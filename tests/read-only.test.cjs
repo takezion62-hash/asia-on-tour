@@ -51,7 +51,7 @@ class Element {
 
 // Only the DOM operations used by this static site are emulated. Missing IDs
 // return null, so stale handlers for removed form elements fail at startup.
-function boot() {
+function boot(source = script) {
   const elements = [...html.matchAll(/<([\w-]+)\b([^>]*)>/g)]
     .map(([, tag, attributes]) => new Element(tag, attributes));
   const ids = new Map(elements.filter(element => element.id).map(element => [element.id, element]));
@@ -95,7 +95,7 @@ function boot() {
   for (const name of ['sessionStorage', 'indexedDB', 'FileReader', 'FormData', 'confirm']) {
     Object.defineProperty(sandbox, name, { get() { throw new Error(`Unexpected write feature: ${name}`); } });
   }
-  vm.runInNewContext(script, sandbox, { filename: 'index.html', timeout: 5000 });
+  vm.runInNewContext(source, sandbox, { filename: 'index.html', timeout: 5000 });
   const get = id => { assert.ok(ids.has(id), `Missing element ${id}`); return ids.get(id); };
   const click = element => {
     element.dispatch('click');
@@ -117,13 +117,38 @@ function boot() {
   };
 }
 
+function renderedArticles(app) {
+  return [...app.get('result-table').innerHTML.matchAll(/<article\b([^>]*)>([\s\S]*?)<\/article>/g)]
+    .filter(([, attributes]) => /class="[^"]*\barchive-row\b/.test(attributes))
+    .map(([, attributes, content]) => ({
+      id: decode(attributes.match(/data-result-id="([^"]+)"/)[1]), content, attributes
+    }));
+}
+
+// Read a marked value while allowing nested markup of the same tag. These
+// assertions inspect the user-facing content, not a duplicate rendering path.
+function markedContent(content, attribute, name) {
+  const start = new RegExp(`<([\\w-]+)\\b[^>]*\\b${attribute}="${name}"[^>]*>`).exec(content);
+  assert.ok(start, `Missing ${attribute}="${name}"`);
+  const tag = start[1];
+  const position = start.index + start[0].length;
+  const tags = new RegExp(`<\\/?${tag}\\b[^>]*>`, 'g');
+  tags.lastIndex = position;
+  let depth = 1;
+  for (let next; (next = tags.exec(content));) {
+    depth += next[0].startsWith('</') ? -1 : 1;
+    if (!depth) return content.slice(position, next.index);
+  }
+  assert.fail(`Unclosed ${attribute}="${name}"`);
+}
+const field = (content, name) => plain(markedContent(content, 'data-field', name));
+const detail = (content, name) => plain(markedContent(content, 'data-detail', name));
+
 function renderedRows(app) {
-  const body = app.get('result-table').innerHTML.match(/<tbody>([\s\S]*?)<\/tbody>/)?.[1] || '';
-  return [...body.matchAll(/<tr\b[^>]*>([\s\S]*?)<\/tr>/g)].map(([, row]) => {
-    const cells = [...row.matchAll(/<td>([\s\S]*?)<\/td>/g)].map(match => match[1]);
-    const strong = index => plain(cells[index].match(/<strong>([\s\S]*?)<\/strong>/)[1]);
-    return [strong(0).replaceAll('.', '-'), strong(1), plain(cells[2]), strong(3), strong(5)];
-  });
+  return renderedArticles(app).map(({ content }) => [
+    field(content, 'date').replaceAll('.', '-'), field(content, 'player'),
+    field(content, 'region'), field(content, 'event'), field(content, 'rank')
+  ]);
 }
 
 const key = record => [record.date, record.player, record.region, record.event,
@@ -151,6 +176,123 @@ test('startup renders published data when browser storage is inaccessible', () =
   assert.doesNotMatch(app.get('result-table').innerHTML, /data-delete|自分で追加/);
   assert.match(app.get('latest-results').innerHTML, /result-card/);
   assert.match(app.get('home-earnings-leaders').innerHTML, /data-player=/);
+});
+
+test('the compact archive preserves all 136 records, 86 players and $9,000 of verified individual earnings', () => {
+  const app = boot();
+  assert.equal(records.length, 136);
+  assert.equal(new Set(records.flatMap(record => record.players || [record.player])).size, 86);
+  assert.equal(Number(app.get('stat-players').textContent), 86);
+  assert.equal(app.get('home-earnings-sum').textContent, '$9,000');
+  assert.equal(app.get('player-earnings-sum').textContent, '$9,000');
+  const articles = renderedArticles(app);
+  assert.equal(articles.length, 136);
+  assert.equal(new Set(articles.map(article => article.id)).size, 136);
+  const byId = new Map(records.map(record => [record.id, record]));
+  for (const { id, content } of articles) {
+    const record = byId.get(id);
+    assert.ok(record, `Unexpected result ${id}`);
+    for (const [name, value] of [['kills', record.kills], ['vrs', record.vrs]]) {
+      assert.equal(field(content, name), typeof value === 'number' ? value.toLocaleString('ja-JP') : '—');
+    }
+    // Cash is highlighted by the row and amount, without repeating the old
+    // trophy badge under the name, stage and amount on every record.
+    assert.doesNotMatch(content, /class="win-badge\b/);
+    const overview = content.slice(0, content.indexOf('<details'));
+    assert.ok((plain(overview).match(/賞金獲得/g) || []).length <= 1);
+  }
+  assert.doesNotMatch(app.get('result-table').innerHTML, /<table\b|<thead\b|<tbody\b/);
+});
+
+test('every result has a native disclosure retaining points, round, display names, evidence and profiles', () => {
+  const app = boot();
+  const byId = new Map(records.map(record => [record.id, record]));
+  for (const { id, content } of renderedArticles(app)) {
+    const record = byId.get(id);
+    assert.equal((content.match(/<details\b/g) || []).length, 1, id);
+    assert.match(content, /<details\b[^>]*class="result-details"/);
+    assert.match(content, /<summary\b[^>]*>[\s\S]*?詳細を見る[\s\S]*?<\/summary>/);
+    assert.doesNotMatch(content, /<details\b[^>]*\bopen(?:\s|>)/);
+    assert.equal(detail(content, 'points'), typeof record.points === 'number' ? record.points.toLocaleString('ja-JP') : '—', id);
+    assert.equal(detail(content, 'round'), record.round, id);
+    assert.equal(detail(content, 'playerRaw'), record.playerRaw, id);
+    assert.equal(detail(content, 'note'), record.note, id);
+    const expectedLinks = [record.source, record.profileUrl, ...(record.profiles || []).map(profile => profile.url)]
+      .filter(Boolean).map(url => new URL(url).href);
+    const links = [...content.matchAll(/<a\b([^>]*)>/g)].map(([, attributes]) => {
+      assert.match(attributes, /target="_blank"/);
+      assert.match(attributes, /rel="noopener noreferrer"/);
+      const url = decode(attributes.match(/href="([^"]+)"/)[1]);
+      assert.ok(['https:', 'http:'].includes(new URL(url).protocol));
+      return url;
+    });
+    assert.deepEqual(links.sort(), expectedLinks.sort(), id);
+    assert.ok(detail(content, 'source').includes(new URL(record.source).href), id);
+    for (const profile of record.profiles || []) {
+      assert.ok(detail(content, 'profiles').includes(profile.name), id);
+      assert.ok(detail(content, 'profiles').includes(new URL(profile.url).href), id);
+    }
+    if (record.profileUrl) assert.ok(detail(content, 'profiles').includes(new URL(record.profileUrl).href), id);
+    if (record.players?.length > 1 && record.prize > 0) {
+      const prize = detail(content, 'prize');
+      assert.match(prize, /チーム合計/);
+      assert.ok(prize.includes(`$${record.prize.toLocaleString('ja-JP')}`), id);
+      assert.match(prize, /各選手/);
+      assert.ok(prize.includes(`$${record.prizePerPlayer.toLocaleString('ja-JP')}`), id);
+    }
+    if (record.prize === null) assert.match(detail(content, 'prize'), /未設定/);
+    if (record.prize === 0) assert.match(detail(content, 'prize'), /賞金なし/);
+  }
+});
+
+function fixtureScript(rows) {
+  return script.replace(/const builtIn=(\[[\s\S]*?\n    \]);/, () => `const builtIn=${JSON.stringify(rows)};`);
+}
+
+test('detail text is escaped and non-web source or profile links are not rendered', () => {
+  const unsafe = '\"><img src=x onerror=alert(1)> & <script>alert(1)</script>';
+  const url = 'https://example.com/profile?player=%22%3E&mode=events';
+  const fixture = {
+    ...records[0], id: 'escaped-result', player: unsafe, playerRaw: unsafe,
+    event: unsafe, round: unsafe, note: unsafe, points: null,
+    source: 'javascript:alert(1)', profileUrl: 'data:text/html,unsafe',
+    profiles: [{ name: unsafe, url }, { name: 'unsafe', url: 'javascript:alert(2)' }]
+  };
+  const app = boot(fixtureScript([fixture]));
+  const [{ content }] = renderedArticles(app);
+  for (const name of ['player', 'event']) assert.equal(field(content, name), unsafe);
+  for (const name of ['playerRaw', 'round', 'note']) assert.equal(detail(content, name), unsafe);
+  assert.equal(detail(content, 'points'), '—');
+  assert.doesNotMatch(content, /<img\b|<script\b|href="(?:javascript|data):/);
+  assert.match(content, /&lt;img/);
+  const links = [...content.matchAll(/href="([^"]+)"/g)].map(([, href]) => decode(href));
+  assert.deepEqual(links, [url]);
+  assert.ok(detail(content, 'profiles').includes(unsafe));
+});
+
+test('unknown duo shares, unverified prizes, zero and unset prizes remain distinct without personal credit', () => {
+  const base = { ...records[0], players: ['first', 'second'], player: 'first / second', prizePerPlayer: undefined };
+  const fixtures = [
+    { ...base, id: 'unknown-duo-share', prize: 400 },
+    { ...base, id: 'invalid-duo-share', prize: 400, prizePerPlayer: 300 },
+    { ...base, id: 'unverified-cash', prize: 200, verified: false },
+    { ...base, id: 'zero-cash', prize: 0 },
+    { ...base, id: 'unset-cash', prize: null }
+  ];
+  const app = boot(fixtureScript(fixtures));
+  assert.equal(app.get('home-earnings-sum').textContent, '$0');
+  assert.equal(app.get('player-earnings-sum').textContent, '$0');
+  const rows = new Map(renderedArticles(app).map(article => [article.id, article.content]));
+  for (const id of ['unknown-duo-share', 'invalid-duo-share']) {
+    assert.match(field(rows.get(id), 'prize'), /チーム合計/);
+    assert.match(detail(rows.get(id), 'prize'), /チーム合計/);
+    assert.match(detail(rows.get(id), 'prize'), /\$400/);
+    assert.match(detail(rows.get(id), 'prize'), /個人内訳未確認/);
+    assert.doesNotMatch(detail(rows.get(id), 'prize'), /各選手/);
+  }
+  assert.match(detail(rows.get('unverified-cash'), 'prize'), /未確認/);
+  assert.match(detail(rows.get('zero-cash'), 'prize'), /賞金なし/);
+  assert.match(detail(rows.get('unset-cash'), 'prize'), /未設定/);
 });
 
 test('all navigation pages remain usable with accurate active state', () => {
