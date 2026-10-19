@@ -424,6 +424,154 @@
     a.player{display:block;cursor:pointer}
     a.player:focus-visible{outline:2px solid var(--cyan);outline-offset:4px}
     .player-card-action{color:#a7eef3;font-weight:800;padding:5px}
+    /* Tournament discovery keeps format, event subtype and round independent. */
+    .tournament-intro{margin:6px 0 25px}
+    .tournament-kicker{margin:0 0 12px;color:#ac91ff;font-size:11px;letter-spacing:.19em;font-weight:850}
+    .tournament-intro h1{margin:0;font-size:clamp(36px,5vw,63px);line-height:1.12;font-weight:900;letter-spacing:-.035em;overflow-wrap:anywhere}
+    .tournament-intro h1 span{color:#a890f6}
+    .tournament-intro>p:last-child{margin:14px 0 0;color:#a9b6cf;font-size:13px}
+    .tournament-search-panel{padding:22px;border:1px solid #37354f;border-radius:18px;background:linear-gradient(125deg,#1e1c33,#131a29);min-width:0;margin-bottom:24px}
+    .tournament-search-input{display:block;position:relative;margin-bottom:20px}
+    .tournament-search-input>span{display:block;margin-bottom:8px;font-size:11px;color:#b7bfd9;font-weight:800}
+    .tournament-search-input input[type="search"]{padding:12px 14px;min-width:0;border-color:#45405e;background:#101525}
+    .tournament-filter-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px 15px}
+    .tournament-filter-field{min-width:0}
+    .tournament-filter-field>label{display:block;font-size:10px;color:#a3afcd;font-weight:800;letter-spacing:.04em;margin-bottom:7px}
+    .tournament-filter-field select{display:block;width:100%;min-width:0;max-width:100%;border:1px solid #3c4561;border-radius:9px;padding:10px 30px 10px 11px;background:#0e1525;color:#e5e9f8;font-size:12px;text-overflow:ellipsis}
+    .tournament-filter-field select:focus{border-color:#a58de4}
+    .tournament-round-note{margin:16px 0 0;padding-top:14px;border-top:1px solid #34374e;color:#99a6c1;font-size:10px;line-height:1.8}
+    .tournament-browse-heading{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin:0 0 15px}
+    .tournament-browse-heading h2{margin:0;font-size:19px;font-weight:850}
+    .tournament-count{color:#b5c0d8;font-size:12px;font-variant-numeric:tabular-nums}
+    .tournament-reset{font-size:11px;color:#bda5fb;font-weight:750;text-decoration:underline;text-underline-offset:4px}
+    .tournament-active-filters{display:flex;gap:7px;flex-wrap:wrap;margin:0 0 15px}
+    .tournament-active-filters:empty{display:none}
+    .tournament-active-filter{display:inline-flex;align-items:center;border:1px solid #66548b;background:#302747;color:#e1d3ff;border-radius:7px;padding:5px 9px;font-size:10px;overflow-wrap:anywhere}
+    .tournament-facets{border:1px solid #30374e;background:#121827;border-radius:15px;padding:4px 17px;margin:0 0 20px;min-width:0}
+    .tournament-facets>summary{color:#bdc6e0;font-size:11px;font-weight:750;cursor:pointer;padding:11px 0;min-height:42px}
+    .tournament-facets>summary:focus-visible{outline:2px solid var(--cyan);outline-offset:3px;border-radius:4px}
+    .tournament-facet{padding:13px 0;border-bottom:1px solid #2d344a;min-width:0}
+    .tournament-facet:last-child{border-bottom:0}
+    .tournament-facet>h3{margin:0 0 9px;font-size:10px;color:#95a6c5;font-weight:800}
+    .tournament-facet-options{display:flex;flex-wrap:wrap;gap:7px}
+    .tournament-facet-chip{display:inline-flex;align-items:center;justify-content:space-between;gap:8px;border:1px solid #3a425b;border-radius:7px;background:#1c2336;color:#bac6df;font-size:10px;font-weight:700;padding:5px 8px;min-height:31px;min-width:0;overflow-wrap:anywhere;transition:background .16s,border-color .16s}
+    .tournament-facet-chip:hover{color:#fff;border-color:#a18ac9;background:#302b47}
+    .tournament-facet-chip[aria-current="true"]{border-color:#b297f1;background:#403254;color:#f1e8ff}
+    .tournament-facet-chip.is-empty{color:#8a95ad}
+    .tournament-facet-chip b{font-size:10px;line-height:1;color:#c5d2ec;background:#0d1323;border-radius:4px;padding:4px 5px;white-space:nowrap;flex-shrink:0;font-variant-numeric:tabular-nums}
+    .tournament-facet-caption{color:#8393b2;font-size:10px;margin:0 0 9px}
+    .tournament-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+    .tournament-card{min-width:0;border:1px solid #343e58;border-radius:17px;padding:21px 22px 17px;background:linear-gradient(130deg,#1d2236,#121927);transition:border-color .16s,transform .16s}
+    .tournament-card:hover{border-color:#8871ad;transform:translateY(-1px)}
+    .tournament-card-top{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:11px}
+    .tournament-season{color:#8e9cba;font-size:10px;font-weight:750;letter-spacing:.07em;overflow-wrap:anywhere}
+    .tournament-card-arrow{color:#c0a6fb;font-size:18px;line-height:1;flex-shrink:0}
+    .tournament-card h3{margin:0 0 13px;font-size:19px;line-height:1.55;font-weight:850;overflow-wrap:anywhere}
+    .tournament-card h3 a:hover{color:#d4c2ff;text-decoration:underline;text-underline-offset:4px}
+    .tournament-tags{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0;min-width:0}
+    .tournament-tag{display:inline-flex;align-items:center;gap:5px;min-width:0;max-width:100%;border:1px solid #4b4469;border-radius:6px;background:#29243c;color:#d2c4f4;padding:4px 7px;font-size:10px;font-weight:750;line-height:1.55;overflow-wrap:anywhere;transition:filter .16s,border-color .16s}
+    .tournament-tag:hover{filter:brightness(1.2);border-color:#ac91ee}
+    .tournament-tag[data-axis="mode"]{background:#17303b;border-color:#355e6c;color:#99dce7}
+    .tournament-tag[data-axis="subtype"]{background:#252b42;border-color:#454f70;color:#b6c6ef}
+    .tournament-tag[data-axis="team"],.tournament-tag[data-axis="platform"]{background:#202a34;border-color:#3e5363;color:#a7c3d6}
+    .tournament-tag.is-unknown{background:#242936;border-color:#4c5264;color:#adb4c6}
+    .archive-event .tournament-tags{margin:8px 0 0;gap:5px}
+    .archive-event .tournament-tag{font-size:9px;padding:3px 6px}
+    .profile-history-row>.tournament-tags{margin:10px 0 0}
+    .tournament-card-regions{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0}
+    .tournament-card-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;border-top:1px solid #353d54;margin:17px 0 0;padding-top:13px}
+    .tournament-card-stats>div{min-width:0}
+    .tournament-card-stats dt{font-size:9px;color:#8f9fbd;margin-bottom:3px;font-weight:750}
+    .tournament-card-stats dd{font-size:23px;line-height:1.4;margin:0;font-weight:850;color:#e8edfb;font-variant-numeric:tabular-nums}
+    .tournament-card-stats dd small{font-size:10px;color:#95a4c3;margin-left:3px;font-weight:650}
+    .tournament-card-latest{font-size:10px;color:#9baccb;margin:14px 0 0;line-height:1.6}
+    .tournament-list .empty{grid-column:1/-1}
+    .tournament-detail-toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:0 0 20px;flex-wrap:wrap}
+    .tournament-detail-toolbar>a{color:#98dce7;font-size:11px;font-weight:750;text-decoration:underline;text-underline-offset:4px}
+    .tournament-detail-hero{padding:27px 29px;border:1px solid #514569;background:radial-gradient(ellipse at 0 0,#55427850,transparent 67%),linear-gradient(120deg,#1d2034,#111a28);border-radius:21px;margin-bottom:22px;min-width:0}
+    .tournament-detail-hero h1{font-size:clamp(27px,3.5vw,43px);line-height:1.35;margin:11px 0 16px;font-weight:900;letter-spacing:-.025em;overflow-wrap:anywhere}
+    .tournament-detail-meta{display:flex;gap:8px 12px;flex-wrap:wrap;align-items:center;margin:0 0 12px;color:#a4b1cd;font-size:11px}
+    .tournament-detail-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;border-top:1px solid #42405a;margin:21px 0 0;padding-top:17px}
+    .tournament-detail-summary>div{min-width:0}
+    .tournament-detail-summary dt{font-size:10px;color:#9facc8;font-weight:750;margin-bottom:6px}
+    .tournament-detail-summary dd{margin:0;font-size:29px;font-weight:850;line-height:1.35;font-variant-numeric:tabular-nums}
+    .tournament-detail-summary dd small{font-size:11px;color:#a6b4cf;margin-left:4px;font-weight:650}
+    .tournament-evidence{margin:20px 0 0;padding-top:15px;border-top:1px solid #42405a;min-width:0}
+    .tournament-evidence summary{color:#99d6e2;font-size:11px;cursor:pointer;font-weight:750;min-height:24px}
+    .tournament-evidence summary:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+    .tournament-evidence ul{list-style:none;padding:0;margin:12px 0 0;display:grid;gap:9px}
+    .tournament-evidence li{font-size:11px;line-height:1.8;color:#a8b4ce;overflow-wrap:anywhere}
+    .tournament-evidence a{color:#9bdee7;text-decoration:underline;text-underline-offset:3px;overflow-wrap:anywhere}
+    .tournament-sessions-heading{margin:26px 0 16px}
+    .tournament-sessions-heading h2{margin:0;font-size:19px;font-weight:850}
+    .tournament-sessions-heading p{margin:5px 0 0;color:#8f9fbd;font-size:11px}
+    .tournament-sessions{display:grid;gap:23px}
+    .tournament-session{min-width:0}
+    .tournament-session-heading{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;padding:15px 17px;border:1px solid #3b3f59;border-radius:12px;background:#202338;margin-bottom:11px;min-width:0}
+    .tournament-session-heading>div{min-width:0}
+    .tournament-session-heading h3{display:flex;gap:10px;flex-wrap:wrap;align-items:center;font-size:14px;font-weight:800;margin:0;color:#edf0fc;overflow-wrap:anywhere}
+    .tournament-session-heading p{margin:6px 0 0;color:#a8b3cd;font-size:11px;overflow-wrap:anywhere}
+    .tournament-session-source{font-size:10px;color:#8dd9e2;font-weight:750;text-decoration:underline;text-underline-offset:3px;overflow-wrap:anywhere}
+    .tournament-session-count{font-size:10px;color:#adbbd4;white-space:nowrap}
+    .tournament-session-records{display:grid;gap:10px;min-width:0}
+    .tournament-result{border:1px solid #323b54;border-radius:14px;padding:18px 20px 0;background:linear-gradient(110deg,#192133,#111827);min-width:0}
+    .tournament-result.is-prize-win{border-color:#806641;box-shadow:inset 3px 0 0 var(--gold);background:linear-gradient(110deg,#30272a,#192030 65%)}
+    .tournament-result-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;min-width:0}
+    .tournament-result-player{font-size:19px;font-weight:850;line-height:1.55;margin:0;overflow-wrap:anywhere;min-width:0}
+    .tournament-result.is-prize-win .tournament-result-player{color:#fff1d2}
+    .tournament-result-stage{color:#a1afcc;font-size:10px;overflow-wrap:anywhere}
+    .tournament-result-round{font-size:11px;color:#97a7c5;margin:7px 0 0;overflow-wrap:anywhere}
+    .tournament-result-metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr)) minmax(0,1.6fr);gap:14px;margin:15px 0 0;padding:13px 0 0;border-top:1px solid #343d52}
+    .tournament-result-metrics>div{min-width:0}
+    .tournament-result-metrics dt{font-size:9px;letter-spacing:.06em;color:#95a5c3;margin:0 0 5px;font-weight:800}
+    .tournament-result-metrics dd{margin:0;font-size:25px;line-height:1.35;color:#e4eaf8;font-weight:850;font-variant-numeric:tabular-nums}
+    .tournament-result-metrics .unknown{font-size:14px;letter-spacing:0}
+    .tournament-result-prize .prize-value,.tournament-result-prize .prize-zero{font-size:24px}
+    .tournament-result-prize small{display:block;font-size:10px;font-weight:650;color:#a9b5ce;line-height:1.7;overflow-wrap:anywhere}
+    .tournament-result-prize .prize-value small{color:#cdb786}
+    .tournament-result .result-detail-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+    @media(max-width:1179px){.tournament-list{grid-template-columns:1fr}.tournament-filter-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.tournament-card{padding:21px}}
+    @media(max-width:640px){
+      .tournament-intro{margin-top:1px;margin-bottom:22px}
+      .tournament-intro h1{font-size:36px}
+      .tournament-intro>p:last-child{font-size:12px}
+      .tournament-search-panel{padding:17px 15px;border-radius:15px}
+      .tournament-filter-grid{grid-template-columns:minmax(0,1fr);gap:14px}
+      .tournament-filter-field>label{font-size:10px}
+      .tournament-filter-field select{min-height:43px;font-size:12px}
+      .tournament-search-input input[type="search"]{min-height:44px}
+      .tournament-search-input{margin-bottom:17px}
+      .tournament-facets{padding:2px 13px}
+      .tournament-facet-options{gap:6px}
+      .tournament-facet-chip{min-height:35px;max-width:100%}
+      .tournament-card{padding:18px 16px 16px;border-radius:15px}
+      .tournament-card h3{font-size:19px}
+      .tournament-tags{gap:6px}
+      .tournament-tag{font-size:10px}
+      .tournament-card-stats{gap:9px}
+      .tournament-card-stats dd{font-size:25px}
+      .tournament-detail-hero{padding:21px 17px;border-radius:17px}
+      .tournament-detail-hero h1{font-size:27px}
+      .tournament-detail-summary{gap:12px}
+      .tournament-detail-summary dd{font-size:25px}
+      .tournament-detail-summary dt{font-size:9px}
+      .tournament-session-heading{padding:13px}
+      .tournament-session-heading h3{font-size:13px}
+      .tournament-result{padding:16px 14px 0}
+      .tournament-result-player{font-size:19px}
+      .tournament-result-metrics{grid-template-columns:repeat(2,minmax(0,1fr));gap:13px 10px}
+      .tournament-result-metrics dd{font-size:25px}
+      .tournament-result-prize{grid-column:1/-1;border-top:1px solid #343d52;padding-top:12px}
+      .tournament-result .result-detail-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+    }
+    @media(max-width:360px){.tournament-intro h1{font-size:31px}.tournament-card{padding:16px 13px}.tournament-card h3{font-size:17px}.tournament-detail-hero{padding:19px 14px}.tournament-detail-hero h1{font-size:25px}.tournament-detail-summary{gap:9px}.tournament-detail-summary dd{font-size:23px}.tournament-detail-summary dt{font-size:9px;letter-spacing:0}.tournament-result{padding:15px 12px 0}.tournament-result-player{font-size:18px}}
+
+    #tournament-title:focus{outline:none}
+    .nav span small{display:block;color:#7787aa;font-size:8px;letter-spacing:.12em;line-height:1.3;margin-top:2px}
+    .archive-row>.tournament-tags{margin:11px 0 0;gap:5px}
+    .archive-row>.tournament-tags .tournament-tag{font-size:9px;padding:3px 6px}
+    .tournament-session-uncertain{color:#c9b79b!important;font-size:10px!important}
+    @media(max-width:640px){.sidebar{padding:8px 10px;gap:8px}.sidebar .brand{gap:7px;min-width:0}.sidebar .brand-mark{flex:0 0 32px;width:32px;height:32px}.sidebar .brand-name{min-width:0}.sidebar .brand-title{font-size:15px;line-height:1}.nav{gap:0;flex-shrink:0}.nav button{padding:8px 6px}.nav button svg{width:17px;height:17px;flex-basis:17px}}
   </style>
 </head>
 <body>
@@ -438,6 +586,7 @@
         <button type="button" data-page="home" class="active" aria-label="ダッシュボード"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg><span>ダッシュボード</span></button>
         <button type="button" data-page="results" aria-label="遠征結果"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 4v16h16M7 15l5-5 4 3 4-7"/></svg><span>遠征結果</span></button>
         <button type="button" data-page="players" aria-label="プレイヤー名鑑"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="9" cy="8" r="3.2"/><path d="M2 21v-2c0-4 3-6 7-6s7 2 7 6v2M16 5a3 3 0 0 1 0 6M17 14c3 0 5 2 5 5v2"/></svg><span>プレイヤー名鑑</span></button>
+        <button type="button" data-page="tournaments" aria-label="大会を探す"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M8 3h8v5a4 4 0 0 1-8 0V3ZM8 5H4v2c0 3 2 4 5 4M16 5h4v2c0 3-2 4-5 4M12 12v6M8 21h8M9 18h6v3"/></svg><span>大会を探す<small>TOURNAMENTS</small></span></button>
         <button type="button" data-page="about" aria-label="参照ソース"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7v.3"/></svg><span>参照ソース</span></button>
       </nav>
       <div class="side-bottom"><div class="disclaimer">UNOFFICIAL FAN PROJECT<br>Epic Gamesとは無関係の非公式サイトです</div></div>
@@ -454,6 +603,8 @@
       </section>
       <section class="section" id="page-results"><div class="page-label">ARCHIVE / 01</div><h1 class="big-title">OVERSEAS RESULTS</h1><p class="explainer">チャプター7 シーズン4（2026.08.20〜10.18）の海外大会アーカイブ。NAW・ME・NAC・OCE・BRの海外結果を追加調査中。</p><div class="filterbar"><div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><input id="search-results" type="search" placeholder="選手名・大会名を検索" aria-label="選手名や大会名で検索"></div><select id="region-filter" aria-label="遠征先で絞り込み"><option value="all">すべての地域</option><option>ME</option><option>EU</option><option>NAC</option><option>NAW</option><option>OCE</option><option>BR</option></select><select id="stage-filter" aria-label="大会区分で絞り込み"><option value="all">すべての区分</option><option value="賞金決勝">賞金決勝</option><option value="予選">予選</option><option value="Practice決勝">Practice決勝</option><option value="Performance決勝">Performance決勝</option><option value="コスメ大会">コスメ大会</option></select><select id="sort-results" aria-label="並び替え"><option value="date">新しい順</option><option value="rank">順位が高い順</option><option value="kills">キル数順</option></select><label class="toggle"><input type="checkbox" id="prize-only"> 🏆 賞金獲得のみ</label></div><div class="panel-header"><h2>遠征結果 <span id="result-count">0件</span></h2></div><p class="prize-row-note">🏆 <strong>金色の行＝賞金獲得確定</strong>　·　「賞金決勝」は賞金獲得を意味しないため、賞金ゼロや未確認は別の表示にしているよ</p><div id="result-table"></div><div class="export-tools"><button type="button" class="btn sm ghost" id="export-csv">↓ CSVを書き出し</button></div><p class="footnote">CSVは現在の絞り込み結果を出力するよ。デュオの戦績はチーム単位で1行・賞金はチーム合計、prizePerPlayer列は各選手の金額。このサイトは閲覧専用で、掲載済みの戦績を検索・閲覧できるよ</p></section>
       <section class="section" id="page-players"><div class="page-label">DATABASE / 02</div><h1 class="big-title">ASIA PLAYERS</h1><p class="explainer">ここに載っているのは追跡対象の候補。戦績が「0件」の選手は、海外大会の順位をまだこのサイトで検証・登録できていない状態だよ</p><section class="earnings-feature" aria-labelledby="ranking-title"><div class="earnings-head"><div><h2 id="ranking-title">🏆 外鯖獲得賞金ランキング</h2><p>今シーズン · 個人の確認済み賞金額（USD）</p></div><div class="earnings-total"><small>掲載済み選手の合計</small><span id="player-earnings-sum">$0</span></div></div><div class="player-prize-list" id="player-earnings-leaders"></div><p class="earnings-explainer">※ 大会・予選で獲得したPRやコスメ報酬は含めないよ · 同名別人は合算しない · 未掲載の大会があるため、実際のシーズン総賞金と一致しない場合があるよ · 選手名を押すと詳細プロフィールへ移動するよ</p></section><div class="filterbar"><div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><input id="search-players" type="search" placeholder="プレイヤー名を検索" aria-label="プレイヤー名検索"></div><select id="player-sort" aria-label="プレイヤーの並び順"><option value="prize">獲得賞金が多い順</option><option value="name">選手名順</option><option value="events">戦績件数順</option></select></div><div class="players" id="all-players"></div></section>
+      <section class="section" id="page-tournaments"><div id="tournament-content"></div></section>
+      <section class="section" id="page-tournament" aria-labelledby="tournament-title"><div id="tournament-detail-content"></div></section>
       <section class="section" id="page-profile" aria-labelledby="profile-title"><div id="profile-content"></div></section>
       <section class="section" id="page-about" aria-labelledby="sources-title">
         <div class="page-label">REFERENCE / 03</div>
@@ -746,6 +897,609 @@
       return [...totals.values()].sort((a,b)=>b.total-a.total||b.events-a.events||a.name.localeCompare(b.name,'ja'));
     }
     function playerPrizeTotal(name){return prizeTotals().find(p=>p.name===name)?.total||0}
+    const tournamentAxes=[
+  {
+    "key": "series",
+    "label": "大会シリーズ",
+    "options": [
+      {
+        "id": "victory-cup",
+        "label": "Victory Cup"
+      },
+      {
+        "id": "cash-cup",
+        "label": "Cash Cup"
+      },
+      {
+        "id": "fncs",
+        "label": "FNCS"
+      },
+      {
+        "id": "override-series",
+        "label": "Override Series"
+      },
+      {
+        "id": "performance-evaluation",
+        "label": "Performance Evaluation"
+      },
+      {
+        "id": "icon-cup",
+        "label": "Icon Cup"
+      },
+      {
+        "id": "unknown",
+        "label": "未確認"
+      }
+    ]
+  },
+  {
+    "key": "mode",
+    "label": "ゲーム形式",
+    "options": [
+      {
+        "id": "battle-royale",
+        "label": "通常バトロワ"
+      },
+      {
+        "id": "zero-build",
+        "label": "ゼロビルド"
+      },
+      {
+        "id": "reload",
+        "label": "Reload"
+      },
+      {
+        "id": "reload-zero-build",
+        "label": "Reloadゼロビルド"
+      },
+      {
+        "id": "unknown",
+        "label": "未確認"
+      }
+    ]
+  },
+  {
+    "key": "subtype",
+    "label": "大会細分類",
+    "options": [
+      {
+        "id": "solo-victory-cup",
+        "label": "Solo Victory Cup"
+      },
+      {
+        "id": "reload-duos-victory-cup",
+        "label": "Reload Duos Victory Cup"
+      },
+      {
+        "id": "console-solo-victory-cup",
+        "label": "Console Solo Victory Cup"
+      },
+      {
+        "id": "reload-zb-duos-cash-cup",
+        "label": "Reload ZB Duos Cash Cup"
+      },
+      {
+        "id": "solo-reload-victory-cup",
+        "label": "Solo Reload Victory Cup"
+      },
+      {
+        "id": "fncs-division-1-practice",
+        "label": "FNCS Division 1 Practice"
+      },
+      {
+        "id": "mega-man-cup",
+        "label": "Mega Man Cup"
+      },
+      {
+        "id": "kingdom-hearts-cup",
+        "label": "KINGDOM HEARTS Cup"
+      },
+      {
+        "id": "performance-evaluation",
+        "label": "Performance Evaluation"
+      },
+      {
+        "id": "nickeh30-icon-cup",
+        "label": "NickEh30 Icon Cup"
+      },
+      {
+        "id": "champion-focus-fncs-cup",
+        "label": "Champion Focus FNCS Cup"
+      },
+      {
+        "id": "fncs-division-1",
+        "label": "FNCS Division 1"
+      },
+      {
+        "id": "fncs-major",
+        "label": "FNCS Major"
+      },
+      {
+        "id": "fncs-heats",
+        "label": "FNCS Heats"
+      },
+      {
+        "id": "fncs-lcq",
+        "label": "FNCS LCQ"
+      },
+      {
+        "id": "unknown",
+        "label": "未確認"
+      }
+    ]
+  },
+  {
+    "key": "team",
+    "label": "チーム人数",
+    "options": [
+      {
+        "id": "solo",
+        "label": "ソロ"
+      },
+      {
+        "id": "duo",
+        "label": "デュオ"
+      },
+      {
+        "id": "unknown",
+        "label": "未確認"
+      }
+    ]
+  },
+  {
+    "key": "platform",
+    "label": "機種条件",
+    "options": [
+      {
+        "id": "cross-platform",
+        "label": "クロスプラットフォーム"
+      },
+      {
+        "id": "console",
+        "label": "コンソール"
+      },
+      {
+        "id": "playstation",
+        "label": "PlayStation"
+      },
+      {
+        "id": "unknown",
+        "label": "未確認"
+      }
+    ]
+  }
+];
+    const tournamentCatalog=[
+  {
+    "id": "ch7s4-solo-victory-cup",
+    "name": "Solo Victory Cup Battle Royale",
+    "chapter": 7,
+    "season": 4,
+    "seasonId": "S42",
+    "sourceEventIds": [
+      "S42_SoloVictoryCupBR",
+      "S42_SoloVictoryCup"
+    ],
+    "series": "victory-cup",
+    "mode": "battle-royale",
+    "subtype": "solo-victory-cup",
+    "team": "solo",
+    "platform": "cross-platform",
+    "unknownFields": [],
+    "evidence": [
+      {
+        "text": "登録名のBattle Royale/Soloと公式規則2.2.1が形式を確認。規則2.2.6にクロスプラットフォーム明記。",
+        "url": "https://www.fortnite.com/competitive/events/S42_SoloVictoryCupBR/"
+      },
+      {
+        "text": "大会情報・公式規則の確認元",
+        "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-4-official-rules"
+      }
+    ]
+  },
+  {
+    "id": "ch7s4-reload-duos-victory-cup",
+    "name": "Reload Duos Victory Cup",
+    "chapter": 7,
+    "season": 4,
+    "seasonId": "S42",
+    "sourceEventIds": [
+      "S42_ReloadDuosVictoryCup"
+    ],
+    "series": "victory-cup",
+    "mode": "reload",
+    "subtype": "reload-duos-victory-cup",
+    "team": "duo",
+    "platform": "cross-platform",
+    "unknownFields": [],
+    "evidence": [
+      {
+        "text": "公式名と規則2.2.4でDuos/Reload、2.2.6でクロスプラットフォームを確認。",
+        "url": "https://www.fortnite.com/competitive/events/S42_ReloadDuosVictoryCup/"
+      },
+      {
+        "text": "大会情報・公式規則の確認元",
+        "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-4-official-rules"
+      }
+    ]
+  },
+  {
+    "id": "ch7s4-console-zero-build-solo-victory-cup",
+    "name": "Console Zero Build Solo Victory Cup",
+    "chapter": 7,
+    "season": 4,
+    "seasonId": "S42",
+    "sourceEventIds": [
+      "S42_ConsoleVCC_SolosZB"
+    ],
+    "series": "victory-cup",
+    "mode": "zero-build",
+    "subtype": "console-solo-victory-cup",
+    "team": "solo",
+    "platform": "console",
+    "unknownFields": [],
+    "evidence": [
+      {
+        "text": "登録名・公式名がConsole/Zero Build/Soloを明示。規則2.2.2でZero Build/Soloを確認。機種世代は補完しない。",
+        "url": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/"
+      },
+      {
+        "text": "大会情報・公式規則の確認元",
+        "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-4-official-rules"
+      }
+    ]
+  },
+  {
+    "id": "ch7s4-reload-zero-build-duos-cash-cup",
+    "name": "Reload ZB Duos Cash Cup",
+    "chapter": 7,
+    "season": 4,
+    "seasonId": "S42",
+    "sourceEventIds": [
+      "S42_ReloadCashCup_DuosZB"
+    ],
+    "series": "cash-cup",
+    "mode": "reload-zero-build",
+    "subtype": "reload-zb-duos-cash-cup",
+    "team": "duo",
+    "platform": "unknown",
+    "unknownFields": [
+      "platform"
+    ],
+    "evidence": [
+      {
+        "text": "公式名・source IDにDuosZBを明示。公式規則2.2にDuos/Zero Build Reload設定を確認。機種条件は未確認。",
+        "url": "https://www.fortnite.com/competitive/events/S42_ReloadCashCup_DuosZB/"
+      },
+      {
+        "text": "大会情報・公式規則の確認元",
+        "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-zero-build-reload-cash-cups-chapter-7-season-4-official-rules"
+      }
+    ]
+  },
+  {
+    "id": "ch7s4-solo-reload-victory-cup",
+    "name": "Solo Reload Victory Cup",
+    "chapter": 7,
+    "season": 4,
+    "seasonId": "S42",
+    "sourceEventIds": [
+      "S42_ReloadSoloVictoryCup",
+      "S42_ReloadReloadSoloVictoryCup"
+    ],
+    "series": "victory-cup",
+    "mode": "reload",
+    "subtype": "solo-reload-victory-cup",
+    "team": "solo",
+    "platform": "cross-platform",
+    "unknownFields": [],
+    "evidence": [
+      {
+        "text": "公式名と規則2.2.3でSolo/Reload、2.2.6でクロスプラットフォームを確認。TrackerのReloadReloadSolo識別子も保持する。",
+        "url": "https://www.fortnite.com/competitive/events/S42_ReloadSoloVictoryCup/"
+      },
+      {
+        "text": "大会情報・公式規則の確認元",
+        "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-4-official-rules"
+      }
+    ]
+  },
+  {
+    "id": "ch7s4-fncs-division-1-practice",
+    "name": "FNCS Division 1 Practice",
+    "chapter": 7,
+    "season": 4,
+    "seasonId": "S42",
+    "sourceEventIds": [
+      "S42_FNCSDivisionalCup_Division1"
+    ],
+    "series": "fncs",
+    "mode": "battle-royale",
+    "subtype": "fncs-division-1-practice",
+    "team": "duo",
+    "platform": "cross-platform",
+    "unknownFields": [],
+    "evidence": [
+      {
+        "text": "公式ページがFNCS Division 1 Practiceを明示。公式Practice規則2.2がDuos/Battle Royale、2.2.10がクロスプラットフォームを明記。source IDにPracticeがなくても通常Division 1とは別大会として扱う。",
+        "url": "https://www.fortnite.com/competitive/events/S42_FNCSDivisionalCup_Division1/"
+      },
+      {
+        "text": "大会情報・公式規則の確認元",
+        "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fncs-practice-cups-chapter-7-season-4-official-rules"
+      }
+    ]
+  },
+  {
+    "id": "ch7s4-override-mega-man-cup",
+    "name": "Override Series: Mega Man Cup",
+    "chapter": 7,
+    "season": 4,
+    "seasonId": "S42",
+    "sourceEventIds": [
+      "S42_MegaManCup"
+    ],
+    "series": "override-series",
+    "mode": "unknown",
+    "subtype": "mega-man-cup",
+    "team": "duo",
+    "platform": "unknown",
+    "unknownFields": [
+      "mode",
+      "platform"
+    ],
+    "evidence": [
+      {
+        "text": "公式ページと規則2.2.1でDuosを確認。規則はBRとZBの両セッションを扱う。登録名に形式がなく汎用Battle Royale欄はZBページでも表示されるため、形式を保守的に未確認とする。機種条件も未確認。",
+        "url": "https://www.fortnite.com/competitive/events/S42_MegaManCup/"
+      },
+      {
+        "text": "大会情報・公式規則の確認元",
+        "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/override-series-mega-man-cup-chapter-7-season-4-official-rules"
+      }
+    ]
+  },
+  {
+    "id": "ch7s4-override-kingdom-hearts-cup",
+    "name": "Override Series: KINGDOM HEARTS Cup",
+    "chapter": 7,
+    "season": 4,
+    "seasonId": "S42",
+    "sourceEventIds": [
+      "S42_KingdomHeartsCup"
+    ],
+    "series": "override-series",
+    "mode": "unknown",
+    "subtype": "kingdom-hearts-cup",
+    "team": "solo",
+    "platform": "unknown",
+    "unknownFields": [
+      "mode",
+      "platform"
+    ],
+    "evidence": [
+      {
+        "text": "公式ページと規則2.2.1でSoloを確認。規則はBRとZBの両セッションを扱う。登録名に形式がなく汎用Battle Royale欄だけでは確証が不足するため、形式を保守的に未確認とする。機種条件も未確認。",
+        "url": "https://www.fortnite.com/competitive/events/S42_KingdomHeartsCup/"
+      },
+      {
+        "text": "大会情報・公式規則の確認元",
+        "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/override-series-kingdom-hearts-cup-chapter-7-season-4-official-rules"
+      }
+    ]
+  },
+  {
+    "id": "ch7s4-performance-evaluation",
+    "name": "Fortnite Performance Evaluation",
+    "chapter": 7,
+    "season": 4,
+    "seasonId": "S42",
+    "sourceEventIds": [
+      "S42_PerformanceEvaluation"
+    ],
+    "series": "performance-evaluation",
+    "mode": "battle-royale",
+    "subtype": "performance-evaluation",
+    "team": "duo",
+    "platform": "unknown",
+    "unknownFields": [
+      "platform"
+    ],
+    "evidence": [
+      {
+        "text": "当該S42公式ページがDuos/Battle Royaleと二段階の性能検証イベントを説明。参加条件がFNCS Division 1でもPracticeとは別大会。後続シーズンのTriosを当該S42へ一般化しない。機種条件未確認。",
+        "url": "https://www.fortnite.com/competitive/events/S42_PerformanceEvaluation/"
+      }
+    ]
+  },
+  {
+    "id": "ch7s4-playstation-nickeh30-icon-cup",
+    "name": "PlayStation NickEh30 Icon Cup",
+    "chapter": 7,
+    "season": 4,
+    "seasonId": "S42",
+    "sourceEventIds": [
+      "S42_PSNickEh30"
+    ],
+    "series": "icon-cup",
+    "mode": "battle-royale",
+    "subtype": "nickeh30-icon-cup",
+    "team": "solo",
+    "platform": "playstation",
+    "unknownFields": [],
+    "evidence": [
+      {
+        "text": "公式ページと規則2.2.1でSolo確認。公式scheduleがS42_PSNickEh30の予選をBattle Royale版と明示しZB版を別のS42_PSNickEh30_ZBへリンク。提供sourceは前者Qualifier_NAW。PlayStationは公式名に明記、世代は補完しない。",
+        "url": "https://www.fortnite.com/competitive/events/S42_PSNickEh30/"
+      },
+      {
+        "text": "大会情報・公式規則の確認元",
+        "url": "https://www.fortnite.com/competitive/events/S42_PSNickEh30?region=NAC&round=S42_PSNickEh30_Qualifier_NAW"
+      },
+      {
+        "text": "大会情報・公式規則の確認元",
+        "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/playstation-nick-eh-30-cup"
+      }
+    ]
+  },
+  {
+    "id": "ch7s4-champion-focus-fncs-cup",
+    "name": "Champion Focus FNCS Cup",
+    "chapter": 7,
+    "season": 4,
+    "seasonId": "S42",
+    "sourceEventIds": [
+      "S42_ChampionFocusFNCSCup"
+    ],
+    "series": "fncs",
+    "mode": "battle-royale",
+    "subtype": "champion-focus-fncs-cup",
+    "team": "solo",
+    "platform": "unknown",
+    "unknownFields": [
+      "platform"
+    ],
+    "evidence": [
+      {
+        "text": "既存roundがBattle Royaleを明記。公式ページと規則2.2.1でSoloとコスメ報酬を確認。Practiceや本戦とは別。別ZB/Mobile版へ一般化しない。機種条件未確認。",
+        "url": "https://www.fortnite.com/competitive/events/S42_ChampionFocusFNCSCup/"
+      },
+      {
+        "text": "大会情報・公式規則の確認元",
+        "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/champion-focus-fncs-cup-chapter-7-season-4-official-rules"
+      }
+    ]
+  }
+];
+    // Classification is separate from immutable published results. Match both
+    // the explicit season/source identity and exact registered tournament name.
+    function tournamentSource(e){
+      try{
+        const u=new URL(e.source);const parts=u.pathname.split('/').filter(Boolean);
+        if(!['https:','http:'].includes(u.protocol)||!['fortnite.com','www.fortnite.com','fortnitetracker.com','www.fortnitetracker.com'].includes(u.hostname.toLowerCase()))return {eventId:null,roundId:null,seasonId:'unknown'};
+        let eventId=parts.find(p=>/^S\d+_/i.test(p))||parts.find(p=>/^epicgames_S\d+_/i.test(p))?.replace(/^epicgames_/i,'')||null;
+        if(eventId){const suffix=eventId.split('_').at(-1);if(regions.includes(suffix))eventId=eventId.slice(0,-suffix.length-1)}
+        const roundId=u.searchParams.get('window')||u.searchParams.get('round')||null;
+        const eventSeason=eventId?.match(/^S\d+/i)?.[0]?.toUpperCase();
+        const roundSeason=roundId?.match(/^S\d+/i)?.[0]?.toUpperCase();
+        if(eventSeason&&roundSeason&&eventSeason!==roundSeason)return {eventId:null,roundId:null,seasonId:'unknown'};
+        const seasonId=(eventId||roundId||'').match(/^S\d+/i)?.[0]?.toUpperCase()||'unknown';
+        return {eventId,roundId,seasonId};
+      }catch{return {eventId:null,roundId:null,seasonId:'unknown'}}
+    }
+    function classifyTournamentRecord(e){
+      const source=tournamentSource(e);
+      const known=tournamentCatalog.find(t=>t.seasonId===source.seasonId&&t.name===e.event&&t.sourceEventIds.includes(source.eventId));
+      if(known)return known;
+      return {id:'unconfirmed-'+encodeURIComponent([source.seasonId,e.event,source.eventId||e.id].join('|')),name:e.event||'大会名未確認',chapter:null,season:null,seasonId:source.seasonId,sourceEventIds:source.eventId?[source.eventId]:[],series:'unknown',mode:'unknown',subtype:'unknown',team:'unknown',platform:'unknown',evidence:[{text:'登録名・出典の識別子に一致する確認済み分類がないため、各項目を未確認としています。'}]};
+    }
+    const tournamentForRecord=classifyTournamentRecord;
+    const tournamentDefaultFilters=()=>({series:'all',mode:'all',subtype:'all',team:'all',platform:'all',stage:'all',q:''});
+    let tournamentBrowseFilters=tournamentDefaultFilters();
+    function tournamentLabel(axis,value){return tournamentAxes.find(a=>a.key===axis)?.options.find(o=>o.id===value)?.label||'未確認'}
+    function sanitizeTournamentFilters(filters={}){
+      const result=tournamentDefaultFilters();
+      for(const axis of tournamentAxes)if(axis.options.some(o=>o.id===filters[axis.key]))result[axis.key]=filters[axis.key];
+      if(all().some(e=>e.kind===filters.stage))result.stage=filters.stage;
+      result.q=typeof filters.q==='string'?filters.q:'';
+      return result;
+    }
+    function tournamentSearchHash(filters={}){
+      const f=sanitizeTournamentFilters(filters),params=new URLSearchParams();
+      for(const key of [...tournamentAxes.map(a=>a.key),'stage','q'])if(f[key]&&f[key]!=='all')params.set(key,f[key]);
+      return '#tournaments'+(params.size?'?'+params.toString():'');
+    }
+    const tournamentHref=id=>'#tournament='+encodeURIComponent(id);
+    function tournamentSearchHref(axis,value,context=currentView.page==='tournaments'){const base=context?{...currentView.filters}:tournamentDefaultFilters();base[axis]=base[axis]===value?'all':value;return tournamentSearchHash(base)}
+    function tournamentTags(e){const t=classifyTournamentRecord(e);return `<div class="tournament-tags" data-record-classification="${escape(e.id)}">${tournamentAxes.map(axis=>`<a class="tournament-tag${t[axis.key]==='unknown'?' is-unknown':''}" data-axis="${escape(axis.key)}" data-tournament-tag="${escape(axis.key+':'+t[axis.key])}" href="${escape(tournamentSearchHref(axis.key,t[axis.key],false))}" title="${escape(axis.label+'：'+tournamentLabel(axis.key,t[axis.key]))}"><span class="sr-only">${escape(axis.label)}：</span>${escape(tournamentLabel(axis.key,t[axis.key]))}</a>`).join('')}</div>`}
+    function tournamentRecordsMatch(e,filters,skipAxis){
+      const t=classifyTournamentRecord(e);
+      return tournamentAxes.every(axis=>axis.key===skipAxis||filters[axis.key]==='all'||t[axis.key]===filters[axis.key])&&(filters.stage==='all'||e.kind===filters.stage)&&(!filters.q||[t.name,...tournamentAxes.map(a=>tournamentLabel(a.key,t[a.key])),t.seasonId].some(s=>String(s).toLowerCase().includes(filters.q.trim().toLowerCase())));
+    }
+    function tournamentFilterCounts(axis,filters={}){
+      const f=sanitizeTournamentFilters(filters);return (tournamentAxes.find(a=>a.key===axis)?.options||[]).map(o=>({id:o.id,label:o.label,count:all().filter(e=>tournamentRecordsMatch(e,f,axis)&&classifyTournamentRecord(e)[axis]===o.id).length}));
+    }
+    function tournamentSessions(t,records){
+      const groups=new Map();
+      for(const e of records){
+        const source=tournamentSource(e);
+        const explicitLabel=/(?:Event|Week|Session)\s*\d+/i.test(e.round||'');
+        const uncertain=!source.roundId&&!explicitLabel;
+        const sourceId=source.roundId||(explicitLabel?'label:'+e.round:'unconfirmed:'+e.id);
+        const key=JSON.stringify([t.id,e.region,e.date,e.round||null,e.kind||null,sourceId]);
+        if(!groups.has(key))groups.set(key,{id:key,label:e.round||'ラウンド未確認',region:e.region,date:e.date,round:e.round,kind:e.kind,sourceId,uncertain,records:[]});
+        groups.get(key).records.push(e);
+      }
+      return [...groups.values()].sort((a,b)=>b.date.localeCompare(a.date)||a.region.localeCompare(b.region)||String(a.round).localeCompare(String(b.round),'ja'));
+    }
+    function tournamentInfo(id,subset){
+      const records=(subset||all()).filter(e=>classifyTournamentRecord(e).id===id);
+      const catalog=tournamentCatalog.find(t=>t.id===id)||records[0]&&classifyTournamentRecord(records[0]);
+      if(!catalog)return null;
+      const sorted=records.slice().sort((a,b)=>b.date.localeCompare(a.date)||(a.rank??Infinity)-(b.rank??Infinity));
+      return {...catalog,records:sorted,recordCount:sorted.length,sessions:tournamentSessions(catalog,sorted),regions:regions.filter(r=>sorted.some(e=>e.region===r)),latestDate:sorted[0]?.date||''};
+    }
+    function tournamentSummaries(filters={}){
+      const f=sanitizeTournamentFilters(filters),rows=all().filter(e=>tournamentRecordsMatch(e,f));
+      return [...new Set(rows.map(e=>classifyTournamentRecord(e).id))].map(id=>tournamentInfo(id,rows)).sort((a,b)=>b.latestDate.localeCompare(a.latestDate)||a.name.localeCompare(b.name));
+    }
+    function tournamentRecordCard(e){return `<article class="tournament-result${isPrizeWin(e)?' is-prize-win':''}" data-tournament-record="${escape(e.id)}"><div class="tournament-result-heading"><h4 class="tournament-result-player">${profileNameLinks(e)}</h4><span class="tournament-result-stage">${escape(verificationLabel(e))}</span></div><dl class="tournament-result-metrics"><div><dt>順位</dt><dd data-tournament-metric="rank"${Number.isInteger(e.rank)?'':' class="unknown"'}>${escape(rankLabel(e))}</dd></div><div><dt>PTS</dt><dd data-tournament-metric="points">${format(e.points)}</dd></div><div><dt>KILLS</dt><dd data-tournament-metric="kills">${format(e.kills)}</dd></div><div><dt>VR</dt><dd data-tournament-metric="vrs">${format(e.vrs)}</dd></div><div class="tournament-result-prize"><dt>賞金 / USD</dt><dd data-tournament-metric="prize">${archivePrize(e)}</dd></div></dl>${archiveDetails(e)}</article>`}
+
+    function tournamentViewSeason(t){
+      if(t.chapter!=null&&t.season!=null)return `CH${t.chapter} · SEASON ${t.season}`;
+      return t.seasonId||'シーズン未確認';
+    }
+    function tournamentViewStageOptions(){
+      return [...new Set(all().map(e=>e.kind).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'ja')).map(id=>({id,label:id}));
+    }
+    function tournamentViewSelect(axis,filters){
+      const selected=filters[axis.key]||'all';
+      return `<div class="tournament-filter-field"><label for="tournament-${escape(axis.key)}">${escape(axis.label)}</label><select id="tournament-${escape(axis.key)}" data-tournament-filter="${escape(axis.key)}"><option value="all"${selected==='all'?' selected':''}>すべての${escape(axis.label)}</option>${axis.options.map(o=>`<option value="${escape(o.id)}"${selected===o.id?' selected':''}>${escape(o.label)}</option>`).join('')}</select></div>`;
+    }
+    function renderTournamentSearch(filters={}){
+      const axes=[...tournamentAxes,{key:'stage',label:'大会ラウンド区分',options:tournamentViewStageOptions()}];
+      $('#tournament-content').innerHTML=`<header class="tournament-intro"><p class="tournament-kicker">TOURNAMENTS / ASIA OVERSEAS</p><h1>大会を<span>探す</span></h1><p>大会の形式から、ASIA勢の海外戦績を探す。</p></header><section class="tournament-search-panel" aria-label="大会の検索と絞り込み"><label class="tournament-search-input" for="tournament-query"><span>大会名で検索</span><input id="tournament-query" type="search" value="${escape(filters.q||'')}" placeholder="大会名を入力" aria-label="大会名で検索"></label><div class="tournament-filter-grid">${axes.map(axis=>tournamentViewSelect(axis,filters)).join('')}</div><p class="tournament-round-note">ゲーム形式と予選・決勝は別々に絞り込めます。形式や機種条件を確認できない大会は「未確認」と表示します。</p></section><div class="tournament-browse-heading"><h2>掲載大会</h2><span class="tournament-count" id="tournament-count" aria-live="polite"></span><a class="tournament-reset" href="#tournaments" data-tournament-reset>条件をリセット</a></div><div class="tournament-active-filters" id="tournament-active-filters" aria-label="適用中の条件"></div><details class="tournament-facets"><summary>タグから絞り込む・掲載戦績数を見る</summary><p class="tournament-facet-caption">タグの数字は、ほかの絞り込み条件に一致する戦績の件数です。</p>${tournamentAxes.map(axis=>`<section class="tournament-facet"><h3>${escape(axis.label)}</h3><div class="tournament-facet-options" id="tournament-facet-${escape(axis.key)}"></div></section>`).join('')}</details><div class="tournament-list" id="tournament-list"></div>`;
+      renderTournamentList(filters);
+    }
+    function tournamentViewCard(t){
+      const roster=new Set(t.records.flatMap(names));
+      const visited=regions.filter(r=>t.records.some(e=>e.region===r));
+      return `<article class="tournament-card" data-tournament-id="${escape(t.id)}"><div class="tournament-card-top"><span class="tournament-season">${escape(tournamentViewSeason(t))}</span><span class="tournament-card-arrow" aria-hidden="true">↗</span></div><h3><a href="${escape(tournamentHref(t.id))}" data-open-tournament="${escape(t.id)}">${escape(t.name)}</a></h3>${t.records.length?tournamentTags(t.records[0]):''}<div class="tournament-card-regions" aria-label="開催地域">${visited.map(regionPill).join('')}</div><dl class="tournament-card-stats"><div><dt>掲載戦績</dt><dd>${format(t.recordCount??t.records.length)}<small>件</small></dd></div><div><dt>開催枠</dt><dd>${format(t.sessions.length)}<small>枠</small></dd></div><div><dt>掲載選手</dt><dd>${format(roster.size)}<small>名</small></dd></div></dl><p class="tournament-card-latest">最新の掲載日 ${escape(friendlyDate(t.latestDate||''))}<br>地域・日付・ラウンド別の戦績を見る →</p></article>`;
+    }
+    function renderTournamentList(filters={}){
+      const shown=tournamentSummaries(filters);
+      const recordCount=shown.reduce((sum,t)=>sum+(t.recordCount??t.records.length),0);
+      $('#tournament-count').textContent=`${format(shown.length)}大会 · ${format(recordCount)}戦績`;
+      const active=[];
+      for(const axis of tournamentAxes){
+        const value=filters[axis.key];
+        if(value&&value!=='all')active.push(`${axis.label}：${tournamentLabel(axis.key,value)}`);
+        const counts=tournamentFilterCounts(axis.key,filters);
+        $(`#tournament-facet-${axis.key}`).innerHTML=counts.map(option=>`<a class="tournament-facet-chip${option.count?'':' is-empty'}" href="${escape(tournamentSearchHref(axis.key,option.id))}" data-tournament-tag="${escape(axis.key+':'+option.id)}" data-tournament-context="search" aria-current="${value===option.id?'true':'false'}"><span>${escape(option.label)}</span><b>${format(option.count)}</b></a>`).join('');
+      }
+      if(filters.stage&&filters.stage!=='all')active.push(`大会ラウンド区分：${filters.stage}`);
+      if(filters.q)active.push(`検索：${filters.q}`);
+      $('#tournament-active-filters').innerHTML=active.map(value=>`<span class="tournament-active-filter">${escape(value)}</span>`).join('');
+      $('#tournament-list').innerHTML=shown.length?shown.map(tournamentViewCard).join(''):'<div class="empty"><div class="emoji">⌕</div><b>条件に合う大会がありません</b><p>大会名やタグの条件を変えるか、条件をリセットしてください。</p></div>';
+    }
+    function tournamentViewEvidence(info){
+      const items=Array.isArray(info.evidence)?info.evidence:[];
+      if(!items.length)return '<details class="tournament-evidence"><summary>分類の確認根拠</summary><ul><li>分類を確定できない項目は「未確認」と表示しています。大会ごとの出典は各戦績の詳細から確認できます。</li></ul></details>';
+      return `<details class="tournament-evidence"><summary>分類の確認根拠 · ${items.length}件</summary><ul>${items.map(item=>{const url=safeUrl(item.url);return `<li>${escape(item.text||'大会情報')}${url?`<br><a href="${escape(url)}" target="_blank" rel="noopener noreferrer">出典を開く ↗</a>`:''}</li>`}).join('')}</ul></details>`;
+    }
+    function tournamentViewSession(session){
+      const source=session.records.map(e=>safeUrl(e.source)).find(Boolean);
+      return `<section class="tournament-session" data-tournament-session="${escape(session.id)}"><header class="tournament-session-heading"><div><h3>${regionPill(session.region)}<time datetime="${escape(session.date)}">${escape(friendlyDate(session.date))}</time><span>${escape(session.kind||'区分未確認')}</span></h3><p>${escape(session.round||'ラウンド未確認')}</p>${session.uncertain?'<p class="tournament-session-uncertain">ラウンドID未確認のため、ほかの記録とは分けて表示</p>':''}${source?`<a class="tournament-session-source" href="${escape(source)}" target="_blank" rel="noopener noreferrer">開催枠の出典 ↗</a>`:''}</div><span class="tournament-session-count">${format(session.records.length)}戦績</span></header><div class="tournament-session-records">${session.records.map(tournamentRecordCard).join('')}</div></section>`;
+    }
+    function renderTournament(id){
+      const info=tournamentInfo(id);
+      if(!info){$('#tournament-detail-content').innerHTML='<div class="tournament-detail-toolbar"><button type="button" class="btn sm ghost" data-tournament-back>← 戻る</button><a href="#tournaments" data-page="tournaments">大会を探す</a></div><div class="empty"><b>大会が見つかりません</b><p>URLを確認するか、大会検索から探してください。</p></div>';return}
+      const roster=new Set(info.records.flatMap(names));
+      const visited=regions.filter(r=>info.records.some(e=>e.region===r));
+      $('#tournament-detail-content').innerHTML=`<div class="tournament-detail-toolbar"><button type="button" class="btn sm ghost" data-tournament-back>← 戻る</button><a href="${escape(tournamentHref(info.id))}" title="このURLをコピーして共有できます">大会のURL ↗</a></div><header class="tournament-detail-hero"><p class="tournament-kicker">TOURNAMENT / ASIA RESULTS</p><div class="tournament-detail-meta"><span class="tournament-season">${escape(tournamentViewSeason(info))}</span>${visited.map(regionPill).join('')}</div><h1 id="tournament-title" tabindex="-1">${escape(info.name)}</h1>${info.records.length?tournamentTags(info.records[0]):''}<dl class="tournament-detail-summary"><div><dt>掲載戦績</dt><dd>${format(info.recordCount??info.records.length)}<small>件</small></dd></div><div><dt>地域・日付・ラウンド</dt><dd>${format(info.sessions.length)}<small>枠</small></dd></div><div><dt>掲載選手</dt><dd>${format(roster.size)}<small>名</small></dd></div></dl>${tournamentViewEvidence(info)}</header><div class="tournament-sessions-heading"><h2>開催枠ごとの戦績</h2><p>新しい順 · 地域・日付・ラウンドを分けて表示 · ラウンドID未確認は個別表示 · 金色は賞金獲得</p></div><div class="tournament-sessions">${info.sessions.length?info.sessions.map(tournamentViewSession).join(''):'<div class="empty"><b>戦績はまだ掲載されていません</b></div>'}</div>`;
+    }
+    function renderTournamentDetail(id){renderTournament(id)}
+
     const confirmedAliases={
   "Zagouの弟": [
     "zagouの弟",
@@ -859,49 +1613,72 @@
       return {...player,aliases:confirmedAliases[name]||[],events,total:playerPrizeTotal(name),prizeEvents:events.filter(e=>individualPrize(e)>0).length,bestQualifying:best(e=>e.kind==='予選'),bestFinal:best(e=>String(e.kind||'').includes('決勝')),regionStats:regions.map(region=>{const rows=events.filter(e=>e.region===region);return {region,count:rows.length,prize:rows.reduce((sum,e)=>sum+individualPrize(e),0)}}),links};
     }
 
-    let currentView={page:'home',name:null};
+    let currentView={page:'home',name:null,id:null};
     let routeDepth=0;
     let routedHash='';
     let routingReady=false;
     function captureView(){
-      return {...currentView,scroll:window.scrollY||0,results:{search:$('#search-results').value,region:$('#region-filter').value,stage:$('#stage-filter').value,sort:$('#sort-results').value,prize:$('#prize-only').checked,player:selectedPlayer},players:{search:$('#search-players').value,sort:$('#player-sort').value}};
+      return {...currentView,scroll:window.scrollY||0,results:{search:$('#search-results').value,region:$('#region-filter').value,stage:$('#stage-filter').value,sort:$('#sort-results').value,prize:$('#prize-only').checked,player:selectedPlayer},players:{search:$('#search-players').value,sort:$('#player-sort').value},tournaments:{...tournamentBrowseFilters}};
     }
     function restoreBrowseState(view){
       if(view.results){const r=view.results;$('#search-results').value=r.search;$('#region-filter').value=r.region;$('#stage-filter').value=r.stage;$('#sort-results').value=r.sort;$('#prize-only').checked=r.prize;selectedPlayer=r.player;}
       if(view.players){$('#search-players').value=view.players.search;$('#player-sort').value=view.players.sort;}
+      if(view.tournaments)tournamentBrowseFilters=sanitizeTournamentFilters(view.tournaments);
     }
     function routeFromHash(){
       const hash=window.location.hash;
       if(hash.startsWith('#player=')){try{return {page:'profile',name:decodeURIComponent(hash.slice(8))}}catch{return {page:'profile',name:null,invalid:true}}}
+      if(hash.startsWith('#tournament=')){try{return {page:'tournament',id:decodeURIComponent(hash.slice(12))}}catch{return {page:'tournament',id:null,invalid:true}}}
+      if(hash==='#tournaments'||hash.startsWith('#tournaments?')){const params=new URLSearchParams(hash.split('?').slice(1).join('?'));return {page:'tournaments',filters:sanitizeTournamentFilters(Object.fromEntries(params))}}
       const page=hash.slice(1);
       return {page:['home','results','players','about'].includes(page)?page:'home',name:null};
     }
-    function routeHash(view){return view.page==='profile'?(view.invalid?window.location.hash:profileHref(view.name||'')):'#'+view.page;}
+    function routeHash(view){
+      if(view.page==='profile')return view.invalid?window.location.hash:profileHref(view.name||'');
+      if(view.page==='tournament')return view.invalid?window.location.hash:tournamentHref(view.id||'');
+      if(view.page==='tournaments')return tournamentSearchHash(view.filters);
+      return '#'+view.page;
+    }
     function showView(view,restore=false){
       restoreBrowseState(view);
-      currentView={page:view.page,name:view.name||null,invalid:!!view.invalid};
+      currentView={page:view.page,name:view.name||null,id:view.id||null,invalid:!!view.invalid};
+      if(view.page==='tournaments'){tournamentBrowseFilters=sanitizeTournamentFilters(view.filters||tournamentBrowseFilters);currentView.filters={...tournamentBrowseFilters};renderTournamentSearch(currentView.filters)}
+      if(view.page==='tournament')renderTournament(view.id);
       if(view.page==='profile'&&!renderProfile(view.name))$('#profile-content').innerHTML='<div class="profile-toolbar"><button type="button" class="btn sm ghost" id="profile-back" data-profile-back>← 戻る</button></div><div class="empty"><h1 id="profile-title" tabindex="-1">選手が見つかりません</h1><p>掲載済みの選手を名鑑から選んでください。</p><a class="text-link" href="#players" data-page="players">プレイヤー名鑑へ →</a></div>';
       document.querySelectorAll('.section').forEach(e=>e.classList.toggle('active',e.id==='page-'+view.page));
-      document.querySelectorAll('.nav button').forEach(e=>{const active=e.dataset.page===(view.page==='profile'?'players':view.page);e.classList.toggle('active',active);e.setAttribute('aria-current',active?'page':'false')});
+      document.querySelectorAll('.nav button').forEach(e=>{const active=e.dataset.page===(view.page==='profile'?'players':view.page==='tournament'?'tournaments':view.page);e.classList.toggle('active',active);e.setAttribute('aria-current',active?'page':'false')});
       if(view.page==='results')renderResults();
       if(view.page==='players')renderPlayers();
-      document.title=view.page==='profile'&&profileInfo(view.name)?view.name+' · ASIA ON TOUR':'ASIA ON TOUR — Fortnite海外遠征トラッカー';
+      document.title=view.page==='profile'&&profileInfo(view.name)?view.name+' · ASIA ON TOUR':view.page==='tournament'&&tournamentInfo(view.id)?tournamentInfo(view.id).name+' · ASIA ON TOUR':view.page==='tournaments'?'大会を探す · ASIA ON TOUR':'ASIA ON TOUR — Fortnite海外遠征トラッカー';
       routedHash=window.location.hash;
       window.scrollTo({top:restore?(view.scroll||0):0,behavior:'instant'});
-      if(view.page==='profile'&&!restore)$('#profile-title')?.focus?.({preventScroll:true});
+      if(!restore){if(view.page==='profile')$('#profile-title')?.focus?.({preventScroll:true});if(view.page==='tournament')$('#tournament-title')?.focus?.({preventScroll:true});}
     }
     function visitView(view,replace=false){
       if(routingReady)window.history.replaceState({aot:true,depth:routeDepth,view:captureView()},'',window.location.href);
-      const same=currentView.page===view.page&&currentView.name===(view.name||null);
-      const next={...captureView(),...view,scroll:0};
+      const same=currentView.page===view.page&&currentView.name===(view.name||null)&&currentView.id===(view.id||null)&&(view.page!=='tournaments'||tournamentSearchHash(currentView.filters)===tournamentSearchHash(view.filters));
+      const next={...captureView(),invalid:false,...view,scroll:0};
       if(!replace&&!same)routeDepth++;
       const state={aot:true,depth:routeDepth,view:next};
       if(replace||same)window.history.replaceState(state,'',routeHash(view));else window.history.pushState(state,'',routeHash(view));
       showView(next);
     }
-    function navigate(page){visitView({page,name:null})}
-    function openProfile(name){visitView({page:'profile',name})}
-    function profileBack(){if(routeDepth>0)window.history.back();else visitView({page:'players',name:null},true)}
+    function navigate(page){visitView({page,name:null,id:null,...(page==='tournaments'?{filters:{...tournamentBrowseFilters}}:{})})}
+    function openProfile(name){visitView({page:'profile',name,id:null})}
+    function openTournament(id){visitView({page:'tournament',id,name:null})}
+    function profileBack(){if(routeDepth>0)window.history.back();else visitView({page:'players',name:null,id:null},true)}
+    function tournamentBack(){if(routeDepth>0)window.history.back();else visitView({page:currentView.page==='tournaments'?'home':'tournaments',name:null,id:null,filters:tournamentDefaultFilters()},true)}
+    function tournamentTagNavigate(axis,value,context){
+      if(!tournamentAxes.some(a=>a.key===axis&&a.options.some(o=>o.id===value)))return;
+      const filters=context==='search'?{...currentView.filters}:tournamentDefaultFilters();filters[axis]=context==='search'&&filters[axis]===value?'all':value;
+      visitView({page:'tournaments',name:null,id:null,filters:sanitizeTournamentFilters(filters)});
+    }
+    function updateTournamentFilters(key,value){
+      const filters=sanitizeTournamentFilters({...currentView.filters,[key]:value});
+      tournamentBrowseFilters=filters;currentView.filters={...filters};
+      window.history.replaceState({aot:true,depth:routeDepth,view:captureView()},'',tournamentSearchHash(filters));routedHash=window.location.hash;
+      if(key==='q')renderTournamentList(filters);else renderTournamentSearch(filters);
+    }
     function initializeRouting(){
       const view=routeFromHash();
       routeDepth=0;
@@ -937,7 +1714,7 @@
       const source=safeUrl(e.source);
       const partners=names(e).filter(n=>n!==name);
       const partnerLinks=partners.map(n=>`<a href="${escape(profileHref(n))}" data-open-profile="${escape(n)}">${escape(n)}</a>`).join(' / ');
-      return `<article class="profile-history-row${individualPrize(e)>0?' is-prize-win':''}" data-result-id="${escape(e.id)}"><div class="profile-history-meta"><time datetime="${escape(e.date)}">${escape(friendlyDate(e.date))}</time>${regionPill(e.region)}<span class="profile-history-stage">${escape(e.kind||'未分類')}</span></div><h3 class="profile-history-event">${escape(e.event)}</h3><p class="profile-history-round">${escape(e.round||'大会ラウンド未登録')}</p>${partners.length?`<p class="profile-history-partners">相方：${partnerLinks}</p>`:''}<dl class="profile-history-metrics"><div><dt>順位</dt><dd data-profile-event="rank"${Number.isInteger(e.rank)?'':' class="profile-metric-unknown"'}>${escape(rankLabel(e))}</dd></div><div><dt>PTS</dt><dd data-profile-event="points">${format(e.points)}</dd></div><div><dt>KILLS</dt><dd data-profile-event="kills">${format(e.kills)}</dd></div><div><dt>VR</dt><dd data-profile-event="vrs">${format(e.vrs)}</dd></div><div class="profile-history-prize"><dt>個人賞金 / USD</dt><dd>${profileHistoryPrize(e)}</dd></div></dl><p class="profile-history-source">${source?`<a href="${escape(source)}" target="_blank" rel="noopener noreferrer">大会の出典を見る ↗</a>`:'出典URL未登録'}</p>${archiveDetails(e)}</article>`;
+      return `<article class="profile-history-row${individualPrize(e)>0?' is-prize-win':''}" data-result-id="${escape(e.id)}"><div class="profile-history-meta"><time datetime="${escape(e.date)}">${escape(friendlyDate(e.date))}</time>${regionPill(e.region)}<span class="profile-history-stage">${escape(e.kind||'未分類')}</span></div><h3 class="profile-history-event">${escape(e.event)}</h3><p class="profile-history-round">${escape(e.round||'大会ラウンド未登録')}</p>${tournamentTags(e)}${partners.length?`<p class="profile-history-partners">相方：${partnerLinks}</p>`:''}<dl class="profile-history-metrics"><div><dt>順位</dt><dd data-profile-event="rank"${Number.isInteger(e.rank)?'':' class="profile-metric-unknown"'}>${escape(rankLabel(e))}</dd></div><div><dt>PTS</dt><dd data-profile-event="points">${format(e.points)}</dd></div><div><dt>KILLS</dt><dd data-profile-event="kills">${format(e.kills)}</dd></div><div><dt>VR</dt><dd data-profile-event="vrs">${format(e.vrs)}</dd></div><div class="profile-history-prize"><dt>個人賞金 / USD</dt><dd>${profileHistoryPrize(e)}</dd></div></dl><p class="profile-history-source">${source?`<a href="${escape(source)}" target="_blank" rel="noopener noreferrer">大会の出典を見る ↗</a>`:'出典URL未登録'}</p>${archiveDetails(e)}</article>`;
     }
     function renderProfile(name){
       const info=profileInfo(name);
@@ -1003,7 +1780,7 @@
         <div class="archive-stat"><span class="field-label">KILLS</span><strong data-field="kills">${format(e.kills)}</strong></div>
         <div class="archive-stat"><span class="field-label">VR</span><strong data-field="vrs">${format(e.vrs)}</strong></div>
         <div class="archive-stat archive-prize"><span class="field-label">賞金 / USD</span><div data-field="prize">${archivePrize(e)}</div></div>
-      </div>${archiveDetails(e)}</article>`;
+      </div>${tournamentTags(e)}${archiveDetails(e)}</article>`;
     }
     function renderResults(){const s=($('#search-results').value||'').trim().toLowerCase();const r=$('#region-filter').value;const prize=$('#prize-only').checked;const stage=$('#stage-filter').value;visible=all().filter(e=>(!selectedPlayer||names(e).includes(selectedPlayer))&&(r==='all'||e.region===r)&&(stage==='all'||e.kind===stage)&&(!prize||isPrizeWin(e))&&(!s||[e.player,...names(e),e.playerRaw,e.event,e.region,e.round,e.note].some(x=>String(x||'').toLowerCase().includes(s))));const order=$('#sort-results').value;visible.sort((a,b)=>order==='rank'?((a.rank??Infinity)-(b.rank??Infinity)||b.date.localeCompare(a.date)):order==='kills'?((b.kills??-1)-(a.kills??-1)):b.date.localeCompare(a.date));$('#result-count').textContent=`${visible.length}件`;
       if(!visible.length){$('#result-table').innerHTML='<div class="empty"><div class="emoji">🔎</div><b>条件に合う戦績がまだないよ</b><p>検索条件や絞り込みを変えてみてね</p></div>';return}
@@ -1015,7 +1792,18 @@
     function csvText(rows){const cols=['date','player','players','region','event','round','rank','points','kills','vrs','prize','prizePerPlayer','kind','source','verified','note'];const cell=x=>'"'+String(x??'').replace(/"/g,'""')+'"';return '\ufeff'+cols.join(',')+'\r\n'+rows.map(e=>cols.map(k=>cell(k==='players'?names(e).join(' / '):e[k])).join(',')).join('\r\n')}
     function download(name,content,type){const b=new Blob([content],{type});const url=URL.createObjectURL(b);const a=document.createElement('a');a.href=url;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000)}
     document.addEventListener('click',e=>{
+      if(e.target.closest('[data-tournament-back]')){tournamentBack();return}
       if(e.target.closest('[data-profile-back]')){profileBack();return}
+      const tournament=e.target.closest('[data-open-tournament]');
+      const tag=e.target.closest('[data-tournament-tag]');
+      const reset=e.target.closest('[data-tournament-reset]');
+      if(tournament||tag||reset){
+        if(e.ctrlKey||e.metaKey||e.shiftKey||e.altKey||e.button>0)return;e.preventDefault();
+        if(tournament)openTournament(tournament.dataset.openTournament);
+        else if(tag){const [axis,value]=tag.dataset.tournamentTag.split(':');tournamentTagNavigate(axis,value,tag.dataset.tournamentContext)}
+        else visitView({page:'tournaments',name:null,id:null,filters:tournamentDefaultFilters()});
+        return;
+      }
       const profile=e.target.closest('[data-open-profile]');
       if(profile){if(e.ctrlKey||e.metaKey||e.shiftKey||e.altKey||e.button>0)return;e.preventDefault();openProfile(profile.dataset.openProfile);return}
       const nav=e.target.closest('[data-page]');
@@ -1024,6 +1812,8 @@
       const p=e.target.closest('[data-player]');if(p){selectedPlayer=p.dataset.player;$('#search-results').value=p.dataset.player;$('#region-filter').value='all';$('#stage-filter').value='all';$('#prize-only').checked=false;navigate('results')}
     });
     ['#region-filter','#stage-filter','#sort-results','#prize-only'].forEach(s=>$(s).addEventListener('input',renderResults));$('#search-results').addEventListener('input',()=>{selectedPlayer=null;renderResults()});$('#search-players').addEventListener('input',renderPlayers);$('#player-sort').addEventListener('change',renderPlayers);$('#export-csv').addEventListener('click',()=>download('asia-on-tour-results.csv',csvText(visible),'text/csv;charset=utf-8'));
+    document.addEventListener('input',e=>{if(e.target.id==='tournament-query')updateTournamentFilters('q',e.target.value)});
+    document.addEventListener('change',e=>{if(e.target.dataset.tournamentFilter)updateTournamentFilters(e.target.dataset.tournamentFilter,e.target.value)});
     refresh();
     initializeRouting();
   })();
