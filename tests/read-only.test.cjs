@@ -3,6 +3,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 const vm = require('node:vm');
+const crypto = require('node:crypto');
 
 const html = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
 const script = html.match(/<script>([\s\S]*?)<\/script>/)[1];
@@ -46,6 +47,8 @@ class Element {
     for (const callback of this.events.get(type) || []) callback(event);
   }
   setAttribute(name, value) { this.attributes[name] = value; }
+  set innerHTML(value) { this.markup = value; this.onHTML?.(value); }
+  get innerHTML() { return this.markup; }
   closest(selector) {
     const attribute = selector.match(/^\[([\w-]+)\]$/)?.[1];
     return attribute && Object.hasOwn(this.attributes, attribute) ? this : this.parent?.closest(selector) || null;
@@ -58,11 +61,25 @@ function boot(source = script, { hash = '' } = {}) {
   const elements = [...html.matchAll(/<([\w-]+)\b([^>]*)>/g)]
     .map(([, tag, attributes]) => new Element(tag, attributes));
   const ids = new Map(elements.filter(element => element.id).map(element => [element.id, element]));
-  for (const [, attributes, content] of html.matchAll(/<select\b([^>]*)>([\s\S]*?)<\/select>/g)) {
-    const id = attributes.match(/id="([^"]+)"/)[1];
-    const first = content.match(/<option\b([^>]*)>([\s\S]*?)<\/option>/);
-    ids.get(id).value = first[1].match(/value="([^"]*)"/)?.[1] ?? plain(first[2]);
-  }
+  const initialiseSelects = markup => {
+    for (const [, attributes, content] of markup.matchAll(/<select\b([^>]*)>([\s\S]*?)<\/select>/g)) {
+      const id = attributes.match(/id="([^"]+)"/)?.[1];
+      const options = [...content.matchAll(/<option\b([^>]*)>([\s\S]*?)<\/option>/g)];
+      const selected = options.find(([, attributes]) => /\bselected\b/.test(attributes)) || options[0];
+      if (id && selected) ids.get(id).value = selected[1].match(/value="([^"]*)"/)?.[1] ?? plain(selected[2]);
+    }
+  };
+  // Tournament search controls are a rendered view, so newly inserted elements
+  // become queryable just as they do in the browser.
+  const registerMarkup = markup => {
+    for (const [, tag, attributes] of markup.matchAll(/<([\w-]+)\b([^>]*)>/g)) {
+      const element = new Element(tag, attributes);
+      if (element.id) { element.onHTML = registerMarkup; ids.set(element.id, element); }
+    }
+    initialiseSelects(markup);
+  };
+  for (const element of elements) element.onHTML = registerMarkup;
+  initialiseSelects(html);
   const navSource = html.match(/<nav\b[^>]*>([\s\S]*?)<\/nav>/)[1];
   const nav = [...navSource.matchAll(/<button\b([^>]*)>/g)]
     .map(([, attributes]) => new Element('button', attributes));
@@ -119,7 +136,7 @@ function boot(source = script, { hash = '' } = {}) {
   };
   const sandbox = {
     document, window,
-    URL: BrowserURL, Blob, setTimeout: callback => { callback(); return 1; }
+    URL: BrowserURL, URLSearchParams, Blob, setTimeout: callback => { callback(); return 1; }
   };
   Object.defineProperty(sandbox, 'location', { get: () => location });
   sandbox.history = window.history;
@@ -142,12 +159,16 @@ function boot(source = script, { hash = '' } = {}) {
       const element = get(id);
       if (typeof value === 'boolean') element.checked = value; else element.value = value;
       element.dispatch(type);
+      document.dispatch(type, element);
     },
     click,
     navigate(page) { click(nav.find(element => element.dataset.page === page)); },
     player(name) { click(new Element('button', `data-player="${name}"`)); },
     profile(name) { click(new Element('a', `data-open-profile="${name}" href="#player=${encodeURIComponent(name)}"`)); },
     profileBack() { click(new Element('button', 'data-profile-back=""')); },
+    tournament(id) { click(new Element('a', `data-open-tournament="${id}" href="#tournament=${encodeURIComponent(id)}"`)); },
+    tag(axis, value) { click(new Element('a', `data-tournament-tag="${axis}:${value}" href="#tournaments?${axis}=${encodeURIComponent(value)}"`)); },
+    tournamentBack() { click(new Element('button', 'data-tournament-back=""')); },
     browserBack() { window.history.back(); },
     hash(value) {
       const oldURL = location.href;
@@ -169,8 +190,9 @@ function renderedArticles(app) {
 
 // Read a marked value while allowing nested markup of the same tag. These
 // assertions inspect the user-facing content, not a duplicate rendering path.
+const regexLiteral = value => String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 function markedContent(content, attribute, name) {
-  const start = new RegExp(`<([\\w-]+)\\b[^>]*\\b${attribute}="${name}"[^>]*>`).exec(content);
+  const start = new RegExp(`<([\\w-]+)\\b[^>]*\\b${regexLiteral(attribute)}="${regexLiteral(name)}"[^>]*>`).exec(content);
   assert.ok(start, `Missing ${attribute}="${name}"`);
   const tag = start[1];
   const position = start.index + start[0].length;
@@ -184,7 +206,7 @@ function markedContent(content, attribute, name) {
   assert.fail(`Unclosed ${attribute}="${name}"`);
 }
 function markedContents(content, attribute, name) {
-  return [...content.matchAll(new RegExp(`<([\\w-]+)\\b[^>]*\\b${attribute}="${name}"[^>]*>`, 'g'))]
+  return [...content.matchAll(new RegExp(`<([\\w-]+)\\b[^>]*\\b${regexLiteral(attribute)}="${regexLiteral(name)}"[^>]*>`, 'g'))]
     .map(match => markedContent(content.slice(match.index), attribute, name));
 }
 const field = (content, name) => plain(markedContent(content, 'data-field', name));
@@ -253,6 +275,10 @@ test('startup renders published data when browser storage is inaccessible', () =
 
 test('the compact archive preserves all 136 records, 86 players and $9,000 of verified individual earnings', () => {
   const app = boot();
+  // The tournament catalog adds metadata beside the published records. This
+  // baseline covers every record field, including identity, source and shares.
+  assert.equal(crypto.createHash('sha256').update(JSON.stringify(records)).digest('hex'),
+    '863fea3a5018d860d660b70c71f910ddd2cf596a0e0a0e9cc2f8b1dae1a99cb4');
   assert.equal(records.length, 136);
   assert.equal(new Set(records.flatMap(record => record.players || [record.player])).size, 86);
   assert.equal(Number(app.get('stat-players').textContent), 86);
@@ -293,7 +319,7 @@ test('every result has a native disclosure retaining points, round, display name
     const expectedLinks = [record.source, record.profileUrl, ...(record.profiles || []).map(profile => profile.url)]
       .filter(Boolean).map(url => new URL(url).href);
     const links = [...content.matchAll(/<a\b([^>]*)>/g)]
-      .filter(([, attributes]) => !/data-open-profile=/.test(attributes)).map(([, attributes]) => {
+      .filter(([, attributes]) => /href="https?:/.test(attributes)).map(([, attributes]) => {
       assert.match(attributes, /target="_blank"/);
       assert.match(attributes, /rel="noopener noreferrer"/);
       const url = decode(attributes.match(/href="([^"]+)"/)[1]);
@@ -340,7 +366,7 @@ test('detail text is escaped and non-web source or profile links are not rendere
   assert.doesNotMatch(content, /<img\b|<script\b|href="(?:javascript|data):/);
   assert.match(content, /&lt;img/);
   const links = [...content.matchAll(/<a\b([^>]*)>/g)]
-    .filter(([, attributes]) => !/data-open-profile=/.test(attributes))
+    .filter(([, attributes]) => /href="https?:/.test(attributes))
     .map(([, attributes]) => decode(attributes.match(/href="([^"]+)"/)[1]));
   assert.deepEqual(links, [url]);
   assert.ok(detail(content, 'profiles').includes(unsafe));
@@ -379,12 +405,12 @@ test('unknown duo shares, unverified prizes, zero and unset prizes remain distin
 test('all navigation pages remain usable with accurate active state', () => {
   const app = boot();
   const initialScrolls = app.scrolls.length;
-  for (const page of ['results', 'players', 'about', 'home']) {
+  for (const page of ['results', 'players', 'tournaments', 'about', 'home']) {
     app.navigate(page);
     assert.deepEqual(app.sections.filter(element => element.classList.contains('active')).map(element => element.id), [`page-${page}`]);
     assert.equal(app.nav.find(element => element.dataset.page === page).attributes['aria-current'], 'page');
   }
-  assert.equal(app.scrolls.length - initialScrolls, 4);
+  assert.equal(app.scrolls.length - initialScrolls, 5);
   assert.equal(app.storageAccesses(), 0);
 });
 
@@ -692,4 +718,386 @@ test('profile totals never credit unconfirmed, missing or excessive duo shares',
     assert.equal(new Set(profileHistory(app).map(({ id }) => id)).size, 5);
   }
   assert.equal(app.get('home-earnings-sum').textContent, '$400');
+});
+
+test('the complete individual prize ranking keeps its original order, amounts and paid-record counts', () => {
+  const totals = new Map();
+  for (const record of records) {
+    const amount = personalCash(record);
+    if (!amount) continue;
+    for (const name of new Set(roster(record))) {
+      const current = totals.get(name) || { name, total: 0, events: 0 };
+      current.total += amount;
+      current.events++;
+      totals.set(name, current);
+    }
+  }
+  const expected = [...totals.values()].sort((a, b) => b.total - a.total || b.events - a.events || a.name.localeCompare(b.name, 'ja'));
+  assert.equal(expected.reduce((sum, player) => sum + player.total, 0), 9000);
+  const app = boot();
+  for (const [id, limit] of [['home-earnings-leaders', 5], ['player-earnings-leaders', expected.length]]) {
+    const rows = [...app.get(id).innerHTML.matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/g)]
+      .filter(([, attributes]) => /data-open-profile=/.test(attributes));
+    assert.deepEqual(rows.map(([, attributes, content]) => [
+      decode(attributes.match(/data-open-profile="([^"]+)"/)[1]),
+      plain(content.match(/<strong\b[^>]*class="amount"[^>]*>([\s\S]*?)<\/strong>/)[1])
+    ]), expected.slice(0, limit).map(player => [player.name, currency(player.total)]));
+    if (limit === expected.length) {
+      assert.deepEqual(rows.map(([, , content]) => Number(plain(content).match(/賞金獲得 (\d+)件/)[1])), expected.map(player => player.events));
+    }
+  }
+});
+
+const tournamentAxes = ['series', 'mode', 'subtype', 'team', 'platform'];
+// Audited against the season-specific source pages and rules. Similar names
+// intentionally occupy separate rows instead of sharing a guessed classifier.
+const tournamentExpected = [
+  ['Solo Victory Cup Battle Royale', 'victory-cup', 'battle-royale', 'solo-victory-cup', 'solo', 'cross-platform'],
+  ['Reload Duos Victory Cup', 'victory-cup', 'reload', 'reload-duos-victory-cup', 'duo', 'cross-platform'],
+  ['Console Zero Build Solo Victory Cup', 'victory-cup', 'zero-build', 'console-solo-victory-cup', 'solo', 'console'],
+  ['Reload ZB Duos Cash Cup', 'cash-cup', 'reload-zero-build', 'reload-zb-duos-cash-cup', 'duo', 'unknown'],
+  ['Solo Reload Victory Cup', 'victory-cup', 'reload', 'solo-reload-victory-cup', 'solo', 'cross-platform'],
+  ['FNCS Division 1 Practice', 'fncs', 'battle-royale', 'fncs-division-1-practice', 'duo', 'cross-platform'],
+  ['Override Series: Mega Man Cup', 'override-series', 'unknown', 'mega-man-cup', 'duo', 'unknown'],
+  ['Override Series: KINGDOM HEARTS Cup', 'override-series', 'unknown', 'kingdom-hearts-cup', 'solo', 'unknown'],
+  ['Fortnite Performance Evaluation', 'performance-evaluation', 'battle-royale', 'performance-evaluation', 'duo', 'unknown'],
+  ['PlayStation NickEh30 Icon Cup', 'icon-cup', 'battle-royale', 'nickeh30-icon-cup', 'solo', 'playstation'],
+  ['Champion Focus FNCS Cup', 'fncs', 'battle-royale', 'champion-focus-fncs-cup', 'solo', 'unknown']
+].map(([name, ...values]) => ({ name, ...Object.fromEntries(tournamentAxes.map((axis, index) => [axis, values[index]])) }));
+function tournamentTags(markup) {
+  return [...markup.matchAll(/<a\b([^>]*)>/g)]
+    .filter(([, attributes]) => /data-tournament-tag="/.test(attributes))
+    .map(([, attributes]) => {
+      const [axis, value] = decode(attributes.match(/data-tournament-tag="([^"]+)"/)[1]).split(':');
+      return { axis, value, href: decode(attributes.match(/href="([^"]+)"/)[1]), attributes };
+    });
+}
+function tournamentCards(app) {
+  return [...app.get('tournament-list').innerHTML.matchAll(/<article\b([^>]*)>([\s\S]*?)<\/article>/g)]
+    .filter(([, attributes]) => /data-tournament-id=/.test(attributes))
+    .map(([, attributes, content]) => ({ id: decode(attributes.match(/data-tournament-id="([^"]+)"/)[1]), content }));
+}
+function tournamentRecordIds(app) {
+  return [...app.get('tournament-detail-content').innerHTML.matchAll(/data-tournament-record="([^"]+)"/g)]
+    .map(([, id]) => decode(id));
+}
+function activePage(app) {
+  return app.sections.filter(element => element.classList.contains('active')).map(element => element.id);
+}
+
+test('all 136 archive records and every player history expose the same five independent tournament facets', () => {
+  const app = boot();
+  const archive = new Map();
+  for (const { id, content } of renderedArticles(app)) {
+    const tags = tournamentTags(content);
+    assert.deepEqual(tags.map(tag => tag.axis).sort(), tournamentAxes.slice().sort(), id);
+    for (const tag of tags) {
+      assert.ok(tag.value, `${id}: ${tag.axis}`);
+      const url = new URL(tag.href, app.window.location.href);
+      assert.ok(url.hash.startsWith('#tournaments?'), `${id}: ${tag.href}`);
+      assert.equal(new URLSearchParams(url.hash.split('?')[1]).get(tag.axis), tag.value, id);
+    }
+    archive.set(id, tags.map(tag => `${tag.axis}:${tag.value}`).sort());
+  }
+  assert.equal(archive.size, 136);
+  for (const name of publishedPlayers) {
+    app.profile(name);
+    for (const { id, content } of profileHistory(app)) {
+      assert.deepEqual(tournamentTags(content).map(tag => `${tag.axis}:${tag.value}`).sort(), archive.get(id), `${name}: ${id}`);
+    }
+  }
+});
+
+test('tournament catalog and detail routes retain all records once and separate regions, dates and rounds', () => {
+  const app = boot(script, { hash: '#tournaments' });
+  assert.deepEqual(activePage(app), ['page-tournaments']);
+  assert.equal(app.get('tournament-query').attributes.type, 'search');
+  const catalog = tournamentCards(app);
+  assert.equal(catalog.length, 11);
+  assert.equal(new Set(catalog.map(card => card.id)).size, 11);
+  assert.equal(app.get('tournament-count').textContent, '11大会 · 136戦績');
+  const allIds = [];
+  for (const card of catalog) {
+    const direct = boot(script, { hash: `#tournament=${encodeURIComponent(card.id)}` });
+    assert.deepEqual(activePage(direct), ['page-tournament'], card.id);
+    const ids = tournamentRecordIds(direct);
+    assert.ok(ids.length, card.id);
+    assert.equal(new Set(ids).size, ids.length, card.id);
+    allIds.push(...ids);
+    const markup = direct.get('tournament-detail-content').innerHTML;
+    const rendered = [...markup.matchAll(/<article\b([^>]*)>([\s\S]*?)<\/article>/g)]
+      .filter(([, attributes]) => /data-tournament-record=/.test(attributes));
+    for (const [, attributes, content] of rendered) {
+      const id = decode(attributes.match(/data-tournament-record="([^"]+)"/)[1]);
+      const record = records.find(record => record.id === id);
+      assert.equal(plain(markedContent(content, 'data-tournament-metric', 'rank')), key(record)[4], id);
+      for (const metric of ['points', 'kills', 'vrs']) {
+        assert.equal(plain(markedContent(content, 'data-tournament-metric', metric)),
+          Number.isFinite(record[metric]) ? record[metric].toLocaleString('ja-JP') : '—', `${id}: ${metric}`);
+      }
+      assert.equal(/\bis-prize-win\b/.test(attributes), record.verified === true && record.prize > 0, id);
+      assert.deepEqual([...new Set(profileLinks(content).map(link => link.name))].sort(), [...new Set(roster(record))].sort(), id);
+      assert.ok(detail(content, 'source').includes(new URL(record.source).href), id);
+      assert.equal(detail(content, 'round'), record.round, id);
+      assert.equal(detail(content, 'playerRaw'), record.playerRaw, id);
+      if (record.players?.length > 1 && record.prize > 0) {
+        assert.ok(detail(content, 'prize').includes(currency(record.prizePerPlayer)), id);
+        assert.match(detail(content, 'prize'), /チーム合計/);
+      }
+    }
+    const sessions = [...markup.matchAll(/<section\b[^>]*data-tournament-session="([^"]+)"[^>]*>/g)]
+      .map(match => markedContent(markup.slice(match.index), 'data-tournament-session', match[1]));
+    assert.ok(sessions.length, card.id);
+    const sessionDates = [];
+    for (const session of sessions) {
+      const sessionIds = [...session.matchAll(/data-tournament-record="([^"]+)"/g)].map(([, id]) => decode(id));
+      assert.ok(sessionIds.length, card.id);
+      const rows = sessionIds.map(id => records.find(record => record.id === id));
+      assert.ok(rows.every(Boolean), card.id);
+      for (const axis of ['date', 'region', 'kind']) assert.equal(new Set(rows.map(record => record[axis])).size, 1, `${card.id}: ${axis}`);
+      const windows = rows.map(record => new URL(record.source).searchParams.get('window') || new URL(record.source).searchParams.get('round')).filter(Boolean);
+      assert.ok(new Set(windows).size <= 1, `${card.id}: distinct known event rounds were merged`);
+      sessionDates.push(rows[0].date);
+    }
+    assert.deepEqual(sessionDates, sessionDates.slice().sort((a, b) => b.localeCompare(a)), card.id);
+  }
+  assert.deepEqual(allIds.sort(), records.map(record => record.id).sort());
+});
+
+test('unknown tournament metadata stays unconfirmed instead of being guessed from a suggestive name', () => {
+  const fixture = { ...records[0], id: 'unconfirmed-format', event: 'Mystery Reload ZB Duo Cup',
+    round: '未確認', source: 'https://example.com/no-event-metadata' };
+  const app = boot(fixtureScript([fixture]));
+  const [{ content }] = renderedArticles(app);
+  const tags = tournamentTags(content);
+  assert.deepEqual(tags.map(tag => tag.axis).sort(), tournamentAxes.slice().sort());
+  assert.ok(tags.every(tag => tag.value === 'unknown'), 'Unconfirmed names must not supply format, team or platform restrictions');
+});
+
+test('all existing tournament assignments match the audited season-specific taxonomy', () => {
+  const app = boot();
+  const counts = Object.fromEntries(tournamentAxes.map(axis => [axis, {}]));
+  for (const { id, content } of renderedArticles(app)) {
+    const record = records.find(record => record.id === id);
+    const expected = tournamentExpected.find(event => event.name === record.event);
+    assert.ok(expected, record.event);
+    for (const { axis, value } of tournamentTags(content)) {
+      assert.equal(value, expected[axis], `${id}: ${axis}`);
+      counts[axis][value] = (counts[axis][value] || 0) + 1;
+    }
+  }
+  assert.deepEqual(counts.mode, { 'battle-royale': 33, reload: 55, 'zero-build': 42, 'reload-zero-build': 2, unknown: 4 });
+  assert.deepEqual(counts.series, { 'victory-cup': 118, 'cash-cup': 2, fncs: 7, 'override-series': 4, 'performance-evaluation': 2, 'icon-cup': 3 });
+  assert.deepEqual(counts.team, { solo: 117, duo: 19 });
+  assert.deepEqual(counts.platform, { 'cross-platform': 82, console: 42, unknown: 9, playstation: 3 });
+});
+
+test('all five tournament facets and free text use AND filtering with stage separate from game mode', () => {
+  const app = boot(script, { hash: '#tournaments' });
+  const assertCatalog = filters => {
+    const expectedRecords = records.filter(record => {
+      const meta = tournamentExpected.find(event => event.name === record.event);
+      return tournamentAxes.every(axis => !filters[axis] || filters[axis] === 'all' || meta[axis] === filters[axis]) &&
+        (!filters.stage || filters.stage === 'all' || record.kind === filters.stage) &&
+        (!filters.q || record.event.toLowerCase().includes(filters.q.toLowerCase()));
+    });
+    const expectedNames = [...new Set(expectedRecords.map(record => record.event))].sort();
+    const shown = tournamentCards(app);
+    assert.deepEqual(shown.map(card => plain(card.content.match(/<h3[^>]*>([\s\S]*?)<\/h3>/)[1])).sort(), expectedNames);
+    assert.equal(app.get('tournament-count').textContent, `${expectedNames.length}大会 · ${expectedRecords.length}戦績`);
+    const query = new URLSearchParams(app.window.location.hash.split('?')[1] || '');
+    for (const [axis, value] of Object.entries(filters)) if (value !== 'all' && value !== '') assert.equal(query.get(axis), value, axis);
+  };
+  const filters = {};
+  for (const [axis, value] of [
+    ['series', 'victory-cup'], ['mode', 'reload'], ['team', 'solo'], ['platform', 'cross-platform'],
+    ['subtype', 'solo-reload-victory-cup'], ['stage', '予選']
+  ]) {
+    filters[axis] = value;
+    app.set(`tournament-${axis}`, value, 'change');
+    assertCatalog(filters);
+  }
+  filters.q = 'Solo Reload';
+  app.set('tournament-query', filters.q);
+  assertCatalog(filters);
+  filters.q = 'no-such-event-9718';
+  app.set('tournament-query', filters.q);
+  assertCatalog(filters);
+  assert.match(plain(app.get('tournament-list').innerHTML), /条件に合う大会がありません/);
+  assert.doesNotMatch(app.get('tournament-list').innerHTML, /登録して|追加して/);
+});
+
+test('FNCS practice, normal Division 1, Major, Heats, LCQ, Performance and Champion Focus stay separate', () => {
+  for (const [subtype, name, count] of [
+    ['fncs-division-1-practice', 'FNCS Division 1 Practice', 6],
+    ['performance-evaluation', 'Fortnite Performance Evaluation', 2],
+    ['champion-focus-fncs-cup', 'Champion Focus FNCS Cup', 1],
+    ['fncs-division-1', null, 0], ['fncs-major', null, 0], ['fncs-heats', null, 0], ['fncs-lcq', null, 0]
+  ]) {
+    const app = boot(script, { hash: `#tournaments?subtype=${subtype}` });
+    const shown = tournamentCards(app);
+    assert.equal(app.get('tournament-count').textContent, `${name ? 1 : 0}大会 · ${count}戦績`, subtype);
+    assert.equal(shown.length, name ? 1 : 0, subtype);
+    if (name) assert.ok(plain(shown[0].content).includes(name), subtype);
+    assert.equal(app.get('tournament-subtype').value, subtype, subtype);
+  }
+});
+
+test('archive and profile tags navigate to search and browser back restores their original view and filters', () => {
+  const app = boot();
+  app.navigate('results');
+  app.set('search-results', 'solo');
+  app.set('region-filter', 'NAW');
+  app.set('stage-filter', '予選');
+  app.set('sort-results', 'rank');
+  const before = renderedRows(app);
+  app.window.scrollY = 420;
+  const archiveTag = tournamentTags(renderedArticles(app)[0].content).find(tag => tag.axis === 'mode');
+  app.click(new Element('a', archiveTag.attributes));
+  assert.deepEqual(activePage(app), ['page-tournaments']);
+  assert.equal(app.get('tournament-mode').value, archiveTag.value);
+  app.browserBack();
+  assert.deepEqual(activePage(app), ['page-results']);
+  assert.deepEqual(renderedRows(app), before);
+  assert.equal(app.get('search-results').value, 'solo');
+  assert.equal(app.get('region-filter').value, 'NAW');
+  assert.equal(app.get('stage-filter').value, '予選');
+  assert.equal(app.get('sort-results').value, 'rank');
+  assert.equal(app.window.scrollY, 420);
+  app.profile('miru');
+  const ids = profileHistory(app).map(record => record.id);
+  const profileTag = tournamentTags(profileHistory(app)[0].content).find(tag => tag.axis === 'series');
+  app.click(new Element('a', profileTag.attributes));
+  assert.deepEqual(activePage(app), ['page-tournaments']);
+  assert.equal(app.get('tournament-series').value, profileTag.value);
+  app.browserBack();
+  assert.deepEqual(activePage(app), ['page-profile']);
+  assert.equal(profileField(app, 'name'), 'miru');
+  assert.equal(profileField(app, 'total'), '$700');
+  assert.deepEqual(profileHistory(app).map(record => record.id), ids);
+});
+
+test('search tag chips combine with active filters, toggle their selection and restore after tournament detail back', () => {
+  const app = boot(script, { hash: '#tournaments?series=victory-cup&mode=reload' });
+  const clickDuo = () => {
+    const tag = tournamentTags(app.get('tournament-facet-team').innerHTML).find(tag => tag.value === 'duo');
+    assert.ok(tag);
+    app.click(new Element('a', tag.attributes));
+  };
+  clickDuo();
+  assert.equal(app.get('tournament-series').value, 'victory-cup');
+  assert.equal(app.get('tournament-mode').value, 'reload');
+  assert.equal(app.get('tournament-team').value, 'duo');
+  assert.equal(app.get('tournament-count').textContent, '1大会 · 7戦績');
+  const card = tournamentCards(app)[0];
+  app.window.scrollY = 570;
+  app.tournament(card.id);
+  assert.deepEqual(activePage(app), ['page-tournament']);
+  assert.equal(tournamentRecordIds(app).length, 7);
+  app.tournamentBack();
+  assert.deepEqual(activePage(app), ['page-tournaments']);
+  assert.equal(app.get('tournament-count').textContent, '1大会 · 7戦績');
+  assert.equal(app.get('tournament-team').value, 'duo');
+  assert.equal(app.window.scrollY, 570);
+  clickDuo();
+  assert.equal(app.get('tournament-team').value, 'all');
+  assert.equal(app.get('tournament-count').textContent, '2大会 · 55戦績');
+});
+
+test('direct malformed or unknown tournament URLs are recoverable and query text is escaped', () => {
+  for (const hash of ['#tournament=no-such-event-9718', '#tournament=%E0%A4%A', '#tournament=']) {
+    const app = boot(script, { hash });
+    assert.deepEqual(activePage(app), ['page-tournament']);
+    assert.match(plain(app.get('tournament-detail-content').innerHTML), /大会が見つかりません/);
+    assert.equal(tournamentRecordIds(app).length, 0);
+    app.tournamentBack();
+    assert.deepEqual(activePage(app), ['page-tournaments']);
+  }
+  const unsafe = '"><img src=x onerror=alert(1)> & <script>alert(1)</script>';
+  const hash = '#tournaments?series=fncs&mode=not-a-mode&stage=not-a-stage&q=' + encodeURIComponent(unsafe);
+  const app = boot(script, { hash });
+  assert.deepEqual(activePage(app), ['page-tournaments']);
+  assert.equal(app.get('tournament-series').value, 'fncs');
+  assert.equal(app.get('tournament-mode').value, 'all');
+  assert.equal(app.get('tournament-stage').value, 'all');
+  assert.equal(app.get('tournament-query').value, unsafe);
+  assert.doesNotMatch(app.get('tournament-content').innerHTML, /<img\b|<script\b/);
+  assert.doesNotMatch(app.get('tournament-active-filters').innerHTML, /<img\b|<script\b/);
+  assert.ok(plain(app.get('tournament-active-filters').innerHTML).includes(unsafe));
+});
+
+test('a future season with the same event name keeps a separate tournament identity and unconfirmed classification', () => {
+  const current = { ...records[0], id: 'season-s42-fixture' };
+  const future = { ...records[0], id: 'season-s43-fixture', date: '2027-01-01',
+    source: records[0].source.replaceAll('S42', 'S43') };
+  const source = fixtureScript([current, future]);
+  const app = boot(source);
+  const rows = new Map(renderedArticles(app).map(record => [record.id, record.content]));
+  const futureTags = tournamentTags(rows.get(future.id));
+  assert.ok(futureTags.every(tag => tag.value === 'unknown'), 'A new season must not inherit unverified rules from S42');
+  app.navigate('tournaments');
+  const catalog = tournamentCards(app);
+  assert.equal(catalog.length, 2);
+  assert.equal(new Set(catalog.map(card => card.id)).size, 2);
+  const histories = catalog.map(card => {
+    const direct = boot(source, { hash: `#tournament=${encodeURIComponent(card.id)}` });
+    return tournamentRecordIds(direct);
+  });
+  assert.deepEqual(histories.map(ids => ids.slice().sort()).sort((a, b) => a[0].localeCompare(b[0])), [[current.id], [future.id]]);
+  assert.ok(catalog.some(card => plain(card.content).includes('S43')), 'Unconfirmed season keeps its known source season identifier');
+});
+
+test('visible facet counts reflect matching records and exclude only their own axis from the current filters', () => {
+  const app = boot(script, { hash: '#tournaments' });
+  const assertCounts = filters => {
+    for (const axis of tournamentAxes) {
+      const chips = [...app.get(`tournament-facet-${axis}`).innerHTML.matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/g)]
+        .filter(([, attributes]) => /data-tournament-tag=/.test(attributes));
+      assert.ok(chips.length, axis);
+      let sum = 0;
+      for (const [, attributes, content] of chips) {
+        const [tagAxis, value] = decode(attributes.match(/data-tournament-tag="([^"]+)"/)[1]).split(':');
+        assert.equal(tagAxis, axis);
+        const expected = records.filter(record => {
+          const meta = tournamentExpected.find(event => event.name === record.event);
+          return meta[axis] === value && tournamentAxes.every(other => other === axis || !filters[other] || meta[other] === filters[other]) &&
+            (!filters.stage || record.kind === filters.stage);
+        }).length;
+        const actual = Number(plain(content.match(/<b[^>]*>([\s\S]*?)<\/b>/)[1]).replaceAll(',', ''));
+        assert.equal(actual, expected, `${axis}:${value}`);
+        sum += actual;
+      }
+      const expectedTotal = records.filter(record => {
+        const meta = tournamentExpected.find(event => event.name === record.event);
+        return tournamentAxes.every(other => other === axis || !filters[other] || meta[other] === filters[other]) &&
+          (!filters.stage || record.kind === filters.stage);
+      }).length;
+      assert.equal(sum, expectedTotal, `${axis}: all facet options count every matching record once`);
+    }
+  };
+  assertCounts({});
+  const filters = {};
+  for (const [axis, value] of [['series', 'victory-cup'], ['mode', 'reload'], ['stage', '予選']]) {
+    filters[axis] = value;
+    app.set(`tournament-${axis}`, value, 'change');
+    assertCounts(filters);
+  }
+});
+
+test('copied event slugs on untrusted hosts and conflicting source seasons never receive confirmed tags', () => {
+  const mixed = new URL(records[0].source);
+  mixed.searchParams.set('window', 'S43_SoloVictoryCup_Event1Round2_ME');
+  const sources = [
+    records[0].source.replace('fortnitetracker.com', 'example.com'),
+    records[0].source.replace('fortnitetracker.com', 'fortnitetracker.com.example.com'),
+    mixed.href
+  ];
+  for (const [index, source] of sources.entries()) {
+    const fixture = { ...records[0], id: `untrusted-identity-${index}`, source };
+    const app = boot(fixtureScript([fixture]));
+    const [{ content }] = renderedArticles(app);
+    const tags = tournamentTags(content);
+    assert.equal(tags.length, 5, source);
+    assert.ok(tags.every(tag => tag.value === 'unknown'), source);
+  }
 });
