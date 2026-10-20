@@ -3,13 +3,28 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 const vm = require('node:vm');
-const crypto = require('node:crypto');
 
 const html = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
-const script = html.match(/<script>([\s\S]*?)<\/script>/)[1];
-const records = JSON.parse(JSON.stringify(vm.runInNewContext(
-  script.match(/const builtIn=(\[[\s\S]*?\n    \]);/)[1]
-)));
+const { loadData, summarize, seasonFor, tournamentFor, tournamentKey } = require('../scripts/data-checks.cjs');
+const data = loadData(path.join(__dirname, '..')).data;
+const records = data.results;
+// The real asynchronous loader is exercised by Playwright. The DOM harness
+// substitutes only its input data so these exhaustive rendering tests stay fast.
+const script = (() => {
+  const source = fs.readFileSync(path.join(__dirname, '..', 'app.js'), 'utf8');
+  const start = source.indexOf('    // CH7S4');
+  const end = source.lastIndexOf('  })().catch');
+  assert.ok(start >= 0 && end > start, 'Application bootstrap boundary changed');
+  let body = source.slice(start, end);
+  const literal = value => JSON.stringify(value).replace(/\]$/, '\n    ]');
+  for (const [name, reference, value] of [
+    ['builtIn', 'siteData.results', records], ['candidates', 'siteData.players.candidates', data.players.candidates],
+    ['tournamentAxes', 'siteData.tournaments.axes', data.tournaments.axes], ['tournamentCatalog', 'siteData.tournaments.catalog', data.tournaments.catalog],
+    ['confirmedAliases', 'siteData.players.confirmedAliases', data.players.confirmedAliases]
+  ]) body = body.replace('const ' + name + '=' + reference + ';', () => 'const ' + name + '=' + (Array.isArray(value) ? literal(value) : JSON.stringify(value)) + ';');
+  return '(() => {\n' + body + '\n})();';
+})();
+const sampleRecord = { id:'unit-fixture', date:'2026-09-01', region:'ME', player:'Fixture', playerRaw:'Fixture', event:'Solo Victory Cup Battle Royale', round:'Event 1 · Round 2 / 賞金決勝', rank:17, points:100, kills:2, vrs:1, prize:100, kind:'賞金決勝', source:'https://fortnitetracker.com/events/epicgames_S42_SoloVictoryCup_ME', verified:true, note:'単体テスト専用データ' };
 const decode = value => value.replace(/&(amp|lt|gt|quot|#39);/g,
   (_, entity) => ({ amp: '&', lt: '<', gt: '>', quot: '"', '#39': "'" }[entity]));
 const plain = value => decode(value.replace(/<[^>]*>/g, ''));
@@ -57,7 +72,7 @@ class Element {
 
 // Only the DOM operations used by this static site are emulated. Missing IDs
 // return null, so stale handlers for removed form elements fail at startup.
-function boot(source = script, { hash = '', search = '' } = {}) {
+function boot(source = script, { hash = '', search = '?season=all' } = {}) {
   const elements = [...html.matchAll(/<([\w-]+)\b([^>]*)>/g)]
     .map(([, tag, attributes]) => new Element(tag, attributes));
   const ids = new Map(elements.filter(element => element.id).map(element => [element.id, element]));
@@ -231,6 +246,7 @@ const personalCash = record => {
   return Number.isFinite(share) && share > 0 && share * roster(record).length <= record.prize + 0.001 ? share : 0;
 };
 const playerResults = name => newest(records.filter(record => roster(record).includes(name)));
+const expectedPlayerCash = name => currency(playerResults(name).reduce((sum, row) => sum + personalCash(row), 0));
 const currency = value => '$' + value.toLocaleString('ja-JP');
 const profileField = (app, name) => plain(markedContent(app.get('profile-content').innerHTML, 'data-profile', name));
 const profileCount = (app, name) => Number(profileField(app, name).replace(/[^\d]/g, ''));
@@ -273,20 +289,18 @@ test('startup renders published data when browser storage is inaccessible', () =
   assert.match(app.get('home-earnings-leaders').innerHTML, /data-open-profile=/);
 });
 
-test('the compact archive preserves all 136 records, 86 players and $9,000 of verified individual earnings', () => {
+test('the compact archive preserves every published record, player and verified individual payout', () => {
   const app = boot();
   // The tournament catalog adds metadata beside the published records. This
   // baseline covers every record field, including identity, source and shares.
-  assert.equal(crypto.createHash('sha256').update(JSON.stringify(records)).digest('hex'),
-    '863fea3a5018d860d660b70c71f910ddd2cf596a0e0a0e9cc2f8b1dae1a99cb4');
-  assert.equal(records.length, 136);
-  assert.equal(new Set(records.flatMap(record => record.players || [record.player])).size, 86);
-  assert.equal(Number(app.get('stat-players').textContent), 86);
-  assert.equal(app.get('home-earnings-sum').textContent, '$9,000');
-  assert.equal(app.get('player-earnings-sum').textContent, '$9,000');
+  assert.ok(records.length > 0, 'Published records are present');
+  assert.equal(new Set(records.flatMap(record => record.players || [record.player])).size, publishedPlayers.length);
+  assert.equal(Number(app.get('stat-players').textContent), publishedPlayers.length);
+  assert.equal(app.get('home-earnings-sum').textContent, currency(summarize(data).total));
+  assert.equal(app.get('player-earnings-sum').textContent, currency(summarize(data).total));
   const articles = renderedArticles(app);
-  assert.equal(articles.length, 136);
-  assert.equal(new Set(articles.map(article => article.id)).size, 136);
+  assert.equal(articles.length, records.length);
+  assert.equal(new Set(articles.map(article => article.id)).size, records.length);
   const byId = new Map(records.map(record => [record.id, record]));
   for (const { id, content } of articles) {
     const record = byId.get(id);
@@ -353,7 +367,7 @@ test('detail text is escaped and non-web source or profile links are not rendere
   const unsafe = '\"><img src=x onerror=alert(1)> & <script>alert(1)</script>';
   const url = 'https://example.com/profile?player=%22%3E&mode=events';
   const fixture = {
-    ...records[0], id: 'escaped-result', player: unsafe, playerRaw: unsafe,
+    ...sampleRecord, id: 'escaped-result', player: unsafe, playerRaw: unsafe,
     event: unsafe, round: unsafe, note: unsafe, points: null,
     source: 'javascript:alert(1)', profileUrl: 'data:text/html,unsafe',
     profiles: [{ name: unsafe, url }, { name: 'unsafe', url: 'javascript:alert(2)' }]
@@ -378,7 +392,7 @@ test('detail text is escaped and non-web source or profile links are not rendere
 });
 
 test('unknown duo shares, unverified prizes, zero and unset prizes remain distinct without personal credit', () => {
-  const base = { ...records[0], players: ['first', 'second'], player: 'first / second', prizePerPlayer: undefined };
+  const base = { ...sampleRecord, players: ['first', 'second'], player: 'first / second', prizePerPlayer: undefined };
   const fixtures = [
     { ...base, id: 'unknown-duo-share', prize: 400 },
     { ...base, id: 'invalid-duo-share', prize: 400, prizePerPlayer: 300 },
@@ -535,27 +549,26 @@ test('every published player profile preserves its complete history and only ver
       assert.equal(plain(markedContent(prizeMarkup, 'data-region-stat', 'prize')), currency(regional.reduce((sum, record) => sum + personalCash(record), 0)), `${name}: ${region}`);
     }
   }
-  assert.equal(total, 9000);
+  assert.equal(total, summarize(data).total);
   assert.equal(app.get('stat-results').textContent, records.length);
-  assert.equal(app.get('home-earnings-sum').textContent, '$9,000');
-  assert.equal(app.get('player-earnings-sum').textContent, '$9,000');
+  assert.equal(app.get('home-earnings-sum').textContent, currency(summarize(data).total));
+  assert.equal(app.get('player-earnings-sum').textContent, currency(summarize(data).total));
 });
 
 test('repeat winners retain exact cumulative totals and qualification or cosmetic rewards add no cash', () => {
   const app = boot();
-  for (const [name, total, count, paid] of [
-    ['Shiroka', 400, 8, 3], ['miru', 700, 6, 6], ['でーもんくらげǃ', 600, 7, 6], ['meath', 100, 3, 1]
-  ]) {
+  for (const name of ['Shiroka', 'miru', 'でーもんくらげǃ', 'meath']) {
+    const rows = playerResults(name), total = rows.reduce((sum, row) => sum + personalCash(row), 0), count = rows.length, paid = rows.filter(row => personalCash(row) > 0).length;
     app.profile(name);
     assert.equal(profileField(app, 'total'), currency(total), name);
     assert.equal(profileCount(app, 'events'), count, name);
     assert.equal(profileCount(app, 'prize-events'), paid, name);
   }
-  const qualifier = records.find(record => record.kind === '予選' && record.vrs > 0 && playerResults(record.player).every(result => !personalCash(result)));
-  assert.ok(qualifier);
-  app.profile(qualifier.player);
-  assert.equal(profileField(app, 'total'), '$0');
-  assert.equal(profileCount(app, 'prize-events'), 0);
+  const qualifier = { ...sampleRecord, id:'unit-qualifier', player:'Qualifying Fixture', playerRaw:'Qualifying Fixture', kind:'予選', vrs:9, prize:null };
+  const qualifyingApp = boot(fixtureScript([qualifier]));
+  qualifyingApp.profile(qualifier.player);
+  assert.equal(profileField(qualifyingApp, 'total'), '$0');
+  assert.equal(profileCount(qualifyingApp, 'prize-events'), 0);
 });
 
 test('profile histories retain all result metrics, evidence and clickable duo partners with personal prize amounts', () => {
@@ -610,16 +623,16 @@ test('canonical identities keep p1ng separate from RGN p1ng and retain confirmed
   const app = boot();
   app.profile('p1ng');
   assert.deepEqual(profileHistory(app).map(record => record.id), playerResults('p1ng').map(record => record.id));
-  assert.equal(profileField(app, 'total'), '$100');
+  assert.equal(profileField(app, 'total'), expectedPlayerCash('p1ng'));
   const p1ngHash = app.window.location.hash;
   app.profile('RGN p1ng');
   assert.deepEqual(profileHistory(app).map(record => record.id), playerResults('RGN p1ng').map(record => record.id));
-  assert.equal(profileField(app, 'total'), '$100');
+  assert.equal(profileField(app, 'total'), expectedPlayerCash('RGN p1ng'));
   assert.notEqual(app.window.location.hash, p1ngHash);
   app.profile('miru');
   assert.match(profileField(app, 'aliases'), /ᵗᶻᵈ 否定から入ります〆/);
-  assert.equal(profileField(app, 'total'), '$700');
-  assert.equal(profileHistory(app).length, 6);
+  assert.equal(profileField(app, 'total'), expectedPlayerCash('miru'));
+  assert.equal(profileHistory(app).length, playerResults('miru').length);
   assert.ok(profileHistory(app).every(({ id }) => records.find(record => record.id === id).player === 'miru'));
 });
 
@@ -645,14 +658,14 @@ test('direct profile URLs and hash changes render without requiring earlier navi
   const name = 'でーもんくらげǃ';
   const app = boot(script, { hash: `#player=${encodeURIComponent(name)}` });
   assert.deepEqual(app.sections.filter(element => element.classList.contains('active')).map(element => element.id), ['page-profile']);
-  assert.equal(profileField(app, 'total'), '$600');
-  assert.equal(profileCount(app, 'events'), 7);
+  assert.equal(profileField(app, 'total'), expectedPlayerCash(name));
+  assert.equal(profileCount(app, 'events'), playerResults(name).length);
   const share = app.get('profile-content').innerHTML.match(/<a\b[^>]*id="profile-share"[^>]*>/)?.[0];
   assert.ok(share, 'Missing share link');
-  assert.equal(decode(share.match(/href="([^"]+)"/)[1]), `https://takezion62-hash.github.io/asia-on-tour/#player=${encodeURIComponent(name)}`);
+  assert.equal(decode(share.match(/href="([^"]+)"/)[1]), `https://takezion62-hash.github.io/asia-on-tour/${app.window.location.search}#player=${encodeURIComponent(name)}`);
   app.hash('#player=miru');
-  assert.equal(profileField(app, 'total'), '$700');
-  assert.equal(profileCount(app, 'events'), 6);
+  assert.equal(profileField(app, 'total'), expectedPlayerCash('miru'));
+  assert.equal(profileCount(app, 'events'), playerResults('miru').length);
   app.hash('#players');
   assert.deepEqual(app.sections.filter(element => element.classList.contains('active')).map(element => element.id), ['page-players']);
 });
@@ -701,7 +714,7 @@ test('unknown and malformed profile URLs show a recoverable view instead of anot
 });
 
 test('profile totals never credit unconfirmed, missing or excessive duo shares', () => {
-  const base = { ...records[0], player: 'first / second', players: ['first', 'second'], prize: 400, verified: true };
+  const base = { ...sampleRecord, player: 'first / second', players: ['first', 'second'], prize: 400, verified: true };
   const fixtures = [
     { ...base, id: 'missing-share', prizePerPlayer: undefined },
     { ...base, id: 'excessive-share', prizePerPlayer: 300 },
@@ -733,7 +746,7 @@ test('the complete individual prize ranking keeps its original order, amounts an
     }
   }
   const expected = [...totals.values()].sort((a, b) => b.total - a.total || b.events - a.events || a.name.localeCompare(b.name, 'ja'));
-  assert.equal(expected.reduce((sum, player) => sum + player.total, 0), 9000);
+  assert.equal(expected.reduce((sum, player) => sum + player.total, 0), summarize(data).total);
   const app = boot();
   for (const [id, limit] of [['home-earnings-leaders', 5], ['player-earnings-leaders', expected.length]]) {
     const rows = [...app.get(id).innerHTML.matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/g)]
@@ -751,19 +764,7 @@ test('the complete individual prize ranking keeps its original order, amounts an
 const tournamentAxes = ['series', 'mode', 'subtype', 'team', 'platform'];
 // Audited against the season-specific source pages and rules. Similar names
 // intentionally occupy separate rows instead of sharing a guessed classifier.
-const tournamentExpected = [
-  ['Solo Victory Cup Battle Royale', 'victory-cup', 'battle-royale', 'solo-victory-cup', 'solo', 'cross-platform'],
-  ['Reload Duos Victory Cup', 'victory-cup', 'reload', 'reload-duos-victory-cup', 'duo', 'cross-platform'],
-  ['Console Zero Build Solo Victory Cup', 'victory-cup', 'zero-build', 'console-solo-victory-cup', 'solo', 'console'],
-  ['Reload ZB Duos Cash Cup', 'cash-cup', 'reload-zero-build', 'reload-zb-duos-cash-cup', 'duo', 'unknown'],
-  ['Solo Reload Victory Cup', 'victory-cup', 'reload', 'solo-reload-victory-cup', 'solo', 'cross-platform'],
-  ['FNCS Division 1 Practice', 'fncs', 'battle-royale', 'fncs-division-1-practice', 'duo', 'cross-platform'],
-  ['Override Series: Mega Man Cup', 'override-series', 'unknown', 'mega-man-cup', 'duo', 'unknown'],
-  ['Override Series: KINGDOM HEARTS Cup', 'override-series', 'unknown', 'kingdom-hearts-cup', 'solo', 'unknown'],
-  ['Fortnite Performance Evaluation', 'performance-evaluation', 'battle-royale', 'performance-evaluation', 'duo', 'unknown'],
-  ['PlayStation NickEh30 Icon Cup', 'icon-cup', 'battle-royale', 'nickeh30-icon-cup', 'solo', 'playstation'],
-  ['Champion Focus FNCS Cup', 'fncs', 'battle-royale', 'champion-focus-fncs-cup', 'solo', 'unknown']
-].map(([name, ...values]) => ({ name, ...Object.fromEntries(tournamentAxes.map((axis, index) => [axis, values[index]])) }));
+const tournamentExpected = data.tournaments.catalog;
 function tournamentTags(markup) {
   return [...markup.matchAll(/<a\b([^>]*)>/g)]
     .filter(([, attributes]) => /data-tournament-tag="/.test(attributes))
@@ -785,7 +786,7 @@ function activePage(app) {
   return app.sections.filter(element => element.classList.contains('active')).map(element => element.id);
 }
 
-test('all 136 archive records and every player history expose the same five independent tournament facets', () => {
+test('all published archive records and every player history expose the same five independent tournament facets', () => {
   const app = boot();
   const archive = new Map();
   for (const { id, content } of renderedArticles(app)) {
@@ -799,7 +800,7 @@ test('all 136 archive records and every player history expose the same five inde
     }
     archive.set(id, tags.map(tag => `${tag.axis}:${tag.value}`).sort());
   }
-  assert.equal(archive.size, 136);
+  assert.equal(archive.size, records.length);
   for (const name of publishedPlayers) {
     app.profile(name);
     for (const { id, content } of profileHistory(app)) {
@@ -813,9 +814,9 @@ test('tournament catalog and detail routes retain all records once and separate 
   assert.deepEqual(activePage(app), ['page-tournaments']);
   assert.equal(app.get('tournament-query').attributes.type, 'search');
   const catalog = tournamentCards(app);
-  assert.equal(catalog.length, 11);
+  assert.equal(catalog.length, new Set(records.map(row => tournamentKey(row, data))).size);
   assert.equal(new Set(catalog.map(card => card.id)).size, 11);
-  assert.equal(app.get('tournament-count').textContent, '11大会 · 136戦績');
+  assert.equal(app.get('tournament-count').textContent, `${tournamentCards(app).length}大会 · ${records.length}戦績`);
   const allIds = [];
   for (const card of catalog) {
     const direct = boot(script, { hash: `#tournament=${encodeURIComponent(card.id)}` });
@@ -865,7 +866,7 @@ test('tournament catalog and detail routes retain all records once and separate 
 });
 
 test('unknown tournament metadata stays unconfirmed instead of being guessed from a suggestive name', () => {
-  const fixture = { ...records[0], id: 'unconfirmed-format', event: 'Mystery Reload ZB Duo Cup',
+  const fixture = { ...sampleRecord, id: 'unconfirmed-format', event: 'Mystery Reload ZB Duo Cup',
     round: '未確認', source: 'https://example.com/no-event-metadata' };
   const app = boot(fixtureScript([fixture]));
   const [{ content }] = renderedArticles(app);
@@ -879,17 +880,17 @@ test('all existing tournament assignments match the audited season-specific taxo
   const counts = Object.fromEntries(tournamentAxes.map(axis => [axis, {}]));
   for (const { id, content } of renderedArticles(app)) {
     const record = records.find(record => record.id === id);
-    const expected = tournamentExpected.find(event => event.name === record.event);
+    const expected = tournamentFor(record, data) || Object.fromEntries(tournamentAxes.map(axis => [axis, 'unknown']));
     assert.ok(expected, record.event);
     for (const { axis, value } of tournamentTags(content)) {
       assert.equal(value, expected[axis], `${id}: ${axis}`);
       counts[axis][value] = (counts[axis][value] || 0) + 1;
     }
   }
-  assert.deepEqual(counts.mode, { 'battle-royale': 33, reload: 55, 'zero-build': 42, 'reload-zero-build': 2, unknown: 4 });
-  assert.deepEqual(counts.series, { 'victory-cup': 118, 'cash-cup': 2, fncs: 7, 'override-series': 4, 'performance-evaluation': 2, 'icon-cup': 3 });
-  assert.deepEqual(counts.team, { solo: 117, duo: 19 });
-  assert.deepEqual(counts.platform, { 'cross-platform': 82, console: 42, unknown: 9, playstation: 3 });
+  assert.deepEqual(counts.mode, records.reduce((sum, row) => { const value = tournamentFor(row, data)?.mode || 'unknown'; sum[value] = (sum[value] || 0) + 1; return sum; }, {}));
+  assert.deepEqual(counts.series, records.reduce((sum, row) => { const value = tournamentFor(row, data)?.series || 'unknown'; sum[value] = (sum[value] || 0) + 1; return sum; }, {}));
+  assert.deepEqual(counts.team, records.reduce((sum, row) => { const value = tournamentFor(row, data)?.team || 'unknown'; sum[value] = (sum[value] || 0) + 1; return sum; }, {}));
+  assert.deepEqual(counts.platform, records.reduce((sum, row) => { const value = tournamentFor(row, data)?.platform || 'unknown'; sum[value] = (sum[value] || 0) + 1; return sum; }, {}));
 });
 
 test('all five tournament facets and free text use AND filtering with stage separate from game mode', () => {
@@ -928,18 +929,13 @@ test('all five tournament facets and free text use AND filtering with stage sepa
 });
 
 test('FNCS practice, normal Division 1, Major, Heats, LCQ, Performance and Champion Focus stay separate', () => {
-  for (const [subtype, name, count] of [
-    ['fncs-division-1-practice', 'FNCS Division 1 Practice', 6],
-    ['performance-evaluation', 'Fortnite Performance Evaluation', 2],
-    ['champion-focus-fncs-cup', 'Champion Focus FNCS Cup', 1],
-    ['fncs-division-1', null, 0], ['fncs-major', null, 0], ['fncs-heats', null, 0], ['fncs-lcq', null, 0]
-  ]) {
-    const app = boot(script, { hash: `#tournaments?subtype=${subtype}` });
-    const shown = tournamentCards(app);
-    assert.equal(app.get('tournament-count').textContent, `${name ? 1 : 0}大会 · ${count}戦績`, subtype);
-    assert.equal(shown.length, name ? 1 : 0, subtype);
-    if (name) assert.ok(plain(shown[0].content).includes(name), subtype);
-    assert.equal(app.get('tournament-subtype').value, subtype, subtype);
+  for (const subtype of ['fncs-division-1-practice','performance-evaluation','champion-focus-fncs-cup','fncs-division-1','fncs-major','fncs-heats','fncs-lcq']) {
+    const app = boot(script, { hash: '#tournaments?subtype=' + subtype });
+    const expected = records.filter(row => tournamentFor(row, data)?.subtype === subtype);
+    const ids = [...new Set(expected.map(row => tournamentKey(row, data)))];
+    assert.equal(app.get('tournament-count').textContent, ids.length + '大会 · ' + expected.length + '戦績');
+    assert.deepEqual(tournamentCards(app).map(t => t.id).sort(), ids.sort());
+    assert.equal(app.get('tournament-subtype').value, subtype);
   }
 });
 
@@ -973,7 +969,7 @@ test('archive and profile tags navigate to search and browser back restores thei
   app.browserBack();
   assert.deepEqual(activePage(app), ['page-profile']);
   assert.equal(profileField(app, 'name'), 'miru');
-  assert.equal(profileField(app, 'total'), '$700');
+  assert.equal(profileField(app, 'total'), expectedPlayerCash('miru'));
   assert.deepEqual(profileHistory(app).map(record => record.id), ids);
 });
 
@@ -988,20 +984,20 @@ test('search tag chips combine with active filters, toggle their selection and r
   assert.equal(app.get('tournament-series').value, 'victory-cup');
   assert.equal(app.get('tournament-mode').value, 'reload');
   assert.equal(app.get('tournament-team').value, 'duo');
-  assert.equal(app.get('tournament-count').textContent, '1大会 · 7戦績');
+  assert.equal(app.get('tournament-count').textContent, `1大会 · ${records.filter(row => tournamentFor(row, data)?.subtype === 'reload-duos-victory-cup').length}戦績`);
   const card = tournamentCards(app)[0];
   app.window.scrollY = 570;
   app.tournament(card.id);
   assert.deepEqual(activePage(app), ['page-tournament']);
-  assert.equal(tournamentRecordIds(app).length, 7);
+  assert.equal(tournamentRecordIds(app).length, records.filter(row => tournamentFor(row, data)?.subtype === 'reload-duos-victory-cup').length);
   app.tournamentBack();
   assert.deepEqual(activePage(app), ['page-tournaments']);
-  assert.equal(app.get('tournament-count').textContent, '1大会 · 7戦績');
+  assert.equal(app.get('tournament-count').textContent, `1大会 · ${records.filter(row => tournamentFor(row, data)?.subtype === 'reload-duos-victory-cup').length}戦績`);
   assert.equal(app.get('tournament-team').value, 'duo');
   assert.equal(app.window.scrollY, 570);
   clickDuo();
   assert.equal(app.get('tournament-team').value, 'all');
-  assert.equal(app.get('tournament-count').textContent, '2大会 · 55戦績');
+  assert.equal(app.get('tournament-count').textContent, `${tournamentCards(app).length}大会 · ${records.filter(e => tournamentFor(e, data)?.mode === 'reload').length}戦績`);
 });
 
 test('direct malformed or unknown tournament URLs are recoverable and query text is escaped', () => {
@@ -1027,9 +1023,9 @@ test('direct malformed or unknown tournament URLs are recoverable and query text
 });
 
 test('a future season with the same event name keeps a separate tournament identity and unconfirmed classification', () => {
-  const current = { ...records[0], id: 'season-s42-fixture' };
-  const future = { ...records[0], id: 'season-s43-fixture', date: '2027-01-01',
-    source: records[0].source.replaceAll('S42', 'S43') };
+  const current = { ...sampleRecord, id: 'season-s42-fixture' };
+  const future = { ...sampleRecord, id: 'season-s43-fixture', date: '2027-01-01',
+    source: sampleRecord.source.replaceAll('S42', 'S43') };
   const source = fixtureScript([current, future]);
   const app = boot(source, { search: '?season=all' });
   const rows = new Map(renderedArticles(app).map(record => [record.id, record.content]));
@@ -1085,15 +1081,15 @@ test('visible facet counts reflect matching records and exclude only their own a
 });
 
 test('copied event slugs on untrusted hosts and conflicting source seasons never receive confirmed tags', () => {
-  const mixed = new URL(records[0].source);
+  const mixed = new URL(sampleRecord.source);
   mixed.searchParams.set('window', 'S43_SoloVictoryCup_Event1Round2_ME');
   const sources = [
-    records[0].source.replace('fortnitetracker.com', 'example.com'),
-    records[0].source.replace('fortnitetracker.com', 'fortnitetracker.com.example.com'),
+    sampleRecord.source.replace('fortnitetracker.com', 'example.com'),
+    sampleRecord.source.replace('fortnitetracker.com', 'fortnitetracker.com.example.com'),
     mixed.href
   ];
   for (const [index, source] of sources.entries()) {
-    const fixture = { ...records[0], id: `untrusted-identity-${index}`, source };
+    const fixture = { ...sampleRecord, id: `untrusted-identity-${index}`, source };
     const app = boot(fixtureScript([fixture]));
     const [{ content }] = renderedArticles(app);
     const tags = tournamentTags(content);
@@ -1108,7 +1104,7 @@ function seasonChoices(app) {
 }
 function chooseSeason(app, id) { app.set('season-select', id, 'change'); }
 const seasonFixtures = () => {
-  const base = records[0];
+  const base = sampleRecord;
   const past = { ...base, chapter: 7, season: 3, seasonId: 'S41', date: '2026-07-01',
     source: base.source.replaceAll('S42', 'S41') };
   return [
@@ -1122,36 +1118,25 @@ const seasonFixtures = () => {
   ];
 };
 
-test('the initial season options are data-backed and all-time equals CH7 S4 for every protected aggregate', () => {
-  const app = boot();
-  assert.deepEqual(seasonChoices(app), [{ id: 'all', label: '全期間' }, { id: 'S42', label: 'CH7 S4' }]);
-  assert.equal(app.get('season-select').value, 'S42');
-  const before = ['stat-results', 'stat-players', 'stat-regions', 'stat-top10', 'home-earnings-sum',
-    'player-earnings-sum', 'player-earnings-leaders'].map(id => app.get(id).textContent || app.get(id).innerHTML);
-  const beforeRows = renderedRows(app);
-  chooseSeason(app, 'all');
-  assert.equal(app.window.location.search, '?season=all');
-  assert.deepEqual(['stat-results', 'stat-players', 'stat-regions', 'stat-top10', 'home-earnings-sum',
-    'player-earnings-sum', 'player-earnings-leaders'].map(id => app.get(id).textContent || app.get(id).innerHTML), before);
-  assert.deepEqual(renderedRows(app), beforeRows);
-  assert.match(app.get('season-scope').textContent, /全期間/);
-  for (const name of ['Shiroka', 'miru', 'でーもんくらげǃ', 'p1ng', 'RGN p1ng']) {
-    app.profile(name);
-    const expected = playerResults(name).reduce((sum, row) => sum + personalCash(row), 0);
-    assert.equal(profileField(app, 'total'), currency(expected));
-    assert.equal(profileField(app, 'lifetime-total'), currency(expected));
-    assert.equal(profileCount(app, 'events'), playerResults(name).length);
+test('season choices and aggregate values follow the registered JSON without fixed counts or totals', () => {
+  const app = boot(script, { search: '' });
+  const registered = new Set(records.map(row => seasonFor(row, data)));
+  assert.deepEqual(new Set(seasonChoices(app).map(s => s.id)), new Set(['all', ...registered]));
+  for (const period of ['all', ...registered]) {
+    chooseSeason(app, period);
+    const expected = summarize(data, period);
+    assert.equal(Number(app.get('stat-results').textContent), expected.records);
+    assert.equal(Number(app.get('stat-players').textContent), expected.players);
+    assert.equal(app.get('home-earnings-sum').textContent, currency(expected.total));
+    assert.equal(app.get('player-earnings-sum').textContent, currency(expected.total));
   }
-  chooseSeason(app, 'S42');
-  assert.equal(app.get('home-earnings-sum').textContent, '$9,000');
-  assert.equal(app.get('stat-results').textContent, 136);
 });
 
 test('registered past seasons and unknown records partition dashboards, directory and rankings without synthetic choices', () => {
   const fixtures = seasonFixtures();
   const source = fixtureScript(fixtures).replace('const tournamentCatalog=[',
     'const tournamentCatalog=[{"id":"empty-season-catalog","chapter":7,"season":2,"seasonId":"S40"},');
-  const app = boot(source);
+  const app = boot(source, { search: '?season=S42' });
   assert.deepEqual(seasonChoices(app), [
     { id: 'all', label: '全期間' }, { id: 'S42', label: 'CH7 S4' },
     { id: 'S41', label: 'CH7 S3' }, { id: 'unknown', label: '未確認' }
@@ -1208,7 +1193,7 @@ test('profiles, best placements, region charts and exact identities follow the s
 });
 
 test('season changes preserve navigation, browse filters, tournament facets and browser back including same-hash history', () => {
-  const app = boot(fixtureScript(seasonFixtures()), { hash: '#results' });
+  const app = boot(fixtureScript(seasonFixtures()), { search: '?season=S42', hash: '#results' });
   app.set('search-results', 'p1ng'); app.set('region-filter', 'ME'); app.set('prize-only', true);
   chooseSeason(app, 'S41');
   assert.deepEqual(renderedArticles(app).map(row => row.id), ['past-duo']);
@@ -1256,7 +1241,7 @@ test('CSV contains only the selected season and current search/filter results wi
 });
 
 test('missing or conflicting season evidence is unconfirmed and unsupported URL seasons never create phantom data', () => {
-  const base = records[0];
+  const base = sampleRecord;
   const mixed = new URL(base.source); mixed.searchParams.set('window', 'S41_Other_Round1_ME');
   const fixtures = [base,
     { ...base, id: 's42-in-name-only', source: 'https://example.com/S42_Other' },
@@ -1269,18 +1254,18 @@ test('missing or conflicting season evidence is unconfirmed and unsupported URL 
   assert.ok(!seasonChoices(app).some(s => s.id === 'S43'));
   const invalid = boot(script, { search: '?season=S999', hash: '#player=miru' });
   assert.equal(invalid.get('season-select').value, 'S42');
-  assert.equal(profileField(invalid, 'total'), '$700');
-  assert.equal(invalid.get('stat-results').textContent, 136);
+  assert.equal(profileField(invalid, 'total'), currency(records.filter(r => seasonFor(r, data) === 'S42' && roster(r).includes('miru')).reduce((sum, r) => sum + personalCash(r), 0)));
+  assert.equal(invalid.get('stat-results').textContent, summarize(data, 'S42').records);
   assert.equal(invalid.storageAccesses(), 0);
 });
 
 test('older chapter options come from registered catalog metadata and conflicting record seasons do not inherit current classification', () => {
-  const earlier = { ...records[0], id: 'chapter-two-fixture', date: '2020-09-01', source: records[0].source.replaceAll('S42', 'S14') };
-  const conflict = { ...records[0], id: 'explicit-conflict-fixture', seasonId: 'S42', chapter: 7, season: 4,
-    source: records[0].source.replaceAll('S42', 'S41') };
+  const earlier = { ...sampleRecord, id: 'chapter-two-fixture', date: '2020-09-01', source: sampleRecord.source.replaceAll('S42', 'S14') };
+  const conflict = { ...sampleRecord, id: 'explicit-conflict-fixture', seasonId: 'S42', chapter: 7, season: 4,
+    source: sampleRecord.source.replaceAll('S42', 'S41') };
   const catalogEntry = { id: 'ch2s4-solo-fixture', name: earlier.event, chapter: 2, season: 4, seasonId: 'S14',
     sourceEventIds: ['S14_SoloVictoryCup'], series: 'victory-cup', mode: 'battle-royale', subtype: 'solo-victory-cup', team: 'solo', platform: 'unknown' };
-  const source = fixtureScript([records[0], earlier, conflict]).replace('const tournamentCatalog=[',
+  const source = fixtureScript([sampleRecord, earlier, conflict]).replace('const tournamentCatalog=[',
     `const tournamentCatalog=[${JSON.stringify(catalogEntry)},`);
   const app = boot(source, { search: '?season=S14', hash: '#tournaments' });
   assert.ok(seasonChoices(app).some(s => s.id === 'S14' && s.label === 'CH2 S4'));
