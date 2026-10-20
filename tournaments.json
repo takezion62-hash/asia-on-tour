@@ -1,0 +1,476 @@
+{
+  "axes": [
+    {
+      "key": "series",
+      "label": "大会シリーズ",
+      "options": [
+        {
+          "id": "victory-cup",
+          "label": "Victory Cup"
+        },
+        {
+          "id": "cash-cup",
+          "label": "Cash Cup"
+        },
+        {
+          "id": "fncs",
+          "label": "FNCS"
+        },
+        {
+          "id": "override-series",
+          "label": "Override Series"
+        },
+        {
+          "id": "performance-evaluation",
+          "label": "Performance Evaluation"
+        },
+        {
+          "id": "icon-cup",
+          "label": "Icon Cup"
+        },
+        {
+          "id": "unknown",
+          "label": "未確認"
+        }
+      ]
+    },
+    {
+      "key": "mode",
+      "label": "ゲーム形式",
+      "options": [
+        {
+          "id": "battle-royale",
+          "label": "通常バトロワ"
+        },
+        {
+          "id": "zero-build",
+          "label": "ゼロビルド"
+        },
+        {
+          "id": "reload",
+          "label": "Reload"
+        },
+        {
+          "id": "reload-zero-build",
+          "label": "Reloadゼロビルド"
+        },
+        {
+          "id": "unknown",
+          "label": "未確認"
+        }
+      ]
+    },
+    {
+      "key": "subtype",
+      "label": "大会細分類",
+      "options": [
+        {
+          "id": "solo-victory-cup",
+          "label": "Solo Victory Cup"
+        },
+        {
+          "id": "reload-duos-victory-cup",
+          "label": "Reload Duos Victory Cup"
+        },
+        {
+          "id": "console-solo-victory-cup",
+          "label": "Console Solo Victory Cup"
+        },
+        {
+          "id": "reload-zb-duos-cash-cup",
+          "label": "Reload ZB Duos Cash Cup"
+        },
+        {
+          "id": "solo-reload-victory-cup",
+          "label": "Solo Reload Victory Cup"
+        },
+        {
+          "id": "fncs-division-1-practice",
+          "label": "FNCS Division 1 Practice"
+        },
+        {
+          "id": "mega-man-cup",
+          "label": "Mega Man Cup"
+        },
+        {
+          "id": "kingdom-hearts-cup",
+          "label": "KINGDOM HEARTS Cup"
+        },
+        {
+          "id": "performance-evaluation",
+          "label": "Performance Evaluation"
+        },
+        {
+          "id": "nickeh30-icon-cup",
+          "label": "NickEh30 Icon Cup"
+        },
+        {
+          "id": "champion-focus-fncs-cup",
+          "label": "Champion Focus FNCS Cup"
+        },
+        {
+          "id": "fncs-division-1",
+          "label": "FNCS Division 1"
+        },
+        {
+          "id": "fncs-major",
+          "label": "FNCS Major"
+        },
+        {
+          "id": "fncs-heats",
+          "label": "FNCS Heats"
+        },
+        {
+          "id": "fncs-lcq",
+          "label": "FNCS LCQ"
+        },
+        {
+          "id": "unknown",
+          "label": "未確認"
+        }
+      ]
+    },
+    {
+      "key": "team",
+      "label": "チーム人数",
+      "options": [
+        {
+          "id": "solo",
+          "label": "ソロ"
+        },
+        {
+          "id": "duo",
+          "label": "デュオ"
+        },
+        {
+          "id": "unknown",
+          "label": "未確認"
+        }
+      ]
+    },
+    {
+      "key": "platform",
+      "label": "機種条件",
+      "options": [
+        {
+          "id": "cross-platform",
+          "label": "クロスプラットフォーム"
+        },
+        {
+          "id": "console",
+          "label": "コンソール"
+        },
+        {
+          "id": "playstation",
+          "label": "PlayStation"
+        },
+        {
+          "id": "unknown",
+          "label": "未確認"
+        }
+      ]
+    }
+  ],
+  "catalog": [
+    {
+      "id": "ch7s4-solo-victory-cup",
+      "name": "Solo Victory Cup Battle Royale",
+      "chapter": 7,
+      "season": 4,
+      "seasonId": "S42",
+      "sourceEventIds": [
+        "S42_SoloVictoryCupBR",
+        "S42_SoloVictoryCup"
+      ],
+      "series": "victory-cup",
+      "mode": "battle-royale",
+      "subtype": "solo-victory-cup",
+      "team": "solo",
+      "platform": "cross-platform",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "登録名のBattle Royale/Soloと公式規則2.2.1が形式を確認。規則2.2.6にクロスプラットフォーム明記。",
+          "url": "https://www.fortnite.com/competitive/events/S42_SoloVictoryCupBR/"
+        },
+        {
+          "text": "大会情報・公式規則の確認元",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-4-official-rules"
+        }
+      ]
+    },
+    {
+      "id": "ch7s4-reload-duos-victory-cup",
+      "name": "Reload Duos Victory Cup",
+      "chapter": 7,
+      "season": 4,
+      "seasonId": "S42",
+      "sourceEventIds": [
+        "S42_ReloadDuosVictoryCup"
+      ],
+      "series": "victory-cup",
+      "mode": "reload",
+      "subtype": "reload-duos-victory-cup",
+      "team": "duo",
+      "platform": "cross-platform",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "公式名と規則2.2.4でDuos/Reload、2.2.6でクロスプラットフォームを確認。",
+          "url": "https://www.fortnite.com/competitive/events/S42_ReloadDuosVictoryCup/"
+        },
+        {
+          "text": "大会情報・公式規則の確認元",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-4-official-rules"
+        }
+      ]
+    },
+    {
+      "id": "ch7s4-console-zero-build-solo-victory-cup",
+      "name": "Console Zero Build Solo Victory Cup",
+      "chapter": 7,
+      "season": 4,
+      "seasonId": "S42",
+      "sourceEventIds": [
+        "S42_ConsoleVCC_SolosZB"
+      ],
+      "series": "victory-cup",
+      "mode": "zero-build",
+      "subtype": "console-solo-victory-cup",
+      "team": "solo",
+      "platform": "console",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "登録名・公式名がConsole/Zero Build/Soloを明示。規則2.2.2でZero Build/Soloを確認。機種世代は補完しない。",
+          "url": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/"
+        },
+        {
+          "text": "大会情報・公式規則の確認元",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-4-official-rules"
+        }
+      ]
+    },
+    {
+      "id": "ch7s4-reload-zero-build-duos-cash-cup",
+      "name": "Reload ZB Duos Cash Cup",
+      "chapter": 7,
+      "season": 4,
+      "seasonId": "S42",
+      "sourceEventIds": [
+        "S42_ReloadCashCup_DuosZB"
+      ],
+      "series": "cash-cup",
+      "mode": "reload-zero-build",
+      "subtype": "reload-zb-duos-cash-cup",
+      "team": "duo",
+      "platform": "unknown",
+      "unknownFields": [
+        "platform"
+      ],
+      "evidence": [
+        {
+          "text": "公式名・source IDにDuosZBを明示。公式規則2.2にDuos/Zero Build Reload設定を確認。機種条件は未確認。",
+          "url": "https://www.fortnite.com/competitive/events/S42_ReloadCashCup_DuosZB/"
+        },
+        {
+          "text": "大会情報・公式規則の確認元",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-zero-build-reload-cash-cups-chapter-7-season-4-official-rules"
+        }
+      ]
+    },
+    {
+      "id": "ch7s4-solo-reload-victory-cup",
+      "name": "Solo Reload Victory Cup",
+      "chapter": 7,
+      "season": 4,
+      "seasonId": "S42",
+      "sourceEventIds": [
+        "S42_ReloadSoloVictoryCup",
+        "S42_ReloadReloadSoloVictoryCup"
+      ],
+      "series": "victory-cup",
+      "mode": "reload",
+      "subtype": "solo-reload-victory-cup",
+      "team": "solo",
+      "platform": "cross-platform",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "公式名と規則2.2.3でSolo/Reload、2.2.6でクロスプラットフォームを確認。TrackerのReloadReloadSolo識別子も保持する。",
+          "url": "https://www.fortnite.com/competitive/events/S42_ReloadSoloVictoryCup/"
+        },
+        {
+          "text": "大会情報・公式規則の確認元",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-4-official-rules"
+        }
+      ]
+    },
+    {
+      "id": "ch7s4-fncs-division-1-practice",
+      "name": "FNCS Division 1 Practice",
+      "chapter": 7,
+      "season": 4,
+      "seasonId": "S42",
+      "sourceEventIds": [
+        "S42_FNCSDivisionalCup_Division1"
+      ],
+      "series": "fncs",
+      "mode": "battle-royale",
+      "subtype": "fncs-division-1-practice",
+      "team": "duo",
+      "platform": "cross-platform",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "公式ページがFNCS Division 1 Practiceを明示。公式Practice規則2.2がDuos/Battle Royale、2.2.10がクロスプラットフォームを明記。source IDにPracticeがなくても通常Division 1とは別大会として扱う。",
+          "url": "https://www.fortnite.com/competitive/events/S42_FNCSDivisionalCup_Division1/"
+        },
+        {
+          "text": "大会情報・公式規則の確認元",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fncs-practice-cups-chapter-7-season-4-official-rules"
+        }
+      ]
+    },
+    {
+      "id": "ch7s4-override-mega-man-cup",
+      "name": "Override Series: Mega Man Cup",
+      "chapter": 7,
+      "season": 4,
+      "seasonId": "S42",
+      "sourceEventIds": [
+        "S42_MegaManCup"
+      ],
+      "series": "override-series",
+      "mode": "unknown",
+      "subtype": "mega-man-cup",
+      "team": "duo",
+      "platform": "unknown",
+      "unknownFields": [
+        "mode",
+        "platform"
+      ],
+      "evidence": [
+        {
+          "text": "公式ページと規則2.2.1でDuosを確認。規則はBRとZBの両セッションを扱う。登録名に形式がなく汎用Battle Royale欄はZBページでも表示されるため、形式を保守的に未確認とする。機種条件も未確認。",
+          "url": "https://www.fortnite.com/competitive/events/S42_MegaManCup/"
+        },
+        {
+          "text": "大会情報・公式規則の確認元",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/override-series-mega-man-cup-chapter-7-season-4-official-rules"
+        }
+      ]
+    },
+    {
+      "id": "ch7s4-override-kingdom-hearts-cup",
+      "name": "Override Series: KINGDOM HEARTS Cup",
+      "chapter": 7,
+      "season": 4,
+      "seasonId": "S42",
+      "sourceEventIds": [
+        "S42_KingdomHeartsCup"
+      ],
+      "series": "override-series",
+      "mode": "unknown",
+      "subtype": "kingdom-hearts-cup",
+      "team": "solo",
+      "platform": "unknown",
+      "unknownFields": [
+        "mode",
+        "platform"
+      ],
+      "evidence": [
+        {
+          "text": "公式ページと規則2.2.1でSoloを確認。規則はBRとZBの両セッションを扱う。登録名に形式がなく汎用Battle Royale欄だけでは確証が不足するため、形式を保守的に未確認とする。機種条件も未確認。",
+          "url": "https://www.fortnite.com/competitive/events/S42_KingdomHeartsCup/"
+        },
+        {
+          "text": "大会情報・公式規則の確認元",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/override-series-kingdom-hearts-cup-chapter-7-season-4-official-rules"
+        }
+      ]
+    },
+    {
+      "id": "ch7s4-performance-evaluation",
+      "name": "Fortnite Performance Evaluation",
+      "chapter": 7,
+      "season": 4,
+      "seasonId": "S42",
+      "sourceEventIds": [
+        "S42_PerformanceEvaluation"
+      ],
+      "series": "performance-evaluation",
+      "mode": "battle-royale",
+      "subtype": "performance-evaluation",
+      "team": "duo",
+      "platform": "unknown",
+      "unknownFields": [
+        "platform"
+      ],
+      "evidence": [
+        {
+          "text": "当該S42公式ページがDuos/Battle Royaleと二段階の性能検証イベントを説明。参加条件がFNCS Division 1でもPracticeとは別大会。後続シーズンのTriosを当該S42へ一般化しない。機種条件未確認。",
+          "url": "https://www.fortnite.com/competitive/events/S42_PerformanceEvaluation/"
+        }
+      ]
+    },
+    {
+      "id": "ch7s4-playstation-nickeh30-icon-cup",
+      "name": "PlayStation NickEh30 Icon Cup",
+      "chapter": 7,
+      "season": 4,
+      "seasonId": "S42",
+      "sourceEventIds": [
+        "S42_PSNickEh30"
+      ],
+      "series": "icon-cup",
+      "mode": "battle-royale",
+      "subtype": "nickeh30-icon-cup",
+      "team": "solo",
+      "platform": "playstation",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "公式ページと規則2.2.1でSolo確認。公式scheduleがS42_PSNickEh30の予選をBattle Royale版と明示しZB版を別のS42_PSNickEh30_ZBへリンク。提供sourceは前者Qualifier_NAW。PlayStationは公式名に明記、世代は補完しない。",
+          "url": "https://www.fortnite.com/competitive/events/S42_PSNickEh30/"
+        },
+        {
+          "text": "大会情報・公式規則の確認元",
+          "url": "https://www.fortnite.com/competitive/events/S42_PSNickEh30?region=NAC&round=S42_PSNickEh30_Qualifier_NAW"
+        },
+        {
+          "text": "大会情報・公式規則の確認元",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/playstation-nick-eh-30-cup"
+        }
+      ]
+    },
+    {
+      "id": "ch7s4-champion-focus-fncs-cup",
+      "name": "Champion Focus FNCS Cup",
+      "chapter": 7,
+      "season": 4,
+      "seasonId": "S42",
+      "sourceEventIds": [
+        "S42_ChampionFocusFNCSCup"
+      ],
+      "series": "fncs",
+      "mode": "battle-royale",
+      "subtype": "champion-focus-fncs-cup",
+      "team": "solo",
+      "platform": "unknown",
+      "unknownFields": [
+        "platform"
+      ],
+      "evidence": [
+        {
+          "text": "既存roundがBattle Royaleを明記。公式ページと規則2.2.1でSoloとコスメ報酬を確認。Practiceや本戦とは別。別ZB/Mobile版へ一般化しない。機種条件未確認。",
+          "url": "https://www.fortnite.com/competitive/events/S42_ChampionFocusFNCSCup/"
+        },
+        {
+          "text": "大会情報・公式規則の確認元",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/champion-focus-fncs-cup-chapter-7-season-4-official-rules"
+        }
+      ]
+    }
+  ]
+}
