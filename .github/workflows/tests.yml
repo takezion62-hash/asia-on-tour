@@ -1,0 +1,45 @@
+name: Data and site tests
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: tests-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: JSON検証・単体テスト・PCスマホ回帰テスト
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '24'
+          cache: npm
+      - name: 最小のテスト依存を導入
+        run: npm ci --ignore-scripts
+      - name: JSON構造・参照・現金賞金を検証
+        run: npm run validate
+      - name: データと画面ロジックの回帰テスト
+        run: npm run test:unit
+      - name: Chromiumを準備
+        run: npx playwright install --with-deps chromium
+      - name: PC・スマホの主要画面を検証
+        run: npm run test:e2e
+      - name: レポートと失敗時のスクリーンショット・トレースを保存
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: site-test-report
+          path: |
+            playwright-report/
+            test-results/
+          if-no-files-found: ignore
+          retention-days: 7
