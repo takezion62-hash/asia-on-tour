@@ -57,7 +57,7 @@ class Element {
 
 // Only the DOM operations used by this static site are emulated. Missing IDs
 // return null, so stale handlers for removed form elements fail at startup.
-function boot(source = script, { hash = '' } = {}) {
+function boot(source = script, { hash = '', search = '' } = {}) {
   const elements = [...html.matchAll(/<([\w-]+)\b([^>]*)>/g)]
     .map(([, tag, attributes]) => new Element(tag, attributes));
   const ids = new Map(elements.filter(element => element.id).map(element => [element.id, element]));
@@ -107,7 +107,7 @@ function boot(source = script, { hash = '' } = {}) {
   BrowserURL.createObjectURL = blob => { const url = `blob:${blobs.size}`; blobs.set(url, blob); return url; };
   BrowserURL.revokeObjectURL = url => revoked.push(url);
   const window = new Element('window');
-  let location = new BrowserURL(`https://takezion62-hash.github.io/asia-on-tour/${hash}`);
+  let location = new BrowserURL(`https://takezion62-hash.github.io/asia-on-tour/${search}${hash}`);
   const historyEntries = [{ url: location.href, state: null }];
   let historyIndex = 0;
   window.scrollY = 0;
@@ -1031,7 +1031,7 @@ test('a future season with the same event name keeps a separate tournament ident
   const future = { ...records[0], id: 'season-s43-fixture', date: '2027-01-01',
     source: records[0].source.replaceAll('S42', 'S43') };
   const source = fixtureScript([current, future]);
-  const app = boot(source);
+  const app = boot(source, { search: '?season=all' });
   const rows = new Map(renderedArticles(app).map(record => [record.id, record.content]));
   const futureTags = tournamentTags(rows.get(future.id));
   assert.ok(futureTags.every(tag => tag.value === 'unknown'), 'A new season must not inherit unverified rules from S42');
@@ -1040,7 +1040,7 @@ test('a future season with the same event name keeps a separate tournament ident
   assert.equal(catalog.length, 2);
   assert.equal(new Set(catalog.map(card => card.id)).size, 2);
   const histories = catalog.map(card => {
-    const direct = boot(source, { hash: `#tournament=${encodeURIComponent(card.id)}` });
+    const direct = boot(source, { search: '?season=all', hash: `#tournament=${encodeURIComponent(card.id)}` });
     return tournamentRecordIds(direct);
   });
   assert.deepEqual(histories.map(ids => ids.slice().sort()).sort((a, b) => a[0].localeCompare(b[0])), [[current.id], [future.id]]);
@@ -1100,4 +1100,196 @@ test('copied event slugs on untrusted hosts and conflicting source seasons never
     assert.equal(tags.length, 5, source);
     assert.ok(tags.every(tag => tag.value === 'unknown'), source);
   }
+});
+
+function seasonChoices(app) {
+  return [...app.get('season-select').innerHTML.matchAll(/<option value="([^"]+)"[^>]*>([^<]+)<\/option>/g)]
+    .map(([, id, label]) => ({ id, label: decode(label) }));
+}
+function chooseSeason(app, id) { app.set('season-select', id, 'change'); }
+const seasonFixtures = () => {
+  const base = records[0];
+  const past = { ...base, chapter: 7, season: 3, seasonId: 'S41', date: '2026-07-01',
+    source: base.source.replaceAll('S42', 'S41') };
+  return [
+    { ...base, id: 'current-p1ng', player: 'p1ng', prize: 100 },
+    { ...base, id: 'current-rgn', player: 'RGN p1ng', prize: 50 },
+    { ...past, id: 'past-duo', player: 'p1ng / miru', players: ['p1ng', 'miru'], prize: 400, prizePerPlayer: 200 },
+    { ...past, id: 'past-qualifying', player: 'RGN p1ng', kind: '予選', rank: 2, prize: null, vrs: 3 },
+    { ...past, id: 'past-cosmetic', player: 'miru', kind: 'コスメ大会', event: 'Past Cosmetic Cup', prize: null,
+      source: 'https://fortnitetracker.com/events/epicgames_S41_CosmeticCup_ME' },
+    { ...base, id: 'unknown-season', player: 'Unmapped', prize: 25, source: 'https://example.com/no-season' }
+  ];
+};
+
+test('the initial season options are data-backed and all-time equals CH7 S4 for every protected aggregate', () => {
+  const app = boot();
+  assert.deepEqual(seasonChoices(app), [{ id: 'all', label: '全期間' }, { id: 'S42', label: 'CH7 S4' }]);
+  assert.equal(app.get('season-select').value, 'S42');
+  const before = ['stat-results', 'stat-players', 'stat-regions', 'stat-top10', 'home-earnings-sum',
+    'player-earnings-sum', 'player-earnings-leaders'].map(id => app.get(id).textContent || app.get(id).innerHTML);
+  const beforeRows = renderedRows(app);
+  chooseSeason(app, 'all');
+  assert.equal(app.window.location.search, '?season=all');
+  assert.deepEqual(['stat-results', 'stat-players', 'stat-regions', 'stat-top10', 'home-earnings-sum',
+    'player-earnings-sum', 'player-earnings-leaders'].map(id => app.get(id).textContent || app.get(id).innerHTML), before);
+  assert.deepEqual(renderedRows(app), beforeRows);
+  assert.match(app.get('season-scope').textContent, /全期間/);
+  for (const name of ['Shiroka', 'miru', 'でーもんくらげǃ', 'p1ng', 'RGN p1ng']) {
+    app.profile(name);
+    const expected = playerResults(name).reduce((sum, row) => sum + personalCash(row), 0);
+    assert.equal(profileField(app, 'total'), currency(expected));
+    assert.equal(profileField(app, 'lifetime-total'), currency(expected));
+    assert.equal(profileCount(app, 'events'), playerResults(name).length);
+  }
+  chooseSeason(app, 'S42');
+  assert.equal(app.get('home-earnings-sum').textContent, '$9,000');
+  assert.equal(app.get('stat-results').textContent, 136);
+});
+
+test('registered past seasons and unknown records partition dashboards, directory and rankings without synthetic choices', () => {
+  const fixtures = seasonFixtures();
+  const source = fixtureScript(fixtures).replace('const tournamentCatalog=[',
+    'const tournamentCatalog=[{"id":"empty-season-catalog","chapter":7,"season":2,"seasonId":"S40"},');
+  const app = boot(source);
+  assert.deepEqual(seasonChoices(app), [
+    { id: 'all', label: '全期間' }, { id: 'S42', label: 'CH7 S4' },
+    { id: 'S41', label: 'CH7 S3' }, { id: 'unknown', label: '未確認' }
+  ]);
+  assertRows(app, newest(fixtures.slice(0, 2)));
+  assert.equal(app.get('stat-players').textContent, 2);
+  assert.equal(app.get('home-earnings-sum').textContent, '$150');
+  assert.ok(!profileLinks(app.get('all-players').innerHTML).some(p => p.name === 'Unmapped'));
+  app.profile('Unmapped');
+  assert.equal(profileCount(app, 'events'), 0);
+  assert.equal(profileField(app, 'total'), '$0');
+  assert.equal(profileField(app, 'lifetime-total'), '$25');
+  chooseSeason(app, 'S41');
+  assertRows(app, newest(fixtures.slice(2, 5)));
+  assert.equal(app.get('stat-results').textContent, 3);
+  assert.equal(app.get('stat-players').textContent, 3);
+  assert.equal(app.get('home-earnings-sum').textContent, '$400');
+  assert.equal(app.get('home-spotlight').hidden, true);
+  assert.deepEqual(profileLinks(app.get('all-players').innerHTML).map(p => p.name).sort(), ['RGN p1ng', 'miru', 'p1ng'].sort());
+  assert.match(plain(app.get('player-earnings-leaders').innerHTML), /p1ng\$200/);
+  assert.doesNotMatch(plain(app.get('player-earnings-leaders').innerHTML), /RGN p1ng/);
+  chooseSeason(app, 'all');
+  assert.equal(app.get('stat-results').textContent, 6);
+  assert.equal(app.get('home-earnings-sum').textContent, '$575');
+  chooseSeason(app, 'unknown');
+  assertRows(app, [fixtures[5]]);
+  assert.equal(app.get('home-earnings-sum').textContent, '$25');
+  assert.match(app.get('season-scope').textContent, /未確認/);
+});
+
+test('profiles, best placements, region charts and exact identities follow the selected season while lifetime totals remain global', () => {
+  const app = boot(fixtureScript(seasonFixtures()), { search: '?season=S41', hash: '#player=p1ng' });
+  assert.equal(profileField(app, 'total'), '$200');
+  assert.equal(profileField(app, 'lifetime-total'), '$300');
+  assert.equal(profileCount(app, 'events'), 1);
+  assert.deepEqual(profileHistory(app).map(e => e.id), ['past-duo']);
+  const region = markedContents(app.get('profile-content').innerHTML, 'data-profile-region', 'ME');
+  assert.equal(plain(markedContent(region.find(s => /data-region-stat="prize"/.test(s)), 'data-region-stat', 'prize')), '$200');
+  assert.match(app.get('profile-content').innerHTML, /チーム合計 \$400/);
+  app.profile('RGN p1ng');
+  assert.equal(profileField(app, 'total'), '$0');
+  assert.equal(profileField(app, 'lifetime-total'), '$50');
+  assert.equal(profileField(app, 'best-qualifying'), '#2');
+  assert.equal(profileField(app, 'best-final'), '未登録');
+  app.profile('miru');
+  assert.match(profileField(app, 'aliases'), /ᵗᶻᵈ 否定から入ります〆/);
+  assert.equal(profileField(app, 'total'), '$200');
+  chooseSeason(app, 'S42');
+  assert.equal(profileCount(app, 'events'), 0);
+  assert.equal(profileField(app, 'total'), '$0');
+  assert.equal(profileField(app, 'lifetime-total'), '$200');
+  assert.equal(profileHistory(app).length, 0);
+  assert.match(app.get('profile-content').innerHTML, /\?season=S42#player=miru/);
+});
+
+test('season changes preserve navigation, browse filters, tournament facets and browser back including same-hash history', () => {
+  const app = boot(fixtureScript(seasonFixtures()), { hash: '#results' });
+  app.set('search-results', 'p1ng'); app.set('region-filter', 'ME'); app.set('prize-only', true);
+  chooseSeason(app, 'S41');
+  assert.deepEqual(renderedArticles(app).map(row => row.id), ['past-duo']);
+  app.profile('p1ng');
+  assert.equal(app.window.location.search, '?season=S41');
+  assert.match(app.get('profile-content').innerHTML, /\?season=S41#player=p1ng/);
+  chooseSeason(app, 'all');
+  assert.equal(profileField(app, 'total'), '$300');
+  app.browserBack();
+  assert.equal(app.get('season-select').value, 'S41');
+  assert.equal(profileField(app, 'total'), '$200');
+  app.profileBack();
+  assert.equal(app.get('search-results').value, 'p1ng');
+  assert.equal(app.get('prize-only').checked, true);
+  assert.deepEqual(renderedArticles(app).map(row => row.id), ['past-duo']);
+  app.navigate('tournaments');
+  app.set('tournament-mode', 'unknown', 'change');
+  assert.equal(app.get('tournament-count').textContent, '2大会 · 3戦績');
+  chooseSeason(app, 'S42');
+  assert.equal(app.get('tournament-mode').value, 'unknown');
+  assert.equal(app.get('tournament-count').textContent, '0大会 · 0戦績');
+  app.browserBack();
+  assert.equal(app.get('season-select').value, 'S41');
+  assert.equal(app.get('tournament-count').textContent, '2大会 · 3戦績');
+  for (const card of tournamentCards(app)) {
+    app.tournament(card.id);
+    assert.ok(tournamentRecordIds(app).every(id => id.startsWith('past-')));
+    assert.equal(app.window.location.search, '?season=S41');
+    app.tournamentBack();
+  }
+});
+
+test('CSV contains only the selected season and current search/filter results with explicit season metadata', async () => {
+  const app = boot(fixtureScript(seasonFixtures()), { search: '?season=S41' });
+  app.set('search-results', 'p1ng'); app.set('prize-only', true);
+  app.click(app.get('export-csv'));
+  const [headers, ...rows] = parseCSV(await app.downloads[0].blob.text());
+  assert.deepEqual(headers.slice(-3), ['chapter', 'season', 'seasonId']);
+  const exported = rows.map(row => Object.fromEntries(headers.map((name, i) => [name, row[i]])));
+  assert.equal(exported.length, 1);
+  assert.equal(exported[0].player, 'p1ng / miru');
+  assert.equal(exported[0].prize, '400');
+  assert.equal(exported[0].prizePerPlayer, '200');
+  assert.deepEqual([exported[0].chapter, exported[0].season, exported[0].seasonId], ['7', '3', 'S41']);
+});
+
+test('missing or conflicting season evidence is unconfirmed and unsupported URL seasons never create phantom data', () => {
+  const base = records[0];
+  const mixed = new URL(base.source); mixed.searchParams.set('window', 'S41_Other_Round1_ME');
+  const fixtures = [base,
+    { ...base, id: 's42-in-name-only', source: 'https://example.com/S42_Other' },
+    { ...base, id: 'new-source-unmapped', source: base.source.replaceAll('S42', 'S43') },
+    { ...base, id: 'conflicting-season', source: mixed.href }
+  ];
+  const app = boot(fixtureScript(fixtures), { search: '?season=unknown' });
+  assert.deepEqual(renderedArticles(app).map(e => e.id).sort(), fixtures.slice(1).map(e => e.id).sort());
+  assert.ok(renderedArticles(app).every(e => e.content.includes('data-record-season="unknown"')));
+  assert.ok(!seasonChoices(app).some(s => s.id === 'S43'));
+  const invalid = boot(script, { search: '?season=S999', hash: '#player=miru' });
+  assert.equal(invalid.get('season-select').value, 'S42');
+  assert.equal(profileField(invalid, 'total'), '$700');
+  assert.equal(invalid.get('stat-results').textContent, 136);
+  assert.equal(invalid.storageAccesses(), 0);
+});
+
+test('older chapter options come from registered catalog metadata and conflicting record seasons do not inherit current classification', () => {
+  const earlier = { ...records[0], id: 'chapter-two-fixture', date: '2020-09-01', source: records[0].source.replaceAll('S42', 'S14') };
+  const conflict = { ...records[0], id: 'explicit-conflict-fixture', seasonId: 'S42', chapter: 7, season: 4,
+    source: records[0].source.replaceAll('S42', 'S41') };
+  const catalogEntry = { id: 'ch2s4-solo-fixture', name: earlier.event, chapter: 2, season: 4, seasonId: 'S14',
+    sourceEventIds: ['S14_SoloVictoryCup'], series: 'victory-cup', mode: 'battle-royale', subtype: 'solo-victory-cup', team: 'solo', platform: 'unknown' };
+  const source = fixtureScript([records[0], earlier, conflict]).replace('const tournamentCatalog=[',
+    `const tournamentCatalog=[${JSON.stringify(catalogEntry)},`);
+  const app = boot(source, { search: '?season=S14', hash: '#tournaments' });
+  assert.ok(seasonChoices(app).some(s => s.id === 'S14' && s.label === 'CH2 S4'));
+  assert.equal(app.get('tournament-count').textContent, '1大会 · 1戦績');
+  app.tournament(catalogEntry.id);
+  assert.deepEqual(tournamentRecordIds(app), [earlier.id]);
+  assert.match(plain(app.get('tournament-detail-content').innerHTML), /CH2 · SEASON 4/);
+  chooseSeason(app, 'unknown'); app.navigate('results');
+  const [row] = renderedArticles(app);
+  assert.equal(row.id, conflict.id);
+  assert.ok(tournamentTags(row.content).every(tag => tag.value === 'unknown'));
 });

@@ -572,6 +572,20 @@
     .archive-row>.tournament-tags .tournament-tag{font-size:9px;padding:3px 6px}
     .tournament-session-uncertain{color:#c9b79b!important;font-size:10px!important}
     @media(max-width:640px){.sidebar{padding:8px 10px;gap:8px}.sidebar .brand{gap:7px;min-width:0}.sidebar .brand-mark{flex:0 0 32px;width:32px;height:32px}.sidebar .brand-name{min-width:0}.sidebar .brand-title{font-size:15px;line-height:1}.nav{gap:0;flex-shrink:0}.nav button{padding:8px 6px}.nav button svg{width:17px;height:17px;flex-basis:17px}}
+    .top-actions{flex-wrap:wrap;justify-content:flex-end;gap:5px 12px;max-width:100%;min-width:0}
+    .season-control{display:flex;align-items:center;gap:9px;min-width:0}
+    .season-control label{font-size:10px;color:#aeb8d3;font-weight:800;white-space:nowrap}
+    #season-select{background:#171b2b;border:1px solid #665487;border-radius:10px;color:#f2edff;font:inherit;font-size:12px;font-weight:800;min-width:135px;max-width:100%;padding:9px 30px 9px 12px;cursor:pointer;color-scheme:dark}
+    #season-select:focus-visible{outline:2px solid #a58aff;outline-offset:3px}
+    .season-scope{font-size:10px;color:#b8c4df;line-height:1.5;overflow-wrap:anywhere}
+    .record-season{display:inline-block;font-size:9px;line-height:1.4;color:#cfc2ed;border:1px solid #544969;background:#29213c;border-radius:5px;padding:2px 5px;vertical-align:middle;white-space:nowrap}
+    .archive-date .record-season{display:block;width:max-content;margin-top:6px}
+    .season-biography-note{display:block;font-size:9px;color:#918ba5;margin-bottom:6px}
+    .profile-lifetime{display:block;margin-top:9px;color:#c7b997;font-size:12px}
+    [hidden]{display:none!important}
+    @media(max-width:1050px){.topbar{align-items:flex-start}.topbar>.eyebrow{max-width:43%;line-height:1.6}.top-actions{max-width:55%}.season-scope{flex-basis:100%;text-align:right}}
+    @media(max-width:640px){.topbar{display:block}.topbar>.eyebrow{max-width:none}.top-actions{max-width:none;justify-content:space-between;margin-top:11px;gap:6px 10px}.season-control{flex:0 1 auto;gap:7px}.season-control label{font-size:10px}#season-select{min-width:128px;padding:8px 24px 8px 10px;font-size:12px}.season-scope{flex:1 1 100px;text-align:right;font-size:9px}.profile-history-meta{flex-wrap:wrap}}
+    @media(max-width:360px){.season-scope{flex-basis:100%;text-align:left}.top-actions{gap:6px}}
   </style>
 </head>
 <body>
@@ -592,17 +606,17 @@
       <div class="side-bottom"><div class="disclaimer">UNOFFICIAL FAN PROJECT<br>Epic Gamesとは無関係の非公式サイトです</div></div>
     </aside>
     <main class="main" id="top">
-      <div class="topbar"><div class="eyebrow">FORTNITE / COMPETITIVE / ASIA OVERSEAS</div><div class="top-actions"><span class="date-pill">CH7 S4 · 2026.08.20 — 10.18</span></div></div>
+      <div class="topbar"><div class="eyebrow">FORTNITE / COMPETITIVE / ASIA OVERSEAS</div><div class="top-actions"><div class="season-control"><label for="season-select">集計期間</label><select id="season-select" aria-label="シーズンを選択"><option value="all">全期間</option><option value="S42" selected>CH7 S4</option></select></div><span class="season-scope" id="season-scope" aria-live="polite">集計対象：CH7 S4</span></div></div>
       <section class="section active" id="page-home">
-        <div class="hero"><div class="hero-copy"><div class="mini-label"><span class="live-dot"></span> CHAPTER 7 · SEASON 4 · OVERRIDE</div><h1>ASIA <span class="tour">ON<br>TOUR.</span></h1><p>日本・ASIA勢は、世界でどこまで戦えるのか<br>2026年8月20日〜10月18日の海外サーバー挑戦を記録する</p><small>FROM ASIA. ACROSS EVERY REGION.</small></div><div class="hero-visual" aria-hidden="true"><div class="orbit"></div><div class="orbit two"></div><div class="orbit three"></div><div class="planet"></div><span class="spot a"></span><span class="spot b"></span><span class="spot c"></span></div></div>
+        <div class="hero"><div class="hero-copy"><div class="mini-label"><span class="live-dot"></span> <span id="home-season-label">CH7 S4 · OVERSEAS ARCHIVE</span></div><h1>ASIA <span class="tour">ON<br>TOUR.</span></h1><p>日本・ASIA勢は、世界でどこまで戦えるのか<br><span id="home-season-description">CH7 S4の海外サーバー挑戦を記録する</span></p><small>FROM ASIA. ACROSS EVERY REGION.</small></div><div class="hero-visual" aria-hidden="true"><div class="orbit"></div><div class="orbit two"></div><div class="orbit three"></div><div class="planet"></div><span class="spot a"></span><span class="spot b"></span><span class="spot c"></span></div></div>
         <div class="stats"><div class="stat"><div class="name">掲載中の遠征結果</div><div class="value"><span id="stat-results">34</span><span class="suffix">件</span></div><div class="sub">出典確認分と一部詳細未確認分</div></div><div class="stat"><div class="name">戦績掲載プレイヤー</div><div class="value"><span id="stat-players">21</span><span class="suffix">名</span></div><div class="sub">確認済みの結果がある選手</div></div><div class="stat"><div class="name">記録のある遠征先</div><div class="value"><span id="stat-regions">3</span><span class="suffix">地域</span></div><div class="sub">対象の海外地域は全6地域</div></div><div class="stat"><div class="name">大会・予選のトップ10</div><div class="value"><span id="stat-top10">3</span><span class="suffix">件</span></div><div class="sub">掲載データ内の集計（デュオは1戦績）</div></div></div>
         <div class="dashboard-cols"><div class="panel"><div class="panel-header"><h2>最新の <span>OVERSEAS RESULTS</span></h2><button type="button" data-page="results" class="text-link">すべて見る ↗</button></div><div class="result-list" id="latest-results"></div></div><div class="panel"><div class="panel-header"><h2>遠征先 <span>REGIONS</span></h2></div><div id="region-breakdown"></div><div class="footnote">※サイト内に登録済みの戦績のみを集計しています</div></div></div>
         <section class="earnings-feature" aria-labelledby="home-earnings-title"><div class="earnings-head"><div><h2 id="home-earnings-title">🏆 今シーズンの外鯖獲得賞金 <span style="color:#e8c383">TOP 5</span></h2><p>各選手の取り分を集計した確認済み賞金 · USD</p></div><div class="earnings-total"><small>掲載データの選手合計</small><span id="home-earnings-sum">$0</span></div></div><div class="earnings-grid" id="home-earnings-leaders"></div><p class="earnings-explainer">※ サイトに登録済み・出典確認済みの記録だけを集計 · デュオはチーム賞金ではなく各選手の額を加算 · <button class="text-link" type="button" data-page="players">全選手を見る ↗</button></p></section>
-        <div class="spotlight"><div><div class="spotlight-overline">ME OVERSEAS SPOTLIGHT · 2026.08.25</div><h2>Karf <span style="color:#8d96af;font-weight:600">×</span> huggy <span class="spotlight-prize">$200 TEAM</span></h2><p>ME Reload Duos Victory Cup 決勝 <strong>14位</strong> · <strong>1 VR</strong> · 8 KILLS　<span>（各選手 $100）</span></p></div><button type="button" class="btn sm spotlight-action" data-spotlight>ME戦績を見る ↗</button></div>
+        <div class="spotlight" id="home-spotlight"><div><div class="spotlight-overline">ME OVERSEAS SPOTLIGHT · 2026.08.25</div><h2>Karf <span style="color:#8d96af;font-weight:600">×</span> huggy <span class="spotlight-prize">$200 TEAM</span></h2><p>ME Reload Duos Victory Cup 決勝 <strong>14位</strong> · <strong>1 VR</strong> · 8 KILLS　<span>（各選手 $100）</span></p></div><button type="button" class="btn sm spotlight-action" data-spotlight>ME戦績を見る ↗</button></div>
         <div class="section-head"><div><h2 class="section-title">注目の <span>PLAYERS</span></h2><p>海外に挑むASIA勢をウォッチ</p></div><button type="button" data-page="players" class="text-link">プレイヤー一覧 ↗</button></div><div class="players" id="featured-players"></div>
       </section>
-      <section class="section" id="page-results"><div class="page-label">ARCHIVE / 01</div><h1 class="big-title">OVERSEAS RESULTS</h1><p class="explainer">チャプター7 シーズン4（2026.08.20〜10.18）の海外大会アーカイブ。NAW・ME・NAC・OCE・BRの海外結果を追加調査中。</p><div class="filterbar"><div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><input id="search-results" type="search" placeholder="選手名・大会名を検索" aria-label="選手名や大会名で検索"></div><select id="region-filter" aria-label="遠征先で絞り込み"><option value="all">すべての地域</option><option>ME</option><option>EU</option><option>NAC</option><option>NAW</option><option>OCE</option><option>BR</option></select><select id="stage-filter" aria-label="大会区分で絞り込み"><option value="all">すべての区分</option><option value="賞金決勝">賞金決勝</option><option value="予選">予選</option><option value="Practice決勝">Practice決勝</option><option value="Performance決勝">Performance決勝</option><option value="コスメ大会">コスメ大会</option></select><select id="sort-results" aria-label="並び替え"><option value="date">新しい順</option><option value="rank">順位が高い順</option><option value="kills">キル数順</option></select><label class="toggle"><input type="checkbox" id="prize-only"> 🏆 賞金獲得のみ</label></div><div class="panel-header"><h2>遠征結果 <span id="result-count">0件</span></h2></div><p class="prize-row-note">🏆 <strong>金色の行＝賞金獲得確定</strong>　·　「賞金決勝」は賞金獲得を意味しないため、賞金ゼロや未確認は別の表示にしているよ</p><div id="result-table"></div><div class="export-tools"><button type="button" class="btn sm ghost" id="export-csv">↓ CSVを書き出し</button></div><p class="footnote">CSVは現在の絞り込み結果を出力するよ。デュオの戦績はチーム単位で1行・賞金はチーム合計、prizePerPlayer列は各選手の金額。このサイトは閲覧専用で、掲載済みの戦績を検索・閲覧できるよ</p></section>
-      <section class="section" id="page-players"><div class="page-label">DATABASE / 02</div><h1 class="big-title">ASIA PLAYERS</h1><p class="explainer">ここに載っているのは追跡対象の候補。戦績が「0件」の選手は、海外大会の順位をまだこのサイトで検証・登録できていない状態だよ</p><section class="earnings-feature" aria-labelledby="ranking-title"><div class="earnings-head"><div><h2 id="ranking-title">🏆 外鯖獲得賞金ランキング</h2><p>今シーズン · 個人の確認済み賞金額（USD）</p></div><div class="earnings-total"><small>掲載済み選手の合計</small><span id="player-earnings-sum">$0</span></div></div><div class="player-prize-list" id="player-earnings-leaders"></div><p class="earnings-explainer">※ 大会・予選で獲得したPRやコスメ報酬は含めないよ · 同名別人は合算しない · 未掲載の大会があるため、実際のシーズン総賞金と一致しない場合があるよ · 選手名を押すと詳細プロフィールへ移動するよ</p></section><div class="filterbar"><div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><input id="search-players" type="search" placeholder="プレイヤー名を検索" aria-label="プレイヤー名検索"></div><select id="player-sort" aria-label="プレイヤーの並び順"><option value="prize">獲得賞金が多い順</option><option value="name">選手名順</option><option value="events">戦績件数順</option></select></div><div class="players" id="all-players"></div></section>
+      <section class="section" id="page-results"><div class="page-label">ARCHIVE / 01</div><h1 class="big-title">OVERSEAS RESULTS</h1><p class="explainer" id="archive-season-description">CH7 S4の海外大会アーカイブ。</p><div class="filterbar"><div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><input id="search-results" type="search" placeholder="選手名・大会名を検索" aria-label="選手名や大会名で検索"></div><select id="region-filter" aria-label="遠征先で絞り込み"><option value="all">すべての地域</option><option>ME</option><option>EU</option><option>NAC</option><option>NAW</option><option>OCE</option><option>BR</option></select><select id="stage-filter" aria-label="大会区分で絞り込み"><option value="all">すべての区分</option><option value="賞金決勝">賞金決勝</option><option value="予選">予選</option><option value="Practice決勝">Practice決勝</option><option value="Performance決勝">Performance決勝</option><option value="コスメ大会">コスメ大会</option></select><select id="sort-results" aria-label="並び替え"><option value="date">新しい順</option><option value="rank">順位が高い順</option><option value="kills">キル数順</option></select><label class="toggle"><input type="checkbox" id="prize-only"> 🏆 賞金獲得のみ</label></div><div class="panel-header"><h2>遠征結果 <span id="result-count">0件</span></h2></div><p class="prize-row-note">🏆 <strong>金色の行＝賞金獲得確定</strong>　·　「賞金決勝」は賞金獲得を意味しないため、賞金ゼロや未確認は別の表示にしているよ</p><div id="result-table"></div><div class="export-tools"><button type="button" class="btn sm ghost" id="export-csv">↓ CSVを書き出し</button></div><p class="footnote">CSVは選択シーズンと現在の絞り込み結果を出力するよ。chapter・season・seasonId列で各行の対象シーズンを確認できます。デュオの戦績はチーム単位で1行・賞金はチーム合計、prizePerPlayer列は各選手の金額。このサイトは閲覧専用で、掲載済みの戦績を検索・閲覧できるよ</p></section>
+      <section class="section" id="page-players"><div class="page-label">DATABASE / 02</div><h1 class="big-title">ASIA PLAYERS</h1><p class="explainer" id="players-season-description">選択期間の掲載選手。</p><section class="earnings-feature" aria-labelledby="ranking-title"><div class="earnings-head"><div><h2 id="ranking-title">🏆 外鯖獲得賞金ランキング</h2><p id="ranking-season-description">CH7 S4 · 個人の確認済み賞金額（USD）</p></div><div class="earnings-total"><small>掲載済み選手の合計</small><span id="player-earnings-sum">$0</span></div></div><div class="player-prize-list" id="player-earnings-leaders"></div><p class="earnings-explainer">※ 大会・予選で獲得したPRやコスメ報酬は含めないよ · 同名別人は合算しない · <span id="ranking-completeness">未掲載の大会があるため、実際の獲得賞金総額とは一致しない場合があります。</span> · 選手名を押すと詳細プロフィールへ移動するよ</p></section><div class="filterbar"><div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><input id="search-players" type="search" placeholder="プレイヤー名を検索" aria-label="プレイヤー名検索"></div><select id="player-sort" aria-label="プレイヤーの並び順"><option value="prize">獲得賞金が多い順</option><option value="name">選手名順</option><option value="events">戦績件数順</option></select></div><div class="players" id="all-players"></div></section>
       <section class="section" id="page-tournaments"><div id="tournament-content"></div></section>
       <section class="section" id="page-tournament" aria-labelledby="tournament-title"><div id="tournament-detail-content"></div></section>
       <section class="section" id="page-profile" aria-labelledby="profile-title"><div id="profile-content"></div></section>
@@ -863,7 +877,9 @@
     ];
     const regions=['ME','EU','NAC','NAW','OCE','BR'];
     const $=s=>document.querySelector(s);
-    const all=()=>builtIn;
+    const rawAll=()=>builtIn;
+    let selectedSeason='S42';
+    const all=()=>selectedSeason==='all'?rawAll():rawAll().filter(e=>recordSeason(e).id===selectedSeason);
     const escape=s=>String(s??'').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
     const format=n=>typeof n==='number'&&Number.isFinite(n)?n.toLocaleString('ja-JP'):'—';
     const names=e=>Array.isArray(e.players)&&e.players.length?e.players:[e.player];
@@ -882,9 +898,9 @@
       if(e.prizePerPlayer*roster.length>e.prize+0.001)return 0;
       return e.prizePerPlayer;
     };
-    function prizeTotals(){
+    function prizeTotals(rows=all()){
       const totals=new Map();
-      for(const e of all()){
+      for(const e of rows){
         const amount=individualPrize(e);
         if(!amount)continue;
         for(const n of new Set(names(e))){
@@ -896,7 +912,7 @@
       }
       return [...totals.values()].sort((a,b)=>b.total-a.total||b.events-a.events||a.name.localeCompare(b.name,'ja'));
     }
-    function playerPrizeTotal(name){return prizeTotals().find(p=>p.name===name)?.total||0}
+    function playerPrizeTotal(name,rows=all()){return prizeTotals(rows).find(p=>p.name===name)?.total||0}
     const tournamentAxes=[
   {
     "key": "series",
@@ -1382,7 +1398,7 @@
         const roundId=u.searchParams.get('window')||u.searchParams.get('round')||null;
         const eventSeason=eventId?.match(/^S\d+/i)?.[0]?.toUpperCase();
         const roundSeason=roundId?.match(/^S\d+/i)?.[0]?.toUpperCase();
-        if(eventSeason&&roundSeason&&eventSeason!==roundSeason)return {eventId:null,roundId:null,seasonId:'unknown'};
+        if(eventSeason&&roundSeason&&eventSeason!==roundSeason)return {eventId:null,roundId:null,seasonId:'unknown',seasonConflict:true};
         const seasonId=(eventId||roundId||'').match(/^S\d+/i)?.[0]?.toUpperCase()||'unknown';
         return {eventId,roundId,seasonId};
       }catch{return {eventId:null,roundId:null,seasonId:'unknown'}}
@@ -1390,9 +1406,84 @@
     function classifyTournamentRecord(e){
       const source=tournamentSource(e);
       const known=tournamentCatalog.find(t=>t.seasonId===source.seasonId&&t.name===e.event&&t.sourceEventIds.includes(source.eventId));
-      if(known)return known;
-      return {id:'unconfirmed-'+encodeURIComponent([source.seasonId,e.event,source.eventId||e.id].join('|')),name:e.event||'大会名未確認',chapter:null,season:null,seasonId:source.seasonId,sourceEventIds:source.eventId?[source.eventId]:[],series:'unknown',mode:'unknown',subtype:'unknown',team:'unknown',platform:'unknown',evidence:[{text:'登録名・出典の識別子に一致する確認済み分類がないため、各項目を未確認としています。'}]};
+      const period=recordSeason(e);
+      if(known&&period.id===known.seasonId)return known;
+      const periodId=period.id==='unknown'?source.seasonId:period.seasonId;
+      return {id:'unconfirmed-'+encodeURIComponent([periodId,e.event,source.eventId||e.id].join('|')),name:e.event||'大会名未確認',chapter:period.chapter,season:period.season,seasonId:periodId,sourceEventIds:source.eventId?[source.eventId]:[],series:'unknown',mode:'unknown',subtype:'unknown',team:'unknown',platform:'unknown',evidence:[{text:'登録名・出典の識別子に一致する確認済み分類がないため、各項目を未確認としています。'}]};
     }
+    // Season identity is explicit metadata, never inferred from dates or S-number arithmetic.
+    const currentSeasonId='S42';
+    const unknownSeason=()=>({id:'unknown',seasonId:'unknown',chapter:null,season:null,label:'未確認'});
+    function buildSeasonMetadata(){
+      const definitions=new Map(),conflicts=new Set();
+      for(const row of [...tournamentCatalog,...rawAll()]){
+        if(!/^S\d+$/.test(row.seasonId||'')||!Number.isInteger(row.chapter)||row.chapter<1||!Number.isInteger(row.season)||row.season<1)continue;
+        const item={id:row.seasonId,seasonId:row.seasonId,chapter:row.chapter,season:row.season,label:`CH${row.chapter} S${row.season}`};
+        const previous=definitions.get(item.id);
+        if(previous&&(previous.chapter!==item.chapter||previous.season!==item.season))conflicts.add(item.id);
+        else definitions.set(item.id,item);
+      }
+      for(const id of conflicts)definitions.delete(id);
+      return definitions;
+    }
+    const seasonMetadata=buildSeasonMetadata();
+    const recordSeasonCache=new WeakMap();
+    function recordSeason(e){
+      if(!recordSeasonCache.has(e))recordSeasonCache.set(e,resolveRecordSeason(e));
+      return recordSeasonCache.get(e);
+    }
+    function resolveRecordSeason(e){
+      const source=tournamentSource(e);
+      if(source.seasonConflict)return unknownSeason();
+      const explicit=e.seasonId;
+      if(explicit!=null&&!/^S\d+$/.test(explicit))return unknownSeason();
+      if(explicit&&source.seasonId!=='unknown'&&explicit!==source.seasonId)return unknownSeason();
+      const definition=seasonMetadata.get(explicit||source.seasonId);
+      if(!definition||(e.chapter!=null&&e.chapter!==definition.chapter)||(e.season!=null&&e.season!==definition.season))return unknownSeason();
+      return definition;
+    }
+    function seasonOptions(){
+      const registered=new Map(rawAll().map(e=>{const info=recordSeason(e);return [info.id,info]}));
+      return [{id:'all',label:'全期間'},...[...registered.values()].filter(s=>s.id!=='unknown').sort((a,b)=>b.chapter-a.chapter||b.season-a.season||a.id.localeCompare(b.id)),...(registered.has('unknown')?[unknownSeason()]:[])];
+    }
+    function defaultSeason(){return seasonOptions().some(s=>s.id===currentSeasonId)?currentSeasonId:'all'}
+    function sanitizeSeason(value){return seasonOptions().some(s=>s.id===value)?value:defaultSeason()}
+    function seasonFromUrl(){return sanitizeSeason(new URL(window.location.href).searchParams.get('season'))}
+    function seasonLabel(){return seasonOptions().find(s=>s.id===selectedSeason)?.label||'未確認'}
+    function seasonScope(){return selectedSeason==='all'?'全期間（登録済み全シーズン）':selectedSeason==='unknown'?'シーズン未確認の記録':seasonLabel()}
+    function seasonPrizeLabel(){return selectedSeason==='all'?'全期間の確認済み海外獲得賞金':`${seasonLabel()}の確認済み海外獲得賞金`}
+    function seasonStamp(e){return `<span class="record-season" data-record-season="${escape(recordSeason(e).id)}">${escape(recordSeason(e).label)}</span>`}
+    function selectedSeasonPlayers(){
+      const active=new Set(all().flatMap(names));
+      return playerRegistry().filter(p=>selectedSeason==='all'||active.has(p.name)||(selectedSeason===currentSeasonId&&candidates.some(c=>c.name===p.name)));
+    }
+    function renderSeasonControl(){
+      const scope=seasonScope();
+      $('#season-select').innerHTML=seasonOptions().map(s=>`<option value="${escape(s.id)}"${s.id===selectedSeason?' selected':''}>${escape(s.label)}</option>`).join('');
+      $('#season-select').value=selectedSeason;
+      $('#season-scope').textContent=`集計対象：${scope}`;
+      $('#home-season-label').textContent=selectedSeason==='all'?'ALL SEASONS · OVERSEAS ARCHIVE':`${seasonLabel()} · OVERSEAS ARCHIVE`;
+      $('#home-season-description').textContent=`${scope}の海外サーバー挑戦を記録する`;
+      $('#archive-season-description').textContent=`${scope}の海外大会アーカイブ。掲載済みの戦績を検索・閲覧できます。`;
+      $('#players-season-description').textContent=`${scope}の掲載選手。CH7 S4の追跡候補は戦績0件でも掲載しています。紹介文はCH7 S4時点の記録で、集計値は選択期間に対応します。`;
+      $('#home-earnings-title').innerHTML=`🏆 ${escape(seasonPrizeLabel())} <span style="color:#e8c383">TOP 5</span>`;
+      $('#ranking-season-description').textContent=`${scope} · 個人の確認済み賞金額（USD）`;
+      $('#ranking-completeness').textContent='未掲載の大会があるため、実際の獲得賞金総額とは一致しない場合があります。';
+      $('#home-spotlight').hidden=!all().some(e=>e.region==='ME'&&e.date==='2026-08-25'&&names(e).includes('Karf'));
+    }
+    function changeSeason(value){
+      const nextSeason=sanitizeSeason(value);
+      if(nextSeason===selectedSeason)return;
+      const previous=captureView();
+      window.history.replaceState({aot:true,depth:routeDepth,view:previous},'',window.location.href);
+      const next={...previous,season:nextSeason};
+      const url=new URL(window.location.href);url.searchParams.set('season',nextSeason);
+      routeDepth++;
+      window.history.pushState({aot:true,depth:routeDepth,view:next},'',url.href);
+      selectedSeason=nextSeason;
+      refresh();showView(next,true);
+    }
+
     const tournamentForRecord=classifyTournamentRecord;
     const tournamentDefaultFilters=()=>({series:'all',mode:'all',subtype:'all',team:'all',platform:'all',stage:'all',q:''});
     let tournamentBrowseFilters=tournamentDefaultFilters();
@@ -1400,7 +1491,7 @@
     function sanitizeTournamentFilters(filters={}){
       const result=tournamentDefaultFilters();
       for(const axis of tournamentAxes)if(axis.options.some(o=>o.id===filters[axis.key]))result[axis.key]=filters[axis.key];
-      if(all().some(e=>e.kind===filters.stage))result.stage=filters.stage;
+      if(rawAll().some(e=>e.kind===filters.stage))result.stage=filters.stage;
       result.q=typeof filters.q==='string'?filters.q:'';
       return result;
     }
@@ -1450,7 +1541,7 @@
       return t.seasonId||'シーズン未確認';
     }
     function tournamentViewStageOptions(){
-      return [...new Set(all().map(e=>e.kind).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'ja')).map(id=>({id,label:id}));
+      return [...new Set(rawAll().map(e=>e.kind).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'ja')).map(id=>({id,label:id}));
     }
     function tournamentViewSelect(axis,filters){
       const selected=filters[axis.key]||'all';
@@ -1593,7 +1684,7 @@
     const profileHref=name=>'#player='+encodeURIComponent(name);
     function playerRegistry(){
       const known=new Set(candidates.map(p=>p.name));
-      const extras=[...new Set(all().flatMap(names))].filter(name=>!known.has(name)).map(name=>({name,initials:[...name].slice(0,2).join(''),desc:'登録済みの海外戦績がある選手'}));
+      const extras=[...new Set(rawAll().flatMap(names))].filter(name=>!known.has(name)).map(name=>({name,initials:[...name].slice(0,2).join(''),desc:'登録済みの海外戦績がある選手'}));
       return [...candidates,...extras];
     }
     function profileNameLinks(e){
@@ -1606,11 +1697,11 @@
       const best=predicate=>events.filter(e=>predicate(e)&&Number.isInteger(e.rank)&&e.rank>0).sort((a,b)=>a.rank-b.rank||b.date.localeCompare(a.date))[0]||null;
       const links=[];
       const seen=new Set();
-      for(const e of events){
+      for(const e of rawAll().filter(e=>names(e).includes(name))){
         const owned=[...(names(e).length===1&&safeUrl(e.profileUrl)?[{name,url:e.profileUrl}]:[]),...(Array.isArray(e.profiles)?e.profiles.filter(p=>p.name===name||names(e).length===1):[])];
         for(const p of owned){const url=safeUrl(p.url);if(url&&!seen.has(url)){seen.add(url);links.push({name:p.name,url});}}
       }
-      return {...player,aliases:confirmedAliases[name]||[],events,total:playerPrizeTotal(name),prizeEvents:events.filter(e=>individualPrize(e)>0).length,bestQualifying:best(e=>e.kind==='予選'),bestFinal:best(e=>String(e.kind||'').includes('決勝')),regionStats:regions.map(region=>{const rows=events.filter(e=>e.region===region);return {region,count:rows.length,prize:rows.reduce((sum,e)=>sum+individualPrize(e),0)}}),links};
+      return {...player,aliases:confirmedAliases[name]||[],events,total:playerPrizeTotal(name),lifetimeTotal:playerPrizeTotal(name,rawAll()),prizeEvents:events.filter(e=>individualPrize(e)>0).length,bestQualifying:best(e=>e.kind==='予選'),bestFinal:best(e=>String(e.kind||'').includes('決勝')),regionStats:regions.map(region=>{const rows=events.filter(e=>e.region===region);return {region,count:rows.length,prize:rows.reduce((sum,e)=>sum+individualPrize(e),0)}}),links};
     }
 
     let currentView={page:'home',name:null,id:null};
@@ -1618,7 +1709,7 @@
     let routedHash='';
     let routingReady=false;
     function captureView(){
-      return {...currentView,scroll:window.scrollY||0,results:{search:$('#search-results').value,region:$('#region-filter').value,stage:$('#stage-filter').value,sort:$('#sort-results').value,prize:$('#prize-only').checked,player:selectedPlayer},players:{search:$('#search-players').value,sort:$('#player-sort').value},tournaments:{...tournamentBrowseFilters}};
+      return {...currentView,season:selectedSeason,scroll:window.scrollY||0,results:{search:$('#search-results').value,region:$('#region-filter').value,stage:$('#stage-filter').value,sort:$('#sort-results').value,prize:$('#prize-only').checked,player:selectedPlayer},players:{search:$('#search-players').value,sort:$('#player-sort').value},tournaments:{...tournamentBrowseFilters}};
     }
     function restoreBrowseState(view){
       if(view.results){const r=view.results;$('#search-results').value=r.search;$('#region-filter').value=r.region;$('#stage-filter').value=r.stage;$('#sort-results').value=r.sort;$('#prize-only').checked=r.prize;selectedPlayer=r.player;}
@@ -1640,6 +1731,8 @@
       return '#'+view.page;
     }
     function showView(view,restore=false){
+      const nextSeason=seasonFromUrl();
+      if(nextSeason!==selectedSeason){selectedSeason=nextSeason;refresh()}
       restoreBrowseState(view);
       currentView={page:view.page,name:view.name||null,id:view.id||null,invalid:!!view.invalid};
       if(view.page==='tournaments'){tournamentBrowseFilters=sanitizeTournamentFilters(view.filters||tournamentBrowseFilters);currentView.filters={...tournamentBrowseFilters};renderTournamentSearch(currentView.filters)}
@@ -1700,7 +1793,7 @@
         const width=maximum?Math.max(0,Math.min(100,value/maximum*100)):0;
         return `<li class="profile-chart-row${value?'':' is-zero'}" data-region="${escape(r.region)}" data-profile-region="${escape(r.region)}"><span class="profile-chart-region">${escape(r.region)}</span><span class="profile-chart-track" aria-hidden="true"><span class="profile-chart-bar" style="width:${width}%"></span></span><span class="profile-chart-number" data-region-stat="${metric}">${count?`${format(value)}件`:`$${format(value)}`}</span></li>`;
       }).join('');
-      return `<section class="profile-chart" aria-label="${count?'地域別の掲載戦績数':'地域別の確認済み個人賞金'}"><div class="profile-chart-heading"><h3>${count?'掲載戦績数':'確認済み個人賞金'}</h3><p>${count?'件数':'USD'} / 最大 ${count?`${format(maximum)}件`:`$${format(maximum)}`}</p></div><ul class="profile-chart-list">${rows}</ul><p class="profile-chart-hint">${count?'掲載されている海外大会の結果を地域別に集計。':'個人分が確認できた現金賞金のみを地域別に集計。'}</p></section>`;
+      return `<section class="profile-chart" aria-label="${count?'地域別の掲載戦績数':'地域別の確認済み個人賞金'}"><div class="profile-chart-heading"><h3>${count?'掲載戦績数':'確認済み個人賞金'}</h3><p>${escape(seasonLabel())} · ${count?'件数':'USD'} / 最大 ${count?`${format(maximum)}件`:`$${format(maximum)}`}</p></div><ul class="profile-chart-list">${rows}</ul><p class="profile-chart-hint">${count?'掲載されている海外大会の結果を地域別に集計。':'個人分が確認できた現金賞金のみを地域別に集計。'}</p></section>`;
     }
     function profileHistoryPrize(e){
       const amount=individualPrize(e);
@@ -1714,7 +1807,7 @@
       const source=safeUrl(e.source);
       const partners=names(e).filter(n=>n!==name);
       const partnerLinks=partners.map(n=>`<a href="${escape(profileHref(n))}" data-open-profile="${escape(n)}">${escape(n)}</a>`).join(' / ');
-      return `<article class="profile-history-row${individualPrize(e)>0?' is-prize-win':''}" data-result-id="${escape(e.id)}"><div class="profile-history-meta"><time datetime="${escape(e.date)}">${escape(friendlyDate(e.date))}</time>${regionPill(e.region)}<span class="profile-history-stage">${escape(e.kind||'未分類')}</span></div><h3 class="profile-history-event">${escape(e.event)}</h3><p class="profile-history-round">${escape(e.round||'大会ラウンド未登録')}</p>${tournamentTags(e)}${partners.length?`<p class="profile-history-partners">相方：${partnerLinks}</p>`:''}<dl class="profile-history-metrics"><div><dt>順位</dt><dd data-profile-event="rank"${Number.isInteger(e.rank)?'':' class="profile-metric-unknown"'}>${escape(rankLabel(e))}</dd></div><div><dt>PTS</dt><dd data-profile-event="points">${format(e.points)}</dd></div><div><dt>KILLS</dt><dd data-profile-event="kills">${format(e.kills)}</dd></div><div><dt>VR</dt><dd data-profile-event="vrs">${format(e.vrs)}</dd></div><div class="profile-history-prize"><dt>個人賞金 / USD</dt><dd>${profileHistoryPrize(e)}</dd></div></dl><p class="profile-history-source">${source?`<a href="${escape(source)}" target="_blank" rel="noopener noreferrer">大会の出典を見る ↗</a>`:'出典URL未登録'}</p>${archiveDetails(e)}</article>`;
+      return `<article class="profile-history-row${individualPrize(e)>0?' is-prize-win':''}" data-result-id="${escape(e.id)}"><div class="profile-history-meta"><time datetime="${escape(e.date)}">${escape(friendlyDate(e.date))}</time>${seasonStamp(e)}${regionPill(e.region)}<span class="profile-history-stage">${escape(e.kind||'未分類')}</span></div><h3 class="profile-history-event">${escape(e.event)}</h3><p class="profile-history-round">${escape(e.round||'大会ラウンド未登録')}</p>${tournamentTags(e)}${partners.length?`<p class="profile-history-partners">相方：${partnerLinks}</p>`:''}<dl class="profile-history-metrics"><div><dt>順位</dt><dd data-profile-event="rank"${Number.isInteger(e.rank)?'':' class="profile-metric-unknown"'}>${escape(rankLabel(e))}</dd></div><div><dt>PTS</dt><dd data-profile-event="points">${format(e.points)}</dd></div><div><dt>KILLS</dt><dd data-profile-event="kills">${format(e.kills)}</dd></div><div><dt>VR</dt><dd data-profile-event="vrs">${format(e.vrs)}</dd></div><div class="profile-history-prize"><dt>個人賞金 / USD</dt><dd>${profileHistoryPrize(e)}</dd></div></dl><p class="profile-history-source">${source?`<a href="${escape(source)}" target="_blank" rel="noopener noreferrer">大会の出典を見る ↗</a>`:'出典URL未登録'}</p>${archiveDetails(e)}</article>`;
     }
     function renderProfile(name){
       const info=profileInfo(name);
@@ -1727,7 +1820,7 @@
       const visited=info.regionStats.filter(r=>r.count>0).map(r=>regionPill(r.region)).join('');
       const links=info.links.filter(link=>safeUrl(link.url));
       const external=links.length?`<details class="profile-external"><summary>確認済み外部プロフィール · ${format(links.length)}件</summary><ul class="profile-external-links">${links.map(link=>`<li><a href="${escape(safeUrl(link.url))}" target="_blank" rel="noopener noreferrer">${escape(link.name)} ↗</a><span>${escape(link.url)}</span></li>`).join('')}</ul></details>`:'';
-      $('#profile-content').innerHTML=`<div class="profile-toolbar"><button class="btn sm ghost" id="profile-back" data-profile-back type="button">← 戻る</button><a id="profile-share" href="${escape(shareUrl)}" title="このURLをコピーして共有できます">プロフィールのURL ↗</a></div><header class="profile-hero"><div><p class="profile-kicker">PLAYER PROFILE / ASIA OVERSEAS</p><div class="profile-identity"><div class="profile-avatar" aria-hidden="true">${escape(info.initials)}</div><div class="profile-identity-copy"><h1 class="profile-name" id="profile-title" tabindex="-1" data-profile="name">${escape(info.name)}</h1><p class="profile-alias-heading">確認済みの別名義</p><div class="profile-aliases" data-profile="aliases">${aliases}</div></div></div>${info.desc?`<p class="profile-description">${escape(info.desc)}</p>`:''}${external}</div><div class="profile-prize-total"><p class="profile-total-label">今シーズンの確認済み海外獲得賞金</p><div class="profile-total-value"><span data-profile="total">$${format(info.total)}</span><small>USD</small></div><p class="profile-total-hint">掲載済みの個人賞金累計<br>デュオは確認済みの個人分のみ集計</p></div></header><div class="profile-stats"><article class="profile-stat"><h2>賞金獲得記録</h2><div class="profile-stat-value"><span data-profile="prize-events">${format(info.prizeEvents)}</span><small>件</small></div><p class="profile-stat-context">個人賞金の獲得を確認した記録</p></article><article class="profile-stat"><h2>掲載されている海外戦績</h2><div class="profile-stat-value"><span data-profile="events">${format(info.events.length)}</span><small>件</small></div><p class="profile-stat-context">予選・決勝を含む全掲載記録</p></article>${profileBestCard('予選の最高順位',info.bestQualifying,'best-qualifying')}${profileBestCard('決勝の最高順位',info.bestFinal,'best-final')}</div><section aria-labelledby="profile-region-title"><div class="profile-region-heading"><div><h2 id="profile-region-title">地域別の<span>実績</span></h2><p>${visited?'戦績掲載地域':'海外大会の戦績はまだ掲載されていません'}</p></div><div class="profile-regions-visited" aria-label="海外挑戦地域">${visited}</div></div><div class="profile-region-charts">${profileRegionChart(info,'count')}${profileRegionChart(info,'prize')}</div></section><section aria-labelledby="profile-history-title"><div class="profile-history-heading"><div><h2 id="profile-history-title">海外大会<span>履歴</span></h2><p>新しい順 · 賞金獲得記録は金色で表示</p></div><span class="profile-history-count">${format(info.events.length)}件</span></div><div class="profile-history">${info.events.length?info.events.map(e=>profileHistoryRow(e,info.name)).join(''):'<div class="profile-empty"><h3>海外大会の戦績はまだ未登録です</h3><p>選手名鑑には掲載されていますが、確認済みの海外大会記録はまだ掲載されていません。</p></div>'}</div></section>`;
+      $('#profile-content').innerHTML=`<div class="profile-toolbar"><button class="btn sm ghost" id="profile-back" data-profile-back type="button">← 戻る</button><a id="profile-share" href="${escape(shareUrl)}" title="このURLをコピーして共有できます">プロフィールのURL ↗</a></div><header class="profile-hero"><div><p class="profile-kicker">PLAYER PROFILE / ASIA OVERSEAS</p><div class="profile-identity"><div class="profile-avatar" aria-hidden="true">${escape(info.initials)}</div><div class="profile-identity-copy"><h1 class="profile-name" id="profile-title" tabindex="-1" data-profile="name">${escape(info.name)}</h1><p class="profile-alias-heading">確認済みの別名義</p><div class="profile-aliases" data-profile="aliases">${aliases}</div></div></div>${info.desc?`<p class="profile-description">${candidates.some(c=>c.name===info.name)?'<span class="season-biography-note">紹介文：CH7 S4時点</span>':''}${escape(info.desc)}</p>`:''}${external}</div><div class="profile-prize-total"><p class="profile-total-label">${escape(seasonPrizeLabel())}</p><div class="profile-total-value"><span data-profile="total">$${format(info.total)}</span><small>USD</small></div><p class="profile-total-hint">${escape(seasonScope())}の個人賞金累計<br>デュオは確認済みの個人分のみ集計<span class="profile-lifetime">全期間の確認済み個人賞金 <b data-profile="lifetime-total">$${format(info.lifetimeTotal)}</b></span></p></div></header><div class="profile-stats"><article class="profile-stat"><h2>賞金獲得記録</h2><div class="profile-stat-value"><span data-profile="prize-events">${format(info.prizeEvents)}</span><small>件</small></div><p class="profile-stat-context">個人賞金の獲得を確認した記録</p></article><article class="profile-stat"><h2>掲載されている海外戦績</h2><div class="profile-stat-value"><span data-profile="events">${format(info.events.length)}</span><small>件</small></div><p class="profile-stat-context">予選・決勝を含む全掲載記録</p></article>${profileBestCard('予選の最高順位',info.bestQualifying,'best-qualifying')}${profileBestCard('決勝の最高順位',info.bestFinal,'best-final')}</div><section aria-labelledby="profile-region-title"><div class="profile-region-heading"><div><h2 id="profile-region-title">地域別の<span>実績</span></h2><p>${visited?'戦績掲載地域':'海外大会の戦績はまだ掲載されていません'}</p></div><div class="profile-regions-visited" aria-label="海外挑戦地域">${visited}</div></div><div class="profile-region-charts">${profileRegionChart(info,'count')}${profileRegionChart(info,'prize')}</div></section><section aria-labelledby="profile-history-title"><div class="profile-history-heading"><div><h2 id="profile-history-title">海外大会<span>履歴</span></h2><p>${escape(seasonScope())} · 新しい順 · 賞金獲得記録は金色で表示</p></div><span class="profile-history-count">${format(info.events.length)}件</span></div><div class="profile-history">${info.events.length?info.events.map(e=>profileHistoryRow(e,info.name)).join(''):'<div class="profile-empty"><h3>海外大会の戦績はまだ未登録です</h3><p>選手名鑑には掲載されていますが、確認済みの海外大会記録はまだ掲載されていません。</p></div>'}</div></section>`;
       return true;
     }
 
@@ -1742,10 +1835,10 @@
     const safeUrl=s=>{try{const u=new URL(s);return ['https:','http:'].includes(u.protocol)?u.href:null}catch{return null}};
     const friendlyDate=s=>s?String(s).replace(/-/g,'.'):'—';
     function regionPill(r){return `<span class="pill" data-region="${escape(r)}">🌐 ${escape(r)}</span>`}
-    function resultCard(e){const v=verificationLabel(e);const src=safeUrl(e.source);return `<article class="result-card${isPrizeWin(e)?' is-prize-win':''}"><div class="rank ${e.rank===1?'gold':e.rank<=3?'silver':''}">${Number.isInteger(e.rank)?'<span class="hash">#</span>':''}${Number.isInteger(e.rank)?format(e.rank):'<span style="font-size:19px">'+(e.reported?'確認中':'通過')+'</span>'}</div><div><div class="result-title">${profileNameLinks(e)} <span style="color:#9fa7bf;font-weight:600;font-size:11px">/ ${escape(e.event)}</span></div>${isPrizeWin(e)||hasClaimedPrize(e)?`<div class="prize-ribbon">${winBadge(e,true)}</div>`:''}<div class="result-sub">${friendlyDate(e.date)} · ASIA → ${escape(e.region)} · ${escape(e.round||'大会結果')}</div><div class="result-meta">${regionPill(e.region)}<span class="pill">${escape(stageLabel(e))}</span><span class="pill ${e.partial?'orange':e.verified?'green':'orange'}">${e.reported?'△':e.partial?'△':e.verified?'✓':'✎'} ${v}</span><span class="pill">${format(e.kills)} KILLS</span><span class="pill">${format(e.vrs)} VR</span></div></div><div class="right-data"><div class="score">${format(e.points)} <small>PTS</small></div>${src?`<a class="external-link" href="${escape(src)}" target="_blank" rel="noopener noreferrer">出典を見る ↗</a>`:'<span class="fine">出典未登録</span>'}</div></article>`}
+    function resultCard(e){const v=verificationLabel(e);const src=safeUrl(e.source);return `<article class="result-card${isPrizeWin(e)?' is-prize-win':''}"><div class="rank ${e.rank===1?'gold':e.rank<=3?'silver':''}">${Number.isInteger(e.rank)?'<span class="hash">#</span>':''}${Number.isInteger(e.rank)?format(e.rank):'<span style="font-size:19px">'+(e.reported?'確認中':'通過')+'</span>'}</div><div><div class="result-title">${profileNameLinks(e)} <span style="color:#9fa7bf;font-weight:600;font-size:11px">/ ${escape(e.event)}</span></div>${isPrizeWin(e)||hasClaimedPrize(e)?`<div class="prize-ribbon">${winBadge(e,true)}</div>`:''}<div class="result-sub">${seasonStamp(e)} ${friendlyDate(e.date)} · ASIA → ${escape(e.region)} · ${escape(e.round||'大会結果')}</div><div class="result-meta">${regionPill(e.region)}<span class="pill">${escape(stageLabel(e))}</span><span class="pill ${e.partial?'orange':e.verified?'green':'orange'}">${e.reported?'△':e.partial?'△':e.verified?'✓':'✎'} ${v}</span><span class="pill">${format(e.kills)} KILLS</span><span class="pill">${format(e.vrs)} VR</span></div></div><div class="right-data"><div class="score">${format(e.points)} <small>PTS</small></div>${src?`<a class="external-link" href="${escape(src)}" target="_blank" rel="noopener noreferrer">出典を見る ↗</a>`:'<span class="fine">出典未登録</span>'}</div></article>`}
 
-    function renderHome(){const a=all();$('#stat-results').textContent=a.length;$('#stat-players').textContent=new Set(a.flatMap(names)).size;$('#stat-regions').textContent=new Set(a.map(e=>e.region)).size;$('#stat-top10').textContent=a.filter(e=>e.rank<=10).length;const latest=a.slice().sort((x,y)=>y.date.localeCompare(x.date)).slice(0,3);$('#latest-results').innerHTML=latest.length?latest.map(resultCard).join(''):'<div class="empty">まだ戦績が登録されていないよ</div>';$('#region-breakdown').innerHTML=regions.map(r=>{const n=a.filter(e=>e.region===r).length;const percent=a.length?(n/a.length*100):0;return `<div class="region-entry"><div class="reg-left"><div class="flag" data-region="${escape(r)}">${escape(r)}</div><div class="reg-details"><strong>${{ME:'中東',EU:'ヨーロッパ',NAC:'北米中部',NAW:'北米西部',OCE:'オセアニア',BR:'ブラジル'}[r]}</strong><small>${n?'登録あり':'未登録'}</small><div class="reg-bar"><span style="width:${percent}%"></span></div></div></div><span class="reg-count">${n}</span></div>`}).join('');$('#featured-players').innerHTML=candidates.slice(0,3).map(renderPlayerCard).join('')}
-    function renderPlayerCard(p){const events=all().filter(e=>names(e).includes(p.name));const sum=playerPrizeTotal(p.name);return `<a class="player" href="${escape(profileHref(p.name))}" data-open-profile="${escape(p.name)}"><div class="player-top"><div class="avatar">${escape(p.initials)}</div><div><div class="player-name">${escape(p.name)}</div><div class="player-region">🌏 遠征関連選手 · ${events.length?'戦績掲載中':'海外結果を調査中'}</div></div></div><div class="player-blurb">${escape(p.desc)}</div><div class="player-earnings${sum?'':' zero'}"><span>🏆 今季の外鯖獲得賞金<br><small>掲載済み・確認済みの個人累計</small></span><strong>${events.length?'$'+format(sum):'未登録'}</strong></div><div class="player-bottom"><span>掲載された海外戦績 <strong>${events.length}</strong> 件</span><span class="player-card-action">プロフィールを見る →</span></div></a>`}
+    function renderHome(){const a=all();$('#stat-results').textContent=a.length;$('#stat-players').textContent=new Set(a.flatMap(names)).size;$('#stat-regions').textContent=new Set(a.map(e=>e.region)).size;$('#stat-top10').textContent=a.filter(e=>e.rank<=10).length;const latest=a.slice().sort((x,y)=>y.date.localeCompare(x.date)).slice(0,3);$('#latest-results').innerHTML=latest.length?latest.map(resultCard).join(''):'<div class="empty">まだ戦績が登録されていないよ</div>';$('#region-breakdown').innerHTML=regions.map(r=>{const n=a.filter(e=>e.region===r).length;const percent=a.length?(n/a.length*100):0;return `<div class="region-entry"><div class="reg-left"><div class="flag" data-region="${escape(r)}">${escape(r)}</div><div class="reg-details"><strong>${{ME:'中東',EU:'ヨーロッパ',NAC:'北米中部',NAW:'北米西部',OCE:'オセアニア',BR:'ブラジル'}[r]}</strong><small>${n?'登録あり':'未登録'}</small><div class="reg-bar"><span style="width:${percent}%"></span></div></div></div><span class="reg-count">${n}</span></div>`}).join('');$('#featured-players').innerHTML=selectedSeasonPlayers().slice(0,3).map(renderPlayerCard).join('')}
+    function renderPlayerCard(p){const events=all().filter(e=>names(e).includes(p.name));const sum=playerPrizeTotal(p.name);return `<a class="player" href="${escape(profileHref(p.name))}" data-open-profile="${escape(p.name)}"><div class="player-top"><div class="avatar">${escape(p.initials)}</div><div><div class="player-name">${escape(p.name)}</div><div class="player-region">🌏 遠征関連選手 · ${events.length?'戦績掲載中':'海外結果を調査中'}</div></div></div><div class="player-blurb"><span class="season-biography-note">${candidates.some(c=>c.name===p.name)?'紹介文：CH7 S4時点':'掲載選手'}</span>${escape(p.desc)}</div><div class="player-earnings${sum?'':' zero'}"><span>🏆 ${escape(seasonLabel())}の確認済み賞金<br><small>掲載済み・確認済みの個人累計</small></span><strong>${events.length?'$'+format(sum):'未登録'}</strong></div><div class="player-bottom"><span>掲載された海外戦績 <strong>${events.length}</strong> 件</span><span class="player-card-action">プロフィールを見る →</span></div></a>`}
     let visible=[]; let selectedPlayer=null;
     function archivePrize(e){
       const duo=names(e).length>1;
@@ -1762,7 +1855,7 @@
         <div><dt>ポイント / PTS</dt><dd data-detail="points">${format(e.points)}</dd></div>
         <div><dt>大会区分</dt><dd>${escape(e.kind||'未分類')}</dd></div>
         <div><dt>確認状況</dt><dd>${escape(verificationLabel(e))}</dd></div>
-        <div><dt>大会ラウンド</dt><dd data-detail="round">${escape(e.round||'未登録')}</dd></div>
+        <div><dt>シーズン</dt><dd>${seasonStamp(e)}</dd><dt>大会ラウンド</dt><dd data-detail="round">${escape(e.round||'未登録')}</dd></div>
         <div><dt>大会での表示名</dt><dd data-detail="playerRaw">${escape(e.playerRaw||e.player)}</dd></div>
         <div><dt>賞金内訳 / USD</dt><dd data-detail="prize">${archivePrize(e)}</dd></div>
         <div class="detail-wide"><dt>出典URL</dt><dd data-detail="source">${src?`<a href="${escape(src)}" target="_blank" rel="noopener noreferrer">${escape(e.source)} ↗</a>`:'未登録'}</dd></div>
@@ -1772,7 +1865,7 @@
     }
     function archiveRow(e){
       return `<article class="archive-row${isPrizeWin(e)?' is-prize-win':''}" data-result-id="${escape(e.id)}" aria-labelledby="result-player-${escape(e.id)}"><div class="archive-overview">
-        <div class="archive-date"><span class="field-label">日付</span><time data-field="date" datetime="${escape(e.date)}">${escape(friendlyDate(e.date))}</time></div>
+        <div class="archive-date"><span class="field-label">日付</span><time data-field="date" datetime="${escape(e.date)}">${escape(friendlyDate(e.date))}</time>${seasonStamp(e)}</div>
         <h3 class="archive-player" id="result-player-${escape(e.id)}" data-field="player">${profileNameLinks(e)}</h3>
         <div class="archive-region"><span class="field-label">地域</span><span class="region-tag" data-field="region" data-region="${escape(e.region)}">${escape(e.region)}</span></div>
         <div class="archive-event"><span class="field-label">大会名</span><p data-field="event">${escape(e.event)}</p><small>${escape(e.kind||'未分類')}</small></div>
@@ -1786,10 +1879,10 @@
       if(!visible.length){$('#result-table').innerHTML='<div class="empty"><div class="emoji">🔎</div><b>条件に合う戦績がまだないよ</b><p>検索条件や絞り込みを変えてみてね</p></div>';return}
       $('#result-table').innerHTML=`<div class="archive-head" aria-hidden="true"><span>日付</span><span>選手名</span><span>地域</span><span>大会名</span><span>順位</span><span>KILLS</span><span>VR</span><span>賞金 / USD</span></div><div class="archive-list">${visible.map(archiveRow).join('')}</div>`;
     }
-    function renderPlayers(){const s=($('#search-players').value||'').trim().toLowerCase();const shown=playerRegistry().filter(p=>[p.name,...(confirmedAliases[p.name]||[])].some(n=>n.toLowerCase().includes(s)));const sort=$('#player-sort').value;shown.sort((a,b)=>sort==='name'?a.name.localeCompare(b.name,'ja'):sort==='events'?all().filter(e=>names(e).includes(b.name)).length-all().filter(e=>names(e).includes(a.name)).length||a.name.localeCompare(b.name,'ja'):playerPrizeTotal(b.name)-playerPrizeTotal(a.name)||a.name.localeCompare(b.name,'ja'));$('#all-players').innerHTML=shown.length?shown.map(renderPlayerCard).join(''):'<div class="empty">一致する選手はまだいないよ</div>'}
+    function renderPlayers(){const s=($('#search-players').value||'').trim().toLowerCase();const shown=selectedSeasonPlayers().filter(p=>[p.name,...(confirmedAliases[p.name]||[])].some(n=>n.toLowerCase().includes(s)));const sort=$('#player-sort').value;shown.sort((a,b)=>sort==='name'?a.name.localeCompare(b.name,'ja'):sort==='events'?all().filter(e=>names(e).includes(b.name)).length-all().filter(e=>names(e).includes(a.name)).length||a.name.localeCompare(b.name,'ja'):playerPrizeTotal(b.name)-playerPrizeTotal(a.name)||a.name.localeCompare(b.name,'ja'));$('#all-players').innerHTML=shown.length?shown.map(renderPlayerCard).join(''):'<div class="empty">一致する選手はまだいないよ</div>'}
 
-    function refresh(){renderHome();renderResults();renderEarnings();renderPlayers()}
-    function csvText(rows){const cols=['date','player','players','region','event','round','rank','points','kills','vrs','prize','prizePerPlayer','kind','source','verified','note'];const cell=x=>'"'+String(x??'').replace(/"/g,'""')+'"';return '\ufeff'+cols.join(',')+'\r\n'+rows.map(e=>cols.map(k=>cell(k==='players'?names(e).join(' / '):e[k])).join(',')).join('\r\n')}
+    function refresh(){renderSeasonControl();renderHome();renderResults();renderEarnings();renderPlayers()}
+    function csvText(rows){const cols=['date','player','players','region','event','round','rank','points','kills','vrs','prize','prizePerPlayer','kind','source','verified','note','chapter','season','seasonId'];const cell=x=>'"'+String(x??'').replace(/"/g,'""')+'"';return '\ufeff'+cols.join(',')+'\r\n'+rows.map(e=>cols.map(k=>cell(k==='players'?names(e).join(' / '):['chapter','season','seasonId'].includes(k)?recordSeason(e)[k]:e[k])).join(',')).join('\r\n')}
     function download(name,content,type){const b=new Blob([content],{type});const url=URL.createObjectURL(b);const a=document.createElement('a');a.href=url;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000)}
     document.addEventListener('click',e=>{
       if(e.target.closest('[data-tournament-back]')){tournamentBack();return}
@@ -1813,7 +1906,8 @@
     });
     ['#region-filter','#stage-filter','#sort-results','#prize-only'].forEach(s=>$(s).addEventListener('input',renderResults));$('#search-results').addEventListener('input',()=>{selectedPlayer=null;renderResults()});$('#search-players').addEventListener('input',renderPlayers);$('#player-sort').addEventListener('change',renderPlayers);$('#export-csv').addEventListener('click',()=>download('asia-on-tour-results.csv',csvText(visible),'text/csv;charset=utf-8'));
     document.addEventListener('input',e=>{if(e.target.id==='tournament-query')updateTournamentFilters('q',e.target.value)});
-    document.addEventListener('change',e=>{if(e.target.dataset.tournamentFilter)updateTournamentFilters(e.target.dataset.tournamentFilter,e.target.value)});
+    document.addEventListener('change',e=>{if(e.target.id==='season-select'){changeSeason(e.target.value);return}if(e.target.dataset.tournamentFilter)updateTournamentFilters(e.target.dataset.tournamentFilter,e.target.value)});
+    selectedSeason=seasonFromUrl();
     refresh();
     initializeRouting();
   })();
