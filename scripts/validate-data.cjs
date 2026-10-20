@@ -4,6 +4,20 @@ const { loadData, validateData, summarize } = require('./data-checks.cjs');
 const directory = path.resolve(process.argv[2] || path.join(__dirname, '..'));
 const loaded = loadData(directory);
 const result = loaded.errors.length ? { errors: loaded.errors, warnings: [] } : validateData(loaded.data);
+// Skin rewards must never become cash payouts, including the current
+// 'スキン大会' label and older records labeled 'コスメ大会'.
+if (!loaded.errors.length && Array.isArray(loaded.data?.results)) {
+  for (const row of loaded.data.results) {
+    if (['スキン大会', 'コスメ大会'].includes(row?.kind) && typeof row.prize === 'number' && row.prize > 0) {
+      result.errors.push({
+        file: 'results.json',
+        id: row.id || 'ID未設定',
+        field: 'prize',
+        message: 'スキン／コスメ報酬を現金賞金として登録しないでください（prizeは0）。'
+      });
+    }
+  }
+}
 for (const [kind, entries] of [['エラー', result.errors], ['要確認', result.warnings]]) for (const item of entries) {
   const message = `[戦績／対象ID: ${item.id}] ${item.field}: ${item.message}`;
   console.log(`${kind} ${item.file} ${message}`);
