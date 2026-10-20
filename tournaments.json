@@ -31,6 +31,10 @@
         {
           "id": "unknown",
           "label": "未確認"
+        },
+        {
+          "id": "skin-cup",
+          "label": "スキン大会"
         }
       ]
     },
@@ -127,6 +131,10 @@
         {
           "id": "unknown",
           "label": "未確認"
+        },
+        {
+          "id": "slender-man-cup-reload",
+          "label": "Slender Man Cup Reload"
         }
       ]
     },
@@ -469,6 +477,34 @@
         {
           "text": "大会情報・公式規則の確認元",
           "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/champion-focus-fncs-cup-chapter-7-season-4-official-rules"
+        }
+      ]
+    },
+    {
+      "id": "ch7s4-slender-man-cup-reload",
+      "name": "Slender Man Cup Reload",
+      "chapter": 7,
+      "season": 4,
+      "seasonId": "S42",
+      "sourceEventIds": [
+        "S42_SlenderManCup"
+      ],
+      "series": "skin-cup",
+      "mode": "reload",
+      "subtype": "slender-man-cup-reload",
+      "team": "duo",
+      "platform": "unknown",
+      "unknownFields": [
+        "platform"
+      ],
+      "evidence": [
+        {
+          "text": "公式ルール2.2.1がSlender Man Cupのデュオ戦とReload/Zero Build Reloadの別セッションを明記。今回の戦績はユーザー提示TrackerのReload部門。",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/slender-man-cup-chapter-7-season-4-official-rules"
+        },
+        {
+          "text": "公式イベントページがSlender Manコスメ報酬を明記。現金賞金として換算しない。",
+          "url": "https://www.fortnite.com/competitive/events/S42_SlenderManCup/"
         }
       ]
     }

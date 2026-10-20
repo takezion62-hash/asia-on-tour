@@ -31,7 +31,7 @@
 
     // Only explicitly verified cash payouts are counted. A duo payout MUST have
     // a known per-player share, otherwise it is not assigned to individuals.
-    const isPrizeWin=e=>typeof e.prize==='number'&&e.prize>0&&e.verified===true;
+    const isPrizeWin=e=>typeof e.prize==='number'&&e.prize>0&&e.verified===true&&!['予選','コスメ大会','スキン大会'].includes(e.kind);
     const individualPrize=e=>{
       if(!isPrizeWin(e))return 0;
       const roster=names(e);
