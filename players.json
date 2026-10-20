@@ -117,7 +117,7 @@
     {
       "name": "Reo",
       "initials": "RE",
-      "desc": "9/5 NAW Reload ZB Duos Cash Cupであくりあと3位、個人賞金$200",
+      "desc": "9/5 NAW Reload ZB Duos Cash Cupであくりあと決勝3位・個人賞金$200。10/18 OCE予選はろみぃと4位・559pt",
       "accent": "pink"
     },
     {
@@ -243,7 +243,7 @@
     {
       "name": "uptemp",
       "initials": "UP",
-      "desc": "10/17 NAW Solo Reload VC予選188位・310pt・50キル・1VR。国籍でなくASIA活動で判定",
+      "desc": "10/17 NAW Solo Reload VC予選188位、10/18 OCE Reload ZB Duos CC予選14位（vurаdd0とデュオ）。国籍でなくASIA主戦場で判定",
       "accent": "pink"
     },
     {
@@ -491,6 +491,18 @@
       "initials": "GD",
       "desc": "10/17 NAW Solo Reload VC予選320位・300ptで決勝進出",
       "accent": "violet"
+    },
+    {
+      "name": "ろみぃ",
+      "initials": "RM",
+      "desc": "10/18 OCE Reload ZB Duos Cash Cup予選4位・559pt・3VR（Reoとデュオ）。Tracker名は「eniyan duduー」",
+      "accent": "cyan"
+    },
+    {
+      "name": "vurаdd0",
+      "initials": "VU",
+      "desc": "10/18 OCE Reload ZB Duos Cash Cup予選14位・539pt・3VR（uptempとデュオ）",
+      "accent": "violet"
     }
   ],
   "confirmedAliases": {
@@ -579,6 +591,9 @@
     ],
     "lixx": [
       "nlt かぶきんvsごんたまん"
+    ],
+    "ろみぃ": [
+      "eniyan duduー"
     ]
   }
 }
