@@ -507,6 +507,33 @@
           "url": "https://www.fortnite.com/competitive/events/S42_SlenderManCup/"
         }
       ]
+    },
+    {
+      "id": "ch7s3-solo-reload-victory-cup",
+      "name": "Solo Reload Victory Cup",
+      "chapter": 7,
+      "season": 3,
+      "seasonId": "S41",
+      "sourceEventIds": [
+        "S41_ReloadSoloVictoryCup",
+        "S41_ReloadReloadSoloVictoryCup"
+      ],
+      "series": "victory-cup",
+      "mode": "reload",
+      "subtype": "solo-reload-victory-cup",
+      "team": "solo",
+      "platform": "cross-platform",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "公式大会ページ。2026年8月のS41大会、Solo / Reload の形式を確認。",
+          "url": "https://www.fortnite.com/competitive/events/S41_ReloadSoloVictoryCup/"
+        },
+        {
+          "text": "地域・日付・VRにつき$100の賞金ルールを確認。",
+          "url": "https://fncomprankings.com/tournaments/epicgames_S41_ReloadReloadSoloVictoryCup_ME?region=ME&window=S41_ReloadSoloVictoryCup_Round2_Day3_ME"
+        }
+      ]
     }
   ]
 }
