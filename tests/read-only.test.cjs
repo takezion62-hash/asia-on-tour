@@ -815,7 +815,7 @@ test('tournament catalog and detail routes retain all records once and separate 
   assert.equal(app.get('tournament-query').attributes.type, 'search');
   const catalog = tournamentCards(app);
   assert.equal(catalog.length, new Set(records.map(row => tournamentKey(row, data))).size);
-  assert.equal(new Set(catalog.map(card => card.id)).size, 11);
+  assert.equal(new Set(catalog.map(card => card.id)).size, catalog.length);
   assert.equal(app.get('tournament-count').textContent, `${tournamentCards(app).length}大会 · ${records.length}戦績`);
   const allIds = [];
   for (const card of catalog) {
@@ -997,7 +997,7 @@ test('search tag chips combine with active filters, toggle their selection and r
   assert.equal(app.window.scrollY, 570);
   clickDuo();
   assert.equal(app.get('tournament-team').value, 'all');
-  assert.equal(app.get('tournament-count').textContent, `${tournamentCards(app).length}大会 · ${records.filter(e => tournamentFor(e, data)?.mode === 'reload').length}戦績`);
+  assert.equal(app.get('tournament-count').textContent, `${tournamentCards(app).length}大会 · ${records.filter(e => { const t = tournamentFor(e, data); return t?.series === 'victory-cup' && t.mode === 'reload'; }).length}戦績`);
 });
 
 test('direct malformed or unknown tournament URLs are recoverable and query text is escaped', () => {
