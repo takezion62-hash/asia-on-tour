@@ -534,6 +534,29 @@
           "url": "https://fncomprankings.com/tournaments/epicgames_S41_ReloadReloadSoloVictoryCup_ME?region=ME&window=S41_ReloadSoloVictoryCup_Round2_Day3_ME"
         }
       ]
+    },
+    {
+      "id": "ch7s3-playstation-typical-gamer-icon-cup-battle-royale",
+      "name": "PlayStation Typical Gamer Icon Cup Battle Royale",
+      "chapter": 7,
+      "season": 3,
+      "seasonId": "S41",
+      "sourceEventIds": [
+        "S41_PSTypicalGamer_NAW",
+        "S41_PSTypicalGamer"
+      ],
+      "series": "icon-cup",
+      "mode": "battle-royale",
+      "subtype": "playstation-typical-gamer-icon-cup-battle-royale",
+      "team": "solo",
+      "platform": "playstation",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "Fortnite Tracker のイベントページ。PlayStation Typical Gamer Icon Cup Battle Royale の NAW 結果。",
+          "url": "https://fortnitetracker.com/events/epicgames_S41_PSTypicalGamer_NAW"
+        }
+      ]
     }
   ]
 }
