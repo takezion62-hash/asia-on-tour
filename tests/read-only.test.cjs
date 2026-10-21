@@ -328,7 +328,7 @@ test('every result has a native disclosure retaining points, round, display name
     assert.doesNotMatch(content, /<details\b[^>]*\bopen(?:\s|>)/);
     assert.equal(detail(content, 'points'), typeof record.points === 'number' ? record.points.toLocaleString('ja-JP') : '—', id);
     assert.equal(detail(content, 'round'), record.round, id);
-    assert.equal(detail(content, 'playerRaw'), record.playerRaw, id);
+    assert.equal(detail(content, 'playerRaw'), record.playerRaw || record.player, id);
     assert.equal(detail(content, 'note'), record.note, id);
     const expectedLinks = [record.source, record.profileUrl, ...(record.profiles || []).map(profile => profile.url)]
       .filter(Boolean).map(url => new URL(url).href);
@@ -764,7 +764,6 @@ test('the complete individual prize ranking keeps its original order, amounts an
 const tournamentAxes = ['series', 'mode', 'subtype', 'team', 'platform'];
 // Audited against the season-specific source pages and rules. Similar names
 // intentionally occupy separate rows instead of sharing a guessed classifier.
-const tournamentExpected = data.tournaments.catalog;
 function tournamentTags(markup) {
   return [...markup.matchAll(/<a\b([^>]*)>/g)]
     .filter(([, attributes]) => /data-tournament-tag="/.test(attributes))
@@ -840,7 +839,7 @@ test('tournament catalog and detail routes retain all records once and separate 
       assert.deepEqual([...new Set(profileLinks(content).map(link => link.name))].sort(), [...new Set(roster(record))].sort(), id);
       assert.ok(detail(content, 'source').includes(new URL(record.source).href), id);
       assert.equal(detail(content, 'round'), record.round, id);
-      assert.equal(detail(content, 'playerRaw'), record.playerRaw, id);
+      assert.equal(detail(content, 'playerRaw'), record.playerRaw || record.player, id);
       if (record.players?.length > 1 && record.prize > 0) {
         assert.ok(detail(content, 'prize').includes(currency(record.prizePerPlayer)), id);
         assert.match(detail(content, 'prize'), /チーム合計/);
@@ -897,12 +896,12 @@ test('all five tournament facets and free text use AND filtering with stage sepa
   const app = boot(script, { hash: '#tournaments' });
   const assertCatalog = filters => {
     const expectedRecords = records.filter(record => {
-      const meta = tournamentExpected.find(event => event.name === record.event);
+      const meta = tournamentFor(record, data) || Object.fromEntries(tournamentAxes.map(axis => [axis, 'unknown']));
       return tournamentAxes.every(axis => !filters[axis] || filters[axis] === 'all' || meta[axis] === filters[axis]) &&
         (!filters.stage || filters.stage === 'all' || record.kind === filters.stage) &&
         (!filters.q || record.event.toLowerCase().includes(filters.q.toLowerCase()));
     });
-    const expectedNames = [...new Set(expectedRecords.map(record => record.event))].sort();
+    const expectedNames = [...new Map(expectedRecords.map(record => [tournamentKey(record, data), record.event])).values()].sort();
     const shown = tournamentCards(app);
     assert.deepEqual(shown.map(card => plain(card.content.match(/<h3[^>]*>([\s\S]*?)<\/h3>/)[1])).sort(), expectedNames);
     assert.equal(app.get('tournament-count').textContent, `${expectedNames.length}大会 · ${expectedRecords.length}戦績`);
@@ -1055,7 +1054,7 @@ test('visible facet counts reflect matching records and exclude only their own a
         const [tagAxis, value] = decode(attributes.match(/data-tournament-tag="([^"]+)"/)[1]).split(':');
         assert.equal(tagAxis, axis);
         const expected = records.filter(record => {
-          const meta = tournamentExpected.find(event => event.name === record.event);
+          const meta = tournamentFor(record, data) || Object.fromEntries(tournamentAxes.map(axis => [axis, 'unknown']));
           return meta[axis] === value && tournamentAxes.every(other => other === axis || !filters[other] || meta[other] === filters[other]) &&
             (!filters.stage || record.kind === filters.stage);
         }).length;
@@ -1064,7 +1063,7 @@ test('visible facet counts reflect matching records and exclude only their own a
         sum += actual;
       }
       const expectedTotal = records.filter(record => {
-        const meta = tournamentExpected.find(event => event.name === record.event);
+        const meta = tournamentFor(record, data) || Object.fromEntries(tournamentAxes.map(axis => [axis, 'unknown']));
         return tournamentAxes.every(other => other === axis || !filters[other] || meta[other] === filters[other]) &&
           (!filters.stage || record.kind === filters.stage);
       }).length;
