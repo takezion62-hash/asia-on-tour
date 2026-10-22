@@ -586,6 +586,47 @@
     @media(max-width:1050px){.topbar{align-items:flex-start}.topbar>.eyebrow{max-width:43%;line-height:1.6}.top-actions{max-width:55%}.season-scope{flex-basis:100%;text-align:right}}
     @media(max-width:640px){.topbar{display:block}.topbar>.eyebrow{max-width:none}.top-actions{max-width:none;justify-content:space-between;margin-top:11px;gap:6px 10px}.season-control{flex:0 1 auto;gap:7px}.season-control label{font-size:10px}#season-select{min-width:128px;padding:8px 24px 8px 10px;font-size:12px}.season-scope{flex:1 1 100px;text-align:right;font-size:9px}.profile-history-meta{flex-wrap:wrap}}
     @media(max-width:360px){.season-scope{flex-basis:100%;text-align:left}.top-actions{gap:6px}}
+    .profile-journey{margin:0 0 34px;padding:24px;border:1px solid #41415e;border-radius:20px;background:linear-gradient(145deg,#191b2e,#0e1625);min-width:0}
+    .journey-heading{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+    .journey-heading .profile-kicker{margin:0 0 8px;color:#9bd9e1}
+    .journey-heading h2{margin:0;font-size:25px;font-weight:900}.journey-heading h2 span{color:#b29af4}
+    .journey-heading p:not(.profile-kicker){font-size:12px;color:#acbad4;margin:7px 0 0}
+    .journey-history-jump{color:#bda8f4;font-size:12px;font-weight:750;text-underline-offset:4px}
+    .journey-disclaimer,.journey-comparison-note{font-size:11px;line-height:1.85;color:#a6b3ce;overflow-wrap:anywhere}
+    .journey-disclaimer{margin:16px 0 20px;padding-left:12px;border-left:2px solid #7863a1}
+    .journey-chart{padding:19px 20px 15px;border:1px solid #4e493d;background:#191c28;border-radius:14px;margin-bottom:22px;min-width:0}
+    .journey-chart-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    .journey-chart-heading h3{font-size:13px;margin:0 0 5px}.journey-chart-heading p{font-size:10px;line-height:1.7;margin:0;color:#b6ae9f}
+    .journey-chart-heading strong{color:#ffe1a1;font-size:28px;line-height:1.2;font-weight:900;font-variant-numeric:tabular-nums}
+    .journey-chart svg{display:block;width:100%;height:auto;max-height:230px;margin:12px 0 0;overflow:visible}
+    .journey-chart svg text{fill:#bcbdc5;font:16px Inter,sans-serif}.journey-chart svg circle{fill:#ffe1a1}
+    .journey-chart-grid{fill:none;stroke:#393b48;stroke-width:1}.journey-chart-line{fill:none;stroke:#f1cc7f;stroke-width:3;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+    .journey-chart-note{margin:12px 0 0;font-size:10px;line-height:1.8;color:#afa99f}
+    .journey-chart-data summary{cursor:pointer;color:#dfc998;font-size:11px;line-height:1.8;padding:5px 0}
+    .journey-chart-data>div{max-height:260px;overflow-y:auto;margin-top:9px}.journey-chart-data table{width:100%;table-layout:fixed;border-collapse:collapse;font-size:12px}
+    .journey-chart-data caption{text-align:left;color:#a4b1c9;font-size:10px;padding-bottom:8px}.journey-chart-data th,.journey-chart-data td{padding:8px 6px;border-bottom:1px solid #393b48;text-align:left;overflow-wrap:anywhere}.journey-chart-data td,.journey-chart-data th:last-child{text-align:right}
+    .journey-controls{display:flex;flex-wrap:wrap;gap:8px}.journey-controls button{font:inherit;font-size:12px;font-weight:800;padding:10px 18px;min-height:44px;border:1px solid #4d506a;background:#161e30;color:#bcc6de;border-radius:999px;cursor:pointer}
+    .journey-controls button[aria-pressed="true"]{border-color:#b69aee;background:#4a366c;color:#fff1ff}.journey-controls button:hover{border-color:#c2adf0}
+    .profile-journey :is(button,a,summary):focus-visible{outline:2px solid #8de4eb;outline-offset:4px}
+    .journey-comparison-note{font-size:10px;margin:11px 0}.journey-count{font-size:11px;color:#bcc9e2;margin:15px 0 18px;font-variant-numeric:tabular-nums}
+    .journey-list{list-style:none;margin:0;padding:0 0 0 20px;min-width:0}.journey-list:focus{outline:none}
+    .journey-entry{position:relative;border-left:1px solid #44516b;padding:0 0 22px 25px;min-width:0}
+    .journey-entry:last-child{padding-bottom:0}.journey-entry:before{content:'';position:absolute;left:-6px;top:5px;width:11px;height:11px;border-radius:50%;background:var(--region-text,#bda9e6);box-shadow:0 0 0 5px #131b2b}
+    .journey-date{display:flex;align-items:center;flex-wrap:wrap;gap:7px;margin-bottom:10px;font-size:12px;color:#c8d4ea;font-weight:800}.journey-date time{font-variant-numeric:tabular-nums;margin-right:3px}
+    .journey-card{padding:18px 20px;border:1px solid #35405a;border-top:2px solid var(--region-border,#72658d);border-radius:12px;background:#151d2d;min-width:0}
+    .journey-entry.is-prize-win .journey-card{border-color:#8b7044;background:linear-gradient(120deg,#30282c,#171f2e 70%)}
+    .journey-record-top{display:flex;gap:7px;align-items:center;flex-wrap:wrap;font-size:10px;color:#a9b7d0}.journey-stage{color:#e0d9f6;font-weight:800}.journey-verification{margin-left:auto}.journey-cosmetic{color:#efbdf8;background:#4c2b5360;border:1px solid #82578b;border-radius:5px;padding:2px 6px}
+    .journey-card h3{font-size:18px;line-height:1.55;margin:10px 0 4px;font-weight:850;overflow-wrap:anywhere}.journey-card h3 a{color:#eaf0ff;text-decoration:none}.journey-card h3 a:hover{text-decoration:underline;text-underline-offset:4px}.journey-card h3 span{color:#a699d2;font-size:14px}
+    .journey-round{font-size:11px;line-height:1.8;color:#a0b1cd;margin:0;overflow-wrap:anywhere}.journey-card .tournament-tags{margin:11px 0 0}
+    .journey-milestones{list-style:none;display:flex;gap:5px;flex-wrap:wrap;padding:0;margin:12px 0 0}.journey-milestones li{color:#d6c6fb;font-size:10px;line-height:1.7;padding:3px 7px;border-radius:5px;background:#312645;border:1px solid #57476e;overflow-wrap:anywhere}
+    .is-prize-win .journey-milestones li{color:#efdbb0;border-color:#77613e;background:#45372e}
+    .journey-metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr)) minmax(0,1.8fr);gap:12px;margin:16px 0 0;padding-top:12px;border-top:1px solid #394055}.journey-metrics>div{min-width:0}.journey-metrics dt{font-size:9px;letter-spacing:.04em;color:#9caecb;margin-bottom:5px}.journey-metrics dd{font-size:24px;line-height:1.35;font-weight:850;letter-spacing:-.03em;margin:0;color:#e5edff;overflow-wrap:anywhere;font-variant-numeric:tabular-nums}.journey-cash small{display:block;font-size:10px;line-height:1.8;margin-top:3px;color:#b7b4b3;overflow-wrap:anywhere}.is-prize-win .journey-cash dd{color:#ffe0a0}
+    .journey-partners{font-size:11px;line-height:1.8;color:#a2b1ca;margin:13px 0 0;overflow-wrap:anywhere}.journey-partners a{color:#c7b6f5;font-size:12px;font-weight:750;text-underline-offset:4px}
+    .journey-record-links{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:11px;margin-top:15px;color:#a1b3cf}.journey-record-links a{color:#94dce7;line-height:1.8;text-underline-offset:4px}
+    .journey-empty{font-size:12px;line-height:1.9;color:#a6b6d0;padding:22px 15px;border:1px dashed #465573;border-radius:12px;list-style:none}
+    .journey-more{display:block;margin:20px auto 0;min-height:44px}
+    @media(max-width:760px){.profile-journey{padding:20px 16px;scroll-margin-top:76px}#profile-history-title{scroll-margin-top:76px}.journey-metrics{grid-template-columns:repeat(4,minmax(0,1fr));gap:12px 8px}.journey-cash{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:3px 8px;padding-top:10px;border-top:1px solid #394055}.journey-cash dt{grid-column:1/-1}.journey-cash small{margin:0;align-self:center}.journey-list{padding-left:7px}.journey-entry{padding-left:18px}.journey-card{padding:16px}.journey-chart{padding:16px}.journey-controls button{padding:9px 15px}}
+    @media(max-width:420px){.profile-journey{padding:19px 12px}.journey-heading h2{font-size:23px}.journey-chart{padding:14px 12px}.journey-chart-heading strong{font-size:25px}.journey-chart svg text{font-size:20px}.journey-entry{padding-left:14px}.journey-card{padding:14px 12px}.journey-card h3{font-size:16px}.journey-metrics dd{font-size:21px}.journey-controls{gap:6px}.journey-controls button{padding:9px 12px}.journey-verification{margin-left:0}}
   </style>
 </head>
 <body>
