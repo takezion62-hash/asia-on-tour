@@ -276,13 +276,11 @@
       "mode": "reload-zero-build",
       "subtype": "reload-zb-duos-cash-cup",
       "team": "duo",
-      "platform": "unknown",
-      "unknownFields": [
-        "platform"
-      ],
+      "platform": "cross-platform",
+      "unknownFields": [],
       "evidence": [
         {
-          "text": "公式名・source IDにDuosZBを明示。公式規則2.2にDuos/Zero Build Reload設定を確認。機種条件は未確認。",
+          "text": "公式名・source IDにDuosZBを明示。公式規則2.2にDuos/Zero Build Reload設定を確認。機種条件はユーザー確認に基づきクロスプラットフォームとして登録。",
           "url": "https://www.fortnite.com/competitive/events/S42_ReloadCashCup_DuosZB/"
         },
         {
@@ -357,14 +355,13 @@
       "mode": "unknown",
       "subtype": "mega-man-cup",
       "team": "duo",
-      "platform": "unknown",
+      "platform": "cross-platform",
       "unknownFields": [
-        "mode",
-        "platform"
+        "mode"
       ],
       "evidence": [
         {
-          "text": "公式ページと規則2.2.1でDuosを確認。規則はBRとZBの両セッションを扱う。登録名に形式がなく汎用Battle Royale欄はZBページでも表示されるため、形式を保守的に未確認とする。機種条件も未確認。",
+          "text": "公式ページと規則2.2.1でDuosを確認。規則はBRとZBの両セッションを扱う。登録名に形式がなく汎用Battle Royale欄はZBページでも表示されるため、形式を保守的に未確認とする。機種条件はユーザー確認に基づきクロスプラットフォームとして登録。",
           "url": "https://www.fortnite.com/competitive/events/S42_MegaManCup/"
         },
         {
@@ -386,14 +383,13 @@
       "mode": "unknown",
       "subtype": "kingdom-hearts-cup",
       "team": "solo",
-      "platform": "unknown",
+      "platform": "cross-platform",
       "unknownFields": [
-        "mode",
-        "platform"
+        "mode"
       ],
       "evidence": [
         {
-          "text": "公式ページと規則2.2.1でSoloを確認。規則はBRとZBの両セッションを扱う。登録名に形式がなく汎用Battle Royale欄だけでは確証が不足するため、形式を保守的に未確認とする。機種条件も未確認。",
+          "text": "公式ページと規則2.2.1でSoloを確認。規則はBRとZBの両セッションを扱う。登録名に形式がなく汎用Battle Royale欄だけでは確証が不足するため、形式を保守的に未確認とする。機種条件はユーザー確認に基づきクロスプラットフォームとして登録。",
           "url": "https://www.fortnite.com/competitive/events/S42_KingdomHeartsCup/"
         },
         {
@@ -415,13 +411,11 @@
       "mode": "battle-royale",
       "subtype": "performance-evaluation",
       "team": "duo",
-      "platform": "unknown",
-      "unknownFields": [
-        "platform"
-      ],
+      "platform": "cross-platform",
+      "unknownFields": [],
       "evidence": [
         {
-          "text": "当該S42公式ページがDuos/Battle Royaleと二段階の性能検証イベントを説明。参加条件がFNCS Division 1でもPracticeとは別大会。後続シーズンのTriosを当該S42へ一般化しない。機種条件未確認。",
+          "text": "当該S42公式ページがDuos/Battle Royaleと二段階の性能検証イベントを説明。参加条件がFNCS Division 1でもPracticeとは別大会。後続シーズンのTriosを当該S42へ一般化しない。機種条件はユーザー確認に基づきクロスプラットフォームとして登録。",
           "url": "https://www.fortnite.com/competitive/events/S42_PerformanceEvaluation/"
         }
       ]
@@ -469,13 +463,11 @@
       "mode": "battle-royale",
       "subtype": "champion-focus-fncs-cup",
       "team": "solo",
-      "platform": "unknown",
-      "unknownFields": [
-        "platform"
-      ],
+      "platform": "cross-platform",
+      "unknownFields": [],
       "evidence": [
         {
-          "text": "既存roundがBattle Royaleを明記。公式ページと規則2.2.1でSoloとコスメ報酬を確認。Practiceや本戦とは別。別ZB/Mobile版へ一般化しない。機種条件未確認。",
+          "text": "既存roundがBattle Royaleを明記。公式ページと規則2.2.1でSoloとコスメ報酬を確認。Practiceや本戦とは別。別ZB/Mobile版へ一般化しない。機種条件はユーザー確認に基づきクロスプラットフォームとして登録。",
           "url": "https://www.fortnite.com/competitive/events/S42_ChampionFocusFNCSCup/"
         },
         {
@@ -497,10 +489,8 @@
       "mode": "reload",
       "subtype": "slender-man-cup-reload",
       "team": "duo",
-      "platform": "unknown",
-      "unknownFields": [
-        "platform"
-      ],
+      "platform": "cross-platform",
+      "unknownFields": [],
       "evidence": [
         {
           "text": "公式ルール2.2.1がSlender Man Cupのデュオ戦とReload/Zero Build Reloadの別セッションを明記。今回の戦績はユーザー提示TrackerのReload部門。",
@@ -575,17 +565,15 @@
       "mode": "battle-royale",
       "subtype": "champion-aphrodite-fncs-cup-battle-royale",
       "team": "duo",
-      "platform": "unknown",
-      "unknownFields": [
-        "platform"
-      ],
+      "platform": "cross-platform",
+      "unknownFields": [],
       "evidence": [
         {
           "text": "公式イベントページで2026/07/31～08/01開催、Duos/Battle Royale、Champion Aphroditeスキン報酬を確認。",
           "url": "https://www.fortnite.com/competitive/events/S41_FNCSCommunityCup/"
         },
         {
-          "text": "CH7 S3公式ルール2.2.1はBR・ZBのデュオを区別し、Attachment CでBRのOCE/ME 60位以内・EU 600位以内のコスメ獲得条件を明記。機種指定は未確認。",
+          "text": "CH7 S3公式ルール2.2.1はBR・ZBのデュオを区別し、Attachment CでBRのOCE/ME 60位以内・EU 600位以内のコスメ獲得条件を明記。機種条件はユーザー確認に基づきクロスプラットフォームとして登録。",
           "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/champion-aphrodite-fncs-cup-chapter-7-season-3-official-rules"
         }
       ]
