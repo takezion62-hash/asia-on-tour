@@ -135,6 +135,10 @@
         {
           "id": "slender-man-cup-reload",
           "label": "Slender Man Cup Reload"
+        },
+        {
+          "id": "champion-aphrodite-fncs-cup-battle-royale",
+          "label": "Champion Aphrodite FNCS Cup BR"
         }
       ]
     },
@@ -555,6 +559,34 @@
         {
           "text": "Fortnite Tracker のイベントページ。PlayStation Typical Gamer Icon Cup Battle Royale の NAW 結果。",
           "url": "https://fortnitetracker.com/events/epicgames_S41_PSTypicalGamer_NAW"
+        }
+      ]
+    },
+    {
+      "id": "ch7s3-champion-aphrodite-fncs-cup-battle-royale",
+      "name": "Champion Aphrodite FNCS Cup Battle Royale",
+      "chapter": 7,
+      "season": 3,
+      "seasonId": "S41",
+      "sourceEventIds": [
+        "S41_FNCSCommunityCup"
+      ],
+      "series": "skin-cup",
+      "mode": "battle-royale",
+      "subtype": "champion-aphrodite-fncs-cup-battle-royale",
+      "team": "duo",
+      "platform": "unknown",
+      "unknownFields": [
+        "platform"
+      ],
+      "evidence": [
+        {
+          "text": "公式イベントページで2026/07/31～08/01開催、Duos/Battle Royale、Champion Aphroditeスキン報酬を確認。",
+          "url": "https://www.fortnite.com/competitive/events/S41_FNCSCommunityCup/"
+        },
+        {
+          "text": "CH7 S3公式ルール2.2.1はBR・ZBのデュオを区別し、Attachment CでBRのOCE/ME 60位以内・EU 600位以内のコスメ獲得条件を明記。機種指定は未確認。",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/champion-aphrodite-fncs-cup-chapter-7-season-3-official-rules"
         }
       ]
     }
