@@ -38,10 +38,14 @@ function model(catalog = [category('A')], results = [], axes = fixtureAxes(catal
   }));
 }
 const reasons = {
-  first: 'サイト掲載初日の記録', cash: 'サイト掲載初の賞金獲得日',
-  region: region => region + 'の初掲載日', best: '同区分の最高順位更新', vr: 'VR獲得'
+  cash: 'サイト掲載初の賞金獲得日', champion: '賞金決勝で総合優勝', podium: '賞金決勝で総合TOP3',
+  skin: 'サイト掲載初のスキン報酬獲得日',
+  milestone: amount => '掲載記録の累計個人賞金 $' + amount.toLocaleString('en-US') + '到達'
 };
 const has = (rows, id, reason) => rows.find(item => item.record.id === id).reasons.includes(reason);
+const cashRecord = (id, date, amount, fields = {}, group = 'A') => record(id, date, { kind: '賞金決勝', round: 'Event 1 · Round 2 / 賞金決勝', prize: amount, ...fields }, group);
+const skinRecord = (id, date, fields = {}, group = 'A') => record(id, date, { kind: 'スキン大会', round: 'スキン獲得', ...fields }, group);
+const highlighted = rows => rows.filter(item => item.reasons.length > 0);
 
 test('年表は日付・ID順に並べ、同大会の予選と決勝を別記録として保持する', () => {
   const qualifying = record('qualifier', '2026-09-02');
@@ -57,39 +61,22 @@ test('年表は日付・ID順に並べ、同大会の予選と決勝を別記録
   assert.deepEqual(input, before, 'The source array and published result fields must not be modified');
 });
 
-test('サイト掲載初日・地域初掲載日は同日の全記録に付け、過去未掲載の挑戦を断定しない', () => {
-  const input = [record('b'), record('a'), record('new-region-a', '2026-09-03', { region: 'OCE' }),
-    record('new-region-b', '2026-09-03', { region: 'OCE' }), record('later', '2026-09-04', { region: 'OCE' })];
-  const rows = model()(input);
-  for (const id of ['a', 'b']) {
-    assert.ok(has(rows, id, reasons.first));
-    assert.ok(has(rows, id, reasons.region('ME')));
-  }
-  for (const id of ['new-region-a', 'new-region-b']) {
-    assert.ok(has(rows, id, reasons.region('OCE')));
-    assert.ok(!has(rows, id, reasons.first));
-  }
-  assert.ok(!has(rows, 'later', reasons.region('OCE')));
-  assert.ok(rows.flatMap(item => item.reasons).every(reason => !reason.includes('初めての海外挑戦')));
-});
 
-test('シーズン内の最初の戦績を全履歴での初掲載・初賞金として作り直さない', () => {
-  const previous = record('previous-season', '2026-06-01', { kind: '賞金決勝', prize: 100 });
-  const current = record('selected-season', '2026-09-01', { kind: '賞金決勝', prize: 200 });
-  const rows = model()([current], [previous, current]);
-  assert.deepEqual(rows.map(item => item.record.id), ['selected-season']);
-  assert.ok(!has(rows, current.id, reasons.first));
-  assert.ok(!has(rows, current.id, reasons.cash));
-  assert.ok(!has(rows, current.id, reasons.region('ME')));
-  assert.equal(rows[0].cash, 200);
-  assert.equal(rows[0].cumulative, 200, 'Selected-period cumulative excludes earlier seasons');
+test('通常VR・予選通過・新地域参加・小さな自己最高更新・Practice上位だけではハイライトにしない', () => {
+  const catalog = [category('A'), category('practice', { series: 'fncs', subtype: 'fncs-division-1-practice' })];
+  const input = [record('first', '2026-09-01'), record('vr', '2026-09-02', { vrs: 1 }),
+    record('more-vr', '2026-09-03', { vrs: 8 }), record('qualified', '2026-09-04', { rank: 10, round: '上位320名通過 / 予選' }),
+    record('new-region', '2026-09-05', { region: 'OCE' }), record('slight-best', '2026-09-06', { rank: 9 }),
+    record('practice', '2026-09-07', { kind: 'Practice', rank: 1, vrs: 4 }, 'practice')];
+  const rows = model(catalog)(input);
+  assert.equal(rows.length, input.length, 'All records remain available in 全戦績');
+  assert.deepEqual(highlighted(rows), [], 'Zero highlights is a valid result');
+  assert.ok(rows.every(item => item.cash === 0));
 });
 
 test('初賞金は確認済み現金の最初の日の全該当記録に付け、同日の累計は日末値を共有する', () => {
-  const input = [record('before', '2026-08-31', { vrs: 3 }),
-    record('cash-b', '2026-09-01', { kind: '賞金決勝', prize: 0.2 }),
-    record('cash-a', '2026-09-01', { kind: '賞金決勝', prize: 0.1 }),
-    record('next', '2026-09-02', { kind: '賞金決勝', prize: 0.15 })];
+  const input = [record('before', '2026-08-31', { vrs: 3 }), cashRecord('cash-b', '2026-09-01', 0.2),
+    cashRecord('cash-a', '2026-09-01', 0.1), cashRecord('next', '2026-09-02', 0.15)];
   const rows = model()(input);
   for (const id of ['cash-a', 'cash-b']) {
     assert.ok(has(rows, id, reasons.cash));
@@ -100,92 +87,154 @@ test('初賞金は確認済み現金の最初の日の全該当記録に付け�
   assert.equal(rows.at(-1).cumulative, 0.45, 'Cumulative money uses integer cents');
 });
 
-test('デュオは確認済み個人分のみ、予選・スキン・未確認・配分不明は累計へ加算しない', () => {
-  const duo = { player: 'Fixture Player / Partner', players: ['Fixture Player', 'Partner'], kind: '賞金決勝', prize: 400, prizePerPlayer: 200 };
-  const input = [record('duo', '2026-09-01', duo),
-    record('qualifying', '2026-09-02', { prize: 100, vrs: 9 }),
-    record('skin', '2026-09-02', { kind: 'スキン大会', prize: 100 }),
-    record('cosmetic', '2026-09-02', { kind: 'コスメ大会', prize: 100 }),
-    record('unverified', '2026-09-02', { kind: '賞金決勝', prize: 100, verified: false }),
-    record('unknown-share', '2026-09-02', { ...duo, prizePerPlayer: null }),
-    record('overallocated-share', '2026-09-02', { ...duo, prizePerPlayer: 300 }),
-    record('unknown-prize', '2026-09-02', { kind: '賞金決勝', prize: null })];
+test('賞金決勝の総合1位と2・3位を区別し、VRの有無や現金額から順位を推測しない', () => {
+  const input = [cashRecord('winner', '2026-09-01', null, { rank: 1, vrs: 0 }),
+    cashRecord('second', '2026-09-02', null, { rank: 2, vrs: 0 }),
+    cashRecord('third', '2026-09-03', null, { rank: 3, vrs: 0 }),
+    cashRecord('fourth', '2026-09-04', null, { rank: 4, vrs: 12 })];
   const rows = model()(input);
-  assert.equal(rows.find(item => item.record.id === 'duo').cash, 200);
-  assert.ok(rows.filter(item => item.record.id !== 'duo').every(item => item.cash === 0));
-  assert.equal(rows.at(-1).cumulative, 200);
-  assert.ok(has(rows, 'qualifying', reasons.vr), 'VR can highlight a qualifying result without becoming cash');
+  assert.deepEqual(rows.find(item => item.record.id === 'winner').reasons, [reasons.champion]);
+  for (const id of ['second', 'third']) assert.deepEqual(rows.find(item => item.record.id === id).reasons, [reasons.podium]);
+  assert.deepEqual(rows.find(item => item.record.id === 'fourth').reasons, []);
+  assert.ok(rows.every(item => item.cash === 0), 'A podium without a confirmed amount cannot invent cash');
 });
 
-test('最高順位更新は前日までの同区分と比べ、初回や同日内の架空の更新を作らない', () => {
-  const input = [record('baseline', '2026-09-01', { rank: 200 }),
-    record('b-better', '2026-09-02', { rank: 50 }), record('a-better', '2026-09-02', { rank: 100 }),
-    record('same', '2026-09-03', { rank: 50 }), record('worse', '2026-09-04', { rank: 70 }),
-    record('later-best', '2026-09-05', { rank: 20 })];
+test('順位未確認・不正な順位・未確認決勝・通常決勝や予選は賞金決勝TOP3にしない', () => {
+  const input = [null, undefined, '', '1', 0, -1, 1.5, NaN, Infinity].map((rank, index) =>
+    cashRecord('bad-rank-' + index, '2026-09-02', null, { rank }));
+  input.push(cashRecord('unverified', '2026-09-02', null, { rank: 1, verified: false }));
+  input.push(cashRecord('not-strictly-verified', '2026-09-02', null, { rank: 1, verified: 'true' }));
+  input.push(record('unknown-stage', '2026-09-02', { rank: 1, kind: '未確認' }));
+  input.push(record('normal-final', '2026-09-02', { rank: 1, kind: '決勝' }));
+  input.push(record('qualifier', '2026-09-02', { rank: 1, vrs: 7 }));
+  assert.deepEqual(highlighted(model()(input)), []);
+});
+
+test('Practiceやスキン大会の分類を賞金決勝TOP3へ取り違えない', () => {
+  const catalog = [category('practice', { series: 'fncs', subtype: 'fncs-division-1-practice' }),
+    category('skin', { series: 'skin-cup', subtype: 'skin-cup' })];
+  const input = [cashRecord('practice-as-cash', '2026-09-01', null, { rank: 1 }, 'practice'),
+    record('practice-kind', '2026-09-01', { kind: 'Practice', rank: 1 }, 'practice'),
+    record('skin-as-cash', '2026-09-02', { kind: '賞金決勝', rank: 2 }, 'skin'),
+    skinRecord('skin-kind', '2026-09-03', { round: 'スキン大会 / 参加', rank: 1 }, 'skin')];
+  assert.deepEqual(highlighted(model(catalog)(input)), []);
+});
+
+test('累計個人賞金は$1,000・$5,000・$10,000に到達した日だけを抽出する', () => {
+  const input = [cashRecord('before', '2026-09-01', 999.99), cashRecord('one-thousand', '2026-09-02', 0.01),
+    cashRecord('still-under-five', '2026-09-03', 3999.99), cashRecord('five-thousand', '2026-09-04', 0.01),
+    cashRecord('ten-thousand', '2026-09-05', 5000), cashRecord('after', '2026-09-06', 1)];
   const rows = model()(input);
-  assert.ok(!has(rows, 'baseline', reasons.best));
-  for (const id of ['a-better', 'b-better', 'later-best']) assert.ok(has(rows, id, reasons.best));
-  for (const id of ['same', 'worse']) assert.ok(!has(rows, id, reasons.best));
+  for (const [id, amount] of [['one-thousand', 1000], ['five-thousand', 5000], ['ten-thousand', 10000]]) {
+    assert.deepEqual(rows.find(item => item.record.id === id).reasons, [reasons.milestone(amount)]);
+  }
+  assert.deepEqual(rows.find(item => item.record.id === 'still-under-five').reasons, []);
+  assert.deepEqual(rows.find(item => item.record.id === 'after').reasons, []);
+  assert.equal(rows.at(-1).cumulative, 10001);
+});
+
+test('一度に複数の節目を超えても同じ戦績は1件、より大きい累計の節目にも対応する', () => {
+  const input = [cashRecord('large-first', '2026-09-01', 12000, { rank: 1 }),
+    cashRecord('larger', '2026-09-02', 88000), cashRecord('after', '2026-09-03', 1)];
+  const rows = model()(input);
+  const first = rows.find(item => item.record.id === 'large-first');
+  assert.equal(rows.filter(item => item.record.id === 'large-first').length, 1);
+  assert.deepEqual(new Set(first.reasons), new Set([reasons.cash, reasons.champion, reasons.milestone(1000), reasons.milestone(5000), reasons.milestone(10000)]));
+  assert.deepEqual(rows.find(item => item.record.id === 'larger').reasons, [reasons.milestone(50000), reasons.milestone(100000)]);
+  assert.deepEqual(rows.find(item => item.record.id === 'after').reasons, []);
+  assert.ok(rows.every(item => new Set(item.reasons).size === item.reasons.length));
+});
+
+test('同日に節目を超えた場合はその日の現金獲得記録だけに付け、時刻不明の順序を作らない', () => {
+  const input = [cashRecord('previous', '2026-09-01', 900), cashRecord('cash-b', '2026-09-02', 60),
+    record('no-cash', '2026-09-02', { vrs: 8 }), cashRecord('cash-a', '2026-09-02', 40)];
+  const rows = model()(input);
+  for (const id of ['cash-a', 'cash-b']) {
+    assert.ok(has(rows, id, reasons.milestone(1000)));
+    assert.equal(rows.find(item => item.record.id === id).cumulative, 1000);
+  }
+  assert.deepEqual(rows.find(item => item.record.id === 'no-cash').reasons, []);
   assert.deepEqual(model()([...input].reverse()).map(item => ({ id: item.record.id, reasons: item.reasons })),
-    rows.map(item => ({ id: item.record.id, reasons: item.reasons })), 'Source insertion order cannot create intraday progress');
+    rows.map(item => ({ id: item.record.id, reasons: item.reasons })), 'Input order cannot invent an intraday threshold-crossing record');
 });
 
-test('順位比較では5分類軸とラウンド区分をすべて区別する', () => {
-  const catalog = [category('A'), category('series', { series: 'cash-cup' }), category('mode', { mode: 'zero-build' }),
-    category('subtype', { subtype: 'fncs-division-1-practice' }), category('team', { team: 'duo' }), category('platform', { platform: 'console' })];
-  const input = [record('baseline', '2026-09-01', { rank: 200 })];
-  for (const axis of ['series', 'mode', 'subtype', 'team', 'platform']) {
-    input.push(record(axis + '-baseline', '2026-09-02', { rank: 100 }, axis));
-    input.push(record(axis + '-improved', '2026-09-03', { rank: 50 }, axis));
-  }
-  input.push(record('final-baseline', '2026-09-02', { rank: 10, kind: '決勝' }));
-  input.push(record('cash-final-baseline', '2026-09-03', { rank: 5, kind: '賞金決勝' }));
-  const rows = model(catalog)(input);
-  for (const axis of ['series', 'mode', 'subtype', 'team', 'platform']) {
-    assert.ok(!has(rows, axis + '-baseline', reasons.best), axis + ' must have an independent baseline');
-    assert.ok(has(rows, axis + '-improved', reasons.best));
-  }
-  for (const id of ['final-baseline', 'cash-final-baseline']) assert.ok(!has(rows, id, reasons.best));
-});
-
-test('未確認の大会分類・順位・区分は自己最高として推測せず、表示用記録を保持する', () => {
-  const unknownCatalog = [category('unknown', { mode: 'unknown' })];
-  const input = [record('unclassified-first', '2026-09-01', { rank: 100 }, 'unknown'),
-    record('unclassified-later', '2026-09-02', { rank: 1 }, 'unknown'),
-    record('null-rank', '2026-09-03', { rank: null }, 'unknown')];
-  const rows = model(unknownCatalog)(input);
-  assert.equal(rows.length, input.length);
-  assert.ok(rows.every(item => !item.reasons.includes(reasons.best)));
-  const missingRanks = [record('missing', '2026-09-01', { rank: null, kind: null }), record('positive', '2026-09-02', { rank: 2, kind: null })];
-  assert.ok(model()(missingRanks).every(item => !item.reasons.includes(reasons.best)));
-});
-
-test('大会カタログに文字列があっても選択肢にないタグは未確認として順位比較から外す', () => {
-  const validAxes = fixtureAxes([category('A')]);
-  for (const axis of Object.keys(baseTaxonomy)) {
-    const catalog = [category('A', { [axis]: 'not-in-axis-options' })];
-    const input = [record('baseline', '2026-09-01', { rank: 100 }), record('later', '2026-09-02', { rank: 1 })];
-    const rows = model(catalog, [], validAxes)(input);
-    assert.equal(rows.length, input.length, axis + ': the original records remain visible');
-    assert.ok(rows.every(item => !item.reasons.includes(reasons.best)), axis + ': invalid taxonomy is not a comparison group');
-  }
-});
-
-test('日付不明・数値未確認でも停止せず、日付不明の初日・順位更新を主張しない', () => {
-  const input = [record('undated-z', null, { rank: null, points: null, kills: null, vrs: null, prize: null }),
-    record('known', '2026-09-01'), record('undated-a', '', { rank: 1, vrs: 1, kind: '賞金決勝', prize: 50 })];
+test('デュオは確認済み個人分のみ、予選・スキン・未確認・配分不明は累計へ加算しない', () => {
+  const duo = { player: 'Fixture Player / Partner', players: ['Fixture Player', 'Partner'], kind: '賞金決勝', prize: 1200, prizePerPlayer: 600 };
+  const input = [record('duo', '2026-09-01', duo),
+    record('qualifying', '2026-09-02', { prize: 1000, vrs: 9 }),
+    record('skin', '2026-09-02', { kind: 'スキン大会', prize: 1000 }),
+    record('cosmetic', '2026-09-02', { kind: 'コスメ大会', prize: 1000 }),
+    record('unverified', '2026-09-02', { kind: '賞金決勝', prize: 1000, verified: false }),
+    record('unknown-share', '2026-09-02', { ...duo, prizePerPlayer: null }),
+    record('overallocated-share', '2026-09-02', { ...duo, prizePerPlayer: 700 }),
+    record('unknown-prize', '2026-09-02', { kind: '賞金決勝', prize: null }),
+    cashRecord('individual-four-hundred', '2026-09-03', 400)];
   const rows = model()(input);
-  assert.deepEqual(rows.map(item => item.record.id), ['known', 'undated-a', 'undated-z']);
-  for (const id of ['undated-a', 'undated-z']) {
-    const reasonsForRecord = rows.find(item => item.record.id === id).reasons;
-    assert.ok(!reasonsForRecord.includes(reasons.first));
-    assert.ok(!reasonsForRecord.includes(reasons.cash));
-    assert.ok(!reasonsForRecord.includes(reasons.region('ME')));
-    assert.ok(!reasonsForRecord.includes(reasons.best));
-  }
-  assert.ok(has(rows, 'undated-a', reasons.vr));
-  assert.equal(rows.at(-1).cumulative, 50);
+  assert.equal(rows.find(item => item.record.id === 'duo').cash, 600);
+  assert.ok(!has(rows, 'duo', reasons.milestone(1000)), 'A team total cannot trigger a personal milestone');
+  assert.ok(rows.filter(item => !['duo', 'individual-four-hundred'].includes(item.record.id)).every(item => item.cash === 0 && item.reasons.length === 0));
+  assert.equal(rows.at(-1).cumulative, 1000);
+  assert.ok(has(rows, 'individual-four-hundred', reasons.milestone(1000)));
+});
+
+test('スキン報酬は確認済みの明示的な獲得表示の初日にだけ掲載し現金には加算しない', () => {
+  const input = [skinRecord('participation', '2026-08-31', { round: 'スキン大会 / 参加', rank: 1 }),
+    skinRecord('reward-b', '2026-09-01', { round: 'Round 1 / スキン獲得', prize: 1000 }),
+    skinRecord('reward-a', '2026-09-01', { kind: 'コスメ大会', round: 'スキン獲得' }),
+    skinRecord('later-reward', '2026-09-02')];
+  const rows = model()(input);
+  for (const id of ['reward-a', 'reward-b']) assert.deepEqual(rows.find(item => item.record.id === id).reasons, [reasons.skin]);
+  for (const id of ['participation', 'later-reward']) assert.deepEqual(rows.find(item => item.record.id === id).reasons, []);
+  assert.ok(rows.every(item => item.cash === 0 && item.cumulative === 0));
+});
+
+test('スキン参加や報酬条件の説明、対象外・未獲得・未確認は獲得と推測しない', () => {
+  const input = ['スキン大会', 'スキン獲得対象外', 'スキン未獲得', 'スキン獲得未確認', 'スキン獲得条件', 'スキン獲得を争う', 'スキン獲得対象', '上位100名スキン獲得'].map((round, index) =>
+    skinRecord('not-earned-' + index, '2026-09-01', { round, rank: 1 }));
+  input.push(skinRecord('unverified-reward', '2026-09-01', { verified: false }));
+  input.push(skinRecord('note-only-reward', '2026-09-01', { round: 'Round 1', note: 'スキン獲得対象 / スキン報酬獲得確認済み' }));
+  input.push(record('wrong-kind', '2026-09-01', { round: 'スキン獲得' }));
+  assert.deepEqual(highlighted(model()(input)), []);
+});
+
+test('過去シーズンの初賞金・初スキン・累計を履歴から判定し選択シーズンの先頭で作り直さない', () => {
+  const previousCash = cashRecord('previous-cash', '2026-06-01', 900);
+  const previousSkin = skinRecord('previous-skin', '2026-06-02');
+  const currentCash = cashRecord('current-cash', '2026-09-01', 100);
+  const currentSkin = skinRecord('current-skin', '2026-09-02');
+  const currentLater = cashRecord('current-later', '2026-09-03', 10);
+  const history = [previousCash, previousSkin, currentCash, currentSkin, currentLater];
+  const rows = model()([currentCash, currentSkin, currentLater], history);
+  assert.deepEqual(rows.map(item => item.record.id), ['current-cash', 'current-skin', 'current-later']);
+  assert.deepEqual(rows[0].reasons, [reasons.milestone(1000)]);
+  assert.ok(rows.every(item => !item.reasons.includes(reasons.cash) && !item.reasons.includes(reasons.skin)));
+  assert.equal(rows.at(-1).cumulative, 110, 'Selected-period graph balances continue to exclude other seasons');
+});
+
+test('日付不明の初賞金・初スキン・到達日を主張せず、確認済み賞金決勝の順位は保持する', () => {
+  const input = [cashRecord('undated-cash', '', 1000, { rank: 1 }),
+    skinRecord('undated-skin', null), skinRecord('dated-skin', '2026-09-01'), cashRecord('dated', '2026-09-01', 500),
+    cashRecord('later', '2026-09-02', 500), cashRecord('invalid-date', '2026-02-30', null, { rank: null }),
+    record('missing-fields', null, { rank: null, points: null, kills: null, vrs: null, prize: null })];
+  const rows = model()(input);
+  assert.deepEqual(rows.find(item => item.record.id === 'undated-cash').reasons, [reasons.champion]);
+  assert.deepEqual(rows.find(item => item.record.id === 'undated-skin').reasons, []);
+  assert.deepEqual(rows.find(item => item.record.id === 'invalid-date').reasons, []);
+  assert.deepEqual(rows.find(item => item.record.id === 'dated-skin').reasons, []);
+  assert.ok(rows.every(item => !item.reasons.includes(reasons.cash) && !item.reasons.includes(reasons.skin) && !item.reasons.some(reason => reason.includes('累計個人賞金'))),
+    'An undated earned reward makes its first day or cumulative crossing date unprovable');
+  assert.equal(rows.at(-1).cumulative, 2000);
   assert.deepEqual(model()([]), []);
+});
+
+test('日付不明の通常戦績だけなら確認済み現金やスキン報酬の初日判定を妨げない', () => {
+  const input = [record('undated-qualifier', null, { vrs: 4 }),
+    cashRecord('dated-cash', '2026-09-01', 1000), skinRecord('dated-skin', '2026-09-02')];
+  const rows = model()(input);
+  assert.ok(has(rows, 'dated-cash', reasons.cash));
+  assert.ok(has(rows, 'dated-cash', reasons.milestone(1000)));
+  assert.ok(has(rows, 'dated-skin', reasons.skin));
+  assert.deepEqual(rows.find(item => item.record.id === 'undated-qualifier').reasons, []);
 });
 
 test('実データ全選手の年表は元の戦績IDを保ち、既存の個人賞金検証値と累計が一致する', () => {
