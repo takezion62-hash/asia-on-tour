@@ -377,35 +377,44 @@
       const sort=(a,b)=>(journeyDate(a)||'9999').localeCompare(journeyDate(b)||'9999')||String(a.id||'').localeCompare(String(b.id||''));
       const ordered=events.filter(e=>e&&typeof e==='object').slice().sort(sort);
       const past=history.filter(e=>e&&typeof e==='object').slice().sort(sort);
-      const reasons=new Map(),best=new Map(),visited=new Set();
-      const cash=e=>{const value=individualPrize(e);return Number.isFinite(value)?Math.max(0,Math.round(value*100)):0};
-      const rankKey=e=>{
-        const t=classifyTournamentRecord(e),axes=['series','mode','subtype','team','platform'];
-        return Number.isInteger(e.rank)&&e.rank>0&&e.kind&&!['未確認','未分類'].includes(e.kind)&&axes.every(k=>t[k]&&t[k]!=='unknown'&&tournamentAxes.find(a=>a.key===k)?.options.some(o=>o.id===t[k]))?JSON.stringify([e.kind,...axes.map(k=>t[k])]):null;
-      };
-      const firstDate=journeyDate(past.find(e=>journeyDate(e)));
-      const firstCash=journeyDate(past.find(e=>journeyDate(e)&&cash(e)>0));
+      const reasons=new Map();
+      const cash=e=>{const cents=Math.round(individualPrize(e)*100);return Number.isFinite(cents)?Math.max(0,cents):0};
+      // A cosmetic event is not proof that a reward was earned. Only an explicit
+      // obtained-skin label counts; placement/VR and reward rules are not inferred.
+      const skinReward=e=>e.verified===true&&['スキン大会','コスメ大会'].includes(e.kind)&&String(e.round||'').split(/[\/／·・|｜]/u).some(part=>/^(?:スキン|スキン報酬)獲得(?:済み)?$/.test(part.trim()));
+      const cashDatesKnown=past.every(e=>cash(e)===0||journeyDate(e));
+      const skinDatesKnown=past.every(e=>!skinReward(e)||journeyDate(e));
+      const firstCash=cashDatesKnown?journeyDate(past.find(e=>cash(e)>0)):null;
+      const firstSkin=skinDatesKnown?journeyDate(past.find(skinReward)):null;
+      let lifetimeCents=0;
       for(let i=0;i<past.length;){
         const date=journeyDate(past[i]);let end=i+1;
         while(end<past.length&&journeyDate(past[end])===date)end++;
-        const dailyBest=new Map();
-        for(const e of past.slice(i,end)){
-          const labels=[];
-          if(date){
-            if(date===firstDate)labels.push('サイト掲載初日の記録');
-            if(date===firstCash&&cash(e)>0)labels.push('サイト掲載初の賞金獲得日');
-            if(regions.includes(e.region)&&!visited.has(e.region))labels.push(`${e.region}の初掲載日`);
-            const key=rankKey(e);
-            if(key){
-              if(best.has(key)&&e.rank<best.get(key))labels.push('同区分の最高順位更新');
-              dailyBest.set(key,Math.min(dailyBest.get(key)??Infinity,e.rank));
+        const batch=past.slice(i,end),previousCents=lifetimeCents;
+        if(date)lifetimeCents+=batch.reduce((sum,e)=>sum+cash(e),0);
+        const milestones=[];
+        if(date&&cashDatesKnown){
+          // $1k, $5k, $10k, $50k, $100k, ...; integer cents avoid rounding drift.
+          for(let unit=100000;Number.isSafeInteger(unit)&&unit<=lifetimeCents;unit*=10){
+            for(const multiple of [1,5]){
+              const target=unit*multiple;
+              if(Number.isSafeInteger(target)&&previousCents<target&&lifetimeCents>=target)milestones.push(`掲載記録の累計個人賞金 $${format(target/100)}到達`);
             }
           }
-          if(typeof e.vrs==='number'&&Number.isFinite(e.vrs)&&e.vrs>0)labels.push('VR獲得');
+        }
+        for(const e of batch){
+          const labels=[];
+          if(date){
+            if(date===firstCash&&cash(e)>0)labels.push('サイト掲載初の賞金獲得日');
+            if(cash(e)>0)labels.push(...milestones);
+            if(date===firstSkin&&skinReward(e))labels.push('サイト掲載初のスキン報酬獲得日');
+          }
+          if(e.verified===true&&e.kind==='賞金決勝'&&Number.isInteger(e.rank)&&e.rank>=1&&e.rank<=3){
+            const t=classifyTournamentRecord(e);
+            if(!/practice/i.test(t.subtype||'')&&t.series!=='skin-cup')labels.push(e.rank===1?'賞金決勝で総合優勝':'賞金決勝で総合TOP3');
+          }
           reasons.set(e.id,labels);
         }
-        for(const e of past.slice(i,end))if(date&&regions.includes(e.region))visited.add(e.region);
-        for(const [key,rank] of dailyBest)best.set(key,Math.min(best.get(key)??Infinity,rank));
         i=end;
       }
       let cents=0;
@@ -448,7 +457,7 @@
     function journeySection(info){
       if(journeyState.name!==info.name)journeyState={name:info.name,mode:'all',limit:30};
       const rows=journeyRows(info);
-      return `<section class="profile-journey" id="profile-journey" aria-labelledby="journey-title"><header class="journey-heading"><div><p class="profile-kicker">OVERSEAS JOURNEY</p><h2 id="journey-title" tabindex="-1">海外遠征<span>年表</span></h2><p>${escape(seasonScope())} · 古い日付から振り返る</p></div><a href="#profile-history-title" data-journey-history class="journey-history-jump">従来の大会履歴へ ↓</a></header><p class="journey-disclaimer">初日・初地域・最高順位は、全期間のサイト掲載記録上の出来事です。実際の初挑戦や生涯記録を意味しません。同日の前後関係は未確認です。</p>${journeyChart(rows)}<div class="journey-controls" role="group" aria-label="年表の表示モード">${[['all','全戦績'],['highlights','ハイライト'],['prize','賞金獲得']].map(([mode,label])=>`<button type="button" id="journey-mode-${mode}" data-journey-mode="${mode}" aria-pressed="${journeyState.mode===mode}" aria-controls="journey-list">${label}</button>`).join('')}</div><p class="journey-comparison-note">最高順位更新は、同じシリーズ・ゲーム形式・大会細分類・人数・機種条件・区分の過去日と比較します。分類や順位が未確認の記録は比較しません。</p><p id="journey-count" class="journey-count" aria-live="polite"></p><ol id="journey-list" class="journey-list" tabindex="-1"></ol><button id="journey-more" class="btn ghost journey-more" type="button" data-journey-more hidden>さらに30件表示</button></section>`;
+      return `<section class="profile-journey" id="profile-journey" aria-labelledby="journey-title"><header class="journey-heading"><div><p class="profile-kicker">OVERSEAS JOURNEY</p><h2 id="journey-title" tabindex="-1">海外遠征<span>年表</span></h2><p>${escape(seasonScope())} · 古い日付から振り返る</p></div><a href="#profile-history-title" data-journey-history class="journey-history-jump">従来の大会履歴へ ↓</a></header><p class="journey-disclaimer">初賞金・初スキン報酬・賞金の節目は、全期間のサイト掲載記録上の出来事です。実際の初獲得や生涯記録を意味しません。同日の前後関係は未確認です。</p>${journeyChart(rows)}<div class="journey-controls" role="group" aria-label="年表の表示モード">${[['all','全戦績'],['highlights','ハイライト'],['prize','賞金獲得']].map(([mode,label])=>`<button type="button" id="journey-mode-${mode}" data-journey-mode="${mode}" aria-pressed="${journeyState.mode===mode}" aria-controls="journey-list">${label}</button>`).join('')}</div><p class="journey-comparison-note">初賞金・賞金決勝の総合TOP3・累計個人賞金の節目（$1,000・$5,000・$10,000など）・初スキン報酬を掲載します。節目は同日分をまとめ、日付不明の獲得がある場合は初獲得日や到達日を断定しません。VR・予選通過・Practice入賞だけでは掲載しません。</p><p id="journey-count" class="journey-count" aria-live="polite"></p><ol id="journey-list" class="journey-list" tabindex="-1"></ol><button id="journey-more" class="btn ghost journey-more" type="button" data-journey-more hidden>さらに30件表示</button></section>`;
     }
     function renderJourney(info=profileInfo(currentView.name)){
       if(!info||!$('#journey-list'))return;
