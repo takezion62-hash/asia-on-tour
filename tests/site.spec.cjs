@@ -24,6 +24,7 @@ test('ダッシュボード・全賞金ランキングをJSONの独立集計と�
   await expect(page.locator('#home-earnings-sum')).toHaveText(money(report.total));
   await page.getByRole('button', { name: 'プレイヤー名鑑', exact: true }).click();
   await expect(page.locator('#player-earnings-sum')).toHaveText(money(report.total));
+  while (await page.locator('#ranking-more').isVisible()) await page.locator('#ranking-more').click();
   const ranking = await page.locator('#player-earnings-leaders .earner').evaluateAll(elements => elements.map(e => ({ name: e.dataset.openProfile, amount: e.querySelector('.amount').textContent, events: Number(e.textContent.match(/賞金獲得 (\d+)件/)[1]) })));
   expect(ranking).toEqual(report.ranking.map(p => ({ name: p.name, amount: money(p.total), events: p.events })));
   await expect(page.getByRole('alert')).toHaveCount(0);

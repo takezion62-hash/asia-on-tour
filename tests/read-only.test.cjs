@@ -150,7 +150,7 @@ function boot(source = script, { hash = '', search = '?season=all' } = {}) {
     }
   };
   const sandbox = {
-    document, window,
+    document, window, AsiaRankings: require('../rankings.js'),
     URL: BrowserURL, URLSearchParams, Blob, setTimeout: callback => { callback(); return 1; }
   };
   Object.defineProperty(sandbox, 'location', { get: () => location });
@@ -748,6 +748,8 @@ test('the complete individual prize ranking keeps its original order, amounts an
   const expected = [...totals.values()].sort((a, b) => b.total - a.total || b.events - a.events || a.name.localeCompare(b.name, 'ja'));
   assert.equal(expected.reduce((sum, player) => sum + player.total, 0), summarize(data).total);
   const app = boot();
+  app.navigate('players');
+  while (!app.get('ranking-more').hidden) app.click(new Element('button', 'data-ranking-more=""'));
   for (const [id, limit] of [['home-earnings-leaders', 5], ['player-earnings-leaders', expected.length]]) {
     const rows = [...app.get(id).innerHTML.matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/g)]
       .filter(([, attributes]) => /data-open-profile=/.test(attributes));
