@@ -159,7 +159,7 @@
     {
       "name": "あくりあ",
       "initials": "AQ",
-      "desc": "9/5 NAW Reload ZB Duos Cash CupでReoと3位・各$200、9/22 NAW Solo VCと10/3 ME Solo Reload VCで各$100。確認済み個人賞金$400",
+      "desc": "9/5 NAW Reload ZB Duos Cash CupでReoと3位・各$200、9/22 NAW Solo VCと10/3 ME Solo Reload VCで各$100。確認済み個人賞金$400。10/4 OCE Reload ZB Duos CC予選14位→10/9決勝19位（huggyfvと）",
       "accent": "pink"
     },
     {
@@ -201,7 +201,7 @@
     {
       "name": "なずな",
       "initials": "NZ",
-      "desc": "10/17 NAW Solo Reload VC予選37位・339pt・41キル・1VR（Tracker表示 TsV NazuSimpleǃ）",
+      "desc": "10/17 NAW Solo Reload VC予選37位・339pt・41キル・1VR（Tracker表示 TsV NazuSimpleǃ）。9/6 EU Reload ZB Duos CC予選20位→9/12決勝11位（tantanと）",
       "accent": "cyan"
     },
     {
@@ -225,7 +225,7 @@
     {
       "name": "tantan",
       "initials": "TT",
-      "desc": "10/17 NAW Solo Reload VC予選103位・324pt・14キル・1VR（Tracker表示 FTW KINGALING ʚɞ）",
+      "desc": "10/17 NAW Solo Reload VC予選103位・324pt・14キル・1VR（Tracker表示 FTW KINGALING ʚɞ）。9/6 EU Reload ZB Duos CC予選20位→9/12決勝11位（なずなと）",
       "accent": "violet"
     },
     {
@@ -255,13 +255,13 @@
     {
       "name": "Asuka",
       "initials": "AK",
-      "desc": "9/8 NAW FNCS Div1 Practiceでhuggyfvと予選29位→9/13決勝38位",
+      "desc": "9/8 NAW FNCS Div1 Practiceでhuggyfvと予選29位→9/13決勝38位。10/5 ME Reload ZB Duos CC予選10位→10/10決勝17位（Raitoと）",
       "accent": "violet"
     },
     {
       "name": "huggyfv",
       "initials": "HF",
-      "desc": "9/8 NAW FNCS Div1 PracticeでAsukaと予選29位→9/13決勝38位。ME参加のhuggyとの同一性は未確認",
+      "desc": "9/8 NAW FNCS Div1 PracticeでAsukaと予選29位→9/13決勝38位。ME参加のhuggyとの同一性は未確認。10/4 OCE Reload ZB Duos CC予選14位→10/9決勝19位（あくりあと）",
       "accent": "cyan"
     },
     {
@@ -495,7 +495,7 @@
     {
       "name": "ろみぃ",
       "initials": "RM",
-      "desc": "10/18 OCE Reload ZB Duos Cash Cup予選4位・559pt・3VR（Reoとデュオ）。Tracker名は「eniyan duduー」",
+      "desc": "10/18 OCE Reload ZB Duos Cash Cup予選4位・559pt・3VR（Reoとデュオ）。Tracker名は「eniyan duduー」。10/4 OCE Reload ZB Duos CC予選15位→10/9決勝11位・1VR（Haganeと）",
       "accent": "cyan"
     },
     {
@@ -1199,6 +1199,18 @@
       "initials": "MT",
       "desc": "2026/10/25 NAW HamiKuma Cup BR トリオ 57位・スキン獲得。Tracker名：見てる見えてるこっちを見てる",
       "accent": "violet"
+    },
+    {
+      "name": "Hagane",
+      "initials": "HG",
+      "desc": "10/4 OCE Reload ZB Duos CCでろみぃと予選15位・534pt、10/9決勝11位・185pt・1VR。Tracker名「神里綾華とはがねZbwʕᵒᴥᵒʔ」。10/4 OCE Reload ZB Duos CC予選15位→10/9決勝11位・1VR（ろみぃと）",
+      "accent": "cyan"
+    },
+    {
+      "name": "Raito",
+      "initials": "RT",
+      "desc": "10/5 ME Reload ZB Duos CCでAsukaと予選10位・572pt・125キル、10/10決勝17位・117pt。。10/5 ME Reload ZB Duos CC予選10位→10/10決勝17位（Asukaと）",
+      "accent": "violet"
     }
   ],
   "confirmedAliases": {
@@ -1287,7 +1299,8 @@
       "nlt かぶきんvsごんたまん"
     ],
     "ろみぃ": [
-      "eniyan duduー"
+      "eniyan duduー",
+      "INNMU Reo"
     ],
     "Karf": [
       "faction karf 19ǃ"
@@ -1443,6 +1456,9 @@
     ],
     "alpha fvǃ": [
       "alphaﾠfvǃ"
+    ],
+    "Hagane": [
+      "神里綾華とはがねZbwʕᵒᴥᵒʔ"
     ]
   }
 }
