@@ -145,6 +145,10 @@
           "label": "Champion Aphrodite FNCS Cup BR"
         },
         {
+          "id": "hamikuma-cup-battle-royale",
+          "label": "HamiKuma Cup Battle Royale"
+        },
+        {
           "id": "champion-teal-knight-fncs-cup-battle-royale",
           "label": "Champion Teal Knight FNCS Cup Battle Royale"
         }
@@ -161,6 +165,10 @@
         {
           "id": "duo",
           "label": "デュオ"
+        },
+        {
+          "id": "trio",
+          "label": "トリオ"
         },
         {
           "id": "unknown",
@@ -609,6 +617,34 @@
         {
           "text": "2026/10/13公開公式ルール Attachment CでOCE通常Battle Royale部門の100位以内にFNCS Teal Knightコスメ報酬。現金賞金と混同しない。",
           "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/champion-teal-knight-fncs-cup-chapter-7-season-4-official-rules"
+        }
+      ]
+    },
+    {
+      "id": "ch7s4-hamikuma-cup-battle-royale",
+      "name": "HamiKuma Cup Battle Royale",
+      "chapter": 7,
+      "season": 4,
+      "seasonId": "S42",
+      "sourceEventIds": [
+        "S42_HamiKumaCup",
+        "S42_HamiKumaCup_ME",
+        "S42_HamiKumaCup_NAW"
+      ],
+      "series": "skin-cup",
+      "mode": "battle-royale",
+      "subtype": "hamikuma-cup-battle-royale",
+      "team": "trio",
+      "platform": "cross-platform",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "2026/10/23公表の公式ルール2.2.1：通常Battle Royaleトリオ（Zero Build部門とは別）・最大11試合・コスメ報酬。Attachment CのME上位30・NAW上位60が対象。",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/hamikuma-cup-chapter-7-season-4-official-rules"
+        },
+        {
+          "text": "ユーザー提供Fortnite TrackerスクリーンショットにてME1組、NAW3組の各順位と試合スタッツを確認。",
+          "url": "https://fortnitetracker.com/events/epicgames_S42_HamiKumaCup_NAW"
         }
       ]
     }

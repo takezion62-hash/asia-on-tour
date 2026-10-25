@@ -559,7 +559,7 @@
     "id": "s42-me-reload-solo-final-20261017-buriburi",
     "date": "2026-10-17",
     "region": "ME",
-    "player": "ぶりぶりざえもん.USA",
+    "player": "Melon",
     "playerRaw": "好きじゃなくなったらすぐ言ってね",
     "event": "Solo Reload Victory Cup",
     "round": "Event 4 · Round 2 / 賞金決勝",
@@ -787,7 +787,7 @@
     "id": "s42-me-reload-solo-qual-20261017-buriburi",
     "date": "2026-10-17",
     "region": "ME",
-    "player": "ぶりぶりざえもん.USA",
+    "player": "Melon",
     "playerRaw": "好きじゃなくなったらすぐ言ってね",
     "event": "Solo Reload Victory Cup",
     "round": "Event 4 · Round 1 / 予選",
@@ -2086,7 +2086,7 @@
     "id": "s42-naw-reload-solo-final-20261003-sukijanaku",
     "date": "2026-10-03",
     "region": "NAW",
-    "player": "ぶりぶりざえもん.USA",
+    "player": "Melon",
     "playerRaw": "好きじゃなくなったらすぐ言ってね",
     "event": "Solo Reload Victory Cup",
     "round": "Event 1 · Round 2 / 賞金決勝",
@@ -2439,7 +2439,7 @@
     "id": "s42-naw-solo-vc-final-20260914-buriburi-usa",
     "date": "2026-09-14",
     "region": "NAW",
-    "player": "ぶりぶりざえもん.USA",
+    "player": "Melon",
     "playerRaw": "ぶりぶりざえもん.USA",
     "event": "Solo Victory Cup Battle Royale",
     "round": "Event 2 · Round 2 / 賞金決勝",
@@ -5431,7 +5431,7 @@
     "id": "s42-me-reload-solo-qual-20261024-buriburizaemon-usa",
     "date": "2026-10-24",
     "region": "ME",
-    "player": "ぶりぶりざえもん.USA",
+    "player": "Melon",
     "playerRaw": "好きじゃなくなったらすぐ言ってね",
     "event": "Solo Reload Victory Cup",
     "round": "Event 5 · Round 1 / 予選突破",
@@ -5937,7 +5937,7 @@
     "id": "s42-me-reload-solo-final-20261024-buriburizaemon-usa",
     "date": "2026-10-24",
     "region": "ME",
-    "player": "ぶりぶりざえもん.USA",
+    "player": "Melon",
     "playerRaw": "好きじゃなくなったらすぐ言ってね",
     "event": "Solo Reload Victory Cup",
     "round": "Event 5 · Round 2 / 賞金決勝",
@@ -8347,5 +8347,169 @@
     "chapter": 7,
     "season": 4,
     "tournamentId": "ch7s4-solo-reload-victory-cup"
+  },
+  {
+    "id": "s42-me-hamikuma-br-trios-skin-20261025-ema-shxrkgoty-akishika",
+    "date": "2026-10-25",
+    "region": "ME",
+    "player": "えま / shxrkGOTY / NexF 秋鹿七緒",
+    "players": [
+      "えま",
+      "shxrkGOTY",
+      "NexF 秋鹿七緒"
+    ],
+    "playerRaw": "Twitter emaxcvz / shxrkGOTYㅤㅤ / NexF 秋鹿七緒",
+    "event": "HamiKuma Cup Battle Royale",
+    "round": "Session 1 / スキン獲得",
+    "rank": 21,
+    "points": 398,
+    "kills": 35,
+    "vrs": 1,
+    "prize": 0,
+    "kind": "スキン大会",
+    "source": "https://fortnitetracker.com/events/epicgames_S42_HamiKumaCup_ME",
+    "profiles": [
+      {
+        "name": "えま",
+        "url": "https://fortnitetracker.com/profile/all/Twitter%20emaxcvz/events?id=40ac85b1-4d01-4564-af20-3d2bce76dafa"
+      },
+      {
+        "name": "shxrkGOTY",
+        "url": "https://fortnitetracker.com/profile/all/shxrkGOTY%E3%85%A4%E3%85%A4/events?id=7a7e16d4-ac81-40d2-9b85-0223e81d1127"
+      },
+      {
+        "name": "NexF 秋鹿七緒",
+        "url": "https://fortnitetracker.com/profile/all/NexF%20%E7%A7%8B%E9%B9%BF%E4%B8%83%E7%B7%92/events?id=f5dff840-119a-4aee-9238-8e3a09a8c5f3"
+      }
+    ],
+    "verified": true,
+    "note": "ユーザー提供の2026/10/25 ME HamiKuma Cup Battle Royale (トリオ) Fortnite Tracker スクリーンショット：21位・398pt・9試合・1VR・35キル。ME通常BRトリオの上位30組にスキン報酬。現金賞金はないため$0。大会表示名：Twitter emaxcvz / shxrkGOTYㅤㅤ / NexF 秋鹿七緒。",
+    "seasonId": "S42",
+    "chapter": 7,
+    "season": 4,
+    "tournamentId": "ch7s4-hamikuma-cup-battle-royale"
+  },
+  {
+    "id": "s42-naw-hamikuma-br-trios-skin-20261025-kusachan-rurumaru-nijiirobeta",
+    "date": "2026-10-25",
+    "region": "NAW",
+    "player": "くさちゃん / るるまる 723. / にじいろベタ",
+    "players": [
+      "くさちゃん",
+      "るるまる 723.",
+      "にじいろベタ"
+    ],
+    "playerRaw": "GENIUS くさちゃんǃ / Moet るるまる 723. / Æ IGNITE.にじいろベタ",
+    "event": "HamiKuma Cup Battle Royale",
+    "round": "Session 1 / スキン獲得",
+    "rank": 46,
+    "points": 444,
+    "kills": 93,
+    "vrs": 0,
+    "prize": 0,
+    "kind": "スキン大会",
+    "source": "https://fortnitetracker.com/events/epicgames_S42_HamiKumaCup_NAW",
+    "profiles": [
+      {
+        "name": "くさちゃん",
+        "url": "https://fortnitetracker.com/profile/all/GENIUS%20%E3%81%8F%E3%81%95%E3%81%A1%E3%82%83%E3%82%93%C7%83/events?id=850c756b-65d9-4a2a-a0bd-82472d8d64a2"
+      },
+      {
+        "name": "るるまる 723.",
+        "url": "https://fortnitetracker.com/profile/all/Moet%20%E3%82%8B%E3%82%8B%E3%81%BE%E3%82%8B%20723./events?id=cd8576d4-096b-4b0d-91f0-0ed978ddd3c5"
+      },
+      {
+        "name": "にじいろベタ",
+        "url": "https://fortnitetracker.com/profile/all/%C3%86%20IGNITE.%E3%81%AB%E3%81%98%E3%81%84%E3%82%8D%E3%83%99%E3%82%BF/events?id=fa24325c-ff62-41f7-b2da-8e0400e132a8"
+      }
+    ],
+    "verified": true,
+    "note": "ユーザー提供の2026/10/25 NAW HamiKuma Cup Battle Royale (トリオ) Fortnite Tracker スクリーンショット：46位・444pt・10試合・0VR・93キル。NAW通常BRトリオの上位60組にスキン報酬。現金賞金はないため$0。大会表示名：GENIUS くさちゃんǃ / Moet るるまる 723. / Æ IGNITE.にじいろベタ。",
+    "seasonId": "S42",
+    "chapter": 7,
+    "season": 4,
+    "tournamentId": "ch7s4-hamikuma-cup-battle-royale"
+  },
+  {
+    "id": "s42-naw-hamikuma-br-trios-skin-20261025-hiro-fisker-kereyushi",
+    "date": "2026-10-25",
+    "region": "NAW",
+    "player": "ひろ / fisker / けれゆし",
+    "players": [
+      "ひろ",
+      "fisker",
+      "けれゆし"
+    ],
+    "playerRaw": "UC.ひろ / FCT ふぃすかーだゾ / hst-o スイドラください",
+    "event": "HamiKuma Cup Battle Royale",
+    "round": "Session 1 / スキン獲得",
+    "rank": 55,
+    "points": 435,
+    "kills": 57,
+    "vrs": 3,
+    "prize": 0,
+    "kind": "スキン大会",
+    "source": "https://fortnitetracker.com/events/epicgames_S42_HamiKumaCup_NAW",
+    "profiles": [
+      {
+        "name": "ひろ",
+        "url": "https://fortnitetracker.com/profile/all/UC.%E3%81%B2%E3%82%8D/events?id=2c9f2338-1150-494b-829d-e21b3f9e541d"
+      },
+      {
+        "name": "fisker",
+        "url": "https://fortnitetracker.com/profile/all/FCT%20%E3%81%B5%E3%81%83%E3%81%99%E3%81%8B%E3%83%BC%E3%81%A0%E3%82%BE/events?id=748984f0-920d-4e2b-a4de-9a671ae93124"
+      },
+      {
+        "name": "けれゆし",
+        "url": "https://fortnitetracker.com/profile/all/hst-o%20%E3%82%B9%E3%82%A4%E3%83%89%E3%83%A9%E3%81%8F%E3%81%A0%E3%81%95%E3%81%84/events?id=bcfe0469-36d1-49b8-a1a2-49cc99c96532"
+      }
+    ],
+    "verified": true,
+    "note": "ユーザー提供の2026/10/25 NAW HamiKuma Cup Battle Royale (トリオ) Fortnite Tracker スクリーンショット：55位・435pt・11試合・3VR・57キル。NAW通常BRトリオの上位60組にスキン報酬。現金賞金はないため$0。大会表示名：UC.ひろ / FCT ふぃすかーだゾ / hst-o スイドラください。",
+    "seasonId": "S42",
+    "chapter": 7,
+    "season": 4,
+    "tournamentId": "ch7s4-hamikuma-cup-battle-royale"
+  },
+  {
+    "id": "s42-naw-hamikuma-br-trios-skin-20261025-minto-alpha-miteru",
+    "date": "2026-10-25",
+    "region": "NAW",
+    "player": "みんと / alpha fvǃ / 見てる見えてるこっちを見てる",
+    "players": [
+      "みんと",
+      "alpha fvǃ",
+      "見てる見えてるこっちを見てる"
+    ],
+    "playerRaw": "ptt みんと我の屁は温泉卵臭 / alphaﾠfvǃ / 見てる見えてるこっちを見てる",
+    "event": "HamiKuma Cup Battle Royale",
+    "round": "Session 1 / スキン獲得",
+    "rank": 57,
+    "points": 434,
+    "kills": 53,
+    "vrs": 1,
+    "prize": 0,
+    "kind": "スキン大会",
+    "source": "https://fortnitetracker.com/events/epicgames_S42_HamiKumaCup_NAW",
+    "profiles": [
+      {
+        "name": "みんと",
+        "url": "https://fortnitetracker.com/profile/all/ptt%20%E3%81%BF%E3%82%93%E3%81%A8%E6%88%91%E3%81%AE%E5%B1%81%E3%81%AF%E6%B8%A9%E6%B3%89%E5%8D%B5%E8%87%AD/events?id=44bf39ef-281e-40b7-bd2a-81d2f019f39c"
+      },
+      {
+        "name": "alpha fvǃ",
+        "url": "https://fortnitetracker.com/profile/all/alpha%EF%BE%A0fv%C7%83/events?id=6cb2ceee-2007-4811-bfaf-58505bd6d588"
+      },
+      {
+        "name": "見てる見えてるこっちを見てる",
+        "url": "https://fortnitetracker.com/profile/all/%E8%A6%8B%E3%81%A6%E3%82%8B%E8%A6%8B%E3%81%88%E3%81%A6%E3%82%8B%E3%81%93%E3%81%A3%E3%81%A1%E3%82%92%E8%A6%8B%E3%81%A6%E3%82%8B/events?id=c9b4d449-05ec-4e92-b485-31e37f7f401b"
+      }
+    ],
+    "verified": true,
+    "note": "ユーザー提供の2026/10/25 NAW HamiKuma Cup Battle Royale (トリオ) Fortnite Tracker スクリーンショット：57位・434pt・8試合・1VR・53キル。NAW通常BRトリオの上位60組にスキン報酬。現金賞金はないため$0。大会表示名：ptt みんと我の屁は温泉卵臭 / alphaﾠfvǃ / 見てる見えてるこっちを見てる。",
+    "seasonId": "S42",
+    "chapter": 7,
+    "season": 4,
+    "tournamentId": "ch7s4-hamikuma-cup-battle-royale"
   }
 ]
