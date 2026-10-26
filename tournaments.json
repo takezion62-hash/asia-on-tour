@@ -151,6 +151,10 @@
         {
           "id": "champion-teal-knight-fncs-cup-battle-royale",
           "label": "Champion Teal Knight FNCS Cup Battle Royale"
+        },
+        {
+          "id": "inoxtag-icon-cup-battle-royale",
+          "label": "Inoxtag Icon Cup Battle Royale"
         }
       ]
     },
@@ -645,6 +649,36 @@
         {
           "text": "ユーザー提供Fortnite TrackerスクリーンショットにてME1組、NAW3組の各順位と試合スタッツを確認。",
           "url": "https://fortnitetracker.com/events/epicgames_S42_HamiKumaCup_NAW"
+        }
+      ]
+    },
+    {
+      "id": "ch7s4-inoxtag-icon-cup-battle-royale",
+      "name": "Inoxtag Icon Cup Battle Royale",
+      "chapter": 7,
+      "season": 4,
+      "seasonId": "S42",
+      "sourceEventIds": [
+        "S42_InoxtagIconCup",
+        "S42_InoxtagIconCup_OCE",
+        "S42_InoxtagIconCup_ME",
+        "S42_InoxtagIconCup_NAC",
+        "S42_InoxtagIconCup_NAW"
+      ],
+      "series": "icon-cup",
+      "mode": "battle-royale",
+      "subtype": "inoxtag-icon-cup-battle-royale",
+      "team": "duo",
+      "platform": "cross-platform",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "2026-10-24公式ルール2.2.1：Battle Royaleのデュオ形式。Attachment Cに通常BRの獲得順位 OCE・ME上位80、NAC上位280、NAW上位120。現金賞金なし。",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/inoxtag-icon-cup-chapter-7-season-4-official-rules"
+        },
+        {
+          "text": "ユーザー提供のFortnite Trackerスクリーンショットで2026-10-25 OCE2組、2026-10-26 ME1組、NAC1組、NAW5組を確認",
+          "url": "https://fortnitetracker.com/events/epicgames_S42_InoxtagIconCup_NAW"
         }
       ]
     }
