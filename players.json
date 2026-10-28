@@ -445,12 +445,6 @@
       "accent": "pink"
     },
     {
-      "name": "Herb らずととりむ",
-      "initials": "RZ",
-      "desc": "10/17 NAW Solo Reload VC予選262位・304ptで決勝進出",
-      "accent": "cyan"
-    },
-    {
       "name": "ftw かぷしーなlcqǃǃ",
       "initials": "CP",
       "desc": "10/17 NAW Solo Reload VC予選286位・303ptで決勝進出",
@@ -473,12 +467,6 @@
       "initials": "SH",
       "desc": "10/17 NAW Solo Reload VC予選306位・301ptで決勝進出",
       "accent": "violet"
-    },
-    {
-      "name": "れすぶゆりるかいと",
-      "initials": "RK",
-      "desc": "10/17 NAW Solo Reload VC予選310位・301ptで決勝進出",
-      "accent": "pink"
     },
     {
       "name": "lixx",
@@ -719,12 +707,6 @@
       "initials": "ER",
       "desc": "8/1 ME Champion Aphrodite FNCS Cup Battle RoyaleでCelis やなぎさわつつ上等と38位・スキン獲得",
       "accent": "violet"
-    },
-    {
-      "name": "Т1 demuś 10ǃ",
-      "initials": "T1",
-      "desc": "8/1 EU Champion Aphrodite FNCS Cup Battle Royaleでひつじと515位・2VR・スキン獲得",
-      "accent": "cyan"
     },
     {
       "name": "ひつじ",
@@ -1005,7 +987,7 @@
     {
       "name": "Herb shxrkÿ 己",
       "initials": "HS",
-      "desc": "2026/10/24 NAC Solo Reload Victory Cup予選180位・311pt・20キルで決勝進出",
+      "desc": "2026/10/24 NAC Solo Reload Victory Cup予選180位・311pt・20キルで決勝進出。旧名義「Herb らずととりむ」：10/17 NAW Solo Reload VC予選262位・304ptで決勝進出",
       "accent": "cyan"
     },
     {
@@ -1017,7 +999,7 @@
     {
       "name": "Anastasyaǃ3",
       "initials": "AN",
-      "desc": "2026/10/24 NAC Solo Reload Victory Cup予選555位・289pt・28キルで決勝進出",
+      "desc": "2026/10/24 NAC Solo Reload Victory Cup予選555位・289pt・28キルで決勝進出。旧名義「Т1 demuś 10ǃ」：8/1 EU Champion Aphrodite FNCS Cup Battle Royaleでひつじと515位・2VR・スキン獲得",
       "accent": "violet"
     },
     {
@@ -1101,7 +1083,7 @@
     {
       "name": "AURA 後藤進平",
       "initials": "AU",
-      "desc": "2026/10/24 NAW Solo Reload Victory Cup予選219位・292pt・40キル・1VR。決勝進出",
+      "desc": "2026/10/24 NAW Solo Reload Victory Cup予選219位・292pt・40キル・1VR。決勝進出。旧名義「れすぶゆりるかいと」：10/17 NAW Solo Reload VC予選310位・301ptで決勝進出",
       "accent": "pink"
     },
     {
@@ -1573,6 +1555,15 @@
     ],
     "Pisco": [
       "infl 515"
+    ],
+    "Herb shxrkÿ 己": [
+      "Herb らずととりむ"
+    ],
+    "Anastasyaǃ3": [
+      "Т1 demuś 10ǃ"
+    ],
+    "AURA 後藤進平": [
+      "れすぶゆりるかいと"
     ]
   }
 }
