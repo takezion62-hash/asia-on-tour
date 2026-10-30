@@ -373,7 +373,7 @@
       "accent": "pink"
     },
     {
-      "name": "Zst まぐろいち",
+      "name": "まぐろいち",
       "initials": "MG",
       "desc": "9/13 NAW FNCS Practiceで各$50、10/3 NAW Solo Reload VCで$100獲得。Tracker別名義「るいのゲーム部屋 YouTube」",
       "accent": "cyan"
@@ -1343,6 +1343,90 @@
       "initials": "RM",
       "desc": "2026/10/13 NAW Solo Reload Victory Cup予選突破（決勝結果はresults.jsonに記録）。",
       "accent": "cyan"
+    },
+    {
+      "name": "Ama",
+      "initials": "AM",
+      "accent": "cyan",
+      "desc": "2026-10-03 NAW Solo Reload Victory Cup 予選 41位（賞金なし）"
+    },
+    {
+      "name": "りくとかい",
+      "initials": "りく",
+      "accent": "cyan",
+      "desc": "2026-10-03 NAW Solo Reload Victory Cup 予選 56位（賞金なし）"
+    },
+    {
+      "name": "ゆめみるあお",
+      "initials": "ゆめ",
+      "accent": "cyan",
+      "desc": "2026-10-03 NAW Solo Reload Victory Cup 予選 79位（賞金なし）"
+    },
+    {
+      "name": "rilamero",
+      "initials": "RI",
+      "accent": "cyan",
+      "desc": "2026-10-03 NAW Solo Reload Victory Cup 予選 100位（賞金なし）"
+    },
+    {
+      "name": "センス0",
+      "initials": "セン",
+      "accent": "cyan",
+      "desc": "2026-10-03 NAW Solo Reload Victory Cup 予選 103位（賞金なし）"
+    },
+    {
+      "name": "Job",
+      "initials": "JO",
+      "accent": "cyan",
+      "desc": "2026-10-03 NAW Solo Reload Victory Cup 予選 135位（賞金なし）"
+    },
+    {
+      "name": "君の魔法にかけられて",
+      "initials": "君の",
+      "accent": "cyan",
+      "desc": "2026-10-03 NAW Solo Reload Victory Cup 予選 154位（賞金なし）"
+    },
+    {
+      "name": "calm pepperǃ",
+      "initials": "CA",
+      "accent": "cyan",
+      "desc": "2026-10-03 NAW Solo Reload Victory Cup 予選 156位（賞金なし）"
+    },
+    {
+      "name": "in via 七草ナズナ",
+      "initials": "IN",
+      "accent": "cyan",
+      "desc": "2026-10-03 NAW Solo Reload Victory Cup 予選 180位（賞金なし）"
+    },
+    {
+      "name": "ポテットくらげ",
+      "initials": "ポテ",
+      "accent": "cyan",
+      "desc": "2026-10-03 NAW Solo Reload Victory Cup 予選 191位（賞金なし）"
+    },
+    {
+      "name": "HY",
+      "initials": "HY",
+      "accent": "cyan",
+      "desc": "2026-10-03 NAW Solo Reload Victory Cup 予選 211位（賞金なし）"
+    },
+    {
+      "name": "ぱる",
+      "initials": "ぱる",
+      "accent": "cyan",
+      "desc": "2026-10-03 NAW Solo Reload Victory Cup 予選 295位（賞金なし）"
+    },
+    {
+      "name": "Yucky",
+      "initials": "YU",
+      "accent": "cyan",
+      "desc": "2026-10-03 NAW Solo Reload Victory Cup 予選 296位（賞金なし）"
+    },
+    {
+      "name": "die さくやちぇ.",
+      "initials": "DI",
+      "accent": "cyan",
+      "desc": "2026-10-03 NAW Solo Reload Victory Cup 予選 316位（賞金なし）"
     }
   ],
   "confirmedAliases": {
@@ -1393,10 +1477,6 @@
     ],
     "たいが": [
       "NEXUS たいがǃ"
-    ],
-    "Zst まぐろいち": [
-      "Zst まぐろいち 10",
-      "るいのゲーム部屋 YouTube"
     ],
     "arim": [
       "まーまんも海に落ちる."
@@ -1490,7 +1570,8 @@
       "Ξkopis"
     ],
     "らずのっと": [
-      "tsv razfnw"
+      "tsv razfnw",
+      "gre RazNotÿǃ"
     ],
     "Zealfnz": [
       "Yotta vazenbotǃ"
@@ -1623,7 +1704,8 @@
       "モフモフのキラーマヌル"
     ],
     "かぷせる": [
-      "ftw かぷしーなlcqǃǃ"
+      "ftw かぷしーなlcqǃǃ",
+      "かぷせるてぃーてぃーTTていてい"
     ],
     "りりむ": [
       "りりむㅤㅤ"
@@ -1631,6 +1713,35 @@
     "みずるん": [
       "みずるん.",
       "어뷰징입니다 단데기 단단해지기"
+    ],
+    "まぐろいち": [
+      "Zst まぐろいち",
+      "Zst まぐろいち 10",
+      "るいのゲーム部屋 YouTube"
+    ],
+    "Ama": [
+      "Lit Player Ama"
+    ],
+    "りくとかい": [
+      "りくとかい15才."
+    ],
+    "ゆめみるあお": [
+      "BoF ゆめみるあお"
+    ],
+    "rilamero": [
+      "Msy rilazZzero0"
+    ],
+    "まっちゃやけん": [
+      "exd 抹茶fvǃ"
+    ],
+    "calm pepperǃ": [
+      "calmﾠpepperǃ"
+    ],
+    "HY": [
+      "PC勢最弱のHY"
+    ],
+    "ぱる": [
+      "ECG ぱるですｸﾞｷﾞｨｰ"
     ]
   }
 }
