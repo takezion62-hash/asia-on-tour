@@ -167,6 +167,10 @@
         {
           "id": "street-fighter-cup-reload",
           "label": "Street Fighter Cup Reload"
+        },
+        {
+          "id": "persona-5-royal-cup-reload",
+          "label": "Persona 5 Royal Cup Reload"
         }
       ]
     },
@@ -765,6 +769,32 @@
         {
           "text": "Epic Games公式Street Fighter Cupイベントページ。Reloadデュオ形式のコスメ報酬イベント。ユーザー提供のTrackerスクリーンショットに基づき各地域の対象チームを記録。",
           "url": "https://www.fortnite.com/competitive/events/S42_StreetFighterCup"
+        }
+      ]
+    },
+    {
+      "id": "ch7s4-override-persona-5-royal-cup-reload",
+      "name": "Override Series: Persona 5 Royal Cup Reload",
+      "chapter": 7,
+      "season": 4,
+      "seasonId": "S42",
+      "sourceEventIds": [
+        "S42_Persona5Cup"
+      ],
+      "series": "override-series",
+      "mode": "reload",
+      "subtype": "persona-5-royal-cup-reload",
+      "team": "solo",
+      "platform": "cross-platform",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "Fortnite Tracker大会ページに「Override Series: Persona 5 Royal Cup Reload」と明記。OCE/MEの2地域を確認。",
+          "url": "https://fortnitetracker.com/events/epicgames_S42_Persona5Cup_OCE"
+        },
+        {
+          "text": "Fortnite公式のイベントページはSolos、スケジュールでは通常ReloadとZero Build Reloadを別記。",
+          "url": "https://www.fortnite.com/competitive/events/S42_Persona5Cup/"
         }
       ]
     }
