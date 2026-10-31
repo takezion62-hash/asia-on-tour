@@ -159,6 +159,10 @@
         {
           "id": "lady-liberty-cup-battle-royale",
           "label": "Lady Liberty Cup Battle Royale"
+        },
+        {
+          "id": "elite-kado-thorne-cup-reload",
+          "label": "Elite Kado Thorne Cup Reload"
         }
       ]
     },
@@ -709,6 +713,32 @@
         {
           "text": "公式Lady Liberty Cupイベントページ。Epic Games大会ID S42_PurgeCup、現金賞金ではなくコスメ報酬。",
           "url": "https://www.fortnite.com/competitive/events/S42_PurgeCup/"
+        }
+      ]
+    },
+    {
+      "id": "ch7s4-elite-kado-thorne-cup-reload",
+      "name": "Elite Kado Thorne Cup Reload",
+      "chapter": 7,
+      "season": 4,
+      "seasonId": "S42",
+      "sourceEventIds": [
+        "S42_EliteKadoThorneCup"
+      ],
+      "series": "skin-cup",
+      "mode": "reload",
+      "subtype": "elite-kado-thorne-cup-reload",
+      "team": "solo",
+      "platform": "cross-platform",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "Epic Games公式ルール（2026年10月12日）2.2.1でSolo・Reload部門を確認。Attachment CではOCE・ME・NAWとも50位以内へElite Kado Thorne Outfit等のコスメ報酬。機種制限なしの大会としてクロスプラットフォームで登録。",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/elite-kado-thorne-cup-chapter-7-season-4-official-rules"
+        },
+        {
+          "text": "Epic Games公式Elite Kado Thorne Cupイベントページ。現金ではなくコスメ報酬。",
+          "url": "https://www.fortnite.com/competitive/events/S42_EliteKadoThorneCup/"
         }
       ]
     }
