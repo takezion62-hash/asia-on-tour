@@ -155,6 +155,10 @@
         {
           "id": "inoxtag-icon-cup-battle-royale",
           "label": "Inoxtag Icon Cup Battle Royale"
+        },
+        {
+          "id": "lady-liberty-cup-battle-royale",
+          "label": "Lady Liberty Cup Battle Royale"
         }
       ]
     },
@@ -679,6 +683,32 @@
         {
           "text": "ユーザー提供のFortnite Trackerスクリーンショットで2026-10-25 OCE2組、2026-10-26 ME1組、NAC1組、NAW5組を確認",
           "url": "https://fortnitetracker.com/events/epicgames_S42_InoxtagIconCup_NAW"
+        }
+      ]
+    },
+    {
+      "id": "ch7s4-lady-liberty-cup-battle-royale",
+      "name": "Lady Liberty Cup Battle Royale",
+      "chapter": 7,
+      "season": 4,
+      "seasonId": "S42",
+      "sourceEventIds": [
+        "S42_PurgeCup"
+      ],
+      "series": "skin-cup",
+      "mode": "battle-royale",
+      "subtype": "lady-liberty-cup-battle-royale",
+      "team": "solo",
+      "platform": "cross-platform",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "2026/10/16公開のFortnite公式ルール2.2.1・2.2.3でソロ通常BRとクロスプラットフォームを確認。Attachment CでOCE/ME 100位、NAC 700位、NAW 200位以内にLady Liberty Outfit / Purge Drone Back Bling。",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/the-purges-lady-liberty-cup-chapter-7-season-4-official-rules"
+        },
+        {
+          "text": "公式Lady Liberty Cupイベントページ。Epic Games大会ID S42_PurgeCup、現金賞金ではなくコスメ報酬。",
+          "url": "https://www.fortnite.com/competitive/events/S42_PurgeCup/"
         }
       ]
     }
