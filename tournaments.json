@@ -163,6 +163,10 @@
         {
           "id": "elite-kado-thorne-cup-reload",
           "label": "Elite Kado Thorne Cup Reload"
+        },
+        {
+          "id": "street-fighter-cup-reload",
+          "label": "Street Fighter Cup Reload"
         }
       ]
     },
@@ -739,6 +743,28 @@
         {
           "text": "Epic Games公式Elite Kado Thorne Cupイベントページ。現金ではなくコスメ報酬。",
           "url": "https://www.fortnite.com/competitive/events/S42_EliteKadoThorneCup/"
+        }
+      ]
+    },
+    {
+      "id": "ch7s4-street-fighter-cup-reload",
+      "name": "Street Fighter Cup Reload",
+      "chapter": 7,
+      "season": 4,
+      "seasonId": "S42",
+      "sourceEventIds": [
+        "S42_StreetFighterCup"
+      ],
+      "series": "skin-cup",
+      "mode": "reload",
+      "subtype": "street-fighter-cup-reload",
+      "team": "duos",
+      "platform": "cross-platform",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "Epic Games公式Street Fighter Cupイベントページ。Reloadデュオ形式のコスメ報酬イベント。ユーザー提供のTrackerスクリーンショットに基づき各地域の対象チームを記録。",
+          "url": "https://www.fortnite.com/competitive/events/S42_StreetFighterCup"
         }
       ]
     }
