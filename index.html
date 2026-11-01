@@ -646,6 +646,41 @@
     .performance-ranking :is(a,button,select,summary):focus-visible{outline:2px solid #bda2ff;outline-offset:3px}
     @media(max-width:900px){.ranking-filters{grid-template-columns:repeat(2,minmax(0,1fr))}.ranking-field:first-child{grid-column:1/-1}}
     @media(max-width:640px){.ranking-regions{gap:4px}.ranking-regions button{font-size:11px;padding:9px 3px}.ranking-filters{gap:10px}.ranking-field select{font-size:12px;padding:11px 7px;min-height:42px}.ranking-results-head h3{font-size:15px}.performance-ranking .earner{padding:12px 10px;gap:8px}.performance-ranking .earner .amount{font-size:18px}.ranking-row-note{font-size:10px}.ranking-definition{min-height:76px}.ranking-results{min-height:220px}}
+
+    /* Registration history, separate from competition dates */
+    .registration-section{margin:32px 0}
+    .update-overview{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(250px,.85fr);gap:16px;align-items:start}
+    .registration-panel,.update-preview-panel,.updates-list-section{border:1px solid var(--stroke);background:var(--panel);border-radius:17px;padding:18px;min-width:0}
+    .registration-help{color:#aeb7d1;font-size:12px;line-height:1.8;margin:0 0 16px}
+    .registration-results{display:grid;gap:13px;min-width:0}
+    .registration-item{min-width:0}
+    .registration-item .result-card{margin:0;min-width:0}
+    .registration-meta{color:#c7d5fa;font-size:12px;font-weight:800;margin:0 0 6px;display:flex;flex-wrap:wrap;gap:9px}
+    .registration-meta time{font-variant-numeric:tabular-nums}
+    .registration-meta .competition-date{color:#97a5c7;font-weight:500}
+    .update-preview-panel h3{font-size:15px;margin:0 0 13px}
+    .update-preview-line{padding:12px 0;border-top:1px solid #313750}
+    .update-preview-line:first-child{border-top:0;padding-top:0}
+    .update-preview-line time,.update-entry time{color:#afbad7;font-size:11px;font-variant-numeric:tabular-nums}
+    .update-preview-line p{margin:3px 0 0;font-size:12px;font-weight:750;line-height:1.6}
+    .update-preview-panel>.text-link{margin-top:13px}
+    .updates-list-section{margin:20px 0;padding:23px}
+    .updates-list-section .section-head{margin:0 0 13px}
+    .updates-list-section .section-title{font-size:24px}
+    .update-feed{display:grid;gap:13px;margin-top:18px}
+    .update-entry{border:1px solid #333b54;background:#171b2d;border-radius:13px;padding:18px;min-width:0}
+    .update-entry-title{font-size:16px;line-height:1.6;margin:4px 0}
+    .update-entry-description{color:#b7c3db;font-size:12px;margin:3px 0 0;overflow-wrap:anywhere}
+    .update-entry-label{display:inline-block;margin-right:8px;color:#90e8df;font-weight:800;font-size:11px}
+    .update-entry details{margin-top:12px}
+    .update-entry summary{cursor:pointer;color:#acebf6;font-size:12px;font-weight:750}
+    .update-record-links{display:grid;gap:5px;list-style:none;padding:8px 0 0;margin:0}
+    .update-record-links li{overflow-wrap:anywhere;font-size:12px;color:#b7c3db}
+    .update-record-links a{color:#e5edff;text-decoration:underline;text-underline-offset:3px}
+    .registration-more{display:block;margin:17px auto 0}
+    .registration-more[hidden]{display:none}
+    @media(max-width:940px){.update-overview{grid-template-columns:minmax(0,1fr)}}
+    @media(max-width:640px){.registration-panel,.update-preview-panel,.updates-list-section{padding:14px}.registration-section .section-head{align-items:flex-start;flex-wrap:wrap;gap:9px}.registration-meta{font-size:11px}.updates-list-section .section-title{font-size:20px}.update-entry{padding:14px}}
   </style>
   <link rel="stylesheet" href="./aot-pr.css">
 </head>
@@ -662,6 +697,7 @@
         <button type="button" data-page="results" aria-label="遠征結果"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 4v16h16M7 15l5-5 4 3 4-7"/></svg><span>遠征結果</span></button>
         <button type="button" data-page="players" aria-label="プレイヤー名鑑"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="9" cy="8" r="3.2"/><path d="M2 21v-2c0-4 3-6 7-6s7 2 7 6v2M16 5a3 3 0 0 1 0 6M17 14c3 0 5 2 5 5v2"/></svg><span>プレイヤー名鑑</span></button>
         <button type="button" data-page="tournaments" aria-label="大会を探す"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M8 3h8v5a4 4 0 0 1-8 0V3ZM8 5H4v2c0 3 2 4 5 4M16 5h4v2c0 3-2 4-5 4M12 12v6M8 21h8M9 18h6v3"/></svg><span>大会を探す<small>TOURNAMENTS</small></span></button>
+        <button type="button" data-page="updates" aria-label="更新履歴"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 3v5h5M12 7v5l4 2"/></svg><span>更新履歴<small>UPDATES</small></span></button>
         <button type="button" data-page="about" aria-label="参照ソース"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7v.3"/></svg><span>参照ソース</span></button>
       </nav>
       <div class="side-bottom"><div class="disclaimer">UNOFFICIAL FAN PROJECT<br>Epic Gamesとは無関係の非公式サイトです</div></div>
@@ -672,6 +708,11 @@
         <div class="hero"><div class="hero-copy"><div class="mini-label"><span class="live-dot"></span> <span id="home-season-label">CH7 S4 · OVERSEAS ARCHIVE</span></div><h1>ASIA <span class="tour">ON<br>TOUR.</span></h1><p>日本・ASIA勢は、世界でどこまで戦えるのか<br><span id="home-season-description">CH7 S4の海外サーバー挑戦を記録する</span></p><small>FROM ASIA. ACROSS EVERY REGION.</small></div><div class="hero-visual" aria-hidden="true"><div class="orbit"></div><div class="orbit two"></div><div class="orbit three"></div><div class="planet"></div><span class="spot a"></span><span class="spot b"></span><span class="spot c"></span></div></div>
         <div class="stats"><div class="stat"><div class="name">掲載中の遠征結果</div><div class="value"><span id="stat-results">34</span><span class="suffix">件</span></div><div class="sub">出典確認分と一部詳細未確認分</div></div><div class="stat"><div class="name">戦績掲載プレイヤー</div><div class="value"><span id="stat-players">21</span><span class="suffix">名</span></div><div class="sub">確認済みの結果がある選手</div></div><div class="stat"><div class="name">記録のある遠征先</div><div class="value"><span id="stat-regions">3</span><span class="suffix">地域</span></div><div class="sub">対象の海外地域は全6地域</div></div><div class="stat"><div class="name">大会・予選のトップ10</div><div class="value"><span id="stat-top10">3</span><span class="suffix">件</span></div><div class="sub">掲載データ内の集計（デュオは1戦績）</div></div></div>
         <div class="dashboard-cols"><div class="panel"><div class="panel-header"><h2>最新の <span>OVERSEAS RESULTS</span></h2><button type="button" data-page="results" class="text-link">すべて見る ↗</button></div><div class="result-list" id="latest-results"></div></div><div class="panel"><div class="panel-header"><h2>遠征先 <span>REGIONS</span></h2></div><div id="region-breakdown"></div><div class="footnote">※サイト内に登録済みの戦績のみを集計しています</div></div></div>
+        <section class="registration-section" aria-labelledby="home-registration-title">
+          <div class="section-head"><div><h2 class="section-title" id="home-registration-title">新着 <span>REGISTRATIONS</span></h2><p>サイトに新しく登録された戦績 · 大会開催日とは別です</p></div><button type="button" data-page="updates" class="text-link">更新履歴をすべて見る ↗</button></div>
+          <div class="update-overview"><div class="registration-panel"><p class="registration-help">GitHubの差分で登録日を確認できた戦績のみ表示。過去の登録日は推測しません。</p><div class="registration-results" id="home-new-registrations"></div></div>
+          <aside class="update-preview-panel" aria-label="最近のサイト更新"><h3>最近の更新</h3><div id="home-update-preview"></div><button type="button" data-page="updates" class="text-link">すべての更新を見る →</button></aside></div>
+        </section>
         <section class="earnings-feature" aria-labelledby="home-earnings-title"><div class="earnings-head"><div><h2 id="home-earnings-title">🏆 今シーズンの外鯖獲得賞金 <span style="color:#e8c383">TOP 5</span></h2><p>各選手の取り分を集計した確認済み賞金 · USD</p></div><div class="earnings-total"><small>掲載データの選手合計</small><span id="home-earnings-sum">$0</span></div></div><div class="earnings-grid" id="home-earnings-leaders"></div><p class="earnings-explainer">※ サイトに登録済み・出典確認済みの記録だけを集計 · デュオはチーム賞金ではなく各選手の額を加算 · <button class="text-link" type="button" data-page="players">全選手を見る ↗</button></p></section>
         <div class="spotlight" id="home-spotlight"><div><div class="spotlight-overline">ME OVERSEAS SPOTLIGHT · 2026.08.25</div><h2>Karf <span style="color:#8d96af;font-weight:600">×</span> huggy <span class="spotlight-prize">$200 TEAM</span></h2><p>ME Reload Duos Victory Cup 決勝 <strong>14位</strong> · <strong>1 VR</strong> · 8 KILLS　<span>（各選手 $100）</span></p></div><button type="button" class="btn sm spotlight-action" data-spotlight>ME戦績を見る ↗</button></div>
         <div class="section-head"><div><h2 class="section-title">注目の <span>PLAYERS</span></h2><p>海外に挑むASIA勢をウォッチ</p></div><button type="button" data-page="players" class="text-link">プレイヤー一覧 ↗</button></div><div class="players" id="featured-players"></div>
@@ -710,6 +751,18 @@
       <section class="section" id="page-tournaments"><div id="tournament-content"></div></section>
       <section class="section" id="page-tournament" aria-labelledby="tournament-title"><div id="tournament-detail-content"></div></section>
       <section class="section" id="page-profile" aria-labelledby="profile-title"><div id="profile-content"></div></section>
+      <section class="section" id="page-updates" aria-labelledby="updates-title">
+        <div class="page-label">ACTIVITY / 04</div>
+        <h1 class="big-title" id="updates-title">UPDATES<span>.</span></h1>
+        <p class="explainer">新しく登録された海外戦績とサイトの改善履歴。登録日と大会開催日は異なります。</p>
+        <section class="updates-list-section" aria-labelledby="registration-list-title">
+          <div class="section-head"><div><h2 class="section-title" id="registration-list-title">新着 <span>REGISTERED RESULTS</span></h2><p id="new-registration-count" aria-live="polite"></p></div></div>
+          <div class="registration-results" id="new-entries-list"></div>
+          <button type="button" class="btn ghost registration-more" id="registration-more" data-registrations-more hidden>さらに20件表示</button>
+          <p class="registration-help">新着戦績は上部の集計期間に対応。登録日を確認できない過去分は推測で表示しません。</p>
+        </section>
+        <section class="updates-list-section" aria-labelledby="site-updates-title"><h2 class="section-title" id="site-updates-title">更新 <span>HISTORY</span></h2><div class="update-feed" id="updates-feed"></div></section>
+      </section>
       <section class="section" id="page-about" aria-labelledby="sources-title">
         <div class="page-label">REFERENCE / 03</div>
         <div class="sources-heading"><div><h1 class="big-title" id="sources-title">SOURCES<span>.</span></h1><p>参照するソース</p></div><span class="sources-count" aria-hidden="true">03 LINKS</span></div>
