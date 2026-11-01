@@ -109,6 +109,7 @@ test('大会タグ検索・大会URL・期間切り替えをデータから照�
 });
 
 test('主要画面で横はみ出しと閲覧者向け編集機能の復活がない', async ({ page }) => {
+  test.slow(); // Render all data-heavy views before checking layout and read-only controls.
   for (const button of ['ダッシュボード', '遠征結果', 'プレイヤー名鑑', '大会を探す', '参照ソース']) {
     await page.getByRole('button', { name: button, exact: true }).click();
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1), button + 'の横はみ出し').toBe(true);
