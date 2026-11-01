@@ -171,6 +171,10 @@
         {
           "id": "persona-5-royal-cup-reload",
           "label": "Persona 5 Royal Cup Reload"
+        },
+        {
+          "id": "madison-beer-icon-cup-reload",
+          "label": "Madison Beer Icon Cup Reload"
         }
       ]
     },
@@ -795,6 +799,32 @@
         {
           "text": "Fortnite公式のイベントページはSolos、スケジュールでは通常ReloadとZero Build Reloadを別記。",
           "url": "https://www.fortnite.com/competitive/events/S42_Persona5Cup/"
+        }
+      ]
+    },
+    {
+      "id": "ch7s4-madison-beer-icon-cup-reload",
+      "name": "Madison Beer Icon Cup Reload",
+      "chapter": 7,
+      "season": 4,
+      "seasonId": "S42",
+      "sourceEventIds": [
+        "S42_MadisonBeerIconCup"
+      ],
+      "series": "icon-cup",
+      "mode": "reload",
+      "subtype": "madison-beer-icon-cup-reload",
+      "team": "duo",
+      "platform": "cross-platform",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "2026-09-22 Fortnite公式ルール2.2.1：通常ReloadデュオとZero Build Reloadを別開催。Attachment C：通常ReloadはNAC 350位以内・NAW 100位以内にコスメ報酬。",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/madison-beer-icon-cup-chapter-7-season-4-official-rules"
+        },
+        {
+          "text": "ユーザー提供Fortnite Tracker画像でNAC 2組・NAW 6組の順位、キル、VRを確認。",
+          "url": "https://fortnitetracker.com/events/epicgames_S42_MadisonBeerIconCup_NAW"
         }
       ]
     }
