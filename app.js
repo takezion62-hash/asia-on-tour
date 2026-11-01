@@ -476,6 +476,80 @@
       ['all','highlights','prize'].forEach(mode=>$('#journey-mode-'+mode)?.setAttribute('aria-pressed',String(mode===journeyState.mode)));
     }
 
+
+    // A player's summary is derived from explicitly published records only.
+    // Team eliminations and VRs are team totals, not individual attribution.
+    function profileSnapshotSection(info){
+      const verified=info.events.filter(record=>record.verified===true);
+      const kills=verified.filter(record=>Number.isInteger(record.kills)&&record.kills>=0);
+      const vrRows=verified.filter(record=>Number.isInteger(record.vrs)&&record.vrs>=0);
+      const totalKills=kills.reduce((sum,record)=>sum+record.kills,0);
+      const totalVR=vrRows.reduce((sum,record)=>sum+record.vrs,0);
+      const finals=verified.filter(record=>['賞金決勝','Practice決勝','Performance決勝','決勝'].includes(record.kind)&&Number.isInteger(record.rank)&&record.rank>0);
+      const skins=verified.filter(confirmedSkinReward);
+      const teamKillRecords=kills.filter(record=>names(record).length>1).length;
+      const teamVRRecords=vrRows.filter(record=>names(record).length>1).length;
+      const score=(label,value,description,key)=>
+        '<article class="profile-snapshot-stat" data-profile-snapshot="'+key+'"><h3>'+escape(label)+'</h3>'
+        +'<strong>'+escape(value)+'</strong><p>'+escape(description)+'</p></article>';
+      const metrics=[
+        score('確認済み KILLS',kills.length?format(totalKills):'—',
+          '数値確認 '+format(kills.length)+' / '+format(info.events.length)+'戦績'+(teamKillRecords?' · チーム戦のキルを含む':''),'kills'),
+        score('確認済み VR',vrRows.length?format(totalVR):'—',
+          '数値確認 '+format(vrRows.length)+' / '+format(info.events.length)+'戦績'+(teamVRRecords?' · チーム戦のVRを含む':''),'vrs'),
+        score('順位確認済み決勝',format(finals.length),
+          '賞金・Practice・Performance等の決勝を含む','finals'),
+        score('スキン報酬獲得',format(skins.length),
+          '確認済みの獲得表記がある記録のみ','skins')
+      ];
+      const modes=[
+        {id:'battle-royale',name:'通常BR'},
+        {id:'zero-build',name:'ゼロビルド'},
+        {id:'reload',name:'リロード'},
+        {id:'reload-zero-build',name:'リロード ZB'},
+        {id:'unknown',name:'形式未確認'}
+      ];
+      const counts=new Map(modes.map(mode=>[mode.id,0]));
+      for(const record of info.events){
+        const classified=classifyTournamentRecord(record);
+        const mode=counts.has(classified.mode)?classified.mode:'unknown';
+        counts.set(mode,counts.get(mode)+1);
+      }
+      const modeRows=modes.filter(mode=>counts.get(mode.id)>0);
+      const modeMax=Math.max(0,...modeRows.map(mode=>counts.get(mode.id)));
+      const modeHTML=modeRows.length?modeRows.map(mode=>{
+        const count=counts.get(mode.id),percent=modeMax?count/modeMax*100:0;
+        return '<li class="profile-mode-row" data-profile-mode="'+escape(mode.id)+'"><span>'+escape(mode.name)+'</span>'
+          +'<span class="profile-mode-track" aria-hidden="true"><span style="width:'+percent+'%"></span></span>'
+          +'<strong>'+format(count)+'件</strong></li>';
+      }).join(''):'<li class="profile-snapshot-empty">この期間の掲載戦績はまだありません</li>';
+      const teammates=new Map();
+      for(const record of info.events){
+        const members=names(record);
+        if(members.length<2||!members.includes(info.name))continue;
+        for(const other of new Set(members.filter(member=>member!==info.name))){
+          teammates.set(other,(teammates.get(other)||0)+1);
+        }
+      }
+      const partners=[...teammates].map(([name,count])=>({name,count}))
+        .sort((a,b)=>b.count-a.count||a.name.localeCompare(b.name,'ja'));
+      const partnerHTML=partners.length?partners.slice(0,8).map(partner=>
+        '<li class="profile-partner-row"><a href="'+escape(profileHref(partner.name))+'" data-open-profile="'+escape(partner.name)+'">'+escape(partner.name)+'</a>'
+        +'<span>'+format(partner.count)+'件</span></li>'
+      ).join(''):'<li class="profile-snapshot-empty">この期間に掲載されたチーム戦の相方はいません</li>';
+      return '<section class="profile-snapshot" aria-labelledby="profile-snapshot-title">'
+        +'<div class="profile-snapshot-heading"><h2 id="profile-snapshot-title">海外遠征<span>スタッツ</span></h2>'
+        +'<p>'+escape(seasonScope())+' · 掲載済み戦績から集計</p></div>'
+        +'<div class="profile-snapshot-stats">'+metrics.join('')+'</div>'
+        +'<div class="profile-snapshot-details"><div class="profile-snapshot-panel" data-profile-modes>'
+        +'<h3>大会形式別の掲載戦績</h3><ul class="profile-mode-list">'+modeHTML+'</ul>'
+        +'<p class="profile-snapshot-note">大会開催形式が確認できない戦績は「形式未確認」に分類。順位や賞金の優劣ではなく、掲載された戦績の件数です。</p></div>'
+        +'<div class="profile-snapshot-panel" data-profile-partners><h3>チーム戦で組んだ相方 <small>上位8名</small></h3>'
+        +'<ul class="profile-partner-list">'+partnerHTML+'</ul>'
+        +'<p class="profile-snapshot-note">同じチームとして掲載された戦績の件数で、固定デュオや所属を意味しません。別名義からの推測統合は行いません。</p></div></div>'
+        +'<p class="profile-snapshot-note">※ 確認済みKILLS・VRはチーム戦の数値を含むため、個人が単独で記録した合計とは限りません。未確認値は0として加算していません。</p></section>';
+    }
+
     function profileBestCard(label,record,field){
       return `<article class="profile-stat"><h2>${escape(label)}</h2><div class="profile-stat-value${record?'':' is-empty'}" data-profile="${field}">${record?escape(rankLabel(record)):'未登録'}</div><p class="profile-stat-context">${record?`<span class="profile-best-context">${escape(record.event)}</span>${escape(record.region)} · ${escape(friendlyDate(record.date))}<br>${escape(record.kind||'未分類')}`:'順位が確認できる戦績は未登録'}</p></article>`;
     }
@@ -514,7 +588,7 @@
       const visited=info.regionStats.filter(r=>r.count>0).map(r=>regionPill(r.region)).join('');
       const links=info.links.filter(link=>safeUrl(link.url));
       const external=links.length?`<details class="profile-external"><summary>確認済み外部プロフィール · ${format(links.length)}件</summary><ul class="profile-external-links">${links.map(link=>`<li><a href="${escape(safeUrl(link.url))}" target="_blank" rel="noopener noreferrer">${escape(link.name)} ↗</a><span>${escape(link.url)}</span></li>`).join('')}</ul></details>`:'';
-      $('#profile-content').innerHTML=`<div class="profile-toolbar"><button class="btn sm ghost" id="profile-back" data-profile-back type="button">← 戻る</button><a href="#journey-title" data-journey-jump>海外遠征年表へ ↓</a><a id="profile-share" href="${escape(shareUrl)}" title="このURLをコピーして共有できます">プロフィールのURL ↗</a></div><header class="profile-hero"><div><p class="profile-kicker">PLAYER PROFILE / ASIA OVERSEAS</p><div class="profile-identity"><div class="profile-avatar" aria-hidden="true">${escape(info.initials)}</div><div class="profile-identity-copy"><h1 class="profile-name" id="profile-title" tabindex="-1" data-profile="name">${escape(info.name)}</h1><p class="profile-alias-heading">確認済みの別名義</p><div class="profile-aliases" data-profile="aliases">${aliases}</div></div></div>${info.desc?`<p class="profile-description">${candidates.some(c=>c.name===info.name)?'<span class="season-biography-note">紹介文：CH7 S4時点</span>':''}${escape(info.desc)}</p>`:''}${external}</div><div class="profile-prize-total"><p class="profile-total-label">${escape(seasonPrizeLabel())}</p><div class="profile-total-value"><span data-profile="total">$${format(info.total)}</span><small>USD</small></div><p class="profile-total-hint">${escape(seasonScope())}の個人賞金累計<br>デュオは確認済みの個人分のみ集計<span class="profile-lifetime">全期間の確認済み個人賞金 <b data-profile="lifetime-total">$${format(info.lifetimeTotal)}</b></span></p></div></header><div class="profile-stats"><article class="profile-stat"><h2>賞金獲得記録</h2><div class="profile-stat-value"><span data-profile="prize-events">${format(info.prizeEvents)}</span><small>件</small></div><p class="profile-stat-context">個人賞金の獲得を確認した記録</p></article><article class="profile-stat"><h2>掲載されている海外戦績</h2><div class="profile-stat-value"><span data-profile="events">${format(info.events.length)}</span><small>件</small></div><p class="profile-stat-context">予選・決勝を含む全掲載記録</p></article>${profileBestCard('予選の最高順位',info.bestQualifying,'best-qualifying')}${profileBestCard('決勝の最高順位',info.bestFinal,'best-final')}</div>${journeySection(info)}<section aria-labelledby="profile-region-title"><div class="profile-region-heading"><div><h2 id="profile-region-title">地域別の<span>実績</span></h2><p>${visited?'戦績掲載地域':'海外大会の戦績はまだ掲載されていません'}</p></div><div class="profile-regions-visited" aria-label="海外挑戦地域">${visited}</div></div><div class="profile-region-charts">${profileRegionChart(info,'count')}${profileRegionChart(info,'prize')}</div></section><section aria-labelledby="profile-history-title"><div class="profile-history-heading"><div><h2 id="profile-history-title">海外大会<span>履歴</span></h2><p>${escape(seasonScope())} · 新しい順 · 賞金獲得記録は金色で表示</p></div><span class="profile-history-count">${format(info.events.length)}件</span></div><div class="profile-history">${info.events.length?info.events.map(e=>profileHistoryRow(e,info.name)).join(''):'<div class="profile-empty"><h3>海外大会の戦績はまだ未登録です</h3><p>選手名鑑には掲載されていますが、確認済みの海外大会記録はまだ掲載されていません。</p></div>'}</div></section>`;
+      $('#profile-content').innerHTML=`<div class="profile-toolbar"><button class="btn sm ghost" id="profile-back" data-profile-back type="button">← 戻る</button><a href="#journey-title" data-journey-jump>海外遠征年表へ ↓</a><a id="profile-share" href="${escape(shareUrl)}" title="このURLをコピーして共有できます">プロフィールのURL ↗</a></div><header class="profile-hero"><div><p class="profile-kicker">PLAYER PROFILE / ASIA OVERSEAS</p><div class="profile-identity"><div class="profile-avatar" aria-hidden="true">${escape(info.initials)}</div><div class="profile-identity-copy"><h1 class="profile-name" id="profile-title" tabindex="-1" data-profile="name">${escape(info.name)}</h1><p class="profile-alias-heading">確認済みの別名義</p><div class="profile-aliases" data-profile="aliases">${aliases}</div></div></div>${info.desc?`<p class="profile-description">${candidates.some(c=>c.name===info.name)?'<span class="season-biography-note">紹介文：CH7 S4時点</span>':''}${escape(info.desc)}</p>`:''}${external}</div><div class="profile-prize-total"><p class="profile-total-label">${escape(seasonPrizeLabel())}</p><div class="profile-total-value"><span data-profile="total">$${format(info.total)}</span><small>USD</small></div><p class="profile-total-hint">${escape(seasonScope())}の個人賞金累計<br>デュオは確認済みの個人分のみ集計<span class="profile-lifetime">全期間の確認済み個人賞金 <b data-profile="lifetime-total">$${format(info.lifetimeTotal)}</b></span></p></div></header><div class="profile-stats"><article class="profile-stat"><h2>賞金獲得記録</h2><div class="profile-stat-value"><span data-profile="prize-events">${format(info.prizeEvents)}</span><small>件</small></div><p class="profile-stat-context">個人賞金の獲得を確認した記録</p></article><article class="profile-stat"><h2>掲載されている海外戦績</h2><div class="profile-stat-value"><span data-profile="events">${format(info.events.length)}</span><small>件</small></div><p class="profile-stat-context">予選・決勝を含む全掲載記録</p></article>${profileBestCard('予選の最高順位',info.bestQualifying,'best-qualifying')}${profileBestCard('決勝の最高順位',info.bestFinal,'best-final')}</div>${profileSnapshotSection(info)}${journeySection(info)}<section aria-labelledby="profile-region-title"><div class="profile-region-heading"><div><h2 id="profile-region-title">地域別の<span>実績</span></h2><p>${visited?'戦績掲載地域':'海外大会の戦績はまだ掲載されていません'}</p></div><div class="profile-regions-visited" aria-label="海外挑戦地域">${visited}</div></div><div class="profile-region-charts">${profileRegionChart(info,'count')}${profileRegionChart(info,'prize')}</div></section><section aria-labelledby="profile-history-title"><div class="profile-history-heading"><div><h2 id="profile-history-title">海外大会<span>履歴</span></h2><p>${escape(seasonScope())} · 新しい順 · 賞金獲得記録は金色で表示</p></div><span class="profile-history-count">${format(info.events.length)}件</span></div><div class="profile-history">${info.events.length?info.events.map(e=>profileHistoryRow(e,info.name)).join(''):'<div class="profile-empty"><h3>海外大会の戦績はまだ未登録です</h3><p>選手名鑑には掲載されていますが、確認済みの海外大会記録はまだ掲載されていません。</p></div>'}</div></section>`;
       renderJourney(info);
       renderProfileAotPR(info.name);
       return true;
