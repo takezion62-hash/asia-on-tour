@@ -749,6 +749,41 @@
     .home-pick:focus-visible,.home-record a:focus-visible{outline:3px solid #99e5fa;outline-offset:3px}
     @media(max-width:1150px){.home-showcase-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.home-pick.is-lead{grid-column:1/-1}.home-records-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
     @media(max-width:640px){.home-showcase,.home-records{margin:20px 0 25px}.home-showcase-grid,.home-records-grid{grid-template-columns:minmax(0,1fr);gap:10px}.home-pick.is-lead{grid-column:auto}.home-pick{padding:19px 18px}.home-record{padding:18px}.home-record-value{font-size:40px}.home-showcase-head h2{font-size:30px}}
+
+    /* Tournament progression: separate recorded qualifiers, finals and verified cash */
+    .tournament-progress{border:1px solid #42506b;background:linear-gradient(145deg,#1a2036,#111828);border-radius:20px;padding:23px;margin:20px 0 26px;min-width:0}
+    .tournament-progress>header h2{font-size:clamp(23px,3vw,31px);font-weight:900;line-height:1.3;margin:8px 0}
+    .tournament-progress>header>p:last-child{font-size:12px;line-height:1.85;color:#aebdd6;margin:8px 0 18px}
+    .tournament-phase-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+    .tournament-phase-card{display:flex;flex-direction:column;gap:6px;min-width:0;text-align:left;border:1px solid #48516b;border-radius:14px;padding:16px;background:#1c253a;color:#e4ecfd;transition:.15s}
+    .tournament-phase-card:hover{border-color:#a78ae8;background:#26304c}
+    .tournament-phase-card[aria-pressed="true"]{border-color:#b9a4f4;background:linear-gradient(130deg,#42385e,#1c2b43);box-shadow:inset 0 3px 0 #b29df5}
+    .tournament-phase-card>span{font-size:12px;font-weight:850}
+    .tournament-phase-card>strong{font-size:30px;line-height:1.25;font-family:'Barlow Condensed',Inter,sans-serif;font-weight:900;font-variant-numeric:tabular-nums}
+    .tournament-phase-card>strong small{font-size:10px;font-family:Inter,sans-serif;font-weight:650;margin-left:4px}
+    .tournament-phase-card>small{font-size:10px;color:#b1bfd8;line-height:1.55;overflow-wrap:anywhere}
+    .tournament-progress-totals{margin:13px 0 21px;font-size:11px;line-height:1.85;color:#a8b9d4}
+    .tournament-highlights{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;min-width:0}
+    .tournament-highlight-block{min-width:0;border:1px solid #374259;border-radius:13px;background:#141c2e;padding:17px 15px}
+    .tournament-highlight-block h3{font-size:14px;font-weight:850;margin:0 0 4px}
+    .tournament-highlight-block>p{font-size:10px;color:#aab8d1;line-height:1.6;margin:0 0 10px}
+    .tournament-highlight-block ol{list-style:none;padding:0;margin:0;display:grid;gap:11px}
+    .tournament-highlight-block li{border-top:1px solid #303b52;padding:10px 0 0;min-width:0}
+    .tournament-highlight-name{font-size:12px;font-weight:850;line-height:1.6;overflow-wrap:anywhere}
+    .tournament-highlight-name a{color:#e8ddff;text-decoration:underline;text-underline-offset:3px}
+    .tournament-highlight-facts{font-size:10px;color:#9eacc8;line-height:1.6;margin:4px 0}
+    .tournament-highlight-value{display:block;color:#f7dba6;font-size:17px;line-height:1.5;font-weight:850;overflow-wrap:anywhere}
+    .tournament-highlight-value .prize-value,.tournament-highlight-value .prize-zero{font-size:16px}
+    .tournament-progress-empty{font-size:11px;color:#adbbd4;line-height:1.8}
+    .tournament-linked-progress{margin:17px 0 0;border-top:1px solid #3a445c;padding-top:14px}
+    .tournament-linked-progress summary{cursor:pointer;font-size:12px;font-weight:850;color:#91e5f0;line-height:1.7}
+    .tournament-linked-progress>p{font-size:11px;color:#a6b6d0;line-height:1.8}
+    .tournament-linked-progress ul{display:grid;gap:8px;list-style:none;padding:0;margin:14px 0 0}
+    .tournament-linked-progress li{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr) minmax(0,1.1fr);gap:12px;border:1px solid #344058;border-radius:9px;padding:10px;font-size:11px;line-height:1.7;color:#aab9d3;overflow-wrap:anywhere}
+    .tournament-linked-progress li a{color:#e4d9ff;font-weight:850;text-decoration:underline;text-underline-offset:3px}
+    .tournament-phase-card:focus-visible,.tournament-linked-progress summary:focus-visible{outline:3px solid #96e5f0;outline-offset:3px}
+    @media(max-width:1050px){.tournament-highlights{grid-template-columns:1fr}.tournament-phase-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.tournament-linked-progress li{grid-template-columns:1fr}}
+    @media(max-width:640px){.tournament-progress{padding:17px 13px;border-radius:15px}.tournament-phase-grid{gap:8px}.tournament-phase-card{padding:12px 10px}.tournament-phase-card>strong{font-size:27px}.tournament-phase-card>span{font-size:11px}.tournament-highlight-block{padding:15px 13px}.tournament-progress-totals{font-size:10px}}
   </style>
   <link rel="stylesheet" href="./aot-pr.css">
 </head>
@@ -866,6 +901,6 @@
 
   <script src="./rankings.js" defer></script>
   <script src="./aot-pr.js" defer></script>
-  <script src="./app.js?v=home-showcase-1.0.0" defer></script>
+  <script src="./app.js?v=tournament-progress-1.0.0" defer></script>
 </body>
 </html>
