@@ -756,243 +756,45 @@
     }
 
 
-    // Featured leaders update with the global season selection; no editorial rankings are invented.
+    // Current-season highlights are derived from existing, verified records.
     function renderHomeShowcase(){
-      const payout=prizeTotals()[0]||null;
+      const prize=prizeTotals()[0]||null;
       const pr=prReport().ranked.find(player=>player.score>0)||null;
       const vr=AsiaRankings.buildRankings(all(),{metric:'vrs'},{
         names,individualPrize,classifyTournamentRecord,confirmedPrizeFinalRank,confirmedSkinReward,
-        series:rankingSeries().map(option=>option.id)
+        series:rankingSeries().map(o=>o.id)
       }).rows.find(player=>player.value>0&&player.knownRecords>0)||null;
       const picks=[
-        payout&&{key:'prize',label:'CONFIRMED EARNINGS LEADER',name:payout.name,title:'確認済み個人賞金',
-          value:'$('#stat-results').textContent=a.length;$('#stat-players').textContent=new Set(a.flatMap(names)).size;$('#stat-regions').textContent=new Set(a.map(e=>e.region)).size;$('#stat-top10').textContent=a.filter(e=>e.rank<=10).length;const latest=a.slice().sort((x,y)=>y.date.localeCompare(x.date)).slice(0,3);$('#latest-results').innerHTML=latest.length?latest.map(resultCard).join(''):'<div class="empty">まだ戦績が登録されていないよ</div>';$('#region-breakdown').innerHTML=regions.map(r=>{const n=a.filter(e=>e.region===r).length;const percent=a.length?(n/a.length*100):0;return `<div class="region-entry"><div class="reg-left"><div class="flag" data-region="${escape(r)}">${escape(r)}</div><div class="reg-details"><strong>${{ME:'中東',EU:'ヨーロッパ',NAC:'北米中部',NAW:'北米西部',OCE:'オセアニア',BR:'ブラジル'}[r]}</strong><small>${n?'登録あり':'未登録'}</small><div class="reg-bar"><span style="width:${percent}%"></span></div></div></div><span class="reg-count">${n}</span></div>`}).join('');renderHomeShowcase();renderHomeRecords()}
-    function renderPlayerCard(p){const events=all().filter(e=>names(e).includes(p.name));const sum=playerPrizeTotal(p.name);return `<a class="player" href="${escape(profileHref(p.name))}" data-open-profile="${escape(p.name)}"><div class="player-top"><div class="avatar">${escape(p.initials)}</div><div><div class="player-name">${escape(p.name)}</div><div class="player-region">🌏 遠征関連選手 · ${events.length?'戦績掲載中':'海外結果を調査中'}</div></div></div><div class="player-blurb"><span class="season-biography-note">${candidates.some(c=>c.name===p.name)?'紹介文：CH7 S4時点':'掲載選手'}</span>${escape(p.desc)}</div><div class="player-earnings${sum?'':' zero'}"><span>🏆 ${escape(seasonLabel())}の確認済み賞金<br><small>掲載済み・確認済みの個人累計</small></span><strong>${events.length?'$'+format(sum):'未登録'}</strong></div><div class="player-bottom"><span>掲載された海外戦績 <strong>${events.length}</strong> 件</span><span class="player-card-action">プロフィールを見る →</span></div></a>`}
-    let visible=[]; let selectedPlayer=null;
-    function archivePrize(e){
-      const duo=names(e).length>1;
-      const share=typeof e.prizePerPlayer==='number'&&Number.isFinite(e.prizePerPlayer)&&e.prizePerPlayer>0&&e.prizePerPlayer*names(e).length<=e.prize+0.001?e.prizePerPlayer:null;
-      const scope=duo?'チーム合計':'個人賞金';
-      const breakdown=duo?(share?`各選手 $${format(share)}`:'個人内訳未確認'):'';
-      if(isPrizeWin(e)||hasClaimedPrize(e))return `<span class="${isPrizeWin(e)?'prize-value':'prize-pending'}"><small>${scope}${hasClaimedPrize(e)?'・未確認':''}</small>$${format(e.prize)}${duo?`<small>${breakdown}</small>`:''}</span>`;
-      return `<span class="prize-zero">${e.prize===0?'$0':'—'}</span><small>${e.prize===0?'賞金なし':'未設定'}</small>`;
-    }
-    function archiveDetails(e){
-      const src=safeUrl(e.source);
-      const profiles=[...(safeUrl(e.profileUrl)?[{name:e.player,url:e.profileUrl}]:[]),...(Array.isArray(e.profiles)?e.profiles.filter(p=>safeUrl(p.url)):[])];
-      return `<details class="result-details"><summary><span class="sr-only">${escape(e.player)}・${escape(friendlyDate(e.date))}・${escape(e.event)}の</span><span class="open-label">詳細を見る</span><span class="close-label">詳細を閉じる</span></summary><dl class="result-detail-grid">
-        <div><dt>ポイント / PTS</dt><dd data-detail="points">${format(e.points)}</dd></div>
-        <div><dt>大会区分</dt><dd>${escape(e.kind||'未分類')}</dd></div>
-        <div><dt>確認状況</dt><dd>${escape(verificationLabel(e))}</dd></div>
-        <div><dt>シーズン</dt><dd>${seasonStamp(e)}</dd><dt>大会ラウンド</dt><dd data-detail="round">${escape(e.round||'未登録')}</dd></div>
-        <div><dt>大会での表示名</dt><dd data-detail="playerRaw">${escape(e.playerRaw||e.player)}</dd></div>
-        <div><dt>賞金内訳 / USD</dt><dd data-detail="prize">${archivePrize(e)}</dd></div>
-        <div class="detail-wide"><dt>出典URL</dt><dd data-detail="source">${src?`<a href="${escape(src)}" target="_blank" rel="noopener noreferrer">${escape(e.source)} ↗</a>`:'未登録'}</dd></div>
-        <div class="detail-wide detail-links"><dt>選手プロフィール</dt><dd data-detail="profiles">${profiles.length?profiles.map(p=>`<a class="result-profile" href="${escape(safeUrl(p.url))}" target="_blank" rel="noopener noreferrer">${escape(p.name)} ↗<span>${escape(p.url)}</span></a>`).join(''):'未登録'}</dd></div>
-        <div class="detail-wide"><dt>補足・確認根拠</dt><dd data-detail="note">${escape(e.note||'補足なし')}</dd></div>
-      </dl></details>`;
-    }
-    function archiveRow(e){
-      return `<article class="archive-row${isPrizeWin(e)?' is-prize-win':''}" data-result-id="${escape(e.id)}" aria-labelledby="result-player-${escape(e.id)}"><div class="archive-overview">
-        <div class="archive-date"><span class="field-label">日付</span><time data-field="date" datetime="${escape(e.date)}">${escape(friendlyDate(e.date))}</time>${seasonStamp(e)}</div>
-        <h3 class="archive-player" id="result-player-${escape(e.id)}" data-field="player">${profileNameLinks(e)}</h3>
-        <div class="archive-region"><span class="field-label">地域</span><span class="region-tag" data-field="region" data-region="${escape(e.region)}">${escape(e.region)}</span></div>
-        <div class="archive-event"><span class="field-label">大会名</span><p data-field="event">${escape(e.event)}</p><small>${escape(e.kind||'未分類')}</small></div>
-        <div class="archive-stat"><span class="field-label">順位</span><strong data-field="rank"${Number.isInteger(e.rank)?'':' class="unknown"'}>${rankLabel(e)}</strong></div>
-        <div class="archive-stat"><span class="field-label">KILLS</span><strong data-field="kills">${format(e.kills)}</strong></div>
-        <div class="archive-stat"><span class="field-label">VR</span><strong data-field="vrs">${format(e.vrs)}</strong></div>
-        <div class="archive-stat archive-prize"><span class="field-label">賞金 / USD</span><div data-field="prize">${archivePrize(e)}</div></div>
-      </div>${tournamentTags(e)}${archiveDetails(e)}</article>`;
-    }
-    function renderResults(){const s=($('#search-results').value||'').trim().toLowerCase();const r=$('#region-filter').value;const prize=$('#prize-only').checked;const stage=$('#stage-filter').value;visible=all().filter(e=>(!selectedPlayer||names(e).includes(selectedPlayer))&&(r==='all'||e.region===r)&&(stage==='all'||e.kind===stage)&&(!prize||isPrizeWin(e))&&(!s||[e.player,...names(e),e.playerRaw,e.event,e.region,e.round,e.note].some(x=>String(x||'').toLowerCase().includes(s))));const order=$('#sort-results').value;visible.sort((a,b)=>order==='rank'?((a.rank??Infinity)-(b.rank??Infinity)||b.date.localeCompare(a.date)):order==='kills'?((b.kills??-1)-(a.kills??-1)):b.date.localeCompare(a.date));$('#result-count').textContent=`${visible.length}件`;
-      if(!visible.length){$('#result-table').innerHTML='<div class="empty"><div class="emoji">🔎</div><b>条件に合う戦績がまだないよ</b><p>検索条件や絞り込みを変えてみてね</p></div>';return}
-      $('#result-table').innerHTML=`<div class="archive-head" aria-hidden="true"><span>日付</span><span>選手名</span><span>地域</span><span>大会名</span><span>順位</span><span>KILLS</span><span>VR</span><span>賞金 / USD</span></div><div class="archive-list">${visible.map(archiveRow).join('')}</div>`;
-    }
-    function renderPlayers(){const s=($('#search-players').value||'').trim().toLowerCase();const shown=selectedSeasonPlayers().filter(p=>[p.name,...(confirmedAliases[p.name]||[])].some(n=>n.toLowerCase().includes(s)));const sort=$('#player-sort').value;shown.sort((a,b)=>sort==='name'?a.name.localeCompare(b.name,'ja'):sort==='events'?all().filter(e=>names(e).includes(b.name)).length-all().filter(e=>names(e).includes(a.name)).length||a.name.localeCompare(b.name,'ja'):playerPrizeTotal(b.name)-playerPrizeTotal(a.name)||a.name.localeCompare(b.name,'ja'));$('#all-players').innerHTML=shown.length?shown.map(renderPlayerCard).join(''):'<div class="empty">一致する選手はまだいないよ</div>'}
-
-    function refresh(){renderSeasonControl();renderHome();renderResults();renderEarnings();renderPlayers();renderAotPR();renderUpdates()}
-    function csvText(rows){const cols=['date','player','players','region','event','round','rank','points','kills','vrs','prize','prizePerPlayer','kind','source','verified','note','chapter','season','seasonId'];const cell=x=>'"'+String(x??'').replace(/"/g,'""')+'"';return '\ufeff'+cols.join(',')+'\r\n'+rows.map(e=>cols.map(k=>cell(k==='players'?names(e).join(' / '):['chapter','season','seasonId'].includes(k)?recordSeason(e)[k]:e[k])).join(',')).join('\r\n')}
-    function download(name,content,type){const b=new Blob([content],{type});const url=URL.createObjectURL(b);const a=document.createElement('a');a.href=url;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000)}
-    document.addEventListener('click',e=>{
-      const prRegion=e.target.closest('[data-aot-pr-region]');
-      if(prRegion&&currentView.page==='players'){aotPrRegion=prRegion.dataset.aotPrRegion;renderAotPR();return}
-      const rankingRegion=e.target.closest('[data-ranking-region]');
-      if(rankingRegion&&currentView.page==='players'){updateRankingFilter('region',rankingRegion.dataset.rankingRegion);return}
-      if(e.target.closest('[data-ranking-more]')&&currentView.page==='players'){rankingLimit+=30;renderRanking();return}
-      if(e.target.closest('[data-registrations-more]')&&currentView.page==='updates'){registrationLimit+=20;renderUpdates();return}
-      if(e.target.closest('[data-journey-jump]')){e.preventDefault();$('#journey-title')?.focus?.({preventScroll:true});$('#profile-journey')?.scrollIntoView?.({behavior:'instant',block:'start'});return}
-      const journeyMode=e.target.closest('[data-journey-mode]');
-      if(journeyMode&&currentView.page==='profile'){
-        if(['highlights','prize'].includes(journeyMode.dataset.journeyMode)){journeyState.mode=journeyMode.dataset.journeyMode;journeyState.limit=30;renderJourney()}
-        return;
-      }
-      if(e.target.closest('[data-journey-more]')&&currentView.page==='profile'){journeyState.limit+=30;renderJourney();return}
-      if(e.target.closest('[data-journey-history]')){e.preventDefault();$('#profile-history-title')?.scrollIntoView?.({behavior:'smooth',block:'start'});return}
-
-      if(e.target.closest('[data-tournament-back]')){tournamentBack();return}
-      if(e.target.closest('[data-profile-back]')){profileBack();return}
-      const tournament=e.target.closest('[data-open-tournament]');
-      const tag=e.target.closest('[data-tournament-tag]');
-      const reset=e.target.closest('[data-tournament-reset]');
-      if(tournament||tag||reset){
-        if(e.ctrlKey||e.metaKey||e.shiftKey||e.altKey||e.button>0)return;e.preventDefault();
-        if(tournament)openTournament(tournament.dataset.openTournament);
-        else if(tag){const [axis,value]=tag.dataset.tournamentTag.split(':');tournamentTagNavigate(axis,value,tag.dataset.tournamentContext)}
-        else visitView({page:'tournaments',name:null,id:null,filters:tournamentDefaultFilters()});
-        return;
-      }
-      const profile=e.target.closest('[data-open-profile]');
-      if(profile){if(e.ctrlKey||e.metaKey||e.shiftKey||e.altKey||e.button>0)return;e.preventDefault();openProfile(profile.dataset.openProfile);return}
-      const nav=e.target.closest('[data-page]');
-      if(nav){if(e.ctrlKey||e.metaKey||e.shiftKey||e.altKey||e.button>0)return;e.preventDefault();navigate(nav.dataset.page);return}
-      const p=e.target.closest('[data-player]');if(p){selectedPlayer=p.dataset.player;$('#search-results').value=p.dataset.player;$('#region-filter').value='all';$('#stage-filter').value='all';$('#prize-only').checked=false;navigate('results')}
-    });
-    ['#region-filter','#stage-filter','#sort-results','#prize-only'].forEach(s=>$(s).addEventListener('input',renderResults));$('#search-results').addEventListener('input',()=>{selectedPlayer=null;renderResults()});$('#search-players').addEventListener('input',renderPlayers);$('#player-sort').addEventListener('change',renderPlayers);$('#export-csv').addEventListener('click',()=>download('asia-on-tour-results.csv',csvText(visible),'text/csv;charset=utf-8'));
-    document.addEventListener('input',e=>{if(e.target.id==='tournament-query')updateTournamentFilters('q',e.target.value)});
-    document.addEventListener('change',e=>{if(e.target.id==='season-select'){changeSeason(e.target.value);return}const rankingKey={'ranking-metric':'metric','ranking-mode':'mode','ranking-series':'series','ranking-final-kind':'finalKind'}[e.target.id];if(rankingKey&&currentView.page==='players'){updateRankingFilter(rankingKey,e.target.value);return}if(e.target.dataset.tournamentFilter)updateTournamentFilters(e.target.dataset.tournamentFilter,e.target.value)});
-    selectedSeason=seasonFromUrl();
-    refresh();
-    initializeRouting();
-  })().catch(err=>{
-  console.error('ASIA ON TOUR could not initialize:',err);
-  const notice=document.createElement('div');
-  notice.setAttribute('role','alert');
-  notice.style.cssText='background:#492129;color:#fff0e6;padding:16px 22px;font:14px sans-serif;position:relative;z-index:9999';
-  notice.textContent='サイトデータを読み込めませんでした。GitHub Pagesで全ファイルを同じ場所に配置し、再読み込みしてください。';
-  document.body.prepend(notice);
-});
-+format(payout.total),detail:'賞金獲得 '+format(payout.events)+'件 · デュオは個人分のみ'},
-        pr&&{key:'pr',label:'AOT POWER RANKING',name:pr.name,title:'独自PR・総合トップ',
-          value:prNumber(pr.score)+' pt',detail:'総合 #'+format(pr.rank)+' · '+format(pr.appearances)+'開催枠 · 非公式'},
-        vr&&{key:'vrs',label:'VERIFIED VICTORY ROYALES',name:vr.name,title:'確認済み海外VR',
-          value:format(vr.value)+' VR',detail:'確認済み '+format(vr.knownRecords)+'戦績 · チームVR含む'}
+        prize&&{id:'prize',label:'CONFIRMED EARNINGS LEADER',title:'確認済み個人賞金',name:prize.name,value:'$'+format(prize.total),note:'賞金獲得 '+format(prize.events)+'件 · デュオは個人分のみ'},
+        pr&&{id:'pr',label:'AOT POWER RANKING',title:'独自PR・総合トップ',name:pr.name,value:prNumber(pr.score)+' pt',note:'総合 #'+format(pr.rank)+' · '+format(pr.appearances)+'開催枠 · 非公式'},
+        vr&&{id:'vrs',label:'VERIFIED VICTORY ROYALES',title:'確認済み海外VR',name:vr.name,value:format(vr.value)+' VR',note:'数値確認 '+format(vr.knownRecords)+'戦績 · チーム戦を含む'}
       ].filter(Boolean);
-      $('#home-showcase-players').innerHTML=picks.length?picks.map((item,i)=>
-        '<a class="home-pick'+(!i?' is-lead':'')+'" data-home-feature="'+escape(item.key)+'"'
-        +' href="'+escape(profileHref(item.name))+'" data-open-profile="'+escape(item.name)+'">'
-        +'<span class="home-pick-index">'+escape(item.label)+'</span>'
-        +'<span class="home-pick-label">'+escape(item.title)+'</span>'
-        +'<strong class="home-pick-name">'+escape(item.name)+'</strong>'
-        +'<span class="home-pick-value">'+escape(item.value)+'</span>'
-        +'<span class="home-pick-context">'+escape(item.detail)+'</span>'
-        +'<span class="home-pick-action">プロフィールを見る ↗</span></a>'
-      ).join(''):'<div class="empty">この期間に、注目選手として掲載できる確認済み実績はまだありません。</div>';
+      $('#home-showcase-players').innerHTML=picks.length?picks.map((p,i)=>
+        '<a class="home-pick'+(!i?' is-lead':'')+'" data-home-feature="'+escape(p.id)+'" href="'+escape(profileHref(p.name))+'" data-open-profile="'+escape(p.name)+'">'
+        +'<span class="home-pick-index">'+escape(p.label)+'</span><span class="home-pick-label">'+escape(p.title)+'</span>'
+        +'<strong class="home-pick-name">'+escape(p.name)+'</strong><span class="home-pick-value">'+escape(p.value)+'</span>'
+        +'<span class="home-pick-context">'+escape(p.note)+'</span><span class="home-pick-action">プロフィールを見る ↗</span></a>'
+      ).join(''):'<div class="empty">この期間に注目選手として表示できる確認済み実績はまだありません。</div>';
     }
     function renderHomeRecords(){
-      const rows=all(),used=new Set(),recent=(a,b)=>String(b.date||'').localeCompare(String(a.date||''))||String(a.id||'').localeCompare(String(b.id||''));
-      const winner=rows.filter(row=>individualPrize(row)>0).sort((a,b)=>individualPrize(b)-individualPrize(a)||recent(a,b))[0];
-      const selections=[];
-      if(winner){selections.push({key:'payout',label:'掲載内の最高個人賞金',eyebrow:'BIGGEST VERIFIED PAYOUT',value:'$('#stat-results').textContent=a.length;$('#stat-players').textContent=new Set(a.flatMap(names)).size;$('#stat-regions').textContent=new Set(a.map(e=>e.region)).size;$('#stat-top10').textContent=a.filter(e=>e.rank<=10).length;const latest=a.slice().sort((x,y)=>y.date.localeCompare(x.date)).slice(0,3);$('#latest-results').innerHTML=latest.length?latest.map(resultCard).join(''):'<div class="empty">まだ戦績が登録されていないよ</div>';$('#region-breakdown').innerHTML=regions.map(r=>{const n=a.filter(e=>e.region===r).length;const percent=a.length?(n/a.length*100):0;return `<div class="region-entry"><div class="reg-left"><div class="flag" data-region="${escape(r)}">${escape(r)}</div><div class="reg-details"><strong>${{ME:'中東',EU:'ヨーロッパ',NAC:'北米中部',NAW:'北米西部',OCE:'オセアニア',BR:'ブラジル'}[r]}</strong><small>${n?'登録あり':'未登録'}</small><div class="reg-bar"><span style="width:${percent}%"></span></div></div></div><span class="reg-count">${n}</span></div>`}).join('');renderHomeShowcase();renderHomeRecords()}
-    function renderPlayerCard(p){const events=all().filter(e=>names(e).includes(p.name));const sum=playerPrizeTotal(p.name);return `<a class="player" href="${escape(profileHref(p.name))}" data-open-profile="${escape(p.name)}"><div class="player-top"><div class="avatar">${escape(p.initials)}</div><div><div class="player-name">${escape(p.name)}</div><div class="player-region">🌏 遠征関連選手 · ${events.length?'戦績掲載中':'海外結果を調査中'}</div></div></div><div class="player-blurb"><span class="season-biography-note">${candidates.some(c=>c.name===p.name)?'紹介文：CH7 S4時点':'掲載選手'}</span>${escape(p.desc)}</div><div class="player-earnings${sum?'':' zero'}"><span>🏆 ${escape(seasonLabel())}の確認済み賞金<br><small>掲載済み・確認済みの個人累計</small></span><strong>${events.length?'$'+format(sum):'未登録'}</strong></div><div class="player-bottom"><span>掲載された海外戦績 <strong>${events.length}</strong> 件</span><span class="player-card-action">プロフィールを見る →</span></div></a>`}
-    let visible=[]; let selectedPlayer=null;
-    function archivePrize(e){
-      const duo=names(e).length>1;
-      const share=typeof e.prizePerPlayer==='number'&&Number.isFinite(e.prizePerPlayer)&&e.prizePerPlayer>0&&e.prizePerPlayer*names(e).length<=e.prize+0.001?e.prizePerPlayer:null;
-      const scope=duo?'チーム合計':'個人賞金';
-      const breakdown=duo?(share?`各選手 $${format(share)}`:'個人内訳未確認'):'';
-      if(isPrizeWin(e)||hasClaimedPrize(e))return `<span class="${isPrizeWin(e)?'prize-value':'prize-pending'}"><small>${scope}${hasClaimedPrize(e)?'・未確認':''}</small>$${format(e.prize)}${duo?`<small>${breakdown}</small>`:''}</span>`;
-      return `<span class="prize-zero">${e.prize===0?'$0':'—'}</span><small>${e.prize===0?'賞金なし':'未設定'}</small>`;
-    }
-    function archiveDetails(e){
-      const src=safeUrl(e.source);
-      const profiles=[...(safeUrl(e.profileUrl)?[{name:e.player,url:e.profileUrl}]:[]),...(Array.isArray(e.profiles)?e.profiles.filter(p=>safeUrl(p.url)):[])];
-      return `<details class="result-details"><summary><span class="sr-only">${escape(e.player)}・${escape(friendlyDate(e.date))}・${escape(e.event)}の</span><span class="open-label">詳細を見る</span><span class="close-label">詳細を閉じる</span></summary><dl class="result-detail-grid">
-        <div><dt>ポイント / PTS</dt><dd data-detail="points">${format(e.points)}</dd></div>
-        <div><dt>大会区分</dt><dd>${escape(e.kind||'未分類')}</dd></div>
-        <div><dt>確認状況</dt><dd>${escape(verificationLabel(e))}</dd></div>
-        <div><dt>シーズン</dt><dd>${seasonStamp(e)}</dd><dt>大会ラウンド</dt><dd data-detail="round">${escape(e.round||'未登録')}</dd></div>
-        <div><dt>大会での表示名</dt><dd data-detail="playerRaw">${escape(e.playerRaw||e.player)}</dd></div>
-        <div><dt>賞金内訳 / USD</dt><dd data-detail="prize">${archivePrize(e)}</dd></div>
-        <div class="detail-wide"><dt>出典URL</dt><dd data-detail="source">${src?`<a href="${escape(src)}" target="_blank" rel="noopener noreferrer">${escape(e.source)} ↗</a>`:'未登録'}</dd></div>
-        <div class="detail-wide detail-links"><dt>選手プロフィール</dt><dd data-detail="profiles">${profiles.length?profiles.map(p=>`<a class="result-profile" href="${escape(safeUrl(p.url))}" target="_blank" rel="noopener noreferrer">${escape(p.name)} ↗<span>${escape(p.url)}</span></a>`).join(''):'未登録'}</dd></div>
-        <div class="detail-wide"><dt>補足・確認根拠</dt><dd data-detail="note">${escape(e.note||'補足なし')}</dd></div>
-      </dl></details>`;
-    }
-    function archiveRow(e){
-      return `<article class="archive-row${isPrizeWin(e)?' is-prize-win':''}" data-result-id="${escape(e.id)}" aria-labelledby="result-player-${escape(e.id)}"><div class="archive-overview">
-        <div class="archive-date"><span class="field-label">日付</span><time data-field="date" datetime="${escape(e.date)}">${escape(friendlyDate(e.date))}</time>${seasonStamp(e)}</div>
-        <h3 class="archive-player" id="result-player-${escape(e.id)}" data-field="player">${profileNameLinks(e)}</h3>
-        <div class="archive-region"><span class="field-label">地域</span><span class="region-tag" data-field="region" data-region="${escape(e.region)}">${escape(e.region)}</span></div>
-        <div class="archive-event"><span class="field-label">大会名</span><p data-field="event">${escape(e.event)}</p><small>${escape(e.kind||'未分類')}</small></div>
-        <div class="archive-stat"><span class="field-label">順位</span><strong data-field="rank"${Number.isInteger(e.rank)?'':' class="unknown"'}>${rankLabel(e)}</strong></div>
-        <div class="archive-stat"><span class="field-label">KILLS</span><strong data-field="kills">${format(e.kills)}</strong></div>
-        <div class="archive-stat"><span class="field-label">VR</span><strong data-field="vrs">${format(e.vrs)}</strong></div>
-        <div class="archive-stat archive-prize"><span class="field-label">賞金 / USD</span><div data-field="prize">${archivePrize(e)}</div></div>
-      </div>${tournamentTags(e)}${archiveDetails(e)}</article>`;
-    }
-    function renderResults(){const s=($('#search-results').value||'').trim().toLowerCase();const r=$('#region-filter').value;const prize=$('#prize-only').checked;const stage=$('#stage-filter').value;visible=all().filter(e=>(!selectedPlayer||names(e).includes(selectedPlayer))&&(r==='all'||e.region===r)&&(stage==='all'||e.kind===stage)&&(!prize||isPrizeWin(e))&&(!s||[e.player,...names(e),e.playerRaw,e.event,e.region,e.round,e.note].some(x=>String(x||'').toLowerCase().includes(s))));const order=$('#sort-results').value;visible.sort((a,b)=>order==='rank'?((a.rank??Infinity)-(b.rank??Infinity)||b.date.localeCompare(a.date)):order==='kills'?((b.kills??-1)-(a.kills??-1)):b.date.localeCompare(a.date));$('#result-count').textContent=`${visible.length}件`;
-      if(!visible.length){$('#result-table').innerHTML='<div class="empty"><div class="emoji">🔎</div><b>条件に合う戦績がまだないよ</b><p>検索条件や絞り込みを変えてみてね</p></div>';return}
-      $('#result-table').innerHTML=`<div class="archive-head" aria-hidden="true"><span>日付</span><span>選手名</span><span>地域</span><span>大会名</span><span>順位</span><span>KILLS</span><span>VR</span><span>賞金 / USD</span></div><div class="archive-list">${visible.map(archiveRow).join('')}</div>`;
-    }
-    function renderPlayers(){const s=($('#search-players').value||'').trim().toLowerCase();const shown=selectedSeasonPlayers().filter(p=>[p.name,...(confirmedAliases[p.name]||[])].some(n=>n.toLowerCase().includes(s)));const sort=$('#player-sort').value;shown.sort((a,b)=>sort==='name'?a.name.localeCompare(b.name,'ja'):sort==='events'?all().filter(e=>names(e).includes(b.name)).length-all().filter(e=>names(e).includes(a.name)).length||a.name.localeCompare(b.name,'ja'):playerPrizeTotal(b.name)-playerPrizeTotal(a.name)||a.name.localeCompare(b.name,'ja'));$('#all-players').innerHTML=shown.length?shown.map(renderPlayerCard).join(''):'<div class="empty">一致する選手はまだいないよ</div>'}
-
-    function refresh(){renderSeasonControl();renderHome();renderResults();renderEarnings();renderPlayers();renderAotPR();renderUpdates()}
-    function csvText(rows){const cols=['date','player','players','region','event','round','rank','points','kills','vrs','prize','prizePerPlayer','kind','source','verified','note','chapter','season','seasonId'];const cell=x=>'"'+String(x??'').replace(/"/g,'""')+'"';return '\ufeff'+cols.join(',')+'\r\n'+rows.map(e=>cols.map(k=>cell(k==='players'?names(e).join(' / '):['chapter','season','seasonId'].includes(k)?recordSeason(e)[k]:e[k])).join(',')).join('\r\n')}
-    function download(name,content,type){const b=new Blob([content],{type});const url=URL.createObjectURL(b);const a=document.createElement('a');a.href=url;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000)}
-    document.addEventListener('click',e=>{
-      const prRegion=e.target.closest('[data-aot-pr-region]');
-      if(prRegion&&currentView.page==='players'){aotPrRegion=prRegion.dataset.aotPrRegion;renderAotPR();return}
-      const rankingRegion=e.target.closest('[data-ranking-region]');
-      if(rankingRegion&&currentView.page==='players'){updateRankingFilter('region',rankingRegion.dataset.rankingRegion);return}
-      if(e.target.closest('[data-ranking-more]')&&currentView.page==='players'){rankingLimit+=30;renderRanking();return}
-      if(e.target.closest('[data-registrations-more]')&&currentView.page==='updates'){registrationLimit+=20;renderUpdates();return}
-      if(e.target.closest('[data-journey-jump]')){e.preventDefault();$('#journey-title')?.focus?.({preventScroll:true});$('#profile-journey')?.scrollIntoView?.({behavior:'instant',block:'start'});return}
-      const journeyMode=e.target.closest('[data-journey-mode]');
-      if(journeyMode&&currentView.page==='profile'){
-        if(['highlights','prize'].includes(journeyMode.dataset.journeyMode)){journeyState.mode=journeyMode.dataset.journeyMode;journeyState.limit=30;renderJourney()}
-        return;
-      }
-      if(e.target.closest('[data-journey-more]')&&currentView.page==='profile'){journeyState.limit+=30;renderJourney();return}
-      if(e.target.closest('[data-journey-history]')){e.preventDefault();$('#profile-history-title')?.scrollIntoView?.({behavior:'smooth',block:'start'});return}
-
-      if(e.target.closest('[data-tournament-back]')){tournamentBack();return}
-      if(e.target.closest('[data-profile-back]')){profileBack();return}
-      const tournament=e.target.closest('[data-open-tournament]');
-      const tag=e.target.closest('[data-tournament-tag]');
-      const reset=e.target.closest('[data-tournament-reset]');
-      if(tournament||tag||reset){
-        if(e.ctrlKey||e.metaKey||e.shiftKey||e.altKey||e.button>0)return;e.preventDefault();
-        if(tournament)openTournament(tournament.dataset.openTournament);
-        else if(tag){const [axis,value]=tag.dataset.tournamentTag.split(':');tournamentTagNavigate(axis,value,tag.dataset.tournamentContext)}
-        else visitView({page:'tournaments',name:null,id:null,filters:tournamentDefaultFilters()});
-        return;
-      }
-      const profile=e.target.closest('[data-open-profile]');
-      if(profile){if(e.ctrlKey||e.metaKey||e.shiftKey||e.altKey||e.button>0)return;e.preventDefault();openProfile(profile.dataset.openProfile);return}
-      const nav=e.target.closest('[data-page]');
-      if(nav){if(e.ctrlKey||e.metaKey||e.shiftKey||e.altKey||e.button>0)return;e.preventDefault();navigate(nav.dataset.page);return}
-      const p=e.target.closest('[data-player]');if(p){selectedPlayer=p.dataset.player;$('#search-results').value=p.dataset.player;$('#region-filter').value='all';$('#stage-filter').value='all';$('#prize-only').checked=false;navigate('results')}
-    });
-    ['#region-filter','#stage-filter','#sort-results','#prize-only'].forEach(s=>$(s).addEventListener('input',renderResults));$('#search-results').addEventListener('input',()=>{selectedPlayer=null;renderResults()});$('#search-players').addEventListener('input',renderPlayers);$('#player-sort').addEventListener('change',renderPlayers);$('#export-csv').addEventListener('click',()=>download('asia-on-tour-results.csv',csvText(visible),'text/csv;charset=utf-8'));
-    document.addEventListener('input',e=>{if(e.target.id==='tournament-query')updateTournamentFilters('q',e.target.value)});
-    document.addEventListener('change',e=>{if(e.target.id==='season-select'){changeSeason(e.target.value);return}const rankingKey={'ranking-metric':'metric','ranking-mode':'mode','ranking-series':'series','ranking-final-kind':'finalKind'}[e.target.id];if(rankingKey&&currentView.page==='players'){updateRankingFilter(rankingKey,e.target.value);return}if(e.target.dataset.tournamentFilter)updateTournamentFilters(e.target.dataset.tournamentFilter,e.target.value)});
-    selectedSeason=seasonFromUrl();
-    refresh();
-    initializeRouting();
-  })().catch(err=>{
-  console.error('ASIA ON TOUR could not initialize:',err);
-  const notice=document.createElement('div');
-  notice.setAttribute('role','alert');
-  notice.style.cssText='background:#492129;color:#fff0e6;padding:16px 22px;font:14px sans-serif;position:relative;z-index:9999';
-  notice.textContent='サイトデータを読み込めませんでした。GitHub Pagesで全ファイルを同じ場所に配置し、再読み込みしてください。';
-  document.body.prepend(notice);
-});
-+format(individualPrize(winner)),record:winner});used.add(winner.id);}
-      const final=rows.filter(row=>{const rank=confirmedPrizeFinalRank(row);return rank!==null&&rank<=3;}).sort(recent).find(row=>!used.has(row.id));
-      if(final){selections.push({key:'podium',label:'賞金決勝・総合TOP3の記録',eyebrow:'PRIZE FINAL · TOP 3',value:'#'+format(confirmedPrizeFinalRank(final)),record:final});used.add(final.id);}
-      const skin=rows.filter(confirmedSkinReward).sort(recent).find(row=>!used.has(row.id));
-      if(skin){selections.push({key:'skin',label:'確認済みスキン報酬獲得',eyebrow:'VERIFIED SKIN REWARD',value:'SKIN',record:skin});used.add(skin.id);}
-      $('#home-showcase-records').innerHTML=selections.length?selections.map(item=>{
-        const e=item.record,t=classifyTournamentRecord(e),source=safeUrl(e.source),players=[...new Set(names(e))];
-        return '<article class="home-record" data-home-record="'+escape(item.key)+'" data-result-id="'+escape(e.id)+'">'
-          +'<span class="home-record-label">'+escape(item.eyebrow)+'</span>'
-          +'<strong class="home-record-value">'+escape(item.value)+'</strong>'
-          +'<p class="home-pick-label">'+escape(item.label)+'</p>'
-          +'<h3><a href="'+escape(tournamentHref(t.id))+'" data-open-tournament="'+escape(t.id)+'">'+escape(e.event)+' ↗</a></h3>'
+      const rows=all(),used=new Set();
+      const recent=(a,b)=>String(b.date||'').localeCompare(String(a.date||''))||String(a.id||'').localeCompare(String(b.id||''));
+      const payout=rows.filter(r=>individualPrize(r)>0).sort((a,b)=>individualPrize(b)-individualPrize(a)||recent(a,b))[0];
+      const highlights=[];
+      if(payout){highlights.push({id:'payout',heading:'BIGGEST VERIFIED PAYOUT',label:'掲載内の最高個人賞金',value:'$'+format(individualPrize(payout)),row:payout});used.add(payout.id);}
+      const podium=rows.filter(r=>{const rank=confirmedPrizeFinalRank(r);return rank!==null&&rank<=3;})
+        .sort(recent).find(r=>!used.has(r.id));
+      if(podium){highlights.push({id:'podium',heading:'PRIZE FINAL · TOP 3',label:'賞金決勝の総合TOP3',value:'#'+format(confirmedPrizeFinalRank(podium)),row:podium});used.add(podium.id);}
+      const skin=rows.filter(confirmedSkinReward).sort(recent).find(r=>!used.has(r.id));
+      if(skin)highlights.push({id:'skin',heading:'VERIFIED SKIN REWARD',label:'確認済みスキン報酬獲得',value:'SKIN',row:skin});
+      $('#home-showcase-records').innerHTML=highlights.length?highlights.map(h=>{
+        const e=h.row,t=classifyTournamentRecord(e),source=safeUrl(e.source);
+        return '<article class="home-record" data-home-record="'+escape(h.id)+'" data-result-id="'+escape(e.id)+'">'
+          +'<span class="home-record-label">'+escape(h.heading)+'</span><strong class="home-record-value">'+escape(h.value)+'</strong>'
+          +'<p class="home-pick-label">'+escape(h.label)+'</p><h3><a href="'+escape(tournamentHref(t.id))+'" data-open-tournament="'+escape(t.id)+'">'+escape(e.event)+' ↗</a></h3>'
           +'<p class="home-record-detail">'+escape(friendlyDate(e.date))+' · '+escape(e.region)+' · '+escape(e.kind)+' · '+escape(rankLabel(e))+'</p>'
-          +'<div class="home-record-people">'+players.map(name=>'<a href="'+escape(profileHref(name))+'" data-open-profile="'+escape(name)+'">'+escape(name)+'</a>').join(' / ')+'</div>'
-          +(source?'<a class="home-record-source" href="'+escape(source)+'" target="_blank" rel="noopener noreferrer">出典で確認 ↗</a>':'<span class="home-record-detail">出典URL未登録</span>')
-          +'</article>';
+          +'<div class="home-record-people">'+[...new Set(names(e))].map(n=>'<a href="'+escape(profileHref(n))+'" data-open-profile="'+escape(n)+'">'+escape(n)+'</a>').join(' / ')+'</div>'
+          +(source?'<a class="home-record-source" href="'+escape(source)+'" target="_blank" rel="noopener noreferrer">出典で確認 ↗</a>':'<span class="home-record-detail">出典URL未登録</span>')+'</article>';
       }).join(''):'<div class="empty">この期間に掲載できる確認済みの賞金・総合TOP3・スキン報酬記録はまだありません。</div>';
     }
     function renderHome(){const a=all();$('#stat-results').textContent=a.length;$('#stat-players').textContent=new Set(a.flatMap(names)).size;$('#stat-regions').textContent=new Set(a.map(e=>e.region)).size;$('#stat-top10').textContent=a.filter(e=>e.rank<=10).length;const latest=a.slice().sort((x,y)=>y.date.localeCompare(x.date)).slice(0,3);$('#latest-results').innerHTML=latest.length?latest.map(resultCard).join(''):'<div class="empty">まだ戦績が登録されていないよ</div>';$('#region-breakdown').innerHTML=regions.map(r=>{const n=a.filter(e=>e.region===r).length;const percent=a.length?(n/a.length*100):0;return `<div class="region-entry"><div class="reg-left"><div class="flag" data-region="${escape(r)}">${escape(r)}</div><div class="reg-details"><strong>${{ME:'中東',EU:'ヨーロッパ',NAC:'北米中部',NAW:'北米西部',OCE:'オセアニア',BR:'ブラジル'}[r]}</strong><small>${n?'登録あり':'未登録'}</small><div class="reg-bar"><span style="width:${percent}%"></span></div></div></div><span class="reg-count">${n}</span></div>`}).join('');renderHomeShowcase();renderHomeRecords()}
