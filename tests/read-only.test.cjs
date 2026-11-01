@@ -1295,7 +1295,7 @@ test('newly registered results and update history are distinct from event dates'
   const batch = updates.entries.find(entry => entry.type === 'records');
   assert.ok(batch && batch.recordIds.length > 0);
   assert.match(app.get('home-new-registrations').innerHTML, /登録日/);
-  assert.match(app.get('home-update-preview').innerHTML, /更新履歴と新着登録/);
+  assert.ok(app.get('home-update-preview').innerHTML.includes(updates.entries[0].title), '最新の更新履歴を先頭に表示する');
   app.navigate('updates');
   assert.match(app.get('updates-feed').innerHTML, /サイト改善/);
   assert.ok(app.get('updates-feed').innerHTML.includes(batch.id));
