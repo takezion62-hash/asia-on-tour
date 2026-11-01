@@ -148,3 +148,32 @@ test('更新履歴と新着登録がPC・スマホで閲覧できる', async ({ 
   await expect(page).toHaveURL(/#player=/);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1)).toBe(true);
 });
+
+
+test('選手プロフィールの競技スタッツは確認済み戦績だけを集計し相方と形式を表示する', async ({ page }) => {
+  const teamRow = rows.find(row => Array.isArray(row.players) && row.players.length > 1 && row.verified === true);
+  expect(teamRow, 'チーム戦の検証用実データ').toBeTruthy();
+  const name = teamRow.players[0];
+  const own = rows.filter(row => roster(row).includes(name));
+  const verified = own.filter(row => row.verified === true);
+  const knownKills = verified.filter(row => Number.isInteger(row.kills) && row.kills >= 0);
+  const knownVR = verified.filter(row => Number.isInteger(row.vrs) && row.vrs >= 0);
+  const finals = verified.filter(row => ['賞金決勝', 'Practice決勝', 'Performance決勝', '決勝'].includes(row.kind) && Number.isInteger(row.rank) && row.rank > 0);
+  await page.goto('/?season=all#player=' + encodeURIComponent(name));
+  const snapshot = page.locator('#page-profile .profile-snapshot');
+  await expect(snapshot).toBeVisible();
+  const killsText = knownKills.length ? knownKills.reduce((sum, row) => sum + row.kills, 0).toLocaleString('ja-JP') : '—';
+  const vrText = knownVR.length ? knownVR.reduce((sum, row) => sum + row.vrs, 0).toLocaleString('ja-JP') : '—';
+  await expect(snapshot.locator('[data-profile-snapshot="kills"] strong')).toHaveText(killsText);
+  await expect(snapshot.locator('[data-profile-snapshot="vrs"] strong')).toHaveText(vrText);
+  await expect(snapshot.locator('[data-profile-snapshot="finals"] strong')).toHaveText(finals.length.toLocaleString('ja-JP'));
+  const modeTotal = await snapshot.locator('[data-profile-mode]').evaluateAll(elements =>
+    elements.reduce((sum, element) => sum + Number(element.querySelector('strong').textContent.replace(/[^0-9]/g, '')), 0));
+  expect(modeTotal).toBe(own.length);
+  const teammate = teamRow.players[1];
+  const partnerLink = snapshot.locator('[data-profile-partners] [data-open-profile="' + teammate + '"]').first();
+  await expect(partnerLink).toBeVisible();
+  await partnerLink.click();
+  await expect(page.locator('#profile-title')).toHaveText(teammate);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1)).toBe(true);
+});
