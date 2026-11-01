@@ -681,6 +681,34 @@
     .registration-more[hidden]{display:none}
     @media(max-width:940px){.update-overview{grid-template-columns:minmax(0,1fr)}}
     @media(max-width:640px){.registration-panel,.update-preview-panel,.updates-list-section{padding:14px}.registration-section .section-head{align-items:flex-start;flex-wrap:wrap;gap:9px}.registration-meta{font-size:11px}.updates-list-section .section-title{font-size:20px}.update-entry{padding:14px}}
+
+    /* Compact profile scouting snapshot */
+    .profile-snapshot{margin:0 0 26px}
+    .profile-snapshot-heading{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:0 0 15px}
+    .profile-snapshot-heading h2{margin:0;font-size:20px;font-weight:850}
+    .profile-snapshot-heading h2 span{color:#bba2ff}
+    .profile-snapshot-heading p{margin:0;color:#95a5c3;font-size:11px}
+    .profile-snapshot-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:15px}
+    .profile-snapshot-stat{min-width:0;border:1px solid #34405b;border-radius:14px;padding:17px;background:linear-gradient(135deg,#182038,#141a2c)}
+    .profile-snapshot-stat h3{margin:0;color:#a6b3ce;font-size:11px;font-weight:750}
+    .profile-snapshot-stat strong{display:block;margin:9px 0 6px;font-size:30px;line-height:1.15;font-weight:900;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+    .profile-snapshot-stat p{font-size:10px;color:#a0afca;line-height:1.75;margin:0;overflow-wrap:anywhere}
+    .profile-snapshot-details{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+    .profile-snapshot-panel{min-width:0;border:1px solid #313b55;border-radius:15px;background:#121a2b;padding:20px}
+    .profile-snapshot-panel h3{font-size:14px;line-height:1.5;margin:0 0 16px}
+    .profile-snapshot-panel h3 small{font-size:10px;color:#91a2bf;font-weight:650}
+    .profile-mode-list,.profile-partner-list{display:grid;gap:12px;list-style:none;padding:0;margin:0}
+    .profile-mode-row{display:grid;grid-template-columns:110px minmax(0,1fr) 50px;align-items:center;gap:11px;font-size:12px;color:#d9e4f7}
+    .profile-mode-row strong{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+    .profile-mode-track{height:9px;background:#252f46;border-radius:999px;overflow:hidden}
+    .profile-mode-track>span{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,#8e78e7,#59d7e0)}
+    .profile-partner-row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;min-width:0;border-bottom:1px solid #2b3550;padding-bottom:9px;font-size:12px}
+    .profile-partner-row a{color:#d9caff;text-decoration:underline;text-underline-offset:3px;overflow-wrap:anywhere;min-width:0}
+    .profile-partner-row span{color:#adbedb;font-weight:800;font-variant-numeric:tabular-nums;white-space:nowrap}
+    .profile-snapshot-note{margin:14px 0 0;font-size:10px;color:#99a9c7;line-height:1.85;overflow-wrap:anywhere}
+    .profile-snapshot-empty{font-size:12px;color:#a6b4d1;padding:7px 0}
+    @media(max-width:1100px){.profile-snapshot-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.profile-snapshot-details{grid-template-columns:1fr}}
+    @media(max-width:640px){.profile-snapshot-stats{gap:9px}.profile-snapshot-stat{padding:13px 12px}.profile-snapshot-stat strong{font-size:27px}.profile-snapshot-stat h3{font-size:10px}.profile-snapshot-panel{padding:16px 14px}.profile-mode-row{grid-template-columns:90px minmax(0,1fr) 42px;gap:7px;font-size:11px}}
   </style>
   <link rel="stylesheet" href="./aot-pr.css">
 </head>
@@ -790,6 +818,6 @@
 
   <script src="./rankings.js" defer></script>
   <script src="./aot-pr.js" defer></script>
-  <script src="./app.js?v=update-history-1.0.0" defer></script>
+  <script src="./app.js?v=profile-snapshot-1.0.0" defer></script>
 </body>
 </html>
