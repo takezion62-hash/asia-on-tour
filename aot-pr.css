@@ -1,0 +1,36 @@
+/* AOT PR v1.0: independent of the existing regional/achievement leaderboard */
+.aot-pr-section{border:1px solid #4c3f62;border-radius:19px;background:linear-gradient(135deg,#211c34,#121a29);padding:24px;margin:0 0 24px;min-width:0}
+.aot-pr-head{display:flex;align-items:start;justify-content:space-between;gap:16px;margin-bottom:16px;flex-wrap:wrap}
+.aot-pr-kicker{font-size:10px;font-weight:850;letter-spacing:.17em;color:#c5b4ff;margin:0 0 7px}
+.aot-pr-head h2{font-size:clamp(22px,3vw,30px);color:#f1eafd;margin:0}
+.aot-pr-note{font-size:12px;line-height:1.9;color:#a9b8d4;margin:0 0 16px}
+.aot-pr-regions{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 17px}
+.aot-pr-regions button{border:1px solid #59617b;border-radius:9px;background:#182138;color:#c8d6ee;min-height:40px;padding:8px 12px;font-size:12px;font-weight:800;cursor:pointer}
+.aot-pr-regions button[aria-pressed="true"]{background:#60418c;border-color:#b9a0fa;color:#fff}
+.aot-pr-regions button:focus-visible{outline:2px solid #cdb9ff;outline-offset:3px}
+.aot-pr-status{font-size:11px;color:#a8b4d1;margin:0 0 10px}
+.aot-pr-list{display:grid;gap:9px;list-style:none;margin:0;padding:0}
+.aot-pr-item{display:grid;grid-template-columns:46px minmax(0,1fr) auto;align-items:center;gap:13px;padding:12px 15px;border:1px solid #343d59;border-radius:12px;background:#171f31;min-width:0}
+.aot-pr-item[data-top="true"]{border-color:#716180;background:#232138}
+.aot-pr-rank{font-size:19px;font-weight:900;color:#c0b0e3;font-variant-numeric:tabular-nums}
+.aot-pr-item:first-child .aot-pr-rank{color:#f4d08b}
+.aot-pr-name{display:block;font-size:13px;font-weight:800;color:#e8eafd;text-decoration:none;overflow-wrap:anywhere}
+.aot-pr-name:hover{text-decoration:underline;color:#cbb5ff}
+.aot-pr-facts{display:block;color:#99a8c7;font-size:10px;line-height:1.8;overflow-wrap:anywhere}
+.aot-pr-score{font-size:20px;font-weight:850;white-space:nowrap;color:#ede2ff;font-variant-numeric:tabular-nums;text-align:right}
+.aot-pr-score small{display:block;font-size:10px;color:#a99cce}
+.aot-pr-method{font-size:11px;line-height:1.95;color:#9baac8;margin:16px 0 0}
+.aot-pr-profile{padding:21px;border:1px solid #55466e;border-radius:16px;background:linear-gradient(135deg,#1d1a2e,#121a29);margin:0 0 28px}
+.aot-pr-profile h2{font-size:19px;margin:0 0 13px;color:#eaddff}
+.aot-pr-overview{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:13px}
+.aot-pr-overview>div{padding:12px 8px;border-radius:11px;background:#111a2c;min-width:0;text-align:center}
+.aot-pr-overview dt{font-size:10px;color:#98a9ca;margin:0 0 6px}
+.aot-pr-overview dd{font-size:17px;color:#f2eaff;font-weight:900;margin:0;overflow-wrap:anywhere}
+.aot-pr-breakdown{border-top:1px solid #47415d;padding-top:12px}
+.aot-pr-breakdown summary{font-weight:800;color:#d1c2fc;cursor:pointer;min-height:30px}
+.aot-pr-breakdown ol{padding:0;margin:12px 0 0;list-style:none;display:grid;gap:8px}
+.aot-pr-breakdown li{background:#131c2e;padding:11px;border-radius:9px;font-size:11px;color:#c8d1e7}
+.aot-pr-breakdown li strong{color:#f5e7fd}
+.aot-pr-breakdown li span{display:block;color:#99aacb;margin:4px 0}
+.aot-pr-breakdown a{color:#9adce8}
+@media(max-width:640px){.aot-pr-section{padding:17px 14px}.aot-pr-item{grid-template-columns:32px minmax(0,1fr) auto;gap:8px;padding:11px 9px}.aot-pr-rank{font-size:15px}.aot-pr-score{font-size:15px}.aot-pr-name{font-size:12px}.aot-pr-overview{grid-template-columns:repeat(2,minmax(0,1fr))}.aot-pr-profile{padding:16px 13px}}
