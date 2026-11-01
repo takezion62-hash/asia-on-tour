@@ -9,10 +9,23 @@ ASIA勢のFortnite海外大会戦績を検索・閲覧する、GitHub Pagesの�
 - `rankings.js`：地域別・実績別ランキングの共通集計（ブラウザー／Node.js）
 - `aot-pr.js` / `aot-pr.css`：AOT PR v1.0の計算と表示
 - `results.json`：戦績の配列
+- `updates.json`：更新履歴と登録日を確認できた戦績IDの差分リスト
 - `players.json`：`candidates`（名鑑）と`confirmedAliases`（確認済み別名義）
 - `tournaments.json`：`axes`（5分類軸）と`catalog`（大会・シーズン・出典ID）
 
 掲載内容はJSONを編集して更新します。3つのJSON、`rankings.js`、`aot-pr.js`、`aot-pr.css`、`app.js`は`index.html`と同じ場所へ配置してください。ローカルではHTTPサーバーを使用します。
+
+
+## 更新履歴と新着登録
+
+ホームの「新着 REGISTRATIONS」とナビの「更新履歴」で、サイトへ新しく掲載した戦績とサイト改善履歴を分けて表示します。大会開催日は元の `results.json` の `date` のまま、新着登録日は `updates.json` の `entries[].date`（日本時間）で管理します。
+
+- `type: "records"` はGitHubの差分で新規追加が確認できた**戦績IDのみ**を `recordIds` に記載します。修正済みレコードを新着扱いせず、日付を推測しません。
+- `type: "site"` はサイト機能・分類の改善記録です。`recordIds: []` にします。
+- **新しい戦績を登録する際は、results.json と updates.json をセットで更新**します。これは運用で明示的に追加する履歴で、GitHub APIから自動取得する仕組みではありません。書き忘れた戦績は新着欄に表示されません。
+- 既存履歴は2026年11月1日の実コミット2件の新規追加差分（38＋20件）を元にしています。それ以前の登録日を推測していません。
+- ホームでは新着4件、更新履歴ページでは新着20件ずつと全更新履歴を表示します。新着は選択中のシーズンで絞り込みますが、更新履歴の記録自体は全期間を表示します。
+- `npm run validate` は `updates.json` の更新ID・日付・登録戦績IDの整合性も検証します。
 
 ## AOT POWER RANKING v1.0
 
