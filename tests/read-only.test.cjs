@@ -8,6 +8,7 @@ const html = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
 const { loadData, summarize, seasonFor, tournamentFor, tournamentKey } = require('../scripts/data-checks.cjs');
 const data = loadData(path.join(__dirname, '..')).data;
 const records = data.results;
+const updates = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'updates.json'), 'utf8'));
 // The real asynchronous loader is exercised by Playwright. The DOM harness
 // substitutes only its input data so these exhaustive rendering tests stay fast.
 const script = (() => {
@@ -22,7 +23,7 @@ const script = (() => {
     ['tournamentAxes', 'siteData.tournaments.axes', data.tournaments.axes], ['tournamentCatalog', 'siteData.tournaments.catalog', data.tournaments.catalog],
     ['confirmedAliases', 'siteData.players.confirmedAliases', data.players.confirmedAliases]
   ]) body = body.replace('const ' + name + '=' + reference + ';', () => 'const ' + name + '=' + (Array.isArray(value) ? literal(value) : JSON.stringify(value)) + ';');
-  return '(() => {\n' + body + '\n})();';
+  return '(() => {\n const updateEntries=' + JSON.stringify(updates.entries) + ';\n' + body + '\n})();';
 })();
 const sampleRecord = { id:'unit-fixture', date:'2026-09-01', region:'ME', player:'Fixture', playerRaw:'Fixture', event:'Solo Victory Cup Battle Royale', round:'Event 1 · Round 2 / 賞金決勝', rank:17, points:100, kills:2, vrs:1, prize:100, kind:'賞金決勝', source:'https://fortnitetracker.com/events/epicgames_S42_SoloVictoryCup_ME', verified:true, note:'単体テスト専用データ' };
 const decode = value => value.replace(/&(amp|lt|gt|quot|#39);/g,
@@ -420,12 +421,12 @@ test('unknown duo shares, unverified prizes, zero and unset prizes remain distin
 test('all navigation pages remain usable with accurate active state', () => {
   const app = boot();
   const initialScrolls = app.scrolls.length;
-  for (const page of ['results', 'players', 'tournaments', 'about', 'home']) {
+  for (const page of ['results', 'players', 'tournaments', 'updates', 'about', 'home']) {
     app.navigate(page);
     assert.deepEqual(app.sections.filter(element => element.classList.contains('active')).map(element => element.id), [`page-${page}`]);
     assert.equal(app.nav.find(element => element.dataset.page === page).attributes['aria-current'], 'page');
   }
-  assert.equal(app.scrolls.length - initialScrolls, 5);
+  assert.equal(app.scrolls.length - initialScrolls, 6);
   assert.equal(app.storageAccesses(), 0);
 });
 
@@ -1279,4 +1280,18 @@ test('older chapter options come from registered catalog metadata and conflictin
   const [row] = renderedArticles(app);
   assert.equal(row.id, conflict.id);
   assert.ok(tournamentTags(row.content).every(tag => tag.value === 'unknown'));
+});
+
+test('newly registered results and update history are distinct from event dates', () => {
+  const app = boot();
+  const batch = updates.entries.find(entry => entry.type === 'records');
+  assert.ok(batch && batch.recordIds.length > 0);
+  assert.match(app.get('home-new-registrations').innerHTML, /登録日/);
+  assert.match(app.get('home-update-preview').innerHTML, /更新履歴と新着登録/);
+  app.navigate('updates');
+  assert.match(app.get('updates-feed').innerHTML, /サイト改善/);
+  assert.ok(app.get('updates-feed').innerHTML.includes(batch.id));
+  assert.match(app.get('new-entries-list').innerHTML, /大会開催日/);
+  assert.ok(app.get('new-registration-count').textContent.includes('登録日を確認できた'));
+  assert.equal(app.storageAccesses(), 0);
 });
