@@ -17,7 +17,7 @@ const script = (() => {
   const end = source.lastIndexOf('  })().catch');
   assert.ok(start >= 0 && end > start, 'Application bootstrap boundary changed');
   let body = source.slice(start, end);
-  body = body.replace('const updateEntries=siteData.updates.entries;', ''); // injected below for the DOM harness
+  body = body.replace('const updateEntries=siteData.updates?.entries||[];', ''); // injected below for the DOM harness
   const literal = value => JSON.stringify(value).replace(/\]$/, '\n    ]');
   for (const [name, reference, value] of [
     ['builtIn', 'siteData.results', records], ['candidates', 'siteData.players.candidates', data.players.candidates],
