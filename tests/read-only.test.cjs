@@ -194,7 +194,6 @@ function boot(source = script, { hash = '', search = '?season=all' } = {}) {
       window.history.pushState(null, '', next.href);
       window.dispatch('hashchange', window, { oldURL, newURL: next.href });
     },
-    spotlight() { click(elements.find(element => Object.hasOwn(element.dataset, 'spotlight'))); }
   };
 }
 
@@ -482,12 +481,20 @@ test('player drilldown includes duo records and typing a new search clears the s
   assert.match(app.get('all-players').innerHTML, /data-open-profile="meath"/);
 });
 
-test('spotlight opens its region and player result view', () => {
+test('home performance showcases only data-derived player and record highlights', () => {
   const app = boot();
-  app.spotlight();
-  assert.equal(app.get('search-results').value, 'Karf');
-  assert.equal(app.get('region-filter').value, 'ME');
-  assertRows(app, newest(records.filter(record => record.region === 'ME' && record.player.includes('Karf'))));
+  const players=app.get('home-showcase-players').innerHTML;
+  const moments=app.get('home-showcase-records').innerHTML;
+  const leader=summarize(data).ranking[0];
+  assert.ok(leader && leader.total > 0);
+  assert.match(players, /data-home-feature="prize"/);
+  assert.match(players, /data-home-feature="pr"/);
+  assert.match(players, /data-home-feature="vrs"/);
+  assert.match(players, /data-open-profile=/);
+  assert.match(players, /公式順位ではありません|非公式/);
+  assert.match(moments, /data-home-record="payout"/);
+  assert.match(moments, /data-open-tournament=/);
+  assert.doesNotMatch(players+moments, /2026\.08\.25|ME OVERSEAS SPOTLIGHT/);
 });
 
 function parseCSV(text) {
@@ -1158,7 +1165,7 @@ test('registered past seasons and unknown records partition dashboards, director
   assert.equal(app.get('stat-results').textContent, 3);
   assert.equal(app.get('stat-players').textContent, 3);
   assert.equal(app.get('home-earnings-sum').textContent, '$400');
-  assert.equal(app.get('home-spotlight').hidden, true);
+  assert.doesNotMatch(app.get('home-showcase-players').innerHTML, /確認済み個人賞金[^]*ME OVERSEAS SPOTLIGHT/);
   assert.deepEqual(profileLinks(app.get('all-players').innerHTML).map(p => p.name).sort(), ['RGN p1ng', 'miru', 'p1ng'].sort());
   assert.match(plain(app.get('player-earnings-leaders').innerHTML), /p1ng\$200/);
   assert.doesNotMatch(plain(app.get('player-earnings-leaders').innerHTML), /RGN p1ng/);
