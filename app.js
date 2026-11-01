@@ -16,7 +16,7 @@
     // CH7S4 / Override · 2026-08-20 through 2026-10-18 (snapshot, not exhaustive)
     // Every record includes the intended match-region in its source round ID; some official result URLs use a generic region query parameter.
     const builtIn=siteData.results;
-    const updateEntries=siteData.updates.entries;
+    const updateEntries=siteData.updates?.entries||[];
     const candidates=siteData.players.candidates;
     const regions=['ME','EU','NAC','NAW','OCE','BR'];
     const $=s=>document.querySelector(s);
