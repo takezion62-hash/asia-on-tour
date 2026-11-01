@@ -177,3 +177,28 @@ test('選手プロフィールの競技スタッツは確認済み戦績だけ�
   await expect(page.locator('#profile-title')).toHaveText(teammate);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1)).toBe(true);
 });
+
+
+test('ホームの注目選手・記録は掲載された確認済み戦績から選ばれ、プロフィールと大会へ移動できる', async ({ page }) => {
+  const report=summarize(data),leader=report.ranking[0];
+  expect(leader?.total).toBeGreaterThan(0);
+  const featured=page.locator('#home-showcase-players');
+  const prize=featured.locator('[data-home-feature="prize"]');
+  await expect(prize).toContainText(leader.name);
+  await expect(prize).toContainText(money(leader.total));
+  await expect(featured.locator('[data-home-feature="pr"]')).toBeVisible();
+  await expect(featured.locator('[data-home-feature="vrs"]')).toBeVisible();
+  const moments=page.locator('#home-showcase-records');
+  const best=rows.filter(row=>personalCents(row)>0).sort((a,b)=>personalCents(b)-personalCents(a)||b.date.localeCompare(a.date))[0];
+  await expect(moments.locator('[data-home-record="payout"]')).toHaveAttribute('data-result-id',best.id);
+  await expect(moments.locator('[data-home-record="payout"] .home-record-value')).toHaveText(money(personalCents(best)/100));
+  await expect(moments.locator('[data-home-record="payout"] .home-record-source')).toHaveAttribute('href',best.source);
+  await prize.click();
+  await expect(page.locator('#profile-title')).toHaveText(leader.name);
+  await page.goto('/?season=all#home');
+  await moments.locator('[data-home-record="payout"] [data-open-tournament]').click();
+  await expect(page.locator('#page-tournament')).toBeVisible();
+  await page.goto('/?season=S41#home');
+  await expect(page.locator('#stat-results')).not.toHaveText(String(rows.length));
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth+1)).toBe(true);
+});
