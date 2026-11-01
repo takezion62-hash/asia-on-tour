@@ -6,7 +6,7 @@
 
 ## 分類の考え方
 
-大会分類は、既存の戦績データとは別の `tournamentCatalog` に保存しています。大会シリーズ・ゲーム形式・大会細分類・チーム人数・機種条件の5項目を独立した軸として扱います。予選・Practice決勝・Performance決勝・賞金決勝・コスメ大会は、既存の `kind` に基づく別の絞り込みです。
+大会分類は、既存の戦績データとは別の `tournamentCatalog` に保存しています。大会シリーズ・ゲーム形式・大会細分類・チーム人数・機種条件の5項目を独立した軸として扱います。予選・Practice決勝・Performance決勝・賞金決勝・スキン大会は、既存の `kind` に基づく別の絞り込みです。
 
 - 登録済みの大会名、出典の大会識別子、公式大会ページ・公式規則を照合します。
 - 形式や機種条件を確定できない項目は「未確認」にします。機種制限の記載がないことを、PC限定・制限なし・クロスプラットフォームの根拠にしません。
@@ -110,7 +110,7 @@ PlayStation NickEh30 Icon Cupは、既存出典の `S42_PSNickEh30_Qualifier_NAW
 |Override Series: KINGDOM HEARTS Cup|[公式大会ページ](https://www.fortnite.com/competitive/events/S42_KingdomHeartsCup/?region=ME)と[公式規則](https://www.fortnite.com/competitive/rules-guidelines/rules-library/override-series-kingdom-hearts-cup-chapter-7-season-4-official-rules)。ソロとシリーズを確認し、形式・機種条件は未確認を維持。|
 |Fortnite Performance Evaluation|[当該S42公式大会ページ](https://www.fortnite.com/competitive/events/S42_PerformanceEvaluation/?region=NAC)で通常バトロワ・デュオと性能検証イベントであることを確認。FNCS参加条件をPracticeという分類の根拠にはしない。|
 |PlayStation NickEh30 Icon Cup|[当該予選を含む公式大会情報](https://www.fortnite.com/competitive/events/S42_PSNickEh30?region=NAC&round=S42_PSNickEh30_Qualifier_NAW)と[公式規則](https://www.fortnite.com/competitive/rules-guidelines/rules-library/playstation-nick-eh-30-cup)で、モード別開催・ソロを確認。PlayStationは明示された大会名を使用。|
-|Champion Focus FNCS Cup|[公式大会ページ](https://www.fortnite.com/competitive/events/S42_ChampionFocusFNCSCup/)と[公式規則](https://www.fortnite.com/competitive/rules-guidelines/rules-library/champion-focus-fncs-cup-chapter-7-season-4-official-rules)でソロ・コスメ大会を確認。既存ラウンド表記を併用し、PracticeやFNCS本戦とは別区分にする。|
+|Champion Focus FNCS Cup|[公式大会ページ](https://www.fortnite.com/competitive/events/S42_ChampionFocusFNCSCup/)と[公式規則](https://www.fortnite.com/competitive/rules-guidelines/rules-library/champion-focus-fncs-cup-chapter-7-season-4-official-rules)でソロ・スキン大会を確認。既存ラウンド表記を併用し、PracticeやFNCS本戦とは別区分にする。|
 
 元の大会順位・ポイント・賞金を再取得して置き換える作業は行っていません。上記の追加確認は大会分類の根拠に使用しています。
 

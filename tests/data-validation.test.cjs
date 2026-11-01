@@ -90,11 +90,12 @@ test('過大な個人配分・チーム内重複を戦績ID付きで拒否する
   bad((data, row) => { row.players = ['first', 'first']; delete row.profileUrl; }, 'players', '重複');
 });
 
-test('予選VR・コスメ・未確認賞金を現金へ加算しない', () => {
+test('予選VR・スキン大会・未確認賞金を現金へ加算しない', () => {
   const base = current.results[soloIndex];
-  for (const row of [{ ...base, kind: '予選', vrs: 99, prize: null }, { ...base, kind: 'コスメ大会', prize: null }, { ...base, verified: false }, { ...base, prize: 0 }]) assert.equal(personalCents(row), 0);
+  for (const row of [{ ...base, kind: '予選', vrs: 99, prize: null }, { ...base, kind: 'スキン大会', prize: 100 }, { ...base, kind: 'コスメ大会', prize: 100 }, { ...base, verified: false }, { ...base, prize: 0 }]) assert.equal(personalCents(row), 0);
   bad((data, row) => { row.kind = '予選'; row.prize = 100; }, 'prize', '予選VR');
-  bad((data, row) => { row.kind = 'コスメ大会'; row.prize = 100; }, 'prize', 'コスメ');
+  bad((data, row) => { row.kind = 'スキン大会'; row.prize = 100; }, 'prize', 'スキン大会');
+  bad((data, row) => { row.kind = 'コスメ大会'; row.prize = 0; }, 'kind', 'スキン大会');
 });
 
 test('存在しないタグ・大会IDと大会／ラウンドのシーズン矛盾を検出する', () => {
