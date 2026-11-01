@@ -123,3 +123,28 @@ test('JSON読み込み失敗を画面上で通知し、正常表示に見せか�
   await page.reload();
   await expect(page.getByRole('alert')).toContainText('サイトデータを読み込めませんでした');
 });
+
+
+test('更新履歴と新着登録がPC・スマホで閲覧できる', async ({ page }) => {
+  const log = JSON.parse(await fs.readFile(path.join(__dirname, '..', 'updates.json'), 'utf8'));
+  const expected = log.entries.filter(e => e.type === 'records').flatMap(e => e.recordIds);
+  await expect(page.locator('#home-new-registrations [data-registration-id]')).toHaveCount(Math.min(expected.length, 4));
+  await page.getByRole('button', { name: '更新履歴', exact: true }).click();
+  await expect(page).toHaveURL(/#updates$/);
+  await expect(page.locator('#updates-feed [data-update-id]')).toHaveCount(log.entries.length);
+  await expect(page.locator('#new-entries-list [data-registration-id]')).toHaveCount(Math.min(20, expected.length));
+  await expect(page.locator('#new-registration-count')).toContainText('登録日を確認できた');
+  if (expected.length > 20) {
+    await page.locator('#registration-more').click();
+    await expect(page.locator('#new-entries-list [data-registration-id]')).toHaveCount(Math.min(40, expected.length));
+  }
+  const meta = page.locator('#new-entries-list .registration-meta').first();
+  await expect(meta).toContainText('登録日');
+  await expect(meta).toContainText('大会開催日');
+  const details = page.locator('#updates-feed details').first();
+  await details.locator('summary').click();
+  await expect(details.locator('[data-open-profile]').first()).toBeVisible();
+  await details.locator('[data-open-profile]').first().click();
+  await expect(page).toHaveURL(/#player=/);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1)).toBe(true);
+});
