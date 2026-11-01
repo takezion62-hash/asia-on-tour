@@ -258,12 +258,117 @@
       const source=session.records.map(e=>safeUrl(e.source)).find(Boolean);
       return `<section class="tournament-session" data-tournament-session="${escape(session.id)}"><header class="tournament-session-heading"><div><h3>${regionPill(session.region)}<time datetime="${escape(session.date)}">${escape(friendlyDate(session.date))}</time><span>${escape(session.kind||'区分未確認')}</span></h3><p>${escape(session.round||'ラウンド未確認')}</p>${session.uncertain?'<p class="tournament-session-uncertain">ラウンドID未確認のため、ほかの記録とは分けて表示</p>':''}${source?`<a class="tournament-session-source" href="${escape(source)}" target="_blank" rel="noopener noreferrer">開催枠の出典 ↗</a>`:''}</div><span class="tournament-session-count">${format(session.records.length)}戦績</span></header><div class="tournament-session-records">${session.records.map(tournamentRecordCard).join('')}</div></section>`;
     }
+
+    // A published qualifier record is not proof of advancement.
+    // Only explicit round labels establish a confirmed qualifier in these summaries.
+    const tournamentFinalKinds=new Set(['賞金決勝','Practice決勝','Performance決勝','決勝']);
+    const tournamentIsConfirmedQualifier=e=>e.verified===true&&e.kind==='予選'&&/予選(?:突破|通過)/u.test(String(e.round||''));
+    const tournamentPhase=e=>e.kind==='予選'?'qualifier':tournamentFinalKinds.has(e.kind)?'final':'other';
+    let tournamentProgressMode='all',tournamentProgressId=null;
+    function tournamentProgressSummary(records){
+      const qualifiers=records.filter(e=>tournamentPhase(e)==='qualifier');
+      const finals=records.filter(e=>tournamentPhase(e)==='final');
+      const prizes=records.filter(isPrizeWin);
+      const advancers=qualifiers.filter(tournamentIsConfirmedQualifier);
+      const people=rows=>new Set(rows.flatMap(names)).size;
+      return {qualifiers,finals,prizes,advancers,people};
+    }
+    function tournamentProgressFilter(e){
+      if(tournamentProgressMode==='qualifier')return tournamentPhase(e)==='qualifier';
+      if(tournamentProgressMode==='final')return tournamentPhase(e)==='final';
+      if(tournamentProgressMode==='prize')return isPrizeWin(e);
+      return true;
+    }
+    // Same exact published name, region, date and explicit Event/Week/Session token.
+    // This indicates linked listed rounds, not independent confirmation of a qualification threshold.
+    function tournamentProgressToken(e){
+      const round=String(e.round||'');
+      const src=tournamentSource(e),text=[round,String(src.roundId||'')];
+      for(const part of text){
+        const m=part.match(/(?:^|[^A-Za-z])(?:Event|Week|Session)[ _#-]*(\d+)/iu);
+        if(m)return m[0].trim().replace(/^[^A-Za-z]+/,'').replace(/[ _#-]+/g,'').toLowerCase();
+      }
+      return null;
+    }
+    function tournamentProgressMatches(records){
+      const grouped=new Map();
+      for(const row of records){
+        if(row.verified!==true||!['qualifier','final'].includes(tournamentPhase(row)))continue;
+        const token=tournamentProgressToken(row);
+        if(!token||!row.region||!row.date)continue;
+        for(const name of new Set(names(row))){
+          const id=JSON.stringify([name,row.region,row.date,token]);
+          if(!grouped.has(id))grouped.set(id,{name,region:row.region,date:row.date,token,qualifiers:[],finals:[]});
+          grouped.get(id)[tournamentPhase(row)==='qualifier'?'qualifiers':'finals'].push(row);
+        }
+      }
+      return [...grouped.values()].filter(x=>x.qualifiers.length&&x.finals.length)
+        .sort((a,b)=>b.date.localeCompare(a.date)||a.region.localeCompare(b.region)||a.name.localeCompare(b.name,'ja'));
+    }
+    function tournamentProgressHighlights(info,summary){
+      const orderRank=(a,b)=>(a.rank??Infinity)-(b.rank??Infinity)||String(b.date||'').localeCompare(String(a.date||''));
+      const quals=summary.advancers.slice().sort(orderRank).slice(0,4);
+      const finals=summary.finals.filter(e=>e.verified===true&&Number.isInteger(e.rank)&&e.rank>0)
+        .sort(orderRank).slice(0,4);
+      const prizes=summary.prizes.slice().sort((a,b)=>individualPrize(b)-individualPrize(a)||String(b.date||'').localeCompare(String(a.date||''))).slice(0,4);
+      function item(e,kind){
+        const suffix=kind==='prize'?archivePrize(e):escape(rankLabel(e));
+        return '<li data-tournament-highlight="'+escape(kind)+'" data-highlight-record="'+escape(e.id)+'">'
+          +'<div class="tournament-highlight-name">'+profileNameLinks(e)+'</div>'
+          +'<div class="tournament-highlight-facts">'+escape(friendlyDate(e.date))+' · '+escape(e.region)+' · '
+          +escape(kind==='prize'?e.kind:e.round||e.kind)+'</div>'
+          +'<strong class="tournament-highlight-value">'+suffix+'</strong></li>';
+      }
+      const block=(key,title,subtitle,rows)=>
+        '<section class="tournament-highlight-block" data-tournament-highlight-group="'+key+'"><h3>'+title+'</h3>'
+        +'<p>'+subtitle+'</p><ol>'+ (rows.length?rows.map(e=>item(e,key)).join(''):'<li class="tournament-progress-empty">該当する確認済み戦績はまだありません</li>')+'</ol></section>';
+      return '<div class="tournament-highlights">'
+        +block('qualifier','予選突破を確認','「予選突破・予選通過」と明記された掲載記録のみ',quals)
+        +block('final','決勝の好成績','確認済みの総合順位がある決勝から抜粋',finals)
+        +block('prize','賞金獲得','出典確認済みの現金賞金記録のみ',prizes)
+        +'</div>';
+    }
+    function tournamentProgress(info){
+      const summary=tournamentProgressSummary(info.records),matches=tournamentProgressMatches(info.records);
+      const options=[
+        {key:'all',label:'全戦績',count:info.records.length,description:'予選・決勝・スキン大会を含む'},
+        {key:'qualifier',label:'予選',count:summary.qualifiers.length,description:'突破明記 '+format(summary.advancers.length)+'件'},
+        {key:'final',label:'決勝',count:summary.finals.length,description:'各種決勝の掲載記録'},
+        {key:'prize',label:'賞金獲得',count:summary.prizes.length,description:'確認済み現金賞金のみ'}
+      ];
+      const cards=options.map(option=>
+        '<button type="button" class="tournament-phase-card" data-tournament-phase="'+option.key+'" aria-pressed="'+(tournamentProgressMode===option.key)+'" aria-controls="tournament-record-sessions">'
+        +'<span>'+escape(option.label)+'</span><strong>'+format(option.count)+'<small>件</small></strong>'
+        +'<small>'+escape(option.description)+'</small></button>').join('');
+      const matchRows=matches.map(x=>{
+        const qual=x.qualifiers.slice().sort((a,b)=>(a.rank??Infinity)-(b.rank??Infinity))[0];
+        const final=x.finals.slice().sort((a,b)=>(a.rank??Infinity)-(b.rank??Infinity))[0];
+        return '<li data-tournament-linked="'+escape(x.name)+'"><a href="'+escape(profileHref(x.name))+'" data-open-profile="'+escape(x.name)+'">'+escape(x.name)+'</a>'
+          +'<span>'+escape(x.region)+' · '+escape(friendlyDate(x.date))+' · '+escape(x.token)+'</span>'
+          +'<span>予選 '+escape(rankLabel(qual))+' → 決勝 '+escape(rankLabel(final))+'</span></li>';
+      }).join('');
+      return '<section class="tournament-progress" aria-labelledby="tournament-progress-title">'
+        +'<header><p class="tournament-kicker">EVENT PROGRESSION / VERIFIED RECORDS</p>'
+        +'<h2 id="tournament-progress-title">予選 → 決勝 → 賞金獲得</h2>'
+        +'<p>大会内の掲載結果を段階別に確認。予選の掲載は突破を意味せず、決勝の掲載も賞金獲得を意味しません。</p></header>'
+        +'<div class="tournament-phase-grid" role="group" aria-label="大会の表示段階">'+cards+'</div>'
+        +'<p class="tournament-progress-totals">掲載対象：予選 '+format(summary.qualifiers.length)+'件（突破明記 '+format(summary.advancers.length)+'件） / 決勝 '+format(summary.finals.length)+'件 / 賞金獲得 '+format(summary.prizes.length)+'件 · '+format(summary.people(summary.prizes))+'名</p>'
+        +tournamentProgressHighlights(info,summary)
+        +'<details class="tournament-linked-progress"><summary>同じ開催枠で予選・決勝の両方が掲載されている選手（'+format(matches.length)+'件）</summary>'
+        +'<p>掲載名の完全一致、開催地域・日付、明示されたEvent/Week/Session番号でのみ照合。異なる日付や識別不明の記録を推測で接続しません。通過ラインや未収録の戦績を保証するものではありません。</p>'
+        +(matches.length?'<ul>'+matchRows+'</ul>':'<p>この条件で紐付けられる予選・決勝の掲載記録はありません。</p>')+'</details>'
+        +'</section>';
+    }
+
     function renderTournament(id){
       const info=tournamentInfo(id);
+      if(tournamentProgressId!==id){tournamentProgressId=id;tournamentProgressMode='all';}
       if(!info){$('#tournament-detail-content').innerHTML='<div class="tournament-detail-toolbar"><button type="button" class="btn sm ghost" data-tournament-back>← 戻る</button><a href="#tournaments" data-page="tournaments">大会を探す</a></div><div class="empty"><b>大会が見つかりません</b><p>URLを確認するか、大会検索から探してください。</p></div>';return}
       const roster=new Set(info.records.flatMap(names));
       const visited=regions.filter(r=>info.records.some(e=>e.region===r));
-      $('#tournament-detail-content').innerHTML=`<div class="tournament-detail-toolbar"><button type="button" class="btn sm ghost" data-tournament-back>← 戻る</button><a href="${escape(tournamentHref(info.id))}" title="このURLをコピーして共有できます">大会のURL ↗</a></div><header class="tournament-detail-hero"><p class="tournament-kicker">TOURNAMENT / ASIA RESULTS</p><div class="tournament-detail-meta"><span class="tournament-season">${escape(tournamentViewSeason(info))}</span>${visited.map(regionPill).join('')}</div><h1 id="tournament-title" tabindex="-1">${escape(info.name)}</h1>${info.records.length?tournamentTags(info.records[0]):''}<dl class="tournament-detail-summary"><div><dt>掲載戦績</dt><dd>${format(info.recordCount??info.records.length)}<small>件</small></dd></div><div><dt>地域・日付・ラウンド</dt><dd>${format(info.sessions.length)}<small>枠</small></dd></div><div><dt>掲載選手</dt><dd>${format(roster.size)}<small>名</small></dd></div></dl>${tournamentViewEvidence(info)}</header><div class="tournament-sessions-heading"><h2>開催枠ごとの戦績</h2><p>新しい順 · 地域・日付・ラウンドを分けて表示 · ラウンドID未確認は個別表示 · 金色は賞金獲得</p></div><div class="tournament-sessions">${info.sessions.length?info.sessions.map(tournamentViewSession).join(''):'<div class="empty"><b>戦績はまだ掲載されていません</b></div>'}</div>`;
+      const visibleSessions=info.sessions.map(session=>({...session,records:session.records.filter(tournamentProgressFilter)})).filter(session=>session.records.length>0);
+      const visibleCount=visibleSessions.reduce((sum,session)=>sum+session.records.length,0);
+      $('#tournament-detail-content').innerHTML=`<div class="tournament-detail-toolbar"><button type="button" class="btn sm ghost" data-tournament-back>← 戻る</button><a href="${escape(tournamentHref(info.id))}" title="このURLをコピーして共有できます">大会のURL ↗</a></div><header class="tournament-detail-hero"><p class="tournament-kicker">TOURNAMENT / ASIA RESULTS</p><div class="tournament-detail-meta"><span class="tournament-season">${escape(tournamentViewSeason(info))}</span>${visited.map(regionPill).join('')}</div><h1 id="tournament-title" tabindex="-1">${escape(info.name)}</h1>${info.records.length?tournamentTags(info.records[0]):''}<dl class="tournament-detail-summary"><div><dt>掲載戦績</dt><dd>${format(info.recordCount??info.records.length)}<small>件</small></dd></div><div><dt>地域・日付・ラウンド</dt><dd>${format(info.sessions.length)}<small>枠</small></dd></div><div><dt>掲載選手</dt><dd>${format(roster.size)}<small>名</small></dd></div></dl>${tournamentViewEvidence(info)}</header>${tournamentProgress(info)}<div class="tournament-sessions-heading"><h2>開催枠ごとの戦績</h2><p aria-live="polite">全${format(info.recordCount)}件中 ${format(visibleCount)}件を表示 · 新しい順 · 地域・日付・ラウンド別 · 金色は賞金獲得</p></div><div class="tournament-sessions" id="tournament-record-sessions">${visibleSessions.length?visibleSessions.map(tournamentViewSession).join(''):'<div class="empty"><b>この表示条件に該当する戦績はありません</b><p>「全戦績」を選ぶと、スキン大会などの記録も確認できます。</p></div>'}</div>`;
     }
     function renderTournamentDetail(id){renderTournament(id)}
 
@@ -860,6 +965,15 @@
       if(e.target.closest('[data-journey-more]')&&currentView.page==='profile'){journeyState.limit+=30;renderJourney();return}
       if(e.target.closest('[data-journey-history]')){e.preventDefault();$('#profile-history-title')?.scrollIntoView?.({behavior:'smooth',block:'start'});return}
 
+      const tournamentPhaseButton=e.target.closest('[data-tournament-phase]');
+      if(tournamentPhaseButton&&currentView.page==='tournament'){
+        const mode=tournamentPhaseButton.dataset.tournamentPhase;
+        if(['all','qualifier','final','prize'].includes(mode)){
+          tournamentProgressMode=mode;
+          renderTournament(currentView.id);
+        }
+        return;
+      }
       if(e.target.closest('[data-tournament-back]')){tournamentBack();return}
       if(e.target.closest('[data-profile-back]')){profileBack();return}
       const tournament=e.target.closest('[data-open-tournament]');
