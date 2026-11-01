@@ -6,16 +6,17 @@
       if(!response.ok)throw new Error(filename+' could not be loaded (HTTP '+response.status+')');
       return response.json();
     };
-    const [records,playerData,tournamentData]=await Promise.all([
-      loadJSON('results.json'),loadJSON('players.json'),loadJSON('tournaments.json')
+    const [records,playerData,tournamentData,updateData]=await Promise.all([
+      loadJSON('results.json'),loadJSON('players.json'),loadJSON('tournaments.json'),loadJSON('updates.json')
     ]);
-    const siteData={results:records,players:playerData,tournaments:tournamentData};
-    if(!Array.isArray(siteData.results)||!Array.isArray(siteData.players.candidates)||!Array.isArray(siteData.tournaments.catalog))
+    const siteData={results:records,players:playerData,tournaments:tournamentData,updates:updateData};
+    if(!Array.isArray(siteData.results)||!Array.isArray(siteData.players.candidates)||!Array.isArray(siteData.tournaments.catalog)||!Array.isArray(siteData.updates.entries))
       throw new Error('Invalid ASIA ON TOUR data files');
 
     // CH7S4 / Override · 2026-08-20 through 2026-10-18 (snapshot, not exhaustive)
     // Every record includes the intended match-region in its source round ID; some official result URLs use a generic region query parameter.
     const builtIn=siteData.results;
+    const updateEntries=siteData.updates.entries;
     const candidates=siteData.players.candidates;
     const regions=['ME','EU','NAC','NAW','OCE','BR'];
     const $=s=>document.querySelector(s);
@@ -314,7 +315,7 @@
       if(hash==='#tournaments'||hash.startsWith('#tournaments?')){const params=new URLSearchParams(hash.split('?').slice(1).join('?'));return {page:'tournaments',filters:sanitizeTournamentFilters(Object.fromEntries(params))}}
       if(hash==='#players'||hash.startsWith('#players?')){const params=new URLSearchParams(hash.split('?').slice(1).join('?'));return {page:'players',ranking:{filters:sanitizeRankingFilters(Object.fromEntries(params)),limit:30}}}
       const page=hash.slice(1);
-      return {page:['home','results','players','about'].includes(page)?page:'home',name:null};
+      return {page:['home','results','players','updates','about'].includes(page)?page:'home',name:null};
     }
     function routeHash(view){
       if(view.page==='profile')return view.invalid?window.location.hash:profileHref(view.name||'');
@@ -335,7 +336,7 @@
       document.querySelectorAll('.nav button').forEach(e=>{const active=e.dataset.page===(view.page==='profile'?'players':view.page==='tournament'?'tournaments':view.page);e.classList.toggle('active',active);e.setAttribute('aria-current',active?'page':'false')});
       if(view.page==='results')renderResults();
       if(view.page==='players'){renderPlayers();renderRanking()}
-      document.title=view.page==='profile'&&profileInfo(view.name)?view.name+' · ASIA ON TOUR':view.page==='tournament'&&tournamentInfo(view.id)?tournamentInfo(view.id).name+' · ASIA ON TOUR':view.page==='tournaments'?'大会を探す · ASIA ON TOUR':'ASIA ON TOUR — Fortnite海外遠征トラッカー';
+      document.title=view.page==='profile'&&profileInfo(view.name)?view.name+' · ASIA ON TOUR':view.page==='tournament'&&tournamentInfo(view.id)?tournamentInfo(view.id).name+' · ASIA ON TOUR':view.page==='tournaments'?'大会を探す · ASIA ON TOUR':view.page==='updates'?'更新履歴 · ASIA ON TOUR':'ASIA ON TOUR — Fortnite海外遠征トラッカー';
       routedHash=window.location.hash;
       window.scrollTo({top:restore?(view.scroll||0):0,behavior:'instant'});
       if(!restore){if(view.page==='profile')$('#profile-title')?.focus?.({preventScroll:true});if(view.page==='tournament')$('#tournament-title')?.focus?.({preventScroll:true});}
@@ -629,6 +630,58 @@
     function regionPill(r){return `<span class="pill" data-region="${escape(r)}">🌐 ${escape(r)}</span>`}
     function resultCard(e){const v=verificationLabel(e);const src=safeUrl(e.source);return `<article class="result-card${isPrizeWin(e)?' is-prize-win':''}"><div class="rank ${e.rank===1?'gold':e.rank<=3?'silver':''}">${Number.isInteger(e.rank)?'<span class="hash">#</span>':''}${Number.isInteger(e.rank)?format(e.rank):'<span style="font-size:19px">'+(e.reported?'確認中':'通過')+'</span>'}</div><div><div class="result-title">${profileNameLinks(e)} <span style="color:#9fa7bf;font-weight:600;font-size:11px">/ ${escape(e.event)}</span></div>${isPrizeWin(e)||hasClaimedPrize(e)?`<div class="prize-ribbon">${winBadge(e,true)}</div>`:''}<div class="result-sub">${seasonStamp(e)} ${friendlyDate(e.date)} · ASIA → ${escape(e.region)} · ${escape(e.round||'大会結果')}</div><div class="result-meta">${regionPill(e.region)}<span class="pill">${escape(stageLabel(e))}</span><span class="pill ${e.partial?'orange':e.verified?'green':'orange'}">${e.reported?'△':e.partial?'△':e.verified?'✓':'✎'} ${v}</span><span class="pill">${format(e.kills)} KILLS</span><span class="pill">${format(e.vrs)} VR</span></div></div><div class="right-data"><div class="score">${format(e.points)} <small>PTS</small></div>${src?`<a class="external-link" href="${escape(src)}" target="_blank" rel="noopener noreferrer">出典を見る ↗</a>`:'<span class="fine">出典未登録</span>'}</div></article>`}
 
+
+    // A registration date is recorded only when a GitHub addition is verified.
+    let registrationLimit=20;
+    function registeredRows(){
+      const byId=new Map(rawAll().map(record=>[record.id,record]));
+      const inSeason=new Set(all().map(record=>record.id));
+      const seen=new Set(),registered=[];
+      for(const entry of updateEntries){
+        if(entry.type!=='records'||!Array.isArray(entry.recordIds))continue;
+        for(const id of entry.recordIds){
+          if(seen.has(id))continue;
+          seen.add(id);
+          const record=byId.get(id);
+          if(record&&inSeason.has(id))registered.push({record,registeredAt:entry.date});
+        }
+      }
+      return registered;
+    }
+    function registrationItem(item){
+      return '<div class="registration-item" data-registration-id="'+escape(item.record.id)+'">'
+        +'<p class="registration-meta"><span>NEW · 登録日 <time datetime="'+escape(item.registeredAt)+'">'+escape(friendlyDate(item.registeredAt))+'</time></span>'
+        +'<span class="competition-date">大会開催日 <time datetime="'+escape(item.record.date)+'">'+escape(friendlyDate(item.record.date))+'</time></span></p>'
+        +resultCard(item.record)+'</div>';
+    }
+    function updateRecordLinks(entry,byId){
+      const ids=Array.isArray(entry.recordIds)?entry.recordIds:[];
+      if(!ids.length)return '';
+      const records=ids.map(id=>byId.get(id)).filter(Boolean);
+      return '<details><summary>今回追加した'+format(records.length)+'件の戦績を見る</summary><ul class="update-record-links">'
+        +records.map(record=>'<li><a href="'+escape(profileHref(names(record)[0]))+'" data-open-profile="'+escape(names(record)[0])+'">'
+          +escape(record.player)+'</a> · '+escape(record.region)+' · '+escape(record.kind)+' · '+escape(rankLabel(record))+'</li>').join('')
+        +'</ul></details>';
+    }
+    function updateEntryItem(entry,byId){
+      const category=entry.type==='records'?'新着戦績':'サイト改善';
+      return '<article class="update-entry" data-update-id="'+escape(entry.id)+'"><div>'
+        +'<span class="update-entry-label">'+escape(category)+'</span><time datetime="'+escape(entry.date)+'">'+escape(friendlyDate(entry.date))+'</time></div>'
+        +'<h3 class="update-entry-title">'+escape(entry.title)+'</h3>'
+        +'<p class="update-entry-description">'+escape(entry.description)+'</p>'
+        +updateRecordLinks(entry,byId)+'</article>';
+    }
+    function renderUpdates(){
+      const records=registeredRows(),byId=new Map(rawAll().map(record=>[record.id,record]));
+      const empty='<div class="empty">登録日を確認できる新着戦績はまだありません。大会の開催日から推測して表示することはありません。</div>';
+      $('#home-new-registrations').innerHTML=records.length?records.slice(0,4).map(registrationItem).join(''):empty;
+      $('#new-entries-list').innerHTML=records.length?records.slice(0,registrationLimit).map(registrationItem).join(''):empty;
+      $('#registration-more').hidden=registrationLimit>=records.length;
+      $('#new-registration-count').textContent='登録日を確認できた '+format(records.length)+'戦績 · '+seasonScope()+' · '+format(Math.min(registrationLimit,records.length))+'件表示';
+      $('#home-update-preview').innerHTML=updateEntries.slice(0,3).map(entry=>'<div class="update-preview-line"><time datetime="'+escape(entry.date)+'">'+escape(friendlyDate(entry.date))+'</time><p>'+escape(entry.title)+'</p></div>').join('');
+      $('#updates-feed').innerHTML=updateEntries.length?updateEntries.map(entry=>updateEntryItem(entry,byId)).join(''):'<div class="empty">まだ更新履歴はありません</div>';
+    }
+
     function renderHome(){const a=all();$('#stat-results').textContent=a.length;$('#stat-players').textContent=new Set(a.flatMap(names)).size;$('#stat-regions').textContent=new Set(a.map(e=>e.region)).size;$('#stat-top10').textContent=a.filter(e=>e.rank<=10).length;const latest=a.slice().sort((x,y)=>y.date.localeCompare(x.date)).slice(0,3);$('#latest-results').innerHTML=latest.length?latest.map(resultCard).join(''):'<div class="empty">まだ戦績が登録されていないよ</div>';$('#region-breakdown').innerHTML=regions.map(r=>{const n=a.filter(e=>e.region===r).length;const percent=a.length?(n/a.length*100):0;return `<div class="region-entry"><div class="reg-left"><div class="flag" data-region="${escape(r)}">${escape(r)}</div><div class="reg-details"><strong>${{ME:'中東',EU:'ヨーロッパ',NAC:'北米中部',NAW:'北米西部',OCE:'オセアニア',BR:'ブラジル'}[r]}</strong><small>${n?'登録あり':'未登録'}</small><div class="reg-bar"><span style="width:${percent}%"></span></div></div></div><span class="reg-count">${n}</span></div>`}).join('');$('#featured-players').innerHTML=selectedSeasonPlayers().slice(0,3).map(renderPlayerCard).join('')}
     function renderPlayerCard(p){const events=all().filter(e=>names(e).includes(p.name));const sum=playerPrizeTotal(p.name);return `<a class="player" href="${escape(profileHref(p.name))}" data-open-profile="${escape(p.name)}"><div class="player-top"><div class="avatar">${escape(p.initials)}</div><div><div class="player-name">${escape(p.name)}</div><div class="player-region">🌏 遠征関連選手 · ${events.length?'戦績掲載中':'海外結果を調査中'}</div></div></div><div class="player-blurb"><span class="season-biography-note">${candidates.some(c=>c.name===p.name)?'紹介文：CH7 S4時点':'掲載選手'}</span>${escape(p.desc)}</div><div class="player-earnings${sum?'':' zero'}"><span>🏆 ${escape(seasonLabel())}の確認済み賞金<br><small>掲載済み・確認済みの個人累計</small></span><strong>${events.length?'$'+format(sum):'未登録'}</strong></div><div class="player-bottom"><span>掲載された海外戦績 <strong>${events.length}</strong> 件</span><span class="player-card-action">プロフィールを見る →</span></div></a>`}
     let visible=[]; let selectedPlayer=null;
@@ -673,7 +726,7 @@
     }
     function renderPlayers(){const s=($('#search-players').value||'').trim().toLowerCase();const shown=selectedSeasonPlayers().filter(p=>[p.name,...(confirmedAliases[p.name]||[])].some(n=>n.toLowerCase().includes(s)));const sort=$('#player-sort').value;shown.sort((a,b)=>sort==='name'?a.name.localeCompare(b.name,'ja'):sort==='events'?all().filter(e=>names(e).includes(b.name)).length-all().filter(e=>names(e).includes(a.name)).length||a.name.localeCompare(b.name,'ja'):playerPrizeTotal(b.name)-playerPrizeTotal(a.name)||a.name.localeCompare(b.name,'ja'));$('#all-players').innerHTML=shown.length?shown.map(renderPlayerCard).join(''):'<div class="empty">一致する選手はまだいないよ</div>'}
 
-    function refresh(){renderSeasonControl();renderHome();renderResults();renderEarnings();renderPlayers();renderAotPR()}
+    function refresh(){renderSeasonControl();renderHome();renderResults();renderEarnings();renderPlayers();renderAotPR();renderUpdates()}
     function csvText(rows){const cols=['date','player','players','region','event','round','rank','points','kills','vrs','prize','prizePerPlayer','kind','source','verified','note','chapter','season','seasonId'];const cell=x=>'"'+String(x??'').replace(/"/g,'""')+'"';return '\ufeff'+cols.join(',')+'\r\n'+rows.map(e=>cols.map(k=>cell(k==='players'?names(e).join(' / '):['chapter','season','seasonId'].includes(k)?recordSeason(e)[k]:e[k])).join(',')).join('\r\n')}
     function download(name,content,type){const b=new Blob([content],{type});const url=URL.createObjectURL(b);const a=document.createElement('a');a.href=url;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000)}
     document.addEventListener('click',e=>{
@@ -682,6 +735,7 @@
       const rankingRegion=e.target.closest('[data-ranking-region]');
       if(rankingRegion&&currentView.page==='players'){updateRankingFilter('region',rankingRegion.dataset.rankingRegion);return}
       if(e.target.closest('[data-ranking-more]')&&currentView.page==='players'){rankingLimit+=30;renderRanking();return}
+      if(e.target.closest('[data-registrations-more]')&&currentView.page==='updates'){registrationLimit+=20;renderUpdates();return}
       if(e.target.closest('[data-journey-jump]')){e.preventDefault();$('#journey-title')?.focus?.({preventScroll:true});$('#profile-journey')?.scrollIntoView?.({behavior:'instant',block:'start'});return}
       const journeyMode=e.target.closest('[data-journey-mode]');
       if(journeyMode&&currentView.page==='profile'){
