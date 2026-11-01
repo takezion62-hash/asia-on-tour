@@ -107,6 +107,7 @@ function boot(source = script, { hash = '', search = '?season=all' } = {}) {
   document.querySelectorAll = selector => {
     if (selector === '.section') return sections;
     if (selector === '.nav button') return nav;
+    if (selector === '[data-aot-pr-region]') return elements.filter(element => Object.hasOwn(element.dataset, 'aotPrRegion'));
     throw new Error(`Unsupported selector ${selector}`);
   };
   const blobs = new Map();
@@ -150,7 +151,7 @@ function boot(source = script, { hash = '', search = '?season=all' } = {}) {
     }
   };
   const sandbox = {
-    document, window, AsiaRankings: require('../rankings.js'),
+    document, window, AsiaRankings: require('../rankings.js'), AotPR: require('../aot-pr.js'),
     URL: BrowserURL, URLSearchParams, Blob, setTimeout: callback => { callback(); return 1; }
   };
   Object.defineProperty(sandbox, 'location', { get: () => location });

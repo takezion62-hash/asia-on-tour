@@ -75,6 +75,7 @@ async function fixture(page, records) {
 }
 
 test('既存の個人賞金ランキングと全地域・地域別の独立集計が一致する', async ({ page }) => {
+  test.slow(); // Compare every published player across seven scopes as the dataset grows.
   await openRankings(page);
   await expectCash(page, data.results);
   for (const region of regions) {
@@ -88,6 +89,7 @@ test('既存の個人賞金ランキングと全地域・地域別の独立集�
 });
 
 test('シーズン・4形式・大会シリーズが組み合わさり、未確認形式は全形式だけに含まれる', async ({ page }) => {
+  test.slow(); // This is a sequence of full-data comparisons, not a single screen action.
   await openRankings(page);
   for (const season of ['S42', 'S41', 'all']) {
     await page.locator('#season-select').selectOption(season);

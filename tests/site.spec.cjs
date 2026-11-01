@@ -32,6 +32,7 @@ test('ダッシュボード・全賞金ランキングをJSONの独立集計と�
 });
 
 test('遠征結果の検索・複合フィルター・詳細・CSVが同じ戦績を表示する', async ({ page }) => {
+  test.slow(); // Preserve exhaustive comparisons as the published archive grows.
   await page.getByRole('button', { name: '遠征結果', exact: true }).click();
   expect((await resultIDs(page)).sort()).toEqual(rows.map(r => r.id).sort());
   const sample = rows.find(r => r.verified && r.prize > 0) || rows[0];
@@ -57,6 +58,7 @@ test('遠征結果の検索・複合フィルター・詳細・CSVが同じ戦�
 });
 
 test('プロフィール・地域グラフ・別名義・同名別人・共有URLを確認する', async ({ page }) => {
+  test.slow(); // Visit multiple real profiles and compare their complete published histories.
   const report = summarize(data), name = report.ranking[0]?.name || roster(rows[0])[0];
   await page.goto('/?season=all#player=' + encodeURIComponent(name));
   await expect(page.locator('#profile-title')).toHaveText(name);
@@ -84,6 +86,7 @@ test('プロフィール・地域グラフ・別名義・同名別人・共有UR
 });
 
 test('大会タグ検索・大会URL・期間切り替えをデータから照合する', async ({ page }) => {
+  test.slow(); // Check the complete catalog and every facet against the current JSON.
   await page.getByRole('button', { name: '大会を探す', exact: true }).click();
   const ids = [...new Set(rows.map(r => tournamentKey(r, data)))];
   await expect(page.locator('#tournament-count')).toHaveText(ids.length + '大会 · ' + rows.length + '戦績');
