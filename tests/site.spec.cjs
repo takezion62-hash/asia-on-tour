@@ -202,3 +202,39 @@ test('ホームの注目選手・記録は掲載された確認済み戦績か�
   await expect(page.locator('#stat-results')).not.toHaveText(String(rows.length));
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth+1)).toBe(true);
 });
+
+
+test('大会詳細で予選・決勝・賞金獲得を独立表示し、全戦績へ戻せる', async ({ page }) => {
+  const finalKinds=new Set(['賞金決勝','Practice決勝','Performance決勝','決勝']);
+  const groups=new Map();
+  for(const row of rows){
+    const id=tournamentKey(row,data),group=groups.get(id)||[];
+    group.push(row);groups.set(id,group);
+  }
+  const candidates=[...groups].filter(([,group])=>group.some(row=>row.kind==='予選')&&group.some(row=>finalKinds.has(row.kind)));
+  expect(candidates.length).toBeGreaterThan(0);
+  candidates.sort((a,b)=>b[1].length-a[1].length);
+  const [id,expected]=candidates[0];
+  const modes={
+    all:expected,
+    qualifier:expected.filter(row=>row.kind==='予選'),
+    final:expected.filter(row=>finalKinds.has(row.kind)),
+    prize:expected.filter(row=>row.verified===true&&row.prize>0&&!['予選','スキン大会','コスメ大会'].includes(row.kind))
+  };
+  await page.goto('/?season=all#tournament='+encodeURIComponent(id));
+  await expect(page.locator('#tournament-progress-title')).toHaveText('予選 → 決勝 → 賞金獲得');
+  await expect(page.locator('[data-tournament-highlight-group="qualifier"]')).toContainText('予選突破を確認');
+  await expect(page.locator('[data-tournament-highlight-group="final"]')).toContainText('決勝の好成績');
+  await expect(page.locator('[data-tournament-highlight-group="prize"]')).toContainText('賞金獲得');
+  await expect(page.locator('.tournament-linked-progress summary')).toContainText('同じ開催枠');
+  for (const [mode,expectedRows] of Object.entries(modes)){
+    const button=page.locator('[data-tournament-phase="'+mode+'"]');
+    await button.click();
+    await expect(button).toHaveAttribute('aria-pressed','true');
+    const actual=await page.locator('#tournament-record-sessions [data-tournament-record]')
+      .evaluateAll(elements=>elements.map(element=>element.dataset.tournamentRecord));
+    expect(actual.slice().sort()).toEqual(expectedRows.map(row=>row.id).sort());
+    await expect(page.locator('.tournament-detail-summary')).toContainText(String(expected.length));
+  }
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth+1)).toBe(true);
+});
