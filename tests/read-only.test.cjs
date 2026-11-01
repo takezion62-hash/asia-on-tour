@@ -876,6 +876,35 @@ test('tournament catalog and detail routes retain all records once and separate 
   assert.deepEqual(allIds.sort(), records.map(record => record.id).sort());
 });
 
+
+test('tournament stage navigation preserves all records and distinguishes verified prizes', () => {
+  const grouped=new Map();
+  for(const row of records){const id=tournamentKey(row,data);if(!grouped.has(id))grouped.set(id,[]);grouped.get(id).push(row);}
+  const finalKinds=['賞金決勝','Practice決勝','Performance決勝','決勝'];
+  const [id,rows]=[...grouped].find(([,group])=>group.some(r=>r.kind==='予選')&&group.some(r=>finalKinds.includes(r.kind)))||[];
+  assert.ok(id,'a tournament with both qualifier and final records must exist');
+  const app=boot();
+  app.tournament(id);
+  const target=app.get('tournament-detail-content').innerHTML;
+  assert.match(target,/予選 → 決勝 → 賞金獲得/);
+  assert.match(target,/予選の掲載は突破を意味せず/);
+  assert.match(target,/data-tournament-highlight-group="qualifier"/);
+  assert.match(target,/data-tournament-highlight-group="final"/);
+  assert.match(target,/data-tournament-highlight-group="prize"/);
+  const expected={
+    all:rows,
+    qualifier:rows.filter(r=>r.kind==='予選'),
+    final:rows.filter(r=>finalKinds.includes(r.kind)),
+    prize:rows.filter(r=>r.verified===true&&r.prize>0&&!['予選','スキン大会','コスメ大会'].includes(r.kind))
+  };
+  for(const [mode,group] of Object.entries(expected)){
+    app.click(new Element('button','data-tournament-phase="'+mode+'"'));
+    const now=tournamentRecordIds(app);
+    assert.deepEqual(now.slice().sort(),group.map(r=>r.id).sort(),mode);
+    assert.ok(app.get('tournament-detail-content').innerHTML.includes('data-tournament-phase="'+mode+'" aria-pressed="true"'),mode);
+  }
+});
+
 test('unknown tournament metadata stays unconfirmed instead of being guessed from a suggestive name', () => {
   const fixture = { ...sampleRecord, id: 'unconfirmed-format', event: 'Mystery Reload ZB Duo Cup',
     round: '未確認', source: 'https://example.com/no-event-metadata' };
