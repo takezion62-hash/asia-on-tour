@@ -3,11 +3,11 @@ const http = require('node:http');
 const fs = require('node:fs');
 const path = require('node:path');
 const root = path.join(__dirname, '..');
-const files = new Map([['/', 'index.html'], ['/index.html', 'index.html'], ['/app.js', 'app.js'], ['/rankings.js', 'rankings.js'], ...['results', 'players', 'tournaments'].map(name => ['/' + name + '.json', name + '.json'])]);
+const files = new Map([['/', 'index.html'], ['/index.html', 'index.html'], ['/app.js', 'app.js'], ['/rankings.js', 'rankings.js'], ['/aot-pr.js', 'aot-pr.js'], ['/aot-pr.css', 'aot-pr.css'], ...['results', 'players', 'tournaments'].map(name => ['/' + name + '.json', name + '.json'])]);
 const server = http.createServer((req, res) => {
   const file = files.get(new URL(req.url, 'http://localhost').pathname);
   if (!file || !['GET', 'HEAD'].includes(req.method)) { res.writeHead(404); res.end(); return; }
-  const type = file.endsWith('.json') ? 'application/json' : file.endsWith('.js') ? 'text/javascript' : 'text/html';
+  const type = file.endsWith('.json') ? 'application/json' : file.endsWith('.js') ? 'text/javascript' : file.endsWith('.css') ? 'text/css' : 'text/html';
   res.writeHead(200, { 'Content-Type': type + '; charset=utf-8', 'Cache-Control': 'no-store' });
   res.end(req.method === 'HEAD' ? undefined : fs.readFileSync(path.join(root, file)));
 });
