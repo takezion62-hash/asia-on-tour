@@ -980,7 +980,13 @@
       const stage=$('#stage-filter').value;
       visible=all().filter(e=>(!selectedPlayer||names(e).includes(selectedPlayer))&&(r==='all'||e.region===r)&&(stage==='all'||e.kind===stage)&&(!prize||isPrizeWin(e))&&(!s||[e.player,...names(e),e.playerRaw,e.event,e.region,e.round,e.note].some(x=>String(x||'').toLowerCase().includes(s))));
       const order=$('#sort-results').value;
-      visible.sort((a,b)=>order==='rank'?((a.rank??Infinity)-(b.rank??Infinity)||b.date.localeCompare(a.date)):order==='kills'?((b.kills??-1)-(a.kills??-1)):b.date.localeCompare(a.date));
+      visible.sort((a,b)=>{
+        if(order==='oldest')return a.date.localeCompare(b.date);
+        if(order==='vrs')return (b.vrs??-1)-(a.vrs??-1)||b.date.localeCompare(a.date);
+        if(order==='rank')return (a.rank??Infinity)-(b.rank??Infinity)||b.date.localeCompare(a.date);
+        if(order==='kills')return (b.kills??-1)-(a.kills??-1);
+        return b.date.localeCompare(a.date);
+      });
       $('#result-count').textContent=format(visible.length)+'件';
       renderArchivePagination();
       if(!visible.length){
