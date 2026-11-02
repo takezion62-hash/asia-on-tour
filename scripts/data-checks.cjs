@@ -130,6 +130,16 @@ function validateData(data) {
     registerSeason(entry, 'tournaments.json', id);
     check(Number.isInteger(entry.chapter) && entry.chapter > 0 && Number.isInteger(entry.season) && entry.season > 0, 'tournaments.json', id, 'chapter/season', '確認済みの正の整数が必要です。');
     for (const axis of axes) check(optionSets.get(axis)?.has(entry[axis]), 'tournaments.json', id, axis, `存在しないタグ「${entry[axis]}」を参照しています。`);
+    if(entry.additionalSeries!=null){
+      check(Array.isArray(entry.additionalSeries),'tournaments.json',id,'additionalSeries','追加シリーズは配列で指定してください。');
+      if(Array.isArray(entry.additionalSeries)){
+        const seen=new Set([entry.series]);
+        for(const tag of entry.additionalSeries){
+          check(text(tag)&&optionSets.get('series')?.has(tag)&&tag!=='unknown'&&!seen.has(tag),'tournaments.json',id,'additionalSeries','追加シリーズは登録済み・重複なしのタグを指定してください。');
+          seen.add(tag);
+        }
+      }
+    }
     if (!Array.isArray(entry.sourceEventIds) || !entry.sourceEventIds.length) issue('tournaments.json', id, 'sourceEventIds', '出典の大会識別子の配列が必要です。');
     else for (const source of entry.sourceEventIds) {
       check(text(source) && source.startsWith(entry.seasonId + '_'), 'tournaments.json', id, 'sourceEventIds', '出典大会IDとシーズンIDが一致しません。');

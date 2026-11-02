@@ -7,14 +7,14 @@
 })(typeof globalThis === 'object' ? globalThis : this, function () {
   'use strict';
 
-  const VERSION = '1.4.0';
+  const VERSION = '1.5.0';
   const REGIONS = Object.freeze({ EU: 1.4, BR: 1.3, NAC: 1.2, ME: 1.1, OCE: 1.1, NAW: 1.0 });
   const STAGES = Object.freeze({ '予選': 0.35, '賞金決勝': 1, '決勝': 1, 'Practice決勝': 1,
     'Performance決勝': 1, 'スキン大会': 1, 'コスメ大会': 1, 'Test Cup': 1 });
   const TEAM_SIZES = Object.freeze({ solo: 1, duo: 2, trio: 3 });
   const SKIN_KINDS = new Set(['スキン大会', 'コスメ大会']);
-  const SKIN_SERIES = new Set(['skin-cup']);
-  const OTHER_COSMETIC_SERIES = new Set(['icon-cup', 'override-series']);
+  const SKIN_SERIES = new Set(['skin-cup', 'override-series']); // legacy Override data also skin-rated
+  const OTHER_COSMETIC_SERIES = new Set(['icon-cup']);
   const SCORED_SERIES = new Set(['fncs', 'performance-evaluation', 'victory-cup', 'cash-cup', 'test-cup', ...SKIN_SERIES, ...OTHER_COSMETIC_SERIES]);
 
   function eventMultiplier(record, tournament) {
@@ -22,6 +22,8 @@
     // Test Cups reward verified overseas participation, without competing with cash cups.
     if (tournament.series === 'test-cup') return record.kind === 'Test Cup' ? 0.25 : null;
     if (record.kind === 'Test Cup') return null; // never treat a test as a higher-paying series
+    if (tournament.series === 'icon-cup' && Array.isArray(tournament.additionalSeries) &&
+      tournament.additionalSeries.includes('skin-cup')) return 0.50;
     if (OTHER_COSMETIC_SERIES.has(tournament.series)) return 0.35;
     if (SKIN_KINDS.has(record.kind) || SKIN_SERIES.has(tournament.series)) return 0.50;
     if (tournament.series === 'performance-evaluation') return 1.2;
@@ -60,7 +62,7 @@
         /victory\s+cash\s+cup/i.test(String(tournament.name || ''));
       return isVictory ? { mode: 'vr', base: 20 } : { mode: 'event', base: 30 };
     }
-    return null; // No invented cash bonuses for skin, test, Icon or Override series.
+    return null; // No invented cash bonuses for skin, test or Icon series.
   }
 
   function sourceRound(record) {

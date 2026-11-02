@@ -124,7 +124,8 @@
       const tournament = classify(record);
       return (filters.region === 'all' || record.region === filters.region) &&
         (filters.mode === 'all' || tournament.mode === filters.mode) &&
-        (filters.series === 'all' || tournament.series === filters.series) &&
+        (filters.series === 'all' || tournament.series === filters.series ||
+          (Array.isArray(tournament.additionalSeries) && tournament.additionalSeries.includes(filters.series))) &&
         (filters.metric !== 'finals' || filters.finalKind === 'all' || record.kind === filters.finalKind);
     });
     const players = new Map();

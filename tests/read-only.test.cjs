@@ -802,7 +802,8 @@ test('all published archive records and every player history expose the same fiv
   const archive = new Map();
   for (const { id, content } of renderedArticles(app)) {
     const tags = tournamentTags(content);
-    assert.deepEqual(tags.map(tag => tag.axis).sort(), tournamentAxes.slice().sort(), id);
+    const meta=tournamentFor(records.find(record=>record.id===id),data);
+    assert.deepEqual(tags.map(tag=>tag.axis).sort(),[...tournamentAxes,...(meta?.additionalSeries||[]).map(()=>'series')].sort(),id);
     for (const tag of tags) {
       assert.ok(tag.value, `${id}: ${tag.axis}`);
       const url = new URL(tag.href, app.window.location.href);
@@ -818,6 +819,23 @@ test('all published archive records and every player history expose the same fiv
       assert.deepEqual(tournamentTags(content).map(tag => `${tag.axis}:${tag.value}`).sort(), archive.get(id), `${name}: ${id}`);
     }
   }
+});
+
+test('Override merges into skin and two Icon Cups are tagged by both series without doubling records',()=>{
+  const overridden=['Override Series: Mega Man Cup','Override Series: KINGDOM HEARTS Cup','Override Series: Persona 5 Royal Cup Reload'];
+  const dual=['Inoxtag Icon Cup Battle Royale','Madison Beer Icon Cup Reload'];
+  for(const name of overridden){const row=records.find(e=>e.event===name);assert.ok(row,name);assert.equal(tournamentFor(row,data).series,'skin-cup');}
+  for(const name of dual){const row=records.find(e=>e.event===name);assert.ok(row,name);const t=tournamentFor(row,data);assert.equal(t.series,'icon-cup');assert.deepEqual(t.additionalSeries,['skin-cup']);}
+  const app=boot(script,{hash:'#tournaments?series=skin-cup'});
+  for(const name of [...overridden,...dual])assert.ok(tournamentCards(app).some(card=>plain(card.content).includes(name)),name);
+  const skin=records.filter(e=>{const t=tournamentFor(e,data);return t?.series==='skin-cup'||t?.additionalSeries?.includes('skin-cup')}).length;
+  assert.equal(app.get('tournament-count').textContent,`${tournamentCards(app).length}大会 · ${skin}戦績`);
+  app.set('tournament-series','icon-cup','change');
+  for(const name of dual)assert.ok(tournamentCards(app).some(card=>plain(card.content).includes(name)),name);
+  const icons=records.filter(e=>tournamentFor(e,data)?.series==='icon-cup').length;
+  assert.equal(app.get('tournament-count').textContent,`${tournamentCards(app).length}大会 · ${icons}戦績`);
+  const row=records.find(e=>e.event===dual[0]),view=boot();
+  assert.deepEqual(tournamentTags(renderedArticles(view).find(e=>e.id===row.id).content).filter(t=>t.axis==='series').map(t=>t.value).sort(),['icon-cup','skin-cup']);
 });
 
 test('tournament catalog and detail routes retain all records once and separate regions, dates and rounds', () => {
@@ -923,12 +941,12 @@ test('all existing tournament assignments match the audited season-specific taxo
     const expected = tournamentFor(record, data) || Object.fromEntries(tournamentAxes.map(axis => [axis, 'unknown']));
     assert.ok(expected, record.event);
     for (const { axis, value } of tournamentTags(content)) {
-      assert.equal(value, expected[axis], `${id}: ${axis}`);
+      assert.ok(axis==='series'?[expected.series,...(expected.additionalSeries||[])].includes(value):value===expected[axis], `${id}: ${axis}:${value}`);
       counts[axis][value] = (counts[axis][value] || 0) + 1;
     }
   }
   assert.deepEqual(counts.mode, records.reduce((sum, row) => { const value = tournamentFor(row, data)?.mode || 'unknown'; sum[value] = (sum[value] || 0) + 1; return sum; }, {}));
-  assert.deepEqual(counts.series, records.reduce((sum, row) => { const value = tournamentFor(row, data)?.series || 'unknown'; sum[value] = (sum[value] || 0) + 1; return sum; }, {}));
+  assert.deepEqual(counts.series, records.reduce((sum, row) => { const meta=tournamentFor(row, data);for(const value of [meta?.series||'unknown',...(meta?.additionalSeries||[])])sum[value]=(sum[value]||0)+1;return sum; }, {}));
   assert.deepEqual(counts.team, records.reduce((sum, row) => { const value = tournamentFor(row, data)?.team || 'unknown'; sum[value] = (sum[value] || 0) + 1; return sum; }, {}));
   assert.deepEqual(counts.platform, records.reduce((sum, row) => { const value = tournamentFor(row, data)?.platform || 'unknown'; sum[value] = (sum[value] || 0) + 1; return sum; }, {}));
 });
@@ -938,7 +956,7 @@ test('all five tournament facets and free text use AND filtering with stage sepa
   const assertCatalog = filters => {
     const expectedRecords = records.filter(record => {
       const meta = tournamentFor(record, data) || Object.fromEntries(tournamentAxes.map(axis => [axis, 'unknown']));
-      return tournamentAxes.every(axis => !filters[axis] || filters[axis] === 'all' || meta[axis] === filters[axis]) &&
+      return tournamentAxes.every(axis => !filters[axis] || filters[axis] === 'all' || (axis==='series'?[meta.series,...(meta.additionalSeries||[])].includes(filters[axis]):meta[axis]===filters[axis])) &&
         (!filters.stage || filters.stage === 'all' || record.kind === filters.stage) &&
         (!filters.q || record.event.toLowerCase().includes(filters.q.toLowerCase()));
     });
@@ -1096,7 +1114,7 @@ test('visible facet counts reflect matching records and exclude only their own a
         assert.equal(tagAxis, axis);
         const expected = records.filter(record => {
           const meta = tournamentFor(record, data) || Object.fromEntries(tournamentAxes.map(axis => [axis, 'unknown']));
-          return meta[axis] === value && tournamentAxes.every(other => other === axis || !filters[other] || meta[other] === filters[other]) &&
+          return (axis==='series'?[meta.series,...(meta.additionalSeries||[])].includes(value):meta[axis]===value) && tournamentAxes.every(other => other === axis || !filters[other] || (other==='series'?[meta.series,...(meta.additionalSeries||[])].includes(filters[other]):meta[other]===filters[other])) &&
             (!filters.stage || record.kind === filters.stage);
         }).length;
         const actual = Number(plain(content.match(/<b[^>]*>([\s\S]*?)<\/b>/)[1]).replaceAll(',', ''));
@@ -1105,10 +1123,10 @@ test('visible facet counts reflect matching records and exclude only their own a
       }
       const expectedTotal = records.filter(record => {
         const meta = tournamentFor(record, data) || Object.fromEntries(tournamentAxes.map(axis => [axis, 'unknown']));
-        return tournamentAxes.every(other => other === axis || !filters[other] || meta[other] === filters[other]) &&
+        return tournamentAxes.every(other => other === axis || !filters[other] || (other==='series'?[meta.series,...(meta.additionalSeries||[])].includes(filters[other]):meta[other]===filters[other])) &&
           (!filters.stage || record.kind === filters.stage);
-      }).length;
-      assert.equal(sum, expectedTotal, `${axis}: all facet options count every matching record once`);
+      }).reduce((n,record)=>n+(axis==='series'?1+(tournamentFor(record,data)?.additionalSeries||[]).length:1),0);
+      assert.equal(sum, expectedTotal, `${axis}: facet totals reflect additional series tags`);
     }
   };
   assertCounts({});

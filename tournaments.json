@@ -21,10 +21,6 @@
           "label": "FNCS"
         },
         {
-          "id": "override-series",
-          "label": "Override Series"
-        },
-        {
           "id": "performance-evaluation",
           "label": "Performance Evaluation"
         },
@@ -399,7 +395,7 @@
       "sourceEventIds": [
         "S42_MegaManCup"
       ],
-      "series": "override-series",
+      "series": "skin-cup",
       "mode": "unknown",
       "subtype": "mega-man-cup",
       "team": "duo",
@@ -427,7 +423,7 @@
       "sourceEventIds": [
         "S42_KingdomHeartsCup"
       ],
-      "series": "override-series",
+      "series": "skin-cup",
       "mode": "unknown",
       "subtype": "kingdom-hearts-cup",
       "team": "solo",
@@ -708,6 +704,9 @@
           "text": "ユーザー提供のFortnite Trackerスクリーンショットで2026-10-25 OCE2組、2026-10-26 ME1組、NAC1組、NAW5組を確認",
           "url": "https://fortnitetracker.com/events/epicgames_S42_InoxtagIconCup_NAW"
         }
+      ],
+      "additionalSeries": [
+        "skin-cup"
       ]
     },
     {
@@ -793,7 +792,7 @@
       "sourceEventIds": [
         "S42_Persona5Cup"
       ],
-      "series": "override-series",
+      "series": "skin-cup",
       "mode": "reload",
       "subtype": "persona-5-royal-cup-reload",
       "team": "solo",
@@ -834,6 +833,9 @@
           "text": "ユーザー提供Fortnite Tracker画像でNAC 2組・NAW 6組の順位、キル、VRを確認。",
           "url": "https://fortnitetracker.com/events/epicgames_S42_MadisonBeerIconCup_NAW"
         }
+      ],
+      "additionalSeries": [
+        "skin-cup"
       ]
     }
   ]

@@ -164,6 +164,7 @@
     const tournamentDefaultFilters=()=>({series:'all',mode:'all',subtype:'all',team:'all',platform:'all',stage:'all',q:''});
     let tournamentBrowseFilters=tournamentDefaultFilters();
     function tournamentLabel(axis,value){return tournamentAxes.find(a=>a.key===axis)?.options.find(o=>o.id===value)?.label||'未確認'}
+    const tournamentAxisValues=(t,key)=>key==='series'?[t.series,...(Array.isArray(t.additionalSeries)?t.additionalSeries:[])]:[t[key]];
     function sanitizeTournamentFilters(filters={}){
       const result=tournamentDefaultFilters();
       for(const axis of tournamentAxes)if(axis.options.some(o=>o.id===filters[axis.key]))result[axis.key]=filters[axis.key];
@@ -178,13 +179,13 @@
     }
     const tournamentHref=id=>'#tournament='+encodeURIComponent(id);
     function tournamentSearchHref(axis,value,context=currentView.page==='tournaments'){const base=context?{...currentView.filters}:tournamentDefaultFilters();base[axis]=base[axis]===value?'all':value;return tournamentSearchHash(base)}
-    function tournamentTags(e){const t=classifyTournamentRecord(e);return `<div class="tournament-tags" data-record-classification="${escape(e.id)}">${tournamentAxes.map(axis=>`<a class="tournament-tag${t[axis.key]==='unknown'?' is-unknown':''}" data-axis="${escape(axis.key)}" data-tournament-tag="${escape(axis.key+':'+t[axis.key])}" href="${escape(tournamentSearchHref(axis.key,t[axis.key],false))}" title="${escape(axis.label+'：'+tournamentLabel(axis.key,t[axis.key]))}"><span class="sr-only">${escape(axis.label)}：</span>${escape(tournamentLabel(axis.key,t[axis.key]))}</a>`).join('')}</div>`}
+    function tournamentTags(e){const t=classifyTournamentRecord(e);return `<div class="tournament-tags" data-record-classification="${escape(e.id)}">${tournamentAxes.flatMap(axis=>tournamentAxisValues(t,axis.key).map(value=>`<a class="tournament-tag${value==='unknown'?' is-unknown':''}" data-axis="${escape(axis.key)}" data-tournament-tag="${escape(axis.key+':'+value)}" href="${escape(tournamentSearchHref(axis.key,value,false))}" title="${escape(axis.label+'：'+tournamentLabel(axis.key,value))}"><span class="sr-only">${escape(axis.label)}：</span>${escape(tournamentLabel(axis.key,value))}</a>`)).join('')}</div>`}
     function tournamentRecordsMatch(e,filters,skipAxis){
       const t=classifyTournamentRecord(e);
-      return tournamentAxes.every(axis=>axis.key===skipAxis||filters[axis.key]==='all'||t[axis.key]===filters[axis.key])&&(filters.stage==='all'||e.kind===filters.stage)&&(!filters.q||[t.name,...tournamentAxes.map(a=>tournamentLabel(a.key,t[a.key])),t.seasonId].some(s=>String(s).toLowerCase().includes(filters.q.trim().toLowerCase())));
+      return tournamentAxes.every(axis=>axis.key===skipAxis||filters[axis.key]==='all'||tournamentAxisValues(t,axis.key).includes(filters[axis.key]))&&(filters.stage==='all'||e.kind===filters.stage)&&(!filters.q||[t.name,...tournamentAxes.flatMap(a=>tournamentAxisValues(t,a.key).map(value=>tournamentLabel(a.key,value))),t.seasonId].some(s=>String(s).toLowerCase().includes(filters.q.trim().toLowerCase())));
     }
     function tournamentFilterCounts(axis,filters={}){
-      const f=sanitizeTournamentFilters(filters);return (tournamentAxes.find(a=>a.key===axis)?.options||[]).map(o=>({id:o.id,label:o.label,count:all().filter(e=>tournamentRecordsMatch(e,f,axis)&&classifyTournamentRecord(e)[axis]===o.id).length}));
+      const f=sanitizeTournamentFilters(filters);return (tournamentAxes.find(a=>a.key===axis)?.options||[]).map(o=>({id:o.id,label:o.label,count:all().filter(e=>tournamentRecordsMatch(e,f,axis)&&tournamentAxisValues(classifyTournamentRecord(e),axis).includes(o.id)).length}));
     }
     function tournamentSessions(t,records){
       const groups=new Map();

@@ -112,6 +112,13 @@ test('予選VR・スキン大会・未確認賞金を現金へ加算しない', 
   bad((data, row) => { row.kind = 'コスメ大会'; row.prize = 0; }, 'kind', 'スキン大会');
 });
 
+test('Merged Override and dual-tag cosmetic Icon Cup metadata remains valid',()=>{
+  for(const t of current.tournaments.catalog.filter(t=>t.name.startsWith('Override Series:')))assert.equal(t.series,'skin-cup');
+  for(const name of ['Inoxtag Icon Cup Battle Royale','Madison Beer Icon Cup Reload']){const t=current.tournaments.catalog.find(t=>t.name===name);assert.ok(t);assert.equal(t.series,'icon-cup');assert.deepEqual(t.additionalSeries,['skin-cup']);}
+  bad(data=>{data.tournaments.catalog[0].additionalSeries=['not-real'];},'additionalSeries','登録済み');
+  bad(data=>{data.tournaments.catalog[0].additionalSeries=[data.tournaments.catalog[0].series];},'additionalSeries','重複');
+});
+
 test('存在しないタグ・大会IDと大会／ラウンドのシーズン矛盾を検出する', () => {
   bad(data => { data.tournaments.catalog[0].mode = 'made-up-mode'; }, 'mode', '存在しない');
   bad((data, row) => { row.tournamentId = 'missing'; }, 'tournamentId');

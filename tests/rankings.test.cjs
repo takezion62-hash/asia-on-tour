@@ -22,11 +22,13 @@ const categories = [
   ['reload-zb', 'reload-zero-build', 'cash-cup', 'reload-zb-duos-cash-cup'],
   ['practice', 'battle-royale', 'fncs', 'fncs-division-1-practice'],
   ['performance', 'battle-royale', 'performance-evaluation', 'performance-evaluation'],
-  ['skin', 'battle-royale', 'skin-cup', 'champion-aphrodite-fncs-cup-battle-royale']
+  ['skin', 'battle-royale', 'skin-cup', 'champion-aphrodite-fncs-cup-battle-royale'],
+  ['icon-skin', 'reload', 'icon-cup', 'madison-beer-icon-cup-reload']
 ].map(([key, mode, series, subtype]) => ({
   id: 'ranking-fixture-' + key, name: 'Ranking fixture ' + key,
   chapter: 7, season: 4, seasonId: 'S42', sourceEventIds: ['S42_RankingFixture_' + key],
-  mode, series, subtype, team: key === 'reload-zb' ? 'duo' : 'solo', platform: 'cross-platform'
+  mode, series, subtype, additionalSeries: key === 'icon-skin' ? ['skin-cup'] : undefined,
+  team: key === 'reload-zb' ? 'duo' : 'solo', platform: 'cross-platform'
 }));
 const fixtureData = {
   results: [], players: { candidates: [], confirmedAliases: {} },
@@ -89,6 +91,12 @@ test('大会シリーズ・開催地域・形式はANDで絞り込む', () => {
     record('cash', { player: 'Cash', region: 'NAW', prize: 200 }, 'reload-zb')];
   assert.deepEqual(values(build(inputs, { series: 'cash-cup', region: 'NAW', mode: 'reload-zero-build' })), { Cash: 200 });
   assert.deepEqual(build(inputs, { series: 'cash-cup', region: 'ME' }).rows, []);
+});
+
+test('Dual-tag Icon Cup appears in both series filters but once in all-series totals',()=>{
+  const rows=[record('icon-skin-1',{player:'IconSkin',kind:'スキン大会',prize:0,vrs:2},'icon-skin')];
+  for(const series of ['icon-cup','skin-cup']){const report=build(rows,{series,metric:'vrs'});assert.equal(report.recordCount,1);assert.deepEqual(values(report),{IconSkin:2});}
+  assert.equal(build(rows,{series:'all',metric:'vrs'}).recordCount,1);
 });
 
 test('既存のindividualPrizeを呼び出して集計し、別の賞金計算を内蔵しない', () => {

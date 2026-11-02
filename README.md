@@ -16,6 +16,10 @@ ASIA勢のFortnite海外大会戦績を検索・閲覧する、GitHub Pagesの�
 掲載内容はJSONを編集して更新します。3つのJSON、`rankings.js`、`aot-pr.js`、`aot-pr.css`、`app.js`は`index.html`と同じ場所へ配置してください。ローカルではHTTPサーバーを使用します。
 
 
+## スキン大会の統合と複数シリーズタグ（2026-11-02）
+
+Override SeriesのMega Man・KINGDOM HEARTS・Persona 5の3大会をシリーズ`skin-cup`へ統合。大会名と出典IDは維持し、旧Overrideの独立選択肢は廃止しました。Inoxtag Icon Cup Battle Royale・Madison Beer Icon Cup Reloadはシリーズ`icon-cup`のまま、`additionalSeries: ["skin-cup"]`を追加。大会・選手・結果ページでは両タグを表示し、シリーズ検索や実績ランキングでも両カテゴリから検索可能です。総戦績・賞金の重複加算はせず、AOT PRだけスキン倍率0.50を適用します。
+
 ## 更新履歴と新着登録
 
 ホームの「新着 REGISTRATIONS」とナビの「更新履歴」で、サイトへ新しく掲載した戦績とサイト改善履歴を分けて表示します。大会開催日は元の `results.json` の `date` のまま、新着登録日は `updates.json` の `entries[].date`（日本時間）で管理します。
@@ -39,7 +43,7 @@ ASIA勢のFortnite海外大会戦績を検索・閲覧する、GitHub Pagesの�
 
 | 倍率・係数 | 定義 |
 | --- | --- |
-| 大会 | FNCS Major・Heats・LCQ等1.6、Division 1・Division 1 Practiceともに1.4、Performance Evaluation 1.2、Victory/Cash Cup 1.0、スキン・旧コスメ 0.50、Icon・Override 0.35、Test Cup 0.25 |
+| 大会 | FNCS Major・Heats・LCQ等1.6、Division 1・Division 1 Practiceともに1.4、Performance Evaluation 1.2、Victory/Cash Cup 1.0、スキン大会・旧Override・指定コスメIcon 0.50、その他のIcon Cup 0.35、Test Cup 0.25 |
 | ラウンド | 予選0.35、決勝・単一セッション1.0 |
 | キル | 通常BR・通常ゼロビルド1.5、Reload・Reloadゼロビルド0.7 |
 | 地域 | EU 1.40、BR 1.30、NAC 1.20、ME 1.10、OCE 1.10、NAW 1.00 |
@@ -61,7 +65,7 @@ ASIA勢のFortnite海外大会戦績を検索・閲覧する、GitHub Pagesの�
 - `verified: true` の決勝系レコードで、個人賞金が正の記録のみ。 `reported`・`partial`・予選・スキン大会・Test Cup・未確認賞金には付けません。デュオ等はチーム賞金だけでなく `prizePerPlayer` が確認できて初めて各選手に付けます。
 - VR方式は `vrs` が確認済みの正の整数で、当該レコードの個人賞金獲得が確認できた場合だけ加算。賞金額からVR数を推測しません。順位型の賞金はVRゼロでも加算します。
 - 同一選手・大会・地域・日付・Event/Session/Week/Day枠のボーナスは重複計上しません。同枠の複数の確認済みVR集計は最大のVR数を採用し、各レコードのVRを足し合わせません。別開催枠は独立します。
-- Icon Cup・Override Seriesは現段階で賞金ボーナスの明示的な基準がないため対象外です。大会賞金そのものは従来通り別集計し、AOT PRとは独立させます。
+- Icon Cup・スキン大会（旧Override Series含む）は賞金ボーナス対象外です。大会賞金そのものは従来通り別集計し、AOT PRとは独立させます。
 
 同一選手・大会・日付・地域・開催セッションの参加点は1回だけです。予選と決勝の成果は別々に加点し、異なるEvent/Session/Week/Dayは別枠にします。開催枠を特定する情報が不足する場合は推測で増やしません。同一IDの同一データ、または明示的な出典ラウンドと内容が一致する別IDの記録は二重加点せず、矛盾した同一IDは保留します。
 

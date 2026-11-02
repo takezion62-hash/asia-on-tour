@@ -61,12 +61,12 @@ test('FNCS Major, Heats and LCQ use x1.6, higher than Division 1 and Performance
   approx(score([row],catalog({series:'fncs',subtype:'fncs-division-1'})).ranked[0].score,84);
   approx(score([row],catalog({series:'performance-evaluation'})).ranked[0].score,72);
 });
-test('Skin and legacy cosmetic competitions x0.50, separate Icon and Override remain x0.35',()=>{
-  for(const kind of ['スキン大会','コスメ大会'])
-    approx(score([event({kind,rank:1,kills:0})],catalog({series:'fncs'})).ranked[0].score,55);
-  approx(score([event({kind:'スキン大会',rank:1,kills:0})],catalog({series:'skin-cup'})).ranked[0].score,55);
-  for(const series of ['icon-cup','override-series'])
-    approx(score([event({kind:'スキン大会',rank:1,kills:0})],catalog({series})).ranked[0].score,38.5);
+test('Merged Override and dual-tag cosmetic Icon use skin x0.50, regular Icon stays x0.35',()=>{
+  for(const kind of ['スキン大会','コスメ大会'])approx(score([event({kind,rank:1,kills:0})],catalog({series:'fncs'})).ranked[0].score,55);
+  for(const series of ['skin-cup','override-series'])approx(score([event({kind:'スキン大会',rank:1,kills:0})],catalog({series})).ranked[0].score,55);
+  approx(score([event({kind:'スキン大会',rank:1,kills:0})],catalog({series:'icon-cup',additionalSeries:['skin-cup']})).ranked[0].score,55);
+  approx(score([event({kind:'スキン大会',rank:1,kills:0})],catalog({series:'icon-cup'})).ranked[0].score,38.5);
+  approx(score([event({kind:'賞金決勝',rank:1,kills:0,prize:500,vrs:1})],catalog({series:'icon-cup'})).ranked[0].bonus,0);
 });
 test('Solo Reload Test Cup x0.25 credits verified overseas participation and scores rank/kills',()=>{
   const row=event({date:'2026-11-02',event:'Solo Reload Test Cup',kind:'Test Cup',rank:10,kills:8,region:'ME',
