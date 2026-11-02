@@ -1082,8 +1082,8 @@ test('direct malformed or unknown tournament URLs are recoverable and query text
 
 test('a future season with the same event name keeps a separate tournament identity and unconfirmed classification', () => {
   const current = { ...sampleRecord, id: 'season-s42-fixture' };
-  const future = { ...sampleRecord, id: 'season-s43-fixture', date: '2027-01-01',
-    source: sampleRecord.source.replaceAll('S42', 'S43') };
+  const future = { ...sampleRecord, id: 'season-s44-fixture', date: '2027-01-01',
+    source: sampleRecord.source.replaceAll('S42', 'S44') };
   const source = fixtureScript([current, future]);
   const app = boot(source, { search: '?season=all' });
   const rows = new Map(renderedArticles(app).map(record => [record.id, record.content]));
@@ -1098,7 +1098,7 @@ test('a future season with the same event name keeps a separate tournament ident
     return tournamentRecordIds(direct);
   });
   assert.deepEqual(histories.map(ids => ids.slice().sort()).sort((a, b) => a[0].localeCompare(b[0])), [[current.id], [future.id]]);
-  assert.ok(catalog.some(card => plain(card.content).includes('S43')), 'Unconfirmed season keeps its known source season identifier');
+  assert.ok(catalog.some(card => plain(card.content).includes('S44')), 'Unconfirmed season keeps its known source season identifier');
 });
 
 test('visible facet counts reflect matching records and exclude only their own axis from the current filters', () => {
@@ -1303,13 +1303,13 @@ test('missing or conflicting season evidence is unconfirmed and unsupported URL 
   const mixed = new URL(base.source); mixed.searchParams.set('window', 'S41_Other_Round1_ME');
   const fixtures = [base,
     { ...base, id: 's42-in-name-only', source: 'https://example.com/S42_Other' },
-    { ...base, id: 'new-source-unmapped', source: base.source.replaceAll('S42', 'S43') },
+    { ...base, id: 'new-source-unmapped', source: base.source.replaceAll('S42', 'S44') },
     { ...base, id: 'conflicting-season', source: mixed.href }
   ];
   const app = boot(fixtureScript(fixtures), { search: '?season=unknown' });
   assert.deepEqual(renderedArticles(app).map(e => e.id).sort(), fixtures.slice(1).map(e => e.id).sort());
   assert.ok(renderedArticles(app).every(e => e.content.includes('data-record-season="unknown"')));
-  assert.ok(!seasonChoices(app).some(s => s.id === 'S43'));
+  assert.ok(!seasonChoices(app).some(s => s.id === 'S44'));
   const invalid = boot(script, { search: '?season=S999', hash: '#player=miru' });
   assert.equal(invalid.get('season-select').value, 'S42');
   assert.equal(profileField(invalid, 'total'), currency(records.filter(r => seasonFor(r, data) === 'S42' && roster(r).includes('miru')).reduce((sum, r) => sum + personalCash(r), 0)));
