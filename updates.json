@@ -2,6 +2,14 @@
   "version": 1,
   "entries": [
     {
+      "id": "2026-11-02-aot-pr-test-cup-weights",
+      "date": "2026-11-02",
+      "type": "site",
+      "title": "AOT PRのスキン大会倍率を更新・Test Cupを追加",
+      "description": "スキン大会の倍率を0.35から0.50に変更し、海外挑戦を評価するTest Cupを0.25で追加。Icon Cup・Overrideは0.35のまま。確認済みの参加・順位・キルだけを加点し、賞金・既存の戦績は維持。実際のTest Cup結果は出典確認後に登録します。",
+      "recordIds": []
+    },
+    {
       "id": "2026-11-02-tournament-progress",
       "date": "2026-11-02",
       "type": "site",

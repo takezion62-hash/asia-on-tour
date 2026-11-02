@@ -95,6 +95,7 @@ test('予選VR・スキン大会・未確認賞金を現金へ加算しない', 
   for (const row of [{ ...base, kind: '予選', vrs: 99, prize: null }, { ...base, kind: 'スキン大会', prize: 100 }, { ...base, kind: 'コスメ大会', prize: 100 }, { ...base, verified: false }, { ...base, prize: 0 }]) assert.equal(personalCents(row), 0);
   bad((data, row) => { row.kind = '予選'; row.prize = 100; }, 'prize', '予選VR');
   bad((data, row) => { row.kind = 'スキン大会'; row.prize = 100; }, 'prize', 'スキン大会');
+  bad((data, row) => { row.kind = 'Test Cup'; row.prize = 100; }, 'prize', 'Test Cup');
   bad((data, row) => { row.kind = 'コスメ大会'; row.prize = 0; }, 'kind', 'スキン大会');
 });
 

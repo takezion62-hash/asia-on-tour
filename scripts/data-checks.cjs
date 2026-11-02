@@ -46,7 +46,7 @@ function tournamentKey(record, data) {
 // An independent test oracle. No aliases, display-name similarity, VR or cosmetic
 // rewards participate in cash aggregation. Integer cents avoid rounding drift.
 function personalCents(e) {
-  if (e.verified !== true || !money(e.prize) || e.prize <= 0 || ['予選', 'スキン大会', 'コスメ大会'].includes(e.kind)) return 0;
+  if (e.verified !== true || !money(e.prize) || e.prize <= 0 || ['予選', 'スキン大会', 'コスメ大会', 'Test Cup'].includes(e.kind)) return 0;
   const people = roster(e);
   if (new Set(people).size !== people.length) return 0;
   const total = Math.round(e.prize * 100);
@@ -166,7 +166,7 @@ function validateData(data) {
       check(money(row.prizePerPlayer), 'results.json', id, 'prizePerPlayer', '個人配分は0以上・小数2桁以内の数値にしてください。');
       check(money(row.prize) && Math.round(row.prizePerPlayer * 100) * people.length <= Math.round(row.prize * 100), 'results.json', id, 'prizePerPlayer', '個人配分の人数分がチーム賞金を超えています（チーム賞金の未設定も確認してください）。');
     }
-    if (row.prize > 0 && row.verified === true && ['予選', 'スキン大会', 'コスメ大会'].includes(row.kind)) issue('results.json', id, 'prize', '予選VR・スキン大会の報酬を確認済み現金賞金へ設定しないでください。');
+    if (row.prize > 0 && (row.kind === 'Test Cup' || (row.verified === true && ['予選', 'スキン大会', 'コスメ大会'].includes(row.kind)))) issue('results.json', id, 'prize', '予選VR・スキン大会の報酬・Test Cupを現金賞金へ設定しないでください。');
     if (row.prize > 0 && row.verified === true && people.length > 1 && !(row.prizePerPlayer > 0)) issue('results.json', id, 'prizePerPlayer', '個人配分が未確認のため、個人賞金には加算しません。', true);
     const source = sourceInfo(row);
     check(!!webURL(row.source), 'results.json', id, 'source', '出典は認証情報を含まないhttp／https URLにしてください。');

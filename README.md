@@ -7,7 +7,7 @@ ASIA勢のFortnite海外大会戦績を検索・閲覧する、GitHub Pagesの�
 - `index.html`：デザイン・画面構造
 - `app.js`：JSONの読み込み、検索、シーズン、プロフィール、賞金集計
 - `rankings.js`：地域別・実績別ランキングの共通集計（ブラウザー／Node.js）
-- `aot-pr.js` / `aot-pr.css`：AOT PR v1.0の計算と表示
+- `aot-pr.js` / `aot-pr.css`：AOT PR v1.1の計算と表示
 - `results.json`：戦績の配列
 - `updates.json`：更新履歴と登録日を確認できた戦績IDの差分リスト
 - `players.json`：`candidates`（名鑑）と`confirmedAliases`（確認済み別名義）
@@ -39,12 +39,12 @@ ASIA勢のFortnite海外大会戦績を検索・閲覧する、GitHub Pagesの�
 
 | 倍率・係数 | 定義 |
 | --- | --- |
-| 大会 | FNCS Major・Heats等1.6、Division 1・Division 1 Practiceともに1.2、Performance Evaluation 1.4、Victory/Cash Cup 1.0、スキン・旧コスメ・Icon・Override 0.35 |
+| 大会 | FNCS Major・Heats等1.6、Division 1・Division 1 Practiceともに1.2、Performance Evaluation 1.4、Victory/Cash Cup 1.0、スキン・旧コスメ 0.50、Icon・Override 0.35、Test Cup 0.25 |
 | ラウンド | 予選0.35、決勝・単一セッション1.0 |
 | キル | 通常BR・通常ゼロビルド1.5、Reload・Reloadゼロビルド0.7 |
 | 地域 | EU 1.40、BR 1.30、NAC 1.20、ME 1.10、OCE 1.10、NAW 1.00 |
 
-確認済みの掲載名だけを使用し、順位・キルが未確認なら当該項目の加点を保留します。形式未確認ではキル点を保留、大会分類未確認では全体を保留します。未確認値を確認済み0として書き換えません。確認済み参加の参加点は残します。
+確認済みの掲載名だけを使用し、順位・キルが未確認なら当該項目の加点を保留します。形式未確認ではキル点を保留、大会分類未確認では全体を保留します。未確認値を確認済み0として書き換えません。確認済み参加の参加点は残します。Test Cupも確認済みの掲載成績に限り、単一セッション倍率1.0と大会倍率0.25で加点します（賞金は加算しません）。Test Cupは大会シリーズ `test-cup` と戦績区分 `Test Cup` の両方が一致する場合だけ加点します。
 
 同一選手・大会・日付・地域・開催セッションの参加点は1回だけです。予選と決勝の成果は別々に加点し、異なるEvent/Session/Week/Dayは別枠にします。開催枠を特定する情報が不足する場合は推測で増やしません。同一IDの同一データ、または明示的な出典ラウンドと内容が一致する別IDの記録は二重加点せず、矛盾した同一IDは保留します。
 

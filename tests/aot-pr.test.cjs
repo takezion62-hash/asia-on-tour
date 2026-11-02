@@ -58,9 +58,26 @@ test('Performance x1.4 and major x1.6',()=>{
   approx(score([row],catalog({series:'performance-evaluation'})).ranked[0].score,84);
   approx(score([row],catalog({series:'fncs',subtype:'fncs-major'})).ranked[0].score,96);
 });
-test('Skins and legacy cosmetic competitions x0.35 even when classified fncs',()=>{
+test('Skin and legacy cosmetic competitions x0.50, separate Icon and Override remain x0.35',()=>{
   for(const kind of ['スキン大会','コスメ大会'])
-    approx(score([event({kind,rank:1,kills:0})],catalog({series:'fncs'})).ranked[0].score,38.5);
+    approx(score([event({kind,rank:1,kills:0})],catalog({series:'fncs'})).ranked[0].score,55);
+  approx(score([event({kind:'スキン大会',rank:1,kills:0})],catalog({series:'skin-cup'})).ranked[0].score,55);
+  for(const series of ['icon-cup','override-series'])
+    approx(score([event({kind:'スキン大会',rank:1,kills:0})],catalog({series})).ranked[0].score,38.5);
+});
+test('Solo Reload Test Cup x0.25 credits verified overseas participation and scores rank/kills',()=>{
+  const row=event({date:'2026-11-02',event:'Solo Reload Test Cup',kind:'Test Cup',rank:10,kills:8,region:'ME',
+    source:'https://fortnitetracker.com/events/epicgames_S43_ReloadTestCup_ME?window=S43_ReloadTestCup_Event1_Round1_ME'});
+  const testCatalog=catalog({id:'s43-reload-test-cup',series:'test-cup',subtype:'solo-reload-test-cup'});
+  const report=score([row],testCatalog),player=report.ranked[0];
+  assert.equal(report.recordCount,1);
+  approx(player.attendance,10*0.25*1.1);
+  approx(player.placement,100/Math.sqrt(10)*0.25*1.1);
+  approx(player.eliminations,8*0.7*0.25*1.1);
+  approx(player.score,(10+100/Math.sqrt(10)+8*0.7)*0.25*1.1);
+  assert.equal(score([{...row,verified:false}],testCatalog).ranked.length,0);
+  assert.equal(score([row],catalog({series:'unknown'})).ranked.length,0);
+  assert.equal(score([row],catalog({series:'victory-cup'})).ranked.length,0);
 });
 test('Unsupported modes receive no assumed elimination points',()=>{
   const report=score([event({rank:4,kills:100})],catalog({mode:'unknown'}));
