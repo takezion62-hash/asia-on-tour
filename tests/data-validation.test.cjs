@@ -50,6 +50,25 @@ test('S43 Solo Reload Test Cup ME/NAW has six verified non-cash results and 0.25
   assert.ok(result.ranked.find(r=>r.name==='3peace').score>0);
 });
 
+test('2026/9/14 ME Solo Victory Cup qualifiers and hero name merge preserve historical winnings',()=>{
+  const qualifiers=current.results.filter(r=>r.date==='2026-09-14'&&r.region==='ME'&&r.event==='Solo Victory Cup Battle Royale'&&r.kind==='予選');
+  const expected=new Map([['ぷりなの',[51,256,8,17,0]],['ぱな',[89,244,8,31,2]],['Botえもん',[117,240,8,15,0]],['あいむらま',[123,238,6,11,1]],['らいちん',[128,238,6,4,0]],['さばべる',[180,233,8,14,0]],['rakirye',[216,229,7,11,1]],['ウン！ボクつよい！',[245,227,7,8,0]],['ゆあもにーさまの歌を聴けぇǃ',[257,226,8,5,0]],['ヒーロー',[260,225,6,10,1]]]);
+  assert.equal(qualifiers.length,10);
+  for(const row of qualifiers){
+    assert.deepEqual([row.rank,row.points,row.matches,row.kills,row.vrs],expected.get(row.player),row.player);
+    assert.equal(row.kind,'予選');assert.equal(row.prize,null);assert.equal(row.verified,true);
+    assert.equal(tournamentFor(row,current)?.id,'ch7s4-solo-victory-cup');
+    assert.equal(personalCents(row),0);
+  }
+  const heroRows=current.results.filter(r=>r.player==='ヒーロー');
+  assert.equal(heroRows.length,5);
+  assert.ok(heroRows.every(r=>r.playerRaw==='REBEL 英雄のヒーロー 轟'));
+  assert.deepEqual(heroRows.filter(r=>r.prize>0).map(r=>r.prize).sort(),[100,100]);
+  assert.ok(current.players.candidates.some(p=>p.name==='ヒーロー'));
+  assert.ok(!current.players.candidates.some(p=>p.name==='REBEL 英雄のヒーロー 轟'));
+  assert.ok(current.players.confirmedAliases['ヒーロー'].includes('REBEL 英雄のヒーロー 轟'));
+});
+
 test('Champion Focus FNCS Cup is a skin competition, not an FNCS main event', () => {
   const record = current.results.find(row => row.event === 'Champion Focus FNCS Cup');
   assert.ok(record, 'Champion Focus result must remain registered');

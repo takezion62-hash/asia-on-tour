@@ -1273,9 +1273,9 @@
       "accent": "cyan"
     },
     {
-      "name": "REBEL 英雄のヒーロー 轟",
-      "initials": "RE",
-      "desc": "10/3 ME Solo Reload VC予選305位・決勝289位（賞金なし）。",
+      "name": "ヒーロー",
+      "initials": "ヒー",
+      "desc": "2026/8/12 NAW・8/15 ME Solo Reload Victory Cup決勝で各1VR・$100。2026/9/14 ME Solo Victory Cup Battle Royale予選260位・225pt・10キル・1VR。10/3 ME Solo Reload VC予選305位・決勝289位。",
       "accent": "cyan"
     },
     {
@@ -2165,6 +2165,24 @@
       "initials": "RV",
       "desc": "2026/11/2 Solo Reload Test Cup：ME 75位・375pt・15K・1VR、NAW 53位・394pt・11K・0VR（賞金なし）",
       "accent": "violet"
+    },
+    {
+      "name": "Botえもん",
+      "initials": "Bo",
+      "desc": "2026/9/14 ME Solo Victory Cup Battle Royale予選117位・240pt・15キル・0VR。",
+      "accent": "cyan"
+    },
+    {
+      "name": "ウン！ボクつよい！",
+      "initials": "ウン",
+      "desc": "2026/9/14 ME Solo Victory Cup Battle Royale予選245位・227pt・8キル・0VR。Tracker名「IPF ウンǃボクつよいǃ」。",
+      "accent": "violet"
+    },
+    {
+      "name": "ゆあもにーさまの歌を聴けぇǃ",
+      "initials": "ゆあ",
+      "desc": "2026/9/14 ME Solo Victory Cup Battle Royale予選257位・226pt・5キル・0VR。",
+      "accent": "pink"
     }
   ],
   "confirmedAliases": {
@@ -2353,7 +2371,8 @@
       "Nxthanlol"
     ],
     "さばべる": [
-      "NŁT 仮面ライダーさばべる"
+      "NŁT 仮面ライダーさばべる",
+      "NŁT SVBL 虎"
     ],
     "32歳爆運たひね": [
       "32歳超絶爆運執念たひね"
@@ -2661,6 +2680,12 @@
     "Jaemon": [
       "SRZ Jaemon.K",
       "Jaemon.K"
+    ],
+    "ヒーロー": [
+      "REBEL 英雄のヒーロー 轟"
+    ],
+    "ウン！ボクつよい！": [
+      "IPF ウンǃボクつよいǃ"
     ]
   }
 }
