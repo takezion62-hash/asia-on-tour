@@ -218,3 +218,23 @@ test('新しい正当な賞金記録を足すと件数・賞金・ランキン�
   assert.equal(next.total, original.total + 123.45);
   assert.equal(next.ranking.find(p => p.name === row.player).total, original.ranking.find(p => p.name === row.player).total + 123.45);
 });
+
+test('2026/9/14 ME Solo Victory Cup Event 2 final 10 additional records and historical winner prize',()=>{
+  const finals=current.results.filter(r=>r.date==='2026-09-14'&&r.region==='ME'&&r.event==='Solo Victory Cup Battle Royale'&&r.kind==='賞金決勝');
+  assert.equal(finals.length,11);
+  const expected=new Map([['ヒーロー',[230,3,3]],['rakirye',[289,3,2]],['らいちん',[297,3,2]],['らりむ',[311,3,2]],['AXIS lameloball',[341,3,2]],['Dartri',[354,3,2]],['こがね',[404,2,1]],['Ares.Mea',[409,3,1]],['ぷりなの',[412,3,1]],['nia',[424,3,1]]]);
+  for(const [name,[rank,matches,kills]] of expected){
+    const record=finals.find(r=>r.player===name);
+    assert.ok(record,'missing finalist '+name);
+    assert.deepEqual([record.rank,record.matches,record.kills,record.points,record.vrs,record.prize,record.verified],[rank,matches,kills,0,0,0,true],name);
+    assert.equal(record.kind,'賞金決勝');
+    assert.equal(record.round,'Event 2 · Round 2 / 賞金決勝');
+    assert.equal(tournamentFor(record,current)?.id,'ch7s4-solo-victory-cup');
+    const qual=current.results.find(r=>r.date==='2026-09-14'&&r.region==='ME'&&r.event==='Solo Victory Cup Battle Royale'&&r.kind==='予選'&&r.player===name);
+    assert.ok(qual,'missing qualifier '+name);
+    assert.equal(record.profileUrl,qual.profileUrl);
+  }
+  const kametin=finals.find(r=>r.player==='かめてぃん');
+  assert.ok(kametin);
+  assert.equal(kametin.prize,100);
+});
