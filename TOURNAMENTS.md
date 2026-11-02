@@ -8,6 +8,10 @@
 
 今後の海外遠征記録向けに、シリーズ `Test Cup`（`test-cup`）と細分類 `Solo Reload Test Cup`（`solo-reload-test-cup`）を用意しました。大会結果の区分は `Test Cup` とし、確認済みの海外参加・順位・キルを独自AOT PRの0.25倍で評価します。現金賞金には加算しません。スキン大会は0.50倍、Icon CupとOverride Seriesは0.35倍のままです。AOT PR v1.3ではFNCS Major・Heats・LCQ等を1.60倍、FNCS Division 1・Practiceを1.40倍、Performance Evaluationを1.20倍として区別します。v1.2の記述は訂正しました。大会出典ID・開催シーズン・地域・セッションを確認してから、大会カタログと戦績を登録します。ここでは未確認の開催IDや結果を追加していません。以下の件数は従来の対象日の集計です。
 
+## Champion Focus FNCS Cupの分類訂正（2026年11月2日）
+
+`Champion Focus FNCS Cup`は大会名にFNCSを含みますが、公式のスキン報酬大会のため、シリーズを`FNCS`から`スキン大会`（`skin-cup`）へ修正しました。細分類・ソロ・通常BR・出典ID・既存のShirokaの戦績は保持します。戦績区分は修正前から`スキン大会`であり、AOT PRの大会倍率0.50は変更しません。
+
 ## 分類の考え方
 
 大会分類は、既存の戦績データとは別の `tournamentCatalog` に保存しています。大会シリーズ・ゲーム形式・大会細分類・チーム人数・機種条件の5項目を独立した軸として扱います。予選・Practice決勝・Performance決勝・賞金決勝・スキン大会は、既存の `kind` に基づく別の絞り込みです。
@@ -29,7 +33,8 @@
 |---|---:|
 |Victory Cup|118|
 |Cash Cup|2|
-|FNCS|7|
+|FNCS|6|
+|スキン大会|1|
 |Override Series|4|
 |Performance Evaluation|2|
 |Icon Cup|3|

@@ -2,6 +2,14 @@
   "version": 1,
   "entries": [
     {
+      "id": "2026-11-02-champion-focus-skin-series-fix",
+      "date": "2026-11-02",
+      "type": "site",
+      "title": "Champion Focus FNCS Cupをスキン大会に分類修正",
+      "description": "名前にFNCSを含むChampion Focus FNCS Cupの大会シリーズをFNCSからスキン大会へ修正。細分類・出典・既存のShirokaの順位・キル・VR・賞金データは保持。AOT PRでは従来からスキン大会0.50倍を適用しており、賞金獲得ボーナスは検討中のため未実装です。",
+      "recordIds": []
+    },
+    {
       "id": "2026-11-02-aot-pr-tier-correction",
       "date": "2026-11-02",
       "type": "site",

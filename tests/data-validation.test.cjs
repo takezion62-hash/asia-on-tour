@@ -4,7 +4,8 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
-const { loadData, validateData, summarize, personalCents, seasonFor } = require('../scripts/data-checks.cjs');
+const { loadData, validateData, summarize, personalCents, seasonFor, tournamentFor } = require('../scripts/data-checks.cjs');
+const AotPR = require('../aot-pr.js');
 const loaded = loadData(path.join(__dirname, '..'));
 const current = loaded.data;
 const clone = () => structuredClone(current);
@@ -22,6 +23,18 @@ test('現在の3ファイルは構文・構造・参照・賞金配分の検証�
   const report = summarize(current);
   assert.equal(report.records, current.results.length);
   assert.equal(Math.round(report.total * 100), report.ranking.reduce((sum, p) => sum + Math.round(p.total * 100), 0));
+});
+
+test('Champion Focus FNCS Cup is a skin competition, not an FNCS main event', () => {
+  const record = current.results.find(row => row.event === 'Champion Focus FNCS Cup');
+  assert.ok(record, 'Champion Focus result must remain registered');
+  assert.equal(record.kind, 'スキン大会');
+  const tournament = tournamentFor(record, current);
+  assert.ok(tournament, 'Champion Focus catalog record must resolve');
+  assert.equal(tournament.series, 'skin-cup');
+  assert.equal(tournament.subtype, 'champion-focus-fncs-cup');
+  assert.equal(AotPR.eventMultiplier(record, tournament), 0.5);
+  assert.equal(personalCents(record), 0);
 });
 
 test('JSONの構文エラーと欠落ファイルを日本語・ファイル名付きで報告する', () => {
