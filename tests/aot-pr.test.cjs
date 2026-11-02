@@ -82,6 +82,91 @@ test('Solo Reload Test Cup x0.25 credits verified overseas participation and sco
   assert.equal(score([row],catalog({series:'unknown'})).ranked.length,0);
   assert.equal(score([row],catalog({series:'victory-cup'})).ranked.length,0);
 });
+
+test('Victory Cups award 20pt for each confirmed paid final VR, with region factor only',()=>{
+  const row=event({rank:4,kills:10,prize:200,vrs:2,region:'EU'});
+  const original=structuredClone(row);
+  const result=score([row]),p=result.ranked[0];
+  approx(p.attendance,14);approx(p.placement,70);approx(p.eliminations,9.8);
+  approx(p.bonus,20*2*1.4);approx(p.score,(10+50+7+40)*1.4);
+  assert.equal(p.rows[0].bonusUnits,2);
+  assert.deepEqual(row,original);
+});
+
+test('FNCS Major/Heats/LCQ get one 80pt prize bonus per session; Div1/Practice one 60pt even at 0VR',()=>{
+  const duo=event({kind:'Practice決勝',rank:19,kills:3,vrs:0,prize:100,prizePerPlayer:50,players:['Arim','Maguro'],player:'Arim'});
+  for(const subtype of ['fncs-division-1','fncs-division-1-practice']){
+    const p=score([duo],catalog({series:'fncs',subtype,team:'duo'})).ranked;
+    assert.equal(p.length,2);p.forEach(x=>approx(x.bonus,60));
+  }
+  for(const subtype of ['fncs-major','fncs-heats','fncs-lcq']){
+    const p=score([duo],catalog({series:'fncs',subtype,team:'duo'})).ranked;
+    p.forEach(x=>approx(x.bonus,80));
+  }
+});
+
+test('Performance Evaluation awards 40pt for each paid VR and never for its qualifier wins',()=>{
+  const cat=catalog({series:'performance-evaluation',subtype:'performance-evaluation',team:'duo',mode:'battle-royale'});
+  const qual=event({kind:'予選',round:'Session 3 · Round 1 / 予選',vrs:2,prize:null,players:['A','B'],
+    source:'https://fortnitetracker.com/events/epicgames_S42_PerformanceEvaluation_EU?window=S42_PerformanceEvaluation_Session3_Round1_EU',region:'EU'});
+  const fin=event({kind:'Performance決勝',round:'Session 3 · Round 2 / Performance決勝',vrs:2,prize:1600,prizePerPlayer:800,players:['A','B'],
+    source:'https://fortnitetracker.com/events/epicgames_S42_PerformanceEvaluation_EU?window=S42_PerformanceEvaluation_Session3_Round2_EU',region:'EU'});
+  const players=score([qual,fin],cat).ranked;
+  players.forEach(p=>{approx(p.bonus,40*2*1.4);assert.equal(p.appearances,1);});
+});
+
+test('Cash Cups use 30pt for placement payouts at 0VR; explicit Victory Cash Cups use paid VR',()=>{
+  const row=event({prize:400,prizePerPlayer:200,vrs:0,players:['A','B'],player:'A'});
+  const ordinary=catalog({series:'cash-cup',subtype:'reload-zb-duos-cash-cup',team:'duo'});
+  score([row],ordinary).ranked.forEach(p=>approx(p.bonus,30));
+  const victory=catalog({series:'cash-cup',subtype:'solo-victory-cash-cup',team:'solo'});
+  approx(score([event({prize:200,vrs:2})],victory).ranked[0].bonus,40);
+  approx(score([event({prize:100,vrs:0})],victory).ranked[0].bonus,0);
+});
+
+test('No bonus for uncertain prize, unpaid qualifier, missing paid VR count, or unconfirmed duo shares',()=>{
+  for(const fields of [
+    {prize:null,vrs:2},{prize:0,vrs:2},{prize:100,vrs:null},
+    {prize:100,vrs:2,verified:false},{prize:100,vrs:2,reported:true},
+    {prize:100,vrs:2,partial:true},{prize:100,vrs:2,kind:'予選'},
+    {prize:100,vrs:2,kind:'Test Cup'},{prize:100,vrs:2,kind:'スキン大会'},
+    {prize:200,vrs:2,players:['A','B'],prizePerPlayer:null},
+    {prize:200,vrs:2,players:['A','B'],prizePerPlayer:150}
+  ]) {
+    const report=score([event(fields)]),p=report.ranked[0];
+    if(p) approx(p.bonus,0);
+  }
+  const fakePrize=score([event({prize:100,vrs:1})],catalog({series:'unknown'}));
+  assert.equal(fakePrize.playerCount,0);
+});
+
+test('One cash bonus per event/session, maximum confirmed paid VRs on duplicate standings, other sessions distinct',()=>{
+  const base=event({id:'vr-a',prize:100,vrs:1});
+  const second={...base,id:'vr-b',prize:200,vrs:2,rank:3,source:'https://fortnitetracker.com/events/epicgames_S42_ReloadSoloVictoryCup_NAW?window=S42_ReloadSoloVictoryCup_Event5_Round3_NAW'};
+  const p=score([base,second]).ranked[0];
+  approx(p.bonus,40);assert.equal(p.appearances,1);
+  const other={...base,id:'vr-c',round:'Event 6 · Round 2 / 賞金決勝',
+    source:'https://fortnitetracker.com/events/epicgames_S42_ReloadSoloVictoryCup_NAW?window=S42_ReloadSoloVictoryCup_Event6_Round2_NAW'};
+  approx(score([base,second,other]).ranked[0].bonus,60);
+  const fncs=catalog({series:'fncs',subtype:'fncs-division-1-practice'});
+  approx(score([base,second],fncs).ranked[0].bonus,60);
+});
+
+test('Cash bonus is preserved across all-region and per-region aggregation',()=>{
+  const a=event({region:'NAW',prize:100,vrs:1});
+  const b=event({region:'EU',prize:200,vrs:2,source:'https://fortnitetracker.com/events/epicgames_S42_ReloadSoloVictoryCup_EU?window=S42_ReloadSoloVictoryCup_Event5_Round2_EU'});
+  const all=score([a,b]).ranked[0],naw=score([a,b],catalog(),{region:'NAW'}).ranked[0],eu=score([a,b],catalog(),{region:'EU'}).ranked[0];
+  approx(all.bonus,naw.bonus+eu.bonus);
+  approx(all.score,naw.score+eu.score);
+});
+
+test('Configured individualPrize helper prevents uncertain or inflated payouts',()=>{
+  const x=event({prize:200,prizePerPlayer:100,vrs:2,players:['A','B']});
+  assert.equal(score([x],catalog({team:'duo'}),{individualPrize:()=>0}).ranked[0].bonus,0);
+  assert.equal(score([x],catalog({team:'duo'}),{individualPrize:()=>250}).ranked[0].bonus,0);
+  assert.equal(score([x],catalog({team:'duo'}),{individualPrize:()=>100}).ranked[0].bonus,40);
+});
+
 test('Unsupported modes receive no assumed elimination points',()=>{
   const report=score([event({rank:4,kills:100})],catalog({mode:'unknown'}));
   approx(report.ranked[0].score,60);assert.equal(report.unknownModeKills,1);

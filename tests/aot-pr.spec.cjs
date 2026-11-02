@@ -154,6 +154,23 @@ test('共通シーズン変更をランキングと直接プロフィールに�
   await noOverflow(page);
 });
 
+
+test('賞金獲得ボーナスを地域倍率付きで加点し、プロフィール内訳に表示する', async ({ page }) => {
+  const paid = record('paid', { player: 'Paid Victory Player', region: 'EU', prize: 200, vrs: 2 });
+  const unpaid = record('unpaid', { player: 'Unpaid Player', region: 'EU', prize: 0, vrs: 2 });
+  await fixture(page, [paid, unpaid]);
+  await open(page);
+  await expect(playerRow(page,'Paid Victory Player').locator('.aot-pr-score')).toHaveText('149.8AOT PR');
+  await expect(playerRow(page,'Unpaid Player').locator('.aot-pr-score')).toHaveText('93.8AOT PR');
+  await expect(playerRow(page,'Paid Victory Player')).toContainText('賞金ボーナス 56.0');
+  await playerRow(page,'Paid Victory Player').getByRole('link').click();
+  await expect(page.locator('.aot-pr-profile')).toContainText('賞金ボーナス');
+  await expect(page.locator('.aot-pr-overview')).toContainText('56.0');
+  await page.locator('.aot-pr-breakdown summary').click();
+  await expect(page.locator('.aot-pr-breakdown')).toContainText('2VR');
+  await noOverflow(page);
+});
+
 test('全戦績が加点保留でも空状態と直接プロフィールの未集計表示が安全に動く', async ({ page }) => {
   const failures = [];
   page.on('pageerror', error => failures.push(error.message));

@@ -22,7 +22,7 @@
 .aot-pr-method{font-size:11px;line-height:1.95;color:#9baac8;margin:16px 0 0}
 .aot-pr-profile{padding:21px;border:1px solid #55466e;border-radius:16px;background:linear-gradient(135deg,#1d1a2e,#121a29);margin:0 0 28px}
 .aot-pr-profile h2{font-size:19px;margin:0 0 13px;color:#eaddff}
-.aot-pr-overview{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:13px}
+.aot-pr-overview{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-bottom:13px}
 .aot-pr-overview>div{padding:12px 8px;border-radius:11px;background:#111a2c;min-width:0;text-align:center}
 .aot-pr-overview dt{font-size:10px;color:#98a9ca;margin:0 0 6px}
 .aot-pr-overview dd{font-size:17px;color:#f2eaff;font-weight:900;margin:0;overflow-wrap:anywhere}

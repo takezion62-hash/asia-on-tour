@@ -1,4 +1,4 @@
-/* ASIA ON TOUR Power Ranking v1.0 - independent, deterministic, read-only scoring */
+/* ASIA ON TOUR Power Ranking v1.4 - independent, deterministic, read-only scoring */
 (function (root, factory) {
   'use strict';
   const api = factory();
@@ -7,7 +7,7 @@
 })(typeof globalThis === 'object' ? globalThis : this, function () {
   'use strict';
 
-  const VERSION = '1.3.0';
+  const VERSION = '1.4.0';
   const REGIONS = Object.freeze({ EU: 1.4, BR: 1.3, NAC: 1.2, ME: 1.1, OCE: 1.1, NAW: 1.0 });
   const STAGES = Object.freeze({ '予選': 0.35, '賞金決勝': 1, '決勝': 1, 'Practice決勝': 1,
     'Performance決勝': 1, 'スキン大会': 1, 'コスメ大会': 1, 'Test Cup': 1 });
@@ -31,6 +31,36 @@
     }
     if (tournament.series === 'victory-cup' || tournament.series === 'cash-cup') return 1;
     return null; // classification unknown: do not guess the importance of the event
+  }
+
+  // Bonus is for a verified cash achievement, not a conversion from USD to points.
+  // Only an eligible *personal* payout qualifies; unknown duo shares are withheld.
+  const CASH_FINALS = new Set(['賞金決勝', '決勝', 'Practice決勝', 'Performance決勝']);
+  function confirmedCash(record, people, individualPrize) {
+    if (record.verified !== true || record.reported || record.partial || !CASH_FINALS.has(record.kind) ||
+      typeof record.prize !== 'number' || !Number.isFinite(record.prize) || record.prize <= 0) return false;
+    if (typeof individualPrize === 'function') {
+      const amount = individualPrize(record);
+      return typeof amount === 'number' && Number.isFinite(amount) && amount > 0 && amount <= record.prize;
+    }
+    if (people.length === 1) return true;
+    return Number.isFinite(record.prizePerPlayer) && record.prizePerPlayer > 0 &&
+      record.prizePerPlayer * people.length <= record.prize + 0.001;
+  }
+
+  function bonusPolicy(tournament) {
+    if (tournament.series === 'fncs') return {
+      mode: 'event', base: ['fncs-division-1', 'fncs-division-1-practice'].includes(tournament.subtype) ? 60 : 80
+    };
+    if (tournament.series === 'performance-evaluation') return { mode: 'vr', base: 40 };
+    if (tournament.series === 'victory-cup') return { mode: 'vr', base: 20 };
+    if (tournament.series === 'cash-cup') {
+      // Victory Cash Cups explicitly award by VR; ordinary Cash Cups are placement based.
+      const isVictory = /victory/i.test(String(tournament.subtype || '')) ||
+        /victory\s+cash\s+cup/i.test(String(tournament.name || ''));
+      return isVictory ? { mode: 'vr', base: 20 } : { mode: 'event', base: 30 };
+    }
+    return null; // No invented cash bonuses for skin, test, Icon or Override series.
   }
 
   function sourceRound(record) {
@@ -103,6 +133,7 @@
     const unique = uniqueRecords(input, options.names, options.classify);
     const players = new Map();
     const seenEntries = new Set();
+    const awardedBonusUnits = new Map();
     let included = 0, unknownModeKills = 0, missingRanks = 0, missingKills = 0, ignored = 0;
 
     for (const record of unique.records) {
@@ -136,15 +167,25 @@
         const attendance = (newAppearance ? 10 * eventFactor : 0) * regionFactor;
         const placement = rankBase * regionFactor;
         const elimination = killsBase * regionFactor;
-        const total = attendance + placement + elimination;
-        const value = players.get(name) || { name, score: 0, attendance: 0, placement: 0, eliminations: 0,
+        // A single final standing may summarize multiple paid VRs. Repeated exports
+        // for that session use the maximum *confirmed* paid VR count, never a sum.
+        const policy = bonusPolicy(tournament);
+        const cashConfirmed = policy && confirmedCash(record, people, options.individualPrize);
+        const candidateUnits = cashConfirmed && (policy.mode === 'event' || (Number.isInteger(record.vrs) && record.vrs > 0))
+          ? (policy.mode === 'event' ? 1 : record.vrs) : 0;
+        const alreadyAwarded = awardedBonusUnits.get(appearanceKey) || 0;
+        const bonusUnits = Math.max(0, candidateUnits - alreadyAwarded);
+        if (bonusUnits) awardedBonusUnits.set(appearanceKey, candidateUnits);
+        const bonus = bonusUnits * (policy?.base || 0) * regionFactor;
+        const total = attendance + placement + elimination + bonus;
+        const value = players.get(name) || { name, score: 0, attendance: 0, placement: 0, eliminations: 0, bonus: 0,
           appearances: 0, roundRecords: 0, rows: [], regions: new Set() };
         value.score += total; value.attendance += attendance; value.placement += placement;
-        value.eliminations += elimination; value.appearances += Number(newAppearance);
+        value.eliminations += elimination; value.bonus += bonus; value.appearances += Number(newAppearance);
         value.roundRecords++; value.regions.add(record.region);
         value.rows.push({ id: record.id || null, date: record.date, region: record.region, event: record.event,
           kind: record.kind, rank: hasRank ? record.rank : null, kills: hasKills ? record.kills : null,
-          source: record.source || null, attendance, placement, eliminations: elimination, total,
+          source: record.source || null, attendance, placement, eliminations: elimination, bonus, bonusUnits, bonusMode: policy?.mode || null, total,
           regionMultiplier: regionFactor, eventMultiplier: eventFactor, stageMultiplier: stageFactor,
           modeKnown: killCoefficient !== null });
         players.set(name, value);

@@ -2,6 +2,14 @@
   "version": 1,
   "entries": [
     {
+      "id": "2026-11-02-aot-pr-cash-achievement-bonus",
+      "date": "2026-11-02",
+      "type": "site",
+      "title": "AOT PR v1.4に確認済み賞金獲得ボーナスを導入",
+      "description": "Victory系は賞金対象の決勝VR1回につき20pt、Performance Evaluationは1VRにつき40pt。FNCS Major/Heats/LCQ等は賞金獲得1開催枠につき80pt、FNCS Division 1/Practiceは60pt、累計順位型Cash Cupは30pt。いずれも地域倍率のみ適用し、重複・未確認賞金・個人配分未確認を除外。選手プロフィールに内訳を追加し既存データは保持しました。",
+      "recordIds": []
+    },
+    {
       "id": "2026-11-02-champion-focus-skin-series-fix",
       "date": "2026-11-02",
       "type": "site",
