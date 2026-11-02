@@ -2,6 +2,14 @@
   "version": 1,
   "entries": [
     {
+      "id": "2026-11-02-aot-pr-tier-correction",
+      "date": "2026-11-02",
+      "type": "site",
+      "title": "AOT PRのFNCS・Performance Evaluation倍率を訂正",
+      "description": "FNCS Major・Heats・LCQ等を1.60倍、FNCS Division 1・Practiceを1.40倍、Performance Evaluationを1.20倍に設定。直前のv1.2設定を訂正し、既存の戦績・賞金・選手情報は変更しません。",
+      "recordIds": []
+    },
+    {
       "id": "2026-11-02-aot-pr-fncs-performance-weights",
       "date": "2026-11-02",
       "type": "site",

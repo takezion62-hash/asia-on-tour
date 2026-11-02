@@ -48,17 +48,18 @@ test('Squads split team kills by team size; all members get the same team result
 test('Elimination base points capped at 25 before tournament/region multipliers',()=>{
   approx(score([event({rank:1,kills:300,region:'EU'})],catalog({mode:'reload'})).ranked[0].score,(10+100+25)*1.4);
 });
-test('FNCS Division 1 and practice have equal x1.2 weights',()=>{
+test('FNCS Division 1 and Practice use x1.4, above Performance Evaluation x1.2',()=>{
   const row=event({rank:4,kills:0,kind:'Practice決勝'});
-  approx(score([row],catalog({series:'fncs',subtype:'fncs-division-1-practice'})).ranked[0].score,72);
-  approx(score([row],catalog({series:'fncs',subtype:'fncs-division-1'})).ranked[0].score,72);
-});
-test('Performance Evaluation x1.6 ranks above FNCS Major and Heats x1.4',()=>{
-  const row=event({rank:4,kills:0,kind:'Performance決勝'});
-  approx(score([row],catalog({series:'performance-evaluation'})).ranked[0].score,96);
-  for(const subtype of ['fncs-major','fncs-heats','fncs-lcq'])
+  for (const subtype of ['fncs-division-1','fncs-division-1-practice'])
     approx(score([row],catalog({series:'fncs',subtype})).ranked[0].score,84);
-  // FNCS Division 1 and Practice remain x1.2, as independently verified above.
+  approx(score([row],catalog({series:'performance-evaluation',subtype:'performance-evaluation'})).ranked[0].score,72);
+});
+test('FNCS Major, Heats and LCQ use x1.6, higher than Division 1 and Performance',()=>{
+  const row=event({rank:4,kills:0,kind:'Performance決勝'});
+  for (const subtype of ['fncs-major','fncs-heats','fncs-lcq'])
+    approx(score([row],catalog({series:'fncs',subtype})).ranked[0].score,96);
+  approx(score([row],catalog({series:'fncs',subtype:'fncs-division-1'})).ranked[0].score,84);
+  approx(score([row],catalog({series:'performance-evaluation'})).ranked[0].score,72);
 });
 test('Skin and legacy cosmetic competitions x0.50, separate Icon and Override remain x0.35',()=>{
   for(const kind of ['スキン大会','コスメ大会'])

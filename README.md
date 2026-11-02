@@ -7,7 +7,7 @@ ASIA勢のFortnite海外大会戦績を検索・閲覧する、GitHub Pagesの�
 - `index.html`：デザイン・画面構造
 - `app.js`：JSONの読み込み、検索、シーズン、プロフィール、賞金集計
 - `rankings.js`：地域別・実績別ランキングの共通集計（ブラウザー／Node.js）
-- `aot-pr.js` / `aot-pr.css`：AOT PR v1.2の計算と表示
+- `aot-pr.js` / `aot-pr.css`：AOT PR v1.3の計算と表示
 - `results.json`：戦績の配列
 - `updates.json`：更新履歴と登録日を確認できた戦績IDの差分リスト
 - `players.json`：`candidates`（名鑑）と`confirmedAliases`（確認済み別名義）
@@ -39,7 +39,7 @@ ASIA勢のFortnite海外大会戦績を検索・閲覧する、GitHub Pagesの�
 
 | 倍率・係数 | 定義 |
 | --- | --- |
-| 大会 | FNCS Major・Heats等1.4、Division 1・Division 1 Practiceともに1.2、Performance Evaluation 1.6、Victory/Cash Cup 1.0、スキン・旧コスメ 0.50、Icon・Override 0.35、Test Cup 0.25 |
+| 大会 | FNCS Major・Heats・LCQ等1.6、Division 1・Division 1 Practiceともに1.4、Performance Evaluation 1.2、Victory/Cash Cup 1.0、スキン・旧コスメ 0.50、Icon・Override 0.35、Test Cup 0.25 |
 | ラウンド | 予選0.35、決勝・単一セッション1.0 |
 | キル | 通常BR・通常ゼロビルド1.5、Reload・Reloadゼロビルド0.7 |
 | 地域 | EU 1.40、BR 1.30、NAC 1.20、ME 1.10、OCE 1.10、NAW 1.00 |

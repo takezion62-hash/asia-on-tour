@@ -6,7 +6,7 @@
 
 ## 新しいTest Cup分類（2026年11月2日）
 
-今後の海外遠征記録向けに、シリーズ `Test Cup`（`test-cup`）と細分類 `Solo Reload Test Cup`（`solo-reload-test-cup`）を用意しました。大会結果の区分は `Test Cup` とし、確認済みの海外参加・順位・キルを独自AOT PRの0.25倍で評価します。現金賞金には加算しません。スキン大会は0.50倍、Icon CupとOverride Seriesは0.35倍のままです。2026年11月2日以降のAOT PR v1.2ではPerformance Evaluationを1.60倍、FNCS Major・Heats・LCQ等を1.40倍に調整し、FNCS Division 1・Practiceは1.20倍を維持します。大会出典ID・開催シーズン・地域・セッションを確認してから、大会カタログと戦績を登録します。ここでは未確認の開催IDや結果を追加していません。以下の件数は従来の対象日の集計です。
+今後の海外遠征記録向けに、シリーズ `Test Cup`（`test-cup`）と細分類 `Solo Reload Test Cup`（`solo-reload-test-cup`）を用意しました。大会結果の区分は `Test Cup` とし、確認済みの海外参加・順位・キルを独自AOT PRの0.25倍で評価します。現金賞金には加算しません。スキン大会は0.50倍、Icon CupとOverride Seriesは0.35倍のままです。AOT PR v1.3ではFNCS Major・Heats・LCQ等を1.60倍、FNCS Division 1・Practiceを1.40倍、Performance Evaluationを1.20倍として区別します。v1.2の記述は訂正しました。大会出典ID・開催シーズン・地域・セッションを確認してから、大会カタログと戦績を登録します。ここでは未確認の開催IDや結果を追加していません。以下の件数は従来の対象日の集計です。
 
 ## 分類の考え方
 
