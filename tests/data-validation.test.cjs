@@ -52,8 +52,8 @@ test('S43 Solo Reload Test Cup ME/NAW has six verified non-cash results and 0.25
 
 test('2026/9/14 ME Solo Victory Cup qualifiers and hero name merge preserve historical winnings',()=>{
   const qualifiers=current.results.filter(r=>r.date==='2026-09-14'&&r.region==='ME'&&r.event==='Solo Victory Cup Battle Royale'&&r.kind==='予選');
-  const expected=new Map([['ぷりなの',[51,256,8,17,0]],['ぱな',[89,244,8,31,2]],['Botえもん',[117,240,8,15,0]],['あいむらま',[123,238,6,11,1]],['らいちん',[128,238,6,4,0]],['さばべる',[180,233,8,14,0]],['rakirye',[216,229,7,11,1]],['ウン！ボクつよい！',[245,227,7,8,0]],['ゆあもにーさまの歌を聴けぇǃ',[257,226,8,5,0]],['ヒーロー',[260,225,6,10,1]]]);
-  assert.equal(qualifiers.length,10);
+  const expected=new Map([['ぷりなの',[51,256,8,17,0]],['ぱな',[89,244,8,31,2]],['Botえもん',[117,240,8,15,0]],['あいむらま',[123,238,6,11,1]],['らいちん',[128,238,6,4,0]],['さばべる',[180,233,8,14,0]],['rakirye',[216,229,7,11,1]],['ウン！ボクつよい！',[245,227,7,8,0]],['ゆあもにーさまの歌を聴けぇǃ',[257,226,8,5,0]],['ヒーロー',[260,225,6,10,1]],['ずーにんぐくん',[306,222,7,6,0]],['らず',[313,221,8,20,1]],['こがね',[325,221,6,9,0]],['Melon',[390,217,6,5,0]],['angelwing',[407,216,7,8,0]],['koafnr',[409,216,8,8,0]],['falcon manzuǃ',[410,216,8,8,0]],['おーくん',[455,214,7,6,0]],['RGN 俺が俺の人生の主人公だǃ',[456,214,6,1,0]],['かめてぃん',[468,213,8,33,0]]]);
+  assert.equal(qualifiers.length,20);
   for(const row of qualifiers){
     assert.deepEqual([row.rank,row.points,row.matches,row.kills,row.vrs],expected.get(row.player),row.player);
     assert.equal(row.kind,'予選');assert.equal(row.prize,null);assert.equal(row.verified,true);
@@ -67,6 +67,12 @@ test('2026/9/14 ME Solo Victory Cup qualifiers and hero name merge preserve hist
   assert.ok(current.players.candidates.some(p=>p.name==='ヒーロー'));
   assert.ok(!current.players.candidates.some(p=>p.name==='REBEL 英雄のヒーロー 轟'));
   assert.ok(current.players.confirmedAliases['ヒーロー'].includes('REBEL 英雄のヒーロー 轟'));
+  const angel=current.results.filter(r=>r.player==='angelwing');
+  assert.equal(angel.length,3);
+  assert.ok(current.players.candidates.some(c=>c.name==='angelwing'));
+  assert.ok(!current.players.candidates.some(c=>c.name==='Starbucks Lоvers'));
+  assert.ok(current.players.confirmedAliases.angelwing.includes('Starbucks Lоvers'));
+  assert.equal(current.results.filter(r=>r.player==='Starbucks Lоvers').length,0);
 });
 
 test('Champion Focus FNCS Cup is a skin competition, not an FNCS main event', () => {
