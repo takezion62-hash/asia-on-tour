@@ -68,7 +68,7 @@ test('Merged Override and dual-tag cosmetic Icon use skin x0.50, regular Icon st
   approx(score([event({kind:'スキン大会',rank:1,kills:0})],catalog({series:'icon-cup'})).ranked[0].score,38.5);
   approx(score([event({kind:'賞金決勝',rank:1,kills:0,prize:500,vrs:1})],catalog({series:'icon-cup'})).ranked[0].bonus,0);
 });
-test('PlayStation NickEh30 dual-tag Icon Cup scores cosmetic qualifiers x0.50, cash finals x0.35',()=>{
+test('PlayStation NickEh30 dual-tag Icon Cup scores cosmetic qualifiers x0.50, cash finals x1.20',()=>{
   const t=catalog({id:'ch7s4-playstation-nickeh30-icon-cup',series:'icon-cup',
     subtype:'nickeh30-icon-cup',additionalSeries:['skin-cup'],mode:'battle-royale'});
   const qual=event({id:'nick-qual',kind:'予選',rank:4,kills:10,prize:null,vrs:1,
@@ -76,13 +76,15 @@ test('PlayStation NickEh30 dual-tag Icon Cup scores cosmetic qualifiers x0.50, c
   const fin=event({id:'nick-final',kind:'決勝',rank:4,kills:10,prize:null,vrs:0,
     round:'Session 1 / 決勝',source:'https://www.fortnite.com/competitive/events/S42_PSNickEh30?round=S42_PSNickEh30_Final_NAW'});
   approx(PR.eventMultiplier(qual,t),0.5);
-  approx(PR.eventMultiplier(fin,t),0.35);
+  approx(PR.eventMultiplier(fin,t),1.20);
   const q=score([qual],t).ranked[0],f=score([fin],t).ranked[0];
   approx(q.score,(10+50*.35+15*.35)*0.50);
-  approx(f.score,(10+50+15)*0.35);
+  approx(f.score,(10+50+15)*1.20);
   approx(q.bonus,0);approx(f.bonus,0);
   const paid={...fin,id:'paid-final',vrs:1,prize:500};
-  approx(score([paid],t).ranked[0].bonus,0); // No Icon Cup prize bonus policy yet.
+  const paidResult=score([paid],t).ranked[0];
+  approx(paidResult.bonus,0); // No Icon Cup prize bonus policy yet.
+  approx(paidResult.score,(10+50+15)*1.20);
   const both=score([qual,fin],t).ranked[0];
   assert.equal(both.roundRecords,2);
   approx(both.bonus,0);

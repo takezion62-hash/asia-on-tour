@@ -18,7 +18,7 @@ Override SeriesのMega Man、KINGDOM HEARTS、Persona 5 Royalの3大会を`skin-
 
 ## 2026年11月2日：NickEh30 Icon Cupを混合報酬大会として扱う
 
-PlayStation NickEh30 Icon Cupにも `Icon Cup` と `スキン大会` の両シリーズタグを追加しました（`series: icon-cup`、`additionalSeries: [skin-cup]`）。公式規則（2026年9月28日付）Attachment Cによると、通常BR予選は順位に応じたコスメ報酬、決勝は1VRごとの現金賞金です。そこで大会検索では両タグを持たせながら、AOT PR大会倍率は予選0.50、決勝0.35とラウンド別に扱います。既存の予選8件・決勝7件の順位・キル・VR・賞金・参加者は変更せず、未確認賞金を創作しません。賞金獲得ボーナスは既存ルール上Icon Cup対象外のままです。
+PlayStation NickEh30 Icon Cupにも `Icon Cup` と `スキン大会` の両シリーズタグを追加しました（`series: icon-cup`、`additionalSeries: [skin-cup]`）。公式規則（2026年9月28日付）Attachment Cによると、通常BR予選は順位に応じたコスメ報酬、決勝は1VRごとの現金賞金です。そこで大会検索では両タグを持たせながら、AOT PR大会倍率は予選0.50、上位100名のみが進出できる現金賞金決勝1.20とラウンド別に扱います。既存の予選8件・決勝7件の順位・キル・VR・賞金・参加者は変更せず、未確認賞金を創作しません。賞金獲得ボーナスは既存ルール上Icon Cup対象外のままです。
 
 ## 分類の考え方
 

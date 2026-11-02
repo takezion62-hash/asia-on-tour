@@ -120,7 +120,7 @@ test('Merged Override and dual-tag cosmetic Icon Cup metadata remains valid',()=
   const final=current.results.find(e=>e.event===nick.name&&e.kind==='決勝');
   assert.ok(qualifying&&final);
   assert.equal(AotPR.eventMultiplier(qualifying,nick),0.50);
-  assert.equal(AotPR.eventMultiplier(final,nick),0.35);
+  assert.equal(AotPR.eventMultiplier(final,nick),1.20);
   assert.equal(personalCents(qualifying),0);
   assert.equal(personalCents(final),0);
   bad(data=>{data.tournaments.catalog[0].additionalSeries=['not-real'];},'additionalSeries','登録済み');
