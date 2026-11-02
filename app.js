@@ -1055,7 +1055,15 @@
       if(nav){if(e.ctrlKey||e.metaKey||e.shiftKey||e.altKey||e.button>0)return;e.preventDefault();navigate(nav.dataset.page);return}
       const p=e.target.closest('[data-player]');if(p){selectedPlayer=p.dataset.player;archivePage=1;$('#search-results').value=p.dataset.player;$('#region-filter').value='all';$('#stage-filter').value='all';$('#prize-only').checked=false;navigate('results')}
     });
-    ['#region-filter','#stage-filter','#sort-results','#prize-only'].forEach(s=>$(s).addEventListener('input',()=>{archivePage=1;renderResults()}));$('#search-results').addEventListener('input',()=>{selectedPlayer=null;archivePage=1;renderResults()});$('#search-players').addEventListener('input',renderPlayers);$('#player-sort').addEventListener('change',renderPlayers);$('#export-csv').addEventListener('click',()=>download('asia-on-tour-results.csv',csvText(visible),'text/csv;charset=utf-8'));
+    // Native iOS select controls reliably send 'change' when the picker is confirmed.
+// Listen for both event types so every browser refreshes the sorted archive.
+    const refreshArchiveFilters=()=>{archivePage=1;renderResults()};
+    ['#region-filter','#stage-filter','#sort-results','#prize-only'].forEach(s=>{
+      const control=$(s);
+      control.addEventListener('input',refreshArchiveFilters);
+      control.addEventListener('change',refreshArchiveFilters);
+    });
+    $('#search-results').addEventListener('input',()=>{selectedPlayer=null;refreshArchiveFilters()});$('#search-players').addEventListener('input',renderPlayers);$('#player-sort').addEventListener('change',renderPlayers);$('#export-csv').addEventListener('click',()=>download('asia-on-tour-results.csv',csvText(visible),'text/csv;charset=utf-8'));
     document.addEventListener('input',e=>{if(e.target.id==='tournament-query')updateTournamentFilters('q',e.target.value)});
     document.addEventListener('change',e=>{if(e.target.id==='season-select'){changeSeason(e.target.value);return}const rankingKey={'ranking-metric':'metric','ranking-mode':'mode','ranking-series':'series','ranking-final-kind':'finalKind'}[e.target.id];if(rankingKey&&currentView.page==='players'){updateRankingFilter(rankingKey,e.target.value);return}if(e.target.dataset.tournamentFilter)updateTournamentFilters(e.target.dataset.tournamentFilter,e.target.value)});
     selectedSeason=seasonFromUrl();
