@@ -16,6 +16,10 @@
 
 Override SeriesのMega Man、KINGDOM HEARTS、Persona 5 Royalの3大会を`skin-cup`へ分類変更しました。大会ID・名称・実績数値は変えず、旧Override Seriesの独立タグを廃止。Inoxtag Icon Cup Battle RoyaleとMadison Beer Icon Cup Reloadには、元の`icon-cup`を保持しつつ追加タグ`skin-cup`を付けています。2シリーズのどちらでも検索でき、賞金・全件数は二重加算されません。AOT PRはこれらのスキン大会に0.50倍を適用します。以下の数表は旧日付時点の固定表です。
 
+## 2026年11月2日：NickEh30 Icon Cupを混合報酬大会として扱う
+
+PlayStation NickEh30 Icon Cupにも `Icon Cup` と `スキン大会` の両シリーズタグを追加しました（`series: icon-cup`、`additionalSeries: [skin-cup]`）。公式規則（2026年9月28日付）Attachment Cによると、通常BR予選は順位に応じたコスメ報酬、決勝は1VRごとの現金賞金です。そこで大会検索では両タグを持たせながら、AOT PR大会倍率は予選0.50、決勝0.35とラウンド別に扱います。既存の予選8件・決勝7件の順位・キル・VR・賞金・参加者は変更せず、未確認賞金を創作しません。賞金獲得ボーナスは既存ルール上Icon Cup対象外のままです。
+
 ## 分類の考え方
 
 大会分類は、既存の戦績データとは別の `tournamentCatalog` に保存しています。大会シリーズ・ゲーム形式・大会細分類・チーム人数・機種条件の5項目を独立した軸として扱います。予選・Practice決勝・Performance決勝・賞金決勝・スキン大会は、既存の `kind` に基づく別の絞り込みです。

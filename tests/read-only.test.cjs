@@ -823,7 +823,7 @@ test('all published archive records and every player history expose the same fiv
 
 test('Override merges into skin and two Icon Cups are tagged by both series without doubling records',()=>{
   const overridden=['Override Series: Mega Man Cup','Override Series: KINGDOM HEARTS Cup','Override Series: Persona 5 Royal Cup Reload'];
-  const dual=['Inoxtag Icon Cup Battle Royale','Madison Beer Icon Cup Reload'];
+  const dual=['Inoxtag Icon Cup Battle Royale','Madison Beer Icon Cup Reload','PlayStation NickEh30 Icon Cup'];
   for(const name of overridden){const row=records.find(e=>e.event===name);assert.ok(row,name);assert.equal(tournamentFor(row,data).series,'skin-cup');}
   for(const name of dual){const row=records.find(e=>e.event===name);assert.ok(row,name);const t=tournamentFor(row,data);assert.equal(t.series,'icon-cup');assert.deepEqual(t.additionalSeries,['skin-cup']);}
   const app=boot(script,{hash:'#tournaments?series=skin-cup'});

@@ -18,7 +18,7 @@ ASIA勢のFortnite海外大会戦績を検索・閲覧する、GitHub Pagesの�
 
 ## スキン大会の統合と複数シリーズタグ（2026-11-02）
 
-Override SeriesのMega Man・KINGDOM HEARTS・Persona 5の3大会をシリーズ`skin-cup`へ統合。大会名と出典IDは維持し、旧Overrideの独立選択肢は廃止しました。Inoxtag Icon Cup Battle Royale・Madison Beer Icon Cup Reloadはシリーズ`icon-cup`のまま、`additionalSeries: ["skin-cup"]`を追加。大会・選手・結果ページでは両タグを表示し、シリーズ検索や実績ランキングでも両カテゴリから検索可能です。総戦績・賞金の重複加算はせず、AOT PRだけスキン倍率0.50を適用します。
+Override SeriesのMega Man・KINGDOM HEARTS・Persona 5の3大会をシリーズ`skin-cup`へ統合。大会名と出典IDは維持し、旧Overrideの独立選択肢は廃止しました。Inoxtag Icon Cup Battle Royale・Madison Beer Icon Cup Reload・PlayStation NickEh30 Icon Cupはシリーズ`icon-cup`のまま、`additionalSeries: ["skin-cup"]`を追加。大会・選手・結果ページでは両タグを表示し、シリーズ検索や実績ランキングでも両カテゴリから検索可能です。総戦績・賞金の重複加算はせず、Inoxtag・Madisonにはスキン倍率0.50を適用します。**NickEh30は混合報酬大会**なので、予選はスキン大会0.50、決勝はIcon Cup0.35のままにして、未確認の現金賞金を追加しません。
 
 ## 更新履歴と新着登録
 
@@ -43,7 +43,7 @@ Override SeriesのMega Man・KINGDOM HEARTS・Persona 5の3大会をシリーズ
 
 | 倍率・係数 | 定義 |
 | --- | --- |
-| 大会 | FNCS Major・Heats・LCQ等1.6、Division 1・Division 1 Practiceともに1.4、Performance Evaluation 1.2、Victory/Cash Cup 1.0、スキン大会・旧Override・指定コスメIcon 0.50、その他のIcon Cup 0.35、Test Cup 0.25 |
+| 大会 | FNCS Major・Heats・LCQ等1.6、Division 1・Division 1 Practiceともに1.4、Performance Evaluation 1.2、Victory/Cash Cup 1.0、スキン大会・旧Override・Inoxtag/Madison Icon 0.50、NickEh30の予選0.50／決勝0.35、その他Icon Cup 0.35、Test Cup 0.25 |
 | ラウンド | 予選0.35、決勝・単一セッション1.0 |
 | キル | 通常BR・通常ゼロビルド1.5、Reload・Reloadゼロビルド0.7 |
 | 地域 | EU 1.40、BR 1.30、NAC 1.20、ME 1.10、OCE 1.10、NAW 1.00 |

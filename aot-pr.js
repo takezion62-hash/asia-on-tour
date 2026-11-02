@@ -7,7 +7,7 @@
 })(typeof globalThis === 'object' ? globalThis : this, function () {
   'use strict';
 
-  const VERSION = '1.5.0';
+  const VERSION = '1.6.0';
   const REGIONS = Object.freeze({ EU: 1.4, BR: 1.3, NAC: 1.2, ME: 1.1, OCE: 1.1, NAW: 1.0 });
   const STAGES = Object.freeze({ '予選': 0.35, '賞金決勝': 1, '決勝': 1, 'Practice決勝': 1,
     'Performance決勝': 1, 'スキン大会': 1, 'コスメ大会': 1, 'Test Cup': 1 });
@@ -22,6 +22,12 @@
     // Test Cups reward verified overseas participation, without competing with cash cups.
     if (tournament.series === 'test-cup') return record.kind === 'Test Cup' ? 0.25 : null;
     if (record.kind === 'Test Cup') return null; // never treat a test as a higher-paying series
+    // NickEh30 is mixed reward: cosmetic qualifier, paid-VR final. Its series tags
+    // are shared by the event but cannot imply the same reward or weight per round.
+    if (tournament.series === 'icon-cup' && tournament.subtype === 'nickeh30-icon-cup' &&
+      Array.isArray(tournament.additionalSeries) && tournament.additionalSeries.includes('skin-cup')) {
+      return record.kind === '予選' || SKIN_KINDS.has(record.kind) ? 0.50 : 0.35;
+    }
     if (tournament.series === 'icon-cup' && Array.isArray(tournament.additionalSeries) &&
       tournament.additionalSeries.includes('skin-cup')) return 0.50;
     if (OTHER_COSMETIC_SERIES.has(tournament.series)) return 0.35;
