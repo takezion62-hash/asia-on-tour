@@ -6,7 +6,11 @@
 
 ## 新しいTest Cup分類（2026年11月2日）
 
-今後の海外遠征記録向けに、シリーズ `Test Cup`（`test-cup`）と細分類 `Solo Reload Test Cup`（`solo-reload-test-cup`）を用意しました。大会結果の区分は `Test Cup` とし、確認済みの海外参加・順位・キルを独自AOT PRの0.25倍で評価します。現金賞金には加算しません。スキン大会は0.50倍、Icon CupとOverride Seriesは0.35倍のままです。AOT PR v1.3ではFNCS Major・Heats・LCQ等を1.60倍、FNCS Division 1・Practiceを1.40倍、Performance Evaluationを1.20倍として区別します。v1.2の記述は訂正しました。大会出典ID・開催シーズン・地域・セッションを確認してから、大会カタログと戦績を登録します。ここでは未確認の開催IDや結果を追加していません。以下の件数は従来の対象日の集計です。
+今後の海外遠征記録向けに、シリーズ `Test Cup`（`test-cup`）と細分類 `Solo Reload Test Cup`（`solo-reload-test-cup`）を用意しました。大会結果の区分は `Test Cup` とし、確認済みの海外参加・順位・キルを独自AOT PRの0.25倍で評価します。現金賞金には加算しません。スキン大会は0.50倍、Icon CupとOverride Seriesは0.35倍のままです。AOT PR v1.3ではFNCS Major・Heats・LCQ等を1.60倍、FNCS Division 1・Practiceを1.40倍、Performance Evaluationを1.20倍として区別します。v1.2の記述は訂正しました。大会出典ID・開催シーズン・地域・セッションを確認してから、大会カタログと戦績を登録します。S43 Solo Reload Test Cupの大会IDと結果は2026年11月2日に確認・登録済みです。以下の件数は従来の対象日の集計です。
+
+## S43 Solo Reload Test Cupを初登録（2026年11月2日）
+
+公式イベントID `S43_SoloReloadTestCup`、11/2開催のME・NAWを大会カタログへ登録しました。チャプター7・シーズン5（Treasure Huntersミニシーズン）に該当します。ソロ通常Reloadで、テスト大会のため現金賞金・賞品はありません。ユーザー提供のFortnite Trackerの順位・ポイント・キル・VR・試合数を根拠にMEで2戦績、NAWで4戦績を追加。Test Cupは大会倍率0.25、賞金ボーナスなしとし、複数地域に参加した選手は地域ごとに独立集計します。既存戦績・賞金の変更はありません。
 
 ## Champion Focus FNCS Cupの分類訂正（2026年11月2日）
 

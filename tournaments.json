@@ -844,6 +844,36 @@
       "additionalSeries": [
         "skin-cup"
       ]
+    },
+    {
+      "id": "ch7s5-solo-reload-test-cup",
+      "name": "Solo Reload Test Cup",
+      "chapter": 7,
+      "season": 5,
+      "seasonId": "S43",
+      "sourceEventIds": [
+        "S43_SoloReloadTestCup"
+      ],
+      "series": "test-cup",
+      "mode": "reload",
+      "subtype": "solo-reload-test-cup",
+      "team": "solo",
+      "platform": "cross-platform",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "Epic Games公式競技イベント：11月2日開催のSolo Reload Test Cup。テスト大会であり賞品は授与されないことを明記。",
+          "url": "https://www.fortnite.com/competitive/events/S43_SoloReloadTestCup/?lang=ja&region=NAC"
+        },
+        {
+          "text": "Fortnite Tracker のME開催結果。IGNUM rirksignzx・RVL ぐれーぷふぁんぼーいの順位・ポイント・試合数・キル・VRをユーザー提供スクリーンショットで確認。",
+          "url": "https://fortnitetracker.com/events/epicgames_S43_SoloReloadTestCup_ME"
+        },
+        {
+          "text": "Fortnite Tracker のNAW開催結果。3peace・rakirye・RVL ぐれーぷふぁんぼーい・Jack ψ pols見ての成績をユーザー提供スクリーンショットで確認。",
+          "url": "https://fortnitetracker.com/events/epicgames_S43_SoloReloadTestCup_NAW"
+        }
+      ]
     }
   ]
 }

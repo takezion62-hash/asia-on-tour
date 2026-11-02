@@ -25,6 +25,31 @@ test('現在の3ファイルは構文・構造・参照・賞金配分の検証�
   assert.equal(Math.round(report.total * 100), report.ranking.reduce((sum, p) => sum + Math.round(p.total * 100), 0));
 });
 
+test('S43 Solo Reload Test Cup ME/NAW has six verified non-cash results and 0.25 AOT PR weight',()=>{
+  const records=current.results.filter(r=>r.event==='Solo Reload Test Cup'&&r.date==='2026-11-02');
+  assert.equal(records.length,6);
+  assert.equal(records.filter(r=>r.region==='ME').length,2);
+  assert.equal(records.filter(r=>r.region==='NAW').length,4);
+  const t=current.tournaments.catalog.find(t=>t.id==='ch7s5-solo-reload-test-cup');
+  assert.ok(t);assert.equal(t.series,'test-cup');assert.equal(t.subtype,'solo-reload-test-cup');
+  assert.equal(t.mode,'reload');assert.equal(t.seasonId,'S43');
+  const rk=records.find(r=>r.player==='3peace'&&r.region==='NAW');
+  assert.equal(rk.rank,5);assert.equal(rk.kills,58);assert.equal(rk.vrs,2);
+  const grape=records.filter(r=>r.player==='RVL ぐれーぷふぁんぼーい');
+  assert.equal(grape.length,2);assert.deepEqual(grape.map(r=>r.region).sort(),['ME','NAW']);
+  for(const row of records){
+    assert.equal(row.kind,'Test Cup');assert.equal(row.verified,true);assert.equal(row.prize,0);
+    assert.equal(tournamentFor(row,current)?.id,t.id);
+    assert.equal(AotPR.eventMultiplier(row,t),0.25);
+    assert.equal(personalCents(row),0);
+  }
+  const result=AotPR.calculate(records,{names:r=>[r.player],classify:r=>tournamentFor(r,current)});
+  assert.equal(result.recordCount,6);
+  assert.equal(result.ranked.length,5);
+  assert.equal(result.ranked.find(r=>r.name==='3peace').bonus,0);
+  assert.ok(result.ranked.find(r=>r.name==='3peace').score>0);
+});
+
 test('Champion Focus FNCS Cup is a skin competition, not an FNCS main event', () => {
   const record = current.results.find(row => row.event === 'Champion Focus FNCS Cup');
   assert.ok(record, 'Champion Focus result must remain registered');
