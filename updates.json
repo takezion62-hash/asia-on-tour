@@ -2,6 +2,14 @@
   "version": 1,
   "entries": [
     {
+      "id": "2026-11-02-aot-pr-fncs-performance-weights",
+      "date": "2026-11-02",
+      "type": "site",
+      "title": "Performance EvaluationとFNCS主要大会のAOT PR倍率を入れ替え",
+      "description": "Performance Evaluationを1.40から1.60、FNCS Major・Heats・LCQ等を1.60から1.40へ変更。FNCS Division 1・Practiceは1.20を維持。既存の順位・キル・VR・現金賞金・大会結果は保持し、AOT PRポイントだけを再計算します。",
+      "recordIds": []
+    },
+    {
       "id": "2026-11-02-aot-pr-test-cup-weights",
       "date": "2026-11-02",
       "type": "site",

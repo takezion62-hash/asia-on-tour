@@ -7,7 +7,7 @@
 })(typeof globalThis === 'object' ? globalThis : this, function () {
   'use strict';
 
-  const VERSION = '1.1.0';
+  const VERSION = '1.2.0';
   const REGIONS = Object.freeze({ EU: 1.4, BR: 1.3, NAC: 1.2, ME: 1.1, OCE: 1.1, NAW: 1.0 });
   const STAGES = Object.freeze({ '予選': 0.35, '賞金決勝': 1, '決勝': 1, 'Practice決勝': 1,
     'Performance決勝': 1, 'スキン大会': 1, 'コスメ大会': 1, 'Test Cup': 1 });
@@ -24,9 +24,9 @@
     if (record.kind === 'Test Cup') return null; // never treat a test as a higher-paying series
     if (OTHER_COSMETIC_SERIES.has(tournament.series)) return 0.35;
     if (SKIN_KINDS.has(record.kind) || SKIN_SERIES.has(tournament.series)) return 0.50;
-    if (tournament.series === 'performance-evaluation') return 1.4;
+    if (tournament.series === 'performance-evaluation') return 1.6;
     if (['fncs-division-1', 'fncs-division-1-practice'].includes(tournament.subtype)) return 1.2;
-    if (tournament.series === 'fncs') return 1.6;
+    if (tournament.series === 'fncs') return 1.4;
     if (tournament.series === 'victory-cup' || tournament.series === 'cash-cup') return 1;
     return null; // classification unknown: do not guess the importance of the event
   }

@@ -53,10 +53,12 @@ test('FNCS Division 1 and practice have equal x1.2 weights',()=>{
   approx(score([row],catalog({series:'fncs',subtype:'fncs-division-1-practice'})).ranked[0].score,72);
   approx(score([row],catalog({series:'fncs',subtype:'fncs-division-1'})).ranked[0].score,72);
 });
-test('Performance x1.4 and major x1.6',()=>{
+test('Performance Evaluation x1.6 ranks above FNCS Major and Heats x1.4',()=>{
   const row=event({rank:4,kills:0,kind:'Performance決勝'});
-  approx(score([row],catalog({series:'performance-evaluation'})).ranked[0].score,84);
-  approx(score([row],catalog({series:'fncs',subtype:'fncs-major'})).ranked[0].score,96);
+  approx(score([row],catalog({series:'performance-evaluation'})).ranked[0].score,96);
+  for(const subtype of ['fncs-major','fncs-heats','fncs-lcq'])
+    approx(score([row],catalog({series:'fncs',subtype})).ranked[0].score,84);
+  // FNCS Division 1 and Practice remain x1.2, as independently verified above.
 });
 test('Skin and legacy cosmetic competitions x0.50, separate Icon and Override remain x0.35',()=>{
   for(const kind of ['スキン大会','コスメ大会'])
