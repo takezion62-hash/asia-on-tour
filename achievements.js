@@ -107,6 +107,84 @@
     };
   }
 
+
+  // Unusual accomplishments are evaluated from explicit, verified archive
+  // fields. A session-level kill/VR value is never treated as per-match data;
+  // team results are team totals, never inferred individual eliminations.
+  const SPECIAL_TIERS = Object.freeze({
+    rare:Object.freeze({label:'RARE',name:'レア',order:1}),
+    epic:Object.freeze({label:'EPIC',name:'エピック',order:2}),
+    legendary:Object.freeze({label:'LEGENDARY',name:'レジェンダリー',order:3})
+  });
+  const SPECIAL_CATALOG = Object.freeze([
+    {id:'silent-earner',icon:'🥷',title:'静かなる賞金稼ぎ',description:'KILLSが明確に0の掲載戦績で、個人の現金賞金を獲得',rarity:'epic',goal:1},
+    {id:'pacifist-vr',icon:'🕊️',title:'戦わずして勝つ',description:'KILLSが明確に0の掲載戦績でVRを獲得（チーム戦はチーム合計）',rarity:'legendary',goal:1},
+    {id:'one-kill-earner',icon:'🎯',title:'一撃の価値',description:'KILLSが明確に1の掲載戦績で、個人の現金賞金を獲得',rarity:'rare',goal:1},
+    {id:'twenty-kills',icon:'🔥',title:'破壊神',description:'1件の掲載戦績で20KILLS以上を記録（チーム戦はチーム合計）',rarity:'epic',goal:1},
+    {id:'final-champion',icon:'🏆',title:'海外制覇',description:'確認済みの海外大会決勝で総合1位',rarity:'legendary',goal:1},
+    {id:'cash-three-regions',icon:'🌎',title:'越境マネーメーカー',description:'異なる海外3地域で個人の現金賞金を獲得',rarity:'legendary',goal:3,unit:'地域'},
+    {id:'solo-and-team-cash',icon:'⚔️',title:'二刀流',description:'ソロとチーム戦の両方で個人の現金賞金を獲得',rarity:'epic',goal:2,unit:'形式'},
+    {id:'skin-and-cash',icon:'🎭',title:'文武両道',description:'スキン報酬獲得と個人の現金賞金獲得を両方確認',rarity:'rare',goal:2,unit:'条件'},
+    {id:'vr-three-regions',icon:'🌏',title:'旅先の勝者',description:'異なる海外3地域でVRを確認（チーム戦を含む）',rarity:'legendary',goal:3,unit:'地域'},
+    {id:'vr-and-cash',icon:'✨',title:'ダブルクラウン',description:'同じ掲載戦績でVRと個人の現金賞金を両方確認',rarity:'epic',goal:1},
+    {id:'top-ten',icon:'🥇',title:'海外決勝TOP10',description:'確認済みの海外大会決勝で総合10位以内',rarity:'epic',goal:1},
+    ...REGIONS.map((region,index)=>({
+      id:'specialist-'+region.toLowerCase(),
+      icon:['🏜️','🏰','🌆','🌉','🌊','🌴'][index],
+      title:region+'スペシャリスト',
+      description:region+'で確認済み海外戦績を5件掲載',
+      rarity:'rare',goal:5,unit:'件',region
+    }))
+  ].map(def=>Object.freeze({unit:'件',...def})));
+  function specialRecordEvidence(row) {
+    return {id:String(row.id||''),date:String(row.date||''),region:String(row.region||''),event:String(row.event||''),kind:String(row.kind||'')};
+  }
+  function computeSpecial(verified) {
+    const paid=verified.filter(row=>individualCash(row)>0);
+    const withVR=verified.filter(row=>Number.isInteger(row.vrs)&&row.vrs>0);
+    const skins=verified.filter(confirmedSkin);
+    const uniqueRegions=rows=>{
+      const byRegion=new Map();
+      for(const row of rows)if(REGIONS.includes(row.region)&&!byRegion.has(row.region))byRegion.set(row.region,row);
+      return [...byRegion.values()];
+    };
+    const specials=SPECIAL_CATALOG.map(def=>{
+      let evidence=[];
+      let progress=0;
+      switch(def.id){
+        case 'silent-earner': evidence=paid.filter(row=>row.kills===0);break;
+        case 'pacifist-vr': evidence=withVR.filter(row=>row.kills===0);break;
+        case 'one-kill-earner': evidence=paid.filter(row=>row.kills===1);break;
+        case 'twenty-kills': evidence=verified.filter(row=>Number.isInteger(row.kills)&&row.kills>=20);break;
+        case 'final-champion': evidence=verified.filter(row=>FINAL_KINDS.has(row.kind)&&row.rank===1);break;
+        case 'cash-three-regions': evidence=uniqueRegions(paid);break;
+        case 'solo-and-team-cash':{
+          const solo=paid.find(row=>roster(row).length===1);
+          const team=paid.find(row=>roster(row).length>1);
+          evidence=[solo,team].filter(Boolean);
+          break;
+        }
+        case 'skin-and-cash': evidence=[skins[0],paid[0]].filter(Boolean);break;
+        case 'vr-three-regions': evidence=uniqueRegions(withVR);break;
+        case 'vr-and-cash': evidence=paid.filter(row=>Number.isInteger(row.vrs)&&row.vrs>0);break;
+        case 'top-ten': evidence=verified.filter(row=>FINAL_KINDS.has(row.kind)&&Number.isInteger(row.rank)&&row.rank>=1&&row.rank<=10);break;
+        default: evidence=def.region?verified.filter(row=>row.region===def.region):[];break;
+      }
+      progress=evidence.length;
+      return {...def,unlocked:progress>=def.goal,progress,remaining:Math.max(0,def.goal-progress),
+        rarityLabel:SPECIAL_TIERS[def.rarity].name,
+        evidence:evidence.slice(0,3).map(specialRecordEvidence)};
+    });
+    specials.sort((a,b)=>Number(b.unlocked)-Number(a.unlocked)||SPECIAL_TIERS[b.rarity].order-SPECIAL_TIERS[a.rarity].order||a.title.localeCompare(b.title,'ja'));
+    return {achievements:specials,unlocked:specials.filter(a=>a.unlocked),locked:specials.filter(a=>!a.unlocked),
+      earned:specials.filter(a=>a.unlocked).length,total:specials.length};
+  }
+  function calculateSpecial(records,playerName) {
+    if(typeof playerName!=='string'||!playerName)return computeSpecial([]);
+    const verified=(Array.isArray(records)?records:[]).filter(row=>row&&row.verified===true&&roster(row).includes(playerName));
+    return computeSpecial(verified);
+  }
+
   function calculate(records, playerName) {
     const name = typeof playerName === 'string' ? playerName : '';
     const verified = (Array.isArray(records)?records:[]).filter(row=>
@@ -139,8 +217,9 @@
       title,
       earned:unlocked.length,
       total:CATALOG.length,
-      evolution:calculateEvolution(value)
+      evolution:calculateEvolution(value),
+      special:computeSpecial(verified)
     };
   }
-  return Object.freeze({VERSION:2,REGIONS:Object.freeze(REGIONS),CATALOG,EVOLUTION_TIERS,EVOLUTION_TRACKS,calculate,calculateEvolution,individualCash,confirmedSkin});
+  return Object.freeze({VERSION:3,REGIONS:Object.freeze(REGIONS),CATALOG,EVOLUTION_TIERS,EVOLUTION_TRACKS,SPECIAL_TIERS,SPECIAL_CATALOG,calculate,calculateSpecial,calculateEvolution,individualCash,confirmedSkin});
 });
