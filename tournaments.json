@@ -874,6 +874,32 @@
           "url": "https://fortnitetracker.com/events/epicgames_S43_SoloReloadTestCup_NAW"
         }
       ]
+    },
+    {
+      "id": "ch7s4-performance-evaluation-trios",
+      "name": "Fortnite Performance Evaluation",
+      "chapter": 7,
+      "season": 4,
+      "seasonId": "S42",
+      "sourceEventIds": [
+        "S42_PerformanceEvaluationTrios"
+      ],
+      "series": "performance-evaluation",
+      "mode": "battle-royale",
+      "subtype": "performance-evaluation-trios",
+      "team": "trio",
+      "platform": "cross-platform",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "S42公式大会ページにTrios・Battle Royaleと明記。既存のS42_PerformanceEvaluation（Duos）とは別の大会マスターにする。",
+          "url": "https://www.fortnite.com/competitive/events/S42_PerformanceEvaluationTrios/?region=EU"
+        },
+        {
+          "text": "2026/10/2 EU Event6 Round1の2チームはユーザー提供Trackerスクリーンショットで確認。",
+          "url": "https://fortnitetracker.com/events/epicgames_S42_PerformanceEvaluationTrios_EU?window=S42_PerformanceEvaluation_Event6Round1_EU"
+        }
+      ]
     }
   ]
 }
