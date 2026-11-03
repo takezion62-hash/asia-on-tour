@@ -1,0 +1,71 @@
+'use strict';
+const { test, expect } = require('@playwright/test');
+const path = require('node:path');
+const { loadData, tournamentKey } = require('../scripts/data-checks.cjs');
+const data = loadData(path.join(__dirname,'..')).data;
+const rows = data.results;
+const month = [...new Set(rows.map(row => row.date.slice(0,7)))].sort().at(-1);
+const forMonth = rows.filter(row => row.date.startsWith(month));
+const sessionKey = row => JSON.stringify([row.date,row.region,tournamentKey(row,data),row.round||'',row.kind||'']);
+
+test('大会カレンダーは掲載日だけから生成し、開催枠を重複集計しない', async ({ page }) => {
+  const errors=[];page.on('pageerror',error=>errors.push(error.message));
+  await page.goto('/?season=all#calendar?month='+month);
+  await expect(page.locator('#page-calendar')).toBeVisible();
+  await expect(page.locator('.calendar-month-head h2')).toHaveText(Number(month.slice(0,4))+'年 '+Number(month.slice(5))+'月');
+  const unique=new Set(forMonth.map(sessionKey)).size;
+  await expect(page.locator('.calendar-month-head small')).toContainText(unique+'開催枠');
+  await expect(page.locator('.calendar-month-head small')).toContainText(forMonth.length+'戦績');
+  const dates=new Set(forMonth.map(row=>row.date));
+  await expect(page.locator('.calendar-day-count')).toHaveCount(dates.size);
+  const selected=await page.locator('.calendar-day.is-selected').getAttribute('data-calendar-day');
+  await expect(page.locator('.calendar-event')).toHaveCount(new Set(forMonth.filter(row=>row.date===selected).map(sessionKey)).size);
+  expect(errors).toEqual([]);
+});
+
+test('地域と予選フィルター、日付選択、大会・選手リンクと履歴戻りが使える', async ({ page }) => {
+  const source=rows.find(row=>row.kind==='予選'&&row.region==='ME');
+  expect(source).toBeTruthy();
+  const targetMonth=source.date.slice(0,7);
+  await page.goto('/?season=all#calendar?month='+targetMonth);
+  await page.locator('#calendar-region').selectOption('ME');
+  await page.locator('#calendar-stage').selectOption('予選');
+  const matching=rows.filter(row=>row.date.startsWith(targetMonth)&&row.region==='ME'&&row.kind==='予選');
+  expect(matching.length).toBeGreaterThan(0);
+  await expect(page.locator('.calendar-month-head small')).toContainText(new Set(matching.map(sessionKey)).size+'開催枠');
+  const date=matching[0].date;
+  await page.locator('[data-calendar-day="'+date+'"]').click();
+  await expect(page.locator('.calendar-day.is-selected')).toHaveAttribute('data-calendar-day',date);
+  await expect(page.locator('.calendar-event')).toHaveCount(new Set(matching.filter(row=>row.date===date).map(sessionKey)).size);
+  const link=page.locator('.calendar-event h3 a').first();
+  await expect(link).toBeVisible();
+  await link.click();
+  await expect(page.locator('#page-tournament')).toBeVisible();
+  await page.goBack();
+  await expect(page.locator('#page-calendar')).toBeVisible();
+  await expect(page.locator('#calendar-region')).toHaveValue('ME');
+  await expect(page.locator('#calendar-stage')).toHaveValue('予選');
+  await expect(page.locator('.calendar-day.is-selected')).toHaveAttribute('data-calendar-day',date);
+  await page.reload();
+  await expect(page.locator('#page-calendar')).toBeVisible();
+  await expect(page.locator('#calendar-region')).toHaveValue('ME');
+  await expect(page.locator('#calendar-stage')).toHaveValue('予選');
+  const playerLink=page.locator('.calendar-event-players a').first();
+  await expect(playerLink).toBeVisible();
+  await playerLink.click();
+  await expect(page.locator('#page-profile')).toBeVisible();
+});
+
+test('月送りと狭い画面の表示が正常', async ({ page }) => {
+  await page.goto('/?season=all#calendar?month='+month);
+  const previous=new Date(Date.UTC(Number(month.slice(0,4)),Number(month.slice(5))-2,1));
+  const prevMonth=previous.getUTCFullYear()+'-'+String(previous.getUTCMonth()+1).padStart(2,'0');
+  await page.getByRole('button',{name:'前の月'}).click();
+  await expect(page).toHaveURL(new RegExp('month='+prevMonth));
+  await page.getByRole('button',{name:'次の月'}).click();
+  await expect(page.locator('.calendar-month-head h2')).toHaveText(Number(month.slice(0,4))+'年 '+Number(month.slice(5))+'月');
+  const scrollWidth=await page.evaluate(()=>document.documentElement.scrollWidth);
+  const width=await page.evaluate(()=>document.documentElement.clientWidth);
+  expect(scrollWidth).toBeLessThanOrEqual(width+2);
+  await expect(page.locator('.calendar-day').first()).toBeVisible();
+});
