@@ -970,6 +970,58 @@
           "url": "https://fortnitetracker.com/events/epicgames_S40_FNCSDivisionalCup_Division1_ME?window=S40_FNCSDivisionalCup_Division1_Week2Final_ME"
         }
       ]
+    },
+    {
+      "id": "ch5s4-solo-victory-cup",
+      "name": "Solo Victory Cup Battle Royale",
+      "chapter": 5,
+      "season": 4,
+      "seasonId": "S31",
+      "sourceEventIds": [
+        "S31_SoloVictoryCashCup"
+      ],
+      "series": "victory-cup",
+      "mode": "battle-royale",
+      "subtype": "solo-victory-cup",
+      "team": "solo",
+      "platform": "cross-platform",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "2024/10/14開催（日本時間10/15）ME Event7 Round2。2024 Chapter5 Season4 Solo Victory Cash Cupの公式規則は決勝VRごとに$100を規定。ユーザー提供Tracker画像で5選手の結果を確認。",
+          "url": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-4-official-rules"
+        },
+        {
+          "text": "Tracker大会のRound2識別子",
+          "url": "https://fortnitetracker.com/events/epicgames_S31_SoloVictoryCashCup_ME?window=S31_SoloVictoryCashCup_Event7Round2_ME"
+        }
+      ]
+    },
+    {
+      "id": "ch5s5-solo-victory-cup",
+      "name": "Solo Victory Cup Battle Royale",
+      "chapter": 5,
+      "season": 5,
+      "seasonId": "S32",
+      "sourceEventIds": [
+        "S32_SoloVictoryCashCup"
+      ],
+      "series": "victory-cup",
+      "mode": "battle-royale",
+      "subtype": "solo-victory-cup",
+      "team": "solo",
+      "platform": "cross-platform",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "2024/11/25開催（日本時間11/26）ME Event4 Round2。S32はChapter2 Remix（Chapter5の特別シーズン）。大会は決勝の1VRにつき$100。ユーザー提供Tracker画像で5選手の結果を確認。",
+          "url": "https://www.fortnite.com/news/competitive-details-make-your-mark-in-chapter-2-remix"
+        },
+        {
+          "text": "Tracker大会のRound2識別子",
+          "url": "https://fortnitetracker.com/events/epicgames_S32_SoloVictoryCashCup_ME?window=S32_SoloVictoryCashCup_Event4Round2_ME"
+        }
+      ]
     }
   ]
 }
