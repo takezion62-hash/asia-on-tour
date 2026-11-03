@@ -130,11 +130,11 @@
     if(types.length>1)return null;
     const members=Array.isArray(row.players)&&row.players.length?row.players:null;
     if(members && (members.length<1||members.length>3||members.some(n=>typeof n!=='string'||!n.trim())||new Set(members).size!==members.length))return null;
-    if(!members && (typeof row.player!=='string'||!row.player.trim()||/\\s+\\/\\s+/.test(row.player)))return null;
+    if(!members && (typeof row.player!=='string'||!row.player.trim()||/\s+\/\s+/.test(row.player)))return null;
     const size=members?.length||1;
     const format=['solo','duo','trio'][size-1];
     if(!format || (known&&known!==format))return null;
-    if(format==='solo'&&!known&&!/\\bsolo\\b/i.test(String(row.event||'')))return null;
+    if(format==='solo'&&!known&&!/\bsolo\b/i.test(String(row.event||'')))return null;
     return format;
   }
   const SPECIAL_CATALOG = Object.freeze([
