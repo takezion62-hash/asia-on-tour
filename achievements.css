@@ -1,0 +1,39 @@
+/* Player achievements / badges. Data-driven, no icons or image assets required. */
+.achievement-section{margin:0 0 28px;border:1px solid #41445e;border-radius:19px;background:radial-gradient(ellipse at 90% 0%,#62508c2b,transparent 55%),linear-gradient(140deg,#191d31,#101727);padding:23px;min-width:0}
+.achievement-heading{display:flex;align-items:baseline;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:15px}
+.achievement-heading h2{margin:0;font-size:20px;font-weight:900}
+.achievement-heading h2 span{color:#b8a0ff}
+.achievement-heading p{margin:0;color:#a6b6d3;font-size:11px}
+.achievement-featured{border:1px solid #9878c85e;background:linear-gradient(105deg,#2b2444,#172c3a);border-radius:15px;padding:18px 19px;display:flex;align-items:center;gap:14px;margin-bottom:16px}
+.achievement-featured-icon{font-size:35px;display:grid;place-items:center;width:55px;min-width:55px;height:55px;border-radius:15px;background:#202c46}
+.achievement-featured-copy{min-width:0}
+.achievement-featured-label{display:block;color:#b0b8d5;font-size:10px;letter-spacing:.08em;font-weight:800}
+.achievement-featured strong{display:block;color:#f4e9ff;font-size:22px;line-height:1.35;overflow-wrap:anywhere}
+.achievement-featured small{color:#adbcd5;font-size:11px;line-height:1.65;display:block}
+.achievement-progress{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;color:#d3deef;font-size:11px;margin-bottom:18px}
+.achievement-progress strong{font-weight:900;font-variant-numeric:tabular-nums}
+.achievement-progress-track{height:9px;border-radius:10px;overflow:hidden;background:#28344f}
+.achievement-progress-track span{display:block;height:100%;background:linear-gradient(90deg,#9f7eff,#5dd7de);border-radius:inherit}
+.achievement-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.achievement-card{min-width:0;border:1px solid #46486f;border-radius:13px;padding:15px;display:flex;align-items:flex-start;gap:11px;background:#20243d}
+.achievement-card[data-achievement-tier="legendary"]{border-color:#d6b36e;background:linear-gradient(125deg,#493825,#252742)}
+.achievement-card[data-achievement-tier="epic"]{border-color:#8e70c7}
+.achievement-icon{display:grid;place-items:center;width:37px;height:37px;min-width:37px;border-radius:11px;background:#3a3857;font-size:20px}
+.achievement-card-content{min-width:0}
+.achievement-card h3{margin:0;font-size:13px;line-height:1.5;color:#f4ecff;overflow-wrap:anywhere}
+.achievement-card p{font-size:10px;line-height:1.65;color:#a8bad8;margin:3px 0 0;overflow-wrap:anywhere}
+.achievement-card .achievement-value{font-size:10px;color:#8ce3df;font-weight:850;margin-top:6px}
+.achievement-locked{margin-top:13px;border:1px solid #353b58;border-radius:12px;background:#12182a;padding:12px 14px}
+.achievement-locked summary{cursor:pointer;color:#cad3ea;font-size:12px;font-weight:850;line-height:1.6}
+.achievement-locked summary:focus-visible{outline:2px solid #6fdde6;outline-offset:4px}
+.achievement-locked-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:13px 0 0;padding:0;list-style:none}
+.achievement-locked-item{display:flex;align-items:flex-start;gap:10px;border:1px solid #303a53;border-radius:10px;background:#171e31;padding:11px;min-width:0;color:#9eabc4}
+.achievement-locked-icon{font-size:20px;filter:grayscale(1);opacity:.6}
+.achievement-locked-item strong{display:block;font-size:12px;color:#c3cde1}
+.achievement-locked-item span{font-size:10px;line-height:1.6}
+.achievement-meter{height:5px;background:#293149;border-radius:8px;margin-top:5px;overflow:hidden}
+.achievement-meter>span{display:block;height:100%;background:#8578c4;border-radius:inherit}
+.achievement-note{margin:15px 0 0;font-size:10px;line-height:1.8;color:#95a8c7}
+.achievement-empty{font-size:12px;line-height:1.8;color:#acbbd4;padding:10px 0}
+@media(max-width:1100px){.achievement-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:640px){.achievement-section{padding:17px 13px;border-radius:15px}.achievement-heading h2{font-size:18px}.achievement-featured{padding:13px 12px;gap:11px}.achievement-featured-icon{min-width:44px;width:44px;height:44px;font-size:27px}.achievement-featured strong{font-size:18px}.achievement-grid{grid-template-columns:1fr}.achievement-card{padding:12px}.achievement-locked-list{grid-template-columns:1fr}.achievement-progress{gap:7px}}
