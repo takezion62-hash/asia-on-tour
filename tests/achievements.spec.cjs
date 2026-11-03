@@ -203,7 +203,7 @@ test('二刀流→三刀流→四刀流はソロからスクワッドまでの�
   await expect(card).toBeVisible();
   await expect(card).toHaveAttribute('data-special-rarity','legendary');
   await expect(card.locator('h4')).toHaveText('四刀流');
-  await expect(card.locator('[data-special-growth-level]')).toHaveCount(0);
+  await expect(card.locator('[data-special-growth-level]')).toHaveAttribute('data-special-growth-level','3');
   await expect(card.locator('.special-evo-stages span')).toHaveCount(3);
   await expect(card.locator('.special-evo-next')).toContainText('最高ランク達成');
   await card.locator('.special-achievement-proof summary').click();
