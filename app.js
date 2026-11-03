@@ -831,7 +831,7 @@
     }
     const achievementsByPlayer=new Map();
     function achievementsForPlayer(name){
-      if(!achievementsByPlayer.has(name))achievementsByPlayer.set(name,AsiaAchievements.calculate(rawAll(),name));
+      if(!achievementsByPlayer.has(name))achievementsByPlayer.set(name,AsiaAchievements.calculate(rawAll(),name,{catalog:tournamentCatalog}));
       return achievementsByPlayer.get(name);
     }
     // Badges are lifetime achievements: changing the season never revokes earned titles.
@@ -871,7 +871,7 @@
       const earnedSpecial=specials.unlocked.map(badge=>{
         const support=badge.evidence.map(row=>
           '<li data-special-evidence-id="'+escape(row.id)+'"><span>'+escape(row.date)+' · '+escape(row.region)+'</span> '+escape(row.event)
-          +' <small>('+escape(row.kind)+')</small></li>'
+          +' <small>('+escape(row.kind)+')</small>'+(row.killThreshold?'<small class="special-kill-proof"> · '+escape(({solo:'ソロ',duo:'デュオ',trio:'トリオ'})[row.killFormat]||'形式未確認')+' '+format(row.kills)+'K / 基準'+format(row.killThreshold)+'K</small>':'')+'</li>'
         ).join('');
         return '<article class="special-achievement" data-special-id="'+escape(badge.id)+'" data-special-rarity="'+escape(badge.rarity)+'" data-special-unlocked="true">'
           +'<div class="special-achievement-top"><span class="special-achievement-icon" aria-hidden="true">'+escape(badge.icon)+'</span>'
