@@ -672,6 +672,18 @@
     .registration-results{display:grid;gap:13px;min-width:0}
     .registration-item{min-width:0}
     .registration-item .result-card{margin:0;min-width:0}
+
+    /* Keep 4+ digit placements inside their own column in archives and registration feeds. */
+    .result-card{grid-template-columns:124px minmax(0,1fr) max-content;gap:16px}
+    .result-card>.result-content{min-width:0}
+    .result-card .rank{min-width:0;white-space:nowrap;font-variant-numeric:tabular-nums}
+    .result-card .rank.rank-four-digit{font-size:42px;letter-spacing:-.045em}
+    .result-card .rank.rank-five-digit{font-size:33px;letter-spacing:-.045em}
+    @media(max-width:640px){
+      .result-card{grid-template-columns:96px minmax(0,1fr);gap:12px}
+      .result-card .rank.rank-four-digit{font-size:30px}
+      .result-card .rank.rank-five-digit{font-size:25px}
+    }
     .registration-meta{color:#c7d5fa;font-size:12px;font-weight:800;margin:0 0 6px;display:flex;flex-wrap:wrap;gap:9px}
     .registration-meta time{font-variant-numeric:tabular-nums}
     .registration-meta .competition-date{color:#97a5c7;font-weight:500}
