@@ -62,7 +62,7 @@ test('遠征結果の検索・複合フィルター・詳細・CSVが同じ戦�
   await page.locator('#region-filter').selectOption(sample.region);
   await page.locator('#stage-filter').selectOption(sample.kind);
   const expected = rows.filter(r => r.region === sample.region && r.kind === sample.kind && [r.player, ...roster(r), r.playerRaw, r.event, r.region, r.round, r.note].some(x => String(x || '').toLowerCase().includes(search.toLowerCase())));
-  await expect(page.locator('#result-count')).toHaveText(expected.length + '件');
+  await expect(page.locator('#result-count')).toHaveText(expected.length.toLocaleString('ja-JP') + '件');
   expect((await resultIDs(page)).sort()).toEqual(expected.map(r => r.id).sort());
   await page.locator('#page-results details summary').first().click();
   await expect(page.locator('#page-results details[open] [data-detail="source"] a')).toBeVisible();
@@ -89,7 +89,7 @@ test('プロフィール・地域グラフ・別名義・同名別人・共有UR
   expect((await historyIDs(page)).sort()).toEqual(expected.map(r => r.id).sort());
   for (const region of ['ME', 'EU', 'NAC', 'NAW', 'OCE', 'BR']) {
     const regional = expected.filter(r => r.region === region);
-    await expect(page.locator(`[data-profile-region="${region}"] [data-region-stat="count"]`)).toHaveText(regional.length + '件');
+    await expect(page.locator(`[data-profile-region="${region}"] [data-region-stat="count"]`)).toHaveText(regional.length.toLocaleString('ja-JP') + '件');
     await expect(page.locator(`[data-profile-region="${region}"] [data-region-stat="prize"]`)).toHaveText(money(regional.reduce((sum, r) => sum + personalCents(r), 0) / 100));
   }
   await page.reload(); await expect(page.locator('#profile-title')).toHaveText(name);
@@ -110,11 +110,11 @@ test('大会タグ検索・大会URL・期間切り替えをデータから照�
   test.slow(); // Check the complete catalog and every facet against the current JSON.
   await page.getByRole('button', { name: '大会を探す', exact: true }).click();
   const ids = [...new Set(rows.map(r => tournamentKey(r, data)))];
-  await expect(page.locator('#tournament-count')).toHaveText(ids.length + '大会 · ' + rows.length + '戦績');
+  await expect(page.locator('#tournament-count')).toHaveText(ids.length.toLocaleString('ja-JP') + '大会 · ' + rows.length.toLocaleString('ja-JP') + '戦績');
   for (const mode of [...new Set(rows.map(r => tournamentFor(r, data)?.mode || 'unknown'))]) {
     await page.locator('#tournament-mode').selectOption(mode);
     const matching = rows.filter(r => (tournamentFor(r, data)?.mode || 'unknown') === mode);
-    await expect(page.locator('#tournament-count')).toHaveText(new Set(matching.map(r => tournamentKey(r, data))).size + '大会 · ' + matching.length + '戦績');
+    await expect(page.locator('#tournament-count')).toHaveText(new Set(matching.map(r => tournamentKey(r, data))).size.toLocaleString('ja-JP') + '大会 · ' + matching.length.toLocaleString('ja-JP') + '戦績');
   }
   await page.locator('#tournament-mode').selectOption('all');
   const id = ids[0];
