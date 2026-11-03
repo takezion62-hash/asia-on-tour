@@ -24,21 +24,26 @@ test('既存プロフィールで獲得済みと未獲得の称号、代表称�
   const gallery=page.locator('#profile-achievements');
   await expect(gallery).toBeVisible();
   const independent=achievements.calculate(records,player);
-  await expect(gallery.locator('[data-achievement-count]')).toHaveText(independent.earned+' / '+independent.total);
-  await expect(gallery.locator('[data-achievement-title]')).toHaveText(independent.title?.title||'挑戦中');
-  const found=await gallery.locator('[data-achievement-unlocked="true"]').evaluateAll(list=>list.map(e=>e.dataset.achievementId));
-  expect(found.sort()).toEqual(independent.unlocked.map(b=>b.id).sort());
-  const locked=gallery.locator('[data-achievement-unlocked="false"]');
-  if(independent.earned<independent.total){
-    await gallery.locator('.achievement-locked summary').click();
-    await expect(locked).toHaveCount(independent.total-independent.earned);
+  await expect(gallery.locator('[data-achievement-count]')).toHaveText(independent.evolution.earnedStages+' / '+independent.evolution.totalStages);
+  await expect(gallery.locator('[data-achievement-title]')).toHaveText(independent.evolution.featured?.current?.title||'挑戦中');
+  await expect(gallery.locator('[data-evolution-track]')).toHaveCount(6);
+  const found=await gallery.locator('[data-evolution-track]').evaluateAll(elements=>elements.map(e=>e.dataset.evolutionTrack));
+  expect(found).toEqual(independent.evolution.tracks.map(t=>t.id));
+  for(const track of independent.evolution.tracks){
+    const badge=gallery.locator('[data-evolution-track="'+track.id+'"]');
+    await expect(badge).toHaveAttribute('data-evolution-tier',track.current?.tier||'locked');
+    await expect(badge.locator('.evo-current strong')).toHaveText(track.value.toLocaleString('ja-JP'));
+    await expect(badge.locator('[role="progressbar"]')).toHaveAttribute('aria-valuenow',String(track.percent));
   }
+  const first=gallery.locator('[data-evolution-track="expeditions"]');
+  await first.locator('summary').click();
+  await expect(first.locator('.evo-level-details li')).toHaveCount(5);
   expect(errors).toEqual([]);
   const period=seasonFor(sample,data);
   if(period!=='unknown'){
     await page.locator('#season-select').selectOption(period);
-    await expect(gallery.locator('[data-achievement-count]')).toHaveText(independent.earned+' / '+independent.total);
-    await expect(gallery.locator('[data-achievement-title]')).toHaveText(independent.title?.title||'挑戦中');
+    await expect(gallery.locator('[data-achievement-count]')).toHaveText(independent.evolution.earnedStages+' / '+independent.evolution.totalStages);
+    await expect(gallery.locator('[data-achievement-title]')).toHaveText(independent.evolution.featured?.current?.title||'挑戦中');
   }
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth+1)).toBe(true);
 });
@@ -49,21 +54,20 @@ test('選手名鑑の称号プレビューから本人プロフィールへ移�
   await expect(card).toBeVisible();
   const name=await card.getAttribute('data-open-profile');
   const expected=achievements.calculate(records,name);
-  await expect(card.locator('[data-player-achievement]')).toHaveAttribute('data-player-achievement',expected.title?.id||'none');
+  await expect(card.locator('[data-player-achievement]')).toHaveAttribute('data-player-achievement',expected.evolution.featured?.id||'none');
   await card.click();
   await expect(page.locator('#profile-title')).toHaveText(name);
-  await expect(page.locator('[data-achievement-title]')).toHaveText(expected.title?.title||'挑戦中');
+  await expect(page.locator('[data-achievement-title]')).toHaveText(expected.evolution.featured?.current?.title||'挑戦中');
 });
 
 test('確認されていない結果だけでは称号は獲得できず、空の状態も案内する',async({page})=>{
   const onlyOne={...sample,id:'achievements-unverified-test',verified:false,reported:true,vrs:15,prize:99999,kind:'賞金決勝',rank:1};
   await page.route('**/results.json',route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify([onlyOne])}));
   await page.goto('/?season=all#player='+encodeURIComponent(player));
-  await expect(page.locator('#profile-achievements [data-achievement-count]')).toHaveText('0 / '+achievements.CATALOG.length);
+  await expect(page.locator('#profile-achievements [data-achievement-count]')).toHaveText('0 / '+achievements.EVOLUTION_TRACKS.length*5);
   await expect(page.locator('[data-achievement-title]')).toHaveText('挑戦中');
-  await expect(page.locator('.achievement-empty')).toBeVisible();
-  await page.locator('.achievement-locked summary').click();
-  await expect(page.locator('[data-achievement-unlocked="false"]')).toHaveCount(achievements.CATALOG.length);
+  await expect(page.locator('.evo-card[data-evolution-tier="locked"]')).toHaveCount(6);
+  await expect(page.locator('[data-evolution-track="expeditions"] .evo-current strong')).toHaveText('0');
 });
 
 test('公開済みのスキン報酬とチームVRを正しい条件で計上する',async({page})=>{
@@ -75,10 +79,10 @@ test('公開済みのスキン報酬とチームVRを正しい条件で計上す
   await page.goto('/?season=all#player='+encodeURIComponent(skinName));
   const expected=achievements.calculate(records,skinName);
   expect(expected.metrics.skins).toBeGreaterThan(0);
-  await expect(page.locator('[data-achievement-id="skin-earned"][data-achievement-unlocked="true"]')).toBeVisible();
+  await expect(page.locator('[data-evolution-track="skins"]:not([data-evolution-tier="locked"])')).toBeVisible();
   await page.goto('/?season=all#player='+encodeURIComponent(teamName));
   const teamData=achievements.calculate(records,teamName);
   expect(teamData.metrics.vrs).toBeGreaterThan(0);
-  await expect(page.locator('[data-achievement-id="first-vr"][data-achievement-unlocked="true"]')).toBeVisible();
+  await expect(page.locator('[data-evolution-track="victories"]:not([data-evolution-tier="locked"])')).toBeVisible();
   await expect(page.locator('#profile-achievements .achievement-note')).toContainText('チーム戦');
 });
