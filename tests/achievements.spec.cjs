@@ -90,7 +90,7 @@ test('公開済みのスキン報酬とチームVRを正しい条件で計上す
 
 test('特別称号は17種類から判定し、獲得済み・未獲得・レア度・出典を閲覧できる',async({page})=>{
   const person=records.find(row=>row.verified===true&&(row.players||[row.player]).length===1)?.player||player;
-  const expected=achievements.calculate(records,person).special;
+  const expected=achievements.calculate(records,person,{catalog:data.tournaments.catalog}).special;
   await page.goto('/?season=all#player='+encodeURIComponent(person));
   const section=page.locator('#profile-special-achievements');
   await expect(section).toBeVisible();
@@ -130,4 +130,22 @@ test('0キル現金賞金の特別称号は本人の個人賞金と明示0キル
   await expect(cash.locator('[data-special-evidence-id="test-special-0kill-cash"]')).toBeVisible();
   await expect(cash.locator('[data-special-evidence-id="test-reported"]')).toHaveCount(0);
   await expect(page.locator('#profile-achievements .achievement-note')).toContainText('チーム合計');
+});
+
+
+test('破壊神は人数別の高キル基準、ダブルクラウンはレアとして表示する',async({page})=>{
+  const row=records.find(e=>e.verified===true&&e.kind==='賞金決勝'&&e.event.includes('Solo')
+    &&typeof e.prize==='number'&&e.prize>0&&!Array.isArray(e.players));
+  expect(row,'ソロの確認済み賞金決勝記録').toBeTruthy();
+  const name=row.player;
+  const edited={...row,id:'test-destruction-solo-65',kills:65,vrs:1,prize:100,verified:true};
+  await page.route('**/results.json',route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify([edited])}));
+  await page.goto('/?season=all#player='+encodeURIComponent(name));
+  const destruction=page.locator('[data-special-id="twenty-kills"][data-special-unlocked="true"]');
+  const double=page.locator('[data-special-id="vr-and-cash"][data-special-unlocked="true"]');
+  await expect(destruction).toBeVisible();
+  await expect(double).toHaveAttribute('data-special-rarity','rare');
+  await destruction.locator('summary').click();
+  await expect(destruction.locator('[data-special-evidence-id="test-destruction-solo-65"]')).toContainText('ソロ 65K / 基準65K');
+  await expect(page.locator('[data-special-id="twenty-kills"][data-special-rarity="epic"]')).toBeVisible();
 });
