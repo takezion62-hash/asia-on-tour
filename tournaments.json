@@ -39,6 +39,10 @@
         {
           "id": "unreal-cup",
           "label": "Unreal Cup"
+        },
+        {
+          "id": "playstation-cup",
+          "label": "PlayStation Cup"
         }
       ]
     },
@@ -199,6 +203,14 @@
         {
           "id": "one-million-unreal-cup",
           "label": "$1 Million Unreal Cup"
+        },
+        {
+          "id": "days-of-play-playstation-cup-battle-royale",
+          "label": "Days of Play PlayStation Cup (Battle Royale)"
+        },
+        {
+          "id": "playstation-clix-cup-battle-royale",
+          "label": "PlayStation Clix Cup (Battle Royale)"
         }
       ]
     },
@@ -1144,6 +1156,69 @@
         {
           "text": "NAW順位表。ユーザー提供画像から2025/12/21の6組の順位・賞金・キル・VRを確認。",
           "url": "https://fortnitetracker.com/events/epicgames_S39_1MillionUnrealCup_NAW?window=S39_1MillionUnrealCup_NAW"
+        }
+      ]
+    },
+    {
+      "id": "ch7s3-days-of-play-playstation-cup-br",
+      "name": "Days of Play PlayStation Cup (Battle Royale)",
+      "chapter": 7,
+      "season": 3,
+      "seasonId": "S41",
+      "sourceEventIds": [
+        "S41_PSCupDaysOfPlay"
+      ],
+      "series": "playstation-cup",
+      "mode": "battle-royale",
+      "subtype": "days-of-play-playstation-cup-battle-royale",
+      "team": "solo",
+      "platform": "playstation",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "公式大会ページ：CH7 S3、Solo、Battle Royale、6/11 NAW最終ラウンド。",
+          "url": "https://www.fortnite.com/competitive/events/S41_PSCupDaysOfPlay?region=NAW&round=S41_PSCupDaysOfPlay_Final_NAW"
+        },
+        {
+          "text": "公式規則Attachment C：NAW決勝21〜50位は各$100。予選のスプレー報酬と現金決勝を区別。",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/days-of-play-playstation-cup-chapter-7-season-3-official-rules"
+        },
+        {
+          "text": "ユーザー提供Fortnite Tracker NAW結果画像。",
+          "url": "https://fortnitetracker.com/events/epicgames_S41_PSCupDaysOfPlay_NAW"
+        }
+      ]
+    },
+    {
+      "id": "ch7s2-playstation-clix-cup-br",
+      "name": "PlayStation Clix Cup (Battle Royale)",
+      "chapter": 7,
+      "season": 2,
+      "seasonId": "S40",
+      "sourceEventIds": [
+        "S40_PlayStationCupClix"
+      ],
+      "series": "icon-cup",
+      "additionalSeries": [
+        "skin-cup"
+      ],
+      "mode": "battle-royale",
+      "subtype": "playstation-clix-cup-battle-royale",
+      "team": "solo",
+      "platform": "playstation",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "公式大会ページ：CH7 S2、PlayStation Clix Cup Battle Royale、NAW 5/3決勝（Solo）。",
+          "url": "https://www.fortnite.com/competitive/events/S40_PlayStationCupClix/?region=NAW"
+        },
+        {
+          "text": "公式規則：予選はClixコスメ報酬、BR決勝はNAWで1VRあたり$250の現金賞金。",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/playstation-clix-cup-official-rules"
+        },
+        {
+          "text": "ユーザー提供Fortnite Tracker NAW結果画像でめいる4位・1VR・$250。",
+          "url": "https://fortnitetracker.com/events/epicgames_S40_PlayStationCupClix_NAW"
         }
       ]
     }

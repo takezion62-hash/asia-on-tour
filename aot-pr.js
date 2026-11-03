@@ -15,7 +15,7 @@
   const SKIN_KINDS = new Set(['スキン大会', 'コスメ大会']);
   const SKIN_SERIES = new Set(['skin-cup', 'override-series']); // legacy Override data also skin-rated
   const OTHER_COSMETIC_SERIES = new Set(['icon-cup']);
-  const SCORED_SERIES = new Set(['fncs', 'performance-evaluation', 'victory-cup', 'cash-cup', 'unreal-cup', 'test-cup', ...SKIN_SERIES, ...OTHER_COSMETIC_SERIES]);
+  const SCORED_SERIES = new Set(['fncs', 'performance-evaluation', 'victory-cup', 'cash-cup', 'unreal-cup', 'playstation-cup', 'test-cup', ...SKIN_SERIES, ...OTHER_COSMETIC_SERIES]);
 
   function eventMultiplier(record, tournament) {
     if (!tournament || !SCORED_SERIES.has(tournament.series)) return null;
@@ -24,7 +24,7 @@
     if (record.kind === 'Test Cup') return null; // never treat a test as a higher-paying series
     // NickEh30 is mixed reward: cosmetic qualifier, paid-VR final. Its series tags
     // are shared by the event but cannot imply the same reward or weight per round.
-    if (tournament.series === 'icon-cup' && tournament.subtype === 'nickeh30-icon-cup' &&
+    if (tournament.series === 'icon-cup' && ['nickeh30-icon-cup', 'playstation-clix-cup-battle-royale'].includes(tournament.subtype) &&
       Array.isArray(tournament.additionalSeries) && tournament.additionalSeries.includes('skin-cup')) {
       return record.kind === '予選' || SKIN_KINDS.has(record.kind) ? 0.50 :
         ['決勝', '賞金決勝'].includes(record.kind) ? 1.20 : null;
@@ -38,7 +38,7 @@
       if (['fncs-division-1', 'fncs-division-1-practice'].includes(tournament.subtype)) return 1.4;
       return 1.6; // Major, Heats, LCQ and other verified FNCS tiers
     }
-    if (tournament.series === 'victory-cup' || tournament.series === 'cash-cup' || tournament.series === 'unreal-cup') return 1;
+    if (tournament.series === 'victory-cup' || tournament.series === 'cash-cup' || tournament.series === 'unreal-cup' || tournament.series === 'playstation-cup') return 1;
     return null; // classification unknown: do not guess the importance of the event
   }
 
@@ -63,6 +63,7 @@
     };
     if (tournament.series === 'performance-evaluation') return { mode: 'vr', base: 40 };
     if (tournament.series === 'victory-cup') return { mode: 'vr', base: 20 };
+    if (tournament.series === 'playstation-cup') return { mode: 'event', base: 30 }; // placement-based paid final
     if (tournament.series === 'cash-cup') {
       // Victory Cash Cups explicitly award by VR; ordinary Cash Cups are placement based.
       const isVictory = /victory/i.test(String(tournament.subtype || '')) ||
