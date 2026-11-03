@@ -88,7 +88,7 @@
       const current=achieved.at(-1)||null;
       const next=track.steps[level]||null;
       const start=current?.goal||0;
-      const percent=next?Math.min(100,Math.max(0,Math.round((value-start)/(next.goal-start)*100))):100;
+      const percent=next?(value<=start?0:Math.min(99,Math.max(1,Math.round((value-start)/(next.goal-start)*100)))):100;
       return {
         id:track.id,icon:track.icon,label:track.label,description:track.description,
         metric:track.metric,unit:track.unit,priority:track.priority,value,level,
