@@ -40,3 +40,80 @@
 
 .player-achievement-preview{display:inline-flex;align-items:center;gap:5px;flex-wrap:wrap;max-width:100%;border:1px solid #685b8d;border-radius:9px;background:#372b4e55;color:#dfccff;font-size:11px;font-weight:850;padding:6px 10px;margin:12px 0 0;overflow-wrap:anywhere}
 .player-achievement-preview small{color:#9eb4c9;font-size:10px;font-weight:750}
+
+
+/* Evolution v2: six ongoing badge tracks instead of one card per milestone. */
+.achievement-eyebrow{display:block;color:#88a6c7;font-size:10px;letter-spacing:.18em;font-weight:900;margin-bottom:6px}
+.achievement-featured[data-evolution-tier]{position:relative;overflow:hidden;isolation:isolate}
+.achievement-featured[data-evolution-tier]::after{content:'✦';position:absolute;right:11px;top:-40px;font-size:125px;color:#ffffff0b;pointer-events:none;z-index:-1}
+.achievement-featured[data-evolution-tier="bronze"]{border-color:#a97b61;background:linear-gradient(105deg,#51352c,#202339)}
+.achievement-featured[data-evolution-tier="silver"]{border-color:#a4b7c9;background:linear-gradient(105deg,#435267,#1b2a39)}
+.achievement-featured[data-evolution-tier="gold"]{border-color:#e4b96a;background:linear-gradient(105deg,#584328,#2a2844)}
+.achievement-featured[data-evolution-tier="platinum"]{border-color:#78d9e4;background:linear-gradient(105deg,#17434e,#29325a)}
+.achievement-featured[data-evolution-tier="prismatic"]{border-color:#d6b1ff;background:linear-gradient(110deg,#703c86,#244c65 55%,#75512d)}
+.evo-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}
+.evo-card{--evo-metal:#66748e;--evo-glow:#67758d30;--evo-luminous:#b5c4db;background:linear-gradient(140deg,#1b2336,#12192c);border:1px solid #3c4961;border-radius:17px;padding:17px;min-width:0;position:relative;overflow:hidden;isolation:isolate}
+.evo-card::before{content:'';position:absolute;inset:-100px -90px auto auto;height:190px;width:190px;border-radius:50%;background:radial-gradient(circle,var(--evo-glow),transparent 68%);pointer-events:none;z-index:-1}
+.evo-card[data-evolution-tier="bronze"],.player-achievement-preview[data-evolution-tier="bronze"]{--evo-metal:#bf8b66;--evo-glow:#b66c3a66;--evo-luminous:#eac4a6}
+.evo-card[data-evolution-tier="silver"],.player-achievement-preview[data-evolution-tier="silver"]{--evo-metal:#a0bfd0;--evo-glow:#79a5c75b;--evo-luminous:#e2f5ff}
+.evo-card[data-evolution-tier="gold"],.player-achievement-preview[data-evolution-tier="gold"]{--evo-metal:#e6ba62;--evo-glow:#d49f3b66;--evo-luminous:#ffe4a6}
+.evo-card[data-evolution-tier="platinum"],.player-achievement-preview[data-evolution-tier="platinum"]{--evo-metal:#71d5e8;--evo-glow:#64c9de72;--evo-luminous:#d3faff}
+.evo-card[data-evolution-tier="prismatic"],.player-achievement-preview[data-evolution-tier="prismatic"]{--evo-metal:#c98bf4;--evo-glow:#d47cf17a;--evo-luminous:#ffe3ff}
+.evo-card[data-evolution-tier="bronze"]{border-color:#81634b}
+.evo-card[data-evolution-tier="silver"]{border-color:#718a9a}
+.evo-card[data-evolution-tier="gold"]{border-color:#bc974e;background:linear-gradient(140deg,#302c36,#1b2234)}
+.evo-card[data-evolution-tier="platinum"]{border-color:#79cbdb;background:linear-gradient(140deg,#173843,#1e2441)}
+.evo-card[data-evolution-tier="prismatic"]{border:1px solid transparent;background:linear-gradient(#211d35,#151f33) padding-box,linear-gradient(135deg,#efb5ff,#7ae5e5,#f7d37e,#b69cf8) border-box;box-shadow:0 0 25px #b680ea33}
+.evo-card-head{display:flex;align-items:center;gap:13px;min-width:0}
+.evo-card-identity{min-width:0}
+.evo-medal{display:grid;place-items:center;flex:0 0 65px;width:65px;height:65px;background:radial-gradient(circle at 33% 20%,#e9eaf8,#8a87ad 37%,#403b63 74%);border:3px double var(--evo-metal,#867ba3);border-radius:24px;transform:rotate(-4deg);box-shadow:0 0 0 3px #ffffff12,0 8px 18px #0005,0 0 25px var(--evo-glow,#9a88b75e);position:relative}
+.evo-medal-symbol{font-size:29px;filter:drop-shadow(0 2px 3px #0007);transform:rotate(4deg)}
+.evo-medal-stars{position:absolute;bottom:-10px;background:#192039;color:var(--evo-luminous);border:1px solid var(--evo-metal);border-radius:10px;padding:0 6px;font-size:9px;letter-spacing:-2px;white-space:nowrap}
+.evo-card[data-evolution-tier="bronze"] .evo-medal{background:radial-gradient(circle at 30% 20%,#ffe6c1,#b5754f 45%,#683e32)}
+.evo-card[data-evolution-tier="silver"] .evo-medal{background:radial-gradient(circle at 30% 20%,#fff,#afc8d9 47%,#52677c)}
+.evo-card[data-evolution-tier="gold"] .evo-medal{background:radial-gradient(circle at 30% 20%,#fff4bf,#e7ad43 45%,#82582b)}
+.evo-card[data-evolution-tier="platinum"] .evo-medal{background:radial-gradient(circle at 30% 20%,#f8ffff,#7bdbe2 45%,#3c6c91);box-shadow:0 0 23px #5fdbea5c}
+.evo-card[data-evolution-tier="prismatic"] .evo-medal{background:conic-gradient(from 30deg,#c996ff,#9aefff,#f4d6a7,#d38bfc,#c996ff);border-color:#e5cdfb;box-shadow:0 0 24px #c580ef8c,0 0 9px #97f5ef77}
+.evo-card[data-evolution-tier="locked"] .evo-medal{filter:grayscale(.8);opacity:.66}
+.evo-family{margin:0 0 3px;font-size:10px;letter-spacing:.1em;font-weight:800;color:#a5b6d2}
+.evo-tier{display:inline-flex;border:1px solid var(--evo-metal);color:var(--evo-luminous);background:#101b2c9c;padding:1px 8px;border-radius:999px;font-size:9px;font-weight:900}
+.evo-card h3{font-size:16px;line-height:1.4;color:#f6efff;margin:6px 0 0;font-weight:900;overflow-wrap:anywhere}
+.evo-description{font-size:10px;color:#9caeca;line-height:1.65;margin:17px 0 8px;min-height:33px}
+.evo-current{display:flex;align-items:baseline;gap:5px;flex-wrap:wrap;margin:2px 0 12px}
+.evo-current strong{font-size:29px;line-height:1.2;font-weight:950;font-variant-numeric:tabular-nums;color:var(--evo-luminous)}
+.evo-current span{font-size:11px;color:#b9c6df;font-weight:800}
+.evo-current small{font-size:9px;letter-spacing:.08em;font-weight:850;color:#879bb7;margin-left:auto}
+.evo-rank-steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px;margin:11px 0}
+.evo-rank-steps span{height:7px;background:#313b57;border-radius:4px}
+.evo-rank-steps span.is-earned{background:linear-gradient(90deg,var(--evo-metal),var(--evo-luminous))}
+.evo-next{color:#b9c8de;line-height:1.6;min-height:34px}
+.evo-next-text{font-size:11px}
+.evo-next-text strong{color:#e8efff}
+.evo-next-text.is-max{color:#ffdf91;font-weight:900}
+.evo-bar{height:7px;overflow:hidden;border-radius:10px;background:#29344c;margin:9px 0 14px}
+.evo-bar>span{display:block;height:100%;border-radius:10px;background:linear-gradient(90deg,var(--evo-metal),var(--evo-luminous))}
+.evo-level-details{border-top:1px solid #38425a;padding-top:9px;margin-top:8px}
+.evo-level-details summary{color:#a9cfdc;cursor:pointer;font-size:11px;font-weight:850}
+.evo-level-details summary:focus-visible{outline:2px solid #79d5e2;outline-offset:3px}
+.evo-level-details ol{margin:10px 0 0;padding:0;list-style:none;display:grid;gap:7px}
+.evo-level-details li{display:grid;grid-template-columns:10px 1fr;column-gap:7px;color:#8e9db9;font-size:10px;line-height:1.5}
+.evo-level-details li strong{grid-column:2;font-size:10px;font-weight:800}
+.evo-level-details li.is-earned{color:#c2e9e0}
+.evo-level-details li.is-next{color:#e0caff}
+.evo-step-dot{height:9px;width:9px;border-radius:50%;background:#454f69;margin-top:3px}
+.evo-level-details li.is-earned .evo-step-dot{background:#84d6ca}
+.evo-level-details li.is-next .evo-step-dot{background:#ba9cfc}
+.evo-special{margin-top:19px;border:1px solid #3b415e;border-radius:14px;background:#151c2e;padding:15px}
+.evo-special h3{font-size:13px;font-weight:900;margin:0 0 11px}
+.evo-special h3 small{font-size:10px;color:#99a8c3;font-weight:700;margin-left:7px}
+.evo-special-list{display:flex;gap:7px;flex-wrap:wrap}
+.evo-special-badge{font-size:11px;line-height:1.5;font-weight:800;color:#ddceff;border-radius:9px;padding:7px 9px;background:#40345c70;border:1px solid #655782}
+.achievement-featured[data-evolution-tier="bronze"] .evo-medal{--evo-metal:#bd906b;--evo-glow:#b2745877}
+.achievement-featured[data-evolution-tier="silver"] .evo-medal{--evo-metal:#bdd2e5;--evo-glow:#76bada66}
+.achievement-featured[data-evolution-tier="gold"] .evo-medal{--evo-metal:#f0c86d;--evo-glow:#e2b34c66}
+.achievement-featured[data-evolution-tier="platinum"] .evo-medal{--evo-metal:#77e1df;--evo-glow:#64bfc96a}
+.achievement-featured[data-evolution-tier="prismatic"] .evo-medal{--evo-metal:#f1baf8;--evo-glow:#de89ff77;background:conic-gradient(#a6ecfc,#c29cf7,#f8c48d,#a6ecfc)}
+.player-achievement-preview[data-evolution-tier]{border-color:var(--evo-metal,#6f618e);color:var(--evo-luminous,#ded0f5);background:#202c42}
+@media(max-width:1100px){.evo-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:640px){.evo-grid{grid-template-columns:1fr;gap:11px}.evo-card{padding:16px}.achievement-featured[data-evolution-tier]::after{font-size:85px;top:-20px}.evo-description{min-height:0}.evo-medal{flex-basis:56px;width:56px;height:56px;border-radius:20px}.evo-medal-symbol{font-size:26px}}
+@media(prefers-reduced-motion:reduce){.evo-card,.evo-medal,.evo-bar>span{transition:none!important;animation:none!important}}
