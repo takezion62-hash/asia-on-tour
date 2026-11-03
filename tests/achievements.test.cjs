@@ -216,11 +216,11 @@ test('zero-kill cash: explicit zero KILLS and verified individual cash are both 
   assert.equal(special([duo],'silent-earner','Pair').unlocked,true);
   assert.equal(special([duo],'silent-earner','NotPair').unlocked,false);
 });
-test('no-kill VR, one-kill cash and 20-kill record cannot infer unknown individual or per-match results',()=>{
+test('no-kill VR, one-kill cash and solo 65-kill record cannot infer unknown individual or per-match results',()=>{
   const rows=[
     fixture('zero-vr',{kills:0,vrs:1,kind:'決勝',prize:null}),
     fixture('one-cash',{kills:1,kind:'賞金決勝',prize:100}),
-    fixture('killer',{kills:20,kind:'予選'}),
+    fixture('killer',{kills:65,kind:'予選'}),
     fixture('unknown-vr',{kills:null,vrs:7}),
     fixture('unverified-kills',{kills:100,verified:false}),
     fixture('no-cash-one',{kills:1,prize:null})
@@ -294,4 +294,65 @@ test('new special titles for every published player are deterministic and read-o
     assert.deepEqual(report.achievements.map(a=>a.id),engine.calculateSpecial(records,player).achievements.map(a=>a.id));
   }
   assert.equal(JSON.stringify(records),before,'published results not mutated');
+});
+
+test('破壊神 uses precise solo 65 / duo 120 / trio 150 thresholds, including exact boundaries',()=>{
+  const cases=[
+    {label:'solo',size:1,goal:65,event:'Solo Victory Cup Battle Royale'},
+    {label:'duo',size:2,goal:120,event:'Reload Duos Cash Cup'},
+    {label:'trio',size:3,goal:150,event:'HamiKuma Cup Battle Royale'}
+  ];
+  const make=(which,kills)=>fixture(which.label+'-'+kills,{
+    event:which.event,kills,kind:'予選',
+    ...(which.size===1?{}:{player:['Hero','Pair','Third'].slice(0,which.size).join(' / '),players:['Hero','Pair','Third'].slice(0,which.size)})
+  });
+  for(const which of cases){
+    assert.equal(engine.confirmedKillFormat(make(which,which.goal)),which.label);
+    assert.equal(special([make(which,which.goal-1)],'twenty-kills').unlocked,false,which.label+' under threshold');
+    const exact=special([make(which,which.goal)],'twenty-kills');
+    assert.equal(exact.unlocked,true,which.label+' exact threshold');
+    assert.equal(exact.progress,1);
+    assert.equal(exact.evidence[0].kills,which.goal);
+    assert.equal(exact.evidence[0].killThreshold,which.goal);
+    assert.equal(exact.evidence[0].killFormat,which.label);
+    assert.equal(special([make(which,which.goal+1)],'twenty-kills').unlocked,true,which.label+' above');
+  }
+  assert.equal(engine.DESTRUCTION_KILLS.solo,65);
+  assert.equal(engine.DESTRUCTION_KILLS.duo,120);
+  assert.equal(engine.DESTRUCTION_KILLS.trio,150);
+  assert.equal(engine.SPECIAL_CATALOG.find(x=>x.id==='twenty-kills').rarity,'epic');
+  assert.equal(engine.SPECIAL_CATALOG.find(x=>x.id==='vr-and-cash').rarity,'rare');
+});
+test('破壊神 does not infer team size from incomplete/contradictory entries and rejects unverified KILLS',()=>{
+  const bad=[
+    fixture('unknown-solo',{event:'Generic Cup',kills:1000}),
+    fixture('missing-solo',{event:'Generic Cup',player:'Hero / Unknown',kills:1000}),
+    fixture('incomplete-duo',{event:'Reload Duos Cup',player:'Hero',players:['Hero'],kills:150}),
+    fixture('unverified',{event:'Solo Victory Cup',kills:200,verified:false}),
+    fixture('null',{event:'Solo Victory Cup',kills:null}),
+    fixture('many',{event:'HamiKuma Cup',players:['Hero','Pair','Third','Fourth'],kills:200}),
+    fixture('dup-roster',{event:'Reload Duos Cup',players:['Hero','Hero'],kills:200})
+  ];
+  assert.equal(special(bad,'twenty-kills').unlocked,false);
+  assert.equal(engine.confirmedKillFormat(bad[0]),null);
+  assert.equal(engine.confirmedKillFormat(bad[1]),null);
+  // Authoritative tournament catalog exposes a contradiction: 1 listed player in a duo event.
+  const catalog=[{name:'Reload Duos Cup',team:'duo'}];
+  assert.equal(engine.confirmedKillFormat(bad[2],catalog),null);
+  const duo=fixture('contradictory',{event:'Known Solo Cup',players:['Hero','Pair'],player:'Hero / Pair',kills:130});
+  assert.equal(engine.confirmedKillFormat(duo,[{name:'Known Solo Cup',team:'solo'}]),null);
+  const result=engine.calculateSpecial([duo],'Hero',{catalog:[{name:'Known Solo Cup',team:'solo'}]});
+  assert.equal(result.achievements.find(a=>a.id==='twenty-kills').unlocked,false);
+});
+test('catalog-verified solo events without Solo in title are eligible while ambiguous names are not',()=>{
+  const row=fixture('persona',{event:'Override Series: Persona 5 Royal Cup Reload',kills:65});
+  assert.equal(engine.confirmedKillFormat(row),null);
+  assert.equal(special([row],'twenty-kills').unlocked,false);
+  const catalog=[{name:row.event,team:'solo',seasonId:'S42'}];
+  assert.equal(engine.confirmedKillFormat(row,catalog),'solo');
+  const report=engine.calculateSpecial([row],'Hero',{catalog});
+  const badge=report.achievements.find(x=>x.id==='twenty-kills');
+  assert.equal(badge.unlocked,true);
+  assert.equal(badge.evidence[0].killFormat,'solo');
+  assert.equal(engine.calculateSpecial([row],'Hero',{catalog:[...catalog,{...catalog[0],team:'duo'}]}).unlocked.some(x=>x.id==='twenty-kills'),false);
 });
