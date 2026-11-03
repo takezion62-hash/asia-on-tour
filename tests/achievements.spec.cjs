@@ -149,3 +149,65 @@ test('破壊神は人数別の高キル基準、ダブルクラウンはレア�
   await expect(destruction.locator('[data-special-evidence-id="test-destruction-solo-65"]')).toContainText('ソロ 65K / 基準65K');
   await expect(page.locator('[data-special-id="twenty-kills"][data-special-rarity="epic"]')).toBeVisible();
 });
+
+
+test('地域スペシャリストは累計戦績で進化し、次段階への進捗もプロフィールに表示する',async({page})=>{
+  const counts=new Map();
+  for(const e of records.filter(e=>e.verified===true)){
+    for(const name of roster(e)){
+      if(!name)continue;
+      const key=name+'|'+e.region;
+      counts.set(key,(counts.get(key)||0)+1);
+    }
+  }
+  const target=[...counts].find(([,total])=>total>=10);
+  expect(target,'10件以上の海外戦績を持つ地域別選手').toBeTruthy();
+  const [name,region]=target[0].split('|');
+  const badge=achievements.calculate(records,name,{catalog:data.tournaments.catalog}).special.achievements
+    .find(x=>x.id==='specialist-'+region.toLowerCase());
+  await page.goto('/?season=all#player='+encodeURIComponent(name));
+  const card=page.locator('[data-special-id="'+badge.id+'"][data-special-unlocked="true"]');
+  await expect(card).toBeVisible();
+  await expect(card).toHaveAttribute('data-special-growth-level',String(badge.growth.level));
+  await expect(card).toHaveAttribute('data-special-evolution-tier',badge.growth.current.tier);
+  await expect(card.locator('h4')).toHaveText(badge.title);
+  await expect(card.locator('[data-special-growth] .special-evo-status strong')).toHaveText(badge.progress+' / '+badge.goal+' 件');
+  await expect(card.locator('[role="progressbar"]')).toHaveAttribute('aria-valuenow',String(badge.growth.percent));
+  await expect(card.locator('.special-evo-stages span')).toHaveCount(5);
+  await expect(card.locator('.special-evo-next')).toContainText(badge.growth.next?'あと '+badge.growth.remaining+' 件':'最高ランク達成');
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth+1)).toBe(true);
+});
+
+test('二刀流→三刀流→四刀流はソロからスクワッドまでの個人賞金獲得形式で進化する',async({page})=>{
+  const base=records.find(e=>e.verified===true&&e.kind==='賞金決勝'
+    &&typeof e.prize==='number'&&e.prize>0&&roster(e).length===1);
+  expect(base,'確認済みソロ賞金の基準データ').toBeTruthy();
+  const name=roster(base)[0];
+  const teams=[
+    {team:'solo',event:'Solo Victory Cup Battle Royale',players:[name],prize:100},
+    {team:'duo',event:'Reload Duos Victory Cup',players:[name,'Pair'],prize:200},
+    {team:'trio',event:'Trios Cash Cup',players:[name,'Pair','Third'],prize:300},
+    {team:'squad',event:'Squads Victory Cup Battle Royale',players:[name,'Pair','Third','Fourth'],prize:400}
+  ];
+  const rows=teams.map((team,i)=>({...base,id:'special-formats-'+team.team,event:team.event,
+    player:team.players.join(' / '),players:team.players,
+    kind:'賞金決勝',prize:team.prize,prizePerPlayer:team.players.length>1?100:undefined,
+    verified:true,kills:3,rank:25,vrs:0,source:base.source,date:base.date}));
+  const expected=achievements.calculate(rows,name,{catalog:data.tournaments.catalog}).special.achievements
+    .find(x=>x.id==='solo-and-team-cash');
+  expect(expected.title).toBe('四刀流');
+  expect(expected.progress).toBe(4);
+  await page.route('**/results.json',route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify(rows)}));
+  await page.goto('/?season=all#player='+encodeURIComponent(name));
+  const card=page.locator('[data-special-id="solo-and-team-cash"][data-special-unlocked="true"]');
+  await expect(card).toBeVisible();
+  await expect(card).toHaveAttribute('data-special-rarity','legendary');
+  await expect(card.locator('h4')).toHaveText('四刀流');
+  await expect(card.locator('[data-special-growth-level]')).toHaveCount(0);
+  await expect(card.locator('.special-evo-stages span')).toHaveCount(3);
+  await expect(card.locator('.special-evo-next')).toContainText('最高ランク達成');
+  await card.locator('.special-achievement-proof summary').click();
+  const evidence=card.locator('[data-special-evidence-id]');
+  await expect(evidence).toHaveCount(4);
+  for(const format of ['ソロ','デュオ','トリオ','スクワッド'])await expect(card.locator('.special-format-proof').filter({hasText:format})).toHaveCount(1);
+});
