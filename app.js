@@ -154,10 +154,16 @@
       window.history.replaceState({aot:true,depth:routeDepth,view:previous},'',window.location.href);
       const next={...previous,season:nextSeason,results:{...previous.results,page:1}};
       archivePage=1;
+      selectedSeason=nextSeason;
+      // A different season may have no sessions in the old calendar month.
+      if(next.page==='calendar'){
+        next.calendar={...sanitizeCalendarFilters(next.calendar),month:calendarDefaultMonth(),date:''};
+        calendarBrowse={...next.calendar};
+      }
       const url=new URL(window.location.href);url.searchParams.set('season',nextSeason);
+      if(next.page==='calendar')url.hash=calendarHash(next.calendar);
       routeDepth++;
       window.history.pushState({aot:true,depth:routeDepth,view:next},'',url.href);
-      selectedSeason=nextSeason;
       refresh();showView(next,true);
     }
 
