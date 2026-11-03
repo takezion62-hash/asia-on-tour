@@ -904,6 +904,72 @@
           "url": "https://fortnitetracker.com/events/epicgames_S42_PerformanceEvaluationTrios_EU?window=S42_PerformanceEvaluation_Event6Round1_EU"
         }
       ]
+    },
+    {
+      "id": "ch7s3-solo-victory-cup",
+      "name": "Solo Victory Cup Battle Royale",
+      "chapter": 7,
+      "season": 3,
+      "seasonId": "S41",
+      "sourceEventIds": [
+        "S41_SoloVictoryCup"
+      ],
+      "series": "victory-cup",
+      "mode": "battle-royale",
+      "subtype": "solo-victory-cup",
+      "team": "solo",
+      "platform": "cross-platform",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "S41公式イベント：NAC Solo Victory CupはSolo / Battle Royale、決勝は1VRごとに$100。Tracker掲載のRound1 Day1/ Round2 Day1を使用。",
+          "url": "https://www.fortnite.com/competitive/events/S41_SoloVictoryCup?region=NAC&round=S41_SoloVictoryCup_Round2_Day1_NAC"
+        }
+      ]
+    },
+    {
+      "id": "ch7s3-fncs-division-1",
+      "name": "FNCS Division 1",
+      "chapter": 7,
+      "season": 3,
+      "seasonId": "S41",
+      "sourceEventIds": [
+        "S41_FNCSDivisionalCup_Division1"
+      ],
+      "series": "fncs",
+      "mode": "battle-royale",
+      "subtype": "fncs-division-1",
+      "team": "duo",
+      "platform": "cross-platform",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "S41 Week1 FinalはFNCS Division 1通常大会のDuos・Battle Royale。ME賞金は11〜20位が各選手$100。",
+          "url": "https://osirion.gg/tournaments/S41_FNCSDivisionalCup_Division1_Week1Final_ME"
+        }
+      ]
+    },
+    {
+      "id": "ch7s2-fncs-division-1",
+      "name": "FNCS Division 1",
+      "chapter": 7,
+      "season": 2,
+      "seasonId": "S40",
+      "sourceEventIds": [
+        "S40_FNCSDivisionalCup_Division1"
+      ],
+      "series": "fncs",
+      "mode": "battle-royale",
+      "subtype": "fncs-division-1",
+      "team": "duo",
+      "platform": "cross-platform",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "S40 Week2 Finalは通常FNCS Division 1のDuos・Battle Royale。MEユーザー提供Tracker画面で15〜19位の賞金欄がチーム合計$200/各$100。",
+          "url": "https://fortnitetracker.com/events/epicgames_S40_FNCSDivisionalCup_Division1_ME?window=S40_FNCSDivisionalCup_Division1_Week2Final_ME"
+        }
+      ]
     }
   ]
 }
