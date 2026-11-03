@@ -9,6 +9,13 @@ const roster=row=>Array.isArray(row.players)&&row.players.length?row.players:[ro
 const sample=records.find(row=>row.verified===true&&roster(row).length===1)||records.find(row=>row.verified===true);
 const player=roster(sample)[0];
 
+async function expandAchievements(page){
+  const gallery=page.locator('#profile-achievements .achievement-collection');
+  await gallery.locator('summary').click();
+  await expect(gallery).toHaveAttribute('open','');
+}
+
+
 test('称号のスクリプトとスタイルをテスト用サーバーが正しく配信する',async({request})=>{
   const js=await request.get('/achievements.js');
   const css=await request.get('/achievements.css');
@@ -23,6 +30,15 @@ test('既存プロフィールで獲得済みと未獲得の称号、代表称�
   await page.goto('/?season=all#player='+encodeURIComponent(player));
   const gallery=page.locator('#profile-achievements');
   await expect(gallery).toBeVisible();
+  const collection=gallery.locator('.achievement-collection');
+  await expect(collection).not.toHaveAttribute('open','');
+  await expect(gallery.locator('.evo-grid')).toBeHidden();
+  await expect(gallery.locator('.achievement-toggle')).toContainText('すべての称号を見る');
+  await expandAchievements(page);
+  await expect(gallery.locator('.evo-grid')).toBeVisible();
+  await collection.locator('summary').click();
+  await expect(gallery.locator('.evo-grid')).toBeHidden();
+  await expandAchievements(page);
   const independent=achievements.calculate(records,player);
   await expect(gallery.locator('[data-achievement-count]')).toHaveText(independent.evolution.earnedStages+' / '+independent.evolution.totalStages);
   await expect(gallery.locator('[data-achievement-title]')).toHaveText(independent.evolution.featured?.current?.title||'挑戦中');
@@ -64,6 +80,7 @@ test('確認されていない結果だけでは称号は獲得できず、空�
   const onlyOne={...sample,id:'achievements-unverified-test',verified:false,reported:true,vrs:15,prize:99999,kind:'賞金決勝',rank:1};
   await page.route('**/results.json',route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify([onlyOne])}));
   await page.goto('/?season=all#player='+encodeURIComponent(player));
+  await expandAchievements(page);
   await expect(page.locator('#profile-achievements [data-achievement-count]')).toHaveText('0 / '+achievements.EVOLUTION_TRACKS.length*5);
   await expect(page.locator('[data-achievement-title]')).toHaveText('挑戦中');
   await expect(page.locator('.evo-card[data-evolution-tier="locked"]')).toHaveCount(6);
@@ -77,10 +94,12 @@ test('公開済みのスキン報酬とチームVRを正しい条件で計上す
   expect(team,'確認済みチーム戦VR').toBeTruthy();
   const skinName=roster(skin)[0],teamName=roster(team)[0];
   await page.goto('/?season=all#player='+encodeURIComponent(skinName));
+  await expandAchievements(page);
   const expected=achievements.calculate(records,skinName);
   expect(expected.metrics.skins).toBeGreaterThan(0);
   await expect(page.locator('[data-evolution-track="skins"]:not([data-evolution-tier="locked"])')).toBeVisible();
   await page.goto('/?season=all#player='+encodeURIComponent(teamName));
+  await expandAchievements(page);
   const teamData=achievements.calculate(records,teamName);
   expect(teamData.metrics.vrs).toBeGreaterThan(0);
   await expect(page.locator('[data-evolution-track="victories"]:not([data-evolution-tier="locked"])')).toBeVisible();
@@ -92,6 +111,7 @@ test('特別称号は17種類から判定し、獲得済み・未獲得・レア
   const person=records.find(row=>row.verified===true&&(row.players||[row.player]).length===1)?.player||player;
   const expected=achievements.calculate(records,person,{catalog:data.tournaments.catalog}).special;
   await page.goto('/?season=all#player='+encodeURIComponent(person));
+  await expandAchievements(page);
   const section=page.locator('#profile-special-achievements');
   await expect(section).toBeVisible();
   await expect(section.locator('[data-special-count]')).toHaveText(expected.earned+' / '+expected.total);
@@ -123,6 +143,7 @@ test('0キル現金賞金の特別称号は本人の個人賞金と明示0キル
     status:200,contentType:'application/json',body:JSON.stringify([valid,reported])
   }));
   await page.goto('/?season=all#player='+encodeURIComponent(name));
+  await expandAchievements(page);
   await expect(page.locator('[data-special-id="silent-earner"][data-special-unlocked="true"]')).toBeVisible();
   await expect(page.locator('[data-special-id="pacifist-vr"][data-special-unlocked="false"]')).toHaveCount(1);
   const cash=page.locator('[data-special-id="silent-earner"][data-special-unlocked="true"]');
@@ -141,6 +162,7 @@ test('破壊神は人数別の高キル基準、ダブルクラウンはレア�
   const edited={...row,id:'test-destruction-solo-65',kills:65,vrs:1,prize:100,verified:true};
   await page.route('**/results.json',route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify([edited])}));
   await page.goto('/?season=all#player='+encodeURIComponent(name));
+  await expandAchievements(page);
   const destruction=page.locator('[data-special-id="twenty-kills"][data-special-unlocked="true"]');
   const double=page.locator('[data-special-id="vr-and-cash"][data-special-unlocked="true"]');
   await expect(destruction).toBeVisible();
@@ -166,6 +188,7 @@ test('地域スペシャリストは累計戦績で進化し、次段階への�
   const badge=achievements.calculate(records,name,{catalog:data.tournaments.catalog}).special.achievements
     .find(x=>x.id==='specialist-'+region.toLowerCase());
   await page.goto('/?season=all#player='+encodeURIComponent(name));
+  await expandAchievements(page);
   const card=page.locator('[data-special-id="'+badge.id+'"][data-special-unlocked="true"]');
   await expect(card).toBeVisible();
   await expect(card).toHaveAttribute('data-special-growth-level',String(badge.growth.level));
@@ -199,6 +222,7 @@ test('二刀流→三刀流→四刀流はソロからスクワッドまでの�
   expect(expected.progress).toBe(4);
   await page.route('**/results.json',route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify(rows)}));
   await page.goto('/?season=all#player='+encodeURIComponent(name));
+  await expandAchievements(page);
   const card=page.locator('[data-special-id="solo-and-team-cash"][data-special-unlocked="true"]');
   await expect(card).toBeVisible();
   await expect(card).toHaveAttribute('data-special-rarity','legendary');
