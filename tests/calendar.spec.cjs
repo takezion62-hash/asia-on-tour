@@ -1,7 +1,7 @@
 'use strict';
 const { test, expect } = require('@playwright/test');
 const path = require('node:path');
-const { loadData, tournamentKey } = require('../scripts/data-checks.cjs');
+const { loadData, tournamentKey, seasonFor } = require('../scripts/data-checks.cjs');
 const data = loadData(path.join(__dirname,'..')).data;
 const rows = data.results;
 const month = [...new Set(rows.map(row => row.date.slice(0,7)))].sort().at(-1);
@@ -68,4 +68,17 @@ test('月送りと狭い画面の表示が正常', async ({ page }) => {
   const width=await page.evaluate(()=>document.documentElement.clientWidth);
   expect(scrollWidth).toBeLessThanOrEqual(width+2);
   await expect(page.locator('.calendar-day').first()).toBeVisible();
+});
+
+test('シーズンを切り替えると対象期間の最新掲載月へ移動する', async ({ page }) => {
+  const nextSeason='S43';
+  const seasonRows=rows.filter(row=>seasonFor(row,data)===nextSeason);
+  if(!seasonRows.length)return;
+  const latest=seasonRows.map(row=>row.date.slice(0,7)).sort().at(-1);
+  await page.goto('/?season=all#calendar?month=2026-09');
+  await page.locator('#season-select').selectOption(nextSeason);
+  await expect(page.locator('.calendar-month-head h2')).toHaveText(Number(latest.slice(0,4))+'年 '+Number(latest.slice(5))+'月');
+  await expect(page).toHaveURL(new RegExp('season='+nextSeason));
+  await expect(page).toHaveURL(new RegExp('month='+latest));
+  expect(await page.locator('.calendar-event').count()).toBeGreaterThan(0);
 });
