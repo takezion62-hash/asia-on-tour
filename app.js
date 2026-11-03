@@ -837,36 +837,54 @@
     // Badges are lifetime achievements: changing the season never revokes earned titles.
     // Use the same immutable archive and exact player roster names as the profile.
     function profileAchievementsSection(info){
-      const data=achievementsForPlayer(info.name);
-      const earned=data.unlocked.map(badge=>
-        '<article class="achievement-card" data-achievement-id="'+escape(badge.id)+'" data-achievement-unlocked="true" data-achievement-tier="'+escape(badge.tier)+'">'
-        +'<span class="achievement-icon" aria-hidden="true">'+escape(badge.icon)+'</span><div class="achievement-card-content">'
-        +'<h3>'+escape(badge.title)+'</h3><p>'+escape(badge.description)+'</p>'
-        +'<p class="achievement-value">'+format(badge.progress)+' / '+format(badge.goal)+' '+escape(badge.unit)+'</p></div></article>'
-      ).join('');
-      const locked=data.achievements.filter(badge=>!badge.unlocked).map(badge=>
-        '<li class="achievement-locked-item" data-achievement-id="'+escape(badge.id)+'" data-achievement-unlocked="false">'
-        +'<span class="achievement-locked-icon" aria-hidden="true">'+escape(badge.icon)+'</span><div>'
-        +'<strong>'+escape(badge.title)+'</strong><span>'+escape(badge.description)+' · '+format(badge.progress)+' / '+format(badge.goal)+' '+escape(badge.unit)+'</span>'
-        +'<div class="achievement-meter" aria-hidden="true"><span style="width:'+Math.min(100,Math.max(0,badge.progress/badge.goal*100))+'%"></span></div>'
-        +'</div></li>'
-      ).join('');
-      const title=data.title;
+      const data=achievementsForPlayer(info.name),evolution=data.evolution;
+      const featured=evolution.featured;
+      const tier=featured?.current?.tier||'locked';
+      const tracks=evolution.tracks.map(track=>{
+        const stage=track.current;
+        const stageTone=stage?.tier||'locked';
+        const steps=track.milestones.map((milestone,index)=>
+          '<li class="'+(index<track.level?'is-earned':index===track.level?'is-next':'')+'">'
+          +'<span class="evo-step-dot" aria-hidden="true"></span>'
+          +'<span>'+escape(milestone.tierLabel)+' · '+format(milestone.goal)+' '+escape(track.unit)+'</span>'
+          +'<strong>'+escape(milestone.title)+'</strong></li>'
+        ).join('');
+        const next=track.next
+          ?'<span class="evo-next-text">次の'+escape(track.next.tierLabel)+'まで <strong>あと '+format(track.remaining)+' '+escape(track.unit)+'</strong></span>'
+          :'<span class="evo-next-text is-max">最高ランク達成！ 👑</span>';
+        return '<article class="evo-card" data-evolution-track="'+escape(track.id)+'" data-evolution-tier="'+escape(stageTone)+'" data-evolution-level="'+track.level+'">'
+          +'<div class="evo-card-head"><div class="evo-medal" aria-hidden="true"><span class="evo-medal-symbol">'+escape(track.icon)+'</span>'
+          +(track.level?'<span class="evo-medal-stars">'+('✦'.repeat(Math.min(5,track.level)))+'</span>':'')
+          +'</div><div class="evo-card-identity"><p class="evo-family">'+escape(track.label)+'</p>'
+          +'<span class="evo-tier">'+escape(stage?.tierLabel||'未獲得')+'</span>'
+          +'<h3>'+escape(stage?.title||'挑戦中')+'</h3></div></div>'
+          +'<p class="evo-description">'+escape(track.description)+'</p>'
+          +'<div class="evo-current"><strong>'+format(track.value)+'</strong><span>'+escape(track.unit)+'</span>'
+          +'<small>LEVEL '+track.level+' / '+track.milestones.length+'</small></div>'
+          +'<div class="evo-rank-steps" aria-label="到達ランク">'
+          +track.milestones.map((milestone,index)=>'<span class="'+(index<track.level?'is-earned':'')+'" title="'+escape(milestone.tierLabel)+'"></span>').join('')
+          +'</div><div class="evo-next">'+next+'</div>'
+          +'<div class="evo-bar" role="progressbar" aria-label="'+escape(track.label)+'の次ランクへの進捗" aria-valuemin="0" aria-valuemax="100" aria-valuenow="'+track.percent+'"><span style="width:'+track.percent+'%"></span></div>'
+          +'<details class="evo-level-details"><summary>ランクの達成条件を見る</summary><ol>'+steps+'</ol></details></article>';
+      }).join('');
+      const special=data.achievements.filter(a=>a.unlocked&&(a.id==='top-ten'||a.id.startsWith('specialist-')));
       return '<section class="achievement-section" id="profile-achievements" aria-labelledby="achievement-title">'
-        +'<div class="achievement-heading"><h2 id="achievement-title">海外遠征<span>実績・称号</span></h2>'
-        +'<p>全期間の確認済み戦績から自動判定 · '+format(data.earned)+' / '+format(data.total)+' 称号獲得</p></div>'
-        +'<div class="achievement-featured" data-achievement-featured="'+escape(title?.id||'none')+'">'
-        +'<span class="achievement-featured-icon" aria-hidden="true">'+escape(title?.icon||'🔒')+'</span>'
-        +'<div class="achievement-featured-copy"><span class="achievement-featured-label">PLAYER TITLE / 自動選出</span>'
-        +'<strong data-achievement-title>'+escape(title?.title||'挑戦中')+'</strong>'
-        +'<small>'+escape(title?.description||'確認済み戦績が登録されると実績を獲得できます')+'</small></div></div>'
-        +'<div class="achievement-progress"><span>実績コンプリート率</span><div class="achievement-progress-track" aria-hidden="true">'
-        +'<span style="width:'+(data.total?Math.round(data.earned/data.total*100):0)+'%"></span></div>'
-        +'<strong data-achievement-count>'+format(data.earned)+' / '+format(data.total)+'</strong></div>'
-        +'<div class="achievement-grid" aria-label="獲得済み称号">'+(earned||'<p class="achievement-empty">この選手の獲得済み称号はまだありません</p>')+'</div>'
-        +(locked?'<details class="achievement-locked"><summary>未獲得の実績 '+format(data.total-data.earned)+'件を見る · 達成条件と進捗</summary>'
-        +'<ul class="achievement-locked-list">'+locked+'</ul></details>':'')
-        +'<p class="achievement-note">※ この機能は公式Fortnite称号ではなく、ASIA ON TOUR独自の実績です。全期間の掲載済み・出典確認済み記録を使用し、未確認記録や推測した別名義は加算しません。賞金は確認済みの個人受取額のみ、VRはチーム戦の合計値を含みます。未掲載の記録がある場合は実際の全実績とは異なります。</p></section>';
+        +'<div class="achievement-heading"><div><span class="achievement-eyebrow">ASIA ON TOUR / EVOLVING BADGES</span>'
+        +'<h2 id="achievement-title">進化する<span>実績バッジ</span></h2></div>'
+        +'<p>全期間の確認済み戦績から自動進化 · 6系統</p></div>'
+        +'<div class="achievement-featured" data-evolution-featured="'+escape(featured?.id||'none')+'" data-evolution-tier="'+escape(tier)+'">'
+        +'<div class="achievement-featured-icon evo-medal" aria-hidden="true"><span class="evo-medal-symbol">'+escape(featured?.icon||'🔒')+'</span></div>'
+        +'<div class="achievement-featured-copy"><span class="achievement-featured-label">MAIN TITLE · 最高到達ランクから選出</span>'
+        +'<strong data-achievement-title>'+escape(featured?.current?.title||'挑戦中')+'</strong>'
+        +'<small>'+escape(featured?featured.label+' · '+featured.current.tierLabel:'戦績が確認されるとバッジを獲得できるよ')+'</small></div></div>'
+        +'<div class="achievement-progress"><span>獲得したランク</span><div class="achievement-progress-track" aria-hidden="true">'
+        +'<span style="width:'+(evolution.totalStages?Math.round(evolution.earnedStages/evolution.totalStages*100):0)+'%"></span></div>'
+        +'<strong data-achievement-count>'+format(evolution.earnedStages)+' / '+format(evolution.totalStages)+'</strong></div>'
+        +'<div class="evo-grid" aria-label="進化バッジ一覧">'+tracks+'</div>'
+        +(special.length?'<div class="evo-special"><h3>特別実績 <small>達成済み '+format(special.length)+'件</small></h3><div class="evo-special-list">'
+          +special.map(a=>'<span class="evo-special-badge" data-achievement-id="'+escape(a.id)+'" data-achievement-unlocked="true">'
+          +escape(a.icon)+' '+escape(a.title)+'</span>').join('')+'</div></div>':'')
+        +'<p class="achievement-note">※ ASIA ON TOUR独自の非公式実績です。確認済みの掲載戦績だけを使い、未掲載・未確認記録は加算しません。賞金は個人受取額が確認できた現金賞金のみ、VRはチーム戦の合計値を含みます。地域は海外6地域、スキンは獲得を明記した記録だけをカウントします。シーズンを切り替えても全期間のバッジは維持されます。</p></section>';
     }
 
     function renderProfile(name){
@@ -1091,7 +1109,7 @@
       }).join(''):'<div class="empty">この期間に掲載できる確認済みの賞金・総合TOP3・スキン報酬記録はまだありません。</div>';
     }
     function renderHome(){const a=all();$('#stat-results').textContent=a.length;$('#stat-players').textContent=new Set(a.flatMap(names)).size;$('#stat-regions').textContent=new Set(a.map(e=>e.region)).size;$('#stat-top10').textContent=a.filter(e=>e.rank<=10).length;const latest=a.slice().sort((x,y)=>y.date.localeCompare(x.date)).slice(0,3);$('#latest-results').innerHTML=latest.length?latest.map(resultCard).join(''):'<div class="empty">まだ戦績が登録されていないよ</div>';$('#region-breakdown').innerHTML=regions.map(r=>{const n=a.filter(e=>e.region===r).length;const percent=a.length?(n/a.length*100):0;return `<div class="region-entry"><div class="reg-left"><div class="flag" data-region="${escape(r)}">${escape(r)}</div><div class="reg-details"><strong>${{ME:'中東',EU:'ヨーロッパ',NAC:'北米中部',NAW:'北米西部',OCE:'オセアニア',BR:'ブラジル'}[r]}</strong><small>${n?'登録あり':'未登録'}</small><div class="reg-bar"><span style="width:${percent}%"></span></div></div></div><span class="reg-count">${n}</span></div>`}).join('');renderHomeShowcase();renderHomeRecords()}
-    function renderPlayerCard(p){const events=all().filter(e=>names(e).includes(p.name));const sum=playerPrizeTotal(p.name);const achievement=achievementsForPlayer(p.name);return `<a class="player" href="${escape(profileHref(p.name))}" data-open-profile="${escape(p.name)}"><div class="player-top"><div class="avatar">${escape(p.initials)}</div><div><div class="player-name">${escape(p.name)}</div><div class="player-region">🌏 遠征関連選手 · ${events.length?'戦績掲載中':'海外結果を調査中'}</div></div></div><div class="player-blurb"><span class="season-biography-note">${candidates.some(c=>c.name===p.name)?'紹介文：CH7 S4時点':'掲載選手'}</span>${escape(p.desc)}</div><div class="player-achievement-preview" data-player-achievement="${escape(achievement.title?.id||'none')}"><span aria-hidden="true">${escape(achievement.title?.icon||'🏅')}</span> ${escape(achievement.title?.title||'実績に挑戦中')} <small>· ${format(achievement.earned)}/${format(achievement.total)}</small></div><div class="player-earnings${sum?'':' zero'}"><span>🏆 ${escape(seasonLabel())}の確認済み賞金<br><small>掲載済み・確認済みの個人累計</small></span><strong>${events.length?'$'+format(sum):'未登録'}</strong></div><div class="player-bottom"><span>掲載された海外戦績 <strong>${events.length}</strong> 件</span><span class="player-card-action">プロフィールを見る →</span></div></a>`}
+    function renderPlayerCard(p){const events=all().filter(e=>names(e).includes(p.name));const sum=playerPrizeTotal(p.name);const evolution=achievementsForPlayer(p.name).evolution;const featured=evolution.featured;return `<a class="player" href="${escape(profileHref(p.name))}" data-open-profile="${escape(p.name)}"><div class="player-top"><div class="avatar">${escape(p.initials)}</div><div><div class="player-name">${escape(p.name)}</div><div class="player-region">🌏 遠征関連選手 · ${events.length?'戦績掲載中':'海外結果を調査中'}</div></div></div><div class="player-blurb"><span class="season-biography-note">${candidates.some(c=>c.name===p.name)?'紹介文：CH7 S4時点':'掲載選手'}</span>${escape(p.desc)}</div><div class="player-achievement-preview" data-player-achievement="${escape(featured?.id||'none')}" data-evolution-tier="${escape(featured?.current?.tier||'locked')}"><span aria-hidden="true">${escape(featured?.icon||'🏅')}</span> ${escape(featured?.current?.title||'実績に挑戦中')} <small>· ${format(evolution.earnedStages)}/${format(evolution.totalStages)}</small></div><div class="player-earnings${sum?'':' zero'}"><span>🏆 ${escape(seasonLabel())}の確認済み賞金<br><small>掲載済み・確認済みの個人累計</small></span><strong>${events.length?'$'+format(sum):'未登録'}</strong></div><div class="player-bottom"><span>掲載された海外戦績 <strong>${events.length}</strong> 件</span><span class="player-card-action">プロフィールを見る →</span></div></a>`}
     let visible=[]; let selectedPlayer=null;
     const ARCHIVE_PAGE_SIZE=50;
     let archivePage=1;
