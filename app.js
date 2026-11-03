@@ -867,7 +867,26 @@
           +'<div class="evo-bar" role="progressbar" aria-label="'+escape(track.label)+'の次ランクへの進捗" aria-valuemin="0" aria-valuemax="100" aria-valuenow="'+track.percent+'"><span style="width:'+track.percent+'%"></span></div>'
           +'<details class="evo-level-details"><summary>ランクの達成条件を見る</summary><ol>'+steps+'</ol></details></article>';
       }).join('');
-      const special=data.achievements.filter(a=>a.unlocked&&(a.id==='top-ten'||a.id.startsWith('specialist-')));
+      const specials=data.special;
+      const earnedSpecial=specials.unlocked.map(badge=>{
+        const support=badge.evidence.map(row=>
+          '<li data-special-evidence-id="'+escape(row.id)+'"><span>'+escape(row.date)+' · '+escape(row.region)+'</span> '+escape(row.event)
+          +' <small>('+escape(row.kind)+')</small></li>'
+        ).join('');
+        return '<article class="special-achievement" data-special-id="'+escape(badge.id)+'" data-special-rarity="'+escape(badge.rarity)+'" data-special-unlocked="true">'
+          +'<div class="special-achievement-top"><span class="special-achievement-icon" aria-hidden="true">'+escape(badge.icon)+'</span>'
+          +'<div class="special-achievement-ident"><span class="special-achievement-rarity">'+escape(badge.rarityLabel)+'</span>'
+          +'<h4>'+escape(badge.title)+'</h4></div></div><p>'+escape(badge.description)+'</p>'
+          +'<details class="special-achievement-proof"><summary>達成した記録を見る</summary><ul>'+support+'</ul>'
+          +'<small>掲載済み戦績から抽出 · '+format(badge.progress)+' / '+format(badge.goal)+' '+escape(badge.unit)+'</small></details></article>';
+      }).join('');
+      const missingSpecial=specials.locked.map(badge=>
+        '<li class="special-locked-item" data-special-id="'+escape(badge.id)+'" data-special-rarity="'+escape(badge.rarity)+'" data-special-unlocked="false">'
+        +'<span class="special-locked-icon" aria-hidden="true">'+escape(badge.icon)+'</span><div>'
+        +'<strong>'+escape(badge.title)+'</strong><span class="special-locked-rarity">'+escape(badge.rarityLabel)+'</span>'
+        +'<p>'+escape(badge.description)+'</p><small>'+format(Math.min(badge.progress,badge.goal))+' / '+format(badge.goal)+' '+escape(badge.unit)+'</small>'
+        +'</div></li>'
+      ).join('');
       return '<section class="achievement-section" id="profile-achievements" aria-labelledby="achievement-title">'
         +'<div class="achievement-heading"><div><span class="achievement-eyebrow">ASIA ON TOUR / EVOLVING BADGES</span>'
         +'<h2 id="achievement-title">進化する<span>実績バッジ</span></h2></div>'
@@ -881,10 +900,19 @@
         +'<span style="width:'+(evolution.totalStages?Math.round(evolution.earnedStages/evolution.totalStages*100):0)+'%"></span></div>'
         +'<strong data-achievement-count>'+format(evolution.earnedStages)+' / '+format(evolution.totalStages)+'</strong></div>'
         +'<div class="evo-grid" aria-label="進化バッジ一覧">'+tracks+'</div>'
-        +(special.length?'<div class="evo-special"><h3>特別実績 <small>達成済み '+format(special.length)+'件</small></h3><div class="evo-special-list">'
-          +special.map(a=>'<span class="evo-special-badge" data-achievement-id="'+escape(a.id)+'" data-achievement-unlocked="true">'
-          +escape(a.icon)+' '+escape(a.title)+'</span>').join('')+'</div></div>':'')
-        +'<p class="achievement-note">※ ASIA ON TOUR独自の非公式実績です。確認済みの掲載戦績だけを使い、未掲載・未確認記録は加算しません。賞金は個人受取額が確認できた現金賞金のみ、VRはチーム戦の合計値を含みます。地域は海外6地域、スキンは獲得を明記した記録だけをカウントします。シーズンを切り替えても全期間のバッジは維持されます。</p></section>';
+        +'<section class="evo-special" id="profile-special-achievements" aria-labelledby="special-achievements-title">'
+        +'<div class="special-header"><div><span class="achievement-eyebrow">SPECIAL ACHIEVEMENTS</span>'
+        +'<h3 id="special-achievements-title">特別称号<span>コレクション</span></h3>'
+        +'<p>珍記録・大会結果・海外挑戦の組み合わせで獲得</p></div>'
+        +'<div class="special-summary"><strong data-special-count>'+format(specials.earned)+' / '+format(specials.total)+'</strong><span>獲得済み</span></div></div>'
+        +'<div class="special-rarity-guide" aria-label="特別称号のレア度"><span data-rarity="rare">RARE</span><span data-rarity="epic">EPIC</span><span data-rarity="legendary">LEGENDARY</span></div>'
+        +'<div class="special-unlocked-grid" aria-label="獲得した特別称号">'
+        +(earnedSpecial||'<p class="special-none">まだ獲得した特別称号はないよ · 新しい記録が掲載されると自動で判定されます</p>')
+        +'</div>'
+        +(missingSpecial?'<details class="special-locked-details"><summary>未獲得の特別称号 '+format(specials.locked.length)+'種類と達成条件を見る</summary>'
+        +'<ul class="special-locked-list">'+missingSpecial+'</ul></details>':'')
+        +'</section>'
+        +'<p class="achievement-note">※ ASIA ON TOUR独自の非公式実績です。掲載された確認済み戦績のみで判定し、未確認や推測した別名義は加算しません。賞金は確認済みの個人現金受取額のみ。0・1キル称号はKILLSの数値が明記された場合だけです。KILLSとVRはチーム戦ではチーム合計、複数試合の大会戦績ではセッション合計であり、個人または1試合単位の達成とは限りません。スキンは獲得が明記された記録のみ。レア度はサイト独自の分類です。シーズンを変えても全期間の実績が維持されます。</p></section>';
     }
 
     function renderProfile(name){
