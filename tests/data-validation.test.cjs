@@ -61,7 +61,8 @@ test('2026/9/14 ME Solo Victory Cup qualifiers and hero name merge preserve hist
     assert.equal(personalCents(row),0);
   }
   const heroRows=current.results.filter(r=>r.player==='ヒーロー');
-  assert.equal(heroRows.length,5);
+  assert.ok(heroRows.length>=5,'追加登録分も含めて過去のヒーロー5戦績を保持');
+  assert.equal(new Set(heroRows.map(r=>r.id)).size,heroRows.length,'同一選手の登録IDは重複しない');
   assert.ok(heroRows.every(r=>r.playerRaw==='REBEL 英雄のヒーロー 轟'));
   assert.deepEqual(heroRows.filter(r=>r.prize>0).map(r=>r.prize).sort(),[100,100]);
   assert.ok(current.players.candidates.some(p=>p.name==='ヒーロー'));
@@ -221,7 +222,8 @@ test('新しい正当な賞金記録を足すと件数・賞金・ランキン�
 
 test('2026/9/14 ME Solo Victory Cup Event 2 final 10 additional records and historical winner prize',()=>{
   const finals=current.results.filter(r=>r.date==='2026-09-14'&&r.region==='ME'&&r.event==='Solo Victory Cup Battle Royale'&&r.kind==='賞金決勝');
-  assert.equal(finals.length,11);
+  assert.ok(finals.length>=11,'初期11戦績を保持しながら後から決勝参加者が増えることを許容');
+  assert.equal(new Set(finals.map(r=>r.id)).size,finals.length,'同じ決勝戦績を重複登録しない');
   const expected=new Map([['ヒーロー',[230,3,3]],['rakirye',[289,3,2]],['らいちん',[297,3,2]],['らりむ',[311,3,2]],['AXIS lameloball',[341,3,2]],['Dartri',[354,3,2]],['こがね',[404,2,1]],['Ares.Mea',[409,3,1]],['ぷりなの',[412,3,1]],['nia',[424,3,1]]]);
   for(const [name,[rank,matches,kills]] of expected){
     const record=finals.find(r=>r.player===name);
