@@ -190,3 +190,23 @@
 .special-locked-item .special-evo-stages span{font-size:9px}
 .special-format-proof{font-weight:850;color:#c2e3f2!important}
 @media(max-width:640px){.special-evolution{padding:9px}.special-evo-stages{gap:4px}}
+
+/* Compact profile: featured title remains visible, complete gallery opens on demand. */
+.achievement-collection{margin-top:4px}
+.achievement-toggle{display:flex;align-items:center;gap:12px;padding:13px 16px;border:1px solid #7766a0;border-radius:13px;background:linear-gradient(105deg,#34274f,#1b293e);color:#f4eeff;cursor:pointer;list-style:none;transition:border-color .18s,background .18s}
+.achievement-toggle::-webkit-details-marker{display:none}
+.achievement-toggle::marker{content:''}
+.achievement-toggle:hover{border-color:#b39af7;background:linear-gradient(105deg,#433260,#1f3448)}
+.achievement-toggle:focus-visible{outline:2px solid #79e9ef;outline-offset:3px}
+.achievement-toggle-mark{display:grid;place-items:center;width:34px;height:34px;flex:0 0 34px;border-radius:10px;background:#8d71c72a;color:#dfc7ff;font-size:20px}
+.achievement-toggle-copy{display:grid;gap:2px;flex:1;min-width:0}
+.achievement-toggle-copy strong{font-size:13px;line-height:1.4;font-weight:900}
+.achievement-toggle-copy small{font-size:10px;line-height:1.6;color:#b4c5df}
+.achievement-toggle-chevron{font-size:23px;line-height:1;color:#d3b9ff;transition:transform .18s}
+.achievement-label-open{display:none}
+.achievement-collection[open] .achievement-label-closed{display:none}
+.achievement-collection[open] .achievement-label-open{display:block}
+.achievement-collection[open] .achievement-toggle-chevron{transform:rotate(180deg)}
+.achievement-collection-body{padding-top:18px}
+@media(max-width:640px){.achievement-toggle{padding:11px 12px;gap:10px}.achievement-toggle-mark{width:30px;height:30px;flex-basis:30px}.achievement-collection-body{padding-top:14px}}
+@media(prefers-reduced-motion:reduce){.achievement-toggle,.achievement-toggle-chevron{transition:none}}
