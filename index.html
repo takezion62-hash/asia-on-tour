@@ -815,6 +815,7 @@
     @media(max-width:640px){.tournament-progress{padding:17px 13px;border-radius:15px}.tournament-phase-grid{gap:8px}.tournament-phase-card{padding:12px 10px}.tournament-phase-card>strong{font-size:27px}.tournament-phase-card>span{font-size:11px}.tournament-highlight-block{padding:15px 13px}.tournament-progress-totals{font-size:10px}}
   </style>
   <link rel="stylesheet" href="./aot-pr.css">
+  <link rel="stylesheet" href="./calendar.css?v=20261103-1">
 </head>
 <body>
   <div class="layout">
@@ -829,6 +830,7 @@
         <button type="button" data-page="results" aria-label="遠征結果"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 4v16h16M7 15l5-5 4 3 4-7"/></svg><span>遠征結果</span></button>
         <button type="button" data-page="players" aria-label="プレイヤー名鑑"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="9" cy="8" r="3.2"/><path d="M2 21v-2c0-4 3-6 7-6s7 2 7 6v2M16 5a3 3 0 0 1 0 6M17 14c3 0 5 2 5 5v2"/></svg><span>プレイヤー名鑑</span></button>
         <button type="button" data-page="tournaments" aria-label="大会を探す"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M8 3h8v5a4 4 0 0 1-8 0V3ZM8 5H4v2c0 3 2 4 5 4M16 5h4v2c0 3-2 4-5 4M12 12v6M8 21h8M9 18h6v3"/></svg><span>大会を探す<small>TOURNAMENTS</small></span></button>
+        <button type="button" data-page="calendar" aria-label="大会カレンダー"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4M17 3v4M3 10h18M8 14h2M14 14h2M8 18h2"/></svg><span>大会カレンダー<small>CALENDAR</small></span></button>
         <button type="button" data-page="updates" aria-label="更新履歴"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 3v5h5M12 7v5l4 2"/></svg><span>更新履歴<small>UPDATES</small></span></button>
         <button type="button" data-page="about" aria-label="参照ソース"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7v.3"/></svg><span>参照ソース</span></button>
       </nav>
@@ -888,6 +890,7 @@
   <button id="ranking-more" class="btn sm ghost ranking-more" type="button" data-ranking-more hidden>さらに30名表示</button><p id="ranking-integrity" class="ranking-integrity" hidden></p>
   <p class="earnings-explainer" id="ranking-completeness">このランキングは、ASIA ON TOURに掲載されている海外大会戦績をもとに集計しています。未掲載の大会があるため、選手の実際の全成績とは異なる場合があります。公式ランキングではありません。</p>
 </section><div class="filterbar"><div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><input id="search-players" type="search" placeholder="プレイヤー名を検索" aria-label="プレイヤー名検索"></div><select id="player-sort" aria-label="プレイヤーの並び順"><option value="prize">獲得賞金が多い順</option><option value="name">選手名順</option><option value="events">戦績件数順</option></select></div><div class="players" id="all-players"></div></section>
+      <section class="section" id="page-calendar" aria-label="大会カレンダー"><div id="calendar-content"></div></section>
       <section class="section" id="page-tournaments"><div id="tournament-content"></div></section>
       <section class="section" id="page-tournament" aria-labelledby="tournament-title"><div id="tournament-detail-content"></div></section>
       <section class="section" id="page-profile" aria-labelledby="profile-title"><div id="profile-content"></div></section>
@@ -930,6 +933,6 @@
 
   <script src="./rankings.js" defer></script>
   <script src="./aot-pr.js" defer></script>
-  <script src="./app.js?v=archive-sort-extra-20261103-1" defer></script>
+  <script src="./app.js?v=calendar-20261103-1" defer></script>
 </body>
 </html>
