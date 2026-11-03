@@ -107,7 +107,7 @@ test('公開済みのスキン報酬とチームVRを正しい条件で計上す
 });
 
 
-test('特別称号は17種類から判定し、獲得済み・未獲得・レア度・出典を閲覧できる',async({page})=>{
+test('特別称号は18種類から判定し、獲得済み・未獲得・レア度・出典を閲覧できる',async({page})=>{
   const person=records.find(row=>row.verified===true&&(row.players||[row.player]).length===1)?.player||player;
   const expected=achievements.calculate(records,person,{catalog:data.tournaments.catalog}).special;
   await page.goto('/?season=all#player='+encodeURIComponent(person));
@@ -234,4 +234,28 @@ test('二刀流→三刀流→四刀流はソロからスクワッドまでの�
   const evidence=card.locator('[data-special-evidence-id]');
   await expect(evidence).toHaveCount(4);
   for(const format of ['ソロ','デュオ','トリオ','スクワッド'])await expect(card.locator('.special-format-proof').filter({hasText:format})).toHaveCount(1);
+});
+
+test('ソロ累計キル称号は一覧を開いて確認でき、デュオのチームキルは加算しない',async({page})=>{
+  const source=records.find(row=>row.verified===true&&roster(row).length===1&&/\\bsolo\\b/i.test(row.event));
+  expect(source,'ソロ戦績の基準').toBeTruthy();
+  const name=roster(source)[0];
+  const rows=[
+    {...source,id:'solo-cumulative-qual',player:name,players:[name],event:'Solo Victory Cup',kind:'予選',kills:25,verified:true},
+    {...source,id:'solo-cumulative-final',player:name,players:[name],event:'Solo Victory Cup',kind:'賞金決勝',kills:25,verified:true},
+    {...source,id:'duo-kills-excluded',player:name+' / Partner',players:[name,'Partner'],event:'Duos Cash Cup',kills:999,verified:true}
+  ];
+  await page.route('**/results.json',route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify(rows)}));
+  await page.goto('/?season=all#player='+encodeURIComponent(name));
+  await expect(page.locator('#profile-achievements .achievement-collection')).not.toHaveAttribute('open','');
+  await expandAchievements(page);
+  const card=page.locator('[data-special-id="solo-kill-mastery"][data-special-unlocked="true"]');
+  await expect(card).toBeVisible();
+  await expect(card.locator('h4')).toHaveText('孤高の狩人');
+  await expect(card).toHaveAttribute('data-special-growth-level','2');
+  await expect(card.locator('.special-evo-status strong')).toHaveText('50 / 100 K');
+  await card.locator('.special-achievement-proof summary').click();
+  await expect(card.locator('.special-kill-proof')).toHaveCount(2);
+  await expect(card.locator('.special-achievement-proof')).toContainText('ソロ 25K');
+  await expect(card.locator('.special-achievement-proof')).toContainText('根拠はキル上位3件');
 });
