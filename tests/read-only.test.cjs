@@ -273,7 +273,7 @@ function profileLinks(markup) {
 }
 function assertRows(app, expected) {
   assert.deepEqual(renderedRows(app), expected.map(key));
-  assert.equal(String(app.get('result-count').textContent), `${expected.length}件`);
+  assert.equal(String(app.get('result-count').textContent), `${expected.length.toLocaleString('ja-JP')}件`);
 }
 
 test('production archive pagination displays all records exactly once without disabling the 50-row limit', () => {
@@ -871,7 +871,7 @@ test('tournament catalog and detail routes retain all records once and separate 
   const catalog = tournamentCards(app);
   assert.equal(catalog.length, new Set(records.map(row => tournamentKey(row, data))).size);
   assert.equal(new Set(catalog.map(card => card.id)).size, catalog.length);
-  assert.equal(app.get('tournament-count').textContent, `${tournamentCards(app).length}大会 · ${records.length}戦績`);
+  assert.equal(app.get('tournament-count').textContent, `${tournamentCards(app).length.toLocaleString('ja-JP')}大会 · ${records.length.toLocaleString('ja-JP')}戦績`);
   const allIds = [];
   for (const card of catalog) {
     const direct = boot(script, { hash: `#tournament=${encodeURIComponent(card.id)}` });
@@ -1295,13 +1295,19 @@ test('season changes preserve navigation, browse filters, tournament facets and 
   assert.deepEqual(renderedArticles(app).map(row => row.id), ['past-duo']);
   app.navigate('tournaments');
   app.set('tournament-mode', 'unknown', 'change');
-  assert.equal(app.get('tournament-count').textContent, '2大会 · 3戦績');
+  // Newly registered historical tournaments can change the count of unknown
+  // fixtures; calculate the expected facet from the current source-backed catalog.
+  const unknownRows=seasonFixtures().filter(row=>
+    seasonFor(row,data)==='S41'&&(!tournamentFor(row,data)||tournamentFor(row,data).mode==='unknown'));
+  const unknownCount=new Set(unknownRows.map(row=>tournamentKey(row,data))).size;
+  const unknownLabel=`${unknownCount.toLocaleString('ja-JP')}大会 · ${unknownRows.length.toLocaleString('ja-JP')}戦績`;
+  assert.equal(app.get('tournament-count').textContent, unknownLabel);
   chooseSeason(app, 'S42');
   assert.equal(app.get('tournament-mode').value, 'unknown');
   assert.equal(app.get('tournament-count').textContent, '0大会 · 0戦績');
   app.browserBack();
   assert.equal(app.get('season-select').value, 'S41');
-  assert.equal(app.get('tournament-count').textContent, '2大会 · 3戦績');
+  assert.equal(app.get('tournament-count').textContent, unknownLabel);
   for (const card of tournamentCards(app)) {
     app.tournament(card.id);
     assert.ok(tournamentRecordIds(app).every(id => id.startsWith('past-')));
