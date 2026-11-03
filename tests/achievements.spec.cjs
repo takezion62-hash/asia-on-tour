@@ -9,6 +9,15 @@ const roster=row=>Array.isArray(row.players)&&row.players.length?row.players:[ro
 const sample=records.find(row=>row.verified===true&&roster(row).length===1)||records.find(row=>row.verified===true);
 const player=roster(sample)[0];
 
+test('称号のスクリプトとスタイルをテスト用サーバーが正しく配信する',async({request})=>{
+  const js=await request.get('/achievements.js');
+  const css=await request.get('/achievements.css');
+  expect(js.status()).toBe(200);
+  expect(css.status()).toBe(200);
+  expect(await js.text()).toContain('AsiaAchievements');
+  expect(await css.text()).toContain('achievement-section');
+});
+
 test('既存プロフィールで獲得済みと未獲得の称号、代表称号、進捗を表示する',async({page})=>{
   const errors=[];page.on('pageerror',error=>errors.push(error.message));
   await page.goto('/?season=all#player='+encodeURIComponent(player));
