@@ -109,3 +109,79 @@ test('real published archive remains immutable; roster-based calculation matches
   }
   assert.equal(JSON.stringify(records),snapshot,'no published result was changed');
 });
+
+
+test('six evolving badge tracks have five strictly increasing rank goals',()=>{
+  assert.equal(engine.VERSION,2);
+  assert.equal(engine.EVOLUTION_TRACKS.length,6);
+  assert.deepEqual(engine.EVOLUTION_TIERS.map(t=>t.id),['bronze','silver','gold','platinum','prismatic']);
+  assert.equal(new Set(engine.EVOLUTION_TRACKS.map(t=>t.id)).size,6);
+  for(const track of engine.EVOLUTION_TRACKS){
+    assert.equal(track.steps.length,5,track.id);
+    assert.ok(track.steps.every((step,i)=>step.goal>0&&(!i||step.goal>track.steps[i-1].goal)),track.id);
+    assert.deepEqual(track.steps.map(step=>step.tier),engine.EVOLUTION_TIERS.map(t=>t.id));
+  }
+});
+test('each badge evolves at exact milestones and shows progress only toward next tier',()=>{
+  for(const def of engine.EVOLUTION_TRACKS){
+    const original=def.steps.map(x=>x.goal);
+    for(let level=0;level<=5;level++){
+      const value=level===0?0:original[level-1];
+      const evolution=engine.calculateEvolution({[def.metric]:value});
+      const track=evolution.tracks.find(t=>t.id===def.id);
+      assert.equal(track.level,level,def.id+':'+value);
+      assert.equal(track.current?.tier||'locked',engine.EVOLUTION_TIERS[level-1]?.id||'locked');
+      assert.equal(track.next?.goal||null,original[level]||null);
+      assert.equal(track.remaining,level===5?0:original[level]-value);
+      assert.equal(track.percent,level===5?100:0);
+      if(level>0&&level<5&&original[level]-original[level-1]>1){
+        const nextValue=original[level-1]+1;
+        const updated=engine.calculateEvolution({[def.metric]:nextValue}).tracks.find(t=>t.id===def.id);
+        assert.equal(updated.level,level);
+        assert.ok(updated.percent>0&&updated.percent<=100);
+      }
+    }
+    const beyond=engine.calculateEvolution({[def.metric]:original[4]+500}).tracks.find(t=>t.id===def.id);
+    assert.equal(beyond.level,5);
+    assert.equal(beyond.completed,true);
+    assert.equal(beyond.percent,100);
+    assert.deepEqual(def.steps.map(x=>x.goal),original,'static milestone thresholds never mutate');
+  }
+});
+test('six-region traveler is prismatic, and highest reached tier selects the representative title',()=>{
+  const regions=engine.REGIONS.map((region,i)=>fixture('visited-'+i,{region}));
+  const progress=engine.calculate(regions,'Hero').evolution;
+  const region=progress.tracks.find(t=>t.id==='regions');
+  assert.equal(region.level,5);
+  assert.equal(region.current.title,'世界旅行者');
+  assert.equal(region.current.tier,'prismatic');
+  assert.equal(progress.featured.id,'regions');
+  assert.equal(progress.earnedStages,6);
+  assert.equal(progress.totalStages,30);
+});
+test('cash award milestones are dollar totals; team VR counts do not imply individual victories',()=>{
+  const earned=engine.calculate([
+    fixture('cash',{kind:'賞金決勝',prize:510,rank:21,vrs:0}),
+    fixture('team-vr',{kind:'賞金決勝',players:['Hero','Partner'],player:'Hero / Partner',prize:null,rank:50,vrs:5})
+  ],'Hero');
+  const cash=earned.evolution.tracks.find(t=>t.id==='earnings'),vr=earned.evolution.tracks.find(t=>t.id==='victories');
+  assert.equal(cash.level,2);
+  assert.equal(cash.value,510);
+  assert.equal(cash.next.goal,2000);
+  assert.equal(vr.level,2);
+  assert.equal(vr.current.title,'VRコレクター');
+  assert.equal(earned.metrics.paidEvents,1);
+});
+test('every real published player gets exactly six evolving tracks without modifying results',()=>{
+  const original=JSON.stringify(records);
+  const players=[...new Set(records.flatMap(row=>Array.isArray(row.players)&&row.players.length?row.players:[row.player]).filter(Boolean))];
+  for(const name of players){
+    const result=engine.calculate(records,name);
+    const progression=result.evolution;
+    assert.equal(progression.tracks.length,6,name);
+    assert.equal(progression.totalStages,30);
+    assert.equal(progression.earnedStages,progression.tracks.reduce((s,t)=>s+t.level,0),name);
+    assert.ok(progression.tracks.every(t=>t.level>=0&&t.level<=5&&t.percent>=0&&t.percent<=100),name);
+  }
+  assert.equal(JSON.stringify(records),original,'published results are read-only');
+});
