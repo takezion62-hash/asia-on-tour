@@ -112,7 +112,7 @@ test('real published archive remains immutable; roster-based calculation matches
 
 
 test('six evolving badge tracks have five strictly increasing rank goals',()=>{
-  assert.equal(engine.VERSION,3,'special achievement expansion ships engine v3');
+  assert.equal(engine.VERSION,4,'special achievement progression ships engine v4');
   assert.equal(engine.EVOLUTION_TRACKS.length,6);
   assert.deepEqual(engine.EVOLUTION_TIERS.map(t=>t.id),['bronze','silver','gold','platinum','prismatic']);
   assert.equal(new Set(engine.EVOLUTION_TRACKS.map(t=>t.id)).size,6);
@@ -254,7 +254,7 @@ test('cross-region cash and VR require 3 different supported overseas regions, n
 });
 test('solo and team payouts, explicit skin reward + cash, and VR + payout in same record unlock combinations',()=>{
   const solo=fixture('solo-paid',{kind:'賞金決勝',prize:200,vrs:0});
-  const team=fixture('duo-paid',{player:'Hero / Pair',players:['Hero','Pair'],kind:'賞金決勝',prize:400,prizePerPlayer:200,vrs:0});
+  const team=fixture('duo-paid',{player:'Hero / Pair',players:['Hero','Pair'],event:'Reload Duos Cash Cup',kind:'賞金決勝',prize:400,prizePerPlayer:200,vrs:0});
   const skin=fixture('rewarded',{kind:'スキン大会',prize:0,round:'Session 1 / スキン獲得'});
   const both=fixture('double',{kind:'賞金決勝',prize:150,vrs:1});
   assert.equal(special([solo],'solo-and-team-cash').progress,1);
@@ -290,7 +290,7 @@ test('new special titles for every published player are deterministic and read-o
     assert.equal(report.total,17);
     assert.equal(report.earned,report.unlocked.length,player);
     assert.equal(report.locked.length+report.earned,report.total,player);
-    assert.ok(report.achievements.every(a=>a.evidence.length<=3&&a.evidence.every(e=>e.id)),player);
+    assert.ok(report.achievements.every(a=>a.evidence.length<=(a.id==='solo-and-team-cash'?4:3)&&a.evidence.every(e=>e.id)),player);
     assert.deepEqual(report.achievements.map(a=>a.id),engine.calculateSpecial(records,player).achievements.map(a=>a.id));
   }
   assert.equal(JSON.stringify(records),before,'published results not mutated');
@@ -355,4 +355,87 @@ test('catalog-verified solo events without Solo in title are eligible while ambi
   assert.equal(badge.unlocked,true);
   assert.equal(badge.evidence[0].killFormat,'solo');
   assert.equal(engine.calculateSpecial([row],'Hero',{catalog:[...catalog,{...catalog[0],team:'duo'}]}).unlocked.some(x=>x.id==='twenty-kills'),false);
+});
+
+
+test('regional specialist titles evolve cumulatively through 5/10/20/40/80 records without duplicate badge IDs',()=>{
+  assert.deepEqual(engine.SPECIALIST_GOALS,[5,10,20,40,80]);
+  for(const region of engine.REGIONS){
+    for(const count of [0,4,5,9,10,19,20,39,40,79,80,105]){
+      const rows=Array.from({length:count},(_,i)=>fixture(region+'-'+i,{region}));
+      const badge=special(rows,'specialist-'+region.toLowerCase());
+      const goals=[5,10,20,40,80];
+      const level=goals.filter(g=>count>=g).length;
+      const currentTitle=level===0?region+'スペシャリスト':region+(level===5?'の覇者':engine.SPECIALIST_NAMES[level-1]);
+      assert.equal(badge.title,currentTitle,region+' '+count);
+      assert.equal(badge.progress,count);
+      assert.equal(badge.unlocked,level>0);
+      assert.equal(badge.growth.level,level);
+      assert.equal(badge.growth.stages.length,5);
+      assert.equal(badge.growth.next?.goal||null,goals[level]||null);
+      assert.equal(badge.goal,goals[level]||80);
+      assert.equal(badge.rarity,level===5?'legendary':level===3||level===4?'epic':'rare');
+      assert.equal(badge.growth.remaining,level===5?0:goals[level]-count);
+      assert.ok(badge.growth.percent>=0&&badge.growth.percent<=100);
+      assert.equal(badge.growth.maxed,level===5);
+    }
+  }
+});
+test('cash format specialty evolves 二刀流→三刀流→四刀流 for solo/duo/trio/squad winnings',()=>{
+  const cases=[
+    fixture('solo-paid',{event:'Solo Victory Cup Battle Royale',kind:'賞金決勝',prize:100}),
+    fixture('duo-paid',{event:'Reload Duos Cash Cup',player:'Hero / Pair',players:['Hero','Pair'],kind:'賞金決勝',prize:400,prizePerPlayer:200}),
+    fixture('trio-paid',{event:'Trios Cash Cup',player:'Hero / Pair / Third',players:['Hero','Pair','Third'],kind:'賞金決勝',prize:600,prizePerPlayer:200}),
+    fixture('squad-paid',{event:'Squads Victory Cup Battle Royale',player:'Hero / Pair / Third / Fourth',players:['Hero','Pair','Third','Fourth'],kind:'賞金決勝',prize:800,prizePerPlayer:200})
+  ];
+  assert.deepEqual(cases.map(e=>engine.confirmedPrizeFormat(e)),['solo','duo','trio','squad']);
+  assert.deepEqual(engine.WEAPON_MILESTONES.map(x=>x.title),['二刀流','三刀流','四刀流']);
+  assert.deepEqual(engine.TEAM_FORMATS,['solo','duo','trio','squad']);
+  for(let n=0;n<=4;n++){
+    const badge=special(cases.slice(0,n),'solo-and-team-cash');
+    assert.equal(badge.progress,n);
+    assert.equal(badge.growth.level,Math.max(0,n-1));
+    assert.equal(badge.unlocked,n>=2);
+    assert.equal(badge.title,n===4?'四刀流':n===3?'三刀流':'二刀流');
+    assert.equal(badge.rarity,n===4?'legendary':'epic');
+    assert.equal(badge.growth.next?.goal||null,n===4?null:Math.max(2,n+1));
+    assert.equal(badge.evidence.length,n);
+  }
+  const four=engine.calculateSpecial(cases,'Hero').achievements.find(x=>x.id==='solo-and-team-cash');
+  assert.equal(four.growth.maxed,true);
+  assert.equal(four.growth.percent,100);
+  assert.deepEqual(four.evidence.map(e=>e.teamFormat),engine.TEAM_FORMATS);
+  assert.equal(engine.calculateSpecial(cases,'Pair').achievements.find(x=>x.id==='solo-and-team-cash').progress,3);
+});
+test('two distinct cash-winning team formats count as 二刀流 even without solo, but repeated one format counts once',()=>{
+  const duo=fixture('duo-only',{event:'Duos Cash Cup',player:'Hero / Pair',players:['Hero','Pair'],kind:'賞金決勝',prize:200,prizePerPlayer:100});
+  const trio=fixture('trio-only',{event:'Trios Cash Cup',player:'Hero / Pair / Third',players:['Hero','Pair','Third'],kind:'賞金決勝',prize:300,prizePerPlayer:100});
+  const duplicate={...duo,id:'duo-repeated'};
+  const single=special([duo,duplicate],'solo-and-team-cash');
+  assert.equal(single.progress,1);
+  assert.equal(single.unlocked,false);
+  const twin=special([duo,duplicate,trio],'solo-and-team-cash');
+  assert.equal(twin.progress,2);
+  assert.equal(twin.unlocked,true);
+  assert.equal(twin.title,'二刀流');
+  assert.equal(twin.evidence.length,2);
+});
+test('cash format progression requires verified personal payout, matching season and complete rosters',()=>{
+  const solos=fixture('solo',{event:'Solo Cash Cup',kind:'賞金決勝',prize:100});
+  const paidUnknown=fixture('unknown',{event:'Ambiguous Cup',kind:'賞金決勝',prize:100});
+  const unverified=fixture('unverified',{event:'Solo Victory Cup',verified:false,kind:'賞金決勝',prize:100});
+  const noShare=fixture('duo-no-share',{event:'Duos Cup',player:'Hero / Pair',players:['Hero','Pair'],kind:'賞金決勝',prize:400});
+  const notPaid=fixture('duo-skin',{event:'Duos Skin Cup',player:'Hero / Pair',players:['Hero','Pair'],kind:'スキン大会',prize:200,prizePerPlayer:100});
+  const duplicate=fixture('duo-dup',{event:'Duos Cup',player:'Hero / Hero',players:['Hero','Hero'],kind:'賞金決勝',prize:400,prizePerPlayer:200});
+  const contradict=fixture('squad-known-as-duo',{event:'Known Duos Cup',player:'Hero / Pair / Third / Fourth',players:['Hero','Pair','Third','Fourth'],kind:'賞金決勝',prize:400,prizePerPlayer:100});
+  assert.equal(engine.confirmedPrizeFormat(paidUnknown),null);
+  assert.equal(engine.confirmedPrizeFormat(contradict,[{name:'Known Duos Cup',team:'duo'}]),null);
+  const badge=engine.calculateSpecial([solos,paidUnknown,unverified,noShare,notPaid,duplicate,contradict],'Hero',{catalog:[{name:'Known Duos Cup',team:'duo'}]}).achievements.find(b=>b.id==='solo-and-team-cash');
+  assert.equal(badge.progress,1);
+  assert.equal(badge.unlocked,false);
+  assert.deepEqual(badge.evidence.map(e=>e.id),['solo']);
+  const override=fixture('verified-by-catalog',{event:'Persona 5 Royal Cup Reload',kind:'賞金決勝',prize:100,seasonId:'S42'});
+  assert.equal(engine.confirmedPrizeFormat(override),null);
+  assert.equal(engine.confirmedPrizeFormat(override,[{name:override.event,team:'solo',seasonId:'S42'}]),'solo');
+  assert.equal(engine.confirmedPrizeFormat(override,[{name:override.event,team:'solo',seasonId:'S41'}]),null);
 });
