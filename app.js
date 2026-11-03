@@ -868,23 +868,39 @@
           +'<details class="evo-level-details"><summary>ランクの達成条件を見る</summary><ol>'+steps+'</ol></details></article>';
       }).join('');
       const specials=data.special;
+      const specialGrowthMarkup=badge=>{
+        if(!badge.growth)return '';
+        const progress=badge.growth;
+        const tierName=badge.region&&progress.level?AsiaAchievements.EVOLUTION_TIERS[progress.level-1]?.display:'';
+        return '<div class="special-evolution" data-special-growth="'+escape(badge.id)+'" data-special-growth-level="'+progress.level+'">'
+          +'<div class="special-evo-status"><span>'+escape(tierName||'達成段階')+'</span>'
+          +'<strong>'+format(badge.progress)+' / '+format(badge.goal)+' '+escape(badge.unit)+'</strong></div>'
+          +'<div class="special-evo-meter" role="progressbar" aria-label="'+escape(badge.title)+'の次ランクへの進捗" aria-valuemin="0" aria-valuemax="100" aria-valuenow="'+progress.percent+'">'
+          +'<span style="width:'+progress.percent+'%"></span></div>'
+          +'<p class="special-evo-next">'+(progress.next?'次の「'+escape(progress.next.title)+'」まで <strong>あと '+format(progress.remaining)+' '+escape(badge.unit)+'</strong>':'最高ランク達成！ 👑')+'</p>'
+          +'<div class="special-evo-stages" aria-label="ランク達成条件">'
+          +progress.stages.map((stage,i)=>'<span class="'+(i<progress.level?'is-earned':'')+'" title="'+escape(stage.title+'：'+format(stage.goal)+badge.unit)+'">'+escape(stage.title)+'</span>').join('')+'</div>'
+          +'</div>';
+      };
       const earnedSpecial=specials.unlocked.map(badge=>{
         const support=badge.evidence.map(row=>
           '<li data-special-evidence-id="'+escape(row.id)+'"><span>'+escape(row.date)+' · '+escape(row.region)+'</span> '+escape(row.event)
-          +' <small>('+escape(row.kind)+')</small>'+(row.killThreshold?'<small class="special-kill-proof"> · '+escape(({solo:'ソロ',duo:'デュオ',trio:'トリオ'})[row.killFormat]||'形式未確認')+' '+format(row.kills)+'K / 基準'+format(row.killThreshold)+'K</small>':'')+'</li>'
+          +' <small>('+escape(row.kind)+')</small>'+(row.teamFormat?'<small class="special-format-proof"> · '+escape(AsiaAchievements.TEAM_FORMAT_LABELS[row.teamFormat]||row.teamFormat)+'</small>':'')+(row.killThreshold?'<small class="special-kill-proof"> · '+escape(({solo:'ソロ',duo:'デュオ',trio:'トリオ'})[row.killFormat]||'形式未確認')+' '+format(row.kills)+'K / 基準'+format(row.killThreshold)+'K</small>':'')+'</li>'
         ).join('');
-        return '<article class="special-achievement" data-special-id="'+escape(badge.id)+'" data-special-rarity="'+escape(badge.rarity)+'" data-special-unlocked="true">'
+        return '<article class="special-achievement" data-special-id="'+escape(badge.id)+'" data-special-rarity="'+escape(badge.rarity)+'" data-special-growth-level="'+(badge.growth?.level||0)+'" data-special-evolution-tier="'+escape(badge.region&&badge.growth?.level?AsiaAchievements.EVOLUTION_TIERS[badge.growth.level-1].id:'none')+'" data-special-unlocked="true">'
           +'<div class="special-achievement-top"><span class="special-achievement-icon" aria-hidden="true">'+escape(badge.icon)+'</span>'
           +'<div class="special-achievement-ident"><span class="special-achievement-rarity">'+escape(badge.rarityLabel)+'</span>'
           +'<h4>'+escape(badge.title)+'</h4></div></div><p>'+escape(badge.description)+'</p>'
+          +specialGrowthMarkup(badge)
           +'<details class="special-achievement-proof"><summary>達成した記録を見る</summary><ul>'+support+'</ul>'
           +'<small>掲載済み戦績から抽出 · '+format(badge.progress)+' / '+format(badge.goal)+' '+escape(badge.unit)+'</small></details></article>';
       }).join('');
       const missingSpecial=specials.locked.map(badge=>
-        '<li class="special-locked-item" data-special-id="'+escape(badge.id)+'" data-special-rarity="'+escape(badge.rarity)+'" data-special-unlocked="false">'
+        '<li class="special-locked-item" data-special-id="'+escape(badge.id)+'" data-special-rarity="'+escape(badge.rarity)+'" data-special-growth-level="'+(badge.growth?.level||0)+'" data-special-unlocked="false">'
         +'<span class="special-locked-icon" aria-hidden="true">'+escape(badge.icon)+'</span><div>'
         +'<strong>'+escape(badge.title)+'</strong><span class="special-locked-rarity">'+escape(badge.rarityLabel)+'</span>'
         +'<p>'+escape(badge.description)+'</p><small>'+format(Math.min(badge.progress,badge.goal))+' / '+format(badge.goal)+' '+escape(badge.unit)+'</small>'
+        +(badge.growth?specialGrowthMarkup(badge):'')
         +'</div></li>'
       ).join('');
       return '<section class="achievement-section" id="profile-achievements" aria-labelledby="achievement-title">'
@@ -912,7 +928,7 @@
         +(missingSpecial?'<details class="special-locked-details"><summary>未獲得の特別称号 '+format(specials.locked.length)+'種類と達成条件を見る</summary>'
         +'<ul class="special-locked-list">'+missingSpecial+'</ul></details>':'')
         +'</section>'
-        +'<p class="achievement-note">※ ASIA ON TOUR独自の非公式実績です。掲載された確認済み戦績のみで判定し、未確認や推測した別名義は加算しません。賞金は確認済みの個人現金受取額のみ。0・1キル称号はKILLSの数値が明記された場合だけです。KILLSとVRはチーム戦ではチーム合計、複数試合の大会戦績ではセッション合計であり、個人または1試合単位の達成とは限りません。スキンは獲得が明記された記録のみ。レア度はサイト独自の分類です。シーズンを変えても全期間の実績が維持されます。</p></section>';
+        +'<p class="achievement-note">※ ASIA ON TOUR独自の非公式実績です。掲載された確認済み戦績のみで判定し、未確認や推測した別名義は加算しません。賞金は確認済みの個人現金受取額のみ。0・1キル称号はKILLSの数値が明記された場合だけです。KILLSとVRはチーム戦ではチーム合計、複数試合の大会戦績ではセッション合計であり、個人または1試合単位の達成とは限りません。スキンは獲得が明記された記録のみ。レア度はサイト独自の分類です。地域別スペシャリストと二刀流・三刀流・四刀流は全期間の掲載数／確認済み賞金獲得形式から自動進化します。大会編成が不明な成績は形式数に含めません。シーズンを変えても全期間の実績が維持されます。</p></section>';
     }
 
     function renderProfile(name){
