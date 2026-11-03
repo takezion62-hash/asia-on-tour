@@ -7,7 +7,28 @@ const data = loadData(path.join(__dirname, '..')).data;
 const rows = data.results;
 const money = value => '$' + value.toLocaleString('ja-JP');
 const totalFor = name => rows.filter(row => roster(row).includes(name)).reduce((sum, row) => sum + personalCents(row), 0) / 100;
-const resultIDs = page => page.locator('#page-results [data-result-id]').evaluateAll(elements => elements.map(e => e.dataset.resultId));
+// Collect every page through the real browser event handler, not just page 1.
+const resultIDs = page => page.evaluate(() => {
+  const total=Number(document.querySelector('#result-count').textContent.replace(/[^0-9]/g,''));
+  const perPage=50;
+  const pages=Math.max(1,Math.ceil(total/perPage));
+  const ids=[];
+  for(let pageNumber=1;pageNumber<=pages;pageNumber++){
+    if(pageNumber>1){
+      const button=document.querySelector('#result-pagination-top [data-archive-page="'+pageNumber+'"]');
+      if(!button)throw new Error('Pagination button missing for page '+pageNumber);
+      button.click();
+    }
+    const pageIds=[...document.querySelectorAll('#result-table .archive-row[data-result-id]')].map(row=>row.dataset.resultId);
+    const expectedLength=Math.min(perPage,Math.max(0,total-(pageNumber-1)*perPage));
+    if(pageIds.length!==expectedLength)throw new Error('Unexpected archive page size on page '+pageNumber+': '+pageIds.length+'/'+expectedLength);
+    ids.push(...pageIds);
+  }
+  const first=document.querySelector('#result-pagination-top [data-archive-page="1"]');
+  if(first)first.click();
+  if(ids.length!==total||new Set(ids).size!==total)throw new Error('Incomplete or duplicate archive results: '+ids.length+'/'+total);
+  return ids;
+});
 const historyIDs = page => page.locator('#page-profile .profile-history-row').evaluateAll(elements => elements.map(e => e.dataset.resultId));
 
 test.beforeAll(() => expect(validateData(data).errors, 'ブラウザーテストの前提となるJSON検証').toEqual([]));
@@ -110,7 +131,7 @@ test('大会タグ検索・大会URL・期間切り替えをデータから照�
 
 test('主要画面で横はみ出しと閲覧者向け編集機能の復活がない', async ({ page }) => {
   test.slow(); // Render all data-heavy views before checking layout and read-only controls.
-  for (const button of ['ダッシュボード', '遠征結果', 'プレイヤー名鑑', '大会を探す', '参照ソース']) {
+  for (const button of ['ダッシュボード', '遠征結果', 'プレイヤー名鑑', '大会を探す', '大会カレンダー', '参照ソース']) {
     await page.getByRole('button', { name: button, exact: true }).click();
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1), button + 'の横はみ出し').toBe(true);
     await expect(page.locator('input[type="file"], form, [contenteditable="true"], [data-add], [data-delete]')).toHaveCount(0);
