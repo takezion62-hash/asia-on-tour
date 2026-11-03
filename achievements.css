@@ -37,3 +37,6 @@
 .achievement-empty{font-size:12px;line-height:1.8;color:#acbbd4;padding:10px 0}
 @media(max-width:1100px){.achievement-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:640px){.achievement-section{padding:17px 13px;border-radius:15px}.achievement-heading h2{font-size:18px}.achievement-featured{padding:13px 12px;gap:11px}.achievement-featured-icon{min-width:44px;width:44px;height:44px;font-size:27px}.achievement-featured strong{font-size:18px}.achievement-grid{grid-template-columns:1fr}.achievement-card{padding:12px}.achievement-locked-list{grid-template-columns:1fr}.achievement-progress{gap:7px}}
+
+.player-achievement-preview{display:inline-flex;align-items:center;gap:5px;flex-wrap:wrap;max-width:100%;border:1px solid #685b8d;border-radius:9px;background:#372b4e55;color:#dfccff;font-size:11px;font-weight:850;padding:6px 10px;margin:12px 0 0;overflow-wrap:anywhere}
+.player-achievement-preview small{color:#9eb4c9;font-size:10px;font-weight:750}
