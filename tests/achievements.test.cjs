@@ -112,7 +112,7 @@ test('real published archive remains immutable; roster-based calculation matches
 
 
 test('six evolving badge tracks have five strictly increasing rank goals',()=>{
-  assert.equal(engine.VERSION,4,'special achievement progression ships engine v4');
+  assert.equal(engine.VERSION,5,'solo cumulative kill title ships engine v5');
   assert.equal(engine.EVOLUTION_TRACKS.length,6);
   assert.deepEqual(engine.EVOLUTION_TIERS.map(t=>t.id),['bronze','silver','gold','platinum','prismatic']);
   assert.equal(new Set(engine.EVOLUTION_TRACKS.map(t=>t.id)).size,6);
@@ -188,9 +188,9 @@ test('every real published player gets exactly six evolving tracks without modif
 
 
 const special=(rows,id,name='Hero')=>engine.calculateSpecial(rows,name).achievements.find(badge=>badge.id===id);
-test('special title catalog includes all ten rare records plus existing top-ten and six regional specialists',()=>{
-  assert.equal(engine.SPECIAL_CATALOG.length,17);
-  assert.equal(new Set(engine.SPECIAL_CATALOG.map(def=>def.id)).size,17);
+test('special title catalog includes solo cumulative KILLS and existing titles',()=>{
+  assert.equal(engine.SPECIAL_CATALOG.length,18);
+  assert.equal(new Set(engine.SPECIAL_CATALOG.map(def=>def.id)).size,18);
   for(const def of engine.SPECIAL_CATALOG){
     assert.ok(['rare','epic','legendary'].includes(def.rarity),def.id);
     assert.ok(def.goal>=1&&def.description&&def.title&&def.icon,def.id);
@@ -275,7 +275,7 @@ test('legacy top ten and region specialist survive; report does not mutate evide
   ];
   const before=JSON.stringify(rows);
   const report=engine.calculateSpecial(rows,'Hero');
-  assert.equal(report.total,17);
+  assert.equal(report.total,18);
   assert.equal(report.unlocked.length,2);
   assert.equal(special(rows,'top-ten').unlocked,true);
   assert.equal(special(rows,'specialist-me').unlocked,true);
@@ -287,7 +287,7 @@ test('new special titles for every published player are deterministic and read-o
   const players=[...new Set(records.flatMap(row=>Array.isArray(row.players)&&row.players.length?row.players:[row.player]).filter(Boolean))];
   for(const player of players){
     const report=engine.calculate(records,player).special;
-    assert.equal(report.total,17);
+    assert.equal(report.total,18);
     assert.equal(report.earned,report.unlocked.length,player);
     assert.equal(report.locked.length+report.earned,report.total,player);
     assert.ok(report.achievements.every(a=>a.evidence.length<=(a.id==='solo-and-team-cash'?4:3)&&a.evidence.every(e=>e.id)),player);
@@ -438,4 +438,55 @@ test('cash format progression requires verified personal payout, matching season
   assert.equal(engine.confirmedPrizeFormat(override),null);
   assert.equal(engine.confirmedPrizeFormat(override,[{name:override.event,team:'solo',seasonId:'S42'}]),'solo');
   assert.equal(engine.confirmedPrizeFormat(override,[{name:override.event,team:'solo',seasonId:'S41'}]),null);
+});
+
+test('solo-only cumulative eliminations unlock five escalating titles using verified session KILLS',()=>{
+  const goals=engine.SOLO_KILL_MILESTONES.map(stage=>stage.goal);
+  assert.deepEqual(goals,[20,50,100,200,300]);
+  assert.deepEqual(engine.SOLO_KILL_MILESTONES.map(stage=>stage.title),
+    ['孤独な追跡者','孤高の狩人','戦場の死神','百戦の支配者','孤高の覇王']);
+  for(const goal of [0,19,20,49,50,99,100,199,200,299,300,401]){
+    const row=fixture('solo-'+goal,{kills:goal});
+    const badge=special([row],'solo-kill-mastery');
+    const level=goals.filter(value=>goal>=value).length;
+    assert.equal(badge.progress,goal);
+    assert.equal(badge.unlocked,level>0);
+    assert.equal(badge.growth.level,level);
+    assert.equal(badge.title,level?engine.SOLO_KILL_MILESTONES[level-1].title:'孤独な追跡者');
+    assert.equal(badge.rarity,level===5?'legendary':level>=3?'epic':'rare');
+    assert.equal(badge.goal,goals[level]||300);
+    assert.equal(badge.growth.remaining,goals[level]?goals[level]-goal:0);
+    assert.equal(badge.growth.maxed,level===5);
+  }
+});
+test('solo KILLS sum qualifying and final sessions, never teams, missing kills, unknown formats, or duplicate IDs',()=>{
+  const allowed=[
+    fixture('solo-qual',{event:'Solo Victory Cup Battle Royale',kills:14,kind:'予選'}),
+    fixture('solo-final',{event:'Solo Victory Cup Battle Royale',kills:13,kind:'賞金決勝'}),
+    fixture('catalog-solo',{event:'Persona Reload Cup',kills:25,kind:'スキン大会',seasonId:'S42'})
+  ];
+  const denied=[
+    fixture('team-duo',{event:'Duos Cash Cup',player:'Hero / Pair',players:['Hero','Pair'],kills:999}),
+    fixture('team-trio',{event:'Trios Cash Cup',player:'Hero / Pair / Third',players:['Hero','Pair','Third'],kills:999}),
+    fixture('solo-unverified',{event:'Solo Victory Cup',kills:999,verified:false}),
+    fixture('unknown-format',{event:'No Format Cup',kills:999}),
+    fixture('no-kills',{event:'Solo Victory Cup',kills:null}),
+    fixture('negative-kills',{event:'Solo Victory Cup',kills:-5}),
+    fixture('noninteger-kills',{event:'Solo Victory Cup',kills:9.5}),
+    fixture('conflicting-catalog',{event:'Registered Duos Cup',kills:999}),
+    {...allowed[0]}
+  ];
+  const catalog=[{name:'Persona Reload Cup',team:'solo',seasonId:'S42'},{name:'Registered Duos Cup',team:'duo'}];
+  const report=engine.calculateSpecial([...allowed,...denied],'Hero',{catalog});
+  const badge=report.achievements.find(item=>item.id==='solo-kill-mastery');
+  assert.equal(badge.progress,52);
+  assert.equal(badge.title,'孤高の狩人');
+  assert.equal(badge.growth.level,2);
+  assert.equal(badge.goal,100);
+  assert.deepEqual(badge.evidence.map(e=>e.kills),[25,14,13]);
+  assert.ok(badge.evidence.every(row=>row.killFormat==='solo'));
+  assert.equal(report.achievements.find(item=>item.id==='twenty-kills').unlocked,false);
+  const nonmember=engine.calculateSpecial([...allowed,...denied],'Pair',{catalog}).achievements.find(item=>item.id==='solo-kill-mastery');
+  assert.equal(nonmember.progress,0);
+  assert.equal(nonmember.unlocked,false);
 });
