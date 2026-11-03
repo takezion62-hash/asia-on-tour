@@ -915,6 +915,13 @@
         +'<div class="achievement-progress"><span>獲得したランク</span><div class="achievement-progress-track" aria-hidden="true">'
         +'<span style="width:'+(evolution.totalStages?Math.round(evolution.earnedStages/evolution.totalStages*100):0)+'%"></span></div>'
         +'<strong data-achievement-count>'+format(evolution.earnedStages)+' / '+format(evolution.totalStages)+'</strong></div>'
+        +'<details class="achievement-collection" data-achievement-collection>'
+        +'<summary class="achievement-toggle" role="button"><span class="achievement-toggle-mark" aria-hidden="true">✦</span>'
+        +'<span class="achievement-toggle-copy"><strong class="achievement-label-closed">すべての称号を見る</strong>'
+        +'<strong class="achievement-label-open">称号を折りたたむ</strong>'
+        +'<small>進化バッジ6系統 · 特別称号 '+format(specials.earned)+' / '+format(specials.total)+' 獲得</small></span>'
+        +'<span class="achievement-toggle-chevron" aria-hidden="true">⌄</span></summary>'
+        +'<div class="achievement-collection-body">'
         +'<div class="evo-grid" aria-label="進化バッジ一覧">'+tracks+'</div>'
         +'<section class="evo-special" id="profile-special-achievements" aria-labelledby="special-achievements-title">'
         +'<div class="special-header"><div><span class="achievement-eyebrow">SPECIAL ACHIEVEMENTS</span>'
@@ -928,7 +935,7 @@
         +(missingSpecial?'<details class="special-locked-details"><summary>未獲得の特別称号 '+format(specials.locked.length)+'種類と達成条件を見る</summary>'
         +'<ul class="special-locked-list">'+missingSpecial+'</ul></details>':'')
         +'</section>'
-        +'<p class="achievement-note">※ ASIA ON TOUR独自の非公式実績です。掲載された確認済み戦績のみで判定し、未確認や推測した別名義は加算しません。賞金は確認済みの個人現金受取額のみ。0・1キル称号はKILLSの数値が明記された場合だけです。KILLSとVRはチーム戦ではチーム合計、複数試合の大会戦績ではセッション合計であり、個人または1試合単位の達成とは限りません。スキンは獲得が明記された記録のみ。レア度はサイト独自の分類です。地域別スペシャリストと二刀流・三刀流・四刀流は全期間の掲載数／確認済み賞金獲得形式から自動進化します。大会編成が不明な成績は形式数に含めません。シーズンを変えても全期間の実績が維持されます。</p></section>';
+        +'<p class="achievement-note">※ ASIA ON TOUR独自の非公式実績です。掲載された確認済み戦績のみで判定し、未確認や推測した別名義は加算しません。賞金は確認済みの個人現金受取額のみ。0・1キル称号はKILLSの数値が明記された場合だけです。KILLSとVRはチーム戦ではチーム合計、複数試合の大会戦績ではセッション合計であり、個人または1試合単位の達成とは限りません。スキンは獲得が明記された記録のみ。レア度はサイト独自の分類です。地域別スペシャリストと二刀流・三刀流・四刀流は全期間の掲載数／確認済み賞金獲得形式から自動進化します。大会編成が不明な成績は形式数に含めません。シーズンを変えても全期間の実績が維持されます。</p></div></details></section>';
     }
 
     function renderProfile(name){
