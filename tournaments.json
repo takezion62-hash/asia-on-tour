@@ -35,6 +35,10 @@
         {
           "id": "skin-cup",
           "label": "スキン大会"
+        },
+        {
+          "id": "unreal-cup",
+          "label": "Unreal Cup"
         }
       ]
     },
@@ -191,6 +195,10 @@
         {
           "id": "squads-victory-cup",
           "label": "Squads Victory Cup"
+        },
+        {
+          "id": "one-million-unreal-cup",
+          "label": "$1 Million Unreal Cup"
         }
       ]
     },
@@ -1110,6 +1118,32 @@
         {
           "text": "S30 Squads Victory Cup Event3 Round2大会",
           "url": "https://fortnitetracker.com/events/epicgames_S30_SquadsVictoryCashCup_NAC?window=S30_SquadsVictoryCashCup_Event3Round2_NAC"
+        }
+      ]
+    },
+    {
+      "id": "ch7s1-one-million-unreal-cup",
+      "name": "$1 Million Unreal Cup",
+      "chapter": 7,
+      "season": 1,
+      "seasonId": "S39",
+      "sourceEventIds": [
+        "S39_1MillionUnrealCup"
+      ],
+      "series": "unreal-cup",
+      "mode": "battle-royale",
+      "subtype": "one-million-unreal-cup",
+      "team": "duo",
+      "platform": "cross-platform",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "Epic公式：Chapter 7 Season 1の$1 Million Unreal Cupはデュオ通常BRの賞金大会。",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/1-million-dollar-unreal-cup-chapter-7-season-1-official-rules"
+        },
+        {
+          "text": "NAW順位表。ユーザー提供画像から2025/12/21の6組の順位・賞金・キル・VRを確認。",
+          "url": "https://fortnitetracker.com/events/epicgames_S39_1MillionUnrealCup_NAW?window=S39_1MillionUnrealCup_NAW"
         }
       ]
     }
