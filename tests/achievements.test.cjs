@@ -112,7 +112,7 @@ test('real published archive remains immutable; roster-based calculation matches
 
 
 test('six evolving badge tracks have five strictly increasing rank goals',()=>{
-  assert.equal(engine.VERSION,2);
+  assert.equal(engine.VERSION,3,'special achievement expansion ships engine v3');
   assert.equal(engine.EVOLUTION_TRACKS.length,6);
   assert.deepEqual(engine.EVOLUTION_TIERS.map(t=>t.id),['bronze','silver','gold','platinum','prismatic']);
   assert.equal(new Set(engine.EVOLUTION_TRACKS.map(t=>t.id)).size,6);
