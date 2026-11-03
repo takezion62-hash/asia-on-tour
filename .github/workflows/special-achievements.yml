@@ -1,0 +1,45 @@
+name: Special achievements regression tests
+on:
+  push:
+    branches: [main]
+    paths:
+      - achievements.js
+      - achievements.css
+      - app.js
+      - index.html
+      - tests/achievements.test.cjs
+      - tests/achievements.spec.cjs
+      - .github/workflows/special-achievements.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  achievements:
+    name: Achievements logic and PC/mobile UI
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Install test dependencies
+        run: npm ci --ignore-scripts
+      - name: Verify achievement thresholds and archive-derived titles
+        run: node --test tests/achievements.test.cjs
+      - name: Install Chromium for profile checks
+        run: npx playwright install --with-deps chromium
+      - name: Verify PC/mobile special titles
+        run: npx playwright test tests/achievements.spec.cjs
+      - name: Save failure details
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: special-achievements-test-report
+          path: |
+            playwright-report/
+            test-results/
+          if-no-files-found: ignore
