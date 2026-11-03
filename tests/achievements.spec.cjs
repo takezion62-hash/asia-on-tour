@@ -34,6 +34,18 @@ test('既存プロフィールで獲得済みと未獲得の称号、代表称�
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth+1)).toBe(true);
 });
 
+test('選手名鑑の称号プレビューから本人プロフィールへ移動できる',async({page})=>{
+  await page.goto('/?season=all#players');
+  const card=page.locator('#all-players [data-open-profile]').filter({has:page.locator('[data-player-achievement]')}).first();
+  await expect(card).toBeVisible();
+  const name=await card.getAttribute('data-open-profile');
+  const expected=achievements.calculate(records,name);
+  await expect(card.locator('[data-player-achievement]')).toHaveAttribute('data-player-achievement',expected.title?.id||'none');
+  await card.click();
+  await expect(page.locator('#profile-title')).toHaveText(name);
+  await expect(page.locator('[data-achievement-title]')).toHaveText(expected.title?.title||'挑戦中');
+});
+
 test('確認されていない結果だけでは称号は獲得できず、空の状態も案内する',async({page})=>{
   const onlyOne={...sample,id:'achievements-unverified-test',verified:false,reported:true,vrs:15,prize:99999,kind:'賞金決勝',rank:1};
   await page.route('**/results.json',route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify([onlyOne])}));
