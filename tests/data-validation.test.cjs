@@ -69,7 +69,8 @@ test('2026/9/14 ME Solo Victory Cup qualifiers and hero name merge preserve hist
   assert.ok(!current.players.candidates.some(p=>p.name==='REBEL 英雄のヒーロー 轟'));
   assert.ok(current.players.confirmedAliases['ヒーロー'].includes('REBEL 英雄のヒーロー 轟'));
   const angel=current.results.filter(r=>r.player==='angelwing');
-  assert.equal(angel.length,3);
+  assert.ok(angel.length>=3,'過去のangelwing戦績3件を保持し、新規登録も認める');
+  assert.equal(new Set(angel.map(r=>r.id)).size,angel.length,'angelwingの結果ID重複を検知する');
   assert.ok(current.players.candidates.some(c=>c.name==='angelwing'));
   assert.ok(!current.players.candidates.some(c=>c.name==='Starbucks Lоvers'));
   assert.ok(current.players.confirmedAliases.angelwing.includes('Starbucks Lоvers'));
