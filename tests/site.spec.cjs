@@ -139,6 +139,45 @@ test('主要画面で横はみ出しと閲覧者向け編集機能の復活が�
   }
 });
 
+test('低いPC・タブレット画面ではメニューだけが縦スクロールし、参照ソースまで到達できる', async ({ page }) => {
+  for(const {width,height} of [{width:1440,height:520},{width:800,height:325}]){
+    await page.setViewportSize({width,height});
+    const nav=page.locator('.sidebar .nav');
+    const before=await nav.evaluate(element=>{
+      const brand=document.querySelector('.sidebar .brand').getBoundingClientRect();
+      return {
+        overflow:getComputedStyle(element).overflowY,
+        scrollHeight:element.scrollHeight,
+        clientHeight:element.clientHeight,
+        brandTop:brand.top,
+        brandVisible:brand.bottom>0
+      };
+    });
+    expect(before.overflow,'PC/タブレットではメニュー内スクロール').toBe('auto');
+    expect(before.scrollHeight,'メニューが収まらない短い画面').toBeGreaterThan(before.clientHeight);
+    expect(before.brandVisible,'ロゴが上部に残る').toBe(true);
+    await nav.evaluate(element=>{element.scrollTop=element.scrollHeight;});
+    const scrollTop=await nav.evaluate(element=>element.scrollTop);
+    expect(scrollTop,'下までスクロール可能').toBeGreaterThan(0);
+    const afterBrand=await page.locator('.sidebar .brand').evaluate(element=>element.getBoundingClientRect().top);
+    expect(afterBrand).toBeCloseTo(before.brandTop,0);
+    await page.getByRole('button',{name:'参照ソース',exact:true}).click();
+    await expect(page.locator('#page-about')).toBeVisible();
+    expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth+1)).toBe(true);
+  }
+  await page.setViewportSize({width:390,height:700});
+  const mobile=await page.locator('.sidebar .nav').evaluate(element=>({
+    x:getComputedStyle(element).overflowX,
+    y:getComputedStyle(element).overflowY
+  }));
+  expect(mobile.x,'スマホは従来の横スクロール').toBe('auto');
+  expect(mobile.y).not.toBe('auto');
+  await page.getByRole('button',{name:'ダッシュボード',exact:true}).click();
+  await expect(page.locator('#page-home')).toBeVisible();
+  await page.getByRole('button',{name:'参照ソース',exact:true}).click();
+  await expect(page.locator('#page-about')).toBeVisible();
+});
+
 test('JSON読み込み失敗を画面上で通知し、正常表示に見せかけない', async ({ page }) => {
   await page.route('**/results.json', route => route.fulfill({ status: 200, contentType: 'application/json', body: '{broken-json' }));
   await page.reload();
