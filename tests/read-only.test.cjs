@@ -18,6 +18,9 @@ const script = (() => {
   assert.ok(start >= 0 && end > start, 'Application bootstrap boundary changed');
   let body = source.slice(start, end);
   body = body.replace('const updateEntries=siteData.updates?.entries||[];', ''); // injected below for the DOM harness
+  // Legacy exhaustive DOM assertions intentionally inspect every record at once.
+  // Production 50-row pagination is independently tested below and in Playwright.
+  body = body.replace('const ARCHIVE_PAGE_SIZE=50;', 'const ARCHIVE_PAGE_SIZE=Number.MAX_SAFE_INTEGER;');
   const literal = value => JSON.stringify(value).replace(/\]$/, '\n    ]');
   for (const [name, reference, value] of [
     ['builtIn', 'siteData.results', records], ['candidates', 'siteData.players.candidates', data.players.candidates],
@@ -103,6 +106,7 @@ function boot(source = script, { hash = '', search = '?season=all' } = {}) {
   const sections = elements.filter(element => element.classList.contains('section'));
   const document = new Element('document');
   document.querySelector = selector => {
+    if(selector==='#page-results .panel-header')return {scrollIntoView(){}};
     assert.ok(selector.startsWith('#'), `Unsupported selector ${selector}`);
     return ids.get(selector.slice(1)) || null;
   };
@@ -271,6 +275,28 @@ function assertRows(app, expected) {
   assert.deepEqual(renderedRows(app), expected.map(key));
   assert.equal(String(app.get('result-count').textContent), `${expected.length}件`);
 }
+
+test('production archive pagination displays all records exactly once without disabling the 50-row limit', () => {
+  const paginatedScript=script.replace('const ARCHIVE_PAGE_SIZE=Number.MAX_SAFE_INTEGER;', 'const ARCHIVE_PAGE_SIZE=50;');
+  assert.notEqual(paginatedScript,script,'テスト専用の全件表示を解除できる');
+  const app=boot(paginatedScript);
+  app.navigate('results');
+  const expected=newest(records).map(row=>row.id);
+  const allIds=[];
+  const pages=Math.ceil(records.length/50);
+  for(let number=1;number<=pages;number++){
+    if(number>1)app.click(new Element('button', 'data-archive-page="'+number+'"'));
+    const ids=renderedArticles(app).map(row=>row.id);
+    assert.deepEqual(ids,expected.slice((number-1)*50,number*50), 'ページ'+number+'の戦績');
+    assert.ok(ids.length<=50,'1ページは50件以下');
+    allIds.push(...ids);
+  }
+  assert.equal(new Set(allIds).size,records.length,'全件を重複なく表示');
+  assert.deepEqual(allIds,expected,'掲載済み戦績が全件確認できる');
+  assert.match(app.get('result-pagination-top').innerHTML, new RegExp(pages+'ページ'));
+  app.click(new Element('button','data-archive-page="1"'));
+  assert.deepEqual(renderedArticles(app).map(row=>row.id),expected.slice(0,50),'先頭ページに戻れる');
+});
 
 test('entry, import, and delete controls are absent; only browse inputs remain', () => {
   const markup = html.slice(0, html.indexOf('<script>'));
