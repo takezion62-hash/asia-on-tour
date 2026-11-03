@@ -485,7 +485,7 @@ test('solo KILLS sum qualifying and final sessions, never teams, missing kills, 
   assert.equal(badge.goal,100);
   assert.deepEqual(badge.evidence.map(e=>e.kills),[25,14,13]);
   assert.ok(badge.evidence.every(row=>row.killFormat==='solo'));
-  assert.equal(report.achievements.find(item=>item.id==='twenty-kills').unlocked,false);
+  assert.equal(report.achievements.find(item=>item.id==='twenty-kills').unlocked,true,'破壊神はチーム戦の高キル記録も対象のまま');
   const nonmember=engine.calculateSpecial([...allowed,...denied],'Pair',{catalog}).achievements.find(item=>item.id==='solo-kill-mastery');
   assert.equal(nonmember.progress,0);
   assert.equal(nonmember.unlocked,false);
