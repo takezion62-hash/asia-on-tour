@@ -1022,6 +1022,84 @@
           "url": "https://fortnitetracker.com/events/epicgames_S32_SoloVictoryCashCup_ME?window=S32_SoloVictoryCashCup_Event4Round2_ME"
         }
       ]
+    },
+    {
+      "id": "ch5s4-duos-cash-cup",
+      "name": "Duos Cash Cup",
+      "chapter": 5,
+      "season": 4,
+      "seasonId": "S31",
+      "sourceEventIds": [
+        "S31_DuosCashCup"
+      ],
+      "series": "cash-cup",
+      "mode": "battle-royale",
+      "subtype": "duos-cash-cup",
+      "team": "duo",
+      "platform": "cross-platform",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "2024年9月20日（日本時間）ME Event3 Round2：Fortnite Tracker画像で12位/29位/40位の賞金欄$200/$100 eachを確認。Victory Royaleが0でも順位賞金あり。",
+          "url": "https://fortnitetracker.com/events/epicgames_S31_DuosCashCup_ME?window=S31_DuosCashCup_Event3Round2_ME"
+        },
+        {
+          "text": "S31 Duos Cash Cup Event3 Round2大会・賞金ルール",
+          "url": "https://fortnitetracker.com/events/epicgames_S31_DuosCashCup_NAC?window=S31_DuosCashCup_Event3Round2_NAC"
+        }
+      ]
+    },
+    {
+      "id": "ch5s3-solo-victory-cup",
+      "name": "Solo Victory Cup Battle Royale",
+      "chapter": 5,
+      "season": 3,
+      "seasonId": "S30",
+      "sourceEventIds": [
+        "S30_SoloVictoryCashCup"
+      ],
+      "series": "victory-cup",
+      "mode": "battle-royale",
+      "subtype": "solo-victory-cup",
+      "team": "solo",
+      "platform": "cross-platform",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "2024年7月16日（日本時間）ME Event5 Round2：ユーザー提供Tracker画像でかめてぃんとR1zeが各1VR/$100、3試合。",
+          "url": "https://fortnitetracker.com/events/epicgames_S30_SoloVictoryCashCup_ME?window=S30_SoloVictoryCashCup_Event5Round2_ME"
+        },
+        {
+          "text": "S30 Event5 Solo Victory CupではRound2のVRごとに$100",
+          "url": "https://www.osirion.gg/tournaments/S30_SoloVictoryCashCup_Event5Round2_ME"
+        }
+      ]
+    },
+    {
+      "id": "ch5s3-squads-victory-cup",
+      "name": "Squads Victory Cup Battle Royale",
+      "chapter": 5,
+      "season": 3,
+      "seasonId": "S30",
+      "sourceEventIds": [
+        "S30_SquadsVictoryCashCup"
+      ],
+      "series": "victory-cup",
+      "mode": "battle-royale",
+      "subtype": "squads-victory-cup",
+      "team": "squad",
+      "platform": "cross-platform",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "2024年7月1日（日本時間）ME Event3 Round2：8位・2試合・14キル・1VR。Trackerの賞金欄$400/$100 each。",
+          "url": "https://fortnitetracker.com/events/epicgames_S30_SquadsVictoryCashCup_ME?window=S30_SquadsVictoryCashCup_Event3Round2_ME"
+        },
+        {
+          "text": "S30 Squads Victory Cup Event3 Round2大会",
+          "url": "https://fortnitetracker.com/events/epicgames_S30_SquadsVictoryCashCup_NAC?window=S30_SquadsVictoryCashCup_Event3Round2_NAC"
+        }
+      ]
     }
   ]
 }
