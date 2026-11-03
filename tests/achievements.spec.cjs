@@ -86,3 +86,48 @@ test('公開済みのスキン報酬とチームVRを正しい条件で計上す
   await expect(page.locator('[data-evolution-track="victories"]:not([data-evolution-tier="locked"])')).toBeVisible();
   await expect(page.locator('#profile-achievements .achievement-note')).toContainText('チーム戦');
 });
+
+
+test('特別称号は17種類から判定し、獲得済み・未獲得・レア度・出典を閲覧できる',async({page})=>{
+  const person=records.find(row=>row.verified===true&&(row.players||[row.player]).length===1)?.player||player;
+  const expected=achievements.calculate(records,person).special;
+  await page.goto('/?season=all#player='+encodeURIComponent(person));
+  const section=page.locator('#profile-special-achievements');
+  await expect(section).toBeVisible();
+  await expect(section.locator('[data-special-count]')).toHaveText(expected.earned+' / '+expected.total);
+  await expect(section.locator('[data-special-unlocked="true"]')).toHaveCount(expected.earned);
+  if(expected.earned){
+    const card=section.locator('[data-special-unlocked="true"]').first();
+    const id=await card.getAttribute('data-special-id');
+    const badge=expected.unlocked.find(a=>a.id===id);
+    await expect(card).toHaveAttribute('data-special-rarity',badge.rarity);
+    await card.locator('summary').click();
+    await expect(card.locator('[data-special-evidence-id]')).toHaveCount(badge.evidence.length);
+  }
+  if(expected.locked.length){
+    await section.locator('.special-locked-details summary').click();
+    await expect(section.locator('[data-special-unlocked="false"]')).toHaveCount(expected.locked.length);
+    await expect(section.locator('[data-special-id="silent-earner"]')).toHaveCount(1);
+  }
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth+1)).toBe(true);
+});
+
+test('0キル現金賞金の特別称号は本人の個人賞金と明示0キルだけで付与される',async({page})=>{
+  const row=records.find(r=>r.verified===true&&r.kind==='賞金決勝'
+    &&(r.players||[r.player]).length===1&&typeof r.prize==='number'&&r.prize>0);
+  expect(row,'実データ内にソロの確認済み現金賞金記録が存在する').toBeTruthy();
+  const name=(row.players||[row.player])[0];
+  const valid={...row,id:'test-special-0kill-cash',player:name,players:[name],kills:0,vrs:0,rank:21,prize:100,verified:true};
+  const reported={...valid,id:'test-reported',verified:false,kills:0,prize:500};
+  await page.route('**/results.json',route=>route.fulfill({
+    status:200,contentType:'application/json',body:JSON.stringify([valid,reported])
+  }));
+  await page.goto('/?season=all#player='+encodeURIComponent(name));
+  await expect(page.locator('[data-special-id="silent-earner"][data-special-unlocked="true"]')).toBeVisible();
+  await expect(page.locator('[data-special-id="pacifist-vr"][data-special-unlocked="false"]')).toHaveCount(1);
+  const cash=page.locator('[data-special-id="silent-earner"][data-special-unlocked="true"]');
+  await cash.locator('summary').click();
+  await expect(cash.locator('[data-special-evidence-id="test-special-0kill-cash"]')).toBeVisible();
+  await expect(cash.locator('[data-special-evidence-id="test-reported"]')).toHaveCount(0);
+  await expect(page.locator('#profile-achievements .achievement-note')).toContainText('チーム合計');
+});
