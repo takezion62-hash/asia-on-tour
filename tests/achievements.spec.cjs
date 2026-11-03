@@ -11,7 +11,7 @@ const player=roster(sample)[0];
 
 async function expandAchievements(page){
   const gallery=page.locator('#profile-achievements .achievement-collection');
-  await gallery.locator('summary').click();
+  await gallery.locator('summary.achievement-toggle').click();
   await expect(gallery).toHaveAttribute('open','');
 }
 
@@ -36,7 +36,7 @@ test('既存プロフィールで獲得済みと未獲得の称号、代表称�
   await expect(gallery.locator('.achievement-toggle')).toContainText('すべての称号を見る');
   await expandAchievements(page);
   await expect(gallery.locator('.evo-grid')).toBeVisible();
-  await collection.locator('summary').click();
+  await collection.locator('summary.achievement-toggle').click();
   await expect(gallery.locator('.evo-grid')).toBeHidden();
   await expandAchievements(page);
   const independent=achievements.calculate(records,player);
