@@ -185,3 +185,113 @@ test('every real published player gets exactly six evolving tracks without modif
   }
   assert.equal(JSON.stringify(records),original,'published results are read-only');
 });
+
+
+const special=(rows,id,name='Hero')=>engine.calculateSpecial(rows,name).achievements.find(badge=>badge.id===id);
+test('special title catalog includes all ten rare records plus existing top-ten and six regional specialists',()=>{
+  assert.equal(engine.SPECIAL_CATALOG.length,17);
+  assert.equal(new Set(engine.SPECIAL_CATALOG.map(def=>def.id)).size,17);
+  for(const def of engine.SPECIAL_CATALOG){
+    assert.ok(['rare','epic','legendary'].includes(def.rarity),def.id);
+    assert.ok(def.goal>=1&&def.description&&def.title&&def.icon,def.id);
+  }
+  assert.equal(engine.SPECIAL_TIERS.legendary.name,'レジェンダリー');
+});
+test('zero-kill cash: explicit zero KILLS and verified individual cash are both mandatory',()=>{
+  const valid=fixture('zero-cash',{kind:'賞金決勝',rank:9,kills:0,prize:100});
+  const invalid=[
+    fixture('unknown-kills',{kind:'賞金決勝',rank:5,kills:null,prize:500}),
+    fixture('reported',{kind:'賞金決勝',rank:6,kills:0,prize:100,verified:false}),
+    fixture('skin',{kind:'スキン大会',rank:7,kills:0,prize:100}),
+    fixture('team-unsplit',{player:'Hero / Pair',players:['Hero','Pair'],kind:'賞金決勝',kills:0,prize:400}),
+    fixture('team-invalid',{player:'Hero / Pair',players:['Hero','Pair'],kind:'賞金決勝',kills:0,prize:400,prizePerPlayer:300})
+  ];
+  assert.equal(special(invalid,'silent-earner').unlocked,false);
+  const win=special([...invalid,valid],'silent-earner');
+  assert.equal(win.unlocked,true);
+  assert.equal(win.progress,1);
+  assert.deepEqual(win.evidence.map(row=>row.id),['zero-cash']);
+  const duo=fixture('team-valid',{player:'Hero / Pair',players:['Hero','Pair'],kind:'賞金決勝',kills:0,prize:400,prizePerPlayer:200});
+  assert.equal(special([duo],'silent-earner').unlocked,true);
+  assert.equal(special([duo],'silent-earner','Pair').unlocked,true);
+  assert.equal(special([duo],'silent-earner','NotPair').unlocked,false);
+});
+test('no-kill VR, one-kill cash and 20-kill record cannot infer unknown individual or per-match results',()=>{
+  const rows=[
+    fixture('zero-vr',{kills:0,vrs:1,kind:'決勝',prize:null}),
+    fixture('one-cash',{kills:1,kind:'賞金決勝',prize:100}),
+    fixture('killer',{kills:20,kind:'予選'}),
+    fixture('unknown-vr',{kills:null,vrs:7}),
+    fixture('unverified-kills',{kills:100,verified:false}),
+    fixture('no-cash-one',{kills:1,prize:null})
+  ];
+  for(const id of ['pacifist-vr','one-kill-earner','twenty-kills'])assert.equal(special(rows,id).unlocked,true,id);
+  assert.deepEqual(special(rows,'pacifist-vr').evidence.map(e=>e.id),['zero-vr']);
+  assert.deepEqual(special(rows,'one-kill-earner').evidence.map(e=>e.id),['one-cash']);
+  assert.deepEqual(special(rows,'twenty-kills').evidence.map(e=>e.id),['killer']);
+  const notYet=rows.filter(row=>!['zero-vr','one-cash','killer'].includes(row.id));
+  for(const id of ['pacifist-vr','one-kill-earner','twenty-kills'])assert.equal(special(notYet,id).unlocked,false,id);
+});
+test('overseas champion uses verified final rank one; qualifying rank one and VR alone are insufficient',()=>{
+  const rows=[
+    fixture('qual-first',{kind:'予選',rank:1,vrs:2}),
+    fixture('final-not-first',{kind:'賞金決勝',rank:2,vrs:1}),
+    fixture('unknown-final',{kind:'賞金決勝',rank:1,verified:false})
+  ];
+  assert.equal(special(rows,'final-champion').unlocked,false);
+  assert.equal(special([...rows,fixture('final-champ',{kind:'賞金決勝',rank:1})],'final-champion').unlocked,true);
+});
+test('cross-region cash and VR require 3 different supported overseas regions, not 3 events in one region',()=>{
+  const cashRows=['ME','EU','NAC'].map((region,i)=>fixture('cash-region-'+i,{region,kind:'賞金決勝',prize:100,vrs:i?0:1}));
+  const vrRows=['ME','EU','NAW'].map((region,i)=>fixture('vr-region-'+i,{region,kind:'予選',vrs:1}));
+  const sameCash=Array.from({length:3},(_,i)=>fixture('same-'+i,{kind:'賞金決勝',prize:100,vrs:1,region:'ME'}));
+  assert.equal(special(sameCash,'cash-three-regions').progress,1);
+  assert.equal(special(sameCash,'vr-three-regions').unlocked,false);
+  assert.equal(special(cashRows,'cash-three-regions').unlocked,true);
+  assert.equal(special(cashRows,'vr-three-regions').unlocked,false);
+  assert.equal(special(vrRows,'vr-three-regions').unlocked,true);
+  assert.equal(special(vrRows,'cash-three-regions').unlocked,false);
+});
+test('solo and team payouts, explicit skin reward + cash, and VR + payout in same record unlock combinations',()=>{
+  const solo=fixture('solo-paid',{kind:'賞金決勝',prize:200,vrs:0});
+  const team=fixture('duo-paid',{player:'Hero / Pair',players:['Hero','Pair'],kind:'賞金決勝',prize:400,prizePerPlayer:200,vrs:0});
+  const skin=fixture('rewarded',{kind:'スキン大会',prize:0,round:'Session 1 / スキン獲得'});
+  const both=fixture('double',{kind:'賞金決勝',prize:150,vrs:1});
+  assert.equal(special([solo],'solo-and-team-cash').progress,1);
+  assert.equal(special([solo,team],'solo-and-team-cash').unlocked,true);
+  assert.equal(special([solo,team],'skin-and-cash').unlocked,false);
+  assert.equal(special([solo,skin],'skin-and-cash').unlocked,true);
+  assert.equal(special([solo,skin],'skin-and-cash').progress,2);
+  assert.equal(special([solo,skin],'vr-and-cash').unlocked,false);
+  assert.equal(special([both],'vr-and-cash').unlocked,true);
+  assert.equal(special([solo,fixture('vr-only',{vrs:1})],'vr-and-cash').unlocked,false);
+  const duoUnpaid=fixture('duo-unknown',{player:'Hero / Pair',players:['Hero','Pair'],kind:'賞金決勝',prize:400,prizePerPlayer:null});
+  assert.equal(special([solo,duoUnpaid],'solo-and-team-cash').unlocked,false);
+});
+test('legacy top ten and region specialist survive; report does not mutate evidence rows',()=>{
+  const rows=[
+    ...Array.from({length:5},(_,i)=>fixture('me-'+i,{region:'ME',kind:i===0?'賞金決勝':'予選',rank:i===0?6:100})),
+    fixture('other',{region:'NAC',verified:false,rank:1})
+  ];
+  const before=JSON.stringify(rows);
+  const report=engine.calculateSpecial(rows,'Hero');
+  assert.equal(report.total,17);
+  assert.equal(report.unlocked.length,2);
+  assert.equal(special(rows,'top-ten').unlocked,true);
+  assert.equal(special(rows,'specialist-me').unlocked,true);
+  assert.equal(special(rows,'specialist-nac').unlocked,false);
+  assert.equal(JSON.stringify(rows),before);
+});
+test('new special titles for every published player are deterministic and read-only',()=>{
+  const before=JSON.stringify(records);
+  const players=[...new Set(records.flatMap(row=>Array.isArray(row.players)&&row.players.length?row.players:[row.player]).filter(Boolean))];
+  for(const player of players){
+    const report=engine.calculate(records,player).special;
+    assert.equal(report.total,17);
+    assert.equal(report.earned,report.unlocked.length,player);
+    assert.equal(report.locked.length+report.earned,report.total,player);
+    assert.ok(report.achievements.every(a=>a.evidence.length<=3&&a.evidence.every(e=>e.id)),player);
+    assert.deepEqual(report.achievements.map(a=>a.id),engine.calculateSpecial(records,player).achievements.map(a=>a.id));
+  }
+  assert.equal(JSON.stringify(records),before,'published results not mutated');
+});
