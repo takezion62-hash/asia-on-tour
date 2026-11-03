@@ -166,3 +166,27 @@
 .special-locked-item small{color:#bda9e2;font-size:10px;font-weight:850}
 @media(max-width:1200px){.special-unlocked-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:640px){.evo-special{padding:14px 11px}.special-header h3{font-size:18px}.special-unlocked-grid,.special-locked-list{grid-template-columns:1fr}.special-achievement{padding:13px}.special-summary{min-width:75px;padding:8px 10px}.special-summary strong{font-size:18px}}
+
+
+/* Progressive special titles: regional mastery and multi-format cash awards. */
+.special-achievement[data-special-growth-level]{--growth-color:var(--special-outline,#9db0cd)}
+.special-achievement[data-special-evolution-tier="bronze"]{--growth-color:#bf8b66}
+.special-achievement[data-special-evolution-tier="silver"]{--growth-color:#a0bfd0}
+.special-achievement[data-special-evolution-tier="gold"]{--growth-color:#e6ba62;border-color:#aa905a}
+.special-achievement[data-special-evolution-tier="platinum"]{--growth-color:#77d8df;border-color:#6abac8}
+.special-achievement[data-special-evolution-tier="prismatic"]{--growth-color:#ce9aff;border-color:transparent;background:linear-gradient(#282038,#161d32) padding-box,linear-gradient(120deg,#cf97fa,#78e9e6,#e8b97a) border-box;box-shadow:0 0 19px #b870d32b}
+.special-evolution{margin:11px 0 13px;padding:11px;border:1px solid #47526d;border-radius:11px;background:#151c2b86;min-width:0}
+.special-evo-status{display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap}
+.special-evo-status>span{font-size:10px;color:var(--growth-color,#a8bacc);font-weight:900}
+.special-evo-status strong{font-size:12px;color:#ebefff;font-variant-numeric:tabular-nums}
+.special-evo-meter{height:7px;background:#283652;border-radius:999px;margin:7px 0;overflow:hidden}
+.special-evo-meter>span{display:block;height:100%;background:linear-gradient(90deg,var(--growth-color,#ae91db),#d7f4e9);border-radius:inherit}
+.special-evo-next{font-size:10px;line-height:1.65;color:#abbcd4;margin:6px 0 0}
+.special-evo-next strong{color:#e9d7ff}
+.special-evo-stages{display:flex;flex-wrap:wrap;gap:5px;margin-top:9px}
+.special-evo-stages span{font-size:9px;line-height:1.4;padding:4px 6px;border-radius:6px;background:#293349;border:1px solid #45516a;color:#9cacc7}
+.special-evo-stages span.is-earned{color:#eef5ff;border-color:var(--growth-color,#9275c4);background:#334259}
+.special-locked-item .special-evolution{margin-bottom:0;padding:9px;background:#192138}
+.special-locked-item .special-evo-stages span{font-size:9px}
+.special-format-proof{font-weight:850;color:#c2e3f2!important}
+@media(max-width:640px){.special-evolution{padding:9px}.special-evo-stages{gap:4px}}
