@@ -237,7 +237,7 @@ test('二刀流→三刀流→四刀流はソロからスクワッドまでの�
 });
 
 test('ソロ累計キル称号は一覧を開いて確認でき、デュオのチームキルは加算しない',async({page})=>{
-  const source=records.find(row=>row.verified===true&&roster(row).length===1&&/\\bsolo\\b/i.test(row.event));
+  const source=records.find(row=>row.verified===true&&roster(row).length===1&&/\bsolo\b/i.test(row.event));
   expect(source,'ソロ戦績の基準').toBeTruthy();
   const name=roster(source)[0];
   const rows=[
