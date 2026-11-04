@@ -886,7 +886,9 @@
         const support=badge.evidence.map(row=>
           '<li data-special-evidence-id="'+escape(row.id)+'"><span>'+escape(row.date)+' · '+escape(row.region)+'</span> '+escape(row.event)
           +' <small>('+escape(row.kind)+')</small>'+(row.teamFormat?'<small class="special-format-proof"> · '+escape(AsiaAchievements.TEAM_FORMAT_LABELS[row.teamFormat]||row.teamFormat)+'</small>':'')+(row.killThreshold?'<small class="special-kill-proof"> · '+escape(({solo:'ソロ',duo:'デュオ',trio:'トリオ'})[row.killFormat]||'形式未確認')+' '+format(row.kills)+'K / 基準'+format(row.killThreshold)+'K</small>':'')
-          +(badge.id==='solo-kill-mastery'?'<small class="special-kill-proof"> · ソロ '+format(row.kills)+'K</small>':'')+'</li>'
+          +(badge.id==='solo-kill-mastery'?'<small class="special-kill-proof"> · ソロ '+format(row.kills)+'K</small>':'')
+          +(badge.id==='final-kill-tyrant'?'<small class="special-kill-proof"> · ソロ決勝 '+format(row.kills)+'K</small>':'')
+          +(badge.id==='cash-windfall'?'<small class="special-cash-proof"> · 個人賞金 $'+format(row.personalCash)+'</small>':'')+'</li>'
         ).join('');
         return '<article class="special-achievement" data-special-id="'+escape(badge.id)+'" data-special-rarity="'+escape(badge.rarity)+'" data-special-growth-level="'+(badge.growth?.level||0)+'" data-special-evolution-tier="'+escape((badge.region||badge.id==='solo-kill-mastery')&&badge.growth?.level?AsiaAchievements.EVOLUTION_TIERS[badge.growth.level-1].id:'none')+'" data-special-unlocked="true">'
           +'<div class="special-achievement-top"><span class="special-achievement-icon" aria-hidden="true">'+escape(badge.icon)+'</span>'
@@ -936,7 +938,7 @@
         +(missingSpecial?'<details class="special-locked-details"><summary>未獲得の特別称号 '+format(specials.locked.length)+'種類と達成条件を見る</summary>'
         +'<ul class="special-locked-list">'+missingSpecial+'</ul></details>':'')
         +'</section>'
-        +'<p class="achievement-note">※ ASIA ON TOUR独自の非公式実績です。掲載された確認済み戦績のみで判定し、未確認や推測した別名義は加算しません。賞金は確認済みの個人現金受取額のみ。0・1キル称号はKILLSの数値が明記された場合だけです。KILLSとVRはチーム戦ではチーム合計、複数試合の大会戦績ではセッション合計であり、個人または1試合単位の達成とは限りません。スキンは獲得が明記された記録のみ。レア度はサイト独自の分類です。地域別スペシャリストと二刀流・三刀流・四刀流は全期間の掲載数／確認済み賞金獲得形式から自動進化します。ソロ累計キルの称号は、ソロ形式・本人のKILLSが確認できた戦績のみを対象とし、予選・決勝の掲載セッション合計を積み上げ、同一記録IDは重複計上しません。デュオ・トリオ・スクワッドのキル数は含めません。大会編成が不明な成績は形式数に含めません。シーズンを変えても全期間の実績が維持されます。</p></div></details></section>';
+        +'<p class="achievement-note">※ ASIA ON TOUR独自の非公式実績です。掲載された確認済み戦績のみで判定し、未確認や推測した別名義は加算しません。賞金は確認済みの個人現金受取額のみ。0・1キル称号はKILLSの数値が明記された場合だけです。KILLSとVRはチーム戦ではチーム合計、複数試合の大会戦績ではセッション合計であり、個人または1試合単位の達成とは限りません。スキンは獲得が明記された記録のみ。レア度はサイト独自の分類です。地域別スペシャリストと二刀流・三刀流・四刀流は全期間の掲載数／確認済み賞金獲得形式から自動進化します。ソロ累計キルの称号は、ソロ形式・本人のKILLSが確認できた戦績のみを対象とし、予選・決勝の掲載セッション合計を積み上げ、同一記録IDは重複計上しません。デュオ・トリオ・スクワッドのキル数は含めません。大会編成が不明な成績は形式数に含めません。追加の決勝・賞金・地域移動・Reload・Zero Build・FNCS称号も確認済みの掲載戦績から判定します。日付型称号は記録された開催日単位で集計し、同一大会の予選・決勝を別大会として二重に数えません。30日以内の賞金連鎖は両端の日付差30日以内、七日間の旅人は両端の日付差6日以内が条件です。シーズンを変えても全期間の実績が維持されます。</p></div></details></section>';
     }
 
     function renderProfile(name){
