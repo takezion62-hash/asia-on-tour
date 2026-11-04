@@ -70,6 +70,8 @@ class Element {
   setAttribute(name, value) { this.attributes[name] = value; }
   hasAttribute(name) { return Object.hasOwn(this.attributes,name); }
   getAttribute(name) { return this.attributes[name] ?? null; }
+  // SVG chart scrolling is tested in real browsers; the VM's static DOM has no descendants to query.
+  querySelector(selector) { return null; }
   set innerHTML(value) { this.markup = value; this.onHTML?.(value); }
   get innerHTML() { return this.markup; }
   closest(selector) {
