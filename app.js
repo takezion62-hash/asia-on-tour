@@ -867,7 +867,7 @@
           +'<div class="evo-bar" role="progressbar" aria-label="'+escape(track.label)+'の次ランクへの進捗" aria-valuemin="0" aria-valuemax="100" aria-valuenow="'+track.percent+'"><span style="width:'+track.percent+'%"></span></div>'
           +'<details class="evo-level-details"><summary>ランクの達成条件を見る</summary><ol>'+steps+'</ol></details></article>';
       }).join('');
-      const specials=data.special;
+      const specials=data.special,secret=data.secret;
       const specialGrowthMarkup=badge=>{
         if(!badge.growth)return '';
         const progress=badge.growth;
@@ -906,6 +906,42 @@
         +(badge.growth?specialGrowthMarkup(badge):'')
         +'</div></li>'
       ).join('');
+      const secretUnlocked=secret.unlocked.map(badge=>{
+        const proof=badge.evidence.map(row=>'<li data-secret-evidence-id="'+escape(row.id)+'">'
+          +'<span>'+escape(row.date)+' · '+escape(row.region)+'</span> '+escape(row.event)
+          +'<small>('+escape(row.kind)+')</small>'
+          +(row.kills!==undefined?'<small> · '+format(row.kills)+'K</small>':'')
+          +(row.vrs!==undefined?'<small> · '+format(row.vrs)+'VR</small>':'')
+          +(row.personalCash!==undefined?'<small> · 個人賞金 $'+format(row.personalCash)+'</small>':'')
+          +'</li>').join('');
+        return '<article class="secret-card secret-card-earned" data-secret-id="'+escape(badge.id)+'" data-secret-unlocked="true" data-secret-rarity="'+escape(badge.rarity)+'">'
+          +'<div class="secret-card-top"><span class="secret-card-icon" aria-hidden="true">'+escape(badge.icon)+'</span>'
+          +'<div><span class="secret-card-eyebrow">'+escape(badge.rarity==='legendary'?'LEGENDARY SECRET':'EPIC SECRET')+'</span>'
+          +'<h4>'+escape(badge.title)+'</h4></div></div>'
+          +'<p>'+escape(badge.description)+'</p>'
+          +(badge.difficulty?'<span class="secret-difficulty">難易度 '+escape(badge.difficulty)+'</span>':'')
+          +'<details class="secret-proof"><summary>解放した大会記録を見る</summary><ul>'+proof+'</ul></details>'
+          +'</article>';
+      }).join('');
+      // Undiscovered names, IDs, conditions and progress are not rendered.
+      // Two sealed awards have no locked placeholder at all.
+      const secretLocked=secret.visibleLocked.map(badge=>
+        '<li class="secret-card secret-card-locked" data-secret-locked="true">'
+        +'<span class="secret-card-icon" aria-hidden="true">❔</span>'
+        +'<div><span class="secret-card-eyebrow">SECRET ACHIEVEMENT</span>'
+        +'<h4>？？？？？？</h4><p>ヒント：「'+escape(badge.hint)+'」</p>'
+        +'<small>達成条件は非公開</small></div></li>'
+      ).join('');
+      const secretSection='<section class="secret-achievements" id="profile-secret-achievements" aria-labelledby="secret-achievements-title">'
+        +'<div class="secret-header"><div><span class="achievement-eyebrow">SECRET ACHIEVEMENTS</span>'
+        +'<h3 id="secret-achievements-title">秘密の<span>称号</span> 🔒</h3>'
+        +'<p>手掛かりから謎を解き明かせ · 獲得すると称号と出典が公開</p></div>'
+        +'<div class="secret-summary"><strong data-secret-count>'+format(secret.earned)+'</strong><span>発見済み</span></div></div>'
+        +(secretUnlocked?'<div class="secret-earned-grid" aria-label="解放した隠し称号">'+secretUnlocked+'</div>':'')
+        +(secretLocked?'<details class="secret-locked-details"><summary>未発見の手掛かりを見る</summary>'
+          +'<ul class="secret-locked-grid">'+secretLocked+'</ul></details>':'')
+        +'<p class="secret-note">※ 未解放の称号は名前・条件・レア度を公開しません。一部の完全シークレットは解放前には手掛かりも表示されません。日付・大会形式・個人賞金は確認済みの掲載データから判定します。</p>'
+        +'</section>';
       return '<section class="achievement-section" id="profile-achievements" aria-labelledby="achievement-title">'
         +'<div class="achievement-heading"><div><span class="achievement-eyebrow">ASIA ON TOUR / EVOLVING BADGES</span>'
         +'<h2 id="achievement-title">進化する<span>実績バッジ</span></h2></div>'
@@ -938,6 +974,7 @@
         +(missingSpecial?'<details class="special-locked-details"><summary>未獲得の特別称号 '+format(specials.locked.length)+'種類と達成条件を見る</summary>'
         +'<ul class="special-locked-list">'+missingSpecial+'</ul></details>':'')
         +'</section>'
+        +secretSection
         +'<p class="achievement-note">※ ASIA ON TOUR独自の非公式実績です。掲載された確認済み戦績のみで判定し、未確認や推測した別名義は加算しません。賞金は確認済みの個人現金受取額のみ。0・1キル称号はKILLSの数値が明記された場合だけです。KILLSとVRはチーム戦ではチーム合計、複数試合の大会戦績ではセッション合計であり、個人または1試合単位の達成とは限りません。スキンは獲得が明記された記録のみ。レア度はサイト独自の分類です。地域別スペシャリストと二刀流・三刀流・四刀流は全期間の掲載数／確認済み賞金獲得形式から自動進化します。ソロ累計キルの称号は、ソロ形式・本人のKILLSが確認できた戦績のみを対象とし、予選・決勝の掲載セッション合計を積み上げ、同一記録IDは重複計上しません。デュオ・トリオ・スクワッドのキル数は含めません。大会編成が不明な成績は形式数に含めません。追加の決勝・賞金・地域移動・Reload・Zero Build・FNCS称号も確認済みの掲載戦績から判定します。日付型称号は記録された開催日単位で集計し、同一大会の予選・決勝を別大会として二重に数えません。30日以内の賞金連鎖は両端の日付差30日以内、七日間の旅人は両端の日付差6日以内が条件です。シーズンを変えても全期間の実績が維持されます。</p></div></details></section>';
     }
 
