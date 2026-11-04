@@ -135,3 +135,90 @@ test('予定には非Division1 FNCSやASIA開催を混ぜず、S42閲覧中もS4
  for(const txt of await scheduled.allTextContents())expect(txt).toContain('OCE');
  await expect(page.locator('.calendar-note')).toContainText('JST');
 });
+
+
+
+test('カレンダーの大会名から2026/09/06 ME決勝だけを表示し、他の日・地域・ラウンドを混ぜない',async({page})=>{
+  const source=rows.find(row=>row.date==='2026-09-06'&&row.region==='ME'
+    &&row.event==='Console Zero Build Solo Victory Cup'&&row.kind==='賞金決勝');
+  expect(source,'9/6 ME Console Zero Build Solo VC final is registered').toBeTruthy();
+  const tournamentId=tournamentKey(source,data);
+  const expected=rows.filter(row=>tournamentKey(row,data)===tournamentId
+    &&row.date===source.date&&row.region===source.region
+    &&(row.round||'ラウンド未確認')===(source.round||'ラウンド未確認')
+    &&(row.kind||'区分未確認')===(source.kind||'区分未確認'));
+  expect(expected.length).toBeGreaterThan(0);
+  const pageErrors=[];page.on('pageerror',e=>pageErrors.push(e.message));
+  await page.goto('/?season=all#calendar?month=2026-09&date=2026-09-06');
+  const link=page.locator('.calendar-event h3 a[data-open-tournament][data-tournament-date="2026-09-06"][data-tournament-region="ME"]')
+    .filter({hasText:source.event}).first();
+  await expect(link).toBeVisible();
+  await expect(link).toHaveAttribute('href',/\?date=2026-09-06&region=ME&round=/);
+  await link.click();
+  await expect(page.locator('#page-tournament')).toBeVisible();
+  await expect(page.locator('.tournament-selected-scope')).toContainText('2026/09/06');
+  await expect(page.locator('.tournament-selected-scope')).toContainText('ME');
+  await expect(page.locator('.tournament-selected-scope')).toContainText(source.round);
+  await expect(page.locator('.tournament-selected-scope')).toContainText(source.kind);
+  const displayed=await page.locator('[data-tournament-record]').evaluateAll(els=>els.map(el=>el.getAttribute('data-tournament-record')));
+  expect(displayed.slice().sort()).toEqual(expected.map(row=>row.id).sort());
+  await expect(page.locator('[data-tournament-session]')).not.toHaveCount(0);
+  const sections=page.locator('[data-tournament-session]');
+  for(let i=0;i<await sections.count();i++){
+    const section=sections.nth(i);
+    await expect(section.locator('time')).toHaveAttribute('datetime','2026-09-06');
+    await expect(section).toContainText('ME');
+  }
+  await expect(page.locator('.tournament-detail-summary')).toContainText(expected.length+'件');
+  await expect(page.locator('.tournament-show-all')).toBeVisible();
+  expect(pageErrors).toEqual([]);
+});
+
+test('大会開催枠の共有URLを開き直しても限定表示を維持し、大会全体へ切り替え・戻る操作が動く',async({page})=>{
+  const source=rows.find(row=>row.date==='2026-09-06'&&row.region==='ME'
+    &&row.event==='Console Zero Build Solo Victory Cup'&&row.kind==='賞金決勝');
+  expect(source).toBeTruthy();
+  const id=tournamentKey(source,data);
+  const expectedCount=rows.filter(row=>tournamentKey(row,data)===id&&row.date===source.date
+    &&row.region===source.region&&(row.round||'ラウンド未確認')===(source.round||'ラウンド未確認')
+    &&row.kind===source.kind).length;
+  await page.goto('/?season=all#calendar?month=2026-09&date=2026-09-06');
+  const link=page.locator('.calendar-event h3 a[data-tournament-region="ME"]')
+    .filter({hasText:source.event}).first();
+  await link.click();
+  const scopedURL=page.url();
+  await expect(page.locator('[data-tournament-record]')).toHaveCount(expectedCount);
+  await page.reload();
+  await expect(page.locator('.tournament-selected-scope')).toBeVisible();
+  await expect(page.locator('[data-tournament-record]')).toHaveCount(expectedCount);
+  await page.locator('.tournament-show-all').click();
+  await expect(page).not.toHaveURL(scopedURL);
+  await expect(page.locator('.tournament-selected-scope')).toHaveCount(0);
+  const fullCount=rows.filter(row=>tournamentKey(row,data)===id).length;
+  await expect(page.locator('[data-tournament-record]')).toHaveCount(fullCount);
+  expect(fullCount).toBeGreaterThan(expectedCount);
+  await page.goBack();
+  await expect(page.locator('.tournament-selected-scope')).toBeVisible();
+  await expect(page.locator('[data-tournament-record]')).toHaveCount(expectedCount);
+  await page.goBack();
+  await expect(page.locator('#page-calendar')).toBeVisible();
+  await expect(page.locator('.calendar-day.is-selected')).toHaveAttribute('data-calendar-day','2026-09-06');
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth+2)).toBe(true);
+});
+
+test('存在しない限定開催枠は他の戦績に勝手に置換せず、古い大会URLは従来どおり全件表示',async({page})=>{
+  const source=rows.find(row=>row.date==='2026-09-06'&&row.region==='ME'
+    &&row.event==='Console Zero Build Solo Victory Cup'&&row.kind==='賞金決勝');
+  expect(source).toBeTruthy();
+  const id=tournamentKey(source,data);
+  const base='/'+ '?season=all#tournament='+encodeURIComponent(id);
+  const absent=base+'?'+new URLSearchParams({date:'2026-09-07',region:'ME',round:source.round,kind:'賞金決勝'}).toString();
+  await page.goto(absent);
+  await expect(page.locator('#page-tournament')).toBeVisible();
+  await expect(page.locator('#tournament-detail-content')).toContainText('この開催枠の掲載結果はまだありません');
+  await expect(page.locator('[data-tournament-record]')).toHaveCount(0);
+  await page.locator('.tournament-show-all').click();
+  await expect(page.locator('.tournament-selected-scope')).toHaveCount(0);
+  await page.goto(base);
+  await expect(page.locator('[data-tournament-record]')).toHaveCount(rows.filter(r=>tournamentKey(r,data)===id).length);
+});
