@@ -500,7 +500,7 @@ test('12 new special awards have stable IDs, rarities and distinct achievement c
   const ids=['final-kill-tyrant','final-runner-up','podium-streak','cash-windfall',
     'cash-chain','same-day-traveler','same-day-cash','reload-regular','no-vr-cash',
     'zero-build-champion','fncs-finalist','seven-day-traveler'];
-  assert.equal(engine.VERSION,6);
+  assert.equal(engine.VERSION,7);
   assert.equal(engine.SPECIAL_CATALOG.length,30);
   assert.equal(new Set(engine.SPECIAL_CATALOG.map(x=>x.id)).size,30);
   for(const id of ids){
