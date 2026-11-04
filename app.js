@@ -352,7 +352,7 @@
     }
     function renderCalendar(){
       const filters=sanitizeCalendarFilters(calendarBrowse);
-      const sessions=calendarSessions(filters);
+      const sessions=filters.scope==='scheduled'?[]:calendarSessions(filters);
       const byDay=new Map();
       for(const session of sessions){
         if(!byDay.has(session.date))byDay.set(session.date,[]);
