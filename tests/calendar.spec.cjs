@@ -222,3 +222,94 @@ test('存在しない限定開催枠は他の戦績に勝手に置換せず、�
   await page.goto(base);
   await expect(page.locator('[data-tournament-record]')).toHaveCount(rows.filter(r=>tournamentKey(r,data)===id).length);
 });
+
+
+
+test('大会全体のページで開催日を選び、同じ日付の掲載結果・集計だけを表示できる',async({page})=>{
+  const id='ch7s4-solo-victory-cup';
+  const allRows=rows.filter(row=>tournamentKey(row,data)===id);
+  const dates=[...new Set(allRows.map(row=>row.date))].sort();
+  const target='2026-09-06';
+  const expected=allRows.filter(row=>row.date===target);
+  expect(allRows.length).toBeGreaterThan(expected.length);
+  expect(expected.length).toBeGreaterThan(0);
+  await page.goto('/?season=all#tournament='+id);
+  const datePanel=page.locator('.tournament-date-navigator');
+  await expect(datePanel).toBeVisible();
+  await expect(datePanel).toContainText('開催日から探す');
+  await expect(datePanel.locator('#tournament-date-filter')).toHaveValue('all');
+  await expect(datePanel.locator('select option')).toHaveCount(dates.length+1);
+  await expect(page.locator('[data-tournament-record]')).toHaveCount(allRows.length);
+  await page.locator('#tournament-date-filter').selectOption(target);
+  await expect(page).toHaveURL(new RegExp('#tournament='+id+'\\?date='+target+'$'));
+  await expect(page.locator('#tournament-date-filter')).toHaveValue(target);
+  await expect(page.locator('.tournament-date-current')).toContainText(target.replace(/-/g,'/'));
+  await expect(page.locator('.tournament-date-current')).toContainText('この日の全地域・全ラウンド');
+  await expect(page.locator('[data-tournament-record]')).toHaveCount(expected.length);
+  const rendered=await page.locator('[data-tournament-record]').evaluateAll(els=>els.map(el=>el.getAttribute('data-tournament-record')));
+  expect(rendered.slice().sort()).toEqual(expected.map(row=>row.id).sort());
+  const displayedDates=await page.locator('.tournament-session-heading time').evaluateAll(els=>els.map(el=>el.dateTime));
+  expect(displayedDates.length).toBeGreaterThan(0);
+  expect(displayedDates.every(date=>date===target)).toBe(true);
+  await expect(page.locator('.tournament-detail-summary')).toContainText(expected.length+'件');
+  await expect(page.locator('.tournament-detail-toolbar a[title="このURLをコピーして共有できます"]'))
+    .toHaveAttribute('href',new RegExp('\\?date='+target+'$'));
+});
+
+test('日付の前後移動・全日程復帰・予選決勝フィルター・履歴戻りが動く',async({page})=>{
+  const id='ch7s4-solo-victory-cup',target='2026-09-06';
+  const allRows=rows.filter(row=>tournamentKey(row,data)===id);
+  const dates=[...new Set(allRows.map(row=>row.date))].sort();
+  expect(dates).toContain(target);
+  const earlier=dates[dates.indexOf(target)-1],later=dates[dates.indexOf(target)+1];
+  expect(earlier).toBeTruthy();
+  expect(later).toBeTruthy();
+  await page.goto('/?season=all#tournament='+id+'?date='+target);
+  await expect(page.locator('.tournament-date-navigator')).toBeVisible();
+  await expect(page.locator('#tournament-date-filter')).toHaveValue(target);
+  await page.locator('[data-tournament-phase="final"]').click();
+  const finals=allRows.filter(row=>row.date===target&&['賞金決勝','Practice決勝','Performance決勝','決勝'].includes(row.kind));
+  await expect(page.locator('[data-tournament-record]')).toHaveCount(finals.length);
+  await page.locator('[data-tournament-date-nav="'+earlier+'"]').click();
+  await expect(page.locator('#tournament-date-filter')).toHaveValue(earlier);
+  await expect(page.locator('[data-tournament-record]')).toHaveCount(allRows.filter(row=>row.date===earlier).length);
+  await page.locator('[data-tournament-date-nav="'+target+'"]').click();
+  await expect(page.locator('#tournament-date-filter')).toHaveValue(target);
+  await page.locator('#tournament-date-filter').selectOption('all');
+  await expect(page.locator('#tournament-date-filter')).toHaveValue('all');
+  await expect(page.locator('[data-tournament-record]')).toHaveCount(allRows.length);
+  await expect(page).toHaveURL(new RegExp('#tournament='+id+'$'));
+  await page.goBack();
+  await expect(page.locator('#tournament-date-filter')).toHaveValue(target);
+  await expect(page.locator('[data-tournament-record]')).toHaveCount(allRows.filter(row=>row.date===target).length);
+  await page.reload();
+  await expect(page.locator('#tournament-date-filter')).toHaveValue(target);
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth+2)).toBe(true);
+});
+
+test('カレンダーで選んだ開催枠でも日付選択ができ、日付だけの表示に切替可能',async({page})=>{
+  const source=rows.find(row=>row.date==='2026-09-06'&&row.region==='ME'
+    &&row.event==='Console Zero Build Solo Victory Cup'&&row.kind==='賞金決勝');
+  expect(source).toBeTruthy();
+  await page.goto('/?season=all#calendar?month=2026-09&date=2026-09-06');
+  await page.locator('.calendar-event h3 a[data-tournament-region="ME"]').filter({hasText:source.event}).first().click();
+  await expect(page.locator('.tournament-selected-scope')).toBeVisible();
+  await expect(page.locator('#tournament-date-filter')).toHaveValue('2026-09-06');
+  await page.locator('#tournament-date-filter').selectOption('all');
+  await expect(page.locator('.tournament-selected-scope')).toHaveCount(0);
+  await expect(page.locator('#tournament-date-filter')).toHaveValue('all');
+  await page.goBack();
+  await expect(page.locator('.tournament-selected-scope')).toBeVisible();
+  await expect(page.locator('#tournament-date-filter')).toHaveValue('2026-09-06');
+});
+
+test('存在しない日付の共有リンクでも他日の結果を混ぜず、日付指定を解除できる',async({page})=>{
+  const id='ch7s4-solo-victory-cup',date='2026-12-31';
+  await page.goto('/?season=all#tournament='+id+'?date='+date);
+  await expect(page.locator('#tournament-date-filter')).toHaveValue(date);
+  await expect(page.locator('[data-tournament-record]')).toHaveCount(0);
+  await expect(page.locator('.tournament-date-current')).toContainText('2026/12/31');
+  await page.locator('#tournament-date-filter').selectOption('all');
+  await expect(page.locator('[data-tournament-record]').first()).toBeVisible();
+  await expect(page.locator('#tournament-date-filter')).toHaveValue('all');
+});
