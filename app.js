@@ -6,11 +6,11 @@
       if(!response.ok)throw new Error(filename+' could not be loaded (HTTP '+response.status+')');
       return response.json();
     };
-    const [records,playerData,tournamentData,updateData]=await Promise.all([
-      loadJSON('results.json'),loadJSON('players.json'),loadJSON('tournaments.json'),loadJSON('updates.json')
+    const [records,playerData,tournamentData,updateData,scheduleData]=await Promise.all([
+      loadJSON('results.json'),loadJSON('players.json'),loadJSON('tournaments.json'),loadJSON('updates.json'),loadJSON('schedule.json')
     ]);
-    const siteData={results:records,players:playerData,tournaments:tournamentData,updates:updateData};
-    if(!Array.isArray(siteData.results)||!Array.isArray(siteData.players.candidates)||!Array.isArray(siteData.tournaments.catalog)||!Array.isArray(siteData.updates.entries))
+    const siteData={results:records,players:playerData,tournaments:tournamentData,updates:updateData,schedule:scheduleData};
+    if(!Array.isArray(siteData.results)||!Array.isArray(siteData.players.candidates)||!Array.isArray(siteData.tournaments.catalog)||!Array.isArray(siteData.updates.entries)||!Array.isArray(siteData.schedule.sessions))
       throw new Error('Invalid ASIA ON TOUR data files');
 
     // CH7S4 / Override · 2026-08-20 through 2026-10-18 (snapshot, not exhaustive)
@@ -219,8 +219,8 @@
       return [...new Set(rows.map(e=>classifyTournamentRecord(e).id))].map(id=>tournamentInfo(id,rows)).sort((a,b)=>b.latestDate.localeCompare(a.latestDate)||a.name.localeCompare(b.name));
     }
 
-    // Calendar dates come exclusively from published results (not a live schedule).
-    // date strings are source calendar dates; do not reinterpret them as UTC instants.
+    // Archive dates and official future session times are different sources;
+    // scheduled sessions have their own JST dates and never become results.
     const validCalendarDate=date=>{
       if(typeof date!=='string'||!/^\d{4}-\d{2}-\d{2}$/.test(date))return false;
       const [year,month,day]=date.split('-').map(Number);
@@ -234,24 +234,27 @@
     function calendarDefaultMonth(){
       const today=calendarTokyoToday().slice(0,7);
       const dates=all().map(e=>e.date).filter(validCalendarDate).sort();
-      return dates.some(date=>date.startsWith(today))?today:dates.at(-1)?.slice(0,7)||today;
+      const upcoming=siteData.schedule.sessions.filter(e=>validCalendarDate(e.dateJst)&&e.dateJst>=today).map(e=>e.dateJst).sort();
+      if(upcoming.some(date=>date.startsWith(today)))return today;
+      return dates.some(date=>date.startsWith(today))?today:upcoming[0]?.slice(0,7)||dates.at(-1)?.slice(0,7)||today;
     }
-    const calendarDefaultFilters=()=>({month:calendarDefaultMonth(),date:'',region:'all',series:'all',mode:'all',stage:'all'});
-    let calendarBrowse={month:'',date:'',region:'all',series:'all',mode:'all',stage:'all'};
+    const calendarDefaultFilters=()=>({month:calendarDefaultMonth(),date:'',region:'all',series:'all',mode:'all',stage:'all',scope:'all'});
+    let calendarBrowse={month:'',date:'',region:'all',series:'all',mode:'all',stage:'all',scope:'all'};
     function sanitizeCalendarFilters(value={}){
       const f=calendarDefaultFilters();
       if(typeof value.month==='string'&&/^(20\d{2}|2100)-(0[1-9]|1[0-2])$/.test(value.month))f.month=value.month;
       if(validCalendarDate(value.date)&&value.date.startsWith(f.month+'-'))f.date=value.date;
       if(regions.includes(value.region))f.region=value.region;
       for(const axis of ['series','mode'])
-        if(tournamentAxes.find(item=>item.key===axis)?.options.some(option=>option.id===value[axis]))f[axis]=value[axis];
-      if(rawAll().some(e=>e.kind===value.stage))f.stage=value.stage;
+        if(tournamentAxes.find(item=>item.key===axis)?.options.some(option=>option.id===value[axis])||(axis==='series'&&value[axis]==='ranked-cup'))f[axis]=value[axis];
+      if(rawAll().some(e=>e.kind===value.stage)||value.stage==='単一ラウンド')f.stage=value.stage;
+      if(['all','scheduled','results'].includes(value.scope))f.scope=value.scope;
       return f;
     }
     function calendarHash(filters={}){
       const f=sanitizeCalendarFilters(filters),params=new URLSearchParams();
       params.set('month',f.month);
-      for(const key of ['date','region','series','mode','stage'])if(f[key]&&f[key]!=='all')params.set(key,f[key]);
+      for(const key of ['date','region','series','mode','stage','scope'])if(f[key]&&f[key]!=='all')params.set(key,f[key]);
       return '#calendar?'+params.toString();
     }
     function calendarShiftMonth(month,offset){
@@ -278,6 +281,75 @@
       return '<div class="calendar-filter-field"><label for="calendar-'+key+'">'+escape(label)+'</label><select id="calendar-'+key+'" data-calendar-filter="'+escape(key)+'">'
         +options.map(option=>'<option value="'+escape(option.id)+'"'+(option.id===selected?' selected':'')+'>'+escape(option.label)+'</option>').join('')+'</select></div>';
     }
+
+    // Distinct scheduled sessions: never passed to AOT PR, player profiles,
+    // prize totals, tournament histories, achievements or registered results.
+    function calendarUpcomingSessions(filters) {
+      if(filters.scope==='results')return [];
+      return siteData.schedule.sessions.filter(e=>{
+        if(!e||e.seasonId!==siteData.schedule.seasonId||!validCalendarDate(e.dateJst)||!e.dateJst.startsWith(filters.month+'-'))return false;
+        if(!regions.includes(e.region)||(/fncs/i.test(e.name)&&!/fncs\s+division\s*1/i.test(e.name)))return false;
+        return (filters.region==='all'||e.region===filters.region)
+          &&(filters.series==='all'||e.series===filters.series)
+          &&(filters.mode==='all'||e.mode===filters.mode)
+          &&(filters.stage==='all'||e.stage===filters.stage);
+      }).sort((a,b)=>a.startUtc.localeCompare(b.startUtc)||a.region.localeCompare(b.region));
+    }
+    function renderUpcomingCalendar(filters) {
+      const root=$('#calendar-content'),scheduled=calendarUpcomingSessions(filters),byDate=new Map();
+      for(const e of scheduled){
+        if(!byDate.has(e.dateJst))byDate.set(e.dateJst,[]);
+        byDate.get(e.dateJst).push(e);
+      }
+      const selector=root.querySelector('#calendar-series');
+      if(selector){
+        selector.insertAdjacentHTML('beforeend','<option value="ranked-cup">Ranked Cup</option>');
+        selector.value=filters.series;
+      }
+      const stage=root.querySelector('#calendar-stage');
+      if(stage){
+        stage.insertAdjacentHTML('beforeend','<option value="単一ラウンド">単一ラウンド</option>');
+        stage.value=filters.stage;
+      }
+      root.querySelector('.calendar-filter-grid').insertAdjacentHTML('beforeend',
+        '<div class="calendar-filter-field"><label for="calendar-scope">表示内容</label>'
+        +'<select id="calendar-scope" data-calendar-filter="scope">'
+        +[['all','結果＋予定'],['scheduled','開催予定のみ'],['results','登録済み結果のみ']]
+          .map(([id,label])=>'<option value="'+id+'"'+(id===filters.scope?' selected':'')+'>'+label+'</option>').join('')
+        +'</select></div>');
+      const monthSummary=root.querySelector('.calendar-month-head small');
+      monthSummary.textContent+=' · 予定'+format(scheduled.length)+'枠';
+      for(const button of root.querySelectorAll('[data-calendar-day]')){
+        const day=button.dataset.calendarDay,count=(byDate.get(day)||[]).length;
+        if(!count)continue;
+        button.classList.add('has-upcoming');
+        button.insertAdjacentHTML('beforeend','<span class="calendar-day-upcoming-count">予定 '+format(count)+'</span>');
+        button.setAttribute('aria-label',button.getAttribute('aria-label')+'、今季予定'+count+'枠');
+      }
+      const entries=byDate.get(filters.date)||[];
+      if(filters.scope==='scheduled')for(const elem of root.querySelectorAll('.calendar-event,.calendar-day-count'))elem.hidden=true;
+      const list=root.querySelector('.calendar-event-list');
+      if(entries.length&&list.querySelector('.calendar-empty'))list.querySelector('.calendar-empty').remove();
+      const cards=entries.map(e=>{
+        const status=Date.now()<Date.parse(e.startUtc)?'開催予定':'開始時刻経過';
+        const link=safeUrl(e.url);
+        return '<article class="calendar-upcoming-event" data-scheduled-id="'+escape(e.id)+'">'
+          +'<div class="calendar-event-top"><span class="calendar-event-tag is-upcoming">'+status+'</span>'
+          +'<span class="calendar-event-tag is-region">'+escape(e.region)+'</span>'
+          +'<span class="calendar-event-tag">'+escape(e.stage)+'</span>'
+          +(e.rewardType==='cosmetic'?'<span class="calendar-event-tag">コスメ報酬</span>':'')+'</div>'
+          +'<h3>'+escape(e.name)+'</h3>'
+          +'<p><strong>日本時間 '+escape(e.timeJst)+' 開始</strong> · '+escape(e.round)+'</p>'
+          +(link?'<p><a href="'+escape(link)+'" target="_blank" rel="noopener noreferrer">Epic公式の日程を確認 ↗</a></p>':'')
+          +'<p class="calendar-upcoming-note">日程のみ登録。参加・結果・賞金獲得は未確認</p></article>';
+      }).join('');
+      list.insertAdjacentHTML('beforeend',cards);
+      root.querySelector('.calendar-detail-head h2').textContent=filters.date.replace(/-/g,'/')+' の大会';
+      root.querySelector('.calendar-detail-head p').textContent+=' · 予定'+format(entries.length)+'枠';
+      root.querySelector('.calendar-intro p:last-child').textContent='登録済みの海外大会結果と、今シーズンの開催予定を同じカレンダーで確認できるよ。';
+      root.querySelector('.calendar-note').textContent='※ 開催予定：'+siteData.schedule.seasonLabel+'（'+siteData.schedule.checkedAt+'時点の確認分）。海外6地域の公式大会日程をJSTに変換して表示します。FNCS Division 1以外のFNCSはリージョンロックのため除外。開催予定は実績・賞金・AOT PR・称号に加算しません。開催日や時刻は変更される場合があるため、必ず公式大会ページで再確認してください。';
+      root.querySelector('.calendar-legend').textContent='青い開催枠は実際に掲載した戦績、紫の「予定」は確認済みの日程です（出場・賞金獲得とは別）。';
+    }
     function renderCalendar(){
       const filters=sanitizeCalendarFilters(calendarBrowse);
       const sessions=calendarSessions(filters);
@@ -288,7 +360,8 @@
       }
       const today=calendarTokyoToday();
       const dates=[...byDay.keys()].sort();
-      filters.date=(validCalendarDate(filters.date)&&filters.date.startsWith(filters.month+'-'))?filters.date:(dates.at(-1)||((today.startsWith(filters.month+'-'))?today:filters.month+'-01'));
+      const nextScheduled=siteData.schedule.sessions.filter(e=>e.dateJst>=today&&e.dateJst.startsWith(filters.month+'-')&&(!regions.includes(filters.region)||e.region===filters.region)).map(e=>e.dateJst).sort()[0];
+      filters.date=(validCalendarDate(filters.date)&&filters.date.startsWith(filters.month+'-'))?filters.date:(nextScheduled||dates.at(-1)||((today.startsWith(filters.month+'-'))?today:filters.month+'-01'));
       calendarBrowse={...filters};
       if(currentView.page==='calendar')currentView.calendar={...filters};
       const [year,month]=filters.month.split('-').map(Number);
@@ -340,12 +413,13 @@
         +'<section class="calendar-detail-panel" aria-label="選択した日の大会"><div class="calendar-detail-head"><h2>'+escape(filters.date.replace(/-/g,'/'))+' の掲載大会</h2>'
         +'<p>'+format(selected.length)+'開催枠 · '+format(selected.reduce((sum,item)=>sum+item.records.length,0))+'戦績</p></div>'
         +'<div class="calendar-event-list">'+(eventsMarkup||'<div class="calendar-empty"><strong>この日の掲載成績はまだないよ</strong>別の日付を選ぶか、地域・シリーズの絞り込みを変えてみてね</div>')+'</div></section>';
+      renderUpcomingCalendar(filters);
     }
     function updateCalendarFilter(key,value){
       const next={...calendarBrowse};
       if(key==='month'){next.month=value;next.date=''}
       else if(key==='date'){next.date=value}
-      else if(['region','series','mode','stage'].includes(key)){next[key]=value;next.date=''}
+      else if(['region','series','mode','stage','scope'].includes(key)){next[key]=value;next.date=''}
       else return;
       calendarBrowse=sanitizeCalendarFilters(next);
       renderCalendar();
