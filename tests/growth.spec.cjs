@@ -1,0 +1,63 @@
+'use strict';
+const {test,expect}=require('@playwright/test');
+const path=require('node:path');
+const {loadData}=require('../scripts/data-checks.cjs');
+const growth=require('../growth.js');
+const achievements=require('../achievements.js');
+const archive=loadData(path.join(__dirname,'..')).data.results;
+const name='Shiroka';
+const roster=row=>Array.isArray(row.players)&&row.players.length?row.players:[row.player];
+const own=archive.filter(row=>roster(row).includes(name));
+test('成長グラフのスクリプトとスタイルが配信される',async({request})=>{
+ for(const file of ['/growth.js','/growth.css']){
+  const response=await request.get(file);
+  expect(response.status()).toBe(200);
+  const body=await response.text();
+  expect(body).toContain(file.endsWith('.js')?'AsiaGrowth':'growth-chart-scroll');
+ }
+});
+test('PC・スマホで月別・シーズン別、累計・期間別、4つの実績を切り替えられる',async({page})=>{
+ expect(own.length).toBeGreaterThan(2);
+ await page.goto('/?season=all#player='+encodeURIComponent(name));
+ const section=page.locator('#profile-growth');
+ await expect(section).toBeVisible();
+ await expect(section.locator('h2')).toContainText('成長グラフ');
+ await expect(section.locator('[data-growth-grouping="month"]')).toHaveAttribute('aria-pressed','true');
+ await expect(section.locator('[data-growth-mode="cumulative"]')).toHaveAttribute('aria-pressed','true');
+ await expect(section.locator('[data-growth-metric="pr"]')).toHaveAttribute('aria-pressed','true');
+ await expect(section.locator('.growth-svg')).toBeVisible();
+ await expect(section.locator('.growth-period-button').first()).toBeVisible();
+ const points=section.locator('[data-growth-point]');
+ expect(await points.count()).toBeGreaterThan(1);
+ await section.locator('[data-growth-metric="cash"]').click();
+ await expect(section.locator('[data-growth-metric="cash"]')).toHaveAttribute('aria-pressed','true');
+ const expected=growth.periods(own,'month',{player:name,cash:achievements.individualCash});
+ const total=expected.points.at(-1).cumulative.cash;
+ await expect(section.locator('.growth-detail')).toContainText('$'+total.toLocaleString('ja-JP',{maximumFractionDigits:2}));
+ await section.locator('[data-growth-mode="period"]').click();
+ await expect(section.locator('[data-growth-mode="period"]')).toHaveAttribute('aria-pressed','true');
+ await section.locator('[data-growth-metric="finals"]').click();
+ await expect(section.locator('[data-growth-metric="finals"]')).toHaveAttribute('aria-pressed','true');
+ await section.locator('[data-growth-metric="podiums"]').click();
+ await expect(section.locator('[data-growth-metric="podiums"]')).toHaveAttribute('aria-pressed','true');
+ await section.locator('[data-growth-point]').first().click();
+ await expect(section.locator('[data-growth-point]').first()).toHaveAttribute('aria-pressed','true');
+ await section.locator('.growth-data-details summary').click();
+ await expect(section.locator('.growth-data-details tbody tr')).toHaveCount(expected.points.length);
+ await section.locator('[data-growth-grouping="season"]').click();
+ await expect(section.locator('[data-growth-grouping="season"]')).toHaveAttribute('aria-pressed','true');
+ await expect(section.locator('.growth-period-button').first()).toBeVisible();
+ await section.locator('[data-growth-mode="cumulative"]').click();
+ await expect(section.locator('.growth-svg')).toBeVisible();
+ await expect(section.locator('.growth-footnote')).toContainText('当時の公式PRや順位ではありません');
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth+1)).toBe(true);
+});
+test('選択したサイト集計シーズンとは独立して全期間の成長グラフを保持する',async({page})=>{
+ await page.goto('/?season=all#player='+encodeURIComponent(name));
+ const section=page.locator('#profile-growth');
+ await expect(section.locator('.growth-svg')).toBeVisible();
+ const count=await section.locator('[data-growth-point]').count();
+ await page.locator('#season-select').selectOption('S42');
+ await expect(section.locator('[data-growth-point]')).toHaveCount(count);
+ await expect(section.locator('.growth-footnote')).toContainText('全期間');
+});
