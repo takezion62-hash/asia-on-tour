@@ -371,6 +371,135 @@
     return {achievements:specials,unlocked:specials.filter(a=>a.unlocked),locked:specials.filter(a=>!a.unlocked),
       earned:specials.filter(a=>a.unlocked).length,total:specials.length};
   }
+
+  // Separate secret gallery. A hidden badge is never rendered with a real
+  // title or detailed requirement until the verified archive unlocks it.
+  const SECRET_CATALOG = Object.freeze([
+    {id:'silent-crown',icon:'🕊️',title:'無音の王冠',hint:'勝利に、銃声は必要ない',
+      description:'ソロ決勝の同一掲載戦績で0K・0VR・確認済み個人現金賞金を同時達成',
+      rarity:'legendary',difficulty:'極高'},
+    {id:'golden-strike',icon:'🎯',title:'黄金の一撃',hint:'たった一撃が運命を変えた',
+      description:'ソロ決勝の同一掲載戦績で1K・1VR以上・確認済み個人現金賞金を同時達成',
+      rarity:'legendary'},
+    {id:'death-coronation',icon:'💀',title:'死神の戴冠',hint:'勝者であり、狩人でもある',
+      description:'ソロ決勝の同一掲載戦績で総合1位・30K以上・確認済み個人現金賞金を同時達成',
+      rarity:'legendary'},
+    {id:'three-world-shadow',icon:'🌌',title:'三界を渡る影',hint:'一日のうちに、世界を三度渡った',
+      description:'同じ開催日に異なる海外3地域で確認済み戦績を記録',
+      rarity:'legendary'},
+    {id:'triple-gold',icon:'💎',title:'三重の黄金',hint:'三つの世界から黄金を持ち帰る',
+      description:'同じ開催日に異なる海外3地域で確認済み個人現金賞金を獲得',
+      rarity:'legendary',sealed:true},
+    {id:'six-region-bounty',icon:'🌐',title:'六界の賞金首',hint:'もはや逃げ場は、どこにもない',
+      description:'ME・EU・NAC・NAW・OCE・BRの海外6地域すべてで個人現金賞金を獲得',
+      rarity:'legendary'},
+    {id:'borderless-champion',icon:'👑',title:'国境なき王者',hint:'王座に国境は存在しない',
+      description:'異なる海外3地域の大会決勝でそれぞれ総合1位を記録',
+      rarity:'legendary'},
+    {id:'returning-phoenix',icon:'🔥',title:'不死鳥の遠征',hint:'時を超え、再び戦場へ',
+      description:'同じ海外地域で365日以上離れた日付の大会から個人現金賞金を獲得',
+      rarity:'epic'},
+    {id:'light-and-shadow',icon:'🎭',title:'光と影の双貌',hint:'静寂と破壊、二つの顔を持つ者',
+      description:'確認済みソロ戦績で0K・個人賞金獲得と、別のソロ大会セッションで65K以上を両方記録',
+      rarity:'legendary',sealed:true},
+    {id:'double-crown-miracle',icon:'⚡',title:'双冠の奇跡',hint:'二つの戦場で、二つの王冠を掲げた',
+      description:'同じ開催日に異なる海外2地域それぞれの同一戦績でVRと個人現金賞金を両方獲得',
+      rarity:'legendary'}
+  ].map(x=>Object.freeze({goal:1,unit:'条件',...x})));
+
+  function calculateSecretEvidence(verified,catalog=[]) {
+    const paid=verified.filter(row=>individualCash(row)>0);
+    const solo=row=>confirmedKillFormat(row,catalog)==='solo';
+    const isFinal=row=>FINAL_KINDS.has(row.kind);
+    const validCashDay=row=>dayNumber(row.date)!==null&&REGIONS.includes(row.region);
+    const pickOnePerRegion=rows=>{
+      const seen=new Set();
+      return rows.filter(row=>REGIONS.includes(row.region)&&!seen.has(row.region)&&(seen.add(row.region),true));
+    };
+    const sameDayRegions=rows=>bestDateWindow(rows,1,row=>row.region);
+    const results=SECRET_CATALOG.map(def=>{
+      let evidence=[];
+      switch(def.id){
+        case 'silent-crown':
+          evidence=paid.filter(row=>isFinal(row)&&solo(row)&&row.kills===0&&row.vrs===0);
+          break;
+        case 'golden-strike':
+          evidence=paid.filter(row=>isFinal(row)&&solo(row)&&row.kills===1&&Number.isInteger(row.vrs)&&row.vrs>=1);
+          break;
+        case 'death-coronation':
+          evidence=paid.filter(row=>isFinal(row)&&solo(row)&&row.rank===1&&Number.isInteger(row.kills)&&row.kills>=30);
+          break;
+        case 'three-world-shadow':
+          evidence=sameDayRegions(verified);
+          break;
+        case 'triple-gold':
+          evidence=sameDayRegions(paid);
+          break;
+        case 'six-region-bounty':
+          evidence=pickOnePerRegion(paid);
+          break;
+        case 'borderless-champion':
+          evidence=pickOnePerRegion(verified.filter(row=>isFinal(row)&&row.rank===1));
+          break;
+        case 'returning-phoenix':{
+          const byRegion=new Map();
+          for(const row of paid){
+            if(!validCashDay(row))continue;
+            const entries=byRegion.get(row.region)||[];
+            entries.push(row);
+            byRegion.set(row.region,entries);
+          }
+          for(const [region,entries] of byRegion){
+            entries.sort((a,b)=>a.date.localeCompare(b.date));
+            if(entries.length<2)continue;
+            const first=entries[0],last=entries[entries.length-1];
+            if(dayNumber(last.date)-dayNumber(first.date)>=365){
+              evidence=[first,last];
+              break;
+            }
+          }
+          break;
+        }
+        case 'light-and-shadow':{
+          const zero=paid.find(row=>solo(row)&&row.kills===0);
+          const destruction=verified.find(row=>solo(row)&&Number.isInteger(row.kills)&&row.kills>=65&&row.id!==zero?.id);
+          if(zero&&destruction)evidence=[zero,destruction];
+          break;
+        }
+        case 'double-crown-miracle':
+          evidence=sameDayRegions(paid.filter(row=>Number.isInteger(row.vrs)&&row.vrs>0));
+          break;
+      }
+      const goal=def.id==='three-world-shadow'||def.id==='triple-gold'||def.id==='borderless-champion'?3:
+        def.id==='six-region-bounty'?6:def.id==='returning-phoenix'||def.id==='light-and-shadow'||def.id==='double-crown-miracle'?2:1;
+      const unlocked=evidence.length>=goal;
+      return {...def,goal,progress:evidence.length,unlocked,
+        remaining:Math.max(0,goal-evidence.length),
+        rarityLabel:SPECIAL_TIERS[def.rarity].name,
+        evidence:unlocked?evidence.slice(0,6).map(row=>({
+          ...specialRecordEvidence(row),
+          ...(Number.isInteger(row.kills)?{kills:row.kills}:{}),
+          ...(Number.isInteger(row.vrs)?{vrs:row.vrs}:{}),
+          ...(individualCash(row)>0?{personalCash:individualCash(row)}:{})
+        })):[]
+      };
+    });
+    return {
+      achievements:results,
+      unlocked:results.filter(b=>b.unlocked),
+      locked:results.filter(b=>!b.unlocked),
+      earned:results.filter(b=>b.unlocked).length,
+      total:results.length,
+      visibleLocked:results.filter(b=>!b.unlocked&&!b.sealed)
+    };
+  }
+  function calculateSecret(records,playerName,options={}) {
+    const verified=typeof playerName==='string'&&playerName
+      ?(Array.isArray(records)?records:[]).filter(row=>row&&row.verified===true&&roster(row).includes(playerName))
+      :[];
+    return calculateSecretEvidence(verified,options.catalog);
+  }
+
   function calculateSpecial(records,playerName,options={}) {
     if(typeof playerName!=='string'||!playerName)return computeSpecial([],options.catalog);
     const verified=(Array.isArray(records)?records:[]).filter(row=>row&&row.verified===true&&roster(row).includes(playerName));
@@ -410,8 +539,9 @@
       earned:unlocked.length,
       total:CATALOG.length,
       evolution:calculateEvolution(value),
-      special:computeSpecial(verified,options.catalog)
+      special:computeSpecial(verified,options.catalog),
+      secret:calculateSecretEvidence(verified,options.catalog)
     };
   }
-  return Object.freeze({VERSION:6,REGIONS:Object.freeze(REGIONS),CATALOG,EVOLUTION_TIERS,EVOLUTION_TRACKS,SPECIAL_TIERS,SPECIAL_CATALOG,calculate,calculateSpecial,calculateEvolution,confirmedKillFormat,confirmedPrizeFormat,DESTRUCTION_KILLS,SPECIALIST_GOALS,SPECIALIST_NAMES,WEAPON_MILESTONES,SOLO_KILL_MILESTONES,TEAM_FORMATS,TEAM_FORMAT_LABELS,individualCash,confirmedSkin});
+  return Object.freeze({VERSION:7,REGIONS:Object.freeze(REGIONS),CATALOG,EVOLUTION_TIERS,EVOLUTION_TRACKS,SPECIAL_TIERS,SPECIAL_CATALOG,SECRET_CATALOG,calculate,calculateSpecial,calculateSecret,calculateEvolution,confirmedKillFormat,confirmedPrizeFormat,DESTRUCTION_KILLS,SPECIALIST_GOALS,SPECIALIST_NAMES,WEAPON_MILESTONES,SOLO_KILL_MILESTONES,TEAM_FORMATS,TEAM_FORMAT_LABELS,individualCash,confirmedSkin});
 });
