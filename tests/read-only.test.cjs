@@ -9,6 +9,7 @@ const { loadData, summarize, seasonFor, tournamentFor, tournamentKey } = require
 const data = loadData(path.join(__dirname, '..')).data;
 const records = data.results;
 const updates = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'updates.json'), 'utf8'));
+const schedule = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'schedule.json'), 'utf8'));
 // The real asynchronous loader is exercised by Playwright. The DOM harness
 // substitutes only its input data so these exhaustive rendering tests stay fast.
 const script = (() => {
@@ -27,7 +28,7 @@ const script = (() => {
     ['tournamentAxes', 'siteData.tournaments.axes', data.tournaments.axes], ['tournamentCatalog', 'siteData.tournaments.catalog', data.tournaments.catalog],
     ['confirmedAliases', 'siteData.players.confirmedAliases', data.players.confirmedAliases]
   ]) body = body.replace('const ' + name + '=' + reference + ';', () => 'const ' + name + '=' + (Array.isArray(value) ? literal(value) : JSON.stringify(value)) + ';');
-  return '(() => {\n const updateEntries=' + JSON.stringify(updates.entries) + ';\n' + body + '\n})();';
+  return '(() => {\n const siteData=' + JSON.stringify({results:records,players:data.players,tournaments:data.tournaments,updates,schedule}) + ';\n const updateEntries=' + JSON.stringify(updates.entries) + ';\n' + body + '\n})();';
 })();
 const sampleRecord = { id:'unit-fixture', date:'2026-09-01', region:'ME', player:'Fixture', playerRaw:'Fixture', event:'Solo Victory Cup Battle Royale', round:'Event 1 · Round 2 / 賞金決勝', rank:17, points:100, kills:2, vrs:1, prize:100, kind:'賞金決勝', source:'https://fortnitetracker.com/events/epicgames_S42_SoloVictoryCup_ME', verified:true, note:'単体テスト専用データ' };
 const decode = value => value.replace(/&(amp|lt|gt|quot|#39);/g,
@@ -67,6 +68,8 @@ class Element {
     for (const callback of this.events.get(type) || []) callback(event);
   }
   setAttribute(name, value) { this.attributes[name] = value; }
+  hasAttribute(name) { return Object.hasOwn(this.attributes,name); }
+  getAttribute(name) { return this.attributes[name] ?? null; }
   set innerHTML(value) { this.markup = value; this.onHTML?.(value); }
   get innerHTML() { return this.markup; }
   closest(selector) {
@@ -157,7 +160,7 @@ function boot(source = script, { hash = '', search = '?season=all' } = {}) {
     }
   };
   const sandbox = {
-    document, window, AsiaRankings: require('../rankings.js'), AotPR: require('../aot-pr.js'), AsiaAchievements: require('../achievements.js'),
+    document, window, AsiaRankings: require('../rankings.js'), AotPR: require('../aot-pr.js'), AsiaAchievements: require('../achievements.js'), AsiaGrowth: require('../growth.js'), AsiaCompare: require('../compare.js'),
     URL: BrowserURL, URLSearchParams, Blob, setTimeout: callback => { callback(); return 1; }
   };
   Object.defineProperty(sandbox, 'location', { get: () => location });
