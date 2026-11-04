@@ -186,6 +186,59 @@
       maxed:level===milestones.length,stages:milestones};
   }
 
+  // Tournament-format badges use catalog metadata first; an explicit name
+  // provides a conservative fallback when no catalog entry matches.
+  function tournamentMatches(row,catalog=[]) {
+    return Array.isArray(catalog)?catalog.filter(t=>t&&t.name===row.event
+      &&(!row.seasonId||t.seasonId===row.seasonId)):[];
+  }
+  function confirmedMode(row,catalog,predicate,fallback) {
+    const matches=tournamentMatches(row,catalog);
+    if(matches.length)return matches.every(predicate);
+    return fallback.test(String(row.event||''));
+  }
+  function isReloadEvent(row,catalog) {
+    return confirmedMode(row,catalog,t=>['reload','reload-zero-build'].includes(t.mode),/\breload\b/i);
+  }
+  function isZeroBuildEvent(row,catalog) {
+    return confirmedMode(row,catalog,t=>['zero-build','reload-zero-build'].includes(t.mode),/\b(?:zero[ -]?build|zb)\b/i);
+  }
+  function isFNCSEvent(row,catalog) {
+    return confirmedMode(row,catalog,t=>t.series==='fncs',/^(?:FNCS\b|Fortnite Champion Series\b)/i);
+  }
+  function dayNumber(value) {
+    if(typeof value!=='string'||!/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/.test(value))return null;
+    const day=new Date(value+'T00:00:00Z');
+    return Number.isFinite(day.getTime())&&day.toISOString().slice(0,10)===value
+      ?Math.floor(day.getTime()/86400000):null;
+  }
+  function eventIdentity(row) {
+    if(dayNumber(row.date)===null||!REGIONS.includes(row.region)
+      ||typeof row.event!=='string'||!row.event.trim())return null;
+    return [row.date,row.region,row.event,row.seasonId||''].join('\u001f');
+  }
+  // Return the strongest qualifying group, counting each region/event once
+  // within the inclusive date window. No inferred times or player identities.
+  function bestDateWindow(rows,days,keyOf) {
+    const sorted=rows.filter(row=>dayNumber(row.date)!==null&&REGIONS.includes(row.region))
+      .sort((a,b)=>a.date.localeCompare(b.date)||String(a.id||'').localeCompare(String(b.id||'')));
+    let best=[];
+    for(let i=0;i<sorted.length;i++){
+      const start=dayNumber(sorted[i].date),keys=new Set(),candidate=[];
+      for(let j=i;j<sorted.length;j++){
+        if(dayNumber(sorted[j].date)-start>=days)break;
+        const key=keyOf(sorted[j]);
+        if(key!=null&&!keys.has(key)){keys.add(key);candidate.push(sorted[j]);}
+      }
+      if(candidate.length>best.length)best=candidate;
+    }
+    return best;
+  }
+  function uniqueTournamentRows(rows) {
+    const used=new Set();
+    return rows.filter(row=>{const key=eventIdentity(row);if(!key||used.has(key))return false;used.add(key);return true;});
+  }
+
   const SPECIAL_CATALOG = Object.freeze([
     {id:'silent-earner',icon:'🥷',title:'静かなる賞金稼ぎ',description:'KILLSが明確に0の掲載戦績で、個人の現金賞金を獲得',rarity:'epic',goal:1},
     {id:'pacifist-vr',icon:'🕊️',title:'戦わずして勝つ',description:'KILLSが明確に0の掲載戦績でVRを獲得（チーム戦はチーム合計）',rarity:'legendary',goal:1},
@@ -199,6 +252,19 @@
     {id:'vr-three-regions',icon:'🌏',title:'旅先の勝者',description:'異なる海外3地域でVRを確認（チーム戦を含む）',rarity:'legendary',goal:3,unit:'地域'},
     {id:'vr-and-cash',icon:'✨',title:'ダブルクラウン',description:'同じ掲載戦績でVRと個人の現金賞金を両方確認',rarity:'rare',goal:1},
     {id:'top-ten',icon:'🥇',title:'海外決勝TOP10',description:'確認済みの海外大会決勝で総合10位以内',rarity:'epic',goal:1},
+    // New special awards: all derived from confirmed archive records.
+    {id:'final-kill-tyrant',icon:'⚔️',title:'決勝の暴君',description:'海外ソロ大会の決勝セッションで30K以上を記録',rarity:'epic',goal:1},
+    {id:'final-runner-up',icon:'🥈',title:'あと一歩の英雄',description:'海外大会の決勝で総合2位を獲得',rarity:'rare',goal:1},
+    {id:'podium-streak',icon:'🏅',title:'表彰台の常連',description:'異なる海外大会の決勝で総合TOP3を累計3回',rarity:'epic',goal:3},
+    {id:'cash-windfall',icon:'💸',title:'一攫千金',description:'1大会戦績で個人現金賞金500 USD以上を獲得',rarity:'epic',goal:1},
+    {id:'cash-chain',icon:'🔗',title:'賞金連鎖',description:'30日以内（両端の日付差30日以内）に異なる海外3大会で個人現金賞金を獲得',rarity:'epic',goal:3},
+    {id:'same-day-traveler',icon:'🌍',title:'時差を駆ける者',description:'同じ日に異なる海外2地域で確認済み戦績を記録',rarity:'epic',goal:2,unit:'地域'},
+    {id:'same-day-cash',icon:'💎',title:'ダブル遠征賞金王',description:'同じ日に異なる海外2地域で個人現金賞金を獲得',rarity:'legendary',goal:2,unit:'地域'},
+    {id:'reload-regular',icon:'🧱',title:'リロードの申し子',description:'海外Reload大会の確認済み掲載戦績が累計10件',rarity:'rare',goal:10},
+    {id:'no-vr-cash',icon:'🎯',title:'勝たずして稼ぐ',description:'VRが明確に0の大会戦績で個人現金賞金を獲得',rarity:'rare',goal:1},
+    {id:'zero-build-champion',icon:'🛡️',title:'ゼロビルドの覇者',description:'海外Zero Build大会の決勝で総合1位を獲得',rarity:'epic',goal:1},
+    {id:'fncs-finalist',icon:'🏟️',title:'世界への挑戦状',description:'海外FNCS本大会・Division・Practiceの決勝で順位付き戦績を記録（スキン大会は除外）',rarity:'epic',goal:1},
+    {id:'seven-day-traveler',icon:'🗺️',title:'七日間の旅人',description:'連続する7日間以内に異なる海外3地域で戦績を記録',rarity:'legendary',goal:3,unit:'地域'},
     ...REGIONS.map((region,index)=>({
       id:'specialist-'+region.toLowerCase(),
       icon:['🏜️','🏰','🌆','🌉','🌊','🌴'][index],
@@ -252,6 +318,26 @@
         case 'vr-three-regions': evidence=uniqueRegions(withVR);break;
         case 'vr-and-cash': evidence=paid.filter(row=>Number.isInteger(row.vrs)&&row.vrs>0);break;
         case 'top-ten': evidence=verified.filter(row=>FINAL_KINDS.has(row.kind)&&Number.isInteger(row.rank)&&row.rank>=1&&row.rank<=10);break;
+        case 'final-kill-tyrant': evidence=verified.filter(row=>FINAL_KINDS.has(row.kind)
+          &&confirmedKillFormat(row,catalog)==='solo'&&Number.isInteger(row.kills)&&row.kills>=30);break;
+        case 'final-runner-up': evidence=verified.filter(row=>FINAL_KINDS.has(row.kind)&&row.rank===2);break;
+        case 'podium-streak': evidence=uniqueTournamentRows(verified.filter(row=>FINAL_KINDS.has(row.kind)
+          &&Number.isInteger(row.rank)&&row.rank>=1&&row.rank<=3));break;
+        case 'cash-windfall': evidence=paid.filter(row=>individualCash(row)>=500);break;
+        case 'cash-chain': evidence=bestDateWindow(paid,31,eventIdentity);break;
+        case 'same-day-traveler': evidence=bestDateWindow(verified,1,row=>row.region);break;
+        case 'same-day-cash': evidence=bestDateWindow(paid,1,row=>row.region);break;
+        case 'reload-regular':{
+          const seen=new Set();
+          evidence=verified.filter(row=>row.id&&!seen.has(row.id)&&isReloadEvent(row,catalog)
+            &&(seen.add(row.id),true));break;
+        }
+        case 'no-vr-cash': evidence=paid.filter(row=>row.vrs===0);break;
+        case 'zero-build-champion': evidence=verified.filter(row=>FINAL_KINDS.has(row.kind)
+          &&row.rank===1&&isZeroBuildEvent(row,catalog));break;
+        case 'fncs-finalist': evidence=verified.filter(row=>FINAL_KINDS.has(row.kind)
+          &&Number.isInteger(row.rank)&&row.rank>0&&isFNCSEvent(row,catalog));break;
+        case 'seven-day-traveler': evidence=bestDateWindow(verified,7,row=>row.region);break;
         default: evidence=def.region?verified.filter(row=>row.region===def.region):[];break;
       }
       const isSoloKills=def.id==='solo-kill-mastery';
@@ -274,6 +360,8 @@
         evidence:evidence.slice(0,isWeapons?4:3).map(row=>({ ...specialRecordEvidence(row),
           ...(isWeapons?{teamFormat:confirmedPrizeFormat(row,catalog)}:{}),
           ...(isSoloKills?{kills:row.kills,killFormat:'solo'}:{}),
+          ...(def.id==='final-kill-tyrant'?{kills:row.kills,killFormat:'solo'}:{}),
+          ...(def.id==='cash-windfall'?{personalCash:individualCash(row)}:{}),
           ...(def.id==='twenty-kills'?{
             kills:row.kills,killFormat:confirmedKillFormat(row,catalog),killThreshold:DESTRUCTION_KILLS[confirmedKillFormat(row,catalog)]
           }:{})
@@ -325,5 +413,5 @@
       special:computeSpecial(verified,options.catalog)
     };
   }
-  return Object.freeze({VERSION:5,REGIONS:Object.freeze(REGIONS),CATALOG,EVOLUTION_TIERS,EVOLUTION_TRACKS,SPECIAL_TIERS,SPECIAL_CATALOG,calculate,calculateSpecial,calculateEvolution,confirmedKillFormat,confirmedPrizeFormat,DESTRUCTION_KILLS,SPECIALIST_GOALS,SPECIALIST_NAMES,WEAPON_MILESTONES,SOLO_KILL_MILESTONES,TEAM_FORMATS,TEAM_FORMAT_LABELS,individualCash,confirmedSkin});
+  return Object.freeze({VERSION:6,REGIONS:Object.freeze(REGIONS),CATALOG,EVOLUTION_TIERS,EVOLUTION_TRACKS,SPECIAL_TIERS,SPECIAL_CATALOG,calculate,calculateSpecial,calculateEvolution,confirmedKillFormat,confirmedPrizeFormat,DESTRUCTION_KILLS,SPECIALIST_GOALS,SPECIALIST_NAMES,WEAPON_MILESTONES,SOLO_KILL_MILESTONES,TEAM_FORMATS,TEAM_FORMAT_LABELS,individualCash,confirmedSkin});
 });
