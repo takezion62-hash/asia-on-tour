@@ -3,7 +3,7 @@ const http = require('node:http');
 const fs = require('node:fs');
 const path = require('node:path');
 const root = path.join(__dirname, '..');
-const files = new Map([['/', 'index.html'], ['/index.html', 'index.html'], ['/app.js', 'app.js'], ['/rankings.js', 'rankings.js'], ['/aot-pr.js', 'aot-pr.js'], ['/aot-pr.css', 'aot-pr.css'], ['/achievements.js', 'achievements.js'], ['/achievements.css', 'achievements.css'], ...['results', 'players', 'tournaments', 'updates'].map(name => ['/' + name + '.json', name + '.json'])]);
+const files = new Map([['/', 'index.html'], ['/index.html', 'index.html'], ['/app.js', 'app.js'], ['/rankings.js', 'rankings.js'], ['/aot-pr.js', 'aot-pr.js'], ['/aot-pr.css', 'aot-pr.css'], ['/achievements.js', 'achievements.js'], ['/achievements.css', 'achievements.css'], ['/growth.js', 'growth.js'], ['/growth.css', 'growth.css'], ...['results', 'players', 'tournaments', 'updates'].map(name => ['/' + name + '.json', name + '.json'])]);
 const server = http.createServer((req, res) => {
   const file = files.get(new URL(req.url, 'http://localhost').pathname);
   if (!file || !['GET', 'HEAD'].includes(req.method)) { res.writeHead(404); res.end(); return; }
