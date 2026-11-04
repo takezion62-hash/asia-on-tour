@@ -90,3 +90,33 @@
 .tournament-detail-toolbar .tournament-show-all:hover{background:#294d65;border-color:#8cddea;color:white}
 .tournament-detail-toolbar .tournament-show-all:focus-visible{outline:2px solid #98e7f7;outline-offset:3px}
 @media(max-width:640px){.tournament-selected-scope{padding:10px 11px;gap:5px 9px}.tournament-detail-toolbar .tournament-show-all{font-size:11px;max-width:100%}}
+
+
+/* Tournament date search: all-published dates or any single calendar day. */
+.tournament-date-navigator{margin:18px 0;border:1px solid #4e7294;border-radius:18px;padding:19px 21px;background:linear-gradient(135deg,#1b2c43,#191e36);min-width:0}
+.tournament-date-header{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:14px}
+.tournament-date-eyebrow{font-size:10px;font-weight:900;color:#83dce7;letter-spacing:.14em}
+.tournament-date-header h2{font-size:clamp(18px,2.5vw,24px);font-weight:900;line-height:1.3;color:#f0efff;margin:5px 0 0}
+.tournament-date-total{display:inline-flex;white-space:nowrap;border-radius:8px;border:1px solid #4f7493;background:#243951;padding:7px 10px;color:#b7dff0;font-size:11px;font-weight:800}
+.tournament-date-toolbar{display:flex;gap:12px;align-items:end;flex-wrap:wrap}
+.tournament-date-field{display:grid;gap:7px;flex:1 1 255px;min-width:0}
+.tournament-date-field label{font-size:11px;font-weight:800;color:#afc4e5}
+.tournament-date-field select{font:inherit;width:100%;min-height:43px;color:#f3f7ff;background:#111b30;border:1px solid #647d9d;border-radius:10px;padding:9px 12px;font-size:13px;line-height:1.45;cursor:pointer}
+.tournament-date-field select:focus-visible,.tournament-date-nav button:focus-visible{outline:2px solid #94e8f1;outline-offset:3px}
+.tournament-date-nav{display:flex;gap:7px;align-items:center;flex-wrap:wrap}
+.tournament-date-nav button{font:inherit;min-height:43px;min-width:112px;border-radius:10px;border:1px solid #6988a8;background:#233954;color:#d4edff;padding:8px 13px;font-size:11px;font-weight:850;cursor:pointer;white-space:nowrap}
+.tournament-date-nav button:hover:not(:disabled){background:#315479;border-color:#9cecf3}
+.tournament-date-nav button:disabled{cursor:not-allowed;opacity:.45}
+.tournament-date-current{font-size:12px;color:#a8dfec;font-weight:750;margin:13px 0 4px}
+.tournament-date-current strong{color:#edfdff;font-variant-numeric:tabular-nums}
+.tournament-date-note{font-size:10px;color:#a2b4d2;line-height:1.75;margin:8px 0 0}
+@media(max-width:640px){
+  .tournament-date-navigator{padding:14px 12px;margin:13px 0;border-radius:14px}
+  .tournament-date-header h2{font-size:19px}
+  .tournament-date-toolbar{display:grid;gap:9px}
+  .tournament-date-field{width:100%;flex-basis:auto}
+  .tournament-date-field select{font-size:12px}
+  .tournament-date-nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));width:100%}
+  .tournament-date-nav button{min-width:0;white-space:normal;padding:7px 9px}
+  .tournament-date-current{font-size:11px}
+}
