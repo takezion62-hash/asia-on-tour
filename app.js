@@ -978,6 +978,102 @@
         +'<p class="achievement-note">※ ASIA ON TOUR独自の非公式実績です。掲載された確認済み戦績のみで判定し、未確認や推測した別名義は加算しません。賞金は確認済みの個人現金受取額のみ。0・1キル称号はKILLSの数値が明記された場合だけです。KILLSとVRはチーム戦ではチーム合計、複数試合の大会戦績ではセッション合計であり、個人または1試合単位の達成とは限りません。スキンは獲得が明記された記録のみ。レア度はサイト独自の分類です。地域別スペシャリストと二刀流・三刀流・四刀流は全期間の掲載数／確認済み賞金獲得形式から自動進化します。ソロ累計キルの称号は、ソロ形式・本人のKILLSが確認できた戦績のみを対象とし、予選・決勝の掲載セッション合計を積み上げ、同一記録IDは重複計上しません。デュオ・トリオ・スクワッドのキル数は含めません。大会編成が不明な成績は形式数に含めません。追加の決勝・賞金・地域移動・Reload・Zero Build・FNCS称号も確認済みの掲載戦績から判定します。日付型称号は記録された開催日単位で集計し、同一大会の予選・決勝を別大会として二重に数えません。30日以内の賞金連鎖は両端の日付差30日以内、七日間の旅人は両端の日付差6日以内が条件です。シーズンを変えても全期間の実績が維持されます。</p></div></details></section>';
     }
 
+
+    // Growth charts are all-time even when another season is selected, just
+    // like the evolving titles. All values use the site's present calculation
+    // rules and source-verified archive rather than estimated historic stats.
+    const growthState={grouping:'month',metric:'pr',mode:'cumulative',selectedKey:null};
+    const growthCache=new Map();
+    function growthReport(name,grouping=growthState.grouping){
+      const key=name+'|'+grouping;
+      if(!growthCache.has(key)){
+        growthCache.set(key,AsiaGrowth.periods(rawAll(),grouping,{
+          player:name,season:recordSeason,cash:individualPrize,prizeFinalRank:confirmedPrizeFinalRank,
+          prScore:rows=>AotPR.calculate(rows,{
+            names,classify:classifyTournamentRecord,individualPrize
+          }).byName.get(name)?.score||0
+        }));
+      }
+      return growthCache.get(key);
+    }
+    const growthValue=(value,metric)=>metric==='pr'?prNumber(value):
+      metric==='cash'?'$'+Number(value||0).toLocaleString('ja-JP',{maximumFractionDigits:2}):format(value);
+    function profileGrowthSection(info){
+      return '<section class="profile-growth" id="profile-growth" aria-labelledby="profile-growth-title">'
+        +'<div class="growth-heading"><div><span class="growth-eyebrow">ASIA ON TOUR / PLAYER PROGRESSION</span>'
+        +'<h2 id="profile-growth-title">海外遠征の<span>成長グラフ</span></h2>'
+        +'<p>全期間の掲載済み戦績を月別・シーズン別に分析</p></div>'
+        +'<span class="growth-live-mark" aria-hidden="true">📈</span></div>'
+        +'<div id="growth-chart-content" aria-live="polite"></div></section>';
+    }
+    function renderProfileGrowth(name){
+      const root=$('#growth-chart-content');
+      if(!root)return;
+      const report=growthReport(name),metric=AsiaGrowth.METRICS.find(x=>x.id===growthState.metric)||AsiaGrowth.METRICS[0];
+      const points=AsiaGrowth.series(report,metric.id,growthState.mode);
+      const controls='<div class="growth-controls">'
+        +'<div class="growth-control-group" role="group" aria-label="集計単位">'
+        +[['month','月別'],['season','シーズン別']].map(([id,label])=>'<button type="button" data-growth-grouping="'+id+'" aria-pressed="'+(growthState.grouping===id)+'">'+label+'</button>').join('')+'</div>'
+        +'<div class="growth-control-group" role="group" aria-label="表示方法">'
+        +[['cumulative','累計'],['period','期間別']].map(([id,label])=>'<button type="button" data-growth-mode="'+id+'" aria-pressed="'+(growthState.mode===id)+'">'+label+'</button>').join('')+'</div>'
+        +'<div class="growth-control-group growth-metrics" role="group" aria-label="表示する成長指標">'
+        +AsiaGrowth.METRICS.map(def=>'<button type="button" data-growth-metric="'+escape(def.id)+'" aria-pressed="'+(metric.id===def.id)+'">'+escape(def.label)+'</button>').join('')+'</div></div>';
+      if(!points.length){
+        root.innerHTML=controls+'<p class="growth-empty">この選手には、日付・シーズンを確認できる掲載戦績がまだありません。確認済み戦績が追加されると自動的にグラフへ反映されます。</p>';
+        return;
+      }
+      const current=points.find(p=>p.key===growthState.selectedKey)||points.at(-1);
+      const maxVal=Math.max(1,...points.map(point=>point.value));
+      const width=Math.max(640,Math.min(9000,points.length*68+100)),height=284;
+      const left=74,right=24,top=22,bottom=57,base=height-bottom;
+      const x=i=>left+(points.length>1?(width-left-right)*i/(points.length-1):0);
+      const y=value=>top+(base-top)*(1-value/maxVal);
+      const coords=points.map((p,i)=>[Number(x(i).toFixed(2)),Number(y(p.value).toFixed(2))]);
+      const poly=coords.map(([px,py],i)=>(i?'L':'M')+px+' '+py).join(' ');
+      const area='M'+coords[0][0]+' '+base+' '+poly.replace(/^M/,'L')+' L'+coords.at(-1)[0]+' '+base+' Z';
+      const activeIndex=points.indexOf(current),axisTicks=[0,.25,.5,.75,1].map(f=>{
+        const value=maxVal*f,py=y(value);
+        return '<line x1="'+left+'" y1="'+py+'" x2="'+(width-right)+'" y2="'+py+'" class="growth-gridline"/>'
+          +'<text x="'+(left-12)+'" y="'+(py+4)+'" text-anchor="end" class="growth-axis-value">'+escape(metric.id==='cash'?'$'+format(Math.round(value)):metric.id==='pr'?format(Math.round(value)):format(Math.round(value)))+'</text>';
+      }).join('');
+      const every=Math.max(1,Math.ceil(points.length/8));
+      const axisLabels=points.map((point,i)=>(i%every===0||i===points.length-1)
+        ?'<text x="'+x(i)+'" y="'+(height-18)+'" text-anchor="middle" class="growth-axis-label">'+escape(point.label)+'</text>':'').join('');
+      const dots=coords.map(([px,py],i)=>'<circle cx="'+px+'" cy="'+py+'" r="'+(points[i].key===current.key?6:3.5)+'" class="'+(points[i].key===current.key?'growth-dot is-selected':'growth-dot')+'"/>').join('');
+      const activeX=x(activeIndex),activeY=y(current.value);
+      const svg='<svg class="growth-svg" width="'+width+'" height="'+height+'" viewBox="0 0 '+width+' '+height+'" role="img" aria-labelledby="growth-svg-title growth-svg-desc">'
+        +'<title id="growth-svg-title">'+escape(name)+' · '+escape(metric.label)+'の'+(growthState.mode==='cumulative'?'累計':'期間別')+'推移</title>'
+        +'<desc id="growth-svg-desc">出典確認済みの掲載戦績を'+(growthState.grouping==='month'?'月別':'シーズン別')+'に集計した折れ線グラフ。下の期間ボタンから数値を確認できます。</desc>'
+        +'<defs><linearGradient id="growth-area-fill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#83c7f3" stop-opacity=".34"/><stop offset="1" stop-color="#83c7f3" stop-opacity=".02"/></linearGradient></defs>'
+        +axisTicks+axisLabels+'<path d="'+area+'" fill="url(#growth-area-fill)"/>'
+        +(points.length>1?'<path d="'+poly+'" class="growth-trend-line"/>':'')
+        +'<line x1="'+activeX+'" y1="'+top+'" x2="'+activeX+'" y2="'+base+'" class="growth-guide"/>'
+        +dots+'<circle cx="'+activeX+'" cy="'+activeY+'" r="10" class="growth-dot-halo"/></svg>';
+      const values=points.map(point=>'<button type="button" class="growth-period-button" data-growth-point="'+escape(point.key)+'" aria-pressed="'+(point.key===current.key)+'">'
+        +'<span>'+escape(point.label)+'</span><strong>'+escape(growthValue(point.value,metric.id))+'</strong></button>').join('');
+      const peak=points.reduce((best,p)=>(p.period[metric.id]>best.period[metric.id]?p:best),points[0]);
+      const last=points.at(-1);
+      const detail='<div class="growth-detail" aria-live="polite"><div><small>選択期間</small><strong>'+escape(current.label)+'</strong>'
+        +'<span>掲載 '+format(current.records)+'件'+(!current.records?'（記録なし）':'')+'</span></div>'
+        +'<div><small>'+(growthState.mode==='cumulative'?'その時点までの累計':'この期間の記録')+'</small><strong>'+escape(growthValue(current.value,metric.id))+'</strong>'
+        +'<span>'+escape(metric.label)+'</span></div>'
+        +'<div><small>期間別の最高記録</small><strong>'+escape(growthValue(peak.period[metric.id],metric.id))+'</strong>'
+        +'<span>'+escape(peak.label)+'</span></div></div>';
+      const table='<details class="growth-data-details"><summary>すべての期間の数値を表で見る</summary>'
+        +'<div class="growth-table-wrap"><table><thead><tr><th>期間</th><th>掲載数</th><th>'+escape(metric.label)+'（'+(growthState.mode==='cumulative'?'累計':'期間別')+'）</th></tr></thead><tbody>'
+        +points.map(point=>'<tr><th>'+escape(point.label)+'</th><td>'+format(point.records)+'件</td><td>'+escape(growthValue(point.value,metric.id))+'</td></tr>').join('')
+        +'</tbody></table></div></details>';
+      root.innerHTML=controls+detail
+        +'<div class="growth-chart-scroll" tabindex="0" aria-label="期間推移のグラフ。横スクロールできます">'+svg+'</div>'
+        +'<div class="growth-period-picker" role="group" aria-label="数値を確認する期間">'+values+'</div>'
+        +table
+        +'<p class="growth-footnote">※ グラフは選択中のシーズンに関係なく全期間の確認済み掲載戦績から計算します。未掲載の月は「掲載0件」であり大会への不参加を意味しません。AOT PRは現行の計算式を過去の掲載記録へ適用した参考推移であり、当時の公式PRや順位ではありません。賞金は確認済みの個人現金額のみ。決勝出場は順位が確認済みの決勝（Practice等を含む）、決勝TOP3は確認済みの賞金決勝のみ。シーズン未確認の戦績はシーズン別グラフには含めません。</p>';
+      // Show the latest result on first open without disrupting later manual
+      // point selection, and keep the drawn line legible on narrow screens.
+      const chart=root.querySelector('.growth-chart-scroll');
+      if(chart&&growthState.selectedKey===null)chart.scrollLeft=chart.scrollWidth;
+    }
+
     function renderProfile(name){
       const info=profileInfo(name);
       if(!info){
@@ -989,9 +1085,10 @@
       const visited=info.regionStats.filter(r=>r.count>0).map(r=>regionPill(r.region)).join('');
       const links=info.links.filter(link=>safeUrl(link.url));
       const external=links.length?`<details class="profile-external"><summary>確認済み外部プロフィール · ${format(links.length)}件</summary><ul class="profile-external-links">${links.map(link=>`<li><a href="${escape(safeUrl(link.url))}" target="_blank" rel="noopener noreferrer">${escape(link.name)} ↗</a><span>${escape(link.url)}</span></li>`).join('')}</ul></details>`:'';
-      $('#profile-content').innerHTML=`<div class="profile-toolbar"><button class="btn sm ghost" id="profile-back" data-profile-back type="button">← 戻る</button><a href="#journey-title" data-journey-jump>海外遠征年表へ ↓</a><a id="profile-share" href="${escape(shareUrl)}" title="このURLをコピーして共有できます">プロフィールのURL ↗</a></div><header class="profile-hero"><div><p class="profile-kicker">PLAYER PROFILE / ASIA OVERSEAS</p><div class="profile-identity"><div class="profile-avatar" aria-hidden="true">${escape(info.initials)}</div><div class="profile-identity-copy"><h1 class="profile-name" id="profile-title" tabindex="-1" data-profile="name">${escape(info.name)}</h1><p class="profile-alias-heading">確認済みの別名義</p><div class="profile-aliases" data-profile="aliases">${aliases}</div></div></div>${info.desc?`<p class="profile-description">${candidates.some(c=>c.name===info.name)?'<span class="season-biography-note">紹介文：CH7 S4時点</span>':''}${escape(info.desc)}</p>`:''}${external}</div><div class="profile-prize-total"><p class="profile-total-label">${escape(seasonPrizeLabel())}</p><div class="profile-total-value"><span data-profile="total">$${format(info.total)}</span><small>USD</small></div><p class="profile-total-hint">${escape(seasonScope())}の個人賞金累計<br>デュオは確認済みの個人分のみ集計<span class="profile-lifetime">全期間の確認済み個人賞金 <b data-profile="lifetime-total">$${format(info.lifetimeTotal)}</b></span></p></div></header><div class="profile-stats"><article class="profile-stat"><h2>賞金獲得記録</h2><div class="profile-stat-value"><span data-profile="prize-events">${format(info.prizeEvents)}</span><small>件</small></div><p class="profile-stat-context">個人賞金の獲得を確認した記録</p></article><article class="profile-stat"><h2>掲載されている海外戦績</h2><div class="profile-stat-value"><span data-profile="events">${format(info.events.length)}</span><small>件</small></div><p class="profile-stat-context">予選・決勝を含む全掲載記録</p></article>${profileBestCard('予選の最高順位',info.bestQualifying,'best-qualifying')}${profileBestCard('決勝の最高順位',info.bestFinal,'best-final')}</div>${profileAchievementsSection(info)}${profileSnapshotSection(info)}${journeySection(info)}<section aria-labelledby="profile-region-title"><div class="profile-region-heading"><div><h2 id="profile-region-title">地域別の<span>実績</span></h2><p>${visited?'戦績掲載地域':'海外大会の戦績はまだ掲載されていません'}</p></div><div class="profile-regions-visited" aria-label="海外挑戦地域">${visited}</div></div><div class="profile-region-charts">${profileRegionChart(info,'count')}${profileRegionChart(info,'prize')}</div></section><section aria-labelledby="profile-history-title"><div class="profile-history-heading"><div><h2 id="profile-history-title">海外大会<span>履歴</span></h2><p>${escape(seasonScope())} · 新しい順 · 賞金獲得記録は金色で表示</p></div><span class="profile-history-count">${format(info.events.length)}件</span></div><div class="profile-history">${info.events.length?info.events.map(e=>profileHistoryRow(e,info.name)).join(''):'<div class="profile-empty"><h3>海外大会の戦績はまだ未登録です</h3><p>選手名鑑には掲載されていますが、確認済みの海外大会記録はまだ掲載されていません。</p></div>'}</div></section>`;
+      $('#profile-content').innerHTML=`<div class="profile-toolbar"><button class="btn sm ghost" id="profile-back" data-profile-back type="button">← 戻る</button><a href="#journey-title" data-journey-jump>海外遠征年表へ ↓</a><a id="profile-share" href="${escape(shareUrl)}" title="このURLをコピーして共有できます">プロフィールのURL ↗</a></div><header class="profile-hero"><div><p class="profile-kicker">PLAYER PROFILE / ASIA OVERSEAS</p><div class="profile-identity"><div class="profile-avatar" aria-hidden="true">${escape(info.initials)}</div><div class="profile-identity-copy"><h1 class="profile-name" id="profile-title" tabindex="-1" data-profile="name">${escape(info.name)}</h1><p class="profile-alias-heading">確認済みの別名義</p><div class="profile-aliases" data-profile="aliases">${aliases}</div></div></div>${info.desc?`<p class="profile-description">${candidates.some(c=>c.name===info.name)?'<span class="season-biography-note">紹介文：CH7 S4時点</span>':''}${escape(info.desc)}</p>`:''}${external}</div><div class="profile-prize-total"><p class="profile-total-label">${escape(seasonPrizeLabel())}</p><div class="profile-total-value"><span data-profile="total">$${format(info.total)}</span><small>USD</small></div><p class="profile-total-hint">${escape(seasonScope())}の個人賞金累計<br>デュオは確認済みの個人分のみ集計<span class="profile-lifetime">全期間の確認済み個人賞金 <b data-profile="lifetime-total">$${format(info.lifetimeTotal)}</b></span></p></div></header><div class="profile-stats"><article class="profile-stat"><h2>賞金獲得記録</h2><div class="profile-stat-value"><span data-profile="prize-events">${format(info.prizeEvents)}</span><small>件</small></div><p class="profile-stat-context">個人賞金の獲得を確認した記録</p></article><article class="profile-stat"><h2>掲載されている海外戦績</h2><div class="profile-stat-value"><span data-profile="events">${format(info.events.length)}</span><small>件</small></div><p class="profile-stat-context">予選・決勝を含む全掲載記録</p></article>${profileBestCard('予選の最高順位',info.bestQualifying,'best-qualifying')}${profileBestCard('決勝の最高順位',info.bestFinal,'best-final')}</div>${profileAchievementsSection(info)}${profileGrowthSection(info)}${profileSnapshotSection(info)}${journeySection(info)}<section aria-labelledby="profile-region-title"><div class="profile-region-heading"><div><h2 id="profile-region-title">地域別の<span>実績</span></h2><p>${visited?'戦績掲載地域':'海外大会の戦績はまだ掲載されていません'}</p></div><div class="profile-regions-visited" aria-label="海外挑戦地域">${visited}</div></div><div class="profile-region-charts">${profileRegionChart(info,'count')}${profileRegionChart(info,'prize')}</div></section><section aria-labelledby="profile-history-title"><div class="profile-history-heading"><div><h2 id="profile-history-title">海外大会<span>履歴</span></h2><p>${escape(seasonScope())} · 新しい順 · 賞金獲得記録は金色で表示</p></div><span class="profile-history-count">${format(info.events.length)}件</span></div><div class="profile-history">${info.events.length?info.events.map(e=>profileHistoryRow(e,info.name)).join(''):'<div class="profile-empty"><h3>海外大会の戦績はまだ未登録です</h3><p>選手名鑑には掲載されていますが、確認済みの海外大会記録はまだ掲載されていません。</p></div>'}</div></section>`;
       renderJourney(info);
       renderProfileAotPR(info.name);
+      renderProfileGrowth(info.name);
       return true;
     }
 
@@ -1324,6 +1421,22 @@
       if(e.target.closest('[data-ranking-more]')&&currentView.page==='players'){rankingLimit+=30;renderRanking();return}
       if(e.target.closest('[data-registrations-more]')&&currentView.page==='updates'){registrationLimit+=20;renderUpdates();return}
       if(e.target.closest('[data-journey-jump]')){e.preventDefault();$('#journey-title')?.focus?.({preventScroll:true});$('#profile-journey')?.scrollIntoView?.({behavior:'instant',block:'start'});return}
+      if(currentView.page==='profile'){
+        const control=e.target.closest('[data-growth-grouping],[data-growth-mode],[data-growth-metric],[data-growth-point]');
+        if(control){
+          if(control.hasAttribute('data-growth-grouping')&&['month','season'].includes(control.dataset.growthGrouping)){
+            growthState.grouping=control.dataset.growthGrouping;growthState.selectedKey=null;
+          }else if(control.hasAttribute('data-growth-mode')&&['cumulative','period'].includes(control.dataset.growthMode)){
+            growthState.mode=control.dataset.growthMode;
+          }else if(control.hasAttribute('data-growth-metric')&&AsiaGrowth.METRICS.some(x=>x.id===control.dataset.growthMetric)){
+            growthState.metric=control.dataset.growthMetric;
+          }else if(control.hasAttribute('data-growth-point')){
+            growthState.selectedKey=control.dataset.growthPoint;
+          }
+          renderProfileGrowth(currentView.name);
+          return;
+        }
+      }
       const journeyMode=e.target.closest('[data-journey-mode]');
       if(journeyMode&&currentView.page==='profile'){
         if(['highlights','prize'].includes(journeyMode.dataset.journeyMode)){journeyState.mode=journeyMode.dataset.journeyMode;journeyState.limit=30;renderJourney()}
