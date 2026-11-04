@@ -712,12 +712,189 @@
       return {...player,aliases:confirmedAliases[name]||[],events,total:playerPrizeTotal(name),lifetimeTotal:playerPrizeTotal(name,rawAll()),prizeEvents:events.filter(e=>individualPrize(e)>0).length,bestQualifying:best(e=>e.kind==='予選'),bestFinal:best(e=>String(e.kind||'').includes('決勝')),regionStats:regions.map(region=>{const rows=events.filter(e=>e.region===region);return {region,count:rows.length,prize:rows.reduce((sum,e)=>sum+individualPrize(e),0)}}),links};
     }
 
+
+    // Comparisons are read-only and scoped to a common season, region,
+    // format and series. Shares use exact registered player identities.
+    let compareState=null;
+    function compareAvailableNames(){
+      return [...new Set(playerRegistry().map(player=>player.name))].sort((a,b)=>a.localeCompare(b,'ja'));
+    }
+    function compareSeriesOptions(){
+      return [...new Set(tournamentAxes.find(axis=>axis.key==='series')?.options?.map(option=>option.id)||[])];
+    }
+    function compareDefaults(){
+      const namesInPR=prReport('all').ranked.map(row=>row.name);
+      const names=compareAvailableNames();
+      return {players:[...new Set([...namesInPR,...names])].slice(0,2),region:'all',mode:'all',series:'all'};
+    }
+    function compareSanitize(value){
+      const params=AsiaCompare.sanitize(value||{},compareSeriesOptions(),[]);
+      return {players:AsiaCompare.cleanPlayers(value?.players,compareAvailableNames()),
+        region:params.region,mode:params.mode,series:params.series};
+    }
+    function compareHash(value){
+      const f=compareSanitize(value),params=new URLSearchParams();
+      for(const name of f.players)params.append('player',name);
+      if(!f.players.length)params.set('empty','1');
+      for(const key of ['region','mode','series'])if(f[key]!=='all')params.set(key,f[key]);
+      return '#compare?'+params.toString();
+    }
+    function compareFormat(value,metric){
+      if(value==null)return '未確認';
+      if(metric==='pr')return Number(value).toLocaleString('ja-JP',{minimumFractionDigits:1,maximumFractionDigits:1});
+      if(metric==='cash')return '$'+Number(value).toLocaleString('ja-JP',{maximumFractionDigits:2});
+      return format(value);
+    }
+    function renderComparison(){
+      const host=$('#compare-content');if(!host)return;
+      const state=compareSanitize(compareState||compareDefaults());
+      compareState=state;
+      const available=compareAvailableNames();
+      const rows=AsiaCompare.build(rawAll(),state.players,{
+        season:selectedSeason,region:state.region,mode:state.mode,series:state.series
+      },{
+        available,seasonOf:row=>recordSeason(row).id,
+        classify:classifyTournamentRecord,names,individualPrize,
+        confirmedPrizeFinalRank,prCalculate:AotPR.calculate,
+        series:compareSeriesOptions(),seasons:seasonOptions().map(option=>option.id)
+      });
+      const seasonChoices=seasonOptions().map(option=>'<option value="'+escape(option.id)+'"'
+        +(selectedSeason===option.id?' selected':'')+'>'+escape(option.label)+'</option>').join('');
+      const regionChoices=[{id:'all',label:'全地域'},...regions.map(id=>({id,label:id}))];
+      const modeChoices=[{id:'all',label:'全形式'},...(tournamentAxes.find(axis=>axis.key==='mode')?.options||[]).filter(x=>x.id!=='unknown')];
+      const seriesChoices=[{id:'all',label:'全シリーズ'},...(tournamentAxes.find(axis=>axis.key==='series')?.options||[]).filter(x=>x.id!=='unknown')];
+      const filter=(id,label,options,selected)=>'<label class="compare-filter"><span>'+label+'</span>'
+        +'<select id="compare-filter-'+id+'" data-compare-filter="'+id+'">'
+        +options.map(item=>'<option value="'+escape(item.id)+'"'+(selected===item.id?' selected':'')+'>'+escape(item.label)+'</option>').join('')
+        +'</select></label>';
+      const inputChoices=available.map(name=>'<option value="'+escape(name)+'"></option>').join('');
+      const selectedCards=rows.players.map((row,i)=>'<article class="compare-selected-player" data-compare-player="'+escape(row.name)+'" data-compare-slot="'+i+'">'
+        +'<div class="compare-player-number">0'+(i+1)+'</div><div class="compare-player-details"><h3>'+escape(row.name)+'</h3>'
+        +'<p>確認済みの掲載戦績 '+format(row.records)+'件</p>'
+        +'<a href="'+escape(profileHref(row.name))+'" data-open-profile="'+escape(row.name)+'">プロフィールを見る →</a></div>'
+        +'<button type="button" class="compare-remove" data-compare-remove="'+escape(row.name)+'" aria-label="'+escape(row.name)+'を比較から外す">×</button>'
+        +'</article>').join('');
+      const remaining=3-state.players.length;
+      const add='<form id="compare-add-form" class="compare-add-form" aria-label="比較する選手を追加">'
+        +'<label for="compare-player-input">選手名を検索して追加（'+format(state.players.length)+'/3人）</label>'
+        +'<div class="compare-add-row"><input id="compare-player-input" type="search" list="compare-player-options" '
+        +'placeholder="選手名を入力・候補から選択" autocomplete="off"'+(remaining?'':' disabled')+'>'
+        +'<datalist id="compare-player-options">'+inputChoices+'</datalist>'
+        +'<button type="submit"'+(remaining?'':' disabled')+'>＋ 追加</button></div>'
+        +'<p id="compare-add-error" class="compare-add-error" role="status" aria-live="polite"></p>'
+        +'</form>';
+      const filters='<div class="compare-filter-grid">'
+        +'<label class="compare-filter"><span>比較期間</span><select id="compare-filter-season">'
+        +seasonChoices+'</select></label>'
+        +filter('region','海外地域',regionChoices,state.region)
+        +filter('mode','ゲーム形式',modeChoices,state.mode)
+        +filter('series','大会シリーズ',seriesChoices,state.series)
+        +'</div>';
+      let overview='';
+      if(rows.players.length<2){
+        overview='<div class="compare-empty" data-compare-empty="true"><strong>比較する選手をあと'+format(2-rows.players.length)+'人追加してね</strong>'
+          +'<p>2〜3人を選ぶと、AOT PR・個人賞金・VR・決勝実績・遠征先を横並びで比較できるよ</p></div>';
+      }else{
+        const palette=['#81dcec','#bb9bff','#ffc77e'];
+        const cards=rows.players.map((p,i)=>'<article class="compare-summary-card" data-compare-summary="'+escape(p.name)+'" style="--compare-accent:'+palette[i]+'">'
+          +'<span>PLAYER '+(i+1)+'</span><h3>'+escape(p.name)+'</h3>'
+          +'<p>比較対象のAOT PR</p><strong data-compare-summary-pr="'+escape(p.name)+'">'+escape(compareFormat(p.values.pr,'pr'))+'</strong><small>pt</small>'
+          +'<p class="compare-summary-cash">個人獲得賞金 <b>'+escape(compareFormat(p.values.cash,'cash'))+'</b></p></article>').join('');
+        const rowMetrics=AsiaCompare.METRICS.map(metric=>{
+          const vals=rows.players.map(row=>row.values[metric.id]);
+          const valid=vals.filter(v=>typeof v==='number'&&Number.isFinite(v));
+          const max=Math.max(0,...valid);
+          const hasWinner=max>0;
+          const cells=rows.players.map((player,index)=>{
+            const value=vals[index],numeric=typeof value==='number'&&Number.isFinite(value);
+            const pct=numeric&&max>0?Math.max(0,Math.min(100,value/max*100)):0;
+            const isTop=hasWinner&&numeric&&Math.abs(value-max)<1e-9;
+            return '<td data-compare-value="'+escape(metric.id)+'" data-compare-player="'+escape(player.name)+'">'
+              +'<div class="compare-value'+(isTop?' is-highest':'')+'">'
+              +'<strong>'+escape(compareFormat(value,metric.id))+'</strong>'
+              +(isTop?'<span class="compare-leader">最多</span>':'')+'</div>'
+              +'<div class="compare-bar" aria-hidden="true"><span style="width:'+pct.toFixed(1)+'%;background:'+palette[index]+'"></span></div></td>';
+          }).join('');
+          return '<tr data-compare-metric="'+escape(metric.id)+'"><th scope="row"><strong>'+escape(metric.label)+'</strong><small>'+escape(metric.unit)+'</small></th>'
+            +cells+'</tr>';
+        }).join('');
+        const table='<div class="compare-table-scroll" tabindex="0" aria-label="2〜3人の戦績比較表。左右にスクロールできます">'
+          +'<table class="compare-table"><thead><tr><th scope="col">比較項目</th>'
+          +rows.players.map((p,i)=>'<th scope="col" style="--compare-accent:'+palette[i]+'">'+escape(p.name)+'</th>').join('')
+          +'</tr></thead><tbody>'+rowMetrics+'</tbody></table></div>';
+        const regional=regions.map(region=>{
+          const details=rows.players.map((p,i)=>{
+            const stats=p.byRegion[region];
+            return '<td data-compare-region="'+region+'" data-compare-player="'+escape(p.name)+'">'
+              +'<strong>'+escape(compareFormat(stats.cash,'cash'))+'</strong>'
+              +'<small>掲載 '+format(stats.results)+'件</small></td>';
+          }).join('');
+          return '<tr><th scope="row">'+region+'</th>'+details+'</tr>';
+        }).join('');
+        const breakdown='<section class="compare-regions" aria-labelledby="compare-regions-title">'
+          +'<h2 id="compare-regions-title">地域別の遠征実績</h2><p>各地域の確認済み個人賞金と掲載戦績数</p>'
+          +'<div class="compare-table-scroll" tabindex="0" aria-label="地域ごとの選手比較表"><table class="compare-region-table">'
+          +'<thead><tr><th scope="col">地域</th>'+rows.players.map(p=>'<th scope="col">'+escape(p.name)+'</th>').join('')+'</tr></thead>'
+          +'<tbody>'+regional+'</tbody></table></div></section>';
+        overview='<div class="compare-summary-grid">'+cards+'</div><section aria-labelledby="compare-metrics-title">'
+          +'<h2 id="compare-metrics-title" class="compare-metrics-title">戦績を横並びで比較</h2>'
+          +table+'</section>'+breakdown;
+      }
+      host.innerHTML='<header class="compare-hero"><div><p class="compare-kicker">PLAYER COMPARISON / OVERSEAS RESULTS</p>'
+        +'<h1 id="compare-title" tabindex="-1">選手<span>比較</span></h1>'
+        +'<p>海外遠征の強みを同じ条件で比べよう · 最大3選手</p></div>'
+        +'<span class="compare-hero-symbol" aria-hidden="true">⚔️</span></header>'
+        +'<section class="compare-picker-panel" aria-label="比較選手を選ぶ"><div class="compare-panel-heading">'
+        +'<h2>比較したい選手を選択</h2><a id="compare-share" href="'+escape(compareHash(state))+'">この比較のURL ↗</a></div>'
+        +'<div class="compare-player-grid">'+selectedCards+'</div>'+add+'</section>'
+        +'<section class="compare-filter-panel" aria-label="比較条件"><h2>比較条件をそろえる</h2>'+filters+'</section>'
+        +'<div id="compare-report" data-compare-selected="'+rows.players.length+'">'+overview+'</div>'
+        +'<p class="compare-footnote">※ 比較はサイト掲載済みで出典確認された戦績だけを対象にしています。'
+        +'個人賞金は確認済みの本人分のみで、チーム総額を個人へ割り当てません。VRは掲載されたソロまたはチームの記録で、'
+        +'VR未確認の結果は合計に含めません。AOT PRは選んだ条件の戦績に現行の独自計算式を再適用した参考値で、'
+        +'公式順位や選手間の勝率・大会参加回数を保証するものではありません。'
+        +'決勝TOP3は順位を確認できる賞金決勝のみで、掲載されていない大会結果は補完しません。</p>';
+    }
+    function updateComparison(next,replace=false){
+      const normalized=compareSanitize(next);
+      if(currentView.page!=='compare')return;
+      const previous=compareState||compareDefaults();
+      const unchanged=compareHash(previous)===compareHash(normalized);
+      if(unchanged)return;
+      visitView({page:'compare',name:null,id:null,comparison:normalized},replace);
+      $('#compare-player-input')?.focus?.({preventScroll:true});
+    }
+    function addComparisonPlayer(input){
+      const text=String(input||'').trim(),available=compareAvailableNames();
+      const error=$('#compare-add-error');
+      const exact=available.find(name=>name===text);
+      const aliases=available.filter(name=>(confirmedAliases[name]||[]).includes(text));
+      const matches=exact?[exact]:aliases;
+      if(!text||matches.length!==1){
+        if(error)error.textContent=!text?'選手名を入力してね':matches.length>1?'同じ別名義の選手が複数います。登録名を選んでね':'候補一覧から登録されている選手名を選んでね';
+        return;
+      }
+      const name=matches[0],selected=compareState?.players||[];
+      if(selected.includes(name)){if(error)error.textContent='その選手はすでに比較に入っているよ';return;}
+      if(selected.length>=3){if(error)error.textContent='比較は最大3人までだよ。1人外してから追加してね';return;}
+      updateComparison({...compareState,players:[...selected,name]});
+    }
+    function compareFromProfile(name){
+      if(!compareAvailableNames().includes(name))return;
+      const present=compareState?.players||[];
+      const players=present.includes(name)?present:present.length>=3?[...present.slice(0,2),name]:[...present,name];
+      visitView({page:'compare',name:null,id:null,comparison:compareSanitize({
+        players:compareState?players:[name],
+        region:compareState?.region||'all',mode:compareState?.mode||'all',series:compareState?.series||'all'
+      })});
+    }
+
     let currentView={page:'home',name:null,id:null};
     let routeDepth=0;
     let routedHash='';
     let routingReady=false;
     function captureView(){
-      return {...currentView,season:selectedSeason,scroll:window.scrollY||0,results:{search:$('#search-results').value,region:$('#region-filter').value,stage:$('#stage-filter').value,sort:$('#sort-results').value,prize:$('#prize-only').checked,player:selectedPlayer,page:archivePage},players:{search:$('#search-players').value,sort:$('#player-sort').value},tournaments:{...tournamentBrowseFilters},calendar:{...calendarBrowse},journey:{...journeyState},ranking:{filters:{...rankingFilters},limit:rankingLimit}};
+      return {...currentView,comparison:compareState?{...compareState,players:[...compareState.players]}:null,season:selectedSeason,scroll:window.scrollY||0,results:{search:$('#search-results').value,region:$('#region-filter').value,stage:$('#stage-filter').value,sort:$('#sort-results').value,prize:$('#prize-only').checked,player:selectedPlayer,page:archivePage},players:{search:$('#search-players').value,sort:$('#player-sort').value},tournaments:{...tournamentBrowseFilters},calendar:{...calendarBrowse},journey:{...journeyState},ranking:{filters:{...rankingFilters},limit:rankingLimit}};
     }
     function restoreBrowseState(view){
       if(view.journey)journeyState={...view.journey};
@@ -726,6 +903,7 @@
       if(view.players){$('#search-players').value=view.players.search;$('#player-sort').value=view.players.sort;}
       if(view.tournaments)tournamentBrowseFilters=sanitizeTournamentFilters(view.tournaments);
       if(view.calendar)calendarBrowse=sanitizeCalendarFilters(view.calendar);
+      if(view.comparison)compareState=compareSanitize(view.comparison);
     }
     function routeFromHash(){
       const hash=window.location.hash;
@@ -741,6 +919,15 @@
           return session?{page:'tournament',id,session,dateFilter:''}:{page:'tournament',id,session:null,invalid:true};
         }catch{return {page:'tournament',id:null,invalid:true}}
       }
+      if(hash==='#compare'||hash.startsWith('#compare?')){
+        const params=new URLSearchParams(hash.split('?').slice(1).join('?'));
+        const comparison=compareSanitize({
+          players:params.getAll('player'),region:params.get('region'),
+          mode:params.get('mode'),series:params.get('series')
+        });
+        if(!params.has('player')&&!params.has('empty'))comparison.players=compareDefaults().players;
+        return {page:'compare',comparison};
+      }
       if(hash==='#calendar'||hash.startsWith('#calendar?')){const params=new URLSearchParams(hash.split('?').slice(1).join('?'));return {page:'calendar',calendar:sanitizeCalendarFilters(Object.fromEntries(params))}}
       if(hash==='#tournaments'||hash.startsWith('#tournaments?')){const params=new URLSearchParams(hash.split('?').slice(1).join('?'));return {page:'tournaments',filters:sanitizeTournamentFilters(Object.fromEntries(params))}}
       if(hash==='#players'||hash.startsWith('#players?')){const params=new URLSearchParams(hash.split('?').slice(1).join('?'));return {page:'players',ranking:{filters:sanitizeRankingFilters(Object.fromEntries(params)),limit:30}}}
@@ -751,6 +938,7 @@
       if(view.page==='profile')return view.invalid?window.location.hash:profileHref(view.name||'');
       if(view.page==='tournament')return view.invalid?window.location.hash:tournamentHref(view.id||'',view.session,view.dateFilter||'');
       if(view.page==='calendar')return calendarHash(view.calendar||calendarBrowse);
+      if(view.page==='compare')return compareHash(view.comparison||compareState||compareDefaults());
       if(view.page==='tournaments')return tournamentSearchHash(view.filters);
       if(view.page==='players')return rankingSearchHash(view.ranking?.filters||rankingFilters);
       return '#'+view.page;
@@ -762,27 +950,28 @@
       currentView={page:view.page,name:view.name||null,id:view.id||null,session:tournamentSessionScope(view.session),dateFilter:validCalendarDate(view.dateFilter)?view.dateFilter:'',invalid:!!view.invalid};
       if(view.page==='tournaments'){tournamentBrowseFilters=sanitizeTournamentFilters(view.filters||tournamentBrowseFilters);currentView.filters={...tournamentBrowseFilters};renderTournamentSearch(currentView.filters)}
       if(view.page==='calendar'){calendarBrowse=sanitizeCalendarFilters(view.calendar||calendarBrowse);currentView.calendar={...calendarBrowse};renderCalendar()}
+      if(view.page==='compare'){compareState=compareSanitize(view.comparison||compareState||compareDefaults());currentView.comparison={...compareState,players:[...compareState.players]};renderComparison()}
       if(view.page==='tournament')renderTournament(view.invalid?null:view.id,view.session,view.dateFilter);
       if(view.page==='profile'&&!renderProfile(view.name))$('#profile-content').innerHTML='<div class="profile-toolbar"><button type="button" class="btn sm ghost" id="profile-back" data-profile-back>← 戻る</button></div><div class="empty"><h1 id="profile-title" tabindex="-1">選手が見つかりません</h1><p>掲載済みの選手を名鑑から選んでください。</p><a class="text-link" href="#players" data-page="players">プレイヤー名鑑へ →</a></div>';
       document.querySelectorAll('.section').forEach(e=>e.classList.toggle('active',e.id==='page-'+view.page));
       document.querySelectorAll('.nav button').forEach(e=>{const active=e.dataset.page===(view.page==='profile'?'players':view.page==='tournament'?'tournaments':view.page);e.classList.toggle('active',active);e.setAttribute('aria-current',active?'page':'false')});
       if(view.page==='results')renderResults();
       if(view.page==='players'){renderPlayers();renderRanking()}
-      document.title=view.page==='profile'&&profileInfo(view.name)?view.name+' · ASIA ON TOUR':view.page==='tournament'&&tournamentInfo(view.id)?tournamentInfo(view.id).name+' · ASIA ON TOUR':view.page==='calendar'?'大会カレンダー · ASIA ON TOUR':view.page==='tournaments'?'大会を探す · ASIA ON TOUR':view.page==='updates'?'更新履歴 · ASIA ON TOUR':'ASIA ON TOUR — Fortnite海外遠征トラッカー';
+      document.title=view.page==='profile'&&profileInfo(view.name)?view.name+' · ASIA ON TOUR':view.page==='tournament'&&tournamentInfo(view.id)?tournamentInfo(view.id).name+' · ASIA ON TOUR':view.page==='calendar'?'大会カレンダー · ASIA ON TOUR':view.page==='compare'?'選手比較 · ASIA ON TOUR':view.page==='tournaments'?'大会を探す · ASIA ON TOUR':view.page==='updates'?'更新履歴 · ASIA ON TOUR':'ASIA ON TOUR — Fortnite海外遠征トラッカー';
       routedHash=window.location.hash;
       window.scrollTo({top:restore?(view.scroll||0):0,behavior:'instant'});
       if(!restore){if(view.page==='profile')$('#profile-title')?.focus?.({preventScroll:true});if(view.page==='tournament')$('#tournament-title')?.focus?.({preventScroll:true});}
     }
     function visitView(view,replace=false){
       if(routingReady)window.history.replaceState({aot:true,depth:routeDepth,view:captureView()},'',window.location.href);
-      const same=currentView.page===view.page&&currentView.name===(view.name||null)&&currentView.id===(view.id||null)&&(view.page!=='tournaments'||tournamentSearchHash(currentView.filters)===tournamentSearchHash(view.filters))&&(view.page!=='tournament'||(tournamentSessionKey(currentView.session)===tournamentSessionKey(view.session)&&currentView.dateFilter===(view.dateFilter||'')));
+      const same=currentView.page===view.page&&currentView.name===(view.name||null)&&currentView.id===(view.id||null)&&(view.page!=='tournaments'||tournamentSearchHash(currentView.filters)===tournamentSearchHash(view.filters))&&(view.page!=='tournament'||(tournamentSessionKey(currentView.session)===tournamentSessionKey(view.session)&&currentView.dateFilter===(view.dateFilter||'')))&&(view.page!=='compare'||compareHash(currentView.comparison||compareDefaults())===compareHash(view.comparison||compareDefaults()));
       const next={...captureView(),invalid:false,...view,scroll:0};
       if(!replace&&!same)routeDepth++;
       const state={aot:true,depth:routeDepth,view:next};
       if(replace||same)window.history.replaceState(state,'',routeHash(view));else window.history.pushState(state,'',routeHash(view));
       showView(next);
     }
-    function navigate(page){visitView({page,name:null,id:null,...(page==='tournaments'?{filters:{...tournamentBrowseFilters}}:{}),...(page==='calendar'?{calendar:{...calendarBrowse}}:{}),...(page==='players'?{ranking:{filters:{...rankingFilters},limit:rankingLimit}}:{})})}
+    function navigate(page){visitView({page,name:null,id:null,...(page==='tournaments'?{filters:{...tournamentBrowseFilters}}:{}),...(page==='calendar'?{calendar:{...calendarBrowse}}:{}),...(page==='compare'?{comparison:compareState||compareDefaults()}:{}),...(page==='players'?{ranking:{filters:{...rankingFilters},limit:rankingLimit}}:{})})}
     function openProfile(name){visitView({page:'profile',name,id:null})}
     function openTournament(id,session=null){visitView({page:'tournament',id,name:null,session:tournamentSessionScope(session),dateFilter:''})}
     function showTournamentDate(date){
@@ -1274,7 +1463,7 @@
       const visited=info.regionStats.filter(r=>r.count>0).map(r=>regionPill(r.region)).join('');
       const links=info.links.filter(link=>safeUrl(link.url));
       const external=links.length?`<details class="profile-external"><summary>確認済み外部プロフィール · ${format(links.length)}件</summary><ul class="profile-external-links">${links.map(link=>`<li><a href="${escape(safeUrl(link.url))}" target="_blank" rel="noopener noreferrer">${escape(link.name)} ↗</a><span>${escape(link.url)}</span></li>`).join('')}</ul></details>`:'';
-      $('#profile-content').innerHTML=`<div class="profile-toolbar"><button class="btn sm ghost" id="profile-back" data-profile-back type="button">← 戻る</button><a href="#journey-title" data-journey-jump>海外遠征年表へ ↓</a><a id="profile-share" href="${escape(shareUrl)}" title="このURLをコピーして共有できます">プロフィールのURL ↗</a></div><header class="profile-hero"><div><p class="profile-kicker">PLAYER PROFILE / ASIA OVERSEAS</p><div class="profile-identity"><div class="profile-avatar" aria-hidden="true">${escape(info.initials)}</div><div class="profile-identity-copy"><h1 class="profile-name" id="profile-title" tabindex="-1" data-profile="name">${escape(info.name)}</h1><p class="profile-alias-heading">確認済みの別名義</p><div class="profile-aliases" data-profile="aliases">${aliases}</div></div></div>${info.desc?`<p class="profile-description">${candidates.some(c=>c.name===info.name)?'<span class="season-biography-note">紹介文：CH7 S4時点</span>':''}${escape(info.desc)}</p>`:''}${external}</div><div class="profile-prize-total"><p class="profile-total-label">${escape(seasonPrizeLabel())}</p><div class="profile-total-value"><span data-profile="total">$${format(info.total)}</span><small>USD</small></div><p class="profile-total-hint">${escape(seasonScope())}の個人賞金累計<br>デュオは確認済みの個人分のみ集計<span class="profile-lifetime">全期間の確認済み個人賞金 <b data-profile="lifetime-total">$${format(info.lifetimeTotal)}</b></span></p></div></header><div class="profile-stats"><article class="profile-stat"><h2>賞金獲得記録</h2><div class="profile-stat-value"><span data-profile="prize-events">${format(info.prizeEvents)}</span><small>件</small></div><p class="profile-stat-context">個人賞金の獲得を確認した記録</p></article><article class="profile-stat"><h2>掲載されている海外戦績</h2><div class="profile-stat-value"><span data-profile="events">${format(info.events.length)}</span><small>件</small></div><p class="profile-stat-context">予選・決勝を含む全掲載記録</p></article>${profileBestCard('予選の最高順位',info.bestQualifying,'best-qualifying')}${profileBestCard('決勝の最高順位',info.bestFinal,'best-final')}</div>${profileAchievementsSection(info)}${profileGrowthSection(info)}${profileSnapshotSection(info)}${journeySection(info)}<section aria-labelledby="profile-region-title"><div class="profile-region-heading"><div><h2 id="profile-region-title">地域別の<span>実績</span></h2><p>${visited?'戦績掲載地域':'海外大会の戦績はまだ掲載されていません'}</p></div><div class="profile-regions-visited" aria-label="海外挑戦地域">${visited}</div></div><div class="profile-region-charts">${profileRegionChart(info,'count')}${profileRegionChart(info,'prize')}</div></section><section aria-labelledby="profile-history-title"><div class="profile-history-heading"><div><h2 id="profile-history-title">海外大会<span>履歴</span></h2><p>${escape(seasonScope())} · 新しい順 · 賞金獲得記録は金色で表示</p></div><span class="profile-history-count">${format(info.events.length)}件</span></div><div class="profile-history">${info.events.length?info.events.map(e=>profileHistoryRow(e,info.name)).join(''):'<div class="profile-empty"><h3>海外大会の戦績はまだ未登録です</h3><p>選手名鑑には掲載されていますが、確認済みの海外大会記録はまだ掲載されていません。</p></div>'}</div></section>`;
+      $('#profile-content').innerHTML=`<div class="profile-toolbar"><button class="btn sm ghost" id="profile-back" data-profile-back type="button">← 戻る</button><button type="button" class="profile-compare-action" data-compare-profile="${escape(info.name)}">⚔️ 他の選手と比較</button><a href="#journey-title" data-journey-jump>海外遠征年表へ ↓</a><a id="profile-share" href="${escape(shareUrl)}" title="このURLをコピーして共有できます">プロフィールのURL ↗</a></div><header class="profile-hero"><div><p class="profile-kicker">PLAYER PROFILE / ASIA OVERSEAS</p><div class="profile-identity"><div class="profile-avatar" aria-hidden="true">${escape(info.initials)}</div><div class="profile-identity-copy"><h1 class="profile-name" id="profile-title" tabindex="-1" data-profile="name">${escape(info.name)}</h1><p class="profile-alias-heading">確認済みの別名義</p><div class="profile-aliases" data-profile="aliases">${aliases}</div></div></div>${info.desc?`<p class="profile-description">${candidates.some(c=>c.name===info.name)?'<span class="season-biography-note">紹介文：CH7 S4時点</span>':''}${escape(info.desc)}</p>`:''}${external}</div><div class="profile-prize-total"><p class="profile-total-label">${escape(seasonPrizeLabel())}</p><div class="profile-total-value"><span data-profile="total">$${format(info.total)}</span><small>USD</small></div><p class="profile-total-hint">${escape(seasonScope())}の個人賞金累計<br>デュオは確認済みの個人分のみ集計<span class="profile-lifetime">全期間の確認済み個人賞金 <b data-profile="lifetime-total">$${format(info.lifetimeTotal)}</b></span></p></div></header><div class="profile-stats"><article class="profile-stat"><h2>賞金獲得記録</h2><div class="profile-stat-value"><span data-profile="prize-events">${format(info.prizeEvents)}</span><small>件</small></div><p class="profile-stat-context">個人賞金の獲得を確認した記録</p></article><article class="profile-stat"><h2>掲載されている海外戦績</h2><div class="profile-stat-value"><span data-profile="events">${format(info.events.length)}</span><small>件</small></div><p class="profile-stat-context">予選・決勝を含む全掲載記録</p></article>${profileBestCard('予選の最高順位',info.bestQualifying,'best-qualifying')}${profileBestCard('決勝の最高順位',info.bestFinal,'best-final')}</div>${profileAchievementsSection(info)}${profileGrowthSection(info)}${profileSnapshotSection(info)}${journeySection(info)}<section aria-labelledby="profile-region-title"><div class="profile-region-heading"><div><h2 id="profile-region-title">地域別の<span>実績</span></h2><p>${visited?'戦績掲載地域':'海外大会の戦績はまだ掲載されていません'}</p></div><div class="profile-regions-visited" aria-label="海外挑戦地域">${visited}</div></div><div class="profile-region-charts">${profileRegionChart(info,'count')}${profileRegionChart(info,'prize')}</div></section><section aria-labelledby="profile-history-title"><div class="profile-history-heading"><div><h2 id="profile-history-title">海外大会<span>履歴</span></h2><p>${escape(seasonScope())} · 新しい順 · 賞金獲得記録は金色で表示</p></div><span class="profile-history-count">${format(info.events.length)}件</span></div><div class="profile-history">${info.events.length?info.events.map(e=>profileHistoryRow(e,info.name)).join(''):'<div class="profile-empty"><h3>海外大会の戦績はまだ未登録です</h3><p>選手名鑑には掲載されていますが、確認済みの海外大会記録はまだ掲載されていません。</p></div>'}</div></section>`;
       renderJourney(info);
       renderProfileAotPR(info.name);
       renderProfileGrowth(info.name);
@@ -1587,6 +1776,13 @@
     function csvText(rows){const cols=['date','player','players','region','event','round','rank','points','kills','vrs','prize','prizePerPlayer','kind','source','verified','note','chapter','season','seasonId'];const cell=x=>'"'+String(x??'').replace(/"/g,'""')+'"';return '\ufeff'+cols.join(',')+'\r\n'+rows.map(e=>cols.map(k=>cell(k==='players'?names(e).join(' / '):['chapter','season','seasonId'].includes(k)?recordSeason(e)[k]:e[k])).join(',')).join('\r\n')}
     function download(name,content,type){const b=new Blob([content],{type});const url=URL.createObjectURL(b);const a=document.createElement('a');a.href=url;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000)}
     document.addEventListener('click',e=>{
+      const remove=e.target.closest('[data-compare-remove]');
+      if(remove&&currentView.page==='compare'){
+        updateComparison({...compareState,players:compareState.players.filter(name=>name!==remove.dataset.compareRemove)});
+        return;
+      }
+      const profileCompare=e.target.closest('[data-compare-profile]');
+      if(profileCompare){compareFromProfile(profileCompare.dataset.compareProfile);return;}
       const archiveButton=e.target.closest('[data-archive-page]');
       if(archiveButton&&currentView.page==='results'&&!archiveButton.disabled){
         const next=Number(archiveButton.dataset.archivePage);
@@ -1683,8 +1879,19 @@
       control.addEventListener('change',refreshArchiveFilters);
     });
     $('#search-results').addEventListener('input',()=>{selectedPlayer=null;refreshArchiveFilters()});$('#search-players').addEventListener('input',renderPlayers);$('#player-sort').addEventListener('change',renderPlayers);$('#export-csv').addEventListener('click',()=>download('asia-on-tour-results.csv',csvText(visible),'text/csv;charset=utf-8'));
+    document.addEventListener('submit',e=>{
+      if(e.target.id!=='compare-add-form')return;
+      e.preventDefault();
+      addComparisonPlayer($('#compare-player-input')?.value);
+    });
     document.addEventListener('input',e=>{if(e.target.id==='tournament-query')updateTournamentFilters('q',e.target.value)});
-    document.addEventListener('change',e=>{if(e.target.id==='season-select'){changeSeason(e.target.value);return}if(e.target.id==='tournament-date-filter'&&currentView.page==='tournament'){showTournamentDate(e.target.value);return}if(e.target.dataset.calendarFilter&&currentView.page==='calendar'){updateCalendarFilter(e.target.dataset.calendarFilter,e.target.value);return}const rankingKey={'ranking-metric':'metric','ranking-mode':'mode','ranking-series':'series','ranking-final-kind':'finalKind'}[e.target.id];if(rankingKey&&currentView.page==='players'){updateRankingFilter(rankingKey,e.target.value);return}if(e.target.dataset.tournamentFilter)updateTournamentFilters(e.target.dataset.tournamentFilter,e.target.value)});
+    document.addEventListener('change',e=>{if(e.target.id==='season-select'){changeSeason(e.target.value);return}if(e.target.id==='tournament-date-filter'&&currentView.page==='tournament'){showTournamentDate(e.target.value);return}
+      if(e.target.id==='compare-filter-season'&&currentView.page==='compare'){changeSeason(e.target.value);return}
+      if(e.target.dataset.compareFilter&&currentView.page==='compare'){
+        const key=e.target.dataset.compareFilter;
+        if(['region','mode','series'].includes(key))updateComparison({...compareState,[key]:e.target.value},true);
+        return;
+      }if(e.target.dataset.calendarFilter&&currentView.page==='calendar'){updateCalendarFilter(e.target.dataset.calendarFilter,e.target.value);return}const rankingKey={'ranking-metric':'metric','ranking-mode':'mode','ranking-series':'series','ranking-final-kind':'finalKind'}[e.target.id];if(rankingKey&&currentView.page==='players'){updateRankingFilter(rankingKey,e.target.value);return}if(e.target.dataset.tournamentFilter)updateTournamentFilters(e.target.dataset.tournamentFilter,e.target.value)});
     selectedSeason=seasonFromUrl();
     refresh();
     initializeRouting();
