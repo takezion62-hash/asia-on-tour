@@ -107,7 +107,7 @@ test('公開済みのスキン報酬とチームVRを正しい条件で計上す
 });
 
 
-test('特別称号は18種類から判定し、獲得済み・未獲得・レア度・出典を閲覧できる',async({page})=>{
+test('特別称号は30種類から判定し、獲得済み・未獲得・レア度・出典を閲覧できる',async({page})=>{
   const person=records.find(row=>row.verified===true&&(row.players||[row.player]).length===1)?.player||player;
   const expected=achievements.calculate(records,person,{catalog:data.tournaments.catalog}).special;
   await page.goto('/?season=all#player='+encodeURIComponent(person));
@@ -258,4 +258,50 @@ test('ソロ累計キル称号は一覧を開いて確認でき、デュオの�
   await expect(card.locator('.special-kill-proof')).toHaveCount(2);
   await expect(card.locator('.special-achievement-proof')).toContainText('ソロ 25K');
   await expect(card.locator('.special-achievement-proof')).toContainText('根拠はキル上位3件');
+});
+
+
+test('12個の追加称号はPC・スマホの折りたたみプロフィールで表示・判定される',async({page})=>{
+  const basis=records.find(row=>row.verified===true&&roster(row).length===1&&/solo/i.test(row.event));
+  expect(basis,'ソロ本人プロフィール').toBeTruthy();
+  const name=roster(basis)[0];
+  const make=(id,event,region,date,rank,kills,prize,kind='賞金決勝')=>({
+    ...basis,id,event,region,date,rank,kills,prize,kind,vrs:0,
+    player:name,players:[name],verified:true
+  });
+  const rows=[
+    make('badge-new-me','Solo Victory Cup Battle Royale','ME','2026-10-01',2,30,500),
+    make('badge-new-eu','Solo Reload Victory Cup','EU','2026-10-01',1,12,200),
+    make('badge-new-nac','Console Zero Build Solo Victory Cup','NAC','2026-10-07',1,8,100),
+    make('badge-new-fncs','FNCS Division 1','ME','2026-10-08',20,4,0,'Practice決勝'),
+    ...Array.from({length:9},(_,i)=>make('badge-reload-'+i,'Solo Reload Victory Cup',
+      'EU','2026-09-'+String(i+1).padStart(2,'0'),70,3,0,'予選'))
+  ];
+  const expected=achievements.calculate(rows,name,{catalog:data.tournaments.catalog}).special;
+  expect(expected.total).toBe(30);
+  for(const id of ['final-kill-tyrant','final-runner-up','podium-streak','cash-windfall',
+    'cash-chain','same-day-traveler','same-day-cash','reload-regular','no-vr-cash',
+    'zero-build-champion','fncs-finalist','seven-day-traveler']){
+    expect(expected.achievements.find(x=>x.id===id).unlocked,id).toBe(true);
+  }
+  await page.route('**/results.json',route=>route.fulfill({
+    status:200,contentType:'application/json',body:JSON.stringify(rows)
+  }));
+  await page.goto('/?season=all#player='+encodeURIComponent(name));
+  const gallery=page.locator('#profile-achievements .achievement-collection');
+  await expect(gallery).not.toHaveAttribute('open','');
+  await expandAchievements(page);
+  await expect(page.locator('[data-special-count]')).toHaveText(expected.earned+' / 30');
+  for(const id of ['final-kill-tyrant','cash-windfall','same-day-cash','seven-day-traveler',
+    'zero-build-champion','reload-regular','fncs-finalist']){
+    await expect(page.locator('[data-special-id="'+id+'"][data-special-unlocked="true"]')).toBeVisible();
+  }
+  const kills=page.locator('[data-special-id="final-kill-tyrant"][data-special-unlocked="true"]');
+  await kills.locator('.special-achievement-proof summary').click();
+  await expect(kills.locator('.special-kill-proof')).toContainText('ソロ決勝 30K');
+  const cash=page.locator('[data-special-id="cash-windfall"][data-special-unlocked="true"]');
+  await cash.locator('.special-achievement-proof summary').click();
+  await expect(cash.locator('.special-cash-proof')).toContainText('個人賞金 $500');
+  await expect(page.locator('#profile-achievements .achievement-note')).toContainText('同一大会の予選・決勝');
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth+1)).toBe(true);
 });
