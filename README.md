@@ -2,6 +2,17 @@
 
 ASIA勢のFortnite海外大会戦績を検索・閲覧する、GitHub Pagesの閲覧専用サイトです。一般閲覧者による戦績の追加・削除・保存・アップロード機能はありません。
 
+## 選手比較機能（2026-11-04）
+
+メニューの**「選手比較」**から2〜3人の選手の海外遠征成績を同一条件で比較できます。選手名入力は既存の登録選手・確認済み別名義のみを採用し、別人の同名選手を勝手に統合しません。選手プロフィールの「⚔️ 他の選手と比較」から始めることもできます。
+
+- **指標**：現行の独自算出式を再適用したAOT PR、確認済み個人現金賞金、掲載VR合計、正の順位が確認できる決勝出場、賞金決勝TOP3、個人賞金獲得戦績数、遠征地域数、出典確認済み掲載戦績数。6地域別の確認済み個人賞金と掲載件数も横並びで表示
+- **公平な比較条件**：全期間／シーズン別（サイト上部のシーズン選択と同期）、海外地域、ゲーム形式、シリーズを2〜3人すべてに共通適用。各指標の最多値を表示し、数値バーで比較
+- **データの信頼性**：`verified===true` の掲載成績のみ。重複した同一IDを除去し、矛盾する重複IDは集計せず、賞金は確認済み個人分のみをカウント。チームのVRはチーム戦績のVRとして表示し、未確認VRはゼロと決めつけない。大会未登録や未確認のデータを推測で埋めない
+- **共有**：`#compare?player=<名前>&player=<名前>&region=ME&mode=reload` などで選手の組み合わせと比較条件を直接共有。ブラウザーの履歴や再読み込みから比較を復元可能
+- **実装**：`compare.js`（比較集計エンジン）、`compare.css`（PC/スマホの比較画面）、`app.js`（検索・選択・URL同期）。既存の戦績JSON、プロフィール、PRや称号計算コードは編集せず再利用
+- **検証**：`node --test tests/compare.test.cjs`（個人賞金、確認済みVR、重複除外、共通フィルター等）、`npx playwright test tests/compare.spec.cjs`（PC/スマホの選手追加・削除・比較画面・共有・戻る操作）
+
 ## 大会別・開催日で探す機能（2026-11-04）
 
 「大会を探す」から開く大会詳細ページ（例：Solo Victory Cup Battle Royale）に、**開催日から探す**を追加。登録済みの開催日を件数・地域とともに選べます。
@@ -49,13 +60,14 @@ ASIA勢のFortnite海外大会戦績を検索・閲覧する、GitHub Pagesの�
 - `aot-pr.js` / `aot-pr.css`：AOT PR v1.4の計算と表示
 - `achievements.js` / `achievements.css`：プロフィールの進化バッジ・通常特別称号・秘密の称号
 - `growth.js` / `growth.css`：選手プロフィールの月別・シーズン別成長グラフ
+- `compare.js` / `compare.css`：2〜3選手の海外遠征成績比較（AOT PR・賞金・VR・決勝実績など）
 - `results.json`：確認済み・未確認の戦績データ（予定とは別）
 - `schedule.json`：S43今シーズンの公式大会予定セッション（JST表示、戦績集計と完全分離）
 - `updates.json`：更新履歴と登録日を確認できた戦績IDの差分リスト
 - `players.json`：`candidates`（名鑑）と`confirmedAliases`（確認済み別名義）
 - `tournaments.json`：`axes`（5分類軸）と`catalog`（大会・シーズン・出典ID）
 
-掲載内容はJSONを編集して更新します。`results.json`・`players.json`・`tournaments.json`・`updates.json`・`schedule.json`、`rankings.js`、`aot-pr.js`、`aot-pr.css`、`achievements.js`、`achievements.css`、`growth.js`、`growth.css`、`app.js`は`index.html`と同じ場所へ配置してください。ローカルではHTTPサーバーを使用します。
+掲載内容はJSONを編集して更新します。`results.json`・`players.json`・`tournaments.json`・`updates.json`・`schedule.json`、`rankings.js`、`aot-pr.js`、`aot-pr.css`、`achievements.js`、`achievements.css`、`growth.js`、`growth.css`、`compare.js`、`compare.css`、`app.js`は`index.html`と同じ場所へ配置してください。ローカルではHTTPサーバーを使用します。
 
 
 ## 特別称号の累計進化 v4（2026-11-03）
