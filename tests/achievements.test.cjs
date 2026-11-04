@@ -112,7 +112,7 @@ test('real published archive remains immutable; roster-based calculation matches
 
 
 test('six evolving badge tracks have five strictly increasing rank goals',()=>{
-  assert.equal(engine.VERSION,6,'twelve new special achievements ship engine v6');
+  assert.equal(engine.VERSION,7,'ten additional secret achievements ship engine v7');
   assert.equal(engine.EVOLUTION_TRACKS.length,6);
   assert.deepEqual(engine.EVOLUTION_TIERS.map(t=>t.id),['bronze','silver','gold','platinum','prismatic']);
   assert.equal(new Set(engine.EVOLUTION_TRACKS.map(t=>t.id)).size,6);
@@ -609,4 +609,130 @@ test('seven-day traveler needs three distinct regions within seven consecutive c
     'seven-day-traveler').progress,2);
   assert.equal(badge30([rows[0],rows[1],{...rows[2],verified:false}],
     'seven-day-traveler').progress,2);
+});
+
+
+const secret=(rows,id,catalog=[])=>engine.calculateSecret(rows,'Hero',{catalog}).achievements.find(x=>x.id===id);
+const secretPaid=(id,overrides={})=>fixture(id,{
+  date:'2026-09-01',kind:'賞金決勝',rank:12,kills:2,vrs:0,prize:100,...overrides
+});
+test('secret titles have separate 10-item catalog, keep ordinary 30 titles and hide two completely',()=>{
+  const ids=['silent-crown','golden-strike','death-coronation','three-world-shadow',
+    'triple-gold','six-region-bounty','borderless-champion','returning-phoenix',
+    'light-and-shadow','double-crown-miracle'];
+  assert.equal(engine.VERSION,7);
+  assert.equal(engine.SECRET_CATALOG.length,10);
+  assert.deepEqual(engine.SECRET_CATALOG.map(x=>x.id),ids);
+  assert.equal(engine.SPECIAL_CATALOG.length,30);
+  assert.ok(engine.SECRET_CATALOG.every(x=>x.title&&x.icon&&x.hint&&x.description&&x.rarity));
+  assert.equal(engine.SECRET_CATALOG.filter(x=>x.sealed).length,2);
+  const empty=engine.calculateSecret([],'Hero');
+  assert.equal(empty.total,10);
+  assert.equal(empty.earned,0);
+  assert.equal(empty.visibleLocked.length,8);
+  assert.equal(empty.locked.length,10);
+  assert.ok(empty.achievements.every(x=>x.evidence.length===0));
+  assert.equal(empty.achievements.find(x=>x.id==='silent-crown').difficulty,'極高');
+});
+test('無音の王冠: confirmed solo FINAL 0K 0VR personal cash, not 1VR or team cash',()=>{
+  const win=secretPaid('win',{kills:0,vrs:0,prize:100});
+  const unlocked=secret([win],'silent-crown');
+  assert.equal(unlocked.unlocked,true);
+  assert.equal(unlocked.evidence[0].kills,0);
+  assert.equal(unlocked.evidence[0].vrs,0);
+  assert.equal(unlocked.evidence[0].personalCash,100);
+  const rejected=[
+    {...win,id:'one-vr',vrs:1}, {...win,id:'no-vr',vrs:null},
+    {...win,id:'one-kill',kills:1}, {...win,id:'missing-kill',kills:null},
+    {...win,id:'qualifier',kind:'予選'}, {...win,id:'test',kind:'Test Cup'},
+    {...win,id:'unknown-format',event:'Unknown Cup'},
+    {...win,id:'team',event:'Duos Cash Cup',players:['Hero','Pair'],player:'Hero / Pair',prize:200,prizePerPlayer:100},
+    {...win,id:'no-pay',prize:0}, {...win,id:'unverified',verified:false}
+  ];
+  assert.equal(secret(rejected,'silent-crown').unlocked,false);
+  assert.equal(engine.calculateSecret([win],'Different').earned,0);
+  const contradictory=[{name:'Solo Victory Cup Battle Royale',team:'duo'}];
+  assert.equal(secret([win],'silent-crown',contradictory).unlocked,false);
+});
+test('黄金の一撃 is 1K with VR+cash in a solo final, 死神の戴冠 is rank 1+30K+cash',()=>{
+  const golden=secretPaid('golden',{kills:1,vrs:1});
+  assert.equal(secret([golden],'golden-strike').unlocked,true);
+  assert.equal(secret([{...golden,vrs:0},{...golden,id:'kill2',kills:2}],'golden-strike').unlocked,false);
+  assert.equal(secret([{...golden,kind:'予選'}],'golden-strike').unlocked,false);
+  const death=secretPaid('death',{rank:1,kills:30,vrs:1});
+  assert.equal(secret([death],'death-coronation').unlocked,true);
+  assert.equal(secret([{...death,rank:2}],'death-coronation').unlocked,false);
+  assert.equal(secret([{...death,kills:29}],'death-coronation').unlocked,false);
+  assert.equal(secret([{...death,prize:0}],'death-coronation').unlocked,false);
+  assert.equal(secret([{...death,kind:'予選'}],'death-coronation').unlocked,false);
+});
+test('三界を渡る影 and 三重の黄金 require three distinct regions on the SAME calendar date',()=>{
+  const a=secretPaid('a',{region:'ME',date:'2026-10-01'});
+  const b=secretPaid('b',{region:'EU',date:'2026-10-01'});
+  const c=secretPaid('c',{region:'NAW',date:'2026-10-01'});
+  assert.equal(secret([a,b,c],'three-world-shadow').unlocked,true);
+  assert.equal(secret([a,b,c],'triple-gold').unlocked,true);
+  assert.equal(secret([a,b,{...c,date:'2026-10-02'}],'three-world-shadow').unlocked,false);
+  assert.equal(secret([a,b,{...c,region:'ME'}],'triple-gold').unlocked,false);
+  assert.equal(secret([a,b,{...c,prize:0}],'triple-gold').unlocked,false);
+  assert.equal(secret([a,b,{...c,date:'2026-02-30'}],'three-world-shadow').unlocked,false);
+});
+test('六界の賞金首: verified individual cash in ALL six overseas regions, team unknown split ignored',()=>{
+  const six=engine.REGIONS.map((region,i)=>secretPaid('cash-'+region,{region,date:'2026-10-'+String(i+1).padStart(2,'0')}));
+  assert.equal(secret(six,'six-region-bounty').progress,6);
+  assert.equal(secret(six,'six-region-bounty').unlocked,true);
+  assert.equal(secret(six.slice(0,5),'six-region-bounty').unlocked,false);
+  assert.equal(secret([...six.slice(0,5),{...six[5],verified:false}],'six-region-bounty').unlocked,false);
+  assert.equal(secret([...six.slice(0,5),{...six[5],players:['Hero','Pair'],player:'Hero / Pair',prizePerPlayer:null}],
+    'six-region-bounty').unlocked,false);
+});
+test('国境なき王者 needs three DISTINCT regions with verified rank-one finals',()=>{
+  const champions=['ME','EU','NAC'].map((region,i)=>secretPaid('c-'+i,{region,rank:1}));
+  assert.equal(secret(champions,'borderless-champion').unlocked,true);
+  assert.equal(secret([...champions.slice(0,2),{...champions[2],region:'EU'}],'borderless-champion').progress,2);
+  assert.equal(secret([...champions.slice(0,2),{...champions[2],rank:2}],'borderless-champion').unlocked,false);
+  assert.equal(secret([...champions.slice(0,2),{...champions[2],kind:'予選'}],'borderless-champion').unlocked,false);
+});
+test('不死鳥の遠征 needs >=365 full days between two personal payouts IN SAME overseas region',()=>{
+  const one=secretPaid('old',{date:'2025-01-01',region:'ME'});
+  const far=secretPaid('new',{date:'2026-01-01',region:'ME'});
+  assert.equal(secret([one,far],'returning-phoenix').unlocked,true);
+  assert.equal(secret([one,{...far,date:'2025-12-31'}],'returning-phoenix').unlocked,false);
+  assert.equal(secret([one,{...far,region:'EU'}],'returning-phoenix').unlocked,false);
+  assert.equal(secret([one,{...far,prize:0}],'returning-phoenix').unlocked,false);
+  assert.deepEqual(secret([one,far],'returning-phoenix').evidence.map(e=>e.id),['old','new']);
+});
+test('光と影の双貌 pairs solo 0K-paid and a DISTINCT solo >=65K session, excluding team totals',()=>{
+  const quiet=secretPaid('quiet',{kills:0,prize:100});
+  const wild=fixture('wild',{kills:65,kind:'予選'});
+  assert.equal(secret([quiet,wild],'light-and-shadow').unlocked,true);
+  assert.equal(secret([quiet,{...wild,kills:64}],'light-and-shadow').unlocked,false);
+  assert.equal(secret([quiet,{...wild,event:'Duos Cash Cup',players:['Hero','Pair'],player:'Hero / Pair',kills:150}],
+    'light-and-shadow').unlocked,false);
+  assert.equal(secret([{...quiet,prize:0},wild],'light-and-shadow').unlocked,false);
+  assert.equal(secret([quiet,{...wild,verified:false}],'light-and-shadow').unlocked,false);
+});
+test('双冠の奇跡 needs on a single date two distinct regions EACH with VR + individual cash',()=>{
+  const a=secretPaid('a',{date:'2026-10-01',region:'ME',vrs:1});
+  const b=secretPaid('b',{date:'2026-10-01',region:'NAW',vrs:2});
+  assert.equal(secret([a,b],'double-crown-miracle').unlocked,true);
+  assert.equal(secret([a,{...b,vrs:0}],'double-crown-miracle').unlocked,false);
+  assert.equal(secret([a,{...b,date:'2026-10-02'}],'double-crown-miracle').unlocked,false);
+  assert.equal(secret([a,{...b,region:'ME'}],'double-crown-miracle').unlocked,false);
+  assert.equal(secret([a,{...b,prize:0}],'double-crown-miracle').unlocked,false);
+});
+test('every existing archived player gets deterministic secret badges without mutating records or special titles',()=>{
+  const before=JSON.stringify(records);
+  const players=[...new Set(records.flatMap(row=>Array.isArray(row.players)&&row.players.length?row.players:[row.player]).filter(Boolean))];
+  for(const name of players){
+    const a=engine.calculate(records,name);
+    const secretOnly=engine.calculateSecret(records,name);
+    assert.equal(a.secret.total,10,name);
+    assert.equal(a.special.total,30,name);
+    assert.equal(a.secret.earned,a.secret.unlocked.length,name);
+    assert.equal(a.secret.locked.length+a.secret.earned,10,name);
+    assert.deepEqual(a.secret.achievements.map(b=>b.id),secretOnly.achievements.map(b=>b.id));
+    assert.ok(a.secret.locked.every(b=>b.evidence.length===0),name);
+  }
+  assert.equal(JSON.stringify(records),before);
 });
