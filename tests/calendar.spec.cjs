@@ -82,3 +82,56 @@ test('シーズンを切り替えると対象期間の最新掲載月へ移動�
   await expect(page).toHaveURL(new RegExp('month='+latest));
   expect(await page.locator('.calendar-event').count()).toBeGreaterThan(0);
 });
+
+
+test('S43海外開催予定を結果と別に表示し、日本時間とEpic公式リンクを確認できる',async({page})=>{
+ const errors=[];page.on('pageerror',e=>errors.push(e.message));
+ await page.goto('/?season=all#calendar?month=2026-11&date=2026-11-08&region=ME&series=cash-cup&mode=reload-zero-build&stage=予選');
+ await expect(page.locator('#page-calendar')).toBeVisible();
+ await expect(page.locator('#calendar-series')).toHaveValue('cash-cup');
+ await expect(page.locator('#calendar-mode')).toHaveValue('reload-zero-build');
+ await expect(page.locator('#calendar-stage')).toHaveValue('予選');
+ await expect(page.locator('.calendar-day.is-selected')).toHaveAttribute('data-calendar-day','2026-11-08');
+ await expect(page.locator('.calendar-upcoming-event')).toHaveCount(1);
+ const event=page.locator('.calendar-upcoming-event');
+ await expect(event).toContainText('Reload ZB Duos Cash Cup');
+ await expect(event).toContainText('日本時間 20:00');
+ await expect(event).toContainText('日程のみ登録');
+ await expect(event.locator('a')).toHaveAttribute('href',/fortnite\.com\/competitive\/events\/S43_ReloadZBDuosCashCup/);
+ await expect(page.locator('.calendar-month-head small')).toContainText('予定');
+ await expect(page.locator('.calendar-day-upcoming-count').first()).toBeVisible();
+ await expect(page.locator('.calendar-note')).toContainText('FNCS Division 1以外のFNCS');
+ expect(errors).toEqual([]);
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth+2)).toBe(true);
+});
+
+test('開催予定のみ・掲載結果のみの表示を切り替えても既存の結果は保持される',async({page})=>{
+ await page.goto('/?season=all#calendar?month=2026-11&date=2026-11-10');
+ await expect(page.locator('.calendar-upcoming-event').first()).toBeVisible();
+ await page.locator('#calendar-scope').selectOption('scheduled');
+ await expect(page.locator('#calendar-scope')).toHaveValue('scheduled');
+ expect(await page.locator('.calendar-upcoming-event').count()).toBeGreaterThan(0);
+ await expect(page.locator('.calendar-event')).toHaveCount(0);
+ await expect(page).toHaveURL(/scope=scheduled/);
+ await page.locator('#calendar-scope').selectOption('results');
+ await expect(page.locator('.calendar-upcoming-event')).toHaveCount(0);
+ await expect(page).toHaveURL(/scope=results/);
+ await page.locator('#calendar-scope').selectOption('all');
+ await expect(page.locator('.calendar-upcoming-event').first()).toBeVisible();
+});
+
+test('予定には非Division1 FNCSやASIA開催を混ぜず、S42閲覧中もS43の公式予定が見える',async({page})=>{
+ await page.goto('/?season=S42#calendar?month=2026-11&date=2026-11-07');
+ await expect(page.locator('#season-select')).toHaveValue('S42');
+ const all=page.locator('.calendar-upcoming-event');
+ expect(await all.count()).toBeGreaterThan(0);
+ expect(await all.allTextContents()).not.toContain('FNCS Solos Reload Qualifiers');
+ for(const el of await all.allTextContents()){
+   expect(el).not.toMatch(/FNCS Solos Reload|FNCS Solos Reload Finals|FNCS Solos Reload Qualifiers/);
+ }
+ await page.locator('#calendar-region').selectOption('OCE');
+ await expect(page.locator('#calendar-region')).toHaveValue('OCE');
+ const scheduled=page.locator('.calendar-upcoming-event');
+ for(const txt of await scheduled.allTextContents())expect(txt).toContain('OCE');
+ await expect(page.locator('.calendar-note')).toContainText('JST');
+});
