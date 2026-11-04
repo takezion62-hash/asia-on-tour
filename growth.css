@@ -1,0 +1,60 @@
+/* ASIA ON TOUR · responsive, accessible profile growth chart */
+.profile-growth{margin:18px 0 28px;padding:20px;border:1px solid #3f557b;border-radius:17px;background:radial-gradient(circle at 95% 8%,#24638c27,transparent 43%),linear-gradient(148deg,#171e34,#101827);min-width:0;overflow:hidden}
+.growth-heading{display:flex;justify-content:space-between;gap:12px;align-items:start;margin-bottom:16px}
+.growth-eyebrow{display:block;font-size:10px;letter-spacing:.13em;font-weight:900;color:#7fdbef}
+.growth-heading h2{margin:5px 0 0;font-size:23px;color:#f0f6ff;font-weight:900;line-height:1.3}
+.growth-heading h2 span{color:#8ae1ee}
+.growth-heading p{font-size:11px;line-height:1.6;color:#a4bad5;margin:7px 0 0}
+.growth-live-mark{display:grid;place-items:center;flex:0 0 46px;width:46px;height:46px;border-radius:13px;border:1px solid #3f8faa;background:#1f4d6960;font-size:24px}
+.growth-controls{display:flex;flex-wrap:wrap;gap:10px 14px;margin:0 0 18px;align-items:center}
+.growth-control-group{display:flex;gap:4px;flex-wrap:wrap;align-items:center;padding:4px;border-radius:11px;background:#0e1829;border:1px solid #3c4d6a}
+.growth-control-group button{font:inherit;font-size:11px;font-weight:850;color:#a4b8d2;border:0;border-radius:8px;padding:8px 11px;cursor:pointer;background:transparent;transition:background .16s,color .16s}
+.growth-control-group button:hover{background:#28415f;color:#ecf7ff}
+.growth-control-group button[aria-pressed="true"]{background:#264c66;color:#a5f1ff;box-shadow:inset 0 0 0 1px #4388a4}
+.growth-control-group button:focus-visible,.growth-period-button:focus-visible,.growth-data-details summary:focus-visible{outline:2px solid #8aeafa;outline-offset:3px}
+.growth-metrics{width:100%;gap:5px}
+.growth-metrics button{flex:1 1 auto}
+.growth-detail{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:17px}
+.growth-detail>div{display:grid;align-content:start;gap:4px;border:1px solid #435673;background:#18263b;border-radius:11px;padding:12px;min-width:0}
+.growth-detail small{color:#a9b9d1;font-size:10px;font-weight:750}
+.growth-detail strong{color:#e4f8ff;font-size:22px;font-weight:950;line-height:1.22;overflow-wrap:anywhere;font-variant-numeric:tabular-nums}
+.growth-detail span{color:#9cb4d0;font-size:10px;line-height:1.5}
+.growth-chart-scroll{overflow-x:auto;overflow-y:hidden;background:linear-gradient(180deg,#131c31,#101b2f);border:1px solid #40536f;border-radius:12px;scrollbar-color:#476c8b #17263b;scrollbar-width:thin;touch-action:pan-x pan-y}
+.growth-svg{display:block;max-width:none}
+.growth-gridline{stroke:#40516a;stroke-width:1;stroke-dasharray:3 5;opacity:.7}
+.growth-axis-value,.growth-axis-label{font-family:system-ui,"Noto Sans JP",sans-serif;font-size:11px;fill:#a0b6d0}
+.growth-trend-line{fill:none;stroke:#85ddeb;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.growth-guide{stroke:#d6b3ff;stroke-width:1.6;stroke-dasharray:4 4;opacity:.85}
+.growth-dot{fill:#91dfea;stroke:#132137;stroke-width:2}
+.growth-dot.is-selected{fill:#e8c6fb;stroke:#e9d5ff;stroke-width:2}
+.growth-dot-halo{fill:none;stroke:#d6b3ff;stroke-width:1.4;opacity:.4}
+.growth-period-picker{display:flex;gap:6px;margin-top:10px;padding:3px 0 10px;overflow-x:auto;scrollbar-width:thin;scrollbar-color:#3d6884 transparent}
+.growth-period-button{font:inherit;flex:0 0 auto;display:grid;justify-items:center;gap:3px;min-width:82px;max-width:158px;border:1px solid #394963;background:#18263a;color:#b5cce3;border-radius:9px;padding:8px 11px;cursor:pointer}
+.growth-period-button span{font-size:10px;white-space:nowrap}
+.growth-period-button strong{font-size:12px;font-weight:900;font-variant-numeric:tabular-nums;color:#e4f3ff}
+.growth-period-button[aria-pressed="true"]{border-color:#89cde8;background:#244b67;box-shadow:0 0 0 1px #89cde87b}
+.growth-period-button:hover{border-color:#72abc5}
+.growth-empty{border:1px dashed #566b83;border-radius:12px;padding:19px;margin:0;background:#162238;color:#b5cce1;font-size:12px;line-height:1.75}
+.growth-data-details{border-top:1px solid #41516b;margin-top:12px;padding-top:12px}
+.growth-data-details summary{cursor:pointer;color:#b5e6ff;font-size:11px;font-weight:850}
+.growth-table-wrap{overflow-x:auto;margin-top:11px;border:1px solid #465a70;border-radius:9px}
+.growth-data-details table{width:100%;border-collapse:collapse;text-align:left;min-width:360px;color:#cad8ec;font-size:11px}
+.growth-data-details thead{background:#233953}
+.growth-data-details th,.growth-data-details td{padding:8px 11px;border-bottom:1px solid #384b62}
+.growth-data-details tr:last-child th,.growth-data-details tr:last-child td{border-bottom:0}
+.growth-data-details td:last-child{font-weight:850;color:#aee9f4;font-variant-numeric:tabular-nums}
+.growth-footnote{color:#97aac8;font-size:10px;line-height:1.8;margin:15px 0 0}
+@media(max-width:700px){
+ .profile-growth{margin:13px 0 20px;padding:13px;border-radius:13px}
+ .growth-heading{margin-bottom:12px}
+ .growth-heading h2{font-size:18px}
+ .growth-live-mark{width:37px;height:37px;flex-basis:37px;font-size:20px}
+ .growth-control-group{width:100%}
+ .growth-control-group button{flex:1;min-height:37px;padding:8px 9px}
+ .growth-detail{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+ .growth-detail>div{padding:10px}
+ .growth-detail>div:first-child{grid-column:1/-1}
+ .growth-detail strong{font-size:18px}
+ .growth-period-button{min-width:76px}
+}
+@media(prefers-reduced-motion:reduce){.growth-control-group button{transition:none}}
