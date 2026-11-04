@@ -210,3 +210,42 @@
 .achievement-collection-body{padding-top:18px}
 @media(max-width:640px){.achievement-toggle{padding:11px 12px;gap:10px}.achievement-toggle-mark{width:30px;height:30px;flex-basis:30px}.achievement-collection-body{padding-top:14px}}
 @media(prefers-reduced-motion:reduce){.achievement-toggle,.achievement-toggle-chevron{transition:none}}
+
+
+/* Hidden achievements: the default presentation reveals clues, never criteria.
+   Two sealed achievements are deliberately absent until unlocked. */
+.secret-achievements{margin-top:21px;padding:17px;border:1px solid #68558a;border-radius:16px;background:radial-gradient(circle at 92% 8%,#482b704d,transparent 44%),linear-gradient(155deg,#211b36,#121d30);min-width:0}
+.secret-header{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:14px}
+.secret-header h3{margin:3px 0 0;font-size:21px;font-weight:900;color:#f6efff}
+.secret-header h3 span{color:#d6aeff}
+.secret-header p{font-size:11px;color:#afbbd7;line-height:1.6;margin:6px 0 0}
+.secret-summary{min-width:85px;display:grid;justify-items:center;padding:9px 13px;border:1px solid #8463b1;border-radius:12px;background:#3b2a57}
+.secret-summary strong{font-size:21px;color:#f3dcff;line-height:1.2;font-variant-numeric:tabular-nums}
+.secret-summary span{font-size:10px;color:#c7b1d9;font-weight:800}
+.secret-earned-grid,.secret-locked-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+.secret-locked-grid{list-style:none;margin:14px 0 0;padding:0}
+.secret-card{min-width:0;border-radius:13px;padding:14px;overflow-wrap:anywhere}
+.secret-card-earned{border:1px solid #be98f0;background:linear-gradient(135deg,#352345,#1c2440);box-shadow:0 0 18px #9b5ce526}
+.secret-card-earned[data-secret-rarity="epic"]{border-color:#9f8cc5;background:linear-gradient(135deg,#312444,#1d273e)}
+.secret-card-locked{display:flex;align-items:center;gap:12px;border:1px dashed #655877;background:#1c2034}
+.secret-card-top{display:flex;align-items:center;gap:11px}
+.secret-card-icon{display:grid;place-items:center;flex:0 0 45px;width:45px;height:45px;border-radius:13px;background:#69418d51;border:1px solid #9e79bf;font-size:25px}
+.secret-card-locked .secret-card-icon{border:1px dashed #786c91;color:#c8b8e3;filter:grayscale(1)}
+.secret-card-eyebrow{font-size:9px;letter-spacing:.09em;font-weight:900;color:#dfbaff}
+.secret-card h4{color:#f6edff;font-size:14px;line-height:1.5;font-weight:900;margin:4px 0}
+.secret-card-locked h4{letter-spacing:.12em;color:#aaa2c4}
+.secret-card p{font-size:11px;color:#bfcee3;line-height:1.7;margin:10px 0;overflow-wrap:anywhere}
+.secret-card-locked p{font-style:italic;color:#c4b4db;margin:5px 0}
+.secret-card-locked small{font-size:10px;color:#8e9fbd}
+.secret-difficulty{display:inline-flex;padding:4px 9px;border-radius:999px;border:1px solid #f1c17c;background:#624025;color:#ffe6b1;font-size:10px;font-weight:900}
+.secret-proof{margin-top:13px;border-top:1px solid #716384;padding-top:10px}
+.secret-proof summary{cursor:pointer;font-size:11px;color:#dbc5ff;font-weight:850}
+.secret-proof summary:focus-visible,.secret-locked-details summary:focus-visible{outline:2px solid #b7a9fa;outline-offset:4px}
+.secret-proof ul{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:7px}
+.secret-proof li{font-size:10px;line-height:1.65;color:#c8d4e8}
+.secret-proof li span{font-weight:850;color:#e1d0ff}
+.secret-proof li small{color:#aebce0}
+.secret-locked-details{border-top:1px solid #69587d;margin-top:15px;padding-top:13px}
+.secret-locked-details>summary{font-size:12px;color:#dbbfff;font-weight:900;cursor:pointer}
+.secret-note{font-size:10px;color:#9daece;line-height:1.7;margin:14px 0 0}
+@media(max-width:680px){.secret-achievements{padding:12px;margin-top:15px}.secret-header h3{font-size:18px}.secret-earned-grid,.secret-locked-grid{grid-template-columns:1fr}.secret-card{padding:12px}.secret-card-icon{width:41px;height:41px;flex-basis:41px}.secret-summary{min-width:70px;padding:7px 9px}.secret-summary strong{font-size:18px}}
