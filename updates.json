@@ -2,6 +2,14 @@
   "version": 1,
   "entries": [
     {
+      "id": "2026-11-04-s43-scheduled-tournaments-calendar",
+      "date": "2026-11-04",
+      "type": "site",
+      "title": "今シーズンS43の海外大会開催予定をカレンダーへ追加",
+      "description": "Epic公式大会予定から海外ME/EU/NAC/NAW/OCE/BRのS43予定190セッションを別ファイルschedule.jsonに登録。Trios Cash Cup、Reload ZB Duos Cash Cup、Squads Victory Cup、Arenas Cash Cup、Performance Evaluation、Ranked CupのBR/ZB/Reloadを収録。公式UTC開始時刻からJST表示、結果／予定／両方の切替、地域・シリーズ・形式・ラウンド絞り込みに対応。FNCS Division 1以外のFNCS（FNCS Solos Reload Qualifiers・Heats・LCQ・Finals等）はリージョンロックのため除外。既存の戦績や賞金、称号、PRは一切変更しない。11/4時点のスナップショットのため変更時は再確認が必要。",
+      "recordIds": []
+    },
+    {
       "id": "2026-11-04-player-growth-chart",
       "date": "2026-11-04",
       "type": "site",
