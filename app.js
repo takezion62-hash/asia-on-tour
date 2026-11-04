@@ -185,7 +185,30 @@
       for(const key of [...tournamentAxes.map(a=>a.key),'stage','q'])if(f[key]&&f[key]!=='all')params.set(key,f[key]);
       return '#tournaments'+(params.size?'?'+params.toString():'');
     }
-    const tournamentHref=id=>'#tournament='+encodeURIComponent(id);
+
+    // Calendar-only result scope; other tournament links remain full archive.
+    function tournamentSessionScope(value){
+      if(!value||!validCalendarDate(value.date)||!regions.includes(value.region)
+         ||typeof value.round!=='string'||!value.round.trim()
+         ||typeof value.kind!=='string'||!value.kind.trim())return null;
+      return {date:value.date,region:value.region,round:value.round,kind:value.kind};
+    }
+    function tournamentSessionKey(value){
+      const session=tournamentSessionScope(value);
+      return session?JSON.stringify([session.date,session.region,session.round,session.kind]):'';
+    }
+    function tournamentRecordInScope(row,scope){
+      return row.date===scope.date&&row.region===scope.region
+        &&(row.round||'ラウンド未確認')===scope.round
+        &&(row.kind||'区分未確認')===scope.kind;
+    }
+    function tournamentHref(id,session=null){
+      const base='#tournament='+encodeURIComponent(id),scope=tournamentSessionScope(session);
+      if(!scope)return base;
+      const params=new URLSearchParams();
+      for(const key of ['date','region','round','kind'])params.set(key,scope[key]);
+      return base+'?'+params.toString();
+    }
     function tournamentSearchHref(axis,value,context=currentView.page==='tournaments'){const base=context?{...currentView.filters}:tournamentDefaultFilters();base[axis]=base[axis]===value?'all':value;return tournamentSearchHash(base)}
     function tournamentTags(e){const t=classifyTournamentRecord(e);return `<div class="tournament-tags" data-record-classification="${escape(e.id)}">${tournamentAxes.flatMap(axis=>tournamentAxisValues(t,axis.key).map(value=>`<a class="tournament-tag${value==='unknown'?' is-unknown':''}" data-axis="${escape(axis.key)}" data-tournament-tag="${escape(axis.key+':'+value)}" href="${escape(tournamentSearchHref(axis.key,value,false))}" title="${escape(axis.label+'：'+tournamentLabel(axis.key,value))}"><span class="sr-only">${escape(axis.label)}：</span>${escape(tournamentLabel(axis.key,value))}</a>`)).join('')}</div>`}
     function tournamentRecordsMatch(e,filters,skipAxis){
@@ -397,7 +420,7 @@
         return '<article class="calendar-event"><div class="calendar-event-top"><span class="calendar-event-tag is-region">'+escape(item.region)+'</span>'
           +'<span class="calendar-event-tag">'+escape(item.kind)+'</span>'
           +'<span class="calendar-event-tag">'+escape(item.round)+'</span></div>'
-          +'<h3><a href="'+escape(tournamentHref(item.id))+'" data-open-tournament="'+escape(item.id)+'">'+escape(item.name)+'</a></h3>'
+          +'<h3><a href="'+escape(tournamentHref(item.id,item))+'" data-open-tournament="'+escape(item.id)+'" data-tournament-date="'+escape(item.date)+'" data-tournament-region="'+escape(item.region)+'" data-tournament-round="'+escape(item.round)+'" data-tournament-kind="'+escape(item.kind)+'">'+escape(item.name)+'</a></h3>'
           +'<p>掲載済み：'+format(item.records.length)+'戦績 / '+format(players.length)+'選手 · 地域・日付・ラウンド単位の集計</p>'
           +(links?'<div class="calendar-event-players">'+links+(players.length>5?'<span class="calendar-event-tag">ほか'+format(players.length-5)+'名</span>':'')+'</div>':'')
           +'</article>';
@@ -579,15 +602,30 @@
         +'</section>';
     }
 
-    function renderTournament(id){
-      const info=tournamentInfo(id);
-      if(tournamentProgressId!==id){tournamentProgressId=id;tournamentProgressMode='all';}
+    function renderTournament(id,session=null){
+      const scope=tournamentSessionScope(session);
+      const scopeIdentity=id+'|'+tournamentSessionKey(scope);
+      const subset=scope?all().filter(row=>tournamentRecordInScope(row,scope)):undefined;
+      const info=tournamentInfo(id,subset);
+      if(tournamentProgressId!==scopeIdentity){tournamentProgressId=scopeIdentity;tournamentProgressMode='all';}
       if(!info){$('#tournament-detail-content').innerHTML='<div class="tournament-detail-toolbar"><button type="button" class="btn sm ghost" data-tournament-back>← 戻る</button><a href="#tournaments" data-page="tournaments">大会を探す</a></div><div class="empty"><b>大会が見つかりません</b><p>URLを確認するか、大会検索から探してください。</p></div>';return}
+      if(scope&&!info.recordCount){
+        $('#tournament-detail-content').innerHTML='<div class="tournament-detail-toolbar"><button type="button" class="btn sm ghost" data-tournament-back>← 戻る</button>'
+          +'<a class="tournament-show-all" data-open-tournament="'+escape(id)+'" href="'+escape(tournamentHref(id))+'">大会全体の戦績を見る →</a></div>'
+          +'<div class="empty"><b>この開催枠の掲載結果はまだありません</b>'
+          +'<p>'+escape(scope.date)+' · '+escape(scope.region)+' · '+escape(scope.round)+' · '+escape(scope.kind)+'</p>'
+          +'<p>ほかの日付や地域の結果を代わりに表示せず、大会全体の戦績から確認できます。</p></div>';
+        return;
+      }
+      const scopeHeading=scope?
+        '<div class="tournament-selected-scope" data-tournament-scope="'+escape(tournamentSessionKey(scope))+'">'
+        +'<strong>カレンダーで選択した開催枠</strong><span>'+escape(scope.date.replace(/-/g,'/'))+' · '+escape(scope.region)+' · '+escape(scope.round)+' · '+escape(scope.kind)+'</span></div>':'';
+      const scopeLink=scope?'<a class="tournament-show-all" href="'+escape(tournamentHref(info.id))+'" data-open-tournament="'+escape(info.id)+'">大会全体の戦績を見る →</a>':'';
       const roster=new Set(info.records.flatMap(names));
       const visited=regions.filter(r=>info.records.some(e=>e.region===r));
       const visibleSessions=info.sessions.map(session=>({...session,records:session.records.filter(tournamentProgressFilter)})).filter(session=>session.records.length>0);
       const visibleCount=visibleSessions.reduce((sum,session)=>sum+session.records.length,0);
-      $('#tournament-detail-content').innerHTML=`<div class="tournament-detail-toolbar"><button type="button" class="btn sm ghost" data-tournament-back>← 戻る</button><a href="${escape(tournamentHref(info.id))}" title="このURLをコピーして共有できます">大会のURL ↗</a></div><header class="tournament-detail-hero"><p class="tournament-kicker">TOURNAMENT / ASIA RESULTS</p><div class="tournament-detail-meta"><span class="tournament-season">${escape(tournamentViewSeason(info))}</span>${visited.map(regionPill).join('')}</div><h1 id="tournament-title" tabindex="-1">${escape(info.name)}</h1>${info.records.length?tournamentTags(info.records[0]):''}<dl class="tournament-detail-summary"><div><dt>掲載戦績</dt><dd>${format(info.recordCount??info.records.length)}<small>件</small></dd></div><div><dt>地域・日付・ラウンド</dt><dd>${format(info.sessions.length)}<small>枠</small></dd></div><div><dt>掲載選手</dt><dd>${format(roster.size)}<small>名</small></dd></div></dl>${tournamentViewEvidence(info)}</header>${tournamentProgress(info)}<div class="tournament-sessions-heading"><h2>開催枠ごとの戦績</h2><p aria-live="polite">全${format(info.recordCount)}件中 ${format(visibleCount)}件を表示 · 新しい順 · 地域・日付・ラウンド別 · 金色は賞金獲得</p></div><div class="tournament-sessions" id="tournament-record-sessions">${visibleSessions.length?visibleSessions.map(tournamentViewSession).join(''):'<div class="empty"><b>この表示条件に該当する戦績はありません</b><p>「全戦績」を選ぶと、スキン大会などの記録も確認できます。</p></div>'}</div>`;
+      $('#tournament-detail-content').innerHTML=`<div class="tournament-detail-toolbar"><button type="button" class="btn sm ghost" data-tournament-back>← 戻る</button><a href="${escape(tournamentHref(info.id,scope))}" title="このURLをコピーして共有できます">大会のURL ↗</a>${scopeLink}</div>${scopeHeading}<header class="tournament-detail-hero"><p class="tournament-kicker">TOURNAMENT / ASIA RESULTS</p><div class="tournament-detail-meta"><span class="tournament-season">${escape(tournamentViewSeason(info))}</span>${visited.map(regionPill).join('')}</div><h1 id="tournament-title" tabindex="-1">${escape(info.name)}</h1>${info.records.length?tournamentTags(info.records[0]):''}<dl class="tournament-detail-summary"><div><dt>掲載戦績</dt><dd>${format(info.recordCount??info.records.length)}<small>件</small></dd></div><div><dt>地域・日付・ラウンド</dt><dd>${format(info.sessions.length)}<small>枠</small></dd></div><div><dt>掲載選手</dt><dd>${format(roster.size)}<small>名</small></dd></div></dl>${tournamentViewEvidence(info)}</header>${tournamentProgress(info)}<div class="tournament-sessions-heading"><h2>開催枠ごとの戦績</h2><p aria-live="polite">全${format(info.recordCount)}件中 ${format(visibleCount)}件を表示 · 新しい順 · 地域・日付・ラウンド別 · 金色は賞金獲得</p></div><div class="tournament-sessions" id="tournament-record-sessions">${visibleSessions.length?visibleSessions.map(tournamentViewSession).join(''):'<div class="empty"><b>この表示条件に該当する戦績はありません</b><p>「全戦績」を選ぶと、スキン大会などの記録も確認できます。</p></div>'}</div>`;
     }
     function renderTournamentDetail(id){renderTournament(id)}
 
@@ -635,7 +673,14 @@
     function routeFromHash(){
       const hash=window.location.hash;
       if(hash.startsWith('#player=')){try{return {page:'profile',name:decodeURIComponent(hash.slice(8))}}catch{return {page:'profile',name:null,invalid:true}}}
-      if(hash.startsWith('#tournament=')){try{return {page:'tournament',id:decodeURIComponent(hash.slice(12))}}catch{return {page:'tournament',id:null,invalid:true}}}
+      if(hash.startsWith('#tournament=')){
+        try{
+          const suffix=hash.slice(12),q=suffix.indexOf('?'),id=decodeURIComponent(q<0?suffix:suffix.slice(0,q));
+          if(q<0)return {page:'tournament',id,session:null};
+          const session=tournamentSessionScope(Object.fromEntries(new URLSearchParams(suffix.slice(q+1))));
+          return session?{page:'tournament',id,session}:{page:'tournament',id,session:null,invalid:true};
+        }catch{return {page:'tournament',id:null,invalid:true}}
+      }
       if(hash==='#calendar'||hash.startsWith('#calendar?')){const params=new URLSearchParams(hash.split('?').slice(1).join('?'));return {page:'calendar',calendar:sanitizeCalendarFilters(Object.fromEntries(params))}}
       if(hash==='#tournaments'||hash.startsWith('#tournaments?')){const params=new URLSearchParams(hash.split('?').slice(1).join('?'));return {page:'tournaments',filters:sanitizeTournamentFilters(Object.fromEntries(params))}}
       if(hash==='#players'||hash.startsWith('#players?')){const params=new URLSearchParams(hash.split('?').slice(1).join('?'));return {page:'players',ranking:{filters:sanitizeRankingFilters(Object.fromEntries(params)),limit:30}}}
@@ -644,7 +689,7 @@
     }
     function routeHash(view){
       if(view.page==='profile')return view.invalid?window.location.hash:profileHref(view.name||'');
-      if(view.page==='tournament')return view.invalid?window.location.hash:tournamentHref(view.id||'');
+      if(view.page==='tournament')return view.invalid?window.location.hash:tournamentHref(view.id||'',view.session);
       if(view.page==='calendar')return calendarHash(view.calendar||calendarBrowse);
       if(view.page==='tournaments')return tournamentSearchHash(view.filters);
       if(view.page==='players')return rankingSearchHash(view.ranking?.filters||rankingFilters);
@@ -654,10 +699,10 @@
       const nextSeason=seasonFromUrl();
       if(nextSeason!==selectedSeason){selectedSeason=nextSeason;archivePage=1;refresh()}
       restoreBrowseState(view);
-      currentView={page:view.page,name:view.name||null,id:view.id||null,invalid:!!view.invalid};
+      currentView={page:view.page,name:view.name||null,id:view.id||null,session:tournamentSessionScope(view.session),invalid:!!view.invalid};
       if(view.page==='tournaments'){tournamentBrowseFilters=sanitizeTournamentFilters(view.filters||tournamentBrowseFilters);currentView.filters={...tournamentBrowseFilters};renderTournamentSearch(currentView.filters)}
       if(view.page==='calendar'){calendarBrowse=sanitizeCalendarFilters(view.calendar||calendarBrowse);currentView.calendar={...calendarBrowse};renderCalendar()}
-      if(view.page==='tournament')renderTournament(view.id);
+      if(view.page==='tournament')renderTournament(view.invalid?null:view.id,view.session);
       if(view.page==='profile'&&!renderProfile(view.name))$('#profile-content').innerHTML='<div class="profile-toolbar"><button type="button" class="btn sm ghost" id="profile-back" data-profile-back>← 戻る</button></div><div class="empty"><h1 id="profile-title" tabindex="-1">選手が見つかりません</h1><p>掲載済みの選手を名鑑から選んでください。</p><a class="text-link" href="#players" data-page="players">プレイヤー名鑑へ →</a></div>';
       document.querySelectorAll('.section').forEach(e=>e.classList.toggle('active',e.id==='page-'+view.page));
       document.querySelectorAll('.nav button').forEach(e=>{const active=e.dataset.page===(view.page==='profile'?'players':view.page==='tournament'?'tournaments':view.page);e.classList.toggle('active',active);e.setAttribute('aria-current',active?'page':'false')});
@@ -670,7 +715,7 @@
     }
     function visitView(view,replace=false){
       if(routingReady)window.history.replaceState({aot:true,depth:routeDepth,view:captureView()},'',window.location.href);
-      const same=currentView.page===view.page&&currentView.name===(view.name||null)&&currentView.id===(view.id||null)&&(view.page!=='tournaments'||tournamentSearchHash(currentView.filters)===tournamentSearchHash(view.filters));
+      const same=currentView.page===view.page&&currentView.name===(view.name||null)&&currentView.id===(view.id||null)&&(view.page!=='tournaments'||tournamentSearchHash(currentView.filters)===tournamentSearchHash(view.filters))&&(view.page!=='tournament'||tournamentSessionKey(currentView.session)===tournamentSessionKey(view.session));
       const next={...captureView(),invalid:false,...view,scroll:0};
       if(!replace&&!same)routeDepth++;
       const state={aot:true,depth:routeDepth,view:next};
@@ -679,7 +724,7 @@
     }
     function navigate(page){visitView({page,name:null,id:null,...(page==='tournaments'?{filters:{...tournamentBrowseFilters}}:{}),...(page==='calendar'?{calendar:{...calendarBrowse}}:{}),...(page==='players'?{ranking:{filters:{...rankingFilters},limit:rankingLimit}}:{})})}
     function openProfile(name){visitView({page:'profile',name,id:null})}
-    function openTournament(id){visitView({page:'tournament',id,name:null})}
+    function openTournament(id,session=null){visitView({page:'tournament',id,name:null,session:tournamentSessionScope(session)})}
     function profileBack(){if(routeDepth>0)window.history.back();else visitView({page:'players',name:null,id:null},true)}
     function tournamentBack(){if(routeDepth>0)window.history.back();else visitView({page:currentView.page==='tournaments'?'home':'tournaments',name:null,id:null,filters:tournamentDefaultFilters()},true)}
     function tournamentTagNavigate(axis,value,context){
@@ -1525,7 +1570,7 @@
         const mode=tournamentPhaseButton.dataset.tournamentPhase;
         if(['all','qualifier','final','prize'].includes(mode)){
           tournamentProgressMode=mode;
-          renderTournament(currentView.id);
+          renderTournament(currentView.id,currentView.session);
         }
         return;
       }
@@ -1536,7 +1581,15 @@
       const reset=e.target.closest('[data-tournament-reset]');
       if(tournament||tag||reset){
         if(e.ctrlKey||e.metaKey||e.shiftKey||e.altKey||e.button>0)return;e.preventDefault();
-        if(tournament)openTournament(tournament.dataset.openTournament);
+        if(tournament){
+          const session=tournament.hasAttribute('data-tournament-date')?{
+            date:tournament.dataset.tournamentDate,
+            region:tournament.dataset.tournamentRegion,
+            round:tournament.dataset.tournamentRound,
+            kind:tournament.dataset.tournamentKind
+          }:null;
+          openTournament(tournament.dataset.openTournament,session);
+        }
         else if(tag){const [axis,value]=tag.dataset.tournamentTag.split(':');tournamentTagNavigate(axis,value,tag.dataset.tournamentContext)}
         else visitView({page:'tournaments',name:null,id:null,filters:tournamentDefaultFilters()});
         return;
