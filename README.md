@@ -2,6 +2,21 @@
 
 ASIA勢のFortnite海外大会戦績を検索・閲覧する、GitHub Pagesの閲覧専用サイトです。一般閲覧者による戦績の追加・削除・保存・アップロード機能はありません。
 
+## 今シーズンの公式大会予定（2026-11-04）
+
+カレンダーには **CH7 Mini-Season（S43）** に発表されている海外6地域（ME/EU/NAC/NAW/OCE/BR）の大会予定を表示します。予定は開催結果とは完全に別の `schedule.json`（2026-11-04確認）に置き、`results.json` の実際の戦績、`players.json`、`tournaments.json`、賞金、AOT PR、称号には一切加算しません。
+
+- 対象：Trios Cash Cup Battle Royale（Event 1〜3）、Reload ZB Duos Cash Cup Zero Build（各Eventの予選・決勝）、Squads Victory Cup Battle Royale（各Eventの予選・決勝）、Arenas Cash Cup（Event 1・2）、EU・NAC Fortnite Performance Evaluation Trios（4イベント・各2ラウンド）、Solo Ranked CupのBR/Zero BuildとDuos Reload Ranked CupのBR/Zero Build
+- 日時は公式Fortnite Competitive各大会ページに掲載されたUTC開始時刻を **日本時間（JST、UTC+9）へ変換**。日付をまたぐ開催枠は変換後の日付に表示します。海外6地域・190セッションを登録。実際の大会日時は公式側の変更に従うため、リンク先で随時確認してください
+- **FNCS Division 1以外のFNCSは登録しない**：今季のFNCS Solos Reload Qualifiers、Heats、LCQ、Finalsなどは地域制限があるため、予定一覧からすべて除外。Division 1は開催日程を確認できた場合のみ追加し、架空の大会予定は作りません
+- カレンダーは**確認済み結果＋開催予定／開催予定のみ／登録済み結果のみ**を選択できます。地域・大会シリーズ・形式・ラウンドの既存フィルターも予定に適用。紫色の「予定」は日程情報、青い開催枠は出典付きの実戦績と区別
+- 予定の掲載範囲はデータスナップショット時点で確認できた大会に限られます。現時点で **サイトが公式の日程更新を自動取得する機能はありません**。日程が変更・追加された場合は `schedule.json` を再確認して更新してください
+- グローバルのシーズンフィルターがS42などでも、カレンダーの **S43開催予定は独立して表示**。結果のシーズン集計は元のフィルターに従います
+
+確認先： [Fortnite Competitive](https://www.fortnite.com/competitive/schedule)、各予定カードの**公式大会ページへのリンク**、[Fortnite.GG Events](https://fortnite.gg/events)。
+
+自動検証：`node --test tests/schedule.test.cjs`（ID・地域・JST変換・排除対象・独立性）、`npx playwright test tests/calendar.spec.cjs`（PC・スマホ表示、予定カード、リンク、各フィルター、戦績保持）。
+
 ## 選手プロフィールの成長グラフ（2026-11-04）
 
 選手プロフィールに**全期間の海外遠征成長グラフ**を追加しました。`growth.js` が確認済みの掲載戦績から時系列を作り、`growth.css` と `app.js` で折れ線グラフ・期間選択ボタン・数値表を描画します。
@@ -24,12 +39,13 @@ ASIA勢のFortnite海外大会戦績を検索・閲覧する、GitHub Pagesの�
 - `aot-pr.js` / `aot-pr.css`：AOT PR v1.4の計算と表示
 - `achievements.js` / `achievements.css`：プロフィールの進化バッジ・通常特別称号・秘密の称号
 - `growth.js` / `growth.css`：選手プロフィールの月別・シーズン別成長グラフ
-- `results.json`：戦績の配列
+- `results.json`：確認済み・未確認の戦績データ（予定とは別）
+- `schedule.json`：S43今シーズンの公式大会予定セッション（JST表示、戦績集計と完全分離）
 - `updates.json`：更新履歴と登録日を確認できた戦績IDの差分リスト
 - `players.json`：`candidates`（名鑑）と`confirmedAliases`（確認済み別名義）
 - `tournaments.json`：`axes`（5分類軸）と`catalog`（大会・シーズン・出典ID）
 
-掲載内容はJSONを編集して更新します。3つのJSON、`rankings.js`、`aot-pr.js`、`aot-pr.css`、`achievements.js`、`achievements.css`、`growth.js`、`growth.css`、`app.js`は`index.html`と同じ場所へ配置してください。ローカルではHTTPサーバーを使用します。
+掲載内容はJSONを編集して更新します。`results.json`・`players.json`・`tournaments.json`・`updates.json`・`schedule.json`、`rankings.js`、`aot-pr.js`、`aot-pr.css`、`achievements.js`、`achievements.css`、`growth.js`、`growth.css`、`app.js`は`index.html`と同じ場所へ配置してください。ローカルではHTTPサーバーを使用します。
 
 
 ## 特別称号の累計進化 v4（2026-11-03）
