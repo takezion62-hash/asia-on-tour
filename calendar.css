@@ -64,3 +64,18 @@
   .sidebar .brand-name{display:none}
   .sidebar .nav{justify-content:space-around}
 }
+
+
+/* Official upcoming S43 schedule is independent of archive results. */
+.calendar-day.has-upcoming{border-color:#7a5ba6;background:linear-gradient(150deg,#231e3e,#17243b)}
+.calendar-day.has-upcoming.is-selected{border-color:#dbb5ff;background:linear-gradient(130deg,#533567,#242842)}
+.calendar-day-upcoming-count{display:block;max-width:100%;padding:3px 6px;border-radius:7px;background:#54396d;color:#f0d7ff;font-size:10px;font-weight:850;line-height:1.4}
+.calendar-upcoming-event{min-width:0;border:1px solid #775a9d;border-radius:13px;padding:16px 18px;background:linear-gradient(130deg,#2c213d,#19243a);box-shadow:inset 0 1px 0 #fff1}
+.calendar-upcoming-event h3{font-size:17px;font-weight:900;line-height:1.5;color:#f1e5ff;margin:0 0 8px;overflow-wrap:anywhere}
+.calendar-upcoming-event p{font-size:11px;line-height:1.7;color:#bbc8df;margin:5px 0 0;overflow-wrap:anywhere}
+.calendar-upcoming-event p strong{font-size:13px;color:#f6d6ff}
+.calendar-upcoming-event p a{color:#a1ebf2;text-decoration:underline;text-underline-offset:3px;overflow-wrap:anywhere}
+.calendar-upcoming-event p a:hover{color:#ecfbff}
+.calendar-upcoming-event .calendar-event-tag.is-upcoming{border-color:#bf8af1;background:#513667;color:#f4dcff}
+.calendar-upcoming-event .calendar-upcoming-note{font-size:10px;color:#91a6c7}
+@media(max-width:640px){.calendar-upcoming-event{padding:12px}.calendar-upcoming-event h3{font-size:15px}.calendar-day-upcoming-count{font-size:9px;padding:2px 3px}.calendar-day.has-upcoming{min-height:75px}}
