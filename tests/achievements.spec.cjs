@@ -305,3 +305,90 @@ test('12個の追加称号はPC・スマホの折りたたみプロフィール�
   await expect(page.locator('#profile-achievements .achievement-note')).toContainText('同一大会の予選・決勝');
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth+1)).toBe(true);
 });
+
+
+test('秘密の称号は未解放時に名前・条件を伏せ、通常8つのヒントと完全シークレット2つを区別する',async({page})=>{
+  const source=records.find(row=>row.verified===true&&roster(row).length===1&&/\bsolo\b/i.test(row.event));
+  expect(source).toBeTruthy();
+  const name=roster(source)[0];
+  const row={...source,id:'secret-locked-test',event:'Solo Victory Cup Battle Royale',
+    date:'2026-10-01',player:name,players:[name],kind:'予選',rank:20,kills:0,vrs:0,prize:null,verified:true};
+  await page.route('**/results.json',route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify([row])}));
+  await page.goto('/?season=all#player='+encodeURIComponent(name));
+  await expect(page.locator('#profile-achievements .achievement-collection')).not.toHaveAttribute('open','');
+  await expandAchievements(page);
+  const secret=page.locator('#profile-secret-achievements');
+  await expect(secret).toBeVisible();
+  await expect(secret.locator('[data-secret-count]')).toHaveText('0');
+  await expect(secret.locator('[data-secret-unlocked="true"]')).toHaveCount(0);
+  await expect(secret.locator('[data-secret-id]')).toHaveCount(0);
+  await secret.locator('.secret-locked-details>summary').click();
+  await expect(secret.locator('[data-secret-locked="true"]')).toHaveCount(8);
+  await expect(secret.locator('.secret-card-locked h4')).toHaveText(Array(8).fill('？？？？？？'));
+  const markup=await secret.innerHTML();
+  for(const title of achievements.SECRET_CATALOG.map(def=>def.title))expect(markup).not.toContain(title);
+  for(const sealed of achievements.SECRET_CATALOG.filter(def=>def.sealed)){
+    expect(markup).not.toContain(sealed.hint);
+    expect(markup).not.toContain(sealed.description);
+  }
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth+1)).toBe(true);
+});
+
+test('無音の王冠はソロ決勝0K・0VR・個人賞金で解放し難易度極高と出典を表示する',async({page})=>{
+  const source=records.find(row=>row.verified===true&&roster(row).length===1&&/\bsolo\b/i.test(row.event));
+  expect(source).toBeTruthy();
+  const name=roster(source)[0];
+  const row={...source,id:'silent-crown-unlocked',event:'Solo Victory Cup Battle Royale',
+    date:'2026-10-01',player:name,players:[name],kind:'賞金決勝',rank:13,kills:0,vrs:0,prize:100,verified:true};
+  await page.route('**/results.json',route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify([row])}));
+  await page.goto('/?season=all#player='+encodeURIComponent(name));
+  await expandAchievements(page);
+  const secret=page.locator('#profile-secret-achievements');
+  await expect(secret.locator('[data-secret-count]')).toHaveText('1');
+  const badge=secret.locator('[data-secret-id="silent-crown"][data-secret-unlocked="true"]');
+  await expect(badge).toBeVisible();
+  await expect(badge.locator('h4')).toHaveText('無音の王冠');
+  await expect(badge.locator('.secret-difficulty')).toHaveText('難易度 極高');
+  await expect(badge).toContainText('0K・0VR');
+  await badge.locator('.secret-proof summary').click();
+  await expect(badge.locator('[data-secret-evidence-id="silent-crown-unlocked"]')).toContainText('0K');
+  await expect(badge.locator('[data-secret-evidence-id="silent-crown-unlocked"]')).toContainText('0VR');
+  await expect(badge.locator('[data-secret-evidence-id="silent-crown-unlocked"]')).toContainText('個人賞金 $100');
+});
+
+test('10種すべての秘密称号は確認済み複合戦績で解放し、完全シークレットも初めて表示する',async({page})=>{
+  const source=records.find(row=>row.verified===true&&roster(row).length===1&&/\bsolo\b/i.test(row.event));
+  expect(source).toBeTruthy();
+  const name=roster(source)[0];
+  const make=(id,date,region,kills,vrs,rank,prize,kind='賞金決勝')=>({
+    ...source,id,date,region,kills,vrs,rank,prize,kind,verified:true,
+    event:'Solo Victory Cup Battle Royale',player:name,players:[name]
+  });
+  const rows=[
+    make('secret-silent','2026-10-01','ME',0,0,12,100),
+    make('secret-golden','2026-10-01','EU',1,1,12,100),
+    make('secret-death','2026-10-01','NAC',35,2,1,200),
+    make('secret-naw','2026-10-01','NAW',10,1,1,100),
+    make('secret-oce','2026-10-02','OCE',20,1,1,100),
+    make('secret-br','2026-10-03','BR',10,0,2,100),
+    make('secret-phoenix-start','2025-01-01','ME',4,0,12,100),
+    make('secret-phoenix-end','2026-02-01','ME',3,0,12,100),
+    make('secret-destruction','2026-10-04','ME',65,0,50,null,'予選')
+  ];
+  const report=achievements.calculate(rows,name,{catalog:data.tournaments.catalog});
+  expect(report.secret.total).toBe(10);
+  expect(report.secret.earned).toBe(10);
+  expect(report.special.total).toBe(30);
+  await page.route('**/results.json',route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify(rows)}));
+  await page.goto('/?season=all#player='+encodeURIComponent(name));
+  await expandAchievements(page);
+  const secret=page.locator('#profile-secret-achievements');
+  await expect(secret.locator('[data-secret-count]')).toHaveText('10');
+  await expect(secret.locator('[data-secret-unlocked="true"]')).toHaveCount(10);
+  await expect(secret.locator('[data-secret-locked="true"]')).toHaveCount(0);
+  for(const id of ['triple-gold','light-and-shadow']){
+    await expect(secret.locator('[data-secret-id="'+id+'"]')).toBeVisible();
+  }
+  await expect(page.locator('[data-special-count]')).toContainText('/ 30');
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth+1)).toBe(true);
+});
