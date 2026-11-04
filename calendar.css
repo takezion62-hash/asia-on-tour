@@ -79,3 +79,14 @@
 .calendar-upcoming-event .calendar-event-tag.is-upcoming{border-color:#bf8af1;background:#513667;color:#f4dcff}
 .calendar-upcoming-event .calendar-upcoming-note{font-size:10px;color:#91a6c7}
 @media(max-width:640px){.calendar-upcoming-event{padding:12px}.calendar-upcoming-event h3{font-size:15px}.calendar-day-upcoming-count{font-size:9px;padding:2px 3px}.calendar-day.has-upcoming{min-height:75px}}
+
+
+/* Calendar-scoped tournament detail: date/region/round clearly distinguished
+   from the normal all-time tournament archive. */
+.tournament-selected-scope{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;margin:12px 0 16px;padding:11px 15px;border-radius:11px;border:1px solid #5e91ba;background:linear-gradient(120deg,#1d3651,#25253d);color:#dbefff;font-size:12px;line-height:1.6}
+.tournament-selected-scope strong{color:#94ebf2;font-size:11px}
+.tournament-selected-scope span{font-weight:800;overflow-wrap:anywhere}
+.tournament-detail-toolbar .tournament-show-all{display:inline-flex;align-items:center;min-height:38px;padding:7px 12px;border-radius:9px;border:1px solid #6487ac;background:#20374a;color:#b5edff;text-decoration:none;font-size:12px;font-weight:900;line-height:1.4}
+.tournament-detail-toolbar .tournament-show-all:hover{background:#294d65;border-color:#8cddea;color:white}
+.tournament-detail-toolbar .tournament-show-all:focus-visible{outline:2px solid #98e7f7;outline-offset:3px}
+@media(max-width:640px){.tournament-selected-scope{padding:10px 11px;gap:5px 9px}.tournament-detail-toolbar .tournament-show-all{font-size:11px;max-width:100%}}
