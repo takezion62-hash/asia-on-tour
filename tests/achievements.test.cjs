@@ -112,7 +112,7 @@ test('real published archive remains immutable; roster-based calculation matches
 
 
 test('six evolving badge tracks have five strictly increasing rank goals',()=>{
-  assert.equal(engine.VERSION,5,'solo cumulative kill title ships engine v5');
+  assert.equal(engine.VERSION,6,'twelve new special achievements ship engine v6');
   assert.equal(engine.EVOLUTION_TRACKS.length,6);
   assert.deepEqual(engine.EVOLUTION_TIERS.map(t=>t.id),['bronze','silver','gold','platinum','prismatic']);
   assert.equal(new Set(engine.EVOLUTION_TRACKS.map(t=>t.id)).size,6);
@@ -189,8 +189,8 @@ test('every real published player gets exactly six evolving tracks without modif
 
 const special=(rows,id,name='Hero')=>engine.calculateSpecial(rows,name).achievements.find(badge=>badge.id===id);
 test('special title catalog includes solo cumulative KILLS and existing titles',()=>{
-  assert.equal(engine.SPECIAL_CATALOG.length,18);
-  assert.equal(new Set(engine.SPECIAL_CATALOG.map(def=>def.id)).size,18);
+  assert.equal(engine.SPECIAL_CATALOG.length,30);
+  assert.equal(new Set(engine.SPECIAL_CATALOG.map(def=>def.id)).size,30);
   for(const def of engine.SPECIAL_CATALOG){
     assert.ok(['rare','epic','legendary'].includes(def.rarity),def.id);
     assert.ok(def.goal>=1&&def.description&&def.title&&def.icon,def.id);
@@ -275,7 +275,7 @@ test('legacy top ten and region specialist survive; report does not mutate evide
   ];
   const before=JSON.stringify(rows);
   const report=engine.calculateSpecial(rows,'Hero');
-  assert.equal(report.total,18);
+  assert.equal(report.total,30);
   assert.equal(report.unlocked.length,2);
   assert.equal(special(rows,'top-ten').unlocked,true);
   assert.equal(special(rows,'specialist-me').unlocked,true);
@@ -287,7 +287,7 @@ test('new special titles for every published player are deterministic and read-o
   const players=[...new Set(records.flatMap(row=>Array.isArray(row.players)&&row.players.length?row.players:[row.player]).filter(Boolean))];
   for(const player of players){
     const report=engine.calculate(records,player).special;
-    assert.equal(report.total,18);
+    assert.equal(report.total,30);
     assert.equal(report.earned,report.unlocked.length,player);
     assert.equal(report.locked.length+report.earned,report.total,player);
     assert.ok(report.achievements.every(a=>a.evidence.length<=(a.id==='solo-and-team-cash'?4:3)&&a.evidence.every(e=>e.id)),player);
@@ -489,4 +489,124 @@ test('solo KILLS sum qualifying and final sessions, never teams, missing kills, 
   const nonmember=engine.calculateSpecial([...allowed,...denied],'Pair',{catalog}).achievements.find(item=>item.id==='solo-kill-mastery');
   assert.equal(nonmember.progress,0);
   assert.equal(nonmember.unlocked,false);
+});
+
+
+const badge30=(rows,id,catalog=[])=>engine.calculateSpecial(rows,'Hero',{catalog}).achievements.find(x=>x.id===id);
+const cashRow=(id,overrides={})=>fixture(id,{
+  kind:'賞金決勝',prize:100,vrs:0,kills:2,rank:15,date:'2026-10-01',...overrides
+});
+test('12 new special awards have stable IDs, rarities and distinct achievement catalog entries',()=>{
+  const ids=['final-kill-tyrant','final-runner-up','podium-streak','cash-windfall',
+    'cash-chain','same-day-traveler','same-day-cash','reload-regular','no-vr-cash',
+    'zero-build-champion','fncs-finalist','seven-day-traveler'];
+  assert.equal(engine.VERSION,6);
+  assert.equal(engine.SPECIAL_CATALOG.length,30);
+  assert.equal(new Set(engine.SPECIAL_CATALOG.map(x=>x.id)).size,30);
+  for(const id of ids){
+    const def=engine.SPECIAL_CATALOG.find(x=>x.id===id);
+    assert.ok(def&&def.description&&def.title, id);
+    assert.ok(['rare','epic','legendary'].includes(def.rarity),id);
+    assert.equal(badge30([],id).unlocked,false,id+' is locked without verified evidence');
+  }
+});
+test('solo final 30K, final runner-up and three distinct podium finals respect exact boundaries',()=>{
+  const solo=fixture('solo-final',{kind:'賞金決勝',rank:2,kills:30,date:'2026-11-01'});
+  const under={...solo,id:'under',kills:29};
+  const team={...solo,id:'duo-90',event:'Reload Duos Victory Cup',player:'Hero / Pair',players:['Hero','Pair'],kills:90};
+  const qualifier={...solo,id:'qualifier',kind:'予選',kills:50};
+  const unknown={...solo,id:'unknown',event:'Ambiguous Tournament',kills:60};
+  assert.equal(badge30([solo],'final-kill-tyrant').unlocked,true);
+  assert.equal(badge30([under,team,qualifier,unknown],'final-kill-tyrant').unlocked,false);
+  assert.equal(badge30([solo],'final-runner-up').unlocked,true);
+  assert.equal(badge30([{...solo,kind:'予選'}, {...solo,id:'third',rank:3}],'final-runner-up').unlocked,false);
+  const f1=solo,f2={...solo,id:'f2',date:'2026-11-02',rank:1},f3={...solo,id:'f3',date:'2026-11-03',rank:3};
+  const duplicate={...solo,id:'same-day-duplicate',kind:'Practice決勝'};
+  assert.equal(badge30([solo,f2,duplicate],'podium-streak').progress,2);
+  assert.equal(badge30([solo,f2,f3],'podium-streak').unlocked,true);
+  assert.equal(badge30([solo,f2,f3],'podium-streak').progress,3);
+  assert.equal(badge30([solo,{...f2,id:'not-verified',verified:false},f3],'podium-streak').unlocked,false);
+});
+test('single-event windfall uses confirmed personal cash, zero VR cash requires explicit 0',()=>{
+  const solo=cashRow('rich',{prize:500});
+  const duo=cashRow('duo-rich',{player:'Hero / Pair',players:['Hero','Pair'],event:'Reload Duos Cash Cup',prize:1000,prizePerPlayer:500});
+  const teamUnknown={...duo,id:'duo-unknown',prizePerPlayer:null};
+  assert.equal(badge30([solo],'cash-windfall').unlocked,true);
+  assert.equal(badge30([{...solo,prize:499}],'cash-windfall').unlocked,false);
+  assert.equal(badge30([duo],'cash-windfall').unlocked,true);
+  assert.equal(badge30([teamUnknown],'cash-windfall').unlocked,false);
+  assert.equal(badge30([duo],'cash-windfall').evidence[0].personalCash,500);
+  assert.equal(badge30([solo],'no-vr-cash').unlocked,true);
+  assert.equal(badge30([{...solo,vrs:null}, {...solo,id:'vr1',vrs:1}],'no-vr-cash').unlocked,false);
+  assert.equal(badge30([{...solo,verified:false}],'no-vr-cash').unlocked,false);
+});
+test('cash chain requires three different cash-paying events within inclusive 30-day date span',()=>{
+  const a=cashRow('a',{event:'Cup A',date:'2026-10-01'});
+  const b=cashRow('b',{event:'Cup B',date:'2026-10-15'});
+  const c=cashRow('c',{event:'Cup C',date:'2026-10-31'});
+  assert.equal(badge30([a,b,c],'cash-chain').unlocked,true);
+  assert.equal(badge30([a,b,c],'cash-chain').progress,3);
+  assert.deepEqual(badge30([a,b,c],'cash-chain').evidence.map(x=>x.id),['a','b','c']);
+  assert.equal(badge30([a,b,{...c,date:'2026-11-01'}],'cash-chain').unlocked,false);
+  assert.equal(badge30([a,b,{...c,event:'Cup A',date:'2026-10-01'}],'cash-chain').progress,2);
+  assert.equal(badge30([a,b,{...c,date:'2026-13-01'}],'cash-chain').progress,2);
+  assert.equal(badge30([a,b,{...c,prize:0}],'cash-chain').progress,2);
+});
+test('two regions on one calendar date count for traveler; cash version requires confirmed payouts in both regions',()=>{
+  const a=cashRow('same-me',{date:'2026-10-15',region:'ME'});
+  const b=cashRow('same-eu',{date:'2026-10-15',region:'EU'});
+  assert.equal(badge30([a,b],'same-day-traveler').unlocked,true);
+  assert.equal(badge30([a,b],'same-day-cash').unlocked,true);
+  assert.equal(badge30([a,{...b,date:'2026-10-16'}],'same-day-traveler').unlocked,false);
+  assert.equal(badge30([a,{...b,date:'2026-10-16'}],'same-day-cash').unlocked,false);
+  assert.equal(badge30([a,{...b,region:'ME'}],'same-day-traveler').progress,1);
+  assert.equal(badge30([a,{...b,prize:0}],'same-day-cash').progress,1);
+  assert.equal(badge30([a,{...b,verified:false}],'same-day-traveler').progress,1);
+  assert.equal(badge30([a,{...b,date:'2026-02-30'}],'same-day-traveler').progress,1);
+});
+test('Reload 10 verified entries respect catalog modes; battle-royale contradictions do not qualify',()=>{
+  const ten=Array.from({length:10},(_,i)=>fixture('reload-'+i,{
+    event:'Solo Reload Victory Cup',date:'2026-10-'+String(i+1).padStart(2,'0')
+  }));
+  assert.equal(badge30(ten.slice(0,9),'reload-regular').unlocked,false);
+  assert.equal(badge30(ten,'reload-regular').progress,10);
+  assert.equal(badge30(ten,'reload-regular').unlocked,true);
+  const withDuplicate=[...ten.slice(0,9),{...ten[0]}];
+  assert.equal(badge30(withDuplicate,'reload-regular').progress,9);
+  const falseMode=[{name:'Solo Reload Victory Cup',team:'solo',mode:'battle-royale'}];
+  assert.equal(badge30(ten,'reload-regular',falseMode).progress,0);
+  const trueMode=[{name:'Ambiguous Event',team:'solo',mode:'reload-zero-build'}];
+  assert.equal(badge30([fixture('catalog',{event:'Ambiguous Event'})],'reload-regular',trueMode).progress,1);
+});
+test('Zero Build winner and actual FNCS finalist use catalog metadata, not cosmetic cup names',()=>{
+  const champ=cashRow('zb',{event:'Console Zero Build Solo Victory Cup',rank:1});
+  assert.equal(badge30([champ],'zero-build-champion').unlocked,true);
+  assert.equal(badge30([{...champ,kind:'予選'}],'zero-build-champion').unlocked,false);
+  assert.equal(badge30([{...champ,rank:2}],'zero-build-champion').unlocked,false);
+  assert.equal(badge30([champ],'zero-build-champion',[{name:champ.event,mode:'battle-royale'}]).unlocked,false);
+  const event='Cryptic Tournament';
+  assert.equal(badge30([cashRow('catalog-zb',{event,rank:1})],'zero-build-champion',
+    [{name:event,mode:'reload-zero-build'}]).unlocked,true);
+  const fncs=cashRow('fncs',{event:'FNCS Division 1',kind:'Practice決勝',rank:45});
+  assert.equal(badge30([fncs],'fncs-finalist').unlocked,true);
+  assert.equal(badge30([{...fncs,rank:null}, {...fncs,id:'qual',kind:'予選'}],'fncs-finalist').unlocked,false);
+  const skin=cashRow('cosmetic',{event:'Champion Focus FNCS Cup',kind:'決勝',rank:3});
+  assert.equal(badge30([skin],'fncs-finalist',[{name:skin.event,series:'skin-cup'}]).unlocked,false);
+  assert.equal(badge30([cashRow('real',{event:'Unknown Championship',kind:'決勝',rank:12})],
+    'fncs-finalist',[{name:'Unknown Championship',series:'fncs'}]).unlocked,true);
+});
+test('seven-day traveler needs three distinct regions within seven consecutive calendar dates',()=>{
+  const rows=[
+    fixture('day-me',{date:'2026-11-01',region:'ME'}),
+    fixture('day-eu',{date:'2026-11-04',region:'EU'}),
+    fixture('day-nac',{date:'2026-11-07',region:'NAC'})
+  ];
+  assert.equal(badge30(rows,'seven-day-traveler').progress,3);
+  assert.equal(badge30(rows,'seven-day-traveler').unlocked,true);
+  assert.equal(badge30([rows[0],rows[1],{...rows[2],date:'2026-11-08'}],
+    'seven-day-traveler').unlocked,false);
+  assert.equal(badge30([rows[0],rows[1],{...rows[2],region:'ME'}],
+    'seven-day-traveler').progress,2);
+  assert.equal(badge30([rows[0],rows[1],{...rows[2],verified:false}],
+    'seven-day-traveler').progress,2);
 });
