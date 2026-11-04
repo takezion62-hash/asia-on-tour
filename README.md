@@ -2,19 +2,34 @@
 
 ASIA勢のFortnite海外大会戦績を検索・閲覧する、GitHub Pagesの閲覧専用サイトです。一般閲覧者による戦績の追加・削除・保存・アップロード機能はありません。
 
+## 選手プロフィールの成長グラフ（2026-11-04）
+
+選手プロフィールに**全期間の海外遠征成長グラフ**を追加しました。`growth.js` が確認済みの掲載戦績から時系列を作り、`growth.css` と `app.js` で折れ線グラフ・期間選択ボタン・数値表を描画します。
+
+- **月別／シーズン別**を切り替え可能。シーズンは日付から推定せず、既存の大会カタログと明示的なSeason IDの確認結果を使い、未確認は季節別表示から除外します
+- **累計／期間別**を切り替え可能。何月・どのシーズンで成果が増えたかを確認できます
+- **4つの指標**：現行の `AotPR.calculate` 計算式を遡及適用したAOT PRの参考推移、確認済み個人現金賞金、順位を確認できた決勝出場件数、確認済み賞金決勝の総合TOP3件数
+- 決勝出場には `賞金決勝`・`Practice決勝`・`Performance決勝`・`決勝` を含め、正の整数順位がある戦績のみ。TOP3は既存ランキングの厳格な賞金決勝順位判定を再利用します
+- **未掲載の月**は線を平らに描くため掲載0件の月として表示しますが、本人が大会に参加しなかったとは断定しません。掲載済みの確認済みレコードのみ集計し、未確認別名義や不明な個人賞金は補完しません
+- グラフは全期間の実績から算出され、画面上の集計対象シーズンを切り替えても累計を失いません。AOT PRは過去の公式順位や実際の時点の強さを再現するものではありません
+- スマホでは横スクロールできるSVG折れ線グラフ、タップ可能な期間選択ボタン、詳細を確認できる数値表を提供。既存の成績・選手・大会のJSONは変更しません
+
+動作検証: `node --test tests/growth.test.cjs` と `npx playwright test tests/growth.spec.cjs`（PC・スマホ）
+
 ## ファイル構成
 
 - `index.html`：デザイン・画面構造
 - `app.js`：JSONの読み込み、検索、シーズン、プロフィール、賞金集計
 - `rankings.js`：地域別・実績別ランキングの共通集計（ブラウザー／Node.js）
 - `aot-pr.js` / `aot-pr.css`：AOT PR v1.4の計算と表示
-- `achievements.js` / `achievements.css`：プロフィールの実績・称号判定と表示（全期間・19種類）
+- `achievements.js` / `achievements.css`：プロフィールの進化バッジ・通常特別称号・秘密の称号
+- `growth.js` / `growth.css`：選手プロフィールの月別・シーズン別成長グラフ
 - `results.json`：戦績の配列
 - `updates.json`：更新履歴と登録日を確認できた戦績IDの差分リスト
 - `players.json`：`candidates`（名鑑）と`confirmedAliases`（確認済み別名義）
 - `tournaments.json`：`axes`（5分類軸）と`catalog`（大会・シーズン・出典ID）
 
-掲載内容はJSONを編集して更新します。3つのJSON、`rankings.js`、`aot-pr.js`、`aot-pr.css`、`achievements.js`、`achievements.css`、`app.js`は`index.html`と同じ場所へ配置してください。ローカルではHTTPサーバーを使用します。
+掲載内容はJSONを編集して更新します。3つのJSON、`rankings.js`、`aot-pr.js`、`aot-pr.css`、`achievements.js`、`achievements.css`、`growth.js`、`growth.css`、`app.js`は`index.html`と同じ場所へ配置してください。ローカルではHTTPサーバーを使用します。
 
 
 ## 特別称号の累計進化 v4（2026-11-03）
