@@ -157,7 +157,8 @@
       selectedSeason=nextSeason;
       // A different season may have no sessions in the old calendar month.
       if(next.page==='calendar'){
-        next.calendar={...sanitizeCalendarFilters(next.calendar),month:calendarDefaultMonth(),date:''};
+        const latestResult=all().map(e=>e.date).filter(validCalendarDate).sort().at(-1)||'';
+        next.calendar={...sanitizeCalendarFilters(next.calendar),month:latestResult?latestResult.slice(0,7):calendarDefaultMonth(),date:latestResult};
         calendarBrowse={...next.calendar};
       }
       const url=new URL(window.location.href);url.searchParams.set('season',nextSeason);
