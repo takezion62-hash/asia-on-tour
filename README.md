@@ -175,14 +175,16 @@ Override SeriesのMega Man・KINGDOM HEARTS・Persona 5の3大会をシリーズ
 - 既存の**賞金ボーナスは20～80ptから据え置き**。10ptの予選突破ボーナスは賞金ボーナスと独立した小さな加点で、賞金獲得の有無・賞金額・VR数を操作しません。AOT PRの内訳でも別の項目に表示します。
 
 
-#### 予選突破ボーナスの全件照合（2026年11月5日）
+#### 予選突破ボーナスの全件照合（2026年11月5日・更新版）
 
-- `results.json` の1,244戦績のうち、確認済みの予選戦績530件を再点検。従来の「予選突破／予選通過」文字列だけの判定で、**87件**の予選戦績を十分に検出できていなかった。S42 Solo Reload Victory Cup・Solo Battle Royale Victory Cupなどについて、公式地域別通過人数と正しいRound 1の出典を照合し、明記のない予選突破も対象にした。
-- **PlayStation NickEh30 Icon Cupの各地域・各モード上位100名**の予選通過は、[Epic公式規則](https://www.fortnite.com/competitive/rules-guidelines/rules-library/playstation-nick-eh-30-cup)で確認。 `S42_PSNickEh30_Qualifier_地域` の適切な出典がある予選にのみ加点。
-- FNCS Division 1 Practice・Performance Evaluation・その他の未検証シリーズについて、根拠のない一律通過順位を設定しない。本人の決勝進出が検証済みの記録に書かれている場合だけ加点する。
-- **未確認7件は加点保留**：OCE Reload ZB Duos Cash Cup予選2件（正しい開催枠・通過枠未確認）、NAW FNCS Division 1 Practice予選1件（突破根拠未確認）、EU Performance Evaluationトリオ予選3件・NAC同デュオ予選1件（突破根拠未確認）。「予選に出た＝予選を通過した」とは扱わない。
-- 確認済み予選の**523件**は、明示・公式通過枠・出典で確かめられる決勝進出情報のいずれかがある。今回の修正で **新たに73選手・85選手枠の突破認定、合計＋917 AOT PR**（2026-11-05、正式掲載1,244件時点で新旧計算を比較）。賞金合計、確認済み賞金ボーナスの計算、称号、正式掲載結果は変更しない。
-- 二重計上防止：同一選手・大会・地域・開催日・Event/Session/Week/Day枠ごとに1回だけ付与。参加アーカイブ由来の`participationOnly`レコードからは突破ボーナスを認定しない。
+- `results.json` の**1,244件のうち予選530件**をすべて再点検。従来は「予選突破／予選通過」の文字列がない**87件**が未認定だったため、公式通過順位・出典ラウンドID・検証済み決勝進出記述を照合して修正した。戦績JSON自体は書き換えず、AOT PR算定ロジックのみ変更。
+- 公式通過順位が確定した各シリーズのみで補足判定する。S42 Solo Reload Victory Cup（EU 1,600／NAC 800／その他320）、Solo Battle Royale Victory Cup（EU 4,000／NAC 2,000／その他800）、Console ZB Solo VC（EU・NAC 2,000／その他1,000）、Reload Duos VC（EU・NAC 300／その他120）、[PlayStation NickEh30 Icon Cup](https://www.fortnite.com/competitive/rules-guidelines/rules-library/playstation-nick-eh-30-cup)（上位100）。
+- [FNCS Division 1 Practice](https://www.fortnite.com/competitive/events/S42_FNCSDivisionalCup_Division1?region=NAC) のS42上位50チーム、[Performance Evaluation](https://www.fortnite.com/competitive/events/S42_PerformanceEvaluation?region=NAC) のS42デュオ上位50チーム・[同トリオ](https://www.fortnite.com/competitive/events/S42_PerformanceEvaluationTrios?region=EU) 上位33チーム、[Reload Zero Build Cash Cup](https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-zero-build-reload-cash-cups-chapter-7-season-4-official-rules) のS42上位20チームも、対象大会IDが一致する場合だけ使用。
+- OCE 2026-10-18 Reload ZB Duos Cash Cupの2件は、ユーザー提供の順位表スクリーンショットで**予選4位・14位**を確認。出典リンクにwindow指定がない例外のため、確認済みの**2つのレコードIDと開催日・大会・地域・出典・メモが完全一致**する場合だけ通過枠内と認定。任意のwindow不明レコードには適用しない。
+- 修正時点の内訳は、**突破確認526件**（明記443、公式通過枠52、決勝進出の確認済みメモ29、限定スクリーンショット2）。**未認定4件**は実際に公式の通過順位より下位だったS42 Performance Evaluation予選：EUトリオ144位・974位・975位（上位33）、NACデュオ701位（上位50）。
+- AOT PR v1.9からの差分は**76選手・91選手枠の追加突破ボーナス、合計＋981 PR**。1選手・1大会・1地域・1開催日・1Event/Session/Week/Dayにつき1回限り。賞金合計・賞金ボーナス・称号・実績JSONは変更しない。
+- `qualificationEvidence()` は「予選突破明記」「検証済みメモ」「公式通過枠」「限定スクリーンショット」を区別して、プロフィールの大会別PR内訳に判定根拠を表示する。出場アーカイブ由来の`participationOnly`は突破ボーナス対象外。
+- 追加した回帰テストは、勝手な未知の通過ラインの仮定、通過圏外への誤認定、本人/イベント/地域の不一致、決勝のみ掲載からの誤推測、同一開催枠での二重付与を拒否する。
 
 ### 確認済み賞金獲得ボーナス（v1.8）
 
