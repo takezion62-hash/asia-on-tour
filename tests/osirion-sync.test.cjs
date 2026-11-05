@@ -1,6 +1,6 @@
 'use strict';
 const test=require('node:test'),assert=require('node:assert/strict');
-const {identity,linkedAccounts,parseStage,discover,discoverUnmapped,selectHistoricalWindows,historicalEvidenceScore,advancementLimit,normalizeRow}=require('../scripts/osirion-sync.cjs');
+const {identity,linkedAccounts,parseStage,discover,discoverUnmapped,selectHistoricalWindows,historicalEvidenceScore,advancementLimit,transientLeaderboardFailure,normalizeRow}=require('../scripts/osirion-sync.cjs');
 const f='https://fortnitetracker.com/profile/all/Alpha/events?id=8a57ac58-f937-4de2-81b7-9abd070c7ae8';
 test('Tracker UUID can map to the same 32-char account ID after strict validation',()=>{
  assert.equal(identity(f),'8a57ac58f9374de281b79abd070c7ae8');
@@ -143,4 +143,11 @@ test('historical scan prioritizes oldest documented year before 2026 while still
  assert.equal(chosen[0].dateJst.slice(0,4),'2024');
  assert.equal(chosen.length,6);
  assert.equal(chosen.filter(v=>v.series==='cash-cup').length,3);
+});
+
+test('transient API failures preserve history checkpoints instead of publishing partial results',()=>{
+ assert.equal(transientLeaderboardFailure(new Error('TimeoutError: The operation was aborted due to timeout')),true);
+ assert.equal(transientLeaderboardFailure(new Error('Osirion API HTTP 429 /v1/tournaments/leaderboard')),true);
+ assert.equal(transientLeaderboardFailure(new Error('Osirion API HTTP 503 /v1/tournaments/leaderboard')),true);
+ assert.equal(transientLeaderboardFailure(new Error('大会順位表のID/形式が不正')),false);
 });
