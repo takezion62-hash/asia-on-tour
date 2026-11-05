@@ -12,7 +12,21 @@ const identity=url=>{
  return token&&/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(token)?token.replace(/-/g,'').toLowerCase():null;
 };
 function linkedAccounts(data){
- const known=new Set(data.players.candidates.map(p=>p.name)),map=new Map(),conflicts=[];
+ const known=new Set(data.players.candidates.map(p=>p.name)),aliases=new Map(),map=new Map(),conflicts=[];
+ // Only names already explicitly confirmed in players.json may resolve to a canonical player.
+ // Never use fuzzy matching or assign a single alias that maps to multiple candidates.
+ for(const [canonical,list] of Object.entries(data.players.confirmedAliases||{})){
+  if(!known.has(canonical)||!Array.isArray(list))continue;
+  for(const alias of list){
+   if(typeof alias!=='string'||!alias.trim())continue;
+   if(!aliases.has(alias))aliases.set(alias,new Set());
+   aliases.get(alias).add(canonical);
+  }
+ }
+ const canonicalName=name=>{
+  const matches=new Set([...(known.has(name)?[name]:[]),...(aliases.get(name)||[])]);
+  return matches.size===1?[...matches][0]:null;
+ };
  for(const result of data.results){
   const source=[...(result.profileUrl?[{name:result.player,url:result.profileUrl}]:[]),...(result.profiles||[])];
   for(const entry of source){
@@ -22,9 +36,9 @@ function linkedAccounts(data){
  }
  const accounts=[];
  for(const [id,names] of map){
-  const match=[...names];
-  if(match.length===1&&known.has(match[0]))accounts.push({player:match[0],epicAccountId:id,confirmed:true});
-  else conflicts.push({idPrefix:id.slice(0,8),names:match});
+  const raw=[...names],resolved=raw.map(canonicalName);
+  if(resolved.every(Boolean)&&new Set(resolved).size===1)accounts.push({player:resolved[0],epicAccountId:id,confirmed:true});
+  else conflicts.push({idPrefix:id.slice(0,8),names:raw});
  }
  return {accounts,conflicts};
 }
