@@ -805,7 +805,14 @@
       },{
         available,seasonOf:row=>recordSeason(row).id,
         classify:classifyTournamentRecord,names,individualPrize,
-        confirmedPrizeFinalRank,prCalculate:AotPR.calculate,
+        confirmedPrizeFinalRank,prCalculate:(published,opts)=>{
+          const extras=participationPRRows.filter(row=>
+            (selectedSeason==='all'||row.seasonId===selectedSeason)&&
+            (state.region==='all'||row.region===state.region)&&
+            (state.mode==='all'||classifyTournamentRecord(row).mode===state.mode)&&
+            (state.series==='all'||classifyTournamentRecord(row).series===state.series));
+          return AotPR.calculate(mergeForPR(published,extras).records,opts);
+        },
         series:compareSeriesOptions(),seasons:seasonOptions().map(option=>option.id)
       });
       const seasonChoices=seasonOptions().map(option=>'<option value="'+escape(option.id)+'"'
@@ -1415,7 +1422,7 @@
     function growthReport(name,grouping=growthState.grouping){
       const key=name+'|'+grouping;
       if(!growthCache.has(key)){
-        growthCache.set(key,AsiaGrowth.periods(rawAll(),grouping,{
+        growthCache.set(key,AsiaGrowth.periods(mergeForPR(rawAll()).records,grouping,{
           player:name,season:recordSeason,cash:individualPrize,prizeFinalRank:confirmedPrizeFinalRank,
           prScore:rows=>AotPR.calculate(rows,{
             names,classify:classifyTournamentRecord,individualPrize
@@ -1592,9 +1599,18 @@
     // The loaded data is read-only; reuse reports while browsing this season.
     let aotPrReportSeason=null;
     const aotPrReports=new Map();
+    let participationPRRows=[];
+    const confirmedPRPlayers=new Set(candidates.map(p=>p.name));
+    function mergeForPR(published,participation=participationPRRows){
+      if(!participation.length||typeof window.AotParticipationPR?.merge!=='function')return {records:published,creditedRows:0,creditedPlayers:0};
+      const source=participation.filter(row=>selectedSeason==='all'||row.seasonId===selectedSeason);
+      return window.AotParticipationPR.merge(published,source,{
+        classify:classifyTournamentRecord,sessionKey:AotPR.sessionKey,knownPlayers:confirmedPRPlayers
+      });
+    }
     function prReport(region='all'){
       if(aotPrReportSeason!==selectedSeason){aotPrReports.clear();aotPrReportSeason=selectedSeason;}
-      if(!aotPrReports.has(region))aotPrReports.set(region,AotPR.calculate(all(),{region,names,classify:classifyTournamentRecord,individualPrize}));
+      if(!aotPrReports.has(region))aotPrReports.set(region,AotPR.calculate(mergeForPR(all()).records,{region,names,classify:classifyTournamentRecord,individualPrize}));
       return aotPrReports.get(region);
     }
     function renderAotPR(){
@@ -1602,16 +1618,16 @@
       if(!target)return;
       const report=prReport(aotPrRegion);
       document.querySelectorAll('[data-aot-pr-region]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.aotPrRegion===aotPrRegion)));
-      $('#aot-pr-status').textContent=`${seasonScope()} · ${aotPrRegion==='all'?'全地域':aotPrRegion} · ${format(report.playerCount)}名 / ${format(report.recordCount)}戦績 · 上位50名を表示`;
-      target.innerHTML=report.ranked.length?report.ranked.slice(0,50).map(player=>`<li class="aot-pr-item" data-top="${player.rank<=3}"><span class="aot-pr-rank">#${format(player.rank)}</span><div><a class="aot-pr-name" href="${escape(profileHref(player.name))}" data-open-profile="${escape(player.name)}">${escape(player.name)}</a><span class="aot-pr-facts">参加 ${format(player.appearances)}枠 · 順位 ${prNumber(player.placement)} · キル ${prNumber(player.eliminations)} · 予選突破 ${prNumber(player.qualificationBonus)} · 賞金ボーナス ${prNumber(player.bonus)}</span></div><span class="aot-pr-score">${prNumber(player.score)}<small>AOT PR</small></span></li>`).join(''):'<li class="aot-pr-item">この条件で加点できる確認済み戦績はありません</li>';
+      $('#aot-pr-status').textContent=`${seasonScope()} · ${aotPrRegion==='all'?'全地域':aotPrRegion} · ${format(report.playerCount)}名 / ${format(report.recordCount)}戦績（出場アーカイブ ${format(report.participationIncluded||0)}件） · 上位50名を表示`;
+      target.innerHTML=report.ranked.length?report.ranked.slice(0,50).map(player=>`<li class="aot-pr-item" data-top="${player.rank<=3}"><span class="aot-pr-rank">#${format(player.rank)}</span><div><a class="aot-pr-name" href="${escape(profileHref(player.name))}" data-open-profile="${escape(player.name)}">${escape(player.name)}</a><span class="aot-pr-facts">参加 ${format(player.appearances)}枠 · 順位 ${prNumber(player.placement)} · キル ${prNumber(player.eliminations)} · 出場記録から ${prNumber(player.participationScore||0)} · 予選突破 ${prNumber(player.qualificationBonus)} · 賞金ボーナス ${prNumber(player.bonus)}</span></div><span class="aot-pr-score">${prNumber(player.score)}<small>AOT PR</small></span></li>`).join(''):'<li class="aot-pr-item">この条件で加点できる確認済み戦績はありません</li>';
     }
     function renderProfileAotPR(name){
       const anchor=$('#profile-content .profile-stats');
       if(!anchor)return;
       const report=prReport(),player=report.byName.get(name);
       if(!player){anchor.insertAdjacentHTML('afterend',`<section class="aot-pr-profile" aria-label="AOT PRの個人内訳"><h2>AOT PR · 未集計</h2><p class="aot-pr-method">${escape(seasonScope())}には、加点できる確認済み戦績がありません。大会分類などが未確認の記録は加点を保留しています。</p></section>`);return;}
-      const rows=player.rows.map(row=>`<li><strong>+${prNumber(row.total)}pt</strong> ${escape(row.date)} · ${escape(row.region)} · ${escape(row.event)}<span>${escape(row.kind)} · 参加 ${prNumber(row.attendance)} / 順位 ${prNumber(row.placement)} / キル ${prNumber(row.eliminations)}${row.bonus>0?` · 賞金ボーナス ${prNumber(row.bonus)}（${row.bonusMode==='vr'?`${row.bonusUnits}VR`:'賞金獲得1回'}）`:''}${row.qualificationBonus>0?` · 予選突破ボーナス ${prNumber(row.qualificationBonus)}`:''}${row.rank===null?' · 順位未確認':''}${row.kills===null?' · キル未確認':''}${!row.modeKnown?' · 形式未確認・キル加点保留':''}</span>${safeUrl(row.source)?`<a href="${escape(safeUrl(row.source))}" target="_blank" rel="noopener noreferrer">出典 ↗</a>`:''}</li>`).join('');
-      anchor.insertAdjacentHTML('afterend',`<section class="aot-pr-profile" aria-label="AOT PRの個人内訳"><h2>AOT PR v${escape(AotPR.VERSION)} · ${prNumber(player.score)} pt（総合 #${format(player.rank)}）</h2><dl class="aot-pr-overview"><div><dt>参加ポイント</dt><dd>${prNumber(player.attendance)}</dd></div><div><dt>順位ポイント</dt><dd>${prNumber(player.placement)}</dd></div><div><dt>キルポイント</dt><dd>${prNumber(player.eliminations)}</dd></div><div><dt>予選突破ボーナス</dt><dd>${prNumber(player.qualificationBonus)}</dd></div><div><dt>賞金ボーナス</dt><dd>${prNumber(player.bonus)}</dd></div><div><dt>参加した開催枠</dt><dd>${format(player.appearances)}</dd></div></dl><details class="aot-pr-breakdown"><summary>大会別のポイント内訳（${format(player.rows.length)}件）</summary><ol>${rows}</ol></details><p class="aot-pr-method">${escape(seasonScope())}の掲載済み・出典確認済み戦績から計算しています。予選突破が明記された確認済み戦績だけに1開催枠10pt×地域倍率を追加し、賞金ボーナスは別に計算します。出場確認だけの専用アーカイブは加点対象外です。大会の未掲載や情報未確認により、実際の活動を網羅するものではありません.</p></section>`);
+      const rows=player.rows.map(row=>`<li><strong>+${prNumber(row.total)}pt</strong> ${escape(row.date)} · ${escape(row.region)} · ${escape(row.event)}<span>${escape(row.participationOnly?'出場確認（賞金・突破ボーナス対象外）':row.kind)} · 参加 ${prNumber(row.attendance)} / 順位 ${prNumber(row.placement)} / キル ${prNumber(row.eliminations)}${row.bonus>0?` · 賞金ボーナス ${prNumber(row.bonus)}（${row.bonusMode==='vr'?`${row.bonusUnits}VR`:'賞金獲得1回'}）`:''}${row.qualificationBonus>0?` · 予選突破ボーナス ${prNumber(row.qualificationBonus)}`:''}${row.rank===null?' · 順位未確認':''}${row.kills===null?' · キル未確認':''}${!row.modeKnown?' · 形式未確認・キル加点保留':''}</span>${safeUrl(row.source)?`<a href="${escape(safeUrl(row.source))}" target="_blank" rel="noopener noreferrer">出典 ↗</a>`:''}</li>`).join('');
+      anchor.insertAdjacentHTML('afterend',`<section class="aot-pr-profile" aria-label="AOT PRの個人内訳"><h2>AOT PR v${escape(AotPR.VERSION)} · ${prNumber(player.score)} pt（総合 #${format(player.rank)}）</h2><dl class="aot-pr-overview"><div><dt>参加ポイント</dt><dd>${prNumber(player.attendance)}</dd></div><div><dt>順位ポイント</dt><dd>${prNumber(player.placement)}</dd></div><div><dt>キルポイント</dt><dd>${prNumber(player.eliminations)}</dd></div><div><dt>出場記録からのPR</dt><dd>${prNumber(player.participationScore||0)}</dd></div><div><dt>予選突破ボーナス</dt><dd>${prNumber(player.qualificationBonus)}</dd></div><div><dt>賞金ボーナス</dt><dd>${prNumber(player.bonus)}</dd></div><div><dt>参加した開催枠</dt><dd>${format(player.appearances)}</dd></div></dl><details class="aot-pr-breakdown"><summary>大会別のポイント内訳（${format(player.rows.length)}件）</summary><ol>${rows}</ol></details><p class="aot-pr-method">${escape(seasonScope())}の掲載済み・出典確認済み戦績から計算しています。予選突破が明記された確認済み戦績だけに1開催枠10pt×地域倍率を追加し、賞金ボーナスは別に計算します。本人IDが照合できる出場アーカイブは、重複のない開催枠で参加・順位・キルの基本PRのみ加点します。通過・賞金・称号ボーナスは付きません。大会の未掲載や情報未確認により、実際の活動を網羅するものではありません.</p></section>`);
     }
     function renderEarnings(){
       const ranked=prizeTotals();let position=0;
@@ -1946,6 +1962,19 @@
     selectedSeason=seasonFromUrl();
     refresh();
     initializeRouting();
+    window.AOTParticipation?.subscribePR?.(rows=>{
+      if(!Array.isArray(rows))return;
+      participationPRRows=rows;
+      aotPrReports.clear();
+      growthCache.clear();
+      renderAotPR();
+      if(currentView.page==='profile'&&currentView.name){
+        $('#profile-content .aot-pr-profile')?.remove();
+        renderProfileAotPR(currentView.name);
+        renderProfileGrowth(currentView.name);
+      }
+      if(currentView.page==='compare')renderComparison();
+    });
   })().catch(err=>{
   console.error('ASIA ON TOUR could not initialize:',err);
   const notice=document.createElement('div');
