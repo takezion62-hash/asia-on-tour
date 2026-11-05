@@ -14,7 +14,7 @@
     "BR"
   ],
   "minLagMinutes": 240,
-  "maxPagesPerRun": 12,
-  "maxWindowsPerRun": 2,
+  "maxPagesPerRun": 24,
+  "maxWindowsPerRun": 6,
   "autoApproveVerified": true
 }
