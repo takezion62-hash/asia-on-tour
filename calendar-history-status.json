@@ -1,10 +1,49 @@
 {
   "version": 1,
-  "checkedAt": null,
+  "checkedAt": "2026-11-05T09:56:19.218Z",
   "source": "Osirion public beta / Epic tournament IDs",
-  "count": 0,
-  "dates": [],
-  "unmappedCount": 0,
-  "unmappedSample": [],
-  "ignored": {}
+  "count": 1100,
+  "dates": [
+    "2024-06-02",
+    "2026-11-02"
+  ],
+  "unmappedCount": 503,
+  "unmappedSample": [
+    "S29_FNCS_Major2_GrandFinals",
+    "S29_FNCS_Major2_Qualifier2",
+    "S29_FNCS_Major2_SemiFinalLowerBracket",
+    "S29_FNCS_Major2_SemiFinalUpperBracket",
+    "S30_ConsoleCashCups",
+    "S30_d4vd_Cup",
+    "S30_DuosCashCup",
+    "S30_DuosCashCupZB",
+    "S30_FNCS_Major3_GrandFinals",
+    "S30_FNCS_Major3_Qualifier1",
+    "S30_FNCS_Major3_Qualifier2",
+    "S30_FNCS_Major3_SemiFinalLowerBracket",
+    "S30_FNCS_Major3_SemiFinalUpperBracket",
+    "S30_MetallicaCup",
+    "S30_NickEh",
+    "S30_OpenDuosCupBR",
+    "S30_OpenDuosCupZB",
+    "S30_OpenTriosCupBR",
+    "S30_OpenTriosCupZB",
+    "S30_PlaystationCupJune",
+    "S30_PlaystationCupZBJune",
+    "S30_RankedCupBSGDuos",
+    "S30_RankedCupBSGSolo",
+    "S30_RankedCupBSGSquads",
+    "S30_RankedCupEliteDuos",
+    "S30_RankedCupEliteSolo",
+    "S30_RankedCupEliteSquads",
+    "S30_RankedCupPDDuos",
+    "S30_RankedCupPDSolo",
+    "S30_RankedCupPDSquads"
+  ],
+  "ignored": {
+    "outside supported regions": 20,
+    "not catalogued": 2750,
+    "future or invalid timestamps": 24,
+    "invalid region window": 3
+  }
 }
