@@ -67,6 +67,22 @@ function discover(all,catalog,opts,time=Date.now()){
  }
  return [...selected.values()].sort((a,b)=>a.end-b.end);
 }
+// Report newly introduced Victory Cup source IDs instead of silently skipping future seasons.
+function discoverUnmapped(all,catalog,opts,time=Date.now()){
+ const days=Number.isInteger(opts.lookbackDays)?opts.lookbackDays:7,missing=new Set();
+ for(const tournament of all){
+  const full=typeof tournament.eventId==='string'?tournament.eventId:'',match=full.match(/^epicgames_(S\\d+_.+)_([A-Z]{2,4})$/);
+  if(!match||!regions.includes(match[2])||!/(VictoryCup|VictoryCashCup|ConsoleVCC)/i.test(match[1]))continue;
+  const [,base,region]=match;
+  if(catalog.some(x=>x.series==='victory-cup'&&x.seasonId===base.split('_')[0]&&x.sourceEventIds?.includes(base)))continue;
+  const relevant=(tournament.eventWindows||[]).some(w=>{
+   const end=Date.parse(w.endTime);
+   return typeof w.eventWindowId==='string'&&w.eventWindowId.endsWith('_'+region)&&Number.isFinite(end)&&end>=time-days*86400000&&end<=time+14*86400000;
+  });
+  if(relevant)missing.add(base);
+ }
+ return [...missing].sort();
+}
 function normalizeRow(entry,win){
  if(!entry||!Array.isArray(entry.players)||entry.players.length<1||entry.unscoredSessions?.length)return null;
  if(!Array.isArray(entry.sessionHistory)||!entry.sessionHistory.length)return null;
@@ -113,6 +129,7 @@ async function main(){
  if(!accounts.length)throw Error('追跡対象のIDがありません');
  const all=await getTournaments();
  const windows=discover(all,data.tournaments.catalog,config);
+ const unmapped=discoverUnmapped(all,data.tournaments.catalog,config);
  const state=read('auto-sync-scan.json');
  if(state.version!==1||!state.windows||typeof state.windows!=='object')throw Error('checkpoint invalid');
  const active=windows.filter(w=>!state.windows[w.key]?.complete).slice(0,config.maxWindowsPerRun||2);
@@ -140,12 +157,12 @@ async function main(){
  const unique=new Map(proposals.map(x=>[x.id,x]));
  const finished=Object.values(state.windows).filter(w=>w.complete).length;
  const stamp=new Date().toISOString();
- const status={version:1,state:'checked',checkedAt:stamp,mode:'review',provider:'osirion',linkedPlayers:accounts.length,trackedWindows:windows.length,found:unique.size,skipped:invalidRows,imported:0,scannedPages:scanned,completedWindows:finished,identityConflicts:conflicts.length,message:'Osirionに接続済み。既存プロフィールのうちIDが一意な'+accounts.length+'名を追跡。'+scanned+'ページを検査、'+unique.size+'件が確認待ち。照合保留ID'+conflicts.length+'件は対象外。'};
+ const status={version:1,state:'checked',checkedAt:stamp,mode:'review',provider:'osirion',linkedPlayers:accounts.length,trackedWindows:windows.length,found:unique.size,skipped:invalidRows,imported:0,scannedPages:scanned,completedWindows:finished,identityConflicts:conflicts.length,unmappedEvents:unmapped.length,unmappedEventIds:unmapped.slice(0,12),message:'Osirionに接続済み。既存プロフィールのうちIDが一意な'+accounts.length+'名を追跡。'+scanned+'ページを検査、'+unique.size+'件が確認待ち。照合保留ID'+conflicts.length+'件は対象外。'+(unmapped.length?' カタログ未登録のVictory Cup系イベント'+unmapped.length+'種は確認待ち。':'')};
  state.checkedAt=stamp;
  write('auto-sync-scan.json',state);
  write('auto-sync-review.json',{version:1,status:'review',checkedAt:stamp,proposals:[...unique.values()]});
  write('auto-sync-status.json',status);
- console.log('OSIRION_REVIEW '+JSON.stringify({scannedPages:scanned,linkedPlayers:accounts.length,identityConflicts:conflicts.length,windows:windows.length,proposals:unique.size,finished}));
+ console.log('OSIRION_REVIEW '+JSON.stringify({scannedPages:scanned,linkedPlayers:accounts.length,identityConflicts:conflicts.length,windows:windows.length,unmappedEvents:unmapped.length,proposals:unique.size,finished}));
 }
 if(require.main===module)main().catch(e=>{console.error('OSIRION_SYNC_ERROR '+e.stack);process.exitCode=1});
-module.exports={identity,linkedAccounts,parseStage,discover,normalizeRow,main};
+module.exports={identity,linkedAccounts,parseStage,discover,discoverUnmapped,normalizeRow,main};
