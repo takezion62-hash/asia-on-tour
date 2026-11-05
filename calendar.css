@@ -120,3 +120,13 @@
   .tournament-date-nav button{min-width:0;white-space:normal;padding:7px 9px}
   .tournament-date-current{font-size:11px}
 }
+
+/* Historical calendar: jump between archived months and distinguish elapsed events */
+.calendar-month-jump{display:inline-flex;align-items:center;gap:8px;min-height:41px;color:#b9d1ee;font-size:11px;font-weight:800}
+.calendar-month-jump select{min-height:41px;max-width:min(285px,80vw);border:1px solid #5a6c90;background:#18253c;border-radius:9px;padding:8px 11px;color:#e3f7ff;font-size:12px;font-weight:800}
+.calendar-month-jump select:focus-visible{outline:2px solid #72dbe5;outline-offset:2px}
+.calendar-upcoming-event.is-history{border-color:#497e98;background:linear-gradient(128deg,#163344,#182239)}
+.calendar-upcoming-event.is-history h3{color:#d7fbff}
+.calendar-upcoming-event.is-history p strong{color:#b6e7ee}
+.calendar-upcoming-event .calendar-event-tag.is-history{border-color:#6ca7b6;background:#244b60;color:#d0f8ff}
+@media(max-width:640px){.calendar-month-jump{width:100%;justify-content:space-between}.calendar-month-jump select{width:calc(100% - 67px);max-width:none}}
