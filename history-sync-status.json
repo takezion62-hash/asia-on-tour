@@ -11,7 +11,7 @@
   "provider": "osirion",
   "linkedPlayers": 439,
   "trackedWindows": 2767,
-  "found": 1,
+  "found": 0,
   "skipped": 0,
   "imported": 0,
   "scannedPages": 48,
@@ -20,12 +20,14 @@
   "alreadyRegistered": 355,
   "autoApprovedTotal": 240,
   "invalidCachedCandidates": 1,
-  "manualReviewCandidates": 1,
+  "manualReviewCandidates": 0,
   "retryWindows": 0,
   "transientFailures": 0,
   "reviewOnlyWindows": 1255,
   "reviewOnlyCandidates": 0,
   "unmappedEvents": 0,
   "unmappedEventIds": [],
-  "message": "Osirionで439アカウントIDを追跡。今回の公式規則による自動承認0件、追加確認待ち1件、名義照合保留0件。"
+  "message": "未確認候補72件と新たに見つかったS36 EU予選1件を確認。正式57件・出場履歴8件・重複8件。",
+  "manuallyPublished": 57,
+  "manualReviewedAt": "2026-11-05T15:16:00.000Z"
 }

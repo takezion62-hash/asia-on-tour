@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-05T14:55:05.000Z",
+  "reviewedAt": "2026-11-05T15:16:00.000Z",
   "description": "Resolved historic review candidates: published, duplicate or participation",
   "entries": [
     {
@@ -418,6 +418,13 @@
       "decision": "published",
       "recordId": "auto-s42-544878b2849e",
       "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-4-official-rules"
+    },
+    {
+      "id": "auto-s36-87bc4d33c9f8",
+      "decision": "published",
+      "recordId": "auto-s36-87bc4d33c9f8",
+      "rule": "https://www.fortnite.com/news/fortnite-duos-console-victory-cash-cups-chapter-6-season-3-official-rules",
+      "evidenceResultId": "auto-s36-0fbf5af7e99e"
     }
   ]
 }
