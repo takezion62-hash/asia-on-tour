@@ -88,6 +88,7 @@
   // verified qualifier row must explicitly say 予選突破 / 予選通過.
   function qualificationEvidence(record,tournament) {
     if (!record || record.verified!==true || record.partial===true || record.reported===true || record.reviewOnly===true ||
+      record.qualification==='outside-cutoff' || record.status==='通過圏外' ||
       !QUALIFYING_SERIES.has(tournament?.series)) return null;
     return record.kind==='予選' && /予選(?:突破|通過)/u.test(String(record.round||'')) ? 'explicit' : null;
   }
