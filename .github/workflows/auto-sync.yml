@@ -4,6 +4,8 @@ on:
     branches: [main]
     paths:
       - "scripts/osirion-sync.cjs"
+      - "scripts/auto-sync-core.cjs"
+      - "tests/non-victory-auto-sync.test.cjs"
       - "auto-sync-config.json"
       - ".github/workflows/auto-sync.yml"
   schedule:
@@ -12,7 +14,7 @@ on:
 permissions:
   contents: write
 concurrency:
-  group: aot-autosync-main
+  group: aot-provider-scans-main
   cancel-in-progress: false
 jobs:
   check:
@@ -35,7 +37,7 @@ jobs:
       - name: Validate data and run sync unit tests
         run: |
           npm run validate
-          node --test tests/auto-sync.test.cjs tests/osirion-sync.test.cjs
+          node --test tests/auto-sync.test.cjs tests/osirion-sync.test.cjs tests/non-victory-auto-sync.test.cjs
       - name: Commit checked updates only
         run: |
           if [ -z "$(git status --porcelain -- results.json updates.json auto-sync-status.json auto-sync-review.json auto-sync-scan.json)" ]; then
