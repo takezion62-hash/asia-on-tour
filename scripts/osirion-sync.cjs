@@ -98,7 +98,7 @@ function advancementLimit(win){
  if(win.kind!=='予選')return null;
  const isEU=win.region==='EU',isNAC=win.region==='NAC';
  const type=win.tournamentId;
- if(['S41','S42'].includes(win.seasonId)&&type.endsWith('-solo-victory-cup'))return isEU?4000:isNAC?2000:800;
+ if((type==='ch7s3-solo-victory-cup'||type==='ch7s4-solo-victory-cup')&&['S41','S42'].includes(win.seasonId))return isEU?4000:isNAC?2000:800;
  if(['S41','S42'].includes(win.seasonId)&&type.endsWith('-solo-reload-victory-cup'))return isEU?1600:isNAC?800:320;
  if(win.seasonId==='S42'&&type.endsWith('-console-zero-build-solo-victory-cup'))return isEU||isNAC?2000:1000;
  if(win.seasonId==='S42'&&type.endsWith('-reload-duos-victory-cup'))return isEU||isNAC?300:120;
