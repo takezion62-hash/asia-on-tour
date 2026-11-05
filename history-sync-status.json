@@ -11,7 +11,7 @@
   "provider": "osirion",
   "linkedPlayers": 439,
   "trackedWindows": 2767,
-  "found": 72,
+  "found": 0,
   "skipped": 1,
   "imported": 1,
   "scannedPages": 48,
@@ -20,12 +20,16 @@
   "alreadyRegistered": 298,
   "autoApprovedTotal": 240,
   "invalidCachedCandidates": 1,
-  "manualReviewCandidates": 72,
+  "manualReviewCandidates": 0,
   "retryWindows": 0,
   "transientFailures": 0,
   "reviewOnlyWindows": 1255,
   "reviewOnlyCandidates": 57,
   "unmappedEvents": 0,
   "unmappedEventIds": [],
-  "message": "Osirionで439アカウントIDを追跡。今回の公式規則による自動承認1件、追加確認待ち72件、名義照合保留0件。"
+  "message": "Epic公式規則と本人IDで72件を確認。正式掲載56件・出場履歴8件・既存重複8件。",
+  "manualReviewedAt": "2026-11-05T14:55:05.000Z",
+  "manuallyPublished": 56,
+  "manuallyArchived": 8,
+  "manuallyDetectedDuplicates": 8
 }
