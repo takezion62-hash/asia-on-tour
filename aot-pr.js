@@ -1,4 +1,4 @@
-/* ASIA ON TOUR Power Ranking v1.9 — verified archive scoring with safe optional participation overlay */
+/* ASIA ON TOUR Power Ranking v1.10 — source-backed qualification auditing and safe participation scoring */
 (function (root, factory) {
   'use strict';
   const api = factory();
@@ -7,7 +7,7 @@
 })(typeof globalThis === 'object' ? globalThis : this, function () {
   'use strict';
 
-  const VERSION = '1.9.0';
+  const VERSION = '1.10.0';
   const REGIONS = Object.freeze({ EU: 1.4, BR: 1.3, NAC: 1.2, ME: 1.1, OCE: 1.1, NAW: 1.0 });
   const STAGES = Object.freeze({ '予選': 0.35, '賞金決勝': 1, '決勝': 1, 'Practice決勝': 1,
     'Performance決勝': 1, 'スキン大会': 1, 'コスメ大会': 1, 'Test Cup': 1, '参加確認': 0.35 });
@@ -86,13 +86,68 @@
     } catch { return null; }
   }
 
-  // No rank-only inference or final-only inference: the published, independently
-  // verified qualifier row must explicitly say 予選突破 / 予選通過.
+  // Only *published official, season- and series-specific* advancement limits.
+  // No cutoff is invented for FNCS, Cash Cups, Performance Evaluation or unknown cups.
+  function officialQualificationCutoff(record,tournament) {
+    if (!record || !tournament || tournament.seasonId!==record.seasonId &&
+      record.seasonId!=null || !Object.hasOwn(REGIONS,record.region)) return null;
+    const id=tournament.id;
+    if (id==='ch7s4-playstation-nickeh30-icon-cup' && tournament.seasonId==='S42') return 100;
+    if (['ch7s3-solo-victory-cup','ch7s4-solo-victory-cup'].includes(id) &&
+      ['S41','S42'].includes(tournament.seasonId))
+      return record.region==='EU'?4000:record.region==='NAC'?2000:800;
+    if (['ch7s3-solo-reload-victory-cup','ch7s4-solo-reload-victory-cup'].includes(id) &&
+      ['S41','S42'].includes(tournament.seasonId))
+      return record.region==='EU'?1600:record.region==='NAC'?800:320;
+    if (id==='ch7s4-console-zero-build-solo-victory-cup' && tournament.seasonId==='S42')
+      return ['EU','NAC'].includes(record.region)?2000:1000;
+    if (id==='ch7s4-reload-duos-victory-cup' && tournament.seasonId==='S42')
+      return ['EU','NAC'].includes(record.region)?300:120;
+    return null;
+  }
+
+  // The official cutoff is usable only when the recorded Round 1 leaderboard
+  // URL identifies the exact catalog event and the same region. Page rank
+  // alone, a fabricated round, or a contradictory URL are never enough.
+  function verifiedQualificationSource(record,tournament) {
+    const id=sourceRound(record);
+    if (!id || !Array.isArray(tournament?.sourceEventIds)) return false;
+    const qualifier=tournament.id==='ch7s4-playstation-nickeh30-icon-cup'
+      ? /_Qualifier_(?:ME|EU|NAC|NAW|OCE|BR)$/i.test(id)
+      : /Round_?1_(?:ME|EU|NAC|NAW|OCE|BR)$/i.test(id);
+    if (!qualifier || !id.endsWith('_'+record.region)) return false;
+    try {
+      const u=new URL(record.source);
+      const hosts=['fortnitetracker.com','www.fortnitetracker.com','fortnite.com','www.fortnite.com'];
+      if (!hosts.includes(u.hostname.toLowerCase()) || !['http:','https:'].includes(u.protocol)) return false;
+      if (u.searchParams.get('region') && u.searchParams.get('region')!==record.region) return false;
+      const parts=u.pathname.split('/').filter(Boolean);
+      let sourceEvent=parts.find(p=>/^S\\d+_/i.test(p)) ||
+        parts.find(p=>/^epicgames_S\\d+_/i.test(p))?.replace(/^epicgames_/i,'') || null;
+      if (sourceEvent?.endsWith('_'+record.region)) sourceEvent=sourceEvent.slice(0,-record.region.length-1);
+      return tournament.sourceEventIds.includes(sourceEvent) &&
+        id.startsWith(tournament.seasonId+'_');
+    } catch { return false; }
+  }
+
+  // Return an evidence code only for a *verified qualifier performance*.
+  // Even a published final alone is not used to invent a missing qualifier row.
   function qualificationEvidence(record,tournament) {
-    if (!record || record.verified!==true || record.participationOnly===true || record.partial===true || record.reported===true || record.reviewOnly===true ||
-      record.qualification==='outside-cutoff' || record.status==='通過圏外' ||
-      !QUALIFYING_SERIES.has(tournament?.series)) return null;
-    return record.kind==='予選' && /予選(?:突破|通過)/u.test(String(record.round||'')) ? 'explicit' : null;
+    if (!record || record.verified!==true || record.kind!=='予選' ||
+      record.participationOnly===true || record.partial===true || record.reported===true ||
+      record.reviewOnly===true || record.qualification==='outside-cutoff' ||
+      record.status==='通過圏外' || !QUALIFYING_SERIES.has(tournament?.series)) return null;
+    const cutoff=officialQualificationCutoff(record,tournament);
+    // Contradictory ranks cannot win even when a label or note claims success.
+    if (cutoff!==null && Number.isInteger(record.rank) && record.rank>cutoff) return null;
+    if (/予選(?:突破|通過)/u.test(String(record.round||''))) return 'explicit';
+    const note=String(record.note||'');
+    const positivelyConfirmed=/(?:予選(?:突破|通過)|決勝(?:[0-9,]+位)?へ進出|週末決勝へ|決勝進出を確認)/u.test(note);
+    const contrary=/(?:予選(?:突破|通過).{0,14}(?:未確認|不明|できず|失敗|ならず)|決勝進出.{0,10}(?:未確認|不明|できず|ならず))/u.test(note);
+    if (positivelyConfirmed && !contrary && verifiedQualificationSource(record,tournament)) return 'verified-note';
+    if (cutoff!==null && Number.isInteger(record.rank) && record.rank>0 &&
+      verifiedQualificationSource(record,tournament)) return 'official-cutoff';
+    return null;
   }
 
   function sessionKey(record) {
@@ -164,11 +219,11 @@
     const players = new Map();
     const seenEntries = new Set();
     const awardedBonusUnits = new Map();
-    // A verified explicit advancement is counted once per player/session,
-    // independent of duplicated qualifier rows and source ordering.
+    // Explicit, source-backed advances are counted once per player and dated session,
+    // independently of duplicate exports and record ordering.
     const qualifyingRows=new Map();
     const qualificationKey=(record,tournament,name)=>stable([name,tournament.id||record.event,record.region,
-      sessionKey(record)==='unspecified'?record.date:sessionKey(record)]);
+      record.date,sessionKey(record)]);
     for (const record of unique.records) {
       if (!record || !(record.kind in STAGES) || !Object.hasOwn(REGIONS,record.region) || !record.date ||
         (region!=='all' && region!==record.region)) continue;
@@ -178,7 +233,8 @@
       if (!evidence) continue;
       for (const name of cleanPeople(record,options.names)) {
         const key=qualificationKey(record,tournament,name),earlier=qualifyingRows.get(key);
-        if (!earlier || (evidence==='explicit' && earlier.evidence!=='explicit') ||
+        const priority={explicit:3,'verified-note':2,'official-cutoff':1};
+        if (!earlier || priority[evidence]>priority[earlier.evidence] ||
           (evidence===earlier.evidence && String(record.id||'').localeCompare(String(earlier.record.id||''))<0))
           qualifyingRows.set(key,{record,evidence});
       }
@@ -263,5 +319,6 @@
       conflictingDuplicateCount: unique.conflictingCount, missingRanks, missingKills, unknownModeKills };
   }
 
-  return Object.freeze({ VERSION, REGIONS, STAGES, QUALIFICATION_BASE, eventMultiplier, qualificationEvidence, sessionKey, calculate });
+  return Object.freeze({ VERSION, REGIONS, STAGES, QUALIFICATION_BASE, eventMultiplier,
+    officialQualificationCutoff, verifiedQualificationSource, qualificationEvidence, sessionKey, calculate });
 });
