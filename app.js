@@ -556,7 +556,7 @@
     // A published qualifier record is not proof of advancement.
     // Only explicit round labels establish a confirmed qualifier in these summaries.
     const tournamentFinalKinds=new Set(['賞金決勝','Practice決勝','Performance決勝','決勝']);
-    const tournamentIsConfirmedQualifier=e=>e.verified===true&&e.kind==='予選'&&/予選(?:突破|通過)/u.test(String(e.round||''));
+    const tournamentIsConfirmedQualifier=e=>e.verified===true&&e.kind==='予選'&&!!AotPR.qualificationEvidence(e,classifyTournamentRecord(e));
     const tournamentPhase=e=>e.kind==='予選'?'qualifier':tournamentFinalKinds.has(e.kind)?'final':'other';
     let tournamentProgressMode='all',tournamentProgressId=null;
     function tournamentProgressSummary(records){
@@ -617,7 +617,7 @@
         '<section class="tournament-highlight-block" data-tournament-highlight-group="'+key+'"><h3>'+title+'</h3>'
         +'<p>'+subtitle+'</p><ol>'+ (rows.length?rows.map(e=>item(e,key)).join(''):'<li class="tournament-progress-empty">該当する確認済み戦績はまだありません</li>')+'</ol></section>';
       return '<div class="tournament-highlights">'
-        +block('qualifier','予選突破を確認','「予選突破・予選通過」と明記された掲載記録のみ',quals)
+        +block('qualifier','予選突破を確認','表記・公式通過順位・出典で確認した予選戦績',quals)
         +block('final','決勝の好成績','確認済みの総合順位がある決勝から抜粋',finals)
         +block('prize','賞金獲得','出典確認済みの現金賞金記録のみ',prizes)
         +'</div>';
@@ -626,7 +626,7 @@
       const summary=tournamentProgressSummary(info.records),matches=tournamentProgressMatches(info.records);
       const options=[
         {key:'all',label:'全戦績',count:info.records.length,description:'予選・決勝・スキン大会を含む'},
-        {key:'qualifier',label:'予選',count:summary.qualifiers.length,description:'突破明記 '+format(summary.advancers.length)+'件'},
+        {key:'qualifier',label:'予選',count:summary.qualifiers.length,description:'突破確認 '+format(summary.advancers.length)+'件'},
         {key:'final',label:'決勝',count:summary.finals.length,description:'各種決勝の掲載記録'},
         {key:'prize',label:'賞金獲得',count:summary.prizes.length,description:'確認済み現金賞金のみ'}
       ];
