@@ -34,10 +34,9 @@
       row.player!==people.join(' / '))return false;
     try{
       const url=new URL(row.source);
-      if(url.protocol!=='https:'||url.hostname!=='www.fortnite.com'||
-        url.username||url.password||url.pathname.split('/').filter(Boolean).slice(0,3).join('/')!=='competitive/events/'+
-          encodeURIComponent(category.sourceEventIds.find(x=>row.source.includes('/'+encodeURIComponent(x)+'/'))||'__none__')||
-        !category.sourceEventIds.some(x=>url.pathname==='/competitive/events/'+encodeURIComponent(x)+'/')||
+      if(url.protocol!=='https:'||url.hostname!=='www.fortnite.com'||url.username||url.password||
+        !Array.isArray(category.sourceEventIds)||
+        !category.sourceEventIds.some(id=>url.pathname==='/competitive/events/'+encodeURIComponent(id)+'/')||
         url.searchParams.get('region')!==row.region)return false;
       const round=url.searchParams.get('round');
       if(typeof round!=='string'||!round.startsWith(row.seasonId+'_')||!round.endsWith('_'+row.region))return false;
@@ -48,6 +47,7 @@
     if(typeof options.classify!=='function'||typeof options.sessionKey!=='function')throw TypeError('classify and sessionKey required');
     const base=Array.isArray(published)?published:[];
     const source=Array.isArray(archive)?archive:[];
+    const known=options.knownPlayers instanceof Set?options.knownPlayers:null;
     const hasSession=record=>sessionKey(record,options.sessionKey);
     const publishedByPlayer=new Map();
     for(const row of base){
@@ -71,7 +71,7 @@
       if(!row||seenIds.has(row.id)){skippedDuplicate++;continue}
       seenIds.add(row.id);
       const category=options.classify(row);
-      if(!allowed(row,category)){skippedInvalid++;continue}
+      if(!allowed(row,category)||known&&members(row).some(name=>!known.has(name))){skippedInvalid++;continue}
       const slot=hasSession(row),eligible=[];
       for(const name of members(row)){
         const key=JSON.stringify([name,category.id,row.date,row.region]);
