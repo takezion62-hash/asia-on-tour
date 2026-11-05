@@ -272,3 +272,75 @@ test('Skin and legacy cosmetic kinds do not override an unconfirmed tournament c
     assert.equal(report.ignored,1);
   }
 });
+
+test('AOT PR v1.8: explicitly verified qualification earns 10pt, less than one paid Victory VR (20pt)',()=>{
+  assert.equal(PR.QUALIFICATION_BASE,10);
+  assert.ok(PR.QUALIFICATION_BASE<20);
+  const qual=event({id:'qual-one',kind:'予選',round:'Event 5 · Round 1 / 予選突破',rank:799,
+    prize:0,vrs:0,source:'https://fortnitetracker.com/events/epicgames_S42_ReloadSoloVictoryCup_NAW?window=S42_ReloadSoloVictoryCup_Event5_Round1_NAW'});
+  const player=score([qual]).ranked[0];
+  approx(player.qualificationBonus,10);
+  assert.equal(player.qualificationCount,1);
+  approx(player.bonus,0);
+  approx(player.rows[0].qualificationBonus,10);
+  assert.equal(player.rows[0].qualificationEvidence,'explicit');
+  approx(player.score,player.attendance+player.placement+player.eliminations+player.bonus+player.qualificationBonus);
+  const bare=score([{...qual,id:'qual-not-confirmed',round:'Event 5 · Round 1 / 予選'}]).ranked[0];
+  approx(bare.qualificationBonus,0);
+  assert.equal(bare.qualificationCount,0);
+});
+test('explicit qualification plus separately listed final gets one qualification bonus and unchanged cash VR bonus',()=>{
+  const q=event({id:'one-qual',kind:'予選',round:'Event 5 · Round 1 / 予選通過',rank:500,prize:0,vrs:0,
+    source:'https://fortnitetracker.com/events/epicgames_S42_ReloadSoloVictoryCup_NAW?window=S42_ReloadSoloVictoryCup_Event5_Round1_NAW'});
+  const f=event({id:'one-final',rank:10,vrs:2,prize:200,kind:'賞金決勝'});
+  const result=score([f,q]).ranked[0];
+  approx(result.qualificationBonus,10);
+  assert.equal(result.qualificationCount,1);
+  approx(result.bonus,40);
+  assert.equal(result.appearances,1);
+  assert.equal(result.rows.filter(r=>r.qualificationBonus>0).length,1);
+  const finalOnly=score([f]).ranked[0];
+  approx(finalOnly.qualificationBonus,0); // a final without documented qualifier is not itself a published breakthrough record
+  approx(finalOnly.bonus,40);
+});
+test('same verified qualifier appearing twice can never earn two bonuses; distinct event sessions can',()=>{
+  const a=event({id:'qa',kind:'予選',round:'Event 5 · Round 1 / 予選突破',rank:1500,prize:0,
+    source:'https://fortnitetracker.com/events/epicgames_S42_ReloadSoloVictoryCup_NAW?window=S42_ReloadSoloVictoryCup_Event5_Round1_NAW'});
+  const duplicate={...a,id:'qb',rank:1501,points:79};
+  const second={...a,id:'qc',round:'Event 6 · Round 1 / 予選突破',
+    source:'https://fortnitetracker.com/events/epicgames_S42_ReloadSoloVictoryCup_NAW?window=S42_ReloadSoloVictoryCup_Event6_Round1_NAW'};
+  approx(score([a,duplicate]).ranked[0].qualificationBonus,10);
+  approx(score([duplicate,a]).ranked[0].qualificationBonus,10);
+  approx(score([a,duplicate,second]).ranked[0].qualificationBonus,20);
+});
+test('bonus uses region multiplier only and remains below minimum regional paid VR bonus',()=>{
+  for (const [region,factor] of Object.entries(PR.REGIONS)) {
+    const row=event({id:'regional-qual-'+region,kind:'予選',round:'Event 8 · Round 1 / 予選突破',
+      region,prize:0,source:'https://www.fortnite.com/competitive/events/S42_ReloadSoloVictoryCup/?region='+region+'&round=S42_ReloadSoloVictoryCup_Event8_Round1_'+region});
+    const scoreRow=score([row]).ranked[0];
+    approx(scoreRow.qualificationBonus,10*factor);
+    assert.ok(scoreRow.qualificationBonus<20*factor);
+  }
+});
+test('no qualification points for participation, rank-only cutoff guesses, partial/reported or unsupported test cups',()=>{
+  const base=event({id:'qual-safe',kind:'予選',rank:1,prize:0,
+    round:'Event 3 · Round 1 / 予選突破',
+    source:'https://www.fortnite.com/competitive/events/S42_ReloadSoloVictoryCup/?region=NAW&round=S42_ReloadSoloVictoryCup_Event3_Round1_NAW'});
+  for(const attrs of [
+    {round:'Event 3 · Round 1 / 予選'},
+    {round:'Event 3 · Round 1 / 参加確認'},
+    {qualification:'outside-cutoff'},
+    {status:'通過圏外'},
+    {partial:true},
+    {reported:true},
+    {reviewOnly:true},
+    {verified:false},
+    {kind:'賞金決勝'},
+    {kind:'参加確認'}
+  ]) {
+    const p=score([{...base,...attrs}]).ranked[0];
+    if(p)approx(p.qualificationBonus,0);
+  }
+  const testCup=score([base],catalog({series:'test-cup',subtype:'solo-reload-test-cup'}));
+  assert.equal(testCup.ranked.length,0); // a fake qualifier cannot convert a Test Cup into a paid round
+});
