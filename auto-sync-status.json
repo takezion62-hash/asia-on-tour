@@ -1,12 +1,16 @@
 {
   "version": 1,
-  "state": "setup",
-  "checkedAt": null,
+  "state": "checked",
+  "checkedAt": "2026-11-05T05:58:46.669Z",
   "mode": "review",
-  "linkedPlayers": 0,
+  "provider": "osirion",
+  "linkedPlayers": 417,
   "trackedWindows": 0,
   "found": 0,
   "skipped": 0,
   "imported": 0,
-  "message": "導入準備済み。大会APIキー・本人確認済みEpic ID・大会ウィンドウが未設定のため、現在は自動登録していません。"
+  "scannedPages": 0,
+  "completedWindows": 0,
+  "identityConflicts": 13,
+  "message": "Osirionに接続済み。既存プロフィールのうちIDが一意な417名を追跡。0ページを検査、0件が確認待ち。名前の競合13件は対象外。"
 }
