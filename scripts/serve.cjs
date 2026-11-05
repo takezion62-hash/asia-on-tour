@@ -6,7 +6,7 @@ const root = path.join(__dirname, '..');
 const files = new Map([['/', 'index.html'], ['/index.html', 'index.html'], ['/app.js', 'app.js'], ['/rankings.js', 'rankings.js'], ['/aot-pr.js', 'aot-pr.js'], ['/aot-pr.css', 'aot-pr.css'], ['/achievements.js', 'achievements.js'], ['/achievements.css', 'achievements.css'], ['/growth.js', 'growth.js'], ['/growth.css', 'growth.css'], ['/compare.js', 'compare.js'], ['/compare.css', 'compare.css'], ['/schedule.json', 'schedule.json'], ...['results', 'players', 'tournaments', 'updates'].map(name => ['/' + name + '.json', name + '.json'])]);
 // Keep the browser-test allowlist in sync with assets loaded by the live site.
 // The monthly archive is deliberately restricted to YYYY-MM.json names.
-for(const name of ['calendar.css','auto-sync-ui.js','auto-sync-ui.css','participation-ui.js','participation.css','participation-index.json','participation-status.json','calendar-history-index.json','calendar-history-status.json','auto-sync-status.json','auto-sync-review.json','history-sync-status.json','history-sync-review.json'])files.set('/'+name,name);
+for(const name of ['calendar.css','auto-sync-ui.js','auto-sync-ui.css','participation-ui.js','participation-pr.js','participation.css','participation-index.json','participation-status.json','calendar-history-index.json','calendar-history-status.json','auto-sync-status.json','auto-sync-review.json','history-sync-status.json','history-sync-review.json'])files.set('/'+name,name);
 for(const name of fs.readdirSync(path.join(root,'calendar-history'))){
   if(/^\d{4}-\d{2}\.json$/.test(name))files.set('/calendar-history/'+name,'calendar-history/'+name);
 }
