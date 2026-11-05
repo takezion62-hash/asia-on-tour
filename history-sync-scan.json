@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-11-05T14:22:19.536Z",
+  "checkedAt": "2026-11-05T14:46:50.332Z",
   "windows": {
     "epicgames_S42_SoloVictoryCup_NAW/S42_SoloVictoryCup_Event3Round1_NAW": {
       "nextPage": 9,
@@ -3505,7 +3505,7 @@
       "totalPages": 100
     },
     "epicgames_S41_FNCSCommunityCup_ME/S41_FNCSCommunityCup_ME": {
-      "nextPage": 39,
+      "nextPage": 41,
       "complete": false,
       "proposals": [
         {
@@ -3944,7 +3944,7 @@
           ]
         }
       ],
-      "pages": 39,
+      "pages": 41,
       "emptyAttempts": 0,
       "totalPages": 100
     },
@@ -4998,10 +4998,10 @@
       "totalPages": 4
     },
     "epicgames_S36_VictoryDuosCup_OCE/S36_VictoryDuosCup_Event1Round1_OCE": {
-      "nextPage": 4,
+      "nextPage": 20,
       "complete": false,
       "proposals": [],
-      "pages": 4,
+      "pages": 20,
       "emptyAttempts": 0,
       "totalPages": 26
     },
@@ -5246,7 +5246,7 @@
       "totalPages": 2
     },
     "epicgames_S39_1MillionUnrealCup_NAW/S39_1MillionUnrealCup_NAW": {
-      "nextPage": 29,
+      "nextPage": 31,
       "complete": false,
       "proposals": [
         {
@@ -6207,7 +6207,7 @@
           ]
         }
       ],
-      "pages": 29,
+      "pages": 31,
       "emptyAttempts": 0,
       "totalPages": 100
     },
@@ -6872,7 +6872,7 @@
       "totalPages": 3
     },
     "epicgames_S31_DuosCashCup_ME/S31_DuosCashCup_Event2Round1_ME": {
-      "nextPage": 52,
+      "nextPage": 54,
       "complete": false,
       "proposals": [
         {
@@ -7137,7 +7137,7 @@
           ]
         }
       ],
-      "pages": 52,
+      "pages": 54,
       "emptyAttempts": 0,
       "totalPages": 100
     },
@@ -9213,9 +9213,164 @@
       "totalPages": 18
     },
     "epicgames_S42_SoloVictoryCup_ME/S42_SoloVictoryCup_Event1Round2_ME": {
+      "nextPage": 8,
+      "complete": true,
+      "proposals": [
+        {
+          "id": "auto-s42-1e5da130f484",
+          "date": "2026-09-05",
+          "region": "ME",
+          "player": "dyd Qrënتǃǃ",
+          "playerRaw": "dyd Qrënتǃǃ",
+          "event": "Solo Victory Cup Battle Royale",
+          "round": "Event 1 · Round 2 / 賞金決勝",
+          "rank": 309,
+          "points": 0,
+          "kills": 2,
+          "vrs": 0,
+          "prize": null,
+          "kind": "賞金決勝",
+          "matches": 3,
+          "seasonId": "S42",
+          "chapter": 7,
+          "season": 4,
+          "tournamentId": "ch7s4-solo-victory-cup",
+          "source": "https://www.fortnite.com/competitive/events/S42_SoloVictoryCup/?region=ME&round=S42_SoloVictoryCup_Event1Round2_ME",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。現金賞金の確定情報なし。"
+        }
+      ],
+      "pages": 8,
+      "emptyAttempts": 0,
+      "totalPages": 8
+    },
+    "epicgames_S30_SquadsVictoryCashCup_ME/S30_SquadsVictoryCashCup_Event3Round1_ME": {
+      "nextPage": 16,
+      "complete": false,
+      "proposals": [
+        {
+          "id": "auto-s30-f91ed2def48a",
+          "date": "2024-07-01",
+          "region": "ME",
+          "player": "Ｍutu / かめてぃん / ultrxMarin / ゆったり",
+          "playerRaw": "Ｍutu / EDGE かめてぃん.魔女ǃ / ultrxMarin / ZEAL ゆったり IGL",
+          "event": "Squads Victory Cup Battle Royale",
+          "round": "Event 3 · Round 1 / 予選",
+          "rank": 107,
+          "points": 243,
+          "kills": 44,
+          "vrs": 1,
+          "prize": 0,
+          "kind": "予選",
+          "matches": 6,
+          "seasonId": "S30",
+          "chapter": 5,
+          "season": 3,
+          "tournamentId": "ch5s3-squads-victory-cup",
+          "source": "https://www.fortnite.com/competitive/events/S30_SquadsVictoryCashCup/?region=ME&round=S30_SquadsVictoryCashCup_Event3Round1_ME",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。",
+          "players": [
+            "Ｍutu",
+            "かめてぃん",
+            "ultrxMarin",
+            "ゆったり"
+          ]
+        },
+        {
+          "id": "auto-s30-4542e4eabc09",
+          "date": "2024-07-01",
+          "region": "ME",
+          "player": "Aim / Razl / TEITEI / ZAZI",
+          "playerRaw": "awetatewateweawa / XxRAZLxX / TEITEI 8 / LYNX ZAZI 咲",
+          "event": "Squads Victory Cup Battle Royale",
+          "round": "Event 3 · Round 1 / 予選",
+          "rank": 138,
+          "points": 237,
+          "kills": 48,
+          "vrs": 2,
+          "prize": 0,
+          "kind": "予選",
+          "matches": 6,
+          "seasonId": "S30",
+          "chapter": 5,
+          "season": 3,
+          "tournamentId": "ch5s3-squads-victory-cup",
+          "source": "https://www.fortnite.com/competitive/events/S30_SquadsVictoryCashCup/?region=ME&round=S30_SquadsVictoryCashCup_Event3Round1_ME",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。",
+          "players": [
+            "Aim",
+            "Razl",
+            "TEITEI",
+            "ZAZI"
+          ]
+        }
+      ],
+      "pages": 16,
+      "emptyAttempts": 0,
+      "totalPages": 40
+    },
+    "epicgames_S42_SoloVictoryCup_NAC/S42_SoloVictoryCup_Event1Round2_NAC": {
       "nextPage": 2,
       "complete": false,
-      "proposals": [],
+      "proposals": [
+        {
+          "id": "auto-s42-02d92c8588db",
+          "date": "2026-09-06",
+          "region": "NAC",
+          "player": "Zagouの弟",
+          "playerRaw": "NŁT zagouの弟",
+          "event": "Solo Victory Cup Battle Royale",
+          "round": "Event 1 · Round 2 / 賞金決勝",
+          "rank": 32,
+          "points": 100,
+          "kills": 7,
+          "vrs": 1,
+          "prize": null,
+          "kind": "賞金決勝",
+          "matches": 3,
+          "seasonId": "S42",
+          "chapter": 7,
+          "season": 4,
+          "tournamentId": "ch7s4-solo-victory-cup",
+          "source": "https://www.fortnite.com/competitive/events/S42_SoloVictoryCup/?region=NAC&round=S42_SoloVictoryCup_Event1Round2_NAC",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。現金賞金の確定情報なし。"
+        }
+      ],
+      "pages": 2,
+      "emptyAttempts": 0,
+      "totalPages": 20
+    },
+    "epicgames_S42_SoloVictoryCup_ME/S42_SoloVictoryCup_Event2Round2_ME": {
+      "nextPage": 2,
+      "complete": false,
+      "proposals": [
+        {
+          "id": "auto-s42-544878b2849e",
+          "date": "2026-09-14",
+          "region": "ME",
+          "player": "かめてぃん",
+          "playerRaw": "EDGE かめてぃん.魔女ǃ",
+          "event": "Solo Victory Cup Battle Royale",
+          "round": "Event 2 · Round 2 / 賞金決勝",
+          "rank": 19,
+          "points": 100,
+          "kills": 0,
+          "vrs": 1,
+          "prize": null,
+          "kind": "賞金決勝",
+          "matches": 3,
+          "seasonId": "S42",
+          "chapter": 7,
+          "season": 4,
+          "tournamentId": "ch7s4-solo-victory-cup",
+          "source": "https://www.fortnite.com/competitive/events/S42_SoloVictoryCup/?region=ME&round=S42_SoloVictoryCup_Event2Round2_ME",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。現金賞金の確定情報なし。"
+        }
+      ],
       "pages": 2,
       "emptyAttempts": 0,
       "totalPages": 8
