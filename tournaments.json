@@ -265,6 +265,94 @@
   ],
   "catalog": [
     {
+      "id": "ch7s5-squads-victory-cup",
+      "name": "Squads Victory Cup Battle Royale",
+      "chapter": 7,
+      "season": 5,
+      "seasonId": "S43",
+      "sourceEventIds": [
+        "S43_SquadsVictoryCup"
+      ],
+      "series": "victory-cup",
+      "mode": "battle-royale",
+      "subtype": "squads-victory-cup",
+      "team": "squad",
+      "platform": "cross-platform",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "2026年11月のS43公式大会予定に記載。地域・開催日時・ラウンドはschedule.jsonで確認し、賞金は順位表から推定しない。",
+          "url": "https://www.fortnite.com/competitive/events/S43_SquadsVictoryCup/?region=EU"
+        }
+      ]
+    },
+    {
+      "id": "ch7s5-trios-cash-cup",
+      "name": "Trios Cash Cup Battle Royale",
+      "chapter": 7,
+      "season": 5,
+      "seasonId": "S43",
+      "sourceEventIds": [
+        "S43_TriosCashCup"
+      ],
+      "series": "cash-cup",
+      "mode": "battle-royale",
+      "subtype": "trios-cash-cup",
+      "team": "trio",
+      "platform": "cross-platform",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "2026年11月のS43公式大会予定に記載。地域・開催日時・ラウンドはschedule.jsonで確認し、賞金は順位表から推定しない。",
+          "url": "https://www.fortnite.com/competitive/events/S43_TriosCashCup/?region=EU"
+        }
+      ]
+    },
+    {
+      "id": "ch7s5-reload-zb-duos-cash-cup",
+      "name": "Reload ZB Duos Cash Cup Zero Build",
+      "chapter": 7,
+      "season": 5,
+      "seasonId": "S43",
+      "sourceEventIds": [
+        "S43_ReloadZBDuosCashCup"
+      ],
+      "series": "cash-cup",
+      "mode": "reload-zero-build",
+      "subtype": "reload-zb-duos-cash-cup",
+      "team": "duo",
+      "platform": "cross-platform",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "2026年11月のS43公式大会予定に記載。地域・開催日時・ラウンドはschedule.jsonで確認し、賞金は順位表から推定しない。",
+          "url": "https://www.fortnite.com/competitive/events/S43_ReloadZBDuosCashCup/?region=EU"
+        }
+      ]
+    },
+    {
+      "id": "ch7s5-performance-evaluation-trios",
+      "name": "Fortnite Performance Evaluation",
+      "chapter": 7,
+      "season": 5,
+      "seasonId": "S43",
+      "sourceEventIds": [
+        "S43_PerformanceEvaluationTrios"
+      ],
+      "series": "performance-evaluation",
+      "mode": "battle-royale",
+      "subtype": "performance-evaluation-trios",
+      "team": "trio",
+      "platform": "cross-platform",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "2026年11月のS43公式大会予定に記載。地域・開催日時・ラウンドはschedule.jsonで確認し、賞金は順位表から推定しない。",
+          "url": "https://www.fortnite.com/competitive/events/S43_PerformanceEvaluationTrios/?region=EU"
+        }
+      ]
+    },
+    {
       "id": "ch7s4-solo-victory-cup",
       "name": "Solo Victory Cup Battle Royale",
       "chapter": 7,
