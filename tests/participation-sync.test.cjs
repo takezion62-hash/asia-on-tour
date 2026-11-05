@@ -104,3 +104,28 @@ test('when a prize result is published, an existing participation duplicate is p
   assert.equal(appendArchive(dir,[{win:winUnreal,proposals:[a]}],[b]).added,0);
  }finally{fs.rmSync(dir,{recursive:true,force:true})}
 });
+
+test('manual participation identity never reappears with a new generated hash ID',()=>{
+ const dir=fs.mkdtempSync(path.join(os.tmpdir(),'aot-reviewed-participation-'));
+ try{
+  const w={eventId:'S31_DuosCashCup',windowId:'S31_DuosCashCup_Event2Round1_ME',dateJst:'2024-09-12',region:'ME',kind:'参加確認',tournamentId:'ch5s4-duos-cash-cup',round:'Event 2 · Round 1 / 参加確認'};
+  const rowReview={...row(157,'R'),date:'2024-09-12',region:'ME',player:'R / X',players:['R','X'],event:'Duos Cash Cup',tournamentId:w.tournamentId,seasonId:'S31',round:w.round,kind:'参加確認',source:'https://www.fortnite.com/competitive/events/S31_DuosCashCup/?region=ME&round=S31_DuosCashCup_Event2Round1_ME'};
+  assert.equal(appendArchive(dir,[{win:w,proposals:[rowReview]}],[]).added,1);
+  const filename=path.join(dir,'participation/2024-09.json');
+  const file=JSON.parse(fs.readFileSync(filename,'utf8'));
+  file.entries[0].id='participation-review-'+rowReview.id;
+  fs.writeFileSync(filename,JSON.stringify(file));
+  const next=appendArchive(dir,[{win:w,proposals:[rowReview]}],[]);
+  assert.equal(next.added,0);
+  assert.equal(next.duplicates,1);
+  assert.equal(JSON.parse(fs.readFileSync(filename,'utf8')).entries.length,1);
+ }finally{fs.rmSync(dir,{recursive:true,force:true})}
+});
+test('skin tournament alias matching requires same rank, kills and victory royales',()=>{
+ const a={date:'2026-08-01',region:'ME',tournamentId:'skin',player:'A / B',rank:11,points:441,kills:27,vrs:5,source:'https://www.fortnite.com/competitive/events/S41_FNCSCommunityCup/?region=ME&round=S41_FNCSCommunityCup_ME'};
+ const old={...a,player:'C / B',source:'https://fortnitetracker.com/events/epicgames_S41_FNCSCommunityCup_ME'};
+ assert.equal(publishedEquivalent(a,[old]),true);
+ assert.equal(publishedEquivalent({...a,rank:12},[old]),false);
+ assert.equal(publishedEquivalent({...a,kills:25},[old]),false);
+ assert.equal(publishedEquivalent({...a,source:a.source.replace('round=S41_FNCSCommunityCup_ME','round=S41_FNCSCommunityCup_EU')},[{...old,source:a.source}]),false);
+});

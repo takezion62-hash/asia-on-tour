@@ -14,10 +14,14 @@ const roundFromSource=s=>{
 };
 function publishedEquivalent(p,published){
  return published.some(r=>{
-  if(r.date!==p.date||r.region!==p.region||r.tournamentId!==p.tournamentId||rosterKey(r)!==rosterKey(p))return false;
-  if(r.source===p.source)return true;
+  if(r.date!==p.date||r.region!==p.region||r.tournamentId!==p.tournamentId)return false;
   const a=roundFromSource(r.source),b=roundFromSource(p.source);
-  return a&&b?a===b:r.round===p.round||(!r.source?.includes('round=')&&!r.source?.includes('window='));
+  const sameRoster=rosterKey(r)===rosterKey(p);
+  // A renamed team can only match by the same rank, kills, VR and (where present) points.
+  const samePlacement=r.rank===p.rank&&r.kills===p.kills&&r.vrs===p.vrs&&(r.points===p.points||r.points==null||p.points==null);
+  if(!sameRoster&&!samePlacement)return false;
+  if(a&&b)return a===b;
+  return r.source===p.source||r.round===p.round||samePlacement;
  });
 }
 function toParticipation(p,win,cutoff=null){
@@ -48,7 +52,8 @@ function appendArchive(root,proposalsByWindow,published,opts={}){
  const indexPath=path.join(root,'participation-index.json');
  const previous=fs.existsSync(indexPath)?JSON.parse(fs.readFileSync(indexPath,'utf8')):{version:1,months:[],total:0};
  if(previous.version!==1)throw Error('participation index version mismatch');
- const old=new Map(),dir=path.join(root,'participation');
+ const old=new Map(),keys=new Set(),dir=path.join(root,'participation');
+ const identityKey=p=>[p.date,p.region,p.tournamentId,roundFromSource(p.source)||p.round,rosterKey(p)].join('::');
  if(fs.existsSync(dir)){
   for(const name of fs.readdirSync(dir)){
    if(!/^\d{4}-\d{2}\.json$/.test(name))continue;
@@ -58,7 +63,8 @@ function appendArchive(root,proposalsByWindow,published,opts={}){
    for(const record of document.entries){
     if(publishedEquivalent(record,published)){prunedPublished++;continue}
     if(seen.has(record.id))throw Error('duplicate participation ID '+record.id);
-    seen.add(record.id);keep.push(record);
+    if(keys.has(identityKey(record)))throw Error('duplicate participation identity '+record.id);
+    keys.add(identityKey(record));seen.add(record.id);keep.push(record);
    }
    if(keep.length!==document.entries.length)changed.set(month,keep);
    old.set(month,keep);
@@ -71,10 +77,10 @@ function appendArchive(root,proposalsByWindow,published,opts={}){
    const record=toParticipation(proposal,win,cutoff);
    if(!record){rejected.push(proposal?.id||'unknown');continue}
    if(publishedEquivalent(record,published)){skippedPublished++;continue}
-   if(seen.has(record.id)){duplicates++;continue}
+   if(seen.has(record.id)||keys.has(identityKey(record))){duplicates++;continue}
    const month=record.date.slice(0,7),rows=changed.get(month)||[...(old.get(month)||[])];
    if(rows.length>=50000)throw Error('participation month exceeds safe size');
-   rows.push(record);changed.set(month,rows);seen.add(record.id);added++;
+   rows.push(record);changed.set(month,rows);keys.add(identityKey(record));seen.add(record.id);added++;
   }
  }
  if(!added&&!prunedPublished)return {added:0,prunedPublished:0,skippedPublished,duplicates,rejected:rejected.length,total:previous.total,months:old.size};

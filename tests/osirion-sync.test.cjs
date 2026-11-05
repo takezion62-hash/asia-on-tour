@@ -207,3 +207,16 @@ test('extra historical slot reaches recently completed official events despite a
  assert.equal(selected.filter(w=>w.dateJst.startsWith('2024')).length,2);
  assert.equal(selected.filter(w=>w.dateJst.startsWith('2025')).length,2);
 });
+
+test('reviewed candidates are uniquely resolved and all approved IDs are in public results',()=>{
+ const fs=require('node:fs'),path=require('node:path'),folder=path.join(__dirname,'..');
+ const data=JSON.parse(fs.readFileSync(path.join(folder,'history-sync-reviewed.json'),'utf8'));
+ const ids=data.entries.map(x=>x.id);
+ assert.ok(ids.length>=72);
+ assert.equal(new Set(ids).size,ids.length);
+ assert.ok(data.entries.filter(x=>x.decision==='published').length>=56);
+ assert.ok(data.entries.filter(x=>x.decision==='participation').length>=8);
+ assert.ok(data.entries.filter(x=>x.decision==='already-published').length>=8);
+ const existing=new Set(JSON.parse(fs.readFileSync(path.join(folder,'results.json'),'utf8')).map(x=>x.id));
+ for(const row of data.entries.filter(x=>x.decision==='published'))assert.ok(existing.has(row.recordId),row.id);
+});
