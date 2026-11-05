@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-06T00:00:00Z",
+  "reviewedAt": "2026-11-05T22:28:20.387Z",
   "description": "Resolved historic review candidates: published, duplicate or participation",
   "entries": [
     {
@@ -432,6 +432,41 @@
       "recordId": "auto-s42-d1ce81b0c22a",
       "rule": "https://www.fortnite.com/competitive/events/S42_PerformanceEvaluationTrios/?region=EU",
       "evidence": "Epic-ID verified tournament leaderboard; 33-team qualifier cutoff; manual review 2026-11-06"
+    },
+    {
+      "id": "auto-s42-ec0c00ae725b",
+      "decision": "published",
+      "recordId": "auto-s42-ec0c00ae725b",
+      "rule": "https://www.fortnite.com/competitive/events/S42_PerformanceEvaluation/?region=EU",
+      "evidence": "Epic-ID verified Osirion leaderboard; manual review 2026-11-06; passage and prize unconfirmed"
+    },
+    {
+      "id": "auto-s42-4ae405984cb0",
+      "decision": "published",
+      "recordId": "auto-s42-4ae405984cb0",
+      "rule": "https://www.fortnite.com/competitive/events/S42_PerformanceEvaluation/?region=EU",
+      "evidence": "Epic-ID verified Osirion leaderboard; manual review 2026-11-06; passage and prize unconfirmed"
+    },
+    {
+      "id": "auto-s42-0009df4966ed",
+      "decision": "published",
+      "recordId": "auto-s42-0009df4966ed",
+      "rule": "https://www.fortnite.com/competitive/events/S42_PerformanceEvaluation/?region=EU",
+      "evidence": "Epic-ID verified Osirion leaderboard; manual review 2026-11-06; passage and prize unconfirmed"
+    },
+    {
+      "id": "auto-s42-16187f7ee065",
+      "decision": "published",
+      "recordId": "auto-s42-16187f7ee065",
+      "rule": "https://www.fortnite.com/competitive/events/S42_PerformanceEvaluation/?region=EU",
+      "evidence": "Epic-ID verified Osirion leaderboard; manual review 2026-11-06; passage and prize unconfirmed"
+    },
+    {
+      "id": "auto-s42-1891244a0e9f",
+      "decision": "published",
+      "recordId": "auto-s42-1891244a0e9f",
+      "rule": "https://www.fortnite.com/competitive/events/S42_PerformanceEvaluation/?region=EU",
+      "evidence": "Epic-ID verified Osirion leaderboard; manual review 2026-11-06; passage and prize unconfirmed"
     }
   ]
 }
