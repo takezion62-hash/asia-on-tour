@@ -1,7 +1,7 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-05T10:53:24.361Z",
+  "checkedAt": "2026-11-05T11:11:38.912Z",
   "mode": "review",
   "scope": "history",
   "fromDate": "2026-08-01",
@@ -11,12 +11,12 @@
   "trackedWindows": 512,
   "found": 12,
   "skipped": 0,
-  "imported": 1,
-  "scannedPages": 16,
-  "completedWindows": 23,
+  "imported": 42,
+  "scannedPages": 24,
+  "completedWindows": 26,
   "identityConflicts": 0,
-  "alreadyRegistered": 144,
-  "autoApprovedTotal": 86,
+  "alreadyRegistered": 145,
+  "autoApprovedTotal": 128,
   "invalidCachedCandidates": 1,
   "manualReviewCandidates": 12,
   "retryWindows": 0,
@@ -24,5 +24,5 @@
   "reviewOnlyCandidates": 12,
   "unmappedEvents": 0,
   "unmappedEventIds": [],
-  "message": "Osirionで439アカウントIDを追跡。今回の公式規則による自動承認1件、追加確認待ち12件、名義照合保留0件。"
+  "message": "Osirionで439アカウントIDを追跡。今回の公式規則による自動承認42件、追加確認待ち12件、名義照合保留0件。"
 }
