@@ -220,3 +220,31 @@ test('reviewed candidates are uniquely resolved and all approved IDs are in publ
  const existing=new Set(JSON.parse(fs.readFileSync(path.join(folder,'results.json'),'utf8')).map(x=>x.id));
  for(const row of data.entries.filter(x=>x.decision==='published'))assert.ok(existing.has(row.recordId),row.id);
 });
+
+test('expanded historical backfill spreads work across six regions and keeps review-only series',()=>{
+ const regions=['ME','EU','NAC','NAW','OCE','BR'];
+ const rows=regions.flatMap(region=>[
+  {key:region+'-2024',region,series:'victory-cup',dateJst:'2024-07-01',end:Date.parse('2024-07-01T12:00:00Z'),tournamentId:'ch5s3-solo-victory-cup',kind:'予選'},
+  {key:region+'-2025',region,series:'cash-cup',dateJst:'2025-07-01',end:Date.parse('2025-07-01T12:00:00Z'),tournamentId:'cash',kind:'参加確認'},
+  {key:region+'-2026',region,series:'performance-evaluation',dateJst:'2026-07-01',end:Date.parse('2026-07-01T12:00:00Z'),tournamentId:'performance',kind:'参加確認'}
+ ]);
+ const chosen=selectHistoricalWindows(rows,{windows:{}},{maxWindowsPerRun:18},Date.parse('2026-11-06T12:00:00Z'));
+ assert.equal(chosen.length,18);
+ assert.deepEqual(new Set(chosen.map(w=>w.region)),new Set(regions));
+ assert.deepEqual(new Set(chosen.map(w=>w.dateJst.slice(0,4))),new Set(['2024','2025','2026']));
+ assert.ok(chosen.some(w=>w.series==='cash-cup'));
+ assert.ok(chosen.some(w=>w.series==='performance-evaluation'));
+});
+test('expanded 2023 history safely discovers explicitly catalogued Test Cup attendance only',()=>{
+ const catalog=[{id:'old-test',name:'Archive Test Cup',series:'test-cup',team:'solo',seasonId:'S28',sourceEventIds:['S28_ArchiveTestCup']}];
+ const event={eventId:'epicgames_S28_ArchiveTestCup_NAW',eventWindows:[{eventWindowId:'S28_ArchiveTestCup_Event1_NAW',beginTime:'2023-09-10T01:00:00Z',endTime:'2023-09-10T03:00:00Z'}]};
+ const opts={fromDate:'2023-01-01',toDate:'2026-11-06',regions:['NAW'],minLagMinutes:240,reviewSeries:['test-cup']};
+ const found=discover([event],catalog,opts,Date.parse('2026-11-06T05:00:00Z'));
+ assert.equal(found.length,1);
+ assert.equal(found[0].kind,'参加確認');
+ assert.equal(found[0].series,'test-cup');
+ assert.equal(found[0].dateJst,'2023-09-10');
+ const unknown=discoverUnmapped([event],[],opts,Date.parse('2026-11-06T05:00:00Z'));
+ assert.deepEqual(unknown,['S28_ArchiveTestCup']);
+ assert.deepEqual(discoverUnmapped([event],catalog,opts,Date.parse('2026-11-06T05:00:00Z')),[]);
+});
