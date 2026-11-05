@@ -24,3 +24,22 @@ test('derive kills/VR/matches only from explicit tracked stats',()=>{
  const n=normalizeRow(e,w);assert.equal(n.kills,14);assert.equal(n.vrs,1);assert.equal(n.matches,2);assert.equal(n.points,268);
  assert.equal(normalizeRow({...e,unscoredSessions:['missing']},w),null);
 });
+
+test('canonicalizes only explicitly confirmed player aliases',()=>{
+ const id='8a57ac58-f937-4de2-81b7-9abd070c7ae8',url='https://fortnitetracker.com/profile/all/name/events?id='+id;
+ const data={players:{candidates:[{name:'Hazy'}],confirmedAliases:{Hazy:['CLD hazyǃ']}},results:[{player:'Hazy',profileUrl:url},{player:'CLD hazyǃ',profileUrl:url}]};
+ const out=linkedAccounts(data);
+ assert.equal(out.accounts.length,1);
+ assert.equal(out.accounts[0].player,'Hazy');
+ assert.equal(out.conflicts.length,0);
+});
+test('ambiguous aliases or inconsistent canonical names remain excluded',()=>{
+ const url='https://fortnitetracker.com/?id=8a57ac58-f937-4de2-81b7-9abd070c7ae8';
+ const ambiguous={players:{candidates:[{name:'A'},{name:'B'}],confirmedAliases:{A:['shared'],B:['shared']}},results:[{player:'shared',profileUrl:url}]};
+ const collision={players:{candidates:[{name:'A'},{name:'B'}],confirmedAliases:{A:['old A']}},results:[{player:'old A',profileUrl:url},{player:'B',profileUrl:url}]};
+ for(const data of [ambiguous,collision]){
+  const out=linkedAccounts(data);
+  assert.equal(out.accounts.length,0);
+  assert.equal(out.conflicts.length,1);
+ }
+});
