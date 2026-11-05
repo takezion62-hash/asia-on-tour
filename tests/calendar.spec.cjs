@@ -313,3 +313,48 @@ test('存在しない日付の共有リンクでも他日の結果を混ぜず�
   await expect(page.locator('[data-tournament-record]').first()).toBeVisible();
   await expect(page.locator('#tournament-date-filter')).toHaveValue('all');
 });
+
+test('同日同大会の報酬・参加確認は1開催枠、別ラウンドだけを残す',async({page})=>{
+ const problems=[
+  {month:'2025-12',date:'2025-12-21',region:'NAW',name:'$1 Million Unreal Cup',count:1,records:38},
+  {month:'2026-08',date:'2026-08-01',region:'ME',name:'Champion Aphrodite FNCS Cup Battle Royale',count:1,records:15},
+  {month:'2026-09',date:'2026-09-22',region:'ME',name:'Solo Victory Cup Battle Royale',count:2,records:152}
+ ];
+ for(const item of problems){
+  await page.goto('/?season=all#calendar?month='+item.month+'&date='+item.date+'&region='+item.region+'&scope=results');
+  await expect(page.locator('#page-calendar')).toBeVisible();
+  const cards=page.locator('.calendar-event').filter({hasText:item.name});
+  await expect(cards).toHaveCount(item.count);
+  const text=await cards.allTextContents();
+  if(item.count===1)expect(text.join('')).toContain('掲載済み：'+item.records+'戦績');
+  else{
+   expect(text.some(x=>x.includes('Round 1'))).toBe(true);
+   expect(text.some(x=>x.includes('Round 2'))).toBe(true);
+  }
+  const path=cards.first().locator('h3 a');
+  await expect(path).toHaveAttribute('href',/date=/);
+  await path.click();
+  await expect(page.locator('#page-tournament')).toBeVisible();
+  await expect(page.locator('.tournament-selected-scope')).toContainText(item.region);
+  await expect(page.locator('.tournament-selected-scope')).toContainText(item.date.replace(/-/g,'/'));
+ }
+});
+test('大会詳細は未確認Event番号の決勝と確認済み決勝を同枠にまとめる',async({page})=>{
+ await page.goto('/?season=all#tournament=ch7s4-solo-victory-cup?date=2026-09-22');
+ await expect(page.locator('#page-tournament')).toBeVisible();
+ const all=page.locator('.tournament-session').filter({hasText:'ME'});
+ // Page may render multiple regions; ME must have only Round 1 and Round 2 for the date.
+ const labels=await all.allTextContents();
+ expect(labels.filter(s=>s.includes('Event 3')&&s.includes('Round 2')).length).toBe(1);
+ expect(labels.join('')).toContain('mell');
+});
+test('API履歴の同時刻・同大会・同地域の別IDは重複表示しない',async({page})=>{
+ await page.goto('/?season=all#calendar?month=2026-09&date=2026-09-05&region=OCE&scope=scheduled');
+ await expect(page.locator('#page-calendar')).toBeVisible();
+ await expect(page.locator('.calendar-upcoming-event').first()).toBeVisible();
+ const cards=page.locator('.calendar-upcoming-event').filter({hasText:'Solo Victory Cup Battle Royale'});
+ await expect(cards).toHaveCount(2);
+ const txt=await cards.allTextContents();
+ expect(txt.some(x=>x.includes('Round 1'))).toBe(true);
+ expect(txt.some(x=>x.includes('Round 2'))).toBe(true);
+});
