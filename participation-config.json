@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "enabled": true,
+  "provider": "osirion",
+  "fromDate": "2026-08-01",
+  "regions": [
+    "ME",
+    "EU",
+    "NAC",
+    "NAW",
+    "OCE",
+    "BR"
+  ],
+  "reviewSeries": [
+    "victory-cup",
+    "cash-cup",
+    "fncs",
+    "performance-evaluation",
+    "skin-cup",
+    "icon-cup",
+    "playstation-cup"
+  ],
+  "minLagMinutes": 240,
+  "maxPagesPerRun": 30,
+  "maxWindowsPerRun": 5,
+  "maxPagesPerWindowPerRun": 8,
+  "maxPagesPerWindowTotal": 40,
+  "lookbackDays": 7
+}
