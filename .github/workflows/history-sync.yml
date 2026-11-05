@@ -6,6 +6,8 @@ on:
       - "scripts/osirion-sync.cjs"
       - "history-sync-config.json"
       - ".github/workflows/history-sync.yml"
+  schedule:
+    - cron: '41 3 * * *'
   workflow_dispatch:
 permissions:
   contents: write
