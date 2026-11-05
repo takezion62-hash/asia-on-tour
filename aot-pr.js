@@ -7,7 +7,7 @@
 })(typeof globalThis === 'object' ? globalThis : this, function () {
   'use strict';
 
-  const VERSION = '1.10.0';
+  const VERSION = '1.11.0';
   const REGIONS = Object.freeze({ EU: 1.4, BR: 1.3, NAC: 1.2, ME: 1.1, OCE: 1.1, NAW: 1.0 });
   const STAGES = Object.freeze({ '予選': 0.35, '賞金決勝': 1, '決勝': 1, 'Practice決勝': 1,
     'Performance決勝': 1, 'スキン大会': 1, 'コスメ大会': 1, 'Test Cup': 1, '参加確認': 0.35 });
@@ -191,6 +191,44 @@
     return null;
   }
 
+  // A genuine, source-verified Finals appearance proves advancement only
+  // in events whose official rules require Round 1 qualification. No bonus
+  // for finals without a round identifier or older, unverified rulebooks.
+  const FINAL_PROOF_EVENTS=new Set([
+    'ch7s3-solo-reload-victory-cup','ch7s4-solo-victory-cup',
+    'ch7s4-solo-reload-victory-cup','ch7s4-console-zero-build-solo-victory-cup',
+    'ch7s4-reload-duos-victory-cup','ch7s4-reload-zero-build-duos-cash-cup',
+    'ch7s4-fncs-division-1-practice','ch7s4-performance-evaluation',
+    'ch7s4-performance-evaluation-trios','ch7s4-playstation-nickeh30-icon-cup'
+  ]);
+  function verifiedFinalEvidence(record,tournament) {
+    if (!record || !tournament || !FINAL_PROOF_EVENTS.has(tournament.id) ||
+      record.verified!==true || record.participationOnly===true ||
+      record.partial===true || record.reported===true || record.reviewOnly===true ||
+      !CASH_FINALS.has(record.kind) || !Number.isInteger(record.rank) || record.rank<1 ||
+      officialQualificationCutoff(record,tournament)===null ||
+      !verifiedQualificationSource(record,tournament,false)) return null;
+    const id=sourceRound(record),region=record.region;
+    if (!id || !id.endsWith('_'+region)) return null;
+    const exact=tournament.sourceEventIds?.some(base=>id.startsWith(base+'_'));
+    if (tournament.id==='ch7s4-playstation-nickeh30-icon-cup') {
+      return exact && id==='S42_PSNickEh30_Final_'+region ? 'verified-final' : null;
+    }
+    if (tournament.id==='ch7s4-fncs-division-1-practice') {
+      const week=id.match(/^S42_FNCSDivisionalCup_Division1_Week(\d+)Final_(?:ME|EU|NAC|NAW|OCE|BR)$/);
+      const label=String(record.round||'').match(/Week\s*(\d+)/i);
+      return week && label && week[1]===label[1] ? 'verified-final' : null;
+    }
+    if (tournament.id==='ch7s3-solo-reload-victory-cup') {
+      return exact && /^S41_ReloadSoloVictoryCup_Round2_Day\d+_(?:ME|EU|NAC|NAW|OCE|BR)$/.test(id)
+        ? 'verified-final' : null;
+    }
+    const officialRoundRoot=exact || (tournament.id==='ch7s4-performance-evaluation-trios' &&
+      /^S42_PerformanceEvaluation_Event\d+Round2_/.test(id));
+    return officialRoundRoot && /_Event\d+_?Round2_(?:ME|EU|NAC|NAW|OCE|BR)$/.test(id)
+      ? 'verified-final' : null;
+  }
+
   function sessionKey(record) {
     const identifiers = new Map();
     // Keep every explicit scheduling axis; rounds share attendance, sessions do not.
@@ -280,6 +318,49 @@
           qualifyingRows.set(key,{record,evidence});
       }
     }
+    // The same event often publishes the qualifier and finals on different
+    // calendar dates (NickEh30: one week; FNCS Practice: next weekend). First
+    // prefer actual qualifier evidence, then give final-only participants one
+    // award. Do not create fictitious preliminary results or extra appearances.
+    const acceptedQualifiers=new Map();
+    for (const item of qualifyingRows.values()) {
+      const r=item.record,t=options.classify(r)||{};
+      for(const name of cleanPeople(r,options.names)){
+        const k=stable([name,t.id,r.region,sessionKey(r)]);
+        if(!acceptedQualifiers.has(k))acceptedQualifiers.set(k,[]);
+        acceptedQualifiers.get(k).push(r.date);
+      }
+    }
+    const finalAwarded=new Map();
+    const unsafeQualifierSlots=new Set();
+    for (const record of unique.records) {
+      if (!record || record.kind!=='予選' || !record.date) continue;
+      const t=options.classify(record)||{};
+      if (!t.id) continue;
+      if (record.qualification!=='outside-cutoff' && record.status!=='通過圏外') continue;
+      for(const name of cleanPeople(record,options.names))
+        unsafeQualifierSlots.add(stable([name,t.id,record.region,sessionKey(record)]));
+    }
+    for (const record of unique.records) {
+      if (!record || !record.date || !Object.hasOwn(REGIONS,record.region) ||
+        (region!=='all'&&record.region!==region)) continue;
+      const t=options.classify(record)||{},proof=verifiedFinalEvidence(record,t);
+      if (!proof) continue;
+      const sess=sessionKey(record);
+      if(sess==='unspecified')continue;
+      for(const name of cleanPeople(record,options.names)) {
+        const slot=stable([name,t.id,record.region,sess]);
+        if(unsafeQualifierSlots.has(slot))continue;
+        const isNear=(day)=>Number.isFinite(Date.parse(day)) &&
+          Math.abs(Date.parse(record.date)-Date.parse(day))<=14*86400000;
+        if((acceptedQualifiers.get(slot)||[]).some(isNear) ||
+          (finalAwarded.get(slot)||[]).some(isNear))continue;
+        const key=qualificationKey(record,t,name);
+        qualifyingRows.set(key,{record,evidence:proof});
+        if(!finalAwarded.has(slot))finalAwarded.set(slot,[]);
+        finalAwarded.get(slot).push(record.date);
+      }
+    }
     let included = 0, participationIncluded=0, unknownModeKills = 0, missingRanks = 0, missingKills = 0, ignored = 0;
 
     for (const record of unique.records) {
@@ -362,5 +443,5 @@
 
   return Object.freeze({ VERSION, REGIONS, STAGES, QUALIFICATION_BASE, eventMultiplier,
     officialQualificationCutoff, verifiedQualificationSource, verifiedScreenshotQualification,
-    qualificationEvidence, sessionKey, calculate });
+    verifiedFinalEvidence, qualificationEvidence, sessionKey, calculate });
 });
