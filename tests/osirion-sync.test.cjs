@@ -58,3 +58,14 @@ test('reports upcoming unmapped Victory Cups without inventing catalog entries',
  const registered=[...older,{id:'new',series:'victory-cup',seasonId:'S43',sourceEventIds:['S43_SoloVictoryCup']}];
  assert.deepEqual(discoverUnmapped(events,registered,{lookbackDays:7},now),[]);
 });
+
+test('S43 Squads Victory Cup windows with underscores are detected correctly',()=>{
+ const catalog=[{id:'ch7s5-squads-victory-cup',name:'Squads Victory Cup Battle Royale',series:'victory-cup',team:'squad',seasonId:'S43',sourceEventIds:['S43_SquadsVictoryCup']}];
+ const event={eventId:'epicgames_S43_SquadsVictoryCup_NAW',eventWindows:[{eventWindowId:'S43_SquadsVictoryCup_Event1_Round1_NAW',beginTime:'2026-11-10T02:00:00Z',endTime:'2026-11-10T04:00:00Z'},{eventWindowId:'S43_SquadsVictoryCup_Event1_Round2_NAW',beginTime:'2026-11-10T05:00:00Z',endTime:'2026-11-10T06:00:00Z'}]};
+ const wins=discover([event],catalog,{lookbackDays:7,minLagMinutes:240},Date.parse('2026-11-11T12:00:00Z'));
+ assert.equal(wins.length,2);
+ assert.equal(wins[0].kind,'予選');
+ assert.equal(wins[1].kind,'賞金決勝');
+ assert.equal(wins[1].tournamentId,'ch7s5-squads-victory-cup');
+ assert.equal(parseStage('S42_SoloVictoryCup_Event3Round1_NAW').kind,'予選');
+});
