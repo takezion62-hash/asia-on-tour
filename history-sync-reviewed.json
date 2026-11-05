@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-05T15:16:00.000Z",
+  "reviewedAt": "2026-11-06T00:00:00Z",
   "description": "Resolved historic review candidates: published, duplicate or participation",
   "entries": [
     {
@@ -425,6 +425,13 @@
       "recordId": "auto-s36-87bc4d33c9f8",
       "rule": "https://www.fortnite.com/news/fortnite-duos-console-victory-cash-cups-chapter-6-season-3-official-rules",
       "evidenceResultId": "auto-s36-0fbf5af7e99e"
+    },
+    {
+      "id": "auto-s42-d1ce81b0c22a",
+      "decision": "published",
+      "recordId": "auto-s42-d1ce81b0c22a",
+      "rule": "https://www.fortnite.com/competitive/events/S42_PerformanceEvaluationTrios/?region=EU",
+      "evidence": "Epic-ID verified tournament leaderboard; 33-team qualifier cutoff; manual review 2026-11-06"
     }
   ]
 }
