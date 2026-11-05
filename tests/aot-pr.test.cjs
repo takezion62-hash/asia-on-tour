@@ -78,9 +78,10 @@ test('PlayStation NickEh30 dual-tag Icon Cup scores cosmetic qualifiers x0.50, c
   approx(PR.eventMultiplier(qual,t),0.5);
   approx(PR.eventMultiplier(fin,t),1.20);
   const q=score([qual],t).ranked[0],f=score([fin],t).ranked[0];
-  approx(q.score,(10+50*.35+15*.35)*0.50);
+  approx(q.score,(10+50*.35+15*.35)*0.50+10);
   approx(f.score,(10+50+15)*1.20);
   approx(q.bonus,0);approx(f.bonus,0);
+  approx(q.qualificationBonus,10);approx(f.qualificationBonus,0);
   const paid={...fin,id:'paid-final',vrs:1,prize:500};
   const paidResult=score([paid],t).ranked[0];
   approx(paidResult.bonus,0); // No Icon Cup prize bonus policy yet.
@@ -273,10 +274,10 @@ test('Skin and legacy cosmetic kinds do not override an unconfirmed tournament c
   }
 });
 
-test('AOT PR v1.8: explicitly verified qualification earns 10pt, less than one paid Victory VR (20pt)',()=>{
+test('AOT PR v1.10: explicitly verified qualification earns 10pt, less than paid Victory VR (20pt)',()=>{
   assert.equal(PR.QUALIFICATION_BASE,10);
   assert.ok(PR.QUALIFICATION_BASE<20);
-  const qual=event({id:'qual-one',kind:'予選',round:'Event 5 · Round 1 / 予選突破',rank:799,
+  const qual=event({id:'qual-one',kind:'予選',round:'Event 5 · Round 1 / 予選突破',rank:319,
     prize:0,vrs:0,source:'https://fortnitetracker.com/events/epicgames_S42_ReloadSoloVictoryCup_NAW?window=S42_ReloadSoloVictoryCup_Event5_Round1_NAW'});
   const player=score([qual]).ranked[0];
   approx(player.qualificationBonus,10);
@@ -285,12 +286,12 @@ test('AOT PR v1.8: explicitly verified qualification earns 10pt, less than one p
   approx(player.rows[0].qualificationBonus,10);
   assert.equal(player.rows[0].qualificationEvidence,'explicit');
   approx(player.score,player.attendance+player.placement+player.eliminations+player.bonus+player.qualificationBonus);
-  const bare=score([{...qual,id:'qual-not-confirmed',round:'Event 5 · Round 1 / 予選'}]).ranked[0];
+  const bare=score([{...qual,id:'qual-not-confirmed',round:'Event 5 · Round 1 / 予選',rank:321}]).ranked[0];
   approx(bare.qualificationBonus,0);
   assert.equal(bare.qualificationCount,0);
 });
 test('explicit qualification plus separately listed final gets one qualification bonus and unchanged cash VR bonus',()=>{
-  const q=event({id:'one-qual',kind:'予選',round:'Event 5 · Round 1 / 予選通過',rank:500,prize:0,vrs:0,
+  const q=event({id:'one-qual',kind:'予選',round:'Event 5 · Round 1 / 予選通過',rank:300,prize:0,vrs:0,
     source:'https://fortnitetracker.com/events/epicgames_S42_ReloadSoloVictoryCup_NAW?window=S42_ReloadSoloVictoryCup_Event5_Round1_NAW'});
   const f=event({id:'one-final',rank:10,vrs:2,prize:200,kind:'賞金決勝'});
   const result=score([f,q]).ranked[0];
@@ -304,9 +305,9 @@ test('explicit qualification plus separately listed final gets one qualification
   approx(finalOnly.bonus,40);
 });
 test('same verified qualifier appearing twice can never earn two bonuses; distinct event sessions can',()=>{
-  const a=event({id:'qa',kind:'予選',round:'Event 5 · Round 1 / 予選突破',rank:1500,prize:0,
+  const a=event({id:'qa',kind:'予選',round:'Event 5 · Round 1 / 予選突破',rank:300,prize:0,
     source:'https://fortnitetracker.com/events/epicgames_S42_ReloadSoloVictoryCup_NAW?window=S42_ReloadSoloVictoryCup_Event5_Round1_NAW'});
-  const duplicate={...a,id:'qb',rank:1501,points:79};
+  const duplicate={...a,id:'qb',rank:301,points:79};
   const second={...a,id:'qc',round:'Event 6 · Round 1 / 予選突破',
     source:'https://fortnitetracker.com/events/epicgames_S42_ReloadSoloVictoryCup_NAW?window=S42_ReloadSoloVictoryCup_Event6_Round1_NAW'};
   approx(score([a,duplicate]).ranked[0].qualificationBonus,10);
@@ -322,16 +323,15 @@ test('bonus uses region multiplier only and remains below minimum regional paid 
     assert.ok(scoreRow.qualificationBonus<20*factor);
   }
 });
-test('no qualification points for participation, rank-only cutoff guesses, partial/reported or unsupported test cups',()=>{
+test('no qualification reward for outside cutoff, review-only, unverified or unsupported test cups',()=>{
   const base=event({id:'qual-safe',kind:'予選',rank:1,prize:0,
     round:'Event 3 · Round 1 / 予選突破',
     source:'https://www.fortnite.com/competitive/events/S42_ReloadSoloVictoryCup/?region=NAW&round=S42_ReloadSoloVictoryCup_Event3_Round1_NAW'});
   for(const attrs of [
-    {round:'Event 3 · Round 1 / 予選'},
-    {round:'Event 3 · Round 1 / 参加確認'},
+    {round:'Event 3 · Round 1 / 予選',rank:321},
+    {round:'Event 3 · Round 1 / 参加確認',rank:321},
     {qualification:'outside-cutoff'},
     {status:'通過圏外'},
-    {partial:true},
     {reported:true},
     {reviewOnly:true},
     {verified:false},
@@ -341,6 +341,7 @@ test('no qualification points for participation, rank-only cutoff guesses, parti
     const p=score([{...base,...attrs}]).ranked[0];
     if(p)approx(p.qualificationBonus,0);
   }
+  approx(score([{...base,partial:true}]).ranked[0].qualificationBonus,10); // breakthrough explicit despite missing stats
   const testCup=score([base],catalog({series:'test-cup',subtype:'solo-reload-test-cup'}));
   assert.equal(testCup.ranked.length,0); // a fake qualifier cannot convert a Test Cup into a paid round
 });
