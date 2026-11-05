@@ -22,7 +22,7 @@ function stageLabel(windowId){
 // an explicit non-empty title; raw codes never masquerade as a verified title.
 function classifyUntyped(title){
  const value=String(title).toLowerCase();
- const series=/victory(?: cash)? cup/.test(value)?'victory-cup':/cash cup/.test(value)?'cash-cup':/ranked cup/.test(value)?'unknown':/performance evaluation/.test(value)?'performance-evaluation':/icon cup/.test(value)?'icon-cup':/playstation/.test(value)?'playstation-cup':/test cup/.test(value)?'test-cup':'unknown';
+ const series=/victory(?: cash)? cup/.test(value)?'victory-cup':/cash cup/.test(value)?'cash-cup':/ranked cup/.test(value)?'ranked-cup':/performance evaluation/.test(value)?'performance-evaluation':/icon cup/.test(value)?'icon-cup':/playstation/.test(value)?'playstation-cup':/test cup/.test(value)?'test-cup':'unknown';
  const mode=/zero.build.*reload|reload.*zero.build|\bzb\b.*reload|reload.*\bzb\b/i.test(title)?'reload-zero-build':/zero.build|\bzb\b/i.test(title)?'zero-build':/reload/i.test(title)?'reload':/battle.royale/i.test(title)?'battle-royale':'unknown';
  return {series,mode};
 }
