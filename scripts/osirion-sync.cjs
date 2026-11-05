@@ -159,14 +159,23 @@ async function main(){
  const unmapped=historical?[]:discoverUnmapped(all,data.tournaments.catalog,config);
  const state=read(prefix+'-scan.json');
  if(state.version!==1||!state.windows||typeof state.windows!=='object')throw Error('checkpoint invalid');
- const active=windows.filter(w=>!state.windows[w.key]?.complete).slice(0,config.maxWindowsPerRun||2);
+ const active=windows.filter(w=>{
+  const item=state.windows[w.key];
+  return !item?.complete&&(!item?.retryAfter||Date.parse(item.retryAfter)<=Date.now());
+ }).slice(0,config.maxWindowsPerRun||2);
  const previewConfig={version:1,accounts,windows:active.map(w=>({eventId:w.eventId,windowId:w.windowId,dateJst:w.dateJst,region:w.region,seasonId:w.seasonId,tournamentId:w.tournamentId,kind:w.kind,round:w.round}))};
  let budget=Math.min(Math.max(config.maxPagesPerRun||30,1),50),scanned=0,invalidRows=0;
  for(const win of active){
   const checkpoint=state.windows[win.key]||{nextPage:0,complete:false,proposals:[],pages:0};
   while(budget>0&&!checkpoint.complete){
    const page=checkpoint.nextPage,l=await getLeaderboard(win,page);
-   if(page===0&&l.entries.length===0)break; // Empty success responses must not be treated as complete.
+   if(page===0&&l.entries.length===0){
+    checkpoint.emptyAttempts=(checkpoint.emptyAttempts||0)+1;
+    checkpoint.retryAfter=new Date(Date.now()+Math.min(checkpoint.emptyAttempts,7)*86400000).toISOString();
+    break; // Unavailable historic page: retry later, without blocking other windows.
+   }
+   checkpoint.emptyAttempts=0;
+   delete checkpoint.retryAfter;
    if(!l.entries.length&&page<l.totalPages-1)throw Error('順位表に未期待の空ページ: '+win.key+' page '+page);
    const cutoff=historical?advancementLimit(win):null;
    const pageRanks=l.entries.map(e=>e.rank);
@@ -193,7 +202,7 @@ async function main(){
  const unique=new Map(proposals.map(x=>[x.id,x]));
  const finished=Object.entries(state.windows).filter(([key,w])=>eligible.has(key)&&w.complete).length;
  const stamp=new Date().toISOString();
- const status={version:1,state:'checked',checkedAt:stamp,mode:'review',scope:historical?'history':'recent',fromDate:historical?config.fromDate:null,toDate:historical?config.toDate:null,provider:'osirion',linkedPlayers:accounts.length,trackedWindows:windows.length,found:unique.size,skipped:invalidRows,imported:0,scannedPages:scanned,completedWindows:finished,identityConflicts:conflicts.length,alreadyRegistered:recordedFromReview,unmappedEvents:unmapped.length,unmappedEventIds:unmapped.slice(0,12),message:'Osirionに接続済み。既存プロフィールのうちIDが一意な'+accounts.length+'名を追跡。'+scanned+'ページを検査、'+unique.size+'件が確認待ち。照合保留ID'+conflicts.length+'件は対象外。'+(unmapped.length?' カタログ未登録のVictory Cup系イベント'+unmapped.length+'種は確認待ち。':'')};
+ const status={version:1,state:'checked',checkedAt:stamp,mode:'review',scope:historical?'history':'recent',fromDate:historical?config.fromDate:null,toDate:historical?config.toDate:null,provider:'osirion',linkedPlayers:accounts.length,trackedWindows:windows.length,found:unique.size,skipped:invalidRows,imported:0,scannedPages:scanned,completedWindows:finished,identityConflicts:conflicts.length,alreadyRegistered:recordedFromReview,retryWindows:Object.entries(state.windows).filter(([key,w])=>eligible.has(key)&&!w.complete&&w.retryAfter).length,unmappedEvents:unmapped.length,unmappedEventIds:unmapped.slice(0,12),message:'Osirionに接続済み。既存プロフィールのうちIDが一意な'+accounts.length+'名を追跡。'+scanned+'ページを検査、'+unique.size+'件が確認待ち。照合保留ID'+conflicts.length+'件は対象外。'+(unmapped.length?' カタログ未登録のVictory Cup系イベント'+unmapped.length+'種は確認待ち。':'')};
  state.checkedAt=stamp;
  write(prefix+'-scan.json',state);
  write(prefix+'-review.json',{version:1,status:'review',checkedAt:stamp,proposals:[...unique.values()]});
