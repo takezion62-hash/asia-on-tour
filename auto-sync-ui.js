@@ -32,4 +32,52 @@
     finally{btn.disabled=false;}
   }
   btn.addEventListener('click',refresh);refresh();
+  const historyArea=document.getElementById('history-sync-status');
+  const historyCandidates=document.getElementById('history-sync-proposals');
+  const historyBtn=document.getElementById('history-sync-refresh');
+  async function refreshHistory(){
+    if(!historyArea||!historyCandidates||!historyBtn)return;
+    historyBtn.disabled=true;
+    historyArea.textContent='過去大会の調査状況を確認中…';
+    try{
+      const response=await fetch(new URL('history-sync-status.json',base),{cache:'no-store'});
+      if(!response.ok)throw Error('history status HTTP '+response.status);
+      const status=await response.json();
+      if(status.version!==1||status.scope!=='history')throw Error('unknown history status');
+      const checked=status.checkedAt?new Date(status.checkedAt).toLocaleString('ja-JP',{timeZone:'Asia/Tokyo'}):'未実行';
+      historyArea.replaceChildren(
+        field('対象期間',(status.fromDate||'—')+' ～ '+(status.toDate||'—')),
+        field('最終チェック',checked),
+        field('取得候補',fmt(status.found)+'件'),
+        field('調査したページ（今回）',fmt(status.scannedPages)+'ページ'),
+        field('調査対象ラウンド',fmt(status.trackedWindows)+'件'),
+        field('完了ラウンド',fmt(status.completedWindows)+'件')
+      );
+      const message=document.createElement('p');message.className='auto-sync-message';
+      message.textContent=status.message||'';historyArea.append(message);
+      const response2=await fetch(new URL('history-sync-review.json',base),{cache:'no-store'});
+      if(!response2.ok)throw Error('history review HTTP '+response2.status);
+      const review=await response2.json();
+      if(review.version!==1||!Array.isArray(review.proposals))throw Error('history review format');
+      if(!review.proposals.length){historyCandidates.textContent='現在、確認候補はありません';}
+      else{
+        const ul=document.createElement('ul');ul.className='auto-sync-proposals';
+        for(const item of review.proposals.slice(0,20)){
+          const li=document.createElement('li');
+          li.textContent=[item.date,item.region,item.player,item.event,item.round,'#'+fmt(item.rank),item.kind==='予選'?'通過未確認':item.prize==null?'賞金未確認':'賞金要確認'].join(' · ');
+          ul.append(li);
+        }
+        historyCandidates.replaceChildren(ul);
+        if(review.proposals.length>20){
+          const p=document.createElement('p');p.textContent='先頭20件のみ表示。残りはGitHubの確認候補データを参照してください。';
+          historyCandidates.append(p);
+        }
+      }
+    }catch{
+      historyArea.textContent='過去大会の調査状況を取得できません。';
+      historyCandidates.textContent='—';
+    }finally{historyBtn.disabled=false;}
+  }
+  if(historyBtn){historyBtn.addEventListener('click',refreshHistory);refreshHistory();}
+
 })();
