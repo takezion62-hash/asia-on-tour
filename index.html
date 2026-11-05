@@ -906,8 +906,8 @@
         </section>
       </section>
       <section class="section" id="page-players"><div class="page-label">DATABASE / 02</div><h1 class="big-title">ASIA PLAYERS</h1><p class="explainer" id="players-season-description">選択期間の掲載選手。</p><section class="aot-pr-section" id="aot-pr-section" aria-labelledby="aot-pr-title">
-  <header class="aot-pr-head"><div><p class="aot-pr-kicker">ASIA ON TOUR / AOT PR v1.7</p><h2 id="aot-pr-title">海外遠征 POWER RANKING</h2></div></header>
-  <p class="aot-pr-note">海外大会への挑戦・順位・キル・確認済み賞金獲得を全登録大会から積算した、サイト独自のポイントです。公式の実力順位ではありません。</p>
+  <header class="aot-pr-head"><div><p class="aot-pr-kicker">ASIA ON TOUR / AOT PR v1.8</p><h2 id="aot-pr-title">海外遠征 POWER RANKING</h2></div></header>
+  <p class="aot-pr-note">海外大会への挑戦・順位・キル・明記された予選突破・確認済み賞金獲得を掲載戦績から積算した、サイト独自のポイントです。公式の実力順位ではありません。</p>
   <div class="aot-pr-regions" role="group" aria-label="AOT PR開催地域">
     <button type="button" data-aot-pr-region="all" aria-pressed="true">ALL</button>
     <button type="button" data-aot-pr-region="ME" aria-pressed="false">ME</button>
@@ -919,7 +919,7 @@
   </div>
   <p class="aot-pr-status" id="aot-pr-status" aria-live="polite"></p>
   <ol class="aot-pr-list" id="aot-pr-leaders"></ol>
-  <p class="aot-pr-method">計算：参加10pt＋順位100/√順位＋形式別キル加点（上限25pt）、さらに確認済み賞金獲得ボーナス。通常ポイントは大会・ラウンド・地域倍率、賞金ボーナスは地域倍率のみ適用。予選・決勝は成果を別々に評価し参加ptだけ重複排除。データ未掲載の大会は得点に含みません。評価対象は出典確認済みの記録のみです。</p>
+  <p class="aot-pr-method">計算：参加10pt＋順位100/√順位＋形式別キル加点（上限25pt）＋予選突破ボーナス（確認済み1開催枠につき10pt）＋確認済み賞金獲得ボーナス。通常ポイントは大会・ラウンド・地域倍率、予選突破・賞金ボーナスは地域倍率のみ適用。予選・決勝を別々に評価し、参加pt・突破ボーナスは同じ開催枠で重複させません。『予選突破／予選通過』と明記された戦績だけが突破加点の対象です。出場確認だけのアーカイブ、通過圏外、未掲載の大会は加点しません。</p>
 </section><section class="earnings-feature performance-ranking" aria-labelledby="ranking-title">
   <div class="earnings-head"><div><h2 id="ranking-title">地域別・実績別ランキング</h2><p id="ranking-season-description"></p></div><div class="earnings-total"><small>条件内の確認済み個人賞金</small><span id="player-earnings-sum">$0</span></div></div>
   <div class="ranking-regions" role="group" aria-label="開催地域"><button type="button" id="ranking-region-all" data-ranking-region="all" aria-pressed="true" aria-controls="player-earnings-leaders">ALL</button><button type="button" id="ranking-region-ME" data-ranking-region="ME" data-region="ME" aria-pressed="false" aria-controls="player-earnings-leaders">ME</button><button type="button" id="ranking-region-EU" data-ranking-region="EU" data-region="EU" aria-pressed="false" aria-controls="player-earnings-leaders">EU</button><button type="button" id="ranking-region-NAC" data-ranking-region="NAC" data-region="NAC" aria-pressed="false" aria-controls="player-earnings-leaders">NAC</button><button type="button" id="ranking-region-NAW" data-ranking-region="NAW" data-region="NAW" aria-pressed="false" aria-controls="player-earnings-leaders">NAW</button><button type="button" id="ranking-region-OCE" data-ranking-region="OCE" data-region="OCE" aria-pressed="false" aria-controls="player-earnings-leaders">OCE</button><button type="button" id="ranking-region-BR" data-ranking-region="BR" data-region="BR" aria-pressed="false" aria-controls="player-earnings-leaders">BR</button></div>
@@ -1007,12 +1007,12 @@
   </div>
 
   <script src="./rankings.js" defer></script>
-  <script src="./aot-pr.js" defer></script>
+  <script src="./aot-pr.js?v=1.8.0" defer></script>
   <script src="./achievements.js?v=7" defer></script>
   <script src="./growth.js?v=1" defer></script>
   <script src="./compare.js?v=1" defer></script>
   <script src="./participation-ui.js?v=1" defer></script>
-  <script src="./app.js?v=historical-calendar-20261105-v3" defer></script>
+  <script src="./app.js?v=qualifying-bonus-20261105-v1" defer></script>
   <script src="./auto-sync-ui.js?v=3" defer></script>
 </body>
 </html>
