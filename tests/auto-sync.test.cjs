@@ -8,3 +8,16 @@ test('verified Epic ID only and zero cash for qualifier',()=>{const{data,config}
 test('idempotent and preserves old data',()=>{const{data,config}=setup();const feed={entries:[entry(a)]};const a1=prepare(feed,config,data);assert.equal(applyProposals(data,a1.proposals,'2026-11-15T22:00:00Z'),1);assert.equal(prepare(feed,config,data).proposals.length,0);assert.equal(data.updates.entries[0].recordIds[0],data.results[0].id)});
 test('unknown final cash is null, not guessed',()=>{const{data,config}=setup();config.windows[0].kind='賞金決勝';assert.equal(prepare({entries:[entry(a)]},config,data).proposals[0].prize,null)});
 test('unverified account and team size rejected',()=>{const{data,config}=setup();assert.throws(()=>prepare({entries:[]},{...config,accounts:[{player:'A',epicAccountId:a,confirmed:false}]},data));assert.equal(prepare({entries:[entry(a,{teamAccountIds:[a,b]})]},config,data).proposals.length,0)});
+
+test('qualifier label changes do not reimport the same player',()=>{
+ const {data,config}=setup();
+ data.results.push({id:'old',date:'2026-11-15',region:'NAW',tournamentId:'cup',round:'Event 1 · Round 1 / 予選突破',player:'A',rank:35});
+ assert.equal(prepare({entries:[entry(a)]},config,data).proposals.length,0);
+});
+test('same duo with reversed roster does not create another record',()=>{
+ const {data,config}=setup();
+ config.windows[0].round='Event 1 · Round 1 / 予選';
+ data.tournaments.catalog[0].team='duo';
+ data.results.push({id:'duo-old',date:'2026-11-15',region:'NAW',tournamentId:'cup',round:'Event 1 · Round 1 / 予選突破',player:'B / A',players:['B','A'],rank:35});
+ assert.equal(prepare({entries:[entry(a,{teamAccountIds:[a,b]})]},config,data).proposals.length,0);
+});
