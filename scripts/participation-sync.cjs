@@ -19,11 +19,13 @@ function chooseWindows(windows,state,config,now=Date.now()){
  const fresh=available.filter(w=>now-w.end<14*86400000).sort((a,b)=>b.end-a.end);
  const progressing=available.filter(w=>state.windows[w.key]?.nextPage>0).sort((a,b)=>
    String(state.windows[a.key]?.lastScanned||'').localeCompare(String(state.windows[b.key]?.lastScanned||''))||a.end-b.end);
+ const qualifiers=available.filter(w=>w.series==='victory-cup'&&w.kind==='予選').sort((a,b)=>b.end-a.end);
  const older=available.filter(w=>!state.windows[w.key]?.nextPage).sort((a,b)=>a.end-b.end);
  const limit=Math.max(1,config.maxWindowsPerRun||5),chosen=[],seen=new Set();
  const add=(pool,max)=>{for(const w of pool){if(chosen.length>=limit||max<=0)break;if(seen.has(w.key))continue;chosen.push(w);seen.add(w.key);max--}};
- add(fresh,Math.max(1,Math.floor(limit/3)));
- add(progressing,Math.max(1,Math.floor(limit/3)));
+ add(fresh,Math.max(1,Math.floor(limit/4)));
+ add(progressing,Math.max(1,Math.floor(limit/4)));
+ add(qualifiers,Math.max(1,Math.floor(limit/4)));
  add(older,limit-chosen.length);
  add(available.sort((a,b)=>b.end-a.end),limit-chosen.length);
  return chosen;
@@ -46,6 +48,7 @@ async function main(){
  const items=[];
  for(const win of selected){
   const checkpoint=state.windows[win.key]||{nextPage:0,pages:0,complete:false,coverageLimited:false};
+  if(checkpoint.coverageLimited&&checkpoint.nextPage<(config.maxPagesPerWindowTotal||40)){checkpoint.complete=false;checkpoint.coverageLimited=false}
   if(checkpoint.nextPage>=(config.maxPagesPerWindowTotal||40))continue;
   const preview={version:1,accounts,windows:[{
    eventId:win.eventId,windowId:win.windowId,dateJst:win.dateJst,region:win.region,
