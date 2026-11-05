@@ -11,7 +11,7 @@
   const REGIONS = Object.freeze({ EU: 1.4, BR: 1.3, NAC: 1.2, ME: 1.1, OCE: 1.1, NAW: 1.0 });
   const STAGES = Object.freeze({ '予選': 0.35, '賞金決勝': 1, '決勝': 1, 'Practice決勝': 1,
     'Performance決勝': 1, 'スキン大会': 1, 'コスメ大会': 1, 'Test Cup': 1, '参加確認': 0.35 });
-  const TEAM_SIZES = Object.freeze({ solo: 1, duo: 2, trio: 3 });
+  const TEAM_SIZES = Object.freeze({ solo: 1, duo: 2, trio: 3, squad: 4 });
   const SKIN_KINDS = new Set(['スキン大会', 'コスメ大会']);
   const SKIN_SERIES = new Set(['skin-cup', 'override-series']); // legacy Override data also skin-rated
   const OTHER_COSMETIC_SERIES = new Set(['icon-cup']);
