@@ -43,9 +43,13 @@ function linkedAccounts(data){
  return {accounts,conflicts};
 }
 function parseStage(windowId){
- const match=windowId.match(/Event(\d+)_?Round([12])_(ME|EU|NAC|NAW|OCE|BR)$/);
- if(!match)return null;
- return {round:'Event '+Number(match[1])+' · Round '+Number(match[2])+' / '+(match[2]==='1'?'予選':'賞金決勝'),kind:match[2]==='1'?'予選':'賞金決勝'};
+ if(typeof windowId!=='string')return null;
+ const event=windowId.match(/Event(\d+)_?Round([12])_(ME|EU|NAC|NAW|OCE|BR)$/);
+ const day=windowId.match(/_Round([12])_Day(\d+)_(ME|EU|NAC|NAW|OCE|BR)$/);
+ if(!event&&!day)return null;
+ const stage=Number(event?event[2]:day[1]);
+ const label=event?'Event '+Number(event[1]):'Day '+Number(day[2]);
+ return {round:label+' · Round '+stage+' / '+(stage===1?'予選':'賞金決勝'),kind:stage===1?'予選':'賞金決勝'};
 }
 function discover(all,catalog,opts,time=Date.now()){
  const selected=new Map(),recentDays=Number.isInteger(opts.lookbackDays)?opts.lookbackDays:7,delay=(opts.minLagMinutes||240)*60000;
@@ -54,15 +58,20 @@ function discover(all,catalog,opts,time=Date.now()){
   const match=full.match(/^epicgames_(S\d+_.+)_([A-Z]{2,4})$/);
   if(!match||!regions.includes(match[2]))continue;
   const [_,base,region]=match;
+  if(Array.isArray(opts.regions)&&!opts.regions.includes(region))continue;
   const t=catalog.find(x=>x.series==='victory-cup'&&x.seasonId===base.split('_')[0]&&x.sourceEventIds?.includes(base));
   if(!t||!['solo','duo','trio','squad'].includes(t.team))continue;
   for(const window of tournament.eventWindows||[]){
    const windowId=window.eventWindowId,stage=typeof windowId==='string'?parseStage(windowId):null;
    const end=Date.parse(window.endTime),begin=Date.parse(window.beginTime);
    if(!stage||!windowId.endsWith('_'+region)||!Number.isFinite(end)||!Number.isFinite(begin))continue;
-   if(end>time-delay||end<time-recentDays*86400000)continue;
+   const dateJst=nowJst(window.beginTime);
+   if(end>time-delay)continue;
+   if(opts.fromDate&&opts.toDate){
+    if(dateJst<opts.fromDate||dateJst>opts.toDate)continue;
+   }else if(end<time-recentDays*86400000)continue;
    const key=full+'/'+windowId;
-   selected.set(key,{key,fullEventId:full,eventId:base,windowId,region,dateJst:nowJst(window.beginTime),seasonId:t.seasonId,tournamentId:t.id,round:stage.round,kind:stage.kind,end});
+   selected.set(key,{key,fullEventId:full,eventId:base,windowId,region,dateJst,seasonId:t.seasonId,tournamentId:t.id,round:stage.round,kind:stage.kind,end});
   }
  }
  return [...selected.values()].sort((a,b)=>a.end-b.end);
@@ -104,10 +113,10 @@ async function fetchJson(url){
  if(body?.success===false)throw Error('Osirion API error');
  return body;
 }
-async function getTournaments(){
+async function getTournaments(historical=false){
  const all=new Map();
  for(const region of regions){
-  const response=await fetchJson('https://fnapi.osirion.gg/v1/tournaments?'+new URLSearchParams({region,includeHistoricData:'false'}));
+  const response=await fetchJson('https://fnapi.osirion.gg/v1/tournaments?'+new URLSearchParams({region,includeHistoricData:historical?'true':'false'}));
   if(!Array.isArray(response.tournaments))throw Error('大会一覧の形式が変わりました');
   for(const item of response.tournaments)if(typeof item.eventId==='string')all.set(item.eventId,item);
  }
@@ -121,16 +130,22 @@ async function getLeaderboard(win,page){
  return l;
 }
 async function main(){
- const config=read('auto-sync-config.json');
+ const historical=process.argv.includes('--history');
+ const prefix=historical?'history-sync':'auto-sync';
+ const config=read(prefix+'-config.json');
+ if(historical){
+  const validDate=x=>typeof x==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(x)&&!Number.isNaN(Date.parse(x))&&new Date(x).toISOString().slice(0,10)===x;
+  if(!validDate(config.fromDate)||!validDate(config.toDate)||config.fromDate>config.toDate||!Array.isArray(config.regions)||!config.regions.length||config.regions.some(x=>!regions.includes(x)))throw Error('過去大会の期間または地域設定が不正');
+ }
  if(!config.enabled||config.provider!=='osirion'){console.log('OSIRION_SYNC_DISABLED');return}
  if(config.mode!=='review')throw Error('Osirionの自動公開は安全性検証が完了するまで無効です');
  const data={results:read('results.json'),players:read('players.json'),tournaments:read('tournaments.json'),updates:read('updates.json')};
  const {accounts,conflicts}=linkedAccounts(data);
  if(!accounts.length)throw Error('追跡対象のIDがありません');
- const all=await getTournaments();
+ const all=await getTournaments(historical);
  const windows=discover(all,data.tournaments.catalog,config);
- const unmapped=discoverUnmapped(all,data.tournaments.catalog,config);
- const state=read('auto-sync-scan.json');
+ const unmapped=historical?[]:discoverUnmapped(all,data.tournaments.catalog,config);
+ const state=read(prefix+'-scan.json');
  if(state.version!==1||!state.windows||typeof state.windows!=='object')throw Error('checkpoint invalid');
  const active=windows.filter(w=>!state.windows[w.key]?.complete).slice(0,config.maxWindowsPerRun||2);
  const previewConfig={version:1,accounts,windows:active.map(w=>({eventId:w.eventId,windowId:w.windowId,dateJst:w.dateJst,region:w.region,seasonId:w.seasonId,tournamentId:w.tournamentId,kind:w.kind,round:w.round}))};
@@ -153,16 +168,17 @@ async function main(){
   state.windows[win.key]=checkpoint;
   if(budget<=0)break;
  }
- const proposals=Object.values(state.windows).flatMap(w=>w.proposals||[]);
+ const eligible=new Set(windows.map(w=>w.key));
+ const proposals=Object.entries(state.windows).filter(([key])=>eligible.has(key)).flatMap(([,w])=>w.proposals||[]);
  const unique=new Map(proposals.map(x=>[x.id,x]));
- const finished=Object.values(state.windows).filter(w=>w.complete).length;
+ const finished=Object.entries(state.windows).filter(([key,w])=>eligible.has(key)&&w.complete).length;
  const stamp=new Date().toISOString();
- const status={version:1,state:'checked',checkedAt:stamp,mode:'review',provider:'osirion',linkedPlayers:accounts.length,trackedWindows:windows.length,found:unique.size,skipped:invalidRows,imported:0,scannedPages:scanned,completedWindows:finished,identityConflicts:conflicts.length,unmappedEvents:unmapped.length,unmappedEventIds:unmapped.slice(0,12),message:'Osirionに接続済み。既存プロフィールのうちIDが一意な'+accounts.length+'名を追跡。'+scanned+'ページを検査、'+unique.size+'件が確認待ち。照合保留ID'+conflicts.length+'件は対象外。'+(unmapped.length?' カタログ未登録のVictory Cup系イベント'+unmapped.length+'種は確認待ち。':'')};
+ const status={version:1,state:'checked',checkedAt:stamp,mode:'review',scope:historical?'history':'recent',fromDate:historical?config.fromDate:null,toDate:historical?config.toDate:null,provider:'osirion',linkedPlayers:accounts.length,trackedWindows:windows.length,found:unique.size,skipped:invalidRows,imported:0,scannedPages:scanned,completedWindows:finished,identityConflicts:conflicts.length,unmappedEvents:unmapped.length,unmappedEventIds:unmapped.slice(0,12),message:'Osirionに接続済み。既存プロフィールのうちIDが一意な'+accounts.length+'名を追跡。'+scanned+'ページを検査、'+unique.size+'件が確認待ち。照合保留ID'+conflicts.length+'件は対象外。'+(unmapped.length?' カタログ未登録のVictory Cup系イベント'+unmapped.length+'種は確認待ち。':'')};
  state.checkedAt=stamp;
- write('auto-sync-scan.json',state);
- write('auto-sync-review.json',{version:1,status:'review',checkedAt:stamp,proposals:[...unique.values()]});
- write('auto-sync-status.json',status);
- console.log('OSIRION_REVIEW '+JSON.stringify({scannedPages:scanned,linkedPlayers:accounts.length,identityConflicts:conflicts.length,windows:windows.length,unmappedEvents:unmapped.length,proposals:unique.size,finished}));
+ write(prefix+'-scan.json',state);
+ write(prefix+'-review.json',{version:1,status:'review',checkedAt:stamp,proposals:[...unique.values()]});
+ write(prefix+'-status.json',status);
+ console.log((historical?'OSIRION_HISTORY_REVIEW ':'OSIRION_REVIEW ')+JSON.stringify({scannedPages:scanned,linkedPlayers:accounts.length,identityConflicts:conflicts.length,windows:windows.length,unmappedEvents:unmapped.length,proposals:unique.size,finished}));
 }
 if(require.main===module)main().catch(e=>{console.error('OSIRION_SYNC_ERROR '+e.stack);process.exitCode=1});
-module.exports={identity,linkedAccounts,parseStage,discover,discoverUnmapped,normalizeRow,main};
+module.exports={identity,linkedAccounts,parseStage,discover,discoverUnmapped,normalizeRow,getTournaments,main};
