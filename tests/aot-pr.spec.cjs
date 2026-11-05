@@ -193,11 +193,11 @@ test('全戦績が加点保留でも空状態と直接プロフィールの未�
 
 test('予選突破を明記した選手だけ10ptを賞金とは別枠で付与し、プロフィールにも表示する',async({page})=>{
   const qualifier=record('qualifier-awarded',{player:'Qualification Player',kind:'予選',
-    round:'Event 5 · Round 1 / 予選突破',rank:700,kills:3,vrs:0,prize:0,
+    round:'Event 5 · Round 1 / 予選突破',rank:319,kills:3,vrs:0,prize:0,
     source:'https://fortnitetracker.com/events/epicgames_S42_ReloadSoloVictoryCup_NAW?window=S42_ReloadSoloVictoryCup_Event5_Round1_NAW'});
   const final=record('qualifier-final',{player:'Qualification Player',kind:'賞金決勝',prize:0,vrs:0});
   const rankOnly=record('rank-no-advance',{player:'Just Participated',kind:'予選',round:'Event 5 · Round 1 / 予選',
-    rank:1,prize:0,source:'https://fortnitetracker.com/events/epicgames_S42_ReloadSoloVictoryCup_NAW?window=S42_ReloadSoloVictoryCup_Event5_Round1_NAW'});
+    rank:321,prize:0,source:'https://fortnitetracker.com/events/epicgames_S42_ReloadSoloVictoryCup_NAW?window=S42_ReloadSoloVictoryCup_Event5_Round1_NAW'});
   await fixture(page,[qualifier,final,rankOnly]);
   await open(page);
   const awarded=playerRow(page,'Qualification Player');
@@ -210,4 +210,20 @@ test('予選突破を明記した選手だけ10ptを賞金とは別枠で付与�
   await page.locator('.aot-pr-breakdown summary').click();
   await expect(page.locator('.aot-pr-breakdown')).toContainText('予選突破ボーナス 10.0');
   await expect(page.locator('.aot-pr-overview')).toContainText('賞金ボーナス');
+});
+
+
+test('official victory cup Round 1 advancement receives a bonus without a special round label',async({page})=>{
+ const source='https://fortnitetracker.com/events/epicgames_S42_ReloadSoloVictoryCup_NAW?window=S42_ReloadSoloVictoryCup_Event4_Round1_NAW';
+ const passed=record('rule-320',{player:'Rule-Confirmed Player',kind:'予選',round:'Event 4 · Round 1 / 予選',
+   rank:320,kills:8,prize:0,source});
+ const notPassed=record('rule-321',{player:'Not-Advanced Player',kind:'予選',round:'Event 4 · Round 1 / 予選',
+   rank:321,kills:15,prize:0,source});
+ await fixture(page,[passed,notPassed]);
+ await open(page);
+ await expect(playerRow(page,'Rule-Confirmed Player')).toContainText('予選突破 10.0');
+ await expect(playerRow(page,'Not-Advanced Player')).toContainText('予選突破 0.0');
+ await playerRow(page,'Rule-Confirmed Player').getByRole('link').click();
+ await page.locator('.aot-pr-breakdown summary').click();
+ await expect(page.locator('.aot-pr-breakdown')).toContainText('公式通過枠');
 });
