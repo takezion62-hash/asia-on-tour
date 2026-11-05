@@ -1,0 +1,49 @@
+name: AOT historical tournament calendar discovery
+on:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/historical-calendar.cjs"
+      - "tests/historical-calendar.test.cjs"
+      - "tournaments.json"
+      - ".github/workflows/calendar-history.yml"
+  schedule:
+    - cron: '29 2 * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: aot-calendar-history-main
+  cancel-in-progress: false
+jobs:
+  historical-calendar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Validate historical date extraction rules
+        run: node --test tests/historical-calendar.test.cjs
+      - name: Import available historical schedule windows only
+        run: node scripts/historical-calendar.cjs
+      - name: Validate existing archive has not changed
+        run: npm run validate
+      - name: Commit verified calendar dates without modifying player results
+        run: |
+          if [ -z "$(git status --porcelain -- calendar-history.json calendar-history-status.json)" ]; then
+            echo "No calendar changes"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add calendar-history.json calendar-history-status.json
+          git commit -m "data: archive verified historical tournament sessions"
+          git pull --rebase origin main
+          git push origin HEAD:main
