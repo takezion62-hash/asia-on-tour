@@ -6,6 +6,7 @@ test('Auto sync panel has a working UI and asset references',()=>{
  for(const id of ['auto-sync-heading','auto-sync-status','auto-sync-refresh','auto-sync-proposals'])assert.ok(html.includes('id="'+id+'"'));
  assert.ok(html.includes('auto-sync-ui.js')&&html.includes('auto-sync-ui.css'));
  assert.ok(js.includes("addEventListener('click',refresh)")&&css.includes('auto-sync-control'));
+ assert.doesNotThrow(()=>new Function(js),'auto-sync UI must remain valid browser JavaScript');
 });
 test('Live AUTO SYNC remains in review-only mode and the browser cannot publish results',()=>{
  const cfg=JSON.parse(read('auto-sync-config.json'));
