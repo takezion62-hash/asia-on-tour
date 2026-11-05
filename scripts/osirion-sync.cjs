@@ -178,6 +178,10 @@ async function getTournaments(historical=false){
  }
  return [...all.values()];
 }
+function transientLeaderboardFailure(error){
+ const msg=String(error?.message||error);
+ return /TimeoutError|time.?out|aborted|ECONNRESET|fetch failed|HTTP (?:429|50[0-9]|52[0-9])/i.test(msg);
+}
 async function getLeaderboard(win,page){
  const params=new URLSearchParams({leaderboardEventId:win.fullEventId,leaderboardEventWindowId:win.windowId,page:String(page)});
  const result=await fetchJson('https://fnapi.osirion.gg/v1/tournaments/leaderboard?'+params);
@@ -265,7 +269,7 @@ async function main(){
  if(state.version!==1||!state.windows||typeof state.windows!=='object')throw Error('checkpoint invalid');
  const active=historical?selectHistoricalWindows(windows,state,config,Date.now(),data.results):selectActiveWindows(windows,state,config);
  const previewConfig={version:1,accounts,windows:active.map(w=>({eventId:w.eventId,windowId:w.windowId,dateJst:w.dateJst,region:w.region,seasonId:w.seasonId,tournamentId:w.tournamentId,kind:w.kind,round:w.round}))};
- let budget=Math.min(Math.max(config.maxPagesPerRun||30,1),50),scanned=0,invalidRows=0;
+ let budget=Math.min(Math.max(config.maxPagesPerRun||30,1),50),scanned=0,invalidRows=0,transientFailures=0;
  for(let windowIndex=0;windowIndex<active.length;windowIndex++){
   const win=active[windowIndex];
   const checkpoint=state.windows[win.key]||{nextPage:0,complete:false,proposals:[],pages:0};
@@ -275,7 +279,16 @@ async function main(){
   const reserved=historical?Math.max(0,active.length-windowIndex-1)*2:0;
   const perWindowLimit=historical?Math.max(0,Math.min(limit,budget-reserved)):limit;
   while(budget>0&&pagesThisWindow<perWindowLimit&&!checkpoint.complete){
-   const page=checkpoint.nextPage,l=await getLeaderboard(win,page);
+   const page=checkpoint.nextPage;
+   let l;
+   try{l=await getLeaderboard(win,page)}
+   catch(error){
+    if(!transientLeaderboardFailure(error))throw error;
+    checkpoint.retryAfter=new Date(Date.now()+6*3600000).toISOString();
+    checkpoint.lastError=String(error.message||error).slice(0,180);
+    transientFailures++;
+    break;
+   }
    if(page===0&&l.entries.length===0){
     checkpoint.emptyAttempts=(checkpoint.emptyAttempts||0)+1;
     checkpoint.retryAfter=new Date(Date.now()+Math.min(checkpoint.emptyAttempts,7)*86400000).toISOString();
@@ -336,7 +349,7 @@ async function main(){
  const reviewOnlyWindows=windows.filter(w=>w.series!=='victory-cup').length;
  const reviewOnlyCandidates=unique.size?Array.from(unique.values()).filter(p=>p.reviewOnly===true).length:0;
  const cumulativeApprovals=data.updates.entries.filter(x=>x.title?.startsWith('公式規則で自動承認：')).reduce((sum,x)=>sum+(x.recordIds?.length||0),0);
- const status={version:1,state:'checked',checkedAt:stamp,mode:'review',scope:historical?'history':'recent',fromDate:historical?config.fromDate:null,toDate:historical?config.toDate:null,provider:'osirion',linkedPlayers:accounts.length,trackedWindows:windows.length,found:unique.size,skipped:invalidRows,imported,scannedPages:scanned,completedWindows:finished,identityConflicts:conflicts.length,alreadyRegistered:recordedFromReview,autoApprovedTotal:cumulativeApprovals,invalidCachedCandidates:invalidCached,manualReviewCandidates:manuallyHeld,retryWindows:Object.entries(state.windows).filter(([key,w])=>eligible.has(key)&&!w.complete&&w.retryAfter).length,reviewOnlyWindows,reviewOnlyCandidates,unmappedEvents:unmapped.length,unmappedEventIds:unmapped.slice(0,12),message:'Osirionで'+accounts.length+'アカウントIDを追跡。今回の公式規則による自動承認'+imported+'件、追加確認待ち'+unique.size+'件、名義照合保留'+conflicts.length+'件。'};
+ const status={version:1,state:'checked',checkedAt:stamp,mode:'review',scope:historical?'history':'recent',fromDate:historical?config.fromDate:null,toDate:historical?config.toDate:null,provider:'osirion',linkedPlayers:accounts.length,trackedWindows:windows.length,found:unique.size,skipped:invalidRows,imported,scannedPages:scanned,completedWindows:finished,identityConflicts:conflicts.length,alreadyRegistered:recordedFromReview,autoApprovedTotal:cumulativeApprovals,invalidCachedCandidates:invalidCached,manualReviewCandidates:manuallyHeld,retryWindows:Object.entries(state.windows).filter(([key,w])=>eligible.has(key)&&!w.complete&&w.retryAfter).length,transientFailures,reviewOnlyWindows,reviewOnlyCandidates,unmappedEvents:unmapped.length,unmappedEventIds:unmapped.slice(0,12),message:'Osirionで'+accounts.length+'アカウントIDを追跡。今回の公式規則による自動承認'+imported+'件、追加確認待ち'+unique.size+'件、名義照合保留'+conflicts.length+'件。'};
  state.checkedAt=stamp;
  write(prefix+'-scan.json',state);
  write(prefix+'-review.json',{version:1,status:'review',checkedAt:stamp,proposals:[...unique.values()]});
@@ -344,4 +357,4 @@ async function main(){
  console.log((historical?'OSIRION_HISTORY_REVIEW ':'OSIRION_REVIEW ')+JSON.stringify({scannedPages:scanned,linkedPlayers:accounts.length,identityConflicts:conflicts.length,windows:windows.length,unmappedEvents:unmapped.length,proposals:unique.size,imported,finished}));
 }
 if(require.main===module)main().catch(e=>{console.error('OSIRION_SYNC_ERROR '+e.stack);process.exitCode=1});
-module.exports={identity,linkedAccounts,parseStage,parseReviewStage,discover,discoverUnmapped,selectActiveWindows,selectHistoricalWindows,historicalEvidenceScore,advancementLimit,normalizeRow,getTournaments,getLeaderboard,main};
+module.exports={identity,linkedAccounts,parseStage,parseReviewStage,discover,discoverUnmapped,selectActiveWindows,selectHistoricalWindows,historicalEvidenceScore,advancementLimit,normalizeRow,getTournaments,getLeaderboard,transientLeaderboardFailure,main};
