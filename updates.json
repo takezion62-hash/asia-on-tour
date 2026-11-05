@@ -2,6 +2,16 @@
   "version": 1,
   "entries": [
     {
+      "id": "auto-sync-20261105105324",
+      "date": "2026-11-05",
+      "type": "records",
+      "title": "公式規則で自動承認：過去大会1戦績",
+      "description": "Epic公式規則とOsirion順位表、確認済み選手ID・既存戦績を照合。予選突破と決勝0VR（賞金$0）のみ自動承認。既存登録を保持。",
+      "recordIds": [
+        "auto-s41-cd75ee735bbe"
+      ]
+    },
+    {
       "id": "auto-sync-20261105102704",
       "date": "2026-11-05",
       "type": "records",

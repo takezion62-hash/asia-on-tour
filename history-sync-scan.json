@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-11-05T10:49:08.156Z",
+  "checkedAt": "2026-11-05T10:53:24.361Z",
   "windows": {
     "epicgames_S42_SoloVictoryCup_NAW/S42_SoloVictoryCup_Event3Round1_NAW": {
       "nextPage": 8,
@@ -3480,10 +3480,10 @@
       "totalPages": 3
     },
     "epicgames_S41_ReloadReloadSoloVictoryCup_EU/S41_ReloadSoloVictoryCup_Round1_Day2_EU": {
-      "nextPage": 16,
-      "complete": false,
+      "nextPage": 17,
+      "complete": true,
       "proposals": [],
-      "pages": 16,
+      "pages": 17,
       "emptyAttempts": 0,
       "totalPages": 100
     },
@@ -3504,7 +3504,7 @@
       "totalPages": 100
     },
     "epicgames_S41_FNCSCommunityCup_ME/S41_FNCSCommunityCup_ME": {
-      "nextPage": 4,
+      "nextPage": 12,
       "complete": false,
       "proposals": [
         {
@@ -3738,15 +3738,131 @@
             "そろぷれいやーわんす",
             "slce めろみやでǃǃ"
           ]
+        },
+        {
+          "id": "auto-s41-14f30f7da510",
+          "date": "2026-08-01",
+          "region": "ME",
+          "player": "む る こ ぎǃlalala / TikTok とあるプロのサブ垢",
+          "playerRaw": "む る こ ぎǃlalala / TikTok とあるプロのサブ垢",
+          "event": "Champion Aphrodite FNCS Cup Battle Royale",
+          "round": "単一開催枠 / 参加確認",
+          "rank": 436,
+          "points": 294,
+          "kills": 7,
+          "vrs": 0,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 8,
+          "seasonId": "S41",
+          "chapter": 7,
+          "season": 3,
+          "tournamentId": "ch7s3-champion-aphrodite-fncs-cup-battle-royale",
+          "source": "https://www.fortnite.com/competitive/events/S41_FNCSCommunityCup/?region=ME&round=S41_FNCSCommunityCup_ME",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "む る こ ぎǃlalala",
+            "TikTok とあるプロのサブ垢"
+          ]
+        },
+        {
+          "id": "auto-s41-3984a888b93e",
+          "date": "2026-08-01",
+          "region": "ME",
+          "player": "セフィロス / 譲らないあいる",
+          "playerRaw": "EXV セフィロス / NŁT 譲らないあいる",
+          "event": "Champion Aphrodite FNCS Cup Battle Royale",
+          "round": "単一開催枠 / 参加確認",
+          "rank": 441,
+          "points": 293,
+          "kills": 43,
+          "vrs": 1,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 11,
+          "seasonId": "S41",
+          "chapter": 7,
+          "season": 3,
+          "tournamentId": "ch7s3-champion-aphrodite-fncs-cup-battle-royale",
+          "source": "https://www.fortnite.com/competitive/events/S41_FNCSCommunityCup/?region=ME&round=S41_FNCSCommunityCup_ME",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "セフィロス",
+            "譲らないあいる"
+          ]
+        },
+        {
+          "id": "auto-s41-028b17e61b57",
+          "date": "2026-08-01",
+          "region": "ME",
+          "player": "R1ze / rakirye",
+          "playerRaw": "Helix R1ze 777 / lynx rak1rye",
+          "event": "Champion Aphrodite FNCS Cup Battle Royale",
+          "round": "単一開催枠 / 参加確認",
+          "rank": 487,
+          "points": 289,
+          "kills": 47,
+          "vrs": 0,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 11,
+          "seasonId": "S41",
+          "chapter": 7,
+          "season": 3,
+          "tournamentId": "ch7s3-champion-aphrodite-fncs-cup-battle-royale",
+          "source": "https://www.fortnite.com/competitive/events/S41_FNCSCommunityCup/?region=ME&round=S41_FNCSCommunityCup_ME",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "R1ze",
+            "rakirye"
+          ]
+        },
+        {
+          "id": "auto-s41-c78565b09db6",
+          "date": "2026-08-01",
+          "region": "ME",
+          "player": "にしき / Crs くるただにょりーǃǃ",
+          "playerRaw": "invia 藤田 / Crs るた",
+          "event": "Champion Aphrodite FNCS Cup Battle Royale",
+          "round": "単一開催枠 / 参加確認",
+          "rank": 578,
+          "points": 278,
+          "kills": 24,
+          "vrs": 0,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 11,
+          "seasonId": "S41",
+          "chapter": 7,
+          "season": 3,
+          "tournamentId": "ch7s3-champion-aphrodite-fncs-cup-battle-royale",
+          "source": "https://www.fortnite.com/competitive/events/S41_FNCSCommunityCup/?region=ME&round=S41_FNCSCommunityCup_ME",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "にしき",
+            "Crs くるただにょりーǃǃ"
+          ]
         }
       ],
-      "pages": 4,
+      "pages": 12,
       "emptyAttempts": 0,
       "totalPages": 100
     },
     "epicgames_S41_ReloadReloadSoloVictoryCup_NAC/S41_ReloadSoloVictoryCup_Round1_Day2_NAC": {
-      "nextPage": 8,
-      "complete": false,
+      "nextPage": 9,
+      "complete": true,
       "proposals": [
         {
           "id": "auto-s41-cd75ee735bbe",
@@ -3772,9 +3888,33 @@
           "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。"
         }
       ],
-      "pages": 8,
+      "pages": 9,
       "emptyAttempts": 0,
       "totalPages": 100
+    },
+    "epicgames_S41_ReloadReloadSoloVictoryCup_BR/S41_ReloadSoloVictoryCup_Round2_Day2_BR": {
+      "nextPage": 4,
+      "complete": true,
+      "proposals": [],
+      "pages": 4,
+      "emptyAttempts": 0,
+      "totalPages": 4
+    },
+    "epicgames_S41_PSTypicalGamer_ME/S41_PSTypicalGamer_Final_ME": {
+      "nextPage": 1,
+      "complete": true,
+      "proposals": [],
+      "pages": 1,
+      "emptyAttempts": 0,
+      "totalPages": 1
+    },
+    "epicgames_S41_PSTypicalGamer_EU/S41_PSTypicalGamer_Final_EU": {
+      "nextPage": 1,
+      "complete": true,
+      "proposals": [],
+      "pages": 1,
+      "emptyAttempts": 0,
+      "totalPages": 1
     }
   }
 }
