@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-11-05T09:56:19.218Z",
+  "checkedAt": "2026-11-05T09:59:56.307Z",
   "source": "Osirion public beta / Epic tournament IDs",
   "count": 1100,
   "dates": [
@@ -39,6 +39,190 @@
     "S30_RankedCupPDDuos",
     "S30_RankedCupPDSolo",
     "S30_RankedCupPDSquads"
+  ],
+  "unmappedDetails": [
+    {
+      "id": "S29_FNCS_Major2_GrandFinals",
+      "fields": [
+        "eventId",
+        "eventGroup",
+        "regions",
+        "platforms",
+        "displayData",
+        "eventWindows",
+        "metadata"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "S29_FNCS_Major2_Qualifier2",
+      "fields": [
+        "eventId",
+        "eventGroup",
+        "regions",
+        "platforms",
+        "displayData",
+        "eventWindows",
+        "metadata"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "S29_FNCS_Major2_SemiFinalLowerBracket",
+      "fields": [
+        "eventId",
+        "eventGroup",
+        "regions",
+        "platforms",
+        "displayData",
+        "eventWindows",
+        "metadata"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "S29_FNCS_Major2_SemiFinalUpperBracket",
+      "fields": [
+        "eventId",
+        "eventGroup",
+        "regions",
+        "platforms",
+        "displayData",
+        "eventWindows",
+        "metadata"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "S30_ConsoleCashCups",
+      "fields": [
+        "eventId",
+        "eventGroup",
+        "regions",
+        "platforms",
+        "displayData",
+        "eventWindows",
+        "metadata"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "S30_d4vd_Cup",
+      "fields": [
+        "eventId",
+        "eventGroup",
+        "regions",
+        "platforms",
+        "displayData",
+        "eventWindows",
+        "metadata"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "S30_DuosCashCup",
+      "fields": [
+        "eventId",
+        "eventGroup",
+        "regions",
+        "platforms",
+        "displayData",
+        "eventWindows",
+        "metadata"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "S30_DuosCashCupZB",
+      "fields": [
+        "eventId",
+        "eventGroup",
+        "regions",
+        "platforms",
+        "displayData",
+        "eventWindows",
+        "metadata"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "S30_FNCS_Major3_GrandFinals",
+      "fields": [
+        "eventId",
+        "eventGroup",
+        "regions",
+        "platforms",
+        "displayData",
+        "eventWindows",
+        "metadata"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "S30_FNCS_Major3_Qualifier1",
+      "fields": [
+        "eventId",
+        "eventGroup",
+        "regions",
+        "platforms",
+        "displayData",
+        "eventWindows",
+        "metadata"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "S30_FNCS_Major3_Qualifier2",
+      "fields": [
+        "eventId",
+        "eventGroup",
+        "regions",
+        "platforms",
+        "displayData",
+        "eventWindows",
+        "metadata"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "S30_FNCS_Major3_SemiFinalLowerBracket",
+      "fields": [
+        "eventId",
+        "eventGroup",
+        "regions",
+        "platforms",
+        "displayData",
+        "eventWindows",
+        "metadata"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "S30_FNCS_Major3_SemiFinalUpperBracket",
+      "fields": [
+        "eventId",
+        "eventGroup",
+        "regions",
+        "platforms",
+        "displayData",
+        "eventWindows",
+        "metadata"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "S30_MetallicaCup",
+      "fields": [
+        "eventId",
+        "eventGroup",
+        "regions",
+        "platforms",
+        "displayData",
+        "eventWindows",
+        "metadata"
+      ],
+      "metadata": {}
+    }
   ],
   "ignored": {
     "outside supported regions": 20,
