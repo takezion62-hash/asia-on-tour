@@ -1,7 +1,7 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-05T08:22:55.986Z",
+  "checkedAt": "2026-11-05T08:23:19.486Z",
   "mode": "review",
   "scope": "history",
   "fromDate": "2026-08-01",
@@ -9,11 +9,11 @@
   "provider": "osirion",
   "linkedPlayers": 422,
   "trackedWindows": 256,
-  "found": 20,
+  "found": 0,
   "skipped": 1,
-  "imported": 0,
-  "scannedPages": 10,
-  "completedWindows": 8,
+  "imported": 25,
+  "scannedPages": 12,
+  "completedWindows": 10,
   "identityConflicts": 8,
   "alreadyRegistered": 59,
   "invalidCachedCandidates": 1,
@@ -21,5 +21,5 @@
   "retryWindows": 0,
   "unmappedEvents": 0,
   "unmappedEventIds": [],
-  "message": "Osirionで422アカウントIDを追跡。今回の公式規則による自動承認0件、追加確認待ち20件、名義照合保留8件。"
+  "message": "Osirionで422アカウントIDを追跡。今回の公式規則による自動承認25件、追加確認待ち0件、名義照合保留8件。"
 }
