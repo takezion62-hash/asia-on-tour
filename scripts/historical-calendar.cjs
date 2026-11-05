@@ -84,9 +84,30 @@ async function main(){
  const all=await getTournaments(true);
  const output=buildHistory(all,catalog);
  if(!output.sessions.length)throw Error('No historical tournament windows found: preserving the prior archive');
- fs.writeFileSync(path.join(root,'calendar-history.json'),JSON.stringify(output)+'\n');
- fs.writeFileSync(path.join(root,'calendar-history-status.json'),JSON.stringify({version:1,checkedAt:output.checkedAt,source:output.source,count:output.sessions.length,dates:[output.sessions[0].dateJst,output.sessions.at(-1).dateJst],unmappedCount:output.unmappedCount,unmappedSample:output.unmappedSample,unmappedDetails:output.unmappedDetails,ignored:output.ignored},null,2)+'\n');
- console.log('HISTORICAL_CALENDAR '+JSON.stringify({events:output.sessions.length,months:new Set(output.sessions.map(x=>x.dateJst.slice(0,7))).size,unmapped:output.unmappedCount}));
+ const fullPath=path.join(root,'calendar-history.json');
+ let prior=null;
+ if(fs.existsSync(fullPath)){try{prior=JSON.parse(fs.readFileSync(fullPath,'utf8'))}catch{}}
+ const changed=JSON.stringify(prior?.sessions)!==JSON.stringify(output.sessions);
+ const byMonth=new Map();
+ for(const session of output.sessions){
+  const month=session.dateJst.slice(0,7);
+  if(!byMonth.has(month))byMonth.set(month,[]);
+  byMonth.get(month).push(session);
+ }
+ if(changed){
+  // Preserve the full archive as durable evidence; browsers load month-sized files.
+  fs.writeFileSync(fullPath,JSON.stringify(output)+'\n');
+  const archiveDir=path.join(root,'calendar-history');
+  fs.mkdirSync(archiveDir,{recursive:true});
+  for(const [month,sessions] of byMonth){
+   fs.writeFileSync(path.join(archiveDir,month+'.json'),JSON.stringify({version:1,month,sessions})+'\n');
+  }
+  const index={version:1,source:output.source,builtAt:output.checkedAt,fromDate:output.sessions[0].dateJst,toDate:output.sessions.at(-1).dateJst,
+   total:output.sessions.length,months:[...byMonth].map(([month,sessions])=>({month,count:sessions.length}))};
+  fs.writeFileSync(path.join(root,'calendar-history-index.json'),JSON.stringify(index)+'\n');
+ }
+ fs.writeFileSync(path.join(root,'calendar-history-status.json'),JSON.stringify({version:1,checkedAt:output.checkedAt,source:output.source,count:output.sessions.length,dates:[output.sessions[0].dateJst,output.sessions.at(-1).dateJst],months:byMonth.size,changed,unmappedCount:output.unmappedCount,unmappedSample:output.unmappedSample,unmappedDetails:output.unmappedDetails,ignored:output.ignored},null,2)+'\n');
+ console.log('HISTORICAL_CALENDAR '+JSON.stringify({events:output.sessions.length,months:byMonth.size,unmapped:output.unmappedCount,changed}));
 }
 if(require.main===module)main().catch(err=>{console.error(err);process.exitCode=1});
 module.exports={stageLabel,buildHistory};
