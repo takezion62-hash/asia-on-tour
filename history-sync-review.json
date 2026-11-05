@@ -1,7 +1,7 @@
 {
   "version": 1,
   "status": "review",
-  "checkedAt": "2026-11-05T10:48:13.480Z",
+  "checkedAt": "2026-11-05T10:49:08.156Z",
   "proposals": [
     {
       "id": "auto-s41-1df7e15c9d13",
@@ -234,6 +234,30 @@
         "そろぷれいやーわんす",
         "slce めろみやでǃǃ"
       ]
+    },
+    {
+      "id": "auto-s41-cd75ee735bbe",
+      "date": "2026-08-12",
+      "region": "NAC",
+      "player": "めるんやけん",
+      "playerRaw": "がちのシャーク",
+      "event": "Solo Reload Victory Cup",
+      "round": "Day 2 · Round 1 / 予選",
+      "rank": 678,
+      "points": 307,
+      "kills": 13,
+      "vrs": 0,
+      "prize": 0,
+      "kind": "予選",
+      "matches": 7,
+      "seasonId": "S41",
+      "chapter": 7,
+      "season": 3,
+      "tournamentId": "ch7s3-solo-reload-victory-cup",
+      "source": "https://www.fortnite.com/competitive/events/S41_ReloadReloadSoloVictoryCup/?region=NAC&round=S41_ReloadSoloVictoryCup_Round1_Day2_NAC",
+      "verified": true,
+      "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。",
+      "reviewReason": "順位表の取得が完了していません"
     }
   ]
 }
