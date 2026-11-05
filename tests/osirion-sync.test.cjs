@@ -69,3 +69,16 @@ test('S43 Squads Victory Cup windows with underscores are detected correctly',()
  assert.equal(wins[1].tournamentId,'ch7s5-squads-victory-cup');
  assert.equal(parseStage('S42_SoloVictoryCup_Event3Round1_NAW').kind,'予選');
 });
+
+test('historical S41 Day rounds and explicit date ranges are supported',()=>{
+ const catalog=[{id:'ch7s3-solo-reload-victory-cup',name:'Solo Reload Victory Cup',series:'victory-cup',team:'solo',seasonId:'S41',sourceEventIds:['S41_ReloadSoloVictoryCup']}];
+ const data=[{eventId:'epicgames_S41_ReloadSoloVictoryCup_NAW',eventWindows:[
+  {eventWindowId:'S41_ReloadSoloVictoryCup_Round2_Day3_NAW',beginTime:'2026-08-15T02:00:00Z',endTime:'2026-08-15T04:00:00Z'},
+  {eventWindowId:'S41_ReloadSoloVictoryCup_Round2_Day4_NAW',beginTime:'2026-08-16T02:00:00Z',endTime:'2026-08-16T04:00:00Z'}
+ ]}];
+ assert.equal(parseStage('S41_ReloadSoloVictoryCup_Round2_Day3_NAW').round,'Day 3 · Round 2 / 賞金決勝');
+ const matches=discover(data,catalog,{fromDate:'2026-08-15',toDate:'2026-08-15',regions:['NAW'],minLagMinutes:240},Date.parse('2026-11-05T05:00:00Z'));
+ assert.equal(matches.length,1);
+ assert.equal(matches[0].windowId,'S41_ReloadSoloVictoryCup_Round2_Day3_NAW');
+ assert.equal(discover(data,catalog,{fromDate:'2026-08-15',toDate:'2026-08-15',regions:['ME']},Date.parse('2026-11-05T05:00:00Z')).length,0);
+});
