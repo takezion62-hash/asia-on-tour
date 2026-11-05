@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-11-05T09:59:56.307Z",
+  "checkedAt": "2026-11-05T10:01:37.403Z",
   "source": "Osirion public beta / Epic tournament IDs",
   "count": 1100,
   "dates": [
@@ -52,7 +52,36 @@
         "eventWindows",
         "metadata"
       ],
-      "metadata": {}
+      "metadata": {},
+      "displayData": {
+        "backgroundLeftColor": "D8D7E3",
+        "backgroundRightColor": "9D9FAD",
+        "backgroundTextColor": "161616",
+        "baseColor": "FFFFFF",
+        "detailsDescription": "Advance from the Semi-Finals to compete in the FNCS Major 1 Grand Finals, the pinnacle of Fortnite competition! The Grand Finals adds scores from each session a",
+        "flavorDescription": "Compete in the Fortnite Championship Series: Major 2 for a share of the $1,891,000.00 total prize pool.",
+        "highlightColor": "08E164",
+        "loadingScreenImage": "https://cdn2.unrealengine.com/fncs-2024-tile-1920x1080-1920x1080-fd4fe17f410f.jpg",
+        "longFormatTitle": "Fortnite Championship Series",
+        "playlistTileImage": "https://cdn2.unrealengine.com/fncs-2024-tile-1920x1080-1920x1080-fd4fe17f410f.jpg",
+        "posterBackImage": "https://cdn2.unrealengine.com/fncs-2024-poster-back-750x1080-5ee59587e601.jpg",
+        "posterFadeColor": "001A41"
+      },
+      "apiMetadata": {
+        "TeamLockType": "Week",
+        "minimumAccountLevel": 50,
+        "TrackedStats": [
+          "0",
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+        ],
+        "DisqualifyType": "Floating",
+        "RegionLockType": "Season",
+        "AccountLockType": "Season"
+      }
     },
     {
       "id": "S29_FNCS_Major2_Qualifier2",
@@ -65,7 +94,37 @@
         "eventWindows",
         "metadata"
       ],
-      "metadata": {}
+      "metadata": {},
+      "displayData": {
+        "backgroundLeftColor": "D8D7E3",
+        "backgroundRightColor": "9D9FAD",
+        "backgroundTextColor": "161616",
+        "baseColor": "FFFFFF",
+        "detailsDescription": "Reach Platinum Rank in Chapter 5 Season 2 to unlock this event. There is a total of 4 rounds (EU/NA), 3 rounds (ASIA/BR/ME/OCE) for Open Qualifier 2. The top 2,",
+        "flavorDescription": "Compete in the Fortnite Championship Series: Major 2 for a share of the $1,891,000.00 total prize pool.",
+        "highlightColor": "08E164",
+        "loadingScreenImage": "https://cdn2.unrealengine.com/fncs-2024-tile-1920x1080-1920x1080-fd4fe17f410f.jpg",
+        "longFormatTitle": "Fortnite Championship Series",
+        "playlistTileImage": "https://cdn2.unrealengine.com/fncs-2024-tile-1920x1080-1920x1080-fd4fe17f410f.jpg",
+        "posterBackImage": "https://cdn2.unrealengine.com/fncs-2024-poster-back-750x1080-5ee59587e601.jpg",
+        "posterFadeColor": "001A41"
+      },
+      "apiMetadata": {
+        "SeriesPointLeaderboardScoreId": "cumulative:S29_FNCS_Major2_SeriesLeaderboard_ME",
+        "TeamLockType": "Week",
+        "minimumAccountLevel": 50,
+        "TrackedStats": [
+          "0",
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+        ],
+        "DisqualifyType": "Floating",
+        "RegionLockType": "Season",
+        "AccountLockType": "Season"
+      }
     },
     {
       "id": "S29_FNCS_Major2_SemiFinalLowerBracket",
@@ -78,7 +137,36 @@
         "eventWindows",
         "metadata"
       ],
-      "metadata": {}
+      "metadata": {},
+      "displayData": {
+        "backgroundLeftColor": "D8D7E3",
+        "backgroundRightColor": "9D9FAD",
+        "backgroundTextColor": "161616",
+        "baseColor": "FFFFFF",
+        "detailsDescription": "Advance from the Series Leaderboard after Open Qualifier 2 to qualify for the Semi-Finals! Battle your way through the Lower Bracket. 1st - 50th on the Series L",
+        "flavorDescription": "Compete in the Fortnite Championship Series: Major 2 for a share of the $1,891,000.00 total prize pool.",
+        "highlightColor": "08E164",
+        "loadingScreenImage": "https://cdn2.unrealengine.com/fncs-2024-tile-1920x1080-1920x1080-fd4fe17f410f.jpg",
+        "longFormatTitle": "Fortnite Championship Series",
+        "playlistTileImage": "https://cdn2.unrealengine.com/fncs-2024-tile-1920x1080-1920x1080-fd4fe17f410f.jpg",
+        "posterBackImage": "https://cdn2.unrealengine.com/fncs-2024-poster-back-750x1080-5ee59587e601.jpg",
+        "posterFadeColor": "001A41"
+      },
+      "apiMetadata": {
+        "TeamLockType": "Week",
+        "minimumAccountLevel": 50,
+        "TrackedStats": [
+          "0",
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+        ],
+        "DisqualifyType": "Floating",
+        "RegionLockType": "Season",
+        "AccountLockType": "Season"
+      }
     },
     {
       "id": "S29_FNCS_Major2_SemiFinalUpperBracket",
@@ -91,7 +179,36 @@
         "eventWindows",
         "metadata"
       ],
-      "metadata": {}
+      "metadata": {},
+      "displayData": {
+        "backgroundLeftColor": "D8D7E3",
+        "backgroundRightColor": "9D9FAD",
+        "backgroundTextColor": "161616",
+        "baseColor": "FFFFFF",
+        "detailsDescription": "Advance from the Series Leaderboard after Open Qualifier 2 to qualify for the Semi-Finals! Battle your way through the Upper Bracket. 1st - 50th on the Series L",
+        "flavorDescription": "Compete in the Fortnite Championship Series: Major 2 for a share of the $1,891,000.00 total prize pool.",
+        "highlightColor": "08E164",
+        "loadingScreenImage": "https://cdn2.unrealengine.com/fncs-2024-tile-1920x1080-1920x1080-fd4fe17f410f.jpg",
+        "longFormatTitle": "Fortnite Championship Series",
+        "playlistTileImage": "https://cdn2.unrealengine.com/fncs-2024-tile-1920x1080-1920x1080-fd4fe17f410f.jpg",
+        "posterBackImage": "https://cdn2.unrealengine.com/fncs-2024-poster-back-750x1080-5ee59587e601.jpg",
+        "posterFadeColor": "001A41"
+      },
+      "apiMetadata": {
+        "TeamLockType": "Week",
+        "minimumAccountLevel": 50,
+        "TrackedStats": [
+          "0",
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+        ],
+        "DisqualifyType": "Floating",
+        "RegionLockType": "Season",
+        "AccountLockType": "Season"
+      }
     },
     {
       "id": "S30_ConsoleCashCups",
@@ -104,7 +221,27 @@
         "eventWindows",
         "metadata"
       ],
-      "metadata": {}
+      "metadata": {},
+      "displayData": {
+        "backgroundLeftColor": "2D0760",
+        "backgroundRightColor": "6912E0",
+        "backgroundTextColor": "161616",
+        "baseColor": "FFFFFF",
+        "detailsDescription": "Unlock this tournament by playing Ranked Battle Royale. You and your teammate must be ranked in Gold or higher in Battle Royale to unlock this tournament. This ",
+        "flavorDescription": "Duo up and win cash prizes!",
+        "highlightColor": "F7FF00",
+        "loadingScreenImage": "https://cdn2.unrealengine.com/28comp-evergreen-console-in-game-tile-1920x1080-1920x1080-64729b1c865a.png",
+        "longFormatTitle": "Duos Console Cash Cup",
+        "playlistTileImage": "https://cdn2.unrealengine.com/28comp-evergreen-console-in-game-tile-1920x1080-1920x1080-64729b1c865a.png",
+        "posterBackImage": "https://cdn2.unrealengine.com/28comp-evergreen-console-in-game-poster-back-750x1080-e9f422b76e96.png",
+        "posterFadeColor": "1F0541"
+      },
+      "apiMetadata": {
+        "minimumAccountLevel": 15,
+        "AccountLockType": "Window",
+        "TeamLockType": "Window",
+        "DisqualifyType": "Window"
+      }
     },
     {
       "id": "S30_d4vd_Cup",
@@ -117,7 +254,27 @@
         "eventWindows",
         "metadata"
       ],
-      "metadata": {}
+      "metadata": {},
+      "displayData": {
+        "backgroundLeftColor": "00265F",
+        "backgroundRightColor": "0054D3",
+        "backgroundTextColor": "161616",
+        "baseColor": "FFFFFF",
+        "detailsDescription": "This event is open to all eligible players. Form a duo and play in this single-round tournament to win early access to the \"Feel It\" Emote! Players must be at l",
+        "flavorDescription": "Welcome to the d4vd Cup - an opportunity to win the \"Feel It\" Emote!",
+        "highlightColor": "F7FF00",
+        "loadingScreenImage": "https://cdn2.unrealengine.com/28comp-evergreen-green-in-game-tile-1920x1080-1920x1080-83a7f323a3ec.jpg",
+        "longFormatTitle": "d4vd Cup",
+        "playlistTileImage": "https://cdn2.unrealengine.com/28comp-evergreen-green-in-game-tile-1920x1080-1920x1080-83a7f323a3ec.jpg",
+        "posterBackImage": "https://cdn2.unrealengine.com/28comp-evergreen-green-in-game-poster-back-750x1080-b08e46c54e7c.jpg",
+        "posterFadeColor": "001A41"
+      },
+      "apiMetadata": {
+        "minimumAccountLevel": 15,
+        "AccountLockType": "Window",
+        "TeamLockType": "Window",
+        "DisqualifyType": "Window"
+      }
     },
     {
       "id": "S30_DuosCashCup",
@@ -130,7 +287,27 @@
         "eventWindows",
         "metadata"
       ],
-      "metadata": {}
+      "metadata": {},
+      "displayData": {
+        "backgroundLeftColor": "00265F",
+        "backgroundRightColor": "0054D3",
+        "backgroundTextColor": "161616",
+        "baseColor": "FFFFFF",
+        "detailsDescription": "Unlock this tournament by playing Ranked Battle Royale. You and your teammate must be ranked in Gold or higher in Battle Royale to unlock this tournament. This ",
+        "flavorDescription": "Duo up and win cash prizes!",
+        "highlightColor": "F7FF00",
+        "loadingScreenImage": "https://cdn2.unrealengine.com/25comp-evergreens-in-game-br-tile-1920x1080-1920x1080-642a5305f1bc.jpg",
+        "longFormatTitle": "Duos Cash Cup",
+        "playlistTileImage": "https://cdn2.unrealengine.com/25comp-evergreens-in-game-br-tile-1920x1080-1920x1080-642a5305f1bc.jpg",
+        "posterBackImage": "https://cdn2.unrealengine.com/25comp-evergreens-in-game-br-poster-back-750x1080-e56607bf30e3.jpg",
+        "posterFadeColor": "001A41"
+      },
+      "apiMetadata": {
+        "minimumAccountLevel": 15,
+        "AccountLockType": "Window",
+        "TeamLockType": "Window",
+        "DisqualifyType": "Window"
+      }
     },
     {
       "id": "S30_DuosCashCupZB",
@@ -143,7 +320,27 @@
         "eventWindows",
         "metadata"
       ],
-      "metadata": {}
+      "metadata": {},
+      "displayData": {
+        "backgroundLeftColor": "00265F",
+        "backgroundRightColor": "0054D3",
+        "backgroundTextColor": "161616",
+        "baseColor": "FFFFFF",
+        "detailsDescription": "Unlock this tournament by playing Ranked Zero Build. You and your teammate must be ranked in Gold or higher in Zero Build to unlock this tournament. This tourna",
+        "flavorDescription": "Duo up and win cash prizes!",
+        "highlightColor": "F7FF00",
+        "loadingScreenImage": "https://cdn2.unrealengine.com/28comp-evergreen-br-in-game-tile-1920x1080-1920x1080-ff509d31c790.jpg",
+        "longFormatTitle": "ZB Duos Cash Cup",
+        "playlistTileImage": "https://cdn2.unrealengine.com/28comp-evergreen-br-in-game-tile-1920x1080-1920x1080-ff509d31c790.jpg",
+        "posterBackImage": "https://cdn2.unrealengine.com/25comp-evergreens-in-game-br-poster-back-750x1080-e56607bf30e3.jpg",
+        "posterFadeColor": "001A41"
+      },
+      "apiMetadata": {
+        "minimumAccountLevel": 15,
+        "AccountLockType": "Window",
+        "TeamLockType": "Window",
+        "DisqualifyType": "Window"
+      }
     },
     {
       "id": "S30_FNCS_Major3_GrandFinals",
@@ -156,7 +353,36 @@
         "eventWindows",
         "metadata"
       ],
-      "metadata": {}
+      "metadata": {},
+      "displayData": {
+        "backgroundLeftColor": "D8D7E3",
+        "backgroundRightColor": "9D9FAD",
+        "backgroundTextColor": "161616",
+        "baseColor": "FFFFFF",
+        "detailsDescription": "Advance from the Semi-Finals to compete in the FNCS Major 3 Grand Finals, the pinnacle of Fortnite competition! The Grand Finals adds scores from each session a",
+        "flavorDescription": "Compete in the Fortnite Championship Series: Major 3 for a share of the $1,891,000.00 total prize pool.",
+        "highlightColor": "08E164",
+        "loadingScreenImage": "https://cdn2.unrealengine.com/fncs-2024-tile-1920x1080-1920x1080-fd4fe17f410f.jpg",
+        "longFormatTitle": "Fortnite Championship Series",
+        "playlistTileImage": "https://cdn2.unrealengine.com/fncs-2024-tile-1920x1080-1920x1080-fd4fe17f410f.jpg",
+        "posterBackImage": "https://cdn2.unrealengine.com/fncs-2024-poster-back-750x1080-5ee59587e601.jpg",
+        "posterFadeColor": "001A41"
+      },
+      "apiMetadata": {
+        "TeamLockType": "Week",
+        "minimumAccountLevel": 50,
+        "TrackedStats": [
+          "0",
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+        ],
+        "DisqualifyType": "Floating",
+        "RegionLockType": "Season",
+        "AccountLockType": "Season"
+      }
     },
     {
       "id": "S30_FNCS_Major3_Qualifier1",
@@ -169,7 +395,37 @@
         "eventWindows",
         "metadata"
       ],
-      "metadata": {}
+      "metadata": {},
+      "displayData": {
+        "backgroundLeftColor": "D8D7E3",
+        "backgroundRightColor": "9D9FAD",
+        "backgroundTextColor": "161616",
+        "baseColor": "FFFFFF",
+        "detailsDescription": "Reach Platinum Rank in Chapter 5 Season 3 to unlock this event. There is a total of 4 rounds (EU/NA), 3 rounds (ASIA/BR/ME/OCE) for Open Qualifier 1. The top 2,",
+        "flavorDescription": "Compete in the Fortnite Championship Series: Major 3 for a share of the $1,891,000.00 total prize pool.",
+        "highlightColor": "08E164",
+        "loadingScreenImage": "https://cdn2.unrealengine.com/fncs-2024-tile-1920x1080-1920x1080-fd4fe17f410f.jpg",
+        "longFormatTitle": "Fortnite Championship Series",
+        "playlistTileImage": "https://cdn2.unrealengine.com/fncs-2024-tile-1920x1080-1920x1080-fd4fe17f410f.jpg",
+        "posterBackImage": "https://cdn2.unrealengine.com/fncs-2024-poster-back-750x1080-5ee59587e601.jpg",
+        "posterFadeColor": "001A41"
+      },
+      "apiMetadata": {
+        "SeriesPointLeaderboardScoreId": "cumulative:S30_FNCS_Major3_SeriesLeaderboard_ME",
+        "TeamLockType": "Week",
+        "minimumAccountLevel": 50,
+        "TrackedStats": [
+          "0",
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+        ],
+        "DisqualifyType": "Floating",
+        "RegionLockType": "Season",
+        "AccountLockType": "Season"
+      }
     },
     {
       "id": "S30_FNCS_Major3_Qualifier2",
@@ -182,7 +438,37 @@
         "eventWindows",
         "metadata"
       ],
-      "metadata": {}
+      "metadata": {},
+      "displayData": {
+        "backgroundLeftColor": "D8D7E3",
+        "backgroundRightColor": "9D9FAD",
+        "backgroundTextColor": "161616",
+        "baseColor": "FFFFFF",
+        "detailsDescription": "Reach Platinum Rank in Chapter 5 Season 3 to unlock this event. There is a total of 4 rounds (EU/NA), 3 rounds (ASIA/BR/ME/OCE) for Open Qualifier 2. The top 2,",
+        "flavorDescription": "Compete in the Fortnite Championship Series: Major 3 for a share of the $1,891,000.00 total prize pool.",
+        "highlightColor": "08E164",
+        "loadingScreenImage": "https://cdn2.unrealengine.com/fncs-2024-tile-1920x1080-1920x1080-fd4fe17f410f.jpg",
+        "longFormatTitle": "Fortnite Championship Series",
+        "playlistTileImage": "https://cdn2.unrealengine.com/fncs-2024-tile-1920x1080-1920x1080-fd4fe17f410f.jpg",
+        "posterBackImage": "https://cdn2.unrealengine.com/fncs-2024-poster-back-750x1080-5ee59587e601.jpg",
+        "posterFadeColor": "001A41"
+      },
+      "apiMetadata": {
+        "SeriesPointLeaderboardScoreId": "cumulative:S30_FNCS_Major3_SeriesLeaderboard_ME",
+        "TeamLockType": "Week",
+        "minimumAccountLevel": 50,
+        "TrackedStats": [
+          "0",
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+        ],
+        "DisqualifyType": "Floating",
+        "RegionLockType": "Season",
+        "AccountLockType": "Season"
+      }
     },
     {
       "id": "S30_FNCS_Major3_SemiFinalLowerBracket",
@@ -195,7 +481,36 @@
         "eventWindows",
         "metadata"
       ],
-      "metadata": {}
+      "metadata": {},
+      "displayData": {
+        "backgroundLeftColor": "D8D7E3",
+        "backgroundRightColor": "9D9FAD",
+        "backgroundTextColor": "161616",
+        "baseColor": "FFFFFF",
+        "detailsDescription": "Advance from the Series Leaderboard after Open Qualifier 2 to qualify for the Semi-Finals! Battle your way through the Lower Bracket. 1st - 50th on the Series L",
+        "flavorDescription": "Compete in the Fortnite Championship Series: Major 3 for a share of the $1,891,000.00 total prize pool.",
+        "highlightColor": "08E164",
+        "loadingScreenImage": "https://cdn2.unrealengine.com/fncs-2024-tile-1920x1080-1920x1080-fd4fe17f410f.jpg",
+        "longFormatTitle": "Fortnite Championship Series",
+        "playlistTileImage": "https://cdn2.unrealengine.com/fncs-2024-tile-1920x1080-1920x1080-fd4fe17f410f.jpg",
+        "posterBackImage": "https://cdn2.unrealengine.com/fncs-2024-poster-back-750x1080-5ee59587e601.jpg",
+        "posterFadeColor": "001A41"
+      },
+      "apiMetadata": {
+        "TeamLockType": "Week",
+        "minimumAccountLevel": 50,
+        "TrackedStats": [
+          "0",
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+        ],
+        "DisqualifyType": "Floating",
+        "RegionLockType": "Season",
+        "AccountLockType": "Season"
+      }
     },
     {
       "id": "S30_FNCS_Major3_SemiFinalUpperBracket",
@@ -208,7 +523,36 @@
         "eventWindows",
         "metadata"
       ],
-      "metadata": {}
+      "metadata": {},
+      "displayData": {
+        "backgroundLeftColor": "D8D7E3",
+        "backgroundRightColor": "9D9FAD",
+        "backgroundTextColor": "161616",
+        "baseColor": "FFFFFF",
+        "detailsDescription": "Advance from the Series Leaderboard after Open Qualifier 2 to qualify for the Semi-Finals! Battle your way through the Upper Bracket. 1st - 50th on the Series L",
+        "flavorDescription": "Compete in the Fortnite Championship Series: Major 3 for a share of the $1,891,000.00 total prize pool.",
+        "highlightColor": "08E164",
+        "loadingScreenImage": "https://cdn2.unrealengine.com/fncs-2024-tile-1920x1080-1920x1080-fd4fe17f410f.jpg",
+        "longFormatTitle": "Fortnite Championship Series",
+        "playlistTileImage": "https://cdn2.unrealengine.com/fncs-2024-tile-1920x1080-1920x1080-fd4fe17f410f.jpg",
+        "posterBackImage": "https://cdn2.unrealengine.com/fncs-2024-poster-back-750x1080-5ee59587e601.jpg",
+        "posterFadeColor": "001A41"
+      },
+      "apiMetadata": {
+        "TeamLockType": "Week",
+        "minimumAccountLevel": 50,
+        "TrackedStats": [
+          "0",
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+        ],
+        "DisqualifyType": "Floating",
+        "RegionLockType": "Season",
+        "AccountLockType": "Season"
+      }
     },
     {
       "id": "S30_MetallicaCup",
@@ -221,7 +565,27 @@
         "eventWindows",
         "metadata"
       ],
-      "metadata": {}
+      "metadata": {},
+      "displayData": {
+        "backgroundLeftColor": "BC3900",
+        "backgroundRightColor": "FF730C",
+        "backgroundTextColor": "161616",
+        "baseColor": "FFFFFF",
+        "detailsDescription": "This event is open to all eligible players, Bronze rank and above in Ranked Battle Royale. Form a squad, or queue as a solo to be matchmade with others, and pla",
+        "flavorDescription": "Welcome to the Metallica Cup - an opportunity to win the Ringer Emote!",
+        "highlightColor": "F7FF00",
+        "loadingScreenImage": "https://cdn2.unrealengine.com/30comp-in-game-stainless-tile-1920x1080-1920x1080-a34d7692adb7.jpg",
+        "longFormatTitle": "Metallica Cup",
+        "playlistTileImage": "https://cdn2.unrealengine.com/30comp-in-game-stainless-tile-1920x1080-1920x1080-a34d7692adb7.jpg",
+        "posterBackImage": "https://cdn2.unrealengine.com/30comp-in-game-stainless-poster-back-750x1080-704c95147b8f.jpg",
+        "posterFadeColor": "6Е2403"
+      },
+      "apiMetadata": {
+        "minimumAccountLevel": 15,
+        "AccountLockType": "Window",
+        "TeamLockType": "Window",
+        "DisqualifyType": "Window"
+      }
     }
   ],
   "ignored": {
