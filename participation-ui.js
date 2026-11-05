@@ -88,7 +88,7 @@
     section.className='participation-panel participation-profile';
     section.id='participation-profile';
     section.innerHTML='<div class="participation-heading"><div><p class="participation-kicker">AUTO-VERIFIED PARTICIPATION</p><h2>海外大会の出場戦績 <span>（予選敗退も収録）</span></h2></div></div>'
-      +'<p class="participation-note">予選通過圏外と、通過未確認の出場記録を分けて掲載。賞金・AOT PR・称号の集計には加算されません。</p>'
+      +'<p class="participation-note">予選通過圏外と、通過未確認の出場記録を分けて掲載。賞金・称号には加算されません。AOT PRには、正式戦績との重複を除いた参加・順位・キルの基本ポイントのみ反映します。</p>'
       +'<div class="participation-profile-body" aria-live="polite">出場記録を確認中…</div>';
     host.append(section);
     const target=section.querySelector('.participation-profile-body');
