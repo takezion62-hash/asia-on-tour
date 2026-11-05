@@ -346,3 +346,110 @@ test('no qualification reward for outside cutoff, review-only, unverified or uns
   const testCup=score([base],catalog({series:'test-cup',subtype:'solo-reload-test-cup'}));
   assert.equal(testCup.ranked.length,0); // a fake qualifier cannot convert a Test Cup into a paid round
 });
+
+
+test('official S42 Solo Reload cutoff recovers missing advance labels at 320 NAW / 800 NAC / 1600 EU',()=>{
+ const c=catalog({id:'ch7s4-solo-reload-victory-cup',series:'victory-cup',
+   name:'Solo Reload Victory Cup',seasonId:'S42',
+   sourceEventIds:['S42_ReloadReloadSoloVictoryCup','S42_ReloadSoloVictoryCup']});
+ const src=region=>'https://fortnitetracker.com/events/epicgames_S42_ReloadReloadSoloVictoryCup_'+region+
+   '?window=S42_ReloadSoloVictoryCup_Event4_Round1_'+region;
+ const cutoff={NAW:320,NAC:800,EU:1600,ME:320,BR:320,OCE:320};
+ for(const [region,limit] of Object.entries(cutoff)){
+  const q=event({kind:'予選',round:'Event 4 · Round 1 / 予選',date:'2026-10-17',
+    region,rank:limit,source:src(region),prize:0});
+  const p=score([q],c).ranked[0];
+  approx(p.qualificationBonus,10*PR.REGIONS[region]);
+  assert.equal(p.rows[0].qualificationEvidence,'official-cutoff');
+  approx(score([{...q,id:'outside-'+region,rank:limit+1}],c).ranked[0].qualificationBonus,0);
+ }
+});
+test('official S42 BR, console ZB and Reload Duos cutoffs are category and region specific',()=>{
+ const cases=[
+  {id:'ch7s4-solo-victory-cup',event:'Solo Victory Cup Battle Royale',seasonId:'S42',region:'NAC',
+   sourceId:'S42_SoloVictoryCup',subtype:'solo-victory-cup',rank:2000,limit:2000},
+  {id:'ch7s4-console-zero-build-solo-victory-cup',event:'Console Zero Build Solo Victory Cup',seasonId:'S42',region:'NAW',
+   sourceId:'S42_ConsoleVCC_SolosZB',subtype:'console-solo-victory-cup',rank:1000,limit:1000},
+  {id:'ch7s4-reload-duos-victory-cup',event:'Reload Duos Victory Cup',seasonId:'S42',region:'ME',
+   sourceId:'S42_ReloadDuosVictoryCup',subtype:'reload-duos-victory-cup',rank:120,limit:120}
+ ];
+ for(const [i,x] of cases.entries()){
+  const c=catalog({id:x.id,name:x.event,series:'victory-cup',seasonId:x.seasonId,
+    sourceEventIds:[x.sourceId],subtype:x.subtype,team:x.id.includes('duos')?'duo':'solo'});
+  const p=event({id:'verified-'+i,kind:'予選',round:'Event 1 · Round 1 / 予選',rank:x.rank,region:x.region,prize:0,
+    ...(x.id.includes('duos')?{players:['A','B'],player:'A / B'}:{}),
+    source:'https://www.fortnite.com/competitive/events/'+x.sourceId+
+    '/?region='+x.region+'&round='+x.sourceId+'_Event1_Round1_'+x.region});
+  assert.equal(PR.officialQualificationCutoff(p,c),x.limit);
+  score([p],c).ranked.forEach(row=>approx(row.qualificationBonus,10*PR.REGIONS[x.region]));
+  score([{...p,id:'outside-'+i,rank:x.limit+1}],c).ranked.forEach(row=>approx(row.qualificationBonus,0));
+ }
+});
+test('PlayStation NickEh30 qualifier top-100 official rule resolves unnamed qualification for NAW',()=>{
+ const c=catalog({id:'ch7s4-playstation-nickeh30-icon-cup',series:'icon-cup',mode:'battle-royale',
+  subtype:'nickeh30-icon-cup',seasonId:'S42',sourceEventIds:['S42_PSNickEh30'],additionalSeries:['skin-cup']});
+ const q=event({kind:'予選',rank:84,region:'NAW',round:'Session 1 / 決勝進出予選',
+  source:'https://fortnitetracker.com/events/epicgames_S42_PSNickEh30_NAW?window=S42_PSNickEh30_Qualifier_NAW'});
+ approx(score([q],c).ranked[0].qualificationBonus,10);
+ assert.equal(score([q],c).ranked[0].rows[0].qualificationEvidence,'official-cutoff');
+ approx(score([{...q,id:'nick-101',rank:101}],c).ranked[0].qualificationBonus,0);
+});
+test('verified progression notes recover FNCS Practice and Performance Evaluation without invented cutoffs',()=>{
+ const fncs=catalog({id:'ch7s4-fncs-division-1-practice',series:'fncs',subtype:'fncs-division-1-practice',
+  seasonId:'S42',sourceEventIds:['S42_FNCSDivisionalCup_Division1'],mode:'battle-royale',team:'duo'});
+ const q=event({id:'fncs-note',kind:'予選',date:'2026-09-08',rank:29,region:'NAW',prize:0,
+  players:['Asuka','huggyfv'],player:'Asuka / huggyfv',round:'Week 3 · Round 1 / 予選',
+  note:'9/8 NAW予選29位。決勝進出。',
+  source:'https://fortnitetracker.com/events/epicgames_S42_FNCSDivisionalCup_Division1_NAW?window=S42_FNCSDivisionalCup_Division1_Event3_NAW'});
+ score([q],fncs).ranked.forEach(p=>{
+  approx(p.qualificationBonus,10);
+  assert.equal(p.rows[0].qualificationEvidence,'verified-note');
+ });
+ score([{...q,id:'fncs-no-claim',note:'予選順位を確認。決勝進出の有無は不明。'}],fncs).ranked.forEach(p=>approx(p.qualificationBonus,0));
+ const perf=catalog({id:'ch7s4-performance-evaluation',series:'performance-evaluation',
+  seasonId:'S42',sourceEventIds:['S42_PerformanceEvaluation'],subtype:'performance-evaluation',team:'duo'});
+ const p=event({id:'perf-note',kind:'予選',region:'NAC',players:['meath','3peace'],player:'meath / 3peace',
+  round:'Session 3 · Round 1 / 予選',note:'47位・273pt。決勝46位へ進出。',
+  source:'https://fortnitetracker.com/events/epicgames_S42_PerformanceEvaluation_NAC?window=S42_PerformanceEvaluation_Event3Round1_NAC'});
+ score([p],perf).ranked.forEach(row=>approx(row.qualificationBonus,12));
+});
+test('a partially reported but VERIFIED explicit advance still earns its once-only bonus',()=>{
+ const c=catalog({id:'ch7s4-solo-victory-cup',series:'victory-cup',seasonId:'S42',
+   sourceEventIds:['S42_SoloVictoryCup'],subtype:'solo-victory-cup'});
+ const p=event({id:'qual-partial',kind:'予選',rank:null,points:null,kills:null,partial:true,
+  round:'Event 1 · Round 1 / 予選通過',date:'2026-09-06',region:'NAW',
+  source:'https://fortnitetracker.com/events/epicgames_S42_SoloVictoryCup_NAW?window=S42_SoloVictoryCup_Event1Round1_NAW'});
+ const result=score([p],c).ranked[0];
+ approx(result.qualificationBonus,10);
+ assert.equal(result.rows[0].qualificationEvidence,'explicit');
+ assert.equal(result.rows[0].rank,null);
+});
+test('never award for contradictory outside-cutoff, unverified, wrong source or falsely claimed progress',()=>{
+ const c=catalog({id:'ch7s4-solo-victory-cup',series:'victory-cup',seasonId:'S42',
+   sourceEventIds:['S42_SoloVictoryCup'],subtype:'solo-victory-cup'});
+ const q=event({kind:'予選',region:'NAW',rank:459,round:'Event 2 · Round 1 / 予選',prize:0,
+  source:'https://fortnitetracker.com/events/epicgames_S42_SoloVictoryCup_NAW?window=S42_SoloVictoryCup_Event2Round1_NAW'});
+ for(const change of [
+   {rank:801},{verified:false},{reviewOnly:true},{qualification:'outside-cutoff'},
+   {status:'通過圏外'},{partial:true},{reported:true},
+   {source:'https://example.com/forged-round'},
+   {source:'https://fortnitetracker.com/events/epicgames_S42_SoloVictoryCup_EU?window=S42_SoloVictoryCup_Event2Round1_EU'},
+   {source:'https://fortnitetracker.com/events/epicgames_S42_SoloVictoryCup_NAW?window=S42_SoloVictoryCup_Event2Round2_NAW'},
+   {source:'https://fortnitetracker.com/events/epicgames_S42_DifferentCup_NAW?window=S42_DifferentCup_Event2Round1_NAW'}
+ ]){
+  approx(score([{...q,...change,id:'blocked-'+Object.keys(change)[0]}],c).ranked[0].qualificationBonus,0);
+ }
+ approx(score([{...q,note:'決勝進出ではなく予選結果。',id:'no-false-note',
+   source:'https://fortnitetracker.com/events/epicgames_S42_DifferentCup_NAW?window=S42_DifferentCup_Event2Round1_NAW'}],c).ranked[0].qualificationBonus,0);
+});
+test('different dates for the same event label remain separate qualified sessions, never merge awards',()=>{
+ const c=catalog({id:'ch7s4-solo-victory-cup',series:'victory-cup',seasonId:'S42',
+   sourceEventIds:['S42_SoloVictoryCup'],subtype:'solo-victory-cup'});
+ const base=event({id:'qa-11',kind:'予選',region:'NAW',rank:30,
+  round:'Event 1 · Round 1 / 予選突破',
+  source:'https://fortnitetracker.com/events/epicgames_S42_SoloVictoryCup_NAW?window=S42_SoloVictoryCup_Event1Round1_NAW'});
+ const second={...base,id:'qa-12',date:'2026-09-08'};
+ const report=score([base,second],c).ranked[0];
+ approx(report.qualificationBonus,20);
+ assert.equal(report.qualificationCount,2);
+});
