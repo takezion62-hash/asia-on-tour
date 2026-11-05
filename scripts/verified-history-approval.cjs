@@ -3,6 +3,11 @@
 // A zero-VR final can be recorded as $0 because the rules pay per final-round VR.
 // Positive cash awards and unknown events remain in manual review.
 const RULES=Object.freeze({
+  'ch5s3-squads-victory-cup':{
+    seasonId:'S30',eventIds:['S30_SquadsVictoryCashCup'],team:'squad',
+    matchCaps:{'予選':7,'賞金決勝':3},advance:{EU:150,ME:150,OCE:150,BR:150},
+    source:'https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules'
+  },
   'ch5s3-solo-victory-cup':{
     seasonId:'S30',eventIds:['S30_SoloVictoryCashCup'],
     matchCaps:{'予選':7,'賞金決勝':3},advance:{"EU":7000,"BR":2000,"ME":2000,"OCE":2000},
@@ -47,11 +52,14 @@ function decide(row,win,checkpoint,data){
  const rule=RULES[row.tournamentId];
  if(!rule)return decline('未検証のシーズンまたは大会');
  const catalog=data.tournaments.catalog.find(x=>x.id===row.tournamentId);
- if(!catalog||catalog.team!=='solo'||catalog.series!=='victory-cup'||catalog.seasonId!==rule.seasonId)return decline('大会カタログ不一致');
+ if(!catalog||catalog.team!==(rule.team||'solo')||catalog.series!=='victory-cup'||catalog.seasonId!==rule.seasonId)return decline('大会カタログ不一致');
  if(win.tournamentId!==row.tournamentId||win.seasonId!==rule.seasonId||row.seasonId!==rule.seasonId||!rule.eventIds.includes(win.eventId)||!catalog.sourceEventIds.includes(win.eventId))return decline('公式イベントID不一致');
  if(row.date!==win.dateJst||row.region!==win.region||!Object.hasOwn(rule.advance,row.region)||row.round!==win.round||row.kind!==win.kind)return decline('開催日・地域・ラウンド不一致');
  if(!row.id?.startsWith('auto-'+rule.seasonId.toLowerCase()+'-')||row.verified!==true||!Array.isArray(checkpoint.proposals)||!checkpoint.proposals.some(x=>x.id===row.id))return decline('照合済み候補ではありません');
- if(!data.players.candidates.some(x=>x.name===row.player)||participants(row).length!==1)return decline('名鑑と照合できない選手');
+ const lineup=participants(row),teamSize=rule.team==='squad'?4:1;
+ if(lineup.length!==teamSize||new Set(lineup).size!==lineup.length
+    ||lineup.some(name=>!data.players.candidates.some(x=>x.name===name))
+    ||lineup.join(' / ')!==row.player)return decline('名鑑と照合できない選手');
  if(!Number.isSafeInteger(row.rank)||row.rank<1||!Number.isSafeInteger(row.points)||row.points<0||!Number.isSafeInteger(row.kills)||row.kills<0||!Number.isSafeInteger(row.vrs)||row.vrs<0||!Number.isSafeInteger(row.matches)||row.matches<1||row.vrs>row.matches)return decline('不正または未確定の成績');
  if(row.matches>rule.matchCaps[row.kind])return decline('公式試合数上限との矛盾');
  try{
