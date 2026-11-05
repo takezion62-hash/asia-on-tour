@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-11-05T07:16:24.084Z",
+  "checkedAt": "2026-11-05T07:18:55.975Z",
   "windows": {
     "epicgames_S42_SoloVictoryCup_NAW/S42_SoloVictoryCup_Event3Round1_NAW": {
       "nextPage": 8,
@@ -1743,12 +1743,68 @@
       "totalPages": 3
     },
     "epicgames_S41_ReloadReloadSoloVictoryCup_EU/S41_ReloadSoloVictoryCup_Round1_Day1_EU": {
-      "nextPage": 12,
-      "complete": false,
-      "proposals": [],
-      "pages": 12,
+      "nextPage": 17,
+      "complete": true,
+      "proposals": [
+        {
+          "id": "auto-s41-3dc9f87b05b5",
+          "date": "2026-08-01",
+          "region": "EU",
+          "player": "Hazy",
+          "playerRaw": "cloud hazÿ 17ǃ",
+          "event": "Solo Reload Victory Cup",
+          "round": "Day 1 · Round 1 / 予選",
+          "rank": 1311,
+          "points": 300,
+          "kills": 36,
+          "vrs": 2,
+          "prize": 0,
+          "kind": "予選",
+          "matches": 8,
+          "seasonId": "S41",
+          "chapter": 7,
+          "season": 3,
+          "tournamentId": "ch7s3-solo-reload-victory-cup",
+          "source": "https://www.fortnite.com/competitive/events/S41_ReloadReloadSoloVictoryCup/?region=EU&round=S41_ReloadSoloVictoryCup_Round1_Day1_EU",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。"
+        }
+      ],
+      "pages": 17,
       "emptyAttempts": 0,
       "totalPages": 100
+    },
+    "epicgames_S41_ReloadReloadSoloVictoryCup_EU/S41_ReloadSoloVictoryCup_Round2_Day1_EU": {
+      "nextPage": 7,
+      "complete": false,
+      "proposals": [
+        {
+          "id": "auto-s41-f0113e33c0a8",
+          "date": "2026-08-02",
+          "region": "EU",
+          "player": "Hazy",
+          "playerRaw": "cloud hazÿ 17ǃ",
+          "event": "Solo Reload Victory Cup",
+          "round": "Day 1 · Round 2 / 賞金決勝",
+          "rank": 297,
+          "points": 0,
+          "kills": 10,
+          "vrs": 0,
+          "prize": null,
+          "kind": "賞金決勝",
+          "matches": 3,
+          "seasonId": "S41",
+          "chapter": 7,
+          "season": 3,
+          "tournamentId": "ch7s3-solo-reload-victory-cup",
+          "source": "https://www.fortnite.com/competitive/events/S41_ReloadReloadSoloVictoryCup/?region=EU&round=S41_ReloadSoloVictoryCup_Round2_Day1_EU",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。現金賞金の確定情報なし。"
+        }
+      ],
+      "pages": 7,
+      "emptyAttempts": 0,
+      "totalPages": 16
     }
   }
 }
