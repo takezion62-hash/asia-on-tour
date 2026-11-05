@@ -1,4 +1,4 @@
-/* ASIA ON TOUR Power Ranking v1.4 - independent, deterministic, read-only scoring */
+/* ASIA ON TOUR Power Ranking v1.9 — verified archive scoring with safe optional participation overlay */
 (function (root, factory) {
   'use strict';
   const api = factory();
@@ -7,10 +7,10 @@
 })(typeof globalThis === 'object' ? globalThis : this, function () {
   'use strict';
 
-  const VERSION = '1.8.0';
+  const VERSION = '1.9.0';
   const REGIONS = Object.freeze({ EU: 1.4, BR: 1.3, NAC: 1.2, ME: 1.1, OCE: 1.1, NAW: 1.0 });
   const STAGES = Object.freeze({ '予選': 0.35, '賞金決勝': 1, '決勝': 1, 'Practice決勝': 1,
-    'Performance決勝': 1, 'スキン大会': 1, 'コスメ大会': 1, 'Test Cup': 1 });
+    'Performance決勝': 1, 'スキン大会': 1, 'コスメ大会': 1, 'Test Cup': 1, '参加確認': 0.35 });
   const TEAM_SIZES = Object.freeze({ solo: 1, duo: 2, trio: 3 });
   const SKIN_KINDS = new Set(['スキン大会', 'コスメ大会']);
   const SKIN_SERIES = new Set(['skin-cup', 'override-series']); // legacy Override data also skin-rated
@@ -27,6 +27,8 @@
     if (record.kind === 'Test Cup') return null; // never treat a test as a higher-paying series
     // NickEh30 is mixed reward: cosmetic qualifier, paid-VR final. Its series tags
     // are shared by the event but cannot imply the same reward or weight per round.
+    if (record.participationOnly===true && tournament.series==='icon-cup' &&
+      ['nickeh30-icon-cup','playstation-clix-cup-battle-royale'].includes(tournament.subtype)) return 0.5;
     if (tournament.series === 'icon-cup' && ['nickeh30-icon-cup', 'playstation-clix-cup-battle-royale'].includes(tournament.subtype) &&
       Array.isArray(tournament.additionalSeries) && tournament.additionalSeries.includes('skin-cup')) {
       return record.kind === '予選' || SKIN_KINDS.has(record.kind) ? 0.50 :
@@ -87,7 +89,7 @@
   // No rank-only inference or final-only inference: the published, independently
   // verified qualifier row must explicitly say 予選突破 / 予選通過.
   function qualificationEvidence(record,tournament) {
-    if (!record || record.verified!==true || record.partial===true || record.reported===true || record.reviewOnly===true ||
+    if (!record || record.verified!==true || record.participationOnly===true || record.partial===true || record.reported===true || record.reviewOnly===true ||
       record.qualification==='outside-cutoff' || record.status==='通過圏外' ||
       !QUALIFYING_SERIES.has(tournament?.series)) return null;
     return record.kind==='予選' && /予選(?:突破|通過)/u.test(String(record.round||'')) ? 'explicit' : null;
@@ -113,8 +115,14 @@
     return JSON.stringify(value);
   }
   function cleanPeople(record, names) {
-    const supplied = names(record);
-    return [...new Set((Array.isArray(supplied) ? supplied : []).filter(name => typeof name === 'string' && name.trim()))];
+    const supplied=names(record);
+    const original=[...new Set((Array.isArray(supplied)?supplied:[]).filter(name=>typeof name==='string'&&name.trim()))];
+    if(record?.participationOnly!==true)return original;
+    // Members absent from the whitelist already have a published record for
+    // the same session. No double-scoring a single player in a mixed duo.
+    if(!Array.isArray(record.prEligiblePlayers))return [];
+    const allowed=new Set(record.prEligiblePlayers);
+    return original.filter(name=>allowed.has(name));
   }
 
   function uniqueRecords(records, names, classify) {
@@ -175,17 +183,21 @@
           qualifyingRows.set(key,{record,evidence});
       }
     }
-    let included = 0, unknownModeKills = 0, missingRanks = 0, missingKills = 0, ignored = 0;
+    let included = 0, participationIncluded=0, unknownModeKills = 0, missingRanks = 0, missingKills = 0, ignored = 0;
 
     for (const record of unique.records) {
-      if (record.verified !== true || !(record.kind in STAGES) || !Object.hasOwn(REGIONS, record.region) ||
+      if (record.verified !== true || (record.kind==='参加確認'&&record.participationOnly!==true) ||
+        (record.participationOnly===true && (record.reviewOnly===true||record.prize!==null||
+          record.kind!=='参加確認'&&record.kind!=='予選'||
+          !['unverified'].includes(record.qualification))) ||
+        !(record.kind in STAGES) || !Object.hasOwn(REGIONS, record.region) ||
         (region !== 'all' && region !== record.region)) { ignored++; continue; }
       const tournament = options.classify(record) || {};
       const eventFactor = eventMultiplier(record, tournament);
       if (eventFactor === null) { ignored++; continue; }
       const people = cleanPeople(record, options.names);
       if (!people.length || typeof record.date !== 'string' || !record.date) { ignored++; continue; }
-      included++;
+      included++;if(record.participationOnly===true)participationIncluded++;
       const stageFactor = STAGES[record.kind], regionFactor = REGIONS[record.region];
       const hasRank = Number.isInteger(record.rank) && record.rank > 0;
       const hasKills = Number.isInteger(record.kills) && record.kills >= 0;
@@ -222,15 +234,17 @@
         const qualificationBonus=chosenQualification?.record===record ? QUALIFICATION_BASE*regionFactor : 0;
         const total = attendance + placement + elimination + bonus + qualificationBonus;
         const value = players.get(name) || { name, score: 0, attendance: 0, placement: 0, eliminations: 0, bonus: 0, qualificationBonus: 0, qualificationCount: 0,
-          appearances: 0, roundRecords: 0, rows: [], regions: new Set() };
+          appearances: 0, roundRecords: 0, participationScore:0, participationRecords:0, rows: [], regions: new Set() };
         value.score += total; value.attendance += attendance; value.placement += placement;
         value.eliminations += elimination; value.bonus += bonus; value.qualificationBonus += qualificationBonus;
+        if(record.participationOnly===true){value.participationScore+=total;value.participationRecords++;}
         value.qualificationCount += Number(qualificationBonus>0); value.appearances += Number(newAppearance);
         value.roundRecords++; value.regions.add(record.region);
         value.rows.push({ id: record.id || null, date: record.date, region: record.region, event: record.event,
           kind: record.kind, rank: hasRank ? record.rank : null, kills: hasKills ? record.kills : null,
           source: record.source || null, attendance, placement, eliminations: elimination, bonus, bonusUnits, bonusMode: policy?.mode || null,
-          qualificationBonus, qualificationEvidence:qualificationBonus>0?chosenQualification.evidence:null, total,
+          qualificationBonus, qualificationEvidence:qualificationBonus>0?chosenQualification.evidence:null,
+          participationOnly:record.participationOnly===true,total,
           regionMultiplier: regionFactor, eventMultiplier: eventFactor, stageMultiplier: stageFactor,
           modeKnown: killCoefficient !== null });
         players.set(name, value);
@@ -244,7 +258,7 @@
         rows: player.rows.slice().sort((a, b) => b.total - a.total || b.date.localeCompare(a.date)) };
     });
     return { version: VERSION, region, ranked, byName: new Map(ranked.map(player => [player.name, player])),
-      recordCount: included, playerCount: ranked.length, ignored, duplicateCount: unique.duplicateCount,
+      recordCount: included, participationIncluded, playerCount: ranked.length, ignored, duplicateCount: unique.duplicateCount,
       conflictingDuplicateCount: unique.conflictingCount, missingRanks, missingKills, unknownModeKills };
   }
 
