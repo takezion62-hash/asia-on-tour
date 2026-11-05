@@ -1,0 +1,52 @@
+name: AOT verified participation archive
+on:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/participation-archive.cjs"
+      - "scripts/participation-sync.cjs"
+      - "scripts/osirion-sync.cjs"
+      - "scripts/auto-sync-core.cjs"
+      - "tests/participation-sync.test.cjs"
+      - "participation-config.json"
+      - ".github/workflows/participation-sync.yml"
+  schedule:
+    - cron: '53 2,8,14,20 * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: aot-provider-scans-main
+  cancel-in-progress: false
+jobs:
+  participation:
+    name: Archive confirmed overseas participation (bounded)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Scan confirmed Epic-ID players, not all public leaderboard participants
+        run: node scripts/participation-sync.cjs
+      - name: Validate published achievements and participation safety
+        run: |
+          npm run validate
+          node --test tests/participation-sync.test.cjs tests/auto-sync.test.cjs tests/osirion-sync.test.cjs tests/non-victory-auto-sync.test.cjs
+      - name: Commit participation ledger only (do not touch results or achievements)
+        run: |
+          git add -A participation-index.json participation-status.json participation-scan.json
+          if [ -d participation ]; then git add -A participation; fi
+          if git diff --cached --quiet; then
+            echo "No participation updates"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "data: archive verified overseas participation"
+          git pull --rebase origin main
+          git push origin HEAD:main
