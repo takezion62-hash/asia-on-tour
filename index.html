@@ -893,7 +893,7 @@
       <section class="section" id="page-results"><div class="page-label">ARCHIVE / 01</div><h1 class="big-title">OVERSEAS RESULTS</h1><p class="explainer" id="archive-season-description">CH7 S4の海外大会アーカイブ。</p><div class="filterbar"><div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><input id="search-results" type="search" placeholder="選手名・大会名を検索" aria-label="選手名や大会名で検索"></div><select id="region-filter" aria-label="遠征先で絞り込み"><option value="all">すべての地域</option><option>ME</option><option>EU</option><option>NAC</option><option>NAW</option><option>OCE</option><option>BR</option></select><select id="stage-filter" aria-label="大会区分で絞り込み"><option value="all">すべての区分</option><option value="賞金決勝">賞金決勝</option><option value="決勝">決勝</option><option value="予選">予選</option><option value="Practice決勝">Practice決勝</option><option value="Performance決勝">Performance決勝</option><option value="スキン大会">スキン大会</option></select><select id="sort-results" aria-label="並び替え"><option value="date">新しい順</option><option value="oldest">古い順</option><option value="rank">順位が高い順</option><option value="kills">キル数順</option><option value="vrs">ビクロイ数が多い順</option><option value="prize">賞金額が多い順</option><option value="points">ポイントが高い順</option><option value="registered">登録が新しい順</option></select><label class="toggle"><input type="checkbox" id="prize-only"> 🏆 賞金獲得のみ</label></div><div class="panel-header"><h2>遠征結果 <span id="result-count">0件</span></h2></div><p class="prize-row-note">🏆 <strong>金色の行＝賞金獲得確定</strong>　·　「賞金決勝」は賞金獲得を意味しないため、賞金ゼロや未確認は別の表示にしているよ</p><div id="result-pagination-top"></div><div id="result-table"></div><div id="result-pagination-bottom"></div><div class="export-tools"><button type="button" class="btn sm ghost" id="export-csv">↓ CSVを書き出し</button></div><p class="footnote">CSVは表示ページに関係なく、選択シーズンと現在の絞り込み結果の全件を出力するよ。chapter・season・seasonId列で各行の対象シーズンを確認できます。デュオの戦績はチーム単位で1行・賞金はチーム合計、prizePerPlayer列は各選手の金額。このサイトは閲覧専用で、掲載済みの戦績を検索・閲覧できるよ</p>
         <section id="participation-archive" class="participation-panel" aria-labelledby="participation-title">
           <div class="participation-heading"><div><p class="participation-kicker">EPIC ID VERIFIED / PARTICIPATION</p><h2 id="participation-title">予選敗退を含む出場戦績</h2></div></div>
-          <p class="participation-note">公式順位表と本人Epic IDで照合した大会出場データを月別に収録。通過ライン圏外は「通過圏外」、未確認は「出場確認」と区別します。賞金獲得・AOT PR・称号・公式戦績の集計には加算しません。調査済み範囲の記録であり、全大会・全参加者を網羅したものではありません。</p>
+          <p class="participation-note">公式順位表と本人Epic IDで照合した大会出場データを月別に収録。通過ライン圏外は「通過圏外」、未確認は「出場確認」と区別します。賞金獲得・称号・正式戦績の集計には加算しません。AOT PRは同じ開催枠の正式戦績がない場合に限り、参加・順位・キルの基本ポイントのみ加算します。調査済み範囲の記録であり、全大会・全参加者を網羅したものではありません。</p>
           <p class="participation-count" id="participation-summary" aria-live="polite">出場記録を読み込み中…</p>
           <div class="participation-fields">
             <label>開催月<select id="participation-month" aria-label="出場記録の開催月"></select></label>
@@ -906,8 +906,8 @@
         </section>
       </section>
       <section class="section" id="page-players"><div class="page-label">DATABASE / 02</div><h1 class="big-title">ASIA PLAYERS</h1><p class="explainer" id="players-season-description">選択期間の掲載選手。</p><section class="aot-pr-section" id="aot-pr-section" aria-labelledby="aot-pr-title">
-  <header class="aot-pr-head"><div><p class="aot-pr-kicker">ASIA ON TOUR / AOT PR v1.8</p><h2 id="aot-pr-title">海外遠征 POWER RANKING</h2></div></header>
-  <p class="aot-pr-note">海外大会への挑戦・順位・キル・明記された予選突破・確認済み賞金獲得を掲載戦績から積算した、サイト独自のポイントです。公式の実力順位ではありません。</p>
+  <header class="aot-pr-head"><div><p class="aot-pr-kicker">ASIA ON TOUR / AOT PR v1.9</p><h2 id="aot-pr-title">海外遠征 POWER RANKING</h2></div></header>
+  <p class="aot-pr-note">海外大会への挑戦・順位・キル・明記された予選突破・確認済み賞金獲得に加え、出場アーカイブの本人確認済み参加・順位・キルを安全に合算するサイト独自のポイントです。公式の実力順位ではありません。</p>
   <div class="aot-pr-regions" role="group" aria-label="AOT PR開催地域">
     <button type="button" data-aot-pr-region="all" aria-pressed="true">ALL</button>
     <button type="button" data-aot-pr-region="ME" aria-pressed="false">ME</button>
@@ -919,7 +919,7 @@
   </div>
   <p class="aot-pr-status" id="aot-pr-status" aria-live="polite"></p>
   <ol class="aot-pr-list" id="aot-pr-leaders"></ol>
-  <p class="aot-pr-method">計算：参加10pt＋順位100/√順位＋形式別キル加点（上限25pt）＋予選突破ボーナス（確認済み1開催枠につき10pt）＋確認済み賞金獲得ボーナス。通常ポイントは大会・ラウンド・地域倍率、予選突破・賞金ボーナスは地域倍率のみ適用。予選・決勝を別々に評価し、参加pt・突破ボーナスは同じ開催枠で重複させません。『予選突破／予選通過』と明記された戦績だけが突破加点の対象です。出場確認だけのアーカイブ、通過圏外、未掲載の大会は加点しません。</p>
+  <p class="aot-pr-method">計算：参加10pt＋順位100/√順位＋形式別キル加点（上限25pt）＋予選突破ボーナス（確認済み1開催枠につき10pt）＋確認済み賞金獲得ボーナス。通常ポイントは大会・ラウンド・地域倍率、予選突破・賞金ボーナスは地域倍率のみ適用。予選・決勝を別々に評価し、参加pt・突破ボーナスは同じ開催枠で重複させません。『予選突破／予選通過』と明記された戦績だけが突破ボーナスの対象です。出場確認・通過圏外は基本PRのみ（未確定ラウンドは保守的な0.35倍）、突破・賞金・スキン報酬のボーナスなし。同一選手・大会・開催枠の正式掲載戦績がある場合はアーカイブ側を重複加点しません。</p>
 </section><section class="earnings-feature performance-ranking" aria-labelledby="ranking-title">
   <div class="earnings-head"><div><h2 id="ranking-title">地域別・実績別ランキング</h2><p id="ranking-season-description"></p></div><div class="earnings-total"><small>条件内の確認済み個人賞金</small><span id="player-earnings-sum">$0</span></div></div>
   <div class="ranking-regions" role="group" aria-label="開催地域"><button type="button" id="ranking-region-all" data-ranking-region="all" aria-pressed="true" aria-controls="player-earnings-leaders">ALL</button><button type="button" id="ranking-region-ME" data-ranking-region="ME" data-region="ME" aria-pressed="false" aria-controls="player-earnings-leaders">ME</button><button type="button" id="ranking-region-EU" data-ranking-region="EU" data-region="EU" aria-pressed="false" aria-controls="player-earnings-leaders">EU</button><button type="button" id="ranking-region-NAC" data-ranking-region="NAC" data-region="NAC" aria-pressed="false" aria-controls="player-earnings-leaders">NAC</button><button type="button" id="ranking-region-NAW" data-ranking-region="NAW" data-region="NAW" aria-pressed="false" aria-controls="player-earnings-leaders">NAW</button><button type="button" id="ranking-region-OCE" data-ranking-region="OCE" data-region="OCE" aria-pressed="false" aria-controls="player-earnings-leaders">OCE</button><button type="button" id="ranking-region-BR" data-ranking-region="BR" data-region="BR" aria-pressed="false" aria-controls="player-earnings-leaders">BR</button></div>
@@ -1007,12 +1007,13 @@
   </div>
 
   <script src="./rankings.js" defer></script>
-  <script src="./aot-pr.js?v=1.8.0" defer></script>
+  <script src="./aot-pr.js?v=1.9.0" defer></script>
+  <script src="./participation-pr.js?v=1.0.0" defer></script>
   <script src="./achievements.js?v=7" defer></script>
   <script src="./growth.js?v=1" defer></script>
   <script src="./compare.js?v=1" defer></script>
-  <script src="./participation-ui.js?v=1" defer></script>
-  <script src="./app.js?v=qualifying-bonus-20261105-v1" defer></script>
+  <script src="./participation-ui.js?v=2" defer></script>
+  <script src="./app.js?v=participation-pr-20261105-v1" defer></script>
   <script src="./auto-sync-ui.js?v=3" defer></script>
 </body>
 </html>
