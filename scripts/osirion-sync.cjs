@@ -8,7 +8,7 @@ const root=path.resolve(__dirname,'..');
 const read=name=>JSON.parse(fs.readFileSync(path.join(root,name),'utf8'));
 const write=(name,obj)=>fs.writeFileSync(path.join(root,name),JSON.stringify(obj,null,2)+'\n');
 const regions=['ME','EU','NAC','NAW','OCE','BR'];
-const REVIEW_SERIES=new Set(['victory-cup','cash-cup','fncs','performance-evaluation','skin-cup','icon-cup','playstation-cup','unreal-cup']);
+const REVIEW_SERIES=new Set(['victory-cup','cash-cup','fncs','performance-evaluation','skin-cup','icon-cup','playstation-cup','unreal-cup','test-cup']);
 const nowJst=utc=>new Date(new Date(utc).getTime()+9*3600000).toISOString().slice(0,10);
 // The history window must follow new competitions after the initial 2024-2026 backfill.
 function resolveHistoricalScope(config,time=Date.now()){
@@ -119,7 +119,7 @@ function discoverUnmapped(all,catalog,opts,time=Date.now()){
   if(!match||!regions.includes(match[2]))continue;
   const [,base,region]=match;
   const title=String(tournament.displayData?.longFormatTitle||tournament.displayData?.shortFormatTitle||'');
-  const knownType=/(VictoryCup|VictoryCashCup|ConsoleVCC|CashCup|FNCSDivisionalCup_Division1|PerformanceEvaluation|PerfEval|IconCup)/i.test(base)||/\b(?:Cash Cup|Victory Cup|Performance Evaluation|Icon Cup)\b/i.test(title);
+  const knownType=/(VictoryCup|VictoryCashCup|ConsoleVCC|CashCup|FNCSDivisionalCup_Division1|PerformanceEvaluation|PerfEval|IconCup|TestCup)/i.test(base)||/\b(?:Cash Cup|Victory Cup|Performance Evaluation|Icon Cup|Test Cup)\b/i.test(title);
   const cosmeticCup=/\bCup\b/i.test(title)&&!/Ranked Cup|Test Cup/i.test(title)&&!/^S\d+_FNCS(?:Reload|Solos|Major)/i.test(base);
   if(!knownType&&!cosmeticCup)continue;
   const tracked=reviewSeries(opts);
@@ -131,8 +131,11 @@ function discoverUnmapped(all,catalog,opts,time=Date.now()){
   if(/^S\d+_FNCS/i.test(base)&&!isFncsDiv1&&!cosmeticCup)continue;
   if(catalog.some(x=>x.seasonId===base.split('_')[0]&&x.sourceEventIds?.includes(base)))continue;
   const relevant=(tournament.eventWindows||[]).some(w=>{
-   const end=Date.parse(w.endTime);
-   return typeof w.eventWindowId==='string'&&w.eventWindowId.endsWith('_'+region)&&Number.isFinite(end)&&end>=time-days*86400000&&end<=time+14*86400000;
+   const end=Date.parse(w.endTime),begin=Date.parse(w.beginTime);
+   if(typeof w.eventWindowId!=='string'||!w.eventWindowId.endsWith('_'+region)||!Number.isFinite(end)||!Number.isFinite(begin))return false;
+   // Historic catalog gaps must also be visible; never publish an unmapped event.
+   if(opts.fromDate&&opts.toDate)return nowJst(w.beginTime)>=opts.fromDate&&nowJst(w.beginTime)<=opts.toDate&&end<=time;
+   return end>=time-days*86400000&&end<=time+14*86400000;
   });
   if(relevant)missing.add(base);
  }
@@ -297,6 +300,18 @@ function selectHistoricalWindows(windows,state,config,time=Date.now(),records=[]
   const ruleBacked=fresh.filter(w=>w.series==='victory-cup'&&Object.hasOwn(RULES,w.tournamentId));
   add(ruleBacked.length?ruleBacked:fresh);
  }
+ // Backfill the six overseas regions evenly before filling the remaining slots.
+ // Completed windows naturally leave the queue; a region with no eligible rounds is skipped.
+ for(const region of regions){
+  if(selected.length>=limit)break;
+  if(!selected.some(w=>w.region===region))add(pending.filter(w=>w.region===region));
+ }
+ // Rotate across supported tournament series, including review-only cups.
+ // Never infer cash, advancement or rewards from series membership.
+ for(const series of [...new Set(pending.map(w=>w.series))].sort()){
+  if(selected.length>=limit)break;
+  if(!selected.some(w=>w.series===series))add(pending.filter(w=>w.series===series));
+ }
  for(const w of pending.slice().sort(priority)){
   if(selected.length>=limit)break;
   if(!seen.has(w.key)){selected.push(w);seen.add(w.key)}
@@ -319,13 +334,18 @@ async function main(){
  if(!accounts.length)throw Error('追跡対象のIDがありません');
  const all=await getTournaments(historical);
  const windows=discover(all,data.tournaments.catalog,config);
- const unmapped=historical?[]:discoverUnmapped(all,data.tournaments.catalog,config);
+ const unmapped=discoverUnmapped(all,data.tournaments.catalog,config);
  const state=read(prefix+'-scan.json');
  if(state.version!==1||!state.windows||typeof state.windows!=='object')throw Error('checkpoint invalid');
  const active=historical?selectHistoricalWindows(windows,state,config,Date.now(),data.results):selectActiveWindows(windows,state,config);
  const previewConfig={version:1,accounts,windows:active.map(w=>({eventId:w.eventId,windowId:w.windowId,dateJst:w.dateJst,region:w.region,seasonId:w.seasonId,tournamentId:w.tournamentId,kind:w.kind,round:w.round}))};
- let budget=Math.min(Math.max(config.maxPagesPerRun||30,1),50),scanned=0,invalidRows=0,transientFailures=0;
+ // Historical backfill can inspect more pages, but always yields before the Actions job limit.
+ let budget=Math.min(Math.max(config.maxPagesPerRun||30,1),historical?96:50),scanned=0,invalidRows=0,transientFailures=0;
+ const maxRunMinutes=historical?Math.min(14,Math.max(2,Number.isFinite(config.maxRunMinutes)?config.maxRunMinutes:12)):14;
+ const scanDeadline=Date.now()+maxRunMinutes*60000;
+ let timeLimitReached=false;
  for(let windowIndex=0;windowIndex<active.length;windowIndex++){
+  if(Date.now()>=scanDeadline){timeLimitReached=true;break}
   const win=active[windowIndex];
   const checkpoint=state.windows[win.key]||{nextPage:0,complete:false,proposals:[],pages:0};
   let pagesThisWindow=0;
@@ -334,6 +354,7 @@ async function main(){
   const reserved=Math.max(0,active.length-windowIndex-1)*(historical?2:1);
   const perWindowLimit=Math.max(0,Math.min(limit,budget-reserved));
   while(budget>0&&pagesThisWindow<perWindowLimit&&!checkpoint.complete){
+   if(Date.now()>=scanDeadline){timeLimitReached=true;break}
    const page=checkpoint.nextPage;
    let l;
    try{l=await getLeaderboard(win,page)}
@@ -408,7 +429,7 @@ async function main(){
  const reviewOnlyWindows=windows.filter(w=>w.series!=='victory-cup').length;
  const reviewOnlyCandidates=unique.size?Array.from(unique.values()).filter(p=>p.reviewOnly===true).length:0;
  const cumulativeApprovals=data.updates.entries.filter(x=>x.title?.startsWith('公式規則で自動承認：')).reduce((sum,x)=>sum+(x.recordIds?.length||0),0);
- const status={version:1,state:'checked',checkedAt:stamp,mode:'review',scope:historical?'history':'recent',dateMode:historical?(storedConfig.toDate==='rolling'?'rolling':'fixed'):null,selectedWindows:active.length,fromDate:historical?config.fromDate:null,toDate:historical?config.toDate:null,provider:'osirion',linkedPlayers:accounts.length,trackedWindows:windows.length,found:unique.size,skipped:invalidRows,imported,scannedPages:scanned,completedWindows:finished,identityConflicts:conflicts.length,alreadyRegistered:recordedFromReview,autoApprovedTotal:cumulativeApprovals,invalidCachedCandidates:invalidCached,manualReviewCandidates:manuallyHeld,retryWindows:Object.entries(state.windows).filter(([key,w])=>eligible.has(key)&&!w.complete&&w.retryAfter).length,transientFailures,reviewOnlyWindows,reviewOnlyCandidates,unmappedEvents:unmapped.length,unmappedEventIds:unmapped.slice(0,12),message:'Osirionで'+accounts.length+'アカウントIDを追跡。今回の公式規則による自動承認'+imported+'件、追加確認待ち'+unique.size+'件、名義照合保留'+conflicts.length+'件。'};
+ const status={version:1,state:'checked',checkedAt:stamp,mode:'review',scope:historical?'history':'recent',dateMode:historical?(storedConfig.toDate==='rolling'?'rolling':'fixed'):null,selectedWindows:active.length,fromDate:historical?config.fromDate:null,toDate:historical?config.toDate:null,provider:'osirion',linkedPlayers:accounts.length,trackedWindows:windows.length,found:unique.size,skipped:invalidRows,imported,scannedPages:scanned,completedWindows:finished,identityConflicts:conflicts.length,alreadyRegistered:recordedFromReview,autoApprovedTotal:cumulativeApprovals,invalidCachedCandidates:invalidCached,manualReviewCandidates:manuallyHeld,timeLimitReached,retryWindows:Object.entries(state.windows).filter(([key,w])=>eligible.has(key)&&!w.complete&&w.retryAfter).length,transientFailures,reviewOnlyWindows,reviewOnlyCandidates,unmappedEvents:unmapped.length,unmappedEventIds:unmapped.slice(0,12),message:'Osirionで'+accounts.length+'アカウントIDを追跡。今回の公式規則による自動承認'+imported+'件、追加確認待ち'+unique.size+'件、名義照合保留'+conflicts.length+'件。'};
  state.checkedAt=stamp;
  write(prefix+'-scan.json',state);
  write(prefix+'-review.json',{version:1,status:'review',checkedAt:stamp,proposals:[...unique.values()]});
