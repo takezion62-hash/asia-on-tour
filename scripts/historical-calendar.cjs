@@ -45,7 +45,7 @@ function buildHistory(all,catalog,opts={}){
   const title=tournament.displayData?.longFormatTitle||tournament.displayData?.shortFormatTitle;
   const hasTitle=typeof title==='string'&&title.trim().length>=3&&title.trim().length<=140;
   if((catalogued?.series==='fncs'&&!/^FNCS Division 1(?: |$)/i.test(catalogued.name))
-     ||(!catalogued&&/^S\\d+_FNCS/i.test(base)&&!/^S\\d+_FNCSDivisionalCup_Division1/i.test(base)&&!/FNCSCommunityCup/i.test(base))){
+     ||(!catalogued&&/^S\d+_FNCS/i.test(base)&&!/^S\d+_FNCSDivisionalCup_Division1/i.test(base)&&!/FNCSCommunityCup/i.test(base))){
    skip('region-locked FNCS');continue;
   }
   if(!catalogued&&!hasTitle){
