@@ -21,9 +21,9 @@
     "playstation-cup"
   ],
   "minLagMinutes": 240,
-  "maxPagesPerRun": 30,
+  "maxPagesPerRun": 36,
   "maxWindowsPerRun": 5,
-  "maxPagesPerWindowPerRun": 8,
+  "maxPagesPerWindowPerRun": 12,
   "maxPagesPerWindowTotal": 40,
   "lookbackDays": 7
 }
