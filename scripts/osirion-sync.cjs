@@ -126,7 +126,7 @@ async function main(){
  const unique=new Map(proposals.map(x=>[x.id,x]));
  const finished=Object.values(state.windows).filter(w=>w.complete).length;
  const stamp=new Date().toISOString();
- const status={version:1,state:'checked',checkedAt:stamp,mode:'review',provider:'osirion',linkedPlayers:accounts.length,trackedWindows:windows.length,found:unique.size,skipped:invalidRows,imported:0,scannedPages:scanned,completedWindows:finished,identityConflicts:conflicts.length,message:'Osirionに接続済み。既存プロフィールのうちIDが一意な'+accounts.length+'名を追跡。'+scanned+'ページを検査、'+unique.size+'件が確認待ち。名前の競合'+conflicts.length+'件は対象外。'};
+ const status={version:1,state:'checked',checkedAt:stamp,mode:'review',provider:'osirion',linkedPlayers:accounts.length,trackedWindows:windows.length,found:unique.size,skipped:invalidRows,imported:0,scannedPages:scanned,completedWindows:finished,identityConflicts:conflicts.length,message:'Osirionに接続済み。既存プロフィールのうちIDが一意な'+accounts.length+'名を追跡。'+scanned+'ページを検査、'+unique.size+'件が確認待ち。照合保留ID'+conflicts.length+'件は対象外。'};
  state.checkedAt=stamp;
  write('auto-sync-scan.json',state);
  write('auto-sync-review.json',{version:1,status:'review',checkedAt:stamp,proposals:[...unique.values()]});
