@@ -3,12 +3,17 @@
   "enabled": true,
   "mode": "review",
   "provider": "osirion",
-  "fromDate": "2026-09-22",
-  "toDate": "2026-09-22",
+  "fromDate": "2026-08-01",
+  "toDate": "2026-11-04",
   "regions": [
-    "NAW"
+    "ME",
+    "EU",
+    "NAC",
+    "NAW",
+    "OCE",
+    "BR"
   ],
   "minLagMinutes": 240,
-  "maxPagesPerRun": 4,
+  "maxPagesPerRun": 12,
   "maxWindowsPerRun": 2
 }
