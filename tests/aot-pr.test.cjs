@@ -80,16 +80,16 @@ test('PlayStation NickEh30 dual-tag Icon Cup scores cosmetic qualifiers x0.50, c
   approx(PR.eventMultiplier(fin,t),1.20);
   const q=score([qual],t).ranked[0],f=score([fin],t).ranked[0];
   approx(q.score,(10+50*.35+15*.35)*0.50+10);
-  approx(f.score,(10+50+15)*1.20);
+  approx(f.score,(10+50+15)*1.20+10);
   approx(q.bonus,0);approx(f.bonus,0);
-  approx(q.qualificationBonus,10);approx(f.qualificationBonus,0);
+  approx(q.qualificationBonus,10);approx(f.qualificationBonus,10);
   const paid={...fin,id:'paid-final',vrs:1,prize:500};
   const paidResult=score([paid],t).ranked[0];
   approx(paidResult.bonus,0); // No Icon Cup prize bonus policy yet.
-  approx(paidResult.score,(10+50+15)*1.20);
+  approx(paidResult.score,(10+50+15)*1.20+10);
   const both=score([qual,fin],t).ranked[0];
   assert.equal(both.roundRecords,2);
-  approx(both.bonus,0);
+  approx(both.bonus,0);approx(both.qualificationBonus,10);
   assert.ok(both.score>0);
 });
 
@@ -513,4 +513,97 @@ test('only two reviewed OCE Reload ZB Duos screenshot records qualify by officia
     score([{...row,...bad,id:bad.id||row.id}],c).ranked.forEach(p=>approx(p.qualificationBonus,0));
   }
  }
+});
+
+
+test('final-only published Round 2 proves advancement for rules-backed S42 Victory Cup without inventing Round 1 results',()=>{
+  const c=catalog({id:'ch7s4-solo-victory-cup',name:'Solo Victory Cup Battle Royale',
+    series:'victory-cup',subtype:'solo-victory-cup',seasonId:'S42',sourceEventIds:['S42_SoloVictoryCup']});
+  const fin=event({id:'only-final',date:'2026-09-22',region:'NAW',
+    kind:'賞金決勝',round:'Event 3 · Round 2 / 賞金決勝',rank:17,kills:6,vrs:0,prize:0,
+    source:'https://fortnitetracker.com/events/epicgames_S42_SoloVictoryCup_NAW?window=S42_SoloVictoryCup_Event3Round2_NAW'});
+  const solo=score([fin],c).ranked[0];
+  approx(solo.qualificationBonus,10);
+  assert.equal(solo.rows[0].qualificationEvidence,'verified-final');
+  assert.equal(solo.appearances,1);
+  assert.equal(solo.roundRecords,1);
+  const qual=event({id:'prior-round',date:'2026-09-21',region:'NAW',
+    kind:'予選',round:'Event 3 · Round 1 / 予選',rank:210,kills:5,vrs:0,prize:0,
+    source:'https://fortnitetracker.com/events/epicgames_S42_SoloVictoryCup_NAW?window=S42_SoloVictoryCup_Event3Round1_NAW'});
+  const combined=score([fin,qual],c).ranked[0];
+  approx(combined.qualificationBonus,10);
+  assert.equal(combined.qualificationCount,1);
+  assert.equal(combined.roundRecords,2);
+  assert.equal(combined.rows.filter(r=>r.qualificationBonus>0)[0].qualificationEvidence,'official-cutoff');
+  const reversed=score([qual,fin],c).ranked[0];
+  approx(reversed.qualificationBonus,10);
+});
+test('finals-only Week 3 FNCS Practice and NickEh30 proof do not double-count qualifiers held days earlier',()=>{
+ const fncs=catalog({id:'ch7s4-fncs-division-1-practice',name:'FNCS Division 1 Practice',
+   series:'fncs',subtype:'fncs-division-1-practice',seasonId:'S42',
+   team:'duo',sourceEventIds:['S42_FNCSDivisionalCup_Division1']});
+ const f=event({id:'week3-final',kind:'Practice決勝',region:'NAW',date:'2026-09-13',
+   round:'Week 3 · Round 2 / Practice決勝',player:'Asuka / huggyfv',players:['Asuka','huggyfv'],
+   rank:38,source:'https://fortnitetracker.com/events/epicgames_S42_FNCSDivisionalCup_Division1_NAW?window=S42_FNCSDivisionalCup_Division1_Week3Final_NAW'});
+ const q=event({id:'week3-qual',kind:'予選',region:'NAW',date:'2026-09-08',
+   round:'Week 3 · Round 1 / 予選',player:'Asuka / huggyfv',players:['Asuka','huggyfv'],
+   rank:29,source:'https://fortnitetracker.com/events/epicgames_S42_FNCSDivisionalCup_Division1_NAW?window=S42_FNCSDivisionalCup_Division1_Event3_NAW'});
+ for(const person of score([f],fncs).ranked){
+   approx(person.qualificationBonus,10);
+   assert.equal(person.rows[0].qualificationEvidence,'verified-final');
+ }
+ for(const person of score([q,f],fncs).ranked) {
+   approx(person.qualificationBonus,10);
+   assert.equal(person.qualificationCount,1);
+ }
+ const nick=catalog({id:'ch7s4-playstation-nickeh30-icon-cup',name:'PlayStation NickEh30 Icon Cup',
+  series:'icon-cup',subtype:'nickeh30-icon-cup',additionalSeries:['skin-cup'],
+  seasonId:'S42',sourceEventIds:['S42_PSNickEh30']});
+ const ns='https://www.fortnite.com/competitive/events/S42_PSNickEh30/';
+ const nfinal=event({id:'nick-only',kind:'決勝',date:'2026-10-08',round:'Session 1 / 決勝',
+  source:ns+'?region=NAW&round=S42_PSNickEh30_Final_NAW'});
+ const nqual=event({id:'nick-qual-week',kind:'予選',date:'2026-10-01',rank:84,
+  round:'Session 1 / 決勝進出予選',source:ns+'?region=NAW&round=S42_PSNickEh30_Qualifier_NAW'});
+ approx(score([nfinal],nick).ranked[0].qualificationBonus,10);
+ const both=score([nqual,nfinal],nick).ranked[0];
+ approx(both.qualificationBonus,10);
+ assert.equal(both.qualificationCount,1);
+});
+test('source-verified S41 Reload Day3 and S42 Zero Build Reload Round2 finals qualify; blank or wrong URL cannot',()=>{
+ const s41=catalog({id:'ch7s3-solo-reload-victory-cup',name:'Solo Reload Victory Cup',
+   series:'victory-cup',subtype:'solo-reload-victory-cup',seasonId:'S41',
+   sourceEventIds:['S41_ReloadSoloVictoryCup']});
+ const day3=event({id:'s41-final-only',date:'2026-08-16',kind:'賞金決勝',round:'Day 3 · Round 2 / 賞金決勝',
+   rank:19,source:'https://fortnitetracker.com/events/epicgames_S41_ReloadSoloVictoryCup_NAW?window=S41_ReloadSoloVictoryCup_Round2_Day3_NAW'});
+ approx(score([day3],s41).ranked[0].qualificationBonus,10);
+ const cash=catalog({id:'ch7s4-reload-zero-build-duos-cash-cup',name:'Reload ZB Duos Cash Cup',
+   series:'cash-cup',subtype:'reload-zero-build-duos-cash-cup',team:'duo',
+   seasonId:'S42',sourceEventIds:['S42_ReloadCashCup_DuosZB']});
+ const cashFinal=event({id:'cash-final-only',kind:'賞金決勝',date:'2026-10-23',region:'OCE',
+   player:'Reo / ろみぃ',players:['Reo','ろみぃ'],
+   round:'Event 6 · Round 2 / 決勝（賞金なし）',rank:16,prize:0,
+   source:'https://fortnitetracker.com/events/epicgames_S42_ReloadCashCup_DuosZB_OCE?window=S42_ReloadCashCup_DuosZB_Event6Round2_OCE'});
+ const rows=score([cashFinal],cash).ranked;
+ assert.equal(rows.length,2);
+ rows.forEach(row=>{approx(row.qualificationBonus,11);assert.equal(row.qualificationCount,1)});
+ for(const change of [
+   {partial:true},{verified:false},{reviewOnly:true},{rank:null},
+   {source:'https://fortnitetracker.com/events/epicgames_S42_ReloadCashCup_DuosZB_OCE'},
+   {source:'https://fortnitetracker.com/events/epicgames_S42_ReloadCashCup_DuosZB_OCE?window=S42_ReloadCashCup_DuosZB_Event6Round1_OCE'},
+   {source:'https://fortnitetracker.com/events/epicgames_S42_AnotherCup_OCE?window=S42_AnotherCup_Event6Round2_OCE'}
+ ]){
+   const result=score([{...cashFinal,id:'bad-'+Object.keys(change)[0],...change}],cash);
+   for(const player of result.ranked)approx(player.qualificationBonus,0);
+ }
+});
+test('repeated identical final sessions never earn two qualification bonuses',()=>{
+ const c=catalog({id:'ch7s4-solo-victory-cup',name:'Solo Victory Cup Battle Royale',
+  series:'victory-cup',seasonId:'S42',sourceEventIds:['S42_SoloVictoryCup']});
+ const fin=event({id:'final-a',kind:'賞金決勝',date:'2026-09-22',rank:18,
+  round:'Event 3 · Round 2 / 賞金決勝',
+  source:'https://fortnitetracker.com/events/epicgames_S42_SoloVictoryCup_NAW?window=S42_SoloVictoryCup_Event3Round2_NAW'});
+ const same={...fin,id:'final-b',date:'2026-09-23',rank:19,points:44};
+ const p=score([fin,same],c).ranked[0];
+ approx(p.qualificationBonus,10);
+ assert.equal(p.qualificationCount,1);
 });
