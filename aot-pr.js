@@ -89,8 +89,8 @@
   // Only *published official, season- and series-specific* advancement limits.
   // No cutoff is invented for FNCS, Cash Cups, Performance Evaluation or unknown cups.
   function officialQualificationCutoff(record,tournament) {
-    if (!record || !tournament || tournament.seasonId!==record.seasonId &&
-      record.seasonId!=null || !Object.hasOwn(REGIONS,record.region)) return null;
+    if (!record || !tournament || (record.seasonId!=null && tournament.seasonId!==record.seasonId) ||
+      !Object.hasOwn(REGIONS,record.region)) return null;
     const id=tournament.id;
     if (id==='ch7s4-playstation-nickeh30-icon-cup' && tournament.seasonId==='S42') return 100;
     if (['ch7s3-solo-victory-cup','ch7s4-solo-victory-cup'].includes(id) &&
@@ -126,8 +126,9 @@
       let sourceEvent=parts.find(p=>/^S\d+_/i.test(p)) ||
         parts.find(p=>/^epicgames_S\d+_/i.test(p))?.replace(/^epicgames_/i,'') || null;
       if (sourceEvent?.endsWith('_'+record.region)) sourceEvent=sourceEvent.slice(0,-record.region.length-1);
+      const officialRoundRoot=tournament.sourceEventIds.some(key=>id.startsWith(key+'_'));
       return tournament.sourceEventIds.includes(sourceEvent) &&
-        id.startsWith(tournament.seasonId+'_');
+        id.startsWith(tournament.seasonId+'_') && (!requireRoundOne || officialRoundRoot);
     } catch { return false; }
   }
 
