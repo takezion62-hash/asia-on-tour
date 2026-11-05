@@ -74,7 +74,22 @@ function buildHistory(all,catalog,opts={}){
    });
   }
  }
- const sessions=[...selected.values()].sort((a,b)=>a.startUtc.localeCompare(b.startUtc)||a.region.localeCompare(b.region)||a.eventId.localeCompare(b.eventId));
+ // Epic's catalog sometimes contains two event-ID aliases for exactly the
+ // same tournament, region, round and start/end timestamps. Keep one history
+ // window, while preserving distinct numbered rounds, platforms and start times.
+ const unique=new Map();
+ for(const session of selected.values()){
+  const catalogued=catalog.find(t=>t.id===session.tournamentId);
+  const key=catalogued?JSON.stringify([session.dateJst,session.region,session.tournamentId,
+    session.startUtc,session.endUtc,session.round,session.stage,session.mode]):session.id;
+  const previous=unique.get(key);
+  if(!previous){unique.set(key,session);continue}
+  const order=catalogued.sourceEventIds||[];
+  if(order.indexOf(session.eventId)>=0&&
+     (order.indexOf(previous.eventId)<0||order.indexOf(session.eventId)<order.indexOf(previous.eventId)))
+    unique.set(key,session);
+ }
+ const sessions=[...unique.values()].sort((a,b)=>a.startUtc.localeCompare(b.startUtc)||a.region.localeCompare(b.region)||a.eventId.localeCompare(b.eventId));
  return {version:1,source:'Osirion public beta / Epic tournament IDs',checkedAt:new Date(now).toISOString(),fromDate,timezone:'Asia/Tokyo',
   note:'These entries confirm historical tournament windows only, not AOT player participation, prizes or eligibility. FNCS outside Division 1 is excluded.',
   sessions,unmappedCount:missing.size,unmappedSample:[...missing].slice(0,30),unmappedDetails:missingDetails,ignored};
