@@ -36,7 +36,7 @@ test('2人を比較して3人目を追加・除外でき、比較リンクに全
  await page.locator('#compare-player-input').fill(nameC);
  await page.locator('#compare-add-form button[type="submit"]').click();
  await expect(page.locator('[data-compare-summary]')).toHaveCount(3);
- await expect(page.locator('[data-compare-player="'+nameC+'"]')).toHaveCount(1);
+ await expect(page.locator('[data-compare-summary="'+nameC+'"]')).toHaveCount(1);
  await expect(page.locator('[data-compare-value="pr"]')).toHaveCount(3);
  const currentURL=page.url();
  expect(currentURL).toContain(encodeURIComponent(nameA));
