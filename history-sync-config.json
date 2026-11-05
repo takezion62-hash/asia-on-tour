@@ -15,5 +15,6 @@
   ],
   "minLagMinutes": 240,
   "maxPagesPerRun": 12,
-  "maxWindowsPerRun": 2
+  "maxWindowsPerRun": 2,
+  "autoApproveVerified": true
 }
