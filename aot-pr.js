@@ -189,7 +189,7 @@
       if (record.verified !== true || (record.kind==='参加確認'&&record.participationOnly!==true) ||
         (record.participationOnly===true && (record.reviewOnly===true||record.prize!==null||
           record.kind!=='参加確認'&&record.kind!=='予選'||
-          !['unverified'].includes(record.qualification))) ||
+          !['unverified','outside-cutoff'].includes(record.qualification))) ||
         !(record.kind in STAGES) || !Object.hasOwn(REGIONS, record.region) ||
         (region !== 'all' && region !== record.region)) { ignored++; continue; }
       const tournament = options.classify(record) || {};
@@ -244,7 +244,8 @@
           kind: record.kind, rank: hasRank ? record.rank : null, kills: hasKills ? record.kills : null,
           source: record.source || null, attendance, placement, eliminations: elimination, bonus, bonusUnits, bonusMode: policy?.mode || null,
           qualificationBonus, qualificationEvidence:qualificationBonus>0?chosenQualification.evidence:null,
-          participationOnly:record.participationOnly===true,total,
+          participationOnly:record.participationOnly===true,
+          participationStatus:record.participationOnly===true?record.status:null,total,
           regionMultiplier: regionFactor, eventMultiplier: eventFactor, stageMultiplier: stageFactor,
           modeKnown: killCoefficient !== null });
         players.set(name, value);
