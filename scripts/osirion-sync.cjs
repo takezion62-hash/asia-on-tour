@@ -92,6 +92,18 @@ function discoverUnmapped(all,catalog,opts,time=Date.now()){
  }
  return [...missing].sort();
 }
+// Only official, season-specific Round 1 advancement cutoffs are trusted.
+// Unmapped seasons/types remain review-only without an inferred cutoff.
+function advancementLimit(win){
+ if(win.kind!=='予選')return null;
+ const isEU=win.region==='EU',isNAC=win.region==='NAC';
+ const type=win.tournamentId;
+ if(['S41','S42'].includes(win.seasonId)&&type.endsWith('-solo-victory-cup'))return isEU?4000:isNAC?2000:800;
+ if(['S41','S42'].includes(win.seasonId)&&type.endsWith('-solo-reload-victory-cup'))return isEU?1600:isNAC?800:320;
+ if(win.seasonId==='S42'&&type.endsWith('-console-zero-build-solo-victory-cup'))return isEU||isNAC?2000:1000;
+ if(win.seasonId==='S42'&&type.endsWith('-reload-duos-victory-cup'))return isEU||isNAC?300:120;
+ return null;
+}
 function normalizeRow(entry,win){
  if(!entry||!Array.isArray(entry.players)||entry.players.length<1||entry.unscoredSessions?.length)return null;
  if(!Array.isArray(entry.sessionHistory)||!entry.sessionHistory.length)return null;
@@ -156,14 +168,19 @@ async function main(){
    const page=checkpoint.nextPage,l=await getLeaderboard(win,page);
    if(page===0&&l.entries.length===0)break; // Empty success responses must not be treated as complete.
    if(!l.entries.length&&page<l.totalPages-1)throw Error('順位表に未期待の空ページ: '+win.key+' page '+page);
-   const entries=l.entries.map(e=>normalizeRow(e,win));
+   const cutoff=historical?advancementLimit(win):null;
+   const pageRanks=l.entries.map(e=>e.rank);
+   const ordered=pageRanks.every((rank,i)=>Number.isSafeInteger(rank)&&rank>=1&&(i===0||rank>=pageRanks[i-1]));
+   const crossed=ordered&&cutoff!==null&&pageRanks.some(rank=>rank>cutoff);
+   const eligibleRows=cutoff===null?l.entries:l.entries.filter(e=>!Number.isSafeInteger(e.rank)||e.rank<=cutoff);
+   const entries=eligibleRows.map(e=>normalizeRow(e,win));
    invalidRows+=entries.filter(x=>!x).length;
    const found=prepare({entries:entries.filter(Boolean)},previewConfig,data).proposals;
    const already=new Set(checkpoint.proposals.map(x=>x.id));
    for(const row of found)if(!already.has(row.id)){checkpoint.proposals.push(row);already.add(row.id)}
    checkpoint.nextPage=page+1;checkpoint.pages++;scanned++;budget--;
    checkpoint.totalPages=l.totalPages;
-   checkpoint.complete=checkpoint.nextPage>=l.totalPages;
+   checkpoint.complete=checkpoint.nextPage>=l.totalPages||crossed;
   }
   state.windows[win.key]=checkpoint;
   if(budget<=0)break;
@@ -184,4 +201,4 @@ async function main(){
  console.log((historical?'OSIRION_HISTORY_REVIEW ':'OSIRION_REVIEW ')+JSON.stringify({scannedPages:scanned,linkedPlayers:accounts.length,identityConflicts:conflicts.length,windows:windows.length,unmappedEvents:unmapped.length,proposals:unique.size,finished}));
 }
 if(require.main===module)main().catch(e=>{console.error('OSIRION_SYNC_ERROR '+e.stack);process.exitCode=1});
-module.exports={identity,linkedAccounts,parseStage,discover,discoverUnmapped,normalizeRow,getTournaments,main};
+module.exports={identity,linkedAccounts,parseStage,discover,discoverUnmapped,advancementLimit,normalizeRow,getTournaments,main};
