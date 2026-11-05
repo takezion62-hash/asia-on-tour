@@ -405,7 +405,7 @@ test('verified progression notes recover FNCS Practice and Performance Evaluatio
   approx(p.qualificationBonus,10);
   assert.equal(p.rows[0].qualificationEvidence,'verified-note');
  });
- score([{...q,id:'fncs-no-claim',note:'予選順位を確認。決勝進出の有無は不明。'}],fncs).ranked.forEach(p=>approx(p.qualificationBonus,0));
+ score([{...q,id:'fncs-no-claim',rank:51,note:'予選順位を確認。決勝進出の有無は不明。'}],fncs).ranked.forEach(p=>approx(p.qualificationBonus,0));
  const perf=catalog({id:'ch7s4-performance-evaluation',series:'performance-evaluation',
   seasonId:'S42',sourceEventIds:['S42_PerformanceEvaluation'],subtype:'performance-evaluation',team:'duo'});
  const p=event({id:'perf-note',kind:'予選',region:'NAC',players:['meath','3peace'],player:'meath / 3peace',
