@@ -1,6 +1,6 @@
 'use strict';
 const test=require('node:test'),assert=require('node:assert/strict');
-const {identity,linkedAccounts,parseStage,discover,discoverUnmapped,advancementLimit,normalizeRow}=require('../scripts/osirion-sync.cjs');
+const {identity,linkedAccounts,parseStage,discover,discoverUnmapped,selectHistoricalWindows,advancementLimit,normalizeRow}=require('../scripts/osirion-sync.cjs');
 const f='https://fortnitetracker.com/profile/all/Alpha/events?id=8a57ac58-f937-4de2-81b7-9abd070c7ae8';
 test('Tracker UUID can map to the same 32-char account ID after strict validation',()=>{
  assert.equal(identity(f),'8a57ac58f9374de281b79abd070c7ae8');
@@ -93,4 +93,17 @@ test('official S41/S42 cutoffs are region and mode specific, never guessed for o
  assert.equal(advancementLimit(w('S42','ch7s4-reload-duos-victory-cup','ME')),120);
  assert.equal(advancementLimit(w('S43','ch7s5-squads-victory-cup','NAW')),null);
  assert.equal(advancementLimit(w('S42','ch7s4-solo-victory-cup','NAW','賞金決勝')),null);
+});
+
+test('historical scans distribute limited slots across years and event series',()=>{
+ const rows=['2024','2025','2026'].flatMap(y=>['victory-cup','cash-cup'].map(series=>({key:y+series,dateJst:y+'-06-01',end:Date.parse(y+'-06-01T01:00:00Z'),series})));
+ const chosen=selectHistoricalWindows(rows,{windows:{}},{maxWindowsPerRun:6},Date.parse('2026-11-05'));
+ assert.equal(chosen.length,6);
+ assert.deepEqual(new Set(chosen.map(x=>x.dateJst.slice(0,4))),new Set(['2024','2025','2026']));
+ assert.equal(chosen.filter(x=>x.series==='cash-cup').length,3);
+});
+test('historical scans honor finished and retry-delayed windows',()=>{
+ const rows=[{key:'a',dateJst:'2024-07-01',series:'victory-cup',end:1},{key:'b',dateJst:'2024-07-02',series:'victory-cup',end:2},{key:'c',dateJst:'2024-07-03',series:'victory-cup',end:3}];
+ const state={windows:{a:{complete:true},b:{nextPage:3},c:{retryAfter:'2030-01-01T00:00:00Z'}}};
+ assert.deepEqual(selectHistoricalWindows(rows,state,{maxWindowsPerRun:3},Date.parse('2026-11-05')).map(x=>x.key),['b']);
 });

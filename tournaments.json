@@ -1397,6 +1397,562 @@
           "url": "https://fortnitetracker.com/events/epicgames_S43_SquadsVictoryCup_NAW"
         }
       ]
+    },
+    {
+      "id": "ch5s3-duos-cash",
+      "name": "Duos Cash Cup",
+      "chapter": 5,
+      "season": 3,
+      "seasonId": "S30",
+      "sourceEventIds": [
+        "S30_DuosCashCup"
+      ],
+      "series": "cash-cup",
+      "mode": "unknown",
+      "subtype": "duos-cash-cup",
+      "team": "duo",
+      "platform": "cross-platform",
+      "unknownFields": [
+        "mode"
+      ],
+      "evidence": [
+        {
+          "text": "Osirionの過去大会開催履歴で公式EpicイベントID・大会名称を確認。個別の通過・賞金・報酬を推定せず確認候補として登録。",
+          "url": "https://www.fortnite.com/competitive/events/S30_DuosCashCup/"
+        }
+      ]
+    },
+    {
+      "id": "ch5s3-zb-duos-cash",
+      "name": "ZB Duos Cash Cup",
+      "chapter": 5,
+      "season": 3,
+      "seasonId": "S30",
+      "sourceEventIds": [
+        "S30_DuosCashCupZB"
+      ],
+      "series": "cash-cup",
+      "mode": "zero-build",
+      "subtype": "duos-cash-cup",
+      "team": "duo",
+      "platform": "cross-platform",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "Osirionの過去大会開催履歴で公式EpicイベントID・大会名称を確認。個別の通過・賞金・報酬を推定せず確認候補として登録。",
+          "url": "https://www.fortnite.com/competitive/events/S30_DuosCashCupZB/"
+        }
+      ]
+    },
+    {
+      "id": "ch5s3-zb-solo-victory",
+      "name": "ZB Solo Victory Cup",
+      "chapter": 5,
+      "season": 3,
+      "seasonId": "S30",
+      "sourceEventIds": [
+        "S30_SoloZBVictoryCashCup"
+      ],
+      "series": "victory-cup",
+      "mode": "zero-build",
+      "subtype": "solo-victory-cup",
+      "team": "solo",
+      "platform": "cross-platform",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "Osirionの過去大会開催履歴で公式EpicイベントID・大会名称を確認。個別の通過・賞金・報酬を推定せず確認候補として登録。",
+          "url": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/"
+        }
+      ]
+    },
+    {
+      "id": "ch5s4-zb-solo-victory",
+      "name": "ZB Solo Victory Cup",
+      "chapter": 5,
+      "season": 4,
+      "seasonId": "S31",
+      "sourceEventIds": [
+        "S31_SoloZBVictoryCashCup"
+      ],
+      "series": "victory-cup",
+      "mode": "zero-build",
+      "subtype": "solo-victory-cup",
+      "team": "solo",
+      "platform": "cross-platform",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "Osirionの過去大会開催履歴で公式EpicイベントID・大会名称を確認。個別の通過・賞金・報酬を推定せず確認候補として登録。",
+          "url": "https://www.fortnite.com/competitive/events/S31_SoloZBVictoryCashCup/"
+        }
+      ]
+    },
+    {
+      "id": "ch5s4-zb-duos-cash",
+      "name": "ZB Duos Cash Cup",
+      "chapter": 5,
+      "season": 4,
+      "seasonId": "S31",
+      "sourceEventIds": [
+        "S31_DuosCashCupZB"
+      ],
+      "series": "cash-cup",
+      "mode": "zero-build",
+      "subtype": "duos-cash-cup",
+      "team": "duo",
+      "platform": "cross-platform",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "Osirionの過去大会開催履歴で公式EpicイベントID・大会名称を確認。個別の通過・賞金・報酬を推定せず確認候補として登録。",
+          "url": "https://www.fortnite.com/competitive/events/S31_DuosCashCupZB/"
+        }
+      ]
+    },
+    {
+      "id": "ch5s4-reload-squads-victory",
+      "name": "Reload Squads Victory Cup",
+      "chapter": 5,
+      "season": 4,
+      "seasonId": "S31",
+      "sourceEventIds": [
+        "S31_SquadsReloadVictoryCashCup"
+      ],
+      "series": "victory-cup",
+      "mode": "reload",
+      "subtype": "squads-victory-cup",
+      "team": "squad",
+      "platform": "cross-platform",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "Osirionの過去大会開催履歴で公式EpicイベントID・大会名称を確認。個別の通過・賞金・報酬を推定せず確認候補として登録。",
+          "url": "https://www.fortnite.com/competitive/events/S31_SquadsReloadVictoryCashCup/"
+        }
+      ]
+    },
+    {
+      "id": "ch5s4-trios-cash",
+      "name": "Trios Cash Cup",
+      "chapter": 5,
+      "season": 4,
+      "seasonId": "S31",
+      "sourceEventIds": [
+        "S31_TriosCashCup"
+      ],
+      "series": "cash-cup",
+      "mode": "unknown",
+      "subtype": "trios-cash-cup",
+      "team": "trio",
+      "platform": "cross-platform",
+      "unknownFields": [
+        "mode"
+      ],
+      "evidence": [
+        {
+          "text": "Osirionの過去大会開催履歴で公式EpicイベントID・大会名称を確認。個別の通過・賞金・報酬を推定せず確認候補として登録。",
+          "url": "https://www.fortnite.com/competitive/events/S31_TriosCashCup/"
+        }
+      ]
+    },
+    {
+      "id": "ch5s5-zb-solo-victory",
+      "name": "ZB Solo Victory Cup",
+      "chapter": 5,
+      "season": 5,
+      "seasonId": "S32",
+      "sourceEventIds": [
+        "S32_SoloZBVictoryCashCup"
+      ],
+      "series": "victory-cup",
+      "mode": "zero-build",
+      "subtype": "solo-victory-cup",
+      "team": "solo",
+      "platform": "cross-platform",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "Osirionの過去大会開催履歴で公式EpicイベントID・大会名称を確認。個別の通過・賞金・報酬を推定せず確認候補として登録。",
+          "url": "https://www.fortnite.com/competitive/events/S32_SoloZBVictoryCashCup/"
+        }
+      ]
+    },
+    {
+      "id": "ch5s5-trios-cash",
+      "name": "Trios Cash Cup",
+      "chapter": 5,
+      "season": 5,
+      "seasonId": "S32",
+      "sourceEventIds": [
+        "S32_TriosCashCup"
+      ],
+      "series": "cash-cup",
+      "mode": "unknown",
+      "subtype": "trios-cash-cup",
+      "team": "trio",
+      "platform": "cross-platform",
+      "unknownFields": [
+        "mode"
+      ],
+      "evidence": [
+        {
+          "text": "Osirionの過去大会開催履歴で公式EpicイベントID・大会名称を確認。個別の通過・賞金・報酬を推定せず確認候補として登録。",
+          "url": "https://www.fortnite.com/competitive/events/S32_TriosCashCup/"
+        }
+      ]
+    },
+    {
+      "id": "ch5s5-zb-trios-cash",
+      "name": "ZB Trios Cash Cup",
+      "chapter": 5,
+      "season": 5,
+      "seasonId": "S32",
+      "sourceEventIds": [
+        "S32_TriosCashCup_ZB"
+      ],
+      "series": "cash-cup",
+      "mode": "zero-build",
+      "subtype": "trios-cash-cup",
+      "team": "trio",
+      "platform": "cross-platform",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "Osirionの過去大会開催履歴で公式EpicイベントID・大会名称を確認。個別の通過・賞金・報酬を推定せず確認候補として登録。",
+          "url": "https://www.fortnite.com/competitive/events/S32_TriosCashCup_ZB/"
+        }
+      ]
+    },
+    {
+      "id": "ch6s1-solo-cash",
+      "name": "Solo Cash Cup",
+      "chapter": 6,
+      "season": 1,
+      "seasonId": "S33",
+      "sourceEventIds": [
+        "S33_SoloCashCup"
+      ],
+      "series": "cash-cup",
+      "mode": "battle-royale",
+      "subtype": "unknown",
+      "team": "solo",
+      "platform": "cross-platform",
+      "unknownFields": [
+        "subtype"
+      ],
+      "evidence": [
+        {
+          "text": "Osirionの過去大会開催履歴で公式EpicイベントID・大会名称を確認。個別の通過・賞金・報酬を推定せず確認候補として登録。",
+          "url": "https://www.fortnite.com/competitive/events/S33_SoloCashCup/"
+        }
+      ]
+    },
+    {
+      "id": "ch6s2-solo-cash",
+      "name": "Solo Cash Cup",
+      "chapter": 6,
+      "season": 2,
+      "seasonId": "S34",
+      "sourceEventIds": [
+        "S34_SoloCashCup"
+      ],
+      "series": "cash-cup",
+      "mode": "battle-royale",
+      "subtype": "unknown",
+      "team": "solo",
+      "platform": "cross-platform",
+      "unknownFields": [
+        "subtype"
+      ],
+      "evidence": [
+        {
+          "text": "Osirionの過去大会開催履歴で公式EpicイベントID・大会名称を確認。個別の通過・賞金・報酬を推定せず確認候補として登録。",
+          "url": "https://www.fortnite.com/competitive/events/S34_SoloCashCup/"
+        }
+      ]
+    },
+    {
+      "id": "ch6s3-console-duos-victory",
+      "name": "Duos Console Victory Cash Cup",
+      "chapter": 6,
+      "season": 3,
+      "seasonId": "S36",
+      "sourceEventIds": [
+        "S36_VictoryDuosCup"
+      ],
+      "series": "victory-cup",
+      "mode": "battle-royale",
+      "subtype": "unknown",
+      "team": "duo",
+      "platform": "console",
+      "unknownFields": [
+        "subtype"
+      ],
+      "evidence": [
+        {
+          "text": "Osirionの過去大会開催履歴で公式EpicイベントID・大会名称を確認。個別の通過・賞金・報酬を推定せず確認候補として登録。",
+          "url": "https://www.fortnite.com/competitive/events/S36_VictoryDuosCup/"
+        }
+      ]
+    },
+    {
+      "id": "ch6s4-console-duos-victory",
+      "name": "Duos Console Victory Cash Cup",
+      "chapter": 6,
+      "season": 4,
+      "seasonId": "S37",
+      "sourceEventIds": [
+        "S37_ConsoleDuosCashCups"
+      ],
+      "series": "victory-cup",
+      "mode": "unknown",
+      "subtype": "unknown",
+      "team": "duo",
+      "platform": "console",
+      "unknownFields": [
+        "mode",
+        "subtype"
+      ],
+      "evidence": [
+        {
+          "text": "Osirionの過去大会開催履歴で公式EpicイベントID・大会名称を確認。個別の通過・賞金・報酬を推定せず確認候補として登録。",
+          "url": "https://www.fortnite.com/competitive/events/S37_ConsoleDuosCashCups/"
+        }
+      ]
+    },
+    {
+      "id": "ch7s1-reload-duos-victory",
+      "name": "Reload Duos Victory Cup",
+      "chapter": 7,
+      "season": 1,
+      "seasonId": "S39",
+      "sourceEventIds": [
+        "S39_ReloadCashVictoryCup_Dec",
+        "S39_ReloadCashVictoryCup_Jan"
+      ],
+      "series": "victory-cup",
+      "mode": "reload",
+      "subtype": "reload-duos-victory-cup",
+      "team": "duo",
+      "platform": "cross-platform",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "Osirionの過去大会開催履歴で公式EpicイベントID・大会名称を確認。個別の通過・賞金・報酬を推定せず確認候補として登録。",
+          "url": "https://www.fortnite.com/competitive/events/S39_ReloadCashVictoryCup_Dec/"
+        }
+      ]
+    },
+    {
+      "id": "ch7s1-duos-victory",
+      "name": "Duos Victory Cup",
+      "chapter": 7,
+      "season": 1,
+      "seasonId": "S39",
+      "sourceEventIds": [
+        "S39_DuosVictoryCup_Dec",
+        "S39_DuosVictoryCup"
+      ],
+      "series": "victory-cup",
+      "mode": "unknown",
+      "subtype": "unknown",
+      "team": "duo",
+      "platform": "cross-platform",
+      "unknownFields": [
+        "mode",
+        "subtype"
+      ],
+      "evidence": [
+        {
+          "text": "Osirionの過去大会開催履歴で公式EpicイベントID・大会名称を確認。個別の通過・賞金・報酬を推定せず確認候補として登録。",
+          "url": "https://www.fortnite.com/competitive/events/S39_DuosVictoryCup_Dec/"
+        }
+      ]
+    },
+    {
+      "id": "ch7s1-console-duos-victory-zb",
+      "name": "Duos Console Victory Cup (ZB)",
+      "chapter": 7,
+      "season": 1,
+      "seasonId": "S39",
+      "sourceEventIds": [
+        "S39_DuosConsoleVictoryCupZB_Dec",
+        "S39_DuosConsoleVictoryCupZB_Jan"
+      ],
+      "series": "victory-cup",
+      "mode": "zero-build",
+      "subtype": "unknown",
+      "team": "duo",
+      "platform": "console",
+      "unknownFields": [
+        "subtype"
+      ],
+      "evidence": [
+        {
+          "text": "Osirionの過去大会開催履歴で公式EpicイベントID・大会名称を確認。個別の通過・賞金・報酬を推定せず確認候補として登録。",
+          "url": "https://www.fortnite.com/competitive/events/S39_DuosConsoleVictoryCupZB_Dec/"
+        }
+      ]
+    },
+    {
+      "id": "ch7s1-solo-victory",
+      "name": "Solo Victory Cup",
+      "chapter": 7,
+      "season": 1,
+      "seasonId": "S39",
+      "sourceEventIds": [
+        "S39_SoloVictoryCup"
+      ],
+      "series": "victory-cup",
+      "mode": "unknown",
+      "subtype": "solo-victory-cup",
+      "team": "solo",
+      "platform": "cross-platform",
+      "unknownFields": [
+        "mode"
+      ],
+      "evidence": [
+        {
+          "text": "Osirionの過去大会開催履歴で公式EpicイベントID・大会名称を確認。個別の通過・賞金・報酬を推定せず確認候補として登録。",
+          "url": "https://www.fortnite.com/competitive/events/S39_SoloVictoryCup/"
+        }
+      ]
+    },
+    {
+      "id": "ch7s2-solo-victory",
+      "name": "Solo Victory Cup",
+      "chapter": 7,
+      "season": 2,
+      "seasonId": "S40",
+      "sourceEventIds": [
+        "S40_SoloVictoryCup"
+      ],
+      "series": "victory-cup",
+      "mode": "unknown",
+      "subtype": "solo-victory-cup",
+      "team": "solo",
+      "platform": "cross-platform",
+      "unknownFields": [
+        "mode"
+      ],
+      "evidence": [
+        {
+          "text": "Osirionの過去大会開催履歴で公式EpicイベントID・大会名称を確認。個別の通過・賞金・報酬を推定せず確認候補として登録。",
+          "url": "https://www.fortnite.com/competitive/events/S40_SoloVictoryCup/"
+        }
+      ]
+    },
+    {
+      "id": "ch7s2-console-zb-solo-victory",
+      "name": "Console Solo Victory Cup (ZB)",
+      "chapter": 7,
+      "season": 2,
+      "seasonId": "S40",
+      "sourceEventIds": [
+        "S40_ConsoleVCC_SolosZB"
+      ],
+      "series": "victory-cup",
+      "mode": "zero-build",
+      "subtype": "console-solo-victory-cup",
+      "team": "solo",
+      "platform": "console",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "Osirionの過去大会開催履歴で公式EpicイベントID・大会名称を確認。個別の通過・賞金・報酬を推定せず確認候補として登録。",
+          "url": "https://www.fortnite.com/competitive/events/S40_ConsoleVCC_SolosZB/"
+        }
+      ]
+    },
+    {
+      "id": "ch7s2-reload-duos-victory",
+      "name": "Reload Duos Victory Cup",
+      "chapter": 7,
+      "season": 2,
+      "seasonId": "S40",
+      "sourceEventIds": [
+        "S40_DuosReloadVictoryCup"
+      ],
+      "series": "victory-cup",
+      "mode": "reload",
+      "subtype": "reload-duos-victory-cup",
+      "team": "duo",
+      "platform": "cross-platform",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "Osirionの過去大会開催履歴で公式EpicイベントID・大会名称を確認。個別の通過・賞金・報酬を推定せず確認候補として登録。",
+          "url": "https://www.fortnite.com/competitive/events/S40_DuosReloadVictoryCup/"
+        }
+      ]
+    },
+    {
+      "id": "ch7s2-console-zb-trios-cash",
+      "name": "Console Trios Cash Cup (ZB)",
+      "chapter": 7,
+      "season": 2,
+      "seasonId": "S40",
+      "sourceEventIds": [
+        "S40_ConsoleCC_TriosZB"
+      ],
+      "series": "cash-cup",
+      "mode": "zero-build",
+      "subtype": "trios-cash-cup",
+      "team": "trio",
+      "platform": "console",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "Osirionの過去大会開催履歴で公式EpicイベントID・大会名称を確認。個別の通過・賞金・報酬を推定せず確認候補として登録。",
+          "url": "https://www.fortnite.com/competitive/events/S40_ConsoleCC_TriosZB/"
+        }
+      ]
+    },
+    {
+      "id": "ch7s3-console-zb-solo-victory",
+      "name": "Console Solo Victory Cup (ZB)",
+      "chapter": 7,
+      "season": 3,
+      "seasonId": "S41",
+      "sourceEventIds": [
+        "S41_ConsoleVCC_SolosZB"
+      ],
+      "series": "victory-cup",
+      "mode": "zero-build",
+      "subtype": "console-solo-victory-cup",
+      "team": "solo",
+      "platform": "console",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "Osirionの過去大会開催履歴で公式EpicイベントID・大会名称を確認。個別の通過・賞金・報酬を推定せず確認候補として登録。",
+          "url": "https://www.fortnite.com/competitive/events/S41_ConsoleVCC_SolosZB/"
+        }
+      ]
+    },
+    {
+      "id": "ch7s3-console-zb-duos-cash",
+      "name": "Console Duos ZB Cash Cup",
+      "chapter": 7,
+      "season": 3,
+      "seasonId": "S41",
+      "sourceEventIds": [
+        "S41_ConsoleCC_DuosZB",
+        "S41_CashCup_DuosZB"
+      ],
+      "series": "cash-cup",
+      "mode": "zero-build",
+      "subtype": "duos-cash-cup",
+      "team": "duo",
+      "platform": "console",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "Osirionの過去大会開催履歴で公式EpicイベントID・大会名称を確認。個別の通過・賞金・報酬を推定せず確認候補として登録。",
+          "url": "https://www.fortnite.com/competitive/events/S41_ConsoleCC_DuosZB/"
+        }
+      ]
     }
   ]
 }

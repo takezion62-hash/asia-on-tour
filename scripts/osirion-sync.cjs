@@ -192,6 +192,28 @@ function selectActiveWindows(windows,state,config){
  for(const win of pending){if(chosen.length>=limit)break;if(!seen.has(win.key)){chosen.push(win);seen.add(win.key)}}
  return chosen;
 }
+// Historical scans must fairly cover every year and tournament series.
+function selectHistoricalWindows(windows,state,config,time=Date.now()){
+ const pending=windows.filter(w=>{
+  const p=state.windows[w.key];
+  return !p?.complete&&(!p?.retryAfter||Date.parse(p.retryAfter)<=time);
+ });
+ const years=[...new Set(pending.map(w=>w.dateJst.slice(0,4)))].sort((a,b)=>b.localeCompare(a));
+ const limit=Math.max(1,config.maxWindowsPerRun||6),selected=[],seen=new Set();
+ const priority=(a,b)=>Number(!!state.windows[b.key]?.nextPage)-Number(!!state.windows[a.key]?.nextPage)||a.end-b.end;
+ const add=pool=>{for(const w of pool.slice().sort(priority))if(!seen.has(w.key)){selected.push(w);seen.add(w.key);break}};
+ for(const series of ['victory-cup','other']){
+  for(const year of years){
+   if(selected.length>=limit)break;
+   add(pending.filter(w=>w.dateJst.startsWith(year)&&(series==='victory-cup'?w.series==='victory-cup':w.series!=='victory-cup')));
+  }
+ }
+ for(const w of pending.slice().sort(priority)){
+  if(selected.length>=limit)break;
+  if(!seen.has(w.key)){selected.push(w);seen.add(w.key)}
+ }
+ return selected;
+}
 async function main(){
  const historical=process.argv.includes('--history');
  const prefix=historical?'history-sync':'auto-sync';
@@ -210,7 +232,7 @@ async function main(){
  const unmapped=historical?[]:discoverUnmapped(all,data.tournaments.catalog,config);
  const state=read(prefix+'-scan.json');
  if(state.version!==1||!state.windows||typeof state.windows!=='object')throw Error('checkpoint invalid');
- const active=selectActiveWindows(windows,state,config);
+ const active=historical?selectHistoricalWindows(windows,state,config):selectActiveWindows(windows,state,config);
  const previewConfig={version:1,accounts,windows:active.map(w=>({eventId:w.eventId,windowId:w.windowId,dateJst:w.dateJst,region:w.region,seasonId:w.seasonId,tournamentId:w.tournamentId,kind:w.kind,round:w.round}))};
  let budget=Math.min(Math.max(config.maxPagesPerRun||30,1),50),scanned=0,invalidRows=0;
  for(const win of active){
@@ -287,4 +309,4 @@ async function main(){
  console.log((historical?'OSIRION_HISTORY_REVIEW ':'OSIRION_REVIEW ')+JSON.stringify({scannedPages:scanned,linkedPlayers:accounts.length,identityConflicts:conflicts.length,windows:windows.length,unmappedEvents:unmapped.length,proposals:unique.size,imported,finished}));
 }
 if(require.main===module)main().catch(e=>{console.error('OSIRION_SYNC_ERROR '+e.stack);process.exitCode=1});
-module.exports={identity,linkedAccounts,parseStage,parseReviewStage,discover,discoverUnmapped,selectActiveWindows,advancementLimit,normalizeRow,getTournaments,getLeaderboard,main};
+module.exports={identity,linkedAccounts,parseStage,parseReviewStage,discover,discoverUnmapped,selectActiveWindows,selectHistoricalWindows,advancementLimit,normalizeRow,getTournaments,getLeaderboard,main};

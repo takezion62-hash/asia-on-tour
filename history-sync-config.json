@@ -3,7 +3,7 @@
   "enabled": true,
   "mode": "review",
   "provider": "osirion",
-  "fromDate": "2026-08-01",
+  "fromDate": "2024-05-29",
   "toDate": "2026-11-04",
   "regions": [
     "ME",
@@ -26,5 +26,5 @@
     "icon-cup",
     "playstation-cup"
   ],
-  "maxPagesPerWindowPerRun": 8
+  "maxPagesPerWindowPerRun": 4
 }
