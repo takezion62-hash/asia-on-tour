@@ -50,5 +50,18 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git commit -m "data: archive verified overseas participation"
-          git pull --rebase origin main
-          git push origin HEAD:main
+          # Race-safe, bounded retry: integrate other bots' commits, never force push.
+          for attempt in 1 2 3 4 5; do
+            git pull --rebase origin main || {
+              git rebase --abort || true
+              echo "Rebase conflict: preserve both histories and require review"
+              exit 1
+            }
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            echo "Remote advanced between pull and push; retrying ($attempt/5)"
+            sleep $((attempt * 3))
+          done
+          echo "Could not push after 5 safe retries"
+          exit 1
