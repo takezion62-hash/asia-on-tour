@@ -1,8 +1,11 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-05T06:29:39.654Z",
+  "checkedAt": "2026-11-05T07:04:21.126Z",
   "mode": "review",
+  "scope": "recent",
+  "fromDate": null,
+  "toDate": null,
   "provider": "osirion",
   "linkedPlayers": 422,
   "trackedWindows": 0,
@@ -12,6 +15,7 @@
   "scannedPages": 0,
   "completedWindows": 0,
   "identityConflicts": 8,
+  "alreadyRegistered": 0,
   "unmappedEvents": 0,
   "unmappedEventIds": [],
   "message": "Osirionに接続済み。既存プロフィールのうちIDが一意な422名を追跡。0ページを検査、0件が確認待ち。照合保留ID8件は対象外。"
