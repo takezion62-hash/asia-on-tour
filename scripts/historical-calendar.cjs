@@ -18,6 +18,14 @@ function stageLabel(windowId){
  let label=event?'Event '+Number(event[1])+' · Round '+round:day?'Day '+Number(day[2])+' · Round '+round:week?'Week '+Number(week[1])+' · Round '+round:session?'Session '+Number(session[1]):eventOnly?'Event '+Number(eventOnly[1]):'ラウンド詳細未確認';
  return {round:label,stage:round===1?'予選':round===2?'決勝':'単一ラウンド'};
 }
+// Untagged tournaments are allowed only when Fortnite's own displayData supplies
+// an explicit non-empty title; raw codes never masquerade as a verified title.
+function classifyUntyped(title){
+ const value=String(title).toLowerCase();
+ const series=/victory(?: cash)? cup/.test(value)?'victory-cup':/cash cup/.test(value)?'cash-cup':/ranked cup/.test(value)?'unknown':/performance evaluation/.test(value)?'performance-evaluation':/icon cup/.test(value)?'icon-cup':/playstation/.test(value)?'playstation-cup':/test cup/.test(value)?'test-cup':'unknown';
+ const mode=/zero.build.*reload|reload.*zero.build|\bzb\b.*reload|reload.*\bzb\b/i.test(title)?'reload-zero-build':/zero.build|\bzb\b/i.test(title)?'zero-build':/reload/i.test(title)?'reload':/battle.royale/i.test(title)?'battle-royale':'unknown';
+ return {series,mode};
+}
 function buildHistory(all,catalog,opts={}){
  const now=opts.now??Date.now(),fromDate=opts.fromDate||'2024-01-01';
  const catalogIndex=new Map();
@@ -34,15 +42,20 @@ function buildHistory(all,catalog,opts={}){
   const matched=String(tournament.eventId||'').match(/^epicgames_(S\d+_.+)_([A-Z]{2,4})$/);
   if(!matched||!regions.has(matched[2])){skip('outside supported regions');continue}
   const [,base,region]=matched,seasonId=base.split('_')[0],catalogued=catalogIndex.get(base);
-  if(!catalogued||catalogued.seasonId!==seasonId){
-   if(!missing.has(base)&&missingDetails.length<14){
-    const candidates=Object.entries(tournament).filter(([k,v])=>/name|title|description|type|mode|region/i.test(k)&&typeof v==='string').slice(0,10);
-    const summary=obj=>obj&&typeof obj==='object'?Object.fromEntries(Object.entries(obj).slice(0,12).map(([k,v])=>[k,typeof v==='string'?v.slice(0,160):v&&typeof v==='object'?Object.keys(v).slice(0,12):v])):obj;
-    missingDetails.push({id:base,fields:Object.keys(tournament),metadata:Object.fromEntries(candidates),displayData:summary(tournament.displayData),apiMetadata:summary(tournament.metadata)});
-   }
-   missing.add(base);skip('not catalogued');continue;
+  const title=tournament.displayData?.longFormatTitle||tournament.displayData?.shortFormatTitle;
+  const hasTitle=typeof title==='string'&&title.trim().length>=3&&title.trim().length<=140;
+  if((catalogued?.series==='fncs'&&!/^FNCS Division 1(?: |$)/i.test(catalogued.name))
+     ||(!catalogued&&/^S\\d+_FNCS/i.test(base)&&!/^S\\d+_FNCSDivisionalCup_Division1/i.test(base)&&!/FNCSCommunityCup/i.test(base))){
+   skip('region-locked FNCS');continue;
   }
-  if(catalogued.series==='fncs'&&!/^FNCS Division 1(?: |$)/i.test(catalogued.name)){skip('region-locked FNCS');continue}
+  if(!catalogued&&!hasTitle){
+   if(!missing.has(base)&&missingDetails.length<14){
+    missingDetails.push({id:base,reason:'missing verified displayData title'});
+   }
+   missing.add(base);skip('no official display title');continue;
+  }
+  const inferred=!catalogued?classifyUntyped(title):null;
+  const entry=catalogued||{id:base,name:title.trim(),seasonId,series:inferred.series,mode:inferred.mode};
   for(const win of tournament.eventWindows||[]){
    const windowId=win.eventWindowId;
    if(typeof windowId!=='string'||!windowId.endsWith('_'+region)){skip('invalid region window');continue}
@@ -53,8 +66,8 @@ function buildHistory(all,catalog,opts={}){
    const key=tournament.eventId+'/'+windowId;
    const labels=stageLabel(windowId);
    selected.set(key,{
-    id:key,seasonId, name:catalogued.name,eventId:base,region,
-    tournamentId:catalogued.id,series:catalogued.series,mode:catalogued.mode,
+    id:key,seasonId, name:entry.name,eventId:base,region,
+    tournamentId:entry.id,series:entry.series,mode:entry.mode,
     round:labels.round,stage:labels.stage,
     sourceWindowId:windowId,startUtc,endUtc:new Date(end).toISOString(),
     dateJst,timeJst:iso.slice(11,16),url:officialUrl(base,region,windowId)
