@@ -7,7 +7,7 @@
 })(typeof globalThis === 'object' ? globalThis : this, function () {
   'use strict';
 
-  const VERSION = '1.7.0';
+  const VERSION = '1.8.0';
   const REGIONS = Object.freeze({ EU: 1.4, BR: 1.3, NAC: 1.2, ME: 1.1, OCE: 1.1, NAW: 1.0 });
   const STAGES = Object.freeze({ '予選': 0.35, '賞金決勝': 1, '決勝': 1, 'Practice決勝': 1,
     'Performance決勝': 1, 'スキン大会': 1, 'コスメ大会': 1, 'Test Cup': 1 });
@@ -16,6 +16,9 @@
   const SKIN_SERIES = new Set(['skin-cup', 'override-series']); // legacy Override data also skin-rated
   const OTHER_COSMETIC_SERIES = new Set(['icon-cup']);
   const SCORED_SERIES = new Set(['fncs', 'performance-evaluation', 'victory-cup', 'cash-cup', 'unreal-cup', 'playstation-cup', 'test-cup', ...SKIN_SERIES, ...OTHER_COSMETIC_SERIES]);
+  // A confirmed advancement is meaningful, but worth less than the smallest cash award (20pt/VR).
+  const QUALIFICATION_BASE = 10;
+  const QUALIFYING_SERIES = new Set(['fncs', 'performance-evaluation', 'victory-cup', 'cash-cup', 'unreal-cup', 'playstation-cup', 'skin-cup', 'override-series', 'icon-cup']);
 
   function eventMultiplier(record, tournament) {
     if (!tournament || !SCORED_SERIES.has(tournament.series)) return null;
@@ -81,6 +84,17 @@
     } catch { return null; }
   }
 
+  // Only a verified, explicitly labelled advancement OR a verified Round 2 appearance
+  // can establish qualification. Round 1 participation/rank alone proves nothing.
+  function qualificationEvidence(record,tournament) {
+    if (!record || record.verified!==true || record.partial===true || record.reported===true || record.reviewOnly===true ||
+      !QUALIFYING_SERIES.has(tournament?.series)) return null;
+    if (record.kind==='予選' && /予選(?:突破|通過)/u.test(String(record.round||''))) return 'explicit';
+    const secondRound=sourceRound(record);
+    if (CASH_FINALS.has(record.kind) && typeof secondRound==='string' && /Round_?2(?:_|$)/i.test(secondRound)) return 'final';
+    return null;
+  }
+
   function sessionKey(record) {
     const identifiers = new Map();
     // Keep every explicit scheduling axis; rounds share attendance, sessions do not.
@@ -144,6 +158,25 @@
     const players = new Map();
     const seenEntries = new Set();
     const awardedBonusUnits = new Map();
+    // Choose explicit advancement over a derived Round 2 spot; fixes double counting
+    // independently of source row order and still works when only the final is published.
+    const qualifyingRows=new Map();
+    const qualificationKey=(record,tournament,name)=>stable([name,tournament.id||record.event,record.region,
+      sessionKey(record)==='unspecified'?record.date:sessionKey(record)]);
+    for (const record of unique.records) {
+      if (!record || !(record.kind in STAGES) || !Object.hasOwn(REGIONS,record.region) || !record.date ||
+        (region!=='all' && region!==record.region)) continue;
+      const tournament=options.classify(record)||{};
+      if (eventMultiplier(record,tournament)===null) continue;
+      const evidence=qualificationEvidence(record,tournament);
+      if (!evidence) continue;
+      for (const name of cleanPeople(record,options.names)) {
+        const key=qualificationKey(record,tournament,name),earlier=qualifyingRows.get(key);
+        if (!earlier || (evidence==='explicit' && earlier.evidence!=='explicit') ||
+          (evidence===earlier.evidence && String(record.id||'').localeCompare(String(earlier.record.id||''))<0))
+          qualifyingRows.set(key,{record,evidence});
+      }
+    }
     let included = 0, unknownModeKills = 0, missingRanks = 0, missingKills = 0, ignored = 0;
 
     for (const record of unique.records) {
@@ -187,15 +220,19 @@
         const bonusUnits = Math.max(0, candidateUnits - alreadyAwarded);
         if (bonusUnits) awardedBonusUnits.set(appearanceKey, candidateUnits);
         const bonus = bonusUnits * (policy?.base || 0) * regionFactor;
-        const total = attendance + placement + elimination + bonus;
-        const value = players.get(name) || { name, score: 0, attendance: 0, placement: 0, eliminations: 0, bonus: 0,
+        const chosenQualification=qualifyingRows.get(qualificationKey(record,tournament,name));
+        const qualificationBonus=chosenQualification?.record===record ? QUALIFICATION_BASE*regionFactor : 0;
+        const total = attendance + placement + elimination + bonus + qualificationBonus;
+        const value = players.get(name) || { name, score: 0, attendance: 0, placement: 0, eliminations: 0, bonus: 0, qualificationBonus: 0, qualificationCount: 0,
           appearances: 0, roundRecords: 0, rows: [], regions: new Set() };
         value.score += total; value.attendance += attendance; value.placement += placement;
-        value.eliminations += elimination; value.bonus += bonus; value.appearances += Number(newAppearance);
+        value.eliminations += elimination; value.bonus += bonus; value.qualificationBonus += qualificationBonus;
+        value.qualificationCount += Number(qualificationBonus>0); value.appearances += Number(newAppearance);
         value.roundRecords++; value.regions.add(record.region);
         value.rows.push({ id: record.id || null, date: record.date, region: record.region, event: record.event,
           kind: record.kind, rank: hasRank ? record.rank : null, kills: hasKills ? record.kills : null,
-          source: record.source || null, attendance, placement, eliminations: elimination, bonus, bonusUnits, bonusMode: policy?.mode || null, total,
+          source: record.source || null, attendance, placement, eliminations: elimination, bonus, bonusUnits, bonusMode: policy?.mode || null,
+          qualificationBonus, qualificationEvidence:qualificationBonus>0?chosenQualification.evidence:null, total,
           regionMultiplier: regionFactor, eventMultiplier: eventFactor, stageMultiplier: stageFactor,
           modeKnown: killCoefficient !== null });
         players.set(name, value);
@@ -213,5 +250,5 @@
       conflictingDuplicateCount: unique.conflictingCount, missingRanks, missingKills, unknownModeKills };
   }
 
-  return Object.freeze({ VERSION, REGIONS, STAGES, eventMultiplier, sessionKey, calculate });
+  return Object.freeze({ VERSION, REGIONS, STAGES, QUALIFICATION_BASE, eventMultiplier, qualificationEvidence, sessionKey, calculate });
 });
