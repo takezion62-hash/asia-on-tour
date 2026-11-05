@@ -1,9 +1,12 @@
 {
   "version": 1,
-  "enabled": false,
+  "enabled": true,
   "mode": "review",
-  "provider": "api-fortnite.com",
-  "maxPages": 120,
+  "provider": "osirion",
+  "lookbackDays": 7,
+  "minLagMinutes": 240,
+  "maxPagesPerRun": 30,
+  "maxWindowsPerRun": 2,
   "accounts": [],
   "windows": []
 }

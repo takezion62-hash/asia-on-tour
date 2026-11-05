@@ -1,5 +1,11 @@
 name: AOT safe results auto-sync
 on:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/osirion-sync.cjs"
+      - "auto-sync-config.json"
+      - ".github/workflows/auto-sync.yml"
   schedule:
     - cron: '17 0,6,12,18 * * *'
   workflow_dispatch:
@@ -25,20 +31,20 @@ jobs:
       - name: Check eligible tournament results
         env:
           AOT_FORTNITE_API_KEY: ${{ secrets.AOT_FORTNITE_API_KEY }}
-        run: node scripts/auto-sync.cjs
+        run: node scripts/osirion-sync.cjs
       - name: Validate data and run sync unit tests
         run: |
           npm run validate
-          node --test tests/auto-sync.test.cjs
+          node --test tests/auto-sync.test.cjs tests/osirion-sync.test.cjs
       - name: Commit checked updates only
         run: |
-          if [ -z "$(git status --porcelain -- results.json updates.json auto-sync-status.json auto-sync-review.json)" ]; then
+          if [ -z "$(git status --porcelain -- results.json updates.json auto-sync-status.json auto-sync-review.json auto-sync-scan.json)" ]; then
             echo "No changes: disabled or already up to date"
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add results.json updates.json auto-sync-status.json auto-sync-review.json
+          git add results.json updates.json auto-sync-status.json auto-sync-review.json auto-sync-scan.json
           git commit -m "data: apply verified AOT tournament sync"
           git pull --rebase origin main
           git push origin HEAD:main

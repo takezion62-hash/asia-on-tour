@@ -25,3 +25,15 @@
 
 ## ファイル構成
 auto-sync-config.json は設定、auto-sync-status.json は公開状態、auto-sync-review.json は確認候補、scripts/auto-sync-core.cjs は重複と本人確認検証、scripts/auto-sync.cjs は実行、.github/workflows/auto-sync.yml は定期ジョブ。
+
+## Osirionパイロット（2026-11-05）
+- 無料公開API `https://fnapi.osirion.gg/` の `/v1/tournaments` と `/v1/tournaments/leaderboard` にGitHub Actionsから接続できました。
+- 2026/9/22 NAW Solo Victory Cupの予選10名について、TrackerプロフィールUUIDのハイフン除去後のIDがOsirionのaccountIdと一致。順位、ポイント、試合数、キル数、VRの全項目が10名とも一致しました。
+- 現在の設定は `provider: "osirion"`, `enabled: true`, `mode: "review"`。無課金・鍵なしの定期取得を有効化しますが、**戦績への自動追加は引き続き無効**です。
+- 現在の追跡は既存 `results.json` に記録されたTracker UUIDを読み込み、1つのIDに掲載名が1つだけの選手に限定します。複数の名前が競合するID、名鑑にない選手、確定していないイベントは除外。
+- `tournaments.json` に登録済みのVictory Cup系イベントについて、開催後4時間以上経過した直近7日間の開催ウィンドウを自動発見します。対象はME/EU/NAC/NAW/OCE/BRで、ASIAやリージョンロックされた未登録FNCS予選は対象外です。
+- GitHub Actions 1回につき順位表最大30ページ、ウィンドウ最大2件まで。ページの続きは `auto-sync-scan.json` で管理し、次回継続します。API制限（順位表60回/分）に余裕を持たせています。
+- 候補は `auto-sync-review.json` とサイトの管理パネルに反映し、既存 `results.json` は一切書き換えません。決勝の賞金データはOsirionでは自動確定できないため未確認とします。
+- 今後、自動公開には重複確認・大会種別別の賞金ルール・API遅延・開催日判定・表示名変更などの再検証が必要です。modeをpublishにしても実行処理は安全のため失敗します。
+- オリジナルのFortnite Trackerリンクを保存し、Osirion APIの生の全順位表を当サイトに再配布しない方式です。運用時はOsirionの最新規約と利用制限も確認してください。
+
