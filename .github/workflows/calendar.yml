@@ -9,6 +9,7 @@ on:
       - 'results.json'
       - 'tournaments.json'
       - 'tests/calendar.spec.cjs'
+      - 'scripts/serve.cjs'
       - '.github/workflows/calendar.yml'
   pull_request:
     paths:
@@ -18,6 +19,7 @@ on:
       - 'results.json'
       - 'tournaments.json'
       - 'tests/calendar.spec.cjs'
+      - 'scripts/serve.cjs'
       - '.github/workflows/calendar.yml'
   workflow_dispatch:
 
