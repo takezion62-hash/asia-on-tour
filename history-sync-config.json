@@ -3,7 +3,7 @@
   "enabled": true,
   "mode": "review",
   "provider": "osirion",
-  "fromDate": "2024-05-29",
+  "fromDate": "2023-01-01",
   "toDate": "rolling",
   "regions": [
     "ME",
@@ -14,8 +14,8 @@
     "BR"
   ],
   "minLagMinutes": 240,
-  "maxPagesPerRun": 48,
-  "maxWindowsPerRun": 8,
+  "maxPagesPerRun": 80,
+  "maxWindowsPerRun": 18,
   "autoApproveVerified": true,
   "reviewSeries": [
     "victory-cup",
@@ -25,13 +25,15 @@
     "skin-cup",
     "icon-cup",
     "playstation-cup",
-    "unreal-cup"
+    "unreal-cup",
+    "test-cup"
   ],
-  "maxPagesPerWindowPerRun": 16,
+  "maxPagesPerWindowPerRun": 10,
   "priorityReview": {
     "series": "performance-evaluation",
     "region": "EU",
     "fromDate": "2026-08-01",
-    "maxWindows": 3
-  }
+    "maxWindows": 2
+  },
+  "maxRunMinutes": 12
 }
