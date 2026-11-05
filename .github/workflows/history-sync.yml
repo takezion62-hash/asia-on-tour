@@ -16,7 +16,7 @@ on:
 permissions:
   contents: write
 concurrency:
-  group: aot-provider-scans-main
+  group: aot-provider-history-main
   cancel-in-progress: false
 jobs:
   review-history:
@@ -32,6 +32,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '24'
+      - name: Delay historical API calls
+        run: sleep 35
       - name: Scan historical Osirion tournaments and approve verified results
         run: node scripts/osirion-sync.cjs --history
       - name: Validate unchanged public data and tests

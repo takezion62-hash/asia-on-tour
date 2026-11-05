@@ -16,7 +16,7 @@ on:
 permissions:
   contents: write
 concurrency:
-  group: aot-provider-scans-main
+  group: aot-provider-participation-main
   cancel-in-progress: false
 jobs:
   participation:
@@ -31,6 +31,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
+      - name: Delay participation API calls
+        run: sleep 75
       - name: Scan confirmed Epic-ID players, not all public leaderboard participants
         run: node scripts/participation-sync.cjs
       - name: Validate published achievements and participation safety

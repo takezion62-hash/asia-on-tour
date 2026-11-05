@@ -14,7 +14,7 @@ on:
 permissions:
   contents: write
 concurrency:
-  group: aot-provider-scans-main
+  group: aot-provider-recent-main
   cancel-in-progress: false
 jobs:
   check:
