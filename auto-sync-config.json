@@ -8,5 +8,15 @@
   "maxPagesPerRun": 30,
   "maxWindowsPerRun": 2,
   "accounts": [],
-  "windows": []
+  "windows": [],
+  "reviewSeries": [
+    "victory-cup",
+    "cash-cup",
+    "fncs",
+    "performance-evaluation",
+    "skin-cup",
+    "icon-cup",
+    "playstation-cup"
+  ],
+  "maxPagesPerWindowPerRun": 12
 }
