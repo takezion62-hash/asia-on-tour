@@ -93,6 +93,10 @@
       !Object.hasOwn(REGIONS,record.region)) return null;
     const id=tournament.id;
     if (id==='ch7s4-playstation-nickeh30-icon-cup' && tournament.seasonId==='S42') return 100;
+    if (id==='ch7s4-fncs-division-1-practice' && tournament.seasonId==='S42') return 50;
+    if (id==='ch7s4-performance-evaluation' && tournament.seasonId==='S42') return 50;
+    if (id==='ch7s4-performance-evaluation-trios' && tournament.seasonId==='S42') return 33;
+    if (id==='ch7s4-reload-zero-build-duos-cash-cup' && tournament.seasonId==='S42') return 20;
     if (['ch7s3-solo-victory-cup','ch7s4-solo-victory-cup'].includes(id) &&
       ['S41','S42'].includes(tournament.seasonId))
       return record.region==='EU'?4000:record.region==='NAC'?2000:800;
@@ -112,9 +116,13 @@
   function verifiedQualificationSource(record,tournament,requireRoundOne=true) {
     const id=sourceRound(record);
     if (!id || !Array.isArray(tournament?.sourceEventIds)) return false;
+    const fncsWindow=id.match(/_Event(\d+)_(?:ME|EU|NAC|NAW|OCE|BR)$/i);
+    const fncsWeek=String(record.round||'').match(/Week\s*(\d+)/i);
     const qualifier=tournament.id==='ch7s4-playstation-nickeh30-icon-cup'
       ? /_Qualifier_(?:ME|EU|NAC|NAW|OCE|BR)$/i.test(id)
-      : /Round_?1_(?:ME|EU|NAC|NAW|OCE|BR)$/i.test(id);
+      : tournament.id==='ch7s4-fncs-division-1-practice'
+        ? !!fncsWindow && !!fncsWeek && fncsWindow[1]===fncsWeek[1] && /Round\s*1/u.test(record.round)
+        : /Round_?1_(?:ME|EU|NAC|NAW|OCE|BR)$/i.test(id);
     if ((requireRoundOne && !qualifier) || !id.endsWith('_'+record.region)) return false;
     try {
       const u=new URL(record.source);
@@ -130,6 +138,30 @@
       return tournament.sourceEventIds.includes(sourceEvent) &&
         id.startsWith(tournament.seasonId+'_') && (!requireRoundOne || officialRoundRoot);
     } catch { return false; }
+  }
+
+  // Two independently reviewed old OCE duos screenshots omit the Tracker
+  // window parameter. They identify Round 1 and ranks 4/14; Epic's S42
+  // Zero Build Reload Cash Cup rule advances the top 20 teams of each region.
+  // Restrict this exception to exactly the confirmed archive IDs and source;
+  // an arbitrary event URL without a round never establishes advancement.
+  const VERIFIED_SCREENSHOT_IDS=new Set([
+    's42-oce-reload-zb-duos-qual-20261018-reo-romii',
+    's42-oce-reload-zb-duos-qual-20261018-uptemp-vuradd0'
+  ]);
+  function verifiedScreenshotQualification(record,tournament) {
+    if (!VERIFIED_SCREENSHOT_IDS.has(record.id) ||
+      tournament?.id!=='ch7s4-reload-zero-build-duos-cash-cup' ||
+      record.date!=='2026-10-18' || record.region!=='OCE' ||
+      record.round!=='予選 / Event・Round番号未確認' ||
+      !/ユーザー提供.*OCE.*予選のFortnite Tracker画像で/u.test(String(record.note||''))) return false;
+    try{
+      const u=new URL(record.source);
+      return ['https:'].includes(u.protocol) &&
+        ['fortnitetracker.com','www.fortnitetracker.com'].includes(u.hostname.toLowerCase()) &&
+        u.pathname==='/events/epicgames_S42_ReloadCashCup_DuosZB_OCE' &&
+        !u.searchParams.get('window') && !u.searchParams.get('round');
+    }catch{return false}
   }
 
   // Return an evidence code only for a *verified qualifier performance*.
@@ -150,6 +182,8 @@
     const positivelyConfirmed=/(?:予選(?:突破|通過)|決勝(?:[0-9,]+位)?へ進出|週末決勝へ|(?:^|[。；、\s])決勝進出(?:[。、\s]|を確認))/u.test(note);
     const contrary=/(?:予選(?:突破|通過).{0,14}(?:未確認|不明|できず|失敗|ならず)|決勝進出.{0,10}(?:未確認|不明|できず|ならず))/u.test(note);
     if (positivelyConfirmed && !contrary && verifiedQualificationSource(record,tournament,false)) return 'verified-note';
+    if (cutoff!==null && Number.isInteger(record.rank) && record.rank>0 &&
+      verifiedScreenshotQualification(record,tournament)) return 'verified-screenshot';
     if (cutoff!==null && Number.isInteger(record.rank) && record.rank>0 &&
       verifiedQualificationSource(record,tournament)) return 'official-cutoff';
     return null;
@@ -238,7 +272,7 @@
       if (!evidence) continue;
       for (const name of cleanPeople(record,options.names)) {
         const key=qualificationKey(record,tournament,name),earlier=qualifyingRows.get(key);
-        const priority={explicit:3,'verified-note':2,'official-cutoff':1};
+        const priority={explicit:4,'verified-note':3,'official-cutoff':2,'verified-screenshot':2};
         if (!earlier || priority[evidence]>priority[earlier.evidence] ||
           (evidence===earlier.evidence && String(record.id||'').localeCompare(String(earlier.record.id||''))<0))
           qualifyingRows.set(key,{record,evidence});
@@ -325,5 +359,6 @@
   }
 
   return Object.freeze({ VERSION, REGIONS, STAGES, QUALIFICATION_BASE, eventMultiplier,
-    officialQualificationCutoff, verifiedQualificationSource, qualificationEvidence, sessionKey, calculate });
+    officialQualificationCutoff, verifiedQualificationSource, verifiedScreenshotQualification,
+    qualificationEvidence, sessionKey, calculate });
 });
