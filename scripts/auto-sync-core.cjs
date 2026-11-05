@@ -11,6 +11,14 @@ const normalizedRound=round=>{
  return stage&&(event||day)?(event?'event'+Number(event[1]):'day'+Number(day[1]))+'/round'+stage[1]:text;
 };
 const normalizedRoster=members=>members.slice().sort((a,b)=>a.localeCompare(b,'ja')).join('|');
+// Epic's official S41/S42 Victory Cup rules specify session match limits.
+// Other seasons and unfamiliar event subtypes are never assigned an invented cap.
+const maximumMatches=win=>{
+ if(!['S41','S42'].includes(win.seasonId)||win.catalog.series!=='victory-cup')return null;
+ if(win.kind==='賞金決勝')return 3;
+ if(win.kind!=='予選')return null;
+ return win.catalog.subtype==='reload-duos-victory-cup'?10:8;
+};
 function createIndex(config,data){
   if(config?.version!==1||!Array.isArray(config.accounts)||!Array.isArray(config.windows))throw Error('自動更新設定が不正');
   const known=new Set(data.players.candidates.map(x=>x.name)),accounts=new Map(),windows=new Map();
@@ -45,6 +53,8 @@ function prepare(feed,config,data){
     const members=ids.map(id=>accounts.get(id));
     if(members.length!=={solo:1,duo:2,trio:3,squad:4}[win.catalog.team]||new Set(members).size!==members.length){skipped.push({key,reason:'チーム人数不一致'});continue}
     if(!Number.isSafeInteger(x.rank)||x.rank<1||!int(x.points)||!int(x.kills)||!int(x.vrs)||!int(x.matches)){skipped.push({key,reason:'成績が未確定'});continue}
+    const matchCap=maximumMatches(win);
+    if(matchCap!==null&&x.matches>matchCap){skipped.push({key,reason:'公式ルールの試合数上限を超過'});continue}
     const deDup=[win.dateJst,win.region,win.tournamentId,normalizedRound(win.round),normalizedRoster(members)].join('|');
     if(existing.has(deDup)||seen.has(deDup)){skipped.push({key,reason:'登録済み'});continue}
     const id='auto-'+win.seasonId.toLowerCase()+'-'+crypto.createHash('sha256').update(JSON.stringify([key,ids])).digest('hex').slice(0,12);
