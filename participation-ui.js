@@ -8,7 +8,7 @@
     if(!response.ok)throw Error('記録を取得できません ('+response.status+')');
     return response.json();
   };
-  let indexPromise=null,profileSequence=0;
+  let indexPromise=null,profileSequence=0,currentPage=1;
   const months=new Map();
   const getIndex=()=>indexPromise||(indexPromise=load('participation-index.json').then(data=>{
     if(data.version!==1||!Array.isArray(data.months)||!Array.isArray(data.players))throw Error('出場記録の形式が不正です');
@@ -47,18 +47,25 @@
       const query=(document.getElementById('participation-search')?.value||'').trim().toLocaleLowerCase();
       const filtered=sortRows(entries.filter(r=>(region==='all'||r.region===region)&&(!query||
         [r.event,r.player,...members(r),r.round,String(r.rank)].some(s=>String(s||'').toLocaleLowerCase().includes(query)))));
-      target.innerHTML=buildTable(filtered.slice(0,100));
+      const begin=(currentPage-1)*100;
+      target.innerHTML=buildTable(filtered.slice(begin,begin+100));
       const count=document.getElementById('participation-count');
-      if(count)count.textContent=filtered.length.toLocaleString('ja-JP')+'件'+(filtered.length>100?'（先頭100件を表示）':'');
+      if(count)count.textContent=filtered.length.toLocaleString('ja-JP')+'件中 '+(filtered.length?fmt(begin+1)+'〜'+fmt(Math.min(filtered.length,begin+100)):'0')+'件を表示';
+      const prev=document.getElementById('participation-prev'),next=document.getElementById('participation-next');
+      if(prev){prev.hidden=currentPage<=1;prev.disabled=currentPage<=1}
+      if(next){next.hidden=begin+100>=filtered.length;next.disabled=begin+100>=filtered.length}
     }catch(error){if(target.isConnected)target.textContent=error.message}
   }
   async function initArchive(){
     const picker=document.getElementById('participation-month');
     const target=document.getElementById('participation-table');
     if(!picker||!target)return;
-    picker.addEventListener('change',renderMonth);
-    document.getElementById('participation-region')?.addEventListener('change',renderMonth);
-    document.getElementById('participation-search')?.addEventListener('input',renderMonth);
+    const reset=()=>{currentPage=1;renderMonth()};
+    picker.addEventListener('change',reset);
+    document.getElementById('participation-region')?.addEventListener('change',reset);
+    document.getElementById('participation-search')?.addEventListener('input',reset);
+    document.getElementById('participation-prev')?.addEventListener('click',()=>{if(currentPage>1){currentPage--;renderMonth()}});
+    document.getElementById('participation-next')?.addEventListener('click',()=>{currentPage++;renderMonth()});
     try{
       const index=await getIndex();
       const m=index.months.slice().sort((a,b)=>b.month.localeCompare(a.month));
