@@ -189,16 +189,54 @@
     // Round labels describe the session; advancement and cash are per-player outcomes.
     // Keep explicit advancement evidence on each record (and in AotPR) while sharing
     // one calendar/tournament session for the same qualifying leaderboard.
-    function canonicalTournamentRound(round,kind){
-      const label=String(round||'');
-      return kind==='予選'?label.replace(/\/\s*予選(?:突破|通過)$/u,'/ 予選'):label;
+    // A tournament session is a single leaderboard, regardless of the player's
+    // cash/qualification/cosmetic outcome. Do not merge distinct numbered rounds.
+    function canonicalTournamentRound(round,kind,tournamentId,date,region){
+      let label=String(round||'').trim();
+      if(tournamentId==='ch7s1-one-million-unreal-cup'&&/^Session\s*1\s*\//iu.test(label))
+        return 'Session 1 / 賞金決勝';
+      if(tournamentId==='ch7s3-champion-aphrodite-fncs-cup-battle-royale'
+         &&/^(?:Session\s*1|単一開催枠)\s*\//iu.test(label))
+        return 'Session 1 / スキン大会';
+      if(kind==='予選')label=label.replace(/\/\s*予選(?:突破|通過)$/u,'/ 予選');
+      const unnamed=label.match(/^Round\s*(\d+)\s*\/\s*賞金決勝（Event番号未確認）$/iu);
+      if(unnamed&&date&&region&&tournamentId){
+        // Adopt a numbered event ONLY when this date/region/tournament has exactly
+        // one explicit match. Preserve uncertainty when multiple events exist.
+        const numbered=new Set(rawAll().filter(x=>x.date===date&&x.region===region
+          &&classifyTournamentRecord(x).id===tournamentId)
+          .map(x=>String(x.round||'').match(new RegExp('^(Event\\s*\\d+\\s*·\\s*Round\\s*'+Number(unnamed[1])+')\\s*\\/','i'))?.[1])
+          .filter(Boolean));
+        if(numbered.size===1)label=[...numbered][0]+' / 賞金決勝';
+      }
+      if(kind==='決勝'&&/\/\s*(?:決勝(?:（賞金なし）)?|本戦（賞金なし）)$/u.test(label)){
+        const series=tournamentCatalog.find(t=>t.id===tournamentId)?.series;
+        if(['victory-cup','cash-cup','unreal-cup','playstation-cup'].includes(series)
+          &&/(?:Round\s*2|Final|Session\s*1)/iu.test(label))
+          label=label.replace(/\/\s*(?:決勝(?:（賞金なし）)?|本戦（賞金なし）)$/u,'/ 賞金決勝');
+      }
+      return label;
+    }
+    function canonicalTournamentKind(kind,tournamentId,round){
+      if(tournamentId==='ch7s1-one-million-unreal-cup'&&/^Session\s*1\s*\//iu.test(String(round||'')))return '賞金決勝';
+      if(tournamentId==='ch7s3-champion-aphrodite-fncs-cup-battle-royale'
+        &&/^(?:Session\s*1|単一開催枠)\s*\//iu.test(String(round||'')))return 'スキン大会';
+      if(kind==='決勝'){
+        const series=tournamentCatalog.find(t=>t.id===tournamentId)?.series;
+        if(['victory-cup','cash-cup','unreal-cup','playstation-cup'].includes(series)
+          &&/(?:Round\s*2|Final|Session\s*1)/iu.test(String(round||'')))return '賞金決勝';
+      }
+      return kind;
     }
     // Calendar-only result scope; other tournament links remain full archive.
-    function tournamentSessionScope(value){
+    function tournamentSessionScope(value,tournamentId=''){
       if(!value||!validCalendarDate(value.date)||!regions.includes(value.region)
          ||typeof value.round!=='string'||!value.round.trim()
          ||typeof value.kind!=='string'||!value.kind.trim())return null;
-      return {date:value.date,region:value.region,round:canonicalTournamentRound(value.round,value.kind),kind:value.kind};
+      const id=tournamentId||value.tournamentId||value.id||'';
+      return {date:value.date,region:value.region,
+        round:canonicalTournamentRound(value.round,value.kind,id,value.date,value.region),
+        kind:canonicalTournamentKind(value.kind,id,value.round)};
     }
     function tournamentSessionKey(value){
       const session=tournamentSessionScope(value);
@@ -206,18 +244,13 @@
     }
     function tournamentRecordInScope(row,scope){
       if(row.date!==scope.date||row.region!==scope.region)return false;
-      const sameKind=row.kind===scope.kind;
-      if(sameKind)return canonicalTournamentRound(row.round,row.kind)===canonicalTournamentRound(scope.round,scope.kind);
-      // Old shared links used an individual's unpaid result as a distinct final.
-      // Continue opening the now-unified prize-eligible round from those links.
-      const legacy=scope.kind==='決勝'&&row.kind==='賞金決勝'
-        &&/\/\s*(?:決勝(?:（賞金なし）)?|本戦（賞金なし）)$/u.test(scope.round);
-      if(!legacy)return false;
-      const cashLabel=label=>String(label||'').replace(/\/\s*(?:決勝(?:（賞金なし）)?|本戦（賞金なし）|賞金対象|賞金決勝)$/u,'/ 賞金決勝');
-      return cashLabel(row.round)===cashLabel(scope.round);
+      const id=classifyTournamentRecord(row).id;
+      return canonicalTournamentRound(row.round,row.kind,id,row.date,row.region)
+          ===canonicalTournamentRound(scope.round,scope.kind,id,scope.date,scope.region)
+        &&canonicalTournamentKind(row.kind,id,row.round)===canonicalTournamentKind(scope.kind,id,scope.round);
     }
     function tournamentHref(id,session=null,dateFilter=''){
-      const base='#tournament='+encodeURIComponent(id),scope=tournamentSessionScope(session);
+      const base='#tournament='+encodeURIComponent(id),scope=tournamentSessionScope(session,id);
       if(scope){
         const params=new URLSearchParams();
         for(const key of ['date','region','round','kind'])params.set(key,scope[key]);
@@ -238,14 +271,15 @@
       const groups=new Map();
       for(const e of records){
         const source=tournamentSource(e);
-        const round=canonicalTournamentRound(e.round,e.kind);
+        const round=canonicalTournamentRound(e.round,e.kind,t.id,e.date,e.region);
+        const kind=canonicalTournamentKind(e.kind,t.id,e.round);
         const explicitLabel=/(?:Event|Day|Week|Session)\s*\d+/i.test(round);
         const uncertain=!source.roundId&&!explicitLabel;
-        const sourceId=source.roundId||(explicitLabel?'label:'+round:'unconfirmed:'+e.id);
-        // When a clear date/region/round exists, a missing source window URL
-        // must not split a single competition into two visible session cards.
-        const key=JSON.stringify([t.id,e.region,e.date,round||null,e.kind||null,explicitLabel?'labeled':sourceId]);
-        if(!groups.has(key))groups.set(key,{id:key,label:round||'ラウンド未確認',region:e.region,date:e.date,round,kind:e.kind,sourceId,uncertain,records:[]});
+        const sourceId=source.roundId||(explicitLabel?'label:'+round:'unknown-round');
+        // Without a source window, use the shared date/region/round label rather
+        // than creating one bogus session card per player ID.
+        const key=JSON.stringify([t.id,e.region,e.date,round||null,kind||null,explicitLabel?'labeled':sourceId]);
+        if(!groups.has(key))groups.set(key,{id:key,label:round||'ラウンド未確認',region:e.region,date:e.date,round,kind,sourceId,uncertain,records:[]});
         else if(source.roundId&&!groups.get(key).sourceId?.startsWith('S'))groups.get(key).sourceId=source.roundId;
         groups.get(key).records.push(e);
       }
@@ -311,13 +345,14 @@
       for(const record of all()){
         if(!validCalendarDate(record.date)||!record.date.startsWith(filters.month+'-'))continue;
         if(filters.region!=='all'&&record.region!==filters.region)continue;
-        if(filters.stage!=='all'&&record.kind!==filters.stage)continue;
         const info=classifyTournamentRecord(record);
+        const kind=canonicalTournamentKind(record.kind,info.id,record.round);
+        if(filters.stage!=='all'&&record.kind!==filters.stage&&kind!==filters.stage)continue;
         if(filters.series!=='all'&&!tournamentAxisValues(info,'series').includes(filters.series))continue;
         if(filters.mode!=='all'&&info.mode!==filters.mode)continue;
-        const round=canonicalTournamentRound(record.round,record.kind);
-        const key=JSON.stringify([record.date,record.region,info.id,round||'',record.kind||'']);
-        if(!groups.has(key))groups.set(key,{date:record.date,region:record.region,id:info.id,name:info.name,round:round||'ラウンド未確認',kind:record.kind||'区分未確認',records:[]});
+        const round=canonicalTournamentRound(record.round,record.kind,info.id,record.date,record.region);
+        const key=JSON.stringify([record.date,record.region,info.id,round||'',kind||'']);
+        if(!groups.has(key))groups.set(key,{date:record.date,region:record.region,id:info.id,name:info.name,round:round||'ラウンド未確認',kind:kind||'区分未確認',records:[]});
         groups.get(key).records.push(record);
       }
       return [...groups.values()].sort((a,b)=>a.date.localeCompare(b.date)||regions.indexOf(a.region)-regions.indexOf(b.region)||a.name.localeCompare(b.name,'ja')||a.round.localeCompare(b.round,'ja'));
@@ -361,6 +396,7 @@
     function calendarUpcomingSessions(filters) {
       if(filters.scope==='results')return [];
       const published=calendarSessions({...filters,scope:'all'});
+      const uniqueHistory=new Set();
       return [...(calendarHistoryCache.get(filters.month)||[]),...siteData.schedule.sessions].filter(e=>{
         if(!e||!validCalendarDate(e.dateJst)||!e.dateJst.startsWith(filters.month+'-'))return false;
         const historic=typeof e.sourceWindowId==='string'&&e.sourceWindowId.length>0;
@@ -373,7 +409,15 @@
           ||(filters.stage!=='all'&&e.stage!==filters.stage))return false;
         // Do not show a redundant schedule card when this exact round has published AOT results.
         if(historic&&published.some(p=>p.date===e.dateJst&&p.region===e.region&&p.id===e.tournamentId
-          &&calendarRoundSignature(p.round)===calendarRoundSignature(e.round)))return false;
+          &&(calendarRoundSignature(p.round)===calendarRoundSignature(e.round)
+            ||(e.round==='ラウンド詳細未確認'
+              &&published.filter(q=>q.date===e.dateJst&&q.region===e.region&&q.id===e.tournamentId).length===1
+              &&!/(?:Round\s*[12])/iu.test(p.round)))))return false;
+        // Two API event aliases may resolve to the exact same official
+        // start/end, tournament, region and stage. Display only one calendar card.
+        const key=JSON.stringify([e.dateJst,e.region,e.tournamentId,e.startUtc,e.endUtc,e.round,e.stage,e.mode]);
+        if(uniqueHistory.has(key))return false;
+        uniqueHistory.add(key);
         return true;
       }).sort((a,b)=>a.startUtc.localeCompare(b.startUtc)||a.region.localeCompare(b.region));
     }
@@ -726,7 +770,7 @@
     }
 
     function renderTournament(id,session=null,dateFilter=''){
-      const scope=tournamentSessionScope(session);
+      const scope=tournamentSessionScope(session,id);
       const selectedDate=scope?.date||(validCalendarDate(dateFilter)?dateFilter:'');
       const scopeIdentity=id+'|'+tournamentSessionKey(scope)+'|'+selectedDate;
       const subset=scope?all().filter(row=>tournamentRecordInScope(row,scope))
