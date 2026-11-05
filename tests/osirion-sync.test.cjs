@@ -1,6 +1,6 @@
 'use strict';
 const test=require('node:test'),assert=require('node:assert/strict');
-const {identity,linkedAccounts,parseStage,discover,discoverUnmapped,normalizeRow}=require('../scripts/osirion-sync.cjs');
+const {identity,linkedAccounts,parseStage,discover,discoverUnmapped,advancementLimit,normalizeRow}=require('../scripts/osirion-sync.cjs');
 const f='https://fortnitetracker.com/profile/all/Alpha/events?id=8a57ac58-f937-4de2-81b7-9abd070c7ae8';
 test('Tracker UUID can map to the same 32-char account ID after strict validation',()=>{
  assert.equal(identity(f),'8a57ac58f9374de281b79abd070c7ae8');
@@ -81,4 +81,16 @@ test('historical S41 Day rounds and explicit date ranges are supported',()=>{
  assert.equal(matches.length,1);
  assert.equal(matches[0].windowId,'S41_ReloadSoloVictoryCup_Round2_Day3_NAW');
  assert.equal(discover(data,catalog,{fromDate:'2026-08-15',toDate:'2026-08-15',regions:['ME']},Date.parse('2026-11-05T05:00:00Z')).length,0);
+});
+
+test('official S41/S42 cutoffs are region and mode specific, never guessed for other seasons',()=>{
+ const w=(seasonId,tournamentId,region,kind='予選')=>({seasonId,tournamentId,region,kind});
+ assert.equal(advancementLimit(w('S42','ch7s4-solo-victory-cup','NAW')),800);
+ assert.equal(advancementLimit(w('S42','ch7s4-solo-victory-cup','NAC')),2000);
+ assert.equal(advancementLimit(w('S42','ch7s4-console-zero-build-solo-victory-cup','NAW')),1000);
+ assert.equal(advancementLimit(w('S42','ch7s4-console-zero-build-solo-victory-cup','EU')),2000);
+ assert.equal(advancementLimit(w('S41','ch7s3-solo-reload-victory-cup','NAW')),320);
+ assert.equal(advancementLimit(w('S42','ch7s4-reload-duos-victory-cup','ME')),120);
+ assert.equal(advancementLimit(w('S43','ch7s5-squads-victory-cup','NAW')),null);
+ assert.equal(advancementLimit(w('S42','ch7s4-solo-victory-cup','NAW','賞金決勝')),null);
 });
