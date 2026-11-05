@@ -1,10 +1,10 @@
 {
   "version": 1,
-  "checkedAt": "2026-11-05T11:11:38.912Z",
+  "checkedAt": "2026-11-05T13:44:13.328Z",
   "windows": {
     "epicgames_S42_SoloVictoryCup_NAW/S42_SoloVictoryCup_Event3Round1_NAW": {
-      "nextPage": 8,
-      "complete": false,
+      "nextPage": 9,
+      "complete": true,
       "proposals": [
         {
           "id": "auto-s42-886538db4fb4",
@@ -1364,8 +1364,9 @@
           "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。"
         }
       ],
-      "pages": 8,
-      "totalPages": 93
+      "pages": 9,
+      "totalPages": 93,
+      "emptyAttempts": 0
     },
     "epicgames_S41_ReloadReloadSoloVictoryCup_OCE/S41_ReloadSoloVictoryCup_Round1_Day1_OCE": {
       "nextPage": 25,
@@ -3504,7 +3505,7 @@
       "totalPages": 100
     },
     "epicgames_S41_FNCSCommunityCup_ME/S41_FNCSCommunityCup_ME": {
-      "nextPage": 20,
+      "nextPage": 24,
       "complete": false,
       "proposals": [
         {
@@ -3856,7 +3857,7 @@
           ]
         }
       ],
-      "pages": 20,
+      "pages": 24,
       "emptyAttempts": 0,
       "totalPages": 100
     },
@@ -4908,6 +4909,38 @@
       "pages": 4,
       "emptyAttempts": 0,
       "totalPages": 4
+    },
+    "epicgames_S36_VictoryDuosCup_OCE/S36_VictoryDuosCup_Event1Round1_OCE": {
+      "nextPage": 4,
+      "complete": false,
+      "proposals": [],
+      "pages": 4,
+      "emptyAttempts": 0,
+      "totalPages": 26
+    },
+    "epicgames_S30_SquadsVictoryCashCup_OCE/S30_SquadsVictoryCashCup_Event1Round1_OCE": {
+      "nextPage": 4,
+      "complete": false,
+      "proposals": [],
+      "pages": 4,
+      "emptyAttempts": 0,
+      "totalPages": 23
+    },
+    "epicgames_S33_SoloCashCup_OCE/S33_SoloCashCup_Event3Round1_OCE": {
+      "nextPage": 4,
+      "complete": false,
+      "proposals": [],
+      "pages": 4,
+      "emptyAttempts": 0,
+      "totalPages": 100
+    },
+    "epicgames_S30_DuosCashCup_OCE/S30_DuosCashCup_Event1Round1_OCE": {
+      "nextPage": 4,
+      "complete": false,
+      "proposals": [],
+      "pages": 4,
+      "emptyAttempts": 0,
+      "totalPages": 51
     }
   }
 }
