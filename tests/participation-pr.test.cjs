@@ -53,9 +53,9 @@ test('confirmed attendance in a single unknown-stage Icon event is conservativel
  const players=rank(merged.records).ranked;
  assert.equal(players.length,2);
  for(const p of players){
-  close(p.attendance,10*.5);
-  close(p.placement,100/Math.sqrt(229)*.5*.35);
-  close(p.eliminations,Math.min(25,24/2*1.5)*.5*.35);
+  close(p.attendance,10*.35);
+  close(p.placement,100/Math.sqrt(229)*.35*.35);
+  close(p.eliminations,Math.min(25,24/2*1.5)*.35*.35);
   assert.equal(p.qualificationBonus,0);
   assert.equal(p.bonus,0);
  }
@@ -105,7 +105,7 @@ test('invalid dates, unconfirmed identity, fake prizes, impossible scores and mi
   {matches:0},{vrs:9},{source:'https://evil.example/events/S42/'},
   {source:'https://www.fortnite.com/competitive/events/S42_InoxtagIconCup/?region=NAW&round=S42_InoxtagIconCup_NAW'},
   {tournamentId:'unknown'}, {region:'NAC'},{id:'fake'},
-  {player:'B'}, {seasonId:'S43'}, {stage:'賞金決勝'}
+  {player:'not confirmed'}, {seasonId:'S43'}, {stage:'賞金決勝'}
  ]){
   assert.equal(prepare([],[row(change)]).creditedRows,0,JSON.stringify(change));
  }
