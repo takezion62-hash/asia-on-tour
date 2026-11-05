@@ -37,13 +37,13 @@ jobs:
         run: npm run validate
       - name: Commit verified calendar dates without modifying player results
         run: |
-          if [ -z "$(git status --porcelain -- calendar-history.json calendar-history-status.json)" ]; then
+          if [ -z "$(git status --porcelain -- calendar-history.json calendar-history-status.json calendar-history-index.json calendar-history/)" ]; then
             echo "No calendar changes"
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add calendar-history.json calendar-history-status.json
+          git add calendar-history.json calendar-history-status.json calendar-history-index.json calendar-history/
           git commit -m "data: archive verified historical tournament sessions"
           git pull --rebase origin main
           git push origin HEAD:main
