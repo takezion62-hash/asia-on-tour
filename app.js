@@ -1517,6 +1517,7 @@
       renderJourney(info);
       renderProfileAotPR(info.name);
       renderProfileGrowth(info.name);
+      window.AOTParticipation?.renderProfile(info.name);
       return true;
     }
 
