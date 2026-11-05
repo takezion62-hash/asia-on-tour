@@ -86,7 +86,7 @@
       // plain '参加確認' uses the conservative qualifying-stage coefficient.
       result.push({...row,kind:row.stage==='予選'?'予選':'参加確認',
         participationOnly:true,prEligiblePlayers:eligible,prize:null,
-        qualification:'unverified',verified:true});
+        qualification:row.qualification,verified:true});
       creditedRows++;creditedPlayers+=eligible.length;
     }
     return {records:result,creditedRows,creditedPlayers,skippedPublished,skippedDuplicate,skippedInvalid};
