@@ -940,6 +940,16 @@
             <a href="https://github.com/takezion62-hash/asia-on-tour/blob/main/AUTO_SYNC.md" target="_blank" rel="noopener noreferrer">導入手順 ↗</a>
           </div>
           <details class="auto-sync-review"><summary>取得した候補の確認</summary><div id="auto-sync-proposals">接続後、確認候補を表示します</div></details>
+          <div class="auto-sync-review" aria-labelledby="history-sync-heading">
+            <h3 id="history-sync-heading">過去大会の戦績調査 <span>HISTORY BACKFILL</span></h3>
+            <p>過去に開催された海外大会を安全に照合します。取得したものは確認候補であり、賞金・予選突破が確定した掲載戦績ではありません。</p>
+            <div id="history-sync-status" class="auto-sync-status" aria-live="polite">過去大会の調査状況を確認中…</div>
+            <div class="auto-sync-controls">
+              <button type="button" class="btn ghost" id="history-sync-refresh">過去大会の状況を更新</button>
+              <a href="https://github.com/takezion62-hash/asia-on-tour/actions/workflows/history-sync.yml" target="_blank" rel="noopener noreferrer">管理者：過去大会を照合 ↗</a>
+            </div>
+            <details class="auto-sync-review"><summary>過去大会の確認候補</summary><div id="history-sync-proposals">候補を確認中…</div></details>
+          </div>
           <p class="auto-sync-warning">※ 公開サイトから直接GitHubの戦績を書き換えることはできません。書き込みは管理者権限のGitHub Actionsのみです。初期設定完了まで自動取り込みは停止しています。</p>
         </section>
         <section class="updates-list-section" aria-labelledby="registration-list-title">
@@ -981,6 +991,6 @@
   <script src="./growth.js?v=1" defer></script>
   <script src="./compare.js?v=1" defer></script>
   <script src="./app.js?v=player-compare-20261104-1" defer></script>
-  <script src="./auto-sync-ui.js?v=1" defer></script>
+  <script src="./auto-sync-ui.js?v=2" defer></script>
 </body>
 </html>
