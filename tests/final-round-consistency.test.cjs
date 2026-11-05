@@ -37,7 +37,9 @@ test('Cash totals, rank, IDs and confirmed qualifier evidence remain independent
 
 test('Validation rejects splitting the same prize final by payout and checks trio rosters',()=>{
  const sample=data.results.find(x=>x.kind==='賞金決勝'&&x.verified===true
-   &&x.prize>0&&tournamentFor(x,data)?.series==='victory-cup');
+   &&x.prize>0&&tournamentFor(x,data)?.series==='victory-cup'
+  &&/(?:Round\s*2|Final|Session\s*1)/i.test(x.round)
+  &&/\/\s*賞金決勝(?:（Event番号未確認）)?$/u.test(x.round));
  assert.ok(sample,'cash-final fixture');
  for(const [patch,field] of [
    [{kind:'決勝'},'kind'],
