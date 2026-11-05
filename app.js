@@ -396,8 +396,8 @@
       const cards=entries.map(e=>{
         const historic=!!e.sourceWindowId,status=historic?'開催履歴':Date.now()<Date.parse(e.startUtc)?'開催予定':'開始時刻経過';
         const link=safeUrl(e.url),time=typeof e.timeJst==='string'?e.timeJst:'—';
-        return '<article class="calendar-upcoming-event" data-scheduled-id="'+escape(e.id)+'">'
-          +'<div class="calendar-event-top"><span class="calendar-event-tag is-upcoming">'+status+'</span>'
+        return '<article class="calendar-upcoming-event'+(historic?' is-history':'')+'" data-scheduled-id="'+escape(e.id)+'">'
+          +'<div class="calendar-event-top"><span class="calendar-event-tag '+(historic?'is-history':'is-upcoming')+'">'+status+'</span>'
           +'<span class="calendar-event-tag is-region">'+escape(e.region)+'</span>'
           +'<span class="calendar-event-tag">'+escape(e.stage)+'</span>'
           +(e.rewardType==='cosmetic'?'<span class="calendar-event-tag">コスメ報酬</span>':'')+'</div>'
