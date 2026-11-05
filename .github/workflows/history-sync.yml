@@ -1,0 +1,46 @@
+name: AOT historical tournament review backfill
+on:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/osirion-sync.cjs"
+      - "history-sync-config.json"
+      - ".github/workflows/history-sync.yml"
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: aot-history-backfill-main
+  cancel-in-progress: false
+jobs:
+  review-history:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Scan historical Osirion tournaments (review only)
+        run: node scripts/osirion-sync.cjs --history
+      - name: Validate unchanged public data and tests
+        run: |
+          npm run validate
+          node --test tests/auto-sync.test.cjs tests/osirion-sync.test.cjs
+      - name: Commit reviewed candidate files only
+        run: |
+          if [ -z "$(git status --porcelain -- history-sync-status.json history-sync-review.json history-sync-scan.json)" ]; then
+            echo "No historical review changes"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add history-sync-status.json history-sync-review.json history-sync-scan.json
+          git commit -m "data: save historical AOT review candidates"
+          git pull --rebase origin main
+          git push origin HEAD:main
