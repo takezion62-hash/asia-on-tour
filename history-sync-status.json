@@ -11,7 +11,7 @@
   "provider": "osirion",
   "linkedPlayers": 439,
   "trackedWindows": 2767,
-  "found": 11,
+  "found": 3,
   "skipped": 0,
   "imported": 37,
   "scannedPages": 48,
@@ -20,12 +20,13 @@
   "alreadyRegistered": 394,
   "autoApprovedTotal": 309,
   "invalidCachedCandidates": 1,
-  "manualReviewCandidates": 11,
+  "manualReviewCandidates": 3,
   "retryWindows": 0,
   "transientFailures": 0,
   "reviewOnlyWindows": 1255,
-  "reviewOnlyCandidates": 8,
+  "reviewOnlyCandidates": 0,
   "unmappedEvents": 0,
   "unmappedEventIds": [],
-  "message": "Osirionで439アカウントIDを追跡。今回の公式規則による自動承認37件、追加確認待ち11件、名義照合保留0件。"
+  "message": "参加確認8件を手動掲載。保留3件。",
+  "manuallyPublished": 8
 }
