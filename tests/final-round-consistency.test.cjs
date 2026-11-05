@@ -30,7 +30,7 @@ test('Cash totals, rank, IDs and confirmed qualifier evidence remain independent
  assert.ok(money(rows)>=0);
  const official=data.results.find(x=>x.id==='s42-naw-solo-vc-qual-20260906-tonightreet');
  assert.ok(official);
- assert.equal(official.round,'Event 1 · Round 1 / 予選');
+ assert.equal(official.round,'Event 1 · Round 1 / 予選通過');
  assert.match(official.note,/予選突破/);
  assert.ok(AotPR.qualificationEvidence(official,tournamentFor(official,data)),'Existing qualifier proof is still recognized');
 });
