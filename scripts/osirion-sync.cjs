@@ -1,5 +1,6 @@
 'use strict';
-// Read-only Osirion provider. For now this script ONLY produces review proposals, never results.json.
+// Osirion data provider. The regular workflow is review-only; the historical workflow
+// may auto-approve only narrowly allow-listed Victory Cup rows with official rules.
 const fs=require('node:fs'),path=require('node:path');
 const {prepare,maximumMatches,applyProposals}=require('./auto-sync-core.cjs');
 const {evaluate}=require('./verified-history-approval.cjs');
@@ -7,6 +8,7 @@ const root=path.resolve(__dirname,'..');
 const read=name=>JSON.parse(fs.readFileSync(path.join(root,name),'utf8'));
 const write=(name,obj)=>fs.writeFileSync(path.join(root,name),JSON.stringify(obj,null,2)+'\n');
 const regions=['ME','EU','NAC','NAW','OCE','BR'];
+const REVIEW_SERIES=new Set(['victory-cup','cash-cup','fncs','performance-evaluation','skin-cup','icon-cup','playstation-cup']);
 const nowJst=utc=>new Date(new Date(utc).getTime()+9*3600000).toISOString().slice(0,10);
 const identity=url=>{
  const token=typeof url==='string'?url.match(/[?&]id=([0-9a-f-]{36})(?:&|$)/i)?.[1]:null;
@@ -52,6 +54,25 @@ function parseStage(windowId){
  const label=event?'Event '+Number(event[1]):'Day '+Number(day[2]);
  return {round:label+' · Round '+stage+' / '+(stage===1?'予選':'賞金決勝'),kind:stage===1?'予選':'賞金決勝'};
 }
+// Never infer qualification, cash prizes or cosmetic rewards from a leaderboard.
+// Other series carry a neutral stage label and remain review-only.
+function parseReviewStage(windowId){
+ if(typeof windowId!=='string'||!/_?(ME|EU|NAC|NAW|OCE|BR)$/.test(windowId))return null;
+ const event=windowId.match(/(?:^|_)Event(\d+)_?Round(\d+)(?:_|$)/i);
+ const day=windowId.match(/(?:^|_)Round(\d+)_Day(\d+)(?:_|$)/i);
+ const generic=windowId.match(/(?:^|_)Event(\d+)(?:_|$)/i);
+ const special=windowId.match(/(?:^|_)(Qualifier|Qualifiers|SemiFinal|Final|GrandFinal|Heat\d+)(?:_|$)/i);
+ const label=event?'Event '+Number(event[1])+' · Round '+Number(event[2]):day?'Day '+Number(day[2])+' · Round '+Number(day[1]):generic?'Event '+Number(generic[1]):special?special[1]:'単一開催枠';
+ return {round:label+' / 参加確認',kind:'参加確認'};
+}
+function reviewSeries(opts){
+ const list=opts?.reviewSeries;
+ return new Set(Array.isArray(list)?list.filter(s=>REVIEW_SERIES.has(s)):['victory-cup']);
+}
+function catalogMatches(catalog,base,series){
+ return catalog.filter(x=>series.has(x.series)&&x.seasonId===base.split('_')[0]&&x.sourceEventIds?.includes(base)&&['solo','duo','trio','squad'].includes(x.team)&&
+   (x.series!=='fncs'||(/^S\d+_FNCSDivisionalCup_Division1$/.test(base)&&/^fncs-division-1(?:-practice)?$/.test(x.subtype||''))));
+}
 function discover(all,catalog,opts,time=Date.now()){
  const selected=new Map(),recentDays=Number.isInteger(opts.lookbackDays)?opts.lookbackDays:7,delay=(opts.minLagMinutes||240)*60000;
  for(const tournament of all){
@@ -60,10 +81,12 @@ function discover(all,catalog,opts,time=Date.now()){
   if(!match||!regions.includes(match[2]))continue;
   const [_,base,region]=match;
   if(Array.isArray(opts.regions)&&!opts.regions.includes(region))continue;
-  const t=catalog.find(x=>x.series==='victory-cup'&&x.seasonId===base.split('_')[0]&&x.sourceEventIds?.includes(base));
-  if(!t||!['solo','duo','trio','squad'].includes(t.team))continue;
+  const mapped=catalogMatches(catalog,base,reviewSeries(opts));
+  // Ambiguous event mappings and uncatalogued series are never guessed.
+  if(mapped.length!==1)continue;
+  const t=mapped[0];
   for(const window of tournament.eventWindows||[]){
-   const windowId=window.eventWindowId,stage=typeof windowId==='string'?parseStage(windowId):null;
+   const windowId=window.eventWindowId,stage=typeof windowId==='string'?(t.series==='victory-cup'?parseStage(windowId):parseReviewStage(windowId)):null;
    const end=Date.parse(window.endTime),begin=Date.parse(window.beginTime);
    if(!stage||!windowId.endsWith('_'+region)||!Number.isFinite(end)||!Number.isFinite(begin))continue;
    const dateJst=nowJst(window.beginTime);
@@ -72,19 +95,24 @@ function discover(all,catalog,opts,time=Date.now()){
     if(dateJst<opts.fromDate||dateJst>opts.toDate)continue;
    }else if(end<time-recentDays*86400000)continue;
    const key=full+'/'+windowId;
-   selected.set(key,{key,fullEventId:full,eventId:base,windowId,region,dateJst,seasonId:t.seasonId,tournamentId:t.id,round:stage.round,kind:stage.kind,end});
+   selected.set(key,{key,fullEventId:full,eventId:base,windowId,region,dateJst,seasonId:t.seasonId,tournamentId:t.id,series:t.series,round:stage.round,kind:stage.kind,end});
   }
  }
  return [...selected.values()].sort((a,b)=>a.end-b.end);
 }
-// Report newly introduced Victory Cup source IDs instead of silently skipping future seasons.
+// Report uncatalogued eligible tournament IDs rather than guessing their formats.
 function discoverUnmapped(all,catalog,opts,time=Date.now()){
  const days=Number.isInteger(opts.lookbackDays)?opts.lookbackDays:7,missing=new Set();
  for(const tournament of all){
   const full=typeof tournament.eventId==='string'?tournament.eventId:'',match=full.match(/^epicgames_(S[0-9]+_.+)_([A-Z]{2,4})$/);
-  if(!match||!regions.includes(match[2])||!/(VictoryCup|VictoryCashCup|ConsoleVCC)/i.test(match[1]))continue;
+  if(!match||!regions.includes(match[2]))continue;
   const [,base,region]=match;
-  if(catalog.some(x=>x.series==='victory-cup'&&x.seasonId===base.split('_')[0]&&x.sourceEventIds?.includes(base)))continue;
+  const title=String(tournament.displayData?.longFormatTitle||tournament.displayData?.shortFormatTitle||'');
+  const knownType=/(VictoryCup|VictoryCashCup|ConsoleVCC|CashCup|FNCSDivisionalCup_Division1|PerformanceEvaluation|PerfEval|IconCup)/i.test(base)||/\b(?:Cash Cup|Victory Cup|Performance Evaluation|Icon Cup)\b/i.test(title);
+  const cosmeticCup=/\bCup\b/i.test(title)&&!/Ranked Cup|Test Cup/i.test(title)&&!/^S\d+_FNCS(?:Reload|Solos|Major)/i.test(base);
+  if(!knownType&&!cosmeticCup)continue;
+  if(/^S\d+_FNCS/i.test(base)&&!/^S\d+_FNCSDivisionalCup_Division1$/.test(base)&&!cosmeticCup)continue;
+  if(catalog.some(x=>x.seasonId===base.split('_')[0]&&x.sourceEventIds?.includes(base)))continue;
   const relevant=(tournament.eventWindows||[]).some(w=>{
    const end=Date.parse(w.endTime);
    return typeof w.eventWindowId==='string'&&w.eventWindowId.endsWith('_'+region)&&Number.isFinite(end)&&end>=time-days*86400000&&end<=time+14*86400000;
@@ -142,6 +170,22 @@ async function getLeaderboard(win,page){
  if(!l||l.leaderboardEventId!==win.fullEventId||l.leaderboardEventWindowId!==win.windowId||!Array.isArray(l.entries)||!Number.isInteger(l.totalPages)||l.totalPages<1||l.totalPages>100)throw Error('大会順位表のID/形式が不正');
  return l;
 }
+// Balance existing Victory Cups and safely matched review-only series in the same
+// run; never let a large FNCS leaderboard starve known cash records (or vice versa).
+function selectActiveWindows(windows,state,config){
+ const pending=windows.filter(w=>{
+  const item=state.windows[w.key];
+  return !item?.complete&&(!item?.retryAfter||Date.parse(item.retryAfter)<=Date.now());
+ });
+ const limit=Math.max(1,config.maxWindowsPerRun||2);
+ const victory=pending.filter(w=>w.series==='victory-cup');
+ const review=pending.filter(w=>w.series!=='victory-cup');
+ if(!victory.length||!review.length)return pending.slice(0,limit);
+ const vQuota=Math.ceil(limit/2),chosen=[...victory.slice(0,vQuota),...review.slice(0,limit-vQuota)];
+ const seen=new Set(chosen.map(w=>w.key));
+ for(const win of pending){if(chosen.length>=limit)break;if(!seen.has(win.key)){chosen.push(win);seen.add(win.key)}}
+ return chosen;
+}
 async function main(){
  const historical=process.argv.includes('--history');
  const prefix=historical?'history-sync':'auto-sync';
@@ -160,15 +204,14 @@ async function main(){
  const unmapped=historical?[]:discoverUnmapped(all,data.tournaments.catalog,config);
  const state=read(prefix+'-scan.json');
  if(state.version!==1||!state.windows||typeof state.windows!=='object')throw Error('checkpoint invalid');
- const active=windows.filter(w=>{
-  const item=state.windows[w.key];
-  return !item?.complete&&(!item?.retryAfter||Date.parse(item.retryAfter)<=Date.now());
- }).slice(0,config.maxWindowsPerRun||2);
+ const active=selectActiveWindows(windows,state,config);
  const previewConfig={version:1,accounts,windows:active.map(w=>({eventId:w.eventId,windowId:w.windowId,dateJst:w.dateJst,region:w.region,seasonId:w.seasonId,tournamentId:w.tournamentId,kind:w.kind,round:w.round}))};
  let budget=Math.min(Math.max(config.maxPagesPerRun||30,1),50),scanned=0,invalidRows=0;
  for(const win of active){
   const checkpoint=state.windows[win.key]||{nextPage:0,complete:false,proposals:[],pages:0};
-  while(budget>0&&!checkpoint.complete){
+  let pagesThisWindow=0;
+  const perWindowLimit=Math.min(Math.max(config.maxPagesPerWindowPerRun||budget,1),50);
+  while(budget>0&&pagesThisWindow<perWindowLimit&&!checkpoint.complete){
    const page=checkpoint.nextPage,l=await getLeaderboard(win,page);
    if(page===0&&l.entries.length===0){
     checkpoint.emptyAttempts=(checkpoint.emptyAttempts||0)+1;
@@ -188,7 +231,7 @@ async function main(){
    const found=prepare({entries:entries.filter(Boolean)},previewConfig,data).proposals;
    const already=new Set(checkpoint.proposals.map(x=>x.id));
    for(const row of found)if(!already.has(row.id)){checkpoint.proposals.push(row);already.add(row.id)}
-   checkpoint.nextPage=page+1;checkpoint.pages++;scanned++;budget--;
+   checkpoint.nextPage=page+1;checkpoint.pages++;scanned++;budget--;pagesThisWindow++;
    checkpoint.totalPages=l.totalPages;
    checkpoint.complete=checkpoint.nextPage>=l.totalPages||crossed;
   }
@@ -227,8 +270,10 @@ async function main(){
  const proposals=pending.filter(x=>!importedIds.has(x.id)).map(x=>reasons.has(x.id)?{...x,reviewReason:reasons.get(x.id)}:x);
  const unique=new Map(proposals.map(x=>[x.id,x]));
  const finished=Object.entries(state.windows).filter(([key,w])=>eligible.has(key)&&w.complete).length;
+ const reviewOnlyWindows=windows.filter(w=>w.series!=='victory-cup').length;
+ const reviewOnlyCandidates=unique.size?Array.from(unique.values()).filter(p=>p.reviewOnly===true).length:0;
  const cumulativeApprovals=data.updates.entries.filter(x=>x.title?.startsWith('公式規則で自動承認：')).reduce((sum,x)=>sum+(x.recordIds?.length||0),0);
- const status={version:1,state:'checked',checkedAt:stamp,mode:'review',scope:historical?'history':'recent',fromDate:historical?config.fromDate:null,toDate:historical?config.toDate:null,provider:'osirion',linkedPlayers:accounts.length,trackedWindows:windows.length,found:unique.size,skipped:invalidRows,imported,scannedPages:scanned,completedWindows:finished,identityConflicts:conflicts.length,alreadyRegistered:recordedFromReview,autoApprovedTotal:cumulativeApprovals,invalidCachedCandidates:invalidCached,manualReviewCandidates:manuallyHeld,retryWindows:Object.entries(state.windows).filter(([key,w])=>eligible.has(key)&&!w.complete&&w.retryAfter).length,unmappedEvents:unmapped.length,unmappedEventIds:unmapped.slice(0,12),message:'Osirionで'+accounts.length+'アカウントIDを追跡。今回の公式規則による自動承認'+imported+'件、追加確認待ち'+unique.size+'件、名義照合保留'+conflicts.length+'件。'};
+ const status={version:1,state:'checked',checkedAt:stamp,mode:'review',scope:historical?'history':'recent',fromDate:historical?config.fromDate:null,toDate:historical?config.toDate:null,provider:'osirion',linkedPlayers:accounts.length,trackedWindows:windows.length,found:unique.size,skipped:invalidRows,imported,scannedPages:scanned,completedWindows:finished,identityConflicts:conflicts.length,alreadyRegistered:recordedFromReview,autoApprovedTotal:cumulativeApprovals,invalidCachedCandidates:invalidCached,manualReviewCandidates:manuallyHeld,retryWindows:Object.entries(state.windows).filter(([key,w])=>eligible.has(key)&&!w.complete&&w.retryAfter).length,reviewOnlyWindows,reviewOnlyCandidates,unmappedEvents:unmapped.length,unmappedEventIds:unmapped.slice(0,12),message:'Osirionで'+accounts.length+'アカウントIDを追跡。今回の公式規則による自動承認'+imported+'件、追加確認待ち'+unique.size+'件、名義照合保留'+conflicts.length+'件。'};
  state.checkedAt=stamp;
  write(prefix+'-scan.json',state);
  write(prefix+'-review.json',{version:1,status:'review',checkedAt:stamp,proposals:[...unique.values()]});
@@ -236,4 +281,4 @@ async function main(){
  console.log((historical?'OSIRION_HISTORY_REVIEW ':'OSIRION_REVIEW ')+JSON.stringify({scannedPages:scanned,linkedPlayers:accounts.length,identityConflicts:conflicts.length,windows:windows.length,unmappedEvents:unmapped.length,proposals:unique.size,imported,finished}));
 }
 if(require.main===module)main().catch(e=>{console.error('OSIRION_SYNC_ERROR '+e.stack);process.exitCode=1});
-module.exports={identity,linkedAccounts,parseStage,discover,discoverUnmapped,advancementLimit,normalizeRow,getTournaments,main};
+module.exports={identity,linkedAccounts,parseStage,parseReviewStage,discover,discoverUnmapped,selectActiveWindows,advancementLimit,normalizeRow,getTournaments,main};
