@@ -37,7 +37,8 @@ function buildHistory(all,catalog,opts={}){
   if(!catalogued||catalogued.seasonId!==seasonId){
    if(!missing.has(base)&&missingDetails.length<14){
     const candidates=Object.entries(tournament).filter(([k,v])=>/name|title|description|type|mode|region/i.test(k)&&typeof v==='string').slice(0,10);
-    missingDetails.push({id:base,fields:Object.keys(tournament),metadata:Object.fromEntries(candidates)});
+    const summary=obj=>obj&&typeof obj==='object'?Object.fromEntries(Object.entries(obj).slice(0,12).map(([k,v])=>[k,typeof v==='string'?v.slice(0,160):v&&typeof v==='object'?Object.keys(v).slice(0,12):v])):obj;
+    missingDetails.push({id:base,fields:Object.keys(tournament),metadata:Object.fromEntries(candidates),displayData:summary(tournament.displayData),apiMetadata:summary(tournament.metadata)});
    }
    missing.add(base);skip('not catalogued');continue;
   }
