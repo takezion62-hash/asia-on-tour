@@ -16,5 +16,15 @@
   "minLagMinutes": 240,
   "maxPagesPerRun": 24,
   "maxWindowsPerRun": 6,
-  "autoApproveVerified": true
+  "autoApproveVerified": true,
+  "reviewSeries": [
+    "victory-cup",
+    "cash-cup",
+    "fncs",
+    "performance-evaluation",
+    "skin-cup",
+    "icon-cup",
+    "playstation-cup"
+  ],
+  "maxPagesPerWindowPerRun": 8
 }
