@@ -151,7 +151,7 @@ function validateData(data) {
     }
   }
   for (const [i, row] of r.entries()) if (object(row)) registerSeason(row, 'results.json', row.id || `行#${i + 1}`);
-  const ids = new Set(), accounts = new Map();
+  const ids = new Set(), accounts = new Map(), semanticRecords = new Map();
   for (const [i, row] of r.entries()) {
     const id = row?.id || `行#${i + 1}`;
     if (!object(row)) { issue('results.json', id, 'record', '戦績はオブジェクトで指定してください。'); continue; }
@@ -191,6 +191,18 @@ function validateData(data) {
     if (source.seasonId !== 'unknown' && !seasons.has(row.seasonId || source.seasonId)) issue('results.json', id, 'seasonId', 'チャプター・シーズンの対応が未確認です。特定シーズンへ推測で分類しません。', true);
     const catalog = t.catalog.find(c => object(c) && c.name === row.event && c.seasonId === (row.seasonId || source.seasonId) && Array.isArray(c.sourceEventIds) && c.sourceEventIds.includes(source.eventId));
     if (!catalog) issue('results.json', id, 'event', '一致する大会カタログがないためタグは未確認です。必要なら根拠を確認してカタログを追加してください。', true);
+    if (catalog) {
+      check(row.tournamentId === catalog.id, 'results.json', id, 'tournamentId', '出典から一意に特定できる大会IDを記録してください。');
+      check(row.seasonId === catalog.seasonId && row.chapter === catalog.chapter && row.season === catalog.season,
+        'results.json', id, 'seasonId', '確認済み大会に対応するシーズン・チャプター情報を明記してください。');
+    }
+    // IDs alone do not prevent a manual screenshot row and an API row from
+    // describing the exact same player's appearance in the same tournament round.
+    const stage = String(row.round||'').replace(/\s*\/\s*(?:予選(?:突破|通過)?|賞金決勝(?:（Event番号未確認）)?|決勝(?:（賞金なし）)?|本戦（賞金なし）|賞金対象)$/u,'').trim();
+    const uniqueKey = JSON.stringify([row.date,row.region,catalog?.id||row.tournamentId||row.event,stage,people.slice().sort()]);
+    if (semanticRecords.has(uniqueKey)) issue('results.json', id, 'id',
+      '同じ大会・地域・ラウンド・選手の戦績が「'+semanticRecords.get(uniqueKey)+'」と重複しています。異なる出典は既存戦績へ統合してください。');
+    else semanticRecords.set(uniqueKey,id);
     const teamSize = { solo: 1, duo: 2, trio: 3, squad: 4 }[catalog?.team];
     if (teamSize) check(people.length === teamSize, 'results.json', id, 'players',
       ({ solo: 'ソロ', duo: 'デュオ', trio: 'トリオ', squad: 'スクワッド' }[catalog.team]) + '大会の選手は' + teamSize + '名で指定してください。');
