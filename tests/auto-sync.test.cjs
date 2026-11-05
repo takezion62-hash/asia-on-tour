@@ -21,3 +21,20 @@ test('same duo with reversed roster does not create another record',()=>{
  data.results.push({id:'duo-old',date:'2026-11-15',region:'NAW',tournamentId:'cup',round:'Event 1 · Round 1 / 予選突破',player:'B / A',players:['B','A'],rank:35});
  assert.equal(prepare({entries:[entry(a,{teamAccountIds:[a,b]})]},config,data).proposals.length,0);
 });
+
+test('official historical S42 match limits reject inconsistent rows',()=>{
+ const {data,config}=setup();
+ const win=config.windows[0],catalog=data.tournaments.catalog[0];
+ Object.assign(win,{seasonId:'S42',eventId:'S42_ReloadSoloVictoryCup',windowId:'S42_ReloadSoloVictoryCup_Event1Round1_NAW'});
+ Object.assign(catalog,{seasonId:'S42',series:'victory-cup',subtype:'solo-reload-victory-cup',sourceEventIds:['S42_ReloadSoloVictoryCup']});
+ const info={eventId:win.eventId,windowId:win.windowId};
+ const invalid=prepare({entries:[entry(a,{...info,matches:9})]},config,data);
+ assert.equal(invalid.proposals.length,0);
+ assert.equal(invalid.skipped[0].reason,'公式ルールの試合数上限を超過');
+ const valid=prepare({entries:[entry(a,{...info,matches:8})]},config,data);
+ assert.equal(valid.proposals.length,1);
+ win.kind='賞金決勝';
+ win.windowId='S42_ReloadSoloVictoryCup_Event1Round2_NAW';
+ const invalidFinal=prepare({entries:[entry(a,{eventId:win.eventId,windowId:win.windowId,matches:4})]},config,data);
+ assert.equal(invalidFinal.proposals.length,0);
+});
