@@ -454,3 +454,63 @@ test('different dates for the same event label remain separate qualified session
  approx(report.qualificationBonus,20);
  assert.equal(report.qualificationCount,2);
 });
+
+test('FNCS Division 1 Practice verified top-50 weekly finals cutoff includes unlabeled NAW rank 15',()=>{
+ const c=catalog({id:'ch7s4-fncs-division-1-practice',series:'fncs',
+   subtype:'fncs-division-1-practice',team:'duo',mode:'battle-royale',
+   seasonId:'S42',sourceEventIds:['S42_FNCSDivisionalCup_Division1']});
+ const base=event({id:'fncs-week3-15',kind:'予選',date:'2026-09-08',region:'NAW',rank:15,
+   players:['まぐろいち','arim'],player:'まぐろいち / arim',
+   round:'Week 3 · Round 1 / 予選',prize:0,note:'予選順位のみを確認',
+   source:'https://fortnitetracker.com/events/epicgames_S42_FNCSDivisionalCup_Division1_NAW?window=S42_FNCSDivisionalCup_Division1_Event3_NAW'});
+ score([base],c).ranked.forEach(p=>{approx(p.qualificationBonus,10);assert.equal(p.rows[0].qualificationEvidence,'official-cutoff')});
+ score([{...base,id:'fncs-week3-51',rank:51}],c).ranked.forEach(p=>approx(p.qualificationBonus,0));
+ const mismatched={...base,id:'fncs-week2-invalid',round:'Week 2 · Round 1 / 予選'};
+ score([mismatched],c).ranked.forEach(p=>approx(p.qualificationBonus,0));
+});
+test('S42 Performance Evaluation Trios top-33 and Duos top-50 cutoffs reject observed ranks 144 and 701',()=>{
+ const trios=catalog({id:'ch7s4-performance-evaluation-trios',series:'performance-evaluation',
+  subtype:'performance-evaluation-trios',seasonId:'S42',sourceEventIds:['S42_PerformanceEvaluationTrios'],team:'trio'});
+ const base=event({id:'perf-trios',kind:'予選',event:'Fortnite Performance Evaluation',rank:144,region:'EU',
+  round:'Event 6 · Round 1 / 予選',source:'https://fortnitetracker.com/events/epicgames_S42_PerformanceEvaluationTrios_EU?window=S42_PerformanceEvaluation_Event6Round1_EU'});
+ assert.equal(PR.officialQualificationCutoff(base,trios),33);
+ approx(score([base],trios).ranked[0].qualificationBonus,0);
+ const qualifying=score([{...base,id:'perf-qualifies',rank:33}],trios).ranked[0];
+ approx(qualifying.qualificationBonus,14);
+ assert.equal(qualifying.rows[0].qualificationEvidence,'official-cutoff');
+ const duos=catalog({id:'ch7s4-performance-evaluation',series:'performance-evaluation',
+  subtype:'performance-evaluation',seasonId:'S42',sourceEventIds:['S42_PerformanceEvaluation'],team:'duo'});
+ const p=event({id:'perf-duos',kind:'予選',event:'Fortnite Performance Evaluation',rank:701,region:'NAC',
+  round:'Session 4 · Round 1 / 予選',
+  source:'https://fortnitetracker.com/events/epicgames_S42_PerformanceEvaluation_NAC?window=S42_PerformanceEvaluation_Event4Round1_NAC'});
+ assert.equal(PR.officialQualificationCutoff(p,duos),50);
+ approx(score([p],duos).ranked[0].qualificationBonus,0);
+});
+test('only two reviewed OCE Reload ZB Duos screenshot records qualify by official top-20 rule without round URLs',()=>{
+ const c=catalog({id:'ch7s4-reload-zero-build-duos-cash-cup',series:'cash-cup',
+   subtype:'reload-zb-duos-cash-cup',team:'duo',mode:'reload-zero-build',seasonId:'S42',
+   sourceEventIds:['S42_ReloadCashCup_DuosZB']});
+ const samples=[
+  {id:'s42-oce-reload-zb-duos-qual-20261018-reo-romii',players:['Reo','ろみぃ'],rank:4},
+  {id:'s42-oce-reload-zb-duos-qual-20261018-uptemp-vuradd0',players:['uptemp','vurаdd0'],rank:14}
+ ];
+ for(const sample of samples){
+  const row=event({id:sample.id,date:'2026-10-18',region:'OCE',kind:'予選',
+    players:sample.players,player:sample.players.join(' / '),rank:sample.rank,prize:0,
+    round:'予選 / Event・Round番号未確認',
+    note:'ユーザー提供の2026/10/18 OCE Reload ZB Duos Cash Cup予選のFortnite Tracker画像で'+sample.rank+'位を確認。',
+    source:'https://fortnitetracker.com/events/epicgames_S42_ReloadCashCup_DuosZB_OCE'});
+  assert.equal(PR.officialQualificationCutoff(row,c),20);
+  score([row],c).ranked.forEach(p=>{
+    approx(p.qualificationBonus,11);
+    assert.equal(p.rows[0].qualificationEvidence,'verified-screenshot');
+  });
+  for(const bad of [
+    {id:'other-user-row'},{rank:21},{date:'2026-10-19'},
+    {note:'順位表を確認しましたが予選か決勝か不明'},
+    {source:'https://fortnitetracker.com/events/epicgames_S42_ReloadCashCup_DuosZB_NAC'}
+  ]){
+    score([{...row,...bad,id:bad.id||row.id}],c).ranked.forEach(p=>approx(p.qualificationBonus,0));
+  }
+ }
+});
