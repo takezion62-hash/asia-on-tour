@@ -36,3 +36,11 @@
 - 定期チェックは `.github/workflows/auto-sync.yml`、取得処理は `scripts/osirion-sync.cjs`、本人照合・候補検証は `scripts/auto-sync-core.cjs`、一覧状態は `auto-sync-status.json` です。
 - 公開サイトの更新ボタンはステータスの再読込のみで、公開閲覧者によるGitHubへの書き込みを許可しません。
 - `scripts/auto-sync.cjs` は旧API用の未使用実験コードです。現在のGitHub ActionsはOsirionを使用します。
+
+## S43 Squads Victory Cup（2026年11月5日追加）
+- 公式ページおよび2026年11月1日付Epic公式規則で、S43のスクワッド・通常バトロワ・クロスプラットフォーム大会と確認。開催は11月9日から地域ごとに開始します。
+- `tournaments.json` に `ch7s5-squads-victory-cup`（`S43_SquadsVictoryCup`）を登録。現時点で戦績の追加・賞金額の推定は行っていません。
+- Round 1通過条件はEU上位300チーム、NAC上位200チーム、ME/NAW/OCE/BR上位120チーム。Round 2はVR1回につきチーム$200、原則4人に均等配分。ただし公式の賞金対象外居住地域や受賞資格の確認があるため、自動で賞金確定扱いにしません。
+- 新しいラウンドID形式 `Event1_Round1` / `Event1_Round2` と従来形式 `Event1Round1` を両方認識します。
+- スクワッドの自動候補は、4人全員のEpic IDが掲載名鑑の確認済みアカウントとして照合できる場合に限ります。1人でも未確認の場合は誤ったチーム登録を避けるため保留します。
+- 追加後の自動実行で、新シーズン未登録Victory Cupイベント数は1→0に解消しました。現在の運用モードは引き続き`review`です。
