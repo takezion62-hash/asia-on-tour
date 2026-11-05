@@ -1,25 +1,30 @@
 'use strict';
-async function get(url){
- const r=await fetch(url,{headers:{accept:'application/json'},signal:AbortSignal.timeout(30000)});
- return {status:r.status,body:await r.json().catch(()=>({parseError:true}))};
+const fs=require('node:fs'),path=require('node:path');
+const all=JSON.parse(fs.readFileSync(path.join(__dirname,'../results.json'),'utf8'));
+const expected=all.filter(x=>x.date==='2026-09-22'&&x.region==='NAW'&&x.event==='Solo Victory Cup Battle Royale'&&x.round.includes('Event 3')&&x.round.includes('Round 1'));
+const source='https://fnapi.osirion.gg/v1/tournaments/leaderboard';
+async function getPage(page){
+ const params=new URLSearchParams({leaderboardEventId:'epicgames_S42_SoloVictoryCup_NAW',leaderboardEventWindowId:'S42_SoloVictoryCup_Event3Round1_NAW',page:String(page)});
+ const r=await fetch(source+'?'+params,{signal:AbortSignal.timeout(25000)});
+ const j=await r.json();if(!r.ok||!j?.success||!Array.isArray(j.leaderboard?.entries))throw Error('Bad response '+r.status);
+ return j.leaderboard.entries;
 }
-function recursively(list,schema,name,seen=new Set(),depth=0){
- if(!schema||depth>5||seen.has(name))return;seen.add(name);
- console.log('OSIRION_SCHEMA '+JSON.stringify({name,definition:schema}).slice(0,16000));
- const refs=[...JSON.stringify(schema).matchAll(/#\/components\/schemas\/([A-Za-z0-9]+)/g)].map(x=>x[1]);
- for(const ref of [...new Set(refs)])recursively(list,list[ref],ref,seen,depth+1);
-}
+function normId(url){return url?.match(/[?&]id=([0-9a-f-]{36})/i)?.[1]?.replace(/-/g,'').toLowerCase()}
 async function run(){
- const spec=(await get('https://fnapi.osirion.gg/openapi.json')).body;
- recursively(spec.components.schemas,spec.components.schemas.TournamentLeaderboardEntry,'TournamentLeaderboardEntry');
- const id='epicgames_S42_SoloVictoryCup_NAW',windowId='S42_SoloVictoryCup_Event3Round1_NAW';
- for(const page of [0,1]){
-  const url='https://fnapi.osirion.gg/v1/tournaments/leaderboard?'+new URLSearchParams({leaderboardEventId:id,leaderboardEventWindowId:windowId,page:String(page)});
-  try{
-   const {status,body}=await get(url),l=body?.leaderboard;
-   console.log('OSIRION_BOARD '+JSON.stringify({id,windowId,page,status,success:body?.success,totalPages:l?.totalPages,updatedAt:l?.updatedAt,rows:l?.entries?.length,entrySample:(l?.entries||[]).slice(0,3),rank9:(l?.entries||[]).find(x=>x.rank===9),errors:!l?Object.keys(body||{}):null}).slice(0,17000));
-   if(status!==200||!l?.entries?.length)break;
-  }catch(e){console.log('OSIRION_BOARD_ERROR '+JSON.stringify({page,error:e.message}));}
+ const entries=[...(await getPage(0)),...(await getPage(1))];
+ let passed=0;
+ const audit=[];
+ for(const x of expected){
+  const id=normId(x.profileUrl);
+  const e=entries.find(y=>y.players?.some(p=>p.accountId===id));
+  const stats=(e?.sessionHistory||[]).map(h=>h.trackedStats||{});
+  const observed=e?{rank:e.rank,points:e.pointsEarned,matches:stats.reduce((a,s)=>a+(s.MATCH_PLAYED_STAT||0),0),kills:stats.reduce((a,s)=>a+(s.TEAM_ELIMS_STAT_INDEX||0),0),vrs:stats.reduce((a,s)=>a+(s.VICTORY_ROYALE_STAT||0),0)}:null;
+  const desired={rank:x.rank,points:x.points,matches:x.matches,kills:x.kills,vrs:x.vrs};
+  const ok=observed&&Object.keys(desired).every(k=>observed[k]===desired[k]);
+  if(ok)passed++;
+  audit.push({name:x.player,idMatch:!!e,ok,observed,desired});
  }
+ console.log('OSIRION_COMPARE '+JSON.stringify({expectedRecords:expected.length,matchedExact:passed,entriesScanned:entries.length,records:audit}).slice(0,16000));
+ if(passed!==expected.length)process.exitCode=1;
 }
 run().catch(e=>{console.error(e.stack);process.exitCode=1});
