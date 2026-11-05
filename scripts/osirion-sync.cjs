@@ -71,7 +71,7 @@ function discover(all,catalog,opts,time=Date.now()){
 function discoverUnmapped(all,catalog,opts,time=Date.now()){
  const days=Number.isInteger(opts.lookbackDays)?opts.lookbackDays:7,missing=new Set();
  for(const tournament of all){
-  const full=typeof tournament.eventId==='string'?tournament.eventId:'',match=full.match(/^epicgames_(S\\d+_.+)_([A-Z]{2,4})$/);
+  const full=typeof tournament.eventId==='string'?tournament.eventId:'',match=full.match(/^epicgames_(S[0-9]+_.+)_([A-Z]{2,4})$/);
   if(!match||!regions.includes(match[2])||!/(VictoryCup|VictoryCashCup|ConsoleVCC)/i.test(match[1]))continue;
   const [,base,region]=match;
   if(catalog.some(x=>x.series==='victory-cup'&&x.seasonId===base.split('_')[0]&&x.sourceEventIds?.includes(base)))continue;
