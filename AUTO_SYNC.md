@@ -44,3 +44,12 @@
 - 新しいラウンドID形式 `Event1_Round1` / `Event1_Round2` と従来形式 `Event1Round1` を両方認識します。
 - スクワッドの自動候補は、4人全員のEpic IDが掲載名鑑の確認済みアカウントとして照合できる場合に限ります。1人でも未確認の場合は誤ったチーム登録を避けるため保留します。
 - 追加後の自動実行で、新シーズン未登録Victory Cupイベント数は1→0に解消しました。現在の運用モードは引き続き`review`です。
+
+## 過去大会の自動照合（HISTORY BACKFILL、2026年11月5日）
+- 通常の6時間ごとのAUTO SYNCとは完全に別のGitHub Actions `.github/workflows/history-sync.yml` と `history-sync-*.json` を使用。Osirionの公開大会一覧で `includeHistoricData=true` を指定して終了済みの過去大会を調べます。
+- 初回検証は2026/9/22 NAW Solo Victory Cup（S42）Event 3 Round 1。8ページを走査し、登録済み選手のEpic IDで新規59件（158〜792位）を抽出。Epic公式規則のNAW上位800位通過を照合し、2026年11月5日に**59件を予選突破・賞金$0として`results.json`へ追加**。既存の1047件は保持し、計1106件になりました。
+- `history-sync-config.json` の現在の照合対象は**2026/8/1〜11/4、ME/EU/NAC/NAW/OCE/BR**。毎日UTC 03:41（日本時間12:41）を目安にGitHub Actionsが調査します。1回最大12ページ・2ラウンドの控えめな制限、途中経過は `history-sync-scan.json` に保存します。GitHub Actionsによる遅延・失敗はありえます。
+- サイトの「更新履歴」→「過去大会の戦績調査」から、照合進捗・確認候補数を表示。登録済みの候補IDは次回照合で確認待ち一覧から除外します。
+- **今後の候補は引き続き確認モード**。APIの過去データが取得できても、開催シーズンごとに予選通過条件・賞金ルール・ASIA主活動選手かどうか・同名別人・既存登録との重複を確認するまでは自動公開しません。
+- `results.json` が1MBを超えるとGitHub Contents APIの通常取得に制限があるため、管理者はBlob取得またはGit checkoutで最新版を扱います。サイトのJSONファイル自体はUTF-8として有効で、1,106件の重複なしを確認しています。
+- APIに残っていない過去大会は自動検出できないため、Fortnite Trackerスクリーンショット・公式順位表など従来の手入力を併用してください。2024年の大会などは確認対象日付を広げる前にAPIの履歴対応を試験します。
