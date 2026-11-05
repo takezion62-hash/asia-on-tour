@@ -2,6 +2,20 @@
   "version": 1,
   "entries": [
     {
+      "id": "aot-eu-performance-verified-batch-20261106",
+      "date": "2026-11-06",
+      "type": "records",
+      "title": "EU Performance EvaluationでASIA選手の未掲載成績を追加",
+      "description": "2026年9〜10月のEU Performance Evaluation（デュオ・トリオ）でEpic ID照合できた未登録5チームを追加。既存成績・賞金を保持し、通過・賞金を推定しない。",
+      "recordIds": [
+        "auto-s42-ec0c00ae725b",
+        "auto-s42-4ae405984cb0",
+        "auto-s42-0009df4966ed",
+        "auto-s42-16187f7ee065",
+        "auto-s42-1891244a0e9f"
+      ]
+    },
+    {
       "id": "auto-sync-20261105222717",
       "date": "2026-11-06",
       "type": "records",
