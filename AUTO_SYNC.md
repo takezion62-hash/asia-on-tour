@@ -48,7 +48,7 @@
 ## 過去大会の自動照合（HISTORY BACKFILL、2026年11月5日）
 - 通常の6時間ごとのAUTO SYNCとは完全に別のGitHub Actions `.github/workflows/history-sync.yml` と `history-sync-*.json` を使用。Osirionの公開大会一覧で `includeHistoricData=true` を指定して終了済みの過去大会を調べます。
 - 初回検証は2026/9/22 NAW Solo Victory Cup（S42）Event 3 Round 1。8ページを走査し、登録済み選手のEpic IDで新規59件（158〜792位）を抽出。Epic公式規則のNAW上位800位通過を照合し、2026年11月5日に**59件を予選突破・賞金$0として`results.json`へ追加**。既存の1047件は保持し、計1106件になりました。
-- `history-sync-config.json` の現在の照合対象は**2026/8/1〜11/4、ME/EU/NAC/NAW/OCE/BR**。毎日UTC 03:41（日本時間12:41）を目安にGitHub Actionsが調査します。1回最大12ページ・2ラウンドの控えめな制限、途中経過は `history-sync-scan.json` に保存します。GitHub Actionsによる遅延・失敗はありえます。
+- `history-sync-config.json` の現在の照合対象は**2026/8/1〜11/4、ME/EU/NAC/NAW/OCE/BR**。毎日UTC 03:41（日本時間12:41）を目安にGitHub Actionsが調査します。1回最大24ページ・6ラウンドの制限（大会一覧の最大6地域照会と合わせて通常30リクエスト以内）、途中経過は `history-sync-scan.json` に保存します。GitHub Actionsによる遅延・失敗はありえます。
 - サイトの「更新履歴」→「過去大会の戦績調査」から、照合進捗・確認候補数を表示。登録済みの候補IDは次回照合で確認待ち一覧から除外します。
 - **条件を厳密に確認できた過去大会だけ自動承認**。`history-sync-config.json`の`autoApproveVerified: true`と`scripts/verified-history-approval.cjs`の限定ルールを使用。S41（Chapter 7 Season 3）Solo Reload Victory Cup、S42（Chapter 7 Season 4）Solo Battle Royale Victory Cupのみが初期の自動承認対象です。
 - 予選は公式地域別通過順位以内、公式ルールの試合数上限以内、Epic IDが名鑑の本人と一意に照合でき、順位表の取得が完了した場合に限って、賞金$0の「予選突破」として登録します。決勝は**0VRのときのみ**公式のVR単位賞金規則から$0と確定し「決勝（賞金なし）」で登録します。1VR以上の賞金は自動推定・公開せず、出典や資格を確認してください。
