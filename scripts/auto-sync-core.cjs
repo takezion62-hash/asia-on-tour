@@ -5,6 +5,12 @@ const int=n=>Number.isSafeInteger(n)&&n>=0;
 const epicId=s=>typeof s==='string'&&/^[0-9a-f]{32}$/i.test(s)?s.toLowerCase():null;
 const dateOK=s=>typeof s==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(s)&&!Number.isNaN(Date.parse(s))&&new Date(s).toISOString().slice(0,10)===s;
 const roster=r=>Array.isArray(r.players)&&r.players.length?r.players:[r.player];
+const normalizedRound=round=>{
+ const text=String(round||'');
+ const event=text.match(/Event\s*(\d+)/i),day=text.match(/Day\s*(\d+)/i),stage=text.match(/Round\s*([12])/i);
+ return stage&&(event||day)?(event?'event'+Number(event[1]):'day'+Number(day[1]))+'/round'+stage[1]:text;
+};
+const normalizedRoster=members=>members.slice().sort((a,b)=>a.localeCompare(b,'ja')).join('|');
 function createIndex(config,data){
   if(config?.version!==1||!Array.isArray(config.accounts)||!Array.isArray(config.windows))throw Error('自動更新設定が不正');
   const known=new Set(data.players.candidates.map(x=>x.name)),accounts=new Map(),windows=new Map();
@@ -28,7 +34,7 @@ function prepare(feed,config,data){
   const {accounts,windows}=createIndex(config,data);
   if(!Array.isArray(feed?.entries))throw Error('取得した順位表が不正');
   const registeredIds=new Set(data.results.map(x=>x.id));
-  const existing=new Set(data.results.map(x=>[x.date,x.region,x.tournamentId,x.round,...roster(x)].join('|')));
+  const existing=new Set(data.results.map(x=>[x.date,x.region,x.tournamentId,normalizedRound(x.round),normalizedRoster(roster(x))].join('|')));
   const seen=new Set(),proposals=[],skipped=[];
   for(const x of feed.entries){
     const key=x.eventId+'/'+x.windowId,win=windows.get(key);
@@ -39,7 +45,7 @@ function prepare(feed,config,data){
     const members=ids.map(id=>accounts.get(id));
     if(members.length!=={solo:1,duo:2,trio:3,squad:4}[win.catalog.team]||new Set(members).size!==members.length){skipped.push({key,reason:'チーム人数不一致'});continue}
     if(!Number.isSafeInteger(x.rank)||x.rank<1||!int(x.points)||!int(x.kills)||!int(x.vrs)||!int(x.matches)){skipped.push({key,reason:'成績が未確定'});continue}
-    const deDup=[win.dateJst,win.region,win.tournamentId,win.round,...members].join('|');
+    const deDup=[win.dateJst,win.region,win.tournamentId,normalizedRound(win.round),normalizedRoster(members)].join('|');
     if(existing.has(deDup)||seen.has(deDup)){skipped.push({key,reason:'登録済み'});continue}
     const id='auto-'+win.seasonId.toLowerCase()+'-'+crypto.createHash('sha256').update(JSON.stringify([key,ids])).digest('hex').slice(0,12);
     if(registeredIds.has(id)){skipped.push({key,reason:'ID重複'});continue}
