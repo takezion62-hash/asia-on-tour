@@ -84,15 +84,12 @@
     } catch { return null; }
   }
 
-  // Only a verified, explicitly labelled advancement OR a verified Round 2 appearance
-  // can establish qualification. Round 1 participation/rank alone proves nothing.
+  // No rank-only inference or final-only inference: the published, independently
+  // verified qualifier row must explicitly say 予選突破 / 予選通過.
   function qualificationEvidence(record,tournament) {
     if (!record || record.verified!==true || record.partial===true || record.reported===true || record.reviewOnly===true ||
       !QUALIFYING_SERIES.has(tournament?.series)) return null;
-    if (record.kind==='予選' && /予選(?:突破|通過)/u.test(String(record.round||''))) return 'explicit';
-    const secondRound=sourceRound(record);
-    if (CASH_FINALS.has(record.kind) && typeof secondRound==='string' && /Round_?2(?:_|$)/i.test(secondRound)) return 'final';
-    return null;
+    return record.kind==='予選' && /予選(?:突破|通過)/u.test(String(record.round||'')) ? 'explicit' : null;
   }
 
   function sessionKey(record) {
@@ -158,8 +155,8 @@
     const players = new Map();
     const seenEntries = new Set();
     const awardedBonusUnits = new Map();
-    // Choose explicit advancement over a derived Round 2 spot; fixes double counting
-    // independently of source row order and still works when only the final is published.
+    // A verified explicit advancement is counted once per player/session,
+    // independent of duplicated qualifier rows and source ordering.
     const qualifyingRows=new Map();
     const qualificationKey=(record,tournament,name)=>stable([name,tournament.id||record.event,record.region,
       sessionKey(record)==='unspecified'?record.date:sessionKey(record)]);
