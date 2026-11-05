@@ -28,7 +28,7 @@ function createIndex(config,data){
     accounts.set(id,x.player);
   }
   for(const x of config.windows){
-    if(!x?.eventId||!x.windowId||!dateOK(x.dateJst)||!REGIONS.has(x.region)||!['予選','決勝','賞金決勝','スキン大会'].includes(x.kind)||!x.round)throw Error('大会ウィンドウ設定が不正');
+    if(!x?.eventId||!x.windowId||!dateOK(x.dateJst)||!REGIONS.has(x.region)||!['予選','決勝','賞金決勝','スキン大会','参加確認'].includes(x.kind)||!x.round)throw Error('大会ウィンドウ設定が不正');
     const t=data.tournaments.catalog.find(y=>y.id===x.tournamentId);
     if(!t||!t.sourceEventIds.includes(x.eventId)||t.seasonId!==x.seasonId||!['solo','duo','trio','squad'].includes(t.team))throw Error('大会カタログ不一致: '+x.windowId);
     if(!x.windowId.startsWith(x.seasonId+'_')||!x.windowId.endsWith('_'+x.region))throw Error('地域/シーズンが不一致');
@@ -61,8 +61,14 @@ function prepare(feed,config,data){
     if(registeredIds.has(id)){skipped.push({key,reason:'ID重複'});continue}
     const source='https://www.fortnite.com/competitive/events/'+encodeURIComponent(win.eventId)+'/?region='+encodeURIComponent(win.region)+'&round='+encodeURIComponent(win.windowId);
     const cashConfirmed=win.kind==='賞金決勝'&&x.cashVerified===true&&Number.isFinite(x.prize)&&x.prize>=0&&Math.abs(x.prize*100-Math.round(x.prize*100))<1e-6;
-    const prize=['予選','スキン大会'].includes(win.kind)?0:cashConfirmed?x.prize:null;
+    const reviewOnly=win.catalog.series!=='victory-cup';
+    const prize=reviewOnly?null:['予選','スキン大会'].includes(win.kind)?0:cashConfirmed?x.prize:null;
     const rec={id,date:win.dateJst,region:win.region,player:members.join(' / '),playerRaw:typeof x.rawName==='string'&&x.rawName.trim()?x.rawName.trim():members.join(' / '),event:win.catalog.name,round:win.round,rank:x.rank,points:x.points,kills:x.kills,vrs:x.vrs,prize,kind:win.kind,matches:x.matches,seasonId:win.seasonId,chapter:win.catalog.chapter,season:win.catalog.season,tournamentId:win.tournamentId,source,verified:true,note:'大会APIウィンドウと本人確認済みEpic IDによる登録。'+(prize===null?'現金賞金の確定情報なし。':'賞金額を推定せず登録。')};
+    if(reviewOnly){
+      rec.reviewOnly=true;
+      rec.reviewReason='API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。';
+      rec.note='参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。';
+    }
     if(members.length>1)rec.players=members;
     if(cashConfirmed&&members.length>1&&Number.isFinite(x.prizePerPlayer)&&x.prizePerPlayer>0&&x.prizePerPlayer*members.length<=prize)rec.prizePerPlayer=x.prizePerPlayer;
     proposals.push(rec);seen.add(deDup);
@@ -71,6 +77,7 @@ function prepare(feed,config,data){
 }
 function applyProposals(data,proposals,timestamp){
   if(!proposals.length)return 0;
+  if(proposals.some(x=>x.reviewOnly===true||x.kind==='参加確認'))throw Error('未検証大会の候補は公開登録できません');
   const ids=new Set(data.results.map(x=>x.id));
   if(proposals.some(x=>ids.has(x.id)))throw Error('コミット前の重複');
   data.results.push(...proposals);
