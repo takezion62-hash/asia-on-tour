@@ -1,7 +1,7 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-05T06:25:46.511Z",
+  "checkedAt": "2026-11-05T06:26:05.465Z",
   "mode": "review",
   "provider": "osirion",
   "linkedPlayers": 422,
@@ -12,7 +12,9 @@
   "scannedPages": 0,
   "completedWindows": 0,
   "identityConflicts": 8,
-  "unmappedEvents": 0,
-  "unmappedEventIds": [],
-  "message": "Osirionに接続済み。既存プロフィールのうちIDが一意な422名を追跡。0ページを検査、0件が確認待ち。照合保留ID8件は対象外。"
+  "unmappedEvents": 1,
+  "unmappedEventIds": [
+    "S43_SquadsVictoryCup"
+  ],
+  "message": "Osirionに接続済み。既存プロフィールのうちIDが一意な422名を追跡。0ページを検査、0件が確認待ち。照合保留ID8件は対象外。 カタログ未登録のVictory Cup系イベント1種は確認待ち。"
 }
