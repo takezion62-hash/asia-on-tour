@@ -24,3 +24,36 @@ test('derive kills/VR/matches only from explicit tracked stats',()=>{
  const n=normalizeRow(e,w);assert.equal(n.kills,14);assert.equal(n.vrs,1);assert.equal(n.matches,2);assert.equal(n.points,268);
  assert.equal(normalizeRow({...e,unscoredSessions:['missing']},w),null);
 });
+
+test('S43 approved cash, evaluation, and Victory Cup stages are discovered without inventing prizes',()=>{
+ const catalog=[
+  {id:'cash',series:'cash-cup',team:'trio',seasonId:'S43',sourceEventIds:['S43_TriosCashCup']},
+  {id:'evaluation',series:'performance-evaluation',team:'trio',seasonId:'S43',sourceEventIds:['S43_PerformanceEvaluationTrios']},
+  {id:'squads',series:'victory-cup',team:'squad',seasonId:'S43',sourceEventIds:['S43_SquadsVictoryCup']}
+ ];
+ const now=Date.parse('2026-11-12T18:00:00Z');
+ const w=(base,region,stage)=>({eventId:'epicgames_'+base+'_'+region,eventWindows:[{
+  eventWindowId:base+'_'+stage+'_'+region,beginTime:'2026-11-11T13:00:00Z',endTime:'2026-11-11T16:00:00Z'
+ }]});
+ const all=[
+  w('S43_TriosCashCup','ME','Event1'),
+  w('S43_PerformanceEvaluationTrios','EU','Event1Round2'),
+  w('S43_SquadsVictoryCup','NAW','Event1Round2'),
+  w('S43_FNCSReloadQualifiers','EU','Event1Round1')
+ ];
+ const discovered=discover(all,catalog,{lookbackDays:7,minLagMinutes:240},now);
+ assert.equal(discovered.length,3);
+ assert.equal(discovered.find(x=>x.tournamentId==='cash').kind,'決勝');
+ assert.equal(discovered.find(x=>x.tournamentId==='cash').round,'Event 1 / 単一ラウンド');
+ assert.equal(discovered.find(x=>x.tournamentId==='evaluation').kind,'決勝');
+ assert.equal(discovered.find(x=>x.tournamentId==='squads').kind,'賞金決勝');
+ assert.ok(discovered.every(x=>!x.fullEventId.includes('FNCS')));
+});
+test('unknown, future, and mismatched-region windows are never tracked',()=>{
+ const c=[{id:'squad',series:'victory-cup',team:'squad',seasonId:'S43',sourceEventIds:['S43_SquadsVictoryCup']}];
+ const now=Date.parse('2026-11-10T00:00:00Z');
+ const window={eventWindowId:'S43_SquadsVictoryCup_Event1Round1_NAW',beginTime:'2026-11-09T21:00:00Z',endTime:'2026-11-09T23:00:00Z'};
+ assert.deepEqual(discover([{eventId:'epicgames_S43_SquadsVictoryCup_NAW',eventWindows:[window]}],c,{lookbackDays:7,minLagMinutes:240},now),[]);
+ assert.deepEqual(discover([{eventId:'epicgames_S43_SquadsVictoryCup_ME',eventWindows:[window]}],c,{lookbackDays:7,minLagMinutes:0},now),[]);
+ assert.equal(parseStage('S43_SquadsVictoryCup_Event1Round3_NAW'),null);
+});

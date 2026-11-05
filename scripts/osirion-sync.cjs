@@ -28,24 +28,30 @@ function linkedAccounts(data){
  }
  return {accounts,conflicts};
 }
-function parseStage(windowId){
- const match=windowId.match(/Event(\d+)Round([12])_(ME|EU|NAC|NAW|OCE|BR)$/);
+function parseStage(windowId,series='victory-cup'){
+ const match=typeof windowId==='string'?windowId.match(/Event(\d+)(?:Round([12]))?_(ME|EU|NAC|NAW|OCE|BR)$/):null;
  if(!match)return null;
- return {round:'Event '+Number(match[1])+' · Round '+Number(match[2])+' / '+(match[2]==='1'?'予選':'賞金決勝'),kind:match[2]==='1'?'予選':'賞金決勝'};
+ const round=match[2]?Number(match[2]):null;
+ const kind=round===1?'予選':(round===2&&series==='victory-cup'?'賞金決勝':'決勝');
+ const label=round===null?'単一ラウンド':('Round '+round+' / '+(kind==='予選'?'予選':kind==='賞金決勝'?'賞金決勝':'決勝'));
+ return {round:'Event '+Number(match[1])+(round===null?' / ':' · ')+label,kind};
 }
 function discover(all,catalog,opts,time=Date.now()){
  const selected=new Map(),recentDays=Number.isInteger(opts.lookbackDays)?opts.lookbackDays:7,delay=(opts.minLagMinutes||240)*60000;
+ const supported=new Set(['victory-cup','cash-cup','performance-evaluation']);
  for(const tournament of all){
   const full=typeof tournament.eventId==='string'?tournament.eventId:'';
   const match=full.match(/^epicgames_(S\d+_.+)_([A-Z]{2,4})$/);
   if(!match||!regions.includes(match[2]))continue;
   const [_,base,region]=match;
-  const t=catalog.find(x=>x.series==='victory-cup'&&x.seasonId===base.split('_')[0]&&x.sourceEventIds?.includes(base));
+  // Only events explicitly registered in ASIA ON TOUR's catalog may be followed.
+  // FNCS qualifiers, Ranked Cups and unrelated events are never inferred from names.
+  const t=catalog.find(x=>supported.has(x.series)&&x.seasonId===base.split('_')[0]&&x.sourceEventIds?.includes(base));
   if(!t||!['solo','duo','trio','squad'].includes(t.team))continue;
   for(const window of tournament.eventWindows||[]){
-   const windowId=window.eventWindowId,stage=typeof windowId==='string'?parseStage(windowId):null;
+   const windowId=window.eventWindowId,stage=parseStage(windowId,t.series);
    const end=Date.parse(window.endTime),begin=Date.parse(window.beginTime);
-   if(!stage||!windowId.endsWith('_'+region)||!Number.isFinite(end)||!Number.isFinite(begin))continue;
+   if(!stage||!windowId.startsWith(base+'_')||!windowId.endsWith('_'+region)||!Number.isFinite(end)||!Number.isFinite(begin))continue;
    if(end>time-delay||end<time-recentDays*86400000)continue;
    const key=full+'/'+windowId;
    selected.set(key,{key,fullEventId:full,eventId:base,windowId,region,dateJst:nowJst(window.beginTime),seasonId:t.seasonId,tournamentId:t.id,round:stage.round,kind:stage.kind,end});

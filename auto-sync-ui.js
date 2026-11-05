@@ -12,7 +12,7 @@
       if(!r.ok)throw Error('status HTTP '+r.status);
       const s=await r.json();if(s.version!==1)throw Error('unknown version');
       const time=s.checkedAt?new Date(s.checkedAt).toLocaleString('ja-JP',{timeZone:'Asia/Tokyo'}):'未実行';
-      area.replaceChildren(field('状態',s.state==='setup'?'初期設定待ち':s.mode==='publish'?'自動反映':'確認のみ'),field('最終チェック',time),field('連携済み選手',fmt(s.linkedPlayers)+'名'),field('追跡中の大会',fmt(s.trackedWindows)+'件'),field('新規候補',fmt(s.found)+'件'),field('今回の登録',fmt(s.imported)+'件'));
+      area.replaceChildren(field('状態',s.state==='setup'?'初期設定待ち':s.mode==='review'?'候補確認モード':'停止中'),field('最終チェック',time),field('連携済み選手',fmt(s.linkedPlayers)+'名'),field('対象ウィンドウ',fmt(s.trackedWindows)+'件'),field('確認待ち候補',fmt(s.found)+'件'),field('今回の検査ページ',fmt(s.scannedPages)+'ページ'),field('照合保留ID',fmt(s.identityConflicts)+'件'),field('自動登録',fmt(s.imported)+'件'));
       const info=document.createElement('p');info.className='auto-sync-message';info.textContent=s.message||'';area.append(info);
       try{
         const q=await fetch(new URL('auto-sync-review.json',base),{cache:'no-store'});
@@ -22,7 +22,18 @@
         else {
           const ul=document.createElement('ul');ul.className='auto-sync-proposals';
           for(const x of v.proposals.slice(0,20)){
-            const li=document.createElement('li');li.textContent=[x.date,x.region,x.player,x.event,x.rank?'#'+fmt(x.rank):'',x.prize==null?'賞金未確認':'$'+fmt(x.prize)].filter(Boolean).join(' · ');ul.append(li);
+            const li=document.createElement('li');li.textContent=[x.date,x.region,x.player,x.event,x.rank?'#'+fmt(x.rank):'',Number.isFinite(x.points)?fmt(x.points)+'pt':'',Number.isFinite(x.kills)?fmt(x.kills)+'K':'',Number.isFinite(x.vrs)?fmt(x.vrs)+'VR':'',Number.isFinite(x.matches)?fmt(x.matches)+'試合':'',x.prize==null?'賞金未確認':'.filter(Boolean).join(' · ');ul.append(li);
+          }
+          candidates.replaceChildren(ul);
+          if(v.proposals.length>20){const p=document.createElement('p');p.textContent='先頭20件のみ表示。全候補はGitHubで確認してください。';candidates.append(p);}
+        }
+      }catch{candidates.textContent='候補ファイルを読み込めませんでした';}
+    }catch{area.textContent='更新情報を取得できません。ページを再表示してください。';candidates.textContent='—';}
+    finally{btn.disabled=false;}
+  }
+  btn.addEventListener('click',refresh);refresh();
+})();
++fmt(x.prize)].filter(Boolean).join(' · ');ul.append(li);
           }
           candidates.replaceChildren(ul);
           if(v.proposals.length>20){const p=document.createElement('p');p.textContent='先頭20件のみ表示。全候補はGitHubで確認してください。';candidates.append(p);}

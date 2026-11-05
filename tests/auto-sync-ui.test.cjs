@@ -7,9 +7,16 @@ test('Auto sync panel has a working UI and asset references',()=>{
  assert.ok(html.includes('auto-sync-ui.js')&&html.includes('auto-sync-ui.css'));
  assert.ok(js.includes("addEventListener('click',refresh)")&&css.includes('auto-sync-control'));
 });
-test('No unsafe import until connected',()=>{
+test('Review-only Osirion checks never auto-publish candidate results',()=>{
  const cfg=JSON.parse(read('auto-sync-config.json'));
  const status=JSON.parse(read('auto-sync-status.json'));
- assert.equal(cfg.enabled,false);assert.equal(cfg.mode,'review');assert.deepEqual(cfg.accounts,[]);assert.deepEqual(cfg.windows,[]);
- assert.equal(status.state,'setup');
+ const runner=read('scripts/osirion-sync.cjs');
+ assert.equal(cfg.provider,'osirion');
+ assert.equal(cfg.mode,'review');
+ assert.equal(cfg.enabled,true);
+ assert.equal(status.provider,'osirion');
+ assert.equal(status.mode,'review');
+ assert.equal(status.imported,0);
+ assert.ok(runner.includes("if(config.mode!=='review')throw Error"));
+ assert.ok(!runner.includes("applyProposals(data,"));
 });
