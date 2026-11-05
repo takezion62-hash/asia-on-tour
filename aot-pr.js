@@ -122,8 +122,8 @@
       if (!hosts.includes(u.hostname.toLowerCase()) || !['http:','https:'].includes(u.protocol)) return false;
       if (u.searchParams.get('region') && u.searchParams.get('region')!==record.region) return false;
       const parts=u.pathname.split('/').filter(Boolean);
-      let sourceEvent=parts.find(p=>/^S\\d+_/i.test(p)) ||
-        parts.find(p=>/^epicgames_S\\d+_/i.test(p))?.replace(/^epicgames_/i,'') || null;
+      let sourceEvent=parts.find(p=>/^S\d+_/i.test(p)) ||
+        parts.find(p=>/^epicgames_S\d+_/i.test(p))?.replace(/^epicgames_/i,'') || null;
       if (sourceEvent?.endsWith('_'+record.region)) sourceEvent=sourceEvent.slice(0,-record.region.length-1);
       return tournament.sourceEventIds.includes(sourceEvent) &&
         id.startsWith(tournament.seasonId+'_');
