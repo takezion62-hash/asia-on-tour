@@ -87,7 +87,7 @@ async function main(){
  const fullPath=path.join(root,'calendar-history.json');
  let prior=null;
  if(fs.existsSync(fullPath)){try{prior=JSON.parse(fs.readFileSync(fullPath,'utf8'))}catch{}}
- const changed=JSON.stringify(prior?.sessions)!==JSON.stringify(output.sessions);
+ const changed=!fs.existsSync(path.join(root,'calendar-history-index.json'))||JSON.stringify(prior?.sessions)!==JSON.stringify(output.sessions);
  const byMonth=new Map();
  for(const session of output.sessions){
   const month=session.dateJst.slice(0,7);
