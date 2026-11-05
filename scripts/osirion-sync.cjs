@@ -1,7 +1,7 @@
 'use strict';
 // Read-only Osirion provider. For now this script ONLY produces review proposals, never results.json.
 const fs=require('node:fs'),path=require('node:path');
-const {prepare}=require('./auto-sync-core.cjs');
+const {prepare,maximumMatches}=require('./auto-sync-core.cjs');
 const root=path.resolve(__dirname,'..');
 const read=name=>JSON.parse(fs.readFileSync(path.join(root,name),'utf8'));
 const write=(name,obj)=>fs.writeFileSync(path.join(root,name),JSON.stringify(obj,null,2)+'\n');
@@ -197,12 +197,19 @@ async function main(){
  const eligible=new Set(windows.map(w=>w.key));
  const recordedIds=new Set(data.results.map(x=>x.id));
  const foundInScope=Object.entries(state.windows).filter(([key])=>eligible.has(key)).flatMap(([,w])=>w.proposals||[]);
- const recordedFromReview=foundInScope.filter(x=>recordedIds.has(x.id)).length;
- const proposals=foundInScope.filter(x=>!recordedIds.has(x.id));
+ const catalogById=new Map(data.tournaments.catalog.map(t=>[t.id,t]));
+ const validHistory=foundInScope.filter(p=>{
+  const tournament=catalogById.get(p.tournamentId);
+  const cap=tournament?maximumMatches({...p,catalog:tournament}):null;
+  return cap===null||p.matches<=cap;
+ });
+ const invalidCached=foundInScope.length-validHistory.length;
+ const recordedFromReview=validHistory.filter(x=>recordedIds.has(x.id)).length;
+ const proposals=validHistory.filter(x=>!recordedIds.has(x.id));
  const unique=new Map(proposals.map(x=>[x.id,x]));
  const finished=Object.entries(state.windows).filter(([key,w])=>eligible.has(key)&&w.complete).length;
  const stamp=new Date().toISOString();
- const status={version:1,state:'checked',checkedAt:stamp,mode:'review',scope:historical?'history':'recent',fromDate:historical?config.fromDate:null,toDate:historical?config.toDate:null,provider:'osirion',linkedPlayers:accounts.length,trackedWindows:windows.length,found:unique.size,skipped:invalidRows,imported:0,scannedPages:scanned,completedWindows:finished,identityConflicts:conflicts.length,alreadyRegistered:recordedFromReview,retryWindows:Object.entries(state.windows).filter(([key,w])=>eligible.has(key)&&!w.complete&&w.retryAfter).length,unmappedEvents:unmapped.length,unmappedEventIds:unmapped.slice(0,12),message:'Osirionに接続済み。既存プロフィールのうちIDが一意な'+accounts.length+'名を追跡。'+scanned+'ページを検査、'+unique.size+'件が確認待ち。照合保留ID'+conflicts.length+'件は対象外。'+(unmapped.length?' カタログ未登録のVictory Cup系イベント'+unmapped.length+'種は確認待ち。':'')};
+ const status={version:1,state:'checked',checkedAt:stamp,mode:'review',scope:historical?'history':'recent',fromDate:historical?config.fromDate:null,toDate:historical?config.toDate:null,provider:'osirion',linkedPlayers:accounts.length,trackedWindows:windows.length,found:unique.size,skipped:invalidRows,imported:0,scannedPages:scanned,completedWindows:finished,identityConflicts:conflicts.length,alreadyRegistered:recordedFromReview,invalidCachedCandidates:invalidCached,retryWindows:Object.entries(state.windows).filter(([key,w])=>eligible.has(key)&&!w.complete&&w.retryAfter).length,unmappedEvents:unmapped.length,unmappedEventIds:unmapped.slice(0,12),message:'Osirionに接続済み。既存プロフィールのうちIDが一意な'+accounts.length+'名を追跡。'+scanned+'ページを検査、'+unique.size+'件が確認待ち。照合保留ID'+conflicts.length+'件は対象外。'+(unmapped.length?' カタログ未登録のVictory Cup系イベント'+unmapped.length+'種は確認待ち。':'')};
  state.checkedAt=stamp;
  write(prefix+'-scan.json',state);
  write(prefix+'-review.json',{version:1,status:'review',checkedAt:stamp,proposals:[...unique.values()]});
