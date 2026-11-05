@@ -91,7 +91,7 @@ test('officially mapped S43 cash and evaluation events are discoverable without 
  const source=require('node:fs'),path=require('node:path');
  const catalog=JSON.parse(source.readFileSync(path.join(__dirname,'../tournaments.json'),'utf8')).catalog;
  const configs=[
-  ['S43_TriosCashCup','S43_TriosCashCup_Event1_ME','cash-cup','trio','単一開催枠'],
+  ['S43_TriosCashCup','S43_TriosCashCup_Event1_ME','cash-cup','trio','Event 1'],
   ['S43_ReloadZBDuosCashCup','S43_ReloadZBDuosCashCup_Event1Round1_ME','cash-cup','duo','Event 1 · Round 1'],
   ['S43_ArenaCashCup','S43_ArenaCashCup_Event1_ME','cash-cup','solo','Event 1'],
   ['S43_PerformanceEvaluationTrios','S43_PerformanceEvaluationTrios_Event1Round1_EU','performance-evaluation','trio','Event 1 · Round 1']
