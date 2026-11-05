@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-11-05T07:11:33.359Z",
+  "checkedAt": "2026-11-05T07:14:06.450Z",
   "windows": {
     "epicgames_S42_SoloVictoryCup_NAW/S42_SoloVictoryCup_Event3Round1_NAW": {
       "nextPage": 8,
@@ -1368,11 +1368,18 @@
       "totalPages": 93
     },
     "epicgames_S41_ReloadReloadSoloVictoryCup_OCE/S41_ReloadSoloVictoryCup_Round1_Day1_OCE": {
-      "nextPage": 24,
-      "complete": false,
+      "nextPage": 25,
+      "complete": true,
       "proposals": [],
-      "pages": 24,
+      "pages": 25,
       "totalPages": 86
+    },
+    "epicgames_S41_ReloadReloadSoloVictoryCup_OCE/S41_ReloadSoloVictoryCup_Round2_Day1_OCE": {
+      "nextPage": 4,
+      "complete": true,
+      "proposals": [],
+      "pages": 4,
+      "totalPages": 4
     }
   }
 }
