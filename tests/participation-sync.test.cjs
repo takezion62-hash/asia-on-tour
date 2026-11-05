@@ -82,3 +82,25 @@ test('participation scans reserve one year-2024 and one year-2025 slot',()=>{
  assert.ok(chosen.some(x=>x.key==='past25'));
  assert.ok(chosen.some(x=>x.key==='recent'));
 });
+
+test('Tracker window and Epic round identify the same published result, but different round remains separate',()=>{
+ const shared={date:'2025-12-21',region:'NAW',tournamentId:'ch7s1-one-million-unreal-cup',players:['Lily','p1ng'],player:'Lily / p1ng'};
+ const a={...shared,round:'単一開催枠 / 参加確認',source:'https://www.fortnite.com/competitive/events/S39_1MillionUnrealCup/?region=NAW&round=S39_1MillionUnrealCup_NAW'};
+ const b={...shared,round:'賞金決勝',source:'https://fortnitetracker.com/events/epicgames_S39_1MillionUnrealCup_NAW?window=S39_1MillionUnrealCup_NAW'};
+ assert.equal(publishedEquivalent(a,[b]),true);
+ assert.equal(publishedEquivalent(a,[{...b,source:b.source.replace('window=S39_1MillionUnrealCup_NAW','window=S39_1MillionUnrealCup_OtherRound_NAW')}]),false);
+});
+test('when a prize result is published, an existing participation duplicate is pruned and the index rebuilt',()=>{
+ const dir=fs.mkdtempSync(path.join(os.tmpdir(),'aot-reconcile-'));
+ try{
+  const winUnreal={eventId:'S39_1MillionUnrealCup',windowId:'S39_1MillionUnrealCup_NAW',dateJst:'2025-12-21',region:'NAW',kind:'参加確認',series:'unreal-cup',tournamentId:'ch7s1-one-million-unreal-cup',round:'単一開催枠 / 参加確認'};
+  const a={id:'auto-s39-x',date:'2025-12-21',region:'NAW',tournamentId:winUnreal.tournamentId,seasonId:'S39',event:'$1 Million Unreal Cup',round:winUnreal.round,kind:'参加確認',players:['Lily','p1ng'],player:'Lily / p1ng',source:'https://www.fortnite.com/competitive/events/S39_1MillionUnrealCup/?region=NAW&round=S39_1MillionUnrealCup_NAW',verified:true,rank:7,points:374,kills:39,vrs:1,matches:9};
+  assert.equal(appendArchive(dir,[{win:winUnreal,proposals:[a]}],[]).added,1);
+  const b={...a,round:'賞金決勝',source:'https://fortnitetracker.com/events/epicgames_S39_1MillionUnrealCup_NAW?window=S39_1MillionUnrealCup_NAW'};
+  const result=appendArchive(dir,[],[b]);
+  assert.equal(result.prunedPublished,1);
+  assert.equal(result.total,0);
+  assert.equal(JSON.parse(fs.readFileSync(path.join(dir,'participation/2025-12.json'),'utf8')).entries.length,0);
+  assert.equal(appendArchive(dir,[{win:winUnreal,proposals:[a]}],[b]).added,0);
+ }finally{fs.rmSync(dir,{recursive:true,force:true})}
+});

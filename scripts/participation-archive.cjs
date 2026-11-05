@@ -9,9 +9,16 @@ const members=r=>Array.isArray(r.players)&&r.players.length?r.players:[r.player]
 const rosterKey=r=>members(r).slice().sort((a,b)=>a.localeCompare(b,'ja')).join('|');
 const validDate=s=>typeof s==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(s)&&!Number.isNaN(Date.parse(s));
 const recordId=p=>'participation-'+crypto.createHash('sha256').update(JSON.stringify([p.source,rosterKey(p)])).digest('hex').slice(0,20);
+const roundFromSource=s=>{
+ try{const u=new URL(s);return u.searchParams.get('round')||u.searchParams.get('window')}catch{return null}
+};
 function publishedEquivalent(p,published){
- return published.some(r=>r.date===p.date&&r.region===p.region&&r.tournamentId===p.tournamentId&&rosterKey(r)===rosterKey(p)&&
-   (r.source===p.source||r.round===p.round||(!r.source?.includes('round=')&&!r.source?.includes('window='))));
+ return published.some(r=>{
+  if(r.date!==p.date||r.region!==p.region||r.tournamentId!==p.tournamentId||rosterKey(r)!==rosterKey(p))return false;
+  if(r.source===p.source)return true;
+  const a=roundFromSource(r.source),b=roundFromSource(p.source);
+  return a&&b?a===b:r.round===p.round||(!r.source?.includes('round=')&&!r.source?.includes('window='));
+ });
 }
 function toParticipation(p,win,cutoff=null){
  if(!p||p.verified!==true||!validDate(p.date)||!REGIONS.has(p.region)||p.date!==win.dateJst||p.region!==win.region||p.tournamentId!==win.tournamentId)return null;
@@ -37,6 +44,7 @@ function toParticipation(p,win,cutoff=null){
 const monthFile=(root,month)=>path.join(root,'participation',month+'.json');
 function appendArchive(root,proposalsByWindow,published,opts={}){
  const changed=new Map(),seen=new Set(),rejected=[];
+ let prunedPublished=0;
  const indexPath=path.join(root,'participation-index.json');
  const previous=fs.existsSync(indexPath)?JSON.parse(fs.readFileSync(indexPath,'utf8')):{version:1,months:[],total:0};
  if(previous.version!==1)throw Error('participation index version mismatch');
@@ -46,11 +54,14 @@ function appendArchive(root,proposalsByWindow,published,opts={}){
    if(!/^\d{4}-\d{2}\.json$/.test(name))continue;
    const month=name.slice(0,7),document=JSON.parse(fs.readFileSync(monthFile(root,month),'utf8'));
    if(document.version!==1||document.month!==month||!Array.isArray(document.entries))throw Error('invalid participation month '+month);
+   const keep=[];
    for(const record of document.entries){
+    if(publishedEquivalent(record,published)){prunedPublished++;continue}
     if(seen.has(record.id))throw Error('duplicate participation ID '+record.id);
-    seen.add(record.id);
+    seen.add(record.id);keep.push(record);
    }
-   old.set(month,document.entries);
+   if(keep.length!==document.entries.length)changed.set(month,keep);
+   old.set(month,keep);
   }
  }
  let added=0,skippedPublished=0,duplicates=0;
@@ -66,7 +77,7 @@ function appendArchive(root,proposalsByWindow,published,opts={}){
    rows.push(record);changed.set(month,rows);seen.add(record.id);added++;
   }
  }
- if(!added)return {added:0,skippedPublished,duplicates,rejected:rejected.length,total:previous.total,months:old.size};
+ if(!added&&!prunedPublished)return {added:0,prunedPublished:0,skippedPublished,duplicates,rejected:rejected.length,total:previous.total,months:old.size};
  fs.mkdirSync(dir,{recursive:true});
  for(const [month,rows] of changed){
   rows.sort((a,b)=>b.date.localeCompare(a.date)||a.region.localeCompare(b.region)||a.rank-b.rank||a.id.localeCompare(b.id));
@@ -92,6 +103,6 @@ function appendArchive(root,proposalsByWindow,published,opts={}){
   players:[...players.values()].map(p=>({...p,months:[...p.months].sort().reverse()})).sort((a,b)=>a.name.localeCompare(b.name,'ja'))
  };
  fs.writeFileSync(indexPath,JSON.stringify(next)+'\n');
- return {added,skippedPublished,duplicates,rejected:rejected.length,total:next.total,months:months.length};
+ return {added,prunedPublished,skippedPublished,duplicates,rejected:rejected.length,total:next.total,months:months.length};
 }
 module.exports={recordId,toParticipation,publishedEquivalent,appendArchive};

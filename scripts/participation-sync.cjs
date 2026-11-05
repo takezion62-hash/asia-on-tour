@@ -102,7 +102,7 @@ async function main(){
   trackedWindows:found.length,completedWindows:entries.filter(([,x])=>x.complete).length,
   partialWindows:entries.filter(([,x])=>x.coverageLimited).length,
   pagesScanned,invalidRows:invalid,emptyPages:empty,failedWindows:failed,
-  newRecords:saved.added,total:saved.total,months:saved.months,skippedPublished:saved.skippedPublished,
+  newRecords:saved.added,prunedPublished:saved.prunedPublished||0,total:saved.total,months:saved.months,skippedPublished:saved.skippedPublished,
   message:'Epic IDで本人照合した出場戦績を月別に保存。公式通過枠外の判定以外は通過未確認。賞金・AOT PR・称号には加算しません。全順位表を無制限には調査しません。'};
  state.checkedAt=stamp;
  write('participation-scan.json',state);
