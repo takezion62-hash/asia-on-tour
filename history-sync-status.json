@@ -1,7 +1,7 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-05T07:14:39.048Z",
+  "checkedAt": "2026-11-05T07:16:24.084Z",
   "mode": "review",
   "scope": "history",
   "fromDate": "2026-08-01",
@@ -10,13 +10,14 @@
   "linkedPlayers": 422,
   "trackedWindows": 256,
   "found": 15,
-  "skipped": 0,
+  "skipped": 1,
   "imported": 0,
-  "scannedPages": 7,
+  "scannedPages": 12,
   "completedWindows": 4,
   "identityConflicts": 8,
   "alreadyRegistered": 59,
+  "retryWindows": 0,
   "unmappedEvents": 0,
   "unmappedEventIds": [],
-  "message": "Osirionに接続済み。既存プロフィールのうちIDが一意な422名を追跡。7ページを検査、15件が確認待ち。照合保留ID8件は対象外。"
+  "message": "Osirionに接続済み。既存プロフィールのうちIDが一意な422名を追跡。12ページを検査、15件が確認待ち。照合保留ID8件は対象外。"
 }

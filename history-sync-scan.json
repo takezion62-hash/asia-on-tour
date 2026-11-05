@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-11-05T07:14:39.048Z",
+  "checkedAt": "2026-11-05T07:16:24.084Z",
   "windows": {
     "epicgames_S42_SoloVictoryCup_NAW/S42_SoloVictoryCup_Event3Round1_NAW": {
       "nextPage": 8,
@@ -1741,6 +1741,14 @@
       ],
       "pages": 3,
       "totalPages": 3
+    },
+    "epicgames_S41_ReloadReloadSoloVictoryCup_EU/S41_ReloadSoloVictoryCup_Round1_Day1_EU": {
+      "nextPage": 12,
+      "complete": false,
+      "proposals": [],
+      "pages": 12,
+      "emptyAttempts": 0,
+      "totalPages": 100
     }
   }
 }
