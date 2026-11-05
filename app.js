@@ -346,6 +346,7 @@
         if(!e||!validCalendarDate(e.dateJst)||!e.dateJst.startsWith(filters.month+'-'))return false;
         const historic=typeof e.sourceWindowId==='string'&&e.sourceWindowId.length>0;
         if(!historic&&e.seasonId!==siteData.schedule.seasonId)return false;
+        if(!historic&&(calendarHistoryCache.get(filters.month)||[]).some(p=>p.eventId===e.eventId&&p.region===e.region&&p.startUtc===e.startUtc))return false;
         if(!regions.includes(e.region)||(/fncs/i.test(e.name)&&!/fncs\s+division\s*1/i.test(e.name)))return false;
         if((filters.region!=='all'&&e.region!==filters.region)
           ||(filters.series!=='all'&&e.series!==filters.series)
