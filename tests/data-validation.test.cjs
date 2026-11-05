@@ -118,6 +118,14 @@ test('戦績ID重複と必須フィールド欠落を対象ID付きで検出す�
   bad((data, row) => { row.id = ''; }, 'id');
 });
 
+test('異なる戦績IDでも同じ大会・ラウンド・選手の二重登録を拒否する', () => {
+  bad((data,row) => {
+    const duplicate=structuredClone(row);
+    duplicate.id += '-second-copy';
+    data.results.push(duplicate);
+  }, 'id', '同じ大会');
+});
+
 test('順位・ポイント・キル・VRの負数・文字列・端数を拒否する', () => {
   for (const field of ['rank', 'points', 'kills', 'vrs']) for (const value of [-1, '100', 1.5, NaN, Infinity]) bad((data, row) => { row[field] = value; }, field);
   bad((data, row) => { row.rank = 0; }, 'rank');
@@ -191,6 +199,8 @@ test('存在しないタグ・大会IDと大会／ラウンドのシーズン矛
 test('確認できない形式・シーズンは未確認として警告し推測で埋めない', () => {
   const data = clone(), row = data.results[soloIndex];
   row.source = 'https://example.com/unconfirmed'; row.event = 'Unconfirmed Cup';
+  // No official mapping exists in this synthetic case, so no canonical metadata is asserted.
+  delete row.tournamentId; delete row.seasonId; delete row.chapter; delete row.season;
   assert.equal(seasonFor(row, data), 'unknown');
   const result = validateData(data);
   assert.deepEqual(result.errors, []);
@@ -213,7 +223,7 @@ test('同じTracker IDを別の選手へ割り当てた場合は人間の確認�
 
 test('新しい正当な賞金記録を足すと件数・賞金・ランキングを自動再計算する', () => {
   const data = clone(), original = summarize(data), row = structuredClone(data.results[soloIndex]);
-  row.id += '-new-valid-event'; row.prize = 123.45; data.results.push(row);
+  row.id += '-new-valid-event'; row.date = '2026-10-28'; row.prize = 123.45; data.results.push(row);
   assert.deepEqual(validateData(data).errors, []);
   const next = summarize(data);
   assert.equal(next.records, original.records + 1);
