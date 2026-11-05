@@ -113,7 +113,37 @@
       node.textContent='出場記録 '+fmt(index.total)+'件 / 照合ID '+fmt(status.linkedPlayers)+' / 取得ページ '+fmt(status.pagesScanned)+' / 部分調査で終了 '+fmt(status.partialWindows)+'開催枠 / 最終確認 '+checked;
     }catch{node.textContent='調査状況を読み込めません'}
   }
-  window.AOTParticipation={renderProfile};
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>{initArchive();loadStatus()},{once:true});
-  else{initArchive();loadStatus()}
+  let prRows=[],prLoaded=false;
+  const prSubscribers=new Set();
+  const subscribePR=callback=>{
+    if(typeof callback!=='function')return ()=>{};
+    prSubscribers.add(callback);
+    if(prLoaded)callback(prRows);
+    return ()=>prSubscribers.delete(callback);
+  };
+  const getPRRecords=()=>prRows;
+  async function loadForPR(){
+    try{
+      const index=await getIndex();
+      const list=index.months.map(x=>x.month).filter(m=>/^\d{4}-\d{2}$/.test(m));
+      const gathered=[];
+      // Four months at a time keeps network and memory load bounded as the
+      // historical archive grows. Everything remains read-only on the site.
+      for(let start=0;start<list.length;start+=4){
+        const group=await Promise.all(list.slice(start,start+4).map(getMonth));
+        for(const entries of group)gathered.push(...entries);
+      }
+      prRows=gathered;
+      prLoaded=true;
+      for(const callback of prSubscribers)callback(prRows);
+    }catch(error){
+      console.warn('AOT PR participation could not be loaded; verified results remain available:',error);
+      const target=document.getElementById('participation-summary');
+      if(target)target.setAttribute('title','AOT PR用出場記録の取得に失敗しました');
+    }
+  }
+  window.AOTParticipation={renderProfile,subscribePR,getPRRecords};
+  const initialize=()=>{initArchive();loadStatus();loadForPR()};
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initialize,{once:true});
+  else initialize()
 })();
