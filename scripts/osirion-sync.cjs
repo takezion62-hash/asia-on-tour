@@ -111,7 +111,13 @@ function discoverUnmapped(all,catalog,opts,time=Date.now()){
   const knownType=/(VictoryCup|VictoryCashCup|ConsoleVCC|CashCup|FNCSDivisionalCup_Division1|PerformanceEvaluation|PerfEval|IconCup)/i.test(base)||/\b(?:Cash Cup|Victory Cup|Performance Evaluation|Icon Cup)\b/i.test(title);
   const cosmeticCup=/\bCup\b/i.test(title)&&!/Ranked Cup|Test Cup/i.test(title)&&!/^S\d+_FNCS(?:Reload|Solos|Major)/i.test(base);
   if(!knownType&&!cosmeticCup)continue;
-  if(/^S\d+_FNCS/i.test(base)&&!/^S\d+_FNCSDivisionalCup_Division1$/.test(base)&&!cosmeticCup)continue;
+  const tracked=reviewSeries(opts);
+  const isVictory=/(VictoryCup|VictoryCashCup|ConsoleVCC)/i.test(base);
+  const isFncsDiv1=/^S\d+_FNCSDivisionalCup_Division1$/.test(base);
+  if(isVictory&&!tracked.has('victory-cup'))continue;
+  if(isFncsDiv1&&!tracked.has('fncs'))continue;
+  if(!isVictory&&!isFncsDiv1&&![...tracked].some(s=>s!=='victory-cup'&&s!=='fncs'))continue;
+  if(/^S\d+_FNCS/i.test(base)&&!isFncsDiv1&&!cosmeticCup)continue;
   if(catalog.some(x=>x.seasonId===base.split('_')[0]&&x.sourceEventIds?.includes(base)))continue;
   const relevant=(tournament.eventWindows||[]).some(w=>{
    const end=Date.parse(w.endTime);
