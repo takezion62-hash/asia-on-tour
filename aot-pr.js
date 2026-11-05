@@ -109,18 +109,19 @@
   // The official cutoff is usable only when the recorded Round 1 leaderboard
   // URL identifies the exact catalog event and the same region. Page rank
   // alone, a fabricated round, or a contradictory URL are never enough.
-  function verifiedQualificationSource(record,tournament) {
+  function verifiedQualificationSource(record,tournament,requireRoundOne=true) {
     const id=sourceRound(record);
     if (!id || !Array.isArray(tournament?.sourceEventIds)) return false;
     const qualifier=tournament.id==='ch7s4-playstation-nickeh30-icon-cup'
       ? /_Qualifier_(?:ME|EU|NAC|NAW|OCE|BR)$/i.test(id)
       : /Round_?1_(?:ME|EU|NAC|NAW|OCE|BR)$/i.test(id);
-    if (!qualifier || !id.endsWith('_'+record.region)) return false;
+    if ((requireRoundOne && !qualifier) || !id.endsWith('_'+record.region)) return false;
     try {
       const u=new URL(record.source);
       const hosts=['fortnitetracker.com','www.fortnitetracker.com','fortnite.com','www.fortnite.com'];
       if (!hosts.includes(u.hostname.toLowerCase()) || !['http:','https:'].includes(u.protocol)) return false;
-      if (u.searchParams.get('region') && u.searchParams.get('region')!==record.region) return false;
+      // Epic leaderboard links can retain the viewer's region in ?region=;
+      // the selected ?round=/ ?window= suffix determines the actual scoreboard region.
       const parts=u.pathname.split('/').filter(Boolean);
       let sourceEvent=parts.find(p=>/^S\d+_/i.test(p)) ||
         parts.find(p=>/^epicgames_S\d+_/i.test(p))?.replace(/^epicgames_/i,'') || null;
@@ -134,17 +135,20 @@
   // Even a published final alone is not used to invent a missing qualifier row.
   function qualificationEvidence(record,tournament) {
     if (!record || record.verified!==true || record.kind!=='予選' ||
-      record.participationOnly===true || record.partial===true || record.reported===true ||
+      record.participationOnly===true || record.reported===true ||
       record.reviewOnly===true || record.qualification==='outside-cutoff' ||
       record.status==='通過圏外' || !QUALIFYING_SERIES.has(tournament?.series)) return null;
     const cutoff=officialQualificationCutoff(record,tournament);
     // Contradictory ranks cannot win even when a label or note claims success.
     if (cutoff!==null && Number.isInteger(record.rank) && record.rank>cutoff) return null;
     if (/予選(?:突破|通過)/u.test(String(record.round||''))) return 'explicit';
+    // A partial statistical record may still explicitly and reliably prove advancement.
+    // But never infer an advance from cutoff/note when its round details are partial.
+    if (record.partial===true) return null;
     const note=String(record.note||'');
-    const positivelyConfirmed=/(?:予選(?:突破|通過)|決勝(?:[0-9,]+位)?へ進出|週末決勝へ|決勝進出を確認)/u.test(note);
+    const positivelyConfirmed=/(?:予選(?:突破|通過)|決勝(?:[0-9,]+位)?へ進出|週末決勝へ|(?:^|[。；、\s])決勝進出(?:[。、\s]|を確認))/u.test(note);
     const contrary=/(?:予選(?:突破|通過).{0,14}(?:未確認|不明|できず|失敗|ならず)|決勝進出.{0,10}(?:未確認|不明|できず|ならず))/u.test(note);
-    if (positivelyConfirmed && !contrary && verifiedQualificationSource(record,tournament)) return 'verified-note';
+    if (positivelyConfirmed && !contrary && verifiedQualificationSource(record,tournament,false)) return 'verified-note';
     if (cutoff!==null && Number.isInteger(record.rank) && record.rank>0 &&
       verifiedQualificationSource(record,tournament)) return 'official-cutoff';
     return null;
