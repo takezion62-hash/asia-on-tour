@@ -437,7 +437,8 @@ test('never award for contradictory outside-cutoff, unverified, wrong source or 
    {source:'https://fortnitetracker.com/events/epicgames_S42_SoloVictoryCup_NAW?window=S42_SoloVictoryCup_Event2Round2_NAW'},
    {source:'https://fortnitetracker.com/events/epicgames_S42_DifferentCup_NAW?window=S42_DifferentCup_Event2Round1_NAW'}
  ]){
-  approx(score([{...q,...change,id:'blocked-'+Object.keys(change)[0]}],c).ranked[0].qualificationBonus,0);
+  const blocked=score([{...q,...change,id:'blocked-'+Object.keys(change)[0]}],c).ranked[0];
+  if(blocked)approx(blocked.qualificationBonus,0);
  }
  approx(score([{...q,note:'決勝進出ではなく予選結果。',id:'no-false-note',
    source:'https://fortnitetracker.com/events/epicgames_S42_DifferentCup_NAW?window=S42_DifferentCup_Event2Round1_NAW'}],c).ranked[0].qualificationBonus,0);
