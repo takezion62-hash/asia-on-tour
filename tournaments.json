@@ -1221,6 +1221,36 @@
           "url": "https://fortnitetracker.com/events/epicgames_S40_PlayStationCupClix_NAW"
         }
       ]
+    },
+    {
+      "id": "ch7s5-squads-victory-cup",
+      "name": "Squads Victory Cup Battle Royale",
+      "chapter": 7,
+      "season": 5,
+      "seasonId": "S43",
+      "sourceEventIds": [
+        "S43_SquadsVictoryCup"
+      ],
+      "series": "victory-cup",
+      "mode": "battle-royale",
+      "subtype": "squads-victory-cup",
+      "team": "squad",
+      "platform": "cross-platform",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "Epic Games公式大会ページ：Chapter 7ミニシーズン、Squads/Battle Royale、2026年11月9日～23日の開催枠および地域別通過枠を確認。",
+          "url": "https://www.fortnite.com/competitive/events/S43_SquadsVictoryCup/?region=EU"
+        },
+        {
+          "text": "2026年11月1日公開のEpic公式規則2.2.1～2.2.3／Attachment C：スクワッド・通常バトロワ・クロスプラットフォーム、予選通過枠（EU 300/NAC 200/その他120）と決勝VRごとチーム$200を確認。賞金支払は別途資格確認の対象。",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-squads-victory-cup-chapter-7-mini-season-official-rules"
+        },
+        {
+          "text": "Fortnite TrackerによるS43 NAWイベントIDとEvent1 Round1/2の識別。",
+          "url": "https://fortnitetracker.com/events/epicgames_S43_SquadsVictoryCup_NAW"
+        }
+      ]
     }
   ]
 }
