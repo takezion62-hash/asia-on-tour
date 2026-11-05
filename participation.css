@@ -21,3 +21,6 @@
 .participation-empty{padding:17px 0;color:#b6c6df;font-size:13px}
 .participation-profile{margin-top:30px}
 @media(max-width:640px){.participation-panel{padding:17px 13px}.participation-panel h2{font-size:18px}.participation-fields label{flex:1 1 100%}}
+
+.participation-pagination{display:flex;justify-content:flex-end;gap:10px;margin:12px 0 0;flex-wrap:wrap}
+.participation-pagination button[hidden]{display:none}
