@@ -3,13 +3,19 @@
 // may auto-approve only narrowly allow-listed Victory Cup rows with official rules.
 const fs=require('node:fs'),path=require('node:path');
 const {prepare,maximumMatches,applyProposals}=require('./auto-sync-core.cjs');
-const {evaluate}=require('./verified-history-approval.cjs');
+const {evaluate,RULES}=require('./verified-history-approval.cjs');
 const root=path.resolve(__dirname,'..');
 const read=name=>JSON.parse(fs.readFileSync(path.join(root,name),'utf8'));
 const write=(name,obj)=>fs.writeFileSync(path.join(root,name),JSON.stringify(obj,null,2)+'\n');
 const regions=['ME','EU','NAC','NAW','OCE','BR'];
 const REVIEW_SERIES=new Set(['victory-cup','cash-cup','fncs','performance-evaluation','skin-cup','icon-cup','playstation-cup','unreal-cup']);
 const nowJst=utc=>new Date(new Date(utc).getTime()+9*3600000).toISOString().slice(0,10);
+// The history window must follow new competitions after the initial 2024-2026 backfill.
+function resolveHistoricalScope(config,time=Date.now()){
+ if(config.toDate!=='rolling')return config;
+ const lag=Math.max(0,config.minLagMinutes||240)*60000;
+ return {...config,toDate:nowJst(time-lag)};
+}
 const identity=url=>{
  const token=typeof url==='string'?url.match(/[?&]id=([0-9a-f-]{36})(?:&|$)/i)?.[1]:null;
  return token&&/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(token)?token.replace(/-/g,'').toLowerCase():null;
@@ -162,12 +168,21 @@ function normalizeRow(entry,win){
  if(!sums.matches||!Number.isSafeInteger(entry.rank)||entry.rank<1||!Number.isSafeInteger(entry.pointsEarned)||entry.pointsEarned<0)return null;
  return {eventId:win.eventId,windowId:win.windowId,teamAccountIds:ids.map(x=>x.toLowerCase()),rank:entry.rank,points:entry.pointsEarned,kills:sums.kills,vrs:sums.vrs,matches:sums.matches,rawName:entry.players.map(x=>x.username||'非公開').join(' / '),cashVerified:false};
 }
-async function fetchJson(url){
- const response=await fetch(url,{headers:{accept:'application/json'},signal:AbortSignal.timeout(25000)});
- if(!response.ok)throw Error('Osirion API HTTP '+response.status+' '+new URL(url).pathname);
- const body=await response.json();
- if(body?.success===false)throw Error('Osirion API error');
- return body;
+async function fetchJson(url,opts={}){
+ const attempts=Number.isInteger(opts.attempts)?Math.min(Math.max(opts.attempts,1),3):2;
+ const retryDelayMs=Number.isFinite(opts.retryDelayMs)?Math.max(opts.retryDelayMs,0):800;
+ for(let attempt=0;attempt<attempts;attempt++){
+  try{
+   const response=await fetch(url,{headers:{accept:'application/json'},signal:AbortSignal.timeout(25000)});
+   if(!response.ok)throw Error('Osirion API HTTP '+response.status+' '+new URL(url).pathname);
+   const body=await response.json();
+   if(body?.success===false)throw Error('Osirion API error');
+   return body;
+  }catch(error){
+   if(attempt===attempts-1||!transientLeaderboardFailure(error))throw error;
+   if(retryDelayMs)await new Promise(resolve=>setTimeout(resolve,retryDelayMs*(attempt+1)));
+  }
+ }
 }
 async function getTournaments(historical=false){
  const all=new Map();
@@ -191,19 +206,32 @@ async function getLeaderboard(win,page){
 }
 // Balance existing Victory Cups and safely matched review-only series in the same
 // run; never let a large FNCS leaderboard starve known cash records (or vice versa).
-function selectActiveWindows(windows,state,config){
+function selectActiveWindows(windows,state,config,time=Date.now()){
  const pending=windows.filter(w=>{
   const item=state.windows[w.key];
-  return !item?.complete&&(!item?.retryAfter||Date.parse(item.retryAfter)<=Date.now());
+  return !item?.complete&&(!item?.retryAfter||Date.parse(item.retryAfter)<=time);
  });
- const limit=Math.max(1,config.maxWindowsPerRun||2);
+ const limit=Math.max(1,config.maxWindowsPerRun||2),selected=[],seen=new Set();
+ const priority=(a,b)=>{
+  const progress=w=>{const cp=state.windows[w.key];return cp?.totalPages>0?cp.nextPage/cp.totalPages:0};
+  const progressDiff=progress(b)-progress(a);
+  // Finish already scanned rounds first; then pick the newest competitions.
+  return progressDiff||b.end-a.end;
+ };
+ const add=pool=>{
+  for(const win of pool.slice().sort(priority)){
+   if(selected.length>=limit)break;
+   if(!seen.has(win.key)){selected.push(win);seen.add(win.key)}
+  }
+ };
  const victory=pending.filter(w=>w.series==='victory-cup');
  const review=pending.filter(w=>w.series!=='victory-cup');
- if(!victory.length||!review.length)return pending.slice(0,limit);
- const vQuota=Math.ceil(limit/2),chosen=[...victory.slice(0,vQuota),...review.slice(0,limit-vQuota)];
- const seen=new Set(chosen.map(w=>w.key));
- for(const win of pending){if(chosen.length>=limit)break;if(!seen.has(win.key)){chosen.push(win);seen.add(win.key)}}
- return chosen;
+ if(victory.length&&review.length){
+  add(victory.slice().sort(priority).slice(0,Math.ceil(limit/2)));
+  add(review.slice().sort(priority).slice(0,Math.floor(limit/2)));
+ }
+ add(pending);
+ return selected;
 }
 // Historical scans must fairly cover every year and tournament series.
 // Only documented results seed the scan priority; names are never inferred from historical leaderboards.
@@ -220,11 +248,14 @@ function historicalEvidenceScore(win,records){
 }
 function historicalPriority(state,records){
  return (a,b)=>{
-  const score=w=>historicalEvidenceScore(w,records)+(w.kind==='賞金決勝'?12:0)+(w.kind==='参加確認'?3:0);
-  const diff=score(b)-score(a);
-  if(diff)return diff;
-  const pa=Number(!!state.windows[a.key]?.nextPage),pb=Number(!!state.windows[b.key]?.nextPage);
-  return pb-pa||a.end-b.end;
+  const score=w=>{
+   const cp=state.windows[w.key];
+   const fraction=cp?.totalPages>0?Math.min(1,(cp.nextPage||0)/cp.totalPages):0;
+   // Higher score means a publishable official ruleset and a round near completion.
+   const approvedRule=Object.hasOwn(RULES,w.tournamentId)&&w.series==='victory-cup';
+   return (approvedRule?150:0)+Math.round(fraction*90)+historicalEvidenceScore(w,records)+(w.kind==='賞金決勝'?12:0)+(w.kind==='参加確認'?3:0);
+  };
+  return score(b)-score(a)||a.end-b.end;
  };
 }
 function selectHistoricalWindows(windows,state,config,time=Date.now(),records=[]){
@@ -252,7 +283,8 @@ function selectHistoricalWindows(windows,state,config,time=Date.now(),records=[]
 async function main(){
  const historical=process.argv.includes('--history');
  const prefix=historical?'history-sync':'auto-sync';
- const config=read(prefix+'-config.json');
+ const storedConfig=read(prefix+'-config.json');
+ const config=historical?resolveHistoricalScope(storedConfig):storedConfig;
  if(historical){
   const validDate=x=>typeof x==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(x)&&!Number.isNaN(Date.parse(x))&&new Date(x).toISOString().slice(0,10)===x;
   if(!validDate(config.fromDate)||!validDate(config.toDate)||config.fromDate>config.toDate||!Array.isArray(config.regions)||!config.regions.length||config.regions.some(x=>!regions.includes(x)))throw Error('過去大会の期間または地域設定が不正');
@@ -276,8 +308,8 @@ async function main(){
   let pagesThisWindow=0;
   const limit=Math.min(Math.max(config.maxPagesPerWindowPerRun||budget,1),50);
   // Preserve at least two leaderboard pages for remaining windows when backfilling multiple years.
-  const reserved=historical?Math.max(0,active.length-windowIndex-1)*2:0;
-  const perWindowLimit=historical?Math.max(0,Math.min(limit,budget-reserved)):limit;
+  const reserved=Math.max(0,active.length-windowIndex-1)*(historical?2:1);
+  const perWindowLimit=Math.max(0,Math.min(limit,budget-reserved));
   while(budget>0&&pagesThisWindow<perWindowLimit&&!checkpoint.complete){
    const page=checkpoint.nextPage;
    let l;
@@ -349,7 +381,7 @@ async function main(){
  const reviewOnlyWindows=windows.filter(w=>w.series!=='victory-cup').length;
  const reviewOnlyCandidates=unique.size?Array.from(unique.values()).filter(p=>p.reviewOnly===true).length:0;
  const cumulativeApprovals=data.updates.entries.filter(x=>x.title?.startsWith('公式規則で自動承認：')).reduce((sum,x)=>sum+(x.recordIds?.length||0),0);
- const status={version:1,state:'checked',checkedAt:stamp,mode:'review',scope:historical?'history':'recent',fromDate:historical?config.fromDate:null,toDate:historical?config.toDate:null,provider:'osirion',linkedPlayers:accounts.length,trackedWindows:windows.length,found:unique.size,skipped:invalidRows,imported,scannedPages:scanned,completedWindows:finished,identityConflicts:conflicts.length,alreadyRegistered:recordedFromReview,autoApprovedTotal:cumulativeApprovals,invalidCachedCandidates:invalidCached,manualReviewCandidates:manuallyHeld,retryWindows:Object.entries(state.windows).filter(([key,w])=>eligible.has(key)&&!w.complete&&w.retryAfter).length,transientFailures,reviewOnlyWindows,reviewOnlyCandidates,unmappedEvents:unmapped.length,unmappedEventIds:unmapped.slice(0,12),message:'Osirionで'+accounts.length+'アカウントIDを追跡。今回の公式規則による自動承認'+imported+'件、追加確認待ち'+unique.size+'件、名義照合保留'+conflicts.length+'件。'};
+ const status={version:1,state:'checked',checkedAt:stamp,mode:'review',scope:historical?'history':'recent',dateMode:historical?(storedConfig.toDate==='rolling'?'rolling':'fixed'):null,selectedWindows:active.length,fromDate:historical?config.fromDate:null,toDate:historical?config.toDate:null,provider:'osirion',linkedPlayers:accounts.length,trackedWindows:windows.length,found:unique.size,skipped:invalidRows,imported,scannedPages:scanned,completedWindows:finished,identityConflicts:conflicts.length,alreadyRegistered:recordedFromReview,autoApprovedTotal:cumulativeApprovals,invalidCachedCandidates:invalidCached,manualReviewCandidates:manuallyHeld,retryWindows:Object.entries(state.windows).filter(([key,w])=>eligible.has(key)&&!w.complete&&w.retryAfter).length,transientFailures,reviewOnlyWindows,reviewOnlyCandidates,unmappedEvents:unmapped.length,unmappedEventIds:unmapped.slice(0,12),message:'Osirionで'+accounts.length+'アカウントIDを追跡。今回の公式規則による自動承認'+imported+'件、追加確認待ち'+unique.size+'件、名義照合保留'+conflicts.length+'件。'};
  state.checkedAt=stamp;
  write(prefix+'-scan.json',state);
  write(prefix+'-review.json',{version:1,status:'review',checkedAt:stamp,proposals:[...unique.values()]});
@@ -357,4 +389,4 @@ async function main(){
  console.log((historical?'OSIRION_HISTORY_REVIEW ':'OSIRION_REVIEW ')+JSON.stringify({scannedPages:scanned,linkedPlayers:accounts.length,identityConflicts:conflicts.length,windows:windows.length,unmappedEvents:unmapped.length,proposals:unique.size,imported,finished}));
 }
 if(require.main===module)main().catch(e=>{console.error('OSIRION_SYNC_ERROR '+e.stack);process.exitCode=1});
-module.exports={identity,linkedAccounts,parseStage,parseReviewStage,discover,discoverUnmapped,selectActiveWindows,selectHistoricalWindows,historicalEvidenceScore,advancementLimit,normalizeRow,getTournaments,getLeaderboard,transientLeaderboardFailure,main};
+module.exports={identity,linkedAccounts,parseStage,parseReviewStage,discover,discoverUnmapped,selectActiveWindows,selectHistoricalWindows,historicalEvidenceScore,resolveHistoricalScope,fetchJson,advancementLimit,normalizeRow,getTournaments,getLeaderboard,transientLeaderboardFailure,main};

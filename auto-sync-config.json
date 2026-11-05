@@ -5,8 +5,8 @@
   "provider": "osirion",
   "lookbackDays": 7,
   "minLagMinutes": 240,
-  "maxPagesPerRun": 30,
-  "maxWindowsPerRun": 2,
+  "maxPagesPerRun": 36,
+  "maxWindowsPerRun": 4,
   "accounts": [],
   "windows": [],
   "reviewSeries": [
@@ -16,7 +16,8 @@
     "performance-evaluation",
     "skin-cup",
     "icon-cup",
-    "playstation-cup"
+    "playstation-cup",
+    "unreal-cup"
   ],
   "maxPagesPerWindowPerRun": 12
 }

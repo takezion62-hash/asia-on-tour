@@ -994,7 +994,7 @@ test('all five tournament facets and free text use AND filtering with stage sepa
     const expectedNames = [...new Map(expectedRecords.map(record => [tournamentKey(record, data), record.event])).values()].sort();
     const shown = tournamentCards(app);
     assert.deepEqual(shown.map(card => plain(card.content.match(/<h3[^>]*>([\s\S]*?)<\/h3>/)[1])).sort(), expectedNames);
-    assert.equal(app.get('tournament-count').textContent, `${expectedNames.length}大会 · ${expectedRecords.length}戦績`);
+    assert.equal(app.get('tournament-count').textContent, `${expectedNames.length}大会 · ${expectedRecords.length.toLocaleString('ja-JP')}戦績`);
     const query = new URLSearchParams(app.window.location.hash.split('?')[1] || '');
     for (const [axis, value] of Object.entries(filters)) if (value !== 'all' && value !== '') assert.equal(query.get(axis), value, axis);
   };

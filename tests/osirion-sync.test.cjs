@@ -1,6 +1,6 @@
 'use strict';
 const test=require('node:test'),assert=require('node:assert/strict');
-const {identity,linkedAccounts,parseStage,discover,discoverUnmapped,selectHistoricalWindows,historicalEvidenceScore,advancementLimit,transientLeaderboardFailure,normalizeRow}=require('../scripts/osirion-sync.cjs');
+const {identity,linkedAccounts,parseStage,discover,discoverUnmapped,selectHistoricalWindows,historicalEvidenceScore,resolveHistoricalScope,selectActiveWindows,fetchJson,advancementLimit,transientLeaderboardFailure,normalizeRow}=require('../scripts/osirion-sync.cjs');
 const f='https://fortnitetracker.com/profile/all/Alpha/events?id=8a57ac58-f937-4de2-81b7-9abd070c7ae8';
 test('Tracker UUID can map to the same 32-char account ID after strict validation',()=>{
  assert.equal(identity(f),'8a57ac58f9374de281b79abd070c7ae8');
@@ -150,4 +150,49 @@ test('transient API failures preserve history checkpoints instead of publishing 
  assert.equal(transientLeaderboardFailure(new Error('Osirion API HTTP 429 /v1/tournaments/leaderboard')),true);
  assert.equal(transientLeaderboardFailure(new Error('Osirion API HTTP 503 /v1/tournaments/leaderboard')),true);
  assert.equal(transientLeaderboardFailure(new Error('大会順位表のID/形式が不正')),false);
+});
+
+test('rolling historical date expands every day with a completion lag, and fixed dates remain supported',()=>{
+ const config={fromDate:'2024-05-29',toDate:'rolling',minLagMinutes:240};
+ assert.equal(resolveHistoricalScope(config,Date.parse('2026-11-05T03:00:00Z')).toDate,'2026-11-05');
+ assert.equal(resolveHistoricalScope(config,Date.parse('2026-11-05T00:00:00Z')).toDate,'2026-11-04');
+ assert.equal(config.toDate,'rolling');
+ const fixed={...config,toDate:'2026-10-31'};
+ assert.strictEqual(resolveHistoricalScope(fixed,Date.parse('2026-11-05T00:00:00Z')),fixed);
+});
+test('recent scan prioritizes partial rounds and new events while reserving other-series slots',()=>{
+ const make=(key,series,end)=>({key,series,end:Date.parse(end)});
+ const a=make('old','victory-cup','2026-11-01T01:00:00Z');
+ const b=make('fresh','victory-cup','2026-11-04T01:00:00Z');
+ const c=make('progress','victory-cup','2026-11-02T01:00:00Z');
+ const d=make('skin','skin-cup','2026-11-03T01:00:00Z');
+ const e=make('cash','cash-cup','2026-11-04T01:00:00Z');
+ const state={windows:{progress:{nextPage:8,totalPages:10},old:{nextPage:0}}};
+ const chosen=selectActiveWindows([a,b,c,d,e],state,{maxWindowsPerRun:4},Date.parse('2026-11-05T00:00:00Z'));
+ assert.equal(chosen.length,4);
+ assert.equal(chosen[0].key,'progress');
+ assert.ok(chosen.some(w=>w.key==='fresh'));
+ assert.ok(chosen.some(w=>w.key==='cash'));
+ assert.ok(chosen.some(w=>w.key==='skin'));
+});
+test('provider retries temporary 429 and never retries malformed responses',async()=>{
+ const saved=globalThis.fetch;let calls=0;
+ try{
+  globalThis.fetch=async()=>{calls++;if(calls===1)return {ok:false,status:429};return {ok:true,json:async()=>({success:true,tournaments:[]})}};
+  const ok=await fetchJson('https://fnapi.osirion.gg/v1/tournaments',{attempts:2,retryDelayMs:0});
+  assert.deepEqual(ok.tournaments,[]);assert.equal(calls,2);
+  calls=0;
+  globalThis.fetch=async()=>{calls++;return {ok:true,json:async()=>({success:false})}};
+  await assert.rejects(fetchJson('https://fnapi.osirion.gg/v1/tournaments',{attempts:3,retryDelayMs:0}),/Osirion API error/);
+  assert.equal(calls,1);
+ }finally{globalThis.fetch=saved}
+});
+test('historical picker prioritizes verified rule-backed finals near completion without removing year quotas',()=>{
+ const make=(key,year,id,series,nextPage,totalPages)=>({key,dateJst:year+'-07-01',end:Date.parse(year+'-07-01'),tournamentId:id,kind:'賞金決勝',series});
+ const a=make('a','2024','ch5s3-solo-victory-cup','victory-cup');
+ const b=make('b','2024','unverified-duos-cup','victory-cup');
+ const c=make('c','2025','unverified-duos-cup','cash-cup');
+ const state={windows:{a:{nextPage:12,totalPages:15},b:{nextPage:2,totalPages:20}}};
+ const chosen=selectHistoricalWindows([b,a,c],state,{maxWindowsPerRun:2},Date.parse('2026-11-05'));
+ assert.equal(chosen[0].key,'a');
 });
