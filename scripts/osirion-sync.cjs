@@ -96,7 +96,12 @@ function discover(all,catalog,opts,time=Date.now()){
    const end=Date.parse(window.endTime),begin=Date.parse(window.beginTime);
    if(!stage||!windowId.endsWith('_'+region)||!Number.isFinite(end)||!Number.isFinite(begin))continue;
    const dateJst=nowJst(window.beginTime);
-   if(end>time-delay)continue;
+   // Allow a shorter lag only for an explicitly targeted review-only series.
+   // Rule-backed Victory Cup approvals always retain the standard safety lag.
+   const focus=opts.priorityReview;
+   const focusEligible=focus&&t.series!=='victory-cup'&&t.series===focus.series&&region===focus.region&&(!focus.fromDate||dateJst>=focus.fromDate);
+   const targetLag=focusEligible&&Number.isInteger(focus.minLagMinutes)?Math.min(Math.max(focus.minLagMinutes,0),opts.minLagMinutes||240):opts.minLagMinutes||240;
+   if(end>time-targetLag*60000)continue;
    if(opts.fromDate&&opts.toDate){
     if(dateJst<opts.fromDate||dateJst>opts.toDate)continue;
    }else if(end<time-recentDays*86400000)continue;
