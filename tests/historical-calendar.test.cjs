@@ -63,3 +63,22 @@ test('unmapped FNCS events remain excluded while cosmetic community cups are eli
  assert.equal(out.sessions.length,1);
  assert.equal(out.sessions[0].name,'Champion Aphrodite FNCS Cup');
 });
+
+test('duplicate Epic event aliases collapse only identical windows, not separate rounds or platforms',()=>{
+ const aliases=[{id:'vc',name:'Solo Victory Cup Battle Royale',seasonId:'S42',sourceEventIds:['S42_SoloVictoryCup','S42_SoloVictoryCupBR'],series:'victory-cup',mode:'battle-royale'},
+  {id:'zb',name:'Solo Zero Build Victory Cup',seasonId:'S42',sourceEventIds:['S42_SoloVictoryCupZB'],series:'victory-cup',mode:'zero-build'}];
+ const a=evt('S42_SoloVictoryCup','OCE',[
+  win('S42_SoloVictoryCup_Event1Round1_OCE','2026-09-05T03:00:00Z','2026-09-05T05:00:00Z'),
+  win('S42_SoloVictoryCup_Event1Round2_OCE','2026-09-05T06:00:00Z','2026-09-05T07:00:00Z')]);
+ const b=evt('S42_SoloVictoryCupBR','OCE',[
+  win('S42_SoloVictoryCupBR_Event1Round1_OCE','2026-09-05T03:00:00Z','2026-09-05T05:00:00Z'),
+  win('S42_SoloVictoryCupBR_Event1Round2_OCE','2026-09-05T06:00:00Z','2026-09-05T07:00:00Z')]);
+ const zb=evt('S42_SoloVictoryCupZB','OCE',[
+  win('S42_SoloVictoryCupZB_Event1Round1_OCE','2026-09-05T03:00:00Z','2026-09-05T05:00:00Z')]);
+ const out=buildHistory([b,a,zb],aliases,{now:Date.parse('2026-11-06T00:00:00Z')});
+ assert.equal(out.sessions.length,3);
+ assert.equal(out.sessions.filter(x=>x.tournamentId==='vc').length,2);
+ assert.deepEqual(out.sessions.filter(x=>x.tournamentId==='vc').map(x=>x.round),['Event 1 · Round 1','Event 1 · Round 2']);
+ assert.ok(out.sessions.filter(x=>x.tournamentId==='vc').every(x=>x.eventId==='S42_SoloVictoryCup'));
+ assert.equal(out.sessions.filter(x=>x.mode==='zero-build').length,1);
+});
