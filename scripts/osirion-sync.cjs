@@ -274,6 +274,13 @@ function selectHistoricalWindows(windows,state,config,time=Date.now(),records=[]
    add(pending.filter(w=>w.dateJst.startsWith(year)&&(series==='victory-cup'?w.series==='victory-cup':w.series!=='victory-cup')));
   }
  }
+ // Reserve a slot for recent completed rounds so fast publication does not wait
+ // behind the much larger multi-year backlog.
+ if(selected.length<limit){
+  const fresh=pending.filter(w=>w.end>=time-7*86400000&&w.end<=time);
+  const ruleBacked=fresh.filter(w=>w.series==='victory-cup'&&Object.hasOwn(RULES,w.tournamentId));
+  add(ruleBacked.length?ruleBacked:fresh);
+ }
  for(const w of pending.slice().sort(priority)){
   if(selected.length>=limit)break;
   if(!seen.has(w.key)){selected.push(w);seen.add(w.key)}

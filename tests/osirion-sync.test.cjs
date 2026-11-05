@@ -155,7 +155,7 @@ test('transient API failures preserve history checkpoints instead of publishing 
 test('rolling historical date expands every day with a completion lag, and fixed dates remain supported',()=>{
  const config={fromDate:'2024-05-29',toDate:'rolling',minLagMinutes:240};
  assert.equal(resolveHistoricalScope(config,Date.parse('2026-11-05T03:00:00Z')).toDate,'2026-11-05');
- assert.equal(resolveHistoricalScope(config,Date.parse('2026-11-05T00:00:00Z')).toDate,'2026-11-04');
+ assert.equal(resolveHistoricalScope(config,Date.parse('2026-11-04T16:00:00Z')).toDate,'2026-11-04');
  assert.equal(config.toDate,'rolling');
  const fixed={...config,toDate:'2026-10-31'};
  assert.strictEqual(resolveHistoricalScope(fixed,Date.parse('2026-11-05T00:00:00Z')),fixed);
@@ -195,4 +195,15 @@ test('historical picker prioritizes verified rule-backed finals near completion 
  const state={windows:{a:{nextPage:12,totalPages:15},b:{nextPage:2,totalPages:20}}};
  const chosen=selectHistoricalWindows([b,a,c],state,{maxWindowsPerRun:2},Date.parse('2026-11-05'));
  assert.equal(chosen[0].key,'a');
+});
+
+test('extra historical slot reaches recently completed official events despite a 3-year backlog',()=>{
+ const make=(key,year,series,days)=>({key,seasonId:'S42',tournamentId:series==='victory-cup'?'ch7s4-solo-victory-cup':'unverified-cash',dateJst:year+'-11-01',kind:series==='victory-cup'?'賞金決勝':'参加確認',series,end:Date.parse(days)});
+ const rows=['2024','2025','2026'].flatMap(y=>['victory-cup','cash-cup'].map(s=>make(y+s,y,s,y+'-07-01T00:00:00Z')));
+ rows.push(make('recent2026','2026','victory-cup','2026-11-04T23:00:00Z'));
+ const selected=selectHistoricalWindows(rows,{windows:{}},{maxWindowsPerRun:7},Date.parse('2026-11-05T14:00:00Z'));
+ assert.equal(selected.length,7);
+ assert.ok(selected.some(w=>w.key==='recent2026'));
+ assert.equal(selected.filter(w=>w.dateJst.startsWith('2024')).length,2);
+ assert.equal(selected.filter(w=>w.dateJst.startsWith('2025')).length,2);
 });
