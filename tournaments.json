@@ -1953,6 +1953,30 @@
           "url": "https://www.fortnite.com/competitive/events/S41_ConsoleCC_DuosZB/"
         }
       ]
+    },
+    {
+      "id": "ch6s3-squid-grounds-cash-cup",
+      "name": "Squid Grounds Cash Cup",
+      "chapter": 6,
+      "season": 3,
+      "seasonId": "S36",
+      "sourceEventIds": [
+        "S36_SquidGroundVictoryDuosCup"
+      ],
+      "series": "cash-cup",
+      "mode": "battle-royale",
+      "subtype": "unknown",
+      "team": "duo",
+      "platform": "cross-platform",
+      "unknownFields": [
+        "subtype"
+      ],
+      "evidence": [
+        {
+          "text": "Epic Games公式大会ページで2025年7〜8月のSquid Grounds Cash CupをDuos / Battle Royaleとして確認。現金賞金・通過者は別途照合が必要。",
+          "url": "https://www.fortnite.com/competitive/events/S36_SquidGroundVictoryDuosCup/?region=NAC"
+        }
+      ]
     }
   ]
 }

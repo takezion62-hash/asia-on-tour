@@ -14,8 +14,8 @@
     "BR"
   ],
   "minLagMinutes": 240,
-  "maxPagesPerRun": 24,
-  "maxWindowsPerRun": 6,
+  "maxPagesPerRun": 32,
+  "maxWindowsPerRun": 8,
   "autoApproveVerified": true,
   "reviewSeries": [
     "victory-cup",
@@ -24,7 +24,8 @@
     "performance-evaluation",
     "skin-cup",
     "icon-cup",
-    "playstation-cup"
+    "playstation-cup",
+    "unreal-cup"
   ],
   "maxPagesPerWindowPerRun": 4
 }

@@ -1,6 +1,6 @@
 'use strict';
 const test=require('node:test'),assert=require('node:assert/strict');
-const {identity,linkedAccounts,parseStage,discover,discoverUnmapped,selectHistoricalWindows,advancementLimit,normalizeRow}=require('../scripts/osirion-sync.cjs');
+const {identity,linkedAccounts,parseStage,discover,discoverUnmapped,selectHistoricalWindows,historicalEvidenceScore,advancementLimit,normalizeRow}=require('../scripts/osirion-sync.cjs');
 const f='https://fortnitetracker.com/profile/all/Alpha/events?id=8a57ac58-f937-4de2-81b7-9abd070c7ae8';
 test('Tracker UUID can map to the same 32-char account ID after strict validation',()=>{
  assert.equal(identity(f),'8a57ac58f9374de281b79abd070c7ae8');
@@ -116,4 +116,23 @@ test('2024 official solo Victory brackets do not invent NAC/NAW qualification',(
  assert.equal(advancementLimit(w('S31','ch5s4-zb-solo-victory','OCE')),600);
  assert.equal(advancementLimit(w('S31','ch5s4-solo-victory-cup','NAC')),null);
  assert.equal(advancementLimit(w('S30','ch5s3-zb-solo-victory','NAW')),null);
+});
+
+test('historical evidence prioritizes previously verified regions and rounds without expanding identity rules',()=>{
+ const date='2024-10-15',base={dateJst:date,region:'ME',tournamentId:'ch5s4-solo-victory-cup',series:'victory-cup',end:1};
+ const seeded={...base,key:'seed',windowId:'S31_SoloVictoryCashCup_Event7Round2_ME',kind:'賞金決勝'};
+ const unseeded={...base,key:'other',windowId:'S31_SoloVictoryCashCup_Event8Round1_ME',kind:'予選'};
+ const records=[{date,region:'ME',tournamentId:base.tournamentId,source:'https://fortnitetracker.com/events/epicgames_S31_SoloVictoryCashCup_ME?window='+seeded.windowId}];
+ assert.equal(historicalEvidenceScore(seeded,records),100);
+ assert.equal(historicalEvidenceScore({...seeded,region:'EU'},records),0);
+ assert.deepEqual(selectHistoricalWindows([unseeded,seeded],{windows:{}},{maxWindowsPerRun:1},Date.parse('2026-11-05'),records).map(w=>w.key),['seed']);
+});
+test('2025 Unreal Cup from the existing catalog is scanned for verification only',()=>{
+ const c=JSON.parse(require('node:fs').readFileSync(require('node:path').join(__dirname,'../tournaments.json'),'utf8')).catalog;
+ const item=c.find(x=>x.id==='ch7s1-one-million-unreal-cup');
+ const w='S39_1MillionUnrealCup_NAW';
+ const event={eventId:'epicgames_S39_1MillionUnrealCup_NAW',eventWindows:[{eventWindowId:w,beginTime:'2025-12-21T03:00:00Z',endTime:'2025-12-21T05:00:00Z'}]};
+ const found=discover([event],c,{reviewSeries:['unreal-cup'],fromDate:'2024-05-29',toDate:'2026-11-04',regions:['NAW'],minLagMinutes:240},Date.parse('2026-11-05'));
+ assert.equal(found.length,1);
+ assert.equal(found[0].kind,'参加確認');
 });

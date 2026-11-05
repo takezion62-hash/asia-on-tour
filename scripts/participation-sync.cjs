@@ -2,14 +2,14 @@
 // Independent best-effort, bounded scanner for players already linked to an Epic ID.
 // It never writes results.json, updates.json, PR data or achievement data.
 const fs=require('node:fs'),path=require('node:path');
-const {linkedAccounts,discover,normalizeRow,getTournaments,getLeaderboard,advancementLimit}=require('./osirion-sync.cjs');
+const {linkedAccounts,discover,normalizeRow,getTournaments,getLeaderboard,advancementLimit,historicalEvidenceScore}=require('./osirion-sync.cjs');
 const {prepare}=require('./auto-sync-core.cjs');
 const {appendArchive}=require('./participation-archive.cjs');
 const root=path.resolve(__dirname,'..');
 const read=f=>JSON.parse(fs.readFileSync(path.join(root,f),'utf8'));
 const write=(f,obj)=>fs.writeFileSync(path.join(root,f),JSON.stringify(obj,null,2)+'\n');
 const nowJst=()=>new Date(Date.now()+9*3600000).toISOString().slice(0,10);
-function chooseWindows(windows,state,config,now=Date.now()){
+function chooseWindows(windows,state,config,now=Date.now(),records=[]){
  const available=windows.filter(w=>{
   const item=state.windows[w.key];
   if(item?.complete&&!item.coverageLimited)return false;
@@ -21,12 +21,18 @@ function chooseWindows(windows,state,config,now=Date.now()){
    String(state.windows[a.key]?.lastScanned||'').localeCompare(String(state.windows[b.key]?.lastScanned||''))||a.end-b.end);
  const qualifiers=available.filter(w=>w.series==='victory-cup'&&w.kind==='予選').sort((a,b)=>b.end-a.end);
  const older=available.filter(w=>!state.windows[w.key]?.nextPage).sort((a,b)=>a.end-b.end);
+ const byEvidence=(a,b)=>historicalEvidenceScore(b,records)-historicalEvidenceScore(a,records)||a.end-b.end;
+ const legacy2024=available.filter(w=>w.dateJst?.startsWith('2024')).sort(byEvidence);
+ const legacy2025=available.filter(w=>w.dateJst?.startsWith('2025')).sort(byEvidence);
  const limit=Math.max(1,config.maxWindowsPerRun||5),chosen=[],seen=new Set();
  const add=(pool,max)=>{for(const w of pool){if(chosen.length>=limit||max<=0)break;if(seen.has(w.key))continue;chosen.push(w);seen.add(w.key);max--}};
- add(fresh,Math.max(1,Math.floor(limit/4)));
- add(progressing,Math.max(1,Math.floor(limit/4)));
- add(qualifiers,Math.max(1,Math.floor(limit/4)));
- add(older,limit-chosen.length);
+ add(fresh,1);
+ add(progressing,1);
+ // Reserve separate 2024 and 2025 slots before recent qualifying rounds take over.
+ add(legacy2024,1);
+ add(legacy2025,1);
+ add(older,Math.min(1,limit-chosen.length));
+ add(qualifiers,limit-chosen.length);
  add(available.sort((a,b)=>b.end-a.end),limit-chosen.length);
  return chosen;
 }
@@ -43,7 +49,7 @@ async function main(){
  if(state.version!==1||!state.windows||typeof state.windows!=='object')throw Error('invalid participation scan state');
  const all=await getTournaments(true);
  const found=discover(all,data.tournaments.catalog,{...config,toDate:nowJst()},Date.now());
- const selected=chooseWindows(found,state,config);
+ const selected=chooseWindows(found,state,config,Date.now(),data.results);
  let remaining=config.maxPagesPerRun,pagesScanned=0,invalid=0,empty=0,failed=0;
  const items=[];
  for(const win of selected){

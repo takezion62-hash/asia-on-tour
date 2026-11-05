@@ -8,7 +8,7 @@ const root=path.resolve(__dirname,'..');
 const read=name=>JSON.parse(fs.readFileSync(path.join(root,name),'utf8'));
 const write=(name,obj)=>fs.writeFileSync(path.join(root,name),JSON.stringify(obj,null,2)+'\n');
 const regions=['ME','EU','NAC','NAW','OCE','BR'];
-const REVIEW_SERIES=new Set(['victory-cup','cash-cup','fncs','performance-evaluation','skin-cup','icon-cup','playstation-cup']);
+const REVIEW_SERIES=new Set(['victory-cup','cash-cup','fncs','performance-evaluation','skin-cup','icon-cup','playstation-cup','unreal-cup']);
 const nowJst=utc=>new Date(new Date(utc).getTime()+9*3600000).toISOString().slice(0,10);
 const identity=url=>{
  const token=typeof url==='string'?url.match(/[?&]id=([0-9a-f-]{36})(?:&|$)/i)?.[1]:null;
@@ -202,15 +202,37 @@ function selectActiveWindows(windows,state,config){
  return chosen;
 }
 // Historical scans must fairly cover every year and tournament series.
-function selectHistoricalWindows(windows,state,config,time=Date.now()){
+// Only documented results seed the scan priority; names are never inferred from historical leaderboards.
+function historicalEvidenceScore(win,records){
+ let best=0;
+ for(const r of records){
+  if(r.tournamentId!==win.tournamentId||r.region!==win.region)continue;
+  if(typeof r.source==='string'&&r.source.includes(encodeURIComponent(win.windowId)))return 100;
+  if(r.date===win.dateJst)best=Math.max(best,70);
+  else if(typeof r.date==='string'&&r.date.slice(0,7)===win.dateJst.slice(0,7))best=Math.max(best,25);
+  else if(typeof r.date==='string'&&r.date.slice(0,4)===win.dateJst.slice(0,4))best=Math.max(best,5);
+ }
+ return best;
+}
+function historicalPriority(state,records){
+ return (a,b)=>{
+  const score=w=>historicalEvidenceScore(w,records)+(w.kind==='賞金決勝'?12:0)+(w.kind==='参加確認'?3:0);
+  const diff=score(b)-score(a);
+  if(diff)return diff;
+  const pa=Number(!!state.windows[a.key]?.nextPage),pb=Number(!!state.windows[b.key]?.nextPage);
+  return pb-pa||a.end-b.end;
+ };
+}
+function selectHistoricalWindows(windows,state,config,time=Date.now(),records=[]){
  const pending=windows.filter(w=>{
-  const p=state.windows[w.key];
-  return !p?.complete&&(!p?.retryAfter||Date.parse(p.retryAfter)<=time);
+  const cp=state.windows[w.key];
+  return !cp?.complete&&(!cp?.retryAfter||Date.parse(cp.retryAfter)<=time);
  });
  const years=[...new Set(pending.map(w=>w.dateJst.slice(0,4)))].sort((a,b)=>b.localeCompare(a));
  const limit=Math.max(1,config.maxWindowsPerRun||6),selected=[],seen=new Set();
- const priority=(a,b)=>Number(!!state.windows[b.key]?.nextPage)-Number(!!state.windows[a.key]?.nextPage)||a.end-b.end;
+ const priority=historicalPriority(state,records);
  const add=pool=>{for(const w of pool.slice().sort(priority))if(!seen.has(w.key)){selected.push(w);seen.add(w.key);break}};
+ // One Victory and one other-series slot per year; remaining slots target known historical evidence.
  for(const series of ['victory-cup','other']){
   for(const year of years){
    if(selected.length>=limit)break;
@@ -241,7 +263,7 @@ async function main(){
  const unmapped=historical?[]:discoverUnmapped(all,data.tournaments.catalog,config);
  const state=read(prefix+'-scan.json');
  if(state.version!==1||!state.windows||typeof state.windows!=='object')throw Error('checkpoint invalid');
- const active=historical?selectHistoricalWindows(windows,state,config):selectActiveWindows(windows,state,config);
+ const active=historical?selectHistoricalWindows(windows,state,config,Date.now(),data.results):selectActiveWindows(windows,state,config);
  const previewConfig={version:1,accounts,windows:active.map(w=>({eventId:w.eventId,windowId:w.windowId,dateJst:w.dateJst,region:w.region,seasonId:w.seasonId,tournamentId:w.tournamentId,kind:w.kind,round:w.round}))};
  let budget=Math.min(Math.max(config.maxPagesPerRun||30,1),50),scanned=0,invalidRows=0;
  for(const win of active){
@@ -318,4 +340,4 @@ async function main(){
  console.log((historical?'OSIRION_HISTORY_REVIEW ':'OSIRION_REVIEW ')+JSON.stringify({scannedPages:scanned,linkedPlayers:accounts.length,identityConflicts:conflicts.length,windows:windows.length,unmappedEvents:unmapped.length,proposals:unique.size,imported,finished}));
 }
 if(require.main===module)main().catch(e=>{console.error('OSIRION_SYNC_ERROR '+e.stack);process.exitCode=1});
-module.exports={identity,linkedAccounts,parseStage,parseReviewStage,discover,discoverUnmapped,selectActiveWindows,selectHistoricalWindows,advancementLimit,normalizeRow,getTournaments,getLeaderboard,main};
+module.exports={identity,linkedAccounts,parseStage,parseReviewStage,discover,discoverUnmapped,selectActiveWindows,selectHistoricalWindows,historicalEvidenceScore,advancementLimit,normalizeRow,getTournaments,getLeaderboard,main};

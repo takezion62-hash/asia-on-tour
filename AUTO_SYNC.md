@@ -101,3 +101,11 @@
 - Chapter 5 Season 3（S30）およびSeason 4（S31）の**ソロ通常BR/ソロZB**に限って、Epicの当時の公式規則による「予選突破」の自動照合に対応。地域別規則と順位表の両方を検証済み、本人Epic ID一致、最大7試合、順位表全ページ確認、既存記録と非重複の場合に限る。賞金$0の予選突破としてのみ記録する。決勝0VRの場合のみ$0の賞金なし決勝を登録。
 - 当時の公式規則はNA一地域であり、NAC/NAWへの通過枠の換算は不可能。この二地域は自動承認から除外する。現金賞金が発生する決勝や他の大会シリーズも引き続き確認専用。
 - 公式ルール：https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules および https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-4-official-rules
+
+
+## 2024・2025年の戦績を優先して取り込む改良（2026年11月5日）
+- 公開済み戦績の実測：2024年20件、2025年6件、2026年1218件。登録済みは合計1244件（2026-11-05確認時点）。
+- 過去大会スキャナーを、年ごとのVictory Cup/その他シリーズに加え、**既に出典が確認された開催日・同一イベントID/ラウンドID・地域**を優先するスケジューリングへ変更。順位表の未確認選手を名前の似かよりで紐づけることはしない。
+- 過去大会は1回最大32ページ・8開催枠・1開催枠最大4ページに拡大。各年への枠配分とAPI負荷上限を維持。出場戦績スキャナーも2024年・2025年の各1枠を予約して、2026年だけに偏らないようにした。
+- 2025年7〜8月の「Squid Grounds Cash Cup」はEpic公式大会ページで**Duos/Battle Royale**と確認して、S36の大会カタログに追加。2025年12月「$1 Million Unreal Cup」も確認対象に追加した。ただし両大会とも賞金額・予選突破を順位表だけで自動確定せず、本人Epic IDが完全一致した場合のみ出場履歴に保存する。
+- 出典：https://www.fortnite.com/competitive/events/S36_SquidGroundVictoryDuosCup/?region=NAC

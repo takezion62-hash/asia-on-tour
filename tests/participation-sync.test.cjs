@@ -71,3 +71,14 @@ test('scanner gives recent, resuming, and older windows bounded fair turns',()=>
  assert.ok(chosen.some(w=>w.key==='1'));
  assert.ok(!chosen.some(w=>w.key==='3'));
 });
+
+test('participation scans reserve one year-2024 and one year-2025 slot',()=>{
+ const now=Date.parse('2026-11-05T12:00:00Z');
+ const row=(key,date,series='victory-cup')=>({key,dateJst:date,series,kind:'予選',end:Date.parse(date+'T12:00:00Z'),tournamentId:'t',region:'ME'});
+ const set=[row('recent','2026-11-04'),row('progress','2026-10-01'),row('past24','2024-10-15'),row('past25','2025-12-21'),row('other','2026-10-25')];
+ const state={windows:{progress:{nextPage:3,lastScanned:'2026-11-04T01:00:00Z'}}};
+ const chosen=chooseWindows(set,state,{maxWindowsPerRun:5,maxPagesPerWindowTotal:40},now);
+ assert.ok(chosen.some(x=>x.key==='past24'));
+ assert.ok(chosen.some(x=>x.key==='past25'));
+ assert.ok(chosen.some(x=>x.key==='recent'));
+});
