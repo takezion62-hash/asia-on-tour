@@ -6,11 +6,11 @@
       if(!response.ok)throw new Error(filename+' could not be loaded (HTTP '+response.status+')');
       return response.json();
     };
-    const [records,playerData,tournamentData,updateData,scheduleData]=await Promise.all([
-      loadJSON('results.json'),loadJSON('players.json'),loadJSON('tournaments.json'),loadJSON('updates.json'),loadJSON('schedule.json')
+    const [records,playerData,tournamentData,updateData,scheduleData,historyCalendarData]=await Promise.all([
+      loadJSON('results.json'),loadJSON('players.json'),loadJSON('tournaments.json'),loadJSON('updates.json'),loadJSON('schedule.json'),loadJSON('calendar-history.json')
     ]);
-    const siteData={results:records,players:playerData,tournaments:tournamentData,updates:updateData,schedule:scheduleData};
-    if(!Array.isArray(siteData.results)||!Array.isArray(siteData.players.candidates)||!Array.isArray(siteData.tournaments.catalog)||!Array.isArray(siteData.updates.entries)||!Array.isArray(siteData.schedule.sessions))
+    const siteData={results:records,players:playerData,tournaments:tournamentData,updates:updateData,schedule:scheduleData,calendarHistory:historyCalendarData};
+    if(!Array.isArray(siteData.results)||!Array.isArray(siteData.players.candidates)||!Array.isArray(siteData.tournaments.catalog)||!Array.isArray(siteData.updates.entries)||!Array.isArray(siteData.schedule.sessions)||!Array.isArray(siteData.calendarHistory.sessions))
       throw new Error('Invalid ASIA ON TOUR data files');
 
     // CH7S4 / Override · 2026-08-20 through 2026-10-18 (snapshot, not exhaustive)
@@ -310,15 +310,31 @@
 
     // Distinct scheduled sessions: never passed to AOT PR, player profiles,
     // prize totals, tournament histories, achievements or registered results.
+    // Historic tournament sessions are calendar metadata, never AOT match records.
+    const calendarRoundSignature=value=>{
+      const s=String(value||'');
+      const day=s.match(/Day\s*(\d+).*Round\s*(\d+)/iu),event=s.match(/Event\s*(\d+).*Round\s*(\d+)/iu),week=s.match(/Week\s*(\d+).*Round\s*(\d+)/iu);
+      if(day)return 'day'+Number(day[1])+'-round'+Number(day[2]);
+      if(event)return 'event'+Number(event[1])+'-round'+Number(event[2]);
+      if(week)return 'week'+Number(week[1])+'-round'+Number(week[2]);
+      return s.replace(/\s*\/.*$/u,'').trim().toLowerCase();
+    };
     function calendarUpcomingSessions(filters) {
       if(filters.scope==='results')return [];
-      return siteData.schedule.sessions.filter(e=>{
-        if(!e||e.seasonId!==siteData.schedule.seasonId||!validCalendarDate(e.dateJst)||!e.dateJst.startsWith(filters.month+'-'))return false;
+      const published=calendarSessions({...filters,scope:'all'});
+      return [...siteData.calendarHistory.sessions,...siteData.schedule.sessions].filter(e=>{
+        if(!e||!validCalendarDate(e.dateJst)||!e.dateJst.startsWith(filters.month+'-'))return false;
+        const historic=typeof e.sourceWindowId==='string'&&e.sourceWindowId.length>0;
+        if(!historic&&e.seasonId!==siteData.schedule.seasonId)return false;
         if(!regions.includes(e.region)||(/fncs/i.test(e.name)&&!/fncs\s+division\s*1/i.test(e.name)))return false;
-        return (filters.region==='all'||e.region===filters.region)
-          &&(filters.series==='all'||e.series===filters.series)
-          &&(filters.mode==='all'||e.mode===filters.mode)
-          &&(filters.stage==='all'||e.stage===filters.stage);
+        if((filters.region!=='all'&&e.region!==filters.region)
+          ||(filters.series!=='all'&&e.series!==filters.series)
+          ||(filters.mode!=='all'&&e.mode!==filters.mode)
+          ||(filters.stage!=='all'&&e.stage!==filters.stage))return false;
+        // Do not show a redundant schedule card when this exact round has published AOT results.
+        if(historic&&published.some(p=>p.date===e.dateJst&&p.region===e.region&&p.id===e.tournamentId
+          &&calendarRoundSignature(p.round)===calendarRoundSignature(e.round)))return false;
+        return true;
       }).sort((a,b)=>a.startUtc.localeCompare(b.startUtc)||a.region.localeCompare(b.region));
     }
     function renderUpcomingCalendar(filters) {
@@ -340,41 +356,42 @@
       root.querySelector('.calendar-filter-grid').insertAdjacentHTML('beforeend',
         '<div class="calendar-filter-field"><label for="calendar-scope">表示内容</label>'
         +'<select id="calendar-scope" data-calendar-filter="scope">'
-        +[['all','結果＋予定'],['scheduled','開催予定のみ'],['results','登録済み結果のみ']]
+        +[['all','結果＋開催履歴＋予定'],['scheduled','開催日程・履歴のみ'],['results','登録済み結果のみ']]
           .map(([id,label])=>'<option value="'+id+'"'+(id===filters.scope?' selected':'')+'>'+label+'</option>').join('')
         +'</select></div>');
-      const monthSummary=root.querySelector('.calendar-month-head small');
-      monthSummary.textContent+=' · 予定'+format(scheduled.length)+'枠';
+      const past=scheduled.filter(e=>!!e.sourceWindowId).length,future=scheduled.length-past;
+      root.querySelector('.calendar-month-head small').textContent+=' · 開催履歴'+format(past)+'枠 · 予定'+format(future)+'枠';
       for(const button of root.querySelectorAll('[data-calendar-day]')){
-        const day=button.dataset.calendarDay,count=(byDate.get(day)||[]).length;
-        if(!count)continue;
+        const day=button.dataset.calendarDay,items=byDate.get(day)||[];
+        if(!items.length)continue;
+        const pastItems=items.filter(e=>!!e.sourceWindowId).length,upcomingItems=items.length-pastItems;
         button.classList.add('has-upcoming');
-        button.insertAdjacentHTML('beforeend','<span class="calendar-day-upcoming-count">予定 '+format(count)+'</span>');
-        button.setAttribute('aria-label',button.getAttribute('aria-label')+'、今季予定'+count+'枠');
+        button.insertAdjacentHTML('beforeend','<span class="calendar-day-upcoming-count">'+(pastItems?'履歴 '+format(pastItems):'')+(pastItems&&upcomingItems?' · ':'')+(upcomingItems?'予定 '+format(upcomingItems):'')+'</span>');
+        button.setAttribute('aria-label',button.getAttribute('aria-label')+'、開催履歴'+pastItems+'枠、今季予定'+upcomingItems+'枠');
       }
       const entries=byDate.get(filters.date)||[];
       if(filters.scope==='scheduled')for(const elem of root.querySelectorAll('.calendar-event,.calendar-day-count'))elem.hidden=true;
       const list=root.querySelector('.calendar-event-list');
       if(entries.length&&list.querySelector('.calendar-empty'))list.querySelector('.calendar-empty').remove();
       const cards=entries.map(e=>{
-        const status=Date.now()<Date.parse(e.startUtc)?'開催予定':'開始時刻経過';
-        const link=safeUrl(e.url);
+        const historic=!!e.sourceWindowId,status=historic?'開催履歴':Date.now()<Date.parse(e.startUtc)?'開催予定':'開始時刻経過';
+        const link=safeUrl(e.url),time=typeof e.timeJst==='string'?e.timeJst:'—';
         return '<article class="calendar-upcoming-event" data-scheduled-id="'+escape(e.id)+'">'
           +'<div class="calendar-event-top"><span class="calendar-event-tag is-upcoming">'+status+'</span>'
           +'<span class="calendar-event-tag is-region">'+escape(e.region)+'</span>'
           +'<span class="calendar-event-tag">'+escape(e.stage)+'</span>'
           +(e.rewardType==='cosmetic'?'<span class="calendar-event-tag">コスメ報酬</span>':'')+'</div>'
           +'<h3>'+escape(e.name)+'</h3>'
-          +'<p><strong>日本時間 '+escape(e.timeJst)+' 開始</strong> · '+escape(e.round)+'</p>'
-          +(link?'<p><a href="'+escape(link)+'" target="_blank" rel="noopener noreferrer">Epic公式の日程を確認 ↗</a></p>':'')
-          +'<p class="calendar-upcoming-note">日程のみ登録。参加・結果・賞金獲得は未確認</p></article>';
+          +'<p><strong>日本時間 '+escape(time)+' 開始</strong> · '+escape(e.round)+'</p>'
+          +(link?'<p><a href="'+escape(link)+'" target="_blank" rel="noopener noreferrer">Epic大会ページ ↗</a></p>':'')
+          +'<p class="calendar-upcoming-note">'+(historic?'過去の大会開催日をAPIで確認。ASIA選手の出場・戦績・賞金は未確認':'開催日程のみ確認。出場・結果・賞金獲得は未確認')+'</p></article>';
       }).join('');
       list.insertAdjacentHTML('beforeend',cards);
       root.querySelector('.calendar-detail-head h2').textContent=filters.date.replace(/-/g,'/')+' の大会';
-      root.querySelector('.calendar-detail-head p').textContent+=' · 予定'+format(entries.length)+'枠';
-      root.querySelector('.calendar-intro p:last-child').textContent='登録済みの海外大会結果と、今シーズンの開催予定を同じカレンダーで確認できるよ。';
-      root.querySelector('.calendar-note').textContent='※ 開催予定：'+siteData.schedule.seasonLabel+'（'+siteData.schedule.checkedAt+'時点の確認分）。海外6地域の公式大会日程をJSTに変換して表示します。FNCS Division 1以外のFNCSはリージョンロックのため除外。開催予定は実績・賞金・AOT PR・称号に加算しません。開催日や時刻は変更される場合があるため、必ず公式大会ページで再確認してください。';
-      root.querySelector('.calendar-legend').textContent='青い開催枠は実際に掲載した戦績、紫の「予定」は確認済みの日程です（出場・賞金獲得とは別）。';
+      root.querySelector('.calendar-detail-head p').textContent+=' · 開催履歴'+format(entries.filter(e=>!!e.sourceWindowId).length)+'枠 · 予定'+format(entries.filter(e=>!e.sourceWindowId).length)+'枠';
+      root.querySelector('.calendar-intro p:last-child').textContent='登録済みの海外戦績に加えて、過去の大会開催履歴と今シーズンの開催予定も確認できるよ。';
+      root.querySelector('.calendar-note').textContent='※ 開催履歴はOsirion大会APIの終了済みウィンドウ、開催予定は今季の日程（'+siteData.schedule.checkedAt+'時点）から取得。公式大会ID・開始日時を根拠とし、FNCS Division 1以外のFNCS予選は対象外。開催履歴・予定は戦績や獲得賞金・AOT PR・称号に加算しません。';
+      root.querySelector('.calendar-legend').textContent='掲載結果・過去の開催履歴・今季予定は別データ。開催履歴があることは、ASIA選手の参加や賞金獲得を意味しません。';
     }
     function renderCalendar(){
       const filters=sanitizeCalendarFilters(calendarBrowse);
@@ -385,7 +402,8 @@
         byDay.get(session.date).push(session);
       }
       const today=calendarTokyoToday();
-      const dates=[...byDay.keys()].sort();
+      const historyDates=calendarUpcomingSessions({...filters,scope:'scheduled'}).map(x=>x.dateJst);
+      const dates=[...new Set([...byDay.keys(),...historyDates])].sort();
       const nextScheduled=siteData.schedule.sessions.filter(e=>e.dateJst>=today&&e.dateJst.startsWith(filters.month+'-')&&(!regions.includes(filters.region)||e.region===filters.region)).map(e=>e.dateJst).sort()[0];
       filters.date=(validCalendarDate(filters.date)&&filters.date.startsWith(filters.month+'-'))?filters.date:(nextScheduled||dates.at(-1)||((today.startsWith(filters.month+'-'))?today:filters.month+'-01'));
       calendarBrowse={...filters};
