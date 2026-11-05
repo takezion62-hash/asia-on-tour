@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-11-05T15:14:37.523Z",
+  "checkedAt": "2026-11-05T15:45:11.280Z",
   "windows": {
     "epicgames_S42_InoxtagIconCup_NAW/S42_InoxtagIconCup_NAW": {
       "nextPage": 40,
@@ -165,12 +165,12 @@
       "emptyAttempts": 0
     },
     "epicgames_S31_SoloVictoryCashCup_ME/S31_SoloVictoryCashCup_Event7Round2_ME": {
-      "nextPage": 12,
-      "pages": 12,
-      "complete": false,
+      "nextPage": 18,
+      "pages": 18,
+      "complete": true,
       "coverageLimited": false,
       "totalPages": 18,
-      "lastScanned": "2026-11-05T14:47:03.199Z",
+      "lastScanned": "2026-11-05T15:44:41.641Z",
       "emptyAttempts": 0
     },
     "epicgames_S33_SoloCashCup_OCE/S33_SoloCashCup_Event3Round1_OCE": {
@@ -192,21 +192,39 @@
       "emptyAttempts": 0
     },
     "epicgames_S42_ArenaCashCup_NAW/S42_ArenaCashCup_Event1_NAW": {
-      "nextPage": 12,
-      "pages": 12,
+      "nextPage": 24,
+      "pages": 24,
       "complete": false,
       "coverageLimited": false,
       "totalPages": 52,
-      "lastScanned": "2026-11-05T15:13:57.582Z",
+      "lastScanned": "2026-11-05T15:44:32.438Z",
       "emptyAttempts": 0
     },
     "epicgames_S30_SquadsVictoryCashCup_ME/S30_SquadsVictoryCashCup_Event3Round1_ME": {
-      "nextPage": 12,
-      "pages": 12,
+      "nextPage": 24,
+      "pages": 24,
       "complete": false,
       "coverageLimited": false,
       "totalPages": 40,
-      "lastScanned": "2026-11-05T15:14:37.523Z",
+      "lastScanned": "2026-11-05T15:45:05.511Z",
+      "emptyAttempts": 0
+    },
+    "epicgames_S36_VictoryDuosCup_ME/S36_VictoryDuosCup_Event1Round2_ME": {
+      "nextPage": 3,
+      "pages": 3,
+      "complete": true,
+      "coverageLimited": false,
+      "totalPages": 3,
+      "lastScanned": "2026-11-05T15:45:08.082Z",
+      "emptyAttempts": 0
+    },
+    "epicgames_S30_SquadsVictoryCashCup_EU/S30_SquadsVictoryCashCup_Event1Round1_EU": {
+      "nextPage": 3,
+      "pages": 3,
+      "complete": false,
+      "coverageLimited": false,
+      "totalPages": 100,
+      "lastScanned": "2026-11-05T15:45:11.280Z",
       "emptyAttempts": 0
     }
   }
