@@ -107,3 +107,13 @@ test('historical scans honor finished and retry-delayed windows',()=>{
  const state={windows:{a:{complete:true},b:{nextPage:3},c:{retryAfter:'2030-01-01T00:00:00Z'}}};
  assert.deepEqual(selectHistoricalWindows(rows,state,{maxWindowsPerRun:3},Date.parse('2026-11-05')).map(x=>x.key),['b']);
 });
+
+test('2024 official solo Victory brackets do not invent NAC/NAW qualification',()=>{
+ const w=(sid,id,region)=>({seasonId:sid,tournamentId:id,region,kind:'予選'});
+ assert.equal(advancementLimit(w('S30','ch5s3-solo-victory-cup','EU')),7000);
+ assert.equal(advancementLimit(w('S30','ch5s3-zb-solo-victory','OCE')),2000);
+ assert.equal(advancementLimit(w('S31','ch5s4-solo-victory-cup','BR')),2500);
+ assert.equal(advancementLimit(w('S31','ch5s4-zb-solo-victory','OCE')),600);
+ assert.equal(advancementLimit(w('S31','ch5s4-solo-victory-cup','NAC')),null);
+ assert.equal(advancementLimit(w('S30','ch5s3-zb-solo-victory','NAW')),null);
+});

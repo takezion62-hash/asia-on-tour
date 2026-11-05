@@ -3,6 +3,26 @@
 // A zero-VR final can be recorded as $0 because the rules pay per final-round VR.
 // Positive cash awards and unknown events remain in manual review.
 const RULES=Object.freeze({
+  'ch5s3-solo-victory-cup':{
+    seasonId:'S30',eventIds:['S30_SoloVictoryCashCup'],
+    matchCaps:{'予選':7,'賞金決勝':3},advance:{"EU":7000,"BR":2000,"ME":2000,"OCE":2000},
+    source:'https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules'
+  },
+  'ch5s3-zb-solo-victory':{
+    seasonId:'S30',eventIds:['S30_SoloZBVictoryCashCup'],
+    matchCaps:{'予選':7,'賞金決勝':3},advance:{"EU":7000,"BR":2000,"ME":2000,"OCE":2000},
+    source:'https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules'
+  },
+  'ch5s4-solo-victory-cup':{
+    seasonId:'S31',eventIds:['S31_SoloVictoryCashCup'],
+    matchCaps:{'予選':7,'賞金決勝':3},advance:{"EU":15000,"BR":2500,"ME":2000,"OCE":1500},
+    source:'https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-4-official-rules'
+  },
+  'ch5s4-zb-solo-victory':{
+    seasonId:'S31',eventIds:['S31_SoloZBVictoryCashCup'],
+    matchCaps:{'予選':7,'賞金決勝':3},advance:{"EU":3000,"BR":1000,"ME":1000,"OCE":600},
+    source:'https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-4-official-rules'
+  },
   'ch7s3-solo-reload-victory-cup':{
     seasonId:'S41',eventIds:['S41_ReloadReloadSoloVictoryCup','S41_ReloadSoloVictoryCup'],
     matchCaps:{'予選':8,'賞金決勝':3},advance:{EU:1600,NAC:800,ME:320,NAW:320,OCE:320,BR:320},

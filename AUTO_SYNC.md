@@ -96,3 +96,8 @@
 - 毎日の過去大会スキャンは2024・2025・2026の各年およびVictory Cup/その他の系列に枠を配分。1日最大24ページ・6ウィンドウ・1ウィンドウ最大4ページに抑えて途中進捗を保存する。
 - 2024/2025年の未検証大会は自動承認しない。公式ルールを検証済みのS41/S42一部Victory Cupのみ引き続き承認し、確認済み出場履歴は賞金・PR・称号から分離する。
 - 既存の `results.json` と `players.json`、賞金額・順位・各種ランキングはこの変更では一切編集していない。
+
+## 2024年のSolo Victory公式規則による限定承認（2026年11月5日）
+- Chapter 5 Season 3（S30）およびSeason 4（S31）の**ソロ通常BR/ソロZB**に限って、Epicの当時の公式規則による「予選突破」の自動照合に対応。地域別規則と順位表の両方を検証済み、本人Epic ID一致、最大7試合、順位表全ページ確認、既存記録と非重複の場合に限る。賞金$0の予選突破としてのみ記録する。決勝0VRの場合のみ$0の賞金なし決勝を登録。
+- 当時の公式規則はNA一地域であり、NAC/NAWへの通過枠の換算は不可能。この二地域は自動承認から除外する。現金賞金が発生する決勝や他の大会シリーズも引き続き確認専用。
+- 公式ルール：https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules および https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-4-official-rules

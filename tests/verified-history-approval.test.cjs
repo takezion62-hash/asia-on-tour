@@ -40,3 +40,24 @@ test('evaluate holds unfinished rounds while accepting completed ones',()=>{
  assert.equal(approved.length,1);
  assert.equal(held.length,1);
 });
+
+test('2024 official solos can approve qualifiers with exact regional limits only',()=>{
+ const variants=[
+  ['S30','ch5s3-solo-victory-cup','S30_SoloVictoryCashCup','EU',7000],
+  ['S30','ch5s3-zb-solo-victory','S30_SoloZBVictoryCashCup','ME',2000],
+  ['S31','ch5s4-solo-victory-cup','S31_SoloVictoryCashCup','OCE',1500],
+  ['S31','ch5s4-zb-solo-victory','S31_SoloZBVictoryCashCup','OCE',600]
+ ];
+ for(const [sid,id,eventId,region,cutoff] of variants){
+  const win={key:sid+id+region,seasonId:sid,tournamentId:id,eventId,region,dateJst:'2024-09-20',kind:'予選',round:'Event 1 · Round 1 / 予選',windowId:eventId+'_Event1Round1_'+region};
+  const item={id,seasonId:sid,team:'solo',series:'victory-cup',sourceEventIds:[eventId],name:'Test Cup'};
+  const proposal={id:'auto-'+sid.toLowerCase()+'-123456789012',date:win.dateJst,region,tournamentId:id,seasonId:sid,round:win.round,kind:'予選',player:'A',rank:cutoff,points:200,kills:5,vrs:0,matches:7,prize:0,verified:true,source:source(win)};
+  const db={players:{candidates:[{name:'A'}]},tournaments:{catalog:[item]},results:[]};
+  const checkpoint={complete:true,proposals:[proposal]};
+  assert.equal(decide(proposal,win,checkpoint,db).approved,true);
+  assert.equal(decide({...proposal,rank:cutoff+1},win,checkpoint,db).approved,false);
+  assert.equal(decide({...proposal,matches:8},win,checkpoint,db).approved,false);
+  assert.equal(decide(proposal,win,{...checkpoint,complete:false},db).approved,false);
+  assert.equal(decide({...proposal,region:'NAW'},win,checkpoint,db).approved,false);
+ }
+});
