@@ -50,6 +50,8 @@
         field('最終チェック',checked),
         field('確認待ち候補',fmt(status.found)+'件'),
         field('今回の自動承認',fmt(status.imported||0)+'件'),
+        field('累計自動承認',fmt(status.autoApprovedTotal||0)+'件'),
+        field('数値矛盾の保留',fmt(status.invalidCachedCandidates||0)+'件'),
         field('照合後に登録済み',fmt(status.alreadyRegistered||0)+'件'),
         field('調査したページ（今回）',fmt(status.scannedPages)+'ページ'),
         field('調査対象ラウンド',fmt(status.trackedWindows)+'件'),
@@ -66,7 +68,7 @@
         const ul=document.createElement('ul');ul.className='auto-sync-proposals';
         for(const item of review.proposals.slice(0,20)){
           const li=document.createElement('li');
-          li.textContent=[item.date,item.region,item.player,item.event,item.round,'#'+fmt(item.rank),item.kind==='予選'?'通過未確認':item.prize==null?'賞金未確認':'賞金要確認'].join(' · ');
+          li.textContent=[item.date,item.region,item.player,item.event,item.round,'#'+fmt(item.rank),item.reviewReason|| (item.kind==='予選'?'通過未確認':item.prize==null?'賞金未確認':'賞金要確認')].join(' · ');
           ul.append(li);
         }
         historyCandidates.replaceChildren(ul);
