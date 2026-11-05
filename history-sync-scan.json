@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-11-05T07:18:55.975Z",
+  "checkedAt": "2026-11-05T08:21:52.053Z",
   "windows": {
     "epicgames_S42_SoloVictoryCup_NAW/S42_SoloVictoryCup_Event3Round1_NAW": {
       "nextPage": 8,
@@ -1775,8 +1775,8 @@
       "totalPages": 100
     },
     "epicgames_S41_ReloadReloadSoloVictoryCup_EU/S41_ReloadSoloVictoryCup_Round2_Day1_EU": {
-      "nextPage": 7,
-      "complete": false,
+      "nextPage": 16,
+      "complete": true,
       "proposals": [
         {
           "id": "auto-s41-f0113e33c0a8",
@@ -1802,9 +1802,17 @@
           "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。現金賞金の確定情報なし。"
         }
       ],
-      "pages": 7,
+      "pages": 16,
       "emptyAttempts": 0,
       "totalPages": 16
+    },
+    "epicgames_S41_ReloadReloadSoloVictoryCup_BR/S41_ReloadSoloVictoryCup_Round1_Day1_BR": {
+      "nextPage": 3,
+      "complete": false,
+      "proposals": [],
+      "pages": 3,
+      "emptyAttempts": 0,
+      "totalPages": 100
     }
   }
 }
