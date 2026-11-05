@@ -1,7 +1,7 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-05T15:12:25.462Z",
+  "checkedAt": "2026-11-05T19:15:37.244Z",
   "mode": "review",
   "scope": "recent",
   "dateMode": null,
@@ -25,7 +25,11 @@
   "transientFailures": 0,
   "reviewOnlyWindows": 0,
   "reviewOnlyCandidates": 0,
-  "unmappedEvents": 0,
-  "unmappedEventIds": [],
+  "unmappedEvents": 3,
+  "unmappedEventIds": [
+    "S43_OnePieceZoroCup",
+    "S43_OnePieceZoroCup_Mobile",
+    "S43_OnePieceZoroCup_ZB"
+  ],
   "message": "Osirionで439アカウントIDを追跡。今回の公式規則による自動承認0件、追加確認待ち0件、名義照合保留0件。"
 }
