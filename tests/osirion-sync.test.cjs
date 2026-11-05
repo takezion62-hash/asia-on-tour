@@ -136,3 +136,11 @@ test('2025 Unreal Cup from the existing catalog is scanned for verification only
  assert.equal(found.length,1);
  assert.equal(found[0].kind,'参加確認');
 });
+
+test('historical scan prioritizes oldest documented year before 2026 while still choosing distinct series',()=>{
+ const rows=['2024','2025','2026'].flatMap(year=>['victory-cup','cash-cup'].map(series=>({key:year+series,dateJst:year+'-07-01',end:Date.parse(year+'-07-01T12:00:00Z'),series})));
+ const chosen=selectHistoricalWindows(rows,{windows:{}},{maxWindowsPerRun:6},Date.parse('2026-11-05'));
+ assert.equal(chosen[0].dateJst.slice(0,4),'2024');
+ assert.equal(chosen.length,6);
+ assert.equal(chosen.filter(v=>v.series==='cash-cup').length,3);
+});

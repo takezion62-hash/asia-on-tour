@@ -228,7 +228,7 @@ function selectHistoricalWindows(windows,state,config,time=Date.now(),records=[]
   const cp=state.windows[w.key];
   return !cp?.complete&&(!cp?.retryAfter||Date.parse(cp.retryAfter)<=time);
  });
- const years=[...new Set(pending.map(w=>w.dateJst.slice(0,4)))].sort((a,b)=>b.localeCompare(a));
+ const years=[...new Set(pending.map(w=>w.dateJst.slice(0,4)))].sort((a,b)=>a.localeCompare(b));
  const limit=Math.max(1,config.maxWindowsPerRun||6),selected=[],seen=new Set();
  const priority=historicalPriority(state,records);
  const add=pool=>{for(const w of pool.slice().sort(priority))if(!seen.has(w.key)){selected.push(w);seen.add(w.key);break}};
@@ -266,10 +266,14 @@ async function main(){
  const active=historical?selectHistoricalWindows(windows,state,config,Date.now(),data.results):selectActiveWindows(windows,state,config);
  const previewConfig={version:1,accounts,windows:active.map(w=>({eventId:w.eventId,windowId:w.windowId,dateJst:w.dateJst,region:w.region,seasonId:w.seasonId,tournamentId:w.tournamentId,kind:w.kind,round:w.round}))};
  let budget=Math.min(Math.max(config.maxPagesPerRun||30,1),50),scanned=0,invalidRows=0;
- for(const win of active){
+ for(let windowIndex=0;windowIndex<active.length;windowIndex++){
+  const win=active[windowIndex];
   const checkpoint=state.windows[win.key]||{nextPage:0,complete:false,proposals:[],pages:0};
   let pagesThisWindow=0;
-  const perWindowLimit=Math.min(Math.max(config.maxPagesPerWindowPerRun||budget,1),50);
+  const limit=Math.min(Math.max(config.maxPagesPerWindowPerRun||budget,1),50);
+  // Preserve at least two leaderboard pages for remaining windows when backfilling multiple years.
+  const reserved=historical?Math.max(0,active.length-windowIndex-1)*2:0;
+  const perWindowLimit=historical?Math.max(0,Math.min(limit,budget-reserved)):limit;
   while(budget>0&&pagesThisWindow<perWindowLimit&&!checkpoint.complete){
    const page=checkpoint.nextPage,l=await getLeaderboard(win,page);
    if(page===0&&l.entries.length===0){
