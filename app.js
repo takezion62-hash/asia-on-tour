@@ -455,6 +455,16 @@
         calendarSelectMarkup('ゲーム形式','mode',[{id:'all',label:'全形式'},...(modeAxis?.options||[])],filters.mode),
         calendarSelectMarkup('ラウンド区分','stage',[{id:'all',label:'全区分'},...tournamentViewStageOptions()],filters.stage)
       ].join('');
+      const calendarMonths=[...new Set([
+        ...siteData.calendarHistory.months.map(x=>x.month),
+        ...rawAll().map(e=>String(e.date||'').slice(0,7)),
+        ...siteData.schedule.sessions.map(e=>String(e.dateJst||'').slice(0,7))
+      ])].filter(x=>/^\d{4}-(?:0[1-9]|1[0-2])$/.test(x)).sort().reverse();
+      const monthOptions=calendarMonths.map(value=>{
+        const count=siteData.calendarHistory.months.find(x=>x.month===value)?.count;
+        const label=value.slice(0,4)+'年'+value.slice(5)+'月'+(count?'（開催履歴'+format(count)+'枠）':'');
+        return '<option value="'+value+'"'+(value===filters.month?' selected':'')+'>'+escape(label)+'</option>';
+      }).join('');
       const eventsMarkup=selected.map(item=>{
         const players=[...new Set(item.records.flatMap(names).filter(Boolean))];
         const links=players.slice(0,5).map(name=>'<a href="'+escape(profileHref(name))+'" data-open-profile="'+escape(name)+'">'+escape(name)+'</a>').join('');
@@ -472,7 +482,7 @@
         +'<p class="calendar-note">※ 登録済みの海外遠征成績から自動生成。今後の未開催大会や未登録の大会日程は表示しません。時刻情報は扱わず、登録済みの開催日をそのまま表示します。</p></section>'
         +'<section class="calendar-month-panel" aria-label="月別の大会カレンダー"><div class="calendar-month-head"><div><h2>'+year+'年 '+month+'月</h2>'
         +'<small>'+format(sessions.length)+'開催枠 · '+format(sessions.reduce((sum,item)=>sum+item.records.length,0))+'戦績</small></div>'
-        +'<div class="calendar-month-nav"><button type="button" data-calendar-nav="-1" aria-label="前の月">← 前月</button><button type="button" data-calendar-today="true">最新月へ</button><button type="button" data-calendar-nav="1" aria-label="次の月">次月 →</button></div></div>'
+        +'<div class="calendar-month-nav"><label class="calendar-month-jump">月を選ぶ <select data-calendar-filter="month" aria-label="開催月を選ぶ">'+monthOptions+'</select></label><button type="button" data-calendar-nav="-1" aria-label="前の月">← 前月</button><button type="button" data-calendar-today="true">最新月へ</button><button type="button" data-calendar-nav="1" aria-label="次の月">次月 →</button></div></div>'
         +'<div class="calendar-weekdays" aria-hidden="true">'+['月','火','水','木','金','土','日'].map(day=>'<span>'+day+'</span>').join('')+'</div>'
         +'<div class="calendar-grid">'+cells.join('')+'</div><p class="calendar-legend">各日付の「開催枠」は、同じ大会・地域・ラウンドに掲載された複数選手の戦績をまとめた数です。</p></section>'
         +'<section class="calendar-detail-panel" aria-label="選択した日の大会"><div class="calendar-detail-head"><h2>'+escape(filters.date.replace(/-/g,'/'))+' の掲載大会</h2>'
