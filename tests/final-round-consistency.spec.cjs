@@ -4,7 +4,7 @@ const {loadData}=require('../scripts/data-checks.cjs');
 const path=require('node:path');
 const data=loadData(path.join(__dirname,'..')).data;
 const paidScope={date:'2026-08-16',region:'NAW',round:'Day 3 · Round 2 / 賞金決勝',kind:'賞金決勝'};
-const base='/\?season=all#tournament='+encodeURIComponent('ch7s3-solo-reload-victory-cup');
+const base='/?season=all#tournament='+encodeURIComponent('ch7s3-solo-reload-victory-cup');
 const href=scope=>base+'?'+new URLSearchParams(scope).toString();
 
 test('One prize-eligible final contains both cash winners and $0 finalists',async({page})=>{
