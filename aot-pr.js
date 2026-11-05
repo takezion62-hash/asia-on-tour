@@ -243,6 +243,19 @@
       .map(word => word + '-' + identifiers.get(word)).join('|') || 'unspecified';
   }
 
+  // FNCS's qualifier URL identifies Event3, whereas the finals URL says
+  // Week3Final. Both refer to the same competition week. Preserve the
+  // ordinary session key for all other events and attendance calculation.
+  function qualificationSessionKey(record,tournament) {
+    if(tournament?.id==='ch7s4-fncs-division-1-practice'){
+      const label=String(record.round||'').match(/Week\s*(\d+)/i);
+      if(label)return 'week-'+Number(label[1]);
+      const code=sourceRound(record)?.match(/_Week(\d+)Final_/i);
+      if(code)return 'week-'+Number(code[1]);
+    }
+    return sessionKey(record);
+  }
+
   function stable(value) {
     if (Array.isArray(value)) return '[' + value.map(stable).join(',') + ']';
     if (value && typeof value === 'object') return '{' + Object.keys(value).sort().map(key => JSON.stringify(key) + ':' + stable(value[key])).join(',') + '}';
@@ -302,7 +315,7 @@
     // independently of duplicate exports and record ordering.
     const qualifyingRows=new Map();
     const qualificationKey=(record,tournament,name)=>stable([name,tournament.id||record.event,record.region,
-      record.date,sessionKey(record)]);
+      record.date,qualificationSessionKey(record,tournament)]);
     for (const record of unique.records) {
       if (!record || !(record.kind in STAGES) || !Object.hasOwn(REGIONS,record.region) || !record.date ||
         (region!=='all' && region!==record.region)) continue;
@@ -326,7 +339,7 @@
     for (const item of qualifyingRows.values()) {
       const r=item.record,t=options.classify(r)||{};
       for(const name of cleanPeople(r,options.names)){
-        const k=stable([name,t.id,r.region,sessionKey(r)]);
+        const k=stable([name,t.id,r.region,qualificationSessionKey(r,t)]);
         if(!acceptedQualifiers.has(k))acceptedQualifiers.set(k,[]);
         acceptedQualifiers.get(k).push(r.date);
       }
@@ -339,14 +352,14 @@
       if (!t.id) continue;
       if (record.qualification!=='outside-cutoff' && record.status!=='通過圏外') continue;
       for(const name of cleanPeople(record,options.names))
-        unsafeQualifierSlots.add(stable([name,t.id,record.region,sessionKey(record)]));
+        unsafeQualifierSlots.add(stable([name,t.id,record.region,qualificationSessionKey(record,t)]));
     }
     for (const record of unique.records) {
       if (!record || !record.date || !Object.hasOwn(REGIONS,record.region) ||
         (region!=='all'&&record.region!==region)) continue;
       const t=options.classify(record)||{},proof=verifiedFinalEvidence(record,t);
       if (!proof) continue;
-      const sess=sessionKey(record);
+      const sess=qualificationSessionKey(record,t);
       if(sess==='unspecified')continue;
       for(const name of cleanPeople(record,options.names)) {
         const slot=stable([name,t.id,record.region,sess]);
