@@ -12,7 +12,7 @@
       if(!r.ok)throw Error('status HTTP '+r.status);
       const s=await r.json();if(s.version!==1)throw Error('unknown version');
       const time=s.checkedAt?new Date(s.checkedAt).toLocaleString('ja-JP',{timeZone:'Asia/Tokyo'}):'未実行';
-      area.replaceChildren(field('状態',s.state==='setup'?'初期設定待ち':s.mode==='publish'?'自動反映':'確認のみ'),field('最終チェック',time),field('連携済み選手',fmt(s.linkedPlayers)+'名'),field('追跡中の大会',fmt(s.trackedWindows)+'件'),field('新規候補',fmt(s.found)+'件'),field('今回の登録',fmt(s.imported)+'件'));
+      area.replaceChildren(field('状態',s.state==='setup'?'初期設定待ち':s.mode==='publish'?'自動反映':'確認のみ'),field('最終チェック',time),field('連携済み選手',fmt(s.linkedPlayers)+'名'),field('追跡中の大会',fmt(s.trackedWindows)+'件'),field('新規候補',fmt(s.found)+'件'),field('今回の登録',fmt(s.imported)+'件'),field('未登録Victory Cup',fmt(s.unmappedEvents||0)+'種類'));
       const info=document.createElement('p');info.className='auto-sync-message';info.textContent=s.message||'';area.append(info);
       try{
         const q=await fetch(new URL('auto-sync-review.json',base),{cache:'no-store'});
