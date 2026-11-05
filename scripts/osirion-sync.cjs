@@ -267,6 +267,17 @@ function selectHistoricalWindows(windows,state,config,time=Date.now(),records=[]
  const limit=Math.max(1,config.maxWindowsPerRun||6),selected=[],seen=new Set();
  const priority=historicalPriority(state,records);
  const add=pool=>{for(const w of pool.slice().sort(priority))if(!seen.has(w.key)){selected.push(w);seen.add(w.key);break}};
+ // Bounded focus from config: keep other historical regions and series running.
+ // Non-Victory series remain review-only; this only changes scan order.
+ const focus=config.priorityReview;
+ if(focus&&typeof focus==='object'&&typeof focus.series==='string'&&typeof focus.region==='string'){
+  const cap=Math.min(3,Math.max(0,Number.isInteger(focus.maxWindows)?focus.maxWindows:2));
+  const choices=pending.filter(w=>w.series===focus.series&&w.region===focus.region&&(!focus.fromDate||w.dateJst>=focus.fromDate));
+  for(const w of choices.sort((a,b)=>b.end-a.end).slice(0,cap)){
+   if(selected.length>=limit)break;
+   if(!seen.has(w.key)){selected.push(w);seen.add(w.key)}
+  }
+ }
  // One Victory and one other-series slot per year; remaining slots target known historical evidence.
  for(const series of ['victory-cup','other']){
   for(const year of years){
