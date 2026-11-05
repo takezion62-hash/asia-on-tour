@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-11-05T14:13:39.686Z",
+  "checkedAt": "2026-11-05T14:18:15.144Z",
   "windows": {
     "epicgames_S42_InoxtagIconCup_NAW/S42_InoxtagIconCup_NAW": {
       "nextPage": 40,
@@ -39,12 +39,12 @@
       "emptyAttempts": 0
     },
     "epicgames_S41_FNCSCommunityCup_EU/S41_FNCSCommunityCup_EU": {
-      "nextPage": 32,
-      "pages": 32,
-      "complete": false,
-      "coverageLimited": false,
+      "nextPage": 40,
+      "pages": 40,
+      "complete": true,
+      "coverageLimited": true,
       "totalPages": 100,
-      "lastScanned": "2026-11-05T14:00:55.187Z",
+      "lastScanned": "2026-11-05T14:17:50.441Z",
       "emptyAttempts": 0
     },
     "epicgames_S42_ConsoleVCC_SolosZB_NAW/S42_ConsoleVCC_SolosZB_Event8Round1_NAW": {
@@ -102,12 +102,12 @@
       "emptyAttempts": 0
     },
     "epicgames_S39_1MillionUnrealCup_NAW/S39_1MillionUnrealCup_NAW": {
-      "nextPage": 33,
-      "pages": 33,
+      "nextPage": 37,
+      "pages": 37,
       "complete": false,
       "coverageLimited": false,
       "totalPages": 100,
-      "lastScanned": "2026-11-05T14:13:39.686Z",
+      "lastScanned": "2026-11-05T14:18:15.144Z",
       "emptyAttempts": 0
     },
     "epicgames_S30_SoloVictoryCashCup_ME/S30_SoloVictoryCashCup_Event5Round2_ME": {
@@ -129,12 +129,12 @@
       "emptyAttempts": 0
     },
     "epicgames_S42_InoxtagIconCup_BR/S42_InoxtagIconCup_BR": {
-      "nextPage": 12,
-      "pages": 12,
+      "nextPage": 24,
+      "pages": 24,
       "complete": false,
       "coverageLimited": false,
       "totalPages": 100,
-      "lastScanned": "2026-11-05T14:13:06.676Z",
+      "lastScanned": "2026-11-05T14:17:36.390Z",
       "emptyAttempts": 0
     },
     "epicgames_S31_DuosCashCup_ME/S31_DuosCashCup_Event3Round2_ME": {
@@ -144,6 +144,15 @@
       "coverageLimited": false,
       "totalPages": 1,
       "lastScanned": "2026-11-05T14:13:23.501Z",
+      "emptyAttempts": 0
+    },
+    "epicgames_S31_SoloVictoryCashCup_OCE/S31_SoloVictoryCashCup_Event5Round2_OCE": {
+      "nextPage": 12,
+      "pages": 12,
+      "complete": false,
+      "coverageLimited": false,
+      "totalPages": 15,
+      "lastScanned": "2026-11-05T14:18:10.446Z",
       "emptyAttempts": 0
     }
   }
