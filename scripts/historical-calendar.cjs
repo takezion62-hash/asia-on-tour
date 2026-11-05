@@ -28,13 +28,19 @@ function buildHistory(all,catalog,opts={}){
    catalogIndex.set(raw,t);
   }
  }
- const selected=new Map(),missing=new Set(),ignored={};
+ const selected=new Map(),missing=new Set(),missingDetails=[],ignored={};
  const skip=why=>ignored[why]=(ignored[why]||0)+1;
  for(const tournament of all){
   const matched=String(tournament.eventId||'').match(/^epicgames_(S\d+_.+)_([A-Z]{2,4})$/);
   if(!matched||!regions.has(matched[2])){skip('outside supported regions');continue}
   const [,base,region]=matched,seasonId=base.split('_')[0],catalogued=catalogIndex.get(base);
-  if(!catalogued||catalogued.seasonId!==seasonId){missing.add(base);skip('not catalogued');continue}
+  if(!catalogued||catalogued.seasonId!==seasonId){
+   if(!missing.has(base)&&missingDetails.length<14){
+    const candidates=Object.entries(tournament).filter(([k,v])=>/name|title|description|type|mode|region/i.test(k)&&typeof v==='string').slice(0,10);
+    missingDetails.push({id:base,fields:Object.keys(tournament),metadata:Object.fromEntries(candidates)});
+   }
+   missing.add(base);skip('not catalogued');continue;
+  }
   if(catalogued.series==='fncs'&&!/^FNCS Division 1(?: |$)/i.test(catalogued.name)){skip('region-locked FNCS');continue}
   for(const win of tournament.eventWindows||[]){
    const windowId=win.eventWindowId;
@@ -57,7 +63,7 @@ function buildHistory(all,catalog,opts={}){
  const sessions=[...selected.values()].sort((a,b)=>a.startUtc.localeCompare(b.startUtc)||a.region.localeCompare(b.region)||a.eventId.localeCompare(b.eventId));
  return {version:1,source:'Osirion public beta / Epic tournament IDs',checkedAt:new Date(now).toISOString(),fromDate,timezone:'Asia/Tokyo',
   note:'These entries confirm historical tournament windows only, not AOT player participation, prizes or eligibility. FNCS outside Division 1 is excluded.',
-  sessions,unmappedCount:missing.size,unmappedSample:[...missing].slice(0,30),ignored};
+  sessions,unmappedCount:missing.size,unmappedSample:[...missing].slice(0,30),unmappedDetails:missingDetails,ignored};
 }
 async function main(){
  const catalog=JSON.parse(fs.readFileSync(path.join(root,'tournaments.json'),'utf8')).catalog;
@@ -65,7 +71,7 @@ async function main(){
  const output=buildHistory(all,catalog);
  if(!output.sessions.length)throw Error('No historical tournament windows found: preserving the prior archive');
  fs.writeFileSync(path.join(root,'calendar-history.json'),JSON.stringify(output)+'\n');
- fs.writeFileSync(path.join(root,'calendar-history-status.json'),JSON.stringify({version:1,checkedAt:output.checkedAt,source:output.source,count:output.sessions.length,dates:[output.sessions[0].dateJst,output.sessions.at(-1).dateJst],unmappedCount:output.unmappedCount,unmappedSample:output.unmappedSample,ignored:output.ignored},null,2)+'\n');
+ fs.writeFileSync(path.join(root,'calendar-history-status.json'),JSON.stringify({version:1,checkedAt:output.checkedAt,source:output.source,count:output.sessions.length,dates:[output.sessions[0].dateJst,output.sessions.at(-1).dateJst],unmappedCount:output.unmappedCount,unmappedSample:output.unmappedSample,unmappedDetails:output.unmappedDetails,ignored:output.ignored},null,2)+'\n');
  console.log('HISTORICAL_CALENDAR '+JSON.stringify({events:output.sessions.length,months:new Set(output.sessions.map(x=>x.dateJst.slice(0,7))).size,unmapped:output.unmappedCount}));
 }
 if(require.main===module)main().catch(err=>{console.error(err);process.exitCode=1});
