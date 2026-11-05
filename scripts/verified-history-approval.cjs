@@ -22,6 +22,7 @@ const participants=r=>Array.isArray(r.players)&&r.players.length?r.players:[r.pl
 const identity=r=>[r.date,r.region,r.tournamentId,roundId(r.round),participants(r).slice().sort().join('|')].join('::');
 const decline=reason=>({approved:false,reason});
 function decide(row,win,checkpoint,data){
+ if(row?.reviewOnly===true||row?.kind==='参加確認'||win?.kind==='参加確認'||(win?.series&&win.series!=='victory-cup'))return decline('確認専用大会は自動承認不可');
  if(!checkpoint?.complete)return decline('順位表の取得が完了していません');
  const rule=RULES[row.tournamentId];
  if(!rule)return decline('未検証のシーズンまたは大会');
