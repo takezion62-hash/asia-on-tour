@@ -61,3 +61,28 @@ test('2024 official solos can approve qualifiers with exact regional limits only
   assert.equal(decide({...proposal,region:'NAW'},win,checkpoint,db).approved,false);
  }
 });
+
+test('2024 S30 squads with all four verified Epic players can publish zero-VR prize-free final only',()=>{
+ const tournamentId='ch5s3-squads-victory-cup',eventId='S30_SquadsVictoryCashCup',region='ME';
+ const win={key:'epicgames_S30_SquadsVictoryCashCup_ME/S30_SquadsVictoryCashCup_Event3Round2_ME',
+   tournamentId,eventId,region,dateJst:'2024-07-01',seasonId:'S30',series:'victory-cup',
+   kind:'賞金決勝',round:'Event 3 · Round 2 / 賞金決勝',windowId:'S30_SquadsVictoryCashCup_Event3Round2_ME'};
+ const names=['Aim','Razl','TEITEI','ZAZI'];
+ const p={id:'auto-s30-72e2696a507f',date:'2024-07-01',region,player:names.join(' / '),players:names,
+   event:'Squads Victory Cup Battle Royale',tournamentId,seasonId:'S30',round:win.round,
+   rank:59,points:0,kills:13,vrs:0,matches:3,prize:null,kind:win.kind,verified:true,source:source(win)};
+ const catalog={id:tournamentId,team:'squad',series:'victory-cup',seasonId:'S30',
+   name:p.event,sourceEventIds:[eventId]};
+ const data={players:{candidates:names.map(name=>({name}))},tournaments:{catalog:[catalog]},results:[]};
+ const cp={complete:true,proposals:[p]};
+ const ok=decide(p,win,cp,data);
+ assert.equal(ok.approved,true);
+ assert.equal(ok.record.kind,'決勝');
+ assert.equal(ok.record.prize,0);
+ assert.equal(ok.record.players.length,4);
+ assert.equal(decide({...p,vrs:1},win,cp,data).approved,false);
+ assert.equal(decide({...p,players:names.slice(0,3)},win,cp,data).approved,false);
+ assert.equal(decide({...p,players:[names[0],names[1],names[1],names[3]]},win,cp,data).approved,false);
+ assert.equal(decide(p,win,{...cp,complete:false},data).approved,false);
+ assert.equal(decide(p,win,cp,{...data,results:[{...p,kind:'賞金決勝'}]}).approved,false);
+});
