@@ -211,6 +211,14 @@
         {
           "id": "playstation-clix-cup-battle-royale",
           "label": "PlayStation Clix Cup (Battle Royale)"
+        },
+        {
+          "id": "arenas-cash-cup",
+          "label": "Arenas Cash Cup"
+        },
+        {
+          "id": "trios-cash-cup",
+          "label": "Trios Cash Cup"
         }
       ]
     },
@@ -1219,6 +1227,144 @@
         {
           "text": "ユーザー提供Fortnite Tracker NAW結果画像でめいる4位・1VR・$250。",
           "url": "https://fortnitetracker.com/events/epicgames_S40_PlayStationCupClix_NAW"
+        }
+      ]
+    },
+    {
+      "id": "ch7s4-arenas-cash-cup",
+      "name": "Arenas Cash Cup",
+      "chapter": 7,
+      "season": 4,
+      "seasonId": "S42",
+      "sourceEventIds": [
+        "S42_ArenaCashCup"
+      ],
+      "series": "cash-cup",
+      "mode": "unknown",
+      "subtype": "arenas-cash-cup",
+      "team": "solo",
+      "platform": "unknown",
+      "unknownFields": [
+        "mode",
+        "platform"
+      ],
+      "evidence": [
+        {
+          "text": "公式大会ページの開催履歴と2026-10-23公式規則2.2.1でソロ・Arenasを確認。サイトの既存モード分類にArenasはないためmodeは未確認に保持。",
+          "url": "https://www.fortnite.com/competitive/events/S42_ArenaCashCup/?region=EU"
+        },
+        {
+          "text": "Epic公式大会規則（成績や賞金額は別途確認）",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/arenas-cash-cup-chapter-7-season-4-official-rules"
+        }
+      ]
+    },
+    {
+      "id": "ch7s5-trios-cash-cup",
+      "name": "Trios Cash Cup Battle Royale",
+      "chapter": 7,
+      "season": 5,
+      "seasonId": "S43",
+      "sourceEventIds": [
+        "S43_TriosCashCup"
+      ],
+      "series": "cash-cup",
+      "mode": "battle-royale",
+      "subtype": "trios-cash-cup",
+      "team": "trio",
+      "platform": "unknown",
+      "unknownFields": [
+        "platform"
+      ],
+      "evidence": [
+        {
+          "text": "Epic S43公式大会ページでTrios/Battle Royaleと2026-11-07以降の開催を確認。",
+          "url": "https://www.fortnite.com/competitive/events/S43_TriosCashCup/?region=EU"
+        },
+        {
+          "text": "Epic公式大会規則（成績や賞金額は別途確認）",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-trios-cash-cups-chapter-7-mini-season-official-rules"
+        }
+      ]
+    },
+    {
+      "id": "ch7s5-reload-zero-build-duos-cash-cup",
+      "name": "Reload ZB Duos Cash Cup Zero Build",
+      "chapter": 7,
+      "season": 5,
+      "seasonId": "S43",
+      "sourceEventIds": [
+        "S43_ReloadZBDuosCashCup"
+      ],
+      "series": "cash-cup",
+      "mode": "reload-zero-build",
+      "subtype": "reload-zb-duos-cash-cup",
+      "team": "duo",
+      "platform": "unknown",
+      "unknownFields": [
+        "platform"
+      ],
+      "evidence": [
+        {
+          "text": "Epic S43公式大会ページでDuos、公式大会カレンダーでReload ZB/Zero Buildを確認。",
+          "url": "https://www.fortnite.com/competitive/events/S43_ReloadZBDuosCashCup/?region=EU"
+        },
+        {
+          "text": "Epic公式大会規則（成績や賞金額は別途確認）",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-zero-build-reload-cash-cups-chapter-7-mini-season-official-rules"
+        }
+      ]
+    },
+    {
+      "id": "ch7s5-arenas-cash-cup",
+      "name": "Arenas Cash Cup",
+      "chapter": 7,
+      "season": 5,
+      "seasonId": "S43",
+      "sourceEventIds": [
+        "S43_ArenaCashCup"
+      ],
+      "series": "cash-cup",
+      "mode": "unknown",
+      "subtype": "arenas-cash-cup",
+      "team": "solo",
+      "platform": "unknown",
+      "unknownFields": [
+        "mode",
+        "platform"
+      ],
+      "evidence": [
+        {
+          "text": "Epic S43公式大会ページでArenasを確認。公式規則のソロ設定と照合。Arenasは既存のmode列にないため未確認扱い。",
+          "url": "https://www.fortnite.com/competitive/events/S43_ArenaCashCup/?region=EU"
+        },
+        {
+          "text": "Epic公式大会規則（成績や賞金額は別途確認）",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/arenas-cash-cup-chapter-7-mini-season-official-rules"
+        }
+      ]
+    },
+    {
+      "id": "ch7s5-performance-evaluation-trios",
+      "name": "Fortnite Performance Evaluation",
+      "chapter": 7,
+      "season": 5,
+      "seasonId": "S43",
+      "sourceEventIds": [
+        "S43_PerformanceEvaluationTrios"
+      ],
+      "series": "performance-evaluation",
+      "mode": "battle-royale",
+      "subtype": "performance-evaluation-trios",
+      "team": "trio",
+      "platform": "unknown",
+      "unknownFields": [
+        "platform"
+      ],
+      "evidence": [
+        {
+          "text": "Epic S43公式大会ページでTrios/Battle Royale、EUのRound 1→2を確認。賞金の推定は行わず確認専用。",
+          "url": "https://www.fortnite.com/competitive/events/S43_PerformanceEvaluationTrios/?region=EU"
         }
       ]
     },
