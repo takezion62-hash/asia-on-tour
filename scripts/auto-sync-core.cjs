@@ -78,4 +78,4 @@ function applyProposals(data,proposals,timestamp){
   data.updates.entries.unshift({id:'auto-sync-'+timestamp.replace(/[^\d]/g,'').slice(0,14),date:jst,type:'records',title:'自動取り込み：新規戦績'+proposals.length+'件',description:'本人確認済みのEpic IDと大会ウィンドウを照合。既存結果を保持して重複なく追記、未確定賞金はnull。',recordIds:proposals.map(x=>x.id)});
   return proposals.length;
 }
-module.exports={epicId,createIndex,prepare,applyProposals};
+module.exports={epicId,createIndex,prepare,applyProposals,maximumMatches};
