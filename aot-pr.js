@@ -147,12 +147,15 @@
   // Zero Build Reload Cash Cup rule advances the top 20 teams of each region.
   // Restrict this exception to exactly the confirmed archive IDs and source;
   // an arbitrary event URL without a round never establishes advancement.
-  const VERIFIED_SCREENSHOT_IDS=new Set([
-    's42-oce-reload-zb-duos-qual-20261018-reo-romii',
-    's42-oce-reload-zb-duos-qual-20261018-uptemp-vuradd0'
+  const VERIFIED_SCREENSHOT_ROWS=new Map([
+    ['s42-oce-reload-zb-duos-qual-20261018-reo-romii',
+      {player:'Reo / ろみぃ',rank:4,points:559,kills:107,vrs:3}],
+    ['s42-oce-reload-zb-duos-qual-20261018-uptemp-vuradd0',
+      {player:'uptemp / vurаdd0',rank:14,points:539,kills:71,vrs:3}]
   ]);
   function verifiedScreenshotQualification(record,tournament) {
-    if (!VERIFIED_SCREENSHOT_IDS.has(record.id) ||
+    const expected=VERIFIED_SCREENSHOT_ROWS.get(record.id);
+    if (!expected || Object.entries(expected).some(([k,v])=>record[k]!==v) ||
       tournament?.id!=='ch7s4-reload-zero-build-duos-cash-cup' ||
       record.date!=='2026-10-18' || record.region!=='OCE' ||
       record.round!=='予選 / Event・Round番号未確認' ||
