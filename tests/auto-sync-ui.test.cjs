@@ -7,9 +7,17 @@ test('Auto sync panel has a working UI and asset references',()=>{
  assert.ok(html.includes('auto-sync-ui.js')&&html.includes('auto-sync-ui.css'));
  assert.ok(js.includes("addEventListener('click',refresh)")&&css.includes('auto-sync-control'));
 });
-test('No unsafe import until connected',()=>{
+test('Live AUTO SYNC remains in review-only mode and the browser cannot publish results',()=>{
  const cfg=JSON.parse(read('auto-sync-config.json'));
  const status=JSON.parse(read('auto-sync-status.json'));
- assert.equal(cfg.enabled,false);assert.equal(cfg.mode,'review');assert.deepEqual(cfg.accounts,[]);assert.deepEqual(cfg.windows,[]);
- assert.equal(status.state,'setup');
+ const ui=read('auto-sync-ui.js');
+ assert.equal(cfg.enabled,true);
+ assert.equal(cfg.provider,'osirion');
+ assert.equal(cfg.mode,'review');
+ assert.deepEqual(cfg.accounts,[]);
+ assert.deepEqual(cfg.windows,[]);
+ assert.equal(status.mode,'review');
+ assert.ok(['setup','checked'].includes(status.state));
+ assert.ok(ui.includes("new URL('auto-sync-review.json',base)"));
+ assert.ok(!/fetch\([^;]*method\s*:\s*['"](?:POST|PUT|PATCH|DELETE)/i.test(ui));
 });
