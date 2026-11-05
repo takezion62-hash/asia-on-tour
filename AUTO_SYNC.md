@@ -67,3 +67,13 @@
 - 勝利条件や賞金配分は大会により違います。FNCS 2026の公式ルール：https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-championship-series-fncs-2026-official-rules ／S42 Reload Zero Build Cash Cup公式規則：https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-zero-build-reload-cash-cups-chapter-7-season-4-official-rules
 - S43など新シーズンの大会は、ソースID・人数が確認できていない限り候補発見通知のみ。誤ったカタログ自動生成は行いません。
 - `tests/non-victory-auto-sync.test.cjs`で対象判定、地域ロック除外、賞金未確定・公開禁止、チームの完全一致、カテゴリ間のスキャン配分を回帰テストしています。
+
+## 2026-11-05 確認済みの新シーズン大会ID
+- Epic公式大会ページ・既存の公式日程データから、S43の`S43_TriosCashCup`（通常BR・トリオ）、`S43_ReloadZBDuosCashCup`（Reloadゼロビルド・デュオ）、`S43_ArenaCashCup`（アリーナ・ソロ）、`S43_PerformanceEvaluationTrios`（通常BR・トリオ）を`tournaments.json`に追加。S42 `S42_ArenaCashCup`も公式規則に基づき登録しました。
+- 公式資料：
+  - https://www.fortnite.com/competitive/events/S43_TriosCashCup/?region=EU
+  - https://www.fortnite.com/competitive/events/S43_ReloadZBDuosCashCup/?region=EU
+  - https://www.fortnite.com/competitive/events/S43_ArenaCashCup/?region=EU
+  - https://www.fortnite.com/competitive/events/S43_PerformanceEvaluationTrios/?region=EU
+- 上記はいずれも**参加確認のみ**で、賞金や予選突破の確定登録を行いません。現在の大会カタログには42大会を登録。アリーナは現行表示軸に専用モードがないため、表示上の`mode`は保守的に未確認としています。
+- 実際の過去照合ジョブ（2026-11-05 10:49 UTC）は**506開催枠を対象**にし、そのうち**250枠がVictory Cup以外**。本人照合できた確認専用候補は8件で、現金賞金は`null`、公開登録は0件でした。
