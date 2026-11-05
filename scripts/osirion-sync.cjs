@@ -1,7 +1,8 @@
 'use strict';
 // Read-only Osirion provider. For now this script ONLY produces review proposals, never results.json.
 const fs=require('node:fs'),path=require('node:path');
-const {prepare,maximumMatches}=require('./auto-sync-core.cjs');
+const {prepare,maximumMatches,applyProposals}=require('./auto-sync-core.cjs');
+const {evaluate}=require('./verified-history-approval.cjs');
 const root=path.resolve(__dirname,'..');
 const read=name=>JSON.parse(fs.readFileSync(path.join(root,name),'utf8'));
 const write=(name,obj)=>fs.writeFileSync(path.join(root,name),JSON.stringify(obj,null,2)+'\n');
@@ -205,16 +206,32 @@ async function main(){
  });
  const invalidCached=foundInScope.length-validHistory.length;
  const recordedFromReview=validHistory.filter(x=>recordedIds.has(x.id)).length;
- const proposals=validHistory.filter(x=>!recordedIds.has(x.id));
+ const pending=validHistory.filter(x=>!recordedIds.has(x.id));
+ const stamp=new Date().toISOString();
+ let imported=0,manuallyHeld=0;
+ const importedIds=new Set();
+ if(historical&&config.autoApproveVerified===true){
+  const decisions=evaluate(pending,windows,state.windows,data);
+  manuallyHeld=decisions.held.length;
+  for(const row of decisions.approved)importedIds.add(row.id);
+  imported=applyProposals(data,decisions.approved,stamp);
+  if(imported){
+   const entry=data.updates.entries[0];
+   entry.title='公式規則で自動承認：過去大会'+imported+'戦績';
+   entry.description='Epic公式規則とOsirion順位表、確認済み選手ID・既存戦績を照合。予選突破と決勝0VR（賞金$0）のみ自動承認。既存登録を保持。';
+   write('results.json',data.results);
+   write('updates.json',data.updates);
+  }
+ }
+ const proposals=pending.filter(x=>!importedIds.has(x.id));
  const unique=new Map(proposals.map(x=>[x.id,x]));
  const finished=Object.entries(state.windows).filter(([key,w])=>eligible.has(key)&&w.complete).length;
- const stamp=new Date().toISOString();
- const status={version:1,state:'checked',checkedAt:stamp,mode:'review',scope:historical?'history':'recent',fromDate:historical?config.fromDate:null,toDate:historical?config.toDate:null,provider:'osirion',linkedPlayers:accounts.length,trackedWindows:windows.length,found:unique.size,skipped:invalidRows,imported:0,scannedPages:scanned,completedWindows:finished,identityConflicts:conflicts.length,alreadyRegistered:recordedFromReview,invalidCachedCandidates:invalidCached,retryWindows:Object.entries(state.windows).filter(([key,w])=>eligible.has(key)&&!w.complete&&w.retryAfter).length,unmappedEvents:unmapped.length,unmappedEventIds:unmapped.slice(0,12),message:'Osirionに接続済み。既存プロフィールのうちIDが一意な'+accounts.length+'名を追跡。'+scanned+'ページを検査、'+unique.size+'件が確認待ち。照合保留ID'+conflicts.length+'件は対象外。'+(unmapped.length?' カタログ未登録のVictory Cup系イベント'+unmapped.length+'種は確認待ち。':'')};
+ const status={version:1,state:'checked',checkedAt:stamp,mode:'review',scope:historical?'history':'recent',fromDate:historical?config.fromDate:null,toDate:historical?config.toDate:null,provider:'osirion',linkedPlayers:accounts.length,trackedWindows:windows.length,found:unique.size,skipped:invalidRows,imported,scannedPages:scanned,completedWindows:finished,identityConflicts:conflicts.length,alreadyRegistered:recordedFromReview,invalidCachedCandidates:invalidCached,manualReviewCandidates:manuallyHeld,retryWindows:Object.entries(state.windows).filter(([key,w])=>eligible.has(key)&&!w.complete&&w.retryAfter).length,unmappedEvents:unmapped.length,unmappedEventIds:unmapped.slice(0,12),message:'Osirionで'+accounts.length+'アカウントIDを追跡。今回の公式規則による自動承認'+imported+'件、追加確認待ち'+unique.size+'件、名義照合保留'+conflicts.length+'件。'};
  state.checkedAt=stamp;
  write(prefix+'-scan.json',state);
  write(prefix+'-review.json',{version:1,status:'review',checkedAt:stamp,proposals:[...unique.values()]});
  write(prefix+'-status.json',status);
- console.log((historical?'OSIRION_HISTORY_REVIEW ':'OSIRION_REVIEW ')+JSON.stringify({scannedPages:scanned,linkedPlayers:accounts.length,identityConflicts:conflicts.length,windows:windows.length,unmappedEvents:unmapped.length,proposals:unique.size,finished}));
+ console.log((historical?'OSIRION_HISTORY_REVIEW ':'OSIRION_REVIEW ')+JSON.stringify({scannedPages:scanned,linkedPlayers:accounts.length,identityConflicts:conflicts.length,windows:windows.length,unmappedEvents:unmapped.length,proposals:unique.size,imported,finished}));
 }
 if(require.main===module)main().catch(e=>{console.error('OSIRION_SYNC_ERROR '+e.stack);process.exitCode=1});
 module.exports={identity,linkedAccounts,parseStage,discover,discoverUnmapped,advancementLimit,normalizeRow,getTournaments,main};
