@@ -52,7 +52,7 @@ function prepare(feed,config,data){
     if(ids.some(x=>!x)||new Set(ids).size!==ids.length||ids.some(x=>!accounts.has(x))){skipped.push({key,reason:'未確認アカウント'});continue}
     const members=ids.map(id=>accounts.get(id));
     if(members.length!=={solo:1,duo:2,trio:3,squad:4}[win.catalog.team]||new Set(members).size!==members.length){skipped.push({key,reason:'チーム人数不一致'});continue}
-    if(!Number.isSafeInteger(x.rank)||x.rank<1||!int(x.points)||!int(x.kills)||!int(x.vrs)||!int(x.matches)){skipped.push({key,reason:'成績が未確定'});continue}
+    if(!Number.isSafeInteger(x.rank)||x.rank<1||!int(x.points)||!int(x.kills)||!int(x.vrs)||!int(x.matches)||x.matches<1||x.vrs>x.matches){skipped.push({key,reason:'成績が未確定'});continue}
     const matchCap=maximumMatches(win);
     if(matchCap!==null&&x.matches>matchCap){skipped.push({key,reason:'公式ルールの試合数上限を超過'});continue}
     const deDup=[win.dateJst,win.region,win.tournamentId,normalizedRound(win.round),normalizedRoster(members)].join('|');
