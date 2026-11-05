@@ -186,21 +186,35 @@
       return '#tournaments'+(params.size?'?'+params.toString():'');
     }
 
+    // Round labels describe the session; advancement and cash are per-player outcomes.
+    // Keep explicit advancement evidence on each record (and in AotPR) while sharing
+    // one calendar/tournament session for the same qualifying leaderboard.
+    function canonicalTournamentRound(round,kind){
+      const label=String(round||'');
+      return kind==='予選'?label.replace(/\/\s*予選(?:突破|通過)$/u,'/ 予選'):label;
+    }
     // Calendar-only result scope; other tournament links remain full archive.
     function tournamentSessionScope(value){
       if(!value||!validCalendarDate(value.date)||!regions.includes(value.region)
          ||typeof value.round!=='string'||!value.round.trim()
          ||typeof value.kind!=='string'||!value.kind.trim())return null;
-      return {date:value.date,region:value.region,round:value.round,kind:value.kind};
+      return {date:value.date,region:value.region,round:canonicalTournamentRound(value.round,value.kind),kind:value.kind};
     }
     function tournamentSessionKey(value){
       const session=tournamentSessionScope(value);
       return session?JSON.stringify([session.date,session.region,session.round,session.kind]):'';
     }
     function tournamentRecordInScope(row,scope){
-      return row.date===scope.date&&row.region===scope.region
-        &&(row.round||'ラウンド未確認')===scope.round
-        &&(row.kind||'区分未確認')===scope.kind;
+      if(row.date!==scope.date||row.region!==scope.region)return false;
+      const sameKind=row.kind===scope.kind;
+      if(sameKind)return canonicalTournamentRound(row.round,row.kind)===canonicalTournamentRound(scope.round,scope.kind);
+      // Old shared links used an individual's unpaid result as a distinct final.
+      // Continue opening the now-unified prize-eligible round from those links.
+      const legacy=scope.kind==='決勝'&&row.kind==='賞金決勝'
+        &&/\/\s*(?:決勝(?:（賞金なし）)?|本戦（賞金なし）)$/u.test(scope.round);
+      if(!legacy)return false;
+      const cashLabel=label=>String(label||'').replace(/\/\s*(?:決勝(?:（賞金なし）)?|本戦（賞金なし）|賞金対象|賞金決勝)$/u,'/ 賞金決勝');
+      return cashLabel(row.round)===cashLabel(scope.round);
     }
     function tournamentHref(id,session=null,dateFilter=''){
       const base='#tournament='+encodeURIComponent(id),scope=tournamentSessionScope(session);
@@ -224,11 +238,15 @@
       const groups=new Map();
       for(const e of records){
         const source=tournamentSource(e);
-        const explicitLabel=/(?:Event|Week|Session)\s*\d+/i.test(e.round||'');
+        const round=canonicalTournamentRound(e.round,e.kind);
+        const explicitLabel=/(?:Event|Day|Week|Session)\s*\d+/i.test(round);
         const uncertain=!source.roundId&&!explicitLabel;
-        const sourceId=source.roundId||(explicitLabel?'label:'+e.round:'unconfirmed:'+e.id);
-        const key=JSON.stringify([t.id,e.region,e.date,e.round||null,e.kind||null,sourceId]);
-        if(!groups.has(key))groups.set(key,{id:key,label:e.round||'ラウンド未確認',region:e.region,date:e.date,round:e.round,kind:e.kind,sourceId,uncertain,records:[]});
+        const sourceId=source.roundId||(explicitLabel?'label:'+round:'unconfirmed:'+e.id);
+        // When a clear date/region/round exists, a missing source window URL
+        // must not split a single competition into two visible session cards.
+        const key=JSON.stringify([t.id,e.region,e.date,round||null,e.kind||null,explicitLabel?'labeled':sourceId]);
+        if(!groups.has(key))groups.set(key,{id:key,label:round||'ラウンド未確認',region:e.region,date:e.date,round,kind:e.kind,sourceId,uncertain,records:[]});
+        else if(source.roundId&&!groups.get(key).sourceId?.startsWith('S'))groups.get(key).sourceId=source.roundId;
         groups.get(key).records.push(e);
       }
       return [...groups.values()].sort((a,b)=>b.date.localeCompare(a.date)||a.region.localeCompare(b.region)||String(a.round).localeCompare(String(b.round),'ja'));
@@ -297,8 +315,9 @@
         const info=classifyTournamentRecord(record);
         if(filters.series!=='all'&&!tournamentAxisValues(info,'series').includes(filters.series))continue;
         if(filters.mode!=='all'&&info.mode!==filters.mode)continue;
-        const key=JSON.stringify([record.date,record.region,info.id,record.round||'',record.kind||'']);
-        if(!groups.has(key))groups.set(key,{date:record.date,region:record.region,id:info.id,name:info.name,round:record.round||'ラウンド未確認',kind:record.kind||'区分未確認',records:[]});
+        const round=canonicalTournamentRound(record.round,record.kind);
+        const key=JSON.stringify([record.date,record.region,info.id,round||'',record.kind||'']);
+        if(!groups.has(key))groups.set(key,{date:record.date,region:record.region,id:info.id,name:info.name,round:round||'ラウンド未確認',kind:record.kind||'区分未確認',records:[]});
         groups.get(key).records.push(record);
       }
       return [...groups.values()].sort((a,b)=>a.date.localeCompare(b.date)||regions.indexOf(a.region)-regions.indexOf(b.region)||a.name.localeCompare(b.name,'ja')||a.round.localeCompare(b.round,'ja'));
