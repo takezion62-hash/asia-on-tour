@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-11-05T14:05:04.622Z",
+  "checkedAt": "2026-11-05T14:09:45.149Z",
   "windows": {
     "epicgames_S42_InoxtagIconCup_NAW/S42_InoxtagIconCup_NAW": {
       "nextPage": 40,
@@ -66,21 +66,21 @@
       "emptyAttempts": 0
     },
     "epicgames_S41_FNCSCommunityCup_BR/S41_FNCSCommunityCup_BR": {
-      "nextPage": 17,
-      "pages": 17,
+      "nextPage": 29,
+      "pages": 29,
       "complete": false,
       "coverageLimited": false,
       "totalPages": 100,
-      "lastScanned": "2026-11-05T13:51:09.165Z",
+      "lastScanned": "2026-11-05T14:08:51.909Z",
       "emptyAttempts": 0
     },
     "epicgames_S42_InoxtagIconCup_NAC/S42_InoxtagIconCup_NAC": {
-      "nextPage": 36,
-      "pages": 36,
-      "complete": false,
-      "coverageLimited": false,
+      "nextPage": 40,
+      "pages": 40,
+      "complete": true,
+      "coverageLimited": true,
       "totalPages": 100,
-      "lastScanned": "2026-11-05T14:04:13.935Z",
+      "lastScanned": "2026-11-05T14:08:20.615Z",
       "emptyAttempts": 0
     },
     "epicgames_S30_SquadsVictoryCashCup_OCE/S30_SquadsVictoryCashCup_Event1Round1_OCE": {
@@ -102,21 +102,30 @@
       "emptyAttempts": 0
     },
     "epicgames_S39_1MillionUnrealCup_NAW/S39_1MillionUnrealCup_NAW": {
-      "nextPage": 10,
-      "pages": 10,
+      "nextPage": 22,
+      "pages": 22,
       "complete": false,
       "coverageLimited": false,
       "totalPages": 100,
-      "lastScanned": "2026-11-05T14:01:09.050Z",
+      "lastScanned": "2026-11-05T14:09:43.266Z",
       "emptyAttempts": 0
     },
     "epicgames_S30_SoloVictoryCashCup_ME/S30_SoloVictoryCashCup_Event5Round2_ME": {
-      "nextPage": 12,
-      "pages": 12,
-      "complete": false,
+      "nextPage": 18,
+      "pages": 18,
+      "complete": true,
       "coverageLimited": false,
       "totalPages": 18,
-      "lastScanned": "2026-11-05T14:05:04.622Z",
+      "lastScanned": "2026-11-05T14:09:18.887Z",
+      "emptyAttempts": 0
+    },
+    "epicgames_S30_SquadsVictoryCashCup_OCE/S30_SquadsVictoryCashCup_Event1Round2_OCE": {
+      "nextPage": 2,
+      "pages": 2,
+      "complete": true,
+      "coverageLimited": false,
+      "totalPages": 2,
+      "lastScanned": "2026-11-05T14:09:45.149Z",
       "emptyAttempts": 0
     }
   }
