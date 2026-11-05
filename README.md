@@ -57,7 +57,7 @@ ASIA勢のFortnite海外大会戦績を検索・閲覧する、GitHub Pagesの�
 - `index.html`：デザイン・画面構造
 - `app.js`：JSONの読み込み、検索、シーズン、プロフィール、賞金集計
 - `rankings.js`：地域別・実績別ランキングの共通集計（ブラウザー／Node.js）
-- `aot-pr.js` / `aot-pr.css` / `participation-pr.js`：AOT PR v1.10の計算と表示、出場記録の重複除外
+- `aot-pr.js` / `aot-pr.css` / `participation-pr.js`：AOT PR v1.11の計算と表示、出場記録の重複除外
 - `achievements.js` / `achievements.css`：プロフィールの進化バッジ・通常特別称号・秘密の称号
 - `growth.js` / `growth.css`：選手プロフィールの月別・シーズン別成長グラフ
 - `compare.js` / `compare.css`：2〜3選手の海外遠征成績比較（AOT PR・賞金・VR・決勝実績など）
@@ -147,7 +147,7 @@ Override SeriesのMega Man・KINGDOM HEARTS・Persona 5の3大会をシリーズ
 - ホームでは新着4件、更新履歴ページでは新着20件ずつと全更新履歴を表示します。新着は選択中のシーズンで絞り込みますが、更新履歴の記録自体は全期間を表示します。
 - `npm run validate` は `updates.json` の更新ID・日付・登録戦績IDの整合性も検証します。
 
-## AOT POWER RANKING v1.10
+## AOT POWER RANKING v1.11
 
 名鑑の上部に、選択シーズンの掲載済み海外戦績から自動計算した独自ポイントを上位50名まで表示します。ALLと6開催地域を切り替えられ、選手名からプロフィールの参加・順位・キル・予選突破・賞金獲得ボーナス別内訳と大会ラウンドごとの得点を確認できます。既存の賞金ランキングとは独立しており、現金賞金へ換算しません。公式PRや選手の絶対的な実力順位ではありません。
 
@@ -166,10 +166,10 @@ Override SeriesのMega Man・KINGDOM HEARTS・Persona 5の3大会をシリーズ
 
 確認済みの掲載名だけを使用し、順位・キルが未確認なら当該項目の加点を保留します。形式未確認ではキル点を保留、大会分類未確認では全体を保留します。未確認値を確認済み0として書き換えません。確認済み参加の参加点は残します。Test Cupも確認済みの掲載成績に限り、単一セッション倍率1.0と大会倍率0.25で加点します（賞金は加算しません）。Test Cupは大会シリーズ `test-cup` と戦績区分 `Test Cup` の両方が一致する場合だけ加点します。
 
-### 確認済み予選突破ボーナス（v1.10）
+### 確認済み予選突破ボーナス（v1.11）
 
 - **`verified: true` かつ `kind: "予選"`** の出典確認済み戦績で、①ラウンド欄に「予選突破／予選通過」が明記、②その大会の公式ルールで確認した地域別通過順位以内かつ出典が正しいRound 1、③本人の決勝進出が検証済みの記録文に明記され、出典のイベント・地域が一致、のいずれかに該当する場合、**同じ選手・大会・日付・開催枠につき 10pt × 開催地域倍率** を付与します。例：NAWなら10pt、EUなら14pt。
-- 公式通過枠が未確認の大会で、単に予選順位が高いだけの記録や、決勝出場を確認できない記録からは**突破を推測しません**。決勝の掲載記録のみからの自動推測も行いません。「予選敗退／通過圏外」「出場確認」だけの参加アーカイブには**予選突破ボーナスを付けません**。AOT PR v1.9では、本人ID確認済みの参加・順位・キルの基本点を正式戦績と重複しない範囲で加点します。
+- 公式通過枠が未確認の大会で、単に予選順位が高いだけの記録や、決勝出場を確認できない記録からは**突破を推測しません**。ただしルール上、予選突破者しか決勝に進めない大会について、**出典URLから決勝ラウンドであることまで確認できた戦績**は、予選記録が未掲載でも突破を示す独立した根拠として評価します。「予選敗退／通過圏外」「出場確認」だけの参加アーカイブには**予選突破ボーナスを付けません**。AOT PR v1.9では、本人ID確認済みの参加・順位・キルの基本点を正式戦績と重複しない範囲で加点します。
 - `reported`・`reviewOnly`・`qualification: "outside-cutoff"`・通過圏外には加点しません。`partial` は基本的に保留しますが、**突破・通過とラウンド欄に明記された確認済み戦績**なら、順位やキルが未記録でも突破加点は認めます。既知の公式通過順位を超える記録は、突破と表記されていても矛盾が解消するまで加点しません。大会分類が未確定の記録やTest Cupも対象外です。
 - 同じ大会の予選と決勝が並んでも **1開催枠につき突破ボーナス1回**。同じ開催枠の別ID・順位差分にも二重付与しません。異なるEvent/Session/Week/Dayは別の開催枠とします。
 - 既存の**賞金ボーナスは20～80ptから据え置き**。10ptの予選突破ボーナスは賞金ボーナスと独立した小さな加点で、賞金獲得の有無・賞金額・VR数を操作しません。AOT PRの内訳でも別の項目に表示します。
@@ -181,10 +181,11 @@ Override SeriesのMega Man・KINGDOM HEARTS・Persona 5の3大会をシリーズ
 - 公式通過順位が確定した各シリーズのみで補足判定する。S42 Solo Reload Victory Cup（EU 1,600／NAC 800／その他320）、Solo Battle Royale Victory Cup（EU 4,000／NAC 2,000／その他800）、Console ZB Solo VC（EU・NAC 2,000／その他1,000）、Reload Duos VC（EU・NAC 300／その他120）、[PlayStation NickEh30 Icon Cup](https://www.fortnite.com/competitive/rules-guidelines/rules-library/playstation-nick-eh-30-cup)（上位100）。
 - [FNCS Division 1 Practice](https://www.fortnite.com/competitive/events/S42_FNCSDivisionalCup_Division1?region=NAC) のS42上位50チーム、[Performance Evaluation](https://www.fortnite.com/competitive/events/S42_PerformanceEvaluation?region=NAC) のS42デュオ上位50チーム・[同トリオ](https://www.fortnite.com/competitive/events/S42_PerformanceEvaluationTrios?region=EU) 上位33チーム、[Reload Zero Build Cash Cup](https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-zero-build-reload-cash-cups-chapter-7-season-4-official-rules) のS42上位20チームも、対象大会IDが一致する場合だけ使用。
 - OCE 2026-10-18 Reload ZB Duos Cash Cupの2件は、ユーザー提供の順位表スクリーンショットで**予選4位・14位**を確認。出典リンクにwindow指定がない例外のため、確認済みの**2つのレコードIDと開催日・大会・地域・出典・メモが完全一致**する場合だけ通過枠内と認定。任意のwindow不明レコードには適用しない。
+- **予選記録なしでも参加資格が確認できる決勝戦績**からも加点。公式に予選通過者のみが進めることが確認されたVictory Cup・FNCS Division 1 Practice・Performance Evaluation・NickEh30などの適切な決勝イベントID/ラウンドIDを照合し、確認済み決勝出場を追加根拠とした。開催日がずれるFNCSのEvent N予選→Week N決勝、NickEh30のSession N予選→決勝も同じ枠として扱う。結果として決勝からの確定ボーナスは**選手別88回分**を算定。
 - 修正時点の内訳は、**突破確認526件**（明記443、公式通過枠52、決勝進出の確認済みメモ29、限定スクリーンショット2）。**未認定4件**は実際に公式の通過順位より下位だったS42 Performance Evaluation予選：EUトリオ144位・974位・975位（上位33）、NACデュオ701位（上位50）。
-- AOT PR v1.9からの差分は**76選手・91選手枠の追加突破ボーナス、合計＋981 PR**。1選手・1大会・1地域・1開催日・1Event/Session/Week/Dayにつき1回限り。賞金合計・賞金ボーナス・称号・実績JSONは変更しない。
-- `qualificationEvidence()` は「予選突破明記」「検証済みメモ」「公式通過枠」「限定スクリーンショット」を区別して、プロフィールの大会別PR内訳に判定根拠を表示する。出場アーカイブ由来の`participationOnly`は突破ボーナス対象外。
-- 追加した回帰テストは、勝手な未知の通過ラインの仮定、通過圏外への誤認定、本人/イベント/地域の不一致、決勝のみ掲載からの誤推測、同一開催枠での二重付与を拒否する。
+- **AOT PR v1.9からの差分は127選手・179選手枠の追加突破ボーナス、合計＋1,908 PR**（正式登録1,244戦績で再計算）。従来より突破証拠を拡大した一方、1選手・1大会・1地域・同じEvent/Session/Week/Day枠につき1回限りとし、14日以内の予選・決勝を同じ枠として二重認定しない。賞金合計・賞金ボーナス・称号・正式戦績JSONは変更しない。
+- `qualificationEvidence()` と `verifiedFinalEvidence()` は「予選突破明記」「検証済みメモ」「公式通過枠」「限定スクリーンショット」「確認済み決勝進出」を区別して、プロフィールの大会別PR内訳に判定根拠を表示する。出場アーカイブ由来の`participationOnly`は突破ボーナス対象外。
+- 追加した回帰テストは、勝手な未知の通過ラインの仮定、通過圏外への誤認定、本人/イベント/地域の不一致、**出典を特定できない決勝記録からの推測**、同じ大会で予選と別日に記録された決勝の二重付与を拒否する。
 
 ### 確認済み賞金獲得ボーナス（v1.8）
 
