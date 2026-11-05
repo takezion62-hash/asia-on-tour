@@ -46,8 +46,12 @@ test('uses verified Epic displayData titles for uncatalogued cups without assert
  ];
  const out=buildHistory(source,catalog,{now:Date.parse('2026-11-05T00:00:00Z')});
  assert.equal(out.sessions.length,2);
- assert.equal(out.sessions[0].name,'d4vd Cup');
- assert.equal(out.sessions[1].series,'ranked-cup');
+ const d4vd=out.sessions.find(s=>s.eventId==='S30_d4vd_Cup');
+ const ranked=out.sessions.find(s=>s.eventId==='S30_RankedCupSolo');
+ assert.equal(d4vd?.name,'d4vd Cup');
+ assert.equal(ranked?.name,'Solo Ranked Cup');
+ assert.equal(ranked?.series,'ranked-cup');
+ assert.ok(out.sessions.every(s=>!('prize' in s)&&!('players' in s)));
  assert.equal(out.unmappedCount,1);
 });
 test('unmapped FNCS events remain excluded while cosmetic community cups are eligible',()=>{
