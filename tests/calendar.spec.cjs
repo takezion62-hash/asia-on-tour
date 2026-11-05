@@ -96,7 +96,7 @@ test('S43海外開催予定を結果と別に表示し、日本時間とEpic公�
  const event=page.locator('.calendar-upcoming-event');
  await expect(event).toContainText('Reload ZB Duos Cash Cup');
  await expect(event).toContainText('日本時間 20:00');
- await expect(event).toContainText('日程のみ登録');
+ await expect(event).toContainText('開催日程のみ確認');
  await expect(event.locator('a')).toHaveAttribute('href',/fortnite\.com\/competitive\/events\/S43_ReloadZBDuosCashCup/);
  await expect(page.locator('.calendar-month-head small')).toContainText('予定');
  await expect(page.locator('.calendar-day-upcoming-count').first()).toBeVisible();
@@ -133,7 +133,7 @@ test('予定には非Division1 FNCSやASIA開催を混ぜず、S42閲覧中もS4
  await expect(page.locator('#calendar-region')).toHaveValue('OCE');
  const scheduled=page.locator('.calendar-upcoming-event');
  for(const txt of await scheduled.allTextContents())expect(txt).toContain('OCE');
- await expect(page.locator('.calendar-note')).toContainText('JST');
+ await expect(page.locator('.calendar-note')).toContainText('公式大会ID・開始日時');
 });
 
 
