@@ -86,3 +86,27 @@ test('new Cash Cup IDs are surfaced for mapping, not invented or silently publis
  assert.deepEqual(discoverUnmapped(missing,catalog,{reviewSeries:['cash-cup'],lookbackDays:7},now),['S43_TriosCashCup']);
  assert.deepEqual(discoverUnmapped(missing,catalog,{reviewSeries:['victory-cup'],lookbackDays:7},now),[]);
 });
+
+test('officially mapped S43 cash and evaluation events are discoverable without guessing awards',()=>{
+ const source=require('node:fs'),path=require('node:path');
+ const catalog=JSON.parse(source.readFileSync(path.join(__dirname,'../tournaments.json'),'utf8')).catalog;
+ const configs=[
+  ['S43_TriosCashCup','S43_TriosCashCup_Event1_ME','cash-cup','trio','単一開催枠'],
+  ['S43_ReloadZBDuosCashCup','S43_ReloadZBDuosCashCup_Event1Round1_ME','cash-cup','duo','Event 1 · Round 1'],
+  ['S43_ArenaCashCup','S43_ArenaCashCup_Event1_ME','cash-cup','solo','Event 1'],
+  ['S43_PerformanceEvaluationTrios','S43_PerformanceEvaluationTrios_Event1Round1_EU','performance-evaluation','trio','Event 1 · Round 1']
+ ];
+ const fixture=configs.map(([id,win])=>evt(id,win.endsWith('_EU')?'EU':'ME',win));
+ const now=Date.parse('2026-11-20T00:00:00Z');
+ // Fixture uses an earlier completed timestamp so it does not assert future results.
+ const found=discover(fixture,catalog,{reviewSeries:['cash-cup','performance-evaluation'],fromDate:'2026-10-01',toDate:'2026-11-19'},now);
+ assert.equal(found.length,configs.length);
+ for(const [id,,series,team,label] of configs){
+  const win=found.find(w=>w.eventId===id);
+  const t=catalog.find(x=>x.id===win?.tournamentId);
+  assert.equal(win.series,series);
+  assert.equal(t.team,team);
+  assert.equal(win.kind,'参加確認');
+  assert.ok(win.round.startsWith(label));
+ }
+});
