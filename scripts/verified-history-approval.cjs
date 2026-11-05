@@ -77,8 +77,10 @@ function decide(row,win,checkpoint,data){
   rec.note='Epic公式規則で'+row.region+'上位'+rule.advance[row.region]+'名が予選突破。Osirion順位表の'+row.rank+'位をEpic IDで照合。予選の現金賞金は$0。規則: '+rule.source;
  }else if(row.kind==='賞金決勝'){
   if(row.vrs!==0||row.prize!==null)return decline('賞金が発生する可能性があり確認が必要');
-  rec.round=win.round.replace(/\/ 賞金決勝$/,'/ 決勝（賞金なし）');
-  rec.kind='決勝';
+  // Keep the same cash-final stage for winners and $0 finalists.
+  // Whether the player earned cash is represented only by prize.
+  rec.round=win.round;
+  rec.kind='賞金決勝';
   rec.prize=0;
   rec.note='Epic公式規則は決勝のVRごとに賞金を付与。Osirionで決勝0VRを確認したため現金賞金$0。規則: '+rule.source;
  }else return decline('対象外ラウンド');
