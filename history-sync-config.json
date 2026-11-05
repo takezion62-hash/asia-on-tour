@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "enabled": true,
+  "mode": "review",
+  "provider": "osirion",
+  "fromDate": "2026-09-22",
+  "toDate": "2026-09-22",
+  "regions": [
+    "NAW"
+  ],
+  "minLagMinutes": 240,
+  "maxPagesPerRun": 4,
+  "maxWindowsPerRun": 2
+}
