@@ -1,5 +1,51 @@
 {
   "version": 1,
-  "checkedAt": null,
-  "windows": {}
+  "checkedAt": "2026-11-05T11:14:01.266Z",
+  "windows": {
+    "epicgames_S42_InoxtagIconCup_NAW/S42_InoxtagIconCup_NAW": {
+      "nextPage": 8,
+      "pages": 8,
+      "complete": false,
+      "coverageLimited": false,
+      "totalPages": 89,
+      "lastScanned": "2026-11-05T11:13:40.829Z",
+      "emptyAttempts": 0
+    },
+    "epicgames_S41_FNCSCommunityCup_ME/S41_FNCSCommunityCup_ME": {
+      "nextPage": 8,
+      "pages": 8,
+      "complete": false,
+      "coverageLimited": false,
+      "totalPages": 100,
+      "lastScanned": "2026-11-05T11:13:49.363Z",
+      "emptyAttempts": 0
+    },
+    "epicgames_S41_PSTypicalGamer_ME/S41_PSTypicalGamer_Final_ME": {
+      "nextPage": 1,
+      "pages": 1,
+      "complete": true,
+      "coverageLimited": false,
+      "totalPages": 1,
+      "lastScanned": "2026-11-05T11:13:49.856Z",
+      "emptyAttempts": 0
+    },
+    "epicgames_S41_PSTypicalGamer_EU/S41_PSTypicalGamer_Final_EU": {
+      "nextPage": 1,
+      "pages": 1,
+      "complete": true,
+      "coverageLimited": false,
+      "totalPages": 1,
+      "lastScanned": "2026-11-05T11:13:50.357Z",
+      "emptyAttempts": 0
+    },
+    "epicgames_S41_FNCSCommunityCup_EU/S41_FNCSCommunityCup_EU": {
+      "nextPage": 8,
+      "pages": 8,
+      "complete": false,
+      "coverageLimited": false,
+      "totalPages": 100,
+      "lastScanned": "2026-11-05T11:14:01.266Z",
+      "emptyAttempts": 0
+    }
+  }
 }
