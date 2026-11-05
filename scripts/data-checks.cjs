@@ -191,8 +191,22 @@ function validateData(data) {
     if (source.seasonId !== 'unknown' && !seasons.has(row.seasonId || source.seasonId)) issue('results.json', id, 'seasonId', 'チャプター・シーズンの対応が未確認です。特定シーズンへ推測で分類しません。', true);
     const catalog = t.catalog.find(c => object(c) && c.name === row.event && c.seasonId === (row.seasonId || source.seasonId) && Array.isArray(c.sourceEventIds) && c.sourceEventIds.includes(source.eventId));
     if (!catalog) issue('results.json', id, 'event', '一致する大会カタログがないためタグは未確認です。必要なら根拠を確認してカタログを追加してください。', true);
-    else if (catalog.team === 'duo') check(people.length === 2, 'results.json', id, 'players', 'デュオ大会の選手は2名で指定してください。');
-    else if (catalog.team === 'solo') check(people.length === 1, 'results.json', id, 'players', 'ソロ大会の選手は1名で指定してください。');
+    const teamSize = { solo: 1, duo: 2, trio: 3, squad: 4 }[catalog?.team];
+    if (teamSize) check(people.length === teamSize, 'results.json', id, 'players',
+      ({ solo: 'ソロ', duo: 'デュオ', trio: 'トリオ', squad: 'スクワッド' }[catalog.team]) + '大会の選手は' + teamSize + '名で指定してください。');
+    // A prize-eligible final is the same round for every player, even when
+    // a particular player's verified cash is $0 or not yet confirmed.
+    // Separate cash outcome (prize) from the round category (kind/round).
+    const prizeSeries = new Set(['victory-cup','cash-cup','unreal-cup','playstation-cup']);
+    const eligibleFinal = (prizeSeries.has(catalog?.series) ||
+      (!catalog && /Victory Cup|Victory Cash Cup|Cash Cup|Unreal Cup/u.test(row.event))) &&
+      /(?:Round\s*2|Final|Session\s*1)/iu.test(row.round) && !/予選/u.test(row.round);
+    if (eligibleFinal && ['賞金決勝','決勝'].includes(row.kind)) {
+      check(row.kind === '賞金決勝', 'results.json', id, 'kind',
+        '賞金対象の決勝は賞金の有無で「決勝」と「賞金決勝」を分けないでください。');
+      check(/\/\s*賞金決勝(?:（Event番号未確認）)?$/u.test(row.round), 'results.json', id, 'round',
+        '同じ賞金決勝は全選手で同じラウンド名にしてください。未獲得賞金はprize:0、不明ならnullで区別します。');
+    }
     for (const axis of axes) if (row[axis] != null) check(optionSets.get(axis)?.has(row[axis]) && (!catalog || row[axis] === catalog[axis]), 'results.json', id, axis, 'タグが存在しないか、大会カタログと一致しません。');
     const links = [...(row.profileUrl != null ? [{ name: people[0], url: row.profileUrl }] : []), ...(Array.isArray(row.profiles) ? row.profiles : [])];
     if (row.profiles != null) check(Array.isArray(row.profiles), 'results.json', id, 'profiles', 'プロフィールは配列にしてください。');
