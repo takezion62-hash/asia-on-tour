@@ -844,6 +844,7 @@
   <link rel="stylesheet" href="./achievements.css?v=6">
   <link rel="stylesheet" href="./growth.css?v=1">
   <link rel="stylesheet" href="./compare.css?v=1">
+  <link rel="stylesheet" href="./auto-sync-ui.css?v=1">
 </head>
 <body>
   <div class="layout">
@@ -928,6 +929,19 @@
         <div class="page-label">ACTIVITY / 04</div>
         <h1 class="big-title" id="updates-title">UPDATES<span>.</span></h1>
         <p class="explainer">新しく登録された海外戦績とサイトの改善履歴。登録日と大会開催日は異なります。</p>
+
+        <section class="auto-sync-control" aria-labelledby="auto-sync-heading">
+          <h2 id="auto-sync-heading">成績の自動更新 <span>AUTO SYNC</span></h2>
+          <p>登録済み選手の海外大会成績を追跡する仕組みです。確認済みEpic IDと大会ウィンドウだけを対象とし、未確認の賞金は推測しません。</p>
+          <div id="auto-sync-status" class="auto-sync-status" aria-live="polite">確認中…</div>
+          <div class="auto-sync-controls">
+            <button type="button" class="btn ghost" id="auto-sync-refresh">最新状況を確認</button>
+            <a href="https://github.com/takezion62-hash/asia-on-tour/actions/workflows/auto-sync.yml" target="_blank" rel="noopener noreferrer">管理者：更新チェックを実行 ↗</a>
+            <a href="https://github.com/takezion62-hash/asia-on-tour/blob/main/AUTO_SYNC.md" target="_blank" rel="noopener noreferrer">導入手順 ↗</a>
+          </div>
+          <details class="auto-sync-review"><summary>取得した候補の確認</summary><div id="auto-sync-proposals">接続後、確認候補を表示します</div></details>
+          <p class="auto-sync-warning">※ 公開サイトから直接GitHubの戦績を書き換えることはできません。書き込みは管理者権限のGitHub Actionsのみです。初期設定完了まで自動取り込みは停止しています。</p>
+        </section>
         <section class="updates-list-section" aria-labelledby="registration-list-title">
           <div class="section-head"><div><h2 class="section-title" id="registration-list-title">新着 <span>REGISTERED RESULTS</span></h2><p id="new-registration-count" aria-live="polite"></p></div></div>
           <div class="registration-results" id="new-entries-list"></div>
@@ -967,5 +981,6 @@
   <script src="./growth.js?v=1" defer></script>
   <script src="./compare.js?v=1" defer></script>
   <script src="./app.js?v=player-compare-20261104-1" defer></script>
+  <script src="./auto-sync-ui.js?v=1" defer></script>
 </body>
 </html>
