@@ -6,11 +6,11 @@
       if(!response.ok)throw new Error(filename+' could not be loaded (HTTP '+response.status+')');
       return response.json();
     };
-    const [records,playerData,tournamentData,updateData,scheduleData,historyCalendarData]=await Promise.all([
-      loadJSON('results.json'),loadJSON('players.json'),loadJSON('tournaments.json'),loadJSON('updates.json'),loadJSON('schedule.json'),loadJSON('calendar-history.json')
+    const [records,playerData,tournamentData,updateData,scheduleData,historyCalendarIndex]=await Promise.all([
+      loadJSON('results.json'),loadJSON('players.json'),loadJSON('tournaments.json'),loadJSON('updates.json'),loadJSON('schedule.json'),loadJSON('calendar-history-index.json')
     ]);
-    const siteData={results:records,players:playerData,tournaments:tournamentData,updates:updateData,schedule:scheduleData,calendarHistory:historyCalendarData};
-    if(!Array.isArray(siteData.results)||!Array.isArray(siteData.players.candidates)||!Array.isArray(siteData.tournaments.catalog)||!Array.isArray(siteData.updates.entries)||!Array.isArray(siteData.schedule.sessions)||!Array.isArray(siteData.calendarHistory.sessions))
+    const siteData={results:records,players:playerData,tournaments:tournamentData,updates:updateData,schedule:scheduleData,calendarHistory:historyCalendarIndex};
+    if(!Array.isArray(siteData.results)||!Array.isArray(siteData.players.candidates)||!Array.isArray(siteData.tournaments.catalog)||!Array.isArray(siteData.updates.entries)||!Array.isArray(siteData.schedule.sessions)||!Array.isArray(siteData.calendarHistory.months))
       throw new Error('Invalid ASIA ON TOUR data files');
 
     // CH7S4 / Override · 2026-08-20 through 2026-10-18 (snapshot, not exhaustive)
@@ -310,6 +310,26 @@
 
     // Distinct scheduled sessions: never passed to AOT PR, player profiles,
     // prize totals, tournament histories, achievements or registered results.
+    // Read calendar history a month at a time, so the 11k+ historic sessions do
+    // not slow down every visit to the homepage or a player profile.
+    const calendarHistoryCache=new Map(),calendarHistoryLoading=new Set();
+    function ensureCalendarHistoryMonth(month){
+      if(calendarHistoryCache.has(month)||calendarHistoryLoading.has(month))return;
+      const entry=siteData.calendarHistory.months.find(x=>x.month===month);
+      if(!entry){calendarHistoryCache.set(month,[]);return}
+      calendarHistoryLoading.add(month);
+      loadJSON('calendar-history/'+month+'.json').then(data=>{
+        if(data.version!==1||data.month!==month||!Array.isArray(data.sessions)||data.sessions.some(x=>x.dateJst.slice(0,7)!==month))throw Error('Invalid historic calendar month: '+month);
+        calendarHistoryCache.set(month,data.sessions);
+        if(currentView.page==='calendar'&&calendarBrowse.month===month){
+          if(calendarBrowse.date===month+'-01'
+             &&!data.sessions.some(x=>x.dateJst===calendarBrowse.date)
+             &&!all().some(x=>x.date===calendarBrowse.date))calendarBrowse.date='';
+          renderCalendar();
+        }
+      }).catch(err=>{console.warn('過去大会の開催履歴を取得できません',err)})
+        .finally(()=>calendarHistoryLoading.delete(month));
+    }
     // Historic tournament sessions are calendar metadata, never AOT match records.
     const calendarRoundSignature=value=>{
       const s=String(value||'');
@@ -322,7 +342,7 @@
     function calendarUpcomingSessions(filters) {
       if(filters.scope==='results')return [];
       const published=calendarSessions({...filters,scope:'all'});
-      return [...siteData.calendarHistory.sessions,...siteData.schedule.sessions].filter(e=>{
+      return [...(calendarHistoryCache.get(filters.month)||[]),...siteData.schedule.sessions].filter(e=>{
         if(!e||!validCalendarDate(e.dateJst)||!e.dateJst.startsWith(filters.month+'-'))return false;
         const historic=typeof e.sourceWindowId==='string'&&e.sourceWindowId.length>0;
         if(!historic&&e.seasonId!==siteData.schedule.seasonId)return false;
@@ -395,6 +415,7 @@
     }
     function renderCalendar(){
       const filters=sanitizeCalendarFilters(calendarBrowse);
+      ensureCalendarHistoryMonth(filters.month);
       const sessions=filters.scope==='scheduled'?[]:calendarSessions(filters);
       const byDay=new Map();
       for(const session of sessions){
