@@ -14,7 +14,7 @@
   const TEAM={solo:1,duo:2,trio:3,squad:4};
   const members=row=>Array.isArray(row?.players)&&row.players.length?row.players:[row?.player];
   const numeric=value=>Number.isSafeInteger(value)&&value>=0;
-  const dateOk=value=>typeof value==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(value)&&new Date(value).toISOString().slice(0,10)===value;
+  const dateOk=value=>typeof value==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(value)&&Number.isFinite(Date.parse(value))&&new Date(value).toISOString().slice(0,10)===value;
   const sessionKey=(record,key)=>key(record)||'unspecified';
   const sameSession=(a,b)=>a===b||a==='unspecified'||b==='unspecified';
   function allowed(row,category) {
