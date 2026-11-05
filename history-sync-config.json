@@ -31,7 +31,8 @@
   "priorityReview": {
     "series": "performance-evaluation",
     "region": "EU",
-    "fromDate": "2026-08-01",
-    "maxWindows": 3
+    "fromDate": "2026-11-06",
+    "minLagMinutes": 100,
+    "maxWindows": 2
   }
 }
