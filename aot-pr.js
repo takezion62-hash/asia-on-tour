@@ -134,7 +134,9 @@
       let sourceEvent=parts.find(p=>/^S\d+_/i.test(p)) ||
         parts.find(p=>/^epicgames_S\d+_/i.test(p))?.replace(/^epicgames_/i,'') || null;
       if (sourceEvent?.endsWith('_'+record.region)) sourceEvent=sourceEvent.slice(0,-record.region.length-1);
-      const officialRoundRoot=tournament.sourceEventIds.some(key=>id.startsWith(key+'_'));
+      const officialRoundRoot=tournament.sourceEventIds.some(key=>id.startsWith(key+'_')) ||
+        (tournament.id==='ch7s4-performance-evaluation-trios' &&
+          id.startsWith('S42_PerformanceEvaluation_Event'));
       return tournament.sourceEventIds.includes(sourceEvent) &&
         id.startsWith(tournament.seasonId+'_') && (!requireRoundOne || officialRoundRoot);
     } catch { return false; }
