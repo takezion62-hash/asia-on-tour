@@ -48,7 +48,8 @@
       historyArea.replaceChildren(
         field('対象期間',(status.fromDate||'—')+' ～ '+(status.toDate||'—')),
         field('最終チェック',checked),
-        field('取得候補',fmt(status.found)+'件'),
+        field('確認待ち候補',fmt(status.found)+'件'),
+        field('今回の自動承認',fmt(status.imported||0)+'件'),
         field('照合後に登録済み',fmt(status.alreadyRegistered||0)+'件'),
         field('調査したページ（今回）',fmt(status.scannedPages)+'ページ'),
         field('調査対象ラウンド',fmt(status.trackedWindows)+'件'),
