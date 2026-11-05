@@ -491,12 +491,12 @@ test('only two reviewed OCE Reload ZB Duos screenshot records qualify by officia
    subtype:'reload-zb-duos-cash-cup',team:'duo',mode:'reload-zero-build',seasonId:'S42',
    sourceEventIds:['S42_ReloadCashCup_DuosZB']});
  const samples=[
-  {id:'s42-oce-reload-zb-duos-qual-20261018-reo-romii',players:['Reo','ろみぃ'],rank:4},
-  {id:'s42-oce-reload-zb-duos-qual-20261018-uptemp-vuradd0',players:['uptemp','vurаdd0'],rank:14}
+  {id:'s42-oce-reload-zb-duos-qual-20261018-reo-romii',players:['Reo','ろみぃ'],rank:4,points:559,kills:107,vrs:3},
+  {id:'s42-oce-reload-zb-duos-qual-20261018-uptemp-vuradd0',players:['uptemp','vurаdd0'],rank:14,points:539,kills:71,vrs:3}
  ];
  for(const sample of samples){
   const row=event({id:sample.id,date:'2026-10-18',region:'OCE',kind:'予選',
-    players:sample.players,player:sample.players.join(' / '),rank:sample.rank,prize:0,
+    players:sample.players,player:sample.players.join(' / '),rank:sample.rank,points:sample.points,kills:sample.kills,vrs:sample.vrs,prize:0,
     round:'予選 / Event・Round番号未確認',
     note:'ユーザー提供の2026/10/18 OCE Reload ZB Duos Cash Cup予選のFortnite Tracker画像で'+sample.rank+'位を確認。',
     source:'https://fortnitetracker.com/events/epicgames_S42_ReloadCashCup_DuosZB_OCE'});
