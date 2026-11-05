@@ -37,3 +37,25 @@ test('stage label accepts historic day windows and solo event windows without in
  assert.deepEqual(stageLabel('S42_SoloVictoryCup_Event6_NAW'),{round:'Event 6',stage:'単一ラウンド'});
  assert.deepEqual(stageLabel('S42_Unknown_Mystery_NAW'),{round:'ラウンド詳細未確認',stage:'単一ラウンド'});
 });
+
+test('uses verified Epic displayData titles for uncatalogued cups without asserting match results',()=>{
+ const source=[
+ {...evt('S30_d4vd_Cup','ME',[win('S30_d4vd_Cup_Event1_ME','2024-06-07T15:00:00Z','2024-06-07T18:00:00Z')]),displayData:{longFormatTitle:'d4vd Cup'}},
+ {...evt('S30_RankedCupSolo','EU',[win('S30_RankedCupSolo_Event1_EU','2024-06-07T15:00:00Z','2024-06-07T18:00:00Z')]),displayData:{longFormatTitle:'Solo Ranked Cup'}},
+ {...evt('S30_Untitled','ME',[win('S30_Untitled_Event1_ME','2024-06-07T15:00:00Z','2024-06-07T18:00:00Z')]),displayData:{}}
+ ];
+ const out=buildHistory(source,catalog,{now:Date.parse('2026-11-05T00:00:00Z')});
+ assert.equal(out.sessions.length,2);
+ assert.equal(out.sessions[0].name,'d4vd Cup');
+ assert.equal(out.sessions[1].series,'ranked-cup');
+ assert.equal(out.unmappedCount,1);
+});
+test('unmapped FNCS events remain excluded while cosmetic community cups are eligible',()=>{
+ const data=[
+ {...evt('S42_FNCSReloadQualifiers','ME',[win('S42_FNCSReloadQualifiers_Event1Round1_ME','2026-10-25T15:00:00Z','2026-10-25T18:00:00Z')]),displayData:{longFormatTitle:'FNCS Solos Reload Qualifiers'}},
+ {...evt('S41_FNCSCommunityCup','ME',[win('S41_FNCSCommunityCup_Event1_ME','2026-08-10T15:00:00Z','2026-08-10T18:00:00Z')]),displayData:{longFormatTitle:'Champion Aphrodite FNCS Cup'}}
+ ];
+ const out=buildHistory(data,catalog,{now:Date.parse('2026-11-05T00:00:00Z')});
+ assert.equal(out.sessions.length,1);
+ assert.equal(out.sessions[0].name,'Champion Aphrodite FNCS Cup');
+});
