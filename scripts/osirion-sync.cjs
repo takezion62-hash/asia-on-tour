@@ -43,7 +43,7 @@ function linkedAccounts(data){
  return {accounts,conflicts};
 }
 function parseStage(windowId){
- const match=windowId.match(/Event(\d+)Round([12])_(ME|EU|NAC|NAW|OCE|BR)$/);
+ const match=windowId.match(/Event(\d+)_?Round([12])_(ME|EU|NAC|NAW|OCE|BR)$/);
  if(!match)return null;
  return {round:'Event '+Number(match[1])+' · Round '+Number(match[2])+' / '+(match[2]==='1'?'予選':'賞金決勝'),kind:match[2]==='1'?'予選':'賞金決勝'};
 }
