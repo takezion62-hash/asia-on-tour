@@ -1,6 +1,6 @@
 'use strict';
 const test=require('node:test'),assert=require('node:assert/strict');
-const {identity,linkedAccounts,parseStage,discover,normalizeRow}=require('../scripts/osirion-sync.cjs');
+const {identity,linkedAccounts,parseStage,discover,discoverUnmapped,normalizeRow}=require('../scripts/osirion-sync.cjs');
 const f='https://fortnitetracker.com/profile/all/Alpha/events?id=8a57ac58-f937-4de2-81b7-9abd070c7ae8';
 test('Tracker UUID can map to the same 32-char account ID after strict validation',()=>{
  assert.equal(identity(f),'8a57ac58f9374de281b79abd070c7ae8');
@@ -42,4 +42,19 @@ test('ambiguous aliases or inconsistent canonical names remain excluded',()=>{
   assert.equal(out.accounts.length,0);
   assert.equal(out.conflicts.length,1);
  }
+});
+
+test('reports upcoming unmapped Victory Cups without inventing catalog entries',()=>{
+ const now=Date.parse('2026-11-05T05:00:00Z');
+ const events=[{
+  eventId:'epicgames_S43_SoloVictoryCup_NAW',
+  eventWindows:[{eventWindowId:'S43_SoloVictoryCup_Event1Round1_NAW',beginTime:'2026-11-06T20:00:00Z',endTime:'2026-11-06T22:00:00Z'}]
+ },{
+  eventId:'epicgames_S43_FNCSDivisionalCup_Division1_NAW',
+  eventWindows:[{eventWindowId:'S43_FNCS_Event1Round1_NAW',endTime:'2026-11-06T22:00:00Z'}]
+ }];
+ const older=[{id:'old',series:'victory-cup',seasonId:'S42',sourceEventIds:['S42_SoloVictoryCup']}];
+ assert.deepEqual(discoverUnmapped(events,older,{lookbackDays:7},now),['S43_SoloVictoryCup']);
+ const registered=[...older,{id:'new',series:'victory-cup',seasonId:'S43',sourceEventIds:['S43_SoloVictoryCup']}];
+ assert.deepEqual(discoverUnmapped(events,registered,{lookbackDays:7},now),[]);
 });
