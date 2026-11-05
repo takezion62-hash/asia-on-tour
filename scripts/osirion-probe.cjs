@@ -1,39 +1,34 @@
 'use strict';
-// Diagnostic-only: no credentials, no uploads, no modifications, and no bulk collection.
-const target='https://fnapi.osirion.gg';
-async function inspect(url) {
-  const response=await fetch(url,{headers:{Accept:'application/json,text/html;q=0.9,*/*;q=0.5'},signal:AbortSignal.timeout(18000)});
-  const contentType=response.headers.get('content-type')||'';
-  const raw=await response.text();
-  const base={url:response.url,status:response.status,contentType,bytes:raw.length};
-  if(contentType.includes('json')){
-    try{
-      const data=JSON.parse(raw);
-      base.topKeys=data&&typeof data==='object'?Object.keys(data).slice(0,24):[];
-      for(const key of ['events','tournaments','items','data','results']){
-        const rows=data?.[key];
-        if(Array.isArray(rows)){base[key+'_count']=rows.length;base[key+'_firstKeys']=rows[0]&&typeof rows[0]==='object'?Object.keys(rows[0]).slice(0,28):[];}
-      }
-      if(data?.paths&&typeof data.paths==='object'){
-        base.openapiPaths=Object.keys(data.paths).filter(x=>x.includes('tournament'));
-        base.operationMeta=Object.entries(data.paths)
-          .filter(([path])=>path.includes('/v1/tournaments'))
-          .map(([path,ops])=>({path,methods:Object.keys(ops),getParams:(ops.get?.parameters||[]).map(x=>({name:x.name,in:x.in,required:x.required,schema:x.schema})),responseSchema:ops.get?.responses?.['200']?.content?.['application/json']?.schema}));
-      }
-      if(!response.ok)base.errorCode=data?.error?.code||data?.code||null;
-      return base;
-    }catch {base.json='unparseable';return base;}
-  }
-  if(contentType.includes('html')){
-    base.docsLinks=[...raw.matchAll(/(?:href|src|url|spec)\s*[:=]\s*["']([^"']{1,260})["']/gi)].map(x=>x[1]).filter(x=>/openapi|swagger|spec|\.json/i.test(x)).slice(0,25);
-    base.openapiMentions=[...raw.matchAll(/.{0,100}(?:openapi|swagger|scalar).{0,100}/gi)].slice(0,9).map(x=>x[0].slice(0,220));
-  }
-  return base;
+const host='https://fnapi.osirion.gg';
+async function get(route){
+ const r=await fetch(new URL(route,host),{headers:{accept:'application/json'},signal:AbortSignal.timeout(20000)});
+ const json=await r.json().catch(()=>null);
+ return {status:r.status,data:json};
+}
+function summary(obj,depth=0){
+ if(depth>4)return typeof obj;
+ if(Array.isArray(obj))return {arrayLength:obj.length,first:obj.length?summary(obj[0],depth+1):null};
+ if(obj&&typeof obj==='object')return Object.fromEntries(Object.entries(obj).slice(0,18).map(([k,v])=>[k,summary(v,depth+1)]));
+ if(typeof obj==='string'&&obj.length>100)return obj.slice(0,98)+'…';
+ return obj;
 }
 async function run(){
-  for(const route of ['/','/openapi.json','/v1/tournaments']){
-    try{console.log('OSIRION_PROBE '+JSON.stringify(await inspect(target+route)).slice(0,12000));}
-    catch(e){console.log('OSIRION_PROBE_ERROR '+JSON.stringify({route,error:e.message}));}
-  }
+ const spec=(await get('/openapi.json')).data;
+ if(!spec?.paths?.['/v1/tournaments/leaderboard'])throw Error('leaderboard endpoint undocumented');
+ const api=spec.paths['/v1/tournaments/leaderboard'].get;
+ const names=['TournamentLeaderboardDataResponse'];
+ for(const name of names)console.log('OSIRION_SCHEMA '+JSON.stringify({name,definition:spec.components.schemas[name]}).slice(0,10000));
+ const refs=[...JSON.stringify(spec.components.schemas.TournamentLeaderboardDataResponse).matchAll(/#\/components\/schemas\/([A-Za-z0-9]+)/g)].map(x=>x[1]);
+ for(const name of [...new Set(refs)])console.log('OSIRION_SUBSCHEMA '+JSON.stringify({name,definition:spec.components.schemas[name]}).slice(0,12000));
+ const tournaments=await get('/v1/tournaments?region=NAW');
+ console.log('OSIRION_TOUR '+JSON.stringify({status:tournaments.status,available:tournaments.data?.tournaments?.length,matches:(tournaments.data?.tournaments||[]).filter(x=>x.eventId?.includes('S42_SoloVictoryCup')).slice(0,3).map(x=>({eventId:x.eventId,regions:x.regions,windows:(x.eventWindows||[]).slice(0,4).map(w=>({id:w.eventWindowId||w.windowId||w.id,keys:Object.keys(w)}))}))}).slice(0,6000));
+ for(const id of ['S42_SoloVictoryCup','epicgames_S42_SoloVictoryCup_NAW']){
+   const params=new URLSearchParams({leaderboardEventId:id,leaderboardEventWindowId:'S42_SoloVictoryCup_Event3Round1_NAW',page:'0'});
+   try{
+     const {status,data}=await get('/v1/tournaments/leaderboard?'+params);
+     console.log('OSIRION_BOARD '+JSON.stringify({eventId:id,status,shape:summary(data)}).slice(0,16500));
+     if(status===200)break;
+   }catch(e){console.log('OSIRION_BOARD_ERROR '+JSON.stringify({eventId:id,error:e.message}))}
+ }
 }
-run();
+run().catch(e=>{console.error(e.stack);process.exitCode=1});
