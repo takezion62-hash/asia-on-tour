@@ -1422,7 +1422,7 @@
     function growthReport(name,grouping=growthState.grouping){
       const key=name+'|'+grouping;
       if(!growthCache.has(key)){
-        growthCache.set(key,AsiaGrowth.periods(mergeForPR(rawAll()).records,grouping,{
+        growthCache.set(key,AsiaGrowth.periods(mergeForPR(rawAll(),participationPRRows,'all').records,grouping,{
           player:name,season:recordSeason,cash:individualPrize,prizeFinalRank:confirmedPrizeFinalRank,
           prScore:rows=>AotPR.calculate(rows,{
             names,classify:classifyTournamentRecord,individualPrize
@@ -1601,9 +1601,9 @@
     const aotPrReports=new Map();
     let participationPRRows=[];
     const confirmedPRPlayers=new Set(candidates.map(p=>p.name));
-    function mergeForPR(published,participation=participationPRRows){
+    function mergeForPR(published,participation=participationPRRows,filterSeason=selectedSeason){
       if(!participation.length||typeof window.AotParticipationPR?.merge!=='function')return {records:published,creditedRows:0,creditedPlayers:0};
-      const source=participation.filter(row=>selectedSeason==='all'||row.seasonId===selectedSeason);
+      const source=participation.filter(row=>filterSeason==='all'||row.seasonId===filterSeason);
       return window.AotParticipationPR.merge(published,source,{
         classify:classifyTournamentRecord,sessionKey:AotPR.sessionKey,knownPlayers:confirmedPRPlayers
       });
