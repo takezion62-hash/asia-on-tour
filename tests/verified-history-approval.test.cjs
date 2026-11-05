@@ -25,7 +25,8 @@ test('zero-VR final is $0, positive-VR final requires manual verification',()=>{
  const x={...row,kind:f.kind,round:f.round,rank:216,vrs:0,matches:3,points:0,prize:null,source:source(f)};
  const r=decide(x,f,checkpoint(x),data());
  assert.equal(r.approved,true);
- assert.equal(r.record.kind,'決勝');
+ assert.equal(r.record.kind,'賞金決勝');
+ assert.equal(r.record.round,f.round);
  assert.equal(r.record.prize,0);
  assert.equal(decide({...x,vrs:1},f,checkpoint({...x,vrs:1}),data()).approved,false);
 });
@@ -77,7 +78,8 @@ test('2024 S30 squads with all four verified Epic players can publish zero-VR pr
  const cp={complete:true,proposals:[p]};
  const ok=decide(p,win,cp,data);
  assert.equal(ok.approved,true);
- assert.equal(ok.record.kind,'決勝');
+ assert.equal(ok.record.kind,'賞金決勝');
+ assert.equal(ok.record.round,win.round);
  assert.equal(ok.record.prize,0);
  assert.equal(ok.record.players.length,4);
  assert.equal(decide({...p,vrs:1},win,cp,data).approved,false);
