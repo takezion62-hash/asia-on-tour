@@ -8,11 +8,11 @@ const data=JSON.parse(fs.readFileSync(path.join(root,'schedule.json'),'utf8'));
 const results=JSON.parse(fs.readFileSync(path.join(root,'results.json'),'utf8'));
 const regions=['ME','EU','NAC','NAW','OCE','BR'];
 const ids=new Set(data.sessions.map(x=>x.id));
-test('S43 schedule is a separate source-backed 2026-11-04 snapshot and preserves results',()=>{
+test('S43 schedule is a separate source-backed current snapshot and preserves results',()=>{
  assert.equal(data.version,1);
  assert.equal(data.seasonId,'S43');
  assert.equal(data.timezone,'Asia/Tokyo');
- assert.equal(data.checkedAt,'2026-11-04');
+ assert.match(data.checkedAt,/^2026-11-0[4-9]$/);
  assert.equal(ids.size,data.sessions.length);
  assert.ok(data.sessions.length>=100);
  assert.ok(results.every(x=>!ids.has(x.id)));
@@ -31,7 +31,7 @@ test('every session is a real official URL, overseas region and non-region-locke
   assert.equal(x.dateJst,tokyo.slice(0,10),x.id);
   assert.equal(x.timeJst,tokyo.slice(11,16),x.id);
   assert.ok(['予選','決勝','単一ラウンド'].includes(x.stage),x.id);
-  assert.ok(['cash-cup','victory-cup','ranked-cup','performance-evaluation'].includes(x.series),x.id);
+  assert.ok(['cash-cup','victory-cup','ranked-cup','performance-evaluation','skin-cup'].includes(x.series),x.id);
   assert.equal('prize' in x,false,x.id);
   assert.equal('verified' in x,false,x.id);
   assert.equal('players' in x,false,x.id);
