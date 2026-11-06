@@ -45,7 +45,7 @@ jobs:
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "data: publish 27 verified historical results including $200 ME duo prize"
+          git commit -m 'data: publish 27 verified historical results including USD200 ME duo prize'
           git fetch origin main
           if [ "$(git rev-parse HEAD^)" != "$(git rev-parse origin/main)" ]; then
             echo "::error::main changed after review started; refusing stale publication"
