@@ -27,5 +27,5 @@ test('検索・地域指定・リロードが可能で閲覧画面に保存操�
  await expect(page.locator('#audit-summary')).toContainText('収集状況');
  await page.locator('#audit-refresh').click();
  await expect(page.locator('#audit-refresh')).toBeEnabled({timeout:20000});
- await expect(page.locator('button')).not.toContainText('掲載確定');
+ expect(await page.getByRole('button',{name:'掲載確定'}).count()).toBe(0);
 });
