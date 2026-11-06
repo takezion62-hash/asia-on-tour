@@ -2,6 +2,14 @@
   "version": 1,
   "entries": [
     {
+      "id": "player-style-regional-analytics-20261106",
+      "date": "2026-11-06",
+      "type": "site",
+      "title": "プレイスタイル分析・得意地域を追加",
+      "description": "選手プロフィールに試合数確認分のキル効率・VR率・得意地域候補・地域適応力・月別推移を追加。選手比較にも共通条件の分析を連携。少数サンプルや未確認戦績は推測せず判定保留とし、既存の賞金・PR・称号の集計を変更しない。",
+      "recordIds": []
+    },
+    {
       "id": "manual-reviewed-history-95-20261106",
       "date": "2026-11-06",
       "type": "records",
