@@ -77,7 +77,7 @@
      +'<p class="style-region-note">地域の累計キル数では判定しない。得意地域候補は同条件で2地域以上の15試合・3開催枠を満たし、差が10点以上ある場合のみ表示（キル効率70%＋VR率30%）。大会の難易度差は補正していないょ</p>'
      +'<div class="style-extra">'+percentiles+radar(report.style)+'</div>'
      +trendHtml
-     +'<p class="style-footnote">出典確認済みの掲載結果と本人確認済み出場アーカイブの重複排除分のみを対象にしているょ。試合数不明はK/試合・VR率に加えず、チームのキルやVRを個人の数字として扱わない。大会未掲載・詳細未確認・同一IDの矛盾は集計しない。<a href="#profile-growth">既存の成長グラフを見る</a> ／ <a href="./verification.html">データ検証センター</a></p></section>';
+     +'<p class="style-footnote">出典確認済みの掲載結果と本人確認済み出場アーカイブの重複排除分のみを対象にしているょ。試合数不明はK/試合・VR率に加えず、チームのキルやVRを個人の数字として扱わない。大会未掲載・詳細未確認・同一IDの矛盾は集計しない。<button type="button" data-style-growth-jump class="style-jump">既存の成長グラフを見る ↗</button> ／ <a href="./verification.html">データ検証センター</a></p></section>';
  }
  function comparison(reports,options={}){
    const selected=Array.isArray(reports)?reports:[];
