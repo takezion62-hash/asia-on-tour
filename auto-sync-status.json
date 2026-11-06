@@ -11,7 +11,7 @@
   "provider": "osirion",
   "linkedPlayers": 439,
   "trackedWindows": 3,
-  "found": 1,
+  "found": 0,
   "skipped": 0,
   "imported": 0,
   "scannedPages": 5,
@@ -25,7 +25,7 @@
   "retryWindows": 0,
   "transientFailures": 0,
   "reviewOnlyWindows": 3,
-  "reviewOnlyCandidates": 1,
+  "reviewOnlyCandidates": 0,
   "unmappedEvents": 4,
   "unmappedEventIds": [
     "S42_ArenaTestCup",
@@ -33,5 +33,7 @@
     "S43_OnePieceZoroCup_Mobile",
     "S43_OnePieceZoroCup_ZB"
   ],
-  "message": "Osirionで439アカウントIDを追跡。今回の公式規則による自動承認0件、追加確認待ち1件、名義照合保留0件。"
+  "message": "管理者確認で1件を掲載、既存重複0件を解消。未確認賞金なし。",
+  "manualReviewResolvedAt": "2026-11-06T08:46:28.308Z",
+  "manualReviewProcessed": 1
 }

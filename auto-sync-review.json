@@ -2,36 +2,6 @@
   "version": 1,
   "status": "review",
   "checkedAt": "2026-11-06T07:36:30.706Z",
-  "proposals": [
-    {
-      "id": "auto-s43-21408f1d31bc",
-      "date": "2026-11-06",
-      "region": "NAC",
-      "player": "arim / まぐろいち / chacha",
-      "playerRaw": "FCT arimyfn / ptt まぐろいちタニマのタニー / twitter chachafn",
-      "event": "Fortnite Performance Evaluation",
-      "round": "Event 1 · Round 1 / 参加確認",
-      "rank": 141,
-      "points": 175,
-      "kills": 11,
-      "vrs": 0,
-      "prize": null,
-      "kind": "参加確認",
-      "matches": 8,
-      "seasonId": "S43",
-      "chapter": 7,
-      "season": 5,
-      "tournamentId": "ch7s5-performance-evaluation-trios",
-      "source": "https://www.fortnite.com/competitive/events/S43_PerformanceEvaluationTrios/?region=NAC&round=S43_PerformanceEvaluation_Event1Round1_NAC",
-      "verified": true,
-      "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
-      "reviewOnly": true,
-      "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
-      "players": [
-        "arim",
-        "まぐろいち",
-        "chacha"
-      ]
-    }
-  ]
+  "proposals": [],
+  "manualReviewedAt": "2026-11-06T08:46:28.308Z"
 }

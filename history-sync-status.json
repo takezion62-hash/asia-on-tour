@@ -11,7 +11,7 @@
   "provider": "osirion",
   "linkedPlayers": 439,
   "trackedWindows": 2775,
-  "found": 24,
+  "found": 0,
   "skipped": 10,
   "imported": 1,
   "scannedPages": 80,
@@ -20,12 +20,12 @@
   "alreadyRegistered": 589,
   "autoApprovedTotal": 384,
   "invalidCachedCandidates": 1,
-  "manualReviewCandidates": 24,
+  "manualReviewCandidates": 0,
   "timeLimitReached": false,
   "retryWindows": 2,
   "transientFailures": 0,
   "reviewOnlyWindows": 1263,
-  "reviewOnlyCandidates": 6,
+  "reviewOnlyCandidates": 0,
   "unmappedEvents": 243,
   "unmappedEventIds": [
     "S30_ConsoleCashCups",
@@ -41,5 +41,7 @@
     "S30_Reload",
     "S30_ReloadZB"
   ],
-  "message": "Osirionで439アカウントIDを追跡。今回の公式規則による自動承認1件、追加確認待ち24件、名義照合保留0件。"
+  "message": "管理者確認で22件を掲載、既存重複2件を解消。未確認賞金なし。",
+  "manualReviewResolvedAt": "2026-11-06T08:46:28.308Z",
+  "manualReviewProcessed": 24
 }
