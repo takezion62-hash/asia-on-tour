@@ -1,5 +1,21 @@
 # ASIA ON TOUR
 
+## データ検証センター v1.1：管理者による安全な掲載申請（2026-11-06）
+
+公開閲覧者に編集・承認権限を渡さず、GitHub Actions上で管理者が候補の承認を申請できるフローを追加しました。公開ページの「確認待ち」タブで対象IDを選択し、コピーしてから、Actionsの **AOT reviewed candidate publication request** を実行します。
+
+1. GitHub Actionsの「Run workflow」で `candidate_ids` に1～20件の候補IDを入力。 `publication_policy` は「attendance-only」（参加確認のみ）または「verified-rule」（既存公式規則で検証可能な予選突破・決勝0VR）。 `confirmation` を明示的にCONFIRMにします。
+2. 既定の `preview_only: true` では候補とスキャン済み順位表・大会マスター・本人確認・公式開催枠・既存の重複を照合し、**結果JSONは更新せず**承認プレビューをActionsのartifactに14日保存します。
+3. 照合内容を確認したら `preview_only: false` で再実行。最新のmainから候補を再照合し、JSON検証と承認テストを通過した場合だけ、`reviewed-results/<run-id>` ブランチへコミットし、Pull Requestを提案します。**mainへ直接Pushしません**。
+4. PRで戦績差分・対象ID・個人賞金・出典・GitHub Actionsのテストを確認し、管理者がマージした後に正式掲載となります。マージ前にmainが更新されていれば、競合や重複を再確認します。GitHub ActionsからのPR作成が組織設定で禁止されている場合はブランチ作成までで失敗し、管理者がそのブランチから手動PRを開く必要があります。
+5. 掲載された候補は両方の確認待ちJSONから該当IDだけ除き、`approval-history.json` に出典・承認ポリシー・日時を記録、`updates.json` に履歴を追加します。残りの候補・正式記録・賞金・選手名・大会マスターは維持します。
+
+安全条件：元の候補と順位表スキャンの重要項目が完全一致、公式EpicイベントID・ラウンド・地域・JST開催日と大会カタログが一致、参加者全員が確認済み名鑑と一致、数字が有効、既存に同一IDや同一選手・開催枠がないことを必須とします。ラウンドの識別が不足する同日・同大会・同一選手の記録は**推測で追加しません**。公式順位表の収集途中でも、順位表に記録済みの個別候補を確認できる場合に限り、「参加確認」だけを扱えます。
+
+**未確認の賞金・スキン報酬・予選突破は承認操作だけでは確定できません**。現金賞金が正の記録は今回の申請機能では自動処理を禁止し、公式ルール・受賞資格・個人配分まで人間が確認する既存の管理者更新フローに残します。承認種別を変更してもこの制限を迂回できません。
+
+実装：`scripts/manual-approval-core.cjs`、`scripts/manual-approval.cjs`、`.github/workflows/reviewed-candidate-publication.yml`、`approval-history.json`、データ検証センターのID選択UI。検証：`node --test tests/manual-approval.test.cjs`。この機能は公開GitHub PagesからAPI書き込みを行いません。
+
 ## データ検証センター（2026-11-06）
 
 公開ページの「データ検証センター」（verification.html）から、直近のAUTO SYNCと過去大会の確認候補、掲載済み戦績の重複・大会枠分裂疑い、不正な基本数値、未登録大会ID、月別・地域別の掲載状況、サイト更新と過去候補の処理履歴を参照できます。
