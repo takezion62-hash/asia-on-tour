@@ -313,8 +313,10 @@ test('entry, import, and delete controls are absent; only browse inputs remain',
 
 test('startup renders published data when browser storage is inaccessible', () => {
   const app = boot();
+  // Archive cards are intentionally rendered on first visit, not at home startup.
   assert.ok(records.length > 0);
   assert.equal(Number(app.get('stat-results').textContent), records.length);
+  app.navigate('results');
   assertRows(app, newest(records));
   assert.equal(app.storageAccesses(), 0);
   assert.doesNotMatch(app.get('result-table').innerHTML, /data-delete|自分で追加/);
@@ -324,6 +326,7 @@ test('startup renders published data when browser storage is inaccessible', () =
 
 test('the compact archive preserves every published record, player and verified individual payout', () => {
   const app = boot();
+  app.navigate('results');
   // The tournament catalog adds metadata beside the published records. This
   // baseline covers every record field, including identity, source and shares.
   assert.ok(records.length > 0, 'Published records are present');
@@ -406,6 +409,7 @@ test('detail text is escaped and non-web source or profile links are not rendere
     profiles: [{ name: unsafe, url }, { name: 'unsafe', url: 'javascript:alert(2)' }]
   };
   const app = boot(fixtureScript([fixture]));
+  app.navigate('results');
   const [{ content }] = renderedArticles(app);
   for (const name of ['player', 'event']) assert.equal(field(content, name), unsafe);
   for (const name of ['playerRaw', 'round', 'note']) assert.equal(detail(content, name), unsafe);
@@ -434,6 +438,7 @@ test('unknown duo shares, unverified prizes, zero and unset prizes remain distin
     { ...base, id: 'unset-cash', prize: null }
   ];
   const app = boot(fixtureScript(fixtures));
+  app.navigate('results');
   assert.equal(app.get('home-earnings-sum').textContent, '$0');
   assert.equal(app.get('player-earnings-sum').textContent, '$0');
   const rows = new Map(renderedArticles(app).map(article => [article.id, article.content]));
@@ -680,6 +685,8 @@ test('canonical identities keep p1ng separate from RGN p1ng and retain confirmed
 
 test('directory, earnings and archive entry links use canonical shareable profile URLs', () => {
   const app = boot();
+  app.navigate('players');
+  app.navigate('results');
   const directory = profileLinks(app.get('all-players').innerHTML);
   assert.ok(directory.length >= publishedPlayers.length);
   for (const name of publishedPlayers) assert.ok(directory.some(link => link.name === name), name);
@@ -831,6 +838,7 @@ function activePage(app) {
 
 test('all published archive records and every player history expose the same five independent tournament facets', () => {
   const app = boot();
+  app.navigate('results');
   const archive = new Map();
   for (const { id, content } of renderedArticles(app)) {
     const tags = tournamentTags(content);
@@ -867,6 +875,7 @@ test('Override merges into skin and two Icon Cups are tagged by both series with
   const icons=records.filter(e=>tournamentFor(e,data)?.series==='icon-cup').length;
   assert.equal(app.get('tournament-count').textContent,`${tournamentCards(app).length}大会 · ${icons}戦績`);
   const row=records.find(e=>e.event===dual[0]),view=boot();
+  view.navigate('results');
   assert.deepEqual(tournamentTags(renderedArticles(view).find(e=>e.id===row.id).content).filter(t=>t.axis==='series').map(t=>t.value).sort(),['icon-cup','skin-cup']);
 });
 
@@ -961,6 +970,7 @@ test('unknown tournament metadata stays unconfirmed instead of being guessed fro
   const fixture = { ...sampleRecord, id: 'unconfirmed-format', event: 'Mystery Reload ZB Duo Cup',
     round: '未確認', source: 'https://example.com/no-event-metadata' };
   const app = boot(fixtureScript([fixture]));
+  app.navigate('results');
   const [{ content }] = renderedArticles(app);
   const tags = tournamentTags(content);
   assert.deepEqual(tags.map(tag => tag.axis).sort(), tournamentAxes.slice().sort());
@@ -969,6 +979,7 @@ test('unknown tournament metadata stays unconfirmed instead of being guessed fro
 
 test('all existing tournament assignments match the audited season-specific taxonomy', () => {
   const app = boot();
+  app.navigate('results');
   const counts = Object.fromEntries(tournamentAxes.map(axis => [axis, {}]));
   for (const { id, content } of renderedArticles(app)) {
     const record = records.find(record => record.id === id);
@@ -1120,6 +1131,7 @@ test('a future season with the same event name keeps a separate tournament ident
     source: sampleRecord.source.replaceAll('S42', 'S44') };
   const source = fixtureScript([current, future]);
   const app = boot(source, { search: '?season=all' });
+  app.navigate('results');
   const rows = new Map(renderedArticles(app).map(record => [record.id, record.content]));
   const futureTags = tournamentTags(rows.get(future.id));
   assert.ok(futureTags.every(tag => tag.value === 'unknown'), 'A new season must not inherit unverified rules from S42');
@@ -1183,6 +1195,7 @@ test('copied event slugs on untrusted hosts and conflicting source seasons never
   for (const [index, source] of sources.entries()) {
     const fixture = { ...sampleRecord, id: `untrusted-identity-${index}`, source };
     const app = boot(fixtureScript([fixture]));
+    app.navigate('results');
     const [{ content }] = renderedArticles(app);
     const tags = tournamentTags(content);
     assert.equal(tags.length, 5, source);
@@ -1229,6 +1242,7 @@ test('registered past seasons and unknown records partition dashboards, director
   const source = fixtureScript(fixtures).replace('const tournamentCatalog=[',
     'const tournamentCatalog=[{"id":"empty-season-catalog","chapter":7,"season":2,"seasonId":"S40"},');
   const app = boot(source, { search: '?season=S42' });
+  app.navigate('results');
   assert.deepEqual(seasonChoices(app), [
     { id: 'all', label: '全期間' }, { id: 'S42', label: 'CH7 S4' },
     { id: 'S41', label: 'CH7 S3' }, { id: 'unknown', label: '未確認' }
@@ -1236,17 +1250,20 @@ test('registered past seasons and unknown records partition dashboards, director
   assertRows(app, newest(fixtures.slice(0, 2)));
   assert.equal(app.get('stat-players').textContent, 2);
   assert.equal(app.get('home-earnings-sum').textContent, '$150');
+  app.navigate('players');
   assert.ok(!profileLinks(app.get('all-players').innerHTML).some(p => p.name === 'Unmapped'));
   app.profile('Unmapped');
   assert.equal(profileCount(app, 'events'), 0);
   assert.equal(profileField(app, 'total'), '$0');
   assert.equal(profileField(app, 'lifetime-total'), '$25');
   chooseSeason(app, 'S41');
+  app.navigate('results');
   assertRows(app, newest(fixtures.slice(2, 5)));
   assert.equal(app.get('stat-results').textContent, 3);
   assert.equal(app.get('stat-players').textContent, 3);
   assert.equal(app.get('home-earnings-sum').textContent, '$400');
   assert.doesNotMatch(app.get('home-showcase-players').innerHTML, /確認済み個人賞金[^]*ME OVERSEAS SPOTLIGHT/);
+  app.navigate('players');
   assert.deepEqual(profileLinks(app.get('all-players').innerHTML).map(p => p.name).sort(), ['RGN p1ng', 'miru', 'p1ng'].sort());
   assert.match(plain(app.get('player-earnings-leaders').innerHTML), /p1ng\$200/);
   assert.doesNotMatch(plain(app.get('player-earnings-leaders').innerHTML), /RGN p1ng/);
@@ -1254,6 +1271,7 @@ test('registered past seasons and unknown records partition dashboards, director
   assert.equal(app.get('stat-results').textContent, 6);
   assert.equal(app.get('home-earnings-sum').textContent, '$575');
   chooseSeason(app, 'unknown');
+  app.navigate('results');
   assertRows(app, [fixtures[5]]);
   assert.equal(app.get('home-earnings-sum').textContent, '$25');
   assert.match(app.get('season-scope').textContent, /未確認/);
@@ -1360,6 +1378,7 @@ test('missing or conflicting season evidence is unconfirmed and unsupported URL 
     { ...base, id: 'conflicting-season', source: mixed.href }
   ];
   const app = boot(fixtureScript(fixtures), { search: '?season=unknown' });
+  app.navigate('results');
   assert.deepEqual(renderedArticles(app).map(e => e.id).sort(), fixtures.slice(1).map(e => e.id).sort());
   assert.ok(renderedArticles(app).every(e => e.content.includes('data-record-season="unknown"')));
   assert.ok(!seasonChoices(app).some(s => s.id === 'S44'));
