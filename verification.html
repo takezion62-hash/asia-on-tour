@@ -31,6 +31,13 @@
 <div class="meta"><span id="audit-last-check">最終チェック：読み込み中…</span><span id="audit-data-date">集計対象：全期間</span></div>
 <div class="actions"><button type="button" id="audit-refresh" class="btn">↻ 最新データで再検証</button><a class="btn" href="./index.html#updates">更新履歴に戻る</a><a class="btn" href="https://github.com/takezion62-hash/asia-on-tour/actions" target="_blank" rel="noopener noreferrer">管理者：GitHub Actions ↗</a></div>
 </header>
+<section class="panel approval-guide" aria-labelledby="review-publish-heading">
+<h2 id="review-publish-heading">🛡️ 管理者の掲載承認（REVIEW &amp; PUBLISH）</h2>
+<p>「確認待ち」タブで候補IDを選び、IDをコピー → GitHub Actionsで本人・大会の確認を宣言 → 変更差分のPull Requestを作成 → テスト合格後に管理者がマージします。</p>
+<p><strong>attendance-only：</strong>参加した事実と順位表だけを確認。賞金・突破・スキンは未認定。 <strong>verified-rule：</strong>既存の公式規則で厳密に確定できる予選突破や決勝0VRのみ。</p>
+<div class="actions"><a class="btn" target="_blank" rel="noopener noreferrer" href="https://github.com/takezion62-hash/asia-on-tour/actions/workflows/reviewed-candidate-publication.yml">管理者：承認申請を開く ↗</a><button type="button" class="btn" id="audit-copy-ids" disabled>選択したIDをコピー</button><span id="audit-selected-count" class="note" aria-live="polite">選択中 0件</span></div>
+<p class="note">初期設定はプレビューのみ。GitHubの認証なしで公開画面から直接登録することはできません。候補が0件なら新規の掲載申請は不要です。</p>
+</section>
 <div id="audit-loading" class="notice" role="status" aria-live="polite">データを読み込んで検証中…</div>
 <section class="metrics" aria-label="検証サマリー">
 <div class="metric"><small>確認待ち候補</small><strong id="metric-queue">—</strong><p>現在の候補ファイル内</p></div>
