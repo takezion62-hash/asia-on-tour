@@ -26,11 +26,16 @@ test('現在の3ファイルは構文・構造・参照・賞金配分の検証�
 });
 
 test('S43 Solo Reload Test Cup ME/NAW retains all verified non-cash results and 0.25 AOT PR weight',()=>{
-  const records=current.results.filter(r=>r.event==='Solo Reload Test Cup'&&r.date==='2026-11-02');
+  const sameEvent=current.results.filter(r=>r.event==='Solo Reload Test Cup'&&r.date==='2026-11-02');
+  // Score-bearing Test Cup results and participation-only confirmations must remain distinct.
+  const records=sameEvent.filter(r=>r.kind==='Test Cup');
+  const confirmations=sameEvent.filter(r=>r.kind==='参加確認');
   // Historical registrations grow, so keep the original six as a floor.
   assert.ok(records.length>=6);
   assert.ok(records.filter(r=>r.region==='ME').length>=2);
   assert.ok(records.filter(r=>r.region==='NAW').length>=4);
+  assert.ok(confirmations.length>=2);
+  assert.equal(records.length+confirmations.length,sameEvent.length);
   const t=current.tournaments.catalog.find(t=>t.id==='ch7s5-solo-reload-test-cup');
   assert.ok(t);assert.equal(t.series,'test-cup');assert.equal(t.subtype,'solo-reload-test-cup');
   assert.equal(t.mode,'reload');assert.equal(t.seasonId,'S43');
@@ -43,6 +48,11 @@ test('S43 Solo Reload Test Cup ME/NAW retains all verified non-cash results and 
     assert.equal(tournamentFor(row,current)?.id,t.id);
     assert.equal(AotPR.eventMultiplier(row,t),0.25);
     assert.equal(personalCents(row),0);
+  }
+  for(const row of confirmations){
+    assert.equal(row.prize,null);
+    assert.equal(personalCents(row),0);
+    assert.equal(AotPR.eventMultiplier(row,t),null,'Participation-only records must not earn Test Cup PR');
   }
   const result=AotPR.calculate(records,{names:r=>[r.player],classify:r=>tournamentFor(r,current)});
   assert.equal(result.recordCount,records.length);
