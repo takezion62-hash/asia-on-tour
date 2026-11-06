@@ -107,12 +107,12 @@ test('未掲載の月は月別推移に0キルの行として挿入しない',()
 });
 
 test('攻撃とVRの得意地域を別々に集計し、全期間を無条件に比較しない',()=>{
- const regions=['ME','EU'].flatMap(region=>Array.from({length:3},(_,i)=>({
+ const regions=['ME','EU'].map(region=>({
    region,records:3,windows:3,killMatches:15,vrMatches:15,
    kpm:region==='ME'?4:1,
    vrRate:region==='ME'?0.01:0.30,
    level:'provisional'
- })));
+ }));
  const medals=style.regionalLeaders(regions,opts);
  assert.equal(medals.attack,'ME');
  assert.equal(medals.victory,'EU');
