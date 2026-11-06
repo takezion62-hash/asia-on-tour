@@ -144,7 +144,7 @@ function build(db,options={}){
  const ledger={...db.ledger,reviewedAt:stamp,entries:db.ledger.entries.concat(
    audit.map(x=>({id:x.id,decision:'published',recordId:x.recordId,rule:x.rule,
      evidence:x.evidence+'; fullScanComplete='+x.fullScanComplete,
-     approvedAt:stamp,source:x.source}))};
+     approvedAt:stamp,source:x.source})))};
  const updateId='history-reviewed-27-20261106';
  assert(!db.updates.entries.some(x=>x.id===updateId),'review update already published');
  const update={id:updateId,date:stamp.slice(0,10),type:'records',
