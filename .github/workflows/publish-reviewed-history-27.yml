@@ -1,0 +1,55 @@
+name: AOT publish reviewed history 27 candidates
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/publish-reviewed-history-27.yml"
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: aot-provider-history-main
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout latest main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+          persist-credentials: true
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - name: Install locked dependencies
+        run: npm ci --ignore-scripts
+      - name: Verify 27 saved candidates, official rules, identities, windows and cash
+        run: node scripts/manual-review-history-27-run.cjs
+      - name: Validate site data, money and reference integrity
+        run: npm run validate
+      - name: Test publication policies and source consistency
+        run: |
+          node --test tests/manual-review-history-27.test.cjs tests/manual-approval.test.cjs tests/approval-history.test.cjs tests/verified-history-approval.test.cjs
+      - name: Commit complete validated publication atomically
+        run: |
+          set -euo pipefail
+          git add results.json history-sync-review.json history-sync-status.json history-sync-reviewed.json updates.json data/manual-approvals/20261106-history-27-audit.json
+          if git diff --cached --quiet; then
+            echo "Already published. No changes."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "data: publish 27 verified historical results including $200 ME duo prize"
+          git fetch origin main
+          if [ "$(git rev-parse HEAD^)" != "$(git rev-parse origin/main)" ]; then
+            echo "::error::main changed after review started; refusing stale publication"
+            exit 1
+          fi
+          git push origin HEAD:main
+          echo "All 27 records have been published to main."
