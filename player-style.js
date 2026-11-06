@@ -121,6 +121,65 @@
         level:adequacy(rows).level,rows};
     });
   }
+  // Regional sub-specialties are descriptive efficiency comparisons, not skill
+  // or tactical-role claims. Require separate observed denominators and 2 peers.
+  // One recorded VR is not a guarantee that the region is objectively easier.
+  function regionalLeaders(regions,filters={}){
+    const comparable=filters.team!=='all'&&filters.mode!=='all'&&filters.series!=='all'&&
+      filters.season!=='all';
+    if(!comparable)return {
+      attack:null,victory:null,attackReason:'シーズン・人数・形式・大会シリーズを統一してね',
+      victoryReason:'シーズン・人数・形式・大会シリーズを統一してね',attackCandidates:0,victoryCandidates:0
+    };
+    function decide(metric,denominator){
+      const candidates=regions.filter(r=>r.windows>=3&&r[denominator]>=15&&Number.isFinite(r[metric]));
+      const name=metric==='kpm'?'キル効率':'VR率';
+      if(candidates.length<2)return {region:null,reason:name+'の比較対象は2地域以上・各3枠15試合以上が必要',candidates:candidates.length};
+      const ranked=candidates.slice().sort((a,b)=>b[metric]-a[metric]||REGIONS.indexOf(a.region)-REGIONS.indexOf(b.region));
+      const top=ranked[0][metric],runner=ranked[1][metric];
+      if(top<=0)return {region:null,reason:name+'が全候補地域で0のため優位は未判定',candidates:candidates.length};
+      if((top-runner)/top<.10)return {region:null,reason:name+'の上位2地域の差が10%未満',candidates:candidates.length};
+      return {region:ranked[0].region,reason:'掲載済みの実測'+name+'で差が10%以上',candidates:candidates.length,
+        value:top,runnerUp:ranked[1].region};
+    }
+    const attack=decide('kpm','killMatches'),victory=decide('vrRate','vrMatches');
+    return {attack:attack.region,victory:victory.region,
+      attackReason:attack.reason,victoryReason:victory.reason,
+      attackCandidates:attack.candidates,victoryCandidates:victory.candidates};
+  }
+  function quality(stats,overlapping=[],conflicts=[]){
+    const total=stats.records;
+    return {recordCount:total,killCoverage:total?stats.killRecords/total:null,
+      vrCoverage:total?stats.vrRecords/total:null,
+      missingMatches:stats.unknownMatchRecords,
+      missingKillRecords:Math.max(0,total-stats.killRecords),
+      missingVrRecords:Math.max(0,total-stats.vrRecords),
+      overlappingIds:[...new Set(overlapping)],conflictingIds:[...new Set(conflicts)]};
+  }
+  function momentum(rows){
+    const ordered=(Array.isArray(rows)?rows:[]).slice()
+      .sort((a,b)=>String(b.date).localeCompare(String(a.date))||String(b.id).localeCompare(String(a.id)));
+    if(ordered.length<10)return {ready:false,reason:'同条件の10開催枠以上の実測が必要',recent:[],previous:[]};
+    const recent=ordered.slice(0,5),previous=ordered.slice(5,10);
+    const now=summarize(recent),was=summarize(previous);
+    if(now.killMatches<15||now.vrMatches<15||was.killMatches<15||was.vrMatches<15)
+      return {ready:false,reason:'直近5枠と前5枠それぞれに実測15試合以上が必要',recent:recent.map(x=>x.id),previous:previous.map(x=>x.id)};
+    return {ready:true,reason:'直近5開催枠と、その前の5開催枠の実測値の差',
+      recent:recent.map(x=>x.id),previous:previous.map(x=>x.id),
+      current:now,prior:was,
+      deltaKpm:now.kpm-was.kpm,deltaVrRate:now.vrRate-was.vrRate};
+  }
+  function evidence(rows,max=15){
+    return (Array.isArray(rows)?rows:[]).slice().sort((a,b)=>String(b.date).localeCompare(String(a.date))||
+      String(b.id).localeCompare(String(a.id))).slice(0,max).map(r=>({
+        id:r.id,date:r.date,region:r.region,event:r.event,round:r.round,
+        matches:good(r.matches)&&r.matches>0?r.matches:null,
+        kills:good(r.kills)?r.kills:null,
+        vrs:good(r.vrs)?r.vrs:null,
+        rank:good(r.rank)?r.rank:null,
+        source:typeof r.source==='string'?r.source:''
+    }));
+  }
   function scoreRegional(a,maxKill,maxVr){
     if(a.kpm===null||a.vrRate===null)return null;
     const kill=maxKill>0?a.kpm/maxKill:1;
@@ -130,8 +189,8 @@
   function regionAffinity(regions,filters={}){
     // Never compare different official series or modes through unweighted raw scores:
     // when "all" is requested the UI must say only descriptive stats are available.
-    if(filters.series==='all'||filters.mode==='all'||filters.team==='all')
-      return {region:null,reason:'大会シリーズ・形式・チーム人数を揃えると判定できます',adaptation:null,qualified:0};
+    if(filters.series==='all'||filters.mode==='all'||filters.team==='all'||filters.season==='all')
+      return {region:null,reason:'シーズン・大会シリーズ・形式・チーム人数を揃えると判定できます',adaptation:null,qualified:0};
     const eligible=regions.filter(r=>r.level!=='insufficient'&&r.kpm!=null&&r.vrRate!=null);
     if(eligible.length<2)return {region:null,reason:'比較可能な地域が2つ以上必要（各3開催枠・15試合以上）',adaptation:null,qualified:eligible.length};
     const maxKill=Math.max(...eligible.map(r=>r.kpm)),maxVr=Math.max(...eligible.map(r=>r.vrRate));
@@ -165,6 +224,7 @@
   function classifyStyle(summary,rows,allRows,filters,helpers){
     const adequate=adequacy(rows);
     if(adequate.level!=='qualified')return {key:'unrated',label:STYLES.unrated,reason:'5開催枠・30試合以上の実測データが必要',confidence:adequate.level};
+    if(filters.season==='all')return {key:'unrated',label:STYLES.unrated,reason:'相対比較では同じシーズンを指定してね',confidence:'incomparable'};
     if(filters.mode==='all'||filters.series==='all'||filters.team==='all')
       return {key:'unrated',label:STYLES.unrated,reason:'ゲーム形式・大会シリーズ・チーム人数を指定してください',confidence:'incomparable'};
     const peers=cohort(allRows,filters,helpers);
@@ -173,7 +233,8 @@
     const victory=percentile(summary.vrRate,peers.map(r=>r.vrRate));
     let key='balanced';
     if(attack-victory>=15&&attack>=60)key='attack';
-    if(victory-attack>=15&&victory>=60)key='victory';
+    else if(victory-attack>=15&&victory>=60)key='victory';
+    else if(attack<50||victory<50)return {key:'unrated',label:STYLES.unrated,reason:'比較対象内で攻撃・勝利の両面が高いとは言えず、タイプを保留',confidence:'incomparable',attack,victory,peers:peers.length};
     const breadth=filters.region==='all'?percentile(summary.regionCount,peers.map(r=>r.regionCount)):null;
     return {key,label:STYLES[key],attack,victory,breadth,peers:peers.length,
       reason:'同じシーズン・地域・チーム・ゲーム形式・大会シリーズの実測効率の相対位置'};
@@ -183,10 +244,11 @@
     const selection=select(records,{...f,region:'all'},helpers);
     const ownAll=forPlayer(selection.rows,name);
     const allRegionMetrics=regionStats(selection.rows,name);
-    const chosen=forPlayer(select(records,f,helpers).rows,name);
+    const chosen=forPlayer(f.region==='all'?selection.rows:selection.rows.filter(r=>r.region===f.region),name);
     const stats=summarize(chosen.rows);
     const affinity=regionAffinity(allRegionMetrics,f);
     const style=classifyStyle(stats,chosen.rows,records,f,helpers);
+    const regionalSpecialties=regionalLeaders(allRegionMetrics,f);
     const monthly=new Map();
     for(const r of chosen.rows){
       const month=String(r.date||'').slice(0,7);
@@ -195,10 +257,12 @@
       monthly.get(month).push(r);
     }
     const trend=[...monthly].sort(([a],[b])=>a.localeCompare(b)).map(([month,rows])=>({month,...summarize(rows)}));
+    const overlapping=[...new Set([...ownAll.overlapping,...chosen.overlapping])];
     return {player:name,filters:f,stats,style,regions:allRegionMetrics,affinity,trend,
-      available:ownAll.rows.length,overlapping:[...new Set([...ownAll.overlapping,...chosen.overlapping])],
-      conflicts:selection.conflicts,quality:adequacy(chosen.rows)};
+      specialties:regionalSpecialties,momentum:momentum(chosen.rows),evidence:evidence(chosen.rows),
+      available:ownAll.rows.length,overlapping,conflicts:selection.conflicts,
+      quality:adequacy(chosen.rows),coverage:quality(stats,overlapping,selection.conflicts)};
   }
   return Object.freeze({VERSION:1,REGIONS,TEAMS,FILTER_DEFAULTS,STYLES,dedupe,windowKey,select,forPlayer,
-    summarize,slotsCount,adequacy,regionAffinity,percentile,cohort,analyze});
+    summarize,slotsCount,adequacy,regionAffinity,regionalLeaders,quality,momentum,evidence,percentile,cohort,analyze});
 });
