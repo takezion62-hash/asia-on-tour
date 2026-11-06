@@ -107,13 +107,17 @@
     }
     return out.sort((a,b)=>text(b.date).localeCompare(text(a.date))||text(a.player).localeCompare(text(b.player)));
   }
-  function coverage(records,queue){
+  function coverage(records,queue,calendarMonths=[]){
     const grouped=new Map();
     const ensure=(month,region)=>{
       const key=month+'|'+region;
       if(!grouped.has(key))grouped.set(key,{month,region,published:0,pending:0});
       return grouped.get(key);
     };
+    for(const entry of (Array.isArray(calendarMonths)?calendarMonths:[])){
+      const month=typeof entry==='string'?entry:text(entry?.month);
+      if(/^\d{4}-\d{2}$/.test(month))for(const region of REGIONS)ensure(month,region);
+    }
     for(const r of (Array.isArray(records)?records:[])){
       const date=text(r?.date),region=text(r?.region);
       if(/^\d{4}-\d{2}-\d{2}$/.test(date)&&REGIONS.includes(region))ensure(date.slice(0,7),region).published++;
