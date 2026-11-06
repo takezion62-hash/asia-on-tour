@@ -1990,6 +1990,14 @@
       if(rankingRegion&&currentView.page==='players'){updateRankingFilter('region',rankingRegion.dataset.rankingRegion);return}
       if(e.target.closest('[data-ranking-more]')&&currentView.page==='players'){rankingLimit+=30;renderRanking();return}
       if(e.target.closest('[data-registrations-more]')&&currentView.page==='updates'){registrationLimit+=20;renderUpdates();return}
+      const styleSeasonButton=e.target.closest('[data-style-season-pick]');
+      if(styleSeasonButton&&currentView.page==='profile'){
+        e.preventDefault();const season=styleSeasonButton.dataset.styleSeasonPick;
+        if(seasonOptions().some(option=>option.id===season)){
+          styleState.season=season;renderProfileStyle(currentView.name);
+        }
+        return;
+      }
       if(e.target.closest('[data-style-jump]')&&currentView.page==='profile'){e.preventDefault();$('#profile-style')?.scrollIntoView({behavior:'smooth',block:'start'});return}
       if(e.target.closest('[data-style-growth-jump]')&&currentView.page==='profile'){e.preventDefault();$('#profile-growth')?.scrollIntoView({behavior:'smooth',block:'start'});return}
       if(e.target.closest('[data-journey-jump]')){e.preventDefault();$('#journey-title')?.focus?.({preventScroll:true});$('#profile-journey')?.scrollIntoView?.({behavior:'instant',block:'start'});return}
