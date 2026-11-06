@@ -132,7 +132,7 @@
    return '<section class="profile-style" id="profile-style" aria-labelledby="profile-style-title">'
      +'<div class="style-head"><div><span class="style-kicker">PLAYER STYLE / REGION PERFORMANCE</span><h2 id="profile-style-title">プレイスタイル<span>分析</span></h2>'
      +'<p>海外大会の実測結果から攻撃・勝利・得意地域を比較。戦術的なIGL/フラッガー役は推測しないょ</p></div><span class="style-icon" aria-hidden="true">🎯</span></div>'
-     +filterMarkup+summary+qualityHtml+style+affinity+specialtyHtml+observed+adapt
+     +filterMarkup+(f.season==='all'&&report.recommendedSeason?'<div class="style-season-help"><span>🌱 シーズンをそろえると地域別の得意傾向をより正確に比較できるょ</span><button type="button" data-style-season-pick="'+esc(report.recommendedSeason)+'">記録が充実した '+esc(report.recommendedSeason)+' に絞る ↗</button></div>':'')+summary+qualityHtml+style+affinity+specialtyHtml+observed+adapt
      +'<h3 class="style-region-title">🌍 地域別パフォーマンス</h3>'+regionStats
      +'<p class="style-region-note">地域の累計キル数では判定しない。得意地域候補は同シーズン・同形式・同シリーズで2地域以上の15試合・3開催枠を満たし、総合差が10点以上の場合のみ表示（キル効率70%＋VR率30%）。大会の難易度差は補正していないょ</p>'
      +'<div class="style-extra">'+percentiles+radar(report.style)+'</div>'
@@ -150,14 +150,34 @@
      return '<article class="style-compare-item" data-compare-style-player="'+esc(report.player)+'"><h3>'+esc(report.player)+'</h3>'
        +'<dl><dt>キル / 試合</dt><dd>'+(s.kpm==null?'—':num(s.kpm,2))+'</dd>'
        +'<dt>VR / 試合</dt><dd>'+pct(s.vrRate)+'</dd>'
-       +'<dt>対象試合（確認済み）</dt><dd>'+count(s.matchTotal)+'</dd>'
-       +'<dt>得意地域候補</dt><dd>'+esc(best)+'</dd></dl>'
+       +'<dt>キル集計の試合数</dt><dd>'+count(s.killMatches)+'</dd>'
+       +'<dt>VR集計の試合数</dt><dd>'+count(s.vrMatches)+'</dd>'
+       +'<dt>総合得意地域</dt><dd>'+esc(best)+'</dd>'
+       +'<dt>攻撃効率の地域</dt><dd>'+esc(report.specialties?.attack||'未判定')+'</dd>'
+       +'<dt>勝ち切り効率の地域</dt><dd>'+esc(report.specialties?.victory||'未判定')+'</dd></dl>'
        +'<span class="style-tag'+(report.style.key==='unrated'?' is-low':'')+'">'+esc(report.style.label)+'</span>'
        +'<p class="style-small">'+esc(report.affinity.reason)+'</p></article>';
    }).join('');
+   const regionMatrix='<div class="style-evidence-scroll style-region-matrix" tabindex="0" aria-label="同条件・地域別の攻撃効率と勝率の比較表">'
+     +'<table class="style-matrix"><thead><tr><th scope="col">地域</th>'
+     +selected.map(r=>'<th scope="col">'+esc(r.player)+'</th>').join('')+'</tr></thead><tbody>'
+     +['ME','EU','NAC','NAW','OCE','BR'].map(region=>{
+       return '<tr data-style-compare-region="'+region+'"><th scope="row">'+region+'</th>'
+        +selected.map(player=>{
+          const metric=player.regions.find(x=>x.region===region);
+          const hasData=metric?.records>0;
+          const checked=metric?.killMatches||0,winChecked=metric?.vrMatches||0;
+          return '<td data-style-matrix-player="'+esc(player.player)+'">'
+            +(hasData?'<strong>K/試合 '+num(metric.kpm,2)+'</strong><small>VR率 '+pct(metric.vrRate)
+              +' · '+count(checked)+'試合（K） / '+count(winChecked)+'試合（VR）</small>'
+              +(metric.level==='insufficient'?'<small>※データ少</small>':'')
+              :'<small>掲載済み戦績なし</small>')+'</td>';
+        }).join('')+'</tr>';
+     }).join('')+'</tbody></table></div>';
    return '<section class="compare-style" aria-labelledby="compare-style-title"><div class="style-head"><div><span class="style-kicker">PLAYSTYLE COMPARISON</span><h2 id="compare-style-title">プレイスタイル<span>比較</span></h2><p>選手比較の期間・地域・形式・大会シリーズと同期。チーム形式は別途そろえるょ</p></div></div>'
      +'<div class="style-filters"><label>チーム形式<select id="compare-style-team" aria-label="プレイスタイル比較 チーム形式">'+opts+'</select></label></div>'
      +'<div class="style-compare-row">'+cards+'</div>'
+     +'<h3 class="style-region-title">🌍 同条件の地域別実測比較</h3>'+regionMatrix
      +'<p class="style-footnote">試合数がわからない記録は率に含めません。チーム戦はチームキル・チームVR。得意地域候補は厳密に同じ条件で比較可能な地域が複数ある場合にのみ表示します。</p></section>';
  }
  return Object.freeze({profile,comparison,radar});
