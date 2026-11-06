@@ -8,6 +8,9 @@ test('ナビゲーションから専用ページへ移動し6つの確認タブ�
  await expect(page.locator('h1')).toContainText('データ検証センター');
  await expect(page.locator('.side nav a[aria-current] span')).toBeVisible();
  await expect(page.locator('#metric-queue')).not.toHaveText('—',{timeout:20000});
+ await expect(page.locator('.approval-guide')).toBeVisible();
+ await expect(page.locator('.approval-guide a[href*="reviewed-candidate-publication.yml"]')).toBeVisible();
+ await expect(page.locator('#audit-copy-ids')).toBeDisabled();
  await page.locator('#tab-duplicates').click();
  await expect(page.locator('#audit-summary')).toContainText('重複・大会枠');
  await page.locator('#tab-coverage').click();
