@@ -83,6 +83,7 @@
      +'<div class="style-quality-bar" aria-hidden="true"><i style="width:'+Math.round((cov.killCoverage||0)*100)+'%"></i></div>'
      +'<p>掲載戦績'+count(q.records)+'件のうち試合数不明'+count(cov.missingMatches||0)+'件、キル効率の対象外'+count(cov.missingKillRecords||0)+'件、VR率の対象外'+count(cov.missingVrRecords||0)+'件。未知数値を0には置き換えないょ</p>'
      +(cov.overlappingIds?.length?'<p class="style-quality-warning">同じ開催枠の重複疑い '+count(cov.overlappingIds.length)+'件を除外中</p>':'')
+     +(cov.conflictingIds?.length?'<p class="style-quality-warning">対象データセット内のID衝突 '+count(cov.conflictingIds.length)+'件を除外中（この選手に限らない）</p>':'')
      +'</div>';
    const eligible=report.affinity;
    const best=eligible.region?'🏅 集計上の得意地域候補：'+eligible.region:'🌍 得意地域：未判定';
