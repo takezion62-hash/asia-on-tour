@@ -1,0 +1,31 @@
+'use strict';
+const {test,expect}=require('@playwright/test');
+test('ナビゲーションから専用ページへ移動し6つの確認タブを利用',async({page})=>{
+ const errors=[];page.on('pageerror',e=>errors.push(e.message));
+ await page.goto('/?season=all#updates');
+ await page.locator('.nav a.audit-nav').click();
+ await expect(page).toHaveURL(/verification\.html/);
+ await expect(page.locator('h1')).toContainText('データ検証センター');
+ await expect(page.locator('#metric-queue')).not.toHaveText('—',{timeout:20000});
+ await page.locator('#tab-duplicates').click();
+ await expect(page.locator('#audit-summary')).toContainText('重複・大会枠');
+ await page.locator('#tab-coverage').click();
+ await expect(page.locator('#audit-summary')).toContainText('収集状況');
+ await page.locator('#tab-unmapped').click();
+ await expect(page.locator('#audit-summary')).toContainText('未登録大会');
+ await page.locator('#tab-queue').click();
+ await expect(page.locator('#audit-items')).toBeVisible();
+ expect(errors).toEqual([]);
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth+2)).toBe(true);
+});
+test('検索・地域指定・リロードが可能で閲覧画面に保存操作がない',async({page})=>{
+ await page.goto('/verification.html#coverage');
+ await expect(page.locator('#metric-queue')).not.toHaveText('—',{timeout:20000});
+ await page.locator('#audit-region').selectOption('ME');
+ await expect(page.locator('#audit-summary')).toContainText('収集状況');
+ await page.locator('#audit-search').fill('2026');
+ await expect(page.locator('#audit-summary')).toContainText('収集状況');
+ await page.locator('#audit-refresh').click();
+ await expect(page.locator('#audit-refresh')).toBeEnabled({timeout:20000});
+ await expect(page.locator('button')).not.toContainText('掲載確定');
+});
