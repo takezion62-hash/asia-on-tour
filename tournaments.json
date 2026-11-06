@@ -219,6 +219,10 @@
         {
           "id": "trios-cash-cup",
           "label": "Trios Cash Cup"
+        },
+        {
+          "id": "one-piece-zoro-cup-battle-royale",
+          "label": "One Piece: Zoro Cup Battle Royale"
         }
       ]
     },
@@ -1975,6 +1979,32 @@
         {
           "text": "Epic Games公式大会ページで2025年7〜8月のSquid Grounds Cash CupをDuos / Battle Royaleとして確認。現金賞金・通過者は別途照合が必要。",
           "url": "https://www.fortnite.com/competitive/events/S36_SquidGroundVictoryDuosCup/?region=NAC"
+        }
+      ]
+    },
+    {
+      "id": "ch7s5-one-piece-zoro-cup-battle-royale",
+      "name": "One Piece: Zoro Cup Battle Royale",
+      "chapter": 7,
+      "season": 5,
+      "seasonId": "S43",
+      "sourceEventIds": [
+        "S43_OnePieceZoroCup"
+      ],
+      "series": "skin-cup",
+      "mode": "battle-royale",
+      "subtype": "one-piece-zoro-cup-battle-royale",
+      "team": "duo",
+      "platform": "cross-platform",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "2026年11月6日開催。Epic Games公式大会ページでDuos・Battle Royaleとロロノア・ゾロ等のコスメ報酬を確認。通常BR版として登録し、Zero Build版（S43_OnePieceZoroCup_ZB）・Mobile版と区別。現金賞金ではない。",
+          "url": "https://www.fortnite.com/competitive/events/S43_OnePieceZoroCup/?region=ASIA"
+        },
+        {
+          "text": "Fortnite Tracker公式イベントID照合、開催時間（UTC）・地域別セッション情報を確認。",
+          "url": "https://fortnitetracker.com/events/epicgames_S43_OnePieceZoroCup_ASIA"
         }
       ]
     }
