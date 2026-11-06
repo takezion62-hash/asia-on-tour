@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-05T22:37:15.471Z",
+  "reviewedAt": "2026-11-06T00:05:45.982Z",
   "description": "Resolved historic review candidates: published, duplicate or participation",
   "entries": [
     {
@@ -474,6 +474,30 @@
       "recordId": "auto-s43-569cfd2bf94a",
       "rule": "https://www.fortnite.com/competitive/events/S43_PerformanceEvaluationTrios/?region=EU&round=S43_PerformanceEvaluation_Event1Round1_EU",
       "evidence": "Osirion Epic account IDs matched with registered Tracker profiles, rank not qualified"
+    },
+    {
+      "id": "auto-s42-0b675770d2ed",
+      "decision": "already-published",
+      "existingId": "s42-nac-solo-vc-final-20260913-blaze",
+      "reason": "JST date normalized; exact same player, rank and match statistics"
+    },
+    {
+      "id": "auto-s42-609ece393978",
+      "decision": "already-published",
+      "existingId": "s42-nac-solo-vc-final-20260913-kame",
+      "reason": "JST date normalized; exact same player, rank and match statistics"
+    },
+    {
+      "id": "auto-s42-b7878775d624",
+      "decision": "already-published",
+      "existingId": "s42-nac-solo-vc-final-20260913-dagutorio-taisho",
+      "reason": "JST date normalized; exact same player, rank and match statistics"
+    },
+    {
+      "id": "auto-s42-5844fef9dc36",
+      "decision": "already-published",
+      "existingId": "s42-nac-solo-vc-final-20260913-ama-crow",
+      "reason": "JST date normalized; exact same player, rank and match statistics"
     }
   ]
 }

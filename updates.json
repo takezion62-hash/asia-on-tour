@@ -2,16 +2,20 @@
   "version": 1,
   "entries": [
     {
+      "id": "site-fix-session-dates-and-duplicate-finals-20261106",
+      "date": "2026-11-06",
+      "type": "site",
+      "title": "大会開催日のJST統一と決勝重複の解消",
+      "description": "Epic公式大会ウィンドウで14戦績の開催日を日本時間へ統一。NAC Solo Victory Cup決勝の同一選手4件は既存の本人確認済み記録に公式出典を統合。旧リンクの記録ID・個人の実績・賞金は保持。",
+      "recordIds": []
+    },
+    {
       "id": "auto-sync-20261105234749",
       "date": "2026-11-06",
       "type": "records",
-      "title": "公式規則で自動承認：過去大会77戦績",
-      "description": "Epic公式規則とOsirion順位表、確認済み選手ID・既存戦績を照合。予選突破と決勝0VR（賞金$0）のみ自動承認。既存登録を保持。",
+      "title": "公式規則で自動承認：過去大会73戦績",
+      "description": "Epic公式規則とOsirion順位表、確認済み選手ID・既存戦績を照合。予選突破と決勝0VR（賞金$0）のみ自動承認。既存登録を保持。 重複4件は先行する本人確認済み戦績へ出典を統合し二重計上を解消。",
       "recordIds": [
-        "auto-s42-0b675770d2ed",
-        "auto-s42-b7878775d624",
-        "auto-s42-609ece393978",
-        "auto-s42-5844fef9dc36",
         "auto-s30-1dedb6d5dd2b",
         "auto-s30-f23828960935",
         "auto-s30-4eeda28eed6b",
