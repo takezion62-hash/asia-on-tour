@@ -49,6 +49,7 @@ test('出場確認だけを公開候補化し、既存戦績・賞金・順位�
  assert.equal(r.next.results[0].rank,60);
  assert.equal(r.next.reviews.history.proposals.length,0);
  assert.equal(r.next.statuses.history.found,0);
+ assert.deepEqual(r.next.statuses.auto,db.statuses.auto,'unrelated auto-sync status must not change');
  assert.equal(r.next.ledger.entries[0].policy,'attendance-only');
  assert.equal(r.next.updates.entries[0].recordIds[0],id);
  assert.equal(JSON.stringify(db),before,'planner must not mutate original data');
@@ -99,4 +100,27 @@ test('確認チェックなし・不明な候補・処理済みIDは停止',()=>
  assert.throws(()=>apply(fixture(),input(['auto-s42-cccccccccccc'])),/存在しない/);
  const db=fixture();db.ledger.entries.push({id,decision:'published'});
  assert.throws(()=>apply(db,input()),/処理済み/);
+});
+
+test('既存の公式ルールで確認済みのS41ソロ予選通過だけを安全に掲載',()=>{
+ const id='auto-s41-123456789abc',eventId='S41_ReloadReloadSoloVictoryCup',windowId='S41_ReloadSoloVictoryCup_Round1_Day1_ME';
+ const original={
+   id,date:'2026-08-01',region:'ME',player:'A',event:'Solo Reload Victory Cup',tournamentId:'ch7s3-solo-reload-victory-cup',
+   seasonId:'S41',chapter:7,season:3,round:'Day 1 · Round 1 / 予選',kind:'予選',
+   rank:319,points:320,kills:5,vrs:1,matches:8,prize:0,verified:true,
+   source:'https://www.fortnite.com/competitive/events/'+eventId+'/?region=ME&round='+windowId
+ };
+ const key='epicgames_'+eventId+'_ME/'+windowId;
+ const db=fixture([]);
+ db.reviews.history.proposals=[original];
+ db.scans.history.windows[key]={complete:true,nextPage:3,proposals:[original]};
+ db.tournaments.catalog=[{id:original.tournamentId,name:original.event,team:'solo',series:'victory-cup',
+   seasonId:'S41',sourceEventIds:[eventId]}];
+ db.calendar['2026-08']=[{sourceWindowId:windowId,eventId,dateJst:'2026-08-01',region:'ME',
+   tournamentId:original.tournamentId,seasonId:'S41'}];
+ const planned=apply(db,input([id],'verified-rule'));
+ assert.equal(planned.changes.length,1);
+ assert.equal(planned.next.results[0].kind,'予選');
+ assert.equal(planned.next.results[0].prize,0);
+ assert.match(planned.next.results[0].round,/予選突破/);
 });
