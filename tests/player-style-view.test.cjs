@@ -59,3 +59,15 @@ test('出典が外部の無許可ドメインやjavascriptならリンク化せ�
  assert.doesNotMatch(comparison,/<script>alert/);
  assert.match(comparison,/&lt;script&gt;/);
 });
+
+test('分析と選手比較の折りたたみは初期状態で閉じており、見出しで開ける',()=>{
+ const profile=view.profile(report());
+ const compare=view.comparison([report('A'),report('B')]);
+ assert.match(profile,/<details class="style-fold" id="profile-style-fold">/);
+ assert.match(profile,/<summary class="style-fold-summary">/);
+ assert.match(profile,/詳細を見る ⌄/);
+ assert.doesNotMatch(profile,/<details class="style-fold" id="profile-style-fold" open/);
+ assert.match(compare,/<details class="style-fold" id="compare-style-fold">/);
+ assert.match(compare,/閉じる ⌃/);
+ assert.match(compare,/id="compare-style-title"/);
+});
