@@ -97,3 +97,29 @@
 .style-region-matrix td small{display:block;margin:4px 0;color:#abc3d5}
 .style-region-matrix td small:last-child{color:#bea9d9}
 @media(max-width:640px){.style-specialties{grid-template-columns:1fr}.style-season-help{align-items:stretch}.style-season-help button{width:100%}.style-quality{padding:11px}.style-region-matrix{margin-right:0}}
+
+
+/* Collapsible style panels — native details/summary are keyboard and touch accessible */
+.profile-style,.compare-style{scroll-margin-top:22px}
+.style-fold{min-width:0}
+.style-fold-summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:14px;cursor:pointer;min-height:60px;border-radius:10px;user-select:none;-webkit-tap-highlight-color:transparent}
+.style-fold-summary::-webkit-details-marker{display:none}
+.style-fold-summary::marker{content:""}
+.style-fold-summary:hover .style-fold-action{border-color:#b1a0ec;background:#444175}
+.style-fold-summary:focus-visible{outline:3px solid #9fe5f2;outline-offset:6px}
+.style-fold-intro{display:grid;gap:5px;min-width:0}
+.style-fold-title{font-size:clamp(19px,3.5vw,25px);font-weight:900;color:#f3f6ff;line-height:1.3}
+.style-fold-title>span{color:#94e5f0}
+.style-fold-desc{color:#b7c9df;font-size:12px;line-height:1.5}
+.style-fold-action{flex:0 0 auto;border:1px solid #7163a9;border-radius:999px;padding:10px 14px;background:#352e58;color:#e6e0ff;font-size:12px;font-weight:850;white-space:nowrap;transition:background .15s ease}
+.style-fold-opened{display:none}
+.style-fold[open] .style-fold-closed{display:none}
+.style-fold[open] .style-fold-opened{display:inline}
+.style-fold[open]>.style-fold-summary{padding-bottom:16px;border-bottom:1px solid #425271;border-radius:0}
+.style-fold-body{padding-top:15px;min-width:0}
+@media(max-width:640px){
+ .profile-style,.compare-style{padding:13px 14px}
+ .style-fold-summary{min-height:66px;gap:9px}
+ .style-fold-desc{font-size:11px}
+ .style-fold-action{padding:9px 10px;font-size:11px}
+}
