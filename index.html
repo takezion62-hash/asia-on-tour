@@ -838,6 +838,11 @@
     @media(max-width:640px){
       .sidebar .nav{overflow-y:hidden}
     }
+    .nav a.audit-nav{display:flex;align-items:center;gap:13px;text-align:left;background:transparent;border:1px solid transparent;border-radius:12px;padding:12px 13px;color:#8d99ba;font-weight:750;width:100%;text-decoration:none;transition:.18s}
+    .nav a.audit-nav:hover{background:#1c2138;color:white}
+    .nav a.audit-nav svg{width:19px;height:19px;stroke-width:1.9;flex:0 0 19px}
+    .nav a.audit-nav small{display:block;font-size:9px;letter-spacing:1px;color:#8f9bbf}
+    @media(max-width:980px){.nav a.audit-nav{justify-content:center;padding:13px}.nav a.audit-nav span{display:none}.nav a.audit-nav svg{flex-basis:22px;width:22px;height:22px}}
   </style>
   <link rel="stylesheet" href="./aot-pr.css">
   <link rel="stylesheet" href="./calendar.css?v=historical-calendar-20261105-1">
@@ -863,6 +868,7 @@
         <button type="button" data-page="tournaments" aria-label="大会を探す"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M8 3h8v5a4 4 0 0 1-8 0V3ZM8 5H4v2c0 3 2 4 5 4M16 5h4v2c0 3-2 4-5 4M12 12v6M8 21h8M9 18h6v3"/></svg><span>大会を探す<small>TOURNAMENTS</small></span></button>
         <button type="button" data-page="calendar" aria-label="大会カレンダー"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4M17 3v4M3 10h18M8 14h2M14 14h2M8 18h2"/></svg><span>大会カレンダー<small>CALENDAR</small></span></button>
         <button type="button" data-page="updates" aria-label="更新履歴"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 3v5h5M12 7v5l4 2"/></svg><span>更新履歴<small>UPDATES</small></span></button>
+        <a class="audit-nav" href="./verification.html" aria-label="データ検証センター"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6l-8-3Z"/><path d="m8 12 2.7 2.7L16.8 9"/></svg><span>データ検証センター<small>VERIFY</small></span></a>
         <button type="button" data-page="about" aria-label="参照ソース"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7v.3"/></svg><span>参照ソース</span></button>
       </nav>
       <div class="side-bottom"><div class="disclaimer">UNOFFICIAL FAN PROJECT<br>Epic Gamesとは無関係の非公式サイトです</div></div>
@@ -935,7 +941,7 @@
   <button id="ranking-more" class="btn sm ghost ranking-more" type="button" data-ranking-more hidden>さらに30名表示</button><p id="ranking-integrity" class="ranking-integrity" hidden></p>
   <p class="earnings-explainer" id="ranking-completeness">このランキングは、ASIA ON TOURに掲載されている海外大会戦績をもとに集計しています。未掲載の大会があるため、選手の実際の全成績とは異なる場合があります。公式ランキングではありません。</p>
 </section><div class="filterbar"><div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><input id="search-players" type="search" placeholder="プレイヤー名を検索" aria-label="プレイヤー名検索"></div><select id="player-sort" aria-label="プレイヤーの並び順"><option value="prize">獲得賞金が多い順</option><option value="name">選手名順</option><option value="events">戦績件数順</option></select></div><div class="players" id="all-players"></div></section>
-      <section class="section" id="page-calendar" aria-label="大会カレンダー"><div id="calendar-content"></div></section>
+      <section class="section" id="page-calendar" aria-label="大会カレンダー"><p style="margin:0 0 14px"><a href="./verification.html#coverage" class="text-link">🔍 大会の収集状況・確認待ちを調べる ↗</a></p><div id="calendar-content"></div></section>
       <section class="section" id="page-compare" aria-labelledby="compare-title"><div id="compare-content"></div></section>
       <section class="section" id="page-tournaments"><div id="tournament-content"></div></section>
       <section class="section" id="page-tournament" aria-labelledby="tournament-title"><div id="tournament-detail-content"></div></section>
@@ -949,6 +955,7 @@
           <h2 id="auto-sync-heading">成績の自動更新 <span>AUTO SYNC</span></h2>
           <p>登録済み選手の海外大会成績を追跡する仕組みです。確認済みEpic IDと大会ウィンドウだけを対象とし、未確認の賞金は推測しません。</p>
           <div id="auto-sync-status" class="auto-sync-status" aria-live="polite">確認中…</div>
+          <p><a href="./verification.html" style="color:#8fe7ef;font-weight:800;text-decoration:underline">🔍 データ検証センターで確認待ち・重複疑いをまとめて見る ↗</a></p>
           <div class="auto-sync-controls">
             <button type="button" class="btn ghost" id="auto-sync-refresh">最新状況を確認</button>
             <a href="https://github.com/takezion62-hash/asia-on-tour/actions/workflows/auto-sync.yml" target="_blank" rel="noopener noreferrer">管理者：更新チェックを実行 ↗</a>
