@@ -89,6 +89,22 @@ jobs:
         run: |
           npm run validate
           node --test tests/manual-approval.test.cjs tests/verified-history-approval.test.cjs
+      - name: Install Chromium for complete PC and mobile checks
+        if: ${{ !inputs.preview_only }}
+        run: npx playwright install --with-deps chromium
+      - name: Run entire data, unit and browser test suite before PR
+        if: ${{ !inputs.preview_only }}
+        run: npm test
+      - name: Preserve complete browser test report
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.0
+        with:
+          name: manual-approval-site-test-report
+          path: |
+            playwright-report/
+            test-results/
+          retention-days: 14
+          if-no-files-found: ignore
       - name: Open an inspectable PR, never write directly to main
         if: ${{ !inputs.preview_only }}
         env:
