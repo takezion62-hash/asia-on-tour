@@ -174,7 +174,8 @@
     let key='balanced';
     if(attack-victory>=15&&attack>=60)key='attack';
     if(victory-attack>=15&&victory>=60)key='victory';
-    return {key,label:STYLES[key],attack,victory,peers:peers.length,
+    const breadth=filters.region==='all'?percentile(summary.regionCount,peers.map(r=>r.regionCount)):null;
+    return {key,label:STYLES[key],attack,victory,breadth,peers:peers.length,
       reason:'同じシーズン・地域・チーム・ゲーム形式・大会シリーズの実測効率の相対位置'};
   }
   function analyze(records,name,filters={},helpers={}){
