@@ -326,7 +326,9 @@ test('同日同大会の報酬・参加確認は1開催枠、別ラウンドだ�
   const cards=page.locator('.calendar-event').filter({hasText:item.name});
   await expect(cards).toHaveCount(item.count);
   const text=await cards.allTextContents();
-  if(item.count===1)expect(text.join('')).toContain('掲載済み：'+item.records+'戦績');
+  const matching=rows.filter(row=>row.date===item.date&&row.region===item.region&&row.event.includes(item.name));
+  expect(matching.length).toBeGreaterThanOrEqual(item.records); // Preserve the known historical baseline.
+  if(item.count===1)expect(text.join('')).toContain('掲載済み：'+matching.length+'戦績');
   else{
    expect(text.some(x=>x.includes('Round 1'))).toBe(true);
    expect(text.some(x=>x.includes('Round 2'))).toBe(true);
@@ -370,9 +372,11 @@ test('手動追加した参加者がスキン・FNCS決勝の既存開催枠と�
   await expect(page.locator('#page-calendar')).toBeVisible();
   const card=page.locator('.calendar-event').filter({hasText:event.name});
   await expect(card).toHaveCount(1);
-  await expect(card).toContainText('掲載済み：'+event.expected+'戦績');
+  const matching=rows.filter(row=>row.date===event.date&&row.region===event.region&&row.event.includes(event.name));
+  expect(matching.length).toBeGreaterThanOrEqual(event.expected);
+  await expect(card).toContainText('掲載済み：'+matching.length+'戦績');
   await card.locator('h3 a').click();
   await expect(page.locator('#page-tournament')).toBeVisible();
-  await expect(page.locator('.tournament-result')).toHaveCount(event.expected);
+  await expect(page.locator('.tournament-result')).toHaveCount(matching.length);
  }
 });
