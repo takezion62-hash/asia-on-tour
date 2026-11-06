@@ -1,6 +1,8 @@
 'use strict';
 // Osirion data provider. The regular workflow is review-only; the historical workflow
 // may auto-approve only narrowly allow-listed Victory Cup rows with official rules.
+// Operations: a source change here triggers both recent and historical review workflows;
+// continue enforcing identity, official-rule, and duplicate checks before publication.
 const fs=require('node:fs'),path=require('node:path');
 const {prepare,maximumMatches,applyProposals}=require('./auto-sync-core.cjs');
 const {evaluate,RULES}=require('./verified-history-approval.cjs');
