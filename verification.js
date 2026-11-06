@@ -9,7 +9,7 @@
   const state={tab:'queue',page:0,search:'',region:'all',loaded:false};
   const labels={queue:'確認待ち',duplicates:'重複・大会枠',errors:'不整合',unmapped:'未登録大会',coverage:'収集状況',history:'検証履歴'};
   const required=['results.json','auto-sync-review.json','history-sync-review.json','auto-sync-status.json','history-sync-status.json'];
-  const files=[...required,'history-sync-reviewed.json','updates.json','calendar-history-status.json'];
+  const files=[...required,'history-sync-reviewed.json','updates.json','calendar-history-status.json','calendar-history-index.json'];
   const dom=(tag,cls,content)=>{
     const el=document.createElement(tag);
     if(cls)el.className=cls;
@@ -98,11 +98,11 @@
         description:'公式大会ID・地域・競技形式・チーム人数を照合するまで自動登録しません。',
         meta:'自動収集対象で検出 · 最新の保存済みステータス',searchText:id,region:''});
     }
-    const cov=engine.coverage(records,queue);
+    const cov=engine.coverage(records,queue,data['calendar-history-index.json']?.months);
     for(const c of cov){
       out.coverage.push({badge:c.published>0?'掲載あり':'掲載未確認',level:c.published>0?'ok':'info',
         title:c.month+' / '+c.region,meta:'確認済みを含む掲載戦績 '+n(c.published)+'件 · 現在の確認待ち '+n(c.pending)+'件',
-        description:'記録が存在する月・地域の確認状況。未収録大会が存在する可能性があります。調査完了を意味しません。',
+        description:'カレンダー対象月と掲載状況の突合。掲載0件でも、その地域で大会が開催されなかった・未調査だったとは断定できません。調査完了を意味しません。',
         region:c.region,searchText:c.month+' '+c.region});
     }
     for(const x of updates){
@@ -141,6 +141,7 @@
     const target=$('audit-items');target.replaceChildren(...shown.map(details));
     if(!shown.length)target.append(dom('div','empty',full.length?'この条件に一致する項目はありません':'現在、該当する項目はありません'));
     $('audit-summary').textContent=labels[state.tab]+'：'+n(found.length)+'項目（全'+n(full.length)+'項目）';
+    if(state.tab==='unmapped')$('audit-summary').textContent+=' ／ 記録されたIDの一覧のみ。過去調査で検出した大会種類数：'+n(data['history-sync-status.json']?.unmappedEvents||0)+'、直近：'+n(data['auto-sync-status.json']?.unmappedEvents||0);
     $('audit-pagination').textContent=n(state.page+1)+' / '+n(pages)+'ページ';
     $('audit-prev').disabled=state.page===0;
     $('audit-next').disabled=state.page>=pages-1;
