@@ -13,6 +13,31 @@
  const choices=(value,list)=>list.map(item=>'<option value="'+esc(item.id)+'"'+(value===item.id?' selected':'')+'>'+esc(item.label)+'</option>').join('');
  const axis=(label,value)=>'<div class="style-bar-line"><span>'+esc(label)+'</span><div class="style-bar"><i style="width:'+Math.max(0,Math.min(100,value||0))+'%"></i></div><small>'+count(value)+'/100</small></div>';
  const dataLine=(a,b)=>a+' · '+b;
+ const trustedSource=url=>{
+   try{const u=new URL(String(url||''));return u.protocol==='https:'&&
+     ['www.fortnite.com','fortnite.com','fortnitetracker.com','www.fortnitetracker.com','liquipedia.net','www.liquipedia.net','myfortnitestats.com','osirion.gg'].includes(u.hostname)?u.href:null;}
+   catch{return null;}
+ };
+ const trendGraph=(rows,metric,label,color)=>{
+   const points=rows.map(r=>({month:r.month,value:r[metric]})).filter(p=>p.value!=null&&Number.isFinite(p.value));
+   if(points.length<2)return '<div class="style-box"><h3>'+esc(label)+'</h3><p class="style-note">グラフ表示には実測月が2か月以上必要だょ</p></div>';
+   const stamp=p=>Number(p.month.slice(0,4))*12+Number(p.month.slice(5,7));
+   const months=points.map(stamp),min=Math.min(...months),span=Math.max(1,Math.max(...months)-min);
+   const max=Math.max(0.001,...points.map(p=>p.value));
+   const coords=points.map((p,i)=>({
+     x:18+(months[i]-min)/span*294,
+     y:145-(p.value/max)*110,
+     label:p.month
+   }));
+   const poly=coords.map(p=>p.x.toFixed(1)+','+p.y.toFixed(1)).join(' ');
+   const dots=coords.map(p=>'<circle cx="'+p.x.toFixed(1)+'" cy="'+p.y.toFixed(1)+'" r="4" fill="'+color+'"/>').join('');
+   const first=esc(points[0].month),last=esc(points.at(-1).month);
+   return '<div class="style-box style-trend-plot"><h3>'+esc(label)+'</h3><svg viewBox="0 0 330 190" role="img" aria-label="'+esc(label)+'の月別推移 '+first+'から'+last+'" width="100%">'
+     +'<path d="M18 145H312" stroke="#5e728d" stroke-width="1"/>'
+     +'<polyline points="'+poly+'" fill="none" stroke="'+color+'" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>'
+     +dots+'<text x="18" y="172" fill="#bbcade" font-size="12">'+first+'</text><text x="312" y="172" text-anchor="end" fill="#bbcade" font-size="12">'+last+'</text>'
+     +'</svg><p class="style-note">実測値だけを描画。月の間隔は実際の経過月数を反映するょ</p></div>';
+ };
  function radar(style){
    if(style.attack==null||style.victory==null||style.breadth==null)return '';
    const points=[style.attack,style.victory,style.breadth];
@@ -51,15 +76,29 @@
      card('分析対象の開催枠',count(report.quality.windows),count(q.records)+'件の掲載済み戦績'),
      card('試合数を確認できた記録',count(q.knownMatchRecords),count(q.unknownMatchRecords)+'件は試合数不明')
    ].join('')+'</div>';
+   const cov=report.coverage||{};
+   const percentage=val=>val==null?'—':num(val*100,0)+'%';
+   const qualityHtml='<div class="style-quality" aria-label="データの充実度">'
+     +'<div><strong>入力の充実度</strong><span>キル入力 '+percentage(cov.killCoverage)+' · VR入力 '+percentage(cov.vrCoverage)+'</span></div>'
+     +'<div class="style-quality-bar" aria-hidden="true"><i style="width:'+Math.round((cov.killCoverage||0)*100)+'%"></i></div>'
+     +'<p>掲載戦績'+count(q.records)+'件のうち試合数不明'+count(cov.missingMatches||0)+'件、キル効率の対象外'+count(cov.missingKillRecords||0)+'件、VR率の対象外'+count(cov.missingVrRecords||0)+'件。未知数値を0には置き換えないょ</p>'
+     +(cov.overlappingIds?.length?'<p class="style-quality-warning">同じ開催枠の重複疑い '+count(cov.overlappingIds.length)+'件を除外中</p>':'')
+     +'</div>';
    const eligible=report.affinity;
    const best=eligible.region?'🏅 集計上の得意地域候補：'+eligible.region:'🌍 得意地域：未判定';
    const style='<div class="style-status"><span class="style-tag'+(report.style.key==='unrated'?' is-low':'')+'">'+esc(report.style.label)+'</span><span class="style-small">'+esc(report.style.reason)+'</span></div>';
    const most=[...report.regions].filter(r=>r.records>0).sort((a,b)=>b.records-a.records)[0];
    const observed=most?'<p class="style-advice">掲載戦績が最も多い地域：<b>'+esc(most.region)+'</b>（'+count(most.records)+'戦績）※得意地域の判定とは別</p>':'';
    const affinity='<div class="style-status"><span class="style-tag'+(!eligible.region?' is-low':'')+'">'+esc(best)+'</span><span class="style-small">'+esc(eligible.reason)+'</span></div>';
+   const specials=report.specialties||{};
+   const specialty=(icon,label,region,reason)=>'<div class="style-specialty"><small>'+icon+' '+label+'</small><strong>'+(region?esc(region):'未判定')+'</strong><span>'+esc(reason||'比較材料なし')+'</span></div>';
+   const specialtyHtml='<div class="style-specialties" aria-label="地域別の得意傾向">'
+     +specialty('⚔️','攻撃効率が高い地域',specials.attack,specials.attackReason)
+     +specialty('🏆','勝ち切り効率が高い地域',specials.victory,specials.victoryReason)
+     +'</div>';
    const adapt=eligible.adaptation?'<p class="style-advice">地域適応力の参考情報：<strong>'+count(eligible.adaptation.qualifiedRegions)+'地域に比較可能な記録</strong>があり、そのうち'+count(eligible.adaptation.consistentRegions)+'地域は最良地域スコアの75%以上（'+esc(eligible.adaptation.label)+'）</p>'
      :'<p class="style-advice">地域適応力は複数地域の十分な試合数がそろってから判定するょ</p>';
-   const regionStats='<div class="style-regions">'+report.regions.map(r=>'<article class="style-region'+(r.region===eligible.region?' is-best':'')+'" data-style-region="'+esc(r.region)+'"><strong>'+esc(r.region)+(r.region===eligible.region?' 🏅':'')+'</strong>'
+   const regionStats='<div class="style-regions">'+report.regions.map(r=>'<article class="style-region'+(r.region===eligible.region?' is-best':'')+(r.region===specials.attack?' is-attack':'')+(r.region===specials.victory?' is-victory':'')+'" data-style-region="'+esc(r.region)+'"><strong>'+esc(r.region)+(r.region===eligible.region?' 🏅':'')+(r.region===specials.attack?' ⚔️':'')+(r.region===specials.victory?' 🏆':'')+'</strong>'
      +'<small>'+count(r.records)+'戦績 · '+count(r.windows)+'開催枠 · '+count(r.matchTotal)+'試合（試合数確認分）</small>'
      +'<b>K/試合 '+(r.kpm==null?'—':num(r.kpm,2))+' / VR率 '+pct(r.vrRate)+'</b>'
      +'<small>'+(r.level==='qualified'?'比較候補：5枠・30試合以上':r.level==='provisional'?'暫定：3枠・15試合以上':'データ不足')+'</small></article>').join('')+'</div>';
@@ -71,14 +110,33 @@
      +(trend.length?trend.map(t=>'<tr><th>'+esc(t.month)+'</th><td>'+(t.kpm==null?'—':num(t.kpm,2))+'</td><td>'+pct(t.vrRate)+'</td><td>'+count(t.matchTotal)+'</td></tr>').join('')
       :'<tr><td colspan="4">対象月の掲載戦績はありません</td></tr>')
      +'</tbody></table></div><p class="style-small">未掲載月は表示しないため、不参加や0キルを意味しません</p></div>';
+   const mom=report.momentum||{};
+   const delta=(n,kind)=>n==null?'—':(n>0?'+':'')+num(n*(kind==='rate'?100:1),2)+(kind==='rate'?'pt':'');
+   const momentumHtml=mom.ready?'<div class="style-momentum"><strong>📈 直近5開催枠 vs 前5開催枠</strong>'
+     +'<span>キル/試合 '+delta(mom.deltaKpm)+' · VR率 '+delta(mom.deltaVrRate,'rate')+'</span>'
+     +'<small>同条件・各期間15試合以上の実測差。将来の成績予測ではないょ</small></div>'
+     :'<p class="style-note">📈 最近の傾向：'+esc(mom.reason||'データ不足')+'</p>';
+   const graphs='<div class="style-extra">'+trendGraph(report.trend,'kpm','月別 キル/試合','#a79dff')
+     +trendGraph(report.trend,'vrRate','月別 VR率','#68dcd6')+'</div>';
+   const proof=(report.evidence||[]).slice(0,15).map(r=>{
+     const url=trustedSource(r.source);
+     return '<tr><td>'+esc(r.date)+'</td><td>'+esc(r.region)+'</td>'
+      +'<td>'+esc(r.event||'大会未確認')+'<small class="style-proof-round">'+esc(r.round||'')+'</small></td>'
+      +'<td>'+count(r.matches)+'</td><td>'+count(r.kills)+'</td><td>'+count(r.vrs)+'</td>'
+      +'<td>'+(url?'<a href="'+esc(url)+'" target="_blank" rel="noopener noreferrer">出典 ↗</a>':'—')+'</td></tr>';
+   }).join('');
+   const evidenceHtml='<details class="style-evidence"><summary>📚 計算に使った戦績・出典を見る（直近'+count((report.evidence||[]).length)+'件）</summary>'
+     +'<div class="style-evidence-scroll" tabindex="0"><table><thead><tr><th>日付</th><th>地域</th><th>大会</th><th>試合</th><th>キル</th><th>VR</th><th>根拠</th></tr></thead><tbody>'
+     +(proof||'<tr><td colspan="7">表示できる掲載戦績はないょ</td></tr>')+'</tbody></table></div>'
+     +'<p class="style-note">ここには最新15件を表示。元戦績・資格確認・対象大会は他のページでも確認できるょ</p></details>';
    return '<section class="profile-style" id="profile-style" aria-labelledby="profile-style-title">'
      +'<div class="style-head"><div><span class="style-kicker">PLAYER STYLE / REGION PERFORMANCE</span><h2 id="profile-style-title">プレイスタイル<span>分析</span></h2>'
      +'<p>海外大会の実測結果から攻撃・勝利・得意地域を比較。戦術的なIGL/フラッガー役は推測しないょ</p></div><span class="style-icon" aria-hidden="true">🎯</span></div>'
-     +filterMarkup+summary+style+affinity+observed+adapt
+     +filterMarkup+summary+qualityHtml+style+affinity+specialtyHtml+observed+adapt
      +'<h3 class="style-region-title">🌍 地域別パフォーマンス</h3>'+regionStats
-     +'<p class="style-region-note">地域の累計キル数では判定しない。得意地域候補は同条件で2地域以上の15試合・3開催枠を満たし、差が10点以上ある場合のみ表示（キル効率70%＋VR率30%）。大会の難易度差は補正していないょ</p>'
+     +'<p class="style-region-note">地域の累計キル数では判定しない。得意地域候補は同シーズン・同形式・同シリーズで2地域以上の15試合・3開催枠を満たし、総合差が10点以上の場合のみ表示（キル効率70%＋VR率30%）。大会の難易度差は補正していないょ</p>'
      +'<div class="style-extra">'+percentiles+radar(report.style)+'</div>'
-     +trendHtml
+     +trendHtml+graphs+momentumHtml+evidenceHtml
      +'<p class="style-footnote">出典確認済みの掲載結果と本人確認済み出場アーカイブの重複排除分のみを対象にしているょ。試合数不明はK/試合・VR率に加えず、チームのキルやVRを個人の数字として扱わない。大会未掲載・詳細未確認・同一IDの矛盾は集計しない。<button type="button" data-style-growth-jump class="style-jump">既存の成長グラフを見る ↗</button> ／ <a href="./verification.html">データ検証センター</a></p></section>';
  }
  function comparison(reports,options={}){
