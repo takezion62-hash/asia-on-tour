@@ -1517,8 +1517,11 @@
           .map(item=>({id:item.id,label:item.label}))
       });
       const old=$('#profile-style');
+      const wasOpen=old?.querySelector('#profile-style-fold')?.open===true;
       if(old)old.outerHTML=html;
       else anchor.insertAdjacentHTML('afterend',html);
+      // Filtering replaces the panel, but must not accidentally close it.
+      if(wasOpen)$('#profile-style-fold').open=true;
     }
     function renderComparisonStyle(state=compareState){
       const host=$('#compare-report');
@@ -1529,9 +1532,11 @@
       const reports=stateFilters.players.map(name=>styleReport(name,filters));
       const html=AsiaPlayerStyleView.comparison(reports,{team:styleCompareTeam});
       const old=$('#compare-style');
+      const wasOpen=old?.querySelector('#compare-style-fold')?.open===true;
       // Use a predictable id so subsequent filter changes replace only this panel.
       if(old)old.outerHTML=html.replace('class="compare-style"','class="compare-style" id="compare-style"');
       else host.insertAdjacentHTML('afterend',html.replace('class="compare-style"','class="compare-style" id="compare-style"'));
+      if(wasOpen)$('#compare-style-fold').open=true;
     }
 
     const growthState={grouping:'month',metric:'pr',mode:'cumulative',selectedKey:null};
@@ -1998,7 +2003,13 @@
         }
         return;
       }
-      if(e.target.closest('[data-style-jump]')&&currentView.page==='profile'){e.preventDefault();$('#profile-style')?.scrollIntoView({behavior:'smooth',block:'start'});return}
+      if(e.target.closest('[data-style-jump]')&&currentView.page==='profile'){
+        e.preventDefault();
+        const fold=$('#profile-style-fold');
+        if(fold)fold.open=true;
+        $('#profile-style')?.scrollIntoView({behavior:'smooth',block:'start'});
+        return;
+      }
       if(e.target.closest('[data-style-growth-jump]')&&currentView.page==='profile'){e.preventDefault();$('#profile-growth')?.scrollIntoView({behavior:'smooth',block:'start'});return}
       if(e.target.closest('[data-journey-jump]')){e.preventDefault();$('#journey-title')?.focus?.({preventScroll:true});$('#profile-journey')?.scrollIntoView?.({behavior:'instant',block:'start'});return}
       if(currentView.page==='profile'){
