@@ -150,8 +150,9 @@ function apply(db,input){
   if(!changes.length)return {next,changes,skipped};
   const added=new Set(changes.map(x=>x.id));
   for(const origin of ['auto','history']){
-    const current=next.reviews[origin];
+    const current=next.reviews[origin],before=current.proposals.length;
     current.proposals=current.proposals.filter(x=>!added.has(x.id));
+    if(before===current.proposals.length)continue;
     current.manualReviewedAt=input.timestamp;
     next.statuses[origin].found=current.proposals.length;
     next.statuses[origin].manualReviewCandidates=current.proposals.length;
@@ -160,7 +161,7 @@ function apply(db,input){
   next.ledger.reviewedAt=input.timestamp;
   next.ledger.entries.push(...changes.map(x=>({
     id:x.id,decision:'published',recordId:x.id,policy,approvedAt:input.timestamp,
-    approvedBy:'GitHub Actions / manual workflow',
+    approvedBy:input.actor||'GitHub Actions / manual workflow',
     rule:x.rule||null,source:x.record.source,
     evidence:'Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout.'
   })));
