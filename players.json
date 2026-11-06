@@ -1035,7 +1035,7 @@
     {
       "name": "モバイル勢のまかろん",
       "initials": "モバ",
-      "desc": "2026/10/24 NAW Solo Reload Victory Cup予選130位・306pt・30キル・1VR。決勝進出",
+      "desc": "2026/10/24 NAW Solo Reload Victory Cup予選130位・306pt・30キル・1VR。決勝進出。2026/11/6 OCE Zoro Mobile Cup 9位・24キル・2VR（旧名義 BRN 916GonLuck）",
       "accent": "cyan"
     },
     {
@@ -2791,16 +2791,10 @@
       "accent": "violet"
     },
     {
-      "name": "YOTTAれぼりゅーしゅん",
-      "initials": "YO",
+      "name": "れぼりゅーしょん",
+      "initials": "れぼ",
       "desc": "2026/11/6 OCE Zoro Mobile Cup 8位・36キル・2VR・スキン獲得対象",
       "accent": "pink"
-    },
-    {
-      "name": "BRN 916GonLuck",
-      "initials": "BR",
-      "desc": "2026/11/6 OCE Zoro Mobile Cup 9位・24キル・2VR・スキン獲得対象",
-      "accent": "cyan"
     }
   ],
   "confirmedAliases": {
@@ -3444,6 +3438,12 @@
     ],
     "ふんふん": [
       "GENIUS ふんふん"
+    ],
+    "モバイル勢のまかろん": [
+      "BRN 916GonLuck"
+    ],
+    "れぼりゅーしょん": [
+      "YOTTAれぼりゅーしゅん"
     ]
   }
 }
