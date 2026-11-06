@@ -40,7 +40,7 @@ for(const id of ids){
     }
   }
 }
-const plan=apply(base,{ids,policy,confirmation,timestamp,runId});
+const plan=apply(base,{ids,policy,confirmation,timestamp,runId,actor:process.env.GITHUB_ACTOR||'local-reviewer'});
 const before=base.results.length,after=plan.next.results.length;
 const check=validateData({results:plan.next.results,players:base.players,tournaments:base.tournaments});
 if(check.errors.length)throw Error('Publication fails site data validator: '+JSON.stringify(check.errors.slice(0,5)));
