@@ -1,5 +1,19 @@
 # ASIA ON TOUR
 
+## データ検証センター（2026-11-06）
+
+公開ページの「データ検証センター」（verification.html）から、直近のAUTO SYNCと過去大会の確認候補、掲載済み戦績の重複・大会枠分裂疑い、不正な基本数値、未登録大会ID、月別・地域別の掲載状況、サイト更新と過去候補の処理履歴を参照できます。
+
+- サイドバーから移動可能。更新履歴のAUTO SYNC管理パネルと大会カレンダーにもリンクを追加しました。PC・スマホ対応、カテゴリ切り替え、検索、地域フィルター、50件ずつのページ移動、画面からの再読み込みに対応。
+- verification-core.js は読み取り専用の検査エンジン。results.json、auto-sync-review.json、history-sync-review.json、auto-sync-status.json、history-sync-status.json を都度読み込みます。補助データとして history-sync-reviewed.json、updates.json、calendar-history-status.json を利用。正式な結果や候補データを変更しません。
+- 同一IDの重複・内容矛盾、同一選手・日付・地域・大会・段階・識別できたセッションの複数レコード、同日の「決勝」「賞金決勝」の混在を「要照合候補」として提示します。出典の公式ウィンドウが確認できない場合は自動統合しません。予選と決勝・異なるEvent/Session・同名別人の誤統合をしません。
+- 未確認の数値は null として扱い、0へ補完しません。スキン大会の現金賞金・負数・必須項目欠落などの基本的な不整合を表示します。ただしこの画面の検査は全チェックを再実装したものではありません。公開前の厳密な構造・出典整合性検証は従来の scripts/validate-data.cjs とGitHub ActionsのCIを利用してください。
+- 月別・地域別の掲載数は調査完了率ではありません。現在候補が0件でも未調査大会がないとは断言しません。未登録大会IDは収集側のスナップショットから参照し、未確認の大会を自動作成しません。
+- history-sync-reviewed.json の判断履歴と updates.json の公開履歴を参照でき、公開サイト側では候補の採否・賞金の訂正・削除・GitHub書き込みはできません。承認・修正は管理者が従来のGitHubワークフローで行い、CI合格後に公開します。
+- 必須JSONの取得に失敗した場合は0件と誤表示せずエラーにし、検証数値を非表示にします。出典リンクは許可したHTTPSサイトに限定し、候補由来の文字列はHTMLとして解釈せず文字列表示します。
+
+実装：verification.html、verification.css、verification.js、verification-core.js。単体テストは node --test tests/verification.test.cjs、PC・スマホ画面は npx playwright test tests/verification.spec.cjs で検証します。
+
 ASIA勢のFortnite海外大会戦績を検索・閲覧する、GitHub Pagesの閲覧専用サイトです。一般閲覧者による戦績の追加・削除・保存・アップロード機能はありません。
 
 ## 選手比較機能（2026-11-04）
