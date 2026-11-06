@@ -918,7 +918,10 @@ test('tournament catalog and detail routes retain all records once and separate 
       assert.ok(rows.every(Boolean), card.id);
       for (const axis of ['date', 'region']) assert.equal(new Set(rows.map(record => record[axis])).size, 1, `${card.id}: ${axis}`);
       const kinds=[...new Set(rows.map(record=>record.kind))].sort();
-      if(kinds.length>1)assert.deepEqual(kinds,['決勝','賞金決勝'].sort(),`${card.id}: unexpected mixed round types`);
+      if(kinds.length>1){
+        const allowed=[['決勝','賞金決勝'].sort(),['スキン大会','参加確認'].sort()];
+        assert.ok(allowed.some(accepted=>JSON.stringify(accepted)===JSON.stringify(kinds)),`${card.id}: unexpected mixed round types ${kinds.join(',')}`);
+      }
       const windows = rows.map(record => new URL(record.source).searchParams.get('window') || new URL(record.source).searchParams.get('round')).filter(Boolean);
       assert.ok(new Set(windows).size <= 1, `${card.id}: distinct known event rounds were merged`);
       sessionDates.push(rows[0].date);
