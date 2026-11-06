@@ -53,3 +53,47 @@
 @media(max-width:640px){.profile-style,.compare-style{padding:14px;margin:15px 0 22px}.style-filters{gap:9px}.style-filters label{min-width:126px}.style-cards{gap:8px}.style-card{padding:11px}.style-region{padding:9px}.style-extra{grid-template-columns:1fr}.compare-style .style-compare-row{grid-template-columns:1fr}.style-bar-line{grid-template-columns:65px minmax(0,1fr) 60px;gap:6px}}
 
 .style-jump{background:transparent;border:0;color:#97e9f5;text-decoration:underline;text-underline-offset:3px;font-size:11px;font-weight:800;padding:3px;cursor:pointer}.style-jump:focus-visible{outline:2px solid #90e3f1;outline-offset:3px}
+
+/* v1.1: provenance-first regional specialties, graph and evidence */
+.style-season-help{background:#1b2640;border:1px solid #5a6b96;border-radius:12px;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:10px 0 16px}
+.style-season-help span{font-size:12px;color:#d0def3;flex:1 1 220px}
+.style-season-help button{font:inherit;font-size:12px;color:#fff;background:#6255a2;border:1px solid #a196e6;border-radius:8px;padding:9px 12px;font-weight:850;cursor:pointer}
+.style-season-help button:hover{background:#7667b8}
+.style-season-help button:focus-visible{outline:2px solid #99eaf1;outline-offset:3px}
+.style-quality{border:1px solid #384b65;background:#111b2c;padding:13px 16px;border-radius:12px;margin-bottom:16px}
+.style-quality>div:first-child{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.style-quality strong{font-size:13px}
+.style-quality span,.style-quality p{font-size:11px;color:#bdcce2}
+.style-quality p{margin:7px 0 0;line-height:1.6}
+.style-quality .style-quality-warning{color:#f4ca9d}
+.style-quality-bar{margin-top:8px;height:7px;border-radius:99px;background:#34405d;overflow:hidden}
+.style-quality-bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#7669c8,#8fe6d3)}
+.style-specialties{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:13px 0 17px}
+.style-specialty{border-radius:13px;padding:13px 14px;border:1px solid #516481;background:linear-gradient(135deg,#27344c,#172338);display:grid;gap:4px;min-width:0}
+.style-specialty small{font-size:12px;color:#c7d8ee}
+.style-specialty strong{font-size:24px;color:#f0f7ff;font-weight:900}
+.style-specialty span{color:#a9bad3;font-size:11px}
+.style-region.is-attack{box-shadow:inset 3px 0 0 #bd9cf7}
+.style-region.is-victory{box-shadow:inset -3px 0 0 #89e2d1}
+.style-momentum{display:flex;flex-wrap:wrap;align-items:baseline;gap:7px 18px;background:#19313c;border:1px solid #486f78;border-radius:12px;padding:14px;margin:17px 0}
+.style-momentum strong{font-size:13px;color:#b6f5e3}
+.style-momentum span{font-size:15px;font-weight:900}
+.style-momentum small{font-size:11px;color:#b9cfd6;flex-basis:100%}
+.style-trend-plot h3{margin-bottom:12px}
+.style-trend-plot svg{height:auto;max-height:205px;display:block}
+.style-evidence{margin:17px 0;padding:15px;border-radius:13px;background:#101a2d;border:1px solid #455477}
+.style-evidence summary{cursor:pointer;font-weight:850;color:#c4f0f3;font-size:13px}
+.style-evidence[open] summary{margin-bottom:13px}
+.style-evidence-scroll{overflow-x:auto;max-width:100%;border:1px solid #33425d;border-radius:9px}
+.style-evidence-scroll table{width:100%;border-collapse:collapse;min-width:590px;font-size:11px}
+.style-evidence-scroll th,.style-evidence-scroll td{padding:9px 10px;border-bottom:1px solid #34445f;text-align:left;white-space:normal;vertical-align:top}
+.style-evidence-scroll th{color:#e8f4ff;background:#1c2a42;font-weight:850}
+.style-evidence-scroll td{color:#bbd0e6}
+.style-evidence-scroll a{color:#9debeb}
+.style-proof-round{color:#9aaeca;font-size:10px;display:block;margin-top:4px}
+.style-region-matrix{margin-top:10px}
+.style-region-matrix table{min-width:490px}
+.style-region-matrix td strong{display:block;color:#eff8fd}
+.style-region-matrix td small{display:block;margin:4px 0;color:#abc3d5}
+.style-region-matrix td small:last-child{color:#bea9d9}
+@media(max-width:640px){.style-specialties{grid-template-columns:1fr}.style-season-help{align-items:stretch}.style-season-help button{width:100%}.style-quality{padding:11px}.style-region-matrix{margin-right:0}}
