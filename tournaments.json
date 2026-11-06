@@ -223,6 +223,10 @@
         {
           "id": "one-piece-zoro-cup-battle-royale",
           "label": "One Piece: Zoro Cup Battle Royale"
+        },
+        {
+          "id": "one-piece-zoro-mobile-cup",
+          "label": "One Piece: Zoro Mobile Cup"
         }
       ]
     },
@@ -2005,6 +2009,33 @@
         {
           "text": "Fortnite Tracker公式イベントID照合、開催時間（UTC）・地域別セッション情報を確認。",
           "url": "https://fortnitetracker.com/events/epicgames_S43_OnePieceZoroCup_ASIA"
+        }
+      ]
+    },
+    {
+      "id": "ch7s5-one-piece-zoro-mobile-cup",
+      "name": "One Piece: Zoro Mobile Cup",
+      "chapter": 7,
+      "season": 5,
+      "seasonId": "S43",
+      "sourceEventIds": [
+        "S43_OnePieceZoroCup_Mobile",
+        "S43_OnePieceZoroCup_MobileAll"
+      ],
+      "series": "skin-cup",
+      "mode": "reload-zero-build",
+      "subtype": "one-piece-zoro-mobile-cup",
+      "team": "solo",
+      "platform": "mobile",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "2026年11月6日、OCEのモバイルソロ大会。公式順位表で選手の順位・得点・試合・VR・キルを確認。",
+          "url": "https://www.fortnite.com/competitive/events/S43_OnePieceZoroCup_Mobile/?region=OCE"
+        },
+        {
+          "text": "OCEでは上位30位にゾロのコスメ報酬。モバイル操作限定・Reload Zero Build・現金賞金なし。",
+          "url": "https://fortnitetracker.com/events/epicgames_S43_OnePieceZoroCup_Mobile_OCE"
         }
       ]
     }
