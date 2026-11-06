@@ -2,7 +2,7 @@
     'use strict';
     const baseUrl=new URL('.',document.currentScript?.src||document.baseURI);
     const loadJSON=async filename=>{
-      const response=await fetch(new URL(filename,baseUrl),{cache:'no-store'});
+      const response=await fetch(new URL(filename,baseUrl),{cache:'no-cache'});
       if(!response.ok)throw new Error(filename+' could not be loaded (HTTP '+response.status+')');
       return response.json();
     };
@@ -22,7 +22,31 @@
     const $=s=>document.querySelector(s);
     const rawAll=()=>builtIn;
     let selectedSeason='S42';
-    const all=()=>selectedSeason==='all'?rawAll():rawAll().filter(e=>recordSeason(e).id===selectedSeason);
+    // Published records are immutable during a page session. Reuse each season's
+    // filtered array instead of scanning the entire archive on every UI render.
+    const seasonRowsCache=new Map();
+    const all=()=>{
+      if(selectedSeason==='all')return rawAll();
+      if(!seasonRowsCache.has(selectedSeason)){
+        seasonRowsCache.set(selectedSeason,rawAll().filter(e=>recordSeason(e).id===selectedSeason));
+      }
+      return seasonRowsCache.get(selectedSeason);
+    };
+    const seasonPlayerIndexes=new WeakMap();
+    function seasonPlayerIndex(){
+      const rows=all();
+      if(!seasonPlayerIndexes.has(rows)){
+        const byName=new Map();
+        for(const row of rows){
+          for(const name of new Set(names(row))){
+            if(!byName.has(name))byName.set(name,[]);
+            byName.get(name).push(row);
+          }
+        }
+        seasonPlayerIndexes.set(rows,{byName});
+      }
+      return seasonPlayerIndexes.get(rows);
+    }
     const escape=s=>String(s??'').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
     const format=n=>typeof n==='number'&&Number.isFinite(n)?n.toLocaleString('ja-JP'):'—';
     const names=e=>Array.isArray(e.players)&&e.players.length?e.players:[e.player];
@@ -41,7 +65,13 @@
       if(e.prizePerPlayer*roster.length>e.prize+0.001)return 0;
       return e.prizePerPlayer;
     };
+    // WeakMap caches follow the immutable array identity. Both ranking summaries
+    // and hundreds of player cards can share one prize calculation per season.
+    const prizeTotalsCache=new WeakMap();
+    const prizeLookupCache=new WeakMap();
     function prizeTotals(rows=all()){
+      const previous=prizeTotalsCache.get(rows);
+      if(previous)return previous;
       const totals=new Map();
       for(const e of rows){
         const amount=individualPrize(e);
@@ -53,9 +83,16 @@
           totals.set(n,current);
         }
       }
-      return [...totals.values()].sort((a,b)=>b.total-a.total||b.events-a.events||a.name.localeCompare(b.name,'ja'));
+      const ranked=[...totals.values()].sort((a,b)=>b.total-a.total||b.events-a.events||a.name.localeCompare(b.name,'ja'));
+      prizeTotalsCache.set(rows,ranked);
+      return ranked;
     }
-    function playerPrizeTotal(name,rows=all()){return prizeTotals(rows).find(p=>p.name===name)?.total||0}
+    function playerPrizeTotal(name,rows=all()){
+      if(!prizeLookupCache.has(rows)){
+        prizeLookupCache.set(rows,new Map(prizeTotals(rows).map(p=>[p.name,p.total])));
+      }
+      return prizeLookupCache.get(rows).get(name)||0;
+    }
     const tournamentAxes=siteData.tournaments.axes;
     const tournamentCatalog=siteData.tournaments.catalog;
     // Classification is separate from immutable published results. Match both
@@ -113,9 +150,12 @@
       if(!definition||(e.chapter!=null&&e.chapter!==definition.chapter)||(e.season!=null&&e.season!==definition.season))return unknownSeason();
       return definition;
     }
+    let cachedSeasonOptions=null;
     function seasonOptions(){
+      if(cachedSeasonOptions)return cachedSeasonOptions;
       const registered=new Map(rawAll().map(e=>{const info=recordSeason(e);return [info.id,info]}));
-      return [{id:'all',label:'全期間'},...[...registered.values()].filter(s=>s.id!=='unknown').sort((a,b)=>b.chapter-a.chapter||b.season-a.season||a.id.localeCompare(b.id)),...(registered.has('unknown')?[unknownSeason()]:[])];
+      cachedSeasonOptions=[{id:'all',label:'全期間'},...[...registered.values()].filter(s=>s.id!=='unknown').sort((a,b)=>b.chapter-a.chapter||b.season-a.season||a.id.localeCompare(b.id)),...(registered.has('unknown')?[unknownSeason()]:[])];
+      return cachedSeasonOptions;
     }
     function defaultSeason(){return seasonOptions().some(s=>s.id===currentSeasonId)?currentSeasonId:'all'}
     function sanitizeSeason(value){return seasonOptions().some(s=>s.id===value)?value:defaultSeason()}
@@ -130,9 +170,10 @@
       const t=classifyTournamentRecord(e);
       return /practice/i.test(t.subtype||'')||t.series==='skin-cup'?null:e.rank;
     }
+    const candidateNames=new Set(candidates.map(p=>p.name));
     function selectedSeasonPlayers(){
-      const active=new Set(all().flatMap(names));
-      return playerRegistry().filter(p=>selectedSeason==='all'||active.has(p.name)||(selectedSeason===currentSeasonId&&candidates.some(c=>c.name===p.name)));
+      const active=seasonPlayerIndex().byName;
+      return playerRegistry().filter(p=>selectedSeason==='all'||active.has(p.name)||(selectedSeason===currentSeasonId&&candidateNames.has(p.name)));
     }
     function renderSeasonControl(){
       const scope=seasonScope();
@@ -808,10 +849,13 @@
     // Identity membership always uses exact published roster names. Aliases are
     // display-only evidence and never merge records or resolve another identity.
     const profileHref=name=>'#player='+encodeURIComponent(name);
+    let registryCache=null;
     function playerRegistry(){
+      if(registryCache)return registryCache;
       const known=new Set(candidates.map(p=>p.name));
       const extras=[...new Set(rawAll().flatMap(names))].filter(name=>!known.has(name)).map(name=>({name,initials:[...name].slice(0,2).join(''),desc:'登録済みの海外戦績がある選手'}));
-      return [...candidates,...extras];
+      registryCache=[...candidates,...extras];
+      return registryCache;
     }
     function profileNameLinks(e){
       return names(e).map(name=>`<a class="player-name-link" href="${escape(profileHref(name))}" data-open-profile="${escape(name)}">${escape(name)}</a>`).join(' / ');
@@ -1773,9 +1817,12 @@
 
     // A registration date is recorded only when a GitHub addition is verified.
     let registrationLimit=20;
+    const registrationCache=new WeakMap();
     function registeredRows(){
+      const seasonRows=all();
+      if(registrationCache.has(seasonRows))return registrationCache.get(seasonRows);
       const byId=new Map(rawAll().map(record=>[record.id,record]));
-      const inSeason=new Set(all().map(record=>record.id));
+      const inSeason=new Set(seasonRows.map(record=>record.id));
       const seen=new Set(),registered=[];
       for(const entry of updateEntries){
         if(entry.type!=='records'||!Array.isArray(entry.recordIds))continue;
@@ -1786,6 +1833,7 @@
           if(record&&inSeason.has(id))registered.push({record,registeredAt:entry.date});
         }
       }
+      registrationCache.set(seasonRows,registered);
       return registered;
     }
     function registrationItem(item){
@@ -1865,7 +1913,7 @@
       }).join(''):'<div class="empty">この期間に掲載できる確認済みの賞金・総合TOP3・スキン報酬記録はまだありません。</div>';
     }
     function renderHome(){const a=all();$('#stat-results').textContent=a.length;$('#stat-players').textContent=new Set(a.flatMap(names)).size;$('#stat-regions').textContent=new Set(a.map(e=>e.region)).size;$('#stat-top10').textContent=a.filter(e=>e.rank<=10).length;const latest=a.slice().sort((x,y)=>y.date.localeCompare(x.date)).slice(0,3);$('#latest-results').innerHTML=latest.length?latest.map(resultCard).join(''):'<div class="empty">まだ戦績が登録されていないよ</div>';$('#region-breakdown').innerHTML=regions.map(r=>{const n=a.filter(e=>e.region===r).length;const percent=a.length?(n/a.length*100):0;return `<div class="region-entry"><div class="reg-left"><div class="flag" data-region="${escape(r)}">${escape(r)}</div><div class="reg-details"><strong>${{ME:'中東',EU:'ヨーロッパ',NAC:'北米中部',NAW:'北米西部',OCE:'オセアニア',BR:'ブラジル'}[r]}</strong><small>${n?'登録あり':'未登録'}</small><div class="reg-bar"><span style="width:${percent}%"></span></div></div></div><span class="reg-count">${n}</span></div>`}).join('');renderHomeShowcase();renderHomeRecords()}
-    function renderPlayerCard(p){const events=all().filter(e=>names(e).includes(p.name));const sum=playerPrizeTotal(p.name);const evolution=achievementsForPlayer(p.name).evolution;const featured=evolution.featured;return `<a class="player" href="${escape(profileHref(p.name))}" data-open-profile="${escape(p.name)}"><div class="player-top"><div class="avatar">${escape(p.initials)}</div><div><div class="player-name">${escape(p.name)}</div><div class="player-region">🌏 遠征関連選手 · ${events.length?'戦績掲載中':'海外結果を調査中'}</div></div></div><div class="player-blurb"><span class="season-biography-note">${candidates.some(c=>c.name===p.name)?'紹介文：CH7 S4時点':'掲載選手'}</span>${escape(p.desc)}</div><div class="player-achievement-preview" data-player-achievement="${escape(featured?.id||'none')}" data-evolution-tier="${escape(featured?.current?.tier||'locked')}"><span aria-hidden="true">${escape(featured?.icon||'🏅')}</span> ${escape(featured?.current?.title||'実績に挑戦中')} <small>· ${format(evolution.earnedStages)}/${format(evolution.totalStages)}</small></div><div class="player-earnings${sum?'':' zero'}"><span>🏆 ${escape(seasonLabel())}の確認済み賞金<br><small>掲載済み・確認済みの個人累計</small></span><strong>${events.length?'$'+format(sum):'未登録'}</strong></div><div class="player-bottom"><span>掲載された海外戦績 <strong>${events.length}</strong> 件</span><span class="player-card-action">プロフィールを見る →</span></div></a>`}
+    function renderPlayerCard(p){const events=seasonPlayerIndex().byName.get(p.name)||[];const sum=playerPrizeTotal(p.name);const evolution=achievementsForPlayer(p.name).evolution;const featured=evolution.featured;return `<a class="player" href="${escape(profileHref(p.name))}" data-open-profile="${escape(p.name)}"><div class="player-top"><div class="avatar">${escape(p.initials)}</div><div><div class="player-name">${escape(p.name)}</div><div class="player-region">🌏 遠征関連選手 · ${events.length?'戦績掲載中':'海外結果を調査中'}</div></div></div><div class="player-blurb"><span class="season-biography-note">${candidates.some(c=>c.name===p.name)?'紹介文：CH7 S4時点':'掲載選手'}</span>${escape(p.desc)}</div><div class="player-achievement-preview" data-player-achievement="${escape(featured?.id||'none')}" data-evolution-tier="${escape(featured?.current?.tier||'locked')}"><span aria-hidden="true">${escape(featured?.icon||'🏅')}</span> ${escape(featured?.current?.title||'実績に挑戦中')} <small>· ${format(evolution.earnedStages)}/${format(evolution.totalStages)}</small></div><div class="player-earnings${sum?'':' zero'}"><span>🏆 ${escape(seasonLabel())}の確認済み賞金<br><small>掲載済み・確認済みの個人累計</small></span><strong>${events.length?'$'+format(sum):'未登録'}</strong></div><div class="player-bottom"><span>掲載された海外戦績 <strong>${events.length}</strong> 件</span><span class="player-card-action">プロフィールを見る →</span></div></a>`}
     let visible=[]; let selectedPlayer=null;
     const ARCHIVE_PAGE_SIZE=50;
     let archivePage=1;
@@ -1940,7 +1988,9 @@
       const stage=$('#stage-filter').value;
       visible=all().filter(e=>(!selectedPlayer||names(e).includes(selectedPlayer))&&(r==='all'||e.region===r)&&(stage==='all'||e.kind===stage)&&(!prize||isPrizeWin(e))&&(!s||[e.player,...names(e),e.playerRaw,e.event,e.region,e.round,e.note].some(x=>String(x||'').toLowerCase().includes(s))));
       const order=$('#sort-results').value;
-      const registrationDates=new Map(registeredRows().map(item=>[item.record.id,item.registeredAt]));
+      const registrationDates=order==='registered'
+        ?new Map(registeredRows().map(item=>[item.record.id,item.registeredAt]))
+        :null;
       visible.sort((a,b)=>{
         if(order==='oldest')return a.date.localeCompare(b.date);
         if(order==='vrs')return (b.vrs??-1)-(a.vrs??-1)||b.date.localeCompare(a.date);
@@ -1960,7 +2010,16 @@
       const shown=visible.slice((archivePage-1)*ARCHIVE_PAGE_SIZE,archivePage*ARCHIVE_PAGE_SIZE);
       $('#result-table').innerHTML='<div class="archive-head" aria-hidden="true"><span>日付</span><span>選手名</span><span>地域</span><span>大会名</span><span>順位</span><span>KILLS</span><span>VR</span><span>賞金 / USD</span></div><div class="archive-list">'+shown.map(archiveRow).join('')+'</div>';
     }
-    function renderPlayers(){const s=($('#search-players').value||'').trim().toLowerCase();const shown=selectedSeasonPlayers().filter(p=>[p.name,...(confirmedAliases[p.name]||[])].some(n=>n.toLowerCase().includes(s)));const sort=$('#player-sort').value;shown.sort((a,b)=>sort==='name'?a.name.localeCompare(b.name,'ja'):sort==='events'?all().filter(e=>names(e).includes(b.name)).length-all().filter(e=>names(e).includes(a.name)).length||a.name.localeCompare(b.name,'ja'):playerPrizeTotal(b.name)-playerPrizeTotal(a.name)||a.name.localeCompare(b.name,'ja'));$('#all-players').innerHTML=shown.length?shown.map(renderPlayerCard).join(''):'<div class="empty">一致する選手はまだいないよ</div>'}
+    function renderPlayers(){
+      const s=($('#search-players').value||'').trim().toLowerCase();
+      const shown=selectedSeasonPlayers().filter(p=>[p.name,...(confirmedAliases[p.name]||[])].some(n=>n.toLowerCase().includes(s)));
+      const sort=$('#player-sort').value;
+      const byName=seasonPlayerIndex().byName;
+      shown.sort((a,b)=>sort==='name'?a.name.localeCompare(b.name,'ja')
+        :sort==='events'?(byName.get(b.name)?.length||0)-(byName.get(a.name)?.length||0)||a.name.localeCompare(b.name,'ja')
+        :playerPrizeTotal(b.name)-playerPrizeTotal(a.name)||a.name.localeCompare(b.name,'ja'));
+      $('#all-players').innerHTML=shown.length?shown.map(renderPlayerCard).join(''):'<div class="empty">一致する選手はまだいないよ</div>';
+    }
 
     function refresh(){renderSeasonControl();renderHome();renderResults();renderEarnings();renderPlayers();renderAotPR();renderUpdates()}
     function csvText(rows){const cols=['date','player','players','region','event','round','rank','points','kills','vrs','prize','prizePerPlayer','kind','source','verified','note','chapter','season','seasonId'];const cell=x=>'"'+String(x??'').replace(/"/g,'""')+'"';return '\ufeff'+cols.join(',')+'\r\n'+rows.map(e=>cols.map(k=>cell(k==='players'?names(e).join(' / '):['chapter','season','seasonId'].includes(k)?recordSeason(e)[k]:e[k])).join(',')).join('\r\n')}
