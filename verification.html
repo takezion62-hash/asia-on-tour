@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b0c19">
+<meta name="description" content="ASIA ON TOURの確認待ち・重複疑い・掲載履歴を参照するデータ検証センター">
+<title>データ検証センター · ASIA ON TOUR</title>
+<link rel="stylesheet" href="./verification.css?v=1">
+<script src="./verification-core.js?v=1" defer></script>
+<script src="./verification.js?v=1" defer></script>
+</head>
+<body>
+<div class="layout">
+<aside class="side">
+<a class="logo" href="./index.html#home">ASIA <span>ON TOUR</span><small>DATA INTEGRITY</small></a>
+<nav aria-label="サイト内ナビゲーション">
+<a href="./index.html#home"><span>ダッシュボード</span></a>
+<a href="./index.html#results"><span>遠征結果</span></a>
+<a href="./index.html#calendar"><span>大会カレンダー</span></a>
+<a href="./index.html#updates"><span>更新履歴</span></a>
+<a href="./verification.html" aria-current="page"><span>データ検証センター</span></a>
+</nav>
+<p class="side-note">UNOFFICIAL FAN PROJECT<br>公開ページは閲覧専用です</p>
+</aside>
+<main>
+<header class="head">
+<div class="kicker">ASIA ON TOUR / DATA VERIFICATION CENTER</div>
+<h1>データ<span>検証センター</span></h1>
+<p>確認待ちの成績・掲載データの重複疑い・調査の進み具合をまとめて確認。大会の実績は推測で補完せず、公開済みのランキングや賞金を変更しません。</p>
+<div class="meta"><span id="audit-last-check">最終チェック：読み込み中…</span><span id="audit-data-date">集計対象：全期間</span></div>
+<div class="actions"><button type="button" id="audit-refresh" class="btn">↻ 最新データで再検証</button><a class="btn" href="./index.html#updates">更新履歴に戻る</a><a class="btn" href="https://github.com/takezion62-hash/asia-on-tour/actions" target="_blank" rel="noopener noreferrer">管理者：GitHub Actions ↗</a></div>
+</header>
+<div id="audit-loading" class="notice" role="status" aria-live="polite">データを読み込んで検証中…</div>
+<section class="metrics" aria-label="検証サマリー">
+<div class="metric"><small>確認待ち候補</small><strong id="metric-queue">—</strong><p>現在の候補ファイル内</p></div>
+<div class="metric"><small>重複・分裂疑い</small><strong id="metric-duplicate">—</strong><p>判断前の照合候補</p></div>
+<div class="metric"><small>形式の不整合</small><strong id="metric-error">—</strong><p>基本項目の検査</p></div>
+<div class="metric"><small>未登録の大会ID</small><strong id="metric-unmapped">—</strong><p>自動収集の照合対象</p></div>
+</section>
+<section class="panel">
+<h2>確認メニュー</h2>
+<p class="note">すべての数値は公開データのスナップショットから計算。結果が0件でも全大会を網羅したことは意味しません。</p>
+<div class="tabs" role="tablist" aria-label="検証カテゴリ">
+<button type="button" class="tab" role="tab" id="tab-queue" aria-selected="true" data-tab="queue">確認待ち</button>
+<button type="button" class="tab" role="tab" id="tab-duplicates" aria-selected="false" data-tab="duplicates">重複・大会枠</button>
+<button type="button" class="tab" role="tab" id="tab-errors" aria-selected="false" data-tab="errors">不整合</button>
+<button type="button" class="tab" role="tab" id="tab-unmapped" aria-selected="false" data-tab="unmapped">未登録大会</button>
+<button type="button" class="tab" role="tab" id="tab-coverage" aria-selected="false" data-tab="coverage">収集状況</button>
+<button type="button" class="tab" role="tab" id="tab-history" aria-selected="false" data-tab="history">検証履歴</button>
+</div>
+<div class="filters">
+<label class="search">検索<input id="audit-search" type="search" placeholder="選手・大会・IDを検索" autocomplete="off"></label>
+<label>地域<select id="audit-region"><option value="all">全地域</option><option>ME</option><option>EU</option><option>NAC</option><option>NAW</option><option>OCE</option><option>BR</option></select></label>
+</div>
+<div id="audit-summary" class="note" aria-live="polite"></div>
+<div id="audit-items" role="tabpanel" aria-labelledby="tab-queue" aria-live="polite"></div>
+<div class="pager"><button type="button" id="audit-prev" class="btn" disabled>← 前へ</button><small id="audit-pagination">—</small><button type="button" id="audit-next" class="btn" disabled>次へ →</button></div>
+</section>
+<section class="panel">
+<h2>検証センターの判定ルール</h2>
+<p>同じ日付・大会・地域というだけでは重複確定にしません。特に予選と決勝、別Event/Session、同名別人は別々に扱い、公式ウィンドウと出典を人間が照合してから修正します。</p>
+<p>候補はGitHub Actionsが取得した情報です。出典未確認の賞金・スキン報酬・予選突破は掲載確定ではありません。公開ページに承認・削除・賞金編集などの書き込み機能はありません。</p>
+<div class="actions"><a href="https://github.com/takezion62-hash/asia-on-tour/blob/main/AUTO_SYNC.md" target="_blank" rel="noopener noreferrer">自動収集の仕様 ↗</a><a href="https://github.com/takezion62-hash/asia-on-tour/blob/main/README.md" target="_blank" rel="noopener noreferrer">既存の検証規則 ↗</a></div>
+</section>
+<p class="footer">ASIA ON TOUR · Fortnite非公式コミュニティサイト / Epic Gamesとは無関係</p>
+</main>
+</div>
+</body>
+</html>
