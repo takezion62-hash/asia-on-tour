@@ -54,4 +54,7 @@ test('月地域の掲載件数は調査完了を意味せず候補と独立集�
  const rows=audit.coverage([record('a'),record('b',{region:'EU'})],q);
  assert.deepEqual(rows.find(x=>x.region==='ME'),{month:'2026-10',region:'ME',published:1,pending:1});
  assert.deepEqual(audit.unregistered([{unmappedEventIds:['X','Y']},{unmappedEventIds:['X','Z']}]),['X','Y','Z']);
+ const withCalendar=audit.coverage([],[],[{month:'2024-06'}]);
+ assert.equal(withCalendar.length,6);
+ assert.equal(withCalendar.find(x=>x.region==='ME').published,0);
 });
