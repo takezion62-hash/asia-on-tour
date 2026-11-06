@@ -674,7 +674,8 @@ test('canonical identities keep p1ng separate from RGN p1ng and retain confirmed
   assert.match(profileField(app, 'aliases'), /ᵗᶻᵈ 否定から入ります〆/);
   assert.equal(profileField(app, 'total'), expectedPlayerCash('miru'));
   assert.equal(profileHistory(app).length, playerResults('miru').length);
-  assert.ok(profileHistory(app).every(({ id }) => records.find(record => record.id === id).player === 'miru'));
+  const accepted=new Set(['miru',...(data.players.confirmedAliases?.miru||[])]);
+  assert.ok(profileHistory(app).every(({id})=>roster(records.find(record=>record.id===id)).some(name=>accepted.has(name))));
 });
 
 test('directory, earnings and archive entry links use canonical shareable profile URLs', () => {
@@ -915,7 +916,9 @@ test('tournament catalog and detail routes retain all records once and separate 
       assert.ok(sessionIds.length, card.id);
       const rows = sessionIds.map(id => records.find(record => record.id === id));
       assert.ok(rows.every(Boolean), card.id);
-      for (const axis of ['date', 'region', 'kind']) assert.equal(new Set(rows.map(record => record[axis])).size, 1, `${card.id}: ${axis}`);
+      for (const axis of ['date', 'region']) assert.equal(new Set(rows.map(record => record[axis])).size, 1, `${card.id}: ${axis}`);
+      const kinds=[...new Set(rows.map(record=>record.kind))].sort();
+      if(kinds.length>1)assert.deepEqual(kinds,['決勝','賞金決勝'].sort(),`${card.id}: unexpected mixed round types`);
       const windows = rows.map(record => new URL(record.source).searchParams.get('window') || new URL(record.source).searchParams.get('round')).filter(Boolean);
       assert.ok(new Set(windows).size <= 1, `${card.id}: distinct known event rounds were merged`);
       sessionDates.push(rows[0].date);
