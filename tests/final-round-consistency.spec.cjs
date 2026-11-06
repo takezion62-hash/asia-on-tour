@@ -1,6 +1,6 @@
 'use strict';
 const {test,expect}=require('@playwright/test');
-const {loadData}=require('../scripts/data-checks.cjs');
+const {loadData,tournamentFor}=require('../scripts/data-checks.cjs');
 const path=require('node:path');
 const data=loadData(path.join(__dirname,'..')).data;
 const paidScope={date:'2026-08-16',region:'NAW',round:'Day 3 · Round 2 / 賞金決勝',kind:'賞金決勝'};
@@ -33,7 +33,11 @@ test('Missing Tracker window ID does not split a clearly labeled same-day final'
  const expected=data.results.filter(r=>r.event==='Solo Reload Victory Cup'&&
    r.date===scope.date&&r.region===scope.region&&r.round===scope.round);
  expect(expected.length).toBeGreaterThan(5);
- await page.goto(href(scope));
+ // This later final belongs to a different season than the August S41 fixture.
+ // Resolve its catalog identity from the actual record instead of reusing S41.
+ const tournament=tournamentFor(expected[0],data);
+ expect(tournament).toBeTruthy();
+ await page.goto('/?season=all#tournament='+encodeURIComponent(tournament.id)+'?'+new URLSearchParams(scope).toString());
  await expect(page.locator('#tournament-record-sessions [data-tournament-record]')).toHaveCount(expected.length);
  await expect(page.locator('#tournament-record-sessions .tournament-session')).toHaveCount(1);
 });
