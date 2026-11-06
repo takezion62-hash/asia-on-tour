@@ -1,0 +1,113 @@
+name: AOT reviewed candidate publication request
+on:
+  workflow_dispatch:
+    inputs:
+      candidate_ids:
+        description: "確認済み候補ID（カンマ区切り、最大20件）"
+        required: true
+        type: string
+      publication_policy:
+        description: "掲載種別（未確認賞金は自動確定しません）"
+        required: true
+        type: choice
+        default: attendance-only
+        options:
+          - attendance-only
+          - verified-rule
+      confirmation:
+        description: "Epic ID/開催枠/出典を人間が確認したらCONFIRMを選択"
+        required: true
+        type: choice
+        default: NOT_CONFIRMED
+        options:
+          - NOT_CONFIRMED
+          - CONFIRM
+      preview_only:
+        description: "確認レポートのみ作成（PRは作成しない）"
+        required: true
+        type: boolean
+        default: true
+permissions:
+  contents: write
+  pull-requests: write
+concurrency:
+  group: aot-provider-history-main
+  cancel-in-progress: false
+jobs:
+  propose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Require main branch and explicit human approval
+        env:
+          CONFIRM: ${{ inputs.confirmation }}
+        run: |
+          test "$GITHUB_REF" = "refs/heads/main" || { echo "::error::Run this workflow against main only"; exit 1; }
+          test "$CONFIRM" = "CONFIRM" || { echo "::error::Explicit CONFIRM is required"; exit 1; }
+      - name: Checkout latest main snapshot
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: main
+          fetch-depth: 1
+          persist-credentials: true
+      - name: Set up Node
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '24'
+          cache: npm
+      - name: Install locked test dependencies
+        run: npm ci --ignore-scripts
+      - name: Validate reviewer selection and generate preview
+        env:
+          AOT_APPROVAL_IDS: ${{ inputs.candidate_ids }}
+          AOT_APPROVAL_POLICY: ${{ inputs.publication_policy }}
+          AOT_APPROVAL_CONFIRMATION: ${{ inputs.confirmation }}
+        run: node scripts/manual-approval.cjs --dry-run
+      - name: Keep inspectable approval preview
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.0
+        with:
+          name: approval-preview
+          path: |
+            .manual-approval-summary.md
+            .manual-approval-report.json
+          retention-days: 14
+          if-no-files-found: ignore
+          include-hidden-files: true
+      - name: Stop after preview
+        if: ${{ inputs.preview_only }}
+        run: echo "Preview only, no GitHub branch or result JSON writes."
+      - name: Prepare approved changes
+        if: ${{ !inputs.preview_only }}
+        env:
+          AOT_APPROVAL_IDS: ${{ inputs.candidate_ids }}
+          AOT_APPROVAL_POLICY: ${{ inputs.publication_policy }}
+          AOT_APPROVAL_CONFIRMATION: ${{ inputs.confirmation }}
+        run: node scripts/manual-approval.cjs
+      - name: Validate data, account identity rules and publication engine
+        if: ${{ !inputs.preview_only }}
+        run: |
+          npm run validate
+          node --test tests/manual-approval.test.cjs tests/verified-history-approval.test.cjs
+      - name: Open an inspectable PR, never write directly to main
+        if: ${{ !inputs.preview_only }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          git add results.json updates.json auto-sync-review.json history-sync-review.json auto-sync-status.json history-sync-status.json approval-history.json
+          if git diff --cached --quiet; then
+            echo "No publishable candidates (already registered). No PR needed."
+            exit 0
+          fi
+          BRANCH="reviewed-results/$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c "$BRANCH"
+          git commit -m "review: propose manually verified candidate results"
+          git push -u origin "$BRANCH"
+          gh pr create --repo "$GITHUB_REPOSITORY" \
+            --base main --head "$BRANCH" \
+            --title "Review: safe publication of verified ASIA ON TOUR candidates" \
+            --body-file .manual-approval-summary.md
+          echo "A PR was created. Human review and merge are still required."
