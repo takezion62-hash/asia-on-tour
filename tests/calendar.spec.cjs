@@ -342,7 +342,7 @@ test('同日同大会の報酬・参加確認は1開催枠、別ラウンドだ�
 test('大会詳細は未確認Event番号の決勝と確認済み決勝を同枠にまとめる',async({page})=>{
  await page.goto('/?season=all#tournament=ch7s4-solo-victory-cup?date=2026-09-22');
  await expect(page.locator('#page-tournament')).toBeVisible();
- const all=page.locator('.tournament-session').filter({hasText:'ME'});
+ const all=page.locator('.tournament-session').filter({has:page.locator('.tournament-session-heading [data-region="ME"]')});
  // Page may render multiple regions; ME must have only Round 1 and Round 2 for the date.
  const labels=await all.allTextContents();
  expect(labels.filter(s=>s.includes('Event 3')&&s.includes('Round 2')).length).toBe(1);
