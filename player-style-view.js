@@ -131,14 +131,18 @@
      +(proof||'<tr><td colspan="7">表示できる掲載戦績はないょ</td></tr>')+'</tbody></table></div>'
      +'<p class="style-note">ここには最新15件を表示。元戦績・資格確認・対象大会は他のページでも確認できるょ</p></details>';
    return '<section class="profile-style" id="profile-style" aria-labelledby="profile-style-title">'
-     +'<div class="style-head"><div><span class="style-kicker">PLAYER STYLE / REGION PERFORMANCE</span><h2 id="profile-style-title">プレイスタイル<span>分析</span></h2>'
-     +'<p>海外大会の実測結果から攻撃・勝利・得意地域を比較。戦術的なIGL/フラッガー役は推測しないょ</p></div><span class="style-icon" aria-hidden="true">🎯</span></div>'
+     +'<details class="style-fold" id="profile-style-fold">'
+     +'<summary class="style-fold-summary"><span class="style-fold-intro"><span class="style-kicker">PLAYER STYLE / REGION PERFORMANCE</span>'
+     +'<span class="style-fold-title" id="profile-style-title">🎯 プレイスタイル<span>分析</span></span>'
+     +'<span class="style-fold-desc">攻撃・勝利・得意地域の詳しい分析</span></span>'
+     +'<span class="style-fold-action" aria-hidden="true"><span class="style-fold-closed">詳細を見る ⌄</span><span class="style-fold-opened">閉じる ⌃</span></span></summary>'
+     +'<div class="style-fold-body">'
      +filterMarkup+(f.season==='all'&&report.recommendedSeason?'<div class="style-season-help"><span>🌱 シーズンをそろえると地域別の得意傾向をより正確に比較できるょ</span><button type="button" data-style-season-pick="'+esc(report.recommendedSeason)+'">記録が充実した '+esc(report.recommendedSeason)+' に絞る ↗</button></div>':'')+summary+qualityHtml+style+affinity+specialtyHtml+observed+adapt
      +'<h3 class="style-region-title">🌍 地域別パフォーマンス</h3>'+regionStats
      +'<p class="style-region-note">地域の累計キル数では判定しない。得意地域候補は同シーズン・同形式・同シリーズで2地域以上の15試合・3開催枠を満たし、総合差が10点以上の場合のみ表示（キル効率70%＋VR率30%）。大会の難易度差は補正していないょ</p>'
      +'<div class="style-extra">'+percentiles+radar(report.style)+'</div>'
      +trendHtml+graphs+momentumHtml+evidenceHtml
-     +'<p class="style-footnote">出典確認済みの掲載結果と本人確認済み出場アーカイブの重複排除分のみを対象にしているょ。試合数不明はK/試合・VR率に加えず、チームのキルやVRを個人の数字として扱わない。大会未掲載・詳細未確認・同一IDの矛盾は集計しない。<button type="button" data-style-growth-jump class="style-jump">既存の成長グラフを見る ↗</button> ／ <a href="./verification.html">データ検証センター</a></p></section>';
+     +'<p class="style-footnote">出典確認済みの掲載結果と本人確認済み出場アーカイブの重複排除分のみを対象にしているょ。試合数不明はK/試合・VR率に加えず、チームのキルやVRを個人の数字として扱わない。大会未掲載・詳細未確認・同一IDの矛盾は集計しない。<button type="button" data-style-growth-jump class="style-jump">既存の成長グラフを見る ↗</button> ／ <a href="./verification.html">データ検証センター</a></p></div></details></section>';
  }
  function comparison(reports,options={}){
    const selected=Array.isArray(reports)?reports:[];
@@ -175,11 +179,17 @@
               :'<small>掲載済み戦績なし</small>')+'</td>';
         }).join('')+'</tr>';
      }).join('')+'</tbody></table></div>';
-   return '<section class="compare-style" aria-labelledby="compare-style-title"><div class="style-head"><div><span class="style-kicker">PLAYSTYLE COMPARISON</span><h2 id="compare-style-title">プレイスタイル<span>比較</span></h2><p>選手比較の期間・地域・形式・大会シリーズと同期。チーム形式は別途そろえるょ</p></div></div>'
+   return '<section class="compare-style" aria-labelledby="compare-style-title">'
+     +'<details class="style-fold" id="compare-style-fold">'
+     +'<summary class="style-fold-summary"><span class="style-fold-intro"><span class="style-kicker">PLAYSTYLE COMPARISON</span>'
+     +'<span class="style-fold-title" id="compare-style-title">⚔️ プレイスタイル<span>比較</span></span>'
+     +'<span class="style-fold-desc">選手ごとの特徴と6地域の実測値を比較</span></span>'
+     +'<span class="style-fold-action" aria-hidden="true"><span class="style-fold-closed">詳細を見る ⌄</span><span class="style-fold-opened">閉じる ⌃</span></span></summary>'
+     +'<div class="style-fold-body">'
      +'<div class="style-filters"><label>チーム形式<select id="compare-style-team" aria-label="プレイスタイル比較 チーム形式">'+opts+'</select></label></div>'
      +'<div class="style-compare-row">'+cards+'</div>'
      +'<h3 class="style-region-title">🌍 同条件の地域別実測比較</h3>'+regionMatrix
-     +'<p class="style-footnote">試合数がわからない記録は率に含めません。チーム戦はチームキル・チームVR。得意地域候補は厳密に同じ条件で比較可能な地域が複数ある場合にのみ表示します。</p></section>';
+     +'<p class="style-footnote">試合数がわからない記録は率に含めません。チーム戦はチームキル・チームVR。得意地域候補は厳密に同じ条件で比較可能な地域が複数ある場合にのみ表示します。</p></div></details></section>';
  }
  return Object.freeze({profile,comparison,radar});
 });
