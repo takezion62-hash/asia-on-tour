@@ -2,6 +2,14 @@
   "version": 1,
   "entries": [
     {
+      "id": "site-default-s43-20261107",
+      "date": "2026-11-07",
+      "type": "site",
+      "title": "最新シーズン CH7 S5 を初期表示に変更",
+      "description": "サイトの既定の集計期間をS42（CH7 S4）からS43（CH7 S5）へ変更。トップページ、選手名鑑、ランキングなどに反映。URLのseason指定、過去シーズン、全期間表示は従来通り維持し、画面内の初期ラベルと回帰テストも更新。",
+      "recordIds": []
+    },
+    {
       "id": "site-performance-optimization-20261107",
       "date": "2026-11-07",
       "type": "site",
