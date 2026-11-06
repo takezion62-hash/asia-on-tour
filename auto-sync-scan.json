@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-11-06T07:36:30.706Z",
+  "checkedAt": "2026-11-06T13:27:05.766Z",
   "windows": {
     "epicgames_S43_PerformanceEvaluationTrios_EU/S43_PerformanceEvaluation_Event1Round1_EU": {
       "nextPage": 7,
@@ -50,6 +50,14 @@
       "totalPages": 4
     },
     "epicgames_S43_PerformanceEvaluationTrios_EU/S43_PerformanceEvaluation_Event1Round2_EU": {
+      "nextPage": 1,
+      "complete": true,
+      "proposals": [],
+      "pages": 1,
+      "emptyAttempts": 0,
+      "totalPages": 1
+    },
+    "epicgames_S43_PerformanceEvaluationTrios_NAC/S43_PerformanceEvaluation_Event1Round2_NAC": {
       "nextPage": 1,
       "complete": true,
       "proposals": [],
