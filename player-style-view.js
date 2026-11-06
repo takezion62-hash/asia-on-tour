@@ -20,7 +20,7 @@
  };
  const trendGraph=(rows,metric,label,color)=>{
    const points=rows.map(r=>({month:r.month,value:r[metric]})).filter(p=>p.value!=null&&Number.isFinite(p.value));
-   if(points.length<2)return '<div class="style-box"><h3>'+esc(label)+'</h3><p class="style-note">グラフ表示には実測月が2か月以上必要だょ</p></div>';
+   if(points.length<2)return '<div class="style-box style-trend-plot"><h3>'+esc(label)+'</h3><p class="style-note">グラフ表示には実測月が2か月以上必要だょ</p></div>';
    const stamp=p=>Number(p.month.slice(0,4))*12+Number(p.month.slice(5,7));
    const months=points.map(stamp),min=Math.min(...months),span=Math.max(1,Math.max(...months)-min);
    const max=Math.max(0.001,...points.map(p=>p.value));
