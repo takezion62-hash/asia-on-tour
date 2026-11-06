@@ -13,7 +13,7 @@ const knownFields=['id','date','region','player','playerRaw','players','event','
 const pick=(r,k)=>r?.[k]===undefined?null:r[k];
 const equalCandidate=(a,b)=>knownFields.every(k=>JSON.stringify(pick(a,k))===JSON.stringify(pick(b,k)));
 const safeInt=n=>Number.isSafeInteger(n)&&n>=0;
-const validDate=d=>typeof d==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(d)&&new Date(d).toISOString().slice(0,10)===d;
+const validDate=d=>typeof d==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(d)&&Number.isFinite(Date.parse(d))&&new Date(d).toISOString().slice(0,10)===d;
 const norm=s=>String(s||'').trim();
 const canon=(name,aliases)=>{
   if(!aliases||typeof aliases!=='object')return name;
