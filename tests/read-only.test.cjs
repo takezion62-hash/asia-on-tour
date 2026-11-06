@@ -1338,6 +1338,19 @@ test('CSV contains only the selected season and current search/filter results wi
   assert.deepEqual([exported[0].chapter, exported[0].season, exported[0].seasonId], ['7', '3', 'S41']);
 });
 
+test('S43 opens by default while explicit S42 and all-season URLs keep their requested scope', () => {
+  const initial = boot(script, { search: '', hash: '#home' });
+  assert.equal(initial.get('season-select').value, 'S43');
+  assert.equal(initial.get('stat-results').textContent, summarize(data, 'S43').records);
+  assert.ok(seasonChoices(initial).some(s => s.id === 'S42' && s.label === 'CH7 S4'));
+  const previous = boot(script, { search: '?season=S42', hash: '#home' });
+  assert.equal(previous.get('season-select').value, 'S42');
+  assert.equal(previous.get('stat-results').textContent, summarize(data, 'S42').records);
+  const all = boot(script, { search: '?season=all', hash: '#home' });
+  assert.equal(all.get('season-select').value, 'all');
+  assert.equal(all.get('stat-results').textContent, summarize(data, 'all').records);
+});
+
 test('missing or conflicting season evidence is unconfirmed and unsupported URL seasons never create phantom data', () => {
   const base = sampleRecord;
   const mixed = new URL(base.source); mixed.searchParams.set('window', 'S41_Other_Round1_ME');
@@ -1351,9 +1364,9 @@ test('missing or conflicting season evidence is unconfirmed and unsupported URL 
   assert.ok(renderedArticles(app).every(e => e.content.includes('data-record-season="unknown"')));
   assert.ok(!seasonChoices(app).some(s => s.id === 'S44'));
   const invalid = boot(script, { search: '?season=S999', hash: '#player=miru' });
-  assert.equal(invalid.get('season-select').value, 'S42');
-  assert.equal(profileField(invalid, 'total'), currency(records.filter(r => seasonFor(r, data) === 'S42' && roster(r).includes('miru')).reduce((sum, r) => sum + personalCash(r), 0)));
-  assert.equal(invalid.get('stat-results').textContent, summarize(data, 'S42').records);
+  assert.equal(invalid.get('season-select').value, 'S43');
+  assert.equal(profileField(invalid, 'total'), currency(records.filter(r => seasonFor(r, data) === 'S43' && roster(r).includes('miru')).reduce((sum, r) => sum + personalCash(r), 0)));
+  assert.equal(invalid.get('stat-results').textContent, summarize(data, 'S43').records);
   assert.equal(invalid.storageAccesses(), 0);
 });
 
