@@ -257,9 +257,20 @@
       monthly.get(month).push(r);
     }
     const trend=[...monthly].sort(([a],[b])=>a.localeCompare(b)).map(([month,rows])=>({month,...summarize(rows)}));
+    const seasonCounts=new Map();
+    for(const r of ownAll.rows){
+      const season=typeof helpers.seasonOf==='function'?helpers.seasonOf(r):r.seasonId;
+      if(!/^S\d+$/.test(String(season||'')))continue;
+      const current=seasonCounts.get(season)||{season,matches:0,records:0};
+      current.records++;
+      if(good(r.matches)&&r.matches>0)current.matches+=r.matches;
+      seasonCounts.set(season,current);
+    }
+    const recommendedSeason=[...seasonCounts.values()]
+      .sort((a,b)=>b.matches-a.matches||Number(b.season.slice(1))-Number(a.season.slice(1)))[0]?.season||null;
     const overlapping=[...new Set([...ownAll.overlapping,...chosen.overlapping])];
     return {player:name,filters:f,stats,style,regions:allRegionMetrics,affinity,trend,
-      specialties:regionalSpecialties,momentum:momentum(chosen.rows),evidence:evidence(chosen.rows),
+      specialties:regionalSpecialties,momentum:momentum(chosen.rows),evidence:evidence(chosen.rows),recommendedSeason,
       available:ownAll.rows.length,overlapping,conflicts:selection.conflicts,
       quality:adequacy(chosen.rows),coverage:quality(stats,overlapping,selection.conflicts)};
   }
