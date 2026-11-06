@@ -21,7 +21,7 @@
     const regions=['ME','EU','NAC','NAW','OCE','BR'];
     const $=s=>document.querySelector(s);
     const rawAll=()=>builtIn;
-    let selectedSeason='S42';
+    let selectedSeason='S43';
     // Published records are immutable during a page session. Reuse each season's
     // filtered array instead of scanning the entire archive on every UI render.
     const seasonRowsCache=new Map();
@@ -120,7 +120,7 @@
       return {id:'unconfirmed-'+encodeURIComponent([periodId,e.event,source.eventId||e.id].join('|')),name:e.event||'大会名未確認',chapter:period.chapter,season:period.season,seasonId:periodId,sourceEventIds:source.eventId?[source.eventId]:[],series:'unknown',mode:'unknown',subtype:'unknown',team:'unknown',platform:'unknown',evidence:[{text:'登録名・出典の識別子に一致する確認済み分類がないため、各項目を未確認としています。'}]};
     }
     // Season identity is explicit metadata, never inferred from dates or S-number arithmetic.
-    const currentSeasonId='S42';
+    const currentSeasonId='S43';
     const unknownSeason=()=>({id:'unknown',seasonId:'unknown',chapter:null,season:null,label:'未確認'});
     function buildSeasonMetadata(){
       const definitions=new Map(),conflicts=new Set();
@@ -183,7 +183,7 @@
       $('#home-season-label').textContent=selectedSeason==='all'?'ALL SEASONS · OVERSEAS ARCHIVE':`${seasonLabel()} · OVERSEAS ARCHIVE`;
       $('#home-season-description').textContent=`${scope}の海外サーバー挑戦を記録する`;
       $('#archive-season-description').textContent=`${scope}の海外大会アーカイブ。掲載済みの戦績を検索・閲覧できます。`;
-      $('#players-season-description').textContent=`${scope}の掲載選手。CH7 S4の追跡候補は戦績0件でも掲載しています。紹介文はCH7 S4時点の記録で、集計値は選択期間に対応します。`;
+      $('#players-season-description').textContent=`${scope}の掲載選手。今シーズンは追跡対象の選手を戦績0件でも表示します。紹介文は作成時点の情報で、集計値は選択期間に対応します。`;
       $('#home-earnings-title').innerHTML=`🏆 ${escape(seasonPrizeLabel())} <span style="color:#e8c383">TOP 5</span>`;
       $('#ranking-season-description').textContent=`${scope} · 個人の確認済み賞金額（USD）`;
       $('#ranking-completeness').textContent='このランキングは、ASIA ON TOURに掲載されている海外大会戦績をもとに集計しています。未掲載の大会があるため、選手の実際の全成績とは異なる場合があります。公式ランキングではありません。';
