@@ -31,7 +31,7 @@ test('プロフィールに根拠・2種の得意地域・データ品質・月�
  assert.match(html,/style-evidence/);
  assert.match(html,/Solo Victory Cup/);
  assert.match(html,/style-trend-plot/);
- assert.match(html,/source/);
+ assert.match(html,/出典 ↗/);
 });
 test('全期間はおすすめシーズン絞り込みを表示するが、結果を勝手に変えない',()=>{
  const r=report();r.filters.season='all';
