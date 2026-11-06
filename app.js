@@ -979,6 +979,7 @@
         +'VR未確認の結果は合計に含めません。AOT PRは選んだ条件の戦績に現行の独自計算式を再適用した参考値で、'
         +'公式順位や選手間の勝率・大会参加回数を保証するものではありません。'
         +'決勝TOP3は順位を確認できる賞金決勝のみで、掲載されていない大会結果は補完しません。</p>';
+      renderComparisonStyle(state);
     }
     function updateComparison(next,replace=false){
       const normalized=compareSanitize(next);
@@ -1485,6 +1486,50 @@
     // Growth charts are all-time even when another season is selected, just
     // like the evolving titles. All values use the site's present calculation
     // rules and source-verified archive rather than estimated historic stats.
+
+    // Playstyle is separate from AOT PR, achievements and financial records.
+    // Use official published records plus the existing deduplicated Epic-ID participation bridge.
+    const styleState={season:'all',team:'solo',mode:'battle-royale',series:'victory-cup',region:'all'};
+    let styleCompareTeam='solo';
+    function styleInputRecords(){
+      return mergeForPR(rawAll(),participationPRRows,'all').records;
+    }
+    function styleReport(name,filters){
+      return AsiaPlayerStyle.analyze(styleInputRecords(),name,filters,{
+        classify:classifyTournamentRecord,seasonOf:row=>recordSeason(row).id
+      });
+    }
+    function styleChoices(key){
+      return (tournamentAxes.find(axis=>axis.key===key)?.options||[])
+        .filter(option=>option.id!=='unknown'&&option.id!=='all').map(option=>({id:option.id,label:option.label}));
+    }
+    function renderProfileStyle(name){
+      const anchor=$('#profile-growth');
+      if(!anchor||!window.AsiaPlayerStyle||!window.AsiaPlayerStyleView)return;
+      const report=styleReport(name,styleState);
+      const html=AsiaPlayerStyleView.profile(report,{
+        modes:styleChoices('mode'),series:styleChoices('series'),
+        seasons:seasonOptions().filter(item=>item.id!=='unknown'&&item.id!=='all')
+          .map(item=>({id:item.id,label:item.label}))
+      });
+      const old=$('#profile-style');
+      if(old)old.outerHTML=html;
+      else anchor.insertAdjacentHTML('afterend',html);
+    }
+    function renderComparisonStyle(state=compareState){
+      const host=$('#compare-report');
+      if(!host||!window.AsiaPlayerStyle||!window.AsiaPlayerStyleView)return;
+      const stateFilters=state||compareDefaults();
+      const filters={season:selectedSeason,team:styleCompareTeam,mode:stateFilters.mode,
+        series:stateFilters.series,region:stateFilters.region};
+      const reports=stateFilters.players.map(name=>styleReport(name,filters));
+      const html=AsiaPlayerStyleView.comparison(reports,{team:styleCompareTeam});
+      const old=$('#compare-style');
+      // Use a predictable id so subsequent filter changes replace only this panel.
+      if(old)old.outerHTML=html.replace('class="compare-style"','class="compare-style" id="compare-style"');
+      else host.insertAdjacentHTML('afterend',html.replace('class="compare-style"','class="compare-style" id="compare-style"'));
+    }
+
     const growthState={grouping:'month',metric:'pr',mode:'cumulative',selectedKey:null};
     const growthCache=new Map();
     function growthReport(name,grouping=growthState.grouping){
@@ -1592,6 +1637,7 @@
       renderJourney(info);
       renderProfileAotPR(info.name);
       renderProfileGrowth(info.name);
+      renderProfileStyle(info.name);
       window.AOTParticipation?.renderProfile(info.name);
       return true;
     }
@@ -1940,6 +1986,7 @@
       if(rankingRegion&&currentView.page==='players'){updateRankingFilter('region',rankingRegion.dataset.rankingRegion);return}
       if(e.target.closest('[data-ranking-more]')&&currentView.page==='players'){rankingLimit+=30;renderRanking();return}
       if(e.target.closest('[data-registrations-more]')&&currentView.page==='updates'){registrationLimit+=20;renderUpdates();return}
+      if(e.target.closest('[data-style-growth-jump]')&&currentView.page==='profile'){e.preventDefault();$('#profile-growth')?.scrollIntoView({behavior:'smooth',block:'start'});return}
       if(e.target.closest('[data-journey-jump]')){e.preventDefault();$('#journey-title')?.focus?.({preventScroll:true});$('#profile-journey')?.scrollIntoView?.({behavior:'instant',block:'start'});return}
       if(currentView.page==='profile'){
         const control=e.target.closest('[data-growth-grouping],[data-growth-mode],[data-growth-metric],[data-growth-point]');
@@ -2020,7 +2067,9 @@
       addComparisonPlayer($('#compare-player-input')?.value);
     });
     document.addEventListener('input',e=>{if(e.target.id==='tournament-query')updateTournamentFilters('q',e.target.value)});
-    document.addEventListener('change',e=>{if(e.target.id==='season-select'){changeSeason(e.target.value);return}if(e.target.id==='tournament-date-filter'&&currentView.page==='tournament'){showTournamentDate(e.target.value);return}
+    document.addEventListener('change',e=>{if(e.target.dataset.styleFilter&&currentView.page==='profile'){const key=e.target.dataset.styleFilter;if(Object.hasOwn(styleState,key)){styleState[key]=e.target.value;renderProfileStyle(currentView.name)}return}
+      if(e.target.id==='compare-style-team'&&currentView.page==='compare'){if(AsiaPlayerStyle.TEAMS.includes(e.target.value)){styleCompareTeam=e.target.value;renderComparisonStyle(compareState)}return}
+      if(e.target.id==='season-select'){changeSeason(e.target.value);return}if(e.target.id==='tournament-date-filter'&&currentView.page==='tournament'){showTournamentDate(e.target.value);return}
       if(e.target.id==='compare-filter-season'&&currentView.page==='compare'){changeSeason(e.target.value);return}
       if(e.target.dataset.compareFilter&&currentView.page==='compare'){
         const key=e.target.dataset.compareFilter;
@@ -2040,6 +2089,7 @@
         $('#profile-content .aot-pr-profile')?.remove();
         renderProfileAotPR(currentView.name);
         renderProfileGrowth(currentView.name);
+        renderProfileStyle(currentView.name);
       }
       if(currentView.page==='compare')renderComparison();
     });
