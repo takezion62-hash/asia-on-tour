@@ -358,3 +358,21 @@ test('API履歴の同時刻・同大会・同地域の別IDは重複表示しな
  expect(txt.some(x=>x.includes('Round 1'))).toBe(true);
  expect(txt.some(x=>x.includes('Round 2'))).toBe(true);
 });
+
+test('手動追加した参加者がスキン・FNCS決勝の既存開催枠と合流する',async({page})=>{
+ const pairs=[
+  {date:'2026-09-25',region:'NAW',name:'Madison Beer Icon Cup',expected:8},
+  {date:'2026-03-29',region:'ME',name:'FNCS Division 1',expected:2},
+  {date:'2026-08-01',region:'ME',name:'Champion Aphrodite FNCS Cup',expected:17}
+ ];
+ for(const event of pairs){
+  await page.goto('/?season=all#calendar?month='+event.date.slice(0,7)+'&date='+event.date+'&region='+event.region+'&scope=results');
+  await expect(page.locator('#page-calendar')).toBeVisible();
+  const card=page.locator('.calendar-event').filter({hasText:event.name});
+  await expect(card).toHaveCount(1);
+  await expect(card).toContainText('掲載済み：'+event.expected+'戦績');
+  await card.locator('h3 a').click();
+  await expect(page.locator('#page-tournament')).toBeVisible();
+  await expect(page.locator('.tournament-result')).toHaveCount(event.expected);
+ }
+});
