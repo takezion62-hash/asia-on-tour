@@ -2021,7 +2021,9 @@
       $('#all-players').innerHTML=shown.length?shown.map(renderPlayerCard).join(''):'<div class="empty">一致する選手はまだいないよ</div>';
     }
 
-    function refresh(){renderSeasonControl();renderHome();renderResults();renderEarnings();renderPlayers();renderAotPR();renderUpdates()}
+    // Archive and player cards are expensive and belong to hidden pages at startup.
+    // showView() already renders each on demand, including deep links and season changes.
+    function refresh(){renderSeasonControl();renderHome();renderEarnings();renderAotPR();renderUpdates()}
     function csvText(rows){const cols=['date','player','players','region','event','round','rank','points','kills','vrs','prize','prizePerPlayer','kind','source','verified','note','chapter','season','seasonId'];const cell=x=>'"'+String(x??'').replace(/"/g,'""')+'"';return '\ufeff'+cols.join(',')+'\r\n'+rows.map(e=>cols.map(k=>cell(k==='players'?names(e).join(' / '):['chapter','season','seasonId'].includes(k)?recordSeason(e)[k]:e[k])).join(',')).join('\r\n')}
     function download(name,content,type){const b=new Blob([content],{type});const url=URL.createObjectURL(b);const a=document.createElement('a');a.href=url;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000)}
     document.addEventListener('click',e=>{
