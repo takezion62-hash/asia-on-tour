@@ -6,10 +6,10 @@
   const n=v=>Number.isFinite(v)?v.toLocaleString('ja-JP'):'—';
   const s=v=>v==null?'':String(v);
   const data={};
-  const state={tab:'queue',page:0,search:'',region:'all',loaded:false};
+  const state={tab:'queue',page:0,search:'',region:'all',loaded:false,selected:new Set()};
   const labels={queue:'確認待ち',duplicates:'重複・大会枠',errors:'不整合',unmapped:'未登録大会',coverage:'収集状況',history:'検証履歴'};
   const required=['results.json','auto-sync-review.json','history-sync-review.json','auto-sync-status.json','history-sync-status.json'];
-  const files=[...required,'history-sync-reviewed.json','updates.json','calendar-history-status.json','calendar-history-index.json'];
+  const files=[...required,'history-sync-reviewed.json','updates.json','calendar-history-status.json','calendar-history-index.json','approval-history.json'];
   const dom=(tag,cls,content)=>{
     const el=document.createElement(tag);
     if(cls)el.className=cls;
@@ -35,6 +35,16 @@
     if(item.badge)top.append(dom('span','badge '+(item.level||'info'),item.badge));
     top.append(dom('span','itemtitle',item.title||'確認項目'));
     d.append(top);
+    if(state.tab==='queue'&&item.id&&!item.alreadyPublished){
+      const choice=dom('label','audit-select');
+      const input=dom('input');input.type='checkbox';input.checked=state.selected.has(item.id);
+      input.addEventListener('change',()=>{
+        if(input.checked)state.selected.add(item.id);else state.selected.delete(item.id);
+        updateSelected();
+      });
+      choice.append(input,dom('span','','掲載申請用に候補IDを選択'));
+      d.append(choice);
+    }
     if(item.meta)d.append(dom('div','sub',item.meta));
     if(item.description)d.append(dom('div','sub',item.description));
     if(item.people?.length){
@@ -54,6 +64,20 @@
     }
     return d;
   }
+  function updateSelected(){
+    $('audit-selected-count').textContent='選択中 '+n(state.selected.size)+'件';
+    $('audit-copy-ids').disabled=state.selected.size===0;
+  }
+  async function copyIds(){
+    if(!state.selected.size)return;
+    const value=[...state.selected].join(',');
+    try{
+      await navigator.clipboard.writeText(value);
+      $('audit-selected-count').textContent=n(state.selected.size)+'件のIDをコピーしました';
+    }catch{
+      $('audit-selected-count').textContent='コピーできません。候補ID：'+value;
+    }
+  }
   function timeText(raw){
     const t=Date.parse(s(raw));
     return Number.isFinite(t)?new Date(t).toLocaleString('ja-JP',{timeZone:'Asia/Tokyo',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'})+' JST':'未実行';
@@ -71,6 +95,7 @@
     const historic=data['history-sync-status.json']||{};
     const recent=data['auto-sync-status.json']||{};
     const historyReviewed=data['history-sync-reviewed.json']?.entries||[];
+    const reviewApprovals=data['approval-history.json']?.entries||[];
     const updates=data['updates.json']?.entries||[];
     const out={queue:[],duplicates:[],errors:[],unmapped:[],coverage:[],history:[]};
     for(const p of queue){
@@ -80,7 +105,7 @@
         title:s(p.player)|| (Array.isArray(p.players)?p.players.join(' / '):'選手不明'),
         description:s(p.reviewReason)||(p.prize==null?'賞金未確認：確定前に公式ルールと本人IDを照合':'追加検証が必要'),
         meta:[p.origin==='history'?'過去大会':'直近',p.date,p.region,p.event,p.round,p.rank!=null?'#'+n(p.rank):'',p.alreadyPublished?'同一IDが掲載済み':''].filter(Boolean).join(' · '),
-        id:p.id,region:p.region,searchText:JSON.stringify(p),ids:p.id?[p.id]:[],link:p.source
+        id:p.id,alreadyPublished:p.alreadyPublished,region:p.region,searchText:JSON.stringify(p),ids:p.id?[p.id]:[],link:p.source
       });
     }
     for(const x of issues){
@@ -109,6 +134,13 @@
       out.history.push({badge:'サイト更新',level:'ok',title:s(x.title)||'変更履歴',
         description:s(x.description),meta:s(x.date)+' · '+s(x.type)+' · '+n(Array.isArray(x.recordIds)?x.recordIds.length:0)+'件の戦績ID',
         searchText:[x.date,x.title,x.description,x.id].join(' '),region:'',ids:Array.isArray(x.recordIds)?x.recordIds:[]});
+    }
+    for(const x of reviewApprovals){
+      out.history.push({badge:'管理者の掲載承認',level:'ok',title:'掲載確認 '+s(x.id),
+        description:x.policy==='attendance-only'?'出場確認のみ・賞金と通過は未認定':'公式ルールで確認済みの突破・0VR',
+        meta:'承認日時：'+timeText(x.approvedAt)+' · '+s(x.policy),
+        searchText:[x.id,x.recordId,x.policy,x.approvedAt].join(' '),
+        ids:[x.id,x.recordId].filter(Boolean),link:x.source,source:x.rule,region:''});
     }
     for(const x of historyReviewed){
       out.history.push({badge:x.decision==='published'?'掲載判断':x.decision==='already-published'?'重複解決':'確認済み',
@@ -166,6 +198,9 @@
       $('audit-summary').textContent='取得エラー';$('audit-pagination').textContent='—';
     }else{
       state.loaded=true;
+      const valid=new Set(engine.proposals(data['auto-sync-review.json'],data['history-sync-review.json'],data['results.json']).filter(x=>!x.alreadyPublished).map(x=>x.id));
+      for(const key of state.selected)if(!valid.has(key))state.selected.delete(key);
+      updateSelected();
       const recent=data['auto-sync-status.json'],historic=data['history-sync-status.json'];
       const checked=[recent.checkedAt,historic.checkedAt].filter(Boolean).sort().at(-1);
       $('audit-last-check').textContent='自動調査の最終チェック：'+timeText(checked);
@@ -190,6 +225,7 @@
   $('audit-prev').addEventListener('click',()=>{if(state.page>0){state.page--;render()}});
   $('audit-next').addEventListener('click',()=>{state.page++;render()});
   $('audit-refresh').addEventListener('click',refresh);
+  $('audit-copy-ids').addEventListener('click',copyIds);
   const hash=location.hash.slice(1);
   if(Object.prototype.hasOwnProperty.call(labels,hash))state.tab=hash;
   refresh();
