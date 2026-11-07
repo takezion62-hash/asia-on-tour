@@ -17,7 +17,9 @@ on:
 permissions:
   contents: write
 concurrency:
-  group: aot-provider-recent-main
+  # Serialize recent and historical writers of results.json/updates.json.
+  # Never let simultaneous push-triggered scans race on a JSON rebase.
+  group: aot-provider-results-main
   cancel-in-progress: false
 jobs:
   check:
