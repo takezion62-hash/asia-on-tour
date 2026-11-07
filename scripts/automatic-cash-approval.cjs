@@ -16,9 +16,7 @@ function cashPrize(rule,region,rank){
  // Ranges are inclusive: top #10 following top #5 covers sixth through tenth.
  for(const tier of tiers){
   if(rank<=tier.through)return tier.perPlayer;
- }
- return null;
-}
+ }\n // Rank beyond the last awarded place has no cash prize.\n return 0;\n}
 function cashLimitForWindow(win){
  const rule=RULES[win?.tournamentId];
  if(!rule||win.series!=='cash-cup'||win.kind!=='参加確認'||
@@ -108,7 +106,9 @@ function decide(row,win,checkpoint,data){
  const record={...base,round:row.round.replace(/\s*\/\s*参加確認$/u,' / 賞金決勝'),
   kind:'賞金決勝',prize:cash,prizePerPlayer:share,
   note:'Epic公式賞金規則で'+win.region+'・Event '+event+'の'+row.rank+
-   '位は1人
+   '位は個人賞金USD '+share+'、チーム合計USD '+cash+'。'+
+   (share===0?'賞金圏外のため現金賞金は0。':'公式地域別順位の賞金額を適用。')+
+   '保存済みOsirion順位表、'+expected+
    '名の既知Epic ID、公式開催日時を照合済み。受給資格の審査・支払完了は未確認。規則: '+rule.source};
  return {approved:true,record,rule:rule.source};
 }
