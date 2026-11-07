@@ -1,7 +1,7 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-07T16:22:55.105Z",
+  "checkedAt": "2026-11-07T16:45:33.123Z",
   "mode": "review",
   "scope": "history",
   "dateMode": "rolling",
@@ -11,16 +11,16 @@
   "provider": "osirion",
   "linkedPlayers": 522,
   "trackedWindows": 2909,
-  "found": 177,
-  "skipped": 14,
-  "imported": 11,
+  "found": 210,
+  "skipped": 11,
+  "imported": 0,
   "scannedPages": 80,
-  "completedWindows": 169,
+  "completedWindows": 170,
   "identityConflicts": 3,
-  "alreadyRegistered": 1160,
+  "alreadyRegistered": 1172,
   "autoApprovedTotal": 734,
   "invalidCachedCandidates": 1,
-  "manualReviewCandidates": 177,
+  "manualReviewCandidates": 210,
   "autoApprovedCosmeticThisRun": 0,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
@@ -31,7 +31,7 @@
   "malformedFailures": 0,
   "skippedLeaderboards": [],
   "reviewOnlyWindows": 1289,
-  "reviewOnlyCandidates": 88,
+  "reviewOnlyCandidates": 99,
   "unmappedEvents": 240,
   "unmappedEventIds": [
     "S30_ConsoleCashCups",
@@ -47,27 +47,27 @@
     "S30_Reload",
     "S30_ReloadZB"
   ],
-  "message": "公式順位表と規則でS35/S38の0VR決勝（ソロ以外・デュオ／スクワッド）を1件$0掲載。既存戦績の重複0件を確認済みに移動。残り確認待ち177件。未確定賞金や取得途中の順位は変更しない。",
+  "message": "最新版と安全統合：新規掲載0件、重複スキップ0件、要確認の競合0件、確認待ち210件。既存の戦績・賞金は保持。",
   "manuallyPublished": 59,
   "manuallyResolvedDuplicates": 2,
   "lastReviewedBatchAt": "2026-11-07T16:22:59.206Z",
   "manuallyCorrected": 1,
   "lastCorrectedReviewAt": "2026-11-07T09:14:30.244Z",
   "concurrentMerge": {
-    "appended": 11,
+    "appended": 0,
     "alreadyPublished": 0,
     "reviewConflicts": 0,
-    "keptPending": 178,
-    "reconciledAt": "2026-11-07T16:22:56.916Z"
+    "keptPending": 210,
+    "reconciledAt": "2026-11-07T16:45:35.446Z"
   },
   "coverage": {
     "total": 2909,
-    "completed": 169,
-    "notStarted": 2710,
-    "partial": 18,
+    "completed": 170,
+    "notStarted": 2707,
+    "partial": 20,
     "retryWaiting": 12,
     "retryDue": 0,
-    "remaining": 2740,
+    "remaining": 2739,
     "retryCount": 12,
     "completionPercent": 5.8,
     "byRegion": {
@@ -93,8 +93,8 @@
       },
       "NAC": {
         "total": 528,
-        "completed": 28,
-        "pending": 500
+        "completed": 29,
+        "pending": 499
       },
       "NAW": {
         "total": 319,
@@ -115,8 +115,8 @@
       },
       "2026": {
         "total": 1257,
-        "completed": 115,
-        "pending": 1142
+        "completed": 116,
+        "pending": 1141
       }
     },
     "outsideScopeCheckpoints": 0,
