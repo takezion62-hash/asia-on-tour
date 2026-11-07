@@ -151,14 +151,12 @@ function advancementLimit(win){
  const isEU=win.region==='EU',isNAC=win.region==='NAC';
  const type=win.tournamentId;
  // 2024 Epic rules had a unified NA region. Never convert this cutoff to NAC/NAW.
- const verified2024={
-  'ch5s3-solo-victory-cup':{seasonId:'S30',advance:{"EU":7000,"BR":2000,"ME":2000,"OCE":2000}},
-  'ch5s3-zb-solo-victory':{seasonId:'S30',advance:{"EU":7000,"BR":2000,"ME":2000,"OCE":2000}},
-  'ch5s4-solo-victory-cup':{seasonId:'S31',advance:{"EU":15000,"BR":2500,"ME":2000,"OCE":1500}},
-  'ch5s4-zb-solo-victory':{seasonId:'S31',advance:{"EU":3000,"BR":1000,"ME":1000,"OCE":600}}
- };
- const historic=verified2024[type];
- if(historic&&historic.seasonId===win.seasonId)return historic.advance[win.region]||null;
+ // The verified region-specific qualifying cutoffs are held in the same
+ // official rules registry displayed in the Sources tab.
+ const documented=RULES[type];
+ if(documented&&documented.seasonId===win.seasonId&&
+    (!win.eventId||documented.eventIds.includes(win.eventId)))
+  return documented.advance?.[win.region]||null;
  if((type==='ch7s3-solo-victory-cup'||type==='ch7s4-solo-victory-cup')&&['S41','S42'].includes(win.seasonId))return isEU?4000:isNAC?2000:800;
  if(['S41','S42'].includes(win.seasonId)&&type.endsWith('-solo-reload-victory-cup'))return isEU?1600:isNAC?800:320;
  if(win.seasonId==='S42'&&type.endsWith('-console-zero-build-solo-victory-cup'))return isEU||isNAC?2000:1000;
