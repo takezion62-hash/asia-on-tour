@@ -11,7 +11,7 @@
   "provider": "osirion",
   "linkedPlayers": 459,
   "trackedWindows": 2783,
-  "found": 64,
+  "found": 15,
   "skipped": 7,
   "imported": 96,
   "scannedPages": 80,
@@ -20,7 +20,7 @@
   "alreadyRegistered": 795,
   "autoApprovedTotal": 590,
   "invalidCachedCandidates": 1,
-  "manualReviewCandidates": 64,
+  "manualReviewCandidates": 15,
   "autoApprovedCosmeticThisRun": 0,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
@@ -28,7 +28,7 @@
   "retryWindows": 9,
   "transientFailures": 0,
   "reviewOnlyWindows": 1271,
-  "reviewOnlyCandidates": 64,
+  "reviewOnlyCandidates": 15,
   "unmappedEvents": 244,
   "unmappedEventIds": [
     "S30_ConsoleCashCups",
@@ -44,8 +44,9 @@
     "S30_Reload",
     "S30_ReloadZB"
   ],
-  "message": "2026-11-07過去大会ルール確認: 新規30件、完全一致の既存0件、保留0件。現金1VR=$100、予選突破320/2000位規則のみ適用。",
-  "manuallyPublished": 30,
-  "manuallyResolvedDuplicates": 0,
-  "lastRuleReviewedAt": "2026-11-07T03:20:28.520Z"
+  "message": "過去大会の出場・公式報酬確認: 38件新規掲載、11件既存一致、1件この実行では保留。疑義のあるOCE PlayStation13件とUnreal Cup賞金分配1件は未処理。",
+  "manuallyPublished": 68,
+  "manuallyResolvedDuplicates": 11,
+  "lastRuleReviewedAt": "2026-11-07T03:20:28.520Z",
+  "lastAttendanceReviewedAt": "2026-11-07T03:25:38.520Z"
 }
