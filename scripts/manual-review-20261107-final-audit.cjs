@@ -96,10 +96,10 @@ hStatus.message='過去候補を照合完了。無効開催枠13件は掲載除�
 aStatus.found=0;aStatus.manualReviewCandidates=0;aStatus.reviewOnlyCandidates=0;
 aStatus.reviewedExactDuplicates=(aStatus.reviewedExactDuplicates||0)+2;
 aStatus.lastAuditAt=now;aStatus.message='最新候補2件は既存のZoro Mobileスキン結果と完全一致。新規重複なしで確認待ちを解消。';
-updates.entries.unshift({id:marker,date:now.slice(0,10),type:'records',
+updates.entries.unshift({id:marker,date:now.slice(0,10),type:'site',
  title:'確認待ち候補の照合を完了：無効大会・重複・順位差を整理',
  description:'OCE PlayStation Cup 2026/6/7の無効開催枠13件は掲載対象外。ME Solo Reloadの74/75位差異はEpic公式75位を採用して二重登録せず。OCE Zoro Mobileの既存スキン2件は重複除外。既存の賞金・成績は保持。',
- recordIds:[old.id,...ZORO_IDS.map(id=>ledger.entries.find(x=>x.id===id).existingId)]});
+ recordIds:[]});
 write('results.json',results);write('history-sync-review.json',history);write('auto-sync-review.json',current);
 write('history-sync-status.json',hStatus);write('auto-sync-status.json',aStatus);
 write('history-sync-reviewed.json',ledger);write('approval-history.json',approvals);write('updates.json',updates);
