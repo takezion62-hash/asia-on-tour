@@ -1,6 +1,6 @@
 'use strict';
 const test=require('node:test'),assert=require('node:assert/strict');
-const {identity,linkedAccounts,parseStage,discover,discoverUnmapped,selectHistoricalWindows,historicalEvidenceScore,resolveHistoricalScope,selectActiveWindows,fetchJson,advancementLimit,transientLeaderboardFailure,normalizeRow}=require('../scripts/osirion-sync.cjs');
+const {identity,linkedAccounts,parseStage,discover,discoverUnmapped,selectHistoricalWindows,historicalEvidenceScore,resolveHistoricalScope,selectActiveWindows,fetchJson,advancementLimit,transientLeaderboardFailure,normalizeRow,getLeaderboard,leaderboardResponseError,recoverableLeaderboardFailure,holdLeaderboardWindow}=require('../scripts/osirion-sync.cjs');
 const f='https://fortnitetracker.com/profile/all/Alpha/events?id=8a57ac58-f937-4de2-81b7-9abd070c7ae8';
 test('Tracker UUID can map to the same 32-char account ID after strict validation',()=>{
  assert.equal(identity(f),'8a57ac58f9374de281b79abd070c7ae8');
@@ -247,4 +247,85 @@ test('expanded 2023 history safely discovers explicitly catalogued Test Cup atte
  const unknown=discoverUnmapped([event],[],opts,Date.parse('2026-11-06T05:00:00Z'));
  assert.deepEqual(unknown,['S28_ArchiveTestCup']);
  assert.deepEqual(discoverUnmapped([event],catalog,opts,Date.parse('2026-11-06T05:00:00Z')),[]);
+});
+
+test('malformed historical leaderboard holds its own window with full event and page diagnostics',async()=>{
+ const win={key:'epicgames_S31_SoloVictoryCashCup_OCE/S31_SoloVictoryCashCup_Event3Round2_OCE',
+  fullEventId:'epicgames_S31_SoloVictoryCashCup_OCE',
+  windowId:'S31_SoloVictoryCashCup_Event3Round2_OCE',region:'OCE',series:'victory-cup',
+  dateJst:'2024-09-16',end:Date.parse('2024-09-16T12:00:00Z')};
+ const issue=leaderboardResponseError(win,7,{leaderboardEventId:win.fullEventId,
+  leaderboardEventWindowId:'S31_SoloVictoryCashCup_Event3Round1_OCE',entries:[],totalPages:12});
+ assert.equal(issue.code,'OSIRION_INVALID_LEADERBOARD');
+ assert.match(issue.message,/大会順位表のID\/形式が不正/);
+ assert.match(issue.message,/windowId=/);
+ assert.match(issue.message,/page=7/);
+ assert.equal(recoverableLeaderboardFailure(issue),true);
+ const previous={nextPage:7,pages:7,totalPages:12,complete:false,
+  proposals:[{id:'original-confirmed-row'}],lastSeenRank:88,rankingOrderValid:true};
+ const time=Date.parse('2026-11-07T08:00:00Z');
+ const held=holdLeaderboardWindow(previous,issue,win,7,time);
+ assert.equal(previous.nextPage,7);
+ assert.equal(previous.complete,false);
+ assert.equal(previous.proposals[0].id,'original-confirmed-row');
+ assert.equal(previous.lastSeenRank,88);
+ assert.equal(previous.errorAttempts,1);
+ assert.equal(previous.lastErrorPage,7);
+ assert.equal(previous.lastErrorCode,'OSIRION_INVALID_LEADERBOARD');
+ assert.equal(held.page,7);
+ assert.equal(held.window,win.key);
+ assert.equal(held.retryAfter,'2026-11-07T14:00:00.000Z');
+ const healthy={...win,key:'healthy'};
+ const paused=selectHistoricalWindows([win,healthy],{windows:{[win.key]:previous}},
+  {maxWindowsPerRun:2},time+3600000,[]);
+ assert.deepEqual(paused.map(x=>x.key),['healthy']);
+ const next=selectHistoricalWindows([win,healthy],{windows:{[win.key]:previous}},
+  {maxWindowsPerRun:2},time+7*3600000,[]);
+ assert.ok(next.some(x=>x.key===win.key),'The malformed window becomes eligible to retry later');
+ const second=holdLeaderboardWindow(previous,issue,win,7,time+7*3600000);
+ assert.equal(second.attempt,2);
+ assert.equal(Date.parse(second.retryAfter)-(time+7*3600000),12*3600000);
+});
+
+test('missing response IDs or entries are not guessed, even when HTTP is 200',async()=>{
+ const w={key:'epicgames_S31_Example_OCE/S31_Example_Event1Round1_OCE',
+ fullEventId:'epicgames_S31_Example_OCE',windowId:'S31_Example_Event1Round1_OCE',series:'victory-cup'};
+ const original=globalThis.fetch;
+ try{
+  for(const response of [
+   {success:true,leaderboard:{entries:[],totalPages:12}},
+   {success:true,leaderboard:{leaderboardEventId:w.fullEventId,
+      leaderboardEventWindowId:'S31_MISMATCH_OCE',entries:[],totalPages:12}},
+   {success:true,leaderboard:{leaderboardEventId:w.fullEventId,
+      leaderboardEventWindowId:w.windowId,totalPages:12}},
+   {success:true,leaderboard:{leaderboardEventId:w.fullEventId,
+      leaderboardEventWindowId:w.windowId,entries:[],totalPages:2001}}
+  ]){
+   globalThis.fetch=async()=>({ok:true,json:async()=>response});
+   await assert.rejects(()=>getLeaderboard(w,0),e=>
+    e.code==='OSIRION_INVALID_LEADERBOARD'&&recoverableLeaderboardFailure(e));
+  }
+ }finally{globalThis.fetch=original}
+});
+test('provider HTTP 404 is skipped by window but 401, code defects and auth issues are not hidden',()=>{
+ assert.equal(recoverableLeaderboardFailure(new Error('Osirion API HTTP 404 /v1/tournaments/leaderboard')),true);
+ assert.equal(recoverableLeaderboardFailure(new Error('Osirion API HTTP 422 /v1/tournaments/leaderboard')),true);
+ assert.equal(recoverableLeaderboardFailure(new Error('Osirion API HTTP 401 /v1/tournaments/leaderboard')),false);
+ assert.equal(recoverableLeaderboardFailure(new Error('Osirion API HTTP 403 /v1/tournaments/leaderboard')),false);
+ assert.equal(recoverableLeaderboardFailure(new ReferenceError('unknown function')),false);
+ assert.equal(recoverableLeaderboardFailure(new Error('Osirion API HTTP 503 /v1/tournaments/leaderboard')),true);
+});
+test('large 175-page historic cups pass strict IDs without expanding the 80-page work budget',async()=>{
+ const w={key:'epicgames_S31_LegacyCashCup_EU/S31_LegacyCashCup_Event1Round1_EU',
+ fullEventId:'epicgames_S31_LegacyCashCup_EU',
+ windowId:'S31_LegacyCashCup_Event1Round1_EU',series:'cash-cup'};
+ const f=globalThis.fetch;
+ globalThis.fetch=async()=>({ok:true,json:async()=>({success:true,leaderboard:{
+  leaderboardEventId:w.fullEventId,leaderboardEventWindowId:w.windowId,entries:[],totalPages:175
+ }})});
+ try{
+  const received=await getLeaderboard(w,0);
+  assert.equal(received.totalPages,175);
+  assert.equal(leaderboardResponseError(w,0,received),null);
+ }finally{globalThis.fetch=f}
 });
