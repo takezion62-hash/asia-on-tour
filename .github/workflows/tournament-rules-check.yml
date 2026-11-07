@@ -53,7 +53,7 @@ jobs:
         run: |
           node --check source-rules.js
           npm run validate
-          node --test tests/tournament-rules.test.cjs tests/cosmetic-rank-rules.test.cjs tests/verified-history-approval.test.cjs tests/automatic-cash-approval.test.cjs
+          node --test tests/tournament-rules.test.cjs tests/cosmetic-rank-rules.test.cjs tests/verified-history-approval.test.cjs tests/automatic-cash-approval.test.cjs tests/automatic-performance-approval.test.cjs
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
       - name: PC and mobile rulebook tests
