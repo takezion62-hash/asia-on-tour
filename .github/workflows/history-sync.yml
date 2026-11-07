@@ -4,6 +4,8 @@ on:
     branches: [main]
     paths:
       - "scripts/osirion-sync.cjs"
+      - "scripts/safe-sync-merge.cjs"
+      - "tests/safe-sync-merge.test.cjs"
       - "scripts/verified-history-approval.cjs"
       - "scripts/auto-sync-core.cjs"
       - "scripts/automatic-cosmetic-approval.cjs"
@@ -47,6 +49,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '24'
+      - name: Snapshot the original main before the historical provider scan
+        run: node scripts/safe-sync-merge.cjs snapshot history "$RUNNER_TEMP/aot-history-base.json"
       - name: Delay historical API calls
         run: sleep 35
       - name: Scan historical Osirion tournaments and approve verified results
@@ -55,28 +59,34 @@ jobs:
         run: |
           npm run validate
           node --test tests/auto-sync.test.cjs tests/osirion-sync.test.cjs tests/non-victory-auto-sync.test.cjs tests/verified-history-approval.test.cjs tests/automatic-cosmetic-approval.test.cjs tests/cosmetic-rank-rules.test.cjs tests/automatic-cash-approval.test.cjs tests/automatic-unreal-approval.test.cjs tests/automatic-performance-approval.test.cjs tests/tournament-rules.test.cjs
-      - name: Commit only verified results and review state
+      - name: Preserve the verified scan output before refreshing main
+        run: node scripts/safe-sync-merge.cjs snapshot history "$RUNNER_TEMP/aot-history-scanned.json"
+      - name: Reconcile and commit verified history onto newest main (conflict-safe)
         run: |
-          if [ -z "$(git status --porcelain -- results.json updates.json history-sync-status.json history-sync-review.json history-sync-scan.json)" ]; then
-            echo "No historical review changes"
-            exit 0
-          fi
+          set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add results.json updates.json history-sync-status.json history-sync-review.json history-sync-scan.json
-          git commit -m "data: save historical AOT review candidates"
-          # Race-safe, bounded retry: integrate other bots' commits, never force push.
+          # No git pull --rebase for generated JSON: each attempt starts from the
+          # latest main and safely replays only this scan's verified additions.
           for attempt in 1 2 3 4 5; do
-            git pull --rebase origin main || {
-              git rebase --abort || true
-              echo "Rebase conflict: preserve both histories and require review"
-              exit 1
-            }
-            if git push origin HEAD:main; then
+            echo "SAFE_HISTORY_MERGE attempt ${attempt}/5"
+            git fetch origin main
+            git reset --hard origin/main
+            node scripts/safe-sync-merge.cjs merge history "$RUNNER_TEMP/aot-history-base.json" "$RUNNER_TEMP/aot-history-scanned.json"
+            npm run validate
+            node --test tests/safe-sync-merge.test.cjs
+            git add results.json updates.json history-sync-status.json history-sync-review.json history-sync-scan.json
+            if git diff --cached --quiet; then
+              echo "SAFE_HISTORY_MERGE no new data to publish"
               exit 0
             fi
-            echo "Remote advanced between pull and push; retrying ($attempt/5)"
+            git commit -m "data: safely merge historical AOT sync into newest main"
+            if git push origin HEAD:main; then
+              echo "SAFE_HISTORY_MERGE published with existing history preserved"
+              exit 0
+            fi
+            echo "Main moved during historical sync; replay changes onto newest main"
             sleep $((attempt * 3))
           done
-          echo "Could not push after 5 safe retries"
+          echo "SAFE_HISTORY_MERGE failed after 5 conflict-safe attempts"
           exit 1
