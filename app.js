@@ -234,7 +234,7 @@
     // cash/qualification/cosmetic outcome. Do not merge distinct numbered rounds.
     function canonicalTournamentRound(round,kind,tournamentId,date,region){
       let label=String(round||'').trim();
-      if(tournamentId==='ch7s1-one-million-unreal-cup'&&/^Session\s*1\s*\//iu.test(label))
+      if(tournamentId==='ch7s1-one-million-unreal-cup'&&/^(?:Session\s*1|単一開催枠)\s*\//iu.test(label))
         return 'Session 1 / 賞金決勝';
       if(['ch7s3-champion-aphrodite-fncs-cup-battle-royale','ch7s4-madison-beer-icon-cup-reload'].includes(tournamentId)
          &&/^(?:Session\s*1|単一開催枠)\s*\//iu.test(label))
@@ -262,7 +262,7 @@
       return label;
     }
     function canonicalTournamentKind(kind,tournamentId,round){
-      if(tournamentId==='ch7s1-one-million-unreal-cup'&&/^Session\s*1\s*\//iu.test(String(round||'')))return '賞金決勝';
+      if(tournamentId==='ch7s1-one-million-unreal-cup'&&/^(?:Session\s*1|単一開催枠)\s*\//iu.test(String(round||'')))return '賞金決勝';
       if(['ch7s3-champion-aphrodite-fncs-cup-battle-royale','ch7s4-madison-beer-icon-cup-reload'].includes(tournamentId)
         &&/^(?:Session\s*1|単一開催枠)\s*\//iu.test(String(round||'')))return 'スキン大会';
       if(tournamentId==='ch7s2-fncs-division-1'
