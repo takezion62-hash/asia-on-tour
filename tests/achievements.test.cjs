@@ -122,6 +122,25 @@ test('six evolving badge tracks have five strictly increasing rank goals',()=>{
     assert.deepEqual(track.steps.map(step=>step.tier),engine.EVOLUTION_TIERS.map(t=>t.id));
   }
 });
+test('legendary rarity promotions keep existing award criteria and 文武両道 stays RARE',()=>{
+ const expected={
+  'twenty-kills':'破壊神',
+  'zero-build-champion':'ゼロビルドの覇者',
+  'podium-streak':'表彰台の常連'
+ };
+ for(const [id,title] of Object.entries(expected)){
+  const def=engine.SPECIAL_CATALOG.find(x=>x.id===id);
+  assert.ok(def,'Missing existing title '+id);
+  assert.equal(def.title,title);
+  assert.equal(def.rarity,'legendary');
+ }
+ const keep=engine.SPECIAL_CATALOG.find(x=>x.id==='skin-and-cash');
+ assert.equal(keep.title,'文武両道');
+ assert.equal(keep.rarity,'rare');
+ assert.equal(engine.SPECIAL_CATALOG.find(x=>x.id==='final-runner-up').rarity,'epic');
+ assert.equal(engine.SPECIAL_CATALOG.find(x=>x.id==='no-vr-cash').rarity,'epic');
+});
+
 test('no-VR cash earner and finals runner-up are EPIC; achievement conditions stay intact',()=>{
  for(const [id,title] of [
   ['no-vr-cash','勝たずして稼ぐ'],
@@ -341,7 +360,7 @@ test('破壊神 uses precise solo 65 / duo 120 / trio 150 thresholds, including 
   assert.equal(engine.DESTRUCTION_KILLS.solo,65);
   assert.equal(engine.DESTRUCTION_KILLS.duo,120);
   assert.equal(engine.DESTRUCTION_KILLS.trio,150);
-  assert.equal(engine.SPECIAL_CATALOG.find(x=>x.id==='twenty-kills').rarity,'epic');
+  assert.equal(engine.SPECIAL_CATALOG.find(x=>x.id==='twenty-kills').rarity,'legendary');
   assert.equal(engine.SPECIAL_CATALOG.find(x=>x.id==='vr-and-cash').rarity,'rare');
 });
 test('破壊神 does not infer team size from incomplete/contradictory entries and rejects unverified KILLS',()=>{
