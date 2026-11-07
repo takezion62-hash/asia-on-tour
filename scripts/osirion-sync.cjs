@@ -8,6 +8,7 @@ const {prepare,maximumMatches,applyProposals}=require('./auto-sync-core.cjs');
 const {evaluate,RULES}=require('./verified-history-approval.cjs');
 const {evaluate:evaluateCosmetics,cutoffForWindow}=require('./automatic-cosmetic-approval.cjs');
 const {evaluate:evaluateCash,cashLimitForWindow}=require('./automatic-cash-approval.cjs');
+const {evaluate:evaluatePerformance,qualifierCutoff,evaluationStage}=require('./automatic-performance-approval.cjs');
 const root=path.resolve(__dirname,'..');
 const read=name=>JSON.parse(fs.readFileSync(path.join(root,name),'utf8'));
 const write=(name,obj)=>fs.writeFileSync(path.join(root,name),JSON.stringify(obj,null,2)+'\n');
