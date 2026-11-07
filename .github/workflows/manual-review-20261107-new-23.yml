@@ -1,0 +1,50 @@
+name: AOT verify 2026-11-07 pending 23 candidates
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/manual-review-20261107-new-23.yml"
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: aot-provider-results-main
+  cancel-in-progress: false
+jobs:
+  verify-and-publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout current main and ledger
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Syntax and source checks
+        run: node --check scripts/manual-review-20261107-new-23.cjs
+      - name: Check and classify official score and prize for each reviewed candidate
+        run: node scripts/manual-review-20261107-new-23.cjs
+      - name: Validate source, players, payouts, updates and published record references
+        run: npm run validate
+      - name: Test automatic history and recent sync safeguards
+        run: node --test tests/osirion-sync.test.cjs tests/verified-history-approval.test.cjs tests/approval-history.test.cjs tests/automatic-unreal-approval.test.cjs
+      - name: Safely commit verified results or reviewed duplicates
+        run: |
+          set -euo pipefail
+          git add results.json history-sync-review.json auto-sync-review.json history-sync-reviewed.json history-sync-status.json auto-sync-status.json updates.json
+          if git diff --cached --quiet; then
+            echo 'No reviewed changes to commit'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'data: verify archived cashless tournament entries and Zoro duplicates'
+          for attempt in 1 2 3; do
+            git pull --rebase origin main || { git rebase --abort || true; echo 'Concurrent conflict requires review'; exit 1; }
+            git push origin HEAD:main && exit 0
+            sleep $((attempt * 3))
+          done
+          exit 1
