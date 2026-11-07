@@ -1,7 +1,7 @@
 'use strict';
 // Narrow, rule-backed auto approval. Only allow-listed historical events qualify.
 // A zero-VR final can be recorded as $0 because the rules pay per final-round VR.
-// Positive cash awards and unknown events remain in manual review.
+// Positive cash requires a season-specific verified payout rule; unknown events remain in manual review.
 const RULES=Object.freeze({
   'ch5s3-squads-victory-cup':{
     seasonId:'S30',eventIds:['S30_SquadsVictoryCashCup'],team:'squad',
