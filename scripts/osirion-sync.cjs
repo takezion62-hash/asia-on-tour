@@ -426,7 +426,9 @@ async function main(){
   evaluateCosmetics(pending,windows,state.windows,{...data,results:[...data.results,...verified.approved]}):{approved:[],held:[]};
  const cash=(config.autoApproveCash===true)?
   evaluateCash(pending,windows,state.windows,{...data,results:[...data.results,...verified.approved,...cosmetic.approved]}):{approved:[],held:[]};
- const approved=[...verified.approved,...cosmetic.approved,...cash.approved];
+ const performance=(config.autoApprovePerformance===true)?
+  evaluatePerformance(pending,windows,state.windows,{...data,results:[...data.results,...verified.approved,...cosmetic.approved,...cash.approved]}):{approved:[],held:[]};
+ const approved=[...verified.approved,...cosmetic.approved,...cash.approved,...performance.approved];
  importedCosmetics=cosmetic.approved.length;
  for(const hold of verified.held)reasons.set(hold.id,hold.reason);
  for(const hold of cosmetic.held)if(!reasons.has(hold.id))reasons.set(hold.id,hold.reason);
