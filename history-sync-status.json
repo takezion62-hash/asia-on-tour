@@ -1,7 +1,7 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-07T16:15:25.001Z",
+  "checkedAt": "2026-11-07T16:18:14.845Z",
   "mode": "review",
   "scope": "history",
   "dateMode": "rolling",
@@ -11,16 +11,16 @@
   "provider": "osirion",
   "linkedPlayers": 522,
   "trackedWindows": 2909,
-  "found": 145,
-  "skipped": 14,
-  "imported": 0,
+  "found": 165,
+  "skipped": 10,
+  "imported": 3,
   "scannedPages": 80,
-  "completedWindows": 164,
+  "completedWindows": 166,
   "identityConflicts": 3,
-  "alreadyRegistered": 1155,
-  "autoApprovedTotal": 720,
+  "alreadyRegistered": 1157,
+  "autoApprovedTotal": 723,
   "invalidCachedCandidates": 1,
-  "manualReviewCandidates": 145,
+  "manualReviewCandidates": 165,
   "autoApprovedCosmeticThisRun": 0,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
@@ -31,7 +31,7 @@
   "malformedFailures": 0,
   "skippedLeaderboards": [],
   "reviewOnlyWindows": 1289,
-  "reviewOnlyCandidates": 65,
+  "reviewOnlyCandidates": 79,
   "unmappedEvents": 240,
   "unmappedEventIds": [
     "S30_ConsoleCashCups",
@@ -47,39 +47,39 @@
     "S30_Reload",
     "S30_ReloadZB"
   ],
-  "message": "公式順位表と規則でS35/S38の0VR決勝を2件$0掲載。既存戦績の重複0件を確認済みに移動。残り確認待ち145件。未確定賞金や取得途中の順位は変更しない。",
+  "message": "最新版と安全統合：新規掲載3件、重複スキップ0件、要確認の競合0件、確認待ち165件。既存の戦績・賞金は保持。",
   "manuallyPublished": 58,
   "manuallyResolvedDuplicates": 2,
   "lastReviewedBatchAt": "2026-11-07T16:15:29.252Z",
   "manuallyCorrected": 1,
   "lastCorrectedReviewAt": "2026-11-07T09:14:30.244Z",
   "concurrentMerge": {
-    "appended": 0,
+    "appended": 3,
     "alreadyPublished": 0,
     "reviewConflicts": 0,
-    "keptPending": 147,
-    "reconciledAt": "2026-11-07T16:15:26.817Z"
+    "keptPending": 165,
+    "reconciledAt": "2026-11-07T16:18:16.133Z"
   },
   "coverage": {
     "total": 2909,
-    "completed": 164,
-    "notStarted": 2714,
-    "partial": 19,
+    "completed": 166,
+    "notStarted": 2711,
+    "partial": 20,
     "retryWaiting": 12,
     "retryDue": 0,
-    "remaining": 2745,
+    "remaining": 2743,
     "retryCount": 12,
-    "completionPercent": 5.6,
+    "completionPercent": 5.7,
     "byRegion": {
       "OCE": {
         "total": 515,
-        "completed": 23,
-        "pending": 492
+        "completed": 24,
+        "pending": 491
       },
       "ME": {
         "total": 510,
-        "completed": 46,
-        "pending": 464
+        "completed": 47,
+        "pending": 463
       },
       "EU": {
         "total": 528,
@@ -105,8 +105,8 @@
     "byYear": {
       "2024": {
         "total": 974,
-        "completed": 30,
-        "pending": 944
+        "completed": 32,
+        "pending": 942
       },
       "2025": {
         "total": 678,
