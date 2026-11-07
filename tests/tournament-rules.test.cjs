@@ -9,9 +9,9 @@ const {RULES}=require('../scripts/verified-history-approval.cjs');
 const {CUT_OFFS}=require('../scripts/cosmetic-rank-rules.cjs');
 const clone=x=>JSON.parse(JSON.stringify(x));
 
-test('shared official tournament rules include review-only Trio Cash Cup plus approved types',()=>{
+test('shared official tournament rules include review-only Solo Series Finals and approved types',()=>{
  assert.deepEqual(validateRegistry(registry,tournaments),[]);
- assert.equal(registry.rules.length,12);
+ assert.equal(registry.rules.length,13);
  assert.equal(Object.keys(RULES).length,7);
  assert.equal(Object.keys(CUT_OFFS).length,2);
  for(const rule of registry.rules){
@@ -19,7 +19,7 @@ test('shared official tournament rules include review-only Trio Cash Cup plus ap
   if(rule.series==='cash-cup'){
    assert.equal(RULES[rule.id],undefined);
    assert.equal(CUT_OFFS[rule.id],undefined);
-   assert.equal(rule.autoApproval,'verified-team-rank');
+   assert.ok(['verified-team-rank','review-only'].includes(rule.autoApproval));
   }
   if(rule.series==='skin-cup'){
    assert.equal(CUT_OFFS[rule.id].source,rule.source);
@@ -148,4 +148,29 @@ test('S39 $1M Unreal Cup official seven-region duo team prizes and scoring',()=>
  const auto=clone(registry);
  auto.rules.find(r=>r.id===rule.id).autoApproval='review-only';
  assert.match(validateRegistry(auto,tournaments).join('\n'),/自動承認/);
+});
+
+test('S39 NAW Solo Series Finals has verified tier thresholds and stays review-only',()=>{
+ const rule=registry.rules.find(r=>r.id==='ch7s1-solo-series-finals');
+ assert.ok(rule);
+ assert.equal(rule.seasonId,'S39');
+ assert.deepEqual(rule.eventIds,['S39_SoloSeriesCupFinal']);
+ assert.equal(rule.team,'solo');
+ assert.equal(rule.series,'cash-cup');
+ assert.equal(rule.autoApproval,'review-only');
+ assert.equal(rule.matchCaps['単一ラウンド'],12);
+ assert.deepEqual(Object.keys(rule.cashPrizes.tiers),['NAW']);
+ assert.deepEqual(rule.cashPrizes.tiers.NAW,[
+  {through:1,perPlayer:4000},{through:2,perPlayer:2000},
+  {through:3,perPlayer:1000},{through:5,perPlayer:750},
+  {through:10,perPlayer:500},{through:25,perPlayer:400},
+  {through:50,perPlayer:300},{through:75,perPlayer:200}
+ ]);
+ const payout=rank=>rule.cashPrizes.tiers.NAW.find(t=>rank<=t.through)?.perPlayer??0;
+ assert.equal(payout(39),300);
+ assert.equal(payout(59),200);
+ assert.equal(payout(62),200);
+ assert.equal(payout(76),0);
+ assert.equal(RULES[rule.id],undefined,'Unconfirmed historical prize rows stay review-only');
+ assert.equal(CUT_OFFS[rule.id],undefined);
 });
