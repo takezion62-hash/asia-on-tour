@@ -107,7 +107,7 @@ test('Unreal Cup shows all 7 regional prize tiers and separate duo personal shar
  await page.locator('#source-rule-search').fill('1 Million Unreal');
  const card=page.locator('.source-rule-card[data-rule-id="ch7s1-one-million-unreal-cup"]');
  await expect(card).toBeVisible();
- await expect(card).toContainText('確認専用');
+ await expect(card).toContainText('公式賞金表で自動掲載・圏外$0');
  await expect(card.locator('.source-rule-cash-region')).toHaveCount(7);
  await expect(card).toContainText('アンリアル');
  await expect(card).toContainText('レベル350');
