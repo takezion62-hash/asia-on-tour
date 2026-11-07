@@ -1,7 +1,7 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-07T08:47:06.730Z",
+  "checkedAt": "2026-11-07T08:58:22.735Z",
   "mode": "review",
   "scope": "history",
   "dateMode": "rolling",
@@ -11,27 +11,36 @@
   "provider": "osirion",
   "linkedPlayers": 509,
   "trackedWindows": 2859,
-  "found": 21,
-  "skipped": 17,
-  "imported": 3,
+  "found": 51,
+  "skipped": 35,
+  "imported": 16,
   "scannedPages": 80,
-  "completedWindows": 134,
+  "completedWindows": 139,
   "identityConflicts": 3,
-  "alreadyRegistered": 1010,
-  "autoApprovedTotal": 632,
+  "alreadyRegistered": 1013,
+  "autoApprovedTotal": 648,
   "invalidCachedCandidates": 1,
-  "manualReviewCandidates": 21,
-  "autoApprovedCosmeticThisRun": 0,
+  "manualReviewCandidates": 51,
+  "autoApprovedCosmeticThisRun": 2,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
-  "autoApprovedUnrealThisRun": 0,
+  "autoApprovedUnrealThisRun": 2,
   "timeLimitReached": false,
-  "retryWindows": 8,
+  "retryWindows": 9,
   "transientFailures": 0,
-  "malformedFailures": 0,
-  "skippedLeaderboards": [],
+  "malformedFailures": 1,
+  "skippedLeaderboards": [
+    {
+      "window": "epicgames_S42_SoloVictoryCup_OCE/S42_SoloVictoryCup_Event1Round2_OCE",
+      "page": 0,
+      "attempt": 1,
+      "code": "OSIRION_INVALID_LEADERBOARD",
+      "reason": "大会順位表のID/形式が不正 [epicgames_S42_SoloVictoryCup_OCE/S42_SoloVictoryCup_Event1Round2_OCE page=0]: totalPages=0",
+      "retryAfter": "2026-11-07T14:56:59.568Z"
+    }
+  ],
   "reviewOnlyWindows": 1275,
-  "reviewOnlyCandidates": 10,
+  "reviewOnlyCandidates": 21,
   "unmappedEvents": 241,
   "unmappedEventIds": [
     "S30_ConsoleCashCups",
@@ -47,5 +56,5 @@
     "S30_Reload",
     "S30_ReloadZB"
   ],
-  "message": "Osirionで509アカウントIDを追跡。今回の公式規則による自動承認3件、追加確認待ち21件、名義照合保留3件。"
+  "message": "Osirionで509アカウントIDを追跡。今回の公式規則による自動承認16件、追加確認待ち51件、名義照合保留3件。"
 }
