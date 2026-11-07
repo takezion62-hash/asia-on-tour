@@ -23,7 +23,7 @@ const assert=(ok,msg)=>{if(!ok)throw Error('HISTORIC_REVIEW_VERIFY: '+msg)};
 const fieldsSame=(a,b,keys)=>keys.every(key=>JSON.stringify(a[key])===JSON.stringify(b[key]));
 const isDuplicate=(a,b)=>fieldsSame(a,b,['date','region','tournamentId','rank','points','kills','vrs','matches'])
   &&roster(a).slice().sort().join('|')===roster(b).slice().sort().join('|');
-function process(data,now='2026-11-08T00:00:00.000Z'){
+function resolveCandidates(data,now='2026-11-08T00:00:00.000Z'){
  const {results,updates,review,reviewed,status,scan,players,tournaments}=clone(data);
  assert(Array.isArray(results)&&Array.isArray(updates.entries)&&Array.isArray(review.proposals)
   &&Array.isArray(reviewed.entries)&&scan?.windows&&Array.isArray(players.candidates)
@@ -135,7 +135,7 @@ function main(){
   reviewed:read('history-sync-reviewed.json'),status:read('history-sync-status.json'),
   scan:read('history-sync-scan.json'),players:read('players.json'),tournaments:read('tournaments.json')
  };
- const output=process(before,new Date().toISOString());
+ const output=resolveCandidates(before,new Date().toISOString());
  console.log('HISTORIC_REVIEW_PUBLICATION '+JSON.stringify(output.report));
  if(process.argv.includes('--dry-run')||!output.report.changed)return;
  const {docs}=output;
@@ -146,4 +146,4 @@ function main(){
  write('history-sync-status.json',docs.status);
 }
 if(require.main===module)main();
-module.exports={process,TARGETS,RECHECK_DUPLICATES};
+module.exports={process:resolveCandidates,TARGETS,RECHECK_DUPLICATES};
