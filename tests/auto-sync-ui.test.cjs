@@ -29,3 +29,9 @@ test('both panels display incomplete coverage and overdue retry counts',()=>{
  assert.ok(js.includes('appendCoverage(historyArea,status.coverage)'));
  assert.ok(js.includes('再試行期限到来'));
 });
+
+test('window coverage also displays region and year detail',()=>{
+ const js=read('auto-sync-ui.js');
+ assert.ok(js.includes("['地域別',c.byRegion]"));
+ assert.ok(js.includes("['年別',c.byYear]"));
+});
