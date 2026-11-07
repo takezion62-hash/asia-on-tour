@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-11-07T01:47:19.825Z",
+  "checkedAt": "2026-11-07T02:32:06.478Z",
   "windows": {
     "epicgames_S42_InoxtagIconCup_NAW/S42_InoxtagIconCup_NAW": {
       "nextPage": 40,
@@ -291,12 +291,12 @@
       "emptyAttempts": 0
     },
     "epicgames_S30_SquadsVictoryCashCup_BR/S30_SquadsVictoryCashCup_Event1Round1_BR": {
-      "nextPage": 12,
-      "pages": 12,
+      "nextPage": 24,
+      "pages": 24,
       "complete": false,
       "coverageLimited": false,
       "totalPages": 43,
-      "lastScanned": "2026-11-06T09:50:14.708Z",
+      "lastScanned": "2026-11-07T02:31:39.404Z",
       "emptyAttempts": 0
     },
     "epicgames_S43_OnePieceZoroCup_Mobile_EU/S43_OnePieceZoroCup_Mobile_EU": {
@@ -309,12 +309,12 @@
       "emptyAttempts": 0
     },
     "epicgames_S30_SoloVictoryCashCup_ME/S30_SoloVictoryCashCup_Event6Round1_ME": {
-      "nextPage": 36,
-      "pages": 36,
-      "complete": false,
-      "coverageLimited": false,
+      "nextPage": 40,
+      "pages": 40,
+      "complete": true,
+      "coverageLimited": true,
       "totalPages": 100,
-      "lastScanned": "2026-11-07T01:47:19.825Z",
+      "lastScanned": "2026-11-07T02:31:52.415Z",
       "emptyAttempts": 0
     },
     "epicgames_S43_OnePieceZoroCup_EU/S43_OnePieceZoroCup_EU": {
@@ -345,12 +345,21 @@
       "emptyAttempts": 0
     },
     "epicgames_S43_OnePieceZoroCup_Mobile_BR/S43_OnePieceZoroCup_Mobile_BR": {
-      "nextPage": 12,
-      "pages": 12,
+      "nextPage": 24,
+      "pages": 24,
       "complete": false,
       "coverageLimited": false,
       "totalPages": 32,
-      "lastScanned": "2026-11-07T01:46:38.936Z",
+      "lastScanned": "2026-11-07T02:31:19.206Z",
+      "emptyAttempts": 0
+    },
+    "epicgames_S36_VictoryDuosCup_NAC/S36_VictoryDuosCup_Event1Round1_NAC": {
+      "nextPage": 8,
+      "pages": 8,
+      "complete": false,
+      "coverageLimited": false,
+      "totalPages": 100,
+      "lastScanned": "2026-11-07T02:32:06.478Z",
       "emptyAttempts": 0
     }
   }
