@@ -1,7 +1,7 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-07T16:08:00.224Z",
+  "checkedAt": "2026-11-07T16:10:30.668Z",
   "mode": "review",
   "scope": "history",
   "dateMode": "rolling",
@@ -11,27 +11,27 @@
   "provider": "osirion",
   "linkedPlayers": 522,
   "trackedWindows": 2909,
-  "found": 80,
-  "skipped": 14,
+  "found": 99,
+  "skipped": 21,
   "imported": 1,
   "scannedPages": 80,
-  "completedWindows": 157,
+  "completedWindows": 160,
   "identityConflicts": 3,
-  "alreadyRegistered": 1147,
-  "autoApprovedTotal": 719,
+  "alreadyRegistered": 1154,
+  "autoApprovedTotal": 720,
   "invalidCachedCandidates": 1,
-  "manualReviewCandidates": 80,
+  "manualReviewCandidates": 99,
   "autoApprovedCosmeticThisRun": 0,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
-  "autoApprovedUnrealThisRun": 0,
+  "autoApprovedUnrealThisRun": 1,
   "timeLimitReached": false,
   "retryWindows": 12,
   "transientFailures": 0,
   "malformedFailures": 0,
   "skippedLeaderboards": [],
   "reviewOnlyWindows": 1289,
-  "reviewOnlyCandidates": 53,
+  "reviewOnlyCandidates": 56,
   "unmappedEvents": 240,
   "unmappedEventIds": [
     "S30_ConsoleCashCups",
@@ -47,7 +47,7 @@
     "S30_Reload",
     "S30_ReloadZB"
   ],
-  "message": "公式順位表と規則でS35 ME Console Duos 0VRを6件$0掲載。既存戦績の重複2件を確認済みに移動。残り確認待ち80件。未確定賞金や取得途中の順位は変更しない。",
+  "message": "最新版と安全統合：新規掲載1件、重複スキップ0件、要確認の競合0件、確認待ち99件。既存の戦績・賞金は保持。",
   "manuallyPublished": 56,
   "manuallyResolvedDuplicates": 2,
   "lastReviewedBatchAt": "2026-11-07T16:08:04.111Z",
@@ -57,24 +57,24 @@
     "appended": 1,
     "alreadyPublished": 0,
     "reviewConflicts": 0,
-    "keptPending": 88,
-    "reconciledAt": "2026-11-07T16:08:01.779Z"
+    "keptPending": 99,
+    "reconciledAt": "2026-11-07T16:10:32.248Z"
   },
   "coverage": {
     "total": 2909,
-    "completed": 157,
-    "notStarted": 2720,
-    "partial": 20,
+    "completed": 160,
+    "notStarted": 2716,
+    "partial": 21,
     "retryWaiting": 12,
     "retryDue": 0,
-    "remaining": 2752,
+    "remaining": 2749,
     "retryCount": 12,
-    "completionPercent": 5.4,
+    "completionPercent": 5.5,
     "byRegion": {
       "OCE": {
         "total": 515,
-        "completed": 22,
-        "pending": 493
+        "completed": 23,
+        "pending": 492
       },
       "ME": {
         "total": 510,
@@ -98,8 +98,8 @@
       },
       "NAW": {
         "total": 319,
-        "completed": 21,
-        "pending": 298
+        "completed": 23,
+        "pending": 296
       }
     },
     "byYear": {
@@ -110,13 +110,13 @@
       },
       "2025": {
         "total": 678,
-        "completed": 19,
-        "pending": 659
+        "completed": 21,
+        "pending": 657
       },
       "2026": {
         "total": 1257,
-        "completed": 110,
-        "pending": 1147
+        "completed": 111,
+        "pending": 1146
       }
     },
     "outsideScopeCheckpoints": 0,
