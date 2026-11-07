@@ -5,6 +5,32 @@
   const base=new URL('.',document.currentScript?.src||document.baseURI);
   const fmt=v=>Number.isFinite(v)?v.toLocaleString('ja-JP'):'—';
   const field=(label,value)=>{const d=document.createElement('div');d.className='auto-sync-stat';const a=document.createElement('span');a.textContent=label;const b=document.createElement('strong');b.textContent=value;d.append(a,b);return d};
+
+  function appendCoverage(root,c){
+    if(!c||!Number.isFinite(c.total))return;
+    for(const [label,value] of [
+      ['調査完了',fmt(c.completed)+' / '+fmt(c.total)+'開催枠'],
+      ['未着手',fmt(c.notStarted)+'開催枠'],
+      ['調査途中',fmt(c.partial)+'開催枠'],
+      ['再試行待機中',fmt(c.retryWaiting)+'開催枠'],
+      ['再試行期限到来',fmt(c.retryDue)+'開催枠']
+    ])root.append(field(label,value));
+    const box=document.createElement('section');box.className='auto-sync-coverage';
+    const heading=document.createElement('strong');heading.textContent='未完了の開催枠（抜粋）';box.append(heading);
+    const note=document.createElement('p');note.textContent='対象は発見済み大会の順位表。選手の調査完了率ではありません';box.append(note);
+    const items=Array.isArray(c.samples)?c.samples:[];
+    if(items.length){
+      const list=document.createElement('ul'),labels={notStarted:'未着手',partial:'途中',retryWaiting:'待機',retryDue:'再試行対象'};
+      for(const item of items){
+        const li=document.createElement('li');
+        li.textContent=[item.date,item.region,item.series,labels[item.status]||item.status,
+          'ページ '+fmt(item.nextPage)+'/'+(item.totalPages==null?'?':fmt(item.totalPages)),
+          item.errorCode||'',item.retryAfter?'再試行 '+new Date(item.retryAfter).toLocaleString('ja-JP',{timeZone:'Asia/Tokyo'}):''].filter(Boolean).join(' · ');
+        list.append(li);
+      }box.append(list);
+    }else{const p=document.createElement('p');p.textContent='未完了の開催枠なし';box.append(p);}
+    root.append(box);
+  }
   async function refresh(){
     btn.disabled=true;area.textContent='確認中…';candidates.textContent='候補を確認中…';
     try{
@@ -13,7 +39,7 @@
       const s=await r.json();if(s.version!==1)throw Error('unknown version');
       const time=s.checkedAt?new Date(s.checkedAt).toLocaleString('ja-JP',{timeZone:'Asia/Tokyo'}):'未実行';
       area.replaceChildren(field('状態',s.state==='setup'?'初期設定待ち':s.mode==='publish'?'自動反映':'確認のみ'),field('最終チェック',time),field('連携済み選手',fmt(s.linkedPlayers)+'名'),field('直近の終了済みラウンド',fmt(s.trackedWindows)+'件'),field('新規候補',fmt(s.found)+'件'),field('今回の登録',fmt(s.imported)+'件'),field('VC以外の確認対象',fmt(s.reviewOnlyWindows||0)+'開催枠'),field('VC以外の確認待ち',fmt(s.reviewOnlyCandidates||0)+'件'),field('未登録の対象大会',fmt(s.unmappedEvents||0)+'種類'));
-      const info=document.createElement('p');info.className='auto-sync-message';info.textContent=s.message||'';area.append(info);
+      const info=document.createElement('p');info.className='auto-sync-message';info.textContent=s.message||'';area.append(info);appendCoverage(area,s.coverage);
       try{
         const q=await fetch(new URL('auto-sync-review.json',base),{cache:'no-store'});
         if(!q.ok)throw Error('review');
@@ -60,7 +86,7 @@
         field('完了ラウンド',fmt(status.completedWindows)+'件')
       );
       const message=document.createElement('p');message.className='auto-sync-message';
-      message.textContent=status.message||'';historyArea.append(message);
+      message.textContent=status.message||'';historyArea.append(message);appendCoverage(historyArea,status.coverage);
       const response2=await fetch(new URL('history-sync-review.json',base),{cache:'no-store'});
       if(!response2.ok)throw Error('history review HTTP '+response2.status);
       const review=await response2.json();

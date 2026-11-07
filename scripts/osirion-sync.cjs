@@ -10,6 +10,7 @@ const {evaluate:evaluateCosmetics,cutoffForWindow}=require('./automatic-cosmetic
 const {evaluate:evaluateCash,cashLimitForWindow}=require('./automatic-cash-approval.cjs');
 const {evaluate:evaluatePerformance,qualifierCutoff,evaluationStage}=require('./automatic-performance-approval.cjs');
 const {evaluate:evaluateUnreal,unrealWindow}=require('./automatic-unreal-approval.cjs');
+const {scanCoverage}=require('./scan-coverage.cjs');
 const root=path.resolve(__dirname,'..');
 const read=name=>JSON.parse(fs.readFileSync(path.join(root,name),'utf8'));
 const write=(name,obj)=>fs.writeFileSync(path.join(root,name),JSON.stringify(obj,null,2)+'\n');
@@ -244,6 +245,14 @@ function recoverableLeaderboardFailure(error){
   /大会順位表のID\/形式が不正|順位表に未期待の空ページ|Osirion API error|Osirion API HTTP (?:400|404|410|422)\b/i.test(message)||
   error instanceof SyntaxError;
 }
+function holdEmptyFirstPage(checkpoint,win,time=Date.now()){
+ const attempts=(Number.isSafeInteger(checkpoint.emptyAttempts)?checkpoint.emptyAttempts:0)+1;
+ checkpoint.emptyAttempts=attempts;checkpoint.complete=false;
+ checkpoint.retryAfter=new Date(time+Math.min(48,6*2**Math.min(attempts-1,3))*3600000).toISOString();
+ checkpoint.lastError='先頭ページが空のため未完了・再試行待ち';
+ checkpoint.lastErrorCode='OSIRION_EMPTY_FIRST_PAGE';checkpoint.lastErrorPage=0;
+ return {window:win.key,page:0,attempt:attempts,code:checkpoint.lastErrorCode,reason:checkpoint.lastError,retryAfter:checkpoint.retryAfter};
+}
 function holdLeaderboardWindow(checkpoint,error,win,page,time=Date.now()){
  const attempt=(Number.isSafeInteger(checkpoint.errorAttempts)&&checkpoint.errorAttempts>=0?
    checkpoint.errorAttempts:0)+1;
@@ -278,7 +287,9 @@ function selectActiveWindows(windows,state,config,time=Date.now()){
   return (!item?.complete||(w.series==='unreal-cup'&&item?.epicIdsRetained!==true))&&(!item?.retryAfter||Date.parse(item.retryAfter)<=time);
  });
  const limit=Math.max(1,config.maxWindowsPerRun||2),selected=[],seen=new Set();
+ const due=w=>{const t=Date.parse(state.windows[w.key]?.retryAfter||'');return Number.isFinite(t)&&t<=time};
  const priority=(a,b)=>{
+  if(due(a)!==due(b))return due(a)?-1:1;
   const progress=w=>{const cp=state.windows[w.key];return cp?.totalPages>0?cp.nextPage/cp.totalPages:0};
   const progressDiff=progress(b)-progress(a);
   // Finish already scanned rounds first; then pick the newest competitions.
@@ -333,6 +344,10 @@ function selectHistoricalWindows(windows,state,config,time=Date.now(),records=[]
  const limit=Math.max(1,config.maxWindowsPerRun||6),selected=[],seen=new Set();
  const priority=historicalPriority(state,records);
  const add=pool=>{for(const w of pool.slice().sort(priority))if(!seen.has(w.key)){selected.push(w);seen.add(w.key);break}};
+ // Resume at least one expired retry per run, preserving the original page.
+ const dueRetries=pending.filter(w=>{const t=Date.parse(state.windows[w.key]?.retryAfter||'');return Number.isFinite(t)&&t<=time})
+  .sort((a,b)=>Date.parse(state.windows[a.key].retryAfter)-Date.parse(state.windows[b.key].retryAfter));
+ if(dueRetries.length&&selected.length<limit)add(dueRetries.slice(0,1));
  // Bounded focus from config: keep other historical regions and series running.
  // Non-Victory series remain review-only; this only changes scan order.
  const focus=config.priorityReview;
@@ -425,6 +440,7 @@ async function main(){
   while(budget>0&&pagesThisWindow<perWindowLimit&&!checkpoint.complete){
    if(Date.now()>=scanDeadline){timeLimitReached=true;break}
    const page=checkpoint.nextPage;
+   checkpoint.lastAttemptAt=new Date().toISOString();
    let l;
    try{
     l=await getLeaderboard(win,page);
@@ -443,9 +459,10 @@ async function main(){
     break; // Preserve previous confirmed pages, continue with other windows.
    }
    if(page===0&&l.entries.length===0){
-    checkpoint.emptyAttempts=(checkpoint.emptyAttempts||0)+1;
-    checkpoint.retryAfter=new Date(Date.now()+Math.min(checkpoint.emptyAttempts,7)*86400000).toISOString();
-    break; // Unavailable historic page: retry later, without blocking other windows.
+    const held=holdEmptyFirstPage(checkpoint,win);
+    skippedLeaderboards.push(held);
+    console.warn('OSIRION_EMPTY_FIRST_PAGE_HELD '+JSON.stringify(held));
+    break; // Preserve verified pages and retry this tournament later.
    }
    checkpoint.emptyAttempts=0;
    delete checkpoint.retryAfter;
@@ -468,12 +485,14 @@ async function main(){
    const already=new Set(checkpoint.proposals.map(x=>x.id));
    for(const row of found)if(!already.has(row.id)){checkpoint.proposals.push(row);already.add(row.id)}
    checkpoint.nextPage=page+1;checkpoint.pages++;scanned++;budget--;pagesThisWindow++;
+   checkpoint.lastSuccessAt=new Date().toISOString();
    checkpoint.totalPages=l.totalPages;
    checkpoint.complete=checkpoint.nextPage>=l.totalPages||crossed;
   }
   state.windows[win.key]=checkpoint;
   if(budget<=0)break;
  }
+ const coverage=scanCoverage(windows,state,Date.now());
  const eligible=new Set(windows.map(w=>w.key));
  const recordedIds=new Set(data.results.map(x=>x.id));
  const foundInScope=Object.entries(state.windows).filter(([key])=>eligible.has(key)).flatMap(([,w])=>w.proposals||[]);
@@ -529,7 +548,7 @@ async function main(){
  const reviewOnlyWindows=windows.filter(w=>w.series!=='victory-cup').length;
  const reviewOnlyCandidates=unique.size?Array.from(unique.values()).filter(p=>p.reviewOnly===true).length:0;
  const cumulativeApprovals=data.updates.entries.filter(x=>x.title?.startsWith('公式規則で自動承認：')).reduce((sum,x)=>sum+(x.recordIds?.length||0),0);
- const status={version:1,state:'checked',checkedAt:stamp,mode:'review',scope:historical?'history':'recent',dateMode:historical?(storedConfig.toDate==='rolling'?'rolling':'fixed'):null,selectedWindows:active.length,fromDate:historical?config.fromDate:null,toDate:historical?config.toDate:null,provider:'osirion',linkedPlayers:accounts.length,trackedWindows:windows.length,found:unique.size,skipped:invalidRows,imported,scannedPages:scanned,completedWindows:finished,identityConflicts:conflicts.length,alreadyRegistered:recordedFromReview,autoApprovedTotal:cumulativeApprovals,invalidCachedCandidates:invalidCached,manualReviewCandidates:manuallyHeld,autoApprovedCosmeticThisRun:importedCosmetics,autoApprovedCashThisRun:cash.approved.length,autoApprovedPerformanceThisRun:performance.approved.length,autoApprovedUnrealThisRun:unreal.approved.length,timeLimitReached,retryWindows:Object.entries(state.windows).filter(([key,w])=>eligible.has(key)&&!w.complete&&w.retryAfter).length,transientFailures,malformedFailures,skippedLeaderboards:skippedLeaderboards.slice(0,15),reviewOnlyWindows,reviewOnlyCandidates,unmappedEvents:unmapped.length,unmappedEventIds:unmapped.slice(0,12),message:'Osirionで'+accounts.length+'アカウントIDを追跡。今回の公式規則による自動承認'+imported+'件、追加確認待ち'+unique.size+'件、名義照合保留'+conflicts.length+'件。'};
+ const status={version:1,state:'checked',checkedAt:stamp,mode:'review',scope:historical?'history':'recent',dateMode:historical?(storedConfig.toDate==='rolling'?'rolling':'fixed'):null,selectedWindows:active.length,fromDate:historical?config.fromDate:null,toDate:historical?config.toDate:null,provider:'osirion',linkedPlayers:accounts.length,trackedWindows:windows.length,found:unique.size,skipped:invalidRows,imported,scannedPages:scanned,completedWindows:finished,identityConflicts:conflicts.length,alreadyRegistered:recordedFromReview,autoApprovedTotal:cumulativeApprovals,invalidCachedCandidates:invalidCached,manualReviewCandidates:manuallyHeld,autoApprovedCosmeticThisRun:importedCosmetics,autoApprovedCashThisRun:cash.approved.length,autoApprovedPerformanceThisRun:performance.approved.length,autoApprovedUnrealThisRun:unreal.approved.length,timeLimitReached,retryWindows:coverage.retryCount,coverage,transientFailures,malformedFailures,skippedLeaderboards:skippedLeaderboards.slice(0,15),reviewOnlyWindows,reviewOnlyCandidates,unmappedEvents:unmapped.length,unmappedEventIds:unmapped.slice(0,12),message:'Osirionで'+accounts.length+'アカウントIDを追跡。今回の公式規則による自動承認'+imported+'件、追加確認待ち'+unique.size+'件、名義照合保留'+conflicts.length+'件。'};
  state.checkedAt=stamp;
  write(prefix+'-scan.json',state);
  write(prefix+'-review.json',{version:1,status:'review',checkedAt:stamp,proposals:[...unique.values()]});
@@ -537,4 +556,4 @@ async function main(){
  console.log((historical?'OSIRION_HISTORY_REVIEW ':'OSIRION_REVIEW ')+JSON.stringify({scannedPages:scanned,linkedPlayers:accounts.length,identityConflicts:conflicts.length,windows:windows.length,unmappedEvents:unmapped.length,proposals:unique.size,imported,cosmetic:importedCosmetics,cash:cash.approved.length,performance:performance.approved.length,unreal:unreal.approved.length,finished,transientFailures,malformedFailures,heldWindows:skippedLeaderboards.length}));
 }
 if(require.main===module)main().catch(e=>{console.error('OSIRION_SYNC_ERROR '+e.stack);process.exitCode=1});
-module.exports={identity,linkedAccounts,parseStage,parseReviewStage,discover,discoverUnmapped,selectActiveWindows,selectHistoricalWindows,historicalEvidenceScore,resolveHistoricalScope,fetchJson,advancementLimit,normalizeRow,getTournaments,getLeaderboard,leaderboardResponseError,recoverableLeaderboardFailure,holdLeaderboardWindow,transientLeaderboardFailure,main};
+module.exports={identity,linkedAccounts,parseStage,parseReviewStage,discover,discoverUnmapped,selectActiveWindows,selectHistoricalWindows,historicalEvidenceScore,resolveHistoricalScope,fetchJson,advancementLimit,normalizeRow,getTournaments,getLeaderboard,leaderboardResponseError,recoverableLeaderboardFailure,holdLeaderboardWindow,holdEmptyFirstPage,transientLeaderboardFailure,main};

@@ -1,6 +1,6 @@
 'use strict';
 const test=require('node:test'),assert=require('node:assert/strict');
-const {identity,linkedAccounts,parseStage,discover,discoverUnmapped,selectHistoricalWindows,historicalEvidenceScore,resolveHistoricalScope,selectActiveWindows,fetchJson,advancementLimit,transientLeaderboardFailure,normalizeRow,getLeaderboard,leaderboardResponseError,recoverableLeaderboardFailure,holdLeaderboardWindow}=require('../scripts/osirion-sync.cjs');
+const {identity,linkedAccounts,parseStage,discover,discoverUnmapped,selectHistoricalWindows,historicalEvidenceScore,resolveHistoricalScope,selectActiveWindows,fetchJson,advancementLimit,transientLeaderboardFailure,normalizeRow,getLeaderboard,leaderboardResponseError,recoverableLeaderboardFailure,holdLeaderboardWindow,holdEmptyFirstPage}=require('../scripts/osirion-sync.cjs');
 const f='https://fortnitetracker.com/profile/all/Alpha/events?id=8a57ac58-f937-4de2-81b7-9abd070c7ae8';
 test('Tracker UUID can map to the same 32-char account ID after strict validation',()=>{
  assert.equal(identity(f),'8a57ac58f9374de281b79abd070c7ae8');
@@ -328,4 +328,31 @@ test('large 175-page historic cups pass strict IDs without expanding the 80-page
   assert.equal(received.totalPages,175);
   assert.equal(leaderboardResponseError(w,0,received),null);
  }finally{globalThis.fetch=f}
+});
+
+test('expired retry wins a recent slot without bypassing future retry deadlines',()=>{
+ const now=Date.parse('2026-11-07T12:00:00Z'),rows=[
+  {key:'fresh',series:'victory-cup',end:now},
+  {key:'due',series:'victory-cup',end:now-86400000},
+  {key:'future',series:'victory-cup',end:now-172800000}];
+ const state={windows:{due:{nextPage:4,totalPages:10,retryAfter:'2026-11-07T00:00:00Z'},
+  future:{nextPage:9,totalPages:10,retryAfter:'2026-11-09T00:00:00Z'}}};
+ assert.deepEqual(selectActiveWindows(rows,state,{maxWindowsPerRun:1},now).map(x=>x.key),['due']);
+});
+test('historical backfill reserves a slot for overdue retries without resetting saved pages',()=>{
+ const now=Date.parse('2026-11-07T12:00:00Z');
+ const win=(key,year)=>({key,series:'victory-cup',region:'NAW',dateJst:year+'-07-01',end:Date.parse(year+'-07-01')});
+ const cp={nextPage:3,totalPages:8,complete:false,retryAfter:'2026-11-06T00:00:00Z',proposals:[{id:'keep'}]};
+ const chosen=selectHistoricalWindows([win('old','2024'),win('due','2026')],{windows:{due:cp}},{maxWindowsPerRun:1},now);
+ assert.deepEqual(chosen.map(x=>x.key),['due']);assert.equal(cp.nextPage,3);assert.equal(cp.proposals[0].id,'keep');
+});
+test('empty leaderboard page 0 remains incomplete with exponential backoff and no record loss',()=>{
+ const now=Date.parse('2026-11-07T12:00:00Z'),checkpoint={nextPage:0,complete:false,proposals:[{id:'safe'}]};
+ const a=holdEmptyFirstPage(checkpoint,{key:'a'},now);
+ assert.equal(a.code,'OSIRION_EMPTY_FIRST_PAGE');
+ assert.equal(checkpoint.retryAfter,'2026-11-07T18:00:00.000Z');
+ assert.equal(checkpoint.nextPage,0);assert.equal(checkpoint.complete,false);
+ holdEmptyFirstPage(checkpoint,{key:'a'},now);
+ assert.equal(checkpoint.retryAfter,'2026-11-08T00:00:00.000Z');
+ assert.deepEqual(checkpoint.proposals,[{id:'safe'}]);
 });
