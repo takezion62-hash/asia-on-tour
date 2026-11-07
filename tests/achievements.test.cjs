@@ -134,7 +134,7 @@ test('no-VR cash earner and finals runner-up are EPIC; achievement conditions st
   assert.equal(def.goal,1);
  }
  const one=fixture('runner',{kind:'賞金決勝',rank:2,prize:100,vrs:0});
- const awarded=engine.calculateSpecial([one],'Hero');
+ const awarded=engine.calculateSpecial([one],'Hero').achievements;
  const runner=awarded.find(x=>x.id==='final-runner-up');
  const earner=awarded.find(x=>x.id==='no-vr-cash');
  assert.equal(runner?.unlocked,true);
