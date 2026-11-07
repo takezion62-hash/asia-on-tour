@@ -110,7 +110,7 @@ function discover(all,catalog,opts,time=Date.now()){
     if(dateJst<opts.fromDate||dateJst>opts.toDate)continue;
    }else if(end<time-recentDays*86400000)continue;
    const key=full+'/'+windowId;
-   selected.set(key,{key,fullEventId:full,eventId:base,windowId,region,dateJst,seasonId:t.seasonId,tournamentId:t.id,series:t.series,round:stage.round,kind:stage.kind,end});
+   selected.set(key,{key,fullEventId:full,eventId:base,windowId,region,dateJst,startUtc:new Date(begin).toISOString(),seasonId:t.seasonId,tournamentId:t.id,series:t.series,round:stage.round,kind:stage.kind,end});
   }
  }
  return [...selected.values()].sort((a,b)=>a.end-b.end);
