@@ -95,3 +95,52 @@ test('unrelated pending candidates and corrections survive publication',()=>{
  assert.equal(o.docs.status.found,1);
  assert.equal(o.docs.status.manualReviewCandidates,1);
 });
+
+
+function s38Fixture(){
+ const db=fixture();
+ const row={...db.review.proposals[0],
+  id:'auto-s38-4744d9dc78a1',date:'2025-11-23',region:'NAW',
+  player:'R1ze / Zagouの弟',players:['R1ze','Zagouの弟'],
+  playerRaw:'Helix R1ze 777 / NŁT zagouの弟',
+  event:'Duos Victory Cash Cup',round:'Day 3 · Round 2 / 賞金決勝',
+  tournamentId:'ch6mini2-duos-victory-cash-cup',seasonId:'S38',
+  chapter:6,season:5,rank:134,kills:2,vrs:0,points:0,matches:3,prize:null,
+  source:'https://www.fortnite.com/competitive/events/S38_DuosVictoryCup/?region=NAW&round=S38_DuosVictoryCup_Round2_Day3_NAW'
+ };
+ db.review.proposals=[row];
+ db.players.candidates.push({name:'R1ze'},{name:'Zagouの弟'});
+ db.tournaments.catalog.push({id:row.tournamentId,name:row.event,team:'duo',seasonId:'S38',
+  series:'victory-cup',sourceEventIds:['S38_DuosVictoryCup']});
+ const cp=clone(row);delete cp.reviewReason;
+ db.scan.windows['epicgames_S38_DuosVictoryCup_NAW/S38_DuosVictoryCup_Round2_Day3_NAW']={
+  complete:true,nextPage:2,totalPages:2,rankingOrderValid:true,proposals:[cp]
+ };
+ return db;
+}
+test('S38 NAW duo November 23 complete official final 0VR is also $0 with no extra cash',()=>{
+ const db=s38Fixture(),r=reconcile(db,'2026-11-07T17:00:00Z');
+ assert.equal(r.report.published.length,1);
+ assert.equal(r.report.published[0].rank,134);
+ assert.equal(r.report.published[0].prize,0);
+ assert.equal(r.docs.results.length,2);
+ assert.equal(r.docs.results[1].player,'R1ze / Zagouの弟');
+ assert.equal(r.docs.results[1].prize,0);
+ assert.equal(r.docs.review.proposals.length,0);
+ assert.equal(r.docs.updates.entries[0].id,'manual-verified-s38-duos-20261108');
+ assert.deepEqual(r.docs.updates.entries[0].recordIds,['auto-s38-4744d9dc78a1']);
+ assert.ok(r.docs.results[1].note.includes('各選手$100'));
+});
+test('S38 source, leaderboard completion, team roster and reported VR must all match',()=>{
+ for(const tamper of [
+  x=>x.scan.windows[Object.keys(x.scan.windows).at(-1)].complete=false,
+  x=>x.review.proposals[0].source='https://fortnite.com/invalid',
+  x=>x.review.proposals[0].rank=135,
+  x=>x.review.proposals[0].vrs=1,
+  x=>x.review.proposals[0].players=['R1ze','wrong'],
+  x=>x.review.proposals[0].kind='予選'
+ ]){
+  const db=s38Fixture();tamper(db);
+  assert.throws(()=>reconcile(db),/HISTORIC_REVIEW_VERIFY/);
+ }
+});
