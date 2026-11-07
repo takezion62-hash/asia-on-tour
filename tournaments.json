@@ -243,6 +243,10 @@
         {
           "id": "thepeachcobbler-fncs-cup",
           "label": "ThePeachCobbler FNCS Cup"
+        },
+        {
+          "id": "duos-console-victory-cash-cup",
+          "label": "Duos Console Victory Cash Cup"
         }
       ]
     },
@@ -1711,15 +1715,17 @@
       ],
       "series": "victory-cup",
       "mode": "battle-royale",
-      "subtype": "unknown",
+      "subtype": "duos-console-victory-cash-cup",
       "team": "duo",
       "platform": "console",
-      "unknownFields": [
-        "subtype"
-      ],
+      "unknownFields": [],
       "evidence": [
         {
           "text": "Osirionの過去大会開催履歴で公式EpicイベントID・大会名称を確認。個別の通過・賞金・報酬を推定せず確認候補として登録。",
+          "url": "https://www.fortnite.com/competitive/events/S36_VictoryDuosCup/"
+        },
+        {
+          "text": "シリーズ分類：通常バトロワ・細分類 Duos Console Victory Cash Cup（ユーザー提供Tracker画面とEpic公式規則による確認）。",
           "url": "https://www.fortnite.com/competitive/events/S36_VictoryDuosCup/"
         }
       ]
@@ -1734,18 +1740,19 @@
         "S37_ConsoleDuosCashCups"
       ],
       "series": "victory-cup",
-      "mode": "unknown",
-      "subtype": "unknown",
+      "mode": "battle-royale",
+      "subtype": "duos-console-victory-cash-cup",
       "team": "duo",
       "platform": "console",
-      "unknownFields": [
-        "mode",
-        "subtype"
-      ],
+      "unknownFields": [],
       "evidence": [
         {
           "text": "Osirionの過去大会開催履歴で公式EpicイベントID・大会名称を確認。個別の通過・賞金・報酬を推定せず確認候補として登録。",
           "url": "https://www.fortnite.com/competitive/events/S37_ConsoleDuosCashCups/"
+        },
+        {
+          "text": "シリーズ分類：通常バトロワ・細分類 Duos Console Victory Cash Cup（ユーザー提供Tracker画面とEpic公式規則による確認）。",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-duos-console-victory-cash-cups-chapter-6-season-4-official-rules?region=NAC"
         }
       ]
     },
