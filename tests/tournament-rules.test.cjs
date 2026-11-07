@@ -11,7 +11,7 @@ const clone=x=>JSON.parse(JSON.stringify(x));
 
 test('shared official tournament rules include review-only Trio Cash Cup plus approved types',()=>{
  assert.deepEqual(validateRegistry(registry,tournaments),[]);
- assert.equal(registry.rules.length,10);
+ assert.equal(registry.rules.length,11);
  assert.equal(Object.keys(RULES).length,7);
  assert.equal(Object.keys(CUT_OFFS).length,2);
  for(const rule of registry.rules){
@@ -85,4 +85,22 @@ test('Cash Cup payment registry rejects region spoofing, duplicate rank cutoffs 
  assert.match(testChange(rule=>{rule.cashPrizes.tiers.FAKE=rule.cashPrizes.tiers.EU}),/地域・賞金表が不正/);
  assert.match(testChange(rule=>{rule.autoApproval='auto'}),/承認方式/);
  assert.match(testChange(rule=>{rule.cashPrizes.basis='per-team'}),/個人賞金テーブルが不正/);
+});
+
+test('S43 Trios Performance Evaluation is EU/NAC top26 and per-player $400 per VR',()=>{
+ const rule=registry.rules.find(r=>r.id==='ch7s5-performance-evaluation-trios');
+ assert.ok(rule);
+ assert.equal(rule.autoApproval,'verified-performance-vr');
+ assert.deepEqual(rule.eventIds,['S43_PerformanceEvaluationTrios']);
+ assert.equal(rule.windowIdPrefix,'S43_PerformanceEvaluation');
+ assert.deepEqual(rule.advance,{EU:26,NAC:26});
+ assert.equal(rule.team,'trio');
+ assert.equal(rule.prizePerVictory,400);
+ assert.equal(rule.finalWinPoints,100);
+ assert.equal(rule.matchCaps['Performance決勝'],4);
+ assert.equal(rule.matchCaps['予選'],8);
+ const bad=clone(registry);bad.rules[bad.rules.findIndex(x=>x.id===rule.id)].advance.NAC=33;
+ assert.match(validateRegistry(bad,tournaments).join('\n'),/上位26/);
+ const prize=clone(registry);prize.rules[prize.rules.findIndex(x=>x.id===rule.id)].prizePerVictory=1200;
+ assert.match(validateRegistry(prize,tournaments).join('\n'),/VR単価/);
 });
