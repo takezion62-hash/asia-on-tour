@@ -11,7 +11,7 @@
   "provider": "osirion",
   "linkedPlayers": 459,
   "trackedWindows": 11,
-  "found": 2,
+  "found": 0,
   "skipped": 0,
   "imported": 0,
   "scannedPages": 0,
@@ -20,7 +20,7 @@
   "alreadyRegistered": 31,
   "autoApprovedTotal": 590,
   "invalidCachedCandidates": 0,
-  "manualReviewCandidates": 2,
+  "manualReviewCandidates": 0,
   "autoApprovedCosmeticThisRun": 0,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
@@ -28,11 +28,13 @@
   "retryWindows": 0,
   "transientFailures": 0,
   "reviewOnlyWindows": 11,
-  "reviewOnlyCandidates": 2,
+  "reviewOnlyCandidates": 0,
   "unmappedEvents": 2,
   "unmappedEventIds": [
     "S42_ArenaTestCup",
     "S43_OnePieceZoroCup_ZB"
   ],
-  "message": "Osirionで459アカウントIDを追跡。今回の公式規則による自動承認0件、追加確認待ち2件、名義照合保留0件。"
+  "message": "最新候補2件は既存のZoro Mobileスキン結果と完全一致。新規重複なしで確認待ちを解消。",
+  "reviewedExactDuplicates": 2,
+  "lastAuditAt": "2026-11-07T03:32:48.657Z"
 }

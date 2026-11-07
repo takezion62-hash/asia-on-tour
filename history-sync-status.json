@@ -11,7 +11,7 @@
   "provider": "osirion",
   "linkedPlayers": 459,
   "trackedWindows": 2783,
-  "found": 14,
+  "found": 0,
   "skipped": 7,
   "imported": 96,
   "scannedPages": 80,
@@ -20,7 +20,7 @@
   "alreadyRegistered": 795,
   "autoApprovedTotal": 590,
   "invalidCachedCandidates": 1,
-  "manualReviewCandidates": 14,
+  "manualReviewCandidates": 0,
   "autoApprovedCosmeticThisRun": 0,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
@@ -28,7 +28,7 @@
   "retryWindows": 9,
   "transientFailures": 0,
   "reviewOnlyWindows": 1271,
-  "reviewOnlyCandidates": 14,
+  "reviewOnlyCandidates": 0,
   "unmappedEvents": 244,
   "unmappedEventIds": [
     "S30_ConsoleCashCups",
@@ -44,10 +44,13 @@
     "S30_Reload",
     "S30_ReloadZB"
   ],
-  "message": "Unreal Cup OCE172位のチーム規定賞金$100を公式規則で確認して掲載。個人配分未確認は個人累計に加算せず、別候補の競合は保留。残り14件。",
+  "message": "過去候補を照合完了。無効開催枠13件は掲載除外、ME Solo Reloadの順位差異1件は公式75位の既存行を維持。今回の過去確認待ち残件0。",
   "manuallyPublished": 69,
   "manuallyResolvedDuplicates": 11,
   "lastRuleReviewedAt": "2026-11-07T03:20:28.520Z",
   "lastAttendanceReviewedAt": "2026-11-07T03:25:38.520Z",
-  "lastCashReviewedAt": "2026-11-07T03:28:26.110Z"
+  "lastCashReviewedAt": "2026-11-07T03:28:26.110Z",
+  "reviewedVoided": 13,
+  "reviewedRankConflict": 1,
+  "lastAuditAt": "2026-11-07T03:32:48.657Z"
 }
