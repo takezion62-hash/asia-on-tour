@@ -45,3 +45,18 @@
 .source-rules-note{color:#91a7c4;font-size:11px;line-height:1.8;margin:20px 0 0}
 @media(max-width:930px){.source-rule-results{grid-template-columns:1fr}}
 @media(max-width:600px){.source-rules{margin-top:32px}.source-rules-controls{grid-template-columns:1fr 1fr}.source-rules-controls label:first-child{grid-column:1/-1}.source-rule-card{padding:15px}.source-rule-title{flex-wrap:wrap}.source-rule-state{white-space:normal}}
+
+
+/* Per-player Cash Cup reward tables and attached official schedule. */
+.source-rule-cash-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));gap:8px}
+.source-rule-cash-region{min-width:0;padding:10px;border:1px solid #3b536c;border-radius:9px;background:#172337}
+.source-rule-cash-region h4{margin:0 0 9px;color:#8fddeb;font-size:12px}
+.source-rule-cash-region.is-unknown{color:#acbfd0;display:grid;align-content:start;gap:8px;font-size:11px}
+.source-rule-cash-tier{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:11px;border-bottom:1px solid #364459;padding:6px 0}
+.source-rule-cash-tier:last-child{border-bottom:0}
+.source-rule-cash-tier strong{white-space:nowrap;color:#f3dfb0}
+.source-rule-dates{border:1px solid #374b63;border-radius:9px;padding:10px;color:#b9d6e8;font-size:11px}
+.source-rule-dates summary{cursor:pointer;font-weight:850}
+.source-rule-dates div{max-height:300px;overflow:auto;padding:4px 0}
+.source-rule-dates p{padding:6px 2px;border-bottom:1px solid #344158;margin:0}
+.source-rule-dates strong{color:#86deea}

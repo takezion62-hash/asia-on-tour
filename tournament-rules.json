@@ -1,7 +1,7 @@
 {
   "version": 1,
   "updatedAt": "2026-11-07",
-  "description": "Epic公式規則により地域別通過・報酬条件を確認済みの大会のみ登録。開催枠が曖昧な大会や未登録地域には報酬を推測しない。",
+  "description": "Epic公式規則と照合した大会だけを掲載。Victory/スキンの自動承認は限定条件のみ。Cash Cupは地域別賞金テーブルを表示するが自動承認は未対応。",
   "rules": [
     {
       "id": "ch5s3-squads-victory-cup",
@@ -196,6 +196,163 @@
         "NAW": 30
       },
       "source": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/one-piece-zoro-cup-chapter-7-mini-season-official-rules"
+    },
+    {
+      "id": "ch7s5-trios-cash-cup",
+      "seasonId": "S43",
+      "eventIds": [
+        "S43_TriosCashCup"
+      ],
+      "team": "trio",
+      "series": "cash-cup",
+      "matchCaps": {
+        "単一ラウンド": 11
+      },
+      "rankedEligibility": {
+        "1": "Diamond",
+        "2": "Champion",
+        "3": "Champion"
+      },
+      "cashPrizes": {
+        "basis": "per-player",
+        "currency": "USD",
+        "tiers": {
+          "OCE": [
+            {
+              "through": 1,
+              "perPlayer": 300
+            },
+            {
+              "through": 2,
+              "perPlayer": 250
+            },
+            {
+              "through": 3,
+              "perPlayer": 200
+            },
+            {
+              "through": 4,
+              "perPlayer": 150
+            },
+            {
+              "through": 5,
+              "perPlayer": 100
+            }
+          ],
+          "ME": [
+            {
+              "through": 1,
+              "perPlayer": 300
+            },
+            {
+              "through": 2,
+              "perPlayer": 250
+            },
+            {
+              "through": 3,
+              "perPlayer": 200
+            },
+            {
+              "through": 4,
+              "perPlayer": 150
+            },
+            {
+              "through": 5,
+              "perPlayer": 100
+            }
+          ],
+          "EU": [
+            {
+              "through": 1,
+              "perPlayer": 1000
+            },
+            {
+              "through": 2,
+              "perPlayer": 750
+            },
+            {
+              "through": 3,
+              "perPlayer": 500
+            },
+            {
+              "through": 4,
+              "perPlayer": 400
+            },
+            {
+              "through": 5,
+              "perPlayer": 300
+            },
+            {
+              "through": 10,
+              "perPlayer": 200
+            },
+            {
+              "through": 20,
+              "perPlayer": 100
+            }
+          ],
+          "BR": [
+            {
+              "through": 1,
+              "perPlayer": 400
+            },
+            {
+              "through": 2,
+              "perPlayer": 300
+            },
+            {
+              "through": 3,
+              "perPlayer": 200
+            },
+            {
+              "through": 5,
+              "perPlayer": 150
+            },
+            {
+              "through": 10,
+              "perPlayer": 100
+            }
+          ],
+          "NAC": [
+            {
+              "through": 1,
+              "perPlayer": 750
+            },
+            {
+              "through": 2,
+              "perPlayer": 500
+            },
+            {
+              "through": 3,
+              "perPlayer": 400
+            },
+            {
+              "through": 4,
+              "perPlayer": 300
+            },
+            {
+              "through": 5,
+              "perPlayer": 200
+            },
+            {
+              "through": 10,
+              "perPlayer": 150
+            },
+            {
+              "through": 15,
+              "perPlayer": 100
+            }
+          ]
+        }
+      },
+      "autoApproval": "review-only",
+      "source": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-trios-cash-cups-chapter-7-mini-season-official-rules",
+      "evidence": [
+        {
+          "text": "地域別個人賞金はユーザー提供の2026年11月7日Fortnite Tracker Prize Pool画面とEpic公式規則Attachment Cで照合。NAWはユーザー提供待ちのため未登録。",
+          "url": "https://fortnitetracker.com/events/epicgames_S43_TriosCashCup_EU"
+        }
+      ]
     }
   ]
 }

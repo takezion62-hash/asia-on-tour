@@ -18,7 +18,7 @@
   const seriesLabel={ 'victory-cup':'Victory Cup','cash-cup':'Cash Cup','skin-cup':'スキン大会','icon-cup':'Icon Cup','fncs':'FNCS','performance-evaluation':'Performance Evaluation','playstation-cup':'PlayStation Cup','unreal-cup':'Unreal Cup','test-cup':'Test Cup' };
   const modeLabel={solo:'ソロ',duo:'デュオ',trio:'トリオ',squad:'スクワッド'};
   const fmtNumber=value=>Number(value).toLocaleString('ja-JP');
-  const state={catalog:[],rules:new Map(),search:'',region:'all',status:'registered',visible:12};
+  const state={catalog:[],rules:new Map(),sessions:[],search:'',region:'all',status:'registered',visible:12};
   const regionRows=(map,label)=>{
     if(!map||typeof map!=='object')return '<span class="source-rule-unknown">'+esc(label)+'は未登録</span>';
     const keys=state.region==='all'?regionLabels:[state.region];
@@ -26,12 +26,46 @@
       ?'<span class="source-rule-region">'+esc(key)+' <strong>上位'+fmtNumber(map[key])+'</strong></span>'
       :'<span class="source-rule-region is-unknown">'+esc(key)+'：未登録</span>').join('');
   };
+
+  // Ranking thresholds are inclusive: 'Top #5' after '#3' applies to 4th–5th.
+  // All amounts in this branch are per player, not full trio totals.
+  function cashMarkup(rule){
+    const award=rule.cashPrizes;
+    const selected=state.region==='all'?regionLabels:[state.region];
+    const sections=selected.map(region=>{
+      const tiers=award?.tiers?.[region];
+      if(!tiers?.length)return '<div class="source-rule-cash-region is-unknown"><strong>'+esc(region)+'</strong><span>賞金表未登録</span></div>';
+      let last=0;
+      const rows=tiers.map(tier=>{
+        const from=last+1;
+        const label=from===tier.through?from+'位':from+'〜'+tier.through+'位';
+        last=tier.through;
+        return '<div class="source-rule-cash-tier"><span>'+esc(label)+'</span><strong>$'+fmtNumber(tier.perPlayer)+'</strong></div>';
+      }).join('');
+      return '<div class="source-rule-cash-region"><h4>'+esc(region)+'</h4>'+rows+'</div>';
+    }).join('');
+    const eligible=Object.entries(rule.rankedEligibility||{}).map(([event,rank])=>
+      'Event '+esc(event)+': '+esc(rank)+'以上').join(' / ');
+    const supported=new Set(Object.keys(award?.tiers||{}));
+    const sessions=state.sessions.filter(s=>rule.eventIds.includes(s.eventId)&&
+      supported.has(s.region)&&(state.region==='all'||s.region===state.region))
+      .sort((a,b)=>a.startUtc.localeCompare(b.startUtc)||a.region.localeCompare(b.region));
+    const scheduleHtml=sessions.length?'<details class="source-rule-dates"><summary>開催日程（日本時間・登録済み5地域）</summary><div>'+
+      sessions.map(s=>'<p><strong>'+esc(s.region)+'</strong> '+esc(s.round)+' · '+esc(s.dateJst)+
+      ' '+esc(s.timeJst)+'〜（約3時間）</p>').join('')+'</div></details>':'';
+    return '<div class="source-rule-fact"><span>個人賞金（USD・チーム3名それぞれ）</span>'+
+      '<div class="source-rule-cash-grid">'+sections+'</div></div>'+
+      '<div class="source-rule-fact"><span>参加ランク条件（BRランク）</span><strong>'+esc(eligible)+'</strong></div>'+
+      scheduleHtml+
+      '<p class="source-rule-warning">※ 確認できた地域別賞金表のみ掲載。順位表・選手本人・賞金対象資格の照合前には自動で賞金獲得確定にしません。</p>';
+  }
   function ruleMarkup(entry){
     const rule=state.rules.get(entry.id),present=Boolean(rule);
     const ids=rule?.eventIds?.length?rule.eventIds:entry.sourceEventIds||[];
     const url=safeUrl(rule?.source);
     const eventUrl=ids[0]?safeUrl('https://www.fortnite.com/competitive/events/'+encodeURIComponent(ids[0])+'/'):null;
-    const conditions=rule?.cosmeticRanks
+    const conditions=rule?.series==='cash-cup'?cashMarkup(rule):
+      rule?.cosmeticRanks
       ?'<div class="source-rule-fact"><span>スキン獲得対象順位</span><div class="source-rule-regions">'+regionRows(rule.cosmeticRanks,'スキン獲得ライン')+'</div></div>'
       :'<div class="source-rule-fact"><span>予選突破の地域別条件</span><div class="source-rule-regions">'+regionRows(rule?.advance,'予選通過順位')+'</div></div>';
     const cash=rule?.series==='victory-cup'
@@ -49,7 +83,7 @@
       ' · '+esc(seriesLabel[entry.series]||entry.series||'大会')+'</span>'+
       '<h3>'+esc(entry.name)+'</h3>'+
       '<p>'+esc(modeLabel[entry.team]||entry.team||'形式未確認')+' / '+esc(entry.mode||'モード未確認')+'</p></div>'+
-      '<span class="source-rule-state '+(present?'is-ready':'is-pending')+'">'+(present?'公式規則登録済み':'ルール未登録')+'</span></div>'+
+      '<span class="source-rule-state '+(present?'is-ready':'is-pending')+'">'+(present?(rule?.autoApproval==='review-only'?'公式規則登録済み・確認専用':'公式規則登録済み'):'ルール未登録')+'</span></div>'+
       details+
       '<details class="source-rule-identifiers"><summary>大会ID・適用範囲</summary><div>'+ids.map(id=>'<code>'+esc(id)+'</code>').join('')+
       '<p>公式規則が確認済みでも、本人Epic ID・地域・開催枠・順位表の検証が必要です</p></div></details>'+
@@ -85,11 +119,12 @@
   $('#source-rule-more').addEventListener('click',()=>{state.visible+=12;render()});
   async function load(){
     try{
-      const responses=await Promise.all(['tournament-rules.json','tournaments.json'].map(file=>fetch('./'+file,{cache:'no-store'})));
+      const responses=await Promise.all(['tournament-rules.json','tournaments.json','schedule.json'].map(file=>fetch('./'+file,{cache:'no-store'})));
       if(responses.some(response=>!response.ok))throw Error('大会ルールデータを読み込めません');
-      const [registry,catalog]=await Promise.all(responses.map(response=>response.json()));
-      if(registry?.version!==1||!Array.isArray(registry.rules)||!Array.isArray(catalog.catalog))throw Error('大会ルールの形式が不正です');
+      const [registry,catalog,schedule]=await Promise.all(responses.map(response=>response.json()));
+      if(registry?.version!==1||!Array.isArray(registry.rules)||!Array.isArray(catalog.catalog)||!Array.isArray(schedule.sessions))throw Error('大会ルールの形式が不正です');
       state.rules=new Map(registry.rules.map(entry=>[entry.id,entry]));
+      state.sessions=schedule.sessions;
       state.catalog=catalog.catalog.slice().sort((a,b)=>{
         const exists=Number(state.rules.has(b.id))-Number(state.rules.has(a.id));
         return exists||Number(b.seasonId?.replace('S','')||0)-Number(a.seasonId?.replace('S','')||0)||a.name.localeCompare(b.name,'ja');

@@ -17,7 +17,7 @@ function validateRegistry(doc,tournaments){
   const t=catalog.get(id);
   if(!t){fail(id,'登録済み大会カタログにありません');continue}
   if(rule.seasonId!==t.seasonId||rule.team!==t.team||rule.series!==t.series)fail(id,'シーズン/チーム/シリーズが一致しません');
-  if(!['victory-cup','skin-cup'].includes(rule.series))fail(id,'許可されない自動判定シリーズです');
+  if(!['victory-cup','skin-cup','cash-cup'].includes(rule.series))fail(id,'対応していないルールシリーズです');
   if(!Array.isArray(rule.eventIds)||!rule.eventIds.length||new Set(rule.eventIds).size!==rule.eventIds.length||
       rule.eventIds.some(x=>typeof x!=='string'||!t.sourceEventIds.includes(x)))fail(id,'EpicイベントIDがカタログと不一致');
   if(!TEAMS.has(rule.team))fail(id,'チーム形式が不正');
@@ -25,13 +25,37 @@ function validateRegistry(doc,tournaments){
   try{url=new URL(rule.source)}catch{}
   if(!url||url.protocol!=='https:'||!URL_HOSTS.has(url.hostname)||url.username||url.password||url.hash)fail(id,'Epic公式規則URLが不正');
   if(!object(rule.matchCaps)||!Object.keys(rule.matchCaps).length||
-     Object.entries(rule.matchCaps).some(([name,value])=>!['予選','賞金決勝','スキン大会'].includes(name)||!positive(value)||value>40))fail(id,'公式試合数上限が不正');
+     Object.entries(rule.matchCaps).some(([name,value])=>!['予選','賞金決勝','スキン大会','単一ラウンド'].includes(name)||!positive(value)||value>40))fail(id,'公式試合数上限が不正');
   if(rule.series==='victory-cup'){
    if(!positive(rule.matchCaps?.['予選'])||!positive(rule.matchCaps?.['賞金決勝']))fail(id,'Victory Cupの予選/決勝試合数上限が不足');
    if(!object(rule.advance)||!Object.keys(rule.advance).length||
       Object.entries(rule.advance).some(([region,value])=>!REGIONS.has(region)||!positive(value)))fail(id,'地域別予選通過順位が不正');
    if(rule.cosmeticRanks!==undefined)fail(id,'Victory Cupにスキン順位は登録不可');
    if(rule.prizePerVictory!==undefined&&(!positive(rule.prizePerVictory)||rule.prizePerVictory>10000))fail(id,'VR賞金単価が不正');
+  }else if(rule.series==='cash-cup'){
+   // Cash Cup rules may be displayed, but are not eligible for automatic payout
+   // publication until team identity, session completion and eligibility checks exist.
+   if(rule.autoApproval!=='review-only')fail(id,'Cash Cupは確認専用にしてください');
+   if(!positive(rule.matchCaps?.['単一ラウンド']))fail(id,'Cash Cupの試合数上限が必要');
+   if(rule.advance!==undefined||rule.cosmeticRanks!==undefined||rule.prizePerVictory!==undefined)fail(id,'Cash Cupに他大会の報酬条件が混在しています');
+   if(!object(rule.rankedEligibility)||
+      Object.entries(rule.rankedEligibility).some(([event,value])=>!['1','2','3'].includes(event)||!['Diamond','Champion'].includes(value)))
+      fail(id,'参加ランク条件が不正');
+   if(!object(rule.cashPrizes)||rule.cashPrizes.basis!=='per-player'||rule.cashPrizes.currency!=='USD'||
+      !object(rule.cashPrizes.tiers)||Object.keys(rule.cashPrizes.tiers).length===0)
+      fail(id,'個人賞金テーブルが不正');
+   else for(const [region,tiers] of Object.entries(rule.cashPrizes.tiers)){
+     if(!REGIONS.has(region)||!Array.isArray(tiers)||!tiers.length){fail(id,region+'の地域・賞金表が不正');continue}
+     let previousRank=0,previousPrize=Infinity;
+     for(const tier of tiers){
+       if(!object(tier)||!positive(tier.through)||tier.through<=previousRank||
+          !positive(tier.perPlayer)||tier.perPlayer>previousPrize||tier.perPlayer>100000){
+          fail(id,region+'の順位・個人賞金に矛盾');break;
+       }
+       previousRank=tier.through;previousPrize=tier.perPlayer;
+     }
+     if(tiers[0]?.through!==1)fail(id,region+'の1位賞金が未登録');
+   }
   }else if(rule.series==='skin-cup'){
    if(!positive(rule.matchCaps?.['スキン大会']))fail(id,'スキン大会の試合数上限が必要');
    if(!positive(rule.chapter)||!positive(rule.season)||rule.chapter!==t.chapter||rule.season!==t.season)fail(id,'チャプター/シーズン不一致');
