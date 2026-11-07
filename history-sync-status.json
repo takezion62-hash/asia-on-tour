@@ -1,7 +1,7 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-07T01:14:34.074Z",
+  "checkedAt": "2026-11-07T01:47:45.378Z",
   "mode": "review",
   "scope": "history",
   "dateMode": "rolling",
@@ -10,23 +10,23 @@
   "toDate": "2026-11-07",
   "provider": "osirion",
   "linkedPlayers": 459,
-  "trackedWindows": 2782,
-  "found": 9,
+  "trackedWindows": 2783,
+  "found": 28,
   "skipped": 4,
-  "imported": 30,
+  "imported": 7,
   "scannedPages": 80,
-  "completedWindows": 92,
+  "completedWindows": 100,
   "identityConflicts": 0,
-  "alreadyRegistered": 688,
-  "autoApprovedTotal": 416,
+  "alreadyRegistered": 718,
+  "autoApprovedTotal": 423,
   "invalidCachedCandidates": 1,
-  "manualReviewCandidates": 9,
+  "manualReviewCandidates": 28,
   "autoApprovedCosmeticThisRun": 0,
   "timeLimitReached": false,
   "retryWindows": 2,
   "transientFailures": 0,
-  "reviewOnlyWindows": 1270,
-  "reviewOnlyCandidates": 9,
+  "reviewOnlyWindows": 1271,
+  "reviewOnlyCandidates": 14,
   "unmappedEvents": 244,
   "unmappedEventIds": [
     "S30_ConsoleCashCups",
@@ -42,5 +42,5 @@
     "S30_Reload",
     "S30_ReloadZB"
   ],
-  "message": "Osirionで459アカウントIDを追跡。今回の公式規則による自動承認30件、追加確認待ち9件、名義照合保留0件。"
+  "message": "Osirionで459アカウントIDを追跡。今回の公式規則による自動承認7件、追加確認待ち28件、名義照合保留0件。"
 }
