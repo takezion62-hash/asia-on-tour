@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-07T09:05:08.991Z",
+  "reviewedAt": "2026-11-07T09:14:30.244Z",
   "description": "Resolved historic review candidates: published, duplicate or participation",
   "entries": [
     {
@@ -3697,6 +3697,17 @@
       "source": "https://www.fortnite.com/competitive/events/S31_SoloVictoryCashCup/?region=OCE&round=S31_SoloVictoryCashCup_Event1Round1_OCE",
       "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-4-official-rules",
       "evidence": "Original Epic checkpoint, exact archived date/window, 2024 OCE top 1500 official cutoff and known player ID"
+    },
+    {
+      "id": "auto-s42-ef18ae1d40bd",
+      "decision": "corrected-existing",
+      "existingId": "s42-nac-performance-duos-qual-20260918-3peace-job",
+      "recordId": "s42-nac-performance-duos-qual-20260918-3peace-job",
+      "source": "https://www.fortnite.com/competitive/events/S42_PerformanceEvaluation/?region=NAC&round=S42_PerformanceEvaluation_Event4Round1_NAC",
+      "previousRank": 701,
+      "correctedRank": 702,
+      "evidence": "Site owner confirmed the 2026-09-18 NAC Performance Evaluation 3peace/Job duo official position is 702; archived Epic leaderboard also shows 702. Previously listed Tracker result had rank 701 but identical 83 points, 3 eliminations, 0 wins and 4 matches.",
+      "reviewedAt": "2026-11-07T09:14:30.244Z"
     }
   ]
 }
