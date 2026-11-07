@@ -104,7 +104,10 @@ test('シーズン・4形式・大会シリーズが組み合わさり、未確�
   await page.locator('#ranking-mode').selectOption('all');
   for (const series of ['victory-cup', 'cash-cup', 'fncs']) {
     await page.locator('#ranking-series').selectOption(series);
-    await expectCash(page, data.results.filter(row => tournamentFor(row, data)?.series === series));
+    await expectCash(page, data.results.filter(row => {
+      const tournament = tournamentFor(row, data);
+      return tournament?.series === series || tournament?.additionalSeries?.includes(series);
+    }));
   }
   await page.locator('#ranking-series').selectOption('all');
   await expectCash(page, data.results);
