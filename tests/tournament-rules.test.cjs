@@ -141,7 +141,7 @@ test('S39 $1M Unreal Cup official seven-region duo team prizes and scoring',()=>
  assert.equal(RULES[rule.id],undefined,'No unsafe Victory Cup auto cash approval');
  const wrong=clone(registry);
  wrong.rules.find(r=>r.id===rule.id).cashPrizes.tiers.OCE.at(-1).perTeam=101;
- assert.match(validateRegistry(wrong,tournaments).join('\n'),/賞金額・個人分配/);
+ assert.match(validateRegistry(wrong,tournaments).join('\n'),/公式賞金の1位額・最低賞金順位|賞金額・個人分配/);
  const shifted=clone(registry);
  shifted.rules.find(r=>r.id===rule.id).scoring.placementPoints[0]=66;
  assert.match(validateRegistry(shifted,tournaments).join('\n'),/順位点/);
