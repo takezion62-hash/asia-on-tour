@@ -1,7 +1,7 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-07T04:02:46.561Z",
+  "checkedAt": "2026-11-07T04:08:55.720Z",
   "scope": "participation",
   "provider": "osirion",
   "fromDate": "2024-05-29",
@@ -15,9 +15,9 @@
   "invalidRows": 1,
   "emptyPages": 0,
   "failedWindows": 0,
-  "newRecords": 0,
+  "newRecords": 9,
   "prunedPublished": 0,
-  "total": 68,
+  "total": 77,
   "months": 7,
   "skippedPublished": 0,
   "message": "Epic IDで本人照合した出場戦績を月別に保存。公式通過枠外の判定以外は通過未確認。賞金・AOT PR・称号には加算しません。全順位表を無制限には調査しません。"
