@@ -19,6 +19,9 @@ const S38_TARGETS=['auto-s38-4744d9dc78a1','auto-s38-1170ff6e1508'];
 const S38_TID='ch6mini2-duos-victory-cash-cup';
 const S38_EVENT='S38_DuosVictoryCup',S38_WINDOW='S38_DuosVictoryCup_Round2_Day3_NAW';
 const S38_RULES='https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cash-cups-november-2025-official-rules';
+const S38_SQUAD_ID='auto-s38-4dd88cdb5e7c';
+const S38_SQUAD_EVENT='S38_SquadsVictoryCup',S38_SQUAD_WINDOW='S38_SquadsVictoryCup_Round2_Day3_NAW';
+const S38_SQUAD_TID='ch6mini2-squads-victory-cash-cup';
 const read=name=>JSON.parse(fs.readFileSync(path.join(ROOT,name),'utf8'));
 const write=(name,value)=>fs.writeFileSync(path.join(ROOT,name),JSON.stringify(value,null,2)+'\n');
 const clone=o=>JSON.parse(JSON.stringify(o));
@@ -157,6 +160,66 @@ function resolveCandidates(data,now='2026-11-08T00:00:00.000Z'){
     rank:record.rank,prize:0});
   }
  }
+ // Same official November 2025 rules also pay squads per Victory Royale.
+ // The saved S38 NAW 2025-11-24 Round-2 (Nov 23 in some time zones)
+ // standings are a complete single page with all four Epic IDs verified.
+ const squadRow=review.proposals.find(x=>x.id===S38_SQUAD_ID);
+ if(squadRow){
+  const cat=tournaments.catalog.find(x=>x.id===S38_SQUAD_TID);
+  assert(cat&&cat.name==='Squads Victory Cash Cup'&&cat.team==='squad'
+   &&cat.series==='victory-cup'&&cat.seasonId==='S38'
+   &&cat.sourceEventIds?.includes(S38_SQUAD_EVENT),
+   '2025 November squad catalog metadata not verified');
+  const checkpoint=scan.windows['epicgames_'+S38_SQUAD_EVENT+'_NAW/'+S38_SQUAD_WINDOW];
+  assert(checkpoint&&checkpoint.complete===true&&Number.isInteger(checkpoint.totalPages)
+   &&checkpoint.totalPages>=1&&checkpoint.nextPage>=checkpoint.totalPages
+   &&checkpoint.rankingOrderValid!==false&&Array.isArray(checkpoint.proposals),
+   'S38 NAW squad Round-2 leaderboard incomplete');
+  assert(squadRow.date==='2025-11-24'&&squadRow.region==='NAW'
+   &&squadRow.tournamentId===S38_SQUAD_TID&&squadRow.seasonId==='S38'
+   &&squadRow.event===cat.name&&squadRow.kind==='賞金決勝'
+   &&squadRow.round==='Day 3 · Round 2 / 賞金決勝',
+   'S38 squad event identity/date/round mismatch');
+  assert(squadRow.verified===true&&squadRow.vrs===0&&squadRow.prize===null
+   &&squadRow.points===0&&Number.isSafeInteger(squadRow.rank)&&squadRow.rank>=1
+   &&Number.isSafeInteger(squadRow.kills)&&squadRow.kills>=0
+   &&Number.isSafeInteger(squadRow.matches)&&squadRow.matches>=1&&squadRow.matches<=3,
+   'S38 NAW squad prize or stats unverified');
+  const people=roster(squadRow);
+  assert(people.length===4&&new Set(people).size===4&&people.every(x=>names.has(x))
+   &&squadRow.player===people.join(' / '),'S38 squad four-person roster not confirmed');
+  assert(checkpoint.proposals.some(x=>equalCandidate(x,squadRow)),
+   'S38 squad cached Epic-ID standings mismatch');
+  const source=new URL(squadRow.source);
+  assert(source.protocol==='https:'&&source.hostname==='www.fortnite.com'
+   &&source.pathname==='/competitive/events/'+S38_SQUAD_EVENT+'/'
+   &&source.searchParams.get('region')==='NAW'
+   &&source.searchParams.get('round')===S38_SQUAD_WINDOW,
+   'S38 squad official source mismatch');
+  const colliding=results.filter(x=>collision(x,squadRow,aliases));
+  if(colliding.length){
+   if(colliding.length===1&&isDuplicate(colliding[0],squadRow)){
+    removeReview(S38_SQUAD_ID);
+    duplicates.push({id:S38_SQUAD_ID,existingId:colliding[0].id});
+    ledger(S38_SQUAD_ID,{decision:'already-published',existingId:colliding[0].id,
+     source:squadRow.source,verifiedAt:now});
+   }else held.push({id:S38_SQUAD_ID,reason:'squad event source conflicts with existing record'});
+  }else{
+   assert(!existingIds.has(S38_SQUAD_ID),'S38 squad ID duplicate');
+   const {reviewOnly,reviewReason,teamAccountIds,...record}=squadRow;
+   record.prize=0;
+   record.note='S38 NAW 2025/11/24（Epic開催日11/23）のSquads Victory Cash Cup決勝。'
+    +'本人確認済みEpic ID4名と公式順位表全'+checkpoint.totalPages+'ページを照合。'
+    +'チーム0VRのため公式規則（決勝1VRごと各選手$100）から現金賞金$0。'
+    +'順位・KILLS・VR・試合数は変更しない。出典: '+S38_RULES;
+   results.push(record);existingIds.add(record.id);verified.push(record);
+   removeReview(record.id);
+   ledger(record.id,{decision:'published',recordId:record.id,policy:'verified-official-zero-vr',
+    verifiedAt:now,source:record.source,officialRules:S38_RULES,
+    leaderboardWindow:S38_SQUAD_WINDOW,leaderboardPages:checkpoint.totalPages,
+    rank:record.rank,prize:0});
+  }
+ }
  // Prior reviewed NAW S42 official solo finals are already present under manual IDs.
  for(const id of RECHECK_DUPLICATES){
   const row=review.proposals.find(x=>x.id===id);
@@ -179,7 +242,12 @@ function resolveCandidates(data,now='2026-11-08T00:00:00.000Z'){
     title:'2025年11月23日NAW Duos Victory Cash Cup決勝0VR・$0の2組を掲載',
     description:'2025年11月23日NAW決勝の公式全順位表と本人Epic IDを照合。'
      +'Epic公式規則でVR1回あたり各選手$100のため0VRの組は賞金$0。'
-     +'既存の順位・キル・試合数は変更せず、重複なく掲載。出典: '+S38_RULES}
+     +'既存の順位・キル・試合数は変更せず、重複なく掲載。出典: '+S38_RULES},
+   {tournament:S38_SQUAD_TID,id:'manual-verified-s38-squads-20261108',
+    title:'2025年11月24日NAW Squads Victory Cash Cup決勝0VR・$0の1組を掲載',
+    description:'2025年11月24日日本時間のNAW決勝で公式全順位表とEpic ID4名を照合。'
+     +'Epic公式規則のVR1回あたり各選手$100より0VRの組は$0と確認。'
+     +'元の順位・キル・試合数と既存掲載は変更しない。出典: '+S38_RULES}
   ]){
    const published=verified.filter(x=>x.tournamentId===group.tournament);
    if(!published.length)continue;
@@ -198,7 +266,7 @@ function resolveCandidates(data,now='2026-11-08T00:00:00.000Z'){
   status.manuallyPublished=(Number(status.manuallyPublished)||0)+verified.length;
   status.manuallyResolvedDuplicates=(Number(status.manuallyResolvedDuplicates)||0)+duplicates.length;
   status.lastReviewedBatchAt=now;
-  status.message='公式順位表と規則でS35/S38の0VR決勝を'+verified.length+'件$0掲載。既存戦績の重複'+duplicates.length+
+  status.message='公式順位表と規則でS35/S38の0VR決勝（ソロ以外・デュオ／スクワッド）を'+verified.length+'件$0掲載。既存戦績の重複'+duplicates.length+
    '件を確認済みに移動。残り確認待ち'+review.proposals.length+'件。未確定賞金や取得途中の順位は変更しない。';
  }
  return {docs:{results,updates,review,reviewed,status},report:{
