@@ -16,7 +16,10 @@ function cashPrize(rule,region,rank){
  // Ranges are inclusive: top #10 following top #5 covers sixth through tenth.
  for(const tier of tiers){
   if(rank<=tier.through)return tier.perPlayer;
- }\n // Rank beyond the last awarded place has no cash prize.\n return 0;\n}
+ }
+ // Rank beyond the last awarded place has no cash prize.
+ return 0;
+}
 function cashLimitForWindow(win){
  const rule=RULES[win?.tournamentId];
  if(!rule||win.series!=='cash-cup'||win.kind!=='参加確認'||
