@@ -1,0 +1,108 @@
+'use strict';
+// Read-only official tournament rule directory under SOURCES.
+// Publication logic uses this same JSON through Node on GitHub Actions.
+(()=>{
+  const root=document.querySelector('#source-rules');
+  if(!root)return;
+  const $=selector=>root.querySelector(selector);
+  const esc=value=>String(value??'').replace(/[&<>"']/g,character=>({
+    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+  })[character]);
+  const safeUrl=value=>{
+    try{
+      const url=new URL(value);
+      return url.protocol==='https:'&&['www.fortnite.com','fortnite.com'].includes(url.hostname)?url.href:null;
+    }catch{return null}
+  };
+  const regionLabels=['ME','EU','NAC','NAW','OCE','BR'];
+  const seriesLabel={ 'victory-cup':'Victory Cup','cash-cup':'Cash Cup','skin-cup':'スキン大会','icon-cup':'Icon Cup','fncs':'FNCS','performance-evaluation':'Performance Evaluation','playstation-cup':'PlayStation Cup','unreal-cup':'Unreal Cup','test-cup':'Test Cup' };
+  const modeLabel={solo:'ソロ',duo:'デュオ',trio:'トリオ',squad:'スクワッド'};
+  const fmtNumber=value=>Number(value).toLocaleString('ja-JP');
+  const state={catalog:[],rules:new Map(),search:'',region:'all',status:'registered',visible:12};
+  const regionRows=(map,label)=>{
+    if(!map||typeof map!=='object')return '<span class="source-rule-unknown">'+esc(label)+'は未登録</span>';
+    const keys=state.region==='all'?regionLabels:[state.region];
+    return keys.map(key=>Object.hasOwn(map,key)
+      ?'<span class="source-rule-region">'+esc(key)+' <strong>上位'+fmtNumber(map[key])+'</strong></span>'
+      :'<span class="source-rule-region is-unknown">'+esc(key)+'：未登録</span>').join('');
+  };
+  function ruleMarkup(entry){
+    const rule=state.rules.get(entry.id),present=Boolean(rule);
+    const ids=rule?.eventIds?.length?rule.eventIds:entry.sourceEventIds||[];
+    const url=safeUrl(rule?.source);
+    const eventUrl=ids[0]?safeUrl('https://www.fortnite.com/competitive/events/'+encodeURIComponent(ids[0])+'/'):null;
+    const conditions=rule?.cosmeticRanks
+      ?'<div class="source-rule-fact"><span>スキン獲得対象順位</span><div class="source-rule-regions">'+regionRows(rule.cosmeticRanks,'スキン獲得ライン')+'</div></div>'
+      :'<div class="source-rule-fact"><span>予選突破の地域別条件</span><div class="source-rule-regions">'+regionRows(rule?.advance,'予選通過順位')+'</div></div>';
+    const cash=rule?.series==='victory-cup'
+      ?'<div class="source-rule-fact"><span>決勝賞金</span><strong>'+(
+        Number.isFinite(rule.prizePerVictory)?'決勝1VRにつき$'+fmtNumber(rule.prizePerVictory)+'（規則上）'
+        :'VRごとの賞金単価は未登録（0VRは$0で記録可能）'
+      )+'</strong></div>':'';
+    const matchCaps=Object.entries(rule?.matchCaps||{}).map(([stage,limit])=>esc(stage)+' 最大'+fmtNumber(limit)+'試合').join(' / ');
+    const details=present?
+      '<div class="source-rule-facts">'+conditions+cash+
+      '<div class="source-rule-fact"><span>試合数の上限</span><strong>'+esc(matchCaps||'未登録')+'</strong></div></div>'
+      :'<p class="source-rule-warning">公式の地域別通過・賞金・スキン獲得条件は未登録です。順位だけから報酬を自動認定しません。</p>';
+    return '<article class="source-rule-card" data-rule-id="'+esc(entry.id)+'">'+
+      '<div class="source-rule-title"><div><span class="source-rule-season">'+esc(entry.seasonId||'シーズン不明')+
+      ' · '+esc(seriesLabel[entry.series]||entry.series||'大会')+'</span>'+
+      '<h3>'+esc(entry.name)+'</h3>'+
+      '<p>'+esc(modeLabel[entry.team]||entry.team||'形式未確認')+' / '+esc(entry.mode||'モード未確認')+'</p></div>'+
+      '<span class="source-rule-state '+(present?'is-ready':'is-pending')+'">'+(present?'公式規則登録済み':'ルール未登録')+'</span></div>'+
+      details+
+      '<details class="source-rule-identifiers"><summary>大会ID・適用範囲</summary><div>'+ids.map(id=>'<code>'+esc(id)+'</code>').join('')+
+      '<p>公式規則が確認済みでも、本人Epic ID・地域・開催枠・順位表の検証が必要です</p></div></details>'+
+      '<div class="source-rule-links">'+
+      (url?'<a href="'+esc(url)+'" target="_blank" rel="noopener noreferrer">Epic公式大会ルール ↗</a>':'')+
+      (eventUrl?'<a href="'+esc(eventUrl)+'" target="_blank" rel="noopener noreferrer">公式大会ページ ↗</a>':'')+
+      '</div></article>';
+  }
+  function render(){
+    const query=state.search.toLocaleLowerCase('ja');
+    const matches=state.catalog.filter(entry=>{
+      const found=state.rules.has(entry.id);
+      if(state.status==='registered'&&!found)return false;
+      if(state.status==='pending'&&found)return false;
+      if(!query)return true;
+      const haystack=[entry.name,entry.id,entry.seasonId,entry.series,...(entry.sourceEventIds||[])].join(' ').toLocaleLowerCase('ja');
+      return haystack.includes(query);
+    });
+    const items=matches.slice(0,state.visible);
+    $('#source-rule-results').innerHTML=items.length?items.map(ruleMarkup).join(''):
+      '<p class="source-rule-empty">条件に合う大会がないょ。検索や絞り込みを変えてみてね。</p>';
+    $('#source-rule-status').textContent='表示 '+fmtNumber(items.length)+' / '+fmtNumber(matches.length)+'大会 · 公式ルール登録済み '+fmtNumber(state.rules.size)+'大会';
+    $('#source-rule-more').hidden=items.length>=matches.length;
+    $('#source-rule-more').textContent='さらに12大会を見る（残り'+fmtNumber(matches.length-items.length)+'件）';
+  }
+  for(const [control,key] of [['#source-rule-search','search'],['#source-rule-region','region'],['#source-rule-filter','status']]){
+    const element=$(control);
+    if(!element)continue;
+    element.addEventListener(key==='search'?'input':'change',()=>{
+      state[key]=element.value;state.visible=12;render();
+    });
+  }
+  $('#source-rule-more').addEventListener('click',()=>{state.visible+=12;render()});
+  async function load(){
+    try{
+      const responses=await Promise.all(['tournament-rules.json','tournaments.json'].map(file=>fetch('./'+file,{cache:'no-store'})));
+      if(responses.some(response=>!response.ok))throw Error('大会ルールデータを読み込めません');
+      const [registry,catalog]=await Promise.all(responses.map(response=>response.json()));
+      if(registry?.version!==1||!Array.isArray(registry.rules)||!Array.isArray(catalog.catalog))throw Error('大会ルールの形式が不正です');
+      state.rules=new Map(registry.rules.map(entry=>[entry.id,entry]));
+      state.catalog=catalog.catalog.slice().sort((a,b)=>{
+        const exists=Number(state.rules.has(b.id))-Number(state.rules.has(a.id));
+        return exists||Number(b.seasonId?.replace('S','')||0)-Number(a.seasonId?.replace('S','')||0)||a.name.localeCompare(b.name,'ja');
+      });
+      $('#source-rule-overview').textContent='公式規則登録 '+fmtNumber(state.rules.size)+' / 大会 '+fmtNumber(state.catalog.length);
+      render();
+    }catch(error){
+      $('#source-rule-status').textContent='大会ルールを読み込めませんでした。通信状態を確認して再読み込みしてください。';
+      $('#source-rule-results').textContent='';
+      $('#source-rule-more').hidden=true;
+      root.dataset.state='error';
+      console.error('Source rule master load failed',error);
+    }
+  }
+  load();
+})();
