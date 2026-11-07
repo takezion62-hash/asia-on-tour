@@ -18,6 +18,15 @@
     const box=document.createElement('section');box.className='auto-sync-coverage';
     const heading=document.createElement('strong');heading.textContent='未完了の開催枠（抜粋）';box.append(heading);
     const note=document.createElement('p');note.textContent='対象は発見済み大会の順位表。選手の調査完了率ではありません';box.append(note);
+    // Window coverage is not a player win rate.
+    for(const [label,groups] of [['地域別',c.byRegion],['年別',c.byYear]]){
+      if(!groups||typeof groups!=='object')continue;
+      const line=document.createElement('p');
+      line.textContent=label+'：'+Object.entries(groups).sort(([a],[b])=>a.localeCompare(b)).map(
+        ([key,x])=>key+' '+fmt(x.completed)+'/'+fmt(x.total)
+      ).join(' · ');
+      box.append(line);
+    }
     const items=Array.isArray(c.samples)?c.samples:[];
     if(items.length){
       const list=document.createElement('ul'),labels={notStarted:'未着手',partial:'途中',retryWaiting:'待機',retryDue:'再試行対象'};
