@@ -1864,17 +1864,19 @@
         "S40_SoloVictoryCup"
       ],
       "series": "victory-cup",
-      "mode": "unknown",
+      "mode": "battle-royale",
       "subtype": "solo-victory-cup",
       "team": "solo",
       "platform": "cross-platform",
-      "unknownFields": [
-        "mode"
-      ],
+      "unknownFields": [],
       "evidence": [
         {
           "text": "Osirionの過去大会開催履歴で公式EpicイベントID・大会名称を確認。個別の通過・賞金・報酬を推定せず確認候補として登録。",
           "url": "https://www.fortnite.com/competitive/events/S40_SoloVictoryCup/"
+        },
+        {
+          "text": "Epic公式大会ページでS40 Solo Victory CupのBattle Royale / Solos形式を確認。Round2 1VRにつき個人$100。",
+          "url": "https://www.fortnite.com/competitive/events/S40_SoloVictoryCup?lang=en-US&region=NAC"
         }
       ]
     },
@@ -2176,6 +2178,32 @@
         {
           "text": "Fortnite TrackerのS31_InfluencerCup_NAC・Round2における2024年9月7日UTC開催の決勝順位、100pt、VR、各選手$100をユーザー提供8枚の画像で照合。",
           "url": "https://fortnitetracker.com/events/epicgames_S31_InfluencerCup_NAC?window=S31_InfluencerCup_Round2_NAC"
+        }
+      ]
+    },
+    {
+      "id": "ch6s2-console-duos-victory",
+      "name": "Duos Console Victory Cash Cup",
+      "chapter": 6,
+      "season": 2,
+      "seasonId": "S35",
+      "sourceEventIds": [
+        "S35_VictoryDuosCup"
+      ],
+      "series": "victory-cup",
+      "mode": "battle-royale",
+      "subtype": "duos-console-victory-cash-cup",
+      "team": "duo",
+      "platform": "console",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "Epic Games公式大会ページで2025年5月17日〜31日のDuos Console Victory Cash CupをBattle Royale / Duosと確認。Round2のVR1回につきチーム$200。",
+          "url": "https://www.fortnite.com/competitive/events/S35_VictoryDuosCup/?region=ME"
+        },
+        {
+          "text": "2025/5/31 ME Event3 Round2についてユーザー提供Fortnite Tracker結果画像で順位・キル・VR・賞金を照合。",
+          "url": "https://fortnitetracker.com/events/epicgames_S35_VictoryDuosCup_ME?window=S35_VictoryDuosCup_Event3Round2_ME"
         }
       ]
     }
