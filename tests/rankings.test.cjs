@@ -271,3 +271,35 @@ test('実データの全期間と各シーズンで既存賞金ランキング�
   }
   assert.equal(JSON.stringify(published), before, 'Published JSON data must remain unchanged');
 });
+
+test('ランキングは集計値を変えず掲載戦績・実測数値の母数と欠損を返す', () => {
+  const records=[
+    record('known',{player:'Alpha',matches:3,vrs:0,kills:2,rank:2,prize:100}),
+    record('unknown',{player:'Alpha',matches:null,vrs:null,kills:null,rank:null,prize:null}),
+    record('pending',{player:'Alpha',verified:false,matches:4,vrs:9,kills:20,rank:1,prize:200}),
+    record('other',{player:'Beta',region:'EU',matches:2,vrs:1,kills:3,rank:4,prize:0})
+  ];
+  const original=JSON.stringify(records),report=build(records,{metric:'vrs',region:'ME'});
+  assert.deepEqual(values(report),{Alpha:0});
+  assert.equal(report.quality.records,3);
+  assert.equal(report.quality.verified,2);
+  assert.equal(report.quality.ranked,1);
+  assert.equal(report.quality.matches,1);
+  assert.equal(report.quality.kills,1);
+  assert.equal(report.quality.vrs,1);
+  assert.equal(report.quality.cashCandidates,3);
+  assert.equal(report.quality.cashResolved,1);
+  assert.equal(report.rows[0].sampleRecords,3);
+  assert.equal(report.rows[0].verifiedSamples,2);
+  assert.equal(report.rows[0].matchSamples,1);
+  assert.equal(report.rows[0].vrSamples,1);
+  assert.equal(JSON.stringify(records),original);
+});
+test('賞金配分が不明なチーム戦は賞金入力確認済み数に含めない',()=>{
+ const duo=record('cash-duo',{players:['Alpha','Beta'],player:'Alpha / Beta',prize:400,prizePerPlayer:null});
+ const zero=record('cash-zero',{players:['Alpha','Beta'],player:'Alpha / Beta',prize:0,prizePerPlayer:null});
+ const result=build([duo,zero],{metric:'prize'});
+ assert.equal(result.quality.cashCandidates,2);
+ assert.equal(result.quality.cashResolved,1);
+ assert.equal(result.totalPrize,0);
+});

@@ -952,6 +952,20 @@
         +'<button type="submit"'+(remaining?'':' disabled')+'>＋ 追加</button></div>'
         +'<p id="compare-add-error" class="compare-add-error" role="status" aria-live="polite"></p>'
         +'</form>';
+      const sampleShare=(n,total)=>total?format(Math.round(n/total*1000)/10)+'%':'—';
+      const qualityCards=rows.players.map(p=>{
+        const q=p.quality;
+        return '<article class="compare-quality-player" data-compare-quality="'+escape(p.name)+'"><h3>'+escape(p.name)+'</h3>'
+          +'<p>比較条件に合う掲載済み戦績 <b>'+format(q.records)+'件</b></p>'
+          +'<dl><div><dt>試合数入力</dt><dd>'+format(q.matchSamples)+' / '+format(q.records)+'（'+sampleShare(q.matchSamples,q.records)+'）</dd></div>'
+          +'<div><dt>キル数入力</dt><dd>'+format(q.killSamples)+' / '+format(q.records)+'（'+sampleShare(q.killSamples,q.records)+'）</dd></div>'
+          +'<div><dt>VR入力</dt><dd>'+format(q.vrSamples)+' / '+format(q.records)+'（'+sampleShare(q.vrSamples,q.records)+'）</dd></div>'
+          +'<div><dt>賞金区分の金額・配分確認</dt><dd>'+format(q.cashResolved)+' / '+format(q.cashCandidates)+'件</dd></div></dl></article>';
+      }).join('');
+      const qualitySection='<details class="compare-quality" id="compare-data-quality"><summary>比較データの母数・入力の充実度を確認</summary>'
+        +'<p>以下は現在の比較条件に合う確認済み掲載戦績の記録状況です。未掲載の大会は含まれず、入力率は大会全体の網羅率ではありません。'
+        +'AOT PRは本人照合済みの追加参加アーカイブも重複除外して使用するため、この掲載戦績の母数と一致しない場合があります。</p>'
+        +'<div class="compare-quality-grid">'+qualityCards+'</div></details>';
       const filters='<div class="compare-filter-grid">'
         +'<label class="compare-filter"><span>比較期間</span><select id="compare-filter-season">'
         +seasonChoices+'</select></label>'
@@ -1017,7 +1031,7 @@
         +'<h2>比較したい選手を選択</h2><a id="compare-share" href="'+escape(compareHash(state))+'">この比較のURL ↗</a></div>'
         +'<div class="compare-player-grid">'+selectedCards+'</div>'+add+'</section>'
         +'<section class="compare-filter-panel" aria-label="比較条件"><h2>比較条件をそろえる</h2>'+filters+'</section>'
-        +'<div id="compare-report" data-compare-selected="'+rows.players.length+'">'+overview+'</div>'
+        +qualitySection+'<div id="compare-report" data-compare-selected="'+rows.players.length+'">'+overview+'</div>'
         +'<p class="compare-footnote">※ 比較はサイト掲載済みで出典確認された戦績だけを対象にしています。'
         +'個人賞金は確認済みの本人分のみで、チーム総額を個人へ割り当てません。VRは掲載されたソロまたはチームの記録で、'
         +'VR未確認の結果は合計に含めません。AOT PRは選んだ条件の戦績に現行の独自計算式を再適用した参考値で、'
@@ -1726,6 +1740,8 @@
       }
       if(metric.id==='finals')facts.push(...AsiaRankings.FINAL_KINDS.filter(kind=>player.finalKinds[kind]>0).map(kind=>`${kind==='決勝'?'その他の決勝':kind} ${format(player.finalKinds[kind])}件`));
       if(metric.id==='regions')facts.push(player.regions.join(' / '));
+      facts.push('掲載 '+format(player.sampleRecords)+'件・確認済み '+format(player.verifiedSamples)+'件');
+      facts.push('試合数入力 '+format(player.matchSamples)+'/'+format(player.sampleRecords)+'件');
       return `<div role="listitem"><a class="earner" href="${escape(profileHref(player.name))}" data-open-profile="${escape(player.name)}" data-ranking-player="${escape(player.name)}" data-ranking-value="${escape(player.value)}" data-ranking-rank="${escape(player.rank)}" data-ranking-top="${player.rank<=3}"><span class="position" aria-label="${escape(player.rank)}位">#${format(player.rank)}</span><span class="earner-name">${escape(player.name)}</span><strong class="amount">${escape(amount)}</strong><span class="earner-events">${['prize','prizeCount'].includes(metric.id)?`賞金獲得 ${format(player.prizeEvents)}件`:`掲載 ${format(player.knownRecords)}件`} ↗</span>${facts.length?`<small class="ranking-row-note">${escape(facts.join(' · '))}</small>`:''}</a></div>`;
     }
     function renderRanking(){
@@ -1746,6 +1762,20 @@
       const seriesLabel=rankingFilters.series==='all'?'全シリーズ':tournamentLabel('series',rankingFilters.series);
       $('#ranking-scope').textContent=`集計対象：${seasonScope()} · ${regionLabel} · ${modeLabel} · ${seriesLabel}${metric.id==='finals'?' · '+rankingFinalLabel(rankingFilters.finalKind):''}`;
       $('#ranking-definition').textContent=rankingDefinition(metric.id);
+      const q=report.quality;
+      const fraction=(known,total)=>total?format(Math.round(known/total*1000)/10)+'%':'—';
+      const qHost=$('#ranking-data-quality-body');
+      if(qHost)qHost.innerHTML=
+        '<div class="ranking-quality-grid">'
+        +[['掲載戦績',format(q.records)+'件','選択期間・地域・形式・シリーズと決勝区分に合致'],
+          ['確認済みの掲載戦績',format(q.verified)+'件 / '+fraction(q.verified,q.records),'未確認・一部判明は加点条件とは別に区別'],
+          ['順位の数値あり',format(q.ranked)+'件 / '+fraction(q.ranked,q.records),'確認済み・実数順位のみ'],
+          ['試合数の記録あり',format(q.matches)+'件 / '+fraction(q.matches,q.records),'試合数が不明な記録は0試合と扱わない'],
+          ['キル数の記録あり',format(q.kills)+'件 / '+fraction(q.kills,q.records),'チーム戦のキルはチーム記録'],
+          ['VR数の記録あり',format(q.vrs)+'件 / '+fraction(q.vrs,q.records),'確認済み0VRと未確認を区別'],
+          ['賞金入力・配分を判定可能',format(q.cashResolved)+' / '+format(q.cashCandidates)+'件','賞金対象となり得る区分内。支払い完了の証明ではない']
+        ].map(([label,value,note])=>'<div class="ranking-quality-item"><small>'+escape(label)+'</small><strong>'+escape(value)+'</strong><span>'+escape(note)+'</span></div>').join('')
+        +'</div><p class="ranking-quality-caveat">ここでの割合は、選択条件に一致する<strong>掲載済み戦績の入力充実度</strong>です。未発見・未掲載の大会を含む全大会の網羅率、選手の実力、賞金の支払い完了率ではありません。賞金額は公式規則・掲載結果に基づき確認した個人分のみを集計します。</p>';
       $('#player-earnings-sum').textContent='$'+format(report.totalPrize);
       $('#ranking-count').textContent=`${format(report.rows.length)}名中 ${format(shown.length)}名を表示 · 対象 ${format(report.recordCount)}戦績${report.unranked.length?' · VR未確認のみ '+format(report.unranked.length)+'名は順位なし':''}`;
       $('#player-earnings-leaders').innerHTML=shown.length?shown.map(player=>rankingRow(player,metric)).join(''):report.unranked.length?'<div class="empty" role="listitem"><b>VRを確認できる掲載記録はありません</b><p>未確認の選手は下の一覧に、順位なしで表示しています。</p></div>':'<div class="empty" role="listitem"><b>この条件に一致する掲載実績はありません</b><p>地域・大会形式・集計期間を変更して確認できます。</p></div>';

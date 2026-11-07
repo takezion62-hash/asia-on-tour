@@ -128,6 +128,35 @@
           (Array.isArray(tournament.additionalSeries) && tournament.additionalSeries.includes(filters.series))) &&
         (filters.metric !== 'finals' || filters.finalKind === 'all' || record.kind === filters.finalKind);
     });
+    // These counts describe the completeness of PUBLISHED rows in the current
+    // filter, never the fraction of all competitions/participants discovered.
+    const confirmed = row => row.verified === true && !row.reported && !row.partial;
+    const intStat = value => Number.isSafeInteger(value) && value >= 0;
+    const cashKinds = new Set(['賞金決勝','賞金獲得','決勝','Practice決勝','Performance決勝']);
+    const quality = {
+      records: selected.length, verified: 0, ranked: 0, matches: 0,
+      kills: 0, vrs: 0, cashCandidates: 0, cashResolved: 0
+    };
+    for (const row of selected) {
+      const eligible = confirmed(row);
+      if (eligible) {
+        quality.verified++;
+        if (positiveRank(row.rank)) quality.ranked++;
+        if (intStat(row.matches) && row.matches > 0) quality.matches++;
+        if (intStat(row.kills)) quality.kills++;
+        if (intStat(row.vrs)) quality.vrs++;
+      }
+      if (cashKinds.has(row.kind)) {
+        quality.cashCandidates++;
+        const people = peopleFor(row);
+        const payout = row.prize;
+        const split = row.prizePerPlayer;
+        if (eligible && validNumber(payout) && (
+          people.length === 1 || payout === 0 ||
+          validNumber(split) && split > 0 && split * people.length <= payout + 0.001
+        )) quality.cashResolved++;
+      }
+    }
     const players = new Map();
     let totalCents = 0, unknownRecords = 0;
     for (const record of selected) {
@@ -142,8 +171,15 @@
         let player = players.get(name);
         if (!player) {
           player = { name, value: 0, prizeEvents: 0, knownRecords: 0, unknownRecords: 0, teamRecords: 0,
+            sampleRecords: 0, verifiedSamples: 0, matchSamples: 0, vrSamples: 0,
             regions: new Set(), finalKinds: Object.fromEntries(FINAL_KINDS.map(kind => [kind, 0])) };
           players.set(name, player);
+        }
+        player.sampleRecords++;
+        if (confirmed(record)) {
+          player.verifiedSamples++;
+          if (intStat(record.matches) && record.matches > 0) player.matchSamples++;
+          if (intStat(record.vrs)) player.vrSamples++;
         }
         if (cents > 0) player.prizeEvents++;
         if (final) player.finalKinds[record.kind]++;
@@ -191,7 +227,7 @@
     unranked.sort((a, b) => a.name.localeCompare(b.name, 'ja'));
     return {
       filters, rows, unranked, totalPrize: totalCents / 100, recordCount: selected.length, unknownRecords,
-      duplicateCount: unique.duplicateCount, conflictingDuplicateCount: unique.conflictingDuplicateCount
+      duplicateCount: unique.duplicateCount, conflictingDuplicateCount: unique.conflictingDuplicateCount, quality
     };
   }
 

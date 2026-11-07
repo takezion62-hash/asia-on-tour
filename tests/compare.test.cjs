@@ -145,3 +145,17 @@ test('comparison engine leaves source rows unchanged and emits region breakdown 
  assert.equal(result.players[1].byRegion.ME.cash,0);
  assert.equal(result.players[1].values.pr,0);
 });
+
+test('選手比較は同条件の実測入力数と賞金の配分確認数を選手ごとに明示する',()=>{
+ const rows=[
+  sample('complete',{player:'Shiroka',matches:3,vrs:0,kills:4,prize:100}),
+  sample('partial',{player:'Shiroka',matches:null,vrs:null,kills:null,prize:null}),
+  sample('pending-split',{player:'Shiroka / 3peace',players:['Shiroka','3peace'],matches:2,vrs:1,kills:5,prize:400,prizePerPlayer:null}),
+  sample('zero',{player:'3peace',players:['3peace'],matches:2,vrs:0,kills:0,prize:0})
+ ];
+ const before=JSON.stringify(rows),out=go(rows,['Shiroka','3peace']);
+ const shiroka=out.players[0].quality,peace=out.players[1].quality;
+ assert.deepEqual(shiroka,{records:3,matchSamples:2,killSamples:2,vrSamples:2,cashCandidates:3,cashResolved:1});
+ assert.deepEqual(peace,{records:2,matchSamples:2,killSamples:2,vrSamples:2,cashCandidates:2,cashResolved:1});
+ assert.equal(JSON.stringify(rows),before);
+});
