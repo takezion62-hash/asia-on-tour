@@ -6,7 +6,28 @@ const data = loadData(path.join(__dirname,'..')).data;
 const rows = data.results;
 const month = [...new Set(rows.map(row => row.date.slice(0,7)))].sort().at(-1);
 const forMonth = rows.filter(row => row.date.startsWith(month));
-const sessionKey = row => JSON.stringify([row.date,row.region,tournamentKey(row,data),row.round||'',row.kind||'']);
+// Calendar groups a leaderboard by official tournament session, not by the
+// reward status of each participant (qualifier, skin winner, or attendance).
+const cosmeticSingleRound=new Set([
+ 'ch7s3-champion-aphrodite-fncs-cup-battle-royale',
+ 'ch7s4-madison-beer-icon-cup-reload',
+ 'ch7s5-one-piece-zoro-cup-battle-royale',
+ 'ch7s5-one-piece-zoro-mobile-cup'
+]);
+const sessionKey = row => {
+ const id=tournamentKey(row,data);
+ let round=String(row.round||'').trim(),kind=row.kind||'';
+ if(id==='ch7s1-one-million-unreal-cup'&&/^(?:Session\s*1|単一開催枠)\s*\//iu.test(round)){
+   round='Session 1 / 賞金決勝';kind='賞金決勝';
+ }else if(cosmeticSingleRound.has(id)&&/^(?:Session\s*1|単一開催枠)\s*\//iu.test(round)){
+   round='Session 1 / スキン大会';kind='スキン大会';
+ }else if(id==='ch7s2-fncs-division-1'&&/^Week\s*\d+\s*·\s*Final\s*\//iu.test(round)){
+   round=round.replace(/\/\s*(?:参加確認|賞金決勝)$/u,'/ 賞金決勝');kind='賞金決勝';
+ }else if(kind==='予選'){
+   round=round.replace(/\/\s*予選(?:突破|通過)$/u,'/ 予選');
+ }
+ return JSON.stringify([row.date,row.region,id,round,kind]);
+};
 
 test('大会カレンダーは掲載日だけから生成し、開催枠を重複集計しない', async ({ page }) => {
   const errors=[];page.on('pageerror',error=>errors.push(error.message));
