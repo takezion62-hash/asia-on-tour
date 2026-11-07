@@ -1,4 +1,10 @@
 /* Official rule library — visually nested under SOURCES, not a new navigation page. */
+.sources-actions{display:grid;justify-items:end;gap:10px}
+.source-rule-jump{border:1px solid #4a8d97;border-radius:9px;padding:10px 12px;background:#173144;color:#8de8ec;cursor:pointer;font-weight:900;font-size:12px}
+.source-rule-jump:hover{background:#214a60}
+.source-rule-jump:focus-visible{outline:2px solid #87dded;outline-offset:2px}
+@media(max-width:640px){.sources-actions{justify-items:start;width:100%}}
+
 .source-rules{margin-top:42px;padding-top:32px;border-top:1px solid #33405c}
 .source-rules-header{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;flex-wrap:wrap}
 .source-rules-kicker{font-size:10px;font-weight:900;letter-spacing:2px;color:#61daeb;margin:0 0 10px}
