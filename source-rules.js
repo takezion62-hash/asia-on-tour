@@ -38,7 +38,7 @@
       let last=0;
       const rows=tiers.map(tier=>{
         const from=last+1;
-        const label=from===tier.through?from+'位':from+'〜'+tier.through+'位';
+        const label=from===tier.through?fmtNumber(from)+'位':fmtNumber(from)+'〜'+fmtNumber(tier.through)+'位';
         last=tier.through;
         return '<div class="source-rule-cash-tier"><span>'+esc(label)+'</span><strong>$'+fmtNumber(tier.perPlayer)+'</strong></div>';
       }).join('');
