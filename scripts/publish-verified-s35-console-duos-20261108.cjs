@@ -15,6 +15,10 @@ const TARGETS=[
  'auto-s35-3c7a7bd8746c','auto-s35-696e947ecd65'
 ];
 const RECHECK_DUPLICATES=['auto-s42-97bb48f5d3f0','auto-s42-3427725928b0'];
+const S38_TARGETS=['auto-s38-4744d9dc78a1','auto-s38-1170ff6e1508'];
+const S38_TID='ch6mini2-duos-victory-cash-cup';
+const S38_EVENT='S38_DuosVictoryCup',S38_WINDOW='S38_DuosVictoryCup_Round2_Day3_NAW';
+const S38_RULES='https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cash-cups-november-2025-official-rules';
 const read=name=>JSON.parse(fs.readFileSync(path.join(ROOT,name),'utf8'));
 const write=(name,value)=>fs.writeFileSync(path.join(ROOT,name),JSON.stringify(value,null,2)+'\n');
 const clone=o=>JSON.parse(JSON.stringify(o));
@@ -91,6 +95,68 @@ function resolveCandidates(data,now='2026-11-08T00:00:00.000Z'){
    verifiedAt:now,source:row.source,officialRules:RULES,leaderboardWindow:WINDOW,
    leaderboardPages:cp.totalPages,rank:record.rank,prize:0});
  }
+ // Additional official zero-VR final: November 23, 2025 S38 NAW
+ // Duos Victory Cash Cup (each player earns $100 only for a Round-2 VR).
+ const s38Pending=S38_TARGETS.filter(id=>review.proposals.some(x=>x.id===id));
+ if(s38Pending.length){
+  const cat=tournaments.catalog.find(x=>x.id===S38_TID);
+  assert(cat&&cat.name==='Duos Victory Cash Cup'&&cat.seasonId==='S38'
+   &&cat.team==='duo'&&cat.series==='victory-cup'
+   &&cat.sourceEventIds?.includes(S38_EVENT),'2025 November duo official catalog not verified');
+  const checkpoint=scan.windows['epicgames_'+S38_EVENT+'_NAW/'+S38_WINDOW];
+  assert(checkpoint&&checkpoint.complete===true
+   &&Number.isInteger(checkpoint.totalPages)&&checkpoint.totalPages>=1
+   &&checkpoint.nextPage>=checkpoint.totalPages&&checkpoint.rankingOrderValid!==false
+   &&Array.isArray(checkpoint.proposals),'S38 NAW Round 2 official standings incomplete');
+  for(const id of s38Pending){
+   const row=review.proposals.find(x=>x.id===id);
+   if(!row||ids.has(id)){removeReview(id);continue}
+   assert(row.date==='2025-11-23'&&row.region==='NAW'&&row.tournamentId===S38_TID
+    &&row.seasonId==='S38'&&row.event===cat.name&&row.kind==='賞金決勝'
+    &&row.round==='Day 3 · Round 2 / 賞金決勝','wrong S38 event or stage '+id);
+   assert(row.id===id&&row.verified===true&&row.vrs===0&&row.prize===null
+    &&row.points===0&&Number.isSafeInteger(row.rank)&&row.rank>0
+    &&Number.isSafeInteger(row.kills)&&row.kills>=0
+    &&Number.isSafeInteger(row.matches)&&row.matches>=1&&row.matches<=3,
+    'uncertain November S38 score '+id);
+   const members=roster(row);
+   assert(members.length===2&&new Set(members).size===2&&members.every(n=>names.has(n))
+    &&row.player===members.join(' / '),'S38 duo identity mismatch '+id);
+   assert(checkpoint.proposals.some(saved=>equalCandidate(saved,row)),
+    'S38 source candidate not confirmed by archived Epic ID leaderboard '+id);
+   const url=new URL(row.source);
+   assert(url.protocol==='https:'&&url.hostname==='www.fortnite.com'
+    &&url.pathname==='/competitive/events/'+S38_EVENT+'/'
+    &&url.searchParams.get('region')==='NAW'
+    &&url.searchParams.get('round')===S38_WINDOW,
+    'S38 official source session mismatch '+id);
+   const colliding=results.filter(x=>collision(x,row,aliases));
+   if(colliding.length){
+    if(colliding.length!==1||!isDuplicate(colliding[0],row)){
+     held.push({id,reason:'conflicting November 2025 duo stats'});continue;
+    }
+    duplicates.push({id,existingId:colliding[0].id});
+    removeReview(id);
+    ledger(id,{decision:'already-published',existingId:colliding[0].id,
+     source:row.source,verifiedAt:now});
+    continue;
+   }
+   assert(!existingIds.has(id),'S38 duplicate ID '+id);
+   const {reviewOnly,reviewReason,teamAccountIds,...record}=row;
+   record.prize=0;
+   record.note='2025/11/23 S38 NAW Duos Victory Cash Cup決勝。Epic ID照合済み公式順位表'
+    +checkpoint.totalPages+'ページ取得完了。0VRのためEpic公式賞金規則'
+    +'（決勝1VRあたり各選手$100）により個人現金賞金$0。'
+    +'順位・ポイント・キル・試合数は元の順位表のまま。規則: '+S38_RULES;
+   results.push(record);existingIds.add(id);
+   verified.push(record);
+   removeReview(id);
+   ledger(id,{decision:'published',recordId:id,policy:'verified-official-zero-vr',
+    verifiedAt:now,source:row.source,officialRules:S38_RULES,
+    leaderboardWindow:S38_WINDOW,leaderboardPages:checkpoint.totalPages,
+    rank:record.rank,prize:0});
+  }
+ }
  // Prior reviewed NAW S42 official solo finals are already present under manual IDs.
  for(const id of RECHECK_DUPLICATES){
   const row=review.proposals.find(x=>x.id===id);
@@ -104,13 +170,24 @@ function resolveCandidates(data,now='2026-11-08T00:00:00.000Z'){
  }
  if(verified.length){
   const day=new Date(new Date(now).getTime()+9*3600000).toISOString().slice(0,10);
-  const entryId='manual-verified-s35-console-duos-20261108';
-  assert(!updates.entries.some(x=>x.id===entryId),'publication update ID already exists');
-  const log={id:entryId,date:day,type:'records',
-   title:'2025年5月31日ME Console Duos決勝の0VR・未受賞6組を公式規則で確認し掲載',
-   description:'Epic IDで特定済みの決勝順位表を全ページ取得済み（'+cp.totalPages+'ページ）。公式規則でVR1回あたりチーム$200のため、0VRの6組は$0と確認。既存の順位・KILLS・VR・試合数を維持。重複掲載せず、本人未確認のチームや順位表未完了の大会は保留。出典: '+RULES,
-   recordIds:verified.map(x=>x.id)};
-  updates.entries.unshift(log);
+  for(const group of [
+   {tournament:TID,id:'manual-verified-s35-console-duos-20261108',
+    title:'2025年5月31日ME Console Duos決勝の0VR・未受賞6組を公式規則で確認し掲載',
+    description:'Epic IDで特定済みの決勝順位表を全ページ取得済み（'+cp.totalPages+
+    'ページ）。公式規則でVR1回あたりチーム$200のため、0VRの組は$0と確認。既存の順位・KILLS・VR・試合数を維持。出典: '+RULES},
+   {tournament:S38_TID,id:'manual-verified-s38-duos-20261108',
+    title:'2025年11月23日NAW Duos Victory Cash Cup決勝0VR・$0の2組を掲載',
+    description:'2025年11月23日NAW決勝の公式全順位表と本人Epic IDを照合。'
+     +'Epic公式規則でVR1回あたり各選手$100のため0VRの組は賞金$0。'
+     +'既存の順位・キル・試合数は変更せず、重複なく掲載。出典: '+S38_RULES}
+  ]){
+   const published=verified.filter(x=>x.tournamentId===group.tournament);
+   if(!published.length)continue;
+   assert(!updates.entries.some(x=>x.id===group.id),'publication update ID already exists: '+group.id);
+   updates.entries.unshift({id:group.id,date:day,type:'records',
+    title:group.title,description:group.description,
+    recordIds:published.map(x=>x.id)});
+  }
   updates.entries.sort((a,b)=>b.date.localeCompare(a.date));
  }
  if(verified.length||duplicates.length){
@@ -121,7 +198,7 @@ function resolveCandidates(data,now='2026-11-08T00:00:00.000Z'){
   status.manuallyPublished=(Number(status.manuallyPublished)||0)+verified.length;
   status.manuallyResolvedDuplicates=(Number(status.manuallyResolvedDuplicates)||0)+duplicates.length;
   status.lastReviewedBatchAt=now;
-  status.message='公式順位表と規則でS35 ME Console Duos 0VRを'+verified.length+'件$0掲載。既存戦績の重複'+duplicates.length+
+  status.message='公式順位表と規則でS35/S38の0VR決勝を'+verified.length+'件$0掲載。既存戦績の重複'+duplicates.length+
    '件を確認済みに移動。残り確認待ち'+review.proposals.length+'件。未確定賞金や取得途中の順位は変更しない。';
  }
  return {docs:{results,updates,review,reviewed,status},report:{
@@ -146,4 +223,4 @@ function main(){
  write('history-sync-status.json',docs.status);
 }
 if(require.main===module)main();
-module.exports={process:resolveCandidates,TARGETS,RECHECK_DUPLICATES};
+module.exports={process:resolveCandidates,TARGETS,RECHECK_DUPLICATES,S38_TARGETS};
