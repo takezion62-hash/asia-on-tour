@@ -1,0 +1,26 @@
+name: AOT race-safe merge regression checks
+on:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/safe-sync-merge.cjs"
+      - "tests/safe-sync-merge.test.cjs"
+      - ".github/workflows/safe-sync-merge-tests.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate-conflict-merge:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Verify safe-merge script syntax
+        run: node --check scripts/safe-sync-merge.cjs
+      - name: Verify race-safe replay and latest-data preservation
+        run: node --test tests/safe-sync-merge.test.cjs
+      - name: Validate current published data, award logic and update ledger
+        run: npm run validate
