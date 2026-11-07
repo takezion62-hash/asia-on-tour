@@ -213,7 +213,7 @@ async function getLeaderboard(win,page){
  const params=new URLSearchParams({leaderboardEventId:win.fullEventId,leaderboardEventWindowId:win.windowId,page:String(page)});
  const result=await fetchJson('https://fnapi.osirion.gg/v1/tournaments/leaderboard?'+params);
  const l=result.leaderboard;
- if(!l||l.leaderboardEventId!==win.fullEventId||l.leaderboardEventWindowId!==win.windowId||!Array.isArray(l.entries)||!Number.isInteger(l.totalPages)||l.totalPages<1||l.totalPages>100)throw Error('大会順位表のID/形式が不正');
+ if(!l||l.leaderboardEventId!==win.fullEventId||l.leaderboardEventWindowId!==win.windowId||!Array.isArray(l.entries)||!Number.isInteger(l.totalPages)||l.totalPages<1||l.totalPages>(win.series==='unreal-cup'?2000:100))throw Error('大会順位表のID/形式が不正');
  return l;
 }
 // Balance existing Victory Cups and safely matched review-only series in the same
