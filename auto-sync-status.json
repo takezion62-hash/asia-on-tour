@@ -1,7 +1,7 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-07T08:59:36.371Z",
+  "checkedAt": "2026-11-07T11:39:30.410Z",
   "mode": "review",
   "scope": "recent",
   "dateMode": null,
@@ -9,16 +9,16 @@
   "fromDate": null,
   "toDate": null,
   "provider": "osirion",
-  "linkedPlayers": 509,
-  "trackedWindows": 15,
+  "linkedPlayers": 514,
+  "trackedWindows": 17,
   "found": 0,
   "skipped": 0,
   "imported": 1,
-  "scannedPages": 5,
-  "completedWindows": 15,
+  "scannedPages": 14,
+  "completedWindows": 16,
   "identityConflicts": 3,
-  "alreadyRegistered": 34,
-  "autoApprovedTotal": 649,
+  "alreadyRegistered": 35,
+  "autoApprovedTotal": 650,
   "invalidCachedCandidates": 0,
   "manualReviewCandidates": 0,
   "autoApprovedCosmeticThisRun": 1,
@@ -30,12 +30,12 @@
   "transientFailures": 0,
   "malformedFailures": 0,
   "skippedLeaderboards": [],
-  "reviewOnlyWindows": 15,
+  "reviewOnlyWindows": 17,
   "reviewOnlyCandidates": 0,
   "unmappedEvents": 2,
   "unmappedEventIds": [
     "S42_ArenaTestCup",
     "S43_OnePieceZoroCup_ZB"
   ],
-  "message": "Osirionで509アカウントIDを追跡。今回の公式規則による自動承認1件、追加確認待ち0件、名義照合保留3件。"
+  "message": "Osirionで514アカウントIDを追跡。今回の公式規則による自動承認1件、追加確認待ち0件、名義照合保留3件。"
 }
