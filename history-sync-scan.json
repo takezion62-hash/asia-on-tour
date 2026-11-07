@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-11-07T14:25:40.708Z",
+  "checkedAt": "2026-11-07T15:59:41.308Z",
   "windows": {
     "epicgames_S42_SoloVictoryCup_NAW/S42_SoloVictoryCup_Event3Round1_NAW": {
       "nextPage": 9,
@@ -5502,7 +5502,7 @@
       "totalPages": 2
     },
     "epicgames_S39_1MillionUnrealCup_NAW/S39_1MillionUnrealCup_NAW": {
-      "nextPage": 70,
+      "nextPage": 80,
       "complete": false,
       "proposals": [
         {
@@ -5869,14 +5869,14 @@
           ]
         }
       ],
-      "pages": 70,
+      "pages": 80,
       "epicIdsRetained": true,
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 7000,
+      "lastSeenRank": 8000,
       "totalPages": 100,
-      "lastAttemptAt": "2026-11-07T14:24:35.579Z",
-      "lastSuccessAt": "2026-11-07T14:24:36.520Z"
+      "lastAttemptAt": "2026-11-07T15:58:37.144Z",
+      "lastSuccessAt": "2026-11-07T15:58:38.407Z"
     },
     "epicgames_S31_DuosCashCup_ME/S31_DuosCashCup_Event3Round2_ME": {
       "nextPage": 1,
@@ -16063,8 +16063,13 @@
       "totalPages": 100,
       "rankingOrderValid": true,
       "lastSeenRank": 9500,
-      "lastAttemptAt": "2026-11-07T14:25:19.011Z",
-      "lastSuccessAt": "2026-11-07T14:25:19.852Z"
+      "lastAttemptAt": "2026-11-07T15:59:20.500Z",
+      "lastSuccessAt": "2026-11-07T14:25:19.852Z",
+      "errorAttempts": 1,
+      "retryAfter": "2026-11-07T21:59:21.585Z",
+      "lastError": "Osirion API HTTP 429 /v1/tournaments/leaderboard",
+      "lastErrorPage": 95,
+      "lastErrorCode": "OSIRION_TRANSIENT"
     },
     "epicgames_S42_SoloVictoryCup_OCE/S42_SoloVictoryCup_Event2Round1_OCE": {
       "nextPage": 9,
@@ -16232,7 +16237,7 @@
       "totalPages": 1
     },
     "epicgames_S42_MadisonBeerIconCup_NAW/S42_MadisonBeerIconCup_NAW": {
-      "nextPage": 36,
+      "nextPage": 46,
       "complete": false,
       "proposals": [
         {
@@ -16613,14 +16618,16 @@
           ]
         }
       ],
-      "pages": 36,
+      "pages": 46,
       "emptyAttempts": 0,
       "totalPages": 100,
-      "retryAfter": "2026-11-07T08:32:09.200Z",
-      "lastError": "Osirion API HTTP 429 /v1/tournaments/leaderboard"
+      "lastAttemptAt": "2026-11-07T15:58:24.748Z",
+      "rankingOrderValid": true,
+      "lastSeenRank": 4600,
+      "lastSuccessAt": "2026-11-07T15:58:26.031Z"
     },
     "epicgames_S41_PSCupDaysOfPlay_NAW/S41_PSCupDaysOfPlay_Qualifier_NAW": {
-      "nextPage": 31,
+      "nextPage": 32,
       "complete": false,
       "proposals": [
         {
@@ -17049,13 +17056,18 @@
           "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。"
         }
       ],
-      "pages": 31,
+      "pages": 32,
       "emptyAttempts": 0,
       "totalPages": 70,
       "rankingOrderValid": true,
-      "lastSeenRank": 3100,
-      "lastAttemptAt": "2026-11-07T14:25:31.447Z",
-      "lastSuccessAt": "2026-11-07T14:25:32.403Z"
+      "lastSeenRank": 3200,
+      "lastAttemptAt": "2026-11-07T15:59:32.041Z",
+      "lastSuccessAt": "2026-11-07T15:59:32.041Z",
+      "errorAttempts": 1,
+      "retryAfter": "2026-11-07T21:59:33.135Z",
+      "lastError": "Osirion API HTTP 429 /v1/tournaments/leaderboard",
+      "lastErrorPage": 32,
+      "lastErrorCode": "OSIRION_TRANSIENT"
     },
     "epicgames_S42_SoloVictoryCup_ME/S42_SoloVictoryCup_Event1Round1_ME": {
       "nextPage": 9,
@@ -21702,7 +21714,7 @@
       "lastSeenRank": 1805
     },
     "epicgames_S41_FNCSCommunityCup_OCE/S41_FNCSCommunityCup_OCE": {
-      "nextPage": 9,
+      "nextPage": 10,
       "complete": false,
       "proposals": [
         {
@@ -21764,13 +21776,18 @@
           ]
         }
       ],
-      "pages": 9,
+      "pages": 10,
       "emptyAttempts": 0,
       "totalPages": 66,
       "rankingOrderValid": true,
-      "lastSeenRank": 900,
-      "lastAttemptAt": "2026-11-07T14:25:33.388Z",
-      "lastSuccessAt": "2026-11-07T14:25:34.476Z"
+      "lastSeenRank": 1000,
+      "lastAttemptAt": "2026-11-07T15:59:34.161Z",
+      "lastSuccessAt": "2026-11-07T15:59:34.161Z",
+      "errorAttempts": 1,
+      "retryAfter": "2026-11-07T21:59:35.243Z",
+      "lastError": "Osirion API HTTP 429 /v1/tournaments/leaderboard",
+      "lastErrorPage": 10,
+      "lastErrorCode": "OSIRION_TRANSIENT"
     },
     "epicgames_S42_SoloVictoryCup_NAC/S42_SoloVictoryCup_Event3Round1_NAC": {
       "nextPage": 21,
@@ -27783,7 +27800,7 @@
       "totalPages": 5
     },
     "epicgames_S42_PerformanceEvaluation_NAC/S42_PerformanceEvaluation_Event2Round1_NAC": {
-      "nextPage": 10,
+      "nextPage": 11,
       "complete": false,
       "proposals": [
         {
@@ -28051,13 +28068,18 @@
           ]
         }
       ],
-      "pages": 10,
+      "pages": 11,
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 1000,
+      "lastSeenRank": 1100,
       "totalPages": 13,
-      "lastAttemptAt": "2026-11-07T14:25:29.577Z",
-      "lastSuccessAt": "2026-11-07T14:25:30.489Z"
+      "lastAttemptAt": "2026-11-07T15:59:29.599Z",
+      "lastSuccessAt": "2026-11-07T15:59:29.599Z",
+      "errorAttempts": 1,
+      "retryAfter": "2026-11-07T21:59:30.681Z",
+      "lastError": "Osirion API HTTP 429 /v1/tournaments/leaderboard",
+      "lastErrorPage": 11,
+      "lastErrorCode": "OSIRION_TRANSIENT"
     },
     "epicgames_S31_SoloVictoryCashCup_OCE/S31_SoloVictoryCashCup_Event4Round2_OCE": {
       "nextPage": 15,
@@ -29579,7 +29601,7 @@
       "totalPages": 100
     },
     "epicgames_S31_DuosCashCup_ME/S31_DuosCashCup_Event4Round1_ME": {
-      "nextPage": 60,
+      "nextPage": 70,
       "complete": false,
       "proposals": [
         {
@@ -30078,25 +30100,25 @@
           ]
         }
       ],
-      "pages": 60,
+      "pages": 70,
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 6000,
+      "lastSeenRank": 7000,
       "totalPages": 100,
-      "lastAttemptAt": "2026-11-07T14:25:04.196Z",
-      "lastSuccessAt": "2026-11-07T14:25:05.138Z"
+      "lastAttemptAt": "2026-11-07T15:59:07.781Z",
+      "lastSuccessAt": "2026-11-07T15:59:08.874Z"
     },
     "epicgames_S30_SoloVictoryCashCup_BR/S30_SoloVictoryCashCup_Event2Round2_BR": {
-      "nextPage": 19,
-      "complete": false,
+      "nextPage": 20,
+      "complete": true,
       "proposals": [],
-      "pages": 19,
+      "pages": 20,
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 1900,
+      "lastSeenRank": 1961,
       "totalPages": 20,
-      "lastAttemptAt": "2026-11-07T14:25:23.926Z",
-      "lastSuccessAt": "2026-11-07T14:25:24.781Z"
+      "lastAttemptAt": "2026-11-07T15:59:26.374Z",
+      "lastSuccessAt": "2026-11-07T15:59:27.202Z"
     },
     "epicgames_S43_OnePieceZoroCup_Mobile_NAC/S43_OnePieceZoroCup_Mobile_NAC": {
       "nextPage": 2,
@@ -31234,7 +31256,7 @@
       "lastSuccessAt": "2026-11-07T14:24:44.960Z"
     },
     "epicgames_S30_SoloVictoryCashCup_NAC/S30_SoloVictoryCashCup_Event9Round2_NAC": {
-      "nextPage": 10,
+      "nextPage": 20,
       "complete": false,
       "proposals": [
         {
@@ -31305,15 +31327,222 @@
           "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event9Round2_NAC",
           "verified": true,
           "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。現金賞金の確定情報なし。"
+        },
+        {
+          "id": "auto-s30-78de9e9736e8",
+          "date": "2024-08-13",
+          "region": "NAC",
+          "player": "Botえもん",
+          "playerRaw": "Botえもん",
+          "event": "Solo Victory Cup Battle Royale",
+          "round": "Event 9 · Round 2 / 賞金決勝",
+          "rank": 1066,
+          "points": 0,
+          "kills": 4,
+          "vrs": 0,
+          "prize": null,
+          "kind": "賞金決勝",
+          "matches": 3,
+          "seasonId": "S30",
+          "chapter": 5,
+          "season": 3,
+          "tournamentId": "ch5s3-solo-victory-cup",
+          "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event9Round2_NAC",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。現金賞金の確定情報なし。"
+        },
+        {
+          "id": "auto-s30-3faf163bf881",
+          "date": "2024-08-13",
+          "region": "NAC",
+          "player": "テルハルル",
+          "playerRaw": "BoF てるはるるの相方popo",
+          "event": "Solo Victory Cup Battle Royale",
+          "round": "Event 9 · Round 2 / 賞金決勝",
+          "rank": 1259,
+          "points": 0,
+          "kills": 4,
+          "vrs": 0,
+          "prize": null,
+          "kind": "賞金決勝",
+          "matches": 3,
+          "seasonId": "S30",
+          "chapter": 5,
+          "season": 3,
+          "tournamentId": "ch5s3-solo-victory-cup",
+          "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event9Round2_NAC",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。現金賞金の確定情報なし。"
+        },
+        {
+          "id": "auto-s30-7ad450f46ef1",
+          "date": "2024-08-13",
+          "region": "NAC",
+          "player": "白組 shink",
+          "playerRaw": "白組 shink",
+          "event": "Solo Victory Cup Battle Royale",
+          "round": "Event 9 · Round 2 / 賞金決勝",
+          "rank": 1329,
+          "points": 0,
+          "kills": 2,
+          "vrs": 0,
+          "prize": null,
+          "kind": "賞金決勝",
+          "matches": 2,
+          "seasonId": "S30",
+          "chapter": 5,
+          "season": 3,
+          "tournamentId": "ch5s3-solo-victory-cup",
+          "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event9Round2_NAC",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。現金賞金の確定情報なし。"
+        },
+        {
+          "id": "auto-s30-7e784bd708a3",
+          "date": "2024-08-13",
+          "region": "NAC",
+          "player": "ただの白ごま",
+          "playerRaw": "nxfz すぱーく すりごま",
+          "event": "Solo Victory Cup Battle Royale",
+          "round": "Event 9 · Round 2 / 賞金決勝",
+          "rank": 1381,
+          "points": 0,
+          "kills": 3,
+          "vrs": 0,
+          "prize": null,
+          "kind": "賞金決勝",
+          "matches": 3,
+          "seasonId": "S30",
+          "chapter": 5,
+          "season": 3,
+          "tournamentId": "ch5s3-solo-victory-cup",
+          "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event9Round2_NAC",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。現金賞金の確定情報なし。"
+        },
+        {
+          "id": "auto-s30-2d86b5445998",
+          "date": "2024-08-13",
+          "region": "NAC",
+          "player": "zerua",
+          "playerRaw": "vamos 朝倉未来",
+          "event": "Solo Victory Cup Battle Royale",
+          "round": "Event 9 · Round 2 / 賞金決勝",
+          "rank": 1435,
+          "points": 0,
+          "kills": 3,
+          "vrs": 0,
+          "prize": null,
+          "kind": "賞金決勝",
+          "matches": 3,
+          "seasonId": "S30",
+          "chapter": 5,
+          "season": 3,
+          "tournamentId": "ch5s3-solo-victory-cup",
+          "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event9Round2_NAC",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。現金賞金の確定情報なし。"
+        },
+        {
+          "id": "auto-s30-e1b0edf010aa",
+          "date": "2024-08-13",
+          "region": "NAC",
+          "player": "R1ze",
+          "playerRaw": "Helix R1ze 777",
+          "event": "Solo Victory Cup Battle Royale",
+          "round": "Event 9 · Round 2 / 賞金決勝",
+          "rank": 1664,
+          "points": 0,
+          "kills": 3,
+          "vrs": 0,
+          "prize": null,
+          "kind": "賞金決勝",
+          "matches": 3,
+          "seasonId": "S30",
+          "chapter": 5,
+          "season": 3,
+          "tournamentId": "ch5s3-solo-victory-cup",
+          "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event9Round2_NAC",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。現金賞金の確定情報なし。"
+        },
+        {
+          "id": "auto-s30-ab1d07a6f0bf",
+          "date": "2024-08-13",
+          "region": "NAC",
+          "player": "Job",
+          "playerRaw": "Job 17ǃ",
+          "event": "Solo Victory Cup Battle Royale",
+          "round": "Event 9 · Round 2 / 賞金決勝",
+          "rank": 1792,
+          "points": 0,
+          "kills": 3,
+          "vrs": 0,
+          "prize": null,
+          "kind": "賞金決勝",
+          "matches": 3,
+          "seasonId": "S30",
+          "chapter": 5,
+          "season": 3,
+          "tournamentId": "ch5s3-solo-victory-cup",
+          "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event9Round2_NAC",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。現金賞金の確定情報なし。"
+        },
+        {
+          "id": "auto-s30-e2b354a324ec",
+          "date": "2024-08-13",
+          "region": "NAC",
+          "player": "ばぶっち",
+          "playerRaw": "HELIX ばぶっちしゃーく",
+          "event": "Solo Victory Cup Battle Royale",
+          "round": "Event 9 · Round 2 / 賞金決勝",
+          "rank": 1930,
+          "points": 0,
+          "kills": 2,
+          "vrs": 0,
+          "prize": null,
+          "kind": "賞金決勝",
+          "matches": 3,
+          "seasonId": "S30",
+          "chapter": 5,
+          "season": 3,
+          "tournamentId": "ch5s3-solo-victory-cup",
+          "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event9Round2_NAC",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。現金賞金の確定情報なし。"
+        },
+        {
+          "id": "auto-s30-76450e896596",
+          "date": "2024-08-13",
+          "region": "NAC",
+          "player": "Aim",
+          "playerRaw": "awetatewateweawa",
+          "event": "Solo Victory Cup Battle Royale",
+          "round": "Event 9 · Round 2 / 賞金決勝",
+          "rank": 1951,
+          "points": 0,
+          "kills": 2,
+          "vrs": 0,
+          "prize": null,
+          "kind": "賞金決勝",
+          "matches": 3,
+          "seasonId": "S30",
+          "chapter": 5,
+          "season": 3,
+          "tournamentId": "ch5s3-solo-victory-cup",
+          "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event9Round2_NAC",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。現金賞金の確定情報なし。"
         }
       ],
-      "pages": 10,
+      "pages": 20,
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 1000,
+      "lastSeenRank": 2000,
       "totalPages": 48,
-      "lastAttemptAt": "2026-11-07T14:25:35.347Z",
-      "lastSuccessAt": "2026-11-07T14:25:36.246Z"
+      "lastAttemptAt": "2026-11-07T15:58:52.904Z",
+      "lastSuccessAt": "2026-11-07T15:58:53.866Z"
     },
     "epicgames_S43_OnePieceZoroCup_Mobile_NAW/S43_OnePieceZoroCup_Mobile_NAW": {
       "nextPage": 1,
@@ -31527,23 +31756,29 @@
       "complete": false,
       "proposals": [],
       "pages": 0,
-      "errorAttempts": 1,
-      "retryAfter": "2026-11-07T14:56:59.568Z",
+      "errorAttempts": 2,
+      "retryAfter": "2026-11-08T03:58:55.317Z",
       "lastError": "大会順位表のID/形式が不正 [epicgames_S42_SoloVictoryCup_OCE/S42_SoloVictoryCup_Event1Round2_OCE page=0]: totalPages=0",
       "lastErrorPage": 0,
-      "lastErrorCode": "OSIRION_INVALID_LEADERBOARD"
+      "lastErrorCode": "OSIRION_INVALID_LEADERBOARD",
+      "lastAttemptAt": "2026-11-07T15:58:54.969Z"
     },
     "epicgames_S30_SoloVictoryCashCup_EU/S30_SoloVictoryCashCup_Event1Round2_EU": {
-      "nextPage": 19,
+      "nextPage": 20,
       "complete": false,
       "proposals": [],
-      "pages": 19,
+      "pages": 20,
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 1900,
+      "lastSeenRank": 2000,
       "totalPages": 68,
-      "lastAttemptAt": "2026-11-07T14:25:22.088Z",
-      "lastSuccessAt": "2026-11-07T14:25:22.997Z"
+      "lastAttemptAt": "2026-11-07T15:59:25.291Z",
+      "lastSuccessAt": "2026-11-07T15:59:25.291Z",
+      "errorAttempts": 1,
+      "retryAfter": "2026-11-07T21:59:26.374Z",
+      "lastError": "Osirion API HTTP 429 /v1/tournaments/leaderboard",
+      "lastErrorPage": 20,
+      "lastErrorCode": "OSIRION_TRANSIENT"
     },
     "epicgames_S40_FNCSDivisionalCup_Division1_ME/S40_FNCSDivisionalCup_Division1_Week2Day1_ME": {
       "nextPage": 6,
@@ -32032,7 +32267,7 @@
       "totalPages": 3
     },
     "epicgames_S39_1MillionUnrealCup_ME/S39_1MillionUnrealCup_ME": {
-      "nextPage": 29,
+      "nextPage": 39,
       "complete": false,
       "proposals": [
         {
@@ -32760,16 +32995,280 @@
             "ae3cafe60c10413cb91fdf4f869443c8",
             "e1dd57b9f3df41c792019b37c3e1c744"
           ]
+        },
+        {
+          "id": "auto-s39-c6a40871e64f",
+          "date": "2025-12-21",
+          "region": "ME",
+          "player": "こいる / Job",
+          "playerRaw": "こいるやけん / Job 17ǃ",
+          "event": "$1 Million Unreal Cup",
+          "round": "単一開催枠 / 参加確認",
+          "rank": 3183,
+          "points": 139,
+          "kills": 24,
+          "vrs": 1,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 8,
+          "seasonId": "S39",
+          "chapter": 7,
+          "season": 1,
+          "tournamentId": "ch7s1-one-million-unreal-cup",
+          "source": "https://www.fortnite.com/competitive/events/S39_1MillionUnrealCup/?region=ME&round=S39_1MillionUnrealCup_ME",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "こいる",
+            "Job"
+          ],
+          "teamAccountIds": [
+            "50ca67e787cd415ab26692cac0e326c8",
+            "dcd62fd578bb43819c33ac13c0138164"
+          ]
+        },
+        {
+          "id": "auto-s39-465938b930cf",
+          "date": "2025-12-21",
+          "region": "ME",
+          "player": "Minipiyo / ちからV2",
+          "playerRaw": "ZETA Minipiyo / NEXUS ちからV2ǃ",
+          "event": "$1 Million Unreal Cup",
+          "round": "単一開催枠 / 参加確認",
+          "rank": 3223,
+          "points": 138,
+          "kills": 40,
+          "vrs": 0,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 8,
+          "seasonId": "S39",
+          "chapter": 7,
+          "season": 1,
+          "tournamentId": "ch7s1-one-million-unreal-cup",
+          "source": "https://www.fortnite.com/competitive/events/S39_1MillionUnrealCup/?region=ME&round=S39_1MillionUnrealCup_ME",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "Minipiyo",
+            "ちからV2"
+          ],
+          "teamAccountIds": [
+            "022c1a1b18ea4c3ea3922a086b0b6dcf",
+            "2512ed089c99409fb69d2cc3de7c35c6"
+          ]
+        },
+        {
+          "id": "auto-s39-9ec84dbe59cf",
+          "date": "2025-12-21",
+          "region": "ME",
+          "player": "alivenoah / みるやちぇ",
+          "playerRaw": "alivenoah / orz MilkÿGotyǃ",
+          "event": "$1 Million Unreal Cup",
+          "round": "単一開催枠 / 参加確認",
+          "rank": 3254,
+          "points": 137,
+          "kills": 26,
+          "vrs": 1,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 9,
+          "seasonId": "S39",
+          "chapter": 7,
+          "season": 1,
+          "tournamentId": "ch7s1-one-million-unreal-cup",
+          "source": "https://www.fortnite.com/competitive/events/S39_1MillionUnrealCup/?region=ME&round=S39_1MillionUnrealCup_ME",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "alivenoah",
+            "みるやちぇ"
+          ],
+          "teamAccountIds": [
+            "b433079d533340748a8de3f88acd073e",
+            "dd786061211a46fbb8494687e32189b9"
+          ]
+        },
+        {
+          "id": "auto-s39-b4c644f4ae01",
+          "date": "2025-12-21",
+          "region": "ME",
+          "player": "ぶゆ / hst basil",
+          "playerRaw": "Lit Buyureyli / hst basil",
+          "event": "$1 Million Unreal Cup",
+          "round": "単一開催枠 / 参加確認",
+          "rank": 3384,
+          "points": 134,
+          "kills": 16,
+          "vrs": 0,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 8,
+          "seasonId": "S39",
+          "chapter": 7,
+          "season": 1,
+          "tournamentId": "ch7s1-one-million-unreal-cup",
+          "source": "https://www.fortnite.com/competitive/events/S39_1MillionUnrealCup/?region=ME&round=S39_1MillionUnrealCup_ME",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "ぶゆ",
+            "hst basil"
+          ],
+          "teamAccountIds": [
+            "b75619b73ecc41299cdab783bfaabba5",
+            "dd744c4f20fd4808a494626f72e6650a"
+          ]
+        },
+        {
+          "id": "auto-s39-63bf8f605871",
+          "date": "2025-12-21",
+          "region": "ME",
+          "player": "そみー / ほちゃ",
+          "playerRaw": "UC.そみー / UC.2 ほちゃ",
+          "event": "$1 Million Unreal Cup",
+          "round": "単一開催枠 / 参加確認",
+          "rank": 3428,
+          "points": 133,
+          "kills": 7,
+          "vrs": 0,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 10,
+          "seasonId": "S39",
+          "chapter": 7,
+          "season": 1,
+          "tournamentId": "ch7s1-one-million-unreal-cup",
+          "source": "https://www.fortnite.com/competitive/events/S39_1MillionUnrealCup/?region=ME&round=S39_1MillionUnrealCup_ME",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "そみー",
+            "ほちゃ"
+          ],
+          "teamAccountIds": [
+            "61fe8404740046688b1fb5c984ddb602",
+            "91ec0b8c964143b99f0d91094f23af8e"
+          ]
+        },
+        {
+          "id": "auto-s39-fec48337eab0",
+          "date": "2025-12-21",
+          "region": "ME",
+          "player": "Kahcy / まいにちフロッパー",
+          "playerRaw": "Kahcy / まいにちフロッパー",
+          "event": "$1 Million Unreal Cup",
+          "round": "単一開催枠 / 参加確認",
+          "rank": 3681,
+          "points": 126,
+          "kills": 12,
+          "vrs": 0,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 9,
+          "seasonId": "S39",
+          "chapter": 7,
+          "season": 1,
+          "tournamentId": "ch7s1-one-million-unreal-cup",
+          "source": "https://www.fortnite.com/competitive/events/S39_1MillionUnrealCup/?region=ME&round=S39_1MillionUnrealCup_ME",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "Kahcy",
+            "まいにちフロッパー"
+          ],
+          "teamAccountIds": [
+            "39b08e1cbf6d4434a41253071acb2ef0",
+            "b09283aae0bc41c298ca1365dd509f83"
+          ]
+        },
+        {
+          "id": "auto-s39-626aed625dca",
+          "date": "2025-12-21",
+          "region": "ME",
+          "player": "ぷりなの / kuro",
+          "playerRaw": "dyd シンプル編集のぷりなの / dyd kuro",
+          "event": "$1 Million Unreal Cup",
+          "round": "単一開催枠 / 参加確認",
+          "rank": 3771,
+          "points": 123,
+          "kills": 13,
+          "vrs": 0,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 6,
+          "seasonId": "S39",
+          "chapter": 7,
+          "season": 1,
+          "tournamentId": "ch7s1-one-million-unreal-cup",
+          "source": "https://www.fortnite.com/competitive/events/S39_1MillionUnrealCup/?region=ME&round=S39_1MillionUnrealCup_ME",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "ぷりなの",
+            "kuro"
+          ],
+          "teamAccountIds": [
+            "0b7c8bade740430b83e63edf333e64cb",
+            "eb549746e37c4f61ab7baf60c7a9ba66"
+          ]
+        },
+        {
+          "id": "auto-s39-5428915d80e3",
+          "date": "2025-12-21",
+          "region": "ME",
+          "player": "かぷせるてぃーてぃーTTていてい / falcon manzuǃ",
+          "playerRaw": "Pollo 17 ǃ ǃ / falcon manzuǃ",
+          "event": "$1 Million Unreal Cup",
+          "round": "単一開催枠 / 参加確認",
+          "rank": 3783,
+          "points": 123,
+          "kills": 15,
+          "vrs": 0,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 10,
+          "seasonId": "S39",
+          "chapter": 7,
+          "season": 1,
+          "tournamentId": "ch7s1-one-million-unreal-cup",
+          "source": "https://www.fortnite.com/competitive/events/S39_1MillionUnrealCup/?region=ME&round=S39_1MillionUnrealCup_ME",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "かぷせるてぃーてぃーTTていてい",
+            "falcon manzuǃ"
+          ],
+          "teamAccountIds": [
+            "10a89ca8d9c140368cc3f4eac47bcc40",
+            "6005930641914945b4018ecaf65a275d"
+          ]
         }
       ],
-      "pages": 29,
+      "pages": 39,
       "epicIdsRetained": true,
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 2900,
+      "lastSeenRank": 3900,
       "totalPages": 100,
-      "lastAttemptAt": "2026-11-07T14:25:14.256Z",
-      "lastSuccessAt": "2026-11-07T14:25:15.173Z"
+      "lastAttemptAt": "2026-11-07T15:59:19.362Z",
+      "lastSuccessAt": "2026-11-07T15:59:20.500Z"
     },
     "epicgames_S43_OnePieceZoroCup_NAW/S43_OnePieceZoroCup_NAW": {
       "nextPage": 2,
@@ -32830,16 +33329,21 @@
       "totalPages": 8
     },
     "epicgames_S43_TriosCashCup_OCE/S43_TriosCashCup_Event1_OCE": {
-      "nextPage": 4,
+      "nextPage": 5,
       "complete": false,
       "proposals": [],
-      "pages": 4,
-      "lastAttemptAt": "2026-11-07T14:25:20.460Z",
+      "pages": 5,
+      "lastAttemptAt": "2026-11-07T15:59:23.244Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 400,
-      "lastSuccessAt": "2026-11-07T14:25:21.235Z",
-      "totalPages": 16
+      "lastSeenRank": 500,
+      "lastSuccessAt": "2026-11-07T15:59:23.244Z",
+      "totalPages": 16,
+      "errorAttempts": 1,
+      "retryAfter": "2026-11-07T21:59:24.325Z",
+      "lastError": "Osirion API HTTP 429 /v1/tournaments/leaderboard",
+      "lastErrorPage": 5,
+      "lastErrorCode": "OSIRION_TRANSIENT"
     },
     "epicgames_S37_ConsoleDuosCashCups_NAC/S37_ConsoleDuosCashCups_Event10Round2_NAC": {
       "nextPage": 5,
@@ -32866,7 +33370,7 @@
       "lastErrorCode": "OSIRION_INVALID_LEADERBOARD"
     },
     "epicgames_S30_SoloVictoryCashCup_OCE/S30_SoloVictoryCashCup_Event6Round2_OCE": {
-      "nextPage": 2,
+      "nextPage": 3,
       "complete": false,
       "proposals": [
         {
@@ -32891,15 +33395,124 @@
           "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=OCE&round=S30_SoloVictoryCashCup_Event6Round2_OCE",
           "verified": true,
           "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。現金賞金の確定情報なし。"
+        },
+        {
+          "id": "auto-s30-95a56065e4f3",
+          "date": "2024-07-22",
+          "region": "OCE",
+          "player": "fuwa",
+          "playerRaw": "zst fuwaǃ",
+          "event": "Solo Victory Cup Battle Royale",
+          "round": "Event 6 · Round 2 / 賞金決勝",
+          "rank": 244,
+          "points": 0,
+          "kills": 4,
+          "vrs": 0,
+          "prize": null,
+          "kind": "賞金決勝",
+          "matches": 2,
+          "seasonId": "S30",
+          "chapter": 5,
+          "season": 3,
+          "tournamentId": "ch5s3-solo-victory-cup",
+          "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=OCE&round=S30_SoloVictoryCashCup_Event6Round2_OCE",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。現金賞金の確定情報なし。"
+        },
+        {
+          "id": "auto-s30-58c88c0f7831",
+          "date": "2024-07-22",
+          "region": "OCE",
+          "player": "じんくん",
+          "playerRaw": "Aura t3eny 19ǃ",
+          "event": "Solo Victory Cup Battle Royale",
+          "round": "Event 6 · Round 2 / 賞金決勝",
+          "rank": 259,
+          "points": 0,
+          "kills": 4,
+          "vrs": 0,
+          "prize": null,
+          "kind": "賞金決勝",
+          "matches": 2,
+          "seasonId": "S30",
+          "chapter": 5,
+          "season": 3,
+          "tournamentId": "ch5s3-solo-victory-cup",
+          "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=OCE&round=S30_SoloVictoryCashCup_Event6Round2_OCE",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。現金賞金の確定情報なし。"
         }
       ],
-      "pages": 2,
-      "lastAttemptAt": "2026-11-07T14:25:36.967Z",
+      "pages": 3,
+      "lastAttemptAt": "2026-11-07T15:59:36.182Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 200,
-      "lastSuccessAt": "2026-11-07T14:25:40.700Z",
-      "totalPages": 19
+      "lastSeenRank": 300,
+      "lastSuccessAt": "2026-11-07T15:59:36.182Z",
+      "totalPages": 19,
+      "errorAttempts": 1,
+      "retryAfter": "2026-11-07T21:59:37.265Z",
+      "lastError": "Osirion API HTTP 429 /v1/tournaments/leaderboard",
+      "lastErrorPage": 3,
+      "lastErrorCode": "OSIRION_TRANSIENT"
+    },
+    "epicgames_S38_SquadsVictoryCup_NAW/S38_SquadsVictoryCup_Round2_Day2_NAW": {
+      "nextPage": 1,
+      "complete": true,
+      "proposals": [],
+      "pages": 1,
+      "lastAttemptAt": "2026-11-07T15:58:53.866Z",
+      "emptyAttempts": 0,
+      "rankingOrderValid": true,
+      "lastSeenRank": 93,
+      "lastSuccessAt": "2026-11-07T15:58:54.969Z",
+      "totalPages": 1
+    },
+    "epicgames_S40_FNCSDivisionalCup_Division1_ME/S40_FNCSDivisionalCup_Division1_Week2Day2_ME": {
+      "nextPage": 0,
+      "complete": false,
+      "proposals": [],
+      "pages": 0,
+      "lastAttemptAt": "2026-11-07T15:59:27.202Z",
+      "errorAttempts": 1,
+      "retryAfter": "2026-11-07T21:59:28.287Z",
+      "lastError": "Osirion API HTTP 429 /v1/tournaments/leaderboard",
+      "lastErrorPage": 0,
+      "lastErrorCode": "OSIRION_TRANSIENT"
+    },
+    "epicgames_S30_SoloVictoryCashCup_NAC/S30_SoloVictoryCashCup_Event8Round2_NAC": {
+      "nextPage": 1,
+      "complete": false,
+      "proposals": [],
+      "pages": 1,
+      "lastAttemptAt": "2026-11-07T15:59:38.202Z",
+      "emptyAttempts": 0,
+      "rankingOrderValid": true,
+      "lastSeenRank": 100,
+      "lastSuccessAt": "2026-11-07T15:59:38.202Z",
+      "totalPages": 48,
+      "errorAttempts": 1,
+      "retryAfter": "2026-11-07T21:59:39.291Z",
+      "lastError": "Osirion API HTTP 429 /v1/tournaments/leaderboard",
+      "lastErrorPage": 1,
+      "lastErrorCode": "OSIRION_TRANSIENT"
+    },
+    "epicgames_S31_SoloVictoryCashCup_NAC/S31_SoloVictoryCashCup_Event3Round2_NAC": {
+      "nextPage": 1,
+      "complete": false,
+      "proposals": [],
+      "pages": 1,
+      "lastAttemptAt": "2026-11-07T15:59:40.218Z",
+      "emptyAttempts": 0,
+      "rankingOrderValid": true,
+      "lastSeenRank": 100,
+      "lastSuccessAt": "2026-11-07T15:59:40.218Z",
+      "totalPages": 92,
+      "errorAttempts": 1,
+      "retryAfter": "2026-11-07T21:59:41.299Z",
+      "lastError": "Osirion API HTTP 429 /v1/tournaments/leaderboard",
+      "lastErrorPage": 1,
+      "lastErrorCode": "OSIRION_TRANSIENT"
     }
   }
 }
