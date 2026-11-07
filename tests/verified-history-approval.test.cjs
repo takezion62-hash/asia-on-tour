@@ -20,7 +20,7 @@ test('stops on out-of-cutoff rank, match cap, missing account or unfinished scan
  assert.equal(decide({...row,player:'unknown'},w,checkpoint(),data()).approved,false);
  assert.equal(decide(row,w,checkpoint(),{...data(),results:[{...row,round:'Day 1 · Round 1 / 予選突破'}]}).approved,false);
 });
-test('zero-VR final is $0, positive-VR final requires manual verification',()=>{
+test('zero-VR final is $0; S41 positive-VR cash is rule-backed $100 per win',()=>{
  const f={...w,key:'epicgames_S41_ReloadReloadSoloVictoryCup_ME/S41_ReloadSoloVictoryCup_Round2_Day1_ME',windowId:'S41_ReloadSoloVictoryCup_Round2_Day1_ME',kind:'賞金決勝',round:'Day 1 · Round 2 / 賞金決勝'};
  const x={...row,kind:f.kind,round:f.round,rank:216,vrs:0,matches:3,points:0,prize:null,source:source(f)};
  const r=decide(x,f,checkpoint(x),data());
@@ -28,7 +28,12 @@ test('zero-VR final is $0, positive-VR final requires manual verification',()=>{
  assert.equal(r.record.kind,'賞金決勝');
  assert.equal(r.record.round,f.round);
  assert.equal(r.record.prize,0);
- assert.equal(decide({...x,vrs:1},f,checkpoint({...x,vrs:1}),data()).approved,false);
+ const win={...x,vrs:1,matches:3};
+ const earned=decide(win,f,checkpoint(win),data());
+ assert.equal(earned.approved,true);
+ assert.equal(earned.record.prize,100);
+ assert.match(earned.record.note,/資格審査/);
+ assert.equal(decide({...win,prize:100},f,checkpoint({...win,prize:100}),data()).approved,false);
 });
 test('source and tournament identity must match exactly',()=>{
  assert.equal(decide({...row,source:row.source.replace('region=ME','region=NAW')},w,checkpoint(),data()).approved,false);
@@ -87,4 +92,18 @@ test('2024 S30 squads with all four verified Epic players can publish zero-VR pr
  assert.equal(decide({...p,players:[names[0],names[1],names[1],names[3]]},win,cp,data).approved,false);
  assert.equal(decide(p,win,{...cp,complete:false},data).approved,false);
  assert.equal(decide(p,win,cp,{...data,results:[{...p,kind:'賞金決勝'}]}).approved,false);
+});
+
+test('S42 solo cash finals also derive $100 per Victory Royale with exact rules',()=>{
+ const win={...w,key:'S42-auto',eventId:'S42_SoloVictoryCup',windowId:'S42_SoloVictoryCup_Event1Round2_NAW',
+  seasonId:'S42',tournamentId:'ch7s4-solo-victory-cup',region:'NAW',kind:'賞金決勝',
+  round:'Event 1 · Round 2 / 賞金決勝'};
+ const item={id:win.tournamentId,name:'Solo Victory Cup',sourceEventIds:[win.eventId],series:'victory-cup',seasonId:'S42',team:'solo'};
+ const candidate={...row,id:'auto-s42-987654321012',event:item.name,seasonId:'S42',date:win.dateJst,
+  region:win.region,tournamentId:win.tournamentId,round:win.round,kind:win.kind,rank:32,
+  points:0,kills:8,vrs:2,matches:3,prize:null,source:source(win)};
+ const db={players:{candidates:[{name:'A'}]},tournaments:{catalog:[item]},results:[]};
+ const result=decide(candidate,win,{complete:true,proposals:[candidate]},db);
+ assert.equal(result.approved,true);
+ assert.equal(result.record.prize,200);
 });

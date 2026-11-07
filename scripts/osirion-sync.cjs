@@ -6,6 +6,7 @@
 const fs=require('node:fs'),path=require('node:path');
 const {prepare,maximumMatches,applyProposals}=require('./auto-sync-core.cjs');
 const {evaluate,RULES}=require('./verified-history-approval.cjs');
+const {evaluate:evaluateCosmetics,cutoffForWindow}=require('./automatic-cosmetic-approval.cjs');
 const root=path.resolve(__dirname,'..');
 const read=name=>JSON.parse(fs.readFileSync(path.join(root,name),'utf8'));
 const write=(name,obj)=>fs.writeFileSync(path.join(root,name),JSON.stringify(obj,null,2)+'\n');
@@ -262,7 +263,7 @@ function historicalPriority(state,records){
    const cp=state.windows[w.key];
    const fraction=cp?.totalPages>0?Math.min(1,(cp.nextPage||0)/cp.totalPages):0;
    // Higher score means a publishable official ruleset and a round near completion.
-   const approvedRule=Object.hasOwn(RULES,w.tournamentId)&&w.series==='victory-cup';
+   const approvedRule=(Object.hasOwn(RULES,w.tournamentId)&&w.series==='victory-cup')||cutoffForWindow(w)!==null;
    return (approvedRule?150:0)+Math.round(fraction*90)+historicalEvidenceScore(w,records)+(w.kind==='賞金決勝'?12:0)+(w.kind==='参加確認'?3:0);
   };
   return score(b)-score(a)||a.end-b.end;
@@ -288,6 +289,8 @@ function selectHistoricalWindows(windows,state,config,time=Date.now(),records=[]
    if(!seen.has(w.key)){selected.push(w);seen.add(w.key)}
   }
  }
+ // Prioritize one eligible ranked cosmetic session without starving the backfill.
+ if(selected.length<limit)add(pending.filter(w=>cutoffForWindow(w)!==null));
  // One Victory and one other-series slot per year; remaining slots target known historical evidence.
  for(const series of ['victory-cup','other']){
   for(const year of years){
@@ -375,7 +378,7 @@ async function main(){
    checkpoint.emptyAttempts=0;
    delete checkpoint.retryAfter;
    if(!l.entries.length&&page<l.totalPages-1)throw Error('順位表に未期待の空ページ: '+win.key+' page '+page);
-   const cutoff=historical?advancementLimit(win):null;
+   const cutoff=(historical?advancementLimit(win):null)??cutoffForWindow(win);
    const pageRanks=l.entries.map(e=>e.rank);
    const ordered=pageRanks.every((rank,i)=>Number.isSafeInteger(rank)&&rank>=1&&(i===0||rank>=pageRanks[i-1]));
    const crossed=ordered&&cutoff!==null&&pageRanks.some(rank=>rank>cutoff);
@@ -409,21 +412,27 @@ async function main(){
  const reviewedIds=new Set(reviewed.entries.map(x=>x.id));
  const pending=validHistory.filter(x=>!recordedIds.has(x.id)&&!reviewedIds.has(x.id));
  const stamp=new Date().toISOString();
- let imported=0,manuallyHeld=0;
+ let imported=0,manuallyHeld=0,importedCosmetics=0;
  const importedIds=new Set(),reasons=new Map();
- if(historical&&config.autoApproveVerified===true){
-  const decisions=evaluate(pending,windows,state.windows,data);
-  manuallyHeld=decisions.held.length;
-  for(const hold of decisions.held)reasons.set(hold.id,hold.reason);
-  for(const row of decisions.approved)importedIds.add(row.id);
-  imported=applyProposals(data,decisions.approved,stamp);
-  if(imported){
-   const entry=data.updates.entries[0];
-   entry.title='公式規則で自動承認：過去大会'+imported+'戦績';
-   entry.description='Epic公式規則とOsirion順位表、確認済み選手ID・既存戦績を照合。予選突破と決勝0VR（賞金$0）のみ自動承認。既存登録を保持。';
-   write('results.json',data.results);
-   write('updates.json',data.updates);
-  }
+ const verified=(historical&&config.autoApproveVerified===true)?
+  evaluate(pending,windows,state.windows,data):{approved:[],held:[]};
+ // Rule-backed cosmetics can be published in both recent and historical scans.
+ // A positive-VR cash prize remains excluded without an independent verified payout.
+ const cosmetic=(config.autoApproveCosmetic===true)?
+  evaluateCosmetics(pending,windows,state.windows,{...data,results:[...data.results,...verified.approved]}):{approved:[],held:[]};
+ const approved=[...verified.approved,...cosmetic.approved];
+ importedCosmetics=cosmetic.approved.length;
+ for(const hold of verified.held)reasons.set(hold.id,hold.reason);
+ for(const hold of cosmetic.held)if(!reasons.has(hold.id))reasons.set(hold.id,hold.reason);
+ for(const row of approved)importedIds.add(row.id);
+ manuallyHeld=pending.length-approved.length;
+ imported=applyProposals(data,approved,stamp);
+ if(imported){
+  const entry=data.updates.entries[0];
+  entry.title='公式規則で自動承認：'+(historical?'過去大会':'新着大会')+imported+'戦績';
+  entry.description='公式規則・地域別順位・本人確認済みEpic ID・順位表・既存戦績を照合。予選突破、決勝0VR、金額が公式に明記された決勝VR賞金、ゲーム内スキン（'+importedCosmetics+'件）のみ自動掲載。未検証賞金や配布完了は推定しない。';
+  write('results.json',data.results);
+  write('updates.json',data.updates);
  }
  const proposals=pending.filter(x=>!importedIds.has(x.id)).map(x=>reasons.has(x.id)?{...x,reviewReason:reasons.get(x.id)}:x);
  const unique=new Map(proposals.map(x=>[x.id,x]));
@@ -431,12 +440,12 @@ async function main(){
  const reviewOnlyWindows=windows.filter(w=>w.series!=='victory-cup').length;
  const reviewOnlyCandidates=unique.size?Array.from(unique.values()).filter(p=>p.reviewOnly===true).length:0;
  const cumulativeApprovals=data.updates.entries.filter(x=>x.title?.startsWith('公式規則で自動承認：')).reduce((sum,x)=>sum+(x.recordIds?.length||0),0);
- const status={version:1,state:'checked',checkedAt:stamp,mode:'review',scope:historical?'history':'recent',dateMode:historical?(storedConfig.toDate==='rolling'?'rolling':'fixed'):null,selectedWindows:active.length,fromDate:historical?config.fromDate:null,toDate:historical?config.toDate:null,provider:'osirion',linkedPlayers:accounts.length,trackedWindows:windows.length,found:unique.size,skipped:invalidRows,imported,scannedPages:scanned,completedWindows:finished,identityConflicts:conflicts.length,alreadyRegistered:recordedFromReview,autoApprovedTotal:cumulativeApprovals,invalidCachedCandidates:invalidCached,manualReviewCandidates:manuallyHeld,timeLimitReached,retryWindows:Object.entries(state.windows).filter(([key,w])=>eligible.has(key)&&!w.complete&&w.retryAfter).length,transientFailures,reviewOnlyWindows,reviewOnlyCandidates,unmappedEvents:unmapped.length,unmappedEventIds:unmapped.slice(0,12),message:'Osirionで'+accounts.length+'アカウントIDを追跡。今回の公式規則による自動承認'+imported+'件、追加確認待ち'+unique.size+'件、名義照合保留'+conflicts.length+'件。'};
+ const status={version:1,state:'checked',checkedAt:stamp,mode:'review',scope:historical?'history':'recent',dateMode:historical?(storedConfig.toDate==='rolling'?'rolling':'fixed'):null,selectedWindows:active.length,fromDate:historical?config.fromDate:null,toDate:historical?config.toDate:null,provider:'osirion',linkedPlayers:accounts.length,trackedWindows:windows.length,found:unique.size,skipped:invalidRows,imported,scannedPages:scanned,completedWindows:finished,identityConflicts:conflicts.length,alreadyRegistered:recordedFromReview,autoApprovedTotal:cumulativeApprovals,invalidCachedCandidates:invalidCached,manualReviewCandidates:manuallyHeld,autoApprovedCosmeticThisRun:importedCosmetics,timeLimitReached,retryWindows:Object.entries(state.windows).filter(([key,w])=>eligible.has(key)&&!w.complete&&w.retryAfter).length,transientFailures,reviewOnlyWindows,reviewOnlyCandidates,unmappedEvents:unmapped.length,unmappedEventIds:unmapped.slice(0,12),message:'Osirionで'+accounts.length+'アカウントIDを追跡。今回の公式規則による自動承認'+imported+'件、追加確認待ち'+unique.size+'件、名義照合保留'+conflicts.length+'件。'};
  state.checkedAt=stamp;
  write(prefix+'-scan.json',state);
  write(prefix+'-review.json',{version:1,status:'review',checkedAt:stamp,proposals:[...unique.values()]});
  write(prefix+'-status.json',status);
- console.log((historical?'OSIRION_HISTORY_REVIEW ':'OSIRION_REVIEW ')+JSON.stringify({scannedPages:scanned,linkedPlayers:accounts.length,identityConflicts:conflicts.length,windows:windows.length,unmappedEvents:unmapped.length,proposals:unique.size,imported,finished}));
+ console.log((historical?'OSIRION_HISTORY_REVIEW ':'OSIRION_REVIEW ')+JSON.stringify({scannedPages:scanned,linkedPlayers:accounts.length,identityConflicts:conflicts.length,windows:windows.length,unmappedEvents:unmapped.length,proposals:unique.size,imported,cosmetic:importedCosmetics,finished}));
 }
 if(require.main===module)main().catch(e=>{console.error('OSIRION_SYNC_ERROR '+e.stack);process.exitCode=1});
 module.exports={identity,linkedAccounts,parseStage,parseReviewStage,discover,discoverUnmapped,selectActiveWindows,selectHistoricalWindows,historicalEvidenceScore,resolveHistoricalScope,fetchJson,advancementLimit,normalizeRow,getTournaments,getLeaderboard,transientLeaderboardFailure,main};

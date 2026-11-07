@@ -5,11 +5,14 @@ on:
     paths:
       - "scripts/osirion-sync.cjs"
       - "scripts/auto-sync-core.cjs"
+      - "scripts/automatic-cosmetic-approval.cjs"
+      - "scripts/cosmetic-rank-rules.cjs"
       - "tests/non-victory-auto-sync.test.cjs"
+      - "tests/automatic-cosmetic-approval.test.cjs"
       - "auto-sync-config.json"
       - ".github/workflows/auto-sync.yml"
   schedule:
-    - cron: '17 0,6,12,18 * * *'
+    - cron: '17 0,4,8,12,16,20 * * *'
   workflow_dispatch:
 permissions:
   contents: write
@@ -37,7 +40,7 @@ jobs:
       - name: Validate data and run sync unit tests
         run: |
           npm run validate
-          node --test tests/auto-sync.test.cjs tests/osirion-sync.test.cjs tests/non-victory-auto-sync.test.cjs
+          node --test tests/auto-sync.test.cjs tests/osirion-sync.test.cjs tests/non-victory-auto-sync.test.cjs tests/automatic-cosmetic-approval.test.cjs tests/cosmetic-rank-rules.test.cjs
       - name: Commit checked updates only
         run: |
           if [ -z "$(git status --porcelain -- results.json updates.json auto-sync-status.json auto-sync-review.json auto-sync-scan.json)" ]; then

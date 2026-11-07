@@ -15,7 +15,7 @@ test('プレイスタイル画面のJS/CSSが配信され、プロフィール�
   const fold=section.locator('#profile-style-fold');
   await expect(fold).not.toHaveAttribute('open','');
   await expect(section.locator('.style-card').first()).toBeHidden();
-  await fold.locator('summary').click();
+  await fold.locator(':scope > summary').click();
   await expect(fold).toHaveAttribute('open','');
   await expect(section.locator('#profile-style-title')).toContainText('プレイスタイル');
   await expect(section.locator('[data-style-filter="team"]')).toHaveValue('solo');
@@ -35,7 +35,7 @@ test('シーズン・形式・地域・チームのフィルターを変更し�
   const section=page.locator('#profile-style');
   await expect(section).toBeVisible();
   const fold=section.locator('#profile-style-fold');
-  await fold.locator('summary').click();
+  await fold.locator(':scope > summary').click();
   await expect(fold).toHaveAttribute('open','');
   await section.locator('[data-style-filter="team"]').selectOption('duo');
   await expect(fold).toHaveAttribute('open','');
@@ -85,10 +85,10 @@ test('分析パネルを折りたたみ、ショートカットから再び開�
   const fold=page.locator('#profile-style-fold');
   await expect(fold).not.toHaveAttribute('open','');
   await expect(page.locator('#profile-style-title')).toBeVisible();
-  await fold.locator('summary').click();
+  await fold.locator(':scope > summary').click();
   await expect(fold).toHaveAttribute('open','');
   await expect(page.locator('#profile-style .style-quality')).toBeVisible();
-  await fold.locator('summary').click();
+  await fold.locator(':scope > summary').click();
   await expect(fold).not.toHaveAttribute('open','');
   await expect(page.locator('#profile-style .style-quality')).toBeHidden();
   await page.locator('[data-style-jump]').click();
