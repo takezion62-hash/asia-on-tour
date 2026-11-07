@@ -6,7 +6,10 @@ test('nonqualifier participation archive opens by month and stays outside prize 
  await expect(page.locator('#participation-archive')).toBeVisible();
  await expect(page.locator('#participation-summary')).toContainText('出場戦績');
  if(index.total===0){await expect(page.locator('#participation-table')).toContainText('初回自動調査');return}
- const month=index.months.at(-1).month;
+ const latestPopulated=index.months.filter(month=>month.count>0).sort((a,b)=>b.month.localeCompare(a.month))[0];
+ if(!latestPopulated){await expect(page.locator('#participation-table')).toContainText('まだありません');return}
+ const month=latestPopulated.month;
+ await expect(page.locator('#participation-month')).toHaveValue(month);
  await page.locator('#participation-month').selectOption(month);
  await expect(page.locator('#participation-table tbody tr').first()).toBeVisible();
  await expect(page.locator('#participation-table')).toContainText('出場確認');
