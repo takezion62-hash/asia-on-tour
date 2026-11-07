@@ -86,10 +86,10 @@ status.manuallyCorrected=(status.manuallyCorrected||0)+1;
 status.lastCorrectedReviewAt=now;
 status.message='3peace / JobのNAC Performance Evaluation順位を701→702に修正し、確認待ち重複1件を解消。既存の得点・キル・VR・試合数・賞金は維持。残り確認待ち'+queue.proposals.length+'件。';
 updates.entries.unshift({
- id:MARK,date:now.slice(0,10),type:'records',
+ id:MARK,date:now.slice(0,10),type:'site',
  title:'NAC Performance Evaluationの3peace／Jobの順位を702位へ修正',
- description:'2026年9月18日NAC Event 4 Round 1。元掲載701位から702位へ訂正。83pt・3K・0VR・4試合と賞金は変更せず、重複した確認候補1件を解消。',
- recordIds:[RECORD_ID]
+ description:'既存戦績 '+RECORD_ID+'：2026年9月18日NAC Event 4 Round 1。元掲載701位から702位へ訂正。83pt・3K・0VR・4試合と賞金は変更せず、重複した確認候補1件を解消。',
+ recordIds:[]
 });
 write('results.json',results);
 write('history-sync-review.json',queue);
