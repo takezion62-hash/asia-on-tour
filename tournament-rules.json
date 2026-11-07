@@ -342,6 +342,28 @@
               "through": 15,
               "perPlayer": 100
             }
+          ],
+          "NAW": [
+            {
+              "through": 1,
+              "perPlayer": 400
+            },
+            {
+              "through": 2,
+              "perPlayer": 300
+            },
+            {
+              "through": 3,
+              "perPlayer": 200
+            },
+            {
+              "through": 5,
+              "perPlayer": 150
+            },
+            {
+              "through": 10,
+              "perPlayer": 100
+            }
           ]
         }
       },
@@ -349,8 +371,12 @@
       "source": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-trios-cash-cups-chapter-7-mini-season-official-rules",
       "evidence": [
         {
-          "text": "地域別個人賞金はユーザー提供の2026年11月7日Fortnite Tracker Prize Pool画面とEpic公式規則Attachment Cで照合。NAWはユーザー提供待ちのため未登録。",
+          "text": "地域別個人賞金はユーザー提供の2026年11月7日Fortnite Tracker Prize Pool画面とEpic公式規則Attachment Cで照合。NAWは後日別画像で確認済み。",
           "url": "https://fortnitetracker.com/events/epicgames_S43_TriosCashCup_EU"
+        },
+        {
+          "text": "NAW（NA West）2026/11/8,11/15,11/23開催。Fortnite Tracker Prize Poolで1位$400、2位$300、3位$200、4〜5位$150、6〜10位$100（個人賞金）をユーザー提供画像で確認。",
+          "url": "https://fortnitetracker.com/events/epicgames_S43_TriosCashCup_NAW"
         }
       ]
     }
