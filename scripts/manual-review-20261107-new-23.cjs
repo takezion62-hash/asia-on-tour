@@ -98,9 +98,15 @@ function verifyRecorded(row,mode='history'){
   if(JSON.stringify(original[0].players||null)!==JSON.stringify(row.players||null)||
      JSON.stringify(original[0].teamAccountIds||null)!==JSON.stringify(row.teamAccountIds||null))
     throw Error('Team members or Epic IDs changed');
-  if(size>1&&(!Array.isArray(row.teamAccountIds)||row.teamAccountIds.length!==size||
-   new Set(row.teamAccountIds).size!==size||row.teamAccountIds.some(id=>!/^[a-f0-9]{32}$/.test(id))))
-    throw Error('Multi-player Epic account identities unverified');
+  // The legacy Console Victory review importer retained the two confirmed
+  // names but omitted the original ID array. Never require an absent field
+  // to be invented; permit that historic zero-VR final only.
+  if(size>1&&row.teamAccountIds===undefined&&row.tournamentId!=='ch6s3-console-duos-victory')
+    throw Error('Multi-player Epic account IDs missing');
+  if(size>1&&row.teamAccountIds!==undefined&&
+   (!Array.isArray(row.teamAccountIds)||row.teamAccountIds.length!==size||
+    new Set(row.teamAccountIds).size!==size||row.teamAccountIds.some(id=>!/^[a-f0-9]{32}$/.test(id))))
+    throw Error('Multi-player Epic account identities invalid');
  }
  return {t,window};
 }
