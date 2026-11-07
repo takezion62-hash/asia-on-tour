@@ -93,7 +93,7 @@ function classify(r){
    '参加順位'+r.rank+'位。週内Day1+Day2の合計ポイントによる上位50組がWeekly Finalsへ進出。'+
    '現金賞金はWeekly FinalsのためこのDay単位の現金$0。最終進出判定はこの単日順位から確定しない。'+
    '本人Epic ID・公式開催枠を照合。規則: '+rule;
- }else if(r.tournamentId==='ch7s4-performance-evaluation-duos'){
+ }else if(r.tournamentId==='ch7s4-performance-evaluation'){
   if(r.seasonId!=='S42'||r.region!=='NAC'||r.kind!=='参加確認'||r.prize!==null||
     r.date!=='2026-09-04'||r.matches>10||r.rank<=50||
     r.round!=='Event 2 · Round 1 / 参加確認')throw Error('S42 Performance participation mismatch');
