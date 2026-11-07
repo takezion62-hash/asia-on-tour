@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-07T23:01:00.370Z",
+  "reviewedAt": "2026-11-07T23:16:39.215Z",
   "description": "Resolved historic review candidates: published, duplicate or participation",
   "entries": [
     {
@@ -6174,6 +6174,28 @@
       "voidEvidence": "https://fortnitetracker.com/events/epicgames_S41_PSCupDaysOfPlay_OCE?window=S41_PSCupDaysOfPlay_Qualifier_OCE",
       "reviewedAt": "2026-11-08",
       "evidence": "Fortnite Tracker identifies the exact session as VOIDED / rescheduled by Epic. Disqualified session, not a valid credited result, spray, qualification or cash."
+    },
+    {
+      "id": "auto-s39-e5c548f90d4f",
+      "recordId": "auto-s39-e5c548f90d4f",
+      "decision": "published",
+      "policy": "manual-verified-rule",
+      "approvedBy": "ChatGPT (user-authorized GitHub integration)",
+      "reviewedAt": "2026-11-08",
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/1-million-dollar-unreal-cup-chapter-7-season-1-official-rules",
+      "source": "https://www.fortnite.com/competitive/events/S39_1MillionUnrealCup/?region=EU&round=S39_1MillionUnrealCup_EU",
+      "evidence": "Top 1000 EU ranks verified, 957th/275pts, two confirmed Epic IDs; official EU tier team $200 (100 USD each)."
+    },
+    {
+      "id": "auto-s41-8a391f3be8b0",
+      "recordId": "auto-s41-8a391f3be8b0",
+      "decision": "published",
+      "policy": "manual-verified-rule",
+      "approvedBy": "ChatGPT (user-authorized GitHub integration)",
+      "reviewedAt": "2026-11-08",
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-3-official-rules",
+      "source": "https://www.fortnite.com/competitive/events/S41_ReloadReloadSoloVictoryCup/?region=ME&round=S41_ReloadSoloVictoryCup_Round1_Day1_ME",
+      "evidence": "5th in ME qualifier; S41 ME cutoff top320; same-day Round2 finals exists, 9 reported games vs 8-game rule noted, no game count alteration."
     }
   ]
 }
