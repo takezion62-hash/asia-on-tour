@@ -122,6 +122,27 @@ test('six evolving badge tracks have five strictly increasing rank goals',()=>{
     assert.deepEqual(track.steps.map(step=>step.tier),engine.EVOLUTION_TIERS.map(t=>t.id));
   }
 });
+test('no-VR cash earner and finals runner-up are EPIC; achievement conditions stay intact',()=>{
+ for(const [id,title] of [
+  ['no-vr-cash','勝たずして稼ぐ'],
+  ['final-runner-up','あと一歩の英雄']
+ ]){
+  const def=engine.SPECIAL_CATALOG.find(x=>x.id===id);
+  assert.ok(def,id+' must remain in the special title catalog');
+  assert.equal(def.title,title);
+  assert.equal(def.rarity,'epic');
+  assert.equal(def.goal,1);
+ }
+ const one=fixture('runner',{kind:'賞金決勝',rank:2,prize:100,vrs:0});
+ const awarded=engine.calculateSpecial([one],'Hero');
+ const runner=awarded.find(x=>x.id==='final-runner-up');
+ const earner=awarded.find(x=>x.id==='no-vr-cash');
+ assert.equal(runner?.unlocked,true);
+ assert.equal(earner?.unlocked,true);
+ assert.equal(runner?.rarity,'epic');
+ assert.equal(earner?.rarity,'epic');
+});
+
 test('each badge evolves at exact milestones and shows progress only toward next tier',()=>{
   for(const def of engine.EVOLUTION_TRACKS){
     const original=def.steps.map(x=>x.goal);
