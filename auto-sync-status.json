@@ -1,7 +1,7 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-07T13:28:59.732Z",
+  "checkedAt": "2026-11-07T14:22:38.709Z",
   "mode": "review",
   "scope": "recent",
   "dateMode": null,
@@ -18,7 +18,7 @@
   "completedWindows": 17,
   "identityConflicts": 3,
   "alreadyRegistered": 36,
-  "autoApprovedTotal": 654,
+  "autoApprovedTotal": 682,
   "invalidCachedCandidates": 0,
   "manualReviewCandidates": 0,
   "autoApprovedCosmeticThisRun": 0,
@@ -43,6 +43,58 @@
     "alreadyPublished": 0,
     "reviewConflicts": 0,
     "keptPending": 0,
-    "reconciledAt": "2026-11-07T13:29:01.164Z"
+    "reconciledAt": "2026-11-07T14:22:41.031Z"
+  },
+  "coverage": {
+    "total": 17,
+    "completed": 17,
+    "notStarted": 0,
+    "partial": 0,
+    "retryWaiting": 0,
+    "retryDue": 0,
+    "remaining": 0,
+    "retryCount": 0,
+    "completionPercent": 100,
+    "byRegion": {
+      "EU": {
+        "total": 4,
+        "completed": 4,
+        "pending": 0
+      },
+      "NAC": {
+        "total": 4,
+        "completed": 4,
+        "pending": 0
+      },
+      "OCE": {
+        "total": 3,
+        "completed": 3,
+        "pending": 0
+      },
+      "ME": {
+        "total": 2,
+        "completed": 2,
+        "pending": 0
+      },
+      "BR": {
+        "total": 2,
+        "completed": 2,
+        "pending": 0
+      },
+      "NAW": {
+        "total": 2,
+        "completed": 2,
+        "pending": 0
+      }
+    },
+    "byYear": {
+      "2026": {
+        "total": 17,
+        "completed": 17,
+        "pending": 0
+      }
+    },
+    "outsideScopeCheckpoints": 0,
+    "samples": []
   }
 }
