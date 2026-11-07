@@ -1,5 +1,5 @@
 'use strict';
-// Opt-in, tournament-rule-backed Cash Cup publication for verified prize-winning teams.
+// Opt-in, tournament-rule-backed Cash Cup publication for verified teams, including prize-free finishing ranks.
 // All other Cash Cups remain review-only until a complete official payout rule is registered.
 const RULES=Object.freeze(Object.fromEntries(
  require('../tournament-rules.json').rules
@@ -87,12 +87,12 @@ function decide(row,win,checkpoint,data){
  const max=rule.matchCaps['単一ラウンド'];
  if(!Number.isSafeInteger(row.matches)||row.matches<1||row.matches>max||
   !Number.isSafeInteger(row.vrs)||row.vrs<0||row.vrs>row.matches||
-  !Number.isSafeInteger(row.rank)||row.rank<1||row.rank>cutoff||
+  !Number.isSafeInteger(row.rank)||row.rank<1||
   !Number.isSafeInteger(row.points)||row.points<0||
   !Number.isSafeInteger(row.kills)||row.kills<0)
   return decline('公式試合数・入賞順位・キル・VR・ポイントの範囲外');
  const share=cashPrize(rule,win.region,row.rank);
- if(!Number.isSafeInteger(share)||share<=0)return decline('対象順位の個人賞金が未登録');
+ if(!Number.isSafeInteger(share)||share<0)return decline('対象地域の個人賞金ルールが未登録');
  let url;
  try{url=new URL(row.source)}catch{}
  if(!url||url.protocol!=='https:'||url.hostname!=='www.fortnite.com'||
@@ -108,7 +108,49 @@ function decide(row,win,checkpoint,data){
  const record={...base,round:row.round.replace(/\s*\/\s*参加確認$/u,' / 賞金決勝'),
   kind:'賞金決勝',prize:cash,prizePerPlayer:share,
   note:'Epic公式賞金規則で'+win.region+'・Event '+event+'の'+row.rank+
-   '位は1人$'+share+'（'+expected+'人で$'+cash+'）。保存済みOsirion順位表、'+expected+
+   '位は1人
+   '名の既知Epic ID、公式開催日時を照合済み。受給資格の審査・支払完了は未確認。規則: '+rule.source};
+ return {approved:true,record,rule:rule.source};
+}
+function evaluate(proposals,windows,checkpoints,data){
+ const lookup=new Map(windows.map(w=>[w.key,w])),approved=[],held=[];
+ const snapshot={...data,results:[...(data.results||[])]};
+ for(const row of proposals){
+  if(!RULES[row.tournamentId])continue;
+  let win=null,checkpoint=null;
+  for(const [key,cp] of Object.entries(checkpoints||{})){
+   if(cp?.proposals?.some(x=>x.id===row.id)){win=lookup.get(key);checkpoint=cp;break}
+  }
+  if(!win){held.push({id:row.id,reason:'該当公式大会枠なし'});continue}
+  const decision=decide(row,win,checkpoint,snapshot);
+  if(decision.approved){approved.push(decision.record);snapshot.results.push(decision.record)}
+  else held.push({id:row.id,reason:decision.reason});
+ }
+ return {approved,held};
+}
+module.exports={RULES,cashPrize,cashLimitForWindow,sameEvent,decide,evaluate};
++share+'（'+expected+'人で
+   '名の既知Epic ID、公式開催日時を照合済み。受給資格の審査・支払完了は未確認。規則: '+rule.source};
+ return {approved:true,record,rule:rule.source};
+}
+function evaluate(proposals,windows,checkpoints,data){
+ const lookup=new Map(windows.map(w=>[w.key,w])),approved=[],held=[];
+ const snapshot={...data,results:[...(data.results||[])]};
+ for(const row of proposals){
+  if(!RULES[row.tournamentId])continue;
+  let win=null,checkpoint=null;
+  for(const [key,cp] of Object.entries(checkpoints||{})){
+   if(cp?.proposals?.some(x=>x.id===row.id)){win=lookup.get(key);checkpoint=cp;break}
+  }
+  if(!win){held.push({id:row.id,reason:'該当公式大会枠なし'});continue}
+  const decision=decide(row,win,checkpoint,snapshot);
+  if(decision.approved){approved.push(decision.record);snapshot.results.push(decision.record)}
+  else held.push({id:row.id,reason:decision.reason});
+ }
+ return {approved,held};
+}
+module.exports={RULES,cashPrize,cashLimitForWindow,sameEvent,decide,evaluate};
++cash+'）。'+(share===0?'賞金圏外のため現金賞金$0。':'公式順位別賞金に基づく計算。')+'保存済みOsirion順位表、'+expected+
    '名の既知Epic ID、公式開催日時を照合済み。受給資格の審査・支払完了は未確認。規則: '+rule.source};
  return {approved:true,record,rule:rule.source};
 }
