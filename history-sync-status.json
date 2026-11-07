@@ -11,7 +11,7 @@
   "provider": "osirion",
   "linkedPlayers": 459,
   "trackedWindows": 2784,
-  "found": 41,
+  "found": 20,
   "skipped": 25,
   "imported": 0,
   "scannedPages": 80,
@@ -20,7 +20,7 @@
   "alreadyRegistered": 951,
   "autoApprovedTotal": 626,
   "invalidCachedCandidates": 1,
-  "manualReviewCandidates": 41,
+  "manualReviewCandidates": 20,
   "autoApprovedCosmeticThisRun": 0,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
@@ -29,7 +29,7 @@
   "retryWindows": 13,
   "transientFailures": 3,
   "reviewOnlyWindows": 1272,
-  "reviewOnlyCandidates": 40,
+  "reviewOnlyCandidates": 20,
   "unmappedEvents": 244,
   "unmappedEventIds": [
     "S30_ConsoleCashCups",
@@ -45,8 +45,9 @@
     "S30_Reload",
     "S30_ReloadZB"
   ],
-  "message": "CH5 S4 Solo勝利賞金・予選とEU Aphrodite順位報酬を確認: 37件掲載、1件重複、0件保留。過去候補41件。",
-  "manuallyPublished": 37,
+  "message": "過去予選・FNCS・Console・Performance: 21件新規、0件既存、0件保留。無効開催枠と未完成Unrealデータは除外。過去候補残20件。",
+  "manuallyPublished": 58,
   "manuallyResolvedDuplicates": 1,
-  "lastS31RuleReviewAt": "2026-11-07T04:24:32.136Z"
+  "lastS31RuleReviewAt": "2026-11-07T04:24:32.136Z",
+  "lastRound1ReviewAt": "2026-11-07T04:27:04.236Z"
 }

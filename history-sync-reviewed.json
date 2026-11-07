@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-07T04:24:32.136Z",
+  "reviewedAt": "2026-11-07T04:27:04.236Z",
   "description": "Resolved historic review candidates: published, duplicate or participation",
   "entries": [
     {
@@ -2957,6 +2957,195 @@
       "source": "https://www.fortnite.com/competitive/events/S31_SoloVictoryCashCup/?region=ME&round=S31_SoloVictoryCashCup_Event5Round2_ME",
       "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-4-official-rules",
       "evidence": "Verified Epic ID checkpoint, event window, official rank/VR rule, matched calendar and distinct published session"
+    },
+    {
+      "id": "auto-s31-b1e9107f9fef",
+      "decision": "published",
+      "recordId": "auto-s31-b1e9107f9fef",
+      "source": "https://www.fortnite.com/competitive/events/S31_DuosCashCup/?region=ME&round=S31_DuosCashCup_Event3Round1_ME",
+      "rule": "https://www.fortnite.com/news/duos-cash-cups-chapter-5-season-4-official-rules",
+      "policy": "2024-duo-round1",
+      "evidence": "Official rule payout boundary, event schedule, original saved Epic-ID leaderboard row and no matching existing record"
+    },
+    {
+      "id": "auto-s40-c58175f566f6",
+      "decision": "published",
+      "recordId": "auto-s40-c58175f566f6",
+      "source": "https://www.fortnite.com/competitive/events/S40_FNCSDivisionalCup_Division1/?region=ME&round=S40_FNCSDivisionalCup_Division1_Week1Day1_ME",
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fncs-divisional-cups-chapter-7-season-2-official-rules",
+      "policy": "fncs-week1-qualification-attendance",
+      "evidence": "Official rule payout boundary, event schedule, original saved Epic-ID leaderboard row and no matching existing record"
+    },
+    {
+      "id": "auto-s40-ff1d02498e00",
+      "decision": "published",
+      "recordId": "auto-s40-ff1d02498e00",
+      "source": "https://www.fortnite.com/competitive/events/S40_FNCSDivisionalCup_Division1/?region=ME&round=S40_FNCSDivisionalCup_Division1_Week1Day1_ME",
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fncs-divisional-cups-chapter-7-season-2-official-rules",
+      "policy": "fncs-week1-qualification-attendance",
+      "evidence": "Official rule payout boundary, event schedule, original saved Epic-ID leaderboard row and no matching existing record"
+    },
+    {
+      "id": "auto-s40-f6057c533bca",
+      "decision": "published",
+      "recordId": "auto-s40-f6057c533bca",
+      "source": "https://www.fortnite.com/competitive/events/S40_FNCSDivisionalCup_Division1/?region=ME&round=S40_FNCSDivisionalCup_Division1_Week1Day1_ME",
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fncs-divisional-cups-chapter-7-season-2-official-rules",
+      "policy": "fncs-week1-qualification-attendance",
+      "evidence": "Official rule payout boundary, event schedule, original saved Epic-ID leaderboard row and no matching existing record"
+    },
+    {
+      "id": "auto-s40-89381b1bbefb",
+      "decision": "published",
+      "recordId": "auto-s40-89381b1bbefb",
+      "source": "https://www.fortnite.com/competitive/events/S40_FNCSDivisionalCup_Division1/?region=ME&round=S40_FNCSDivisionalCup_Division1_Week1Day1_ME",
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fncs-divisional-cups-chapter-7-season-2-official-rules",
+      "policy": "fncs-week1-qualification-attendance",
+      "evidence": "Official rule payout boundary, event schedule, original saved Epic-ID leaderboard row and no matching existing record"
+    },
+    {
+      "id": "auto-s36-8c8d8ade9ab9",
+      "decision": "published",
+      "recordId": "auto-s36-8c8d8ade9ab9",
+      "source": "https://www.fortnite.com/competitive/events/S36_VictoryDuosCup/?region=EU&round=S36_VictoryDuosCup_Event2Round2_EU",
+      "rule": "https://www.fortnite.com/news/fortnite-duos-console-victory-cash-cups-chapter-6-season-3-official-rules",
+      "policy": "2025-console-zero-vr",
+      "evidence": "Official rule payout boundary, event schedule, original saved Epic-ID leaderboard row and no matching existing record"
+    },
+    {
+      "id": "auto-s40-4905f6f37758",
+      "decision": "published",
+      "recordId": "auto-s40-4905f6f37758",
+      "source": "https://www.fortnite.com/competitive/events/S40_FNCSDivisionalCup_Division1/?region=ME&round=S40_FNCSDivisionalCup_Division1_Week1Day2_ME",
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fncs-divisional-cups-chapter-7-season-2-official-rules",
+      "policy": "fncs-week1-qualification-attendance",
+      "evidence": "Official rule payout boundary, event schedule, original saved Epic-ID leaderboard row and no matching existing record"
+    },
+    {
+      "id": "auto-s40-15b985a2fcf7",
+      "decision": "published",
+      "recordId": "auto-s40-15b985a2fcf7",
+      "source": "https://www.fortnite.com/competitive/events/S40_FNCSDivisionalCup_Division1/?region=ME&round=S40_FNCSDivisionalCup_Division1_Week1Day2_ME",
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fncs-divisional-cups-chapter-7-season-2-official-rules",
+      "policy": "fncs-week1-qualification-attendance",
+      "evidence": "Official rule payout boundary, event schedule, original saved Epic-ID leaderboard row and no matching existing record"
+    },
+    {
+      "id": "auto-s40-219b2a0f6743",
+      "decision": "published",
+      "recordId": "auto-s40-219b2a0f6743",
+      "source": "https://www.fortnite.com/competitive/events/S40_FNCSDivisionalCup_Division1/?region=ME&round=S40_FNCSDivisionalCup_Division1_Week1Day2_ME",
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fncs-divisional-cups-chapter-7-season-2-official-rules",
+      "policy": "fncs-week1-qualification-attendance",
+      "evidence": "Official rule payout boundary, event schedule, original saved Epic-ID leaderboard row and no matching existing record"
+    },
+    {
+      "id": "auto-s42-461d93f03b96",
+      "decision": "published",
+      "recordId": "auto-s42-461d93f03b96",
+      "source": "https://www.fortnite.com/competitive/events/S42_PerformanceEvaluation/?region=NAC&round=S42_PerformanceEvaluation_Event2Round1_NAC",
+      "rule": "https://www.fortnite.com/competitive/events/S42_PerformanceEvaluation/?region=NAC&round=S42_PerformanceEvaluation_Event2Round1_NAC",
+      "policy": "performance-nac-outside-top50",
+      "evidence": "Official rule payout boundary, event schedule, original saved Epic-ID leaderboard row and no matching existing record"
+    },
+    {
+      "id": "auto-s42-beee7acc0690",
+      "decision": "published",
+      "recordId": "auto-s42-beee7acc0690",
+      "source": "https://www.fortnite.com/competitive/events/S42_PerformanceEvaluation/?region=NAC&round=S42_PerformanceEvaluation_Event2Round1_NAC",
+      "rule": "https://www.fortnite.com/competitive/events/S42_PerformanceEvaluation/?region=NAC&round=S42_PerformanceEvaluation_Event2Round1_NAC",
+      "policy": "performance-nac-outside-top50",
+      "evidence": "Official rule payout boundary, event schedule, original saved Epic-ID leaderboard row and no matching existing record"
+    },
+    {
+      "id": "auto-s42-c1d050bf8a39",
+      "decision": "published",
+      "recordId": "auto-s42-c1d050bf8a39",
+      "source": "https://www.fortnite.com/competitive/events/S42_PerformanceEvaluation/?region=NAC&round=S42_PerformanceEvaluation_Event2Round1_NAC",
+      "rule": "https://www.fortnite.com/competitive/events/S42_PerformanceEvaluation/?region=NAC&round=S42_PerformanceEvaluation_Event2Round1_NAC",
+      "policy": "performance-nac-outside-top50",
+      "evidence": "Official rule payout boundary, event schedule, original saved Epic-ID leaderboard row and no matching existing record"
+    },
+    {
+      "id": "auto-s31-81d19f0d8ad6",
+      "decision": "published",
+      "recordId": "auto-s31-81d19f0d8ad6",
+      "source": "https://www.fortnite.com/competitive/events/S31_DuosCashCup/?region=ME&round=S31_DuosCashCup_Event4Round1_ME",
+      "rule": "https://www.fortnite.com/news/duos-cash-cups-chapter-5-season-4-official-rules",
+      "policy": "2024-duo-round1",
+      "evidence": "Official rule payout boundary, event schedule, original saved Epic-ID leaderboard row and no matching existing record"
+    },
+    {
+      "id": "auto-s31-85ca36c222c8",
+      "decision": "published",
+      "recordId": "auto-s31-85ca36c222c8",
+      "source": "https://www.fortnite.com/competitive/events/S31_DuosCashCup/?region=ME&round=S31_DuosCashCup_Event4Round1_ME",
+      "rule": "https://www.fortnite.com/news/duos-cash-cups-chapter-5-season-4-official-rules",
+      "policy": "2024-duo-round1",
+      "evidence": "Official rule payout boundary, event schedule, original saved Epic-ID leaderboard row and no matching existing record"
+    },
+    {
+      "id": "auto-s31-e3d1e3559e56",
+      "decision": "published",
+      "recordId": "auto-s31-e3d1e3559e56",
+      "source": "https://www.fortnite.com/competitive/events/S31_DuosCashCup/?region=ME&round=S31_DuosCashCup_Event4Round1_ME",
+      "rule": "https://www.fortnite.com/news/duos-cash-cups-chapter-5-season-4-official-rules",
+      "policy": "2024-duo-round1",
+      "evidence": "Official rule payout boundary, event schedule, original saved Epic-ID leaderboard row and no matching existing record"
+    },
+    {
+      "id": "auto-s31-118adc8b2ebe",
+      "decision": "published",
+      "recordId": "auto-s31-118adc8b2ebe",
+      "source": "https://www.fortnite.com/competitive/events/S31_DuosCashCup/?region=ME&round=S31_DuosCashCup_Event4Round1_ME",
+      "rule": "https://www.fortnite.com/news/duos-cash-cups-chapter-5-season-4-official-rules",
+      "policy": "2024-duo-round1",
+      "evidence": "Official rule payout boundary, event schedule, original saved Epic-ID leaderboard row and no matching existing record"
+    },
+    {
+      "id": "auto-s31-4b386cd3fe50",
+      "decision": "published",
+      "recordId": "auto-s31-4b386cd3fe50",
+      "source": "https://www.fortnite.com/competitive/events/S31_DuosCashCup/?region=ME&round=S31_DuosCashCup_Event4Round1_ME",
+      "rule": "https://www.fortnite.com/news/duos-cash-cups-chapter-5-season-4-official-rules",
+      "policy": "2024-duo-round1",
+      "evidence": "Official rule payout boundary, event schedule, original saved Epic-ID leaderboard row and no matching existing record"
+    },
+    {
+      "id": "auto-s31-223244cf726b",
+      "decision": "published",
+      "recordId": "auto-s31-223244cf726b",
+      "source": "https://www.fortnite.com/competitive/events/S31_DuosCashCup/?region=ME&round=S31_DuosCashCup_Event4Round1_ME",
+      "rule": "https://www.fortnite.com/news/duos-cash-cups-chapter-5-season-4-official-rules",
+      "policy": "2024-duo-round1",
+      "evidence": "Official rule payout boundary, event schedule, original saved Epic-ID leaderboard row and no matching existing record"
+    },
+    {
+      "id": "auto-s31-1b810ca09f61",
+      "decision": "published",
+      "recordId": "auto-s31-1b810ca09f61",
+      "source": "https://www.fortnite.com/competitive/events/S31_DuosCashCup/?region=ME&round=S31_DuosCashCup_Event4Round1_ME",
+      "rule": "https://www.fortnite.com/news/duos-cash-cups-chapter-5-season-4-official-rules",
+      "policy": "2024-duo-round1",
+      "evidence": "Official rule payout boundary, event schedule, original saved Epic-ID leaderboard row and no matching existing record"
+    },
+    {
+      "id": "auto-s31-21b92a395d4f",
+      "decision": "published",
+      "recordId": "auto-s31-21b92a395d4f",
+      "source": "https://www.fortnite.com/competitive/events/S31_DuosCashCup/?region=ME&round=S31_DuosCashCup_Event4Round1_ME",
+      "rule": "https://www.fortnite.com/news/duos-cash-cups-chapter-5-season-4-official-rules",
+      "policy": "2024-duo-round1",
+      "evidence": "Official rule payout boundary, event schedule, original saved Epic-ID leaderboard row and no matching existing record"
+    },
+    {
+      "id": "auto-s31-8649baa73bc6",
+      "decision": "published",
+      "recordId": "auto-s31-8649baa73bc6",
+      "source": "https://www.fortnite.com/competitive/events/S31_DuosCashCup/?region=ME&round=S31_DuosCashCup_Event4Round1_ME",
+      "rule": "https://www.fortnite.com/news/duos-cash-cups-chapter-5-season-4-official-rules",
+      "policy": "2024-duo-round1",
+      "evidence": "Official rule payout boundary, event schedule, original saved Epic-ID leaderboard row and no matching existing record"
     }
   ]
 }
