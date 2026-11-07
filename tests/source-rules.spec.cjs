@@ -6,8 +6,8 @@ test('参照ソース内で公式大会ルールが検索でき、地域別通�
  const root=page.locator('#source-rules');
  await expect(root).toBeVisible();
  await expect(page.getByRole('heading',{name:'🏆 大会ルール'})).toBeVisible();
- await expect(page.locator('#source-rule-overview')).toContainText('公式規則登録 9');
- await expect(root.locator('.source-rule-card')).toHaveCount(9);
+ await expect(page.locator('#source-rule-overview')).toContainText('公式規則登録 10');
+ await expect(root.locator('.source-rule-card')).toHaveCount(10);
  await expect(root.locator('.source-rule-card a[href*="fortnite.com"]')).not.toHaveCount(0);
  await page.locator('#source-rule-search').fill('zoro');
  await expect(root.locator('.source-rule-card')).toHaveCount(2);
@@ -23,7 +23,7 @@ test('参照ソース内で公式大会ルールが検索でき、地域別通�
 
 test('未登録大会は誤って賞金やスキンを表示せず、検索・追加表示が可能',async({page})=>{
  await page.goto('/?season=all#about');
- await expect(page.locator('#source-rule-overview')).toContainText('公式規則登録 9');
+ await expect(page.locator('#source-rule-overview')).toContainText('公式規則登録 10');
  await page.locator('#source-rule-filter').selectOption('pending');
  const cards=page.locator('#source-rule-results .source-rule-card');
  await expect(cards).toHaveCount(12);
@@ -33,5 +33,40 @@ test('未登録大会は誤って賞金やスキンを表示せず、検索・�
  await expect(cards).toHaveCount(24);
  await page.locator('#source-rule-region').selectOption('BR');
  await expect(cards).toHaveCount(12);
- await expect(page.locator('#source-rule-status')).toContainText('公式ルール登録済み 9大会');
+ await expect(page.locator('#source-rule-status')).toContainText('公式ルール登録済み 10大会');
+});
+
+test('Trios Cash Cup displays 5 verified regional individual payout ladders with NAW pending',async({page})=>{
+ await page.goto('/?season=all#about');
+ await expect(page.locator('#source-rule-overview')).toContainText('公式規則登録 10');
+ await page.locator('#source-rule-search').fill('trios cash');
+ const card=page.locator('.source-rule-card[data-rule-id="ch7s5-trios-cash-cup"]');
+ await expect(card).toBeVisible();
+ await expect(card).toContainText('確認専用');
+ await page.locator('#source-rule-region').selectOption('EU');
+ await expect(card).toContainText('1位');
+ await expect(card).toContainText('$1,000');
+ await expect(card).toContainText('6〜10位');
+ await expect(card).toContainText('$200');
+ await expect(card).toContainText('11〜20位');
+ await expect(card).toContainText('Diamond以上');
+ await expect(card).toContainText('Champion以上');
+ await page.locator('#source-rule-region').selectOption('BR');
+ await expect(card).toContainText('4〜5位');
+ await expect(card).toContainText('$150');
+ await page.locator('#source-rule-region').selectOption('NAC');
+ await expect(card).toContainText('11〜15位');
+ await expect(card).toContainText('$100');
+ await page.locator('#source-rule-region').selectOption('NAW');
+ await expect(card).toContainText('賞金表未登録');
+ await expect(card).not.toContainText('$400');
+ await page.locator('#source-rule-region').selectOption('OCE');
+ await expect(card).toContainText('$300');
+ await page.locator('#source-rule-region').selectOption('ME');
+ await expect(card).toContainText('$250');
+ const dates=card.locator('.source-rule-dates');
+ await dates.locator('summary').click();
+ await expect(dates).toContainText('2026-11-07');
+ await expect(dates).toContainText('20:00');
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth+2)).toBe(true);
 });
