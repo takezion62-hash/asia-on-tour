@@ -11,7 +11,7 @@
   "provider": "osirion",
   "linkedPlayers": 509,
   "trackedWindows": 2859,
-  "found": 51,
+  "found": 34,
   "skipped": 35,
   "imported": 16,
   "scannedPages": 80,
@@ -20,7 +20,7 @@
   "alreadyRegistered": 1013,
   "autoApprovedTotal": 648,
   "invalidCachedCandidates": 1,
-  "manualReviewCandidates": 51,
+  "manualReviewCandidates": 34,
   "autoApprovedCosmeticThisRun": 2,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
@@ -40,7 +40,7 @@
     }
   ],
   "reviewOnlyWindows": 1275,
-  "reviewOnlyCandidates": 21,
+  "reviewOnlyCandidates": 13,
   "unmappedEvents": 241,
   "unmappedEventIds": [
     "S30_ConsoleCashCups",
@@ -56,5 +56,8 @@
     "S30_Reload",
     "S30_ReloadZB"
   ],
-  "message": "Osirionで509アカウントIDを追跡。今回の公式規則による自動承認16件、追加確認待ち51件、名義照合保留3件。"
+  "message": "2026/11/07過去候補のルール・本人確認: 17戦績を$0/スプレーで掲載、0件既存一致、1件保留。過去確認待ち34件。",
+  "manuallyPublished": 17,
+  "manuallyResolvedDuplicates": 0,
+  "lastReviewedBatchAt": "2026-11-07T08:58:33.160Z"
 }
