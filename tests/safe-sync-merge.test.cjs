@@ -121,7 +121,7 @@ test('scanner must not mutate or delete baseline public rows or update announcem
  x.scanned.docs['results.json'][0].rank=99;
  assert.throws(()=>mergeSnapshots(x.scope,x.base,x.scanned,x.latest),/changed\/deleted existing results/);
  const y=scenario();
- y.scanned.docs['updates.json'].entries[0].title='rewritten cash announcement';
+ y.scanned.docs['updates.json'].entries.find(x=>x.id==='old-log').title='rewritten cash announcement';
  assert.throws(()=>mergeSnapshots(y.scope,y.base,y.scanned,y.latest),/changed\/deleted existing entries/);
 });
 test('fail closed if player identity or approval rule source changed on remote during scan',()=>{
