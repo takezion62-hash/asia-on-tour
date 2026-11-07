@@ -104,5 +104,6 @@
       console.error('Source rule master load failed',error);
     }
   }
+  document.querySelector('#source-rule-jump')?.addEventListener('click',()=>root.scrollIntoView({behavior:'smooth',block:'start'}));
   load();
 })();
