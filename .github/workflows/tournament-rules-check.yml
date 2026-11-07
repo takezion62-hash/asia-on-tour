@@ -10,6 +10,8 @@ on:
       - schedule.json
       - scripts/validate-tournament-rules.cjs
       - scripts/automatic-cash-approval.cjs
+      - scripts/automatic-performance-approval.cjs
+      - tests/automatic-performance-approval.test.cjs
       - tests/automatic-cash-approval.test.cjs
       - tests/tournament-rules.test.cjs
       - tests/source-rules.spec.cjs
@@ -24,6 +26,8 @@ on:
       - schedule.json
       - scripts/validate-tournament-rules.cjs
       - scripts/automatic-cash-approval.cjs
+      - scripts/automatic-performance-approval.cjs
+      - tests/automatic-performance-approval.test.cjs
       - tests/automatic-cash-approval.test.cjs
       - tests/tournament-rules.test.cjs
       - tests/source-rules.spec.cjs
