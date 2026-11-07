@@ -1,7 +1,7 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-07T16:45:33.123Z",
+  "checkedAt": "2026-11-07T18:16:07.599Z",
   "mode": "review",
   "scope": "history",
   "dateMode": "rolling",
@@ -10,28 +10,28 @@
   "toDate": "2026-11-07",
   "provider": "osirion",
   "linkedPlayers": 522,
-  "trackedWindows": 2909,
-  "found": 103,
-  "skipped": 11,
-  "imported": 0,
+  "trackedWindows": 2910,
+  "found": 76,
+  "skipped": 8,
+  "imported": 48,
   "scannedPages": 80,
-  "completedWindows": 170,
+  "completedWindows": 173,
   "identityConflicts": 3,
-  "alreadyRegistered": 1172,
-  "autoApprovedTotal": 734,
+  "alreadyRegistered": 1279,
+  "autoApprovedTotal": 782,
   "invalidCachedCandidates": 1,
-  "manualReviewCandidates": 103,
+  "manualReviewCandidates": 76,
   "autoApprovedCosmeticThisRun": 0,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
-  "autoApprovedUnrealThisRun": 0,
+  "autoApprovedUnrealThisRun": 44,
   "timeLimitReached": false,
   "retryWindows": 12,
   "transientFailures": 0,
   "malformedFailures": 0,
   "skippedLeaderboards": [],
-  "reviewOnlyWindows": 1289,
-  "reviewOnlyCandidates": 85,
+  "reviewOnlyWindows": 1290,
+  "reviewOnlyCandidates": 45,
   "unmappedEvents": 240,
   "unmappedEventIds": [
     "S30_ConsoleCashCups",
@@ -47,44 +47,44 @@
     "S30_Reload",
     "S30_ReloadZB"
   ],
-  "message": "過去大会の公式ルールと取得済み連続順位ページから54件を手動照合し追加。予選突破40件、通過圏外参加14件、現金賞金$0。未取得ページの決勝賞金は推定せず、確認待ち103件。",
+  "message": "最新版と安全統合：新規掲載48件、重複スキップ0件、要確認の競合0件、確認待ち76件。既存の戦績・賞金は保持。",
   "manuallyPublished": 166,
   "manuallyResolvedDuplicates": 2,
   "lastReviewedBatchAt": "2026-11-07T17:17:38.476Z",
   "manuallyCorrected": 1,
   "lastCorrectedReviewAt": "2026-11-07T09:14:30.244Z",
   "concurrentMerge": {
-    "appended": 0,
+    "appended": 48,
     "alreadyPublished": 0,
     "reviewConflicts": 0,
-    "keptPending": 210,
-    "reconciledAt": "2026-11-07T16:45:35.446Z"
+    "keptPending": 76,
+    "reconciledAt": "2026-11-07T18:16:09.590Z"
   },
   "coverage": {
-    "total": 2909,
-    "completed": 170,
-    "notStarted": 2707,
-    "partial": 20,
+    "total": 2910,
+    "completed": 173,
+    "notStarted": 2706,
+    "partial": 19,
     "retryWaiting": 12,
     "retryDue": 0,
-    "remaining": 2739,
+    "remaining": 2737,
     "retryCount": 12,
-    "completionPercent": 5.8,
+    "completionPercent": 5.9,
     "byRegion": {
       "OCE": {
         "total": 515,
-        "completed": 25,
-        "pending": 490
+        "completed": 26,
+        "pending": 489
       },
       "ME": {
-        "total": 510,
-        "completed": 48,
+        "total": 511,
+        "completed": 49,
         "pending": 462
       },
       "EU": {
         "total": 528,
-        "completed": 32,
-        "pending": 496
+        "completed": 33,
+        "pending": 495
       },
       "BR": {
         "total": 509,
@@ -110,12 +110,12 @@
       },
       "2025": {
         "total": 678,
-        "completed": 21,
-        "pending": 657
+        "completed": 23,
+        "pending": 655
       },
       "2026": {
-        "total": 1257,
-        "completed": 116,
+        "total": 1258,
+        "completed": 117,
         "pending": 1141
       }
     },
