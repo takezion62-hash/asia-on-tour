@@ -204,8 +204,16 @@ function validateData(data) {
       '同じ大会・地域・ラウンド・選手の戦績が「'+semanticRecords.get(uniqueKey)+'」と重複しています。異なる出典は既存戦績へ統合してください。');
     else semanticRecords.set(uniqueKey,id);
     const teamSize = { solo: 1, duo: 2, trio: 3, squad: 4 }[catalog?.team];
-    if (teamSize) check(people.length === teamSize, 'results.json', id, 'players',
-      ({ solo: 'ソロ', duo: 'デュオ', trio: 'トリオ', squad: 'スクワッド' }[catalog.team]) + '大会の選手は' + teamSize + '名で指定してください。');
+    // In cross-region teams, 'players' lists only ASIA ON TOUR's eligible
+    // players, while 'teamPlayers' retains the complete competitive roster.
+    // Validate the full team without adding non-ASIA teammates to cash totals.
+    const completeTeam = Array.isArray(row.teamPlayers) ? row.teamPlayers : people;
+    const partialEligibleRoster = people.length < teamSize &&
+      Array.isArray(row.teamPlayers) && completeTeam.length === teamSize &&
+      completeTeam.every(text) && new Set(completeTeam).size === completeTeam.length &&
+      people.every(name => completeTeam.includes(name));
+    if (teamSize) check(people.length === teamSize || partialEligibleRoster, 'results.json', id, 'players',
+      ({ solo: 'ソロ', duo: 'デュオ', trio: 'トリオ', squad: 'スクワッド' }[catalog.team]) + '大会のチーム全員（teamPlayersを含む）は' + teamSize + '名で指定してください。');
     // A prize-eligible final is the same round for every player, even when
     // a particular player's verified cash is $0 or not yet confirmed.
     // Separate cash outcome (prize) from the round category (kind/round).
