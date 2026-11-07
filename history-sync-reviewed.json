@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-07T22:53:18.783Z",
+  "reviewedAt": "2026-11-07T23:01:00.370Z",
   "description": "Resolved historic review candidates: published, duplicate or participation",
   "entries": [
     {
@@ -5982,6 +5982,198 @@
       "vrs": 0,
       "prize": 0,
       "note": "部分取得スナップショットの個別行と本人名寄せを確認。大会全ページの取得完了は未確認。0VR/$0のみ確定扱い。"
+    },
+    {
+      "id": "auto-s41-f57919348910",
+      "decision": "published",
+      "recordId": "auto-s41-f57919348910",
+      "policy": "source-backed-attendance-reward-aware",
+      "source": "https://www.fortnite.com/competitive/events/S41_PSCupDaysOfPlay/?region=NAW&round=S41_PSCupDaysOfPlay_Qualifier_NAW",
+      "verifiedAt": "2026-11-07T23:01:00.370Z",
+      "approvedBy": "ChatGPT (user-authorized GitHub integration)",
+      "rank": 2567,
+      "prize": 0,
+      "leaderboardPagesRetrieved": 34,
+      "leaderboardTotalPages": 70
+    },
+    {
+      "id": "auto-s41-1b0d3954a2bb",
+      "decision": "published",
+      "recordId": "auto-s41-1b0d3954a2bb",
+      "policy": "source-backed-attendance-reward-aware",
+      "source": "https://www.fortnite.com/competitive/events/S41_FNCSCommunityCup/?region=EU&round=S41_FNCSCommunityCup_EU",
+      "verifiedAt": "2026-11-07T23:01:00.370Z",
+      "approvedBy": "ChatGPT (user-authorized GitHub integration)",
+      "rank": 1284,
+      "prize": 0,
+      "leaderboardPagesRetrieved": 22,
+      "leaderboardTotalPages": 100
+    },
+    {
+      "id": "auto-s42-d2331a06d473",
+      "decision": "published",
+      "recordId": "auto-s42-d2331a06d473",
+      "policy": "source-backed-attendance-reward-aware",
+      "source": "https://www.fortnite.com/competitive/events/S42_MadisonBeerIconCup/?region=NAC&round=S42_MadisonBeerIconCup_NAC",
+      "verifiedAt": "2026-11-07T23:01:00.370Z",
+      "approvedBy": "ChatGPT (user-authorized GitHub integration)",
+      "rank": 5646,
+      "prize": 0,
+      "leaderboardPagesRetrieved": 97,
+      "leaderboardTotalPages": 100
+    },
+    {
+      "id": "auto-s41-76bd268d0163",
+      "decision": "voided-not-published",
+      "event": "2026-06-07 OCE Days of Play PlayStation Cup BR Qualifier 1",
+      "source": "https://www.fortnite.com/competitive/events/S41_PSCupDaysOfPlay/?region=OCE&round=S41_PSCupDaysOfPlay_Qualifier_OCE",
+      "voidEvidence": "https://fortnitetracker.com/events/epicgames_S41_PSCupDaysOfPlay_OCE?window=S41_PSCupDaysOfPlay_Qualifier_OCE",
+      "reviewedAt": "2026-11-08",
+      "evidence": "Fortnite Tracker identifies the exact session as VOIDED / rescheduled by Epic. Disqualified session, not a valid credited result, spray, qualification or cash."
+    },
+    {
+      "id": "auto-s41-78d6dece1f36",
+      "decision": "voided-not-published",
+      "event": "2026-06-07 OCE Days of Play PlayStation Cup BR Qualifier 1",
+      "source": "https://www.fortnite.com/competitive/events/S41_PSCupDaysOfPlay/?region=OCE&round=S41_PSCupDaysOfPlay_Qualifier_OCE",
+      "voidEvidence": "https://fortnitetracker.com/events/epicgames_S41_PSCupDaysOfPlay_OCE?window=S41_PSCupDaysOfPlay_Qualifier_OCE",
+      "reviewedAt": "2026-11-08",
+      "evidence": "Fortnite Tracker identifies the exact session as VOIDED / rescheduled by Epic. Disqualified session, not a valid credited result, spray, qualification or cash."
+    },
+    {
+      "id": "auto-s41-1a7bae583daa",
+      "decision": "voided-not-published",
+      "event": "2026-06-07 OCE Days of Play PlayStation Cup BR Qualifier 1",
+      "source": "https://www.fortnite.com/competitive/events/S41_PSCupDaysOfPlay/?region=OCE&round=S41_PSCupDaysOfPlay_Qualifier_OCE",
+      "voidEvidence": "https://fortnitetracker.com/events/epicgames_S41_PSCupDaysOfPlay_OCE?window=S41_PSCupDaysOfPlay_Qualifier_OCE",
+      "reviewedAt": "2026-11-08",
+      "evidence": "Fortnite Tracker identifies the exact session as VOIDED / rescheduled by Epic. Disqualified session, not a valid credited result, spray, qualification or cash."
+    },
+    {
+      "id": "auto-s41-7b90de7100de",
+      "decision": "voided-not-published",
+      "event": "2026-06-07 OCE Days of Play PlayStation Cup BR Qualifier 1",
+      "source": "https://www.fortnite.com/competitive/events/S41_PSCupDaysOfPlay/?region=OCE&round=S41_PSCupDaysOfPlay_Qualifier_OCE",
+      "voidEvidence": "https://fortnitetracker.com/events/epicgames_S41_PSCupDaysOfPlay_OCE?window=S41_PSCupDaysOfPlay_Qualifier_OCE",
+      "reviewedAt": "2026-11-08",
+      "evidence": "Fortnite Tracker identifies the exact session as VOIDED / rescheduled by Epic. Disqualified session, not a valid credited result, spray, qualification or cash."
+    },
+    {
+      "id": "auto-s41-3e431a5f914f",
+      "decision": "voided-not-published",
+      "event": "2026-06-07 OCE Days of Play PlayStation Cup BR Qualifier 1",
+      "source": "https://www.fortnite.com/competitive/events/S41_PSCupDaysOfPlay/?region=OCE&round=S41_PSCupDaysOfPlay_Qualifier_OCE",
+      "voidEvidence": "https://fortnitetracker.com/events/epicgames_S41_PSCupDaysOfPlay_OCE?window=S41_PSCupDaysOfPlay_Qualifier_OCE",
+      "reviewedAt": "2026-11-08",
+      "evidence": "Fortnite Tracker identifies the exact session as VOIDED / rescheduled by Epic. Disqualified session, not a valid credited result, spray, qualification or cash."
+    },
+    {
+      "id": "auto-s41-e5a3ecd26146",
+      "decision": "voided-not-published",
+      "event": "2026-06-07 OCE Days of Play PlayStation Cup BR Qualifier 1",
+      "source": "https://www.fortnite.com/competitive/events/S41_PSCupDaysOfPlay/?region=OCE&round=S41_PSCupDaysOfPlay_Qualifier_OCE",
+      "voidEvidence": "https://fortnitetracker.com/events/epicgames_S41_PSCupDaysOfPlay_OCE?window=S41_PSCupDaysOfPlay_Qualifier_OCE",
+      "reviewedAt": "2026-11-08",
+      "evidence": "Fortnite Tracker identifies the exact session as VOIDED / rescheduled by Epic. Disqualified session, not a valid credited result, spray, qualification or cash."
+    },
+    {
+      "id": "auto-s41-cbc759264f3e",
+      "decision": "voided-not-published",
+      "event": "2026-06-07 OCE Days of Play PlayStation Cup BR Qualifier 1",
+      "source": "https://www.fortnite.com/competitive/events/S41_PSCupDaysOfPlay/?region=OCE&round=S41_PSCupDaysOfPlay_Qualifier_OCE",
+      "voidEvidence": "https://fortnitetracker.com/events/epicgames_S41_PSCupDaysOfPlay_OCE?window=S41_PSCupDaysOfPlay_Qualifier_OCE",
+      "reviewedAt": "2026-11-08",
+      "evidence": "Fortnite Tracker identifies the exact session as VOIDED / rescheduled by Epic. Disqualified session, not a valid credited result, spray, qualification or cash."
+    },
+    {
+      "id": "auto-s41-11d38341cbed",
+      "decision": "voided-not-published",
+      "event": "2026-06-07 OCE Days of Play PlayStation Cup BR Qualifier 1",
+      "source": "https://www.fortnite.com/competitive/events/S41_PSCupDaysOfPlay/?region=OCE&round=S41_PSCupDaysOfPlay_Qualifier_OCE",
+      "voidEvidence": "https://fortnitetracker.com/events/epicgames_S41_PSCupDaysOfPlay_OCE?window=S41_PSCupDaysOfPlay_Qualifier_OCE",
+      "reviewedAt": "2026-11-08",
+      "evidence": "Fortnite Tracker identifies the exact session as VOIDED / rescheduled by Epic. Disqualified session, not a valid credited result, spray, qualification or cash."
+    },
+    {
+      "id": "auto-s41-f2c671da531c",
+      "decision": "voided-not-published",
+      "event": "2026-06-07 OCE Days of Play PlayStation Cup BR Qualifier 1",
+      "source": "https://www.fortnite.com/competitive/events/S41_PSCupDaysOfPlay/?region=OCE&round=S41_PSCupDaysOfPlay_Qualifier_OCE",
+      "voidEvidence": "https://fortnitetracker.com/events/epicgames_S41_PSCupDaysOfPlay_OCE?window=S41_PSCupDaysOfPlay_Qualifier_OCE",
+      "reviewedAt": "2026-11-08",
+      "evidence": "Fortnite Tracker identifies the exact session as VOIDED / rescheduled by Epic. Disqualified session, not a valid credited result, spray, qualification or cash."
+    },
+    {
+      "id": "auto-s41-eb9bd4e2a2b6",
+      "decision": "voided-not-published",
+      "event": "2026-06-07 OCE Days of Play PlayStation Cup BR Qualifier 1",
+      "source": "https://www.fortnite.com/competitive/events/S41_PSCupDaysOfPlay/?region=OCE&round=S41_PSCupDaysOfPlay_Qualifier_OCE",
+      "voidEvidence": "https://fortnitetracker.com/events/epicgames_S41_PSCupDaysOfPlay_OCE?window=S41_PSCupDaysOfPlay_Qualifier_OCE",
+      "reviewedAt": "2026-11-08",
+      "evidence": "Fortnite Tracker identifies the exact session as VOIDED / rescheduled by Epic. Disqualified session, not a valid credited result, spray, qualification or cash."
+    },
+    {
+      "id": "auto-s41-d21491661281",
+      "decision": "voided-not-published",
+      "event": "2026-06-07 OCE Days of Play PlayStation Cup BR Qualifier 1",
+      "source": "https://www.fortnite.com/competitive/events/S41_PSCupDaysOfPlay/?region=OCE&round=S41_PSCupDaysOfPlay_Qualifier_OCE",
+      "voidEvidence": "https://fortnitetracker.com/events/epicgames_S41_PSCupDaysOfPlay_OCE?window=S41_PSCupDaysOfPlay_Qualifier_OCE",
+      "reviewedAt": "2026-11-08",
+      "evidence": "Fortnite Tracker identifies the exact session as VOIDED / rescheduled by Epic. Disqualified session, not a valid credited result, spray, qualification or cash."
+    },
+    {
+      "id": "auto-s41-2cda9ac99a7c",
+      "decision": "voided-not-published",
+      "event": "2026-06-07 OCE Days of Play PlayStation Cup BR Qualifier 1",
+      "source": "https://www.fortnite.com/competitive/events/S41_PSCupDaysOfPlay/?region=OCE&round=S41_PSCupDaysOfPlay_Qualifier_OCE",
+      "voidEvidence": "https://fortnitetracker.com/events/epicgames_S41_PSCupDaysOfPlay_OCE?window=S41_PSCupDaysOfPlay_Qualifier_OCE",
+      "reviewedAt": "2026-11-08",
+      "evidence": "Fortnite Tracker identifies the exact session as VOIDED / rescheduled by Epic. Disqualified session, not a valid credited result, spray, qualification or cash."
+    },
+    {
+      "id": "auto-s41-d8d4040c2cb0",
+      "decision": "voided-not-published",
+      "event": "2026-06-07 OCE Days of Play PlayStation Cup BR Qualifier 1",
+      "source": "https://www.fortnite.com/competitive/events/S41_PSCupDaysOfPlay/?region=OCE&round=S41_PSCupDaysOfPlay_Qualifier_OCE",
+      "voidEvidence": "https://fortnitetracker.com/events/epicgames_S41_PSCupDaysOfPlay_OCE?window=S41_PSCupDaysOfPlay_Qualifier_OCE",
+      "reviewedAt": "2026-11-08",
+      "evidence": "Fortnite Tracker identifies the exact session as VOIDED / rescheduled by Epic. Disqualified session, not a valid credited result, spray, qualification or cash."
+    },
+    {
+      "id": "auto-s41-d25cb274922e",
+      "decision": "voided-not-published",
+      "event": "2026-06-07 OCE Days of Play PlayStation Cup BR Qualifier 1",
+      "source": "https://www.fortnite.com/competitive/events/S41_PSCupDaysOfPlay/?region=OCE&round=S41_PSCupDaysOfPlay_Qualifier_OCE",
+      "voidEvidence": "https://fortnitetracker.com/events/epicgames_S41_PSCupDaysOfPlay_OCE?window=S41_PSCupDaysOfPlay_Qualifier_OCE",
+      "reviewedAt": "2026-11-08",
+      "evidence": "Fortnite Tracker identifies the exact session as VOIDED / rescheduled by Epic. Disqualified session, not a valid credited result, spray, qualification or cash."
+    },
+    {
+      "id": "auto-s41-e12453d607ab",
+      "decision": "voided-not-published",
+      "event": "2026-06-07 OCE Days of Play PlayStation Cup BR Qualifier 1",
+      "source": "https://www.fortnite.com/competitive/events/S41_PSCupDaysOfPlay/?region=OCE&round=S41_PSCupDaysOfPlay_Qualifier_OCE",
+      "voidEvidence": "https://fortnitetracker.com/events/epicgames_S41_PSCupDaysOfPlay_OCE?window=S41_PSCupDaysOfPlay_Qualifier_OCE",
+      "reviewedAt": "2026-11-08",
+      "evidence": "Fortnite Tracker identifies the exact session as VOIDED / rescheduled by Epic. Disqualified session, not a valid credited result, spray, qualification or cash."
+    },
+    {
+      "id": "auto-s41-179ecb09f64c",
+      "decision": "voided-not-published",
+      "event": "2026-06-07 OCE Days of Play PlayStation Cup BR Qualifier 1",
+      "source": "https://www.fortnite.com/competitive/events/S41_PSCupDaysOfPlay/?region=OCE&round=S41_PSCupDaysOfPlay_Qualifier_OCE",
+      "voidEvidence": "https://fortnitetracker.com/events/epicgames_S41_PSCupDaysOfPlay_OCE?window=S41_PSCupDaysOfPlay_Qualifier_OCE",
+      "reviewedAt": "2026-11-08",
+      "evidence": "Fortnite Tracker identifies the exact session as VOIDED / rescheduled by Epic. Disqualified session, not a valid credited result, spray, qualification or cash."
+    },
+    {
+      "id": "auto-s41-69daf95e91e8",
+      "decision": "voided-not-published",
+      "event": "2026-06-07 OCE Days of Play PlayStation Cup BR Qualifier 1",
+      "source": "https://www.fortnite.com/competitive/events/S41_PSCupDaysOfPlay/?region=OCE&round=S41_PSCupDaysOfPlay_Qualifier_OCE",
+      "voidEvidence": "https://fortnitetracker.com/events/epicgames_S41_PSCupDaysOfPlay_OCE?window=S41_PSCupDaysOfPlay_Qualifier_OCE",
+      "reviewedAt": "2026-11-08",
+      "evidence": "Fortnite Tracker identifies the exact session as VOIDED / rescheduled by Epic. Disqualified session, not a valid credited result, spray, qualification or cash."
     }
   ]
 }
