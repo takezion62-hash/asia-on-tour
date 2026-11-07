@@ -14,3 +14,8 @@
 .auto-sync-review summary{cursor:pointer;font-weight:750}
 .auto-sync-proposals{padding-left:19px;display:grid;gap:6px}
 @media(max-width:640px){.auto-sync-control{padding:15px}.auto-sync-status{grid-template-columns:repeat(2,minmax(0,1fr))}.auto-sync-stat{padding:10px 8px}.auto-sync-controls{gap:10px}}
+
+.auto-sync-coverage{grid-column:1/-1;padding:13px;border:1px solid #3a586d;border-radius:10px;background:#0f1c2d}
+.auto-sync-coverage>strong{font-size:13px;color:#d3f9ff}
+.auto-sync-coverage p{font-size:11px;margin:5px 0;color:#aec0d7}
+.auto-sync-coverage ul{margin:8px 0 0;padding-left:20px;display:grid;gap:5px;font-size:11px;color:#dceafb;overflow-wrap:anywhere}

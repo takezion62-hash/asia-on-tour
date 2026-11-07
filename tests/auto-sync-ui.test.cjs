@@ -22,3 +22,16 @@ test('Live AUTO SYNC remains in review-only mode and the browser cannot publish 
  assert.ok(ui.includes("new URL('auto-sync-review.json',base)"));
  assert.ok(!/fetch\([^;]*method\s*:\s*['"](?:POST|PUT|PATCH|DELETE)/i.test(ui));
 });
+
+test('both panels display incomplete coverage and overdue retry counts',()=>{
+ const js=read('auto-sync-ui.js');
+ assert.ok(js.includes('appendCoverage(area,s.coverage)'));
+ assert.ok(js.includes('appendCoverage(historyArea,status.coverage)'));
+ assert.ok(js.includes('再試行期限到来'));
+});
+
+test('window coverage also displays region and year detail',()=>{
+ const js=read('auto-sync-ui.js');
+ assert.ok(js.includes("['地域別',c.byRegion]"));
+ assert.ok(js.includes("['年別',c.byYear]"));
+});

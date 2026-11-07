@@ -4,6 +4,8 @@ on:
     branches: [main]
     paths:
       - "scripts/osirion-sync.cjs"
+      - "scripts/scan-coverage.cjs"
+      - "tests/scan-coverage.test.cjs"
       - "scripts/safe-sync-merge.cjs"
       - "tests/safe-sync-merge.test.cjs"
       - "scripts/verified-history-approval.cjs"
