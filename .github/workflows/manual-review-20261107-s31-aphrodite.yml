@@ -1,0 +1,54 @@
+name: AOT publish verified S31 Solo and EU Aphrodite history
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/manual-review-20261107-s31-aphrodite.yml"
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: aot-provider-results-main
+  cancel-in-progress: false
+jobs:
+  verify-and-publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 16
+    steps:
+      - name: Checkout exact latest review queue
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Check review code syntax
+        run: node --check scripts/manual-review-20261107-s31-aphrodite.cjs
+      - name: Verify individual score, original Epic checkpoint, cutoffs and payouts
+        run: node scripts/manual-review-20261107-s31-aphrodite.cjs
+      - name: Validate all site records and updates
+        run: npm run validate
+      - name: Check historical approval and prize regressions
+        run: node --test tests/verified-history-approval.test.cjs tests/approval-history.test.cjs tests/automatic-unreal-approval.test.cjs
+      - name: Commit only validated records, without overwriting concurrent writes
+        run: |
+          set -euo pipefail
+          git add results.json history-sync-review.json history-sync-reviewed.json history-sync-status.json updates.json
+          if git diff --cached --quiet; then
+            echo "No verified records to publish"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "data: publish S31 Solo Victory cash and verified Aphrodite skin results"
+          for attempt in 1 2 3; do
+            git pull --rebase origin main || {
+              git rebase --abort || true
+              echo "::error::A concurrent update conflicted, leave data untouched"
+              exit 1
+            }
+            git push origin HEAD:main && exit 0
+            sleep $((attempt * 3))
+          done
+          exit 1
