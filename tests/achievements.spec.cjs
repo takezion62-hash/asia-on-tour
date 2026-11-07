@@ -169,7 +169,7 @@ test('破壊神は人数別の高キル基準、ダブルクラウンはレア�
   await expect(double).toHaveAttribute('data-special-rarity','rare');
   await destruction.locator('summary').click();
   await expect(destruction.locator('[data-special-evidence-id="test-destruction-solo-65"]')).toContainText('ソロ 65K / 基準65K');
-  await expect(page.locator('[data-special-id="twenty-kills"][data-special-rarity="epic"]')).toBeVisible();
+  await expect(page.locator('[data-special-id="twenty-kills"][data-special-rarity="legendary"]')).toBeVisible();
 });
 
 
