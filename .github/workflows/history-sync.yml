@@ -5,6 +5,8 @@ on:
     paths:
       - "scripts/osirion-sync.cjs"
       - "scripts/audit-pending-history-20261108.cjs"
+      - "scripts/publish-verified-s35-console-duos-20261108.cjs"
+      - "tests/publish-verified-s35-console-duos-20261108.test.cjs"
       - "scripts/scan-coverage.cjs"
       - "tests/scan-coverage.test.cjs"
       - "scripts/safe-sync-merge.cjs"
@@ -94,4 +96,36 @@ jobs:
             sleep $((attempt * 3))
           done
           echo "SAFE_HISTORY_MERGE failed after 5 conflict-safe attempts"
+          exit 1
+
+      - name: Publish source-confirmed S35 zero-VR teams and close exact duplicates
+        run: |
+          set -euo pipefail
+          # Only confirmed official May 2025 0VR/$0 teams, from a completed
+          # 3-page Epic leaderboard, with archive/identity and collision checks.
+          # Rebuild against latest main each attempt: no force push or JSON rebase.
+          for attempt in 1 2 3 4 5; do
+            echo "VERIFIED_HISTORY_PUBLICATION attempt ${attempt}/5"
+            git fetch origin main
+            git reset --hard origin/main
+            node scripts/publish-verified-s35-console-duos-20261108.cjs --dry-run
+            node scripts/publish-verified-s35-console-duos-20261108.cjs
+            npm run validate
+            node --test tests/publish-verified-s35-console-duos-20261108.test.cjs tests/safe-sync-merge.test.cjs
+            git add results.json updates.json history-sync-review.json history-sync-reviewed.json history-sync-status.json
+            if git diff --cached --quiet; then
+              echo "VERIFIED_HISTORY_PUBLICATION already complete; no new rows"
+              exit 0
+            fi
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git commit -m "data: publish source-verified historical 0VR Console Duos and resolve duplicate candidates"
+            if git push origin HEAD:main; then
+              echo "VERIFIED_HISTORY_PUBLICATION committed to main"
+              exit 0
+            fi
+            echo "Another writer updated main; re-evaluating against latest published rows"
+            sleep $((attempt * 3))
+          done
+          echo "VERIFIED_HISTORY_PUBLICATION failed after 5 attempts"
           exit 1
