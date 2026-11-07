@@ -236,7 +236,7 @@
       let label=String(round||'').trim();
       if(tournamentId==='ch7s1-one-million-unreal-cup'&&/^(?:Session\s*1|単一開催枠)\s*\//iu.test(label))
         return 'Session 1 / 賞金決勝';
-      if(['ch7s3-champion-aphrodite-fncs-cup-battle-royale','ch7s4-madison-beer-icon-cup-reload'].includes(tournamentId)
+      if(['ch7s3-champion-aphrodite-fncs-cup-battle-royale','ch7s4-madison-beer-icon-cup-reload','ch7s5-one-piece-zoro-cup-battle-royale','ch7s5-one-piece-zoro-mobile-cup'].includes(tournamentId)
          &&/^(?:Session\s*1|単一開催枠)\s*\//iu.test(label))
         return 'Session 1 / スキン大会';
       if(tournamentId==='ch7s2-fncs-division-1'
@@ -263,7 +263,7 @@
     }
     function canonicalTournamentKind(kind,tournamentId,round){
       if(tournamentId==='ch7s1-one-million-unreal-cup'&&/^(?:Session\s*1|単一開催枠)\s*\//iu.test(String(round||'')))return '賞金決勝';
-      if(['ch7s3-champion-aphrodite-fncs-cup-battle-royale','ch7s4-madison-beer-icon-cup-reload'].includes(tournamentId)
+      if(['ch7s3-champion-aphrodite-fncs-cup-battle-royale','ch7s4-madison-beer-icon-cup-reload','ch7s5-one-piece-zoro-cup-battle-royale','ch7s5-one-piece-zoro-mobile-cup'].includes(tournamentId)
         &&/^(?:Session\s*1|単一開催枠)\s*\//iu.test(String(round||'')))return 'スキン大会';
       if(tournamentId==='ch7s2-fncs-division-1'
         &&/^Week\s*\d+\s*·\s*Final\s*\//iu.test(String(round||'')))return '賞金決勝';

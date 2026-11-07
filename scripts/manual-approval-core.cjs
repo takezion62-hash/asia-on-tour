@@ -5,6 +5,7 @@
  * final authorization. Unknown prizes, qualifications and identity stay unknown.
  */
 const {decide:verifiedRuleDecide}=require('./verified-history-approval.cjs');
+const {evaluate:cosmeticEvaluate}=require('./cosmetic-rank-rules.cjs');
 const allowedRegions=new Set(['ME','EU','NAC','NAW','OCE','BR']);
 const object=x=>x&&typeof x==='object'&&!Array.isArray(x);
 const roster=r=>Array.isArray(r?.players)&&r.players.length?r.players:[r?.player];
@@ -105,7 +106,7 @@ function checkpointFor(row,scans){
 }
 function apply(db,input){
   const ids=parseIds(input.ids),policy=input.policy;
-  if(!['attendance-only','verified-rule'].includes(policy))throw Error('承認種別はattendance-only / verified-ruleのみ');
+  if(!['attendance-only','verified-rule','cosmetic-rank'].includes(policy))throw Error('承認種別はattendance-only / verified-rule / cosmetic-rankのみ');
   if(input.confirmation!=='CONFIRM')throw Error('管理者の明示的なCONFIRMが必要です');
   const sources=candidatesFor(db),catalogs=new Map(db.tournaments.catalog.map(c=>[c.id,c]));
   const next={results:db.results.map(r=>({...r})),
@@ -132,6 +133,15 @@ function apply(db,input){
       if(row.reviewOnly!==true||row.kind!=='参加確認'||row.prize!==null)throw Error('出場確認専用の候補ではありません: '+id);
       const {reviewOnly,reviewReason,...base}=row;
       record={...base,prize:null,kind:'参加確認',note:'管理者がEpic ID・公式大会ウィンドウ・Osirion順位表の参加と数値を再確認。予選突破・賞金・スキン獲得は未確認のため加算しない。出典: '+row.source};
+    }else if(policy==='cosmetic-rank'){
+      if(row.reviewOnly!==true||row.kind!=='参加確認'||row.prize!==null)throw Error('スキン獲得判定の元候補ではありません: '+id);
+      const cosmetic=cosmeticEvaluate(row);
+      if(!cosmetic.eligible)throw Error('公式スキン順位基準の対象外: '+id+' / '+cosmetic.reason);
+      const {reviewOnly,reviewReason,...base}=row;
+      record={...base,round:'単一開催枠 / スキン獲得',kind:'スキン大会',prize:0,
+        note:'Epic公式規則で'+row.region+'上位'+cosmetic.cutoff+'位がスキン獲得対象。'+row.rank+
+          '位をEpic IDと保存済み順位表で照合。現金賞金$0。現物賞品や配布完了は未確認。規則: '+cosmetic.rule};
+      rule=cosmetic.rule;
     }else{
       const win={key:cp.key,eventId:session.eventId,windowId:session.sourceWindowId,dateJst:session.dateJst,
         tournamentId:row.tournamentId,seasonId:row.seasonId,region:row.region,round:row.round,kind:row.kind};
@@ -163,11 +173,11 @@ function apply(db,input){
     id:x.id,decision:'published',recordId:x.id,policy,approvedAt:input.timestamp,
     approvedBy:input.actor||'GitHub Actions / manual workflow',
     rule:x.rule||null,source:x.record.source,
-    evidence:'Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout.'
+    evidence:policy==='cosmetic-rank'?'Exact saved Epic ID, official event session and rank within official cosmetic award cutoff. No physical delivery or cash inferred.':'Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout.'
   })));
   const jst=new Date(Date.parse(input.timestamp)+9*3600000).toISOString().slice(0,10);
   const entry={id:'review-publication-'+input.runId,date:jst,type:'records',title:'管理者確認済み戦績 '+changes.length+'件を追加',
-    description:policy==='attendance-only'?'Epic ID・開催枠・順位表を再照合した出場確認のみ。賞金・予選突破・スキン獲得を未認定。':'公式規則に基づく予選突破または決勝0VRのみを確認。未確認賞金なし。',
+    description:policy==='attendance-only'?'Epic ID・開催枠・順位表を再照合した出場確認のみ。賞金・予選突破・スキン獲得を未認定。':policy==='cosmetic-rank'?'公式大会規則の地域別順位に基づくゲーム内スキン獲得。現金賞金$0、現物賞品・配布完了は未認定。':'公式規則に基づく予選突破または決勝0VRのみを確認。未確認賞金なし。',
     recordIds:changes.map(x=>x.id)};
   if(next.updates.entries.some(x=>x.id===entry.id))throw Error('この実行IDの更新履歴がすでに存在');
   next.updates.entries.unshift(entry);

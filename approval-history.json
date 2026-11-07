@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-07T00:00:46.070Z",
+  "reviewedAt": "2026-11-07T00:10:19.791Z",
   "entries": [
     {
       "id": "auto-s43-21408f1d31bc",
@@ -16,23 +16,25 @@
       "id": "auto-s43-aa95063081ba",
       "decision": "published",
       "recordId": "auto-s43-aa95063081ba",
-      "policy": "attendance-only",
+      "policy": "cosmetic-rank",
       "source": "https://www.fortnite.com/competitive/events/S43_OnePieceZoroCup_Mobile/?region=EU&round=S43_OnePieceZoroCup_Mobile_EU",
       "approvedAt": "2026-11-07T00:00:46.070Z",
       "approvedBy": "ChatGPT (user-authorized GitHub integration)",
-      "rule": null,
-      "evidence": "Exact cached API leaderboard and Epic ID, official event window and region; saved pagination unfinished, so recorded as participation only without inferred award, cash, or finality."
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/one-piece-zoro-cup-chapter-7-mini-season-official-rules",
+      "evidence": "Confirmed Epic ID + official session and ranking 35 in EU; region event cutoff top 200. Classified as in-game cosmetic winner by rank, not physical prize delivery confirmation; cash $0.",
+      "previousPolicy": "attendance-only"
     },
     {
       "id": "auto-s43-bf94f915aa36",
       "decision": "published",
       "recordId": "auto-s43-bf94f915aa36",
-      "policy": "attendance-only",
+      "policy": "cosmetic-rank",
       "source": "https://www.fortnite.com/competitive/events/S43_OnePieceZoroCup_Mobile/?region=EU&round=S43_OnePieceZoroCup_Mobile_EU",
       "approvedAt": "2026-11-07T00:00:46.070Z",
       "approvedBy": "ChatGPT (user-authorized GitHub integration)",
-      "rule": null,
-      "evidence": "Exact cached API leaderboard and Epic ID, official event window and region; saved pagination unfinished, so recorded as participation only without inferred award, cash, or finality."
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/one-piece-zoro-cup-chapter-7-mini-season-official-rules",
+      "evidence": "Confirmed Epic ID + official session and ranking 60 in EU; region event cutoff top 200. Classified as in-game cosmetic winner by rank, not physical prize delivery confirmation; cash $0.",
+      "previousPolicy": "attendance-only"
     },
     {
       "id": "auto-s43-4cbd97851f3d",
@@ -71,34 +73,37 @@
       "id": "auto-s43-b9fcdc628299",
       "decision": "published",
       "recordId": "auto-s43-b9fcdc628299",
-      "policy": "attendance-only",
+      "policy": "cosmetic-rank",
       "source": "https://www.fortnite.com/competitive/events/S43_OnePieceZoroCup/?region=ME&round=S43_OnePieceZoroCup_ME",
       "approvedAt": "2026-11-07T00:00:46.070Z",
       "approvedBy": "ChatGPT (user-authorized GitHub integration)",
-      "rule": null,
-      "evidence": "Exact cached API leaderboard and Epic ID, official event window and region; saved pagination unfinished, so recorded as participation only without inferred award, cash, or finality."
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/one-piece-zoro-cup-chapter-7-mini-season-official-rules",
+      "evidence": "Confirmed Epic ID + official session and ranking 21 in ME; region event cutoff top 50. Classified as in-game cosmetic winner by rank, not physical prize delivery confirmation; cash $0.",
+      "previousPolicy": "attendance-only"
     },
     {
       "id": "auto-s43-165877d12f2a",
       "decision": "published",
       "recordId": "auto-s43-165877d12f2a",
-      "policy": "attendance-only",
+      "policy": "cosmetic-rank",
       "source": "https://www.fortnite.com/competitive/events/S43_OnePieceZoroCup/?region=ME&round=S43_OnePieceZoroCup_ME",
       "approvedAt": "2026-11-07T00:00:46.070Z",
       "approvedBy": "ChatGPT (user-authorized GitHub integration)",
-      "rule": null,
-      "evidence": "Exact cached API leaderboard and Epic ID, official event window and region; saved pagination unfinished, so recorded as participation only without inferred award, cash, or finality."
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/one-piece-zoro-cup-chapter-7-mini-season-official-rules",
+      "evidence": "Confirmed Epic ID + official session and ranking 44 in ME; region event cutoff top 50. Classified as in-game cosmetic winner by rank, not physical prize delivery confirmation; cash $0.",
+      "previousPolicy": "attendance-only"
     },
     {
       "id": "auto-s43-2501944de395",
       "decision": "published",
       "recordId": "auto-s43-2501944de395",
-      "policy": "attendance-only",
+      "policy": "cosmetic-rank",
       "source": "https://www.fortnite.com/competitive/events/S43_OnePieceZoroCup/?region=ME&round=S43_OnePieceZoroCup_ME",
       "approvedAt": "2026-11-07T00:00:46.070Z",
       "approvedBy": "ChatGPT (user-authorized GitHub integration)",
-      "rule": null,
-      "evidence": "Exact cached API leaderboard and Epic ID, official event window and region; saved pagination unfinished, so recorded as participation only without inferred award, cash, or finality."
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/one-piece-zoro-cup-chapter-7-mini-season-official-rules",
+      "evidence": "Confirmed Epic ID + official session and ranking 50 in ME; region event cutoff top 50. Classified as in-game cosmetic winner by rank, not physical prize delivery confirmation; cash $0.",
+      "previousPolicy": "attendance-only"
     },
     {
       "id": "auto-s43-8c5bceee894e",
@@ -247,23 +252,25 @@
       "id": "auto-s43-ceb91f400d31",
       "decision": "published",
       "recordId": "auto-s43-ceb91f400d31",
-      "policy": "attendance-only",
+      "policy": "cosmetic-rank",
       "source": "https://www.fortnite.com/competitive/events/S43_OnePieceZoroCup_Mobile/?region=ME&round=S43_OnePieceZoroCup_Mobile_ME",
       "approvedAt": "2026-11-07T00:00:46.070Z",
       "approvedBy": "ChatGPT (user-authorized GitHub integration)",
-      "rule": null,
-      "evidence": "Exact cached API leaderboard and Epic ID, official event window and region; saved pagination unfinished, so recorded as participation only without inferred award, cash, or finality."
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/one-piece-zoro-cup-chapter-7-mini-season-official-rules",
+      "evidence": "Confirmed Epic ID + official session and ranking 21 in ME; region event cutoff top 30. Classified as in-game cosmetic winner by rank, not physical prize delivery confirmation; cash $0.",
+      "previousPolicy": "attendance-only"
     },
     {
       "id": "auto-s43-07d9e8a30f81",
       "decision": "published",
       "recordId": "auto-s43-07d9e8a30f81",
-      "policy": "attendance-only",
+      "policy": "cosmetic-rank",
       "source": "https://www.fortnite.com/competitive/events/S43_OnePieceZoroCup_Mobile/?region=ME&round=S43_OnePieceZoroCup_Mobile_ME",
       "approvedAt": "2026-11-07T00:00:46.070Z",
       "approvedBy": "ChatGPT (user-authorized GitHub integration)",
-      "rule": null,
-      "evidence": "Exact cached API leaderboard and Epic ID, official event window and region; saved pagination unfinished, so recorded as participation only without inferred award, cash, or finality."
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/one-piece-zoro-cup-chapter-7-mini-season-official-rules",
+      "evidence": "Confirmed Epic ID + official session and ranking 24 in ME; region event cutoff top 30. Classified as in-game cosmetic winner by rank, not physical prize delivery confirmation; cash $0.",
+      "previousPolicy": "attendance-only"
     },
     {
       "id": "auto-s43-b98f18d36f2e",
@@ -302,12 +309,13 @@
       "id": "auto-s43-478b1a9baef6",
       "decision": "published",
       "recordId": "auto-s43-478b1a9baef6",
-      "policy": "attendance-only",
+      "policy": "cosmetic-rank",
       "source": "https://www.fortnite.com/competitive/events/S43_OnePieceZoroCup/?region=OCE&round=S43_OnePieceZoroCup_OCE",
       "approvedAt": "2026-11-07T00:00:46.070Z",
       "approvedBy": "ChatGPT (user-authorized GitHub integration)",
-      "rule": null,
-      "evidence": "Exact cached API leaderboard and Epic ID, official event window and region; saved pagination unfinished, so recorded as participation only without inferred award, cash, or finality."
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/one-piece-zoro-cup-chapter-7-mini-season-official-rules",
+      "evidence": "Confirmed Epic ID + official session and ranking 17 in OCE; region event cutoff top 50. Classified as in-game cosmetic winner by rank, not physical prize delivery confirmation; cash $0.",
+      "previousPolicy": "attendance-only"
     },
     {
       "id": "auto-s41-a996528cc401",

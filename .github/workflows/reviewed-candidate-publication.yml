@@ -14,6 +14,7 @@ on:
         options:
           - attendance-only
           - verified-rule
+          - cosmetic-rank
       confirmation:
         description: "Epic ID/開催枠/出典を人間が確認したらCONFIRMを選択"
         required: true
