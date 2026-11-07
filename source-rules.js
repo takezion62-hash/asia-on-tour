@@ -68,9 +68,83 @@
       rule?.cosmeticRanks
       ?'<div class="source-rule-fact"><span>スキン獲得対象順位</span><div class="source-rule-regions">'+regionRows(rule.cosmeticRanks,'スキン獲得ライン')+'</div></div>'
       :'<div class="source-rule-fact"><span>予選突破の地域別条件</span><div class="source-rule-regions">'+regionRows(rule?.advance,'予選通過順位')+'</div></div>';
-    const cash=rule?.series==='victory-cup'
+    const cash=['victory-cup','performance-evaluation'].includes(rule?.series)
       ?'<div class="source-rule-fact"><span>決勝賞金</span><strong>'+(
-        Number.isFinite(rule.prizePerVictory)?'決勝1VRにつき$'+fmtNumber(rule.prizePerVictory)+'（規則上）'
+        Number.isFinite(rule.prizePerVictory)?'決勝1VRにつき'+(rule.series==='performance-evaluation'?'各選手':'')+'
+        :'VRごとの賞金単価は未登録（0VRは$0で記録可能）'
+      )+'</strong></div>':'';
+    const evalNote=rule?.series==='performance-evaluation'?
+      '<p class="source-rule-warning">※ S43開催枠の通過対象は上位26。公式規則本文の一般表記は33のため、現行イベントの報酬欄・ユーザー確認に基づき26を採用。決勝はVR100ポイントにつき個人$400、チーム$1,200です。支払・資格審査完了までは未確認。</p>':'';
+    const matchCaps=Object.entries(rule?.matchCaps||{}).map(([stage,limit])=>esc(stage)+' 最大'+fmtNumber(limit)+'試合').join(' / ');
+    const details=present?
+      '<div class="source-rule-facts">'+conditions+cash+evalNote+
+      '<div class="source-rule-fact"><span>試合数の上限</span><strong>'+esc(matchCaps||'未登録')+'</strong></div></div>'
+      :'<p class="source-rule-warning">公式の地域別通過・賞金・スキン獲得条件は未登録です。順位だけから報酬を自動認定しません。</p>';
+    return '<article class="source-rule-card" data-rule-id="'+esc(entry.id)+'">'+
+      '<div class="source-rule-title"><div><span class="source-rule-season">'+esc(entry.seasonId||'シーズン不明')+
+      ' · '+esc(seriesLabel[entry.series]||entry.series||'大会')+'</span>'+
+      '<h3>'+esc(entry.name)+'</h3>'+
+      '<p>'+esc(modeLabel[entry.team]||entry.team||'形式未確認')+' / '+esc(entry.mode||'モード未確認')+'</p></div>'+
+      '<span class="source-rule-state '+(present?'is-ready':'is-pending')+'">'+(present?(rule?.autoApproval==='review-only'?'公式規則登録済み・確認専用':rule?.autoApproval==='verified-team-rank'?'公式規則登録済み・全順位を自動掲載':rule?.autoApproval==='verified-performance-vr'?'予選突破・決勝VRを自動掲載':'公式規則登録済み'):'ルール未登録')+'</span></div>'+
+      details+
+      '<details class="source-rule-identifiers"><summary>大会ID・適用範囲</summary><div>'+ids.map(id=>'<code>'+esc(id)+'</code>').join('')+
+      '<p>公式規則が確認済みでも、本人Epic ID・地域・開催枠・順位表の検証が必要です</p></div></details>'+
+      '<div class="source-rule-links">'+
+      (url?'<a href="'+esc(url)+'" target="_blank" rel="noopener noreferrer">Epic公式大会ルール ↗</a>':'')+
+      (eventUrl?'<a href="'+esc(eventUrl)+'" target="_blank" rel="noopener noreferrer">公式大会ページ ↗</a>':'')+
+      '</div></article>';
+  }
+  function render(){
+    const query=state.search.toLocaleLowerCase('ja');
+    const matches=state.catalog.filter(entry=>{
+      const found=state.rules.has(entry.id);
+      if(state.status==='registered'&&!found)return false;
+      if(state.status==='pending'&&found)return false;
+      if(!query)return true;
+      const haystack=[entry.name,entry.id,entry.seasonId,entry.series,...(entry.sourceEventIds||[])].join(' ').toLocaleLowerCase('ja');
+      return haystack.includes(query);
+    });
+    const items=matches.slice(0,state.visible);
+    $('#source-rule-results').innerHTML=items.length?items.map(ruleMarkup).join(''):
+      '<p class="source-rule-empty">条件に合う大会がないょ。検索や絞り込みを変えてみてね。</p>';
+    $('#source-rule-status').textContent='表示 '+fmtNumber(items.length)+' / '+fmtNumber(matches.length)+'大会 · 公式ルール登録済み '+fmtNumber(state.rules.size)+'大会';
+    $('#source-rule-more').hidden=items.length>=matches.length;
+    $('#source-rule-more').textContent='さらに12大会を見る（残り'+fmtNumber(matches.length-items.length)+'件）';
+  }
+  for(const [control,key] of [['#source-rule-search','search'],['#source-rule-region','region'],['#source-rule-filter','status']]){
+    const element=$(control);
+    if(!element)continue;
+    element.addEventListener(key==='search'?'input':'change',()=>{
+      state[key]=element.value;state.visible=12;render();
+    });
+  }
+  $('#source-rule-more').addEventListener('click',()=>{state.visible+=12;render()});
+  async function load(){
+    try{
+      const responses=await Promise.all(['tournament-rules.json','tournaments.json','schedule.json'].map(file=>fetch('./'+file,{cache:'no-store'})));
+      if(responses.some(response=>!response.ok))throw Error('大会ルールデータを読み込めません');
+      const [registry,catalog,schedule]=await Promise.all(responses.map(response=>response.json()));
+      if(registry?.version!==1||!Array.isArray(registry.rules)||!Array.isArray(catalog.catalog)||!Array.isArray(schedule.sessions))throw Error('大会ルールの形式が不正です');
+      state.rules=new Map(registry.rules.map(entry=>[entry.id,entry]));
+      state.sessions=schedule.sessions;
+      state.catalog=catalog.catalog.slice().sort((a,b)=>{
+        const exists=Number(state.rules.has(b.id))-Number(state.rules.has(a.id));
+        return exists||Number(b.seasonId?.replace('S','')||0)-Number(a.seasonId?.replace('S','')||0)||a.name.localeCompare(b.name,'ja');
+      });
+      $('#source-rule-overview').textContent='公式規則登録 '+fmtNumber(state.rules.size)+' / 大会 '+fmtNumber(state.catalog.length);
+      render();
+    }catch(error){
+      $('#source-rule-status').textContent='大会ルールを読み込めませんでした。通信状態を確認して再読み込みしてください。';
+      $('#source-rule-results').textContent='';
+      $('#source-rule-more').hidden=true;
+      root.dataset.state='error';
+      console.error('Source rule master load failed',error);
+    }
+  }
+  document.querySelector('#source-rule-jump')?.addEventListener('click',()=>root.scrollIntoView({behavior:'smooth',block:'start'}));
+  load();
+})();
++fmtNumber(rule.prizePerVictory)+'（規則上）'
         :'VRごとの賞金単価は未登録（0VRは$0で記録可能）'
       )+'</strong></div>':'';
     const matchCaps=Object.entries(rule?.matchCaps||{}).map(([stage,limit])=>esc(stage)+' 最大'+fmtNumber(limit)+'試合').join(' / ');
