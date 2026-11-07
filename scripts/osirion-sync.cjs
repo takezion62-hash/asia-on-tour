@@ -436,7 +436,7 @@ async function main(){
  if(imported){
   const entry=data.updates.entries[0];
   entry.title='公式規則で自動承認：'+(historical?'過去大会':'新着大会')+imported+'戦績';
-  entry.description='公式規則・地域別順位・本人確認済みEpic ID・順位表・既存戦績を照合。予選突破、決勝0VR、金額が公式に明記された決勝VR賞金、ゲーム内スキン（'+importedCosmetics+'件）のみ自動掲載。未検証賞金や配布完了は推定しない。';
+  entry.description='公式規則・地域別順位・本人確認済みEpic ID・順位表・既存戦績を照合。予選突破、公式VR賞金、スキン（'+importedCosmetics+'件）、公式賞金表によるCash Cup（'+cash.approved.length+'件／賞金圏外$0含む）を自動掲載。支払い完了や未確認の賞金は推定しない。';
   write('results.json',data.results);
   write('updates.json',data.updates);
  }
