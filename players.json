@@ -9,7 +9,7 @@
     {
       "name": "りむた",
       "initials": "RM",
-      "desc": "10/4 NAW Console Zero Build Solo VC決勝11位・1VR・賞金$100。Tracker名「A_α Re Syaaz」",
+      "desc": "10/4 NAW Console Zero Build Solo VC決勝11位・1VR・賞金$100。Tracker名「A_α Re Syaaz」。 2024/9/7 NAC ThePeachCobbler FNCS Cup決勝272位・チーム4K・1VR・個人賞金$100（相方: かめてぃん）",
       "accent": "violet"
     },
     {
@@ -333,7 +333,7 @@
     {
       "name": "TONIGHTREET",
       "initials": "TR",
-      "desc": "9/6 NAWソロVC決勝19位・1VR・$100。現在の表示名は変更済み",
+      "desc": "9/6 NAWソロVC決勝19位・1VR・$100。現在の表示名は変更済み。 2024/9/7 NAC ThePeachCobbler FNCS Cup決勝232位・チーム8K・1VR・個人賞金$100（相方: skyrv72）",
       "accent": "violet"
     },
     {
@@ -405,7 +405,7 @@
     {
       "name": "かめてぃん",
       "initials": "KT",
-      "desc": "10/13 NAW Solo Reload VC決勝19位・1VR・賞金$100。9/2 NAW Reload Duos VC決勝68位も掲載。10/3 ME Solo Reload VC予選133位・決勝270位（賞金なし）。",
+      "desc": "10/13 NAW Solo Reload VC決勝19位・1VR・賞金$100。9/2 NAW Reload Duos VC決勝68位も掲載。10/3 ME Solo Reload VC予選133位・決勝270位（賞金なし）。 2024/9/7 NAC ThePeachCobbler FNCS Cup決勝272位・チーム4K・1VR・個人賞金$100（相方: りむた）",
       "accent": "violet"
     },
     {
@@ -1083,7 +1083,7 @@
     {
       "name": "Teddy",
       "initials": "TE",
-      "desc": "2026/10/24 NAW Solo Reload Victory Cup予選244位・290pt・38キル・0VR。決勝進出",
+      "desc": "2026/10/24 NAW Solo Reload Victory Cup予選244位・290pt・38キル・0VR。決勝進出。 2024/9/7 NAC ThePeachCobbler FNCS Cup決勝182位・チーム11K・1VR・個人賞金$100（相方: asvaswgernb）",
       "accent": "cyan"
     },
     {
@@ -2422,7 +2422,7 @@
       "name": "ゆったり",
       "initials": "ゆ",
       "accent": "violet",
-      "desc": "2024/09/20 ME Duos Cash Cup Event3 Round2決勝：かめてぃん / ゆったり 12位・143pt・8キル・1VR。チーム$200（各$100）。Tracker ID db893425-c285-4d81-a025-a5b4db45d266。"
+      "desc": "2024/09/20 ME Duos Cash Cup Event3 Round2決勝：かめてぃん / ゆったり 12位・143pt・8キル・1VR。チーム$200（各$100）。Tracker ID db893425-c285-4d81-a025-a5b4db45d266。 2024/9/7 NAC ThePeachCobbler FNCS Cup決勝220位・チーム9K・1VR・個人賞金$100（相方: ヒロインとオオカミ）"
     },
     {
       "name": "ria",
@@ -3023,6 +3023,42 @@
       "initials": "CH",
       "desc": "2024/5/6 NAC Zero Build Duos Victory Cup決勝93位・チーム7K・1VR・個人賞金$100（相方: 俺は第六感を信じる）",
       "accent": "pink"
+    },
+    {
+      "name": "ヒロインとオオカミ",
+      "initials": "HO",
+      "desc": "2024/9/7 NAC ThePeachCobbler FNCS Cup決勝220位・チーム9K・1VR・個人賞金$100（相方: ゆったり）",
+      "accent": "cyan"
+    },
+    {
+      "name": "112345abcde",
+      "initials": "11",
+      "desc": "2024/9/7 NAC ThePeachCobbler FNCS Cup決勝201位・チーム10K・1VR・個人賞金$100（相方: RADWIMPSǃ）",
+      "accent": "pink"
+    },
+    {
+      "name": "RADWIMPSǃ",
+      "initials": "RA",
+      "desc": "2024/9/7 NAC ThePeachCobbler FNCS Cup決勝201位・チーム10K・1VR・個人賞金$100（相方: 112345abcde）",
+      "accent": "violet"
+    },
+    {
+      "name": "asvaswgernb",
+      "initials": "AS",
+      "desc": "2024/9/7 NAC ThePeachCobbler FNCS Cup決勝182位・チーム11K・1VR・個人賞金$100（相方: Teddy）",
+      "accent": "cyan"
+    },
+    {
+      "name": "NYa めろ神",
+      "initials": "NY",
+      "desc": "2024/9/7 NAC ThePeachCobbler FNCS Cup決勝164位・チーム8K・1VR・個人賞金$100（相方: candyz1a）",
+      "accent": "pink"
+    },
+    {
+      "name": "candyz1a",
+      "initials": "CY",
+      "desc": "2024/9/7 NAC ThePeachCobbler FNCS Cup決勝164位・チーム8K・1VR・個人賞金$100（相方: NYa めろ神）",
+      "accent": "violet"
     }
   ],
   "confirmedAliases": {
@@ -3724,6 +3760,9 @@
     ],
     "ちゃる": [
       "charufn"
+    ],
+    "candyz1a": [
+      "blue p candyz1a"
     ]
   }
 }

@@ -239,6 +239,10 @@
         {
           "id": "zero-build-duos-victory-cup",
           "label": "Zero Build Duos Victory Cup"
+        },
+        {
+          "id": "thepeachcobbler-fncs-cup",
+          "label": "ThePeachCobbler FNCS Cup"
         }
       ]
     },
@@ -2136,6 +2140,35 @@
         {
           "text": "Epic Games公式Chapter 5 Season 2の競技大会説明：Duos Zero Build Victory Cash Cupは決勝でVRを獲得すると現金賞金を授与。",
           "url": "https://www.fortnite.com/news/fortnite-battle-royale-chapter-5-season-2-competitive-details?lang=en-US"
+        }
+      ]
+    },
+    {
+      "id": "ch5s4-thepeachcobbler-fncs-cup",
+      "name": "ThePeachCobbler FNCS Cup",
+      "chapter": 5,
+      "season": 4,
+      "seasonId": "S31",
+      "sourceEventIds": [
+        "S31_InfluencerCup"
+      ],
+      "series": "victory-cup",
+      "additionalSeries": [
+        "fncs"
+      ],
+      "mode": "battle-royale",
+      "subtype": "thepeachcobbler-fncs-cup",
+      "team": "duo",
+      "platform": "cross-platform",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "Epic Games公式FNCS Influencer Cups（Chapter 5 Season 4）ルールの2.2節とAttachment A/C：Round 1上位5,000組がRound 2へ、決勝は最大3試合、1VRにつきチーム$200（個人$100）。VR賞金制のためVictory Cup系に分類し、FNCS属性も併記。",
+          "url": "https://www.fortnite.com/news/fncs-influencer-cups-chapter-5-season-4-official-rules?lang=en-US"
+        },
+        {
+          "text": "Fortnite TrackerのS31_InfluencerCup_NAC・Round2における2024年9月7日UTC開催の決勝順位、100pt、VR、各選手$100をユーザー提供8枚の画像で照合。",
+          "url": "https://fortnitetracker.com/events/epicgames_S31_InfluencerCup_NAC?window=S31_InfluencerCup_Round2_NAC"
         }
       ]
     }
