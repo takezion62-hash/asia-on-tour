@@ -31,11 +31,13 @@ const RULES=Object.freeze({
   'ch7s3-solo-reload-victory-cup':{
     seasonId:'S41',eventIds:['S41_ReloadReloadSoloVictoryCup','S41_ReloadSoloVictoryCup'],
     matchCaps:{'予選':8,'賞金決勝':3},advance:{EU:1600,NAC:800,ME:320,NAW:320,OCE:320,BR:320},
+    prizePerVictory:100,
     source:'https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-3-official-rules'
   },
   'ch7s4-solo-victory-cup':{
     seasonId:'S42',eventIds:['S42_SoloVictoryCup','S42_SoloVictoryCupBR'],
     matchCaps:{'予選':8,'賞金決勝':3},advance:{EU:4000,NAC:2000,ME:800,NAW:800,OCE:800,BR:800},
+    prizePerVictory:100,
     source:'https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-4-official-rules'
   }
 });
@@ -76,13 +78,17 @@ function decide(row,win,checkpoint,data){
   rec.prize=0;
   rec.note='Epic公式規則で'+row.region+'上位'+rule.advance[row.region]+'名が予選突破。Osirion順位表の'+row.rank+'位をEpic IDで照合。予選の現金賞金は$0。規則: '+rule.source;
  }else if(row.kind==='賞金決勝'){
-  if(row.vrs!==0||row.prize!==null)return decline('賞金が発生する可能性があり確認が必要');
-  // Keep the same cash-final stage for winners and $0 finalists.
-  // Whether the player earned cash is represented only by prize.
+  if(row.prize!==null)return decline('APIの賞金額は未確認のまま照合する必要があります');
+  // Never guess dollars for a season without a verified payout rule.
+  if(row.vrs>0&&(!Number.isSafeInteger(rule.prizePerVictory)||rule.prizePerVictory<=0))
+   return decline('正確なVRごとの賞金規則が未登録');
   rec.round=win.round;
   rec.kind='賞金決勝';
-  rec.prize=0;
-  rec.note='Epic公式規則は決勝のVRごとに賞金を付与。Osirionで決勝0VRを確認したため現金賞金$0。規則: '+rule.source;
+  rec.prize=row.vrs*(rule.prizePerVictory||0);
+  rec.note=row.vrs>0?
+   'Epic公式規則で決勝VR1回あたり$'+rule.prizePerVictory+'。Osirionの'+row.vrs+
+   'VRから規則上の獲得賞金$'+rec.prize+'を算定。本人資格審査・支払完了までは未確認。規則: '+rule.source:
+   'Epic公式規則は決勝のVRごとに賞金を付与。Osirionで決勝0VRを確認したため現金賞金$0。規則: '+rule.source;
  }else return decline('対象外ラウンド');
  return {approved:true,record:rec,rule:rule.source};
 }
