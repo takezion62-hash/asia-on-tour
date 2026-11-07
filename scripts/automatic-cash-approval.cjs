@@ -69,7 +69,8 @@ function decide(row,win,checkpoint,data){
  const session=data.schedule?.sessions?.filter(s=>
   s.eventId===win.eventId&&s.seasonId===rule.seasonId&&
   s.name===catalog.name&&s.region===win.region&&s.dateJst===win.dateJst&&
-  s.round==='Event '+event&&s.startUtc===win.startUtc);
+  s.round==='Event '+event&&Number.isFinite(Date.parse(win.startUtc))&&
+  Date.parse(s.startUtc)===Date.parse(win.startUtc));
  if(!session||session.length!==1||session[0].stage!=='単一ラウンド')
   return decline('公式大会カレンダーの開始日時・開催回が未照合');
  const lineup=people(row),expected={solo:1,duo:2,trio:3,squad:4}[rule.team];
