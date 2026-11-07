@@ -1,7 +1,7 @@
 {
   "version": 1,
   "updatedAt": "2026-11-07",
-  "description": "Epic公式規則で確認した大会ルール。Victory／スキン／Cash／Performance／Unrealの地域別条件を表示。Unrealは全7地域のチーム賞金と個人均等配分を掲載し、未確認賞金を自動確定しない。",
+  "description": "Epic公式規則で確認した大会ルール。Unreal Cupもチーム順位と確認済みEpic IDを照合し、賞金圏内は地域別チーム/個人賞金を、圏外は$0として自動掲載（本人資格・支払確認とは別）。",
   "rules": [
     {
       "id": "ch5s3-squads-victory-cup",
@@ -769,7 +769,7 @@
           ]
         }
       },
-      "autoApproval": "review-only",
+      "autoApproval": "verified-team-rank",
       "source": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/1-million-dollar-unreal-cup-chapter-7-season-1-official-rules",
       "evidence": [
         {

@@ -91,7 +91,7 @@
       '<div class="source-rule-score-grid">'+scores+'</div></details>'+
       '<strong>同点時：総ポイント → VR数 → 平均キル → 平均順位 → 生存時間</strong></div>'+
       '<p class="source-rule-warning">※ Attachment Cの賞金はチーム合計。2人の個人配分は半額ずつ表示。'+
-      '賞金圏外は$0。Epic ID・地域・開催回・順位表・既存記録の確認前に現金を自動認定しません。'+
+      '賞金圏外は$0。全順位の取得完了・Epic ID・地域・開催回・既存記録が一致した場合に自動掲載し、未確認の候補は保留します。'+
       '本人の受給資格・支払い完了は別途確認が必要です。</p>';
   }
   function ruleMarkup(entry){
@@ -121,7 +121,7 @@
       ' · '+esc(seriesLabel[entry.series]||entry.series||'大会')+'</span>'+
       '<h3>'+esc(entry.name)+'</h3>'+
       '<p>'+esc(modeLabel[entry.team]||entry.team||'形式未確認')+' / '+esc(entry.mode||'モード未確認')+'</p></div>'+
-      '<span class="source-rule-state '+(present?'is-ready':'is-pending')+'">'+(present?(rule?.autoApproval==='review-only'?'公式規則登録済み・確認専用':rule?.autoApproval==='verified-team-rank'?'公式規則登録済み・全順位を自動掲載':rule?.autoApproval==='verified-performance-vr'?'予選突破・決勝VRを自動掲載':'公式規則登録済み'):'ルール未登録')+'</span></div>'+
+      '<span class="source-rule-state '+(present?'is-ready':'is-pending')+'">'+(present?(rule?.autoApproval==='review-only'?'公式規則登録済み・確認専用':rule?.autoApproval==='verified-team-rank'?(rule.series==='unreal-cup'?'公式賞金表で自動掲載・圏外$0':'公式規則登録済み・全順位を自動掲載'):rule?.autoApproval==='verified-performance-vr'?'予選突破・決勝VRを自動掲載':'公式規則登録済み'):'ルール未登録')+'</span></div>'+
       details+
       '<details class="source-rule-identifiers"><summary>大会ID・適用範囲</summary><div>'+ids.map(id=>'<code>'+esc(id)+'</code>').join('')+
       '<p>公式規則が確認済みでも、本人Epic ID・地域・開催枠・順位表の検証が必要です</p></div></details>'+

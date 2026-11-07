@@ -110,7 +110,7 @@ test('S39 $1M Unreal Cup official seven-region duo team prizes and scoring',()=>
  assert.ok(rule);
  assert.equal(rule.seasonId,'S39');
  assert.deepEqual(rule.eventIds,['S39_1MillionUnrealCup']);
- assert.equal(rule.autoApproval,'review-only');
+ assert.equal(rule.autoApproval,'verified-team-rank');
  assert.equal(rule.series,'unreal-cup');
  assert.equal(rule.matchCaps['単一ラウンド'],10);
  assert.equal(rule.sessionMinutes,180);
@@ -146,6 +146,6 @@ test('S39 $1M Unreal Cup official seven-region duo team prizes and scoring',()=>
  shifted.rules.find(r=>r.id===rule.id).scoring.placementPoints[0]=66;
  assert.match(validateRegistry(shifted,tournaments).join('\n'),/順位点/);
  const auto=clone(registry);
- auto.rules.find(r=>r.id===rule.id).autoApproval='verified-team-rank';
- assert.match(validateRegistry(auto,tournaments).join('\n'),/確認専用/);
+ auto.rules.find(r=>r.id===rule.id).autoApproval='review-only';
+ assert.match(validateRegistry(auto,tournaments).join('\n'),/自動承認/);
 });

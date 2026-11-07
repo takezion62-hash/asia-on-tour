@@ -72,7 +72,7 @@ function prepare(feed,config,data){
     if(members.length>1)rec.players=members;
     // Cash Cup award verification needs the original exact Epic IDs, not just names.
     // The IDs are retained only in review checkpoints; the public record strips them.
-    if(['cash-cup','performance-evaluation'].includes(win.catalog.series))rec.teamAccountIds=ids;
+    if(['cash-cup','performance-evaluation','unreal-cup'].includes(win.catalog.series))rec.teamAccountIds=ids;
     if(cashConfirmed&&members.length>1&&Number.isFinite(x.prizePerPlayer)&&x.prizePerPlayer>0&&x.prizePerPlayer*members.length<=prize)rec.prizePerPlayer=x.prizePerPlayer;
     proposals.push(rec);seen.add(deDup);
   }

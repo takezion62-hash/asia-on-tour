@@ -83,7 +83,7 @@ function validateRegistry(doc,tournaments){
   }else if(rule.series==='unreal-cup'){
    if(rule.id!=='ch7s1-one-million-unreal-cup'||rule.seasonId!=='S39'||
      rule.team!=='duo'||JSON.stringify(rule.eventIds)!=='["S39_1MillionUnrealCup"]'||
-     rule.autoApproval!=='review-only')fail(id,'S39 Unreal Cupは公式ルール登録済み・確認専用');
+     rule.autoApproval!=='verified-team-rank')fail(id,'S39 Unreal Cupは順位別賞金の自動承認が必要');
    if(Object.keys(rule.matchCaps||{}).join(',')!=='単一ラウンド'||
      rule.matchCaps?.['単一ラウンド']!==10||rule.sessionMinutes!==180)
      fail(id,'Unreal Cupは1セッション約3時間・最大10試合');
