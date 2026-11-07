@@ -50386,5 +50386,32 @@
     "source": "https://www.fortnite.com/competitive/events/S43_SoloReloadTestCup/?region=EU&round=S43_SoloReloadTestCup_EU",
     "verified": true,
     "note": "Epic ID・公式開催枠・個別保存順位表の参加と成績を照合。未確認の現金・予選突破・衣装報酬は加算しない。出典: https://www.fortnite.com/competitive/events/S43_SoloReloadTestCup/?region=EU&round=S43_SoloReloadTestCup_EU"
+  },
+  {
+    "id": "auto-s39-4d5f1e94f897",
+    "date": "2025-12-20",
+    "region": "OCE",
+    "player": "まいにちフロッパー / mint",
+    "playerRaw": "まいにちフロッパー / FTW mint",
+    "event": "$1 Million Unreal Cup",
+    "round": "単一開催枠 / 参加確認",
+    "rank": 172,
+    "points": 236,
+    "kills": 23,
+    "vrs": 1,
+    "prize": 100,
+    "kind": "賞金獲得",
+    "matches": 9,
+    "seasonId": "S39",
+    "chapter": 7,
+    "season": 1,
+    "tournamentId": "ch7s1-one-million-unreal-cup",
+    "source": "https://www.fortnite.com/competitive/events/S39_1MillionUnrealCup/?region=OCE&round=S39_1MillionUnrealCup_OCE",
+    "verified": true,
+    "note": "Epic公式$1M Unreal Cup OCEの101〜250位はチーム規定賞金$100。172位のEpic本人ID・保存順位表を照合。個人配分の原文根拠は未確定のためprizePerPlayerを設定せず、個人累計へは加算しない。本人資格審査・支払完了は未確認。規則: https://www.fortnite.com/competitive/rules-guidelines/rules-library/1-million-dollar-unreal-cup-chapter-7-season-1-official-rules",
+    "players": [
+      "まいにちフロッパー",
+      "mint"
+    ]
   }
 ]

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-07T03:25:38.520Z",
+  "reviewedAt": "2026-11-07T03:28:26.110Z",
   "description": "Resolved historic review candidates: published, duplicate or participation",
   "entries": [
     {
@@ -2514,6 +2514,15 @@
       "source": "https://www.fortnite.com/competitive/events/S43_SoloReloadTestCup/?region=EU&round=S43_SoloReloadTestCup_EU",
       "rule": null,
       "evidence": "Exact saved Epic-ID checkpoint, official window, team identity and no same-session duplication"
+    },
+    {
+      "id": "auto-s39-4d5f1e94f897",
+      "decision": "published",
+      "recordId": "auto-s39-4d5f1e94f897",
+      "policy": "verified-team-prize",
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/1-million-dollar-unreal-cup-chapter-7-season-1-official-rules",
+      "source": "https://www.fortnite.com/competitive/events/S39_1MillionUnrealCup/?region=OCE&round=S39_1MillionUnrealCup_OCE",
+      "evidence": "Exact Epic IDs and original leaderboard row, OCE rank172 within prize-paid rank101-250; team cash $100 but no asserted per-player split"
     }
   ]
 }

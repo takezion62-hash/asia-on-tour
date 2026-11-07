@@ -29,35 +29,6 @@
       "reviewReason": "確認専用大会は自動承認不可"
     },
     {
-      "id": "auto-s39-4d5f1e94f897",
-      "date": "2025-12-20",
-      "region": "OCE",
-      "player": "まいにちフロッパー / mint",
-      "playerRaw": "まいにちフロッパー / FTW mint",
-      "event": "$1 Million Unreal Cup",
-      "round": "単一開催枠 / 参加確認",
-      "rank": 172,
-      "points": 236,
-      "kills": 23,
-      "vrs": 1,
-      "prize": null,
-      "kind": "参加確認",
-      "matches": 9,
-      "seasonId": "S39",
-      "chapter": 7,
-      "season": 1,
-      "tournamentId": "ch7s1-one-million-unreal-cup",
-      "source": "https://www.fortnite.com/competitive/events/S39_1MillionUnrealCup/?region=OCE&round=S39_1MillionUnrealCup_OCE",
-      "verified": true,
-      "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
-      "reviewOnly": true,
-      "reviewReason": "確認専用大会は自動承認不可",
-      "players": [
-        "まいにちフロッパー",
-        "mint"
-      ]
-    },
-    {
       "id": "auto-s41-2a0ca39875d4",
       "date": "2026-06-07",
       "region": "OCE",
@@ -383,5 +354,5 @@
       "reviewReason": "確認専用大会は自動承認不可"
     }
   ],
-  "manualReviewedAt": "2026-11-07T03:25:38.520Z"
+  "manualReviewedAt": "2026-11-07T03:28:26.110Z"
 }
