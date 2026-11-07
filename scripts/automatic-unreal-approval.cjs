@@ -3,7 +3,8 @@
 // all two Epic IDs and dated Epic window must match. Never count prizes from VR alone.
 const RULES=Object.freeze(Object.fromEntries(require('../tournament-rules.json').rules
  .filter(x=>x.series==='unreal-cup'&&x.autoApproval==='verified-team-rank').map(x=>[x.id,x])));
-const archive=require('../calendar-history/2025-12.json').sessions;
+const archive=[...require('../calendar-history/2025-12.json').sessions,
+ ...require('../calendar-history/2026-01.json').sessions];
 const roster=x=>Array.isArray(x?.players)&&x.players.length?x.players:[x?.player];
 const key=x=>roster(x).slice().sort((a,b)=>a.localeCompare(b,'ja')).join('|');
 const decline=reason=>({approved:false,reason});
@@ -55,7 +56,7 @@ function decide(row,win,checkpoint,data){
     s.sourceWindowId===win.windowId&&s.dateJst===win.dateJst&&
     s.stage==='単一ラウンド'&&Date.parse(s.startUtc)===Date.parse(win.startUtc)&&
     Date.parse(s.endUtc)===win.end);
- if(matched.length!==1)return decline('2025年12月のEpic公式開催日時と一致する枠がありません');
+ if(matched.length!==1)return decline('Epic公式アーカイブの開催日時と一致する枠がありません');
  const players=roster(row),ids=row.teamAccountIds;
  if(players.length!==2||row.player!==players.join(' / ')||new Set(players).size!==2||
     players.some(x=>!data.players?.candidates?.some(p=>p.name===x))||
