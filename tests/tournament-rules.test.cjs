@@ -11,7 +11,7 @@ const clone=x=>JSON.parse(JSON.stringify(x));
 
 test('shared official tournament rules include review-only Trio Cash Cup plus approved types',()=>{
  assert.deepEqual(validateRegistry(registry,tournaments),[]);
- assert.equal(registry.rules.length,11);
+ assert.equal(registry.rules.length,12);
  assert.equal(Object.keys(RULES).length,7);
  assert.equal(Object.keys(CUT_OFFS).length,2);
  for(const rule of registry.rules){
@@ -103,4 +103,49 @@ test('S43 Trios Performance Evaluation is EU/NAC top26 and per-player $400 per V
  assert.match(validateRegistry(bad,tournaments).join('\n'),/上位26/);
  const prize=clone(registry);prize.rules[prize.rules.findIndex(x=>x.id===rule.id)].prizePerVictory=1200;
  assert.match(validateRegistry(prize,tournaments).join('\n'),/VR単価/);
+});
+
+test('S39 $1M Unreal Cup official seven-region duo team prizes and scoring',()=>{
+ const rule=registry.rules.find(r=>r.id==='ch7s1-one-million-unreal-cup');
+ assert.ok(rule);
+ assert.equal(rule.seasonId,'S39');
+ assert.deepEqual(rule.eventIds,['S39_1MillionUnrealCup']);
+ assert.equal(rule.autoApproval,'review-only');
+ assert.equal(rule.series,'unreal-cup');
+ assert.equal(rule.matchCaps['単一ラウンド'],10);
+ assert.equal(rule.sessionMinutes,180);
+ assert.deepEqual(rule.rankedEligibility,{mode:'battle-royale',rank:'Unreal'});
+ assert.equal(rule.participation.minimumAccountLevel,350);
+ assert.equal(rule.scoring.eliminationPoints,1);
+ assert.equal(rule.scoring.placementPoints.length,25);
+ assert.deepEqual(rule.scoring.placementPoints.slice(0,6),[65,56,52,48,44,40]);
+ assert.equal(rule.scoring.placementPoints.at(-1),2);
+ const award=rule.cashPrizes;
+ assert.equal(award.basis,'per-team');
+ assert.equal(award.teamSize,2);
+ assert.equal(award.individualShare,'equal');
+ assert.deepEqual(Object.keys(award.tiers).sort(),['EU','NAC','NAW','BR','ME','ASIA','OCE'].sort());
+ assert.deepEqual(Object.fromEntries(Object.entries(award.tiers).map(([k,tiers])=>[k,tiers.at(-1).through])),
+   {EU:2000,NAC:1200,NAW:500,BR:500,ME:250,ASIA:250,OCE:250});
+ const payout=(region,rank)=>{
+  const found=award.tiers[region].find(tier=>rank<=tier.through);
+  return found?{team:found.perTeam,perPlayer:found.perTeam/award.teamSize}:null;
+ };
+ assert.deepEqual(payout('OCE',172),{team:100,perPlayer:50});
+ assert.deepEqual(payout('EU',1800),{team:100,perPlayer:50});
+ assert.deepEqual(payout('EU',500),{team:200,perPlayer:100});
+ assert.deepEqual(payout('NAC',1000),{team:100,perPlayer:50});
+ assert.deepEqual(payout('ME',75),{team:200,perPlayer:100});
+ assert.equal(payout('NAW',501),null);
+ assert.equal(payout('OCE',251),null);
+ assert.equal(RULES[rule.id],undefined,'No unsafe Victory Cup auto cash approval');
+ const wrong=clone(registry);
+ wrong.rules.find(r=>r.id===rule.id).cashPrizes.tiers.OCE.at(-1).perTeam=101;
+ assert.match(validateRegistry(wrong,tournaments).join('\n'),/賞金額・個人分配/);
+ const shifted=clone(registry);
+ shifted.rules.find(r=>r.id===rule.id).scoring.placementPoints[0]=66;
+ assert.match(validateRegistry(shifted,tournaments).join('\n'),/順位点/);
+ const auto=clone(registry);
+ auto.rules.find(r=>r.id===rule.id).autoApproval='verified-team-rank';
+ assert.match(validateRegistry(auto,tournaments).join('\n'),/確認専用/);
 });
