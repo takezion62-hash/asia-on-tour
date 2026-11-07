@@ -4,6 +4,7 @@ on:
     branches: [main]
     paths:
       - "scripts/osirion-sync.cjs"
+      - "scripts/audit-pending-history-20261108.cjs"
       - "scripts/scan-coverage.cjs"
       - "tests/scan-coverage.test.cjs"
       - "scripts/safe-sync-merge.cjs"
@@ -51,6 +52,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '24'
+      - name: Audit historical candidates and original leaderboard checkpoints
+        run: node scripts/audit-pending-history-20261108.cjs
       - name: Snapshot the original main before the historical provider scan
         run: node scripts/safe-sync-merge.cjs snapshot history "$RUNNER_TEMP/aot-history-base.json"
       - name: Delay historical API calls
