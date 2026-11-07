@@ -69,7 +69,7 @@
       let previous=0;
       const rows=tiers.map(tier=>{
         const from=previous+1;previous=tier.through;
-        const label=from===tier.through?from+'位':from+'〜'+tier.through+'位';
+        const label=from===tier.through?fmtNumber(from)+'位':fmtNumber(from)+'〜'+fmtNumber(tier.through)+'位';
         const each=tier.perTeam/award.teamSize;
         return '<div class="source-rule-cash-tier source-rule-unreal-tier"><span>'+esc(label)+'</span>'+
           '<div><strong>チーム $'+fmtNumber(tier.perTeam)+'</strong><small>1人 $'+fmtNumber(each)+'</small></div></div>';
