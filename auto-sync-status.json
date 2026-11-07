@@ -1,24 +1,24 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-07T13:02:44.444Z",
+  "checkedAt": "2026-11-07T13:28:59.732Z",
   "mode": "review",
   "scope": "recent",
   "dateMode": null,
-  "selectedWindows": 1,
+  "selectedWindows": 0,
   "fromDate": null,
   "toDate": null,
   "provider": "osirion",
-  "linkedPlayers": 517,
+  "linkedPlayers": 522,
   "trackedWindows": 17,
   "found": 0,
   "skipped": 0,
   "imported": 0,
-  "scannedPages": 4,
+  "scannedPages": 0,
   "completedWindows": 17,
   "identityConflicts": 3,
   "alreadyRegistered": 36,
-  "autoApprovedTotal": 650,
+  "autoApprovedTotal": 654,
   "invalidCachedCandidates": 0,
   "manualReviewCandidates": 0,
   "autoApprovedCosmeticThisRun": 0,
@@ -37,5 +37,12 @@
     "S42_ArenaTestCup",
     "S43_OnePieceZoroCup_ZB"
   ],
-  "message": "Osirionで517アカウントIDを追跡。今回の公式規則による自動承認0件、追加確認待ち0件、名義照合保留3件。"
+  "message": "最新版と安全統合：新規掲載0件、重複スキップ0件、要確認の競合0件、確認待ち0件。既存の戦績・賞金は保持。",
+  "concurrentMerge": {
+    "appended": 0,
+    "alreadyPublished": 0,
+    "reviewConflicts": 0,
+    "keptPending": 0,
+    "reconciledAt": "2026-11-07T13:29:01.164Z"
+  }
 }
