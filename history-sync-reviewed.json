@@ -2522,7 +2522,14 @@
       "policy": "verified-team-prize",
       "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/1-million-dollar-unreal-cup-chapter-7-season-1-official-rules",
       "source": "https://www.fortnite.com/competitive/events/S39_1MillionUnrealCup/?region=OCE&round=S39_1MillionUnrealCup_OCE",
-      "evidence": "Exact Epic IDs and original leaderboard row, OCE rank172 within prize-paid rank101-250; team cash $100 but no asserted per-player split"
+      "evidence": "Exact Epic IDs and original leaderboard row, OCE rank172 within prize-paid rank101-250; team cash $100 but no asserted per-player split",
+      "personalAwardCorrection": {
+        "amount": 50,
+        "perPlayer": true,
+        "source": "https://fortnitetracker.com/events/epicgames_S39_1MillionUnrealCup_OCE?page=0&window=S39_1MillionUnrealCup_OCE",
+        "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/1-million-dollar-unreal-cup-chapter-7-season-1-official-rules",
+        "verifiedAt": "2026-11-07"
+      }
     },
     {
       "id": "auto-s41-2a0ca39875d4",

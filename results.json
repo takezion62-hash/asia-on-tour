@@ -50408,10 +50408,11 @@
     "tournamentId": "ch7s1-one-million-unreal-cup",
     "source": "https://www.fortnite.com/competitive/events/S39_1MillionUnrealCup/?region=OCE&round=S39_1MillionUnrealCup_OCE",
     "verified": true,
-    "note": "Epic公式$1M Unreal Cup OCEの101〜250位はチーム規定賞金$100。172位のEpic本人ID・保存順位表を照合。個人配分の原文根拠は未確定のためprizePerPlayerを設定せず、個人累計へは加算しない。本人資格審査・支払完了は未確認。規則: https://www.fortnite.com/competitive/rules-guidelines/rules-library/1-million-dollar-unreal-cup-chapter-7-season-1-official-rules",
+    "note": "Epic公式$1 Million Unreal Cup CH7 S1 OCEの101〜250位はデュオチーム合計$100。172位（236pt、23K、1VR）を公式開催枠・本人アカウントと照合。Fortnite Trackerの同枠では251位未満のPlayer Earningsは1人$50と明記。個人賞金はまいにちフロッパー・mint各$50として集計。支払完了や最終資格審査は別途未確認。Epic公式: https://www.fortnite.com/competitive/rules-guidelines/rules-library/1-million-dollar-unreal-cup-chapter-7-season-1-official-rules 個人額: https://fortnitetracker.com/events/epicgames_S39_1MillionUnrealCup_OCE?page=0&window=S39_1MillionUnrealCup_OCE",
     "players": [
       "まいにちフロッパー",
       "mint"
-    ]
+    ],
+    "prizePerPlayer": 50
   }
 ]
