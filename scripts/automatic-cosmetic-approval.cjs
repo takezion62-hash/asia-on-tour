@@ -7,7 +7,7 @@ const signature=r=>people(r).slice().sort((a,b)=>a.localeCompare(b,'ja')).join('
 const decline=reason=>({approved:false,reason});
 function cutoffForWindow(win){
  const rule=CUT_OFFS[win?.tournamentId];
- if(!rule||win.series!=='skin-cup'||win.kind!=='参加確認'||win.seasonId!=='S43'
+ if(!rule||win.series!=='skin-cup'||win.kind!=='参加確認'||win.seasonId!==rule.seasonId
    ||win.eventId!==rule.eventId||win.windowId!==rule.eventId+'_'+win.region)return null;
  return Number.isSafeInteger(rule.ranks[win.region])?rule.ranks[win.region]:null;
 }
@@ -19,7 +19,7 @@ function decide(row,win,checkpoint,data){
   return decline('対象順位表の安全な走査が完了していません');
  const catalog=data.tournaments.catalog.find(x=>x.id===row.tournamentId);
  if(!catalog||catalog.series!=='skin-cup'||catalog.seasonId!==win.seasonId||
-   !catalog.sourceEventIds?.includes(win.eventId)||!['solo','duo'].includes(catalog.team))
+   !catalog.sourceEventIds?.includes(win.eventId)||catalog.team!==CUT_OFFS[row.tournamentId].team)
   return decline('登録済み大会カタログと一致しません');
  if(row.tournamentId!==win.tournamentId||row.seasonId!==win.seasonId||row.date!==win.dateJst||
    row.region!==win.region||row.round!==win.round||row.event!==catalog.name)
@@ -29,7 +29,7 @@ function decide(row,win,checkpoint,data){
  if(members.length!==teamSize||new Set(members).size!==members.length||
    members.some(name=>!known.has(name))||row.player!==members.join(' / '))
   return decline('全選手の本人確認が完了していません');
- const maxMatches=catalog.team==='duo'?11:8;
+ const maxMatches=CUT_OFFS[row.tournamentId].maxMatches;
  if(!Number.isSafeInteger(row.matches)||row.matches<1||row.matches>maxMatches)
   return decline('公式試合数上限と一致しません');
  const outcome=evaluateRank(row);

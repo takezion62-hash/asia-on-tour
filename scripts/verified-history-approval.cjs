@@ -2,45 +2,10 @@
 // Narrow, rule-backed auto approval. Only allow-listed historical events qualify.
 // A zero-VR final can be recorded as $0 because the rules pay per final-round VR.
 // Positive cash requires a season-specific verified payout rule; unknown events remain in manual review.
-const RULES=Object.freeze({
-  'ch5s3-squads-victory-cup':{
-    seasonId:'S30',eventIds:['S30_SquadsVictoryCashCup'],team:'squad',
-    matchCaps:{'予選':7,'賞金決勝':3},advance:{EU:150,ME:150,OCE:150,BR:150},
-    source:'https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules'
-  },
-  'ch5s3-solo-victory-cup':{
-    seasonId:'S30',eventIds:['S30_SoloVictoryCashCup'],
-    matchCaps:{'予選':7,'賞金決勝':3},advance:{"EU":7000,"BR":2000,"ME":2000,"OCE":2000},
-    source:'https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules'
-  },
-  'ch5s3-zb-solo-victory':{
-    seasonId:'S30',eventIds:['S30_SoloZBVictoryCashCup'],
-    matchCaps:{'予選':7,'賞金決勝':3},advance:{"EU":7000,"BR":2000,"ME":2000,"OCE":2000},
-    source:'https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules'
-  },
-  'ch5s4-solo-victory-cup':{
-    seasonId:'S31',eventIds:['S31_SoloVictoryCashCup'],
-    matchCaps:{'予選':7,'賞金決勝':3},advance:{"EU":15000,"BR":2500,"ME":2000,"OCE":1500},
-    source:'https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-4-official-rules'
-  },
-  'ch5s4-zb-solo-victory':{
-    seasonId:'S31',eventIds:['S31_SoloZBVictoryCashCup'],
-    matchCaps:{'予選':7,'賞金決勝':3},advance:{"EU":3000,"BR":1000,"ME":1000,"OCE":600},
-    source:'https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-4-official-rules'
-  },
-  'ch7s3-solo-reload-victory-cup':{
-    seasonId:'S41',eventIds:['S41_ReloadReloadSoloVictoryCup','S41_ReloadSoloVictoryCup'],
-    matchCaps:{'予選':8,'賞金決勝':3},advance:{EU:1600,NAC:800,ME:320,NAW:320,OCE:320,BR:320},
-    prizePerVictory:100,
-    source:'https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-3-official-rules'
-  },
-  'ch7s4-solo-victory-cup':{
-    seasonId:'S42',eventIds:['S42_SoloVictoryCup','S42_SoloVictoryCupBR'],
-    matchCaps:{'予選':8,'賞金決勝':3},advance:{EU:4000,NAC:2000,ME:800,NAW:800,OCE:800,BR:800},
-    prizePerVictory:100,
-    source:'https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-4-official-rules'
-  }
-});
+// Single source of truth: the same versioned official rules shown under SOURCES.
+const RULES=Object.freeze(Object.fromEntries(
+ require('../tournament-rules.json').rules.filter(rule=>rule.series==='victory-cup')
+  .map(rule=>[rule.id,Object.freeze(rule)])));
 const roundId=x=>{
  const match=String(x||'').match(/(?:Event\s*(\d+)|Day\s*(\d+)).*Round\s*([12])/i);
  return match?(match[1]?'event'+Number(match[1]):'day'+Number(match[2]))+'/round'+match[3]:String(x||'');

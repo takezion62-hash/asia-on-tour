@@ -76,7 +76,13 @@
       }));
       const summary=document.getElementById('participation-summary');
       if(summary)summary.textContent='本人IDで確認した出場戦績 '+fmt(index.total)+'件 · '+fmt(index.players.length)+'選手 · '+fmt(m.length)+'か月';
-      if(m.length)renderMonth();else{target.textContent='現在、出場戦績の初回自動調査を待っています';picker.disabled=true}
+      if(m.length){
+        // Scanner checkpoints may contain empty months. Open the latest month
+        // that actually has results, while keeping zero-result months selectable.
+        const firstWithRecords=m.find(month=>month.count>0);
+        if(firstWithRecords)picker.value=firstWithRecords.month;
+        renderMonth();
+      }else{target.textContent='現在、出場戦績の初回自動調査を待っています';picker.disabled=true}
     }catch(error){target.textContent=error.message}
   }
   async function renderProfile(name){

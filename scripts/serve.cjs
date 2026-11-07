@@ -9,7 +9,8 @@ const files = new Map([['/', 'index.html'], ['/index.html', 'index.html'], ['/ap
 for(const name of ['calendar.css','auto-sync-ui.js','auto-sync-ui.css','participation-ui.js','participation-pr.js','participation.css','participation-index.json','participation-status.json','calendar-history-index.json','calendar-history-status.json','auto-sync-status.json','auto-sync-review.json','history-sync-status.json','history-sync-review.json',
   // Mirror all public site entrypoints and their dependencies in browser tests.
   'player-style.js','player-style-view.js','player-style.css',
-  'verification.html','verification-core.js','verification.js','verification.css','history-sync-reviewed.json','approval-history.json'])files.set('/'+name,name);
+  'verification.html','verification-core.js','verification.js','verification.css',
+  'source-rules.js','source-rules.css','tournament-rules.json','history-sync-reviewed.json','approval-history.json'])files.set('/'+name,name);
 for(const name of fs.readdirSync(path.join(root,'calendar-history'))){
   if(/^\d{4}-\d{2}\.json$/.test(name))files.set('/calendar-history/'+name,'calendar-history/'+name);
 }
