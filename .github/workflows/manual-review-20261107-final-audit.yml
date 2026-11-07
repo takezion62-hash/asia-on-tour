@@ -4,6 +4,7 @@ on:
     branches: [main]
     paths:
       - ".github/workflows/manual-review-20261107-final-audit.yml"
+      - "scripts/manual-review-20261107-final-audit.cjs"
   workflow_dispatch:
 permissions:
   contents: write
