@@ -307,7 +307,8 @@ test('entry, import, and delete controls are absent; only browse inputs remain',
   const markup = html.slice(0, html.indexOf('<script>'));
   assert.doesNotMatch(markup, /<form\b|data-add\b|data-delete\b|type="(?:file|submit)"|id="(?:entry-form|modal-backdrop|import-button|import-file|export-json)"/);
   assert.deepEqual([...markup.matchAll(/<input\b[^>]*type="([^"]+)"/g)].map(match => match[1]).sort(),
-    ['checkbox', 'search', 'search', 'search']); // results, players, tournament, and participation search; no editing controls
+    ['checkbox', 'search', 'search', 'search', 'search']); // results, players, tournaments, and Sources rule lookup; no editing controls
+  assert.match(markup, /id="source-rule-search"/);
   assert.match(markup, /閲覧専用/);
 });
 
