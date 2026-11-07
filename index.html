@@ -852,6 +852,7 @@
   <link rel="stylesheet" href="./compare.css?v=1">
   <link rel="stylesheet" href="./auto-sync-ui.css?v=1">
   <link rel="stylesheet" href="./participation.css?v=1">
+  <link rel="stylesheet" href="./source-rules.css?v=1">
 </head>
 <body>
   <div class="layout">
@@ -991,7 +992,7 @@
       </section>
       <section class="section" id="page-about" aria-labelledby="sources-title">
         <div class="page-label">REFERENCE / 03</div>
-        <div class="sources-heading"><div><h1 class="big-title" id="sources-title">SOURCES<span>.</span></h1><p>参照するソース</p></div><span class="sources-count" aria-hidden="true">03 LINKS</span></div>
+        <div class="sources-heading"><div><h1 class="big-title" id="sources-title">SOURCES<span>.</span></h1><p>参照するソース</p></div><span class="sources-count" aria-hidden="true">03 LINKS + RULEBOOK</span></div>
         <div class="sources-list">
           <a class="source-card official" href="https://www.fortnite.com/competitive" target="_blank" rel="noopener noreferrer">
             <span class="source-number" aria-hidden="true">01</span>
@@ -1009,6 +1010,31 @@
             <span class="source-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg></span>
           </a>
         </div>
+        <section class="source-rules" id="source-rules" aria-labelledby="source-rules-title">
+          <div class="source-rules-header">
+            <div>
+              <p class="source-rules-kicker">OFFICIAL RULEBOOK / SOURCE DATA</p>
+              <h2 id="source-rules-title">🏆 大会ルール</h2>
+              <p>公式規則で確認できた通過順位・賞金・スキン条件を、地域ごとに調べられるルールマスター。自動更新も同じデータを参照して判定するょ。</p>
+            </div>
+            <span class="source-rules-total" id="source-rule-overview">ルールを読み込み中…</span>
+          </div>
+          <div class="source-rules-controls">
+            <label for="source-rule-search">大会名・大会IDを検索
+              <input type="search" id="source-rule-search" placeholder="大会名・シーズン・イベントID" autocomplete="off">
+            </label>
+            <label for="source-rule-region">確認する開催地域
+              <select id="source-rule-region"><option value="all">全地域</option><option value="ME">ME</option><option value="EU">EU</option><option value="NAC">NAC</option><option value="NAW">NAW</option><option value="OCE">OCE</option><option value="BR">BR</option></select>
+            </label>
+            <label for="source-rule-filter">ルール登録状況
+              <select id="source-rule-filter"><option value="registered">公式規則登録済み</option><option value="all">すべての大会</option><option value="pending">ルール未登録のみ</option></select>
+            </label>
+          </div>
+          <p class="source-rule-status" id="source-rule-status" aria-live="polite">大会ルールを読み込み中…</p>
+          <div class="source-rule-results" id="source-rule-results" aria-live="polite"></div>
+          <button class="source-rule-more" id="source-rule-more" type="button" hidden>さらに大会を見る</button>
+          <p class="source-rules-note">※ 「未登録」は大会が存在しないという意味ではなく、AOTが自動判定に使用する公式規則の登録が未完了という意味です。順位表・選手ID・大会枠の照合は別途必要です。獲得資格の審査や実際の支払い・アイテム配布までは保証しません。</p>
+        </section>
       </section>
       <footer class="footer">ASIA ON TOUR · UNOFFICIAL FORTNITE COMPETITIVE FAN ARCHIVE<br>非公式のファン制作サイト。Epic Games, Inc. による運営・承認を受けていません · SEASON DATA CHECKED: 2026.10.18</footer>
     </main>
@@ -1025,5 +1051,6 @@
   <script src="./participation-ui.js?v=2" defer></script>
   <script src="./app.js?v=default-s43-20261107-v1" defer></script>
   <script src="./auto-sync-ui.js?v=3" defer></script>
+  <script src="./source-rules.js?v=1" defer></script>
 </body>
 </html>
