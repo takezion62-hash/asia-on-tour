@@ -70,8 +70,9 @@
       :'<div class="source-rule-fact"><span>予選突破の地域別条件</span><div class="source-rule-regions">'+regionRows(rule?.advance,'予選通過順位')+'</div></div>';
     const cash=['victory-cup','performance-evaluation'].includes(rule?.series)
       ?'<div class="source-rule-fact"><span>決勝賞金</span><strong>'+(
-        Number.isFinite(rule.prizePerVictory)?'決勝1VRにつき'+(rule.series==='performance-evaluation'?'各選手':'')+'
-        :'VRごとの賞金単価は未登録（0VRは$0で記録可能）'
+        Number.isFinite(rule.prizePerVictory)
+          ?'決勝1VRにつき'+(rule.series==='performance-evaluation'?'各選手':'')+'$'+fmtNumber(rule.prizePerVictory)+'（規則上）'
+          :'VRごとの賞金単価は未登録（0VRは$0で記録可能）'
       )+'</strong></div>':'';
     const evalNote=rule?.series==='performance-evaluation'?
       '<p class="source-rule-warning">※ S43開催枠の通過対象は上位26。公式規則本文の一般表記は33のため、現行イベントの報酬欄・ユーザー確認に基づき26を採用。決勝はVR100ポイントにつき個人$400、チーム$1,200です。支払・資格審査完了までは未確認。</p>':'';
