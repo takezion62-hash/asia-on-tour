@@ -112,7 +112,7 @@ test('real published archive remains immutable; roster-based calculation matches
 
 
 test('six evolving badge tracks have five strictly increasing rank goals',()=>{
-  assert.equal(engine.VERSION,7,'ten additional secret achievements ship engine v7');
+  assert.equal(engine.VERSION,8,'ten additional secret achievements ship engine v7');
   assert.equal(engine.EVOLUTION_TRACKS.length,6);
   assert.deepEqual(engine.EVOLUTION_TIERS.map(t=>t.id),['bronze','silver','gold','platinum','prismatic']);
   assert.equal(new Set(engine.EVOLUTION_TRACKS.map(t=>t.id)).size,6);
@@ -229,7 +229,7 @@ test('every real published player gets exactly six evolving tracks without modif
 
 const special=(rows,id,name='Hero')=>engine.calculateSpecial(rows,name).achievements.find(badge=>badge.id===id);
 test('special title catalog includes solo cumulative KILLS and existing titles',()=>{
-  assert.equal(engine.SPECIAL_CATALOG.length,30);
+  assert.equal(engine.SPECIAL_CATALOG.length,31);
   assert.equal(new Set(engine.SPECIAL_CATALOG.map(def=>def.id)).size,30);
   for(const def of engine.SPECIAL_CATALOG){
     assert.ok(['rare','epic','legendary'].includes(def.rarity),def.id);
@@ -539,9 +539,9 @@ const cashRow=(id,overrides={})=>fixture(id,{
 test('12 new special awards have stable IDs, rarities and distinct achievement catalog entries',()=>{
   const ids=['final-kill-tyrant','final-runner-up','podium-streak','cash-windfall',
     'cash-chain','same-day-traveler','same-day-cash','reload-regular','no-vr-cash',
-    'zero-build-champion','fncs-finalist','seven-day-traveler'];
-  assert.equal(engine.VERSION,7);
-  assert.equal(engine.SPECIAL_CATALOG.length,30);
+    'zero-build-champion','fncs-finalist','seven-day-traveler','triple-format-vr'];
+  assert.equal(engine.VERSION,8);
+  assert.equal(engine.SPECIAL_CATALOG.length,31);
   assert.equal(new Set(engine.SPECIAL_CATALOG.map(x=>x.id)).size,30);
   for(const id of ids){
     const def=engine.SPECIAL_CATALOG.find(x=>x.id===id);
@@ -658,19 +658,19 @@ const secretPaid=(id,overrides={})=>fixture(id,{
 });
 test('secret titles have separate 10-item catalog, keep ordinary 30 titles and hide two completely',()=>{
   const ids=['silent-crown','golden-strike','death-coronation','three-world-shadow',
-    'triple-gold','six-region-bounty','borderless-champion','returning-phoenix',
+    'triple-gold','six-region-bounty','dual-world-champion','borderless-champion','returning-phoenix',
     'light-and-shadow','double-crown-miracle'];
-  assert.equal(engine.VERSION,7);
-  assert.equal(engine.SECRET_CATALOG.length,10);
+  assert.equal(engine.VERSION,8);
+  assert.equal(engine.SECRET_CATALOG.length,11);
   assert.deepEqual(engine.SECRET_CATALOG.map(x=>x.id),ids);
-  assert.equal(engine.SPECIAL_CATALOG.length,30);
+  assert.equal(engine.SPECIAL_CATALOG.length,31);
   assert.ok(engine.SECRET_CATALOG.every(x=>x.title&&x.icon&&x.hint&&x.description&&x.rarity));
   assert.equal(engine.SECRET_CATALOG.filter(x=>x.sealed).length,2);
   const empty=engine.calculateSecret([],'Hero');
-  assert.equal(empty.total,10);
+  assert.equal(empty.total,11);
   assert.equal(empty.earned,0);
-  assert.equal(empty.visibleLocked.length,8);
-  assert.equal(empty.locked.length,10);
+  assert.equal(empty.visibleLocked.length,9);
+  assert.equal(empty.locked.length,11);
   assert.ok(empty.achievements.every(x=>x.evidence.length===0));
   assert.equal(empty.achievements.find(x=>x.id==='silent-crown').difficulty,'極高');
 });
@@ -761,16 +761,68 @@ test('双冠の奇跡 needs on a single date two distinct regions EACH with VR +
   assert.equal(secret([a,{...b,region:'ME'}],'double-crown-miracle').unlocked,false);
   assert.equal(secret([a,{...b,prize:0}],'double-crown-miracle').unlocked,false);
 });
+test('三冠の支配者: verified solo/duo/trio VRs are required, not cash or winless entries',()=>{
+ const solo=fixture('solo-vr',{event:'Solo Victory Cup Battle Royale',vrs:1,prize:null,region:'ME'});
+ const duo=fixture('duo-vr',{event:'Duos Cash Cup',player:'Hero / Pair',
+   players:['Hero','Pair'],vrs:1,prize:0,region:'EU'});
+ const trio=fixture('trio-vr',{event:'Trios Cash Cup',player:'Hero / Pair / Third',
+   players:['Hero','Pair','Third'],vrs:2,prize:null,region:'NAC'});
+ const trioBadge=special([solo,duo,trio],'triple-format-vr');
+ assert.equal(trioBadge.title,'三冠の支配者');
+ assert.equal(trioBadge.rarity,'epic');
+ assert.equal(trioBadge.unlocked,true);
+ assert.equal(trioBadge.progress,3);
+ assert.deepEqual(trioBadge.evidence.map(e=>e.teamFormat),['solo','duo','trio']);
+ assert.equal(special([solo,duo],'triple-format-vr').progress,2);
+ assert.equal(special([solo,duo,{...trio,vrs:0}],'triple-format-vr').unlocked,false);
+ assert.equal(special([solo,duo,{...trio,vrs:null}],'triple-format-vr').unlocked,false);
+ assert.equal(special([solo,duo,{...trio,verified:false}],'triple-format-vr').unlocked,false);
+ assert.equal(special([solo,{...solo,id:'solo-again',region:'BR'}],'triple-format-vr').progress,1);
+ assert.equal(special([{...solo,event:'Unlabeled Cup'},duo,trio],'triple-format-vr').progress,2);
+ assert.equal(special([solo,{...duo,event:'Solo Victory Cup Battle Royale'},trio],'triple-format-vr').progress,2);
+ assert.equal(special([solo,duo,trio],'triple-format-vr').goal,3);
+ assert.equal(special([solo,duo,trio],'triple-format-vr').unit,'形式');
+});
+test('二界の覇者: confirmed Battle Royale AND Zero Build final champions unlock the hidden legendary',()=>{
+ const br=fixture('br-champion',{date:'2026-09-01',event:'Solo Victory Cup Battle Royale',
+   region:'ME',kind:'賞金決勝',rank:1,vrs:0,prize:0});
+ const zb=fixture('zb-champion',{date:'2026-09-04',event:'Zero Build Solo Victory Cup',
+   region:'EU',kind:'賞金決勝',rank:1,vrs:0,prize:0});
+ const claim=secret([br,zb],'dual-world-champion');
+ assert.equal(claim.rarity,'legendary');
+ assert.equal(claim.difficulty,'極高');
+ assert.equal(claim.goal,2);
+ assert.equal(claim.unlocked,true);
+ assert.deepEqual(claim.evidence.map(e=>e.id),['br-champion','zb-champion']);
+ assert.equal(secret([br],'dual-world-champion').progress,1);
+ assert.equal(secret([br,br],'dual-world-champion').progress,1);
+ assert.equal(secret([br,{...zb,rank:2}],'dual-world-champion').unlocked,false);
+ assert.equal(secret([br,{...zb,kind:'予選'}],'dual-world-champion').unlocked,false);
+ assert.equal(secret([br,{...zb,verified:false}],'dual-world-champion').unlocked,false);
+ assert.equal(secret([br,{...zb,region:'ASIA'}],'dual-world-champion').unlocked,false);
+ assert.equal(secret([br,{...zb,event:'Unlabeled Cup'}],'dual-world-champion').unlocked,false);
+ assert.equal(secret([br,{...zb,event:'Solo Victory Cup Battle Royale'}],'dual-world-champion').unlocked,false);
+ assert.equal(secret([br,zb],'dual-world-champion',[
+   {name:'Solo Victory Cup Battle Royale',mode:'zero-build'},
+   {name:'Zero Build Solo Victory Cup',mode:'zero-build'}
+ ]).unlocked,false,'explicit catalog contradicts title BR claim');
+ assert.equal(secret([br,zb],'dual-world-champion',[
+   {name:'Solo Victory Cup Battle Royale',mode:'battle-royale'},
+   {name:'Zero Build Solo Victory Cup',mode:'zero-build'}
+ ]).unlocked,true);
+ const unk=fixture('unknown-br',{event:'Tournament Mystery',region:'ME',kind:'賞金決勝',rank:1});
+ assert.equal(secret([unk,zb],'dual-world-champion').unlocked,false,'do not infer BR from absence of Zero Build');
+});
 test('every existing archived player gets deterministic secret badges without mutating records or special titles',()=>{
   const before=JSON.stringify(records);
   const players=[...new Set(records.flatMap(row=>Array.isArray(row.players)&&row.players.length?row.players:[row.player]).filter(Boolean))];
   for(const name of players){
     const a=engine.calculate(records,name);
     const secretOnly=engine.calculateSecret(records,name);
-    assert.equal(a.secret.total,10,name);
-    assert.equal(a.special.total,30,name);
+    assert.equal(a.secret.total,11,name);
+    assert.equal(a.special.total,31,name);
     assert.equal(a.secret.earned,a.secret.unlocked.length,name);
-    assert.equal(a.secret.locked.length+a.secret.earned,10,name);
+    assert.equal(a.secret.locked.length+a.secret.earned,11,name);
     assert.deepEqual(a.secret.achievements.map(b=>b.id),secretOnly.achievements.map(b=>b.id));
     assert.ok(a.secret.locked.every(b=>b.evidence.length===0),name);
   }
