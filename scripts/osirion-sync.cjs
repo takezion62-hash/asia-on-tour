@@ -262,7 +262,7 @@ function historicalPriority(state,records){
    const cp=state.windows[w.key];
    const fraction=cp?.totalPages>0?Math.min(1,(cp.nextPage||0)/cp.totalPages):0;
    // Higher score means a publishable official ruleset and a round near completion.
-   const approvedRule=(Object.hasOwn(RULES,w.tournamentId)&&w.series==='victory-cup')||cutoffForWindow(w)!==null;
+   const approvedRule=(Object.hasOwn(RULES,w.tournamentId)&&w.series==='victory-cup')||cutoffForWindow(w)!==null||cashLimitForWindow(w)!==null;
    return (approvedRule?150:0)+Math.round(fraction*90)+historicalEvidenceScore(w,records)+(w.kind==='賞金決勝'?12:0)+(w.kind==='参加確認'?3:0);
   };
   return score(b)-score(a)||a.end-b.end;
@@ -333,8 +333,9 @@ async function main(){
  }
  if(!config.enabled||config.provider!=='osirion'){console.log('OSIRION_SYNC_DISABLED');return}
  if(config.mode!=='review')throw Error('Osirionの自動公開は安全性検証が完了するまで無効です');
- const data={results:read('results.json'),players:read('players.json'),tournaments:read('tournaments.json'),updates:read('updates.json')};
+ const data={results:read('results.json'),players:read('players.json'),tournaments:read('tournaments.json'),schedule:read('schedule.json'),updates:read('updates.json')};
  const {accounts,conflicts}=linkedAccounts(data);
+ data.verifiedAccounts=accounts;
  if(!accounts.length)throw Error('追跡対象のIDがありません');
  const all=await getTournaments(historical);
  const windows=discover(all,data.tournaments.catalog,config);
