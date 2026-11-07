@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-11-07T08:57:33.747Z",
+  "checkedAt": "2026-11-07T09:32:47.641Z",
   "windows": {
     "epicgames_S42_InoxtagIconCup_NAW/S42_InoxtagIconCup_NAW": {
       "nextPage": 40,
@@ -219,12 +219,12 @@
       "emptyAttempts": 0
     },
     "epicgames_S30_SquadsVictoryCashCup_EU/S30_SquadsVictoryCashCup_Event1Round1_EU": {
-      "nextPage": 39,
-      "pages": 39,
-      "complete": false,
-      "coverageLimited": false,
+      "nextPage": 40,
+      "pages": 40,
+      "complete": true,
+      "coverageLimited": true,
       "totalPages": 100,
-      "lastScanned": "2026-11-07T03:35:09.332Z",
+      "lastScanned": "2026-11-07T09:32:24.906Z",
       "emptyAttempts": 0
     },
     "epicgames_S36_VictoryDuosCup_EU/S36_VictoryDuosCup_Event1Round1_EU": {
@@ -354,12 +354,12 @@
       "emptyAttempts": 0
     },
     "epicgames_S36_VictoryDuosCup_NAC/S36_VictoryDuosCup_Event1Round1_NAC": {
-      "nextPage": 34,
-      "pages": 34,
-      "complete": false,
-      "coverageLimited": false,
+      "nextPage": 40,
+      "pages": 40,
+      "complete": true,
+      "coverageLimited": true,
       "totalPages": 100,
-      "lastScanned": "2026-11-07T08:57:33.747Z",
+      "lastScanned": "2026-11-07T09:32:42.396Z",
       "emptyAttempts": 0
     },
     "epicgames_S30_SoloVictoryCashCup_ME/S30_SoloVictoryCashCup_Event6Round2_ME": {
@@ -396,6 +396,33 @@
       "coverageLimited": false,
       "totalPages": 100,
       "lastScanned": "2026-11-07T08:57:01.551Z",
+      "emptyAttempts": 0
+    },
+    "epicgames_S43_OnePieceZoroCup_NAW/S43_OnePieceZoroCup_NAW": {
+      "nextPage": 12,
+      "pages": 12,
+      "complete": false,
+      "coverageLimited": false,
+      "totalPages": 100,
+      "lastScanned": "2026-11-07T09:32:23.359Z",
+      "emptyAttempts": 0
+    },
+    "epicgames_S30_SoloVictoryCashCup_ME/S30_SoloVictoryCashCup_Event7Round2_ME": {
+      "nextPage": 12,
+      "pages": 12,
+      "complete": false,
+      "coverageLimited": false,
+      "totalPages": 18,
+      "lastScanned": "2026-11-07T09:32:36.647Z",
+      "emptyAttempts": 0
+    },
+    "epicgames_S30_SquadsVictoryCashCup_NAC/S30_SquadsVictoryCashCup_Event1Round1_NAC": {
+      "nextPage": 5,
+      "pages": 5,
+      "complete": false,
+      "coverageLimited": false,
+      "totalPages": 100,
+      "lastScanned": "2026-11-07T09:32:47.641Z",
       "emptyAttempts": 0
     }
   }
