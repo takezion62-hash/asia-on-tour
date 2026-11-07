@@ -1,0 +1,32 @@
+name: AOT Unreal Cup auto-approval safety tests
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/unreal-auto-check.yml"
+      - "scripts/automatic-unreal-approval.cjs"
+      - "scripts/osirion-sync.cjs"
+      - "scripts/auto-sync-core.cjs"
+      - "tests/automatic-unreal-approval.test.cjs"
+      - "tournament-rules.json"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Check automatic Unreal rule wiring and syntax
+        run: |
+          node --check scripts/automatic-unreal-approval.cjs
+          node --check scripts/osirion-sync.cjs
+          node --check scripts/auto-sync-core.cjs
+      - name: Validate source-backed prize registry and existing results
+        run: npm run validate
+      - name: Check prize, zero award, full leaderboard, Epic IDs and duplicate guards
+        run: node --test tests/automatic-unreal-approval.test.cjs tests/tournament-rules.test.cjs tests/osirion-sync.test.cjs
