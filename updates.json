@@ -581,11 +581,9 @@
       "id": "auto-sync-20261107025130",
       "date": "2026-11-07",
       "type": "records",
-      "title": "公式規則で自動承認：過去大会96戦績",
-      "description": "公式規則・地域別順位・本人確認済みEpic ID・順位表・既存戦績を照合。予選突破、公式VR賞金、スキン（0件）、公式賞金表によるCash Cup（0件／賞金圏外$0含む）、S43 Performance Evaluation（0件）を自動掲載。支払い完了や未確認の賞金は推定しない。",
+      "title": "公式規則で自動承認：過去大会94戦績（重複2件統合済み）",
+      "description": "公式規則・地域別順位・本人確認済みEpic ID・順位表・既存戦績を照合。予選突破、公式VR賞金、スキン（0件）、公式賞金表によるCash Cup（0件／賞金圏外$0含む）、S43 Performance Evaluation（0件）を自動掲載。支払い完了や未確認の賞金は推定しない。 2026-11-07訂正：2026-09-22 NAW Solo Victory CupのYanagi・あくりあは既存の手動登録と同一成績であったため、新規登録分2件を統合し、既存の戦績ID・Trackerプロフィールを保持。更新履歴は実際に新規登録された94件のみ参照する。",
       "recordIds": [
-        "auto-s42-97bb48f5d3f0",
-        "auto-s42-3427725928b0",
         "auto-s42-aebc3d03e7db",
         "auto-s42-94ed2b38d9ef",
         "auto-s42-efedf0328fc3",
