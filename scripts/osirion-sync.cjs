@@ -486,7 +486,8 @@ async function main(){
  const invalidCached=foundInScope.length-validHistory.length;
  const recordedFromReview=validHistory.filter(x=>recordedIds.has(x.id)).length;
  const reviewedPath=path.join(root,'history-sync-reviewed.json');
- const reviewed=historical&&fs.existsSync(reviewedPath)?read('history-sync-reviewed.json'):{version:1,entries:[]};
+ // A manually adjudicated duplicate must stay suppressed in BOTH recent and historical syncs.
+ const reviewed=fs.existsSync(reviewedPath)?read('history-sync-reviewed.json'):{version:1,entries:[]};
  if(reviewed.version!==1||!Array.isArray(reviewed.entries))throw Error('invalid historical review ledger');
  const reviewedIds=new Set(reviewed.entries.map(x=>x.id));
  const pending=validHistory.filter(x=>!recordedIds.has(x.id)&&!reviewedIds.has(x.id));
