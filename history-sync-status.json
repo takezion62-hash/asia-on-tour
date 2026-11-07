@@ -11,7 +11,7 @@
   "provider": "osirion",
   "linkedPlayers": 459,
   "trackedWindows": 2784,
-  "found": 20,
+  "found": 0,
   "skipped": 25,
   "imported": 0,
   "scannedPages": 80,
@@ -20,7 +20,7 @@
   "alreadyRegistered": 951,
   "autoApprovedTotal": 626,
   "invalidCachedCandidates": 1,
-  "manualReviewCandidates": 20,
+  "manualReviewCandidates": 0,
   "autoApprovedCosmeticThisRun": 0,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
@@ -29,7 +29,7 @@
   "retryWindows": 13,
   "transientFailures": 3,
   "reviewOnlyWindows": 1272,
-  "reviewOnlyCandidates": 20,
+  "reviewOnlyCandidates": 0,
   "unmappedEvents": 244,
   "unmappedEventIds": [
     "S30_ConsoleCashCups",
@@ -45,9 +45,11 @@
     "S30_Reload",
     "S30_ReloadZB"
   ],
-  "message": "過去予選・FNCS・Console・Performance: 21件新規、0件既存、0件保留。無効開催枠と未完成Unrealデータは除外。過去候補残20件。",
-  "manuallyPublished": 58,
+  "message": "Unreal NAW122位のチーム$200（個人各$100）を公式規則・独立順位表で確認。無効OCE PlayStation 19件を掲載除外、0件保留。過去確認待ち残0件。",
+  "manuallyPublished": 59,
   "manuallyResolvedDuplicates": 1,
   "lastS31RuleReviewAt": "2026-11-07T04:24:32.136Z",
-  "lastRound1ReviewAt": "2026-11-07T04:27:04.236Z"
+  "lastRound1ReviewAt": "2026-11-07T04:27:04.236Z",
+  "reviewedVoided": 19,
+  "lastUnrealAndVoidedAuditAt": "2026-11-07T04:29:31.816Z"
 }
