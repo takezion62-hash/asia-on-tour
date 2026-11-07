@@ -120,3 +120,19 @@ test('historical checkpoint from the old review-only era becomes rescan-eligible
  const fresh={version:1,windows:{[win.key]:{complete:true,epicIdsRetained:true,proposals:[],nextPage:3,totalPages:3}}};
  assert.equal(selectHistoricalWindows([win],fresh,{maxWindowsPerRun:4},Date.now(),[]).length,0);
 });
+
+test('very large Unreal regional standings can exceed 100 pages without broadening other cups',async()=>{
+ const {getLeaderboard}=require('../scripts/osirion-sync.cjs');
+ const original=globalThis.fetch;
+ globalThis.fetch=async()=>({ok:true,json:async()=>({
+   success:true,leaderboard:{
+     leaderboardEventId:win.fullEventId,leaderboardEventWindowId:win.windowId,
+     entries:[],totalPages:175
+   }
+ })});
+ try{
+  const response=await getLeaderboard(win,0);
+  assert.equal(response.totalPages,175);
+  await assert.rejects(()=>getLeaderboard({...win,series:'cash-cup'},0),/順位表のID\/形式が不正/);
+ }finally{globalThis.fetch=original}
+});
