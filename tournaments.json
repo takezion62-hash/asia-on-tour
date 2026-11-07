@@ -259,6 +259,10 @@
         {
           "id": "duos-victory-cup",
           "label": "Duos Victory Cup"
+        },
+        {
+          "id": "aussieantics-fncs-cup",
+          "label": "AussieAntics FNCS Cup"
         }
       ]
     },
@@ -2249,6 +2253,35 @@
         {
           "text": "Fortnite TrackerのNAW Prize Pool：1位$4,000、2位$2,000、3位$1,000、5位$750、10位$500、25位$400、50位$300、75位$200。",
           "url": "https://fortnitetracker.com/events/epicgames_S39_SoloSeriesCupFinal_NAW"
+        }
+      ]
+    },
+    {
+      "id": "ch5s4-aussieantics-fncs-cup",
+      "name": "AussieAntics FNCS Cup",
+      "chapter": 5,
+      "season": 4,
+      "seasonId": "S31",
+      "sourceEventIds": [
+        "S31_InfluencerCup"
+      ],
+      "series": "victory-cup",
+      "additionalSeries": [
+        "fncs"
+      ],
+      "mode": "battle-royale",
+      "subtype": "aussieantics-fncs-cup",
+      "team": "duo",
+      "platform": "cross-platform",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "Epic公式 Chapter5 Season4 FNCS Influencer Cups規則：通常Battle Royale Duos、決勝3試合、1VRごとにチーム$200＝個人$100。ThePeachCobbler FNCS Cupと同じ大会形式。",
+          "url": "https://www.fortnite.com/news/fncs-influencer-cups-chapter-5-season-4-official-rules?lang=en-US"
+        },
+        {
+          "text": "Fortnite TrackerのAussieAntics FNCS Cup OCE：2024/9/6 Round2、上位800組が予選突破、OCE賞金一覧。添付のAim/3peace結果31位・14キル・1VRを参照。",
+          "url": "https://fortnitetracker.com/events/epicgames_S31_InfluencerCup_OCE?window=S31_InfluencerCup_Round2_OCE"
         }
       ]
     }
