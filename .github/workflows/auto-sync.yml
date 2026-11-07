@@ -4,6 +4,8 @@ on:
     branches: [main]
     paths:
       - "scripts/osirion-sync.cjs"
+      - "scripts/safe-sync-merge.cjs"
+      - "tests/safe-sync-merge.test.cjs"
       - "scripts/auto-sync-core.cjs"
       - "scripts/automatic-cosmetic-approval.cjs"
       - "scripts/automatic-cash-approval.cjs"
@@ -44,6 +46,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '24'
+      - name: Snapshot pre-scan public data for race-safe reconciliation
+        run: node scripts/safe-sync-merge.cjs snapshot auto "$RUNNER_TEMP/aot-auto-base.json"
       - name: Check eligible tournament results
         env:
           AOT_FORTNITE_API_KEY: ${{ secrets.AOT_FORTNITE_API_KEY }}
@@ -52,28 +56,34 @@ jobs:
         run: |
           npm run validate
           node --test tests/auto-sync.test.cjs tests/osirion-sync.test.cjs tests/non-victory-auto-sync.test.cjs tests/automatic-cosmetic-approval.test.cjs tests/cosmetic-rank-rules.test.cjs tests/automatic-cash-approval.test.cjs tests/automatic-unreal-approval.test.cjs tests/automatic-performance-approval.test.cjs tests/tournament-rules.test.cjs
-      - name: Commit checked updates only
+      - name: Preserve verified recent scan output
+        run: node scripts/safe-sync-merge.cjs snapshot auto "$RUNNER_TEMP/aot-auto-scanned.json"
+      - name: Reconcile and commit onto newest main (conflict-safe)
         run: |
-          if [ -z "$(git status --porcelain -- results.json updates.json auto-sync-status.json auto-sync-review.json auto-sync-scan.json)" ]; then
-            echo "No changes: disabled or already up to date"
-            exit 0
-          fi
+          set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add results.json updates.json auto-sync-status.json auto-sync-review.json auto-sync-scan.json
-          git commit -m "data: apply verified AOT tournament sync"
-          # Race-safe, bounded retry: integrate other bots' commits, never force push.
+          # Races with historical/backfill/manual changes are resolved by
+          # replaying this scan's verified additions onto the freshest main.
           for attempt in 1 2 3 4 5; do
-            git pull --rebase origin main || {
-              git rebase --abort || true
-              echo "Rebase conflict: preserve both histories and require review"
-              exit 1
-            }
-            if git push origin HEAD:main; then
+            echo "SAFE_RECENT_MERGE attempt ${attempt}/5"
+            git fetch origin main
+            git reset --hard origin/main
+            node scripts/safe-sync-merge.cjs merge auto "$RUNNER_TEMP/aot-auto-base.json" "$RUNNER_TEMP/aot-auto-scanned.json"
+            npm run validate
+            node --test tests/safe-sync-merge.test.cjs
+            git add results.json updates.json auto-sync-status.json auto-sync-review.json auto-sync-scan.json
+            if git diff --cached --quiet; then
+              echo "SAFE_RECENT_MERGE no new data to publish"
               exit 0
             fi
-            echo "Remote advanced between pull and push; retrying ($attempt/5)"
+            git commit -m "data: safely merge recent AOT sync into newest main"
+            if git push origin HEAD:main; then
+              echo "SAFE_RECENT_MERGE published with existing history preserved"
+              exit 0
+            fi
+            echo "Main moved during recent sync; replay changes onto newest main"
             sleep $((attempt * 3))
           done
-          echo "Could not push after 5 safe retries"
+          echo "SAFE_RECENT_MERGE failed after 5 conflict-safe attempts"
           exit 1
