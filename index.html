@@ -653,6 +653,15 @@
     .ranking-filters{display:grid;grid-template-columns:minmax(190px,1.15fr) repeat(2,minmax(150px,1fr));gap:12px;margin:18px 0 12px}
     .ranking-field{display:grid;gap:6px;min-width:0;font-size:11px;font-weight:750;color:#bdc5da}
     .ranking-field[hidden]{display:none}.ranking-field select{width:100%;min-width:0;max-width:100%;padding:11px 10px;border:1px solid #3f4662;border-radius:9px;background:#101729;color:#e1e5f5;font:inherit;font-size:12px}
+    .ranking-data-quality{border:1px solid #46516e;background:#151d30;border-radius:12px;margin:14px 0;padding:10px 14px}
+    .ranking-data-quality summary{cursor:pointer;color:#d2e7ff;font-weight:800;font-size:12px;min-height:31px;display:flex;align-items:center}
+    .ranking-data-quality summary:focus-visible{outline:2px solid #a0dce9;outline-offset:3px}
+    .ranking-quality-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:9px;margin:13px 0}
+    .ranking-quality-item{display:flex;flex-direction:column;gap:6px;border:1px solid #37435c;border-radius:9px;background:#10182a;padding:12px;min-width:0}
+    .ranking-quality-item small{color:#9caecf;font-size:10px}
+    .ranking-quality-item strong{color:#f2f7ff;font-size:17px;font-variant-numeric:tabular-nums}
+    .ranking-quality-item span,.ranking-quality-caveat{color:#b9c8dd;font-size:10px;line-height:1.8}
+    .ranking-quality-caveat{margin:10px 0 4px}
     .ranking-scope{color:#d0bafa;font-weight:750}.ranking-definition{min-height:40px}.ranking-results{min-height:220px}
     .ranking-results-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:19px 0 11px}.ranking-results-head h3{margin:0;font-size:16px}.ranking-results-head p{font-size:11px;color:#a9b4cf;margin:0}
     .performance-ranking .earner{background:#171e2e;border-color:#333d56;transition:border-color .15s,background .15s;transform:none}
@@ -939,6 +948,7 @@
     <label class="ranking-field" id="ranking-final-field" for="ranking-final-kind" hidden><span>決勝の区分</span><select id="ranking-final-kind"><option value="all">すべての掲載済み決勝</option><option value="賞金決勝">賞金決勝</option><option value="Practice決勝">Practice決勝</option><option value="Performance決勝">Performance決勝</option><option value="決勝">その他の決勝（賞金区分未確認）</option></select></label>
   </div>
   <p id="ranking-scope" class="ranking-scope"></p><p id="ranking-definition" class="ranking-definition"></p>
+  <details class="ranking-data-quality" id="ranking-data-quality"><summary>集計対象・データの充実度を確認</summary><div id="ranking-data-quality-body" aria-label="ランキングの入力データ品質"></div></details>
   <div class="ranking-results"><div class="ranking-results-head"><h3 id="ranking-metric-title">個人獲得賞金</h3><p id="ranking-count" aria-live="polite" aria-atomic="true"></p></div><div class="player-prize-list" id="player-earnings-leaders" role="list" aria-labelledby="ranking-metric-title"></div><details id="ranking-unknown" class="ranking-unknown" hidden></details></div>
   <button id="ranking-more" class="btn sm ghost ranking-more" type="button" data-ranking-more hidden>さらに30名表示</button><p id="ranking-integrity" class="ranking-integrity" hidden></p>
   <p class="earnings-explainer" id="ranking-completeness">このランキングは、ASIA ON TOURに掲載されている海外大会戦績をもとに集計しています。未掲載の大会があるため、選手の実際の全成績とは異なる場合があります。公式ランキングではありません。</p>

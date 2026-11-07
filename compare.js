@@ -116,11 +116,23 @@
           podiums++;if(rank===1)wins++;
         }
       }
+      const quality={
+        records:own.length,
+        matchSamples:own.filter(row=>Number.isSafeInteger(row.matches)&&row.matches>0).length,
+        killSamples:own.filter(row=>Number.isSafeInteger(row.kills)&&row.kills>=0).length,
+        vrSamples:knownVR,
+        cashCandidates:own.filter(row=>FINAL_KINDS.has(row.kind)).length,
+        cashResolved:own.filter(row=>FINAL_KINDS.has(row.kind)&&
+          typeof row.prize==='number'&&Number.isFinite(row.prize)&&row.prize>=0&&
+          (names(row).length===1||row.prize===0||
+           typeof row.prizePerPlayer==='number'&&Number.isFinite(row.prizePerPlayer)&&
+           row.prizePerPlayer>0&&row.prizePerPlayer*names(row).length<=row.prize+0.001)).length
+      };
       const pr=prReport?.byName?.get(name);
       return {
         name,values:{pr:pr?.score||0,cash:cents/100,vrs:knownVR?vrs:null,finals,podiums,
           prizeCount,regions:destination.size,results:own.length},
-        wins,knownVR,roundsWithoutVR:own.length-knownVR,
+        wins,knownVR,roundsWithoutVR:own.length-knownVR,quality,
         regions:REGIONS.filter(region=>destination.has(region)),
         byRegion:Object.fromEntries(REGIONS.map(region=>[region,{
           results:byRegion[region].results,cash:byRegion[region].cash/100,
