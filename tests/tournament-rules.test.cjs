@@ -19,7 +19,7 @@ test('shared official tournament rules include review-only Trio Cash Cup plus ap
   if(rule.series==='cash-cup'){
    assert.equal(RULES[rule.id],undefined);
    assert.equal(CUT_OFFS[rule.id],undefined);
-   assert.equal(rule.autoApproval,'review-only');
+   assert.equal(rule.autoApproval,'verified-team-rank');
   }
   if(rule.series==='skin-cup'){
    assert.equal(CUT_OFFS[rule.id].source,rule.source);
@@ -83,6 +83,6 @@ test('Cash Cup payment registry rejects region spoofing, duplicate rank cutoffs 
  assert.match(testChange(rule=>{rule.cashPrizes.tiers.NAC[2].through=2}),/順位・個人賞金に矛盾/);
  assert.match(testChange(rule=>{rule.cashPrizes.tiers.EU[0].perPlayer=-10}),/順位・個人賞金に矛盾/);
  assert.match(testChange(rule=>{rule.cashPrizes.tiers.FAKE=rule.cashPrizes.tiers.EU}),/地域・賞金表が不正/);
- assert.match(testChange(rule=>{rule.autoApproval='auto'}),/確認専用/);
+ assert.match(testChange(rule=>{rule.autoApproval='auto'}),/承認方式/);
  assert.match(testChange(rule=>{rule.cashPrizes.basis='per-team'}),/個人賞金テーブルが不正/);
 });

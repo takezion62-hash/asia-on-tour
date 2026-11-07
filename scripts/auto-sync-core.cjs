@@ -70,6 +70,9 @@ function prepare(feed,config,data){
       rec.note='参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。';
     }
     if(members.length>1)rec.players=members;
+    // Cash Cup award verification needs the original exact Epic IDs, not just names.
+    // The IDs are retained only in review checkpoints; the public record strips them.
+    if(win.catalog.series==='cash-cup')rec.teamAccountIds=ids;
     if(cashConfirmed&&members.length>1&&Number.isFinite(x.prizePerPlayer)&&x.prizePerPlayer>0&&x.prizePerPlayer*members.length<=prize)rec.prizePerPlayer=x.prizePerPlayer;
     proposals.push(rec);seen.add(deDup);
   }

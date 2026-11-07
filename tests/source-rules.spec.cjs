@@ -42,7 +42,7 @@ test('Trios Cash Cup displays six verified regional individual payout ladders',a
  await page.locator('#source-rule-search').fill('trios cash');
  const card=page.locator('.source-rule-card[data-rule-id="ch7s5-trios-cash-cup"]');
  await expect(card).toBeVisible();
- await expect(card).toContainText('確認専用');
+ await expect(card).toContainText('全順位を自動掲載');
  await page.locator('#source-rule-region').selectOption('EU');
  await expect(card).toContainText('1位');
  await expect(card).toContainText('$1,000');

@@ -9,6 +9,8 @@ on:
       - index.html
       - schedule.json
       - scripts/validate-tournament-rules.cjs
+      - scripts/automatic-cash-approval.cjs
+      - tests/automatic-cash-approval.test.cjs
       - tests/tournament-rules.test.cjs
       - tests/source-rules.spec.cjs
       - .github/workflows/tournament-rules-check.yml
@@ -21,6 +23,8 @@ on:
       - index.html
       - schedule.json
       - scripts/validate-tournament-rules.cjs
+      - scripts/automatic-cash-approval.cjs
+      - tests/automatic-cash-approval.test.cjs
       - tests/tournament-rules.test.cjs
       - tests/source-rules.spec.cjs
       - .github/workflows/tournament-rules-check.yml
@@ -45,7 +49,7 @@ jobs:
         run: |
           node --check source-rules.js
           npm run validate
-          node --test tests/tournament-rules.test.cjs tests/cosmetic-rank-rules.test.cjs tests/verified-history-approval.test.cjs
+          node --test tests/tournament-rules.test.cjs tests/cosmetic-rank-rules.test.cjs tests/verified-history-approval.test.cjs tests/automatic-cash-approval.test.cjs
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
       - name: PC and mobile rulebook tests

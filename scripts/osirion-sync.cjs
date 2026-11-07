@@ -7,6 +7,7 @@ const fs=require('node:fs'),path=require('node:path');
 const {prepare,maximumMatches,applyProposals}=require('./auto-sync-core.cjs');
 const {evaluate,RULES}=require('./verified-history-approval.cjs');
 const {evaluate:evaluateCosmetics,cutoffForWindow}=require('./automatic-cosmetic-approval.cjs');
+const {evaluate:evaluateCash,cashLimitForWindow}=require('./automatic-cash-approval.cjs');
 const root=path.resolve(__dirname,'..');
 const read=name=>JSON.parse(fs.readFileSync(path.join(root,name),'utf8'));
 const write=(name,obj)=>fs.writeFileSync(path.join(root,name),JSON.stringify(obj,null,2)+'\n');
@@ -109,7 +110,7 @@ function discover(all,catalog,opts,time=Date.now()){
     if(dateJst<opts.fromDate||dateJst>opts.toDate)continue;
    }else if(end<time-recentDays*86400000)continue;
    const key=full+'/'+windowId;
-   selected.set(key,{key,fullEventId:full,eventId:base,windowId,region,dateJst,seasonId:t.seasonId,tournamentId:t.id,series:t.series,round:stage.round,kind:stage.kind,end});
+   selected.set(key,{key,fullEventId:full,eventId:base,windowId,region,dateJst,startUtc:new Date(begin).toISOString(),seasonId:t.seasonId,tournamentId:t.id,series:t.series,round:stage.round,kind:stage.kind,end});
   }
  }
  return [...selected.values()].sort((a,b)=>a.end-b.end);
@@ -261,7 +262,7 @@ function historicalPriority(state,records){
    const cp=state.windows[w.key];
    const fraction=cp?.totalPages>0?Math.min(1,(cp.nextPage||0)/cp.totalPages):0;
    // Higher score means a publishable official ruleset and a round near completion.
-   const approvedRule=(Object.hasOwn(RULES,w.tournamentId)&&w.series==='victory-cup')||cutoffForWindow(w)!==null;
+   const approvedRule=(Object.hasOwn(RULES,w.tournamentId)&&w.series==='victory-cup')||cutoffForWindow(w)!==null||cashLimitForWindow(w)!==null;
    return (approvedRule?150:0)+Math.round(fraction*90)+historicalEvidenceScore(w,records)+(w.kind==='賞金決勝'?12:0)+(w.kind==='参加確認'?3:0);
   };
   return score(b)-score(a)||a.end-b.end;
@@ -332,8 +333,9 @@ async function main(){
  }
  if(!config.enabled||config.provider!=='osirion'){console.log('OSIRION_SYNC_DISABLED');return}
  if(config.mode!=='review')throw Error('Osirionの自動公開は安全性検証が完了するまで無効です');
- const data={results:read('results.json'),players:read('players.json'),tournaments:read('tournaments.json'),updates:read('updates.json')};
+ const data={results:read('results.json'),players:read('players.json'),tournaments:read('tournaments.json'),schedule:read('schedule.json'),updates:read('updates.json')};
  const {accounts,conflicts}=linkedAccounts(data);
+ data.verifiedAccounts=accounts;
  if(!accounts.length)throw Error('追跡対象のIDがありません');
  const all=await getTournaments(historical);
  const windows=discover(all,data.tournaments.catalog,config);
@@ -379,7 +381,10 @@ async function main(){
    const cutoff=(historical?advancementLimit(win):null)??cutoffForWindow(win);
    const pageRanks=l.entries.map(e=>e.rank);
    const ordered=pageRanks.every((rank,i)=>Number.isSafeInteger(rank)&&rank>=1&&(i===0||rank>=pageRanks[i-1]));
-   const crossed=ordered&&cutoff!==null&&pageRanks.some(rank=>rank>cutoff);
+   const followsPrevious=checkpoint.lastSeenRank==null||pageRanks.length===0||pageRanks[0]>=checkpoint.lastSeenRank;
+   checkpoint.rankingOrderValid=checkpoint.rankingOrderValid!==false&&ordered&&followsPrevious;
+   if(pageRanks.length)checkpoint.lastSeenRank=pageRanks[pageRanks.length-1];
+   const crossed=checkpoint.rankingOrderValid&&cutoff!==null&&pageRanks.some(rank=>rank>cutoff);
    const eligibleRows=cutoff===null?l.entries:l.entries.filter(e=>!Number.isSafeInteger(e.rank)||e.rank<=cutoff);
    const entries=eligibleRows.map(e=>normalizeRow(e,win));
    invalidRows+=entries.filter(x=>!x).length;
@@ -418,17 +423,20 @@ async function main(){
  // A positive-VR cash prize remains excluded without an independent verified payout.
  const cosmetic=(config.autoApproveCosmetic===true)?
   evaluateCosmetics(pending,windows,state.windows,{...data,results:[...data.results,...verified.approved]}):{approved:[],held:[]};
- const approved=[...verified.approved,...cosmetic.approved];
+ const cash=(config.autoApproveCash===true)?
+  evaluateCash(pending,windows,state.windows,{...data,results:[...data.results,...verified.approved,...cosmetic.approved]}):{approved:[],held:[]};
+ const approved=[...verified.approved,...cosmetic.approved,...cash.approved];
  importedCosmetics=cosmetic.approved.length;
  for(const hold of verified.held)reasons.set(hold.id,hold.reason);
  for(const hold of cosmetic.held)if(!reasons.has(hold.id))reasons.set(hold.id,hold.reason);
+ for(const hold of cash.held)reasons.set(hold.id,hold.reason);
  for(const row of approved)importedIds.add(row.id);
  manuallyHeld=pending.length-approved.length;
  imported=applyProposals(data,approved,stamp);
  if(imported){
   const entry=data.updates.entries[0];
   entry.title='公式規則で自動承認：'+(historical?'過去大会':'新着大会')+imported+'戦績';
-  entry.description='公式規則・地域別順位・本人確認済みEpic ID・順位表・既存戦績を照合。予選突破、決勝0VR、金額が公式に明記された決勝VR賞金、ゲーム内スキン（'+importedCosmetics+'件）のみ自動掲載。未検証賞金や配布完了は推定しない。';
+  entry.description='公式規則・地域別順位・本人確認済みEpic ID・順位表・既存戦績を照合。予選突破、公式VR賞金、スキン（'+importedCosmetics+'件）、公式賞金表によるCash Cup（'+cash.approved.length+'件／賞金圏外$0含む）を自動掲載。支払い完了や未確認の賞金は推定しない。';
   write('results.json',data.results);
   write('updates.json',data.updates);
  }
@@ -438,12 +446,12 @@ async function main(){
  const reviewOnlyWindows=windows.filter(w=>w.series!=='victory-cup').length;
  const reviewOnlyCandidates=unique.size?Array.from(unique.values()).filter(p=>p.reviewOnly===true).length:0;
  const cumulativeApprovals=data.updates.entries.filter(x=>x.title?.startsWith('公式規則で自動承認：')).reduce((sum,x)=>sum+(x.recordIds?.length||0),0);
- const status={version:1,state:'checked',checkedAt:stamp,mode:'review',scope:historical?'history':'recent',dateMode:historical?(storedConfig.toDate==='rolling'?'rolling':'fixed'):null,selectedWindows:active.length,fromDate:historical?config.fromDate:null,toDate:historical?config.toDate:null,provider:'osirion',linkedPlayers:accounts.length,trackedWindows:windows.length,found:unique.size,skipped:invalidRows,imported,scannedPages:scanned,completedWindows:finished,identityConflicts:conflicts.length,alreadyRegistered:recordedFromReview,autoApprovedTotal:cumulativeApprovals,invalidCachedCandidates:invalidCached,manualReviewCandidates:manuallyHeld,autoApprovedCosmeticThisRun:importedCosmetics,timeLimitReached,retryWindows:Object.entries(state.windows).filter(([key,w])=>eligible.has(key)&&!w.complete&&w.retryAfter).length,transientFailures,reviewOnlyWindows,reviewOnlyCandidates,unmappedEvents:unmapped.length,unmappedEventIds:unmapped.slice(0,12),message:'Osirionで'+accounts.length+'アカウントIDを追跡。今回の公式規則による自動承認'+imported+'件、追加確認待ち'+unique.size+'件、名義照合保留'+conflicts.length+'件。'};
+ const status={version:1,state:'checked',checkedAt:stamp,mode:'review',scope:historical?'history':'recent',dateMode:historical?(storedConfig.toDate==='rolling'?'rolling':'fixed'):null,selectedWindows:active.length,fromDate:historical?config.fromDate:null,toDate:historical?config.toDate:null,provider:'osirion',linkedPlayers:accounts.length,trackedWindows:windows.length,found:unique.size,skipped:invalidRows,imported,scannedPages:scanned,completedWindows:finished,identityConflicts:conflicts.length,alreadyRegistered:recordedFromReview,autoApprovedTotal:cumulativeApprovals,invalidCachedCandidates:invalidCached,manualReviewCandidates:manuallyHeld,autoApprovedCosmeticThisRun:importedCosmetics,autoApprovedCashThisRun:cash.approved.length,timeLimitReached,retryWindows:Object.entries(state.windows).filter(([key,w])=>eligible.has(key)&&!w.complete&&w.retryAfter).length,transientFailures,reviewOnlyWindows,reviewOnlyCandidates,unmappedEvents:unmapped.length,unmappedEventIds:unmapped.slice(0,12),message:'Osirionで'+accounts.length+'アカウントIDを追跡。今回の公式規則による自動承認'+imported+'件、追加確認待ち'+unique.size+'件、名義照合保留'+conflicts.length+'件。'};
  state.checkedAt=stamp;
  write(prefix+'-scan.json',state);
  write(prefix+'-review.json',{version:1,status:'review',checkedAt:stamp,proposals:[...unique.values()]});
  write(prefix+'-status.json',status);
- console.log((historical?'OSIRION_HISTORY_REVIEW ':'OSIRION_REVIEW ')+JSON.stringify({scannedPages:scanned,linkedPlayers:accounts.length,identityConflicts:conflicts.length,windows:windows.length,unmappedEvents:unmapped.length,proposals:unique.size,imported,cosmetic:importedCosmetics,finished}));
+ console.log((historical?'OSIRION_HISTORY_REVIEW ':'OSIRION_REVIEW ')+JSON.stringify({scannedPages:scanned,linkedPlayers:accounts.length,identityConflicts:conflicts.length,windows:windows.length,unmappedEvents:unmapped.length,proposals:unique.size,imported,cosmetic:importedCosmetics,cash:cash.approved.length,finished}));
 }
 if(require.main===module)main().catch(e=>{console.error('OSIRION_SYNC_ERROR '+e.stack);process.exitCode=1});
 module.exports={identity,linkedAccounts,parseStage,parseReviewStage,discover,discoverUnmapped,selectActiveWindows,selectHistoricalWindows,historicalEvidenceScore,resolveHistoricalScope,fetchJson,advancementLimit,normalizeRow,getTournaments,getLeaderboard,transientLeaderboardFailure,main};

@@ -35,7 +35,13 @@ function validateRegistry(doc,tournaments){
   }else if(rule.series==='cash-cup'){
    // Cash Cup rules may be displayed, but are not eligible for automatic payout
    // publication until team identity, session completion and eligibility checks exist.
-   if(rule.autoApproval!=='review-only')fail(id,'Cash Cupは確認専用にしてください');
+   if(!['review-only','verified-team-rank'].includes(rule.autoApproval))fail(id,'Cash Cupの承認方式が不正');
+   if(rule.autoApproval==='verified-team-rank'&&(
+      !Number.isSafeInteger(rule.matchCaps?.['単一ラウンド'])||rule.matchCaps['単一ラウンド']<1||
+      !Array.isArray(rule.eventIds)||rule.eventIds.length!==1||
+      rule.cashPrizes?.basis!=='per-player'||rule.cashPrizes?.currency!=='USD'||
+      !Object.keys(rule.cashPrizes?.tiers||{}).length
+   ))fail(id,'自動承認には正確なイベントIDと個人賞金・試合数の条件が必要');
    if(!positive(rule.matchCaps?.['単一ラウンド']))fail(id,'Cash Cupの試合数上限が必要');
    if(rule.advance!==undefined||rule.cosmeticRanks!==undefined||rule.prizePerVictory!==undefined)fail(id,'Cash Cupに他大会の報酬条件が混在しています');
    if(!object(rule.rankedEligibility)||

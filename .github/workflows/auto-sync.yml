@@ -6,6 +6,8 @@ on:
       - "scripts/osirion-sync.cjs"
       - "scripts/auto-sync-core.cjs"
       - "scripts/automatic-cosmetic-approval.cjs"
+      - "scripts/automatic-cash-approval.cjs"
+      - "tests/automatic-cash-approval.test.cjs"
       - "tournament-rules.json"
       - "scripts/validate-tournament-rules.cjs"
       - "tests/tournament-rules.test.cjs"
@@ -45,7 +47,7 @@ jobs:
       - name: Validate data and run sync unit tests
         run: |
           npm run validate
-          node --test tests/auto-sync.test.cjs tests/osirion-sync.test.cjs tests/non-victory-auto-sync.test.cjs tests/automatic-cosmetic-approval.test.cjs tests/cosmetic-rank-rules.test.cjs tests/tournament-rules.test.cjs
+          node --test tests/auto-sync.test.cjs tests/osirion-sync.test.cjs tests/non-victory-auto-sync.test.cjs tests/automatic-cosmetic-approval.test.cjs tests/cosmetic-rank-rules.test.cjs tests/automatic-cash-approval.test.cjs tests/tournament-rules.test.cjs
       - name: Commit checked updates only
         run: |
           if [ -z "$(git status --porcelain -- results.json updates.json auto-sync-status.json auto-sync-review.json auto-sync-scan.json)" ]; then
