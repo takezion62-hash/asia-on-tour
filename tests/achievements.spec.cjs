@@ -278,7 +278,7 @@ test('12個の追加称号はPC・スマホの折りたたみプロフィール�
       'EU','2026-09-'+String(i+1).padStart(2,'0'),70,3,0,'予選'))
   ];
   const expected=achievements.calculate(rows,name,{catalog:data.tournaments.catalog}).special;
-  expect(expected.total).toBe(30);
+  expect(expected.total).toBe(31);
   for(const id of ['final-kill-tyrant','final-runner-up','podium-streak','cash-windfall',
     'cash-chain','same-day-traveler','same-day-cash','reload-regular','no-vr-cash',
     'zero-build-champion','fncs-finalist','seven-day-traveler']){
@@ -291,7 +291,7 @@ test('12個の追加称号はPC・スマホの折りたたみプロフィール�
   const gallery=page.locator('#profile-achievements .achievement-collection');
   await expect(gallery).not.toHaveAttribute('open','');
   await expandAchievements(page);
-  await expect(page.locator('[data-special-count]')).toHaveText(expected.earned+' / 30');
+  await expect(page.locator('[data-special-count]')).toHaveText(expected.earned+' / 31');
   for(const id of ['final-kill-tyrant','cash-windfall','same-day-cash','seven-day-traveler',
     'zero-build-champion','reload-regular','fncs-finalist']){
     await expect(page.locator('[data-special-id="'+id+'"][data-special-unlocked="true"]')).toBeVisible();
@@ -306,6 +306,35 @@ test('12個の追加称号はPC・スマホの折りたたみプロフィール�
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth+1)).toBe(true);
 });
 
+
+test('三冠の支配者はソロ・デュオ・トリオの確認済みVRでエピックとして表示する',async({page})=>{
+ const source=records.find(row=>row.verified===true&&roster(row).length===1&&/solo/i.test(row.event));
+ expect(source,'ソロ本人プロフィール').toBeTruthy();
+ const name=roster(source)[0];
+ const solo={...source,id:'triple-format-solo',event:'Solo Victory Cup Battle Royale',
+   date:'2026-09-03',region:'ME',kind:'予選',player:name,players:[name],vrs:1,prize:null,verified:true};
+ const duo={...solo,id:'triple-format-duo',event:'Duos Cash Cup',
+   date:'2026-09-04',region:'EU',player:name+' / Pair',players:[name,'Pair'],vrs:1};
+ const trio={...solo,id:'triple-format-trio',event:'Trios Cash Cup',
+   date:'2026-09-05',region:'NAC',player:name+' / Pair / Third',players:[name,'Pair','Third'],vrs:2};
+ const expected=achievements.calculate([solo,duo,trio],name,{catalog:data.tournaments.catalog});
+ const triple=expected.special.achievements.find(badge=>badge.id==='triple-format-vr');
+ expect(triple.unlocked).toBe(true);
+ expect(triple.rarity).toBe('epic');
+ await page.route('**/results.json',route=>route.fulfill({
+   status:200,contentType:'application/json',body:JSON.stringify([solo,duo,trio])
+ }));
+ await page.goto('/?season=all#player='+encodeURIComponent(name));
+ await expandAchievements(page);
+ const card=page.locator('[data-special-id="triple-format-vr"][data-special-unlocked="true"]');
+ await expect(card).toBeVisible();
+ await expect(card).toHaveAttribute('data-special-rarity','epic');
+ await expect(card).toContainText('三冠の支配者');
+ await card.locator('.special-achievement-proof summary').click();
+ const proof=card.locator('[data-special-evidence-id]');
+ await expect(proof).toHaveCount(3);
+ for(const label of ['ソロ','デュオ','トリオ'])await expect(card.locator('.special-format-proof', {hasText:label})).toHaveCount(1);
+});
 
 test('秘密の称号は未解放時に名前・条件を伏せ、通常8つのヒントと完全シークレット2つを区別する',async({page})=>{
   const source=records.find(row=>row.verified===true&&roster(row).length===1&&/\bsolo\b/i.test(row.event));
@@ -323,8 +352,8 @@ test('秘密の称号は未解放時に名前・条件を伏せ、通常8つの�
   await expect(secret.locator('[data-secret-unlocked="true"]')).toHaveCount(0);
   await expect(secret.locator('[data-secret-id]')).toHaveCount(0);
   await secret.locator('.secret-locked-details>summary').click();
-  await expect(secret.locator('[data-secret-locked="true"]')).toHaveCount(8);
-  await expect(secret.locator('.secret-card-locked h4')).toHaveText(Array(8).fill('？？？？？？'));
+  await expect(secret.locator('[data-secret-locked="true"]')).toHaveCount(9);
+  await expect(secret.locator('.secret-card-locked h4')).toHaveText(Array(9).fill('？？？？？？'));
   const markup=await secret.innerHTML();
   for(const title of achievements.SECRET_CATALOG.map(def=>def.title))expect(markup).not.toContain(title);
   for(const sealed of achievements.SECRET_CATALOG.filter(def=>def.sealed)){
@@ -356,7 +385,7 @@ test('無音の王冠はソロ決勝0K・0VR・個人賞金で解放し難易度
   await expect(badge.locator('[data-secret-evidence-id="silent-crown-unlocked"]')).toContainText('個人賞金 $100');
 });
 
-test('10種すべての秘密称号は確認済み複合戦績で解放し、完全シークレットも初めて表示する',async({page})=>{
+test('11種すべての秘密称号は確認済み複合戦績で解放し、完全シークレットも初めて表示する',async({page})=>{
   const source=records.find(row=>row.verified===true&&roster(row).length===1&&/\bsolo\b/i.test(row.event));
   expect(source).toBeTruthy();
   const name=roster(source)[0];
@@ -369,6 +398,7 @@ test('10種すべての秘密称号は確認済み複合戦績で解放し、完
     make('secret-golden','2026-10-01','EU',1,1,12,100),
     make('secret-death','2026-10-01','NAC',35,2,1,200),
     make('secret-naw','2026-10-01','NAW',10,1,1,100),
+    {...make('secret-zb','2026-10-01','ME',9,0,1,0),event:'Zero Build Solo Victory Cup'},
     make('secret-oce','2026-10-02','OCE',20,1,1,100),
     make('secret-br','2026-10-03','BR',10,0,2,100),
     make('secret-phoenix-start','2025-01-01','ME',4,0,12,100),
@@ -376,19 +406,19 @@ test('10種すべての秘密称号は確認済み複合戦績で解放し、完
     make('secret-destruction','2026-10-04','ME',65,0,50,null,'予選')
   ];
   const report=achievements.calculate(rows,name,{catalog:data.tournaments.catalog});
-  expect(report.secret.total).toBe(10);
-  expect(report.secret.earned).toBe(10);
-  expect(report.special.total).toBe(30);
+  expect(report.secret.total).toBe(11);
+  expect(report.secret.earned).toBe(11);
+  expect(report.special.total).toBe(31);
   await page.route('**/results.json',route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify(rows)}));
   await page.goto('/?season=all#player='+encodeURIComponent(name));
   await expandAchievements(page);
   const secret=page.locator('#profile-secret-achievements');
-  await expect(secret.locator('[data-secret-count]')).toHaveText('10');
-  await expect(secret.locator('[data-secret-unlocked="true"]')).toHaveCount(10);
+  await expect(secret.locator('[data-secret-count]')).toHaveText('11');
+  await expect(secret.locator('[data-secret-unlocked="true"]')).toHaveCount(11);
   await expect(secret.locator('[data-secret-locked="true"]')).toHaveCount(0);
-  for(const id of ['triple-gold','light-and-shadow']){
+  for(const id of ['triple-gold','light-and-shadow','dual-world-champion']){
     await expect(secret.locator('[data-secret-id="'+id+'"]')).toBeVisible();
   }
-  await expect(page.locator('[data-special-count]')).toContainText('/ 30');
+  await expect(page.locator('[data-special-count]')).toContainText('/ 31');
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth+1)).toBe(true);
 });
