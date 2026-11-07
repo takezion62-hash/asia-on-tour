@@ -381,7 +381,10 @@ async function main(){
    const cutoff=(historical?advancementLimit(win):null)??cutoffForWindow(win);
    const pageRanks=l.entries.map(e=>e.rank);
    const ordered=pageRanks.every((rank,i)=>Number.isSafeInteger(rank)&&rank>=1&&(i===0||rank>=pageRanks[i-1]));
-   const crossed=ordered&&cutoff!==null&&pageRanks.some(rank=>rank>cutoff);
+   const followsPrevious=checkpoint.lastSeenRank==null||pageRanks.length===0||pageRanks[0]>=checkpoint.lastSeenRank;
+   checkpoint.rankingOrderValid=checkpoint.rankingOrderValid!==false&&ordered&&followsPrevious;
+   if(pageRanks.length)checkpoint.lastSeenRank=pageRanks[pageRanks.length-1];
+   const crossed=checkpoint.rankingOrderValid&&cutoff!==null&&pageRanks.some(rank=>rank>cutoff);
    const eligibleRows=cutoff===null?l.entries:l.entries.filter(e=>!Number.isSafeInteger(e.rank)||e.rank<=cutoff);
    const entries=eligibleRows.map(e=>normalizeRow(e,win));
    invalidRows+=entries.filter(x=>!x).length;
