@@ -11,7 +11,7 @@
   "provider": "osirion",
   "linkedPlayers": 459,
   "trackedWindows": 2783,
-  "found": 94,
+  "found": 64,
   "skipped": 7,
   "imported": 96,
   "scannedPages": 80,
@@ -20,7 +20,7 @@
   "alreadyRegistered": 795,
   "autoApprovedTotal": 590,
   "invalidCachedCandidates": 1,
-  "manualReviewCandidates": 94,
+  "manualReviewCandidates": 64,
   "autoApprovedCosmeticThisRun": 0,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
@@ -44,5 +44,8 @@
     "S30_Reload",
     "S30_ReloadZB"
   ],
-  "message": "Osirionで459アカウントIDを追跡。今回の公式規則による自動承認96件、追加確認待ち94件、名義照合保留0件。"
+  "message": "2026-11-07過去大会ルール確認: 新規30件、完全一致の既存0件、保留0件。現金1VR=$100、予選突破320/2000位規則のみ適用。",
+  "manuallyPublished": 30,
+  "manuallyResolvedDuplicates": 0,
+  "lastRuleReviewedAt": "2026-11-07T03:20:28.520Z"
 }
