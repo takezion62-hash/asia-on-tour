@@ -1,0 +1,28 @@
+name: AOT dry-run reviewed candidate validation (no publication)
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/manual-review-20261107-dry-check.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  dry-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Validate the proposed publication without pushing any changes
+        run: |
+          node --check scripts/manual-review-20261107-new-23.cjs
+          node scripts/manual-review-20261107-new-23.cjs
+          npm run validate
+          node --test tests/osirion-sync.test.cjs tests/automatic-unreal-approval.test.cjs
+      - name: Check changed files (informational only)
+        run: git status --short
