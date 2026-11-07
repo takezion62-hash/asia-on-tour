@@ -78,16 +78,15 @@ for(const id of ZORO_IDS){
   ['rank','points','kills','vrs'].some(k=>row[k]!==published[k]))
   throw Error('Current Zoro is not an exact confirmed duplicate '+id);
  if(approvals.entries.some(x=>x.id===id))throw Error('Current Zoro already decided in approval ledger');
- approvals.entries.push({id,decision:'already-published',existingId:published.id,
-  policy:'cosmetic-rank-existing',source:row.source,approvedAt:'2026-11-07',
-  evidence:'Verified same Epic account, OCE session, team, rank, kills, VR and points. Previously published Zoro Mobile award; duplicate ignored.'});
+ // Duplicate resolution is already recorded in history-sync-reviewed.json;
+ // approval-history.json only accepts newly published record IDs.
 }
 const hCleared=new Set([...VOID_IDS,REVIEW_ID]);
 history.proposals=history.proposals.filter(x=>!hCleared.has(x.id));
 current.proposals=current.proposals.filter(x=>!ZORO_IDS.includes(x.id));
 if(history.proposals.length!==0||current.proposals.length!==0)throw Error('New candidates appeared during audit; refuse stale queue clearing');
 const now=new Date().toISOString();history.manualReviewedAt=now;current.manualReviewedAt=now;
-ledger.reviewedAt=now;approvals.reviewedAt=now;
+ledger.reviewedAt=now;
 hStatus.found=0;hStatus.manualReviewCandidates=0;hStatus.reviewOnlyCandidates=0;
 hStatus.reviewedVoided=(hStatus.reviewedVoided||0)+13;
 hStatus.reviewedRankConflict=(hStatus.reviewedRankConflict||0)+1;
@@ -102,6 +101,6 @@ updates.entries.unshift({id:marker,date:now.slice(0,10),type:'site',
  recordIds:[]});
 write('results.json',results);write('history-sync-review.json',history);write('auto-sync-review.json',current);
 write('history-sync-status.json',hStatus);write('auto-sync-status.json',aStatus);
-write('history-sync-reviewed.json',ledger);write('approval-history.json',approvals);write('updates.json',updates);
+write('history-sync-reviewed.json',ledger);write('updates.json',updates);
 console.log('FINAL_REVIEW_AUDIT '+JSON.stringify({voided:13,rankConflict:1,currentExactDuplicates:2,
  historyRemaining:history.proposals.length,recentRemaining:current.proposals.length,existingOfficialRank:old.rank}));
