@@ -247,6 +247,10 @@
         {
           "id": "duos-console-victory-cash-cup",
           "label": "Duos Console Victory Cash Cup"
+        },
+        {
+          "id": "solo-series-finals",
+          "label": "Solo Series Finals"
         }
       ]
     },
@@ -1840,17 +1844,19 @@
         "S39_SoloVictoryCup"
       ],
       "series": "victory-cup",
-      "mode": "unknown",
+      "mode": "battle-royale",
       "subtype": "solo-victory-cup",
       "team": "solo",
       "platform": "cross-platform",
-      "unknownFields": [
-        "mode"
-      ],
+      "unknownFields": [],
       "evidence": [
         {
           "text": "Osirionの過去大会開催履歴で公式EpicイベントID・大会名称を確認。個別の通過・賞金・報酬を推定せず確認候補として登録。",
           "url": "https://www.fortnite.com/competitive/events/S39_SoloVictoryCup/"
+        },
+        {
+          "text": "Epic Games公式大会ページでS39 Solo Victory CupはSolos / Battle Royaleと確認。Round 2の各VRに個人賞金$100。",
+          "url": "https://www.fortnite.com/competitive/events/S39_SoloVictoryCup?region=NAW&round=S39_SoloVictoryCup_Round2_Day1_NAW"
         }
       ]
     },
@@ -2204,6 +2210,34 @@
         {
           "text": "2025/5/31 ME Event3 Round2についてユーザー提供Fortnite Tracker結果画像で順位・キル・VR・賞金を照合。",
           "url": "https://fortnitetracker.com/events/epicgames_S35_VictoryDuosCup_ME?window=S35_VictoryDuosCup_Event3Round2_ME"
+        }
+      ]
+    },
+    {
+      "id": "ch7s1-solo-series-finals",
+      "name": "Solo Series Finals",
+      "chapter": 7,
+      "season": 1,
+      "seasonId": "S39",
+      "sourceEventIds": [
+        "S39_SoloSeriesCupFinal"
+      ],
+      "series": "cash-cup",
+      "mode": "battle-royale",
+      "subtype": "solo-series-finals",
+      "team": "solo",
+      "platform": "unknown",
+      "unknownFields": [
+        "platform"
+      ],
+      "evidence": [
+        {
+          "text": "Epic Games公式：2026/1/25〜26、NAW、Solos Battle Royale、12試合/2日間の賞金付きSolo Series Finals。",
+          "url": "https://www.fortnite.com/competitive/events/S39_SoloSeriesCupFinal/?region=NAW"
+        },
+        {
+          "text": "Fortnite TrackerのNAW Prize Pool：1位$4,000、2位$2,000、3位$1,000、5位$750、10位$500、25位$400、50位$300、75位$200。",
+          "url": "https://fortnitetracker.com/events/epicgames_S39_SoloSeriesCupFinal_NAW"
         }
       ]
     }

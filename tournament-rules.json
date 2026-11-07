@@ -781,6 +781,67 @@
           "url": "https://fortnitetracker.com/events/epicgames_S39_1MillionUnrealCup_OCE?page=0&window=S39_1MillionUnrealCup_OCE"
         }
       ]
+    },
+    {
+      "id": "ch7s1-solo-series-finals",
+      "seasonId": "S39",
+      "eventIds": [
+        "S39_SoloSeriesCupFinal"
+      ],
+      "team": "solo",
+      "series": "cash-cup",
+      "matchCaps": {
+        "単一ラウンド": 12
+      },
+      "rankedEligibility": {},
+      "cashPrizes": {
+        "basis": "per-player",
+        "currency": "USD",
+        "tiers": {
+          "NAW": [
+            {
+              "through": 1,
+              "perPlayer": 4000
+            },
+            {
+              "through": 2,
+              "perPlayer": 2000
+            },
+            {
+              "through": 3,
+              "perPlayer": 1000
+            },
+            {
+              "through": 5,
+              "perPlayer": 750
+            },
+            {
+              "through": 10,
+              "perPlayer": 500
+            },
+            {
+              "through": 25,
+              "perPlayer": 400
+            },
+            {
+              "through": 50,
+              "perPlayer": 300
+            },
+            {
+              "through": 75,
+              "perPlayer": 200
+            }
+          ]
+        }
+      },
+      "autoApproval": "review-only",
+      "source": "https://www.fortnite.com/competitive/events/S39_SoloSeriesCupFinal/?region=NAW",
+      "evidence": [
+        {
+          "text": "2026年1月25〜26日NAW Solo Series Finalsは2日間合計12試合。賞金額はユーザー提供Tracker Prize Pool画像と同大会のNAW順位表から確認。未確認成績の賞金自動確定は禁止。",
+          "url": "https://fortnitetracker.com/events/epicgames_S39_SoloSeriesCupFinal_NAW"
+        }
+      ]
     }
   ]
 }
