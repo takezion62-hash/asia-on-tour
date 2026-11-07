@@ -4,6 +4,7 @@ on:
     branches: [main]
     paths:
       - ".github/workflows/correct-20261107-3peace-job-rank.yml"
+      - "scripts/correct-20261107-3peace-job-rank.cjs"
   workflow_dispatch:
 permissions:
   contents: write
