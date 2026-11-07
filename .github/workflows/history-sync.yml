@@ -8,6 +8,8 @@ on:
       - "scripts/auto-sync-core.cjs"
       - "scripts/automatic-cosmetic-approval.cjs"
       - "scripts/automatic-cash-approval.cjs"
+      - "scripts/automatic-performance-approval.cjs"
+      - "tests/automatic-performance-approval.test.cjs"
       - "tests/automatic-cash-approval.test.cjs"
       - "tournament-rules.json"
       - "scripts/validate-tournament-rules.cjs"
@@ -50,7 +52,7 @@ jobs:
       - name: Validate unchanged public data and tests
         run: |
           npm run validate
-          node --test tests/auto-sync.test.cjs tests/osirion-sync.test.cjs tests/non-victory-auto-sync.test.cjs tests/verified-history-approval.test.cjs tests/automatic-cosmetic-approval.test.cjs tests/cosmetic-rank-rules.test.cjs tests/automatic-cash-approval.test.cjs tests/tournament-rules.test.cjs
+          node --test tests/auto-sync.test.cjs tests/osirion-sync.test.cjs tests/non-victory-auto-sync.test.cjs tests/verified-history-approval.test.cjs tests/automatic-cosmetic-approval.test.cjs tests/cosmetic-rank-rules.test.cjs tests/automatic-cash-approval.test.cjs tests/automatic-performance-approval.test.cjs tests/tournament-rules.test.cjs
       - name: Commit only verified results and review state
         run: |
           if [ -z "$(git status --porcelain -- results.json updates.json history-sync-status.json history-sync-review.json history-sync-scan.json)" ]; then
