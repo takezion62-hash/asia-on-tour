@@ -379,6 +379,43 @@
           "url": "https://fortnitetracker.com/events/epicgames_S43_TriosCashCup_NAW"
         }
       ]
+    },
+    {
+      "id": "ch7s5-performance-evaluation-trios",
+      "seasonId": "S43",
+      "series": "performance-evaluation",
+      "team": "trio",
+      "eventIds": [
+        "S43_PerformanceEvaluationTrios"
+      ],
+      "windowIdPrefix": "S43_PerformanceEvaluation",
+      "matchCaps": {
+        "予選": 8,
+        "Performance決勝": 4
+      },
+      "advance": {
+        "EU": 26,
+        "NAC": 26
+      },
+      "prizePerVictory": 400,
+      "finalWinPoints": 100,
+      "powerRankingTop": 5000,
+      "autoApproval": "verified-performance-vr",
+      "source": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-performance-evaluation-chapter-7-official-rules",
+      "evidence": [
+        {
+          "text": "S43のRound1公式トラッカー表示とユーザー提供画像はEU・NACとも決勝通過Top26。ルール本文の一般的なTop33表記より現行イベント枠固有の通過報酬表示を優先。",
+          "url": "https://fortnitetracker.com/events/epicgames_S43_PerformanceEvaluationTrios_EU?window=S43_PerformanceEvaluation_Event1Round1_EU"
+        },
+        {
+          "text": "S43実施Round1はFortnite.GGの開催枠に最大8試合と表示。規則本文の一般的な最大7試合表記との食い違いがあるため、実際の開催枠仕様に合わせる。Round2は公式規則で最大4試合。",
+          "url": "https://fortnite.gg/events/epicgames_S43_PerformanceEvaluationTrios_NAC"
+        },
+        {
+          "text": "Epic公式規則Attachment C：トリオ決勝の1VRはチーム$1,200、各選手$400。Round2の1VRはリーダーボード100ポイント。",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-performance-evaluation-chapter-7-official-rules"
+        }
+      ]
     }
   ]
 }
