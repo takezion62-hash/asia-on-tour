@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-07T16:48:30.000Z",
+  "reviewedAt": "2026-11-07T17:17:38.476Z",
   "description": "Resolved historic review candidates: published, duplicate or participation",
   "entries": [
     {
@@ -4474,6 +4474,546 @@
       "verifiedAt": "2026-11-07T16:48:30.000Z",
       "source": "https://www.fortnite.com/competitive/events/S41_FNCSDivisionalCup_Division1/?region=ME&round=S41_FNCSDivisionalCup_Division1_Week1Day2_ME",
       "evidence": "Completed official Epic-ID leaderboard checkpoint, exact event and roster, no inferred qualification or cosmetic award"
+    },
+    {
+      "id": "auto-s30-2a171a1d964f",
+      "decision": "published",
+      "recordId": "auto-s30-2a171a1d964f",
+      "policy": "manual-verified-scanned-prefix-qualifier",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=OCE&round=S30_SoloVictoryCashCup_Event6Round1_OCE",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
+      "verifiedAt": "2026-11-07T17:17:38.476Z",
+      "evidence": "Exact account-linked official Osirion leaderboard row; observed continuous ranked prefix, rank inside observed prefix, official session and season-specific top cutoff, no duplicated existing team. No final prize inference."
+    },
+    {
+      "id": "auto-s30-70b8c0d4d128",
+      "decision": "published",
+      "recordId": "auto-s30-70b8c0d4d128",
+      "policy": "manual-verified-scanned-prefix-qualifier",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=OCE&round=S30_SoloVictoryCashCup_Event6Round1_OCE",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
+      "verifiedAt": "2026-11-07T17:17:38.476Z",
+      "evidence": "Exact account-linked official Osirion leaderboard row; observed continuous ranked prefix, rank inside observed prefix, official session and season-specific top cutoff, no duplicated existing team. No final prize inference."
+    },
+    {
+      "id": "auto-s30-37cc52839ea2",
+      "decision": "published",
+      "recordId": "auto-s30-37cc52839ea2",
+      "policy": "manual-verified-scanned-prefix-qualifier",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=OCE&round=S30_SoloVictoryCashCup_Event6Round1_OCE",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
+      "verifiedAt": "2026-11-07T17:17:38.476Z",
+      "evidence": "Exact account-linked official Osirion leaderboard row; observed continuous ranked prefix, rank inside observed prefix, official session and season-specific top cutoff, no duplicated existing team. No final prize inference."
+    },
+    {
+      "id": "auto-s30-8c31537decee",
+      "decision": "published",
+      "recordId": "auto-s30-8c31537decee",
+      "policy": "manual-verified-scanned-prefix-qualifier",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=OCE&round=S30_SoloVictoryCashCup_Event6Round1_OCE",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
+      "verifiedAt": "2026-11-07T17:17:38.476Z",
+      "evidence": "Exact account-linked official Osirion leaderboard row; observed continuous ranked prefix, rank inside observed prefix, official session and season-specific top cutoff, no duplicated existing team. No final prize inference."
+    },
+    {
+      "id": "auto-s30-f828662edeaf",
+      "decision": "published",
+      "recordId": "auto-s30-f828662edeaf",
+      "policy": "manual-verified-scanned-prefix-qualifier",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=OCE&round=S30_SoloVictoryCashCup_Event6Round1_OCE",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
+      "verifiedAt": "2026-11-07T17:17:38.476Z",
+      "evidence": "Exact account-linked official Osirion leaderboard row; observed continuous ranked prefix, rank inside observed prefix, official session and season-specific top cutoff, no duplicated existing team. No final prize inference."
+    },
+    {
+      "id": "auto-s30-f03c0f5a70ab",
+      "decision": "published",
+      "recordId": "auto-s30-f03c0f5a70ab",
+      "policy": "manual-verified-scanned-prefix-qualifier",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=OCE&round=S30_SoloVictoryCashCup_Event6Round1_OCE",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
+      "verifiedAt": "2026-11-07T17:17:38.476Z",
+      "evidence": "Exact account-linked official Osirion leaderboard row; observed continuous ranked prefix, rank inside observed prefix, official session and season-specific top cutoff, no duplicated existing team. No final prize inference."
+    },
+    {
+      "id": "auto-s30-56e6d0c9cd5a",
+      "decision": "published",
+      "recordId": "auto-s30-56e6d0c9cd5a",
+      "policy": "manual-verified-scanned-prefix-qualifier",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=OCE&round=S30_SoloVictoryCashCup_Event6Round1_OCE",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
+      "verifiedAt": "2026-11-07T17:17:38.476Z",
+      "evidence": "Exact account-linked official Osirion leaderboard row; observed continuous ranked prefix, rank inside observed prefix, official session and season-specific top cutoff, no duplicated existing team. No final prize inference."
+    },
+    {
+      "id": "auto-s30-87682c315fd9",
+      "decision": "published",
+      "recordId": "auto-s30-87682c315fd9",
+      "policy": "manual-verified-scanned-prefix-qualifier",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=OCE&round=S30_SoloVictoryCashCup_Event6Round1_OCE",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
+      "verifiedAt": "2026-11-07T17:17:38.476Z",
+      "evidence": "Exact account-linked official Osirion leaderboard row; observed continuous ranked prefix, rank inside observed prefix, official session and season-specific top cutoff, no duplicated existing team. No final prize inference."
+    },
+    {
+      "id": "auto-s30-6a68dd2bea63",
+      "decision": "published",
+      "recordId": "auto-s30-6a68dd2bea63",
+      "policy": "manual-verified-scanned-prefix-qualifier",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=OCE&round=S30_SoloVictoryCashCup_Event6Round1_OCE",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
+      "verifiedAt": "2026-11-07T17:17:38.476Z",
+      "evidence": "Exact account-linked official Osirion leaderboard row; observed continuous ranked prefix, rank inside observed prefix, official session and season-specific top cutoff, no duplicated existing team. No final prize inference."
+    },
+    {
+      "id": "auto-s30-a6790dd88688",
+      "decision": "published",
+      "recordId": "auto-s30-a6790dd88688",
+      "policy": "manual-verified-scanned-prefix-qualifier",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=OCE&round=S30_SoloVictoryCashCup_Event6Round1_OCE",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
+      "verifiedAt": "2026-11-07T17:17:38.476Z",
+      "evidence": "Exact account-linked official Osirion leaderboard row; observed continuous ranked prefix, rank inside observed prefix, official session and season-specific top cutoff, no duplicated existing team. No final prize inference."
+    },
+    {
+      "id": "auto-s30-34da522b8a3f",
+      "decision": "published",
+      "recordId": "auto-s30-34da522b8a3f",
+      "policy": "manual-verified-scanned-prefix-qualifier",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=OCE&round=S30_SoloVictoryCashCup_Event6Round1_OCE",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
+      "verifiedAt": "2026-11-07T17:17:38.476Z",
+      "evidence": "Exact account-linked official Osirion leaderboard row; observed continuous ranked prefix, rank inside observed prefix, official session and season-specific top cutoff, no duplicated existing team. No final prize inference."
+    },
+    {
+      "id": "auto-s30-e4f796084d63",
+      "decision": "published",
+      "recordId": "auto-s30-e4f796084d63",
+      "policy": "manual-verified-scanned-prefix-qualifier",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=OCE&round=S30_SoloVictoryCashCup_Event6Round1_OCE",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
+      "verifiedAt": "2026-11-07T17:17:38.476Z",
+      "evidence": "Exact account-linked official Osirion leaderboard row; observed continuous ranked prefix, rank inside observed prefix, official session and season-specific top cutoff, no duplicated existing team. No final prize inference."
+    },
+    {
+      "id": "auto-s30-53d5b9fc2bbb",
+      "decision": "published",
+      "recordId": "auto-s30-53d5b9fc2bbb",
+      "policy": "manual-verified-scanned-prefix-qualifier",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=OCE&round=S30_SoloVictoryCashCup_Event6Round1_OCE",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
+      "verifiedAt": "2026-11-07T17:17:38.476Z",
+      "evidence": "Exact account-linked official Osirion leaderboard row; observed continuous ranked prefix, rank inside observed prefix, official session and season-specific top cutoff, no duplicated existing team. No final prize inference."
+    },
+    {
+      "id": "auto-s30-e4af2dfa26a0",
+      "decision": "published",
+      "recordId": "auto-s30-e4af2dfa26a0",
+      "policy": "manual-verified-scanned-prefix-qualifier",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=OCE&round=S30_SoloVictoryCashCup_Event6Round1_OCE",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
+      "verifiedAt": "2026-11-07T17:17:38.476Z",
+      "evidence": "Exact account-linked official Osirion leaderboard row; observed continuous ranked prefix, rank inside observed prefix, official session and season-specific top cutoff, no duplicated existing team. No final prize inference."
+    },
+    {
+      "id": "auto-s30-4c4fb45d9ce8",
+      "decision": "published",
+      "recordId": "auto-s30-4c4fb45d9ce8",
+      "policy": "manual-verified-scanned-prefix-qualifier",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=OCE&round=S30_SoloVictoryCashCup_Event6Round1_OCE",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
+      "verifiedAt": "2026-11-07T17:17:38.476Z",
+      "evidence": "Exact account-linked official Osirion leaderboard row; observed continuous ranked prefix, rank inside observed prefix, official session and season-specific top cutoff, no duplicated existing team. No final prize inference."
+    },
+    {
+      "id": "auto-s30-35dca0548ede",
+      "decision": "published",
+      "recordId": "auto-s30-35dca0548ede",
+      "policy": "manual-verified-scanned-prefix-qualifier",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=OCE&round=S30_SoloVictoryCashCup_Event6Round1_OCE",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
+      "verifiedAt": "2026-11-07T17:17:38.476Z",
+      "evidence": "Exact account-linked official Osirion leaderboard row; observed continuous ranked prefix, rank inside observed prefix, official session and season-specific top cutoff, no duplicated existing team. No final prize inference."
+    },
+    {
+      "id": "auto-s30-03bfe351b8d0",
+      "decision": "published",
+      "recordId": "auto-s30-03bfe351b8d0",
+      "policy": "manual-verified-scanned-prefix-qualifier",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=OCE&round=S30_SoloVictoryCashCup_Event6Round1_OCE",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
+      "verifiedAt": "2026-11-07T17:17:38.476Z",
+      "evidence": "Exact account-linked official Osirion leaderboard row; observed continuous ranked prefix, rank inside observed prefix, official session and season-specific top cutoff, no duplicated existing team. No final prize inference."
+    },
+    {
+      "id": "auto-s30-5f4104686c93",
+      "decision": "published",
+      "recordId": "auto-s30-5f4104686c93",
+      "policy": "manual-verified-scanned-prefix-qualifier",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=OCE&round=S30_SoloVictoryCashCup_Event6Round1_OCE",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
+      "verifiedAt": "2026-11-07T17:17:38.476Z",
+      "evidence": "Exact account-linked official Osirion leaderboard row; observed continuous ranked prefix, rank inside observed prefix, official session and season-specific top cutoff, no duplicated existing team. No final prize inference."
+    },
+    {
+      "id": "auto-s30-ff317d240054",
+      "decision": "published",
+      "recordId": "auto-s30-ff317d240054",
+      "policy": "manual-verified-scanned-prefix-qualifier",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=ME&round=S30_SoloVictoryCashCup_Event8Round1_ME",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
+      "verifiedAt": "2026-11-07T17:17:38.476Z",
+      "evidence": "Exact account-linked official Osirion leaderboard row; observed continuous ranked prefix, rank inside observed prefix, official session and season-specific top cutoff, no duplicated existing team. No final prize inference."
+    },
+    {
+      "id": "auto-s30-e84cd5663b2f",
+      "decision": "published",
+      "recordId": "auto-s30-e84cd5663b2f",
+      "policy": "manual-verified-scanned-prefix-qualifier",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=ME&round=S30_SoloVictoryCashCup_Event8Round1_ME",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
+      "verifiedAt": "2026-11-07T17:17:38.476Z",
+      "evidence": "Exact account-linked official Osirion leaderboard row; observed continuous ranked prefix, rank inside observed prefix, official session and season-specific top cutoff, no duplicated existing team. No final prize inference."
+    },
+    {
+      "id": "auto-s30-3fcd7ebdcbb2",
+      "decision": "published",
+      "recordId": "auto-s30-3fcd7ebdcbb2",
+      "policy": "manual-verified-scanned-prefix-qualifier",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=ME&round=S30_SoloVictoryCashCup_Event8Round1_ME",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
+      "verifiedAt": "2026-11-07T17:17:38.476Z",
+      "evidence": "Exact account-linked official Osirion leaderboard row; observed continuous ranked prefix, rank inside observed prefix, official session and season-specific top cutoff, no duplicated existing team. No final prize inference."
+    },
+    {
+      "id": "auto-s30-a6fcf7189a74",
+      "decision": "published",
+      "recordId": "auto-s30-a6fcf7189a74",
+      "policy": "manual-verified-scanned-prefix-qualifier",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=ME&round=S30_SoloVictoryCashCup_Event8Round1_ME",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
+      "verifiedAt": "2026-11-07T17:17:38.476Z",
+      "evidence": "Exact account-linked official Osirion leaderboard row; observed continuous ranked prefix, rank inside observed prefix, official session and season-specific top cutoff, no duplicated existing team. No final prize inference."
+    },
+    {
+      "id": "auto-s30-6e2e68a3e1e9",
+      "decision": "published",
+      "recordId": "auto-s30-6e2e68a3e1e9",
+      "policy": "manual-verified-scanned-prefix-qualifier",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=ME&round=S30_SoloVictoryCashCup_Event8Round1_ME",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
+      "verifiedAt": "2026-11-07T17:17:38.476Z",
+      "evidence": "Exact account-linked official Osirion leaderboard row; observed continuous ranked prefix, rank inside observed prefix, official session and season-specific top cutoff, no duplicated existing team. No final prize inference."
+    },
+    {
+      "id": "auto-s30-c43d7f4e1ec1",
+      "decision": "published",
+      "recordId": "auto-s30-c43d7f4e1ec1",
+      "policy": "manual-verified-scanned-prefix-qualifier",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=ME&round=S30_SoloVictoryCashCup_Event8Round1_ME",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
+      "verifiedAt": "2026-11-07T17:17:38.476Z",
+      "evidence": "Exact account-linked official Osirion leaderboard row; observed continuous ranked prefix, rank inside observed prefix, official session and season-specific top cutoff, no duplicated existing team. No final prize inference."
+    },
+    {
+      "id": "auto-s30-5be8b50b6e80",
+      "decision": "published",
+      "recordId": "auto-s30-5be8b50b6e80",
+      "policy": "manual-verified-scanned-prefix-qualifier",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=ME&round=S30_SoloVictoryCashCup_Event8Round1_ME",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
+      "verifiedAt": "2026-11-07T17:17:38.476Z",
+      "evidence": "Exact account-linked official Osirion leaderboard row; observed continuous ranked prefix, rank inside observed prefix, official session and season-specific top cutoff, no duplicated existing team. No final prize inference."
+    },
+    {
+      "id": "auto-s30-e9fb3717c834",
+      "decision": "published",
+      "recordId": "auto-s30-e9fb3717c834",
+      "policy": "manual-verified-scanned-prefix-qualifier",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=ME&round=S30_SoloVictoryCashCup_Event8Round1_ME",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
+      "verifiedAt": "2026-11-07T17:17:38.476Z",
+      "evidence": "Exact account-linked official Osirion leaderboard row; observed continuous ranked prefix, rank inside observed prefix, official session and season-specific top cutoff, no duplicated existing team. No final prize inference."
+    },
+    {
+      "id": "auto-s30-337cedb55b06",
+      "decision": "published",
+      "recordId": "auto-s30-337cedb55b06",
+      "policy": "manual-verified-scanned-prefix-qualifier",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=ME&round=S30_SoloVictoryCashCup_Event8Round1_ME",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
+      "verifiedAt": "2026-11-07T17:17:38.476Z",
+      "evidence": "Exact account-linked official Osirion leaderboard row; observed continuous ranked prefix, rank inside observed prefix, official session and season-specific top cutoff, no duplicated existing team. No final prize inference."
+    },
+    {
+      "id": "auto-s30-e36f42590bdc",
+      "decision": "published",
+      "recordId": "auto-s30-e36f42590bdc",
+      "policy": "manual-verified-scanned-prefix-qualifier",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=ME&round=S30_SoloVictoryCashCup_Event8Round1_ME",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
+      "verifiedAt": "2026-11-07T17:17:38.476Z",
+      "evidence": "Exact account-linked official Osirion leaderboard row; observed continuous ranked prefix, rank inside observed prefix, official session and season-specific top cutoff, no duplicated existing team. No final prize inference."
+    },
+    {
+      "id": "auto-s30-ecec89d431b7",
+      "decision": "published",
+      "recordId": "auto-s30-ecec89d431b7",
+      "policy": "manual-verified-scanned-prefix-qualifier",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=ME&round=S30_SoloVictoryCashCup_Event8Round1_ME",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
+      "verifiedAt": "2026-11-07T17:17:38.476Z",
+      "evidence": "Exact account-linked official Osirion leaderboard row; observed continuous ranked prefix, rank inside observed prefix, official session and season-specific top cutoff, no duplicated existing team. No final prize inference."
+    },
+    {
+      "id": "auto-s30-9b5d22636a6a",
+      "decision": "published",
+      "recordId": "auto-s30-9b5d22636a6a",
+      "policy": "manual-verified-scanned-prefix-qualifier",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=ME&round=S30_SoloVictoryCashCup_Event8Round1_ME",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
+      "verifiedAt": "2026-11-07T17:17:38.476Z",
+      "evidence": "Exact account-linked official Osirion leaderboard row; observed continuous ranked prefix, rank inside observed prefix, official session and season-specific top cutoff, no duplicated existing team. No final prize inference."
+    },
+    {
+      "id": "auto-s30-b16d04edd0c8",
+      "decision": "published",
+      "recordId": "auto-s30-b16d04edd0c8",
+      "policy": "manual-verified-scanned-prefix-qualifier",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=ME&round=S30_SoloVictoryCashCup_Event8Round1_ME",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
+      "verifiedAt": "2026-11-07T17:17:38.476Z",
+      "evidence": "Exact account-linked official Osirion leaderboard row; observed continuous ranked prefix, rank inside observed prefix, official session and season-specific top cutoff, no duplicated existing team. No final prize inference."
+    },
+    {
+      "id": "auto-s30-f8271a7cad26",
+      "decision": "published",
+      "recordId": "auto-s30-f8271a7cad26",
+      "policy": "manual-verified-scanned-prefix-qualifier",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=ME&round=S30_SoloVictoryCashCup_Event8Round1_ME",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
+      "verifiedAt": "2026-11-07T17:17:38.476Z",
+      "evidence": "Exact account-linked official Osirion leaderboard row; observed continuous ranked prefix, rank inside observed prefix, official session and season-specific top cutoff, no duplicated existing team. No final prize inference."
+    },
+    {
+      "id": "auto-s35-b7e9f2c9dbef",
+      "decision": "published",
+      "recordId": "auto-s35-b7e9f2c9dbef",
+      "policy": "manual-verified-scanned-prefix-qualifier",
+      "source": "https://www.fortnite.com/competitive/events/S35_VictoryDuosCup/?region=ME&round=S35_VictoryDuosCup_Event3Round1_ME",
+      "rule": "https://www.fortnite.com/news/fortnite-duos-console-victory-cash-cups-may-2025-official-rules",
+      "verifiedAt": "2026-11-07T17:17:38.476Z",
+      "evidence": "Exact account-linked official Osirion leaderboard row; observed continuous ranked prefix, rank inside observed prefix, official session and season-specific top cutoff, no duplicated existing team. No final prize inference."
+    },
+    {
+      "id": "auto-s35-3e7a1ca01674",
+      "decision": "published",
+      "recordId": "auto-s35-3e7a1ca01674",
+      "policy": "manual-verified-scanned-prefix-qualifier",
+      "source": "https://www.fortnite.com/competitive/events/S35_VictoryDuosCup/?region=ME&round=S35_VictoryDuosCup_Event3Round1_ME",
+      "rule": "https://www.fortnite.com/news/fortnite-duos-console-victory-cash-cups-may-2025-official-rules",
+      "verifiedAt": "2026-11-07T17:17:38.476Z",
+      "evidence": "Exact account-linked official Osirion leaderboard row; observed continuous ranked prefix, rank inside observed prefix, official session and season-specific top cutoff, no duplicated existing team. No final prize inference."
+    },
+    {
+      "id": "auto-s35-c0e8374787f1",
+      "decision": "published",
+      "recordId": "auto-s35-c0e8374787f1",
+      "policy": "manual-verified-scanned-prefix-qualifier",
+      "source": "https://www.fortnite.com/competitive/events/S35_VictoryDuosCup/?region=ME&round=S35_VictoryDuosCup_Event3Round1_ME",
+      "rule": "https://www.fortnite.com/news/fortnite-duos-console-victory-cash-cups-may-2025-official-rules",
+      "verifiedAt": "2026-11-07T17:17:38.476Z",
+      "evidence": "Exact account-linked official Osirion leaderboard row; observed continuous ranked prefix, rank inside observed prefix, official session and season-specific top cutoff, no duplicated existing team. No final prize inference."
+    },
+    {
+      "id": "auto-s35-99eb39ec54ad",
+      "decision": "published",
+      "recordId": "auto-s35-99eb39ec54ad",
+      "policy": "manual-verified-scanned-prefix-qualifier",
+      "source": "https://www.fortnite.com/competitive/events/S35_VictoryDuosCup/?region=ME&round=S35_VictoryDuosCup_Event3Round1_ME",
+      "rule": "https://www.fortnite.com/news/fortnite-duos-console-victory-cash-cups-may-2025-official-rules",
+      "verifiedAt": "2026-11-07T17:17:38.476Z",
+      "evidence": "Exact account-linked official Osirion leaderboard row; observed continuous ranked prefix, rank inside observed prefix, official session and season-specific top cutoff, no duplicated existing team. No final prize inference."
+    },
+    {
+      "id": "auto-s35-8fb5079e5daf",
+      "decision": "published",
+      "recordId": "auto-s35-8fb5079e5daf",
+      "policy": "manual-verified-scanned-prefix-qualifier",
+      "source": "https://www.fortnite.com/competitive/events/S35_VictoryDuosCup/?region=ME&round=S35_VictoryDuosCup_Event3Round1_ME",
+      "rule": "https://www.fortnite.com/news/fortnite-duos-console-victory-cash-cups-may-2025-official-rules",
+      "verifiedAt": "2026-11-07T17:17:38.476Z",
+      "evidence": "Exact account-linked official Osirion leaderboard row; observed continuous ranked prefix, rank inside observed prefix, official session and season-specific top cutoff, no duplicated existing team. No final prize inference."
+    },
+    {
+      "id": "auto-s35-0f78987e69d0",
+      "decision": "published",
+      "recordId": "auto-s35-0f78987e69d0",
+      "policy": "manual-verified-scanned-prefix-qualifier",
+      "source": "https://www.fortnite.com/competitive/events/S35_VictoryDuosCup/?region=ME&round=S35_VictoryDuosCup_Event3Round1_ME",
+      "rule": "https://www.fortnite.com/news/fortnite-duos-console-victory-cash-cups-may-2025-official-rules",
+      "verifiedAt": "2026-11-07T17:17:38.476Z",
+      "evidence": "Exact account-linked official Osirion leaderboard row; observed continuous ranked prefix, rank inside observed prefix, official session and season-specific top cutoff, no duplicated existing team. No final prize inference."
+    },
+    {
+      "id": "auto-s35-7ba4fffeacca",
+      "decision": "published",
+      "recordId": "auto-s35-7ba4fffeacca",
+      "policy": "manual-verified-scanned-prefix-qualifier",
+      "source": "https://www.fortnite.com/competitive/events/S35_VictoryDuosCup/?region=ME&round=S35_VictoryDuosCup_Event3Round1_ME",
+      "rule": "https://www.fortnite.com/news/fortnite-duos-console-victory-cash-cups-may-2025-official-rules",
+      "verifiedAt": "2026-11-07T17:17:38.476Z",
+      "evidence": "Exact account-linked official Osirion leaderboard row; observed continuous ranked prefix, rank inside observed prefix, official session and season-specific top cutoff, no duplicated existing team. No final prize inference."
+    },
+    {
+      "id": "auto-s35-3ff8082cd5f8",
+      "decision": "published",
+      "recordId": "auto-s35-3ff8082cd5f8",
+      "policy": "manual-verified-scanned-prefix-qualifier",
+      "source": "https://www.fortnite.com/competitive/events/S35_VictoryDuosCup/?region=ME&round=S35_VictoryDuosCup_Event3Round1_ME",
+      "rule": "https://www.fortnite.com/news/fortnite-duos-console-victory-cash-cups-may-2025-official-rules",
+      "verifiedAt": "2026-11-07T17:17:38.476Z",
+      "evidence": "Exact account-linked official Osirion leaderboard row; observed continuous ranked prefix, rank inside observed prefix, official session and season-specific top cutoff, no duplicated existing team. No final prize inference."
+    },
+    {
+      "id": "auto-s35-df0a7ec53e6b",
+      "decision": "published",
+      "recordId": "auto-s35-df0a7ec53e6b",
+      "policy": "manual-verified-scanned-prefix-attendance",
+      "source": "https://www.fortnite.com/competitive/events/S35_VictoryDuosCup/?region=ME&round=S35_VictoryDuosCup_Event3Round1_ME",
+      "rule": "https://www.fortnite.com/news/fortnite-duos-console-victory-cash-cups-may-2025-official-rules",
+      "verifiedAt": "2026-11-07T17:17:38.476Z",
+      "evidence": "Exact account-linked official Osirion leaderboard row; observed continuous ranked prefix, rank inside observed prefix, official session and season-specific top cutoff, no duplicated existing team. No final prize inference."
+    },
+    {
+      "id": "auto-s35-9e3469b8e97b",
+      "decision": "published",
+      "recordId": "auto-s35-9e3469b8e97b",
+      "policy": "manual-verified-scanned-prefix-attendance",
+      "source": "https://www.fortnite.com/competitive/events/S35_VictoryDuosCup/?region=ME&round=S35_VictoryDuosCup_Event3Round1_ME",
+      "rule": "https://www.fortnite.com/news/fortnite-duos-console-victory-cash-cups-may-2025-official-rules",
+      "verifiedAt": "2026-11-07T17:17:38.476Z",
+      "evidence": "Exact account-linked official Osirion leaderboard row; observed continuous ranked prefix, rank inside observed prefix, official session and season-specific top cutoff, no duplicated existing team. No final prize inference."
+    },
+    {
+      "id": "auto-s35-91fe20c09c18",
+      "decision": "published",
+      "recordId": "auto-s35-91fe20c09c18",
+      "policy": "manual-verified-scanned-prefix-attendance",
+      "source": "https://www.fortnite.com/competitive/events/S35_VictoryDuosCup/?region=ME&round=S35_VictoryDuosCup_Event3Round1_ME",
+      "rule": "https://www.fortnite.com/news/fortnite-duos-console-victory-cash-cups-may-2025-official-rules",
+      "verifiedAt": "2026-11-07T17:17:38.476Z",
+      "evidence": "Exact account-linked official Osirion leaderboard row; observed continuous ranked prefix, rank inside observed prefix, official session and season-specific top cutoff, no duplicated existing team. No final prize inference."
+    },
+    {
+      "id": "auto-s35-09280cf97f5f",
+      "decision": "published",
+      "recordId": "auto-s35-09280cf97f5f",
+      "policy": "manual-verified-scanned-prefix-attendance",
+      "source": "https://www.fortnite.com/competitive/events/S35_VictoryDuosCup/?region=ME&round=S35_VictoryDuosCup_Event3Round1_ME",
+      "rule": "https://www.fortnite.com/news/fortnite-duos-console-victory-cash-cups-may-2025-official-rules",
+      "verifiedAt": "2026-11-07T17:17:38.476Z",
+      "evidence": "Exact account-linked official Osirion leaderboard row; observed continuous ranked prefix, rank inside observed prefix, official session and season-specific top cutoff, no duplicated existing team. No final prize inference."
+    },
+    {
+      "id": "auto-s35-dbd78949bb82",
+      "decision": "published",
+      "recordId": "auto-s35-dbd78949bb82",
+      "policy": "manual-verified-scanned-prefix-attendance",
+      "source": "https://www.fortnite.com/competitive/events/S35_VictoryDuosCup/?region=ME&round=S35_VictoryDuosCup_Event3Round1_ME",
+      "rule": "https://www.fortnite.com/news/fortnite-duos-console-victory-cash-cups-may-2025-official-rules",
+      "verifiedAt": "2026-11-07T17:17:38.476Z",
+      "evidence": "Exact account-linked official Osirion leaderboard row; observed continuous ranked prefix, rank inside observed prefix, official session and season-specific top cutoff, no duplicated existing team. No final prize inference."
+    },
+    {
+      "id": "auto-s35-ed606145a264",
+      "decision": "published",
+      "recordId": "auto-s35-ed606145a264",
+      "policy": "manual-verified-scanned-prefix-attendance",
+      "source": "https://www.fortnite.com/competitive/events/S35_VictoryDuosCup/?region=ME&round=S35_VictoryDuosCup_Event3Round1_ME",
+      "rule": "https://www.fortnite.com/news/fortnite-duos-console-victory-cash-cups-may-2025-official-rules",
+      "verifiedAt": "2026-11-07T17:17:38.476Z",
+      "evidence": "Exact account-linked official Osirion leaderboard row; observed continuous ranked prefix, rank inside observed prefix, official session and season-specific top cutoff, no duplicated existing team. No final prize inference."
+    },
+    {
+      "id": "auto-s35-b14a04349b99",
+      "decision": "published",
+      "recordId": "auto-s35-b14a04349b99",
+      "policy": "manual-verified-scanned-prefix-attendance",
+      "source": "https://www.fortnite.com/competitive/events/S35_VictoryDuosCup/?region=ME&round=S35_VictoryDuosCup_Event3Round1_ME",
+      "rule": "https://www.fortnite.com/news/fortnite-duos-console-victory-cash-cups-may-2025-official-rules",
+      "verifiedAt": "2026-11-07T17:17:38.476Z",
+      "evidence": "Exact account-linked official Osirion leaderboard row; observed continuous ranked prefix, rank inside observed prefix, official session and season-specific top cutoff, no duplicated existing team. No final prize inference."
+    },
+    {
+      "id": "auto-s35-d03e4e2e6eff",
+      "decision": "published",
+      "recordId": "auto-s35-d03e4e2e6eff",
+      "policy": "manual-verified-scanned-prefix-attendance",
+      "source": "https://www.fortnite.com/competitive/events/S35_VictoryDuosCup/?region=ME&round=S35_VictoryDuosCup_Event3Round1_ME",
+      "rule": "https://www.fortnite.com/news/fortnite-duos-console-victory-cash-cups-may-2025-official-rules",
+      "verifiedAt": "2026-11-07T17:17:38.476Z",
+      "evidence": "Exact account-linked official Osirion leaderboard row; observed continuous ranked prefix, rank inside observed prefix, official session and season-specific top cutoff, no duplicated existing team. No final prize inference."
+    },
+    {
+      "id": "auto-s35-5375df791159",
+      "decision": "published",
+      "recordId": "auto-s35-5375df791159",
+      "policy": "manual-verified-scanned-prefix-attendance",
+      "source": "https://www.fortnite.com/competitive/events/S35_VictoryDuosCup/?region=ME&round=S35_VictoryDuosCup_Event3Round1_ME",
+      "rule": "https://www.fortnite.com/news/fortnite-duos-console-victory-cash-cups-may-2025-official-rules",
+      "verifiedAt": "2026-11-07T17:17:38.476Z",
+      "evidence": "Exact account-linked official Osirion leaderboard row; observed continuous ranked prefix, rank inside observed prefix, official session and season-specific top cutoff, no duplicated existing team. No final prize inference."
+    },
+    {
+      "id": "auto-s35-90083552b194",
+      "decision": "published",
+      "recordId": "auto-s35-90083552b194",
+      "policy": "manual-verified-scanned-prefix-attendance",
+      "source": "https://www.fortnite.com/competitive/events/S35_VictoryDuosCup/?region=ME&round=S35_VictoryDuosCup_Event3Round1_ME",
+      "rule": "https://www.fortnite.com/news/fortnite-duos-console-victory-cash-cups-may-2025-official-rules",
+      "verifiedAt": "2026-11-07T17:17:38.476Z",
+      "evidence": "Exact account-linked official Osirion leaderboard row; observed continuous ranked prefix, rank inside observed prefix, official session and season-specific top cutoff, no duplicated existing team. No final prize inference."
+    },
+    {
+      "id": "auto-s35-dceaaf3719b4",
+      "decision": "published",
+      "recordId": "auto-s35-dceaaf3719b4",
+      "policy": "manual-verified-scanned-prefix-attendance",
+      "source": "https://www.fortnite.com/competitive/events/S35_VictoryDuosCup/?region=ME&round=S35_VictoryDuosCup_Event3Round1_ME",
+      "rule": "https://www.fortnite.com/news/fortnite-duos-console-victory-cash-cups-may-2025-official-rules",
+      "verifiedAt": "2026-11-07T17:17:38.476Z",
+      "evidence": "Exact account-linked official Osirion leaderboard row; observed continuous ranked prefix, rank inside observed prefix, official session and season-specific top cutoff, no duplicated existing team. No final prize inference."
+    },
+    {
+      "id": "auto-s35-af161afd42cb",
+      "decision": "published",
+      "recordId": "auto-s35-af161afd42cb",
+      "policy": "manual-verified-scanned-prefix-attendance",
+      "source": "https://www.fortnite.com/competitive/events/S35_VictoryDuosCup/?region=ME&round=S35_VictoryDuosCup_Event3Round1_ME",
+      "rule": "https://www.fortnite.com/news/fortnite-duos-console-victory-cash-cups-may-2025-official-rules",
+      "verifiedAt": "2026-11-07T17:17:38.476Z",
+      "evidence": "Exact account-linked official Osirion leaderboard row; observed continuous ranked prefix, rank inside observed prefix, official session and season-specific top cutoff, no duplicated existing team. No final prize inference."
+    },
+    {
+      "id": "auto-s35-f368c5f6cf0f",
+      "decision": "published",
+      "recordId": "auto-s35-f368c5f6cf0f",
+      "policy": "manual-verified-scanned-prefix-attendance",
+      "source": "https://www.fortnite.com/competitive/events/S35_VictoryDuosCup/?region=ME&round=S35_VictoryDuosCup_Event3Round1_ME",
+      "rule": "https://www.fortnite.com/news/fortnite-duos-console-victory-cash-cups-may-2025-official-rules",
+      "verifiedAt": "2026-11-07T17:17:38.476Z",
+      "evidence": "Exact account-linked official Osirion leaderboard row; observed continuous ranked prefix, rank inside observed prefix, official session and season-specific top cutoff, no duplicated existing team. No final prize inference."
+    },
+    {
+      "id": "auto-s35-396f71306d1f",
+      "decision": "published",
+      "recordId": "auto-s35-396f71306d1f",
+      "policy": "manual-verified-scanned-prefix-attendance",
+      "source": "https://www.fortnite.com/competitive/events/S35_VictoryDuosCup/?region=ME&round=S35_VictoryDuosCup_Event3Round1_ME",
+      "rule": "https://www.fortnite.com/news/fortnite-duos-console-victory-cash-cups-may-2025-official-rules",
+      "verifiedAt": "2026-11-07T17:17:38.476Z",
+      "evidence": "Exact account-linked official Osirion leaderboard row; observed continuous ranked prefix, rank inside observed prefix, official session and season-specific top cutoff, no duplicated existing team. No final prize inference."
     }
   ]
 }
