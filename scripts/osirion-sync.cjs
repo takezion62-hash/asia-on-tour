@@ -379,7 +379,7 @@ async function main(){
    checkpoint.emptyAttempts=0;
    delete checkpoint.retryAfter;
    if(!l.entries.length&&page<l.totalPages-1)throw Error('順位表に未期待の空ページ: '+win.key+' page '+page);
-   const cutoff=(historical?advancementLimit(win):null)??cutoffForWindow(win);
+   const cutoff=(historical?advancementLimit(win):null)??cutoffForWindow(win)??(config.autoApprovePerformance===true?qualifierCutoff(win):null);
    const pageRanks=l.entries.map(e=>e.rank);
    const ordered=pageRanks.every((rank,i)=>Number.isSafeInteger(rank)&&rank>=1&&(i===0||rank>=pageRanks[i-1]));
    const followsPrevious=checkpoint.lastSeenRank==null||pageRanks.length===0||pageRanks[0]>=checkpoint.lastSeenRank;
