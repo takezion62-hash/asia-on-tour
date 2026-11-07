@@ -2042,6 +2042,33 @@
           "url": "https://fortnitetracker.com/events/epicgames_S43_OnePieceZoroCup_Mobile_OCE"
         }
       ]
+    },
+    {
+      "id": "ch6mini2-duos-victory-cash-cup",
+      "name": "Duos Victory Cash Cup",
+      "chapter": 6,
+      "season": 5,
+      "seasonId": "S38",
+      "miniSeason": 2,
+      "sourceEventIds": [
+        "S38_DuosVictoryCup"
+      ],
+      "series": "victory-cup",
+      "mode": "battle-royale",
+      "subtype": "duos-victory-cash-cup",
+      "team": "duo",
+      "platform": "cross-platform",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "公式大会ページは2025/11/9〜11/23開催のDuos/Battle Royaleを明記。2025年11月はCH6 Mini Season 2 (S38)。内部season=5はCH6 S4の後に続く小シーズンの検索用番号で、公式表記はMini Season 2。",
+          "url": "https://www.fortnite.com/competitive/events/S38_DuosVictoryCup/?region=NAW"
+        },
+        {
+          "text": "2025年11月のVictory Cash Cup規則 2.2.1：NAWのRound 1上位200デュオがRound 2へ進出、決勝最大3試合。Attachment C：Round2の1VRあたり各選手$100。",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cash-cups-november-2025-official-rules"
+        }
+      ]
     }
   ]
 }
