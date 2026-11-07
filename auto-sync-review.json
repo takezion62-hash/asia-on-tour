@@ -2,5 +2,41 @@
   "version": 1,
   "status": "review",
   "checkedAt": "2026-11-07T13:02:44.444Z",
-  "proposals": []
+  "proposals": [
+    {
+      "id": "auto-s43-3cafe7a0336e",
+      "date": "2026-11-07",
+      "region": "ME",
+      "player": "Stain / Job / ZAZI",
+      "playerRaw": "E36 StainY281 / Job 17ǃ / LYNX ZAZI 咲",
+      "event": "Trios Cash Cup Battle Royale",
+      "round": "Event 1 / 参加確認",
+      "rank": 673,
+      "points": 272,
+      "kills": 87,
+      "vrs": 1,
+      "prize": null,
+      "kind": "参加確認",
+      "matches": 8,
+      "seasonId": "S43",
+      "chapter": 7,
+      "season": 5,
+      "tournamentId": "ch7s5-trios-cash-cup",
+      "source": "https://www.fortnite.com/competitive/events/S43_TriosCashCup/?region=ME&round=S43_TriosCashCup_Event1_ME",
+      "verified": true,
+      "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+      "reviewOnly": true,
+      "reviewReason": "順位表の連続した上位順位の取得が完了していません",
+      "players": [
+        "Stain",
+        "Job",
+        "ZAZI"
+      ],
+      "teamAccountIds": [
+        "268fddd59748458ea78b23ad3bae9ac5",
+        "dcd62fd578bb43819c33ac13c0138164",
+        "f08aad629bf040d6beb78c7aea8e0a1f"
+      ]
+    }
+  ]
 }

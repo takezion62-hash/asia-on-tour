@@ -1,26 +1,26 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-07T16:50:59.465Z",
+  "checkedAt": "2026-11-07T20:49:01.572Z",
   "mode": "review",
   "scope": "recent",
   "dateMode": null,
-  "selectedWindows": 0,
+  "selectedWindows": 1,
   "fromDate": null,
   "toDate": null,
   "provider": "osirion",
   "linkedPlayers": 522,
-  "trackedWindows": 17,
-  "found": 0,
+  "trackedWindows": 18,
+  "found": 1,
   "skipped": 0,
   "imported": 0,
-  "scannedPages": 0,
+  "scannedPages": 12,
   "completedWindows": 17,
   "identityConflicts": 3,
   "alreadyRegistered": 36,
-  "autoApprovedTotal": 734,
+  "autoApprovedTotal": 782,
   "invalidCachedCandidates": 0,
-  "manualReviewCandidates": 0,
+  "manualReviewCandidates": 1,
   "autoApprovedCosmeticThisRun": 0,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
@@ -30,31 +30,31 @@
   "transientFailures": 0,
   "malformedFailures": 0,
   "skippedLeaderboards": [],
-  "reviewOnlyWindows": 17,
-  "reviewOnlyCandidates": 0,
+  "reviewOnlyWindows": 18,
+  "reviewOnlyCandidates": 1,
   "unmappedEvents": 2,
   "unmappedEventIds": [
     "S42_ArenaTestCup",
     "S43_OnePieceZoroCup_ZB"
   ],
-  "message": "最新版と安全統合：新規掲載0件、重複スキップ0件、要確認の競合0件、確認待ち0件。既存の戦績・賞金は保持。",
+  "message": "最新版と安全統合：新規掲載0件、重複スキップ0件、要確認の競合0件、確認待ち1件。既存の戦績・賞金は保持。",
   "concurrentMerge": {
     "appended": 0,
     "alreadyPublished": 0,
     "reviewConflicts": 0,
-    "keptPending": 0,
-    "reconciledAt": "2026-11-07T16:51:01.350Z"
+    "keptPending": 1,
+    "reconciledAt": "2026-11-07T20:49:03.145Z"
   },
   "coverage": {
-    "total": 17,
+    "total": 18,
     "completed": 17,
     "notStarted": 0,
-    "partial": 0,
+    "partial": 1,
     "retryWaiting": 0,
     "retryDue": 0,
-    "remaining": 0,
+    "remaining": 1,
     "retryCount": 0,
-    "completionPercent": 100,
+    "completionPercent": 94.4,
     "byRegion": {
       "EU": {
         "total": 4,
@@ -72,9 +72,9 @@
         "pending": 0
       },
       "ME": {
-        "total": 2,
+        "total": 3,
         "completed": 2,
-        "pending": 0
+        "pending": 1
       },
       "BR": {
         "total": 2,
@@ -89,12 +89,24 @@
     },
     "byYear": {
       "2026": {
-        "total": 17,
+        "total": 18,
         "completed": 17,
-        "pending": 0
+        "pending": 1
       }
     },
     "outsideScopeCheckpoints": 0,
-    "samples": []
+    "samples": [
+      {
+        "window": "epicgames_S43_TriosCashCup_ME/S43_TriosCashCup_Event1_ME",
+        "date": "2026-11-07",
+        "region": "ME",
+        "series": "cash-cup",
+        "status": "partial",
+        "nextPage": 12,
+        "totalPages": 34,
+        "retryAfter": null,
+        "errorCode": null
+      }
+    ]
   }
 }
