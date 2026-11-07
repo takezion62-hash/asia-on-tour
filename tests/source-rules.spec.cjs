@@ -36,7 +36,7 @@ test('未登録大会は誤って賞金やスキンを表示せず、検索・�
  await expect(page.locator('#source-rule-status')).toContainText('公式ルール登録済み 10大会');
 });
 
-test('Trios Cash Cup displays 5 verified regional individual payout ladders with NAW pending',async({page})=>{
+test('Trios Cash Cup displays six verified regional individual payout ladders',async({page})=>{
  await page.goto('/?season=all#about');
  await expect(page.locator('#source-rule-overview')).toContainText('公式規則登録 10');
  await page.locator('#source-rule-search').fill('trios cash');
@@ -58,8 +58,17 @@ test('Trios Cash Cup displays 5 verified regional individual payout ladders with
  await expect(card).toContainText('11〜15位');
  await expect(card).toContainText('$100');
  await page.locator('#source-rule-region').selectOption('NAW');
- await expect(card).toContainText('賞金表未登録');
- await expect(card).not.toContainText('$400');
+ await expect(card).toContainText('1位');
+ await expect(card).toContainText('$400');
+ await expect(card).toContainText('2位');
+ await expect(card).toContainText('$300');
+ await expect(card).toContainText('3位');
+ await expect(card).toContainText('$200');
+ await expect(card).toContainText('4〜5位');
+ await expect(card).toContainText('$150');
+ await expect(card).toContainText('6〜10位');
+ await expect(card).toContainText('$100');
+ await expect(card).not.toContainText('賞金表未登録');
  await page.locator('#source-rule-region').selectOption('OCE');
  await expect(card).toContainText('$300');
  await page.locator('#source-rule-region').selectOption('ME');

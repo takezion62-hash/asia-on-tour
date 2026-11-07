@@ -57,7 +57,7 @@ test('rules remain read-only official evidence; unrelated series stay unmapped',
  assert.equal(CUT_OFFS[unknown.id],undefined);
 });
 
-test('S43 Trio Cash Cup uses individually verified 5-region payouts; NAW remains awaiting evidence',()=>{
+test('S43 Trio Cash Cup uses individually verified six-region per-player payouts',()=>{
  const rule=registry.rules.find(r=>r.id==='ch7s5-trios-cash-cup');
  assert.ok(rule);
  assert.deepEqual(rule.eventIds,['S43_TriosCashCup']);
@@ -66,8 +66,11 @@ test('S43 Trio Cash Cup uses individually verified 5-region payouts; NAW remains
  assert.deepEqual(rule.rankedEligibility,{'1':'Diamond','2':'Champion','3':'Champion'});
  assert.equal(rule.cashPrizes.basis,'per-player');
  assert.equal(rule.cashPrizes.currency,'USD');
- assert.deepEqual(Object.keys(rule.cashPrizes.tiers).sort(),['OCE','ME','EU','BR','NAC'].sort());
- assert.equal(rule.cashPrizes.tiers.NAW,undefined);
+ assert.deepEqual(Object.keys(rule.cashPrizes.tiers).sort(),['OCE','ME','EU','BR','NAC','NAW'].sort());
+ assert.deepEqual(rule.cashPrizes.tiers.NAW,[
+  {through:1,perPlayer:400},{through:2,perPlayer:300},{through:3,perPlayer:200},
+  {through:5,perPlayer:150},{through:10,perPlayer:100}
+ ]);
  assert.deepEqual(rule.cashPrizes.tiers.EU.map(t=>t.perPlayer),[1000,750,500,400,300,200,100]);
  assert.deepEqual(rule.cashPrizes.tiers.NAC.map(t=>t.through),[1,2,3,4,5,10,15]);
  assert.deepEqual(rule.cashPrizes.tiers.BR.map(t=>t.through),[1,2,3,5,10]);
