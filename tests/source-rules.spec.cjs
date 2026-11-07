@@ -6,8 +6,8 @@ test('参照ソース内で公式大会ルールが検索でき、地域別通�
  const root=page.locator('#source-rules');
  await expect(root).toBeVisible();
  await expect(page.getByRole('heading',{name:'🏆 大会ルール'})).toBeVisible();
- await expect(page.locator('#source-rule-overview')).toContainText('公式規則登録 10');
- await expect(root.locator('.source-rule-card')).toHaveCount(10);
+ await expect(page.locator('#source-rule-overview')).toContainText('公式規則登録 11');
+ await expect(root.locator('.source-rule-card')).toHaveCount(11);
  await expect(root.locator('.source-rule-card a[href*="fortnite.com"]')).not.toHaveCount(0);
  await page.locator('#source-rule-search').fill('zoro');
  await expect(root.locator('.source-rule-card')).toHaveCount(2);
@@ -23,7 +23,7 @@ test('参照ソース内で公式大会ルールが検索でき、地域別通�
 
 test('未登録大会は誤って賞金やスキンを表示せず、検索・追加表示が可能',async({page})=>{
  await page.goto('/?season=all#about');
- await expect(page.locator('#source-rule-overview')).toContainText('公式規則登録 10');
+ await expect(page.locator('#source-rule-overview')).toContainText('公式規則登録 11');
  await page.locator('#source-rule-filter').selectOption('pending');
  const cards=page.locator('#source-rule-results .source-rule-card');
  await expect(cards).toHaveCount(12);
@@ -33,12 +33,12 @@ test('未登録大会は誤って賞金やスキンを表示せず、検索・�
  await expect(cards).toHaveCount(24);
  await page.locator('#source-rule-region').selectOption('BR');
  await expect(cards).toHaveCount(12);
- await expect(page.locator('#source-rule-status')).toContainText('公式ルール登録済み 10大会');
+ await expect(page.locator('#source-rule-status')).toContainText('公式ルール登録済み 11大会');
 });
 
 test('Trios Cash Cup displays six verified regional individual payout ladders',async({page})=>{
  await page.goto('/?season=all#about');
- await expect(page.locator('#source-rule-overview')).toContainText('公式規則登録 10');
+ await expect(page.locator('#source-rule-overview')).toContainText('公式規則登録 11');
  await page.locator('#source-rule-search').fill('trios cash');
  const card=page.locator('.source-rule-card[data-rule-id="ch7s5-trios-cash-cup"]');
  await expect(card).toBeVisible();
@@ -77,5 +77,25 @@ test('Trios Cash Cup displays six verified regional individual payout ladders',a
  await dates.locator('summary').click();
  await expect(dates).toContainText('2026-11-07');
  await expect(dates).toContainText('20:00');
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth+2)).toBe(true);
+});
+
+test('S43 Performance Evaluation displays confirmed EU NAC top26 and personal $400 VR',async({page})=>{
+ await page.goto('/?season=all#about');
+ await expect(page.locator('#source-rule-overview')).toContainText('公式規則登録 11');
+ await page.locator('#source-rule-search').fill('Performance Evaluation');
+ const card=page.locator('.source-rule-card[data-rule-id="ch7s5-performance-evaluation-trios"]');
+ await expect(card).toBeVisible();
+ await expect(card).toContainText('予選突破・決勝VRを自動掲載');
+ await page.locator('#source-rule-region').selectOption('EU');
+ await expect(card).toContainText('EU');
+ await expect(card).toContainText('上位26');
+ await expect(card).toContainText('各選手$400');
+ await expect(card).toContainText('33');
+ await page.locator('#source-rule-region').selectOption('NAC');
+ await expect(card).toContainText('NAC');
+ await expect(card).toContainText('上位26');
+ await page.locator('#source-rule-region').selectOption('NAW');
+ await expect(card).toContainText('NAW：未登録');
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth+2)).toBe(true);
 });
