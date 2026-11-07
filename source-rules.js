@@ -50,7 +50,7 @@
     const sessions=state.sessions.filter(s=>rule.eventIds.includes(s.eventId)&&
       supported.has(s.region)&&(state.region==='all'||s.region===state.region))
       .sort((a,b)=>a.startUtc.localeCompare(b.startUtc)||a.region.localeCompare(b.region));
-    const scheduleHtml=sessions.length?'<details class="source-rule-dates"><summary>開催日程（日本時間・登録済み5地域）</summary><div>'+
+    const scheduleHtml=sessions.length?'<details class="source-rule-dates"><summary>開催日程（日本時間・登録済み地域）</summary><div>'+
       sessions.map(s=>'<p><strong>'+esc(s.region)+'</strong> '+esc(s.round)+' · '+esc(s.dateJst)+
       ' '+esc(s.timeJst)+'〜（約3時間）</p>').join('')+'</div></details>':'';
     return '<div class="source-rule-fact"><span>個人賞金（USD・チーム3名それぞれ）</span>'+
