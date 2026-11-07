@@ -1,6 +1,7 @@
 'use strict';
 const fs=require('node:fs'),path=require('node:path');
 const REGIONS=new Set(['ME','EU','NAC','NAW','OCE','BR']);
+const UNREAL_REGIONS=['EU','NAC','NAW','BR','ME','ASIA','OCE'];
 const TEAMS=new Set(['solo','duo','trio','squad']);
 const URL_HOSTS=new Set(['fortnite.com','www.fortnite.com']);
 const positive=x=>Number.isSafeInteger(x)&&x>0;
@@ -17,7 +18,7 @@ function validateRegistry(doc,tournaments){
   const t=catalog.get(id);
   if(!t){fail(id,'登録済み大会カタログにありません');continue}
   if(rule.seasonId!==t.seasonId||rule.team!==t.team||rule.series!==t.series)fail(id,'シーズン/チーム/シリーズが一致しません');
-  if(!['victory-cup','skin-cup','cash-cup','performance-evaluation'].includes(rule.series))fail(id,'対応していないルールシリーズです');
+  if(!['victory-cup','skin-cup','cash-cup','performance-evaluation','unreal-cup'].includes(rule.series))fail(id,'対応していないルールシリーズです');
   if(!Array.isArray(rule.eventIds)||!rule.eventIds.length||new Set(rule.eventIds).size!==rule.eventIds.length||
       rule.eventIds.some(x=>typeof x!=='string'||!t.sourceEventIds.includes(x)))fail(id,'EpicイベントIDがカタログと不一致');
   if(!TEAMS.has(rule.team))fail(id,'チーム形式が不正');
@@ -79,6 +80,52 @@ function validateRegistry(doc,tournaments){
      }
      if(tiers[0]?.through!==1)fail(id,region+'の1位賞金が未登録');
    }
+  }else if(rule.series==='unreal-cup'){
+   if(rule.id!=='ch7s1-one-million-unreal-cup'||rule.seasonId!=='S39'||
+     rule.team!=='duo'||JSON.stringify(rule.eventIds)!=='["S39_1MillionUnrealCup"]'||
+     rule.autoApproval!=='review-only')fail(id,'S39 Unreal Cupは公式ルール登録済み・確認専用');
+   if(Object.keys(rule.matchCaps||{}).join(',')!=='単一ラウンド'||
+     rule.matchCaps?.['単一ラウンド']!==10||rule.sessionMinutes!==180)
+     fail(id,'Unreal Cupは1セッション約3時間・最大10試合');
+   if(rule.rankedEligibility?.mode!=='battle-royale'||rule.rankedEligibility?.rank!=='Unreal'||
+     rule.participation?.minimumAge!==13||rule.participation?.minimumAccountLevel!==350||
+     rule.participation?.twoFactorAuthentication!==true)
+     fail(id,'Unreal Cup参加条件（BR Unreal/13歳/350レベル/2FA）が不正');
+   const points=[65,56,52,48,44,40,38,36,34,32,30,28,26,24,22,20,18,16,14,12,10,8,6,4,2];
+   if(JSON.stringify(rule.scoring?.placementPoints)!==JSON.stringify(points)||
+     rule.scoring?.eliminationPoints!==1||
+     JSON.stringify(rule.scoring?.tiebreakers)!==JSON.stringify(['total-points','victory-royales','average-eliminations','average-placement','survival-seconds']))
+     fail(id,'順位点・キル点・同点時順位の公式規則に矛盾');
+   if(JSON.stringify(rule.sessionDates)!=='["2025-12-20","2026-01-10"]')
+     fail(id,'大会開催回の登録が不正');
+   const a=rule.cashPrizes;
+   if(a?.basis!=='per-team'||a.currency!=='USD'||a.teamSize!==2||
+     a.individualShare!=='equal'||!object(a.tiers)||
+     Object.keys(a.tiers).sort().join(',')!==UNREAL_REGIONS.slice().sort().join(','))
+     fail(id,'全7地域のデュオチーム賞金表が必要');
+   else {
+    const last={EU:2000,NAC:1200,NAW:500,BR:500,ME:250,ASIA:250,OCE:250};
+    const first={EU:20000,NAC:16000,NAW:8000,BR:8000,ME:5000,ASIA:5000,OCE:5000};
+    for(const region of UNREAL_REGIONS){
+     const tiers=a.tiers[region];
+     if(!Array.isArray(tiers)||!tiers.length||tiers[0]?.through!==1||
+       tiers[0]?.perTeam!==first[region]||
+       tiers.at(-1)?.through!==last[region]||tiers.at(-1)?.perTeam!==100){
+       fail(id,region+'公式賞金の1位額・最低賞金順位が不一致');continue;
+     }
+     let prevRank=0,prevTeam=Infinity;
+     for(const tier of tiers){
+      if(!object(tier)||Object.keys(tier).sort().join(',')!=='perTeam,through'||
+       !positive(tier.through)||tier.through<=prevRank||
+       !positive(tier.perTeam)||tier.perTeam>prevTeam||tier.perTeam%2!==0){
+       fail(id,region+'の順位別チーム賞金額・個人分配が不正');break;
+      }
+      prevRank=tier.through;prevTeam=tier.perTeam;
+     }
+    }
+   }
+   if(rule.advance!==undefined||rule.prizePerVictory!==undefined||rule.cosmeticRanks!==undefined)
+     fail(id,'Unreal Cupに予選通過・VR単価・スキン賞を混在させない');
   }else if(rule.series==='skin-cup'){
    if(!positive(rule.matchCaps?.['スキン大会']))fail(id,'スキン大会の試合数上限が必要');
    if(!positive(rule.chapter)||!positive(rule.season)||rule.chapter!==t.chapter||rule.season!==t.season)fail(id,'チャプター/シーズン不一致');
