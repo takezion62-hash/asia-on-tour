@@ -6,8 +6,11 @@ on:
       - "scripts/osirion-sync.cjs"
       - "scripts/verified-history-approval.cjs"
       - "scripts/auto-sync-core.cjs"
+      - "scripts/automatic-cosmetic-approval.cjs"
+      - "scripts/cosmetic-rank-rules.cjs"
       - "tests/verified-history-approval.test.cjs"
       - "tests/non-victory-auto-sync.test.cjs"
+      - "tests/automatic-cosmetic-approval.test.cjs"
       - "tests/osirion-sync.test.cjs"
       - "history-sync-config.json"
       - ".github/workflows/history-sync.yml"
@@ -40,7 +43,7 @@ jobs:
       - name: Validate unchanged public data and tests
         run: |
           npm run validate
-          node --test tests/auto-sync.test.cjs tests/osirion-sync.test.cjs tests/non-victory-auto-sync.test.cjs tests/verified-history-approval.test.cjs
+          node --test tests/auto-sync.test.cjs tests/osirion-sync.test.cjs tests/non-victory-auto-sync.test.cjs tests/verified-history-approval.test.cjs tests/automatic-cosmetic-approval.test.cjs tests/cosmetic-rank-rules.test.cjs
       - name: Commit only verified results and review state
         run: |
           if [ -z "$(git status --porcelain -- results.json updates.json history-sync-status.json history-sync-review.json history-sync-scan.json)" ]; then
