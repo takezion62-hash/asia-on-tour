@@ -2069,6 +2069,37 @@
           "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cash-cups-november-2025-official-rules"
         }
       ]
+    },
+    {
+      "id": "ch6mini2-squads-victory-cash-cup",
+      "name": "Squads Victory Cash Cup",
+      "chapter": 6,
+      "season": 5,
+      "seasonId": "S38",
+      "miniSeason": 2,
+      "sourceEventIds": [
+        "S38_SquadsVictoryCup"
+      ],
+      "series": "victory-cup",
+      "mode": "battle-royale",
+      "subtype": "squads-victory-cash-cup",
+      "team": "squad",
+      "platform": "cross-platform",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "2025年11月17日NAWのSquads Victory Cash Cup、Day 2 Round 2開催と大会形式をFortnite Trackerで確認。CH6 Mini Season 2（S38）に分類。",
+          "url": "https://fortnitetracker.com/events/epicgames_S38_SquadsVictoryCup_NAW?window=S38_SquadsVictoryCup_Round2_Day2_NAW"
+        },
+        {
+          "text": "Epic公式2025年11月Victory Cash Cup規則2.2.2はNAW上位100スクワッドが決勝進出、決勝最大3試合を規定。Attachment Cでは決勝1VRにつき各選手$100。",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cash-cups-november-2025-official-rules"
+        },
+        {
+          "text": "Epic公式大会ページ",
+          "url": "https://www.fortnite.com/competitive/events/S38_SquadsVictoryCup/?region=NAW"
+        }
+      ]
     }
   ]
 }
