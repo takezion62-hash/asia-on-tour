@@ -57,7 +57,7 @@
       '<div class="source-rule-cash-grid">'+sections+'</div></div>'+
       '<div class="source-rule-fact"><span>参加ランク条件（BRランク）</span><strong>'+esc(eligible)+'</strong></div>'+
       scheduleHtml+
-      '<p class="source-rule-warning">※ 確認できた地域別賞金表のみ掲載。順位表・選手本人・賞金対象資格の照合前には自動で賞金獲得確定にしません。</p>';
+      '<p class="source-rule-warning">※ 公式地域別賞金表と照合済みの入賞チームは、3名すべてのEpic ID・完了した開催枠・順位・既存戦績を確認できた場合に自動掲載します。本人の受給資格・賞金支払完了は未確認です。</p>';
   }
   function ruleMarkup(entry){
     const rule=state.rules.get(entry.id),present=Boolean(rule);
@@ -83,7 +83,7 @@
       ' · '+esc(seriesLabel[entry.series]||entry.series||'大会')+'</span>'+
       '<h3>'+esc(entry.name)+'</h3>'+
       '<p>'+esc(modeLabel[entry.team]||entry.team||'形式未確認')+' / '+esc(entry.mode||'モード未確認')+'</p></div>'+
-      '<span class="source-rule-state '+(present?'is-ready':'is-pending')+'">'+(present?(rule?.autoApproval==='review-only'?'公式規則登録済み・確認専用':'公式規則登録済み'):'ルール未登録')+'</span></div>'+
+      '<span class="source-rule-state '+(present?'is-ready':'is-pending')+'">'+(present?(rule?.autoApproval==='review-only'?'公式規則登録済み・確認専用':rule?.autoApproval==='verified-team-rank'?'公式規則登録済み・入賞を自動掲載':'公式規則登録済み'):'ルール未登録')+'</span></div>'+
       details+
       '<details class="source-rule-identifiers"><summary>大会ID・適用範囲</summary><div>'+ids.map(id=>'<code>'+esc(id)+'</code>').join('')+
       '<p>公式規則が確認済みでも、本人Epic ID・地域・開催枠・順位表の検証が必要です</p></div></details>'+
