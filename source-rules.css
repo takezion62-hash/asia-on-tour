@@ -1,0 +1,41 @@
+/* Official rule library — visually nested under SOURCES, not a new navigation page. */
+.source-rules{margin-top:42px;padding-top:32px;border-top:1px solid #33405c}
+.source-rules-header{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;flex-wrap:wrap}
+.source-rules-kicker{font-size:10px;font-weight:900;letter-spacing:2px;color:#61daeb;margin:0 0 10px}
+.source-rules h2{margin:0;font-size:clamp(25px,3.8vw,36px);font-weight:900;letter-spacing:-.7px}
+.source-rules-header p:not(.source-rules-kicker){max-width:720px;line-height:1.7;font-size:12px;color:#aebbd2;margin:10px 0 0}
+.source-rules-total{padding:9px 13px;border:1px solid #45647b;border-radius:20px;color:#9fdfec;font-size:12px;font-weight:850}
+.source-rules-controls{display:grid;grid-template-columns:minmax(0,1fr) 150px 170px;gap:10px;margin:24px 0 8px}
+.source-rules-controls label{font-size:10px;font-weight:800;color:#a9bbd0;display:grid;gap:8px;min-width:0}
+.source-rules-controls input,.source-rules-controls select{min-width:0;width:100%;border:1px solid #3b4b65;border-radius:9px;background:#11182b;color:#edf5ff;padding:12px 13px;font-size:13px;box-sizing:border-box}
+.source-rules-controls input:focus-visible,.source-rules-controls select:focus-visible,.source-rule-more:focus-visible{outline:2px solid #72d9ee;outline-offset:2px}
+.source-rule-status{color:#a8bdd3;margin:15px 0 18px;font-size:12px}
+.source-rule-results{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.source-rule-card{min-width:0;border:1px solid #35445f;border-radius:16px;background:linear-gradient(120deg,#1b2538,#121929);padding:19px;display:flex;flex-direction:column;gap:15px}
+.source-rule-title{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.source-rule-title h3{font-size:17px;line-height:1.4;color:#f7faff;margin:7px 0}
+.source-rule-title p{color:#adbbd0;font-size:11px;margin:0}
+.source-rule-season{font-size:10px;font-weight:900;color:#8bdbec;letter-spacing:.7px}
+.source-rule-state{font-size:10px;border:1px solid #53627b;padding:6px 9px;border-radius:7px;white-space:nowrap;color:#c6d3e7}
+.source-rule-state.is-ready{border-color:#367b84;color:#90e6d6;background:#163333}
+.source-rule-state.is-pending{color:#dfcda7}
+.source-rule-facts{display:grid;gap:12px}
+.source-rule-fact{display:grid;gap:7px;color:#f0f7ff;font-size:12px}
+.source-rule-fact>span:first-child{font-size:10px;color:#a9bbce;font-weight:800}
+.source-rule-regions{display:flex;gap:6px;flex-wrap:wrap}
+.source-rule-region{background:#26344c;border:1px solid #354863;padding:6px 9px;border-radius:8px;color:#cde8f0;font-size:11px}
+.source-rule-region.is-unknown,.source-rule-unknown{color:#9faec6;background:#202b3d}
+.source-rule-warning{color:#bac9de;font-size:12px;line-height:1.7;margin:0}
+.source-rule-identifiers{border-top:1px solid #35435c;padding-top:12px}
+.source-rule-identifiers summary{font-size:11px;font-weight:800;color:#a8d9e6;cursor:pointer}
+.source-rule-identifiers code{display:block;font-size:10px;overflow-wrap:anywhere;margin:7px 0;color:#c6d6ef}
+.source-rule-identifiers p{font-size:11px;color:#a6b5c8;line-height:1.7}
+.source-rule-links{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto}
+.source-rule-links a{font-size:11px;border:1px solid #456279;border-radius:8px;padding:9px 10px;color:#87dfeb;text-decoration:none;font-weight:800}
+.source-rule-links a:hover{background:#28394d}
+.source-rule-more{display:block;margin:22px auto 0;padding:11px 20px;border:1px solid #547c97;border-radius:11px;background:#1b2c46;color:#e1f5fa;font-weight:850;cursor:pointer}
+.source-rule-more[hidden]{display:none}
+.source-rule-empty{grid-column:1/-1;font-size:12px;color:#a5b5ca}
+.source-rules-note{color:#91a7c4;font-size:11px;line-height:1.8;margin:20px 0 0}
+@media(max-width:930px){.source-rule-results{grid-template-columns:1fr}}
+@media(max-width:600px){.source-rules{margin-top:32px}.source-rules-controls{grid-template-columns:1fr 1fr}.source-rules-controls label:first-child{grid-column:1/-1}.source-rule-card{padding:15px}.source-rule-title{flex-wrap:wrap}.source-rule-state{white-space:normal}}
