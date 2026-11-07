@@ -433,6 +433,7 @@ async function main(){
  for(const hold of verified.held)reasons.set(hold.id,hold.reason);
  for(const hold of cosmetic.held)if(!reasons.has(hold.id))reasons.set(hold.id,hold.reason);
  for(const hold of cash.held)reasons.set(hold.id,hold.reason);
+ for(const hold of performance.held)reasons.set(hold.id,hold.reason);
  for(const row of approved)importedIds.add(row.id);
  manuallyHeld=pending.length-approved.length;
  imported=applyProposals(data,approved,stamp);
