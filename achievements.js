@@ -203,6 +203,23 @@
   function isZeroBuildEvent(row,catalog) {
     return confirmedMode(row,catalog,t=>['zero-build','reload-zero-build'].includes(t.mode),/\b(?:zero[ -]?build|zb)\b/i);
   }
+  // Explicit BR/ZB classification: never interpret an unspecified game mode as
+  // Battle Royale. Catalog modes take precedence over a vague event name.
+  // Reload BR and Reload Zero Build belong to their respective build modes.
+  function confirmedBattleMode(row,catalog=[]) {
+    const matches=tournamentMatches(row,catalog);
+    if(matches.length){
+      const modes=[...new Set(matches.map(t=>
+        ['battle-royale','reload'].includes(t.mode)?'br':
+        ['zero-build','reload-zero-build'].includes(t.mode)?'zb':null
+      ))];
+      return modes.length===1?modes[0]:null;
+    }
+    const name=String(row?.event||'');
+    if(/\b(?:zero[ -]?build|zb)\b/i.test(name))return 'zb';
+    if(/\b(?:battle[ -]?royale|br)\b/i.test(name))return 'br';
+    return null;
+  }
   function isFNCSEvent(row,catalog) {
     return confirmedMode(row,catalog,t=>t.series==='fncs',/^(?:FNCS\b|Fortnite Champion Series\b)/i);
   }
@@ -249,6 +266,7 @@
     {id:'cash-three-regions',icon:'🌎',title:'越境マネーメーカー',description:'異なる海外3地域で個人の現金賞金を獲得',rarity:'legendary',goal:3,unit:'地域'},
     {id:'solo-and-team-cash',icon:'⚔️',title:'二刀流',description:'ソロ・デュオ・トリオ・スクワッドのうち異なる2形式以上で個人の現金賞金を獲得',rarity:'epic',goal:2,unit:'形式'},
     {id:'skin-and-cash',icon:'🎭',title:'文武両道',description:'スキン報酬獲得と個人の現金賞金獲得を両方確認',rarity:'rare',goal:2,unit:'条件'},
+    {id:'triple-format-vr',icon:'⚔️',title:'三冠の支配者',description:'海外大会でソロ・デュオ・トリオの3形式すべてでVRを獲得（チーム戦はチーム合計）',rarity:'epic',goal:3,unit:'形式'},
     {id:'vr-three-regions',icon:'🌏',title:'旅先の勝者',description:'異なる海外3地域でVRを確認（チーム戦を含む）',rarity:'legendary',goal:3,unit:'地域'},
     {id:'vr-and-cash',icon:'✨',title:'ダブルクラウン',description:'同じ掲載戦績でVRと個人の現金賞金を両方確認',rarity:'rare',goal:1},
     {id:'top-ten',icon:'🥇',title:'海外決勝TOP10',description:'確認済みの海外大会決勝で総合10位以内',rarity:'epic',goal:1},
@@ -315,6 +333,16 @@
           break;
         }
         case 'skin-and-cash': evidence=[skins[0],paid[0]].filter(Boolean);break;
+        case 'triple-format-vr':{
+          const byFormat=new Map();
+          for(const row of withVR){
+            if(!REGIONS.includes(row.region))continue;
+            const format=confirmedPrizeFormat(row,catalog);
+            if(['solo','duo','trio'].includes(format)&&!byFormat.has(format))byFormat.set(format,row);
+          }
+          evidence=['solo','duo','trio'].filter(format=>byFormat.has(format)).map(format=>byFormat.get(format));
+          break;
+        }
         case 'vr-three-regions': evidence=uniqueRegions(withVR);break;
         case 'vr-and-cash': evidence=paid.filter(row=>Number.isInteger(row.vrs)&&row.vrs>0);break;
         case 'top-ten': evidence=verified.filter(row=>FINAL_KINDS.has(row.kind)&&Number.isInteger(row.rank)&&row.rank>=1&&row.rank<=10);break;
@@ -358,7 +386,7 @@
         rarityLabel:SPECIAL_TIERS[rarity].name,
         ...(growth?{growth}:{}),
         evidence:evidence.slice(0,isWeapons?4:3).map(row=>({ ...specialRecordEvidence(row),
-          ...(isWeapons?{teamFormat:confirmedPrizeFormat(row,catalog)}:{}),
+          ...((isWeapons||def.id==='triple-format-vr')?{teamFormat:confirmedPrizeFormat(row,catalog)}:{}),
           ...(isSoloKills?{kills:row.kills,killFormat:'solo'}:{}),
           ...(def.id==='final-kill-tyrant'?{kills:row.kills,killFormat:'solo'}:{}),
           ...(def.id==='cash-windfall'?{personalCash:individualCash(row)}:{}),
@@ -393,6 +421,9 @@
     {id:'six-region-bounty',icon:'🌐',title:'六界の賞金首',hint:'もはや逃げ場は、どこにもない',
       description:'ME・EU・NAC・NAW・OCE・BRの海外6地域すべてで個人現金賞金を獲得',
       rarity:'legendary'},
+    {id:'dual-world-champion',icon:'🌗',title:'二界の覇者',hint:'築く世界も、築かない世界も、その頂へ',
+      description:'海外Battle RoyaleとZero Buildの両方で、大会決勝の総合1位を獲得（Reload形式も対象）',
+      rarity:'legendary',difficulty:'極高'},
     {id:'borderless-champion',icon:'👑',title:'国境なき王者',hint:'王座に国境は存在しない',
       description:'異なる海外3地域の大会決勝でそれぞれ総合1位を記録',
       rarity:'legendary'},
@@ -438,6 +469,16 @@
         case 'six-region-bounty':
           evidence=pickOnePerRegion(paid);
           break;
+        case 'dual-world-champion':{
+          const byMode=new Map();
+          for(const row of verified){
+            if(!isFinal(row)||row.rank!==1||!REGIONS.includes(row.region))continue;
+            const mode=confirmedBattleMode(row,catalog);
+            if(mode&&!byMode.has(mode))byMode.set(mode,row);
+          }
+          evidence=['br','zb'].filter(mode=>byMode.has(mode)).map(mode=>byMode.get(mode));
+          break;
+        }
         case 'borderless-champion':
           evidence=pickOnePerRegion(verified.filter(row=>isFinal(row)&&row.rank===1));
           break;
@@ -471,6 +512,7 @@
           break;
       }
       const goal=def.id==='three-world-shadow'||def.id==='triple-gold'||def.id==='borderless-champion'?3:
+        def.id==='dual-world-champion'?2:
         def.id==='six-region-bounty'?6:def.id==='returning-phoenix'||def.id==='light-and-shadow'||def.id==='double-crown-miracle'?2:1;
       const unlocked=evidence.length>=goal;
       return {...def,goal,progress:evidence.length,unlocked,
@@ -543,5 +585,5 @@
       secret:calculateSecretEvidence(verified,options.catalog)
     };
   }
-  return Object.freeze({VERSION:7,REGIONS:Object.freeze(REGIONS),CATALOG,EVOLUTION_TIERS,EVOLUTION_TRACKS,SPECIAL_TIERS,SPECIAL_CATALOG,SECRET_CATALOG,calculate,calculateSpecial,calculateSecret,calculateEvolution,confirmedKillFormat,confirmedPrizeFormat,DESTRUCTION_KILLS,SPECIALIST_GOALS,SPECIALIST_NAMES,WEAPON_MILESTONES,SOLO_KILL_MILESTONES,TEAM_FORMATS,TEAM_FORMAT_LABELS,individualCash,confirmedSkin});
+  return Object.freeze({VERSION:8,REGIONS:Object.freeze(REGIONS),CATALOG,EVOLUTION_TIERS,EVOLUTION_TRACKS,SPECIAL_TIERS,SPECIAL_CATALOG,SECRET_CATALOG,calculate,calculateSpecial,calculateSecret,calculateEvolution,confirmedKillFormat,confirmedPrizeFormat,DESTRUCTION_KILLS,SPECIALIST_GOALS,SPECIALIST_NAMES,WEAPON_MILESTONES,SOLO_KILL_MILESTONES,TEAM_FORMATS,TEAM_FORMAT_LABELS,individualCash,confirmedSkin});
 });
