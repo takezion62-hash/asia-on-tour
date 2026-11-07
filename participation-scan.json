@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-11-07T15:25:32.002Z",
+  "checkedAt": "2026-11-07T21:24:21.938Z",
   "windows": {
     "epicgames_S42_InoxtagIconCup_NAW/S42_InoxtagIconCup_NAW": {
       "nextPage": 40,
@@ -300,12 +300,12 @@
       "emptyAttempts": 0
     },
     "epicgames_S43_OnePieceZoroCup_Mobile_EU/S43_OnePieceZoroCup_Mobile_EU": {
-      "nextPage": 36,
-      "pages": 36,
-      "complete": false,
-      "coverageLimited": false,
+      "nextPage": 40,
+      "pages": 40,
+      "complete": true,
+      "coverageLimited": true,
       "totalPages": 100,
-      "lastScanned": "2026-11-07T08:44:07.007Z",
+      "lastScanned": "2026-11-07T21:24:00.863Z",
       "emptyAttempts": 0
     },
     "epicgames_S30_SoloVictoryCashCup_ME/S30_SoloVictoryCashCup_Event6Round1_ME": {
@@ -459,6 +459,42 @@
       "coverageLimited": false,
       "totalPages": 2,
       "lastScanned": "2026-11-07T15:25:32.002Z",
+      "emptyAttempts": 0
+    },
+    "epicgames_S43_TriosCashCup_EU/S43_TriosCashCup_Event1_EU": {
+      "nextPage": 12,
+      "pages": 12,
+      "complete": false,
+      "coverageLimited": false,
+      "totalPages": 100,
+      "lastScanned": "2026-11-07T21:23:56.807Z",
+      "emptyAttempts": 0
+    },
+    "epicgames_S30_SoloVictoryCashCup_OCE/S30_SoloVictoryCashCup_Event6Round1_OCE": {
+      "nextPage": 12,
+      "pages": 12,
+      "complete": false,
+      "coverageLimited": false,
+      "totalPages": 100,
+      "lastScanned": "2026-11-07T21:24:13.236Z",
+      "emptyAttempts": 0
+    },
+    "epicgames_S33_SoloCashCup_NAW/S33_SoloCashCup_Event5Round2_NAW": {
+      "nextPage": 6,
+      "pages": 6,
+      "complete": true,
+      "coverageLimited": false,
+      "totalPages": 6,
+      "lastScanned": "2026-11-07T21:24:19.849Z",
+      "emptyAttempts": 0
+    },
+    "epicgames_S30_SoloVictoryCashCup_OCE/S30_SoloVictoryCashCup_Event1Round1_OCE": {
+      "nextPage": 2,
+      "pages": 2,
+      "complete": false,
+      "coverageLimited": false,
+      "totalPages": 100,
+      "lastScanned": "2026-11-07T21:24:21.938Z",
       "emptyAttempts": 0
     }
   }
