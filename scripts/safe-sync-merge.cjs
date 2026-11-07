@@ -178,7 +178,7 @@ function mergeSnapshots(scope,base,scanned,latest,reviewed={version:1,entries:[]
  const queueExtra=c[qFile].proposals.filter(x=>!baseReviewIds.has(x.id));
  const candidates=[...queueExtra,...conflicts.map(x=>{
   const row=c[rFile].find(r=>r.id===x.id);
-  return row?{...row,reviewReason:'自動掲載を保留：'+x.reason+(x.existingId?'（既存 '+x.existingId+'）':'')} :null;
+  return row?{...row,reviewReason:'自動掲載を保留：競合 '+x.reason+(x.existingId?'（既存 '+x.existingId+'）':'')} :null;
  }).filter(Boolean)];
  for(const row of candidates){
   if(reviewIds.has(row.id)||existing.has(row.id)||reviewedIds.has(row.id))continue;
