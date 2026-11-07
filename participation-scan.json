@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-11-07T02:32:06.478Z",
+  "checkedAt": "2026-11-07T02:51:28.176Z",
   "windows": {
     "epicgames_S42_InoxtagIconCup_NAW/S42_InoxtagIconCup_NAW": {
       "nextPage": 40,
@@ -300,12 +300,12 @@
       "emptyAttempts": 0
     },
     "epicgames_S43_OnePieceZoroCup_Mobile_EU/S43_OnePieceZoroCup_Mobile_EU": {
-      "nextPage": 12,
-      "pages": 12,
+      "nextPage": 24,
+      "pages": 24,
       "complete": false,
       "coverageLimited": false,
       "totalPages": 100,
-      "lastScanned": "2026-11-06T23:06:30.969Z",
+      "lastScanned": "2026-11-07T02:50:59.500Z",
       "emptyAttempts": 0
     },
     "epicgames_S30_SoloVictoryCashCup_ME/S30_SoloVictoryCashCup_Event6Round1_ME": {
@@ -345,21 +345,30 @@
       "emptyAttempts": 0
     },
     "epicgames_S43_OnePieceZoroCup_Mobile_BR/S43_OnePieceZoroCup_Mobile_BR": {
-      "nextPage": 24,
-      "pages": 24,
-      "complete": false,
+      "nextPage": 32,
+      "pages": 32,
+      "complete": true,
       "coverageLimited": false,
       "totalPages": 32,
-      "lastScanned": "2026-11-07T02:31:19.206Z",
+      "lastScanned": "2026-11-07T02:50:46.900Z",
       "emptyAttempts": 0
     },
     "epicgames_S36_VictoryDuosCup_NAC/S36_VictoryDuosCup_Event1Round1_NAC": {
-      "nextPage": 8,
-      "pages": 8,
+      "nextPage": 12,
+      "pages": 12,
       "complete": false,
       "coverageLimited": false,
       "totalPages": 100,
-      "lastScanned": "2026-11-07T02:32:06.478Z",
+      "lastScanned": "2026-11-07T02:51:28.176Z",
+      "emptyAttempts": 0
+    },
+    "epicgames_S30_SoloVictoryCashCup_ME/S30_SoloVictoryCashCup_Event6Round2_ME": {
+      "nextPage": 12,
+      "pages": 12,
+      "complete": false,
+      "coverageLimited": false,
+      "totalPages": 18,
+      "lastScanned": "2026-11-07T02:51:15.057Z",
       "emptyAttempts": 0
     }
   }
