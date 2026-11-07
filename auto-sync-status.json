@@ -1,11 +1,11 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-07T01:06:38.822Z",
+  "checkedAt": "2026-11-07T01:12:12.786Z",
   "mode": "review",
   "scope": "recent",
   "dateMode": null,
-  "selectedWindows": 6,
+  "selectedWindows": 0,
   "fromDate": null,
   "toDate": null,
   "provider": "osirion",
@@ -13,15 +13,15 @@
   "trackedWindows": 10,
   "found": 2,
   "skipped": 0,
-  "imported": 2,
-  "scannedPages": 11,
+  "imported": 0,
+  "scannedPages": 0,
   "completedWindows": 10,
   "identityConflicts": 0,
-  "alreadyRegistered": 28,
+  "alreadyRegistered": 30,
   "autoApprovedTotal": 386,
   "invalidCachedCandidates": 0,
   "manualReviewCandidates": 2,
-  "autoApprovedCosmeticThisRun": 2,
+  "autoApprovedCosmeticThisRun": 0,
   "timeLimitReached": false,
   "retryWindows": 0,
   "transientFailures": 0,
@@ -32,5 +32,5 @@
     "S42_ArenaTestCup",
     "S43_OnePieceZoroCup_ZB"
   ],
-  "message": "Osirionで459アカウントIDを追跡。今回の公式規則による自動承認2件、追加確認待ち2件、名義照合保留0件。"
+  "message": "Osirionで459アカウントIDを追跡。今回の公式規則による自動承認0件、追加確認待ち2件、名義照合保留0件。"
 }
