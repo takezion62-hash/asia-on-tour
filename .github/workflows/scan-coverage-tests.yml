@@ -1,0 +1,41 @@
+name: AOT scan coverage and retry regression checks
+on:
+  pull_request:
+    paths:
+      - "scripts/osirion-sync.cjs"
+      - "scripts/scan-coverage.cjs"
+      - "tests/osirion-sync.test.cjs"
+      - "tests/scan-coverage.test.cjs"
+      - "auto-sync-ui.js"
+      - "tests/auto-sync-ui.test.cjs"
+      - ".github/workflows/scan-coverage-tests.yml"
+  push:
+    branches: [main]
+    paths:
+      - "scripts/osirion-sync.cjs"
+      - "scripts/scan-coverage.cjs"
+      - "tests/osirion-sync.test.cjs"
+      - "tests/scan-coverage.test.cjs"
+      - "auto-sync-ui.js"
+      - "tests/auto-sync-ui.test.cjs"
+      - ".github/workflows/scan-coverage-tests.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  scan-retries:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Validate scan code and published JSON
+        run: |
+          node --check scripts/osirion-sync.cjs
+          node --check scripts/scan-coverage.cjs
+          node --check auto-sync-ui.js
+          npm run validate
+      - name: Test partial checkpoints, safe retries and browser status
+        run: node --test tests/scan-coverage.test.cjs tests/osirion-sync.test.cjs tests/auto-sync-ui.test.cjs
