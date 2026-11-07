@@ -1,7 +1,7 @@
 {
   "version": 1,
   "updatedAt": "2026-11-07",
-  "description": "Epic公式規則と照合した大会だけを掲載。Victory/スキンの自動承認は限定条件のみ。Cash Cupは地域別賞金テーブルを表示するが自動承認は未対応。",
+  "description": "Epic公式規則で確認した大会ルール。Victory／スキン／Cash／Performance／Unrealの地域別条件を表示。Unrealは全7地域のチーム賞金と個人均等配分を掲載し、未確認賞金を自動確定しない。",
   "rules": [
     {
       "id": "ch5s3-squads-victory-cup",
@@ -414,6 +414,371 @@
         {
           "text": "Epic公式規則Attachment C：トリオ決勝の1VRはチーム$1,200、各選手$400。Round2の1VRはリーダーボード100ポイント。",
           "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-performance-evaluation-chapter-7-official-rules"
+        }
+      ]
+    },
+    {
+      "id": "ch7s1-one-million-unreal-cup",
+      "seasonId": "S39",
+      "eventIds": [
+        "S39_1MillionUnrealCup"
+      ],
+      "team": "duo",
+      "series": "unreal-cup",
+      "matchCaps": {
+        "単一ラウンド": 10
+      },
+      "sessionMinutes": 180,
+      "sessionDates": [
+        "2025-12-20",
+        "2026-01-10"
+      ],
+      "rankedEligibility": {
+        "mode": "battle-royale",
+        "rank": "Unreal"
+      },
+      "participation": {
+        "minimumAge": 13,
+        "minimumAccountLevel": 350,
+        "twoFactorAuthentication": true
+      },
+      "scoring": {
+        "placementPoints": [
+          65,
+          56,
+          52,
+          48,
+          44,
+          40,
+          38,
+          36,
+          34,
+          32,
+          30,
+          28,
+          26,
+          24,
+          22,
+          20,
+          18,
+          16,
+          14,
+          12,
+          10,
+          8,
+          6,
+          4,
+          2
+        ],
+        "eliminationPoints": 1,
+        "tiebreakers": [
+          "total-points",
+          "victory-royales",
+          "average-eliminations",
+          "average-placement",
+          "survival-seconds"
+        ]
+      },
+      "cashPrizes": {
+        "currency": "USD",
+        "basis": "per-team",
+        "teamSize": 2,
+        "individualShare": "equal",
+        "tiers": {
+          "EU": [
+            {
+              "through": 1,
+              "perTeam": 20000
+            },
+            {
+              "through": 2,
+              "perTeam": 10000
+            },
+            {
+              "through": 3,
+              "perTeam": 5000
+            },
+            {
+              "through": 4,
+              "perTeam": 4000
+            },
+            {
+              "through": 5,
+              "perTeam": 3000
+            },
+            {
+              "through": 10,
+              "perTeam": 2000
+            },
+            {
+              "through": 50,
+              "perTeam": 1000
+            },
+            {
+              "through": 100,
+              "perTeam": 500
+            },
+            {
+              "through": 1000,
+              "perTeam": 200
+            },
+            {
+              "through": 2000,
+              "perTeam": 100
+            }
+          ],
+          "NAC": [
+            {
+              "through": 1,
+              "perTeam": 16000
+            },
+            {
+              "through": 2,
+              "perTeam": 8000
+            },
+            {
+              "through": 3,
+              "perTeam": 4000
+            },
+            {
+              "through": 4,
+              "perTeam": 3000
+            },
+            {
+              "through": 5,
+              "perTeam": 2000
+            },
+            {
+              "through": 10,
+              "perTeam": 1600
+            },
+            {
+              "through": 50,
+              "perTeam": 800
+            },
+            {
+              "through": 100,
+              "perTeam": 400
+            },
+            {
+              "through": 600,
+              "perTeam": 200
+            },
+            {
+              "through": 1200,
+              "perTeam": 100
+            }
+          ],
+          "NAW": [
+            {
+              "through": 1,
+              "perTeam": 8000
+            },
+            {
+              "through": 2,
+              "perTeam": 4000
+            },
+            {
+              "through": 3,
+              "perTeam": 2000
+            },
+            {
+              "through": 4,
+              "perTeam": 1500
+            },
+            {
+              "through": 5,
+              "perTeam": 1000
+            },
+            {
+              "through": 10,
+              "perTeam": 600
+            },
+            {
+              "through": 50,
+              "perTeam": 400
+            },
+            {
+              "through": 100,
+              "perTeam": 300
+            },
+            {
+              "through": 200,
+              "perTeam": 200
+            },
+            {
+              "through": 500,
+              "perTeam": 100
+            }
+          ],
+          "BR": [
+            {
+              "through": 1,
+              "perTeam": 8000
+            },
+            {
+              "through": 2,
+              "perTeam": 4000
+            },
+            {
+              "through": 3,
+              "perTeam": 2000
+            },
+            {
+              "through": 4,
+              "perTeam": 1500
+            },
+            {
+              "through": 5,
+              "perTeam": 1000
+            },
+            {
+              "through": 10,
+              "perTeam": 600
+            },
+            {
+              "through": 50,
+              "perTeam": 400
+            },
+            {
+              "through": 100,
+              "perTeam": 300
+            },
+            {
+              "through": 200,
+              "perTeam": 200
+            },
+            {
+              "through": 500,
+              "perTeam": 100
+            }
+          ],
+          "ME": [
+            {
+              "through": 1,
+              "perTeam": 5000
+            },
+            {
+              "through": 2,
+              "perTeam": 3000
+            },
+            {
+              "through": 3,
+              "perTeam": 2000
+            },
+            {
+              "through": 4,
+              "perTeam": 1500
+            },
+            {
+              "through": 5,
+              "perTeam": 1000
+            },
+            {
+              "through": 10,
+              "perTeam": 600
+            },
+            {
+              "through": 50,
+              "perTeam": 400
+            },
+            {
+              "through": 100,
+              "perTeam": 200
+            },
+            {
+              "through": 250,
+              "perTeam": 100
+            }
+          ],
+          "ASIA": [
+            {
+              "through": 1,
+              "perTeam": 5000
+            },
+            {
+              "through": 2,
+              "perTeam": 3000
+            },
+            {
+              "through": 3,
+              "perTeam": 2000
+            },
+            {
+              "through": 4,
+              "perTeam": 1500
+            },
+            {
+              "through": 5,
+              "perTeam": 1000
+            },
+            {
+              "through": 10,
+              "perTeam": 600
+            },
+            {
+              "through": 50,
+              "perTeam": 400
+            },
+            {
+              "through": 100,
+              "perTeam": 200
+            },
+            {
+              "through": 250,
+              "perTeam": 100
+            }
+          ],
+          "OCE": [
+            {
+              "through": 1,
+              "perTeam": 5000
+            },
+            {
+              "through": 2,
+              "perTeam": 3000
+            },
+            {
+              "through": 3,
+              "perTeam": 2000
+            },
+            {
+              "through": 4,
+              "perTeam": 1500
+            },
+            {
+              "through": 5,
+              "perTeam": 1000
+            },
+            {
+              "through": 10,
+              "perTeam": 600
+            },
+            {
+              "through": 50,
+              "perTeam": 400
+            },
+            {
+              "through": 100,
+              "perTeam": 200
+            },
+            {
+              "through": 250,
+              "perTeam": 100
+            }
+          ]
+        }
+      },
+      "autoApproval": "review-only",
+      "source": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/1-million-dollar-unreal-cup-chapter-7-season-1-official-rules",
+      "evidence": [
+        {
+          "text": "Epic公式Attachment A・B・Cの参加条件、順位ポイント、開催枠、全7地域のチーム賞金。",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/1-million-dollar-unreal-cup-chapter-7-season-1-official-rules"
+        },
+        {
+          "text": "Fortnite TrackerのOCE大会Prize Pool：チーム$100の階層で個人$50と照合。",
+          "url": "https://fortnitetracker.com/events/epicgames_S39_1MillionUnrealCup_OCE?page=0&window=S39_1MillionUnrealCup_OCE"
         }
       ]
     }
