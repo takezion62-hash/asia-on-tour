@@ -50,7 +50,8 @@ test('S43 Solo Reload Test Cup ME/NAW retains all verified non-cash results and 
     assert.equal(personalCents(row),0);
   }
   for(const row of confirmations){
-    assert.equal(row.prize,null);
+    // A verified non-cash Test Cup may explicitly record $0; unknown payouts remain null.
+    assert.ok(row.prize===null || row.prize===0,'Participation-only record must not claim cash');
     assert.equal(personalCents(row),0);
     assert.equal(AotPR.eventMultiplier(row,t),null,'Participation-only records must not earn Test Cup PR');
   }
@@ -135,6 +136,31 @@ test('異なる戦績IDでも同じ大会・ラウンド・選手の二重登録
     duplicate.id += '-second-copy';
     data.results.push(duplicate);
   }, 'id', '同じ大会');
+});
+
+test('Event番号のない手動戦績と公式Event番号付き戦績を重複判定し賞金を二重計上しない', () => {
+  for (const [name,rank] of [['あくりあ',23],['Yanagi',20]]) {
+    const matches=current.results.filter(row => row.player===name && row.date==='2026-09-22' &&
+      row.region==='NAW' && row.rank===rank && row.kind==='賞金決勝');
+    assert.equal(matches.length,1,name+' must have one qualifying cash result');
+    const row=matches[0];
+    assert.equal(row.prize,100);
+    assert.equal(row.round,'Event 3 · Round 2 / 賞金決勝');
+    assert.equal(row.matches,3);
+    assert.ok(row.profileUrl,'original user-provided Tracker identity must remain');
+  }
+  const data=clone();
+  const original=data.results.find(row => row.id==='s42-naw-solo-vc-final-20260922-akuria');
+  assert.ok(original);
+  const dupe=structuredClone(original);
+  dupe.id+='-without-event-number';
+  dupe.round='Round 2 / 賞金決勝（Event番号未確認）';
+  dupe.source='https://fortnitetracker.com/events/epicgames_S42_SoloVictoryCup_NAW';
+  delete dupe.matches;
+  data.results.push(dupe);
+  const result=validateData(data);
+  assert.ok(result.errors.some(e => e.id===dupe.id && e.field==='id' &&
+    e.message.includes('同一成績の重複疑い')),JSON.stringify(result.errors));
 });
 
 test('順位・ポイント・キル・VRの負数・文字列・端数を拒否する', () => {

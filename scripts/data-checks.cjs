@@ -151,7 +151,7 @@ function validateData(data) {
     }
   }
   for (const [i, row] of r.entries()) if (object(row)) registerSeason(row, 'results.json', row.id || `行#${i + 1}`);
-  const ids = new Set(), accounts = new Map(), semanticRecords = new Map();
+  const ids = new Set(), accounts = new Map(), semanticRecords = new Map(), unresolvedRoundScores = new Map();
   for (const [i, row] of r.entries()) {
     const id = row?.id || `行#${i + 1}`;
     if (!object(row)) { issue('results.json', id, 'record', '戦績はオブジェクトで指定してください。'); continue; }
@@ -203,6 +203,25 @@ function validateData(data) {
     if (semanticRecords.has(uniqueKey)) issue('results.json', id, 'id',
       '同じ大会・地域・ラウンド・選手の戦績が「'+semanticRecords.get(uniqueKey)+'」と重複しています。異なる出典は既存戦績へ統合してください。');
     else semanticRecords.set(uniqueKey,id);
+    // A manually entered round may omit its Event number, while later API
+    // imports supply it. When every score and the round number agree, flag
+    // that collision rather than paying the same appearance twice.
+    const roundNumber = String(row.round || '').match(/\bRound\s*(\d+)\b/iu)?.[1] ||
+      String(source.roundId || '').match(/Round(\d+)/iu)?.[1] || null;
+    const exactScores = ['rank','points','kills','vrs','prize'].every(field => Number.isFinite(row[field]));
+    if (roundNumber && exactScores) {
+      const scoreKey = JSON.stringify([row.date,row.region,catalog?.id||row.tournamentId||row.event,
+        row.kind,roundNumber,people.slice().sort(),row.rank,row.points,row.kills,row.vrs,row.prize]);
+      const numberedEvent = /\bEvent\s*\d+\b|_Event\d+(?=Round|_)/iu.test(String(row.round || '') + ' ' + String(source.roundId || ''));
+      const prior = unresolvedRoundScores.get(scoreKey) || [];
+      for (const earlier of prior) {
+        if (earlier.stage !== stage && (!earlier.numberedEvent || !numberedEvent)) {
+          issue('results.json',id,'id','Event番号未確定と確定済みの同一成績の重複疑いです。「'+earlier.id+'」へ統合してください。');
+        }
+      }
+      prior.push({ id, stage, numberedEvent });
+      unresolvedRoundScores.set(scoreKey,prior);
+    }
     const teamSize = { solo: 1, duo: 2, trio: 3, squad: 4 }[catalog?.team];
     // In cross-region teams, 'players' lists only ASIA ON TOUR's eligible
     // players, while 'teamPlayers' retains the complete competitive roster.
