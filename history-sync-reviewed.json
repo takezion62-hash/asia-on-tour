@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-07T00:28:59.849Z",
+  "reviewedAt": "2026-11-07T03:13:12.216Z",
   "description": "Resolved historic review candidates: published, duplicate or participation",
   "entries": [
     {
@@ -1866,6 +1866,635 @@
       "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
       "reviewedAt": "2026-11-07T00:28:59.849Z",
       "evidence": "individual-leaderboard-row + Epic official session + published award rules; saved snapshot not complete pagination"
+    },
+    {
+      "id": "auto-s33-2460edfd1873",
+      "decision": "published",
+      "recordId": "auto-s33-2460edfd1873",
+      "rule": null,
+      "evidence": "Saved official leaderboard, linked Epic ID, tournament catalog and duplicate review. Policy: attendance-only",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s33-ad94b12dbd64",
+      "decision": "published",
+      "recordId": "auto-s33-ad94b12dbd64",
+      "rule": null,
+      "evidence": "Saved official leaderboard, linked Epic ID, tournament catalog and duplicate review. Policy: attendance-only",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s33-453efb91b750",
+      "decision": "published",
+      "recordId": "auto-s33-453efb91b750",
+      "rule": null,
+      "evidence": "Saved official leaderboard, linked Epic ID, tournament catalog and duplicate review. Policy: attendance-only",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s33-e0298312a872",
+      "decision": "published",
+      "recordId": "auto-s33-e0298312a872",
+      "rule": null,
+      "evidence": "Saved official leaderboard, linked Epic ID, tournament catalog and duplicate review. Policy: attendance-only",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s33-aafa161d3abd",
+      "decision": "published",
+      "recordId": "auto-s33-aafa161d3abd",
+      "rule": null,
+      "evidence": "Saved official leaderboard, linked Epic ID, tournament catalog and duplicate review. Policy: attendance-only",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s42-b9eca90776b0",
+      "decision": "published",
+      "recordId": "auto-s42-b9eca90776b0",
+      "rule": null,
+      "evidence": "Saved official leaderboard, linked Epic ID, tournament catalog and duplicate review. Policy: attendance-only",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s36-3201cfa39026",
+      "decision": "published",
+      "recordId": "auto-s36-3201cfa39026",
+      "rule": null,
+      "evidence": "Saved official leaderboard, linked Epic ID, tournament catalog and duplicate review. Policy: attendance-only",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s36-727347333cf5",
+      "decision": "published",
+      "recordId": "auto-s36-727347333cf5",
+      "rule": null,
+      "evidence": "Saved official leaderboard, linked Epic ID, tournament catalog and duplicate review. Policy: attendance-only",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s43-5bf54554abf2",
+      "decision": "published",
+      "recordId": "auto-s43-5bf54554abf2",
+      "rule": null,
+      "evidence": "Saved official leaderboard, linked Epic ID, tournament catalog and duplicate review. Policy: verified-no-cash",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s42-e3d7f93d15e2",
+      "decision": "published",
+      "recordId": "auto-s42-e3d7f93d15e2",
+      "rule": null,
+      "evidence": "Saved official leaderboard, linked Epic ID, tournament catalog and duplicate review. Policy: attendance-only",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s41-9152490d5a5c",
+      "decision": "published",
+      "recordId": "auto-s41-9152490d5a5c",
+      "rule": null,
+      "evidence": "Saved official leaderboard, linked Epic ID, tournament catalog and duplicate review. Policy: attendance-only",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s41-b2d7162e6d7d",
+      "decision": "published",
+      "recordId": "auto-s41-b2d7162e6d7d",
+      "rule": null,
+      "evidence": "Saved official leaderboard, linked Epic ID, tournament catalog and duplicate review. Policy: attendance-only",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s41-a97b9ac920f1",
+      "decision": "published",
+      "recordId": "auto-s41-a97b9ac920f1",
+      "rule": null,
+      "evidence": "Saved official leaderboard, linked Epic ID, tournament catalog and duplicate review. Policy: attendance-only",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s41-d0dfe4038695",
+      "decision": "published",
+      "recordId": "auto-s41-d0dfe4038695",
+      "rule": null,
+      "evidence": "Saved official leaderboard, linked Epic ID, tournament catalog and duplicate review. Policy: attendance-only",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s41-3af52be8da5b",
+      "decision": "published",
+      "recordId": "auto-s41-3af52be8da5b",
+      "rule": null,
+      "evidence": "Saved official leaderboard, linked Epic ID, tournament catalog and duplicate review. Policy: attendance-only",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s42-f76e452c5dff",
+      "decision": "published",
+      "recordId": "auto-s42-f76e452c5dff",
+      "rule": null,
+      "evidence": "Saved official leaderboard, linked Epic ID, tournament catalog and duplicate review. Policy: attendance-only",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s42-625b69c43ff2",
+      "decision": "published",
+      "recordId": "auto-s42-625b69c43ff2",
+      "rule": null,
+      "evidence": "Saved official leaderboard, linked Epic ID, tournament catalog and duplicate review. Policy: attendance-only",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s42-2e307210a1dc",
+      "decision": "published",
+      "recordId": "auto-s42-2e307210a1dc",
+      "rule": null,
+      "evidence": "Saved official leaderboard, linked Epic ID, tournament catalog and duplicate review. Policy: attendance-only",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s42-55faa055f1ba",
+      "decision": "published",
+      "recordId": "auto-s42-55faa055f1ba",
+      "rule": null,
+      "evidence": "Saved official leaderboard, linked Epic ID, tournament catalog and duplicate review. Policy: attendance-only",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s31-bf8c2a85a49b",
+      "decision": "published",
+      "recordId": "auto-s31-bf8c2a85a49b",
+      "rule": null,
+      "evidence": "Saved official leaderboard, linked Epic ID, tournament catalog and duplicate review. Policy: attendance-only",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s31-f3bdb2228c13",
+      "decision": "published",
+      "recordId": "auto-s31-f3bdb2228c13",
+      "rule": null,
+      "evidence": "Saved official leaderboard, linked Epic ID, tournament catalog and duplicate review. Policy: attendance-only",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s31-c5b6bc0657c0",
+      "decision": "published",
+      "recordId": "auto-s31-c5b6bc0657c0",
+      "rule": null,
+      "evidence": "Saved official leaderboard, linked Epic ID, tournament catalog and duplicate review. Policy: attendance-only",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s31-9eda47099da2",
+      "decision": "published",
+      "recordId": "auto-s31-9eda47099da2",
+      "rule": null,
+      "evidence": "Saved official leaderboard, linked Epic ID, tournament catalog and duplicate review. Policy: attendance-only",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s31-6ea10a0ff554",
+      "decision": "published",
+      "recordId": "auto-s31-6ea10a0ff554",
+      "rule": null,
+      "evidence": "Saved official leaderboard, linked Epic ID, tournament catalog and duplicate review. Policy: attendance-only",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s42-61e71bf45e7b",
+      "decision": "published",
+      "recordId": "auto-s42-61e71bf45e7b",
+      "rule": null,
+      "evidence": "Saved official leaderboard, linked Epic ID, tournament catalog and duplicate review. Policy: attendance-only",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s39-4d5f1e94f897",
+      "decision": "published",
+      "recordId": "auto-s39-4d5f1e94f897",
+      "rule": null,
+      "evidence": "Saved official leaderboard, linked Epic ID, tournament catalog and duplicate review. Policy: attendance-only",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s39-0526a17bfd74",
+      "decision": "published",
+      "recordId": "auto-s39-0526a17bfd74",
+      "rule": null,
+      "evidence": "Saved official leaderboard, linked Epic ID, tournament catalog and duplicate review. Policy: attendance-only",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s39-a1d738d30619",
+      "decision": "published",
+      "recordId": "auto-s39-a1d738d30619",
+      "rule": null,
+      "evidence": "Saved official leaderboard, linked Epic ID, tournament catalog and duplicate review. Policy: attendance-only",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s39-94af2bc3c668",
+      "decision": "published",
+      "recordId": "auto-s39-94af2bc3c668",
+      "rule": null,
+      "evidence": "Saved official leaderboard, linked Epic ID, tournament catalog and duplicate review. Policy: attendance-only",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s39-daeecffb5331",
+      "decision": "published",
+      "recordId": "auto-s39-daeecffb5331",
+      "rule": null,
+      "evidence": "Saved official leaderboard, linked Epic ID, tournament catalog and duplicate review. Policy: attendance-only",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s39-245eaba1e856",
+      "decision": "published",
+      "recordId": "auto-s39-245eaba1e856",
+      "rule": null,
+      "evidence": "Saved official leaderboard, linked Epic ID, tournament catalog and duplicate review. Policy: attendance-only",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s39-fc46cee746c3",
+      "decision": "published",
+      "recordId": "auto-s39-fc46cee746c3",
+      "rule": null,
+      "evidence": "Saved official leaderboard, linked Epic ID, tournament catalog and duplicate review. Policy: attendance-only",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s39-d1c4235e4772",
+      "decision": "published",
+      "recordId": "auto-s39-d1c4235e4772",
+      "rule": null,
+      "evidence": "Saved official leaderboard, linked Epic ID, tournament catalog and duplicate review. Policy: attendance-only",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s39-7674b267dd12",
+      "decision": "published",
+      "recordId": "auto-s39-7674b267dd12",
+      "rule": null,
+      "evidence": "Saved official leaderboard, linked Epic ID, tournament catalog and duplicate review. Policy: attendance-only",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s39-7423dc24ae36",
+      "decision": "published",
+      "recordId": "auto-s39-7423dc24ae36",
+      "rule": null,
+      "evidence": "Saved official leaderboard, linked Epic ID, tournament catalog and duplicate review. Policy: attendance-only",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s42-fbe6daa60c4c",
+      "decision": "published",
+      "recordId": "auto-s42-fbe6daa60c4c",
+      "rule": null,
+      "evidence": "Saved official leaderboard, linked Epic ID, tournament catalog and duplicate review. Policy: attendance-only",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s42-e16506e8f88b",
+      "decision": "published",
+      "recordId": "auto-s42-e16506e8f88b",
+      "rule": null,
+      "evidence": "Saved official leaderboard, linked Epic ID, tournament catalog and duplicate review. Policy: attendance-only",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s42-88c964280cff",
+      "decision": "published",
+      "recordId": "auto-s42-88c964280cff",
+      "rule": null,
+      "evidence": "Saved official leaderboard, linked Epic ID, tournament catalog and duplicate review. Policy: attendance-only",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s42-7374ddbf6e7d",
+      "decision": "published",
+      "recordId": "auto-s42-7374ddbf6e7d",
+      "rule": null,
+      "evidence": "Saved official leaderboard, linked Epic ID, tournament catalog and duplicate review. Policy: attendance-only",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s41-c866e68378f5",
+      "decision": "published",
+      "recordId": "auto-s41-c866e68378f5",
+      "rule": null,
+      "evidence": "Saved official leaderboard, linked Epic ID, tournament catalog and duplicate review. Policy: attendance-only",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s42-8acacc857df4",
+      "decision": "published",
+      "recordId": "auto-s42-8acacc857df4",
+      "rule": null,
+      "evidence": "Saved official leaderboard, linked Epic ID, tournament catalog and duplicate review. Policy: verified-qualifier",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s43-496b6546b82c",
+      "decision": "published",
+      "recordId": "auto-s43-496b6546b82c",
+      "rule": null,
+      "evidence": "Saved official leaderboard, linked Epic ID, tournament catalog and duplicate review. Policy: verified-no-cash",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s41-2b5a7693349c",
+      "decision": "published",
+      "recordId": "auto-s41-2b5a7693349c",
+      "rule": null,
+      "evidence": "Saved official leaderboard, linked Epic ID, tournament catalog and duplicate review. Policy: verified-qualifier",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s41-5681c6a72ed9",
+      "decision": "published",
+      "recordId": "auto-s41-5681c6a72ed9",
+      "rule": null,
+      "evidence": "Saved official leaderboard, linked Epic ID, tournament catalog and duplicate review. Policy: verified-qualifier",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s41-158627160c8c",
+      "decision": "published",
+      "recordId": "auto-s41-158627160c8c",
+      "rule": null,
+      "evidence": "Saved official leaderboard, linked Epic ID, tournament catalog and duplicate review. Policy: verified-qualifier",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s41-cf87d8810351",
+      "decision": "published",
+      "recordId": "auto-s41-cf87d8810351",
+      "rule": null,
+      "evidence": "Saved official leaderboard, linked Epic ID, tournament catalog and duplicate review. Policy: verified-qualifier",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s41-b42f5fae6fee",
+      "decision": "published",
+      "recordId": "auto-s41-b42f5fae6fee",
+      "rule": null,
+      "evidence": "Saved official leaderboard, linked Epic ID, tournament catalog and duplicate review. Policy: verified-qualifier",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s41-ea793bbeb22f",
+      "decision": "published",
+      "recordId": "auto-s41-ea793bbeb22f",
+      "rule": null,
+      "evidence": "Saved official leaderboard, linked Epic ID, tournament catalog and duplicate review. Policy: verified-qualifier",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s41-cb75ea7865b2",
+      "decision": "published",
+      "recordId": "auto-s41-cb75ea7865b2",
+      "rule": null,
+      "evidence": "Saved official leaderboard, linked Epic ID, tournament catalog and duplicate review. Policy: verified-qualifier",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s41-7d70e76215a6",
+      "decision": "published",
+      "recordId": "auto-s41-7d70e76215a6",
+      "rule": null,
+      "evidence": "Saved official leaderboard, linked Epic ID, tournament catalog and duplicate review. Policy: verified-qualifier",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s41-44d3ad3fbc4d",
+      "decision": "published",
+      "recordId": "auto-s41-44d3ad3fbc4d",
+      "rule": null,
+      "evidence": "Saved official leaderboard, linked Epic ID, tournament catalog and duplicate review. Policy: verified-qualifier",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s41-851fc0b962f0",
+      "decision": "published",
+      "recordId": "auto-s41-851fc0b962f0",
+      "rule": null,
+      "evidence": "Saved official leaderboard, linked Epic ID, tournament catalog and duplicate review. Policy: verified-qualifier",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s41-52a923d0d3ee",
+      "decision": "published",
+      "recordId": "auto-s41-52a923d0d3ee",
+      "rule": null,
+      "evidence": "Saved official leaderboard, linked Epic ID, tournament catalog and duplicate review. Policy: verified-qualifier",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s41-c8bddd35d105",
+      "decision": "published",
+      "recordId": "auto-s41-c8bddd35d105",
+      "rule": null,
+      "evidence": "Saved official leaderboard, linked Epic ID, tournament catalog and duplicate review. Policy: verified-qualifier",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s41-0afdb5c38883",
+      "decision": "published",
+      "recordId": "auto-s41-0afdb5c38883",
+      "rule": null,
+      "evidence": "Saved official leaderboard, linked Epic ID, tournament catalog and duplicate review. Policy: verified-qualifier",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s41-280b991d2c27",
+      "decision": "published",
+      "recordId": "auto-s41-280b991d2c27",
+      "rule": null,
+      "evidence": "Saved official leaderboard, linked Epic ID, tournament catalog and duplicate review. Policy: verified-qualifier",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s41-397e9ba13380",
+      "decision": "published",
+      "recordId": "auto-s41-397e9ba13380",
+      "rule": null,
+      "evidence": "Saved official leaderboard, linked Epic ID, tournament catalog and duplicate review. Policy: verified-qualifier",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s41-6019515666a7",
+      "decision": "published",
+      "recordId": "auto-s41-6019515666a7",
+      "rule": null,
+      "evidence": "Saved official leaderboard, linked Epic ID, tournament catalog and duplicate review. Policy: verified-qualifier",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s41-9f929af9623b",
+      "decision": "published",
+      "recordId": "auto-s41-9f929af9623b",
+      "rule": null,
+      "evidence": "Saved official leaderboard, linked Epic ID, tournament catalog and duplicate review. Policy: verified-qualifier",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s41-092f2a7f7fa9",
+      "decision": "published",
+      "recordId": "auto-s41-092f2a7f7fa9",
+      "rule": null,
+      "evidence": "Saved official leaderboard, linked Epic ID, tournament catalog and duplicate review. Policy: verified-qualifier",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s41-076d7a1cb664",
+      "decision": "published",
+      "recordId": "auto-s41-076d7a1cb664",
+      "rule": null,
+      "evidence": "Saved official leaderboard, linked Epic ID, tournament catalog and duplicate review. Policy: verified-qualifier",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s41-8a108d42f284",
+      "decision": "published",
+      "recordId": "auto-s41-8a108d42f284",
+      "rule": null,
+      "evidence": "Saved official leaderboard, linked Epic ID, tournament catalog and duplicate review. Policy: verified-qualifier",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s41-6265eb1c5704",
+      "decision": "published",
+      "recordId": "auto-s41-6265eb1c5704",
+      "rule": null,
+      "evidence": "Saved official leaderboard, linked Epic ID, tournament catalog and duplicate review. Policy: verified-qualifier",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s41-2c480fce0432",
+      "decision": "published",
+      "recordId": "auto-s41-2c480fce0432",
+      "rule": null,
+      "evidence": "Saved official leaderboard, linked Epic ID, tournament catalog and duplicate review. Policy: verified-qualifier",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s41-a5dbd1a2695c",
+      "decision": "published",
+      "recordId": "auto-s41-a5dbd1a2695c",
+      "rule": null,
+      "evidence": "Saved official leaderboard, linked Epic ID, tournament catalog and duplicate review. Policy: verified-qualifier",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s31-611c9063f61e",
+      "decision": "published",
+      "recordId": "auto-s31-611c9063f61e",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-4-official-rules",
+      "evidence": "Saved official leaderboard, linked Epic ID, tournament catalog and duplicate review. Policy: official-vr-rule",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s31-d2c5085fda43",
+      "decision": "published",
+      "recordId": "auto-s31-d2c5085fda43",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-4-official-rules",
+      "evidence": "Saved official leaderboard, linked Epic ID, tournament catalog and duplicate review. Policy: official-vr-rule",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s31-6aa16c08c27c",
+      "decision": "published",
+      "recordId": "auto-s31-6aa16c08c27c",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-4-official-rules",
+      "evidence": "Saved official leaderboard, linked Epic ID, tournament catalog and duplicate review. Policy: official-vr-rule",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s31-798efaead9a7",
+      "decision": "published",
+      "recordId": "auto-s31-798efaead9a7",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-4-official-rules",
+      "evidence": "Saved official leaderboard, linked Epic ID, tournament catalog and duplicate review. Policy: official-vr-rule",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s42-7a7190176717",
+      "decision": "already-published",
+      "existingId": "s42-nac-madison-beer-icon-reload-skin-20260925-0ab44e46-767efa71",
+      "evidence": "Same player/team, event, region, date and exact rank; did not duplicate",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s42-b5f7fea1a00d",
+      "decision": "already-published",
+      "existingId": "s42-nac-madison-beer-icon-reload-skin-20260925-6ddb75bd-7f8da9f1",
+      "evidence": "Same player/team, event, region, date and exact rank; did not duplicate",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s43-c51e2bbfb3ed",
+      "decision": "already-published",
+      "existingId": "s43-oce-zoro-mobile-skin-20261106-akuria",
+      "evidence": "Same player/team, event, region, date and exact rank; did not duplicate",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s43-6b7fe976d9eb",
+      "decision": "already-published",
+      "existingId": "s43-oce-zoro-mobile-skin-20261106-brn-916gonluck",
+      "evidence": "Same player/team, event, region, date and exact rank; did not duplicate",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s42-9fe27b95967c",
+      "decision": "already-published",
+      "existingId": "s42-nac-performance-eval-final-20260911-meath-3peace",
+      "evidence": "Same player/team, event, region, date and exact rank; did not duplicate",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s42-c64abcaf8565",
+      "decision": "already-published",
+      "existingId": "s42-naw-fncs-practice-qual-20260908-maguro-arim",
+      "evidence": "Same player/team, event, region, date and exact rank; did not duplicate",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s42-476c7702d25b",
+      "decision": "already-published",
+      "existingId": "s42-naw-fncs-practice-qual-20260908-asuka-huggyfv",
+      "evidence": "Same player/team, event, region, date and exact rank; did not duplicate",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s41-d18b65839f32",
+      "decision": "already-published",
+      "existingId": "s41-oce-aphrodite-fncs-cup-skin-20260731-bunshi-want",
+      "evidence": "Same player/team, event, region, date and exact rank; did not duplicate",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s42-36e7df59afec",
+      "decision": "already-published",
+      "existingId": "s42-naw-fncs-practice-final-20260913-maguro-arim",
+      "evidence": "Same player/team, event, region, date and exact rank; did not duplicate",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s42-ef7cea06a6a2",
+      "decision": "already-published",
+      "existingId": "s42-naw-fncs-practice-final-20260913-asuka-huggyfv",
+      "evidence": "Same player/team, event, region, date and exact rank; did not duplicate",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
+    },
+    {
+      "id": "auto-s41-f689f190308d",
+      "decision": "already-published",
+      "existingId": "s41-me-fncs-div1-week5-final-20260718-astell-miyaguraru",
+      "evidence": "Same player/team, event, region, date and exact rank; did not duplicate",
+      "reviewedAt": "2026-11-07T03:13:12.216Z"
     }
   ]
 }

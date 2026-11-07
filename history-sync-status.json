@@ -11,7 +11,7 @@
   "provider": "osirion",
   "linkedPlayers": 459,
   "trackedWindows": 2783,
-  "found": 94,
+  "found": 14,
   "skipped": 7,
   "imported": 96,
   "scannedPages": 80,
@@ -20,7 +20,7 @@
   "alreadyRegistered": 795,
   "autoApprovedTotal": 590,
   "invalidCachedCandidates": 1,
-  "manualReviewCandidates": 94,
+  "manualReviewCandidates": 14,
   "autoApprovedCosmeticThisRun": 0,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
@@ -28,7 +28,7 @@
   "retryWindows": 9,
   "transientFailures": 0,
   "reviewOnlyWindows": 1271,
-  "reviewOnlyCandidates": 64,
+  "reviewOnlyCandidates": 14,
   "unmappedEvents": 244,
   "unmappedEventIds": [
     "S30_ConsoleCashCups",
@@ -44,5 +44,9 @@
     "S30_Reload",
     "S30_ReloadZB"
   ],
-  "message": "Osirionで459アカウントIDを追跡。今回の公式規則による自動承認96件、追加確認待ち94件、名義照合保留0件。"
+  "message": "Osirionで459アカウントIDを追跡。今回の公式規則による自動承認96件、追加確認待ち94件、名義照合保留0件。",
+  "manualReviewedAt": "2026-11-07T03:13:12.216Z",
+  "manualPublishedThisReview": 69,
+  "manualAlreadyPublishedThisReview": 11,
+  "manualHeldThisReview": 14
 }
