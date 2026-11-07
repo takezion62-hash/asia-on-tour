@@ -209,11 +209,65 @@ function transientLeaderboardFailure(error){
  const msg=String(error?.message||error);
  return /TimeoutError|time.?out|aborted|ECONNRESET|fetch failed|HTTP (?:429|50[0-9]|52[0-9])/i.test(msg);
 }
+// Keep strict event/window ID matching, but do not confuse valid large historical
+// standings (not just Unreal Cup) with an invalid payload. Per-run page budgets
+// still cap requests independently from this provider response metadata.
+const MAX_LEADERBOARD_PAGES=2000;
+function leaderboardResponseError(win,page,leaderboard){
+ const l=leaderboard,problems=[];
+ if(!l||typeof l!=='object'||Array.isArray(l))problems.push('leaderboard=missing');
+ else{
+  if(l.leaderboardEventId!==win.fullEventId)
+   problems.push('eventId='+String(l.leaderboardEventId??'missing').slice(0,110)+
+    ' expected='+String(win.fullEventId).slice(0,110));
+  if(l.leaderboardEventWindowId!==win.windowId)
+   problems.push('windowId='+String(l.leaderboardEventWindowId??'missing').slice(0,130)+
+    ' expected='+String(win.windowId).slice(0,130));
+  if(!Array.isArray(l.entries))problems.push('entries=not-array');
+  if(!Number.isSafeInteger(l.totalPages)||l.totalPages<1||l.totalPages>MAX_LEADERBOARD_PAGES)
+   problems.push('totalPages='+String(l.totalPages??'missing').slice(0,32));
+ }
+ if(!problems.length)return null;
+ const error=new Error('大会順位表のID/形式が不正 ['+
+  String(win.key||win.fullEventId+'/'+win.windowId).slice(0,180)+' page='+page+
+  ']: '+problems.join('; '));
+ error.code='OSIRION_INVALID_LEADERBOARD';
+ return error;
+}
+function recoverableLeaderboardFailure(error){
+ // Only provider/network/known page anomalies are window-local. Programming
+ // errors and auth/permission failures must remain visible to the operator.
+ const message=String(error?.message||error);
+ return transientLeaderboardFailure(error)||
+  error?.code==='OSIRION_INVALID_LEADERBOARD'||
+  error?.code==='OSIRION_EMPTY_MIDDLE_PAGE'||
+  /大会順位表のID\/形式が不正|順位表に未期待の空ページ|Osirion API error|Osirion API HTTP (?:400|404|410|422)\b/i.test(message)||
+  error instanceof SyntaxError;
+}
+function holdLeaderboardWindow(checkpoint,error,win,page,time=Date.now()){
+ const attempt=(Number.isSafeInteger(checkpoint.errorAttempts)&&checkpoint.errorAttempts>=0?
+   checkpoint.errorAttempts:0)+1;
+ const transient=transientLeaderboardFailure(error);
+ // Start at 6h. Persistent malformed/unsupported windows back off up to 48h;
+ // do not mark complete or skip permanently. Never remove prior valid pages.
+ const delayHours=transient?6:Math.min(48,6*Math.pow(2,Math.min(attempt-1,3)));
+ checkpoint.errorAttempts=attempt;
+ checkpoint.complete=false;
+ checkpoint.retryAfter=new Date(time+delayHours*3600000).toISOString();
+ checkpoint.lastError=String(error?.message||error).slice(0,350);
+ checkpoint.lastErrorPage=page;
+ checkpoint.lastErrorCode=transient?'OSIRION_TRANSIENT':
+  (error?.code||'OSIRION_BAD_PAGE');
+ const report={window:win.key,page,attempt,code:checkpoint.lastErrorCode,
+  reason:checkpoint.lastError,retryAfter:checkpoint.retryAfter};
+ return report;
+}
 async function getLeaderboard(win,page){
  const params=new URLSearchParams({leaderboardEventId:win.fullEventId,leaderboardEventWindowId:win.windowId,page:String(page)});
  const result=await fetchJson('https://fnapi.osirion.gg/v1/tournaments/leaderboard?'+params);
- const l=result.leaderboard;
- if(!l||l.leaderboardEventId!==win.fullEventId||l.leaderboardEventWindowId!==win.windowId||!Array.isArray(l.entries)||!Number.isInteger(l.totalPages)||l.totalPages<1||l.totalPages>(win.series==='unreal-cup'?2000:100))throw Error('大会順位表のID/形式が不正');
+ const l=result?.leaderboard;
+ const issue=leaderboardResponseError(win,page,l);
+ if(issue)throw issue;
  return l;
 }
 // Balance existing Victory Cups and safely matched review-only series in the same
@@ -349,7 +403,8 @@ async function main(){
  const active=historical?selectHistoricalWindows(windows,state,config,Date.now(),data.results):selectActiveWindows(windows,state,config);
  const previewConfig={version:1,accounts,windows:active.map(w=>({eventId:w.eventId,windowId:w.windowId,dateJst:w.dateJst,region:w.region,seasonId:w.seasonId,tournamentId:w.tournamentId,kind:w.kind,round:w.round}))};
  // Historical backfill can inspect more pages, but always yields before the Actions job limit.
- let budget=Math.min(Math.max(config.maxPagesPerRun||30,1),historical?96:50),scanned=0,invalidRows=0,transientFailures=0;
+ let budget=Math.min(Math.max(config.maxPagesPerRun||30,1),historical?96:50),scanned=0,invalidRows=0,transientFailures=0,malformedFailures=0;
+ const skippedLeaderboards=[];
  const maxRunMinutes=historical?Math.min(14,Math.max(2,Number.isFinite(config.maxRunMinutes)?config.maxRunMinutes:12)):14;
  const scanDeadline=Date.now()+maxRunMinutes*60000;
  let timeLimitReached=false;
@@ -371,13 +426,21 @@ async function main(){
    if(Date.now()>=scanDeadline){timeLimitReached=true;break}
    const page=checkpoint.nextPage;
    let l;
-   try{l=await getLeaderboard(win,page)}
-   catch(error){
-    if(!transientLeaderboardFailure(error))throw error;
-    checkpoint.retryAfter=new Date(Date.now()+6*3600000).toISOString();
-    checkpoint.lastError=String(error.message||error).slice(0,180);
-    transientFailures++;
-    break;
+   try{
+    l=await getLeaderboard(win,page);
+    if(!l.entries.length&&page>0&&page<l.totalPages-1){
+     const issue=new Error('順位表に未期待の空ページ: '+win.key+' page '+page);
+     issue.code='OSIRION_EMPTY_MIDDLE_PAGE';
+     throw issue;
+    }
+   }catch(error){
+    if(!recoverableLeaderboardFailure(error))throw error;
+    const skipped=holdLeaderboardWindow(checkpoint,error,win,page);
+    skippedLeaderboards.push(skipped);
+    if(skipped.code==='OSIRION_TRANSIENT')transientFailures++;
+    else malformedFailures++;
+    console.warn('OSIRION_LEADERBOARD_HELD '+JSON.stringify(skipped));
+    break; // Preserve previous confirmed pages, continue with other windows.
    }
    if(page===0&&l.entries.length===0){
     checkpoint.emptyAttempts=(checkpoint.emptyAttempts||0)+1;
@@ -386,7 +449,11 @@ async function main(){
    }
    checkpoint.emptyAttempts=0;
    delete checkpoint.retryAfter;
-   if(!l.entries.length&&page<l.totalPages-1)throw Error('順位表に未期待の空ページ: '+win.key+' page '+page);
+   delete checkpoint.errorAttempts;
+   delete checkpoint.lastError;
+   delete checkpoint.lastErrorPage;
+   delete checkpoint.lastErrorCode;
+   // A malformed middle page was handled above with a per-window retry.
    const cutoff=(historical?advancementLimit(win):null)??cutoffForWindow(win)??(config.autoApprovePerformance===true?qualifierCutoff(win):null);
    const pageRanks=l.entries.map(e=>e.rank);
    const ordered=pageRanks.every((rank,i)=>Number.isSafeInteger(rank)&&rank>=1&&(i===0||rank>=pageRanks[i-1]));
@@ -461,12 +528,12 @@ async function main(){
  const reviewOnlyWindows=windows.filter(w=>w.series!=='victory-cup').length;
  const reviewOnlyCandidates=unique.size?Array.from(unique.values()).filter(p=>p.reviewOnly===true).length:0;
  const cumulativeApprovals=data.updates.entries.filter(x=>x.title?.startsWith('公式規則で自動承認：')).reduce((sum,x)=>sum+(x.recordIds?.length||0),0);
- const status={version:1,state:'checked',checkedAt:stamp,mode:'review',scope:historical?'history':'recent',dateMode:historical?(storedConfig.toDate==='rolling'?'rolling':'fixed'):null,selectedWindows:active.length,fromDate:historical?config.fromDate:null,toDate:historical?config.toDate:null,provider:'osirion',linkedPlayers:accounts.length,trackedWindows:windows.length,found:unique.size,skipped:invalidRows,imported,scannedPages:scanned,completedWindows:finished,identityConflicts:conflicts.length,alreadyRegistered:recordedFromReview,autoApprovedTotal:cumulativeApprovals,invalidCachedCandidates:invalidCached,manualReviewCandidates:manuallyHeld,autoApprovedCosmeticThisRun:importedCosmetics,autoApprovedCashThisRun:cash.approved.length,autoApprovedPerformanceThisRun:performance.approved.length,autoApprovedUnrealThisRun:unreal.approved.length,timeLimitReached,retryWindows:Object.entries(state.windows).filter(([key,w])=>eligible.has(key)&&!w.complete&&w.retryAfter).length,transientFailures,reviewOnlyWindows,reviewOnlyCandidates,unmappedEvents:unmapped.length,unmappedEventIds:unmapped.slice(0,12),message:'Osirionで'+accounts.length+'アカウントIDを追跡。今回の公式規則による自動承認'+imported+'件、追加確認待ち'+unique.size+'件、名義照合保留'+conflicts.length+'件。'};
+ const status={version:1,state:'checked',checkedAt:stamp,mode:'review',scope:historical?'history':'recent',dateMode:historical?(storedConfig.toDate==='rolling'?'rolling':'fixed'):null,selectedWindows:active.length,fromDate:historical?config.fromDate:null,toDate:historical?config.toDate:null,provider:'osirion',linkedPlayers:accounts.length,trackedWindows:windows.length,found:unique.size,skipped:invalidRows,imported,scannedPages:scanned,completedWindows:finished,identityConflicts:conflicts.length,alreadyRegistered:recordedFromReview,autoApprovedTotal:cumulativeApprovals,invalidCachedCandidates:invalidCached,manualReviewCandidates:manuallyHeld,autoApprovedCosmeticThisRun:importedCosmetics,autoApprovedCashThisRun:cash.approved.length,autoApprovedPerformanceThisRun:performance.approved.length,autoApprovedUnrealThisRun:unreal.approved.length,timeLimitReached,retryWindows:Object.entries(state.windows).filter(([key,w])=>eligible.has(key)&&!w.complete&&w.retryAfter).length,transientFailures,malformedFailures,skippedLeaderboards:skippedLeaderboards.slice(0,15),reviewOnlyWindows,reviewOnlyCandidates,unmappedEvents:unmapped.length,unmappedEventIds:unmapped.slice(0,12),message:'Osirionで'+accounts.length+'アカウントIDを追跡。今回の公式規則による自動承認'+imported+'件、追加確認待ち'+unique.size+'件、名義照合保留'+conflicts.length+'件。'};
  state.checkedAt=stamp;
  write(prefix+'-scan.json',state);
  write(prefix+'-review.json',{version:1,status:'review',checkedAt:stamp,proposals:[...unique.values()]});
  write(prefix+'-status.json',status);
- console.log((historical?'OSIRION_HISTORY_REVIEW ':'OSIRION_REVIEW ')+JSON.stringify({scannedPages:scanned,linkedPlayers:accounts.length,identityConflicts:conflicts.length,windows:windows.length,unmappedEvents:unmapped.length,proposals:unique.size,imported,cosmetic:importedCosmetics,cash:cash.approved.length,performance:performance.approved.length,unreal:unreal.approved.length,finished}));
+ console.log((historical?'OSIRION_HISTORY_REVIEW ':'OSIRION_REVIEW ')+JSON.stringify({scannedPages:scanned,linkedPlayers:accounts.length,identityConflicts:conflicts.length,windows:windows.length,unmappedEvents:unmapped.length,proposals:unique.size,imported,cosmetic:importedCosmetics,cash:cash.approved.length,performance:performance.approved.length,unreal:unreal.approved.length,finished,transientFailures,malformedFailures,heldWindows:skippedLeaderboards.length}));
 }
 if(require.main===module)main().catch(e=>{console.error('OSIRION_SYNC_ERROR '+e.stack);process.exitCode=1});
-module.exports={identity,linkedAccounts,parseStage,parseReviewStage,discover,discoverUnmapped,selectActiveWindows,selectHistoricalWindows,historicalEvidenceScore,resolveHistoricalScope,fetchJson,advancementLimit,normalizeRow,getTournaments,getLeaderboard,transientLeaderboardFailure,main};
+module.exports={identity,linkedAccounts,parseStage,parseReviewStage,discover,discoverUnmapped,selectActiveWindows,selectHistoricalWindows,historicalEvidenceScore,resolveHistoricalScope,fetchJson,advancementLimit,normalizeRow,getTournaments,getLeaderboard,leaderboardResponseError,recoverableLeaderboardFailure,holdLeaderboardWindow,transientLeaderboardFailure,main};
