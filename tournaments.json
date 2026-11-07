@@ -235,6 +235,10 @@
         {
           "id": "squads-victory-cash-cup",
           "label": "Squads Victory Cash Cup"
+        },
+        {
+          "id": "zero-build-duos-victory-cup",
+          "label": "Zero Build Duos Victory Cup"
         }
       ]
     },
@@ -2106,6 +2110,32 @@
         {
           "text": "Epic公式大会ページ",
           "url": "https://www.fortnite.com/competitive/events/S38_SquadsVictoryCup/?region=NAW"
+        }
+      ]
+    },
+    {
+      "id": "ch5s2-zero-build-duos-victory-cup",
+      "name": "Zero Build Duos Victory Cup",
+      "chapter": 5,
+      "season": 2,
+      "seasonId": "S29",
+      "sourceEventIds": [
+        "S29_DuosZBVictoryCashCup"
+      ],
+      "series": "victory-cup",
+      "mode": "zero-build",
+      "subtype": "zero-build-duos-victory-cup",
+      "team": "duo",
+      "platform": "cross-platform",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "2024年5月6日（日本時間）NACのEvent 7 Round 2、Zero Buildデュオ・決勝VRごとに各選手$100をFortnite Tracker大会ページとユーザー提供スクリーンショットで確認。",
+          "url": "https://fortnitetracker.com/events/epicgames_S29_DuosZBVictoryCashCup_NAC?window=S29_DuosZBVictoryCashCup_Event7Round2_NAC"
+        },
+        {
+          "text": "Epic Games公式Chapter 5 Season 2の競技大会説明：Duos Zero Build Victory Cash Cupは決勝でVRを獲得すると現金賞金を授与。",
+          "url": "https://www.fortnite.com/news/fortnite-battle-royale-chapter-5-season-2-competitive-details?lang=en-US"
         }
       ]
     }
