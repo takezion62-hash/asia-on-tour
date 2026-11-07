@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-11-06T23:05:58.103Z",
+  "checkedAt": "2026-11-07T01:06:38.822Z",
   "windows": {
     "epicgames_S43_PerformanceEvaluationTrios_EU/S43_PerformanceEvaluation_Event1Round1_EU": {
       "nextPage": 7,
@@ -66,8 +66,8 @@
       "totalPages": 1
     },
     "epicgames_S43_OnePieceZoroCup_Mobile_EU/S43_OnePieceZoroCup_Mobile_EU": {
-      "nextPage": 12,
-      "complete": false,
+      "nextPage": 13,
+      "complete": true,
       "proposals": [
         {
           "id": "auto-s43-aa95063081ba",
@@ -195,13 +195,13 @@
           "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。"
         }
       ],
-      "pages": 12,
+      "pages": 13,
       "emptyAttempts": 0,
       "totalPages": 100
     },
     "epicgames_S43_OnePieceZoroCup_ME/S43_OnePieceZoroCup_ME": {
-      "nextPage": 12,
-      "complete": false,
+      "nextPage": 13,
+      "complete": true,
       "proposals": [
         {
           "id": "auto-s43-b9fcdc628299",
@@ -668,13 +668,13 @@
           ]
         }
       ],
-      "pages": 12,
+      "pages": 13,
       "emptyAttempts": 0,
       "totalPages": 100
     },
     "epicgames_S43_OnePieceZoroCup_Mobile_ME/S43_OnePieceZoroCup_Mobile_ME": {
-      "nextPage": 11,
-      "complete": false,
+      "nextPage": 12,
+      "complete": true,
       "proposals": [
         {
           "id": "auto-s43-ceb91f400d31",
@@ -802,13 +802,13 @@
           "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。"
         }
       ],
-      "pages": 11,
+      "pages": 12,
       "emptyAttempts": 0,
       "totalPages": 30
     },
     "epicgames_S43_OnePieceZoroCup_OCE/S43_OnePieceZoroCup_OCE": {
-      "nextPage": 1,
-      "complete": false,
+      "nextPage": 2,
+      "complete": true,
       "proposals": [
         {
           "id": "auto-s43-478b1a9baef6",
@@ -840,9 +840,126 @@
           ]
         }
       ],
-      "pages": 1,
+      "pages": 2,
       "emptyAttempts": 0,
       "totalPages": 57
+    },
+    "epicgames_S43_OnePieceZoroCup_EU/S43_OnePieceZoroCup_EU": {
+      "nextPage": 6,
+      "complete": true,
+      "proposals": [],
+      "pages": 6,
+      "emptyAttempts": 0,
+      "totalPages": 100
+    },
+    "epicgames_S43_OnePieceZoroCup_Mobile_OCE/S43_OnePieceZoroCup_Mobile_OCE": {
+      "nextPage": 1,
+      "complete": true,
+      "proposals": [
+        {
+          "id": "auto-s43-c51e2bbfb3ed",
+          "date": "2026-11-06",
+          "region": "OCE",
+          "player": "あくりあ",
+          "playerRaw": "gents あくりあハンバーガー",
+          "event": "One Piece: Zoro Mobile Cup",
+          "round": "単一開催枠 / 参加確認",
+          "rank": 4,
+          "points": 331,
+          "kills": 45,
+          "vrs": 2,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 8,
+          "seasonId": "S43",
+          "chapter": 7,
+          "season": 5,
+          "tournamentId": "ch7s5-one-piece-zoro-mobile-cup",
+          "source": "https://www.fortnite.com/competitive/events/S43_OnePieceZoroCup_Mobile/?region=OCE&round=S43_OnePieceZoroCup_Mobile_OCE",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。"
+        },
+        {
+          "id": "auto-s43-6b7fe976d9eb",
+          "date": "2026-11-06",
+          "region": "OCE",
+          "player": "モバイル勢のまかろん",
+          "playerRaw": "BRN 916GonLuck",
+          "event": "One Piece: Zoro Mobile Cup",
+          "round": "単一開催枠 / 参加確認",
+          "rank": 9,
+          "points": 313,
+          "kills": 24,
+          "vrs": 2,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 8,
+          "seasonId": "S43",
+          "chapter": 7,
+          "season": 5,
+          "tournamentId": "ch7s5-one-piece-zoro-mobile-cup",
+          "source": "https://www.fortnite.com/competitive/events/S43_OnePieceZoroCup_Mobile/?region=OCE&round=S43_OnePieceZoroCup_Mobile_OCE",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。"
+        },
+        {
+          "id": "auto-s43-aa3520e5a84d",
+          "date": "2026-11-06",
+          "region": "OCE",
+          "player": "Reo",
+          "playerRaw": "IGNUM Reo",
+          "event": "One Piece: Zoro Mobile Cup",
+          "round": "単一開催枠 / 参加確認",
+          "rank": 13,
+          "points": 306,
+          "kills": 86,
+          "vrs": 4,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 6,
+          "seasonId": "S43",
+          "chapter": 7,
+          "season": 5,
+          "tournamentId": "ch7s5-one-piece-zoro-mobile-cup",
+          "source": "https://www.fortnite.com/competitive/events/S43_OnePieceZoroCup_Mobile/?region=OCE&round=S43_OnePieceZoroCup_Mobile_OCE",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。"
+        },
+        {
+          "id": "auto-s43-8c792531b814",
+          "date": "2026-11-06",
+          "region": "OCE",
+          "player": "まめいし",
+          "playerRaw": "TsV まめいしψ",
+          "event": "One Piece: Zoro Mobile Cup",
+          "round": "単一開催枠 / 参加確認",
+          "rank": 24,
+          "points": 293,
+          "kills": 20,
+          "vrs": 1,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 8,
+          "seasonId": "S43",
+          "chapter": 7,
+          "season": 5,
+          "tournamentId": "ch7s5-one-piece-zoro-mobile-cup",
+          "source": "https://www.fortnite.com/competitive/events/S43_OnePieceZoroCup_Mobile/?region=OCE&round=S43_OnePieceZoroCup_Mobile_OCE",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。"
+        }
+      ],
+      "pages": 1,
+      "emptyAttempts": 0,
+      "totalPages": 10
     }
   }
 }
