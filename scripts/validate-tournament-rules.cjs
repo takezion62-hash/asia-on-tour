@@ -17,7 +17,7 @@ function validateRegistry(doc,tournaments){
   const t=catalog.get(id);
   if(!t){fail(id,'登録済み大会カタログにありません');continue}
   if(rule.seasonId!==t.seasonId||rule.team!==t.team||rule.series!==t.series)fail(id,'シーズン/チーム/シリーズが一致しません');
-  if(!['victory-cup','skin-cup','cash-cup'].includes(rule.series))fail(id,'対応していないルールシリーズです');
+  if(!['victory-cup','skin-cup','cash-cup','performance-evaluation'].includes(rule.series))fail(id,'対応していないルールシリーズです');
   if(!Array.isArray(rule.eventIds)||!rule.eventIds.length||new Set(rule.eventIds).size!==rule.eventIds.length||
       rule.eventIds.some(x=>typeof x!=='string'||!t.sourceEventIds.includes(x)))fail(id,'EpicイベントIDがカタログと不一致');
   if(!TEAMS.has(rule.team))fail(id,'チーム形式が不正');
@@ -25,13 +25,30 @@ function validateRegistry(doc,tournaments){
   try{url=new URL(rule.source)}catch{}
   if(!url||url.protocol!=='https:'||!URL_HOSTS.has(url.hostname)||url.username||url.password||url.hash)fail(id,'Epic公式規則URLが不正');
   if(!object(rule.matchCaps)||!Object.keys(rule.matchCaps).length||
-     Object.entries(rule.matchCaps).some(([name,value])=>!['予選','賞金決勝','スキン大会','単一ラウンド'].includes(name)||!positive(value)||value>40))fail(id,'公式試合数上限が不正');
+     Object.entries(rule.matchCaps).some(([name,value])=>!['予選','賞金決勝','スキン大会','単一ラウンド','Performance決勝'].includes(name)||!positive(value)||value>40))fail(id,'公式試合数上限が不正');
   if(rule.series==='victory-cup'){
    if(!positive(rule.matchCaps?.['予選'])||!positive(rule.matchCaps?.['賞金決勝']))fail(id,'Victory Cupの予選/決勝試合数上限が不足');
    if(!object(rule.advance)||!Object.keys(rule.advance).length||
       Object.entries(rule.advance).some(([region,value])=>!REGIONS.has(region)||!positive(value)))fail(id,'地域別予選通過順位が不正');
    if(rule.cosmeticRanks!==undefined)fail(id,'Victory Cupにスキン順位は登録不可');
    if(rule.prizePerVictory!==undefined&&(!positive(rule.prizePerVictory)||rule.prizePerVictory>10000))fail(id,'VR賞金単価が不正');
+  }else if(rule.series==='performance-evaluation'){
+   if(rule.autoApproval!=='verified-performance-vr'||rule.seasonId!=='S43'||
+     rule.team!=='trio'||rule.eventIds?.length!==1||
+     rule.eventIds[0]!=='S43_PerformanceEvaluationTrios'||
+     rule.windowIdPrefix!=='S43_PerformanceEvaluation')
+     fail(id,'S43トリオの検証済み大会IDと承認方式のみ許可');
+   if(!positive(rule.matchCaps?.['予選'])||!positive(rule.matchCaps?.['Performance決勝'])||
+     rule.matchCaps['Performance決勝']!==4||rule.matchCaps['予選']>8)
+     fail(id,'予選・Performance決勝の試合上限が不正');
+   if(!object(rule.advance)||Object.keys(rule.advance).sort().join(',')!=='EU,NAC'||
+     rule.advance.EU!==26||rule.advance.NAC!==26)
+     fail(id,'S43 EU/NAC予選突破は上位26チーム');
+   if(!positive(rule.prizePerVictory)||rule.prizePerVictory!==400||
+     rule.finalWinPoints!==100||rule.powerRankingTop!==5000)
+     fail(id,'S43決勝VR単価・ポイント・参加条件が不正');
+   if(rule.cashPrizes!==undefined||rule.cosmeticRanks!==undefined)
+     fail(id,'Performance Evaluationに他大会の賞金条件を混在させない');
   }else if(rule.series==='cash-cup'){
    // Cash Cup rules may be displayed, but are not eligible for automatic payout
    // publication until team identity, session completion and eligibility checks exist.
