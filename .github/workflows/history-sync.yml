@@ -6,6 +6,8 @@ on:
       - "scripts/osirion-sync.cjs"
       - "scripts/audit-pending-history-20261108.cjs"
       - "scripts/publish-verified-s35-console-duos-20261108.cjs"
+      - "scripts/publish-reviewed-s30-nac-zero-vr.cjs"
+      - "tests/publish-reviewed-s30-nac-zero-vr.test.cjs"
       - "tests/publish-verified-s35-console-duos-20261108.test.cjs"
       - "scripts/scan-coverage.cjs"
       - "tests/scan-coverage.test.cjs"
@@ -128,4 +130,33 @@ jobs:
             sleep $((attempt * 3))
           done
           echo "VERIFIED_HISTORY_PUBLICATION failed after 5 attempts"
+          exit 1
+
+      - name: Publish fully scanned S30 NAC 2024 Solo finals with 0VR and zero cash only
+        run: |
+          set -euo pipefail
+          for attempt in 1 2 3 4 5; do
+            echo "S30_VERIFIED_REVIEW_PUBLICATION attempt $attempt/5"
+            git fetch origin main
+            git reset --hard origin/main
+            node scripts/publish-reviewed-s30-nac-zero-vr.cjs --dry-run
+            node scripts/publish-reviewed-s30-nac-zero-vr.cjs
+            npm run validate
+            node --test tests/publish-reviewed-s30-nac-zero-vr.test.cjs tests/safe-sync-merge.test.cjs
+            git add results.json updates.json history-sync-review.json history-sync-reviewed.json history-sync-status.json
+            if git diff --cached --quiet; then
+              echo "S30_VERIFIED_REVIEW_PUBLICATION already complete or no newly confirmed rows"
+              exit 0
+            fi
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git commit -m "data: add fully verified 2024 NAC Solo Victory Cash Cup 0VR finalists"
+            if git push origin HEAD:main; then
+              echo "S30_VERIFIED_REVIEW_PUBLICATION published with current results preserved"
+              exit 0
+            fi
+            echo "Remote main advanced; reverify and integrate against latest published rows"
+            sleep $((attempt * 3))
+          done
+          echo "S30_VERIFIED_REVIEW_PUBLICATION failed after conflict-safe retries"
           exit 1
