@@ -112,7 +112,7 @@ test('real published archive remains immutable; roster-based calculation matches
 
 
 test('six evolving badge tracks have five strictly increasing rank goals',()=>{
-  assert.equal(engine.VERSION,8,'ten additional secret achievements ship engine v7');
+  assert.equal(engine.VERSION,8,'eleven secret achievements ship engine v8');
   assert.equal(engine.EVOLUTION_TRACKS.length,6);
   assert.deepEqual(engine.EVOLUTION_TIERS.map(t=>t.id),['bronze','silver','gold','platinum','prismatic']);
   assert.equal(new Set(engine.EVOLUTION_TRACKS.map(t=>t.id)).size,6);
@@ -230,7 +230,7 @@ test('every real published player gets exactly six evolving tracks without modif
 const special=(rows,id,name='Hero')=>engine.calculateSpecial(rows,name).achievements.find(badge=>badge.id===id);
 test('special title catalog includes solo cumulative KILLS and existing titles',()=>{
   assert.equal(engine.SPECIAL_CATALOG.length,31);
-  assert.equal(new Set(engine.SPECIAL_CATALOG.map(def=>def.id)).size,30);
+  assert.equal(new Set(engine.SPECIAL_CATALOG.map(def=>def.id)).size,31);
   for(const def of engine.SPECIAL_CATALOG){
     assert.ok(['rare','epic','legendary'].includes(def.rarity),def.id);
     assert.ok(def.goal>=1&&def.description&&def.title&&def.icon,def.id);
@@ -315,7 +315,7 @@ test('legacy top ten and region specialist survive; report does not mutate evide
   ];
   const before=JSON.stringify(rows);
   const report=engine.calculateSpecial(rows,'Hero');
-  assert.equal(report.total,30);
+  assert.equal(report.total,31);
   assert.equal(report.unlocked.length,2);
   assert.equal(special(rows,'top-ten').unlocked,true);
   assert.equal(special(rows,'specialist-me').unlocked,true);
@@ -327,7 +327,7 @@ test('new special titles for every published player are deterministic and read-o
   const players=[...new Set(records.flatMap(row=>Array.isArray(row.players)&&row.players.length?row.players:[row.player]).filter(Boolean))];
   for(const player of players){
     const report=engine.calculate(records,player).special;
-    assert.equal(report.total,30);
+    assert.equal(report.total,31);
     assert.equal(report.earned,report.unlocked.length,player);
     assert.equal(report.locked.length+report.earned,report.total,player);
     assert.ok(report.achievements.every(a=>a.evidence.length<=(a.id==='solo-and-team-cash'?4:3)&&a.evidence.every(e=>e.id)),player);
@@ -542,7 +542,7 @@ test('12 new special awards have stable IDs, rarities and distinct achievement c
     'zero-build-champion','fncs-finalist','seven-day-traveler','triple-format-vr'];
   assert.equal(engine.VERSION,8);
   assert.equal(engine.SPECIAL_CATALOG.length,31);
-  assert.equal(new Set(engine.SPECIAL_CATALOG.map(x=>x.id)).size,30);
+  assert.equal(new Set(engine.SPECIAL_CATALOG.map(x=>x.id)).size,31);
   for(const id of ids){
     const def=engine.SPECIAL_CATALOG.find(x=>x.id===id);
     assert.ok(def&&def.description&&def.title, id);
@@ -656,7 +656,7 @@ const secret=(rows,id,catalog=[])=>engine.calculateSecret(rows,'Hero',{catalog})
 const secretPaid=(id,overrides={})=>fixture(id,{
   date:'2026-09-01',kind:'賞金決勝',rank:12,kills:2,vrs:0,prize:100,...overrides
 });
-test('secret titles have separate 10-item catalog, keep ordinary 30 titles and hide two completely',()=>{
+test('secret titles have separate 11-item catalog, keep ordinary 31 titles and hide two completely',()=>{
   const ids=['silent-crown','golden-strike','death-coronation','three-world-shadow',
     'triple-gold','six-region-bounty','dual-world-champion','borderless-champion','returning-phoenix',
     'light-and-shadow','double-crown-miracle'];
