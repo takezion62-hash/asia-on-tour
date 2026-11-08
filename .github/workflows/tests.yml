@@ -13,8 +13,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  test:
-    name: JSON検証・単体テスト・PCスマホ回帰テスト
+  unit:
+    name: JSON検証・単体テスト
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -29,6 +29,19 @@ jobs:
         run: npm run validate
       - name: データと画面ロジックの回帰テスト
         run: npm run test:unit
+
+  browser:
+    name: PC・スマホ画面テスト
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '24'
+          cache: npm
+      - name: 最小のテスト依存を導入
+        run: npm ci --ignore-scripts
       - name: Chromiumを準備
         run: npx playwright install --with-deps chromium
       - name: PC・スマホの主要画面を検証
@@ -43,3 +56,25 @@ jobs:
             test-results/
           if-no-files-found: ignore
           retention-days: 7
+
+  test:
+    # 既存の必須チェック名を維持。どちらかのジョブが失敗・スキップされた場合も成功にしない。
+    name: JSON検証・単体テスト・PCスマホ回帰テスト
+    needs: [unit, browser]
+    if: ${{ always() }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: JSON・単体・PCスマホの全件成功を確認
+        env:
+          UNIT_RESULT: ${{ needs.unit.result }}
+          BROWSER_RESULT: ${{ needs.browser.result }}
+        shell: bash
+        run: |
+          echo "JSON/Unit: ${UNIT_RESULT}"
+          echo "PC/Mobile E2E: ${BROWSER_RESULT}"
+          if [[ "${UNIT_RESULT}" != "success" || "${BROWSER_RESULT}" != "success" ]]; then
+            echo "::error::All validation, unit and browser jobs must succeed before merge."
+            exit 1
+          fi
+          echo "All required checks passed."
