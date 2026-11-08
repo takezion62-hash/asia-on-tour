@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-11-08T13:03:32.959Z",
+  "checkedAt": "2026-11-08T16:50:31.850Z",
   "windows": {
     "epicgames_S43_PerformanceEvaluationTrios_EU/S43_PerformanceEvaluation_Event1Round1_EU": {
       "nextPage": 7,
@@ -1252,15 +1252,15 @@
       "totalPages": 55
     },
     "epicgames_S43_TriosCashCup_EU/S43_TriosCashCup_Event1_EU": {
-      "nextPage": 84,
+      "nextPage": 96,
       "complete": false,
       "proposals": [],
-      "pages": 84,
-      "lastAttemptAt": "2026-11-08T13:02:56.689Z",
+      "pages": 96,
+      "lastAttemptAt": "2026-11-08T16:50:06.360Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 8400,
-      "lastSuccessAt": "2026-11-08T13:02:57.831Z",
+      "lastSeenRank": 9600,
+      "lastSuccessAt": "2026-11-08T16:50:07.852Z",
       "totalPages": 100
     },
     "epicgames_S43_TriosCashCup_NAW/S43_TriosCashCup_Event1_NAW": {
@@ -1417,15 +1417,15 @@
       "totalPages": 40
     },
     "epicgames_S43_TriosCashCup_NAC/S43_TriosCashCup_Event1_NAC": {
-      "nextPage": 58,
+      "nextPage": 70,
       "complete": false,
       "proposals": [],
-      "pages": 58,
-      "lastAttemptAt": "2026-11-08T13:03:30.862Z",
+      "pages": 70,
+      "lastAttemptAt": "2026-11-08T16:50:28.205Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 5800,
-      "lastSuccessAt": "2026-11-08T13:03:31.944Z",
+      "lastSeenRank": 7000,
+      "lastSuccessAt": "2026-11-08T16:50:31.849Z",
       "totalPages": 100
     },
     "epicgames_S43_OnePieceZoroCup_ZB_NAW/S43_OnePieceZoroCup_ZB_NAW": {
@@ -1629,8 +1629,8 @@
       "totalPages": 100
     },
     "epicgames_S43_ReloadZBDuosCashCup_OCE/S43_ReloadZBDuosCashCup_Event1Round1_OCE": {
-      "nextPage": 35,
-      "complete": false,
+      "nextPage": 37,
+      "complete": true,
       "proposals": [
         {
           "id": "auto-s43-48bd824cd8c6",
@@ -1930,12 +1930,12 @@
           ]
         }
       ],
-      "pages": 35,
-      "lastAttemptAt": "2026-11-08T13:03:05.269Z",
+      "pages": 37,
+      "lastAttemptAt": "2026-11-08T16:49:50.887Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 3500,
-      "lastSuccessAt": "2026-11-08T13:03:06.032Z",
+      "lastSeenRank": 3649,
+      "lastSuccessAt": "2026-11-08T16:49:51.682Z",
       "totalPages": 37
     },
     "epicgames_S43_OnePieceZoroCup_ZB_BR/S43_OnePieceZoroCup_ZB_BR": {

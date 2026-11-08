@@ -1,11 +1,11 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-08T13:03:32.959Z",
+  "checkedAt": "2026-11-08T16:50:31.850Z",
   "mode": "review",
   "scope": "recent",
   "dateMode": null,
-  "selectedWindows": 4,
+  "selectedWindows": 3,
   "fromDate": null,
   "toDate": null,
   "provider": "osirion",
@@ -14,11 +14,11 @@
   "found": 2,
   "skipped": 0,
   "imported": 0,
-  "scannedPages": 37,
-  "completedWindows": 26,
+  "scannedPages": 26,
+  "completedWindows": 27,
   "identityConflicts": 3,
   "alreadyRegistered": 56,
-  "autoApprovedTotal": 846,
+  "autoApprovedTotal": 860,
   "invalidCachedCandidates": 0,
   "manualReviewCandidates": 2,
   "autoApprovedCosmeticThisRun": 0,
@@ -36,24 +36,24 @@
   "unmappedEventIds": [
     "S42_ArenaTestCup"
   ],
-  "message": "ChatGPT確認済み直接掲載30件（全履歴・直近合計）。残り2件。",
+  "message": "最新版と安全統合：新規掲載0件、重複スキップ0件、要確認の競合0件、確認待ち2件。既存の戦績・賞金は保持。",
   "concurrentMerge": {
     "appended": 0,
     "alreadyPublished": 0,
     "reviewConflicts": 0,
     "keptPending": 2,
-    "reconciledAt": "2026-11-08T13:03:34.980Z"
+    "reconciledAt": "2026-11-08T16:50:33.282Z"
   },
   "coverage": {
     "total": 29,
-    "completed": 26,
+    "completed": 27,
     "notStarted": 0,
-    "partial": 3,
+    "partial": 2,
     "retryWaiting": 0,
     "retryDue": 0,
-    "remaining": 3,
+    "remaining": 2,
     "retryCount": 0,
-    "completionPercent": 89.7,
+    "completionPercent": 93.1,
     "byRegion": {
       "EU": {
         "total": 6,
@@ -67,8 +67,8 @@
       },
       "OCE": {
         "total": 5,
-        "completed": 4,
-        "pending": 1
+        "completed": 5,
+        "pending": 0
       },
       "ME": {
         "total": 4,
@@ -89,8 +89,8 @@
     "byYear": {
       "2026": {
         "total": 29,
-        "completed": 26,
-        "pending": 3
+        "completed": 27,
+        "pending": 2
       }
     },
     "outsideScopeCheckpoints": 0,
@@ -101,19 +101,8 @@
         "region": "EU",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 84,
+        "nextPage": 96,
         "totalPages": 100,
-        "retryAfter": null,
-        "errorCode": null
-      },
-      {
-        "window": "epicgames_S43_ReloadZBDuosCashCup_OCE/S43_ReloadZBDuosCashCup_Event1Round1_OCE",
-        "date": "2026-11-08",
-        "region": "OCE",
-        "series": "cash-cup",
-        "status": "partial",
-        "nextPage": 35,
-        "totalPages": 37,
         "retryAfter": null,
         "errorCode": null
       },
@@ -123,7 +112,7 @@
         "region": "NAC",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 58,
+        "nextPage": 70,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
