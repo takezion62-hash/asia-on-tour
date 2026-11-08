@@ -11,7 +11,7 @@ function finishableWindows(windows,state,perWindowLimit,now=Date.now(),limit=2){
  const cap=Math.max(1,Math.min(50,nonnegative(perWindowLimit)?perWindowLimit:10));
  const all=(Array.isArray(windows)?windows:[]).filter(w=>{
   const cp=state?.windows?.[w.key];
-  if(!w?.key||cp?.complete===true&&!((w.series==='unreal-cup')&&cp.epicIdsRetained!==true))return false;
+  if(!w?.key||cp?.complete===true)return false; // Stale Unreal checkpoints restart at page zero.
   const retry=Date.parse(cp?.retryAfter||'');
   if(Number.isFinite(retry)&&retry>now)return false;
   const remaining=remainingPages(cp);
