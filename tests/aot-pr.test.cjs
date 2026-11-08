@@ -665,3 +665,33 @@ test('same session published result wins, attendance duplicates deterministic',(
   assert.equal(together.publishedParticipationIncluded,0);
   assert.equal(together.recordCount,1);
 });
+
+test('approved attendance counts in Test Cup and mixed-reward Icon Cup without bonuses',()=>{
+  const testCup=catalog({id:'s42-test',name:'Solo Reload Test Cup',seasonId:'S42',
+    sourceEventIds:['S42_ReloadTestCup'],series:'test-cup'});
+  const testRow=publishedAttendance({event:testCup.name,tournamentId:testCup.id,
+    source:'https://www.fortnite.com/competitive/events/S42_ReloadTestCup/?region=NAW&round=S42_ReloadTestCup_Event5_Round1_NAW'});
+  const testScore=score([testRow],testCup).ranked[0];
+  approx(testScore.attendance,10*.25);
+  approx(testScore.bonus,0);
+  const icon=catalog({id:'s42-icon',name:'NickEh30 Icon Cup',seasonId:'S42',
+    sourceEventIds:['S42_NickEh30Cup'],series:'icon-cup',
+    subtype:'nickeh30-icon-cup',additionalSeries:['skin-cup'],team:'duo',mode:'battle-royale'});
+  const duo=publishedAttendance({event:icon.name,tournamentId:icon.id,
+    player:'A / B',players:['A','B'],
+    source:'https://www.fortnite.com/competitive/events/S42_NickEh30Cup/?region=NAW&round=S42_NickEh30Cup_Event5_Round1_NAW'});
+  const duoScore=score([duo],icon);
+  assert.equal(duoScore.playerCount,2);
+  for(const player of duoScore.ranked){
+    approx(player.attendance,10*.5);
+    approx(player.bonus,0);
+    approx(player.qualificationBonus,0);
+  }
+});
+test('unscored invalid duplicate round cannot suppress a valid approved attendance record',()=>{
+  const valid=publishedAttendance();
+  const invalid=event({id:'unknown-round',kind:'不明'});
+  const report=score([invalid,valid],publishedAttendanceCatalog);
+  assert.equal(report.publishedParticipationIncluded,1);
+  assert.equal(report.playerCount,1);
+});

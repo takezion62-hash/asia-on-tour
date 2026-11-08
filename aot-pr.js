@@ -23,11 +23,11 @@
   function eventMultiplier(record, tournament) {
     if (!tournament || !SCORED_SERIES.has(tournament.series)) return null;
     // Test Cups reward verified overseas participation, without competing with cash cups.
-    if (tournament.series === 'test-cup') return record.kind === 'Test Cup' ? 0.25 : null;
+    if (tournament.series === 'test-cup') return record.kind === 'Test Cup' || record.kind === '参加確認' ? 0.25 : null;
     if (record.kind === 'Test Cup') return null; // never treat a test as a higher-paying series
     // NickEh30 is mixed reward: cosmetic qualifier, paid-VR final. Its series tags
     // are shared by the event but cannot imply the same reward or weight per round.
-    if (record.participationOnly===true && tournament.series==='icon-cup' &&
+    if ((record.participationOnly===true || record.kind==='参加確認') && tournament.series==='icon-cup' &&
       ['nickeh30-icon-cup','playstation-clix-cup-battle-royale'].includes(tournament.subtype)) return 0.5;
     if (tournament.series === 'icon-cup' && ['nickeh30-icon-cup', 'playstation-clix-cup-battle-royale'].includes(tournament.subtype) &&
       Array.isArray(tournament.additionalSeries) && tournament.additionalSeries.includes('skin-cup')) {
@@ -418,7 +418,8 @@
     // Full published performance wins over attendance-only for that session.
     // Conflicting attendance imports select a stable ID winner, not row order.
     for(const row of unique.records){
-      if(!row||row.verified!==true||!Object.hasOwn(REGIONS,row.region))continue;
+      if(!row||row.verified!==true||row.reviewOnly===true||
+        !(row.kind in STAGES)||!Object.hasOwn(REGIONS,row.region))continue;
       const t=options.classify(row)||{};
       if(eventMultiplier(row,t)===null)continue;
       const attendance=verifiedPublishedAttendance(row,t);

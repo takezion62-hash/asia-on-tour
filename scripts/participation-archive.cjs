@@ -1,6 +1,7 @@
 'use strict';
-// A separate participation ledger. These rows NEVER enter results.json, AOT PR,
-// prize totals, achievement badges or the verified qualification archive.
+// Separate participation ledger: records never enter results.json, cash totals,
+// achievements or verified qualification. Verified, deduplicated rows can earn
+// basic AOT PR through the participation bridge.
 const fs=require('node:fs');
 const path=require('node:path');
 const crypto=require('node:crypto');
@@ -103,7 +104,7 @@ function appendArchive(root,proposalsByWindow,published,opts={}){
   }
  }
  const next={
-  version:1,description:'Epic ID verified participation records only; excluded from achievements, cash totals and AOT PR',
+  version:1,description:'Epic ID verified participation records only; excluded from achievements and cash totals; eligible for verified basic AOT PR',
   checkedAt:opts.checkedAt||new Date().toISOString(),
   total:months.reduce((sum,m)=>sum+m.count,0),months,
   players:[...players.values()].map(p=>({...p,months:[...p.months].sort().reverse()})).sort((a,b)=>a.name.localeCompare(b.name,'ja'))
