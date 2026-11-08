@@ -4,6 +4,8 @@ on:
     branches: [main]
     paths:
       - "scripts/osirion-sync.cjs"
+      - "scripts/automatic-duo-qualifier-approval.cjs"
+      - "tests/automatic-duo-qualifier-approval.test.cjs"
       - "scripts/verified-partial-page.cjs"
       - "tests/verified-partial-page.test.cjs"
       - "scripts/audit-pending-history-20261108.cjs"
@@ -23,7 +25,7 @@ on:
       - "tests/automatic-unreal-approval.test.cjs"
       - "scripts/automatic-performance-approval.cjs"
       - "tests/automatic-performance-approval.test.cjs"
-      - "tests/automatic-cash-approval.test.cjs"
+      - "tests/automatic-cash-approval.test.cjs tests/automatic-duo-qualifier-approval.test.cjs"
       - "tournament-rules.json"
       - "scripts/validate-tournament-rules.cjs"
       - "tests/tournament-rules.test.cjs"
