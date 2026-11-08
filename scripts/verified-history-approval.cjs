@@ -37,6 +37,9 @@ function decide(row,win,checkpoint,data){
   (!Object.hasOwn(rule.advance,row.region)&&!oldNacZeroFinal)||
   row.round!==win.round||row.kind!==win.kind)
   return decline('開催日・地域・ラウンド不一致');
+ if(oldNacZeroFinal&&(row.points!==0||checkpoint.rankingOrderValid!==true||
+  !checkpoint.proposals.some(x=>JSON.stringify(x)===JSON.stringify(row))))
+  return decline('2024 NAC 0VR決勝の保存済み順位表・ポイント整合性が未確認');
  if(!row.id?.startsWith('auto-'+rule.seasonId.toLowerCase()+'-')||row.verified!==true||!Array.isArray(checkpoint.proposals)||!checkpoint.proposals.some(x=>x.id===row.id))return decline('照合済み候補ではありません');
  const lineup=participants(row),teamSize=rule.team==='squad'?4:1;
  if(lineup.length!==teamSize||new Set(lineup).size!==lineup.length
