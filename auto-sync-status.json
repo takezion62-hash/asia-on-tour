@@ -11,7 +11,7 @@
   "provider": "osirion",
   "linkedPlayers": 556,
   "trackedWindows": 29,
-  "found": 7,
+  "found": 0,
   "skipped": 0,
   "imported": 2,
   "scannedPages": 48,
@@ -20,7 +20,7 @@
   "alreadyRegistered": 45,
   "autoApprovedTotal": 826,
   "invalidCachedCandidates": 0,
-  "manualReviewCandidates": 7,
+  "manualReviewCandidates": 0,
   "autoApprovedCosmeticThisRun": 0,
   "autoApprovedCashThisRun": 2,
   "autoApprovedPerformanceThisRun": 0,
@@ -31,12 +31,12 @@
   "malformedFailures": 0,
   "skippedLeaderboards": [],
   "reviewOnlyWindows": 29,
-  "reviewOnlyCandidates": 7,
+  "reviewOnlyCandidates": 0,
   "unmappedEvents": 1,
   "unmappedEventIds": [
     "S42_ArenaTestCup"
   ],
-  "message": "最新版と安全統合：新規掲載2件、重複スキップ0件、要確認の競合0件、確認待ち7件。既存の戦績・賞金は保持。",
+  "message": "ChatGPTが個別確認した7件の候補を再確認。掲載7件、重複0件、理由付き保留0件。",
   "concurrentMerge": {
     "appended": 2,
     "alreadyPublished": 0,
@@ -174,6 +174,6 @@
       }
     ]
   },
-  "manuallyPublished": 3,
-  "lastReviewedBatchAt": "2026-11-08T06:26:10.820Z"
+  "manuallyPublished": 10,
+  "lastReviewedBatchAt": "2026-11-08T12:35:06.192Z"
 }
