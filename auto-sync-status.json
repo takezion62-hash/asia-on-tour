@@ -1,7 +1,7 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-08T09:35:40.790Z",
+  "checkedAt": "2026-11-08T10:38:31.798Z",
   "mode": "review",
   "scope": "recent",
   "dateMode": null,
@@ -11,18 +11,18 @@
   "provider": "osirion",
   "linkedPlayers": 556,
   "trackedWindows": 29,
-  "found": 6,
+  "found": 7,
   "skipped": 0,
   "imported": 2,
   "scannedPages": 48,
-  "completedWindows": 19,
+  "completedWindows": 22,
   "identityConflicts": 3,
-  "alreadyRegistered": 39,
-  "autoApprovedTotal": 784,
+  "alreadyRegistered": 45,
+  "autoApprovedTotal": 826,
   "invalidCachedCandidates": 0,
-  "manualReviewCandidates": 6,
-  "autoApprovedCosmeticThisRun": 2,
-  "autoApprovedCashThisRun": 0,
+  "manualReviewCandidates": 7,
+  "autoApprovedCosmeticThisRun": 0,
+  "autoApprovedCashThisRun": 2,
   "autoApprovedPerformanceThisRun": 0,
   "autoApprovedUnrealThisRun": 0,
   "timeLimitReached": false,
@@ -31,29 +31,29 @@
   "malformedFailures": 0,
   "skippedLeaderboards": [],
   "reviewOnlyWindows": 29,
-  "reviewOnlyCandidates": 6,
+  "reviewOnlyCandidates": 7,
   "unmappedEvents": 1,
   "unmappedEventIds": [
     "S42_ArenaTestCup"
   ],
-  "message": "最新版と安全統合：新規掲載2件、重複スキップ0件、要確認の競合0件、確認待ち6件。既存の戦績・賞金は保持。",
+  "message": "最新版と安全統合：新規掲載2件、重複スキップ0件、要確認の競合0件、確認待ち7件。既存の戦績・賞金は保持。",
   "concurrentMerge": {
     "appended": 2,
     "alreadyPublished": 0,
     "reviewConflicts": 0,
-    "keptPending": 6,
-    "reconciledAt": "2026-11-08T09:35:42.855Z"
+    "keptPending": 7,
+    "reconciledAt": "2026-11-08T10:38:33.608Z"
   },
   "coverage": {
     "total": 29,
-    "completed": 19,
-    "notStarted": 5,
-    "partial": 5,
+    "completed": 22,
+    "notStarted": 4,
+    "partial": 3,
     "retryWaiting": 0,
     "retryDue": 0,
-    "remaining": 10,
+    "remaining": 7,
     "retryCount": 0,
-    "completionPercent": 65.5,
+    "completionPercent": 75.9,
     "byRegion": {
       "EU": {
         "total": 6,
@@ -62,8 +62,8 @@
       },
       "NAC": {
         "total": 6,
-        "completed": 4,
-        "pending": 2
+        "completed": 5,
+        "pending": 1
       },
       "OCE": {
         "total": 5,
@@ -77,54 +77,43 @@
       },
       "BR": {
         "total": 4,
-        "completed": 2,
-        "pending": 2
+        "completed": 3,
+        "pending": 1
       },
       "NAW": {
         "total": 4,
-        "completed": 3,
-        "pending": 1
+        "completed": 4,
+        "pending": 0
       }
     },
     "byYear": {
       "2026": {
         "total": 29,
-        "completed": 19,
-        "pending": 10
+        "completed": 22,
+        "pending": 7
       }
     },
     "outsideScopeCheckpoints": 0,
     "samples": [
-      {
-        "window": "epicgames_S43_OnePieceZoroCup_ZB_NAC/S43_OnePieceZoroCup_ZB_NAC",
-        "date": "2026-11-07",
-        "region": "NAC",
-        "series": "skin-cup",
-        "status": "partial",
-        "nextPage": 2,
-        "totalPages": 100,
-        "retryAfter": null,
-        "errorCode": null
-      },
       {
         "window": "epicgames_S43_TriosCashCup_EU/S43_TriosCashCup_Event1_EU",
         "date": "2026-11-07",
         "region": "EU",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 48,
+        "nextPage": 60,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
       },
       {
-        "window": "epicgames_S43_TriosCashCup_BR/S43_TriosCashCup_Event1_BR",
+        "window": "epicgames_S43_ReloadZBDuosCashCup_OCE/S43_ReloadZBDuosCashCup_Event1Round1_OCE",
         "date": "2026-11-08",
-        "region": "BR",
+        "region": "OCE",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 48,
-        "totalPages": 55,
+        "nextPage": 11,
+        "totalPages": 37,
         "retryAfter": null,
         "errorCode": null
       },
@@ -134,19 +123,8 @@
         "region": "NAC",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 22,
+        "nextPage": 34,
         "totalPages": 100,
-        "retryAfter": null,
-        "errorCode": null
-      },
-      {
-        "window": "epicgames_S43_TriosCashCup_NAW/S43_TriosCashCup_Event1_NAW",
-        "date": "2026-11-08",
-        "region": "NAW",
-        "series": "cash-cup",
-        "status": "partial",
-        "nextPage": 36,
-        "totalPages": 40,
         "retryAfter": null,
         "errorCode": null
       },
@@ -188,17 +166,6 @@
         "date": "2026-11-07",
         "region": "ME",
         "series": "skin-cup",
-        "status": "notStarted",
-        "nextPage": 0,
-        "totalPages": null,
-        "retryAfter": null,
-        "errorCode": null
-      },
-      {
-        "window": "epicgames_S43_ReloadZBDuosCashCup_OCE/S43_ReloadZBDuosCashCup_Event1Round1_OCE",
-        "date": "2026-11-08",
-        "region": "OCE",
-        "series": "cash-cup",
         "status": "notStarted",
         "nextPage": 0,
         "totalPages": null,
