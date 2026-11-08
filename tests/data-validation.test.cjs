@@ -53,7 +53,7 @@ test('S43 Solo Reload Test Cup ME/NAW retains all verified non-cash results and 
     // A verified non-cash Test Cup may explicitly record $0; unknown payouts remain null.
     assert.ok(row.prize===null || row.prize===0,'Participation-only record must not claim cash');
     assert.equal(personalCents(row),0);
-    assert.equal(AotPR.eventMultiplier(row,t),null,'Participation-only records must not earn Test Cup PR');
+    assert.equal(AotPR.eventMultiplier(row,t),0.25,'Verified Test Cup attendance uses conservative series weight');
   }
   const result=AotPR.calculate(records,{names:r=>[r.player],classify:r=>tournamentFor(r,current)});
   assert.equal(result.recordCount,records.length);

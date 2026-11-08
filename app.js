@@ -1815,7 +1815,7 @@
       if(!target)return;
       const report=prReport(aotPrRegion);
       document.querySelectorAll('[data-aot-pr-region]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.aotPrRegion===aotPrRegion)));
-      $('#aot-pr-status').textContent=`${seasonScope()} · ${aotPrRegion==='all'?'全地域':aotPrRegion} · ${format(report.playerCount)}名 / ${format(report.recordCount)}戦績（出場アーカイブ ${format(report.participationIncluded||0)}件） · 上位50名を表示`;
+      $('#aot-pr-status').textContent=`${seasonScope()} · ${aotPrRegion==='all'?'全地域':aotPrRegion} · ${format(report.playerCount)}名 / ${format(report.recordCount)}戦績（出場アーカイブ ${format(report.archivedParticipationIncluded||0)}件 / 承認掲載の参加確認 ${format(report.publishedParticipationIncluded||0)}件） · 上位50名を表示`;
       target.innerHTML=report.ranked.length?report.ranked.slice(0,50).map(player=>`<li class="aot-pr-item" data-top="${player.rank<=3}"><span class="aot-pr-rank">#${format(player.rank)}</span><div><a class="aot-pr-name" href="${escape(profileHref(player.name))}" data-open-profile="${escape(player.name)}">${escape(player.name)}</a><span class="aot-pr-facts">参加 ${format(player.appearances)}枠 · 順位 ${prNumber(player.placement)} · キル ${prNumber(player.eliminations)} · 出場記録から ${prNumber(player.participationScore||0)} · 予選突破 ${prNumber(player.qualificationBonus)} · 賞金ボーナス ${prNumber(player.bonus)}</span></div><span class="aot-pr-score">${prNumber(player.score)}<small>AOT PR</small></span></li>`).join(''):'<li class="aot-pr-item">この条件で加点できる確認済み戦績はありません</li>';
     }
     function renderProfileAotPR(name){

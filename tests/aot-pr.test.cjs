@@ -607,3 +607,112 @@ test('repeated identical final sessions never earn two qualification bonuses',()
  approx(p.qualificationBonus,10);
  assert.equal(p.qualificationCount,1);
 });
+
+
+const publishedAttendanceCatalog=catalog({
+  id:'s42-reload-vc',name:'Solo Reload Victory Cup',seasonId:'S42',
+  sourceEventIds:['S42_ReloadSoloVictoryCup']
+});
+const publishedAttendance=(extra={})=>event({
+  id:'att-a',date:'2026-10-24',region:'NAW',kind:'参加確認',
+  event:'Solo Reload Victory Cup',tournamentId:'s42-reload-vc',seasonId:'S42',
+  player:'P1',players:['P1'],round:'Event 5 · Round 1 / 参加確認',
+  rank:500,points:180,kills:12,vrs:0,matches:8,prize:null,
+  source:'https://www.fortnite.com/competitive/events/S42_ReloadSoloVictoryCup/?region=NAW&round=S42_ReloadSoloVictoryCup_Event5_Round1_NAW',
+  ...extra
+});
+test('published verified 参加確認 earns AOT PR attendance, rank and kills, without bonuses',()=>{
+  const record=publishedAttendance();
+  assert.equal(PR.verifiedPublishedAttendance(record,publishedAttendanceCatalog),true);
+  const report=score([record],publishedAttendanceCatalog),p=report.byName.get('P1');
+  assert.equal(report.publishedParticipationIncluded,1);
+  assert.equal(report.archivedParticipationIncluded,0);
+  assert.equal(report.participationIncluded,1);
+  approx(p.attendance,10);
+  approx(p.placement,100/Math.sqrt(500)*.35);
+  approx(p.eliminations,12*.7*.35);
+  approx(p.participationScore,p.score);
+  approx(p.qualificationBonus,0);
+  approx(p.bonus,0);
+  assert.equal(p.rows[0].participationOnly,true);
+  assert.equal(record.participationOnly,undefined);
+});
+test('no PR for unapproved, incomplete or non-official published 参加確認',()=>{
+  for(const extra of [
+    {verified:false},{reviewOnly:true},{reported:true},{partial:true},
+    {prize:100},{rank:-1},{points:-1},{kills:-1},{matches:0},{vrs:99},
+    {date:'2026-13-99'},{seasonId:'S43'},{tournamentId:'wrong'},
+    {event:'wrong'},{qualification:'qualified'},{status:'予選突破'},
+    {source:'https://evil.example/competitive/events/S42_ReloadSoloVictoryCup/?region=NAW&round=S42_ReloadSoloVictoryCup_Event5_Round1_NAW'},
+    {source:'https://www.fortnite.com/competitive/events/S42_Other/?region=NAW&round=S42_ReloadSoloVictoryCup_Event5_Round1_NAW'}
+  ]){
+    const record=publishedAttendance(extra);
+    assert.equal(PR.verifiedPublishedAttendance(record,publishedAttendanceCatalog),false,JSON.stringify(extra));
+    assert.equal(score([record],publishedAttendanceCatalog).playerCount,0,JSON.stringify(extra));
+  }
+});
+test('same session published result wins, attendance duplicates deterministic',()=>{
+  const base=publishedAttendance({id:'att-a',rank:500});
+  const duplicate=publishedAttendance({id:'att-z',rank:450,points:190});
+  const a=score([base,duplicate],publishedAttendanceCatalog);
+  const b=score([duplicate,base],publishedAttendanceCatalog);
+  assert.equal(a.recordCount,1);
+  assert.equal(b.recordCount,1);
+  approx(a.byName.get('P1').score,b.byName.get('P1').score);
+  const final=event({id:'fin',kind:'賞金決勝',rank:2,kills:8});
+  const together=score([base,final],publishedAttendanceCatalog);
+  assert.equal(together.publishedParticipationIncluded,0);
+  assert.equal(together.recordCount,1);
+});
+
+test('approved attendance counts in Test Cup and mixed-reward Icon Cup without bonuses',()=>{
+  const testCup=catalog({id:'s42-test',name:'Solo Reload Test Cup',seasonId:'S42',
+    sourceEventIds:['S42_ReloadTestCup'],series:'test-cup'});
+  const testRow=publishedAttendance({event:testCup.name,tournamentId:testCup.id,
+    source:'https://www.fortnite.com/competitive/events/S42_ReloadTestCup/?region=NAW&round=S42_ReloadTestCup_Event5_Round1_NAW'});
+  const testScore=score([testRow],testCup).ranked[0];
+  approx(testScore.attendance,10*.25);
+  approx(testScore.bonus,0);
+  const icon=catalog({id:'s42-icon',name:'NickEh30 Icon Cup',seasonId:'S42',
+    sourceEventIds:['S42_NickEh30Cup'],series:'icon-cup',
+    subtype:'nickeh30-icon-cup',additionalSeries:['skin-cup'],team:'duo',mode:'battle-royale'});
+  const duo=publishedAttendance({event:icon.name,tournamentId:icon.id,
+    player:'A / B',players:['A','B'],
+    source:'https://www.fortnite.com/competitive/events/S42_NickEh30Cup/?region=NAW&round=S42_NickEh30Cup_Event5_Round1_NAW'});
+  const duoScore=score([duo],icon);
+  assert.equal(duoScore.playerCount,2);
+  for(const player of duoScore.ranked){
+    approx(player.attendance,10*.5);
+    approx(player.bonus,0);
+    approx(player.qualificationBonus,0);
+  }
+});
+test('unscored invalid duplicate round cannot suppress a valid approved attendance record',()=>{
+  const valid=publishedAttendance();
+  const invalid=event({id:'unknown-round',kind:'不明'});
+  const report=score([invalid,valid],publishedAttendanceCatalog);
+  assert.equal(report.publishedParticipationIncluded,1);
+  assert.equal(report.playerCount,1);
+});
+
+
+test('verified participation with unknown rank, eliminations or match counts still earns attendance, without invented stats',()=>{
+  const row=publishedAttendance({rank:null,kills:null,points:null,vrs:null,matches:null});
+  assert.equal(PR.verifiedPublishedAttendance(row,publishedAttendanceCatalog),true);
+  const report=score([row],publishedAttendanceCatalog);
+  const p=report.byName.get('P1');
+  approx(p.attendance,10);
+  approx(p.placement,0);
+  approx(p.eliminations,0);
+  approx(p.score,10);
+  approx(p.bonus,0);
+  approx(p.qualificationBonus,0);
+});
+test('officially matched Tracker window on verified published attendance counts, but mismatched event or region is rejected',()=>{
+  const row=publishedAttendance({
+    source:'https://fortnitetracker.com/events/epicgames_S42_ReloadSoloVictoryCup_NAW?window=S42_ReloadSoloVictoryCup_Event5_Round1_NAW'
+  });
+  assert.equal(PR.verifiedPublishedAttendance(row,publishedAttendanceCatalog),true);
+  approx(score([row],publishedAttendanceCatalog).byName.get('P1').attendance,10);
+  assert.equal(PR.verifiedPublishedAttendance({...row,source:row.source.replace('NAW?window','EU?window')},publishedAttendanceCatalog),false);
+});
