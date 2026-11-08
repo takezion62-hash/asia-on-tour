@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-08T06:26:10.820Z",
+  "reviewedAt": "2026-11-08T06:42:00.000Z",
   "description": "Resolved historic review candidates: published, duplicate or participation",
   "entries": [
     {
@@ -6407,6 +6407,27 @@
       "existingId": "s43-me-zoro-zb-skin-20261107-funnybro-takobel",
       "reviewedAt": "2026-11-08T06:26:10.820Z",
       "evidence": "Same verified player lineup, Epic event/region/window/date/rank/points/kills/VR and official source."
+    },
+    {
+      "id": "auto-s43-5d92f90dff90",
+      "decision": "already-published",
+      "existingId": "s43-eu-zoro-zb-skin-20261107-ares-momiji",
+      "reviewedAt": "2026-11-08T06:42:00.000Z",
+      "evidence": "Exact same verified players, Epic event session and region, date/rank/points/kills/VR and official source. Two other near-matches with differing ranks remain pending."
+    },
+    {
+      "id": "auto-s43-243921414ea1",
+      "decision": "already-published",
+      "existingId": "s43-eu-zoro-zb-skin-20261107-koiru-huggy",
+      "reviewedAt": "2026-11-08T06:42:00.000Z",
+      "evidence": "Exact same verified players, Epic event session and region, date/rank/points/kills/VR and official source. Two other near-matches with differing ranks remain pending."
+    },
+    {
+      "id": "auto-s43-82a7652a9f85",
+      "decision": "already-published",
+      "existingId": "s43-eu-zoro-zb-skin-20261107-poison-rukaporin",
+      "reviewedAt": "2026-11-08T06:42:00.000Z",
+      "evidence": "Exact same verified players, Epic event session and region, date/rank/points/kills/VR and official source. Two other near-matches with differing ranks remain pending."
     }
   ]
 }

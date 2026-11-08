@@ -11,7 +11,7 @@
   "provider": "osirion",
   "linkedPlayers": 556,
   "trackedWindows": 2932,
-  "found": 63,
+  "found": 45,
   "skipped": 7,
   "imported": 0,
   "scannedPages": 80,
@@ -20,7 +20,7 @@
   "alreadyRegistered": 1410,
   "autoApprovedTotal": 782,
   "invalidCachedCandidates": 1,
-  "manualReviewCandidates": 63,
+  "manualReviewCandidates": 45,
   "autoApprovedCosmeticThisRun": 0,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
@@ -31,7 +31,7 @@
   "malformedFailures": 0,
   "skippedLeaderboards": [],
   "reviewOnlyWindows": 1312,
-  "reviewOnlyCandidates": 20,
+  "reviewOnlyCandidates": 2,
   "unmappedEvents": 238,
   "unmappedEventIds": [
     "S30_ConsoleCashCups",
@@ -47,10 +47,10 @@
     "S30_Reload",
     "S30_ReloadZB"
   ],
-  "message": "過去の確認待ち5件を参加のみ掲載、完全一致した重複5件を確認待ちから除外。他の候補は保存して継続調査。",
-  "manuallyPublished": 255,
-  "manuallyResolvedDuplicates": 7,
-  "lastReviewedBatchAt": "2026-11-08T06:26:10.820Z",
+  "message": "保存済みEpic IDと大会開催枠で過去の参加確認を15件追加、重複3件整理。残る45件は継続調査。賞金/スキン/突破の未確認部分は保持。",
+  "manuallyPublished": 270,
+  "manuallyResolvedDuplicates": 10,
+  "lastReviewedBatchAt": "2026-11-08T06:42:00.000Z",
   "manuallyCorrected": 1,
   "lastCorrectedReviewAt": "2026-11-07T09:14:30.244Z",
   "concurrentMerge": {
@@ -263,11 +263,11 @@
     "unrealTeamsWithCash": 2
   },
   "latestManualReview": {
-    "reviewedAt": "2026-11-08T06:26:10.820Z",
-    "reviewedCandidates": 12,
-    "published": 5,
-    "duplicateCandidatesResolved": 5,
-    "remainingPending": 63,
+    "reviewedAt": "2026-11-08T06:42:00.000Z",
+    "reviewedCandidates": 18,
+    "published": 15,
+    "duplicateCandidatesResolved": 3,
+    "remainingPending": 45,
     "policy": "attendance-only"
   }
 }
