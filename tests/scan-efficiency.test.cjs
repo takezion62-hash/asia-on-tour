@@ -18,7 +18,7 @@ test('skips completed and future retry windows, preserves checkpoint immutabilit
   due:{retryAfter:'2026-11-07T00:00:00Z',nextPage:9,totalPages:10},
   unreal:{complete:true,epicIdsRetained:false,nextPage:9,totalPages:10}}};
  const old=JSON.stringify(state);
- assert.deepEqual(finishableWindows(wins,state,10,now).map(x=>x.key),['due','unreal']);
+ assert.deepEqual(finishableWindows(wins,state,10,now).map(x=>x.key),['due']);
  assert.equal(JSON.stringify(state),old);
 });
 test('safety cap prevents a large backlog from monopolizing a run',()=>{
