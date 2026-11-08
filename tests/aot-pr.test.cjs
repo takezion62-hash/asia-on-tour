@@ -607,3 +607,61 @@ test('repeated identical final sessions never earn two qualification bonuses',()
  approx(p.qualificationBonus,10);
  assert.equal(p.qualificationCount,1);
 });
+
+
+const publishedAttendanceCatalog=catalog({
+  id:'s42-reload-vc',name:'Solo Reload Victory Cup',seasonId:'S42',
+  sourceEventIds:['S42_ReloadSoloVictoryCup']
+});
+const publishedAttendance=(extra={})=>event({
+  id:'att-a',date:'2026-10-24',region:'NAW',kind:'参加確認',
+  event:'Solo Reload Victory Cup',tournamentId:'s42-reload-vc',seasonId:'S42',
+  player:'P1',players:['P1'],round:'Event 5 · Round 1 / 参加確認',
+  rank:500,points:180,kills:12,vrs:0,matches:8,prize:null,
+  source:'https://www.fortnite.com/competitive/events/S42_ReloadSoloVictoryCup/?region=NAW&round=S42_ReloadSoloVictoryCup_Event5_Round1_NAW',
+  ...extra
+});
+test('published verified 参加確認 earns AOT PR attendance, rank and kills, without bonuses',()=>{
+  const record=publishedAttendance();
+  assert.equal(PR.verifiedPublishedAttendance(record,publishedAttendanceCatalog),true);
+  const report=score([record],publishedAttendanceCatalog),p=report.byName.get('P1');
+  assert.equal(report.publishedParticipationIncluded,1);
+  assert.equal(report.archivedParticipationIncluded,0);
+  assert.equal(report.participationIncluded,1);
+  approx(p.attendance,10);
+  approx(p.placement,100/Math.sqrt(500)*.35);
+  approx(p.eliminations,12*.7*.35);
+  approx(p.participationScore,p.score);
+  approx(p.qualificationBonus,0);
+  approx(p.bonus,0);
+  assert.equal(p.rows[0].participationOnly,true);
+  assert.equal(record.participationOnly,undefined);
+});
+test('no PR for unapproved, incomplete or non-official published 参加確認',()=>{
+  for(const extra of [
+    {verified:false},{reviewOnly:true},{reported:true},{partial:true},
+    {prize:100},{rank:null},{points:-1},{kills:-1},{matches:0},{vrs:99},
+    {date:'2026-13-99'},{seasonId:'S43'},{tournamentId:'wrong'},
+    {event:'wrong'},{qualification:'qualified'},{status:'予選突破'},
+    {source:'https://evil.example/competitive/events/S42_ReloadSoloVictoryCup/?region=NAW&round=S42_ReloadSoloVictoryCup_Event5_Round1_NAW'},
+    {source:'https://fortnitetracker.com/events/epicgames_S42_ReloadSoloVictoryCup_NAW?window=S42_ReloadSoloVictoryCup_Event5_Round1_NAW'},
+    {source:'https://www.fortnite.com/competitive/events/S42_Other/?region=NAW&round=S42_ReloadSoloVictoryCup_Event5_Round1_NAW'}
+  ]){
+    const record=publishedAttendance(extra);
+    assert.equal(PR.verifiedPublishedAttendance(record,publishedAttendanceCatalog),false,JSON.stringify(extra));
+    assert.equal(score([record],publishedAttendanceCatalog).playerCount,0,JSON.stringify(extra));
+  }
+});
+test('same session published result wins, attendance duplicates deterministic',()=>{
+  const base=publishedAttendance({id:'att-a',rank:500});
+  const duplicate=publishedAttendance({id:'att-z',rank:450,points:190});
+  const a=score([base,duplicate],publishedAttendanceCatalog);
+  const b=score([duplicate,base],publishedAttendanceCatalog);
+  assert.equal(a.recordCount,1);
+  assert.equal(b.recordCount,1);
+  approx(a.byName.get('P1').score,b.byName.get('P1').score);
+  const final=event({id:'fin',kind:'賞金決勝',rank:2,kills:8});
+  const together=score([base,final],publishedAttendanceCatalog);
+  assert.equal(together.publishedParticipationIncluded,0);
+  assert.equal(together.recordCount,1);
+});

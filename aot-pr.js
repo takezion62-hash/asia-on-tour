@@ -1,4 +1,4 @@
-/* ASIA ON TOUR Power Ranking v1.10 — source-backed qualification auditing and safe participation scoring */
+/* ASIA ON TOUR Power Ranking v1.12 — source-backed qualification auditing and safe participation scoring */
 (function (root, factory) {
   'use strict';
   const api = factory();
@@ -7,7 +7,7 @@
 })(typeof globalThis === 'object' ? globalThis : this, function () {
   'use strict';
 
-  const VERSION = '1.11.0';
+  const VERSION = '1.12.0';
   const REGIONS = Object.freeze({ EU: 1.4, BR: 1.3, NAC: 1.2, ME: 1.1, OCE: 1.1, NAW: 1.0 });
   const STAGES = Object.freeze({ '予選': 0.35, '賞金決勝': 1, '決勝': 1, 'Practice決勝': 1,
     'Performance決勝': 1, 'スキン大会': 1, 'コスメ大会': 1, 'Test Cup': 1, '参加確認': 0.35 });
@@ -275,6 +275,40 @@
     return original.filter(name=>allowed.has(name));
   }
 
+  // Published, manually approved participation-only records are scored like
+  // verified archive participation, but never count as cash or qualification.
+  function verifiedPublishedAttendance(row,t) {
+    if(!row||row.kind!=='参加確認'||row.participationOnly===true||
+      row.verified!==true||row.reviewOnly===true||row.reported===true||row.partial===true||
+      !(row.prize===null||row.prize===0)||!t||t.id!==row.tournamentId||
+      t.name!==row.event||t.seasonId!==row.seasonId||
+      !Object.hasOwn(REGIONS,row.region)||
+      ![undefined,null,'unverified','outside-cutoff'].includes(row.qualification)||
+      ![undefined,null,'出場確認','通過圏外'].includes(row.status)||
+      typeof row.date!=='string'||!/^\d{4}-\d{2}-\d{2}$/.test(row.date)||
+      !Number.isFinite(Date.parse(row.date))||
+      new Date(row.date).toISOString().slice(0,10)!==row.date||
+      !Number.isSafeInteger(row.rank)||row.rank<1||
+      !Number.isSafeInteger(row.points)||row.points<0||
+      !Number.isSafeInteger(row.kills)||row.kills<0||
+      !Number.isSafeInteger(row.vrs)||row.vrs<0||
+      !Number.isSafeInteger(row.matches)||row.matches<1||row.vrs>row.matches)return false;
+    const size=TEAM_SIZES[t.team];
+    const people=Array.isArray(row.players)&&row.players.length?row.players:[row.player];
+    if(!size||people.length!==size||new Set(people).size!==size||
+      people.some(p=>typeof p!=='string'||!p.trim())||
+      row.player!==people.join(' / '))return false;
+    try{
+      const u=new URL(row.source),match=u.pathname.match(/^\/competitive\/events\/([^/]+)\/$/);
+      const event=match?decodeURIComponent(match[1]):null,round=u.searchParams.get('round');
+      return u.protocol==='https:'&&u.hostname==='www.fortnite.com'&&
+        !u.username&&!u.password&&!u.hash&&
+        Array.isArray(t.sourceEventIds)&&t.sourceEventIds.includes(event)&&
+        typeof round==='string'&&round.startsWith(row.seasonId+'_')&&
+        round.endsWith('_'+row.region)&&u.searchParams.get('region')===row.region;
+    }catch{return false}
+  }
+
   function uniqueRecords(records, names, classify) {
     const byId = new Map(), anonymous = [], conflicts = new Set();
     for (const record of records) {
@@ -377,21 +411,51 @@
         finalAwarded.get(slot).push(record.date);
       }
     }
-    let included = 0, participationIncluded=0, unknownModeKills = 0, missingRanks = 0, missingKills = 0, ignored = 0;
+    let included=0,participationIncluded=0,archivedParticipationIncluded=0,publishedParticipationIncluded=0;
+    let unknownModeKills=0,missingRanks=0,missingKills=0,ignored=0;
+    const slot=(row,t,name)=>stable([name,t.id,row.date,row.region,sessionKey(row)]);
+    const regularSlots=new Set(),attendanceWinner=new Map();
+    // Full published performance wins over attendance-only for that session.
+    // Conflicting attendance imports select a stable ID winner, not row order.
+    for(const row of unique.records){
+      if(!row||row.verified!==true||!Object.hasOwn(REGIONS,row.region))continue;
+      const t=options.classify(row)||{};
+      if(eventMultiplier(row,t)===null)continue;
+      const attendance=verifiedPublishedAttendance(row,t);
+      if(row.kind==='参加確認'&&!attendance)continue;
+      for(const name of cleanPeople(row,options.names)){
+        const key=slot(row,t,name);
+        if(attendance){
+          const prior=attendanceWinner.get(key);
+          if(!prior||String(row.id||'').localeCompare(String(prior.id||''))<0)
+            attendanceWinner.set(key,row);
+        }else if(row.participationOnly!==true)regularSlots.add(key);
+      }
+    }
 
-    for (const record of unique.records) {
-      if (record.verified !== true || (record.kind==='参加確認'&&record.participationOnly!==true) ||
-        (record.participationOnly===true && (record.reviewOnly===true||record.prize!==null||
+    for(const record of unique.records){
+      if(!record||record.verified!==true||
+        (record.participationOnly===true&&(record.reviewOnly===true||record.prize!==null||
           record.kind!=='参加確認'&&record.kind!=='予選'||
-          !['unverified','outside-cutoff'].includes(record.qualification))) ||
-        !(record.kind in STAGES) || !Object.hasOwn(REGIONS, record.region) ||
-        (region !== 'all' && region !== record.region)) { ignored++; continue; }
-      const tournament = options.classify(record) || {};
-      const eventFactor = eventMultiplier(record, tournament);
-      if (eventFactor === null) { ignored++; continue; }
-      const people = cleanPeople(record, options.names);
-      if (!people.length || typeof record.date !== 'string' || !record.date) { ignored++; continue; }
-      included++;if(record.participationOnly===true)participationIncluded++;
+          !['unverified','outside-cutoff'].includes(record.qualification)))||
+        !(record.kind in STAGES)||!Object.hasOwn(REGIONS,record.region)||
+        (region!=='all'&&region!==record.region)){ignored++;continue}
+      const tournament=options.classify(record)||{};
+      const publishedAttendance=record.kind==='参加確認'&&record.participationOnly!==true;
+      if(publishedAttendance&&!verifiedPublishedAttendance(record,tournament)){ignored++;continue}
+      const eventFactor=eventMultiplier(record,tournament);
+      if(eventFactor===null){ignored++;continue}
+      let people=cleanPeople(record,options.names);
+      if(publishedAttendance)people=people.filter(name=>{
+        const key=slot(record,tournament,name);
+        return !regularSlots.has(key)&&attendanceWinner.get(key)===record;
+      });
+      if(!people.length||typeof record.date!=='string'||!record.date){ignored++;continue}
+      const attendanceOnly=publishedAttendance||record.participationOnly===true;
+      included++;
+      if(attendanceOnly)participationIncluded++;
+      if(record.participationOnly===true)archivedParticipationIncluded++;
+      if(publishedAttendance)publishedParticipationIncluded++;
       const stageFactor = STAGES[record.kind], regionFactor = REGIONS[record.region];
       const hasRank = Number.isInteger(record.rank) && record.rank > 0;
       const hasKills = Number.isInteger(record.kills) && record.kills >= 0;
@@ -431,15 +495,15 @@
           appearances: 0, roundRecords: 0, participationScore:0, participationRecords:0, rows: [], regions: new Set() };
         value.score += total; value.attendance += attendance; value.placement += placement;
         value.eliminations += elimination; value.bonus += bonus; value.qualificationBonus += qualificationBonus;
-        if(record.participationOnly===true){value.participationScore+=total;value.participationRecords++;}
+        if(attendanceOnly){value.participationScore+=total;value.participationRecords++;}
         value.qualificationCount += Number(qualificationBonus>0); value.appearances += Number(newAppearance);
         value.roundRecords++; value.regions.add(record.region);
         value.rows.push({ id: record.id || null, date: record.date, region: record.region, event: record.event,
           kind: record.kind, rank: hasRank ? record.rank : null, kills: hasKills ? record.kills : null,
           source: record.source || null, attendance, placement, eliminations: elimination, bonus, bonusUnits, bonusMode: policy?.mode || null,
           qualificationBonus, qualificationEvidence:qualificationBonus>0?chosenQualification.evidence:null,
-          participationOnly:record.participationOnly===true,
-          participationStatus:record.participationOnly===true?record.status:null,total,
+          participationOnly:attendanceOnly,
+          participationStatus:attendanceOnly?(record.status==='通過圏外'?'通過圏外':'出場確認'):null,total,
           regionMultiplier: regionFactor, eventMultiplier: eventFactor, stageMultiplier: stageFactor,
           modeKnown: killCoefficient !== null });
         players.set(name, value);
@@ -453,11 +517,11 @@
         rows: player.rows.slice().sort((a, b) => b.total - a.total || b.date.localeCompare(a.date)) };
     });
     return { version: VERSION, region, ranked, byName: new Map(ranked.map(player => [player.name, player])),
-      recordCount: included, participationIncluded, playerCount: ranked.length, ignored, duplicateCount: unique.duplicateCount,
+      recordCount: included, participationIncluded, archivedParticipationIncluded, publishedParticipationIncluded, playerCount: ranked.length, ignored, duplicateCount: unique.duplicateCount,
       conflictingDuplicateCount: unique.conflictingCount, missingRanks, missingKills, unknownModeKills };
   }
 
   return Object.freeze({ VERSION, REGIONS, STAGES, QUALIFICATION_BASE, eventMultiplier,
     officialQualificationCutoff, verifiedQualificationSource, verifiedScreenshotQualification,
-    verifiedFinalEvidence, qualificationEvidence, sessionKey, calculate });
+    verifiedFinalEvidence, qualificationEvidence, verifiedPublishedAttendance, sessionKey, calculate });
 });
