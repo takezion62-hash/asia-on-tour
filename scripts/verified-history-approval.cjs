@@ -28,7 +28,15 @@ function decide(row,win,checkpoint,data){
  const catalog=data.tournaments.catalog.find(x=>x.id===row.tournamentId);
  if(!catalog||catalog.team!==(rule.team||'solo')||catalog.series!=='victory-cup'||catalog.seasonId!==rule.seasonId)return decline('大会カタログ不一致');
  if(win.tournamentId!==row.tournamentId||win.seasonId!==rule.seasonId||row.seasonId!==rule.seasonId||!rule.eventIds.includes(win.eventId)||!catalog.sourceEventIds.includes(win.eventId))return decline('公式イベントID不一致');
- if(row.date!==win.dateJst||row.region!==win.region||!Object.hasOwn(rule.advance,row.region)||row.round!==win.round||row.kind!==win.kind)return decline('開催日・地域・ラウンド不一致');
+ // S30/S31 official rules say ALL Regions pay only for Round 2 VRs. NA was
+ // a unified qualifier region in 2024: NEVER map its Round 1 cutoff to NAC.
+ // Its observed NAC Round 2 zero-VR record is still deterministically $0.
+ const oldNacZeroFinal=['S30','S31'].includes(rule.seasonId)&&rule.team==='solo'&&
+  row.region==='NAC'&&row.kind==='賞金決勝'&&row.vrs===0&&row.prize===null;
+ if(row.date!==win.dateJst||row.region!==win.region||
+  (!Object.hasOwn(rule.advance,row.region)&&!oldNacZeroFinal)||
+  row.round!==win.round||row.kind!==win.kind)
+  return decline('開催日・地域・ラウンド不一致');
  if(!row.id?.startsWith('auto-'+rule.seasonId.toLowerCase()+'-')||row.verified!==true||!Array.isArray(checkpoint.proposals)||!checkpoint.proposals.some(x=>x.id===row.id))return decline('照合済み候補ではありません');
  const lineup=participants(row),teamSize=rule.team==='squad'?4:1;
  if(lineup.length!==teamSize||new Set(lineup).size!==lineup.length
