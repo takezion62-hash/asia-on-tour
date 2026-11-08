@@ -1,26 +1,26 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-08T01:19:24.654Z",
+  "checkedAt": "2026-11-08T05:03:04.771Z",
   "mode": "review",
   "scope": "recent",
   "dateMode": null,
-  "selectedWindows": 3,
+  "selectedWindows": 5,
   "fromDate": null,
   "toDate": null,
   "provider": "osirion",
-  "linkedPlayers": 524,
-  "trackedWindows": 20,
-  "found": 1,
+  "linkedPlayers": 536,
+  "trackedWindows": 22,
+  "found": 2,
   "skipped": 0,
   "imported": 0,
-  "scannedPages": 36,
-  "completedWindows": 17,
+  "scannedPages": 48,
+  "completedWindows": 18,
   "identityConflicts": 3,
-  "alreadyRegistered": 36,
+  "alreadyRegistered": 37,
   "autoApprovedTotal": 782,
   "invalidCachedCandidates": 0,
-  "manualReviewCandidates": 0,
+  "manualReviewCandidates": 2,
   "autoApprovedCosmeticThisRun": 0,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
@@ -30,31 +30,31 @@
   "transientFailures": 0,
   "malformedFailures": 0,
   "skippedLeaderboards": [],
-  "reviewOnlyWindows": 20,
-  "reviewOnlyCandidates": 0,
+  "reviewOnlyWindows": 22,
+  "reviewOnlyCandidates": 2,
   "unmappedEvents": 2,
   "unmappedEventIds": [
     "S42_ArenaTestCup",
     "S43_OnePieceZoroCup_ZB"
   ],
-  "message": "直近AUTO SYNCのME 2026/11/7 Trios Cash Cup、Stain/Job/ZAZI 673位・272pt・87K・1VRを個別確認し、公式賞金上位5組の圏外につき現金$0で掲載。レビュー残り0件。順位表全34ページの取得は未完了（先頭24ページ検証済み）。既存戦績・賞金は保持。",
+  "message": "最新版と安全統合：新規掲載0件、重複スキップ0件、要確認の競合0件、確認待ち2件。既存の戦績・賞金は保持。",
   "concurrentMerge": {
     "appended": 0,
     "alreadyPublished": 0,
     "reviewConflicts": 0,
-    "keptPending": 1,
-    "reconciledAt": "2026-11-08T01:19:26.619Z"
+    "keptPending": 2,
+    "reconciledAt": "2026-11-08T05:03:06.518Z"
   },
   "coverage": {
-    "total": 20,
-    "completed": 17,
+    "total": 22,
+    "completed": 18,
     "notStarted": 0,
-    "partial": 3,
+    "partial": 4,
     "retryWaiting": 0,
     "retryDue": 0,
-    "remaining": 3,
+    "remaining": 4,
     "retryCount": 0,
-    "completionPercent": 85,
+    "completionPercent": 81.8,
     "byRegion": {
       "EU": {
         "total": 5,
@@ -62,9 +62,9 @@
         "pending": 1
       },
       "NAC": {
-        "total": 4,
+        "total": 5,
         "completed": 4,
-        "pending": 0
+        "pending": 1
       },
       "OCE": {
         "total": 3,
@@ -73,8 +73,8 @@
       },
       "ME": {
         "total": 3,
-        "completed": 2,
-        "pending": 1
+        "completed": 3,
+        "pending": 0
       },
       "BR": {
         "total": 3,
@@ -82,16 +82,16 @@
         "pending": 1
       },
       "NAW": {
-        "total": 2,
+        "total": 3,
         "completed": 2,
-        "pending": 0
+        "pending": 1
       }
     },
     "byYear": {
       "2026": {
-        "total": 20,
-        "completed": 17,
-        "pending": 3
+        "total": 22,
+        "completed": 18,
+        "pending": 4
       }
     },
     "outsideScopeCheckpoints": 0,
@@ -102,19 +102,8 @@
         "region": "EU",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 12,
-        "totalPages": 100,
-        "retryAfter": null,
-        "errorCode": null
-      },
-      {
-        "window": "epicgames_S43_TriosCashCup_ME/S43_TriosCashCup_Event1_ME",
-        "date": "2026-11-07",
-        "region": "ME",
-        "series": "cash-cup",
-        "status": "partial",
         "nextPage": 24,
-        "totalPages": 34,
+        "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
       },
@@ -124,8 +113,30 @@
         "region": "BR",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 12,
+        "nextPage": 24,
         "totalPages": 55,
+        "retryAfter": null,
+        "errorCode": null
+      },
+      {
+        "window": "epicgames_S43_TriosCashCup_NAC/S43_TriosCashCup_Event1_NAC",
+        "date": "2026-11-08",
+        "region": "NAC",
+        "series": "cash-cup",
+        "status": "partial",
+        "nextPage": 2,
+        "totalPages": 100,
+        "retryAfter": null,
+        "errorCode": null
+      },
+      {
+        "window": "epicgames_S43_TriosCashCup_NAW/S43_TriosCashCup_Event1_NAW",
+        "date": "2026-11-08",
+        "region": "NAW",
+        "series": "cash-cup",
+        "status": "partial",
+        "nextPage": 12,
+        "totalPages": 40,
         "retryAfter": null,
         "errorCode": null
       }

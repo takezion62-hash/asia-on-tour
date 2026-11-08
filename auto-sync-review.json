@@ -2,6 +2,77 @@
   "version": 1,
   "status": "review",
   "checkedAt": "2026-11-07T13:02:44.444Z",
-  "proposals": [],
+  "proposals": [
+    {
+      "id": "auto-s43-d4e4db0f245a",
+      "date": "2026-11-08",
+      "region": "NAW",
+      "player": "りあにー / maroa / Plank",
+      "playerRaw": "グランドファイナルに行くために / NE maroafnǃ / Celis Yhwach.",
+      "event": "Trios Cash Cup Battle Royale",
+      "round": "Event 1 / 参加確認",
+      "rank": 23,
+      "points": 430,
+      "kills": 70,
+      "vrs": 2,
+      "prize": null,
+      "kind": "参加確認",
+      "matches": 10,
+      "seasonId": "S43",
+      "chapter": 7,
+      "season": 5,
+      "tournamentId": "ch7s5-trios-cash-cup",
+      "source": "https://www.fortnite.com/competitive/events/S43_TriosCashCup/?region=NAW&round=S43_TriosCashCup_Event1_NAW",
+      "verified": true,
+      "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+      "reviewOnly": true,
+      "reviewReason": "順位表の連続した上位順位の取得が完了していません",
+      "players": [
+        "りあにー",
+        "maroa",
+        "Plank"
+      ],
+      "teamAccountIds": [
+        "0ab44e46947c4f988644b13b672e530e",
+        "767efa71657946cebbe2922277c23584",
+        "97f0138a1b8d45e2a7ad756b914f2790"
+      ]
+    },
+    {
+      "id": "auto-s43-5bc1cca43d3e",
+      "date": "2026-11-08",
+      "region": "NAW",
+      "player": "R1ze / meath / Zagouの弟",
+      "playerRaw": "Helix R1ze 777 / vamos favsyǃ / NŁT zagouの弟",
+      "event": "Trios Cash Cup Battle Royale",
+      "round": "Event 1 / 参加確認",
+      "rank": 128,
+      "points": 363,
+      "kills": 83,
+      "vrs": 1,
+      "prize": null,
+      "kind": "参加確認",
+      "matches": 11,
+      "seasonId": "S43",
+      "chapter": 7,
+      "season": 5,
+      "tournamentId": "ch7s5-trios-cash-cup",
+      "source": "https://www.fortnite.com/competitive/events/S43_TriosCashCup/?region=NAW&round=S43_TriosCashCup_Event1_NAW",
+      "verified": true,
+      "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+      "reviewOnly": true,
+      "reviewReason": "順位表の連続した上位順位の取得が完了していません",
+      "players": [
+        "R1ze",
+        "meath",
+        "Zagouの弟"
+      ],
+      "teamAccountIds": [
+        "2fda3f8f2c2749f5b57daee2c7c8b3f0",
+        "5d58d012509f401cb2c3cfe872ed1d17",
+        "aa5a5f035ef24a8c90b003dcf9385b8e"
+      ]
+    }
+  ],
   "manualReviewedAt": "2026-11-08T01:59:35.049Z"
 }
