@@ -52,3 +52,12 @@ test('duo kills are never treated as individual kills and unsafe event text is e
  assert.doesNotMatch(html,/href="javascript:/);
  assert.match(html,/&lt;img/);
 });
+
+test('metric confidence depends on records with observed values, not unrelated recorded windows',()=>{
+ const rows=Array.from({length:6},(_,i)=>row(i,{kills:i<4?null:36,vrs:i<4?null:1}));
+ const r=analyze(rows);
+ assert.equal(r.scouting.attack.records,2);
+ assert.equal(r.scouting.attack.level,'データ不足');
+ assert.equal(r.scouting.victory.level,'データ不足');
+ assert.equal(r.scouting.stability.spread,null);
+});
