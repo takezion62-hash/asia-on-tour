@@ -2334,6 +2334,32 @@
           "url": "https://www.osirion.gg/tournaments/S36_PlayStationCup_Final_NAW"
         }
       ]
+    },
+    {
+      "id": "ch4s3-playstation-cup-zero-build",
+      "name": "PlayStation Cup Zero Build",
+      "chapter": 4,
+      "season": 3,
+      "seasonId": "S25",
+      "sourceEventIds": [
+        "S25_PlaystationCupZBJune"
+      ],
+      "series": "playstation-cup",
+      "mode": "zero-build",
+      "subtype": "playstation-cup",
+      "team": "solo",
+      "platform": "playstation",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "ユーザー提供の2023/6/20 NAC PlayStation Cup Zero Build決勝画面（Laimustk 9位$500 / 3peace 82位$100、どちらも6試合・0VR）",
+          "url": "https://fortnitetracker.com/events/epicgames_S25_PlaystationCupZBJune_NAC?window=S25_PlaystationCupZBJune_Final_NAC"
+        },
+        {
+          "text": "Epic IDごとのFortnite Trackerイベントプロフィール照合。",
+          "url": "https://fortnitetracker.com/profile/all/Laimustk/events?id=49c0b08e-1e72-45c1-bd34-3682d10d1043"
+        }
+      ]
     }
   ]
 }
