@@ -6,6 +6,28 @@
   const fmt=v=>Number.isFinite(v)?v.toLocaleString('ja-JP'):'—';
   const field=(label,value)=>{const d=document.createElement('div');d.className='auto-sync-stat';const a=document.createElement('span');a.textContent=label;const b=document.createElement('strong');b.textContent=value;d.append(a,b);return d};
 
+  // Keep the reasons visible; an unverified prize and an unfinished scan
+  // require very different operator actions.
+  function appendReviewReasons(root,rows){
+    if(!Array.isArray(rows)||!rows.length)return;
+    const grouped=new Map();
+    for(const row of rows){
+      const reason=typeof row.reviewReason==='string'&&row.reviewReason.trim()?
+        row.reviewReason.trim():'要追加確認';
+      grouped.set(reason,(grouped.get(reason)||0)+1);
+    }
+    const box=document.createElement('section');box.className='auto-sync-coverage';
+    const heading=document.createElement('strong');heading.textContent='確認待ちの理由（多い順）';box.append(heading);
+    const list=document.createElement('ul');
+    for(const [reason,count] of [...grouped].sort((a,b)=>b[1]-a[1]).slice(0,6)){
+      const item=document.createElement('li');
+      item.textContent=reason+'：'+fmt(count)+'件';list.append(item);
+    }
+    box.append(list);
+    const note=document.createElement('p');
+    note.textContent='未調査のページと、公式ルール・本人確認が必要な候補を区別して表示しているょ';
+    box.append(note);root.append(box);
+  }
   function appendCoverage(root,c){
     if(!c||!Number.isFinite(c.total))return;
     for(const [label,value] of [
@@ -53,6 +75,7 @@
         const q=await fetch(new URL('auto-sync-review.json',base),{cache:'no-store'});
         if(!q.ok)throw Error('review');
         const v=await q.json();if(v.version!==1||!Array.isArray(v.proposals))throw Error('format');
+        appendReviewReasons(area,v.proposals);
         if(!v.proposals.length)candidates.textContent='確認待ちの候補はありません';
         else {
           const ul=document.createElement('ul');ul.className='auto-sync-proposals';
@@ -100,6 +123,7 @@
       if(!response2.ok)throw Error('history review HTTP '+response2.status);
       const review=await response2.json();
       if(review.version!==1||!Array.isArray(review.proposals))throw Error('history review format');
+      appendReviewReasons(historyArea,review.proposals);
       if(!review.proposals.length){historyCandidates.textContent='現在、確認候補はありません';}
       else{
         const ul=document.createElement('ul');ul.className='auto-sync-proposals';

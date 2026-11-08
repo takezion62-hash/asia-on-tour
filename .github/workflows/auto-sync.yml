@@ -4,6 +4,8 @@ on:
     branches: [main]
     paths:
       - "scripts/osirion-sync.cjs"
+      - "scripts/verified-partial-page.cjs"
+      - "tests/verified-partial-page.test.cjs"
       - "scripts/scan-coverage.cjs"
       - "tests/scan-coverage.test.cjs"
       - "scripts/safe-sync-merge.cjs"
@@ -57,7 +59,7 @@ jobs:
       - name: Validate data and run sync unit tests
         run: |
           npm run validate
-          node --test tests/auto-sync.test.cjs tests/osirion-sync.test.cjs tests/non-victory-auto-sync.test.cjs tests/automatic-cosmetic-approval.test.cjs tests/cosmetic-rank-rules.test.cjs tests/automatic-cash-approval.test.cjs tests/automatic-unreal-approval.test.cjs tests/automatic-performance-approval.test.cjs tests/tournament-rules.test.cjs
+          node --test tests/auto-sync.test.cjs tests/osirion-sync.test.cjs tests/verified-partial-page.test.cjs tests/non-victory-auto-sync.test.cjs tests/automatic-cosmetic-approval.test.cjs tests/cosmetic-rank-rules.test.cjs tests/automatic-cash-approval.test.cjs tests/automatic-unreal-approval.test.cjs tests/automatic-performance-approval.test.cjs tests/tournament-rules.test.cjs
       - name: Preserve verified recent scan output
         run: node scripts/safe-sync-merge.cjs snapshot auto "$RUNNER_TEMP/aot-auto-scanned.json"
       - name: Reconcile and commit onto newest main (conflict-safe)

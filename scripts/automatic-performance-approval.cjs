@@ -1,6 +1,7 @@
 'use strict';
 // S43 Trios Performance Evaluation: exact EU/NAC Round 1 top 26 and Round 2
 // personal $400 per VR. Legacy seasons and other event formats stay review-only.
+const {verifiedPartialPage}=require('./verified-partial-page.cjs');
 const RULES=Object.freeze(Object.fromEntries(
  require('../tournament-rules.json').rules
  .filter(rule=>rule.series==='performance-evaluation'&&rule.autoApproval==='verified-performance-vr')
@@ -46,9 +47,12 @@ function decide(row,win,checkpoint,data){
  if(!row?.reviewOnly||row.kind!=='参加確認'||row.prize!==null||row.verified!==true||
     !/^auto-s43-[0-9a-f]{12}$/.test(row.id||''))
   return decline('確定したAPI参加候補と一致しません');
- if(!checkpoint?.complete||checkpoint.rankingOrderValid!==true||
-    !Array.isArray(checkpoint.proposals)||
-    !checkpoint.proposals.some(p=>JSON.stringify(p)===JSON.stringify(row)))
+ // A 0-VR Round 2 is a known $0. Positive payouts and Round 1
+ // advancement continue to require the completed leaderboard.
+ const zeroVrFinal=state.round===2&&row.vrs===0&&row.points===0;
+ if(checkpoint?.rankingOrderValid!==true||!Array.isArray(checkpoint?.proposals)||
+    !checkpoint.proposals.some(p=>JSON.stringify(p)===JSON.stringify(row))||
+    (!checkpoint.complete&&!(zeroVrFinal&&verifiedPartialPage(row,win,checkpoint))))
   return decline('順位表の全取得または通過ラインまでの正しい並びが未確認');
  const tournament=data.tournaments?.catalog?.find(t=>t.id===rule.id);
  if(!tournament||tournament.name!==row.event||tournament.team!=='trio'||

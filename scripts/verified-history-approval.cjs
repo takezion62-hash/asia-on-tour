@@ -3,6 +3,7 @@
 // A zero-VR final can be recorded as $0 because the rules pay per final-round VR.
 // Positive cash requires a season-specific verified payout rule; unknown events remain in manual review.
 // Single source of truth: the same versioned official rules shown under SOURCES.
+const {verifiedPartialPage}=require('./verified-partial-page.cjs');
 const RULES=Object.freeze(Object.fromEntries(
  require('../tournament-rules.json').rules.filter(rule=>rule.series==='victory-cup')
   .map(rule=>[rule.id,Object.freeze(rule)])));
@@ -15,7 +16,12 @@ const identity=r=>[r.date,r.region,r.tournamentId,roundId(r.round),participants(
 const decline=reason=>({approved:false,reason});
 function decide(row,win,checkpoint,data){
  if(row?.reviewOnly===true||row?.kind==='参加確認'||win?.kind==='参加確認'||(win?.series&&win.series!=='victory-cup'))return decline('確認専用大会は自動承認不可');
- if(!checkpoint?.complete)return decline('順位表の取得が完了していません');
+ // A verified 0-VR final has $0 under official VR-only rules. Its observed
+ // rows need not wait for thousands of unrelated leaderboard pages.
+ // Qualifiers and positive-VR cash still require completed official scans.
+ if(!checkpoint?.complete&&!(row.kind==='賞金決勝'&&row.vrs===0&&row.prize===null&&
+      verifiedPartialPage(row,win,checkpoint)))
+  return decline('順位表の取得が完了していません');
  const rule=RULES[row.tournamentId];
  if(!rule)return decline('未検証のシーズンまたは大会');
  const catalog=data.tournaments.catalog.find(x=>x.id===row.tournamentId);

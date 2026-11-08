@@ -108,3 +108,18 @@ test('batch evaluation prevents duplicate roster aliases and retains unrelated m
  assert.equal(out.approved[0].prize,0);
  assert.equal(out.held.length,1);
 });
+
+
+test('prize-free verified Cash Cup team can publish from mature continuous partial pages',()=>{
+ const w={...window(),end:Date.parse('2026-11-07T06:00:00Z')};
+ const unpaid=row(500,w),winner=row(3,w);
+ const partial=x=>({complete:false,rankingOrderValid:true,nextPage:5,pages:5,totalPages:40,lastSeenRank:500,
+  lastSuccessAt:'2026-11-08T08:00:00Z',proposals:[x]});
+ const result=decide(unpaid,w,partial(unpaid),db());
+ assert.equal(result.approved,true,result.reason);
+ assert.equal(result.record.prize,0);
+ assert.equal(result.record.prizePerPlayer,0);
+ assert.equal(decide(winner,w,partial(winner),db()).approved,false,'cash must wait for complete leaderboard');
+ assert.equal(decide(unpaid,w,{...partial(unpaid),rankingOrderValid:false},db()).approved,false);
+ assert.equal(decide(unpaid,w,{...partial(unpaid),lastSeenRank:400},db()).approved,false);
+});

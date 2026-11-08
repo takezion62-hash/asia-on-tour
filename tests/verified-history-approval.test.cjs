@@ -107,3 +107,20 @@ test('S42 solo cash finals also derive $100 per Victory Royale with exact rules'
  assert.equal(result.approved,true);
  assert.equal(result.record.prize,200);
 });
+
+
+test('mature partial leaderboard may publish a proven 0-VR final, never positive cash or qualification',()=>{
+ const f={...w,end:Date.parse('2026-08-01T06:00:00Z'),windowId:'S41_ReloadSoloVictoryCup_Round2_Day1_ME',
+  kind:'賞金決勝',round:'Day 1 · Round 2 / 賞金決勝'};
+ const zero={...row,kind:f.kind,round:f.round,rank:216,points:0,vrs:0,matches:3,prize:null,source:source(f)};
+ const cp={complete:false,rankingOrderValid:true,nextPage:4,pages:4,totalPages:30,lastSeenRank:400,
+  lastSuccessAt:'2026-11-07T09:00:00Z',proposals:[zero]};
+ const accepted=decide(zero,f,cp,data());
+ assert.equal(accepted.approved,true,accepted.reason);
+ assert.equal(accepted.record.prize,0);
+ const positive={...zero,vrs:1};
+ assert.equal(decide(positive,f,{...cp,proposals:[positive]},data()).approved,false);
+ const prelim={...row,rank:319};
+ assert.equal(decide(prelim,{...w,end:f.end},{...cp,proposals:[prelim]},data()).approved,false);
+ assert.equal(decide(zero,f,{...cp,lastErrorCode:'INVALID_PAGE'},data()).approved,false);
+});
