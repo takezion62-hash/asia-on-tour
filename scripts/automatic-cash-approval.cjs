@@ -1,6 +1,7 @@
 'use strict';
 // Opt-in, tournament-rule-backed Cash Cup publication for verified teams, including prize-free finishing ranks.
 // All other Cash Cups remain review-only until a complete official payout rule is registered.
+const {verifiedPartialPage}=require('./verified-partial-page.cjs');
 const RULES=Object.freeze(Object.fromEntries(
  require('../tournament-rules.json').rules
   .filter(rule=>rule.series==='cash-cup'&&rule.autoApproval==='verified-team-rank')
@@ -52,9 +53,12 @@ function decide(row,win,checkpoint,data){
  if(!/^auto-s[0-9]+-[a-f0-9]{12}$/.test(row.id||''))return decline('公式スキャン候補ID不一致');
  const cutoff=cashLimitForWindow(win);
  if(cutoff===null)return decline('開催枠・イベント番号・地域の公式条件が未確認');
- if(!checkpoint?.complete||checkpoint.rankingOrderValid!==true||
-  !Array.isArray(checkpoint.proposals)||
-  !checkpoint.proposals.some(x=>JSON.stringify(x)===JSON.stringify(row)))
+ // Out-of-prize ranks pay $0 regardless of later pages. Do not grant cash
+ // from a partial leaderboard; cash-eligible ranks still require completion.
+ const zeroCash=cashPrize(rule,win?.region,row.rank)===0;
+ if(checkpoint?.rankingOrderValid!==true||!Array.isArray(checkpoint?.proposals)||
+  !checkpoint.proposals.some(x=>JSON.stringify(x)===JSON.stringify(row))||
+  (!checkpoint.complete&&!(zeroCash&&verifiedPartialPage(row,win,checkpoint))))
   return decline('順位表の連続した上位順位の取得が完了していません');
  const catalog=data.tournaments?.catalog?.find(x=>x.id===row.tournamentId);
  if(!catalog||catalog.series!=='cash-cup'||catalog.team!==rule.team||
