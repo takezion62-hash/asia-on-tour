@@ -239,6 +239,35 @@
     return {key,label:STYLES[key],attack,victory,breadth,peers:peers.length,
       reason:'同じシーズン・地域・チーム・ゲーム形式・大会シリーズの実測効率の相対位置'};
   }
+
+  // Scouting v1: descriptive evidence only, never an inferred IGL/fragging role
+  // or a subjective power rating. Unknown values stay unknown.
+  function scouting(rows,stats,recent,filters,style){
+    const windows=slotsCount(rows),sample=(matches,records)=>records>=5&&matches>=30?'評価可能':records>=3&&matches>=15?'暫定':'データ不足';
+    const killRows=rows.filter(r=>good(r.matches)&&r.matches>0&&good(r.kills));
+    const validMatches=killRows.reduce((sum,r)=>sum+r.matches,0);
+    let killSpread=null;
+    // Weighted standard deviation across *recorded event windows*, not individual match K/D.
+    if(windows>=5&&killRows.length>=5&&validMatches>=30){
+      const mean=killRows.reduce((sum,r)=>sum+r.kills,0)/validMatches;
+      const variance=killRows.reduce((sum,r)=>sum+r.matches*Math.pow(r.kills/r.matches-mean,2),0)/validMatches;
+      killSpread=Math.sqrt(Math.max(0,variance));
+    }
+    return {
+      scope:'掲載済み・本人確認済み戦績に限る',
+      team:filters.team,windows,regions:stats.regionCount,
+      documentedFinals:stats.finalRecords,documentedPodiums:stats.prizeFinalTop3,
+      attack:{value:stats.kpm,matches:stats.killMatches,records:stats.killRecords,level:sample(stats.killMatches,stats.killRecords)},
+      victory:{value:stats.vrRate,matches:stats.vrMatches,records:stats.vrRecords,level:sample(stats.vrMatches,stats.vrRecords)},
+      stability:{spread:killSpread,matches:validMatches,records:killRows.length,
+        level:killSpread===null?'データ不足':'実測値'},
+      momentum:{ready:recent.ready,reason:recent.reason,deltaKpm:recent.ready?recent.deltaKpm:null,
+        deltaVrRate:recent.ready?recent.deltaVrRate:null},
+      relative:style.key==='unrated'?null:{label:style.label,peers:style.peers},
+      comparable:filters.season!=='all'&&filters.team!=='all'&&filters.mode!=='all'&&filters.series!=='all',
+      limitations:'大会難易度・Ping・対面勝率・戦術ロールは未測定。キルとVRはチーム戦ではチーム合計。'
+    };
+  }
   function analyze(records,name,filters={},helpers={}){
     const f={...FILTER_DEFAULTS,...filters};
     const selection=select(records,{...f,region:'all'},helpers);
@@ -269,11 +298,13 @@
     const recommendedSeason=[...seasonCounts.values()]
       .sort((a,b)=>b.matches-a.matches||Number(b.season.slice(1))-Number(a.season.slice(1)))[0]?.season||null;
     const overlapping=[...new Set([...ownAll.overlapping,...chosen.overlapping])];
+    const recent=momentum(chosen.rows);
     return {player:name,filters:f,stats,style,regions:allRegionMetrics,affinity,trend,
-      specialties:regionalSpecialties,momentum:momentum(chosen.rows),evidence:evidence(chosen.rows),recommendedSeason,
+      specialties:regionalSpecialties,momentum:recent,scouting:scouting(chosen.rows,stats,recent,f,style),
+      evidence:evidence(chosen.rows),recommendedSeason,
       available:ownAll.rows.length,overlapping,conflicts:selection.conflicts,
       quality:adequacy(chosen.rows),coverage:quality(stats,overlapping,selection.conflicts)};
   }
   return Object.freeze({VERSION:1,REGIONS,TEAMS,FILTER_DEFAULTS,STYLES,dedupe,windowKey,select,forPlayer,
-    summarize,slotsCount,adequacy,regionAffinity,regionalLeaders,quality,momentum,evidence,percentile,cohort,analyze});
+    summarize,slotsCount,adequacy,regionAffinity,regionalLeaders,quality,momentum,evidence,percentile,cohort,scouting,analyze});
 });

@@ -5,6 +5,7 @@ const fs=require('node:fs'),path=require('node:path');
 const {linkedAccounts,discover,normalizeRow,getTournaments,getLeaderboard,advancementLimit,historicalEvidenceScore}=require('./osirion-sync.cjs');
 const {prepare}=require('./auto-sync-core.cjs');
 const {appendArchive}=require('./participation-archive.cjs');
+const {finishableWindows}=require('./scan-efficiency.cjs');
 const root=path.resolve(__dirname,'..');
 const read=f=>JSON.parse(fs.readFileSync(path.join(root,f),'utf8'));
 const write=(f,obj)=>fs.writeFileSync(path.join(root,f),JSON.stringify(obj,null,2)+'\n');
@@ -31,6 +32,9 @@ function chooseWindows(windows,state,config,now=Date.now(),records=[]){
  // Reserve separate 2024 and 2025 slots before recent qualifying rounds take over.
  add(legacy2024,1);
  add(legacy2025,1);
+ // Spend one remaining slot finishing a partial board when its rest fits this run.
+ // Fresh results and 2024/2025 historical opportunities keep their existing quotas.
+ add(finishableWindows(available,state,config.maxPagesPerWindowPerRun||8,now,1),1);
  add(older,Math.min(1,limit-chosen.length));
  add(qualifiers,limit-chosen.length);
  add(available.sort((a,b)=>b.end-a.end),limit-chosen.length);

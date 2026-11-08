@@ -11,6 +11,7 @@ const {evaluate:evaluateCash,cashLimitForWindow}=require('./automatic-cash-appro
 const {evaluate:evaluatePerformance,qualifierCutoff,evaluationStage}=require('./automatic-performance-approval.cjs');
 const {evaluate:evaluateUnreal,unrealWindow}=require('./automatic-unreal-approval.cjs');
 const {scanCoverage}=require('./scan-coverage.cjs');
+const {finishableWindows,remainingPages}=require('./scan-efficiency.cjs');
 const root=path.resolve(__dirname,'..');
 const read=name=>JSON.parse(fs.readFileSync(path.join(root,name),'utf8'));
 const write=(name,obj)=>fs.writeFileSync(path.join(root,name),JSON.stringify(obj,null,2)+'\n');
@@ -291,8 +292,10 @@ function selectActiveWindows(windows,state,config,time=Date.now()){
  const priority=(a,b)=>{
   if(due(a)!==due(b))return due(a)?-1:1;
   const progress=w=>{const cp=state.windows[w.key];return cp?.totalPages>0?cp.nextPage/cp.totalPages:0};
+  const finishable=w=>{const cp=state.windows[w.key];const pages=cp?.complete?null:remainingPages(cp);return pages!==null&&pages<=Math.max(1,config.maxPagesPerWindowPerRun||12)};
+  if(finishable(a)!==finishable(b))return finishable(a)?-1:1;
   const progressDiff=progress(b)-progress(a);
-  // Finish already scanned rounds first; then pick the newest competitions.
+  // Finish completable scanned rounds first; then pick newest competitions.
   return progressDiff||b.end-a.end;
  };
  const add=pool=>{
@@ -369,6 +372,12 @@ function selectHistoricalWindows(windows,state,config,time=Date.now(),records=[]
    if(selected.length>=limit)break;
    add(pending.filter(w=>w.dateJst.startsWith(year)&&(series==='victory-cup'?w.series==='victory-cup':w.series!=='victory-cup')));
   }
+ }
+ // Safely finish up to two already scanned leaderboards within one per-window page limit.
+ // Year/series quotas and due retries above remain protected.
+ for(const win of finishableWindows(pending,state,config.maxPagesPerWindowPerRun||10,time,2)){
+  if(selected.length>=limit)break;
+  if(!seen.has(win.key)){selected.push(win);seen.add(win.key)}
  }
  // Reserve a slot for recent completed rounds so fast publication does not wait
  // behind the much larger multi-year backlog.
