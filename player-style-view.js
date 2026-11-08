@@ -85,6 +85,31 @@
      +(cov.overlappingIds?.length?'<p class="style-quality-warning">同じ開催枠の重複疑い '+count(cov.overlappingIds.length)+'件を除外中</p>':'')
      +(cov.conflictingIds?.length?'<p class="style-quality-warning">対象データセット内のID衝突 '+count(cov.conflictingIds.length)+'件を除外中（この選手に限らない）</p>':'')
      +'</div>';
+   // Scouting report is a disclosure inside the existing playstyle fold.
+   // Its numbers are observed summaries, not tactical roles or a strength score.
+   const scout=report.scouting||{};
+   const scoutCard=(label,value,detail)=>'<div class="style-scout-card"><small>'+esc(label)+'</small><strong>'+esc(value)+'</strong><span>'+esc(detail)+'</span></div>';
+   const scoutDelta=(n,percentage=false)=>n==null?'—':(n>0?'+':'')+num(n*(percentage?100:1),2)+(percentage?'pt':'');
+   const scoutHtml='<details class="style-scouting" aria-label="スカウティングレポート">'
+     +'<summary>🧭 スカウティングレポート <small>根拠・データ量・評価保留を確認</small></summary>'
+     +'<div class="style-scout-body"><p class="style-note">実測データから見た海外大会での傾向。総合実力スコアや戦術ロールの推定ではないょ</p>'
+     +'<div class="style-scout-grid">'
+     +scoutCard('攻撃効率',scout.attack?.value==null?'—':num(scout.attack.value,2)+' K/試合',
+       (scout.attack?.level||'データ不足')+' · '+count(scout.attack?.matches||0)+'試合を確認')
+     +scoutCard('勝ち切り効率',scout.victory?.value==null?'—':pct(scout.victory.value),
+       (scout.victory?.level||'データ不足')+' · '+count(scout.victory?.matches||0)+'試合を確認')
+     +scoutCard('キル効率のばらつき',scout.stability?.spread==null?'—':num(scout.stability.spread,2)+' K/試合',
+       (scout.stability?.level||'データ不足')+' · 開催枠ごとの標準偏差（小さいほど変動が小さい）')
+     +scoutCard('遠征の確認記録',scout.windows==null?'—':count(scout.windows)+'開催枠',
+       count(scout.regions||0)+'地域 · 決勝記録'+count(scout.documentedFinals||0)+'件')
+     +'</div><p class="style-scout-context">直近変化：'
+     +(scout.momentum?.ready?'キル効率 '+esc(scoutDelta(scout.momentum.deltaKpm))
+       +' / VR率 '+esc(scoutDelta(scout.momentum.deltaVrRate,true))
+       :esc(scout.momentum?.reason||'実測データ不足'))
+     +'</p><p class="style-scout-context">同条件での相対タイプ：'
+     +esc(scout.relative?.label||'未判定')+(scout.relative?.peers?'（比較可能 '+count(scout.relative.peers)+'名）':'')
+     +'</p><p class="style-note">比較する場合は同一シーズン・ゲーム形式・シリーズ・チーム編成にそろえてね。'
+     +esc(scout.limitations||'データ不足の項目は未判定')+'根拠の大会は下の「計算に使った戦績・出典」で確認できるょ</p></div></details>';
    const eligible=report.affinity;
    const best=eligible.region?'🏅 集計上の得意地域候補：'+eligible.region:'🌍 得意地域：未判定';
    const style='<div class="style-status"><span class="style-tag'+(report.style.key==='unrated'?' is-low':'')+'">'+esc(report.style.label)+'</span><span class="style-small">'+esc(report.style.reason)+'</span></div>';
@@ -137,7 +162,7 @@
      +'<span class="style-fold-desc">攻撃・勝利・得意地域の詳しい分析</span></span>'
      +'<span class="style-fold-action" aria-hidden="true"><span class="style-fold-closed">詳細を見る ⌄</span><span class="style-fold-opened">閉じる ⌃</span></span></summary>'
      +'<div class="style-fold-body">'
-     +filterMarkup+(f.season==='all'&&report.recommendedSeason?'<div class="style-season-help"><span>🌱 シーズンをそろえると地域別の得意傾向をより正確に比較できるょ</span><button type="button" data-style-season-pick="'+esc(report.recommendedSeason)+'">記録が充実した '+esc(report.recommendedSeason)+' に絞る ↗</button></div>':'')+summary+qualityHtml+style+affinity+specialtyHtml+observed+adapt
+     +filterMarkup+(f.season==='all'&&report.recommendedSeason?'<div class="style-season-help"><span>🌱 シーズンをそろえると地域別の得意傾向をより正確に比較できるょ</span><button type="button" data-style-season-pick="'+esc(report.recommendedSeason)+'">記録が充実した '+esc(report.recommendedSeason)+' に絞る ↗</button></div>':'')+summary+qualityHtml+scoutHtml+style+affinity+specialtyHtml+observed+adapt
      +'<h3 class="style-region-title">🌍 地域別パフォーマンス</h3>'+regionStats
      +'<p class="style-region-note">地域の累計キル数では判定しない。得意地域候補は同シーズン・同形式・同シリーズで2地域以上の15試合・3開催枠を満たし、総合差が10点以上の場合のみ表示（キル効率70%＋VR率30%）。大会の難易度差は補正していないょ</p>'
      +'<div class="style-extra">'+percentiles+radar(report.style)+'</div>'
