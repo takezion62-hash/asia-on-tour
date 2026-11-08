@@ -267,6 +267,10 @@
         {
           "id": "playstation-cup",
           "label": "PlayStation Cup"
+        },
+        {
+          "id": "one-piece-zoro-cup-zero-build",
+          "label": "One Piece: Zoro Cup Zero Build"
         }
       ]
     },
@@ -2362,6 +2366,32 @@
         {
           "text": "Epic IDごとのFortnite Trackerイベントプロフィール照合。",
           "url": "https://fortnitetracker.com/profile/all/Laimustk/events?id=49c0b08e-1e72-45c1-bd34-3682d10d1043"
+        }
+      ]
+    },
+    {
+      "id": "ch7s5-one-piece-zoro-cup-zero-build",
+      "name": "One Piece: Zoro Cup Zero Build",
+      "chapter": 7,
+      "season": 5,
+      "seasonId": "S43",
+      "sourceEventIds": [
+        "S43_OnePieceZoroCup_ZB"
+      ],
+      "series": "skin-cup",
+      "mode": "zero-build",
+      "subtype": "one-piece-zoro-cup-zero-build",
+      "team": "duo",
+      "platform": "cross-platform",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "Epic Games公式2026/11/5規則：One Piece Zoro Cup Zero Buildはデュオの独立開催枠で最大11試合、順位報酬を付与。通常BR版、モバイル版とは別大会。",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/one-piece-zoro-cup-chapter-7-mini-season-official-rules"
+        },
+        {
+          "text": "Fortnite Tracker公式イベントID S43_OnePieceZoroCup_ZBで各地域のZero Build順位表を確認。",
+          "url": "https://fortnitetracker.com/events/epicgames_S43_OnePieceZoroCup_ZB_OCE"
         }
       ]
     }

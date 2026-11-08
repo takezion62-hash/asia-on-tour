@@ -842,6 +842,37 @@
           "url": "https://fortnitetracker.com/events/epicgames_S39_SoloSeriesCupFinal_NAW"
         }
       ]
+    },
+    {
+      "id": "ch7s5-one-piece-zoro-cup-zero-build",
+      "seasonId": "S43",
+      "eventIds": [
+        "S43_OnePieceZoroCup_ZB"
+      ],
+      "team": "duo",
+      "series": "skin-cup",
+      "chapter": 7,
+      "season": 5,
+      "matchCaps": {
+        "スキン大会": 11
+      },
+      "cosmeticRanks": {
+        "OCE": 50,
+        "ASIA": 50,
+        "ME": 50,
+        "EU": 525,
+        "BR": 100,
+        "NAC": 375,
+        "NAW": 100
+      },
+      "autoApproval": "verified-team-rank",
+      "source": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/one-piece-zoro-cup-chapter-7-mini-season-official-rules",
+      "evidence": [
+        {
+          "text": "Epic公式規則のAttachment C Zero Build：OCE/ME上位50組、EU上位525組、BR上位100組、NAC上位375組、NAW上位100組の各選手がゾロ衣装・ゲーム内コスメ報酬圏内。現金賞金なし。現物賞品は別途受領条件あり。",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/one-piece-zoro-cup-chapter-7-mini-season-official-rules"
+        }
+      ]
     }
   ]
 }
