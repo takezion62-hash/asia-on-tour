@@ -1,16 +1,20 @@
 'use strict';
 const {test,expect}=require('@playwright/test');
+const ruleRegistry=require('../tournament-rules.json');
+const officialRuleCount=ruleRegistry.rules.length;
+const zoroRuleCount=ruleRegistry.rules.filter(rule=>rule.id.includes('one-piece-zoro')).length;
 test('参照ソース内で公式大会ルールが検索でき、地域別通過順位・報酬条件を切り替えられる',async({page})=>{
  const errors=[];page.on('pageerror',error=>errors.push(error.message));
  await page.goto('/?season=all#about');
  const root=page.locator('#source-rules');
  await expect(root).toBeVisible();
  await expect(page.getByRole('heading',{name:'🏆 大会ルール'})).toBeVisible();
- await expect(page.locator('#source-rule-overview')).toContainText('公式規則登録 13');
+ await expect(page.locator('#source-rule-overview')).toContainText(`公式規則登録 ${officialRuleCount}`);
  await expect(root.locator('.source-rule-card')).toHaveCount(12);
  await expect(root.locator('.source-rule-card a[href*="fortnite.com"]')).not.toHaveCount(0);
  await page.locator('#source-rule-search').fill('zoro');
- await expect(root.locator('.source-rule-card')).toHaveCount(2);
+ await expect(root.locator('.source-rule-card')).toHaveCount(zoroRuleCount);
+ await expect(root.locator('.source-rule-card[data-rule-id="ch7s5-one-piece-zoro-cup-zero-build"]')).toBeVisible();
  await page.locator('#source-rule-region').selectOption('EU');
  await expect(root).toContainText('上位525');
  await expect(root).toContainText('上位200');
@@ -23,7 +27,7 @@ test('参照ソース内で公式大会ルールが検索でき、地域別通�
 
 test('未登録大会は誤って賞金やスキンを表示せず、検索・追加表示が可能',async({page})=>{
  await page.goto('/?season=all#about');
- await expect(page.locator('#source-rule-overview')).toContainText('公式規則登録 13');
+ await expect(page.locator('#source-rule-overview')).toContainText(`公式規則登録 ${officialRuleCount}`);
  await page.locator('#source-rule-filter').selectOption('pending');
  const cards=page.locator('#source-rule-results .source-rule-card');
  await expect(cards).toHaveCount(12);
@@ -33,12 +37,12 @@ test('未登録大会は誤って賞金やスキンを表示せず、検索・�
  await expect(cards).toHaveCount(24);
  await page.locator('#source-rule-region').selectOption('BR');
  await expect(cards).toHaveCount(12);
- await expect(page.locator('#source-rule-status')).toContainText('公式ルール登録済み 13大会');
+ await expect(page.locator('#source-rule-status')).toContainText(`公式ルール登録済み ${officialRuleCount}大会`);
 });
 
 test('Trios Cash Cup displays six verified regional individual payout ladders',async({page})=>{
  await page.goto('/?season=all#about');
- await expect(page.locator('#source-rule-overview')).toContainText('公式規則登録 13');
+ await expect(page.locator('#source-rule-overview')).toContainText(`公式規則登録 ${officialRuleCount}`);
  await page.locator('#source-rule-search').fill('trios cash');
  const card=page.locator('.source-rule-card[data-rule-id="ch7s5-trios-cash-cup"]');
  await expect(card).toBeVisible();
@@ -82,7 +86,7 @@ test('Trios Cash Cup displays six verified regional individual payout ladders',a
 
 test('S43 Performance Evaluation displays confirmed EU NAC top26 and personal $400 VR',async({page})=>{
  await page.goto('/?season=all#about');
- await expect(page.locator('#source-rule-overview')).toContainText('公式規則登録 13');
+ await expect(page.locator('#source-rule-overview')).toContainText(`公式規則登録 ${officialRuleCount}`);
  await page.locator('#source-rule-search').fill('Performance Evaluation');
  const card=page.locator('.source-rule-card[data-rule-id="ch7s5-performance-evaluation-trios"]');
  await expect(card).toBeVisible();
@@ -103,7 +107,7 @@ test('S43 Performance Evaluation displays confirmed EU NAC top26 and personal $4
 test('Unreal Cup shows all 7 regional prize tiers and separate duo personal shares',async({page})=>{
  const errors=[];page.on('pageerror',error=>errors.push(error.message));
  await page.goto('/?season=all#about');
- await expect(page.locator('#source-rule-overview')).toContainText('公式規則登録 13');
+ await expect(page.locator('#source-rule-overview')).toContainText(`公式規則登録 ${officialRuleCount}`);
  await page.locator('#source-rule-search').fill('1 Million Unreal');
  const card=page.locator('.source-rule-card[data-rule-id="ch7s1-one-million-unreal-cup"]');
  await expect(card).toBeVisible();
