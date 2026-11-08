@@ -292,7 +292,7 @@ function selectActiveWindows(windows,state,config,time=Date.now()){
  const priority=(a,b)=>{
   if(due(a)!==due(b))return due(a)?-1:1;
   const progress=w=>{const cp=state.windows[w.key];return cp?.totalPages>0?cp.nextPage/cp.totalPages:0};
-  const finishable=w=>{const pages=remainingPages(state.windows[w.key]);return pages!==null&&pages<=Math.max(1,config.maxPagesPerWindowPerRun||12)};
+  const finishable=w=>{const cp=state.windows[w.key];const pages=cp?.complete?null:remainingPages(cp);return pages!==null&&pages<=Math.max(1,config.maxPagesPerWindowPerRun||12)};
   if(finishable(a)!==finishable(b))return finishable(a)?-1:1;
   const progressDiff=progress(b)-progress(a);
   // Finish completable scanned rounds first; then pick newest competitions.
