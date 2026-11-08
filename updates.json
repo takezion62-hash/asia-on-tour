@@ -2,6 +2,17 @@
   "version": 1,
   "entries": [
     {
+      "id": "auto-sync-20261108123603",
+      "date": "2026-11-08",
+      "type": "records",
+      "title": "公式規則で自動承認：新着大会2戦績（競合解消後）",
+      "description": "最新版と照合して既存戦績を保持し、未登録の公式規則検証済み戦績2件のみ追記。重複候補は追加せず、元の賞金額と大会記録を変更しない。",
+      "recordIds": [
+        "auto-s43-6123267e26d0",
+        "auto-s43-f298a1d8adca"
+      ]
+    },
+    {
       "id": "assistant-reviewed-pending-20261108",
       "date": "2026-11-08",
       "type": "records",

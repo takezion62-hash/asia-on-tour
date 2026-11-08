@@ -1,7 +1,7 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-08T10:38:31.798Z",
+  "checkedAt": "2026-11-08T12:36:03.724Z",
   "mode": "review",
   "scope": "recent",
   "dateMode": null,
@@ -11,18 +11,18 @@
   "provider": "osirion",
   "linkedPlayers": 556,
   "trackedWindows": 29,
-  "found": 0,
+  "found": 2,
   "skipped": 0,
   "imported": 2,
-  "scannedPages": 48,
-  "completedWindows": 22,
+  "scannedPages": 45,
+  "completedWindows": 25,
   "identityConflicts": 3,
-  "alreadyRegistered": 45,
-  "autoApprovedTotal": 826,
+  "alreadyRegistered": 47,
+  "autoApprovedTotal": 828,
   "invalidCachedCandidates": 0,
-  "manualReviewCandidates": 0,
+  "manualReviewCandidates": 2,
   "autoApprovedCosmeticThisRun": 0,
-  "autoApprovedCashThisRun": 2,
+  "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
   "autoApprovedUnrealThisRun": 0,
   "timeLimitReached": false,
@@ -31,34 +31,34 @@
   "malformedFailures": 0,
   "skippedLeaderboards": [],
   "reviewOnlyWindows": 29,
-  "reviewOnlyCandidates": 0,
+  "reviewOnlyCandidates": 2,
   "unmappedEvents": 1,
   "unmappedEventIds": [
     "S42_ArenaTestCup"
   ],
-  "message": "ChatGPTが個別確認した7件の候補を再確認。掲載7件、重複0件、理由付き保留0件。",
+  "message": "最新版と安全統合：新規掲載2件、重複スキップ7件、要確認の競合0件、確認待ち2件。既存の戦績・賞金は保持。",
   "concurrentMerge": {
     "appended": 2,
-    "alreadyPublished": 0,
+    "alreadyPublished": 7,
     "reviewConflicts": 0,
-    "keptPending": 7,
-    "reconciledAt": "2026-11-08T10:38:33.608Z"
+    "keptPending": 2,
+    "reconciledAt": "2026-11-08T12:36:06.057Z"
   },
   "coverage": {
     "total": 29,
-    "completed": 22,
-    "notStarted": 4,
+    "completed": 25,
+    "notStarted": 1,
     "partial": 3,
     "retryWaiting": 0,
     "retryDue": 0,
-    "remaining": 7,
+    "remaining": 4,
     "retryCount": 0,
-    "completionPercent": 75.9,
+    "completionPercent": 86.2,
     "byRegion": {
       "EU": {
         "total": 6,
-        "completed": 4,
-        "pending": 2
+        "completed": 5,
+        "pending": 1
       },
       "NAC": {
         "total": 6,
@@ -72,13 +72,13 @@
       },
       "ME": {
         "total": 4,
-        "completed": 3,
-        "pending": 1
+        "completed": 4,
+        "pending": 0
       },
       "BR": {
         "total": 4,
-        "completed": 3,
-        "pending": 1
+        "completed": 4,
+        "pending": 0
       },
       "NAW": {
         "total": 4,
@@ -89,8 +89,8 @@
     "byYear": {
       "2026": {
         "total": 29,
-        "completed": 22,
-        "pending": 7
+        "completed": 25,
+        "pending": 4
       }
     },
     "outsideScopeCheckpoints": 0,
@@ -101,7 +101,7 @@
         "region": "EU",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 60,
+        "nextPage": 72,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
@@ -112,7 +112,7 @@
         "region": "OCE",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 11,
+        "nextPage": 23,
         "totalPages": 37,
         "retryAfter": null,
         "errorCode": null
@@ -123,7 +123,7 @@
         "region": "NAC",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 34,
+        "nextPage": 46,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
@@ -138,42 +138,10 @@
         "totalPages": null,
         "retryAfter": null,
         "errorCode": null
-      },
-      {
-        "window": "epicgames_S43_OnePieceZoroCup_ZB_BR/S43_OnePieceZoroCup_ZB_BR",
-        "date": "2026-11-07",
-        "region": "BR",
-        "series": "skin-cup",
-        "status": "notStarted",
-        "nextPage": 0,
-        "totalPages": null,
-        "retryAfter": null,
-        "errorCode": null
-      },
-      {
-        "window": "epicgames_S43_OnePieceZoroCup_ZB_EU/S43_OnePieceZoroCup_ZB_EU",
-        "date": "2026-11-07",
-        "region": "EU",
-        "series": "skin-cup",
-        "status": "notStarted",
-        "nextPage": 0,
-        "totalPages": null,
-        "retryAfter": null,
-        "errorCode": null
-      },
-      {
-        "window": "epicgames_S43_OnePieceZoroCup_ZB_ME/S43_OnePieceZoroCup_ZB_ME",
-        "date": "2026-11-07",
-        "region": "ME",
-        "series": "skin-cup",
-        "status": "notStarted",
-        "nextPage": 0,
-        "totalPages": null,
-        "retryAfter": null,
-        "errorCode": null
       }
     ]
   },
   "manuallyPublished": 10,
-  "lastReviewedBatchAt": "2026-11-08T12:35:06.192Z"
+  "lastReviewedBatchAt": "2026-11-08T12:35:06.192Z",
+  "autoApprovedDuoQualifierThisRun": 9
 }

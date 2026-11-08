@@ -2,6 +2,65 @@
   "version": 1,
   "status": "review",
   "checkedAt": "2026-11-07T13:02:44.444Z",
-  "proposals": [],
+  "proposals": [
+    {
+      "id": "auto-s43-9d42693207cd",
+      "date": "2026-11-07",
+      "region": "EU",
+      "player": "たろくん風呂やねー / lef.lef",
+      "playerRaw": "たろくん風呂やねー / lef.lef",
+      "event": "One Piece: Zoro Cup Zero Build",
+      "round": "単一開催枠 / 参加確認",
+      "rank": 363,
+      "points": 447,
+      "kills": 17,
+      "vrs": 1,
+      "prize": null,
+      "kind": "参加確認",
+      "matches": 11,
+      "seasonId": "S43",
+      "chapter": 7,
+      "season": 5,
+      "tournamentId": "ch7s5-one-piece-zoro-cup-zero-build",
+      "source": "https://www.fortnite.com/competitive/events/S43_OnePieceZoroCup_ZB/?region=EU&round=S43_OnePieceZoroCup_ZB_EU",
+      "verified": true,
+      "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+      "reviewOnly": true,
+      "reviewReason": "同一大会・同一選手の既存掲載があるため要照合",
+      "players": [
+        "たろくん風呂やねー",
+        "lef.lef"
+      ]
+    },
+    {
+      "id": "auto-s43-37b3d4421c8d",
+      "date": "2026-11-07",
+      "region": "EU",
+      "player": "Acris rqxzr11 / hoimin",
+      "playerRaw": "Acris rqxzr11 / HOICHQN",
+      "event": "One Piece: Zoro Cup Zero Build",
+      "round": "単一開催枠 / 参加確認",
+      "rank": 374,
+      "points": 446,
+      "kills": 61,
+      "vrs": 2,
+      "prize": null,
+      "kind": "参加確認",
+      "matches": 11,
+      "seasonId": "S43",
+      "chapter": 7,
+      "season": 5,
+      "tournamentId": "ch7s5-one-piece-zoro-cup-zero-build",
+      "source": "https://www.fortnite.com/competitive/events/S43_OnePieceZoroCup_ZB/?region=EU&round=S43_OnePieceZoroCup_ZB_EU",
+      "verified": true,
+      "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+      "reviewOnly": true,
+      "reviewReason": "同一大会・同一選手の既存掲載があるため要照合",
+      "players": [
+        "Acris rqxzr11",
+        "hoimin"
+      ]
+    }
+  ],
   "manualReviewedAt": "2026-11-08T12:35:06.192Z"
 }
