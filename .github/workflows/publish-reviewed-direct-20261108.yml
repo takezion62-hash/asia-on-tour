@@ -1,0 +1,56 @@
+name: Publish ChatGPT-reviewed pending AOT records (one-time)
+on:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/publish-reviewed-direct-20261108.cjs"
+      - ".github/workflows/publish-reviewed-direct-20261108.yml"
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: aot-direct-curated-publish-main
+  cancel-in-progress: false
+jobs:
+  publish-reviewed:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout latest main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+      - name: Prepare Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Run assistant-confirmed one-time publication with race-safe updates
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          for attempt in 1 2 3 4 5; do
+            echo "ASSISTANT_DIRECT_PUBLISH_ATTEMPT ${attempt}/5"
+            git fetch origin main
+            git reset --hard origin/main
+            node scripts/publish-reviewed-direct-20261108.cjs --dry-run
+            node scripts/publish-reviewed-direct-20261108.cjs
+            npm run validate
+            node --test tests/automatic-duo-qualifier-approval.test.cjs tests/verified-history-approval.test.cjs tests/verified-partial-page.test.cjs tests/validate-approvals.test.cjs
+            git add results.json updates.json auto-sync-review.json history-sync-review.json history-sync-reviewed.json auto-sync-status.json history-sync-status.json
+            if git diff --cached --quiet; then
+              echo "ASSISTANT_DIRECT_PUBLISH_ALREADY_COMPLETE no new verified rows"
+              exit 0
+            fi
+            git commit -m "data: publish ChatGPT-reviewed pending competitive results"
+            if git push origin HEAD:main; then
+              echo "ASSISTANT_DIRECT_PUBLISH_COMMITTED to main"
+              exit 0
+            fi
+            echo "Remote changed; rechecking against newest published scores"
+            sleep $((attempt * 3))
+          done
+          echo "ASSISTANT_DIRECT_PUBLISH_FAILED_TO_COMMIT"
+          exit 1
