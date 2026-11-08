@@ -18,13 +18,16 @@ test('プレイスタイル画面のJS/CSSが配信され、プロフィール�
   await fold.locator(':scope > summary').click();
   await expect(fold).toHaveAttribute('open','');
   await expect(section.locator('#profile-style-title')).toContainText('プレイスタイル');
-  await expect(section.locator('[data-style-filter="team"]')).toHaveValue('solo');
+  await expect(section.locator('[data-style-filter="team"]')).toHaveValue('all');
   await expect(section.locator('.style-card')).toHaveCount(4);
   await expect(section.locator('.style-region')).toHaveCount(6);
   await expect(section.locator('.style-quality')).toBeVisible();
   await expect(section.locator('.style-specialty')).toHaveCount(2);
   await expect(section.locator('.style-evidence')).toBeVisible();
-  await expect(section.locator('.style-trend-plot')).toHaveCount(2);
+  await expect(section.locator('.style-trend-plot')).toHaveCount(0);
+  await expect(section.locator('.style-overview')).toBeVisible();
+  await expect(section.locator('.style-region-facts')).toBeVisible();
+  await expect(section).toContainText('現在の分析');
   await expect(section).toContainText('得意地域');
   await expect(section).toContainText('地域適応力');
   expect(errors).toEqual([]);
@@ -41,6 +44,7 @@ test('シーズン・形式・地域・チームのフィルターを変更し�
   await expect(fold).toHaveAttribute('open','');
   await expect(section.locator('[data-style-filter="team"]')).toHaveValue('duo');
   await expect(section).toContainText('チームキル / 試合');
+  await expect(section.locator('.style-trend-plot')).toHaveCount(2);
   await section.locator('[data-style-filter="region"]').selectOption('EU');
   await expect(fold).toHaveAttribute('open','');
   await expect(section.locator('[data-style-filter="region"]')).toHaveValue('EU');
@@ -50,6 +54,11 @@ test('シーズン・形式・地域・チームのフィルターを変更し�
   const evidence=section.locator('.style-evidence');
   await evidence.locator('summary').click();
   await expect(evidence).toHaveAttribute('open','');
+  const preset=section.locator('[data-style-scope-pick]');
+  if(await preset.count()){
+    await preset.first().click();
+    await expect(fold).toHaveAttribute('open','');
+  }
   const suggested=section.locator('[data-style-season-pick]');
   if(await suggested.count()){
     const selected=await suggested.first().getAttribute('data-style-season-pick');

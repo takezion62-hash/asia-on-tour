@@ -60,7 +60,7 @@
  function profile(report,opts={}){
    const f=report.filters,q=report.stats;
    const optsMap=opts||{};
-   const teamChoices=[{id:'solo',label:'ソロ'},{id:'duo',label:'デュオ'},{id:'trio',label:'トリオ'},{id:'squad',label:'スクワッド'}];
+   const teamChoices=[{id:'all',label:'全チーム形式'},{id:'solo',label:'ソロ'},{id:'duo',label:'デュオ'},{id:'trio',label:'トリオ'},{id:'squad',label:'スクワッド'}];
    const modes=[{id:'all',label:'全形式'},...(optsMap.modes||[])];
    const series=[{id:'all',label:'全シリーズ'},...(optsMap.series||[])];
    const seasons=[{id:'all',label:'全期間'},...(optsMap.seasons||[])];
@@ -70,12 +70,55 @@
      +filter('team','チーム形式',teamChoices)+filter('mode','ゲーム形式',modes)
      +filter('series','大会シリーズ',series)+filter('region','対象地域',regions)+'</div>';
    const card=(label,value,hint)=>'<div class="style-card"><small>'+esc(label)+'</small><strong>'+esc(value)+'</strong><em>'+esc(hint)+'</em></div>';
-   const summary='<div class="style-cards">'+[
+   const mixedTeam=f.team==='all';
+   const summary='<div class="style-cards">'+(mixedTeam?[
+     card('記録されたキル合計',count(q.kills),'ソロ個人＋チーム戦のキルが混在。効率比較には使わない'),
+     card('記録されたVR合計',count(q.vrs),'チーム戦はチームのVRを含む'),
+     card('分析対象の開催枠',count(report.quality.windows),count(q.records)+'件の掲載済み戦績'),
+     card('確認できた試合数',count(q.matchTotal),count(q.unknownMatchRecords)+'件は試合数不明')
+   ]:[
      card(f.team==='solo'?'個人キル / 試合':'チームキル / 試合',q.kpm==null?'—':num(q.kpm,2),count(q.killMatches)+'試合・'+count(q.killRecords)+'戦績が対象'),
      card('VR / 試合',q.vrRate==null?'—':pct(q.vrRate),count(q.vrMatches)+'試合・'+count(q.vrRecords)+'戦績が対象'),
      card('分析対象の開催枠',count(report.quality.windows),count(q.records)+'件の掲載済み戦績'),
      card('試合数を確認できた記録',count(q.knownMatchRecords),count(q.unknownMatchRecords)+'件は試合数不明')
-   ].join('')+'</div>';
+   ]).join('')+'</div>';
+   const insight=report.insights||{label:'対象データなし',tags:[],progress:0,
+     detail:'現在の条件に該当する掲載済み戦績はありません'};
+   const level=insight.progress||0;
+   const traits=(insight.tags||[]).map(t=>
+     '<span class="style-trait" title="'+esc(t.detail||'')+'">'+esc(t.label)+'</span>').join('');
+   const scope=report.recommendedScope;
+   const differentScope=scope&&['season','team','mode','series'].some(k=>scope[k]!==f[k]);
+   const scopeButton=differentScope?'<button type="button" class="style-preset" data-style-scope-pick'
+     +' data-style-scope-season="'+esc(scope.season)+'"'
+     +' data-style-scope-team="'+esc(scope.team)+'"'
+     +' data-style-scope-mode="'+esc(scope.mode)+'"'
+     +' data-style-scope-series="'+esc(scope.series)+'">'
+     +'記録が最も多い形式（'+esc(scope.season)+'・'+esc(({solo:'ソロ',duo:'デュオ',trio:'トリオ',squad:'スクワッド'})[scope.team]||scope.team)
+     +'）で詳しく見る</button>':'';
+   const insightHtml='<section class="style-overview" aria-label="少量データ対応の基本分析">'
+     +'<div class="style-overview-top"><div><small>EVIDENCE-BASED SCOUT · v2.0</small>'
+     +'<h3>現在の分析：'+esc(insight.label)+'</h3></div>'
+     +'<strong class="style-stage">LEVEL '+level+' / 3</strong></div>'
+     +'<div class="style-level-steps" aria-label="分析段階 '+level+'/3">'
+     +[1,2,3].map(n=>'<span'+(level>=n?' class="is-active"':'')+'></span>').join('')
+     +'</div><p class="style-overview-description">'+esc(insight.detail||'')+'</p>'
+     +'<div class="style-traits">'+(traits||'<span class="style-trait is-muted">対象の戦績が増えると実績タグが表示されるょ</span>')+'</div>'
+     +(mixedTeam?'<p class="style-overview-warning">全チーム形式の実績をまとめて表示中。ソロの個人キルとチーム戦のキルを混ぜて効率比較しないょ</p>':'')
+     +scopeButton+'</section>';
+   const regionSummary=report.regionHighlights||{};
+   const snapshot=(label,region,detail)=>'<article class="style-region-fact"><small>'+esc(label)+'</small>'
+     +'<strong>'+esc(region||'記録なし')+'</strong><span>'+esc(detail||'確認済み記録なし')+'</span></article>';
+   const regionFacts='<section class="style-region-facts" aria-label="少数記録からわかる海外遠征の実績">'
+     +'<h3>🌍 海外遠征の実績からわかること</h3>'
+     +'<div class="style-region-fact-grid">'
+     +snapshot('最多参加地域',regionSummary.active?.region,regionSummary.active?count(regionSummary.active.windows)+'開催枠を確認':'')
+     +snapshot('賞金獲得記録が最多の地域',regionSummary.cash?.region,
+       regionSummary.cash?count(regionSummary.cash.records)+'件の賞金付き戦績':'賞金付き戦績なし、または最多地域が同数')
+     +snapshot('記録されたVRが最多の地域',regionSummary.victory?.region,
+       regionSummary.victory?count(regionSummary.victory.vrs)+'VR（チーム戦はチームVR）':'VRなし、または最多地域が同数')
+     +'</div><p class="style-region-facts-note">これは確認済み記録の多さであって「最も得意な地域」ではないょ。大会難易度やPingの差は補正していないよ</p>'
+     +'</section>';
    const cov=report.coverage||{};
    const percentage=val=>val==null?'—':num(val*100,0)+'%';
    const qualityHtml='<div class="style-quality" aria-label="データの充実度">'
@@ -94,9 +137,9 @@
      +'<summary>🧭 スカウティングレポート <small>根拠・データ量・評価保留を確認</small></summary>'
      +'<div class="style-scout-body"><p class="style-note">実測データから見た海外大会での傾向。総合実力スコアや戦術ロールの推定ではないょ</p>'
      +'<div class="style-scout-grid">'
-     +scoutCard('攻撃効率',scout.attack?.value==null?'—':num(scout.attack.value,2)+' K/試合',
+     +scoutCard('攻撃効率',mixedTeam?'形式を選択':scout.attack?.value==null?'—':num(scout.attack.value,2)+' K/試合',
        (scout.attack?.level||'データ不足')+' · '+count(scout.attack?.matches||0)+'試合を確認')
-     +scoutCard('勝ち切り効率',scout.victory?.value==null?'—':pct(scout.victory.value),
+     +scoutCard('勝ち切り効率',mixedTeam?'形式を選択':scout.victory?.value==null?'—':pct(scout.victory.value),
        (scout.victory?.level||'データ不足')+' · '+count(scout.victory?.matches||0)+'試合を確認')
      +scoutCard('キル効率のばらつき',scout.stability?.spread==null?'—':num(scout.stability.spread,2)+' K/試合',
        (scout.stability?.level||'データ不足')+' · 開催枠ごとの標準偏差（小さいほど変動が小さい）')
@@ -112,7 +155,7 @@
      +esc(scout.limitations||'データ不足の項目は未判定')+'根拠の大会は下の「計算に使った戦績・出典」で確認できるょ</p></div></details>';
    const eligible=report.affinity;
    const best=eligible.region?'🏅 集計上の得意地域候補：'+eligible.region:'🌍 得意地域：未判定';
-   const style='<div class="style-status"><span class="style-tag'+(report.style.key==='unrated'?' is-low':'')+'">'+esc(report.style.label)+'</span><span class="style-small">'+esc(report.style.reason)+'</span></div>';
+   const style='<div class="style-status"><span class="style-tag'+(report.style.key==='unrated'?' is-low':'')+'">'+esc(report.style.key==='unrated'?'相対タイプ：比較保留':report.style.label)+'</span><span class="style-small">'+esc(report.style.reason)+'</span></div>';
    const most=[...report.regions].filter(r=>r.records>0).sort((a,b)=>b.records-a.records)[0];
    const observed=most?'<p class="style-advice">掲載戦績が最も多い地域：<b>'+esc(most.region)+'</b>（'+count(most.records)+'戦績）※得意地域の判定とは別</p>':'';
    const affinity='<div class="style-status"><span class="style-tag'+(!eligible.region?' is-low':'')+'">'+esc(best)+'</span><span class="style-small">'+esc(eligible.reason)+'</span></div>';
@@ -126,23 +169,23 @@
      :'<p class="style-advice">地域適応力は複数地域の十分な試合数がそろってから判定するょ</p>';
    const regionStats='<div class="style-regions">'+report.regions.map(r=>'<article class="style-region'+(r.region===eligible.region?' is-best':'')+(r.region===specials.attack?' is-attack':'')+(r.region===specials.victory?' is-victory':'')+'" data-style-region="'+esc(r.region)+'"><strong>'+esc(r.region)+(r.region===eligible.region?' 🏅':'')+(r.region===specials.attack?' ⚔️':'')+(r.region===specials.victory?' 🏆':'')+'</strong>'
      +'<small>'+count(r.records)+'戦績 · '+count(r.windows)+'開催枠 · '+count(r.matchTotal)+'試合（試合数確認分）</small>'
-     +'<b>K/試合 '+(r.kpm==null?'—':num(r.kpm,2))+' / VR率 '+pct(r.vrRate)+'</b>'
-     +'<small>'+(r.level==='qualified'?'比較候補：5枠・30試合以上':r.level==='provisional'?'暫定：3枠・15試合以上':'データ不足')+'</small></article>').join('')+'</div>';
+     +'<b>'+(mixedTeam?'形式混在のため効率比較なし':'K/試合 '+(r.kpm==null?'—':num(r.kpm,2))+' / VR率 '+pct(r.vrRate))+'</b>'
+     +'<small>'+(r.level==='qualified'?'比較候補：5枠・30試合以上':r.level==='provisional'?'暫定：3枠・10試合以上':'データ不足')+'</small></article>').join('')+'</div>';
    const percentiles=report.style.attack==null?'<p class="style-note">相対評価に必要な条件を満たしていないため、数値を推測せず保留中だょ</p>'
      :'<div class="style-box"><h3>実測効率の相対位置</h3><div class="style-compare-bars">'+axis('攻撃',report.style.attack)+axis('勝利',report.style.victory)
       +(report.style.breadth!=null?axis('遠征幅',report.style.breadth):'')+'</div><p class="style-note">比較対象'+count(report.style.peers)+'名の中での順位割合。100点満点の実力判定ではないょ</p></div>';
    const trend=report.trend.slice(-12).reverse();
-   const trendHtml='<div class="style-box"><h3>月別の実測傾向（最大12か月）</h3><div class="style-scroll"><table class="style-trend"><thead><tr><th>開催月</th><th>キル/試合</th><th>VR率</th><th>試合数確認</th></tr></thead><tbody>'
+   const trendHtml=mixedTeam?'<div class="style-box"><h3>月別の実測傾向</h3><p class="style-note">チーム形式を選択すると、形式混在のない月別キル効率・VR率を確認できるょ</p></div>':'<div class="style-box"><h3>月別の実測傾向（最大12か月）</h3><div class="style-scroll"><table class="style-trend"><thead><tr><th>開催月</th><th>キル/試合</th><th>VR率</th><th>試合数確認</th></tr></thead><tbody>'
      +(trend.length?trend.map(t=>'<tr><th>'+esc(t.month)+'</th><td>'+(t.kpm==null?'—':num(t.kpm,2))+'</td><td>'+pct(t.vrRate)+'</td><td>'+count(t.matchTotal)+'</td></tr>').join('')
       :'<tr><td colspan="4">対象月の掲載戦績はありません</td></tr>')
      +'</tbody></table></div><p class="style-small">未掲載月は表示しないため、不参加や0キルを意味しません</p></div>';
    const mom=report.momentum||{};
    const delta=(n,kind)=>n==null?'—':(n>0?'+':'')+num(n*(kind==='rate'?100:1),2)+(kind==='rate'?'pt':'');
-   const momentumHtml=mom.ready?'<div class="style-momentum"><strong>📈 直近5開催枠 vs 前5開催枠</strong>'
+   const momentumHtml=mixedTeam?'<p class="style-note">📈 最近の効率変化は、チーム形式を選んでから比較できるょ</p>':mom.ready?'<div class="style-momentum"><strong>📈 直近5開催枠 vs 前5開催枠</strong>'
      +'<span>キル/試合 '+delta(mom.deltaKpm)+' · VR率 '+delta(mom.deltaVrRate,'rate')+'</span>'
      +'<small>同条件・各期間15試合以上の実測差。将来の成績予測ではないょ</small></div>'
      :'<p class="style-note">📈 最近の傾向：'+esc(mom.reason||'データ不足')+'</p>';
-   const graphs='<div class="style-extra">'+trendGraph(report.trend,'kpm','月別 キル/試合','#a79dff')
+   const graphs=mixedTeam?'':'<div class="style-extra">'+trendGraph(report.trend,'kpm','月別 キル/試合','#a79dff')
      +trendGraph(report.trend,'vrRate','月別 VR率','#68dcd6')+'</div>';
    const proof=(report.evidence||[]).slice(0,15).map(r=>{
      const url=trustedSource(r.source);
@@ -162,8 +205,8 @@
      +'<span class="style-fold-desc">攻撃・勝利・得意地域の詳しい分析</span></span>'
      +'<span class="style-fold-action" aria-hidden="true"><span class="style-fold-closed">詳細を見る ⌄</span><span class="style-fold-opened">閉じる ⌃</span></span></summary>'
      +'<div class="style-fold-body">'
-     +filterMarkup+(f.season==='all'&&report.recommendedSeason?'<div class="style-season-help"><span>🌱 シーズンをそろえると地域別の得意傾向をより正確に比較できるょ</span><button type="button" data-style-season-pick="'+esc(report.recommendedSeason)+'">記録が充実した '+esc(report.recommendedSeason)+' に絞る ↗</button></div>':'')+summary+qualityHtml+scoutHtml+style+affinity+specialtyHtml+observed+adapt
-     +'<h3 class="style-region-title">🌍 地域別パフォーマンス</h3>'+regionStats
+     +insightHtml+filterMarkup+(f.season==='all'&&report.recommendedSeason?'<div class="style-season-help"><span>🌱 シーズンをそろえると地域別の得意傾向をより正確に比較できるょ</span><button type="button" data-style-season-pick="'+esc(report.recommendedSeason)+'">記録が充実した '+esc(report.recommendedSeason)+' に絞る ↗</button></div>':'')+summary+qualityHtml+scoutHtml+style+affinity+specialtyHtml+observed+adapt
+     +regionFacts+'<h3 class="style-region-title">🌍 地域別パフォーマンス</h3>'+regionStats
      +'<p class="style-region-note">地域の累計キル数では判定しない。得意地域候補は同シーズン・同形式・同シリーズで2地域以上の15試合・3開催枠を満たし、総合差が10点以上の場合のみ表示（キル効率70%＋VR率30%）。大会の難易度差は補正していないょ</p>'
      +'<div class="style-extra">'+percentiles+radar(report.style)+'</div>'
      +trendHtml+graphs+momentumHtml+evidenceHtml
