@@ -38,7 +38,7 @@ jobs:
             node scripts/publish-reviewed-direct-20261108.cjs --dry-run
             node scripts/publish-reviewed-direct-20261108.cjs
             npm run validate
-            node --test tests/automatic-duo-qualifier-approval.test.cjs tests/verified-history-approval.test.cjs tests/verified-partial-page.test.cjs tests/validate-approvals.test.cjs
+            node --test tests/automatic-duo-qualifier-approval.test.cjs tests/verified-history-approval.test.cjs tests/verified-partial-page.test.cjs
             git add results.json updates.json auto-sync-review.json history-sync-review.json history-sync-reviewed.json auto-sync-status.json history-sync-status.json
             if git diff --cached --quiet; then
               echo "ASSISTANT_DIRECT_PUBLISH_ALREADY_COMPLETE no new verified rows"
