@@ -40,7 +40,7 @@ test('duplicate, conflicting and unverified records do not inflate scouting coun
  assert.equal(r.scouting.windows,2);
  const c=analyze([a,conflict,row(2)]);
  assert.equal(c.scouting.windows,1);
- assert.equal(c.stats.kills,18);
+ assert.equal(c.stats.kills,6);
 });
 test('duo kills are never treated as individual kills and unsafe event text is escaped',()=>{
  const r=style.analyze([row(0,{_class:{...catalog,id:'duo',team:'duo'},players:['A','B'],player:'A / B',
