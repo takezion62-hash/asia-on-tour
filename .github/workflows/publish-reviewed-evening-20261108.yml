@@ -1,0 +1,77 @@
+name: AOT directly publish ChatGPT-reviewed pending evening results
+on:
+  pull_request:
+    paths:
+      - "scripts/publish-reviewed-pending-evening-20261108.cjs"
+      - ".github/workflows/publish-reviewed-evening-20261108.yml"
+  push:
+    branches: [main]
+    paths:
+      - "scripts/publish-reviewed-pending-evening-20261108.cjs"
+      - ".github/workflows/publish-reviewed-evening-20261108.yml"
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: aot-direct-evening-results
+  cancel-in-progress: false
+jobs:
+  verify-curated-evidence:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout proposed reviewed batch
+        uses: actions/checkout@v4
+      - name: Setup Node 24
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Check official source candidates and validation without writing
+        run: |
+          node scripts/publish-reviewed-pending-evening-20261108.cjs --dry-run
+          npm run validate
+          node --test tests/verified-history-approval.test.cjs tests/verified-partial-page.test.cjs tests/automatic-cosmetic-approval.test.cjs tests/safe-sync-merge.test.cjs
+  publish-confirmed:
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout newest main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+      - name: Setup Node 24
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Directly commit ChatGPT-reviewed candidates to main
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          for attempt in 1 2 3 4 5; do
+            echo "EVENING_DIRECT_REVIEW attempt $attempt/5"
+            git fetch origin main
+            git reset --hard origin/main
+            node scripts/publish-reviewed-pending-evening-20261108.cjs --dry-run
+            node scripts/publish-reviewed-pending-evening-20261108.cjs
+            npm run validate
+            node --test tests/verified-history-approval.test.cjs tests/verified-partial-page.test.cjs tests/safe-sync-merge.test.cjs
+            git add results.json updates.json history-sync-review.json auto-sync-review.json history-sync-status.json auto-sync-status.json history-sync-reviewed.json
+            if git diff --cached --quiet; then
+              echo "EVENING_DIRECT_REVIEW no new safe rows"
+              exit 0
+            fi
+            git commit -m "data: directly publish ChatGPT-reviewed evening AOT results"
+            if git push origin HEAD:main; then
+              echo "EVENING_DIRECT_REVIEW published to main"
+              exit 0
+            fi
+            echo "Main moved; reconciling original evidence against latest public data"
+            sleep $((attempt * 3))
+          done
+          echo "EVENING_DIRECT_REVIEW FAILED after safe retries"
+          exit 1
