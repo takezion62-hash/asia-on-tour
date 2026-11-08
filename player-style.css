@@ -123,3 +123,17 @@
  .style-fold-desc{font-size:11px}
  .style-fold-action{padding:9px 10px;font-size:11px}
 }
+
+/* Scouting report: compact, accessible and contained inside existing playstyle fold. */
+.style-scouting{margin:12px 0 18px;border:1px solid #5c6694;border-radius:13px;background:#121d31;overflow:hidden}
+.style-scouting>summary{cursor:pointer;padding:13px 15px;font-weight:850;color:#edf5ff;list-style-position:inside}
+.style-scouting>summary small{display:inline-block;font-size:11px;font-weight:500;color:#acbcda;margin-left:8px}
+.style-scouting>summary:focus-visible{outline:2px solid #9de8f7;outline-offset:-3px}
+.style-scout-body{padding:0 14px 15px}
+.style-scout-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:10px 0 12px}
+.style-scout-card{display:grid;gap:3px;align-content:start;background:#1b2a40;border:1px solid #344c69;border-radius:10px;padding:12px;min-width:0}
+.style-scout-card small{color:#acc1e1;font-size:11px}
+.style-scout-card strong{font-size:18px;color:#f5f9ff;overflow-wrap:anywhere}
+.style-scout-card span,.style-scout-context{font-size:11px;color:#b9c9df;line-height:1.65}
+.style-scout-context{margin:7px 0}
+@media(max-width:640px){.style-scout-grid{grid-template-columns:1fr}.style-scouting>summary small{display:block;margin:3px 0 0 21px}}
