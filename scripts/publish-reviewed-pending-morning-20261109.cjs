@@ -246,7 +246,7 @@ function approve(row,rule,db,src){
    'nonqualifier condition not met '+row.id);
   detail='Round1は現金賞金なし。上位'+rule.cutoff+'組の決勝進出条件には入らない';
   output={...base,kind:'予選',round:row.round.replace(/\/ 参加確認$/,'/ 予選'),prize:0};
- }else if(rule.scope==='day1-participation'){
+ }else if(rule.scope==='day2-participation'){
   must(src.windowId.includes('Week3Day2')&&row.kind==='参加確認'&&row.prize===null,
    'FNCS day2-only evidence missing '+row.id);
   detail='FNCS Division1のWeek3 Day2参加確認。週間合算による決勝進出・週間決勝賞金は未確認';
