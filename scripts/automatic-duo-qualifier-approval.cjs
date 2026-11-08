@@ -1,7 +1,7 @@
 'use strict';
 // Epic-rule-verified duo Round 1 results. Qualifying != merely participating.
 // Cash is $0 in Round 1; never infer Round 2 winnings from these standings.
-const {verifiedPartialPage,FOUR_HOURS}=require('./verified-partial-page.cjs');
+const {verifiedPartialPage,FOUR_HOURS,sameScannedCandidate}=require('./verified-partial-page.cjs');
 const RULES=Object.freeze(Object.fromEntries(require('../tournament-rules.json').rules
  .filter(r=>r.autoApproval==='verified-duo-qualifier-only').map(r=>[r.id,r])));
 const decline=reason=>({approved:false,reason});
@@ -40,7 +40,7 @@ function decide(row,win,cp,data,now=Date.now()){
   row.prize!==(recent?null:0)||Boolean(row.reviewOnly)!==recent)
   return decline('本人ID確認済みの公式予選候補ではありません');
  if(!cp||cp.rankingOrderValid!==true||!Array.isArray(cp.proposals)||
-  !cp.proposals.some(x=>JSON.stringify(x)===JSON.stringify(row))||
+  !cp.proposals.some(x=>sameScannedCandidate(x,row))||
   (!cp.complete&&!verifiedPartialPage(row,win,cp,now)))
   return decline('順位表の連続性・取得済みページ・終了後の成熟期間が確認できません');
  // A complete snapshot must still be taken after the session settled.
