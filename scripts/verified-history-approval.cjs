@@ -24,6 +24,7 @@ function decide(row,win,checkpoint,data){
   return decline('順位表の取得が完了していません');
  const rule=RULES[row.tournamentId];
  if(!rule)return decline('未検証のシーズンまたは大会');
+ if(rule.autoApproval==='verified-duo-qualifier-only')return decline('デュオ予選は公式Round1専用検証で判定');
  const catalog=data.tournaments.catalog.find(x=>x.id===row.tournamentId);
  if(!catalog||catalog.team!==(rule.team||'solo')||catalog.series!=='victory-cup'||catalog.seasonId!==rule.seasonId)return decline('大会カタログ不一致');
  if(win.tournamentId!==row.tournamentId||win.seasonId!==rule.seasonId||row.seasonId!==rule.seasonId||!rule.eventIds.includes(win.eventId)||!catalog.sourceEventIds.includes(win.eventId))return decline('公式イベントID不一致');
