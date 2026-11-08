@@ -243,7 +243,7 @@
   // Scouting v1: descriptive evidence only, never an inferred IGL/fragging role
   // or a subjective power rating. Unknown values stay unknown.
   function scouting(rows,stats,recent,filters,style){
-    const windows=slotsCount(rows),sample=(matches)=>windows>=5&&matches>=30?'評価可能':windows>=3&&matches>=15?'暫定':'データ不足';
+    const windows=slotsCount(rows),sample=(matches,records)=>records>=5&&matches>=30?'評価可能':records>=3&&matches>=15?'暫定':'データ不足';
     const killRows=rows.filter(r=>good(r.matches)&&r.matches>0&&good(r.kills));
     const validMatches=killRows.reduce((sum,r)=>sum+r.matches,0);
     let killSpread=null;
@@ -257,8 +257,8 @@
       scope:'掲載済み・本人確認済み戦績に限る',
       team:filters.team,windows,regions:stats.regionCount,
       documentedFinals:stats.finalRecords,documentedPodiums:stats.prizeFinalTop3,
-      attack:{value:stats.kpm,matches:stats.killMatches,records:stats.killRecords,level:sample(stats.killMatches)},
-      victory:{value:stats.vrRate,matches:stats.vrMatches,records:stats.vrRecords,level:sample(stats.vrMatches)},
+      attack:{value:stats.kpm,matches:stats.killMatches,records:stats.killRecords,level:sample(stats.killMatches,stats.killRecords)},
+      victory:{value:stats.vrRate,matches:stats.vrMatches,records:stats.vrRecords,level:sample(stats.vrMatches,stats.vrRecords)},
       stability:{spread:killSpread,matches:validMatches,records:killRows.length,
         level:killSpread===null?'データ不足':'実測値'},
       momentum:{ready:recent.ready,reason:recent.reason,deltaKpm:recent.ready?recent.deltaKpm:null,
