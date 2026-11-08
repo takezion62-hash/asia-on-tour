@@ -855,18 +855,6 @@
       "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
       "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=ME&round=S30_SoloVictoryCashCup_Event7Round2_ME",
       "evidence": "Exact cached Osirion Epic ID and official Epic window, row rank 949, 0 VR, 100 points per final win, rule-based cutoff/payout, and same-round alias-aware dedupe. Checkpoint all-pages incomplete; stored rank is source snapshot."
-    },
-    {
-      "id": "auto-s43-3cafe7a0336e",
-      "recordId": "auto-s43-3cafe7a0336e",
-      "decision": "published",
-      "policy": "manual-verified-zero-prize",
-      "approvedAt": "2026-11-08T01:59:35.049Z",
-      "approvedBy": "ChatGPT (user-authorized GitHub integration)",
-      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-trios-cash-cups-chapter-7-mini-season-official-rules",
-      "source": "https://www.fortnite.com/competitive/events/S43_TriosCashCup/?region=ME&round=S43_TriosCashCup_Event1_ME",
-      "trackerSource": "https://fortnitetracker.com/events/epicgames_S43_TriosCashCup_ME?window=S43_TriosCashCup_Event1_ME",
-      "evidence": "Osirion/Epic ID trio matching; official ordered leaderboard pages 1–24 through rank 2400; rank 673, 272 points, 87 team eliminations, 1 VR, 8 games. Tracker's ME prize schedule pays only positions 1–5, so 673 is $0; direct Tracker player row inaccessible. No claim that all 34 pages were inspected."
     }
   ]
 }
