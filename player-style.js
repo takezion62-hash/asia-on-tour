@@ -1,4 +1,4 @@
-/* ASIA ON TOUR — evidence-limited overseas playstyle analytics, v1.
+/* ASIA ON TOUR — progressive evidence-based overseas playstyle analytics, v2.
  * Performance statistics, not inferred tactical roles or player skill rankings.
  * All calculations are read-only and ignore unpublished suggestions.
  */
@@ -12,7 +12,7 @@
   const REGIONS=Object.freeze(['ME','EU','NAC','NAW','OCE','BR']);
   const TEAMS=Object.freeze(['solo','duo','trio','squad']);
   const STYLES=Object.freeze({attack:'高火力型',victory:'勝ち切り型',balanced:'バランス型',unrated:'分析データ不足'});
-  const FILTER_DEFAULTS=Object.freeze({season:'all',team:'solo',mode:'all',series:'all',region:'all'});
+  const FILTER_DEFAULTS=Object.freeze({season:'all',team:'all',mode:'all',series:'all',region:'all'});
   const good=n=>Number.isSafeInteger(n)&&n>=0;
   const roster=row=>Array.isArray(row?.players)&&row.players.length?row.players:[row?.player];
   const stable=row=>JSON.stringify(Object.keys(row||{}).sort().map(k=>[k,row[k]]));
@@ -110,7 +110,7 @@
   function adequacy(rows,metric='both'){
     const a=summarize(rows),slotCount=slotsCount(rows);
     const num=metric==='kills'?a.killMatches:metric==='vrs'?a.vrMatches:Math.min(a.killMatches,a.vrMatches);
-    return {level:slotCount>=5&&num>=30?'qualified':slotCount>=3&&num>=15?'provisional':'insufficient',
+    return {level:slotCount>=5&&num>=30?'qualified':slotCount>=3&&num>=10?'provisional':'insufficient',
       windows:slotCount,matches:num};
   }
   function regionStats(selected,name){
@@ -147,6 +147,86 @@
       attackReason:attack.reason,victoryReason:victory.reason,
       attackCandidates:attack.candidates,victoryCandidates:victory.candidates};
   }
+
+  // Stage 1 starts from a single verified competition record. Stages 2/3
+  // only describe stronger evidence; they never turn team K/VR into individual
+  // kill or win contributions, and never guess a tactical IGL/fragging role.
+  function progressiveInsights(rows,stats,adequate){
+    const total=stats?.records||0,windows=adequate?.windows||0;
+    const stage=!total?'none':adequate.level==='qualified'?'detailed':
+      adequate.level==='provisional'?'provisional':'basic';
+    const meta={
+      none:{label:'対象データなし',detail:'現在の絞り込みに該当する確認済み戦績がありません'},
+      basic:{label:'基本分析',detail:'確認できた大会記録の事実のみを表示。比較による強弱は未判定'},
+      provisional:{label:'暫定分析',detail:'3開催枠・10試合以上の実測。効率値は参考として表示'},
+      detailed:{label:'詳細分析',detail:'5開催枠・30試合以上の実測。比較評価は別途同条件の対象選手が必要'}
+    }[stage];
+    const tags=[];
+    const add=(key,label,detail)=>tags.push({key,label,detail});
+    const regions=REGIONS.filter(x=>rows.some(r=>r.region===x));
+    const awards=rows.filter(r=>Number.isFinite(r.prize)&&r.prize>0);
+    const skin=rows.filter(r=>r.kind==='スキン大会');
+    if(regions.length>1)add('multi-region','複数地域に参戦',regions.join(' / ')+'に掲載記録あり');
+    if(stats.finalRecords>0)add('final','決勝経験あり','確認できた決勝 '+stats.finalRecords+'件');
+    if(stats.vrs>0)add('victory','VR実績あり',stats.vrs+'VRを記録（チーム戦はチーム合計）');
+    if(awards.length>0)add('cash','賞金獲得記録あり','賞金付き記録 '+awards.length+'件（チーム賞金と個人額は区別）');
+    if(skin.length>0)add('cosmetic','スキン大会で実績あり','対象の掲載記録 '+skin.length+'件');
+    if(windows>=5)add('experience','遠征大会への継続参加',windows+'開催枠の出場記録を確認');
+    if(stats.kpm!=null&&adequate.level!=='insufficient'){
+      add('kill-rate','K/試合 '+stats.kpm.toFixed(2),
+        '出典から確認できた'+stats.killMatches+'試合の効率（個人/チームは選択条件による）');
+    }
+    if(!tags.length&&total)add('attendance','大会参加記録あり',windows+'開催枠、'+total+'戦績を確認');
+    const progress=stage==='none'?0:stage==='basic'?1:stage==='provisional'?2:3;
+    return {stage,label:meta.label,detail:meta.detail,tags,windows,records:total,
+      matches:adequate.matches,progress,maxProgress:3};
+  }
+  // Descriptive geography does not need a same-season peer cohort; a single
+  // documented appearance can establish where a player appeared. Ties in cash
+  // or VR counts are left undecided, not used to declare a "best region".
+  function regionHighlights(regions){
+    const records=regions.filter(r=>r.records>0);
+    const active=records.slice().sort((a,b)=>b.windows-a.windows||b.records-a.records||
+      REGIONS.indexOf(a.region)-REGIONS.indexOf(b.region))[0];
+    const awardCounts=records.map(r=>({
+      region:r.region,count:r.rows.filter(x=>Number.isFinite(x.prize)&&x.prize>0).length
+    }));
+    const winCounts=records.map(r=>({region:r.region,count:r.vrs||0}));
+    const uniqueMax=list=>{
+      const max=Math.max(0,...list.map(x=>x.count));
+      const tied=list.filter(x=>x.count===max);
+      return max>0&&tied.length===1?tied[0]:null;
+    };
+    const cash=uniqueMax(awardCounts),vr=uniqueMax(winCounts);
+    return {
+      active:active?{region:active.region,windows:active.windows,records:active.records}:null,
+      cash:cash?{region:cash.region,records:cash.count}:null,
+      victory:vr?{region:vr.region,vrs:vr.count}:null,
+      // Do not expose total prize dollars as personal winnings for duo/trio.
+      awardsByRegion:awardCounts,vrByRegion:winCounts
+    };
+  }
+  function recommendedScope(rows,helpers){
+    const groups=new Map();
+    for(const row of rows){
+      const c=row._aotStyleCategory,season=typeof helpers.seasonOf==='function'?
+        helpers.seasonOf(row):row.seasonId;
+      if(!c||!/^S\d+$/.test(String(season||''))||!TEAMS.includes(c.team)||
+        !c.mode||c.mode==='unknown'||!c.series||c.series==='unknown')continue;
+      const scope={season,team:c.team,mode:c.mode,series:c.series};
+      const key=JSON.stringify(scope),prev=groups.get(key)||{scope,records:0,windows:new Set(),
+        matches:0,latest:''};
+      prev.records++;
+      prev.windows.add(JSON.stringify([row.date,row.region,c.id||row.tournamentId,windowKey(row)]));
+      prev.matches+=good(row.matches)?row.matches:0;
+      if(String(row.date||'')>prev.latest)prev.latest=String(row.date);
+      groups.set(key,prev);
+    }
+    const top=[...groups.values()].sort((a,b)=>b.windows.size-a.windows.size||
+      b.matches-a.matches||b.records-a.records||b.latest.localeCompare(a.latest))[0];
+    return top?{...top.scope,windows:top.windows.size,records:top.records,matches:top.matches}:null;
+  }
+
   function quality(stats,overlapping=[],conflicts=[]){
     const total=stats.records;
     return {recordCount:total,killCoverage:total?stats.killRecords/total:null,
@@ -300,11 +380,14 @@
     const overlapping=[...new Set([...ownAll.overlapping,...chosen.overlapping])];
     const recent=momentum(chosen.rows);
     return {player:name,filters:f,stats,style,regions:allRegionMetrics,affinity,trend,
+      insights:progressiveInsights(chosen.rows,stats,adequacy(chosen.rows)),
+      regionHighlights:regionHighlights(allRegionMetrics),
+      recommendedScope:recommendedScope(ownAll.rows,helpers),
       specialties:regionalSpecialties,momentum:recent,scouting:scouting(chosen.rows,stats,recent,f,style),
       evidence:evidence(chosen.rows),recommendedSeason,
       available:ownAll.rows.length,overlapping,conflicts:selection.conflicts,
       quality:adequacy(chosen.rows),coverage:quality(stats,overlapping,selection.conflicts)};
   }
-  return Object.freeze({VERSION:1,REGIONS,TEAMS,FILTER_DEFAULTS,STYLES,dedupe,windowKey,select,forPlayer,
-    summarize,slotsCount,adequacy,regionAffinity,regionalLeaders,quality,momentum,evidence,percentile,cohort,scouting,analyze});
+  return Object.freeze({VERSION:2,REGIONS,TEAMS,FILTER_DEFAULTS,STYLES,dedupe,windowKey,select,forPlayer,
+    summarize,slotsCount,adequacy,progressiveInsights,regionHighlights,recommendedScope,regionAffinity,regionalLeaders,quality,momentum,evidence,percentile,cohort,scouting,analyze});
 });
