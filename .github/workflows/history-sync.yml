@@ -4,6 +4,8 @@ on:
     branches: [main]
     paths:
       - "scripts/osirion-sync.cjs"
+      - "scripts/verified-partial-page.cjs"
+      - "tests/verified-partial-page.test.cjs"
       - "scripts/audit-pending-history-20261108.cjs"
       - "scripts/publish-verified-s35-console-duos-20261108.cjs"
       - "scripts/publish-reviewed-s30-nac-zero-vr.cjs"
@@ -67,7 +69,7 @@ jobs:
       - name: Validate unchanged public data and tests
         run: |
           npm run validate
-          node --test tests/auto-sync.test.cjs tests/osirion-sync.test.cjs tests/non-victory-auto-sync.test.cjs tests/verified-history-approval.test.cjs tests/automatic-cosmetic-approval.test.cjs tests/cosmetic-rank-rules.test.cjs tests/automatic-cash-approval.test.cjs tests/automatic-unreal-approval.test.cjs tests/automatic-performance-approval.test.cjs tests/tournament-rules.test.cjs
+          node --test tests/auto-sync.test.cjs tests/osirion-sync.test.cjs tests/verified-partial-page.test.cjs tests/non-victory-auto-sync.test.cjs tests/verified-history-approval.test.cjs tests/automatic-cosmetic-approval.test.cjs tests/cosmetic-rank-rules.test.cjs tests/automatic-cash-approval.test.cjs tests/automatic-unreal-approval.test.cjs tests/automatic-performance-approval.test.cjs tests/tournament-rules.test.cjs
       - name: Preserve the verified scan output before refreshing main
         run: node scripts/safe-sync-merge.cjs snapshot history "$RUNNER_TEMP/aot-history-scanned.json"
       - name: Reconcile and commit verified history onto newest main (conflict-safe)
