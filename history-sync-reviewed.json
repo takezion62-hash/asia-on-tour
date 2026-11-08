@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-08T04:42:18Z",
+  "reviewedAt": "2026-11-08T06:26:10.820Z",
   "description": "Resolved historic review candidates: published, duplicate or participation",
   "entries": [
     {
@@ -6372,6 +6372,41 @@
       "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/1-million-dollar-unreal-cup-chapter-7-season-1-official-rules",
       "source": "https://www.fortnite.com/competitive/events/S39_1MillionUnrealCup/?region=EU&round=S39_1MillionUnrealCup_EU",
       "evidence": "本人Epic IDと保存済み大会順位表の個別行を照合：EU 1551位・261pt・17チームキル・0VR。Epic公式1001〜2000位はチーム$100・個人$50。順位表全ページの取得は未完了で、確認済み本人個別行と規則に基づく。"
+    },
+    {
+      "id": "auto-s43-3f85cb035533",
+      "decision": "already-published",
+      "existingId": "s43-oce-zoro-zb-skin-20261106-bigsky-sky",
+      "reviewedAt": "2026-11-08T06:26:10.820Z",
+      "evidence": "Same verified player lineup, Epic event/region/window/date/rank/points/kills/VR and official source."
+    },
+    {
+      "id": "auto-s43-fbaed2d93eb1",
+      "decision": "already-published",
+      "existingId": "s43-oce-zoro-zb-skin-20261106-rukaporin-warau",
+      "reviewedAt": "2026-11-08T06:26:10.820Z",
+      "evidence": "Same verified player lineup, Epic event/region/window/date/rank/points/kills/VR and official source."
+    },
+    {
+      "id": "auto-s43-b28d9f6311d2",
+      "decision": "already-published",
+      "existingId": "s43-oce-zoro-zb-skin-20261106-fuchi-ototo-kkkk",
+      "reviewedAt": "2026-11-08T06:26:10.820Z",
+      "evidence": "Same verified player lineup, Epic event/region/window/date/rank/points/kills/VR and official source."
+    },
+    {
+      "id": "auto-s43-c21e52b1b842",
+      "decision": "already-published",
+      "existingId": "s43-me-zoro-zb-skin-20261107-maguro-misosqnda",
+      "reviewedAt": "2026-11-08T06:26:10.820Z",
+      "evidence": "Same verified player lineup, Epic event/region/window/date/rank/points/kills/VR and official source."
+    },
+    {
+      "id": "auto-s43-812d30db5a32",
+      "decision": "already-published",
+      "existingId": "s43-me-zoro-zb-skin-20261107-funnybro-takobel",
+      "reviewedAt": "2026-11-08T06:26:10.820Z",
+      "evidence": "Same verified player lineup, Epic event/region/window/date/rank/points/kills/VR and official source."
     }
   ]
 }
