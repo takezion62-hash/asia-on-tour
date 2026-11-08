@@ -33,6 +33,16 @@ function validateRegistry(doc,tournaments){
       Object.entries(rule.advance).some(([region,value])=>!REGIONS.has(region)||!positive(value)))fail(id,'地域別予選通過順位が不正');
    if(rule.cosmeticRanks!==undefined)fail(id,'Victory Cupにスキン順位は登録不可');
    if(rule.prizePerVictory!==undefined&&(!positive(rule.prizePerVictory)||rule.prizePerVictory>10000))fail(id,'VR賞金単価が不正');
+   if(rule.autoApproval==='verified-duo-qualifier-only'){
+     if(id!=='ch6s3-console-duos-victory'||rule.seasonId!=='S36'||rule.team!=='duo'||
+       JSON.stringify(rule.eventIds)!=='["S36_VictoryDuosCup"]'||
+       rule.matchCaps['予選']!==7||rule.matchCaps['賞金決勝']!==3||
+       rule.prizePerVictory!==undefined||
+       Object.keys(rule.advance).sort().join(',')!=='BR,EU,ME,NAC,NAW,OCE'||
+       ['EU','NAC'].some(r=>rule.advance[r]!==500)||
+       ['BR','ME','NAW','OCE'].some(r=>rule.advance[r]!==250))
+       fail(id,'2025年S36 Console Duosの公式予選地域条件のみ自動承認');
+   } else if(rule.autoApproval!==undefined)fail(id,'Victory Cupの未対応自動承認方式');
   }else if(rule.series==='performance-evaluation'){
    if(rule.autoApproval!=='verified-performance-vr'||rule.seasonId!=='S43'||
      rule.team!=='trio'||rule.eventIds?.length!==1||
@@ -51,6 +61,18 @@ function validateRegistry(doc,tournaments){
    if(rule.cashPrizes!==undefined||rule.cosmeticRanks!==undefined)
      fail(id,'Performance Evaluationに他大会の賞金条件を混在させない');
   }else if(rule.series==='cash-cup'){
+   if(rule.autoApproval==='verified-duo-qualifier-only'){
+     // Strictly no Round 2 cash inference: only official Round 1 results, $0.
+     if(id!=='ch7s5-reload-zero-build-duos-cash-cup'||rule.seasonId!=='S43'||
+       rule.team!=='duo'||JSON.stringify(rule.eventIds)!=='["S43_ReloadZBDuosCashCup"]'||
+       rule.matchCaps['単一ラウンド']!==12||
+       Object.keys(rule.matchCaps).length!==1||
+       Object.keys(rule.advance||{}).sort().join(',')!=='BR,EU,ME,NAC,NAW,OCE'||
+       Object.values(rule.advance||{}).some(x=>x!==20)||
+       rule.rankedEligibility?.mode!=='reload'||rule.rankedEligibility?.minimumRank!=='Platinum'||
+       rule.cashPrizes!==undefined||rule.prizePerVictory!==undefined||rule.cosmeticRanks!==undefined)
+       fail(id,'S43 Reload ZB Duosの公式Round1上位20・12試合条件のみ自動承認');
+   } else {
    // Cash Cup rules may be displayed, but are not eligible for automatic payout
    // publication until team identity, session completion and eligibility checks exist.
    if(!['review-only','verified-team-rank'].includes(rule.autoApproval))fail(id,'Cash Cupの承認方式が不正');
@@ -79,6 +101,7 @@ function validateRegistry(doc,tournaments){
        previousRank=tier.through;previousPrize=tier.perPlayer;
      }
      if(tiers[0]?.through!==1)fail(id,region+'の1位賞金が未登録');
+   }
    }
   }else if(rule.series==='unreal-cup'){
    if(rule.id!=='ch7s1-one-million-unreal-cup'||rule.seasonId!=='S39'||
