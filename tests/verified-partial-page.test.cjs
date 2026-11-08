@@ -27,3 +27,11 @@ test('rejects blocked pages, pending retries and insufficient provider settle ti
  assert.equal(verifiedPartialPage(row,win,{...cp(),lastSuccessAt:new Date(win.end+3600000).toISOString()},stamp),false);
  assert.equal(verifiedPartialPage(row,win,{...cp(),lastSuccessAt:new Date(stamp+10*60000).toISOString()},stamp),false);
 });
+
+test('review reason may change after snapshot but measured scores and Epic IDs may not',()=>{
+ const source=cp(),original=row;
+ const queued={...original,reviewReason:'公式の地域別順位条件の登録待ち'};
+ assert.equal(verifiedPartialPage(queued,win,{...source,proposals:[original]},stamp),true);
+ assert.equal(verifiedPartialPage({...queued,points:111},win,{...source,proposals:[original]},stamp),false);
+ assert.equal(verifiedPartialPage({...queued,rank:51},win,{...source,proposals:[original]},stamp),false);
+});

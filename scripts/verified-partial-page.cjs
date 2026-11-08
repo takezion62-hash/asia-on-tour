@@ -5,10 +5,19 @@
 // This never supplies a rule, a missing Epic identity, a cutoff, or cash evidence.
 const FOUR_HOURS=4*60*60*1000;
 const valid=n=>Number.isSafeInteger(n)&&n>=0;
+// The queue adds/rewords the adjudication reason after the immutable scan is saved.
+// Only that non-evidence field may vary; rank, Epic IDs, source, scores,
+// verified state and every other field must match the scanned candidate.
+function sameScannedCandidate(a,b){
+ if(!a||!b||typeof a!=='object'||typeof b!=='object')return false;
+ const {reviewReason:_a,...left}=a;
+ const {reviewReason:_b,...right}=b;
+ return JSON.stringify(left)===JSON.stringify(right);
+}
 function verifiedPartialPage(row,win,checkpoint,now=Date.now()){
  if(!row||!win||!checkpoint||checkpoint.complete===true||
   checkpoint.rankingOrderValid!==true||!Array.isArray(checkpoint.proposals)||
-  !checkpoint.proposals.some(x=>JSON.stringify(x)===JSON.stringify(row)))return false;
+  !checkpoint.proposals.some(x=>sameScannedCandidate(x,row)))return false;
  if(!valid(checkpoint.nextPage)||checkpoint.nextPage<1||
   !valid(checkpoint.pages)||checkpoint.pages!==checkpoint.nextPage||
   !valid(checkpoint.totalPages)||checkpoint.totalPages<=checkpoint.nextPage||
@@ -25,4 +34,4 @@ function verifiedPartialPage(row,win,checkpoint,now=Date.now()){
  // remain the responsibility of the appropriate rule-specific approver.
  return true;
 }
-module.exports={verifiedPartialPage,FOUR_HOURS};
+module.exports={verifiedPartialPage,FOUR_HOURS,sameScannedCandidate};

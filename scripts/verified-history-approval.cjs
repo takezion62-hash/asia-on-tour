@@ -3,7 +3,7 @@
 // A zero-VR final can be recorded as $0 because the rules pay per final-round VR.
 // Positive cash requires a season-specific verified payout rule; unknown events remain in manual review.
 // Single source of truth: the same versioned official rules shown under SOURCES.
-const {verifiedPartialPage}=require('./verified-partial-page.cjs');
+const {verifiedPartialPage,sameScannedCandidate}=require('./verified-partial-page.cjs');
 const RULES=Object.freeze(Object.fromEntries(
  require('../tournament-rules.json').rules.filter(rule=>rule.series==='victory-cup')
   .map(rule=>[rule.id,Object.freeze(rule)])));
@@ -24,10 +24,22 @@ function decide(row,win,checkpoint,data){
   return decline('順位表の取得が完了していません');
  const rule=RULES[row.tournamentId];
  if(!rule)return decline('未検証のシーズンまたは大会');
+ if(rule.autoApproval==='verified-duo-qualifier-only')return decline('デュオ予選は公式Round1専用検証で判定');
  const catalog=data.tournaments.catalog.find(x=>x.id===row.tournamentId);
  if(!catalog||catalog.team!==(rule.team||'solo')||catalog.series!=='victory-cup'||catalog.seasonId!==rule.seasonId)return decline('大会カタログ不一致');
  if(win.tournamentId!==row.tournamentId||win.seasonId!==rule.seasonId||row.seasonId!==rule.seasonId||!rule.eventIds.includes(win.eventId)||!catalog.sourceEventIds.includes(win.eventId))return decline('公式イベントID不一致');
- if(row.date!==win.dateJst||row.region!==win.region||!Object.hasOwn(rule.advance,row.region)||row.round!==win.round||row.kind!==win.kind)return decline('開催日・地域・ラウンド不一致');
+ // S30/S31 official rules say ALL Regions pay only for Round 2 VRs. NA was
+ // a unified qualifier region in 2024: NEVER map its Round 1 cutoff to NAC.
+ // Its observed NAC Round 2 zero-VR record is still deterministically $0.
+ const oldNacZeroFinal=['S30','S31'].includes(rule.seasonId)&&rule.team==='solo'&&
+  row.region==='NAC'&&row.kind==='賞金決勝'&&row.vrs===0&&row.prize===null;
+ if(row.date!==win.dateJst||row.region!==win.region||
+  (!Object.hasOwn(rule.advance,row.region)&&!oldNacZeroFinal)||
+  row.round!==win.round||row.kind!==win.kind)
+  return decline('開催日・地域・ラウンド不一致');
+ if(oldNacZeroFinal&&(row.points!==0||checkpoint.rankingOrderValid!==true||
+  !checkpoint.proposals.some(x=>sameScannedCandidate(x,row))))
+  return decline('2024 NAC 0VR決勝の保存済み順位表・ポイント整合性が未確認');
  if(!row.id?.startsWith('auto-'+rule.seasonId.toLowerCase()+'-')||row.verified!==true||!Array.isArray(checkpoint.proposals)||!checkpoint.proposals.some(x=>x.id===row.id))return decline('照合済み候補ではありません');
  const lineup=participants(row),teamSize=rule.team==='squad'?4:1;
  if(lineup.length!==teamSize||new Set(lineup).size!==lineup.length

@@ -10,6 +10,7 @@ const {evaluate:evaluateCosmetics,cutoffForWindow}=require('./automatic-cosmetic
 const {evaluate:evaluateCash,cashLimitForWindow}=require('./automatic-cash-approval.cjs');
 const {evaluate:evaluatePerformance,qualifierCutoff,evaluationStage}=require('./automatic-performance-approval.cjs');
 const {evaluate:evaluateUnreal,unrealWindow}=require('./automatic-unreal-approval.cjs');
+const {evaluate:evaluateDuoQualifier}=require('./automatic-duo-qualifier-approval.cjs');
 const {scanCoverage}=require('./scan-coverage.cjs');
 const {finishableWindows,remainingPages}=require('./scan-efficiency.cjs');
 const root=path.resolve(__dirname,'..');
@@ -159,6 +160,7 @@ function advancementLimit(win){
  // The verified region-specific qualifying cutoffs are held in the same
  // official rules registry displayed in the Sources tab.
  const documented=RULES[type];
+ if(documented?.autoApproval==='verified-duo-qualifier-only')return null; // Preserve prize-free participation below cutoff.
  if(documented&&documented.seasonId===win.seasonId&&
     (!win.eventId||documented.eventIds.includes(win.eventId)))
   return documented.advance?.[win.region]||null;
@@ -534,20 +536,24 @@ async function main(){
   evaluatePerformance(pending,windows,state.windows,{...data,results:[...data.results,...verified.approved,...cosmetic.approved,...cash.approved]}):{approved:[],held:[]};
  const unreal=(config.autoApproveUnreal===true)?
   evaluateUnreal(pending,windows,state.windows,{...data,results:[...data.results,...verified.approved,...cosmetic.approved,...cash.approved,...performance.approved]}):{approved:[],held:[]};
- const approved=[...verified.approved,...cosmetic.approved,...cash.approved,...performance.approved,...unreal.approved];
+ const duo=(config.autoApproveDuoQualifier===true)?
+  evaluateDuoQualifier(pending,windows,state.windows,{...data,results:[...data.results,...verified.approved,
+   ...cosmetic.approved,...cash.approved,...performance.approved,...unreal.approved]}):{approved:[],held:[]};
+ const approved=[...verified.approved,...cosmetic.approved,...cash.approved,...performance.approved,...unreal.approved,...duo.approved];
  importedCosmetics=cosmetic.approved.length;
  for(const hold of verified.held)reasons.set(hold.id,hold.reason);
  for(const hold of cosmetic.held)if(!reasons.has(hold.id))reasons.set(hold.id,hold.reason);
  for(const hold of cash.held)reasons.set(hold.id,hold.reason);
  for(const hold of performance.held)reasons.set(hold.id,hold.reason);
  for(const hold of unreal.held)reasons.set(hold.id,hold.reason);
+ for(const hold of duo.held)reasons.set(hold.id,hold.reason);
  for(const row of approved)importedIds.add(row.id);
  manuallyHeld=pending.length-approved.length;
  imported=applyProposals(data,approved,stamp);
  if(imported){
   const entry=data.updates.entries[0];
   entry.title='公式規則で自動承認：'+(historical?'過去大会':'新着大会')+imported+'戦績';
-  entry.description='公式規則・地域別順位・本人確認済みEpic ID・順位表・既存戦績を照合。予選突破、公式VR賞金、スキン（'+importedCosmetics+'件）、公式賞金表によるCash Cup（'+cash.approved.length+'件／賞金圏外$0含む）、S43 Performance Evaluation（'+performance.approved.length+'件）、S39 Unreal Cup（'+unreal.approved.length+'件／チーム・個人賞金、圏外$0）を自動掲載。支払い完了や未確認の賞金は推定しない。';
+  entry.description='公式規則・地域別順位・本人確認済みEpic ID・順位表・既存戦績を照合。予選突破、公式VR賞金、スキン（'+importedCosmetics+'件）、公式賞金表によるCash Cup（'+cash.approved.length+'件／賞金圏外$0含む）、S43 Performance Evaluation（'+performance.approved.length+'件）、S39 Unreal Cup（'+unreal.approved.length+'件／チーム・個人賞金、圏外$0）、公式デュオ予選（'+duo.approved.length+'件／突破と圏外参加を区別・$0）を自動掲載。支払い完了や未確認の賞金は推定しない。';
   write('results.json',data.results);
   write('updates.json',data.updates);
  }
@@ -557,12 +563,12 @@ async function main(){
  const reviewOnlyWindows=windows.filter(w=>w.series!=='victory-cup').length;
  const reviewOnlyCandidates=unique.size?Array.from(unique.values()).filter(p=>p.reviewOnly===true).length:0;
  const cumulativeApprovals=data.updates.entries.filter(x=>x.title?.startsWith('公式規則で自動承認：')).reduce((sum,x)=>sum+(x.recordIds?.length||0),0);
- const status={version:1,state:'checked',checkedAt:stamp,mode:'review',scope:historical?'history':'recent',dateMode:historical?(storedConfig.toDate==='rolling'?'rolling':'fixed'):null,selectedWindows:active.length,fromDate:historical?config.fromDate:null,toDate:historical?config.toDate:null,provider:'osirion',linkedPlayers:accounts.length,trackedWindows:windows.length,found:unique.size,skipped:invalidRows,imported,scannedPages:scanned,completedWindows:finished,identityConflicts:conflicts.length,alreadyRegistered:recordedFromReview,autoApprovedTotal:cumulativeApprovals,invalidCachedCandidates:invalidCached,manualReviewCandidates:manuallyHeld,autoApprovedCosmeticThisRun:importedCosmetics,autoApprovedCashThisRun:cash.approved.length,autoApprovedPerformanceThisRun:performance.approved.length,autoApprovedUnrealThisRun:unreal.approved.length,timeLimitReached,retryWindows:coverage.retryCount,coverage,transientFailures,malformedFailures,skippedLeaderboards:skippedLeaderboards.slice(0,15),reviewOnlyWindows,reviewOnlyCandidates,unmappedEvents:unmapped.length,unmappedEventIds:unmapped.slice(0,12),message:'Osirionで'+accounts.length+'アカウントIDを追跡。今回の公式規則による自動承認'+imported+'件、追加確認待ち'+unique.size+'件、名義照合保留'+conflicts.length+'件。'};
+ const status={version:1,state:'checked',checkedAt:stamp,mode:'review',scope:historical?'history':'recent',dateMode:historical?(storedConfig.toDate==='rolling'?'rolling':'fixed'):null,selectedWindows:active.length,fromDate:historical?config.fromDate:null,toDate:historical?config.toDate:null,provider:'osirion',linkedPlayers:accounts.length,trackedWindows:windows.length,found:unique.size,skipped:invalidRows,imported,scannedPages:scanned,completedWindows:finished,identityConflicts:conflicts.length,alreadyRegistered:recordedFromReview,autoApprovedTotal:cumulativeApprovals,invalidCachedCandidates:invalidCached,manualReviewCandidates:manuallyHeld,autoApprovedCosmeticThisRun:importedCosmetics,autoApprovedCashThisRun:cash.approved.length,autoApprovedPerformanceThisRun:performance.approved.length,autoApprovedUnrealThisRun:unreal.approved.length,autoApprovedDuoQualifierThisRun:duo.approved.length,timeLimitReached,retryWindows:coverage.retryCount,coverage,transientFailures,malformedFailures,skippedLeaderboards:skippedLeaderboards.slice(0,15),reviewOnlyWindows,reviewOnlyCandidates,unmappedEvents:unmapped.length,unmappedEventIds:unmapped.slice(0,12),message:'Osirionで'+accounts.length+'アカウントIDを追跡。今回の公式規則による自動承認'+imported+'件、追加確認待ち'+unique.size+'件、名義照合保留'+conflicts.length+'件。'};
  state.checkedAt=stamp;
  write(prefix+'-scan.json',state);
  write(prefix+'-review.json',{version:1,status:'review',checkedAt:stamp,proposals:[...unique.values()]});
  write(prefix+'-status.json',status);
- console.log((historical?'OSIRION_HISTORY_REVIEW ':'OSIRION_REVIEW ')+JSON.stringify({scannedPages:scanned,linkedPlayers:accounts.length,identityConflicts:conflicts.length,windows:windows.length,unmappedEvents:unmapped.length,proposals:unique.size,imported,cosmetic:importedCosmetics,cash:cash.approved.length,performance:performance.approved.length,unreal:unreal.approved.length,finished,transientFailures,malformedFailures,heldWindows:skippedLeaderboards.length}));
+ console.log((historical?'OSIRION_HISTORY_REVIEW ':'OSIRION_REVIEW ')+JSON.stringify({scannedPages:scanned,linkedPlayers:accounts.length,identityConflicts:conflicts.length,windows:windows.length,unmappedEvents:unmapped.length,proposals:unique.size,imported,cosmetic:importedCosmetics,cash:cash.approved.length,performance:performance.approved.length,unreal:unreal.approved.length,duo:duo.approved.length,finished,transientFailures,malformedFailures,heldWindows:skippedLeaderboards.length}));
 }
 if(require.main===module)main().catch(e=>{console.error('OSIRION_SYNC_ERROR '+e.stack);process.exitCode=1});
 module.exports={identity,linkedAccounts,parseStage,parseReviewStage,discover,discoverUnmapped,selectActiveWindows,selectHistoricalWindows,historicalEvidenceScore,resolveHistoricalScope,fetchJson,advancementLimit,normalizeRow,getTournaments,getLeaderboard,leaderboardResponseError,recoverableLeaderboardFailure,holdLeaderboardWindow,holdEmptyFirstPage,transientLeaderboardFailure,main};

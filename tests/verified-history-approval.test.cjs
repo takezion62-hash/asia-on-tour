@@ -124,3 +124,35 @@ test('mature partial leaderboard may publish a proven 0-VR final, never positive
  assert.equal(decide(prelim,{...w,end:f.end},{...cp,proposals:[prelim]},data()).approved,false);
  assert.equal(decide(zero,f,{...cp,lastErrorCode:'INVALID_PAGE'},data()).approved,false);
 });
+
+test('NA-era S30/S31 NAC Round 2 0VR may be $0, but NA qualifier cutoff is NOT assigned to NAC',()=>{
+ for(const [sid,id,eventId] of [
+  ['S30','ch5s3-solo-victory-cup','S30_SoloVictoryCashCup'],
+  ['S31','ch5s4-solo-victory-cup','S31_SoloVictoryCashCup']
+ ]){
+  const win={key:id+'-NAC-verified-final',eventId,seasonId:sid,tournamentId:id,
+   series:'victory-cup',region:'NAC',dateJst:'2024-09-24',
+   windowId:eventId+'_Event4Round2_NAC',round:'Event 4 · Round 2 / 賞金決勝',
+   kind:'賞金決勝',end:Date.parse('2024-09-24T08:00:00Z')};
+  const candidate={...row,id:'auto-'+sid.toLowerCase()+'-abcabcabcabc',
+   date:win.dateJst,seasonId:sid,tournamentId:id,
+   region:win.region,round:win.round,kind:win.kind,
+   rank:7032,points:0,kills:3,vrs:0,matches:3,prize:null,
+   source:source(win)};
+  const local={players:{candidates:[{name:'A'}]},tournaments:{catalog:[{
+   id,seasonId:sid,series:'victory-cup',team:'solo',
+   sourceEventIds:[eventId]}]},results:[]};
+  const checkpoint={complete:true,rankingOrderValid:true,proposals:[candidate]};
+  const result=decide(candidate,win,checkpoint,local);
+  assert.equal(result.approved,true,result.reason);
+  assert.equal(result.record.prize,0);
+  assert.equal(decide({...candidate,vrs:1},win,{...checkpoint,proposals:[{...candidate,vrs:1}]},local).approved,false);
+  assert.equal(decide(candidate,win,{...checkpoint,rankingOrderValid:false},local).approved,false);
+  assert.equal(decide({...candidate,points:50},win,{...checkpoint,proposals:[{...candidate,points:50}]},local).approved,false);
+  const pre={...win,kind:'予選',round:'Event 4 · Round 1 / 予選',
+   windowId:eventId+'_Event4Round1_NAC'};
+  const entry={...candidate,kind:'予選',round:pre.round,points:200,
+   vrs:1,prize:0,source:source(pre)};
+  assert.equal(decide(entry,pre,{...checkpoint,proposals:[entry]},local).approved,false);
+ }
+});

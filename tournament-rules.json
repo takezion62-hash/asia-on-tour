@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-07",
-  "description": "Epic公式規則で確認した大会ルール。Unreal Cupもチーム順位と確認済みEpic IDを照合し、賞金圏内は地域別チーム/個人賞金を、圏外は$0として自動掲載（本人資格・支払確認とは別）。",
+  "updatedAt": "2026-11-08",
+  "description": "Epic公式規則で確認した大会ルール。Unreal Cupもチーム順位と確認済みEpic IDを照合し、賞金圏内は地域別チーム/個人賞金を、圏外は$0として自動掲載（本人資格・支払確認とは別）。S36 Console Duos・S43 Reload ZB Duosの公式Round 1上位突破／全参加$0を、本人照合済み結果に限り安全に記録。Round 2賞金は推定しない。",
   "rules": [
     {
       "id": "ch5s3-squads-victory-cup",
@@ -870,6 +870,67 @@
         {
           "text": "Epic公式規則のAttachment C Zero Build：OCE/ME上位50組、EU上位525組、BR上位100組、NAC上位375組、NAW上位100組の各選手がゾロ衣装・ゲーム内コスメ報酬圏内。現金賞金なし。現物賞品は別途受領条件あり。",
           "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/one-piece-zoro-cup-chapter-7-mini-season-official-rules"
+        }
+      ]
+    },
+    {
+      "id": "ch6s3-console-duos-victory",
+      "seasonId": "S36",
+      "eventIds": [
+        "S36_VictoryDuosCup"
+      ],
+      "team": "duo",
+      "series": "victory-cup",
+      "matchCaps": {
+        "予選": 7,
+        "賞金決勝": 3
+      },
+      "advance": {
+        "EU": 500,
+        "NAC": 500,
+        "NAW": 250,
+        "BR": 250,
+        "OCE": 250,
+        "ME": 250
+      },
+      "autoApproval": "verified-duo-qualifier-only",
+      "source": "https://www.fortnite.com/news/fortnite-duos-console-victory-cash-cups-chapter-6-season-3-official-rules",
+      "evidence": [
+        {
+          "text": "公式規則2.2.2: NAW/ME/OCE/BRは上位250組、EU/NACは上位500組が決勝進出。予選現金賞金$0、VR賞金はRound 2のみ。",
+          "url": "https://www.fortnite.com/news/fortnite-duos-console-victory-cash-cups-chapter-6-season-3-official-rules"
+        }
+      ]
+    },
+    {
+      "id": "ch7s5-reload-zero-build-duos-cash-cup",
+      "seasonId": "S43",
+      "eventIds": [
+        "S43_ReloadZBDuosCashCup"
+      ],
+      "team": "duo",
+      "series": "cash-cup",
+      "matchCaps": {
+        "単一ラウンド": 12
+      },
+      "advance": {
+        "EU": 20,
+        "NAC": 20,
+        "NAW": 20,
+        "BR": 20,
+        "OCE": 20,
+        "ME": 20
+      },
+      "rankedEligibility": {
+        "mode": "reload",
+        "minimumRank": "Platinum"
+      },
+      "autoApproval": "verified-duo-qualifier-only",
+      "source": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-zero-build-reload-cash-cups-chapter-7-mini-season-official-rules",
+      "evidence": [
+        {
+          "text": "公式規則2.2.1: Round 1は最大12試合、各地域上位20組がRound 2進出。Round 1には現金賞金なし。",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-zero-build-reload-cash-cups-chapter-7-mini-season-official-rules"
         }
       ]
     }
