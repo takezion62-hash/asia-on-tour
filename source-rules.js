@@ -30,6 +30,15 @@
   // Ranking thresholds are inclusive: 'Top #5' after '#3' applies to 4th–5th.
   // All amounts in this branch are per player, not full trio totals.
   function cashMarkup(rule){
+    // Round1-only official qualification data: there is no verified cash table.
+    if(rule.autoApproval==='verified-duo-qualifier-only'){
+      return '<div class="source-rule-fact"><span>Round 1 の決勝進出条件</span>'+
+        '<div class="source-rule-regions">'+regionRows(rule.advance,'予選突破順位')+'</div></div>'+
+        '<div class="source-rule-fact"><span>Round 1 出場記録</span><strong>最大'+
+        fmtNumber(rule.matchCaps['単一ラウンド'])+
+        '試合 · 予選現金賞金 $0 · 決勝の賞金は個別に確認</strong></div>'+
+        '<p class="source-rule-warning">※ Epic公式ルールの地域別通過ラインに基づき、本人Epic ID・保存済み順位表・開催日時を照合したRound 1成績を自動掲載します。通過圏外は「予選」として掲載し、決勝進出とは区別します。Round 2の現金賞金額はこの規則から推定しません。</p>';
+    }
     const award=rule.cashPrizes;
     const selected=state.region==='all'?regionLabels:[state.region];
     const sections=selected.map(region=>{
@@ -121,7 +130,7 @@
       ' · '+esc(seriesLabel[entry.series]||entry.series||'大会')+'</span>'+
       '<h3>'+esc(entry.name)+'</h3>'+
       '<p>'+esc(modeLabel[entry.team]||entry.team||'形式未確認')+' / '+esc(entry.mode||'モード未確認')+'</p></div>'+
-      '<span class="source-rule-state '+(present?'is-ready':'is-pending')+'">'+(present?(rule?.autoApproval==='review-only'?'公式規則登録済み・確認専用':rule?.autoApproval==='verified-team-rank'?(rule.series==='unreal-cup'?'公式賞金表で自動掲載・圏外$0':'公式規則登録済み・全順位を自動掲載'):rule?.autoApproval==='verified-performance-vr'?'予選突破・決勝VRを自動掲載':'公式規則登録済み'):'ルール未登録')+'</span></div>'+
+      '<span class="source-rule-state '+(present?'is-ready':'is-pending')+'">'+(present?(rule?.autoApproval==='review-only'?'公式規則登録済み・確認専用':rule?.autoApproval==='verified-team-rank'?(rule.series==='unreal-cup'?'公式賞金表で自動掲載・圏外$0':'公式規則登録済み・全順位を自動掲載'):rule?.autoApproval==='verified-performance-vr'?'予選突破・決勝VRを自動掲載':rule?.autoApproval==='verified-duo-qualifier-only'?'予選突破・参加$0を自動掲載':'公式規則登録済み'):'ルール未登録')+'</span></div>'+
       details+
       '<details class="source-rule-identifiers"><summary>大会ID・適用範囲</summary><div>'+ids.map(id=>'<code>'+esc(id)+'</code>').join('')+
       '<p>公式規則が確認済みでも、本人Epic ID・地域・開催枠・順位表の検証が必要です</p></div></details>'+
