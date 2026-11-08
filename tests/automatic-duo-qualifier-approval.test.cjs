@@ -75,3 +75,12 @@ test('only known verified checkpoint rows are accepted, never unrelated events',
  assert.equal(out.held.length>=1,true);
  assert.equal(decide(r,w,{...cp(r),proposals:[unmatched]},db(w),now).approved,false);
 });
+
+test('queue reviewReason is not evidence; only that field may vary from immutable scan row',()=>{
+ const w=win(),original=row(w,19),queued={...original,reviewReason:'公式の順位条件を登録していない大会'};
+ const state=cp(original),info=decide(queued,w,state,db(w),now);
+ assert.equal(info.approved,true,info.reason);
+ assert.equal(info.qualified,true);
+ const tampered={...queued,points:501};
+ assert.equal(decide(tampered,w,state,db(w),now).approved,false);
+});
