@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-07T23:16:39.215Z",
+  "reviewedAt": "2026-11-08T04:42:18Z",
   "description": "Resolved historic review candidates: published, duplicate or participation",
   "entries": [
     {
@@ -6196,6 +6196,182 @@
       "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-3-official-rules",
       "source": "https://www.fortnite.com/competitive/events/S41_ReloadReloadSoloVictoryCup/?region=ME&round=S41_ReloadSoloVictoryCup_Round1_Day1_ME",
       "evidence": "5th in ME qualifier; S41 ME cutoff top320; same-day Round2 finals exists, 9 reported games vs 8-game rule noted, no game count alteration."
+    },
+    {
+      "id": "auto-s41-0f9a523f1eaa",
+      "recordId": "auto-s41-0f9a523f1eaa",
+      "decision": "published",
+      "policy": "manual-reviewed-official-prize-rules",
+      "approvedBy": "ChatGPT (user-authorized GitHub integration)",
+      "reviewedAt": "2026-11-08",
+      "rule": "https://www.fortnite.com/competitive/events/S41_PSCupDaysOfPlay/?region=NAW&round=S41_PSCupDaysOfPlay_Qualifier_NAW",
+      "source": "https://www.fortnite.com/competitive/events/S41_PSCupDaysOfPlay/?region=NAW&round=S41_PSCupDaysOfPlay_Qualifier_NAW",
+      "evidence": "S41 NAW Days of Play PlayStation Cup BR予選、保存済み本人Epic ID・個別順位に基づき3532位・44pt・2試合・0キルを確認。決勝出場圏外で現金賞金$0。OCEの無効セッションとは別枠。コスメ報酬は未確定扱い。"
+    },
+    {
+      "id": "auto-s30-21cf7211e559",
+      "recordId": "auto-s30-21cf7211e559",
+      "decision": "published",
+      "policy": "manual-reviewed-official-prize-rules",
+      "approvedBy": "ChatGPT (user-authorized GitHub integration)",
+      "reviewedAt": "2026-11-08",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=OCE&round=S30_SoloVictoryCashCup_Event6Round2_OCE",
+      "evidence": "保存済みOsirion個別順位表の本人Epic IDと536位・2試合・2キル・0VRを照合。Fortnite Tracker開催枠とEpic公式規則でRound2の0VRは賞金$0。順位表全ページの取得は未完了。"
+    },
+    {
+      "id": "auto-s30-4447173f8e61",
+      "recordId": "auto-s30-4447173f8e61",
+      "decision": "published",
+      "policy": "manual-reviewed-official-prize-rules",
+      "approvedBy": "ChatGPT (user-authorized GitHub integration)",
+      "reviewedAt": "2026-11-08",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=OCE&round=S30_SoloVictoryCashCup_Event6Round2_OCE",
+      "evidence": "保存済みOsirion個別順位表の本人Epic IDと564位・3試合・3キル・0VRを照合。Fortnite Tracker開催枠とEpic公式規則でRound2の0VRは賞金$0。順位表全ページの取得は未完了。"
+    },
+    {
+      "id": "auto-s40-1fa11f30ba16",
+      "recordId": "auto-s40-1fa11f30ba16",
+      "decision": "published",
+      "policy": "manual-reviewed-official-prize-rules",
+      "approvedBy": "ChatGPT (user-authorized GitHub integration)",
+      "reviewedAt": "2026-11-08",
+      "rule": "https://fortnitetracker.com/events/epicgames_S40_FNCSDivisionalCup_Division1_ME?window=S40_FNCSDivisionalCup_Division1_Week2Day2_ME",
+      "source": "https://www.fortnite.com/competitive/events/S40_FNCSDivisionalCup_Division1/?region=ME&round=S40_FNCSDivisionalCup_Division1_Week2Day2_ME",
+      "evidence": "S40 ME FNCS Division1 Week2 Day2の保存済み個別順位と本人Epic IDで参加を確認：8位・451pt・43チームキル・2VR・10試合。この単独Day2記録から週決勝通過や賞金は断定せず、賞金$0。全ページは未取得。"
+    },
+    {
+      "id": "auto-s40-af76177b6c0d",
+      "recordId": "auto-s40-af76177b6c0d",
+      "decision": "published",
+      "policy": "manual-reviewed-official-prize-rules",
+      "approvedBy": "ChatGPT (user-authorized GitHub integration)",
+      "reviewedAt": "2026-11-08",
+      "rule": "https://fortnitetracker.com/events/epicgames_S40_FNCSDivisionalCup_Division1_ME?window=S40_FNCSDivisionalCup_Division1_Week2Day2_ME",
+      "source": "https://www.fortnite.com/competitive/events/S40_FNCSDivisionalCup_Division1/?region=ME&round=S40_FNCSDivisionalCup_Division1_Week2Day2_ME",
+      "evidence": "S40 ME FNCS Division1 Week2 Day2の保存済み個別順位と本人Epic IDで参加を確認：14位・432pt・32チームキル・2VR・9試合。この単独Day2記録から週決勝通過や賞金は断定せず、賞金$0。全ページは未取得。"
+    },
+    {
+      "id": "auto-s40-49a097b37eaa",
+      "recordId": "auto-s40-49a097b37eaa",
+      "decision": "published",
+      "policy": "manual-reviewed-official-prize-rules",
+      "approvedBy": "ChatGPT (user-authorized GitHub integration)",
+      "reviewedAt": "2026-11-08",
+      "rule": "https://fortnitetracker.com/events/epicgames_S40_FNCSDivisionalCup_Division1_ME?window=S40_FNCSDivisionalCup_Division1_Week2Day2_ME",
+      "source": "https://www.fortnite.com/competitive/events/S40_FNCSDivisionalCup_Division1/?region=ME&round=S40_FNCSDivisionalCup_Division1_Week2Day2_ME",
+      "evidence": "S40 ME FNCS Division1 Week2 Day2の保存済み個別順位と本人Epic IDで参加を確認：55位・346pt・37チームキル・1VR・11試合。この単独Day2記録から週決勝通過や賞金は断定せず、賞金$0。全ページは未取得。"
+    },
+    {
+      "id": "auto-s40-c65bf0e5b50e",
+      "recordId": "auto-s40-c65bf0e5b50e",
+      "decision": "published",
+      "policy": "manual-reviewed-official-prize-rules",
+      "approvedBy": "ChatGPT (user-authorized GitHub integration)",
+      "reviewedAt": "2026-11-08",
+      "rule": "https://fortnitetracker.com/events/epicgames_S40_FNCSDivisionalCup_Division1_ME?window=S40_FNCSDivisionalCup_Division1_Week2Day2_ME",
+      "source": "https://www.fortnite.com/competitive/events/S40_FNCSDivisionalCup_Division1/?region=ME&round=S40_FNCSDivisionalCup_Division1_Week2Day2_ME",
+      "evidence": "S40 ME FNCS Division1 Week2 Day2の保存済み個別順位と本人Epic IDで参加を確認：59位・340pt・33チームキル・1VR・11試合。この単独Day2記録から週決勝通過や賞金は断定せず、賞金$0。全ページは未取得。"
+    },
+    {
+      "id": "auto-s40-bd6feac861f3",
+      "recordId": "auto-s40-bd6feac861f3",
+      "decision": "published",
+      "policy": "manual-reviewed-official-prize-rules",
+      "approvedBy": "ChatGPT (user-authorized GitHub integration)",
+      "reviewedAt": "2026-11-08",
+      "rule": "https://fortnitetracker.com/events/epicgames_S40_FNCSDivisionalCup_Division1_ME?window=S40_FNCSDivisionalCup_Division1_Week2Day2_ME",
+      "source": "https://www.fortnite.com/competitive/events/S40_FNCSDivisionalCup_Division1/?region=ME&round=S40_FNCSDivisionalCup_Division1_Week2Day2_ME",
+      "evidence": "S40 ME FNCS Division1 Week2 Day2の保存済み個別順位と本人Epic IDで参加を確認：78位・316pt・15チームキル・1VR・10試合。この単独Day2記録から週決勝通過や賞金は断定せず、賞金$0。全ページは未取得。"
+    },
+    {
+      "id": "auto-s40-886a5fab4d3c",
+      "recordId": "auto-s40-886a5fab4d3c",
+      "decision": "published",
+      "policy": "manual-reviewed-official-prize-rules",
+      "approvedBy": "ChatGPT (user-authorized GitHub integration)",
+      "reviewedAt": "2026-11-08",
+      "rule": "https://fortnitetracker.com/events/epicgames_S40_FNCSDivisionalCup_Division1_ME?window=S40_FNCSDivisionalCup_Division1_Week2Day2_ME",
+      "source": "https://www.fortnite.com/competitive/events/S40_FNCSDivisionalCup_Division1/?region=ME&round=S40_FNCSDivisionalCup_Division1_Week2Day2_ME",
+      "evidence": "S40 ME FNCS Division1 Week2 Day2の保存済み個別順位と本人Epic IDで参加を確認：153位・211pt・19チームキル・0VR・11試合。この単独Day2記録から週決勝通過や賞金は断定せず、賞金$0。全ページは未取得。"
+    },
+    {
+      "id": "auto-s30-06ed29743d36",
+      "recordId": "auto-s30-06ed29743d36",
+      "decision": "published",
+      "policy": "manual-reviewed-official-prize-rules",
+      "approvedBy": "ChatGPT (user-authorized GitHub integration)",
+      "reviewedAt": "2026-11-08",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event8Round2_NAC",
+      "evidence": "保存済みOsirion個別順位表の本人Epic IDと466位・3試合・7キル・0VRを照合。Fortnite Tracker開催枠とEpic公式規則でRound2の0VRは賞金$0。順位表全ページの取得は未完了。"
+    },
+    {
+      "id": "auto-s31-873eba20aa62",
+      "recordId": "auto-s31-873eba20aa62",
+      "decision": "published",
+      "policy": "manual-reviewed-official-prize-rules",
+      "approvedBy": "ChatGPT (user-authorized GitHub integration)",
+      "reviewedAt": "2026-11-08",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-4-official-rules",
+      "source": "https://www.fortnite.com/competitive/events/S31_SoloVictoryCashCup/?region=NAC&round=S31_SoloVictoryCashCup_Event4Round2_NAC",
+      "evidence": "保存済みOsirion個別順位表の本人Epic IDと6169位・3試合・1キル・0VRを照合。Fortnite Tracker開催枠とEpic公式規則でRound2の0VRは賞金$0。順位表全ページの取得は未完了。"
+    },
+    {
+      "id": "auto-s31-e4bbf36c30fe",
+      "recordId": "auto-s31-e4bbf36c30fe",
+      "decision": "published",
+      "policy": "manual-reviewed-official-prize-rules",
+      "approvedBy": "ChatGPT (user-authorized GitHub integration)",
+      "reviewedAt": "2026-11-08",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-4-official-rules",
+      "source": "https://www.fortnite.com/competitive/events/S31_SoloVictoryCashCup/?region=NAC&round=S31_SoloVictoryCashCup_Event4Round2_NAC",
+      "evidence": "保存済みOsirion個別順位表の本人Epic IDと6585位・3試合・1キル・0VRを照合。Fortnite Tracker開催枠とEpic公式規則でRound2の0VRは賞金$0。順位表全ページの取得は未完了。"
+    },
+    {
+      "id": "auto-s42-b7b70c77425f",
+      "recordId": "auto-s42-b7b70c77425f",
+      "decision": "published",
+      "policy": "manual-reviewed-official-prize-rules",
+      "approvedBy": "ChatGPT (user-authorized GitHub integration)",
+      "reviewedAt": "2026-11-08",
+      "rule": "https://fortnitetracker.com/events/epicgames_S42_PerformanceEvaluation_NAC?window=S42_PerformanceEvaluation_Event1Round1_NAC",
+      "source": "https://www.fortnite.com/competitive/events/S42_PerformanceEvaluation/?region=NAC&round=S42_PerformanceEvaluation_Event1Round1_NAC",
+      "evidence": "S42 NAC Performance Evaluation Event1 Round1の保存済み順位と本人チームEpic IDを照合：317位・163pt・11キル・0VR。上位50組の通過圏外、賞金$0の予選参加記録。全ページ未取得。"
+    },
+    {
+      "id": "auto-s42-27740539ffa5",
+      "recordId": "auto-s42-27740539ffa5",
+      "decision": "published",
+      "policy": "manual-reviewed-official-prize-rules",
+      "approvedBy": "ChatGPT (user-authorized GitHub integration)",
+      "reviewedAt": "2026-11-08",
+      "rule": "https://fortnitetracker.com/events/epicgames_S42_PerformanceEvaluation_NAC?window=S42_PerformanceEvaluation_Event1Round1_NAC",
+      "source": "https://www.fortnite.com/competitive/events/S42_PerformanceEvaluation/?region=NAC&round=S42_PerformanceEvaluation_Event1Round1_NAC",
+      "evidence": "S42 NAC Performance Evaluation Event1 Round1の保存済み順位と本人チームEpic IDを照合：394位・149pt・9キル・0VR。上位50組の通過圏外、賞金$0の予選参加記録。全ページ未取得。"
+    },
+    {
+      "id": "auto-s39-5d170cd523bc",
+      "recordId": "auto-s39-5d170cd523bc",
+      "decision": "published",
+      "policy": "manual-reviewed-official-prize-rules",
+      "approvedBy": "ChatGPT (user-authorized GitHub integration)",
+      "reviewedAt": "2026-11-08",
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/1-million-dollar-unreal-cup-chapter-7-season-1-official-rules",
+      "source": "https://www.fortnite.com/competitive/events/S39_1MillionUnrealCup/?region=EU&round=S39_1MillionUnrealCup_EU",
+      "evidence": "本人Epic IDと保存済み大会順位表の個別行を照合：EU 1423位・263pt・39チームキル・0VR。Epic公式1001〜2000位はチーム$100・個人$50。順位表全ページの取得は未完了で、確認済み本人個別行と規則に基づく。"
+    },
+    {
+      "id": "auto-s39-e36a6673aa4c",
+      "recordId": "auto-s39-e36a6673aa4c",
+      "decision": "published",
+      "policy": "manual-reviewed-official-prize-rules",
+      "approvedBy": "ChatGPT (user-authorized GitHub integration)",
+      "reviewedAt": "2026-11-08",
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/1-million-dollar-unreal-cup-chapter-7-season-1-official-rules",
+      "source": "https://www.fortnite.com/competitive/events/S39_1MillionUnrealCup/?region=EU&round=S39_1MillionUnrealCup_EU",
+      "evidence": "本人Epic IDと保存済み大会順位表の個別行を照合：EU 1551位・261pt・17チームキル・0VR。Epic公式1001〜2000位はチーム$100・個人$50。順位表全ページの取得は未完了で、確認済み本人個別行と規則に基づく。"
     }
   ]
 }

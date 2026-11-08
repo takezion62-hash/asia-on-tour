@@ -2,6 +2,31 @@
   "version": 1,
   "entries": [
     {
+      "id": "reviewed-20261108-history-16-pending",
+      "date": "2026-11-08",
+      "type": "records",
+      "title": "過去大会の確認待ち16件を検証して掲載",
+      "description": "本人Epic ID付きの保存済みOsirion個別順位、Tracker開催ラウンド、Epic公式ルールを照合。2024年Solo VCの0VR決勝5件（現金$0）、S40 ME FNCS Div1 Week2 Day2の参加6組（$0）、S41 NAW PlayStation予選1件（$0）、S42 NAC Performance Evaluation参加2組（$0）、S39 EU Unreal Cup 1001〜2000位の2組（各チーム$100・各選手$50）を追加。既存戦績・賞金は保持、未取得の順位表ページは未完了として明記。確認待ち候補を解決済み台帳へ移して再追加を防止。",
+      "recordIds": [
+        "auto-s41-0f9a523f1eaa",
+        "auto-s30-21cf7211e559",
+        "auto-s30-4447173f8e61",
+        "auto-s40-1fa11f30ba16",
+        "auto-s40-af76177b6c0d",
+        "auto-s40-49a097b37eaa",
+        "auto-s40-c65bf0e5b50e",
+        "auto-s40-bd6feac861f3",
+        "auto-s40-886a5fab4d3c",
+        "auto-s30-06ed29743d36",
+        "auto-s31-873eba20aa62",
+        "auto-s31-e4bbf36c30fe",
+        "auto-s42-b7b70c77425f",
+        "auto-s42-27740539ffa5",
+        "auto-s39-5d170cd523bc",
+        "auto-s39-e36a6673aa4c"
+      ]
+    },
+    {
       "id": "manual-20261108-s32-nac-solo-vc-e1-20241109-eight",
       "date": "2026-11-08",
       "type": "records",
