@@ -68,3 +68,14 @@ test('batch approvals never duplicate the same roster, including duplicate API r
  assert.equal(out.approved.length,1);
  assert.equal(out.held.length,1);
 });
+
+
+test('official skin reward rank can publish from a mature continuous verified partial snapshot',()=>{
+ const win={...w,end:Date.parse('2026-11-06T05:00:00Z')};
+ const partial={complete:false,rankingOrderValid:true,nextPage:2,pages:2,totalPages:100,lastSeenRank:200,
+  lastSuccessAt:'2026-11-07T07:00:00Z',proposals:[row]};
+ assert.equal(decide(row,win,partial,data()).approved,true);
+ assert.equal(decide(row,win,{...partial,lastSeenRank:49},data()).approved,false);
+ assert.equal(decide(row,win,{...partial,retryAfter:'2030-01-01T00:00:00Z'},data()).approved,false);
+ assert.equal(decide({...row,rank:51},win,{...partial,proposals:[{...row,rank:51}]},data()).approved,false);
+});
