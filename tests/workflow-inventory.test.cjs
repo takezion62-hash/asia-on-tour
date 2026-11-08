@@ -48,3 +48,42 @@ test('full suite and focused safety checks remain registered',()=>{
  assert.match(read('scan-coverage-tests.yml'),/tests\/scan-coverage\.test\.cjs/);
  assert.match(read('safe-sync-merge-tests.yml'),/tests\/safe-sync-merge\.test\.cjs/);
 });
+
+test('parallel checks keep the original required status fail-closed',()=>{
+ const main=read('tests.yml');
+ const block=name=>{
+  const marker='\n  '+name+':\n';
+  const start=main.indexOf(marker);
+  assert.ok(start>=0,'missing job: '+name);
+  const rest=main.slice(start+marker.length);
+  const next=rest.search(/\n  [a-z][a-z0-9_-]*:\n/);
+  return next<0?rest:rest.slice(0,next);
+ };
+ const unit=block('unit'),browser=block('browser'),gate=block('test');
+ assert.match(unit,/run: npm run validate/);
+ assert.match(unit,/run: npm run test:unit/);
+ assert.match(browser,/run: npm run test:e2e/);
+ assert.match(browser,/npx playwright install --with-deps chromium/);
+ assert.match(browser,/if: always\(\)/);
+ assert.match(browser,/name: site-test-report/);
+ assert.match(gate,/name: JSON検証・単体テスト・PCスマホ回帰テスト/);
+ assert.match(gate,/needs: \[unit, browser\]/);
+ assert.match(gate,/if: \$\{\{ always\(\) \}\}/);
+ assert.match(gate,/UNIT_RESULT: \$\{\{ needs\.unit\.result \}\}/);
+ assert.match(gate,/BROWSER_RESULT: \$\{\{ needs\.browser\.result \}\}/);
+ assert.match(gate,/\$\{UNIT_RESULT\}.*!=.*success.*\|\|.*\$\{BROWSER_RESULT\}.*!=.*success/);
+ assert.match(gate,/exit 1/);
+ assert.doesNotMatch(unit,/needs: \[browser\]/);
+ assert.doesNotMatch(browser,/needs: \[unit\]/);
+});
+
+test('browser suite retains both device projects, bounded concurrency, retries and failure evidence',()=>{
+ const config=fs.readFileSync(path.resolve(__dirname,'../playwright.config.cjs'),'utf8');
+ assert.match(config,/workers:\s*2/);
+ assert.match(config,/retries:\s*process\.env\.CI\s*\?\s*1\s*:\s*0/);
+ assert.match(config,/name:\s*'PC'/);
+ assert.match(config,/name:\s*'スマホ'/);
+ assert.match(config,/trace:\s*'retain-on-failure'/);
+ assert.match(config,/screenshot:\s*'only-on-failure'/);
+ assert.match(config,/testMatch:\s*'\*\*\/\*\.spec\.cjs'/);
+});

@@ -12,10 +12,18 @@
 | 過去の大会日程 | `calendar-history.yml` | 定期実行。日程の存在を選手の出場・賞金獲得に読み替えない。 |
 | 調査候補を管理者が掲載申請 | `reviewed-candidate-publication.yml` | `candidate_ids` と根拠を確認 → `confirmation=CONFIRM` → **まず `preview_only=true`** で差分を検証 → `false` でPR作成。mainへ直接反映しない。 |
 | 既存成績・賞金・名寄せの訂正 | **専用ワークフローを再利用しない** | 出典、元の戦績ID、変更前後、本人同一性、賞金の根拠を明記した変更PRで扱う。全体テスト合格後に確認してマージ。 |
-| データ・UIの回帰テスト | `tests.yml` | JSON整合性、単体テスト、PC・スマホE2Eを実行。 |
+| データ・UIの回帰テスト | `tests.yml` | JSON整合性＋単体テスト、PC・スマホE2Eを**並列実行**。どちらも成功した場合のみ既存名「JSON検証・単体テスト・PCスマホ回帰テスト」の最終ジョブが成功。 |
 | 自動更新のマージ・再試行安全性 | `safe-sync-merge-tests.yml` / `scan-coverage-tests.yml` | 対象コードに絞った速い安全性テスト。 |
 | 専門的なUI・規則回帰 | `calendar.yml` / `special-achievements.yml` / `tournament-rules-check.yml` / `unreal-auto-check.yml` | 全体テストとは別の早期検出のため保持。 |
 | API形式の手動点検 | `osirion-probe.yml` | 読み取りのみ。結果を公開しない。 |
+
+### 全体テストの高速化（2026年11月8日）
+
+- `.github/workflows/tests.yml` は `unit`（`npm run validate` → `npm run test:unit`）と `browser`（`npm run test:e2e`、PC・スマホ両プロジェクト）を別ランナーで同時実行する。両ジョブは依存させない。
+- 既存の必須チェック名 **「JSON検証・単体テスト・PCスマホ回帰テスト」** は `test` ジョブのまま維持する。`needs: [unit, browser]` と `if: always()` で失敗・スキップの場合も判定を実行し、**両方が `success` の場合だけ**パスする。既存のブランチ保護の必須チェックを削除・置換しない。
+- Playwright の `workers: 2`、CIリトライ1回、PC/スマホ全件実行、失敗時の trace/screenshot と artifact 保存、ユニット全件実行は変更しない。成功判定のためのテスト省略、`continue-on-error`、失敗の無視は禁止。
+- 変更はまずPRで検証し、両ジョブと最終ゲート成功・旧実行との時間比較を確認してからマージ。速度向上の目安は約7〜8分だが、GitHubランナーの混雑とデータ増加に左右される。
+- `tests/workflow-inventory.test.cjs` は両テストの存在・並列性・必須チェックのfail-closed動作・Playwright安全設定を回帰検査する。CI全体が失敗した場合は最終ゲートを成功扱いにしない。
 
 ### 調査に失敗・途中停止したとき
 
