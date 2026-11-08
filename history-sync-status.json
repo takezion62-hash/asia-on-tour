@@ -1,37 +1,37 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-08T18:15:25.142Z",
+  "checkedAt": "2026-11-08T22:18:13.917Z",
   "mode": "review",
   "scope": "history",
   "dateMode": "rolling",
   "selectedWindows": 18,
   "fromDate": "2023-01-01",
-  "toDate": "2026-11-08",
+  "toDate": "2026-11-09",
   "provider": "osirion",
   "linkedPlayers": 556,
-  "trackedWindows": 2934,
-  "found": 16,
-  "skipped": 9,
-  "imported": 18,
+  "trackedWindows": 2935,
+  "found": 22,
+  "skipped": 13,
+  "imported": 13,
   "scannedPages": 80,
-  "completedWindows": 200,
+  "completedWindows": 202,
   "identityConflicts": 3,
-  "alreadyRegistered": 1574,
-  "autoApprovedTotal": 878,
+  "alreadyRegistered": 1592,
+  "autoApprovedTotal": 899,
   "invalidCachedCandidates": 1,
-  "manualReviewCandidates": 16,
+  "manualReviewCandidates": 22,
   "autoApprovedCosmeticThisRun": 0,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
-  "autoApprovedUnrealThisRun": 1,
+  "autoApprovedUnrealThisRun": 0,
   "timeLimitReached": false,
   "retryWindows": 2,
   "transientFailures": 0,
   "malformedFailures": 0,
   "skippedLeaderboards": [],
-  "reviewOnlyWindows": 1314,
-  "reviewOnlyCandidates": 10,
+  "reviewOnlyWindows": 1315,
+  "reviewOnlyCandidates": 14,
   "unmappedEvents": 238,
   "unmappedEventIds": [
     "S30_ConsoleCashCups",
@@ -47,29 +47,29 @@
     "S30_Reload",
     "S30_ReloadZB"
   ],
-  "message": "最新版と安全統合：新規掲載18件、重複スキップ0件、要確認の競合0件、確認待ち16件。既存の戦績・賞金は保持。",
+  "message": "最新版と安全統合：新規掲載13件、重複スキップ0件、要確認の競合0件、確認待ち22件。既存の戦績・賞金は保持。",
   "manuallyPublished": 312,
   "manuallyResolvedDuplicates": 10,
   "lastReviewedBatchAt": "2026-11-08T14:05:13.917Z",
   "manuallyCorrected": 1,
   "lastCorrectedReviewAt": "2026-11-07T09:14:30.244Z",
   "concurrentMerge": {
-    "appended": 18,
+    "appended": 13,
     "alreadyPublished": 0,
     "reviewConflicts": 0,
-    "keptPending": 16,
-    "reconciledAt": "2026-11-08T18:15:27.133Z"
+    "keptPending": 22,
+    "reconciledAt": "2026-11-08T22:18:16.249Z"
   },
   "coverage": {
-    "total": 2934,
-    "completed": 200,
-    "notStarted": 2708,
+    "total": 2935,
+    "completed": 202,
+    "notStarted": 2707,
     "partial": 24,
     "retryWaiting": 2,
     "retryDue": 0,
-    "remaining": 2734,
+    "remaining": 2733,
     "retryCount": 2,
-    "completionPercent": 6.8,
+    "completionPercent": 6.9,
     "byRegion": {
       "OCE": {
         "total": 519,
@@ -78,13 +78,13 @@
       },
       "ME": {
         "total": 515,
-        "completed": 57,
-        "pending": 458
+        "completed": 59,
+        "pending": 456
       },
       "EU": {
-        "total": 532,
+        "total": 533,
         "completed": 37,
-        "pending": 495
+        "pending": 496
       },
       "BR": {
         "total": 513,
@@ -114,9 +114,9 @@
         "pending": 664
       },
       "2026": {
-        "total": 1270,
-        "completed": 136,
-        "pending": 1134
+        "total": 1271,
+        "completed": 138,
+        "pending": 1133
       }
     },
     "outsideScopeCheckpoints": 0,
@@ -171,7 +171,7 @@
         "region": "ME",
         "series": "victory-cup",
         "status": "partial",
-        "nextPage": 8,
+        "nextPage": 10,
         "totalPages": 18,
         "retryAfter": null,
         "errorCode": null
@@ -182,7 +182,7 @@
         "region": "OCE",
         "series": "victory-cup",
         "status": "partial",
-        "nextPage": 18,
+        "nextPage": 20,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
@@ -215,7 +215,7 @@
         "region": "NAC",
         "series": "victory-cup",
         "status": "partial",
-        "nextPage": 21,
+        "nextPage": 23,
         "totalPages": 48,
         "retryAfter": null,
         "errorCode": null
@@ -226,7 +226,7 @@
         "region": "NAC",
         "series": "victory-cup",
         "status": "partial",
-        "nextPage": 7,
+        "nextPage": 9,
         "totalPages": 92,
         "retryAfter": null,
         "errorCode": null
@@ -237,7 +237,7 @@
         "region": "ME",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 70,
+        "nextPage": 80,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
@@ -248,7 +248,7 @@
         "region": "NAC",
         "series": "victory-cup",
         "status": "partial",
-        "nextPage": 66,
+        "nextPage": 76,
         "totalPages": 91,
         "retryAfter": null,
         "errorCode": null
@@ -270,5 +270,5 @@
     "remainingPending": 45,
     "policy": "attendance-only"
   },
-  "autoApprovedDuoQualifierThisRun": 1
+  "autoApprovedDuoQualifierThisRun": 0
 }
