@@ -11,9 +11,9 @@ const clone=x=>JSON.parse(JSON.stringify(x));
 
 test('shared official tournament rules include review-only Solo Series Finals and approved types',()=>{
  assert.deepEqual(validateRegistry(registry,tournaments),[]);
- assert.equal(registry.rules.length,13);
+ assert.equal(registry.rules.length,14);
  assert.equal(Object.keys(RULES).length,7);
- assert.equal(Object.keys(CUT_OFFS).length,2);
+ assert.equal(Object.keys(CUT_OFFS).length,3);
  for(const rule of registry.rules){
   if(rule.series==='victory-cup')assert.strictEqual(RULES[rule.id].source,rule.source);
   if(rule.series==='cash-cup'){
@@ -28,6 +28,25 @@ test('shared official tournament rules include review-only Solo Series Finals an
   }
  }
 });
+
+test('S43 One Piece Zoro Zero Build is separate from BR and Mobile with verified cosmetics',()=>{
+ const rule=registry.rules.find(r=>r.id==='ch7s5-one-piece-zoro-cup-zero-build');
+ assert.ok(rule);
+ assert.equal(rule.series,'skin-cup');
+ assert.equal(rule.team,'duo');
+ assert.deepEqual(rule.eventIds,['S43_OnePieceZoroCup_ZB']);
+ assert.equal(rule.matchCaps['スキン大会'],11);
+ assert.deepEqual(rule.cosmeticRanks,{OCE:50,ME:50,EU:525,BR:100,NAC:375,NAW:100});
+ assert.equal(CUT_OFFS[rule.id].eventId,'S43_OnePieceZoroCup_ZB');
+ const {evaluate}=require('../scripts/cosmetic-rank-rules.cjs');
+ const row={tournamentId:rule.id,seasonId:'S43',chapter:7,season:5,verified:true,
+   kind:'スキン大会',region:'EU',rank:375,matches:11,kills:61,vrs:2,
+   source:'https://www.fortnite.com/competitive/events/S43_OnePieceZoroCup_ZB/?region=EU&round=S43_OnePieceZoroCup_ZB_EU'};
+ assert.equal(evaluate(row).eligible,true);
+ assert.equal(evaluate({...row,rank:526}).eligible,false);
+ assert.equal(evaluate({...row,source:'https://www.fortnite.com/competitive/events/S43_OnePieceZoroCup/?region=EU&round=S43_OnePieceZoroCup_EU'}).eligible,false);
+});
+
 
 test('unknown tournaments, tampered source URLs and mismatched event IDs cannot be registered',()=>{
  const unknown=clone(registry);unknown.rules[0].id='non-existent';
