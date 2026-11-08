@@ -1547,7 +1547,7 @@
 
     // Playstyle is separate from AOT PR, achievements and financial records.
     // Use official published records plus the existing deduplicated Epic-ID participation bridge.
-    const styleState={season:'all',team:'solo',mode:'battle-royale',series:'victory-cup',region:'all'};
+    const styleState={season:'all',team:'all',mode:'all',series:'all',region:'all'};
     let styleCompareTeam='solo',styleRowsCache=null;
     const styleAnalysisCache=new Map();
     function styleInputRecords(){
@@ -2086,6 +2086,26 @@
       if(rankingRegion&&currentView.page==='players'){updateRankingFilter('region',rankingRegion.dataset.rankingRegion);return}
       if(e.target.closest('[data-ranking-more]')&&currentView.page==='players'){rankingLimit+=30;renderRanking();return}
       if(e.target.closest('[data-registrations-more]')&&currentView.page==='updates'){registrationLimit+=20;renderUpdates();return}
+      // One-click transition from full-history evidence to the best documented
+      // apples-to-apples slice; never accept an arbitrary filter from markup.
+      const stylePreset=e.target.closest('[data-style-scope-pick]');
+      if(stylePreset&&currentView.page==='profile'){
+        e.preventDefault();
+        const preset={
+          season:stylePreset.dataset.styleScopeSeason,
+          team:stylePreset.dataset.styleScopeTeam,
+          mode:stylePreset.dataset.styleScopeMode,
+          series:stylePreset.dataset.styleScopeSeries
+        };
+        if(seasonOptions().some(x=>x.id===preset.season)&&
+          AsiaPlayerStyle.TEAMS.includes(preset.team)&&
+          styleChoices('mode').some(x=>x.id===preset.mode)&&
+          styleChoices('series').some(x=>x.id===preset.series)){
+          Object.assign(styleState,preset,{region:'all'});
+          renderProfileStyle(currentView.name);
+        }
+        return;
+      }
       const styleSeasonButton=e.target.closest('[data-style-season-pick]');
       if(styleSeasonButton&&currentView.page==='profile'){
         e.preventDefault();const season=styleSeasonButton.dataset.styleSeasonPick;
