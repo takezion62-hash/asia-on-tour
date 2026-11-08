@@ -101,3 +101,17 @@ test('batch evaluation is deduplicated and leaves different seasons review-only'
   assert.equal(result.approved[0].prizePerPlayer,400);
   assert.equal(result.held.length,1);
 });
+
+
+test('partial EU/NAC evaluation Round2 publishes proven zero-VR teams only',()=>{
+ const win={...makeWin(2,'EU'),end:Date.parse('2026-11-06T07:00:00Z')};
+ const zero=getRow(win,200,0),earned=getRow(win,3,1),qualifier=makeWin(1,'EU');
+ const partial=x=>({complete:false,rankingOrderValid:true,nextPage:3,pages:3,totalPages:100,
+  lastSeenRank:300,lastSuccessAt:'2026-11-07T08:00:00Z',proposals:[x]});
+ const result=decide(zero,win,partial(zero),data(win));
+ assert.equal(result.approved,true,result.reason);
+ assert.equal(result.record.prize,0);
+ assert.equal(decide(earned,win,partial(earned),data(win)).approved,false);
+ const top26=getRow(qualifier,10,0);
+ assert.equal(decide(top26,{...qualifier,end:win.end},partial(top26),data(qualifier)).approved,false);
+});
