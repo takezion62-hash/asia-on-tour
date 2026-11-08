@@ -2,6 +2,7 @@
 // Automatic cosmetic publication is deliberately limited to exact Epic rank rules.
 // Never infer cash, physical delivery, an unlisted event, or player identity.
 const {CUT_OFFS,evaluate:evaluateRank}=require('./cosmetic-rank-rules.cjs');
+const {verifiedPartialPage}=require('./verified-partial-page.cjs');
 const people=r=>Array.isArray(r?.players)&&r.players.length?r.players:[r?.player];
 const signature=r=>people(r).slice().sort((a,b)=>a.localeCompare(b,'ja')).join('|');
 const decline=reason=>({approved:false,reason});
@@ -15,7 +16,11 @@ function decide(row,win,checkpoint,data){
  if(!row?.reviewOnly||row.kind!=='参加確認'||row.prize!==null)return decline('スキン報酬判定の元データではありません');
  const cutoff=cutoffForWindow(win);
  if(cutoff===null)return decline('公式の順位条件を登録していない大会');
- if(!checkpoint?.complete||!Array.isArray(checkpoint.proposals)||!checkpoint.proposals.some(x=>x.id===row.id))
+ // The verified final rank and a fully validated saved page may establish
+ // eligibility without reading every lower-ranked team. Keep completion-only
+ // semantics for any page whose order or scan provenance is uncertain.
+ if(!Array.isArray(checkpoint?.proposals)||!checkpoint.proposals.some(x=>x.id===row.id)||
+    (!checkpoint.complete&&!verifiedPartialPage(row,win,checkpoint)))
   return decline('対象順位表の安全な走査が完了していません');
  const catalog=data.tournaments.catalog.find(x=>x.id===row.tournamentId);
  if(!catalog||catalog.series!=='skin-cup'||catalog.seasonId!==win.seasonId||
