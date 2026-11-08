@@ -11,7 +11,7 @@ const clone=x=>JSON.parse(JSON.stringify(x));
 
 test('shared official tournament rules include review-only Solo Series Finals and approved types',()=>{
  assert.deepEqual(validateRegistry(registry,tournaments),[]);
- assert.equal(registry.rules.length,14);
+ assert.equal(registry.rules.length,16);
  assert.equal(Object.keys(RULES).length,7);
  assert.equal(Object.keys(CUT_OFFS).length,3);
  for(const rule of registry.rules){
@@ -192,4 +192,23 @@ test('S39 NAW Solo Series Finals has verified tier thresholds and stays review-o
  assert.equal(payout(76),0);
  assert.equal(RULES[rule.id],undefined,'Unconfirmed historical prize rows stay review-only');
  assert.equal(CUT_OFFS[rule.id],undefined);
+});
+
+test('official S36 console and S43 Reload duo Round1 scopes are strictly registered',()=>{
+ const consoleCup=registry.rules.find(r=>r.id==='ch6s3-console-duos-victory');
+ const reload=registry.rules.find(r=>r.id==='ch7s5-reload-zero-build-duos-cash-cup');
+ assert.equal(consoleCup.autoApproval,'verified-duo-qualifier-only');
+ assert.equal(consoleCup.advance.NAW,250);assert.equal(consoleCup.advance.NAC,500);
+ assert.equal(reload.advance.OCE,20);assert.equal(reload.autoApproval,'verified-duo-qualifier-only');
+ assert.equal(reload.matchCaps['単一ラウンド'],12);
+ assert.equal(reload.cashPrizes,undefined,'Round2 cash is not inferred from Round1');
+ for(const mutation of [
+  doc=>doc.rules.find(r=>r.id===reload.id).advance.OCE=25,
+  doc=>doc.rules.find(r=>r.id===reload.id).cashPrizes={basis:'per-player',currency:'USD'},
+  doc=>doc.rules.find(r=>r.id===consoleCup.id).advance.NAW=500,
+  doc=>doc.rules.find(r=>r.id===consoleCup.id).prizePerVictory=100
+ ]){
+  const fake=clone(registry);mutation(fake);
+  assert.ok(validateRegistry(fake,tournaments).length>0,'unauthorized qualifiers/payouts must fail');
+ }
 });
