@@ -27,7 +27,7 @@
 - 直近・履歴の既存自動収集で再評価。GitHub Actionsが安全統合して公開するため、実際の反映件数は実行ログ・`results.json`・残候補で確認する。
 
 ## 継続保留する内容
-- S30/S31 NACの古い0VR決勝：当時はEpic公式ルールが「NA」表記で、現行NACの地域マッピングを自動推定しない。
+- S30/S31 NACの旧決勝：Epic公式は全地域のRound2 0VR=$0と明記。本人照合・順位連続性・0ptの確認ができれば0VR決勝のみ掲載。旧「NA」予選突破順位はNACへ推定転用しない。
 - S39 Unreal Cup：本人Epic IDと順位表の完全スナップショット、既存戦績との照合が必要。
 - S42 Performance Evaluation、2024 Duos Cash Cup、FNCS Div1、PlayStation Cup：公式進出・賞金規則または決勝/賞金実績の個別根拠が必要。
 - Zoro Cup EU：既存掲載との順位・ID矛盾があるため重複疑いを自動解除しない。
