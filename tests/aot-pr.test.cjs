@@ -640,11 +640,10 @@ test('published verified 参加確認 earns AOT PR attendance, rank and kills, w
 test('no PR for unapproved, incomplete or non-official published 参加確認',()=>{
   for(const extra of [
     {verified:false},{reviewOnly:true},{reported:true},{partial:true},
-    {prize:100},{rank:null},{points:-1},{kills:-1},{matches:0},{vrs:99},
+    {prize:100},{rank:-1},{points:-1},{kills:-1},{matches:0},{vrs:99},
     {date:'2026-13-99'},{seasonId:'S43'},{tournamentId:'wrong'},
     {event:'wrong'},{qualification:'qualified'},{status:'予選突破'},
     {source:'https://evil.example/competitive/events/S42_ReloadSoloVictoryCup/?region=NAW&round=S42_ReloadSoloVictoryCup_Event5_Round1_NAW'},
-    {source:'https://fortnitetracker.com/events/epicgames_S42_ReloadSoloVictoryCup_NAW?window=S42_ReloadSoloVictoryCup_Event5_Round1_NAW'},
     {source:'https://www.fortnite.com/competitive/events/S42_Other/?region=NAW&round=S42_ReloadSoloVictoryCup_Event5_Round1_NAW'}
   ]){
     const record=publishedAttendance(extra);
@@ -694,4 +693,26 @@ test('unscored invalid duplicate round cannot suppress a valid approved attendan
   const report=score([invalid,valid],publishedAttendanceCatalog);
   assert.equal(report.publishedParticipationIncluded,1);
   assert.equal(report.playerCount,1);
+});
+
+
+test('verified participation with unknown rank, eliminations or match counts still earns attendance, without invented stats',()=>{
+  const row=publishedAttendance({rank:null,kills:null,points:null,vrs:null,matches:null});
+  assert.equal(PR.verifiedPublishedAttendance(row,publishedAttendanceCatalog),true);
+  const report=score([row],publishedAttendanceCatalog);
+  const p=report.byName.get('P1');
+  approx(p.attendance,10);
+  approx(p.placement,0);
+  approx(p.eliminations,0);
+  approx(p.score,10);
+  approx(p.bonus,0);
+  approx(p.qualificationBonus,0);
+});
+test('officially matched Tracker window on verified published attendance counts, but mismatched event or region is rejected',()=>{
+  const row=publishedAttendance({
+    source:'https://fortnitetracker.com/events/epicgames_S42_ReloadSoloVictoryCup_NAW?window=S42_ReloadSoloVictoryCup_Event5_Round1_NAW'
+  });
+  assert.equal(PR.verifiedPublishedAttendance(row,publishedAttendanceCatalog),true);
+  approx(score([row],publishedAttendanceCatalog).byName.get('P1').attendance,10);
+  assert.equal(PR.verifiedPublishedAttendance({...row,source:row.source.replace('NAW?window','EU?window')},publishedAttendanceCatalog),false);
 });

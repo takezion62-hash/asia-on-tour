@@ -288,24 +288,31 @@
       typeof row.date!=='string'||!/^\d{4}-\d{2}-\d{2}$/.test(row.date)||
       !Number.isFinite(Date.parse(row.date))||
       new Date(row.date).toISOString().slice(0,10)!==row.date||
-      !Number.isSafeInteger(row.rank)||row.rank<1||
-      !Number.isSafeInteger(row.points)||row.points<0||
-      !Number.isSafeInteger(row.kills)||row.kills<0||
-      !Number.isSafeInteger(row.vrs)||row.vrs<0||
-      !Number.isSafeInteger(row.matches)||row.matches<1||row.vrs>row.matches)return false;
+      (row.rank!=null&&(!Number.isSafeInteger(row.rank)||row.rank<1))||
+      (row.points!=null&&(!Number.isSafeInteger(row.points)||row.points<0))||
+      (row.kills!=null&&(!Number.isSafeInteger(row.kills)||row.kills<0))||
+      (row.vrs!=null&&(!Number.isSafeInteger(row.vrs)||row.vrs<0))||
+      (row.matches!=null&&(!Number.isSafeInteger(row.matches)||row.matches<1))||
+      (row.vrs!=null&&row.matches!=null&&row.vrs>row.matches))return false;
     const size=TEAM_SIZES[t.team];
     const people=Array.isArray(row.players)&&row.players.length?row.players:[row.player];
     if(!size||people.length!==size||new Set(people).size!==size||
       people.some(p=>typeof p!=='string'||!p.trim())||
       row.player!==people.join(' / '))return false;
     try{
-      const u=new URL(row.source),match=u.pathname.match(/^\/competitive\/events\/([^/]+)\/$/);
-      const event=match?decodeURIComponent(match[1]):null,round=u.searchParams.get('round');
-      return u.protocol==='https:'&&u.hostname==='www.fortnite.com'&&
-        !u.username&&!u.password&&!u.hash&&
-        Array.isArray(t.sourceEventIds)&&t.sourceEventIds.includes(event)&&
+      const u=new URL(row.source);
+      if(u.protocol!=='https:'||u.username||u.password||u.hash||
+        !Array.isArray(t.sourceEventIds))return false;
+      const epic=u.hostname==='www.fortnite.com'&&u.pathname.match(/^\/competitive\/events\/([^/]+)\/$/);
+      const tracker=['fortnitetracker.com','www.fortnitetracker.com'].includes(u.hostname)&&
+        u.pathname.match(/^\/events\/epicgames_(S\d+_[a-zA-Z0-9_]+)_(ME|EU|NAC|NAW|OCE|BR)$/);
+      const event=epic?decodeURIComponent(epic[1]):tracker?tracker[1]:null;
+      const round=epic?u.searchParams.get('round'):tracker?u.searchParams.get('window'):null;
+      return (epic&&u.searchParams.get('region')===row.region||
+        tracker&&tracker[2]===row.region)&&
+        t.sourceEventIds.includes(event)&&
         typeof round==='string'&&round.startsWith(row.seasonId+'_')&&
-        round.endsWith('_'+row.region)&&u.searchParams.get('region')===row.region;
+        round.endsWith('_'+row.region);
     }catch{return false}
   }
 
