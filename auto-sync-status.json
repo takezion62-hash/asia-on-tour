@@ -20,7 +20,7 @@
   "alreadyRegistered": 36,
   "autoApprovedTotal": 782,
   "invalidCachedCandidates": 0,
-  "manualReviewCandidates": 1,
+  "manualReviewCandidates": 0,
   "autoApprovedCosmeticThisRun": 0,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
@@ -31,13 +31,13 @@
   "malformedFailures": 0,
   "skippedLeaderboards": [],
   "reviewOnlyWindows": 20,
-  "reviewOnlyCandidates": 1,
+  "reviewOnlyCandidates": 0,
   "unmappedEvents": 2,
   "unmappedEventIds": [
     "S42_ArenaTestCup",
     "S43_OnePieceZoroCup_ZB"
   ],
-  "message": "最新版と安全統合：新規掲載0件、重複スキップ0件、要確認の競合0件、確認待ち1件。既存の戦績・賞金は保持。",
+  "message": "直近AUTO SYNCのME 2026/11/7 Trios Cash Cup、Stain/Job/ZAZI 673位・272pt・87K・1VRを個別確認し、公式賞金上位5組の圏外につき現金$0で掲載。レビュー残り0件。順位表全34ページの取得は未完了（先頭24ページ検証済み）。既存戦績・賞金は保持。",
   "concurrentMerge": {
     "appended": 0,
     "alreadyPublished": 0,
@@ -130,5 +130,7 @@
         "errorCode": null
       }
     ]
-  }
+  },
+  "manuallyPublished": 1,
+  "lastReviewedBatchAt": "2026-11-08T01:59:35.049Z"
 }
