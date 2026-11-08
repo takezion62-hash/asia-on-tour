@@ -1,20 +1,20 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-07T20:49:01.572Z",
+  "checkedAt": "2026-11-08T01:19:24.654Z",
   "mode": "review",
   "scope": "recent",
   "dateMode": null,
-  "selectedWindows": 1,
+  "selectedWindows": 3,
   "fromDate": null,
   "toDate": null,
   "provider": "osirion",
-  "linkedPlayers": 522,
-  "trackedWindows": 18,
+  "linkedPlayers": 524,
+  "trackedWindows": 20,
   "found": 1,
   "skipped": 0,
   "imported": 0,
-  "scannedPages": 12,
+  "scannedPages": 36,
   "completedWindows": 17,
   "identityConflicts": 3,
   "alreadyRegistered": 36,
@@ -30,7 +30,7 @@
   "transientFailures": 0,
   "malformedFailures": 0,
   "skippedLeaderboards": [],
-  "reviewOnlyWindows": 18,
+  "reviewOnlyWindows": 20,
   "reviewOnlyCandidates": 1,
   "unmappedEvents": 2,
   "unmappedEventIds": [
@@ -43,23 +43,23 @@
     "alreadyPublished": 0,
     "reviewConflicts": 0,
     "keptPending": 1,
-    "reconciledAt": "2026-11-07T20:49:03.145Z"
+    "reconciledAt": "2026-11-08T01:19:26.619Z"
   },
   "coverage": {
-    "total": 18,
+    "total": 20,
     "completed": 17,
     "notStarted": 0,
-    "partial": 1,
+    "partial": 3,
     "retryWaiting": 0,
     "retryDue": 0,
-    "remaining": 1,
+    "remaining": 3,
     "retryCount": 0,
-    "completionPercent": 94.4,
+    "completionPercent": 85,
     "byRegion": {
       "EU": {
-        "total": 4,
+        "total": 5,
         "completed": 4,
-        "pending": 0
+        "pending": 1
       },
       "NAC": {
         "total": 4,
@@ -77,9 +77,9 @@
         "pending": 1
       },
       "BR": {
-        "total": 2,
+        "total": 3,
         "completed": 2,
-        "pending": 0
+        "pending": 1
       },
       "NAW": {
         "total": 2,
@@ -89,21 +89,43 @@
     },
     "byYear": {
       "2026": {
-        "total": 18,
+        "total": 20,
         "completed": 17,
-        "pending": 1
+        "pending": 3
       }
     },
     "outsideScopeCheckpoints": 0,
     "samples": [
+      {
+        "window": "epicgames_S43_TriosCashCup_EU/S43_TriosCashCup_Event1_EU",
+        "date": "2026-11-07",
+        "region": "EU",
+        "series": "cash-cup",
+        "status": "partial",
+        "nextPage": 12,
+        "totalPages": 100,
+        "retryAfter": null,
+        "errorCode": null
+      },
       {
         "window": "epicgames_S43_TriosCashCup_ME/S43_TriosCashCup_Event1_ME",
         "date": "2026-11-07",
         "region": "ME",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 12,
+        "nextPage": 24,
         "totalPages": 34,
+        "retryAfter": null,
+        "errorCode": null
+      },
+      {
+        "window": "epicgames_S43_TriosCashCup_BR/S43_TriosCashCup_Event1_BR",
+        "date": "2026-11-08",
+        "region": "BR",
+        "series": "cash-cup",
+        "status": "partial",
+        "nextPage": 12,
+        "totalPages": 55,
         "retryAfter": null,
         "errorCode": null
       }
