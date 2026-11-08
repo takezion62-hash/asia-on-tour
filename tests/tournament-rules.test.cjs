@@ -19,7 +19,7 @@ test('shared official tournament rules include review-only Solo Series Finals an
   if(rule.series==='cash-cup'){
    assert.equal(RULES[rule.id],undefined);
    assert.equal(CUT_OFFS[rule.id],undefined);
-   assert.ok(['verified-team-rank','review-only'].includes(rule.autoApproval));
+   assert.ok(['verified-team-rank','review-only','verified-duo-qualifier-only'].includes(rule.autoApproval));
   }
   if(rule.series==='skin-cup'){
    assert.equal(CUT_OFFS[rule.id].source,rule.source);
