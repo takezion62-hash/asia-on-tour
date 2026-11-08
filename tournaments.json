@@ -263,6 +263,10 @@
         {
           "id": "aussieantics-fncs-cup",
           "label": "AussieAntics FNCS Cup"
+        },
+        {
+          "id": "playstation-cup",
+          "label": "PlayStation Cup"
         }
       ]
     },
@@ -2298,6 +2302,36 @@
         {
           "text": "Fortnite TrackerのAussieAntics FNCS Cup OCE：2024/9/6 Round2、上位800組が予選突破、OCE賞金一覧。添付のAim/3peace結果31位・14キル・1VRを参照。",
           "url": "https://fortnitetracker.com/events/epicgames_S31_InfluencerCup_OCE?window=S31_InfluencerCup_Round2_OCE"
+        }
+      ]
+    },
+    {
+      "id": "ch6s3-playstation-cup",
+      "name": "PlayStation Cup",
+      "chapter": 6,
+      "season": 3,
+      "seasonId": "S36",
+      "sourceEventIds": [
+        "S36_PlayStationCup"
+      ],
+      "series": "playstation-cup",
+      "mode": "battle-royale",
+      "subtype": "playstation-cup",
+      "team": "solo",
+      "platform": "playstation",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "Fortnite公式大会ページで2025/7/27 NAW決勝・PlayStation限定・Solo Battle Royale・6試合を確認。",
+          "url": "https://www.fortnite.com/competitive/events/S36_PlayStationCup/?region=NAW"
+        },
+        {
+          "text": "Fortnite TrackerのNAW決勝順位表と、2位$1,250・6〜40位$400等の順位別個人賞金を確認。",
+          "url": "https://fortnitetracker.com/events/epicgames_S36_PlayStationCup_NAW?window=S36_PlayStationCup_Final_NAW"
+        },
+        {
+          "text": "OsirionのNAW決勝・賞金順位別設定も照合。",
+          "url": "https://www.osirion.gg/tournaments/S36_PlayStationCup_Final_NAW"
         }
       ]
     }
