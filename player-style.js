@@ -151,7 +151,7 @@
   // Stage 1 starts from a single verified competition record. Stages 2/3
   // only describe stronger evidence; they never turn team K/VR into individual
   // kill or win contributions, and never guess a tactical IGL/fragging role.
-  function progressiveInsights(rows,stats,adequate){
+  function progressiveInsights(rows,stats,adequate,filters={}){
     const total=stats?.records||0,windows=adequate?.windows||0;
     const stage=!total?'none':adequate.level==='qualified'?'detailed':
       adequate.level==='provisional'?'provisional':'basic';
@@ -172,7 +172,7 @@
     if(awards.length>0)add('cash','賞金獲得記録あり','賞金付き記録 '+awards.length+'件（チーム賞金と個人額は区別）');
     if(skin.length>0)add('cosmetic','スキン大会で実績あり','対象の掲載記録 '+skin.length+'件');
     if(windows>=5)add('experience','遠征大会への継続参加',windows+'開催枠の出場記録を確認');
-    if(stats.kpm!=null&&adequate.level!=='insufficient'){
+    if(filters.team!=='all'&&stats.kpm!=null&&adequate.level!=='insufficient'){
       add('kill-rate','K/試合 '+stats.kpm.toFixed(2),
         '出典から確認できた'+stats.killMatches+'試合の効率（個人/チームは選択条件による）');
     }
@@ -380,7 +380,7 @@
     const overlapping=[...new Set([...ownAll.overlapping,...chosen.overlapping])];
     const recent=momentum(chosen.rows);
     return {player:name,filters:f,stats,style,regions:allRegionMetrics,affinity,trend,
-      insights:progressiveInsights(chosen.rows,stats,adequacy(chosen.rows)),
+      insights:progressiveInsights(chosen.rows,stats,adequacy(chosen.rows),f),
       regionHighlights:regionHighlights(allRegionMetrics),
       recommendedScope:recommendedScope(ownAll.rows,helpers),
       specialties:regionalSpecialties,momentum:recent,scouting:scouting(chosen.rows,stats,recent,f,style),
