@@ -1,0 +1,63 @@
+name: AOT Nov 9 verified candidate source audit and publication
+on:
+  pull_request:
+    paths:
+      - "scripts/publish-reviewed-batch-late-20261109.cjs"
+      - ".github/workflows/publish-verified-pending-20261109-late.yml"
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: aot-provider-results-main
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout selected commit
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Node runtime
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Check exact saved review candidate code
+        run: |
+          node --check scripts/publish-reviewed-batch-late-20261109.cjs
+          node scripts/publish-reviewed-batch-late-20261109.cjs --dry-run > "$RUNNER_TEMP/pending-audit.jsonl"
+          cat "$RUNNER_TEMP/pending-audit.jsonl"
+      - name: Preview branch only - never publish without explicit main dispatch
+        if: ${{ github.event_name == 'pull_request' }}
+        run: echo "Preview-only: original JSON files unchanged."
+      - name: Safely publish reviewed results to main (no force push)
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REF" = "refs/heads/main" || { echo "main only"; exit 1; }
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          for attempt in 1 2 3 4 5; do
+            git fetch origin main
+            git reset --hard origin/main
+            node scripts/publish-reviewed-batch-late-20261109.cjs --dry-run > "$RUNNER_TEMP/audit-$attempt.jsonl"
+            cat "$RUNNER_TEMP/audit-$attempt.jsonl"
+            node scripts/publish-reviewed-batch-late-20261109.cjs
+            npm run validate
+            node --test tests/manual-approval.test.cjs tests/verified-partial-page.test.cjs tests/scan-scheduler.test.cjs
+            git add results.json updates.json history-sync-review.json auto-sync-review.json history-sync-status.json auto-sync-status.json history-sync-reviewed.json
+            if git diff --cached --quiet; then
+              echo "AOT_VERIFIED_NOV09 nothing new to publish"
+              exit 0
+            fi
+            git commit -m "data: publish source-audited pending AOT tournament results"
+            if git push origin HEAD:main; then
+              echo "AOT_VERIFIED_NOV09 published to main"
+              exit 0
+            fi
+            echo "Main changed: restart validation against latest public results"
+            sleep $((attempt*3))
+          done
+          echo "AOT_VERIFIED_NOV09 safe publishing retries exhausted"
+          exit 1
