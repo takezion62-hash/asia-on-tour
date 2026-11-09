@@ -1910,6 +1910,18 @@
         +resultCard(item.record)+'</div>';
     }
     function updateRecordLinks(entry,byId){
+      if(entry.type==='participation'){
+        const teams=Array.isArray(entry.participantTeams)?entry.participantTeams:[];
+        const month=/^\d{4}-\d{2}$/.test(entry.participationMonth||'')?entry.participationMonth:'';
+        if(!month||!teams.length)return '';
+        const links=teams.map(team=>{
+          const first=team.split(' / ')[0];
+          return '<li><a href="'+escape(profileHref(first))+'" data-open-profile="'+escape(first)+'">'+escape(team)+'</a> · 出場確認（賞金なし・最終順位未確定）</li>';
+        }).join('');
+        return '<details><summary>今回追加した'+format(teams.length)+'組の出場確認を見る</summary>'
+          +'<p><a href="#results" data-participation-month-open="'+escape(month)+'">該当月の出場記録一覧を開く ↗</a></p>'
+          +'<ul class="update-record-links">'+links+'</ul></details>';
+      }
       const ids=Array.isArray(entry.recordIds)?entry.recordIds:[];
       if(!ids.length)return '';
       const records=ids.map(id=>byId.get(id)).filter(Boolean);
@@ -1919,7 +1931,7 @@
         +'</ul></details>';
     }
     function updateEntryItem(entry,byId){
-      const category=entry.type==='records'?'新着戦績':'サイト改善';
+      const category=entry.type==='records'?'新着戦績':entry.type==='participation'?'出場確認':'サイト改善';
       return '<article class="update-entry" data-update-id="'+escape(entry.id)+'"><div>'
         +'<span class="update-entry-label">'+escape(category)+'</span><time datetime="'+escape(entry.date)+'">'+escape(friendlyDate(entry.date))+'</time></div>'
         +'<h3 class="update-entry-title">'+escape(entry.title)+'</h3>'

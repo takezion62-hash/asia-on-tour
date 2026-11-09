@@ -34,6 +34,55 @@
     return '<div class="participation-scroll"><table class="participation-table"><thead><tr><th>日付</th><th>地域</th><th>順位</th><th>選手</th><th>大会 / ラウンド</th><th>Pt</th><th>キル</th><th>VR</th><th>試合</th><th>区分</th><th>出典</th></tr></thead><tbody>'+rows.map(rowHtml).join('')+'</tbody></table></div>';
   };
   const sortRows=rows=>rows.slice().sort((a,b)=>b.date.localeCompare(a.date)||a.rank-b.rank||a.event.localeCompare(b.event));
+  // Make newly added archived participation discoverable from the main results
+  // page and update history without mixing it into cash/prize statistics.
+  async function revealLatestPublished(index,picker){
+    try{
+      const log=await load('updates.json');
+      const entry=(log.entries||[]).find(e=>e.type==='participation'&&Array.isArray(e.participationIds)&&e.participationIds.length);
+      if(!entry||!/^[0-9]{4}-[0-9]{2}$/.test(entry.participationMonth||'')||
+          !index.months.some(m=>m.month===entry.participationMonth))return;
+      const candidates=await getMonth(entry.participationMonth);
+      const ids=new Set(entry.participationIds);
+      const rows=candidates.filter(row=>ids.has(row.id));
+      if(!rows.length)return;
+      const summary=document.getElementById('participation-summary');
+      const recent=document.createElement('div');
+      recent.className='participation-recent';
+      recent.innerHTML='<strong>最近追加した出場確認 '+fmt(rows.length)+'組</strong>'
+        +'<span>'+esc(entry.participationMonth)+' · NAC Unreal Cup · 最終順位は確認中</span>'
+        +'<a href="#results" data-participation-month-open="'+esc(entry.participationMonth)+'">今回の出場記録を表示 ↗</a>'
+        +'<div class="participation-recent-names">'+rows.map(r=>'<span>'+esc(r.player)+'</span>').join('')+'</div>';
+      summary?.after(recent);
+      const shortcut=document.createElement('p');
+      shortcut.className='participation-shortcut';
+      shortcut.innerHTML='<strong>新しい出場確認 '+fmt(rows.length)+'組</strong>：通常の遠征結果とは別枠で掲載'
+        +' · <a href="#results" data-participation-month-open="'+esc(entry.participationMonth)+'">出場記録を表示 ↗</a>';
+      document.querySelector('#page-results .prize-row-note')?.after(shortcut);
+      picker.value=entry.participationMonth;
+      document.getElementById('participation-region').value='all';
+    }catch(error){
+      console.warn('Recent participation update was not available:',error);
+    }
+  }
+  document.addEventListener('click',event=>{
+    const link=event.target.closest('[data-participation-month-open]');
+    if(!link)return;
+    event.preventDefault();
+    const month=link.dataset.participationMonthOpen;
+    const picker=document.getElementById('participation-month');
+    if(!picker||!Array.from(picker.options).some(o=>o.value===month))return;
+    picker.value=month;
+    const region=document.getElementById('participation-region');
+    if(region)region.value='all';
+    const query=document.getElementById('participation-search');
+    if(query)query.value='';
+    currentPage=1;
+    renderMonth();
+    if(location.hash!=='#results')location.hash='#results';
+    window.setTimeout(()=>document.getElementById('participation-archive')?.scrollIntoView({block:'start',behavior:'smooth'}),80);
+  });
+
   async function renderMonth(){
     const target=document.getElementById('participation-table');
     const picker=document.getElementById('participation-month');
@@ -81,6 +130,7 @@
         // that actually has results, while keeping zero-result months selectable.
         const firstWithRecords=m.find(month=>month.count>0);
         if(firstWithRecords)picker.value=firstWithRecords.month;
+        await revealLatestPublished(index,picker);
         renderMonth();
       }else{target.textContent='現在、出場戦績の初回自動調査を待っています';picker.disabled=true}
     }catch(error){target.textContent=error.message}

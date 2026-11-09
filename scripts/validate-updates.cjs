@@ -4,7 +4,7 @@ const path=require('node:path');
 function validateUpdateLog(results,log){
   const errors=[];
   if(!Array.isArray(results)||!log||log.version!==1||!Array.isArray(log.entries))return ['更新履歴のルート構造が不正です（version:1 / entries配列）'];
-  const ids=new Set(results.map(r=>r?.id)),entryIds=new Set(),registered=new Set();
+  const ids=new Set(results.map(r=>r?.id)),entryIds=new Set(),registered=new Set(),archived=new Set();
   let previousDate='9999-99-99';
   for(const entry of log.entries){
     if(!entry||typeof entry!=='object'||Array.isArray(entry)){errors.push('entryがオブジェクトではありません');continue}
@@ -19,11 +19,24 @@ function validateUpdateLog(results,log){
       if(entry.date>previousDate)errors.push(prefix+': 更新履歴は新しい順に並べてください');
       previousDate=entry.date;
     }
-    if(!['site','records'].includes(entry.type))errors.push(prefix+': typeはsiteまたはrecords');
+    if(!['site','records','participation'].includes(entry.type))errors.push(prefix+': typeはsite・records・participation');
     if(typeof entry.title!=='string'||!entry.title.trim()||typeof entry.description!=='string'||!entry.description.trim())errors.push(prefix+': タイトル・説明が必要');
     if(!Array.isArray(entry.recordIds)){errors.push(prefix+': recordIds配列が必要');continue}
     if(entry.type==='site'&&entry.recordIds.length)errors.push(prefix+': サイト改善には戦績を紐付けない');
     if(entry.type==='records'&&!entry.recordIds.length)errors.push(prefix+': 新着戦績が空です');
+    if(entry.type==='participation'){
+      if(entry.recordIds.length)errors.push(prefix+': 出場確認に通常戦績IDを紐付けない');
+      if(typeof entry.participationMonth!=='string'||!/^\d{4}-\d{2}$/.test(entry.participationMonth))errors.push(prefix+': 出場記録の月が不正');
+      if(!Array.isArray(entry.participationIds)||!entry.participationIds.length||
+         !Array.isArray(entry.participantTeams)||entry.participantTeams.length!==entry.participationIds?.length)
+        errors.push(prefix+': 出場記録IDとチーム名の一覧が不正');
+      for(const id of entry.participationIds||[]){
+        if(typeof id!=='string'||!/^participation-[a-f0-9]{20}$/.test(id))errors.push(prefix+': 出場記録IDの形式が不正 '+String(id));
+        if(archived.has(id))errors.push(prefix+': 出場記録IDが重複 '+String(id));
+        archived.add(id);
+      }
+      if(Array.isArray(entry.participantTeams)&&entry.participantTeams.some(x=>typeof x!=='string'||!x.trim()))errors.push(prefix+': 出場チーム名が空');
+    }
     for(const recordId of entry.recordIds){
       if(typeof recordId!=='string'||!ids.has(recordId))errors.push(prefix+': 存在しない戦績ID '+String(recordId));
       if(registered.has(recordId))errors.push(prefix+': 新着戦績IDが複数更新へ重複 '+String(recordId));

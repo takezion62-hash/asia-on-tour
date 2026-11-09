@@ -4,15 +4,24 @@
     {
       "id": "manual-reviewed-participation-20261109-nac-unreal5",
       "date": "2026-11-09",
-      "type": "records",
+      "type": "participation",
       "title": "NAC Unreal Cup 出場確認5組とMega Man重複1組を整理",
-      "description": "Epic ID照合済みのUnreal Cup5組を賞金・称号と分離した出場確認アーカイブに追加。Mega Man Cup1組は既存掲載済みであったため二重登録を防止。Unreal Cup最終順位は継続保留。",
-      "recordIds": [
+      "description": "Epic IDで照合した2025年12月21日NAC Unreal Cupの5デュオを「遠征結果」内の出場確認アーカイブに掲載。通常戦績とは別枠（賞金・称号には加算しない）。当時の保存順位は参照可能だが最終順位は照合待ち。Mega Man重複は既存記録を保持。",
+      "recordIds": [],
+      "participationMonth": "2025-12",
+      "participationIds": [
         "participation-9d4257c04505d7c72fae",
         "participation-c5df7fea4a436baccd88",
         "participation-1ebdd395a2e9b6c92b18",
         "participation-5c1d891303a435fc673c",
         "participation-03ffcf2d0755cc4f7962"
+      ],
+      "participantTeams": [
+        "Zealfnz / Acris 0x",
+        "Kahcy / まいにちフロッパー",
+        "じんくん / ぱな",
+        "でーもんくらげǃ / Hakkun",
+        "GR きのでーす / AMA-Crow"
       ]
     },
     {
