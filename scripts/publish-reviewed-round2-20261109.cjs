@@ -259,7 +259,9 @@ async function main(){
   let result;
   try{result=buildRecord(row,proof)}catch(e){held.push({id:row.id,why:String(e.message)});continue}
   const safety={verified:result.verified===true,reviewFlag:result.reviewOnly!==true,
-    numeric:numeric.every(k=>result[k]===row[k]),cash:Number.isSafeInteger(result.prize)&&result.prize>=0,
+    numeric:numeric.every(k=>result[k]===row[k]),
+    cash:(result.kind==='参加確認'&&result.prize===null)||
+      (Number.isSafeInteger(result.prize)&&result.prize>=0),
     uniqueId:!ids.has(result.id)};
   if(Object.values(safety).some(x=>x!==true)){
    held.push({id:row.id,why:'failed conservative publication guard',checks:safety});continue;
