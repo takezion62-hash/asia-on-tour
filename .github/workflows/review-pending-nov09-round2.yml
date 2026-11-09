@@ -4,6 +4,7 @@ on:
     paths:
       - "scripts/audit-review-round2-20261109.cjs"
       - "scripts/publish-reviewed-round2-20261109.cjs"
+      - "scripts/verify-unreal-nac-pending-20261109.cjs"
       - ".github/workflows/review-pending-nov09-round2.yml"
   push:
     branches: [main]
@@ -30,6 +31,7 @@ jobs:
           node scripts/audit-review-round2-20261109.cjs
           node --check scripts/publish-reviewed-round2-20261109.cjs
           node scripts/publish-reviewed-round2-20261109.cjs --dry-run
+          node --check scripts/verify-unreal-nac-pending-20261109.cjs
       - name: Validate simulated candidate update and official payout constraints
         run: |
           node scripts/publish-reviewed-round2-20261109.cjs
@@ -73,4 +75,44 @@ jobs:
             sleep $((attempt*3))
           done
           echo "AOT_ROUND2_PUBLICATION safe reconciliation failed after retries"
+          exit 1
+  unreal-full-publication:
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    needs: reviewed-publication
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Scan full historical Unreal NAC scoreboard and safely publish proven awards
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git reset --hard origin/main
+            node --check scripts/verify-unreal-nac-pending-20261109.cjs
+            node scripts/verify-unreal-nac-pending-20261109.cjs
+            npm run validate
+            node --test tests/automatic-unreal-approval.test.cjs tests/scan-scheduler.test.cjs tests/data-validation.test.cjs
+            git add results.json updates.json history-sync-review.json history-sync-status.json history-sync-reviewed.json
+            if git diff --cached --quiet; then
+              echo "UNREAL_FULL_SOURCE_CHECK held safely or already complete"
+              exit 0
+            fi
+            git commit -m "data: publish 100-page-verified NAC Unreal Cup teams and payouts"
+            if git push origin HEAD:main; then
+              echo "UNREAL_FULL_SOURCE_CHECK published full-verification results"
+              exit 0
+            fi
+            echo "Remote main changed, restart full-source verification against latest main"
+            sleep $((attempt*4))
+          done
+          echo "UNREAL_FULL_SOURCE_CHECK no safe merge after three attempts"
           exit 1
