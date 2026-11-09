@@ -14,8 +14,8 @@
     "BR"
   ],
   "minLagMinutes": 240,
-  "maxPagesPerRun": 80,
-  "maxWindowsPerRun": 18,
+  "maxPagesPerRun": 96,
+  "maxWindowsPerRun": 24,
   "autoApproveVerified": true,
   "reviewSeries": [
     "victory-cup",
@@ -28,17 +28,18 @@
     "unreal-cup",
     "test-cup"
   ],
-  "maxPagesPerWindowPerRun": 10,
+  "maxPagesPerWindowPerRun": 12,
   "priorityReview": {
     "series": "performance-evaluation",
     "region": "EU",
     "fromDate": "2026-08-01",
     "maxWindows": 2
   },
-  "maxRunMinutes": 12,
+  "maxRunMinutes": 13,
   "autoApproveCosmetic": true,
   "autoApproveCash": true,
   "autoApprovePerformance": true,
   "autoApproveUnreal": true,
-  "autoApproveDuoQualifier": true
+  "autoApproveDuoQualifier": true,
+  "minUnstartedWindowsPerRun": 6
 }
