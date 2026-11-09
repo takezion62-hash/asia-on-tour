@@ -1,0 +1,22 @@
+name: AOT candidate audit and rank source reconciliation Nov 9
+on:
+  pull_request:
+    paths:
+      - "scripts/audit-review-round2-20261109.cjs"
+      - ".github/workflows/review-pending-nov09-round2.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  source-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Verify candidate and original rank evidence
+        run: |
+          node --check scripts/audit-review-round2-20261109.cjs
+          node scripts/audit-review-round2-20261109.cjs
