@@ -71,3 +71,34 @@ test('AOT PR credits lower-ranked verified participation once, without breakthro
  await expect(publishedRow).toContainText('出場記録から 0.0');
  await expect(page.locator('#player-earnings-sum')).toHaveText('$0');
 });
+
+
+test('NAW Reload Oct 17 trio is findable in main results search on PC and mobile',async({page})=>{
+ await page.goto('/?season=all#results');
+ const box=page.locator('#search-results');
+ const matches=page.locator('#participation-main-search');
+ const expected=[
+  ['RyoIT','341','23','2'],
+  ['ろず','339','14','0'],
+  ['シルス','342','20','2']
+ ];
+ for(const [name,rank,kills,vrs] of expected){
+  await box.fill(name);
+  await expect(matches).toBeVisible();
+  const row=matches.locator('tbody tr').filter({hasText:name}).first();
+  await expect(row).toBeVisible();
+  await expect(row.locator('td').nth(2)).toHaveText('#'+rank);
+  await expect(row.locator('td').nth(6)).toHaveText(kills);
+  await expect(row.locator('td').nth(7)).toHaveText(vrs);
+  await expect(row).toContainText('通過圏外');
+ }
+ await box.fill('2026-10-17');
+ await page.locator('#region-filter').selectOption('NAW');
+ for(const [name] of expected){
+  await expect(matches.locator('tbody tr').filter({hasText:name})).toHaveCount(1);
+ }
+ await page.locator('#prize-only').check();
+ await expect(matches).toBeHidden();
+ await page.locator('#prize-only').uncheck();
+ await expect(matches).toBeVisible();
+});
