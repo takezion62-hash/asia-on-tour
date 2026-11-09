@@ -32,6 +32,14 @@ function sourceHashes(root,scope){
   result[file]=sha(fs.readFileSync(path.join(root,file)));
  return result;
 }
+// An in-flight scan is no longer authoritative when any approval input moved.
+// The runner must refresh its snapshot and rescan; never relax the merge guard.
+function changedSources(expected,current){
+ if(!expected||!current||typeof expected!=='object'||typeof current!=='object'||
+    Array.isArray(expected)||Array.isArray(current))fail('invalid approval source fingerprints');
+ return [...new Set([...Object.keys(expected),...Object.keys(current)])]
+  .filter(file=>expected[file]!==current[file]).sort();
+}
 function snapshot(scope,root=path.resolve(__dirname,'..')){
  const docs={};
  for(const file of files(scope))docs[file]=read(root,file);
@@ -98,8 +106,8 @@ function mergeCheckpoint(base,scan,latest,conflicts,windowId){
 }
 function mergeSnapshots(scope,base,scanned,latest,reviewed={version:1,entries:[]}){
  assertSnapshot(base,scope);assertSnapshot(scanned,scope);assertSnapshot(latest,scope);
- if(stringify(base.sources)!==stringify(scanned.sources))fail('approval inputs changed during scan');
- if(stringify(base.sources)!==stringify(latest.sources))
+ if(changedSources(base.sources,scanned.sources).length)fail('approval inputs changed during scan');
+ if(changedSources(base.sources,latest.sources).length)
   fail('approval identity/rules/source changed on remote: fresh scan required');
  const p=prefix(scope),rFile='results.json',uFile='updates.json',
   qFile=p+'-review.json',sFile=p+'-status.json',cFile=p+'-scan.json';
@@ -227,6 +235,14 @@ if(require.main===module){
    if(args.length!==1)fail('snapshot requires output path');
    const snap=snapshot(scope);fs.writeFileSync(args[0],JSON.stringify(snap));
    console.log('AOT_SAFE_SYNC_CAPTURE '+JSON.stringify({scope,rows:snap.docs['results.json'].length}));
+  }else if(action==='check-sources'){
+   if(args.length!==1)fail('check-sources requires a base snapshot path');
+   const base=JSON.parse(fs.readFileSync(args[0],'utf8'));
+   assertSnapshot(base,scope);
+   const changed=changedSources(base.sources,sourceHashes(path.resolve(__dirname,'..'),scope));
+   console.log('AOT_SAFE_SYNC_SOURCE_CHECK '+JSON.stringify({scope,changed,needsFreshScan:changed.length>0}));
+   // Distinguish a valid stale snapshot from a programming or filesystem error.
+   if(changed.length)process.exitCode=10;
   }else if(action==='merge'){
    if(args.length!==2)fail('merge requires base and scanned snapshot paths');
    const base=JSON.parse(fs.readFileSync(args[0],'utf8'));
@@ -239,4 +255,4 @@ if(require.main===module){
   }else fail('unknown action '+action);
  }catch(error){console.error('AOT_SAFE_SYNC_ERROR '+error.stack);process.exitCode=1}
 }
-module.exports={snapshot,mergeSnapshots,logicalKey,roundKey,mergeCheckpoint};
+module.exports={snapshot,mergeSnapshots,logicalKey,roundKey,mergeCheckpoint,changedSources};
