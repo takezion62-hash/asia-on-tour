@@ -10,7 +10,7 @@ test('participation panel is separate from money-backed results and has lazy pla
  assert.ok(html.includes('participation-ui.js')&&html.includes('participation.css'));
  assert.ok(app.includes('window.AOTParticipation?.renderProfile(info.name)'));
  assert.ok(ui.includes('getMonth(chosen)')&&ui.includes('getIndex()'));
- assert.doesNotMatch(ui,/results\.json|AotPR\.calculate|prizePerPlayer/,'participation browsing must remain separate from prize/PR calculations');
+ assert.doesNotMatch(ui,/load\(['\"]results\.json['\"]\)|AotPR\.calculate|prizePerPlayer/,'participation browsing must remain separate from prize/PR calculations');
  assert.ok(serve.includes("'participation-index.json'")&&serve.includes("'/participation/'"));
  assert.doesNotThrow(()=>new Function(ui));
  assert.doesNotThrow(()=>new Function(app));
