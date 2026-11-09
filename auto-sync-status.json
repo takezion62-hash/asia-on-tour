@@ -11,7 +11,7 @@
   "provider": "osirion",
   "linkedPlayers": 556,
   "trackedWindows": 94,
-  "found": 28,
+  "found": 0,
   "skipped": 0,
   "imported": 2,
   "scannedPages": 50,
@@ -20,7 +20,7 @@
   "alreadyRegistered": 175,
   "autoApprovedTotal": 1012,
   "invalidCachedCandidates": 0,
-  "manualReviewCandidates": 28,
+  "manualReviewCandidates": 0,
   "autoApprovedCosmeticThisRun": 0,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
@@ -43,7 +43,7 @@
     "S42_SlenderManCup_Mobile",
     "S42_SlenderManCup_ZB"
   ],
-  "message": "最新版と安全統合：新規掲載2件、重複スキップ0件、要確認の競合0件、確認待ち28件。既存の戦績・賞金は保持。",
+  "message": "検証済み確認待ち一括処理：予選突破17件、参加記録45件、既存重複解消22件。未確認は保留0件。賞金は推定しない。",
   "concurrentMerge": {
     "appended": 2,
     "alreadyPublished": 0,
@@ -237,7 +237,7 @@
     ]
   },
   "manuallyPublished": 38,
-  "lastReviewedBatchAt": "2026-11-09T13:51:00.458Z",
+  "lastReviewedBatchAt": "2026-11-09T23:19:12.132Z",
   "autoApprovedDuoQualifierThisRun": 2,
   "latestManualReview": {
     "reviewedAt": "2026-11-09T10:07:54.298Z",
