@@ -947,7 +947,16 @@ test('one official cosmetic session contains both award winners and attendance-o
   for(const event of events){
     const app=boot(script,{hash:'#tournament='+event.id});
     const markup=app.get('tournament-detail-content').innerHTML;
-    assert.equal([...markup.matchAll(/<section class="tournament-session" /g)].length,1,event.id);
+    // A tournament can have separate official sessions in multiple regions.
+    // Require the winner and attendance record to share exactly one session,
+    // without incorrectly merging distinct dates or regions into one section.
+    const sessions=[...markup.matchAll(/<section\b[^>]*data-tournament-session="([^"]+)"[^>]*>/g)]
+      .map(match=>markedContent(markup.slice(match.index),'data-tournament-session',match[1]));
+    const shared=sessions.filter(content=>{
+      const ids=[...content.matchAll(/data-tournament-record="([^"]+)"/g)].map(([,id])=>decode(id));
+      return ids.includes(event.attendance)&&ids.includes(event.winner);
+    });
+    assert.equal(shared.length,1,event.id+' winners and attendees in the same session');
     const ids=tournamentRecordIds(app);
     assert.ok(ids.includes(event.attendance),event.id+' attendance');
     assert.ok(ids.includes(event.winner),event.id+' cosmetic winner');
