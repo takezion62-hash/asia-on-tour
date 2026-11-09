@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-11-09T03:41:54.937Z",
+  "checkedAt": "2026-11-09T09:47:05.774Z",
   "windows": {
     "epicgames_S42_InoxtagIconCup_NAW/S42_InoxtagIconCup_NAW": {
       "nextPage": 50,
@@ -12,12 +12,12 @@
       "emptyAttempts": 0
     },
     "epicgames_S41_FNCSCommunityCup_ME/S41_FNCSCommunityCup_ME": {
-      "nextPage": 40,
-      "pages": 40,
-      "complete": true,
-      "coverageLimited": true,
+      "nextPage": 50,
+      "pages": 50,
+      "complete": false,
+      "coverageLimited": false,
       "totalPages": 100,
-      "lastScanned": "2026-11-05T14:04:54.890Z",
+      "lastScanned": "2026-11-09T09:46:37.495Z",
       "emptyAttempts": 0
     },
     "epicgames_S41_PSTypicalGamer_ME/S41_PSTypicalGamer_Final_ME": {
@@ -525,12 +525,12 @@
       "emptyAttempts": 0
     },
     "epicgames_S35_VictoryDuosCup_ME/S35_VictoryDuosCup_Event3Round1_ME": {
-      "nextPage": 38,
-      "pages": 38,
+      "nextPage": 48,
+      "pages": 48,
       "complete": false,
       "coverageLimited": false,
       "totalPages": 66,
-      "lastScanned": "2026-11-08T15:24:17.307Z",
+      "lastScanned": "2026-11-09T09:47:05.774Z",
       "emptyAttempts": 0
     },
     "epicgames_S30_SoloZBVictoryCashCup_OCE/S30_SoloZBVictoryCashCup_Event1Round1_OCE": {
@@ -597,12 +597,21 @@
       "emptyAttempts": 0
     },
     "epicgames_S30_SoloZBVictoryCashCup_ME/S30_SoloZBVictoryCashCup_Event3Round1_ME": {
+      "nextPage": 20,
+      "pages": 20,
+      "complete": false,
+      "coverageLimited": false,
+      "totalPages": 68,
+      "lastScanned": "2026-11-09T09:46:48.391Z",
+      "emptyAttempts": 0
+    },
+    "epicgames_S43_ReloadZBDuosCashCup_NAW/S43_ReloadZBDuosCashCup_Event1Round1_NAW": {
       "nextPage": 10,
       "pages": 10,
       "complete": false,
       "coverageLimited": false,
-      "totalPages": 68,
-      "lastScanned": "2026-11-09T03:41:43.644Z",
+      "totalPages": 71,
+      "lastScanned": "2026-11-09T09:46:26.349Z",
       "emptyAttempts": 0
     }
   }
