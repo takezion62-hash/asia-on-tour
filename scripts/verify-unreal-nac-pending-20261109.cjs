@@ -11,7 +11,7 @@ const write=(p,x)=>fs.writeFileSync(path.join(root,p),JSON.stringify(x,null,2)+'
 const assert=(condition,msg)=>{if(!condition)throw Error('UNREAL_20261109_UNVERIFIED '+msg)};
 const EVENT='S39_1MillionUnrealCup',REGION='NAC',WINDOW=EVENT+'_'+REGION;
 const KEY='epicgames_'+EVENT+'_'+REGION+'/'+WINDOW,TID='ch7s1-one-million-unreal-cup';
-const expected=new Set(['auto-s39-c71a2ed8749f','auto-s39-6080516837cb','auto-s39-04061d8fd305','auto-s39-3919abca3a94']);
+const expected=new Set(['auto-s39-68251c445ce4','auto-s39-49c379e9a4d1','auto-s39-76a4d7237962','auto-s39-9c3b4aad55db','auto-s39-3ef44cca0ac3']);
 async function fullScan(rows){
  const mappedIds=new Map(rows.map(x=>[x.teamAccountIds.slice().sort().join('|'),x.id]));
  assert(mappedIds.size===rows.length,'duplicate Epic roster');
@@ -125,6 +125,9 @@ async function main(){
  console.log('UNREAL_FULL_REVIEW '+JSON.stringify(report));
  if(process.argv.includes('--dry-run'))return;
  db.results.push(...newResults);
+ const {appendArchive}=require('./participation-archive.cjs');
+ const archive=appendArchive(root,[],db.results,{checkedAt:now});
+ assert(archive.prunedPublished>=newResults.length,'archive and published results do not align');
  for(const r of newResults)db.reviewed.entries.push({id:r.id,recordId:r.id,decision:'published',
   reviewedAt:now,approvedBy:'ChatGPT full 100-page official provider audit 2026-11-09',
   policy:'complete-leaderboard-verified-team-rank',officialRules:rule.source,source:r.source,
