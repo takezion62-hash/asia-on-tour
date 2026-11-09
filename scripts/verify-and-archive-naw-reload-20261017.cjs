@@ -12,7 +12,7 @@ const check=(ok,msg)=>{if(!ok)throw Error('RELOAD_NAW_20261017_VERIFICATION '+ms
 const nowJst=()=>new Date(Date.now()+9*3600000).toISOString().slice(0,10);
 const normalize=s=>String(s||'').normalize('NFKC').trim().replace(/\s+/g,' ').toLocaleLowerCase('en');
 const targets=Object.freeze([
- {name:'RyoIT',raw:'RyoIT',rank:341,points:298,kills:23,vrs:2,matches:7,
+ {name:'RyoIT',raw:'RyoIT',providerAlias:'りょうITだに',rank:341,points:298,kills:23,vrs:2,matches:7,
   profile:'https://fortnitetracker.com/profile/all/RyoIT/events?id=f4cd4eba-e078-4e02-999a-c7f8d911b4c8'},
  {name:'ろず',raw:'ptt ろず',rank:339,points:299,kills:14,vrs:0,matches:8,
   profile:'https://fortnitetracker.com/profile/all/ptt%20%E3%82%8D%E3%81%9A/events?id=00a599b8-02b5-4bd8-9b85-2cc0a9385784'},
@@ -59,7 +59,7 @@ async function main(){
    const r=normalizeRow(e,win);
    return r&&r.rank===t.rank&&r.points===t.points&&
     r.kills===t.kills&&r.vrs===t.vrs&&r.matches===t.matches&&
-    normalize(e.players?.[0]?.username)===normalize(t.raw);
+    [t.raw,t.providerAlias].filter(Boolean).some(n=>normalize(e.players?.[0]?.username)===normalize(n));
   });
   if(exact.length!==1){
    const nearby=entries.filter(e=>Math.abs(e.rank-t.rank)<=3 || e.pointsEarned===t.points).slice(0,25).map(e=>{
@@ -100,15 +100,15 @@ async function main(){
     accent:t.name==='RyoIT'?'cyan':'pink',
     desc:'2026/10/17 NAW Solo Reload Victory Cup Event4予選'+t.rank+
      '位・'+t.points+'pt・'+t.kills+'K・'+t.vrs+
-     'VR。320位の通過枠外。Tracker表示名「'+t.raw+'」。'});
+     'VR。320位の通過枠外。Tracker表示名「'+t.raw+'」。'+(t.providerAlias?'公式順位表表示名「'+t.providerAlias+'」。':'')});
    known.add(t.name);
   }
-  if(t.raw!==t.name){
-   const holders=Object.entries(players.confirmedAliases||{}).filter(([canonical,aliases])=>
-    aliases.includes(t.raw)&&canonical!==t.name);
-   check(!holders.length,'Tracker name alias belongs to another player: '+t.raw);
+  for(const alias of [t.raw,t.providerAlias].filter(n=>n&&n!==t.name)){
+   const holders=Object.entries(players.confirmedAliases||{}).filter(([canonical,list])=>
+    Array.isArray(list)&&list.includes(alias)&&canonical!==t.name);
+   check(!holders.length,'Tracker/provider alias belongs to another player: '+alias);
    if(!players.confirmedAliases[t.name])players.confirmedAliases[t.name]=[];
-   if(!players.confirmedAliases[t.name].includes(t.raw))players.confirmedAliases[t.name].push(t.raw);
+   if(!players.confirmedAliases[t.name].includes(alias))players.confirmedAliases[t.name].push(alias);
   }
  }
  const beforeCount=archive.entries.length;
@@ -123,7 +123,7 @@ async function main(){
   const r=modified.entries.find(x=>x.id===id);
   check(r&&r.status==='通過圏外'&&r.qualification==='outside-cutoff'&&
    r.officialCutoff===320&&r.rank===item.proposal.rank,'participation state invalid '+item.name);
-  r.note='2026/10/17 NAW Solo Reload Victory Cup Event4予選。Fortnite Tracker画像の順位・ポイント・キル・VR・試合数とEpic/Osirion順位表のEpic ID・表示名を照合。NAW通過上位320名、最終300ptのため通過圏外、予選賞金$0。プロフィール: '+item.profile;
+  r.note='2026/10/17 NAW Solo Reload Victory Cup Event4予選。Fortnite Tracker画像の順位・ポイント・キル・VR・試合数とEpic/Osirion順位表のEpic ID・表示名を照合。NAW通過上位320名、最終300ptのため通過圏外、予選賞金$0。'+(item.name==='RyoIT'?'Epic公式表示名「りょうITだに」も341位・全数値一致。':'')+'プロフィール: '+item.profile;
   changed.push({name:item.name,id});
  }
  if(changed.length){
