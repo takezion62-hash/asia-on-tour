@@ -6,6 +6,7 @@ on:
       - "scripts/scan-coverage.cjs"
       - "tests/osirion-sync.test.cjs"
       - "tests/scan-coverage.test.cjs"
+      - "tests/scan-scheduler.test.cjs"
       - "auto-sync-ui.js"
       - "tests/auto-sync-ui.test.cjs"
       - ".github/workflows/scan-coverage-tests.yml"
@@ -16,6 +17,7 @@ on:
       - "scripts/scan-coverage.cjs"
       - "tests/osirion-sync.test.cjs"
       - "tests/scan-coverage.test.cjs"
+      - "tests/scan-scheduler.test.cjs"
       - "auto-sync-ui.js"
       - "tests/auto-sync-ui.test.cjs"
       - ".github/workflows/scan-coverage-tests.yml"
@@ -38,4 +40,4 @@ jobs:
           node --check auto-sync-ui.js
           npm run validate
       - name: Test partial checkpoints, safe retries and browser status
-        run: node --test tests/scan-coverage.test.cjs tests/osirion-sync.test.cjs tests/auto-sync-ui.test.cjs
+        run: node --test tests/scan-coverage.test.cjs tests/scan-scheduler.test.cjs tests/osirion-sync.test.cjs tests/auto-sync-ui.test.cjs

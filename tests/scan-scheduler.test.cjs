@@ -45,3 +45,38 @@ test('participation scheduler reserves a finishable slot after fresh and histori
  assert.ok(picked.some(x=>x.key===older.key));
  assert.ok(picked.some(x=>x.key===almost.key));
 });
+
+test('expanded historical scanning reserves at least six never-scanned windows while finishing partial boards',()=>{
+ const years=['2024','2025','2026'];
+ const partial=years.flatMap(year=>['victory-cup','cash-cup'].map(series=>
+   make(year,series,'ME','-in-progress')));
+ const finishing=make('2025','cash-cup','EU','-finishable');
+ const unseen=years.flatMap(year=>['ME','EU','NAC','NAW','OCE','BR'].map(region=>
+   make(year,'fncs',region,'-unseen')));
+ const state={windows:{}};
+ for(const w of partial)state.windows[w.key]={nextPage:15,totalPages:100};
+ state.windows[finishing.key]={nextPage:98,totalPages:100};
+ const chosen=selectHistoricalWindows([...partial,finishing,...unseen],state,
+  {maxWindowsPerRun:16,maxPagesPerWindowPerRun:8,minUnstartedWindowsPerRun:6},
+  now,[]);
+ assert.equal(chosen.length,16);
+ assert.equal(new Set(chosen.map(w=>w.key)).size,chosen.length);
+ assert.ok(chosen.some(w=>w.key===finishing.key),'nearly completed window remains a priority');
+ assert.ok(chosen.filter(w=>!state.windows[w.key]).length>=6,'new coverage should advance');
+ for(const year of years){
+  assert.ok(chosen.some(w=>w.dateJst.startsWith(year)&&w.series==='victory-cup'),'yearly Victory Cup coverage');
+  assert.ok(chosen.some(w=>w.dateJst.startsWith(year)&&w.series!=='victory-cup'),'yearly other-series coverage');
+ }
+ assert.ok(new Set(chosen.map(w=>w.region)).size>=5,'spread to multiple overseas regions');
+});
+test('unstarted-window quota never ignores future retry deadlines or overflows the configured limit',()=>{
+ const eligible=Array.from({length:12},(_,i)=>make('2025','cash-cup','NAC','-new'+i));
+ const delayed=make('2025','cash-cup','EU','-retry-later');
+ const state={windows:{[delayed.key]:{retryAfter:'2030-01-01T00:00:00Z'}}};
+ const chosen=selectHistoricalWindows([...eligible,delayed],state,
+  {maxWindowsPerRun:7,maxPagesPerWindowPerRun:5,minUnstartedWindowsPerRun:6},
+  now,[]);
+ assert.equal(chosen.length,7);
+ assert.ok(!chosen.some(w=>w.key===delayed.key));
+ assert.equal(new Set(chosen.map(w=>w.key)).size,7);
+});
