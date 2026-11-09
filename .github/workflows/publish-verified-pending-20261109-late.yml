@@ -4,6 +4,10 @@ on:
     paths:
       - "scripts/publish-reviewed-batch-late-20261109.cjs"
       - ".github/workflows/publish-verified-pending-20261109-late.yml"
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/publish-verified-pending-20261109-late.yml"
   workflow_dispatch:
 permissions:
   contents: write
@@ -33,7 +37,7 @@ jobs:
         run: |
           echo "Preview-only: original JSON files unchanged."
       - name: Safely publish reviewed results to main (no force push)
-        if: ${{ github.event_name == 'workflow_dispatch' }}
+        if: ${{ github.event_name == 'workflow_dispatch' || github.event_name == 'push' }}
         run: |
           set -euo pipefail
           test "$GITHUB_REF" = "refs/heads/main" || { echo "main only"; exit 1; }
