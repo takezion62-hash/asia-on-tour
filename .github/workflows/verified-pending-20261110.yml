@@ -6,6 +6,7 @@ on:
       - '.github/workflows/verified-pending-20261110.yml'
       - 'scripts/review-candidates-20261110.cjs'
       - 'tests/participation-ui.test.cjs'
+      - 'scripts/verify-s30-finals-20261110.cjs'
   workflow_dispatch:
 permissions:
   contents: write
@@ -39,6 +40,7 @@ jobs:
             git reset --hard origin/main
             node scripts/review-candidates-20261110.cjs --audit
             node scripts/review-candidates-20261110.cjs
+            node scripts/verify-s30-finals-20261110.cjs
             npm run validate
             node --test tests/participation-sync.test.cjs tests/participation-ui.test.cjs tests/safe-sync-merge.test.cjs
             git add results.json updates.json auto-sync-review.json history-sync-review.json auto-sync-status.json history-sync-status.json history-sync-reviewed.json participation participation-index.json
