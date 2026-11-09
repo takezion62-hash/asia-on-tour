@@ -4,6 +4,7 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/verify-naw-reload-20261017.yml'
+      - 'scripts/verify-and-archive-naw-reload-20261017.cjs'
   workflow_dispatch:
 permissions:
   contents: write
