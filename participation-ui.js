@@ -59,8 +59,8 @@
       shortcut.innerHTML='<strong>新しい出場確認 '+fmt(rows.length)+'組</strong>：通常の遠征結果とは別枠で掲載'
         +' · <a href="#results" data-participation-month-open="'+esc(entry.participationMonth)+'">出場記録を表示 ↗</a>';
       document.querySelector('#page-results .prize-row-note')?.after(shortcut);
-      picker.value=entry.participationMonth;
-      document.getElementById('participation-region').value='all';
+      // Keep the latest populated month as the default for all visitors.
+      // The newly published historical month is opened only via its shortcut.
     }catch(error){
       console.warn('Recent participation update was not available:',error);
     }
