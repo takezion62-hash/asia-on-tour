@@ -113,7 +113,14 @@ function processAll(){
       reviewedAt:now,source:p.source,policy:'score-and-session-equivalence'});
      adjudicated.add(p.id);
     }
-   }else held.push({id:p.id,player:p.player,reason:'conflicting published team/session/score'});
+   }else{
+    if(process.argv.includes('--audit'))console.log('AOT_20261110_CONFLICT '+JSON.stringify({
+      candidate:{id:p.id,player:p.player,date:p.date,region:p.region,event:p.event,
+        kind:p.kind,rank:p.rank,points:p.points,kills:p.kills,vrs:p.vrs,matches:p.matches,source:p.source},
+      existing:conflicts.map(r=>({id:r.id,player:r.player,kind:r.kind,rank:r.rank,
+        points:r.points,kills:r.kills,vrs:r.vrs,matches:r.matches,prize:r.prize,source:r.source}))}));
+    held.push({id:p.id,player:p.player,reason:'conflicting published team/session/score'});
+   }
    continue;
   }
   if(x.qualifying){
@@ -149,7 +156,13 @@ function processAll(){
    toArchive.push({p,win,cutoff,recordId:id});
    planned.push({id:p.id,action:'participation',player:p.player,region:p.region,rank:p.rank});
    resolved.add(p.id);
-  }else held.push({id:p.id,reason:'award/final verification not complete'});
+  }else{
+   if(process.argv.includes('--audit'))console.log('AOT_20261110_AWARD_CHECK '+JSON.stringify({
+    id:p.id,player:p.player,rank:p.rank,points:p.points,kills:p.kills,vrs:p.vrs,matches:p.matches,
+    round:p.round,source:p.source,checkpoint:{complete:x.cp.complete,rankingOrderValid:x.cp.rankingOrderValid,
+    lastSeenRank:x.cp.lastSeenRank,lastSuccessAt:x.cp.lastSuccessAt,pages:x.cp.pages,totalPages:x.cp.totalPages}}));
+   held.push({id:p.id,reason:'award/final verification not complete'});
+  }
  }
  const result={processed:queue.size,published:toPublish.length,archived:toArchive.length,
   duplicates:dupes.length,held:held.length,remaining:held.length,qualified:toPublish,
