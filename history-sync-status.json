@@ -20,7 +20,7 @@
   "alreadyRegistered": 1943,
   "autoApprovedTotal": 1007,
   "invalidCachedCandidates": 1,
-  "manualReviewCandidates": 6,
+  "manualReviewCandidates": 5,
   "autoApprovedCosmeticThisRun": 0,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
@@ -40,7 +40,7 @@
     }
   ],
   "reviewOnlyWindows": 1318,
-  "reviewOnlyCandidates": 6,
+  "reviewOnlyCandidates": 5,
   "unmappedEvents": 238,
   "unmappedEventIds": [
     "S30_ConsoleCashCups",
@@ -56,10 +56,10 @@
     "S30_Reload",
     "S30_ReloadZB"
   ],
-  "message": "保存済み順位表・公式規則を再調査し新規40件を掲載、既存8件を重複整理。Unreal Cup未完成5件と順位矛盾1件の計6件は保留。",
+  "message": "NAC Unreal Cup5組を参加アーカイブへ掲載。Mega Man Cup1件は同一チームの既存掲載と判断して重複候補から除外。最終順位未確定5件を保留。",
   "manuallyPublished": 469,
-  "manuallyResolvedDuplicates": 36,
-  "lastReviewedBatchAt": "2026-11-09T11:28:33.927Z",
+  "manuallyResolvedDuplicates": 37,
+  "lastReviewedBatchAt": "2026-11-09T12:37:07.114Z",
   "manuallyCorrected": 1,
   "lastCorrectedReviewAt": "2026-11-07T09:14:30.244Z",
   "concurrentMerge": {
@@ -279,5 +279,12 @@
     "remainingPending": 6,
     "policy": "stored Epic/Osirion ranked snapshots and season-specific official rules; unknown prizes never inferred"
   },
-  "autoApprovedDuoQualifierThisRun": 0
+  "autoApprovedDuoQualifierThisRun": 0,
+  "latestParticipationReview": {
+    "reviewedAt": "2026-11-09T12:37:07.114Z",
+    "participationPublished": 5,
+    "duplicatesResolved": 1,
+    "remainingPending": 5,
+    "notIncludedInPrizeTotals": true
+  }
 }
