@@ -1,7 +1,7 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-09T05:19:07.678Z",
+  "checkedAt": "2026-11-09T09:24:27.083Z",
   "mode": "review",
   "scope": "recent",
   "dateMode": null,
@@ -11,16 +11,16 @@
   "provider": "osirion",
   "linkedPlayers": 556,
   "trackedWindows": 92,
-  "found": 0,
+  "found": 18,
   "skipped": 0,
   "imported": 0,
   "scannedPages": 50,
   "completedWindows": 31,
   "identityConflicts": 3,
-  "alreadyRegistered": 116,
-  "autoApprovedTotal": 943,
+  "alreadyRegistered": 143,
+  "autoApprovedTotal": 950,
   "invalidCachedCandidates": 0,
-  "manualReviewCandidates": 0,
+  "manualReviewCandidates": 18,
   "autoApprovedCosmeticThisRun": 0,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
@@ -31,7 +31,7 @@
   "malformedFailures": 0,
   "skippedLeaderboards": [],
   "reviewOnlyWindows": 68,
-  "reviewOnlyCandidates": 0,
+  "reviewOnlyCandidates": 1,
   "unmappedEvents": 8,
   "unmappedEventIds": [
     "S42_ArenaTestCup",
@@ -43,19 +43,19 @@
     "S42_SlenderManCup_Mobile",
     "S42_SlenderManCup_ZB"
   ],
-  "message": "公式順位表と確認待ちを再検証。新規70件、順位修正7件、既存登録の確認20件。保留0件。",
+  "message": "最新版と安全統合：新規掲載0件、重複スキップ0件、要確認の競合0件、確認待ち18件。既存の戦績・賞金は保持。",
   "concurrentMerge": {
     "appended": 0,
     "alreadyPublished": 0,
     "reviewConflicts": 0,
-    "keptPending": 34,
-    "reconciledAt": "2026-11-09T05:19:09.640Z"
+    "keptPending": 18,
+    "reconciledAt": "2026-11-09T09:24:29.305Z"
   },
   "coverage": {
     "total": 92,
     "completed": 31,
-    "notStarted": 53,
-    "partial": 8,
+    "notStarted": 51,
+    "partial": 10,
     "retryWaiting": 0,
     "retryDue": 0,
     "remaining": 61,
@@ -103,13 +103,35 @@
     "outsideScopeCheckpoints": 0,
     "samples": [
       {
+        "window": "epicgames_S42_ConsoleVCC_SolosZB_ME/S42_ConsoleVCC_SolosZB_Event8Round2_ME",
+        "date": "2026-10-24",
+        "region": "ME",
+        "series": "victory-cup",
+        "status": "partial",
+        "nextPage": 5,
+        "totalPages": 10,
+        "retryAfter": null,
+        "errorCode": null
+      },
+      {
         "window": "epicgames_S42_ConsoleVCC_SolosZB_BR/S42_ConsoleVCC_SolosZB_Event8Round1_BR",
         "date": "2026-10-25",
         "region": "BR",
         "series": "victory-cup",
         "status": "partial",
-        "nextPage": 10,
+        "nextPage": 20,
         "totalPages": 100,
+        "retryAfter": null,
+        "errorCode": null
+      },
+      {
+        "window": "epicgames_S42_ConsoleVCC_SolosZB_EU/S42_ConsoleVCC_SolosZB_Event8Round2_EU",
+        "date": "2026-10-25",
+        "region": "EU",
+        "series": "victory-cup",
+        "status": "partial",
+        "nextPage": 10,
+        "totalPages": 20,
         "retryAfter": null,
         "errorCode": null
       },
@@ -119,7 +141,7 @@
         "region": "NAC",
         "series": "victory-cup",
         "status": "partial",
-        "nextPage": 20,
+        "nextPage": 30,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
@@ -130,7 +152,7 @@
         "region": "NAW",
         "series": "victory-cup",
         "status": "partial",
-        "nextPage": 20,
+        "nextPage": 30,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
@@ -141,7 +163,7 @@
         "region": "NAW",
         "series": "icon-cup",
         "status": "partial",
-        "nextPage": 2,
+        "nextPage": 3,
         "totalPages": 89,
         "retryAfter": null,
         "errorCode": null
@@ -152,7 +174,7 @@
         "region": "EU",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 26,
+        "nextPage": 27,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
@@ -163,7 +185,7 @@
         "region": "ME",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 26,
+        "nextPage": 27,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
@@ -174,7 +196,7 @@
         "region": "NAC",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 97,
+        "nextPage": 98,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
@@ -185,7 +207,7 @@
         "region": "BR",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 14,
+        "nextPage": 15,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
@@ -205,28 +227,6 @@
         "window": "epicgames_S42_SlenderManCup_BR/S42_SlenderManCup_BR",
         "date": "2026-10-21",
         "region": "BR",
-        "series": "skin-cup",
-        "status": "notStarted",
-        "nextPage": 0,
-        "totalPages": null,
-        "retryAfter": null,
-        "errorCode": null
-      },
-      {
-        "window": "epicgames_S42_SlenderManCup_EU/S42_SlenderManCup_EU",
-        "date": "2026-10-21",
-        "region": "EU",
-        "series": "skin-cup",
-        "status": "notStarted",
-        "nextPage": 0,
-        "totalPages": null,
-        "retryAfter": null,
-        "errorCode": null
-      },
-      {
-        "window": "epicgames_S42_SlenderManCup_ME/S42_SlenderManCup_ME",
-        "date": "2026-10-21",
-        "region": "ME",
         "series": "skin-cup",
         "status": "notStarted",
         "nextPage": 0,
