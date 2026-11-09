@@ -67,12 +67,16 @@ async function zoroLive(){
   for(const e of l.entries){
    const ids=e?.players?.map(p=>p.accountId?.toLowerCase())||[];
    const names=ids.map(id=>knownIds.get(id)||'not-mapped');
-   const match=required.get(names.slice().sort().join('|'));
-   if(!match)continue;
    const row=normalizeRow(e,win);
+   const exactScore=targets.filter(t=>row&&t.points===row.points&&t.kills===row.kills&&
+     t.vrs===row.vrs&&t.matches===row.matches);
+   const match=required.get(names.slice().sort().join('|'))||
+     (exactScore.length===1?exactScore[0]:null);
+   if(!match)continue;
    located.push({id:match.id,page,rank:e.rank,points:e.pointsEarned,
     kills:row?.kills,vrs:row?.vrs,matches:row?.matches,matchedEpicIdCount:names.filter(x=>x!=='not-mapped').length,
-    names,rankStart,rankEnd});
+    names,rawNames:e.players?.map(x=>x.username),rankStart,rankEnd,
+    matchedBy:required.has(names.slice().sort().join('|'))?'confirmed-id':'unique-exact-performance'});
   }
   samples.push({page,count:l.entries.length,from:rankStart,to:rankEnd,totalPages:l.totalPages});
   if(located.length===targets.length||rankEnd>Math.max(...targets.map(x=>x.rank))+80)break;
