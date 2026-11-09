@@ -12,7 +12,9 @@ test('archive pagination reuses sorted search results until filters actually cha
    const original=Array.prototype.sort;
    window.__archivePerf={bigSorts:0};
    Array.prototype.sort=function(...args){
-     if(this.length>=300)window.__archivePerf.bigSorts++;
+     // Ignore other async UI modules sorting their own large arrays.
+     if(this.length>=300&&(new Error().stack||'').includes('renderResults'))
+       window.__archivePerf.bigSorts++;
      return original.apply(this,args);
    };
  });
