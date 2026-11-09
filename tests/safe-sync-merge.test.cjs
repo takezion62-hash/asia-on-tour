@@ -1,7 +1,7 @@
 'use strict';
 const test=require('node:test');
 const assert=require('node:assert/strict');
-const {mergeSnapshots,logicalKey,mergeCheckpoint}=require('../scripts/safe-sync-merge.cjs');
+const {mergeSnapshots,logicalKey,mergeCheckpoint,changedSources}=require('../scripts/safe-sync-merge.cjs');
 const clone=x=>JSON.parse(JSON.stringify(x));
 const ROW=id=>({
  id,date:'2026-11-07',region:'NAC',tournamentId:'s43-solo-vc',seasonId:'S43',
@@ -148,4 +148,28 @@ test('roster and regional window identity never mistake distinct finals for the 
  assert.equal(logicalKey(one),logicalKey({...one,id:'b'}));
  assert.notEqual(logicalKey(one),logicalKey({...one,region:'EU'}));
  assert.notEqual(logicalKey(one),logicalKey({...one,round:'Event 4 · Round 2 / 賞金決勝',source:'https://foo.test'}));
+});
+
+test('source fingerprint check detects newly registered player identities and rule changes',()=>{
+ const original={'players.json':'a','tournament-rules.json':'b'};
+ assert.deepEqual(changedSources(original,{...original}),[]);
+ assert.deepEqual(changedSources(original,{...original,'players.json':'new'}),['players.json']);
+ assert.deepEqual(changedSources(original,{'players.json':'new','extra.cjs':'c'}),['extra.cjs','players.json','tournament-rules.json']);
+ assert.throws(()=>changedSources(null,original),/invalid approval source fingerprints/);
+});
+test('history and recent workflows refresh and rescan after identity change without bypassing the safety guard',()=>{
+ const fs=require('node:fs'),path=require('node:path');
+ const root=path.resolve(__dirname,'../.github/workflows');
+ for(const [name,scope,command] of [
+  ['history-sync.yml','history','node scripts/osirion-sync.cjs --history'],
+  ['auto-sync.yml','auto','node scripts/osirion-sync.cjs']
+ ]){
+  const workflow=fs.readFileSync(path.join(root,name),'utf8');
+  assert.ok(workflow.includes('check-sources '+scope),name+' checks approval input before merge');
+  assert.ok(workflow.includes(command),name+' rescans using current identities');
+  assert.match(workflow,/npm run validate/,name);
+  assert.match(workflow,/fresh_source_retries/,name);
+  assert.match(workflow,/git reset --hard origin\/main/,name);
+  assert.ok(workflow.includes('merge '+scope),name+' retains fail-closed merge');
+ }
 });
