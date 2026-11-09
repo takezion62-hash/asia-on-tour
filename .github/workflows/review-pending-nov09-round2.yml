@@ -1,0 +1,76 @@
+name: AOT candidate audit and rank source reconciliation Nov 9
+on:
+  pull_request:
+    paths:
+      - "scripts/audit-review-round2-20261109.cjs"
+      - "scripts/publish-reviewed-round2-20261109.cjs"
+      - ".github/workflows/review-pending-nov09-round2.yml"
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/review-pending-nov09-round2.yml"
+permissions:
+  contents: write
+concurrency:
+  group: aot-provider-results-main
+  cancel-in-progress: false
+jobs:
+  source-audit:
+    if: ${{ github.event_name == 'pull_request' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Verify candidate and original rank evidence
+        run: |
+          node --check scripts/audit-review-round2-20261109.cjs
+          node scripts/audit-review-round2-20261109.cjs
+          node --check scripts/publish-reviewed-round2-20261109.cjs
+          node scripts/publish-reviewed-round2-20261109.cjs --dry-run
+      - name: Validate simulated candidate update and official payout constraints
+        run: |
+          node scripts/publish-reviewed-round2-20261109.cjs
+          npm run validate
+          node --test tests/manual-approval.test.cjs tests/verified-partial-page.test.cjs tests/data-validation.test.cjs
+  reviewed-publication:
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Publish only verified edits and new results onto fresh main
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          for attempt in 1 2 3 4 5; do
+            git fetch origin main
+            git reset --hard origin/main
+            node scripts/publish-reviewed-round2-20261109.cjs --dry-run
+            node scripts/publish-reviewed-round2-20261109.cjs
+            npm run validate
+            node --test tests/manual-approval.test.cjs tests/verified-partial-page.test.cjs tests/data-validation.test.cjs
+            git add results.json updates.json auto-sync-review.json history-sync-review.json auto-sync-status.json history-sync-status.json history-sync-reviewed.json
+            if git diff --cached --quiet; then
+              echo "AOT_ROUND2_PUBLICATION no new verified records"
+              exit 0
+            fi
+            git commit -m "data: reconcile rank discrepancies and publish source-verified overseas results"
+            if git push origin HEAD:main; then
+              echo "AOT_ROUND2_PUBLICATION committed to latest main"
+              exit 0
+            fi
+            echo "Main changed during write; restart source audit against latest main"
+            sleep $((attempt*3))
+          done
+          echo "AOT_ROUND2_PUBLICATION safe reconciliation failed after retries"
+          exit 1
