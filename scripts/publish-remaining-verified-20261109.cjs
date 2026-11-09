@@ -122,7 +122,7 @@ function main(){
     prev.note=(prev.note||'')+' 保存済み公式API順位の再取得で'+beforeRank+'位から'+row.rank+'位へ更新。';
    }
    if(prev)requireTrue(identicalPerformance(prev,row),'conflicting participation archive: '+row.id);
-   archiveItems.push({row,win:{...calendar[0],kind:isConsole?'予選':'参加確認',round:row.round},
+   archiveItems.push({row,win:{...calendar[0],windowId:calendar[0].sourceWindowId,kind:isConsole?'予選':'参加確認',round:row.round},
     cutoff:isConsole?cutoff:null,already:!!prev});
   }
   resolved.add(row.id);
