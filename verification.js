@@ -6,6 +6,9 @@
   const n=v=>Number.isFinite(v)?v.toLocaleString('ja-JP'):'—';
   const s=v=>v==null?'':String(v);
   const data={};
+  // Full integrity checks are computed once per data refresh, not on every
+  // tab change, search keystroke, region selection or pagination click.
+  let cachedAuditRows=null;
   const state={tab:'queue',page:0,search:'',region:'all',loaded:false,selected:new Set()};
   const labels={queue:'確認待ち',duplicates:'重複・大会枠',errors:'不整合',unmapped:'未登録大会',coverage:'収集状況',history:'検証履歴'};
   const required=['results.json','auto-sync-review.json','history-sync-review.json','auto-sync-status.json','history-sync-status.json'];
@@ -83,12 +86,14 @@
     return Number.isFinite(t)?new Date(t).toLocaleString('ja-JP',{timeZone:'Asia/Tokyo',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'})+' JST':'未実行';
   }
   async function read(name){
-    const resp=await fetch(new URL(name,base),{cache:'no-store'});
+    // Revalidate on every refresh, but allow ETag/304 to reuse unchanged JSON.
+    const resp=await fetch(new URL(name,base),{cache:'no-cache'});
     if(!resp.ok)throw Error(name+' HTTP '+resp.status);
     return resp.json();
   }
   function getRows(){
     if(!state.loaded)return [];
+    if(cachedAuditRows)return cachedAuditRows[state.tab]||[];
     const records=Array.isArray(data['results.json'])?data['results.json']:[];
     const queue=engine.proposals(data['auto-sync-review.json'],data['history-sync-review.json'],records);
     const issues=engine.inspect(records);
@@ -160,6 +165,7 @@
     $('metric-error').textContent=n(out.errors.length);
     $('metric-unmapped').textContent=n(out.unmapped.length);
     data.audit=out;data.queue=queue;data.issues=issues;
+    cachedAuditRows=out;
     return out[state.tab]||[];
   }
   function render(){
@@ -182,7 +188,7 @@
   }
   async function refresh(){
     const button=$('audit-refresh'),loading=$('audit-loading');
-    button.disabled=true;loading.hidden=false;loading.className='notice';loading.textContent='公開データを照合しています…';
+    button.disabled=true;cachedAuditRows=null;loading.hidden=false;loading.className='notice';loading.textContent='公開データを照合しています…';
     const results=await Promise.allSettled(files.map(read));
     const failed=[];
     for(let i=0;i<files.length;i++){
@@ -198,7 +204,8 @@
       $('audit-summary').textContent='取得エラー';$('audit-pagination').textContent='—';
     }else{
       state.loaded=true;
-      const valid=new Set(engine.proposals(data['auto-sync-review.json'],data['history-sync-review.json'],data['results.json']).filter(x=>!x.alreadyPublished).map(x=>x.id));
+      getRows(); // Populate the immutable snapshot before filtering selection.
+      const valid=new Set((data.queue||[]).filter(x=>!x.alreadyPublished).map(x=>x.id));
       for(const key of state.selected)if(!valid.has(key))state.selected.delete(key);
       updateSelected();
       const recent=data['auto-sync-status.json'],historic=data['history-sync-status.json'];
