@@ -49,7 +49,7 @@ concurrency:
 jobs:
   review-history:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 40
     steps:
       - name: Checkout main
         uses: actions/checkout@v4
@@ -81,10 +81,35 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           # No git pull --rebase for generated JSON: each attempt starts from the
           # latest main and safely replays only this scan's verified additions.
-          for attempt in 1 2 3 4 5; do
-            echo "SAFE_HISTORY_MERGE attempt ${attempt}/5"
+          fresh_source_retries=0
+          for attempt in 1 2 3 4 5 6; do
+            echo "SAFE_HISTORY_MERGE attempt ${attempt}/6 (fresh-source rescans: ${fresh_source_retries})"
             git fetch origin main
             git reset --hard origin/main
+            # Reject stale identity or prize rules before replaying provider results.
+            # A changed input is NOT a merge conflict: re-run the provider scan
+            # using the new main rather than loosening the source-hash guard.
+            if node scripts/safe-sync-merge.cjs check-sources history "$RUNNER_TEMP/aot-history-base.json"; then
+              :
+            else
+              check_code=$?
+              if [ "$check_code" -ne 10 ]; then
+                echo "::error::Source validation itself failed (${check_code})"
+                exit "$check_code"
+              fi
+              if [ "$fresh_source_retries" -ge 1 ]; then
+                echo "::error::Approval inputs changed again during the fresh scan; refusing unsafe publication"
+                exit 1
+              fi
+              fresh_source_retries=$((fresh_source_retries + 1))
+              echo "::notice::Player identity or rules changed during scan; discard stale output and re-scan from newest main"
+              node scripts/safe-sync-merge.cjs snapshot history "$RUNNER_TEMP/aot-history-base.json"
+              node scripts/osirion-sync.cjs --history
+              npm run validate
+              node --test tests/safe-sync-merge.test.cjs tests/verified-history-approval.test.cjs tests/automatic-unreal-approval.test.cjs
+              node scripts/safe-sync-merge.cjs snapshot history "$RUNNER_TEMP/aot-history-scanned.json"
+              continue
+            fi
             node scripts/safe-sync-merge.cjs merge history "$RUNNER_TEMP/aot-history-base.json" "$RUNNER_TEMP/aot-history-scanned.json"
             npm run validate
             node --test tests/safe-sync-merge.test.cjs
