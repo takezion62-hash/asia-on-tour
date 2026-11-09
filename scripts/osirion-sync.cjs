@@ -388,6 +388,26 @@ function selectHistoricalWindows(windows,state,config,time=Date.now(),records=[]
   const ruleBacked=fresh.filter(w=>w.series==='victory-cup'&&Object.hasOwn(RULES,w.tournamentId));
   add(ruleBacked.length?ruleBacked:fresh);
  }
+ // Give previously unscanned windows a protected share of the history budget.
+ // This complements the year quotas, due retries, finishable boards and recent
+ // rounds above; do not starve them to chase all 2,000+ unseen windows at once.
+ const minUnstarted=Math.min(limit,Math.max(0,Number.isInteger(config.minUnstartedWindowsPerRun)?
+   config.minUnstartedWindowsPerRun:0));
+ const unstarted=w=>{
+  const cp=state.windows[w.key];
+  return !cp||(!cp.complete&&(!Number.isSafeInteger(cp.nextPage)||cp.nextPage===0));
+ };
+ while(selected.length<limit&&selected.filter(unstarted).length<minUnstarted){
+  const candidates=pending.filter(w=>unstarted(w)&&!seen.has(w.key));
+  if(!candidates.length)break;
+  const novelty=w=>
+   (selected.some(x=>x.region===w.region)?0:60)+
+   (selected.some(x=>x.series===w.series)?0:40)+
+   (selected.some(x=>x.dateJst.slice(0,4)===w.dateJst.slice(0,4))?0:20)+
+   (historicalEvidenceScore(w,records)>0?5:0);
+  candidates.sort((a,b)=>novelty(b)-novelty(a)||a.end-b.end||a.key.localeCompare(b.key));
+  add([candidates[0]]);
+ }
  // Backfill the six overseas regions evenly before filling the remaining slots.
  // Completed windows naturally leave the queue; a region with no eligible rounds is skipped.
  for(const region of regions){
