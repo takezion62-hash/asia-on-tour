@@ -23,3 +23,8 @@ jobs:
           node scripts/audit-review-round2-20261109.cjs
           node --check scripts/publish-reviewed-round2-20261109.cjs
           node scripts/publish-reviewed-round2-20261109.cjs --dry-run
+      - name: Validate simulated candidate update and official payout constraints
+        run: |
+          node scripts/publish-reviewed-round2-20261109.cjs
+          npm run validate
+          node --test tests/manual-approval.test.cjs tests/verified-partial-page.test.cjs tests/data-validation.test.cjs
