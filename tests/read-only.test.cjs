@@ -939,6 +939,20 @@ test('tournament catalog and detail routes retain all records once and separate 
 });
 
 
+test('one official cosmetic session contains both award winners and attendance-only records', () => {
+  const events=[
+    {id:'ch7s4-elite-kado-thorne-cup-reload',attendance:'auto-s42-8ae05d594f81',winner:'s42-oce-elite-kado-thorne-reload-skin-20261013-174d8aad'},
+    {id:'ch7s4-inoxtag-icon-cup-battle-royale',attendance:'auto-s42-85aa144c86ed',winner:'s42-naw-inoxtag-icon-br-duos-skin-20261026-nezah-airisu'}
+  ];
+  for(const event of events){
+    const app=boot(script,{hash:'#tournament='+event.id});
+    const markup=app.get('tournament-detail-content').innerHTML;
+    assert.equal([...markup.matchAll(/<section class="tournament-session" /g)].length,1,event.id);
+    const ids=tournamentRecordIds(app);
+    assert.ok(ids.includes(event.attendance),event.id+' attendance');
+    assert.ok(ids.includes(event.winner),event.id+' cosmetic winner');
+  }
+});
 test('tournament stage navigation preserves all records and distinguishes verified prizes', () => {
   const grouped=new Map();
   for(const row of records){const id=tournamentKey(row,data);if(!grouped.has(id))grouped.set(id,[]);grouped.get(id).push(row);}

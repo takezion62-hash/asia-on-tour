@@ -11,7 +11,7 @@
   "provider": "osirion",
   "linkedPlayers": 556,
   "trackedWindows": 92,
-  "found": 28,
+  "found": 0,
   "skipped": 0,
   "imported": 0,
   "scannedPages": 50,
@@ -20,7 +20,7 @@
   "alreadyRegistered": 143,
   "autoApprovedTotal": 978,
   "invalidCachedCandidates": 0,
-  "manualReviewCandidates": 28,
+  "manualReviewCandidates": 0,
   "autoApprovedCosmeticThisRun": 0,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
@@ -31,7 +31,7 @@
   "malformedFailures": 0,
   "skippedLeaderboards": [],
   "reviewOnlyWindows": 68,
-  "reviewOnlyCandidates": 1,
+  "reviewOnlyCandidates": 0,
   "unmappedEvents": 8,
   "unmappedEventIds": [
     "S42_ArenaTestCup",
@@ -43,7 +43,7 @@
     "S42_SlenderManCup_Mobile",
     "S42_SlenderManCup_ZB"
   ],
-  "message": "最新版と安全統合：新規掲載0件、重複スキップ0件、要確認の競合0件、確認待ち28件。既存の戦績・賞金は保持。",
+  "message": "手動監査：28件の新規成績を確認して掲載。既存記録は保持、未検証のUnreal Cupは保留。残り0件。",
   "concurrentMerge": {
     "appended": 0,
     "alreadyPublished": 0,
@@ -236,7 +236,15 @@
       }
     ]
   },
-  "manuallyPublished": 10,
-  "lastReviewedBatchAt": "2026-11-09T05:30:43.760Z",
-  "autoApprovedDuoQualifierThisRun": 0
+  "manuallyPublished": 38,
+  "lastReviewedBatchAt": "2026-11-09T10:07:54.298Z",
+  "autoApprovedDuoQualifierThisRun": 0,
+  "latestManualReview": {
+    "reviewedAt": "2026-11-09T10:07:54.298Z",
+    "reviewedCandidates": 28,
+    "published": 28,
+    "duplicateCandidatesResolved": 0,
+    "remainingPending": 0,
+    "policy": "official Epic tournament rules, archived leaderboard, verified Epic player identity"
+  }
 }
