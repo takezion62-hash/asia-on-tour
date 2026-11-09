@@ -4,6 +4,7 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/verify-nac-unreal-history.yml'
+      - 'scripts/verify-unreal-nac-pending-20261109.cjs'
   workflow_dispatch:
 permissions:
   contents: write
