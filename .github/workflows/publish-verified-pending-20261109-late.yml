@@ -30,7 +30,8 @@ jobs:
           cat "$RUNNER_TEMP/pending-audit.jsonl"
       - name: Preview branch only - never publish without explicit main dispatch
         if: ${{ github.event_name == 'pull_request' }}
-        run: echo "Preview-only: original JSON files unchanged."
+        run: |
+          echo "Preview-only: original JSON files unchanged."
       - name: Safely publish reviewed results to main (no force push)
         if: ${{ github.event_name == 'workflow_dispatch' }}
         run: |
