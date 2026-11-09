@@ -5,6 +5,7 @@ on:
     paths:
       - '.github/workflows/verified-pending-20261110.yml'
       - 'scripts/review-candidates-20261110.cjs'
+      - 'tests/participation-ui.test.cjs'
   workflow_dispatch:
 permissions:
   contents: write
