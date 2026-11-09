@@ -5,6 +5,8 @@ on:
     paths:
       - "scripts/safe-sync-merge.cjs"
       - "tests/safe-sync-merge.test.cjs"
+      - ".github/workflows/history-sync.yml"
+      - ".github/workflows/auto-sync.yml"
       - "scripts/publish-verified-s35-console-duos-20261108.cjs"
       - "tests/publish-verified-s35-console-duos-20261108.test.cjs"
       - "scripts/publish-reviewed-s30-nac-zero-vr.cjs"
