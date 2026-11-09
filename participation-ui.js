@@ -120,7 +120,7 @@
         +'<a href="#results"'+recentAttributes+'>今回の出場戦績を表示 ↗</a>'
         +'<div class="participation-recent-names">'+rows.map(r=>'<span>'+esc(r.player)+'：'+fmt(r.rank)+'位 / '+fmt(r.kills)+'K / '+fmt(r.vrs)+'VR</span>').join('')+'</div>';
       summary?.after(recent);
-      const shortcut=document.createElement('p');
+      const shortcut=document.createElement('div');
       shortcut.className='participation-shortcut';
       shortcut.innerHTML='<strong>追加済み：'+esc(title)+' · '+fmt(rows.length)+'件</strong>'
         +'<p class="participation-note">予選敗退を含む確認済み出場戦績（賞金・称号の集計対象外）</p>'
