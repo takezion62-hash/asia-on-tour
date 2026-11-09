@@ -1,7 +1,7 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-09T01:32:43.241Z",
+  "checkedAt": "2026-11-09T02:38:32.093Z",
   "mode": "review",
   "scope": "history",
   "dateMode": "rolling",
@@ -10,17 +10,17 @@
   "toDate": "2026-11-09",
   "provider": "osirion",
   "linkedPlayers": 556,
-  "trackedWindows": 2936,
-  "found": 7,
-  "skipped": 6,
-  "imported": 22,
+  "trackedWindows": 2937,
+  "found": 69,
+  "skipped": 11,
+  "imported": 17,
   "scannedPages": 96,
-  "completedWindows": 203,
+  "completedWindows": 212,
   "identityConflicts": 3,
-  "alreadyRegistered": 1625,
-  "autoApprovedTotal": 926,
+  "alreadyRegistered": 1727,
+  "autoApprovedTotal": 943,
   "invalidCachedCandidates": 1,
-  "manualReviewCandidates": 7,
+  "manualReviewCandidates": 69,
   "autoApprovedCosmeticThisRun": 0,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
@@ -30,8 +30,8 @@
   "transientFailures": 0,
   "malformedFailures": 0,
   "skippedLeaderboards": [],
-  "reviewOnlyWindows": 1316,
-  "reviewOnlyCandidates": 7,
+  "reviewOnlyWindows": 1317,
+  "reviewOnlyCandidates": 43,
   "unmappedEvents": 238,
   "unmappedEventIds": [
     "S30_ConsoleCashCups",
@@ -47,29 +47,29 @@
     "S30_Reload",
     "S30_ReloadZB"
   ],
-  "message": "最新版と安全統合：新規掲載22件、重複スキップ0件、要確認の競合0件、確認待ち87件。既存の戦績・賞金は保持。",
+  "message": "最新版と安全統合：新規掲載17件、重複スキップ0件、要確認の競合0件、確認待ち69件。既存の戦績・賞金は保持。",
   "manuallyPublished": 312,
   "manuallyResolvedDuplicates": 10,
   "lastReviewedBatchAt": "2026-11-09T02:15:38.579Z",
   "manuallyCorrected": 1,
   "lastCorrectedReviewAt": "2026-11-07T09:14:30.244Z",
   "concurrentMerge": {
-    "appended": 22,
+    "appended": 17,
     "alreadyPublished": 0,
     "reviewConflicts": 0,
-    "keptPending": 87,
-    "reconciledAt": "2026-11-09T01:32:45.279Z"
+    "keptPending": 69,
+    "reconciledAt": "2026-11-09T02:38:34.158Z"
   },
   "coverage": {
-    "total": 2936,
-    "completed": 203,
-    "notStarted": 2698,
-    "partial": 33,
+    "total": 2937,
+    "completed": 212,
+    "notStarted": 2693,
+    "partial": 30,
     "retryWaiting": 2,
     "retryDue": 0,
-    "remaining": 2733,
+    "remaining": 2725,
     "retryCount": 2,
-    "completionPercent": 6.9,
+    "completionPercent": 7.2,
     "byRegion": {
       "OCE": {
         "total": 519,
@@ -78,8 +78,8 @@
       },
       "ME": {
         "total": 515,
-        "completed": 59,
-        "pending": 456
+        "completed": 63,
+        "pending": 452
       },
       "EU": {
         "total": 533,
@@ -88,35 +88,35 @@
       },
       "BR": {
         "total": 514,
-        "completed": 15,
-        "pending": 499
+        "completed": 16,
+        "pending": 498
       },
       "NAC": {
-        "total": 532,
-        "completed": 35,
-        "pending": 497
+        "total": 533,
+        "completed": 37,
+        "pending": 496
       },
       "NAW": {
         "total": 323,
-        "completed": 26,
-        "pending": 297
+        "completed": 28,
+        "pending": 295
       }
     },
     "byYear": {
       "2024": {
         "total": 974,
-        "completed": 39,
-        "pending": 935
+        "completed": 43,
+        "pending": 931
       },
       "2025": {
         "total": 690,
-        "completed": 26,
-        "pending": 664
+        "completed": 28,
+        "pending": 662
       },
       "2026": {
-        "total": 1272,
-        "completed": 138,
-        "pending": 1134
+        "total": 1273,
+        "completed": 141,
+        "pending": 1132
       }
     },
     "outsideScopeCheckpoints": 0,
@@ -171,7 +171,7 @@
         "region": "ME",
         "series": "victory-cup",
         "status": "partial",
-        "nextPage": 2,
+        "nextPage": 4,
         "totalPages": 68,
         "retryAfter": null,
         "errorCode": null
@@ -182,7 +182,7 @@
         "region": "ME",
         "series": "victory-cup",
         "status": "partial",
-        "nextPage": 12,
+        "nextPage": 14,
         "totalPages": 18,
         "retryAfter": null,
         "errorCode": null
@@ -193,7 +193,7 @@
         "region": "ME",
         "series": "victory-cup",
         "status": "partial",
-        "nextPage": 8,
+        "nextPage": 10,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
@@ -204,7 +204,7 @@
         "region": "NAC",
         "series": "victory-cup",
         "status": "partial",
-        "nextPage": 4,
+        "nextPage": 6,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
@@ -215,7 +215,7 @@
         "region": "NAC",
         "series": "victory-cup",
         "status": "partial",
-        "nextPage": 25,
+        "nextPage": 27,
         "totalPages": 48,
         "retryAfter": null,
         "errorCode": null
@@ -237,7 +237,7 @@
         "region": "NAC",
         "series": "victory-cup",
         "status": "partial",
-        "nextPage": 11,
+        "nextPage": 13,
         "totalPages": 92,
         "retryAfter": null,
         "errorCode": null
@@ -248,7 +248,7 @@
         "region": "ME",
         "series": "victory-cup",
         "status": "partial",
-        "nextPage": 3,
+        "nextPage": 5,
         "totalPages": 18,
         "retryAfter": null,
         "errorCode": null
