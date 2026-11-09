@@ -328,17 +328,51 @@ function historicalEvidenceScore(win,records){
  }
  return best;
 }
-function historicalPriority(state,records){
- return (a,b)=>{
-  const score=w=>{
-   const cp=state.windows[w.key];
-   const fraction=cp?.totalPages>0?Math.min(1,(cp.nextPage||0)/cp.totalPages):0;
-   // Higher score means a publishable official ruleset and a round near completion.
-   const approvedRule=(Object.hasOwn(RULES,w.tournamentId)&&w.series==='victory-cup')||cutoffForWindow(w)!==null||cashLimitForWindow(w)!==null||evaluationStage(w)!==null||unrealWindow(w)!==null;
-   return (approvedRule?150:0)+Math.round(fraction*90)+historicalEvidenceScore(w,records)+(w.kind==='賞金決勝'?12:0)+(w.kind==='参加確認'?3:0);
-  };
-  return score(b)-score(a)||a.end-b.end;
+// Index historical proof once per scan. Previously sorting compared each window
+// by rescanning every archived result on every comparator invocation.
+function historicalEvidenceIndex(records){
+ const groups=new Map();
+ const groupKey=(id,region)=>JSON.stringify([id,region]);
+ for(const r of records){
+  const key=groupKey(r.tournamentId,r.region);
+  if(!groups.has(key))groups.set(key,{sources:[],dates:new Set(),months:new Set(),years:new Set()});
+  const group=groups.get(key);
+  if(typeof r.source==='string')group.sources.push(r.source);
+  if(typeof r.date==='string'){
+   group.dates.add(r.date);
+   group.months.add(r.date.slice(0,7));
+   group.years.add(r.date.slice(0,4));
+  }
+ }
+ const memo=new WeakMap();
+ return win=>{
+  if(memo.has(win))return memo.get(win);
+  const group=groups.get(groupKey(win.tournamentId,win.region));
+  let evidence=0;
+  if(group){
+   const id=encodeURIComponent(win.windowId);
+   if(group.sources.some(source=>source.includes(id)))evidence=100;
+   else if(group.dates.has(win.dateJst))evidence=70;
+   else if(group.months.has(win.dateJst.slice(0,7)))evidence=25;
+   else if(group.years.has(win.dateJst.slice(0,4)))evidence=5;
+  }
+  memo.set(win,evidence);
+  return evidence;
  };
+}
+function historicalPriority(state,records,evidence=historicalEvidenceIndex(records)){
+ const scores=new WeakMap();
+ const score=w=>{
+  if(scores.has(w))return scores.get(w);
+  const cp=state.windows[w.key];
+  const fraction=cp?.totalPages>0?Math.min(1,(cp.nextPage||0)/cp.totalPages):0;
+  // Keep the same rank rules and ordering; only avoid repeated computation.
+  const approvedRule=(Object.hasOwn(RULES,w.tournamentId)&&w.series==='victory-cup')||cutoffForWindow(w)!==null||cashLimitForWindow(w)!==null||evaluationStage(w)!==null||unrealWindow(w)!==null;
+  const value=(approvedRule?150:0)+Math.round(fraction*90)+evidence(w)+(w.kind==='賞金決勝'?12:0)+(w.kind==='参加確認'?3:0);
+  scores.set(w,value);
+  return value;
+ };
+ return (a,b)=>score(b)-score(a)||a.end-b.end;
 }
 function selectHistoricalWindows(windows,state,config,time=Date.now(),records=[]){
  const pending=windows.filter(w=>{
@@ -347,7 +381,8 @@ function selectHistoricalWindows(windows,state,config,time=Date.now(),records=[]
  });
  const years=[...new Set(pending.map(w=>w.dateJst.slice(0,4)))].sort((a,b)=>a.localeCompare(b));
  const limit=Math.max(1,config.maxWindowsPerRun||6),selected=[],seen=new Set();
- const priority=historicalPriority(state,records);
+ const evidence=historicalEvidenceIndex(records);
+ const priority=historicalPriority(state,records,evidence);
  const add=pool=>{for(const w of pool.slice().sort(priority))if(!seen.has(w.key)){selected.push(w);seen.add(w.key);break}};
  // Resume at least one expired retry per run, preserving the original page.
  const dueRetries=pending.filter(w=>{const t=Date.parse(state.windows[w.key]?.retryAfter||'');return Number.isFinite(t)&&t<=time})
@@ -404,7 +439,7 @@ function selectHistoricalWindows(windows,state,config,time=Date.now(),records=[]
    (selected.some(x=>x.region===w.region)?0:60)+
    (selected.some(x=>x.series===w.series)?0:40)+
    (selected.some(x=>x.dateJst.slice(0,4)===w.dateJst.slice(0,4))?0:20)+
-   (historicalEvidenceScore(w,records)>0?5:0);
+   (evidence(w)>0?5:0);
   candidates.sort((a,b)=>novelty(b)-novelty(a)||a.end-b.end||a.key.localeCompare(b.key));
   add([candidates[0]]);
  }
@@ -591,4 +626,4 @@ async function main(){
  console.log((historical?'OSIRION_HISTORY_REVIEW ':'OSIRION_REVIEW ')+JSON.stringify({scannedPages:scanned,linkedPlayers:accounts.length,identityConflicts:conflicts.length,windows:windows.length,unmappedEvents:unmapped.length,proposals:unique.size,imported,cosmetic:importedCosmetics,cash:cash.approved.length,performance:performance.approved.length,unreal:unreal.approved.length,duo:duo.approved.length,finished,transientFailures,malformedFailures,heldWindows:skippedLeaderboards.length}));
 }
 if(require.main===module)main().catch(e=>{console.error('OSIRION_SYNC_ERROR '+e.stack);process.exitCode=1});
-module.exports={identity,linkedAccounts,parseStage,parseReviewStage,discover,discoverUnmapped,selectActiveWindows,selectHistoricalWindows,historicalEvidenceScore,resolveHistoricalScope,fetchJson,advancementLimit,normalizeRow,getTournaments,getLeaderboard,leaderboardResponseError,recoverableLeaderboardFailure,holdLeaderboardWindow,holdEmptyFirstPage,transientLeaderboardFailure,main};
+module.exports={identity,linkedAccounts,parseStage,parseReviewStage,discover,discoverUnmapped,selectActiveWindows,selectHistoricalWindows,historicalEvidenceScore,historicalEvidenceIndex,resolveHistoricalScope,fetchJson,advancementLimit,normalizeRow,getTournaments,getLeaderboard,leaderboardResponseError,recoverableLeaderboardFailure,holdLeaderboardWindow,holdEmptyFirstPage,transientLeaderboardFailure,main};
