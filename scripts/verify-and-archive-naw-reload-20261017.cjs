@@ -61,6 +61,12 @@ async function main(){
     r.kills===t.kills&&r.vrs===t.vrs&&r.matches===t.matches&&
     normalize(e.players?.[0]?.username)===normalize(t.raw);
   });
+  if(exact.length!==1){
+   const nearby=entries.filter(e=>Math.abs(e.rank-t.rank)<=3 || e.pointsEarned===t.points).slice(0,25).map(e=>{
+    const n=normalizeRow(e,win);return {rank:e.rank,name:e.players?.[0]?.username,points:e.pointsEarned,normalized:n?{kills:n.kills,vrs:n.vrs,matches:n.matches}:null};
+   });
+   console.log('NAW_RELOAD_VERIFICATION_DIAGNOSTIC '+JSON.stringify({target:t.name,expected:{rank:t.rank,points:t.points,kills:t.kills,vrs:t.vrs,matches:t.matches,raw:t.raw},nearby,entries:entries.length}));
+  }
   check(exact.length===1,'official leaderboard row/username/scores not uniquely matched: '+t.name+
    ' (matched '+exact.length+')');
   const verified=normalizeRow(exact[0],win);
