@@ -3,6 +3,7 @@ on:
   pull_request:
     paths:
       - "scripts/audit-review-round2-20261109.cjs"
+      - "scripts/publish-reviewed-round2-20261109.cjs"
       - ".github/workflows/review-pending-nov09-round2.yml"
   workflow_dispatch:
 permissions:
@@ -20,3 +21,5 @@ jobs:
         run: |
           node --check scripts/audit-review-round2-20261109.cjs
           node scripts/audit-review-round2-20261109.cjs
+          node --check scripts/publish-reviewed-round2-20261109.cjs
+          node scripts/publish-reviewed-round2-20261109.cjs --dry-run
