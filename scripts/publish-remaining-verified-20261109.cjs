@@ -111,6 +111,16 @@ function main(){
    else requireTrue(row.kind==='参加確認'&&row.prize===null&&row.reviewOnly===true&&
     row.round==='単一開催枠 / 参加確認','icon cup award not confirmed: '+row.id);
    const prev=archived.find(x=>x.id===recordId(row));
+   if(prev&&prev.rank!==row.rank){
+    requireTrue(Math.abs(prev.rank-row.rank)<=1&&
+     ['date','region','player','points','kills','vrs','matches'].every(k=>prev[k]===row[k])&&
+     prev.source===row.source&&prev.tournamentId===row.tournamentId&&
+     roster(prev).join('|')===roster(row).join('|'),
+     'rank change cannot be safely reconciled: '+row.id);
+    const beforeRank=prev.rank;
+    prev.rank=row.rank;
+    prev.note=(prev.note||'')+' 保存済み公式API順位の再取得で'+beforeRank+'位から'+row.rank+'位へ更新。';
+   }
    if(prev)requireTrue(identicalPerformance(prev,row),'conflicting participation archive: '+row.id);
    archiveItems.push({row,win:{...calendar[0],kind:isConsole?'予選':'参加確認',round:row.round},
     cutoff:isConsole?cutoff:null,already:!!prev});
@@ -122,6 +132,7 @@ function main(){
    reviewedAt:now,source:row.source,
    evidence:'Confirmed Epic-ID-linked official checkpoint, event session, source, roster and rank; unverified prizes never inferred'});
  }
+ if(archiveItems.some(x=>x.already))write('participation/2026-10.json',{version:1,month:'2026-10',entries:archived});
  const archiveSummary=archiveItems.length?appendArchive(root,archiveItems.map(x=>({
   win:x.win,proposals:[x.row],cutoff:x.cutoff
  })),db.results,{checkedAt:now}):{added:0,duplicates:0,skippedPublished:0};
