@@ -114,7 +114,7 @@ function approve(row,db,scans,calendars){
    evidence='公式地域上位'+cutoff+'位以内。Round1の賞金は$0、Round2通過圏';
   }else{
    assert(row.matches<=3,'console finals match cap '+row.id);
-   result={...result,prize:row.vrs*100,kind:row.vrs>0?'賞金決勝':'決勝'};
+   result={...result,prize:row.vrs*100,kind:'賞金決勝'};
    evidence='Epic公式Attachment C: Round2の1VRにつき個人$100。受給資格や支払完了は未確認';
   }
  }else if(type==='2024-vc-qualifier'){
