@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-09T11:28:33.927Z",
+  "reviewedAt": "2026-11-09T12:37:46.593Z",
   "description": "Resolved historic review candidates: published, duplicate or participation",
   "entries": [
     {
@@ -12103,6 +12103,14 @@
       "existingId": "s42-naw-psnick-qual-20261001-80daace6",
       "reviewedAt": "2026-11-09T11:28:33.927Z",
       "evidence": "Identical tournament, region, round, roster, rank, points, and VR. Preserved original."
+    },
+    {
+      "id": "auto-s42-541fd42ed90e",
+      "decision": "already-published",
+      "existingId": "s42-me-megaman-cup-20260908-popo-ao",
+      "reviewedAt": "2026-11-09T12:37:46.593Z",
+      "officialRules": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/override-series-mega-man-cup-chapter-7-season-4-official-rules",
+      "evidence": "Same verified ME team (テルハルル / ゆめみるあお), 417 points, 27 eliminations, one VR, nine matches. Different official ranking presentations show 30 or 31; existing published row 31 maintained. Official top-50 cosmetic cutoff established, cash $0. Avoid duplicate."
     }
   ]
 }
