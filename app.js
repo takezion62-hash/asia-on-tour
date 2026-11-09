@@ -2039,26 +2039,35 @@
       archiveSearchCache.set(e,text);
       return text;
     }
+    // A page change should only render 50 different cards. It must not scan,
+    // classify or sort thousands of unmodified results again.
+    let archiveFilterCache=null;
     function renderResults(){
       const s=($('#search-results').value||'').trim().toLowerCase();
       const r=$('#region-filter').value;
       const prize=$('#prize-only').checked;
       const stage=$('#stage-filter').value;
-      visible=all().filter(e=>(!selectedPlayer||names(e).includes(selectedPlayer))&&(r==='all'||e.region===r)&&(stage==='all'||e.kind===stage)&&(!prize||isPrizeWin(e))&&(!s||archiveSearchText(e).includes(s)));
       const order=$('#sort-results').value;
-      const registrationDates=order==='registered'
-        ?new Map(registeredRows().map(item=>[item.record.id,item.registeredAt]))
-        :null;
-      visible.sort((a,b)=>{
-        if(order==='oldest')return a.date.localeCompare(b.date);
-        if(order==='vrs')return (b.vrs??-1)-(a.vrs??-1)||b.date.localeCompare(a.date);
-        if(order==='rank')return (a.rank??Infinity)-(b.rank??Infinity)||b.date.localeCompare(a.date);
-        if(order==='kills')return (b.kills??-1)-(a.kills??-1);
-        if(order==='prize')return (Number(b.prize)||0)-(Number(a.prize)||0)||b.date.localeCompare(a.date);
-        if(order==='points')return (Number(b.points)||0)-(Number(a.points)||0)||b.date.localeCompare(a.date);
-        if(order==='registered')return (registrationDates.get(b.id)||'').localeCompare(registrationDates.get(a.id)||'')||b.date.localeCompare(a.date);
-        return b.date.localeCompare(a.date);
-      });
+      const signature=JSON.stringify([selectedSeason,selectedPlayer,s,r,prize,stage,order]);
+      if(!archiveFilterCache||archiveFilterCache.signature!==signature){
+        visible=all().filter(e=>(!selectedPlayer||names(e).includes(selectedPlayer))&&(r==='all'||e.region===r)&&(stage==='all'||e.kind===stage)&&(!prize||isPrizeWin(e))&&(!s||archiveSearchText(e).includes(s)));
+        const registrationDates=order==='registered'
+          ?new Map(registeredRows().map(item=>[item.record.id,item.registeredAt]))
+          :null;
+        visible.sort((a,b)=>{
+          if(order==='oldest')return a.date.localeCompare(b.date);
+          if(order==='vrs')return (b.vrs??-1)-(a.vrs??-1)||b.date.localeCompare(a.date);
+          if(order==='rank')return (a.rank??Infinity)-(b.rank??Infinity)||b.date.localeCompare(a.date);
+          if(order==='kills')return (b.kills??-1)-(a.kills??-1);
+          if(order==='prize')return (Number(b.prize)||0)-(Number(a.prize)||0)||b.date.localeCompare(a.date);
+          if(order==='points')return (Number(b.points)||0)-(Number(a.points)||0)||b.date.localeCompare(a.date);
+          if(order==='registered')return (registrationDates.get(b.id)||'').localeCompare(registrationDates.get(a.id)||'')||b.date.localeCompare(a.date);
+          return b.date.localeCompare(a.date);
+        });
+        archiveFilterCache={signature,rows:visible};
+      }else{
+        visible=archiveFilterCache.rows;
+      }
       $('#result-count').textContent=format(visible.length)+'件';
       renderArchivePagination();
       if(!visible.length){
