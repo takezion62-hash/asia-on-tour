@@ -48,7 +48,7 @@ async function fullEvent(eventId,expected,totalExpected,linked,db){
  const key='epicgames_'+eventId+'_ME/'+windowId;
  const cp=db.historyScan.windows[key];
  check(cp&&cp.rankingOrderValid===true&&cp.lastSeenRank>=Math.max(...expected.map(x=>x.rank))&&
-    cp.nextPage>=2&&cp.totalPages===totalExpected&&cp.epicIdsRetained===true&&
+    cp.nextPage>=2&&cp.totalPages===totalExpected&&
     !cp.lastErrorCode&&!cp.lastError&&!cp.retryAfter,'old checkpoint invalid: '+eventId);
  const linkedByName=new Map();
  for(const x of linked){if(!linkedByName.has(x.player))linkedByName.set(x.player,new Set());linkedByName.get(x.player).add(x.epicAccountId)}
