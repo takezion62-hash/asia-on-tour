@@ -171,11 +171,23 @@ function processAll(){
    recordIds:toPublish.map(x=>x.id)});
  }
  if(saved.added){
-  const id=logId+'-attendance';
-  assert(!db.updates.entries.some(x=>x.id===id),'duplicate archive announcement');
-  db.updates.entries.unshift({id,date:jsDate,type:'participation',title:'確認済み予選敗退・出場'+saved.added+'件を出場アーカイブへ追加',
-   description:'保存済みEpic順位表・公式開催枠・本人IDを検証。予選突破・現金賞金・スキン報酬は推定していません。',
-   participationIds:toArchive.map(x=>x.recordId),participantTeams:toArchive.map(x=>x.p.player)});
+  // Participation announcements must refer to one month, so navigation opens
+  // the correct month and the existing updates validator can check every ID.
+  const months=new Map();
+  for(const item of toArchive){
+   const month=item.p.date.slice(0,7);
+   if(!months.has(month))months.set(month,[]);
+   months.get(month).push(item);
+  }
+  for(const [month,items] of months){
+   const id=logId+'-attendance-'+month;
+   assert(!db.updates.entries.some(x=>x.id===id),'duplicate archive announcement');
+   db.updates.entries.unshift({id,date:jsDate,type:'participation',recordIds:[],
+    participationMonth:month,
+    title:month+'の確認済み予選敗退・出場'+items.length+'件をアーカイブに追加',
+    description:'保存済みEpic順位表・公式開催枠・本人IDを検証。予選突破・現金賞金・スキン報酬は推定していません。',
+    participationIds:items.map(x=>x.recordId),participantTeams:items.map(x=>x.p.player)});
+  }
  }
  for(const entry of [...toPublish.map(x=>({id:x.id,recordId:x.id,decision:'published'})),
                     ...toArchive.map(x=>({id:x.p.id,recordId:x.recordId,decision:'participation-archived'}))]){
