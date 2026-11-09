@@ -1,7 +1,7 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-09T09:52:58.450Z",
+  "checkedAt": "2026-11-09T10:31:50.473Z",
   "mode": "review",
   "scope": "history",
   "dateMode": "rolling",
@@ -11,16 +11,16 @@
   "provider": "osirion",
   "linkedPlayers": 556,
   "trackedWindows": 2938,
-  "found": 2,
-  "skipped": 12,
-  "imported": 28,
+  "found": 54,
+  "skipped": 10,
+  "imported": 29,
   "scannedPages": 96,
-  "completedWindows": 217,
+  "completedWindows": 220,
   "identityConflicts": 3,
-  "alreadyRegistered": 1868,
-  "autoApprovedTotal": 978,
+  "alreadyRegistered": 1943,
+  "autoApprovedTotal": 1007,
   "invalidCachedCandidates": 1,
-  "manualReviewCandidates": 2,
+  "manualReviewCandidates": 54,
   "autoApprovedCosmeticThisRun": 0,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
@@ -28,10 +28,19 @@
   "timeLimitReached": false,
   "retryWindows": 2,
   "transientFailures": 0,
-  "malformedFailures": 0,
-  "skippedLeaderboards": [],
+  "malformedFailures": 1,
+  "skippedLeaderboards": [
+    {
+      "window": "epicgames_S42_SoloVictoryCup_OCE/S42_SoloVictoryCup_Event1Round1_OCE",
+      "page": 0,
+      "attempt": 4,
+      "code": "OSIRION_INVALID_LEADERBOARD",
+      "reason": "大会順位表のID/形式が不正 [epicgames_S42_SoloVictoryCup_OCE/S42_SoloVictoryCup_Event1Round1_OCE page=0]: totalPages=0",
+      "retryAfter": "2026-11-11T10:29:46.894Z"
+    }
+  ],
   "reviewOnlyWindows": 1318,
-  "reviewOnlyCandidates": 2,
+  "reviewOnlyCandidates": 34,
   "unmappedEvents": 238,
   "unmappedEventIds": [
     "S30_ConsoleCashCups",
@@ -47,29 +56,29 @@
     "S30_Reload",
     "S30_ReloadZB"
   ],
-  "message": "手動監査：47件の新規成績を確認して掲載。既存記録は保持、未検証のUnreal Cupは保留。残り2件。",
+  "message": "最新版と安全統合：新規掲載29件、重複スキップ0件、要確認の競合0件、確認待ち54件。既存の戦績・賞金は保持。",
   "manuallyPublished": 429,
   "manuallyResolvedDuplicates": 28,
   "lastReviewedBatchAt": "2026-11-09T10:07:54.298Z",
   "manuallyCorrected": 1,
   "lastCorrectedReviewAt": "2026-11-07T09:14:30.244Z",
   "concurrentMerge": {
-    "appended": 28,
+    "appended": 29,
     "alreadyPublished": 0,
     "reviewConflicts": 0,
     "keptPending": 54,
-    "reconciledAt": "2026-11-09T09:53:00.949Z"
+    "reconciledAt": "2026-11-09T10:31:52.732Z"
   },
   "coverage": {
     "total": 2938,
-    "completed": 217,
-    "notStarted": 2680,
-    "partial": 39,
+    "completed": 220,
+    "notStarted": 2675,
+    "partial": 41,
     "retryWaiting": 2,
     "retryDue": 0,
-    "remaining": 2721,
+    "remaining": 2718,
     "retryCount": 2,
-    "completionPercent": 7.4,
+    "completionPercent": 7.5,
     "byRegion": {
       "OCE": {
         "total": 519,
@@ -88,13 +97,13 @@
       },
       "BR": {
         "total": 514,
-        "completed": 16,
-        "pending": 498
+        "completed": 17,
+        "pending": 497
       },
       "NAC": {
         "total": 533,
-        "completed": 38,
-        "pending": 495
+        "completed": 40,
+        "pending": 493
       },
       "NAW": {
         "total": 324,
@@ -105,8 +114,8 @@
     "byYear": {
       "2024": {
         "total": 974,
-        "completed": 45,
-        "pending": 929
+        "completed": 46,
+        "pending": 928
       },
       "2025": {
         "total": 690,
@@ -115,23 +124,12 @@
       },
       "2026": {
         "total": 1274,
-        "completed": 144,
-        "pending": 1130
+        "completed": 146,
+        "pending": 1128
       }
     },
     "outsideScopeCheckpoints": 0,
     "samples": [
-      {
-        "window": "epicgames_S42_SoloVictoryCup_OCE/S42_SoloVictoryCup_Event1Round1_OCE",
-        "date": "2026-09-05",
-        "region": "OCE",
-        "series": "victory-cup",
-        "status": "retryWaiting",
-        "nextPage": 0,
-        "totalPages": null,
-        "retryAfter": "2026-11-09T10:23:46.961Z",
-        "errorCode": "OSIRION_INVALID_LEADERBOARD"
-      },
       {
         "window": "epicgames_S42_SoloVictoryCup_OCE/S42_SoloVictoryCup_Event1Round2_OCE",
         "date": "2026-09-05",
@@ -141,6 +139,17 @@
         "nextPage": 0,
         "totalPages": null,
         "retryAfter": "2026-11-11T06:44:01.966Z",
+        "errorCode": "OSIRION_INVALID_LEADERBOARD"
+      },
+      {
+        "window": "epicgames_S42_SoloVictoryCup_OCE/S42_SoloVictoryCup_Event1Round1_OCE",
+        "date": "2026-09-05",
+        "region": "OCE",
+        "series": "victory-cup",
+        "status": "retryWaiting",
+        "nextPage": 0,
+        "totalPages": null,
+        "retryAfter": "2026-11-11T10:29:46.894Z",
         "errorCode": "OSIRION_INVALID_LEADERBOARD"
       },
       {
@@ -166,6 +175,17 @@
         "errorCode": null
       },
       {
+        "window": "epicgames_S30_SoloVictoryCashCup_OCE/S30_SoloVictoryCashCup_Event1Round2_OCE",
+        "date": "2024-06-03",
+        "region": "OCE",
+        "series": "victory-cup",
+        "status": "partial",
+        "nextPage": 3,
+        "totalPages": 19,
+        "retryAfter": null,
+        "errorCode": null
+      },
+      {
         "window": "epicgames_S30_SoloVictoryCashCup_EU/S30_SoloVictoryCashCup_Event1Round2_EU",
         "date": "2024-06-04",
         "region": "EU",
@@ -177,12 +197,23 @@
         "errorCode": null
       },
       {
+        "window": "epicgames_S30_SoloVictoryCashCup_ME/S30_SoloVictoryCashCup_Event1Round1_ME",
+        "date": "2024-06-04",
+        "region": "ME",
+        "series": "victory-cup",
+        "status": "partial",
+        "nextPage": 2,
+        "totalPages": 100,
+        "retryAfter": null,
+        "errorCode": null
+      },
+      {
         "window": "epicgames_S30_SoloZBVictoryCashCup_ME/S30_SoloZBVictoryCashCup_Event3Round1_ME",
         "date": "2024-06-18",
         "region": "ME",
         "series": "victory-cup",
         "status": "partial",
-        "nextPage": 8,
+        "nextPage": 10,
         "totalPages": 68,
         "retryAfter": null,
         "errorCode": null
@@ -193,7 +224,7 @@
         "region": "ME",
         "series": "victory-cup",
         "status": "partial",
-        "nextPage": 14,
+        "nextPage": 16,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
@@ -204,19 +235,8 @@
         "region": "NAC",
         "series": "victory-cup",
         "status": "partial",
-        "nextPage": 10,
+        "nextPage": 12,
         "totalPages": 100,
-        "retryAfter": null,
-        "errorCode": null
-      },
-      {
-        "window": "epicgames_S30_SoloVictoryCashCup_NAC/S30_SoloVictoryCashCup_Event8Round2_NAC",
-        "date": "2024-08-06",
-        "region": "NAC",
-        "series": "victory-cup",
-        "status": "partial",
-        "nextPage": 41,
-        "totalPages": 48,
         "retryAfter": null,
         "errorCode": null
       },
@@ -226,7 +246,7 @@
         "region": "NAC",
         "series": "victory-cup",
         "status": "partial",
-        "nextPage": 6,
+        "nextPage": 8,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
@@ -237,18 +257,7 @@
         "region": "OCE",
         "series": "victory-cup",
         "status": "partial",
-        "nextPage": 4,
-        "totalPages": 100,
-        "retryAfter": null,
-        "errorCode": null
-      },
-      {
-        "window": "epicgames_S31_SoloVictoryCashCup_NAC/S31_SoloVictoryCashCup_Event3Round1_NAC",
-        "date": "2024-09-17",
-        "region": "NAC",
-        "series": "victory-cup",
-        "status": "partial",
-        "nextPage": 4,
+        "nextPage": 6,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
