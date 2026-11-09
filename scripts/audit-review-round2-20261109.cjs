@@ -83,8 +83,29 @@ async function zoroLive(){
  }
  return {located,samples,errors};
 }
+async function inoxtagLive(){
+ const targets=reports.filter(x=>x.tournamentId==='ch7s4-inoxtag-icon-cup-battle-royale');
+ const win={fullEventId:'epicgames_S42_InoxtagIconCup_NAW',eventId:'S42_InoxtagIconCup',
+  windowId:'S42_InoxtagIconCup_NAW',region:'NAW',
+  key:'epicgames_S42_InoxtagIconCup_NAW/S42_InoxtagIconCup_NAW'};
+ try{
+  const l=await getLeaderboard(win,0);
+  const located=[];
+  for(const e of l.entries||[]){
+   const row=normalizeRow(e,win);
+   if(!row)continue;
+   const matches=targets.filter(t=>t.points===row.points&&t.kills===row.kills&&
+    t.vrs===row.vrs&&t.matches===row.matches);
+   if(matches.length!==1)continue;
+   located.push({id:matches[0].id,rank:e.rank,points:e.pointsEarned,
+    kills:row.kills,vrs:row.vrs,matches:row.matches,
+    names:e.players?.map(p=>p.username),source:'exact score uniquely matched on live page 0'});
+  }
+  return {located,entries:l.entries?.length,totalPages:l.totalPages};
+ }catch(e){return {error:String(e).slice(0,250)}}
+}
 async function main(){
- const zoro=await zoroLive();
+ const zoro=await zoroLive(),inoxtag=await inoxtagLive();
  const categories=Object.entries(reports.reduce((a,x)=>(a[x.tournamentId]=(a[x.tournamentId]||0)+1,a),{}));
  const conflict=reports.filter(x=>x.existing.length);
  const status={totalPending:reports.length,historyQueue:data.review.history.proposals.length,autoQueue:data.review.auto.proposals.length,
@@ -94,7 +115,7 @@ async function main(){
     x.checkpoint.lastError||x.checkpoint.retryAfter||x.checkpoint.lastSeenRank<x.rank)).map(x=>x.id),
   missingCalendar:reports.filter(x=>x.calendarMatches!==1).map(x=>({id:x.id,count:x.calendarMatches,group:x.tournamentId})),
   other:reports.filter(x=>!x.existing.length).map(x=>({...x,existing:undefined,source:undefined})),
-  zoroLive:zoro};
+  zoroLive:zoro,inoxtagLive:inoxtag};
  console.log('AOT_AUDIT_ROUND2 '+JSON.stringify(status));
 }
 if(require.main===module)main().catch(e=>{console.error(e.stack);process.exitCode=1});
