@@ -50,7 +50,7 @@ function main(){
   }
   requireTrue(SCORE_KEYS.every(k=>row[k]===expected[k])&&row.verified===true&&
    /^auto-s42-[a-f0-9]{12}$/.test(row.id)&&
-   row.seasonId==='S42'&&row.prize===(expected.kind==='result'?0:null),
+   row.seasonId==='S42'&&row.prize===(row.tournamentId==='ch7s4-console-zero-build-solo-victory-cup'?0:null),
    'candidate score or classification changed: '+row.id);
   const url=new URL(row.source);
   const eventId=decodeURIComponent(url.pathname.split('/')[3]),windowId=url.searchParams.get('round');
