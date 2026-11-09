@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-09T23:19:12.132Z",
+  "reviewedAt": "2026-11-09T23:25:08.586Z",
   "description": "Resolved historic review candidates: published, duplicate or participation",
   "entries": [
     {
@@ -12936,6 +12936,60 @@
       "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=ME&round=S30_SoloZBVictoryCashCup_Event1Round1_ME",
       "officialRules": null,
       "evidence": "Exact saved ranked page checkpoint, original player ID, calendar window and no duplicated public record"
+    },
+    {
+      "id": "auto-s42-cd980b09cda6",
+      "decision": "already-published",
+      "existingId": "s42-oce-lady-liberty-br-skin-20261017-939c9009",
+      "reviewedAt": "2026-11-09T23:25:08.586Z",
+      "policy": "exact-epic-ranked-skin-collision",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=OCE&round=S42_PurgeCup_OCE",
+      "evidence": "Same name/date/region/event/rank/points/kills/VR as previously published Lady Liberty skin result"
+    },
+    {
+      "id": "auto-s42-22d2f1862036",
+      "decision": "already-published",
+      "existingId": "s42-oce-lady-liberty-br-skin-20261017-df650842",
+      "reviewedAt": "2026-11-09T23:25:08.586Z",
+      "policy": "exact-epic-ranked-skin-collision",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=OCE&round=S42_PurgeCup_OCE",
+      "evidence": "Same name/date/region/event/rank/points/kills/VR as previously published Lady Liberty skin result"
+    },
+    {
+      "id": "auto-s42-20c7163112b6",
+      "decision": "already-published",
+      "existingId": "s42-oce-lady-liberty-br-skin-20261017-39945a32",
+      "reviewedAt": "2026-11-09T23:25:08.586Z",
+      "policy": "exact-epic-ranked-skin-collision",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=OCE&round=S42_PurgeCup_OCE",
+      "evidence": "Same name/date/region/event/rank/points/kills/VR as previously published Lady Liberty skin result"
+    },
+    {
+      "id": "auto-s42-78aba2a9c1af",
+      "decision": "already-published",
+      "existingId": "s42-oce-lady-liberty-br-skin-20261017-943c019f",
+      "reviewedAt": "2026-11-09T23:25:08.586Z",
+      "policy": "exact-epic-ranked-skin-collision",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=OCE&round=S42_PurgeCup_OCE",
+      "evidence": "Same name/date/region/event/rank/points/kills/VR as previously published Lady Liberty skin result"
+    },
+    {
+      "id": "auto-s42-7db0f2c7b39d",
+      "decision": "already-published",
+      "existingId": "s42-oce-lady-liberty-br-skin-20261017-174d8aad",
+      "reviewedAt": "2026-11-09T23:25:08.586Z",
+      "policy": "exact-epic-ranked-skin-collision",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=OCE&round=S42_PurgeCup_OCE",
+      "evidence": "Same name/date/region/event/rank/points/kills/VR as previously published Lady Liberty skin result"
+    },
+    {
+      "id": "auto-s42-a89e05ac2219",
+      "decision": "already-published",
+      "existingId": "s42-oce-lady-liberty-br-skin-20261017-eb14596a",
+      "reviewedAt": "2026-11-09T23:25:08.586Z",
+      "policy": "exact-epic-ranked-skin-collision",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=OCE&round=S42_PurgeCup_OCE",
+      "evidence": "Same name/date/region/event/rank/points/kills/VR as previously published Lady Liberty skin result"
     }
   ]
 }
