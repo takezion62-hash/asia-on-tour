@@ -258,9 +258,12 @@ async function main(){
   }
   let result;
   try{result=buildRecord(row,proof)}catch(e){held.push({id:row.id,why:String(e.message)});continue}
-  assert(result.verified===true&&result.reviewOnly!==true&&
-    numeric.every(k=>result[k]===row[k])&&Number.isSafeInteger(result.prize)&&result.prize>=0&&
-    !ids.has(result.id),'publication safety '+row.id);
+  const safety={verified:result.verified===true,reviewFlag:result.reviewOnly!==true,
+    numeric:numeric.every(k=>result[k]===row[k]),cash:Number.isSafeInteger(result.prize)&&result.prize>=0,
+    uniqueId:!ids.has(result.id)};
+  if(Object.values(safety).some(x=>x!==true)){
+   held.push({id:row.id,why:'failed conservative publication guard',checks:safety});continue;
+  }
   db.results.push(result);ids.add(row.id);touched.add(row.id);
   added.push({id:row.id,player:row.player,rank:row.rank,event:row.event,kind:result.kind,
     prize:result.prize,date:row.date,region:row.region});
