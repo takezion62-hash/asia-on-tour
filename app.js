@@ -1916,7 +1916,7 @@
         if(!month||!teams.length)return '';
         const links=teams.map(team=>{
           const first=team.split(' / ')[0];
-          return '<li><a href="'+escape(profileHref(first))+'" data-open-profile="'+escape(first)+'">'+escape(team)+'</a> · 出場確認（賞金なし・最終順位未確定）</li>';
+          return '<li><a href="'+escape(profileHref(first))+'" data-open-profile="'+escape(first)+'">'+escape(team)+'</a> · 出場記録（通過圏外・報酬未確認は別判定）</li>';
         }).join('');
         return '<details><summary>今回追加した'+format(teams.length)+'組の出場確認を見る</summary>'
           +'<p><a href="#results" data-participation-month-open="'+escape(month)+'">該当月の出場記録一覧を開く ↗</a></p>'
