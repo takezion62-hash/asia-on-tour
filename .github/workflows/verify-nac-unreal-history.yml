@@ -1,0 +1,53 @@
+name: Verify five pending 2025 NAC Unreal Cup results
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/verify-nac-unreal-history.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: aot-provider-results-main
+  cancel-in-progress: false
+jobs:
+  verify-and-publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 19
+    steps:
+      - name: Checkout current main
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: main
+          persist-credentials: true
+      - name: Install Node 24
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '24'
+      - name: Verify 100 leaderboard pages and publish exact verified teams
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git reset --hard origin/main
+            node scripts/verify-unreal-nac-pending-20261109.cjs
+            npm run validate
+            node --test tests/automatic-unreal-approval.test.cjs tests/participation-sync.test.cjs
+            git add results.json updates.json history-sync-review.json history-sync-status.json history-sync-reviewed.json participation participation-index.json
+            if git diff --cached --quiet; then
+              echo "UNREAL_NAC_NO_PUBLICATION full source verification not established or already completed"
+              exit 0
+            fi
+            git commit -m "data: publish fully verified 2025 NAC Unreal Cup teams"
+            if git push origin HEAD:main; then
+              echo "UNREAL_NAC_PUBLICATION_CONFIRMED"
+              exit 0
+            fi
+            echo "main advanced; retry from latest source and check duplicates"
+            sleep $((attempt * 3))
+          done
+          echo "::error::Full verified publication could not be safely merged"
+          exit 1
