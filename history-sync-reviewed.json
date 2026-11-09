@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-09T12:37:46.593Z",
+  "reviewedAt": "2026-11-09T13:51:00.458Z",
   "description": "Resolved historic review candidates: published, duplicate or participation",
   "entries": [
     {
@@ -12111,6 +12111,38 @@
       "reviewedAt": "2026-11-09T12:37:46.593Z",
       "officialRules": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/override-series-mega-man-cup-chapter-7-season-4-official-rules",
       "evidence": "Same verified ME team (テルハルル / ゆめみるあお), 417 points, 27 eliminations, one VR, nine matches. Different official ranking presentations show 30 or 31; existing published row 31 maintained. Official top-50 cosmetic cutoff established, cash $0. Avoid duplicate."
+    },
+    {
+      "id": "auto-s42-ecf6149fa02e",
+      "decision": "published",
+      "recordId": "auto-s42-ecf6149fa02e",
+      "reviewedAt": "2026-11-09T13:51:00.458Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=EU&round=S42_ConsoleVCC_SolosZB_Event8Round1_EU",
+      "evidence": "Confirmed Epic-ID-linked official checkpoint, event session, source, roster and rank; unverified prizes never inferred"
+    },
+    {
+      "id": "auto-s42-0445c2eb81e2",
+      "decision": "participation-archived",
+      "recordId": "participation-6d521ebf7dc5fba147ce",
+      "reviewedAt": "2026-11-09T13:51:00.458Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=NAW&round=S42_ConsoleVCC_SolosZB_Event8Round1_NAW",
+      "evidence": "Confirmed Epic-ID-linked official checkpoint, event session, source, roster and rank; unverified prizes never inferred"
+    },
+    {
+      "id": "auto-s42-0ff9d88f0488",
+      "decision": "participation-archived",
+      "recordId": "participation-bac00ae4ad9be4995570",
+      "reviewedAt": "2026-11-09T13:51:00.458Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=NAC&round=S42_ConsoleVCC_SolosZB_Event8Round1_NAC",
+      "evidence": "Confirmed Epic-ID-linked official checkpoint, event session, source, roster and rank; unverified prizes never inferred"
+    },
+    {
+      "id": "auto-s42-d4f17e5d984d",
+      "decision": "participation-archived",
+      "recordId": "participation-03258750b9d526694881",
+      "reviewedAt": "2026-11-09T13:51:00.458Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_InoxtagIconCup/?region=NAW&round=S42_InoxtagIconCup_NAW",
+      "evidence": "Confirmed Epic-ID-linked official checkpoint, event session, source, roster and rank; unverified prizes never inferred"
     }
   ]
 }

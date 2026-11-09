@@ -2,6 +2,21 @@
   "version": 1,
   "entries": [
     {
+      "id": "verified-pending-publication-20261109-final",
+      "date": "2026-11-09",
+      "type": "records",
+      "title": "確認待ちの公式照合成績と参加記録を追加",
+      "description": "EU Console ZB予選突破を成績へ、NAW/NAC Console ZBの通過圏外2件とNAW Inoxtag Cup1件を参加アーカイブへ。本人Epic ID・公式順位表・大会枠を確認し、未確認の賞金やスキン報酬を加算しない。",
+      "recordIds": [
+        "auto-s42-ecf6149fa02e"
+      ],
+      "participationIds": [
+        "participation-6d521ebf7dc5fba147ce",
+        "participation-bac00ae4ad9be4995570",
+        "participation-03258750b9d526694881"
+      ]
+    },
+    {
       "id": "manual-reviewed-participation-20261109-nac-unreal5",
       "date": "2026-11-09",
       "type": "participation",
