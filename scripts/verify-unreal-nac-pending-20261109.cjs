@@ -141,7 +141,7 @@ async function main(){
  db.status.lastReviewedBatchAt=now;
  db.status.message='2025 NAC Unreal Cupの100ページ全順位表を再取得。対象'+items.length+
   'チームを本人Epic ID・公式賞金表で照合し掲載。確認待ち'+db.review.proposals.length+'件。';
- const id='assistant-verified-nac-unreal-full-20261109';
+ const id='assistant-verified-nac-unreal-five-20261109';
  assert(!db.updates.entries.some(x=>x.id===id),'duplicate update ID');
  db.updates.entries.unshift({id,date:new Date(Date.now()+9*3600000).toISOString().slice(0,10),
   type:'records',title:'$1 Million Unreal Cup NAC 全100ページ照合で'+items.length+'組の戦績を掲載',
