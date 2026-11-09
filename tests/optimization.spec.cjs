@@ -4,6 +4,7 @@ const {test,expect}=require('@playwright/test');
 test('archive pagination reuses sorted search results until filters actually change',async({page})=>{
  await page.goto('/?season=all#results');
  const count=page.locator('#result-count');
+ await expect(page.locator('#result-pagination-top [data-archive-page="2"]')).toBeVisible();
  await expect(count).toContainText('件');
  const total=Number((await count.textContent()).replace(/[^0-9]/g,''));
  expect(total).toBeGreaterThan(300);
