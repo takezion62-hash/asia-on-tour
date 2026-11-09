@@ -1,5 +1,9 @@
 name: AOT reviewed candidate publication request
 on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/publish-remaining-verified-20261109.cjs'
   workflow_dispatch:
     inputs:
       candidate_ids:
@@ -36,6 +40,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   propose:
+    if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
@@ -128,3 +133,46 @@ jobs:
             --title "Review: safe publication of verified ASIA ON TOUR candidates" \
             --body-file .manual-approval-summary.md
           echo "A PR was created. Human review and merge are still required."
+
+  publish_newly_verified:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout latest confirmed data
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: main
+          persist-credentials: true
+      - name: Set up Node
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+        with:
+          node-version: '24'
+      - name: Safely publish one verified result and archive three participations
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          for attempt in 1 2 3 4; do
+            git fetch origin main
+            git reset --hard origin/main
+            node scripts/publish-remaining-verified-20261109.cjs
+            npm run validate
+            node --test tests/manual-approval.test.cjs tests/participation-archive.test.cjs
+            git add results.json auto-sync-review.json auto-sync-status.json history-sync-reviewed.json approval-history.json updates.json participation/
+            git add participation-index.json
+            if git diff --cached --quiet; then
+              echo "No outstanding verified candidates to publish"
+              exit 0
+            fi
+            git commit -m "data: publish reviewed EU qualifier and archive verified participation"
+            if git push origin HEAD:main; then
+              echo "Verified publication committed to main"
+              exit 0
+            fi
+            echo "Concurrent main update; revalidate against newest state"
+            sleep $((attempt * 3))
+          done
+          echo "::error::Publication could not be safely merged"
+          exit 1
