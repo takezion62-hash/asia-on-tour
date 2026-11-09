@@ -3,10 +3,10 @@
   "enabled": true,
   "mode": "review",
   "provider": "osirion",
-  "lookbackDays": 10,
+  "lookbackDays": 21,
   "minLagMinutes": 240,
-  "maxPagesPerRun": 48,
-  "maxWindowsPerRun": 6,
+  "maxPagesPerRun": 50,
+  "maxWindowsPerRun": 10,
   "accounts": [],
   "windows": [],
   "reviewSeries": [
@@ -19,7 +19,7 @@
     "playstation-cup",
     "unreal-cup"
   ],
-  "maxPagesPerWindowPerRun": 12,
+  "maxPagesPerWindowPerRun": 10,
   "autoApproveCosmetic": true,
   "autoApproveCash": true,
   "autoApprovePerformance": true,
