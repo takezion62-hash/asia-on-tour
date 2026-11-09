@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-09T02:15:38.579Z",
+  "reviewedAt": "2026-11-09T05:30:43.760Z",
   "description": "Resolved historic review candidates: published, duplicate or participation",
   "entries": [
     {
@@ -8914,6 +8914,983 @@
       "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event9Round1_NAC",
       "officialRules": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
       "evidence": "Exact source window, saved verified ranked checkpoint, player roster, no collisions"
+    },
+    {
+      "id": "auto-s43-9d42693207cd",
+      "recordId": "s43-eu-zoro-zb-skin-20261107-tarokun-lef",
+      "decision": "rank-reconciled",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "source": "https://www.fortnite.com/competitive/events/S43_OnePieceZoroCup_ZB/?region=EU&round=S43_OnePieceZoroCup_ZB_EU",
+      "evidence": "Re-fetched exact Epic/Osirion page with both confirmed IDs and matching team score; preserved cosmetic payout",
+      "previousRank": 364,
+      "newRank": 363
+    },
+    {
+      "id": "auto-s43-37b3d4421c8d",
+      "recordId": "s43-eu-zoro-zb-skin-20261107-acris-hoimin",
+      "decision": "rank-reconciled",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "source": "https://www.fortnite.com/competitive/events/S43_OnePieceZoroCup_ZB/?region=EU&round=S43_OnePieceZoroCup_ZB_EU",
+      "evidence": "Re-fetched exact Epic/Osirion page with both confirmed IDs and matching team score; preserved cosmetic payout",
+      "previousRank": 375,
+      "newRank": 374
+    },
+    {
+      "id": "auto-s42-d0e7d0fff043",
+      "recordId": "s42-naw-inoxtag-icon-br-duos-skin-20261026-nezah-airisu",
+      "decision": "rank-reconciled",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "source": "https://www.fortnite.com/competitive/events/S42_InoxtagIconCup/?region=NAW&round=S42_InoxtagIconCup_NAW",
+      "evidence": "Re-fetched exact Epic/Osirion page with both confirmed IDs and matching team score; preserved cosmetic payout",
+      "previousRank": 12,
+      "newRank": 11
+    },
+    {
+      "id": "auto-s42-4f2f19eeaa06",
+      "recordId": "s42-naw-inoxtag-icon-br-duos-skin-20261026-surafu-sosukimu",
+      "decision": "rank-reconciled",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "source": "https://www.fortnite.com/competitive/events/S42_InoxtagIconCup/?region=NAW&round=S42_InoxtagIconCup_NAW",
+      "evidence": "Re-fetched exact Epic/Osirion page with both confirmed IDs and matching team score; preserved cosmetic payout",
+      "previousRank": 20,
+      "newRank": 19
+    },
+    {
+      "id": "auto-s42-3d6463648572",
+      "recordId": "s42-naw-inoxtag-icon-br-duos-skin-20261026-iruemon-arika",
+      "decision": "rank-reconciled",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "source": "https://www.fortnite.com/competitive/events/S42_InoxtagIconCup/?region=NAW&round=S42_InoxtagIconCup_NAW",
+      "evidence": "Re-fetched exact Epic/Osirion page with both confirmed IDs and matching team score; preserved cosmetic payout",
+      "previousRank": 65,
+      "newRank": 62
+    },
+    {
+      "id": "auto-s42-f3b4beadcf78",
+      "recordId": "s42-naw-inoxtag-icon-br-duos-skin-20261026-esosa-kakuseiex",
+      "decision": "rank-reconciled",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "source": "https://www.fortnite.com/competitive/events/S42_InoxtagIconCup/?region=NAW&round=S42_InoxtagIconCup_NAW",
+      "evidence": "Re-fetched exact Epic/Osirion page with both confirmed IDs and matching team score; preserved cosmetic payout",
+      "previousRank": 76,
+      "newRank": 73
+    },
+    {
+      "id": "auto-s42-ca9c5d891437",
+      "recordId": "s42-naw-inoxtag-icon-br-duos-skin-20261026-falcon-tmu",
+      "decision": "rank-reconciled",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "source": "https://www.fortnite.com/competitive/events/S42_InoxtagIconCup/?region=NAW&round=S42_InoxtagIconCup_NAW",
+      "evidence": "Re-fetched exact Epic/Osirion page with both confirmed IDs and matching team score; preserved cosmetic payout",
+      "previousRank": 84,
+      "newRank": 81
+    },
+    {
+      "id": "auto-s42-536315d52b2a",
+      "recordId": "auto-s42-536315d52b2a",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "policy": "verified-source-attendance-or-no-vr",
+      "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=NAC&round=S42_ConsoleVCC_SolosZB_Event8Round2_NAC",
+      "evidence": "Exact saved leaderboard source, canonical Epic roster, official session, no duplicate or unsupported cash inference"
+    },
+    {
+      "id": "auto-s42-4398d47bf98b",
+      "recordId": "auto-s42-4398d47bf98b",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "policy": "verified-source-attendance-or-no-vr",
+      "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=NAC&round=S42_ConsoleVCC_SolosZB_Event8Round2_NAC",
+      "evidence": "Exact saved leaderboard source, canonical Epic roster, official session, no duplicate or unsupported cash inference"
+    },
+    {
+      "id": "auto-s42-bda63d2f8b6f",
+      "recordId": "auto-s42-bda63d2f8b6f",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "policy": "verified-source-attendance-or-no-vr",
+      "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=NAC&round=S42_ConsoleVCC_SolosZB_Event8Round2_NAC",
+      "evidence": "Exact saved leaderboard source, canonical Epic roster, official session, no duplicate or unsupported cash inference"
+    },
+    {
+      "id": "auto-s42-d56aa63522e6",
+      "recordId": "auto-s42-d56aa63522e6",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "policy": "verified-source-attendance-or-no-vr",
+      "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=NAC&round=S42_ConsoleVCC_SolosZB_Event8Round2_NAC",
+      "evidence": "Exact saved leaderboard source, canonical Epic roster, official session, no duplicate or unsupported cash inference"
+    },
+    {
+      "id": "auto-s42-4e37bcbc4ad7",
+      "recordId": "auto-s42-4e37bcbc4ad7",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "policy": "verified-source-attendance-or-no-vr",
+      "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=NAC&round=S42_ConsoleVCC_SolosZB_Event8Round2_NAC",
+      "evidence": "Exact saved leaderboard source, canonical Epic roster, official session, no duplicate or unsupported cash inference"
+    },
+    {
+      "id": "auto-s42-3b7f227601f0",
+      "recordId": "auto-s42-3b7f227601f0",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "policy": "verified-source-attendance-or-no-vr",
+      "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=NAC&round=S42_ConsoleVCC_SolosZB_Event8Round2_NAC",
+      "evidence": "Exact saved leaderboard source, canonical Epic roster, official session, no duplicate or unsupported cash inference"
+    },
+    {
+      "id": "auto-s42-3e7b4bb853a6",
+      "recordId": "auto-s42-3e7b4bb853a6",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "policy": "verified-source-attendance-or-no-vr",
+      "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=NAW&round=S42_ConsoleVCC_SolosZB_Event8Round1_NAW",
+      "evidence": "Exact saved leaderboard source, canonical Epic roster, official session, no duplicate or unsupported cash inference"
+    },
+    {
+      "id": "auto-s42-c9769dc6d347",
+      "recordId": "auto-s42-c9769dc6d347",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "policy": "verified-source-attendance-or-no-vr",
+      "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=NAW&round=S42_ConsoleVCC_SolosZB_Event8Round1_NAW",
+      "evidence": "Exact saved leaderboard source, canonical Epic roster, official session, no duplicate or unsupported cash inference"
+    },
+    {
+      "id": "auto-s42-417d45ba6d85",
+      "recordId": "auto-s42-417d45ba6d85",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "policy": "verified-source-attendance-or-no-vr",
+      "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=NAW&round=S42_ConsoleVCC_SolosZB_Event8Round1_NAW",
+      "evidence": "Exact saved leaderboard source, canonical Epic roster, official session, no duplicate or unsupported cash inference"
+    },
+    {
+      "id": "auto-s42-690155dcd74a",
+      "recordId": "auto-s42-690155dcd74a",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "policy": "verified-source-attendance-or-no-vr",
+      "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=NAW&round=S42_ConsoleVCC_SolosZB_Event8Round1_NAW",
+      "evidence": "Exact saved leaderboard source, canonical Epic roster, official session, no duplicate or unsupported cash inference"
+    },
+    {
+      "id": "auto-s42-f1359f439d7c",
+      "recordId": "auto-s42-f1359f439d7c",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "policy": "verified-source-attendance-or-no-vr",
+      "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=NAW&round=S42_ConsoleVCC_SolosZB_Event8Round1_NAW",
+      "evidence": "Exact saved leaderboard source, canonical Epic roster, official session, no duplicate or unsupported cash inference"
+    },
+    {
+      "id": "auto-s42-5d1a73d35f84",
+      "recordId": "auto-s42-5d1a73d35f84",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "policy": "verified-source-attendance-or-no-vr",
+      "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=NAW&round=S42_ConsoleVCC_SolosZB_Event8Round1_NAW",
+      "evidence": "Exact saved leaderboard source, canonical Epic roster, official session, no duplicate or unsupported cash inference"
+    },
+    {
+      "id": "auto-s42-120059d7cdac",
+      "recordId": "auto-s42-120059d7cdac",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "policy": "verified-source-attendance-or-no-vr",
+      "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=NAW&round=S42_ConsoleVCC_SolosZB_Event8Round1_NAW",
+      "evidence": "Exact saved leaderboard source, canonical Epic roster, official session, no duplicate or unsupported cash inference"
+    },
+    {
+      "id": "auto-s42-ac8718eeb935",
+      "recordId": "auto-s42-ac8718eeb935",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "policy": "verified-source-attendance-or-no-vr",
+      "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=NAW&round=S42_ConsoleVCC_SolosZB_Event8Round1_NAW",
+      "evidence": "Exact saved leaderboard source, canonical Epic roster, official session, no duplicate or unsupported cash inference"
+    },
+    {
+      "id": "auto-s42-ecedf8ff89bd",
+      "recordId": "auto-s42-ecedf8ff89bd",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "policy": "verified-source-attendance-or-no-vr",
+      "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=NAW&round=S42_ConsoleVCC_SolosZB_Event8Round1_NAW",
+      "evidence": "Exact saved leaderboard source, canonical Epic roster, official session, no duplicate or unsupported cash inference"
+    },
+    {
+      "id": "auto-s42-701f04a5be18",
+      "recordId": "auto-s42-701f04a5be18",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "policy": "verified-source-attendance-or-no-vr",
+      "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=NAC&round=S42_ConsoleVCC_SolosZB_Event8Round1_NAC",
+      "evidence": "Exact saved leaderboard source, canonical Epic roster, official session, no duplicate or unsupported cash inference"
+    },
+    {
+      "id": "auto-s42-4cea5c3a3e95",
+      "recordId": "auto-s42-4cea5c3a3e95",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "policy": "verified-source-attendance-or-no-vr",
+      "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=NAC&round=S42_ConsoleVCC_SolosZB_Event8Round1_NAC",
+      "evidence": "Exact saved leaderboard source, canonical Epic roster, official session, no duplicate or unsupported cash inference"
+    },
+    {
+      "id": "auto-s42-22d2853eba20",
+      "recordId": "auto-s42-22d2853eba20",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "policy": "verified-source-attendance-or-no-vr",
+      "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=NAC&round=S42_ConsoleVCC_SolosZB_Event8Round1_NAC",
+      "evidence": "Exact saved leaderboard source, canonical Epic roster, official session, no duplicate or unsupported cash inference"
+    },
+    {
+      "id": "auto-s42-319c71f0f671",
+      "recordId": "auto-s42-319c71f0f671",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "policy": "verified-source-attendance-or-no-vr",
+      "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=NAC&round=S42_ConsoleVCC_SolosZB_Event8Round1_NAC",
+      "evidence": "Exact saved leaderboard source, canonical Epic roster, official session, no duplicate or unsupported cash inference"
+    },
+    {
+      "id": "auto-s42-29732163ebad",
+      "recordId": "auto-s42-29732163ebad",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "policy": "verified-source-attendance-or-no-vr",
+      "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=NAC&round=S42_ConsoleVCC_SolosZB_Event8Round1_NAC",
+      "evidence": "Exact saved leaderboard source, canonical Epic roster, official session, no duplicate or unsupported cash inference"
+    },
+    {
+      "id": "auto-s42-3857e5844d83",
+      "recordId": "auto-s42-3857e5844d83",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "policy": "verified-source-attendance-or-no-vr",
+      "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=NAC&round=S42_ConsoleVCC_SolosZB_Event8Round1_NAC",
+      "evidence": "Exact saved leaderboard source, canonical Epic roster, official session, no duplicate or unsupported cash inference"
+    },
+    {
+      "id": "auto-s42-be9c4690ddc4",
+      "recordId": "auto-s42-be9c4690ddc4",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "policy": "verified-source-attendance-or-no-vr",
+      "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=NAC&round=S42_ConsoleVCC_SolosZB_Event8Round1_NAC",
+      "evidence": "Exact saved leaderboard source, canonical Epic roster, official session, no duplicate or unsupported cash inference"
+    },
+    {
+      "id": "auto-s42-d7572e6813bb",
+      "recordId": "auto-s42-d7572e6813bb",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "policy": "verified-source-attendance-or-no-vr",
+      "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=BR&round=S42_ConsoleVCC_SolosZB_Event8Round2_BR",
+      "evidence": "Exact saved leaderboard source, canonical Epic roster, official session, no duplicate or unsupported cash inference"
+    },
+    {
+      "id": "auto-s42-65d851b94e0d",
+      "recordId": "auto-s42-65d851b94e0d",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "policy": "verified-source-attendance-or-no-vr",
+      "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=BR&round=S42_ConsoleVCC_SolosZB_Event8Round1_BR",
+      "evidence": "Exact saved leaderboard source, canonical Epic roster, official session, no duplicate or unsupported cash inference"
+    },
+    {
+      "id": "auto-s42-b694ad29003a",
+      "recordId": "auto-s42-b694ad29003a",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "policy": "verified-source-attendance-or-no-vr",
+      "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=BR&round=S42_ConsoleVCC_SolosZB_Event8Round1_BR",
+      "evidence": "Exact saved leaderboard source, canonical Epic roster, official session, no duplicate or unsupported cash inference"
+    },
+    {
+      "id": "auto-s42-71542614317d",
+      "recordId": "auto-s42-71542614317d",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "policy": "verified-source-attendance-or-no-vr",
+      "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=BR&round=S42_ConsoleVCC_SolosZB_Event8Round1_BR",
+      "evidence": "Exact saved leaderboard source, canonical Epic roster, official session, no duplicate or unsupported cash inference"
+    },
+    {
+      "id": "auto-s42-ea923c967b61",
+      "recordId": "auto-s42-ea923c967b61",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "policy": "verified-source-attendance-or-no-vr",
+      "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=BR&round=S42_ConsoleVCC_SolosZB_Event8Round1_BR",
+      "evidence": "Exact saved leaderboard source, canonical Epic roster, official session, no duplicate or unsupported cash inference"
+    },
+    {
+      "id": "auto-s42-96301a6ea435",
+      "recordId": "s42-oce-persona5-reload-skin-20260925-39945a32",
+      "decision": "already-published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "source": "https://www.fortnite.com/competitive/events/S42_Persona5Cup/?region=OCE&round=S42_Persona5Cup_OCE",
+      "evidence": "Existing official event/roster/rank/statistics; kept any previous verified reward",
+      "previousRank": null
+    },
+    {
+      "id": "auto-s30-d6bb0f59c808",
+      "recordId": "auto-s30-d6bb0f59c808",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "policy": "verified-source-attendance-or-no-vr",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=ME&round=S30_SoloVictoryCashCup_Event8Round1_ME",
+      "evidence": "Exact saved leaderboard source, canonical Epic roster, official session, no duplicate or unsupported cash inference"
+    },
+    {
+      "id": "auto-s30-3ef5ca72953b",
+      "recordId": "auto-s30-3ef5ca72953b",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "policy": "verified-source-attendance-or-no-vr",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=ME&round=S30_SoloVictoryCashCup_Event8Round1_ME",
+      "evidence": "Exact saved leaderboard source, canonical Epic roster, official session, no duplicate or unsupported cash inference"
+    },
+    {
+      "id": "auto-s30-abbb70c8ad95",
+      "recordId": "auto-s30-abbb70c8ad95",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "policy": "verified-source-attendance-or-no-vr",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=ME&round=S30_SoloVictoryCashCup_Event8Round1_ME",
+      "evidence": "Exact saved leaderboard source, canonical Epic roster, official session, no duplicate or unsupported cash inference"
+    },
+    {
+      "id": "auto-s30-e6b19ac81022",
+      "recordId": "auto-s30-e6b19ac81022",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "policy": "verified-source-attendance-or-no-vr",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=ME&round=S30_SoloVictoryCashCup_Event8Round1_ME",
+      "evidence": "Exact saved leaderboard source, canonical Epic roster, official session, no duplicate or unsupported cash inference"
+    },
+    {
+      "id": "auto-s30-bef7f3c86829",
+      "recordId": "auto-s30-bef7f3c86829",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "policy": "verified-source-attendance-or-no-vr",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=ME&round=S30_SoloVictoryCashCup_Event8Round1_ME",
+      "evidence": "Exact saved leaderboard source, canonical Epic roster, official session, no duplicate or unsupported cash inference"
+    },
+    {
+      "id": "auto-s30-3e8082fe67dd",
+      "recordId": "auto-s30-3e8082fe67dd",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "policy": "verified-source-attendance-or-no-vr",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=ME&round=S30_SoloVictoryCashCup_Event8Round1_ME",
+      "evidence": "Exact saved leaderboard source, canonical Epic roster, official session, no duplicate or unsupported cash inference"
+    },
+    {
+      "id": "auto-s30-ae665deae0c4",
+      "recordId": "auto-s30-ae665deae0c4",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "policy": "verified-source-attendance-or-no-vr",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=ME&round=S30_SoloVictoryCashCup_Event8Round1_ME",
+      "evidence": "Exact saved leaderboard source, canonical Epic roster, official session, no duplicate or unsupported cash inference"
+    },
+    {
+      "id": "auto-s30-db83d2a7a0aa",
+      "recordId": "auto-s30-db83d2a7a0aa",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "policy": "verified-source-attendance-or-no-vr",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event8Round1_NAC",
+      "evidence": "Exact saved leaderboard source, canonical Epic roster, official session, no duplicate or unsupported cash inference"
+    },
+    {
+      "id": "auto-s30-7eb381176452",
+      "recordId": "auto-s30-7eb381176452",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "policy": "verified-source-attendance-or-no-vr",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event8Round1_NAC",
+      "evidence": "Exact saved leaderboard source, canonical Epic roster, official session, no duplicate or unsupported cash inference"
+    },
+    {
+      "id": "auto-s30-56d5cafb78b6",
+      "recordId": "auto-s30-56d5cafb78b6",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "policy": "verified-source-attendance-or-no-vr",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event8Round1_NAC",
+      "evidence": "Exact saved leaderboard source, canonical Epic roster, official session, no duplicate or unsupported cash inference"
+    },
+    {
+      "id": "auto-s42-3b06d375c222",
+      "recordId": "auto-s42-3b06d375c222",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "policy": "verified-source-attendance-or-no-vr",
+      "source": "https://www.fortnite.com/competitive/events/S42_PerformanceEvaluationTrios/?region=NAC&round=S42_PerformanceEvaluation_Event6Round1_NAC",
+      "evidence": "Exact saved leaderboard source, canonical Epic roster, official session, no duplicate or unsupported cash inference"
+    },
+    {
+      "id": "auto-s42-b0bbf274178e",
+      "recordId": "auto-s42-b0bbf274178e",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "policy": "verified-source-attendance-or-no-vr",
+      "source": "https://www.fortnite.com/competitive/events/S42_PerformanceEvaluationTrios/?region=NAC&round=S42_PerformanceEvaluation_Event6Round1_NAC",
+      "evidence": "Exact saved leaderboard source, canonical Epic roster, official session, no duplicate or unsupported cash inference"
+    },
+    {
+      "id": "auto-s40-8c20156046f0",
+      "recordId": "auto-s40-8c20156046f0",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "policy": "verified-source-attendance-or-no-vr",
+      "source": "https://www.fortnite.com/competitive/events/S40_FNCSDivisionalCup_Division1/?region=ME&round=S40_FNCSDivisionalCup_Division1_Week3Day1_ME",
+      "evidence": "Exact saved leaderboard source, canonical Epic roster, official session, no duplicate or unsupported cash inference"
+    },
+    {
+      "id": "auto-s40-dad1d598bc5b",
+      "recordId": "auto-s40-dad1d598bc5b",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "policy": "verified-source-attendance-or-no-vr",
+      "source": "https://www.fortnite.com/competitive/events/S40_FNCSDivisionalCup_Division1/?region=ME&round=S40_FNCSDivisionalCup_Division1_Week3Day1_ME",
+      "evidence": "Exact saved leaderboard source, canonical Epic roster, official session, no duplicate or unsupported cash inference"
+    },
+    {
+      "id": "auto-s30-ad977b21cb5c",
+      "recordId": "auto-s30-ad977b21cb5c",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "policy": "verified-source-attendance-or-no-vr",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=ME&round=S30_SoloZBVictoryCashCup_Event3Round1_ME",
+      "evidence": "Exact saved leaderboard source, canonical Epic roster, official session, no duplicate or unsupported cash inference"
+    },
+    {
+      "id": "auto-s30-3991065eadd5",
+      "recordId": "auto-s30-3991065eadd5",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "policy": "verified-source-attendance-or-no-vr",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=ME&round=S30_SoloZBVictoryCashCup_Event3Round1_ME",
+      "evidence": "Exact saved leaderboard source, canonical Epic roster, official session, no duplicate or unsupported cash inference"
+    },
+    {
+      "id": "auto-s30-98428d7d0179",
+      "recordId": "auto-s30-98428d7d0179",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "policy": "verified-source-attendance-or-no-vr",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=ME&round=S30_SoloZBVictoryCashCup_Event3Round1_ME",
+      "evidence": "Exact saved leaderboard source, canonical Epic roster, official session, no duplicate or unsupported cash inference"
+    },
+    {
+      "id": "auto-s30-ee32b4a30964",
+      "recordId": "auto-s30-ee32b4a30964",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "policy": "verified-source-attendance-or-no-vr",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=ME&round=S30_SoloZBVictoryCashCup_Event3Round1_ME",
+      "evidence": "Exact saved leaderboard source, canonical Epic roster, official session, no duplicate or unsupported cash inference"
+    },
+    {
+      "id": "auto-s30-a72acbe57f09",
+      "recordId": "auto-s30-a72acbe57f09",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "policy": "verified-source-attendance-or-no-vr",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=ME&round=S30_SoloZBVictoryCashCup_Event3Round1_ME",
+      "evidence": "Exact saved leaderboard source, canonical Epic roster, official session, no duplicate or unsupported cash inference"
+    },
+    {
+      "id": "auto-s30-a4f91241d992",
+      "recordId": "auto-s30-a4f91241d992",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "policy": "verified-source-attendance-or-no-vr",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=ME&round=S30_SoloZBVictoryCashCup_Event3Round1_ME",
+      "evidence": "Exact saved leaderboard source, canonical Epic roster, official session, no duplicate or unsupported cash inference"
+    },
+    {
+      "id": "auto-s30-08c4533a8fa8",
+      "recordId": "auto-s30-08c4533a8fa8",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "policy": "verified-source-attendance-or-no-vr",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=ME&round=S30_SoloZBVictoryCashCup_Event3Round1_ME",
+      "evidence": "Exact saved leaderboard source, canonical Epic roster, official session, no duplicate or unsupported cash inference"
+    },
+    {
+      "id": "auto-s30-2162f1181efb",
+      "recordId": "auto-s30-2162f1181efb",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "policy": "verified-source-attendance-or-no-vr",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=ME&round=S30_SoloZBVictoryCashCup_Event3Round1_ME",
+      "evidence": "Exact saved leaderboard source, canonical Epic roster, official session, no duplicate or unsupported cash inference"
+    },
+    {
+      "id": "auto-s30-9374074402ef",
+      "recordId": "auto-s30-9374074402ef",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "policy": "verified-source-attendance-or-no-vr",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=ME&round=S30_SoloZBVictoryCashCup_Event3Round1_ME",
+      "evidence": "Exact saved leaderboard source, canonical Epic roster, official session, no duplicate or unsupported cash inference"
+    },
+    {
+      "id": "auto-s30-dc628ed11325",
+      "recordId": "auto-s30-dc628ed11325",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "policy": "verified-source-attendance-or-no-vr",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=ME&round=S30_SoloZBVictoryCashCup_Event3Round1_ME",
+      "evidence": "Exact saved leaderboard source, canonical Epic roster, official session, no duplicate or unsupported cash inference"
+    },
+    {
+      "id": "auto-s30-012585c2a675",
+      "recordId": "auto-s30-012585c2a675",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "policy": "verified-source-attendance-or-no-vr",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=ME&round=S30_SoloZBVictoryCashCup_Event3Round1_ME",
+      "evidence": "Exact saved leaderboard source, canonical Epic roster, official session, no duplicate or unsupported cash inference"
+    },
+    {
+      "id": "auto-s30-878b6010e0c2",
+      "recordId": "auto-s30-878b6010e0c2",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "policy": "verified-source-attendance-or-no-vr",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=ME&round=S30_SoloZBVictoryCashCup_Event3Round1_ME",
+      "evidence": "Exact saved leaderboard source, canonical Epic roster, official session, no duplicate or unsupported cash inference"
+    },
+    {
+      "id": "auto-s30-fbdbf7943116",
+      "recordId": "auto-s30-fbdbf7943116",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "policy": "verified-source-attendance-or-no-vr",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=ME&round=S30_SoloZBVictoryCashCup_Event3Round1_ME",
+      "evidence": "Exact saved leaderboard source, canonical Epic roster, official session, no duplicate or unsupported cash inference"
+    },
+    {
+      "id": "auto-s30-328f566bb520",
+      "recordId": "auto-s30-328f566bb520",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "policy": "verified-source-attendance-or-no-vr",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=ME&round=S30_SoloZBVictoryCashCup_Event3Round1_ME",
+      "evidence": "Exact saved leaderboard source, canonical Epic roster, official session, no duplicate or unsupported cash inference"
+    },
+    {
+      "id": "auto-s30-bca6215f8915",
+      "recordId": "auto-s30-bca6215f8915",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "policy": "verified-source-attendance-or-no-vr",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=ME&round=S30_SoloZBVictoryCashCup_Event3Round1_ME",
+      "evidence": "Exact saved leaderboard source, canonical Epic roster, official session, no duplicate or unsupported cash inference"
+    },
+    {
+      "id": "auto-s30-7ff0f0b25a5f",
+      "recordId": "auto-s30-7ff0f0b25a5f",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "policy": "verified-source-attendance-or-no-vr",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=ME&round=S30_SoloZBVictoryCashCup_Event3Round1_ME",
+      "evidence": "Exact saved leaderboard source, canonical Epic roster, official session, no duplicate or unsupported cash inference"
+    },
+    {
+      "id": "auto-s42-cf57afb11827",
+      "recordId": "s42-oce-street-fighter-cup-reload-skin-20261009-5caf936f-e1f6997e",
+      "decision": "already-published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "source": "https://www.fortnite.com/competitive/events/S42_StreetFighterCup/?region=OCE&round=S42_StreetFighterCup_OCE",
+      "evidence": "Existing official event/roster/rank/statistics; kept any previous verified reward",
+      "previousRank": null
+    },
+    {
+      "id": "auto-s36-85a20a40a527",
+      "recordId": "s36-naw-playstation-cup-final-20250728-sky",
+      "decision": "already-published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "source": "https://www.fortnite.com/competitive/events/S36_PlayStationCup/?region=NAW&round=S36_PlayStationCup_Final_NAW",
+      "evidence": "Existing official event/roster/rank/statistics; kept any previous verified reward",
+      "previousRank": null
+    },
+    {
+      "id": "auto-s36-dd864197cec4",
+      "recordId": "s36-naw-playstation-cup-final-20250728-t3eny",
+      "decision": "already-published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "source": "https://www.fortnite.com/competitive/events/S36_PlayStationCup/?region=NAW&round=S36_PlayStationCup_Final_NAW",
+      "evidence": "Existing official event/roster/rank/statistics; kept any previous verified reward",
+      "previousRank": null
+    },
+    {
+      "id": "auto-s36-3c858021ebda",
+      "recordId": "s36-naw-playstation-cup-final-20250728-3peace",
+      "decision": "already-published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "source": "https://www.fortnite.com/competitive/events/S36_PlayStationCup/?region=NAW&round=S36_PlayStationCup_Final_NAW",
+      "evidence": "Existing official event/roster/rank/statistics; kept any previous verified reward",
+      "previousRank": null
+    },
+    {
+      "id": "auto-s36-76b163aee5ab",
+      "recordId": "s36-naw-playstation-cup-final-20250728-mofu",
+      "decision": "already-published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "source": "https://www.fortnite.com/competitive/events/S36_PlayStationCup/?region=NAW&round=S36_PlayStationCup_Final_NAW",
+      "evidence": "Existing official event/roster/rank/statistics; kept any previous verified reward",
+      "previousRank": null
+    },
+    {
+      "id": "auto-s36-fd406c83c45f",
+      "recordId": "s36-naw-playstation-cup-final-20250728-fuwa",
+      "decision": "already-published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "source": "https://www.fortnite.com/competitive/events/S36_PlayStationCup/?region=NAW&round=S36_PlayStationCup_Final_NAW",
+      "evidence": "Existing official event/roster/rank/statistics; kept any previous verified reward",
+      "previousRank": null
+    },
+    {
+      "id": "auto-s36-10759b59d2d3",
+      "recordId": "s36-naw-playstation-cup-final-20250728-natsuai",
+      "decision": "already-published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "source": "https://www.fortnite.com/competitive/events/S36_PlayStationCup/?region=NAW&round=S36_PlayStationCup_Final_NAW",
+      "evidence": "Existing official event/roster/rank/statistics; kept any previous verified reward",
+      "previousRank": null
+    },
+    {
+      "id": "auto-s36-3eb2cb5327ae",
+      "recordId": "s36-naw-playstation-cup-final-20250728-saku",
+      "decision": "already-published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "source": "https://www.fortnite.com/competitive/events/S36_PlayStationCup/?region=NAW&round=S36_PlayStationCup_Final_NAW",
+      "evidence": "Existing official event/roster/rank/statistics; kept any previous verified reward",
+      "previousRank": null
+    },
+    {
+      "id": "auto-s36-a77a640b375c",
+      "recordId": "s36-naw-playstation-cup-final-20250728-maximum24",
+      "decision": "already-published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "source": "https://www.fortnite.com/competitive/events/S36_PlayStationCup/?region=NAW&round=S36_PlayStationCup_Final_NAW",
+      "evidence": "Existing official event/roster/rank/statistics; kept any previous verified reward",
+      "previousRank": null
+    },
+    {
+      "id": "auto-s36-623ca1686ba1",
+      "recordId": "s36-naw-playstation-cup-final-20250728-aim",
+      "decision": "already-published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "source": "https://www.fortnite.com/competitive/events/S36_PlayStationCup/?region=NAW&round=S36_PlayStationCup_Final_NAW",
+      "evidence": "Existing official event/roster/rank/statistics; kept any previous verified reward",
+      "previousRank": null
+    },
+    {
+      "id": "auto-s36-5602fbc08f39",
+      "recordId": "s36-naw-playstation-cup-final-20250728-gochio",
+      "decision": "already-published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "source": "https://www.fortnite.com/competitive/events/S36_PlayStationCup/?region=NAW&round=S36_PlayStationCup_Final_NAW",
+      "evidence": "Existing official event/roster/rank/statistics; kept any previous verified reward",
+      "previousRank": null
+    },
+    {
+      "id": "auto-s36-d6e7b7a3ec2d",
+      "recordId": "s36-naw-playstation-cup-final-20250728-meiru",
+      "decision": "already-published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "source": "https://www.fortnite.com/competitive/events/S36_PlayStationCup/?region=NAW&round=S36_PlayStationCup_Final_NAW",
+      "evidence": "Existing official event/roster/rank/statistics; kept any previous verified reward",
+      "previousRank": null
+    },
+    {
+      "id": "auto-s36-480ec42cdf3c",
+      "recordId": "s36-naw-playstation-cup-final-20250728-hagane",
+      "decision": "already-published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "source": "https://www.fortnite.com/competitive/events/S36_PlayStationCup/?region=NAW&round=S36_PlayStationCup_Final_NAW",
+      "evidence": "Existing official event/roster/rank/statistics; kept any previous verified reward",
+      "previousRank": null
+    },
+    {
+      "id": "auto-s36-135accd63979",
+      "recordId": "s36-naw-playstation-cup-final-20250728-charu",
+      "decision": "already-published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "source": "https://www.fortnite.com/competitive/events/S36_PlayStationCup/?region=NAW&round=S36_PlayStationCup_Final_NAW",
+      "evidence": "Existing official event/roster/rank/statistics; kept any previous verified reward",
+      "previousRank": null
+    },
+    {
+      "id": "auto-s36-f29eaa6406ca",
+      "recordId": "s36-naw-playstation-cup-final-20250728-botemon",
+      "decision": "already-published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "source": "https://www.fortnite.com/competitive/events/S36_PlayStationCup/?region=NAW&round=S36_PlayStationCup_Final_NAW",
+      "evidence": "Existing official event/roster/rank/statistics; kept any previous verified reward",
+      "previousRank": null
+    },
+    {
+      "id": "auto-s36-3e75ec6ffa02",
+      "recordId": "s36-naw-playstation-cup-final-20250728-pana",
+      "decision": "already-published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "source": "https://www.fortnite.com/competitive/events/S36_PlayStationCup/?region=NAW&round=S36_PlayStationCup_Final_NAW",
+      "evidence": "Existing official event/roster/rank/statistics; kept any previous verified reward",
+      "previousRank": null
+    },
+    {
+      "id": "auto-s36-46c3f019d517",
+      "recordId": "s36-naw-playstation-cup-final-20250728-reeton120fps",
+      "decision": "already-published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "source": "https://www.fortnite.com/competitive/events/S36_PlayStationCup/?region=NAW&round=S36_PlayStationCup_Final_NAW",
+      "evidence": "Existing official event/roster/rank/statistics; kept any previous verified reward",
+      "previousRank": null
+    },
+    {
+      "id": "auto-s36-8fc7b1bdf272",
+      "recordId": "s36-naw-playstation-cup-final-20250728-yuragi",
+      "decision": "already-published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "source": "https://www.fortnite.com/competitive/events/S36_PlayStationCup/?region=NAW&round=S36_PlayStationCup_Final_NAW",
+      "evidence": "Existing official event/roster/rank/statistics; kept any previous verified reward",
+      "previousRank": null
+    },
+    {
+      "id": "auto-s40-326739c52d44",
+      "recordId": "s40-naw-playstation-clix-cup-final-20260503-meiru",
+      "decision": "already-published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "source": "https://www.fortnite.com/competitive/events/S40_PlayStationCupClix/?region=NAW&round=S40_PlayStationCupClix_Final_NAW",
+      "evidence": "Existing official event/roster/rank/statistics; kept any previous verified reward",
+      "previousRank": null
+    },
+    {
+      "id": "auto-s40-8374c972baab",
+      "recordId": "auto-s40-8374c972baab",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "policy": "verified-source-attendance-or-no-vr",
+      "source": "https://www.fortnite.com/competitive/events/S40_PlayStationCupClix/?region=NAW&round=S40_PlayStationCupClix_Final_NAW",
+      "evidence": "Exact saved leaderboard source, canonical Epic roster, official session, no duplicate or unsupported cash inference"
+    },
+    {
+      "id": "auto-s40-b7401961720b",
+      "recordId": "auto-s40-b7401961720b",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "policy": "verified-source-attendance-or-no-vr",
+      "source": "https://www.fortnite.com/competitive/events/S40_PlayStationCupClix/?region=NAW&round=S40_PlayStationCupClix_Final_NAW",
+      "evidence": "Exact saved leaderboard source, canonical Epic roster, official session, no duplicate or unsupported cash inference"
+    },
+    {
+      "id": "auto-s40-d7c28c69cb6e",
+      "recordId": "auto-s40-d7c28c69cb6e",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "policy": "verified-source-attendance-or-no-vr",
+      "source": "https://www.fortnite.com/competitive/events/S40_PlayStationCupClix/?region=NAW&round=S40_PlayStationCupClix_Final_NAW",
+      "evidence": "Exact saved leaderboard source, canonical Epic roster, official session, no duplicate or unsupported cash inference"
+    },
+    {
+      "id": "auto-s40-cccaa25e42b6",
+      "recordId": "auto-s40-cccaa25e42b6",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "policy": "verified-source-attendance-or-no-vr",
+      "source": "https://www.fortnite.com/competitive/events/S40_PlayStationCupClix/?region=NAW&round=S40_PlayStationCupClix_Final_NAW",
+      "evidence": "Exact saved leaderboard source, canonical Epic roster, official session, no duplicate or unsupported cash inference"
+    },
+    {
+      "id": "auto-s40-2f4caeb6383d",
+      "recordId": "auto-s40-2f4caeb6383d",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "policy": "verified-source-attendance-or-no-vr",
+      "source": "https://www.fortnite.com/competitive/events/S40_PlayStationCupClix/?region=NAW&round=S40_PlayStationCupClix_Final_NAW",
+      "evidence": "Exact saved leaderboard source, canonical Epic roster, official session, no duplicate or unsupported cash inference"
+    },
+    {
+      "id": "auto-s40-9d4b3736a9f5",
+      "recordId": "auto-s40-9d4b3736a9f5",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "policy": "verified-source-attendance-or-no-vr",
+      "source": "https://www.fortnite.com/competitive/events/S40_PlayStationCupClix/?region=NAW&round=S40_PlayStationCupClix_Final_NAW",
+      "evidence": "Exact saved leaderboard source, canonical Epic roster, official session, no duplicate or unsupported cash inference"
+    },
+    {
+      "id": "auto-s40-e80e79e363b4",
+      "recordId": "auto-s40-e80e79e363b4",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "policy": "verified-source-attendance-or-no-vr",
+      "source": "https://www.fortnite.com/competitive/events/S40_PlayStationCupClix/?region=NAW&round=S40_PlayStationCupClix_Final_NAW",
+      "evidence": "Exact saved leaderboard source, canonical Epic roster, official session, no duplicate or unsupported cash inference"
+    },
+    {
+      "id": "auto-s40-8f7c4e4ee894",
+      "recordId": "auto-s40-8f7c4e4ee894",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "policy": "verified-source-attendance-or-no-vr",
+      "source": "https://www.fortnite.com/competitive/events/S40_PlayStationCupClix/?region=NAW&round=S40_PlayStationCupClix_Final_NAW",
+      "evidence": "Exact saved leaderboard source, canonical Epic roster, official session, no duplicate or unsupported cash inference"
+    },
+    {
+      "id": "auto-s40-a24a8a18ea6f",
+      "recordId": "auto-s40-a24a8a18ea6f",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "policy": "verified-source-attendance-or-no-vr",
+      "source": "https://www.fortnite.com/competitive/events/S40_PlayStationCupClix/?region=NAW&round=S40_PlayStationCupClix_Final_NAW",
+      "evidence": "Exact saved leaderboard source, canonical Epic roster, official session, no duplicate or unsupported cash inference"
+    },
+    {
+      "id": "auto-s40-7f1315bb19a8",
+      "recordId": "auto-s40-7f1315bb19a8",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "policy": "verified-source-attendance-or-no-vr",
+      "source": "https://www.fortnite.com/competitive/events/S40_PlayStationCupClix/?region=NAW&round=S40_PlayStationCupClix_Final_NAW",
+      "evidence": "Exact saved leaderboard source, canonical Epic roster, official session, no duplicate or unsupported cash inference"
+    },
+    {
+      "id": "auto-s40-4d58f75003b8",
+      "recordId": "auto-s40-4d58f75003b8",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "policy": "verified-source-attendance-or-no-vr",
+      "source": "https://www.fortnite.com/competitive/events/S40_PlayStationCupClix/?region=NAW&round=S40_PlayStationCupClix_Final_NAW",
+      "evidence": "Exact saved leaderboard source, canonical Epic roster, official session, no duplicate or unsupported cash inference"
+    },
+    {
+      "id": "auto-s40-b40e2d8f46f7",
+      "recordId": "auto-s40-b40e2d8f46f7",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "policy": "verified-source-attendance-or-no-vr",
+      "source": "https://www.fortnite.com/competitive/events/S40_PlayStationCupClix/?region=NAW&round=S40_PlayStationCupClix_Final_NAW",
+      "evidence": "Exact saved leaderboard source, canonical Epic roster, official session, no duplicate or unsupported cash inference"
+    },
+    {
+      "id": "auto-s40-223d5fe57374",
+      "recordId": "auto-s40-223d5fe57374",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:30:43.760Z",
+      "approvedBy": "ChatGPT reviewed source recheck 2026-11-09",
+      "policy": "verified-source-attendance-or-no-vr",
+      "source": "https://www.fortnite.com/competitive/events/S40_PlayStationCupClix/?region=NAW&round=S40_PlayStationCupClix_Final_NAW",
+      "evidence": "Exact saved leaderboard source, canonical Epic roster, official session, no duplicate or unsupported cash inference"
     }
   ]
 }
