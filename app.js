@@ -97,7 +97,18 @@
     const tournamentCatalog=siteData.tournaments.catalog;
     // Classification is separate from immutable published results. Match both
     // the explicit season/source identity and exact registered tournament name.
+    // Results do not mutate during a page session. Parsing the same official
+    // event URL on each classification/ranking/profile redraw is unnecessary.
+    const tournamentSourceCache=new WeakMap();
     function tournamentSource(e){
+      if(!e||typeof e!=='object')return resolveTournamentSource(e);
+      const cached=tournamentSourceCache.get(e);
+      if(cached)return cached;
+      const parsed=resolveTournamentSource(e);
+      tournamentSourceCache.set(e,parsed);
+      return parsed;
+    }
+    function resolveTournamentSource(e){
       try{
         const u=new URL(e.source);const parts=u.pathname.split('/').filter(Boolean);
         if(!['https:','http:'].includes(u.protocol)||!['fortnite.com','www.fortnite.com','fortnitetracker.com','www.fortnitetracker.com'].includes(u.hostname.toLowerCase()))return {eventId:null,roundId:null,seasonId:'unknown'};
@@ -111,13 +122,20 @@
         return {eventId,roundId,seasonId};
       }catch{return {eventId:null,roundId:null,seasonId:'unknown'}}
     }
+    // Keep the exact conservative tournament classifier, but resolve each
+    // published record only once. Unknown mappings remain unknown, never guessed.
+    const tournamentClassificationCache=new WeakMap();
     function classifyTournamentRecord(e){
+      if(e&&typeof e==='object'&&tournamentClassificationCache.has(e))
+        return tournamentClassificationCache.get(e);
       const source=tournamentSource(e);
       const known=tournamentCatalog.find(t=>t.seasonId===source.seasonId&&t.name===e.event&&t.sourceEventIds.includes(source.eventId));
       const period=recordSeason(e);
-      if(known&&period.id===known.seasonId)return known;
       const periodId=period.id==='unknown'?source.seasonId:period.seasonId;
-      return {id:'unconfirmed-'+encodeURIComponent([periodId,e.event,source.eventId||e.id].join('|')),name:e.event||'大会名未確認',chapter:period.chapter,season:period.season,seasonId:periodId,sourceEventIds:source.eventId?[source.eventId]:[],series:'unknown',mode:'unknown',subtype:'unknown',team:'unknown',platform:'unknown',evidence:[{text:'登録名・出典の識別子に一致する確認済み分類がないため、各項目を未確認としています。'}]};
+      const classified=known&&period.id===known.seasonId?known:
+        {id:'unconfirmed-'+encodeURIComponent([periodId,e.event,source.eventId||e.id].join('|')),name:e.event||'大会名未確認',chapter:period.chapter,season:period.season,seasonId:periodId,sourceEventIds:source.eventId?[source.eventId]:[],series:'unknown',mode:'unknown',subtype:'unknown',team:'unknown',platform:'unknown',evidence:[{text:'登録名・出典の識別子に一致する確認済み分類がないため、各項目を未確認としています。'}]};
+      if(e&&typeof e==='object')tournamentClassificationCache.set(e,classified);
+      return classified;
     }
     // Season identity is explicit metadata, never inferred from dates or S-number arithmetic.
     const currentSeasonId='S43';
@@ -2011,12 +2029,22 @@
         if(target)target.innerHTML='<nav class="archive-pagination" aria-label="遠征結果のページ切り替え"><p class="archive-pagination-status"'+(id==='result-pagination-top'?' role="status" aria-live="polite"':'')+'>'+status+'</p>'+controls+'</nav>';
       }
     }
+    // Pre-normalize each immutable row for repeated interactive archive searches.
+    // A separator keeps distinct fields from matching across their boundaries.
+    const archiveSearchCache=new WeakMap();
+    function archiveSearchText(e){
+      if(archiveSearchCache.has(e))return archiveSearchCache.get(e);
+      const text=[e.player,...names(e),e.playerRaw,e.event,e.region,e.round,e.note]
+        .map(x=>String(x||'').toLowerCase()).join('\u001f');
+      archiveSearchCache.set(e,text);
+      return text;
+    }
     function renderResults(){
       const s=($('#search-results').value||'').trim().toLowerCase();
       const r=$('#region-filter').value;
       const prize=$('#prize-only').checked;
       const stage=$('#stage-filter').value;
-      visible=all().filter(e=>(!selectedPlayer||names(e).includes(selectedPlayer))&&(r==='all'||e.region===r)&&(stage==='all'||e.kind===stage)&&(!prize||isPrizeWin(e))&&(!s||[e.player,...names(e),e.playerRaw,e.event,e.region,e.round,e.note].some(x=>String(x||'').toLowerCase().includes(s))));
+      visible=all().filter(e=>(!selectedPlayer||names(e).includes(selectedPlayer))&&(r==='all'||e.region===r)&&(stage==='all'||e.kind===stage)&&(!prize||isPrizeWin(e))&&(!s||archiveSearchText(e).includes(s)));
       const order=$('#sort-results').value;
       const registrationDates=order==='registered'
         ?new Map(registeredRows().map(item=>[item.record.id,item.registeredAt]))
