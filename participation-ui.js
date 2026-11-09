@@ -34,6 +34,64 @@
     return '<div class="participation-scroll"><table class="participation-table"><thead><tr><th>日付</th><th>地域</th><th>順位</th><th>選手</th><th>大会 / ラウンド</th><th>Pt</th><th>キル</th><th>VR</th><th>試合</th><th>区分</th><th>出典</th></tr></thead><tbody>'+rows.map(rowHtml).join('')+'</tbody></table></div>';
   };
   const sortRows=rows=>rows.slice().sort((a,b)=>b.date.localeCompare(a.date)||a.rank-b.rank||a.event.localeCompare(b.event));
+
+  // Search verified participation alongside the main "遠征結果" search without
+  // adding below-cutoff contestants to results.json, awards or achievements.
+  let mainSearchSequence=0,mainArchiveRows=null;
+  async function searchFromMainResults(){
+    const host=document.getElementById('participation-main-search');
+    const search=document.getElementById('search-results');
+    if(!host||!search)return;
+    const sequence=++mainSearchSequence;
+    const q=search.value.trim().toLocaleLowerCase();
+    const region=document.getElementById('region-filter')?.value||'all';
+    const stage=document.getElementById('stage-filter')?.value||'all';
+    const prizeOnly=document.getElementById('prize-only')?.checked;
+    if(q.length<2||prizeOnly||(stage!=='all'&&stage!=='予選')){
+      host.hidden=true;host.replaceChildren();return;
+    }
+    host.hidden=false;host.textContent='出場確認アーカイブも検索中…';
+    try{
+      if(!mainArchiveRows){
+        const index=await getIndex();
+        const entries=await Promise.all(index.months.filter(m=>m.count>0).map(m=>getMonth(m.month)));
+        mainArchiveRows=entries.flat();
+      }
+      if(sequence!==mainSearchSequence)return;
+      const found=sortRows(mainArchiveRows.filter(r=>(region==='all'||region===r.region)&&
+        [r.player,...members(r),r.event,r.round,String(r.rank),r.date].some(value=>
+         String(value||'').toLocaleLowerCase().includes(q))));
+      const visible=found.slice(0,30);
+      if(!found.length){host.hidden=true;host.replaceChildren();return}
+      const month=visible[0].date.slice(0,7);
+      host.innerHTML='<div class="participation-heading"><div><p class="participation-kicker">OTHER VERIFIED RESULTS</p>'
+        +'<h2>出場アーカイブにも '+fmt(found.length)+'件の一致</h2></div></div>'
+        +'<p class="participation-note">以下は予選敗退・通過未確認を含む別枠の出場記録です。通常の賞金・称号・正式戦績には加算しません。シーズン選択に関係なく全期間を検索しています。</p>'
+        +buildTable(visible)
+        +(found.length>visible.length?'<p class="participation-note">先頭30件を表示。詳しくは下の月別出場アーカイブを確認してください。</p>':'')
+        +'<p class="participation-note"><a href="#results" data-participation-month-open="'+esc(month)+'">月別の出場記録へ移動 ↗</a></p>';
+    }catch(error){
+      if(sequence===mainSearchSequence){
+        host.hidden=false;host.textContent='出場アーカイブの検索に失敗しました。下の出場記録欄から再確認してください。';
+      }
+    }
+  }
+  function connectMainResultsSearch(){
+    const search=document.getElementById('search-results');
+    const filter=document.querySelector('#page-results .prize-row-note');
+    if(!search||!filter)return;
+    const host=document.createElement('section');
+    host.id='participation-main-search';
+    host.className='participation-panel participation-search-results';
+    host.setAttribute('aria-live','polite');
+    host.hidden=true;
+    filter.after(host);
+    search.addEventListener('input',searchFromMainResults);
+    for(const id of ['region-filter','stage-filter','prize-only'])
+      document.getElementById(id)?.addEventListener('change',searchFromMainResults);
+    searchFromMainResults();
+  }
+
   // Make newly added archived participation discoverable from the main results
   // page and update history without mixing it into cash/prize statistics.
   async function revealLatestPublished(index,picker){
@@ -49,15 +107,25 @@
       const summary=document.getElementById('participation-summary');
       const recent=document.createElement('div');
       recent.className='participation-recent';
-      recent.innerHTML='<strong>最近追加した出場確認 '+fmt(rows.length)+'組</strong>'
-        +'<span>'+esc(entry.participationMonth)+' · NAC Unreal Cup · 最終順位は確認中</span>'
-        +'<a href="#results" data-participation-month-open="'+esc(entry.participationMonth)+'">今回の出場記録を表示 ↗</a>'
-        +'<div class="participation-recent-names">'+rows.map(r=>'<span>'+esc(r.player)+'</span>').join('')+'</div>';
+      const sameDate=rows.every(r=>r.date===rows[0].date);
+      const sameEvent=rows.every(r=>r.event===rows[0].event);
+      const sameRegion=rows.every(r=>r.region===rows[0].region);
+      const title=[sameDate?rows[0].date:entry.participationMonth,sameRegion?rows[0].region:'',
+        sameEvent?rows[0].event:'複数大会'].filter(Boolean).join(' · ');
+      const recentAttributes=' data-participation-month-open="'+esc(entry.participationMonth)+'"'
+        +(sameRegion?' data-participation-region="'+esc(rows[0].region)+'"':'')
+        +(sameDate?' data-participation-search="'+esc(rows[0].date)+'"':'');
+      recent.innerHTML='<strong>最近追加した出場戦績 '+fmt(rows.length)+'件</strong>'
+        +'<span>'+esc(title)+' · 順位・キル・VRを照合済み</span>'
+        +'<a href="#results"'+recentAttributes+'>今回の出場戦績を表示 ↗</a>'
+        +'<div class="participation-recent-names">'+rows.map(r=>'<span>'+esc(r.player)+'：'+fmt(r.rank)+'位 / '+fmt(r.kills)+'K / '+fmt(r.vrs)+'VR</span>').join('')+'</div>';
       summary?.after(recent);
       const shortcut=document.createElement('p');
       shortcut.className='participation-shortcut';
-      shortcut.innerHTML='<strong>新しい出場確認 '+fmt(rows.length)+'組</strong>：通常の遠征結果とは別枠で掲載'
-        +' · <a href="#results" data-participation-month-open="'+esc(entry.participationMonth)+'">出場記録を表示 ↗</a>';
+      shortcut.innerHTML='<strong>追加済み：'+esc(title)+' · '+fmt(rows.length)+'件</strong>'
+        +'<p class="participation-note">予選敗退を含む確認済み出場戦績（賞金・称号の集計対象外）</p>'
+        +buildTable(sortRows(rows))
+        +'<p><a href="#results"'+recentAttributes+'>出場アーカイブで絞り込んで表示 ↗</a></p>';
       document.querySelector('#page-results .prize-row-note')?.after(shortcut);
       // Keep the latest populated month as the default for all visitors.
       // The newly published historical month is opened only via its shortcut.
@@ -74,9 +142,9 @@
     if(!picker||!Array.from(picker.options).some(o=>o.value===month))return;
     picker.value=month;
     const region=document.getElementById('participation-region');
-    if(region)region.value='all';
+    if(region)region.value=link.dataset.participationRegion||'all';
     const query=document.getElementById('participation-search');
-    if(query)query.value='';
+    if(query)query.value=link.dataset.participationSearch||'';
     currentPage=1;
     renderMonth();
     if(location.hash!=='#results')location.hash='#results';
@@ -95,7 +163,7 @@
       const region=document.getElementById('participation-region')?.value||'all';
       const query=(document.getElementById('participation-search')?.value||'').trim().toLocaleLowerCase();
       const filtered=sortRows(entries.filter(r=>(region==='all'||r.region===region)&&(!query||
-        [r.event,r.player,...members(r),r.round,String(r.rank)].some(s=>String(s||'').toLocaleLowerCase().includes(query)))));
+        [r.date,r.event,r.player,...members(r),r.round,String(r.rank)].some(s=>String(s||'').toLocaleLowerCase().includes(query)))));
       const begin=(currentPage-1)*100;
       target.innerHTML=buildTable(filtered.slice(begin,begin+100));
       const count=document.getElementById('participation-count');
@@ -199,7 +267,7 @@
     }
   }
   window.AOTParticipation={renderProfile,subscribePR,getPRRecords};
-  const initialize=()=>{initArchive();loadStatus();loadForPR()};
+  const initialize=()=>{connectMainResultsSearch();initArchive();loadStatus();loadForPR()};
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initialize,{once:true});
   else initialize()
 })();
