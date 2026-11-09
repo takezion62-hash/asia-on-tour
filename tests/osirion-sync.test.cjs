@@ -1,6 +1,6 @@
 'use strict';
 const test=require('node:test'),assert=require('node:assert/strict');
-const {identity,linkedAccounts,parseStage,discover,discoverUnmapped,selectHistoricalWindows,historicalEvidenceScore,resolveHistoricalScope,selectActiveWindows,fetchJson,advancementLimit,transientLeaderboardFailure,normalizeRow,getLeaderboard,leaderboardResponseError,recoverableLeaderboardFailure,holdLeaderboardWindow,holdEmptyFirstPage}=require('../scripts/osirion-sync.cjs');
+const {identity,linkedAccounts,parseStage,discover,discoverUnmapped,selectHistoricalWindows,historicalEvidenceScore,historicalEvidenceIndex,resolveHistoricalScope,selectActiveWindows,fetchJson,advancementLimit,transientLeaderboardFailure,normalizeRow,getLeaderboard,leaderboardResponseError,recoverableLeaderboardFailure,holdLeaderboardWindow,holdEmptyFirstPage}=require('../scripts/osirion-sync.cjs');
 const f='https://fortnitetracker.com/profile/all/Alpha/events?id=8a57ac58-f937-4de2-81b7-9abd070c7ae8';
 test('Tracker UUID can map to the same 32-char account ID after strict validation',()=>{
  assert.equal(identity(f),'8a57ac58f9374de281b79abd070c7ae8');
@@ -126,6 +126,30 @@ test('historical evidence prioritizes previously verified regions and rounds wit
  assert.equal(historicalEvidenceScore(seeded,records),100);
  assert.equal(historicalEvidenceScore({...seeded,region:'EU'},records),0);
  assert.deepEqual(selectHistoricalWindows([unseeded,seeded],{windows:{}},{maxWindowsPerRun:1},Date.parse('2026-11-05'),records).map(w=>w.key),['seed']);
+});
+test('indexed historical evidence matches the original reference for all match granularities',()=>{
+  const base={tournamentId:'cash',region:'NAW'};
+  const records=[
+    {...base,date:'2024-08-13',source:'https://example.invalid/events?window=Event1Round2_NAW'},
+    {...base,date:'2024-09-01',source:'https://example.invalid/events?window=other'},
+    {...base,date:'2025-02-15',source:null},
+    {tournamentId:'cash',region:'ME',date:'2024-08-13',source:'https://example.invalid/events?window=Event1Round2_NAW'},
+    {tournamentId:'solo',region:'NAW',date:'2024-08-13',source:'https://example.invalid/events?window=Event1Round2_NAW'}
+  ];
+  const indexed=historicalEvidenceIndex(records);
+  const windows=[
+    {...base,windowId:'Event1Round2_NAW',dateJst:'2024-08-13'},
+    {...base,windowId:'not-found',dateJst:'2024-08-13'},
+    {...base,windowId:'not-found',dateJst:'2024-08-20'},
+    {...base,windowId:'not-found',dateJst:'2024-12-25'},
+    {...base,windowId:'not-found',dateJst:'2025-11-11'},
+    {...base,windowId:'not-found',dateJst:'2026-01-01'},
+    {...base,region:'EU',windowId:'Event1Round2_NAW',dateJst:'2024-08-13'}
+  ];
+  for(const win of windows){
+    assert.equal(indexed(win),historicalEvidenceScore(win,records),JSON.stringify(win));
+    assert.equal(indexed(win),historicalEvidenceScore(win,records),'Repeated indexed lookup is stable');
+  }
 });
 test('2025 Unreal Cup from the existing catalog is scanned for verification only',()=>{
  const c=JSON.parse(require('node:fs').readFileSync(require('node:path').join(__dirname,'../tournaments.json'),'utf8')).catalog;
