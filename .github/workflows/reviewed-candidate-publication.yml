@@ -159,7 +159,7 @@ jobs:
             git reset --hard origin/main
             node scripts/publish-remaining-verified-20261109.cjs
             npm run validate
-            node --test tests/manual-approval.test.cjs tests/participation-archive.test.cjs
+            node --test tests/manual-approval.test.cjs tests/participation-sync.test.cjs
             git add results.json auto-sync-review.json auto-sync-status.json history-sync-reviewed.json approval-history.json updates.json participation/
             git add participation-index.json
             if git diff --cached --quiet; then
