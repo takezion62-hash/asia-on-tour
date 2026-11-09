@@ -11,7 +11,7 @@
   "provider": "osirion",
   "linkedPlayers": 556,
   "trackedWindows": 2938,
-  "found": 54,
+  "found": 6,
   "skipped": 10,
   "imported": 29,
   "scannedPages": 96,
@@ -20,7 +20,7 @@
   "alreadyRegistered": 1943,
   "autoApprovedTotal": 1007,
   "invalidCachedCandidates": 1,
-  "manualReviewCandidates": 54,
+  "manualReviewCandidates": 6,
   "autoApprovedCosmeticThisRun": 0,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
@@ -40,7 +40,7 @@
     }
   ],
   "reviewOnlyWindows": 1318,
-  "reviewOnlyCandidates": 34,
+  "reviewOnlyCandidates": 6,
   "unmappedEvents": 238,
   "unmappedEventIds": [
     "S30_ConsoleCashCups",
@@ -56,10 +56,10 @@
     "S30_Reload",
     "S30_ReloadZB"
   ],
-  "message": "最新版と安全統合：新規掲載29件、重複スキップ0件、要確認の競合0件、確認待ち54件。既存の戦績・賞金は保持。",
-  "manuallyPublished": 429,
-  "manuallyResolvedDuplicates": 28,
-  "lastReviewedBatchAt": "2026-11-09T10:07:54.298Z",
+  "message": "保存済み順位表・公式規則を再調査し新規40件を掲載、既存8件を重複整理。Unreal Cup未完成5件と順位矛盾1件の計6件は保留。",
+  "manuallyPublished": 469,
+  "manuallyResolvedDuplicates": 36,
+  "lastReviewedBatchAt": "2026-11-09T11:28:33.927Z",
   "manuallyCorrected": 1,
   "lastCorrectedReviewAt": "2026-11-07T09:14:30.244Z",
   "concurrentMerge": {
@@ -272,12 +272,12 @@
     "unrealTeamsWithCash": 2
   },
   "latestManualReview": {
-    "reviewedAt": "2026-11-09T10:07:54.298Z",
+    "reviewedAt": "2026-11-09T11:28:33.927Z",
     "reviewedCandidates": 54,
-    "published": 47,
-    "duplicateCandidatesResolved": 5,
-    "remainingPending": 2,
-    "policy": "official Epic tournament rules, archived leaderboard, verified Epic player identity"
+    "published": 40,
+    "duplicateCandidatesResolved": 8,
+    "remainingPending": 6,
+    "policy": "stored Epic/Osirion ranked snapshots and season-specific official rules; unknown prizes never inferred"
   },
   "autoApprovedDuoQualifierThisRun": 0
 }
