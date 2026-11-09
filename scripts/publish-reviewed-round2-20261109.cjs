@@ -297,7 +297,7 @@ async function main(){
    description:'Epic/Osirionと既存戦績の照合。Zoro/Inoxtagスキン大会の順位差は現行の公式データに統一。既存スキン賞・PlayStation決勝賞金は保持し重複なしで承認済み候補を整理。'
      +'2024年Victory予選は出場確認のみ・PlayStation Clix決勝の0VRは$0として掲載。'
      +'賞金と順位の完全性が必要なUnreal Cupは保留。',
-   recordIds:[...added.map(x=>x.id),...rankFixed.map(x=>x.existingId)]});
+   recordIds:added.map(x=>x.id)});
  }
  const summary={expected:EXPECTED.length,found:queue.size,added:added.length,rankFixed:rankFixed.length,
   already:already.length-rankFixed.length,held:held.length,notFound:notFound.length,liveErrors:live.errors,
