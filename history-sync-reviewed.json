@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-09T05:30:43.760Z",
+  "reviewedAt": "2026-11-09T05:38:48.516Z",
   "description": "Resolved historic review candidates: published, duplicate or participation",
   "entries": [
     {
@@ -9891,6 +9891,50 @@
       "policy": "verified-source-attendance-or-no-vr",
       "source": "https://www.fortnite.com/competitive/events/S40_PlayStationCupClix/?region=NAW&round=S40_PlayStationCupClix_Final_NAW",
       "evidence": "Exact saved leaderboard source, canonical Epic roster, official session, no duplicate or unsupported cash inference"
+    },
+    {
+      "id": "auto-s39-c71a2ed8749f",
+      "recordId": "auto-s39-c71a2ed8749f",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:38:48.516Z",
+      "approvedBy": "ChatGPT full 100-page official provider audit 2026-11-09",
+      "policy": "complete-leaderboard-verified-team-rank",
+      "officialRules": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/1-million-dollar-unreal-cup-chapter-7-season-1-official-rules",
+      "source": "https://www.fortnite.com/competitive/events/S39_1MillionUnrealCup/?region=NAC&round=S39_1MillionUnrealCup_NAC",
+      "evidence": "All 100 Epic-window Osirion ranking pages continuous and complete; both players Epic IDs, source, score, current rank, and official per-team payout verified"
+    },
+    {
+      "id": "auto-s39-6080516837cb",
+      "recordId": "auto-s39-6080516837cb",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:38:48.516Z",
+      "approvedBy": "ChatGPT full 100-page official provider audit 2026-11-09",
+      "policy": "complete-leaderboard-verified-team-rank",
+      "officialRules": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/1-million-dollar-unreal-cup-chapter-7-season-1-official-rules",
+      "source": "https://www.fortnite.com/competitive/events/S39_1MillionUnrealCup/?region=NAC&round=S39_1MillionUnrealCup_NAC",
+      "evidence": "All 100 Epic-window Osirion ranking pages continuous and complete; both players Epic IDs, source, score, current rank, and official per-team payout verified"
+    },
+    {
+      "id": "auto-s39-04061d8fd305",
+      "recordId": "auto-s39-04061d8fd305",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:38:48.516Z",
+      "approvedBy": "ChatGPT full 100-page official provider audit 2026-11-09",
+      "policy": "complete-leaderboard-verified-team-rank",
+      "officialRules": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/1-million-dollar-unreal-cup-chapter-7-season-1-official-rules",
+      "source": "https://www.fortnite.com/competitive/events/S39_1MillionUnrealCup/?region=NAC&round=S39_1MillionUnrealCup_NAC",
+      "evidence": "All 100 Epic-window Osirion ranking pages continuous and complete; both players Epic IDs, source, score, current rank, and official per-team payout verified"
+    },
+    {
+      "id": "auto-s39-3919abca3a94",
+      "recordId": "auto-s39-3919abca3a94",
+      "decision": "published",
+      "reviewedAt": "2026-11-09T05:38:48.516Z",
+      "approvedBy": "ChatGPT full 100-page official provider audit 2026-11-09",
+      "policy": "complete-leaderboard-verified-team-rank",
+      "officialRules": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/1-million-dollar-unreal-cup-chapter-7-season-1-official-rules",
+      "source": "https://www.fortnite.com/competitive/events/S39_1MillionUnrealCup/?region=NAC&round=S39_1MillionUnrealCup_NAC",
+      "evidence": "All 100 Epic-window Osirion ranking pages continuous and complete; both players Epic IDs, source, score, current rank, and official per-team payout verified"
     }
   ]
 }
