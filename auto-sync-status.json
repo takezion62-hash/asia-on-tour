@@ -1,7 +1,7 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-08T20:49:48.463Z",
+  "checkedAt": "2026-11-09T01:23:14.383Z",
   "mode": "review",
   "scope": "recent",
   "dateMode": null,
@@ -10,15 +10,15 @@
   "toDate": null,
   "provider": "osirion",
   "linkedPlayers": 556,
-  "trackedWindows": 31,
+  "trackedWindows": 32,
   "found": 2,
   "skipped": 0,
-  "imported": 8,
-  "scannedPages": 40,
+  "imported": 5,
+  "scannedPages": 48,
   "completedWindows": 28,
   "identityConflicts": 3,
-  "alreadyRegistered": 56,
-  "autoApprovedTotal": 886,
+  "alreadyRegistered": 64,
+  "autoApprovedTotal": 904,
   "invalidCachedCandidates": 0,
   "manualReviewCandidates": 2,
   "autoApprovedCosmeticThisRun": 0,
@@ -30,30 +30,30 @@
   "transientFailures": 0,
   "malformedFailures": 0,
   "skippedLeaderboards": [],
-  "reviewOnlyWindows": 31,
+  "reviewOnlyWindows": 32,
   "reviewOnlyCandidates": 2,
   "unmappedEvents": 1,
   "unmappedEventIds": [
     "S42_ArenaTestCup"
   ],
-  "message": "ChatGPT確認済み直接掲載20件（全履歴・直近合計）。残り2件。",
+  "message": "最新版と安全統合：新規掲載5件、重複スキップ0件、要確認の競合0件、確認待ち2件。既存の戦績・賞金は保持。",
   "concurrentMerge": {
-    "appended": 8,
+    "appended": 5,
     "alreadyPublished": 0,
     "reviewConflicts": 0,
     "keptPending": 2,
-    "reconciledAt": "2026-11-08T20:49:50.138Z"
+    "reconciledAt": "2026-11-09T01:23:16.812Z"
   },
   "coverage": {
-    "total": 31,
+    "total": 32,
     "completed": 28,
     "notStarted": 0,
-    "partial": 3,
+    "partial": 4,
     "retryWaiting": 0,
     "retryDue": 0,
-    "remaining": 3,
+    "remaining": 4,
     "retryCount": 0,
-    "completionPercent": 90.3,
+    "completionPercent": 87.5,
     "byRegion": {
       "EU": {
         "total": 7,
@@ -76,9 +76,9 @@
         "pending": 1
       },
       "BR": {
-        "total": 4,
+        "total": 5,
         "completed": 4,
-        "pending": 0
+        "pending": 1
       },
       "NAW": {
         "total": 4,
@@ -88,9 +88,9 @@
     },
     "byYear": {
       "2026": {
-        "total": 31,
+        "total": 32,
         "completed": 28,
-        "pending": 3
+        "pending": 4
       }
     },
     "outsideScopeCheckpoints": 0,
@@ -101,7 +101,7 @@
         "region": "EU",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 12,
+        "nextPage": 24,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
@@ -112,7 +112,7 @@
         "region": "ME",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 12,
+        "nextPage": 24,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
@@ -123,7 +123,18 @@
         "region": "NAC",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 82,
+        "nextPage": 94,
+        "totalPages": 100,
+        "retryAfter": null,
+        "errorCode": null
+      },
+      {
+        "window": "epicgames_S43_ReloadZBDuosCashCup_BR/S43_ReloadZBDuosCashCup_Event1Round1_BR",
+        "date": "2026-11-09",
+        "region": "BR",
+        "series": "cash-cup",
+        "status": "partial",
+        "nextPage": 12,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
@@ -132,5 +143,5 @@
   },
   "manuallyPublished": 10,
   "lastReviewedBatchAt": "2026-11-08T22:50:20.084Z",
-  "autoApprovedDuoQualifierThisRun": 8
+  "autoApprovedDuoQualifierThisRun": 5
 }
