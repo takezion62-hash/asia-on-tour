@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-11-09T09:54:30.664Z",
+  "checkedAt": "2026-11-09T13:28:51.647Z",
   "windows": {
     "epicgames_S43_PerformanceEvaluationTrios_EU/S43_PerformanceEvaluation_Event1Round1_EU": {
       "nextPage": 7,
@@ -1417,15 +1417,15 @@
       "totalPages": 40
     },
     "epicgames_S43_TriosCashCup_NAC/S43_TriosCashCup_Event1_NAC": {
-      "nextPage": 99,
-      "complete": false,
+      "nextPage": 100,
+      "complete": true,
       "proposals": [],
-      "pages": 99,
-      "lastAttemptAt": "2026-11-09T09:54:24.199Z",
+      "pages": 100,
+      "lastAttemptAt": "2026-11-09T13:28:44.792Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 9900,
-      "lastSuccessAt": "2026-11-09T09:54:25.224Z",
+      "lastSeenRank": 10000,
+      "lastSuccessAt": "2026-11-09T13:28:45.712Z",
       "totalPages": 100
     },
     "epicgames_S43_OnePieceZoroCup_ZB_NAW/S43_OnePieceZoroCup_ZB_NAW": {
@@ -2280,7 +2280,7 @@
       "totalPages": 44
     },
     "epicgames_S43_ReloadZBDuosCashCup_EU/S43_ReloadZBDuosCashCup_Event1Round1_EU": {
-      "nextPage": 28,
+      "nextPage": 29,
       "complete": false,
       "proposals": [
         {
@@ -2482,16 +2482,16 @@
           ]
         }
       ],
-      "pages": 28,
-      "lastAttemptAt": "2026-11-09T09:54:25.224Z",
+      "pages": 29,
+      "lastAttemptAt": "2026-11-09T13:28:45.712Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 2800,
-      "lastSuccessAt": "2026-11-09T09:54:26.423Z",
+      "lastSeenRank": 2900,
+      "lastSuccessAt": "2026-11-09T13:28:47.226Z",
       "totalPages": 100
     },
     "epicgames_S43_ReloadZBDuosCashCup_ME/S43_ReloadZBDuosCashCup_Event1Round1_ME": {
-      "nextPage": 28,
+      "nextPage": 29,
       "complete": false,
       "proposals": [
         {
@@ -2693,16 +2693,16 @@
           ]
         }
       ],
-      "pages": 28,
-      "lastAttemptAt": "2026-11-09T09:54:26.423Z",
+      "pages": 29,
+      "lastAttemptAt": "2026-11-09T13:28:47.226Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 2800,
-      "lastSuccessAt": "2026-11-09T09:54:27.783Z",
+      "lastSeenRank": 2900,
+      "lastSuccessAt": "2026-11-09T13:28:49.377Z",
       "totalPages": 100
     },
     "epicgames_S43_ReloadZBDuosCashCup_BR/S43_ReloadZBDuosCashCup_Event1Round1_BR": {
-      "nextPage": 16,
+      "nextPage": 17,
       "complete": false,
       "proposals": [
         {
@@ -2739,12 +2739,12 @@
           ]
         }
       ],
-      "pages": 16,
-      "lastAttemptAt": "2026-11-09T09:54:27.783Z",
+      "pages": 17,
+      "lastAttemptAt": "2026-11-09T13:28:49.377Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 1600,
-      "lastSuccessAt": "2026-11-09T09:54:29.355Z",
+      "lastSeenRank": 1700,
+      "lastSuccessAt": "2026-11-09T13:28:50.626Z",
       "totalPages": 100
     },
     "epicgames_S42_ConsoleVCC_SolosZB_NAW/S42_ConsoleVCC_SolosZB_Event8Round2_NAW": {
@@ -3395,7 +3395,7 @@
       "totalPages": 19
     },
     "epicgames_S42_ConsoleVCC_SolosZB_NAW/S42_ConsoleVCC_SolosZB_Event8Round1_NAW": {
-      "nextPage": 40,
+      "nextPage": 50,
       "complete": false,
       "proposals": [
         {
@@ -4041,18 +4041,41 @@
           "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=NAW&round=S42_ConsoleVCC_SolosZB_Event8Round1_NAW",
           "verified": true,
           "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。"
+        },
+        {
+          "id": "auto-s42-0445c2eb81e2",
+          "date": "2026-10-25",
+          "region": "NAW",
+          "player": "みずるん",
+          "playerRaw": "A_α みずるんぼっとǃ",
+          "event": "Console Zero Build Solo Victory Cup",
+          "round": "Event 8 · Round 1 / 予選",
+          "rank": 4713,
+          "points": 106,
+          "kills": 14,
+          "vrs": 0,
+          "prize": 0,
+          "kind": "予選",
+          "matches": 3,
+          "seasonId": "S42",
+          "chapter": 7,
+          "season": 4,
+          "tournamentId": "ch7s4-console-zero-build-solo-victory-cup",
+          "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=NAW&round=S42_ConsoleVCC_SolosZB_Event8Round1_NAW",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。"
         }
       ],
-      "pages": 40,
-      "lastAttemptAt": "2026-11-09T09:53:56.973Z",
+      "pages": 50,
+      "lastAttemptAt": "2026-11-09T13:27:39.317Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 4000,
-      "lastSuccessAt": "2026-11-09T09:53:58.075Z",
+      "lastSeenRank": 5000,
+      "lastSuccessAt": "2026-11-09T13:27:40.285Z",
       "totalPages": 100
     },
     "epicgames_S42_ConsoleVCC_SolosZB_NAC/S42_ConsoleVCC_SolosZB_Event8Round1_NAC": {
-      "nextPage": 40,
+      "nextPage": 50,
       "complete": false,
       "proposals": [
         {
@@ -4537,14 +4560,37 @@
           "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=NAC&round=S42_ConsoleVCC_SolosZB_Event8Round1_NAC",
           "verified": true,
           "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。"
+        },
+        {
+          "id": "auto-s42-0ff9d88f0488",
+          "date": "2026-10-25",
+          "region": "NAC",
+          "player": "たらこ唇",
+          "playerRaw": "dydゼロビルド勢ではありません",
+          "event": "Console Zero Build Solo Victory Cup",
+          "round": "Event 8 · Round 1 / 予選",
+          "rank": 4453,
+          "points": 140,
+          "kills": 8,
+          "vrs": 0,
+          "prize": 0,
+          "kind": "予選",
+          "matches": 3,
+          "seasonId": "S42",
+          "chapter": 7,
+          "season": 4,
+          "tournamentId": "ch7s4-console-zero-build-solo-victory-cup",
+          "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=NAC&round=S42_ConsoleVCC_SolosZB_Event8Round1_NAC",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。"
         }
       ],
-      "pages": 40,
-      "lastAttemptAt": "2026-11-09T09:54:08.733Z",
+      "pages": 50,
+      "lastAttemptAt": "2026-11-09T13:28:03.739Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 4000,
-      "lastSuccessAt": "2026-11-09T09:54:10.044Z",
+      "lastSeenRank": 5000,
+      "lastSuccessAt": "2026-11-09T13:28:05.091Z",
       "totalPages": 100
     },
     "epicgames_S42_ConsoleVCC_SolosZB_BR/S42_ConsoleVCC_SolosZB_Event8Round2_BR": {
@@ -4607,7 +4653,7 @@
       "totalPages": 10
     },
     "epicgames_S42_InoxtagIconCup_NAW/S42_InoxtagIconCup_NAW": {
-      "nextPage": 4,
+      "nextPage": 5,
       "complete": false,
       "proposals": [
         {
@@ -4783,18 +4829,47 @@
             "Ascend かな",
             "nia"
           ]
+        },
+        {
+          "id": "auto-s42-d4f17e5d984d",
+          "date": "2026-10-26",
+          "region": "NAW",
+          "player": "EXV mAximum24 / ぱな",
+          "playerRaw": "EXV mAximum24 / klixeylzr",
+          "event": "Inoxtag Icon Cup Battle Royale",
+          "round": "単一開催枠 / 参加確認",
+          "rank": 448,
+          "points": 296,
+          "kills": 56,
+          "vrs": 0,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 11,
+          "seasonId": "S42",
+          "chapter": 7,
+          "season": 4,
+          "tournamentId": "ch7s4-inoxtag-icon-cup-battle-royale",
+          "source": "https://www.fortnite.com/competitive/events/S42_InoxtagIconCup/?region=NAW&round=S42_InoxtagIconCup_NAW",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "EXV mAximum24",
+            "ぱな"
+          ]
         }
       ],
-      "pages": 4,
-      "lastAttemptAt": "2026-11-09T09:54:29.355Z",
+      "pages": 5,
+      "lastAttemptAt": "2026-11-09T13:28:50.626Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 400,
-      "lastSuccessAt": "2026-11-09T09:54:30.659Z",
+      "lastSeenRank": 500,
+      "lastSuccessAt": "2026-11-09T13:28:51.642Z",
       "totalPages": 89
     },
     "epicgames_S42_ConsoleVCC_SolosZB_BR/S42_ConsoleVCC_SolosZB_Event8Round1_BR": {
-      "nextPage": 30,
+      "nextPage": 40,
       "complete": false,
       "proposals": [
         {
@@ -4913,12 +4988,12 @@
           "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。"
         }
       ],
-      "pages": 30,
-      "lastAttemptAt": "2026-11-09T09:54:23.156Z",
+      "pages": 40,
+      "lastAttemptAt": "2026-11-09T13:28:18.943Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 3000,
-      "lastSuccessAt": "2026-11-09T09:54:24.199Z",
+      "lastSeenRank": 4000,
+      "lastSuccessAt": "2026-11-09T13:28:19.934Z",
       "totalPages": 100
     },
     "epicgames_S42_ConsoleVCC_SolosZB_EU/S42_ConsoleVCC_SolosZB_Event8Round2_EU": {
@@ -5360,6 +5435,54 @@
       "lastSeenRank": 934,
       "lastSuccessAt": "2026-11-09T09:53:47.283Z",
       "totalPages": 10
+    },
+    "epicgames_S43_SquadsVictoryCup_OCE/S43_SquadsVictoryCup_Event1_Round1_OCE": {
+      "nextPage": 10,
+      "complete": false,
+      "proposals": [],
+      "pages": 10,
+      "lastAttemptAt": "2026-11-09T13:28:27.883Z",
+      "emptyAttempts": 0,
+      "rankingOrderValid": true,
+      "lastSeenRank": 1000,
+      "lastSuccessAt": "2026-11-09T13:28:28.756Z",
+      "totalPages": 15
+    },
+    "epicgames_S42_ConsoleVCC_SolosZB_EU/S42_ConsoleVCC_SolosZB_Event8Round1_EU": {
+      "nextPage": 5,
+      "complete": false,
+      "proposals": [
+        {
+          "id": "auto-s42-ecf6149fa02e",
+          "date": "2026-10-24",
+          "region": "EU",
+          "player": "Dartri",
+          "playerRaw": "FPG Dartrinok",
+          "event": "Console Zero Build Solo Victory Cup",
+          "round": "Event 8 · Round 1 / 予選",
+          "rank": 275,
+          "points": 250,
+          "kills": 2,
+          "vrs": 1,
+          "prize": 0,
+          "kind": "予選",
+          "matches": 5,
+          "seasonId": "S42",
+          "chapter": 7,
+          "season": 4,
+          "tournamentId": "ch7s4-console-zero-build-solo-victory-cup",
+          "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=EU&round=S42_ConsoleVCC_SolosZB_Event8Round1_EU",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。"
+        }
+      ],
+      "pages": 5,
+      "lastAttemptAt": "2026-11-09T13:28:43.829Z",
+      "emptyAttempts": 0,
+      "rankingOrderValid": true,
+      "lastSeenRank": 500,
+      "lastSuccessAt": "2026-11-09T13:28:44.792Z",
+      "totalPages": 100
     }
   }
 }
