@@ -11,7 +11,7 @@
   "provider": "osirion",
   "linkedPlayers": 563,
   "trackedWindows": 2952,
-  "found": 126,
+  "found": 119,
   "skipped": 14,
   "imported": 9,
   "scannedPages": 96,
@@ -20,7 +20,7 @@
   "alreadyRegistered": 2364,
   "autoApprovedTotal": 1240,
   "invalidCachedCandidates": 1,
-  "manualReviewCandidates": 126,
+  "manualReviewCandidates": 119,
   "autoApprovedCosmeticThisRun": 0,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
@@ -47,10 +47,10 @@
     "S30_Reload",
     "S30_ReloadZB"
   ],
-  "message": "公式順位・本人IDを照合した確認候補を掲載。残り確認待ち126件。",
-  "manuallyPublished": 590,
+  "message": "公式予選突破7件を通常成績に追加。重複0件を解消。残り確認待ち119件。未確認賞金は推定しない。",
+  "manuallyPublished": 597,
   "manuallyResolvedDuplicates": 37,
-  "lastReviewedBatchAt": "2026-11-10T23:47:54.613Z",
+  "lastReviewedBatchAt": "2026-11-10T23:47:59.163Z",
   "manuallyCorrected": 1,
   "lastCorrectedReviewAt": "2026-11-07T09:14:30.244Z",
   "concurrentMerge": {
@@ -263,11 +263,11 @@
     "unrealTeamsWithCash": 2
   },
   "latestManualReview": {
-    "reviewedAt": "2026-11-10T23:18:34.436Z",
-    "reviewedCandidates": 29,
-    "published": 29,
-    "remainingPending": 143,
-    "policy": "S30/S31 solo official $100 per VR, S36 duos $200 team per VR; exact leaderboard, zero VR=$0"
+    "reviewedAt": "2026-11-10T23:47:59.163Z",
+    "reviewedCandidates": 7,
+    "published": 7,
+    "remainingPending": 119,
+    "policy": "Official 2024 solo qualification cutoffs and exact verified saved Epic-ID ranked rows; no inferred cash"
   },
   "autoApprovedDuoQualifierThisRun": 2,
   "latestParticipationReview": {
