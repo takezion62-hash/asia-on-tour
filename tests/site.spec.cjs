@@ -64,8 +64,10 @@ test('遠征結果の検索・複合フィルター・詳細・CSVが同じ戦�
   const expected = rows.filter(r => r.region === sample.region && r.kind === sample.kind && [r.player, ...roster(r), r.playerRaw, r.event, r.region, r.round, r.note].some(x => String(x || '').toLowerCase().includes(search.toLowerCase())));
   await expect(page.locator('#result-count')).toHaveText(expected.length.toLocaleString('ja-JP') + '件');
   expect((await resultIDs(page)).sort()).toEqual(expected.map(r => r.id).sort());
-  await page.locator('#page-results details summary').first().click();
-  await expect(page.locator('#page-results details[open] [data-detail="source"] a')).toBeVisible();
+  // Participation shortcuts can also contain <details> before the results list.
+  // Open the result card itself, not an unrelated participation summary.
+  await page.locator('#result-table .archive-row .result-details > summary').first().click();
+  await expect(page.locator('#result-table .archive-row .result-details[open] [data-detail="source"] a').first()).toBeVisible();
   const downloadPromise = page.waitForEvent('download');
   await page.locator('#export-csv').click();
   const download = await downloadPromise;
