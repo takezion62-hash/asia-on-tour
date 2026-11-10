@@ -11,6 +11,8 @@ on:
       - "scripts/audit-pending-history-20261108.cjs"
       - "scripts/publish-verified-s35-console-duos-20261108.cjs"
       - "scripts/publish-verified-qualifier-batch.cjs"
+      - "scripts/publish-verified-finals-batch.cjs"
+      - "tests/publish-verified-finals-batch.test.cjs"
       - "tests/publish-verified-qualifier-batch.test.cjs"
       - "scripts/publish-reviewed-s30-nac-zero-vr.cjs"
       - "tests/publish-reviewed-s30-nac-zero-vr.test.cjs"
@@ -91,6 +93,38 @@ jobs:
               exit 1
             fi
             echo "main advanced; retry from current verified source without force push"
+            sleep $((attempt * 3))
+          done
+
+      - name: Publish confirmed 2024-2025 final cash prizes with original Epic scoreboard
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          for attempt in 1 2 3 4 5; do
+            echo "VERIFIED_FINALS attempt ${attempt}/5"
+            git fetch origin main
+            git reset --hard origin/main
+            node scripts/publish-verified-finals-batch.cjs --dry-run
+            node scripts/publish-verified-finals-batch.cjs
+            npm run validate
+            node --test tests/publish-verified-finals-batch.test.cjs tests/safe-sync-merge.test.cjs
+            git add results.json updates.json history-sync-review.json history-sync-reviewed.json history-sync-status.json approval-history.json participation-index.json
+            git add -A participation/
+            if git diff --cached --quiet; then
+              echo "VERIFIED_FINALS no new records"
+              break
+            fi
+            git commit -m "data: publish exact saved 2024-2025 finals and official VR payouts"
+            if git push origin HEAD:main; then
+              echo "VERIFIED_FINALS published to main"
+              break
+            fi
+            if [ "${attempt}" -ge 5 ]; then
+              echo "::error::verified cash finals could not be published"
+              exit 1
+            fi
+            echo "Main advanced; reload and reverify before retrying"
             sleep $((attempt * 3))
           done
 
