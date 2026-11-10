@@ -282,8 +282,10 @@
       if(target)target.setAttribute('title','AOT PR用出場記録の取得に失敗しました');
     }
   }
-  window.AOTParticipation={renderProfile,subscribePR,getPRRecords};
-  const initialize=()=>{connectMainResultsSearch();initArchive();loadStatus();loadForPR()};
+  // The canonical results list now contains previously archived attendance.
+  // Retain the archive bridge only for conservative AOT PR de-duplication.
+  window.AOTParticipation={renderProfile:()=>{},subscribePR,getPRRecords};
+  const initialize=()=>{loadForPR()};
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initialize,{once:true});
   else initialize()
 })();
