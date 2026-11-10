@@ -85,7 +85,7 @@ function reconcile(original,now='2026-11-10T22:35:00.000Z'){
  if(published.length||duplicates.length){
   const day=new Date(Date.parse(now)+9*3600000).toISOString().slice(0,10);
   if(published.length){
-   const updateId=published.some(x=>x.region==='NAC')?'manual-qualifiers-20261111-batch2':'manual-qualifiers-20261111-batch1';
+   const updateId='manual-qualifiers-20261111-'+require('node:crypto').createHash('sha256').update(published.map(x=>x.id).sort().join('|')).digest('hex').slice(0,16);
    assert(!d.updates.entries.some(x=>x.id===updateId),'update ID already exists');
    d.updates.entries.unshift({id:updateId,date:day,type:'records',
     title:'2024年ME/NAC公式予選突破'+published.length+'戦績を通常一覧に追加',
