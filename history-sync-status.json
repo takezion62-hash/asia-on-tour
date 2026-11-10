@@ -1,7 +1,7 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-10T06:38:15.755Z",
+  "checkedAt": "2026-11-10T10:37:47.360Z",
   "mode": "review",
   "scope": "history",
   "dateMode": "rolling",
@@ -9,29 +9,29 @@
   "fromDate": "2023-01-01",
   "toDate": "2026-11-10",
   "provider": "osirion",
-  "linkedPlayers": 556,
-  "trackedWindows": 2947,
-  "found": 67,
-  "skipped": 15,
-  "imported": 19,
+  "linkedPlayers": 563,
+  "trackedWindows": 2950,
+  "found": 108,
+  "skipped": 21,
+  "imported": 17,
   "scannedPages": 96,
-  "completedWindows": 232,
+  "completedWindows": 236,
   "identityConflicts": 3,
-  "alreadyRegistered": 2075,
-  "autoApprovedTotal": 1081,
+  "alreadyRegistered": 2094,
+  "autoApprovedTotal": 1098,
   "invalidCachedCandidates": 1,
-  "manualReviewCandidates": 67,
+  "manualReviewCandidates": 108,
   "autoApprovedCosmeticThisRun": 0,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
-  "autoApprovedUnrealThisRun": 2,
+  "autoApprovedUnrealThisRun": 0,
   "timeLimitReached": false,
   "retryWindows": 2,
   "transientFailures": 0,
   "malformedFailures": 0,
   "skippedLeaderboards": [],
   "reviewOnlyWindows": 1318,
-  "reviewOnlyCandidates": 23,
+  "reviewOnlyCandidates": 54,
   "unmappedEvents": 238,
   "unmappedEventIds": [
     "S30_ConsoleCashCups",
@@ -47,39 +47,39 @@
     "S30_Reload",
     "S30_ReloadZB"
   ],
-  "message": "最新版と安全統合：新規掲載19件、重複スキップ0件、要確認の競合0件、確認待ち67件。既存の戦績・賞金は保持。",
+  "message": "最新版と安全統合：新規掲載17件、重複スキップ0件、要確認の競合0件、確認待ち108件。既存の戦績・賞金は保持。",
   "manuallyPublished": 469,
   "manuallyResolvedDuplicates": 37,
   "lastReviewedBatchAt": "2026-11-10T05:00:08.538Z",
   "manuallyCorrected": 1,
   "lastCorrectedReviewAt": "2026-11-07T09:14:30.244Z",
   "concurrentMerge": {
-    "appended": 19,
+    "appended": 17,
     "alreadyPublished": 0,
     "reviewConflicts": 0,
-    "keptPending": 67,
-    "reconciledAt": "2026-11-10T06:38:18.810Z"
+    "keptPending": 108,
+    "reconciledAt": "2026-11-10T10:37:49.909Z"
   },
   "coverage": {
-    "total": 2947,
-    "completed": 232,
-    "notStarted": 2666,
-    "partial": 47,
+    "total": 2950,
+    "completed": 236,
+    "notStarted": 2659,
+    "partial": 53,
     "retryWaiting": 2,
     "retryDue": 0,
-    "remaining": 2715,
+    "remaining": 2714,
     "retryCount": 2,
-    "completionPercent": 7.9,
+    "completionPercent": 8,
     "byRegion": {
       "OCE": {
         "total": 521,
-        "completed": 31,
-        "pending": 490
+        "completed": 32,
+        "pending": 489
       },
       "ME": {
         "total": 517,
-        "completed": 69,
-        "pending": 448
+        "completed": 71,
+        "pending": 446
       },
       "EU": {
         "total": 535,
@@ -88,35 +88,35 @@
       },
       "BR": {
         "total": 516,
-        "completed": 18,
-        "pending": 498
+        "completed": 19,
+        "pending": 497
       },
       "NAC": {
-        "total": 534,
+        "total": 535,
         "completed": 42,
-        "pending": 492
+        "pending": 493
       },
       "NAW": {
-        "total": 324,
+        "total": 326,
         "completed": 32,
-        "pending": 292
+        "pending": 294
       }
     },
     "byYear": {
       "2024": {
         "total": 974,
-        "completed": 50,
-        "pending": 924
+        "completed": 51,
+        "pending": 923
       },
       "2025": {
         "total": 690,
-        "completed": 31,
-        "pending": 659
+        "completed": 32,
+        "pending": 658
       },
       "2026": {
-        "total": 1283,
-        "completed": 151,
-        "pending": 1132
+        "total": 1286,
+        "completed": 153,
+        "pending": 1133
       }
     },
     "outsideScopeCheckpoints": 0,
@@ -204,7 +204,7 @@
         "region": "ME",
         "series": "victory-cup",
         "status": "partial",
-        "nextPage": 6,
+        "nextPage": 8,
         "totalPages": 19,
         "retryAfter": null,
         "errorCode": null
@@ -248,7 +248,7 @@
         "region": "ME",
         "series": "victory-cup",
         "status": "partial",
-        "nextPage": 6,
+        "nextPage": 8,
         "totalPages": 18,
         "retryAfter": null,
         "errorCode": null
