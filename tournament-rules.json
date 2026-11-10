@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-08",
+  "updatedAt": "2026-11-11",
   "description": "Epic公式規則で確認した大会ルール。Unreal Cupもチーム順位と確認済みEpic IDを照合し、賞金圏内は地域別チーム/個人賞金を、圏外は$0として自動掲載（本人資格・支払確認とは別）。S36 Console Duos・S43 Reload ZB Duosの公式Round 1上位突破／全参加$0を、本人照合済み結果に限り安全に記録。Round 2賞金は推定しない。",
   "rules": [
     {
@@ -933,6 +933,75 @@
           "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-zero-build-reload-cash-cups-chapter-7-mini-season-official-rules"
         }
       ]
+    },
+    {
+      "id": "ch7s4-override-kingdom-hearts-cup",
+      "seasonId": "S42",
+      "eventIds": [
+        "S42_KingdomHeartsCup"
+      ],
+      "team": "solo",
+      "series": "skin-cup",
+      "chapter": 7,
+      "season": 4,
+      "matchCaps": {
+        "スキン大会": 11
+      },
+      "cosmeticRanks": {
+        "OCE": 100,
+        "ME": 100,
+        "EU": 1000,
+        "BR": 200,
+        "NAC": 700,
+        "NAW": 200
+      },
+      "source": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/override-series-kingdom-hearts-cup-chapter-7-season-4-official-rules"
+    },
+    {
+      "id": "ch7s4-override-persona-5-royal-cup-reload",
+      "seasonId": "S42",
+      "eventIds": [
+        "S42_Persona5Cup"
+      ],
+      "team": "solo",
+      "series": "skin-cup",
+      "chapter": 7,
+      "season": 4,
+      "matchCaps": {
+        "スキン大会": 12
+      },
+      "cosmeticRanks": {
+        "OCE": 100,
+        "ME": 100,
+        "EU": 1000,
+        "BR": 200,
+        "NAC": 700,
+        "NAW": 200
+      },
+      "source": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/override-series-persona-5-cup-chapter-7-season-4-official-rules"
+    },
+    {
+      "id": "ch7s4-champion-focus-fncs-cup",
+      "seasonId": "S42",
+      "eventIds": [
+        "S42_ChampionFocusFNCSCup"
+      ],
+      "team": "solo",
+      "series": "skin-cup",
+      "chapter": 7,
+      "season": 4,
+      "matchCaps": {
+        "スキン大会": 11
+      },
+      "cosmeticRanks": {
+        "OCE": 100,
+        "ME": 100,
+        "EU": 1000,
+        "BR": 200,
+        "NAC": 700,
+        "NAW": 200
+      },
+      "source": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/champion-focus-fncs-cup-chapter-7-season-4-official-rules"
     }
   ]
 }

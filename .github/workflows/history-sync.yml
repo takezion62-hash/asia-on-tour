@@ -64,6 +64,35 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '24'
+      - name: Publish ranked September S42 cosmetics from verified pending review
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          for attempt in 1 2 3 4 5; do
+            git fetch origin main
+            git reset --hard origin/main
+            node scripts/publish-verified-cosmetic-pending.cjs --dry-run
+            node scripts/publish-verified-cosmetic-pending.cjs
+            npm run validate
+            node --test tests/manual-approval.test.cjs tests/automatic-cosmetic-approval.test.cjs tests/tournament-rules.test.cjs
+            git add results.json auto-sync-review.json history-sync-review.json auto-sync-status.json history-sync-status.json approval-history.json updates.json
+            if git diff --cached --quiet; then
+              echo "VERIFIED_COSMETIC_REVIEW no new approved records"
+              break
+            fi
+            git commit -m "data: publish verified S42 cosmetic results into the main result feed"
+            if git push origin HEAD:main; then
+              echo "VERIFIED_COSMETIC_REVIEW published on main"
+              break
+            fi
+            if [ "$attempt" -eq 5 ]; then
+              echo "::error::Could not safely publish verified S42 candidates"
+              exit 1
+            fi
+            sleep $((attempt * 2))
+          done
+
       - name: Publish exact verified 2024 ME/OCE Solo qualifiers (safe, repeatable)
         run: |
           set -euo pipefail
