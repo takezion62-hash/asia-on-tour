@@ -11,7 +11,7 @@
   "provider": "osirion",
   "linkedPlayers": 563,
   "trackedWindows": 104,
-  "found": 14,
+  "found": 2,
   "skipped": 0,
   "imported": 1,
   "scannedPages": 50,
@@ -20,7 +20,7 @@
   "alreadyRegistered": 194,
   "autoApprovedTotal": 1099,
   "invalidCachedCandidates": 0,
-  "manualReviewCandidates": 14,
+  "manualReviewCandidates": 2,
   "autoApprovedCosmeticThisRun": 0,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
@@ -42,7 +42,7 @@
     "S42_SlenderManCup_Mobile",
     "S42_SlenderManCup_ZB"
   ],
-  "message": "最新版と安全統合：新規掲載1件、重複スキップ0件、要確認の競合0件、確認待ち14件。既存の戦績・賞金は保持。",
+  "message": "候補19件を公式順位・地域別突破条件で照合し、通常戦績に掲載。今回直近から12件解決。既存賞金・選手・大会を保持。",
   "concurrentMerge": {
     "appended": 1,
     "alreadyPublished": 0,
@@ -235,15 +235,14 @@
       }
     ]
   },
-  "manuallyPublished": 38,
-  "lastReviewedBatchAt": "2026-11-10T04:56:31.422Z",
+  "manuallyPublished": 50,
+  "lastReviewedBatchAt": "2026-11-10T14:39:48.081Z",
   "autoApprovedDuoQualifierThisRun": 1,
   "latestManualReview": {
-    "reviewedAt": "2026-11-09T10:07:54.298Z",
-    "reviewedCandidates": 28,
-    "published": 28,
-    "duplicateCandidatesResolved": 0,
-    "remainingPending": 0,
-    "policy": "official Epic tournament rules, archived leaderboard, verified Epic player identity"
+    "reviewedAt": "2026-11-10T14:39:48.081Z",
+    "reviewedCandidates": 12,
+    "published": 12,
+    "remainingPending": 2,
+    "policy": "Official regional qualifier limits plus exact saved player/round ranks and zero-VR final, no invented cash"
   }
 }
