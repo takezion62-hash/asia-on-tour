@@ -1,28 +1,23 @@
 'use strict';
 const {test,expect}=require('@playwright/test');
-const index=require('../participation-index.json');
-test('nonqualifier participation archive opens by month and stays outside prize filters',async({page})=>{
+
+test('reviewed squad results appear in the normal overseas results without a separate archive',async({page})=>{
  await page.goto('/?season=all#results');
- await expect(page.locator('#participation-archive')).toBeVisible();
- await expect(page.locator('#participation-summary')).toContainText('出場戦績');
- if(index.total===0){await expect(page.locator('#participation-table')).toContainText('初回自動調査');return}
- const latestPopulated=index.months.filter(month=>month.count>0).sort((a,b)=>b.month.localeCompare(a.month))[0];
- if(!latestPopulated){await expect(page.locator('#participation-table')).toContainText('まだありません');return}
- const month=latestPopulated.month;
- await expect(page.locator('#participation-month')).toHaveValue(month);
- await page.locator('#participation-month').selectOption(month);
- await expect(page.locator('#participation-table tbody tr').first()).toBeVisible();
- await expect(page.locator('#participation-table')).toContainText('出場確認');
- await expect(page.locator('#participation-archive')).toContainText('称号');
+ await expect(page.locator('#participation-archive')).toHaveCount(0);
+ await expect(page.locator('#participation-recent-batch')).toHaveCount(0);
+ const search=page.locator('#search-results');
+ await page.locator('#region-filter').selectOption('NAW');
+ await search.fill('りあにー / ひろ / そみー / Plank');
+ await expect(page.locator('#result-table')).toContainText('りあにー');
+ await expect(page.locator('#result-table')).toContainText('32');
+ await expect(page.locator('#result-table')).toContainText('予選突破');
+ await page.locator('#prize-only').check();
+ await expect(page.locator('#result-table')).not.toContainText('りあにー');
 });
-test('player profile loads their verified participation without counting it as award',async({page})=>{
- test.skip(index.players.length===0,'No participation entries archived yet');
- const player=index.players[0];
- await page.goto('/?season=all#player='+encodeURIComponent(player.name));
- await expect(page.locator('#participation-profile')).toBeVisible();
- await expect(page.locator('#participation-profile')).toContainText('海外大会の出場戦績');
- await expect(page.locator('#participation-profile .participation-count')).toContainText('件の出場戦績');
- await expect(page.locator('#participation-profile tbody tr').first()).toBeVisible();
+test('confirmed ranked player profiles do not add a duplicate attendance-only section',async({page})=>{
+ await page.goto('/?season=all#player='+encodeURIComponent('かめてぃん'));
+ await expect(page.locator('#profile-content')).toBeVisible();
+ await expect(page.locator('#participation-profile')).toHaveCount(0);
 });
 
 test('AOT PR credits lower-ranked verified participation once, without breakthrough, money or achievement claims',async({page})=>{
@@ -65,7 +60,7 @@ test('AOT PR credits lower-ranked verified participation once, without breakthro
  await expect(page.locator('.aot-pr-overview')).toContainText('予選突破ボーナス');
  await page.locator('.aot-pr-breakdown summary').click();
  await expect(page.locator('.aot-pr-breakdown')).toContainText('通過圏外（基本PRのみ）');
- await expect(page.locator('#participation-profile')).toContainText('通過圏外');
+ await expect(page.locator('#participation-profile')).toHaveCount(0);
  await page.getByRole('button',{name:'← 戻る'}).first().click();
  const publishedRow=page.locator('#aot-pr-leaders .aot-pr-item').filter({has:page.getByRole('link',{name:names[1],exact:true})});
  await expect(publishedRow).toContainText('出場記録から 0.0');
@@ -73,21 +68,14 @@ test('AOT PR credits lower-ranked verified participation once, without breakthro
 });
 
 
-test('NAW Reload Oct 17 is searchable with unconfirmed stats clearly distinguished',async({page})=>{
+
+test('NAW Reload Oct 17 searchable evidence remains in the canonical results only',async({page})=>{
  await page.goto('/?season=all#results');
  const search=page.locator('#search-results'),results=page.locator('#result-table');
- const archive=page.locator('#participation-main-search');
  for(const [name,rank] of [['RyoIT','341'],['ろず','339'],['シルス',null]]){
   await search.fill(name);
   await expect(results).toContainText(name);
-  // A matching participation-only record is intentionally shown in a separate,
-  // non-award archive. It must not be mistaken for a prize result.
-  if(index.players.some(player=>player.name===name)){
-   await expect(archive).toContainText(name);
-   await expect(archive).toContainText('通常の賞金・称号・正式戦績には加算しません');
-  }else{
-   await expect(archive).toBeHidden();
-  }
+  await expect(page.locator('#participation-main-search')).toHaveCount(0);
   if(rank)await expect(results).toContainText('#'+rank);
   else await expect(results).toContainText('報告あり・詳細未確認');
  }
@@ -96,34 +84,17 @@ test('NAW Reload Oct 17 is searchable with unconfirmed stats clearly distinguish
  await expect(results).toContainText('RyoIT');
  await page.locator('#prize-only').check();
  await expect(results).not.toContainText('RyoIT');
- await expect(archive).toBeHidden();
  await page.locator('#prize-only').uncheck();
  await expect(results).toContainText('RyoIT');
 });
-
-
-test('a multi-month publication is presented as one visible batch with working month links',async({page})=>{
- const log=require('../updates.json');
- const latest=(log.entries||[]).find(e=>e.type==='participation'&&Array.isArray(e.participationIds)&&e.participationIds.length);
- const match=String(latest?.id||'').match(/^reviewed-participation-(\d{8})-\d{4}-\d{2}$/);
- test.skip(!match,'The latest publication is not a monthly batch');
- const prefix='reviewed-participation-'+match[1]+'-';
- const batch=log.entries.filter(e=>e.type==='participation'&&String(e.id||'').startsWith(prefix)&&
-  Array.isArray(e.participationIds)&&e.participationIds.length);
- const expectedCount=batch.reduce((sum,e)=>sum+e.participationIds.length,0);
- const months=new Set(batch.map(e=>e.participationMonth));
+test('2026 squad teams have qualification evidence in normal results, not a special batch',async({page})=>{
  await page.goto('/?season=all#results');
- const recent=page.locator('#participation-recent-batch');
- await expect(recent).toBeVisible();
- await expect(recent.locator('strong').first()).toContainText(expectedCount.toLocaleString('ja-JP')+'件');
- await expect(recent).toContainText('賞金・称号・正式戦績の集計には加算していません');
- await expect(recent.locator('.participation-month-links a')).toHaveCount(months.size);
- if(expectedCount>8){
-  await recent.locator('.participation-all-records > summary').click();
-  await expect(recent.locator('.participation-all-records > .participation-scroll > table > tbody > tr')).toHaveCount(expectedCount);
- }
- const month=[...months].sort().reverse()[0];
- await recent.locator('.participation-month-links a[data-participation-month-open="'+month+'"]').click();
- await expect(page.locator('#participation-month')).toHaveValue(month);
- await expect(page.locator('#participation-table tbody tr').first()).toBeVisible();
+ await page.locator('#region-filter').selectOption('NAW');
+ const search=page.locator('#search-results');
+ await search.fill('R1ze / かめてぃん / Zagouの弟 / らむ');
+ await expect(page.locator('#result-table')).toContainText('149');
+ await expect(page.locator('#result-table')).toContainText('予選敗退');
+ await expect(page.locator('#participation-recent-batch')).toHaveCount(0);
+ await expect(page.locator('#participation-archive')).toHaveCount(0);
+ await expect(page.locator('#stage-filter').locator('option[value="参加確認"]')).toHaveCount(1);
 });

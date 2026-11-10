@@ -37,3 +37,9 @@
 .participation-all-records{margin:14px 0}
 .participation-all-records>summary{cursor:pointer;font-weight:800;padding:8px 0;color:#99dcff}
 .participation-all-records[open]>summary{margin-bottom:10px}
+
+/* Official qualification status on the canonical overseas result cards. */
+.qual-badge{display:inline-block;margin-top:4px;padding:2px 7px;border:1px solid #566778;border-radius:5px;font-size:11px;font-weight:800;white-space:nowrap;color:#d2dfed}
+.qual-badge.advanced{border-color:#4d927a;color:#a4f2cd;background:#143b34}
+.qual-badge.eliminated{border-color:#697082;color:#c5cede;background:#222b3c}
+.qual-badge.unknown{border-color:#927f53;color:#f2dca3;background:#3b301e}
