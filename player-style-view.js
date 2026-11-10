@@ -149,29 +149,55 @@
      +(scout.momentum?.ready?'キル効率 '+esc(scoutDelta(scout.momentum.deltaKpm))
        +' / VR率 '+esc(scoutDelta(scout.momentum.deltaVrRate,true))
        :esc(scout.momentum?.reason||'実測データ不足'))
-     +'</p><p class="style-scout-context">同条件での相対タイプ：'
-     +esc(scout.relative?.label||'未判定')+(scout.relative?.peers?'（比較可能 '+count(scout.relative.peers)+'名）':'')
+     +'</p><p class="style-scout-context">現在の記録からわかる特徴：'
+     +esc(report.observedTendency?.label||scout.relative?.label||'確認済み戦績なし')+(scout.relative?.peers?'（比較可能 '+count(scout.relative.peers)+'名）':'')
      +'</p><p class="style-note">比較する場合は同一シーズン・ゲーム形式・シリーズ・チーム編成にそろえてね。'
      +esc(scout.limitations||'データ不足の項目は未判定')+'根拠の大会は下の「計算に使った戦績・出典」で確認できるょ</p></div></details>';
    const eligible=report.affinity;
-   const best=eligible.region?'🏅 集計上の得意地域候補：'+eligible.region:'🌍 得意地域：未判定';
-   const style='<div class="style-status"><span class="style-tag'+(report.style.key==='unrated'?' is-low':'')+'">'+esc(report.style.key==='unrated'?'相対タイプ：比較保留':report.style.label)+'</span><span class="style-small">'+esc(report.style.reason)+'</span></div>';
+   const best=eligible.region?'🏅 集計上の得意地域候補：'+eligible.region:'🌍 得意地域は比較準備中';
+   const fact=report.observedTendency;
+   const observedStat=(label,value,detail)=>'<div class="style-observed-stat"><small>'+esc(label)+'</small><strong>'+esc(value)+'</strong><span>'+esc(detail)+'</span></div>';
+   const snapshot=fact&&fact.records?'<section class="style-observed" aria-label="少ない戦績からわかる特徴">'
+     +'<div class="style-observed-top"><div><small>OBSERVED PROFILE / 実測からわかる特徴</small>'
+     +'<h3>'+esc(fact.label)+'</h3></div><span class="style-observed-confidence">'+esc(fact.confidence)+'</span></div>'
+     +'<p>'+esc(fact.reason)+'</p>'
+     +'<div class="style-observed-grid">'
+     +observedStat('大会記録',count(fact.records)+'件',count(fact.windows)+'開催枠 · '+count(fact.regionCount)+'地域')
+     +observedStat('記録されたキル',q.killRecords?count(fact.kills)+' K':'—',q.killRecords?count(fact.killMatches)+'試合から集計':'キル未入力')
+     +observedStat('記録されたVR',q.vrRecords?count(fact.vrs)+' VR':'—',q.vrRecords?count(fact.vrMatches)+'試合から集計':'VR未入力')
+     +(fact.mixed?observedStat('K/試合・VR率','形式別に確認','異なるチーム形式や大会シリーズを平均しない')
+       :observedStat(fact.unit==='チーム'?'チームK/試合':'K/試合',
+        fact.kpm==null?'—':num(fact.kpm,2),count(fact.killMatches)+'試合の実測')
+       +observedStat('VR率',fact.vrRate==null?'—':pct(fact.vrRate),count(fact.vrMatches)+'試合の実測'))
+     +'</div><p class="style-observed-warning">これは公開済み戦績の事実をまとめた参考プロファイル。強さ・IGLなどの役割・他選手との優劣は判定していないよ</p></section>':'';
+   const relative=report.style.key==='unrated'
+     ?'<details class="style-relative-more"><summary>📊 厳密な相対タイプの判定条件を見る</summary>'
+      +'<p>'+esc(report.style.reason)+'。同じシーズン・人数・ゲーム形式・大会シリーズの20名以上を対象とした比較は、条件がそろった場合だけ表示するよ</p></details>'
+     :'<div class="style-status"><span class="style-tag">'+esc('同条件の相対タイプ：'+report.style.label)
+      +'</span><span class="style-small">'+esc(report.style.reason)+'</span></div>';
+   const style=snapshot+relative;
    const most=[...report.regions].filter(r=>r.records>0).sort((a,b)=>b.records-a.records)[0];
    const observed=most?'<p class="style-advice">掲載戦績が最も多い地域：<b>'+esc(most.region)+'</b>（'+count(most.records)+'戦績）※得意地域の判定とは別</p>':'';
-   const affinity='<div class="style-status"><span class="style-tag'+(!eligible.region?' is-low':'')+'">'+esc(best)+'</span><span class="style-small">'+esc(eligible.reason)+'</span></div>';
+   const affinity='<div class="style-status"><span class="style-tag'+(!eligible.region?' is-low':'')+'">'+esc(best)+'</span><span class="style-small">'+esc(eligible.region?eligible.reason:'記録のある地域は表示するけど、得意・不得意は少数データから決めないよ。'+eligible.reason)+'</span></div>';
    const specials=report.specialties||{};
    const specialty=(icon,label,region,reason)=>'<div class="style-specialty"><small>'+icon+' '+label+'</small><strong>'+(region?esc(region):'未判定')+'</strong><span>'+esc(reason||'比較材料なし')+'</span></div>';
-   const specialtyHtml='<div class="style-specialties" aria-label="地域別の得意傾向">'
-     +specialty('⚔️','攻撃効率が高い地域',specials.attack,specials.attackReason)
-     +specialty('🏆','勝ち切り効率が高い地域',specials.victory,specials.victoryReason)
+   const activeRegions=report.regions.filter(r=>r.records>0);
+   const snapshotRegion=activeRegions.length===1?activeRegions[0]:null;
+   const specialtyHtml='<div class="style-specialties" aria-label="地域別の記録">'
+     +(specials.attack?specialty('⚔️','攻撃効率が高い地域',specials.attack,specials.attackReason)
+       :specialty('⚔️','キルを記録した地域',snapshotRegion?.region||null,
+          snapshotRegion?(count(snapshotRegion.kills)+' K · '+count(snapshotRegion.killMatches)+'試合の実測。地域間の優劣は未比較'):specials.attackReason))
+     +(specials.victory?specialty('🏆','勝ち切り効率が高い地域',specials.victory,specials.victoryReason)
+       :specialty('🏆','VRを記録した地域',snapshotRegion?.region||null,
+          snapshotRegion?(count(snapshotRegion.vrs)+' VR · '+count(snapshotRegion.vrMatches)+'試合の実測。地域間の優劣は未比較'):specials.victoryReason))
      +'</div>';
    const adapt=eligible.adaptation?'<p class="style-advice">地域適応力の参考情報：<strong>'+count(eligible.adaptation.qualifiedRegions)+'地域に比較可能な記録</strong>があり、そのうち'+count(eligible.adaptation.consistentRegions)+'地域は最良地域スコアの75%以上（'+esc(eligible.adaptation.label)+'）</p>'
-     :'<p class="style-advice">地域適応力は複数地域の十分な試合数がそろってから判定するょ</p>';
+     :'<p class="style-advice">🌱 地域ごとの実測記録は確認できるよ。2地域以上で条件がそろったら、得意地域も比較できるようになるよ</p>';
    const regionStats='<div class="style-regions">'+report.regions.map(r=>'<article class="style-region'+(r.region===eligible.region?' is-best':'')+(r.region===specials.attack?' is-attack':'')+(r.region===specials.victory?' is-victory':'')+'" data-style-region="'+esc(r.region)+'"><strong>'+esc(r.region)+(r.region===eligible.region?' 🏅':'')+(r.region===specials.attack?' ⚔️':'')+(r.region===specials.victory?' 🏆':'')+'</strong>'
      +'<small>'+count(r.records)+'戦績 · '+count(r.windows)+'開催枠 · '+count(r.matchTotal)+'試合（試合数確認分）</small>'
      +'<b>'+(mixedTeam?'形式混在のため効率比較なし':'K/試合 '+(r.kpm==null?'—':num(r.kpm,2))+' / VR率 '+pct(r.vrRate))+'</b>'
-     +'<small>'+(r.level==='qualified'?'比較候補：5枠・30試合以上':r.level==='provisional'?'暫定：3枠・10試合以上':'データ不足')+'</small></article>').join('')+'</div>';
-   const percentiles=report.style.attack==null?'<p class="style-note">相対評価に必要な条件を満たしていないため、数値を推測せず保留中だょ</p>'
+     +'<small>'+(r.level==='qualified'?'比較候補：5枠・30試合以上':r.level==='provisional'?'暫定：3枠・10試合以上':r.records?'実測参考：'+count(r.matchTotal)+'試合':'掲載記録なし')+'</small></article>').join('')+'</div>';
+   const percentiles=report.style.attack==null?''
      :'<div class="style-box"><h3>実測効率の相対位置</h3><div class="style-compare-bars">'+axis('攻撃',report.style.attack)+axis('勝利',report.style.victory)
       +(report.style.breadth!=null?axis('遠征幅',report.style.breadth):'')+'</div><p class="style-note">比較対象'+count(report.style.peers)+'名の中での順位割合。100点満点の実力判定ではないょ</p></div>';
    const trend=report.trend.slice(-12).reverse();
@@ -207,7 +233,7 @@
      +'<div class="style-fold-body">'
      +insightHtml+filterMarkup+(f.season==='all'&&report.recommendedSeason?'<div class="style-season-help"><span>🌱 シーズンをそろえると地域別の得意傾向をより正確に比較できるょ</span><button type="button" data-style-season-pick="'+esc(report.recommendedSeason)+'">記録が充実した '+esc(report.recommendedSeason)+' に絞る ↗</button></div>':'')+summary+qualityHtml+scoutHtml+style+affinity+specialtyHtml+observed+adapt
      +regionFacts+'<h3 class="style-region-title">🌍 地域別パフォーマンス</h3>'+regionStats
-     +'<p class="style-region-note">地域の累計キル数では判定しない。得意地域候補は同シーズン・同形式・同シリーズで2地域以上の15試合・3開催枠を満たし、総合差が10点以上の場合のみ表示（キル効率70%＋VR率30%）。大会の難易度差は補正していないょ</p>'
+     +'<p class="style-region-note">少ない記録でも地域別のK/試合・VR率を実測として表示するよ。得意地域と断定する場合だけ、同条件の2地域以上で各3開催枠・15試合と十分な差を要求。大会難易度やPingの違いは補正していないよ</p>'
      +'<div class="style-extra">'+percentiles+radar(report.style)+'</div>'
      +trendHtml+graphs+momentumHtml+evidenceHtml
      +'<p class="style-footnote">出典確認済みの掲載結果と本人確認済み出場アーカイブの重複排除分のみを対象にしているょ。試合数不明はK/試合・VR率に加えず、チームのキルやVRを個人の数字として扱わない。大会未掲載・詳細未確認・同一IDの矛盾は集計しない。<button type="button" data-style-growth-jump class="style-jump">既存の成長グラフを見る ↗</button> ／ <a href="./verification.html">データ検証センター</a></p></div></details></section>';
