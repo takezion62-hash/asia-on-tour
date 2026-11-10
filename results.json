@@ -33,7 +33,8 @@
     "tournamentId": "ch7s4-slender-man-cup-reload",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 11
   },
   {
     "id": "s42-me-slenderman-reload-skin-20261021-karf-alpha",
@@ -69,7 +70,8 @@
     "tournamentId": "ch7s4-slender-man-cup-reload",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 11
   },
   {
     "id": "s42-me-slenderman-reload-skin-20261021-rad-celis",
@@ -105,7 +107,8 @@
     "tournamentId": "ch7s4-slender-man-cup-reload",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 10
   },
   {
     "id": "s42-me-slenderman-reload-skin-20261021-yuragi-shirus",
@@ -141,7 +144,8 @@
     "tournamentId": "ch7s4-slender-man-cup-reload",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 11
   },
   {
     "id": "s42-nac-slenderman-reload-skin-20261021-mgavariety-kuro",
@@ -177,7 +181,8 @@
     "tournamentId": "ch7s4-slender-man-cup-reload",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 10
   },
   {
     "id": "s42-nac-slenderman-reload-skin-20261021-riani-maroa",
@@ -213,7 +218,8 @@
     "tournamentId": "ch7s4-slender-man-cup-reload",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 11
   },
   {
     "id": "s42-naw-slenderman-reload-skin-20261021-celisyanagisawa-plank",
@@ -249,7 +255,8 @@
     "tournamentId": "ch7s4-slender-man-cup-reload",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 11
   },
   {
     "id": "s42-naw-slenderman-reload-skin-20261021-kol-guppafv",
@@ -285,7 +292,8 @@
     "tournamentId": "ch7s4-slender-man-cup-reload",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 11
   },
   {
     "id": "s42-naw-slenderman-reload-skin-20261021-menta-shiroka",
@@ -321,7 +329,8 @@
     "tournamentId": "ch7s4-slender-man-cup-reload",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 11
   },
   {
     "id": "s42-naw-slenderman-reload-skin-20261021-ozaki-tob",
@@ -357,7 +366,8 @@
     "tournamentId": "ch7s4-slender-man-cup-reload",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 12
   },
   {
     "id": "s42-naw-slenderman-reload-skin-20261021-takaya-babucchi",
@@ -393,7 +403,8 @@
     "tournamentId": "ch7s4-slender-man-cup-reload",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 9
   },
   {
     "id": "s42-naw-slenderman-reload-skin-20261021-yama-piyopiyo",
@@ -429,7 +440,8 @@
     "tournamentId": "ch7s4-slender-man-cup-reload",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 10
   },
   {
     "id": "s42-naw-slenderman-reload-skin-20261021-yukinya-tanaka",
@@ -465,7 +477,8 @@
     "tournamentId": "ch7s4-slender-man-cup-reload",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 11
   },
   {
     "id": "s42-me-console-zb-solo-vc-final-20261018-nununununu",
@@ -488,7 +501,8 @@
     "tournamentId": "ch7s4-console-zero-build-solo-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 3
   },
   {
     "id": "s42-nac-console-zb-solo-vc-final-20261018-dx-nicolas67",
@@ -511,7 +525,8 @@
     "tournamentId": "ch7s4-console-zero-build-solo-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 3
   },
   {
     "id": "s42-naw-console-zb-solo-vc-final-20261018-gori",
@@ -534,7 +549,8 @@
     "tournamentId": "ch7s4-console-zero-build-solo-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 2
   },
   {
     "id": "s42-oce-reload-zb-duos-qual-20261018-reo-romii",
@@ -570,7 +586,15 @@
     "tournamentId": "ch7s4-reload-zero-build-duos-cash-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 11,
+    "trackerStats": {
+      "verified": true,
+      "source": "https://fortnitetracker.com/events/epicgames_S42_ReloadCashCup_DuosZB_OCE",
+      "avgPlace": 6.55,
+      "avgTimeAliveSeconds": 640,
+      "kdRatio": 13.38
+    }
   },
   {
     "id": "s42-oce-reload-zb-duos-qual-20261018-uptemp-vuradd0",
@@ -606,7 +630,15 @@
     "tournamentId": "ch7s4-reload-zero-build-duos-cash-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 12,
+    "trackerStats": {
+      "verified": true,
+      "source": "https://fortnitetracker.com/events/epicgames_S42_ReloadCashCup_DuosZB_OCE",
+      "avgPlace": 7.17,
+      "avgTimeAliveSeconds": 644,
+      "kdRatio": 7.89
+    }
   },
   {
     "id": "s42-me-reload-solo-final-20261017-ackerman",
@@ -629,7 +661,8 @@
     "tournamentId": "ch7s4-solo-reload-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 3
   },
   {
     "id": "s42-me-reload-solo-final-20261017-buriburi",
@@ -652,7 +685,8 @@
     "tournamentId": "ch7s4-solo-reload-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 3
   },
   {
     "id": "s42-me-reload-solo-final-20261017-chin",
@@ -675,7 +709,8 @@
     "tournamentId": "ch7s4-solo-reload-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 3
   },
   {
     "id": "s42-me-reload-solo-final-20261017-choco",
@@ -698,7 +733,8 @@
     "tournamentId": "ch7s4-solo-reload-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 3
   },
   {
     "id": "s42-me-reload-solo-final-20261017-killer",
@@ -721,7 +757,8 @@
     "tournamentId": "ch7s4-solo-reload-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 2
   },
   {
     "id": "s42-me-reload-solo-final-20261017-meiru",
@@ -744,7 +781,8 @@
     "tournamentId": "ch7s4-solo-reload-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 3
   },
   {
     "id": "s42-me-reload-solo-final-20261017-merunyaken",
@@ -767,7 +805,8 @@
     "tournamentId": "ch7s4-solo-reload-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 3
   },
   {
     "id": "s42-me-reload-solo-final-20261017-miru",
@@ -790,7 +829,8 @@
     "tournamentId": "ch7s4-solo-reload-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 3
   },
   {
     "id": "s42-me-reload-solo-final-20261017-murukogi",
@@ -813,7 +853,8 @@
     "tournamentId": "ch7s4-solo-reload-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 3
   },
   {
     "id": "s42-me-reload-solo-final-20261017-okun",
@@ -836,7 +877,8 @@
     "tournamentId": "ch7s4-solo-reload-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 3
   },
   {
     "id": "s42-me-reload-solo-final-20261017-riani",
@@ -859,7 +901,8 @@
     "tournamentId": "ch7s4-solo-reload-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 3
   },
   {
     "id": "s42-me-reload-solo-final-20261017-torippy",
@@ -882,7 +925,8 @@
     "tournamentId": "ch7s4-solo-reload-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 3
   },
   {
     "id": "s42-me-reload-solo-qual-20261017-ackerman",
@@ -905,7 +949,8 @@
     "tournamentId": "ch7s4-solo-reload-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 8
   },
   {
     "id": "s42-me-reload-solo-qual-20261017-buriburi",
@@ -928,7 +973,8 @@
     "tournamentId": "ch7s4-solo-reload-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 8
   },
   {
     "id": "s42-me-reload-solo-qual-20261017-chin",
@@ -951,7 +997,8 @@
     "tournamentId": "ch7s4-solo-reload-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 10
   },
   {
     "id": "s42-me-reload-solo-qual-20261017-choco",
@@ -974,7 +1021,8 @@
     "tournamentId": "ch7s4-solo-reload-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 7
   },
   {
     "id": "s42-me-reload-solo-qual-20261017-killer",
@@ -997,7 +1045,8 @@
     "tournamentId": "ch7s4-solo-reload-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 7
   },
   {
     "id": "s42-me-reload-solo-qual-20261017-meiru",
@@ -1020,7 +1069,8 @@
     "tournamentId": "ch7s4-solo-reload-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 7
   },
   {
     "id": "s42-me-reload-solo-qual-20261017-merunyaken",
@@ -1043,7 +1093,13 @@
     "tournamentId": "ch7s4-solo-reload-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 10,
+    "trackerStats": {
+      "verified": true,
+      "source": "https://fortnitetracker.com/events/epicgames_S42_ReloadReloadSoloVictoryCup_ME?window=S42_ReloadSoloVictoryCup_Event4_Round1_ME",
+      "avgPlace": 14.5
+    }
   },
   {
     "id": "s42-me-reload-solo-qual-20261017-miru",
@@ -1066,7 +1122,8 @@
     "tournamentId": "ch7s4-solo-reload-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 9
   },
   {
     "id": "s42-me-reload-solo-qual-20261017-murukogi",
@@ -1089,7 +1146,8 @@
     "tournamentId": "ch7s4-solo-reload-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 7
   },
   {
     "id": "s42-me-reload-solo-qual-20261017-okun",
@@ -1112,7 +1170,8 @@
     "tournamentId": "ch7s4-solo-reload-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 8
   },
   {
     "id": "s42-me-reload-solo-qual-20261017-resumaru",
@@ -1135,7 +1194,8 @@
     "tournamentId": "ch7s4-solo-reload-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 8
   },
   {
     "id": "s42-me-reload-solo-qual-20261017-riani",
@@ -1158,7 +1218,8 @@
     "tournamentId": "ch7s4-solo-reload-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 10
   },
   {
     "id": "s42-me-reload-solo-qual-20261017-torippy",
@@ -1181,7 +1242,8 @@
     "tournamentId": "ch7s4-solo-reload-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 8
   },
   {
     "id": "s42-nac-reload-solo-final-20261017-eibuka",
@@ -1203,7 +1265,13 @@
     "tournamentId": "ch7s4-solo-reload-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 3,
+    "trackerStats": {
+      "verified": true,
+      "source": "https://fortnitetracker.com/events/epicgames_S42_ReloadReloadSoloVictoryCup_NAC?window=S42_ReloadSoloVictoryCup_Event4_Round2_NAC",
+      "avgPlace": 20.67
+    }
   },
   {
     "id": "s42-nac-reload-solo-final-20261017-goodcottege",
@@ -1226,7 +1294,8 @@
     "tournamentId": "ch7s4-solo-reload-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 3
   },
   {
     "id": "s42-nac-reload-solo-final-20261017-pegu",
@@ -1248,7 +1317,8 @@
     "tournamentId": "ch7s4-solo-reload-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 3
   },
   {
     "id": "s42-nac-reload-solo-qual-20261017-eibuka",
@@ -1270,7 +1340,13 @@
     "tournamentId": "ch7s4-solo-reload-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 9,
+    "trackerStats": {
+      "verified": true,
+      "source": "https://fortnitetracker.com/events/epicgames_S42_ReloadReloadSoloVictoryCup_NAC?window=S42_ReloadSoloVictoryCup_Event4_Round1_NAC",
+      "avgPlace": 13.33
+    }
   },
   {
     "id": "s42-nac-reload-solo-qual-20261017-goodcottege",
@@ -1293,7 +1369,13 @@
     "tournamentId": "ch7s4-solo-reload-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 8,
+    "trackerStats": {
+      "verified": true,
+      "source": "https://fortnitetracker.com/events/epicgames_S42_ReloadReloadSoloVictoryCup_NAC?window=S42_ReloadSoloVictoryCup_Event4_Round1_NAC",
+      "avgPlace": 11.13
+    }
   },
   {
     "id": "s42-nac-reload-solo-qual-20261017-pegu",
@@ -1315,7 +1397,8 @@
     "tournamentId": "ch7s4-solo-reload-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 10
   },
   {
     "id": "s42-naw-reload-solo-20261017-taiga",
@@ -1360,7 +1443,8 @@
     "tournamentId": "ch7s4-solo-reload-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261017-rintaro",
@@ -1383,7 +1467,8 @@
     "tournamentId": "ch7s4-solo-reload-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261017-shiroka",
@@ -1405,7 +1490,8 @@
     "tournamentId": "ch7s4-solo-reload-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-qual-20261017-0784022a-1592-4074-9a26-60482aa4d2d6",
@@ -1428,7 +1514,13 @@
     "tournamentId": "ch7s4-solo-reload-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 10,
+    "trackerStats": {
+      "verified": true,
+      "source": "https://fortnitetracker.com/events/epicgames_S42_ReloadReloadSoloVictoryCup_NAW?window=S42_ReloadSoloVictoryCup_Event4_Round1_NAW",
+      "avgPlace": 16.7
+    }
   },
   {
     "id": "s42-naw-reload-solo-qual-20261017-37311716-7fff-46c3-a784-644428f1ca25",
@@ -1451,7 +1543,13 @@
     "tournamentId": "ch7s4-solo-reload-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 9,
+    "trackerStats": {
+      "verified": true,
+      "source": "https://fortnitetracker.com/events/epicgames_S42_ReloadReloadSoloVictoryCup_NAW?window=S42_ReloadSoloVictoryCup_Event4_Round1_NAW",
+      "avgPlace": 13.56
+    }
   },
   {
     "id": "s42-naw-reload-solo-qual-20261017-3ad4406c-4672-406b-8f92-051a558d9a0e",
@@ -1474,7 +1572,13 @@
     "tournamentId": "ch7s4-solo-reload-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 8,
+    "trackerStats": {
+      "verified": true,
+      "source": "https://fortnitetracker.com/events/epicgames_S42_ReloadReloadSoloVictoryCup_NAW?window=S42_ReloadSoloVictoryCup_Event4_Round1_NAW",
+      "avgPlace": 7.88
+    }
   },
   {
     "id": "s42-naw-reload-solo-qual-20261017-3e523862-e0d5-4ecd-b640-6633c46103a1",
@@ -1497,7 +1601,13 @@
     "tournamentId": "ch7s4-solo-reload-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 8,
+    "trackerStats": {
+      "verified": true,
+      "source": "https://fortnitetracker.com/events/epicgames_S42_ReloadReloadSoloVictoryCup_NAW?window=S42_ReloadSoloVictoryCup_Event4_Round1_NAW",
+      "avgPlace": 13
+    }
   },
   {
     "id": "s42-naw-reload-solo-qual-20261017-4705fb65-147f-432e-92bb-cbaef8d91c71",
@@ -1520,7 +1630,13 @@
     "tournamentId": "ch7s4-solo-reload-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 7,
+    "trackerStats": {
+      "verified": true,
+      "source": "https://fortnitetracker.com/events/epicgames_S42_ReloadReloadSoloVictoryCup_NAW?window=S42_ReloadSoloVictoryCup_Event4_Round1_NAW",
+      "avgPlace": 8.86
+    }
   },
   {
     "id": "s42-naw-reload-solo-qual-20261017-5aa76ea4-2a16-4e4e-ac2a-e3da5a0d8ed2",
@@ -1543,7 +1659,13 @@
     "tournamentId": "ch7s4-solo-reload-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 10,
+    "trackerStats": {
+      "verified": true,
+      "source": "https://fortnitetracker.com/events/epicgames_S42_ReloadReloadSoloVictoryCup_NAW?window=S42_ReloadSoloVictoryCup_Event4_Round1_NAW",
+      "avgPlace": 17.2
+    }
   },
   {
     "id": "s42-naw-reload-solo-qual-20261017-7f62bc5d-d53d-426e-90e2-b5c7db766885",
@@ -1566,7 +1688,13 @@
     "tournamentId": "ch7s4-solo-reload-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 8,
+    "trackerStats": {
+      "verified": true,
+      "source": "https://fortnitetracker.com/events/epicgames_S42_ReloadReloadSoloVictoryCup_NAW?window=S42_ReloadSoloVictoryCup_Event4_Round1_NAW",
+      "avgPlace": 8.75
+    }
   },
   {
     "id": "s42-naw-reload-solo-qual-20261017-89f7cf5d-d250-43b4-b6b6-c62197215db5",
@@ -1589,7 +1717,13 @@
     "tournamentId": "ch7s4-solo-reload-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 9,
+    "trackerStats": {
+      "verified": true,
+      "source": "https://fortnitetracker.com/events/epicgames_S42_ReloadReloadSoloVictoryCup_NAW?window=S42_ReloadSoloVictoryCup_Event4_Round1_NAW",
+      "avgPlace": 14.22
+    }
   },
   {
     "id": "s42-naw-reload-solo-qual-20261017-9b838d28-9a94-4bb1-973b-bf339c9cf032",
@@ -1612,7 +1746,13 @@
     "tournamentId": "ch7s4-solo-reload-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 9,
+    "trackerStats": {
+      "verified": true,
+      "source": "https://fortnitetracker.com/events/epicgames_S42_ReloadReloadSoloVictoryCup_NAW?window=S42_ReloadSoloVictoryCup_Event4_Round1_NAW",
+      "avgPlace": 15.44
+    }
   },
   {
     "id": "s42-naw-reload-solo-qual-20261017-alpaca",
@@ -1634,7 +1774,8 @@
     "tournamentId": "ch7s4-solo-reload-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 8
   },
   {
     "id": "s42-naw-reload-solo-qual-20261017-chikara",
@@ -1662,7 +1803,13 @@
     "tournamentId": "ch7s4-solo-reload-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 8,
+    "trackerStats": {
+      "verified": true,
+      "source": "https://fortnitetracker.com/events/epicgames_S42_ReloadReloadSoloVictoryCup_NAW?window=S42_ReloadSoloVictoryCup_Event4_Round1_NAW",
+      "avgPlace": 9.5
+    }
   },
   {
     "id": "s42-naw-reload-solo-qual-20261017-cluchkawa",
@@ -1690,7 +1837,13 @@
     "tournamentId": "ch7s4-solo-reload-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 8,
+    "trackerStats": {
+      "verified": true,
+      "source": "https://fortnitetracker.com/events/epicgames_S42_ReloadReloadSoloVictoryCup_NAW?window=S42_ReloadSoloVictoryCup_Event4_Round1_NAW",
+      "avgPlace": 7
+    }
   },
   {
     "id": "s42-naw-reload-solo-qual-20261017-demonkurage",
@@ -1713,7 +1866,13 @@
     "tournamentId": "ch7s4-solo-reload-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 9,
+    "trackerStats": {
+      "verified": true,
+      "source": "https://fortnitetracker.com/events/epicgames_S42_ReloadReloadSoloVictoryCup_NAW?window=S42_ReloadSoloVictoryCup_Event4_Round1_NAW",
+      "avgPlace": 12.89
+    }
   },
   {
     "id": "s42-naw-reload-solo-qual-20261017-ef39bb15-6026-4b5d-9629-b8a9c6631735",
@@ -1736,7 +1895,13 @@
     "tournamentId": "ch7s4-solo-reload-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 9,
+    "trackerStats": {
+      "verified": true,
+      "source": "https://fortnitetracker.com/events/epicgames_S42_ReloadReloadSoloVictoryCup_NAW?window=S42_ReloadSoloVictoryCup_Event4_Round1_NAW",
+      "avgPlace": 16.78
+    }
   },
   {
     "id": "s42-naw-reload-solo-qual-20261017-f62031de-4f25-43c5-9bd3-351debfea470",
@@ -1759,7 +1924,13 @@
     "tournamentId": "ch7s4-solo-reload-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 10,
+    "trackerStats": {
+      "verified": true,
+      "source": "https://fortnitetracker.com/events/epicgames_S42_ReloadReloadSoloVictoryCup_NAW?window=S42_ReloadSoloVictoryCup_Event4_Round1_NAW",
+      "avgPlace": 17.9
+    }
   },
   {
     "id": "s42-naw-reload-solo-qual-20261017-hazy",
@@ -1787,7 +1958,13 @@
     "tournamentId": "ch7s4-solo-reload-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 9,
+    "trackerStats": {
+      "verified": true,
+      "source": "https://fortnitetracker.com/events/epicgames_S42_ReloadReloadSoloVictoryCup_NAW?window=S42_ReloadSoloVictoryCup_Event4_Round1_NAW",
+      "avgPlace": 16.67
+    }
   },
   {
     "id": "s42-naw-reload-solo-qual-20261017-maa",
@@ -1815,7 +1992,13 @@
     "tournamentId": "ch7s4-solo-reload-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 9,
+    "trackerStats": {
+      "verified": true,
+      "source": "https://fortnitetracker.com/events/epicgames_S42_ReloadReloadSoloVictoryCup_NAW?window=S42_ReloadSoloVictoryCup_Event4_Round1_NAW",
+      "avgPlace": 15.11
+    }
   },
   {
     "id": "s42-naw-reload-solo-qual-20261017-nazu",
@@ -1843,7 +2026,13 @@
     "tournamentId": "ch7s4-solo-reload-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 9,
+    "trackerStats": {
+      "verified": true,
+      "source": "https://fortnitetracker.com/events/epicgames_S42_ReloadReloadSoloVictoryCup_NAW?window=S42_ReloadSoloVictoryCup_Event4_Round1_NAW",
+      "avgPlace": 12.89
+    }
   },
   {
     "id": "s42-naw-reload-solo-qual-20261017-rintaro",
@@ -1866,7 +2055,13 @@
     "tournamentId": "ch7s4-solo-reload-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 10,
+    "trackerStats": {
+      "verified": true,
+      "source": "https://fortnitetracker.com/events/epicgames_S42_ReloadReloadSoloVictoryCup_NAW?window=S42_ReloadSoloVictoryCup_Event4_Round1_NAW",
+      "avgPlace": 15
+    }
   },
   {
     "id": "s42-naw-reload-solo-qual-20261017-shiroka",
@@ -1888,7 +2083,13 @@
     "tournamentId": "ch7s4-solo-reload-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 8,
+    "trackerStats": {
+      "verified": true,
+      "source": "https://fortnitetracker.com/events/epicgames_S42_ReloadReloadSoloVictoryCup_NAW?window=S42_ReloadSoloVictoryCup_Event4_Round1_NAW",
+      "avgPlace": 11.25
+    }
   },
   {
     "id": "s42-naw-reload-solo-qual-20261017-taiga",
@@ -1916,7 +2117,13 @@
     "tournamentId": "ch7s4-solo-reload-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 5,
+    "trackerStats": {
+      "verified": true,
+      "source": "https://fortnitetracker.com/events/epicgames_S42_ReloadReloadSoloVictoryCup_NAW?window=S42_ReloadSoloVictoryCup_Event4_Round1_NAW",
+      "avgPlace": 5
+    }
   },
   {
     "id": "s42-naw-reload-solo-qual-20261017-tantan",
@@ -1944,7 +2151,13 @@
     "tournamentId": "ch7s4-solo-reload-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 7,
+    "trackerStats": {
+      "verified": true,
+      "source": "https://fortnitetracker.com/events/epicgames_S42_ReloadReloadSoloVictoryCup_NAW?window=S42_ReloadSoloVictoryCup_Event4_Round1_NAW",
+      "avgPlace": 6.71
+    }
   },
   {
     "id": "s42-naw-reload-solo-qual-20261017-tatsuhiko",
@@ -1972,7 +2185,13 @@
     "tournamentId": "ch7s4-solo-reload-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 9,
+    "trackerStats": {
+      "verified": true,
+      "source": "https://fortnitetracker.com/events/epicgames_S42_ReloadReloadSoloVictoryCup_NAW?window=S42_ReloadSoloVictoryCup_Event4_Round1_NAW",
+      "avgPlace": 12.22
+    }
   },
   {
     "id": "s42-naw-reload-solo-qual-20261017-uptemp",
@@ -1994,7 +2213,8 @@
     "tournamentId": "ch7s4-solo-reload-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 10
   },
   {
     "id": "s42-naw-reload-zb-duos-final-20261017-ares-momiji",
@@ -2031,7 +2251,8 @@
     "tournamentId": "ch7s4-reload-zero-build-duos-cash-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 6
   },
   {
     "id": "s42-oce-console-zb-solo-vc-final-20261017-alpacabest",
@@ -2054,7 +2275,8 @@
     "tournamentId": "ch7s4-console-zero-build-solo-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 1
   },
   {
     "id": "s42-oce-console-zb-solo-vc-final-20261017-demonkurage",
@@ -2077,7 +2299,8 @@
     "tournamentId": "ch7s4-console-zero-build-solo-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 3
   },
   {
     "id": "s42-oce-console-zb-solo-vc-final-20261017-nununununu",
@@ -2100,7 +2323,8 @@
     "tournamentId": "ch7s4-console-zero-build-solo-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261013-3peace",
@@ -2123,7 +2347,8 @@
     "tournamentId": "ch7s4-solo-reload-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261013-kametin",
@@ -2146,7 +2371,8 @@
     "tournamentId": "ch7s4-solo-reload-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 2
   },
   {
     "id": "s42-naw-reload-solo-final-20261013-maa",
@@ -2169,7 +2395,8 @@
     "tournamentId": "ch7s4-solo-reload-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261013-p1ng",
@@ -2192,7 +2419,8 @@
     "tournamentId": "ch7s4-solo-reload-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 3
   },
   {
     "id": "s42-br-console-zb-solo-vc-final-20261011-miru",
@@ -2215,7 +2443,8 @@
     "tournamentId": "ch7s4-console-zero-build-solo-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 3
   },
   {
     "id": "s42-br-console-zb-solo-vc-final-20261004-miru",
@@ -2238,7 +2467,8 @@
     "tournamentId": "ch7s4-console-zero-build-solo-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 3
   },
   {
     "id": "s42-naw-console-zb-solo-vc-final-20261004-maguro-hoppe",
@@ -2261,7 +2491,8 @@
     "tournamentId": "ch7s4-console-zero-build-solo-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 2
   },
   {
     "id": "s42-naw-console-zb-solo-vc-final-20261004-rimuta",
@@ -2284,7 +2515,8 @@
     "tournamentId": "ch7s4-console-zero-build-solo-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 3
   },
   {
     "id": "s42-naw-console-zb-solo-vc-final-20261004-sh-shooter",
@@ -2307,7 +2539,8 @@
     "tournamentId": "ch7s4-console-zero-build-solo-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 2
   },
   {
     "id": "s42-me-console-zb-solo-vc-final-20261003-nununununu",
@@ -2330,7 +2563,8 @@
     "tournamentId": "ch7s4-console-zero-build-solo-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 3
   },
   {
     "id": "s42-me-reload-solo-final-20261003-akuria",
@@ -2353,7 +2587,8 @@
     "tournamentId": "ch7s4-solo-reload-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 3
   },
   {
     "id": "s42-me-reload-solo-final-20261003-demonkurage",
@@ -2376,7 +2611,8 @@
     "tournamentId": "ch7s4-solo-reload-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261003-aresmea",
@@ -2399,7 +2635,8 @@
     "tournamentId": "ch7s4-solo-reload-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 2
   },
   {
     "id": "s42-naw-reload-solo-final-20261003-demonkurage",
@@ -2422,7 +2659,8 @@
     "tournamentId": "ch7s4-solo-reload-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261003-maguro",
@@ -2445,7 +2683,8 @@
     "tournamentId": "ch7s4-solo-reload-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 2
   },
   {
     "id": "s42-naw-reload-solo-final-20261003-shiroka",
@@ -2468,7 +2707,8 @@
     "tournamentId": "ch7s4-solo-reload-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261003-sukijanaku",
@@ -2491,7 +2731,8 @@
     "tournamentId": "ch7s4-solo-reload-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 3
   },
   {
     "id": "s42-oce-console-zb-solo-vc-final-20261003-atlantic-skyx",
@@ -2514,7 +2755,8 @@
     "tournamentId": "ch7s4-console-zero-build-solo-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 3
   },
   {
     "id": "s42-oce-console-zb-solo-vc-final-20261003-heart-bouquet",
@@ -2537,7 +2779,8 @@
     "tournamentId": "ch7s4-console-zero-build-solo-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 3
   },
   {
     "id": "s42-oce-console-zb-solo-vc-final-20261003-maguro-hoppe",
@@ -2560,7 +2803,8 @@
     "tournamentId": "ch7s4-console-zero-build-solo-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 3
   },
   {
     "id": "s42-oce-console-zb-solo-vc-final-20261003-miru",
@@ -2583,7 +2827,8 @@
     "tournamentId": "ch7s4-console-zero-build-solo-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-20261002-shiroka",
@@ -2627,7 +2872,8 @@
     "tournamentId": "ch7s4-playstation-nickeh30-icon-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 8
   },
   {
     "id": "s42-naw-psnick-20261001-meiru",
@@ -2649,7 +2895,8 @@
     "tournamentId": "ch7s4-playstation-nickeh30-icon-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 9
   },
   {
     "id": "s42-naw-psnick-20261001-rintaro",
@@ -2671,7 +2918,8 @@
     "tournamentId": "ch7s4-playstation-nickeh30-icon-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 10
   },
   {
     "id": "s42-me-solo-vc-final-20260922-mell",
@@ -2694,7 +2942,8 @@
     "tournamentId": "ch7s4-solo-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 3
   },
   {
     "id": "s42-naw-solo-vc-final-20260922-akuria",
@@ -2787,7 +3036,8 @@
     "tournamentId": "ch7s4-console-zero-build-solo-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 3
   },
   {
     "id": "official-shiroka-kingdom-2026",
@@ -2832,7 +3082,8 @@
     "tournamentId": "ch7s4-console-zero-build-solo-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 3
   },
   {
     "id": "s42-me-kingdom-cup-20260918-popo",
@@ -2901,7 +3152,8 @@
     "tournamentId": "ch7s4-solo-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 7
   },
   {
     "id": "s42-naw-solo-vc-final-20260914-buriburi-usa",
@@ -2924,7 +3176,8 @@
     "tournamentId": "ch7s4-solo-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 3
   },
   {
     "id": "s42-naw-solo-vc-final-20260914-volare-marota",
@@ -2947,7 +3200,8 @@
     "tournamentId": "ch7s4-solo-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 2
   },
   {
     "id": "s42-nac-console-zb-solo-vc-final-20260913-maguro-hoppe",
@@ -2970,7 +3224,8 @@
     "tournamentId": "ch7s4-console-zero-build-solo-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 3
   },
   {
     "id": "s42-nac-console-zb-solo-vc-final-20260913-peter-happi",
@@ -2993,7 +3248,8 @@
     "tournamentId": "ch7s4-console-zero-build-solo-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 3
   },
   {
     "id": "s42-naw-console-zb-solo-vc-final-20260913-atlanticskyx",
@@ -3016,7 +3272,8 @@
     "tournamentId": "ch7s4-console-zero-build-solo-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 3
   },
   {
     "id": "s42-naw-console-zb-solo-vc-final-20260913-fuutyan28",
@@ -3039,7 +3296,8 @@
     "tournamentId": "ch7s4-console-zero-build-solo-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 3
   },
   {
     "id": "s42-naw-console-zb-solo-vc-final-20260913-hanage-fullpeace",
@@ -3062,7 +3320,8 @@
     "tournamentId": "ch7s4-console-zero-build-solo-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 3
   },
   {
     "id": "s42-naw-fncs-practice-final-20260913-asuka-huggyfv",
@@ -3098,7 +3357,13 @@
     "tournamentId": "ch7s4-fncs-division-1-practice",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 6,
+    "trackerStats": {
+      "verified": true,
+      "source": "https://fortnitetracker.com/events/epicgames_S42_FNCSDivisionalCup_Division1_NAW?window=S42_FNCSDivisionalCup_Division1_Week3Final_NAW",
+      "avgPlace": 25
+    }
   },
   {
     "id": "s42-naw-fncs-practice-final-20260913-maguro-arim",
@@ -3135,7 +3400,8 @@
     "tournamentId": "ch7s4-fncs-division-1-practice",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 6
   },
   {
     "id": "s42-oce-console-zb-solo-vc-final-20260912-holy-fakao",
@@ -3158,7 +3424,8 @@
     "tournamentId": "ch7s4-console-zero-build-solo-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 2
   },
   {
     "id": "s42-oce-console-zb-solo-vc-final-20260912-tomato",
@@ -3181,7 +3448,8 @@
     "tournamentId": "ch7s4-console-zero-build-solo-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 3
   },
   {
     "id": "s42-nac-performance-eval-final-20260911-meath-3peace",
@@ -3207,7 +3475,13 @@
     "tournamentId": "ch7s4-performance-evaluation",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 4,
+    "trackerStats": {
+      "verified": true,
+      "source": "https://fortnitetracker.com/events/epicgames_S42_PerformanceEvaluation_NAC?page=0&window=S42_PerformanceEvaluation_Event3Round2_NAC",
+      "avgPlace": 40.5
+    }
   },
   {
     "id": "s42-nac-performance-eval-qual-20260911-meath-3peace",
@@ -3234,7 +3508,12 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "matches": 6
+    "matches": 6,
+    "trackerStats": {
+      "verified": true,
+      "source": "https://fortnitetracker.com/events/epicgames_S42_PerformanceEvaluation_NAC?page=0&window=S42_PerformanceEvaluation_Event3Round1_NAC",
+      "avgPlace": 6
+    }
   },
   {
     "id": "s42-me-megaman-cup-20260908-maguro-osydd",
@@ -3322,7 +3601,13 @@
     "tournamentId": "ch7s4-fncs-division-1-practice",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 9,
+    "trackerStats": {
+      "verified": true,
+      "source": "https://fortnitetracker.com/events/epicgames_S42_FNCSDivisionalCup_Division1_NAW?window=S42_FNCSDivisionalCup_Division1_Event3_NAW",
+      "avgPlace": 9.78
+    }
   },
   {
     "id": "s42-naw-fncs-practice-qual-20260908-maguro-arim",
@@ -3358,7 +3643,13 @@
     "tournamentId": "ch7s4-fncs-division-1-practice",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 8,
+    "trackerStats": {
+      "verified": true,
+      "source": "https://fortnitetracker.com/events/epicgames_S42_FNCSDivisionalCup_Division1_NAW?window=S42_FNCSDivisionalCup_Division1_Event3_NAW",
+      "avgPlace": 6.63
+    }
   },
   {
     "id": "s42-me-console-zb-solo-vc-final-20260906-mintojunior",
@@ -3381,7 +3672,8 @@
     "tournamentId": "ch7s4-console-zero-build-solo-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 3
   },
   {
     "id": "s42-me-console-zb-solo-vc-final-20260906-miru",
@@ -3404,7 +3696,8 @@
     "tournamentId": "ch7s4-console-zero-build-solo-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 3
   },
   {
     "id": "s42-me-console-zb-solo-vc-final-20260906-nununununu",
@@ -3427,7 +3720,8 @@
     "tournamentId": "ch7s4-console-zero-build-solo-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 3
   },
   {
     "id": "s42-nac-solo-vc-final-20260906-zagou-brother",
@@ -3496,7 +3790,8 @@
     "tournamentId": "ch7s4-console-zero-build-solo-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 3
   },
   {
     "id": "s42-naw-console-zb-solo-vc-final-20260906-rgn-p1ng",
@@ -3519,7 +3814,8 @@
     "tournamentId": "ch7s4-console-zero-build-solo-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 3
   },
   {
     "id": "s42-naw-console-zb-solo-vc-final-20260906-vexel-sj",
@@ -3542,7 +3838,8 @@
     "tournamentId": "ch7s4-console-zero-build-solo-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 3
   },
   {
     "id": "s42-naw-solo-20260905-3peace",
@@ -3564,7 +3861,8 @@
     "tournamentId": "ch7s4-solo-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 5
   },
   {
     "id": "s42-naw-solo-vc-final-20260906-mofu",
@@ -3630,7 +3928,8 @@
     "tournamentId": "ch7s4-solo-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 3
   },
   {
     "id": "s42-naw-solo-vc-final-20260906-tonightreet",
@@ -3675,7 +3974,8 @@
     "tournamentId": "ch7s4-solo-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 8
   },
   {
     "id": "s42-naw-solo-vc-qual-20260906-maguro",
@@ -3697,7 +3997,8 @@
     "tournamentId": "ch7s4-solo-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 7
   },
   {
     "id": "s42-naw-solo-vc-qual-20260906-mofu",
@@ -3719,7 +4020,8 @@
     "tournamentId": "ch7s4-solo-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 8
   },
   {
     "id": "s42-naw-solo-vc-qual-20260906-rintaro",
@@ -3741,7 +4043,8 @@
     "tournamentId": "ch7s4-solo-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 8
   },
   {
     "id": "s42-naw-solo-vc-qual-20260906-shiroka",
@@ -3763,7 +4066,8 @@
     "tournamentId": "ch7s4-solo-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 6
   },
   {
     "id": "s42-naw-solo-vc-qual-20260906-sphinx",
@@ -3785,7 +4089,8 @@
     "tournamentId": "ch7s4-solo-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 7
   },
   {
     "id": "s42-naw-solo-vc-qual-20260906-tonightreet",
@@ -3845,7 +4150,8 @@
     "tournamentId": "ch7s4-reload-zero-build-duos-cash-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 6
   },
   {
     "id": "s42-oce-console-zb-solo-vc-final-20260905-32sai-tahine",
@@ -3868,7 +4174,8 @@
     "tournamentId": "ch7s4-console-zero-build-solo-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 2
   },
   {
     "id": "s42-oce-console-zb-solo-vc-final-20260905-mizurun",
@@ -3891,7 +4198,8 @@
     "tournamentId": "ch7s4-console-zero-build-solo-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-duos-final-20260902-kametin-r1ze",
@@ -3954,7 +4262,8 @@
     "tournamentId": "ch7s4-reload-duos-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 3
   },
   {
     "id": "s42-me-fncs-practice-final-20260830-bof-sphinx",
@@ -4003,7 +4312,8 @@
     "tournamentId": "ch7s4-console-zero-build-solo-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 2
   },
   {
     "id": "s42-naw-console-zb-solo-vc-final-20260830-miru",
@@ -4026,7 +4336,8 @@
     "tournamentId": "ch7s4-console-zero-build-solo-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 3
   },
   {
     "id": "s42-naw-console-zb-solo-vc-final-20260830-misosqnda",
@@ -4049,7 +4360,8 @@
     "tournamentId": "ch7s4-console-zero-build-solo-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 3
   },
   {
     "id": "s42-naw-console-zb-solo-vc-final-20260830-mushygoose6356",
@@ -4072,7 +4384,8 @@
     "tournamentId": "ch7s4-console-zero-build-solo-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 3
   },
   {
     "id": "s42-naw-console-zb-solo-vc-final-20260830-rgn-pinobot",
@@ -4095,7 +4408,8 @@
     "tournamentId": "ch7s4-console-zero-build-solo-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 3
   },
   {
     "id": "s42-naw-console-zb-solo-vc-final-20260830-sh-shooter",
@@ -4118,7 +4432,8 @@
     "tournamentId": "ch7s4-console-zero-build-solo-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 3
   },
   {
     "id": "s42-naw-console-zb-solo-vc-final-20260830-vlz-taimennogokui",
@@ -4141,7 +4456,8 @@
     "tournamentId": "ch7s4-console-zero-build-solo-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 3
   },
   {
     "id": "s42-oce-console-zb-solo-vc-final-20260829-heart-bouquet",
@@ -4164,7 +4480,8 @@
     "tournamentId": "ch7s4-console-zero-build-solo-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 3
   },
   {
     "id": "s42-oce-console-zb-solo-vc-final-20260829-monbu",
@@ -4187,7 +4504,8 @@
     "tournamentId": "ch7s4-console-zero-build-solo-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 3
   },
   {
     "id": "s42-me-fncs-practice-qual-20260826-bof-sphinx",
@@ -4303,7 +4621,8 @@
     "tournamentId": "ch7s4-reload-duos-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-duos-final-20260825-demon-hakkun",
@@ -4340,7 +4659,8 @@
     "tournamentId": "ch7s4-reload-duos-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 2
   },
   {
     "id": "s42-naw-reload-duos-final-20260825-toax-chiwawa",
@@ -4377,7 +4697,8 @@
     "tournamentId": "ch7s4-reload-duos-victory-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 3
   },
   {
     "id": "s41-naw-reload-solo-final-20260816-hazy",
@@ -4751,7 +5072,8 @@
     "seasonId": "S41",
     "chapter": 7,
     "season": 3,
-    "tournamentId": "ch7s3-champion-aphrodite-fncs-cup-battle-royale"
+    "tournamentId": "ch7s3-champion-aphrodite-fncs-cup-battle-royale",
+    "matches": 9
   },
   {
     "id": "s41-me-aphrodite-fncs-cup-skin-20260801-chikoheni-gitsuko",
@@ -4783,7 +5105,8 @@
     "seasonId": "S41",
     "chapter": 7,
     "season": 3,
-    "tournamentId": "ch7s3-champion-aphrodite-fncs-cup-battle-royale"
+    "tournamentId": "ch7s3-champion-aphrodite-fncs-cup-battle-royale",
+    "matches": 10
   },
   {
     "id": "s41-me-aphrodite-fncs-cup-skin-20260801-celis-erunano",
@@ -4819,7 +5142,8 @@
     "seasonId": "S41",
     "chapter": 7,
     "season": 3,
-    "tournamentId": "ch7s3-champion-aphrodite-fncs-cup-battle-royale"
+    "tournamentId": "ch7s3-champion-aphrodite-fncs-cup-battle-royale",
+    "matches": 11
   },
   {
     "id": "s41-eu-aphrodite-fncs-cup-skin-20260801-demus-hitsuji",
@@ -4855,7 +5179,8 @@
     "seasonId": "S41",
     "chapter": 7,
     "season": 3,
-    "tournamentId": "ch7s3-champion-aphrodite-fncs-cup-battle-royale"
+    "tournamentId": "ch7s3-champion-aphrodite-fncs-cup-battle-royale",
+    "matches": 10
   },
   {
     "id": "s41-naw-aphrodite-fncs-cup-skin-20260801-falcon-o2wing",
@@ -4891,7 +5216,8 @@
     "seasonId": "S41",
     "chapter": 7,
     "season": 3,
-    "tournamentId": "ch7s3-champion-aphrodite-fncs-cup-battle-royale"
+    "tournamentId": "ch7s3-champion-aphrodite-fncs-cup-battle-royale",
+    "matches": 8
   },
   {
     "id": "s41-naw-aphrodite-fncs-cup-skin-20260801-popo-riichi",
@@ -4927,7 +5253,8 @@
     "seasonId": "S41",
     "chapter": 7,
     "season": 3,
-    "tournamentId": "ch7s3-champion-aphrodite-fncs-cup-battle-royale"
+    "tournamentId": "ch7s3-champion-aphrodite-fncs-cup-battle-royale",
+    "matches": 9
   },
   {
     "id": "s41-naw-aphrodite-fncs-cup-skin-20260801-rakirye-pino",
@@ -4963,7 +5290,8 @@
     "seasonId": "S41",
     "chapter": 7,
     "season": 3,
-    "tournamentId": "ch7s3-champion-aphrodite-fncs-cup-battle-royale"
+    "tournamentId": "ch7s3-champion-aphrodite-fncs-cup-battle-royale",
+    "matches": 10
   },
   {
     "id": "s41-naw-aphrodite-fncs-cup-skin-20260801-aresmea-sarukun",
@@ -4999,7 +5327,8 @@
     "seasonId": "S41",
     "chapter": 7,
     "season": 3,
-    "tournamentId": "ch7s3-champion-aphrodite-fncs-cup-battle-royale"
+    "tournamentId": "ch7s3-champion-aphrodite-fncs-cup-battle-royale",
+    "matches": 11
   },
   {
     "id": "s41-naw-aphrodite-fncs-cup-skin-20260801-gottokota-kopis",
@@ -5035,7 +5364,8 @@
     "seasonId": "S41",
     "chapter": 7,
     "season": 3,
-    "tournamentId": "ch7s3-champion-aphrodite-fncs-cup-battle-royale"
+    "tournamentId": "ch7s3-champion-aphrodite-fncs-cup-battle-royale",
+    "matches": 10
   },
   {
     "id": "s41-naw-aphrodite-fncs-cup-skin-20260801-razfnw-meath",
@@ -5071,7 +5401,8 @@
     "seasonId": "S41",
     "chapter": 7,
     "season": 3,
-    "tournamentId": "ch7s3-champion-aphrodite-fncs-cup-battle-royale"
+    "tournamentId": "ch7s3-champion-aphrodite-fncs-cup-battle-royale",
+    "matches": 11
   },
   {
     "id": "s41-naw-aphrodite-fncs-cup-skin-20260801-spacevergo-hinashi",
@@ -5107,7 +5438,8 @@
     "seasonId": "S41",
     "chapter": 7,
     "season": 3,
-    "tournamentId": "ch7s3-champion-aphrodite-fncs-cup-battle-royale"
+    "tournamentId": "ch7s3-champion-aphrodite-fncs-cup-battle-royale",
+    "matches": 9
   },
   {
     "id": "s41-naw-aphrodite-fncs-cup-skin-20260801-rara-chacha",
@@ -5143,7 +5475,8 @@
     "seasonId": "S41",
     "chapter": 7,
     "season": 3,
-    "tournamentId": "ch7s3-champion-aphrodite-fncs-cup-battle-royale"
+    "tournamentId": "ch7s3-champion-aphrodite-fncs-cup-battle-royale",
+    "matches": 11
   },
   {
     "id": "s41-naw-aphrodite-fncs-cup-skin-20260801-yhyh-hashida",
@@ -5179,7 +5512,8 @@
     "seasonId": "S41",
     "chapter": 7,
     "season": 3,
-    "tournamentId": "ch7s3-champion-aphrodite-fncs-cup-battle-royale"
+    "tournamentId": "ch7s3-champion-aphrodite-fncs-cup-battle-royale",
+    "matches": 9
   },
   {
     "id": "s41-naw-aphrodite-fncs-cup-skin-20260801-zealfnz-riani",
@@ -5215,7 +5549,8 @@
     "seasonId": "S41",
     "chapter": 7,
     "season": 3,
-    "tournamentId": "ch7s3-champion-aphrodite-fncs-cup-battle-royale"
+    "tournamentId": "ch7s3-champion-aphrodite-fncs-cup-battle-royale",
+    "matches": 9
   },
   {
     "id": "s41-naw-aphrodite-fncs-cup-skin-20260801-misshinyache-pikachu",
@@ -5251,7 +5586,8 @@
     "seasonId": "S41",
     "chapter": 7,
     "season": 3,
-    "tournamentId": "ch7s3-champion-aphrodite-fncs-cup-battle-royale"
+    "tournamentId": "ch7s3-champion-aphrodite-fncs-cup-battle-royale",
+    "matches": 10
   },
   {
     "id": "s41-naw-aphrodite-fncs-cup-skin-20260801-kogane-raru",
@@ -5287,7 +5623,8 @@
     "seasonId": "S41",
     "chapter": 7,
     "season": 3,
-    "tournamentId": "ch7s3-champion-aphrodite-fncs-cup-battle-royale"
+    "tournamentId": "ch7s3-champion-aphrodite-fncs-cup-battle-royale",
+    "matches": 7
   },
   {
     "id": "s41-naw-aphrodite-fncs-cup-skin-20260801-nezah-airisu",
@@ -5323,7 +5660,8 @@
     "seasonId": "S41",
     "chapter": 7,
     "season": 3,
-    "tournamentId": "ch7s3-champion-aphrodite-fncs-cup-battle-royale"
+    "tournamentId": "ch7s3-champion-aphrodite-fncs-cup-battle-royale",
+    "matches": 10
   },
   {
     "id": "s42-oce-reload-zb-duos-final-20261023-uptemp-vuradd0",
@@ -5359,7 +5697,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-reload-zero-build-duos-cash-cup"
+    "tournamentId": "ch7s4-reload-zero-build-duos-cash-cup",
+    "matches": 5
   },
   {
     "id": "s42-oce-reload-zb-duos-final-20261023-reo-romii",
@@ -5395,7 +5734,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-reload-zero-build-duos-cash-cup"
+    "tournamentId": "ch7s4-reload-zero-build-duos-cash-cup",
+    "matches": 4
   },
   {
     "id": "s42-oce-reload-solo-qual-20261023-kohakokko",
@@ -5418,7 +5758,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 7
   },
   {
     "id": "s42-oce-reload-solo-qual-20261023-mrs-omorimotoki",
@@ -5441,7 +5782,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 7
   },
   {
     "id": "s42-oce-reload-solo-qual-20261023-jaemon",
@@ -5464,7 +5806,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 8
   },
   {
     "id": "s42-oce-reload-solo-qual-20261023-zeromu-otouto",
@@ -5487,7 +5830,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 8
   },
   {
     "id": "s42-oce-reload-solo-qual-20261023-hiro",
@@ -5510,7 +5854,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 8
   },
   {
     "id": "s42-oce-teal-knight-fncs-cup-skin-20261018-chun",
@@ -5533,7 +5878,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-champion-teal-knight-fncs-cup-battle-royale"
+    "tournamentId": "ch7s4-champion-teal-knight-fncs-cup-battle-royale",
+    "matches": 8
   },
   {
     "id": "s42-oce-teal-knight-fncs-cup-skin-20261018-hiro",
@@ -5556,7 +5902,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-champion-teal-knight-fncs-cup-battle-royale"
+    "tournamentId": "ch7s4-champion-teal-knight-fncs-cup-battle-royale",
+    "matches": 10
   },
   {
     "id": "s42-oce-teal-knight-fncs-cup-skin-20261018-harupin",
@@ -5579,7 +5926,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-champion-teal-knight-fncs-cup-battle-royale"
+    "tournamentId": "ch7s4-champion-teal-knight-fncs-cup-battle-royale",
+    "matches": 9
   },
   {
     "id": "s42-oce-reload-solo-final-20261023-kohakokko",
@@ -5602,7 +5950,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-oce-reload-solo-final-20261023-jaemon",
@@ -5625,7 +5974,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 2
   },
   {
     "id": "s42-oce-reload-solo-final-20261023-zeromu-otouto",
@@ -5648,7 +5998,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-oce-reload-solo-final-20261023-hiro",
@@ -5671,7 +6022,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 1
   },
   {
     "id": "s42-me-teal-knight-fncs-cup-skin-20261019-budouame",
@@ -5694,7 +6046,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-champion-teal-knight-fncs-cup-battle-royale"
+    "tournamentId": "ch7s4-champion-teal-knight-fncs-cup-battle-royale",
+    "matches": 8
   },
   {
     "id": "s42-me-teal-knight-fncs-cup-skin-20261019-bof-popo",
@@ -5717,7 +6070,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-champion-teal-knight-fncs-cup-battle-royale"
+    "tournamentId": "ch7s4-champion-teal-knight-fncs-cup-battle-royale",
+    "matches": 10
   },
   {
     "id": "s42-me-teal-knight-fncs-cup-skin-20261019-rikram",
@@ -5740,7 +6094,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-champion-teal-knight-fncs-cup-battle-royale"
+    "tournamentId": "ch7s4-champion-teal-knight-fncs-cup-battle-royale",
+    "matches": 8
   },
   {
     "id": "s42-me-teal-knight-fncs-cup-skin-20261019-murukogi",
@@ -5763,7 +6118,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-champion-teal-knight-fncs-cup-battle-royale"
+    "tournamentId": "ch7s4-champion-teal-knight-fncs-cup-battle-royale",
+    "matches": 8
   },
   {
     "id": "s42-me-teal-knight-fncs-cup-skin-20261019-raichin",
@@ -5786,7 +6142,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-champion-teal-knight-fncs-cup-battle-royale"
+    "tournamentId": "ch7s4-champion-teal-knight-fncs-cup-battle-royale",
+    "matches": 8
   },
   {
     "id": "s42-nac-teal-knight-fncs-cup-skin-20261019-sousukimu",
@@ -5809,7 +6166,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-champion-teal-knight-fncs-cup-battle-royale"
+    "tournamentId": "ch7s4-champion-teal-knight-fncs-cup-battle-royale",
+    "matches": 11
   },
   {
     "id": "s42-nac-teal-knight-fncs-cup-skin-20261019-rurumaru-723",
@@ -5832,7 +6190,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-champion-teal-knight-fncs-cup-battle-royale"
+    "tournamentId": "ch7s4-champion-teal-knight-fncs-cup-battle-royale",
+    "matches": 11
   },
   {
     "id": "s42-nac-teal-knight-fncs-cup-skin-20261019-falcon-manzu",
@@ -5855,7 +6214,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-champion-teal-knight-fncs-cup-battle-royale"
+    "tournamentId": "ch7s4-champion-teal-knight-fncs-cup-battle-royale",
+    "matches": 10
   },
   {
     "id": "s42-naw-teal-knight-fncs-cup-skin-20261019-zagou",
@@ -5878,7 +6238,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-champion-teal-knight-fncs-cup-battle-royale"
+    "tournamentId": "ch7s4-champion-teal-knight-fncs-cup-battle-royale",
+    "matches": 8
   },
   {
     "id": "s42-naw-teal-knight-fncs-cup-skin-20261019-rakirye",
@@ -5901,7 +6262,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-champion-teal-knight-fncs-cup-battle-royale"
+    "tournamentId": "ch7s4-champion-teal-knight-fncs-cup-battle-royale",
+    "matches": 10
   },
   {
     "id": "s42-naw-teal-knight-fncs-cup-skin-20261019-rqzrim3",
@@ -5924,7 +6286,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-champion-teal-knight-fncs-cup-battle-royale"
+    "tournamentId": "ch7s4-champion-teal-knight-fncs-cup-battle-royale",
+    "matches": 10
   },
   {
     "id": "s42-naw-teal-knight-fncs-cup-skin-20261019-shiroka",
@@ -5947,7 +6310,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-champion-teal-knight-fncs-cup-battle-royale"
+    "tournamentId": "ch7s4-champion-teal-knight-fncs-cup-battle-royale",
+    "matches": 10
   },
   {
     "id": "s42-naw-teal-knight-fncs-cup-skin-20261019-jinkun",
@@ -5970,7 +6334,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-champion-teal-knight-fncs-cup-battle-royale"
+    "tournamentId": "ch7s4-champion-teal-knight-fncs-cup-battle-royale",
+    "matches": 8
   },
   {
     "id": "s42-naw-teal-knight-fncs-cup-skin-20261019-tabidachi-message",
@@ -5993,7 +6358,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-champion-teal-knight-fncs-cup-battle-royale"
+    "tournamentId": "ch7s4-champion-teal-knight-fncs-cup-battle-royale",
+    "matches": 10
   },
   {
     "id": "s42-naw-teal-knight-fncs-cup-skin-20261019-rise",
@@ -6016,7 +6382,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-champion-teal-knight-fncs-cup-battle-royale"
+    "tournamentId": "ch7s4-champion-teal-knight-fncs-cup-battle-royale",
+    "matches": 10
   },
   {
     "id": "s42-me-reload-solo-qual-20261024-bof-popo",
@@ -6039,7 +6406,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 8
   },
   {
     "id": "s42-me-reload-solo-qual-20261024-nexf-akishika",
@@ -6062,7 +6430,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 9
   },
   {
     "id": "s42-me-reload-solo-qual-20261024-ares-mea",
@@ -6085,7 +6454,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 8
   },
   {
     "id": "s42-me-reload-solo-qual-20261024-chikara-v2",
@@ -6108,7 +6478,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 9
   },
   {
     "id": "s42-me-reload-solo-qual-20261024-mofu",
@@ -6131,7 +6502,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 9
   },
   {
     "id": "s42-me-reload-solo-qual-20261024-buriburizaemon-usa",
@@ -6154,7 +6526,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 8
   },
   {
     "id": "s42-me-reload-solo-qual-20261024-shiroka",
@@ -6177,7 +6550,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 9
   },
   {
     "id": "s42-me-reload-solo-qual-20261024-dyd-not-zb",
@@ -6200,7 +6574,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 7
   },
   {
     "id": "s42-me-reload-solo-qual-20261024-tantan",
@@ -6223,7 +6598,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 8
   },
   {
     "id": "s42-me-reload-solo-qual-20261024-raichin",
@@ -6246,7 +6622,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 8
   },
   {
     "id": "s42-me-reload-solo-qual-20261024-starbucks-lovers",
@@ -6269,7 +6646,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 9
   },
   {
     "id": "s42-me-reload-solo-qual-20261024-sababeru",
@@ -6292,7 +6670,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 9
   },
   {
     "id": "s42-me-reload-solo-qual-20261024-zagou",
@@ -6315,7 +6694,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 9
   },
   {
     "id": "s42-me-reload-solo-qual-20261024-fpg-dartri",
@@ -6338,7 +6718,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 9
   },
   {
     "id": "s42-me-reload-solo-qual-20261024-big-malitryona",
@@ -6361,7 +6742,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 8
   },
   {
     "id": "s42-me-reload-solo-qual-20261024-asuka",
@@ -6384,7 +6766,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 7
   },
   {
     "id": "s42-me-reload-solo-qual-20261024-huggyfv",
@@ -6407,7 +6790,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 8
   },
   {
     "id": "s42-me-reload-solo-qual-20261024-mentai-udon",
@@ -6430,7 +6814,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 8
   },
   {
     "id": "s42-me-reload-solo-qual-20261024-herb-onmaga",
@@ -6453,7 +6838,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 7
   },
   {
     "id": "s42-me-reload-solo-qual-20261024-3peace",
@@ -6476,7 +6862,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 7
   },
   {
     "id": "s42-me-reload-solo-qual-20261024-32sai-tahine",
@@ -6499,7 +6886,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 7
   },
   {
     "id": "s42-me-reload-solo-qual-20261024-taikufv-mini",
@@ -6522,7 +6910,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 8
   },
   {
     "id": "s42-me-reload-solo-final-20261024-3peace",
@@ -6545,7 +6934,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-me-reload-solo-final-20261024-shiroka",
@@ -6568,7 +6958,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 2
   },
   {
     "id": "s42-me-reload-solo-final-20261024-tantan",
@@ -6591,7 +6982,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-me-reload-solo-final-20261024-32sai-tahine",
@@ -6614,7 +7006,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 2
   },
   {
     "id": "s42-me-reload-solo-final-20261024-zagou",
@@ -6637,7 +7030,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-me-reload-solo-final-20261024-buriburizaemon-usa",
@@ -6660,7 +7054,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-me-reload-solo-final-20261024-huggyfv",
@@ -6683,7 +7078,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-me-reload-solo-final-20261024-mofu",
@@ -6706,7 +7102,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-me-reload-solo-final-20261024-taikufv-mini",
@@ -6729,7 +7126,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-me-reload-solo-final-20261024-mentai-udon",
@@ -6752,7 +7150,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-me-reload-solo-final-20261024-chikara-v2",
@@ -6775,7 +7174,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-me-reload-solo-final-20261024-nexf-akishika",
@@ -6798,7 +7198,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-me-reload-solo-final-20261024-ares-mea",
@@ -6821,7 +7222,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-me-reload-solo-final-20261024-big-malitryona",
@@ -6844,7 +7246,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-me-reload-solo-final-20261024-raichin",
@@ -6867,7 +7270,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-me-reload-solo-final-20261024-dyd-not-zb",
@@ -6890,7 +7294,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-me-reload-solo-final-20261024-sababeru",
@@ -6913,7 +7318,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-me-reload-solo-final-20261024-bof-popo",
@@ -6936,7 +7342,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-me-reload-solo-final-20261024-herb-onmaga",
@@ -6959,7 +7366,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-me-reload-solo-final-20261024-asuka",
@@ -6982,7 +7390,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-me-reload-solo-final-20261024-fpg-dartri",
@@ -7005,7 +7414,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-me-reload-solo-final-20261024-starbucks-lovers",
@@ -7028,7 +7438,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-eu-reload-solo-qual-20261024-reo",
@@ -7051,7 +7462,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 9
   },
   {
     "id": "s42-eu-reload-solo-final-20261024-reo",
@@ -7074,7 +7486,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-nac-reload-solo-qual-20261024-rintaro",
@@ -7097,7 +7510,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 7
   },
   {
     "id": "s42-nac-reload-solo-qual-20261024-akuria",
@@ -7120,7 +7534,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 7
   },
   {
     "id": "s42-nac-reload-solo-qual-20261024-herb-shxrky",
@@ -7143,7 +7558,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 8
   },
   {
     "id": "s42-nac-reload-solo-qual-20261024-32sai-tahine",
@@ -7166,7 +7582,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 8
   },
   {
     "id": "s42-nac-reload-solo-qual-20261024-maroyaka-reochaaito",
@@ -7189,7 +7606,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 8
   },
   {
     "id": "s42-nac-reload-solo-qual-20261024-anastasya3",
@@ -7212,7 +7630,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 10
   },
   {
     "id": "s42-nac-reload-solo-qual-20261024-gunshin-minato-ikki",
@@ -7235,7 +7654,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 9
   },
   {
     "id": "s42-nac-reload-solo-final-20261024-maroyaka-reochaaito",
@@ -7258,7 +7678,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-nac-reload-solo-final-20261024-anastasya3",
@@ -7281,7 +7702,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 2
   },
   {
     "id": "s42-nac-reload-solo-final-20261024-32sai-tahine",
@@ -7304,7 +7726,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 2
   },
   {
     "id": "s42-nac-reload-solo-final-20261024-gunshin-minato-ikki",
@@ -7327,7 +7750,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-nac-reload-solo-final-20261024-rintaro",
@@ -7350,7 +7774,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-nac-reload-solo-final-20261024-herb-shxrky",
@@ -7373,7 +7798,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-nac-reload-solo-final-20261024-akuria",
@@ -7396,7 +7822,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-qual-20261024-rakirye",
@@ -7419,7 +7846,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 7
   },
   {
     "id": "s42-naw-reload-solo-qual-20261024-vlz-taimen",
@@ -7442,7 +7870,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 9
   },
   {
     "id": "s42-naw-reload-solo-qual-20261024-purinano",
@@ -7465,7 +7894,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 9
   },
   {
     "id": "s42-naw-reload-solo-qual-20261024-over-shota",
@@ -7488,7 +7918,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 7
   },
   {
     "id": "s42-naw-reload-solo-qual-20261024-harihari",
@@ -7511,7 +7942,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 8
   },
   {
     "id": "s42-naw-reload-solo-qual-20261024-p1ng",
@@ -7534,7 +7966,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 10
   },
   {
     "id": "s42-naw-reload-solo-qual-20261024-kuiya",
@@ -7557,7 +7990,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 7
   },
   {
     "id": "s42-naw-reload-solo-qual-20261024-raichin",
@@ -7580,7 +8014,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 8
   },
   {
     "id": "s42-naw-reload-solo-qual-20261024-ascend-kana",
@@ -7603,7 +8038,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 7
   },
   {
     "id": "s42-naw-reload-solo-qual-20261024-meiru",
@@ -7626,7 +8062,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 6
   },
   {
     "id": "s42-naw-reload-solo-qual-20261024-babucchi",
@@ -7649,7 +8086,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 7
   },
   {
     "id": "s42-naw-reload-solo-qual-20261024-sosukimu",
@@ -7672,7 +8110,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 9
   },
   {
     "id": "s42-naw-reload-solo-qual-20261024-makaron",
@@ -7695,7 +8134,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 6
   },
   {
     "id": "s42-naw-reload-solo-qual-20261024-tantan",
@@ -7718,7 +8158,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 7
   },
   {
     "id": "s42-naw-reload-solo-qual-20261024-takeemon",
@@ -7741,7 +8182,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 9
   },
   {
     "id": "s42-naw-reload-solo-qual-20261024-merunyaken",
@@ -7764,7 +8206,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 7
   },
   {
     "id": "s42-naw-reload-solo-qual-20261024-matchayaken",
@@ -7787,7 +8230,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 7
   },
   {
     "id": "s42-naw-reload-solo-qual-20261024-aimurama",
@@ -7810,7 +8254,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 7
   },
   {
     "id": "s42-naw-reload-solo-qual-20261024-taiga",
@@ -7833,7 +8278,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 10
   },
   {
     "id": "s42-naw-reload-solo-qual-20261024-jack",
@@ -7856,7 +8302,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 7
   },
   {
     "id": "s42-naw-reload-solo-qual-20261024-lucy",
@@ -7879,7 +8326,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 7
   },
   {
     "id": "s42-naw-reload-solo-qual-20261024-kotatsu-mikan",
@@ -7902,7 +8350,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 8
   },
   {
     "id": "s42-naw-reload-solo-qual-20261024-aura-goto",
@@ -7925,7 +8374,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 9
   },
   {
     "id": "s42-naw-reload-solo-qual-20261024-big-malitryona",
@@ -7948,7 +8398,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 8
   },
   {
     "id": "s42-naw-reload-solo-qual-20261024-3peace",
@@ -7971,7 +8422,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 8
   },
   {
     "id": "s42-naw-reload-solo-qual-20261024-fuwa",
@@ -7994,7 +8446,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 8
   },
   {
     "id": "s42-naw-reload-solo-qual-20261024-zagou",
@@ -8017,7 +8470,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 9
   },
   {
     "id": "s42-naw-reload-solo-qual-20261024-teddy",
@@ -8040,7 +8494,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 10
   },
   {
     "id": "s42-naw-reload-solo-qual-20261024-hazy",
@@ -8063,7 +8518,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 9
   },
   {
     "id": "s42-naw-reload-solo-qual-20261024-shiroka",
@@ -8086,7 +8542,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 9
   },
   {
     "id": "s42-naw-reload-solo-qual-20261024-dark",
@@ -8109,7 +8566,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 8
   },
   {
     "id": "s42-naw-reload-solo-qual-20261024-rari",
@@ -8132,7 +8590,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 9
   },
   {
     "id": "s42-naw-reload-solo-qual-20261024-makomo514",
@@ -8155,7 +8614,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 8
   },
   {
     "id": "s42-naw-reload-solo-qual-20261024-chikara-v2",
@@ -8178,7 +8638,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 8
   },
   {
     "id": "s42-naw-reload-solo-qual-20261024-kusachan",
@@ -8201,7 +8662,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 8
   },
   {
     "id": "s42-naw-reload-solo-qual-20261024-favsie",
@@ -8224,7 +8686,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 9
   },
   {
     "id": "s42-naw-reload-solo-qual-20261024-silent",
@@ -8247,7 +8710,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 8
   },
   {
     "id": "s42-naw-reload-solo-final-20261024-shiroka",
@@ -8270,7 +8734,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 2
   },
   {
     "id": "s42-naw-reload-solo-final-20261024-favsie",
@@ -8293,7 +8758,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261024-kotatsu-mikan",
@@ -8316,7 +8782,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261024-purinano",
@@ -8339,7 +8806,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261024-over-shota",
@@ -8362,7 +8830,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261024-hazy",
@@ -8385,7 +8854,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261024-babucchi",
@@ -8408,7 +8878,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261024-taiga",
@@ -8431,7 +8902,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261024-makaron",
@@ -8454,7 +8926,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261024-fuwa",
@@ -8477,7 +8950,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261024-rari",
@@ -8500,7 +8974,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261024-chikara-v2",
@@ -8523,7 +8998,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261024-tantan",
@@ -8546,7 +9022,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 1
   },
   {
     "id": "s42-naw-reload-solo-final-20261024-raichin",
@@ -8569,7 +9046,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261024-sosukimu",
@@ -8592,7 +9070,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261024-3peace",
@@ -8615,7 +9094,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 2
   },
   {
     "id": "s42-naw-reload-solo-final-20261024-vlz-taimen",
@@ -8638,7 +9118,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261024-aura-goto",
@@ -8661,7 +9142,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261024-jack",
@@ -8684,7 +9166,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261024-big-malitryona",
@@ -8707,7 +9190,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261024-meiru",
@@ -8730,7 +9214,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261024-makomo514",
@@ -8753,7 +9238,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261024-p1ng",
@@ -8776,7 +9262,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261024-teddy",
@@ -8799,7 +9286,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261024-kusachan",
@@ -8822,7 +9310,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261024-rakirye",
@@ -8845,7 +9334,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261024-zagou",
@@ -8868,7 +9358,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261024-merunyaken",
@@ -8891,7 +9382,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261024-lucy",
@@ -8914,7 +9406,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261024-dark",
@@ -8937,7 +9430,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261024-kuiya",
@@ -8960,7 +9454,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261024-takeemon",
@@ -8983,7 +9478,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261024-aimurama",
@@ -9006,7 +9502,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261024-matchayaken",
@@ -9029,7 +9526,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261024-harihari",
@@ -9052,7 +9550,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-me-hamikuma-br-trios-skin-20261025-ema-shxrkgoty-akishika",
@@ -9093,7 +9592,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-hamikuma-cup-battle-royale"
+    "tournamentId": "ch7s4-hamikuma-cup-battle-royale",
+    "matches": 9
   },
   {
     "id": "s42-naw-hamikuma-br-trios-skin-20261025-kusachan-rurumaru-nijiirobeta",
@@ -9134,7 +9634,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-hamikuma-cup-battle-royale"
+    "tournamentId": "ch7s4-hamikuma-cup-battle-royale",
+    "matches": 10
   },
   {
     "id": "s42-naw-hamikuma-br-trios-skin-20261025-hiro-fisker-kereyushi",
@@ -9175,7 +9676,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-hamikuma-cup-battle-royale"
+    "tournamentId": "ch7s4-hamikuma-cup-battle-royale",
+    "matches": 11
   },
   {
     "id": "s42-naw-hamikuma-br-trios-skin-20261025-minto-alpha-miteru",
@@ -9216,7 +9718,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-hamikuma-cup-battle-royale"
+    "tournamentId": "ch7s4-hamikuma-cup-battle-royale",
+    "matches": 8
   },
   {
     "id": "s42-oce-reload-zb-duos-qual-20261004-akuria-huggyfv",
@@ -9252,7 +9755,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-reload-zero-build-duos-cash-cup"
+    "tournamentId": "ch7s4-reload-zero-build-duos-cash-cup",
+    "matches": 12
   },
   {
     "id": "s42-oce-reload-zb-duos-qual-20261004-romii-hagane",
@@ -9288,7 +9792,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-reload-zero-build-duos-cash-cup"
+    "tournamentId": "ch7s4-reload-zero-build-duos-cash-cup",
+    "matches": 11
   },
   {
     "id": "s42-oce-reload-zb-duos-final-20261009-romii-hagane",
@@ -9324,7 +9829,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-reload-zero-build-duos-cash-cup"
+    "tournamentId": "ch7s4-reload-zero-build-duos-cash-cup",
+    "matches": 6
   },
   {
     "id": "s42-oce-reload-zb-duos-final-20261009-akuria-huggyfv",
@@ -9360,7 +9866,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-reload-zero-build-duos-cash-cup"
+    "tournamentId": "ch7s4-reload-zero-build-duos-cash-cup",
+    "matches": 2
   },
   {
     "id": "s42-me-reload-zb-duos-qual-20261005-raito-asuka",
@@ -9396,7 +9903,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-reload-zero-build-duos-cash-cup"
+    "tournamentId": "ch7s4-reload-zero-build-duos-cash-cup",
+    "matches": 11
   },
   {
     "id": "s42-me-reload-zb-duos-final-20261010-raito-asuka",
@@ -9432,7 +9940,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-reload-zero-build-duos-cash-cup"
+    "tournamentId": "ch7s4-reload-zero-build-duos-cash-cup",
+    "matches": 4
   },
   {
     "id": "s42-eu-reload-zb-duos-qual-20260906-nazuna-tantan",
@@ -9468,7 +9977,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-reload-zero-build-duos-cash-cup"
+    "tournamentId": "ch7s4-reload-zero-build-duos-cash-cup",
+    "matches": 12
   },
   {
     "id": "s42-eu-reload-zb-duos-final-20260912-nazuna-tantan",
@@ -9504,7 +10014,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-reload-zero-build-duos-cash-cup"
+    "tournamentId": "ch7s4-reload-zero-build-duos-cash-cup",
+    "matches": 6
   },
   {
     "id": "s42-oce-inoxtag-icon-br-duos-skin-20261025-trippy-kurochigu",
@@ -9540,7 +10051,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-inoxtag-icon-cup-battle-royale"
+    "tournamentId": "ch7s4-inoxtag-icon-cup-battle-royale",
+    "matches": 9
   },
   {
     "id": "s42-oce-inoxtag-icon-br-duos-skin-20261025-sephiroth-airu",
@@ -9576,7 +10088,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-inoxtag-icon-cup-battle-royale"
+    "tournamentId": "ch7s4-inoxtag-icon-cup-battle-royale",
+    "matches": 10
   },
   {
     "id": "s42-me-inoxtag-icon-br-duos-skin-20261026-koiru-rakirye",
@@ -9612,7 +10125,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-inoxtag-icon-cup-battle-royale"
+    "tournamentId": "ch7s4-inoxtag-icon-cup-battle-royale",
+    "matches": 11
   },
   {
     "id": "s42-nac-inoxtag-icon-br-duos-skin-20261026-kuiya-rintaro",
@@ -9648,7 +10162,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-inoxtag-icon-cup-battle-royale"
+    "tournamentId": "ch7s4-inoxtag-icon-cup-battle-royale",
+    "matches": 9
   },
   {
     "id": "s42-naw-inoxtag-icon-br-duos-skin-20261026-nezah-airisu",
@@ -9856,7 +10371,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 8
   },
   {
     "id": "s42-me-reload-solo-qual-20261013-rakirye",
@@ -9879,7 +10395,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 9
   },
   {
     "id": "s42-me-reload-solo-qual-20261013-mikan",
@@ -9902,7 +10419,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 8
   },
   {
     "id": "s42-me-reload-solo-qual-20261013-jaemon",
@@ -9925,7 +10443,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 9
   },
   {
     "id": "s42-me-reload-solo-qual-20261013-r1ze",
@@ -9948,7 +10467,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 8
   },
   {
     "id": "s42-me-reload-solo-qual-20261013-rara",
@@ -9971,7 +10491,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 10
   },
   {
     "id": "s42-me-reload-solo-final-20261013-jaemon",
@@ -9994,7 +10515,13 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3,
+    "trackerStats": {
+      "verified": true,
+      "source": "https://fortnitetracker.com/events/epicgames_S42_ReloadReloadSoloVictoryCup_ME?window=S42_ReloadSoloVictoryCup_Event3_Round2_ME",
+      "avgPlace": 10.67
+    }
   },
   {
     "id": "s42-me-reload-solo-final-20261013-r1ze",
@@ -10017,7 +10544,13 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3,
+    "trackerStats": {
+      "verified": true,
+      "source": "https://fortnitetracker.com/events/epicgames_S42_ReloadReloadSoloVictoryCup_ME?window=S42_ReloadSoloVictoryCup_Event3_Round2_ME",
+      "avgPlace": 14
+    }
   },
   {
     "id": "s42-me-reload-solo-final-20261013-piyopiyo",
@@ -10040,7 +10573,13 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3,
+    "trackerStats": {
+      "verified": true,
+      "source": "https://fortnitetracker.com/events/epicgames_S42_ReloadReloadSoloVictoryCup_ME?window=S42_ReloadSoloVictoryCup_Event3_Round2_ME",
+      "avgPlace": 13.33
+    }
   },
   {
     "id": "s42-me-reload-solo-final-20261013-rakirye",
@@ -10063,7 +10602,13 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3,
+    "trackerStats": {
+      "verified": true,
+      "source": "https://fortnitetracker.com/events/epicgames_S42_ReloadReloadSoloVictoryCup_ME?window=S42_ReloadSoloVictoryCup_Event3_Round2_ME",
+      "avgPlace": 20.33
+    }
   },
   {
     "id": "s42-me-reload-solo-final-20261013-mikan",
@@ -10086,7 +10631,13 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3,
+    "trackerStats": {
+      "verified": true,
+      "source": "https://fortnitetracker.com/events/epicgames_S42_ReloadReloadSoloVictoryCup_ME?window=S42_ReloadSoloVictoryCup_Event3_Round2_ME",
+      "avgPlace": 19.67
+    }
   },
   {
     "id": "s42-me-reload-solo-qual-20261003-matcha",
@@ -10109,7 +10660,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 8
   },
   {
     "id": "s42-me-reload-solo-qual-20261003-nazuna",
@@ -10132,7 +10684,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 10
   },
   {
     "id": "s42-me-reload-solo-qual-20261003-saku",
@@ -10155,7 +10708,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 7
   },
   {
     "id": "s42-me-reload-solo-qual-20261003-karf",
@@ -10178,7 +10732,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 10
   },
   {
     "id": "s42-me-reload-solo-qual-20261003-maa",
@@ -10201,7 +10756,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 9
   },
   {
     "id": "s42-me-reload-solo-qual-20261003-akuria",
@@ -10224,7 +10780,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 9
   },
   {
     "id": "s42-me-reload-solo-qual-20261003-kametin",
@@ -10247,7 +10804,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 8
   },
   {
     "id": "s42-me-reload-solo-qual-20261003-demonkurage",
@@ -10270,7 +10828,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 9
   },
   {
     "id": "s42-me-reload-solo-qual-20261003-lily",
@@ -10293,7 +10852,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 6
   },
   {
     "id": "s42-me-reload-solo-qual-20261003-alpacabest",
@@ -10316,7 +10876,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 8
   },
   {
     "id": "s42-me-reload-solo-qual-20261003-pisco",
@@ -10339,7 +10900,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 9
   },
   {
     "id": "s42-me-reload-solo-qual-20261003-yuyuudai",
@@ -10362,7 +10924,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 7
   },
   {
     "id": "s42-me-reload-solo-qual-20261003-hiro",
@@ -10385,7 +10948,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 9
   },
   {
     "id": "s42-me-reload-solo-qual-20261003-todoroki",
@@ -10408,7 +10972,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 9
   },
   {
     "id": "s42-me-reload-solo-qual-20261003-mikan",
@@ -10431,7 +10996,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 9
   },
   {
     "id": "s42-me-reload-solo-final-20261003-karf",
@@ -10454,7 +11020,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-me-reload-solo-final-20261003-maa",
@@ -10477,7 +11044,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-me-reload-solo-final-20261003-alpacabest",
@@ -10500,7 +11068,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-me-reload-solo-final-20261003-lily",
@@ -10523,7 +11092,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-me-reload-solo-final-20261003-hiro",
@@ -10546,7 +11116,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-me-reload-solo-final-20261003-pisco",
@@ -10569,7 +11140,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-me-reload-solo-final-20261003-matcha",
@@ -10592,7 +11164,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-me-reload-solo-final-20261003-nazuna",
@@ -10615,7 +11188,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-me-reload-solo-final-20261003-kametin",
@@ -10638,7 +11212,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-me-reload-solo-final-20261003-saku",
@@ -10661,7 +11236,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 1
   },
   {
     "id": "s42-me-reload-solo-final-20261003-todoroki",
@@ -10684,7 +11260,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-me-reload-solo-final-20261003-yuyuudai",
@@ -10707,7 +11284,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-eu-reload-solo-qual-20261003-anastasya3",
@@ -10730,7 +11308,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 7
   },
   {
     "id": "s42-eu-reload-solo-final-20261003-anastasya3",
@@ -10753,7 +11332,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-nac-reload-solo-qual-20261013-favsie",
@@ -10776,7 +11356,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 8
   },
   {
     "id": "s42-nac-reload-solo-final-20261013-favsie",
@@ -10799,7 +11380,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261017-ff18843d",
@@ -10822,7 +11404,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 2
   },
   {
     "id": "s42-naw-reload-solo-final-20261017-0784022a",
@@ -10845,7 +11428,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261017-4f7ce671",
@@ -10868,7 +11452,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261017-2512ed08",
@@ -10891,7 +11476,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261017-801068c3",
@@ -10914,7 +11500,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261017-89f7cf5d",
@@ -10937,7 +11524,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 2
   },
   {
     "id": "s42-naw-reload-solo-final-20261017-f6e2e7f7",
@@ -10960,7 +11548,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261017-469d92dc",
@@ -10983,7 +11572,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261017-37311716",
@@ -11006,7 +11596,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261017-b477a8cd",
@@ -11029,7 +11620,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261017-939c9009",
@@ -11052,7 +11644,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261017-f62031de",
@@ -11075,7 +11668,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261017-63826005",
@@ -11098,7 +11692,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261017-1417a490",
@@ -11121,7 +11716,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261017-177f0551",
@@ -11144,7 +11740,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261017-a3682347",
@@ -11167,7 +11764,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261017-36ab9f53",
@@ -11190,7 +11788,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261017-9b838d28",
@@ -11213,7 +11812,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261017-501ed338",
@@ -11236,7 +11836,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261017-3ad4406c",
@@ -11259,7 +11860,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261017-3e523862",
@@ -11282,7 +11884,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261017-7a35957b",
@@ -11305,7 +11908,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261017-7f62bc5d",
@@ -11328,7 +11932,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261017-d27be63a",
@@ -11351,7 +11956,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261017-921a20b9",
@@ -11374,7 +11980,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261017-4705fb65",
@@ -11397,7 +12004,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261017-0d77cc7e",
@@ -11420,7 +12028,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 2
   },
   {
     "id": "s42-naw-reload-solo-final-20261017-619038af",
@@ -11443,7 +12052,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261017-d8884391",
@@ -11466,7 +12076,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-qual-20261013-zagou",
@@ -11489,7 +12100,8 @@
     "prize": null,
     "kind": "予選",
     "source": "https://fortnitetracker.com/events/epicgames_S42_ReloadReloadSoloVictoryCup_NAW?window=S42_ReloadSoloVictoryCup_Event3_Round1_NAW",
-    "note": "ユーザー提供の2026/10/13 NAW Solo Reload Victory Cup Event 3 Round 1予選Tracker画像で6位・408pt・7試合・2VR・48キルを確認。上位320位で決勝進出。キル数は平均キル×試合数から算出。賞金対象外。大会表示名「Zagou」。"
+    "note": "ユーザー提供の2026/10/13 NAW Solo Reload Victory Cup Event 3 Round 1予選Tracker画像で6位・408pt・7試合・2VR・48キルを確認。上位320位で決勝進出。キル数は平均キル×試合数から算出。賞金対象外。大会表示名「Zagou」。",
+    "matches": 7
   },
   {
     "id": "s42-naw-reload-solo-final-20261013-zagou",
@@ -11512,7 +12124,8 @@
     "prize": 0,
     "kind": "賞金決勝",
     "source": "https://fortnitetracker.com/events/epicgames_S42_ReloadReloadSoloVictoryCup_NAW?window=S42_ReloadSoloVictoryCup_Event3_Round2_NAW",
-    "note": "ユーザー提供の2026/10/13 NAW Solo Reload Victory Cup Event 3 Round 2決勝Tracker画像で56位・3試合・0VR・7キルを確認。VRなし・現金賞金なし（$0）。Trackerのpoints欄は0表示だが実際の獲得ポイントを示すとは限らない。大会表示名「Zagou」。"
+    "note": "ユーザー提供の2026/10/13 NAW Solo Reload Victory Cup Event 3 Round 2決勝Tracker画像で56位・3試合・0VR・7キルを確認。VRなし・現金賞金なし（$0）。Trackerのpoints欄は0表示だが実際の獲得ポイントを示すとは限らない。大会表示名「Zagou」。",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-qual-20261013-akuria",
@@ -11535,7 +12148,8 @@
     "prize": null,
     "kind": "予選",
     "source": "https://fortnitetracker.com/events/epicgames_S42_ReloadReloadSoloVictoryCup_NAW?window=S42_ReloadSoloVictoryCup_Event3_Round1_NAW",
-    "note": "ユーザー提供の2026/10/13 NAW Solo Reload Victory Cup Event 3 Round 1予選Tracker画像で20位・392pt・7試合・2VR・16キルを確認。上位320位で決勝進出。キル数は平均キル×試合数から算出。賞金対象外。大会表示名「あくりあ」。"
+    "note": "ユーザー提供の2026/10/13 NAW Solo Reload Victory Cup Event 3 Round 1予選Tracker画像で20位・392pt・7試合・2VR・16キルを確認。上位320位で決勝進出。キル数は平均キル×試合数から算出。賞金対象外。大会表示名「あくりあ」。",
+    "matches": 7
   },
   {
     "id": "s42-naw-reload-solo-final-20261013-akuria",
@@ -11558,7 +12172,8 @@
     "prize": 0,
     "kind": "賞金決勝",
     "source": "https://fortnitetracker.com/events/epicgames_S42_ReloadReloadSoloVictoryCup_NAW?window=S42_ReloadSoloVictoryCup_Event3_Round2_NAW",
-    "note": "ユーザー提供の2026/10/13 NAW Solo Reload Victory Cup Event 3 Round 2決勝Tracker画像で100位・2試合・0VR・2キルを確認。VRなし・現金賞金なし（$0）。Trackerのpoints欄は0表示だが実際の獲得ポイントを示すとは限らない。大会表示名「あくりあ」。"
+    "note": "ユーザー提供の2026/10/13 NAW Solo Reload Victory Cup Event 3 Round 2決勝Tracker画像で100位・2試合・0VR・2キルを確認。VRなし・現金賞金なし（$0）。Trackerのpoints欄は0表示だが実際の獲得ポイントを示すとは限らない。大会表示名「あくりあ」。",
+    "matches": 2
   },
   {
     "id": "s42-naw-reload-solo-qual-20261013-jaemon",
@@ -11581,7 +12196,8 @@
     "prize": null,
     "kind": "予選",
     "source": "https://fortnitetracker.com/events/epicgames_S42_ReloadReloadSoloVictoryCup_NAW?window=S42_ReloadSoloVictoryCup_Event3_Round1_NAW",
-    "note": "ユーザー提供の2026/10/13 NAW Solo Reload Victory Cup Event 3 Round 1予選Tracker画像で37位・382pt・8試合・1VR・30キルを確認。上位320位で決勝進出。キル数は平均キル×試合数から算出。賞金対象外。大会表示名「Jaemon」。"
+    "note": "ユーザー提供の2026/10/13 NAW Solo Reload Victory Cup Event 3 Round 1予選Tracker画像で37位・382pt・8試合・1VR・30キルを確認。上位320位で決勝進出。キル数は平均キル×試合数から算出。賞金対象外。大会表示名「Jaemon」。",
+    "matches": 8
   },
   {
     "id": "s42-naw-reload-solo-final-20261013-jaemon",
@@ -11604,7 +12220,8 @@
     "prize": 0,
     "kind": "賞金決勝",
     "source": "https://fortnitetracker.com/events/epicgames_S42_ReloadReloadSoloVictoryCup_NAW?window=S42_ReloadSoloVictoryCup_Event3_Round2_NAW",
-    "note": "ユーザー提供の2026/10/13 NAW Solo Reload Victory Cup Event 3 Round 2決勝Tracker画像で110位・3試合・0VR・3キルを確認。VRなし・現金賞金なし（$0）。Trackerのpoints欄は0表示だが実際の獲得ポイントを示すとは限らない。大会表示名「Jaemon」。"
+    "note": "ユーザー提供の2026/10/13 NAW Solo Reload Victory Cup Event 3 Round 2決勝Tracker画像で110位・3試合・0VR・3キルを確認。VRなし・現金賞金なし（$0）。Trackerのpoints欄は0表示だが実際の獲得ポイントを示すとは限らない。大会表示名「Jaemon」。",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-qual-20261013-p1ng",
@@ -11627,7 +12244,8 @@
     "prize": null,
     "kind": "予選",
     "source": "https://fortnitetracker.com/events/epicgames_S42_ReloadReloadSoloVictoryCup_NAW?window=S42_ReloadSoloVictoryCup_Event3_Round1_NAW",
-    "note": "ユーザー提供の2026/10/13 NAW Solo Reload Victory Cup Event 3 Round 1予選Tracker画像で40位・380pt・9試合・3VR・53キルを確認。上位320位で決勝進出。キル数は平均キル×試合数から算出。賞金対象外。大会表示名「p1ng」。"
+    "note": "ユーザー提供の2026/10/13 NAW Solo Reload Victory Cup Event 3 Round 1予選Tracker画像で40位・380pt・9試合・3VR・53キルを確認。上位320位で決勝進出。キル数は平均キル×試合数から算出。賞金対象外。大会表示名「p1ng」。",
+    "matches": 9
   },
   {
     "id": "s42-naw-reload-solo-qual-20261013-3peace",
@@ -11650,7 +12268,8 @@
     "prize": null,
     "kind": "予選",
     "source": "https://fortnitetracker.com/events/epicgames_S42_ReloadReloadSoloVictoryCup_NAW?window=S42_ReloadSoloVictoryCup_Event3_Round1_NAW",
-    "note": "ユーザー提供の2026/10/13 NAW Solo Reload Victory Cup Event 3 Round 1予選Tracker画像で45位・380pt・8試合・1VR・23キルを確認。上位320位で決勝進出。キル数は平均キル×試合数から算出。賞金対象外。大会表示名「3peace」。"
+    "note": "ユーザー提供の2026/10/13 NAW Solo Reload Victory Cup Event 3 Round 1予選Tracker画像で45位・380pt・8試合・1VR・23キルを確認。上位320位で決勝進出。キル数は平均キル×試合数から算出。賞金対象外。大会表示名「3peace」。",
+    "matches": 8
   },
   {
     "id": "s42-naw-reload-solo-qual-20261013-rianie",
@@ -11673,7 +12292,8 @@
     "prize": null,
     "kind": "予選",
     "source": "https://fortnitetracker.com/events/epicgames_S42_ReloadReloadSoloVictoryCup_NAW?window=S42_ReloadSoloVictoryCup_Event3_Round1_NAW",
-    "note": "ユーザー提供の2026/10/13 NAW Solo Reload Victory Cup Event 3 Round 1予選Tracker画像で46位・378pt・5試合・5VR・47キルを確認。上位320位で決勝進出。キル数は平均キル×試合数から算出。賞金対象外。大会表示名「グランドファイナルに行くために」。"
+    "note": "ユーザー提供の2026/10/13 NAW Solo Reload Victory Cup Event 3 Round 1予選Tracker画像で46位・378pt・5試合・5VR・47キルを確認。上位320位で決勝進出。キル数は平均キル×試合数から算出。賞金対象外。大会表示名「グランドファイナルに行くために」。",
+    "matches": 5
   },
   {
     "id": "s42-naw-reload-solo-final-20261013-rianie",
@@ -11696,7 +12316,8 @@
     "prize": 0,
     "kind": "賞金決勝",
     "source": "https://fortnitetracker.com/events/epicgames_S42_ReloadReloadSoloVictoryCup_NAW?window=S42_ReloadSoloVictoryCup_Event3_Round2_NAW",
-    "note": "ユーザー提供の2026/10/13 NAW Solo Reload Victory Cup Event 3 Round 2決勝Tracker画像で161位・3試合・0VR・2キルを確認。VRなし・現金賞金なし（$0）。Trackerのpoints欄は0表示だが実際の獲得ポイントを示すとは限らない。大会表示名「グランドファイナルに行くために」。"
+    "note": "ユーザー提供の2026/10/13 NAW Solo Reload Victory Cup Event 3 Round 2決勝Tracker画像で161位・3試合・0VR・2キルを確認。VRなし・現金賞金なし（$0）。Trackerのpoints欄は0表示だが実際の獲得ポイントを示すとは限らない。大会表示名「グランドファイナルに行くために」。",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-qual-20261013-mizurun",
@@ -11719,7 +12340,8 @@
     "prize": null,
     "kind": "予選",
     "source": "https://fortnitetracker.com/events/epicgames_S42_ReloadReloadSoloVictoryCup_NAW?window=S42_ReloadSoloVictoryCup_Event3_Round1_NAW",
-    "note": "ユーザー提供の2026/10/13 NAW Solo Reload Victory Cup Event 3 Round 1予選Tracker画像で51位・378pt・8試合・2VR・20キルを確認。上位320位で決勝進出。キル数は平均キル×試合数から算出。賞金対象外。大会表示名「어뷰징입니다 단데기 단단해지기」。"
+    "note": "ユーザー提供の2026/10/13 NAW Solo Reload Victory Cup Event 3 Round 1予選Tracker画像で51位・378pt・8試合・2VR・20キルを確認。上位320位で決勝進出。キル数は平均キル×試合数から算出。賞金対象外。大会表示名「어뷰징입니다 단데기 단단해지기」。",
+    "matches": 8
   },
   {
     "id": "s42-naw-reload-solo-final-20261013-mizurun",
@@ -11742,7 +12364,8 @@
     "prize": 0,
     "kind": "賞金決勝",
     "source": "https://fortnitetracker.com/events/epicgames_S42_ReloadReloadSoloVictoryCup_NAW?window=S42_ReloadSoloVictoryCup_Event3_Round2_NAW",
-    "note": "ユーザー提供の2026/10/13 NAW Solo Reload Victory Cup Event 3 Round 2決勝Tracker画像で154位・3試合・0VR・2キルを確認。VRなし・現金賞金なし（$0）。Trackerのpoints欄は0表示だが実際の獲得ポイントを示すとは限らない。大会表示名「어뷰징입니다 단데기 단단해지기」。"
+    "note": "ユーザー提供の2026/10/13 NAW Solo Reload Victory Cup Event 3 Round 2決勝Tracker画像で154位・3試合・0VR・2キルを確認。VRなし・現金賞金なし（$0）。Trackerのpoints欄は0表示だが実際の獲得ポイントを示すとは限らない。大会表示名「어뷰징입니다 단데기 단단해지기」。",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-qual-20261013-ares-mea",
@@ -11765,7 +12388,8 @@
     "prize": null,
     "kind": "予選",
     "source": "https://fortnitetracker.com/events/epicgames_S42_ReloadReloadSoloVictoryCup_NAW?window=S42_ReloadSoloVictoryCup_Event3_Round1_NAW",
-    "note": "ユーザー提供の2026/10/13 NAW Solo Reload Victory Cup Event 3 Round 1予選Tracker画像で114位・364pt・9試合・3VR・16キルを確認。上位320位で決勝進出。キル数は平均キル×試合数から算出。賞金対象外。大会表示名「Ares.Mea」。"
+    "note": "ユーザー提供の2026/10/13 NAW Solo Reload Victory Cup Event 3 Round 1予選Tracker画像で114位・364pt・9試合・3VR・16キルを確認。上位320位で決勝進出。キル数は平均キル×試合数から算出。賞金対象外。大会表示名「Ares.Mea」。",
+    "matches": 9
   },
   {
     "id": "s42-naw-reload-solo-final-20261013-ares-mea",
@@ -11788,7 +12412,8 @@
     "prize": 0,
     "kind": "賞金決勝",
     "source": "https://fortnitetracker.com/events/epicgames_S42_ReloadReloadSoloVictoryCup_NAW?window=S42_ReloadSoloVictoryCup_Event3_Round2_NAW",
-    "note": "ユーザー提供の2026/10/13 NAW Solo Reload Victory Cup Event 3 Round 2決勝Tracker画像で175位・2試合・0VR・0キルを確認。VRなし・現金賞金なし（$0）。Trackerのpoints欄は0表示だが実際の獲得ポイントを示すとは限らない。大会表示名「Ares.Mea」。"
+    "note": "ユーザー提供の2026/10/13 NAW Solo Reload Victory Cup Event 3 Round 2決勝Tracker画像で175位・2試合・0VR・0キルを確認。VRなし・現金賞金なし（$0）。Trackerのpoints欄は0表示だが実際の獲得ポイントを示すとは限らない。大会表示名「Ares.Mea」。",
+    "matches": 2
   },
   {
     "id": "s42-naw-reload-solo-qual-20261013-kametin",
@@ -11811,7 +12436,8 @@
     "prize": null,
     "kind": "予選",
     "source": "https://fortnitetracker.com/events/epicgames_S42_ReloadReloadSoloVictoryCup_NAW?window=S42_ReloadSoloVictoryCup_Event3_Round1_NAW",
-    "note": "ユーザー提供の2026/10/13 NAW Solo Reload Victory Cup Event 3 Round 1予選Tracker画像で121位・364pt・8試合・1VR・25キルを確認。上位320位で決勝進出。キル数は平均キル×試合数から算出。賞金対象外。大会表示名「かめてぃん」。"
+    "note": "ユーザー提供の2026/10/13 NAW Solo Reload Victory Cup Event 3 Round 1予選Tracker画像で121位・364pt・8試合・1VR・25キルを確認。上位320位で決勝進出。キル数は平均キル×試合数から算出。賞金対象外。大会表示名「かめてぃん」。",
+    "matches": 8
   },
   {
     "id": "s42-naw-reload-solo-qual-20261013-maa",
@@ -11834,7 +12460,8 @@
     "prize": null,
     "kind": "予選",
     "source": "https://fortnitetracker.com/events/epicgames_S42_ReloadReloadSoloVictoryCup_NAW?window=S42_ReloadSoloVictoryCup_Event3_Round1_NAW",
-    "note": "ユーザー提供の2026/10/13 NAW Solo Reload Victory Cup Event 3 Round 1予選Tracker画像で148位・360pt・9試合・1VR・37キルを確認。上位320位で決勝進出。キル数は平均キル×試合数から算出。賞金対象外。大会表示名「まぁ」。"
+    "note": "ユーザー提供の2026/10/13 NAW Solo Reload Victory Cup Event 3 Round 1予選Tracker画像で148位・360pt・9試合・1VR・37キルを確認。上位320位で決勝進出。キル数は平均キル×試合数から算出。賞金対象外。大会表示名「まぁ」。",
+    "matches": 9
   },
   {
     "id": "s42-naw-reload-solo-qual-20261013-lbworks",
@@ -11857,7 +12484,8 @@
     "prize": null,
     "kind": "予選",
     "source": "https://fortnitetracker.com/events/epicgames_S42_ReloadReloadSoloVictoryCup_NAW?window=S42_ReloadSoloVictoryCup_Event3_Round1_NAW",
-    "note": "ユーザー提供の2026/10/13 NAW Solo Reload Victory Cup Event 3 Round 1予選Tracker画像で181位・356pt・10試合・2VR・36キルを確認。上位320位で決勝進出。キル数は平均キル×試合数から算出。賞金対象外。大会表示名「LBworks」。"
+    "note": "ユーザー提供の2026/10/13 NAW Solo Reload Victory Cup Event 3 Round 1予選Tracker画像で181位・356pt・10試合・2VR・36キルを確認。上位320位で決勝進出。キル数は平均キル×試合数から算出。賞金対象外。大会表示名「LBworks」。",
+    "matches": 10
   },
   {
     "id": "s42-naw-reload-solo-final-20261013-lbworks",
@@ -11880,7 +12508,8 @@
     "prize": 0,
     "kind": "賞金決勝",
     "source": "https://fortnitetracker.com/events/epicgames_S42_ReloadReloadSoloVictoryCup_NAW?window=S42_ReloadSoloVictoryCup_Event3_Round2_NAW",
-    "note": "ユーザー提供の2026/10/13 NAW Solo Reload Victory Cup Event 3 Round 2決勝Tracker画像で78位・3試合・0VR・5キルを確認。VRなし・現金賞金なし（$0）。Trackerのpoints欄は0表示だが実際の獲得ポイントを示すとは限らない。大会表示名「LBworks」。"
+    "note": "ユーザー提供の2026/10/13 NAW Solo Reload Victory Cup Event 3 Round 2決勝Tracker画像で78位・3試合・0VR・5キルを確認。VRなし・現金賞金なし（$0）。Trackerのpoints欄は0表示だが実際の獲得ポイントを示すとは限らない。大会表示名「LBworks」。",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-qual-20261013-ririmu",
@@ -11903,7 +12532,8 @@
     "prize": null,
     "kind": "予選",
     "source": "https://fortnitetracker.com/events/epicgames_S42_ReloadReloadSoloVictoryCup_NAW?window=S42_ReloadSoloVictoryCup_Event3_Round1_NAW",
-    "note": "ユーザー提供の2026/10/13 NAW Solo Reload Victory Cup Event 3 Round 1予選Tracker画像で186位・356pt・8試合・1VR・25キルを確認。上位320位で決勝進出。キル数は平均キル×試合数から算出。賞金対象外。大会表示名「りりむㅤㅤ」。"
+    "note": "ユーザー提供の2026/10/13 NAW Solo Reload Victory Cup Event 3 Round 1予選Tracker画像で186位・356pt・8試合・1VR・25キルを確認。上位320位で決勝進出。キル数は平均キル×試合数から算出。賞金対象外。大会表示名「りりむㅤㅤ」。",
+    "matches": 8
   },
   {
     "id": "s42-naw-reload-solo-qual-20261013-kohakokko",
@@ -11926,7 +12556,8 @@
     "prize": null,
     "kind": "予選",
     "source": "https://fortnitetracker.com/events/epicgames_S42_ReloadReloadSoloVictoryCup_NAW?window=S42_ReloadSoloVictoryCup_Event3_Round1_NAW",
-    "note": "ユーザー提供の2026/10/13 NAW Solo Reload Victory Cup Event 3 Round 1予選Tracker画像で188位・356pt・9試合・1VR・20キルを確認。上位320位で決勝進出。キル数は平均キル×試合数から算出。賞金対象外。大会表示名「ZEN こはこっこだっぺ」。"
+    "note": "ユーザー提供の2026/10/13 NAW Solo Reload Victory Cup Event 3 Round 1予選Tracker画像で188位・356pt・9試合・1VR・20キルを確認。上位320位で決勝進出。キル数は平均キル×試合数から算出。賞金対象外。大会表示名「ZEN こはこっこだっぺ」。",
+    "matches": 9
   },
   {
     "id": "s42-naw-reload-solo-qual-20261003-1ec763a9",
@@ -11949,7 +12580,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 9
   },
   {
     "id": "s42-naw-reload-solo-qual-20261003-089efc66",
@@ -11972,7 +12604,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 8
   },
   {
     "id": "s42-naw-reload-solo-qual-20261003-f6dc3883",
@@ -11995,7 +12628,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 7
   },
   {
     "id": "s42-naw-reload-solo-qual-20261003-9f6ae113",
@@ -12018,7 +12652,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 8
   },
   {
     "id": "s42-naw-reload-solo-qual-20261003-ba0c522a",
@@ -12041,7 +12676,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 9
   },
   {
     "id": "s42-naw-reload-solo-qual-20261003-469d92dc",
@@ -12064,7 +12700,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 10
   },
   {
     "id": "s42-naw-reload-solo-qual-20261003-10a89ca8",
@@ -12087,7 +12724,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 9
   },
   {
     "id": "s42-naw-reload-solo-qual-20261003-76b1c1e8",
@@ -12110,7 +12748,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 10
   },
   {
     "id": "s42-naw-reload-solo-qual-20261003-40ac85b1",
@@ -12133,7 +12772,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 8
   },
   {
     "id": "s42-naw-reload-solo-qual-20261003-f5dff840",
@@ -12156,7 +12796,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 9
   },
   {
     "id": "s42-naw-reload-solo-qual-20261003-925f6d0c",
@@ -12179,7 +12820,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 7
   },
   {
     "id": "s42-naw-reload-solo-qual-20261003-9d9ef409",
@@ -12202,7 +12844,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 9
   },
   {
     "id": "s42-naw-reload-solo-qual-20261003-80daace6",
@@ -12225,7 +12868,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 7
   },
   {
     "id": "s42-naw-reload-solo-qual-20261003-fa24325c",
@@ -12248,7 +12892,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 9
   },
   {
     "id": "s42-naw-reload-solo-qual-20261003-921a20b9",
@@ -12271,7 +12916,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 7
   },
   {
     "id": "s42-naw-reload-solo-qual-20261003-dcd62fd5",
@@ -12294,7 +12940,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 8
   },
   {
     "id": "s42-naw-reload-solo-qual-20261003-efc66221",
@@ -12317,7 +12964,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 7
   },
   {
     "id": "s42-naw-reload-solo-qual-20261003-742e89b9",
@@ -12340,7 +12988,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 8
   },
   {
     "id": "s42-naw-reload-solo-qual-20261003-408b97f2",
@@ -12363,7 +13012,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 10
   },
   {
     "id": "s42-naw-reload-solo-qual-20261003-e37f8295",
@@ -12386,7 +13036,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 9
   },
   {
     "id": "s42-naw-reload-solo-qual-20261003-921e73d4",
@@ -12409,7 +13060,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 8
   },
   {
     "id": "s42-naw-reload-solo-qual-20261003-2fbfb0b5",
@@ -12432,7 +13084,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 8
   },
   {
     "id": "s42-naw-reload-solo-qual-20261003-0b7c8bad",
@@ -12455,7 +13108,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 10
   },
   {
     "id": "s42-naw-reload-solo-qual-20261003-852a62b1",
@@ -12478,7 +13132,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 7
   },
   {
     "id": "s42-naw-reload-solo-qual-20261003-c640a465",
@@ -12501,7 +13156,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 8
   },
   {
     "id": "s42-naw-reload-solo-qual-20261003-4ca4fb7d",
@@ -12524,7 +13180,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 8
   },
   {
     "id": "s42-naw-reload-solo-qual-20261003-77860fc7",
@@ -12547,7 +13204,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 10
   },
   {
     "id": "s42-naw-reload-solo-qual-20261003-5ea4ea9f",
@@ -12570,7 +13228,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 8
   },
   {
     "id": "s42-naw-reload-solo-qual-20261003-3edce3ef",
@@ -12593,7 +13252,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 8
   },
   {
     "id": "s42-naw-reload-solo-final-20261003-9d9ef409",
@@ -12616,7 +13276,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261003-742e89b9",
@@ -12639,7 +13300,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261003-5ea4ea9f",
@@ -12662,7 +13324,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261003-40ac85b1",
@@ -12685,7 +13348,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261003-dcd62fd5",
@@ -12708,7 +13372,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261003-fa24325c",
@@ -12731,7 +13396,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261003-10a89ca8",
@@ -12754,7 +13420,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261003-852a62b1",
@@ -12777,7 +13444,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261003-76b1c1e8",
@@ -12800,7 +13468,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261003-4ca4fb7d",
@@ -12823,7 +13492,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261003-921a20b9",
@@ -12846,7 +13516,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261003-921e73d4",
@@ -12869,7 +13540,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261003-9f6ae113",
@@ -12892,7 +13564,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261003-469d92dc",
@@ -12915,7 +13588,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261003-e37f8295",
@@ -12938,7 +13612,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261003-408b97f2",
@@ -12961,7 +13636,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261003-0b7c8bad",
@@ -12984,7 +13660,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261003-f5dff840",
@@ -13007,7 +13684,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261003-c640a465",
@@ -13030,7 +13708,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 2
   },
   {
     "id": "s42-naw-reload-solo-final-20261003-2fbfb0b5",
@@ -13053,7 +13732,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261003-f6dc3883",
@@ -13076,7 +13756,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261003-77860fc7",
@@ -13099,7 +13780,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261003-80daace6",
@@ -13122,7 +13804,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-solo-final-20261003-ba0c522a",
@@ -13145,7 +13828,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-solo-reload-victory-cup"
+    "tournamentId": "ch7s4-solo-reload-victory-cup",
+    "matches": 3
   },
   {
     "id": "s42-naw-reload-zb-duos-qual-20260831-unger-makaron",
@@ -13181,7 +13865,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-reload-zero-build-duos-cash-cup"
+    "tournamentId": "ch7s4-reload-zero-build-duos-cash-cup",
+    "matches": 11
   },
   {
     "id": "s42-naw-reload-zb-duos-qual-20260831-saku-renren",
@@ -13217,7 +13902,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-reload-zero-build-duos-cash-cup"
+    "tournamentId": "ch7s4-reload-zero-build-duos-cash-cup",
+    "matches": 11
   },
   {
     "id": "s42-naw-reload-zb-duos-qual-20260831-reo-akuria",
@@ -13253,7 +13939,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-reload-zero-build-duos-cash-cup"
+    "tournamentId": "ch7s4-reload-zero-build-duos-cash-cup",
+    "matches": 10
   },
   {
     "id": "s42-naw-reload-zb-duos-qual-20260831-meath-eibuka",
@@ -13289,7 +13976,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-reload-zero-build-duos-cash-cup"
+    "tournamentId": "ch7s4-reload-zero-build-duos-cash-cup",
+    "matches": 12
   },
   {
     "id": "s42-naw-reload-zb-duos-final-20260905-unger-makaron",
@@ -13325,7 +14013,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-reload-zero-build-duos-cash-cup"
+    "tournamentId": "ch7s4-reload-zero-build-duos-cash-cup",
+    "matches": 6
   },
   {
     "id": "s42-naw-reload-zb-duos-final-20260905-saku-renren",
@@ -13361,7 +14050,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-reload-zero-build-duos-cash-cup"
+    "tournamentId": "ch7s4-reload-zero-build-duos-cash-cup",
+    "matches": 6
   },
   {
     "id": "s42-oce-lady-liberty-br-skin-20261017-939c9009",
@@ -13384,7 +14074,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale"
+    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale",
+    "matches": 8
   },
   {
     "id": "s42-oce-lady-liberty-br-skin-20261017-df650842",
@@ -13407,7 +14098,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale"
+    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale",
+    "matches": 9
   },
   {
     "id": "s42-oce-lady-liberty-br-skin-20261017-39945a32",
@@ -13430,7 +14122,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale"
+    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale",
+    "matches": 9
   },
   {
     "id": "s42-oce-lady-liberty-br-skin-20261017-943c019f",
@@ -13453,7 +14146,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale"
+    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale",
+    "matches": 8
   },
   {
     "id": "s42-oce-lady-liberty-br-skin-20261017-174d8aad",
@@ -13476,7 +14170,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale"
+    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale",
+    "matches": 8
   },
   {
     "id": "s42-oce-lady-liberty-br-skin-20261017-eb14596a",
@@ -13499,7 +14194,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale"
+    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale",
+    "matches": 8
   },
   {
     "id": "s42-me-lady-liberty-br-skin-20261018-78d9bcbd",
@@ -13522,7 +14218,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale"
+    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale",
+    "matches": 10
   },
   {
     "id": "s42-me-lady-liberty-br-skin-20261018-13f21d58",
@@ -13545,7 +14242,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale"
+    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale",
+    "matches": 9
   },
   {
     "id": "s42-me-lady-liberty-br-skin-20261018-4c43506d",
@@ -13568,7 +14266,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale"
+    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale",
+    "matches": 10
   },
   {
     "id": "s42-me-lady-liberty-br-skin-20261018-9c0cc827",
@@ -13591,7 +14290,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale"
+    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale",
+    "matches": 9
   },
   {
     "id": "s42-me-lady-liberty-br-skin-20261018-eb549746",
@@ -13614,7 +14314,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale"
+    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale",
+    "matches": 9
   },
   {
     "id": "s42-nac-lady-liberty-br-skin-20261018-60059306",
@@ -13637,7 +14338,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale"
+    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale",
+    "matches": 10
   },
   {
     "id": "s42-nac-lady-liberty-br-skin-20261018-87a1c23b",
@@ -13660,7 +14362,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale"
+    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale",
+    "matches": 8
   },
   {
     "id": "s42-nac-lady-liberty-br-skin-20261018-3f9f78d5",
@@ -13683,7 +14386,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale"
+    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale",
+    "matches": 10
   },
   {
     "id": "s42-nac-lady-liberty-br-skin-20261018-8bf3ab32",
@@ -13706,7 +14410,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale"
+    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale",
+    "matches": 10
   },
   {
     "id": "s42-nac-lady-liberty-br-skin-20261018-afef96f7",
@@ -13729,7 +14434,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale"
+    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale",
+    "matches": 11
   },
   {
     "id": "s42-nac-lady-liberty-br-skin-20261018-9b4663b3",
@@ -13752,7 +14458,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale"
+    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale",
+    "matches": 9
   },
   {
     "id": "s42-naw-lady-liberty-br-skin-20261018-4ca4fb7d",
@@ -13775,7 +14482,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale"
+    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale",
+    "matches": 9
   },
   {
     "id": "s42-naw-lady-liberty-br-skin-20261018-a6578a7f",
@@ -13798,7 +14506,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale"
+    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale",
+    "matches": 11
   },
   {
     "id": "s42-naw-lady-liberty-br-skin-20261018-ec74bb5d",
@@ -13821,7 +14530,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale"
+    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale",
+    "matches": 10
   },
   {
     "id": "s42-naw-lady-liberty-br-skin-20261018-fb46adbc",
@@ -13844,7 +14554,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale"
+    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale",
+    "matches": 10
   },
   {
     "id": "s42-naw-lady-liberty-br-skin-20261018-7a39fc6c",
@@ -13867,7 +14578,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale"
+    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale",
+    "matches": 10
   },
   {
     "id": "s42-naw-lady-liberty-br-skin-20261018-9e5682ea",
@@ -13890,7 +14602,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale"
+    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale",
+    "matches": 9
   },
   {
     "id": "s42-naw-lady-liberty-br-skin-20261018-5ce51f7c",
@@ -13913,7 +14626,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale"
+    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale",
+    "matches": 11
   },
   {
     "id": "s42-naw-lady-liberty-br-skin-20261018-f6e2e7f7",
@@ -13936,7 +14650,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale"
+    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale",
+    "matches": 10
   },
   {
     "id": "s42-naw-lady-liberty-br-skin-20261018-2fbfb0b5",
@@ -13959,7 +14674,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale"
+    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale",
+    "matches": 9
   },
   {
     "id": "s42-naw-lady-liberty-br-skin-20261018-29746b80",
@@ -13982,7 +14698,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale"
+    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale",
+    "matches": 11
   },
   {
     "id": "s42-naw-lady-liberty-br-skin-20261018-0873b9b9",
@@ -14005,7 +14722,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale"
+    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale",
+    "matches": 10
   },
   {
     "id": "s42-naw-lady-liberty-br-skin-20261018-6095cbeb",
@@ -14028,7 +14746,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale"
+    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale",
+    "matches": 9
   },
   {
     "id": "s42-naw-lady-liberty-br-skin-20261018-c9affc0b",
@@ -14051,7 +14770,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale"
+    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale",
+    "matches": 10
   },
   {
     "id": "s42-naw-lady-liberty-br-skin-20261018-9c0cc827",
@@ -14074,7 +14794,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale"
+    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale",
+    "matches": 10
   },
   {
     "id": "s42-naw-lady-liberty-br-skin-20261018-e9e5aea3",
@@ -14097,7 +14818,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale"
+    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale",
+    "matches": 10
   },
   {
     "id": "s42-naw-lady-liberty-br-skin-20261018-39b08e1c",
@@ -14120,7 +14842,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale"
+    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale",
+    "matches": 10
   },
   {
     "id": "s42-naw-lady-liberty-br-skin-20261018-67705cef",
@@ -14143,7 +14866,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale"
+    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale",
+    "matches": 10
   },
   {
     "id": "s42-naw-lady-liberty-br-skin-20261018-170579f7",
@@ -14166,7 +14890,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale"
+    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale",
+    "matches": 11
   },
   {
     "id": "s42-naw-lady-liberty-br-skin-20261018-8a46c44a",
@@ -14189,7 +14914,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale"
+    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale",
+    "matches": 11
   },
   {
     "id": "s42-naw-lady-liberty-br-skin-20261018-6a1e56fe",
@@ -14212,7 +14938,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale"
+    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale",
+    "matches": 9
   },
   {
     "id": "s42-naw-lady-liberty-br-skin-20261018-811ba8d5",
@@ -14235,7 +14962,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale"
+    "tournamentId": "ch7s4-lady-liberty-cup-battle-royale",
+    "matches": 9
   },
   {
     "id": "s42-oce-elite-kado-thorne-reload-skin-20261013-174d8aad",
@@ -14258,7 +14986,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-elite-kado-thorne-cup-reload"
+    "tournamentId": "ch7s4-elite-kado-thorne-cup-reload",
+    "matches": 10
   },
   {
     "id": "s42-oce-elite-kado-thorne-reload-skin-20261013-b5bd9559",
@@ -14281,7 +15010,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-elite-kado-thorne-cup-reload"
+    "tournamentId": "ch7s4-elite-kado-thorne-cup-reload",
+    "matches": 10
   },
   {
     "id": "s42-me-elite-kado-thorne-reload-skin-20261014-cfb4372c",
@@ -14304,7 +15034,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-elite-kado-thorne-cup-reload"
+    "tournamentId": "ch7s4-elite-kado-thorne-cup-reload",
+    "matches": 8
   },
   {
     "id": "s42-me-elite-kado-thorne-reload-skin-20261014-089efc66",
@@ -14327,7 +15058,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-elite-kado-thorne-cup-reload"
+    "tournamentId": "ch7s4-elite-kado-thorne-cup-reload",
+    "matches": 10
   },
   {
     "id": "s42-naw-elite-kado-thorne-reload-skin-20261014-a6578a7f",
@@ -14350,7 +15082,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-elite-kado-thorne-cup-reload"
+    "tournamentId": "ch7s4-elite-kado-thorne-cup-reload",
+    "matches": 9
   },
   {
     "id": "s42-naw-elite-kado-thorne-reload-skin-20261014-2daef93e",
@@ -14373,7 +15106,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-elite-kado-thorne-cup-reload"
+    "tournamentId": "ch7s4-elite-kado-thorne-cup-reload",
+    "matches": 9
   },
   {
     "id": "s42-naw-elite-kado-thorne-reload-skin-20261014-64b1abb4",
@@ -14396,7 +15130,8 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-elite-kado-thorne-cup-reload"
+    "tournamentId": "ch7s4-elite-kado-thorne-cup-reload",
+    "matches": 8
   },
   {
     "id": "s42-oce-street-fighter-cup-reload-skin-20261009-5caf936f-e1f6997e",
@@ -15249,7 +15984,12 @@
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "matches": 9
+    "matches": 9,
+    "trackerStats": {
+      "verified": true,
+      "source": "https://fortnitetracker.com/events/epicgames_S42_Persona5Cup_OCE",
+      "avgPlace": 8.78
+    }
   },
   {
     "id": "s42-me-persona5-reload-skin-20260926-1d214403",
@@ -15272,7 +16012,13 @@
     "tournamentId": "ch7s4-override-persona-5-royal-cup-reload",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 10,
+    "trackerStats": {
+      "verified": true,
+      "source": "https://fortnitetracker.com/events/epicgames_S42_Persona5Cup_ME",
+      "avgPlace": 10.7
+    }
   },
   {
     "id": "s42-me-persona5-reload-skin-20260926-2fda3f8f",
@@ -15295,7 +16041,13 @@
     "tournamentId": "ch7s4-override-persona-5-royal-cup-reload",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 9,
+    "trackerStats": {
+      "verified": true,
+      "source": "https://fortnitetracker.com/events/epicgames_S42_Persona5Cup_ME",
+      "avgPlace": 10.67
+    }
   },
   {
     "id": "s42-me-persona5-reload-skin-20260926-174d8aad",
@@ -15318,7 +16070,13 @@
     "tournamentId": "ch7s4-override-persona-5-royal-cup-reload",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 10,
+    "trackerStats": {
+      "verified": true,
+      "source": "https://fortnitetracker.com/events/epicgames_S42_Persona5Cup_ME",
+      "avgPlace": 9.2
+    }
   },
   {
     "id": "s42-me-persona5-reload-skin-20260926-a6578a7f",
@@ -15341,7 +16099,13 @@
     "tournamentId": "ch7s4-override-persona-5-royal-cup-reload",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 10,
+    "trackerStats": {
+      "verified": true,
+      "source": "https://fortnitetracker.com/events/epicgames_S42_Persona5Cup_ME",
+      "avgPlace": 13
+    }
   },
   {
     "id": "s42-me-persona5-reload-skin-20260926-f6e2e7f7",
@@ -15364,7 +16128,13 @@
     "tournamentId": "ch7s4-override-persona-5-royal-cup-reload",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 7,
+    "trackerStats": {
+      "verified": true,
+      "source": "https://fortnitetracker.com/events/epicgames_S42_Persona5Cup_ME",
+      "avgPlace": 5.14
+    }
   },
   {
     "id": "s42-eu-persona5-reload-skin-20260926-fd65e10f",
@@ -15387,7 +16157,8 @@
     "tournamentId": "ch7s4-override-persona-5-royal-cup-reload",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 8
   },
   {
     "id": "s42-eu-persona5-reload-skin-20260926-2da062ae",
@@ -15410,7 +16181,8 @@
     "tournamentId": "ch7s4-override-persona-5-royal-cup-reload",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 11
   },
   {
     "id": "s42-nac-persona5-reload-skin-20260926-939c9009",
@@ -15433,7 +16205,8 @@
     "tournamentId": "ch7s4-override-persona-5-royal-cup-reload",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 9
   },
   {
     "id": "s42-nac-persona5-reload-skin-20260926-921e73d4",
@@ -15456,7 +16229,8 @@
     "tournamentId": "ch7s4-override-persona-5-royal-cup-reload",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 10
   },
   {
     "id": "s42-nac-persona5-reload-skin-20260926-f2dd1ae6",
@@ -15479,7 +16253,8 @@
     "tournamentId": "ch7s4-override-persona-5-royal-cup-reload",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 10
   },
   {
     "id": "s42-nac-persona5-reload-skin-20260926-5962b6da",
@@ -15502,7 +16277,8 @@
     "tournamentId": "ch7s4-override-persona-5-royal-cup-reload",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 11
   },
   {
     "id": "s42-nac-persona5-reload-skin-20260926-4ca4fb7d",
@@ -15525,7 +16301,8 @@
     "tournamentId": "ch7s4-override-persona-5-royal-cup-reload",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 9
   },
   {
     "id": "s42-nac-persona5-reload-skin-20260926-2da062ae",
@@ -15548,7 +16325,8 @@
     "tournamentId": "ch7s4-override-persona-5-royal-cup-reload",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 10
   },
   {
     "id": "s42-nac-persona5-reload-skin-20260926-2bf20a97",
@@ -15571,7 +16349,8 @@
     "tournamentId": "ch7s4-override-persona-5-royal-cup-reload",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 10
   },
   {
     "id": "s42-nac-persona5-reload-skin-20260926-062b103a",
@@ -15594,7 +16373,8 @@
     "tournamentId": "ch7s4-override-persona-5-royal-cup-reload",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 11
   },
   {
     "id": "s42-nac-persona5-reload-skin-20260926-3f9f78d5",
@@ -15617,7 +16397,8 @@
     "tournamentId": "ch7s4-override-persona-5-royal-cup-reload",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 10
   },
   {
     "id": "s42-nac-persona5-reload-skin-20260926-34c0a7eb",
@@ -15640,7 +16421,8 @@
     "tournamentId": "ch7s4-override-persona-5-royal-cup-reload",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 11
   },
   {
     "id": "s42-naw-persona5-reload-skin-20260926-4e28a12c",
@@ -15663,7 +16445,8 @@
     "tournamentId": "ch7s4-override-persona-5-royal-cup-reload",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 12
   },
   {
     "id": "s42-naw-persona5-reload-skin-20260926-619038af",
@@ -15686,7 +16469,8 @@
     "tournamentId": "ch7s4-override-persona-5-royal-cup-reload",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 10
   },
   {
     "id": "s42-naw-persona5-reload-skin-20260926-537674b4",
@@ -15709,7 +16493,8 @@
     "tournamentId": "ch7s4-override-persona-5-royal-cup-reload",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 9
   },
   {
     "id": "s42-naw-persona5-reload-skin-20260926-cfb4372c",
@@ -15732,7 +16517,8 @@
     "tournamentId": "ch7s4-override-persona-5-royal-cup-reload",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 9
   },
   {
     "id": "s42-naw-persona5-reload-skin-20260926-fa24325c",
@@ -15755,7 +16541,8 @@
     "tournamentId": "ch7s4-override-persona-5-royal-cup-reload",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 10
   },
   {
     "id": "s42-naw-persona5-reload-skin-20260926-ba0c522a",
@@ -15778,7 +16565,8 @@
     "tournamentId": "ch7s4-override-persona-5-royal-cup-reload",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 9
   },
   {
     "id": "s42-naw-persona5-reload-skin-20260926-0784022a",
@@ -15801,7 +16589,8 @@
     "tournamentId": "ch7s4-override-persona-5-royal-cup-reload",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 12
   },
   {
     "id": "s42-naw-persona5-reload-skin-20260926-4bd5f43c",
@@ -15824,7 +16613,8 @@
     "tournamentId": "ch7s4-override-persona-5-royal-cup-reload",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 10
   },
   {
     "id": "s42-naw-persona5-reload-skin-20260926-9f6ae113",
@@ -15847,7 +16637,8 @@
     "tournamentId": "ch7s4-override-persona-5-royal-cup-reload",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 12
   },
   {
     "id": "s42-naw-persona5-reload-skin-20260926-0ab44e46",
@@ -15870,7 +16661,8 @@
     "tournamentId": "ch7s4-override-persona-5-royal-cup-reload",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 9
   },
   {
     "id": "s42-naw-persona5-reload-skin-20260926-13f21d58",
@@ -15893,7 +16685,8 @@
     "tournamentId": "ch7s4-override-persona-5-royal-cup-reload",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 10
   },
   {
     "id": "s42-naw-persona5-reload-skin-20260926-b71b032d",
@@ -15916,7 +16709,8 @@
     "tournamentId": "ch7s4-override-persona-5-royal-cup-reload",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 9
   },
   {
     "id": "s42-naw-persona5-reload-skin-20260926-39bd6c50",
@@ -15939,7 +16733,8 @@
     "tournamentId": "ch7s4-override-persona-5-royal-cup-reload",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 9
   },
   {
     "id": "s42-naw-persona5-reload-skin-20260926-19eb0f0f",
@@ -15962,7 +16757,8 @@
     "tournamentId": "ch7s4-override-persona-5-royal-cup-reload",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 9
   },
   {
     "id": "s42-naw-persona5-reload-skin-20260926-b7eaee76",
@@ -15985,7 +16781,8 @@
     "tournamentId": "ch7s4-override-persona-5-royal-cup-reload",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 9
   },
   {
     "id": "s42-naw-persona5-reload-skin-20260926-c6380b39",
@@ -16008,7 +16805,8 @@
     "tournamentId": "ch7s4-override-persona-5-royal-cup-reload",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 11
   },
   {
     "id": "s42-naw-persona5-reload-skin-20260926-6da960fe",
@@ -16031,7 +16829,8 @@
     "tournamentId": "ch7s4-override-persona-5-royal-cup-reload",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 9
   },
   {
     "id": "s42-naw-persona5-reload-skin-20260926-a58b7fdd",
@@ -16054,7 +16853,8 @@
     "tournamentId": "ch7s4-override-persona-5-royal-cup-reload",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 10
   },
   {
     "id": "s42-naw-persona5-reload-skin-20260926-3e523862",
@@ -16077,7 +16877,8 @@
     "tournamentId": "ch7s4-override-persona-5-royal-cup-reload",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 9
   },
   {
     "id": "s42-naw-persona5-reload-skin-20260926-4addf397",
@@ -16100,7 +16901,8 @@
     "tournamentId": "ch7s4-override-persona-5-royal-cup-reload",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 6
   },
   {
     "id": "s42-naw-persona5-reload-skin-20260926-5995a0b9",
@@ -16123,7 +16925,8 @@
     "tournamentId": "ch7s4-override-persona-5-royal-cup-reload",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 8
   },
   {
     "id": "s42-naw-persona5-reload-skin-20260926-422ccfaf",
@@ -16146,7 +16949,8 @@
     "tournamentId": "ch7s4-override-persona-5-royal-cup-reload",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 9
   },
   {
     "id": "s42-naw-persona5-reload-skin-20260926-0b7c8bad",
@@ -16169,7 +16973,8 @@
     "tournamentId": "ch7s4-override-persona-5-royal-cup-reload",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 10
   },
   {
     "id": "s42-naw-persona5-reload-skin-20260926-d76844b3",
@@ -16192,7 +16997,8 @@
     "tournamentId": "ch7s4-override-persona-5-royal-cup-reload",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 12
   },
   {
     "id": "s42-naw-persona5-reload-skin-20260926-9b0bbbaa",
@@ -16215,7 +17021,8 @@
     "tournamentId": "ch7s4-override-persona-5-royal-cup-reload",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 10
   },
   {
     "id": "s42-naw-persona5-reload-skin-20260926-30de90f3",
@@ -16238,7 +17045,8 @@
     "tournamentId": "ch7s4-override-persona-5-royal-cup-reload",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 11
   },
   {
     "id": "s42-naw-persona5-reload-skin-20260926-0aae528f",
@@ -16261,7 +17069,8 @@
     "tournamentId": "ch7s4-override-persona-5-royal-cup-reload",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 9
   },
   {
     "id": "s42-naw-persona5-reload-skin-20260926-7f5738a1",
@@ -16284,7 +17093,8 @@
     "tournamentId": "ch7s4-override-persona-5-royal-cup-reload",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 11
   },
   {
     "id": "s42-naw-persona5-reload-skin-20260926-e5c398cb",
@@ -16307,7 +17117,8 @@
     "tournamentId": "ch7s4-override-persona-5-royal-cup-reload",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 10
   },
   {
     "id": "s42-nac-madison-beer-icon-reload-skin-20260925-0ab44e46-767efa71",
@@ -16343,7 +17154,8 @@
     "tournamentId": "ch7s4-madison-beer-icon-cup-reload",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 10
   },
   {
     "id": "s42-nac-madison-beer-icon-reload-skin-20260925-6ddb75bd-7f8da9f1",
@@ -16379,7 +17191,8 @@
     "tournamentId": "ch7s4-madison-beer-icon-cup-reload",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 11
   },
   {
     "id": "s42-naw-madison-beer-icon-reload-skin-20260925-615a8e0a-ad21c9e6",
@@ -16415,7 +17228,8 @@
     "tournamentId": "ch7s4-madison-beer-icon-cup-reload",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 11
   },
   {
     "id": "s42-naw-madison-beer-icon-reload-skin-20260925-61fe8404-97f0138a",
@@ -16451,7 +17265,8 @@
     "tournamentId": "ch7s4-madison-beer-icon-cup-reload",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 10
   },
   {
     "id": "s42-naw-madison-beer-icon-reload-skin-20260925-61b8ea5b-cfb4372c",
@@ -16487,7 +17302,8 @@
     "tournamentId": "ch7s4-madison-beer-icon-cup-reload",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 10
   },
   {
     "id": "s42-naw-madison-beer-icon-reload-skin-20260925-0a3f3ca1-fc34749c",
@@ -16523,7 +17339,8 @@
     "tournamentId": "ch7s4-madison-beer-icon-cup-reload",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 11
   },
   {
     "id": "s42-naw-madison-beer-icon-reload-skin-20260925-8f90692e-9250f678",
@@ -16559,7 +17376,8 @@
     "tournamentId": "ch7s4-madison-beer-icon-cup-reload",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 11
   },
   {
     "id": "s42-naw-madison-beer-icon-reload-skin-20260925-09b8e741-72601ffe",
@@ -16595,7 +17413,8 @@
     "tournamentId": "ch7s4-madison-beer-icon-cup-reload",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 12
   },
   {
     "id": "s42-oce-solo-vc-qual-20260921-rikram",
@@ -16811,7 +17630,12 @@
     "source": "https://fortnitetracker.com/events/epicgames_S42_SoloVictoryCup_ME?window=S42_SoloVictoryCup_Event3Round1_ME",
     "profileUrl": "https://fortnitetracker.com/profile/all/%E3%83%81%E3%83%B3%E6%97%8F%E3%82%89%E3%81%84%E3%81%A1%E3%82%93/events?id=939c9009-abf9-4a36-b4fe-5a448736f4af",
     "verified": true,
-    "note": "ユーザー提供のFortnite Tracker画像でME 2026/9/22 Event 3 Round 1予選 33位・238pt・8試合・6キル・0VR・平均順位30.50位を確認。予選突破を確認、予選のVRは現金賞金なし。"
+    "note": "ユーザー提供のFortnite Tracker画像でME 2026/9/22 Event 3 Round 1予選 33位・238pt・8試合・6キル・0VR・平均順位30.50位を確認。予選突破を確認、予選のVRは現金賞金なし。",
+    "trackerStats": {
+      "verified": true,
+      "source": "https://fortnitetracker.com/events/epicgames_S42_SoloVictoryCup_ME?window=S42_SoloVictoryCup_Event3Round1_ME",
+      "avgPlace": 30.5
+    }
   },
   {
     "id": "s42-me-solo-vc-qual-20260922-3peace",
@@ -16835,7 +17659,12 @@
     "source": "https://fortnitetracker.com/events/epicgames_S42_SoloVictoryCup_ME?window=S42_SoloVictoryCup_Event3Round1_ME",
     "profileUrl": "https://fortnitetracker.com/profile/all/3peace/events?id=bc21e86c-c3cf-4761-a529-06a8e4fd910b",
     "verified": true,
-    "note": "ユーザー提供のFortnite Tracker画像でME 2026/9/22 Event 3 Round 1予選 20位・248pt・7試合・5キル・1VR・平均順位24.00位を確認。予選突破を確認、予選のVRは現金賞金なし。"
+    "note": "ユーザー提供のFortnite Tracker画像でME 2026/9/22 Event 3 Round 1予選 20位・248pt・7試合・5キル・1VR・平均順位24.00位を確認。予選突破を確認、予選のVRは現金賞金なし。",
+    "trackerStats": {
+      "verified": true,
+      "source": "https://fortnitetracker.com/events/epicgames_S42_SoloVictoryCup_ME?window=S42_SoloVictoryCup_Event3Round1_ME",
+      "avgPlace": 24
+    }
   },
   {
     "id": "s42-me-solo-vc-qual-20260922-rarimu",
@@ -16859,7 +17688,12 @@
     "source": "https://fortnitetracker.com/events/epicgames_S42_SoloVictoryCup_ME?window=S42_SoloVictoryCup_Event3Round1_ME",
     "profileUrl": "https://fortnitetracker.com/profile/all/%E3%82%89%E3%82%8A%E3%82%80%20%E9%85%8D%E4%BF%A1%E4%B8%AD/events?id=7a690fd6-30f3-4dd2-aa14-c67c7e0d96a3",
     "verified": true,
-    "note": "ユーザー提供のFortnite Tracker画像でME 2026/9/22 Event 3 Round 1予選 85位・220pt・6試合・9キル・1VR・平均順位19.00位を確認。予選突破を確認、予選のVRは現金賞金なし。"
+    "note": "ユーザー提供のFortnite Tracker画像でME 2026/9/22 Event 3 Round 1予選 85位・220pt・6試合・9キル・1VR・平均順位19.00位を確認。予選突破を確認、予選のVRは現金賞金なし。",
+    "trackerStats": {
+      "verified": true,
+      "source": "https://fortnitetracker.com/events/epicgames_S42_SoloVictoryCup_ME?window=S42_SoloVictoryCup_Event3Round1_ME",
+      "avgPlace": 19
+    }
   },
   {
     "id": "s42-me-solo-vc-qual-20260922-hayato",
@@ -16883,7 +17717,12 @@
     "source": "https://fortnitetracker.com/events/epicgames_S42_SoloVictoryCup_ME?window=S42_SoloVictoryCup_Event3Round1_ME",
     "profileUrl": "https://fortnitetracker.com/profile/all/HAYATO/events?id=fc34749c-b687-480e-aaa2-1e861afd0797",
     "verified": true,
-    "note": "ユーザー提供のFortnite Tracker画像でME 2026/9/22 Event 3 Round 1予選 87位・220pt・7試合・14キル・0VR・平均順位24.57位を確認。予選突破を確認、予選のVRは現金賞金なし。"
+    "note": "ユーザー提供のFortnite Tracker画像でME 2026/9/22 Event 3 Round 1予選 87位・220pt・7試合・14キル・0VR・平均順位24.57位を確認。予選突破を確認、予選のVRは現金賞金なし。",
+    "trackerStats": {
+      "verified": true,
+      "source": "https://fortnitetracker.com/events/epicgames_S42_SoloVictoryCup_ME?window=S42_SoloVictoryCup_Event3Round1_ME",
+      "avgPlace": 24.57
+    }
   },
   {
     "id": "s42-me-solo-vc-qual-20260922-kametin",
@@ -16907,7 +17746,12 @@
     "source": "https://fortnitetracker.com/events/epicgames_S42_SoloVictoryCup_ME?window=S42_SoloVictoryCup_Event3Round1_ME",
     "profileUrl": "https://fortnitetracker.com/profile/all/%E3%81%8B%E3%82%81%E3%81%A6%E3%81%83%E3%82%93/events?id=a63f6c3b-0330-4aec-b658-62c0a45f03a4",
     "verified": true,
-    "note": "ユーザー提供のFortnite Tracker画像でME 2026/9/22 Event 3 Round 1予選 89位・219pt・4試合・17キル・1VR・平均順位8.25位を確認。予選突破を確認、予選のVRは現金賞金なし。"
+    "note": "ユーザー提供のFortnite Tracker画像でME 2026/9/22 Event 3 Round 1予選 89位・219pt・4試合・17キル・1VR・平均順位8.25位を確認。予選突破を確認、予選のVRは現金賞金なし。",
+    "trackerStats": {
+      "verified": true,
+      "source": "https://fortnitetracker.com/events/epicgames_S42_SoloVictoryCup_ME?window=S42_SoloVictoryCup_Event3Round1_ME",
+      "avgPlace": 8.25
+    }
   },
   {
     "id": "s42-me-solo-vc-qual-20260922-raznot",
@@ -16931,7 +17775,12 @@
     "source": "https://fortnitetracker.com/events/epicgames_S42_SoloVictoryCup_ME?window=S42_SoloVictoryCup_Event3Round1_ME",
     "profileUrl": "https://fortnitetracker.com/profile/all/gre%20RazNot%C3%BF%C7%83/events?id=9f6ae113-0243-4c88-9925-1bac599c71ea",
     "verified": true,
-    "note": "ユーザー提供のFortnite Tracker画像でME 2026/9/22 Event 3 Round 1予選 133位・211pt・7試合・15キル・1VR・平均順位35.29位を確認。予選突破を確認、予選のVRは現金賞金なし。"
+    "note": "ユーザー提供のFortnite Tracker画像でME 2026/9/22 Event 3 Round 1予選 133位・211pt・7試合・15キル・1VR・平均順位35.29位を確認。予選突破を確認、予選のVRは現金賞金なし。",
+    "trackerStats": {
+      "verified": true,
+      "source": "https://fortnitetracker.com/events/epicgames_S42_SoloVictoryCup_ME?window=S42_SoloVictoryCup_Event3Round1_ME",
+      "avgPlace": 35.29
+    }
   },
   {
     "id": "s42-me-solo-vc-qual-20260922-gu-neko",
@@ -16955,7 +17804,12 @@
     "source": "https://fortnitetracker.com/events/epicgames_S42_SoloVictoryCup_ME?window=S42_SoloVictoryCup_Event3Round1_ME",
     "profileUrl": "https://fortnitetracker.com/profile/all/%E3%81%90%E3%83%BCneko/events?id=b71b032d-ce42-4590-aa00-a4f8e8841453",
     "verified": true,
-    "note": "ユーザー提供のFortnite Tracker画像でME 2026/9/22 Event 3 Round 1予選 146位・210pt・6試合・10キル・0VR・平均順位29.00位を確認。予選突破を確認、予選のVRは現金賞金なし。"
+    "note": "ユーザー提供のFortnite Tracker画像でME 2026/9/22 Event 3 Round 1予選 146位・210pt・6試合・10キル・0VR・平均順位29.00位を確認。予選突破を確認、予選のVRは現金賞金なし。",
+    "trackerStats": {
+      "verified": true,
+      "source": "https://fortnitetracker.com/events/epicgames_S42_SoloVictoryCup_ME?window=S42_SoloVictoryCup_Event3Round1_ME",
+      "avgPlace": 29
+    }
   },
   {
     "id": "s42-me-solo-vc-qual-20260922-mob",
@@ -16979,7 +17833,12 @@
     "source": "https://fortnitetracker.com/events/epicgames_S42_SoloVictoryCup_ME?window=S42_SoloVictoryCup_Event3Round1_ME",
     "profileUrl": "https://fortnitetracker.com/profile/all/ecs%20mob%EF%BC%9100/events?id=0477ed5b-0e85-4ec8-9a64-7398dddf655e",
     "verified": true,
-    "note": "ユーザー提供のFortnite Tracker画像でME 2026/9/22 Event 3 Round 1予選 148位・209pt・7試合・3キル・1VR・平均順位34.57位を確認。予選突破を確認、予選のVRは現金賞金なし。"
+    "note": "ユーザー提供のFortnite Tracker画像でME 2026/9/22 Event 3 Round 1予選 148位・209pt・7試合・3キル・1VR・平均順位34.57位を確認。予選突破を確認、予選のVRは現金賞金なし。",
+    "trackerStats": {
+      "verified": true,
+      "source": "https://fortnitetracker.com/events/epicgames_S42_SoloVictoryCup_ME?window=S42_SoloVictoryCup_Event3Round1_ME",
+      "avgPlace": 34.57
+    }
   },
   {
     "id": "s42-me-solo-vc-qual-20260922-furozon",
@@ -17003,7 +17862,12 @@
     "source": "https://fortnitetracker.com/events/epicgames_S42_SoloVictoryCup_ME?window=S42_SoloVictoryCup_Event3Round1_ME",
     "profileUrl": "https://fortnitetracker.com/profile/all/brnw%20furozon%C7%83%C7%83/events?id=add5ea9a-78d9-4821-af78-a990e058bc2e",
     "verified": true,
-    "note": "ユーザー提供のFortnite Tracker画像でME 2026/9/22 Event 3 Round 1予選 154位・209pt・8試合・8キル・0VR・平均順位28.75位を確認。予選突破を確認、予選のVRは現金賞金なし。"
+    "note": "ユーザー提供のFortnite Tracker画像でME 2026/9/22 Event 3 Round 1予選 154位・209pt・8試合・8キル・0VR・平均順位28.75位を確認。予選突破を確認、予選のVRは現金賞金なし。",
+    "trackerStats": {
+      "verified": true,
+      "source": "https://fortnitetracker.com/events/epicgames_S42_SoloVictoryCup_ME?window=S42_SoloVictoryCup_Event3Round1_ME",
+      "avgPlace": 28.75
+    }
   },
   {
     "id": "s42-me-solo-vc-qual-20260922-buyureyli",
@@ -17027,7 +17891,12 @@
     "source": "https://fortnitetracker.com/events/epicgames_S42_SoloVictoryCup_ME?window=S42_SoloVictoryCup_Event3Round1_ME",
     "profileUrl": "https://fortnitetracker.com/profile/all/Lit%20Buyureyli/events?id=b75619b7-3ecc-4129-9cda-b783bfaabba5",
     "verified": true,
-    "note": "ユーザー提供のFortnite Tracker画像でME 2026/9/22 Event 3 Round 1予選 157位・208pt・5試合・5キル・0VR・平均順位12.40位を確認。予選突破を確認、予選のVRは現金賞金なし。"
+    "note": "ユーザー提供のFortnite Tracker画像でME 2026/9/22 Event 3 Round 1予選 157位・208pt・5試合・5キル・0VR・平均順位12.40位を確認。予選突破を確認、予選のVRは現金賞金なし。",
+    "trackerStats": {
+      "verified": true,
+      "source": "https://fortnitetracker.com/events/epicgames_S42_SoloVictoryCup_ME?window=S42_SoloVictoryCup_Event3Round1_ME",
+      "avgPlace": 12.4
+    }
   },
   {
     "id": "s42-me-solo-vc-qual-20260922-piyopiyo",
