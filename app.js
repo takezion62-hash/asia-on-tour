@@ -2020,12 +2020,23 @@
         <div class="detail-wide"><dt>補足・確認根拠</dt><dd data-detail="note">${escape(e.note||'補足なし')}</dd></div>
       </dl></details>`;
     }
+    // Qualification is determined from verified rank and a region-specific rule.
+    // Never equate an observed Round 1 victory with advancement or cash.
+    const qualificationPill=e=>e.kind==='予選'&&e.qualification==='qualified'
+      ?'<span class="qual-badge advanced">✓ 予選突破</span>'
+      :e.kind==='予選'&&e.qualification==='outside-cutoff'
+      ?'<span class="qual-badge eliminated">予選敗退</span>'
+      :e.kind==='予選'&&e.qualification==='unverified'
+      ?'<span class="qual-badge unknown">突破未確認</span>'
+      :e.kind==='参加確認'&&e.qualification==='outside-cutoff'
+      ?'<span class="qual-badge eliminated">通過圏外</span>'
+      :'';
     function archiveRow(e){
       return `<article class="archive-row${isPrizeWin(e)?' is-prize-win':''}" data-result-id="${escape(e.id)}" aria-labelledby="result-player-${escape(e.id)}"><div class="archive-overview">
         <div class="archive-date"><span class="field-label">日付</span><time data-field="date" datetime="${escape(e.date)}">${escape(friendlyDate(e.date))}</time>${seasonStamp(e)}</div>
         <h3 class="archive-player" id="result-player-${escape(e.id)}" data-field="player">${profileNameLinks(e)}</h3>
         <div class="archive-region"><span class="field-label">地域</span><span class="region-tag" data-field="region" data-region="${escape(e.region)}">${escape(e.region)}</span></div>
-        <div class="archive-event"><span class="field-label">大会名</span><p data-field="event">${escape(e.event)}</p><small>${escape(e.kind||'未分類')}</small></div>
+        <div class="archive-event"><span class="field-label">大会名</span><p data-field="event">${escape(e.event)}</p><small>${escape(e.kind||'未分類')}</small>${qualificationPill(e)}</div>
         <div class="archive-stat"><span class="field-label">順位</span><strong data-field="rank"${Number.isInteger(e.rank)?'':' class="unknown"'}>${rankLabel(e)}</strong></div>
         <div class="archive-stat"><span class="field-label">KILLS</span><strong data-field="kills">${format(e.kills)}</strong></div>
         <div class="archive-stat"><span class="field-label">VR</span><strong data-field="vrs">${format(e.vrs)}</strong></div>
