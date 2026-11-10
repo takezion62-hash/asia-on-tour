@@ -80,9 +80,15 @@ test('production saved candidate IDs and official scoreboard checkpoints pass dr
   updates:read('updates.json'),status:read('history-sync-status.json'),
   scan:read('history-sync-scan.json'),players:read('players.json'),tournaments:read('tournaments.json')};
  const out=reconcile(real);
- assert.ok(out.report.selected>=0&&out.report.selected<=39,'expected at most 39 exact qualifiers, or none after prior publication');
+ assert.ok(out.report.selected>=0&&out.report.selected<=72,'expected 33 new plus up to 39 earlier exact qualifiers, or zero if published');
  assert.deepEqual(out.report.held,[],'conflicting qualification must remain blocked');
  assert.equal(out.report.published.length+out.report.duplicates.length,out.report.selected);
  assert.equal(out.docs.results.length,real.results.length+out.report.published.length);
  assert.equal(out.docs.review.proposals.length,real.review.proposals.length-out.report.selected);
+});
+
+test('S30 NAC 2024 API region uses NA top-5000 official cutoff',()=>{
+ const specs=W.filter(x=>x.region==='NAC'&&x.season==='S30');
+ assert.equal(specs.length,2);
+ assert.ok(specs.every(x=>x.cutoff===5000&&x.rules.includes('chapter-5-season-3-official-rules')));
 });
