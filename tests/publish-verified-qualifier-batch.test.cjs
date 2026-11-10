@@ -66,3 +66,18 @@ test('keeps unrelated historical pending candidates intact',()=>{
  const out=reconcile(db);
  assert.deepEqual(out.docs.review.proposals,[extra]);
 });
+
+test('production saved candidate IDs and official scoreboard checkpoints pass dry-run before merge',()=>{
+ const fs=require('node:fs'),path=require('node:path'),root=path.resolve(__dirname,'..');
+ const read=n=>JSON.parse(fs.readFileSync(path.join(root,n),'utf8'));
+ const real={results:read('results.json'),review:read('history-sync-review.json'),
+  reviewed:read('history-sync-reviewed.json'),approval:read('approval-history.json'),
+  updates:read('updates.json'),status:read('history-sync-status.json'),
+  scan:read('history-sync-scan.json'),players:read('players.json'),tournaments:read('tournaments.json')};
+ const out=reconcile(real);
+ assert.ok(out.report.selected>0&&out.report.selected<=39,'expected at most 39 exact qualifiers');
+ assert.deepEqual(out.report.held,[],'conflicting qualification must remain blocked');
+ assert.equal(out.report.published.length+out.report.duplicates.length,out.report.selected);
+ assert.equal(out.docs.results.length,real.results.length+out.report.published.length);
+ assert.equal(out.docs.review.proposals.length,real.review.proposals.length-out.report.selected);
+});
