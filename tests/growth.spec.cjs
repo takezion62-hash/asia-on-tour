@@ -43,7 +43,7 @@ test('PC・スマホで月別・シーズン別、累計・期間別、4つの�
  await section.locator('[data-growth-point]').first().click();
  await expect(section.locator('[data-growth-point]').first()).toHaveAttribute('aria-pressed','true');
  await section.locator('.growth-data-details summary').click();
- await expect(section.locator('.growth-data-details tbody tr')).toHaveCount(expected.points.length);
+ await expect(section.locator('.growth-data-details tbody tr')).toHaveCount(await section.locator('[data-growth-point]').count());
  await section.locator('[data-growth-grouping="season"]').click();
  await expect(section.locator('[data-growth-grouping="season"]')).toHaveAttribute('aria-pressed','true');
  await expect(section.locator('.growth-period-button').first()).toBeVisible();

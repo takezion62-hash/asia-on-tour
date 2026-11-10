@@ -32,7 +32,7 @@ test('missing matches or kills are unknown and cannot be interpreted as zero con
  assert.equal(r.scouting.attack.level,'データ不足');
  assert.equal(r.scouting.windows,1);
  assert.equal(r.scouting.momentum.ready,false);
- assert.match(view.profile(r),/同条件での相対タイプ：未判定/);
+ assert.match(view.profile(r),/比較による強弱は未判定/);
 });
 test('duplicate, conflicting and unverified records do not inflate scouting counts',()=>{
  const a=row(0),duplicate={...a},conflict={...a,kills:999};

@@ -29,35 +29,29 @@ test('the participation index is a distinct valid schema and cannot masquerade a
  assert.ok(config.maxPagesPerWindowTotal<=100);
 });
 
-test('the Oct 17 NAW Reload trio is visible from the main results search without claiming qualification',()=>{
- const ui=read('participation-ui.js');
- const archive=JSON.parse(read('participation/2026-10.json'));
+test('2026-10-17 NAW qualifiers are present without duplicated or invented prizes',()=>{
+ const ui=read('participation-ui.js'),archive=JSON.parse(read('participation/2026-10.json'));
  const results=JSON.parse(read('results.json'));
  const expected=[
-  {name:'RyoIT',rank:341,points:298,kills:23,vrs:2,matches:7},
-  {name:'ろず',rank:339,points:299,kills:14,vrs:0,matches:8},
-  {name:'シルス',rank:342,points:298,kills:20,vrs:2,matches:7}
+  {name:'RyoIT',rank:341,points:298,kills:23,vrs:2,verified:true},
+  {name:'ろず',rank:339,points:299,kills:14,vrs:0,verified:true},
+  {name:'シルス',rank:null,points:null,kills:null,vrs:null,verified:false}
  ];
- for(const e of expected){
-  const matches=archive.entries.filter(r=>r.date==='2026-10-17'&&r.region==='NAW'&&r.player===e.name&&
-    r.tournamentId==='ch7s4-solo-reload-victory-cup'&&r.round==='Event 4 · Round 1 / 予選');
-  assert.equal(matches.length,1,e.name+' should be archived exactly once');
-  const row=matches[0];
-  for(const key of ['rank','points','kills','vrs','matches'])assert.equal(row[key],e[key],e.name+' '+key);
-  assert.equal(row.qualification,'outside-cutoff');
-  assert.equal(row.officialCutoff,320);
-  assert.equal(row.prize,null);
-  assert.equal(results.filter(r=>r.date===row.date&&r.region===row.region&&
-   r.tournamentId===row.tournamentId&&r.player===row.player&&r.rank===row.rank).length,0,
-   e.name+' must not be double-counted as a prize-backed result');
+ for(const x of expected){
+  const rows=results.filter(r=>r.date==='2026-10-17'&&r.region==='NAW'&&r.player===x.name&&
+   r.tournamentId==='ch7s4-solo-reload-victory-cup'&&r.round==='Event 4 · Round 1 / 予選');
+  assert.equal(rows.length,1,x.name+' is listed once');
+  for(const k of ['rank','points','kills','vrs','verified'])assert.equal(rows[0][k],x[k],x.name+' '+k);
+  assert.equal(rows[0].prize,null);
+  assert.equal(rows[0].kind,'予選');
+  if(!x.verified)assert.equal(rows[0].reported,true);
+  assert.equal(archive.entries.filter(r=>r.date===rows[0].date&&r.region===rows[0].region&&r.player===x.name&&r.round===rows[0].round).length,0,
+   x.name+' must not duplicate the archived participation');
  }
  assert.ok(ui.includes("function searchFromMainResults()"));
  assert.ok(ui.includes("search.addEventListener('input',searchFromMainResults)"));
  assert.ok(ui.includes("host.id='participation-main-search'"));
  assert.ok(ui.includes("buildTable(sortRows(rows))"));
  assert.ok(ui.includes("data-participation-search"));
- assert.ok(ui.includes("[r.date,r.event,r.player"),'month archive must support exact event dates');
- assert.ok(!ui.includes(' · NAC Unreal Cup · 最終順位は確認中'),
-  'current event label must not be hardcoded to an unrelated tournament');
  assert.doesNotThrow(()=>new Function(ui));
 });

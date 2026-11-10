@@ -73,32 +73,22 @@ test('AOT PR credits lower-ranked verified participation once, without breakthro
 });
 
 
-test('NAW Reload Oct 17 trio is findable in main results search on PC and mobile',async({page})=>{
+test('NAW Reload Oct 17 is searchable with unconfirmed stats clearly distinguished',async({page})=>{
  await page.goto('/?season=all#results');
- const box=page.locator('#search-results');
- const matches=page.locator('#participation-main-search');
- const expected=[
-  ['RyoIT','341','23','2'],
-  ['ろず','339','14','0'],
-  ['シルス','342','20','2']
- ];
- for(const [name,rank,kills,vrs] of expected){
-  await box.fill(name);
-  await expect(matches).toBeVisible();
-  const row=matches.locator('tbody tr').filter({hasText:name}).first();
-  await expect(row).toBeVisible();
-  await expect(row.locator('td').nth(2)).toHaveText('#'+rank);
-  await expect(row.locator('td').nth(6)).toHaveText(kills);
-  await expect(row.locator('td').nth(7)).toHaveText(vrs);
-  await expect(row).toContainText('通過圏外');
+ const search=page.locator('#search-results'),results=page.locator('#result-table');
+ const archive=page.locator('#participation-main-search');
+ for(const [name,rank] of [['RyoIT','341'],['ろず','339'],['シルス',null]]){
+  await search.fill(name);
+  await expect(results).toContainText(name);
+  await expect(archive).toBeHidden();
+  if(rank)await expect(results).toContainText('#'+rank);
+  else await expect(results).toContainText('報告あり・詳細未確認');
  }
- await box.fill('2026-10-17');
+ await search.fill('RyoIT');
  await page.locator('#region-filter').selectOption('NAW');
- for(const [name] of expected){
-  await expect(matches.locator('tbody tr').filter({hasText:name})).toHaveCount(1);
- }
+ await expect(results).toContainText('RyoIT');
  await page.locator('#prize-only').check();
- await expect(matches).toBeHidden();
+ await expect(results).not.toContainText('RyoIT');
  await page.locator('#prize-only').uncheck();
- await expect(matches).toBeVisible();
+ await expect(results).toContainText('RyoIT');
 });

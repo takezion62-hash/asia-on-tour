@@ -29,7 +29,7 @@ test('プレイスタイル画面のJS/CSSが配信され、プロフィール�
   await expect(section.locator('.style-region-facts')).toBeVisible();
   await expect(section).toContainText('現在の分析');
   await expect(section).toContainText('得意地域');
-  await expect(section).toContainText('地域適応力');
+  await expect(section).toContainText('地域別パフォーマンス');
   expect(errors).toEqual([]);
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth+2)).toBe(true);
 });
