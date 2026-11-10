@@ -2,6 +2,7 @@ name: Tournament calendar smoke tests
 
 on:
   push:
+    branches: [main]
     paths:
       - 'app.js'
       - 'index.html'
