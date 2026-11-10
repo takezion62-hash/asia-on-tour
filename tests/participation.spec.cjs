@@ -100,3 +100,30 @@ test('NAW Reload Oct 17 is searchable with unconfirmed stats clearly distinguish
  await page.locator('#prize-only').uncheck();
  await expect(results).toContainText('RyoIT');
 });
+
+
+test('a multi-month publication is presented as one visible batch with working month links',async({page})=>{
+ const log=require('../updates.json');
+ const latest=(log.entries||[]).find(e=>e.type==='participation'&&Array.isArray(e.participationIds)&&e.participationIds.length);
+ const match=String(latest?.id||'').match(/^reviewed-participation-(\d{8})-\d{4}-\d{2}$/);
+ test.skip(!match,'The latest publication is not a monthly batch');
+ const prefix='reviewed-participation-'+match[1]+'-';
+ const batch=log.entries.filter(e=>e.type==='participation'&&String(e.id||'').startsWith(prefix)&&
+  Array.isArray(e.participationIds)&&e.participationIds.length);
+ const expectedCount=batch.reduce((sum,e)=>sum+e.participationIds.length,0);
+ const months=new Set(batch.map(e=>e.participationMonth));
+ await page.goto('/?season=all#results');
+ const recent=page.locator('#participation-recent-batch');
+ await expect(recent).toBeVisible();
+ await expect(recent.locator('strong').first()).toContainText(expectedCount.toLocaleString('ja-JP')+'件');
+ await expect(recent).toContainText('賞金・称号・正式戦績の集計には加算していません');
+ await expect(recent.locator('.participation-month-links a')).toHaveCount(months.size);
+ if(expectedCount>8){
+  await recent.locator('.participation-all-records > summary').click();
+  await expect(recent.locator('.participation-all-records > .participation-scroll > table > tbody > tr')).toHaveCount(expectedCount);
+ }
+ const month=[...months].sort().reverse()[0];
+ await recent.locator('.participation-month-links a[data-participation-month-open="'+month+'"]').click();
+ await expect(page.locator('#participation-month')).toHaveValue(month);
+ await expect(page.locator('#participation-table tbody tr').first()).toBeVisible();
+});

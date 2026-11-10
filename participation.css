@@ -32,3 +32,8 @@
 .participation-recent>span{color:#bfcee5}
 .participation-recent-names{display:flex;flex-wrap:wrap;gap:6px}
 .participation-recent-names span{padding:5px 8px;border-radius:7px;background:#263c57}
+.participation-month-links{display:flex;gap:8px 12px;flex-wrap:wrap;margin:8px 0}
+.participation-month-links a{padding:5px 8px;border:1px solid #456184;border-radius:7px;background:#1b3048}
+.participation-all-records{margin:14px 0}
+.participation-all-records>summary{cursor:pointer;font-weight:800;padding:8px 0;color:#99dcff}
+.participation-all-records[open]>summary{margin-bottom:10px}

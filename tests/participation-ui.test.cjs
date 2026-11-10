@@ -52,6 +52,8 @@ test('2026-10-17 NAW qualifiers are present without duplicated or invented prize
  assert.ok(ui.includes("search.addEventListener('input',searchFromMainResults)"));
  assert.ok(ui.includes("host.id='participation-main-search'"));
  assert.ok(ui.includes("buildTable(sortRows(rows))"));
- assert.ok(ui.includes("data-participation-search"));
+ assert.ok(ui.includes("data-participation-month-open"));
+ assert.ok(ui.includes("participation-recent-batch"));
+ assert.ok(ui.includes("participation-all-records"));
  assert.doesNotThrow(()=>new Function(ui));
 });

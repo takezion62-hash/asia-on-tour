@@ -99,37 +99,52 @@
     try{
       const log=await load('updates.json');
       const entry=(log.entries||[]).find(e=>e.type==='participation'&&Array.isArray(e.participationIds)&&e.participationIds.length);
-      if(!entry||!/^[0-9]{4}-[0-9]{2}$/.test(entry.participationMonth||'')||
-          !index.months.some(m=>m.month===entry.participationMonth))return;
-      const candidates=await getMonth(entry.participationMonth);
-      const ids=new Set(entry.participationIds);
-      const rows=candidates.filter(row=>ids.has(row.id));
+      if(!entry)return;
+      // Monthly entries belonging to a single manual publication must appear
+      // as ONE batch. Otherwise the last updated historical month shows as
+      // "recently added: 1 record" even when 93 were published together.
+      const marker=String(entry.id||'').match(/^reviewed-participation-(\d{8})-\d{4}-\d{2}$/);
+      const prefix=marker?'reviewed-participation-'+marker[1]+'-':null;
+      const batch=prefix?(log.entries||[]).filter(e=>e.type==='participation'&&
+        String(e.id||'').startsWith(prefix)&&Array.isArray(e.participationIds)&&e.participationIds.length):[entry];
+      const published=batch.filter(e=>/^\d{4}-\d{2}$/.test(e.participationMonth||'')&&
+        index.months.some(m=>m.month===e.participationMonth));
+      const groups=await Promise.all(published.map(async item=>{
+        const ids=new Set(item.participationIds);
+        const rows=(await getMonth(item.participationMonth)).filter(row=>ids.has(row.id));
+        return {month:item.participationMonth,rows};
+      }));
+      const populated=groups.filter(group=>group.rows.length).sort((a,b)=>b.month.localeCompare(a.month));
+      const rows=sortRows(populated.flatMap(group=>group.rows));
       if(!rows.length)return;
-      const summary=document.getElementById('participation-summary');
-      const recent=document.createElement('div');
-      recent.className='participation-recent';
       const sameDate=rows.every(r=>r.date===rows[0].date);
       const sameEvent=rows.every(r=>r.event===rows[0].event);
       const sameRegion=rows.every(r=>r.region===rows[0].region);
-      const title=[sameDate?rows[0].date:entry.participationMonth,sameRegion?rows[0].region:'',
-        sameEvent?rows[0].event:'複数大会'].filter(Boolean).join(' · ');
-      const recentAttributes=' data-participation-month-open="'+esc(entry.participationMonth)+'"'
-        +(sameRegion?' data-participation-region="'+esc(rows[0].region)+'"':'')
-        +(sameDate?' data-participation-search="'+esc(rows[0].date)+'"':'');
+      const title=populated.length>1?
+        entry.date+'登録分 · '+populated.length+'か月':
+        [sameDate?rows[0].date:entry.participationMonth,sameRegion?rows[0].region:'',
+         sameEvent?rows[0].event:'複数大会'].filter(Boolean).join(' · ');
+      const monthLinks=populated.map(group=>'<a href="#results" data-participation-month-open="'+esc(group.month)+
+        '">'+esc(group.month)+'（'+fmt(group.rows.length)+'件）</a>').join('');
+      const recent=document.createElement('div');
+      recent.className='participation-recent';
+      recent.id='participation-recent-summary';
       recent.innerHTML='<strong>最近追加した出場戦績 '+fmt(rows.length)+'件</strong>'
-        +'<span>'+esc(title)+' · 順位・キル・VRを照合済み</span>'
-        +'<a href="#results"'+recentAttributes+'>今回の出場戦績を表示 ↗</a>'
-        +'<div class="participation-recent-names">'+rows.map(r=>'<span>'+esc(r.player)+'：'+fmt(r.rank)+'位 / '+fmt(r.kills)+'K / '+fmt(r.vrs)+'VR</span>').join('')+'</div>';
-      summary?.after(recent);
+        +'<span>'+esc(title)+' · 順位・キル・VRを保存済みの公式順位表で照合</span>'
+        +'<p class="participation-note">賞金・予選突破の確認待ちは継続。正式な賞金戦績ではなく、出場確認アーカイブに掲載しています。</p>'
+        +'<div class="participation-month-links">'+monthLinks+'</div>';
+      document.getElementById('participation-summary')?.after(recent);
       const shortcut=document.createElement('div');
       shortcut.className='participation-shortcut';
-      shortcut.innerHTML='<strong>追加済み：'+esc(title)+' · '+fmt(rows.length)+'件</strong>'
-        +'<p class="participation-note">予選敗退を含む確認済み出場戦績（賞金・称号の集計対象外）</p>'
-        +buildTable(sortRows(rows))
-        +'<p><a href="#results"'+recentAttributes+'>出場アーカイブで絞り込んで表示 ↗</a></p>';
+      shortcut.id='participation-recent-batch';
+      shortcut.innerHTML='<strong>追加済みの出場記録 '+fmt(rows.length)+'件（'+esc(title)+'）</strong>'
+        +'<p class="participation-note">ここに掲載した記録は予選敗退・通過未確認を含みます。賞金・称号・正式戦績の集計には加算していません。確認待ち欄は賞金・通過の未確定事項があるため残っています。</p>'
+        +buildTable(rows.slice(0,8))
+        +(rows.length>8?'<details class="participation-all-records"><summary>今回追加した'+fmt(rows.length)+
+          '件をすべて表示</summary>'+buildTable(sortRows(rows))+'</details>':'')
+        +'<p class="participation-note">開催月ごとの記録を確認：</p>'
+        +'<div class="participation-month-links">'+monthLinks+'</div>';
       document.querySelector('#page-results .prize-row-note')?.after(shortcut);
-      // Keep the latest populated month as the default for all visitors.
-      // The newly published historical month is opened only via its shortcut.
     }catch(error){
       console.warn('Recent participation update was not available:',error);
     }
