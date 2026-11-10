@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-11-10T03:36:19.081Z",
+  "checkedAt": "2026-11-10T09:43:20.348Z",
   "windows": {
     "epicgames_S42_InoxtagIconCup_NAW/S42_InoxtagIconCup_NAW": {
       "nextPage": 50,
@@ -129,12 +129,12 @@
       "emptyAttempts": 0
     },
     "epicgames_S42_InoxtagIconCup_BR/S42_InoxtagIconCup_BR": {
-      "nextPage": 40,
-      "pages": 40,
-      "complete": true,
-      "coverageLimited": true,
+      "nextPage": 50,
+      "pages": 50,
+      "complete": false,
+      "coverageLimited": false,
       "totalPages": 100,
-      "lastScanned": "2026-11-05T14:46:50.012Z",
+      "lastScanned": "2026-11-10T09:42:48.236Z",
       "emptyAttempts": 0
     },
     "epicgames_S31_DuosCashCup_ME/S31_DuosCashCup_Event3Round2_ME": {
@@ -228,12 +228,12 @@
       "emptyAttempts": 0
     },
     "epicgames_S36_VictoryDuosCup_EU/S36_VictoryDuosCup_Event1Round1_EU": {
-      "nextPage": 50,
-      "pages": 50,
-      "complete": false,
-      "coverageLimited": false,
+      "nextPage": 60,
+      "pages": 60,
+      "complete": true,
+      "coverageLimited": true,
       "totalPages": 100,
-      "lastScanned": "2026-11-10T03:36:19.081Z",
+      "lastScanned": "2026-11-10T09:43:10.752Z",
       "emptyAttempts": 0
     },
     "epicgames_S30_SquadsVictoryCashCup_EU/S30_SquadsVictoryCashCup_Event1Round2_EU": {
@@ -624,12 +624,12 @@
       "emptyAttempts": 0
     },
     "epicgames_S30_SoloVictoryCashCup_ME/S30_SoloVictoryCashCup_Event1Round1_ME": {
-      "nextPage": 30,
-      "pages": 30,
+      "nextPage": 40,
+      "pages": 40,
       "complete": false,
       "coverageLimited": false,
       "totalPages": 100,
-      "lastScanned": "2026-11-10T03:36:02.273Z",
+      "lastScanned": "2026-11-10T09:42:58.491Z",
       "emptyAttempts": 0
     },
     "epicgames_S30_SoloZBVictoryCashCup_OCE/S30_SoloZBVictoryCashCup_Event1Round2_OCE": {
@@ -642,12 +642,12 @@
       "emptyAttempts": 0
     },
     "epicgames_S43_SquadsVictoryCup_OCE/S43_SquadsVictoryCup_Event1_Round1_OCE": {
-      "nextPage": 6,
-      "pages": 6,
+      "nextPage": 14,
+      "pages": 14,
       "complete": false,
       "coverageLimited": false,
       "totalPages": 15,
-      "lastScanned": "2026-11-09T15:47:12.639Z",
+      "lastScanned": "2026-11-10T09:43:20.348Z",
       "emptyAttempts": 0
     },
     "epicgames_S43_SquadsVictoryCup_ME/S43_SquadsVictoryCup_Event1_Round1_ME": {
@@ -684,6 +684,15 @@
       "coverageLimited": false,
       "totalPages": 47,
       "lastScanned": "2026-11-10T03:35:30.861Z",
+      "emptyAttempts": 0
+    },
+    "epicgames_S43_SquadsVictoryCup_NAC/S43_SquadsVictoryCup_Event1_Round2_NAC": {
+      "nextPage": 2,
+      "pages": 2,
+      "complete": true,
+      "coverageLimited": false,
+      "totalPages": 2,
+      "lastScanned": "2026-11-10T09:42:37.153Z",
       "emptyAttempts": 0
     }
   }
