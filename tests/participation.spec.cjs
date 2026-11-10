@@ -80,7 +80,14 @@ test('NAW Reload Oct 17 is searchable with unconfirmed stats clearly distinguish
  for(const [name,rank] of [['RyoIT','341'],['ろず','339'],['シルス',null]]){
   await search.fill(name);
   await expect(results).toContainText(name);
-  await expect(archive).toBeHidden();
+  // A matching participation-only record is intentionally shown in a separate,
+  // non-award archive. It must not be mistaken for a prize result.
+  if(index.players.some(player=>player.name===name)){
+   await expect(archive).toContainText(name);
+   await expect(archive).toContainText('通常の賞金・称号・正式戦績には加算しません');
+  }else{
+   await expect(archive).toBeHidden();
+  }
   if(rank)await expect(results).toContainText('#'+rank);
   else await expect(results).toContainText('報告あり・詳細未確認');
  }
@@ -89,6 +96,7 @@ test('NAW Reload Oct 17 is searchable with unconfirmed stats clearly distinguish
  await expect(results).toContainText('RyoIT');
  await page.locator('#prize-only').check();
  await expect(results).not.toContainText('RyoIT');
+ await expect(archive).toBeHidden();
  await page.locator('#prize-only').uncheck();
  await expect(results).toContainText('RyoIT');
 });
