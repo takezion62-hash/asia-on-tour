@@ -4,6 +4,7 @@ on:
     branches: [main]
     paths:
       - ".github/workflows/publish-cosmetics-fast.yml"
+      - "tests/tournament-rules.test.cjs"
   workflow_dispatch:
 permissions:
   contents: write
