@@ -21,6 +21,9 @@ const signature=x=>[x.date,x.region,x.tournamentId,windowId(x),members(x).slice(
 const placement=x=>[x.date,x.region,x.tournamentId,windowId(x),x.rank,x.points,x.kills,x.vrs].join('::');
 function promote(){
  const records=read('results.json'),index=read('participation-index.json');
+ const catalog=new Map(read('tournaments.json').catalog.map(t=>[t.id,t]));
+ const aliasOwners=new Map(Object.entries(read('players.json').confirmedAliases||{}).flatMap(([name,aliases])=>aliases.map(a=>[a,name])));
+ const canonName=n=>aliasOwners.get(n)||n;
  const byKey=new Set(records.map(signature)),byStats=new Map(records.map(r=>[placement(r),r]));
  const byId=new Set(records.map(r=>r.id));
  const appended=[],skipped=[];
@@ -54,10 +57,15 @@ function promote(){
    const note='Epic IDと公式大会ウィンドウの保存済み順位表で順位・キル・VRを照合。'+detail+
      (round1?'Round 1現金賞金$0。':round2&&x.vrs===0?'決勝0VRのため現金賞金$0。':'現金賞金・コスメ報酬を推定しない。')+
      ' 大会規則: '+(rule?.source||x.source);
-   const [chapter,season]=seasons[x.seasonId]||[];
-   const r={id:x.id,date:x.date,region:x.region,player:x.player,
-     ...(x.players?.length?{players:x.players}:{}),
-     event:x.event,round:x.round,rank:x.rank,points:x.points,kills:x.kills,
+   const verifiedCatalog=catalog.get(x.tournamentId);
+   if(!verifiedCatalog||verifiedCatalog.seasonId!==x.seasonId||verifiedCatalog.name!==x.event)throw Error('catalog mismatch '+x.id);
+   const {chapter,season}=verifiedCatalog;
+   const canonicalPlayers=members(x).map(canonName);
+   if(new Set(canonicalPlayers).size!==canonicalPlayers.length)throw Error('duplicate aliases '+x.id);
+   const canonicalRound=round2?String(x.round).replace(/\/\s*(?:参加確認|決勝|賞金決勝|予選)$/u,'/ 賞金決勝'):x.round;
+   const r={id:x.id,date:x.date,region:x.region,player:canonicalPlayers.join(' / '),
+     ...(canonicalPlayers.length>1?{players:canonicalPlayers}:{}),
+     event:x.event,round:canonicalRound,rank:x.rank,points:x.points,kills:x.kills,
      vrs:x.vrs,matches:x.matches,prize,kind,seasonId:x.seasonId,
      ...(chapter?{chapter,season}:{}),tournamentId:x.tournamentId,
      source:x.source,verified:true,
