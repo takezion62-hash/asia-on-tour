@@ -1,6 +1,7 @@
 'use strict';
 const fs = require('node:fs');
 const path = require('node:path');
+const trackerSummary = require('../tracker-summary.js');
 const regions = ['ME', 'EU', 'NAC', 'NAW', 'OCE', 'BR'];
 const axes = ['series', 'mode', 'subtype', 'team', 'platform'];
 const object = x => x !== null && typeof x === 'object' && !Array.isArray(x);
@@ -165,6 +166,7 @@ function validateData(data) {
       if (row[field] === null) continue;
       check(field === 'prize' ? money(row[field]) : Number.isSafeInteger(row[field]) && row[field] >= (field === 'rank' ? 1 : 0), 'results.json', id, field, field === 'prize' ? '賞金は0以上・小数2桁以内の数値、またはnullにしてください。' : '0以上の整数（順位は1以上）、またはnullにしてください。');
     }
+    for (const reason of trackerSummary.validate(row)) issue('results.json', id, 'trackerStats', reason);
     check(typeof row.verified === 'boolean', 'results.json', id, 'verified', '確認済みフラグはtrue／falseで指定してください。');
     for (const flag of ['partial', 'reported']) if (row[flag] != null) check(typeof row[flag] === 'boolean', 'results.json', id, flag, 'フラグはtrue／falseで指定してください。');
     const people = roster(row);
