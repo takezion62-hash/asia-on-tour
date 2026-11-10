@@ -109,3 +109,52 @@ test('対象データが0件でも描画でき、XSSとなるタグ文字列は�
   assert.doesNotMatch(rendered,/<img src=x onerror=/);
   assert.match(rendered,/&lt;img src=x/);
 });
+
+
+test('1〜2開催枠でも観測タイプを表示し、相対順位と混同しない',()=>{
+  const one=analyze([row('early-one',1,{matches:4,kills:10,vrs:1})]);
+  assert.equal(one.style.key,'unrated');
+  assert.equal(one.observedTendency.stage,'early');
+  assert.equal(one.observedTendency.label,'キル・VRの両方を記録');
+  assert.equal(one.observedTendency.kpm,2.5);
+  assert.equal(one.observedTendency.vrRate,.25);
+  assert.equal(one.observedTendency.windows,1);
+  let html=view.profile(one);
+  assert.match(html,/少ない戦績からわかる特徴/);
+  assert.match(html,/キル・VRの両方を記録/);
+  assert.match(html,/少数記録・参考/);
+  assert.match(html,/厳密な相対タイプの判定条件を見る/);
+  assert.doesNotMatch(html,/相対タイプ：比較保留/);
+  const two=analyze([row('early-one',1),row('early-two',2,{kills:20,vrs:0})]);
+  assert.equal(two.observedTendency.windows,2);
+  assert.equal(two.observedTendency.records,2);
+  html=view.profile(two);
+  assert.match(html,/2開催枠/);
+  assert.match(html,/実測からわかる特徴/);
+});
+
+test('混在形式の数値を比較せず、欠損値をゼロと断言しない',()=>{
+  const combined=analyze([row('solo-one',1),row('duo-one',2,{
+    players:['A','B'],player:'A / B',_class:duo,tournamentId:'duo',
+    kills:88,matches:8,vrs:0
+  })]);
+  assert.equal(combined.observedTendency.mixed,true);
+  assert.equal(combined.observedTendency.kpm,null);
+  assert.equal(combined.observedTendency.vrRate,null);
+  assert.match(view.profile(combined),/形式別に確認/);
+  const missing=analyze([row('missing',1,{matches:null,kills:null,vrs:null})]);
+  assert.equal(missing.observedTendency.label,'大会参加を確認');
+  assert.equal(missing.observedTendency.kpm,null);
+  assert.match(view.profile(missing),/キル未入力/);
+  assert.doesNotMatch(view.profile(missing),/記録上は0キル・0VR/);
+});
+
+test('1地域の実測値は見せるが得意地域と判定しない',()=>{
+  const single=analyze([row('one',1)]);
+  assert.equal(single.affinity.region,null);
+  const html=view.profile(single);
+  assert.match(html,/キルを記録した地域/);
+  assert.match(html,/VRを記録した地域/);
+  assert.match(html,/地域間の優劣は未比較/);
+  assert.match(html,/得意地域は比較準備中/);
+});
