@@ -1,7 +1,7 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-10T10:37:47.360Z",
+  "checkedAt": "2026-11-10T14:35:24.230Z",
   "mode": "review",
   "scope": "history",
   "dateMode": "rolling",
@@ -10,17 +10,17 @@
   "toDate": "2026-11-10",
   "provider": "osirion",
   "linkedPlayers": 563,
-  "trackedWindows": 2950,
-  "found": 108,
-  "skipped": 21,
-  "imported": 17,
+  "trackedWindows": 2951,
+  "found": 151,
+  "skipped": 19,
+  "imported": 25,
   "scannedPages": 96,
-  "completedWindows": 236,
+  "completedWindows": 237,
   "identityConflicts": 3,
-  "alreadyRegistered": 2094,
-  "autoApprovedTotal": 1098,
+  "alreadyRegistered": 2111,
+  "autoApprovedTotal": 1124,
   "invalidCachedCandidates": 1,
-  "manualReviewCandidates": 108,
+  "manualReviewCandidates": 151,
   "autoApprovedCosmeticThisRun": 0,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
@@ -30,8 +30,8 @@
   "transientFailures": 0,
   "malformedFailures": 0,
   "skippedLeaderboards": [],
-  "reviewOnlyWindows": 1318,
-  "reviewOnlyCandidates": 54,
+  "reviewOnlyWindows": 1319,
+  "reviewOnlyCandidates": 73,
   "unmappedEvents": 238,
   "unmappedEventIds": [
     "S30_ConsoleCashCups",
@@ -47,24 +47,24 @@
     "S30_Reload",
     "S30_ReloadZB"
   ],
-  "message": "最新版と安全統合：新規掲載17件、重複スキップ0件、要確認の競合0件、確認待ち108件。既存の戦績・賞金は保持。",
+  "message": "最新版と安全統合：新規掲載25件、重複スキップ0件、要確認の競合0件、確認待ち151件。既存の戦績・賞金は保持。",
   "manuallyPublished": 469,
   "manuallyResolvedDuplicates": 37,
   "lastReviewedBatchAt": "2026-11-10T05:00:08.538Z",
   "manuallyCorrected": 1,
   "lastCorrectedReviewAt": "2026-11-07T09:14:30.244Z",
   "concurrentMerge": {
-    "appended": 17,
+    "appended": 25,
     "alreadyPublished": 0,
     "reviewConflicts": 0,
-    "keptPending": 108,
-    "reconciledAt": "2026-11-10T10:37:49.909Z"
+    "keptPending": 151,
+    "reconciledAt": "2026-11-10T14:35:26.420Z"
   },
   "coverage": {
-    "total": 2950,
-    "completed": 236,
-    "notStarted": 2659,
-    "partial": 53,
+    "total": 2951,
+    "completed": 237,
+    "notStarted": 2653,
+    "partial": 59,
     "retryWaiting": 2,
     "retryDue": 0,
     "remaining": 2714,
@@ -72,9 +72,9 @@
     "completionPercent": 8,
     "byRegion": {
       "OCE": {
-        "total": 521,
+        "total": 522,
         "completed": 32,
-        "pending": 489
+        "pending": 490
       },
       "ME": {
         "total": 517,
@@ -83,8 +83,8 @@
       },
       "EU": {
         "total": 535,
-        "completed": 40,
-        "pending": 495
+        "completed": 41,
+        "pending": 494
       },
       "BR": {
         "total": 516,
@@ -110,13 +110,13 @@
       },
       "2025": {
         "total": 690,
-        "completed": 32,
-        "pending": 658
+        "completed": 33,
+        "pending": 657
       },
       "2026": {
-        "total": 1286,
+        "total": 1287,
         "completed": 153,
-        "pending": 1133
+        "pending": 1134
       }
     },
     "outsideScopeCheckpoints": 0,
@@ -204,7 +204,7 @@
         "region": "ME",
         "series": "victory-cup",
         "status": "partial",
-        "nextPage": 8,
+        "nextPage": 10,
         "totalPages": 19,
         "retryAfter": null,
         "errorCode": null
@@ -248,7 +248,7 @@
         "region": "ME",
         "series": "victory-cup",
         "status": "partial",
-        "nextPage": 8,
+        "nextPage": 10,
         "totalPages": 18,
         "retryAfter": null,
         "errorCode": null
