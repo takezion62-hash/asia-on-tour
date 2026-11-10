@@ -113,7 +113,7 @@ for(const {row,change} of candidates){
   if(record.verified!==true||record.prize!==0||/予選敗退/.test(record.round))throw Error('Invalid record metadata');
   const ledgerRow=approved.next.ledger.entries.find(x=>x.id===row.id);
   if(!ledgerRow)throw Error('Approval ledger missing');
-  Object.assign(ledgerRow,{policy:'official-round-and-zero-cash',rule:change.rule,
+  Object.assign(ledgerRow,{policy:'verified-rule',rule:change.rule,
    evidence:'Verified Epic ID, saved ranked Osirion row, official event calendar, cutoff rule and semantic duplicate check; no unverified cash inferred'});
   approved.next.updates.entries=approved.next.updates.entries.filter(u=>
     u.id!=='review-publication-aot-rule-20261111-'+row.id);
