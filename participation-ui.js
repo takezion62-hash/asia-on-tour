@@ -25,7 +25,8 @@
   const members=r=>Array.isArray(r.players)&&r.players.length?r.players:[r.player];
   const heading=r=>r.qualification==='outside-cutoff'?'通過圏外':'出場確認';
   const rowHtml=r=>'<tr><td>'+esc(r.date)+'</td><td>'+esc(r.region)+'</td><td>#'+fmt(r.rank)+'</td>'
-    +'<td>'+esc(members(r).join(' / '))+'</td><td><strong>'+esc(r.event)+'</strong><small>'+esc(r.round)+'</small></td>'
+    +'<td>'+esc(members(r).join(' / '))+'</td><td><strong>'+esc(r.event)+'</strong><small>'+esc(r.round)+'</small>'
+    +(typeof AotTrackerSummary!=='undefined'?'<details class="participation-tracker-details"><summary>基本スタッツ</summary>'+AotTrackerSummary.render(r)+'</details>':'')+'</td>'
     +'<td>'+fmt(r.points)+'</td><td>'+fmt(r.kills)+'</td><td>'+fmt(r.vrs)+'</td><td>'+fmt(r.matches)+'</td>'
     +'<td><span class="participation-tag">'+esc(heading(r))+'</span></td>'
     +'<td><a target="_blank" rel="noopener noreferrer" href="'+esc(r.source)+'">出典 ↗</a></td></tr>';
