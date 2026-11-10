@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-10T04:56:31.422Z",
+  "reviewedAt": "2026-11-10T05:00:08.538Z",
   "description": "Resolved historic review candidates: published, duplicate or participation",
   "entries": [
     {
@@ -13353,6 +13353,51 @@
       "source": "https://www.fortnite.com/competitive/events/S42_ChampionTealKnightFNCSCup/?region=OCE&round=S42_ChampionTealKnightFNCSCup_OCE",
       "officialRules": null,
       "evidence": "Exact saved ranked page checkpoint, original player ID, calendar window and no duplicated public record"
+    },
+    {
+      "id": "auto-s42-a24e5836dc3e",
+      "decision": "already-published",
+      "reviewedAt": "2026-11-10T05:00:08.538Z",
+      "existingId": "s42-oce-teal-knight-fncs-cup-skin-20261018-chun",
+      "policy": "exact-epic-skin-score-and-live-rank",
+      "source": "https://www.fortnite.com/competitive/events/S42_ChampionTealKnightFNCSCup/?region=OCE",
+      "evidence": "Matched official score checkpoint to original tracker result; same checkpoint rank and all official scores"
+    },
+    {
+      "id": "auto-s42-56de183f4301",
+      "decision": "already-published",
+      "reviewedAt": "2026-11-10T05:00:08.538Z",
+      "existingId": "s42-oce-teal-knight-fncs-cup-skin-20261018-hiro",
+      "policy": "exact-epic-skin-score-and-live-rank",
+      "source": "https://www.fortnite.com/competitive/events/S42_ChampionTealKnightFNCSCup/?region=OCE",
+      "evidence": "Matched official score checkpoint to original tracker result; same checkpoint rank and all official scores"
+    },
+    {
+      "id": "auto-s42-f00b45faa40f",
+      "decision": "already-published",
+      "reviewedAt": "2026-11-10T05:00:08.538Z",
+      "existingId": "s42-oce-teal-knight-fncs-cup-skin-20261018-harupin",
+      "policy": "exact-epic-skin-score-and-live-rank",
+      "source": "https://www.fortnite.com/competitive/events/S42_ChampionTealKnightFNCSCup/?region=OCE",
+      "evidence": "Matched official score checkpoint to original tracker result; live Epic leaderboards verified rank 59 (tracker 60 / saved 59)"
+    },
+    {
+      "id": "auto-s42-30f247fe9002",
+      "decision": "already-published",
+      "reviewedAt": "2026-11-10T05:00:08.538Z",
+      "existingId": "s42-oce-inoxtag-icon-br-duos-skin-20261025-trippy-kurochigu",
+      "policy": "exact-epic-skin-score-and-live-rank",
+      "source": "https://www.fortnite.com/competitive/events/S42_InoxtagIconCup/?region=OCE",
+      "evidence": "Matched official score checkpoint to original tracker result; same checkpoint rank and all official scores"
+    },
+    {
+      "id": "auto-s42-0c28f52906c0",
+      "decision": "already-published",
+      "reviewedAt": "2026-11-10T05:00:08.538Z",
+      "existingId": "s42-oce-inoxtag-icon-br-duos-skin-20261025-sephiroth-airu",
+      "policy": "exact-epic-skin-score-and-live-rank",
+      "source": "https://www.fortnite.com/competitive/events/S42_InoxtagIconCup/?region=OCE",
+      "evidence": "Matched official score checkpoint to original tracker result; same checkpoint rank and all official scores"
     }
   ]
 }
