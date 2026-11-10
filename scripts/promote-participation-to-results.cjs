@@ -35,8 +35,9 @@ function promote(){
    if(!Number.isSafeInteger(x.rank)||x.rank<1||!Number.isSafeInteger(x.kills)||x.kills<0||
       !Number.isSafeInteger(x.points)||x.points<0||!Number.isSafeInteger(x.matches)||x.matches<1||
       !Number.isSafeInteger(x.vrs)||x.vrs<0||x.vrs>x.matches)throw Error('invalid score '+x.id);
-   const k=signature(x),old=byStats.get(placement(x));
-   if(byKey.has(k)||old&&members(old).some(n=>members(x).includes(n))){
+   const canonicalRoster=members(x).map(canonName);
+   const k=signature({...x,player:canonicalRoster.join(' / '),players:canonicalRoster}),old=byStats.get(placement(x));
+   if(byKey.has(k)||old&&members(old).some(n=>canonicalRoster.includes(n))){
     skipped.push(x.id);continue;
    }
    if(byId.has(x.id))throw Error('different result with duplicate id '+x.id);
