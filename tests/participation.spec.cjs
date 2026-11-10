@@ -10,6 +10,7 @@ test('reviewed squad results appear in the normal overseas results without a sep
  await search.fill('りあにー / ひろ / そみー / Plank');
  await expect(page.locator('#result-table')).toContainText('りあにー');
  await expect(page.locator('#result-table')).toContainText('32');
+ await expect(page.locator('#result-table')).toContainText('予選突破');
  await page.locator('#prize-only').check();
  await expect(page.locator('#result-table')).not.toContainText('りあにー');
 });
@@ -92,6 +93,7 @@ test('2026 squad teams have qualification evidence in normal results, not a spec
  const search=page.locator('#search-results');
  await search.fill('R1ze / かめてぃん / Zagouの弟 / らむ');
  await expect(page.locator('#result-table')).toContainText('149');
+ await expect(page.locator('#result-table')).toContainText('予選敗退');
  await expect(page.locator('#participation-recent-batch')).toHaveCount(0);
  await expect(page.locator('#participation-archive')).toHaveCount(0);
  await expect(page.locator('#stage-filter').locator('option[value="参加確認"]')).toHaveCount(1);
