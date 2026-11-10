@@ -2,15 +2,14 @@
 const test=require('node:test'),assert=require('node:assert/strict');
 const fs=require('node:fs'),path=require('node:path');
 const root=path.resolve(__dirname,'..'),read=file=>fs.readFileSync(path.join(root,file),'utf8');
-test('participation panel is separate from money-backed results and has lazy player profile hook',()=>{
+test('verified attendance is no longer a separate visual archive',()=>{
  const html=read('index.html'),app=read('app.js'),ui=read('participation-ui.js'),serve=read('scripts/serve.cjs');
- for(const id of ['participation-archive','participation-month','participation-search','participation-region','participation-table','participation-status']){
-  assert.ok(html.includes('id="'+id+'"'),id);
- }
- assert.ok(html.includes('participation-ui.js')&&html.includes('participation.css'));
+ assert.ok(!html.includes('id="participation-archive"'));
+ assert.ok(html.includes('id="result-table"'));
+ assert.ok(html.includes('value="参加確認"'));
+ assert.ok(ui.includes('const initialize=()=>{loadForPR()}'));
+ assert.ok(ui.includes('renderProfile:()=>{}'));
  assert.ok(app.includes('window.AOTParticipation?.renderProfile(info.name)'));
- assert.ok(ui.includes('getMonth(chosen)')&&ui.includes('getIndex()'));
- assert.doesNotMatch(ui,/load\(['\"]results\.json['\"]\)|AotPR\.calculate|prizePerPlayer/,'participation browsing must remain separate from prize/PR calculations');
  assert.ok(serve.includes("'participation-index.json'")&&serve.includes("'/participation/'"));
  assert.doesNotThrow(()=>new Function(ui));
  assert.doesNotThrow(()=>new Function(app));
@@ -48,12 +47,8 @@ test('2026-10-17 NAW qualifiers are present without duplicated or invented prize
   assert.equal(archive.entries.filter(r=>r.date===rows[0].date&&r.region===rows[0].region&&r.player===x.name&&r.round===rows[0].round).length,0,
    x.name+' must not duplicate the archived participation');
  }
- assert.ok(ui.includes("function searchFromMainResults()"));
- assert.ok(ui.includes("search.addEventListener('input',searchFromMainResults)"));
- assert.ok(ui.includes("host.id='participation-main-search'"));
- assert.ok(ui.includes("buildTable(sortRows(rows))"));
- assert.ok(ui.includes("data-participation-month-open"));
- assert.ok(ui.includes("participation-recent-batch"));
- assert.ok(ui.includes("participation-all-records"));
+ assert.ok(ui.includes('const initialize=()=>{loadForPR()}'));
+ assert.ok(!read('index.html').includes('id="participation-archive"'));
+ assert.ok(!read('index.html').includes('id="participation-recent-batch"'));
  assert.doesNotThrow(()=>new Function(ui));
 });
