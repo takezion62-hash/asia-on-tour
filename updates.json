@@ -2,6 +2,24 @@
   "version": 1,
   "entries": [
     {
+      "id": "auto-sync-20261110232144",
+      "date": "2026-11-11",
+      "type": "records",
+      "title": "公式規則で自動承認：過去大会9戦績",
+      "description": "公式規則・地域別順位・本人確認済みEpic ID・順位表・既存戦績を照合。予選突破、公式VR賞金、スキン（0件）、公式賞金表によるCash Cup（0件／賞金圏外$0含む）、S43 Performance Evaluation（0件）、S39 Unreal Cup（0件／チーム・個人賞金、圏外$0）、公式デュオ予選（2件／突破と圏外参加を区別・$0）を自動掲載。支払い完了や未確認の賞金は推定しない。",
+      "recordIds": [
+        "auto-s30-49735ddbc67f",
+        "auto-s30-aa6e3e771c62",
+        "auto-s30-9f7db3608fc9",
+        "auto-s30-32dd64bd4ed3",
+        "auto-s30-7c9f25a122b2",
+        "auto-s30-6cc90f2c42c9",
+        "auto-s30-ca6b93fc24e4",
+        "auto-s36-12c4b0c571b8",
+        "auto-s36-6faea264a798"
+      ]
+    },
+    {
       "id": "manual-finals-20261111-batch3",
       "date": "2026-11-11",
       "type": "records",
