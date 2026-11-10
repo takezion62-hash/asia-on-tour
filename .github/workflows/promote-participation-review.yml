@@ -1,0 +1,40 @@
+name: Promote verified participation into overseas results
+on:
+  push:
+    branches:
+      - fix/qualified-results-not-separate-20261110
+    paths:
+      - scripts/promote-participation-to-results.cjs
+      - .github/workflows/promote-participation-review.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: promote-participation-review-20261110
+  cancel-in-progress: false
+jobs:
+  promote:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/qualified-results-not-separate-20261110
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Promote with canonical deduplication and official round cutoffs
+        run: node scripts/promote-participation-to-results.cjs
+      - name: Validate canonical data
+        run: |
+          npm run validate
+          node --test tests/participation-pr.test.cjs tests/participation-ui.test.cjs
+      - name: Commit to the PR branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add results.json updates.json participation-promotion-report.json
+          git diff --cached --quiet && exit 0
+          git commit -m "data: safely promote verified archive into canonical overseas results"
+          git push origin HEAD:fix/qualified-results-not-separate-20261110
