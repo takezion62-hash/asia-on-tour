@@ -22,7 +22,7 @@ const GROUPS=[
 const roster=p=>Array.isArray(p.players)&&p.players.length?p.players:[p.player];
 const sameStats=(a,b)=>['date','region','tournamentId','event','rank','points','kills','vrs','matches'].every(k=>a[k]===b[k])
  &&roster(a).slice().sort().join('|')===roster(b).slice().sort().join('|');
-function process(original,now='2026-11-11T00:00:00.000Z'){
+function reconcile(original,now='2026-11-11T00:00:00.000Z'){
  const d=clone(original),ids=new Set(d.results.map(x=>x.id)),reviewedIds=new Set(d.reviewed.entries.map(x=>x.id));
  assert(ids.size===d.results.length,'existing result IDs duplicated');
  const players=new Set(d.players.candidates.map(x=>x.name));
@@ -110,7 +110,7 @@ function main(){
  const src={results:read('results.json'),review:read('history-sync-review.json'),reviewed:read('history-sync-reviewed.json'),
   approval:read('approval-history.json'),updates:read('updates.json'),status:read('history-sync-status.json'),
   scan:read('history-sync-scan.json'),players:read('players.json'),tournaments:read('tournaments.json')};
- const out=process(src,new Date().toISOString());
+ const out=reconcile(src,new Date().toISOString());
  console.log('VERIFIED_CASH_FINAL_BATCH '+JSON.stringify(out.report));
  if(process.argv.includes('--dry-run')||!out.report.changed)return;
  for(const [k,n] of Object.entries({results:'results.json',review:'history-sync-review.json',reviewed:'history-sync-reviewed.json',
@@ -118,4 +118,4 @@ function main(){
  console.log('VERIFIED_FINALS_ARCHIVE '+JSON.stringify(appendArchive(ROOT,[],out.docs.results,{checkedAt:new Date().toISOString()})));
 }
 if(require.main===module)main();
-module.exports={process,GROUPS};
+module.exports={reconcile,GROUPS};
