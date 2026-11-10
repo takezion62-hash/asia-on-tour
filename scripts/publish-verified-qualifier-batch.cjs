@@ -13,7 +13,10 @@ const W=[
  ['2024-06-04','S30','ME','S30_SoloZBVictoryCashCup','Event1Round1','ch5s3-zb-solo-victory',2000,RULE_S30],
  ['2024-06-11','S30','ME','S30_SoloVictoryCashCup','Event2Round1','ch5s3-solo-victory-cup',2000,RULE_S30],
  ['2024-06-11','S30','ME','S30_SoloZBVictoryCashCup','Event2Round1','ch5s3-zb-solo-victory',2000,RULE_S30],
- ['2024-09-16','S31','OCE','S31_SoloVictoryCashCup','Event3Round1','ch5s4-solo-victory-cup',1500,RULE_S31]
+ ['2024-09-16','S31','OCE','S31_SoloVictoryCashCup','Event3Round1','ch5s4-solo-victory-cup',1500,RULE_S31],
+ // In C5S3 the rules call NAC the "NA" region; its top 5,000 proceed.
+ ['2024-08-06','S30','NAC','S30_SoloVictoryCashCup','Event8Round1','ch5s3-solo-victory-cup',5000,RULE_S30],
+ ['2024-08-13','S30','NAC','S30_SoloVictoryCashCup','Event9Round1','ch5s3-solo-victory-cup',5000,RULE_S30]
 ].map(([date,season,region,event,round,tournament,cutoff,rules])=>({
  date,season,region,event,window:season+'_'+event.slice(season.length+1)+'_'+round+'_'+region,
  tournament,cutoff,rules
@@ -82,12 +85,12 @@ function reconcile(original,now='2026-11-10T22:35:00.000Z'){
  if(published.length||duplicates.length){
   const day=new Date(Date.parse(now)+9*3600000).toISOString().slice(0,10);
   if(published.length){
-   const updateId='manual-qualifiers-20261111-batch1';
+   const updateId=published.some(x=>x.region==='NAC')?'manual-qualifiers-20261111-batch2':'manual-qualifiers-20261111-batch1';
    assert(!d.updates.entries.some(x=>x.id===updateId),'update ID already exists');
    d.updates.entries.unshift({id:updateId,date:day,type:'records',
-    title:'2024年ME/OCE公式予選突破'+published.length+'戦績を通常一覧に追加',
+    title:'2024年ME/NAC公式予選突破'+published.length+'戦績を通常一覧に追加',
     description:'Epic IDと保存済み順位表、Epic公式2024地域別突破条件で確認。'
-      +'2024年ME: 上位2000名、OCE: 上位1500名。予選現金賞金$0。旧参加アーカイブとの重複も整理。',
+      +'2024年ME: 上位2000名、北米(NA/NAC): 上位5000名。予選現金賞金$0。旧参加アーカイブとの重複も整理。',
     recordIds:published.map(x=>x.id)});
   }
   d.approval.reviewedAt=now;d.reviewed.reviewedAt=now;d.review.manualReviewedAt=now;
