@@ -254,7 +254,7 @@
        +'<dt>総合得意地域</dt><dd>'+esc(best)+'</dd>'
        +'<dt>攻撃効率の地域</dt><dd>'+esc(report.specialties?.attack||'未判定')+'</dd>'
        +'<dt>勝ち切り効率の地域</dt><dd>'+esc(report.specialties?.victory||'未判定')+'</dd></dl>'
-       +'<span class="style-tag'+(report.style.key==='unrated'?' is-low':'')+'">'+esc(report.style.label)+'</span>'
+       +'<span class="style-tag'+(report.style.key==='unrated'?' is-low':'')+'">'+esc(report.style.key==='unrated'&&report.observedTendency?.records?'観測：'+report.observedTendency.label+'（参考）':report.style.label)+'</span>'
        +'<p class="style-small">'+esc(report.affinity.reason)+'</p></article>';
    }).join('');
    const regionMatrix='<div class="style-evidence-scroll style-region-matrix" tabindex="0" aria-label="同条件・地域別の攻撃効率と勝率の比較表">'
