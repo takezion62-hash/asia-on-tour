@@ -1,0 +1,53 @@
+name: AOT fast source-verified pending result publisher
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/publish-cosmetics-fast.yml"
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: aot-fast-cosmetic-publication
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Review verified candidates and safely publish on the latest main
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          for attempt in 1 2 3 4 5; do
+            git fetch origin main
+            git reset --hard origin/main
+            node scripts/publish-verified-cosmetic-pending.cjs --dry-run
+            node scripts/publish-verified-cosmetic-pending.cjs
+            npm run validate
+            node --test tests/manual-approval.test.cjs tests/automatic-cosmetic-approval.test.cjs tests/tournament-rules.test.cjs
+            git add results.json auto-sync-review.json history-sync-review.json auto-sync-status.json history-sync-status.json approval-history.json updates.json
+            if git diff --cached --quiet; then
+              echo "AOT_FAST_PUBLISH already published or no candidates safely eligible"
+              exit 0
+            fi
+            git commit -m "data: publish verified S42 review candidates to the site"
+            if git push origin HEAD:main; then
+              echo "AOT_FAST_PUBLISH results pushed to main"
+              exit 0
+            fi
+            if [ "$attempt" = 5 ]; then
+              echo "::error::Concurrent update prevented safe publication"
+              exit 1
+            fi
+            sleep $((attempt * 2))
+          done
