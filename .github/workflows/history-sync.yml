@@ -10,6 +10,8 @@ on:
       - "tests/verified-partial-page.test.cjs"
       - "scripts/audit-pending-history-20261108.cjs"
       - "scripts/publish-verified-s35-console-duos-20261108.cjs"
+      - "scripts/publish-verified-qualifier-batch.cjs"
+      - "tests/publish-verified-qualifier-batch.test.cjs"
       - "scripts/publish-reviewed-s30-nac-zero-vr.cjs"
       - "tests/publish-reviewed-s30-nac-zero-vr.test.cjs"
       - "tests/publish-verified-s35-console-duos-20261108.test.cjs"
@@ -60,6 +62,38 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '24'
+      - name: Publish exact verified 2024 ME/OCE Solo qualifiers (safe, repeatable)
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          for attempt in 1 2 3 4 5; do
+            echo "VERIFIED_QUALIFIERS attempt ${attempt}/5"
+            git fetch origin main
+            git reset --hard origin/main
+            node scripts/publish-verified-qualifier-batch.cjs --dry-run
+            node scripts/publish-verified-qualifier-batch.cjs
+            npm run validate
+            node --test tests/publish-verified-qualifier-batch.test.cjs tests/safe-sync-merge.test.cjs
+            git add results.json updates.json history-sync-review.json history-sync-reviewed.json history-sync-status.json approval-history.json participation-index.json
+            git add -A participation/
+            if git diff --cached --quiet; then
+              echo "VERIFIED_QUALIFIERS no new rows"
+              break
+            fi
+            git commit -m "data: publish official verified 2024 ME/OCE qualifier results and de-duplicate archive"
+            if git push origin HEAD:main; then
+              echo "VERIFIED_QUALIFIERS published to main"
+              break
+            fi
+            if [ "${attempt}" -ge 5 ]; then
+              echo "::error::verified qualifier batch could not be published safely"
+              exit 1
+            fi
+            echo "main advanced; retry from current verified source without force push"
+            sleep $((attempt * 3))
+          done
+
       - name: Audit historical candidates and original leaderboard checkpoints
         run: node scripts/audit-pending-history-20261108.cjs
       - name: Snapshot the original main before the historical provider scan
