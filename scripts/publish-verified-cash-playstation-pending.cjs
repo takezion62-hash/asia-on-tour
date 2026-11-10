@@ -137,7 +137,7 @@ if(published.length){
  }else{
   db.updates.entries.unshift({id:marker,date:'2026-11-11',type:'records',
    title:'Solo/Duos Cash Cup・PlayStation Cupの公式順位を掲載',
-   description:'Epic IDと公式ラウンド・地域別突破条件を確認。予選突破、決勝結果、現金$0を区別し、通常の遠征結果に統合。予選敗退ラベルや根拠のない賞金は使わない。',
+   description:'Epic IDと公式ラウンド・地域別突破条件を確認。予選突破、決勝結果、現金$0を区別し、通常の遠征結果に統合。不確かな結果表示や未確認の賞金加算は行わない。',
    recordIds:published.map(x=>x.id)});
  }
  for(const k of ['auto','history']){
