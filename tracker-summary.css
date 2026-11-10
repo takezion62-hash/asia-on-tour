@@ -1,0 +1,20 @@
+/* Event-only Fortnite Tracker-style values. Layout never treats missing as zero. */
+.tracker-summary{min-width:0;border:1px solid #435474;background:#122038;border-radius:14px;padding:14px 15px;margin:6px 0;color:#e8efff}
+.tracker-summary h4{display:flex;flex-wrap:wrap;gap:9px;align-items:baseline;margin:0 0 13px;font-size:15px;font-weight:850;color:#eef4ff}
+.tracker-summary h4 small{font-size:10px;letter-spacing:.07em;color:#a5bfe0}
+.tracker-summary-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px 14px;margin:0}
+.tracker-summary-cell{min-width:0;border-top:1px solid #334461;padding:10px 0 5px}
+.tracker-summary-cell dt{font-size:10px;letter-spacing:.02em;color:#b4c4db;font-weight:750;line-height:1.45}
+.tracker-summary-cell dd{margin:6px 0 0;font-size:clamp(15px,2.5vw,24px);font-weight:900;color:#fff;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.tracker-summary-hint{font-size:11px;line-height:1.65;color:#adbed3;margin:15px 0 0}
+.tracker-summary-source{display:inline-block;margin-top:10px;font-size:12px;font-weight:750}
+.participation-tracker-details{margin-top:5px;max-width:320px}
+.participation-tracker-details summary{cursor:pointer;font-size:11px;color:#b3dafe;white-space:nowrap}
+.participation-tracker-details .tracker-summary{min-width:240px;padding:11px 9px;margin:7px 0}
+.participation-tracker-details .tracker-summary-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:5px}
+.participation-tracker-details .tracker-summary-cell dd{font-size:15px}
+@media(max-width:520px){
+  .tracker-summary{padding:12px 10px}
+  .tracker-summary-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 10px}
+  .tracker-summary-cell dd{font-size:18px}
+}
