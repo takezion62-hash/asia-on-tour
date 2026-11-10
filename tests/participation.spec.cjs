@@ -119,8 +119,8 @@ test('a multi-month publication is presented as one visible batch with working m
  await expect(recent).toContainText('賞金・称号・正式戦績の集計には加算していません');
  await expect(recent.locator('.participation-month-links a')).toHaveCount(months.size);
  if(expectedCount>8){
-  await recent.locator('.participation-all-records summary').click();
-  await expect(recent.locator('.participation-all-records tbody tr')).toHaveCount(expectedCount);
+  await recent.locator('.participation-all-records > summary').click();
+  await expect(recent.locator('.participation-all-records > .participation-scroll > table > tbody > tr')).toHaveCount(expectedCount);
  }
  const month=[...months].sort().reverse()[0];
  await recent.locator('.participation-month-links a[data-participation-month-open="'+month+'"]').click();
