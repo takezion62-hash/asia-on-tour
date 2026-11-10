@@ -1,85 +1,36 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-10T18:25:45.477Z",
+  "checkedAt": "2026-11-10T22:23:35.442Z",
   "mode": "review",
   "scope": "history",
   "dateMode": "rolling",
   "selectedWindows": 24,
   "fromDate": "2023-01-01",
-  "toDate": "2026-11-10",
+  "toDate": "2026-11-11",
   "provider": "osirion",
   "linkedPlayers": 563,
-  "trackedWindows": 2951,
-  "found": 154,
-  "skipped": 26,
-  "imported": 43,
+  "trackedWindows": 2952,
+  "found": 175,
+  "skipped": 15,
+  "imported": 19,
   "scannedPages": 96,
-  "completedWindows": 242,
+  "completedWindows": 247,
   "identityConflicts": 3,
-  "alreadyRegistered": 2143,
-  "autoApprovedTotal": 1167,
+  "alreadyRegistered": 2186,
+  "autoApprovedTotal": 1186,
   "invalidCachedCandidates": 1,
-  "manualReviewCandidates": 154,
+  "manualReviewCandidates": 175,
   "autoApprovedCosmeticThisRun": 0,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
   "autoApprovedUnrealThisRun": 0,
   "timeLimitReached": false,
   "retryWindows": 8,
-  "transientFailures": 6,
+  "transientFailures": 0,
   "malformedFailures": 0,
-  "skippedLeaderboards": [
-    {
-      "window": "epicgames_S43_TriosCashCup_BR/S43_TriosCashCup_Event1_BR",
-      "page": 7,
-      "attempt": 1,
-      "code": "OSIRION_TRANSIENT",
-      "reason": "Osirion API HTTP 429 /v1/tournaments/leaderboard",
-      "retryAfter": "2026-11-11T00:24:58.523Z"
-    },
-    {
-      "window": "epicgames_S42_Persona5Cup_ME/S42_Persona5Cup_ME",
-      "page": 1,
-      "attempt": 1,
-      "code": "OSIRION_TRANSIENT",
-      "reason": "Osirion API HTTP 429 /v1/tournaments/leaderboard",
-      "retryAfter": "2026-11-11T00:25:01.062Z"
-    },
-    {
-      "window": "epicgames_S42_InoxtagIconCup_NAC/S42_InoxtagIconCup_NAC",
-      "page": 1,
-      "attempt": 1,
-      "code": "OSIRION_TRANSIENT",
-      "reason": "Osirion API HTTP 429 /v1/tournaments/leaderboard",
-      "retryAfter": "2026-11-11T00:25:03.346Z"
-    },
-    {
-      "window": "epicgames_S30_SoloVictoryCashCup_ME/S30_SoloVictoryCashCup_Event2Round2_ME",
-      "page": 1,
-      "attempt": 1,
-      "code": "OSIRION_TRANSIENT",
-      "reason": "Osirion API HTTP 429 /v1/tournaments/leaderboard",
-      "retryAfter": "2026-11-11T00:25:05.374Z"
-    },
-    {
-      "window": "epicgames_S30_SoloZBVictoryCashCup_ME/S30_SoloZBVictoryCashCup_Event2Round2_ME",
-      "page": 1,
-      "attempt": 1,
-      "code": "OSIRION_TRANSIENT",
-      "reason": "Osirion API HTTP 429 /v1/tournaments/leaderboard",
-      "retryAfter": "2026-11-11T00:25:07.489Z"
-    },
-    {
-      "window": "epicgames_S30_SoloVictoryCashCup_NAC/S30_SoloVictoryCashCup_Event2Round1_NAC",
-      "page": 1,
-      "attempt": 1,
-      "code": "OSIRION_TRANSIENT",
-      "reason": "Osirion API HTTP 429 /v1/tournaments/leaderboard",
-      "retryAfter": "2026-11-11T00:25:09.639Z"
-    }
-  ],
-  "reviewOnlyWindows": 1319,
+  "skippedLeaderboards": [],
+  "reviewOnlyWindows": 1320,
   "reviewOnlyCandidates": 83,
   "unmappedEvents": 238,
   "unmappedEventIds": [
@@ -96,29 +47,29 @@
     "S30_Reload",
     "S30_ReloadZB"
   ],
-  "message": "最新版と安全統合：新規掲載43件、重複スキップ0件、要確認の競合0件、確認待ち154件。既存の戦績・賞金は保持。",
+  "message": "最新版と安全統合：新規掲載19件、重複スキップ0件、要確認の競合0件、確認待ち175件。既存の戦績・賞金は保持。",
   "manuallyPublished": 476,
   "manuallyResolvedDuplicates": 37,
   "lastReviewedBatchAt": "2026-11-10T14:47:13.600Z",
   "manuallyCorrected": 1,
   "lastCorrectedReviewAt": "2026-11-07T09:14:30.244Z",
   "concurrentMerge": {
-    "appended": 43,
+    "appended": 19,
     "alreadyPublished": 0,
     "reviewConflicts": 0,
-    "keptPending": 154,
-    "reconciledAt": "2026-11-10T18:25:47.136Z"
+    "keptPending": 175,
+    "reconciledAt": "2026-11-10T22:23:37.883Z"
   },
   "coverage": {
-    "total": 2951,
-    "completed": 242,
-    "notStarted": 2647,
-    "partial": 54,
+    "total": 2952,
+    "completed": 247,
+    "notStarted": 2640,
+    "partial": 57,
     "retryWaiting": 8,
     "retryDue": 0,
-    "remaining": 2709,
+    "remaining": 2705,
     "retryCount": 8,
-    "completionPercent": 8.2,
+    "completionPercent": 8.4,
     "byRegion": {
       "OCE": {
         "total": 522,
@@ -126,9 +77,9 @@
         "pending": 489
       },
       "ME": {
-        "total": 517,
-        "completed": 72,
-        "pending": 445
+        "total": 518,
+        "completed": 74,
+        "pending": 444
       },
       "EU": {
         "total": 535,
@@ -137,35 +88,35 @@
       },
       "BR": {
         "total": 516,
-        "completed": 19,
-        "pending": 497
+        "completed": 20,
+        "pending": 496
       },
       "NAC": {
         "total": 535,
-        "completed": 44,
-        "pending": 491
+        "completed": 45,
+        "pending": 490
       },
       "NAW": {
         "total": 326,
-        "completed": 32,
-        "pending": 294
+        "completed": 33,
+        "pending": 293
       }
     },
     "byYear": {
       "2024": {
         "total": 974,
-        "completed": 52,
-        "pending": 922
+        "completed": 54,
+        "pending": 920
       },
       "2025": {
         "total": 690,
-        "completed": 34,
-        "pending": 656
+        "completed": 35,
+        "pending": 655
       },
       "2026": {
-        "total": 1287,
-        "completed": 156,
-        "pending": 1131
+        "total": 1288,
+        "completed": 158,
+        "pending": 1130
       }
     },
     "outsideScopeCheckpoints": 0,
