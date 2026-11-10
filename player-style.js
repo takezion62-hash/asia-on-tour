@@ -181,6 +181,40 @@
     return {stage,label:meta.label,detail:meta.detail,tags,windows,records:total,
       matches:adequate.matches,progress,maxProgress:3};
   }
+  // With one or two documented outings, show what *was recorded* rather than
+  // making players wait for a broad cross-player cohort. These are observations,
+  // never a relative ranking, skill tier, or inferred tactical role.
+  function observedTendency(rows,stats){
+    const windows=slotsCount(rows),records=stats.records;
+    if(!records)return {stage:'none',label:'対象戦績なし',reason:'確認済み戦績がありません',
+      windows:0,records:0,matches:0,kpm:null,vrRate:null,regions:[],mixed:false};
+    const categories=new Set(rows.map(r=>[r._aotStyleCategory?.team,
+      r._aotStyleCategory?.mode,r._aotStyleCategory?.series].join('/')));
+    const mixed=categories.size>1;
+    const regions=REGIONS.filter(x=>rows.some(r=>r.region===x));
+    const knownKill=stats.killRecords>0&&stats.killMatches>0;
+    const knownVr=stats.vrRecords>0&&stats.vrMatches>0;
+    const hasKill=knownKill&&stats.kills>0,hasVr=knownVr&&stats.vrs>0;
+    let label;
+    if(hasKill&&hasVr)label='キル・VRの両方を記録';
+    else if(hasVr)label='VR実績を確認';
+    else if(hasKill)label=knownVr?'キル実績あり（VRは0件）':'キル実績を確認';
+    else if(knownKill&&knownVr)label='記録上は0キル・0VR';
+    else label='大会参加を確認';
+    const matches=Math.min(stats.killMatches||0,stats.vrMatches||0);
+    const stage=windows>=5&&matches>=30?'established':windows>=3&&matches>=10?'growing':'early';
+    const confidence=stage==='established'?'データ充実':stage==='growing'?'観測を蓄積中':'少数記録・参考';
+    const unit=rows.every(r=>r._aotStyleCategory?.team==='solo')?'個人':
+      rows.every(r=>r._aotStyleCategory?.team&&r._aotStyleCategory.team!=='solo')?'チーム':'形式混在';
+    return {stage,label,confidence,records,windows,regions,regionCount:regions.length,
+      matches:stats.matchTotal,killMatches:stats.killMatches,vrMatches:stats.vrMatches,
+      kills:stats.kills,vrs:stats.vrs,
+      kpm:mixed?null:stats.kpm,vrRate:mixed?null:stats.vrRate,mixed,unit,
+      reason:windows+'開催枠・'+stats.matchTotal+'試合の記録。'
+       +(mixed?'大会形式が混在するためK/試合・VR率は一括比較しない。':
+       'K/試合・VR率は掲載された試合の実測値で、他選手より強いことを意味しない。')
+       +(stats.unknownMatchRecords?' 試合数が不明な'+stats.unknownMatchRecords+'件は率から除外。':'')};
+  }
   // Descriptive geography does not need a same-season peer cohort; a single
   // documented appearance can establish where a player appeared. Ties in cash
   // or VR counts are left undecided, not used to declare a "best region".
@@ -357,6 +391,7 @@
     const stats=summarize(chosen.rows);
     const affinity=regionAffinity(allRegionMetrics,f);
     const style=classifyStyle(stats,chosen.rows,records,f,helpers);
+    const observed=observedTendency(chosen.rows,stats);
     const regionalSpecialties=regionalLeaders(allRegionMetrics,f);
     const monthly=new Map();
     for(const r of chosen.rows){
@@ -379,7 +414,7 @@
       .sort((a,b)=>b.matches-a.matches||Number(b.season.slice(1))-Number(a.season.slice(1)))[0]?.season||null;
     const overlapping=[...new Set([...ownAll.overlapping,...chosen.overlapping])];
     const recent=momentum(chosen.rows);
-    return {player:name,filters:f,stats,style,regions:allRegionMetrics,affinity,trend,
+    return {player:name,filters:f,stats,style,observedTendency:observed,regions:allRegionMetrics,affinity,trend,
       insights:progressiveInsights(chosen.rows,stats,adequacy(chosen.rows),f),
       regionHighlights:regionHighlights(allRegionMetrics),
       recommendedScope:recommendedScope(ownAll.rows,helpers),
@@ -389,5 +424,5 @@
       quality:adequacy(chosen.rows),coverage:quality(stats,overlapping,selection.conflicts)};
   }
   return Object.freeze({VERSION:2,REGIONS,TEAMS,FILTER_DEFAULTS,STYLES,dedupe,windowKey,select,forPlayer,
-    summarize,slotsCount,adequacy,progressiveInsights,regionHighlights,recommendedScope,regionAffinity,regionalLeaders,quality,momentum,evidence,percentile,cohort,scouting,analyze});
+    summarize,slotsCount,adequacy,observedTendency,progressiveInsights,regionHighlights,recommendedScope,regionAffinity,regionalLeaders,quality,momentum,evidence,percentile,cohort,scouting,analyze});
 });
