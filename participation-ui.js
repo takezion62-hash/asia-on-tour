@@ -67,7 +67,7 @@
       const month=visible[0].date.slice(0,7);
       host.innerHTML='<div class="participation-heading"><div><p class="participation-kicker">OTHER VERIFIED RESULTS</p>'
         +'<h2>出場アーカイブにも '+fmt(found.length)+'件の一致</h2></div></div>'
-        +'<p class="participation-note">以下は予選敗退・通過未確認を含む別枠の出場記録です。通常の賞金・称号・正式戦績には加算しません。シーズン選択に関係なく全期間を検索しています。</p>'
+        +'<p class="participation-note">こちらは本人IDで照合した順位表記録です。通常の賞金・称号・正式戦績には加算しません。シーズン選択に関係なく全期間を検索しています。</p>'
         +buildTable(visible)
         +(found.length>visible.length?'<p class="participation-note">先頭30件を表示。詳しくは下の月別出場アーカイブを確認してください。</p>':'')
         +'<p class="participation-note"><a href="#results" data-participation-month-open="'+esc(month)+'">月別の出場記録へ移動 ↗</a></p>';
@@ -93,62 +93,6 @@
     searchFromMainResults();
   }
 
-  // Make newly added archived participation discoverable from the main results
-  // page and update history without mixing it into cash/prize statistics.
-  async function revealLatestPublished(index,picker){
-    try{
-      const log=await load('updates.json');
-      const entry=(log.entries||[]).find(e=>e.type==='participation'&&Array.isArray(e.participationIds)&&e.participationIds.length);
-      if(!entry)return;
-      // Monthly entries belonging to a single manual publication must appear
-      // as ONE batch. Otherwise the last updated historical month shows as
-      // "recently added: 1 record" even when 93 were published together.
-      const marker=String(entry.id||'').match(/^reviewed-participation-(\d{8})-\d{4}-\d{2}$/);
-      const prefix=marker?'reviewed-participation-'+marker[1]+'-':null;
-      const batch=prefix?(log.entries||[]).filter(e=>e.type==='participation'&&
-        String(e.id||'').startsWith(prefix)&&Array.isArray(e.participationIds)&&e.participationIds.length):[entry];
-      const published=batch.filter(e=>/^\d{4}-\d{2}$/.test(e.participationMonth||'')&&
-        index.months.some(m=>m.month===e.participationMonth));
-      const groups=await Promise.all(published.map(async item=>{
-        const ids=new Set(item.participationIds);
-        const rows=(await getMonth(item.participationMonth)).filter(row=>ids.has(row.id));
-        return {month:item.participationMonth,rows};
-      }));
-      const populated=groups.filter(group=>group.rows.length).sort((a,b)=>b.month.localeCompare(a.month));
-      const rows=sortRows(populated.flatMap(group=>group.rows));
-      if(!rows.length)return;
-      const sameDate=rows.every(r=>r.date===rows[0].date);
-      const sameEvent=rows.every(r=>r.event===rows[0].event);
-      const sameRegion=rows.every(r=>r.region===rows[0].region);
-      const title=populated.length>1?
-        entry.date+'登録分 · '+populated.length+'か月':
-        [sameDate?rows[0].date:entry.participationMonth,sameRegion?rows[0].region:'',
-         sameEvent?rows[0].event:'複数大会'].filter(Boolean).join(' · ');
-      const monthLinks=populated.map(group=>'<a href="#results" data-participation-month-open="'+esc(group.month)+
-        '">'+esc(group.month)+'（'+fmt(group.rows.length)+'件）</a>').join('');
-      const recent=document.createElement('div');
-      recent.className='participation-recent';
-      recent.id='participation-recent-summary';
-      recent.innerHTML='<strong>最近追加した出場戦績 '+fmt(rows.length)+'件</strong>'
-        +'<span>'+esc(title)+' · 順位・キル・VRを保存済みの公式順位表で照合</span>'
-        +'<p class="participation-note">賞金・予選突破の確認待ちは継続。正式な賞金戦績ではなく、出場確認アーカイブに掲載しています。</p>'
-        +'<div class="participation-month-links">'+monthLinks+'</div>';
-      document.getElementById('participation-summary')?.after(recent);
-      const shortcut=document.createElement('div');
-      shortcut.className='participation-shortcut';
-      shortcut.id='participation-recent-batch';
-      shortcut.innerHTML='<strong>追加済みの出場記録 '+fmt(rows.length)+'件（'+esc(title)+'）</strong>'
-        +'<p class="participation-note">ここに掲載した記録は予選敗退・通過未確認を含みます。賞金・称号・正式戦績の集計には加算していません。確認待ち欄は賞金・通過の未確定事項があるため残っています。</p>'
-        +buildTable(rows.slice(0,8))
-        +(rows.length>8?'<details class="participation-all-records"><summary>今回追加した'+fmt(rows.length)+
-          '件をすべて表示</summary>'+buildTable(sortRows(rows))+'</details>':'')
-        +'<p class="participation-note">開催月ごとの記録を確認：</p>'
-        +'<div class="participation-month-links">'+monthLinks+'</div>';
-      document.querySelector('#page-results .prize-row-note')?.after(shortcut);
-    }catch(error){
-      console.warn('Recent participation update was not available:',error);
-    }
-  }
   document.addEventListener('click',event=>{
     const link=event.target.closest('[data-participation-month-open]');
     if(!link)return;
@@ -214,7 +158,6 @@
         // that actually has results, while keeping zero-result months selectable.
         const firstWithRecords=m.find(month=>month.count>0);
         if(firstWithRecords)picker.value=firstWithRecords.month;
-        await revealLatestPublished(index,picker);
         renderMonth();
       }else{target.textContent='現在、出場戦績の初回自動調査を待っています';picker.disabled=true}
     }catch(error){target.textContent=error.message}
@@ -227,8 +170,8 @@
     const section=document.createElement('section');
     section.className='participation-panel participation-profile';
     section.id='participation-profile';
-    section.innerHTML='<div class="participation-heading"><div><p class="participation-kicker">AUTO-VERIFIED PARTICIPATION</p><h2>海外大会の出場戦績 <span>（予選敗退も収録）</span></h2></div></div>'
-      +'<p class="participation-note">予選通過圏外と、通過未確認の出場記録を分けて掲載。賞金・称号には加算されません。AOT PRには、正式戦績との重複を除いた参加・順位・キルの基本ポイントのみ反映します。</p>'
+    section.innerHTML='<div class="participation-heading"><div><p class="participation-kicker">AUTO-VERIFIED PARTICIPATION</p><h2>海外大会の出場戦績 <span>（順位と通過状況）</span></h2></div></div>'
+      +'<p class="participation-note">公式順位表に基づく順位と、確認できた通過状況を掲載。賞金・称号には加算されません。AOT PRには、正式戦績との重複を除いた参加・順位・キルの基本ポイントのみ反映します。</p>'
       +'<div class="participation-profile-body" aria-live="polite">出場記録を確認中…</div>';
     host.append(section);
     const target=section.querySelector('.participation-profile-body');
