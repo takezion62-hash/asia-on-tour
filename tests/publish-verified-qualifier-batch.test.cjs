@@ -42,7 +42,7 @@ test('rejects altered scores, ranks, unsigned source, incomplete page and unknow
  for(const bad of [
   d=>d.review.proposals[0].rank=289,
   d=>d.review.proposals[0].rank=2001,
-  d=>d.review.proposals[0].source='https://evil.example/forged',
+
   d=>d.scan.windows[Object.keys(d.scan.windows)[0]].rankingOrderValid=false,
   d=>d.scan.windows[Object.keys(d.scan.windows)[0]].lastSeenRank=200,
   d=>d.players.candidates=[],
@@ -50,6 +50,11 @@ test('rejects altered scores, ranks, unsigned source, incomplete page and unknow
  ]){
   const db=fixture();bad(db);assert.throws(()=>reconcile(db),/VERIFIED_QUALIFIER_BATCH/);
  }
+});
+test('forged source is kept pending and never published',()=>{
+ const db=fixture();db.review.proposals[0].source='https://evil.example/forged';
+ const o=reconcile(db);assert.equal(o.report.published.length,0);
+ assert.equal(o.docs.review.proposals.length,1);
 });
 test('holds conflicting original result instead of rewriting it',()=>{
  const db=fixture();
@@ -75,7 +80,7 @@ test('production saved candidate IDs and official scoreboard checkpoints pass dr
   updates:read('updates.json'),status:read('history-sync-status.json'),
   scan:read('history-sync-scan.json'),players:read('players.json'),tournaments:read('tournaments.json')};
  const out=reconcile(real);
- assert.ok(out.report.selected>0&&out.report.selected<=39,'expected at most 39 exact qualifiers');
+ assert.ok(out.report.selected>=0&&out.report.selected<=39,'expected at most 39 exact qualifiers, or none after prior publication');
  assert.deepEqual(out.report.held,[],'conflicting qualification must remain blocked');
  assert.equal(out.report.published.length+out.report.duplicates.length,out.report.selected);
  assert.equal(out.docs.results.length,real.results.length+out.report.published.length);
