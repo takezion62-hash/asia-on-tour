@@ -1,7 +1,9 @@
 name: Data and site tests
 
 on:
+  # PR branches run through pull_request only; main still receives post-merge checks.
   push:
+    branches: [main]
   pull_request:
   workflow_dispatch:
 
