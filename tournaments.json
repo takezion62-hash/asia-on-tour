@@ -1098,6 +1098,10 @@
         {
           "text": "2024/9/24（JST）ME Event4 Round2：3peace（24位・8K）、Nalu（28位・7K）、渡良瀬佳乃（44位・0K）が各1VR・各$100。ユーザー提供Tracker画像。",
           "url": "https://fortnitetracker.com/events/epicgames_S31_SoloVictoryCashCup_ME?window=S31_SoloVictoryCashCup_Event4Round2_ME"
+        },
+        {
+          "text": "2024年9月16日 OCE Event3 Round2、Rura（20位）・Harukiyo（34位）各1VR・$100。ユーザー提供Tracker画像。",
+          "url": "https://fortnitetracker.com/events/epicgames_S31_SoloVictoryCashCup_OCE?window=S31_SoloVictoryCashCup_Event3Round2_OCE"
         }
       ]
     },
@@ -1184,6 +1188,10 @@
         {
           "text": "S30 Event5 Solo Victory CupではRound2のVRごとに$100",
           "url": "https://www.osirion.gg/tournaments/S30_SoloVictoryCashCup_Event5Round2_ME"
+        },
+        {
+          "text": "2024年8月5日 OCE Event8 Round2、rakirye（23位）・Aim（33位）・モバイル勢のまかろん（39位）各1VR・$100。ユーザー提供Tracker画像。",
+          "url": "https://fortnitetracker.com/events/epicgames_S30_SoloVictoryCashCup_OCE?window=S30_SoloVictoryCashCup_Event8Round2_OCE"
         }
       ]
     },
@@ -2392,6 +2400,36 @@
         {
           "text": "Fortnite Tracker公式イベントID S43_OnePieceZoroCup_ZBで各地域のZero Build順位表を確認。",
           "url": "https://fortnitetracker.com/events/epicgames_S43_OnePieceZoroCup_ZB_OCE"
+        }
+      ]
+    },
+    {
+      "id": "ch3s3-solo-cash-cup",
+      "name": "Solo Cash Cup",
+      "chapter": 3,
+      "season": 3,
+      "seasonId": "S21",
+      "sourceEventIds": [
+        "S21_SoloCashCup"
+      ],
+      "series": "cash-cup",
+      "mode": "battle-royale",
+      "subtype": "solo-cash-cup",
+      "team": "solo",
+      "platform": "cross-platform",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "2022年6月30日 NAW Event 1 Round2、Aim 7位・81pt・7キル・賞金$250。ユーザー提供Tracker画面。",
+          "url": "https://fortnitetracker.com/events/epicgames_S21_SoloCashCup_NAW?window=S21_SoloCashCup_NAW_Event1_Round2"
+        },
+        {
+          "text": "2022年9月15日 NAW Event 6 Round2、Aim 12位・74pt・7キル・賞金$200。ユーザー提供Tracker画面。",
+          "url": "https://fortnitetracker.com/events/epicgames_S21_SoloCashCup_NAW?window=S21_SoloCashCup_NAW_Event6_Round2"
+        },
+        {
+          "text": "Chapter 3 Season 3 NAW Week 6 Aim 12位・$200（大会結果の独立照合）。",
+          "url": "https://www.esportsearnings.com/tournaments/56982-chapter-3-season-3-solo-cash-cup-week-6-na-west"
         }
       ]
     }
