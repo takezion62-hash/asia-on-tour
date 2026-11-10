@@ -1,7 +1,7 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-09T22:29:20.794Z",
+  "checkedAt": "2026-11-10T02:34:44.319Z",
   "mode": "review",
   "scope": "history",
   "dateMode": "rolling",
@@ -10,17 +10,17 @@
   "toDate": "2026-11-10",
   "provider": "osirion",
   "linkedPlayers": 556,
-  "trackedWindows": 2941,
-  "found": 0,
+  "trackedWindows": 2944,
+  "found": 46,
   "skipped": 10,
-  "imported": 30,
+  "imported": 20,
   "scannedPages": 96,
-  "completedWindows": 222,
+  "completedWindows": 229,
   "identityConflicts": 3,
-  "alreadyRegistered": 2017,
-  "autoApprovedTotal": 1042,
+  "alreadyRegistered": 2055,
+  "autoApprovedTotal": 1062,
   "invalidCachedCandidates": 1,
-  "manualReviewCandidates": 0,
+  "manualReviewCandidates": 46,
   "autoApprovedCosmeticThisRun": 0,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
@@ -31,7 +31,7 @@
   "malformedFailures": 0,
   "skippedLeaderboards": [],
   "reviewOnlyWindows": 1318,
-  "reviewOnlyCandidates": 0,
+  "reviewOnlyCandidates": 20,
   "unmappedEvents": 238,
   "unmappedEventIds": [
     "S30_ConsoleCashCups",
@@ -47,29 +47,29 @@
     "S30_Reload",
     "S30_ReloadZB"
   ],
-  "message": "旧大会精査：Lady Liberty重複0件整理、S30賞金決勝8件を全ページ再取得で掲載、保留0件。",
+  "message": "最新版と安全統合：新規掲載20件、重複スキップ0件、要確認の競合0件、確認待ち46件。既存の戦績・賞金は保持。",
   "manuallyPublished": 469,
   "manuallyResolvedDuplicates": 37,
   "lastReviewedBatchAt": "2026-11-09T23:26:02.628Z",
   "manuallyCorrected": 1,
   "lastCorrectedReviewAt": "2026-11-07T09:14:30.244Z",
   "concurrentMerge": {
-    "appended": 30,
+    "appended": 20,
     "alreadyPublished": 0,
     "reviewConflicts": 0,
-    "keptPending": 70,
-    "reconciledAt": "2026-11-09T22:29:22.902Z"
+    "keptPending": 46,
+    "reconciledAt": "2026-11-10T02:34:46.456Z"
   },
   "coverage": {
-    "total": 2941,
-    "completed": 222,
-    "notStarted": 2672,
-    "partial": 45,
+    "total": 2944,
+    "completed": 229,
+    "notStarted": 2669,
+    "partial": 44,
     "retryWaiting": 2,
     "retryDue": 0,
-    "remaining": 2719,
+    "remaining": 2715,
     "retryCount": 2,
-    "completionPercent": 7.5,
+    "completionPercent": 7.8,
     "byRegion": {
       "OCE": {
         "total": 521,
@@ -77,46 +77,46 @@
         "pending": 490
       },
       "ME": {
-        "total": 516,
-        "completed": 66,
-        "pending": 450
+        "total": 517,
+        "completed": 68,
+        "pending": 449
       },
       "EU": {
-        "total": 533,
-        "completed": 38,
+        "total": 535,
+        "completed": 40,
         "pending": 495
       },
       "BR": {
         "total": 514,
-        "completed": 17,
-        "pending": 497
+        "completed": 18,
+        "pending": 496
       },
       "NAC": {
         "total": 533,
-        "completed": 40,
-        "pending": 493
+        "completed": 41,
+        "pending": 492
       },
       "NAW": {
         "total": 324,
-        "completed": 30,
-        "pending": 294
+        "completed": 31,
+        "pending": 293
       }
     },
     "byYear": {
       "2024": {
         "total": 974,
-        "completed": 47,
-        "pending": 927
+        "completed": 49,
+        "pending": 925
       },
       "2025": {
         "total": 690,
-        "completed": 28,
-        "pending": 662
+        "completed": 29,
+        "pending": 661
       },
       "2026": {
-        "total": 1277,
-        "completed": 147,
-        "pending": 1130
+        "total": 1280,
+        "completed": 151,
+        "pending": 1129
       }
     },
     "outsideScopeCheckpoints": 0,
@@ -204,8 +204,30 @@
         "region": "ME",
         "series": "victory-cup",
         "status": "partial",
-        "nextPage": 2,
+        "nextPage": 4,
         "totalPages": 19,
+        "retryAfter": null,
+        "errorCode": null
+      },
+      {
+        "window": "epicgames_S30_SoloVictoryCashCup_NAC/S30_SoloVictoryCashCup_Event1Round1_NAC",
+        "date": "2024-06-04",
+        "region": "NAC",
+        "series": "victory-cup",
+        "status": "partial",
+        "nextPage": 2,
+        "totalPages": 100,
+        "retryAfter": null,
+        "errorCode": null
+      },
+      {
+        "window": "epicgames_S30_SoloVictoryCashCup_NAC/S30_SoloVictoryCashCup_Event1Round2_NAC",
+        "date": "2024-06-04",
+        "region": "NAC",
+        "series": "victory-cup",
+        "status": "partial",
+        "nextPage": 2,
+        "totalPages": 48,
         "retryAfter": null,
         "errorCode": null
       },
@@ -226,30 +248,8 @@
         "region": "ME",
         "series": "victory-cup",
         "status": "partial",
-        "nextPage": 2,
+        "nextPage": 4,
         "totalPages": 18,
-        "retryAfter": null,
-        "errorCode": null
-      },
-      {
-        "window": "epicgames_S30_SoloZBVictoryCashCup_ME/S30_SoloZBVictoryCashCup_Event3Round1_ME",
-        "date": "2024-06-18",
-        "region": "ME",
-        "series": "victory-cup",
-        "status": "partial",
-        "nextPage": 12,
-        "totalPages": 68,
-        "retryAfter": null,
-        "errorCode": null
-      },
-      {
-        "window": "epicgames_S30_SoloVictoryCashCup_ME/S30_SoloVictoryCashCup_Event8Round1_ME",
-        "date": "2024-08-06",
-        "region": "ME",
-        "series": "victory-cup",
-        "status": "partial",
-        "nextPage": 18,
-        "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
       }
