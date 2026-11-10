@@ -157,7 +157,7 @@
    const best=eligible.region?'🏅 集計上の得意地域候補：'+eligible.region:'🌍 得意地域は比較準備中';
    const fact=report.observedTendency;
    const observedStat=(label,value,detail)=>'<div class="style-observed-stat"><small>'+esc(label)+'</small><strong>'+esc(value)+'</strong><span>'+esc(detail)+'</span></div>';
-   const snapshot=fact&&fact.records?'<section class="style-observed" aria-label="少ない戦績からわかる特徴">'
+   const observedPanel=fact&&fact.records?'<section class="style-observed" aria-label="少ない戦績からわかる特徴">'
      +'<div class="style-observed-top"><div><small>OBSERVED PROFILE / 実測からわかる特徴</small>'
      +'<h3>'+esc(fact.label)+'</h3></div><span class="style-observed-confidence">'+esc(fact.confidence)+'</span></div>'
      +'<p>'+esc(fact.reason)+'</p>'
@@ -175,7 +175,7 @@
       +'<p>'+esc(report.style.reason)+'。同じシーズン・人数・ゲーム形式・大会シリーズの20名以上を対象とした比較は、条件がそろった場合だけ表示するよ</p></details>'
      :'<div class="style-status"><span class="style-tag">'+esc('同条件の相対タイプ：'+report.style.label)
       +'</span><span class="style-small">'+esc(report.style.reason)+'</span></div>';
-   const style=snapshot+relative;
+   const style=observedPanel+relative;
    const most=[...report.regions].filter(r=>r.records>0).sort((a,b)=>b.records-a.records)[0];
    const observed=most?'<p class="style-advice">掲載戦績が最も多い地域：<b>'+esc(most.region)+'</b>（'+count(most.records)+'戦績）※得意地域の判定とは別</p>':'';
    const affinity='<div class="style-status"><span class="style-tag'+(!eligible.region?' is-low':'')+'">'+esc(best)+'</span><span class="style-small">'+esc(eligible.region?eligible.reason:'記録のある地域は表示するけど、得意・不得意は少数データから決めないよ。'+eligible.reason)+'</span></div>';
