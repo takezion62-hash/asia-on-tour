@@ -163,3 +163,32 @@
 .profile-style .style-region-fact span{font-size:10px;color:#c1c6d9;line-height:1.6;overflow-wrap:anywhere}
 .profile-style .style-region-facts-note{font-size:11px;color:#aebbd0;margin:10px 0 0;line-height:1.6}
 @media(max-width:640px){.profile-style .style-overview{padding:14px}.profile-style .style-region-fact-grid{grid-template-columns:1fr}.profile-style .style-region-fact{grid-template-columns:1fr auto;align-items:center;column-gap:10px}.profile-style .style-region-fact small{grid-column:1/-1}.profile-style .style-region-fact strong{font-size:22px}.profile-style .style-stage{font-size:10px}.profile-style .style-overview-top{align-items:flex-start}}
+
+
+/* Evidence-first profile: useful with a single verified event, not a skill tier. */
+.style-observed{margin:14px 0 16px;padding:17px 18px;border:1px solid #665e96;
+ border-radius:16px;background:linear-gradient(130deg,#222743,#17253b 75%);min-width:0}
+.style-observed-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
+.style-observed-top small{display:block;color:#b5abf9;font-size:10px;letter-spacing:.12em;font-weight:850}
+.style-observed h3{color:#f5f7ff;font-size:clamp(17px,3vw,23px);line-height:1.35;margin:6px 0 2px;overflow-wrap:anywhere}
+.style-observed-confidence{font-size:11px;font-weight:800;padding:5px 10px;
+ border-radius:999px;border:1px solid #69839c;background:#1d314b;color:#b9edff;white-space:nowrap}
+.style-observed>p{color:#c6d3eb;line-height:1.65;font-size:12px;margin:10px 0}
+.style-observed-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(135px,100%),1fr));
+ gap:10px;margin-top:13px}
+.style-observed-stat{min-width:0;display:grid;gap:5px;background:#111d32;border:1px solid #415370;
+ border-radius:12px;padding:12px 11px}
+.style-observed-stat small{color:#aabbd5;font-size:11px;font-weight:700}
+.style-observed-stat strong{color:#f5faff;font-size:clamp(16px,3.5vw,21px);font-weight:900;overflow-wrap:anywhere}
+.style-observed-stat span{color:#a8b9cf;font-size:10px;line-height:1.5}
+.style-observed .style-observed-warning{font-size:11px;color:#b5c9db;margin:13px 0 0}
+.style-relative-more{margin:10px 0 15px;border:1px solid #51607f;border-radius:12px;
+ padding:11px 13px;background:#142238}
+.style-relative-more summary{font-size:12px;font-weight:800;cursor:pointer;color:#d5e5fc}
+.style-relative-more p{font-size:11px;color:#b8c9e0;line-height:1.7;margin:11px 0 0}
+@media(max-width:520px){
+ .style-observed{padding:14px 12px}
+ .style-observed-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+ .style-observed-stat{padding:11px 9px}
+ .style-observed-stat strong{font-size:18px}
+}
