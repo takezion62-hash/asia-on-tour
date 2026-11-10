@@ -70,6 +70,15 @@ function promote(){
  if(appended.length<1)throw Error('no new canonical results');
  if(records.length!==new Set(records.map(r=>r.id)).size)throw Error('duplicate result ids');
  save('results.json',records);
+ const updates=read('updates.json');
+ const updateId='archive-promoted-to-results-20261110';
+ if(!updates.entries.some(e=>e.id===updateId)){
+  updates.entries.unshift({id:updateId,date:'2026-11-10',type:'records',
+   title:'予選突破・敗退を照合し、出場記録を遠征結果へ統合',
+   description:'保存済みEpic IDと大会順位表・公式地域別通過条件を再照合。公式通過条件のない大会は未判定。賞金・スキンを推定せず、出場戦績を通常の遠征結果へ統合。',
+   recordIds:appended.map(r=>r.id)});
+  save('updates.json',updates);
+ }
  const summary={added:appended.length,duplicates:skipped.length,
    qualified:appended.filter(r=>r.qualification==='qualified').length,
    eliminated:appended.filter(r=>r.qualification==='outside-cutoff').length,
