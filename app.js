@@ -2014,6 +2014,7 @@
         <div><dt>シーズン</dt><dd>${seasonStamp(e)}</dd><dt>大会ラウンド</dt><dd data-detail="round">${escape(e.round||'未登録')}</dd></div>
         <div><dt>大会での表示名</dt><dd data-detail="playerRaw">${escape(e.playerRaw||e.player)}</dd></div>
         <div><dt>賞金内訳 / USD</dt><dd data-detail="prize">${archivePrize(e)}</dd></div>
+        <div class="detail-wide" data-detail="tracker-summary">${typeof AotTrackerSummary!=='undefined'?AotTrackerSummary.render(e):''}</div>
         <div class="detail-wide"><dt>出典URL</dt><dd data-detail="source">${src?`<a href="${escape(src)}" target="_blank" rel="noopener noreferrer">${escape(e.source)} ↗</a>`:'未登録'}</dd></div>
         <div class="detail-wide detail-links"><dt>選手プロフィール</dt><dd data-detail="profiles">${profiles.length?profiles.map(p=>`<a class="result-profile" href="${escape(safeUrl(p.url))}" target="_blank" rel="noopener noreferrer">${escape(p.name)} ↗<span>${escape(p.url)}</span></a>`).join(''):'未登録'}</dd></div>
         <div class="detail-wide"><dt>補足・確認根拠</dt><dd data-detail="note">${escape(e.note||'補足なし')}</dd></div>
