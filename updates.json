@@ -2,6 +2,29 @@
   "version": 1,
   "entries": [
     {
+      "id": "reviewed-participation-20261110-2026-11",
+      "date": "2026-11-10",
+      "type": "participation",
+      "title": "保存済み公式順位表から出場確認 5件を追加（2026-11）",
+      "description": "Epic ID・公式開催枠・保存済み順位表の該当行を照合。未完了の全順位取得を予選突破・賞金・スキン獲得の確定扱いにせず、出場アーカイブに登録。現金賞金と称号の集計対象外。",
+      "recordIds": [],
+      "participationMonth": "2026-11",
+      "participationIds": [
+        "participation-9ffac986ab8ea8e22b66",
+        "participation-afefbfa45733c05a9b75",
+        "participation-05b07187e8524b68b052",
+        "participation-fdbdb7e376a9a82a2d2d",
+        "participation-7ee5aacd75653321cd9c"
+      ],
+      "participantTeams": [
+        "りあにー / ひろ / そみー / Plank",
+        "R1ze / かめてぃん / Zagouの弟 / らむ",
+        "Aster / nezah / みやぐらーる / りんたろう",
+        "kumo / あくりあ / TEITEI / 3peace",
+        "まぁ / こいる / huggyfv / rakirye"
+      ]
+    },
+    {
       "id": "auto-sync-20261110103747",
       "date": "2026-11-10",
       "type": "records",
