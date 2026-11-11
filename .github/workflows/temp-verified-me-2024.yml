@@ -37,10 +37,6 @@ jobs:
         run: |
           npm run validate
           npm run test:unit
-      - name: Install Chromium
-        run: npx playwright install --with-deps chromium
-      - name: Run PC and mobile browser tests
-        run: npm run test:e2e
       - name: Commit only the verified data changes to proposal branch
         run: |
           set -euo pipefail
@@ -51,3 +47,8 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git commit -m "data: add 7 verified ME Trios/Squads finals for 2024"
           git push origin HEAD:verified-me-2024-finals-20261111
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Run PC and mobile browser tests
+        run: npm run test:e2e
