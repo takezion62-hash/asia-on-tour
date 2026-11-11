@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-11T22:35:09.893Z",
+  "reviewedAt": "2026-11-11T23:10:32.156Z",
   "description": "Resolved historic review candidates: published, duplicate or participation",
   "entries": [
     {
@@ -20178,6 +20178,647 @@
       "source": "https://www.fortnite.com/competitive/events/S42_ReloadReloadSoloVictoryCup/?region=NAC&round=S42_ReloadSoloVictoryCup_Event5_Round1_NAC",
       "policy": "verified-rule",
       "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-4-official-rules"
+    },
+    {
+      "id": "auto-s31-177b0add85fa",
+      "decision": "participation-archived",
+      "recordId": "participation-3c4c403998b1d26056b2",
+      "reviewedAt": "2026-11-11T23:10:32.156Z",
+      "policy": "Epic-evidenced-attendance-only",
+      "source": "https://www.fortnite.com/competitive/events/S31_SoloVictoryCashCup/?region=NAC&round=S31_SoloVictoryCashCup_Event2Round1_NAC",
+      "officialRules": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-4-official-rules",
+      "evidence": "Official calendar, Epic account match, mature original ranked checkpoint"
+    },
+    {
+      "id": "auto-s31-e39b67bb0e7e",
+      "decision": "published",
+      "recordId": "auto-s31-e39b67bb0e7e",
+      "reviewedAt": "2026-11-11T23:10:32.156Z",
+      "source": "https://www.fortnite.com/competitive/events/S31_SoloVictoryCashCup/?region=NAC&round=S31_SoloVictoryCashCup_Event2Round2_NAC",
+      "policy": "official-final-vr-award",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-4-official-rules"
+    },
+    {
+      "id": "auto-s31-95ef394178ec",
+      "decision": "published",
+      "recordId": "auto-s31-95ef394178ec",
+      "reviewedAt": "2026-11-11T23:10:32.156Z",
+      "source": "https://www.fortnite.com/competitive/events/S31_SoloVictoryCashCup/?region=ME&round=S31_SoloVictoryCashCup_Event3Round2_ME",
+      "policy": "official-final-vr-award",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-4-official-rules"
+    },
+    {
+      "id": "auto-s31-25218eb88bd8",
+      "decision": "published",
+      "recordId": "auto-s31-25218eb88bd8",
+      "reviewedAt": "2026-11-11T23:10:32.156Z",
+      "source": "https://www.fortnite.com/competitive/events/S31_SoloVictoryCashCup/?region=ME&round=S31_SoloVictoryCashCup_Event3Round2_ME",
+      "policy": "official-final-vr-award",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-4-official-rules"
+    },
+    {
+      "id": "auto-s31-6061b2a51269",
+      "decision": "published",
+      "recordId": "auto-s31-6061b2a51269",
+      "reviewedAt": "2026-11-11T23:10:32.156Z",
+      "source": "https://www.fortnite.com/competitive/events/S31_SoloVictoryCashCup/?region=ME&round=S31_SoloVictoryCashCup_Event3Round2_ME",
+      "policy": "official-final-vr-award",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-4-official-rules"
+    },
+    {
+      "id": "auto-s31-03805597aa7d",
+      "decision": "published",
+      "recordId": "auto-s31-03805597aa7d",
+      "reviewedAt": "2026-11-11T23:10:32.156Z",
+      "source": "https://www.fortnite.com/competitive/events/S31_SoloVictoryCashCup/?region=ME&round=S31_SoloVictoryCashCup_Event3Round2_ME",
+      "policy": "official-final-vr-award",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-4-official-rules"
+    },
+    {
+      "id": "auto-s31-6192a8cd4a7e",
+      "decision": "published",
+      "recordId": "auto-s31-6192a8cd4a7e",
+      "reviewedAt": "2026-11-11T23:10:32.156Z",
+      "source": "https://www.fortnite.com/competitive/events/S31_SoloVictoryCashCup/?region=ME&round=S31_SoloVictoryCashCup_Event3Round2_ME",
+      "policy": "official-final-vr-award",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-4-official-rules"
+    },
+    {
+      "id": "auto-s42-1fabb53a6b93",
+      "decision": "already-published",
+      "existingId": "s42-naw-lady-liberty-br-skin-20261018-4ca4fb7d",
+      "verifiedAt": "2026-11-11T23:10:32.156Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=NAW&round=S42_PurgeCup_NAW",
+      "note": "Same official event and player, points/kills/VR match. Keep original Tracker rank."
+    },
+    {
+      "id": "auto-s42-1f9651880749",
+      "decision": "already-published",
+      "existingId": "s42-naw-lady-liberty-br-skin-20261018-a6578a7f",
+      "verifiedAt": "2026-11-11T23:10:32.156Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=NAW&round=S42_PurgeCup_NAW",
+      "note": "Same official event and player, points/kills/VR match. Keep original Tracker rank."
+    },
+    {
+      "id": "auto-s42-8788a0e14d7f",
+      "decision": "already-published",
+      "existingId": "s42-naw-lady-liberty-br-skin-20261018-ec74bb5d",
+      "verifiedAt": "2026-11-11T23:10:32.156Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=NAW&round=S42_PurgeCup_NAW",
+      "note": "Same official event and player, points/kills/VR match. Keep original Tracker rank."
+    },
+    {
+      "id": "auto-s42-a8a23a2e91e1",
+      "decision": "already-published",
+      "existingId": "s42-naw-lady-liberty-br-skin-20261018-fb46adbc",
+      "verifiedAt": "2026-11-11T23:10:32.156Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=NAW&round=S42_PurgeCup_NAW",
+      "note": "Same official event and player, points/kills/VR match. Keep original Tracker rank."
+    },
+    {
+      "id": "auto-s42-5d183302d573",
+      "decision": "already-published",
+      "existingId": "s42-naw-lady-liberty-br-skin-20261018-7a39fc6c",
+      "verifiedAt": "2026-11-11T23:10:32.156Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=NAW&round=S42_PurgeCup_NAW",
+      "note": "Same official event and player, points/kills/VR match. Keep original Tracker rank."
+    },
+    {
+      "id": "auto-s42-fe2298ada0c8",
+      "decision": "already-published",
+      "existingId": "s42-naw-lady-liberty-br-skin-20261018-9e5682ea",
+      "verifiedAt": "2026-11-11T23:10:32.156Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=NAW&round=S42_PurgeCup_NAW",
+      "note": "Same official event and player, points/kills/VR match. Keep original Tracker rank."
+    },
+    {
+      "id": "auto-s42-520d8ef272d6",
+      "decision": "already-published",
+      "existingId": "s42-naw-lady-liberty-br-skin-20261018-5ce51f7c",
+      "verifiedAt": "2026-11-11T23:10:32.156Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=NAW&round=S42_PurgeCup_NAW",
+      "note": "Same official event and player, points/kills/VR match. Keep original Tracker rank."
+    },
+    {
+      "id": "auto-s42-638bd1efbf2e",
+      "decision": "already-published",
+      "existingId": "s42-naw-lady-liberty-br-skin-20261018-f6e2e7f7",
+      "verifiedAt": "2026-11-11T23:10:32.156Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=NAW&round=S42_PurgeCup_NAW",
+      "note": "Same official event and player, points/kills/VR match. Keep original Tracker rank."
+    },
+    {
+      "id": "auto-s42-8c6c2ee8fc38",
+      "decision": "already-published",
+      "existingId": "s42-naw-lady-liberty-br-skin-20261018-2fbfb0b5",
+      "verifiedAt": "2026-11-11T23:10:32.156Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=NAW&round=S42_PurgeCup_NAW",
+      "note": "Same official event and player, points/kills/VR match. Keep original Tracker rank."
+    },
+    {
+      "id": "auto-s42-e5062b2a5413",
+      "decision": "already-published",
+      "existingId": "s42-naw-lady-liberty-br-skin-20261018-29746b80",
+      "verifiedAt": "2026-11-11T23:10:32.156Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=NAW&round=S42_PurgeCup_NAW",
+      "note": "Same official event and player, points/kills/VR match. Keep original Tracker rank."
+    },
+    {
+      "id": "auto-s42-45ad63d29928",
+      "decision": "already-published",
+      "existingId": "s42-naw-lady-liberty-br-skin-20261018-0873b9b9",
+      "verifiedAt": "2026-11-11T23:10:32.156Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=NAW&round=S42_PurgeCup_NAW",
+      "note": "Same official event and player, points/kills/VR match. Keep original Tracker rank."
+    },
+    {
+      "id": "auto-s42-b1c2caa4ee78",
+      "decision": "already-published",
+      "existingId": "s42-naw-lady-liberty-br-skin-20261018-6095cbeb",
+      "verifiedAt": "2026-11-11T23:10:32.156Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=NAW&round=S42_PurgeCup_NAW",
+      "note": "Same official event and player, points/kills/VR match. Keep original Tracker rank."
+    },
+    {
+      "id": "auto-s42-c3780262d587",
+      "decision": "already-published",
+      "existingId": "s42-naw-lady-liberty-br-skin-20261018-c9affc0b",
+      "verifiedAt": "2026-11-11T23:10:32.156Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=NAW&round=S42_PurgeCup_NAW",
+      "note": "Same official event and player, points/kills/VR match. Keep original Tracker rank."
+    },
+    {
+      "id": "auto-s42-41ae78ebc03c",
+      "decision": "already-published",
+      "existingId": "s42-naw-lady-liberty-br-skin-20261018-9c0cc827",
+      "verifiedAt": "2026-11-11T23:10:32.156Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=NAW&round=S42_PurgeCup_NAW",
+      "note": "Same official event and player, points/kills/VR match. Keep original Tracker rank."
+    },
+    {
+      "id": "auto-s42-9a89b45deab0",
+      "decision": "already-published",
+      "existingId": "s42-naw-lady-liberty-br-skin-20261018-e9e5aea3",
+      "verifiedAt": "2026-11-11T23:10:32.156Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=NAW&round=S42_PurgeCup_NAW",
+      "note": "Same official event and player, points/kills/VR match. Keep original Tracker rank."
+    },
+    {
+      "id": "auto-s42-93a52058d900",
+      "decision": "already-published",
+      "existingId": "s42-naw-lady-liberty-br-skin-20261018-39b08e1c",
+      "verifiedAt": "2026-11-11T23:10:32.156Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=NAW&round=S42_PurgeCup_NAW",
+      "note": "Same official event and player, points/kills/VR match. Keep original Tracker rank."
+    },
+    {
+      "id": "auto-s42-a7ddfbe627b4",
+      "decision": "already-published",
+      "existingId": "s42-naw-lady-liberty-br-skin-20261018-67705cef",
+      "verifiedAt": "2026-11-11T23:10:32.156Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=NAW&round=S42_PurgeCup_NAW",
+      "note": "Same official event and player, points/kills/VR match. Keep original Tracker rank."
+    },
+    {
+      "id": "auto-s42-761ee83fb5eb",
+      "decision": "published",
+      "recordId": "auto-s42-761ee83fb5eb",
+      "reviewedAt": "2026-11-11T23:10:32.156Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=NAW&round=S42_PurgeCup_NAW",
+      "policy": "cosmetic-rank",
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/the-purges-lady-liberty-cup-chapter-7-season-4-official-rules"
+    },
+    {
+      "id": "auto-s42-cab12174d740",
+      "decision": "already-published",
+      "existingId": "s42-naw-lady-liberty-br-skin-20261018-170579f7",
+      "verifiedAt": "2026-11-11T23:10:32.156Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=NAW&round=S42_PurgeCup_NAW",
+      "note": "Same official event and player, points/kills/VR match. Keep original Tracker rank."
+    },
+    {
+      "id": "auto-s42-3a2bcd26af2c",
+      "decision": "already-published",
+      "existingId": "s42-naw-lady-liberty-br-skin-20261018-8a46c44a",
+      "verifiedAt": "2026-11-11T23:10:32.156Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=NAW&round=S42_PurgeCup_NAW",
+      "note": "Same official event and player, points/kills/VR match. Keep original Tracker rank."
+    },
+    {
+      "id": "auto-s42-4827192104bf",
+      "decision": "already-published",
+      "existingId": "s42-naw-lady-liberty-br-skin-20261018-6a1e56fe",
+      "verifiedAt": "2026-11-11T23:10:32.156Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=NAW&round=S42_PurgeCup_NAW",
+      "note": "Same official event and player, points/kills/VR match. Keep original Tracker rank."
+    },
+    {
+      "id": "auto-s42-bbd6b26df2d0",
+      "decision": "already-published",
+      "existingId": "s42-naw-lady-liberty-br-skin-20261018-811ba8d5",
+      "verifiedAt": "2026-11-11T23:10:32.156Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=NAW&round=S42_PurgeCup_NAW",
+      "note": "Same official event and player, points/kills/VR match. Keep original Tracker rank."
+    },
+    {
+      "id": "auto-s42-cd4c20ccf830",
+      "decision": "participation-archived",
+      "recordId": "participation-60c8a315b4f6e064754b",
+      "reviewedAt": "2026-11-11T23:10:32.156Z",
+      "policy": "Epic-evidenced-attendance-only",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=NAW&round=S42_PurgeCup_NAW",
+      "officialRules": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/the-purges-lady-liberty-cup-chapter-7-season-4-official-rules",
+      "evidence": "Official calendar, Epic account match, mature original ranked checkpoint"
+    },
+    {
+      "id": "auto-s42-f08207ec27dd",
+      "decision": "participation-archived",
+      "recordId": "participation-95f7887327060ca52b5a",
+      "reviewedAt": "2026-11-11T23:10:32.156Z",
+      "policy": "Epic-evidenced-attendance-only",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=NAW&round=S42_PurgeCup_NAW",
+      "officialRules": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/the-purges-lady-liberty-cup-chapter-7-season-4-official-rules",
+      "evidence": "Official calendar, Epic account match, mature original ranked checkpoint"
+    },
+    {
+      "id": "auto-s42-73d23ea2733a",
+      "decision": "participation-archived",
+      "recordId": "participation-83120742ca622442caa0",
+      "reviewedAt": "2026-11-11T23:10:32.156Z",
+      "policy": "Epic-evidenced-attendance-only",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=NAW&round=S42_PurgeCup_NAW",
+      "officialRules": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/the-purges-lady-liberty-cup-chapter-7-season-4-official-rules",
+      "evidence": "Official calendar, Epic account match, mature original ranked checkpoint"
+    },
+    {
+      "id": "auto-s42-b5d71809e60b",
+      "decision": "participation-archived",
+      "recordId": "participation-e05746108c004982c64a",
+      "reviewedAt": "2026-11-11T23:10:32.156Z",
+      "policy": "Epic-evidenced-attendance-only",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=NAW&round=S42_PurgeCup_NAW",
+      "officialRules": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/the-purges-lady-liberty-cup-chapter-7-season-4-official-rules",
+      "evidence": "Official calendar, Epic account match, mature original ranked checkpoint"
+    },
+    {
+      "id": "auto-s42-787c7938eb1f",
+      "decision": "participation-archived",
+      "recordId": "participation-e5ade254d4a5d8443726",
+      "reviewedAt": "2026-11-11T23:10:32.156Z",
+      "policy": "Epic-evidenced-attendance-only",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=NAW&round=S42_PurgeCup_NAW",
+      "officialRules": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/the-purges-lady-liberty-cup-chapter-7-season-4-official-rules",
+      "evidence": "Official calendar, Epic account match, mature original ranked checkpoint"
+    },
+    {
+      "id": "auto-s42-21a1318e584b",
+      "decision": "participation-archived",
+      "recordId": "participation-582cb8d004c554b1dd4a",
+      "reviewedAt": "2026-11-11T23:10:32.156Z",
+      "policy": "Epic-evidenced-attendance-only",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=NAW&round=S42_PurgeCup_NAW",
+      "officialRules": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/the-purges-lady-liberty-cup-chapter-7-season-4-official-rules",
+      "evidence": "Official calendar, Epic account match, mature original ranked checkpoint"
+    },
+    {
+      "id": "auto-s42-d0f008b64c05",
+      "decision": "participation-archived",
+      "recordId": "participation-16c099e324bea3017a02",
+      "reviewedAt": "2026-11-11T23:10:32.156Z",
+      "policy": "Epic-evidenced-attendance-only",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=NAW&round=S42_PurgeCup_NAW",
+      "officialRules": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/the-purges-lady-liberty-cup-chapter-7-season-4-official-rules",
+      "evidence": "Official calendar, Epic account match, mature original ranked checkpoint"
+    },
+    {
+      "id": "auto-s42-511eccf327c2",
+      "decision": "participation-archived",
+      "recordId": "participation-1cc4b54567535285c51a",
+      "reviewedAt": "2026-11-11T23:10:32.156Z",
+      "policy": "Epic-evidenced-attendance-only",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=NAW&round=S42_PurgeCup_NAW",
+      "officialRules": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/the-purges-lady-liberty-cup-chapter-7-season-4-official-rules",
+      "evidence": "Official calendar, Epic account match, mature original ranked checkpoint"
+    },
+    {
+      "id": "auto-s42-8313fc6d5d37",
+      "decision": "participation-archived",
+      "recordId": "participation-050820e396582fac2778",
+      "reviewedAt": "2026-11-11T23:10:32.156Z",
+      "policy": "Epic-evidenced-attendance-only",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=NAW&round=S42_PurgeCup_NAW",
+      "officialRules": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/the-purges-lady-liberty-cup-chapter-7-season-4-official-rules",
+      "evidence": "Official calendar, Epic account match, mature original ranked checkpoint"
+    },
+    {
+      "id": "auto-s42-a35c881907a4",
+      "decision": "participation-archived",
+      "recordId": "participation-2939a577d72c2e86259b",
+      "reviewedAt": "2026-11-11T23:10:32.156Z",
+      "policy": "Epic-evidenced-attendance-only",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=NAW&round=S42_PurgeCup_NAW",
+      "officialRules": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/the-purges-lady-liberty-cup-chapter-7-season-4-official-rules",
+      "evidence": "Official calendar, Epic account match, mature original ranked checkpoint"
+    },
+    {
+      "id": "auto-s42-e269d26f523a",
+      "decision": "participation-archived",
+      "recordId": "participation-219abcfe24e5db422413",
+      "reviewedAt": "2026-11-11T23:10:32.156Z",
+      "policy": "Epic-evidenced-attendance-only",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=NAW&round=S42_PurgeCup_NAW",
+      "officialRules": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/the-purges-lady-liberty-cup-chapter-7-season-4-official-rules",
+      "evidence": "Official calendar, Epic account match, mature original ranked checkpoint"
+    },
+    {
+      "id": "auto-s42-cf7c87f7a6dd",
+      "decision": "participation-archived",
+      "recordId": "participation-a0e7e604d62b66b9fc6b",
+      "reviewedAt": "2026-11-11T23:10:32.156Z",
+      "policy": "Epic-evidenced-attendance-only",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=NAW&round=S42_PurgeCup_NAW",
+      "officialRules": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/the-purges-lady-liberty-cup-chapter-7-season-4-official-rules",
+      "evidence": "Official calendar, Epic account match, mature original ranked checkpoint"
+    },
+    {
+      "id": "auto-s42-abf02d947ebd",
+      "decision": "participation-archived",
+      "recordId": "participation-d36837b97c649a2c1965",
+      "reviewedAt": "2026-11-11T23:10:32.156Z",
+      "policy": "Epic-evidenced-attendance-only",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=NAW&round=S42_PurgeCup_NAW",
+      "officialRules": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/the-purges-lady-liberty-cup-chapter-7-season-4-official-rules",
+      "evidence": "Official calendar, Epic account match, mature original ranked checkpoint"
+    },
+    {
+      "id": "auto-s42-efd77196ffe7",
+      "decision": "participation-archived",
+      "recordId": "participation-9d2235f06be69470ce25",
+      "reviewedAt": "2026-11-11T23:10:32.156Z",
+      "policy": "Epic-evidenced-attendance-only",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=NAW&round=S42_PurgeCup_NAW",
+      "officialRules": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/the-purges-lady-liberty-cup-chapter-7-season-4-official-rules",
+      "evidence": "Official calendar, Epic account match, mature original ranked checkpoint"
+    },
+    {
+      "id": "auto-s42-6bbe927e5f47",
+      "decision": "participation-archived",
+      "recordId": "participation-1f92993d397718988e91",
+      "reviewedAt": "2026-11-11T23:10:32.156Z",
+      "policy": "Epic-evidenced-attendance-only",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=NAW&round=S42_PurgeCup_NAW",
+      "officialRules": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/the-purges-lady-liberty-cup-chapter-7-season-4-official-rules",
+      "evidence": "Official calendar, Epic account match, mature original ranked checkpoint"
+    },
+    {
+      "id": "auto-s42-c81e2748abad",
+      "decision": "participation-archived",
+      "recordId": "participation-6344d371172009ad966f",
+      "reviewedAt": "2026-11-11T23:10:32.156Z",
+      "policy": "Epic-evidenced-attendance-only",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=NAW&round=S42_PurgeCup_NAW",
+      "officialRules": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/the-purges-lady-liberty-cup-chapter-7-season-4-official-rules",
+      "evidence": "Official calendar, Epic account match, mature original ranked checkpoint"
+    },
+    {
+      "id": "auto-s42-f63c029918c8",
+      "decision": "participation-archived",
+      "recordId": "participation-1f92743192f362e219cb",
+      "reviewedAt": "2026-11-11T23:10:32.156Z",
+      "policy": "Epic-evidenced-attendance-only",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=NAW&round=S42_PurgeCup_NAW",
+      "officialRules": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/the-purges-lady-liberty-cup-chapter-7-season-4-official-rules",
+      "evidence": "Official calendar, Epic account match, mature original ranked checkpoint"
+    },
+    {
+      "id": "auto-s42-2a4290b48b9a",
+      "decision": "participation-archived",
+      "recordId": "participation-8502247c52cebc22b918",
+      "reviewedAt": "2026-11-11T23:10:32.156Z",
+      "policy": "Epic-evidenced-attendance-only",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=NAW&round=S42_PurgeCup_NAW",
+      "officialRules": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/the-purges-lady-liberty-cup-chapter-7-season-4-official-rules",
+      "evidence": "Official calendar, Epic account match, mature original ranked checkpoint"
+    },
+    {
+      "id": "auto-s42-470beaa96656",
+      "decision": "participation-archived",
+      "recordId": "participation-f6499a7a7af2b3c3267b",
+      "reviewedAt": "2026-11-11T23:10:32.156Z",
+      "policy": "Epic-evidenced-attendance-only",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=NAW&round=S42_PurgeCup_NAW",
+      "officialRules": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/the-purges-lady-liberty-cup-chapter-7-season-4-official-rules",
+      "evidence": "Official calendar, Epic account match, mature original ranked checkpoint"
+    },
+    {
+      "id": "auto-s42-ede2b6c06a2f",
+      "decision": "participation-archived",
+      "recordId": "participation-8aec29d1d74282f3ae4a",
+      "reviewedAt": "2026-11-11T23:10:32.156Z",
+      "policy": "Epic-evidenced-attendance-only",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=NAW&round=S42_PurgeCup_NAW",
+      "officialRules": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/the-purges-lady-liberty-cup-chapter-7-season-4-official-rules",
+      "evidence": "Official calendar, Epic account match, mature original ranked checkpoint"
+    },
+    {
+      "id": "auto-s42-b16a0779470c",
+      "decision": "participation-archived",
+      "recordId": "participation-8d0fc10e79bc3ce9e55a",
+      "reviewedAt": "2026-11-11T23:10:32.156Z",
+      "policy": "Epic-evidenced-attendance-only",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=NAW&round=S42_PurgeCup_NAW",
+      "officialRules": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/the-purges-lady-liberty-cup-chapter-7-season-4-official-rules",
+      "evidence": "Official calendar, Epic account match, mature original ranked checkpoint"
+    },
+    {
+      "id": "auto-s42-350bda0782c3",
+      "decision": "participation-archived",
+      "recordId": "participation-bc9e6393d54e92b0cff0",
+      "reviewedAt": "2026-11-11T23:10:32.156Z",
+      "policy": "Epic-evidenced-attendance-only",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=NAW&round=S42_PurgeCup_NAW",
+      "officialRules": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/the-purges-lady-liberty-cup-chapter-7-season-4-official-rules",
+      "evidence": "Official calendar, Epic account match, mature original ranked checkpoint"
+    },
+    {
+      "id": "auto-s42-a54cdacd85b7",
+      "decision": "participation-archived",
+      "recordId": "participation-19c5afe3c1f9f9277449",
+      "reviewedAt": "2026-11-11T23:10:32.156Z",
+      "policy": "Epic-evidenced-attendance-only",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=NAW&round=S42_PurgeCup_NAW",
+      "officialRules": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/the-purges-lady-liberty-cup-chapter-7-season-4-official-rules",
+      "evidence": "Official calendar, Epic account match, mature original ranked checkpoint"
+    },
+    {
+      "id": "auto-s42-dfc4b9ea22b3",
+      "decision": "participation-archived",
+      "recordId": "participation-20d52d69f1035d0c93be",
+      "reviewedAt": "2026-11-11T23:10:32.156Z",
+      "policy": "Epic-evidenced-attendance-only",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=NAW&round=S42_PurgeCup_NAW",
+      "officialRules": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/the-purges-lady-liberty-cup-chapter-7-season-4-official-rules",
+      "evidence": "Official calendar, Epic account match, mature original ranked checkpoint"
+    },
+    {
+      "id": "auto-s42-51532737eaf3",
+      "decision": "participation-archived",
+      "recordId": "participation-ac52f2aef630e5348219",
+      "reviewedAt": "2026-11-11T23:10:32.156Z",
+      "policy": "Epic-evidenced-attendance-only",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=NAW&round=S42_PurgeCup_NAW",
+      "officialRules": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/the-purges-lady-liberty-cup-chapter-7-season-4-official-rules",
+      "evidence": "Official calendar, Epic account match, mature original ranked checkpoint"
+    },
+    {
+      "id": "auto-s42-fc4dfd0e7ed6",
+      "decision": "participation-archived",
+      "recordId": "participation-f69df20ce75cf728a03f",
+      "reviewedAt": "2026-11-11T23:10:32.156Z",
+      "policy": "Epic-evidenced-attendance-only",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=NAW&round=S42_PurgeCup_NAW",
+      "officialRules": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/the-purges-lady-liberty-cup-chapter-7-season-4-official-rules",
+      "evidence": "Official calendar, Epic account match, mature original ranked checkpoint"
+    },
+    {
+      "id": "auto-s42-28fb7e02f5cc",
+      "decision": "participation-archived",
+      "recordId": "participation-c65a3de6198b187e7ffc",
+      "reviewedAt": "2026-11-11T23:10:32.156Z",
+      "policy": "Epic-evidenced-attendance-only",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=NAW&round=S42_PurgeCup_NAW",
+      "officialRules": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/the-purges-lady-liberty-cup-chapter-7-season-4-official-rules",
+      "evidence": "Official calendar, Epic account match, mature original ranked checkpoint"
+    },
+    {
+      "id": "auto-s42-cd03e2b7d610",
+      "decision": "participation-archived",
+      "recordId": "participation-77487e9cd4970084605f",
+      "reviewedAt": "2026-11-11T23:10:32.156Z",
+      "policy": "Epic-evidenced-attendance-only",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=NAW&round=S42_PurgeCup_NAW",
+      "officialRules": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/the-purges-lady-liberty-cup-chapter-7-season-4-official-rules",
+      "evidence": "Official calendar, Epic account match, mature original ranked checkpoint"
+    },
+    {
+      "id": "auto-s42-9f5dc4e6b504",
+      "decision": "participation-archived",
+      "recordId": "participation-11775bdcc060ae038539",
+      "reviewedAt": "2026-11-11T23:10:32.156Z",
+      "policy": "Epic-evidenced-attendance-only",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=NAW&round=S42_PurgeCup_NAW",
+      "officialRules": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/the-purges-lady-liberty-cup-chapter-7-season-4-official-rules",
+      "evidence": "Official calendar, Epic account match, mature original ranked checkpoint"
+    },
+    {
+      "id": "auto-s42-b145c4bee2b5",
+      "decision": "participation-archived",
+      "recordId": "participation-4628fa300af57ad0b7c7",
+      "reviewedAt": "2026-11-11T23:10:32.156Z",
+      "policy": "Epic-evidenced-attendance-only",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=NAW&round=S42_PurgeCup_NAW",
+      "officialRules": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/the-purges-lady-liberty-cup-chapter-7-season-4-official-rules",
+      "evidence": "Official calendar, Epic account match, mature original ranked checkpoint"
+    },
+    {
+      "id": "auto-s42-ae6551a4054c",
+      "decision": "participation-archived",
+      "recordId": "participation-fddf632cc50ab897bff4",
+      "reviewedAt": "2026-11-11T23:10:32.156Z",
+      "policy": "Epic-evidenced-attendance-only",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=NAW&round=S42_PurgeCup_NAW",
+      "officialRules": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/the-purges-lady-liberty-cup-chapter-7-season-4-official-rules",
+      "evidence": "Official calendar, Epic account match, mature original ranked checkpoint"
+    },
+    {
+      "id": "auto-s42-4526cd409f65",
+      "decision": "participation-archived",
+      "recordId": "participation-7b50dc06c2cd69d0e3ac",
+      "reviewedAt": "2026-11-11T23:10:32.156Z",
+      "policy": "Epic-evidenced-attendance-only",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=NAW&round=S42_PurgeCup_NAW",
+      "officialRules": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/the-purges-lady-liberty-cup-chapter-7-season-4-official-rules",
+      "evidence": "Official calendar, Epic account match, mature original ranked checkpoint"
+    },
+    {
+      "id": "auto-s42-c9e60fbb6599",
+      "decision": "participation-archived",
+      "recordId": "participation-27c0818205814b998368",
+      "reviewedAt": "2026-11-11T23:10:32.156Z",
+      "policy": "Epic-evidenced-attendance-only",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=NAW&round=S42_PurgeCup_NAW",
+      "officialRules": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/the-purges-lady-liberty-cup-chapter-7-season-4-official-rules",
+      "evidence": "Official calendar, Epic account match, mature original ranked checkpoint"
+    },
+    {
+      "id": "auto-s42-ac816bae7842",
+      "decision": "participation-archived",
+      "recordId": "participation-53295e28c20b395971cf",
+      "reviewedAt": "2026-11-11T23:10:32.156Z",
+      "policy": "Epic-evidenced-attendance-only",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=NAW&round=S42_PurgeCup_NAW",
+      "officialRules": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/the-purges-lady-liberty-cup-chapter-7-season-4-official-rules",
+      "evidence": "Official calendar, Epic account match, mature original ranked checkpoint"
+    },
+    {
+      "id": "auto-s42-d2280bbc7f00",
+      "decision": "participation-archived",
+      "recordId": "participation-11aa005b634c1e782f5a",
+      "reviewedAt": "2026-11-11T23:10:32.156Z",
+      "policy": "Epic-evidenced-attendance-only",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=NAW&round=S42_PurgeCup_NAW",
+      "officialRules": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/the-purges-lady-liberty-cup-chapter-7-season-4-official-rules",
+      "evidence": "Official calendar, Epic account match, mature original ranked checkpoint"
+    },
+    {
+      "id": "auto-s42-638e3c63528c",
+      "decision": "participation-archived",
+      "recordId": "participation-c2a4bcea2c0fe8af79c8",
+      "reviewedAt": "2026-11-11T23:10:32.156Z",
+      "policy": "Epic-evidenced-attendance-only",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=NAW&round=S42_PurgeCup_NAW",
+      "officialRules": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/the-purges-lady-liberty-cup-chapter-7-season-4-official-rules",
+      "evidence": "Official calendar, Epic account match, mature original ranked checkpoint"
+    },
+    {
+      "id": "auto-s42-67f047cdc488",
+      "decision": "participation-archived",
+      "recordId": "participation-75d683296c5d86d8bd0e",
+      "reviewedAt": "2026-11-11T23:10:32.156Z",
+      "policy": "Epic-evidenced-attendance-only",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=NAW&round=S42_PurgeCup_NAW",
+      "officialRules": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/the-purges-lady-liberty-cup-chapter-7-season-4-official-rules",
+      "evidence": "Official calendar, Epic account match, mature original ranked checkpoint"
+    },
+    {
+      "id": "auto-s42-2ef5970ba9be",
+      "decision": "participation-archived",
+      "recordId": "participation-7129e35f7cff66839e1d",
+      "reviewedAt": "2026-11-11T23:10:32.156Z",
+      "policy": "Epic-evidenced-attendance-only",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=NAW&round=S42_PurgeCup_NAW",
+      "officialRules": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/the-purges-lady-liberty-cup-chapter-7-season-4-official-rules",
+      "evidence": "Official calendar, Epic account match, mature original ranked checkpoint"
+    },
+    {
+      "id": "auto-s42-f48fdd8569d7",
+      "decision": "participation-archived",
+      "recordId": "participation-242ff6eeb15ea4f1331a",
+      "reviewedAt": "2026-11-11T23:10:32.156Z",
+      "policy": "Epic-evidenced-attendance-only",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=NAW&round=S42_PurgeCup_NAW",
+      "officialRules": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/the-purges-lady-liberty-cup-chapter-7-season-4-official-rules",
+      "evidence": "Official calendar, Epic account match, mature original ranked checkpoint"
+    },
+    {
+      "id": "auto-s42-3c3656d7a075",
+      "decision": "participation-archived",
+      "recordId": "participation-3f9cd51e22bcf64c87de",
+      "reviewedAt": "2026-11-11T23:10:32.156Z",
+      "policy": "Epic-evidenced-attendance-only",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=NAW&round=S42_PurgeCup_NAW",
+      "officialRules": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/the-purges-lady-liberty-cup-chapter-7-season-4-official-rules",
+      "evidence": "Official calendar, Epic account match, mature original ranked checkpoint"
     }
   ]
 }
