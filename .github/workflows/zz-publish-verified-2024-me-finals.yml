@@ -1,0 +1,45 @@
+name: Temporary publish verified 2024 ME finals into clean PR
+on:
+  push:
+    branches:
+      - publish-verified-me-finals-20241111
+permissions:
+  contents: write
+jobs:
+  publish_verified_results:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout latest proposal
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: publish-verified-me-finals-20241111
+          fetch-depth: 0
+          persist-credentials: true
+      - name: Set up Node 24
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '24'
+          cache: npm
+      - name: Integrate latest main without overriding parallel results
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin main
+          git merge --no-commit --no-ff origin/main
+          node scripts/temp-publish-verified-finals-2024-me.cjs
+          git rm scripts/temp-publish-verified-finals-2024-me.cjs
+          git rm data/verified-finals-2024-me.json
+          git rm .github/workflows/zz-publish-verified-2024-me-finals.yml
+          git add results.json players.json tournaments.json updates.json
+      - name: Validate complete data and entire unit test suite
+        run: |
+          npm ci --ignore-scripts
+          npm run validate
+          npm run test:unit
+      - name: Commit checked results to proposal branch
+        run: |
+          set -euo pipefail
+          git commit -m "data: append 7 screenshot-verified 2024 ME finals without losing main data"
+          git push origin HEAD:publish-verified-me-finals-20241111
