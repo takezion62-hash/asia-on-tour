@@ -29,7 +29,7 @@ test('ME予選1〜120位は予選突破・賞金0、121位以降は通過扱い�
  for(const rank of [121,169,282,318,395,478,619,1500]){
   const result=classifyS43SquadsQualifier(make(rank),spec);
   assert.equal(result.kind,'予選');
-  assert.equal(result.policy,'attendance-only');
+  assert.equal(result.policy,'verified-rule');
   assert.equal(result.round,'Event 1 · Round 1 / 予選');
   assert.equal(result.prize,0);
   assert.match(result.note,/進出対象外/);
@@ -38,9 +38,9 @@ test('ME予選1〜120位は予選突破・賞金0、121位以降は通過扱い�
 });
 test('地域別上位300・200・120の差も崩さない',()=>{
  assert.equal(classifyS43SquadsQualifier(make(290,'EU'),spec).policy,'verified-rule');
- assert.equal(classifyS43SquadsQualifier(make(201,'NAC'),spec).policy,'attendance-only');
+ assert.equal(classifyS43SquadsQualifier(make(201,'NAC'),spec).policy,'verified-rule');
  assert.equal(classifyS43SquadsQualifier(make(200,'NAC'),spec).policy,'verified-rule');
- assert.equal(classifyS43SquadsQualifier(make(121,'OCE'),spec).policy,'attendance-only');
+ assert.equal(classifyS43SquadsQualifier(make(121,'OCE'),spec).policy,'verified-rule');
 });
 test('未検証のEpic IDや賞金・不正チーム人数・超過試合を拒否',()=>{
  const cases=[

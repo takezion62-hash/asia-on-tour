@@ -3,6 +3,8 @@
 // This is a classification of *verified saved scoreboard rows*, NOT a score
 // downloader and NOT a cash/VR payout decision.
 const RULE='https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-squads-victory-cup-chapter-7-mini-season-official-rules';
+// All confirmed Round1 scores are in the official, verified-rule category.
+// Advancement is encoded only by the original rank cutoff and 予選突破 round label.
 const advance=Object.freeze({EU:300,NAC:200,NAW:120,BR:120,ME:120,OCE:120,ASIA:120});
 function classifyS43SquadsQualifier(r,spec){
  const valid=x=>{if(!x)throw Error('S43 squads qualification: original row invalid or award not established')};
@@ -21,7 +23,7 @@ function classifyS43SquadsQualifier(r,spec){
  const qualified=r.rank<=cutoff;
  const round=r.round.replace(/\/\s*予選$/,'/ '+(qualified?'予選突破':'予選'));
  return {
-  policy:qualified?'verified-rule':'attendance-only',
+  policy:'verified-rule',
   kind:'予選',round,prize:0,
   note:'本人Epic ID・保存済み公式順位表と公式開催枠で'+r.rank+'位、'+r.points+'pt、'+r.kills+
     'K、'+r.vrs+'VRを照合。'+
