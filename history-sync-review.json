@@ -3462,31 +3462,6 @@
       "reviewReason": "順位表の取得が完了していません"
     },
     {
-      "id": "auto-s36-c7901b5a7600",
-      "date": "2025-07-24",
-      "region": "OCE",
-      "player": "れすぶゆりる",
-      "playerRaw": "12345ででんででんACE",
-      "event": "PlayStation Cup",
-      "round": "Qualifier / 参加確認",
-      "rank": 9440,
-      "points": 0,
-      "kills": 0,
-      "vrs": 0,
-      "prize": null,
-      "kind": "参加確認",
-      "matches": 1,
-      "seasonId": "S36",
-      "chapter": 6,
-      "season": 3,
-      "tournamentId": "ch6s3-playstation-cup",
-      "source": "https://www.fortnite.com/competitive/events/S36_PlayStationCup/?region=OCE&round=S36_PlayStationCup_Qualifier_OCE",
-      "verified": true,
-      "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
-      "reviewOnly": true,
-      "reviewReason": "確認専用大会は自動承認不可"
-    },
-    {
       "id": "auto-s42-34f48415bd98",
       "date": "2026-09-13",
       "region": "NAC",
@@ -4503,5 +4478,5 @@
       "reviewReason": "順位表の取得が完了していません"
     }
   ],
-  "manualReviewedAt": "2026-11-11T12:55:10.793Z"
+  "manualReviewedAt": "2026-11-11T12:59:35.060Z"
 }

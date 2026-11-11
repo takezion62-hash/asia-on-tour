@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-11T12:55:10.793Z",
+  "reviewedAt": "2026-11-11T12:59:35.060Z",
   "entries": [
     {
       "id": "auto-s43-21408f1d31bc",
@@ -8665,6 +8665,17 @@
       "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
       "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=ME&round=S30_SoloZBVictoryCashCup_Event2Round1_ME",
       "evidence": "Saved Epic ID, official ranked placement 474 within top 2000; qualifier $0"
+    },
+    {
+      "id": "auto-s36-c7901b5a7600",
+      "decision": "published",
+      "recordId": "auto-s36-c7901b5a7600",
+      "policy": "verified-rule",
+      "approvedAt": "2026-11-11T12:59:35.060Z",
+      "approvedBy": "ChatGPT / repository owner requested publication",
+      "rule": "https://www.fortnite.com/news/playstation-cup-chapter-6-season-3-official-rules",
+      "source": "https://www.fortnite.com/competitive/events/S36_PlayStationCup/?region=OCE&round=S36_PlayStationCup_Qualifier_OCE",
+      "evidence": "Verified Epic ID, saved ranked Osirion row, official event calendar, cutoff rule and semantic duplicate check; no unverified cash inferred"
     }
   ]
 }
