@@ -34,6 +34,10 @@ function validCashFinal(r,entry){
  }else if(r.seasonId==='S31'&&r.date==='2024-10-15'&&r.region==='NAC'
   &&r.tournamentId==='ch5s4-solo-victory-cup'){
   event='S31_SoloVictoryCashCup';window='S31_SoloVictoryCashCup_Event7Round2_NAC';
+ }else if(r.seasonId==='S42'&&r.date==='2026-08-29'&&r.region==='OCE'&&
+  r.tournamentId==='ch7s4-console-zero-build-solo-victory-cup'){
+  event='S42_ConsoleVCC_SolosZB';
+  window='S42_ConsoleVCC_SolosZB_Event1Round2_OCE';
  }else if(r.seasonId==='S42'&&r.date==='2026-08-25'&&r.region==='ME'&&
   r.tournamentId==='ch7s4-reload-duos-victory-cup'){
   event='S42_ReloadDuosVictoryCup';

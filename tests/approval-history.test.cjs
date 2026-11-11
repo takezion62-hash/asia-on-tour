@@ -79,3 +79,19 @@ test('2026 Aug ME Reload Duos Victory Cup confirms one VR equals $200 team, $100
  assert.ok(audit([{...r,prize:100}],ledger,{confirmedAliases:{}}).length>0);
  assert.ok(audit([{...r,prizePerPlayer:200}],ledger,{confirmedAliases:{}}).length>0);
 });
+
+test('2026-08-29 OCE Console Zero Build Solo Victory cash pays $100 per original final VR',()=>{
+ const id='auto-s42-eebbcceeaaff';
+ const source='https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=OCE&round=S42_ConsoleVCC_SolosZB_Event1Round2_OCE';
+ const row={...result,id,date:'2026-08-29',region:'OCE',seasonId:'S42',
+  tournamentId:'ch7s4-console-zero-build-solo-victory-cup',
+  event:'Console Zero Build Solo Victory Cup',kind:'賞金決勝',
+  round:'Event 1 · Round 2 / 賞金決勝',rank:16,points:100,kills:9,
+  vrs:1,matches:3,prize:100,verified:true,source};
+ const history={version:1,entries:[{id,decision:'published',recordId:id,
+  policy:'official-final-vr-award',source,
+  rule:'https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-4-official-rules'}]};
+ assert.deepEqual(audit([row],history,{confirmedAliases:{}}),[]);
+ assert.ok(audit([{...row,prize:200}],history,{confirmedAliases:{}}).length>0);
+ assert.ok(audit([{...row,points:0}],history,{confirmedAliases:{}}).length>0);
+});
