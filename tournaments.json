@@ -1672,17 +1672,19 @@
         "S32_TriosCashCup"
       ],
       "series": "cash-cup",
-      "mode": "unknown",
+      "mode": "battle-royale",
       "subtype": "trios-cash-cup",
       "team": "trio",
       "platform": "cross-platform",
-      "unknownFields": [
-        "mode"
-      ],
+      "unknownFields": [],
       "evidence": [
         {
           "text": "Osirionの過去大会開催履歴で公式EpicイベントID・大会名称を確認。個別の通過・賞金・報酬を推定せず確認候補として登録。",
           "url": "https://www.fortnite.com/competitive/events/S32_TriosCashCup/"
+        },
+        {
+          "text": "2024年11月17日および24日MEのTrios Cash Cup通常バトルロイヤル（S32_TriosCashCup）決勝をTrackerの固有イベントIDと提供画像で確認。ゼロビルドは別ID S32_TriosCashCup_ZB。",
+          "url": "https://fortnitetracker.com/events/epicgames_S32_TriosCashCup_ME?window=S32_TriosCashCup_Event6Round2_ME"
         }
       ]
     },
