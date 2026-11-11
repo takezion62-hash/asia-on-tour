@@ -11,7 +11,7 @@
   "provider": "osirion",
   "linkedPlayers": 563,
   "trackedWindows": 104,
-  "found": 55,
+  "found": 0,
   "skipped": 0,
   "imported": 1,
   "scannedPages": 50,
@@ -20,7 +20,7 @@
   "alreadyRegistered": 229,
   "autoApprovedTotal": 1678,
   "invalidCachedCandidates": 0,
-  "manualReviewCandidates": 55,
+  "manualReviewCandidates": 0,
   "autoApprovedCosmeticThisRun": 0,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
@@ -40,7 +40,7 @@
     "S42_InoxtagIconCup_ZB",
     "S42_InoxtagIconMobileCup"
   ],
-  "message": "公式ラウンド・賞金・進出条件を再確認して掲載。残り確認待ち55件。",
+  "message": "公式Epic ID・順位・開催枠を検証し55件を掲載。残り0件。未確認賞金を推定しない。",
   "concurrentMerge": {
     "appended": 1,
     "alreadyPublished": 0,
@@ -233,8 +233,8 @@
       }
     ]
   },
-  "manuallyPublished": 64,
-  "lastReviewedBatchAt": "2026-11-11T13:31:08.034Z",
+  "manuallyPublished": 119,
+  "lastReviewedBatchAt": "2026-11-11T13:47:16.085Z",
   "autoApprovedDuoQualifierThisRun": 1,
   "latestManualReview": {
     "reviewedAt": "2026-11-10T14:39:48.081Z",
