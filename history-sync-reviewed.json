@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-11T00:50:35.607Z",
+  "reviewedAt": "2026-11-11T00:55:25.301Z",
   "description": "Resolved historic review candidates: published, duplicate or participation",
   "entries": [
     {
@@ -14559,6 +14559,476 @@
       "policy": "exact-saved-page-and-official-region-cutoff",
       "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event9Round1_NAC",
       "officialRules": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules"
+    },
+    {
+      "id": "auto-s42-75aeb411e1ba",
+      "decision": "already-published",
+      "existingId": "official-shiroka-kingdom-2026",
+      "reviewedAt": "2026-11-11T00:55:25.301Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_KingdomHeartsCup/?region=NAW&round=S42_KingdomHeartsCup_NAW",
+      "reason": "Corrected existing manually sourced record to verified Epic scoreboard without duplicating trophy",
+      "corrected": true,
+      "canonicalRank": 2
+    },
+    {
+      "id": "auto-s42-3a35f47f39ca",
+      "decision": "already-published",
+      "existingId": "official-shiroka-champion-2026",
+      "reviewedAt": "2026-11-11T00:55:25.301Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_ChampionFocusFNCSCup/?region=NAW&round=S42_ChampionFocusFNCSCup_NAW",
+      "reason": "Corrected existing manually sourced record to verified Epic scoreboard without duplicating trophy",
+      "corrected": true,
+      "canonicalRank": 8
+    },
+    {
+      "id": "auto-s42-27e30d8b9e01",
+      "decision": "already-published",
+      "existingId": "s42-me-inoxtag-icon-br-duos-skin-20261026-koiru-rakirye",
+      "reviewedAt": "2026-11-11T00:55:25.301Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_InoxtagIconCup/?region=ME&round=S42_InoxtagIconCup_ME",
+      "reason": "Corrected existing manually sourced record to verified Epic scoreboard without duplicating trophy",
+      "corrected": true,
+      "canonicalRank": 66
+    },
+    {
+      "id": "auto-s42-30f4533fb042",
+      "decision": "already-published",
+      "existingId": "s42-me-persona5-reload-skin-20260926-1d214403",
+      "reviewedAt": "2026-11-11T00:55:25.301Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_Persona5Cup/?region=ME&round=S42_Persona5Cup_ME",
+      "reason": "Same Epic account lineup, session, rank, points, kills, victories and matches across official and Tracker records",
+      "corrected": false,
+      "canonicalRank": 27
+    },
+    {
+      "id": "auto-s42-14e52abf0eb1",
+      "decision": "already-published",
+      "existingId": "s42-me-persona5-reload-skin-20260926-2fda3f8f",
+      "reviewedAt": "2026-11-11T00:55:25.301Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_Persona5Cup/?region=ME&round=S42_Persona5Cup_ME",
+      "reason": "Same Epic account lineup, session, rank, points, kills, victories and matches across official and Tracker records",
+      "corrected": false,
+      "canonicalRank": 69
+    },
+    {
+      "id": "auto-s42-31e9c6996cc6",
+      "decision": "already-published",
+      "existingId": "s42-me-persona5-reload-skin-20260926-174d8aad",
+      "reviewedAt": "2026-11-11T00:55:25.301Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_Persona5Cup/?region=ME&round=S42_Persona5Cup_ME",
+      "reason": "Same Epic account lineup, session, rank, points, kills, victories and matches across official and Tracker records",
+      "corrected": false,
+      "canonicalRank": 73
+    },
+    {
+      "id": "auto-s42-0407c114b288",
+      "decision": "already-published",
+      "existingId": "s42-me-persona5-reload-skin-20260926-a6578a7f",
+      "reviewedAt": "2026-11-11T00:55:25.301Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_Persona5Cup/?region=ME&round=S42_Persona5Cup_ME",
+      "reason": "Same Epic account lineup, session, rank, points, kills, victories and matches across official and Tracker records",
+      "corrected": false,
+      "canonicalRank": 82
+    },
+    {
+      "id": "auto-s42-152d25c023f5",
+      "decision": "already-published",
+      "existingId": "s42-me-persona5-reload-skin-20260926-f6e2e7f7",
+      "reviewedAt": "2026-11-11T00:55:25.301Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_Persona5Cup/?region=ME&round=S42_Persona5Cup_ME",
+      "reason": "Same Epic account lineup, session, rank, points, kills, victories and matches across official and Tracker records",
+      "corrected": false,
+      "canonicalRank": 88
+    },
+    {
+      "id": "auto-s42-45c12dff1421",
+      "decision": "already-published",
+      "existingId": "s42-nac-inoxtag-icon-br-duos-skin-20261026-kuiya-rintaro",
+      "reviewedAt": "2026-11-11T00:55:25.301Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_InoxtagIconCup/?region=NAC&round=S42_InoxtagIconCup_NAC",
+      "reason": "Corrected existing manually sourced record to verified Epic scoreboard without duplicating trophy",
+      "corrected": true,
+      "canonicalRank": 53
+    },
+    {
+      "id": "auto-s42-b09338c55649",
+      "decision": "already-published",
+      "existingId": "s42-nac-persona5-reload-skin-20260926-939c9009",
+      "reviewedAt": "2026-11-11T00:55:25.301Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_Persona5Cup/?region=NAC&round=S42_Persona5Cup_NAC",
+      "reason": "Same Epic account lineup, session, rank, points, kills, victories and matches across official and Tracker records",
+      "corrected": false,
+      "canonicalRank": 39
+    },
+    {
+      "id": "auto-s42-9f966ab56059",
+      "decision": "already-published",
+      "existingId": "s42-nac-persona5-reload-skin-20260926-921e73d4",
+      "reviewedAt": "2026-11-11T00:55:25.301Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_Persona5Cup/?region=NAC&round=S42_Persona5Cup_NAC",
+      "reason": "Same Epic account lineup, session, rank, points, kills, victories and matches across official and Tracker records",
+      "corrected": false,
+      "canonicalRank": 121
+    },
+    {
+      "id": "auto-s42-667403327bb2",
+      "decision": "already-published",
+      "existingId": "s42-nac-persona5-reload-skin-20260926-f2dd1ae6",
+      "reviewedAt": "2026-11-11T00:55:25.301Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_Persona5Cup/?region=NAC&round=S42_Persona5Cup_NAC",
+      "reason": "Same Epic account lineup, session, rank, points, kills, victories and matches across official and Tracker records",
+      "corrected": false,
+      "canonicalRank": 143
+    },
+    {
+      "id": "auto-s42-29aa63386534",
+      "decision": "already-published",
+      "existingId": "s42-naw-persona5-reload-skin-20260926-4e28a12c",
+      "reviewedAt": "2026-11-11T00:55:25.301Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_Persona5Cup/?region=NAW&round=S42_Persona5Cup_NAW",
+      "reason": "Same Epic account lineup, session, rank, points, kills, victories and matches across official and Tracker records",
+      "corrected": false,
+      "canonicalRank": 8
+    },
+    {
+      "id": "auto-s42-15ae5588af27",
+      "decision": "already-published",
+      "existingId": "s42-naw-persona5-reload-skin-20260926-619038af",
+      "reviewedAt": "2026-11-11T00:55:25.301Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_Persona5Cup/?region=NAW&round=S42_Persona5Cup_NAW",
+      "reason": "Same Epic account lineup, session, rank, points, kills, victories and matches across official and Tracker records",
+      "corrected": false,
+      "canonicalRank": 21
+    },
+    {
+      "id": "auto-s42-0fed12486bde",
+      "decision": "already-published",
+      "existingId": "s42-naw-persona5-reload-skin-20260926-537674b4",
+      "reviewedAt": "2026-11-11T00:55:25.301Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_Persona5Cup/?region=NAW&round=S42_Persona5Cup_NAW",
+      "reason": "Same Epic account lineup, session, rank, points, kills, victories and matches across official and Tracker records",
+      "corrected": false,
+      "canonicalRank": 29
+    },
+    {
+      "id": "auto-s42-5e11dd815a76",
+      "decision": "already-published",
+      "existingId": "s42-naw-persona5-reload-skin-20260926-cfb4372c",
+      "reviewedAt": "2026-11-11T00:55:25.301Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_Persona5Cup/?region=NAW&round=S42_Persona5Cup_NAW",
+      "reason": "Same Epic account lineup, session, rank, points, kills, victories and matches across official and Tracker records",
+      "corrected": false,
+      "canonicalRank": 32
+    },
+    {
+      "id": "auto-s42-5a26bc388be2",
+      "decision": "already-published",
+      "existingId": "s42-naw-persona5-reload-skin-20260926-fa24325c",
+      "reviewedAt": "2026-11-11T00:55:25.301Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_Persona5Cup/?region=NAW&round=S42_Persona5Cup_NAW",
+      "reason": "Same Epic account lineup, session, rank, points, kills, victories and matches across official and Tracker records",
+      "corrected": false,
+      "canonicalRank": 39
+    },
+    {
+      "id": "auto-s42-0d7921dd1c99",
+      "decision": "already-published",
+      "existingId": "s42-naw-persona5-reload-skin-20260926-ba0c522a",
+      "reviewedAt": "2026-11-11T00:55:25.301Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_Persona5Cup/?region=NAW&round=S42_Persona5Cup_NAW",
+      "reason": "Same Epic account lineup, session, rank, points, kills, victories and matches across official and Tracker records",
+      "corrected": false,
+      "canonicalRank": 43
+    },
+    {
+      "id": "auto-s42-64d29b0ac5a2",
+      "decision": "already-published",
+      "existingId": "s42-naw-persona5-reload-skin-20260926-0784022a",
+      "reviewedAt": "2026-11-11T00:55:25.301Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_Persona5Cup/?region=NAW&round=S42_Persona5Cup_NAW",
+      "reason": "Same Epic account lineup, session, rank, points, kills, victories and matches across official and Tracker records",
+      "corrected": false,
+      "canonicalRank": 44
+    },
+    {
+      "id": "auto-s42-4864e9531f7f",
+      "decision": "already-published",
+      "existingId": "s42-naw-persona5-reload-skin-20260926-4bd5f43c",
+      "reviewedAt": "2026-11-11T00:55:25.301Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_Persona5Cup/?region=NAW&round=S42_Persona5Cup_NAW",
+      "reason": "Same Epic account lineup, session, rank, points, kills, victories and matches across official and Tracker records",
+      "corrected": false,
+      "canonicalRank": 57
+    },
+    {
+      "id": "auto-s42-3e822bf45584",
+      "decision": "already-published",
+      "existingId": "s42-naw-persona5-reload-skin-20260926-9f6ae113",
+      "reviewedAt": "2026-11-11T00:55:25.301Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_Persona5Cup/?region=NAW&round=S42_Persona5Cup_NAW",
+      "reason": "Same Epic account lineup, session, rank, points, kills, victories and matches across official and Tracker records",
+      "corrected": false,
+      "canonicalRank": 59
+    },
+    {
+      "id": "auto-s42-ca0da24e6fda",
+      "decision": "already-published",
+      "existingId": "s42-naw-persona5-reload-skin-20260926-0ab44e46",
+      "reviewedAt": "2026-11-11T00:55:25.301Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_Persona5Cup/?region=NAW&round=S42_Persona5Cup_NAW",
+      "reason": "Same Epic account lineup, session, rank, points, kills, victories and matches across official and Tracker records",
+      "corrected": false,
+      "canonicalRank": 60
+    },
+    {
+      "id": "auto-s42-3d4da51a8f7a",
+      "decision": "already-published",
+      "existingId": "s42-naw-persona5-reload-skin-20260926-13f21d58",
+      "reviewedAt": "2026-11-11T00:55:25.301Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_Persona5Cup/?region=NAW&round=S42_Persona5Cup_NAW",
+      "reason": "Same Epic account lineup, session, rank, points, kills, victories and matches across official and Tracker records",
+      "corrected": false,
+      "canonicalRank": 63
+    },
+    {
+      "id": "auto-s42-9c3ede2fa2c8",
+      "decision": "already-published",
+      "existingId": "s42-naw-persona5-reload-skin-20260926-b71b032d",
+      "reviewedAt": "2026-11-11T00:55:25.301Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_Persona5Cup/?region=NAW&round=S42_Persona5Cup_NAW",
+      "reason": "Same Epic account lineup, session, rank, points, kills, victories and matches across official and Tracker records",
+      "corrected": false,
+      "canonicalRank": 83
+    },
+    {
+      "id": "auto-s42-fc61b6ba6b8a",
+      "decision": "already-published",
+      "existingId": "s42-naw-persona5-reload-skin-20260926-39bd6c50",
+      "reviewedAt": "2026-11-11T00:55:25.301Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_Persona5Cup/?region=NAW&round=S42_Persona5Cup_NAW",
+      "reason": "Same Epic account lineup, session, rank, points, kills, victories and matches across official and Tracker records",
+      "corrected": false,
+      "canonicalRank": 94
+    },
+    {
+      "id": "auto-s42-96f0e0d77949",
+      "decision": "already-published",
+      "existingId": "s42-naw-persona5-reload-skin-20260926-19eb0f0f",
+      "reviewedAt": "2026-11-11T00:55:25.301Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_Persona5Cup/?region=NAW&round=S42_Persona5Cup_NAW",
+      "reason": "Same Epic account lineup, session, rank, points, kills, victories and matches across official and Tracker records",
+      "corrected": false,
+      "canonicalRank": 95
+    },
+    {
+      "id": "auto-s42-7e6f7b0fefe5",
+      "decision": "already-published",
+      "existingId": "s42-naw-persona5-reload-skin-20260926-b7eaee76",
+      "reviewedAt": "2026-11-11T00:55:25.301Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_Persona5Cup/?region=NAW&round=S42_Persona5Cup_NAW",
+      "reason": "Same Epic account lineup, session, rank, points, kills, victories and matches across official and Tracker records",
+      "corrected": false,
+      "canonicalRank": 105
+    },
+    {
+      "id": "auto-s42-9c071c44659e",
+      "decision": "already-published",
+      "existingId": "s42-naw-persona5-reload-skin-20260926-c6380b39",
+      "reviewedAt": "2026-11-11T00:55:25.301Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_Persona5Cup/?region=NAW&round=S42_Persona5Cup_NAW",
+      "reason": "Same Epic account lineup, session, rank, points, kills, victories and matches across official and Tracker records",
+      "corrected": false,
+      "canonicalRank": 110
+    },
+    {
+      "id": "auto-s42-7c99050c6e0a",
+      "decision": "already-published",
+      "existingId": "s42-naw-persona5-reload-skin-20260926-6da960fe",
+      "reviewedAt": "2026-11-11T00:55:25.301Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_Persona5Cup/?region=NAW&round=S42_Persona5Cup_NAW",
+      "reason": "Same Epic account lineup, session, rank, points, kills, victories and matches across official and Tracker records",
+      "corrected": false,
+      "canonicalRank": 111
+    },
+    {
+      "id": "auto-s42-a0768a886471",
+      "decision": "already-published",
+      "existingId": "s42-naw-persona5-reload-skin-20260926-a58b7fdd",
+      "reviewedAt": "2026-11-11T00:55:25.301Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_Persona5Cup/?region=NAW&round=S42_Persona5Cup_NAW",
+      "reason": "Same Epic account lineup, session, rank, points, kills, victories and matches across official and Tracker records",
+      "corrected": false,
+      "canonicalRank": 119
+    },
+    {
+      "id": "auto-s42-939126cf968e",
+      "decision": "already-published",
+      "existingId": "s42-naw-persona5-reload-skin-20260926-3e523862",
+      "reviewedAt": "2026-11-11T00:55:25.301Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_Persona5Cup/?region=NAW&round=S42_Persona5Cup_NAW",
+      "reason": "Same Epic account lineup, session, rank, points, kills, victories and matches across official and Tracker records",
+      "corrected": false,
+      "canonicalRank": 123
+    },
+    {
+      "id": "auto-s42-a2329c343283",
+      "decision": "already-published",
+      "existingId": "s42-naw-persona5-reload-skin-20260926-4addf397",
+      "reviewedAt": "2026-11-11T00:55:25.301Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_Persona5Cup/?region=NAW&round=S42_Persona5Cup_NAW",
+      "reason": "Same Epic account lineup, session, rank, points, kills, victories and matches across official and Tracker records",
+      "corrected": false,
+      "canonicalRank": 126
+    },
+    {
+      "id": "auto-s42-53fd3a610728",
+      "decision": "already-published",
+      "existingId": "s42-naw-persona5-reload-skin-20260926-5995a0b9",
+      "reviewedAt": "2026-11-11T00:55:25.301Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_Persona5Cup/?region=NAW&round=S42_Persona5Cup_NAW",
+      "reason": "Same Epic account lineup, session, rank, points, kills, victories and matches across official and Tracker records",
+      "corrected": false,
+      "canonicalRank": 127
+    },
+    {
+      "id": "auto-s42-f5c43b170113",
+      "decision": "already-published",
+      "existingId": "s42-naw-persona5-reload-skin-20260926-422ccfaf",
+      "reviewedAt": "2026-11-11T00:55:25.301Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_Persona5Cup/?region=NAW&round=S42_Persona5Cup_NAW",
+      "reason": "Same Epic account lineup, session, rank, points, kills, victories and matches across official and Tracker records",
+      "corrected": false,
+      "canonicalRank": 136
+    },
+    {
+      "id": "auto-s42-5df905e65606",
+      "decision": "already-published",
+      "existingId": "s42-naw-persona5-reload-skin-20260926-0b7c8bad",
+      "reviewedAt": "2026-11-11T00:55:25.301Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_Persona5Cup/?region=NAW&round=S42_Persona5Cup_NAW",
+      "reason": "Same Epic account lineup, session, rank, points, kills, victories and matches across official and Tracker records",
+      "corrected": false,
+      "canonicalRank": 147
+    },
+    {
+      "id": "auto-s42-13bdbfeb8138",
+      "decision": "already-published",
+      "existingId": "s42-naw-persona5-reload-skin-20260926-d76844b3",
+      "reviewedAt": "2026-11-11T00:55:25.301Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_Persona5Cup/?region=NAW&round=S42_Persona5Cup_NAW",
+      "reason": "Same Epic account lineup, session, rank, points, kills, victories and matches across official and Tracker records",
+      "corrected": false,
+      "canonicalRank": 148
+    },
+    {
+      "id": "auto-s42-5b95d5fbac45",
+      "decision": "already-published",
+      "existingId": "s42-naw-persona5-reload-skin-20260926-9b0bbbaa",
+      "reviewedAt": "2026-11-11T00:55:25.301Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_Persona5Cup/?region=NAW&round=S42_Persona5Cup_NAW",
+      "reason": "Same Epic account lineup, session, rank, points, kills, victories and matches across official and Tracker records",
+      "corrected": false,
+      "canonicalRank": 153
+    },
+    {
+      "id": "auto-s42-5cfb453b5e7e",
+      "decision": "already-published",
+      "existingId": "s42-naw-persona5-reload-skin-20260926-30de90f3",
+      "reviewedAt": "2026-11-11T00:55:25.301Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_Persona5Cup/?region=NAW&round=S42_Persona5Cup_NAW",
+      "reason": "Same Epic account lineup, session, rank, points, kills, victories and matches across official and Tracker records",
+      "corrected": false,
+      "canonicalRank": 174
+    },
+    {
+      "id": "auto-s42-4059ea8af12e",
+      "decision": "already-published",
+      "existingId": "s42-naw-persona5-reload-skin-20260926-0aae528f",
+      "reviewedAt": "2026-11-11T00:55:25.301Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_Persona5Cup/?region=NAW&round=S42_Persona5Cup_NAW",
+      "reason": "Same Epic account lineup, session, rank, points, kills, victories and matches across official and Tracker records",
+      "corrected": false,
+      "canonicalRank": 184
+    },
+    {
+      "id": "auto-s42-41a3cd2f6db9",
+      "decision": "already-published",
+      "existingId": "s42-naw-persona5-reload-skin-20260926-7f5738a1",
+      "reviewedAt": "2026-11-11T00:55:25.301Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_Persona5Cup/?region=NAW&round=S42_Persona5Cup_NAW",
+      "reason": "Same Epic account lineup, session, rank, points, kills, victories and matches across official and Tracker records",
+      "corrected": false,
+      "canonicalRank": 195
+    },
+    {
+      "id": "auto-s42-79aa7fbaadf3",
+      "decision": "already-published",
+      "existingId": "s42-naw-persona5-reload-skin-20260926-e5c398cb",
+      "reviewedAt": "2026-11-11T00:55:25.301Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_Persona5Cup/?region=NAW&round=S42_Persona5Cup_NAW",
+      "reason": "Same Epic account lineup, session, rank, points, kills, victories and matches across official and Tracker records",
+      "corrected": false,
+      "canonicalRank": 199
+    },
+    {
+      "id": "auto-s42-c68efb044c25",
+      "decision": "already-published",
+      "existingId": "s42-me-street-fighter-cup-reload-skin-20261010-57c88294-8c27c560",
+      "reviewedAt": "2026-11-11T00:55:25.301Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_StreetFighterCup/?region=ME&round=S42_StreetFighterCup_ME",
+      "reason": "Corrected existing manually sourced record to verified Epic scoreboard without duplicating trophy",
+      "corrected": true,
+      "canonicalRank": 27
+    },
+    {
+      "id": "auto-s42-bd14ca84ec7b",
+      "decision": "already-published",
+      "existingId": "s42-me-street-fighter-cup-reload-skin-20261010-5ca0ba17-eb14596a",
+      "reviewedAt": "2026-11-11T00:55:25.301Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_StreetFighterCup/?region=ME&round=S42_StreetFighterCup_ME",
+      "reason": "Corrected existing manually sourced record to verified Epic scoreboard without duplicating trophy",
+      "corrected": true,
+      "canonicalRank": 40
+    },
+    {
+      "id": "auto-s42-d2681e2ae444",
+      "decision": "already-published",
+      "existingId": "s42-eu-persona5-reload-skin-20260926-fd65e10f",
+      "reviewedAt": "2026-11-11T00:55:25.301Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_Persona5Cup/?region=EU&round=S42_Persona5Cup_EU",
+      "reason": "Same Epic account lineup, session, rank, points, kills, victories and matches across official and Tracker records",
+      "corrected": false,
+      "canonicalRank": 667
+    },
+    {
+      "id": "auto-s42-753000e34734",
+      "decision": "already-published",
+      "existingId": "s42-eu-persona5-reload-skin-20260926-2da062ae",
+      "reviewedAt": "2026-11-11T00:55:25.301Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_Persona5Cup/?region=EU&round=S42_Persona5Cup_EU",
+      "reason": "Same Epic account lineup, session, rank, points, kills, victories and matches across official and Tracker records",
+      "corrected": false,
+      "canonicalRank": 784
+    },
+    {
+      "id": "auto-s42-b9f0b6706033",
+      "decision": "already-published",
+      "existingId": "s42-nac-persona5-reload-skin-20260926-5962b6da",
+      "reviewedAt": "2026-11-11T00:55:25.301Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_Persona5Cup/?region=NAC&round=S42_Persona5Cup_NAC",
+      "reason": "Same Epic account lineup, session, rank, points, kills, victories and matches across official and Tracker records",
+      "corrected": false,
+      "canonicalRank": 286
+    },
+    {
+      "id": "auto-s42-96ca1f90d0df",
+      "decision": "already-published",
+      "existingId": "s42-nac-persona5-reload-skin-20260926-4ca4fb7d",
+      "reviewedAt": "2026-11-11T00:55:25.301Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_Persona5Cup/?region=NAC&round=S42_Persona5Cup_NAC",
+      "reason": "Same Epic account lineup, session, rank, points, kills, victories and matches across official and Tracker records",
+      "corrected": false,
+      "canonicalRank": 333
     }
   ]
 }

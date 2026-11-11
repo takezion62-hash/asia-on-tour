@@ -3007,13 +3007,14 @@
     "vrs": 3,
     "prize": null,
     "kind": "スキン大会",
-    "source": "https://www.fortnite.com/competitive/events/S42_ChampionFocusFNCSCup?region=NAC&round=S42_ChampionFocusFNCSCup_NAW",
+    "source": "https://www.fortnite.com/competitive/events/S42_ChampionFocusFNCSCup/?region=NAW&round=S42_ChampionFocusFNCSCup_NAW",
     "verified": true,
-    "note": "NAWの公式順位表で8位。FNCS名付きスキン大会であり、通常のFNCS本戦順位ではない 【開催日表記をEpic大会ウィンドウの日本時間2026-09-21に統一。】",
+    "note": "NAWの公式順位表で8位。FNCS名付きスキン大会であり、通常のFNCS本戦順位ではない 【開催日表記をEpic大会ウィンドウの日本時間2026-09-21に統一。】 | 2026-11-11 Epic保存済み本人ID・大会枠の成績を再照合。ポイント・キル・VR・選手が一致したため、最新順位8位と試合数を同期。旧出典: https://www.fortnite.com/competitive/events/S42_ChampionFocusFNCSCup?region=NAC&round=S42_ChampionFocusFNCSCup_NAW",
     "tournamentId": "ch7s4-champion-focus-fncs-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 8
   },
   {
     "id": "s42-naw-console-zb-solo-vc-final-20260920-demonkurage",
@@ -3053,13 +3054,14 @@
     "vrs": 1,
     "prize": null,
     "kind": "スキン大会",
-    "source": "https://www.fortnite.com/competitive/events/S42_KingdomHeartsCup?region=NAC",
+    "source": "https://www.fortnite.com/competitive/events/S42_KingdomHeartsCup/?region=NAW&round=S42_KingdomHeartsCup_NAW",
     "verified": true,
-    "note": "NAWの公式順位表で2位。報酬はコスメ、現金賞金としては計上しない",
+    "note": "NAWの公式順位表で2位。報酬はコスメ、現金賞金としては計上しない | 2026-11-11 Epic保存済み本人ID・大会枠の成績を再照合。ポイント・キル・VR・選手が一致したため、最新順位2位と試合数を同期。旧出典: https://www.fortnite.com/competitive/events/S42_KingdomHeartsCup?region=NAC",
     "tournamentId": "ch7s4-override-kingdom-hearts-cup",
     "seasonId": "S42",
     "chapter": 7,
-    "season": 4
+    "season": 4,
+    "matches": 9
   },
   {
     "id": "s42-oce-console-zb-solo-vc-final-20260919-misosqnda",
@@ -10115,13 +10117,13 @@
     "playerRaw": "こいる / rakirye",
     "event": "Inoxtag Icon Cup Battle Royale",
     "round": "Session 1 / スキン獲得",
-    "rank": 67,
+    "rank": 66,
     "points": 384,
     "kills": 53,
     "vrs": 1,
     "prize": 0,
     "kind": "スキン大会",
-    "source": "https://fortnitetracker.com/events/epicgames_S42_InoxtagIconCup_ME",
+    "source": "https://www.fortnite.com/competitive/events/S42_InoxtagIconCup/?region=ME&round=S42_InoxtagIconCup_ME",
     "profiles": [
       {
         "name": "こいる",
@@ -10133,7 +10135,7 @@
       }
     ],
     "verified": true,
-    "note": "ユーザー提供の2026/10/26 ME Inoxtag Icon Cup Battle Royaleデュオのスクリーンショット：67位・384pt・11試合・1VR・53キル。Tracker表示名：こいる / rakirye。公式ルールAttachment CでMEのスキン獲得ラインは80位以内、スキン獲得対象。現金賞金は$0。",
+    "note": "ユーザー提供の2026/10/26 ME Inoxtag Icon Cup Battle Royaleデュオのスクリーンショット：67位・384pt・11試合・1VR・53キル。Tracker表示名：こいる / rakirye。公式ルールAttachment CでMEのスキン獲得ラインは80位以内、スキン獲得対象。現金賞金は$0。 | 2026-11-11 Epic保存済み本人ID・大会枠の成績を再照合。ポイント・キル・VR・選手が一致したため、最新順位66位（旧Tracker記録67位）と試合数を同期。旧出典: https://fortnitetracker.com/events/epicgames_S42_InoxtagIconCup_ME",
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
@@ -10152,13 +10154,13 @@
     "playerRaw": "逆襲のクイヤ. / りんたろう",
     "event": "Inoxtag Icon Cup Battle Royale",
     "round": "Session 1 / スキン獲得",
-    "rank": 55,
+    "rank": 53,
     "points": 423,
     "kills": 52,
     "vrs": 1,
     "prize": 0,
     "kind": "スキン大会",
-    "source": "https://fortnitetracker.com/events/epicgames_S42_InoxtagIconCup_NAC",
+    "source": "https://www.fortnite.com/competitive/events/S42_InoxtagIconCup/?region=NAC&round=S42_InoxtagIconCup_NAC",
     "profiles": [
       {
         "name": "逆襲のクイヤ.",
@@ -10170,7 +10172,7 @@
       }
     ],
     "verified": true,
-    "note": "ユーザー提供の2026/10/26 NAC Inoxtag Icon Cup Battle Royaleデュオのスクリーンショット：55位・423pt・9試合・1VR・52キル。Tracker表示名：逆襲のクイヤ. / りんたろう。公式ルールAttachment CでNACのスキン獲得ラインは280位以内、スキン獲得対象。現金賞金は$0。",
+    "note": "ユーザー提供の2026/10/26 NAC Inoxtag Icon Cup Battle Royaleデュオのスクリーンショット：55位・423pt・9試合・1VR・52キル。Tracker表示名：逆襲のクイヤ. / りんたろう。公式ルールAttachment CでNACのスキン獲得ラインは280位以内、スキン獲得対象。現金賞金は$0。 | 2026-11-11 Epic保存済み本人ID・大会枠の成績を再照合。ポイント・キル・VR・選手が一致したため、最新順位53位（旧Tracker記録55位）と試合数を同期。旧出典: https://fortnitetracker.com/events/epicgames_S42_InoxtagIconCup_NAC",
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
@@ -15200,7 +15202,7 @@
     "vrs": 3,
     "prize": 0,
     "kind": "スキン大会",
-    "source": "https://fortnitetracker.com/events/epicgames_S42_StreetFighterCup_ME",
+    "source": "https://www.fortnite.com/competitive/events/S42_StreetFighterCup/?region=ME&round=S42_StreetFighterCup_ME",
     "profiles": [
       {
         "name": "ふりーく",
@@ -15212,11 +15214,12 @@
       }
     ],
     "verified": true,
-    "note": "ユーザー提供の2026年10月10日 ME Street Fighter Cup ReloadデュオのFortnite Trackerスクリーンショット：27位・517pt・124キル・3VR。Tracker表示名：ふりーくǃǃ / ptt kaixyfnbrǃ。コスメ報酬（スキン獲得）として登録。現金賞金$0。",
+    "note": "ユーザー提供の2026年10月10日 ME Street Fighter Cup ReloadデュオのFortnite Trackerスクリーンショット：27位・517pt・124キル・3VR。Tracker表示名：ふりーくǃǃ / ptt kaixyfnbrǃ。コスメ報酬（スキン獲得）として登録。現金賞金$0。 | 2026-11-11 Epic保存済み本人ID・大会枠の成績を再照合。ポイント・キル・VR・選手が一致したため、最新順位27位と試合数を同期。旧出典: https://fortnitetracker.com/events/epicgames_S42_StreetFighterCup_ME",
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-street-fighter-cup-reload"
+    "tournamentId": "ch7s4-street-fighter-cup-reload",
+    "matches": 9
   },
   {
     "id": "s42-me-street-fighter-cup-reload-skin-20261010-5ca0ba17-eb14596a",
@@ -15236,7 +15239,7 @@
     "vrs": 3,
     "prize": 0,
     "kind": "スキン大会",
-    "source": "https://fortnitetracker.com/events/epicgames_S42_StreetFighterCup_ME",
+    "source": "https://www.fortnite.com/competitive/events/S42_StreetFighterCup/?region=ME&round=S42_StreetFighterCup_ME",
     "profiles": [
       {
         "name": "りーち",
@@ -15248,11 +15251,12 @@
       }
     ],
     "verified": true,
-    "note": "ユーザー提供の2026年10月10日 ME Street Fighter Cup ReloadデュオのFortnite Trackerスクリーンショット：40位・509pt・74キル・3VR。Tracker表示名：EXV 譲らないりーち / NŁT 譲らないあいる。コスメ報酬（スキン獲得）として登録。現金賞金$0。",
+    "note": "ユーザー提供の2026年10月10日 ME Street Fighter Cup ReloadデュオのFortnite Trackerスクリーンショット：40位・509pt・74キル・3VR。Tracker表示名：EXV 譲らないりーち / NŁT 譲らないあいる。コスメ報酬（スキン獲得）として登録。現金賞金$0。 | 2026-11-11 Epic保存済み本人ID・大会枠の成績を再照合。ポイント・キル・VR・選手が一致したため、最新順位40位と試合数を同期。旧出典: https://fortnitetracker.com/events/epicgames_S42_StreetFighterCup_ME",
     "seasonId": "S42",
     "chapter": 7,
     "season": 4,
-    "tournamentId": "ch7s4-street-fighter-cup-reload"
+    "tournamentId": "ch7s4-street-fighter-cup-reload",
+    "matches": 12
   },
   {
     "id": "s42-nac-street-fighter-cup-reload-skin-20261010-3443a7ca-86f084c0",
