@@ -1,0 +1,53 @@
+name: AOT one-time verified final review fast publication
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/fast-publish-nov11-final.yml"
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: aot-fast-nov11-final-verified-publication
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Verify original Epic ID and publish only source-certified entries
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          for attempt in 1 2 3 4 5; do
+            git fetch origin main
+            git reset --hard origin/main
+            node scripts/publish-extra-verified-nov11.cjs --dry-run
+            node scripts/publish-extra-verified-nov11.cjs
+            npm run validate
+            node --test tests/approval-history.test.cjs tests/manual-approval.test.cjs
+            git add results.json history-sync-review.json history-sync-reviewed.json history-sync-status.json approval-history.json updates.json
+            if git diff --cached --quiet; then
+              echo "AOT_NOV11_FAST already published or no approved entries"
+              exit 0
+            fi
+            git commit -m "data: publish three verified July 2024 and July 2025 pending results"
+            if git push origin HEAD:main; then
+              echo "AOT_NOV11_FAST published and pushed to main"
+              exit 0
+            fi
+            if [ "$attempt" = 5 ]; then
+              echo "::error::source verified publication could not be pushed safely"
+              exit 1
+            fi
+            sleep $((attempt * 2))
+          done
