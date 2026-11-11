@@ -1,8 +1,8 @@
 name: Temporary reconcile 2024 ME PR with latest main
 on:
-  pull_request:
+  push:
     branches:
-      - main
+      - verified-me-2024-finals-20261111
 permissions:
   contents: write
 concurrency:
