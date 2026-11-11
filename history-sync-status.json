@@ -1,7 +1,7 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-11T04:42:41.659Z",
+  "checkedAt": "2026-11-11T04:46:50.802Z",
   "mode": "review",
   "scope": "history",
   "dateMode": "rolling",
@@ -11,17 +11,17 @@
   "provider": "osirion",
   "linkedPlayers": 563,
   "trackedWindows": 2954,
-  "found": 1,
-  "skipped": 36,
-  "imported": 34,
+  "found": 25,
+  "skipped": 30,
+  "imported": 36,
   "scannedPages": 96,
-  "completedWindows": 304,
+  "completedWindows": 308,
   "identityConflicts": 3,
-  "alreadyRegistered": 2812,
-  "autoApprovedTotal": 1397,
+  "alreadyRegistered": 2858,
+  "autoApprovedTotal": 1433,
   "invalidCachedCandidates": 1,
-  "manualReviewCandidates": 1,
-  "autoApprovedCosmeticThisRun": 8,
+  "manualReviewCandidates": 25,
+  "autoApprovedCosmeticThisRun": 1,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
   "autoApprovedUnrealThisRun": 0,
@@ -31,7 +31,7 @@
   "malformedFailures": 0,
   "skippedLeaderboards": [],
   "reviewOnlyWindows": 1322,
-  "reviewOnlyCandidates": 2,
+  "reviewOnlyCandidates": 20,
   "unmappedEvents": 238,
   "unmappedEventIds": [
     "S30_ConsoleCashCups",
@@ -47,39 +47,39 @@
     "S30_Reload",
     "S30_ReloadZB"
   ],
-  "message": "Karf/huggyfvとClixの公式決勝2件を掲載。確認待ち1件。",
+  "message": "最新版と安全統合：新規掲載36件、重複スキップ0件、要確認の競合0件、確認待ち25件。既存の戦績・賞金は保持。",
   "manuallyPublished": 727,
   "manuallyResolvedDuplicates": 89,
   "lastReviewedBatchAt": "2026-11-11T04:46:32.788Z",
   "manuallyCorrected": 1,
   "lastCorrectedReviewAt": "2026-11-07T09:14:30.244Z",
   "concurrentMerge": {
-    "appended": 34,
+    "appended": 36,
     "alreadyPublished": 0,
     "reviewConflicts": 0,
-    "keptPending": 15,
-    "reconciledAt": "2026-11-11T04:42:46.601Z"
+    "keptPending": 25,
+    "reconciledAt": "2026-11-11T04:46:54.108Z"
   },
   "coverage": {
     "total": 2954,
-    "completed": 304,
-    "notStarted": 2576,
-    "partial": 72,
+    "completed": 308,
+    "notStarted": 2570,
+    "partial": 74,
     "retryWaiting": 2,
     "retryDue": 0,
-    "remaining": 2650,
+    "remaining": 2646,
     "retryCount": 2,
-    "completionPercent": 10.3,
+    "completionPercent": 10.4,
     "byRegion": {
       "OCE": {
         "total": 522,
-        "completed": 44,
-        "pending": 478
+        "completed": 45,
+        "pending": 477
       },
       "ME": {
         "total": 518,
-        "completed": 89,
-        "pending": 429
+        "completed": 90,
+        "pending": 428
       },
       "EU": {
         "total": 536,
@@ -88,8 +88,8 @@
       },
       "BR": {
         "total": 517,
-        "completed": 28,
-        "pending": 489
+        "completed": 29,
+        "pending": 488
       },
       "NAC": {
         "total": 535,
@@ -98,15 +98,15 @@
       },
       "NAW": {
         "total": 326,
-        "completed": 41,
-        "pending": 285
+        "completed": 42,
+        "pending": 284
       }
     },
     "byYear": {
       "2024": {
         "total": 974,
-        "completed": 66,
-        "pending": 908
+        "completed": 67,
+        "pending": 907
       },
       "2025": {
         "total": 690,
@@ -115,8 +115,8 @@
       },
       "2026": {
         "total": 1290,
-        "completed": 197,
-        "pending": 1093
+        "completed": 200,
+        "pending": 1090
       }
     },
     "outsideScopeCheckpoints": 0,
@@ -269,7 +269,7 @@
     "remainingPending": 3,
     "policy": "Official 2024 solo qualification cutoffs and exact verified saved Epic-ID ranked rows; no inferred cash"
   },
-  "autoApprovedDuoQualifierThisRun": 0,
+  "autoApprovedDuoQualifierThisRun": 4,
   "latestParticipationReview": {
     "reviewedAt": "2026-11-09T12:37:07.114Z",
     "participationPublished": 5,
