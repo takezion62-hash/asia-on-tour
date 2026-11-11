@@ -1,26 +1,26 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-11T18:33:00.321Z",
+  "checkedAt": "2026-11-11T22:39:24.168Z",
   "mode": "review",
   "scope": "history",
   "dateMode": "rolling",
   "selectedWindows": 24,
   "fromDate": "2023-01-01",
-  "toDate": "2026-11-11",
+  "toDate": "2026-11-12",
   "provider": "osirion",
   "linkedPlayers": 573,
   "trackedWindows": 2956,
-  "found": 7,
-  "skipped": 15,
-  "imported": 35,
+  "found": 69,
+  "skipped": 5,
+  "imported": 14,
   "scannedPages": 96,
-  "completedWindows": 387,
+  "completedWindows": 393,
   "identityConflicts": 3,
-  "alreadyRegistered": 3881,
-  "autoApprovedTotal": 2073,
+  "alreadyRegistered": 3916,
+  "autoApprovedTotal": 2087,
   "invalidCachedCandidates": 1,
-  "manualReviewCandidates": 7,
+  "manualReviewCandidates": 69,
   "autoApprovedCosmeticThisRun": 0,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
@@ -31,7 +31,7 @@
   "malformedFailures": 0,
   "skippedLeaderboards": [],
   "reviewOnlyWindows": 1324,
-  "reviewOnlyCandidates": 0,
+  "reviewOnlyCandidates": 62,
   "unmappedEvents": 238,
   "unmappedEventIds": [
     "S30_ConsoleCashCups",
@@ -47,39 +47,39 @@
     "S30_Reload",
     "S30_ReloadZB"
   ],
-  "message": "最新版と安全統合：新規掲載35件、重複スキップ0件、要確認の競合0件、確認待ち7件。既存の戦績・賞金は保持。",
+  "message": "最新版と安全統合：新規掲載14件、重複スキップ0件、要確認の競合0件、確認待ち69件。既存の戦績・賞金は保持。",
   "manuallyPublished": 1050,
   "manuallyResolvedDuplicates": 110,
   "lastReviewedBatchAt": "2026-11-11T18:29:27.426Z",
   "manuallyCorrected": 4,
   "lastCorrectedReviewAt": "2026-11-07T09:14:30.244Z",
   "concurrentMerge": {
-    "appended": 35,
+    "appended": 14,
     "alreadyPublished": 0,
     "reviewConflicts": 0,
-    "keptPending": 7,
-    "reconciledAt": "2026-11-11T18:33:04.785Z"
+    "keptPending": 69,
+    "reconciledAt": "2026-11-11T22:39:32.100Z"
   },
   "coverage": {
     "total": 2956,
-    "completed": 387,
-    "notStarted": 2449,
-    "partial": 118,
+    "completed": 393,
+    "notStarted": 2441,
+    "partial": 120,
     "retryWaiting": 2,
     "retryDue": 0,
-    "remaining": 2569,
+    "remaining": 2563,
     "retryCount": 2,
-    "completionPercent": 13.1,
+    "completionPercent": 13.3,
     "byRegion": {
       "OCE": {
         "total": 522,
-        "completed": 59,
-        "pending": 463
+        "completed": 60,
+        "pending": 462
       },
       "ME": {
         "total": 518,
-        "completed": 116,
-        "pending": 402
+        "completed": 120,
+        "pending": 398
       },
       "EU": {
         "total": 536,
@@ -93,8 +93,8 @@
       },
       "NAC": {
         "total": 536,
-        "completed": 61,
-        "pending": 475
+        "completed": 62,
+        "pending": 474
       },
       "NAW": {
         "total": 327,
@@ -105,18 +105,18 @@
     "byYear": {
       "2024": {
         "total": 974,
-        "completed": 92,
-        "pending": 882
+        "completed": 94,
+        "pending": 880
       },
       "2025": {
         "total": 690,
-        "completed": 49,
-        "pending": 641
+        "completed": 51,
+        "pending": 639
       },
       "2026": {
         "total": 1292,
-        "completed": 246,
-        "pending": 1046
+        "completed": 248,
+        "pending": 1044
       }
     },
     "outsideScopeCheckpoints": 0,
@@ -248,7 +248,7 @@
         "region": "NAC",
         "series": "victory-cup",
         "status": "partial",
-        "nextPage": 53,
+        "nextPage": 55,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
@@ -269,7 +269,7 @@
     "remainingPending": 2,
     "policy": "Official 2024 solo qualification cutoffs and exact verified saved Epic-ID ranked rows; no inferred cash"
   },
-  "autoApprovedDuoQualifierThisRun": 6,
+  "autoApprovedDuoQualifierThisRun": 0,
   "latestParticipationReview": {
     "reviewedAt": "2026-11-09T12:37:07.114Z",
     "participationPublished": 5,
