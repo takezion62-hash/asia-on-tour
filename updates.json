@@ -2,6 +2,42 @@
   "version": 1,
   "entries": [
     {
+      "id": "legacy-exact-final-awards-9eb01281a099",
+      "date": "2026-11-11",
+      "type": "records",
+      "title": "2024年公式Victory Cup決勝の確認済み賞金 15件を追加",
+      "description": "Epic公式の原本順位表、本人ID、VR数、地域別大会枠を検証。各選手1VR=$100のS30/S31賞金を確定、Squadsはチーム総額と個人額を分離。支払完了は未確認。",
+      "recordIds": [
+        "auto-s30-ba4e64078408",
+        "auto-s30-8dc65b1dcfed",
+        "auto-s30-75127cb7684f",
+        "auto-s30-c0362efc2e8f",
+        "auto-s30-7bf2ae36cc9b",
+        "auto-s30-060f95fa4544",
+        "auto-s30-e842f633e0e6",
+        "auto-s30-a9c45c1edde4",
+        "auto-s30-4aec1d9652e7",
+        "auto-s30-a42081f4328e",
+        "auto-s30-87f1484daea0",
+        "auto-s31-013aacea27fd",
+        "auto-s31-c721a9bef631",
+        "auto-s31-4b15004f277f",
+        "auto-s31-fbc713540dac"
+      ]
+    },
+    {
+      "id": "verified-review-round5-3ece6417da26",
+      "date": "2026-11-11",
+      "type": "records",
+      "title": "公式順位表再検証：予選・決勝・参加実績3件を掲載",
+      "description": "Epic本人ID・大会枠・成熟した保存済み順位表の完全照合。2026 S42予選/決勝0VR、2024公式突破条件、現金賞金未確定の参加記録を分離。未確認の賞金やスキン獲得は推定していない。",
+      "recordIds": [
+        "auto-s42-4c4db3702033",
+        "auto-s42-9f34dc20b4f8",
+        "auto-s42-37755344e1b5"
+      ]
+    },
+    {
       "id": "auto-sync-20261111135102",
       "date": "2026-11-11",
       "type": "records",
