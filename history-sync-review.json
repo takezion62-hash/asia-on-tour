@@ -27,60 +27,7 @@
       "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
       "reviewOnly": true,
       "reviewReason": "確認専用大会は自動承認不可"
-    },
-    {
-      "id": "auto-s42-3fc137750a4c",
-      "date": "2026-08-25",
-      "region": "ME",
-      "player": "Karf / huggyfv",
-      "playerRaw": "faction karf 17ǃ / STX Huggy",
-      "event": "Reload Duos Victory Cup",
-      "round": "Event 1 · Round 2 / 賞金決勝",
-      "rank": 14,
-      "points": 100,
-      "kills": 8,
-      "vrs": 1,
-      "prize": null,
-      "kind": "賞金決勝",
-      "matches": 3,
-      "seasonId": "S42",
-      "chapter": 7,
-      "season": 4,
-      "tournamentId": "ch7s4-reload-duos-victory-cup",
-      "source": "https://www.fortnite.com/competitive/events/S42_ReloadDuosVictoryCup/?region=ME&round=S42_ReloadDuosVictoryCup_Event1_Round2_ME",
-      "verified": true,
-      "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。現金賞金の確定情報なし。",
-      "players": [
-        "Karf",
-        "huggyfv"
-      ],
-      "reviewReason": "未検証のシーズンまたは大会"
-    },
-    {
-      "id": "auto-s40-aa4c808b5bea",
-      "date": "2026-05-03",
-      "region": "NAC",
-      "player": "みずるん",
-      "playerRaw": "A_α みずるんぼっとǃ",
-      "event": "PlayStation Clix Cup (Battle Royale)",
-      "round": "Final / 参加確認",
-      "rank": 96,
-      "points": 0,
-      "kills": 0,
-      "vrs": 0,
-      "prize": null,
-      "kind": "参加確認",
-      "matches": 6,
-      "seasonId": "S40",
-      "chapter": 7,
-      "season": 2,
-      "tournamentId": "ch7s2-playstation-clix-cup-br",
-      "source": "https://www.fortnite.com/competitive/events/S40_PlayStationCupClix/?region=NAC&round=S40_PlayStationCupClix_Final_NAC",
-      "verified": true,
-      "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
-      "reviewOnly": true,
-      "reviewReason": "確認専用大会は自動承認不可"
     }
   ],
-  "manualReviewedAt": "2026-11-11T04:43:17.510Z"
+  "manualReviewedAt": "2026-11-11T04:46:32.788Z"
 }

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-11T04:43:17.510Z",
+  "reviewedAt": "2026-11-11T04:46:32.788Z",
   "description": "Resolved historic review candidates: published, duplicate or participation",
   "entries": [
     {
@@ -16149,6 +16149,24 @@
       "policy": "exact-saved-page-and-official-region-cutoff",
       "source": "https://www.fortnite.com/competitive/events/S31_SoloVictoryCashCup/?region=NAC&round=S31_SoloVictoryCashCup_Event3Round1_NAC",
       "officialRules": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-4-official-rules"
+    },
+    {
+      "id": "auto-s42-3fc137750a4c",
+      "decision": "published",
+      "recordId": "auto-s42-3fc137750a4c",
+      "policy": "official-final-vr-award",
+      "source": "https://www.fortnite.com/competitive/events/S42_ReloadDuosVictoryCup/?region=ME&round=S42_ReloadDuosVictoryCup_Event1_Round2_ME",
+      "reviewedAt": "2026-11-11T04:46:32.788Z",
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-4-official-rules"
+    },
+    {
+      "id": "auto-s40-aa4c808b5bea",
+      "decision": "published",
+      "recordId": "auto-s40-aa4c808b5bea",
+      "policy": "verified-rule",
+      "source": "https://www.fortnite.com/competitive/events/S40_PlayStationCupClix/?region=NAC&round=S40_PlayStationCupClix_Final_NAC",
+      "reviewedAt": "2026-11-11T04:46:32.788Z",
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/playstation-clix-cup-official-rules"
     }
   ]
 }
