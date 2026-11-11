@@ -165,6 +165,21 @@ if(!dry&&(reconciled.length||recordsAdded.length)){
   ['auto-sync-status.json',db.statuses.auto],['approval-history.json',db.ledger],
   ['updates.json',db.updates],['history-sync-reviewed.json',reviewed]])write(p,d);
 }
+const suspected=[...db.reviews.history.proposals,...db.reviews.auto.proposals].map(r=>{
+ const existing=db.results.filter(x=>collision(x,r,db.players.confirmedAliases));
+ return {r,existing};
+}).filter(x=>x.existing.length);
+const audit=suspected.map(({r,existing})=>({
+ id:r.id,player:r.player,event:r.event,region:r.region,date:r.date,
+ candidate:{rank:r.rank,points:r.points,kills:r.kills,vrs:r.vrs,matches:r.matches,source:r.source},
+ existing:existing.slice(0,2).map(x=>({id:x.id,player:x.player,rank:x.rank,points:x.points,
+  kills:x.kills,vrs:x.vrs,matches:x.matches,kind:x.kind,round:x.round,source:x.source,
+  matchingStatistics:x.rank===r.rank&&x.points===r.points&&x.kills===r.kills&&
+    x.vrs===r.vrs&&x.matches===r.matches}))
+}));
+console.log('AOT_PENDING_COLLISION_AUDIT '+JSON.stringify({count:audit.length,
+ exact:audit.filter(x=>x.existing.length===1&&x.existing[0].matchingStatistics).length,
+ examples:audit.slice(0,70)}));
 const by={};for(const x of recordsAdded)by[x.event]=(by[x.event]||0)+1;
 console.log('AOT_PENDING_REVIEW_THIRD '+JSON.stringify({dry,
  added:recordsAdded.length,awards:recordsAdded.filter(x=>x.reward).length,
