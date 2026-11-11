@@ -39,7 +39,7 @@ jobs:
               echo "AOT_FINAL_TWO no safely eligible pending results"
               exit 0
             fi
-            git commit -m "data: publish verified duo $200 team and Clix zero-VR final"
+            git commit -m "data: publish verified reload duo cash and Clix zero-VR final"
             if git push origin HEAD:main; then
               echo "AOT_FINAL_TWO published on main"
               exit 0
