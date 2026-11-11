@@ -41,7 +41,7 @@ function classify(r){
  if(r.kind==='予選'&&q&&q.season===r.seasonId&&q.regions[r.region]&&r.prize===0
      &&r.round.includes('Round 1 / 予選')&&r.matches<=q.cap){
   const passed=r.rank<=q.regions[r.region];
-  return {policy:'verified-qualifier',kind:'予選',
+  return {policy:'verified-rule',kind:'予選',
     round:r.round.replace(/\/\s*予選$/,'/ '+(passed?'予選突破':'予選')),prize:0,
     fullRequired:false,rule:q.rule,
     note:'Epic公式順位表と本人IDで予選'+r.rank+'位、'+r.points+'pt、'+r.kills+'K、'+r.vrs+'VRを確認。'
@@ -56,11 +56,11 @@ function classify(r){
    'ch7s4-reload-duos-victory-cup'
   ].includes(r.tournamentId))rule=RULE42;
   if(rule&&r.vrs===0&&r.points===0)
-   return {policy:'verified-zero-vr-final',kind:'賞金決勝',round:r.round,prize:0,fullRequired:true,rule,
+   return {policy:'verified-rule',kind:'賞金決勝',round:r.round,prize:0,fullRequired:true,rule,
      note:'Epic本人ID・開催枠・全ページ取得済み決勝順位表で'+r.rank+'位、'+r.kills+'K、0VRを確認。公式規則は決勝のVR獲得時のみ現金賞金が発生するため$0。支払・本人資格審査とは区別。規則: '+rule};
   if(r.seasonId==='S30'&&r.tournamentId==='ch5s3-zb-solo-victory'&&r.region==='ME'
      &&r.date==='2024-07-30'&&r.vrs===1&&r.points===100)
-   return {policy:'official-solo-vr-final',kind:'賞金決勝',round:r.round,prize:100,fullRequired:true,rule:RULE30,
+   return {policy:'official-final-vr-award',kind:'賞金決勝',round:r.round,prize:100,fullRequired:true,rule:RULE30,
      note:'2024年ME Zero Build Solo Victory Cash Cup決勝で公式順位表の1VRと100ptを確認。Epic公式の決勝1VR=$100に基づく個人賞金。支払済みの主張ではない。規則: '+RULE30};
  }
  return null;
