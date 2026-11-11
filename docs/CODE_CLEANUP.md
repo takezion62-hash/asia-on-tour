@@ -29,6 +29,17 @@
 
 仕分けは実行時の完全な依存関係の証明ではない。候補の削除前には、過去の変更が適用済みか、現役入口の参照がないか、検証・PCスマホテストが通るか個別に確認する。
 
+## 第2段階の変更（2026-11-11）
+
+- **今回削除する実行ファイルは1本のみ**：scripts/fix-unreal-oce-duo-personal-payout.cjs
+- **適用済みの根拠**：updates.json に fix-unreal-cup-oce-20251220-personal-50 があり、history-sync-reviewed.json の auto-s39-4d5f1e94f897 に personalAwardCorrection: { amount: 50, perPlayer: true } が記録されている
+- **保護する内容**：2025-12-20 OCE $1 Million Unreal Cup 172位、まいにちフロッパー / mint、チーム賞金$100、個人各$50、原本順位表とEpic公式ルール
+- **利用状況**：第1段階の AOT_SCRIPT_USAGE_AUDIT で実行入口・内部依存・テスト依存のいずれにも該当しない review-candidate と判定。今回のテストで現役Actions、package.json、scripts、testsの残留参照を禁止
+- **新たな安全策**：tests/script-lifecycle.test.cjs に、実行ファイルの削除だけでなく実際の公開結果・個人賞金・更新履歴・出典付き承認履歴が維持されていることを確かめる回帰テストを追加
+- **今回も変更しない**：results.json、history-sync-reviewed.json、approval-history.json、updates.json などのデータ、現役Actions、画面コード
+
+当時の修正スクリプトを再実行せず、正しい個人賞金が保たれていることをテストで守る。未使用の静的解析だけで別のファイルを削除しない。
+
 ## 次の段階（未実施）
 
 - 実行中の複数の公式検証済み掲載スクリプトの共通化（別変更で実施）

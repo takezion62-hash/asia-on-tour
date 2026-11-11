@@ -69,3 +69,47 @@ test('全スクリプトを4種類に分類し、未参照を即時削除対象�
   reviewCandidates:rows.filter(x=>x.usage==='review-candidate').map(x=>x.path)
  }));
 });
+
+
+test('2025-12-20 OCE Unreal Cupの完了済み個人賞金修正は実行コードを整理しても残る',()=>{
+ const retired='fix-unreal-oce-duo-personal-payout.cjs';
+ assert.equal(fs.existsSync(path.join(scriptDir,retired)),false,
+  'completed payout migration must not be rerun from a residual executable');
+ const sources=[
+  ...scanFiles(path.join(root,'.github','workflows'),/\.ya?ml$/),
+  ...scanFiles(scriptDir,/\.cjs$/),
+  ...scanFiles(path.join(root,'tests'),/\.[cm]?js$/).filter(p=>!ignored.has(path.basename(p))),
+  path.join(root,'package.json')
+ ];
+ const live=sources.filter(p=>fs.readFileSync(p,'utf8').includes(retired)).map(rel);
+ assert.deepEqual(live,[],'retired payout script must have zero active references');
+
+ const updates=JSON.parse(fs.readFileSync(path.join(root,'updates.json'),'utf8')).entries;
+ assert.equal(updates.filter(e=>e.id==='fix-unreal-cup-oce-20251220-personal-50').length,1,
+  'payout correction must remain in the published update ledger');
+ const approvals=JSON.parse(fs.readFileSync(path.join(root,'history-sync-reviewed.json'),'utf8')).entries;
+ const correction=approvals.find(e=>e.id==='auto-s39-4d5f1e94f897');
+ assert.ok(correction && correction.decision==='published',
+  'original official result must remain approved');
+ assert.equal(correction.personalAwardCorrection?.amount,50);
+ assert.equal(correction.personalAwardCorrection?.perPlayer,true);
+ assert.equal(correction.personalAwardCorrection?.source,
+  'https://fortnitetracker.com/events/epicgames_S39_1MillionUnrealCup_OCE?page=0&window=S39_1MillionUnrealCup_OCE');
+ assert.equal(correction.personalAwardCorrection?.rule,
+  'https://www.fortnite.com/competitive/rules-guidelines/rules-library/1-million-dollar-unreal-cup-chapter-7-season-1-official-rules');
+
+ const rows=JSON.parse(fs.readFileSync(path.join(root,'results.json'),'utf8'));
+ const actual=rows.filter(r=>r.id==='auto-s39-4d5f1e94f897');
+ assert.equal(actual.length,1,'verified source row must stay unique');
+ const row=actual[0];
+ for(const [key,expected] of Object.entries({
+  date:'2025-12-20',region:'OCE',tournamentId:'ch7s1-one-million-unreal-cup',
+  rank:172,points:236,prize:100,prizePerPlayer:50,verified:true,
+  source:'https://www.fortnite.com/competitive/events/S39_1MillionUnrealCup/?region=OCE&round=S39_1MillionUnrealCup_OCE'
+ }))assert.deepEqual(row[key],expected,'verified award field changed: '+key);
+ assert.deepEqual(row.players,['まいにちフロッパー','mint']);
+ assert.equal(row.prizePerPlayer*row.players.length,row.prize,
+  'the duo team cash must equal both personal awards combined');
+ const {personalCents}=require('../scripts/data-checks.cjs');
+ assert.equal(personalCents(row),5000,'each individual must receive exactly $50 in cash totals');
+});
