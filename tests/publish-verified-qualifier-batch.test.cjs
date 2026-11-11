@@ -102,3 +102,42 @@ test('S30 NAC 2024 API region uses NA top-5000 official cutoff',()=>{
  assert.equal(specs.length,2);
  assert.ok(specs.every(x=>x.cutoff===5000&&x.rules.includes('chapter-5-season-3-official-rules')));
 });
+
+test('2024-06-11 ME ZB candidate cohort is published once or remains queued, never guessed cash',()=>{
+ const fs=require('node:fs'),path=require('node:path'),root=path.resolve(__dirname,'..');
+ const get=file=>JSON.parse(fs.readFileSync(path.join(root,file),'utf8'));
+ const results=get('results.json'),pending=get('history-sync-review.json').proposals;
+ const ledger=get('approval-history.json').entries;
+ const spec=W.find(x=>x.date==='2024-06-11'&&x.region==='ME'&&x.event==='S30_SoloZBVictoryCashCup');
+ assert.ok(spec,'source-verified 2024 ZB event must remain in explicit whitelist');
+ assert.equal(spec.cutoff,2000);
+ const ids=[
+ ['auto-s30-c3e6b3460a14',205],['auto-s30-28542af5c346',218],
+ ['auto-s30-b35b33031fb4',234],['auto-s30-823056acb155',238],
+ ['auto-s30-97f47640f696',254],['auto-s30-a516c81689ae',269],
+ ['auto-s30-434c55eb25e7',306],['auto-s30-09eba57dd245',307],
+ ['auto-s30-d0777e90bffc',331],['auto-s30-1971724d0c73',342],
+ ['auto-s30-e20d994cd1df',343],['auto-s30-f073601c26f7',362],
+ ['auto-s30-300dcb3a3b9a',384],['auto-s30-20a216186635',396],
+ ['auto-s30-08225b0b4e81',407],['auto-s30-6fdd6e9d7117',435],
+ ['auto-s30-0e83b59221ba',465],['auto-s30-c158dd34bf7d',474]
+ ];
+ const expected='https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=ME&round=S30_SoloZBVictoryCashCup_Event2Round1_ME';
+ for(const [id,rank] of ids){
+  const published=results.filter(x=>x.id===id),waiting=pending.filter(x=>x.id===id);
+  assert.equal(published.length+waiting.length,1,'2024 verified result lost or duplicated: '+id);
+  const row=published[0]||waiting[0];
+  assert.equal(row.rank,rank);
+  assert.equal(row.event,'ZB Solo Victory Cup');
+  assert.equal(row.source,expected);
+  assert.equal(row.verified,true);
+  assert.equal(row.kind,'予選');
+  assert.equal(row.prize,0);
+  assert.ok(row.kills>=0&&row.vrs>=0&&row.matches>0);
+  if(published.length){
+   assert.match(row.round,/\/ 予選突破$/);
+   assert.ok(ledger.some(x=>x.id===id&&x.decision==='published'&&x.policy==='verified-rule'),
+    'published Epic account must retain approval history: '+id);
+  }
+ }
+});

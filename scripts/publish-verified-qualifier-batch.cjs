@@ -13,6 +13,12 @@ const W=[
  ['2024-06-04','S30','ME','S30_SoloVictoryCashCup','Event1Round1','ch5s3-solo-victory-cup',2000,RULE_S30],
  ['2024-06-04','S30','ME','S30_SoloZBVictoryCashCup','Event1Round1','ch5s3-zb-solo-victory',2000,RULE_S30],
  ['2024-06-11','S30','ME','S30_SoloVictoryCashCup','Event2Round1','ch5s3-solo-victory-cup',2000,RULE_S30],
+ // 2024-06-11 ME Zero Build: the archived Tracker event and Osirion's official
+ // event listing independently confirm Round 1 -> Round 2 is top 2,000.
+ // Tracker: https://fortnitetracker.com/events/epicgames_S30_SoloZBVictoryCashCup_ME?window=S30_SoloZBVictoryCashCup_Event2Round1_ME
+ // Event: https://www.osirion.gg/tournaments/S30_SoloZBVictoryCashCup_Event2Round1_ME
+ // Each player's exact Epic ID/rank/score is still checked against the original
+ // saved Osirion page; this source check NEVER replaces that requirement.
  ['2024-06-11','S30','ME','S30_SoloZBVictoryCashCup','Event2Round1','ch5s3-zb-solo-victory',2000,RULE_S30],
  ['2024-09-16','S31','OCE','S31_SoloVictoryCashCup','Event3Round1','ch5s4-solo-victory-cup',1500,RULE_S31],
  // In C5S3 the rules call NAC the "NA" region; its top 5,000 proceed.

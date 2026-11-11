@@ -233,3 +233,16 @@
 - 既存の `history-sync.yml` がこのスクリプトをdry-run→本番で走らせ、バリデーション後に安全にmainへコミットする。個別に巨大な `results.json` をAPIで上書きしない。
 
 `scripts/squads-qualifier-rules.cjs` とテストを追加して、通過境界と不正候補の拒否、10件の二重掲載防止を維持。過去116件の確認待ち候補のうち、裏付けのない過去大会の賞金や未完了順位表は引き続き保留する。前回の画面最適化に伴って破綻していた旧VM単体テストの「全名鑑を同時描画」の固定前提もテスト環境だけで修正する。実ブラウザの60件ずつ表示は維持する。
+
+## 2026-11-11 追加：2024年6月11日 ME ZB Solo Victory Cup 予選の小分け掲載
+
+ユーザーの依頼により、順位表の全ページ取得が途中で止まっている2024年6月11日JSTの `S30_SoloZBVictoryCashCup_Event2Round1_ME` を優先調査。Fortnite Trackerの歴史的大会枠とOsirionの公式大会開催情報は、**MEの予選突破が上位2,000人**、賞金はRound2でのVictory Royale獲得者のみであることを確認できる。
+
+- Tracker大会枠: https://fortnitetracker.com/events/epicgames_S30_SoloZBVictoryCashCup_ME?window=S30_SoloZBVictoryCashCup_Event2Round1_ME
+- Osirion公式大会枠: https://www.osirion.gg/tournaments/S30_SoloZBVictoryCashCup_Event2Round1_ME
+- Epic公式2024年規則: https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules
+
+現在の確認待ち18人は205〜474位で上位2,000人以内。**Trackerの個別順位表は403応答で直接再取得できなかったため、各選手の順位・キル・VRは既存のOsirion保存済みEpic-ID照合で検証し、外部ページを見られたと装わない**。現行 `publish-verified-qualifier-batch.cjs` はこの大会枠をすでに個別ホワイトリスト登録している。元の順位・ポイント・Epic ID・本人照合・完全一致のチェックポイント・重複判定をすべて満たす成績だけを通常結果へ掲載し、予選賞金$0、Round2の賞金は推定しない。
+
+同時に `tests/publish-verified-qualifier-batch.test.cjs` にこの18件の不変条件（掲載済みまたは確認待ちが各1件、本人・出典・予選区分・賞金$0、掲載時の承認履歴）を追加。大会以外の成績はそのままに、GitHub Actionsの安全な履歴掲載ワークフローを再実行して結果の公開まで検証する。
+
