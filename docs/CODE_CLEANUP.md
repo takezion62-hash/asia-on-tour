@@ -40,6 +40,16 @@
 
 当時の修正スクリプトを再実行せず、正しい個人賞金が保たれていることをテストで守る。未使用の静的解析だけで別のファイルを削除しない。
 
+## 第3段階の変更（2026-11-11）
+
+- **整理した実行ファイルは1本だけ**：scripts/repair-historical-session-dates.cjs
+- **修正適用済みの証拠**：updates.json の site-fix-session-dates-and-duplicate-finals-20261106 に、14件の開催日JST統一とNAC Solo Victory Cup決勝の重複4件解消が記録されている
+- **重複判定の証拠**：history-sync-reviewed.json に対象4件の already-published と、もとの手動掲載結果の existingId が残されている
+- **現役参照**：前段階の AOT_SCRIPT_USAGE_AUDIT で review-candidate に分類された。現行のActions、npm scripts、ほかの処理スクリプト、テストから実行参照がないことを新規回帰テストで監視する
+- **保護する内容**：対象14件のJST開催日・元の戦績IDと出典、重複除外した4件の既存結果と審査記録。データや賞金・本番画面・現在の13本のActionsは一切変更しない
+- **追加した安全テスト**：tests/script-lifecycle.test.cjs に、JST修正済みの全14レコードと重複除外済み4レコード、履歴マーカーが存在し続ける検証を追加
+
+このスクリプトは以前の古い日付・重複データが存在することを前提にしていた一度きりの修復コードであり、現在の自動更新には再実行不要。元のソースコードはGit履歴から復旧可能。
 ## 次の段階（未実施）
 
 - 実行中の複数の公式検証済み掲載スクリプトの共通化（別変更で実施）

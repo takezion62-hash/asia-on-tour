@@ -113,3 +113,67 @@ test('2025-12-20 OCE Unreal Cupの完了済み個人賞金修正は実行コー�
  const {personalCents}=require('../scripts/data-checks.cjs');
  assert.equal(personalCents(row),5000,'each individual must receive exactly $50 in cash totals');
 });
+
+
+test('14件のJST開催日修正と4件の重複解消は古い実行ファイル削除後も維持',()=>{
+ const retired='repair-historical-session-dates.cjs';
+ assert.equal(fs.existsSync(path.join(scriptDir,retired)),false,
+  'historical one-shot repair should not remain executable');
+ const sources=[
+  ...scanFiles(path.join(root,'.github','workflows'),/\.ya?ml$/),
+  ...scanFiles(scriptDir,/\.cjs$/),
+  ...scanFiles(path.join(root,'tests'),/\.[cm]?js$/).filter(p=>!ignored.has(path.basename(p))),
+  path.join(root,'package.json')
+ ];
+ assert.deepEqual(sources.filter(p=>fs.readFileSync(p,'utf8').includes(retired)).map(rel),[],
+  'no active code may execute or import the retired repair');
+
+ const updates=JSON.parse(fs.readFileSync(path.join(root,'updates.json'),'utf8')).entries;
+ const marker='site-fix-session-dates-and-duplicate-finals-20261106';
+ assert.equal(updates.filter(x=>x.id===marker).length,1,
+  'the completed session/date correction must remain logged');
+ const results=JSON.parse(fs.readFileSync(path.join(root,'results.json'),'utf8'));
+ const byId=new Map(results.map(r=>[r.id,r]));
+ assert.equal(byId.size,results.length,'published IDs must remain unique');
+ const dates={
+  's42-naw-reload-solo-20261017-taiga':'2026-10-13',
+  's42-naw-reload-solo-20261002-shiroka':'2026-10-03',
+  'official-shiroka-champion-2026':'2026-09-21',
+  's42-me-megaman-cup-20260908-maguro-osydd':'2026-09-09',
+  's42-me-megaman-cup-20260908-popo-ao':'2026-09-09',
+  's42-nac-solo-vc-qual-20260913-blaze':'2026-09-14',
+  's42-nac-solo-vc-qual-20260913-kame':'2026-09-14',
+  's42-nac-solo-vc-qual-20260913-dagutorio-taisho':'2026-09-14',
+  's42-nac-solo-vc-qual-20260913-ama-crow':'2026-09-14',
+  's42-nac-solo-vc-qual-20260913-diguda':'2026-09-14',
+  's42-nac-solo-vc-final-20260913-blaze':'2026-09-14',
+  's42-nac-solo-vc-final-20260913-kame':'2026-09-14',
+  's42-nac-solo-vc-final-20260913-dagutorio-taisho':'2026-09-14',
+  's42-nac-solo-vc-final-20260913-ama-crow':'2026-09-14'
+ };
+ assert.equal(Object.keys(dates).length,14);
+ for(const [id,date] of Object.entries(dates)){
+  const row=byId.get(id);
+  assert.ok(row,'JST-corrected achievement must remain: '+id);
+  assert.equal(row.date,date,'JST event date changed for '+id);
+  assert.ok(row.source,'original result source must remain for '+id);
+  assert.match(row.note||'',/開催日表記をEpic大会ウィンドウの日本時間/,
+   'JST correction evidence must remain for '+id);
+ }
+ const duplicates={
+  'auto-s42-0b675770d2ed':'s42-nac-solo-vc-final-20260913-blaze',
+  'auto-s42-609ece393978':'s42-nac-solo-vc-final-20260913-kame',
+  'auto-s42-b7878775d624':'s42-nac-solo-vc-final-20260913-dagutorio-taisho',
+  'auto-s42-5844fef9dc36':'s42-nac-solo-vc-final-20260913-ama-crow'
+ };
+ const reviewed=JSON.parse(fs.readFileSync(path.join(root,'history-sync-reviewed.json'),'utf8')).entries;
+ assert.equal(Object.keys(duplicates).length,4);
+ for(const [duplicate,existing] of Object.entries(duplicates)){
+  assert.equal(byId.has(duplicate),false,'removed duplicate was restored: '+duplicate);
+  assert.ok(byId.has(existing),'canonical published record was lost: '+existing);
+  const recorded=reviewed.filter(x=>x.id===duplicate);
+  assert.equal(recorded.length,1,'duplicate resolution entry must be unique: '+duplicate);
+  assert.equal(recorded[0].decision,'already-published');
+  assert.equal(recorded[0].existingId,existing);
+ }
+});
