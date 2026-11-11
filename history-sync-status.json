@@ -1,7 +1,7 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-11T01:10:22.156Z",
+  "checkedAt": "2026-11-11T02:19:47.292Z",
   "mode": "review",
   "scope": "history",
   "dateMode": "rolling",
@@ -11,27 +11,27 @@
   "provider": "osirion",
   "linkedPlayers": 563,
   "trackedWindows": 2953,
-  "found": 21,
-  "skipped": 34,
-  "imported": 26,
+  "found": 51,
+  "skipped": 22,
+  "imported": 16,
   "scannedPages": 96,
-  "completedWindows": 281,
+  "completedWindows": 283,
   "identityConflicts": 3,
-  "alreadyRegistered": 2580,
-  "autoApprovedTotal": 1284,
+  "alreadyRegistered": 2616,
+  "autoApprovedTotal": 1301,
   "invalidCachedCandidates": 1,
-  "manualReviewCandidates": 21,
-  "autoApprovedCosmeticThisRun": 1,
+  "manualReviewCandidates": 51,
+  "autoApprovedCosmeticThisRun": 0,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
   "autoApprovedUnrealThisRun": 0,
   "timeLimitReached": false,
-  "retryWindows": 5,
+  "retryWindows": 4,
   "transientFailures": 0,
   "malformedFailures": 0,
   "skippedLeaderboards": [],
   "reviewOnlyWindows": 1321,
-  "reviewOnlyCandidates": 12,
+  "reviewOnlyCandidates": 16,
   "unmappedEvents": 238,
   "unmappedEventIds": [
     "S30_ConsoleCashCups",
@@ -47,29 +47,29 @@
     "S30_Reload",
     "S30_ReloadZB"
   ],
-  "message": "公式予選突破10件を通常成績に追加。重複0件を解消。残り確認待ち21件。未確認賞金は推定しない。",
+  "message": "最新版と安全統合：新規掲載16件、重複スキップ0件、要確認の競合0件、確認待ち51件。既存の戦績・賞金は保持。",
   "manuallyPublished": 626,
   "manuallyResolvedDuplicates": 84,
   "lastReviewedBatchAt": "2026-11-11T02:16:37.243Z",
   "manuallyCorrected": 1,
   "lastCorrectedReviewAt": "2026-11-07T09:14:30.244Z",
   "concurrentMerge": {
-    "appended": 26,
+    "appended": 16,
     "alreadyPublished": 0,
     "reviewConflicts": 0,
-    "keptPending": 31,
-    "reconciledAt": "2026-11-11T01:10:25.839Z"
+    "keptPending": 51,
+    "reconciledAt": "2026-11-11T02:19:49.935Z"
   },
   "coverage": {
     "total": 2953,
-    "completed": 281,
-    "notStarted": 2605,
-    "partial": 62,
+    "completed": 283,
+    "notStarted": 2599,
+    "partial": 67,
     "retryWaiting": 2,
-    "retryDue": 3,
-    "remaining": 2672,
-    "retryCount": 5,
-    "completionPercent": 9.5,
+    "retryDue": 2,
+    "remaining": 2670,
+    "retryCount": 4,
+    "completionPercent": 9.6,
     "byRegion": {
       "OCE": {
         "total": 522,
@@ -78,8 +78,8 @@
       },
       "ME": {
         "total": 518,
-        "completed": 82,
-        "pending": 436
+        "completed": 83,
+        "pending": 435
       },
       "EU": {
         "total": 536,
@@ -88,8 +88,8 @@
       },
       "BR": {
         "total": 516,
-        "completed": 25,
-        "pending": 491
+        "completed": 26,
+        "pending": 490
       },
       "NAC": {
         "total": 535,
@@ -115,23 +115,12 @@
       },
       "2026": {
         "total": 1289,
-        "completed": 182,
-        "pending": 1107
+        "completed": 184,
+        "pending": 1105
       }
     },
     "outsideScopeCheckpoints": 0,
     "samples": [
-      {
-        "window": "epicgames_S42_InoxtagIconCup_NAC/S42_InoxtagIconCup_NAC",
-        "date": "2026-10-26",
-        "region": "NAC",
-        "series": "icon-cup",
-        "status": "retryDue",
-        "nextPage": 1,
-        "totalPages": 100,
-        "retryAfter": "2026-11-11T00:25:03.346Z",
-        "errorCode": "OSIRION_TRANSIENT"
-      },
       {
         "window": "epicgames_S30_SoloVictoryCashCup_ME/S30_SoloVictoryCashCup_Event2Round2_ME",
         "date": "2024-06-11",
@@ -252,6 +241,17 @@
         "totalPages": 48,
         "retryAfter": null,
         "errorCode": null
+      },
+      {
+        "window": "epicgames_S30_SoloZBVictoryCashCup_ME/S30_SoloZBVictoryCashCup_Event1Round1_ME",
+        "date": "2024-06-04",
+        "region": "ME",
+        "series": "victory-cup",
+        "status": "partial",
+        "nextPage": 19,
+        "totalPages": 50,
+        "retryAfter": null,
+        "errorCode": null
       }
     ]
   },
@@ -269,7 +269,7 @@
     "remainingPending": 21,
     "policy": "Official 2024 solo qualification cutoffs and exact verified saved Epic-ID ranked rows; no inferred cash"
   },
-  "autoApprovedDuoQualifierThisRun": 15,
+  "autoApprovedDuoQualifierThisRun": 2,
   "latestParticipationReview": {
     "reviewedAt": "2026-11-09T12:37:07.114Z",
     "participationPublished": 5,
