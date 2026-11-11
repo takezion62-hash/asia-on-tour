@@ -16,7 +16,12 @@ const W=[
  ['2024-09-16','S31','OCE','S31_SoloVictoryCashCup','Event3Round1','ch5s4-solo-victory-cup',1500,RULE_S31],
  // In C5S3 the rules call NAC the "NA" region; its top 5,000 proceed.
  ['2024-08-06','S30','NAC','S30_SoloVictoryCashCup','Event8Round1','ch5s3-solo-victory-cup',5000,RULE_S30],
- ['2024-08-13','S30','NAC','S30_SoloVictoryCashCup','Event9Round1','ch5s3-solo-victory-cup',5000,RULE_S30]
+ ['2024-08-13','S30','NAC','S30_SoloVictoryCashCup','Event9Round1','ch5s3-solo-victory-cup',5000,RULE_S30],
+ // Unlike the generic NA label in the C5S4 rules, the precise archived NAC
+ // Event3 leaderboard explicitly says "Top 10000 qualify" with 109pt cutoff:
+ // https://fortnitetracker.com/events/epicgames_S31_SoloVictoryCashCup_NAC?window=S31_SoloVictoryCashCup_Event3Round1_NAC
+ // Map only this one confirmed NAC Event3 window; never generalize to other NA weeks.
+ ['2024-09-17','S31','NAC','S31_SoloVictoryCashCup','Event3Round1','ch5s4-solo-victory-cup',10000,RULE_S31]
 ].map(([date,season,region,event,round,tournament,cutoff,rules])=>({
  date,season,region,event,window:season+'_'+event.slice(season.length+1)+'_'+round+'_'+region,
  tournament,cutoff,rules
