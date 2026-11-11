@@ -11,6 +11,7 @@ on:
       - "scripts/audit-pending-history-20261108.cjs"
       - "scripts/publish-verified-s35-console-duos-20261108.cjs"
       - "scripts/publish-verified-qualifier-batch.cjs"
+      - "scripts/publish-verified-nov11-pending.cjs"
       - "scripts/publish-verified-finals-batch.cjs"
       - "tests/publish-verified-finals-batch.test.cjs"
       - "tests/publish-verified-qualifier-batch.test.cjs"
@@ -64,6 +65,42 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '24'
+      - name: Publish exact saved 2024-2026 pending result reviews without uncertain cash
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          for attempt in 1 2 3 4 5; do
+            git fetch origin main
+            git reset --hard origin/main
+            node scripts/publish-verified-cosmetic-pending.cjs --dry-run
+            node scripts/publish-verified-cosmetic-pending.cjs
+            node scripts/publish-verified-cash-playstation-pending.cjs --dry-run
+            node scripts/publish-verified-cash-playstation-pending.cjs
+            node scripts/publish-verified-fncs-performance-days.cjs --dry-run
+            node scripts/publish-verified-fncs-performance-days.cjs
+            node scripts/publish-verified-nov11-pending.cjs --dry-run
+            node scripts/publish-verified-nov11-pending.cjs
+            npm run validate
+            node --test tests/manual-approval.test.cjs tests/approval-history.test.cjs tests/cosmetic-rank-rules.test.cjs tests/tournament-rules.test.cjs
+            git add results.json updates.json history-sync-review.json history-sync-reviewed.json history-sync-status.json auto-sync-review.json auto-sync-status.json approval-history.json
+            if git diff --cached --quiet; then
+              echo "AOT_VERIFIED_NOV11 no new source-verified results to publish"
+              break
+            fi
+            git commit -m "data: publish source-verified pending results to main and preserve prior awards"
+            if git push origin HEAD:main; then
+              echo "AOT_VERIFIED_NOV11 published results to main"
+              break
+            fi
+            if [ "${attempt}" -eq 5 ]; then
+              echo "::error::Verification replay conflicted with main; no unsafe overwrite"
+              exit 1
+            fi
+            sleep $((attempt * 2))
+          done
+
       - name: Publish ranked September S42 cosmetics from verified pending review
         run: |
           set -euo pipefail
