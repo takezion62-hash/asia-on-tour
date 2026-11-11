@@ -1,0 +1,55 @@
+name: Temporary 2024 ME screenshot results reconcile
+on:
+  push:
+    branches:
+      - verified-me-2024-finals-20261111
+permissions:
+  contents: write
+jobs:
+  reconcile:
+    if: github.event.head_commit.message == 'ci: launch verified ME 2024 reconciliation'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout 2024 ME proposal
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: verified-me-2024-finals-20261111
+          fetch-depth: 0
+          persist-credentials: true
+      - name: Node 24
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '24'
+          cache: npm
+      - name: Rebase verified entries on latest main while retaining unrelated main updates
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          for x in results players tournaments updates; do cp "$x.json" "/tmp/aot-ours-$x.json"; done
+          git fetch origin main
+          for x in results players tournaments updates; do git show "origin/main:$x.json" > "/tmp/aot-main-$x.json"; done
+          git merge --no-commit --no-ff origin/main || true
+          node scripts/temp-reconcile-2024-me.cjs
+          git show origin/main:.github/workflows/tests.yml > .github/workflows/tests.yml
+          git rm scripts/temp-reconcile-2024-me.cjs
+          git rm .github/workflows/zz-verified-me-2024-publish.yml
+          git add -A
+          if [ -n "$(git ls-files -u)" ]; then
+            echo "::error::Merge contains unrelated unresolved conflicts"
+            git ls-files -u
+            exit 1
+          fi
+          git diff --cached --stat
+      - name: Validate JSON and entire unit suite
+        run: |
+          npm ci --ignore-scripts
+          npm run validate
+          npm run test:unit
+      - name: Push reconciled results to PR
+        run: |
+          set -euo pipefail
+          git commit -m "merge: preserve latest main and publish 7 verified 2024 ME finals"
+          git push origin HEAD:verified-me-2024-finals-20261111
