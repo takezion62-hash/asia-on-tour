@@ -33,3 +33,4 @@ if(!entry||entry.recordIds.length!==7)throw Error('Missing update entry');
 if(!um.entries.some(x=>x.id===entry.id))um.entries.unshift(entry);
 write('updates',um);
 console.log('Reconciled latest main with seven verified manual rows:',main.length,'results',known.size,'player profiles');
+// Repeatable merge tool: includes verified screenshot source and concurrent main records.
