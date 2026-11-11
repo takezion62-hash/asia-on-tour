@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-11T04:27:18.613Z",
+  "reviewedAt": "2026-11-11T04:35:08.645Z",
   "description": "Resolved historic review candidates: published, duplicate or participation",
   "entries": [
     {
@@ -15740,6 +15740,109 @@
       "policy": "verified-rule-and-original-epic-score",
       "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event4Round1_NAC",
       "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules"
+    },
+    {
+      "id": "auto-s30-ba9bdaf92830",
+      "decision": "published",
+      "recordId": "auto-s30-ba9bdaf92830",
+      "reviewedAt": "2026-11-11T04:35:08.438Z",
+      "policy": "verified-rule-and-original-epic-score",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event8Round1_NAC",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules"
+    },
+    {
+      "id": "auto-s30-50ba88119785",
+      "decision": "published",
+      "recordId": "auto-s30-50ba88119785",
+      "reviewedAt": "2026-11-11T04:35:08.438Z",
+      "policy": "verified-rule-and-original-epic-score",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event9Round1_NAC",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules"
+    },
+    {
+      "id": "auto-s30-73f0b7e72d97",
+      "decision": "published",
+      "recordId": "auto-s30-73f0b7e72d97",
+      "reviewedAt": "2026-11-11T04:35:08.438Z",
+      "policy": "verified-rule-and-original-epic-score",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event9Round1_NAC",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules"
+    },
+    {
+      "id": "auto-s30-5f52bfd36735",
+      "decision": "published",
+      "recordId": "auto-s30-5f52bfd36735",
+      "reviewedAt": "2026-11-11T04:35:08.645Z",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=OCE&round=S30_SoloVictoryCashCup_Event4Round2_OCE",
+      "policy": "official-final-vr-award",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules"
+    },
+    {
+      "id": "auto-s30-8cea76a52b42",
+      "decision": "published",
+      "recordId": "auto-s30-8cea76a52b42",
+      "reviewedAt": "2026-11-11T04:35:08.645Z",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=OCE&round=S30_SoloVictoryCashCup_Event4Round2_OCE",
+      "policy": "official-final-vr-award",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules"
+    },
+    {
+      "id": "auto-s30-4fc00e3d9d48",
+      "decision": "published",
+      "recordId": "auto-s30-4fc00e3d9d48",
+      "reviewedAt": "2026-11-11T04:35:08.645Z",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=ME&round=S30_SoloVictoryCashCup_Event4Round2_ME",
+      "policy": "official-final-vr-award",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules"
+    },
+    {
+      "id": "auto-s30-79ad4a8c4029",
+      "decision": "published",
+      "recordId": "auto-s30-79ad4a8c4029",
+      "reviewedAt": "2026-11-11T04:35:08.645Z",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=ME&round=S30_SoloVictoryCashCup_Event4Round2_ME",
+      "policy": "official-final-vr-award",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules"
+    },
+    {
+      "id": "auto-s42-5fa14f18e8b5",
+      "decision": "already-published",
+      "existingId": "s42-nac-persona5-reload-skin-20260926-2da062ae",
+      "reviewedAt": "2026-11-11T04:35:08.645Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_Persona5Cup/?region=NAC&round=S42_Persona5Cup_NAC",
+      "evidence": "Matching original Epic ID, round, region, name, rank, points, eliminations, VR and matches"
+    },
+    {
+      "id": "auto-s42-c3187af8e934",
+      "decision": "already-published",
+      "existingId": "s42-nac-persona5-reload-skin-20260926-2bf20a97",
+      "reviewedAt": "2026-11-11T04:35:08.645Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_Persona5Cup/?region=NAC&round=S42_Persona5Cup_NAC",
+      "evidence": "Matching original Epic ID, round, region, name, rank, points, eliminations, VR and matches"
+    },
+    {
+      "id": "auto-s42-6239f2d85b2a",
+      "decision": "already-published",
+      "existingId": "s42-nac-persona5-reload-skin-20260926-062b103a",
+      "reviewedAt": "2026-11-11T04:35:08.645Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_Persona5Cup/?region=NAC&round=S42_Persona5Cup_NAC",
+      "evidence": "Matching original Epic ID, round, region, name, rank, points, eliminations, VR and matches"
+    },
+    {
+      "id": "auto-s42-577164f19886",
+      "decision": "already-published",
+      "existingId": "s42-nac-persona5-reload-skin-20260926-3f9f78d5",
+      "reviewedAt": "2026-11-11T04:35:08.645Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_Persona5Cup/?region=NAC&round=S42_Persona5Cup_NAC",
+      "evidence": "Matching original Epic ID, round, region, name, rank, points, eliminations, VR and matches"
+    },
+    {
+      "id": "auto-s42-fa845d15612f",
+      "decision": "already-published",
+      "existingId": "s42-nac-persona5-reload-skin-20260926-34c0a7eb",
+      "reviewedAt": "2026-11-11T04:35:08.645Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_Persona5Cup/?region=NAC&round=S42_Persona5Cup_NAC",
+      "evidence": "Matching original Epic ID, round, region, name, rank, points, eliminations, VR and matches"
     }
   ]
 }
