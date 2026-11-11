@@ -2,6 +2,22 @@
   "version": 1,
   "entries": [
     {
+      "id": "manual-verified-2024-me-finals-20261111",
+      "date": "2026-11-11",
+      "type": "records",
+      "title": "ユーザー提供画像で検証：2024年ME Trios/Squads決勝7件",
+      "description": "2024-11-24/11-17 ME Trios Cash Cup決勝、2024-08-12 ME Squads Victory Cup決勝。全件Tracker順位・ポイント・試合・K・VRと本人IDを確認、Cash Cup順位賞金およびSquads 1VR=$100/人を別方式で記録。0VRで賞金なしの2組は$0。重複防止付きで登録。",
+      "recordIds": [
+        "manual-s32-me-trios-final-20241124-rank16",
+        "manual-s32-me-trios-final-20241124-rank19",
+        "manual-s32-me-trios-final-20241117-rank21",
+        "manual-s30-me-squads-final-20240812-rank8",
+        "manual-s30-me-squads-final-20240812-rank10",
+        "manual-s30-me-squads-final-20240812-rank18",
+        "manual-s30-me-squads-final-20240812-rank41"
+      ]
+    },
+    {
       "id": "auto-sync-20261111140319",
       "date": "2026-11-11",
       "type": "records",
