@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-11-11T09:46:35.177Z",
+  "checkedAt": "2026-11-11T10:21:48.499Z",
   "windows": {
     "epicgames_S42_InoxtagIconCup_NAW/S42_InoxtagIconCup_NAW": {
       "nextPage": 50,
@@ -219,12 +219,12 @@
       "emptyAttempts": 0
     },
     "epicgames_S30_SquadsVictoryCashCup_EU/S30_SquadsVictoryCashCup_Event1Round1_EU": {
-      "nextPage": 40,
-      "pages": 40,
-      "complete": true,
-      "coverageLimited": true,
+      "nextPage": 50,
+      "pages": 50,
+      "complete": false,
+      "coverageLimited": false,
       "totalPages": 100,
-      "lastScanned": "2026-11-07T09:32:24.906Z",
+      "lastScanned": "2026-11-11T10:21:01.722Z",
       "emptyAttempts": 0
     },
     "epicgames_S36_VictoryDuosCup_EU/S36_VictoryDuosCup_Event1Round1_EU": {
@@ -669,12 +669,12 @@
       "emptyAttempts": 0
     },
     "epicgames_S30_SoloZBVictoryCashCup_ME/S30_SoloZBVictoryCashCup_Event1Round1_ME": {
-      "nextPage": 21,
-      "pages": 21,
+      "nextPage": 31,
+      "pages": 31,
       "complete": false,
       "coverageLimited": false,
       "totalPages": 50,
-      "lastScanned": "2026-11-11T09:46:01.030Z",
+      "lastScanned": "2026-11-11T10:21:27.326Z",
       "emptyAttempts": 0
     },
     "epicgames_S43_SquadsVictoryCup_BR/S43_SquadsVictoryCup_Event1_Round1_BR": {
@@ -723,21 +723,21 @@
       "emptyAttempts": 0
     },
     "epicgames_S33_SoloCashCup_NAW/S33_SoloCashCup_Event3Round1_NAW": {
+      "nextPage": 30,
+      "pages": 30,
+      "complete": false,
+      "coverageLimited": false,
+      "totalPages": 100,
+      "lastScanned": "2026-11-11T10:21:48.499Z",
+      "emptyAttempts": 0
+    },
+    "epicgames_S43_ArenaCashCup_NAW/S43_ArenaCashCup_Event1_NAW": {
       "nextPage": 20,
       "pages": 20,
       "complete": false,
       "coverageLimited": false,
-      "totalPages": 100,
-      "lastScanned": "2026-11-11T09:46:35.177Z",
-      "emptyAttempts": 0
-    },
-    "epicgames_S43_ArenaCashCup_NAW/S43_ArenaCashCup_Event1_NAW": {
-      "nextPage": 10,
-      "pages": 10,
-      "complete": false,
-      "coverageLimited": false,
       "totalPages": 37,
-      "lastScanned": "2026-11-11T09:45:34.303Z",
+      "lastScanned": "2026-11-11T10:20:50.396Z",
       "emptyAttempts": 0
     }
   }
