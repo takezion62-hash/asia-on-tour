@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-11T13:51:40.862Z",
+  "reviewedAt": "2026-11-11T13:51:52.351Z",
   "description": "Resolved historic review candidates: published, duplicate or participation",
   "entries": [
     {
@@ -19374,6 +19374,15 @@
       "source": "https://www.fortnite.com/competitive/events/S42_ChampionTealKnightFNCSCup/?region=NAC&round=S42_ChampionTealKnightFNCSCup_NAC",
       "verifiedAt": "2026-11-11T13:51:40.862Z",
       "note": "Same player, date, event, rank, points, kills and VRs already represented in published skin result; no second participation row"
+    },
+    {
+      "id": "auto-s31-157a84737cf1",
+      "decision": "published",
+      "recordId": "auto-s31-157a84737cf1",
+      "reviewedAt": "2026-11-11T13:51:52.351Z",
+      "policy": "exact-saved-page-and-official-region-cutoff",
+      "source": "https://www.fortnite.com/competitive/events/S31_SoloVictoryCashCup/?region=NAC&round=S31_SoloVictoryCashCup_Event3Round1_NAC",
+      "officialRules": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-4-official-rules"
     }
   ]
 }
