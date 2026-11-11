@@ -1,7 +1,7 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-11T04:30:39.130Z",
+  "checkedAt": "2026-11-11T04:39:01.882Z",
   "mode": "review",
   "scope": "history",
   "dateMode": "rolling",
@@ -11,17 +11,17 @@
   "provider": "osirion",
   "linkedPlayers": 563,
   "trackedWindows": 2954,
-  "found": 21,
-  "skipped": 26,
-  "imported": 19,
+  "found": 42,
+  "skipped": 42,
+  "imported": 21,
   "scannedPages": 96,
-  "completedWindows": 288,
+  "completedWindows": 295,
   "identityConflicts": 3,
-  "alreadyRegistered": 2726,
-  "autoApprovedTotal": 1342,
+  "alreadyRegistered": 2753,
+  "autoApprovedTotal": 1363,
   "invalidCachedCandidates": 1,
-  "manualReviewCandidates": 21,
-  "autoApprovedCosmeticThisRun": 1,
+  "manualReviewCandidates": 42,
+  "autoApprovedCosmeticThisRun": 0,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
   "autoApprovedUnrealThisRun": 0,
@@ -31,7 +31,7 @@
   "malformedFailures": 0,
   "skippedLeaderboards": [],
   "reviewOnlyWindows": 1322,
-  "reviewOnlyCandidates": 7,
+  "reviewOnlyCandidates": 12,
   "unmappedEvents": 238,
   "unmappedEventIds": [
     "S30_ConsoleCashCups",
@@ -47,54 +47,54 @@
     "S30_Reload",
     "S30_ReloadZB"
   ],
-  "message": "公式VR賞金4件掲載、既存スキン戦績の同一候補5件を整理。確認待ち21件。",
+  "message": "最新版と安全統合：新規掲載21件、重複スキップ0件、要確認の競合0件、確認待ち42件。既存の戦績・賞金は保持。",
   "manuallyPublished": 691,
   "manuallyResolvedDuplicates": 89,
   "lastReviewedBatchAt": "2026-11-11T04:35:08.645Z",
   "manuallyCorrected": 1,
   "lastCorrectedReviewAt": "2026-11-07T09:14:30.244Z",
   "concurrentMerge": {
-    "appended": 19,
+    "appended": 21,
     "alreadyPublished": 0,
     "reviewConflicts": 0,
-    "keptPending": 34,
-    "reconciledAt": "2026-11-11T04:30:43.619Z"
+    "keptPending": 42,
+    "reconciledAt": "2026-11-11T04:39:04.839Z"
   },
   "coverage": {
     "total": 2954,
-    "completed": 288,
-    "notStarted": 2588,
-    "partial": 76,
+    "completed": 295,
+    "notStarted": 2582,
+    "partial": 75,
     "retryWaiting": 2,
     "retryDue": 0,
-    "remaining": 2666,
+    "remaining": 2659,
     "retryCount": 2,
-    "completionPercent": 9.7,
+    "completionPercent": 10,
     "byRegion": {
       "OCE": {
         "total": 522,
-        "completed": 42,
-        "pending": 480
+        "completed": 43,
+        "pending": 479
       },
       "ME": {
         "total": 518,
-        "completed": 84,
-        "pending": 434
+        "completed": 85,
+        "pending": 433
       },
       "EU": {
         "total": 536,
-        "completed": 47,
-        "pending": 489
+        "completed": 48,
+        "pending": 488
       },
       "BR": {
         "total": 517,
-        "completed": 26,
-        "pending": 491
+        "completed": 28,
+        "pending": 489
       },
       "NAC": {
         "total": 535,
-        "completed": 49,
-        "pending": 486
+        "completed": 51,
+        "pending": 484
       },
       "NAW": {
         "total": 326,
@@ -105,18 +105,18 @@
     "byYear": {
       "2024": {
         "total": 974,
-        "completed": 61,
-        "pending": 913
+        "completed": 63,
+        "pending": 911
       },
       "2025": {
         "total": 690,
-        "completed": 39,
-        "pending": 651
+        "completed": 40,
+        "pending": 650
       },
       "2026": {
         "total": 1290,
-        "completed": 188,
-        "pending": 1102
+        "completed": 192,
+        "pending": 1098
       }
     },
     "outsideScopeCheckpoints": 0,
