@@ -1173,29 +1173,35 @@ test('a future season with the same event name keeps a separate tournament ident
 
 test('visible facet counts reflect matching records and exclude only their own axis from the current filters', () => {
   const app = boot(script, { hash: '#tournaments' });
+  // The tournament metadata is immutable during this test. Compute it once
+  // per published result, rather than re-parsing the same official source URL
+  // for every facet chip x every filter state (previously >7 minutes on CI).
+  // Keep all combinations and independent numerical assertions intact.
+  const unknown = Object.fromEntries(tournamentAxes.map(axis => [axis, 'unknown']));
+  const indexed = records.map(record => ({record, meta: tournamentFor(record, data) || unknown}));
+  const tagged = (meta, axis, value) => axis === 'series'
+    ? [meta.series, ...(meta.additionalSeries || [])].includes(value)
+    : meta[axis] === value;
+  const filtered = (entry, axis, filters) =>
+    tournamentAxes.every(other => other === axis || !filters[other] || tagged(entry.meta, other, filters[other])) &&
+    (!filters.stage || entry.record.kind === filters.stage);
   const assertCounts = filters => {
     for (const axis of tournamentAxes) {
-      const chips = [...app.get(`tournament-facet-${axis}`).innerHTML.matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/g)]
+      const chips = [...app.get(`tournament-facet-${axis}`).innerHTML.matchAll(/<a\\b([^>]*)>([\\s\\S]*?)<\\/a>/g)]
         .filter(([, attributes]) => /data-tournament-tag=/.test(attributes));
       assert.ok(chips.length, axis);
       let sum = 0;
       for (const [, attributes, content] of chips) {
         const [tagAxis, value] = decode(attributes.match(/data-tournament-tag="([^"]+)"/)[1]).split(':');
         assert.equal(tagAxis, axis);
-        const expected = records.filter(record => {
-          const meta = tournamentFor(record, data) || Object.fromEntries(tournamentAxes.map(axis => [axis, 'unknown']));
-          return (axis==='series'?[meta.series,...(meta.additionalSeries||[])].includes(value):meta[axis]===value) && tournamentAxes.every(other => other === axis || !filters[other] || (other==='series'?[meta.series,...(meta.additionalSeries||[])].includes(filters[other]):meta[other]===filters[other])) &&
-            (!filters.stage || record.kind === filters.stage);
-        }).length;
-        const actual = Number(plain(content.match(/<b[^>]*>([\s\S]*?)<\/b>/)[1]).replaceAll(',', ''));
+        const expected = indexed.filter(entry =>
+          tagged(entry.meta, axis, value) && filtered(entry, axis, filters)).length;
+        const actual = Number(plain(content.match(/<b[^>]*>([\\s\\S]*?)<\\/b>/)[1]).replaceAll(',', ''));
         assert.equal(actual, expected, `${axis}:${value}`);
         sum += actual;
       }
-      const expectedTotal = records.filter(record => {
-        const meta = tournamentFor(record, data) || Object.fromEntries(tournamentAxes.map(axis => [axis, 'unknown']));
-        return tournamentAxes.every(other => other === axis || !filters[other] || (other==='series'?[meta.series,...(meta.additionalSeries||[])].includes(filters[other]):meta[other]===filters[other])) &&
-          (!filters.stage || record.kind === filters.stage);
-      }).reduce((n,record)=>n+(axis==='series'?1+(tournamentFor(record,data)?.additionalSeries||[]).length:1),0);
+      const expectedTotal = indexed.filter(entry => filtered(entry, axis, filters))
+        .reduce((n, entry) => n + (axis === 'series' ? 1 + (entry.meta.additionalSeries || []).length : 1), 0);
       assert.equal(sum, expectedTotal, `${axis}: facet totals reflect additional series tags`);
     }
   };
