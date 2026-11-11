@@ -2,6 +2,10 @@
 const {test,expect}=require('@playwright/test');
 const player='Shiroka';
 const profile='/?season=all#player='+encodeURIComponent(player);
+async function openStyleTab(page){
+ await page.locator('[data-profile-tab="analysis"]').click();
+}
+
 test('プレイスタイル画面のJS/CSSが配信され、プロフィールで実測項目を表示',async({page,request})=>{
   for(const path of ['/player-style.js','/player-style-view.js','/player-style.css']){
     const response=await request.get(path);
@@ -10,6 +14,7 @@ test('プレイスタイル画面のJS/CSSが配信され、プロフィール�
   }
   const errors=[];page.on('pageerror',e=>errors.push(e.message));
   await page.goto(profile);
+ await openStyleTab(page);
   const section=page.locator('#profile-style');
   await expect(section).toBeVisible();
   const fold=section.locator('#profile-style-fold');
@@ -35,6 +40,7 @@ test('プレイスタイル画面のJS/CSSが配信され、プロフィール�
 });
 test('シーズン・形式・地域・チームのフィルターを変更して安全に再計算',async({page})=>{
   await page.goto(profile);
+ await openStyleTab(page);
   const section=page.locator('#profile-style');
   await expect(section).toBeVisible();
   const fold=section.locator('#profile-style-fold');
@@ -91,6 +97,7 @@ test('選手比較の条件を引き継ぎ、2選手のキル効率と得意地�
 
 test('分析パネルを折りたたみ、ショートカットから再び開ける',async({page})=>{
   await page.goto(profile);
+ await openStyleTab(page);
   const fold=page.locator('#profile-style-fold');
   await expect(fold).not.toHaveAttribute('open','');
   await expect(page.locator('#profile-style-title')).toBeVisible();
