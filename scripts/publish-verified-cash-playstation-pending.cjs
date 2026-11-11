@@ -14,9 +14,9 @@
  */
 const fs=require('node:fs'),path=require('node:path');
 const {apply}=require('./manual-approval-core.cjs');
+const {loadReviewDb,upsertPublicationLog,writeReviewDb}=require('./reviewed-publication-core.cjs');
 const root=path.resolve(__dirname,'..');
 const read=name=>JSON.parse(fs.readFileSync(path.join(root,name),'utf8'));
-const write=(name,v)=>fs.writeFileSync(path.join(root,name),JSON.stringify(v,null,2)+'\n');
 const dry=process.argv.includes('--dry-run');
 const RULES=Object.freeze({
  solo:'https://www.fortnite.com/news/solo-cash-cups-chapter-6-season-1-official-rules',
@@ -30,13 +30,7 @@ const types=Object.freeze({
  'ch6s3-playstation-cup':{id:'ps',season:'S36',event:'S36_PlayStationCup',region:null,dates:['2025-07-24','2025-07-25']},
  'ch7s2-playstation-clix-cup-br':{id:'clix',season:'S40',event:'S40_PlayStationCupClix',region:null,dates:['2026-04-29','2026-04-30','2026-05-02','2026-05-03']}
 });
-const db={
- results:read('results.json'),players:read('players.json'),tournaments:read('tournaments.json'),
- reviews:{auto:read('auto-sync-review.json'),history:read('history-sync-review.json')},
- statuses:{auto:read('auto-sync-status.json'),history:read('history-sync-status.json')},
- scans:{auto:read('auto-sync-scan.json'),history:read('history-sync-scan.json')},
- ledger:read('approval-history.json'),updates:read('updates.json'),calendar:{}
-};
+const db=loadReviewDb(root);
 function resolve(r){
  const conf=types[r.tournamentId];
  if(!conf||r.seasonId!==conf.season||!conf.dates.includes(r.date)||
@@ -130,16 +124,12 @@ for(const {row,change} of candidates){
 }
 const marker='cash-playstation-reviewed-batch-20261111';
 if(published.length){
- const existing=db.updates.entries.find(x=>x.id===marker);
- if(existing){
-  existing.recordIds=[...new Set([...(existing.recordIds||[]),...published.map(x=>x.id)])];
-  existing.description='公式順位表・Epic ID・進出条件を再照合し、通常の遠征結果へ'+existing.recordIds.length+'件掲載。賞金が確認できない結果を推定せず、予選と決勝・現金$0を区別。';
- }else{
-  db.updates.entries.unshift({id:marker,date:'2026-11-11',type:'records',
-   title:'Solo/Duos Cash Cup・PlayStation Cupの公式順位を掲載',
-   description:'Epic IDと公式ラウンド・地域別突破条件を確認。予選突破、決勝結果、現金$0を区別し、通常の遠征結果に統合。不確かな結果表示や未確認の賞金加算は行わない。',
-   recordIds:published.map(x=>x.id)});
- }
+ upsertPublicationLog(db.updates,{
+  id:marker,date:'2026-11-11',title:'Solo/Duos Cash Cup・PlayStation Cupの公式順位を掲載',
+  description:'Epic IDと公式ラウンド・地域別突破条件を確認。予選突破、決勝結果、現金$0を区別し、通常の遠征結果に統合。不確かな結果表示や未確認の賞金加算は行わない。',
+  recordIds:published.map(x=>x.id),
+  existingDescription:count=>'公式順位表・Epic ID・進出条件を再照合し、通常の遠征結果へ'+count+'件掲載。賞金が確認できない結果を推定せず、予選と決勝・現金$0を区別。'
+ });
  for(const k of ['auto','history']){
   db.statuses[k].found=db.reviews[k].proposals.length;
   db.statuses[k].manualReviewCandidates=db.reviews[k].proposals.length;
@@ -148,13 +138,7 @@ if(published.length){
   db.statuses[k].message='公式ラウンド・賞金・進出条件を再確認して掲載。残り確認待ち'+db.reviews[k].proposals.length+'件。';
  }
 }
-if(!dry&&published.length){
- for(const [file,obj] of [
- ['results.json',db.results],['history-sync-review.json',db.reviews.history],
- ['auto-sync-review.json',db.reviews.auto],['history-sync-status.json',db.statuses.history],
- ['auto-sync-status.json',db.statuses.auto],['approval-history.json',db.ledger],
- ['updates.json',db.updates]])write(file,obj);
-}
+if(!dry&&published.length)writeReviewDb(root,db);
 const eventCounts={};
 for(const x of published)eventCounts[x.event]=(eventCounts[x.event]||0)+1;
 console.log('AOT_RULE_PUBLICATION '+JSON.stringify({

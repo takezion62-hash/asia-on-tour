@@ -4,14 +4,10 @@
 // Rank, rounds, team roster and source are checked by manual-approval-core.
 // Neither award/qualification nor cash are inferred.
 const fs=require('node:fs'),path=require('node:path'),{apply}=require('./manual-approval-core.cjs');
+const {loadReviewDb,upsertPublicationLog,writeReviewDb}=require('./reviewed-publication-core.cjs');
 const root=path.resolve(__dirname,'..'),read=n=>JSON.parse(fs.readFileSync(path.join(root,n),'utf8'));
-const write=(n,v)=>fs.writeFileSync(path.join(root,n),JSON.stringify(v,null,2)+'\n');
 const dry=process.argv.includes('--dry-run'),now=new Date().toISOString();
-const db={results:read('results.json'),players:read('players.json'),tournaments:read('tournaments.json'),
- reviews:{auto:read('auto-sync-review.json'),history:read('history-sync-review.json')},
- statuses:{auto:read('auto-sync-status.json'),history:read('history-sync-status.json')},
- scans:{auto:read('auto-sync-scan.json'),history:read('history-sync-scan.json')},
- ledger:read('approval-history.json'),updates:read('updates.json'),calendar:{}};
+const db=loadReviewDb(root);
 const allow={
  'ch7s2-fncs-division-1':{region:'ME',dates:new Set(['2026-05-06','2026-05-12']),event:'S40_FNCSDivisionalCup_Division1'},
  'ch7s4-performance-evaluation-trios':{region:'NAC',dates:new Set(['2026-10-23']),event:'S42_PerformanceEvaluationTrios'},
@@ -62,16 +58,12 @@ for(const r of candidates){
 if(done.length){
  db.updates.entries=db.updates.entries.filter(x=>!String(x.id||'').startsWith('review-publication-aot-review-3-secondary-'));
  const marker='fncs-performance-days-20261111';
- const existing=db.updates.entries.find(x=>x.id===marker);
- if(existing){
-  existing.recordIds=[...new Set([...(existing.recordIds||[]),...done.map(x=>x.id)])];
-  existing.description='Epic本人ID・公式開催枠・保存済み順位を照合して通常結果に'+existing.recordIds.length+'件掲載。未確認賞金・決勝突破・衣装獲得を推定しない。';
- }else{
-  db.updates.entries.unshift({id:marker,date:'2026-11-11',type:'records',
-   title:'FNCS Division 1・Performance・Days of Playの海外順位を掲載',
-   description:'本人Epic ID・公式開催枠と順位表の順位・キル・VR等を照合して通常結果に掲載。未確認賞金・決勝突破・衣装獲得を推定しない。',
-   recordIds:done.map(x=>x.id)});
- }
+ upsertPublicationLog(db.updates,{
+  id:marker,date:'2026-11-11',title:'FNCS Division 1・Performance・Days of Playの海外順位を掲載',
+  description:'本人Epic ID・公式開催枠と順位表の順位・キル・VR等を照合して通常結果に掲載。未確認賞金・決勝突破・衣装獲得を推定しない。',
+  recordIds:done.map(x=>x.id),
+  existingDescription:count=>'Epic本人ID・公式開催枠・保存済み順位を照合して通常結果に'+count+'件掲載。未確認賞金・決勝突破・衣装獲得を推定しない。'
+ });
  for(const k of ['history','auto']){
   db.statuses[k].found=db.reviews[k].proposals.length;
   db.statuses[k].manualReviewCandidates=db.reviews[k].proposals.length;
@@ -81,11 +73,7 @@ if(done.length){
     +'件を通常一覧へ掲載。確認待ち'+db.reviews[k].proposals.length+'件。';
  }
 }
-if(!dry&&done.length){
- for(const [n,v] of [['results.json',db.results],['history-sync-review.json',db.reviews.history],
- ['auto-sync-review.json',db.reviews.auto],['history-sync-status.json',db.statuses.history],
- ['auto-sync-status.json',db.statuses.auto],['approval-history.json',db.ledger],['updates.json',db.updates]])write(n,v);
-}
+if(!dry&&done.length)writeReviewDb(root,db);
 const by={};for(const r of done)by[r.event]=(by[r.event]||0)+1;
 console.log('AOT_SECONDARY_PUBLISH '+JSON.stringify({dry,selected:candidates.length,added:done.length,by,done,held,
  remainingHistory:db.reviews.history.proposals.length,remainingAuto:db.reviews.auto.proposals.length}));

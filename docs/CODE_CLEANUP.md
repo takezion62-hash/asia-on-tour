@@ -168,3 +168,16 @@
 **削除を見送った候補**：`audit-review-round2-20261109.cjs` は確認待ち候補の読み取り専用診断であり、`auto-sync.cjs` は旧方式ながら手動フィード実行の入口を持つため、安全な移行・代替の確認前には廃止しない。静的未参照であっても削除対象とは限らない。
 
 今回も `results.json`、賞金、選手名、承認台帳、自動更新、GitHub Actions、画面コードの内容は変更しない。元の処理ソースはGitのコミット履歴から復元可能。これで使い終わった旧ランナーの削除は一段落し、次は共通処理と高速化の保守を小さな単位で進める。
+
+## 第10段階の変更（2026-11-11、大会別掲載スクリプトの段階的な共通化）
+
+対象：`publish-verified-cash-playstation-pending.cjs`、`publish-verified-cosmetic-pending.cjs`、`publish-verified-fncs-performance-days.cjs` の3つ。これらは既に `manual-approval-core.cjs` の本人Epic ID・開催枠・保存済み順位表・重複確認を再利用しているため、既存の大会別判定を統合・変更せず、**繰り返していた入出力と掲載履歴の処理**だけを `scripts/reviewed-publication-core.cjs` に集約する。
+
+- `loadReviewDb(root)`：結果、選手、大会、確認候補、スキャン、承認履歴、掲載履歴を全3スクリプトで同じ構造に読み込む。
+- `upsertPublicationLog(updates,options)`：掲載履歴マーカーの新規作成と既存IDの重複除外を共通化。元のタイトル・日付、既存バッチ専用の説明文と掲載件数は保持する。不正なID、空バッチ、同一マーカーの二重登録は中止する。
+- `writeReviewDb(root,db)`：公開結果、候補・状態、承認履歴、掲載履歴の従来と同じ7 JSONファイルだけを書き戻す。選手・大会・スキャンは読み取り専用のまま。
+- `tests/reviewed-publication-core.test.cjs`：構造・読み書き7ファイル・既存履歴の維持・新規履歴・冪等性・二重マーカー停止・3つのスクリプトの利用をテストする。
+
+**変えないもの**：各大会の予選突破順位、賞金条件、衣装報酬ライン、参加確認の扱い、`manual-approval-core` の検証、dry-run条件、掲載履歴の既存ID、成績JSON、賞金、選手・大会マスター、13本のGitHub Actions。今回の範囲は共通の入出力と履歴管理に限定し、未検証の一括書換えや自動掲載の拡大はしない。
+
+次の段階では、これを経由できる別の大会別掲載スクリプトも、個別のテストで同等性を確認しながら少数ずつ移行する。
