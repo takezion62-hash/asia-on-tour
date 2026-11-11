@@ -61,10 +61,17 @@ for(const r of candidates){
 }
 if(done.length){
  db.updates.entries=db.updates.entries.filter(x=>!String(x.id||'').startsWith('review-publication-aot-review-3-secondary-'));
- db.updates.entries.unshift({id:'fncs-performance-days-20261111',date:'2026-11-11',type:'records',
-  title:'FNCS Division 1・Performance・Days of Playの海外順位を掲載',
-  description:'本人Epic ID、公式開催枠と保存済み順位表の順位・キル・VR等を照合し通常の遠征結果に統合。PR対象の出場実績を確認できるようにしつつ、未確認賞金・決勝突破・衣装獲得を推定しない。',
-  recordIds:done.map(x=>x.id)});
+ const marker='fncs-performance-days-20261111';
+ const existing=db.updates.entries.find(x=>x.id===marker);
+ if(existing){
+  existing.recordIds=[...new Set([...(existing.recordIds||[]),...done.map(x=>x.id)])];
+  existing.description='Epic本人ID・公式開催枠・保存済み順位を照合して通常結果に'+existing.recordIds.length+'件掲載。未確認賞金・決勝突破・衣装獲得を推定しない。';
+ }else{
+  db.updates.entries.unshift({id:marker,date:'2026-11-11',type:'records',
+   title:'FNCS Division 1・Performance・Days of Playの海外順位を掲載',
+   description:'本人Epic ID・公式開催枠と順位表の順位・キル・VR等を照合して通常結果に掲載。未確認賞金・決勝突破・衣装獲得を推定しない。',
+   recordIds:done.map(x=>x.id)});
+ }
  for(const k of ['history','auto']){
   db.statuses[k].found=db.reviews[k].proposals.length;
   db.statuses[k].manualReviewCandidates=db.reviews[k].proposals.length;
