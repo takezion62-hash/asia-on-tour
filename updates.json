@@ -2,6 +2,17 @@
   "version": 1,
   "entries": [
     {
+      "id": "legacy-exact-final-awards-16fa3001e7b9",
+      "date": "2026-11-11",
+      "type": "records",
+      "title": "2024年公式Victory Cup決勝の確認済み賞金 2件を追加",
+      "description": "Epic公式の原本順位表、本人ID、VR数、地域別大会枠を検証。各選手1VR=$100のS30/S31賞金を確定、Squadsはチーム総額と個人額を分離。支払完了は未確認。",
+      "recordIds": [
+        "auto-s31-b501c68998c3",
+        "auto-s31-cbebfb98185d"
+      ]
+    },
+    {
       "id": "auto-sync-20261111140319",
       "date": "2026-11-11",
       "type": "records",
@@ -1960,7 +1971,7 @@
       "date": "2026-11-11",
       "type": "records",
       "title": "Solo/Duos Cash Cup・PlayStation Cupの公式順位を掲載",
-      "description": "公式順位表・Epic ID・進出条件を再照合し、通常の遠征結果へ187件掲載。賞金が確認できない結果を推定せず、予選と決勝・現金$0を区別。",
+      "description": "公式順位表・Epic ID・進出条件を再照合し、通常の遠征結果へ189件掲載。賞金が確認できない結果を推定せず、予選と決勝・現金$0を区別。",
       "recordIds": [
         "auto-s31-3e80feaf4fbe",
         "auto-s31-2802d7d51af0",
@@ -2148,7 +2159,9 @@
         "auto-s36-ba2f0a4bb03b",
         "auto-s36-02a68c47f34b",
         "auto-s36-91fd4344afa4",
-        "auto-s36-7fda7e2f841f"
+        "auto-s36-7fda7e2f841f",
+        "auto-s36-f1808b618587",
+        "auto-s36-9959e411ab70"
       ]
     },
     {
