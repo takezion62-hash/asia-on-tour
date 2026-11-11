@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-11T00:48:27.828Z",
+  "reviewedAt": "2026-11-11T00:50:35.607Z",
   "entries": [
     {
       "id": "auto-s43-21408f1d31bc",
@@ -4353,6 +4353,61 @@
       "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
       "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event9Round1_NAC",
       "evidence": "Saved Epic ID, official ranked placement 2882 within top 5000; qualifier $0"
+    },
+    {
+      "id": "auto-s42-ddcf423af88d",
+      "decision": "published",
+      "recordId": "auto-s42-ddcf423af88d",
+      "policy": "attendance-only",
+      "approvedAt": "2026-11-11T00:50:35.607Z",
+      "approvedBy": "ChatGPT / user-authorized review and publication",
+      "rule": null,
+      "source": "https://www.fortnite.com/competitive/events/S42_StreetFighterCup/?region=ME&round=S42_StreetFighterCup_ME",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s42-15963db8b4f9",
+      "decision": "published",
+      "recordId": "auto-s42-15963db8b4f9",
+      "policy": "attendance-only",
+      "approvedAt": "2026-11-11T00:50:35.607Z",
+      "approvedBy": "ChatGPT / user-authorized review and publication",
+      "rule": null,
+      "source": "https://www.fortnite.com/competitive/events/S42_StreetFighterCup/?region=ME&round=S42_StreetFighterCup_ME",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s42-ca44770102e3",
+      "decision": "published",
+      "recordId": "auto-s42-ca44770102e3",
+      "policy": "attendance-only",
+      "approvedAt": "2026-11-11T00:50:35.607Z",
+      "approvedBy": "ChatGPT / user-authorized review and publication",
+      "rule": null,
+      "source": "https://www.fortnite.com/competitive/events/S42_StreetFighterCup/?region=ME&round=S42_StreetFighterCup_ME",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s42-060d98e8993a",
+      "decision": "published",
+      "recordId": "auto-s42-060d98e8993a",
+      "policy": "verified-rule",
+      "approvedAt": "2026-11-11T00:50:35.607Z",
+      "approvedBy": "ChatGPT / user-authorized review",
+      "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=ME&round=S42_ConsoleVCC_SolosZB_Event8Round1_ME",
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-4-official-rules",
+      "evidence": "Exact Epic ID, event, rank within observed saved ranked page; no cash/no progression claimed"
+    },
+    {
+      "id": "auto-s42-8195cef15f80",
+      "decision": "published",
+      "recordId": "auto-s42-8195cef15f80",
+      "policy": "verified-rule",
+      "approvedAt": "2026-11-11T00:50:35.607Z",
+      "approvedBy": "ChatGPT / user-authorized review",
+      "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=ME&round=S42_ConsoleVCC_SolosZB_Event8Round1_ME",
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-4-official-rules",
+      "evidence": "Exact Epic ID, event, rank within observed saved ranked page; no cash/no progression claimed"
     }
   ]
 }
