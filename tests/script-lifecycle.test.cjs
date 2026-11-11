@@ -383,3 +383,47 @@ test('第6段階：完了済み4監査処理を整理して79戦績・18重複�
  assert.equal(oce.prizePerPlayer,50,'corrected OCE personal awards must remain $50 each');
  assert.equal(decisions.get(oce.id)?.personalAwardCorrection?.perPlayer,true);
 });
+
+test('第7段階：4本の一時掲載処理を整理しても169件の公開成績と審査記録を保持',()=>{
+ const completedBatches=[["publish-reviewed-direct-20261108.cjs","assistant-reviewed-pending-20261108",49],["publish-reviewed-pending-evening-20261108.cjs","assistant-reviewed-pending-20261108-evening",30],["publish-reviewed-pending-morning-20261109.cjs","assistant-reviewed-pending-20261109-morning",20],["publish-reviewed-round2-20261109.cjs","assistant-reviewed-pending-round2-20261109",70]];
+ const liveFiles=[
+  ...scanFiles(path.join(root,'.github','workflows'),/\.ya?ml$/),
+  ...scanFiles(scriptDir,/\.cjs$/),
+  ...scanFiles(path.join(root,'tests'),/\.[cm]?js$/).filter(p=>!ignored.has(path.basename(p))),
+  path.join(root,'package.json')
+ ];
+ const updates=JSON.parse(fs.readFileSync(path.join(root,'updates.json'),'utf8')).entries;
+ const reviewed=JSON.parse(fs.readFileSync(path.join(root,'history-sync-reviewed.json'),'utf8')).entries;
+ const approvals=JSON.parse(fs.readFileSync(path.join(root,'approval-history.json'),'utf8')).entries;
+ const results=JSON.parse(fs.readFileSync(path.join(root,'results.json'),'utf8'));
+ const pendingHistory=JSON.parse(fs.readFileSync(path.join(root,'history-sync-review.json'),'utf8')).proposals;
+ const pendingAuto=JSON.parse(fs.readFileSync(path.join(root,'auto-sync-review.json'),'utf8')).proposals;
+ const byId=new Map(results.map(row=>[row.id,row]));
+ const pending=new Set([...pendingHistory,...pendingAuto].map(row=>row.id));
+ const accepted=new Set([...reviewed,...approvals].filter(x=>x.decision==='published').map(x=>x.id));
+ assert.equal(results.length,byId.size,'public results must not contain duplicate IDs');
+ const checked=[];
+ for(const [script,marker,expected] of completedBatches){
+  assert.equal(fs.existsSync(path.join(scriptDir,script)),false,
+   'completed one-shot publication script unexpectedly restored: '+script);
+  const refs=liveFiles.filter(file=>fs.readFileSync(file,'utf8').includes(script)).map(rel);
+  assert.deepEqual(refs,[],'active references to a retired publication script: '+script);
+  const logs=updates.filter(u=>u.id===marker);
+  assert.equal(logs.length,1,'publication ledger marker missing or duplicated: '+marker);
+  const ids=logs[0].recordIds;
+  assert.equal(ids?.length,expected,'published batch count changed: '+marker);
+  assert.equal(new Set(ids).size,expected,'published batch contains duplicate IDs: '+marker);
+  for(const id of ids){
+   checked.push(id);
+   const record=byId.get(id);
+   assert.ok(record,'historical published record was removed: '+id);
+   assert.ok(record.source,'original result source was removed: '+id);
+   assert.ok(record.prize===null||(Number.isFinite(record.prize)&&record.prize>=0),
+    'cash must remain nonnegative or explicitly unconfirmed: '+id);
+   assert.ok(accepted.has(id),'published approval decision was removed: '+id);
+   assert.equal(pending.has(id),false,'old published record reentered review queue: '+id);
+  }
+ }
+ assert.equal(checked.length,169,'four original batches must total 169 published results');
+ assert.equal(new Set(checked).size,169,'published batch overlap reintroduced');
+});
