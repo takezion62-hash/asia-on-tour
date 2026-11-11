@@ -1,4 +1,4 @@
-name: AOT third verified candidate publication
+name: AOT verified remaining cash and historic standings
 on:
   push:
     branches: [main]
@@ -32,6 +32,8 @@ jobs:
           for attempt in 1 2 3 4 5; do
             git fetch origin main
             git reset --hard origin/main
+            node scripts/publish-verified-cash-playstation-pending.cjs --dry-run
+            node scripts/publish-verified-cash-playstation-pending.cjs
             node scripts/publish-verified-remaining-pending.cjs --dry-run
             node scripts/publish-verified-remaining-pending.cjs
             npm run validate
