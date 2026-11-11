@@ -32,3 +32,45 @@ test('archive pagination reuses sorted search results until filters actually cha
  const afterSecondPage=await page.evaluate(()=>window.__archivePerf.bigSorts);
  expect(afterSecondPage).toBe(afterFilter);
 });
+
+test('player directory renders 60 cards per batch without losing search or sorting',async({page})=>{
+ await page.goto('/?season=all#players');
+ const cards=page.locator('#all-players .player');
+ await expect(cards).toHaveCount(60);
+ await expect(page.locator('#player-list-status')).toContainText('60名を表示');
+ const more=page.locator('#player-more');
+ await expect(more).toBeVisible();
+ await more.click();
+ await expect(cards).toHaveCount(120);
+ const late=await cards.nth(119).getAttribute('data-open-profile');
+ expect(late).toBeTruthy();
+ await page.locator('#search-players').fill(late);
+ await expect(cards.first()).toHaveAttribute('data-open-profile',late);
+ await page.locator('#search-players').fill('');
+ await expect(cards).toHaveCount(60);
+ await page.locator('#player-sort').selectOption('name');
+ await expect(cards).toHaveCount(60);
+ await expect(more).toBeVisible();
+});
+test('home defers full update-feed DOM until the updates page is visited',async({page})=>{
+ await page.goto('/?season=all#home');
+ await expect(page.locator('#home-new-registrations [data-registration-id]').first()).toBeVisible();
+ await expect(page.locator('#home-update-preview .update-preview-line')).toHaveCount(3);
+ expect(await page.locator('#updates-feed [data-update-id]').count()).toBe(0);
+ await page.getByRole('button',{name:'更新履歴',exact:true}).click();
+ await expect(page.locator('#page-updates')).toBeVisible();
+ await expect(page.locator('#updates-feed [data-update-id]').first()).toBeVisible();
+});
+test('calendar month paging still displays the correct day buttons with per-month result caching',async({page})=>{
+ await page.goto('/?season=all#calendar?month=2026-10');
+ await expect(page.locator('#page-calendar')).toBeVisible();
+ const dates=page.locator('[data-calendar-day]');
+ await expect(dates).toHaveCount(31);
+ const chosen=page.locator('[data-calendar-day="2026-10-24"]');
+ await chosen.click();
+ await expect(chosen).toHaveAttribute('aria-pressed','true');
+ // Month switching must not expose other months' result-day buttons.
+ const source=require('node:fs').readFileSync(require('node:path').resolve(__dirname,'../app.js'),'utf8');
+ expect(source).toContain('calendarMonthRowsCache');
+ expect(source).toContain('calendarIndexedRows().byMonth.get(filters.month)');
+});

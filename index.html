@@ -108,6 +108,8 @@
     .section-head{display:flex;align-items:end;justify-content:space-between;gap:14px;margin:25px 0 17px;flex-wrap:wrap}
     .section-head p{margin:6px 0 0;color:#8f9ab8;font-size:12px}
     .players{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
+    .player-list-controls{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-top:18px}
+    .player-list-status{margin:0;font-size:13px;color:#a9b3cf}
     .player{border:1px solid #30364d;background:linear-gradient(144deg,#191d30,#111524);border-radius:17px;padding:20px;position:relative;overflow:hidden;transition:.18s}
     .player:hover{border-color:#8d70d6;transform:translateY(-2px)}
     .player::after{content:'';position:absolute;right:-40px;top:-45px;width:140px;height:140px;border:1px solid #d2b0ff26;border-radius:50%;box-shadow:0 0 0 26px #bba4e80a,0 0 0 51px #bba4e806}
@@ -953,7 +955,7 @@
   <div class="ranking-results"><div class="ranking-results-head"><h3 id="ranking-metric-title">個人獲得賞金</h3><p id="ranking-count" aria-live="polite" aria-atomic="true"></p></div><div class="player-prize-list" id="player-earnings-leaders" role="list" aria-labelledby="ranking-metric-title"></div><details id="ranking-unknown" class="ranking-unknown" hidden></details></div>
   <button id="ranking-more" class="btn sm ghost ranking-more" type="button" data-ranking-more hidden>さらに30名表示</button><p id="ranking-integrity" class="ranking-integrity" hidden></p>
   <p class="earnings-explainer" id="ranking-completeness">このランキングは、ASIA ON TOURに掲載されている海外大会戦績をもとに集計しています。未掲載の大会があるため、選手の実際の全成績とは異なる場合があります。公式ランキングではありません。</p>
-</section><div class="filterbar"><div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><input id="search-players" type="search" placeholder="プレイヤー名を検索" aria-label="プレイヤー名検索"></div><select id="player-sort" aria-label="プレイヤーの並び順"><option value="prize">獲得賞金が多い順</option><option value="name">選手名順</option><option value="events">戦績件数順</option></select></div><div class="players" id="all-players"></div></section>
+</section><div class="filterbar"><div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><input id="search-players" type="search" placeholder="プレイヤー名を検索" aria-label="プレイヤー名検索"></div><select id="player-sort" aria-label="プレイヤーの並び順"><option value="prize">獲得賞金が多い順</option><option value="name">選手名順</option><option value="events">戦績件数順</option></select></div><div class="players" id="all-players"></div><div class="player-list-controls"><p id="player-list-status" class="player-list-status" role="status" aria-live="polite"></p><button id="player-more" class="btn sm ghost" type="button" hidden>さらに60名表示</button></div></section>
       <section class="section" id="page-calendar" aria-label="大会カレンダー"><p style="margin:0 0 14px"><a href="./verification.html#coverage" class="text-link">🔍 大会の収集状況・確認待ちを調べる ↗</a></p><div id="calendar-content"></div></section>
       <section class="section" id="page-compare" aria-labelledby="compare-title"><div id="compare-content"></div></section>
       <section class="section" id="page-tournaments"><div id="tournament-content"></div></section>
@@ -1061,7 +1063,7 @@
   <script src="./compare.js?v=1" defer></script>
   <script src="./tracker-summary.js?v=tracker-basics-v1-20261110" defer></script>
   <script src="./participation-ui.js?v=qualified-results-batch1-20261110" defer></script>
-  <script src="./app.js?v=results-search-20261109-r3" defer></script>
+  <script src="./app.js?v=player-batch-calendar-index-20261111" defer></script>
   <script src="./auto-sync-ui.js?v=4-approval-reasons" defer></script>
   <script src="./source-rules.js?v=7-duo-qualifier" defer></script>
 </body>

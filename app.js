@@ -218,7 +218,7 @@
       selectedSeason=nextSeason;
       // A different season may have no sessions in the old calendar month.
       if(next.page==='calendar'){
-        const latestResult=all().map(e=>e.date).filter(validCalendarDate).sort().at(-1)||'';
+        const latestResult=calendarIndexedRows().latestDate;
         next.calendar={...sanitizeCalendarFilters(next.calendar),month:latestResult?latestResult.slice(0,7):calendarDefaultMonth(),date:latestResult};
         calendarBrowse={...next.calendar};
       }
@@ -392,12 +392,30 @@
       const value=type=>parts.find(part=>part.type===type)?.value||'';
       return value('year')+'-'+value('month')+'-'+value('day');
     }
+    // Records never change during a page session. Index valid published dates
+    // once per season instead of rescanning the entire archive on every day tap.
+    const calendarMonthRowsCache=new WeakMap();
+    function calendarIndexedRows(){
+      const rows=all();
+      if(!calendarMonthRowsCache.has(rows)){
+        const byMonth=new Map();let latestDate='';
+        for(const row of rows){
+          if(!validCalendarDate(row.date))continue;
+          const month=row.date.slice(0,7);
+          if(!byMonth.has(month))byMonth.set(month,[]);
+          byMonth.get(month).push(row);
+          if(row.date>latestDate)latestDate=row.date;
+        }
+        calendarMonthRowsCache.set(rows,{byMonth,latestDate});
+      }
+      return calendarMonthRowsCache.get(rows);
+    }
     function calendarDefaultMonth(){
       const today=calendarTokyoToday().slice(0,7);
-      const dates=all().map(e=>e.date).filter(validCalendarDate).sort();
+      const {byMonth,latestDate}=calendarIndexedRows();
       const upcoming=siteData.schedule.sessions.filter(e=>validCalendarDate(e.dateJst)&&e.dateJst>=today).map(e=>e.dateJst).sort();
       if(upcoming.some(date=>date.startsWith(today)))return today;
-      return dates.some(date=>date.startsWith(today))?today:upcoming[0]?.slice(0,7)||dates.at(-1)?.slice(0,7)||today;
+      return byMonth.has(today)?today:upcoming[0]?.slice(0,7)||latestDate.slice(0,7)||today;
     }
     const calendarDefaultFilters=()=>({month:calendarDefaultMonth(),date:'',region:'all',series:'all',mode:'all',stage:'all',scope:'all'});
     let calendarBrowse={month:'',date:'',region:'all',series:'all',mode:'all',stage:'all',scope:'all'};
@@ -425,8 +443,7 @@
     }
     function calendarSessions(filters){
       const groups=new Map();
-      for(const record of all()){
-        if(!validCalendarDate(record.date)||!record.date.startsWith(filters.month+'-'))continue;
+      for(const record of calendarIndexedRows().byMonth.get(filters.month)||[]){
         if(filters.region!=='all'&&record.region!==filters.region)continue;
         const info=classifyTournamentRecord(record);
         const kind=canonicalTournamentKind(record.kind,info.id,record.round);
@@ -1177,6 +1194,7 @@
       document.querySelectorAll('.section').forEach(e=>e.classList.toggle('active',e.id==='page-'+view.page));
       document.querySelectorAll('.nav button').forEach(e=>{const active=e.dataset.page===(view.page==='profile'?'players':view.page==='tournament'?'tournaments':view.page);e.classList.toggle('active',active);e.setAttribute('aria-current',active?'page':'false')});
       if(view.page==='results')renderResults();
+      if(view.page==='updates')renderUpdates();
       if(view.page==='players'){renderPlayers();renderRanking()}
       document.title=view.page==='profile'&&profileInfo(view.name)?view.name+' · ASIA ON TOUR':view.page==='tournament'&&tournamentInfo(view.id)?tournamentInfo(view.id).name+' · ASIA ON TOUR':view.page==='calendar'?'大会カレンダー · ASIA ON TOUR':view.page==='compare'?'選手比較 · ASIA ON TOUR':view.page==='tournaments'?'大会を探す · ASIA ON TOUR':view.page==='updates'?'更新履歴 · ASIA ON TOUR':'ASIA ON TOUR — Fortnite海外遠征トラッカー';
       routedHash=window.location.hash;
@@ -1938,14 +1956,20 @@
         +'<p class="update-entry-description">'+escape(entry.description)+'</p>'
         +updateRecordLinks(entry,byId)+'</article>';
     }
+    // The home page only needs four registrations and three update titles.
+    // Build the potentially large detailed update feed when its page is opened.
+    function renderHomeUpdatePreviews(records=registeredRows()){
+      const empty='<div class="empty">登録日を確認できる新着戦績はまだありません。大会の開催日から推測して表示することはありません。</div>';
+      $('#home-new-registrations').innerHTML=records.length?records.slice(0,4).map(registrationItem).join(''):empty;
+      $('#home-update-preview').innerHTML=updateEntries.slice(0,3).map(entry=>'<div class="update-preview-line"><time datetime="'+escape(entry.date)+'">'+escape(friendlyDate(entry.date))+'</time><p>'+escape(entry.title)+'</p></div>').join('');
+    }
     function renderUpdates(){
       const records=registeredRows(),byId=new Map(rawAll().map(record=>[record.id,record]));
       const empty='<div class="empty">登録日を確認できる新着戦績はまだありません。大会の開催日から推測して表示することはありません。</div>';
-      $('#home-new-registrations').innerHTML=records.length?records.slice(0,4).map(registrationItem).join(''):empty;
+      renderHomeUpdatePreviews(records);
       $('#new-entries-list').innerHTML=records.length?records.slice(0,registrationLimit).map(registrationItem).join(''):empty;
       $('#registration-more').hidden=registrationLimit>=records.length;
       $('#new-registration-count').textContent='登録日を確認できた '+format(records.length)+'戦績 · '+seasonScope()+' · '+format(Math.min(registrationLimit,records.length))+'件表示';
-      $('#home-update-preview').innerHTML=updateEntries.slice(0,3).map(entry=>'<div class="update-preview-line"><time datetime="'+escape(entry.date)+'">'+escape(friendlyDate(entry.date))+'</time><p>'+escape(entry.title)+'</p></div>').join('');
       $('#updates-feed').innerHTML=updateEntries.length?updateEntries.map(entry=>updateEntryItem(entry,byId)).join(''):'<div class="empty">まだ更新履歴はありません</div>';
     }
 
@@ -2109,20 +2133,46 @@
       const shown=visible.slice((archivePage-1)*ARCHIVE_PAGE_SIZE,archivePage*ARCHIVE_PAGE_SIZE);
       $('#result-table').innerHTML='<div class="archive-head" aria-hidden="true"><span>日付</span><span>選手名</span><span>地域</span><span>大会名</span><span>順位</span><span>KILLS</span><span>VR</span><span>賞金 / USD</span></div><div class="archive-list">'+shown.map(archiveRow).join('')+'</div>';
     }
+    // Avoid constructing every lifetime achievement preview and DOM card at once.
+    // Search/sort still covers the complete player registry, not only visible cards.
+    const PLAYER_BATCH_SIZE=60;
+    let playerVisibleCount=PLAYER_BATCH_SIZE,playerListCache=null;
+    function updatePlayerListControls(total){
+      const visibleCount=Math.min(playerVisibleCount,total);
+      $('#player-list-status').textContent='全'+format(total)+'名中 '+format(visibleCount)+'名を表示';
+      const more=$('#player-more');
+      more.hidden=visibleCount>=total;
+      if(!more.hidden)more.textContent='さらに'+format(Math.min(PLAYER_BATCH_SIZE,total-visibleCount))+'名表示';
+    }
     function renderPlayers(){
       const s=($('#search-players').value||'').trim().toLowerCase();
-      const shown=selectedSeasonPlayers().filter(p=>[p.name,...(confirmedAliases[p.name]||[])].some(n=>n.toLowerCase().includes(s)));
       const sort=$('#player-sort').value;
-      const byName=seasonPlayerIndex().byName;
-      shown.sort((a,b)=>sort==='name'?a.name.localeCompare(b.name,'ja')
-        :sort==='events'?(byName.get(b.name)?.length||0)-(byName.get(a.name)?.length||0)||a.name.localeCompare(b.name,'ja')
-        :playerPrizeTotal(b.name)-playerPrizeTotal(a.name)||a.name.localeCompare(b.name,'ja'));
-      $('#all-players').innerHTML=shown.length?shown.map(renderPlayerCard).join(''):'<div class="empty">一致する選手はまだいないよ</div>';
+      const signature=JSON.stringify([selectedSeason,s,sort]);
+      if(!playerListCache||playerListCache.signature!==signature){
+        const shown=selectedSeasonPlayers().filter(p=>[p.name,...(confirmedAliases[p.name]||[])].some(n=>n.toLowerCase().includes(s)));
+        const byName=seasonPlayerIndex().byName;
+        shown.sort((a,b)=>sort==='name'?a.name.localeCompare(b.name,'ja')
+          :sort==='events'?(byName.get(b.name)?.length||0)-(byName.get(a.name)?.length||0)||a.name.localeCompare(b.name,'ja')
+          :playerPrizeTotal(b.name)-playerPrizeTotal(a.name)||a.name.localeCompare(b.name,'ja'));
+        playerListCache={signature,rows:shown};
+        playerVisibleCount=PLAYER_BATCH_SIZE;
+      }
+      const shown=playerListCache.rows;
+      $('#all-players').innerHTML=shown.length?shown.slice(0,playerVisibleCount).map(renderPlayerCard).join(''):'<div class="empty">一致する選手はまだいないよ</div>';
+      updatePlayerListControls(shown.length);
+    }
+    function showMorePlayers(){
+      if(!playerListCache||currentView.page!=='players')return;
+      const rows=playerListCache.rows,from=Math.min(playerVisibleCount,rows.length);
+      if(from>=rows.length)return;
+      playerVisibleCount=Math.min(from+PLAYER_BATCH_SIZE,rows.length);
+      $('#all-players').insertAdjacentHTML('beforeend',rows.slice(from,playerVisibleCount).map(renderPlayerCard).join(''));
+      updatePlayerListControls(rows.length);
     }
 
     // Archive and player cards are expensive and belong to hidden pages at startup.
     // showView() already renders each on demand, including deep links and season changes.
-    function refresh(){renderSeasonControl();renderHome();renderEarnings();renderAotPR();renderUpdates()}
+    function refresh(){renderSeasonControl();renderHome();renderEarnings();renderAotPR();renderHomeUpdatePreviews()}
     function csvText(rows){const cols=['date','player','players','region','event','round','rank','points','kills','vrs','prize','prizePerPlayer','kind','source','verified','note','chapter','season','seasonId'];const cell=x=>'"'+String(x??'').replace(/"/g,'""')+'"';return '\ufeff'+cols.join(',')+'\r\n'+rows.map(e=>cols.map(k=>cell(k==='players'?names(e).join(' / '):['chapter','season','seasonId'].includes(k)?recordSeason(e)[k]:e[k])).join(',')).join('\r\n')}
     function download(name,content,type){const b=new Blob([content],{type});const url=URL.createObjectURL(b);const a=document.createElement('a');a.href=url;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000)}
     document.addEventListener('click',e=>{
@@ -2264,7 +2314,7 @@
       control.addEventListener('input',refreshArchiveFilters);
       control.addEventListener('change',refreshArchiveFilters);
     });
-    $('#search-results').addEventListener('input',()=>{selectedPlayer=null;refreshArchiveFilters()});$('#search-players').addEventListener('input',renderPlayers);$('#player-sort').addEventListener('change',renderPlayers);$('#export-csv').addEventListener('click',()=>download('asia-on-tour-results.csv',csvText(visible),'text/csv;charset=utf-8'));
+    $('#search-results').addEventListener('input',()=>{selectedPlayer=null;refreshArchiveFilters()});$('#search-players').addEventListener('input',renderPlayers);$('#player-sort').addEventListener('change',renderPlayers);$('#player-more').addEventListener('click',showMorePlayers);$('#export-csv').addEventListener('click',()=>download('asia-on-tour-results.csv',csvText(visible),'text/csv;charset=utf-8'));
     document.addEventListener('submit',e=>{
       if(e.target.id!=='compare-add-form')return;
       e.preventDefault();
