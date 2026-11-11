@@ -2771,55 +2771,6 @@
       "reviewReason": "順位表の取得が完了していません"
     },
     {
-      "id": "auto-s36-dd0dad621a9b",
-      "date": "2025-07-24",
-      "region": "OCE",
-      "player": "じんくん",
-      "playerRaw": "Aura t3eny 19ǃ",
-      "event": "PlayStation Cup",
-      "round": "Qualifier / 参加確認",
-      "rank": 7405,
-      "points": 12,
-      "kills": 4,
-      "vrs": 0,
-      "prize": null,
-      "kind": "参加確認",
-      "matches": 1,
-      "seasonId": "S36",
-      "chapter": 6,
-      "season": 3,
-      "tournamentId": "ch6s3-playstation-cup",
-      "source": "https://www.fortnite.com/competitive/events/S36_PlayStationCup/?region=OCE&round=S36_PlayStationCup_Qualifier_OCE",
-      "verified": true,
-      "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
-      "reviewOnly": true,
-      "reviewReason": "確認専用大会は自動承認不可"
-    },
-    {
-      "id": "auto-s30-57629c5fdcb5",
-      "date": "2024-06-18",
-      "region": "NAC",
-      "player": "112345abcde",
-      "playerRaw": "112345abcde",
-      "event": "Solo Victory Cup Battle Royale",
-      "round": "Event 3 · Round 1 / 予選",
-      "rank": 489,
-      "points": 171,
-      "kills": 26,
-      "vrs": 1,
-      "prize": 0,
-      "kind": "予選",
-      "matches": 7,
-      "seasonId": "S30",
-      "chapter": 5,
-      "season": 3,
-      "tournamentId": "ch5s3-solo-victory-cup",
-      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event3Round1_NAC",
-      "verified": true,
-      "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。",
-      "reviewReason": "順位表の取得が完了していません"
-    },
-    {
       "id": "auto-s42-649c3bb062df",
       "date": "2026-09-13",
       "region": "NAC",
@@ -3943,5 +3894,5 @@
       "reviewReason": "順位表の取得が完了していません"
     }
   ],
-  "manualReviewedAt": "2026-11-11T12:43:39.914Z"
+  "manualReviewedAt": "2026-11-11T12:54:59.834Z"
 }
