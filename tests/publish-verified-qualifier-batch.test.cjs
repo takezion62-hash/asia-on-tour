@@ -141,3 +141,41 @@ test('2024-06-11 ME ZB candidate cohort is published once or remains queued, nev
   }
  }
 });
+
+test('2024-07-30 ME ZB event7 and 2024-08-06 event8 cohorts remain pending or source-verified published',()=>{
+ const fs=require('node:fs'),path=require('node:path'),root=path.resolve(__dirname,'..');
+ const get=file=>JSON.parse(fs.readFileSync(path.join(root,file),'utf8'));
+ const results=get('results.json'),pending=get('history-sync-review.json').proposals;
+ const approvals=get('approval-history.json').entries;
+ const groups=[
+  {date:'2024-07-30',event:'Event7Round1',rows:[
+   ['auto-s30-5a39e0df5e77',28],['auto-s30-7c2853bff732',34],
+   ['auto-s30-a10e83679675',40],['auto-s30-56dcc55ccb2a',158],
+   ['auto-s30-9ebb39b49e01',162]]},
+  {date:'2024-08-06',event:'Event8Round1',rows:[
+   ['auto-s30-14be63fe4632',22],['auto-s30-d7919b6b8e05',117],
+   ['auto-s30-d336d683438d',145]]}
+ ];
+ for(const group of groups){
+  const spec=W.find(x=>x.date===group.date&&x.region==='ME'&&x.event==='S30_SoloZBVictoryCashCup'&&x.window.includes(group.event));
+  assert.ok(spec,'official S30 ZB event must stay explicitly allowed: '+group.event);
+  assert.equal(spec.cutoff,2000);
+  const original='https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=ME&round='+spec.window;
+  for(const [id,rank] of group.rows){
+   const published=results.filter(x=>x.id===id),waiting=pending.filter(x=>x.id===id);
+   assert.equal(published.length+waiting.length,1,'historical result lost or duplicated: '+id);
+   const row=published[0]||waiting[0];
+   assert.equal(row.rank,rank);
+   assert.equal(row.source,original);
+   assert.equal(row.event,'ZB Solo Victory Cup');
+   assert.equal(row.kind,'予選');
+   assert.equal(row.verified,true);
+   assert.equal(row.prize,0);
+   if(published.length){
+    assert.match(row.round,/\/ 予選突破$/);
+    assert.ok(approvals.some(a=>a.id===id&&a.decision==='published'&&a.policy==='verified-rule'),
+     'publication approval lost: '+id);
+   }
+  }
+ }
+});

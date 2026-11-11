@@ -20,6 +20,13 @@ const W=[
  // Each player's exact Epic ID/rank/score is still checked against the original
  // saved Osirion page; this source check NEVER replaces that requirement.
  ['2024-06-11','S30','ME','S30_SoloZBVictoryCashCup','Event2Round1','ch5s3-zb-solo-victory',2000,RULE_S30],
+ // Exact S30 ME Zero Build weekly sessions. Tracker confirms top 2,000
+ // advance on both weeks; per-player ranks remain subject to immutable Epic-ID
+ // scoreboard checkpoint checks below (NOT an unverified payout).
+ // https://fortnitetracker.com/events/epicgames_S30_SoloZBVictoryCashCup_ME?window=S30_SoloZBVictoryCashCup_Event7Round1_ME
+ // https://fortnitetracker.com/events/epicgames_S30_SoloZBVictoryCashCup_ME?window=S30_SoloZBVictoryCashCup_Event8Round1_ME
+ ['2024-07-30','S30','ME','S30_SoloZBVictoryCashCup','Event7Round1','ch5s3-zb-solo-victory',2000,RULE_S30],
+ ['2024-08-06','S30','ME','S30_SoloZBVictoryCashCup','Event8Round1','ch5s3-zb-solo-victory',2000,RULE_S30],
  ['2024-09-16','S31','OCE','S31_SoloVictoryCashCup','Event3Round1','ch5s4-solo-victory-cup',1500,RULE_S31],
  // In C5S3 the rules call NAC the "NA" region; its top 5,000 proceed.
  ['2024-08-06','S30','NAC','S30_SoloVictoryCashCup','Event8Round1','ch5s3-solo-victory-cup',5000,RULE_S30],

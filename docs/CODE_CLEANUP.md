@@ -246,3 +246,13 @@
 
 同時に `tests/publish-verified-qualifier-batch.test.cjs` にこの18件の不変条件（掲載済みまたは確認待ちが各1件、本人・出典・予選区分・賞金$0、掲載時の承認履歴）を追加。大会以外の成績はそのままに、GitHub Actionsの安全な履歴掲載ワークフローを再実行して結果の公開まで検証する。
 
+## 2026-11-11 第2便：2024年7月・8月 ME ZB Solo Victory Cup 予選
+Fortnite TrackerのC5S3 Zero Build Solo Victory Cupの当該Round 1ページで、ME上位2,000人がRound 2へ進出すると確認した。出場者別の正確な順位をTrackerから直接閲覧できない場合でも、**保存済みOsirion/Epic-ID順位表の完全一致・順位索引の範囲・チェックポイントの連続性を検証できたものだけ**を公開する。
+
+- 2024年7月30日（S30 Event7 Round1 ME）：既存確認候補5件、28/34/40/158/162位。
+- 2024年8月6日（S30 Event8 Round1 ME）：既存確認候補3件、22/117/145位。
+- 2024年7月30日の35位Minipiyoは**Round2の賞金決勝で別枠**であり、今回のRound1予選掲載には含めない。賞金について推測しない。
+- Tracker: https://fortnitetracker.com/events/epicgames_S30_SoloZBVictoryCashCup_ME?window=S30_SoloZBVictoryCashCup_Event7Round1_ME
+- Tracker: https://fortnitetracker.com/events/epicgames_S30_SoloZBVictoryCashCup_ME?window=S30_SoloZBVictoryCashCup_Event8Round1_ME
+
+公式大会ID、選手の本人照合、過去成績重複、順位表の保存値、突破枠を照合する既存の安全な掲載スクリプトへ2つの大会ウィンドウを許可リストとして追加し、回帰テストで候補の保護・賞金$0・掲載履歴を検証する。
