@@ -57,3 +57,22 @@
 - GitHub Actionsの重複実行・JSON読込速度の見直し
 
 現時点で大規模削除はしない。手動掲載や例外賞金を単なる参加記録に変えたり、既存の確定金額を再計算したりしない。
+
+## 第4段階の変更（2026-11-11、まとめて4本）
+
+過去の**確認済み掲載処理だけ**をまとめて整理する。静的利用状況監査で review-candidate と判定され、現役Actions／npm／スクリプト／テストから参照がない4本に限定。
+
+| 旧実行ファイル | 公開済み根拠 | 保護する掲載件数 |
+| --- | --- | ---: |
+| `manual-review-20261107-oce-qualifiers3.cjs` | `review-20261107-oce-s31-qualifier-last-three` | 3 |
+| `manual-review-20261107-round1-21.cjs` | `review-20261107-round1-participation-21` | 21 |
+| `manual-review-20261107-s31-aphrodite.cjs` | `review-20261107-s31-victory-aphrodite-38` | 37（38候補中） |
+| `publish-last-two-nov11.cjs` | `verified-final-reviews-20261111` | 2 |
+
+- 63件の掲載ID・公式出典・確定賞金額・審査決定・確認待ちからの除去を `tests/script-lifecycle.test.cjs` で回帰検証
+- 特に Karf / huggyfv のデュオ賞金チーム$200と、Clix Cup決勝0VRの$0を固定検証
+- 既存の results / players / tournaments、各承認台帳、更新履歴、ワークフロー、画面コードは一切変更しない
+- 実行コードのみGit管理対象から削除。監査・復元が必要な場合はGitコミット履歴を使用
+- `publish-verified-final4-persona.cjs` など、現役テスト依存または状況が曖昧なものは今回は除外
+
+次回も自動更新・公式検証済み掲載処理を先に整理・共通化せず、一度きりの完了済みスクリプトだけを証拠付きで検討する。

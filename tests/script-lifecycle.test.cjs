@@ -177,3 +177,70 @@ test('14件のJST開催日修正と4件の重複解消は古い実行ファイ�
   assert.equal(recorded[0].existingId,existing);
  }
 });
+
+test('第4段階：掲載完了4バッチの旧実行ファイルを除去しても63戦績・賞金・審査履歴を守る',()=>{
+ const batches=[
+  {
+    "script": "manual-review-20261107-oce-qualifiers3.cjs",
+    "marker": "review-20261107-oce-s31-qualifier-last-three",
+    "count": 3
+  },
+  {
+    "script": "manual-review-20261107-round1-21.cjs",
+    "marker": "review-20261107-round1-participation-21",
+    "count": 21
+  },
+  {
+    "script": "manual-review-20261107-s31-aphrodite.cjs",
+    "marker": "review-20261107-s31-victory-aphrodite-38",
+    "count": 37
+  },
+  {
+    "script": "publish-last-two-nov11.cjs",
+    "marker": "verified-final-reviews-20261111",
+    "count": 2
+  }
+];
+ const active=[
+  ...scanFiles(path.join(root,'.github','workflows'),/\.ya?ml$/),
+  ...scanFiles(scriptDir,/\.cjs$/),
+  ...scanFiles(path.join(root,'tests'),/\.[cm]?js$/).filter(p=>!ignored.has(path.basename(p))),
+  path.join(root,'package.json')
+ ];
+ const updates=JSON.parse(fs.readFileSync(path.join(root,'updates.json'),'utf8')).entries;
+ const results=JSON.parse(fs.readFileSync(path.join(root,'results.json'),'utf8'));
+ const reviewed=JSON.parse(fs.readFileSync(path.join(root,'history-sync-reviewed.json'),'utf8')).entries;
+ const approvals=JSON.parse(fs.readFileSync(path.join(root,'approval-history.json'),'utf8')).entries;
+ const pending=JSON.parse(fs.readFileSync(path.join(root,'history-sync-review.json'),'utf8')).proposals;
+ const byId=new Map(results.map(r=>[r.id,r]));
+ assert.equal(byId.size,results.length,'published result IDs must remain unique');
+ const ids=[];
+ for(const {script,marker,count} of batches){
+  assert.equal(fs.existsSync(path.join(scriptDir,script)),false,'retired one-shot executable reappeared: '+script);
+  assert.deepEqual(active.filter(p=>fs.readFileSync(p,'utf8').includes(script)).map(rel),[],
+   'active reference to retired one-shot executable: '+script);
+  const logs=updates.filter(e=>e.id===marker);
+  assert.equal(logs.length,1,'published correction batch must be logged exactly once: '+marker);
+  assert.equal(logs[0].recordIds?.length,count,'published batch size changed: '+marker);
+  assert.equal(new Set(logs[0].recordIds).size,count,'duplicate ID in batch: '+marker);
+  for(const id of logs[0].recordIds){
+   ids.push(id);
+   const row=byId.get(id);
+   assert.ok(row,'published achievement lost: '+id);
+   assert.equal(row.verified,true,'original official verification lost: '+id);
+   assert.ok(row.source,'original source lost: '+id);
+   assert.ok(typeof row.prize==='number'&&Number.isFinite(row.prize)&&row.prize>=0,
+    'confirmed prize has been changed to unknown: '+id);
+   assert.ok(reviewed.some(e=>e.id===id&&e.decision==='published')||
+     approvals.some(e=>e.id===id&&e.decision==='published'),
+    'approval decision lost: '+id);
+   assert.equal(pending.some(e=>e.id===id),false,'published ID returned to pending review: '+id);
+  }
+ }
+ assert.equal(ids.length,63);
+ assert.equal(new Set(ids).size,63,'batch overlap was reintroduced');
+ const duo=byId.get('auto-s42-3fc137750a4c');
+ assert.equal(duo?.prize,200,'Karf / huggyfv verified team prize must remain $200');
+ assert.equal(byId.get('auto-s40-aa4c808b5bea')?.prize,0,
+  'Clix Cup zero-VR final must remain $0');
+});
