@@ -1,7 +1,7 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-11T02:30:44.733Z",
+  "checkedAt": "2026-11-11T04:30:39.130Z",
   "mode": "review",
   "scope": "history",
   "dateMode": "rolling",
@@ -10,28 +10,28 @@
   "toDate": "2026-11-11",
   "provider": "osirion",
   "linkedPlayers": 563,
-  "trackedWindows": 2953,
-  "found": 10,
-  "skipped": 35,
-  "imported": 22,
+  "trackedWindows": 2954,
+  "found": 34,
+  "skipped": 26,
+  "imported": 19,
   "scannedPages": 96,
-  "completedWindows": 286,
+  "completedWindows": 288,
   "identityConflicts": 3,
-  "alreadyRegistered": 2638,
-  "autoApprovedTotal": 1323,
+  "alreadyRegistered": 2726,
+  "autoApprovedTotal": 1342,
   "invalidCachedCandidates": 1,
-  "manualReviewCandidates": 10,
-  "autoApprovedCosmeticThisRun": 6,
+  "manualReviewCandidates": 34,
+  "autoApprovedCosmeticThisRun": 1,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
   "autoApprovedUnrealThisRun": 0,
   "timeLimitReached": false,
-  "retryWindows": 3,
+  "retryWindows": 2,
   "transientFailures": 0,
   "malformedFailures": 0,
   "skippedLeaderboards": [],
-  "reviewOnlyWindows": 1321,
-  "reviewOnlyCandidates": 6,
+  "reviewOnlyWindows": 1322,
+  "reviewOnlyCandidates": 8,
   "unmappedEvents": 238,
   "unmappedEventIds": [
     "S30_ConsoleCashCups",
@@ -47,34 +47,34 @@
     "S30_Reload",
     "S30_ReloadZB"
   ],
-  "message": "Epic本人IDと保存済み順位を確認して52件を通常一覧に掲載。残り10件。未確認賞金を推定しない。",
+  "message": "最新版と安全統合：新規掲載19件、重複スキップ0件、要確認の競合0件、確認待ち34件。既存の戦績・賞金は保持。",
   "manuallyPublished": 684,
   "manuallyResolvedDuplicates": 84,
   "lastReviewedBatchAt": "2026-11-11T04:27:18.613Z",
   "manuallyCorrected": 1,
   "lastCorrectedReviewAt": "2026-11-07T09:14:30.244Z",
   "concurrentMerge": {
-    "appended": 22,
+    "appended": 19,
     "alreadyPublished": 0,
     "reviewConflicts": 0,
-    "keptPending": 76,
-    "reconciledAt": "2026-11-11T02:30:47.998Z"
+    "keptPending": 34,
+    "reconciledAt": "2026-11-11T04:30:43.619Z"
   },
   "coverage": {
-    "total": 2953,
-    "completed": 286,
-    "notStarted": 2593,
-    "partial": 71,
+    "total": 2954,
+    "completed": 288,
+    "notStarted": 2588,
+    "partial": 76,
     "retryWaiting": 2,
-    "retryDue": 1,
-    "remaining": 2667,
-    "retryCount": 3,
+    "retryDue": 0,
+    "remaining": 2666,
+    "retryCount": 2,
     "completionPercent": 9.7,
     "byRegion": {
       "OCE": {
         "total": 522,
-        "completed": 41,
-        "pending": 481
+        "completed": 42,
+        "pending": 480
       },
       "ME": {
         "total": 518,
@@ -83,13 +83,13 @@
       },
       "EU": {
         "total": 536,
-        "completed": 46,
-        "pending": 490
+        "completed": 47,
+        "pending": 489
       },
       "BR": {
-        "total": 516,
+        "total": 517,
         "completed": 26,
-        "pending": 490
+        "pending": 491
       },
       "NAC": {
         "total": 535,
@@ -114,24 +114,13 @@
         "pending": 651
       },
       "2026": {
-        "total": 1289,
-        "completed": 186,
-        "pending": 1103
+        "total": 1290,
+        "completed": 188,
+        "pending": 1102
       }
     },
     "outsideScopeCheckpoints": 0,
     "samples": [
-      {
-        "window": "epicgames_S30_SoloVictoryCashCup_NAC/S30_SoloVictoryCashCup_Event2Round1_NAC",
-        "date": "2024-06-11",
-        "region": "NAC",
-        "series": "victory-cup",
-        "status": "retryDue",
-        "nextPage": 1,
-        "totalPages": 100,
-        "retryAfter": "2026-11-11T00:25:09.639Z",
-        "errorCode": "OSIRION_TRANSIENT"
-      },
       {
         "window": "epicgames_S42_SoloVictoryCup_OCE/S42_SoloVictoryCup_Event1Round2_OCE",
         "date": "2026-09-05",
@@ -250,6 +239,17 @@
         "status": "partial",
         "nextPage": 2,
         "totalPages": 19,
+        "retryAfter": null,
+        "errorCode": null
+      },
+      {
+        "window": "epicgames_S30_SoloVictoryCashCup_ME/S30_SoloVictoryCashCup_Event2Round1_ME",
+        "date": "2024-06-11",
+        "region": "ME",
+        "series": "victory-cup",
+        "status": "partial",
+        "nextPage": 2,
+        "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
       }
