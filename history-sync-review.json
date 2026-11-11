@@ -4406,56 +4406,6 @@
       "reviewReason": "順位表の取得が完了していません"
     },
     {
-      "id": "auto-s36-d4b4bb751bf2",
-      "date": "2025-07-25",
-      "region": "ME",
-      "player": "Reeton120fps-",
-      "playerRaw": "Reeton120fps-",
-      "event": "PlayStation Cup",
-      "round": "Qualifier / 参加確認",
-      "rank": 303,
-      "points": 280,
-      "kills": 12,
-      "vrs": 0,
-      "prize": null,
-      "kind": "参加確認",
-      "matches": 7,
-      "seasonId": "S36",
-      "chapter": 6,
-      "season": 3,
-      "tournamentId": "ch6s3-playstation-cup",
-      "source": "https://www.fortnite.com/competitive/events/S36_PlayStationCup/?region=ME&round=S36_PlayStationCup_Qualifier_ME",
-      "verified": true,
-      "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
-      "reviewOnly": true,
-      "reviewReason": "確認専用大会は自動承認不可"
-    },
-    {
-      "id": "auto-s36-589ae83606e5",
-      "date": "2025-07-25",
-      "region": "ME",
-      "player": "SN Season",
-      "playerRaw": "SN Season",
-      "event": "PlayStation Cup",
-      "round": "Qualifier / 参加確認",
-      "rank": 572,
-      "points": 261,
-      "kills": 12,
-      "vrs": 1,
-      "prize": null,
-      "kind": "参加確認",
-      "matches": 9,
-      "seasonId": "S36",
-      "chapter": 6,
-      "season": 3,
-      "tournamentId": "ch6s3-playstation-cup",
-      "source": "https://www.fortnite.com/competitive/events/S36_PlayStationCup/?region=ME&round=S36_PlayStationCup_Qualifier_ME",
-      "verified": true,
-      "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
-      "reviewOnly": true,
-      "reviewReason": "確認専用大会は自動承認不可"
-    },
-    {
       "id": "auto-s31-15297dbef7e7",
       "date": "2024-08-29",
       "region": "ME",
@@ -5143,5 +5093,5 @@
       "reviewReason": "順位表の取得が完了していません"
     }
   ],
-  "manualReviewedAt": "2026-11-11T12:59:49.167Z"
+  "manualReviewedAt": "2026-11-11T13:07:55.327Z"
 }
