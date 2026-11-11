@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-11T04:43:10.386Z",
+  "reviewedAt": "2026-11-11T04:43:17.510Z",
   "description": "Resolved historic review candidates: published, duplicate or participation",
   "entries": [
     {
@@ -16140,6 +16140,15 @@
       "policy": "verified-rule-and-original-epic-score",
       "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event9Round1_NAC",
       "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules"
+    },
+    {
+      "id": "auto-s31-4ecb25d425d3",
+      "decision": "published",
+      "recordId": "auto-s31-4ecb25d425d3",
+      "reviewedAt": "2026-11-11T04:43:17.510Z",
+      "policy": "exact-saved-page-and-official-region-cutoff",
+      "source": "https://www.fortnite.com/competitive/events/S31_SoloVictoryCashCup/?region=NAC&round=S31_SoloVictoryCashCup_Event3Round1_NAC",
+      "officialRules": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-4-official-rules"
     }
   ]
 }
