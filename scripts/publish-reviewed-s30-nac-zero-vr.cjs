@@ -1,12 +1,14 @@
 'use strict';
+const {createPublicationFiles}=require('./reviewed-publication-core.cjs');
 // Historical ASIA ON TOUR verification for Chapter 5 Season 3 Solo Victory Cash
 // Cup NAC (2024-08-12 local / 2024-08-13 JST), Event 9 Round 2.
 // Source: Epic's June 2024 official rules, Attachment C ($100 per final VR).
 // This imports ONLY confirmed 0-VR/$0 finals from a completely downloaded,
 // ordered Epic-ID leaderboard. Does not infer cash/awards from participation.
-const fs=require('node:fs'),path=require('node:path');
+const path=require('node:path');
 const {equalCandidate,collision}=require('./manual-approval-core.cjs');
 const ROOT=path.resolve(__dirname,'..');
+const {read,write}=createPublicationFiles(ROOT);
 const ID='ch5s3-solo-victory-cup',EVENT='S30_SoloVictoryCashCup';
 const WINDOW='S30_SoloVictoryCashCup_Event9Round2_NAC';
 const KEY='epicgames_'+EVENT+'_NAC/'+WINDOW;
@@ -19,8 +21,6 @@ const FILES={
  rules:'tournament-rules.json'
 };
 const clone=v=>JSON.parse(JSON.stringify(v));
-const read=f=>JSON.parse(fs.readFileSync(path.join(ROOT,f),'utf8'));
-const write=(f,v)=>fs.writeFileSync(path.join(ROOT,f),JSON.stringify(v,null,2)+'\n');
 const check=(cond,msg)=>{if(!cond)throw Error('S30_NAC_VERIFIED_REVIEW: '+msg)};
 const lineup=r=>Array.isArray(r.players)&&r.players.length?r.players:[r.player];
 const validNumber=n=>Number.isSafeInteger(n)&&n>=0;

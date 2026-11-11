@@ -1,11 +1,11 @@
 'use strict';
+const {createPublicationFiles,verifyEpicReviewEvidence}=require('./reviewed-publication-core.cjs');
 // ASIA ON TOUR — source-verified 2026-11-11 follow-up batch, 9 exact sessions.
 // Idempotent, fail-closed, no inferred prize or duplicated team/solo result.
-const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
+const path=require('node:path'),crypto=require('node:crypto');
 const {collision,equalCandidate}=require('./manual-approval-core.cjs');
 const ROOT=path.resolve(__dirname,'..');
-const read=n=>JSON.parse(fs.readFileSync(path.join(ROOT,n),'utf8'));
-const write=(n,x)=>fs.writeFileSync(path.join(ROOT,n),JSON.stringify(x,null,2)+'\n');
+const {read,write}=createPublicationFiles(ROOT);
 const dry=process.argv.includes('--dry-run'),now=new Date().toISOString();
 const S30='https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules';
 const S31='https://www.fortnite.com/news/duos-cash-cups-chapter-5-season-4-official-rules';
@@ -43,47 +43,7 @@ const approvedIds=new Set(d.approval.entries.map(x=>x.id));
 const changed=[],held=[],outOfScope=[];
 function requireValid(ok,msg){if(!ok)throw Error(msg)}
 function getEvidence(r,spec){
- requireValid(r.date===spec.date&&r.region===spec.region&&r.tournamentId===spec.tournamentId&&
-  r.seasonId===spec.season&&r.verified===true,'official session differs');
- const url=new URL(r.source);
- requireValid(url.protocol==='https:'&&url.hostname==='www.fortnite.com'&&
-  url.pathname==='/competitive/events/'+spec.event+'/'&&
-  url.searchParams.get('region')===spec.region&&url.searchParams.get('round')===spec.window&&
-  !url.username&&!url.password&&!url.hash,'Epic official event URL differs');
- const cat=catalog.get(r.tournamentId);
- const members={solo:1,duo:2,trio:3,squad:4}[cat?.team];
- requireValid(cat&&cat.name===r.event&&cat.seasonId===spec.season&&
-  cat.sourceEventIds?.includes(spec.event)&&members,'event master mismatch');
- const team=Array.isArray(r.players)&&r.players.length?r.players:[r.player];
- requireValid(team.length===members&&team.every(x=>known.has(x))&&
-  new Set(team).size===members&&r.player===team.join(' / '),'team Epic ID roster unverified');
- requireValid(Number.isSafeInteger(r.rank)&&r.rank>0&&
-  Number.isSafeInteger(r.points)&&r.points>=0&&
-  Number.isSafeInteger(r.kills)&&r.kills>=0&&
-  Number.isSafeInteger(r.vrs)&&r.vrs>=0&&
-  Number.isSafeInteger(r.matches)&&r.matches>0&&r.vrs<=r.matches,
-  'rank or scored values invalid');
- const key='epicgames_'+spec.event+'_'+spec.region+'/'+spec.window;
- const candidates=[];
- for(const scan of Object.values(d.scans)){
-  if(!scan?.windows)continue;
-  const cp=scan.windows[key];
-  if(cp)candidates.push(cp);
- }
- requireValid(candidates.length>0,'original Epic scoreboard was not saved');
- const matching=candidates.filter(cp=>cp.rankingOrderValid===true&&cp.nextPage>0&&
-  Number.isSafeInteger(cp.lastSeenRank)&&cp.lastSeenRank>=r.rank&&
-  Array.isArray(cp.proposals)&&
-  cp.proposals.filter(x=>x.id===r.id&&equalCandidate(x,r)).length===1);
- requireValid(matching.length>0,'original Epic-ID leaderboard rank/score did not match saved checkpoint');
- const month=r.date.slice(0,7);
- if(!d.calendar[month])d.calendar[month]=read('calendar-history/'+month+'.json').sessions;
- requireValid(d.calendar[month]?.some(x=>x.eventId===spec.event&&x.sourceWindowId===spec.window&&
-  x.dateJst===r.date&&x.region===r.region&&x.tournamentId===r.tournamentId&&
-  x.seasonId===r.seasonId),'official calendar date or region mismatch');
- requireValid(!resultIds.has(r.id)&&!approvedIds.has(r.id),'previously approved ID');
- requireValid(!d.results.some(x=>collision(x,r,d.players.confirmedAliases||{})),
-  'overlapping existing achievement, manual reconciliation required');
+ return verifyEpicReviewEvidence(r,spec,{requireValid,catalog,known,d,read,resultIds,approvedIds,equalCandidate,collision});
 }
 function classify(r,spec){
  const zeroFinal=spec.type==='duo-zero'||spec.type==='console-final'||spec.type==='squad-zero';

@@ -1,11 +1,12 @@
 'use strict';
+const {createPublicationFiles}=require('./reviewed-publication-core.cjs');
 // ASIA ON TOUR: small, fail-closed review publication from verified saved Epic-ID rows.
 // This runs on the repository checkout so large results.json is never uploaded through an API.
-const fs=require('node:fs');
 const path=require('node:path');
 const {equalCandidate,collision}=require('./manual-approval-core.cjs');
 const {appendArchive}=require('./participation-archive.cjs');
 const ROOT=path.resolve(__dirname,'..');
+const {read,write}=createPublicationFiles(ROOT);
 const RULE_S30='https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules';
 const RULE_S31='https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-4-official-rules';
 const W=[
@@ -26,8 +27,6 @@ const W=[
  date,season,region,event,window:season+'_'+event.slice(season.length+1)+'_'+round+'_'+region,
  tournament,cutoff,rules
 }));
-const read=n=>JSON.parse(fs.readFileSync(path.join(ROOT,n),'utf8'));
-const write=(n,d)=>fs.writeFileSync(path.join(ROOT,n),JSON.stringify(d,null,2)+'\n');
 const clone=d=>JSON.parse(JSON.stringify(d));
 const assert=(yes,msg)=>{if(!yes)throw Error('VERIFIED_QUALIFIER_BATCH: '+msg)};
 const props=['id','date','region','player','playerRaw','players','event','round','rank','points','kills','vrs','matches','prize','kind','seasonId','chapter','season','tournamentId','source','verified'];

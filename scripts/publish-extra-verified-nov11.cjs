@@ -1,11 +1,11 @@
 'use strict';
+const {createPublicationFiles,upsertPublicationLog}=require('./reviewed-publication-core.cjs');
 // Incremental official source review of new candidates added by the historical
 // scan while the first 76-record review was already being published.
-const fs=require('node:fs'),path=require('node:path');
+const path=require('node:path');
 const {collision,equalCandidate}=require('./manual-approval-core.cjs');
 const dir=path.resolve(__dirname,'..'),dry=process.argv.includes('--dry-run'),now=new Date().toISOString();
-const read=f=>JSON.parse(fs.readFileSync(path.join(dir,f),'utf8'));
-const write=(f,v)=>fs.writeFileSync(path.join(dir,f),JSON.stringify(v,null,2)+'\n');
+const {read,write}=createPublicationFiles(dir);
 const RULE30='https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules';
 const RULE40='https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-2-official-rules';
 const RULECLIX='https://www.fortnite.com/competitive/rules-guidelines/rules-library/playstation-clix-cup-official-rules';
@@ -111,17 +111,14 @@ for(const row of [...db.review.proposals]){
 }
 if(added.length){
  const id='source-verified-next-candidates-20261111';
- const previous=db.updates.entries.find(x=>x.id===id);
- if(previous){
-  previous.recordIds=[...new Set([...(previous.recordIds||[]),...added.map(x=>x.id)])];
-  previous.title='2024/2026年の新規確認候補'+previous.recordIds.length+'戦績を通常一覧へ追加';
-  previous.description='本人Epic ID・順位と公式賞金ルールで'+previous.recordIds.length+'件の過去成績を確認し通常結果に掲載。';
- }else{
-  db.updates.entries.unshift({id,date:'2026-11-11',type:'records',
-   title:'2024/2026年の新規確認候補'+added.length+'戦績を通常一覧へ追加',
-   description:'公式順位表の本人Epic ID、予選突破・決勝VR賞金・衣装対象の根拠を確認。未確認の実績や報酬を加算しない。',
-   recordIds:added.map(x=>x.id)});
- }
+ upsertPublicationLog(db.updates,{
+  id,date:'2026-11-11',
+  title:'2024/2026年の新規確認候補'+added.length+'戦績を通常一覧へ追加',
+  description:'公式順位表の本人Epic ID、予選突破・決勝VR賞金・衣装対象の根拠を確認。未確認の実績や報酬を加算しない。',
+  recordIds:added.map(x=>x.id),
+  existingTitle:count=>'2024/2026年の新規確認候補'+count+'戦績を通常一覧へ追加',
+  existingDescription:count=>'本人Epic ID・順位と公式賞金ルールで'+count+'件の過去成績を確認し通常結果に掲載。'
+ });
  db.review.manualReviewedAt=now;db.reviewed.reviewedAt=now;db.ledger.reviewedAt=now;
  db.status.found=db.review.proposals.length;
  db.status.manualReviewCandidates=db.review.proposals.length;

@@ -1,12 +1,12 @@
 'use strict';
+const {createPublicationFiles}=require('./reviewed-publication-core.cjs');
 // 2026-11-11: Source-verified historic review batch. Only exact original
 // Epic account+event+ranked checkpoint rows are published; no uncertain cash.
 // Integrate into the ordinary results feed. No separate attendance archive.
-const fs=require('node:fs'),path=require('node:path');
+const path=require('node:path');
 const {equalCandidate,collision}=require('./manual-approval-core.cjs');
 const root=path.resolve(__dirname,'..');
-const read=n=>JSON.parse(fs.readFileSync(path.join(root,n),'utf8'));
-const write=(n,x)=>fs.writeFileSync(path.join(root,n),JSON.stringify(x,null,2)+'\n');
+const {read,write}=createPublicationFiles(root);
 const now=new Date().toISOString(),dry=process.argv.includes('--dry-run');
 const R30='https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules';
 const R39='https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-solo-victory-cups-chapter-7-season-1-official-rules';

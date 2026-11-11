@@ -1,13 +1,13 @@
 'use strict';
+const {createPublicationFiles}=require('./reviewed-publication-core.cjs');
 // Final 2026-11-11 review: confirmed C5S3 Solo Victory Cash Cup Event4
 // 1VR cash prizes and duplicate reconciliation for existing Persona 5 outfits.
 // No guesses, no second costume copy, no separate attendance archive.
-const fs=require('node:fs'),path=require('node:path');
+const path=require('node:path');
 const {collision,equalCandidate}=require('./manual-approval-core.cjs');
 const {evaluate}=require('./cosmetic-rank-rules.cjs');
 const root=path.resolve(__dirname,'..'),dry=process.argv.includes('--dry-run');
-const load=n=>JSON.parse(fs.readFileSync(path.join(root,n),'utf8'));
-const write=(n,v)=>fs.writeFileSync(path.join(root,n),JSON.stringify(v,null,2)+'\n');
+const {read:load,write}=createPublicationFiles(root);
 const now=new Date().toISOString();
 const RULE='https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules';
 const d={

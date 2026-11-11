@@ -1,12 +1,12 @@
 'use strict';
+const {createPublicationFiles}=require('./reviewed-publication-core.cjs');
 // Published only for Epic-ID confirmed final results within saved official leaderboard checkpoints.
 // Existing results, unconfirmed VR awards and conflicting records are never overwritten.
-const fs=require('node:fs'),path=require('node:path');
+const path=require('node:path');
 const {equalCandidate,collision}=require('./manual-approval-core.cjs');
 const {appendArchive}=require('./participation-archive.cjs');
 const ROOT=path.resolve(__dirname,'..');
-const read=name=>JSON.parse(fs.readFileSync(path.join(ROOT,name),'utf8'));
-const write=(name,value)=>fs.writeFileSync(path.join(ROOT,name),JSON.stringify(value,null,2)+'\n');
+const {read,write}=createPublicationFiles(ROOT);
 const clone=o=>JSON.parse(JSON.stringify(o));
 const assert=(v,m)=>{if(!v)throw Error('VERIFIED_CASH_FINAL_BATCH: '+m)};
 const R30='https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules';

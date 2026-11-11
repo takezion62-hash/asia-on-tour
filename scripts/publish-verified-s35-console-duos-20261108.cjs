@@ -1,11 +1,12 @@
 'use strict';
+const {createPublicationFiles}=require('./reviewed-publication-core.cjs');
 // Verified historical review publication: S35 ME Console Duos Victory Cash Cup,
 // 2025-05-31 Event 3 Round 2. Only complete archived Epic-ID leaderboard
 // checks plus official May 2025 0-VR=$0 cash rules qualify. No speculative cash.
-const fs=require('node:fs');
 const path=require('node:path');
 const {equalCandidate,collision}=require('./manual-approval-core.cjs');
 const ROOT=path.resolve(__dirname,'..');
+const {read,write}=createPublicationFiles(ROOT);
 const TID='ch6s2-console-duos-victory';
 const EVENT='S35_VictoryDuosCup',WINDOW='S35_VictoryDuosCup_Event3Round2_ME';
 const RULES='https://www.fortnite.com/news/fortnite-duos-console-victory-cash-cups-may-2025-official-rules?lang=en-US';
@@ -22,8 +23,6 @@ const S38_RULES='https://www.fortnite.com/competitive/rules-guidelines/rules-lib
 const S38_SQUAD_ID='auto-s38-4dd88cdb5e7c';
 const S38_SQUAD_EVENT='S38_SquadsVictoryCup',S38_SQUAD_WINDOW='S38_SquadsVictoryCup_Round2_Day3_NAW';
 const S38_SQUAD_TID='ch6mini2-squads-victory-cash-cup';
-const read=name=>JSON.parse(fs.readFileSync(path.join(ROOT,name),'utf8'));
-const write=(name,value)=>fs.writeFileSync(path.join(ROOT,name),JSON.stringify(value,null,2)+'\n');
 const clone=o=>JSON.parse(JSON.stringify(o));
 const roster=r=>Array.isArray(r.players)&&r.players.length?r.players:[r.player];
 const assert=(ok,msg)=>{if(!ok)throw Error('HISTORIC_REVIEW_VERIFY: '+msg)};
