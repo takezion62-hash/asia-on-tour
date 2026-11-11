@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-11-10T21:29:39.500Z",
+  "checkedAt": "2026-11-11T03:40:31.187Z",
   "windows": {
     "epicgames_S42_InoxtagIconCup_NAW/S42_InoxtagIconCup_NAW": {
       "nextPage": 50,
@@ -246,12 +246,12 @@
       "emptyAttempts": 0
     },
     "epicgames_S42_InoxtagIconCup_EU/S42_InoxtagIconCup_EU": {
-      "nextPage": 40,
-      "pages": 40,
-      "complete": true,
-      "coverageLimited": true,
+      "nextPage": 50,
+      "pages": 50,
+      "complete": false,
+      "coverageLimited": false,
       "totalPages": 100,
-      "lastScanned": "2026-11-07T04:02:26.162Z",
+      "lastScanned": "2026-11-11T03:40:02.917Z",
       "emptyAttempts": 0
     },
     "epicgames_S30_SoloVictoryCashCup_ME/S30_SoloVictoryCashCup_Event5Round1_ME": {
@@ -669,12 +669,12 @@
       "emptyAttempts": 0
     },
     "epicgames_S30_SoloZBVictoryCashCup_ME/S30_SoloZBVictoryCashCup_Event1Round1_ME": {
-      "nextPage": 1,
-      "pages": 1,
+      "nextPage": 11,
+      "pages": 11,
       "complete": false,
       "coverageLimited": false,
       "totalPages": 50,
-      "lastScanned": "2026-11-09T21:39:56.343Z",
+      "lastScanned": "2026-11-11T03:40:14.772Z",
       "emptyAttempts": 0
     },
     "epicgames_S43_SquadsVictoryCup_BR/S43_SquadsVictoryCup_Event1_Round1_BR": {
@@ -711,6 +711,24 @@
       "coverageLimited": false,
       "totalPages": 40,
       "lastScanned": "2026-11-10T21:28:33.859Z",
+      "emptyAttempts": 0
+    },
+    "epicgames_S43_ArenaCashCup_BR/S43_ArenaCashCup_Event1_BR": {
+      "nextPage": 10,
+      "pages": 10,
+      "complete": false,
+      "coverageLimited": false,
+      "totalPages": 43,
+      "lastScanned": "2026-11-11T03:39:49.722Z",
+      "emptyAttempts": 0
+    },
+    "epicgames_S33_SoloCashCup_NAW/S33_SoloCashCup_Event3Round1_NAW": {
+      "nextPage": 10,
+      "pages": 10,
+      "complete": false,
+      "coverageLimited": false,
+      "totalPages": 100,
+      "lastScanned": "2026-11-11T03:40:31.187Z",
       "emptyAttempts": 0
     }
   }
