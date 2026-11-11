@@ -20,6 +20,7 @@ const profileURL = (name, season = 'all') => '/?season=' + season + '#player=' +
 async function openProfile(page, name, season = 'all') {
   await page.goto(profileURL(name, season));
   await expect(page.locator('#profile-title')).toHaveText(name);
+  await page.locator('[data-profile-tab="history"]').click();
   await expect(page.locator('#profile-journey')).toBeVisible();
 }
 async function revealAll(page) {
