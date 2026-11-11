@@ -62,7 +62,7 @@ test('missing or invented region cutoffs and non-integer cash values fail valida
  const broken=clone(registry);
  broken.rules[0].advance.NAC=12.3;
  broken.rules[5].prizePerVictory=101.5;
- broken.rules[7].cosmeticRanks.EU=0;
+ broken.rules.find(x=>x.series==='skin-cup').cosmeticRanks.EU=0;
  const problems=validateRegistry(broken,tournaments).join('\n');
  assert.match(problems,/予選通過順位/);
  assert.match(problems,/VR賞金単価/);
