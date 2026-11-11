@@ -11,9 +11,9 @@ const clone=x=>JSON.parse(JSON.stringify(x));
 
 test('shared official tournament rules include review-only Solo Series Finals and approved types',()=>{
  assert.deepEqual(validateRegistry(registry,tournaments),[]);
- assert.equal(registry.rules.length,20);
+ assert.equal(registry.rules.length,21);
  assert.equal(Object.keys(RULES).length,9);
- assert.equal(Object.keys(CUT_OFFS).length,8);
+ assert.equal(Object.keys(CUT_OFFS).length,9);
  for(const rule of registry.rules){
   if(rule.series==='victory-cup')assert.strictEqual(RULES[rule.id].source,rule.source);
   if(rule.series==='cash-cup'){
@@ -220,4 +220,22 @@ test('S42 Console Zero Build Solo Victory Cup has exact official thresholds and 
  assert.deepEqual(x.advance,{EU:2000,NAC:2000,OCE:1000,ME:1000,BR:1000,NAW:1000});
  assert.equal(x.matchCaps['予選'],8);assert.equal(x.matchCaps['賞金決勝'],3);
  assert.equal(x.prizePerVictory,100);assert.strictEqual(RULES[x.id].source,x.source);
+});
+
+test('S42 Lady Liberty Battle Royale NAW official costume cutoffs',()=>{
+ const rule=registry.rules.find(r=>r.id==='ch7s4-lady-liberty-cup-battle-royale');
+ assert.ok(rule);
+ assert.equal(rule.seasonId,'S42');
+ assert.equal(rule.series,'skin-cup');
+ assert.equal(rule.team,'solo');
+ assert.deepEqual(rule.eventIds,['S42_PurgeCup']);
+ assert.equal(rule.matchCaps['スキン大会'],11);
+ assert.deepEqual(rule.cosmeticRanks,{OCE:100,ME:100,EU:1000,BR:200,NAC:700,NAW:200});
+ const {evaluate}=require('../scripts/cosmetic-rank-rules.cjs');
+ const row={tournamentId:rule.id,seasonId:'S42',chapter:7,season:4,verified:true,kind:'スキン大会',
+  region:'NAW',rank:170,matches:10,kills:10,vrs:0,
+  source:'https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=NAW&round=S42_PurgeCup_NAW'};
+ assert.equal(evaluate(row).eligible,true);
+ assert.equal(evaluate({...row,rank:201}).eligible,false);
+ assert.equal(evaluate({...row,source:'https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=ME&round=S42_PurgeCup_ME'}).eligible,false);
 });
