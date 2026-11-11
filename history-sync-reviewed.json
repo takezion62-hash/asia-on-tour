@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-11T06:37:12.639Z",
+  "reviewedAt": "2026-11-11T08:15:19.054Z",
   "description": "Resolved historic review candidates: published, duplicate or participation",
   "entries": [
     {
@@ -16860,6 +16860,393 @@
       "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=NAC&round=S42_ConsoleVCC_SolosZB_Event1Round2_NAC",
       "policy": "verified-rule",
       "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-4-official-rules"
+    },
+    {
+      "id": "auto-s30-1e59c01ab0cb",
+      "decision": "published",
+      "recordId": "auto-s30-1e59c01ab0cb",
+      "reviewedAt": "2026-11-11T08:15:18.081Z",
+      "policy": "verified-rule-and-original-epic-score",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event9Round1_NAC",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules"
+    },
+    {
+      "id": "auto-s31-f61974f4abc5",
+      "decision": "published",
+      "recordId": "auto-s31-f61974f4abc5",
+      "reviewedAt": "2026-11-11T08:15:18.709Z",
+      "source": "https://www.fortnite.com/competitive/events/S31_DuosCashCup/?region=ME&round=S31_DuosCashCup_Event8Round1_ME",
+      "policy": "verified-rule",
+      "rule": "https://www.fortnite.com/news/duos-cash-cups-chapter-5-season-4-official-rules"
+    },
+    {
+      "id": "auto-s31-813858b28248",
+      "decision": "published",
+      "recordId": "auto-s31-813858b28248",
+      "reviewedAt": "2026-11-11T08:15:18.709Z",
+      "source": "https://www.fortnite.com/competitive/events/S31_DuosCashCup/?region=ME&round=S31_DuosCashCup_Event8Round1_ME",
+      "policy": "verified-rule",
+      "rule": "https://www.fortnite.com/news/duos-cash-cups-chapter-5-season-4-official-rules"
+    },
+    {
+      "id": "auto-s41-4b9357888a28",
+      "decision": "published",
+      "recordId": "auto-s41-4b9357888a28",
+      "reviewedAt": "2026-11-11T08:15:19.054Z",
+      "source": "https://www.fortnite.com/competitive/events/S41_PSTypicalGamer/?region=OCE&round=S41_PSTypicalGamer_Final_OCE",
+      "policy": "verified-rule",
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/playstation-typical-gamer-icon-cup"
+    },
+    {
+      "id": "auto-s41-86bba3b03b25",
+      "decision": "published",
+      "recordId": "auto-s41-86bba3b03b25",
+      "reviewedAt": "2026-11-11T08:15:19.054Z",
+      "source": "https://www.fortnite.com/competitive/events/S41_PSTypicalGamer/?region=OCE&round=S41_PSTypicalGamer_Final_OCE",
+      "policy": "verified-rule",
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/playstation-typical-gamer-icon-cup"
+    },
+    {
+      "id": "auto-s31-f7d1596c6f9e",
+      "decision": "published",
+      "recordId": "auto-s31-f7d1596c6f9e",
+      "reviewedAt": "2026-11-11T08:15:19.054Z",
+      "source": "https://www.fortnite.com/competitive/events/S31_SoloVictoryCashCup/?region=OCE&round=S31_SoloVictoryCashCup_Event4Round1_OCE",
+      "policy": "verified-rule",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-4-official-rules"
+    },
+    {
+      "id": "auto-s31-9d92f6242656",
+      "decision": "published",
+      "recordId": "auto-s31-9d92f6242656",
+      "reviewedAt": "2026-11-11T08:15:19.054Z",
+      "source": "https://www.fortnite.com/competitive/events/S31_SoloVictoryCashCup/?region=OCE&round=S31_SoloVictoryCashCup_Event4Round1_OCE",
+      "policy": "verified-rule",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-4-official-rules"
+    },
+    {
+      "id": "auto-s42-a7998745c4a6",
+      "decision": "published",
+      "recordId": "auto-s42-a7998745c4a6",
+      "reviewedAt": "2026-11-11T08:15:19.054Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=NAW&round=S42_ConsoleVCC_SolosZB_Event1Round2_NAW",
+      "policy": "verified-rule",
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-4-official-rules"
+    },
+    {
+      "id": "auto-s42-65f1d18d1181",
+      "decision": "published",
+      "recordId": "auto-s42-65f1d18d1181",
+      "reviewedAt": "2026-11-11T08:15:19.054Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=NAW&round=S42_ConsoleVCC_SolosZB_Event1Round2_NAW",
+      "policy": "verified-rule",
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-4-official-rules"
+    },
+    {
+      "id": "auto-s42-65e3f9630d08",
+      "decision": "published",
+      "recordId": "auto-s42-65e3f9630d08",
+      "reviewedAt": "2026-11-11T08:15:19.054Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=NAW&round=S42_ConsoleVCC_SolosZB_Event1Round2_NAW",
+      "policy": "verified-rule",
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-4-official-rules"
+    },
+    {
+      "id": "auto-s42-5de17163a5ee",
+      "decision": "published",
+      "recordId": "auto-s42-5de17163a5ee",
+      "reviewedAt": "2026-11-11T08:15:19.054Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=NAW&round=S42_ConsoleVCC_SolosZB_Event1Round2_NAW",
+      "policy": "verified-rule",
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-4-official-rules"
+    },
+    {
+      "id": "auto-s42-6bf147c187d9",
+      "decision": "published",
+      "recordId": "auto-s42-6bf147c187d9",
+      "reviewedAt": "2026-11-11T08:15:19.054Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=NAW&round=S42_ConsoleVCC_SolosZB_Event1Round2_NAW",
+      "policy": "verified-rule",
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-4-official-rules"
+    },
+    {
+      "id": "auto-s42-8c97ba56ae0a",
+      "decision": "published",
+      "recordId": "auto-s42-8c97ba56ae0a",
+      "reviewedAt": "2026-11-11T08:15:19.054Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=NAW&round=S42_ConsoleVCC_SolosZB_Event1Round2_NAW",
+      "policy": "verified-rule",
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-4-official-rules"
+    },
+    {
+      "id": "auto-s42-e98fdd1fa108",
+      "decision": "published",
+      "recordId": "auto-s42-e98fdd1fa108",
+      "reviewedAt": "2026-11-11T08:15:19.054Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=NAW&round=S42_ConsoleVCC_SolosZB_Event1Round2_NAW",
+      "policy": "verified-rule",
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-4-official-rules"
+    },
+    {
+      "id": "auto-s42-049d1977b01d",
+      "decision": "published",
+      "recordId": "auto-s42-049d1977b01d",
+      "reviewedAt": "2026-11-11T08:15:19.054Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=NAW&round=S42_ConsoleVCC_SolosZB_Event1Round2_NAW",
+      "policy": "verified-rule",
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-4-official-rules"
+    },
+    {
+      "id": "auto-s42-364d074ee10d",
+      "decision": "published",
+      "recordId": "auto-s42-364d074ee10d",
+      "reviewedAt": "2026-11-11T08:15:19.054Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=NAW&round=S42_ConsoleVCC_SolosZB_Event1Round2_NAW",
+      "policy": "verified-rule",
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-4-official-rules"
+    },
+    {
+      "id": "auto-s42-1d97b9d1b169",
+      "decision": "published",
+      "recordId": "auto-s42-1d97b9d1b169",
+      "reviewedAt": "2026-11-11T08:15:19.054Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=NAW&round=S42_ConsoleVCC_SolosZB_Event1Round2_NAW",
+      "policy": "verified-rule",
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-4-official-rules"
+    },
+    {
+      "id": "auto-s42-10fd43503136",
+      "decision": "published",
+      "recordId": "auto-s42-10fd43503136",
+      "reviewedAt": "2026-11-11T08:15:19.054Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=NAW&round=S42_ConsoleVCC_SolosZB_Event1Round2_NAW",
+      "policy": "verified-rule",
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-4-official-rules"
+    },
+    {
+      "id": "auto-s42-67aef4f567a3",
+      "decision": "published",
+      "recordId": "auto-s42-67aef4f567a3",
+      "reviewedAt": "2026-11-11T08:15:19.054Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=NAW&round=S42_ConsoleVCC_SolosZB_Event1Round2_NAW",
+      "policy": "verified-rule",
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-4-official-rules"
+    },
+    {
+      "id": "auto-s42-66713912fabd",
+      "decision": "published",
+      "recordId": "auto-s42-66713912fabd",
+      "reviewedAt": "2026-11-11T08:15:19.054Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=NAW&round=S42_ConsoleVCC_SolosZB_Event1Round2_NAW",
+      "policy": "verified-rule",
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-4-official-rules"
+    },
+    {
+      "id": "auto-s42-cfc589530984",
+      "decision": "published",
+      "recordId": "auto-s42-cfc589530984",
+      "reviewedAt": "2026-11-11T08:15:19.054Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=NAW&round=S42_ConsoleVCC_SolosZB_Event1Round2_NAW",
+      "policy": "verified-rule",
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-4-official-rules"
+    },
+    {
+      "id": "auto-s42-918ab54c6e60",
+      "decision": "published",
+      "recordId": "auto-s42-918ab54c6e60",
+      "reviewedAt": "2026-11-11T08:15:19.054Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=NAW&round=S42_ConsoleVCC_SolosZB_Event1Round2_NAW",
+      "policy": "verified-rule",
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-4-official-rules"
+    },
+    {
+      "id": "auto-s42-00b7627c4a4f",
+      "decision": "published",
+      "recordId": "auto-s42-00b7627c4a4f",
+      "reviewedAt": "2026-11-11T08:15:19.054Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=NAW&round=S42_ConsoleVCC_SolosZB_Event1Round2_NAW",
+      "policy": "verified-rule",
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-4-official-rules"
+    },
+    {
+      "id": "auto-s42-d8c6e8daeefa",
+      "decision": "published",
+      "recordId": "auto-s42-d8c6e8daeefa",
+      "reviewedAt": "2026-11-11T08:15:19.054Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=NAW&round=S42_ConsoleVCC_SolosZB_Event1Round2_NAW",
+      "policy": "verified-rule",
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-4-official-rules"
+    },
+    {
+      "id": "auto-s42-76fa19ca3072",
+      "decision": "published",
+      "recordId": "auto-s42-76fa19ca3072",
+      "reviewedAt": "2026-11-11T08:15:19.054Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=NAW&round=S42_ConsoleVCC_SolosZB_Event1Round2_NAW",
+      "policy": "verified-rule",
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-4-official-rules"
+    },
+    {
+      "id": "auto-s42-9768be980abf",
+      "decision": "published",
+      "recordId": "auto-s42-9768be980abf",
+      "reviewedAt": "2026-11-11T08:15:19.054Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=NAW&round=S42_ConsoleVCC_SolosZB_Event1Round2_NAW",
+      "policy": "verified-rule",
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-4-official-rules"
+    },
+    {
+      "id": "auto-s42-dd6d7c77672b",
+      "decision": "published",
+      "recordId": "auto-s42-dd6d7c77672b",
+      "reviewedAt": "2026-11-11T08:15:19.054Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=NAW&round=S42_ConsoleVCC_SolosZB_Event1Round2_NAW",
+      "policy": "verified-rule",
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-4-official-rules"
+    },
+    {
+      "id": "auto-s42-ddd92ca8cdf3",
+      "decision": "published",
+      "recordId": "auto-s42-ddd92ca8cdf3",
+      "reviewedAt": "2026-11-11T08:15:19.054Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=NAW&round=S42_ConsoleVCC_SolosZB_Event1Round2_NAW",
+      "policy": "verified-rule",
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-4-official-rules"
+    },
+    {
+      "id": "auto-s42-68fbcfaed3ec",
+      "decision": "published",
+      "recordId": "auto-s42-68fbcfaed3ec",
+      "reviewedAt": "2026-11-11T08:15:19.054Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=NAW&round=S42_ConsoleVCC_SolosZB_Event1Round2_NAW",
+      "policy": "verified-rule",
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-4-official-rules"
+    },
+    {
+      "id": "auto-s42-0f78b27ed4d6",
+      "decision": "published",
+      "recordId": "auto-s42-0f78b27ed4d6",
+      "reviewedAt": "2026-11-11T08:15:19.054Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=NAW&round=S42_ConsoleVCC_SolosZB_Event1Round2_NAW",
+      "policy": "verified-rule",
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-4-official-rules"
+    },
+    {
+      "id": "auto-s42-ef1e3674b8d5",
+      "decision": "published",
+      "recordId": "auto-s42-ef1e3674b8d5",
+      "reviewedAt": "2026-11-11T08:15:19.054Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=NAW&round=S42_ConsoleVCC_SolosZB_Event1Round2_NAW",
+      "policy": "verified-rule",
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-4-official-rules"
+    },
+    {
+      "id": "auto-s42-15fd483bd69c",
+      "decision": "published",
+      "recordId": "auto-s42-15fd483bd69c",
+      "reviewedAt": "2026-11-11T08:15:19.054Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=NAW&round=S42_ConsoleVCC_SolosZB_Event1Round2_NAW",
+      "policy": "verified-rule",
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-4-official-rules"
+    },
+    {
+      "id": "auto-s42-75cd67555d94",
+      "decision": "published",
+      "recordId": "auto-s42-75cd67555d94",
+      "reviewedAt": "2026-11-11T08:15:19.054Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=NAW&round=S42_ConsoleVCC_SolosZB_Event1Round2_NAW",
+      "policy": "verified-rule",
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-4-official-rules"
+    },
+    {
+      "id": "auto-s42-79ec12cff831",
+      "decision": "published",
+      "recordId": "auto-s42-79ec12cff831",
+      "reviewedAt": "2026-11-11T08:15:19.054Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=NAW&round=S42_ConsoleVCC_SolosZB_Event1Round2_NAW",
+      "policy": "verified-rule",
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-4-official-rules"
+    },
+    {
+      "id": "auto-s42-933e5222221e",
+      "decision": "published",
+      "recordId": "auto-s42-933e5222221e",
+      "reviewedAt": "2026-11-11T08:15:19.054Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=NAW&round=S42_ConsoleVCC_SolosZB_Event1Round2_NAW",
+      "policy": "verified-rule",
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-4-official-rules"
+    },
+    {
+      "id": "auto-s42-9826e56125f9",
+      "decision": "published",
+      "recordId": "auto-s42-9826e56125f9",
+      "reviewedAt": "2026-11-11T08:15:19.054Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=NAW&round=S42_ConsoleVCC_SolosZB_Event1Round2_NAW",
+      "policy": "verified-rule",
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-4-official-rules"
+    },
+    {
+      "id": "auto-s42-1d077657d39a",
+      "decision": "published",
+      "recordId": "auto-s42-1d077657d39a",
+      "reviewedAt": "2026-11-11T08:15:19.054Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=NAW&round=S42_ConsoleVCC_SolosZB_Event1Round2_NAW",
+      "policy": "verified-rule",
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-4-official-rules"
+    },
+    {
+      "id": "auto-s30-2ff8e78047b7",
+      "decision": "published",
+      "recordId": "auto-s30-2ff8e78047b7",
+      "reviewedAt": "2026-11-11T08:15:19.054Z",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event6Round1_NAC",
+      "policy": "verified-rule",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules"
+    },
+    {
+      "id": "auto-s30-a10a3f1153ec",
+      "decision": "published",
+      "recordId": "auto-s30-a10a3f1153ec",
+      "reviewedAt": "2026-11-11T08:15:19.054Z",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event6Round1_NAC",
+      "policy": "verified-rule",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules"
+    },
+    {
+      "id": "auto-s30-b25874f46a6d",
+      "decision": "published",
+      "recordId": "auto-s30-b25874f46a6d",
+      "reviewedAt": "2026-11-11T08:15:19.054Z",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event6Round1_NAC",
+      "policy": "verified-rule",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules"
+    },
+    {
+      "id": "auto-s30-34b01105d7f9",
+      "decision": "published",
+      "recordId": "auto-s30-34b01105d7f9",
+      "reviewedAt": "2026-11-11T08:15:19.054Z",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event6Round1_NAC",
+      "policy": "verified-rule",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules"
+    },
+    {
+      "id": "auto-s30-3d36b24e1c4a",
+      "decision": "published",
+      "recordId": "auto-s30-3d36b24e1c4a",
+      "reviewedAt": "2026-11-11T08:15:19.054Z",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event6Round2_NAC",
+      "policy": "official-final-vr-award",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules"
+    },
+    {
+      "id": "auto-s30-6431705a6546",
+      "decision": "published",
+      "recordId": "auto-s30-6431705a6546",
+      "reviewedAt": "2026-11-11T08:15:19.054Z",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event6Round2_NAC",
+      "policy": "official-final-vr-award",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules"
     }
   ]
 }
