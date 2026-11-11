@@ -1,7 +1,7 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-11T01:18:51.311Z",
+  "checkedAt": "2026-11-11T05:13:12.327Z",
   "mode": "review",
   "scope": "recent",
   "dateMode": null,
@@ -10,17 +10,17 @@
   "toDate": null,
   "provider": "osirion",
   "linkedPlayers": 563,
-  "trackedWindows": 103,
-  "found": 0,
+  "trackedWindows": 102,
+  "found": 4,
   "skipped": 0,
-  "imported": 1,
+  "imported": 0,
   "scannedPages": 50,
-  "completedWindows": 44,
+  "completedWindows": 45,
   "identityConflicts": 3,
-  "alreadyRegistered": 212,
-  "autoApprovedTotal": 1285,
+  "alreadyRegistered": 213,
+  "autoApprovedTotal": 1459,
   "invalidCachedCandidates": 0,
-  "manualReviewCandidates": 0,
+  "manualReviewCandidates": 4,
   "autoApprovedCosmeticThisRun": 0,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
@@ -30,50 +30,44 @@
   "transientFailures": 0,
   "malformedFailures": 0,
   "skippedLeaderboards": [],
-  "reviewOnlyWindows": 67,
+  "reviewOnlyWindows": 66,
   "reviewOnlyCandidates": 0,
-  "unmappedEvents": 6,
+  "unmappedEvents": 5,
   "unmappedEventIds": [
     "S42_ArenaTestCup",
     "S42_HamiKumaCup_ZB",
     "S42_HamiKumaMobileCup",
     "S42_InoxtagIconCup_ZB",
-    "S42_InoxtagIconMobileCup",
-    "S42_SlenderManCup_ZB"
+    "S42_InoxtagIconMobileCup"
   ],
-  "message": "公式ラウンド・賞金・進出条件を再確認して掲載。残り確認待ち0件。",
+  "message": "最新版と安全統合：新規掲載0件、重複スキップ0件、要確認の競合0件、確認待ち4件。既存の戦績・賞金は保持。",
   "concurrentMerge": {
-    "appended": 1,
+    "appended": 0,
     "alreadyPublished": 0,
     "reviewConflicts": 0,
-    "keptPending": 0,
-    "reconciledAt": "2026-11-11T01:18:53.733Z"
+    "keptPending": 4,
+    "reconciledAt": "2026-11-11T05:13:16.239Z"
   },
   "coverage": {
-    "total": 103,
-    "completed": 44,
-    "notStarted": 50,
+    "total": 102,
+    "completed": 45,
+    "notStarted": 48,
     "partial": 9,
     "retryWaiting": 0,
     "retryDue": 0,
-    "remaining": 59,
+    "remaining": 57,
     "retryCount": 0,
-    "completionPercent": 42.7,
+    "completionPercent": 44.1,
     "byRegion": {
-      "NAC": {
-        "total": 20,
-        "completed": 9,
-        "pending": 11
-      },
-      "NAW": {
-        "total": 16,
-        "completed": 8,
-        "pending": 8
-      },
       "EU": {
         "total": 20,
         "completed": 9,
         "pending": 11
+      },
+      "NAC": {
+        "total": 19,
+        "completed": 9,
+        "pending": 10
       },
       "OCE": {
         "total": 16,
@@ -82,20 +76,25 @@
       },
       "ME": {
         "total": 16,
-        "completed": 5,
-        "pending": 11
+        "completed": 6,
+        "pending": 10
       },
       "BR": {
-        "total": 15,
+        "total": 16,
         "completed": 7,
-        "pending": 8
+        "pending": 9
+      },
+      "NAW": {
+        "total": 15,
+        "completed": 8,
+        "pending": 7
       }
     },
     "byYear": {
       "2026": {
-        "total": 103,
-        "completed": 44,
-        "pending": 59
+        "total": 102,
+        "completed": 45,
+        "pending": 57
       }
     },
     "outsideScopeCheckpoints": 0,
@@ -106,7 +105,7 @@
         "region": "ME",
         "series": "victory-cup",
         "status": "partial",
-        "nextPage": 80,
+        "nextPage": 90,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
@@ -117,7 +116,7 @@
         "region": "NAW",
         "series": "icon-cup",
         "status": "partial",
-        "nextPage": 16,
+        "nextPage": 17,
         "totalPages": 89,
         "retryAfter": null,
         "errorCode": null
@@ -128,7 +127,7 @@
         "region": "EU",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 58,
+        "nextPage": 62,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
@@ -139,7 +138,7 @@
         "region": "ME",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 40,
+        "nextPage": 41,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
@@ -150,7 +149,7 @@
         "region": "BR",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 28,
+        "nextPage": 29,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
@@ -161,7 +160,7 @@
         "region": "NAW",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 11,
+        "nextPage": 12,
         "totalPages": 70,
         "retryAfter": null,
         "errorCode": null
@@ -172,7 +171,7 @@
         "region": "BR",
         "series": "victory-cup",
         "status": "partial",
-        "nextPage": 25,
+        "nextPage": 35,
         "totalPages": 47,
         "retryAfter": null,
         "errorCode": null
@@ -183,7 +182,7 @@
         "region": "EU",
         "series": "victory-cup",
         "status": "partial",
-        "nextPage": 10,
+        "nextPage": 20,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
@@ -194,30 +193,8 @@
         "region": "NAC",
         "series": "victory-cup",
         "status": "partial",
-        "nextPage": 50,
+        "nextPage": 60,
         "totalPages": 86,
-        "retryAfter": null,
-        "errorCode": null
-      },
-      {
-        "window": "epicgames_S42_SlenderManCup_NAC/S42_SlenderManCup_NAC",
-        "date": "2026-10-21",
-        "region": "NAC",
-        "series": "skin-cup",
-        "status": "notStarted",
-        "nextPage": 0,
-        "totalPages": null,
-        "retryAfter": null,
-        "errorCode": null
-      },
-      {
-        "window": "epicgames_S42_SlenderManCup_NAW/S42_SlenderManCup_NAW",
-        "date": "2026-10-21",
-        "region": "NAW",
-        "series": "skin-cup",
-        "status": "notStarted",
-        "nextPage": 0,
-        "totalPages": null,
         "retryAfter": null,
         "errorCode": null
       },
@@ -231,12 +208,34 @@
         "totalPages": null,
         "retryAfter": null,
         "errorCode": null
+      },
+      {
+        "window": "epicgames_S42_PerformanceEvaluationTrios_EU/S42_PerformanceEvaluation_Event9Round2_EU",
+        "date": "2026-10-23",
+        "region": "EU",
+        "series": "performance-evaluation",
+        "status": "notStarted",
+        "nextPage": 0,
+        "totalPages": null,
+        "retryAfter": null,
+        "errorCode": null
+      },
+      {
+        "window": "epicgames_S42_PerformanceEvaluationTrios_NAC/S42_PerformanceEvaluation_Event9Round1_NAC",
+        "date": "2026-10-23",
+        "region": "NAC",
+        "series": "performance-evaluation",
+        "status": "notStarted",
+        "nextPage": 0,
+        "totalPages": null,
+        "retryAfter": null,
+        "errorCode": null
       }
     ]
   },
   "manuallyPublished": 50,
   "lastReviewedBatchAt": "2026-11-11T04:47:12.234Z",
-  "autoApprovedDuoQualifierThisRun": 1,
+  "autoApprovedDuoQualifierThisRun": 0,
   "latestManualReview": {
     "reviewedAt": "2026-11-10T14:39:48.081Z",
     "reviewedCandidates": 12,
