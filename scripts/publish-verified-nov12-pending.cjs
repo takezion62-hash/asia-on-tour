@@ -1,6 +1,7 @@
 'use strict';
 // One-time, idempotent 2026-11-12 review of original Epic-ID ranked rows.
 // Never overwrite older Tracker rankings; never infer cosmetic receipt or paid status.
+// Test registry count now 21 (including official Lady Liberty BR cutoffs).
 const path=require('node:path');
 const {createPublicationFiles}=require('./reviewed-publication-core.cjs');
 const {sameScannedCandidate,verifiedPartialPage}=require('./verified-partial-page.cjs');
