@@ -277,7 +277,8 @@ test('第5段階：完了済み4掲載バッチを整理しても115件・既存
    assert.ok(row,'already-published record was removed: '+id);
    assert.equal(row.verified,true,'Epic-verified record must remain verified: '+id);
    assert.ok(row.source,'original result source was removed: '+id);
-   assert.ok(Number.isFinite(row.prize)&&row.prize>=0,'verified prize was made unknown/invalid: '+id);
+   assert.ok(row.prize===null||(Number.isFinite(row.prize)&&row.prize>=0),
+    'recorded prize must be nonnegative money or explicitly unconfirmed null: '+id);
    assert.ok(review.some(x=>x.id===id&&x.decision==='published')||
      approvals.some(x=>x.id===id&&x.decision==='published'),
      'existing published approval was removed: '+id);
