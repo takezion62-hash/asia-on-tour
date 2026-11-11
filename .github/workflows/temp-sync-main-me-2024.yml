@@ -3,6 +3,9 @@ on:
   push:
     branches:
       - verified-me-2024-finals-20261111
+  pull_request:
+    branches:
+      - main
 permissions:
   contents: write
 concurrency:
