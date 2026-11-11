@@ -88,3 +88,47 @@ jobs:
             exit 1
           fi
           echo "All required checks passed."
+
+  aot_reconcile_verified_2024:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/verified-me-2024-finals-20261111'
+    name: Temporary merge-safe repair of 2024 ME PR
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: verified-me-2024-finals-20261111
+          fetch-depth: 0
+          persist-credentials: true
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '24'
+          cache: npm
+      - name: Merge latest main without losing parallel auto-sync results
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          for x in results players tournaments updates; do cp "$x.json" "/tmp/aot-ours-$x.json"; done
+          git fetch origin main
+          for x in results players tournaments updates; do git show "origin/main:$x.json" > "/tmp/aot-main-$x.json"; done
+          git merge --no-commit --no-ff origin/main || true
+          node scripts/temp-reconcile-2024-me.cjs
+          git show origin/main:.github/workflows/tests.yml > .github/workflows/tests.yml
+          git rm scripts/temp-reconcile-2024-me.cjs
+          git add -A
+          if [ -n "$(git ls-files -u)" ]; then echo "::error::Unresolved merge conflict"; git ls-files -u; exit 1; fi
+          git diff --cached --stat
+      - name: Validate merged JSON and run all unit tests
+        run: |
+          npm ci --ignore-scripts
+          npm run validate
+          npm run test:unit
+      - name: Commit reconciled proposal and remove temporary changes
+        run: |
+          set -euo pipefail
+          git commit -m "merge: preserve latest main results plus 7 verified 2024 ME finals"
+          git push origin HEAD:verified-me-2024-finals-20261111
