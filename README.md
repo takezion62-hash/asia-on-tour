@@ -1,5 +1,7 @@
 # ASIA ON TOUR
 
+コード整理の記録と安全方針は [コード整理台帳](docs/CODE_CLEANUP.md) を参照してください。
+
 GitHub Actions の自動更新・候補承認・戦績訂正は [運用ガイド](docs/WORKFLOW_OPERATIONS.md) を参照してください（日時固定の修正用Actionは廃止済み）
 
 ## プレイスタイル分析 v1.1：地域傾向・根拠・成長比較の強化（2026-11-06）
