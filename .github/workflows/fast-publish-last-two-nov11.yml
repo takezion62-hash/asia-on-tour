@@ -1,0 +1,52 @@
+name: AOT one-time source-verifiable duo cash and Clix finals
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/fast-publish-last-two-nov11.yml"
+permissions:
+  contents: write
+concurrency:
+  group: aot-final-two-source-verified-review
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Publish two results only if original Epic account and awards are verified
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          for attempt in 1 2 3 4 5; do
+            git fetch origin main
+            git reset --hard origin/main
+            node scripts/publish-last-two-nov11.cjs --dry-run
+            node scripts/publish-last-two-nov11.cjs
+            npm run validate
+            node --test tests/approval-history.test.cjs tests/manual-approval.test.cjs
+            git add results.json history-sync-review.json history-sync-reviewed.json history-sync-status.json approval-history.json updates.json
+            if git diff --cached --quiet; then
+              echo "AOT_FINAL_TWO no safely eligible pending results"
+              exit 0
+            fi
+            git commit -m "data: publish verified duo $200 team and Clix zero-VR final"
+            if git push origin HEAD:main; then
+              echo "AOT_FINAL_TWO published on main"
+              exit 0
+            fi
+            if [ "$attempt" -eq 5 ]; then
+              echo "::error::Could not safely write last verified final results"
+              exit 1
+            fi
+            sleep $((attempt * 2))
+          done

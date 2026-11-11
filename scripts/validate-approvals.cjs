@@ -11,7 +11,8 @@ const load=name=>JSON.parse(fs.readFileSync(path.join(root,name),'utf8'));
 const FINAL_CASH_RULES={
  S30:'https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules',
  S31:'https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-4-official-rules',
- S36:'https://www.fortnite.com/news/fortnite-duos-console-victory-cash-cups-chapter-6-season-3-official-rules'
+ S36:'https://www.fortnite.com/news/fortnite-duos-console-victory-cash-cups-chapter-6-season-3-official-rules',
+ S42:'https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-4-official-rules'
 };
 function validCashFinal(r,entry){
  if(!r||r.kind!=='賞金決勝'||r.reviewOnly===true||r.verified!==true
@@ -33,6 +34,11 @@ function validCashFinal(r,entry){
  }else if(r.seasonId==='S31'&&r.date==='2024-10-15'&&r.region==='NAC'
   &&r.tournamentId==='ch5s4-solo-victory-cup'){
   event='S31_SoloVictoryCashCup';window='S31_SoloVictoryCashCup_Event7Round2_NAC';
+ }else if(r.seasonId==='S42'&&r.date==='2026-08-25'&&r.region==='ME'&&
+  r.tournamentId==='ch7s4-reload-duos-victory-cup'){
+  event='S42_ReloadDuosVictoryCup';
+  window='S42_ReloadDuosVictoryCup_Event1_Round2_ME';
+  team=true;
  }else if(r.seasonId==='S36'&&r.tournamentId==='ch6s3-console-duos-victory'){
   event='S36_VictoryDuosCup';team=true;
   if(r.date==='2025-06-21'&&r.region==='NAW')window='S36_VictoryDuosCup_Event2Round2_NAW';

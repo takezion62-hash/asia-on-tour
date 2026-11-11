@@ -64,3 +64,18 @@ test('2024 July ME ZB Solo Victory final pays $100 only for one exact Epic VR',(
  assert.deepEqual(audit([r],ledger,{confirmedAliases:{}}),[]);
  assert.ok(audit([{...r,prize:0}],ledger,{confirmedAliases:{}}).length>0);
 });
+
+test('2026 Aug ME Reload Duos Victory Cup confirms one VR equals $200 team, $100 each',()=>{
+ const id='auto-s42-bbcceeffaabb',source='https://www.fortnite.com/competitive/events/S42_ReloadDuosVictoryCup/?region=ME&round=S42_ReloadDuosVictoryCup_Event1_Round2_ME';
+ const r={...result,id,date:'2026-08-25',region:'ME',seasonId:'S42',
+  tournamentId:'ch7s4-reload-duos-victory-cup',event:'Reload Duos Victory Cup',
+  player:'Karf / huggyfv',players:['Karf','huggyfv'],
+  kind:'賞金決勝',round:'Event 1 · Round 2 / 賞金決勝',
+  rank:14,points:100,kills:8,vrs:1,matches:3,verified:true,prize:200,
+  teamPrize:200,prizePerPlayer:100,source};
+ const ledger={version:1,entries:[{id,decision:'published',recordId:id,policy:'official-final-vr-award',
+  source,rule:'https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-4-official-rules'}]};
+ assert.deepEqual(audit([r],ledger,{confirmedAliases:{}}),[]);
+ assert.ok(audit([{...r,prize:100}],ledger,{confirmedAliases:{}}).length>0);
+ assert.ok(audit([{...r,prizePerPlayer:200}],ledger,{confirmedAliases:{}}).length>0);
+});
