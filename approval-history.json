@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-11T13:08:09.321Z",
+  "reviewedAt": "2026-11-11T13:31:08.034Z",
   "entries": [
     {
       "id": "auto-s43-21408f1d31bc",
@@ -9094,6 +9094,28 @@
       "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
       "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=ME&round=S30_SoloZBVictoryCashCup_Event9Round1_ME",
       "evidence": "Saved Epic ID, official ranked placement 169 within top 2000; qualifier $0"
+    },
+    {
+      "id": "auto-s36-d633cf21ed5e",
+      "decision": "published",
+      "recordId": "auto-s36-d633cf21ed5e",
+      "policy": "verified-rule",
+      "approvedAt": "2026-11-11T13:31:08.034Z",
+      "approvedBy": "ChatGPT / repository owner requested publication",
+      "rule": "https://www.fortnite.com/news/playstation-cup-chapter-6-season-3-official-rules",
+      "source": "https://www.fortnite.com/competitive/events/S36_PlayStationCup/?region=ME&round=S36_PlayStationCup_Qualifier_ME",
+      "evidence": "Verified Epic ID, saved ranked Osirion row, official event calendar, cutoff rule and semantic duplicate check; no unverified cash inferred"
+    },
+    {
+      "id": "auto-s36-bd52e491415b",
+      "decision": "published",
+      "recordId": "auto-s36-bd52e491415b",
+      "policy": "verified-rule",
+      "approvedAt": "2026-11-11T13:31:08.034Z",
+      "approvedBy": "ChatGPT / repository owner requested publication",
+      "rule": "https://www.fortnite.com/news/playstation-cup-chapter-6-season-3-official-rules",
+      "source": "https://www.fortnite.com/competitive/events/S36_PlayStationCup/?region=ME&round=S36_PlayStationCup_Qualifier_ME",
+      "evidence": "Verified Epic ID, saved ranked Osirion row, official event calendar, cutoff rule and semantic duplicate check; no unverified cash inferred"
     }
   ]
 }

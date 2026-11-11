@@ -4445,56 +4445,6 @@
       "reviewReason": "順位表の取得が完了していません"
     },
     {
-      "id": "auto-s36-d633cf21ed5e",
-      "date": "2025-07-25",
-      "region": "ME",
-      "player": "ぱな",
-      "playerRaw": "force klixey281",
-      "event": "PlayStation Cup",
-      "round": "Qualifier / 参加確認",
-      "rank": 1826,
-      "points": 223,
-      "kills": 8,
-      "vrs": 0,
-      "prize": null,
-      "kind": "参加確認",
-      "matches": 9,
-      "seasonId": "S36",
-      "chapter": 6,
-      "season": 3,
-      "tournamentId": "ch6s3-playstation-cup",
-      "source": "https://www.fortnite.com/competitive/events/S36_PlayStationCup/?region=ME&round=S36_PlayStationCup_Qualifier_ME",
-      "verified": true,
-      "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
-      "reviewOnly": true,
-      "reviewReason": "確認専用大会は自動承認不可"
-    },
-    {
-      "id": "auto-s36-bd52e491415b",
-      "date": "2025-07-25",
-      "region": "ME",
-      "player": "とまと",
-      "playerRaw": "helix r7chay4",
-      "event": "PlayStation Cup",
-      "round": "Qualifier / 参加確認",
-      "rank": 2367,
-      "points": 208,
-      "kills": 6,
-      "vrs": 0,
-      "prize": null,
-      "kind": "参加確認",
-      "matches": 9,
-      "seasonId": "S36",
-      "chapter": 6,
-      "season": 3,
-      "tournamentId": "ch6s3-playstation-cup",
-      "source": "https://www.fortnite.com/competitive/events/S36_PlayStationCup/?region=ME&round=S36_PlayStationCup_Qualifier_ME",
-      "verified": true,
-      "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
-      "reviewOnly": true,
-      "reviewReason": "確認専用大会は自動承認不可"
-    },
-    {
       "id": "auto-s31-c6726fe6660f",
       "date": "2024-08-29",
       "region": "ME",
@@ -5316,5 +5266,5 @@
       "reviewReason": "順位表の取得が完了していません"
     }
   ],
-  "manualReviewedAt": "2026-11-11T13:08:09.321Z"
+  "manualReviewedAt": "2026-11-11T13:31:08.034Z"
 }
