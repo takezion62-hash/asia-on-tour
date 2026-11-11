@@ -11,7 +11,7 @@
   "provider": "osirion",
   "linkedPlayers": 563,
   "trackedWindows": 2956,
-  "found": 206,
+  "found": 205,
   "skipped": 20,
   "imported": 17,
   "scannedPages": 96,
@@ -20,7 +20,7 @@
   "alreadyRegistered": 3364,
   "autoApprovedTotal": 1676,
   "invalidCachedCandidates": 1,
-  "manualReviewCandidates": 206,
+  "manualReviewCandidates": 205,
   "autoApprovedCosmeticThisRun": 0,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
@@ -47,10 +47,10 @@
     "S30_Reload",
     "S30_ReloadZB"
   ],
-  "message": "公式ラウンド・賞金・進出条件を再確認して掲載。残り確認待ち206件。",
-  "manuallyPublished": 921,
+  "message": "公式予選突破1件を通常成績に追加。重複0件を解消。残り確認待ち205件。未確認賞金は推定しない。",
+  "manuallyPublished": 922,
   "manuallyResolvedDuplicates": 89,
-  "lastReviewedBatchAt": "2026-11-11T13:31:08.034Z",
+  "lastReviewedBatchAt": "2026-11-11T13:31:17.602Z",
   "manuallyCorrected": 1,
   "lastCorrectedReviewAt": "2026-11-07T09:14:30.244Z",
   "concurrentMerge": {
@@ -263,10 +263,10 @@
     "unrealTeamsWithCash": 2
   },
   "latestManualReview": {
-    "reviewedAt": "2026-11-11T13:08:09.321Z",
-    "reviewedCandidates": 28,
-    "published": 28,
-    "remainingPending": 172,
+    "reviewedAt": "2026-11-11T13:31:17.602Z",
+    "reviewedCandidates": 1,
+    "published": 1,
+    "remainingPending": 205,
     "policy": "Official 2024 solo qualification cutoffs and exact verified saved Epic-ID ranked rows; no inferred cash"
   },
   "autoApprovedDuoQualifierThisRun": 0,
