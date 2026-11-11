@@ -156,3 +156,14 @@ test('NA-era S30/S31 NAC Round 2 0VR may be $0, but NA qualifier cutoff is NOT a
   assert.equal(decide(entry,pre,{...checkpoint,proposals:[entry]},local).approved,false);
  }
 });
+
+test('S42 Console ZB Solo Round 2 pays $0 for verified 0VR and $100 for 1VR',()=>{
+ const w2={key:'epicgames_S42_ConsoleVCC_SolosZB_NAW/S42_ConsoleVCC_SolosZB_Event2Round2_NAW',eventId:'S42_ConsoleVCC_SolosZB',windowId:'S42_ConsoleVCC_SolosZB_Event2Round2_NAW',dateJst:'2026-09-06',seasonId:'S42',tournamentId:'ch7s4-console-zero-build-solo-victory-cup',region:'NAW',kind:'賞金決勝',round:'Event 2 · Round 2 / 賞金決勝'};
+ const cat={id:w2.tournamentId,name:'Console Zero Build Solo Victory Cup',sourceEventIds:[w2.eventId],series:'victory-cup',seasonId:'S42',team:'solo'};
+ const x={id:'auto-s42-111122223333',date:w2.dateJst,region:'NAW',tournamentId:w2.tournamentId,seasonId:'S42',event:cat.name,round:w2.round,kind:'賞金決勝',player:'A',rank:55,points:0,kills:9,vrs:0,matches:3,prize:null,verified:true,source:source(w2)};
+ const db={players:{candidates:[{name:'A'}]},tournaments:{catalog:[cat]},results:[]};
+ const zero=decide(x,w2,{complete:true,proposals:[x]},db);
+ assert.equal(zero.approved,true);assert.equal(zero.record.prize,0);
+ const one={...x,vrs:1};assert.equal(decide(one,w2,{complete:true,proposals:[one]},db).record.prize,100);
+ assert.equal(decide({...x,matches:4},w2,{complete:true,proposals:[{...x,matches:4}]},db).approved,false);
+});

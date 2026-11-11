@@ -11,8 +11,8 @@ const clone=x=>JSON.parse(JSON.stringify(x));
 
 test('shared official tournament rules include review-only Solo Series Finals and approved types',()=>{
  assert.deepEqual(validateRegistry(registry,tournaments),[]);
- assert.equal(registry.rules.length,19);
- assert.equal(Object.keys(RULES).length,8);
+ assert.equal(registry.rules.length,20);
+ assert.equal(Object.keys(RULES).length,9);
  assert.equal(Object.keys(CUT_OFFS).length,8);
  for(const rule of registry.rules){
   if(rule.series==='victory-cup')assert.strictEqual(RULES[rule.id].source,rule.source);
@@ -211,4 +211,13 @@ test('official S36 console and S43 Reload duo Round1 scopes are strictly registe
   const fake=clone(registry);mutation(fake);
   assert.ok(validateRegistry(fake,tournaments).length>0,'unauthorized qualifiers/payouts must fail');
  }
+});
+
+test('S42 Console Zero Build Solo Victory Cup has exact official thresholds and VR award',()=>{
+ const x=registry.rules.find(r=>r.id==='ch7s4-console-zero-build-solo-victory-cup');
+ assert.ok(x);assert.equal(x.seasonId,'S42');assert.equal(x.series,'victory-cup');
+ assert.deepEqual(x.eventIds,['S42_ConsoleVCC_SolosZB']);
+ assert.deepEqual(x.advance,{EU:2000,NAC:2000,OCE:1000,ME:1000,BR:1000,NAW:1000});
+ assert.equal(x.matchCaps['予選'],8);assert.equal(x.matchCaps['賞金決勝'],3);
+ assert.equal(x.prizePerVictory,100);assert.strictEqual(RULES[x.id].source,x.source);
 });

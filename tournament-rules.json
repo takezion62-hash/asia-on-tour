@@ -152,6 +152,29 @@
       "source": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-4-official-rules"
     },
     {
+      "id": "ch7s4-console-zero-build-solo-victory-cup",
+      "seasonId": "S42",
+      "eventIds": [
+        "S42_ConsoleVCC_SolosZB"
+      ],
+      "team": "solo",
+      "series": "victory-cup",
+      "matchCaps": {
+        "予選": 8,
+        "賞金決勝": 3
+      },
+      "advance": {
+        "EU": 2000,
+        "NAC": 2000,
+        "OCE": 1000,
+        "ME": 1000,
+        "BR": 1000,
+        "NAW": 1000
+      },
+      "prizePerVictory": 100,
+      "source": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-4-official-rules"
+    },
+    {
       "id": "ch7s5-one-piece-zoro-cup-battle-royale",
       "seasonId": "S43",
       "eventIds": [
