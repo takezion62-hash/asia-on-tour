@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-11T00:59:38.605Z",
+  "reviewedAt": "2026-11-11T01:01:39.714Z",
   "entries": [
     {
       "id": "auto-s43-21408f1d31bc",
@@ -4496,6 +4496,94 @@
       "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/playstation-clix-cup-official-rules",
       "source": "https://www.fortnite.com/competitive/events/S40_PlayStationCupClix/?region=ME&round=S40_PlayStationCupClix_Final_ME",
       "evidence": "Verified Epic ID, saved ranked Osirion row, official event calendar, cutoff rule and semantic duplicate check; no unverified cash inferred"
+    },
+    {
+      "id": "auto-s40-33f747723dbe",
+      "decision": "published",
+      "recordId": "auto-s40-33f747723dbe",
+      "policy": "attendance-only",
+      "approvedAt": "2026-11-11T01:01:39.714Z",
+      "approvedBy": "ChatGPT / user-authorized leaderboard review",
+      "rule": null,
+      "source": "https://www.fortnite.com/competitive/events/S40_FNCSDivisionalCup_Division1/?region=ME&round=S40_FNCSDivisionalCup_Division1_Week3Day2_ME",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s40-8a77a4d56239",
+      "decision": "published",
+      "recordId": "auto-s40-8a77a4d56239",
+      "policy": "attendance-only",
+      "approvedAt": "2026-11-11T01:01:39.714Z",
+      "approvedBy": "ChatGPT / user-authorized leaderboard review",
+      "rule": null,
+      "source": "https://www.fortnite.com/competitive/events/S40_FNCSDivisionalCup_Division1/?region=ME&round=S40_FNCSDivisionalCup_Division1_Week4Day1_ME",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s40-dfebd7502772",
+      "decision": "published",
+      "recordId": "auto-s40-dfebd7502772",
+      "policy": "attendance-only",
+      "approvedAt": "2026-11-11T01:01:39.714Z",
+      "approvedBy": "ChatGPT / user-authorized leaderboard review",
+      "rule": null,
+      "source": "https://www.fortnite.com/competitive/events/S40_FNCSDivisionalCup_Division1/?region=ME&round=S40_FNCSDivisionalCup_Division1_Week4Day1_ME",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s40-26c59d86cc6c",
+      "decision": "published",
+      "recordId": "auto-s40-26c59d86cc6c",
+      "policy": "attendance-only",
+      "approvedAt": "2026-11-11T01:01:39.714Z",
+      "approvedBy": "ChatGPT / user-authorized leaderboard review",
+      "rule": null,
+      "source": "https://www.fortnite.com/competitive/events/S40_FNCSDivisionalCup_Division1/?region=ME&round=S40_FNCSDivisionalCup_Division1_Week4Day1_ME",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s40-91a86705d7da",
+      "decision": "published",
+      "recordId": "auto-s40-91a86705d7da",
+      "policy": "attendance-only",
+      "approvedAt": "2026-11-11T01:01:39.714Z",
+      "approvedBy": "ChatGPT / user-authorized leaderboard review",
+      "rule": null,
+      "source": "https://www.fortnite.com/competitive/events/S40_FNCSDivisionalCup_Division1/?region=ME&round=S40_FNCSDivisionalCup_Division1_Week4Day1_ME",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s41-1ec60e2f0273",
+      "decision": "published",
+      "recordId": "auto-s41-1ec60e2f0273",
+      "policy": "attendance-only",
+      "approvedAt": "2026-11-11T01:01:39.714Z",
+      "approvedBy": "ChatGPT / user-authorized leaderboard review",
+      "rule": null,
+      "source": "https://www.fortnite.com/competitive/events/S41_PSCupDaysOfPlay/?region=OCE&round=S41_PSCupDaysOfPlay_Qualifier_OCE",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s42-91813924da4f",
+      "decision": "published",
+      "recordId": "auto-s42-91813924da4f",
+      "policy": "attendance-only",
+      "approvedAt": "2026-11-11T01:01:39.714Z",
+      "approvedBy": "ChatGPT / user-authorized leaderboard review",
+      "rule": null,
+      "source": "https://www.fortnite.com/competitive/events/S42_PerformanceEvaluationTrios/?region=NAC&round=S42_PerformanceEvaluation_Event9Round1_NAC",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s42-c0d354495262",
+      "decision": "published",
+      "recordId": "auto-s42-c0d354495262",
+      "policy": "attendance-only",
+      "approvedAt": "2026-11-11T01:01:39.714Z",
+      "approvedBy": "ChatGPT / user-authorized leaderboard review",
+      "rule": null,
+      "source": "https://www.fortnite.com/competitive/events/S42_PerformanceEvaluationTrios/?region=NAC&round=S42_PerformanceEvaluation_Event9Round1_NAC",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
     }
   ]
 }
