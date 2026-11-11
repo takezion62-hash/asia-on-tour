@@ -24,3 +24,18 @@ test('存在しない掲載IDと承認履歴の二重記載を検知する',()=>
  assert.ok(audit([],ledger,{confirmedAliases:{}}).length);
  assert.ok(audit([result],{version:1,entries:[...ledger.entries,...ledger.entries]},{confirmedAliases:{}}).length);
 });
+
+test('S30 Event4 OCE or ME cash is exactly one hundred dollars per verified final VR',()=>{
+ for(const [date,region] of [['2024-06-24','OCE'],['2024-06-25','ME']]){
+  const window='S30_SoloVictoryCashCup_Event4Round2_'+region, id='auto-s30-bbaccddeeff0';
+  const row={...result,id,date,region,tournamentId:'ch5s3-solo-victory-cup',event:'Solo Victory Cup Battle Royale',
+   seasonId:'S30',kind:'賞金決勝',round:'Event 4 · Round 2 / 賞金決勝',vrs:1,points:100,
+   source:'https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region='+region+'&round='+window,
+   matches:3,kills:6,rank:33,prize:100,verified:true};
+  const history={version:1,entries:[{id,decision:'published',recordId:id,policy:'official-final-vr-award',
+   source:row.source,rule:'https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules'}]};
+  assert.deepEqual(audit([row],history,{confirmedAliases:{}}),[]);
+  assert.ok(audit([{...row,prize:200}],history,{confirmedAliases:{}}).length>0);
+  assert.ok(audit([{...row,points:0}],history,{confirmedAliases:{}}).length>0);
+ }
+});

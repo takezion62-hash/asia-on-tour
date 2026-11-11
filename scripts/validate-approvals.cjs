@@ -20,7 +20,10 @@ function validCashFinal(r,entry){
   ||!Number.isSafeInteger(r.matches)||r.matches<1||r.matches>3||r.vrs>r.matches
   ||!Number.isSafeInteger(r.kills)||r.kills<0||r.points!==r.vrs*100)return false;
  let event,window,team=false;
- if(r.seasonId==='S30'&&r.date==='2024-06-11'&&r.region==='ME'
+ if(r.seasonId==='S30'&&r.tournamentId==='ch5s3-solo-victory-cup'&&
+  ((r.date==='2024-06-24'&&r.region==='OCE')||(r.date==='2024-06-25'&&r.region==='ME'))){
+  event='S30_SoloVictoryCashCup';window='S30_SoloVictoryCashCup_Event4Round2_'+r.region;
+ }else if(r.seasonId==='S30'&&r.date==='2024-06-11'&&r.region==='ME'
   &&r.tournamentId==='ch5s3-zb-solo-victory'){
   event='S30_SoloZBVictoryCashCup';window='S30_SoloZBVictoryCashCup_Event2Round2_ME';
  }else if(r.seasonId==='S31'&&r.date==='2024-10-15'&&r.region==='NAC'
