@@ -1,7 +1,7 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-11T14:37:58.279Z",
+  "checkedAt": "2026-11-11T18:33:00.321Z",
   "mode": "review",
   "scope": "history",
   "dateMode": "rolling",
@@ -9,16 +9,16 @@
   "fromDate": "2023-01-01",
   "toDate": "2026-11-11",
   "provider": "osirion",
-  "linkedPlayers": 563,
+  "linkedPlayers": 573,
   "trackedWindows": 2956,
   "found": 7,
-  "skipped": 57,
-  "imported": 36,
+  "skipped": 15,
+  "imported": 35,
   "scannedPages": 96,
-  "completedWindows": 380,
+  "completedWindows": 387,
   "identityConflicts": 3,
-  "alreadyRegistered": 3830,
-  "autoApprovedTotal": 2038,
+  "alreadyRegistered": 3881,
+  "autoApprovedTotal": 2073,
   "invalidCachedCandidates": 1,
   "manualReviewCandidates": 7,
   "autoApprovedCosmeticThisRun": 0,
@@ -47,39 +47,39 @@
     "S30_Reload",
     "S30_ReloadZB"
   ],
-  "message": "2024年公式現金賞金0件、完全一致の既存スキン戦績との重複3件を整理。残り7件は順位差等を保留。",
+  "message": "最新版と安全統合：新規掲載35件、重複スキップ0件、要確認の競合0件、確認待ち7件。既存の戦績・賞金は保持。",
   "manuallyPublished": 1050,
   "manuallyResolvedDuplicates": 110,
   "lastReviewedBatchAt": "2026-11-11T18:29:27.426Z",
   "manuallyCorrected": 4,
   "lastCorrectedReviewAt": "2026-11-07T09:14:30.244Z",
   "concurrentMerge": {
-    "appended": 36,
+    "appended": 35,
     "alreadyPublished": 0,
     "reviewConflicts": 0,
-    "keptPending": 25,
-    "reconciledAt": "2026-11-11T14:38:05.050Z"
+    "keptPending": 7,
+    "reconciledAt": "2026-11-11T18:33:04.785Z"
   },
   "coverage": {
     "total": 2956,
-    "completed": 380,
-    "notStarted": 2457,
-    "partial": 117,
+    "completed": 387,
+    "notStarted": 2449,
+    "partial": 118,
     "retryWaiting": 2,
     "retryDue": 0,
-    "remaining": 2576,
+    "remaining": 2569,
     "retryCount": 2,
-    "completionPercent": 12.9,
+    "completionPercent": 13.1,
     "byRegion": {
       "OCE": {
         "total": 522,
-        "completed": 58,
-        "pending": 464
+        "completed": 59,
+        "pending": 463
       },
       "ME": {
         "total": 518,
-        "completed": 112,
-        "pending": 406
+        "completed": 116,
+        "pending": 402
       },
       "EU": {
         "total": 536,
@@ -88,8 +88,8 @@
       },
       "BR": {
         "total": 517,
-        "completed": 39,
-        "pending": 478
+        "completed": 40,
+        "pending": 477
       },
       "NAC": {
         "total": 536,
@@ -98,25 +98,25 @@
       },
       "NAW": {
         "total": 327,
-        "completed": 54,
-        "pending": 273
+        "completed": 55,
+        "pending": 272
       }
     },
     "byYear": {
       "2024": {
         "total": 974,
-        "completed": 90,
-        "pending": 884
+        "completed": 92,
+        "pending": 882
       },
       "2025": {
         "total": 690,
-        "completed": 48,
-        "pending": 642
+        "completed": 49,
+        "pending": 641
       },
       "2026": {
         "total": 1292,
-        "completed": 242,
-        "pending": 1050
+        "completed": 246,
+        "pending": 1046
       }
     },
     "outsideScopeCheckpoints": 0,
@@ -248,7 +248,7 @@
         "region": "NAC",
         "series": "victory-cup",
         "status": "partial",
-        "nextPage": 51,
+        "nextPage": 53,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
@@ -269,7 +269,7 @@
     "remainingPending": 2,
     "policy": "Official 2024 solo qualification cutoffs and exact verified saved Epic-ID ranked rows; no inferred cash"
   },
-  "autoApprovedDuoQualifierThisRun": 3,
+  "autoApprovedDuoQualifierThisRun": 6,
   "latestParticipationReview": {
     "reviewedAt": "2026-11-09T12:37:07.114Z",
     "participationPublished": 5,
