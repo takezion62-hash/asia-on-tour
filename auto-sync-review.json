@@ -272,6 +272,65 @@
         "Shiroka"
       ],
       "reviewReason": "スキン報酬判定の元データではありません"
+    },
+    {
+      "id": "auto-s42-08d88e14204b",
+      "date": "2026-10-26",
+      "region": "NAW",
+      "player": "れすぶゆりる / chacha",
+      "playerRaw": "12345ででんででんACE / twitter chachafn",
+      "event": "Inoxtag Icon Cup Battle Royale",
+      "round": "単一開催枠 / 参加確認",
+      "rank": 1871,
+      "points": 167,
+      "kills": 32,
+      "vrs": 1,
+      "prize": null,
+      "kind": "参加確認",
+      "matches": 8,
+      "seasonId": "S42",
+      "chapter": 7,
+      "season": 4,
+      "tournamentId": "ch7s4-inoxtag-icon-cup-battle-royale",
+      "source": "https://www.fortnite.com/competitive/events/S42_InoxtagIconCup/?region=NAW&round=S42_InoxtagIconCup_NAW",
+      "verified": true,
+      "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+      "reviewOnly": true,
+      "reviewReason": "公式の順位条件を登録していない大会",
+      "players": [
+        "れすぶゆりる",
+        "chacha"
+      ]
+    },
+    {
+      "id": "auto-s43-6d7877cf1fdf",
+      "date": "2026-11-10",
+      "region": "ME",
+      "player": "Aster / nezah / みやぐらーる / りんたろう",
+      "playerRaw": "ONYX KatEvolved / User-05c63f2c86 / orz miyA H2H / ONYX りんたろうʕᵒᴥᵒʔ",
+      "event": "Squads Victory Cup Battle Royale",
+      "round": "Event 1 · Round 1 / 予選",
+      "rank": 619,
+      "points": 230,
+      "kills": 81,
+      "vrs": 0,
+      "prize": 0,
+      "kind": "予選",
+      "matches": 8,
+      "seasonId": "S43",
+      "chapter": 7,
+      "season": 5,
+      "tournamentId": "ch7s5-squads-victory-cup",
+      "source": "https://www.fortnite.com/competitive/events/S43_SquadsVictoryCup/?region=ME&round=S43_SquadsVictoryCup_Event1_Round1_ME",
+      "verified": true,
+      "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。",
+      "players": [
+        "Aster",
+        "nezah",
+        "みやぐらーる",
+        "りんたろう"
+      ],
+      "reviewReason": "スキン報酬判定の元データではありません"
     }
   ],
   "manualReviewedAt": "2026-11-11T08:15:19.054Z"

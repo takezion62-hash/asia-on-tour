@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-11-11T09:07:41.802Z",
+  "checkedAt": "2026-11-11T10:24:58.013Z",
   "windows": {
     "epicgames_S43_PerformanceEvaluationTrios_EU/S43_PerformanceEvaluation_Event1Round1_EU": {
       "nextPage": 7,
@@ -2280,7 +2280,7 @@
       "totalPages": 44
     },
     "epicgames_S43_ReloadZBDuosCashCup_EU/S43_ReloadZBDuosCashCup_Event1Round1_EU": {
-      "nextPage": 63,
+      "nextPage": 73,
       "complete": false,
       "proposals": [
         {
@@ -2515,16 +2515,16 @@
           ]
         }
       ],
-      "pages": 63,
-      "lastAttemptAt": "2026-11-11T09:07:35.032Z",
+      "pages": 73,
+      "lastAttemptAt": "2026-11-11T10:24:49.854Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 6300,
-      "lastSuccessAt": "2026-11-11T09:07:36.283Z",
+      "lastSeenRank": 7300,
+      "lastSuccessAt": "2026-11-11T10:24:51.164Z",
       "totalPages": 100
     },
     "epicgames_S43_ReloadZBDuosCashCup_ME/S43_ReloadZBDuosCashCup_Event1Round1_ME": {
-      "nextPage": 42,
+      "nextPage": 45,
       "complete": false,
       "proposals": [
         {
@@ -2792,16 +2792,16 @@
           ]
         }
       ],
-      "pages": 42,
-      "lastAttemptAt": "2026-11-11T09:07:36.283Z",
+      "pages": 45,
+      "lastAttemptAt": "2026-11-11T10:24:53.528Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 4200,
-      "lastSuccessAt": "2026-11-11T09:07:37.441Z",
+      "lastSeenRank": 4500,
+      "lastSuccessAt": "2026-11-11T10:24:54.600Z",
       "totalPages": 100
     },
     "epicgames_S43_ReloadZBDuosCashCup_BR/S43_ReloadZBDuosCashCup_Event1Round1_BR": {
-      "nextPage": 30,
+      "nextPage": 31,
       "complete": false,
       "proposals": [
         {
@@ -2838,12 +2838,12 @@
           ]
         }
       ],
-      "pages": 30,
-      "lastAttemptAt": "2026-11-11T09:07:37.441Z",
+      "pages": 31,
+      "lastAttemptAt": "2026-11-11T10:24:54.600Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 3000,
-      "lastSuccessAt": "2026-11-11T09:07:38.983Z",
+      "lastSeenRank": 3100,
+      "lastSuccessAt": "2026-11-11T10:24:55.907Z",
       "totalPages": 100
     },
     "epicgames_S42_ConsoleVCC_SolosZB_NAW/S42_ConsoleVCC_SolosZB_Event8Round2_NAW": {
@@ -5051,7 +5051,7 @@
       "totalPages": 10
     },
     "epicgames_S42_InoxtagIconCup_NAW/S42_InoxtagIconCup_NAW": {
-      "nextPage": 18,
+      "nextPage": 19,
       "complete": false,
       "proposals": [
         {
@@ -5314,14 +5314,43 @@
             "おーばーとしょうたwwwww",
             "Shiroka"
           ]
+        },
+        {
+          "id": "auto-s42-08d88e14204b",
+          "date": "2026-10-26",
+          "region": "NAW",
+          "player": "れすぶゆりる / chacha",
+          "playerRaw": "12345ででんででんACE / twitter chachafn",
+          "event": "Inoxtag Icon Cup Battle Royale",
+          "round": "単一開催枠 / 参加確認",
+          "rank": 1871,
+          "points": 167,
+          "kills": 32,
+          "vrs": 1,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 8,
+          "seasonId": "S42",
+          "chapter": 7,
+          "season": 4,
+          "tournamentId": "ch7s4-inoxtag-icon-cup-battle-royale",
+          "source": "https://www.fortnite.com/competitive/events/S42_InoxtagIconCup/?region=NAW&round=S42_InoxtagIconCup_NAW",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "れすぶゆりる",
+            "chacha"
+          ]
         }
       ],
-      "pages": 18,
-      "lastAttemptAt": "2026-11-11T09:07:38.983Z",
+      "pages": 19,
+      "lastAttemptAt": "2026-11-11T10:24:55.907Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 1800,
-      "lastSuccessAt": "2026-11-11T09:07:40.372Z",
+      "lastSeenRank": 1900,
+      "lastSuccessAt": "2026-11-11T10:24:56.846Z",
       "totalPages": 89
     },
     "epicgames_S42_ConsoleVCC_SolosZB_BR/S42_ConsoleVCC_SolosZB_Event8Round1_BR": {
@@ -6148,7 +6177,7 @@
       "totalPages": 100
     },
     "epicgames_S43_ReloadZBDuosCashCup_NAW/S43_ReloadZBDuosCashCup_Event1Round1_NAW": {
-      "nextPage": 13,
+      "nextPage": 14,
       "complete": false,
       "proposals": [
         {
@@ -6317,12 +6346,12 @@
           ]
         }
       ],
-      "pages": 13,
-      "lastAttemptAt": "2026-11-11T09:07:40.372Z",
+      "pages": 14,
+      "lastAttemptAt": "2026-11-11T10:24:56.846Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 1300,
-      "lastSuccessAt": "2026-11-11T09:07:41.797Z",
+      "lastSeenRank": 1400,
+      "lastSuccessAt": "2026-11-11T10:24:58.006Z",
       "totalPages": 70
     },
     "epicgames_S42_ConsoleVCC_SolosZB_ME/S42_ConsoleVCC_SolosZB_Event8Round1_ME": {
@@ -6988,15 +7017,15 @@
       "totalPages": 2
     },
     "epicgames_S43_SquadsVictoryCup_NAC/S43_SquadsVictoryCup_Event1_Round1_NAC": {
-      "nextPage": 70,
+      "nextPage": 80,
       "complete": false,
       "proposals": [],
-      "pages": 70,
-      "lastAttemptAt": "2026-11-11T09:07:15.520Z",
+      "pages": 80,
+      "lastAttemptAt": "2026-11-11T10:23:30.653Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 7000,
-      "lastSuccessAt": "2026-11-11T09:07:16.472Z",
+      "lastSeenRank": 8000,
+      "lastSuccessAt": "2026-11-11T10:23:31.595Z",
       "totalPages": 86
     },
     "epicgames_S43_SquadsVictoryCup_BR/S43_SquadsVictoryCup_Event1_Round2_BR": {
@@ -7012,15 +7041,15 @@
       "totalPages": 2
     },
     "epicgames_S43_SquadsVictoryCup_BR/S43_SquadsVictoryCup_Event1_Round1_BR": {
-      "nextPage": 45,
-      "complete": false,
+      "nextPage": 47,
+      "complete": true,
       "proposals": [],
-      "pages": 45,
-      "lastAttemptAt": "2026-11-11T09:07:04.617Z",
+      "pages": 47,
+      "lastAttemptAt": "2026-11-11T10:23:19.451Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 4500,
-      "lastSuccessAt": "2026-11-11T09:07:05.902Z",
+      "lastSeenRank": 4680,
+      "lastSuccessAt": "2026-11-11T10:23:20.320Z",
       "totalPages": 47
     },
     "epicgames_S43_SquadsVictoryCup_EU/S43_SquadsVictoryCup_Event1_Round2_EU": {
@@ -7036,15 +7065,15 @@
       "totalPages": 3
     },
     "epicgames_S43_SquadsVictoryCup_EU/S43_SquadsVictoryCup_Event1_Round1_EU": {
-      "nextPage": 30,
+      "nextPage": 40,
       "complete": false,
       "proposals": [],
-      "pages": 30,
-      "lastAttemptAt": "2026-11-11T09:07:27.378Z",
+      "pages": 40,
+      "lastAttemptAt": "2026-11-11T10:23:56.874Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 3000,
-      "lastSuccessAt": "2026-11-11T09:07:28.590Z",
+      "lastSeenRank": 4000,
+      "lastSuccessAt": "2026-11-11T10:23:57.986Z",
       "totalPages": 100
     },
     "epicgames_S43_SquadsVictoryCup_ME/S43_SquadsVictoryCup_Event1_Round2_ME": {
@@ -7177,7 +7206,7 @@
       "totalPages": 2
     },
     "epicgames_S43_SquadsVictoryCup_ME/S43_SquadsVictoryCup_Event1_Round1_ME": {
-      "nextPage": 5,
+      "nextPage": 15,
       "complete": false,
       "proposals": [
         {
@@ -7440,15 +7469,56 @@
             "おーばーとしょうたwwwww",
             "Shiroka"
           ]
+        },
+        {
+          "id": "auto-s43-6d7877cf1fdf",
+          "date": "2026-11-10",
+          "region": "ME",
+          "player": "Aster / nezah / みやぐらーる / りんたろう",
+          "playerRaw": "ONYX KatEvolved / User-05c63f2c86 / orz miyA H2H / ONYX りんたろうʕᵒᴥᵒʔ",
+          "event": "Squads Victory Cup Battle Royale",
+          "round": "Event 1 · Round 1 / 予選",
+          "rank": 619,
+          "points": 230,
+          "kills": 81,
+          "vrs": 0,
+          "prize": 0,
+          "kind": "予選",
+          "matches": 8,
+          "seasonId": "S43",
+          "chapter": 7,
+          "season": 5,
+          "tournamentId": "ch7s5-squads-victory-cup",
+          "source": "https://www.fortnite.com/competitive/events/S43_SquadsVictoryCup/?region=ME&round=S43_SquadsVictoryCup_Event1_Round1_ME",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。",
+          "players": [
+            "Aster",
+            "nezah",
+            "みやぐらーる",
+            "りんたろう"
+          ]
         }
       ],
-      "pages": 5,
-      "lastAttemptAt": "2026-11-11T09:07:33.945Z",
+      "pages": 15,
+      "lastAttemptAt": "2026-11-11T10:24:18.981Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 500,
-      "lastSuccessAt": "2026-11-11T09:07:35.032Z",
+      "lastSeenRank": 1500,
+      "lastSuccessAt": "2026-11-11T10:24:20.358Z",
       "totalPages": 32
+    },
+    "epicgames_S43_SquadsVictoryCup_OCE/S43_SquadsVictoryCup_Event1_Round2_OCE": {
+      "nextPage": 2,
+      "complete": true,
+      "proposals": [],
+      "pages": 2,
+      "lastAttemptAt": "2026-11-11T10:24:21.581Z",
+      "emptyAttempts": 0,
+      "rankingOrderValid": true,
+      "lastSeenRank": 119,
+      "lastSuccessAt": "2026-11-11T10:24:22.271Z",
+      "totalPages": 2
     }
   }
 }
