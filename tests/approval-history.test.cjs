@@ -95,3 +95,18 @@ test('2026-08-29 OCE Console Zero Build Solo Victory cash pays $100 per original
  assert.ok(audit([{...row,prize:200}],history,{confirmedAliases:{}}).length>0);
  assert.ok(audit([{...row,points:0}],history,{confirmedAliases:{}}).length>0);
 });
+
+
+test('2024-07-23 NAC Event6 Round2 awards exact $100 for each Epic-verified VR',()=>{
+ const source='https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event6Round2_NAC';
+ const row={...result,id:'auto-s30-fae0bb000001',date:'2024-07-23',region:'NAC',seasonId:'S30',
+  tournamentId:'ch5s3-solo-victory-cup',event:'Solo Victory Cup Battle Royale',
+  round:'Event 6 · Round 2 / 賞金決勝',kind:'賞金決勝',rank:62,
+  points:100,kills:6,vrs:1,matches:2,prize:100,verified:true,source};
+ const history={version:1,entries:[{id:row.id,recordId:row.id,decision:'published',policy:'official-final-vr-award',
+  rule:'https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules',source}]};
+ assert.deepEqual(audit([row],history,{confirmedAliases:{}}),[]);
+ assert.ok(audit([{...row,prize:0}],history,{confirmedAliases:{}}).length>0);
+ assert.ok(audit([{...row,points:0}],history,{confirmedAliases:{}}).length>0);
+ assert.ok(audit([{...row,source:source.replace('Event6Round2','Event7Round2')}],history,{confirmedAliases:{}}).length>0);
+});

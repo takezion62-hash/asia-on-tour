@@ -14,11 +14,16 @@ const S42='https://www.fortnite.com/competitive/rules-guidelines/rules-library/f
 const S43='https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-squads-victory-cup-chapter-7-mini-season-official-rules';
 const S31SOLO='https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-4-official-rules';
 const TYPICAL='https://www.fortnite.com/competitive/rules-guidelines/rules-library/playstation-typical-gamer-icon-cup';
+const S36PS='https://www.fortnite.com/competitive/events/S36_PlayStationCup/?region=OCE';
 const CONFIG=[
+ ['2026-07-31','OCE','S41_PSTypicalGamer','Final','ch7s3-playstation-typical-gamer-icon-cup-battle-royale','typical-final',TYPICAL],
+ ['2024-08-13','NAC','S30_SoloVictoryCashCup','Event9Round1','ch5s3-solo-victory-cup','qual',S30],
  ['2024-09-23','OCE','S31_SoloVictoryCashCup','Event4Round1','ch5s4-solo-victory-cup','qual-s31',S31SOLO],
- ['2025-01-11','NAW','S33_SoloCashCup','Event3Round1','ch6s1-solo-cash','cash-qual',S33],
- ['2026-08-30','NAC','S42_ConsoleVCC_SolosZB','Event1Round2','ch7s4-console-zero-build-solo-victory-cup','console-final',S42],
- ['2026-07-29','OCE','S41_PSTypicalGamer','Qualifier','ch7s3-playstation-typical-gamer-icon-cup-battle-royale','typical-qual',TYPICAL]
+ ['2025-07-24','OCE','S36_PlayStationCup','Qualifier','ch6s3-playstation-cup','ps-qual',S36PS],
+ ['2024-10-24','ME','S31_DuosCashCup','Event8Round1','ch5s4-duos-cash-cup','cash-qual',S31],
+ ['2026-08-30','NAW','S42_ConsoleVCC_SolosZB','Event1Round2','ch7s4-console-zero-build-solo-victory-cup','console-final',S42],
+ ['2024-07-23','NAC','S30_SoloVictoryCashCup','Event6Round1','ch5s3-solo-victory-cup','qual',S30],
+ ['2024-07-23','NAC','S30_SoloVictoryCashCup','Event6Round2','ch5s3-solo-victory-cup','solo-final',S30]
 ].map(([date,region,event,fragment,tournamentId,type,rule])=>{
  const season=event.split('_')[0],window=event+(fragment?'_'+fragment:'')+'_'+region;
  return{date,region,event,window,tournamentId,type,season,rule};
@@ -89,7 +94,7 @@ function classify(r,spec){
   const cutoff=spec.type==='qual-s31'?1500:spec.type==='cash-qual'?(spec.season==='S31'?50:600):(spec.region==='NAC'?5000:2000);
   const inTop=r.rank<=cutoff;
   requireValid((spec.type==='qual'||spec.type==='qual-s31')?
-   (r.kind==='予選'&&r.prize===0&&inTop&&r.round.includes('Round 1 / 予選')&&r.matches<=7):
+   (r.kind==='予選'&&r.prize===0&&r.round.includes('Round 1 / 予選')&&r.matches<=7):
    (r.kind==='参加確認'&&r.reviewOnly===true&&r.prize===null&&
     !inTop&&r.round.includes('Round 1 / 参加確認')&&r.matches<=10),
    'rank is outside source-verified qualifying category');
@@ -117,6 +122,37 @@ function classify(r,spec){
    kind:'賞金決勝',round:r.round,prize:award,note,
    ...(team>1?{teamPrize:award,prizePerPlayer:award/team}:{})
   };
+ }
+ if(spec.type==='solo-final'){
+  requireValid(r.kind==='賞金決勝'&&r.prize===null&&
+   r.round==='Event 6 · Round 2 / 賞金決勝'&&r.region==='NAC'&&
+   r.vrs===1&&r.points===100&&r.matches<=3&&r.matches>=r.vrs,
+   '2024 Event6 NAC solo final original VR payout not verified');
+  return{policy:'official-final-vr-award',kind:'賞金決勝',round:r.round,prize:100,
+   note:'2024年7月23日NAC Solo Victory Cash Cup Event6決勝、'+r.rank+'位・'+r.kills+
+    'K・1VRを本人Epic ID、公式開催枠、保存済みEpic順位表で確認。'+
+    '公式Round2 1VR=$100を適用、個人賞金$100。支払完了と区別。規則: '+spec.rule};
+ }
+ if(spec.type==='typical-final'){
+  requireValid(r.kind==='参加確認'&&r.reviewOnly===true&&r.prize===null&&
+   r.round==='Final / 参加確認'&&r.matches<=6&&
+   r.vrs===0&&r.points===0&&r.rank>=1,
+   '2026 Typical Gamer final official zero-VR scoring not confirmed');
+  return{policy:'verified-rule',kind:'賞金決勝',round:'Final / 賞金決勝',prize:0,
+   note:'2026年7月31日OCE PlayStation Typical Gamer Icon Cup BR決勝 '+r.rank+
+    '位・'+r.kills+'K・0VR。本人Epic IDと保存済み公式順位を照合。'+
+    'Epic公式決勝はOCE 1VR=$250、今回は0VRのため現金賞金$0。'+
+    '予選のスキン順位条件と決勝の現金賞金を別々に評価し、重複獲得とは扱わない。公式規則: '+spec.rule};
+ }
+ if(spec.type==='ps-qual'){
+  requireValid(r.kind==='参加確認'&&r.reviewOnly===true&&r.prize===null&&
+   r.round==='Qualifier / 参加確認'&&r.rank>100&&r.matches<=10&&r.points>=8,
+   '2025 PlayStation Cup OCE qualification and cosmetic spray rules mismatch');
+  return{policy:'verified-rule',kind:'予選',round:'Qualifier / 予選',prize:0,
+   note:'2025年7月24日OCE PlayStation Cup予選 '+r.rank+'位・'+r.points+
+    'pt・'+r.kills+'K・'+r.vrs+'VRを本人Epic IDと保存済み公式順位表で確認。'+
+    '決勝進出は上位100人のため進出扱いにはしない。予選8pt以上のスプレー獲得順位条件に該当（配布完了は未確認）。'+
+    '現金賞金$0。Epic開催情報: '+spec.rule};
  }
  if(spec.type==='typical-qual'){
   requireValid(r.kind==='参加確認'&&r.reviewOnly===true&&r.prize===null&&
@@ -181,14 +217,14 @@ for(const {r,origin} of selected){
  }catch(e){held.push({id:r.id,player:r.player,reason:String(e.message||e)})}
 }
 if(changed.length){
- const id='verified-history-nov11-round3-'+crypto.createHash('sha256').update(changed.map(x=>x.id).sort().join('|')).digest('hex').slice(0,14);
+ const id='verified-history-nov11-round4-'+crypto.createHash('sha256').update(changed.map(x=>x.id).sort().join('|')).digest('hex').slice(0,14);
  requireValid(!d.updates.entries.some(x=>x.id===id),'reused update id');
  const jst=new Date(Date.parse(now)+9*3600000).toISOString().slice(0,10);
  const categories={};
  for(const x of changed)categories[x.event]=(categories[x.event]||0)+1;
  d.updates.entries.unshift({id,date:jst,type:'records',
-  title:'新規確認候補の公式予選突破・決勝順位 '+changed.length+'戦績を掲載',
-  description:'2024 OCE Solo Victory予選と2025 NAW Cash予選、2026 NAC Console ZB決勝0VR、Typical Gamer OCE決勝進出と衣装順位条件を、本人Epic ID・原本順位表・公式規則で検証して通常結果へ統合。現金の推定なし。',
+  title:'Epic公式順位・決勝VR・過去予選 '+changed.length+'件を通常結果に掲載',
+  description:'2024 NAC Event6 Solo Victory決勝の1VR賞金、2026 NAW Console ZB決勝0VR、Typical Gamer決勝、2025 PlayStation予選、過去予選などをEpic本人ID・公式開催枠・原本順位表で照合。公式条件がない賞金は加算しない。',
   recordIds:changed.map(x=>x.id)});
  d.reviewed.reviewedAt=now;d.approval.reviewedAt=now;
  for(const origin of ['history','auto']){
@@ -206,7 +242,7 @@ const report={dry,selected:selected.length,added:changed.length,
  cashRecords:changed.filter(x=>x.prize>0),held,heldCount:held.length,
  outOfScope,remainingHistory:d.reviews.history.proposals.length,
  remainingAuto:d.reviews.auto.proposals.length};
-console.log('AOT_VERIFIED_NOV11_ROUND3 '+JSON.stringify(report));
+console.log('AOT_VERIFIED_NOV11_ROUND4 '+JSON.stringify(report));
 if(!dry&&changed.length){
  const names={results:'results.json',history:'history-sync-review.json',auto:'auto-sync-review.json',
   reviewed:'history-sync-reviewed.json',historyStatus:'history-sync-status.json',

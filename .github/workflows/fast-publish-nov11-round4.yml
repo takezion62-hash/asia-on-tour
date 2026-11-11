@@ -1,0 +1,52 @@
+name: AOT 2026-11-11 final verified history batch 4
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/fast-publish-nov11-round4.yml"
+permissions:
+  contents: write
+concurrency:
+  group: aot-source-verified-20261111-round4-fast
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Publish exact Epic checkpoint and official payout verified results
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          for attempt in 1 2 3 4 5; do
+            git fetch origin main
+            git reset --hard origin/main
+            node scripts/publish-verified-nov11-round3.cjs --dry-run
+            node scripts/publish-verified-nov11-round3.cjs
+            npm run validate
+            node --test tests/approval-history.test.cjs tests/manual-approval.test.cjs tests/tournament-rules.test.cjs
+            git add results.json history-sync-review.json auto-sync-review.json history-sync-reviewed.json history-sync-status.json auto-sync-status.json approval-history.json updates.json
+            if git diff --cached --quiet; then
+              echo "AOT_NOV11_ROUND4 no new verified candidates"
+              exit 0
+            fi
+            git commit -m 'data: add exact Epic verified C5S3 awards and pending finals'
+            if git push origin HEAD:main; then
+              echo "AOT_NOV11_ROUND4 published verified results to main"
+              exit 0
+            fi
+            if [ "$attempt" -eq 5 ]; then
+              echo "::error::Failed to safely publish against latest main"
+              exit 1
+            fi
+            sleep $((attempt * 2))
+          done
