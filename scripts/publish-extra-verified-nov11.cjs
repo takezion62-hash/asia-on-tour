@@ -114,6 +114,7 @@ if(added.length){
  const previous=db.updates.entries.find(x=>x.id===id);
  if(previous){
   previous.recordIds=[...new Set([...(previous.recordIds||[]),...added.map(x=>x.id)])];
+  previous.title='2024/2026年の新規確認候補'+previous.recordIds.length+'戦績を通常一覧へ追加';
   previous.description='本人Epic ID・順位と公式賞金ルールで'+previous.recordIds.length+'件の過去成績を確認し通常結果に掲載。';
  }else{
   db.updates.entries.unshift({id,date:'2026-11-11',type:'records',
