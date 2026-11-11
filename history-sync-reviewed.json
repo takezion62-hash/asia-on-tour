@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-11T04:39:25.031Z",
+  "reviewedAt": "2026-11-11T04:43:02.737Z",
   "description": "Resolved historic review candidates: published, duplicate or participation",
   "entries": [
     {
@@ -16104,6 +16104,33 @@
       "policy": "verified-rule",
       "source": "https://www.fortnite.com/competitive/events/S40_SoloVictoryCup/?region=NAC&round=S40_SoloVictoryCup_Round2_Day1_NAC",
       "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-2-official-rules"
+    },
+    {
+      "id": "auto-s36-5e1b6b74c259",
+      "decision": "published",
+      "recordId": "auto-s36-5e1b6b74c259",
+      "reviewedAt": "2026-11-11T04:43:02.737Z",
+      "policy": "verified-rule",
+      "source": "https://www.fortnite.com/competitive/events/S36_PlayStationCup/?region=OCE&round=S36_PlayStationCup_Final_OCE",
+      "rule": "https://www.fortnite.com/news/playstation-cup-chapter-6-season-3-official-rules"
+    },
+    {
+      "id": "auto-s30-52abf4e53343",
+      "decision": "published",
+      "recordId": "auto-s30-52abf4e53343",
+      "reviewedAt": "2026-11-11T04:43:02.737Z",
+      "policy": "official-final-vr-award",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=ME&round=S30_SoloZBVictoryCashCup_Event5Round2_ME",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules"
+    },
+    {
+      "id": "auto-s30-a3ead6f02a0c",
+      "decision": "published",
+      "recordId": "auto-s30-a3ead6f02a0c",
+      "reviewedAt": "2026-11-11T04:43:02.737Z",
+      "policy": "verified-rule",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event5Round1_NAC",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules"
     }
   ]
 }
