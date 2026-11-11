@@ -218,3 +218,18 @@
 4. **回帰テスト**：`tests/optimization.spec.cjs` に名鑑60→120件と全選手検索・ソート切替、ホームの履歴遅延描画、カレンダー月内の日付操作を追加し、PC・スマホ両方で実行する。
 
 表示用のキャッシュと段階描画だけを変更し、`results.json` 等の原本データや自動取得/承認/掲載のGitHub Actionsは触らない。実際のLCP等のミリ秒測定は実端末や継続的な性能観測が必要で、速度改善率の数値はここでは断定しない。
+
+## 2026-11-11 ME Squads Victory Cup 確認候補の本人・順位・通過条件検証
+
+管理者からの「確認候補を調べて掲載」依頼で、2026年11月10日JSTのS43 ME Event1 Round1を追加調査。Epic公式2026年11月1日公開規則は**EU 300、NAC 200、ME/OCE/BR/NAW/ASIA 120チーム**がRound2通過。Round1の現金賞金は$0、Round2のVR賞金は別開催枠でのみ確定する。
+規則: https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-squads-victory-cup-chapter-7-mini-season-official-rules
+
+`auto-sync-review.json` にある同日の10チームはEpic ID確認済み4人編成・公式順位・PTS・キル・VR・試合数を保持。元の `auto-sync-scan.json` にはRound1の公式ウィンドウの順位順検証済みチェックポイント（`rankingOrderValid=true`、最終照合順位1500）が残っている。ただし全32ページ中15ページのため「全順位表の取得完了」とはみなさない。
+
+既存の `publish-verified-nov11-round2.cjs` にこの公式Round1を対象追加。本人ID、正確な順位とスコア、公式開催日・地域、保存済みウィンドウ、既存成績衝突を従来の共通 `verifyEpicReviewEvidence` で再検証し、結果のわかった個別10チームだけを判定する。
+- 24/42/65/102位：上位120に入った4チームを「予選突破」と表示。
+- 169/282/318/395/478/619位：Round1参加・順位として記録し、進出や賞金を認定しない。**予選と同じ開催枠にまとめるため `kind=予選` を保ち、突破バッジを付けない。**
+- 10チームともRound1個人・チーム現金賞金は$0。Round2でのVRや支払いは未確認のため合算しない。
+- 既存の `history-sync.yml` がこのスクリプトをdry-run→本番で走らせ、バリデーション後に安全にmainへコミットする。個別に巨大な `results.json` をAPIで上書きしない。
+
+`scripts/squads-qualifier-rules.cjs` とテストを追加して、通過境界と不正候補の拒否、10件の二重掲載防止を維持。過去116件の確認待ち候補のうち、裏付けのない過去大会の賞金や未完了順位表は引き続き保留する。前回の画面最適化に伴って破綻していた旧VM単体テストの「全名鑑を同時描画」の固定前提もテスト環境だけで修正する。実ブラウザの60件ずつ表示は維持する。

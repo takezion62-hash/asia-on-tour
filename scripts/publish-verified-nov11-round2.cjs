@@ -1,9 +1,10 @@
 'use strict';
 const {createPublicationFiles,verifyEpicReviewEvidence}=require('./reviewed-publication-core.cjs');
-// ASIA ON TOUR — source-verified 2026-11-11 follow-up batch, 9 exact sessions.
+// ASIA ON TOUR — source-verified 2026-11-11 follow-up batches, exact official sessions.
 // Idempotent, fail-closed, no inferred prize or duplicated team/solo result.
 const path=require('node:path'),crypto=require('node:crypto');
 const {collision,equalCandidate}=require('./manual-approval-core.cjs');
+const {classifyS43SquadsQualifier}=require('./squads-qualifier-rules.cjs');
 const ROOT=path.resolve(__dirname,'..');
 const {read,write}=createPublicationFiles(ROOT);
 const dry=process.argv.includes('--dry-run'),now=new Date().toISOString();
@@ -20,6 +21,7 @@ const CONFIG=[
  ['2026-05-13','ME','S40_FNCSDivisionalCup_Division1','Week4Day2','ch7s2-fncs-division-1','fncs',null],
  ['2026-08-25','NAW','S42_ReloadDuosVictoryCup','Event1_Round2','ch7s4-reload-duos-victory-cup','duo-zero',S42],
  ['2026-08-29','OCE','S42_ConsoleVCC_SolosZB','Event1Round2','ch7s4-console-zero-build-solo-victory-cup','console-final',S42],
+ ['2026-11-10','ME','S43_SquadsVictoryCup','Event1_Round1','ch7s5-squads-victory-cup','squad-qual',S43],
  ['2026-11-10','ME','S43_SquadsVictoryCup','Event1_Round2','ch7s5-squads-victory-cup','squad-zero',S43],
  ['2026-11-02','ME','S43_SoloReloadTestCup','', 'ch7s5-solo-reload-test-cup','test',null]
 ].map(([date,region,event,fragment,tournamentId,type,rule])=>{
@@ -46,6 +48,7 @@ function getEvidence(r,spec){
  return verifyEpicReviewEvidence(r,spec,{requireValid,catalog,known,d,read,resultIds,approvedIds,equalCandidate,collision});
 }
 function classify(r,spec){
+ if(spec.type==='squad-qual')return classifyS43SquadsQualifier(r,spec);
  const zeroFinal=spec.type==='duo-zero'||spec.type==='console-final'||spec.type==='squad-zero';
  const q=spec.type==='qual'||spec.type==='cash-qual';
  if(q){

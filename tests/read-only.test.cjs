@@ -22,6 +22,9 @@ const script = (() => {
   // Legacy exhaustive DOM assertions intentionally inspect every record at once.
   // Production 50-row pagination is independently tested below and in Playwright.
   body = body.replace('const ARCHIVE_PAGE_SIZE=50;', 'const ARCHIVE_PAGE_SIZE=Number.MAX_SAFE_INTEGER;');
+  // Keep exhaustive share-link assertions in this synthetic DOM harness.
+  // Production player batching is checked by the real browser tests.
+  body = body.replace('const PLAYER_BATCH_SIZE=60;', 'const PLAYER_BATCH_SIZE=Number.MAX_SAFE_INTEGER;');
   const literal = value => JSON.stringify(value).replace(/\]$/, '\n    ]');
   for (const [name, reference, value] of [
     ['builtIn', 'siteData.results', records], ['candidates', 'siteData.players.candidates', data.players.candidates],
