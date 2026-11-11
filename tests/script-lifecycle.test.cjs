@@ -244,3 +244,59 @@ test('第4段階：掲載完了4バッチの旧実行ファイルを除去して
  assert.equal(byId.get('auto-s40-aa4c808b5bea')?.prize,0,
   'Clix Cup zero-VR final must remain $0');
 });
+
+test('第5段階：完了済み4掲載バッチを整理しても115件・既存Zoro重複判定を保護',()=>{
+ const batches=[["manual-review-history-20261107-rule30.cjs","manual-history-20261107-rule-30",30],["manual-review-history-20261107-attendance50.cjs","manual-history-20261107-attendance-50",38],["manual-review-20261107-followup-33.cjs","verified-history-20261107-followup-33",30],["manual-review-20261107-new-23.cjs","verified-review-20261107-21-history-and-2-recent",17]];
+ const activeFiles=[
+  ...scanFiles(path.join(root,'.github','workflows'),/\.ya?ml$/),
+  ...scanFiles(scriptDir,/\.cjs$/),
+  ...scanFiles(path.join(root,'tests'),/\.[cm]?js$/).filter(p=>!ignored.has(path.basename(p))),
+  path.join(root,'package.json')
+ ];
+ const updates=JSON.parse(fs.readFileSync(path.join(root,'updates.json'),'utf8')).entries;
+ const results=JSON.parse(fs.readFileSync(path.join(root,'results.json'),'utf8'));
+ const review=JSON.parse(fs.readFileSync(path.join(root,'history-sync-reviewed.json'),'utf8')).entries;
+ const approvals=JSON.parse(fs.readFileSync(path.join(root,'approval-history.json'),'utf8')).entries;
+ const pendingHistory=JSON.parse(fs.readFileSync(path.join(root,'history-sync-review.json'),'utf8')).proposals;
+ const pendingCurrent=JSON.parse(fs.readFileSync(path.join(root,'auto-sync-review.json'),'utf8')).proposals;
+ const byId=new Map(results.map(r=>[r.id,r]));
+ assert.equal(byId.size,results.length,'published records must have unique IDs');
+ const ids=[];
+ for(const [filename,marker,count] of batches){
+  assert.equal(fs.existsSync(path.join(scriptDir,filename)),false,
+   'retired historic publisher must not be executable: '+filename);
+  const live=activeFiles.filter(p=>fs.readFileSync(p,'utf8').includes(filename)).map(rel);
+  assert.deepEqual(live,[],'active code still references a retired publisher: '+filename);
+  const logs=updates.filter(e=>e.id===marker);
+  assert.equal(logs.length,1,'published batch marker must remain unique: '+marker);
+  assert.equal(logs[0].recordIds?.length,count,'published record count changed: '+marker);
+  assert.equal(new Set(logs[0].recordIds).size,count,'duplicate record in update batch: '+marker);
+  for(const id of logs[0].recordIds){
+   ids.push(id);
+   const row=byId.get(id);
+   assert.ok(row,'already-published record was removed: '+id);
+   assert.equal(row.verified,true,'Epic-verified record must remain verified: '+id);
+   assert.ok(row.source,'original result source was removed: '+id);
+   assert.ok(Number.isFinite(row.prize)&&row.prize>=0,'verified prize was made unknown/invalid: '+id);
+   assert.ok(review.some(x=>x.id===id&&x.decision==='published')||
+     approvals.some(x=>x.id===id&&x.decision==='published'),
+     'existing published approval was removed: '+id);
+   assert.ok(!pendingHistory.some(x=>x.id===id)&&!pendingCurrent.some(x=>x.id===id),
+     'published record reappeared in a review queue: '+id);
+  }
+ }
+ assert.equal(ids.length,115,'four completed batches must preserve 115 records');
+ assert.equal(new Set(ids).size,115,'overlapping achievement IDs were reintroduced');
+ const zoro=[
+  ['auto-s43-c51e2bbfb3ed','s43-oce-zoro-mobile-skin-20261106-akuria'],
+  ['auto-s43-6b7fe976d9eb','s43-oce-zoro-mobile-skin-20261106-brn-916gonluck']
+ ];
+ for(const [candidate,canonical] of zoro){
+  assert.equal(byId.has(candidate),false,'duplicate Zoro result was published again: '+candidate);
+  assert.ok(byId.has(canonical),'canonical Zoro result was removed: '+canonical);
+  const matching=review.filter(x=>x.id===candidate);
+  assert.equal(matching.length,1,'duplicate decision must not be lost: '+candidate);
+  assert.equal(matching[0].decision,'already-published');
+  assert.equal(matching[0].existingId,canonical);
+ }
+});
