@@ -1,18 +1,8 @@
 name: AOT race-safe merge regression checks
 on:
-  push:
-    branches: [main]
-    paths:
-      - "scripts/safe-sync-merge.cjs"
-      - "tests/safe-sync-merge.test.cjs"
-      - ".github/workflows/history-sync.yml"
-      - ".github/workflows/auto-sync.yml"
-      - "scripts/publish-verified-s35-console-duos-20261108.cjs"
-      - "tests/publish-verified-s35-console-duos-20261108.test.cjs"
-      - "scripts/publish-reviewed-s30-nac-zero-vr.cjs"
-      - "tests/publish-reviewed-s30-nac-zero-vr.test.cjs"
-      - ".github/workflows/safe-sync-merge-tests.yml"
+  # Full push/PR coverage is owned by tests.yml; this focused check is on demand.
   workflow_dispatch:
+
 permissions:
   contents: read
 jobs:

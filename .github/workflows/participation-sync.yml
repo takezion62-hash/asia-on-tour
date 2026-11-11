@@ -1,5 +1,6 @@
 name: AOT verified participation archive
 on:
+  # Test-only changes are verified by tests.yml; they must not re-scan the provider.
   push:
     branches: [main]
     paths:
@@ -7,7 +8,6 @@ on:
       - "scripts/participation-sync.cjs"
       - "scripts/osirion-sync.cjs"
       - "scripts/auto-sync-core.cjs"
-      - "tests/participation-sync.test.cjs"
       - "participation-config.json"
       - ".github/workflows/participation-sync.yml"
   schedule:

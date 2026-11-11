@@ -1,15 +1,8 @@
 name: AOT Unreal Cup auto-approval safety tests
 on:
-  push:
-    branches: [main]
-    paths:
-      - ".github/workflows/unreal-auto-check.yml"
-      - "scripts/automatic-unreal-approval.cjs"
-      - "scripts/osirion-sync.cjs"
-      - "scripts/auto-sync-core.cjs"
-      - "tests/automatic-unreal-approval.test.cjs"
-      - "tournament-rules.json"
+  # Full push/PR coverage is owned by tests.yml; this focused check is on demand.
   workflow_dispatch:
+
 permissions:
   contents: read
 jobs:

@@ -1,10 +1,10 @@
 name: AOT historical tournament calendar discovery
 on:
+  # Test-only changes are verified by tests.yml; they must not re-scan the provider.
   push:
     branches: [main]
     paths:
       - "scripts/historical-calendar.cjs"
-      - "tests/historical-calendar.test.cjs"
       - "tournaments.json"
       - ".github/workflows/calendar-history.yml"
   schedule:

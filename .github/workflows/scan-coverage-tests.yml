@@ -1,27 +1,8 @@
 name: AOT scan coverage and retry regression checks
 on:
-  pull_request:
-    paths:
-      - "scripts/osirion-sync.cjs"
-      - "scripts/scan-coverage.cjs"
-      - "tests/osirion-sync.test.cjs"
-      - "tests/scan-coverage.test.cjs"
-      - "tests/scan-scheduler.test.cjs"
-      - "auto-sync-ui.js"
-      - "tests/auto-sync-ui.test.cjs"
-      - ".github/workflows/scan-coverage-tests.yml"
-  push:
-    branches: [main]
-    paths:
-      - "scripts/osirion-sync.cjs"
-      - "scripts/scan-coverage.cjs"
-      - "tests/osirion-sync.test.cjs"
-      - "tests/scan-coverage.test.cjs"
-      - "tests/scan-scheduler.test.cjs"
-      - "auto-sync-ui.js"
-      - "tests/auto-sync-ui.test.cjs"
-      - ".github/workflows/scan-coverage-tests.yml"
+  # Full push/PR coverage is owned by tests.yml; this focused check is on demand.
   workflow_dispatch:
+
 permissions:
   contents: read
 jobs:

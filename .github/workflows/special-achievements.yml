@@ -1,15 +1,6 @@
 name: Special achievements regression tests
 on:
-  push:
-    branches: [main]
-    paths:
-      - achievements.js
-      - achievements.css
-      - app.js
-      - index.html
-      - tests/achievements.test.cjs
-      - tests/achievements.spec.cjs
-      - .github/workflows/special-achievements.yml
+  # Full push/PR coverage is owned by tests.yml; this focused check is on demand.
   workflow_dispatch:
 
 permissions:

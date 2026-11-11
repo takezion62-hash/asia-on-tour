@@ -1,30 +1,7 @@
 name: Tournament calendar smoke tests
 
 on:
-  push:
-    paths:
-      - 'app.js'
-      - 'index.html'
-      - 'calendar.css'
-      - 'results.json'
-      - 'tournaments.json'
-      - 'tournament-rules.json'
-      - 'scripts/validate-tournament-rules.cjs'
-      - 'tests/calendar.spec.cjs'
-      - 'scripts/serve.cjs'
-      - '.github/workflows/calendar.yml'
-  pull_request:
-    paths:
-      - 'app.js'
-      - 'index.html'
-      - 'calendar.css'
-      - 'results.json'
-      - 'tournaments.json'
-      - 'tournament-rules.json'
-      - 'scripts/validate-tournament-rules.cjs'
-      - 'tests/calendar.spec.cjs'
-      - 'scripts/serve.cjs'
-      - '.github/workflows/calendar.yml'
+  # Full push/PR coverage is owned by tests.yml; this focused check is on demand.
   workflow_dispatch:
 
 permissions:

@@ -85,17 +85,17 @@ jobs:
           AOT_APPROVAL_POLICY: ${{ inputs.publication_policy }}
           AOT_APPROVAL_CONFIRMATION: ${{ inputs.confirmation }}
         run: node scripts/manual-approval.cjs
-      - name: Validate data, account identity rules and publication engine
+      - name: Validate data and all unit tests once before browser setup
         if: ${{ !inputs.preview_only }}
         run: |
           npm run validate
-          node --test tests/manual-approval.test.cjs tests/verified-history-approval.test.cjs
+          npm run test:unit
       - name: Install Chromium for complete PC and mobile checks
         if: ${{ !inputs.preview_only }}
         run: npx playwright install --with-deps chromium
-      - name: Run entire data, unit and browser test suite before PR
+      - name: Run complete PC and mobile browser suite once before PR
         if: ${{ !inputs.preview_only }}
-        run: npm test
+        run: npm run test:e2e
       - name: Preserve complete browser test report
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.0

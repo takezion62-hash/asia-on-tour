@@ -1,37 +1,7 @@
 name: Tournament rules focused checks
 
 on:
-  pull_request:
-    paths:
-      - tournament-rules.json
-      - source-rules.js
-      - source-rules.css
-      - index.html
-      - schedule.json
-      - scripts/validate-tournament-rules.cjs
-      - scripts/automatic-cash-approval.cjs
-      - scripts/automatic-performance-approval.cjs
-      - tests/automatic-performance-approval.test.cjs
-      - tests/automatic-cash-approval.test.cjs
-      - tests/tournament-rules.test.cjs
-      - tests/source-rules.spec.cjs
-      - .github/workflows/tournament-rules-check.yml
-  push:
-    branches: [main]
-    paths:
-      - tournament-rules.json
-      - source-rules.js
-      - source-rules.css
-      - index.html
-      - schedule.json
-      - scripts/validate-tournament-rules.cjs
-      - scripts/automatic-cash-approval.cjs
-      - scripts/automatic-performance-approval.cjs
-      - tests/automatic-performance-approval.test.cjs
-      - tests/automatic-cash-approval.test.cjs
-      - tests/tournament-rules.test.cjs
-      - tests/source-rules.spec.cjs
-      - .github/workflows/tournament-rules-check.yml
+  # Full push/PR coverage is owned by tests.yml; this focused check is on demand.
   workflow_dispatch:
 
 permissions:

@@ -2,6 +2,9 @@ name: Data and site tests
 
 on:
   push:
+    # Docs-only pushes do not change public data or executable site behavior.
+    paths-ignore:
+      - '**/*.md'
   pull_request:
   workflow_dispatch:
 
