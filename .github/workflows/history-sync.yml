@@ -15,6 +15,7 @@ on:
       - "scripts/publish-verified-final4-persona.cjs"
       - "scripts/publish-extra-verified-nov11.cjs"
       - "scripts/publish-verified-nov11-round2.cjs"
+      - "scripts/squads-qualifier-rules.cjs"
       - "scripts/publish-verified-nov11-round3.cjs"
       - "scripts/publish-verified-finals-batch.cjs"
       - "scripts/publish-reviewed-s30-nac-zero-vr.cjs"
