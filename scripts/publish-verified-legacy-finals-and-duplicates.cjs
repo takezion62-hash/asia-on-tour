@@ -16,6 +16,8 @@ const cases=[
  ['2024-08-13','ME','S30_SoloVictoryCashCup','Event9Round2','ch5s3-solo-victory-cup',1,R30],
  ['2024-08-13','ME','S30_SoloZBVictoryCashCup','Event9Round2','ch5s3-zb-solo-victory',1,R30],
  ['2024-09-03','ME','S31_SoloVictoryCashCup','Event1Round2','ch5s4-solo-victory-cup',1,R31],
+ ['2024-09-03','NAC','S31_SoloVictoryCashCup','Event1Round2','ch5s4-solo-victory-cup',1,R31],
+ ['2024-09-10','ME','S31_SoloVictoryCashCup','Event2Round2','ch5s4-solo-victory-cup',1,R31],
  ['2024-08-12','ME','S30_SquadsVictoryCashCup','Event5Round2','ch5s3-squads-victory-cup',4,R30]
 ].map(([date,region,event,round,tournamentId,team,rule])=>({
  date,region,event,window:event+'_'+round+'_'+region,tournamentId,team,rule

@@ -37,6 +37,12 @@ function validCashFinal(r,entry){
   r.date==='2024-08-13'&&r.region==='ME'){
   event='S30_SoloZBVictoryCashCup';window='S30_SoloZBVictoryCashCup_Event9Round2_ME';
  }else if(r.seasonId==='S31'&&r.tournamentId==='ch5s4-solo-victory-cup'&&
+  r.date==='2024-09-03'&&r.region==='NAC'){
+  event='S31_SoloVictoryCashCup';window='S31_SoloVictoryCashCup_Event1Round2_NAC';
+ }else if(r.seasonId==='S31'&&r.tournamentId==='ch5s4-solo-victory-cup'&&
+  r.date==='2024-09-10'&&r.region==='ME'){
+  event='S31_SoloVictoryCashCup';window='S31_SoloVictoryCashCup_Event2Round2_ME';
+ }else if(r.seasonId==='S31'&&r.tournamentId==='ch5s4-solo-victory-cup'&&
   r.date==='2024-09-03'&&r.region==='ME'){
   event='S31_SoloVictoryCashCup';window='S31_SoloVictoryCashCup_Event1Round2_ME';
  }else if(r.seasonId==='S30'&&r.tournamentId==='ch5s3-squads-victory-cup'&&
