@@ -39,3 +39,15 @@ test('S30 Event4 OCE or ME cash is exactly one hundred dollars per verified fina
   assert.ok(audit([{...row,points:0}],history,{confirmedAliases:{}}).length>0);
  }
 });
+
+test('2024-07-15 OCE Event5 final per-VR cash remains strictly $100 and exact window',()=>{
+ const id='auto-s30-abbcdeffff00',row={...result,id,date:'2024-07-15',region:'OCE',
+  tournamentId:'ch5s3-solo-victory-cup',event:'Solo Victory Cup Battle Royale',seasonId:'S30',
+  round:'Event 5 · Round 2 / 賞金決勝',kind:'賞金決勝',rank:35,points:100,
+  kills:7,vrs:1,matches:3,prize:100,verified:true,
+  source:'https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=OCE&round=S30_SoloVictoryCashCup_Event5Round2_OCE'};
+ const history={version:1,entries:[{id,decision:'published',recordId:id,policy:'official-final-vr-award',
+  source:row.source,rule:'https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules'}]};
+ assert.deepEqual(audit([row],history,{confirmedAliases:{}}),[]);
+ assert.ok(audit([{...row,prize:0}],history,{confirmedAliases:{}}).length>0);
+});
