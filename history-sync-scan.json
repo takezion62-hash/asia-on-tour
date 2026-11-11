@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-11-11T22:39:24.168Z",
+  "checkedAt": "2026-11-11T23:14:11.697Z",
   "windows": {
     "epicgames_S42_SoloVictoryCup_NAW/S42_SoloVictoryCup_Event3Round1_NAW": {
       "nextPage": 9,
@@ -59039,15 +59039,15 @@
       "totalPages": 1
     },
     "epicgames_S43_SoloReloadTestCup_NAC/S43_SoloReloadTestCup_NAC": {
-      "nextPage": 6,
+      "nextPage": 8,
       "complete": false,
       "proposals": [],
-      "pages": 6,
-      "lastAttemptAt": "2026-11-11T22:38:36.682Z",
+      "pages": 8,
+      "lastAttemptAt": "2026-11-11T23:13:42.934Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 600,
-      "lastSuccessAt": "2026-11-11T22:38:37.709Z",
+      "lastSeenRank": 800,
+      "lastSuccessAt": "2026-11-11T23:13:43.977Z",
       "totalPages": 100
     },
     "epicgames_S30_SquadsVictoryCashCup_ME/S30_SquadsVictoryCashCup_Event1Round1_ME": {
@@ -60618,7 +60618,7 @@
       "totalPages": 100
     },
     "epicgames_S31_SoloVictoryCashCup_NAC/S31_SoloVictoryCashCup_Event3Round1_NAC": {
-      "nextPage": 66,
+      "nextPage": 68,
       "complete": false,
       "proposals": [
         {
@@ -60990,12 +60990,12 @@
           "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。"
         }
       ],
-      "pages": 66,
-      "lastAttemptAt": "2026-11-11T22:38:59.543Z",
+      "pages": 68,
+      "lastAttemptAt": "2026-11-11T23:13:51.499Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 6600,
-      "lastSuccessAt": "2026-11-11T22:39:00.689Z",
+      "lastSeenRank": 6800,
+      "lastSuccessAt": "2026-11-11T23:13:52.443Z",
       "totalPages": 100
     },
     "epicgames_S42_SoloVictoryCup_EU/S42_SoloVictoryCup_Event1Round1_EU": {
@@ -63297,8 +63297,8 @@
       "totalPages": 100
     },
     "epicgames_S42_PurgeCup_OCE/S42_PurgeCup_OCE": {
-      "nextPage": 2,
-      "complete": false,
+      "nextPage": 3,
+      "complete": true,
       "proposals": [
         {
           "id": "auto-s42-cd980b09cda6",
@@ -63501,12 +63501,12 @@
           "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。"
         }
       ],
-      "pages": 2,
-      "lastAttemptAt": "2026-11-09T22:28:24.445Z",
+      "pages": 3,
+      "lastAttemptAt": "2026-11-11T23:13:20.994Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 200,
-      "lastSuccessAt": "2026-11-09T22:28:25.741Z",
+      "lastSeenRank": 300,
+      "lastSuccessAt": "2026-11-11T23:13:22.003Z",
       "totalPages": 100
     },
     "epicgames_S40_FNCSDivisionalCup_Division1_BR/S40_FNCSDivisionalCup_Division1_Week1Day2_BR": {
@@ -71752,15 +71752,15 @@
       "totalPages": 64
     },
     "epicgames_S31_SoloVictoryCashCup_EU/S31_SoloVictoryCashCup_Event7Round2_EU": {
-      "nextPage": 70,
+      "nextPage": 72,
       "complete": false,
       "proposals": [],
-      "pages": 70,
-      "lastAttemptAt": "2026-11-11T22:38:53.270Z",
+      "pages": 72,
+      "lastAttemptAt": "2026-11-11T23:13:47.366Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 7000,
-      "lastSuccessAt": "2026-11-11T22:38:55.713Z",
+      "lastSeenRank": 7200,
+      "lastSuccessAt": "2026-11-11T23:13:48.775Z",
       "totalPages": 100
     },
     "epicgames_S36_VictoryDuosCup_NAC/S36_VictoryDuosCup_Event3Round2_NAC": {
@@ -73482,7 +73482,7 @@
       "totalPages": 18
     },
     "epicgames_S30_SoloVictoryCashCup_NAC/S30_SoloVictoryCashCup_Event2Round1_NAC": {
-      "nextPage": 55,
+      "nextPage": 57,
       "complete": false,
       "proposals": [
         {
@@ -73509,12 +73509,12 @@
           "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。"
         }
       ],
-      "pages": 55,
-      "lastAttemptAt": "2026-11-11T22:39:04.709Z",
+      "pages": 57,
+      "lastAttemptAt": "2026-11-11T23:13:57.478Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 5500,
-      "lastSuccessAt": "2026-11-11T22:39:05.654Z",
+      "lastSeenRank": 5700,
+      "lastSuccessAt": "2026-11-11T23:13:58.396Z",
       "totalPages": 100
     },
     "epicgames_S36_VictoryDuosCup_NAW/S36_VictoryDuosCup_Event3Round2_NAW": {
@@ -73993,7 +73993,7 @@
       "totalPages": 1
     },
     "epicgames_S31_SoloVictoryCashCup_NAC/S31_SoloVictoryCashCup_Event7Round2_NAC": {
-      "nextPage": 68,
+      "nextPage": 70,
       "complete": false,
       "proposals": [
         {
@@ -74388,16 +74388,16 @@
           "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。現金賞金の確定情報なし。"
         }
       ],
-      "pages": 68,
-      "lastAttemptAt": "2026-11-11T22:38:38.547Z",
+      "pages": 70,
+      "lastAttemptAt": "2026-11-11T23:13:45.221Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 6800,
-      "lastSuccessAt": "2026-11-11T22:38:39.426Z",
+      "lastSeenRank": 7000,
+      "lastSuccessAt": "2026-11-11T23:13:46.442Z",
       "totalPages": 92
     },
     "epicgames_S31_SoloVictoryCashCup_EU/S31_SoloVictoryCashCup_Event8Round2_EU": {
-      "nextPage": 68,
+      "nextPage": 70,
       "complete": false,
       "proposals": [
         {
@@ -74424,12 +74424,12 @@
           "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。現金賞金の確定情報なし。"
         }
       ],
-      "pages": 68,
-      "lastAttemptAt": "2026-11-11T22:38:57.016Z",
+      "pages": 70,
+      "lastAttemptAt": "2026-11-11T23:13:49.661Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 6800,
-      "lastSuccessAt": "2026-11-11T22:38:58.157Z",
+      "lastSeenRank": 7000,
+      "lastSuccessAt": "2026-11-11T23:13:50.533Z",
       "totalPages": 100
     },
     "epicgames_S36_VictoryDuosCup_ME/S36_VictoryDuosCup_Event1Round1_ME": {
@@ -91635,8 +91635,8 @@
       "totalPages": 100
     },
     "epicgames_S30_SoloVictoryCashCup_NAC/S30_SoloVictoryCashCup_Event6Round2_NAC": {
-      "nextPage": 36,
-      "complete": false,
+      "nextPage": 48,
+      "complete": true,
       "proposals": [
         {
           "id": "auto-s30-3d36b24e1c4a",
@@ -92350,14 +92350,198 @@
           "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event6Round2_NAC",
           "verified": true,
           "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。現金賞金の確定情報なし。"
+        },
+        {
+          "id": "auto-s30-84c32294b190",
+          "date": "2024-07-23",
+          "region": "NAC",
+          "player": "AMA-Crow",
+          "playerRaw": "GR MrSavage",
+          "event": "Solo Victory Cup Battle Royale",
+          "round": "Event 6 · Round 2 / 賞金決勝",
+          "rank": 3749,
+          "points": 0,
+          "kills": 1,
+          "vrs": 0,
+          "prize": null,
+          "kind": "賞金決勝",
+          "matches": 3,
+          "seasonId": "S30",
+          "chapter": 5,
+          "season": 3,
+          "tournamentId": "ch5s3-solo-victory-cup",
+          "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event6Round2_NAC",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。現金賞金の確定情報なし。"
+        },
+        {
+          "id": "auto-s30-02dabea6a10e",
+          "date": "2024-07-23",
+          "region": "NAC",
+          "player": "ぱな",
+          "playerRaw": "force klixey281",
+          "event": "Solo Victory Cup Battle Royale",
+          "round": "Event 6 · Round 2 / 賞金決勝",
+          "rank": 3775,
+          "points": 0,
+          "kills": 0,
+          "vrs": 0,
+          "prize": null,
+          "kind": "賞金決勝",
+          "matches": 3,
+          "seasonId": "S30",
+          "chapter": 5,
+          "season": 3,
+          "tournamentId": "ch5s3-solo-victory-cup",
+          "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event6Round2_NAC",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。現金賞金の確定情報なし。"
+        },
+        {
+          "id": "auto-s30-e0d3e390f286",
+          "date": "2024-07-23",
+          "region": "NAC",
+          "player": "p1ng",
+          "playerRaw": "boltzZzero0oǃ",
+          "event": "Solo Victory Cup Battle Royale",
+          "round": "Event 6 · Round 2 / 賞金決勝",
+          "rank": 3802,
+          "points": 0,
+          "kills": 0,
+          "vrs": 0,
+          "prize": null,
+          "kind": "賞金決勝",
+          "matches": 3,
+          "seasonId": "S30",
+          "chapter": 5,
+          "season": 3,
+          "tournamentId": "ch5s3-solo-victory-cup",
+          "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event6Round2_NAC",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。現金賞金の確定情報なし。"
+        },
+        {
+          "id": "auto-s30-8ca022dae275",
+          "date": "2024-07-23",
+          "region": "NAC",
+          "player": "yorufnzǃ",
+          "playerRaw": "yorufnzǃ",
+          "event": "Solo Victory Cup Battle Royale",
+          "round": "Event 6 · Round 2 / 賞金決勝",
+          "rank": 3830,
+          "points": 0,
+          "kills": 0,
+          "vrs": 0,
+          "prize": null,
+          "kind": "賞金決勝",
+          "matches": 3,
+          "seasonId": "S30",
+          "chapter": 5,
+          "season": 3,
+          "tournamentId": "ch5s3-solo-victory-cup",
+          "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event6Round2_NAC",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。現金賞金の確定情報なし。"
+        },
+        {
+          "id": "auto-s30-1a38cbef568f",
+          "date": "2024-07-23",
+          "region": "NAC",
+          "player": "ちゃる",
+          "playerRaw": "charufn",
+          "event": "Solo Victory Cup Battle Royale",
+          "round": "Event 6 · Round 2 / 賞金決勝",
+          "rank": 3884,
+          "points": 0,
+          "kills": 0,
+          "vrs": 0,
+          "prize": null,
+          "kind": "賞金決勝",
+          "matches": 3,
+          "seasonId": "S30",
+          "chapter": 5,
+          "season": 3,
+          "tournamentId": "ch5s3-solo-victory-cup",
+          "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event6Round2_NAC",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。現金賞金の確定情報なし。"
+        },
+        {
+          "id": "auto-s30-5938c023f972",
+          "date": "2024-07-23",
+          "region": "NAC",
+          "player": "Zagouの弟",
+          "playerRaw": "NŁT zagouの弟",
+          "event": "Solo Victory Cup Battle Royale",
+          "round": "Event 6 · Round 2 / 賞金決勝",
+          "rank": 4053,
+          "points": 0,
+          "kills": 0,
+          "vrs": 0,
+          "prize": null,
+          "kind": "賞金決勝",
+          "matches": 3,
+          "seasonId": "S30",
+          "chapter": 5,
+          "season": 3,
+          "tournamentId": "ch5s3-solo-victory-cup",
+          "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event6Round2_NAC",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。現金賞金の確定情報なし。"
+        },
+        {
+          "id": "auto-s30-6bdef150361f",
+          "date": "2024-07-23",
+          "region": "NAC",
+          "player": "alivenoah",
+          "playerRaw": "alivenoah",
+          "event": "Solo Victory Cup Battle Royale",
+          "round": "Event 6 · Round 2 / 賞金決勝",
+          "rank": 4077,
+          "points": 0,
+          "kills": 0,
+          "vrs": 0,
+          "prize": null,
+          "kind": "賞金決勝",
+          "matches": 3,
+          "seasonId": "S30",
+          "chapter": 5,
+          "season": 3,
+          "tournamentId": "ch5s3-solo-victory-cup",
+          "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event6Round2_NAC",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。現金賞金の確定情報なし。"
+        },
+        {
+          "id": "auto-s30-612d031efc95",
+          "date": "2024-07-23",
+          "region": "NAC",
+          "player": "おろないと",
+          "playerRaw": "Herbおろろろろろろろろろろろ",
+          "event": "Solo Victory Cup Battle Royale",
+          "round": "Event 6 · Round 2 / 賞金決勝",
+          "rank": 4200,
+          "points": 0,
+          "kills": 0,
+          "vrs": 0,
+          "prize": null,
+          "kind": "賞金決勝",
+          "matches": 3,
+          "seasonId": "S30",
+          "chapter": 5,
+          "season": 3,
+          "tournamentId": "ch5s3-solo-victory-cup",
+          "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event6Round2_NAC",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。現金賞金の確定情報なし。"
         }
       ],
-      "pages": 36,
-      "lastAttemptAt": "2026-11-11T22:38:51.508Z",
+      "pages": 48,
+      "lastAttemptAt": "2026-11-11T23:12:19.254Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 3600,
-      "lastSuccessAt": "2026-11-11T22:38:52.390Z",
+      "lastSeenRank": 4800,
+      "lastSuccessAt": "2026-11-11T23:12:20.137Z",
       "totalPages": 48
     },
     "epicgames_S42_Persona5Cup_BR/S42_Persona5Cup_BR": {
@@ -93782,7 +93966,7 @@
       "totalPages": 100
     },
     "epicgames_S30_SoloVictoryCashCup_NAC/S30_SoloVictoryCashCup_Event7Round2_NAC": {
-      "nextPage": 10,
+      "nextPage": 12,
       "complete": false,
       "proposals": [
         {
@@ -93878,12 +94062,12 @@
           "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。現金賞金の確定情報なし。"
         }
       ],
-      "pages": 10,
-      "lastAttemptAt": "2026-11-11T22:39:06.481Z",
+      "pages": 12,
+      "lastAttemptAt": "2026-11-11T23:13:59.329Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 1000,
-      "lastSuccessAt": "2026-11-11T22:39:07.341Z",
+      "lastSeenRank": 1200,
+      "lastSuccessAt": "2026-11-11T23:14:00.445Z",
       "totalPages": 48
     },
     "epicgames_S30_SquadsVictoryCashCup_ME/S30_SquadsVictoryCashCup_Event4Round1_ME": {
@@ -102337,7 +102521,7 @@
       "totalPages": 10
     },
     "epicgames_S43_ReloadZBDuosCashCup_ME/S43_ReloadZBDuosCashCup_Event1Round1_ME": {
-      "nextPage": 66,
+      "nextPage": 68,
       "complete": false,
       "proposals": [
         {
@@ -102372,14 +102556,47 @@
             "80a59392e44e413fb9288478fe7bf2bb",
             "8bf9579c86cd4ba4a5a8739edda8d014"
           ]
+        },
+        {
+          "id": "auto-s43-f8a8d9057b99",
+          "date": "2026-11-08",
+          "region": "ME",
+          "player": "みんと / Crs くるただにょりーǃǃ",
+          "playerRaw": "ptt みんと我の屁は温泉卵臭 / Crs るた",
+          "event": "Reload ZB Duos Cash Cup Zero Build",
+          "round": "Event 1 · Round 1 / 参加確認",
+          "rank": 6615,
+          "points": 134,
+          "kills": 21,
+          "vrs": 0,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 6,
+          "seasonId": "S43",
+          "chapter": 7,
+          "season": 5,
+          "tournamentId": "ch7s5-reload-zero-build-duos-cash-cup",
+          "source": "https://www.fortnite.com/competitive/events/S43_ReloadZBDuosCashCup/?region=ME&round=S43_ReloadZBDuosCashCup_Event1Round1_ME",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "みんと",
+            "Crs くるただにょりーǃǃ"
+          ],
+          "teamAccountIds": [
+            "44bf39ef281e40b7bd2a81d2f019f39c",
+            "56db84f033784ee9b303da349abd3d6d"
+          ]
         }
       ],
-      "pages": 66,
-      "lastAttemptAt": "2026-11-11T22:37:32.321Z",
+      "pages": 68,
+      "lastAttemptAt": "2026-11-11T23:13:31.242Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 6600,
-      "lastSuccessAt": "2026-11-11T22:37:34.699Z",
+      "lastSeenRank": 6800,
+      "lastSuccessAt": "2026-11-11T23:13:32.288Z",
       "totalPages": 100
     },
     "epicgames_S42_PurgeCup_NAC/S42_PurgeCup_NAC": {
@@ -107133,7 +107350,7 @@
       "totalPages": 100
     },
     "epicgames_S31_SoloVictoryCashCup_NAC/S31_SoloVictoryCashCup_Event1Round2_NAC": {
-      "nextPage": 10,
+      "nextPage": 12,
       "complete": false,
       "proposals": [
         {
@@ -107252,12 +107469,12 @@
           "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。現金賞金の確定情報なし。"
         }
       ],
-      "pages": 10,
-      "lastAttemptAt": "2026-11-11T22:39:18.929Z",
+      "pages": 12,
+      "lastAttemptAt": "2026-11-11T23:14:02.814Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 1000,
-      "lastSuccessAt": "2026-11-11T22:39:20.723Z",
+      "lastSeenRank": 1200,
+      "lastSuccessAt": "2026-11-11T23:14:04.693Z",
       "totalPages": 92
     },
     "epicgames_S31_SoloVictoryCashCup_ME/S31_SoloVictoryCashCup_Event2Round1_ME": {
@@ -107481,7 +107698,7 @@
       "totalPages": 100
     },
     "epicgames_S31_SoloVictoryCashCup_ME/S31_SoloVictoryCashCup_Event2Round2_ME": {
-      "nextPage": 10,
+      "nextPage": 13,
       "complete": false,
       "proposals": [
         {
@@ -108127,14 +108344,198 @@
           "source": "https://www.fortnite.com/competitive/events/S31_SoloVictoryCashCup/?region=ME&round=S31_SoloVictoryCashCup_Event2Round2_ME",
           "verified": true,
           "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。現金賞金の確定情報なし。"
+        },
+        {
+          "id": "auto-s31-33c877f1a871",
+          "date": "2024-09-10",
+          "region": "ME",
+          "player": "Fraymy",
+          "playerRaw": "xRB AmiaNC.",
+          "event": "Solo Victory Cup Battle Royale",
+          "round": "Event 2 · Round 2 / 賞金決勝",
+          "rank": 1011,
+          "points": 0,
+          "kills": 1,
+          "vrs": 0,
+          "prize": null,
+          "kind": "賞金決勝",
+          "matches": 3,
+          "seasonId": "S31",
+          "chapter": 5,
+          "season": 4,
+          "tournamentId": "ch5s4-solo-victory-cup",
+          "source": "https://www.fortnite.com/competitive/events/S31_SoloVictoryCashCup/?region=ME&round=S31_SoloVictoryCashCup_Event2Round2_ME",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。現金賞金の確定情報なし。"
+        },
+        {
+          "id": "auto-s31-f84639d202eb",
+          "date": "2024-09-10",
+          "region": "ME",
+          "player": "Choco",
+          "playerRaw": "nagisa furukawaǃ",
+          "event": "Solo Victory Cup Battle Royale",
+          "round": "Event 2 · Round 2 / 賞金決勝",
+          "rank": 1016,
+          "points": 0,
+          "kills": 1,
+          "vrs": 0,
+          "prize": null,
+          "kind": "賞金決勝",
+          "matches": 3,
+          "seasonId": "S31",
+          "chapter": 5,
+          "season": 4,
+          "tournamentId": "ch5s4-solo-victory-cup",
+          "source": "https://www.fortnite.com/competitive/events/S31_SoloVictoryCashCup/?region=ME&round=S31_SoloVictoryCashCup_Event2Round2_ME",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。現金賞金の確定情報なし。"
+        },
+        {
+          "id": "auto-s31-b6381924ae4f",
+          "date": "2024-09-10",
+          "region": "ME",
+          "player": "zerua",
+          "playerRaw": "vamos 朝倉未来",
+          "event": "Solo Victory Cup Battle Royale",
+          "round": "Event 2 · Round 2 / 賞金決勝",
+          "rank": 1020,
+          "points": 0,
+          "kills": 1,
+          "vrs": 0,
+          "prize": null,
+          "kind": "賞金決勝",
+          "matches": 3,
+          "seasonId": "S31",
+          "chapter": 5,
+          "season": 4,
+          "tournamentId": "ch5s4-solo-victory-cup",
+          "source": "https://www.fortnite.com/competitive/events/S31_SoloVictoryCashCup/?region=ME&round=S31_SoloVictoryCashCup_Event2Round2_ME",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。現金賞金の確定情報なし。"
+        },
+        {
+          "id": "auto-s31-6e1173d60ef4",
+          "date": "2024-09-10",
+          "region": "ME",
+          "player": "112345abcde",
+          "playerRaw": "112345abcde",
+          "event": "Solo Victory Cup Battle Royale",
+          "round": "Event 2 · Round 2 / 賞金決勝",
+          "rank": 1022,
+          "points": 0,
+          "kills": 1,
+          "vrs": 0,
+          "prize": null,
+          "kind": "賞金決勝",
+          "matches": 3,
+          "seasonId": "S31",
+          "chapter": 5,
+          "season": 4,
+          "tournamentId": "ch5s4-solo-victory-cup",
+          "source": "https://www.fortnite.com/competitive/events/S31_SoloVictoryCashCup/?region=ME&round=S31_SoloVictoryCashCup_Event2Round2_ME",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。現金賞金の確定情報なし。"
+        },
+        {
+          "id": "auto-s31-f62a6c5f5ca7",
+          "date": "2024-09-10",
+          "region": "ME",
+          "player": "渡良瀬佳乃",
+          "playerRaw": "渡良瀬佳乃",
+          "event": "Solo Victory Cup Battle Royale",
+          "round": "Event 2 · Round 2 / 賞金決勝",
+          "rank": 1059,
+          "points": 0,
+          "kills": 1,
+          "vrs": 0,
+          "prize": null,
+          "kind": "賞金決勝",
+          "matches": 3,
+          "seasonId": "S31",
+          "chapter": 5,
+          "season": 4,
+          "tournamentId": "ch5s4-solo-victory-cup",
+          "source": "https://www.fortnite.com/competitive/events/S31_SoloVictoryCashCup/?region=ME&round=S31_SoloVictoryCashCup_Event2Round2_ME",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。現金賞金の確定情報なし。"
+        },
+        {
+          "id": "auto-s31-34b269117b34",
+          "date": "2024-09-10",
+          "region": "ME",
+          "player": "Aim",
+          "playerRaw": "awetatewateweawa",
+          "event": "Solo Victory Cup Battle Royale",
+          "round": "Event 2 · Round 2 / 賞金決勝",
+          "rank": 1099,
+          "points": 0,
+          "kills": 1,
+          "vrs": 0,
+          "prize": null,
+          "kind": "賞金決勝",
+          "matches": 3,
+          "seasonId": "S31",
+          "chapter": 5,
+          "season": 4,
+          "tournamentId": "ch5s4-solo-victory-cup",
+          "source": "https://www.fortnite.com/competitive/events/S31_SoloVictoryCashCup/?region=ME&round=S31_SoloVictoryCashCup_Event2Round2_ME",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。現金賞金の確定情報なし。"
+        },
+        {
+          "id": "auto-s31-1c02fc4929c4",
+          "date": "2024-09-10",
+          "region": "ME",
+          "player": "逆襲のクイヤ.",
+          "playerRaw": "con Si Dē R Ae.",
+          "event": "Solo Victory Cup Battle Royale",
+          "round": "Event 2 · Round 2 / 賞金決勝",
+          "rank": 1125,
+          "points": 0,
+          "kills": 1,
+          "vrs": 0,
+          "prize": null,
+          "kind": "賞金決勝",
+          "matches": 3,
+          "seasonId": "S31",
+          "chapter": 5,
+          "season": 4,
+          "tournamentId": "ch5s4-solo-victory-cup",
+          "source": "https://www.fortnite.com/competitive/events/S31_SoloVictoryCashCup/?region=ME&round=S31_SoloVictoryCashCup_Event2Round2_ME",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。現金賞金の確定情報なし。"
+        },
+        {
+          "id": "auto-s31-117de12d7466",
+          "date": "2024-09-10",
+          "region": "ME",
+          "player": "Dartri",
+          "playerRaw": "FPG Dartrinok",
+          "event": "Solo Victory Cup Battle Royale",
+          "round": "Event 2 · Round 2 / 賞金決勝",
+          "rank": 1204,
+          "points": 0,
+          "kills": 1,
+          "vrs": 0,
+          "prize": null,
+          "kind": "賞金決勝",
+          "matches": 3,
+          "seasonId": "S31",
+          "chapter": 5,
+          "season": 4,
+          "tournamentId": "ch5s4-solo-victory-cup",
+          "source": "https://www.fortnite.com/competitive/events/S31_SoloVictoryCashCup/?region=ME&round=S31_SoloVictoryCashCup_Event2Round2_ME",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。現金賞金の確定情報なし。"
         }
       ],
-      "pages": 10,
-      "lastAttemptAt": "2026-11-11T22:39:02.877Z",
+      "pages": 13,
+      "lastAttemptAt": "2026-11-11T23:13:24.014Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 1000,
-      "lastSuccessAt": "2026-11-11T22:39:03.727Z",
+      "lastSeenRank": 1300,
+      "lastSuccessAt": "2026-11-11T23:13:24.875Z",
       "totalPages": 18
     },
     "epicgames_S42_MegaManCup_OCE/S42_MegaManCup_OCE": {
@@ -108240,7 +108641,7 @@
       "totalPages": 100
     },
     "epicgames_S31_SoloVictoryCashCup_NAC/S31_SoloVictoryCashCup_Event2Round2_NAC": {
-      "nextPage": 2,
+      "nextPage": 4,
       "complete": false,
       "proposals": [
         {
@@ -108265,14 +108666,60 @@
           "source": "https://www.fortnite.com/competitive/events/S31_SoloVictoryCashCup/?region=NAC&round=S31_SoloVictoryCashCup_Event2Round2_NAC",
           "verified": true,
           "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。現金賞金の確定情報なし。"
+        },
+        {
+          "id": "auto-s31-bd8e9fe91b7b",
+          "date": "2024-09-10",
+          "region": "NAC",
+          "player": "田所V2",
+          "playerRaw": "넘귀여워서미안 By Kya",
+          "event": "Solo Victory Cup Battle Royale",
+          "round": "Event 2 · Round 2 / 賞金決勝",
+          "rank": 215,
+          "points": 100,
+          "kills": 3,
+          "vrs": 1,
+          "prize": null,
+          "kind": "賞金決勝",
+          "matches": 2,
+          "seasonId": "S31",
+          "chapter": 5,
+          "season": 4,
+          "tournamentId": "ch5s4-solo-victory-cup",
+          "source": "https://www.fortnite.com/competitive/events/S31_SoloVictoryCashCup/?region=NAC&round=S31_SoloVictoryCashCup_Event2Round2_NAC",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。現金賞金の確定情報なし。"
+        },
+        {
+          "id": "auto-s31-45d562e513d2",
+          "date": "2024-09-10",
+          "region": "NAC",
+          "player": "モバイル勢のまかろん",
+          "playerRaw": "BRN 916GonLuck",
+          "event": "Solo Victory Cup Battle Royale",
+          "round": "Event 2 · Round 2 / 賞金決勝",
+          "rank": 257,
+          "points": 100,
+          "kills": 1,
+          "vrs": 1,
+          "prize": null,
+          "kind": "賞金決勝",
+          "matches": 3,
+          "seasonId": "S31",
+          "chapter": 5,
+          "season": 4,
+          "tournamentId": "ch5s4-solo-victory-cup",
+          "source": "https://www.fortnite.com/competitive/events/S31_SoloVictoryCashCup/?region=NAC&round=S31_SoloVictoryCashCup_Event2Round2_NAC",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。現金賞金の確定情報なし。"
         }
       ],
-      "pages": 2,
-      "lastAttemptAt": "2026-11-11T13:58:26.796Z",
+      "pages": 4,
+      "lastAttemptAt": "2026-11-11T23:14:10.711Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 200,
-      "lastSuccessAt": "2026-11-11T13:58:27.932Z",
+      "lastSeenRank": 400,
+      "lastSuccessAt": "2026-11-11T23:14:11.681Z",
       "totalPages": 92
     },
     "epicgames_S31_SoloVictoryCashCup_ME/S31_SoloVictoryCashCup_Event3Round1_ME": {
@@ -109063,7 +109510,7 @@
       "totalPages": 100
     },
     "epicgames_S31_SoloVictoryCashCup_ME/S31_SoloVictoryCashCup_Event3Round2_ME": {
-      "nextPage": 2,
+      "nextPage": 4,
       "complete": false,
       "proposals": [
         {
@@ -109182,12 +109629,12 @@
           "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。現金賞金の確定情報なし。"
         }
       ],
-      "pages": 2,
-      "lastAttemptAt": "2026-11-11T14:02:45.592Z",
+      "pages": 4,
+      "lastAttemptAt": "2026-11-11T23:14:05.597Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 200,
-      "lastSuccessAt": "2026-11-11T14:02:46.548Z",
+      "lastSeenRank": 400,
+      "lastSuccessAt": "2026-11-11T23:14:07.822Z",
       "totalPages": 18
     },
     "epicgames_S42_ConsoleVCC_SolosZB_BR/S42_ConsoleVCC_SolosZB_Event6Round2_BR": {
@@ -109832,15 +110279,15 @@
       "totalPages": 10
     },
     "epicgames_S42_ConsoleVCC_SolosZB_EU/S42_ConsoleVCC_SolosZB_Event8Round2_EU": {
-      "nextPage": 4,
+      "nextPage": 16,
       "complete": false,
       "proposals": [],
-      "pages": 4,
-      "lastAttemptAt": "2026-11-11T22:39:08.176Z",
+      "pages": 16,
+      "lastAttemptAt": "2026-11-11T23:12:52.011Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 400,
-      "lastSuccessAt": "2026-11-11T22:39:09.031Z",
+      "lastSeenRank": 1600,
+      "lastSuccessAt": "2026-11-11T23:12:53.082Z",
       "totalPages": 20
     },
     "epicgames_S32_TriosCashCup_ME/S32_TriosCashCup_Event6Round2_ME": {
@@ -109880,8 +110327,8 @@
       "totalPages": 100
     },
     "epicgames_S42_PurgeCup_NAW/S42_PurgeCup_NAW": {
-      "nextPage": 12,
-      "complete": false,
+      "nextPage": 13,
+      "complete": true,
       "proposals": [
         {
           "id": "auto-s42-1fabb53a6b93",
@@ -111434,12 +111881,12 @@
           "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。"
         }
       ],
-      "pages": 12,
-      "lastAttemptAt": "2026-11-11T22:38:08.588Z",
+      "pages": 13,
+      "lastAttemptAt": "2026-11-11T23:12:03.455Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 1200,
-      "lastSuccessAt": "2026-11-11T22:38:09.512Z",
+      "lastSeenRank": 1300,
+      "lastSuccessAt": "2026-11-11T23:12:05.158Z",
       "totalPages": 100
     },
     "epicgames_S41_PSCupDaysOfPlay_BR/S41_PSCupDaysOfPlay_Qualifier_BR": {
@@ -111467,28 +111914,480 @@
       "totalPages": 72
     },
     "epicgames_S42_ConsoleVCC_SolosZB_BR/S42_ConsoleVCC_SolosZB_Event8Round2_BR": {
-      "nextPage": 2,
+      "nextPage": 4,
       "complete": false,
       "proposals": [],
-      "pages": 2,
-      "lastAttemptAt": "2026-11-11T22:39:21.666Z",
+      "pages": 4,
+      "lastAttemptAt": "2026-11-11T23:13:27.624Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 200,
-      "lastSuccessAt": "2026-11-11T22:39:22.455Z",
+      "lastSeenRank": 400,
+      "lastSuccessAt": "2026-11-11T23:13:28.618Z",
       "totalPages": 10
     },
     "epicgames_S42_ConsoleVCC_SolosZB_NAC/S42_ConsoleVCC_SolosZB_Event8Round2_NAC": {
-      "nextPage": 2,
+      "nextPage": 4,
       "complete": false,
       "proposals": [],
+      "pages": 4,
+      "lastAttemptAt": "2026-11-11T23:14:08.687Z",
+      "emptyAttempts": 0,
+      "rankingOrderValid": true,
+      "lastSeenRank": 400,
+      "lastSuccessAt": "2026-11-11T23:14:09.549Z",
+      "totalPages": 19
+    },
+    "epicgames_S36_VictoryDuosCup_NAC/S36_VictoryDuosCup_Event2Round1_NAC": {
+      "nextPage": 12,
+      "complete": false,
+      "proposals": [
+        {
+          "id": "auto-s36-458db9ad36b0",
+          "date": "2025-06-21",
+          "region": "NAC",
+          "player": "Saku / れっどうぃんぐ",
+          "playerRaw": "A_α さくʕᵔᴥᵔʔ / ptt れっどにゃんぐ",
+          "event": "Duos Console Victory Cash Cup",
+          "round": "Event 2 · Round 1 / 予選",
+          "rank": 196,
+          "points": 249,
+          "kills": 39,
+          "vrs": 1,
+          "prize": 0,
+          "kind": "予選",
+          "matches": 5,
+          "seasonId": "S36",
+          "chapter": 6,
+          "season": 3,
+          "tournamentId": "ch6s3-console-duos-victory",
+          "source": "https://www.fortnite.com/competitive/events/S36_VictoryDuosCup/?region=NAC&round=S36_VictoryDuosCup_Event2Round1_NAC",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。",
+          "players": [
+            "Saku",
+            "れっどうぃんぐ"
+          ]
+        },
+        {
+          "id": "auto-s36-d5596782bb5f",
+          "date": "2025-06-21",
+          "region": "NAC",
+          "player": "p1ng / しこぴよフォートナイト",
+          "playerRaw": "boltzZzero0oǃ / しこぴよフォートナイト",
+          "event": "Duos Console Victory Cash Cup",
+          "round": "Event 2 · Round 1 / 予選",
+          "rank": 801,
+          "points": 217,
+          "kills": 27,
+          "vrs": 1,
+          "prize": 0,
+          "kind": "予選",
+          "matches": 7,
+          "seasonId": "S36",
+          "chapter": 6,
+          "season": 3,
+          "tournamentId": "ch6s3-console-duos-victory",
+          "source": "https://www.fortnite.com/competitive/events/S36_VictoryDuosCup/?region=NAC&round=S36_VictoryDuosCup_Event2Round1_NAC",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。",
+          "players": [
+            "p1ng",
+            "しこぴよフォートナイト"
+          ]
+        },
+        {
+          "id": "auto-s36-b3b6c39d1b02",
+          "date": "2025-06-21",
+          "region": "NAC",
+          "player": "Aim / Asuka",
+          "playerRaw": "awetatewateweawa / VOLARE Asuka",
+          "event": "Duos Console Victory Cash Cup",
+          "round": "Event 2 · Round 1 / 予選",
+          "rank": 1003,
+          "points": 210,
+          "kills": 27,
+          "vrs": 0,
+          "prize": 0,
+          "kind": "予選",
+          "matches": 6,
+          "seasonId": "S36",
+          "chapter": 6,
+          "season": 3,
+          "tournamentId": "ch6s3-console-duos-victory",
+          "source": "https://www.fortnite.com/competitive/events/S36_VictoryDuosCup/?region=NAC&round=S36_VictoryDuosCup_Event2Round1_NAC",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。",
+          "players": [
+            "Aim",
+            "Asuka"
+          ]
+        }
+      ],
+      "pages": 12,
+      "lastAttemptAt": "2026-11-11T23:12:33.375Z",
+      "emptyAttempts": 0,
+      "rankingOrderValid": true,
+      "lastSeenRank": 1200,
+      "lastSuccessAt": "2026-11-11T23:12:34.649Z",
+      "totalPages": 100
+    },
+    "epicgames_S32_TriosCashCup_ME/S32_TriosCashCup_Event1Round1_ME": {
+      "nextPage": 12,
+      "complete": false,
+      "proposals": [
+        {
+          "id": "auto-s32-bf277cdefc6a",
+          "date": "2024-11-07",
+          "region": "ME",
+          "player": "Stain / ぷろぼこ / ZAZI",
+          "playerRaw": "E36 StainY281 / ぷろぼこTakethetop / LYNX ZAZI 咲",
+          "event": "Trios Cash Cup",
+          "round": "Event 1 · Round 1 / 参加確認",
+          "rank": 20,
+          "points": 349,
+          "kills": 50,
+          "vrs": 1,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 7,
+          "seasonId": "S32",
+          "chapter": 5,
+          "season": 5,
+          "tournamentId": "ch5s5-trios-cash",
+          "source": "https://www.fortnite.com/competitive/events/S32_TriosCashCup/?region=ME&round=S32_TriosCashCup_Event1Round1_ME",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "Stain",
+            "ぷろぼこ",
+            "ZAZI"
+          ],
+          "teamAccountIds": [
+            "268fddd59748458ea78b23ad3bae9ac5",
+            "7992a13b46a24f30a29b4b6fa67c99e1",
+            "f08aad629bf040d6beb78c7aea8e0a1f"
+          ]
+        },
+        {
+          "id": "auto-s32-7bb40131eea7",
+          "date": "2024-11-07",
+          "region": "ME",
+          "player": "Choco / こいる / Jaemon",
+          "playerRaw": "nagisa furukawaǃ / こいるやけん / Jaemon.K",
+          "event": "Trios Cash Cup",
+          "round": "Event 1 · Round 1 / 参加確認",
+          "rank": 27,
+          "points": 344,
+          "kills": 33,
+          "vrs": 1,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 9,
+          "seasonId": "S32",
+          "chapter": 5,
+          "season": 5,
+          "tournamentId": "ch5s5-trios-cash",
+          "source": "https://www.fortnite.com/competitive/events/S32_TriosCashCup/?region=ME&round=S32_TriosCashCup_Event1Round1_ME",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "Choco",
+            "こいる",
+            "Jaemon"
+          ],
+          "teamAccountIds": [
+            "2b094ce46d094e268301c560f9b1d8c3",
+            "50ca67e787cd415ab26692cac0e326c8",
+            "dcc5f4df088a4bcab4058b9b0fb2f97c"
+          ]
+        },
+        {
+          "id": "auto-s32-ac59758a7fae",
+          "date": "2024-11-07",
+          "region": "ME",
+          "player": "Meip / そみー / Prurun",
+          "playerRaw": "KIT StL Meip / UC.そみー / Prurun",
+          "event": "Trios Cash Cup",
+          "round": "Event 1 · Round 1 / 参加確認",
+          "rank": 202,
+          "points": 287,
+          "kills": 39,
+          "vrs": 2,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 7,
+          "seasonId": "S32",
+          "chapter": 5,
+          "season": 5,
+          "tournamentId": "ch5s5-trios-cash",
+          "source": "https://www.fortnite.com/competitive/events/S32_TriosCashCup/?region=ME&round=S32_TriosCashCup_Event1Round1_ME",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "Meip",
+            "そみー",
+            "Prurun"
+          ],
+          "teamAccountIds": [
+            "4a17f5393908438895a8abd1b64e9af5",
+            "61fe8404740046688b1fb5c984ddb602",
+            "e1dd57b9f3df41c792019b37c3e1c744"
+          ]
+        },
+        {
+          "id": "auto-s32-b6f6e1e57a7d",
+          "date": "2024-11-07",
+          "region": "ME",
+          "player": "R1ze / angelwing / Zagouの弟",
+          "playerRaw": "Helix R1ze 777 / angelwingfn / NŁT zagouの弟",
+          "event": "Trios Cash Cup",
+          "round": "Event 1 · Round 1 / 参加確認",
+          "rank": 901,
+          "points": 225,
+          "kills": 25,
+          "vrs": 1,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 9,
+          "seasonId": "S32",
+          "chapter": 5,
+          "season": 5,
+          "tournamentId": "ch5s5-trios-cash",
+          "source": "https://www.fortnite.com/competitive/events/S32_TriosCashCup/?region=ME&round=S32_TriosCashCup_Event1Round1_ME",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "R1ze",
+            "angelwing",
+            "Zagouの弟"
+          ],
+          "teamAccountIds": [
+            "2fda3f8f2c2749f5b57daee2c7c8b3f0",
+            "5e05deb016cf4f12b5c75beca443de48",
+            "aa5a5f035ef24a8c90b003dcf9385b8e"
+          ]
+        }
+      ],
+      "pages": 12,
+      "lastAttemptAt": "2026-11-11T23:13:06.068Z",
+      "emptyAttempts": 0,
+      "rankingOrderValid": true,
+      "lastSeenRank": 1200,
+      "lastSuccessAt": "2026-11-11T23:13:07.212Z",
+      "totalPages": 58
+    },
+    "epicgames_S33_SoloCashCup_OCE/S33_SoloCashCup_Event4Round1_OCE": {
+      "nextPage": 11,
+      "complete": false,
+      "proposals": [],
+      "pages": 11,
+      "lastAttemptAt": "2026-11-11T23:13:19.653Z",
+      "emptyAttempts": 0,
+      "rankingOrderValid": true,
+      "lastSeenRank": 1100,
+      "lastSuccessAt": "2026-11-11T23:13:20.994Z",
+      "totalPages": 100
+    },
+    "epicgames_S40_FNCSDivisionalCup_Division1_ME/S40_FNCSDivisionalCup_Division1_Week5Day1_ME": {
+      "nextPage": 2,
+      "complete": false,
+      "proposals": [
+        {
+          "id": "auto-s40-0e4fead63942",
+          "date": "2026-05-19",
+          "region": "ME",
+          "player": "ちからV2 / Mofu",
+          "playerRaw": "NEXUS ちからV2ǃ / RC MOFU 16ǃ",
+          "event": "FNCS Division 1",
+          "round": "単一開催枠 / 参加確認",
+          "rank": 40,
+          "points": 363,
+          "kills": 32,
+          "vrs": 1,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 10,
+          "seasonId": "S40",
+          "chapter": 7,
+          "season": 2,
+          "tournamentId": "ch7s2-fncs-division-1",
+          "source": "https://www.fortnite.com/competitive/events/S40_FNCSDivisionalCup_Division1/?region=ME&round=S40_FNCSDivisionalCup_Division1_Week5Day1_ME",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "ちからV2",
+            "Mofu"
+          ]
+        }
+      ],
       "pages": 2,
-      "lastAttemptAt": "2026-11-11T22:39:23.283Z",
+      "lastAttemptAt": "2026-11-11T23:13:33.763Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
       "lastSeenRank": 200,
-      "lastSuccessAt": "2026-11-11T22:39:24.149Z",
-      "totalPages": 19
+      "lastSuccessAt": "2026-11-11T23:13:35.050Z",
+      "totalPages": 4
+    },
+    "epicgames_S36_PlayStationCup_NAC/S36_PlayStationCup_Qualifier_NAC": {
+      "nextPage": 2,
+      "complete": false,
+      "proposals": [
+        {
+          "id": "auto-s36-e29f0c54540c",
+          "date": "2025-07-25",
+          "region": "NAC",
+          "player": "p1ng",
+          "playerRaw": "boltzZzero0oǃ",
+          "event": "PlayStation Cup",
+          "round": "Qualifier / 参加確認",
+          "rank": 46,
+          "points": 334,
+          "kills": 26,
+          "vrs": 1,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 10,
+          "seasonId": "S36",
+          "chapter": 6,
+          "season": 3,
+          "tournamentId": "ch6s3-playstation-cup",
+          "source": "https://www.fortnite.com/competitive/events/S36_PlayStationCup/?region=NAC&round=S36_PlayStationCup_Qualifier_NAC",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。"
+        }
+      ],
+      "pages": 2,
+      "lastAttemptAt": "2026-11-11T23:13:36.283Z",
+      "emptyAttempts": 0,
+      "rankingOrderValid": true,
+      "lastSeenRank": 200,
+      "lastSuccessAt": "2026-11-11T23:13:37.248Z",
+      "totalPages": 100
+    },
+    "epicgames_S42_PSNickEh30_ME/S42_PSNickEh30_Qualifier_ME": {
+      "nextPage": 2,
+      "complete": false,
+      "proposals": [
+        {
+          "id": "auto-s42-2071006b887f",
+          "date": "2026-10-01",
+          "region": "ME",
+          "player": "RGN p1ng",
+          "playerRaw": "RGN p1ng",
+          "event": "PlayStation NickEh30 Icon Cup",
+          "round": "Qualifier / 参加確認",
+          "rank": 127,
+          "points": 317,
+          "kills": 29,
+          "vrs": 2,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 9,
+          "seasonId": "S42",
+          "chapter": 7,
+          "season": 4,
+          "tournamentId": "ch7s4-playstation-nickeh30-icon-cup",
+          "source": "https://www.fortnite.com/competitive/events/S42_PSNickEh30/?region=ME&round=S42_PSNickEh30_Qualifier_ME",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。"
+        },
+        {
+          "id": "auto-s42-c1af0cbfcfd5",
+          "date": "2026-10-01",
+          "region": "ME",
+          "player": "チン族きーさんジャイロ",
+          "playerRaw": "チン族きーさんジャイロ",
+          "event": "PlayStation NickEh30 Icon Cup",
+          "round": "Qualifier / 参加確認",
+          "rank": 165,
+          "points": 310,
+          "kills": 20,
+          "vrs": 0,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 11,
+          "seasonId": "S42",
+          "chapter": 7,
+          "season": 4,
+          "tournamentId": "ch7s4-playstation-nickeh30-icon-cup",
+          "source": "https://www.fortnite.com/competitive/events/S42_PSNickEh30/?region=ME&round=S42_PSNickEh30_Qualifier_ME",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。"
+        },
+        {
+          "id": "auto-s42-cc4ca34284bd",
+          "date": "2026-10-01",
+          "region": "ME",
+          "player": "Ares.Mea",
+          "playerRaw": "Ares.Mea",
+          "event": "PlayStation NickEh30 Icon Cup",
+          "round": "Qualifier / 参加確認",
+          "rank": 179,
+          "points": 304,
+          "kills": 8,
+          "vrs": 0,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 9,
+          "seasonId": "S42",
+          "chapter": 7,
+          "season": 4,
+          "tournamentId": "ch7s4-playstation-nickeh30-icon-cup",
+          "source": "https://www.fortnite.com/competitive/events/S42_PSNickEh30/?region=ME&round=S42_PSNickEh30_Qualifier_ME",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。"
+        },
+        {
+          "id": "auto-s42-6467cb1f56f8",
+          "date": "2026-10-01",
+          "region": "ME",
+          "player": "すたーだよ",
+          "playerRaw": "すたーだよ",
+          "event": "PlayStation NickEh30 Icon Cup",
+          "round": "Qualifier / 参加確認",
+          "rank": 196,
+          "points": 301,
+          "kills": 12,
+          "vrs": 0,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 11,
+          "seasonId": "S42",
+          "chapter": 7,
+          "season": 4,
+          "tournamentId": "ch7s4-playstation-nickeh30-icon-cup",
+          "source": "https://www.fortnite.com/competitive/events/S42_PSNickEh30/?region=ME&round=S42_PSNickEh30_Qualifier_ME",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。"
+        }
+      ],
+      "pages": 2,
+      "lastAttemptAt": "2026-11-11T23:13:40.734Z",
+      "emptyAttempts": 0,
+      "rankingOrderValid": true,
+      "lastSeenRank": 200,
+      "lastSuccessAt": "2026-11-11T23:13:41.824Z",
+      "totalPages": 100
     }
   }
 }
