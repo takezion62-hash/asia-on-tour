@@ -96,11 +96,16 @@ for(const row of [...db.review.proposals]){
 }
 if(added.length){
  const id='source-verified-next-candidates-20261111';
- if(db.updates.entries.some(x=>x.id===id))throw Error('conflicting update log ID');
- db.updates.entries.unshift({id,date:'2026-11-11',type:'records',
-  title:'2024/2026年の新規確認候補'+added.length+'戦績を通常一覧へ追加',
-  description:'公式順位表の本人Epic ID、予選突破・決勝VR賞金・衣装対象の根拠を確認。未確認の実績や報酬を加算しない。',
-  recordIds:added.map(x=>x.id)});
+ const previous=db.updates.entries.find(x=>x.id===id);
+ if(previous){
+  previous.recordIds=[...new Set([...(previous.recordIds||[]),...added.map(x=>x.id)])];
+  previous.description='本人Epic ID・順位と公式賞金ルールで'+previous.recordIds.length+'件の過去成績を確認し通常結果に掲載。';
+ }else{
+  db.updates.entries.unshift({id,date:'2026-11-11',type:'records',
+   title:'2024/2026年の新規確認候補'+added.length+'戦績を通常一覧へ追加',
+   description:'公式順位表の本人Epic ID、予選突破・決勝VR賞金・衣装対象の根拠を確認。未確認の実績や報酬を加算しない。',
+   recordIds:added.map(x=>x.id)});
+ }
  db.review.manualReviewedAt=now;db.reviewed.reviewedAt=now;db.ledger.reviewedAt=now;
  db.status.found=db.review.proposals.length;
  db.status.manualReviewCandidates=db.review.proposals.length;
