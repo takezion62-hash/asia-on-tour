@@ -1,0 +1,83 @@
+name: Temporary reconcile 2024 ME PR with latest main
+on:
+  pull_request:
+    branches:
+      - main
+permissions:
+  contents: write
+concurrency:
+  group: one-time-2024-me-reconcile
+  cancel-in-progress: false
+jobs:
+  reconcile:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout proposal branch with full history
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: verified-me-2024-finals-20261111
+          fetch-depth: 0
+          persist-credentials: true
+      - name: Set up Node
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '24'
+          cache: npm
+      - name: Fetch latest main, preserve both branches' unique JSON rows
+        run: |
+          set -euo pipefail
+          for x in results players tournaments updates; do cp "$x.json" "/tmp/ours-$x.json"; done
+          git fetch origin main
+          for x in results players tournaments updates; do git show "origin/main:$x.json" > "/tmp/main-$x.json"; done
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git merge --no-commit --no-ff origin/main || true
+          node <<'NODE'
+          const fs = require('node:fs');
+          const read = (side, name) => JSON.parse(fs.readFileSync('/tmp/' + side + '-' + name + '.json', 'utf8'));
+          const write = (name, data) => fs.writeFileSync(name + '.json', JSON.stringify(data, null, 2) + '\n');
+          const mr = read('main', 'results'), or = read('ours', 'results');
+          const manual = or.filter(r => /^manual-s(?:30|32)-me-(?:trios|squads)-final-2024/.test(r.id || ''));
+          if (manual.length !== 7) throw Error('Expected exact seven verified new result IDs');
+          for (const row of manual) {
+            const clash = mr.find(x => x.id === row.id || (x.date === row.date && x.region === row.region && x.tournamentId === row.tournamentId && /Round 2|決勝/.test(x.round || '') && Array.isArray(x.players) && x.players.length === row.players.length && row.players.every(n => x.players.includes(n))));
+            if (clash) {
+              if (clash.rank !== row.rank || clash.points !== row.points || clash.kills !== row.kills || clash.vrs !== row.vrs || clash.prize !== row.prize) throw Error('Conflict in existing row: ' + row.id);
+            } else mr.push(row);
+          }
+          write('results', mr);
+          const mp = read('main', 'players'), op = read('ours', 'players');
+          const known = new Set(mp.candidates.map(x => x.name));
+          for (const p of op.candidates) if (!known.has(p.name) && manual.some(r => r.players.includes(p.name))) { mp.candidates.push(p); known.add(p.name); }
+          write('players', mp);
+          const mt = read('main', 'tournaments'), ot = read('ours', 'tournaments');
+          const target = mt.catalog.find(x => x.id === 'ch5s5-trios-cash'), verified = ot.catalog.find(x => x.id === 'ch5s5-trios-cash');
+          if (!target || !verified) throw Error('S32 tournament missing');
+          if (target.mode === 'unknown') { target.mode = verified.mode; target.unknownFields = (target.unknownFields || []).filter(x => x !== 'mode'); }
+          for (const e of verified.evidence || []) if (!(target.evidence || []).some(x => x.url === e.url && x.text === e.text)) target.evidence.push(e);
+          write('tournaments', mt);
+          const mu = read('main', 'updates'), ou = read('ours', 'updates');
+          const entry = ou.entries.find(x => x.id === 'manual-verified-2024-me-finals-20261111');
+          if (!entry || entry.recordIds.length !== 7) throw Error('Expected verified history entry');
+          if (!mu.entries.some(x => x.id === entry.id)) mu.entries.unshift(entry);
+          write('updates', mu);
+          console.log('Merged new manual rows with latest main; total records:', mr.length);
+          NODE
+          git rm .github/workflows/temp-sync-main-me-2024.yml
+          git add -A
+          if [ -n "$(git diff --name-only --diff-filter=U)" ]; then
+            echo "::error::Unresolved conflicts outside the four safely reconciled JSON files"
+            git diff --name-only --diff-filter=U
+            exit 1
+          fi
+      - name: Verify data and unit tests before pushing updated proposal
+        run: |
+          npm ci --ignore-scripts
+          npm run validate
+          npm run test:unit
+      - name: Push clean conflict-free merge commit
+        run: |
+          set -euo pipefail
+          git commit -m "merge: reconcile latest automatic updates with verified 2024 ME results"
+          git push origin HEAD:verified-me-2024-finals-20261111
