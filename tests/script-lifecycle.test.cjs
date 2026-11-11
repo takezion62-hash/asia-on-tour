@@ -498,3 +498,69 @@ test('第8段階：完了済み4ランナーを廃止しても182件・本人確
    'Unreal verified player payout lost: '+id);
  }
 });
+
+test('第9段階：適用済みの参加・コスメ処理を退役しても13件の公開成績を保護',()=>{
+ const retired=[
+  ['apply-reviewed-participation.cjs','manual-reviewed-participation-20261106',8],
+  ['publish-verified-remaining-pending.cjs','pending-review-batch-3-20261111',5]
+ ];
+ const activeFiles=[
+  ...scanFiles(path.join(root,'.github','workflows'),/\.ya?ml$/),
+  ...scanFiles(scriptDir,/\.cjs$/),
+  ...scanFiles(path.join(root,'tests'),/\.[cm]?js$/).filter(p=>!ignored.has(path.basename(p))),
+  path.join(root,'package.json')
+ ];
+ const updates=JSON.parse(fs.readFileSync(path.join(root,'updates.json'),'utf8')).entries;
+ const records=JSON.parse(fs.readFileSync(path.join(root,'results.json'),'utf8'));
+ const byId=new Map(records.map(r=>[r.id,r]));
+ const historyPending=JSON.parse(fs.readFileSync(path.join(root,'history-sync-review.json'),'utf8')).proposals;
+ const autoPending=JSON.parse(fs.readFileSync(path.join(root,'auto-sync-review.json'),'utf8')).proposals;
+ const approvals=JSON.parse(fs.readFileSync(path.join(root,'approval-history.json'),'utf8')).entries;
+ const sourcePlan=JSON.parse(fs.readFileSync(path.join(root,'data/manual-approvals/20261106-participation.json'),'utf8'));
+ const pending=new Set([...historyPending,...autoPending].map(r=>r.id));
+ assert.equal(records.length,byId.size,'published IDs must remain unique');
+ const seen=[];
+ for(const [script,marker,count] of retired){
+  assert.equal(fs.existsSync(path.join(scriptDir,script)),false,'retired one-time publisher reappeared: '+script);
+  assert.deepEqual(activeFiles.filter(p=>fs.readFileSync(p,'utf8').includes(script)).map(rel),[],
+   'live scripts/workflows still invoke retired publisher: '+script);
+  const logs=updates.filter(entry=>entry.id===marker);
+  assert.equal(logs.length,1,'applied publication marker must remain unique: '+marker);
+  const ids=logs[0].recordIds;
+  assert.equal(ids?.length,count,'published review batch size changed: '+marker);
+  assert.equal(new Set(ids).size,count,'duplicate ID in published review batch: '+marker);
+  for(const id of ids){
+   seen.push(id);
+   const row=byId.get(id);
+   assert.ok(row,'previously published achievement was removed: '+id);
+   assert.equal(row.verified,true,'original Epic verification must remain: '+id);
+   assert.ok(row.source,'original official result link was removed: '+id);
+   assert.ok(row.prize===null||(Number.isFinite(row.prize)&&row.prize>=0),
+    'cash cannot become invalid: '+id);
+   assert.equal(pending.has(id),false,'published result returned to pending review: '+id);
+  }
+ }
+ assert.equal(seen.length,13);
+ assert.equal(new Set(seen).size,13,'reviewed result overlap was reintroduced');
+ assert.equal(sourcePlan.decision,'manually-verified-attendance');
+ assert.equal(sourcePlan.recordIds.length,8);
+ const attended=updates.find(x=>x.id==='manual-reviewed-participation-20261106').recordIds;
+ assert.deepEqual([...attended].sort(),[...sourcePlan.recordIds].sort(),
+  'manually reviewed 8 Epic participants must match original manifest');
+ for(const id of attended){
+  const row=byId.get(id);
+  assert.equal(row.prize,0,'officially verified non-paying attendance must remain $0: '+id);
+  assert.equal(row.kind,'参加確認','attendance must not become an award or qualifier: '+id);
+ }
+ const cosmetic=updates.find(x=>x.id==='pending-review-batch-3-20261111').recordIds;
+ for(const id of cosmetic){
+  assert.ok(approvals.some(a=>a.id===id&&a.decision==='published'),
+   'directly reviewed cosmetic result must retain publication approval: '+id);
+ }
+ // These two are intentionally preserved pending a dedicated replacement review:
+ // one is a non-mutating reviewer aid, the other is a manual feed entrypoint.
+ for(const name of ['audit-review-round2-20261109.cjs','auto-sync.cjs']){
+  assert.equal(fs.existsSync(path.join(scriptDir,name)),true,
+   'manual diagnostic or legacy sync requires explicit migration review: '+name);
+ }
+});
