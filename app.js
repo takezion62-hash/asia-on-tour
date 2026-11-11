@@ -1761,6 +1761,7 @@
       renderProfileGrowth(info.name);
       renderProfileStyle(info.name);
       window.AOTParticipation?.renderProfile(info.name);
+      window.AsiaProfileLayout?.mount(info.name,seasonScope());
       return true;
     }
 
@@ -1874,7 +1875,7 @@
       target.innerHTML=report.ranked.length?report.ranked.slice(0,50).map(player=>`<li class="aot-pr-item" data-top="${player.rank<=3}"><span class="aot-pr-rank">#${format(player.rank)}</span><div><a class="aot-pr-name" href="${escape(profileHref(player.name))}" data-open-profile="${escape(player.name)}">${escape(player.name)}</a><span class="aot-pr-facts">参加 ${format(player.appearances)}枠 · 順位 ${prNumber(player.placement)} · キル ${prNumber(player.eliminations)} · 出場記録から ${prNumber(player.participationScore||0)} · 予選突破 ${prNumber(player.qualificationBonus)} · 賞金ボーナス ${prNumber(player.bonus)}</span></div><span class="aot-pr-score">${prNumber(player.score)}<small>AOT PR</small></span></li>`).join(''):'<li class="aot-pr-item">この条件で加点できる確認済み戦績はありません</li>';
     }
     function renderProfileAotPR(name){
-      const anchor=$('#profile-content .profile-stats');
+      const anchor=$('#profile-content [data-profile-panel="season"] .profile-snapshot')||$('#profile-content .profile-stats');
       if(!anchor)return;
       const report=prReport(),player=report.byName.get(name);
       if(!player){anchor.insertAdjacentHTML('afterend',`<section class="aot-pr-profile" aria-label="AOT PRの個人内訳"><h2>AOT PR · 未集計</h2><p class="aot-pr-method">${escape(seasonScope())}には、加点できる確認済み戦績がありません。大会分類などが未確認の記録は加点を保留しています。</p></section>`);return;}
