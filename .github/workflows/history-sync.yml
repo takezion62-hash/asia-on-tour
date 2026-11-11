@@ -12,6 +12,7 @@ on:
       - "scripts/publish-verified-s35-console-duos-20261108.cjs"
       - "scripts/publish-verified-qualifier-batch.cjs"
       - "scripts/publish-verified-nov11-pending.cjs"
+      - "scripts/publish-verified-fncs-performance-days.cjs"
       - "scripts/publish-verified-finals-batch.cjs"
       - "tests/publish-verified-finals-batch.test.cjs"
       - "tests/publish-verified-qualifier-batch.test.cjs"
