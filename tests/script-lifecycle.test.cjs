@@ -427,3 +427,74 @@ test('第7段階：4本の一時掲載処理を整理しても169件の公開成
  assert.equal(checked.length,169,'four original batches must total 169 published results');
  assert.equal(new Set(checked).size,169,'published batch overlap reintroduced');
 });
+
+test('第8段階：完了済み4ランナーを廃止しても182件・本人確認・賞金・重複記録を保護',()=>{
+ const batches=[["publish-reviewed-batch-late-20261109.cjs","assistant-verified-batch-20261109-late",127],["verify-unreal-nac-pending-20261109.cjs","assistant-verified-nac-unreal-five-20261109",5],["manual-review-current-25-run.cjs","reviewed-25-results-20261106",23],["manual-review-history-27-run.cjs","history-reviewed-27-20261106",27]];
+ const live=[
+  ...scanFiles(path.join(root,'.github','workflows'),/\.ya?ml$/),
+  ...scanFiles(scriptDir,/\.cjs$/),
+  ...scanFiles(path.join(root,'tests'),/\.[cm]?js$/).filter(p=>!ignored.has(path.basename(p))),
+  path.join(root,'package.json')
+ ];
+ const updates=JSON.parse(fs.readFileSync(path.join(root,'updates.json'),'utf8')).entries;
+ const results=JSON.parse(fs.readFileSync(path.join(root,'results.json'),'utf8'));
+ const reviewed=JSON.parse(fs.readFileSync(path.join(root,'history-sync-reviewed.json'),'utf8')).entries;
+ const approvals=JSON.parse(fs.readFileSync(path.join(root,'approval-history.json'),'utf8')).entries;
+ const history=JSON.parse(fs.readFileSync(path.join(root,'history-sync-review.json'),'utf8')).proposals;
+ const recent=JSON.parse(fs.readFileSync(path.join(root,'auto-sync-review.json'),'utf8')).proposals;
+ const audit25=JSON.parse(fs.readFileSync(path.join(root,'data/manual-approvals/20261106-current-25-audit.json'),'utf8'));
+ const audit27=JSON.parse(fs.readFileSync(path.join(root,'data/manual-approvals/20261106-history-27-audit.json'),'utf8'));
+ const byId=new Map(results.map(x=>[x.id,x]));
+ const permitted=new Set([...reviewed,...approvals].filter(x=>x.decision==='published').map(x=>x.id));
+ const pending=new Set([...history,...recent].map(x=>x.id));
+ assert.equal(byId.size,results.length,'published results must remain unique');
+ const verifiedIds=[];
+ for(const [file,marker,count] of batches){
+  assert.equal(fs.existsSync(path.join(scriptDir,file)),false,'completed one-shot runner unexpectedly restored: '+file);
+  assert.deepEqual(live.filter(p=>fs.readFileSync(p,'utf8').includes(file)).map(rel),[],
+   'active entrypoint references retired runner: '+file);
+  const batch=updates.filter(x=>x.id===marker);
+  assert.equal(batch.length,1,'completed publication marker must remain unique: '+marker);
+  const ids=batch[0].recordIds;
+  assert.equal(ids?.length,count,'previously published batch total changed: '+marker);
+  assert.equal(new Set(ids).size,count,'duplicate ID inside historic batch: '+marker);
+  for(const id of ids){
+   verifiedIds.push(id);
+   const row=byId.get(id);
+   assert.ok(row,'previously published result missing: '+id);
+   assert.ok(row.source,'original score source removed: '+id);
+   assert.ok(row.prize===null||(Number.isFinite(row.prize)&&row.prize>=0),
+    'cash must be nonnegative or explicitly unconfirmed: '+id);
+   assert.ok(permitted.has(id),'original approval record disappeared: '+id);
+   assert.equal(pending.has(id),false,'published candidate returned to review: '+id);
+  }
+ }
+ assert.equal(verifiedIds.length,182);
+ assert.equal(new Set(verifiedIds).size,182,'overlapping review results were published twice');
+ assert.equal(audit25.newResults,23);
+ assert.equal(audit25.resolvedDuplicates.length,2);
+ for(const duplicate of audit25.resolvedDuplicates){
+  const record=reviewed.find(x=>x.id===duplicate.id);
+  assert.equal(record?.decision,'already-published','resolved duplicate decision lost: '+duplicate.id);
+  assert.equal(record.existingId,duplicate.existingId);
+  assert.ok(byId.has(duplicate.existingId),'original published result disappeared: '+duplicate.existingId);
+  assert.equal(byId.has(duplicate.id),false,'duplicate candidate was republished: '+duplicate.id);
+ }
+ assert.equal(audit27.processed,27);
+ assert.deepEqual(audit27.groups,{finals:12,qualifiers:6,attendance:8,cash:1});
+ const cashId='auto-s31-727a67581880';
+ const cash=byId.get(cashId);
+ assert.ok(cash,'ME Duos Cash Cup award was lost');
+ assert.equal(cash.prize,200,'verified ME team cash must remain $200');
+ assert.equal(cash.prizePerPlayer,100,'verified ME player cash must remain $100 each');
+ assert.equal(cash.rank,17,'original verified ME duo rank must be preserved');
+ const unreal=updates.find(x=>x.id==='assistant-verified-nac-unreal-five-20261109').recordIds;
+ assert.equal(unreal.length,5);
+ for(const id of unreal){
+  const row=byId.get(id);
+  assert.ok(row&&row.verified===true,'NAC Unreal 100-page verified result missing: '+id);
+  assert.ok(Number.isFinite(row.prize)&&row.prize>=0,'Unreal verified team payout lost: '+id);
+  assert.ok(Number.isFinite(row.prizePerPlayer)&&row.prizePerPlayer>=0,
+   'Unreal verified player payout lost: '+id);
+ }
+});
