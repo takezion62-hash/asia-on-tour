@@ -19,6 +19,7 @@ on:
       - "scripts/publish-verified-nov11-round3.cjs"
       - "scripts/publish-verified-review-round5.cjs"
       - "scripts/publish-verified-legacy-finals-and-duplicates.cjs"
+      - "scripts/publish-verified-nov12-pending.cjs"
       - "scripts/reconcile-exact-epic-rank-three.cjs"
       - ".github/workflows/history-sync.yml"
       - "scripts/publish-verified-finals-batch.cjs"
@@ -60,6 +61,36 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '24'
+      - name: Publish verified 2024 finals and Lady Liberty pending rows to newest main
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          for attempt in 1 2 3 4 5; do
+            git fetch origin main
+            git reset --hard origin/main
+            node scripts/publish-verified-nov12-pending.cjs --dry-run
+            node scripts/publish-verified-nov12-pending.cjs
+            npm run validate
+            node --test tests/manual-approval.test.cjs tests/approval-history.test.cjs tests/cosmetic-rank-rules.test.cjs tests/tournament-rules.test.cjs
+            git add results.json history-sync-review.json history-sync-reviewed.json approval-history.json history-sync-status.json updates.json participation-index.json participation-status.json participation/2026-10.json participation/2024-09.json
+            if git diff --cached --quiet; then
+              echo "NOV12_VERIFIED no further pending rows"
+              break
+            fi
+            git commit -m "data: publish 7 official results and archive 41 verified attendance rows"
+            if git push origin HEAD:main; then
+              echo "NOV12_VERIFIED published to main"
+              break
+            fi
+            if [ "$attempt" -ge 5 ]; then
+              echo "::error::NOV12_VERIFIED failed safe main update; original source intact"
+              exit 1
+            fi
+            sleep $((attempt * 3))
+          done
+
       - name: Publish exact saved 2024-2026 pending result reviews without uncertain cash
         shell: bash
         run: |
