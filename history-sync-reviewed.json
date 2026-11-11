@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-11T04:46:32.788Z",
+  "reviewedAt": "2026-11-11T04:47:12.640Z",
   "description": "Resolved historic review candidates: published, duplicate or participation",
   "entries": [
     {
@@ -16167,6 +16167,15 @@
       "source": "https://www.fortnite.com/competitive/events/S40_PlayStationCupClix/?region=NAC&round=S40_PlayStationCupClix_Final_NAC",
       "reviewedAt": "2026-11-11T04:46:32.788Z",
       "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/playstation-clix-cup-official-rules"
+    },
+    {
+      "id": "auto-s30-22d9fe86199e",
+      "decision": "published",
+      "recordId": "auto-s30-22d9fe86199e",
+      "reviewedAt": "2026-11-11T04:47:12.640Z",
+      "policy": "verified-rule-and-original-epic-score",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event9Round1_NAC",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules"
     }
   ]
 }
