@@ -6,6 +6,10 @@ const growth=require('../growth.js');
 const achievements=require('../achievements.js');
 const archive=loadData(path.join(__dirname,'..')).data.results;
 const name='Shiroka';
+async function openGrowth(page){
+ await page.locator('[data-profile-tab="analysis"]').click();
+ await page.locator('[data-analysis-fold="growth"] > summary').click();
+}
 const roster=row=>Array.isArray(row.players)&&row.players.length?row.players:[row.player];
 const own=archive.filter(row=>roster(row).includes(name));
 test('成長グラフのスクリプトとスタイルが配信される',async({request})=>{
@@ -19,6 +23,7 @@ test('成長グラフのスクリプトとスタイルが配信される',async(
 test('PC・スマホで月別・シーズン別、累計・期間別、4つの実績を切り替えられる',async({page})=>{
  expect(own.length).toBeGreaterThan(2);
  await page.goto('/?season=all#player='+encodeURIComponent(name));
+ await openGrowth(page);
  const section=page.locator('#profile-growth');
  await expect(section).toBeVisible();
  await expect(section.locator('h2')).toContainText('成長グラフ');
@@ -54,10 +59,12 @@ test('PC・スマホで月別・シーズン別、累計・期間別、4つの�
 });
 test('選択したサイト集計シーズンとは独立して全期間の成長グラフを保持する',async({page})=>{
  await page.goto('/?season=all#player='+encodeURIComponent(name));
+ await openGrowth(page);
  const section=page.locator('#profile-growth');
  await expect(section.locator('.growth-svg')).toBeVisible();
  const count=await section.locator('[data-growth-point]').count();
  await page.locator('#season-select').selectOption('S42');
+ await openGrowth(page);
  await expect(section.locator('[data-growth-point]')).toHaveCount(count);
  await expect(section.locator('.growth-footnote')).toContainText('全期間');
 });
