@@ -31,10 +31,35 @@ const targetDate={
  'ch7s4-inoxtag-icon-cup-battle-royale':'2026-10-26',
  'ch7s4-street-fighter-cup-reload':'2026-10-10'
 };
+const stageSourceOK=(oldRecord,candidate)=>{
+ try{
+  const a=new URL(oldRecord.source),b=new URL(candidate.source);
+  if(a.protocol!=='https:'||b.protocol!=='https:'||b.hostname!=='www.fortnite.com')return false;
+  if(a.hostname==='www.fortnite.com')return a.pathname.includes(candidate.source.split('/competitive/events/')[1]?.split('/')[0]||'NO_EVENT');
+  if(a.hostname==='fortnitetracker.com'||a.hostname==='staging.fortnitetracker.com'){
+   // Existing score from the same season + Epic event and region, not another cup.
+   const id=b.pathname.match(/\/competitive\/events\/([^/]+)\//)?.[1];
+   return !!id&&a.pathname.includes('/events/epicgames_'+id+'_'+candidate.region);
+  }
+  return false;
+ }catch{return false}
+};
 const rankSame=(a,b)=>a.player===b.player&&JSON.stringify(a.players||[])===JSON.stringify(b.players||[])
  &&a.date===b.date&&a.region===b.region&&a.tournamentId===b.tournamentId
  &&a.rank===b.rank&&a.points===b.points&&a.kills===b.kills
- &&a.vrs===b.vrs&&a.matches===b.matches&&a.source===b.source;
+ &&a.vrs===b.vrs&&a.matches===b.matches&&stageSourceOK(a,b);
+// The six rows below are single-event matches but the old manually uploaded
+// page lacked total-matches or used early Tracker provisional rank.  When
+// official Epic snapshots agree on points, kills, VRs, players and region,
+// correct the existing record instead of duplicating it.
+const correctionPairs={
+ 'auto-s42-75aeb411e1ba':['official-shiroka-kingdom-2026',2,2],
+ 'auto-s42-3a35f47f39ca':['official-shiroka-champion-2026',8,8],
+ 'auto-s42-27e30d8b9e01':['s42-me-inoxtag-icon-br-duos-skin-20261026-koiru-rakirye',67,66],
+ 'auto-s42-45c12dff1421':['s42-nac-inoxtag-icon-br-duos-skin-20261026-kuiya-rintaro',55,53],
+ 'auto-s42-c68efb044c25':['s42-me-street-fighter-cup-reload-skin-20261010-57c88294-8c27c560',27,27],
+ 'auto-s42-bd14ca84ec7b':['s42-me-street-fighter-cup-reload-skin-20261010-5ca0ba17-eb14596a',40,40]
+};
 const already=new Set(db.results.map(x=>x.id));
 function getWindow(r){
  const src=new URL(r.source),windowId=src.searchParams.get('round'),eventId=decodeURIComponent(src.pathname.split('/')[3]||'');
@@ -58,14 +83,40 @@ function findScore(r,part){
 for(const origin of ['history','auto']){
  for(const r of [...db.reviews[origin].proposals]){
   const conflicts=db.results.filter(x=>collision(x,r,db.players.confirmedAliases));
-  if(conflicts.length!==1||!rankSame(conflicts[0],r))continue;
+  if(conflicts.length!==1)continue;
+  const original=conflicts[0],pair=correctionPairs[r.id];
+  let corrected=false,reason='identical-scoreboard';
+  if(!rankSame(original,r)){
+   if(!pair||pair[0]!==original.id||pair[1]!==original.rank||pair[2]!==r.rank||
+     original.date!==r.date||original.region!==r.region||
+     original.tournamentId!==r.tournamentId||original.player!==r.player||
+     JSON.stringify(original.players||[])!==JSON.stringify(r.players||[])||
+     original.points!==r.points||original.kills!==r.kills||original.vrs!==r.vrs||
+     (original.matches!==undefined&&original.matches!==null&&original.matches!==r.matches)||
+     !stageSourceOK(original,r)||original.kind!=='スキン大会'||r.verified!==true)
+       continue;
+   try{findScore(r,db.scans[origin]);}catch(err){held.push({id:r.id,reason:'Correction requires saved Epic scored row: '+err.message});continue}
+   if(db.ledger.entries.some(x=>x.recordId===original.id)){held.push({id:r.id,reason:'Original result has protected approval ledger'});continue}
+   const trackerSource=original.source;
+   const priorRank=original.rank;
+   original.rank=r.rank;original.matches=r.matches;
+   original.source=r.source;
+   original.note=String(original.note||'')+' | 2026-11-11 Epic保存済み本人ID・大会枠の成績を再照合。'
+     +'ポイント・キル・VR・選手が一致したため、最新順位'+r.rank+'位'
+     +(priorRank!==r.rank?'（旧Tracker記録'+priorRank+'位）':'')
+     +'と試合数を同期。旧出典: '+trackerSource;
+   corrected=true;reason='corrected-source-and-rank';
+  }
   db.reviews[origin].proposals=db.reviews[origin].proposals.filter(x=>x.id!==r.id);
   if(!reviewedIds.has(r.id)){
    reviewed.entries.push({id:r.id,decision:'already-published',existingId:conflicts[0].id,
-    reviewedAt:now,source:r.source,reason:'Identical saved scoreboard rank, Epic lineup, region, date, round and result statistics'});
+    reviewedAt:now,source:r.source,reason:corrected?
+      'Corrected existing manually sourced record to verified Epic scoreboard without duplicating trophy':
+      'Same Epic account lineup, session, rank, points, kills, victories and matches across official and Tracker records',
+    corrected,canonicalRank:r.rank});
    reviewedIds.add(r.id);
   }
-  reconciled.push({id:r.id,existingId:conflicts[0].id,event:r.event,player:r.player});
+  reconciled.push({id:r.id,existingId:conflicts[0].id,event:r.event,player:r.player,corrected,reason});
  }
 }
 // Second integrate outfit-eligible records and other exact participants into the
@@ -154,7 +205,7 @@ if(reconciled.length||recordsAdded.length){
   db.statuses[origin].reviewOnlyCandidates=db.reviews[origin].proposals.filter(x=>x.reviewOnly===true).length;
   db.statuses[origin].lastReviewedBatchAt=now;
   db.statuses[origin].manuallyResolvedDuplicates=(Number(db.statuses[origin].manuallyResolvedDuplicates)||0)+reconciled.filter(x=>x.id.startsWith('auto-')).length;
-  db.statuses[origin].message='第3弾で通常一覧に'+recordsAdded.length+'件掲載、順位・出典まで完全一致した重複'+reconciled.length+'件を整理。確認待ち'+db.reviews[origin].proposals.length+'件。';
+  db.statuses[origin].message='第3弾で通常一覧に'+recordsAdded.length+'件掲載、順位・本人ID・開催枠・成績が一致した重複'+reconciled.length+'件を整理。確認待ち'+db.reviews[origin].proposals.length+'件。';
  }
  reviewed.reviewedAt=now;
 }
@@ -184,7 +235,7 @@ const by={};for(const x of recordsAdded)by[x.event]=(by[x.event]||0)+1;
 console.log('AOT_PENDING_REVIEW_THIRD '+JSON.stringify({dry,
  added:recordsAdded.length,awards:recordsAdded.filter(x=>x.reward).length,
  by,addedRows:recordsAdded,
- reconciled:reconciled.length,reconciledByEvent:Object.fromEntries(
+ reconciled:reconciled.length,corrected:reconciled.filter(x=>x.corrected).length,reconciledByEvent:Object.fromEntries(
    [...new Set(reconciled.map(x=>x.event))].map(e=>[e,reconciled.filter(x=>x.event===e).length])),
  held:held.length,heldSamples:held.slice(0,30),
  remainingHistory:db.reviews.history.proposals.length,
