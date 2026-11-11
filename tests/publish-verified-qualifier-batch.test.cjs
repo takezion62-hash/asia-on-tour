@@ -41,8 +41,6 @@ test('no repeat publication or duplicate update after first application',()=>{
 test('rejects altered scores, ranks, unsigned source, incomplete page and unknown identity',()=>{
  for(const bad of [
   d=>d.review.proposals[0].rank=289,
-  d=>d.review.proposals[0].rank=2001,
-
   d=>d.scan.windows[Object.keys(d.scan.windows)[0]].rankingOrderValid=false,
   d=>d.scan.windows[Object.keys(d.scan.windows)[0]].lastSeenRank=200,
   d=>d.players.candidates=[],
@@ -50,6 +48,18 @@ test('rejects altered scores, ranks, unsigned source, incomplete page and unknow
  ]){
   const db=fixture();bad(db);assert.throws(()=>reconcile(db),/VERIFIED_QUALIFIER_BATCH/);
  }
+});
+test('out-of-cutoff ranking is safely held for review, not treated as a malformed or winning score',()=>{
+ const db=fixture(),row=db.review.proposals[0],id=row.id;
+ row.rank=2001;
+ const checkpoint=db.scan.windows[Object.keys(db.scan.windows)[0]];
+ checkpoint.proposals[0].rank=2001;
+ const out=reconcile(db);
+ assert.equal(out.report.selected,0);
+ assert.equal(out.report.published.length,0);
+ assert.equal(out.docs.review.proposals.length,1);
+ assert.equal(out.docs.review.proposals[0].id,id);
+ assert.equal(out.docs.results.length,0);
 });
 test('forged source is kept pending and never published',()=>{
  const db=fixture();db.review.proposals[0].source='https://evil.example/forged';

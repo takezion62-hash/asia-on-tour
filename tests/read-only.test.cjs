@@ -1187,7 +1187,7 @@ test('visible facet counts reflect matching records and exclude only their own a
     (!filters.stage || entry.record.kind === filters.stage);
   const assertCounts = filters => {
     for (const axis of tournamentAxes) {
-      const chips = [...app.get(`tournament-facet-${axis}`).innerHTML.matchAll(/<a\\b([^>]*)>([\\s\\S]*?)<\\/a>/g)]
+      const chips = [...app.get(`tournament-facet-${axis}`).innerHTML.matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/g)]
         .filter(([, attributes]) => /data-tournament-tag=/.test(attributes));
       assert.ok(chips.length, axis);
       let sum = 0;
@@ -1196,7 +1196,7 @@ test('visible facet counts reflect matching records and exclude only their own a
         assert.equal(tagAxis, axis);
         const expected = indexed.filter(entry =>
           tagged(entry.meta, axis, value) && filtered(entry, axis, filters)).length;
-        const actual = Number(plain(content.match(/<b[^>]*>([\\s\\S]*?)<\\/b>/)[1]).replaceAll(',', ''));
+        const actual = Number(plain(content.match(/<b[^>]*>([\s\S]*?)<\/b>/)[1]).replaceAll(',', ''));
         assert.equal(actual, expected, `${axis}:${value}`);
         sum += actual;
       }

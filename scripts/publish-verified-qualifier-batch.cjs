@@ -41,8 +41,13 @@ function reconcile(original,now='2026-11-10T22:35:00.000Z'){
  const published=[],duplicates=[],held=[],selected=new Set();
  for(const spec of W){
   const cpKey='epicgames_'+spec.event+'_'+spec.region+'/'+spec.window;
+  // A ranked candidate outside the *verified* advancement cutoff is not
+  // fraudulent data: leave it pending, never classify it as a qualifier.
+  // Still reject malformed/in-range candidates when their source, Epic identity
+  // or saved ranking checkpoint fails a required integrity check.
   const rows=d.review.proposals.filter(p=>p.date===spec.date&&p.seasonId===spec.season&&p.region===spec.region
-    &&p.tournamentId===spec.tournament&&p.source?.includes('round='+spec.window));
+    &&p.tournamentId===spec.tournament&&p.source?.includes('round='+spec.window)
+    &&!(Number.isSafeInteger(p.rank)&&p.rank>spec.cutoff));
   if(!rows.length)continue;
   const cp=d.scan.windows[cpKey],cat=catalogs.get(spec.tournament);
   assert(cp&&Array.isArray(cp.proposals)&&cp.nextPage>0&&cp.rankingOrderValid===true&&Number.isSafeInteger(cp.lastSeenRank),'ranking checkpoint not verified '+cpKey);
