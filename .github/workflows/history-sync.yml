@@ -13,6 +13,7 @@ on:
       - "scripts/publish-verified-qualifier-batch.cjs"
       - "scripts/publish-verified-nov11-pending.cjs"
       - "scripts/publish-verified-fncs-performance-days.cjs"
+      - "scripts/publish-verified-final4-persona.cjs"
       - "scripts/publish-verified-finals-batch.cjs"
       - "tests/publish-verified-finals-batch.test.cjs"
       - "tests/publish-verified-qualifier-batch.test.cjs"
@@ -83,6 +84,8 @@ jobs:
             node scripts/publish-verified-fncs-performance-days.cjs
             node scripts/publish-verified-nov11-pending.cjs --dry-run
             node scripts/publish-verified-nov11-pending.cjs
+            node scripts/publish-verified-final4-persona.cjs --dry-run
+            node scripts/publish-verified-final4-persona.cjs
             npm run validate
             node --test tests/manual-approval.test.cjs tests/approval-history.test.cjs tests/cosmetic-rank-rules.test.cjs tests/tournament-rules.test.cjs
             git add results.json updates.json history-sync-review.json history-sync-reviewed.json history-sync-status.json auto-sync-review.json auto-sync-status.json approval-history.json
