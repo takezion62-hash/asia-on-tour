@@ -2,7 +2,25 @@
 // Rank-based cosmetic classification. In-game rewards only; physical goods and actual
 // item delivery may require residence/eligibility checks and are never asserted here.
 // Both the public Sources section and auto-publishing read one verified registry.
-const cosmeticRules=require('../tournament-rules.json').rules.filter(rule=>rule.series==='skin-cup');
+const supplementalRules=[
+// Source: Epic Games Inoxtag Icon Cup CH7 S4 Attachment C, Battle Royale, 2026-10-24.
+// This event is catalogued under the icon-cup series, so it does not appear in
+// the usual skin-cup source registry even though it awards in-game outfits.
+{ id:'ch7s4-inoxtag-icon-cup-battle-royale',seasonId:'S42',chapter:7,season:4,
+  team:'duo',eventIds:['S42_InoxtagIconCup'],matchCaps:{'スキン大会':11},
+  cosmeticRanks:{OCE:80,ME:80,EU:740,BR:120,NAC:280,NAW:120},
+  source:'https://www.fortnite.com/competitive/rules-guidelines/rules-library/inoxtag-icon-cup-chapter-7-season-4-official-rules',
+  evidence:'Epic Attachment C Battle Royale, not Zero Build or Mobile'},
+// In-game top-50 ME Chun-Li reward is explicitly visible on Tracker's
+// tournament-specific reward schedule; Epic's event page confirms the event.
+// No cash or item-delivery assertions are implied.
+{ id:'ch7s4-street-fighter-cup-reload',seasonId:'S42',chapter:7,season:4,
+  team:'duo',eventIds:['S42_StreetFighterCup'],matchCaps:{'スキン大会':12},
+  cosmeticRanks:{ME:50},
+  source:'https://www.fortnite.com/competitive/events/S42_StreetFighterCup/',
+  evidence:'https://fortnitetracker.com/events/epicgames_S42_StreetFighterCup_ME'}
+];
+const cosmeticRules=[...require('../tournament-rules.json').rules.filter(rule=>rule.series==='skin-cup'),...supplementalRules];
 const RULE_URL=cosmeticRules[0]?.source||'';
 const CUT_OFFS=Object.freeze(Object.fromEntries(cosmeticRules.map(rule=>[rule.id,Object.freeze({
  eventId:rule.eventIds[0],seasonId:rule.seasonId,chapter:rule.chapter,season:rule.season,
