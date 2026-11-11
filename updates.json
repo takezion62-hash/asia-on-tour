@@ -2,6 +2,30 @@
   "version": 1,
   "entries": [
     {
+      "id": "verified-history-nov11-round4-cbb5a6e53d0333",
+      "date": "2026-11-11",
+      "type": "records",
+      "title": "Epic公式順位・決勝VR・過去予選 4件を通常結果に掲載",
+      "description": "2024 NAC Event6 Solo Victory決勝の1VR賞金、2026 NAW Console ZB決勝0VR、Typical Gamer決勝、2025 PlayStation予選、過去予選などをEpic本人ID・公式開催枠・原本順位表で照合。公式条件がない賞金は加算しない。",
+      "recordIds": [
+        "auto-s31-77f86ee2b734",
+        "auto-s31-21af892826d2",
+        "auto-s31-11484436fa67",
+        "auto-s31-c6aaeda7964f"
+      ]
+    },
+    {
+      "id": "verified-s30-s39-review-ccbe65de1ffac4",
+      "date": "2026-11-11",
+      "type": "records",
+      "title": "Epic公式C5S3予選とC7S1決勝の成績2件を掲載",
+      "description": "過去大会の本人Epic ID・公式開催枠・保存済みオリジナル順位表と公式規則を照合。予選突破条件・現金賞金$0・決勝0VRを区別し、通常の遠征結果に反映。",
+      "recordIds": [
+        "auto-s30-4c62fa9423a5",
+        "auto-s30-531f0cc6d27c"
+      ]
+    },
+    {
       "id": "auto-sync-20261111102249",
       "date": "2026-11-11",
       "type": "records",
@@ -970,7 +994,7 @@
       "date": "2026-11-11",
       "type": "records",
       "title": "Solo/Duos Cash Cup・PlayStation Cupの公式順位を掲載",
-      "description": "公式順位表・Epic ID・進出条件を再照合し、通常の遠征結果へ169件掲載。賞金が確認できない結果を推定せず、予選と決勝・現金$0を区別。",
+      "description": "公式順位表・Epic ID・進出条件を再照合し、通常の遠征結果へ171件掲載。賞金が確認できない結果を推定せず、予選と決勝・現金$0を区別。",
       "recordIds": [
         "auto-s31-3e80feaf4fbe",
         "auto-s31-2802d7d51af0",
@@ -1140,7 +1164,9 @@
         "auto-s36-c25d83e09600",
         "auto-s36-cec8e9b85376",
         "auto-s36-fee693812451",
-        "auto-s36-913d79c6a31c"
+        "auto-s36-913d79c6a31c",
+        "auto-s36-e926e21e13f5",
+        "auto-s36-0414b1893652"
       ]
     },
     {
@@ -1191,7 +1217,7 @@
       "date": "2026-11-11",
       "type": "records",
       "title": "Epic公式規則で確認した海外大会成績を追加",
-      "description": "KINGDOM HEARTS、Persona 5 Reload、Champion Focus FNCSの地域別衣装獲得条件とInoxtag参加を照合。スキン対象外は参加記録のみ。現金賞金を推定せず通常の遠征結果へ統合。",
+      "description": "Epic本人ID・保存済み公式順位表・地域別賞品規則を照合した52件を通常の遠征結果へ追加（現金賞金の推定なし）",
       "recordIds": [
         "auto-s42-68bb7e826097",
         "auto-s42-759e3608b57f",
@@ -1243,7 +1269,8 @@
         "auto-s42-749d65248388",
         "auto-s42-ce4d0aa43eef",
         "auto-s42-ea5769055a8e",
-        "auto-s42-6394bd3156fa"
+        "auto-s42-6394bd3156fa",
+        "auto-s42-08d88e14204b"
       ]
     },
     {

@@ -274,35 +274,6 @@
       "reviewReason": "スキン報酬判定の元データではありません"
     },
     {
-      "id": "auto-s42-08d88e14204b",
-      "date": "2026-10-26",
-      "region": "NAW",
-      "player": "れすぶゆりる / chacha",
-      "playerRaw": "12345ででんででんACE / twitter chachafn",
-      "event": "Inoxtag Icon Cup Battle Royale",
-      "round": "単一開催枠 / 参加確認",
-      "rank": 1871,
-      "points": 167,
-      "kills": 32,
-      "vrs": 1,
-      "prize": null,
-      "kind": "参加確認",
-      "matches": 8,
-      "seasonId": "S42",
-      "chapter": 7,
-      "season": 4,
-      "tournamentId": "ch7s4-inoxtag-icon-cup-battle-royale",
-      "source": "https://www.fortnite.com/competitive/events/S42_InoxtagIconCup/?region=NAW&round=S42_InoxtagIconCup_NAW",
-      "verified": true,
-      "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
-      "reviewOnly": true,
-      "reviewReason": "公式の順位条件を登録していない大会",
-      "players": [
-        "れすぶゆりる",
-        "chacha"
-      ]
-    },
-    {
       "id": "auto-s43-6d7877cf1fdf",
       "date": "2026-11-10",
       "region": "ME",
@@ -333,5 +304,5 @@
       "reviewReason": "スキン報酬判定の元データではありません"
     }
   ],
-  "manualReviewedAt": "2026-11-11T08:15:19.054Z"
+  "manualReviewedAt": "2026-11-11T10:39:47.599Z"
 }
