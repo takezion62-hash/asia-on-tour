@@ -19,7 +19,10 @@ const allowed=[
  {date:'2024-07-16',region:'ME',event:'S30_SoloZBVictoryCashCup',window:'S30_SoloZBVictoryCashCup_Event5Round1_ME',tid:'ch5s3-zb-solo-victory',type:'qual',maxRank:2000},
  {date:'2024-07-15',region:'OCE',event:'S30_SoloVictoryCashCup',window:'S30_SoloVictoryCashCup_Event5Round2_OCE',tid:'ch5s3-solo-victory-cup',type:'cash'},
  {date:'2026-03-23',region:'NAC',event:'S40_SoloVictoryCup',window:'S40_SoloVictoryCup_Round2_Day1_NAC',tid:'ch7s2-solo-victory',type:'no-vr'},
- {date:'2026-04-30',region:'NAC',event:'S40_PlayStationCupClix',window:'S40_PlayStationCupClix_Qualifier_NAC',tid:'ch7s2-playstation-clix-cup-br',type:'clix',maxRank:100}
+ {date:'2026-04-30',region:'NAC',event:'S40_PlayStationCupClix',window:'S40_PlayStationCupClix_Qualifier_NAC',tid:'ch7s2-playstation-clix-cup-br',type:'clix',maxRank:100},
+ {date:'2024-07-16',region:'ME',event:'S30_SoloZBVictoryCashCup',window:'S30_SoloZBVictoryCashCup_Event5Round2_ME',tid:'ch5s3-zb-solo-victory',type:'zb-cash'},
+ {date:'2024-07-16',region:'NAC',event:'S30_SoloVictoryCashCup',window:'S30_SoloVictoryCashCup_Event5Round1_NAC',tid:'ch5s3-solo-victory-cup',type:'qual',maxRank:5000},
+ {date:'2025-07-26',region:'OCE',event:'S36_PlayStationCup',window:'S36_PlayStationCup_Final_OCE',tid:'ch6s3-playstation-cup',type:'ps-final-zero'}
 ];
 const known=new Set(db.players.candidates.map(p=>p.name));
 const handled=new Set(db.reviewed.entries.map(x=>x.id));
@@ -66,6 +69,18 @@ for(const row of [...db.review.proposals]){
    kind='賞金決勝';round=row.round;prize=100;policy='official-final-vr-award';
    note='2024 CH5S3 OCE Event5 Round2決勝の'+row.rank+'位、1VRを本人Epic IDと保存済み順位表で確認。'
     +'公式1VR=$100、個人賞金$100。支払完了とは区別。規則: '+RULE30;
+  }else if(spec.type==='zb-cash'){
+   if(row.seasonId!=='S30'||row.kind!=='賞金決勝'||row.prize!==null||
+     row.vrs!==1||row.points!==100||row.matches>3)throw Error('ZB final VR evidence not verified');
+   kind='賞金決勝';round=row.round;prize=100;policy='official-final-vr-award';
+   note='2024 CH5S3 ME ZB Solo Victory Cash Cup Event5 Round2 '+row.rank+'位。'
+    +'本人Epic ID・保存済み順位表で1VRを照合。公式1VR=$100、個人賞金$100。支払完了と区別。規則: '+RULE30;
+  }else if(spec.type==='ps-final-zero'){
+   if(row.seasonId!=='S36'||row.kind!=='参加確認'||row.reviewOnly!==true||
+     row.prize!==null||row.rank<=40||row.matches>6)throw Error('PlayStation cash cutoff or final round not verified');
+   kind='賞金決勝';round='Final / 賞金決勝';rule='https://www.fortnite.com/news/playstation-cup-chapter-6-season-3-official-rules';
+   note='2025 CH6S3 PlayStation Cup OCE決勝 '+row.rank+'位。'
+    +'Epic ID・保存済み順位表と公式賞金表を照合。OCEは40位までが現金対象、64位は現金賞金$0。公式規則: '+rule;
   }else if(spec.type==='no-vr'){
    if(row.seasonId!=='S40'||row.kind!=='賞金決勝'||row.prize!==null||
       row.vrs!==0||row.points!==0||row.matches>3)throw Error('uncertain 2026 S40 final score');

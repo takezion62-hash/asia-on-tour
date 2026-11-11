@@ -51,3 +51,16 @@ test('2024-07-15 OCE Event5 final per-VR cash remains strictly $100 and exact wi
  assert.deepEqual(audit([row],history,{confirmedAliases:{}}),[]);
  assert.ok(audit([{...row,prize:0}],history,{confirmedAliases:{}}).length>0);
 });
+
+test('2024 July ME ZB Solo Victory final pays $100 only for one exact Epic VR',()=>{
+ const id='auto-s30-aabbccddeeff';
+ const r={...result,id,date:'2024-07-16',region:'ME',
+  seasonId:'S30',tournamentId:'ch5s3-zb-solo-victory',event:'ZB Solo Victory Cup',
+  kind:'賞金決勝',round:'Event 5 · Round 2 / 賞金決勝',rank:24,
+  points:100,kills:11,vrs:1,matches:3,verified:true,prize:100,
+  source:'https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=ME&round=S30_SoloZBVictoryCashCup_Event5Round2_ME'};
+ const ledger={version:1,entries:[{id,decision:'published',recordId:id,policy:'official-final-vr-award',source:r.source,
+  rule:'https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules'}]};
+ assert.deepEqual(audit([r],ledger,{confirmedAliases:{}}),[]);
+ assert.ok(audit([{...r,prize:0}],ledger,{confirmedAliases:{}}).length>0);
+});
