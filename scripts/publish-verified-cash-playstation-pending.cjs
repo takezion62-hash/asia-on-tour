@@ -28,7 +28,7 @@ const types=Object.freeze({
  'ch6s1-solo-cash':{id:'solo',season:'S33',event:'S33_SoloCashCup',region:'NAW',dates:['2025-01-11','2025-01-13','2025-01-27']},
  'ch5s4-duos-cash-cup':{id:'duo',season:'S31',event:'S31_DuosCashCup',region:'ME',dates:['2024-10-10','2024-10-17']},
  'ch6s3-playstation-cup':{id:'ps',season:'S36',event:'S36_PlayStationCup',region:null,dates:['2025-07-24','2025-07-25']},
- 'ch7s2-playstation-clix-cup-br':{id:'clix',season:'S40',event:'S40_PlayStationCupClix',region:null,dates:['2026-04-29','2026-04-30','2026-05-02']}
+ 'ch7s2-playstation-clix-cup-br':{id:'clix',season:'S40',event:'S40_PlayStationCupClix',region:null,dates:['2026-04-29','2026-04-30','2026-05-02','2026-05-03']}
 });
 const db={
  results:read('results.json'),players:read('players.json'),tournaments:read('tournaments.json'),
