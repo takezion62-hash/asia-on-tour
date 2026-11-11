@@ -19,6 +19,7 @@ test('player profile loads their verified participation without counting it as a
  test.skip(index.players.length===0,'No participation entries archived yet');
  const player=index.players[0];
  await page.goto('/?season=all#player='+encodeURIComponent(player.name));
+ await page.locator('[data-profile-tab="history"]').click();
  await expect(page.locator('#participation-profile')).toBeVisible();
  await expect(page.locator('#participation-profile')).toContainText('海外大会の出場戦績');
  await expect(page.locator('#participation-profile .participation-count')).toContainText('件の出場戦績');
@@ -61,6 +62,7 @@ test('AOT PR credits lower-ranked verified participation once, without breakthro
  await expect(row).toContainText('予選突破 0.0');
  await expect(row).toContainText('賞金ボーナス 0.0');
  await row.getByRole('link').click();
+ await page.locator('[data-profile-tab="season"]').click();
  await expect(page.locator('.aot-pr-overview')).toContainText('出場記録からのPR');
  await expect(page.locator('.aot-pr-overview')).toContainText('予選突破ボーナス');
  await page.locator('.aot-pr-breakdown summary').click();
