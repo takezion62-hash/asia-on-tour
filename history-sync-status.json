@@ -1,7 +1,7 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-11T08:18:41.614Z",
+  "checkedAt": "2026-11-11T10:03:43.750Z",
   "mode": "review",
   "scope": "history",
   "dateMode": "rolling",
@@ -11,16 +11,16 @@
   "provider": "osirion",
   "linkedPlayers": 563,
   "trackedWindows": 2956,
-  "found": 11,
-  "skipped": 18,
-  "imported": 12,
+  "found": 42,
+  "skipped": 33,
+  "imported": 8,
   "scannedPages": 96,
-  "completedWindows": 333,
+  "completedWindows": 336,
   "identityConflicts": 3,
-  "alreadyRegistered": 3112,
-  "autoApprovedTotal": 1531,
+  "alreadyRegistered": 3138,
+  "autoApprovedTotal": 1539,
   "invalidCachedCandidates": 1,
-  "manualReviewCandidates": 11,
+  "manualReviewCandidates": 42,
   "autoApprovedCosmeticThisRun": 0,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
@@ -28,19 +28,10 @@
   "timeLimitReached": false,
   "retryWindows": 2,
   "transientFailures": 0,
-  "malformedFailures": 1,
-  "skippedLeaderboards": [
-    {
-      "window": "epicgames_S42_SoloVictoryCup_OCE/S42_SoloVictoryCup_Event1Round2_OCE",
-      "page": 0,
-      "attempt": 5,
-      "code": "OSIRION_INVALID_LEADERBOARD",
-      "reason": "大会順位表のID/形式が不正 [epicgames_S42_SoloVictoryCup_OCE/S42_SoloVictoryCup_Event1Round2_OCE page=0]: totalPages=0",
-      "retryAfter": "2026-11-13T08:16:17.928Z"
-    }
-  ],
+  "malformedFailures": 0,
+  "skippedLeaderboards": [],
   "reviewOnlyWindows": 1324,
-  "reviewOnlyCandidates": 1,
+  "reviewOnlyCandidates": 8,
   "unmappedEvents": 238,
   "unmappedEventIds": [
     "S30_ConsoleCashCups",
@@ -56,44 +47,44 @@
     "S30_Reload",
     "S30_ReloadZB"
   ],
-  "message": "公式予選突破2件を通常成績に追加。重複0件を解消。残り確認待ち11件。未確認賞金は推定しない。",
+  "message": "最新版と安全統合：新規掲載8件、重複スキップ0件、要確認の競合0件、確認待ち42件。既存の戦績・賞金は保持。",
   "manuallyPublished": 850,
   "manuallyResolvedDuplicates": 89,
   "lastReviewedBatchAt": "2026-11-11T10:00:39.827Z",
   "manuallyCorrected": 1,
   "lastCorrectedReviewAt": "2026-11-07T09:14:30.244Z",
   "concurrentMerge": {
-    "appended": 12,
+    "appended": 8,
     "alreadyPublished": 0,
     "reviewConflicts": 0,
-    "keptPending": 25,
-    "reconciledAt": "2026-11-11T08:18:46.486Z"
+    "keptPending": 42,
+    "reconciledAt": "2026-11-11T10:03:49.595Z"
   },
   "coverage": {
     "total": 2956,
-    "completed": 333,
-    "notStarted": 2543,
-    "partial": 78,
+    "completed": 336,
+    "notStarted": 2537,
+    "partial": 81,
     "retryWaiting": 2,
     "retryDue": 0,
-    "remaining": 2623,
+    "remaining": 2620,
     "retryCount": 2,
-    "completionPercent": 11.3,
+    "completionPercent": 11.4,
     "byRegion": {
       "OCE": {
         "total": 522,
-        "completed": 49,
-        "pending": 473
+        "completed": 50,
+        "pending": 472
       },
       "ME": {
         "total": 518,
-        "completed": 97,
-        "pending": 421
+        "completed": 98,
+        "pending": 420
       },
       "EU": {
         "total": 536,
-        "completed": 52,
-        "pending": 484
+        "completed": 53,
+        "pending": 483
       },
       "BR": {
         "total": 517,
@@ -114,8 +105,8 @@
     "byYear": {
       "2024": {
         "total": 974,
-        "completed": 71,
-        "pending": 903
+        "completed": 72,
+        "pending": 902
       },
       "2025": {
         "total": 690,
@@ -124,8 +115,8 @@
       },
       "2026": {
         "total": 1292,
-        "completed": 217,
-        "pending": 1075
+        "completed": 219,
+        "pending": 1073
       }
     },
     "outsideScopeCheckpoints": 0,
@@ -202,7 +193,7 @@
         "region": "ME",
         "series": "victory-cup",
         "status": "partial",
-        "nextPage": 16,
+        "nextPage": 18,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
@@ -278,7 +269,7 @@
     "remainingPending": 11,
     "policy": "Official 2024 solo qualification cutoffs and exact verified saved Epic-ID ranked rows; no inferred cash"
   },
-  "autoApprovedDuoQualifierThisRun": 1,
+  "autoApprovedDuoQualifierThisRun": 0,
   "latestParticipationReview": {
     "reviewedAt": "2026-11-09T12:37:07.114Z",
     "participationPublished": 5,
