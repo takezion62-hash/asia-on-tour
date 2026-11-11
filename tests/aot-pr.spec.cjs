@@ -75,6 +75,7 @@ test('ALLと全6地域を切り替え、地域倍率・キーボード操作・�
   await page.locator('[data-aot-pr-region="all"]').click();
   await expect(page.locator('#aot-pr-leaders .aot-pr-name')).toHaveCount(6);
   await playerRow(page, longName).getByRole('link').click();
+   await page.locator('[data-profile-tab="season"]').click();
   await expect(page.locator('#profile-title')).toHaveText(longName);
   await noOverflow(page);
   await page.locator('#profile-back').click();
@@ -93,6 +94,7 @@ test('予選・決勝を別に加点し、参加は1枠、プロフィール内�
   await expect(row.locator('.aot-pr-score')).toHaveText('139.4AOT PR');
   await expect(row).toContainText('参加 1枠');
   await row.getByRole('link').click();
+   await page.locator('[data-profile-tab="season"]').click();
   await expect(page.locator('.aot-pr-profile')).toHaveCount(1);
   await expect(page.locator('.aot-pr-profile h2')).toContainText('139.4');
   await expect(page.locator('.aot-pr-overview')).toContainText('10.0');
@@ -124,11 +126,13 @@ test('未確認順位・キル・形式を区別し、未確認分類と同名�
   await expect(playerRow(page, 'Missing Player').locator('.aot-pr-score')).toHaveText('10.0AOT PR');
   await expect(playerRow(page, 'Unknown Mode Player').locator('.aot-pr-score')).toHaveText('60.0AOT PR');
   await playerRow(page, 'Missing Player').getByRole('link').click();
+   await page.locator('[data-profile-tab="season"]').click();
   await page.locator('.aot-pr-breakdown summary').click();
   await expect(page.locator('.aot-pr-breakdown')).toContainText('順位未確認');
   await expect(page.locator('.aot-pr-breakdown')).toContainText('キル未確認');
   await page.locator('#profile-back').click();
   await playerRow(page, 'Unknown Mode Player').getByRole('link').click();
+   await page.locator('[data-profile-tab="season"]').click();
   await page.locator('.aot-pr-breakdown summary').click();
   await expect(page.locator('.aot-pr-breakdown')).toContainText('形式未確認');
   await expect(page.locator('.aot-pr-breakdown')).toContainText('キル加点保留');
@@ -143,6 +147,7 @@ test('共通シーズン変更をランキングと直接プロフィールに�
   await page.locator('#season-select').selectOption('S41');
   await expect(playerRow(page, 'Season Player').locator('.aot-pr-score')).toHaveText('60.0AOT PR');
   await playerRow(page, 'Season Player').getByRole('link').click();
+   await page.locator('[data-profile-tab="season"]').click();
   await expect(page.locator('.aot-pr-profile h2')).toContainText('60.0');
   await page.locator('#season-select').selectOption('S42');
   await expect(page.locator('.aot-pr-profile')).toHaveCount(1);
@@ -164,6 +169,7 @@ test('賞金獲得ボーナスを地域倍率付きで加点し、プロフィ�
   await expect(playerRow(page,'Unpaid Player').locator('.aot-pr-score')).toHaveText('93.8AOT PR');
   await expect(playerRow(page,'Paid Victory Player')).toContainText('賞金ボーナス 56.0');
   await playerRow(page,'Paid Victory Player').getByRole('link').click();
+   await page.locator('[data-profile-tab="season"]').click();
   await expect(page.locator('.aot-pr-profile')).toContainText('賞金ボーナス');
   await expect(page.locator('.aot-pr-overview')).toContainText('56.0');
   await page.locator('.aot-pr-breakdown summary').click();
@@ -205,6 +211,7 @@ test('予選突破を明記した選手だけ10ptを賞金とは別枠で付与�
   await expect(awarded).toContainText('予選突破 10.0');
   await expect(ordinary).toContainText('予選突破 0.0');
   await awarded.getByRole('link').click();
+   await page.locator('[data-profile-tab="season"]').click();
   await expect(page.locator('.aot-pr-overview')).toContainText('予選突破ボーナス');
   await expect(page.locator('.aot-pr-overview')).toContainText('10.0');
   await page.locator('.aot-pr-breakdown summary').click();
@@ -224,6 +231,7 @@ test('official victory cup Round 1 advancement receives a bonus without a specia
  await expect(playerRow(page,'Rule-Confirmed Player')).toContainText('予選突破 10.0');
  await expect(playerRow(page,'Not-Advanced Player')).toContainText('予選突破 0.0');
  await playerRow(page,'Rule-Confirmed Player').getByRole('link').click();
+   await page.locator('[data-profile-tab="season"]').click();
  await page.locator('.aot-pr-breakdown summary').click();
  await expect(page.locator('.aot-pr-breakdown')).toContainText('公式通過枠');
 });
