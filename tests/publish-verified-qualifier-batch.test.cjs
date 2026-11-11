@@ -179,3 +179,58 @@ test('2024-07-30 ME ZB event7 and 2024-08-06 event8 cohorts remain pending or so
   }
  }
 });
+
+test('2024-08-13 ME BR and ZB event9 cohorts remain verified and cannot be published twice',()=>{
+ const fs=require('node:fs'),path=require('node:path'),root=path.resolve(__dirname,'..');
+ const load=p=>JSON.parse(fs.readFileSync(path.join(root,p),'utf8'));
+ const results=load('results.json'),pending=load('history-sync-review.json').proposals,
+  ledger=load('approval-history.json').entries,updates=load('updates.json').entries;
+ const cohorts=[
+  {event:'S30_SoloVictoryCashCup',tournament:'ch5s3-solo-victory-cup',
+   label:'Solo Victory Cup Battle Royale',rows:[
+   ['auto-s30-95d92d1688e1',6],['auto-s30-9229fd929d93',8],
+   ['auto-s30-1c030eb3de1f',13],['auto-s30-6752e326acea',26],
+   ['auto-s30-6b70ccceacf7',60],['auto-s30-f6d8848a4938',107],
+   ['auto-s30-75bfcdee3391',127],['auto-s30-2a87fd7c7799',131],
+   ['auto-s30-d37b6eac87ac',142],['auto-s30-a95fa7406297',145],
+   ['auto-s30-210ef010ceae',166],['auto-s30-0dd8be4e33cd',170],
+   ['auto-s30-8088fbefa12e',171],['auto-s30-db95b2fa7627',176],
+   ['auto-s30-cfe9390bd6e1',198]]},
+  {event:'S30_SoloZBVictoryCashCup',tournament:'ch5s3-zb-solo-victory',
+   label:'ZB Solo Victory Cup',rows:[
+   ['auto-s30-4daf3eef65e1',25],['auto-s30-30232ee3d4f4',50],
+   ['auto-s30-14f7e45dc096',71],['auto-s30-4c00e0a7c510',92],
+   ['auto-s30-731199bc3038',109],['auto-s30-ccc847d6beda',113],
+   ['auto-s30-982640d34bc6',138],['auto-s30-5631deb13cc7',169]]}
+ ];
+ assert.equal(cohorts.reduce((sum,x)=>sum+x.rows.length,0),23);
+ for(const group of cohorts){
+  const spec=W.find(x=>x.date==='2024-08-13'&&x.region==='ME'&&x.event===group.event);
+  assert.ok(spec,'specific event9 session should remain whitelisted');
+  assert.equal(spec.tournament,group.tournament);
+  assert.equal(spec.cutoff,2000);
+  assert.equal(spec.rules,'https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules');
+  const source='https://www.fortnite.com/competitive/events/'+spec.event+'/?region=ME&round='+spec.window;
+  for(const [id,rank] of group.rows){
+   const shown=results.filter(x=>x.id===id),waiting=pending.filter(x=>x.id===id);
+   // This protects raw identifiers across later rescans, including when a
+   // source remains unavailable. The publisher itself checks original
+   // scan checkpoint and record collision before moving anything.
+   assert.equal(shown.length+waiting.length,1,'published once or still waiting: '+id);
+   const row=shown[0]||waiting[0];
+   assert.equal(row.source,source);
+   assert.equal(row.rank,rank);
+   assert.equal(row.event,group.label);
+   assert.equal(row.verified,true);
+   assert.equal(row.kind,'予選');
+   assert.equal(row.prize,0);
+   assert.ok(row.kills>=0&&row.vrs>=0&&row.matches>0);
+   if(shown.length){
+    assert.match(row.round,/\/ 予選突破$/);
+    assert.ok(ledger.some(x=>x.id===id&&x.recordId===id&&x.decision==='published'&&x.policy==='verified-rule'));
+    assert.ok(updates.some(x=>Array.isArray(x.recordIds)&&x.recordIds.includes(id)),
+     'every published row should be traceable to an update');
+   }
+  }
+ }
+});

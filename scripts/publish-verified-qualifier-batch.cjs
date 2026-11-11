@@ -27,6 +27,14 @@ const W=[
  // https://fortnitetracker.com/events/epicgames_S30_SoloZBVictoryCashCup_ME?window=S30_SoloZBVictoryCashCup_Event8Round1_ME
  ['2024-07-30','S30','ME','S30_SoloZBVictoryCashCup','Event7Round1','ch5s3-zb-solo-victory',2000,RULE_S30],
  ['2024-08-06','S30','ME','S30_SoloZBVictoryCashCup','Event8Round1','ch5s3-zb-solo-victory',2000,RULE_S30],
+ // Chapter 5 Season 3 Event 9, ME. Tracker's archived specific windows
+ // confirm top 2,000 qualify (BR and ZB separately). Do NOT infer player
+ // identities from Tracker pages: fail closed unless original Epic-ID-ranked
+ // saved checkpoint matches id, account, scores and source.
+ // https://fortnitetracker.com/events/epicgames_S30_SoloVictoryCashCup_ME?page=55&window=S30_SoloVictoryCashCup_Event9Round1_ME
+ // https://fortnitetracker.com/events/epicgames_S30_SoloZBVictoryCashCup_ME?page=1&window=S30_SoloZBVictoryCashCup_Event9Round1_ME
+ ['2024-08-13','S30','ME','S30_SoloVictoryCashCup','Event9Round1','ch5s3-solo-victory-cup',2000,RULE_S30],
+ ['2024-08-13','S30','ME','S30_SoloZBVictoryCashCup','Event9Round1','ch5s3-zb-solo-victory',2000,RULE_S30],
  ['2024-09-16','S31','OCE','S31_SoloVictoryCashCup','Event3Round1','ch5s4-solo-victory-cup',1500,RULE_S31],
  // In C5S3 the rules call NAC the "NA" region; its top 5,000 proceed.
  ['2024-08-06','S30','NAC','S30_SoloVictoryCashCup','Event8Round1','ch5s3-solo-victory-cup',5000,RULE_S30],

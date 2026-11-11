@@ -256,3 +256,17 @@ Fortnite TrackerのC5S3 Zero Build Solo Victory Cupの当該Round 1ページで�
 - Tracker: https://fortnitetracker.com/events/epicgames_S30_SoloZBVictoryCashCup_ME?window=S30_SoloZBVictoryCashCup_Event8Round1_ME
 
 公式大会ID、選手の本人照合、過去成績重複、順位表の保存値、突破枠を照合する既存の安全な掲載スクリプトへ2つの大会ウィンドウを許可リストとして追加し、回帰テストで候補の保護・賞金$0・掲載履歴を検証する。
+
+## 2026-11-11 第3便：2024年8月13日 ME Solo/ZB Event9予選
+
+前回の第2便8件は `approval-history.json` のpublished承認8件・`updates.json` の記録・確認待ちからの除外を検証して完了。さらに2024年8月13日(JST)のME Solo / ZB Solo Victory Cash Cup Round1 Event9について、Fortnite Trackerの**開催日・大会枠・予選通過上位2,000名**とEpic公式規則を再確認。
+
+- BR: 15件（順位6、8、13、26、60、107、127、131、142、145、166、170、171、176、198）
+- ZB: 8件（順位25、50、71、92、109、113、138、169）
+- Tracker BR: https://fortnitetracker.com/events/epicgames_S30_SoloVictoryCashCup_ME?page=55&window=S30_SoloVictoryCashCup_Event9Round1_ME
+- Tracker ZB: https://fortnitetracker.com/events/epicgames_S30_SoloZBVictoryCashCup_ME?page=1&window=S30_SoloZBVictoryCashCup_Event9Round1_ME
+- Epic公式: https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules
+
+Trackerで大会の通過条件は確認できても、個人の順位表は一部アクセス制限がある。**個別のID・順位・ポイント・キル・VRは閲覧できたことにせず**、従来の保存済みOsirion/Epic-IDスキャン結果を厳密に一致照合する。20世紀ではなくC5S3の正しい公式大会枠のみ許可。本人ID・既存データ衝突・参加条件・完全一致の保存済み順位表が通らない候補は保留。通過した候補だけ予選突破として掲載し、Round1現金賞金は0ドル、Round2の賞金は推定しない。
+
+`scripts/publish-verified-qualifier-batch.cjs` の許可大会リストに、この2つの正確なウィンドウを追加し、`tests/publish-verified-qualifier-batch.test.cjs` で23件の存在・出典・順位・賞金・履歴を検証する。GitHub Actionsで検証・掲載後に、掲載済みと保留を別々に計数する。
