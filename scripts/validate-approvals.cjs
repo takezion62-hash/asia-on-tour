@@ -28,6 +28,20 @@ function validCashFinal(r,entry){
  }else if(r.seasonId==='S30'&&r.date==='2024-07-23'&&r.region==='NAC'&&
   r.tournamentId==='ch5s3-solo-victory-cup'){
   event='S30_SoloVictoryCashCup';window='S30_SoloVictoryCashCup_Event6Round2_NAC';
+ }else if(r.seasonId==='S30'&&r.tournamentId==='ch5s3-solo-victory-cup'&&
+   ((r.date==='2024-07-30'&&r.region==='NAC')||(r.date==='2024-08-12'&&r.region==='OCE')||
+    (r.date==='2024-08-13'&&r.region==='ME'))){
+  event='S30_SoloVictoryCashCup';
+  window='S30_SoloVictoryCashCup_Event'+(r.date==='2024-07-30'?'7':'9')+'Round2_'+r.region;
+ }else if(r.seasonId==='S30'&&r.tournamentId==='ch5s3-zb-solo-victory'&&
+  r.date==='2024-08-13'&&r.region==='ME'){
+  event='S30_SoloZBVictoryCashCup';window='S30_SoloZBVictoryCashCup_Event9Round2_ME';
+ }else if(r.seasonId==='S31'&&r.tournamentId==='ch5s4-solo-victory-cup'&&
+  r.date==='2024-09-03'&&r.region==='ME'){
+  event='S31_SoloVictoryCashCup';window='S31_SoloVictoryCashCup_Event1Round2_ME';
+ }else if(r.seasonId==='S30'&&r.tournamentId==='ch5s3-squads-victory-cup'&&
+  r.date==='2024-08-12'&&r.region==='ME'){
+  event='S30_SquadsVictoryCashCup';window='S30_SquadsVictoryCashCup_Event5Round2_ME';team='squad';
  }else if(r.seasonId==='S30'&&r.date==='2024-07-30'&&r.region==='ME'&&
   r.tournamentId==='ch5s3-zb-solo-victory'){
   event='S30_SoloZBVictoryCashCup';window='S30_SoloZBVictoryCashCup_Event7Round2_ME';
@@ -59,6 +73,9 @@ function validCashFinal(r,entry){
  if(entry.rule!==FINAL_CASH_RULES[r.seasonId])return false;
  const expected='https://www.fortnite.com/competitive/events/'+event+'/?region='+r.region+'&round='+window;
  if(r.source!==expected||!r.round.includes('Round 2 / 賞金決勝'))return false;
+ if(team==='squad')return Array.isArray(r.players)&&r.players.length===4&&
+  new Set(r.players).size===4&&r.player===r.players.join(' / ')&&
+  r.prize===r.vrs*400&&r.teamPrize===r.vrs*400&&r.prizePerPlayer===r.vrs*100;
  if(team)return Array.isArray(r.players)&&r.players.length===2&&new Set(r.players).size===2
   &&r.player===r.players.join(' / ')&&r.prize===r.vrs*200
   &&r.teamPrize===r.vrs*200&&r.prizePerPlayer===r.vrs*100;

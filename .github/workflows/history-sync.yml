@@ -18,6 +18,7 @@ on:
       - "scripts/squads-qualifier-rules.cjs"
       - "scripts/publish-verified-nov11-round3.cjs"
       - "scripts/publish-verified-review-round5.cjs"
+      - "scripts/publish-verified-legacy-finals-and-duplicates.cjs"
       - ".github/workflows/history-sync.yml"
       - "scripts/publish-verified-finals-batch.cjs"
       - "scripts/publish-reviewed-s30-nac-zero-vr.cjs"
@@ -85,6 +86,8 @@ jobs:
             node scripts/publish-verified-nov11-round3.cjs
             node scripts/publish-verified-review-round5.cjs --dry-run
             node scripts/publish-verified-review-round5.cjs
+            node scripts/publish-verified-legacy-finals-and-duplicates.cjs --dry-run
+            node scripts/publish-verified-legacy-finals-and-duplicates.cjs
             npm run validate
             node --test tests/manual-approval.test.cjs tests/approval-history.test.cjs tests/cosmetic-rank-rules.test.cjs tests/tournament-rules.test.cjs
             git add results.json updates.json history-sync-review.json history-sync-reviewed.json history-sync-status.json auto-sync-review.json auto-sync-status.json approval-history.json
