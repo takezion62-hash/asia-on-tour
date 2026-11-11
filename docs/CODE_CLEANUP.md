@@ -93,3 +93,20 @@
 `tests/script-lifecycle.test.cjs`に115件の公開ID・公式出典・確認済みの賞金値・承認履歴・確認待ち除外の回帰テストと、Zoro Cupの重複抑止テストを追加。公開データ、賞金、選手名、大会枠、審査台帳、自動更新、画面、13本のActionsは変更しない。
 
 対象候補が全て完了したわけではない（50件検討→38件掲載、33件検討→30件掲載、23件検討→17件掲載）。掲載されなかった候補の証拠と保留判断を削除する意図はなく、Git履歴・既存のレビュー台帳に残す。今回も既存スクリプトを再実行せず、現行の自動処理を共通化しない。
+
+## 第6段階の変更（2026-11-11、完了済み監査4本）
+
+過去の固定された監査・一度きりの直接掲載処理だけをまとめて削除する。どのファイルも、前回の静的利用状況監査で `review-candidate` に分類され、現役Actions・npm・別スクリプト・テストからの参照がない。再実行は不要で、元コードはGit履歴から復元可能。
+
+| 廃止する旧実行ファイル | 適用済み更新マーカー | 当時の結果 |
+| --- | --- | --- |
+| `manual-review-20261107-final-audit.cjs` | `review-20261107-final-voided-and-duplicates` | 無効大会13件とEpic順位競合を解決、掲載0件 |
+| `manual-review-20261107-unreal-na-west-voided.cjs` | `review-20261107-unreal-na-west-and-voided-oce-20` | 無効大会19件とNAW Unreal賞金1件 |
+| `manual-unreal-20261107-teamcash.cjs` | `manual-unreal-20261107-team-prize` | OCE Unreal賞金1件 |
+| `manual-review-history-95.cjs` | `manual-reviewed-history-95-20261106` | 77件掲載・18件重複回避 |
+
+成果の保護：**79件の公開ID／18件の重複マッピング／32件のVOIDED除外**と、ME Solo Reload TestのEpic公式75位、NAW Unreal Cupチーム$200・個人$100、OCE Unreal Cupチーム$100・個人$50（後日修正済み）を固定検証する。
+
+`tests/script-lifecycle.test.cjs` に回帰テストを追加。`data/manual-approvals/20261106-remaining-95.json` と既存の結果・更新・承認履歴はそのまま保持する。既存の成績・賞金・選手・大会・保留・承認台帳・13本のActions・フロントエンド・自動処理は変更しない。
+
+**残りの見通し**：整理開始時に67本あったCJSスクリプトは今回後52本。静的未参照候補は暫定約12本だが、中には手動運用中・検証中の処理もあり、残り全部を削除する計画ではない。引き続き証拠付きで個別に選定する。

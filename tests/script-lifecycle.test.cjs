@@ -300,3 +300,85 @@ test('第5段階：完了済み4掲載バッチを整理しても115件・既存
   assert.equal(matching[0].existingId,canonical);
  }
 });
+
+test('第6段階：完了済み4監査処理を整理して79戦績・18重複・32無効大会と順位競合を保護',()=>{
+ const retired=[["manual-review-20261107-final-audit.cjs","review-20261107-final-voided-and-duplicates",0],["manual-review-20261107-unreal-na-west-voided.cjs","review-20261107-unreal-na-west-and-voided-oce-20",1],["manual-unreal-20261107-teamcash.cjs","manual-unreal-20261107-team-prize",1],["manual-review-history-95.cjs","manual-reviewed-history-95-20261106",77]];
+ const voidIds=["auto-s41-2a0ca39875d4","auto-s41-62f75d6684c6","auto-s41-bb9668bd35e5","auto-s41-2cce4619d5f2","auto-s41-b8e6b6ea2115","auto-s41-704ead32c1b3","auto-s41-6d3693648527","auto-s41-1d23722df81b","auto-s41-22bc1422dbfc","auto-s41-27c4ed02bdaf","auto-s41-2b023a1a37bc","auto-s41-dfaec5d7dc8c","auto-s41-adcbb8ece8a2","auto-s41-0b735deca3de","auto-s41-8ee445e815bd","auto-s41-605380df065c","auto-s41-25773441abe2","auto-s41-9b5da99a2c77","auto-s41-7d673a661fcc","auto-s41-e199bfc5ca58","auto-s41-b93d5f9982cc","auto-s41-ab5f532b51e5","auto-s41-b74c5f18bde2","auto-s41-2dcbaf01d1b6","auto-s41-99dde642c80f","auto-s41-0cc56a920990","auto-s41-1dc242e86e63","auto-s41-22611231606a","auto-s41-07b6e9b2b37e","auto-s41-fa745c4bc14a","auto-s41-0989e8a09e8d","auto-s41-25fca1e49aa1"];
+ const active=[
+  ...scanFiles(path.join(root,'.github','workflows'),/\.ya?ml$/),
+  ...scanFiles(scriptDir,/\.cjs$/),
+  ...scanFiles(path.join(root,'tests'),/\.[cm]?js$/).filter(p=>!ignored.has(path.basename(p))),
+  path.join(root,'package.json')
+ ];
+ const updates=JSON.parse(fs.readFileSync(path.join(root,'updates.json'),'utf8')).entries;
+ const reviewed=JSON.parse(fs.readFileSync(path.join(root,'history-sync-reviewed.json'),'utf8')).entries;
+ const reviewQueue=JSON.parse(fs.readFileSync(path.join(root,'history-sync-review.json'),'utf8')).proposals;
+ const recentQueue=JSON.parse(fs.readFileSync(path.join(root,'auto-sync-review.json'),'utf8')).proposals;
+ const rows=JSON.parse(fs.readFileSync(path.join(root,'results.json'),'utf8'));
+ const plan=JSON.parse(fs.readFileSync(path.join(root,'data/manual-approvals/20261106-remaining-95.json'),'utf8'));
+ const results=new Map(rows.map(x=>[x.id,x]));
+ const decisions=new Map(reviewed.map(x=>[x.id,x]));
+ const pending=new Set([...reviewQueue,...recentQueue].map(x=>x.id));
+ assert.equal(results.size,rows.length,'published record IDs must remain unique');
+ assert.equal(decisions.size,reviewed.length,'historical review IDs must remain unique');
+ for(const [file,marker,count] of retired){
+  assert.equal(fs.existsSync(path.join(scriptDir,file)),false,'retired executable must not be replayed: '+file);
+  assert.deepEqual(active.filter(p=>fs.readFileSync(p,'utf8').includes(file)).map(rel),[],
+   'old executable is still invoked: '+file);
+  const log=updates.filter(x=>x.id===marker);
+  assert.equal(log.length,1,'completed update marker lost or duplicated: '+marker);
+  assert.equal(log[0].recordIds?.length,count,'original published count changed: '+marker);
+  for(const id of log[0].recordIds){
+   assert.ok(results.has(id),'original confirmed result lost: '+id);
+   assert.equal(decisions.get(id)?.decision,'published','published approval lost: '+id);
+   assert.equal(pending.has(id),false,'confirmed result returned to review: '+id);
+  }
+ }
+ assert.equal(plan.entries.length,95,'frozen 95-case review manifest must remain');
+ const approved=plan.entries.filter(e=>e.decision==='publish');
+ const duplicate=plan.entries.filter(e=>e.decision==='duplicate');
+ assert.equal(approved.length,77,'original published portion must remain 77');
+ assert.equal(duplicate.length,18,'original duplicate portion must remain 18');
+ assert.equal(new Set(plan.entries.map(x=>x.id)).size,95);
+ for(const item of approved){
+  const row=results.get(item.id);
+  assert.ok(row,'verified result from 95-case batch missing: '+item.id);
+  assert.equal(row.verified,true,'original verification flag lost: '+item.id);
+  assert.ok(row.source,'original Epic evidence lost: '+item.id);
+  assert.equal(decisions.get(item.id)?.decision,'published','review approval changed: '+item.id);
+  assert.equal(pending.has(item.id),false,'previously reviewed record returned to queue: '+item.id);
+ }
+ for(const item of duplicate){
+  assert.equal(results.has(item.id),false,'duplicate result republished: '+item.id);
+  assert.ok(results.has(item.existingId),'canonical result lost: '+item.existingId);
+  assert.equal(decisions.get(item.id)?.decision,'already-published','duplicate decision removed: '+item.id);
+  assert.equal(decisions.get(item.id)?.existingId,item.existingId,'canonical mapping changed: '+item.id);
+  assert.equal(pending.has(item.id),false);
+ }
+ assert.equal(voidIds.length,32);
+ assert.equal(new Set(voidIds).size,32,'original void manifests overlapped');
+ for(const id of voidIds){
+  assert.equal(results.has(id),false,'VOIDED PlayStation Cup result must not be public: '+id);
+  assert.equal(decisions.get(id)?.decision,'voided-not-published',
+   'VOIDED decision must remain: '+id);
+  assert.equal(pending.has(id),false,'VOIDED result returned to review: '+id);
+ }
+ const dispute=decisions.get('auto-s43-1f3a56f9719d');
+ assert.equal(dispute?.decision,'rank-conflict-resolved-existing-official');
+ assert.equal(dispute.existingId,'s43-me-solo-reload-test-20261102-rvl-grape');
+ const canonical=results.get(dispute.existingId);
+ assert.ok(canonical,'corrected official test-cup result must remain');
+ assert.equal(canonical.rank,75,'official Epic rank 75 must be preserved');
+ assert.equal(results.has('auto-s43-1f3a56f9719d'),false,'conflicting rank 74 must not be republished');
+ const naw=results.get('auto-s39-6b024a834d72');
+ assert.ok(naw,'NAW Unreal team cash result must remain');
+ assert.equal(naw.rank,122);
+ assert.equal(naw.prize,200,'NAW Unreal team prize must remain $200');
+ assert.equal(naw.prizePerPlayer,100,'NAW Unreal personal awards must remain $100 each');
+ const oce=results.get('auto-s39-4d5f1e94f897');
+ assert.ok(oce,'OCE Unreal team cash result must remain');
+ assert.equal(oce.rank,172);
+ assert.equal(oce.prize,100,'OCE Unreal team prize must remain $100');
+ assert.equal(oce.prizePerPlayer,50,'corrected OCE personal awards must remain $50 each');
+ assert.equal(decisions.get(oce.id)?.personalAwardCorrection?.perPlayer,true);
+});
