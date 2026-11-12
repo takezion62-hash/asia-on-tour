@@ -1,6 +1,7 @@
 'use strict';
 const { test, expect } = require('@playwright/test');
 const path = require('node:path');
+const {mockSeasonResults} = require('./season-fixture.cjs');
 const { loadData, roster, seasonFor } = require('../scripts/data-checks.cjs');
 const data = loadData(path.join(__dirname, '..')).data;
 const rows = data.results;
@@ -27,7 +28,7 @@ async function revealAll(page) {
   while (await page.locator('#journey-more:visible').count()) await page.locator('#journey-more').click();
 }
 async function fixture(page, list) {
-  await page.route('**/results.json', route => route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify(list) }));
+  await mockSeasonResults(page,list);
 }
 const sample = rows.find(row => roster(row).length === 1 && seasonFor(row, data) === 'S42' && /^https:\/\/fortnitetracker\.com\//.test(row.source)) || rows.find(row => roster(row).length === 1);
 function synthetic(id, overrides = {}) {
