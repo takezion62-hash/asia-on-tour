@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-11-12T00:30:45.390Z",
+  "checkedAt": "2026-11-12T01:27:41.912Z",
   "windows": {
     "epicgames_S43_PerformanceEvaluationTrios_EU/S43_PerformanceEvaluation_Event1Round1_EU": {
       "nextPage": 7,
@@ -2280,7 +2280,7 @@
       "totalPages": 44
     },
     "epicgames_S43_ReloadZBDuosCashCup_EU/S43_ReloadZBDuosCashCup_Event1Round1_EU": {
-      "nextPage": 85,
+      "nextPage": 86,
       "complete": false,
       "proposals": [
         {
@@ -2548,16 +2548,16 @@
           ]
         }
       ],
-      "pages": 85,
-      "lastAttemptAt": "2026-11-12T00:30:27.653Z",
+      "pages": 86,
+      "lastAttemptAt": "2026-11-12T01:27:24.181Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 8500,
-      "lastSuccessAt": "2026-11-12T00:30:28.824Z",
+      "lastSeenRank": 8600,
+      "lastSuccessAt": "2026-11-12T01:27:25.487Z",
       "totalPages": 100
     },
     "epicgames_S43_ReloadZBDuosCashCup_ME/S43_ReloadZBDuosCashCup_Event1Round1_ME": {
-      "nextPage": 50,
+      "nextPage": 51,
       "complete": false,
       "proposals": [
         {
@@ -2858,16 +2858,16 @@
           ]
         }
       ],
-      "pages": 50,
-      "lastAttemptAt": "2026-11-12T00:30:28.824Z",
+      "pages": 51,
+      "lastAttemptAt": "2026-11-12T01:27:25.487Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 5000,
-      "lastSuccessAt": "2026-11-12T00:30:31.699Z",
+      "lastSeenRank": 5100,
+      "lastSuccessAt": "2026-11-12T01:27:38.217Z",
       "totalPages": 100
     },
     "epicgames_S43_ReloadZBDuosCashCup_BR/S43_ReloadZBDuosCashCup_Event1Round1_BR": {
-      "nextPage": 36,
+      "nextPage": 37,
       "complete": false,
       "proposals": [
         {
@@ -2904,12 +2904,12 @@
           ]
         }
       ],
-      "pages": 36,
-      "lastAttemptAt": "2026-11-12T00:30:31.699Z",
+      "pages": 37,
+      "lastAttemptAt": "2026-11-12T01:27:38.217Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 3600,
-      "lastSuccessAt": "2026-11-12T00:30:32.847Z",
+      "lastSeenRank": 3700,
+      "lastSuccessAt": "2026-11-12T01:27:39.496Z",
       "totalPages": 100
     },
     "epicgames_S42_ConsoleVCC_SolosZB_NAW/S42_ConsoleVCC_SolosZB_Event8Round2_NAW": {
@@ -5117,7 +5117,7 @@
       "totalPages": 10
     },
     "epicgames_S42_InoxtagIconCup_NAW/S42_InoxtagIconCup_NAW": {
-      "nextPage": 24,
+      "nextPage": 25,
       "complete": false,
       "proposals": [
         {
@@ -5411,12 +5411,12 @@
           ]
         }
       ],
-      "pages": 24,
-      "lastAttemptAt": "2026-11-12T00:30:32.847Z",
+      "pages": 25,
+      "lastAttemptAt": "2026-11-12T01:27:40.798Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 2400,
-      "lastSuccessAt": "2026-11-12T00:30:44.267Z",
+      "lastSeenRank": 2500,
+      "lastSuccessAt": "2026-11-12T01:27:41.904Z",
       "totalPages": 89
     },
     "epicgames_S42_ConsoleVCC_SolosZB_BR/S42_ConsoleVCC_SolosZB_Event8Round1_BR": {
@@ -6243,7 +6243,7 @@
       "totalPages": 100
     },
     "epicgames_S43_ReloadZBDuosCashCup_NAW/S43_ReloadZBDuosCashCup_Event1Round1_NAW": {
-      "nextPage": 19,
+      "nextPage": 20,
       "complete": false,
       "proposals": [
         {
@@ -6410,14 +6410,47 @@
             "177f0551e829457aad8fbe6e3d84fe3c",
             "c640a465776d4417bd9ebedee4c68928"
           ]
+        },
+        {
+          "id": "auto-s43-52e1cfa6a5a7",
+          "date": "2026-11-09",
+          "region": "NAW",
+          "player": "明太釜玉うどん4玉とり天追加で / ふぃる",
+          "playerRaw": "きゅうり農家の1日vlog / ポルターガイストǃ",
+          "event": "Reload ZB Duos Cash Cup Zero Build",
+          "round": "Event 1 · Round 1 / 参加確認",
+          "rank": 1943,
+          "points": 285,
+          "kills": 44,
+          "vrs": 0,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 9,
+          "seasonId": "S43",
+          "chapter": 7,
+          "season": 5,
+          "tournamentId": "ch7s5-reload-zero-build-duos-cash-cup",
+          "source": "https://www.fortnite.com/competitive/events/S43_ReloadZBDuosCashCup/?region=NAW&round=S43_ReloadZBDuosCashCup_Event1Round1_NAW",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "明太釜玉うどん4玉とり天追加で",
+            "ふぃる"
+          ],
+          "teamAccountIds": [
+            "1d21440323b5477eb10eca571caa7c34",
+            "b8ee0fe8a5744c3ca37bb746388064ec"
+          ]
         }
       ],
-      "pages": 19,
-      "lastAttemptAt": "2026-11-12T00:30:44.267Z",
+      "pages": 20,
+      "lastAttemptAt": "2026-11-12T01:27:39.496Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 1900,
-      "lastSuccessAt": "2026-11-12T00:30:45.385Z",
+      "lastSeenRank": 2000,
+      "lastSuccessAt": "2026-11-12T01:27:40.798Z",
       "totalPages": 70
     },
     "epicgames_S42_ConsoleVCC_SolosZB_ME/S42_ConsoleVCC_SolosZB_Event8Round1_ME": {
@@ -7131,15 +7164,15 @@
       "totalPages": 3
     },
     "epicgames_S43_SquadsVictoryCup_EU/S43_SquadsVictoryCup_Event1_Round1_EU": {
-      "nextPage": 90,
-      "complete": false,
+      "nextPage": 100,
+      "complete": true,
       "proposals": [],
-      "pages": 90,
-      "lastAttemptAt": "2026-11-12T00:29:37.566Z",
+      "pages": 100,
+      "lastAttemptAt": "2026-11-12T01:26:13.625Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 9000,
-      "lastSuccessAt": "2026-11-12T00:29:39.741Z",
+      "lastSeenRank": 10000,
+      "lastSuccessAt": "2026-11-12T01:26:14.928Z",
       "totalPages": 100
     },
     "epicgames_S43_SquadsVictoryCup_ME/S43_SquadsVictoryCup_Event1_Round2_ME": {
@@ -8004,7 +8037,7 @@
       "totalPages": 4
     },
     "epicgames_S42_ConsoleVCC_SolosZB_OCE/S42_ConsoleVCC_SolosZB_Event8Round1_OCE": {
-      "nextPage": 40,
+      "nextPage": 50,
       "complete": false,
       "proposals": [
         {
@@ -8765,18 +8798,41 @@
           "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=OCE&round=S42_ConsoleVCC_SolosZB_Event8Round1_OCE",
           "verified": true,
           "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。"
+        },
+        {
+          "id": "auto-s42-8b2d6a66c92b",
+          "date": "2026-10-24",
+          "region": "OCE",
+          "player": "そそふぃん",
+          "playerRaw": "Blue_P-sosofin",
+          "event": "Console Zero Build Solo Victory Cup",
+          "round": "Event 8 · Round 1 / 予選",
+          "rank": 4786,
+          "points": 27,
+          "kills": 4,
+          "vrs": 0,
+          "prize": 0,
+          "kind": "予選",
+          "matches": 5,
+          "seasonId": "S42",
+          "chapter": 7,
+          "season": 4,
+          "tournamentId": "ch7s4-console-zero-build-solo-victory-cup",
+          "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=OCE&round=S42_ConsoleVCC_SolosZB_Event8Round1_OCE",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。"
         }
       ],
-      "pages": 40,
-      "lastAttemptAt": "2026-11-12T00:29:48.831Z",
+      "pages": 50,
+      "lastAttemptAt": "2026-11-12T01:26:35.927Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 4000,
-      "lastSuccessAt": "2026-11-12T00:29:49.967Z",
+      "lastSeenRank": 5000,
+      "lastSuccessAt": "2026-11-12T01:26:36.862Z",
       "totalPages": 70
     },
     "epicgames_S42_ReloadReloadSoloVictoryCup_NAW/S42_ReloadSoloVictoryCup_Event5_Round1_NAW": {
-      "nextPage": 40,
+      "nextPage": 50,
       "complete": false,
       "proposals": [
         {
@@ -9974,14 +10030,221 @@
           "source": "https://www.fortnite.com/competitive/events/S42_ReloadReloadSoloVictoryCup/?region=NAW&round=S42_ReloadSoloVictoryCup_Event5_Round1_NAW",
           "verified": true,
           "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。"
+        },
+        {
+          "id": "auto-s42-5bd42c5f137f",
+          "date": "2026-10-24",
+          "region": "NAW",
+          "player": "Anastasyaǃ3",
+          "playerRaw": "REBEL Anastasya3",
+          "event": "Solo Reload Victory Cup",
+          "round": "Event 5 · Round 1 / 予選",
+          "rank": 4032,
+          "points": 97,
+          "kills": 16,
+          "vrs": 0,
+          "prize": 0,
+          "kind": "予選",
+          "matches": 5,
+          "seasonId": "S42",
+          "chapter": 7,
+          "season": 4,
+          "tournamentId": "ch7s4-solo-reload-victory-cup",
+          "source": "https://www.fortnite.com/competitive/events/S42_ReloadReloadSoloVictoryCup/?region=NAW&round=S42_ReloadSoloVictoryCup_Event5_Round1_NAW",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。"
+        },
+        {
+          "id": "auto-s42-1b7667a180f9",
+          "date": "2026-10-24",
+          "region": "NAW",
+          "player": "軍神 心湊 壱輝",
+          "playerRaw": "爆運はくあいっき大西りきと爆運",
+          "event": "Solo Reload Victory Cup",
+          "round": "Event 5 · Round 1 / 予選",
+          "rank": 4057,
+          "points": 96,
+          "kills": 16,
+          "vrs": 0,
+          "prize": 0,
+          "kind": "予選",
+          "matches": 3,
+          "seasonId": "S42",
+          "chapter": 7,
+          "season": 4,
+          "tournamentId": "ch7s4-solo-reload-victory-cup",
+          "source": "https://www.fortnite.com/competitive/events/S42_ReloadReloadSoloVictoryCup/?region=NAW&round=S42_ReloadSoloVictoryCup_Event5_Round1_NAW",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。"
+        },
+        {
+          "id": "auto-s42-f153aeccdc06",
+          "date": "2026-10-24",
+          "region": "NAW",
+          "player": "強き者は多くを語らない",
+          "playerRaw": "強き者は多くを語らない",
+          "event": "Solo Reload Victory Cup",
+          "round": "Event 5 · Round 1 / 予選",
+          "rank": 4119,
+          "points": 94,
+          "kills": 18,
+          "vrs": 0,
+          "prize": 0,
+          "kind": "予選",
+          "matches": 6,
+          "seasonId": "S42",
+          "chapter": 7,
+          "season": 4,
+          "tournamentId": "ch7s4-solo-reload-victory-cup",
+          "source": "https://www.fortnite.com/competitive/events/S42_ReloadReloadSoloVictoryCup/?region=NAW&round=S42_ReloadSoloVictoryCup_Event5_Round1_NAW",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。"
+        },
+        {
+          "id": "auto-s42-3e8756ddcf30",
+          "date": "2026-10-24",
+          "region": "NAW",
+          "player": "まぐろいち",
+          "playerRaw": "ptt まぐろいちタニマのタニー",
+          "event": "Solo Reload Victory Cup",
+          "round": "Event 5 · Round 1 / 予選",
+          "rank": 4135,
+          "points": 93,
+          "kills": 13,
+          "vrs": 0,
+          "prize": 0,
+          "kind": "予選",
+          "matches": 3,
+          "seasonId": "S42",
+          "chapter": 7,
+          "season": 4,
+          "tournamentId": "ch7s4-solo-reload-victory-cup",
+          "source": "https://www.fortnite.com/competitive/events/S42_ReloadReloadSoloVictoryCup/?region=NAW&round=S42_ReloadSoloVictoryCup_Event5_Round1_NAW",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。"
+        },
+        {
+          "id": "auto-s42-980951faa0d7",
+          "date": "2026-10-24",
+          "region": "NAW",
+          "player": "norl にことまろん",
+          "playerRaw": "nolr あいみょん",
+          "event": "Solo Reload Victory Cup",
+          "round": "Event 5 · Round 1 / 予選",
+          "rank": 4208,
+          "points": 91,
+          "kills": 4,
+          "vrs": 0,
+          "prize": 0,
+          "kind": "予選",
+          "matches": 3,
+          "seasonId": "S42",
+          "chapter": 7,
+          "season": 4,
+          "tournamentId": "ch7s4-solo-reload-victory-cup",
+          "source": "https://www.fortnite.com/competitive/events/S42_ReloadReloadSoloVictoryCup/?region=NAW&round=S42_ReloadSoloVictoryCup_Event5_Round1_NAW",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。"
+        },
+        {
+          "id": "auto-s42-b34915957baf",
+          "date": "2026-10-24",
+          "region": "NAW",
+          "player": "dyd 7z7z7z7z7z7",
+          "playerRaw": "dyd 7z7z7z7z7z7",
+          "event": "Solo Reload Victory Cup",
+          "round": "Event 5 · Round 1 / 予選",
+          "rank": 4432,
+          "points": 82,
+          "kills": 12,
+          "vrs": 0,
+          "prize": 0,
+          "kind": "予選",
+          "matches": 4,
+          "seasonId": "S42",
+          "chapter": 7,
+          "season": 4,
+          "tournamentId": "ch7s4-solo-reload-victory-cup",
+          "source": "https://www.fortnite.com/competitive/events/S42_ReloadReloadSoloVictoryCup/?region=NAW&round=S42_ReloadSoloVictoryCup_Event5_Round1_NAW",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。"
+        },
+        {
+          "id": "auto-s42-68aa5cdcc378",
+          "date": "2026-10-24",
+          "region": "NAW",
+          "player": "hqttqrä 8 ǃ",
+          "playerRaw": "hqttqrä 8 ǃ",
+          "event": "Solo Reload Victory Cup",
+          "round": "Event 5 · Round 1 / 予選",
+          "rank": 4831,
+          "points": 69,
+          "kills": 4,
+          "vrs": 0,
+          "prize": 0,
+          "kind": "予選",
+          "matches": 4,
+          "seasonId": "S42",
+          "chapter": 7,
+          "season": 4,
+          "tournamentId": "ch7s4-solo-reload-victory-cup",
+          "source": "https://www.fortnite.com/competitive/events/S42_ReloadReloadSoloVictoryCup/?region=NAW&round=S42_ReloadSoloVictoryCup_Event5_Round1_NAW",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。"
+        },
+        {
+          "id": "auto-s42-e9b564fb479a",
+          "date": "2026-10-24",
+          "region": "NAW",
+          "player": "AUR sһхrkÿ",
+          "playerRaw": "AUR sһхrkÿ",
+          "event": "Solo Reload Victory Cup",
+          "round": "Event 5 · Round 1 / 予選",
+          "rank": 4893,
+          "points": 67,
+          "kills": 7,
+          "vrs": 0,
+          "prize": 0,
+          "kind": "予選",
+          "matches": 3,
+          "seasonId": "S42",
+          "chapter": 7,
+          "season": 4,
+          "tournamentId": "ch7s4-solo-reload-victory-cup",
+          "source": "https://www.fortnite.com/competitive/events/S42_ReloadReloadSoloVictoryCup/?region=NAW&round=S42_ReloadSoloVictoryCup_Event5_Round1_NAW",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。"
+        },
+        {
+          "id": "auto-s42-77ae7d33ee7e",
+          "date": "2026-10-24",
+          "region": "NAW",
+          "player": "まろやかれおちゃあいと",
+          "playerRaw": "爆運まろやかれおちゃあいと爆運",
+          "event": "Solo Reload Victory Cup",
+          "round": "Event 5 · Round 1 / 予選",
+          "rank": 4991,
+          "points": 64,
+          "kills": 5,
+          "vrs": 0,
+          "prize": 0,
+          "kind": "予選",
+          "matches": 3,
+          "seasonId": "S42",
+          "chapter": 7,
+          "season": 4,
+          "tournamentId": "ch7s4-solo-reload-victory-cup",
+          "source": "https://www.fortnite.com/competitive/events/S42_ReloadReloadSoloVictoryCup/?region=NAW&round=S42_ReloadSoloVictoryCup_Event5_Round1_NAW",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。"
         }
       ],
-      "pages": 40,
-      "lastAttemptAt": "2026-11-12T00:30:10.838Z",
+      "pages": 50,
+      "lastAttemptAt": "2026-11-12T01:27:06.448Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 4000,
-      "lastSuccessAt": "2026-11-12T00:30:11.710Z",
+      "lastSeenRank": 5000,
+      "lastSuccessAt": "2026-11-12T01:27:07.455Z",
       "totalPages": 84
     },
     "epicgames_S42_ReloadReloadSoloVictoryCup_NAC/S42_ReloadSoloVictoryCup_Event5_Round2_NAC": {
@@ -10021,7 +10284,7 @@
       "totalPages": 8
     },
     "epicgames_S42_ReloadReloadSoloVictoryCup_NAC/S42_ReloadSoloVictoryCup_Event5_Round1_NAC": {
-      "nextPage": 30,
+      "nextPage": 40,
       "complete": false,
       "proposals": [
         {
@@ -10115,14 +10378,83 @@
           "source": "https://www.fortnite.com/competitive/events/S42_ReloadReloadSoloVictoryCup/?region=NAC&round=S42_ReloadSoloVictoryCup_Event5_Round1_NAC",
           "verified": true,
           "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。"
+        },
+        {
+          "id": "auto-s42-c38dde7a24c9",
+          "date": "2026-10-24",
+          "region": "NAC",
+          "player": "ten",
+          "playerRaw": "FUNNY ten 17ǃ",
+          "event": "Solo Reload Victory Cup",
+          "round": "Event 5 · Round 1 / 予選",
+          "rank": 3314,
+          "points": 228,
+          "kills": 4,
+          "vrs": 0,
+          "prize": 0,
+          "kind": "予選",
+          "matches": 7,
+          "seasonId": "S42",
+          "chapter": 7,
+          "season": 4,
+          "tournamentId": "ch7s4-solo-reload-victory-cup",
+          "source": "https://www.fortnite.com/competitive/events/S42_ReloadReloadSoloVictoryCup/?region=NAC&round=S42_ReloadSoloVictoryCup_Event5_Round1_NAC",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。"
+        },
+        {
+          "id": "auto-s42-b3647ded5af3",
+          "date": "2026-10-24",
+          "region": "NAC",
+          "player": "ぜろむの弟",
+          "playerRaw": "約束と希望の少女ぜろりん",
+          "event": "Solo Reload Victory Cup",
+          "round": "Event 5 · Round 1 / 予選",
+          "rank": 3754,
+          "points": 220,
+          "kills": 7,
+          "vrs": 0,
+          "prize": 0,
+          "kind": "予選",
+          "matches": 7,
+          "seasonId": "S42",
+          "chapter": 7,
+          "season": 4,
+          "tournamentId": "ch7s4-solo-reload-victory-cup",
+          "source": "https://www.fortnite.com/competitive/events/S42_ReloadReloadSoloVictoryCup/?region=NAC&round=S42_ReloadSoloVictoryCup_Event5_Round1_NAC",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。"
+        },
+        {
+          "id": "auto-s42-46490a7c3e22",
+          "date": "2026-10-24",
+          "region": "NAC",
+          "player": "Dark",
+          "playerRaw": "Dxrkÿzǃ",
+          "event": "Solo Reload Victory Cup",
+          "round": "Event 5 · Round 1 / 予選",
+          "rank": 3993,
+          "points": 215,
+          "kills": 14,
+          "vrs": 0,
+          "prize": 0,
+          "kind": "予選",
+          "matches": 8,
+          "seasonId": "S42",
+          "chapter": 7,
+          "season": 4,
+          "tournamentId": "ch7s4-solo-reload-victory-cup",
+          "source": "https://www.fortnite.com/competitive/events/S42_ReloadReloadSoloVictoryCup/?region=NAC&round=S42_ReloadSoloVictoryCup_Event5_Round1_NAC",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。"
         }
       ],
-      "pages": 30,
-      "lastAttemptAt": "2026-11-12T00:30:20.909Z",
+      "pages": 40,
+      "lastAttemptAt": "2026-11-12T01:27:17.066Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 3000,
-      "lastSuccessAt": "2026-11-12T00:30:22.135Z",
+      "lastSeenRank": 4000,
+      "lastSuccessAt": "2026-11-12T01:27:18.106Z",
       "totalPages": 100
     },
     "epicgames_S42_ReloadReloadSoloVictoryCup_BR/S42_ReloadSoloVictoryCup_Event5_Round2_BR": {
@@ -10138,15 +10470,15 @@
       "totalPages": 4
     },
     "epicgames_S42_ReloadReloadSoloVictoryCup_BR/S42_ReloadSoloVictoryCup_Event5_Round1_BR": {
-      "nextPage": 10,
+      "nextPage": 15,
       "complete": false,
       "proposals": [],
-      "pages": 10,
-      "lastAttemptAt": "2026-11-12T00:30:26.688Z",
+      "pages": 15,
+      "lastAttemptAt": "2026-11-12T01:27:22.570Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 1000,
-      "lastSuccessAt": "2026-11-12T00:30:27.653Z",
+      "lastSeenRank": 1500,
+      "lastSuccessAt": "2026-11-12T01:27:24.181Z",
       "totalPages": 80
     }
   }
