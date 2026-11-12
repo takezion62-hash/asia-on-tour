@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-12T11:16:34.930Z",
+  "reviewedAt": "2026-11-12T11:18:42.149Z",
   "description": "Resolved historic review candidates: published, duplicate or participation",
   "entries": [
     {
@@ -23080,6 +23080,15 @@
       "recordId": "participation-94f049349fca4208175e",
       "reviewedAt": "2026-11-12T11:16:34.930Z",
       "source": "https://www.fortnite.com/competitive/events/S36_PlayStationCup/?region=NAC&round=S36_PlayStationCup_Qualifier_NAC",
+      "policy": "verified-participation-only",
+      "note": "Exact Epic ID and mature official saved scoreboard; no monetary/cosmetic/qualification award inferred"
+    },
+    {
+      "id": "auto-s41-a99eac364067",
+      "decision": "participation-archived",
+      "recordId": "participation-d108f0b90f5449a5187a",
+      "reviewedAt": "2026-11-12T11:18:42.149Z",
+      "source": "https://www.fortnite.com/competitive/events/S41_FNCSCommunityCup/?region=OCE&round=S41_FNCSCommunityCup_OCE",
       "policy": "verified-participation-only",
       "note": "Exact Epic ID and mature official saved scoreboard; no monetary/cosmetic/qualification award inferred"
     }

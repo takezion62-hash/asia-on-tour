@@ -1,66 +1,12 @@
 {
   "version": 1,
   "sourceCheckedAt": "2026-11-07T23:16:39.215Z",
-  "total": 1,
+  "total": 0,
   "alreadyResolved": 0,
-  "byYear": [
-    {
-      "name": "2026",
-      "count": 1
-    }
-  ],
-  "byRegion": [
-    {
-      "name": "OCE",
-      "count": 1
-    }
-  ],
-  "byTournament": [
-    {
-      "name": "Champion Aphrodite FNCS Cup Battle Royale / OCE / 2026",
-      "count": 1
-    }
-  ],
-  "byStatus": [
-    {
-      "name": "partial-scan",
-      "count": 1
-    }
-  ],
-  "queue": [
-    {
-      "id": "auto-s41-a99eac364067",
-      "origin": "history",
-      "date": "2026-07-31",
-      "year": "2026",
-      "region": "OCE",
-      "tournamentId": "ch7s3-champion-aphrodite-fncs-cup-battle-royale",
-      "event": "Champion Aphrodite FNCS Cup Battle Royale",
-      "round": "単一開催枠 / 参加確認",
-      "player": "まならんど / まろやかれおちゃあいと",
-      "kind": "参加確認",
-      "rank": 5221,
-      "points": 8,
-      "kills": 4,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S41_FNCSCommunityCup/?region=OCE&round=S41_FNCSCommunityCup_OCE",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "確認専用大会は自動承認不可",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 57,
-        "totalPages": 66,
-        "sourceKey": "epicgames_S41_FNCSCommunityCup_OCE/S41_FNCSCommunityCup_OCE",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    }
-  ],
+  "byYear": [],
+  "byRegion": [],
+  "byTournament": [],
+  "byStatus": [],
+  "queue": [],
   "policy": "read-only queue; awards require existing official rule-backed validators and identity/collision proof"
 }
