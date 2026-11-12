@@ -192,3 +192,25 @@
  .style-observed-stat{padding:11px 9px}
  .style-observed-stat strong{font-size:18px}
 }
+
+
+/* Four-axis evidence dashboard: no pseudo-skill bars; transparent denominators. */
+.style-four-axis{margin:18px 0;padding:17px;border:1px solid #516079;border-radius:16px;background:#121e2f;min-width:0}
+.style-four-axis-title{display:flex;align-items:end;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.style-four-axis-title small{font-size:10px;letter-spacing:.12em;font-weight:850;color:#b2abd7}
+.style-four-axis-title h3{margin:5px 0 0;color:#f5f7ff;font-size:19px;font-weight:900}
+.style-four-axis-title p{color:#b9c8d8;font-size:11px;margin:0}
+.style-four-axis-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+.style-axis-card{background:#1b293e;border:1px solid #465876;border-radius:13px;padding:14px;min-width:0;display:flex;flex-direction:column;gap:8px}
+.style-axis-head{display:flex;justify-content:space-between;align-items:flex-start;gap:9px;flex-wrap:wrap}
+.style-axis-head h4{font-size:13px;color:#e5ecfa;margin:0;font-weight:850}
+.style-axis-head span{border:1px solid #6c7793;background:#263653;border-radius:6px;color:#d7e6ff;padding:3px 7px;font-size:10px;white-space:nowrap}
+.style-axis-card[data-axis-confidence="low"] .style-axis-head span{border-color:#8d745e;color:#ffe4ba;background:#3b302c}
+.style-axis-card strong{color:#f6f6ff;font-size:clamp(17px,2.2vw,22px);line-height:1.2;overflow-wrap:anywhere}
+.style-axis-card p{margin:0;color:#c1cfdf;line-height:1.6;font-size:12px;overflow-wrap:anywhere}
+.style-axis-card>small{margin-top:auto;padding-top:7px;border-top:1px solid #394b62;color:#a9bcd1;font-size:10px;line-height:1.6;overflow-wrap:anywhere}
+.style-axis-method{border-top:1px solid #42516a;margin-top:15px;padding-top:12px;color:#bacce0}
+.style-axis-method summary{font-weight:800;color:#c4eaf6;cursor:pointer;font-size:12px}
+.style-axis-method summary:focus-visible{outline:2px solid #9de8f7;outline-offset:4px}
+.style-axis-method p{font-size:11px;line-height:1.8;margin:10px 0 0}
+@media(max-width:640px){.style-four-axis{padding:13px}.style-four-axis-grid{grid-template-columns:1fr}.style-axis-card{padding:12px}}
