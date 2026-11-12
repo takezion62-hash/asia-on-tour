@@ -5,6 +5,7 @@ on:
       - reviewed-results/aot-20261112-batch20
     paths:
       - scripts/aot-reviewed-batch-20261112-temp.cjs
+      - tests/read-only.test.cjs
       - .github/workflows/aot-reviewed-batch-20261112-temp.yml
 permissions:
   contents: write
