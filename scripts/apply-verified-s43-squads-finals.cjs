@@ -20,8 +20,8 @@ assert(doc.version===1 && b && b.id==='tracker-s43-naw-squads-final-20261110' &&
  b.ruleUrl==='https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-squads-victory-cup-chapter-7-mini-season-official-rules' &&
  b.source==='https://fortnitetracker.com/events/epicgames_S43_SquadsVictoryCup_NAW?window='+b.windowId,
  'unsupported event, rules or final round');
-const results=read('results.json'),players=read('players.json'),updates=read('updates.json');
-const catalog=read('tournaments.json').catalog.find(x=>x.id===b.tournamentId);
+const results=read('results.json'),players=read('players.json'),updates=read('updates.json'),tournaments=read('tournaments.json');
+const catalog=tournaments.catalog.find(x=>x.id===b.tournamentId);
 assert(catalog && catalog.seasonId==='S43' && catalog.chapter===7 &&
  catalog.season===5 && catalog.team==='squad' &&
  catalog.mode==='battle-royale' && catalog.sourceEventIds.includes(b.eventId),
@@ -128,7 +128,7 @@ for(const t of b.teams){
  results.push(record);
  imported.push(record);
 }
-const validation=validateData({results,players,tournaments:{catalog:read('tournaments.json').catalog,axes:read('tournaments.json').axes}});
+const validation=validateData({results,players,tournaments});
 assert(validation.errors.length===0,'data validation failed: '+JSON.stringify(validation.errors.slice(0,8)));
 if(imported.length){
  upsertPublicationLog(updates,{
