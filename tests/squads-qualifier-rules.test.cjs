@@ -70,7 +70,7 @@ test('既存の公式順位表・Epic本人ID・重複検証が適用される�
 });
 test('10チームの旧候補は確認待ちか掲載済みの一方だけに存在し金額推測なし',()=>{
  const root=path.resolve(__dirname,'..');
- const rows=JSON.parse(fs.readFileSync(path.join(root,'results.json'),'utf8'));
+ const rows=require('./production-results.cjs');
  const reviews=JSON.parse(fs.readFileSync(path.join(root,'auto-sync-review.json'),'utf8')).proposals;
  const ledger=JSON.parse(fs.readFileSync(path.join(root,'approval-history.json'),'utf8')).entries;
  const ids=[

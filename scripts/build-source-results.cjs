@@ -1,7 +1,7 @@
 'use strict';
 /**
  * Phase 1: create a lossless, season-scoped canonical-source snapshot from the
- * original results.json. In phase 2, source-results is the sole writable authority.
+ * source-results is the sole writable authority. No production results.json input.
  * This script never writes results.json, players.json or tournaments.json.
  *
  * Usage:
@@ -176,15 +176,17 @@ function syncSnapshot({
 }
 
 if (require.main === module) {
-  const check=process.argv.includes('--check');
-  if(!check && fs.existsSync(path.join(TARGET,'manifest.json')) &&
-     !process.argv.includes('--explicit-bootstrap'))
-    throw Error('SOURCE_RESULTS is authoritative: normal runs must use --check; bootstrap requires --explicit-bootstrap');
-  const result=syncSnapshot({check});
-  console.log('Canonical source snapshot '+(check?'verified':'generated')+': '+
-    result.records+' records, '+result.seasons+' shards, team prize cents '+
-    result.teamPrizeCents+', unconfirmed prize records '+result.unconfirmedPrizeRecords+
-    ', personal prize cents '+result.personalPrizeCents+
-    ' (results.json unchanged)');
+ try {
+  if(!process.argv.includes('--check'))throw Error('Source is authoritative: use --check; legacy bootstrap retired');
+  const {readResults,seasonSelector}=require('./source-results-store.cjs');
+  const records=readResults(ROOT).rows;
+  const source=JSON.stringify(records,null,2)+'\n';
+  const expected=buildSnapshot(records,source,seasonSelector(records,ROOT));
+  checkContents(TARGET,expected.files);
+  const report=verifyRoundTrip(TARGET,records,expected);
+  console.log('Canonical source shards independently verified: '+report.records+
+    ' records, '+report.seasons+' shards, team cents '+report.teamPrizeCents+
+    ', personal cents '+report.personalPrizeCents);
+ } catch(error){console.error(error.stack);process.exitCode=1}
 }
 module.exports={buildSnapshot,checkContents,verifyRoundTrip,syncSnapshot,currencyCents};

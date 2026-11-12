@@ -15,8 +15,8 @@ const output = path.join(root, 'season-data');
 const read = name => fs.readFileSync(path.join(root, name), 'utf8');
 const {readResults}=require('./source-results-store.cjs');
 const records=readResults(root).rows;
-// Kept only as a hash-checked compatibility projection for existing clients.
-const source=read('results.json');
+// Preserve the historic source fingerprint using canonical ordered records.
+const source=JSON.stringify(records,null,2)+'\n';
 const tournaments = JSON.parse(read('tournaments.json')).catalog;
 const players = JSON.parse(read('players.json')).candidates;
 const REGIONS = ['ME', 'EU', 'NAC', 'NAW', 'OCE', 'BR'];

@@ -57,3 +57,10 @@ test('untrusted or missing context, missing commits, and Git failures fall back 
  assert.equal(detect(pr,()=>{throw new Error('git error')} ).mode,'full');
  assert.equal(detect(pr,()=>Buffer.from('M\0results.json')).mode,'full');
 });
+
+test('canonical season shards and manifest are safe data-only inputs when added/modified',()=>{
+ for(const p of ['source-results/S30.json','source-results/S43.json','source-results/unknown.json','source-results/manifest.json'])
+  assert.equal(classify([change('M',p)]).mode,'data',p);
+ for(const p of ['source-results/../../secrets.json','source-results/a.txt','source-results/S0.json'])
+  assert.equal(classify([change('M',p)]).mode,'full',p);
+});

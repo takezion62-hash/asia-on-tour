@@ -1,3 +1,6 @@
 node_modules/
 playwright-report/
 test-results/
+
+# Phase 3: the authoritative data lives only in source-results/.
+/results.json

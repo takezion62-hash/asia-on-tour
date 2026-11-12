@@ -3,14 +3,15 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "validate": "node scripts/source-results-store.cjs verify && node scripts/validate-data.cjs && node scripts/validate-updates.cjs && node scripts/validate-approvals.cjs && node scripts/validate-tournament-rules.cjs",
+    "validate": "node scripts/source-results-store.cjs verify && node scripts/validate-data.cjs && node scripts/validate-updates.cjs && node scripts/validate-approvals.cjs && node scripts/validate-tournament-rules.cjs && node scripts/audit-legacy-results.cjs",
     "test:unit": "node scripts/unit-test-runner.cjs all",
     "test:e2e": "playwright test",
     "test": "npm run validate && npm run test:unit && npm run test:e2e",
     "serve": "node scripts/serve.cjs",
     "test:failed:unit": "node scripts/unit-test-runner.cjs failed",
     "test:failed:e2e": "node scripts/browser-failure-recheck.cjs run",
-    "test:source": "node --test tests/source-results-store.test.cjs tests/source-results-split.test.cjs"
+    "test:source": "node --test tests/source-results-store.test.cjs tests/source-results-split.test.cjs",
+    "audit:phase3": "node scripts/audit-legacy-results.cjs"
   },
   "engines": {
     "node": ">=22"

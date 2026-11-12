@@ -24,7 +24,9 @@ test('verification computes integrity results once per refresh; tab/search/page 
  }
  const clone=x=>JSON.parse(JSON.stringify(x));
  const sample={
-  'results.json':[{id:'one',date:'2026-10-01',region:'ME',event:'Event',player:'Alice',verified:true}],
+  'source-results/manifest.json':{count:1,recordOrder:['one'],teamPrizeCents:0,unconfirmedPrizeRecords:0,
+    shards:[{file:'source-results/S42.json',count:1}]},
+  'source-results/S42.json':[{id:'one',date:'2026-10-01',region:'ME',event:'Event',player:'Alice',verified:true,prize:0}],
   'auto-sync-review.json':{proposals:[]},'history-sync-review.json':{proposals:[]},
   'auto-sync-status.json':{checkedAt:'2026-11-09T00:00:00Z',unmappedEventIds:[]},
   'history-sync-status.json':{checkedAt:'2026-11-09T00:00:00Z',fromDate:'2024-05-29',toDate:'2026-11-09',unmappedEventIds:[]},
@@ -64,7 +66,7 @@ test('verification computes integrity results once per refresh; tab/search/page 
  await flush();
  assert.equal(inspections,1,'initial load should inspect once');
  assert.equal(proposals,1,'initial load should compute candidate queue once');
- assert.equal(requests,11,'load each file once');
+ assert.equal(requests,12,'load current sources and shard index once');
  assert.ok(cachePolicies.every(x=>x==='no-cache'),'JSON should revalidate without forced re-download');
  for(const tab of tabs){tab.fire('click');}
  pageElements.get('audit-search').fire('input','2026');
@@ -73,10 +75,10 @@ test('verification computes integrity results once per refresh; tab/search/page 
  pageElements.get('audit-next').fire('click');
  assert.equal(inspections,1,'normal navigation never reruns full 3k-row scan');
  assert.equal(proposals,1,'search and filters reuse queue snapshot');
- assert.equal(requests,11,'tab/filter navigation never refetches JSON');
+ assert.equal(requests,12,'tab/filter navigation never refetches JSON');
  pageElements.get('audit-refresh').fire('click');
  await flush();
  assert.equal(inspections,2,'explicit refresh reruns inspection exactly once');
  assert.equal(proposals,2,'explicit refresh reruns candidate lookup exactly once');
- assert.equal(requests,22,'explicit refresh reloads the eleven current sources');
+ assert.equal(requests,24,'refresh also reloads the shard manifest and season file');
 });

@@ -88,15 +88,20 @@ test('all canonical IDs must be unique; missing IDs and invalid cash never pass'
  assert.throws(()=>buildSnapshot(bad,asText(bad)),/Invalid prize/);
 });
 
-test('current canonical results round-trip losslessly into fresh shards with no source changes',t=>{
+test('current season source independently round-trips without a root results file',t=>{
+ const {readResults,seasonSelector}=require('../scripts/source-results-store.cjs');
+ const rows=readResults(root).rows;
+ const source=JSON.stringify(rows,null,2)+'\n';
+ const before=fs.readFileSync(path.join(root,'source-results','manifest.json'),'utf8');
+ const expected=buildSnapshot(rows,source,seasonSelector(rows,root));
  const out=path.join(scratch(t),'source-results');
- const before=fs.readFileSync(path.join(root,'results.json'),'utf8');
- const rows=JSON.parse(before);
- const result=syncSnapshot({root,out});
+ fs.mkdirSync(out,{recursive:true});
+ for(const [name,content] of expected.files)fs.writeFileSync(path.join(out,name),content);
+ const result=verifyRoundTrip(out,rows,expected);
  assert.equal(result.records,rows.length);
- assert.equal(result.teamPrizeCents,rows.reduce((sum,r)=>sum+Math.round((r.prize ?? 0)*100),0));
- assert.equal(result.unconfirmedPrizeRecords,rows.filter(r=>r.prize == null).length);
+ assert.equal(result.teamPrizeCents,rows.reduce((sum,r)=>sum+Math.round((r.prize??0)*100),0));
+ assert.equal(result.unconfirmedPrizeRecords,rows.filter(r=>r.prize==null).length);
  assert.equal(new Set(rows.map(r=>r.id)).size,rows.length);
- assert.equal(fs.readFileSync(path.join(root,'results.json'),'utf8'),before);
- assert.deepEqual(syncSnapshot({root,out,check:true}),result);
+ assert.equal(fs.readFileSync(path.join(root,'source-results','manifest.json'),'utf8'),before);
+ assert.doesNotThrow(()=>checkContents(out,expected.files));
 });

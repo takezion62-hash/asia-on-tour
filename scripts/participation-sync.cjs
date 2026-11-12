@@ -6,8 +6,9 @@ const {linkedAccounts,discover,normalizeRow,getTournaments,getLeaderboard,advanc
 const {prepare}=require('./auto-sync-core.cjs');
 const {appendArchive}=require('./participation-archive.cjs');
 const {finishableWindows}=require('./scan-efficiency.cjs');
+const {readResults}=require('./source-results-store.cjs');
 const root=path.resolve(__dirname,'..');
-const read=f=>JSON.parse(fs.readFileSync(path.join(root,f),'utf8'));
+const read=f=>f==='results.json'?readResults(root).rows:JSON.parse(fs.readFileSync(path.join(root,f),'utf8'));
 const write=(f,obj)=>fs.writeFileSync(path.join(root,f),JSON.stringify(obj,null,2)+'\n');
 const nowJst=()=>new Date(Date.now()+9*3600000).toISOString().slice(0,10);
 function chooseWindows(windows,state,config,now=Date.now(),records=[]){

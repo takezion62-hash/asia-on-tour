@@ -1,7 +1,7 @@
 'use strict';
 const {test,expect}=require('@playwright/test');
 const manifest=require('../season-data/manifest.json');
-const results=require('../results.json');
+const results=require('./production-results.cjs');
 
 test('data-only: all seasons load, total record count matches and archive opens',async({page})=>{
  const errors=[];

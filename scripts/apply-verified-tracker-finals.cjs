@@ -1,15 +1,16 @@
 'use strict';
 // Safe, repeatable import of screenshot-confirmed, zero-prize Tracker finals.
-// Canonical results.json remains authoritative; duplicate teams are skipped,
+// Source season shards remain authoritative; duplicate teams are skipped,
 // and conflicting ranks, identities or prize amounts fail closed.
 const fs = require('node:fs');
 const path = require('node:path');
 const { sourceInfo, validateData } = require('./data-checks.cjs');
 const { upsertPublicationLog } = require('./reviewed-publication-core.cjs');
+const {readResults,publishResults}=require('./source-results-store.cjs');
 const root = path.resolve(__dirname, '..');
 const directory = path.join(root, 'data', 'manual-approvals');
-const read = file => JSON.parse(fs.readFileSync(path.join(root, file), 'utf8'));
-const save = (file, obj) => fs.writeFileSync(path.join(root, file), JSON.stringify(obj, null, 2) + '\n');
+const read = file => file==='results.json'?readResults(root).rows:JSON.parse(fs.readFileSync(path.join(root, file), 'utf8'));
+const save = (file, obj) => file==='results.json'?publishResults(root,obj):fs.writeFileSync(path.join(root, file), JSON.stringify(obj, null, 2) + '\n');
 const fail = (ok, message) => { if (!ok) throw Error('TRACKER_FINALS_IMPORT: ' + message); };
 const dryRun = process.argv.includes('--dry-run');
 const results = read('results.json');

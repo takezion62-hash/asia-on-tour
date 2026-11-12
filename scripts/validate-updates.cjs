@@ -1,6 +1,7 @@
 'use strict';
 const fs=require('node:fs');
 const path=require('node:path');
+const {readResults}=require('./source-results-store.cjs');
 function validateUpdateLog(results,log){
   const errors=[];
   if(!Array.isArray(results)||!log||log.version!==1||!Array.isArray(log.entries))return ['更新履歴のルート構造が不正です（version:1 / entries配列）'];
@@ -48,7 +49,7 @@ function validateUpdateLog(results,log){
 if(require.main===module){
   try{
     const root=path.join(__dirname,'..');
-    const results=JSON.parse(fs.readFileSync(path.join(root,'results.json'),'utf8'));
+    const results=readResults(root).rows;
     const log=JSON.parse(fs.readFileSync(path.join(root,'updates.json'),'utf8'));
     const errors=validateUpdateLog(results,log);
     if(errors.length){for(const error of errors)console.error('更新履歴エラー '+error);process.exitCode=1}

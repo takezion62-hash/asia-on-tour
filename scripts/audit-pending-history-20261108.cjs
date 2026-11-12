@@ -1,9 +1,10 @@
 'use strict';
+const {readResults}=require('./source-results-store.cjs');
 // 2026-11-08 inspection of historical candidates on the Actions runner.
 // Read-only diagnostics, never publish an unverified team or a prize.
 const fs=require('node:fs'),path=require('node:path');
 const root=path.resolve(__dirname,'..');
-const read=f=>JSON.parse(fs.readFileSync(path.join(root,f),'utf8'));
+const read=f=>f==='results.json'?readResults(root).rows:JSON.parse(fs.readFileSync(path.join(root,f),'utf8'));
 const {collision}=require('./manual-approval-core.cjs');
 const queue=read('history-sync-review.json').proposals;
 const scan=read('history-sync-scan.json').windows;

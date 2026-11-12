@@ -1,8 +1,8 @@
 'use strict';
 /**
- * Phase 2: source-results/*.json is the authoritative writable store.
- * results.json remains a verified compatibility projection for the site and
- * historical scripts, never a source from which changes are silently imported.
+ * Phase 3: source-results/*.json is authoritative; no root results.json
+ * projection is required or written in production. Fixture-only legacy
+ * compatibility remains isolated from published data.
  * A complete manifest, content hashes and the original ID order are required.
  */
 const fs=require('node:fs');
@@ -24,7 +24,7 @@ const formatted=rows=>JSON.stringify(rows,null,2)+'\n';
 const stockPath=root=>path.join(root,'source-results','manifest.json');
 const isProductionRoot=root=>path.resolve(root)===ROOT;
 
-function readResults(root=ROOT,{verifyProjection=true}={}){
+function readResults(root=ROOT,{verifyProjection=false}={}){
  const manifestFile=stockPath(root);
  if(!fs.existsSync(manifestFile)){
   if(!isProductionRoot(root) && fs.existsSync(path.join(root,'results.json')))
@@ -77,6 +77,9 @@ function readResults(root=ROOT,{verifyProjection=true}={}){
   orderSeen.add(id);
   return actual.get(id);
  });
+ // Verify the entire record payload/order without requiring an old projection.
+ if(sha(formatted(rows))!==manifest.canonicalSha256)
+  throw Error('SOURCE_RESULTS reconstructed canonical checksum differs');
  if(verifyProjection){
   const projection=fs.readFileSync(path.join(root,'results.json'),'utf8');
   if(sha(projection)!==manifest.canonicalSha256 ||
@@ -118,7 +121,7 @@ function atomicallyWrite(file,contents){
 }
 function publishResults(root,rows,{legacyWriter=false,allowRemoval=false}={}){
  if(!Array.isArray(rows))throw Error('SOURCE_RESULTS expected array');
- const current=readResults(root,{verifyProjection:!legacyWriter});
+ const current=readResults(root,{verifyProjection:false});
  if(current.fixture){
   // Isolated unit-test fixtures created without source-results are not migrated.
   atomicallyWrite(path.join(root,'results.json'),formatted(rows));
@@ -169,7 +172,9 @@ function publishResults(root,rows,{legacyWriter=false,allowRemoval=false}={}){
    atomicallyWrite(file,bytes);
  }
  atomicallyWrite(path.join(directory,'manifest.json'),next.files.get('manifest.json'));
- atomicallyWrite(path.join(root,'results.json'),projected);
+ // Only explicit isolated fixture tests keep a temporary legacy projection.
+ if(!isProductionRoot(root)&&fs.existsSync(path.join(root,'results.json')))
+  atomicallyWrite(path.join(root,'results.json'),projected);
  for(const name of currentNames)
   if(!next.files.has(name))fs.rmSync(path.join(directory,name),{force:true});
  const checked=readResults(root);
@@ -181,6 +186,7 @@ function publishResults(root,rows,{legacyWriter=false,allowRemoval=false}={}){
   .map(x=>x.seasonId)};
 }
 function importLegacy(root=ROOT){
+ if(isProductionRoot(root))throw Error('SOURCE_RESULTS import-legacy retired in phase 3');
  const rows=readJson(path.join(root,'results.json'));
  return publishResults(root,rows,{legacyWriter:true});
 }
@@ -192,9 +198,7 @@ if(require.main===module){
    if(!manifest)throw Error('No source manifest');
    console.log('SOURCE_RESULTS_VERIFIED '+JSON.stringify({count:rows.length,shards:manifest.shards.length,
     teamPrizeCents:manifest.teamPrizeCents,personalPrizeCents:manifest.personalPrizeCents}));
-  }else if(command==='import-legacy'){
-   console.log('SOURCE_RESULTS_IMPORTED '+JSON.stringify(importLegacy()));
-  }else throw Error('Use verify or import-legacy');
+  }else throw Error('Use verify (legacy imports are retired)');
  }catch(error){console.error(error.stack);process.exitCode=1}
 }
 module.exports={readResults,publishResults,importLegacy,seasonSelector};

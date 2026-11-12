@@ -12,7 +12,7 @@ function buildFileMap(projectRoot = root) {
     ['/', 'index.html'], ['/index.html', 'index.html'],
     ['/verification.html', 'verification.html'],
     ['/schedule.json', 'schedule.json'],
-    ...['results', 'players', 'tournaments', 'updates'].map(name => ['/' + name + '.json', name + '.json'])
+    ...['players', 'tournaments', 'updates'].map(name => ['/' + name + '.json', name + '.json'])
   ]);
   for (const name of [
     'participation-index.json', 'participation-status.json',
@@ -30,6 +30,7 @@ function buildFileMap(projectRoot = root) {
 
   for (const [directory, pattern] of [
     ['season-data', /^(?:S\d+|unknown|manifest|ranking-(?:S\d+|unknown|all))\.json$/],
+    ['source-results', /^(?:S\d+|unknown|manifest)\.json$/],
     ['calendar-history', /^\d{4}-\d{2}\.json$/],
     ['participation', /^\d{4}-\d{2}\.json$/]
   ]) {

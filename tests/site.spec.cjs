@@ -306,7 +306,7 @@ test('大会詳細で予選・決勝・賞金獲得を独立表示し、全戦�
     const actual=await page.locator('#tournament-record-sessions [data-tournament-record]')
       .evaluateAll(elements=>elements.map(element=>element.dataset.tournamentRecord));
     expect(actual.slice().sort()).toEqual(expectedRows.map(row=>row.id).sort());
-    await expect(page.locator('.tournament-detail-summary')).toContainText(String(expected.length));
+    await expect(page.locator('.tournament-detail-summary')).toContainText(expected.length.toLocaleString('ja-JP'));
   }
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth+1)).toBe(true);
 });

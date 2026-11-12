@@ -4,7 +4,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 const root = path.resolve(__dirname, '..');
-const results = JSON.parse(fs.readFileSync(path.join(root, 'results.json'), 'utf8'));
+const results = require('./production-results.cjs');
 const expected = [
   ['manual-s32-me-trios-final-20241124-rank16',16,89,6,5,0,300,3],
   ['manual-s32-me-trios-final-20241124-rank19',19,64,6,5,0,300,3],

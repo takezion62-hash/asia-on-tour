@@ -98,7 +98,7 @@ test('2025-12-20 OCE Unreal Cupの完了済み個人賞金修正は実行コー�
  assert.equal(correction.personalAwardCorrection?.rule,
   'https://www.fortnite.com/competitive/rules-guidelines/rules-library/1-million-dollar-unreal-cup-chapter-7-season-1-official-rules');
 
- const rows=JSON.parse(fs.readFileSync(path.join(root,'results.json'),'utf8'));
+ const rows=require('./production-results.cjs');
  const actual=rows.filter(r=>r.id==='auto-s39-4d5f1e94f897');
  assert.equal(actual.length,1,'verified source row must stay unique');
  const row=actual[0];
@@ -132,7 +132,7 @@ test('14件のJST開催日修正と4件の重複解消は古い実行ファイ�
  const marker='site-fix-session-dates-and-duplicate-finals-20261106';
  assert.equal(updates.filter(x=>x.id===marker).length,1,
   'the completed session/date correction must remain logged');
- const results=JSON.parse(fs.readFileSync(path.join(root,'results.json'),'utf8'));
+ const results=require('./production-results.cjs');
  const byId=new Map(results.map(r=>[r.id,r]));
  assert.equal(byId.size,results.length,'published IDs must remain unique');
  const dates={
@@ -208,7 +208,7 @@ test('第4段階：掲載完了4バッチの旧実行ファイルを除去して
   path.join(root,'package.json')
  ];
  const updates=JSON.parse(fs.readFileSync(path.join(root,'updates.json'),'utf8')).entries;
- const results=JSON.parse(fs.readFileSync(path.join(root,'results.json'),'utf8'));
+ const results=require('./production-results.cjs');
  const reviewed=JSON.parse(fs.readFileSync(path.join(root,'history-sync-reviewed.json'),'utf8')).entries;
  const approvals=JSON.parse(fs.readFileSync(path.join(root,'approval-history.json'),'utf8')).entries;
  const pending=JSON.parse(fs.readFileSync(path.join(root,'history-sync-review.json'),'utf8')).proposals;
@@ -254,7 +254,7 @@ test('第5段階：完了済み4掲載バッチを整理しても115件・既存
   path.join(root,'package.json')
  ];
  const updates=JSON.parse(fs.readFileSync(path.join(root,'updates.json'),'utf8')).entries;
- const results=JSON.parse(fs.readFileSync(path.join(root,'results.json'),'utf8'));
+ const results=require('./production-results.cjs');
  const review=JSON.parse(fs.readFileSync(path.join(root,'history-sync-reviewed.json'),'utf8')).entries;
  const approvals=JSON.parse(fs.readFileSync(path.join(root,'approval-history.json'),'utf8')).entries;
  const pendingHistory=JSON.parse(fs.readFileSync(path.join(root,'history-sync-review.json'),'utf8')).proposals;
@@ -315,7 +315,7 @@ test('第6段階：完了済み4監査処理を整理して79戦績・18重複�
  const reviewed=JSON.parse(fs.readFileSync(path.join(root,'history-sync-reviewed.json'),'utf8')).entries;
  const reviewQueue=JSON.parse(fs.readFileSync(path.join(root,'history-sync-review.json'),'utf8')).proposals;
  const recentQueue=JSON.parse(fs.readFileSync(path.join(root,'auto-sync-review.json'),'utf8')).proposals;
- const rows=JSON.parse(fs.readFileSync(path.join(root,'results.json'),'utf8'));
+ const rows=require('./production-results.cjs');
  const plan=JSON.parse(fs.readFileSync(path.join(root,'data/manual-approvals/20261106-remaining-95.json'),'utf8'));
  const results=new Map(rows.map(x=>[x.id,x]));
  const decisions=new Map(reviewed.map(x=>[x.id,x]));
@@ -395,7 +395,7 @@ test('第7段階：4本の一時掲載処理を整理しても169件の公開成
  const updates=JSON.parse(fs.readFileSync(path.join(root,'updates.json'),'utf8')).entries;
  const reviewed=JSON.parse(fs.readFileSync(path.join(root,'history-sync-reviewed.json'),'utf8')).entries;
  const approvals=JSON.parse(fs.readFileSync(path.join(root,'approval-history.json'),'utf8')).entries;
- const results=JSON.parse(fs.readFileSync(path.join(root,'results.json'),'utf8'));
+ const results=require('./production-results.cjs');
  const pendingHistory=JSON.parse(fs.readFileSync(path.join(root,'history-sync-review.json'),'utf8')).proposals;
  const pendingAuto=JSON.parse(fs.readFileSync(path.join(root,'auto-sync-review.json'),'utf8')).proposals;
  const byId=new Map(results.map(row=>[row.id,row]));
@@ -437,7 +437,7 @@ test('第8段階：完了済み4ランナーを廃止しても182件・本人確
   path.join(root,'package.json')
  ];
  const updates=JSON.parse(fs.readFileSync(path.join(root,'updates.json'),'utf8')).entries;
- const results=JSON.parse(fs.readFileSync(path.join(root,'results.json'),'utf8'));
+ const results=require('./production-results.cjs');
  const reviewed=JSON.parse(fs.readFileSync(path.join(root,'history-sync-reviewed.json'),'utf8')).entries;
  const approvals=JSON.parse(fs.readFileSync(path.join(root,'approval-history.json'),'utf8')).entries;
  const history=JSON.parse(fs.readFileSync(path.join(root,'history-sync-review.json'),'utf8')).proposals;
@@ -511,7 +511,7 @@ test('第9段階：適用済みの参加・コスメ処理を退役しても13�
   path.join(root,'package.json')
  ];
  const updates=JSON.parse(fs.readFileSync(path.join(root,'updates.json'),'utf8')).entries;
- const records=JSON.parse(fs.readFileSync(path.join(root,'results.json'),'utf8'));
+ const records=require('./production-results.cjs');
  const byId=new Map(records.map(r=>[r.id,r]));
  const historyPending=JSON.parse(fs.readFileSync(path.join(root,'history-sync-review.json'),'utf8')).proposals;
  const autoPending=JSON.parse(fs.readFileSync(path.join(root,'auto-sync-review.json'),'utf8')).proposals;

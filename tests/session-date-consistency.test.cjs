@@ -2,7 +2,7 @@
 const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path');
 const root=path.resolve(__dirname,'..');
 const read=file=>JSON.parse(fs.readFileSync(path.join(root,file),'utf8'));
-const records=read('results.json');
+const records=require('./production-results.cjs');
 const historyDir=path.join(root,'calendar-history');
 const windows=new Map();
 for(const filename of fs.readdirSync(historyDir).filter(x=>/^20\d{2}-\d{2}\.json$/.test(x))){

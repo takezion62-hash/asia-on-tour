@@ -68,7 +68,7 @@ test('holds colliding altered score and preserves pending review',()=>{
 test('production checkpoint audit confirms exact pending IDs with no conflicts',()=>{
  const fs=require('node:fs'),path=require('node:path'),ROOT=path.resolve(__dirname,'..');
  const read=n=>JSON.parse(fs.readFileSync(path.join(ROOT,n),'utf8'));
- const d={results:read('results.json'),review:read('history-sync-review.json'),
+ const d={results:require('./production-results.cjs'),review:read('history-sync-review.json'),
   reviewed:read('history-sync-reviewed.json'),approval:read('approval-history.json'),
   updates:read('updates.json'),status:read('history-sync-status.json'),
   scan:read('history-sync-scan.json'),players:read('players.json'),tournaments:read('tournaments.json')};

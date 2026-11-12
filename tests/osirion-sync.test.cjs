@@ -241,7 +241,7 @@ test('reviewed candidates are uniquely resolved and all approved IDs are in publ
  assert.ok(data.entries.filter(x=>x.decision==='published').length>=56);
  assert.ok(data.entries.filter(x=>x.decision==='participation').length>=8);
  assert.ok(data.entries.filter(x=>x.decision==='already-published').length>=8);
- const existing=new Set(JSON.parse(fs.readFileSync(path.join(folder,'results.json'),'utf8')).map(x=>x.id));
+ const existing=new Set(require('./production-results.cjs').map(x=>x.id));
  for(const row of data.entries.filter(x=>x.decision==='published'))assert.ok(existing.has(row.recordId),row.id);
 });
 

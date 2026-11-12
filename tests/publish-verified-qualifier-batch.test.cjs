@@ -85,7 +85,7 @@ test('keeps unrelated historical pending candidates intact',()=>{
 test('production saved candidate IDs and official scoreboard checkpoints pass dry-run before merge',()=>{
  const fs=require('node:fs'),path=require('node:path'),root=path.resolve(__dirname,'..');
  const read=n=>JSON.parse(fs.readFileSync(path.join(root,n),'utf8'));
- const real={results:read('results.json'),review:read('history-sync-review.json'),
+ const real={results:require('./production-results.cjs'),review:read('history-sync-review.json'),
   reviewed:read('history-sync-reviewed.json'),approval:read('approval-history.json'),
   updates:read('updates.json'),status:read('history-sync-status.json'),
   scan:read('history-sync-scan.json'),players:read('players.json'),tournaments:read('tournaments.json')};
@@ -106,7 +106,7 @@ test('S30 NAC 2024 API region uses NA top-5000 official cutoff',()=>{
 test('2024-06-11 ME ZB candidate cohort is published once or remains queued, never guessed cash',()=>{
  const fs=require('node:fs'),path=require('node:path'),root=path.resolve(__dirname,'..');
  const get=file=>JSON.parse(fs.readFileSync(path.join(root,file),'utf8'));
- const results=get('results.json'),pending=get('history-sync-review.json').proposals;
+ const results=require('./production-results.cjs'),pending=get('history-sync-review.json').proposals;
  const ledger=get('approval-history.json').entries;
  const spec=W.find(x=>x.date==='2024-06-11'&&x.region==='ME'&&x.event==='S30_SoloZBVictoryCashCup');
  assert.ok(spec,'source-verified 2024 ZB event must remain in explicit whitelist');
@@ -145,7 +145,7 @@ test('2024-06-11 ME ZB candidate cohort is published once or remains queued, nev
 test('2024-07-30 ME ZB event7 and 2024-08-06 event8 cohorts remain pending or source-verified published',()=>{
  const fs=require('node:fs'),path=require('node:path'),root=path.resolve(__dirname,'..');
  const get=file=>JSON.parse(fs.readFileSync(path.join(root,file),'utf8'));
- const results=get('results.json'),pending=get('history-sync-review.json').proposals;
+ const results=require('./production-results.cjs'),pending=get('history-sync-review.json').proposals;
  const approvals=get('approval-history.json').entries;
  const groups=[
   {date:'2024-07-30',event:'Event7Round1',rows:[
@@ -183,7 +183,7 @@ test('2024-07-30 ME ZB event7 and 2024-08-06 event8 cohorts remain pending or so
 test('2024-08-13 ME BR and ZB event9 cohorts remain verified and cannot be published twice',()=>{
  const fs=require('node:fs'),path=require('node:path'),root=path.resolve(__dirname,'..');
  const load=p=>JSON.parse(fs.readFileSync(path.join(root,p),'utf8'));
- const results=load('results.json'),pending=load('history-sync-review.json').proposals,
+ const results=require('./production-results.cjs'),pending=load('history-sync-review.json').proposals,
   ledger=load('approval-history.json').entries,updates=load('updates.json').entries;
  const cohorts=[
   {event:'S30_SoloVictoryCashCup',tournament:'ch5s3-solo-victory-cup',
