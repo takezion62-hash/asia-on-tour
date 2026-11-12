@@ -410,6 +410,18 @@ function selectHistoricalWindows(windows,state,config,time=Date.now(),records=[]
    add(pending.filter(w=>w.dateJst.startsWith(year)&&(series==='victory-cup'?w.series==='victory-cup':w.series!=='victory-cup')));
   }
  }
+ // Reserve one follow-up slot for a partial leaderboard with an already
+ // observed identity-linked candidate. This accelerates finishing evidence,
+ // but does not authorize cash, qualification, or cosmetic awards.
+ if(selected.length<limit){
+  const alreadyPublished=new Set(records.map(x=>x.id));
+  const candidateWindows=pending.filter(w=>{
+   const cp=state.windows[w.key];
+   return cp&&!cp.complete&&cp.nextPage>0&&Array.isArray(cp.proposals)&&
+    cp.proposals.some(x=>x.verified===true&&!alreadyPublished.has(x.id));
+  });
+  if(candidateWindows.length)add(candidateWindows);
+ }
  // Safely finish up to two already scanned leaderboards within one per-window page limit.
  // Year/series quotas and due retries above remain protected.
  for(const win of finishableWindows(pending,state,config.maxPagesPerWindowPerRun||10,time,2)){
