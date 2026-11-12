@@ -304,13 +304,21 @@
        +'<span class="style-tag'+(report.style.key==='unrated'?' is-low':'')+'">'+esc(report.style.key==='unrated'&&report.observedTendency?.records?'観測：'+report.observedTendency.label+'（参考）':report.style.label)+'</span>'
        +'<p class="style-small">'+esc(report.affinity.reason)+'</p></article>';
    }).join('');
+   const formatConfidence=r=>{
+     const groups=r.axes?.format?.teams||[];
+     if(groups.length!==2)return null;
+     const levels=groups.map(x=>x.confidence?.level||'low');
+     const level=levels.includes('low')?'low':levels.includes('medium')?'medium':'high';
+     return {label:{low:'低',medium:'中',high:'高'}[level],
+       note:groups.map(x=>(x.team==='solo'?'ソロ':'デュオ')+' '+(x.confidence?.note||'対象なし')).join(' / ')};
+   };
    const fourMetrics=[
      ['🌍 得意地域',r=>r.axes?.regional?.leader? r.axes.regional.leader+' '+num(r.axes.regional.score,1)+'/100':'未判定',r=>r.axes?.regional?.confidence],
      ['🎮 ソロ・デュオ',r=>{
        const teams=r.axes?.format?.teams||[];
        const teamVr=t=>pct(teams.find(x=>x.team===t)?.stats?.vrRate??null);
        return 'ソロ '+teamVr('solo')+' / デュオ '+teamVr('duo');
-     },r=>null],
+     },formatConfidence],
      ['🏆 決勝パフォーマンス',r=>r.axes?.finalStrength?.vrRate==null?
        'TOP10 '+count(r.axes?.finalStrength?.top10||0)+'件':
        '決勝VR率 '+pct(r.axes.finalStrength.vrRate)+' / TOP10 '+count(r.axes.finalStrength.top10)+'件',r=>r.axes?.finalStrength?.confidence],
