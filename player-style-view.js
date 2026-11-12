@@ -304,6 +304,28 @@
        +'<span class="style-tag'+(report.style.key==='unrated'?' is-low':'')+'">'+esc(report.style.key==='unrated'&&report.observedTendency?.records?'観測：'+report.observedTendency.label+'（参考）':report.style.label)+'</span>'
        +'<p class="style-small">'+esc(report.affinity.reason)+'</p></article>';
    }).join('');
+   const fourMetrics=[
+     ['🌍 得意地域',r=>r.axes?.regional?.leader? r.axes.regional.leader+' '+num(r.axes.regional.score,1)+'/100':'未判定',r=>r.axes?.regional?.confidence],
+     ['🎮 ソロ・デュオ',r=>{
+       const teams=r.axes?.format?.teams||[];
+       const teamVr=t=>pct(teams.find(x=>x.team===t)?.stats?.vrRate??null);
+       return 'ソロ '+teamVr('solo')+' / デュオ '+teamVr('duo');
+     },r=>null],
+     ['🏆 決勝パフォーマンス',r=>r.axes?.finalStrength?.vrRate==null?
+       'TOP10 '+count(r.axes?.finalStrength?.top10||0)+'件':
+       '決勝VR率 '+pct(r.axes.finalStrength.vrRate)+' / TOP10 '+count(r.axes.finalStrength.top10)+'件',r=>r.axes?.finalStrength?.confidence],
+     ['📈 成長傾向',r=>r.axes?.growth?.ready?
+       'K/試合 '+num(r.axes.growth.deltaKpm,2)+'差 / VR率 '+num(r.axes.growth.deltaVrPp,1)+'pt差':
+       '同条件の記録不足',r=>r.axes?.growth?.confidence]
+   ];
+   const axesMatrix='<div class="style-evidence-scroll style-four-axis-matrix" tabindex="0" aria-label="4軸の実測比較・信頼度">'
+     +'<table class="style-matrix"><thead><tr><th scope="col">比較軸</th>'
+     +selected.map(r=>'<th scope="col">'+esc(r.player)+'</th>').join('')
+     +'</tr></thead><tbody>'
+     +fourMetrics.map(([label,format,grade],i)=>'<tr data-style-compare-axis="'+i+'"><th scope="row">'+esc(label)+'</th>'
+       +selected.map(r=>'<td><strong>'+esc(format(r))+'</strong><small>信頼度 '+esc(grade(r)?.label||'低')
+       +' · '+esc(grade(r)?.note||'同条件の観測が不足')+'</small></td>').join('')+'</tr>').join('')
+     +'</tbody></table><p class="style-note">信頼度はデータ量。地域の100点は本人内の相対値であり、選手同士の実力点数ではありません</p></div>';
    const regionMatrix='<div class="style-evidence-scroll style-region-matrix" tabindex="0" aria-label="同条件・地域別の攻撃効率と勝率の比較表">'
      +'<table class="style-matrix"><thead><tr><th scope="col">地域</th>'
      +selected.map(r=>'<th scope="col">'+esc(r.player)+'</th>').join('')+'</tr></thead><tbody>'
@@ -329,6 +351,7 @@
      +'<div class="style-fold-body">'
      +'<div class="style-filters"><label>チーム形式<select id="compare-style-team" aria-label="プレイスタイル比較 チーム形式">'+opts+'</select></label></div>'
      +'<div class="style-compare-row">'+cards+'</div>'
+     +'<h3 class="style-region-title">📊 4軸の数値・信頼度比較</h3>'+axesMatrix
      +'<h3 class="style-region-title">🌍 同条件の地域別実測比較</h3>'+regionMatrix
      +'<p class="style-footnote">試合数がわからない記録は率に含めません。チーム戦はチームキル・チームVR。得意地域候補は厳密に同じ条件で比較可能な地域が複数ある場合にのみ表示します。</p></div></details></section>';
  }
