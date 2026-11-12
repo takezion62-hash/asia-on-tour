@@ -26,7 +26,7 @@ on:
 permissions:
   contents: write
 concurrency:
-  # Serialize recent and historical writers of results.json/updates.json.
+  # Serialize recent and historical writers of source-results and updates.json.
   # Never let simultaneous push-triggered scans race on a JSON rebase.
   group: aot-provider-results-main
   cancel-in-progress: false
@@ -101,7 +101,7 @@ jobs:
             node scripts/build-candidate-triage.cjs
             git add -A season-data source-results
             git add candidate-triage.json
-            git add results.json updates.json auto-sync-status.json auto-sync-review.json auto-sync-scan.json
+            git add updates.json auto-sync-status.json auto-sync-review.json auto-sync-scan.json
             if git diff --cached --quiet; then
               echo "SAFE_RECENT_MERGE no new data to publish"
               exit 0

@@ -3,7 +3,6 @@ on:
   push:
     branches: [main]
     paths:
-      - results.json
       - tournaments.json
       - players.json
       - achievements.js
@@ -52,8 +51,6 @@ jobs:
             node scripts/apply-verified-tracker-finals.cjs
             node scripts/apply-verified-s43-squads-finals.cjs --dry-run
             node scripts/apply-verified-s43-squads-finals.cjs
-            # Legacy one-off publishers are reconciled explicitly, never implicitly.
-            node scripts/source-results-store.cjs import-legacy
             node scripts/validate-data.cjs
             node scripts/validate-updates.cjs
             node scripts/build-season-data.cjs
@@ -62,7 +59,7 @@ jobs:
             node scripts/build-source-results.cjs --check
             node scripts/build-season-data.cjs --check
             node scripts/build-candidate-triage.cjs --check
-            git add results.json players.json updates.json
+            git add players.json updates.json
             git add -A season-data
             git add -A source-results
             git add candidate-triage.json
