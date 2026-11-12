@@ -25,12 +25,71 @@ const script = (() => {
   // Keep exhaustive share-link assertions in this synthetic DOM harness.
   // Production player batching is checked by the real browser tests.
   body = body.replace('const PLAYER_BATCH_SIZE=60;', 'const PLAYER_BATCH_SIZE=Number.MAX_SAFE_INTEGER;');
+
+  // The VM harness renders synchronously with its injected, full-catalog fixture.
+  // Production fetch/lazy navigation are independently verified in Playwright.
+  body = body.replace('const rawAll=()=>fullResults||builtIn;',
+    'const fullResults=builtIn;\n    const manifest={scopes:{},seasonOrder:[],names:[],previews:{}};\n    const seasonRankingsCache=new Map();\n    const rawAll=()=>builtIn;');
+  body = body.replace('let selectedSeason=initialSeason;', "let selectedSeason='S43';");
+  body = body.replace('const seasonRowsCache=new Map([[initialSeason,records]]);',
+    'const seasonRowsCache=new Map();');
+  {
+    const start=body.indexOf('    const all=()=>{'),end=body.indexOf('    const seasonPlayerIndexes=',start);
+    assert.ok(start>=0&&end>start,'Full-catalog test filter boundary');
+    body=body.slice(0,start)+[
+      '    const all=()=>{',
+      "      if(selectedSeason==='all')return rawAll();",
+      '      if(!seasonRowsCache.has(selectedSeason))seasonRowsCache.set(selectedSeason,rawAll().filter(e=>recordSeason(e).id===selectedSeason));',
+      '      return seasonRowsCache.get(selectedSeason);',
+      '    };',
+      ''
+    ].join('\n')+body.slice(end);
+  }
+  {
+    const start=body.indexOf('    function seasonOptions(){'),end=body.indexOf('    function defaultSeason(){',start);
+    assert.ok(start>=0&&end>start,'Full-catalog test season menu');
+    body=body.slice(0,start)+[
+      '    function seasonOptions(){',
+      '      if(cachedSeasonOptions)return cachedSeasonOptions;',
+      '      const registered=new Map(rawAll().map(e=>{const info=recordSeason(e);return [info.id,info]}));',
+      "      cachedSeasonOptions=[{id:'all',label:'全期間'},...[...registered.values()].filter(s=>s.id!=='unknown').sort((a,b)=>b.chapter-a.chapter||b.season-a.season||a.id.localeCompare(b.id)),...(registered.has('unknown')?[unknownSeason()]:[])];",
+      '      return cachedSeasonOptions;',
+      '    }',
+      ''
+    ].join('\n')+body.slice(end);
+  }
+  body=body.replace('const extras=manifest.names.filter(name=>!known.has(name))',
+    'const extras=[...new Set(rawAll().flatMap(names))].filter(name=>!known.has(name))');
+  {
+    const start=body.indexOf('    async function changeSeason(value){');
+    const end=body.indexOf('      const previous=captureView();',start);
+    assert.ok(start>=0&&end>start,'Synchronous VM season control');
+    body=body.slice(0,start)+[
+      '    function changeSeason(value){',
+      '      const nextSeason=sanitizeSeason(value);',
+      '      if(nextSeason===selectedSeason)return;',
+      ''
+    ].join('\n')+body.slice(end);
+  }
+  {
+    const start=body.indexOf('    let navigationToken=0;\n    async function showView(view,restore=false){');
+    const end=body.indexOf('      if(nextSeason!==selectedSeason){',start);
+    assert.ok(start>=0&&end>start,'Synchronous VM view transition');
+    body=body.slice(0,start)+[
+      '    let navigationToken=0;',
+      '    function showView(view,restore=false){',
+      '      const nextSeason=seasonFromUrl();',
+      ''
+    ].join('\n')+body.slice(end);
+  }
+  body=body.replace('// Ranking is rendered only on demand when the rankings screen is opened.', 'renderRanking();');
+
   const literal = value => JSON.stringify(value).replace(/\]$/, '\n    ]');
   for (const [name, reference, value] of [
     ['builtIn', 'siteData.results', records], ['candidates', 'siteData.players.candidates', data.players.candidates],
     ['tournamentAxes', 'siteData.tournaments.axes', data.tournaments.axes], ['tournamentCatalog', 'siteData.tournaments.catalog', data.tournaments.catalog],
     ['confirmedAliases', 'siteData.players.confirmedAliases', data.players.confirmedAliases]
-  ]) body = body.replace('const ' + name + '=' + reference + ';', () => 'const ' + name + '=' + (Array.isArray(value) ? literal(value) : JSON.stringify(value)) + ';');
+  ]) body = body.replace((name==='builtIn'?'let ':'const ') + name + '=' + reference + ';', () => (name==='builtIn'?'let ':'const ') + name + '=' + (Array.isArray(value) ? literal(value) : JSON.stringify(value)) + ';');
   return '(() => {\n const siteData=' + JSON.stringify({results:records,players:data.players,tournaments:data.tournaments,updates,schedule}) + ';\n const updateEntries=' + JSON.stringify(updates.entries) + ';\n' + body + '\n})();';
 })();
 const sampleRecord = { id:'unit-fixture', date:'2026-09-01', region:'ME', player:'Fixture', playerRaw:'Fixture', event:'Solo Victory Cup Battle Royale', round:'Event 1 · Round 2 / 賞金決勝', rank:17, points:100, kills:2, vrs:1, prize:100, kind:'賞金決勝', source:'https://fortnitetracker.com/events/epicgames_S42_SoloVictoryCup_ME', verified:true, note:'単体テスト専用データ' };
@@ -400,7 +459,7 @@ test('every result has a native disclosure retaining points, round, display name
 });
 
 function fixtureScript(rows) {
-  return script.replace(/const builtIn=(\[[\s\S]*?\n    \]);/, () => `const builtIn=${JSON.stringify(rows)};`);
+  return script.replace(/let builtIn=(\[[\s\S]*?\n    \]);/, () => `let builtIn=${JSON.stringify(rows)};`);
 }
 
 test('detail text is escaped and non-web source or profile links are not rendered', () => {
