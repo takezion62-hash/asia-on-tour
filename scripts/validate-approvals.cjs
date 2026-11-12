@@ -1,11 +1,12 @@
 'use strict';
+const {readResults}=require('./source-results-store.cjs');
 // Checks that previously manually approved rows remain present and safe after
 // later scheduled syncs or PR rebases. Does not claim to verify Epic's facts.
 const fs=require('node:fs'),path=require('node:path');
 const {collision}=require('./manual-approval-core.cjs');
 const {evaluate:cosmeticEvaluate}=require('./cosmetic-rank-rules.cjs');
 const root=path.resolve(__dirname,'..');
-const load=name=>JSON.parse(fs.readFileSync(path.join(root,name),'utf8'));
+const load=name=>name==='results.json'?readResults(root).rows:JSON.parse(fs.readFileSync(path.join(root,name),'utf8'));
 // New cash-final approval policy: exact official tournament, session, score and
 // award calculation. Re-validate all fields on every subsequent CI run.
 const FINAL_CASH_RULES={

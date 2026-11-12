@@ -1,6 +1,7 @@
 'use strict';
+const {readResults}=require('./source-results-store.cjs');
 const fs=require('node:fs'),path=require('node:path');
-const root=path.resolve(__dirname,'..'),read=p=>JSON.parse(fs.readFileSync(path.join(root,p),'utf8'));
+const root=path.resolve(__dirname,'..'),read=p=>p==='results.json'?readResults(root).rows:JSON.parse(fs.readFileSync(path.join(root,p),'utf8'));
 const {collision}=require('./manual-approval-core.cjs');
 const {sameScannedCandidate}=require('./verified-partial-page.cjs');
 const {linkedAccounts,getLeaderboard,normalizeRow}=require('./osirion-sync.cjs');

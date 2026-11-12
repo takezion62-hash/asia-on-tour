@@ -121,7 +121,7 @@ function atomicallyWrite(file,contents){
 }
 function publishResults(root,rows,{legacyWriter=false,allowRemoval=false}={}){
  if(!Array.isArray(rows))throw Error('SOURCE_RESULTS expected array');
- const current=readResults(root,{verifyProjection:!legacyWriter});
+ const current=readResults(root,{verifyProjection:false});
  if(current.fixture){
   // Isolated unit-test fixtures created without source-results are not migrated.
   atomicallyWrite(path.join(root,'results.json'),formatted(rows));
