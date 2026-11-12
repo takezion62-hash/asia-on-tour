@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-11-12T15:45:31.817Z",
+  "checkedAt": "2026-11-12T16:03:51.451Z",
   "windows": {
     "epicgames_S42_InoxtagIconCup_NAW/S42_InoxtagIconCup_NAW": {
       "nextPage": 50,
@@ -390,12 +390,12 @@
       "emptyAttempts": 0
     },
     "epicgames_S43_OnePieceZoroCup_NAC/S43_OnePieceZoroCup_NAC": {
-      "nextPage": 36,
-      "pages": 36,
+      "nextPage": 46,
+      "pages": 46,
       "complete": false,
       "coverageLimited": false,
       "totalPages": 100,
-      "lastScanned": "2026-11-08T03:38:32.975Z",
+      "lastScanned": "2026-11-12T16:03:33.643Z",
       "emptyAttempts": 0
     },
     "epicgames_S43_OnePieceZoroCup_NAW/S43_OnePieceZoroCup_NAW": {
@@ -754,32 +754,32 @@
       "lastError": "Osirion API HTTP 500 /v1/tournaments/leaderboard"
     },
     "epicgames_S30_SoloZBVictoryCashCup_ME/S30_SoloZBVictoryCashCup_Event1Round2_ME": {
-      "nextPage": 2,
-      "pages": 2,
+      "nextPage": 12,
+      "pages": 12,
       "complete": false,
       "coverageLimited": false,
       "totalPages": 18,
-      "lastScanned": "2026-11-11T22:01:40.118Z",
+      "lastScanned": "2026-11-12T16:03:41.576Z",
       "emptyAttempts": 0
     },
     "epicgames_S43_ArenaCashCup_NAC/S43_ArenaCashCup_Event1_NAC": {
-      "nextPage": 20,
-      "pages": 20,
+      "nextPage": 30,
+      "pages": 30,
       "complete": false,
       "coverageLimited": false,
       "totalPages": 83,
-      "lastScanned": "2026-11-12T15:44:58.447Z",
+      "lastScanned": "2026-11-12T16:03:23.391Z",
       "emptyAttempts": 0,
       "lastError": "Osirion API HTTP 500 /v1/tournaments/leaderboard"
     },
     "epicgames_S33_SoloCashCup_NAW/S33_SoloCashCup_Event4Round1_NAW": {
-      "nextPage": 10,
-      "pages": 10,
+      "nextPage": 20,
+      "pages": 20,
       "complete": false,
       "coverageLimited": false,
       "lastError": "Osirion API HTTP 500 /v1/tournaments/leaderboard",
       "totalPages": 100,
-      "lastScanned": "2026-11-12T15:45:25.928Z",
+      "lastScanned": "2026-11-12T16:03:51.451Z",
       "emptyAttempts": 0
     },
     "epicgames_S30_SoloVictoryCashCup_EU/S30_SoloVictoryCashCup_Event1Round1_EU": {
