@@ -48,8 +48,19 @@
     const updateEntries=siteData.updates?.entries||[];
     const candidates=siteData.players.candidates;
     const regions=['ME','EU','NAC','NAW','OCE','BR'];
-    const discovery=window.AOTDiscovery;
-    if(!discovery||discovery.VERSION!==1)throw new Error('Unified discovery module missing');
+    // Browser loads AOTDiscovery normally. Offline VM/unit harnesses and browsers
+    // with disabled supplemental scripts retain the prior conservative search.
+    const discovery=(typeof window!=='undefined'&&window.AOTDiscovery?.VERSION===1)
+      ?window.AOTDiscovery:{matchRecord:(row,f={},options={})=>{
+        if(f.date&&row.date!==f.date||f.region&&f.region!=='all'&&row.region!==f.region)return false;
+        const alias=options.aliases||{},roster=Array.isArray(row.players)&&row.players.length?row.players:[row.player];
+        const txt=x=>String(x??'').normalize('NFKC').toLocaleLowerCase('ja').trim();
+        const people=roster.flatMap(name=>[name,...(alias[name]||[])]);
+        if(f.player&&!people.some(name=>txt(name).includes(txt(f.player))))return false;
+        const allText=[row.event,options.tournament?.name,row.date,row.region,row.round,row.kind,
+          ...people,...(options.labels||[])].map(txt).join(' ');
+        return txt(f.q).split(/\s+/).filter(Boolean).every(term=>allText.includes(term));
+      }};
     const $=s=>document.querySelector(s);
     const rawAll=()=>fullResults||builtIn;
     let selectedSeason=initialSeason;
