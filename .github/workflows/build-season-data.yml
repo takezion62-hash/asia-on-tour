@@ -1,0 +1,46 @@
+name: Rebuild lightweight season data
+on:
+  push:
+    branches: [main]
+    paths:
+      - results.json
+      - tournaments.json
+      - players.json
+      - achievements.js
+      - rankings.js
+      - scripts/build-season-data.cjs
+      - .github/workflows/build-season-data.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: season-data-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  rebuild:
+    name: 戦績分割・サマリー再生成
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: true
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '24'
+      - name: 正本データからシーズン別配信ファイル・事前集計を生成
+        run: |
+          node scripts/build-season-data.cjs
+          node scripts/build-season-data.cjs --check
+      - name: 変更があれば配信ファイルを反映
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A season-data
+          if git diff --cached --quiet; then
+            echo "Season data already current"
+          else
+            git commit -m "chore(data): refresh season shards and precomputed summaries [skip ci]"
+            git push
+          fi
