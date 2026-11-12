@@ -181,39 +181,12 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 2
     steps:
-      - name: 判定範囲の必須成功条件を検証
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: 判定範囲の必須成功条件を検証（不明やスキップを誤承認しない）
         env:
           SCOPE_RESULT: ${{ needs.classify.result }}
           MODE: ${{ needs.classify.outputs.mode }}
           UNIT_RESULT: ${{ needs.unit.result }}
           BROWSER_RESULT: ${{ needs.browser.result }}
           SMOKE_RESULT: ${{ needs.smoke.result }}
-        shell: bash
-        run: |
-          echo "Scope job: ${SCOPE_RESULT}, mode: ${MODE}"
-          echo "JSON/Unit: ${UNIT_RESULT}"
-          echo "PC/Mobile full E2E: ${BROWSER_RESULT}"
-          echo "PC/Mobile data smoke: ${SMOKE_RESULT}"
-          if [[ "${SCOPE_RESULT}" != "success" || "${UNIT_RESULT}" != "success" ]]; then
-            echo "::error::Classifier and validation must succeed in all modes"
-            exit 1
-          fi
-          case "${MODE}" in
-            full)
-              if [[ "${BROWSER_RESULT}" != "success" || "${SMOKE_RESULT}" != "skipped" ]]; then
-                echo "::error::Full mode requires all four PC/mobile shards"
-                exit 1
-              fi
-              ;;
-            data)
-              if [[ "${BROWSER_RESULT}" != "skipped" || "${SMOKE_RESULT}" != "success" ]]; then
-                echo "::error::Data-only mode requires PC/mobile smoke"
-                exit 1
-              fi
-              ;;
-            *)
-              echo "::error::Unknown CI mode is never allowed"
-              exit 1
-              ;;
-          esac
-          echo "All required checks for ${MODE} mode passed."
+        run: node scripts/ci-required-gate.cjs
