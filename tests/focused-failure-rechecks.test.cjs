@@ -69,3 +69,28 @@ test('Playwright failure reports reject malformed IDs and never execute a shell 
   fs.writeFileSync(file,JSON.stringify({failedTests:['; rm -rf /']}));
   assert.throws(()=>readReport(file),/Invalid Playwright/);
 });
+
+
+test('actual Node --test reporter writes a targeted failure artifact for a failing test', t => {
+  const { spawnSync } = require('node:child_process');
+  const scratch = fs.mkdtempSync(path.join(os.tmpdir(), 'aot-test-reporter-'));
+  t.after(() => fs.rmSync(scratch, {recursive:true, force:true}));
+  const dir = path.join(scratch, 'tests');
+  fs.mkdirSync(dir);
+  const testPath = path.join(dir, 'broken.test.cjs');
+  const output = path.join(scratch, 'failed.json');
+  fs.writeFileSync(testPath, [
+    "'use strict';",
+    "const test=require('node:test');",
+    "test('expected fixture failure',()=>{throw new Error('fixture');});"
+  ].join('\n') + '\n');
+  const reporter = path.resolve(__dirname, '../scripts/unit-failure-reporter.cjs');
+  const child = spawnSync(process.execPath, [
+    '--test', '--test-reporter=' + reporter,
+    '--test-reporter-destination=' + output, testPath
+  ], {cwd: scratch, encoding:'utf8', timeout:15000});
+  assert.equal(child.status, 1, String(child.stderr || child.stdout));
+  const info = JSON.parse(fs.readFileSync(output, 'utf8'));
+  assert.ok(info.failedTests.some(x=>x.file==='tests/broken.test.cjs'),
+    'real Node event stream must include the failing test file');
+});
