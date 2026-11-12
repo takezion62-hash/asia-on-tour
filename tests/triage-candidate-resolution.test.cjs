@@ -7,36 +7,60 @@ const root=path.resolve(__dirname,'..');
 const read=file=>JSON.parse(fs.readFileSync(path.join(root,file),'utf8'));
 const script=fs.readFileSync(path.join(root,'scripts/resolve-triaged-candidates-20261112.cjs'),'utf8');
 const match=script.match(/const TARGET_IDS=new Set\((\[[^\n]+\])\);/);
-test('48 exact triage IDs remain uniquely adjudicated, without deleting original scored records',()=>{
+test('61 exact triage IDs remain uniquely adjudicated, without deleting original scored records',()=>{
  assert.ok(match,'safe one-time target list retained');
  const ids=JSON.parse(match[1]),set=new Set(ids);
- assert.equal(ids.length,48);
- assert.equal(set.size,48);
+ assert.equal(ids.length,61);
+ assert.equal(set.size,61);
  const reviewed=read('history-sync-reviewed.json');
  const entries=reviewed.entries.filter(x=>set.has(x.id));
- assert.equal(entries.length,48);
- assert.equal(new Set(entries.map(x=>x.id)).size,48);
+ assert.equal(entries.length,61);
+ assert.equal(new Set(entries.map(x=>x.id)).size,61);
  const counts=entries.reduce((map,x)=>(map[x.decision]=(map[x.decision]||0)+1,map),{});
- assert.equal(counts.published,10);
- assert.equal(counts['participation-archived'],28);
+ assert.equal(counts.published,20);
+ assert.equal(counts['participation-archived'],31);
  assert.equal(counts['already-published'],10);
  const results=read('results.json'),byResult=new Map(results.map(x=>[x.id,x]));
  const rules=read('tournament-rules.json').rules;
- const rule=rules.find(x=>x.id==='ch5s4-solo-victory-cup');
- assert.equal(rule.advance.OCE,1500);
+ const rule31=rules.find(x=>x.id==='ch5s4-solo-victory-cup');
+ const rule30=rules.find(x=>x.id==='ch5s3-zb-solo-victory');
+ assert.equal(rule31.advance.OCE,1500);
+ assert.equal(rule31.advance.ME,2000);
+ assert.equal(rule30.advance.ME,2000);
+ let qualifierCount=0,cashCount=0;
  for(const e of entries.filter(x=>x.decision==='published')){
   const row=byResult.get(e.recordId);
-  assert.ok(row,'missing official qualifier '+e.id);
-  assert.ok((row.date==='2024-10-07'&&row.region==='OCE')||
-   (row.date==='2024-10-08'&&row.region==='ME'),
-   'only rule-backed original S31 ME/OCE sessions are approved');
-  assert.equal(row.kind,'予選');
-  assert.match(row.round,/予選突破/);
-  assert.equal(row.prize,0);
-  assert.ok(row.rank<=rule.advance[row.region]);
-  assert.equal(e.rule,rule.source);
-  assert.equal(e.policy,'verified-rule');
+  assert.ok(row,'missing official result '+e.id);
+  if(e.policy==='official-final-vr-award'){
+   cashCount++;
+   assert.equal(row.date,'2024-10-08');
+   assert.equal(row.region,'NAC');
+   assert.equal(row.tournamentId,rule31.id);
+   assert.equal(row.kind,'賞金決勝');
+   assert.equal(row.points,100);
+   assert.equal(row.vrs,1);
+   assert.equal(row.prize,100);
+   assert.match(row.source,/S31_SoloVictoryCashCup_Event6Round2_NAC$/);
+   assert.equal(e.rule,rule31.source);
+  }else{
+   qualifierCount++;
+   assert.equal(e.policy,'verified-rule');
+   assert.ok(
+    (row.date==='2024-10-07'&&row.region==='OCE'&&row.tournamentId===rule31.id)||
+    (row.date==='2024-10-08'&&row.region==='ME'&&row.tournamentId===rule31.id)||
+    (row.date==='2024-10-14'&&row.region==='OCE'&&row.tournamentId===rule31.id)||
+    (row.date==='2024-06-11'&&row.region==='ME'&&row.tournamentId===rule30.id),
+    'only rule-backed 2024 ME/OCE qualifiers are approved');
+   assert.equal(row.kind,'予選');
+   assert.match(row.round,/予選突破/);
+   assert.equal(row.prize,0);
+   const rule=row.tournamentId===rule31.id?rule31:rule30;
+   assert.ok(row.rank<=rule.advance[row.region]);
+   assert.equal(e.rule,rule.source);
+  }
  }
+ assert.equal(qualifierCount,18);
+ assert.equal(cashCount,2);
  for(const e of entries.filter(x=>x.decision==='already-published')){
   const row=byResult.get(e.existingId);
   assert.ok(row,'existing cosmetic was incorrectly removed '+e.id);
@@ -64,9 +88,9 @@ test('48 exact triage IDs remain uniquely adjudicated, without deleting original
   assert.ok(!pending.some(x=>set.has(x.id)),'resolved ID returned to pending queue: '+file);
  }
  const updates=read('updates.json').entries.filter(x=>x.id.startsWith('triage-verified-20261112-'));
- assert.equal(updates.length,2);
+ assert.equal(updates.length,3);
  const allIds=updates.flatMap(x=>x.recordIds);
- assert.equal(allIds.length,10);
- assert.equal(new Set(allIds).size,10);
+ assert.equal(allIds.length,20);
+ assert.equal(new Set(allIds).size,20);
  assert.deepEqual(new Set(allIds),new Set(entries.filter(x=>x.decision==='published').map(x=>x.recordId)));
 });
