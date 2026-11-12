@@ -18,7 +18,7 @@ test('verification computes integrity results once per refresh; tab/search/page 
  }
  for(const id of ['audit-last-check','audit-data-date','audit-items','audit-summary','audit-pagination',
    'audit-prev','audit-next','audit-selected-count','audit-copy-ids','audit-refresh','audit-loading',
-   'audit-search','audit-region',...['queue','duplicate','error','unmapped'].map(x=>'metric-'+x)])pageElements.set(id,new Element(id));
+   'audit-search','audit-region','audit-year','audit-tournament','audit-triage','audit-groups',...['queue','duplicate','error','unmapped'].map(x=>'metric-'+x)])pageElements.set(id,new Element(id));
  for(const key of ['queue','duplicates','errors','unmapped','coverage','history']){
   const tab=new Element('tab-'+key);tab.dataset.tab=key;tabs.push(tab);
  }
@@ -31,7 +31,7 @@ test('verification computes integrity results once per refresh; tab/search/page 
   'history-sync-reviewed.json':{entries:[]},'updates.json':{entries:[]},
   'calendar-history-status.json':{dates:['2024-05-29','2026-11-09']},
   'calendar-history-index.json':{months:[{month:'2026-10'}]},
-  'approval-history.json':{entries:[]}
+  'approval-history.json':{entries:[]},'candidate-triage.json':{version:1,sourceCheckedAt:'2026-11-09T00:00:00Z',queue:[]}
  };
  let inspections=0,proposals=0,requests=0;const cachePolicies=[];
  const engine={
@@ -52,7 +52,7 @@ test('verification computes integrity results once per refresh; tab/search/page 
   navigator:{clipboard:{writeText:async()=>{}}},
   location:{hash:'#coverage'},
   history:{replaceState(){}},
-  URL,
+  URL,Option:class {constructor(label,value){this.text=label;this.value=value}},
   fetch:async(url,opts)=>{const name=new URL(url).pathname.slice(1);requests++;cachePolicies.push(opts.cache);
    assert.ok(Object.hasOwn(sample,name),'unexpected network request '+name);
    return {ok:true,json:async()=>clone(sample[name])}
@@ -64,7 +64,7 @@ test('verification computes integrity results once per refresh; tab/search/page 
  await flush();
  assert.equal(inspections,1,'initial load should inspect once');
  assert.equal(proposals,1,'initial load should compute candidate queue once');
- assert.equal(requests,10,'load each file once');
+ assert.equal(requests,11,'load each file once');
  assert.ok(cachePolicies.every(x=>x==='no-cache'),'JSON should revalidate without forced re-download');
  for(const tab of tabs){tab.fire('click');}
  pageElements.get('audit-search').fire('input','2026');
@@ -73,10 +73,10 @@ test('verification computes integrity results once per refresh; tab/search/page 
  pageElements.get('audit-next').fire('click');
  assert.equal(inspections,1,'normal navigation never reruns full 3k-row scan');
  assert.equal(proposals,1,'search and filters reuse queue snapshot');
- assert.equal(requests,10,'tab/filter navigation never refetches JSON');
+ assert.equal(requests,11,'tab/filter navigation never refetches JSON');
  pageElements.get('audit-refresh').fire('click');
  await flush();
  assert.equal(inspections,2,'explicit refresh reruns inspection exactly once');
  assert.equal(proposals,2,'explicit refresh reruns candidate lookup exactly once');
- assert.equal(requests,20,'explicit refresh reloads the ten current sources');
+ assert.equal(requests,22,'explicit refresh reloads the eleven current sources');
 });
