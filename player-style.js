@@ -318,6 +318,115 @@
         label:consistent.length>=2?'複数地域で比較的安定':'地域差が見られる'},
       qualified:eligible.length};
   }
+
+  // Four independent evidence cards. This is not a cross-region/role power
+  // ranking: comparisons only compare like-for-like official event scopes.
+  function evidenceLevel(rows,metric='both'){
+    const stats=summarize(rows),windows=slotsCount(rows);
+    const measured=metric==='kills'?stats.killRecords:metric==='vrs'?stats.vrRecords:
+      Math.min(stats.killRecords,stats.vrRecords);
+    const matches=metric==='kills'?stats.killMatches:metric==='vrs'?stats.vrMatches:
+      Math.min(stats.killMatches,stats.vrMatches);
+    const coverage=rows.length?measured/rows.length:0;
+    const level=windows>=5&&matches>=30&&coverage>=.8?'high':
+      windows>=3&&matches>=15&&coverage>=.75?'medium':'low';
+    const label={high:'高',medium:'中',low:'低'}[level];
+    return {level,label,windows,matches,coverage,records:rows.length,
+      note:windows+'開催枠 / '+matches+'試合 / 入力'+Math.round(coverage*100)+'%（'+label+'）'};
+  }
+  function fourAxisComparison(records,name,filters,helpers,rows,regions,affinity){
+    const common=['season','mode','series'].every(key=>filters[key]!=='all');
+    // A regional relative score is normalized among *this player's* viable
+    // regional samples; it is not the player's strength score.
+    const ranked=Array.isArray(affinity.ranked)?affinity.ranked:[];
+    const chosenRegion=regions.find(r=>r.region===affinity.region);
+    const regional={
+      leader:affinity.region||null,
+      score:affinity.region?ranked[0]?.score??null:null,
+      runnerUp:affinity.region?ranked[1]?.region||null:null,
+      runnerScore:affinity.region?ranked[1]?.score??null:null,
+      compared:ranked.length,
+      confidence:chosenRegion?evidenceLevel(chosenRegion.rows):evidenceLevel([]),
+      reason:affinity.reason
+    };
+    const formatRows=forPlayer(select(records,{
+      ...filters,team:'all',region:filters.region
+    },helpers).rows,name).rows;
+    const teams=['solo','duo'].map(team=>{
+      const own=formatRows.filter(r=>r._aotStyleCategory.team===team);
+      return {team,stats:summarize(own),confidence:evidenceLevel(own,'vrs'),
+        // Matches and K/試合 are displayed separately, never compared across
+        // solo-individual vs duo-team kills.
+        kpm:summarize(own).kpm};
+    });
+    const formatRegions=new Set(formatRows.map(r=>r.region));
+    const comparableFormat=common&&(filters.region!=='all'||formatRegions.size<=1);
+    const solid=teams.every(t=>t.confidence.level!=='low'&&t.stats.vrRate!==null);
+    const solo=teams[0].stats.vrRate,duo=teams[1].stats.vrRate;
+    const gap=solid&&comparableFormat?(solo-duo)*100:null;
+    const leader=gap!==null&&Math.abs(gap)>=5?(gap>0?'solo':'duo'):null;
+    const format={
+      teams,leader,deltaVrPp:gap,
+      comparable:comparableFormat&&solid,
+      reason:!common?'同一シーズン・ゲーム形式・大会シリーズに絞ってね':
+        !comparableFormat?'地域が混在しているため、地域も揃えてね':
+        !solid?'ソロ・デュオ各3開催枠・15試合以上とVR入力75%以上が必要':
+        leader?'同じ条件で観測したVR率の差。適性・個人貢献の証明ではありません':
+        '両形式のVR率の差が5ポイント未満。適性の優劣は未判定'
+    };
+    const finalKinds=new Set(['賞金決勝','決勝','Practice決勝','Performance決勝']);
+    const finalRows=rows.filter(row=>finalKinds.has(row.kind)&&good(row.rank)&&row.rank>0);
+    const finals=summarize(finalRows),finalConf=evidenceLevel(finalRows,'vrs');
+    const scoped=common&&filters.team!=='all';
+    const finalStrength={
+      recorded:finalRows.length,top10:finalRows.filter(r=>r.rank<=10).length,
+      top3:finalRows.filter(r=>r.rank<=3).length,
+      matches:finals.vrMatches,vr:finals.vrs,
+      top10Rate:finalRows.length?finalRows.filter(r=>r.rank<=10).length/finalRows.length:null,
+      vrRate:scoped?finals.vrRate:null,
+      confidence:finalConf,
+      comparable:scoped&&finalConf.level!=='low',
+      reason:!scoped?'シーズン・形式・シリーズ・チーム人数を揃えると決勝VR率を比較できるよ':
+        !finalRows.length?'記録された決勝がありません':
+        finalConf.level==='low'?'決勝3開催枠・15試合以上とVR入力75%以上で暫定評価':
+        '決勝のみを集計。上位10位率は掲載された決勝の順位で、参加母数・難易度は未補正'
+    };
+    const dated=rows.filter(r=>/^\d{4}-\d{2}-\d{2}$/.test(String(r.date||'')))
+      .slice().sort((a,b)=>b.date.localeCompare(a.date)||String(b.id).localeCompare(String(a.id)));
+    const growthRegions=new Set(dated.map(r=>r.region));
+    const growthScope=scoped&&(filters.region!=='all'||growthRegions.size<=1);
+    let recent=[],previous=[],current=null,prior=null;
+    let reason='同一シーズン・シリーズ・ゲーム形式・チーム人数・地域で揃えてね';
+    let ready=false;
+    if(growthScope){
+      // Prefer five vs five windows, with a three-vs-three fallback for
+      // expanding archives. Missing scores are never imputed to zero.
+      for(const size of [5,3]){
+        if(dated.length<size*2)continue;
+        const a=dated.slice(0,size),b=dated.slice(size,size*2),am=summarize(a),bm=summarize(b);
+        if([am.killMatches,am.vrMatches,bm.killMatches,bm.vrMatches].every(n=>n>=(size===5?15:10))&&
+         [evidenceLevel(a).coverage,evidenceLevel(b).coverage].every(n=>n>=.75)){
+          recent=a;previous=b;current=am;prior=bm;ready=true;
+          reason='日付順の直近'+size+'枠と前'+size+'枠の同条件の実測差';
+          break;
+        }
+      }
+      if(!ready)reason='成長比較には最低6開催枠・前後各10試合・入力75%以上が必要';
+    }
+    const growth={
+      ready,reason,
+      recent:recent.map(r=>r.id),previous:previous.map(r=>r.id),
+      recentDates:recent.length?[recent.at(-1).date,recent[0].date]:null,
+      previousDates:previous.length?[previous.at(-1).date,previous[0].date]:null,
+      current,prior,
+      deltaKpm:ready?current.kpm-prior.kpm:null,
+      deltaVrPp:ready?(current.vrRate-prior.vrRate)*100:null,
+      confidence:ready?evidenceLevel(recent):evidenceLevel(dated),
+      windowsCompared:recent.length+previous.length
+    };
+    return {regional,format,finalStrength,growth,version:1,
+      caveat:'対象は本人確認済みの掲載戦績のみ。未掲載大会は不参加・0キル・0VRを意味しません。複数形式のチームキルは比較しません。地域Ping・大会難易度・参加人数の差は補正していません。'};
+  }
   function percentile(value,others){
     if(value==null||!Number.isFinite(value)||!others.length)return null;
     const less=others.filter(x=>x<value).length,equal=others.filter(x=>x===value).length;
@@ -414,7 +523,8 @@
       .sort((a,b)=>b.matches-a.matches||Number(b.season.slice(1))-Number(a.season.slice(1)))[0]?.season||null;
     const overlapping=[...new Set([...ownAll.overlapping,...chosen.overlapping])];
     const recent=momentum(chosen.rows);
-    return {player:name,filters:f,stats,style,observedTendency:observed,regions:allRegionMetrics,affinity,trend,
+    const axes=fourAxisComparison(records,name,f,helpers,chosen.rows,allRegionMetrics,affinity);
+    return {player:name,filters:f,stats,style,observedTendency:observed,regions:allRegionMetrics,affinity,axes,trend,
       insights:progressiveInsights(chosen.rows,stats,adequacy(chosen.rows),f),
       regionHighlights:regionHighlights(allRegionMetrics),
       recommendedScope:recommendedScope(ownAll.rows,helpers),
@@ -423,6 +533,6 @@
       available:ownAll.rows.length,overlapping,conflicts:selection.conflicts,
       quality:adequacy(chosen.rows),coverage:quality(stats,overlapping,selection.conflicts)};
   }
-  return Object.freeze({VERSION:2,REGIONS,TEAMS,FILTER_DEFAULTS,STYLES,dedupe,windowKey,select,forPlayer,
-    summarize,slotsCount,adequacy,observedTendency,progressiveInsights,regionHighlights,recommendedScope,regionAffinity,regionalLeaders,quality,momentum,evidence,percentile,cohort,scouting,analyze});
+  return Object.freeze({VERSION:3,REGIONS,TEAMS,FILTER_DEFAULTS,STYLES,dedupe,windowKey,select,forPlayer,
+    summarize,slotsCount,adequacy,evidenceLevel,fourAxisComparison,observedTendency,progressiveInsights,regionHighlights,recommendedScope,regionAffinity,regionalLeaders,quality,momentum,evidence,percentile,cohort,scouting,analyze});
 });
