@@ -1,7 +1,7 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-12T04:12:04.322Z",
+  "checkedAt": "2026-11-12T04:55:29.264Z",
   "mode": "review",
   "scope": "history",
   "dateMode": "rolling",
@@ -11,16 +11,16 @@
   "provider": "osirion",
   "linkedPlayers": 573,
   "trackedWindows": 2956,
-  "found": 0,
-  "skipped": 6,
-  "imported": 12,
+  "found": 19,
+  "skipped": 16,
+  "imported": 13,
   "scannedPages": 96,
-  "completedWindows": 412,
+  "completedWindows": 417,
   "identityConflicts": 3,
-  "alreadyRegistered": 4052,
-  "autoApprovedTotal": 2166,
+  "alreadyRegistered": 4074,
+  "autoApprovedTotal": 2179,
   "invalidCachedCandidates": 1,
-  "manualReviewCandidates": 0,
+  "manualReviewCandidates": 19,
   "autoApprovedCosmeticThisRun": 0,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
@@ -31,7 +31,7 @@
   "malformedFailures": 0,
   "skippedLeaderboards": [],
   "reviewOnlyWindows": 1324,
-  "reviewOnlyCandidates": 0,
+  "reviewOnlyCandidates": 4,
   "unmappedEvents": 238,
   "unmappedEventIds": [
     "S30_ConsoleCashCups",
@@ -47,44 +47,44 @@
     "S30_Reload",
     "S30_ReloadZB"
   ],
-  "message": "残候補の原本再調査：予選突破8件・賞金決勝2件・出場3件・既掲載重複0件を解決。残り0件。報酬は推定しない。",
+  "message": "最新版と安全統合：新規掲載13件、重複スキップ0件、要確認の競合0件、確認待ち19件。既存の戦績・賞金は保持。",
   "manuallyPublished": 1116,
   "manuallyResolvedDuplicates": 141,
   "lastReviewedBatchAt": "2026-11-12T04:51:16.896Z",
   "manuallyCorrected": 4,
   "lastCorrectedReviewAt": "2026-11-07T09:14:30.244Z",
   "concurrentMerge": {
-    "appended": 12,
+    "appended": 13,
     "alreadyPublished": 0,
     "reviewConflicts": 0,
-    "keptPending": 13,
-    "reconciledAt": "2026-11-12T04:12:09.218Z"
+    "keptPending": 19,
+    "reconciledAt": "2026-11-12T04:55:36.787Z"
   },
   "coverage": {
     "total": 2956,
-    "completed": 412,
-    "notStarted": 2410,
-    "partial": 132,
+    "completed": 417,
+    "notStarted": 2404,
+    "partial": 133,
     "retryWaiting": 2,
     "retryDue": 0,
-    "remaining": 2544,
+    "remaining": 2539,
     "retryCount": 2,
-    "completionPercent": 13.9,
+    "completionPercent": 14.1,
     "byRegion": {
       "OCE": {
         "total": 522,
-        "completed": 62,
-        "pending": 460
+        "completed": 63,
+        "pending": 459
       },
       "ME": {
         "total": 518,
-        "completed": 125,
-        "pending": 393
+        "completed": 127,
+        "pending": 391
       },
       "EU": {
         "total": 536,
-        "completed": 58,
-        "pending": 478
+        "completed": 59,
+        "pending": 477
       },
       "BR": {
         "total": 517,
@@ -98,15 +98,15 @@
       },
       "NAW": {
         "total": 327,
-        "completed": 58,
-        "pending": 269
+        "completed": 59,
+        "pending": 268
       }
     },
     "byYear": {
       "2024": {
         "total": 974,
-        "completed": 98,
-        "pending": 876
+        "completed": 100,
+        "pending": 874
       },
       "2025": {
         "total": 690,
@@ -115,8 +115,8 @@
       },
       "2026": {
         "total": 1292,
-        "completed": 263,
-        "pending": 1029
+        "completed": 266,
+        "pending": 1026
       }
     },
     "outsideScopeCheckpoints": 0,
@@ -248,7 +248,7 @@
         "region": "NAC",
         "series": "victory-cup",
         "status": "partial",
-        "nextPage": 65,
+        "nextPage": 67,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
