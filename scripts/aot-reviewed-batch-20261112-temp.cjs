@@ -69,7 +69,7 @@ for(const p of inQueue){
   }else{
     assert(p.reviewOnly===true&&p.kind==='参加確認'&&p.prize===null&&
       ((p.seasonId==='S36'&&p.tournamentId==='ch6s3-playstation-cup'&&p.region==='NAC'&&p.date==='2025-07-25')||
-       (p.seasonId==='S42'&&p.tournamentId==='ch7s4-fncs-div1'&&p.region==='NAW'&&p.date==='2026-09-15')),'not allowed attendance '+p.id);
+       (p.seasonId==='S42'&&p.tournamentId==='ch7s4-fncs-division-1-practice'&&p.region==='NAW'&&p.date==='2026-09-15')),'not allowed attendance '+p.id);
     const scope={dateJst:p.date,region:p.region,tournamentId:p.tournamentId,eventId:event,windowId:win,kind:p.kind,round:p.round,series:c.series};
     const r=toParticipation(p,scope);
     assert(r&&!publishedEquivalent(r,d.results),'unsafe participation '+p.id);
