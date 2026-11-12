@@ -118,7 +118,9 @@ for(const t of b.teams){
   (t.rank===11?'NAW主戦場の他3名はASIA成績に含めず、Teddy個人$50のみ集計。':'');
  const record={
   id,date:b.date,region:b.region,player:named.join(' / '),players:named,
-  playerRaw:t.rawRoster.join(' / '),event:catalog.name,
+  playerRaw:t.rawRoster.join(' / '),
+  ...(t.members.length===1?{teamPlayers:t.rawRoster.slice()}:{}),
+  event:catalog.name,
   round:'Event 1 · Round 2 / 賞金決勝',rank:t.rank,points:t.points,
   kills:t.kills,vrs:t.vrs,matches:t.matches,prize,
   prizePerPlayer:t.vrs*50,kind:'賞金決勝',source:b.source,
