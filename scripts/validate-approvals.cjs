@@ -63,6 +63,10 @@ function validCashFinal(r,entry){
  }else if(r.seasonId==='S30'&&r.date==='2024-06-11'&&r.region==='ME'
   &&r.tournamentId==='ch5s3-zb-solo-victory'){
   event='S30_SoloZBVictoryCashCup';window='S30_SoloZBVictoryCashCup_Event2Round2_ME';
+ }else if(r.seasonId==='S31'&&r.date==='2024-10-08'&&r.region==='NAC'
+  &&r.tournamentId==='ch5s4-solo-victory-cup'){
+  // Original Epic scoreboard, Chapter 5 Season 4 Event 6: $100 per Round 2 VR.
+  event='S31_SoloVictoryCashCup';window='S31_SoloVictoryCashCup_Event6Round2_NAC';
  }else if(r.seasonId==='S31'&&r.date==='2024-10-15'&&r.region==='NAC'
   &&r.tournamentId==='ch5s4-solo-victory-cup'){
   event='S31_SoloVictoryCashCup';window='S31_SoloVictoryCashCup_Event7Round2_NAC';
