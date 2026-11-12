@@ -153,6 +153,53 @@
      +esc(report.observedTendency?.label||scout.relative?.label||'確認済み戦績なし')+(scout.relative?.peers?'（比較可能 '+count(scout.relative.peers)+'名）':'')
      +'</p><p class="style-note">比較する場合は同一シーズン・ゲーム形式・シリーズ・チーム編成にそろえてね。'
      +esc(scout.limitations||'データ不足の項目は未判定')+'根拠の大会は下の「計算に使った戦績・出典」で確認できるょ</p></div></details>';
+   // Every number here has a recorded denominator and an explicit sample grade.
+   // These are observations, never a fabricated individual performance rating.
+   const axes=report.axes||{},ra=axes.regional||{},fa=axes.format||{};
+   const finals=axes.finalStrength||{},growth=axes.growth||{};
+   const conf=x=>x?.label||'低';
+   const card4=(key,label,value,detail,grade)=>{
+     return '<article class="style-axis-card" data-style-axis="'+esc(key)+'" data-axis-confidence="'+esc(grade?.level||'low')+'">'
+       +'<div class="style-axis-head"><h4>'+esc(label)+'</h4><span>信頼度 '+esc(conf(grade))+'</span></div>'
+       +'<strong>'+esc(value)+'</strong><p>'+esc(detail)+'</p><small>'+esc(grade?.note||'確認済みの対象なし')+'</small></article>';
+   };
+   const duoStats=Array.isArray(fa.teams)?fa.teams:[];
+   const part=(key)=>duoStats.find(x=>x.team===key);
+   const solo=part('solo'),duo=part('duo');
+   const teamVr=x=>x?.stats?.vrRate==null?'—':pct(x.stats.vrRate);
+   const fmtGrades=[solo?.confidence?.level,duo?.confidence?.level];
+   const fmtLevel=fmtGrades.includes('low')||fmtGrades.some(x=>!x)?'low':fmtGrades.includes('medium')?'medium':'high';
+   const fmtGrade={level:fmtLevel,label:{low:'低',medium:'中',high:'高'}[fmtLevel],
+     note:'ソロ '+(solo?.confidence?.note||'記録なし')+' / デュオ '+(duo?.confidence?.note||'記録なし')};
+   const delta4=(n,decimal=1,unit='pt')=>n==null?'—':(n>0?'+':'')+num(n,decimal)+unit;
+   const regionValue=ra.leader&&ra.score!=null?ra.leader+' '+num(ra.score,1)+'/100':'比較保留';
+   const regionDetail=ra.leader
+     ?'次点 '+(ra.runnerUp||'—')+' '+num(ra.runnerScore,1)+'/100 · 本人の地域間の相対値'
+     :(ra.reason||'同条件の2地域以上の記録が必要');
+   const fmtValue=fa.leader?(fa.leader==='solo'?'ソロ':'デュオ')+'のVR率が高い':'適性は未判定';
+   const fmtDetail='ソロ '+teamVr(solo)+' / デュオ '+teamVr(duo)
+     +(fa.comparable?' · 差 '+delta4(fa.deltaVrPp):'')+' · '+(fa.reason||'条件が不足');
+   const finalValue=finals.vrRate==null?'決勝VR率 —':'決勝VR率 '+pct(finals.vrRate);
+   const finalDetail='決勝 '+count(finals.recorded||0)+'件 · TOP10 '+count(finals.top10||0)
+     +'件（'+pct(finals.top10Rate)+'） · '+(finals.reason||'データ不足');
+   const growthValue=growth.ready?'K/試合 '+delta4(growth.deltaKpm,2,''):'変化は未判定';
+   const growthDetail=growth.ready?'VR率 '+delta4(growth.deltaVrPp,2)
+     +' · '+count(growth.windowsCompared)+'開催枠 · '+growth.reason:(growth.reason||'実測記録が不足');
+   const axesHtml='<section class="style-four-axis" aria-label="得意地域・ソロデュオ・決勝・成長の数値比較">'
+     +'<div class="style-four-axis-title"><div><small>FOUR-AXIS EVIDENCE</small>'
+     +'<h3>📊 4軸の数値比較</h3></div><p>根拠が少ない項目は判定しない</p></div>'
+     +'<div class="style-four-axis-grid">'
+     +card4('region','🌍 得意地域',regionValue,regionDetail,ra.confidence)
+     +card4('format','🎮 ソロ・デュオ適性',fmtValue,fmtDetail,fmtGrade)
+     +card4('final','🏆 決勝での強さ',finalValue,finalDetail,finals.confidence)
+     +card4('growth','📈 成長傾向',growthValue,growthDetail,growth.confidence)
+     +'</div><details class="style-axis-method"><summary>信頼度・比較条件の説明</summary>'
+     +'<p>信頼度 高：5開催枠・30試合以上、入力80%以上。中：3開催枠・15試合以上、入力75%以上。それ未満は低。'
+     +'信頼度はデータの充実度であり、選手の実力スコアや統計的な信頼区間ではないよ</p>'
+     +'<p>地域点数は本人の同条件の地域間相対値。ソロ個人キルとデュオのチームキルは直接比較せず、VR率だけを並べるよ。'
+     +'決勝は決勝セッションのみ、成長は新旧3〜5開催枠ずつの同条件の差を比較するよ</p>'
+     +'<p>'+esc(axes.caveat||'出典確認済みの掲載戦績のみを使うよ')+'</p>'
+     +'</details></section>';
    const eligible=report.affinity;
    const best=eligible.region?'🏅 集計上の得意地域候補：'+eligible.region:'🌍 得意地域は比較準備中';
    const fact=report.observedTendency;
@@ -231,7 +278,7 @@
      +'<span class="style-fold-desc">攻撃・勝利・得意地域の詳しい分析</span></span>'
      +'<span class="style-fold-action" aria-hidden="true"><span class="style-fold-closed">詳細を見る ⌄</span><span class="style-fold-opened">閉じる ⌃</span></span></summary>'
      +'<div class="style-fold-body">'
-     +insightHtml+filterMarkup+(f.season==='all'&&report.recommendedSeason?'<div class="style-season-help"><span>🌱 シーズンをそろえると地域別の得意傾向をより正確に比較できるょ</span><button type="button" data-style-season-pick="'+esc(report.recommendedSeason)+'">記録が充実した '+esc(report.recommendedSeason)+' に絞る ↗</button></div>':'')+summary+qualityHtml+scoutHtml+style+affinity+specialtyHtml+observed+adapt
+     +insightHtml+filterMarkup+(f.season==='all'&&report.recommendedSeason?'<div class="style-season-help"><span>🌱 シーズンをそろえると地域別の得意傾向をより正確に比較できるょ</span><button type="button" data-style-season-pick="'+esc(report.recommendedSeason)+'">記録が充実した '+esc(report.recommendedSeason)+' に絞る ↗</button></div>':'')+summary+qualityHtml+axesHtml+scoutHtml+style+affinity+specialtyHtml+observed+adapt
      +regionFacts+'<h3 class="style-region-title">🌍 地域別パフォーマンス</h3>'+regionStats
      +'<p class="style-region-note">少ない記録でも地域別のK/試合・VR率を実測として表示するよ。得意地域と断定する場合だけ、同条件の2地域以上で各3開催枠・15試合と十分な差を要求。大会難易度やPingの違いは補正していないよ</p>'
      +'<div class="style-extra">'+percentiles+radar(report.style)+'</div>'
