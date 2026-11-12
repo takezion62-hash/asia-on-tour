@@ -234,6 +234,7 @@ function boot(source = script, { hash = '', search = '?season=all' } = {}) {
   for (const name of ['sessionStorage', 'indexedDB', 'FileReader', 'FormData', 'confirm']) {
     Object.defineProperty(sandbox, name, { get() { throw new Error(`Unexpected write feature: ${name}`); } });
   }
+  window.AOTDiscovery = sandbox.AOTDiscovery;
   vm.runInNewContext(source, sandbox, { filename: 'index.html', timeout: 5000 });
   const get = id => { assert.ok(ids.has(id), `Missing element ${id}`); return ids.get(id); };
   const click = element => {
