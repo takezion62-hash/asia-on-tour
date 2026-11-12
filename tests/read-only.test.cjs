@@ -224,7 +224,7 @@ function boot(source = script, { hash = '', search = '?season=all' } = {}) {
     }
   };
   const sandbox = {
-    document, window, AsiaRankings: require('../rankings.js'), AotPR: require('../aot-pr.js'), AsiaAchievements: require('../achievements.js'), AsiaGrowth: require('../growth.js'), AsiaCompare: require('../compare.js'),
+    document, window, AOTDiscovery: require('../discovery.js'), AsiaRankings: require('../rankings.js'), AotPR: require('../aot-pr.js'), AsiaAchievements: require('../achievements.js'), AsiaGrowth: require('../growth.js'), AsiaCompare: require('../compare.js'),
     URL: BrowserURL, URLSearchParams, Blob, setTimeout: callback => { callback(); return 1; }
   };
   Object.defineProperty(sandbox, 'location', { get: () => location });
