@@ -73,12 +73,13 @@ jobs:
             git reset --hard origin/main
             node scripts/resolve-triaged-candidates-20261112.cjs --dry-run
             node scripts/resolve-triaged-candidates-20261112.cjs
+            node scripts/source-results-store.cjs import-legacy
             npm run validate
             node --test tests/verified-partial-page.test.cjs tests/participation-archive.test.cjs tests/tournament-rules.test.cjs
             node scripts/build-season-data.cjs
             node scripts/build-candidate-triage.cjs
             git add results.json updates.json history-sync-review.json auto-sync-review.json history-sync-reviewed.json approval-history.json history-sync-status.json auto-sync-status.json participation-index.json participation-status.json candidate-triage.json
-            git add -A participation/ season-data/
+            git add -A participation/ season-data/ source-results/
             if git diff --cached --quiet; then
               echo "TRIAGE_RESOLVE no additional verified results or attendance to publish"
               break
@@ -106,12 +107,13 @@ jobs:
             git reset --hard origin/main
             node scripts/publish-verified-nov12-pending.cjs --dry-run
             node scripts/publish-verified-nov12-pending.cjs
+            node scripts/source-results-store.cjs import-legacy
             npm run validate
             node --test tests/manual-approval.test.cjs tests/approval-history.test.cjs tests/cosmetic-rank-rules.test.cjs tests/tournament-rules.test.cjs
             # Publish season shards together with the canonical results (bot pushes do not trigger push workflows).
             node scripts/build-season-data.cjs
             node scripts/build-candidate-triage.cjs
-            git add -A season-data
+            git add -A season-data source-results
             git add candidate-triage.json
             git add results.json history-sync-review.json history-sync-reviewed.json approval-history.json history-sync-status.json updates.json participation-index.json participation-status.json participation/2026-10.json participation/2024-09.json
             if git diff --cached --quiet; then
@@ -161,12 +163,13 @@ jobs:
             node scripts/publish-verified-legacy-finals-and-duplicates.cjs
             node scripts/reconcile-exact-epic-rank-three.cjs --dry-run
             node scripts/reconcile-exact-epic-rank-three.cjs
+            node scripts/source-results-store.cjs import-legacy
             npm run validate
             node --test tests/manual-approval.test.cjs tests/approval-history.test.cjs tests/cosmetic-rank-rules.test.cjs tests/tournament-rules.test.cjs
             # Publish season shards together with the canonical results (bot pushes do not trigger push workflows).
             node scripts/build-season-data.cjs
             node scripts/build-candidate-triage.cjs
-            git add -A season-data
+            git add -A season-data source-results
             git add candidate-triage.json
             git add results.json updates.json history-sync-review.json history-sync-reviewed.json history-sync-status.json auto-sync-review.json auto-sync-status.json approval-history.json
             if git diff --cached --quiet; then
@@ -195,12 +198,13 @@ jobs:
             git reset --hard origin/main
             node scripts/publish-verified-cosmetic-pending.cjs --dry-run
             node scripts/publish-verified-cosmetic-pending.cjs
+            node scripts/source-results-store.cjs import-legacy
             npm run validate
             node --test tests/manual-approval.test.cjs tests/automatic-cosmetic-approval.test.cjs tests/tournament-rules.test.cjs
             # Publish season shards together with the canonical results (bot pushes do not trigger push workflows).
             node scripts/build-season-data.cjs
             node scripts/build-candidate-triage.cjs
-            git add -A season-data
+            git add -A season-data source-results
             git add candidate-triage.json
             git add results.json auto-sync-review.json history-sync-review.json auto-sync-status.json history-sync-status.json approval-history.json updates.json
             if git diff --cached --quiet; then
@@ -230,12 +234,13 @@ jobs:
             git reset --hard origin/main
             node scripts/publish-verified-qualifier-batch.cjs --dry-run
             node scripts/publish-verified-qualifier-batch.cjs
+            node scripts/source-results-store.cjs import-legacy
             npm run validate
             node --test tests/publish-verified-qualifier-batch.test.cjs tests/safe-sync-merge.test.cjs
             # Publish season shards together with the canonical results (bot pushes do not trigger push workflows).
             node scripts/build-season-data.cjs
             node scripts/build-candidate-triage.cjs
-            git add -A season-data
+            git add -A season-data source-results
             git add candidate-triage.json
             git add results.json updates.json history-sync-review.json history-sync-reviewed.json history-sync-status.json approval-history.json participation-index.json
             git add -A participation/
@@ -267,12 +272,13 @@ jobs:
             git reset --hard origin/main
             node scripts/publish-verified-finals-batch.cjs --dry-run
             node scripts/publish-verified-finals-batch.cjs
+            node scripts/source-results-store.cjs import-legacy
             npm run validate
             node --test tests/publish-verified-finals-batch.test.cjs tests/safe-sync-merge.test.cjs
             # Publish season shards together with the canonical results (bot pushes do not trigger push workflows).
             node scripts/build-season-data.cjs
             node scripts/build-candidate-triage.cjs
-            git add -A season-data
+            git add -A season-data source-results
             git add candidate-triage.json
             git add results.json updates.json history-sync-review.json history-sync-reviewed.json history-sync-status.json approval-history.json participation-index.json
             git add -A participation/
@@ -296,7 +302,7 @@ jobs:
       - name: Audit historical candidates and original leaderboard checkpoints
         run: node scripts/audit-pending-history-20261108.cjs
       - name: Snapshot the original main before the historical provider scan
-        run: node scripts/safe-sync-merge.cjs snapshot history "$RUNNER_TEMP/aot-history-base.json"
+        run: node scripts/source-results-store.cjs verify && node scripts/safe-sync-merge.cjs snapshot history "$RUNNER_TEMP/aot-history-base.json"
       - name: Delay historical API calls
         run: sleep 35
       - name: Scan historical Osirion tournaments and approve verified results
@@ -344,12 +350,13 @@ jobs:
               continue
             fi
             node scripts/safe-sync-merge.cjs merge history "$RUNNER_TEMP/aot-history-base.json" "$RUNNER_TEMP/aot-history-scanned.json"
+            node scripts/source-results-store.cjs import-legacy
             npm run validate
             node --test tests/safe-sync-merge.test.cjs
             # Publish season shards together with the canonical results (bot pushes do not trigger push workflows).
             node scripts/build-season-data.cjs
             node scripts/build-candidate-triage.cjs
-            git add -A season-data
+            git add -A season-data source-results
             git add candidate-triage.json
             git add results.json updates.json history-sync-status.json history-sync-review.json history-sync-scan.json
             if git diff --cached --quiet; then
@@ -379,12 +386,13 @@ jobs:
             git reset --hard origin/main
             node scripts/publish-verified-s35-console-duos-20261108.cjs --dry-run
             node scripts/publish-verified-s35-console-duos-20261108.cjs
+            node scripts/source-results-store.cjs import-legacy
             npm run validate
             node --test tests/publish-verified-s35-console-duos-20261108.test.cjs tests/safe-sync-merge.test.cjs
             # Publish season shards together with the canonical results (bot pushes do not trigger push workflows).
             node scripts/build-season-data.cjs
             node scripts/build-candidate-triage.cjs
-            git add -A season-data
+            git add -A season-data source-results
             git add candidate-triage.json
             git add results.json updates.json history-sync-review.json history-sync-reviewed.json history-sync-status.json
             if git diff --cached --quiet; then
@@ -413,12 +421,13 @@ jobs:
             git reset --hard origin/main
             node scripts/publish-reviewed-s30-nac-zero-vr.cjs --dry-run
             node scripts/publish-reviewed-s30-nac-zero-vr.cjs
+            node scripts/source-results-store.cjs import-legacy
             npm run validate
             node --test tests/publish-reviewed-s30-nac-zero-vr.test.cjs tests/safe-sync-merge.test.cjs
             # Publish season shards together with the canonical results (bot pushes do not trigger push workflows).
             node scripts/build-season-data.cjs
             node scripts/build-candidate-triage.cjs
-            git add -A season-data
+            git add -A season-data source-results
             git add candidate-triage.json
             git add results.json updates.json history-sync-review.json history-sync-reviewed.json history-sync-status.json
             if git diff --cached --quiet; then

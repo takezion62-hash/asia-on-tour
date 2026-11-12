@@ -1,7 +1,7 @@
 'use strict';
 /**
  * Phase 1: create a lossless, season-scoped canonical-source snapshot from the
- * current results.json. results.json is still the sole writable authority.
+ * original results.json. In phase 2, source-results is the sole writable authority.
  * This script never writes results.json, players.json or tournaments.json.
  *
  * Usage:
@@ -13,7 +13,6 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const crypto = require('node:crypto');
-const { seasonOf } = require('./build-season-data.cjs');
 const { personalCents, roster } = require('./data-checks.cjs');
 const ROOT = path.resolve(__dirname, '..');
 const TARGET = path.join(ROOT, 'source-results');
@@ -32,7 +31,7 @@ const stableJson = value => JSON.stringify(value, null, 2) + '\n';
 // Personal payout is one player's share; multiply by the real squad size.
 const personalAwardCents = record => personalCents(record) * roster(record).length;
 
-function buildSnapshot(records, sourceText, determineSeason = row => seasonOf(row).id) {
+function buildSnapshot(records, sourceText, determineSeason = row => require('./build-season-data.cjs').seasonOf(row).id) {
   if (!Array.isArray(records)) throw new Error('Canonical results must be an array');
   if (typeof sourceText !== 'string' || !sourceText.length)
     throw new Error('Canonical source bytes are required');
@@ -153,7 +152,7 @@ function verifyRoundTrip(directory, original, expected) {
 }
 
 function syncSnapshot({
-  root=ROOT, out=TARGET, check=false, seasonSelector=record => seasonOf(record).id
+  root=ROOT, out=TARGET, check=false, seasonSelector=record => require('./build-season-data.cjs').seasonOf(record).id
 }={}) {
   const original=fs.readFileSync(path.join(root,'results.json'),'utf8');
   const records=JSON.parse(original);
@@ -178,6 +177,9 @@ function syncSnapshot({
 
 if (require.main === module) {
   const check=process.argv.includes('--check');
+  if(!check && fs.existsSync(path.join(TARGET,'manifest.json')) &&
+     !process.argv.includes('--explicit-bootstrap'))
+    throw Error('SOURCE_RESULTS is authoritative: normal runs must use --check; bootstrap requires --explicit-bootstrap');
   const result=syncSnapshot({check});
   console.log('Canonical source snapshot '+(check?'verified':'generated')+': '+
     result.records+' records, '+result.seasons+' shards, team prize cents '+

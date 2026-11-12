@@ -4,13 +4,14 @@
 const fs=require('node:fs'),path=require('node:path');
 const {apply,parseIds}=require('./manual-approval-core.cjs');
 const {validateData}=require('./data-checks.cjs');
+const {readResults,publishResults}=require('./source-results-store.cjs');
 const root=path.resolve(__dirname,'..'),dry=process.argv.includes('--dry-run');
 const read=(name,required=true)=>{
   const file=path.join(root,name);
   if(!fs.existsSync(file)){if(required)throw Error('Required file missing: '+name);return null}
-  return JSON.parse(fs.readFileSync(file,'utf8'));
+  return name==='results.json'?readResults(root).rows:JSON.parse(fs.readFileSync(file,'utf8'));
 };
-const write=(name,data)=>fs.writeFileSync(path.join(root,name),JSON.stringify(data,null,2)+'\n');
+const write=(name,data)=>name==='results.json'?publishResults(root,data):fs.writeFileSync(path.join(root,name),JSON.stringify(data,null,2)+'\n');
 const ids=parseIds(process.env.AOT_APPROVAL_IDS);
 const policy=process.env.AOT_APPROVAL_POLICY;
 const confirmation=process.env.AOT_APPROVAL_CONFIRMATION;

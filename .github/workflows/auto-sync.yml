@@ -9,6 +9,7 @@ on:
       - "scripts/verified-partial-page.cjs"
       - "scripts/scan-coverage.cjs"
       - "scripts/safe-sync-merge.cjs"
+      - "scripts/source-results-store.cjs"
       - "scripts/auto-sync-core.cjs"
       - "scripts/automatic-cosmetic-approval.cjs"
       - "scripts/automatic-cash-approval.cjs"
@@ -44,7 +45,7 @@ jobs:
         with:
           node-version: '24'
       - name: Snapshot pre-scan public data for race-safe reconciliation
-        run: node scripts/safe-sync-merge.cjs snapshot auto "$RUNNER_TEMP/aot-auto-base.json"
+        run: node scripts/source-results-store.cjs verify && node scripts/safe-sync-merge.cjs snapshot auto "$RUNNER_TEMP/aot-auto-base.json"
       - name: Check eligible tournament results
         env:
           AOT_FORTNITE_API_KEY: ${{ secrets.AOT_FORTNITE_API_KEY }}
@@ -95,9 +96,10 @@ jobs:
             npm run validate
             node --test tests/safe-sync-merge.test.cjs
             # Publish season shards together with the canonical results (bot pushes do not trigger push workflows).
+            node scripts/source-results-store.cjs verify
             node scripts/build-season-data.cjs
             node scripts/build-candidate-triage.cjs
-            git add -A season-data
+            git add -A season-data source-results
             git add candidate-triage.json
             git add results.json updates.json auto-sync-status.json auto-sync-review.json auto-sync-scan.json
             if git diff --cached --quiet; then

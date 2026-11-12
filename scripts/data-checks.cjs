@@ -72,7 +72,14 @@ function summarize(data, season = 'all') {
 function loadData(directory) {
   const data = {}, errors = [];
   for (const name of ['results', 'players', 'tournaments']) {
-    try { data[name] = JSON.parse(fs.readFileSync(path.join(directory, name + '.json'), 'utf8')); }
+    try {
+      // The shard manifest is authoritative for the repository. Unit-test
+      // fixtures with no shard directory can still supply a simple results.json.
+      const sharded=name==='results' && (fs.existsSync(path.join(directory,'source-results','manifest.json')) ||
+        path.resolve(directory)===path.resolve(__dirname,'..'));
+      data[name]=sharded?require('./source-results-store.cjs').readResults(directory).rows:
+        JSON.parse(fs.readFileSync(path.join(directory,name+'.json'),'utf8'));
+    }
     catch (error) { errors.push({ file: name + '.json', id: 'ファイル全体', field: 'JSON', message: `読み込み／構文エラー：${error.message}` }); }
   }
   return { data, errors };

@@ -3,7 +3,8 @@
 // Award, advancement, player identity and cosmetic rules remain in their existing validators.
 const fs=require('node:fs');
 const path=require('node:path');
-const readJson=(root,name)=>JSON.parse(fs.readFileSync(path.join(root,name),'utf8'));
+const {readResults,publishResults}=require('./source-results-store.cjs');
+const readJson=(root,name)=>name==='results.json'?readResults(root).rows:JSON.parse(fs.readFileSync(path.join(root,name),'utf8'));
 function loadReviewDb(root){
  return {
   results:readJson(root,'results.json'),
@@ -47,8 +48,10 @@ function writeReviewDb(root,db){
   ['approval-history.json',db.ledger],
   ['updates.json',db.updates]
  ];
- for(const [name,value] of files)
-  fs.writeFileSync(path.join(root,name),JSON.stringify(value,null,2)+'\n');
+ for(const [name,value] of files){
+  if(name==='results.json')publishResults(root,value);
+  else fs.writeFileSync(path.join(root,name),JSON.stringify(value,null,2)+'\n');
+ }
 }
 
 /**
@@ -58,7 +61,7 @@ function writeReviewDb(root,db){
 function createPublicationFiles(root){
  return {
   read:name=>readJson(root,name),
-  write:(name,value)=>fs.writeFileSync(path.join(root,name),JSON.stringify(value,null,2)+'\n')
+  write:(name,value)=>name==='results.json'?publishResults(root,value):fs.writeFileSync(path.join(root,name),JSON.stringify(value,null,2)+'\n')
  };
 }
 /**

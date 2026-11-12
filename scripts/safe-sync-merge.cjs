@@ -6,17 +6,19 @@
 const fs=require('node:fs');
 const path=require('node:path');
 const crypto=require('node:crypto');
+const {readResults,publishResults}=require('./source-results-store.cjs');
 const VALID_SCOPES=new Set(['history','auto']);
 const SOURCE_FILES=[
   'players.json','tournaments.json','tournament-rules.json',
   'scripts/osirion-sync.cjs','scripts/auto-sync-core.cjs',
   'scripts/verified-history-approval.cjs',
+  'scripts/source-results-store.cjs','scripts/build-source-results.cjs',
   'scripts/automatic-cash-approval.cjs',
   'scripts/automatic-cosmetic-approval.cjs',
   'scripts/automatic-performance-approval.cjs',
   'scripts/automatic-unreal-approval.cjs'
 ];
-const read=(root,file)=>JSON.parse(fs.readFileSync(path.join(root,file),'utf8'));
+const read=(root,file)=>file==='results.json'?readResults(root).rows:JSON.parse(fs.readFileSync(path.join(root,file),'utf8'));
 const stringify=x=>JSON.stringify(x);
 const clone=x=>JSON.parse(stringify(x));
 const fail=reason=>{throw Error('AOT_SAFE_SYNC_MERGE: '+reason)};
@@ -221,7 +223,10 @@ function mergeSnapshots(scope,base,scanned,latest,reviewed={version:1,entries:[]
   report:status.concurrentMerge};
 }
 function saveMerged(scope,data,root=path.resolve(__dirname,'..')){
+ // Publish sharded results and their compatibility projection before logs.
+ publishResults(root,data.docs['results.json']);
  for(const file of files(scope)){
+  if(file==='results.json')continue;
   const original=path.join(root,file),temp=original+'.safe-sync-tmp';
   fs.writeFileSync(temp,JSON.stringify(data.docs[file],null,2)+'\n');
   fs.renameSync(temp,original);
