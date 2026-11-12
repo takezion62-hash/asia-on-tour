@@ -1,6 +1,7 @@
 'use strict';
 const { test, expect } = require('@playwright/test');
 const path = require('node:path');
+const {mockSeasonResults} = require('./season-fixture.cjs');
 const { loadData, roster, personalCents, seasonFor, tournamentFor } = require('../scripts/data-checks.cjs');
 const data = loadData(path.join(__dirname, '..')).data;
 const regions = ['ME', 'EU', 'NAC', 'NAW', 'OCE', 'BR'];
@@ -67,6 +68,7 @@ function record(id, fields = {}) {
   return row;
 }
 async function fixture(page, records) {
+  await mockSeasonResults(page,records);
   for (const [filename, value] of Object.entries({
     'results.json': records,
     'players.json': { candidates: [], confirmedAliases: {} },
