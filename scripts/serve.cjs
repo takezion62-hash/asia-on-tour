@@ -27,7 +27,11 @@ if(fs.existsSync(path.join(root,'participation'))){
 }
 const server = http.createServer((req, res) => {
   const file = files.get(new URL(req.url, 'http://localhost').pathname);
-  if (!file || !['GET', 'HEAD'].includes(req.method)) { res.writeHead(404); res.end(); return; }
+  // Optional generated indexes may not exist in a fresh checkout until the
+  // first builder run. Return 404 instead of crashing the shared test server.
+  if (!file || !['GET', 'HEAD'].includes(req.method) || !fs.existsSync(path.join(root, file))) {
+    res.writeHead(404); res.end(); return;
+  }
   const type = file.endsWith('.json') ? 'application/json' : file.endsWith('.js') ? 'text/javascript' : file.endsWith('.css') ? 'text/css' : 'text/html';
   res.writeHead(200, { 'Content-Type': type + '; charset=utf-8', 'Cache-Control': 'no-store' });
   res.end(req.method === 'HEAD' ? undefined : fs.readFileSync(path.join(root, file)));
