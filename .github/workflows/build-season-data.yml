@@ -9,6 +9,8 @@ on:
       - achievements.js
       - rankings.js
       - scripts/build-season-data.cjs
+      - scripts/apply-verified-tracker-finals.cjs
+      - 'data/manual-approvals/*-tracker.json'
       - scripts/build-candidate-triage.cjs
       - scripts/candidate-triage-core.cjs
       - .github/workflows/build-season-data.yml
@@ -40,17 +42,22 @@ jobs:
           for attempt in 1 2 3 4 5; do
             git fetch origin main
             git reset --hard origin/main
+            node scripts/apply-verified-tracker-finals.cjs --dry-run
+            node scripts/apply-verified-tracker-finals.cjs
+            node scripts/validate-data.cjs
+            node scripts/validate-updates.cjs
             node scripts/build-season-data.cjs
             node scripts/build-candidate-triage.cjs
             node scripts/build-season-data.cjs --check
             node scripts/build-candidate-triage.cjs --check
+            git add results.json players.json updates.json
             git add -A season-data
             git add candidate-triage.json
             if git diff --cached --quiet; then
               echo "Season and candidate triage indexes are current"
               exit 0
             fi
-            git commit -m "chore(data): refresh lightweight season and review indexes [skip ci]"
+            git commit -m "chore(data): publish verified Tracker finals and refresh season indexes [skip ci]"
             if git push origin HEAD:main; then
               echo "Published generated indexes without altering results"
               exit 0

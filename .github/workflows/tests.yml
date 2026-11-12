@@ -30,6 +30,8 @@ jobs:
         run: npm ci --ignore-scripts
       - name: JSON構造・参照・現金賞金を検証
         run: npm run validate
+      - name: Tracker実績の安全な事前反映テスト（書込なし）
+        run: node scripts/apply-verified-tracker-finals.cjs --dry-run
       - name: データと画面ロジックの回帰テスト
         run: npm run test:unit
 

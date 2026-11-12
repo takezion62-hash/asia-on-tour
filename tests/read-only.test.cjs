@@ -234,6 +234,7 @@ function boot(source = script, { hash = '', search = '?season=all' } = {}) {
   for (const name of ['sessionStorage', 'indexedDB', 'FileReader', 'FormData', 'confirm']) {
     Object.defineProperty(sandbox, name, { get() { throw new Error(`Unexpected write feature: ${name}`); } });
   }
+  window.AOTDiscovery = sandbox.AOTDiscovery;
   vm.runInNewContext(source, sandbox, { filename: 'index.html', timeout: 5000 });
   const get = id => { assert.ok(ids.has(id), `Missing element ${id}`); return ids.get(id); };
   const click = element => {
@@ -369,7 +370,7 @@ test('entry, import, and delete controls are absent; only browse inputs remain',
   const markup = html.slice(0, html.indexOf('<script>'));
   assert.doesNotMatch(markup, /<form\b|data-add\b|data-delete\b|type="(?:file|submit)"|id="(?:entry-form|modal-backdrop|import-button|import-file|export-json)"/);
   assert.deepEqual([...markup.matchAll(/<input\b[^>]*type="([^"]+)"/g)].map(match => match[1]).sort(),
-    ['checkbox', 'search', 'search', 'search', 'search']); // results, players, tournaments, and Sources rule lookup; no editing controls
+    ['checkbox', 'checkbox', 'date', 'search', 'search', 'search', 'search', 'search']); // browse-only favorites, date, and searches; no editing controls
   assert.match(markup, /id="source-rule-search"/);
   assert.match(markup, /閲覧専用/);
 });

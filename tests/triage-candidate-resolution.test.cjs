@@ -96,9 +96,16 @@ test('all 31 newly reviewed historical candidates are source-backed, published o
   'news feed must not duplicate reviewed records');
  for(const e of entries.filter(e=>e.decision==='published'))
   assert.ok(recorded.includes(e.recordId),'new reviewed result absent from publication log '+e.id);
+ // latestManualReview is a moving pointer: a subsequent review (even just one
+ // candidate) replaces it. The immutable 31-row ledger assertions above
+ // prove the historical batch; don't mistake a newer pointer for lost data.
  const status=read('history-sync-status.json');
- assert.equal(status.latestManualReview?.reviewedCandidates,31);
- assert.equal(status.latestManualReview?.published,21);
- assert.equal(status.latestManualReview?.participationArchived,10);
- assert.equal(status.latestManualReview?.remainingPending,0);
+ const latestReview=status.latestManualReview;
+ assert.ok(latestReview && Number.isSafeInteger(latestReview.reviewedCandidates));
+ assert.ok(latestReview.reviewedCandidates >= 0);
+ assert.ok(Number.isSafeInteger(latestReview.published) && latestReview.published >= 0);
+ assert.ok(Number.isSafeInteger(latestReview.participationArchived) && latestReview.participationArchived >= 0);
+ assert.ok(Number.isSafeInteger(latestReview.remainingPending) && latestReview.remainingPending >= 0);
+ assert.ok(latestReview.published + latestReview.participationArchived <= latestReview.reviewedCandidates,
+   'latest independent review cannot dispose more than it reviewed');
 });

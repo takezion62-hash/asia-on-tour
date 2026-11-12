@@ -30,7 +30,7 @@ function fixtureAxes(catalog) {
   return Object.keys(baseTaxonomy).map(key => ({ key, options: [...new Set(catalog.map(item => item[key]))].map(id => ({ id, label: id })) }));
 }
 function model(catalog = [category('A')], results = [], axes = fixtureAxes(catalog)) {
-  const context = vm.createContext({ URL, URLSearchParams, siteData: { results, players: { candidates: [] }, tournaments: { axes, catalog } } });
+  const context = vm.createContext({ window: { AOTDiscovery: require('../discovery.js') }, URL, URLSearchParams, siteData: { results, players: { candidates: [] }, tournaments: { axes, catalog } } });
   // The async production bootstrap provides these bindings before defining
   // the journey model. Reproduce its minimal read-only contract in the VM.
   const setup = "const initialSeason='S43'; const records=siteData.results; const fullResults=null; const manifest={scopes:{},seasonOrder:[],names:[],previews:{}};\n";
