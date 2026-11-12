@@ -94,6 +94,9 @@ jobs:
             node scripts/safe-sync-merge.cjs merge auto "$RUNNER_TEMP/aot-auto-base.json" "$RUNNER_TEMP/aot-auto-scanned.json"
             npm run validate
             node --test tests/safe-sync-merge.test.cjs
+            # Publish season shards together with the canonical results (bot pushes do not trigger push workflows).
+            node scripts/build-season-data.cjs
+            git add -A season-data
             git add results.json updates.json auto-sync-status.json auto-sync-review.json auto-sync-scan.json
             if git diff --cached --quiet; then
               echo "SAFE_RECENT_MERGE no new data to publish"
