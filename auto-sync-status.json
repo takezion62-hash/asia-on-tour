@@ -11,7 +11,7 @@
   "provider": "osirion",
   "linkedPlayers": 592,
   "trackedWindows": 104,
-  "found": 12,
+  "found": 0,
   "skipped": 1,
   "imported": 0,
   "scannedPages": 50,
@@ -20,7 +20,7 @@
   "alreadyRegistered": 391,
   "autoApprovedTotal": 2259,
   "invalidCachedCandidates": 0,
-  "manualReviewCandidates": 12,
+  "manualReviewCandidates": 0,
   "autoApprovedCosmeticThisRun": 0,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
@@ -43,7 +43,7 @@
     "S43_OnePieceBuggyCup_Mobile",
     "S43_OnePieceBuggyCup_ZB"
   ],
-  "message": "最新版と安全統合：新規掲載0件、重複スキップ0件、要確認の競合0件、確認待ち12件。既存の戦績・賞金は保持。",
+  "message": "公式Epic ID・順位・開催枠を検証し12件を掲載。残り0件。未確認賞金を推定しない。",
   "concurrentMerge": {
     "appended": 0,
     "alreadyPublished": 0,
@@ -236,8 +236,8 @@
       }
     ]
   },
-  "manuallyPublished": 224,
-  "lastReviewedBatchAt": "2026-11-12T16:04:09.063Z",
+  "manuallyPublished": 236,
+  "lastReviewedBatchAt": "2026-11-12T18:30:11.505Z",
   "autoApprovedDuoQualifierThisRun": 0,
   "latestManualReview": {
     "reviewedAt": "2026-11-12T04:01:32.087Z",
