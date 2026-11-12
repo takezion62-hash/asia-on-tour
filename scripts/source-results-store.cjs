@@ -127,6 +127,16 @@ function publishResults(root,rows,{legacyWriter=false,allowRemoval=false}={}){
  const oldIds=new Set(current.rows.map(x=>x.id)),newIds=new Set(rows.map(x=>x.id));
  if(newIds.size!==rows.length||newIds.has(undefined))
   throw Error('SOURCE_RESULTS invalid or duplicate next result ID');
+ if(legacyWriter){
+  // Historical one-offs may append reviewed achievements, but must never
+  // silently rewrite a previously published rank, cash amount or identity.
+  const proposed=new Map(rows.map(x=>[x.id,x]));
+  for(const previous of current.rows){
+   const replacement=proposed.get(previous.id);
+   if(replacement && JSON.stringify(replacement)!==JSON.stringify(previous))
+    throw Error('SOURCE_RESULTS legacy writer altered existing record: '+previous.id);
+  }
+ }
  const missing=[...oldIds].filter(x=>!newIds.has(x));
  if(missing.length&&!allowRemoval)
   throw Error('SOURCE_RESULTS refused unexpected deletion of '+missing.length+' records');
