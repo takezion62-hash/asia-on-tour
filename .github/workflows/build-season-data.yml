@@ -9,6 +9,7 @@ on:
       - achievements.js
       - rankings.js
       - scripts/build-season-data.cjs
+      - scripts/build-source-results.cjs
       - scripts/apply-verified-tracker-finals.cjs
       - scripts/apply-verified-s43-squads-finals.cjs
       - 'data/manual-approvals/*-tracker.json'
@@ -24,7 +25,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   rebuild:
-    name: 戦績分割・サマリー再生成
+    name: 閲覧用・更新元のシーズン分割を検証・再生成
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -52,10 +53,13 @@ jobs:
             node scripts/validate-updates.cjs
             node scripts/build-season-data.cjs
             node scripts/build-candidate-triage.cjs
+            node scripts/build-source-results.cjs
+            node scripts/build-source-results.cjs --check
             node scripts/build-season-data.cjs --check
             node scripts/build-candidate-triage.cjs --check
             git add results.json players.json updates.json
             git add -A season-data
+            git add -A source-results
             git add candidate-triage.json
             if git diff --cached --quiet; then
               echo "Season and candidate triage indexes are current"
