@@ -110,3 +110,22 @@ test('2024-07-23 NAC Event6 Round2 awards exact $100 for each Epic-verified VR',
  assert.ok(audit([{...row,points:0}],history,{confirmedAliases:{}}).length>0);
  assert.ok(audit([{...row,source:source.replace('Event6Round2','Event7Round2')}],history,{confirmedAliases:{}}).length>0);
 });
+
+test('S31 2024 Event8 OCE/ME cash is $100 only for an exact original Round2 Victory Royale',()=>{
+ for(const [date,region] of [['2024-10-21','OCE'],['2024-10-22','ME']]){
+  const window='S31_SoloVictoryCashCup_Event8Round2_'+region;
+  const id='auto-s31-aabbccddeeff';
+  const source='https://www.fortnite.com/competitive/events/S31_SoloVictoryCashCup/?region='+region+'&round='+window;
+  const r={...result,id,date,region,tournamentId:'ch5s4-solo-victory-cup',seasonId:'S31',
+   event:'Solo Victory Cup Battle Royale',kind:'賞金決勝',
+   round:'Event 8 · Round 2 / 賞金決勝',rank:34,points:100,kills:3,
+   vrs:1,matches:3,prize:100,source,verified:true};
+  const history={version:1,entries:[{id,decision:'published',recordId:id,
+   policy:'official-final-vr-award',source,
+   rule:'https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-4-official-rules'}]};
+  assert.deepEqual(audit([r],history,{confirmedAliases:{}}),[]);
+  for(const edited of [{...r,prize:200},{...r,points:0},{...r,source:source.replace('Event8Round2','Event7Round2')},{...r,region:'NAC'}]){
+   assert.ok(audit([edited],history,{confirmedAliases:{}}).length>0);
+  }
+ }
+});
