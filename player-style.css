@@ -214,3 +214,11 @@
 .style-axis-method summary:focus-visible{outline:2px solid #9de8f7;outline-offset:4px}
 .style-axis-method p{font-size:11px;line-height:1.8;margin:10px 0 0}
 @media(max-width:640px){.style-four-axis{padding:13px}.style-four-axis-grid{grid-template-columns:1fr}.style-axis-card{padding:12px}}
+
+/* Peer view: horizontally scrollable, source-labelled axes with separate confidence. */
+.style-four-axis-matrix{margin:12px 0 19px}
+.style-four-axis-matrix table{min-width:520px;width:100%;border-collapse:collapse}
+.style-four-axis-matrix th,.style-four-axis-matrix td{padding:11px 13px;white-space:normal;vertical-align:top}
+.style-four-axis-matrix td strong{color:#f1f5ff;display:block;overflow-wrap:anywhere}
+.style-four-axis-matrix td small{display:block;margin-top:5px;font-size:11px;line-height:1.55;color:#afc6d8;overflow-wrap:anywhere}
+.style-four-axis-matrix>p{padding:8px 12px;font-size:11px;line-height:1.55;color:#b8c8dc}
