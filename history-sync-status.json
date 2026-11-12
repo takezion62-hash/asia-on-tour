@@ -20,7 +20,7 @@
   "alreadyRegistered": 3937,
   "autoApprovedTotal": 2107,
   "invalidCachedCandidates": 1,
-  "manualReviewCandidates": 12,
+  "manualReviewCandidates": 10,
   "autoApprovedCosmeticThisRun": 0,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
@@ -47,10 +47,10 @@
     "S30_Reload",
     "S30_ReloadZB"
   ],
-  "message": "最新版と安全統合：新規掲載20件、重複スキップ0件、要確認の競合0件、確認待ち12件。既存の戦績・賞金は保持。",
-  "manuallyPublished": 1057,
+  "message": "確認候補を原本再照合：正式2件、出場0件、既掲載重複0件。残り10件。",
+  "manuallyPublished": 1059,
   "manuallyResolvedDuplicates": 131,
-  "lastReviewedBatchAt": "2026-11-11T23:10:32.156Z",
+  "lastReviewedBatchAt": "2026-11-12T02:59:51.445Z",
   "manuallyCorrected": 4,
   "lastCorrectedReviewAt": "2026-11-07T09:14:30.244Z",
   "concurrentMerge": {
@@ -263,20 +263,20 @@
     "unrealTeamsWithCash": 2
   },
   "latestManualReview": {
-    "reviewedAt": "2026-11-11T23:10:32.156Z",
-    "reviewedCandidates": 69,
-    "published": 7,
-    "remainingPending": 0,
-    "duplicatesResolved": 21,
-    "participationArchived": 41,
+    "reviewedAt": "2026-11-12T02:59:51.445Z",
+    "reviewedCandidates": 2,
+    "published": 2,
+    "remainingPending": 10,
+    "duplicatesResolved": 0,
+    "participationArchived": 0,
     "policy": "Epic ID + official calendar + mature original ranked checkpoint; 2024 $100/VR; NAW top200 costume"
   },
   "autoApprovedDuoQualifierThisRun": 4,
   "latestParticipationReview": {
-    "reviewedAt": "2026-11-11T23:10:32.156Z",
-    "participationPublished": 41,
-    "duplicatesResolved": 21,
-    "remainingPending": 0,
+    "reviewedAt": "2026-11-12T02:59:51.445Z",
+    "participationPublished": 0,
+    "duplicatesResolved": 0,
+    "remainingPending": 10,
     "notIncludedInPrizeTotals": true
   }
 }
