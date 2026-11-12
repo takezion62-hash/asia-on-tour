@@ -43,6 +43,11 @@ jobs:
             --name unit-failure-report --dir .
           gh run download "$SOURCE_RUN_ID" --repo "$GITHUB_REPOSITORY" \
             --pattern 'site-test-report-*' --dir .
+          # A single-file GitHub artifact may be extracted without its parent directory.
+          if [[ -f unit-last-failed.json && ! -f test-results/unit-last-failed.json ]]; then
+            mkdir -p test-results
+            mv unit-last-failed.json test-results/unit-last-failed.json
+          fi
           test -f test-results/unit-last-failed.json
           node scripts/browser-failure-recheck.cjs merge
       - name: Rerun failed Node unit test FILES only
