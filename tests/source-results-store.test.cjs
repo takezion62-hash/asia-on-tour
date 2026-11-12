@@ -4,6 +4,7 @@ const assert=require('node:assert/strict');
 const fs=require('node:fs');
 const os=require('node:os');
 const path=require('node:path');
+const crypto=require('node:crypto');
 const {buildSnapshot}=require('../scripts/build-source-results.cjs');
 const {readResults,publishResults,importLegacy}=require('../scripts/source-results-store.cjs');
 const ROOT=path.resolve(__dirname,'..');
@@ -30,12 +31,12 @@ function fixture(t){
  for(const [name,content] of snapshot.files)fs.writeFileSync(path.join(dir,name),content);
  return root;
 }
-test('real 6000+ record source shards reconstruct identical IDs and payout with legacy projection',()=>{
+test('production season shards reconstruct ID order, count and payouts without legacy root JSON',()=>{
  const {rows,manifest}=readResults(ROOT);
  assert.equal(rows.length,manifest.count);
  assert.deepEqual(rows.map(x=>x.id),manifest.recordOrder);
- const legacy=JSON.parse(fs.readFileSync(path.join(ROOT,'results.json'),'utf8'));
- assert.deepEqual(rows,legacy);
+ const content=JSON.stringify(rows,null,2)+'\n';
+ assert.equal(crypto.createHash('sha256').update(content).digest('hex'),manifest.canonicalSha256);
  assert.equal(new Set(rows.map(x=>x.id)).size,rows.length);
  assert.equal(manifest.shards.reduce((n,s)=>n+s.count,0),rows.length);
  assert.equal(manifest.shards.reduce((n,s)=>n+s.teamPrizeCents,0),manifest.teamPrizeCents);
@@ -65,8 +66,11 @@ test('rejects corrupted shards, mismatched projections, ID collisions and accide
  assert.throws(()=>publishResults(root,[...sourceRows,sourceRows[0]]),/duplicate next result ID/);
  const legacy=path.join(root,'results.json');
  fs.writeFileSync(legacy,JSON.stringify([...sourceRows,{...sourceRows[0],id:'UNGUARDED'}]));
- assert.throws(()=>readResults(root),/projection differs/);
- assert.throws(()=>publishResults(root,[...sourceRows,{...sourceRows[0],id:'B2'}]),/projection differs/);
+ assert.throws(()=>readResults(root,{verifyProjection:true}),/projection differs/);
+ assert.deepEqual(readResults(root).rows,sourceRows);
+ const next=[...sourceRows,{...sourceRows[0],id:'B2'}];
+ assert.equal(publishResults(root,next).added,1);
+ assert.deepEqual(readResults(root).rows,next);
 });
 test('legacy compatibility rejects rewriting a previously published score',t=>{
  const root=fixture(t);
@@ -74,7 +78,10 @@ test('legacy compatibility rejects rewriting a previously published score',t=>{
  fs.writeFileSync(path.join(root,'results.json'),JSON.stringify(changed,null,2)+'\n');
  assert.throws(()=>importLegacy(root),/legacy writer altered existing record/);
 });
-test('explicit migration bridge updates authoritative shards from a vetted legacy writer',t=>{
+test('retired production import command cannot replace sharded source',()=>{
+ assert.throws(()=>importLegacy(ROOT),/retired in phase 3/);
+});
+test('isolated fixture bridge remains backward compatible without touching production',t=>{
  const root=fixture(t),newRow={...sourceRows[1],id:'B3'};
  const next=[...sourceRows,newRow];
  fs.writeFileSync(path.join(root,'results.json'),JSON.stringify(next,null,2)+'\n');

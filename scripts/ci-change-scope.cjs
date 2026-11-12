@@ -14,7 +14,7 @@ function classify(files) {
       return {mode:'full',reason:'unsafe-change-type'};
     const p = item.path;
     if (typeof p !== 'string' || p.includes('\0') ||
-        !DIRECT_DATA.has(p))
+        !(DIRECT_DATA.has(p)||/^source-results\/(?:S[1-9]\d*|unknown|manifest)\.json$/.test(p)))
       return {mode:'full',reason:'code-or-unknown-change'};
   }
   return {mode:'data',reason:'allowlisted-json-only'};
