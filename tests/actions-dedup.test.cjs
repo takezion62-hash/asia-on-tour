@@ -36,7 +36,9 @@ test('唯一の自動フルCIはPR必須チェック、JSON/単体/全PCスマ�
  assert.match(main,/run: npm run validate/);
  assert.match(main,/run: npm run test:unit/);
  assert.match(main,/run: npm run test:e2e -- --shard=\$\{\{ matrix\.shard \}\}\/4/);
- assert.match(main,/needs: \[unit, browser\]/);
+ assert.match(main,/needs: \[classify, unit, browser, smoke\]/);
+ assert.match(main,/if: needs\.classify\.outputs\.mode == 'full'/);
+ assert.match(main,/if: needs\.classify\.outputs\.mode == 'data'/);
  assert.match(main,/UNIT_RESULT: \$\{\{ needs\.unit\.result \}\}/);
  assert.match(main,/BROWSER_RESULT: \$\{\{ needs\.browser\.result \}\}/);
  assert.match(main,/cancel-in-progress: true/);
