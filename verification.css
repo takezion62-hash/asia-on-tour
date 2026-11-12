@@ -40,3 +40,15 @@ details summary{cursor:pointer;color:#a8e9fa;font-weight:700;margin:9px 0}
 .issue .evidence-note.warn{border-color:#bc8b45;color:#ffe0ae}
 .issue .evidence-note.danger{border-color:#bd617b;color:#ffb7cb}
 @media(max-width:750px){.audit-groups{grid-template-columns:1fr}.audit-group p{font-size:12px}}
+
+/* Keep dynamic tournament names and review evidence from forcing a mobile
+   intrinsic grid/flex width wider than the viewport. */
+@media(max-width:640px){
+  .layout,.side,main,.panel,.filters,.tabs,.actions,.metrics,.audit-groups{min-width:0;max-width:100%}
+  .side nav{min-width:0;flex:1 1 0}
+  .side nav a{min-width:0;overflow-wrap:anywhere}
+  .filters label,.filters label.search{flex:1 1 140px;min-width:0;max-width:100%}
+  .filters label.search{flex-basis:100%}
+  .filters select,.filters input{width:100%;min-width:0;max-width:100%}
+  .tab,.btn,.sub,.itemtitle,.notice,.metric,.audit-group{min-width:0;overflow-wrap:anywhere}
+}
