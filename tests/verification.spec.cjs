@@ -33,3 +33,22 @@ test('検索・地域指定・リロードが可能で閲覧画面に保存操�
  await expect(page.locator('#audit-refresh')).toBeEnabled({timeout:20000});
  expect(await page.getByRole('button',{name:'掲載確定'}).count()).toBe(0);
 });
+
+test('確認候補を年・大会・証拠の確認段階ごとに絞り込める',async({page})=>{
+ const errors=[];page.on('pageerror',error=>errors.push(error.message));
+ await page.goto('/verification.html#queue');
+ await expect(page.locator('#metric-queue')).not.toHaveText('—',{timeout:20000});
+ const years=page.locator('#audit-year option');
+ expect(await years.count()).toBeGreaterThan(1);
+ const year=await years.nth(1).getAttribute('value');
+ await page.locator('#audit-year').selectOption(year);
+ await expect(page.locator('#audit-summary')).toContainText('確認待ち');
+ await expect(page.locator('#audit-groups .audit-group')).toHaveCount(3);
+ const labels=page.locator('#audit-tournament option');
+ expect(await labels.count()).toBeGreaterThan(1);
+ const tournament=await labels.nth(1).getAttribute('value');
+ await page.locator('#audit-tournament').selectOption(tournament);
+ await page.locator('#audit-triage').selectOption('evidence-conflict');
+ await expect(page.locator('#audit-summary')).toContainText('確認待ち');
+ expect(errors).toEqual([]);
+});
