@@ -12,6 +12,7 @@ on:
       - scripts/apply-verified-tracker-finals.cjs
       - scripts/apply-verified-s43-squads-finals.cjs
       - 'data/manual-approvals/*-tracker.json'
+      - 'data/manual-approvals/*-squads-confirmed.json'
       - scripts/build-candidate-triage.cjs
       - scripts/candidate-triage-core.cjs
       - .github/workflows/build-season-data.yml
