@@ -100,12 +100,12 @@ test('all 31 newly reviewed historical candidates are source-backed, published o
  // candidate) replaces it. The immutable 31-row ledger assertions above
  // prove the historical batch; don't mistake a newer pointer for lost data.
  const status=read('history-sync-status.json');
- const latest=status.latestManualReview;
- assert.ok(latest && Number.isSafeInteger(latest.reviewedCandidates));
- assert.ok(latest.reviewedCandidates >= 0);
- assert.ok(Number.isSafeInteger(latest.published) && latest.published >= 0);
- assert.ok(Number.isSafeInteger(latest.participationArchived) && latest.participationArchived >= 0);
- assert.ok(Number.isSafeInteger(latest.remainingPending) && latest.remainingPending >= 0);
- assert.ok(latest.published + latest.participationArchived <= latest.reviewedCandidates,
+ const latestReview=status.latestManualReview;
+ assert.ok(latestReview && Number.isSafeInteger(latestReview.reviewedCandidates));
+ assert.ok(latestReview.reviewedCandidates >= 0);
+ assert.ok(Number.isSafeInteger(latestReview.published) && latestReview.published >= 0);
+ assert.ok(Number.isSafeInteger(latestReview.participationArchived) && latestReview.participationArchived >= 0);
+ assert.ok(Number.isSafeInteger(latestReview.remainingPending) && latestReview.remainingPending >= 0);
+ assert.ok(latestReview.published + latestReview.participationArchived <= latestReview.reviewedCandidates,
    'latest independent review cannot dispose more than it reviewed');
 });
