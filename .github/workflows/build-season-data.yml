@@ -40,13 +40,11 @@ jobs:
           for attempt in 1 2 3 4 5; do
             git fetch origin main
             git reset --hard origin/main
-            node scripts/import-verified-s30-me-zb-duos-20261112.cjs
-            node scripts/validate-data.cjs
             node scripts/build-season-data.cjs
             node scripts/build-candidate-triage.cjs
             node scripts/build-season-data.cjs --check
             node scripts/build-candidate-triage.cjs --check
-            git add -A results.json players.json tournaments.json season-data
+            git add -A season-data
             git add candidate-triage.json
             if git diff --cached --quiet; then
               echo "Season and candidate triage indexes are current"
