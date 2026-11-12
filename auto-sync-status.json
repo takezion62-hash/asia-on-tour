@@ -1,7 +1,7 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-11T21:47:23.414Z",
+  "checkedAt": "2026-11-12T00:30:45.390Z",
   "mode": "review",
   "scope": "recent",
   "dateMode": null,
@@ -11,16 +11,16 @@
   "provider": "osirion",
   "linkedPlayers": 573,
   "trackedWindows": 104,
-  "found": 0,
+  "found": 17,
   "skipped": 0,
   "imported": 0,
   "scannedPages": 50,
   "completedWindows": 54,
   "identityConflicts": 3,
-  "alreadyRegistered": 301,
-  "autoApprovedTotal": 2073,
+  "alreadyRegistered": 320,
+  "autoApprovedTotal": 2107,
   "invalidCachedCandidates": 0,
-  "manualReviewCandidates": 0,
+  "manualReviewCandidates": 17,
   "autoApprovedCosmeticThisRun": 0,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
@@ -40,13 +40,13 @@
     "S42_InoxtagIconCup_ZB",
     "S42_InoxtagIconMobileCup"
   ],
-  "message": "公式Epic ID・順位・開催枠を検証し19件を掲載。残り0件。未確認賞金を推定しない。",
+  "message": "最新版と安全統合：新規掲載0件、重複スキップ0件、要確認の競合0件、確認待ち17件。既存の戦績・賞金は保持。",
   "concurrentMerge": {
     "appended": 0,
     "alreadyPublished": 0,
     "reviewConflicts": 0,
-    "keptPending": 19,
-    "reconciledAt": "2026-11-11T21:47:31.310Z"
+    "keptPending": 17,
+    "reconciledAt": "2026-11-12T00:30:51.900Z"
   },
   "coverage": {
     "total": 104,
@@ -105,7 +105,7 @@
         "region": "OCE",
         "series": "victory-cup",
         "status": "partial",
-        "nextPage": 30,
+        "nextPage": 40,
         "totalPages": 70,
         "retryAfter": null,
         "errorCode": null
@@ -116,7 +116,7 @@
         "region": "BR",
         "series": "victory-cup",
         "status": "partial",
-        "nextPage": 5,
+        "nextPage": 10,
         "totalPages": 80,
         "retryAfter": null,
         "errorCode": null
@@ -127,7 +127,7 @@
         "region": "NAC",
         "series": "victory-cup",
         "status": "partial",
-        "nextPage": 20,
+        "nextPage": 30,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
@@ -138,7 +138,7 @@
         "region": "NAW",
         "series": "victory-cup",
         "status": "partial",
-        "nextPage": 30,
+        "nextPage": 40,
         "totalPages": 84,
         "retryAfter": null,
         "errorCode": null
@@ -149,7 +149,7 @@
         "region": "NAW",
         "series": "icon-cup",
         "status": "partial",
-        "nextPage": 23,
+        "nextPage": 24,
         "totalPages": 89,
         "retryAfter": null,
         "errorCode": null
@@ -160,7 +160,7 @@
         "region": "EU",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 84,
+        "nextPage": 85,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
@@ -171,7 +171,7 @@
         "region": "ME",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 49,
+        "nextPage": 50,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
@@ -182,7 +182,7 @@
         "region": "BR",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 35,
+        "nextPage": 36,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
@@ -193,7 +193,7 @@
         "region": "NAW",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 18,
+        "nextPage": 19,
         "totalPages": 70,
         "retryAfter": null,
         "errorCode": null
@@ -204,7 +204,7 @@
         "region": "EU",
         "series": "victory-cup",
         "status": "partial",
-        "nextPage": 80,
+        "nextPage": 90,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
