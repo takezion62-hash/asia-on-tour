@@ -1,5 +1,6 @@
 'use strict';
 const {test,expect}=require('@playwright/test');
+const {mockSeasonResults}=require('./season-fixture.cjs');
 const index=require('../participation-index.json');
 test('nonqualifier participation archive opens by month and stays outside prize filters',async({page})=>{
  await page.goto('/?season=all#results');
@@ -46,6 +47,7 @@ test('AOT PR credits lower-ranked verified participation once, without breakthro
   source:source('S42_ConsoleVCC_SolosZB_Event8Round1_NAW')});
  const entries=[make('participation-0123456789abcdefabcd',names[0],1044),
   make('participation-aaaaaaaaaaaaaaaaaaaa',names[1],1100)];
+ await mockSeasonResults(page,[published]);
  for(const [file,body] of Object.entries({
    'results.json':[published],
    'players.json':{candidates:names.map((name,i)=>({name,initials:'P'+i,desc:'Confirmed player',accent:'cyan'})),confirmedAliases:{}},
