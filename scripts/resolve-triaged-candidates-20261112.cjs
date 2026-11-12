@@ -9,7 +9,7 @@ const {RULES}=require('./verified-history-approval.cjs');
 const {toParticipation,recordId:participationId,appendArchive,publishedEquivalent}=require('./participation-archive.cjs');
 const {sourceWindow}=require('./candidate-triage-core.cjs');
 const root=path.resolve(__dirname,'..'),{read,write}=createPublicationFiles(root);
-const TARGET_IDS=new Set(["auto-s42-00bacaa46d78","auto-s42-1353c4dd52b0","auto-s42-36f61cec7e5e","auto-s42-666e9255abb7","auto-s42-8c5da81eea44","auto-s42-31ea77a81948","auto-s42-344bb93fb223","auto-s42-38c619af58c5","auto-s42-5e35168fc3f6","auto-s42-8d5c197e28e2","auto-s31-7a23e1138e55","auto-s31-fc55bba6d32f","auto-s31-2ae2abefe687","auto-s31-24c411e2e0e2","auto-s31-27ff62b1107c","auto-s31-eaed80bd268d","auto-s36-1ecc40675e2b","auto-s36-32b419bb7534","auto-s36-6e5e69f28783","auto-s36-7fef84ff571a","auto-s36-a11e61d5bc70","auto-s36-a567e5c7b23f","auto-s42-36cc38395ba3","auto-s42-86fa836511fe","auto-s42-a887487a1ee6","auto-s42-f319960a7db5","auto-s42-c3741a0cf405","auto-s42-0554fd98619e","auto-s42-07fdf08dd869","auto-s42-1f775155bfa4","auto-s42-1fcb410ad12c","auto-s42-44bcdf243c04","auto-s42-533e934c696f","auto-s42-70cd66eb5b1c","auto-s42-a74193d78b69","auto-s42-af2bc57f1191","auto-s42-d6d846dd1e79","auto-s42-28231f26cea6","auto-s42-4e12249f360d","auto-s42-a8710f7cfbe8","auto-s31-286299ef6e53","auto-s31-5539ecdbbee9","auto-s31-63a1687f62e9","auto-s31-6ba884a84f2e","auto-s31-aed99211a6b6","auto-s31-bba7802e7d06","auto-s31-e9e972efbd8c","auto-s42-34336c3be81a"]);
+const TARGET_IDS=new Set(["auto-s42-00bacaa46d78","auto-s42-1353c4dd52b0","auto-s42-36f61cec7e5e","auto-s42-666e9255abb7","auto-s42-8c5da81eea44","auto-s42-31ea77a81948","auto-s42-344bb93fb223","auto-s42-38c619af58c5","auto-s42-5e35168fc3f6","auto-s42-8d5c197e28e2","auto-s31-7a23e1138e55","auto-s31-fc55bba6d32f","auto-s31-2ae2abefe687","auto-s31-24c411e2e0e2","auto-s31-27ff62b1107c","auto-s31-eaed80bd268d","auto-s36-1ecc40675e2b","auto-s36-32b419bb7534","auto-s36-6e5e69f28783","auto-s36-7fef84ff571a","auto-s36-a11e61d5bc70","auto-s36-a567e5c7b23f","auto-s42-36cc38395ba3","auto-s42-86fa836511fe","auto-s42-a887487a1ee6","auto-s42-f319960a7db5","auto-s42-c3741a0cf405","auto-s42-0554fd98619e","auto-s42-07fdf08dd869","auto-s42-1f775155bfa4","auto-s42-1fcb410ad12c","auto-s42-44bcdf243c04","auto-s42-533e934c696f","auto-s42-70cd66eb5b1c","auto-s42-a74193d78b69","auto-s42-af2bc57f1191","auto-s42-d6d846dd1e79","auto-s42-28231f26cea6","auto-s42-4e12249f360d","auto-s42-a8710f7cfbe8","auto-s31-286299ef6e53","auto-s31-5539ecdbbee9","auto-s31-63a1687f62e9","auto-s31-6ba884a84f2e","auto-s31-aed99211a6b6","auto-s31-bba7802e7d06","auto-s31-e9e972efbd8c","auto-s42-34336c3be81a","auto-s42-20ff2eea3bb3","auto-s30-013524caf149","auto-s30-36c73a521b38","auto-s30-51ccf5f4742f","auto-s30-e62fc8ea41e6","auto-s30-e68f16f49747","auto-s31-39673413e961","auto-s31-db7713aabbaf","auto-s31-0b7e68aacdca","auto-s31-eff393d1a689","auto-s31-f387dc63d7a3","auto-s36-7da10bb1c06b","auto-s36-83ec8d1ff73d"]);
 const dry=process.argv.includes('--dry-run');
 const now=new Date().toISOString(),dateJst=new Date(Date.now()+9*3600000).toISOString().slice(0,10);
 const d={
@@ -38,6 +38,13 @@ for(const origin of ['auto','history']){
  }
 }
 for(const id of TARGET_IDS)if(!audience.has(id))missing.push(id);
+// One-time reconciliation is fully idempotent. In particular, do NOT touch
+// reviewedAt/status files on later scheduled scans when the target queue is empty.
+if(audience.size===0){
+ console.log('TRIAGE_RESOLVE_20261112 '+JSON.stringify({dry,originalTargetIds:TARGET_IDS.size,
+  stillInQueue:0,missing:missing.length,published:0,attendance:0,alreadyPublishedDuplicates:0,held:0}));
+ process.exit(0);
+}
 function members(row){return Array.isArray(row.players)&&row.players.length?row.players:[row.player]}
 function uniqueCandidate(row){
  if(recorded.has(row.id)||reviewed.has(row.id)||ledger.has(row.id))return false;
@@ -90,7 +97,8 @@ function verify(row,{requireMaturity=true}={}){
   seasonId:row.seasonId,eventId,windowId,round:row.round,kind:row.kind,series:cat.series};
  return {cat,win,cp:(eligible[0]||matching[0]).checkpoint,session};
 }
-const qualifiedId='ch5s4-solo-victory-cup',cosmeticId='ch7s4-lady-liberty-cup-battle-royale';
+const qualifiedId='ch5s4-solo-victory-cup',qualifiedZbId='ch5s3-zb-solo-victory';
+const cosmeticId='ch7s4-lady-liberty-cup-battle-royale';
 const scoreFields=['points','kills','vrs'];
 for(const {row,origins} of audience.values()){
  if(!uniqueCandidate(row)){
@@ -115,25 +123,48 @@ for(const {row,origins} of audience.values()){
    dedup.push({row,origin,existingId:old.id});
    continue;
   }
-  const verifiedS31Qualifier=row.seasonId==='S31'&&row.tournamentId===qualifiedId&&
-    row.kind==='予選'&&(
-      row.date==='2024-10-07'&&row.region==='OCE'||
-      row.date==='2024-10-08'&&row.region==='ME'
-    );
+  const verifiedOldQualifier=row.kind==='予選'&&(
+   row.seasonId==='S31'&&row.tournamentId===qualifiedId&&(
+     row.date==='2024-10-07'&&row.region==='OCE'||
+     row.date==='2024-10-08'&&row.region==='ME'||
+     row.date==='2024-10-14'&&row.region==='OCE'
+   )||
+   row.seasonId==='S30'&&row.tournamentId===qualifiedZbId&&
+     row.date==='2024-06-11'&&row.region==='ME'
+  );
   const rule=RULES[row.tournamentId];
-  if(verifiedS31Qualifier){
-   const exactCutoff={OCE:1500,ME:2000}[row.region];
-   fail(rule?.seasonId==='S31'&&rule.advance?.[row.region]===exactCutoff&&
+  if(verifiedOldQualifier){
+   const exactCutoff=rule?.advance?.[row.region];
+   fail(rule?.seasonId===row.seasonId&&Number.isSafeInteger(exactCutoff)&&
     rule.eventIds.includes(win.eventId)&&row.rank<=exactCutoff&&
     row.matches<=rule.matchCaps['予選']&&row.prize===0&&cat.team==='solo',
-    'not verified official 2024 OCE/ME qualifier '+row.id);
+    'not verified official 2024 ME/OCE qualifier '+row.id);
    const {reviewReason,reviewOnly,teamAccountIds,...rec}=row;
    rec.round=row.round.replace(/\/\s*予選$/,'/ 予選突破');
    rec.kind='予選';rec.prize=0;
    rec.note='Epic公式規則で'+row.region+'上位'+exactCutoff+'位が予選突破。本人Epic IDと保存済みの成熟した順位表で'+
     row.rank+'位を確認。予選の現金賞金$0。受賞・支払の断定なし。規則: '+rule.source;
    fail(!d.results.some(x=>collision(x,rec,aliases)),'potential existing result; no automatic merge '+row.id);
-   published.push({row,record:rec,origin,rule:rule.source});
+   published.push({row,record:rec,origin,rule:rule.source,policy:'verified-rule'});
+   continue;
+  }
+  // The 2024 S31 NAC event 6 Round 2 awards exactly $100 per Victory
+  // Royale. A point total of 100 and one VR must both be in the mature
+  // saved Epic scoreboard, not inferred from a qualification or profile.
+  const verifiedNacFinal=row.seasonId==='S31'&&row.tournamentId===qualifiedId&&
+   row.date==='2024-10-08'&&row.region==='NAC'&&row.kind==='賞金決勝';
+  if(verifiedNacFinal){
+   fail(rule?.seasonId==='S31'&&
+    rule.source==='https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-4-official-rules'&&
+    win.windowId==='S31_SoloVictoryCashCup_Event6Round2_NAC'&&
+    row.round.includes('Round 2 / 賞金決勝')&&row.prize===null&&
+    row.vrs===1&&row.points===100&&row.matches<=3&&cat.team==='solo',
+    '2024 NAC official VR payout not proved '+row.id);
+   const {reviewReason,reviewOnly,teamAccountIds,...rec}=row;
+   rec.prize=100;
+   rec.note='2024年S31 NAC Event 6決勝。Epic ID・公式開催枠・成熟した保存順位表で1VR/100ptを照合。公式規則の決勝1VR=$100による賞金。実際の支払・受賞資格は未確認。規則: '+rule.source;
+   fail(!d.results.some(x=>collision(x,rec,aliases)),'potential existing cash result '+row.id);
+   published.push({row,record:rec,origin,rule:rule.source,policy:'official-final-vr-award'});
    continue;
   }
   // For everything outside our narrow official award scope, save attendance
@@ -171,12 +202,14 @@ if(!dry){
  }
  for(const x of published){
   d.reviewed.entries.push({id:x.row.id,decision:'published',recordId:x.record.id,reviewedAt:now,
-   source:x.row.source,policy:'verified-rule',rule:x.rule});
+   source:x.row.source,policy:x.policy,rule:x.rule});
   d.ledger.entries.push({id:x.row.id,decision:'published',recordId:x.record.id,
-   policy:'verified-rule',approvedAt:now,
+   policy:x.policy,approvedAt:now,
    approvedBy:'ChatGPT / user-authorized source-backed review',
    source:x.row.source,rule:x.rule,
-   evidence:'Exact Epic roster + official calendar + mature original leaderboard rank and official OCE top 1500'});
+   evidence:x.policy==='official-final-vr-award'?
+    'Exact Epic roster + official session + mature saved 1VR/100pt scoreboard + S31 official $100/VR':
+    'Exact Epic roster + official calendar + mature saved rank and region-specific qualifier cutoff'});
  }
  for(const x of dedup)d.reviewed.entries.push({id:x.row.id,decision:'already-published',
   existingId:x.existingId,reviewedAt:now,source:x.row.source,
@@ -205,7 +238,7 @@ if(!dry){
     participationArchived:attendance.filter(x=>x.origin===origin).length,
     duplicatesResolved:dedup.filter(x=>x.origin===origin).length,
     remainingPending:q.length,
-    policy:'Exact Epic ID, official session and original mature leaderboard; verified OCE S31 qualifier only'
+    policy:'Exact Epic ID, official session, mature original scoreboard and allowlisted 2024 ME/OCE qualification or S31 NAC $100/VR final'
   };
   status.message='残候補の原本再調査：正式予選突破'+published.filter(x=>x.origin===origin).length+
    '件・出場'+attendance.filter(x=>x.origin===origin).length+
@@ -216,9 +249,11 @@ if(!dry){
   const hash=crypto.createHash('sha256').update(approvedIds.slice().sort().join('|')).digest('hex').slice(0,12);
   const entryId='triage-verified-20261112-'+hash;
   fail(!d.updates.entries.some(x=>x.id===entryId),'unexpected duplicate update marker');
+  const cash=published.filter(x=>x.policy==='official-final-vr-award').length;
+  const qualified=published.length-cash;
   d.updates.entries.unshift({id:entryId,date:dateJst,type:'records',
-   title:'保存順位表とEpic公式ルールを再照合：S31予選突破'+published.length+'件',
-   description:'2024年S31 Solo Victory Cash Cupの公式地域別通過条件（OCE上位1,500位／ME上位2,000位）と本人Epic ID、開催枠、成熟した保存済み順位表を照合。予選賞金$0。参加確認や既掲載スキンは賞金に含めない。',
+   title:'公式順位表を再照合：予選突破'+qualified+'件・賞金決勝'+cash+'件',
+   description:'2024年のME/OCE予選は公式通過条件で$0の突破実績として、S31 NAC Event6決勝は本人Epic ID・1VR/100pt・公式$100/VR規則で賞金記録として照合。実際の支払は未確認。参加記録は賞金に含めない。',
    recordIds:approvedIds});
  }
  d.reviewed.reviewedAt=now;d.ledger.reviewedAt=now;
@@ -237,9 +272,11 @@ if(!dry){
  write('participation-status.json',st);
 }
 const report={dry,originalTargetIds:TARGET_IDS.size,stillInQueue:audience.size,missing:missing.length,
- published:published.length,attendance:attendance.length,alreadyPublishedDuplicates:dedup.length,
+ published:published.length,qualified:published.filter(x=>x.policy==='verified-rule').length,
+ cashFinals:published.filter(x=>x.policy==='official-final-vr-award').length,
+ attendance:attendance.length,alreadyPublishedDuplicates:dedup.length,
  held:held.length,heldReasons:held.slice(0,40),byPlayer:published.map(x=>({
-  name:x.row.player,region:x.row.region,date:x.row.date,rank:x.row.rank,points:x.row.points,kills:x.row.kills,vrs:x.row.vrs
+  name:x.row.player,region:x.row.region,date:x.row.date,rank:x.row.rank,points:x.row.points,kills:x.row.kills,vrs:x.row.vrs,prize:x.record.prize
  }))};
 console.log('TRIAGE_RESOLVE_20261112 '+JSON.stringify(report));
 if(require.main===module)module.exports=report;
