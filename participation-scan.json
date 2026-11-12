@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-11-12T21:34:37.091Z",
+  "checkedAt": "2026-11-12T23:24:34.791Z",
   "windows": {
     "epicgames_S42_InoxtagIconCup_NAW/S42_InoxtagIconCup_NAW": {
       "nextPage": 50,
@@ -318,12 +318,12 @@
       "emptyAttempts": 0
     },
     "epicgames_S43_OnePieceZoroCup_EU/S43_OnePieceZoroCup_EU": {
-      "nextPage": 40,
-      "pages": 40,
-      "complete": true,
-      "coverageLimited": true,
+      "nextPage": 50,
+      "pages": 50,
+      "complete": false,
+      "coverageLimited": false,
       "totalPages": 100,
-      "lastScanned": "2026-11-08T07:41:08.549Z",
+      "lastScanned": "2026-11-12T23:23:57.719Z",
       "emptyAttempts": 0
     },
     "epicgames_S36_VictoryDuosCup_EU/S36_VictoryDuosCup_Event1Round2_EU": {
@@ -830,6 +830,42 @@
       "emptyAttempts": 0,
       "retryAfter": "2026-11-13T03:34:09.897Z",
       "lastError": "Osirion API HTTP 429 /v1/tournaments/leaderboard"
+    },
+    "epicgames_S43_PerformanceEvaluationTrios_EU/S43_PerformanceEvaluation_Event2Round1_EU": {
+      "nextPage": 7,
+      "pages": 7,
+      "complete": true,
+      "coverageLimited": false,
+      "totalPages": 7,
+      "lastScanned": "2026-11-12T23:23:48.204Z",
+      "emptyAttempts": 0
+    },
+    "epicgames_S30_DuosCashCupZB_ME/S30_DuosCashCupZB_Event1Round1_ME": {
+      "nextPage": 10,
+      "pages": 10,
+      "complete": false,
+      "coverageLimited": false,
+      "totalPages": 18,
+      "lastScanned": "2026-11-12T23:24:08.843Z",
+      "emptyAttempts": 0
+    },
+    "epicgames_S36_VictoryDuosCup_ME/S36_VictoryDuosCup_Event1Round1_ME": {
+      "nextPage": 10,
+      "pages": 10,
+      "complete": false,
+      "coverageLimited": false,
+      "totalPages": 59,
+      "lastScanned": "2026-11-12T23:24:32.472Z",
+      "emptyAttempts": 0
+    },
+    "epicgames_S30_SoloVictoryCashCup_EU/S30_SoloVictoryCashCup_Event1Round2_EU": {
+      "nextPage": 3,
+      "pages": 3,
+      "complete": false,
+      "coverageLimited": false,
+      "totalPages": 68,
+      "lastScanned": "2026-11-12T23:24:34.791Z",
+      "emptyAttempts": 0
     }
   }
 }
