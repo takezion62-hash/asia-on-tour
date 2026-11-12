@@ -12,7 +12,7 @@ function buildFileMap(projectRoot = root) {
     ['/', 'index.html'], ['/index.html', 'index.html'],
     ['/verification.html', 'verification.html'],
     ['/schedule.json', 'schedule.json'],
-    ...['results', 'players', 'tournaments', 'updates'].map(name => ['/' + name + '.json', name + '.json])
+    ...['results', 'players', 'tournaments', 'updates'].map(name => ['/' + name + '.json', name + '.json'])
   ]);
   for (const name of [
     'participation-index.json', 'participation-status.json',
