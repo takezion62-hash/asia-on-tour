@@ -9,6 +9,7 @@ const files = new Map([['/', 'index.html'], ['/index.html', 'index.html'], ['/ap
 for(const name of ['calendar.css','auto-sync-ui.js','auto-sync-ui.css','participation-ui.js','participation-pr.js','participation.css','participation-index.json','participation-status.json','calendar-history-index.json','calendar-history-status.json','auto-sync-status.json','auto-sync-review.json','history-sync-status.json','history-sync-review.json','candidate-triage.json',
   // Mirror all public site entrypoints and their dependencies in browser tests.
   'player-style.js','player-style-view.js','player-style.css','tracker-summary.js','tracker-summary.css','profile-layout.js','profile-layout.css',
+  'discovery.js','discovery-ui.js','discovery-ui.css',
   'verification.html','verification-core.js','verification.js','verification.css',
   'source-rules.js','source-rules.css','tournament-rules.json','history-sync-reviewed.json','approval-history.json'])files.set('/'+name,name);
 if(fs.existsSync(path.join(root,'season-data'))){
