@@ -9,7 +9,7 @@ const {RULES}=require('./verified-history-approval.cjs');
 const {toParticipation,recordId:participationId,appendArchive,publishedEquivalent}=require('./participation-archive.cjs');
 const {sourceWindow}=require('./candidate-triage-core.cjs');
 const root=path.resolve(__dirname,'..'),{read,write}=createPublicationFiles(root);
-const TARGET_IDS=new Set(["auto-s42-00bacaa46d78","auto-s42-1353c4dd52b0","auto-s42-36f61cec7e5e","auto-s42-666e9255abb7","auto-s42-8c5da81eea44","auto-s42-31ea77a81948","auto-s42-344bb93fb223","auto-s42-38c619af58c5","auto-s42-5e35168fc3f6","auto-s42-8d5c197e28e2","auto-s31-7a23e1138e55","auto-s31-fc55bba6d32f","auto-s31-2ae2abefe687","auto-s31-24c411e2e0e2","auto-s31-27ff62b1107c","auto-s31-eaed80bd268d","auto-s36-1ecc40675e2b","auto-s36-32b419bb7534","auto-s36-6e5e69f28783","auto-s36-7fef84ff571a","auto-s36-a11e61d5bc70","auto-s36-a567e5c7b23f","auto-s42-36cc38395ba3","auto-s42-86fa836511fe","auto-s42-a887487a1ee6","auto-s42-f319960a7db5","auto-s42-c3741a0cf405","auto-s42-0554fd98619e","auto-s42-07fdf08dd869","auto-s42-1f775155bfa4","auto-s42-1fcb410ad12c","auto-s42-44bcdf243c04","auto-s42-533e934c696f","auto-s42-70cd66eb5b1c","auto-s42-a74193d78b69","auto-s42-af2bc57f1191","auto-s42-d6d846dd1e79","auto-s42-28231f26cea6","auto-s42-4e12249f360d","auto-s42-a8710f7cfbe8"]);
+const TARGET_IDS=new Set(["auto-s42-00bacaa46d78","auto-s42-1353c4dd52b0","auto-s42-36f61cec7e5e","auto-s42-666e9255abb7","auto-s42-8c5da81eea44","auto-s42-31ea77a81948","auto-s42-344bb93fb223","auto-s42-38c619af58c5","auto-s42-5e35168fc3f6","auto-s42-8d5c197e28e2","auto-s31-7a23e1138e55","auto-s31-fc55bba6d32f","auto-s31-2ae2abefe687","auto-s31-24c411e2e0e2","auto-s31-27ff62b1107c","auto-s31-eaed80bd268d","auto-s36-1ecc40675e2b","auto-s36-32b419bb7534","auto-s36-6e5e69f28783","auto-s36-7fef84ff571a","auto-s36-a11e61d5bc70","auto-s36-a567e5c7b23f","auto-s42-36cc38395ba3","auto-s42-86fa836511fe","auto-s42-a887487a1ee6","auto-s42-f319960a7db5","auto-s42-c3741a0cf405","auto-s42-0554fd98619e","auto-s42-07fdf08dd869","auto-s42-1f775155bfa4","auto-s42-1fcb410ad12c","auto-s42-44bcdf243c04","auto-s42-533e934c696f","auto-s42-70cd66eb5b1c","auto-s42-a74193d78b69","auto-s42-af2bc57f1191","auto-s42-d6d846dd1e79","auto-s42-28231f26cea6","auto-s42-4e12249f360d","auto-s42-a8710f7cfbe8","auto-s31-286299ef6e53","auto-s31-5539ecdbbee9","auto-s31-63a1687f62e9","auto-s31-6ba884a84f2e","auto-s31-aed99211a6b6","auto-s31-bba7802e7d06","auto-s31-e9e972efbd8c","auto-s42-34336c3be81a"]);
 const dry=process.argv.includes('--dry-run');
 const now=new Date().toISOString(),dateJst=new Date(Date.now()+9*3600000).toISOString().slice(0,10);
 const d={
@@ -115,18 +115,22 @@ for(const {row,origins} of audience.values()){
    dedup.push({row,origin,existingId:old.id});
    continue;
   }
-  const isOce2024=row.seasonId==='S31'&&row.tournamentId===qualifiedId&&
-    row.date==='2024-10-07'&&row.region==='OCE'&&row.kind==='予選';
+  const verifiedS31Qualifier=row.seasonId==='S31'&&row.tournamentId===qualifiedId&&
+    row.kind==='予選'&&(
+      row.date==='2024-10-07'&&row.region==='OCE'||
+      row.date==='2024-10-08'&&row.region==='ME'
+    );
   const rule=RULES[row.tournamentId];
-  if(isOce2024){
-   fail(rule?.seasonId==='S31'&&rule.advance?.OCE===1500&&
-    rule.eventIds.includes(win.eventId)&&row.rank<=rule.advance.OCE&&
+  if(verifiedS31Qualifier){
+   const exactCutoff={OCE:1500,ME:2000}[row.region];
+   fail(rule?.seasonId==='S31'&&rule.advance?.[row.region]===exactCutoff&&
+    rule.eventIds.includes(win.eventId)&&row.rank<=exactCutoff&&
     row.matches<=rule.matchCaps['予選']&&row.prize===0&&cat.team==='solo',
-    'not verified official 2024 OCE qualifier '+row.id);
+    'not verified official 2024 OCE/ME qualifier '+row.id);
    const {reviewReason,reviewOnly,teamAccountIds,...rec}=row;
    rec.round=row.round.replace(/\/\s*予選$/,'/ 予選突破');
    rec.kind='予選';rec.prize=0;
-   rec.note='Epic公式規則でOCE上位1,500位が予選突破。本人Epic IDと保存済みの成熟した順位表で'+
+   rec.note='Epic公式規則で'+row.region+'上位'+exactCutoff+'位が予選突破。本人Epic IDと保存済みの成熟した順位表で'+
     row.rank+'位を確認。予選の現金賞金$0。受賞・支払の断定なし。規則: '+rule.source;
    fail(!d.results.some(x=>collision(x,rec,aliases)),'potential existing result; no automatic merge '+row.id);
    published.push({row,record:rec,origin,rule:rule.source});
@@ -213,8 +217,8 @@ if(!dry){
   const entryId='triage-verified-20261112-'+hash;
   fail(!d.updates.entries.some(x=>x.id===entryId),'unexpected duplicate update marker');
   d.updates.entries.unshift({id:entryId,date:dateJst,type:'records',
-   title:'保存順位表とEpic公式ルールを再照合：OCE予選突破'+published.length+'件',
-   description:'2024年OCE Solo Victory Cash Cupの公式1,500位通過条件と本人Epic ID、開催枠、成熟した保存済み順位表を照合。予選賞金$0。参加確認や既掲載スキンは賞金に含めない。',
+   title:'保存順位表とEpic公式ルールを再照合：S31予選突破'+published.length+'件',
+   description:'2024年S31 Solo Victory Cash Cupの公式地域別通過条件（OCE上位1,500位／ME上位2,000位）と本人Epic ID、開催枠、成熟した保存済み順位表を照合。予選賞金$0。参加確認や既掲載スキンは賞金に含めない。',
    recordIds:approvedIds});
  }
  d.reviewed.reviewedAt=now;d.ledger.reviewedAt=now;
