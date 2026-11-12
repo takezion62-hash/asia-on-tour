@@ -85,6 +85,9 @@ jobs:
           AOT_APPROVAL_POLICY: ${{ inputs.publication_policy }}
           AOT_APPROVAL_CONFIRMATION: ${{ inputs.confirmation }}
         run: node scripts/manual-approval.cjs
+      - name: Refresh candidate evidence after approval
+        if: ${{ !inputs.preview_only }}
+        run: node scripts/build-candidate-triage.cjs
       - name: Validate data and all unit tests once before browser setup
         if: ${{ !inputs.preview_only }}
         run: |
@@ -112,7 +115,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-          git add results.json updates.json auto-sync-review.json history-sync-review.json auto-sync-status.json history-sync-status.json approval-history.json
+          git add results.json updates.json auto-sync-review.json history-sync-review.json auto-sync-status.json history-sync-status.json approval-history.json candidate-triage.json
           if git diff --cached --quiet; then
             echo "No publishable candidates (already registered). No PR needed."
             exit 0
