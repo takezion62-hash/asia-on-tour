@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-12T16:04:09.063Z",
+  "reviewedAt": "2026-11-12T16:04:36.744Z",
   "entries": [
     {
       "id": "auto-s43-21408f1d31bc",
@@ -14968,6 +14968,50 @@
       "source": "https://www.fortnite.com/competitive/events/S30_DuosCashCupZB/?region=ME&round=S30_DuosCashCupZB_Event2Round1_ME",
       "rule": null,
       "evidence": "Exact Epic account and team roster, canonical official event/calendar, ranked checkpoint with continuous mature rows or complete scan; duplicate check"
+    },
+    {
+      "id": "auto-s30-be903072bc52",
+      "decision": "published",
+      "recordId": "auto-s30-be903072bc52",
+      "policy": "verified-rule",
+      "approvedAt": "2026-11-12T16:04:36.744Z",
+      "approvedBy": "ChatGPT (user-authorized GitHub integration)",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=ME&round=S30_SoloZBVictoryCashCup_Event2Round1_ME",
+      "evidence": "Saved Epic ID, official ranked placement 1737 within top 2000; qualifier $0"
+    },
+    {
+      "id": "auto-s30-b247289069a5",
+      "decision": "published",
+      "recordId": "auto-s30-b247289069a5",
+      "policy": "verified-rule",
+      "approvedAt": "2026-11-12T16:04:36.744Z",
+      "approvedBy": "ChatGPT (user-authorized GitHub integration)",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=ME&round=S30_SoloZBVictoryCashCup_Event2Round1_ME",
+      "evidence": "Saved Epic ID, official ranked placement 1841 within top 2000; qualifier $0"
+    },
+    {
+      "id": "auto-s30-4683fe1ef5b1",
+      "decision": "published",
+      "recordId": "auto-s30-4683fe1ef5b1",
+      "policy": "verified-rule",
+      "approvedAt": "2026-11-12T16:04:36.744Z",
+      "approvedBy": "ChatGPT (user-authorized GitHub integration)",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=ME&round=S30_SoloZBVictoryCashCup_Event2Round1_ME",
+      "evidence": "Saved Epic ID, official ranked placement 1860 within top 2000; qualifier $0"
+    },
+    {
+      "id": "auto-s30-9f7db3a13fc3",
+      "decision": "published",
+      "recordId": "auto-s30-9f7db3a13fc3",
+      "policy": "verified-rule",
+      "approvedAt": "2026-11-12T16:04:36.744Z",
+      "approvedBy": "ChatGPT (user-authorized GitHub integration)",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=ME&round=S30_SoloZBVictoryCashCup_Event2Round1_ME",
+      "evidence": "Saved Epic ID, official ranked placement 1900 within top 2000; qualifier $0"
     }
   ]
 }

@@ -11,7 +11,7 @@
   "provider": "osirion",
   "linkedPlayers": 590,
   "trackedWindows": 2956,
-  "found": 4,
+  "found": 0,
   "skipped": 12,
   "imported": 15,
   "scannedPages": 96,
@@ -20,7 +20,7 @@
   "alreadyRegistered": 4235,
   "autoApprovedTotal": 2239,
   "invalidCachedCandidates": 1,
-  "manualReviewCandidates": 4,
+  "manualReviewCandidates": 0,
   "autoApprovedCosmeticThisRun": 0,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
@@ -72,10 +72,10 @@
     "S30_Reload",
     "S30_ReloadZB"
   ],
-  "message": "公式Epic ID・順位・開催枠を検証し65件を掲載。残り4件。未確認賞金を推定しない。",
-  "manuallyPublished": 1284,
+  "message": "公式予選突破4件を通常成績に追加。重複0件を解消。残り確認待ち0件。未確認賞金は推定しない。",
+  "manuallyPublished": 1288,
   "manuallyResolvedDuplicates": 141,
-  "lastReviewedBatchAt": "2026-11-12T16:04:09.063Z",
+  "lastReviewedBatchAt": "2026-11-12T16:04:36.744Z",
   "manuallyCorrected": 4,
   "lastCorrectedReviewAt": "2026-11-07T09:14:30.244Z",
   "concurrentMerge": {
@@ -288,15 +288,11 @@
     "unrealTeamsWithCash": 2
   },
   "latestManualReview": {
-    "reviewedAt": "2026-11-12T11:18:42.149Z",
-    "reviewedCandidates": 1,
-    "published": 0,
-    "verifiedQualifiers": 0,
-    "verifiedCashFinals": 0,
-    "triosZeroCash": 0,
-    "participationArchived": 1,
+    "reviewedAt": "2026-11-12T16:04:36.744Z",
+    "reviewedCandidates": 4,
+    "published": 4,
     "remainingPending": 0,
-    "note": "Official event roster and matured saved rank; S30/S31/S32 cutoff from Epic/Fortnite Tracker published terms; S32 one VR $100; zero-cash Trios Round1"
+    "policy": "Official 2024 solo qualification cutoffs and exact verified saved Epic-ID ranked rows; no inferred cash"
   },
   "autoApprovedDuoQualifierThisRun": 2,
   "latestParticipationReview": {
