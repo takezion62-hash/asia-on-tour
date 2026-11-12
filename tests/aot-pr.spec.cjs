@@ -22,7 +22,31 @@ function record(id, fields = {}) {
   };
 }
 async function fixture(page, results) {
-  for (const [file, value] of Object.entries({
+  const rows=results.map((row,index)=>({__aotOrder:index,...row}));
+  const groups=new Map();
+  for(const row of rows){
+    const season=row.seasonId||'unknown';
+    if(!groups.has(season))groups.set(season,[]);
+    groups.get(season).push(row);
+  }
+  const names=[...new Set(rows.flatMap(row=>Array.isArray(row.players)&&row.players.length?row.players:[row.player]))];
+  const scopes={all:{id:'all',label:'全期間',count:rows.length,prizeTotal:0,earners:[],rankingFile:null}};
+  const seasonOrder=[...groups.keys()];
+  for(const [id,part] of groups){
+    const sample=part[0],meta={id,label:'CH'+sample.chapter+' S'+sample.season,
+      chapter:sample.chapter,season:sample.season,count:part.length,
+      file:'season-data/'+id+'.json',rankingFile:null,prizeTotal:0,earners:[]};
+    scopes[id]=meta;
+  }
+  const manifest={format:1,total:rows.length,scopes,seasonOrder,names,previews:{}};
+  await page.route('**/season-data/*.json',route=>{
+    const file=new URL(route.request().url()).pathname.split('/').at(-1);
+    let value;
+    if(file==='manifest.json')value=manifest;
+    else if(file.endsWith('.json'))value=groups.get(file.slice(0,-5))||[];
+    return route.fulfill({status:200,contentType:'application/json',body:JSON.stringify(value)});
+  });
+  for(const [file,value] of Object.entries({
     'results.json': results,
     'players.json': { candidates: [], confirmedAliases: {} },
     'tournaments.json': { ...data.tournaments, catalog: [...data.tournaments.catalog, unknownMode, past] }
