@@ -10,7 +10,7 @@ const {toParticipation,recordId:participationId,appendArchive,publishedEquivalen
 const {sourceWindow}=require('./candidate-triage-core.cjs');
 const root=path.resolve(__dirname,'..'),{read,write}=createPublicationFiles(root);
 // 2026-11-12 follow-up: append the still-pending source-verified candidates only.
-const TARGET_IDS=new Set(["auto-s42-00bacaa46d78","auto-s42-1353c4dd52b0","auto-s42-36f61cec7e5e","auto-s42-666e9255abb7","auto-s42-8c5da81eea44","auto-s42-31ea77a81948","auto-s42-344bb93fb223","auto-s42-38c619af58c5","auto-s42-5e35168fc3f6","auto-s42-8d5c197e28e2","auto-s31-7a23e1138e55","auto-s31-fc55bba6d32f","auto-s31-2ae2abefe687","auto-s31-24c411e2e0e2","auto-s31-27ff62b1107c","auto-s31-eaed80bd268d","auto-s36-1ecc40675e2b","auto-s36-32b419bb7534","auto-s36-6e5e69f28783","auto-s36-7fef84ff571a","auto-s36-a11e61d5bc70","auto-s36-a567e5c7b23f","auto-s42-36cc38395ba3","auto-s42-86fa836511fe","auto-s42-a887487a1ee6","auto-s42-f319960a7db5","auto-s42-c3741a0cf405","auto-s42-0554fd98619e","auto-s42-07fdf08dd869","auto-s42-1f775155bfa4","auto-s42-1fcb410ad12c","auto-s42-44bcdf243c04","auto-s42-533e934c696f","auto-s42-70cd66eb5b1c","auto-s42-a74193d78b69","auto-s42-af2bc57f1191","auto-s42-d6d846dd1e79","auto-s42-28231f26cea6","auto-s42-4e12249f360d","auto-s42-a8710f7cfbe8","auto-s31-286299ef6e53","auto-s31-5539ecdbbee9","auto-s31-63a1687f62e9","auto-s31-6ba884a84f2e","auto-s31-aed99211a6b6","auto-s31-bba7802e7d06","auto-s31-e9e972efbd8c","auto-s42-34336c3be81a","auto-s42-20ff2eea3bb3","auto-s30-013524caf149","auto-s30-36c73a521b38","auto-s30-51ccf5f4742f","auto-s30-e62fc8ea41e6","auto-s30-e68f16f49747","auto-s31-39673413e961","auto-s31-db7713aabbaf","auto-s31-0b7e68aacdca","auto-s31-eff393d1a689","auto-s31-f387dc63d7a3","auto-s36-7da10bb1c06b","auto-s36-83ec8d1ff73d","auto-s31-8fe9cea087bf","auto-s31-5f4f59c082d7","auto-s30-38edc2a4468e","auto-s30-622ff6c2a448","auto-s30-5c100d6d95dc","auto-s30-64b28e27dafc","auto-s30-399aecb49618","auto-s30-1662db26699a","auto-s30-a5c983fd5b90","auto-s30-34e8e847274a","auto-s30-c8b9b18b2b58","auto-s36-8ed10eb27786","auto-s42-b57ae47b3a23","auto-s31-8e50853183b3","auto-s31-c3e1baa00d50","auto-s31-46721304168e","auto-s31-8effe69ec336","auto-s31-be3f7178669c","auto-s31-9ee5af459903","auto-s31-4df46aeebbaf"]);
+const TARGET_IDS=new Set(["auto-s42-00bacaa46d78","auto-s42-1353c4dd52b0","auto-s42-36f61cec7e5e","auto-s42-666e9255abb7","auto-s42-8c5da81eea44","auto-s42-31ea77a81948","auto-s42-344bb93fb223","auto-s42-38c619af58c5","auto-s42-5e35168fc3f6","auto-s42-8d5c197e28e2","auto-s31-7a23e1138e55","auto-s31-fc55bba6d32f","auto-s31-2ae2abefe687","auto-s31-24c411e2e0e2","auto-s31-27ff62b1107c","auto-s31-eaed80bd268d","auto-s36-1ecc40675e2b","auto-s36-32b419bb7534","auto-s36-6e5e69f28783","auto-s36-7fef84ff571a","auto-s36-a11e61d5bc70","auto-s36-a567e5c7b23f","auto-s42-36cc38395ba3","auto-s42-86fa836511fe","auto-s42-a887487a1ee6","auto-s42-f319960a7db5","auto-s42-c3741a0cf405","auto-s42-0554fd98619e","auto-s42-07fdf08dd869","auto-s42-1f775155bfa4","auto-s42-1fcb410ad12c","auto-s42-44bcdf243c04","auto-s42-533e934c696f","auto-s42-70cd66eb5b1c","auto-s42-a74193d78b69","auto-s42-af2bc57f1191","auto-s42-d6d846dd1e79","auto-s42-28231f26cea6","auto-s42-4e12249f360d","auto-s42-a8710f7cfbe8","auto-s31-286299ef6e53","auto-s31-5539ecdbbee9","auto-s31-63a1687f62e9","auto-s31-6ba884a84f2e","auto-s31-aed99211a6b6","auto-s31-bba7802e7d06","auto-s31-e9e972efbd8c","auto-s42-34336c3be81a","auto-s42-20ff2eea3bb3","auto-s30-013524caf149","auto-s30-36c73a521b38","auto-s30-51ccf5f4742f","auto-s30-e62fc8ea41e6","auto-s30-e68f16f49747","auto-s31-39673413e961","auto-s31-db7713aabbaf","auto-s31-0b7e68aacdca","auto-s31-eff393d1a689","auto-s31-f387dc63d7a3","auto-s36-7da10bb1c06b","auto-s36-83ec8d1ff73d","auto-s31-8fe9cea087bf","auto-s31-5f4f59c082d7","auto-s30-38edc2a4468e","auto-s30-622ff6c2a448","auto-s30-5c100d6d95dc","auto-s30-64b28e27dafc","auto-s30-399aecb49618","auto-s30-1662db26699a","auto-s30-a5c983fd5b90","auto-s30-34e8e847274a","auto-s30-c8b9b18b2b58","auto-s36-8ed10eb27786","auto-s42-b57ae47b3a23","auto-s31-8e50853183b3","auto-s31-c3e1baa00d50","auto-s31-46721304168e","auto-s31-8effe69ec336","auto-s31-be3f7178669c","auto-s31-9ee5af459903","auto-s31-4df46aeebbaf","auto-s30-2d3ca7ffcf90","auto-s30-55e1c819a536","auto-s30-a3027775a0e4","auto-s30-91a358e33ee5","auto-s30-62dccaa1911f","auto-s30-36fd0a4ad697","auto-s30-173755b98c6a","auto-s36-554a50d5faf8","auto-s36-32286bb9a1b9","auto-s36-e13b0fff436c","auto-s36-282f8164bf5f","auto-s36-2bb5de7e86f4","auto-s36-64b2f394c311","auto-s32-34ae70ebe007","auto-s32-cd8173ab9978","auto-s42-b0f563eec64e","auto-s42-b6f4953848f0","auto-s31-58a1bc0e82e5","auto-s31-9d4fafec5780","auto-s31-95c8ed979ecb","auto-s31-9f2a33eb01d8","auto-s31-9460ac17a160","auto-s31-fd76916ac3ec","auto-s31-2844d1f5e873","auto-s31-3ae098b2ca4b","auto-s31-8e5de2817ad5","auto-s31-089cc3b362de","auto-s31-dc43bb42c913","auto-s31-5b63724f4f66","auto-s31-05deba4ed351","auto-s31-215123cce6a3"]);
 const dry=process.argv.includes('--dry-run');
 const now=new Date().toISOString(),dateJst=new Date(Date.now()+9*3600000).toISOString().slice(0,10);
 const d={
@@ -129,7 +129,8 @@ for(const {row,origins} of audience.values()){
      row.date==='2024-10-07'&&row.region==='OCE'||
      row.date==='2024-10-08'&&row.region==='ME'||
      row.date==='2024-10-14'&&row.region==='OCE'||
-      row.date==='2024-10-21'&&row.region==='OCE'
+      row.date==='2024-10-21'&&row.region==='OCE'||
+      row.date==='2024-10-22'&&row.region==='ME'
    )||
    row.seasonId==='S30'&&row.tournamentId===qualifiedZbId&&
      row.date==='2024-06-11'&&row.region==='ME'
@@ -153,18 +154,26 @@ for(const {row,origins} of audience.values()){
   // The 2024 S31 NAC event 6 Round 2 awards exactly $100 per Victory
   // Royale. A point total of 100 and one VR must both be in the mature
   // saved Epic scoreboard, not inferred from a qualification or profile.
-  const verifiedNacFinal=row.seasonId==='S31'&&row.tournamentId===qualifiedId&&
-   row.date==='2024-10-08'&&row.region==='NAC'&&row.kind==='賞金決勝';
-  if(verifiedNacFinal){
+  const verifiedS31Final=row.seasonId==='S31'&&row.tournamentId===qualifiedId&&
+   row.kind==='賞金決勝'&&(
+    row.date==='2024-10-08'&&row.region==='NAC'||
+    row.date==='2024-10-21'&&row.region==='OCE'||
+    row.date==='2024-10-22'&&row.region==='ME');
+  if(verifiedS31Final){
+   const finalWindow={
+    NAC:'S31_SoloVictoryCashCup_Event6Round2_NAC',
+    OCE:'S31_SoloVictoryCashCup_Event8Round2_OCE',
+    ME:'S31_SoloVictoryCashCup_Event8Round2_ME'
+   }[row.region];
    fail(rule?.seasonId==='S31'&&
     rule.source==='https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-4-official-rules'&&
-    win.windowId==='S31_SoloVictoryCashCup_Event6Round2_NAC'&&
+    win.windowId===finalWindow&&
     row.round.includes('Round 2 / 賞金決勝')&&row.prize===null&&
     row.vrs===1&&row.points===100&&row.matches<=3&&cat.team==='solo',
-    '2024 NAC official VR payout not proved '+row.id);
+    '2024 S31 official VR payout not proved '+row.id);
    const {reviewReason,reviewOnly,teamAccountIds,...rec}=row;
    rec.prize=100;
-   rec.note='2024年S31 NAC Event 6決勝。Epic ID・公式開催枠・成熟した保存順位表で1VR/100ptを照合。公式規則の決勝1VR=$100による賞金。実際の支払・受賞資格は未確認。規則: '+rule.source;
+   rec.note='2024年S31 '+row.region+' '+(row.region==='NAC'?'Event 6':'Event 8')+'決勝。Epic ID・公式開催枠・成熟した保存順位表で1VR/100ptを照合。Epic公式規則の全地域共通1VR=$100による規則上の賞金。実際の支払・受賞資格は未確認。規則: '+rule.source;
    fail(!d.results.some(x=>collision(x,rec,aliases)),'potential existing cash result '+row.id);
    published.push({row,record:rec,origin,rule:rule.source,policy:'official-final-vr-award'});
    continue;
@@ -240,7 +249,7 @@ if(!dry){
     participationArchived:attendance.filter(x=>x.origin===origin).length,
     duplicatesResolved:dedup.filter(x=>x.origin===origin).length,
     remainingPending:q.length,
-    policy:'Exact Epic ID, official session, mature original scoreboard and allowlisted 2024 ME/OCE qualification or S31 NAC $100/VR final'
+    policy:'Exact Epic ID, official calendar session, mature original leaderboard, official S30/S31 region-specific qualification rules, S31 $100/VR rule'
   };
   status.message='残候補の原本再調査：正式予選突破'+published.filter(x=>x.origin===origin).length+
    '件・出場'+attendance.filter(x=>x.origin===origin).length+
@@ -255,7 +264,7 @@ if(!dry){
   const qualified=published.length-cash;
   d.updates.entries.unshift({id:entryId,date:dateJst,type:'records',
    title:'公式順位表を再照合：予選突破'+qualified+'件・賞金決勝'+cash+'件',
-   description:'2024年のME/OCE予選は公式通過条件で$0の突破実績として、S31 NAC Event6決勝は本人Epic ID・1VR/100pt・公式$100/VR規則で賞金記録として照合。実際の支払は未確認。参加記録は賞金に含めない。',
+   description:'2024年S30/S31のME/OCE予選は各シーズン・地域の公式通過条件で$0の突破実績として、S31のNAC/OCE/ME決勝は本人Epic ID・1VR/100pt・公式全地域$100/VR規則で賞金記録として照合。実際の支払は未確認。参加記録は賞金に含めない。',
    recordIds:approvedIds});
  }
  d.reviewed.reviewedAt=now;d.ledger.reviewedAt=now;
