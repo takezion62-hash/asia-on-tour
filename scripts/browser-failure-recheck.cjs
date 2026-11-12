@@ -15,7 +15,7 @@ function readReport(file) {
   return report;
 }
 
-function mergeReports(runRoot = root) {
+function mergeReports(runRoot = root, outputFile = lastRun) {
   const ids = new Set();
   for (let shard = 1; shard <= 4; shard++) {
     const file = path.join(runRoot, 'site-test-report-' + shard,
@@ -25,8 +25,8 @@ function mergeReports(runRoot = root) {
         '; re-run the full suite if the browser job never started');
     for (const id of readReport(file).failedTests) ids.add(id);
   }
-  fs.mkdirSync(path.dirname(lastRun), {recursive: true});
-  fs.writeFileSync(lastRun,
+  fs.mkdirSync(path.dirname(outputFile), {recursive: true});
+  fs.writeFileSync(outputFile,
     JSON.stringify({status: ids.size ? 'failed' : 'passed',
       failedTests: [...ids]}, null, 2) + '\n');
   console.log('Combined Playwright failures: ' + ids.size +
