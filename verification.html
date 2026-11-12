@@ -6,9 +6,9 @@
 <meta name="theme-color" content="#0b0c19">
 <meta name="description" content="ASIA ON TOURの確認待ち・重複疑い・掲載履歴を参照するデータ検証センター">
 <title>データ検証センター · ASIA ON TOUR</title>
-<link rel="stylesheet" href="./verification.css?v=1">
+<link rel="stylesheet" href="./verification.css?v=triage-v2-20261112">
 <script src="./verification-core.js?v=1" defer></script>
-<script src="./verification.js?v=perf-cache-20261109" defer></script>
+<script src="./verification.js?v=triage-v2-20261112" defer></script>
 </head>
 <body>
 <div class="layout">
@@ -27,13 +27,13 @@
 <header class="head">
 <div class="kicker">ASIA ON TOUR / DATA VERIFICATION CENTER</div>
 <h1>データ<span>検証センター</span></h1>
-<p>確認待ちの成績・掲載データの重複疑い・調査の進み具合をまとめて確認。大会の実績は推測で補完せず、公開済みのランキングや賞金を変更しません。</p>
+<p>確認待ちの成績を年代・地域・大会・証拠の段階別に整理し、掲載データの重複疑い・調査の進み具合をまとめて確認。大会の実績は推測で補完せず、公開済みのランキングや賞金を変更しません。</p>
 <div class="meta"><span id="audit-last-check">最終チェック：読み込み中…</span><span id="audit-data-date">集計対象：全期間</span></div>
 <div class="actions"><button type="button" id="audit-refresh" class="btn">↻ 最新データで再検証</button><a class="btn" href="./index.html#updates">更新履歴に戻る</a><a class="btn" href="https://github.com/takezion62-hash/asia-on-tour/actions" target="_blank" rel="noopener noreferrer">管理者：GitHub Actions ↗</a></div>
 </header>
 <section class="panel approval-guide" aria-labelledby="review-publish-heading">
 <h2 id="review-publish-heading">🛡️ 管理者の掲載承認（REVIEW &amp; PUBLISH）</h2>
-<p>「確認待ち」タブで候補IDを選び、IDをコピー → GitHub Actionsで本人・大会の確認を宣言 → 変更差分のPull Requestを作成 → テスト合格後に管理者がマージします。</p>
+<p>「確認待ち」タブで候補IDを選び、IDをコピー → GitHub Actionsで候補の証拠・大会規則を再確認 → 変更差分のPull Requestを作成 → テスト合格後に管理者がマージします。</p>
 <p><strong>attendance-only：</strong>参加した事実と順位表だけを確認。賞金・突破・スキンは未認定。 <strong>verified-rule：</strong>既存の公式規則で厳密に確定できる予選突破や決勝0VRのみ。</p>
 <div class="actions"><a class="btn" target="_blank" rel="noopener noreferrer" href="https://github.com/takezion62-hash/asia-on-tour/actions/workflows/reviewed-candidate-publication.yml">管理者：承認申請を開く ↗</a><button type="button" class="btn" id="audit-copy-ids" disabled>選択したIDをコピー</button><span id="audit-selected-count" class="note" aria-live="polite">選択中 0件</span></div>
 <p class="note">初期設定はプレビューのみ。GitHubの認証なしで公開画面から直接登録することはできません。候補が0件なら新規の掲載申請は不要です。</p>
@@ -59,7 +59,11 @@
 <div class="filters">
 <label class="search">検索<input id="audit-search" type="search" placeholder="選手・大会・IDを検索" autocomplete="off"></label>
 <label>地域<select id="audit-region"><option value="all">全地域</option><option>ME</option><option>EU</option><option>NAC</option><option>NAW</option><option>OCE</option><option>BR</option></select></label>
+<label>開催年<select id="audit-year"><option value="all">全年代</option></select></label>
+<label>大会<select id="audit-tournament"><option value="all">全大会</option></select></label>
+<label>確認段階<select id="audit-triage"><option value="all">全段階</option><option value="rules-review">順位表照合済・規則要確認</option><option value="partial-scan">順位表の調査途中</option><option value="duplicate-risk">既存戦績と要照合</option><option value="evidence-conflict">根拠が不足・不一致</option></select></label>
 </div>
+<div id="audit-groups" class="audit-groups" aria-live="polite"></div>
 <div id="audit-summary" class="note" aria-live="polite"></div>
 <div id="audit-items" role="tabpanel" aria-labelledby="tab-queue" aria-live="polite"></div>
 <div class="pager"><button type="button" id="audit-prev" class="btn" disabled>← 前へ</button><small id="audit-pagination">—</small><button type="button" id="audit-next" class="btn" disabled>次へ →</button></div>
