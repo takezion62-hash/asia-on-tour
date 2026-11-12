@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-12T03:35:46.660Z",
+  "reviewedAt": "2026-11-12T04:01:32.087Z",
   "description": "Resolved historic review candidates: published, duplicate or participation",
   "entries": [
     {
@@ -21440,6 +21440,329 @@
       "policy": "exact-saved-page-and-official-region-cutoff",
       "source": "https://www.fortnite.com/competitive/events/S31_SoloVictoryCashCup/?region=NAC&round=S31_SoloVictoryCashCup_Event3Round1_NAC",
       "officialRules": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-4-official-rules"
+    },
+    {
+      "id": "auto-s31-24c411e2e0e2",
+      "decision": "published",
+      "recordId": "auto-s31-24c411e2e0e2",
+      "reviewedAt": "2026-11-12T04:01:32.087Z",
+      "source": "https://www.fortnite.com/competitive/events/S31_SoloVictoryCashCup/?region=OCE&round=S31_SoloVictoryCashCup_Event6Round1_OCE",
+      "policy": "verified-rule",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-4-official-rules"
+    },
+    {
+      "id": "auto-s31-eaed80bd268d",
+      "decision": "published",
+      "recordId": "auto-s31-eaed80bd268d",
+      "reviewedAt": "2026-11-12T04:01:32.087Z",
+      "source": "https://www.fortnite.com/competitive/events/S31_SoloVictoryCashCup/?region=OCE&round=S31_SoloVictoryCashCup_Event6Round1_OCE",
+      "policy": "verified-rule",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-4-official-rules"
+    },
+    {
+      "id": "auto-s31-27ff62b1107c",
+      "decision": "published",
+      "recordId": "auto-s31-27ff62b1107c",
+      "reviewedAt": "2026-11-12T04:01:32.087Z",
+      "source": "https://www.fortnite.com/competitive/events/S31_SoloVictoryCashCup/?region=OCE&round=S31_SoloVictoryCashCup_Event6Round1_OCE",
+      "policy": "verified-rule",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-4-official-rules"
+    },
+    {
+      "id": "auto-s42-38c619af58c5",
+      "decision": "already-published",
+      "existingId": "s42-nac-lady-liberty-br-skin-20261018-87a1c23b",
+      "reviewedAt": "2026-11-12T04:01:32.087Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=NAC&round=S42_PurgeCup_NAC",
+      "note": "Same official event/player/points/kills/VR as original skin result; preserve Tracker record and rank."
+    },
+    {
+      "id": "auto-s42-8d5c197e28e2",
+      "decision": "already-published",
+      "existingId": "s42-nac-lady-liberty-br-skin-20261018-3f9f78d5",
+      "reviewedAt": "2026-11-12T04:01:32.087Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=NAC&round=S42_PurgeCup_NAC",
+      "note": "Same official event/player/points/kills/VR as original skin result; preserve Tracker record and rank."
+    },
+    {
+      "id": "auto-s42-31ea77a81948",
+      "decision": "already-published",
+      "existingId": "s42-nac-lady-liberty-br-skin-20261018-8bf3ab32",
+      "reviewedAt": "2026-11-12T04:01:32.087Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=NAC&round=S42_PurgeCup_NAC",
+      "note": "Same official event/player/points/kills/VR as original skin result; preserve Tracker record and rank."
+    },
+    {
+      "id": "auto-s42-344bb93fb223",
+      "decision": "already-published",
+      "existingId": "s42-nac-lady-liberty-br-skin-20261018-afef96f7",
+      "reviewedAt": "2026-11-12T04:01:32.087Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=NAC&round=S42_PurgeCup_NAC",
+      "note": "Same official event/player/points/kills/VR as original skin result; preserve Tracker record and rank."
+    },
+    {
+      "id": "auto-s42-5e35168fc3f6",
+      "decision": "already-published",
+      "existingId": "s42-nac-lady-liberty-br-skin-20261018-9b4663b3",
+      "reviewedAt": "2026-11-12T04:01:32.087Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=NAC&round=S42_PurgeCup_NAC",
+      "note": "Same official event/player/points/kills/VR as original skin result; preserve Tracker record and rank."
+    },
+    {
+      "id": "auto-s42-8c5da81eea44",
+      "decision": "already-published",
+      "existingId": "s42-me-lady-liberty-br-skin-20261018-78d9bcbd",
+      "reviewedAt": "2026-11-12T04:01:32.087Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=ME&round=S42_PurgeCup_ME",
+      "note": "Same official event/player/points/kills/VR as original skin result; preserve Tracker record and rank."
+    },
+    {
+      "id": "auto-s42-666e9255abb7",
+      "decision": "already-published",
+      "existingId": "s42-me-lady-liberty-br-skin-20261018-13f21d58",
+      "reviewedAt": "2026-11-12T04:01:32.087Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=ME&round=S42_PurgeCup_ME",
+      "note": "Same official event/player/points/kills/VR as original skin result; preserve Tracker record and rank."
+    },
+    {
+      "id": "auto-s42-00bacaa46d78",
+      "decision": "already-published",
+      "existingId": "s42-me-lady-liberty-br-skin-20261018-4c43506d",
+      "reviewedAt": "2026-11-12T04:01:32.087Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=ME&round=S42_PurgeCup_ME",
+      "note": "Same official event/player/points/kills/VR as original skin result; preserve Tracker record and rank."
+    },
+    {
+      "id": "auto-s42-36f61cec7e5e",
+      "decision": "already-published",
+      "existingId": "s42-me-lady-liberty-br-skin-20261018-9c0cc827",
+      "reviewedAt": "2026-11-12T04:01:32.087Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=ME&round=S42_PurgeCup_ME",
+      "note": "Same official event/player/points/kills/VR as original skin result; preserve Tracker record and rank."
+    },
+    {
+      "id": "auto-s42-1353c4dd52b0",
+      "decision": "already-published",
+      "existingId": "s42-me-lady-liberty-br-skin-20261018-eb549746",
+      "reviewedAt": "2026-11-12T04:01:32.087Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=ME&round=S42_PurgeCup_ME",
+      "note": "Same official event/player/points/kills/VR as original skin result; preserve Tracker record and rank."
+    },
+    {
+      "id": "auto-s42-a8710f7cfbe8",
+      "decision": "participation-archived",
+      "recordId": "participation-768f282fce3848e62e64",
+      "reviewedAt": "2026-11-12T04:01:32.087Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=OCE&round=S42_ConsoleVCC_SolosZB_Event8Round1_OCE",
+      "note": "Epic ID + exact official event/calendar + mature saved leaderboard; cash, skin and advancement not assumed"
+    },
+    {
+      "id": "auto-s42-4e12249f360d",
+      "decision": "participation-archived",
+      "recordId": "participation-3defdfc4cce64db6c52e",
+      "reviewedAt": "2026-11-12T04:01:32.087Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=OCE&round=S42_ConsoleVCC_SolosZB_Event8Round1_OCE",
+      "note": "Epic ID + exact official event/calendar + mature saved leaderboard; cash, skin and advancement not assumed"
+    },
+    {
+      "id": "auto-s42-28231f26cea6",
+      "decision": "participation-archived",
+      "recordId": "participation-2e7ad2ee6d74b4d1086f",
+      "reviewedAt": "2026-11-12T04:01:32.087Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=OCE&round=S42_ConsoleVCC_SolosZB_Event8Round1_OCE",
+      "note": "Epic ID + exact official event/calendar + mature saved leaderboard; cash, skin and advancement not assumed"
+    },
+    {
+      "id": "auto-s42-07fdf08dd869",
+      "decision": "participation-archived",
+      "recordId": "participation-6b15010aba4307f37f7f",
+      "reviewedAt": "2026-11-12T04:01:32.087Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_ReloadReloadSoloVictoryCup/?region=NAW&round=S42_ReloadSoloVictoryCup_Event5_Round1_NAW",
+      "note": "Epic ID + exact official event/calendar + mature saved leaderboard; cash, skin and advancement not assumed"
+    },
+    {
+      "id": "auto-s42-d6d846dd1e79",
+      "decision": "participation-archived",
+      "recordId": "participation-2eb365bd904d2a835d7f",
+      "reviewedAt": "2026-11-12T04:01:32.087Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_ReloadReloadSoloVictoryCup/?region=NAW&round=S42_ReloadSoloVictoryCup_Event5_Round1_NAW",
+      "note": "Epic ID + exact official event/calendar + mature saved leaderboard; cash, skin and advancement not assumed"
+    },
+    {
+      "id": "auto-s42-af2bc57f1191",
+      "decision": "participation-archived",
+      "recordId": "participation-a42fdf1aec4ef529588b",
+      "reviewedAt": "2026-11-12T04:01:32.087Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_ReloadReloadSoloVictoryCup/?region=NAW&round=S42_ReloadSoloVictoryCup_Event5_Round1_NAW",
+      "note": "Epic ID + exact official event/calendar + mature saved leaderboard; cash, skin and advancement not assumed"
+    },
+    {
+      "id": "auto-s42-1fcb410ad12c",
+      "decision": "participation-archived",
+      "recordId": "participation-4437ed80eeb727fcc39b",
+      "reviewedAt": "2026-11-12T04:01:32.087Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_ReloadReloadSoloVictoryCup/?region=NAW&round=S42_ReloadSoloVictoryCup_Event5_Round1_NAW",
+      "note": "Epic ID + exact official event/calendar + mature saved leaderboard; cash, skin and advancement not assumed"
+    },
+    {
+      "id": "auto-s42-70cd66eb5b1c",
+      "decision": "participation-archived",
+      "recordId": "participation-fa4d8a8bf9e4a5a0f93f",
+      "reviewedAt": "2026-11-12T04:01:32.087Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_ReloadReloadSoloVictoryCup/?region=NAW&round=S42_ReloadSoloVictoryCup_Event5_Round1_NAW",
+      "note": "Epic ID + exact official event/calendar + mature saved leaderboard; cash, skin and advancement not assumed"
+    },
+    {
+      "id": "auto-s42-1f775155bfa4",
+      "decision": "participation-archived",
+      "recordId": "participation-40d8f5ba5e8de3625672",
+      "reviewedAt": "2026-11-12T04:01:32.087Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_ReloadReloadSoloVictoryCup/?region=NAW&round=S42_ReloadSoloVictoryCup_Event5_Round1_NAW",
+      "note": "Epic ID + exact official event/calendar + mature saved leaderboard; cash, skin and advancement not assumed"
+    },
+    {
+      "id": "auto-s42-533e934c696f",
+      "decision": "participation-archived",
+      "recordId": "participation-c7951956c340c4805dd6",
+      "reviewedAt": "2026-11-12T04:01:32.087Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_ReloadReloadSoloVictoryCup/?region=NAW&round=S42_ReloadSoloVictoryCup_Event5_Round1_NAW",
+      "note": "Epic ID + exact official event/calendar + mature saved leaderboard; cash, skin and advancement not assumed"
+    },
+    {
+      "id": "auto-s42-44bcdf243c04",
+      "decision": "participation-archived",
+      "recordId": "participation-4393d635e492996a674b",
+      "reviewedAt": "2026-11-12T04:01:32.087Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_ReloadReloadSoloVictoryCup/?region=NAW&round=S42_ReloadSoloVictoryCup_Event5_Round1_NAW",
+      "note": "Epic ID + exact official event/calendar + mature saved leaderboard; cash, skin and advancement not assumed"
+    },
+    {
+      "id": "auto-s42-0554fd98619e",
+      "decision": "participation-archived",
+      "recordId": "participation-01c9a5895c04ffa8aae7",
+      "reviewedAt": "2026-11-12T04:01:32.087Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_ReloadReloadSoloVictoryCup/?region=NAW&round=S42_ReloadSoloVictoryCup_Event5_Round1_NAW",
+      "note": "Epic ID + exact official event/calendar + mature saved leaderboard; cash, skin and advancement not assumed"
+    },
+    {
+      "id": "auto-s42-a74193d78b69",
+      "decision": "participation-archived",
+      "recordId": "participation-e820db1f25434ca9e44a",
+      "reviewedAt": "2026-11-12T04:01:32.087Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_ReloadReloadSoloVictoryCup/?region=NAW&round=S42_ReloadSoloVictoryCup_Event5_Round1_NAW",
+      "note": "Epic ID + exact official event/calendar + mature saved leaderboard; cash, skin and advancement not assumed"
+    },
+    {
+      "id": "auto-s42-c3741a0cf405",
+      "decision": "participation-archived",
+      "recordId": "participation-b48970311188cf2a2997",
+      "reviewedAt": "2026-11-12T04:01:32.087Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_ReloadReloadSoloVictoryCup/?region=NAC&round=S42_ReloadSoloVictoryCup_Event5_Round1_NAC",
+      "note": "Epic ID + exact official event/calendar + mature saved leaderboard; cash, skin and advancement not assumed"
+    },
+    {
+      "id": "auto-s31-7a23e1138e55",
+      "decision": "participation-archived",
+      "recordId": "participation-5cb3736b55905e6b29f5",
+      "reviewedAt": "2026-11-12T04:01:32.087Z",
+      "source": "https://www.fortnite.com/competitive/events/S31_SoloVictoryCashCup/?region=NAC&round=S31_SoloVictoryCashCup_Event4Round1_NAC",
+      "note": "Epic ID + exact official event/calendar + mature saved leaderboard; cash, skin and advancement not assumed"
+    },
+    {
+      "id": "auto-s31-fc55bba6d32f",
+      "decision": "participation-archived",
+      "recordId": "participation-aed59a10a82d85be0651",
+      "reviewedAt": "2026-11-12T04:01:32.087Z",
+      "source": "https://www.fortnite.com/competitive/events/S31_SoloVictoryCashCup/?region=NAC&round=S31_SoloVictoryCashCup_Event4Round1_NAC",
+      "note": "Epic ID + exact official event/calendar + mature saved leaderboard; cash, skin and advancement not assumed"
+    },
+    {
+      "id": "auto-s36-a11e61d5bc70",
+      "decision": "participation-archived",
+      "recordId": "participation-6769e5a33d479be15625",
+      "reviewedAt": "2026-11-12T04:01:32.087Z",
+      "source": "https://www.fortnite.com/competitive/events/S36_PlayStationCup/?region=NAC&round=S36_PlayStationCup_Qualifier_NAC",
+      "note": "Epic ID + exact official event/calendar + mature saved leaderboard; cash, skin and advancement not assumed"
+    },
+    {
+      "id": "auto-s36-1ecc40675e2b",
+      "decision": "participation-archived",
+      "recordId": "participation-ff04df91f7d2f72cd936",
+      "reviewedAt": "2026-11-12T04:01:32.087Z",
+      "source": "https://www.fortnite.com/competitive/events/S36_PlayStationCup/?region=NAC&round=S36_PlayStationCup_Qualifier_NAC",
+      "note": "Epic ID + exact official event/calendar + mature saved leaderboard; cash, skin and advancement not assumed"
+    },
+    {
+      "id": "auto-s36-a567e5c7b23f",
+      "decision": "participation-archived",
+      "recordId": "participation-90b8da7e7eeeab8fbfa0",
+      "reviewedAt": "2026-11-12T04:01:32.087Z",
+      "source": "https://www.fortnite.com/competitive/events/S36_PlayStationCup/?region=NAC&round=S36_PlayStationCup_Qualifier_NAC",
+      "note": "Epic ID + exact official event/calendar + mature saved leaderboard; cash, skin and advancement not assumed"
+    },
+    {
+      "id": "auto-s36-32b419bb7534",
+      "decision": "participation-archived",
+      "recordId": "participation-6e3ffef0cdb7287cba3c",
+      "reviewedAt": "2026-11-12T04:01:32.087Z",
+      "source": "https://www.fortnite.com/competitive/events/S36_PlayStationCup/?region=NAC&round=S36_PlayStationCup_Qualifier_NAC",
+      "note": "Epic ID + exact official event/calendar + mature saved leaderboard; cash, skin and advancement not assumed"
+    },
+    {
+      "id": "auto-s36-7fef84ff571a",
+      "decision": "participation-archived",
+      "recordId": "participation-412c7f22fa4697e5c16d",
+      "reviewedAt": "2026-11-12T04:01:32.087Z",
+      "source": "https://www.fortnite.com/competitive/events/S36_PlayStationCup/?region=NAC&round=S36_PlayStationCup_Qualifier_NAC",
+      "note": "Epic ID + exact official event/calendar + mature saved leaderboard; cash, skin and advancement not assumed"
+    },
+    {
+      "id": "auto-s36-6e5e69f28783",
+      "decision": "participation-archived",
+      "recordId": "participation-136b25506f856efffb74",
+      "reviewedAt": "2026-11-12T04:01:32.087Z",
+      "source": "https://www.fortnite.com/competitive/events/S36_PlayStationCup/?region=NAC&round=S36_PlayStationCup_Qualifier_NAC",
+      "note": "Epic ID + exact official event/calendar + mature saved leaderboard; cash, skin and advancement not assumed"
+    },
+    {
+      "id": "auto-s42-a887487a1ee6",
+      "decision": "participation-archived",
+      "recordId": "participation-b9496e2bd1a3f3b9d15c",
+      "reviewedAt": "2026-11-12T04:01:32.087Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_FNCSDivisionalCup_Division1/?region=NAW&round=S42_FNCSDivisionalCup_Division1_Event2_NAW",
+      "note": "Epic ID + exact official event/calendar + mature saved leaderboard; cash, skin and advancement not assumed"
+    },
+    {
+      "id": "auto-s42-36cc38395ba3",
+      "decision": "participation-archived",
+      "recordId": "participation-653f31975d9446a6834d",
+      "reviewedAt": "2026-11-12T04:01:32.087Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_FNCSDivisionalCup_Division1/?region=NAW&round=S42_FNCSDivisionalCup_Division1_Event2_NAW",
+      "note": "Epic ID + exact official event/calendar + mature saved leaderboard; cash, skin and advancement not assumed"
+    },
+    {
+      "id": "auto-s42-f319960a7db5",
+      "decision": "participation-archived",
+      "recordId": "participation-0c725f3508011e5d82d2",
+      "reviewedAt": "2026-11-12T04:01:32.087Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_FNCSDivisionalCup_Division1/?region=NAW&round=S42_FNCSDivisionalCup_Division1_Event2_NAW",
+      "note": "Epic ID + exact official event/calendar + mature saved leaderboard; cash, skin and advancement not assumed"
+    },
+    {
+      "id": "auto-s42-86fa836511fe",
+      "decision": "participation-archived",
+      "recordId": "participation-ab13e54b4e43015e27d3",
+      "reviewedAt": "2026-11-12T04:01:32.087Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_FNCSDivisionalCup_Division1/?region=NAW&round=S42_FNCSDivisionalCup_Division1_Event2_NAW",
+      "note": "Epic ID + exact official event/calendar + mature saved leaderboard; cash, skin and advancement not assumed"
+    },
+    {
+      "id": "auto-s31-2ae2abefe687",
+      "decision": "participation-archived",
+      "recordId": "participation-8348d83d69ceeca2622a",
+      "reviewedAt": "2026-11-12T04:01:32.087Z",
+      "source": "https://www.fortnite.com/competitive/events/S31_SoloVictoryCashCup/?region=NAC&round=S31_SoloVictoryCashCup_Event5Round1_NAC",
+      "note": "Epic ID + exact official event/calendar + mature saved leaderboard; cash, skin and advancement not assumed"
     }
   ]
 }
