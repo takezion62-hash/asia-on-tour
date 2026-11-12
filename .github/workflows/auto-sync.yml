@@ -96,7 +96,9 @@ jobs:
             node --test tests/safe-sync-merge.test.cjs
             # Publish season shards together with the canonical results (bot pushes do not trigger push workflows).
             node scripts/build-season-data.cjs
+            node scripts/build-candidate-triage.cjs
             git add -A season-data
+            git add candidate-triage.json
             git add results.json updates.json auto-sync-status.json auto-sync-review.json auto-sync-scan.json
             if git diff --cached --quiet; then
               echo "SAFE_RECENT_MERGE no new data to publish"
