@@ -1,0 +1,51 @@
+/* Unified discovery + favorite controls: large tap targets, mobile-first. */
+.quick-find-launch{border:1px solid #555078;background:#211a35;color:#f4ebff;border-radius:12px;padding:10px 14px;font-weight:800;cursor:pointer}
+.quick-find-launch:hover,.quick-find-launch:focus-visible{border-color:#c7a8ff;background:#38284d}
+.quick-find-home{display:block;width:100%;margin:16px 0 20px;text-align:left;border:1px solid #62547e;border-radius:15px;padding:16px 19px;background:linear-gradient(110deg,#2a213d,#141b2c);color:#f4efff;font:inherit;font-weight:850;cursor:pointer}
+.quick-find-home small{display:block;margin-top:4px;color:#b8bbce;font-weight:500}
+.quickfind-hero{margin:0 0 23px}.quickfind-hero h1{font-size:clamp(29px,5vw,51px);line-height:1.12;margin:9px 0}.quickfind-hero h1 span{color:#bda3ff}.quickfind-hero p{color:#aeb6cf;font-size:13px}
+.quickfind-panel{background:#171b2d;border:1px solid #373b53;border-radius:18px;padding:20px;display:grid;gap:15px}
+.quickfind-panel label{display:grid;gap:8px;color:#c6cce1;font-size:12px;font-weight:800;min-width:0}
+.quickfind-panel input,.quickfind-panel select{font:inherit;border:1px solid #4b5068;border-radius:10px;background:#0d1424;color:#f6f6ff;padding:12px;min-width:0;width:100%;color-scheme:dark}
+.quickfind-panel input[type=search]{padding-left:13px;font-size:16px}
+.quickfind-panel input:focus-visible,.quickfind-panel select:focus-visible{outline:2px solid #a78bfa;outline-offset:2px}
+.quickfind-filter-row{display:flex;align-items:end;gap:12px;flex-wrap:wrap}.quickfind-filter-row label{flex:1 1 180px}
+.quickfind-filter-row button,.quickfind-shortcuts button{border:1px solid #5c6078;border-radius:10px;background:#20263b;color:#f0f2ff;padding:12px 15px;font-weight:750;min-height:44px;cursor:pointer}
+.quickfind-summary{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;color:#b9bfd7;font-size:12px;margin:16px 3px}
+.quickfind-favorites{border:1px solid #49405d;background:#1b1b2d;border-radius:16px;padding:17px 20px;margin:20px 0}
+.quickfind-row-heading{display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.quickfind-row-heading h2{font-size:18px;line-height:1.5;margin:0}.quickfind-row-heading h2 span{font-size:12px;color:#bbb2d0;font-weight:650}
+.quickfind-row-heading p,.quickfind-favorite-empty{font-size:12px;color:#abb1cb;margin:0}
+.quickfind-favorite-list{display:flex;flex-wrap:wrap;gap:9px}
+.quickfind-favorite-chip{display:inline-flex;align-items:center;min-height:44px;border:1px solid #6c5982;border-radius:11px;background:#29253b}
+.quickfind-favorite-chip>a{padding:10px 7px 10px 12px;color:#fff;text-decoration:none;font-weight:780;overflow-wrap:anywhere}
+.favorite-toggle{border:1px solid #8b7397;border-radius:11px;background:#322840;color:#ffdc82;font-size:23px;line-height:1;min-height:44px;min-width:44px;cursor:pointer;display:grid;place-items:center}
+.favorite-toggle[aria-pressed=true]{background:#4e3943;border-color:#e1b965;color:#ffe397}
+.favorite-toggle:focus-visible{outline:2px solid #f6da98;outline-offset:2px}
+.favorite-inline{min-height:42px;min-width:42px;border:0;background:transparent}
+.quickfind-result-group{margin:27px 0}
+.quickfind-result-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.quickfind-result-card{border-radius:13px;padding:16px;background:#1b2032;border:1px solid #3b425b;min-width:0}
+.quickfind-result-card h3{font-size:15px;line-height:1.5;margin:6px 0 9px;overflow-wrap:anywhere}
+.quickfind-result-card h3 a{color:#eff0ff;text-decoration:underline;text-decoration-color:#7c7196;text-underline-offset:3px}
+.quickfind-result-card h3 a:hover{color:#d4c0ff}
+.quickfind-result-card p{font-size:12px;color:#abb5d0;line-height:1.6;margin:4px 0;overflow-wrap:anywhere}
+.quickfind-result-card .quickfind-record-players a{color:#bdebf3}
+.quickfind-person{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.quickfind-type{font-size:10px;letter-spacing:.08em;color:#bca9e7;font-weight:850}
+.quickfind-prompt{padding:25px;border:1px dashed #5f5479;border-radius:15px;background:#191b2d;color:#c8cce0}
+.quickfind-prompt h2{font-size:19px;color:#fff;margin:0 0 12px}
+.quickfind-prompt p{font-size:13px;line-height:1.8}
+.quickfind-prompt [data-quick-example]{border:1px solid #73688e;border-radius:8px;background:#29263e;color:#ddd5fc;padding:7px 9px;cursor:pointer}
+.quickfind-shortcuts{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}
+.quickfind-no-match,.quickfind-overflow{color:#aeb5cf;font-size:12px;padding:10px;margin:0}
+.player-card-shell{position:relative;min-width:0}.player-card-shell>.player{height:100%}
+.favorite-card-button{position:absolute;top:9px;right:9px;z-index:2;border-radius:50%;background:#292139e6}
+.player-card-shell .player-top{padding-right:34px}
+.favorite-profile-button{margin-left:auto;font-size:20px}
+.favorite-only-toggle{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:750;color:#f2d9a5;cursor:pointer;white-space:nowrap}
+.favorite-only-toggle input{accent-color:#c5a06e;width:17px;height:17px}
+.tournament-filter-grid input[data-tournament-filter]{width:100%;min-height:40px;border:1px solid #444b62;border-radius:9px;background:#0f1425;color:#edf0ff;padding:8px}
+@media(max-width:760px){.quickfind-result-grid{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:640px){.quick-find-launch{padding:8px 10px;font-size:12px}.quickfind-panel{padding:13px}.quickfind-filter-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.quickfind-filter-row button{grid-column:1/-1}.quickfind-filter-row label{min-width:0}.quickfind-favorites{padding:14px}.quickfind-hero{margin-top:10px}.quickfind-summary{display:block}.quickfind-result-card{padding:14px}.favorite-profile-button{margin-left:0}.quick-find-home{margin:12px 0 16px}}
+@media(max-width:375px){.quickfind-filter-row{grid-template-columns:1fr}}
