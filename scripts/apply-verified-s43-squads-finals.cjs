@@ -10,7 +10,7 @@ const read=file=>JSON.parse(fs.readFileSync(path.join(root,file),'utf8'));
 const save=(file,data)=>fs.writeFileSync(path.join(root,file),JSON.stringify(data,null,2)+'\n');
 const assert=(ok,message)=>{if(!ok)throw Error('S43_NAW_SQUADS_IMPORT: '+message);};
 const dryRun=process.argv.includes('--dry-run');
-const doc=read('data/manual-approvals/20261110-naw-squads-tracker.json');
+const doc=read('data/manual-approvals/20261110-naw-squads-confirmed.json');
 const b=doc.batch;
 assert(doc.version===1 && b && b.id==='tracker-s43-naw-squads-final-20261110' &&
  b.date==='2026-11-10' && b.region==='NAW' &&
