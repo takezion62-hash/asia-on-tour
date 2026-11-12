@@ -11,7 +11,7 @@ const scheduled={
 };
 const permitted=[
  'auto-sync.yml','history-sync.yml','participation-sync.yml','calendar-history.yml',
- 'reviewed-candidate-publication.yml','tests.yml','safe-sync-merge-tests.yml',
+ 'reviewed-candidate-publication.yml','tests.yml','build-season-data.yml','safe-sync-merge-tests.yml',
  'scan-coverage-tests.yml','calendar.yml','special-achievements.yml',
  'tournament-rules-check.yml','unreal-auto-check.yml','osirion-probe.yml'
 ].sort();
