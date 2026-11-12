@@ -181,7 +181,7 @@ test('低いPC・タブレット画面ではメニューだけが縦スクロー
 });
 
 test('JSON読み込み失敗を画面上で通知し、正常表示に見せかけない', async ({ page }) => {
-  await page.route('**/results.json', route => route.fulfill({ status: 200, contentType: 'application/json', body: '{broken-json' }));
+  await page.route('**/season-data/manifest.json', route => route.fulfill({ status: 200, contentType: 'application/json', body: '{broken-json' }));
   await page.reload();
   await expect(page.getByRole('alert')).toContainText('サイトデータを読み込めませんでした');
 });
@@ -222,6 +222,7 @@ test('選手プロフィールの競技スタッツは確認済み戦績だけ�
   const knownVR = verified.filter(row => Number.isInteger(row.vrs) && row.vrs >= 0);
   const finals = verified.filter(row => ['賞金決勝', 'Practice決勝', 'Performance決勝', '決勝'].includes(row.kind) && Number.isInteger(row.rank) && row.rank > 0);
   await page.goto('/?season=all#player=' + encodeURIComponent(name));
+  await page.locator('[data-profile-tab="season"]').click();
   const snapshot = page.locator('#page-profile .profile-snapshot');
   await expect(snapshot).toBeVisible();
   const killsText = knownKills.length ? knownKills.reduce((sum, row) => sum + row.kills, 0).toLocaleString('ja-JP') : '—';
