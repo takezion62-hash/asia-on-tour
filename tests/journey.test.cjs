@@ -31,7 +31,10 @@ function fixtureAxes(catalog) {
 }
 function model(catalog = [category('A')], results = [], axes = fixtureAxes(catalog)) {
   const context = vm.createContext({ URL, URLSearchParams, siteData: { results, players: { candidates: [] }, tournaments: { axes, catalog } } });
-  vm.runInContext(source.slice(prefixStart, prefixEnd) + '\n' + source.slice(modelStart, modelEnd) +
+  // The async production bootstrap provides these bindings before defining
+  // the journey model. Reproduce its minimal read-only contract in the VM.
+  const setup = "const initialSeason='S43'; const records=siteData.results; const fullResults=null; const manifest={scopes:{},seasonOrder:[],names:[],previews:{}};\n";
+  vm.runInContext(setup + source.slice(prefixStart, prefixEnd) + '\n' + source.slice(modelStart, modelEnd) +
     '\nglobalThis.journeyApi = { buildJourney };', context, { timeout: 5000 });
   return (...args) => Array.from(context.journeyApi.buildJourney(...args), item => ({
     record: item.record, reasons: Array.from(item.reasons), cash: item.cash, cumulative: item.cumulative
