@@ -7,9 +7,12 @@ const {validateData}=require('./data-checks.cjs');
 const {readResults,publishResults}=require('./source-results-store.cjs');
 const root=path.resolve(__dirname,'..'),dry=process.argv.includes('--dry-run');
 const read=(name,required=true)=>{
+  // Phase 3: results.json is no longer a file; read season shards before
+  // checking physical JSON paths. Keep fixtures and other docs unchanged.
+  if(name==='results.json')return readResults(root).rows;
   const file=path.join(root,name);
   if(!fs.existsSync(file)){if(required)throw Error('Required file missing: '+name);return null}
-  return name==='results.json'?readResults(root).rows:JSON.parse(fs.readFileSync(file,'utf8'));
+  return JSON.parse(fs.readFileSync(file,'utf8'));
 };
 const write=(name,data)=>name==='results.json'?publishResults(root,data):fs.writeFileSync(path.join(root,name),JSON.stringify(data,null,2)+'\n');
 const ids=parseIds(process.env.AOT_APPROVAL_IDS);
