@@ -3,7 +3,7 @@
 // Never overwrite older Tracker rankings; never infer cosmetic receipt or paid status.
 // Test registry count now 21 (including official Lady Liberty BR cutoffs).
 const path=require('node:path');
-const {createPublicationFiles}=require('./reviewed-publication-core.cjs');
+const {createPublicationFiles,upsertPublicationLog}=require('./reviewed-publication-core.cjs');
 const {sameScannedCandidate,verifiedPartialPage}=require('./verified-partial-page.cjs');
 const {toParticipation}=require('./participation-archive.cjs');
 const {collision}=require('./manual-approval-core.cjs');
@@ -145,12 +145,24 @@ d.index.total+=archived.length;d.index.checkedAt=now;
 d.index.players.sort((a,b)=>a.name.localeCompare(b.name,'ja'));
 fail(d.index.months.reduce((n,x)=>n+x.count,0)===d.index.total,'participation index total mismatch');
 if(formal.length){
+ // A new scan can uncover additional source-verified entries after the first
+ // Nov 12 publication. Extend the existing audit marker rather than rejecting
+ // valid new records or inventing a second marker for the same review batch.
  const updateId='manual-verified-review-nov12-69';
- fail(!d.updates.entries.some(x=>x.id===updateId),'duplicate update marker');
- d.updates.entries.unshift({id:updateId,date:day,type:'records',
+ const existingLog=d.updates.entries.find(x=>x.id===updateId);
+ const newRecordIds=formal.map(x=>x.id);
+ fail(newRecordIds.every(id=>!existingLog?.recordIds?.includes(id)),
+  'new results already appear in an earlier update marker');
+ upsertPublicationLog(d.updates,{
+  id:updateId,date:day,
   title:'確認待ち69件の精査：賞金決勝・スキン大会・参加実績',
   description:'本人Epic ID・公式大会カレンダー・成熟した順位表を照合。2024年決勝6人（各$100）とLady Liberty報酬圏内1人を正式掲載。41人は出場戦績に分離、既掲載21人は重複除外。受領/支払は未確認。',
-  recordIds:formal.map(x=>x.id)});
+  recordIds:newRecordIds,
+  existingTitle:total=>'確認待ち成績の継続精査：正式掲載累計'+total+'件',
+  existingDescription:total=>'本人Epic ID・公式大会カレンダー・成熟した順位表を照合した確認済み戦績を累計'+total+
+   '件正式掲載。初回は2024年決勝6人とLady Liberty報酬圏内1人を掲載し、出場戦績41件・既掲載重複21件を整理。その後に'+
+   formal.length+'件を追加確認。受領・支払は未確認。'
+ });
 }
 d.status.manualReviewCandidates=d.review.proposals.length;
 d.status.reviewOnlyCandidates=d.review.proposals.filter(x=>x.reviewOnly).length;
