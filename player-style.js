@@ -340,13 +340,19 @@
     // regional samples; it is not the player's strength score.
     const ranked=Array.isArray(affinity.ranked)?affinity.ranked:[];
     const chosenRegion=regions.find(r=>r.region===affinity.region);
+    const grades=ranked.slice(0,2).map(r=>regions.find(x=>x.region===r.region))
+      .filter(Boolean).map(x=>evidenceLevel(x.rows));
+    const regionalGrade=affinity.region&&grades.length===2
+      ?grades.find(x=>x.level==='low')||grades.find(x=>x.level==='medium')||grades[0]
+      :evidenceLevel([]);
     const regional={
       leader:affinity.region||null,
       score:affinity.region?ranked[0]?.score??null:null,
       runnerUp:affinity.region?ranked[1]?.region||null:null,
       runnerScore:affinity.region?ranked[1]?.score??null:null,
       compared:ranked.length,
-      confidence:chosenRegion?evidenceLevel(chosenRegion.rows):evidenceLevel([]),
+      confidence:{...regionalGrade,note:affinity.region&&grades.length===2?
+        '上位2地域のうち少ない方：'+regionalGrade.note:regionalGrade.note},
       reason:affinity.reason
     };
     const formatRows=forPlayer(select(records,{
@@ -422,7 +428,11 @@
       current,prior,
       deltaKpm:ready?current.kpm-prior.kpm:null,
       deltaVrPp:ready?(current.vrRate-prior.vrRate)*100:null,
-      confidence:ready?evidenceLevel(recent):evidenceLevel(dated),
+      confidence:ready?(()=>{
+        const a=evidenceLevel(recent),b=evidenceLevel(previous);
+        const weaker=a.level==='low'||b.level==='high'?a:b.level==='low'||a.level==='high'?b:a;
+        return {...weaker,note:'前半 '+b.note+' / 後半 '+a.note};
+      })():evidenceLevel(dated),
       windowsCompared:recent.length+previous.length
     };
     return {regional,format,finalStrength,growth,version:1,
