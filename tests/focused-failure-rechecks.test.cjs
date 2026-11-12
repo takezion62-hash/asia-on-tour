@@ -85,10 +85,15 @@ test('actual Node --test reporter writes a targeted failure artifact for a faili
     "test('expected fixture failure',()=>{throw new Error('fixture');});"
   ].join('\n') + '\n');
   const reporter = path.resolve(__dirname, '../scripts/unit-failure-reporter.cjs');
+  // Running node --test inside a node:test worker needs an independent
+  // process context; otherwise Node intentionally skips recursive runs.
+  const env = {...process.env};
+  delete env.NODE_TEST_CONTEXT;
+  delete env.NODE_TEST_WORKER_ID;
   const child = spawnSync(process.execPath, [
     '--test', '--test-reporter=' + reporter,
     '--test-reporter-destination=' + output, testPath
-  ], {cwd: scratch, encoding:'utf8', timeout:15000});
+  ], {cwd: scratch, env, encoding:'utf8', timeout:15000});
   assert.equal(child.status, 1, String(child.stderr || child.stdout));
   const info = JSON.parse(fs.readFileSync(output, 'utf8'));
   assert.ok(info.failedTests.some(x=>x.file==='tests/broken.test.cjs'),
