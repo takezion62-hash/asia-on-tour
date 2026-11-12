@@ -14,7 +14,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const crypto = require('node:crypto');
 const { seasonOf } = require('./build-season-data.cjs');
-const { personalCents } = require('./data-checks.cjs');
+const { personalCents, roster } = require('./data-checks.cjs');
 const ROOT = path.resolve(__dirname, '..');
 const TARGET = path.join(ROOT, 'source-results');
 const sha = data => crypto.createHash('sha256').update(data).digest('hex');
@@ -27,6 +27,8 @@ const currencyCents = value => {
 };
 const seasonName = name => /^(?:S[1-9]\d*|unknown)$/.test(name);
 const stableJson = value => JSON.stringify(value, null, 2) + '\n';
+// Personal payout is one player's share; multiply by the real squad size.
+const personalAwardCents = record => personalCents(record) * roster(record).length;
 
 function buildSnapshot(records, sourceText, determineSeason = row => seasonOf(row).id) {
   if (!Array.isArray(records)) throw new Error('Canonical results must be an array');
@@ -46,7 +48,7 @@ function buildSnapshot(records, sourceText, determineSeason = row => seasonOf(ro
     if (!groups.has(name)) groups.set(name, []);
     groups.get(name).push(record);
     totalPrizeCents += currencyCents(record.prize);
-    totalPersonalCents += personalCents(record);
+    totalPersonalCents += personalAwardCents(record);
   }
   if (!groups.has('unknown')) groups.set('unknown', []);
   const seasons = [...groups.keys()].sort((a,b) => {
@@ -63,7 +65,7 @@ function buildSnapshot(records, sourceText, determineSeason = row => seasonOf(ro
       seasonId:name, file:'source-results/' + name + '.json',
       count:array.length,
       teamPrizeCents:array.reduce((sum,r) => sum + currencyCents(r.prize),0),
-      personalPrizeCents:array.reduce((sum,r) => sum + personalCents(r),0),
+      personalPrizeCents:array.reduce((sum,r) => sum + personalAwardCents(r),0),
       sha256:sha(content)
     });
   }
@@ -118,7 +120,7 @@ function verifyRoundTrip(directory, original, expected) {
       ids.add(row.id);
       found.set(row.id,row);
       prize += currencyCents(row.prize);
-      personal += personalCents(row);
+      personal += personalAwardCents(row);
     }
     if (prize !== entry.teamPrizeCents || personal !== entry.personalPrizeCents)
       throw new Error('Shard prize mismatch: ' + entry.file);
