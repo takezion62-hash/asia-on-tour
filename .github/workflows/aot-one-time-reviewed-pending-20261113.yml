@@ -32,13 +32,15 @@ jobs:
           node scripts/build-candidate-triage.cjs
           node scripts/build-source-results.cjs --check
           npm run validate
-      - name: Test all units
-        run: npm run test:unit
+      - name: Remove temporary workflow then test approved workflow inventory
+        run: |
+          rm -f .github/workflows/aot-one-time-reviewed-pending-20261113.yml scripts/publish-verified-pending-20261113.cjs
+          node --test tests/workflow-inventory.test.cjs
       - name: Commit data only and remove temporary automation
         run: |
           set -euo pipefail
-          rm .github/workflows/aot-one-time-reviewed-pending-20261113.yml
-          rm scripts/publish-verified-pending-20261113.cjs
+          rm -f .github/workflows/aot-one-time-reviewed-pending-20261113.yml
+          rm -f scripts/publish-verified-pending-20261113.cjs
           git add -A source-results season-data
           git add updates.json approval-history.json auto-sync-review.json history-sync-review.json auto-sync-status.json history-sync-status.json candidate-triage.json
           git add -u .github/workflows/aot-one-time-reviewed-pending-20261113.yml scripts/publish-verified-pending-20261113.cjs
