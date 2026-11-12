@@ -1,209 +1,41 @@
 {
   "version": 1,
   "sourceCheckedAt": "2026-11-07T23:16:39.215Z",
-  "total": 33,
+  "total": 25,
   "alreadyResolved": 0,
   "byYear": [
     {
       "name": "2024",
-      "count": 28
-    },
-    {
-      "name": "2025",
-      "count": 1
-    },
-    {
-      "name": "2026",
-      "count": 4
+      "count": 25
     }
   ],
   "byRegion": [
     {
       "name": "ME",
-      "count": 21
+      "count": 19
     },
     {
       "name": "NAC",
-      "count": 8
-    },
-    {
-      "name": "NAW",
-      "count": 3
-    },
-    {
-      "name": "OCE",
-      "count": 1
+      "count": 6
     }
   ],
   "byTournament": [
-    {
-      "name": "Champion Aphrodite FNCS Cup Battle Royale / OCE / 2026",
-      "count": 1
-    },
-    {
-      "name": "FNCS Division 1 Practice / NAW / 2026",
-      "count": 3
-    },
-    {
-      "name": "PlayStation Cup / NAC / 2025",
-      "count": 1
-    },
     {
       "name": "Solo Victory Cup Battle Royale / ME / 2024",
       "count": 19
     },
     {
       "name": "Solo Victory Cup Battle Royale / NAC / 2024",
-      "count": 7
-    },
-    {
-      "name": "Trios Cash Cup / ME / 2024",
-      "count": 2
+      "count": 6
     }
   ],
   "byStatus": [
     {
       "name": "partial-scan",
-      "count": 30
-    },
-    {
-      "name": "rules-review",
-      "count": 3
+      "count": 25
     }
   ],
   "queue": [
-    {
-      "id": "auto-s42-7bc256bd52ad",
-      "origin": "history",
-      "date": "2026-09-15",
-      "year": "2026",
-      "region": "NAW",
-      "tournamentId": "ch7s4-fncs-division-1-practice",
-      "event": "FNCS Division 1 Practice",
-      "round": "Event 4 / 参加確認",
-      "player": "りあにー / maroa",
-      "kind": "参加確認",
-      "rank": 436,
-      "points": 70,
-      "kills": 5,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S42_FNCSDivisionalCup_Division1/?region=NAW&round=S42_FNCSDivisionalCup_Division1_Event4_NAW",
-      "status": "rules-review",
-      "action": "公式規則・賞金・突破・スキン条件を個別確認",
-      "reason": "確認専用大会は自動承認不可",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": true,
-        "observedPartial": false,
-        "seenPages": 6,
-        "totalPages": 6,
-        "sourceKey": "epicgames_S42_FNCSDivisionalCup_Division1_NAW/S42_FNCSDivisionalCup_Division1_Event4_NAW",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s42-a40b098f1d94",
-      "origin": "history",
-      "date": "2026-09-15",
-      "year": "2026",
-      "region": "NAW",
-      "tournamentId": "ch7s4-fncs-division-1-practice",
-      "event": "FNCS Division 1 Practice",
-      "round": "Event 4 / 参加確認",
-      "player": "huggyfv / Job",
-      "kind": "参加確認",
-      "rank": 443,
-      "points": 66,
-      "kills": 5,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S42_FNCSDivisionalCup_Division1/?region=NAW&round=S42_FNCSDivisionalCup_Division1_Event4_NAW",
-      "status": "rules-review",
-      "action": "公式規則・賞金・突破・スキン条件を個別確認",
-      "reason": "確認専用大会は自動承認不可",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": true,
-        "observedPartial": false,
-        "seenPages": 6,
-        "totalPages": 6,
-        "sourceKey": "epicgames_S42_FNCSDivisionalCup_Division1_NAW/S42_FNCSDivisionalCup_Division1_Event4_NAW",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s42-b4a16fbc9266",
-      "origin": "history",
-      "date": "2026-09-15",
-      "year": "2026",
-      "region": "NAW",
-      "tournamentId": "ch7s4-fncs-division-1-practice",
-      "event": "FNCS Division 1 Practice",
-      "round": "Event 4 / 参加確認",
-      "player": "Aster / りんたろう",
-      "kind": "参加確認",
-      "rank": 516,
-      "points": 16,
-      "kills": 3,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S42_FNCSDivisionalCup_Division1/?region=NAW&round=S42_FNCSDivisionalCup_Division1_Event4_NAW",
-      "status": "rules-review",
-      "action": "公式規則・賞金・突破・スキン条件を個別確認",
-      "reason": "確認専用大会は自動承認不可",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": true,
-        "observedPartial": false,
-        "seenPages": 6,
-        "totalPages": 6,
-        "sourceKey": "epicgames_S42_FNCSDivisionalCup_Division1_NAW/S42_FNCSDivisionalCup_Division1_Event4_NAW",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s30-8cc481348018",
-      "origin": "history",
-      "date": "2024-06-18",
-      "year": "2024",
-      "region": "NAC",
-      "tournamentId": "ch5s3-solo-victory-cup",
-      "event": "Solo Victory Cup Battle Royale",
-      "round": "Event 3 · Round 1 / 予選",
-      "player": "たら",
-      "kind": "予選",
-      "rank": 968,
-      "points": 159,
-      "kills": 16,
-      "vrs": 1,
-      "prize": 0,
-      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event3Round1_NAC",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "順位表の取得が完了していません",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 11,
-        "totalPages": 100,
-        "sourceKey": "epicgames_S30_SoloVictoryCashCup_NAC/S30_SoloVictoryCashCup_Event3Round1_NAC",
-        "possibleExistingId": null
-      },
-      "rewardState": "source-amount-present-not-verified-by-triage"
-    },
     {
       "id": "auto-s31-669830ac6301",
       "origin": "history",
@@ -596,72 +428,6 @@
         "seenPages": 2,
         "totalPages": 18,
         "sourceKey": "epicgames_S32_SoloVictoryCashCup_ME/S32_SoloVictoryCashCup_Event1Round2_ME",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s32-6b7bad5bda05",
-      "origin": "history",
-      "date": "2024-11-09",
-      "year": "2024",
-      "region": "ME",
-      "tournamentId": "ch5s5-trios-cash",
-      "event": "Trios Cash Cup",
-      "round": "Event 2 · Round 1 / 参加確認",
-      "player": "りむた / るかぽりん / みずるん",
-      "kind": "参加確認",
-      "rank": 3544,
-      "points": 46,
-      "kills": 2,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S32_TriosCashCup/?region=ME&round=S32_TriosCashCup_Event2Round1_ME",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "確認専用大会は自動承認不可",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 36,
-        "totalPages": 59,
-        "sourceKey": "epicgames_S32_TriosCashCup_ME/S32_TriosCashCup_Event2Round1_ME",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s32-6d9017e0c8da",
-      "origin": "history",
-      "date": "2024-11-09",
-      "year": "2024",
-      "region": "ME",
-      "tournamentId": "ch5s5-trios-cash",
-      "event": "Trios Cash Cup",
-      "round": "Event 2 · Round 1 / 参加確認",
-      "player": "Aster / asvaswgernb / sena",
-      "kind": "参加確認",
-      "rank": 3005,
-      "points": 65,
-      "kills": 14,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S32_TriosCashCup/?region=ME&round=S32_TriosCashCup_Event2Round1_ME",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "確認専用大会は自動承認不可",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 36,
-        "totalPages": 59,
-        "sourceKey": "epicgames_S32_TriosCashCup_ME/S32_TriosCashCup_Event2Round1_ME",
         "possibleExistingId": null
       },
       "rewardState": "cash-unconfirmed"
@@ -1094,72 +860,6 @@
         "possibleExistingId": null
       },
       "rewardState": "source-amount-present-not-verified-by-triage"
-    },
-    {
-      "id": "auto-s36-49b818b45267",
-      "origin": "history",
-      "date": "2025-07-25",
-      "year": "2025",
-      "region": "NAC",
-      "tournamentId": "ch6s3-playstation-cup",
-      "event": "PlayStation Cup",
-      "round": "Qualifier / 参加確認",
-      "player": "Asuka",
-      "kind": "参加確認",
-      "rank": 9302,
-      "points": 180,
-      "kills": 23,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S36_PlayStationCup/?region=NAC&round=S36_PlayStationCup_Qualifier_NAC",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "確認専用大会は自動承認不可",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 96,
-        "totalPages": 100,
-        "sourceKey": "epicgames_S36_PlayStationCup_NAC/S36_PlayStationCup_Qualifier_NAC",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s41-2a6c5bf8e0cb",
-      "origin": "history",
-      "date": "2026-07-31",
-      "year": "2026",
-      "region": "OCE",
-      "tournamentId": "ch7s3-champion-aphrodite-fncs-cup-battle-royale",
-      "event": "Champion Aphrodite FNCS Cup Battle Royale",
-      "round": "単一開催枠 / 参加確認",
-      "player": "のこのこ / TENNNKO.",
-      "kind": "参加確認",
-      "rank": 4454,
-      "points": 30,
-      "kills": 8,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S41_FNCSCommunityCup/?region=OCE&round=S41_FNCSCommunityCup_OCE",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "確認専用大会は自動承認不可",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 45,
-        "totalPages": 66,
-        "sourceKey": "epicgames_S41_FNCSCommunityCup_OCE/S41_FNCSCommunityCup_OCE",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
     }
   ],
   "policy": "read-only queue; awards require existing official rule-backed validators and identity/collision proof"
