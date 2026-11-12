@@ -161,6 +161,8 @@ jobs:
           npm run validate
       - name: 最新JSONから一時的なシーズンデータを作成
         run: node scripts/build-season-data.cjs
+      - name: データ専用スモーク用Chromiumを準備
+        run: npx playwright install --with-deps chromium
       - name: PC・スマホの最重要画面だけ検査
         run: npm run test:e2e -- tests/ci-data-smoke.spec.cjs
       - name: スモーク失敗の画面・トレースを保存
