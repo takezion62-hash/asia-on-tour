@@ -866,6 +866,7 @@
   <link rel="stylesheet" href="./auto-sync-ui.css?v=1">
   <link rel="stylesheet" href="./participation.css?v=participation-batch-20261110-r1">
   <link rel="stylesheet" href="./source-rules.css?v=3">
+  <link rel="stylesheet" href="./discovery-ui.css?v=1">
 </head>
 <body>
   <div class="layout">
@@ -878,6 +879,7 @@
       <nav class="nav" aria-label="メインナビゲーション">
         <button type="button" data-page="home" class="active" aria-label="ダッシュボード"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg><span>ダッシュボード</span></button>
         <button type="button" data-page="results" aria-label="遠征結果"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 4v16h16M7 15l5-5 4 3 4-7"/></svg><span>遠征結果</span></button>
+        <button type="button" data-page="search" aria-label="大会・選手をまとめて検索"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="10" cy="10" r="7"/><path d="m15 15 6 6M7 10h6M10 7v6"/></svg><span>まとめて検索<small>SEARCH</small></span></button>
         <button type="button" data-page="players" aria-label="プレイヤー名鑑"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="9" cy="8" r="3.2"/><path d="M2 21v-2c0-4 3-6 7-6s7 2 7 6v2M16 5a3 3 0 0 1 0 6M17 14c3 0 5 2 5 5v2"/></svg><span>プレイヤー名鑑</span></button>
         <button type="button" data-page="compare" aria-label="選手比較"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M7 21h10M3 7h18"/><path d="M5 7 2 14h6L5 7ZM19 7l-3 7h6l-3-7Z"/></svg><span>選手比較<small>COMPARE</small></span></button>
         <button type="button" data-page="tournaments" aria-label="大会を探す"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M8 3h8v5a4 4 0 0 1-8 0V3ZM8 5H4v2c0 3 2 4 5 4M16 5h4v2c0 3-2 4-5 4M12 12v6M8 21h8M9 18h6v3"/></svg><span>大会を探す<small>TOURNAMENTS</small></span></button>
@@ -889,9 +891,10 @@
       <div class="side-bottom"><div class="disclaimer">UNOFFICIAL FAN PROJECT<br>Epic Gamesとは無関係の非公式サイトです</div></div>
     </aside>
     <main class="main" id="top">
-      <div class="topbar"><div class="eyebrow">FORTNITE / COMPETITIVE / ASIA OVERSEAS</div><div class="top-actions"><div class="season-control"><label for="season-select">集計期間</label><select id="season-select" aria-label="シーズンを選択"><option value="all">全期間</option><option value="S43" selected>CH7 S5</option><option value="S42">CH7 S4</option></select></div><span class="season-scope" id="season-scope" aria-live="polite">集計対象：CH7 S5</span></div></div>
+      <div class="topbar"><div class="eyebrow">FORTNITE / COMPETITIVE / ASIA OVERSEAS</div><div class="top-actions"><button type="button" class="quick-find-launch" data-page="search" aria-label="大会と選手を検索">⌕ まとめて検索</button><div class="season-control"><label for="season-select">集計期間</label><select id="season-select" aria-label="シーズンを選択"><option value="all">全期間</option><option value="S43" selected>CH7 S5</option><option value="S42">CH7 S4</option></select></div><span class="season-scope" id="season-scope" aria-live="polite">集計対象：CH7 S5</span></div></div>
       <section class="section active" id="page-home">
         <div class="hero"><div class="hero-copy"><div class="mini-label"><span class="live-dot"></span> <span id="home-season-label">CH7 S5 · OVERSEAS ARCHIVE</span></div><h1>ASIA <span class="tour">ON<br>TOUR.</span></h1><p>日本・ASIA勢は、世界でどこまで戦えるのか<br><span id="home-season-description">CH7 S5の海外サーバー挑戦を記録する</span></p><small>FROM ASIA. ACROSS EVERY REGION.</small></div><div class="hero-visual" aria-hidden="true"><div class="orbit"></div><div class="orbit two"></div><div class="orbit three"></div><div class="planet"></div><span class="spot a"></span><span class="spot b"></span><span class="spot c"></span></div></div>
+        <button type="button" class="quick-find-home" data-page="search">⌕ 大会・選手・日付・地域をまとめて検索 <small>気になる選手や大会をすぐ見つける →</small></button>
         <div class="stats"><div class="stat"><div class="name">掲載中の遠征結果</div><div class="value"><span id="stat-results">34</span><span class="suffix">件</span></div><div class="sub">出典確認分と一部詳細未確認分</div></div><div class="stat"><div class="name">戦績掲載プレイヤー</div><div class="value"><span id="stat-players">21</span><span class="suffix">名</span></div><div class="sub">確認済みの結果がある選手</div></div><div class="stat"><div class="name">記録のある遠征先</div><div class="value"><span id="stat-regions">3</span><span class="suffix">地域</span></div><div class="sub">対象の海外地域は全6地域</div></div><div class="stat"><div class="name">大会・予選のトップ10</div><div class="value"><span id="stat-top10">3</span><span class="suffix">件</span></div><div class="sub">掲載データ内の集計（デュオは1戦績）</div></div></div>
         <section class="home-showcase" aria-labelledby="home-showcase-heading">
           <div class="home-showcase-head"><div><p class="home-showcase-kicker">PLAYER FOCUS / ASIA OVERSEAS</p><h2 id="home-showcase-heading">注目の<span>プレイヤー</span></h2><p>この集計期間の確認済み個人賞金・AOT独自PR・確認済み海外VRからピックアップ</p></div><button type="button" class="text-link" data-page="players">ランキングで比較 ↗</button></div>
@@ -910,6 +913,22 @@
           <div class="home-records-grid" id="home-showcase-records" aria-live="polite"></div>
           <p class="home-showcase-note">※ 確認できた戦績だけを表示。スキン報酬を現金賞金に換算したり、予選・試合単位のVRを総合優勝として扱ったりしません。</p>
         </section>
+      </section>
+      <section class="section" id="page-search" aria-label="大会と選手のまとめて検索">
+        <div class="quickfind-hero"><div class="page-label">DISCOVER / 00</div><h1>大会・選手を<span>まとめて検索</span></h1>
+          <p>大会名・開催日・地域・選手名を組み合わせて検索。気になる選手は ★ お気に入りに保存できるよ</p></div>
+        <div class="quickfind-panel">
+          <label for="quickfind-query">キーワード<input id="quickfind-query" type="search" maxlength="160" autocomplete="off" placeholder="例：かめてぃん ME 2026/09/22" aria-label="大会・選手をまとめて検索"></label>
+          <div class="quickfind-filter-row">
+            <label for="quickfind-date">開催日<input id="quickfind-date" type="date" aria-label="開催日で絞り込む"></label>
+            <label for="quickfind-region">地域<select id="quickfind-region" aria-label="地域で絞り込む"><option value="all">すべての地域</option><option>ME</option><option>EU</option><option>NAC</option><option>NAW</option><option>OCE</option><option>BR</option></select></label>
+            <button id="quickfind-clear" type="button">検索条件をクリア</button>
+          </div>
+        </div>
+        <div class="quickfind-summary"><span id="quickfind-period"></span><span id="quickfind-counts" role="status" aria-live="polite"></span></div>
+        <p id="quickfind-save-status" class="quickfind-overflow" role="status" aria-live="polite"></p>
+        <div id="quickfind-favorites" class="quickfind-favorites"></div>
+        <div id="quickfind-results"></div>
       </section>
       <section class="section" id="page-results"><div class="page-label">ARCHIVE / 01</div><h1 class="big-title">OVERSEAS RESULTS</h1><p class="explainer" id="archive-season-description">CH7 S5の海外大会アーカイブ。</p><div class="filterbar"><div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><input id="search-results" type="search" placeholder="選手名・大会名を検索" aria-label="選手名や大会名で検索"></div><select id="region-filter" aria-label="遠征先で絞り込み"><option value="all">すべての地域</option><option>ME</option><option>EU</option><option>NAC</option><option>NAW</option><option>OCE</option><option>BR</option></select><select id="stage-filter" aria-label="大会区分で絞り込み"><option value="all">すべての区分</option><option value="賞金決勝">賞金決勝</option><option value="決勝">決勝</option><option value="予選">予選</option><option value="Practice決勝">Practice決勝</option><option value="Performance決勝">Performance決勝</option><option value="スキン大会">スキン大会</option></select><select id="sort-results" aria-label="並び替え"><option value="date">新しい順</option><option value="oldest">古い順</option><option value="rank">順位が高い順</option><option value="kills">キル数順</option><option value="vrs">ビクロイ数が多い順</option><option value="prize">賞金額が多い順</option><option value="points">ポイントが高い順</option><option value="registered">登録が新しい順</option></select><label class="toggle"><input type="checkbox" id="prize-only"> 🏆 賞金獲得のみ</label></div><div class="panel-header"><h2>遠征結果 <span id="result-count">0件</span></h2></div><p class="prize-row-note">🏆 <strong>金色の行＝賞金獲得確定</strong>　·　「賞金決勝」は賞金獲得を意味しないため、賞金ゼロや未確認は別の表示にしているよ</p><div id="result-pagination-top"></div><div id="result-table"></div><div id="result-pagination-bottom"></div><div class="export-tools"><button type="button" class="btn sm ghost" id="export-csv">↓ CSVを書き出し</button></div><p class="footnote">CSVは表示ページに関係なく、選択シーズンと現在の絞り込み結果の全件を出力するよ。chapter・season・seasonId列で各行の対象シーズンを確認できます。デュオの戦績はチーム単位で1行・賞金はチーム合計、prizePerPlayer列は各選手の金額。このサイトは閲覧専用で、掲載済みの戦績を検索・閲覧できるよ</p>
         <section id="participation-archive" class="participation-panel" aria-labelledby="participation-title">
@@ -956,7 +975,7 @@
   <div class="ranking-results"><div class="ranking-results-head"><h3 id="ranking-metric-title">個人獲得賞金</h3><p id="ranking-count" aria-live="polite" aria-atomic="true"></p></div><div class="player-prize-list" id="player-earnings-leaders" role="list" aria-labelledby="ranking-metric-title"></div><details id="ranking-unknown" class="ranking-unknown" hidden></details></div>
   <button id="ranking-more" class="btn sm ghost ranking-more" type="button" data-ranking-more hidden>さらに30名表示</button><p id="ranking-integrity" class="ranking-integrity" hidden></p>
   <p class="earnings-explainer" id="ranking-completeness">このランキングは、ASIA ON TOURに掲載されている海外大会戦績をもとに集計しています。未掲載の大会があるため、選手の実際の全成績とは異なる場合があります。公式ランキングではありません。</p>
-</section><div class="filterbar"><div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><input id="search-players" type="search" placeholder="プレイヤー名を検索" aria-label="プレイヤー名検索"></div><select id="player-sort" aria-label="プレイヤーの並び順"><option value="prize">獲得賞金が多い順</option><option value="name">選手名順</option><option value="events">戦績件数順</option></select></div><div class="players" id="all-players"></div><div class="player-list-controls"><p id="player-list-status" class="player-list-status" role="status" aria-live="polite"></p><button id="player-more" class="btn sm ghost" type="button" hidden>さらに60名表示</button></div></section>
+</section><div class="filterbar"><div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><input id="search-players" type="search" placeholder="プレイヤー名を検索" aria-label="プレイヤー名検索"></div><select id="player-sort" aria-label="プレイヤーの並び順"><option value="prize">獲得賞金が多い順</option><option value="name">選手名順</option><option value="events">戦績件数順</option><option value="favorite">★ お気に入り優先</option></select><label class="favorite-only-toggle"><input id="favorites-only" type="checkbox"> ★ お気に入りのみ</label></div><div class="players" id="all-players"></div><div class="player-list-controls"><p id="player-list-status" class="player-list-status" role="status" aria-live="polite"></p><button id="player-more" class="btn sm ghost" type="button" hidden>さらに60名表示</button></div></section>
       <section class="section" id="page-calendar" aria-label="大会カレンダー"><p style="margin:0 0 14px"><a href="./verification.html#coverage" class="text-link">🔍 大会の収集状況・確認待ちを調べる ↗</a></p><div id="calendar-content"></div></section>
       <section class="section" id="page-compare" aria-labelledby="compare-title"><div id="compare-content"></div></section>
       <section class="section" id="page-tournaments"><div id="tournament-content"></div></section>
@@ -1065,7 +1084,9 @@
   <script src="./tracker-summary.js?v=tracker-basics-v1-20261110" defer></script>
   <script src="./participation-ui.js?v=qualified-results-batch1-20261110" defer></script>
   <script src="./profile-layout.js?v=profile-tabs-v1-20261112" defer></script>
-  <script src="./app.js?v=season-shards-v1-20261112" defer></script>
+  <script src="./discovery.js?v=discovery-20261112" defer></script>
+  <script src="./discovery-ui.js?v=1" defer></script>
+  <script src="./app.js?v=discovery-and-season-shards-20261112" defer></script>
   <script src="./auto-sync-ui.js?v=4-approval-reasons" defer></script>
   <script src="./source-rules.js?v=7-duo-qualifier" defer></script>
 </body>
