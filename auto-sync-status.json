@@ -1,7 +1,7 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-12T01:27:41.912Z",
+  "checkedAt": "2026-11-12T03:41:29.972Z",
   "mode": "review",
   "scope": "recent",
   "dateMode": null,
@@ -11,16 +11,16 @@
   "provider": "osirion",
   "linkedPlayers": 573,
   "trackedWindows": 104,
-  "found": 0,
-  "skipped": 0,
-  "imported": 1,
+  "found": 14,
+  "skipped": 1,
+  "imported": 0,
   "scannedPages": 50,
   "completedWindows": 55,
   "identityConflicts": 3,
-  "alreadyRegistered": 320,
-  "autoApprovedTotal": 2108,
+  "alreadyRegistered": 351,
+  "autoApprovedTotal": 2146,
   "invalidCachedCandidates": 0,
-  "manualReviewCandidates": 0,
+  "manualReviewCandidates": 14,
   "autoApprovedCosmeticThisRun": 0,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
@@ -40,19 +40,19 @@
     "S42_InoxtagIconCup_ZB",
     "S42_InoxtagIconMobileCup"
   ],
-  "message": "公式Epic ID・順位・開催枠を検証し30件を掲載。残り0件。未確認賞金を推定しない。",
+  "message": "最新版と安全統合：新規掲載0件、重複スキップ0件、要確認の競合0件、確認待ち14件。既存の戦績・賞金は保持。",
   "concurrentMerge": {
-    "appended": 1,
+    "appended": 0,
     "alreadyPublished": 0,
     "reviewConflicts": 0,
-    "keptPending": 30,
-    "reconciledAt": "2026-11-12T01:27:49.161Z"
+    "keptPending": 14,
+    "reconciledAt": "2026-11-12T03:41:37.231Z"
   },
   "coverage": {
     "total": 104,
     "completed": 55,
-    "notStarted": 40,
-    "partial": 9,
+    "notStarted": 39,
+    "partial": 10,
     "retryWaiting": 0,
     "retryDue": 0,
     "remaining": 49,
@@ -105,7 +105,7 @@
         "region": "OCE",
         "series": "victory-cup",
         "status": "partial",
-        "nextPage": 50,
+        "nextPage": 60,
         "totalPages": 70,
         "retryAfter": null,
         "errorCode": null
@@ -116,8 +116,19 @@
         "region": "BR",
         "series": "victory-cup",
         "status": "partial",
-        "nextPage": 15,
+        "nextPage": 25,
         "totalPages": 80,
+        "retryAfter": null,
+        "errorCode": null
+      },
+      {
+        "window": "epicgames_S42_ReloadReloadSoloVictoryCup_EU/S42_ReloadSoloVictoryCup_Event5_Round2_EU",
+        "date": "2026-10-24",
+        "region": "EU",
+        "series": "victory-cup",
+        "status": "partial",
+        "nextPage": 5,
+        "totalPages": 16,
         "retryAfter": null,
         "errorCode": null
       },
@@ -127,7 +138,7 @@
         "region": "NAC",
         "series": "victory-cup",
         "status": "partial",
-        "nextPage": 40,
+        "nextPage": 50,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
@@ -138,7 +149,7 @@
         "region": "NAW",
         "series": "victory-cup",
         "status": "partial",
-        "nextPage": 50,
+        "nextPage": 60,
         "totalPages": 84,
         "retryAfter": null,
         "errorCode": null
@@ -149,7 +160,7 @@
         "region": "NAW",
         "series": "icon-cup",
         "status": "partial",
-        "nextPage": 25,
+        "nextPage": 26,
         "totalPages": 89,
         "retryAfter": null,
         "errorCode": null
@@ -160,7 +171,7 @@
         "region": "EU",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 86,
+        "nextPage": 87,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
@@ -171,7 +182,7 @@
         "region": "ME",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 51,
+        "nextPage": 52,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
@@ -182,7 +193,7 @@
         "region": "BR",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 37,
+        "nextPage": 38,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
@@ -193,7 +204,7 @@
         "region": "NAW",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 20,
+        "nextPage": 21,
         "totalPages": 70,
         "retryAfter": null,
         "errorCode": null
@@ -219,23 +230,12 @@
         "totalPages": null,
         "retryAfter": null,
         "errorCode": null
-      },
-      {
-        "window": "epicgames_S42_PerformanceEvaluationTrios_NAC/S42_PerformanceEvaluation_Event9Round1_NAC",
-        "date": "2026-10-23",
-        "region": "NAC",
-        "series": "performance-evaluation",
-        "status": "notStarted",
-        "nextPage": 0,
-        "totalPages": null,
-        "retryAfter": null,
-        "errorCode": null
       }
     ]
   },
   "manuallyPublished": 184,
   "lastReviewedBatchAt": "2026-11-12T02:59:58.677Z",
-  "autoApprovedDuoQualifierThisRun": 1,
+  "autoApprovedDuoQualifierThisRun": 0,
   "latestManualReview": {
     "reviewedAt": "2026-11-10T14:39:48.081Z",
     "reviewedCandidates": 12,
