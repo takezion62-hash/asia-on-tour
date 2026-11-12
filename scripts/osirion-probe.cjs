@@ -1,6 +1,6 @@
 'use strict';
 const fs=require('node:fs'),path=require('node:path');
-const all=JSON.parse(fs.readFileSync(path.join(__dirname,'../results.json'),'utf8'));
+const all=require('./source-results-store.cjs').readResults().rows;
 const expected=all.filter(x=>x.date==='2026-09-22'&&x.region==='NAW'&&x.event==='Solo Victory Cup Battle Royale'&&x.round.includes('Event 3')&&x.round.includes('Round 1'));
 const source='https://fnapi.osirion.gg/v1/tournaments/leaderboard';
 async function getPage(page){
