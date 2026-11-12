@@ -43,6 +43,10 @@
         {
           "id": "playstation-cup",
           "label": "PlayStation Cup"
+        },
+        {
+          "id": "elite-cup",
+          "label": "Elite Cup"
         }
       ]
     },
@@ -271,6 +275,10 @@
         {
           "id": "one-piece-zoro-cup-zero-build",
           "label": "One Piece: Zoro Cup Zero Build"
+        },
+        {
+          "id": "elite-cup-weekly-finals",
+          "label": "Elite Cup Weekly Finals"
         }
       ]
     },
@@ -1196,6 +1204,10 @@
         {
           "text": "2024-07-29 OCE Event7 Round2の確認済み個人賞金獲得者9名：ねふぁ(2VR、$200)、AUR t3eny 19ǃ・KENTAch・じんくん・めろんなんばーわん・rara・Aim・プロGON・Fraymy(各1VR、$100)。ユーザー提供Tracker画像と選手別IDの照合。",
           "url": "https://fortnitetracker.com/events/epicgames_S30_SoloVictoryCashCup_OCE?window=S30_SoloVictoryCashCup_Event7Round2_OCE"
+        },
+        {
+          "text": "2024/6/25 JST ME Event4 Round2：隠れもふ18位・6K・1VR・$100、Solary Kurаmа28位・5K・1VR・$100。ユーザー提供Tracker画像で確認。",
+          "url": "https://fortnitetracker.com/events/epicgames_S30_SoloVictoryCashCup_ME?window=S30_SoloVictoryCashCup_Event4Round2_ME"
         }
       ]
     },
@@ -2436,6 +2448,32 @@
         {
           "text": "Chapter 3 Season 3 NAW Week 6 Aim 12位・$200（大会結果の独立照合）。",
           "url": "https://www.esportsearnings.com/tournaments/56982-chapter-3-season-3-solo-cash-cup-week-6-na-west"
+        },
+        {
+          "text": "2022/6/30 JST ME Event1 Round2：Aim 6位・10キル・1VR・賞金$200、ITACHI 55位、raru 71位、Ehre そーだむ99位（後3名賞金なし）。ユーザー提供Tracker画像で確認。",
+          "url": "https://fortnitetracker.com/events/epicgames_S21_SoloCashCup_ME?window=S21_SoloCashCup_ME_Event1_Round2"
+        }
+      ]
+    },
+    {
+      "id": "ch3s4-elite-cup-weekly-finals",
+      "name": "Elite Cup Weekly Finals",
+      "chapter": 3,
+      "season": 4,
+      "seasonId": "S22",
+      "sourceEventIds": [
+        "S22_DivisionalCups_Elite_Finals"
+      ],
+      "series": "elite-cup",
+      "mode": "battle-royale",
+      "subtype": "elite-cup-weekly-finals",
+      "team": "duo",
+      "platform": "cross-platform",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "2022/10/30 JST ME Week5 Finals：NqRu/Aim 30位・100pt・9チームキル・賞金$400（各$200）、Kame/ZAZI 47位・20pt・3チームキル・賞金なし。ユーザー提供Tracker画像と各本人IDで確認。",
+          "url": "https://fortnitetracker.com/events/epicgames_S22_DivisionalCups_Elite_Finals_ME?window=S22_DivisionalCups_Elite_Finals_ME_Week5_v2"
         }
       ]
     }
