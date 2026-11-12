@@ -7,12 +7,10 @@ const sha='a'.repeat(40),other='b'.repeat(40);
 
 test('only narrowly allowlisted canonical and season-scoped JSON changes qualify',()=>{
  for(const path of [
-   'results.json','players.json','tournaments.json','updates.json',
-   'season-data/manifest.json','season-data/S30.json','season-data/unknown.json',
-   'season-data/ranking-all.json','season-data/ranking-S43.json'
+   'results.json','players.json','tournaments.json','updates.json'
  ]) assert.equal(classify([change('M',path)]).mode,'data',path);
  assert.equal(classify([
-   change('M','results.json'),change('A','season-data/S43.json'),
+   change('M','results.json'),change('M','updates.json'),
    change('M','players.json')
  ]).mode,'data');
 });
@@ -23,7 +21,8 @@ test('UI, scripts, tests, workflows, mixed and unfamiliar paths always need full
    'scripts/build-season-data.cjs','tests/site.spec.cjs','tests/data-validation.test.cjs',
    '.github/workflows/tests.yml','package.json','package-lock.json',
    'calendar-history/2026-11.json','participation/2026-11.json',
-   'data/manual-approvals/new.json','season-data/new-schema.json',
+   'data/manual-approvals/new.json','season-data/new-schema.json', 'season-data/S30.json',
+   'season-data/manifest.json', 'season-data/ranking-S43.json',
    'season-data/assets/S43.json','docs/README.md'
  ]) {
    assert.equal(classify([change('M',path)]).mode,'full',path);
