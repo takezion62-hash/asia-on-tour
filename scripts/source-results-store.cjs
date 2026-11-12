@@ -62,6 +62,10 @@ function readResults(root=ROOT,{verifyProjection=true}={}){
    throw Error('SOURCE_RESULTS shard cash mismatch: '+entry.file);
   sumTeam+=team;sumPersonal+=personal;sumUnknown+=unknown;
  }
+ for(const name of fs.readdirSync(path.join(root,'source-results'))){
+  if(/^(?:S[1-9]\d*|unknown)\.json$/.test(name) && !seenSeasons.has(name.slice(0,-5)))
+   throw Error('SOURCE_RESULTS unindexed shard on disk: '+name);
+ }
  if(actual.size!==manifest.count||manifest.recordOrder.length!==manifest.count||
     sumTeam!==manifest.teamPrizeCents||sumPersonal!==manifest.personalPrizeCents||
     sumUnknown!==manifest.unconfirmedPrizeRecords)
@@ -127,7 +131,16 @@ function publishResults(root,rows,{legacyWriter=false,allowRemoval=false}={}){
  if(missing.length&&!allowRemoval)
   throw Error('SOURCE_RESULTS refused unexpected deletion of '+missing.length+' records');
  if(JSON.stringify(current.rows)===JSON.stringify(rows)){
-  if(legacyWriter)atomicallyWrite(path.join(root,'results.json'),formatted(rows));
+  if(legacyWriter){
+   const projectedFile=path.join(root,'results.json');
+   const existingBytes=fs.readFileSync(projectedFile,'utf8');
+   if(sha(existingBytes)!==current.manifest.canonicalSha256){
+    const restored=formatted(rows);
+    if(sha(restored)!==current.manifest.canonicalSha256)
+     throw Error('SOURCE_RESULTS legacy reformat cannot restore original projection');
+    atomicallyWrite(projectedFile,restored);
+   }
+  }
   return {unchanged:true,count:rows.length};
  }
  // Import only explicitly verified in-process writes; public corrections still

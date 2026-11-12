@@ -12,6 +12,7 @@ const SOURCE_FILES=[
   'players.json','tournaments.json','tournament-rules.json',
   'scripts/osirion-sync.cjs','scripts/auto-sync-core.cjs',
   'scripts/verified-history-approval.cjs',
+  'scripts/source-results-store.cjs','scripts/build-source-results.cjs',
   'scripts/automatic-cash-approval.cjs',
   'scripts/automatic-cosmetic-approval.cjs',
   'scripts/automatic-performance-approval.cjs',
