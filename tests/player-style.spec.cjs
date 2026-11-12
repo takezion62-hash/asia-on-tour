@@ -27,6 +27,13 @@ test('プレイスタイル画面のJS/CSSが配信され、プロフィール�
   await expect(section.locator('.style-card')).toHaveCount(4);
   await expect(section.locator('.style-region')).toHaveCount(6);
   await expect(section.locator('.style-quality')).toBeVisible();
+  await expect(section.locator('.style-four-axis')).toBeVisible();
+  await expect(section.locator('[data-style-axis]')).toHaveCount(4);
+  await expect(section.locator('[data-style-axis="region"]')).toContainText('得意地域');
+  await expect(section.locator('[data-style-axis="format"]')).toContainText('ソロ・デュオ適性');
+  await expect(section.locator('[data-style-axis="final"]')).toContainText('決勝での強さ');
+  await expect(section.locator('[data-style-axis="growth"]')).toContainText('成長傾向');
+  await expect(section.locator('.style-axis-method')).toBeVisible();
   await expect(section.locator('.style-specialty')).toHaveCount(2);
   await expect(section.locator('.style-evidence')).toBeVisible();
   await expect(section.locator('.style-trend-plot')).toHaveCount(0);
@@ -88,6 +95,8 @@ test('選手比較の条件を引き継ぎ、2選手のキル効率と得意地�
   await expect(page.locator('[data-compare-style-player]')).toHaveCount(2);
   await expect(page.locator('[data-style-compare-region]')).toHaveCount(6);
   await expect(page.locator('.style-region-matrix')).toBeVisible();
+  await expect(page.locator('.style-four-axis-matrix')).toBeVisible();
+  await expect(page.locator('[data-style-compare-axis]')).toHaveCount(4);
   await page.locator('#compare-style-team').selectOption('duo');
   await expect(compareFold).toHaveAttribute('open','');
   await expect(page.locator('#compare-style-team')).toHaveValue('duo');
