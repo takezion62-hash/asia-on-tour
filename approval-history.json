@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-12T03:35:31.224Z",
+  "reviewedAt": "2026-11-12T03:35:46.660Z",
   "entries": [
     {
       "id": "auto-s43-21408f1d31bc",
@@ -12449,6 +12449,17 @@
       "source": "https://www.fortnite.com/competitive/events/S31_SoloVictoryCashCup/?region=ME&round=S31_SoloVictoryCashCup_Event5Round1_ME",
       "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-4-official-rules",
       "evidence": "Exact Epic account and team roster, canonical official event/calendar, ranked checkpoint with continuous mature rows or complete scan; duplicate check"
+    },
+    {
+      "id": "auto-s31-b1cf1c8d2f97",
+      "decision": "published",
+      "recordId": "auto-s31-b1cf1c8d2f97",
+      "policy": "verified-rule",
+      "approvedAt": "2026-11-12T03:35:46.660Z",
+      "approvedBy": "ChatGPT (user-authorized GitHub integration)",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-4-official-rules",
+      "source": "https://www.fortnite.com/competitive/events/S31_SoloVictoryCashCup/?region=NAC&round=S31_SoloVictoryCashCup_Event3Round1_NAC",
+      "evidence": "Saved Epic ID, official ranked placement 6954 within top 10000; qualifier $0"
     }
   ]
 }

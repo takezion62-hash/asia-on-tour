@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-12T03:35:31.224Z",
+  "reviewedAt": "2026-11-12T03:35:46.660Z",
   "description": "Resolved historic review candidates: published, duplicate or participation",
   "entries": [
     {
@@ -21431,6 +21431,15 @@
       "source": "https://www.fortnite.com/competitive/events/S31_SoloVictoryCashCup/?region=ME&round=S31_SoloVictoryCashCup_Event5Round1_ME",
       "policy": "verified-rule",
       "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-4-official-rules"
+    },
+    {
+      "id": "auto-s31-b1cf1c8d2f97",
+      "decision": "published",
+      "recordId": "auto-s31-b1cf1c8d2f97",
+      "reviewedAt": "2026-11-12T03:35:46.660Z",
+      "policy": "exact-saved-page-and-official-region-cutoff",
+      "source": "https://www.fortnite.com/competitive/events/S31_SoloVictoryCashCup/?region=NAC&round=S31_SoloVictoryCashCup_Event3Round1_NAC",
+      "officialRules": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-4-official-rules"
     }
   ]
 }
