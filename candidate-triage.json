@@ -1,7 +1,7 @@
 {
   "version": 1,
   "sourceCheckedAt": "2026-11-07T23:16:39.215Z",
-  "total": 19,
+  "total": 25,
   "alreadyResolved": 0,
   "byYear": [
     {
@@ -11,6 +11,10 @@
     {
       "name": "2025",
       "count": 2
+    },
+    {
+      "name": "2026",
+      "count": 6
     }
   ],
   "byRegion": [
@@ -20,12 +24,32 @@
     },
     {
       "name": "NAC",
-      "count": 13
+      "count": 14
+    },
+    {
+      "name": "NAW",
+      "count": 2
+    },
+    {
+      "name": "OCE",
+      "count": 3
     }
   ],
   "byTournament": [
     {
+      "name": "Console Zero Build Solo Victory Cup / OCE / 2026",
+      "count": 3
+    },
+    {
       "name": "PlayStation Cup / NAC / 2025",
+      "count": 2
+    },
+    {
+      "name": "Solo Reload Victory Cup / NAC / 2026",
+      "count": 1
+    },
+    {
+      "name": "Solo Reload Victory Cup / NAW / 2026",
       "count": 2
     },
     {
@@ -44,11 +68,11 @@
   "byStatus": [
     {
       "name": "partial-scan",
-      "count": 17
+      "count": 20
     },
     {
       "name": "rules-review",
-      "count": 2
+      "count": 5
     }
   ],
   "queue": [
@@ -117,6 +141,105 @@
         "possibleExistingId": null
       },
       "rewardState": "cash-unconfirmed"
+    },
+    {
+      "id": "auto-s42-7a32d81e8ae8",
+      "origin": "recent",
+      "date": "2026-10-24",
+      "year": "2026",
+      "region": "OCE",
+      "tournamentId": "ch7s4-console-zero-build-solo-victory-cup",
+      "event": "Console Zero Build Solo Victory Cup",
+      "round": "Event 8 · Round 1 / 予選",
+      "player": "Xero AsianReika7",
+      "kind": "予選",
+      "rank": 6517,
+      "points": 0,
+      "kills": 0,
+      "vrs": 0,
+      "prize": 0,
+      "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=OCE&round=S42_ConsoleVCC_SolosZB_Event8Round1_OCE",
+      "status": "rules-review",
+      "action": "公式規則・賞金・突破・スキン条件を個別確認",
+      "reason": "スキン報酬判定の元データではありません",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": true,
+        "observedPartial": false,
+        "seenPages": 70,
+        "totalPages": 70,
+        "sourceKey": "epicgames_S42_ConsoleVCC_SolosZB_OCE/S42_ConsoleVCC_SolosZB_Event8Round1_OCE",
+        "possibleExistingId": null
+      },
+      "rewardState": "source-amount-present-not-verified-by-triage"
+    },
+    {
+      "id": "auto-s42-8afd5ae79d90",
+      "origin": "recent",
+      "date": "2026-10-24",
+      "year": "2026",
+      "region": "OCE",
+      "tournamentId": "ch7s4-console-zero-build-solo-victory-cup",
+      "event": "Console Zero Build Solo Victory Cup",
+      "round": "Event 8 · Round 1 / 予選",
+      "player": "Hakkun",
+      "kind": "予選",
+      "rank": 6073,
+      "points": 2,
+      "kills": 1,
+      "vrs": 0,
+      "prize": 0,
+      "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=OCE&round=S42_ConsoleVCC_SolosZB_Event8Round1_OCE",
+      "status": "rules-review",
+      "action": "公式規則・賞金・突破・スキン条件を個別確認",
+      "reason": "スキン報酬判定の元データではありません",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": true,
+        "observedPartial": false,
+        "seenPages": 70,
+        "totalPages": 70,
+        "sourceKey": "epicgames_S42_ConsoleVCC_SolosZB_OCE/S42_ConsoleVCC_SolosZB_Event8Round1_OCE",
+        "possibleExistingId": null
+      },
+      "rewardState": "source-amount-present-not-verified-by-triage"
+    },
+    {
+      "id": "auto-s42-c5b83eabac50",
+      "origin": "recent",
+      "date": "2026-10-24",
+      "year": "2026",
+      "region": "OCE",
+      "tournamentId": "ch7s4-console-zero-build-solo-victory-cup",
+      "event": "Console Zero Build Solo Victory Cup",
+      "round": "Event 8 · Round 1 / 予選",
+      "player": "いっさですー",
+      "kind": "予選",
+      "rank": 6490,
+      "points": 0,
+      "kills": 0,
+      "vrs": 0,
+      "prize": 0,
+      "source": "https://www.fortnite.com/competitive/events/S42_ConsoleVCC_SolosZB/?region=OCE&round=S42_ConsoleVCC_SolosZB_Event8Round1_OCE",
+      "status": "rules-review",
+      "action": "公式規則・賞金・突破・スキン条件を個別確認",
+      "reason": "スキン報酬判定の元データではありません",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": true,
+        "observedPartial": false,
+        "seenPages": 70,
+        "totalPages": 70,
+        "sourceKey": "epicgames_S42_ConsoleVCC_SolosZB_OCE/S42_ConsoleVCC_SolosZB_Event8Round1_OCE",
+        "possibleExistingId": null
+      },
+      "rewardState": "source-amount-present-not-verified-by-triage"
     },
     {
       "id": "auto-s30-ad8eb6b2db42",
@@ -678,6 +801,105 @@
         "possibleExistingId": null
       },
       "rewardState": "cash-unconfirmed"
+    },
+    {
+      "id": "auto-s42-ffd86f87f797",
+      "origin": "recent",
+      "date": "2026-10-24",
+      "year": "2026",
+      "region": "NAC",
+      "tournamentId": "ch7s4-solo-reload-victory-cup",
+      "event": "Solo Reload Victory Cup",
+      "round": "Event 5 · Round 1 / 予選",
+      "player": "Xero AsianReika7",
+      "kind": "予選",
+      "rank": 5727,
+      "points": 177,
+      "kills": 12,
+      "vrs": 0,
+      "prize": 0,
+      "source": "https://www.fortnite.com/competitive/events/S42_ReloadReloadSoloVictoryCup/?region=NAC&round=S42_ReloadSoloVictoryCup_Event5_Round1_NAC",
+      "status": "partial-scan",
+      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
+      "reason": "スキン報酬判定の元データではありません",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": false,
+        "observedPartial": true,
+        "seenPages": 60,
+        "totalPages": 100,
+        "sourceKey": "epicgames_S42_ReloadReloadSoloVictoryCup_NAC/S42_ReloadSoloVictoryCup_Event5_Round1_NAC",
+        "possibleExistingId": null
+      },
+      "rewardState": "source-amount-present-not-verified-by-triage"
+    },
+    {
+      "id": "auto-s42-30d24df09ef1",
+      "origin": "recent",
+      "date": "2026-10-24",
+      "year": "2026",
+      "region": "NAW",
+      "tournamentId": "ch7s4-solo-reload-victory-cup",
+      "event": "Solo Reload Victory Cup",
+      "round": "Event 5 · Round 1 / 予選",
+      "player": "ディグダǃ",
+      "kind": "予選",
+      "rank": 6395,
+      "points": 27,
+      "kills": 1,
+      "vrs": 0,
+      "prize": 0,
+      "source": "https://www.fortnite.com/competitive/events/S42_ReloadReloadSoloVictoryCup/?region=NAW&round=S42_ReloadSoloVictoryCup_Event5_Round1_NAW",
+      "status": "partial-scan",
+      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
+      "reason": "スキン報酬判定の元データではありません",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": false,
+        "observedPartial": true,
+        "seenPages": 70,
+        "totalPages": 84,
+        "sourceKey": "epicgames_S42_ReloadReloadSoloVictoryCup_NAW/S42_ReloadSoloVictoryCup_Event5_Round1_NAW",
+        "possibleExistingId": null
+      },
+      "rewardState": "source-amount-present-not-verified-by-triage"
+    },
+    {
+      "id": "auto-s42-63d37ad8a643",
+      "origin": "recent",
+      "date": "2026-10-24",
+      "year": "2026",
+      "region": "NAW",
+      "tournamentId": "ch7s4-solo-reload-victory-cup",
+      "event": "Solo Reload Victory Cup",
+      "round": "Event 5 · Round 1 / 予選",
+      "player": "REBEL Chillfnbr.",
+      "kind": "予選",
+      "rank": 6720,
+      "points": 20,
+      "kills": 3,
+      "vrs": 0,
+      "prize": 0,
+      "source": "https://www.fortnite.com/competitive/events/S42_ReloadReloadSoloVictoryCup/?region=NAW&round=S42_ReloadSoloVictoryCup_Event5_Round1_NAW",
+      "status": "partial-scan",
+      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
+      "reason": "スキン報酬判定の元データではありません",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": false,
+        "observedPartial": true,
+        "seenPages": 70,
+        "totalPages": 84,
+        "sourceKey": "epicgames_S42_ReloadReloadSoloVictoryCup_NAW/S42_ReloadSoloVictoryCup_Event5_Round1_NAW",
+        "possibleExistingId": null
+      },
+      "rewardState": "source-amount-present-not-verified-by-triage"
     }
   ],
   "policy": "read-only queue; awards require existing official rule-backed validators and identity/collision proof"
