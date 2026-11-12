@@ -4,7 +4,7 @@ const assert=require('node:assert/strict');
 const fs=require('node:fs');
 const path=require('node:path');
 const engine=require('../achievements.js');
-const records=JSON.parse(fs.readFileSync(path.join(__dirname,'..','results.json'),'utf8'));
+const records=require('./production-results.cjs');
 
 const fixture=(id,overrides={})=>({
   id,date:'2026-09-01',player:'Hero',region:'ME',event:'Solo Victory Cup Battle Royale',

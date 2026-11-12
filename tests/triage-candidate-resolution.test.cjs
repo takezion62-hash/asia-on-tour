@@ -25,7 +25,7 @@ test('all 31 newly reviewed historical candidates are source-backed, published o
  assert.equal(counts.published,21);
  assert.equal(counts['participation-archived'],10);
  assert.equal(counts['already-published']||0,0);
- const results=read('results.json'),byId=new Map(results.map(row=>[row.id,row]));
+ const results=require('./production-results.cjs'),byId=new Map(results.map(row=>[row.id,row]));
  assert.equal(byId.size,results.length,'existing result IDs must stay unique');
  const rules=read('tournament-rules.json').rules;
  const rule31=rules.find(r=>r.id==='ch5s4-solo-victory-cup');

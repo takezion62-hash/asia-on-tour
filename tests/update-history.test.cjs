@@ -5,7 +5,7 @@ const fs=require('node:fs');
 const path=require('node:path');
 const {validateUpdateLog}=require('../scripts/validate-updates.cjs');
 const folder=path.join(__dirname,'..');
-const results=JSON.parse(fs.readFileSync(path.join(folder,'results.json'),'utf8'));
+const results=require('./production-results.cjs');
 const log=JSON.parse(fs.readFileSync(path.join(folder,'updates.json'),'utf8'));
 const clone=()=>structuredClone(log);
 test('実登録履歴は存在する戦績IDを重複なく参照する',()=>{

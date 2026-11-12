@@ -34,7 +34,7 @@ test('the participation index is a distinct valid schema and cannot masquerade a
 
 test('2026-10-17 NAW qualifiers are present without duplicated or invented prizes',()=>{
  const ui=read('participation-ui.js'),archive=JSON.parse(read('participation/2026-10.json'));
- const results=JSON.parse(read('results.json'));
+ const results=require('./production-results.cjs');
  const expected=[
   {name:'RyoIT',rank:341,points:298,kills:23,vrs:2,verified:true},
   {name:'ろず',rank:339,points:299,kills:14,vrs:0,verified:true},

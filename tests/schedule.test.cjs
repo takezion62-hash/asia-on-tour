@@ -5,7 +5,7 @@ const fs=require('node:fs');
 const path=require('node:path');
 const root=path.join(__dirname,'..');
 const data=JSON.parse(fs.readFileSync(path.join(root,'schedule.json'),'utf8'));
-const results=JSON.parse(fs.readFileSync(path.join(root,'results.json'),'utf8'));
+const results=require('./production-results.cjs');
 const regions=['ME','EU','NAC','NAW','OCE','BR'];
 const ids=new Set(data.sessions.map(x=>x.id));
 test('S43 schedule is a separate source-backed current snapshot and preserves results',()=>{
