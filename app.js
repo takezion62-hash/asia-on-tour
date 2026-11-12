@@ -6,8 +6,37 @@
       if(!response.ok)throw new Error(filename+' could not be loaded (HTTP '+response.status+')');
       return response.json();
     };
+    // Initial navigation fetches only one season shard; the canonical JSON is never fetched.
+    const manifest=await loadJSON('season-data/manifest.json');
+    if(manifest?.format!==1||!manifest.scopes||!Array.isArray(manifest.seasonOrder))
+      throw new Error('Invalid season data manifest');
+    const requestId=new URL(window.location.href).searchParams.get('season');
+    const initialSeason=Object.hasOwn(manifest.scopes,requestId)?requestId:
+      (Object.hasOwn(manifest.scopes,'S43')?'S43':'all');
+    const seasonPromises=new Map(),seasonRankingsCache=new Map();
+    let fullResults=null,fullResultsPromise=null;
+    async function fetchSeason(id){
+      const entry=manifest.scopes[id],file=entry?.file;
+      if(!file)throw new Error('Unknown season: '+id);
+      if(!seasonPromises.has(id))seasonPromises.set(id,loadJSON(file).then(rows=>{
+        if(!Array.isArray(rows)||rows.length!==entry.count)throw new Error('Incomplete season data: '+id);
+        return rows;
+      }).catch(error=>{seasonPromises.delete(id);throw error}));
+      return seasonPromises.get(id);
+    }
+    function ensureAllResults(){
+      if(fullResults)return Promise.resolve(fullResults);
+      if(!fullResultsPromise)fullResultsPromise=Promise.all(manifest.seasonOrder.map(fetchSeason))
+        .then(chunks=>{
+          const rows=chunks.flat().sort((a,b)=>a.__aotOrder-b.__aotOrder);
+          if(rows.length!==manifest.total)throw new Error('Incomplete full results archive');
+          return fullResults=rows;
+        }).catch(error=>{fullResultsPromise=null;throw error});
+      return fullResultsPromise;
+    }
     const [records,playerData,tournamentData,updateData,scheduleData,historyCalendarIndex]=await Promise.all([
-      loadJSON('results.json'),loadJSON('players.json'),loadJSON('tournaments.json'),loadJSON('updates.json'),loadJSON('schedule.json'),loadJSON('calendar-history-index.json')
+      initialSeason==='all'?ensureAllResults():fetchSeason(initialSeason),
+      loadJSON('players.json'),loadJSON('tournaments.json'),loadJSON('updates.json'),loadJSON('schedule.json'),loadJSON('calendar-history-index.json')
     ]);
     const siteData={results:records,players:playerData,tournaments:tournamentData,updates:updateData,schedule:scheduleData,calendarHistory:historyCalendarIndex};
     if(!Array.isArray(siteData.results)||!Array.isArray(siteData.players.candidates)||!Array.isArray(siteData.tournaments.catalog)||!Array.isArray(siteData.updates.entries)||!Array.isArray(siteData.schedule.sessions)||!Array.isArray(siteData.calendarHistory.months))
@@ -15,21 +44,24 @@
 
     // CH7S4 / Override · 2026-08-20 through 2026-10-18 (snapshot, not exhaustive)
     // Every record includes the intended match-region in its source round ID; some official result URLs use a generic region query parameter.
-    const builtIn=siteData.results;
+    let builtIn=siteData.results;
     const updateEntries=siteData.updates?.entries||[];
     const candidates=siteData.players.candidates;
     const regions=['ME','EU','NAC','NAW','OCE','BR'];
     const $=s=>document.querySelector(s);
-    const rawAll=()=>builtIn;
-    let selectedSeason='S43';
+    const rawAll=()=>fullResults||builtIn;
+    let selectedSeason=initialSeason;
     // Published records are immutable during a page session. Reuse each season's
     // filtered array instead of scanning the entire archive on every UI render.
-    const seasonRowsCache=new Map();
+    const seasonRowsCache=new Map([[initialSeason,records]]);
+    async function ensureSeason(id){
+      if(id==='all')return ensureAllResults();
+      if(!seasonRowsCache.has(id))seasonRowsCache.set(id,await fetchSeason(id));
+      return seasonRowsCache.get(id);
+    }
     const all=()=>{
       if(selectedSeason==='all')return rawAll();
-      if(!seasonRowsCache.has(selectedSeason)){
-        seasonRowsCache.set(selectedSeason,rawAll().filter(e=>recordSeason(e).id===selectedSeason));
-      }
+      if(!seasonRowsCache.has(selectedSeason))throw new Error('Season not loaded: '+selectedSeason);
       return seasonRowsCache.get(selectedSeason);
     };
     const seasonPlayerIndexes=new WeakMap();
@@ -144,7 +176,7 @@
     const unknownSeason=()=>({id:'unknown',seasonId:'unknown',chapter:null,season:null,label:'未確認'});
     function buildSeasonMetadata(){
       const definitions=new Map(),conflicts=new Set();
-      for(const row of [...tournamentCatalog,...rawAll()]){
+      for(const row of [...tournamentCatalog,...Object.values(manifest.scopes).filter(s=>s.chapter!=null).map(s=>({...s,seasonId:s.id})),...rawAll()]){
         if(!/^S\d+$/.test(row.seasonId||'')||!Number.isInteger(row.chapter)||row.chapter<1||!Number.isInteger(row.season)||row.season<1)continue;
         const item={id:row.seasonId,seasonId:row.seasonId,chapter:row.chapter,season:row.season,label:`CH${row.chapter} S${row.season}`};
         const previous=definitions.get(item.id);
@@ -173,8 +205,7 @@
     let cachedSeasonOptions=null;
     function seasonOptions(){
       if(cachedSeasonOptions)return cachedSeasonOptions;
-      const registered=new Map(rawAll().map(e=>{const info=recordSeason(e);return [info.id,info]}));
-      cachedSeasonOptions=[{id:'all',label:'全期間'},...[...registered.values()].filter(s=>s.id!=='unknown').sort((a,b)=>b.chapter-a.chapter||b.season-a.season||a.id.localeCompare(b.id)),...(registered.has('unknown')?[unknownSeason()]:[])];
+      cachedSeasonOptions=[{id:'all',label:'全期間'},...manifest.seasonOrder.map(id=>manifest.scopes[id]).filter(Boolean).map(s=>({id:s.id,label:s.label,chapter:s.chapter,season:s.season}))];
       return cachedSeasonOptions;
     }
     function defaultSeason(){return seasonOptions().some(s=>s.id===currentSeasonId)?currentSeasonId:'all'}
@@ -208,9 +239,19 @@
       $('#ranking-season-description').textContent=`${scope} · 個人の確認済み賞金額（USD）`;
       $('#ranking-completeness').textContent='このランキングは、ASIA ON TOURに掲載されている海外大会戦績をもとに集計しています。未掲載の大会があるため、選手の実際の全成績とは異なる場合があります。公式ランキングではありません。';
     }
-    function changeSeason(value){
+    async function changeSeason(value){
       const nextSeason=sanitizeSeason(value);
       if(nextSeason===selectedSeason)return;
+      const token=++navigationToken;
+      try{
+        await ensureSeason(nextSeason);
+        if(['profile','compare','updates','calendar'].includes(currentView.page))await ensureAllResults();
+        if(token!==navigationToken)return;
+      }catch(error){
+        console.error('Unable to change season:',error);
+        $('#season-select').value=selectedSeason;
+        return;
+      }
       const previous=captureView();
       window.history.replaceState({aot:true,depth:routeDepth,view:previous},'',window.location.href);
       const next={...previous,season:nextSeason,results:{...previous.results,page:1}};
@@ -237,7 +278,7 @@
     function sanitizeTournamentFilters(filters={}){
       const result=tournamentDefaultFilters();
       for(const axis of tournamentAxes)if(axis.options.some(o=>o.id===filters[axis.key]))result[axis.key]=filters[axis.key];
-      if(rawAll().some(e=>e.kind===filters.stage))result.stage=filters.stage;
+      if(all().some(e=>e.kind===filters.stage))result.stage=filters.stage;
       result.q=typeof filters.q==='string'?filters.q:'';
       return result;
     }
@@ -267,7 +308,7 @@
       if(unnamed&&date&&region&&tournamentId){
         // Adopt a numbered event ONLY when this date/region/tournament has exactly
         // one explicit match. Preserve uncertainty when multiple events exist.
-        const numbered=new Set(rawAll().filter(x=>x.date===date&&x.region===region
+        const numbered=new Set(all().filter(x=>x.date===date&&x.region===region
           &&classifyTournamentRecord(x).id===tournamentId)
           .map(x=>String(x.round||'').match(new RegExp('^(Event\\s*\\d+\\s*·\\s*Round\\s*'+Number(unnamed[1])+')\\s*\\/','i'))?.[1])
           .filter(Boolean));
@@ -674,7 +715,7 @@
       return t.seasonId||'シーズン未確認';
     }
     function tournamentViewStageOptions(){
-      return [...new Set(rawAll().map(e=>e.kind).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'ja')).map(id=>({id,label:id}));
+      return [...new Set(all().map(e=>e.kind).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'ja')).map(id=>({id,label:id}));
     }
     function tournamentViewSelect(axis,filters){
       const selected=filters[axis.key]||'all';
@@ -907,7 +948,7 @@
     function playerRegistry(){
       if(registryCache)return registryCache;
       const known=new Set(candidates.map(p=>p.name));
-      const extras=[...new Set(rawAll().flatMap(names))].filter(name=>!known.has(name)).map(name=>({name,initials:[...name].slice(0,2).join(''),desc:'登録済みの海外戦績がある選手'}));
+      const extras=manifest.names.filter(name=>!known.has(name)).map(name=>({name,initials:[...name].slice(0,2).join(''),desc:'登録済みの海外戦績がある選手'}));
       registryCache=[...candidates,...extras];
       return registryCache;
     }
@@ -1181,8 +1222,30 @@
       if(view.page==='players')return rankingSearchHash(view.ranking?.filters||rankingFilters);
       return '#'+view.page;
     }
-    function showView(view,restore=false){
+    let navigationToken=0;
+    async function showView(view,restore=false){
+      const token=++navigationToken;
       const nextSeason=seasonFromUrl();
+      try{
+        await ensureSeason(nextSeason);
+        // Only deep historical views need all seasons; primary search stays lightweight.
+        if(['profile','compare','updates','calendar'].includes(view.page))await ensureAllResults();
+        if(view.page==='players'&&!seasonRankingsCache.has(nextSeason)){
+          const file=manifest.scopes[nextSeason]?.rankingFile;
+          if(file)try{seasonRankingsCache.set(nextSeason,await loadJSON(file))}
+            catch(error){console.warn('Ranking read model not available:',error)}
+        }
+        if(token!==navigationToken)return;
+      }catch(error){
+        if(token!==navigationToken)return;
+        console.error('View data load failed:',error);
+        const errorBox=document.createElement('div');
+        errorBox.setAttribute('role','alert');
+        errorBox.className='season-load-error';
+        errorBox.textContent='戦績の読み込みに失敗しました。通信環境を確認して再読み込みしてください。';
+        document.body.prepend(errorBox);
+        return;
+      }
       if(nextSeason!==selectedSeason){selectedSeason=nextSeason;archivePage=1;refresh()}
       restoreBrowseState(view);
       currentView={page:view.page,name:view.name||null,id:view.id||null,session:tournamentSessionScope(view.session),dateFilter:validCalendarDate(view.dateFilter)?view.dateFilter:'',invalid:!!view.invalid};
@@ -1907,7 +1970,7 @@
     function registeredRows(){
       const seasonRows=all();
       if(registrationCache.has(seasonRows))return registrationCache.get(seasonRows);
-      const byId=new Map(rawAll().map(record=>[record.id,record]));
+      const byId=new Map(seasonRows.map(record=>[record.id,record]));
       const inSeason=new Set(seasonRows.map(record=>record.id));
       const seen=new Set(),registered=[];
       for(const entry of updateEntries){
@@ -2017,7 +2080,7 @@
       }).join(''):'<div class="empty">この期間に掲載できる確認済みの賞金・総合TOP3・スキン報酬記録はまだありません。</div>';
     }
     function renderHome(){const a=all();$('#stat-results').textContent=a.length;$('#stat-players').textContent=new Set(a.flatMap(names)).size;$('#stat-regions').textContent=new Set(a.map(e=>e.region)).size;$('#stat-top10').textContent=a.filter(e=>e.rank<=10).length;const latest=a.slice().sort((x,y)=>y.date.localeCompare(x.date)).slice(0,3);$('#latest-results').innerHTML=latest.length?latest.map(resultCard).join(''):'<div class="empty">まだ戦績が登録されていないよ</div>';$('#region-breakdown').innerHTML=regions.map(r=>{const n=a.filter(e=>e.region===r).length;const percent=a.length?(n/a.length*100):0;return `<div class="region-entry"><div class="reg-left"><div class="flag" data-region="${escape(r)}">${escape(r)}</div><div class="reg-details"><strong>${{ME:'中東',EU:'ヨーロッパ',NAC:'北米中部',NAW:'北米西部',OCE:'オセアニア',BR:'ブラジル'}[r]}</strong><small>${n?'登録あり':'未登録'}</small><div class="reg-bar"><span style="width:${percent}%"></span></div></div></div><span class="reg-count">${n}</span></div>`}).join('');renderHomeShowcase();renderHomeRecords()}
-    function renderPlayerCard(p){const events=seasonPlayerIndex().byName.get(p.name)||[];const sum=playerPrizeTotal(p.name);const evolution=achievementsForPlayer(p.name).evolution;const featured=evolution.featured;return `<a class="player" href="${escape(profileHref(p.name))}" data-open-profile="${escape(p.name)}"><div class="player-top"><div class="avatar">${escape(p.initials)}</div><div><div class="player-name">${escape(p.name)}</div><div class="player-region">🌏 遠征関連選手 · ${events.length?'戦績掲載中':'海外結果を調査中'}</div></div></div><div class="player-blurb"><span class="season-biography-note">${candidateNames.has(p.name)?'紹介文：CH7 S4時点':'掲載選手'}</span>${escape(p.desc)}</div><div class="player-achievement-preview" data-player-achievement="${escape(featured?.id||'none')}" data-evolution-tier="${escape(featured?.current?.tier||'locked')}"><span aria-hidden="true">${escape(featured?.icon||'🏅')}</span> ${escape(featured?.current?.title||'実績に挑戦中')} <small>· ${format(evolution.earnedStages)}/${format(evolution.totalStages)}</small></div><div class="player-earnings${sum?'':' zero'}"><span>🏆 ${escape(seasonLabel())}の確認済み賞金<br><small>掲載済み・確認済みの個人累計</small></span><strong>${events.length?'$'+format(sum):'未登録'}</strong></div><div class="player-bottom"><span>掲載された海外戦績 <strong>${events.length}</strong> 件</span><span class="player-card-action">プロフィールを見る →</span></div></a>`}
+    function renderPlayerCard(p){const events=seasonPlayerIndex().byName.get(p.name)||[];const sum=playerPrizeTotal(p.name);const evolution=manifest.previews?.[p.name]||(fullResults?achievementsForPlayer(p.name).evolution:{earnedStages:0,totalStages:0});const featured=evolution.featured;return `<a class="player" href="${escape(profileHref(p.name))}" data-open-profile="${escape(p.name)}"><div class="player-top"><div class="avatar">${escape(p.initials)}</div><div><div class="player-name">${escape(p.name)}</div><div class="player-region">🌏 遠征関連選手 · ${events.length?'戦績掲載中':'海外結果を調査中'}</div></div></div><div class="player-blurb"><span class="season-biography-note">${candidateNames.has(p.name)?'紹介文：CH7 S4時点':'掲載選手'}</span>${escape(p.desc)}</div><div class="player-achievement-preview" data-player-achievement="${escape(featured?.id||'none')}" data-evolution-tier="${escape(featured?.current?.tier||'locked')}"><span aria-hidden="true">${escape(featured?.icon||'🏅')}</span> ${escape(featured?.current?.title||'実績に挑戦中')} <small>· ${format(evolution.earnedStages)}/${format(evolution.totalStages)}</small></div><div class="player-earnings${sum?'':' zero'}"><span>🏆 ${escape(seasonLabel())}の確認済み賞金<br><small>掲載済み・確認済みの個人累計</small></span><strong>${events.length?'$'+format(sum):'未登録'}</strong></div><div class="player-bottom"><span>掲載された海外戦績 <strong>${events.length}</strong> 件</span><span class="player-card-action">プロフィールを見る →</span></div></a>`}
     let visible=[]; let selectedPlayer=null;
     const ARCHIVE_PAGE_SIZE=50;
     let archivePage=1;
