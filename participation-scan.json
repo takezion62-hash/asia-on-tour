@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-11-12T03:39:55.392Z",
+  "checkedAt": "2026-11-12T09:44:48.268Z",
   "windows": {
     "epicgames_S42_InoxtagIconCup_NAW/S42_InoxtagIconCup_NAW": {
       "nextPage": 50,
@@ -504,7 +504,9 @@
       "coverageLimited": false,
       "totalPages": 100,
       "lastScanned": "2026-11-08T03:38:12.068Z",
-      "emptyAttempts": 0
+      "emptyAttempts": 0,
+      "retryAfter": "2026-11-12T15:44:41.587Z",
+      "lastError": "Osirion API HTTP 500 /v1/tournaments/leaderboard"
     },
     "epicgames_S30_SoloZBVictoryCashCup_ME/S30_SoloZBVictoryCashCup_Event3Round2_ME": {
       "nextPage": 18,
@@ -684,7 +686,9 @@
       "coverageLimited": false,
       "totalPages": 47,
       "lastScanned": "2026-11-10T03:35:30.861Z",
-      "emptyAttempts": 0
+      "emptyAttempts": 0,
+      "retryAfter": "2026-11-12T15:44:48.268Z",
+      "lastError": "Osirion API HTTP 500 /v1/tournaments/leaderboard"
     },
     "epicgames_S43_SquadsVictoryCup_NAC/S43_SquadsVictoryCup_Event1_Round2_NAC": {
       "nextPage": 2,
@@ -747,7 +751,9 @@
       "coverageLimited": false,
       "totalPages": 19,
       "lastScanned": "2026-11-12T03:39:47.616Z",
-      "emptyAttempts": 0
+      "emptyAttempts": 0,
+      "retryAfter": "2026-11-12T15:44:42.769Z",
+      "lastError": "Osirion API HTTP 500 /v1/tournaments/leaderboard"
     },
     "epicgames_S30_SoloZBVictoryCashCup_ME/S30_SoloZBVictoryCashCup_Event1Round2_ME": {
       "nextPage": 2,
@@ -765,7 +771,41 @@
       "coverageLimited": false,
       "totalPages": 83,
       "lastScanned": "2026-11-12T03:39:29.765Z",
-      "emptyAttempts": 0
+      "emptyAttempts": 0,
+      "retryAfter": "2026-11-12T15:44:40.362Z",
+      "lastError": "Osirion API HTTP 500 /v1/tournaments/leaderboard"
+    },
+    "epicgames_S33_SoloCashCup_NAW/S33_SoloCashCup_Event4Round1_NAW": {
+      "nextPage": 0,
+      "pages": 0,
+      "complete": false,
+      "coverageLimited": false,
+      "retryAfter": "2026-11-12T15:44:43.817Z",
+      "lastError": "Osirion API HTTP 500 /v1/tournaments/leaderboard"
+    },
+    "epicgames_S30_SoloVictoryCashCup_EU/S30_SoloVictoryCashCup_Event1Round1_EU": {
+      "nextPage": 0,
+      "pages": 0,
+      "complete": false,
+      "coverageLimited": false,
+      "retryAfter": "2026-11-12T15:44:45.092Z",
+      "lastError": "Osirion API HTTP 500 /v1/tournaments/leaderboard"
+    },
+    "epicgames_S43_SquadsVictoryCup_NAW/S43_SquadsVictoryCup_Event1_Round1_NAW": {
+      "nextPage": 0,
+      "pages": 0,
+      "complete": false,
+      "coverageLimited": false,
+      "retryAfter": "2026-11-12T15:44:46.147Z",
+      "lastError": "Osirion API HTTP 500 /v1/tournaments/leaderboard"
+    },
+    "epicgames_S43_SquadsVictoryCup_NAC/S43_SquadsVictoryCup_Event1_Round1_NAC": {
+      "nextPage": 0,
+      "pages": 0,
+      "complete": false,
+      "coverageLimited": false,
+      "retryAfter": "2026-11-12T15:44:47.209Z",
+      "lastError": "Osirion API HTTP 500 /v1/tournaments/leaderboard"
     }
   }
 }
