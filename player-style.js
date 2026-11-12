@@ -377,7 +377,8 @@
     const finalKinds=new Set(['賞金決勝','決勝','Practice決勝','Performance決勝']);
     const finalRows=rows.filter(row=>finalKinds.has(row.kind)&&good(row.rank)&&row.rank>0);
     const finals=summarize(finalRows),finalConf=evidenceLevel(finalRows,'vrs');
-    const scoped=common&&filters.team!=='all';
+    const finalRegionMixed=filters.region==='all'&&new Set(rows.map(r=>r.region)).size>1;
+    const scoped=common&&filters.team!=='all'&&!finalRegionMixed;
     const finalStrength={
       recorded:finalRows.length,top10:finalRows.filter(r=>r.rank<=10).length,
       top3:finalRows.filter(r=>r.rank<=3).length,
@@ -386,7 +387,7 @@
       vrRate:scoped?finals.vrRate:null,
       confidence:finalConf,
       comparable:scoped&&finalConf.level!=='low',
-      reason:!scoped?'シーズン・形式・シリーズ・チーム人数を揃えると決勝VR率を比較できるよ':
+      reason:finalRegionMixed?'複数地域が混在するため、地域も1つに絞ってね':!scoped?'シーズン・形式・シリーズ・チーム人数を揃えると決勝VR率を比較できるよ':
         !finalRows.length?'記録された決勝がありません':
         finalConf.level==='low'?'決勝3開催枠・15試合以上とVR入力75%以上で暫定評価':
         '決勝のみを集計。上位10位率は掲載された決勝の順位で、参加母数・難易度は未補正'
