@@ -1,0 +1,65 @@
+name: Focused failure recheck (diagnostic, not a merge gate)
+
+# Run this manually after fixing failed tests. Earlier full-suite results
+# supply failure IDs. This is NEVER a substitute for required PR checks.
+on:
+  workflow_dispatch:
+    inputs:
+      source_run_id:
+        description: "Earlier Data and site tests run ID (artifacts retained 7 days)"
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  focused:
+    name: Failed tests only (NOT full-suite approval)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '24'
+          cache: npm
+      - name: Check browser test-server JS/CSS references
+        run: node --check scripts/serve.cjs && node scripts/site-assets.cjs
+      - name: Install test dependencies
+        run: npm ci --ignore-scripts
+      - name: Load previous failed-test manifests from same GitHub repository
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SOURCE_RUN_ID: ${{ inputs.source_run_id }}
+        run: |
+          if [[ ! "$SOURCE_RUN_ID" =~ ^[0-9]{1,18}$ ]]; then
+            echo "::error::source_run_id must be a numeric GitHub Actions run ID"
+            exit 1
+          fi
+          gh run download "$SOURCE_RUN_ID" --repo "$GITHUB_REPOSITORY" \
+            --name unit-failure-report --dir .
+          gh run download "$SOURCE_RUN_ID" --repo "$GITHUB_REPOSITORY" \
+            --pattern 'site-test-report-*' --dir .
+          # A single-file GitHub artifact may be extracted without its parent directory.
+          if [[ -f unit-last-failed.json && ! -f test-results/unit-last-failed.json ]]; then
+            mkdir -p test-results
+            mv unit-last-failed.json test-results/unit-last-failed.json
+          fi
+          test -f test-results/unit-last-failed.json
+          node scripts/browser-failure-recheck.cjs merge
+      - name: Rerun failed Node unit test FILES only
+        run: npm run test:failed:unit
+      - name: Install Chromium only when previous PC/mobile run had failures
+        shell: bash
+        run: |
+          if node -e "const fs=require('fs');const j=JSON.parse(fs.readFileSync('test-results/.last-run.json'));process.exit(j.failedTests.length?0:1)"; then
+            npx playwright install --with-deps chromium
+          fi
+      - name: Rerun previously failed PC/mobile test IDS only
+        run: npm run test:failed:e2e
+      - name: Print focused-only validation warning
+        if: always()
+        run: echo "::notice::Focused recheck is diagnostic only. The full required PR CI in tests.yml must still pass before merging."

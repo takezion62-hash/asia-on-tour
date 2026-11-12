@@ -12,6 +12,7 @@ const scheduled={
 const permitted=[
  'auto-sync.yml','history-sync.yml','participation-sync.yml','calendar-history.yml',
  'reviewed-candidate-publication.yml','tests.yml','build-season-data.yml','safe-sync-merge-tests.yml',
+ 'focused-failure-recheck.yml',
  'scan-coverage-tests.yml','calendar.yml','special-achievements.yml',
  'tournament-rules-check.yml','unreal-auto-check.yml','osirion-probe.yml'
 ].sort();
@@ -86,4 +87,18 @@ test('browser suite retains both device projects, bounded concurrency, retries a
  assert.match(config,/trace:\s*'retain-on-failure'/);
  assert.match(config,/screenshot:\s*'only-on-failure'/);
  assert.match(config,/testMatch:\s*'\*\*\/\*\.spec\.cjs'/);
+});
+
+
+test('focused reruns are opt-in diagnostics; normal PR checks still require every unit/browser shard',()=>{
+ const focused=read('focused-failure-recheck.yml'),main=read('tests.yml');
+ assert.match(focused,/workflow_dispatch:/);
+ assert.match(focused,/name: Failed tests only \(NOT full-suite approval\)/);
+ assert.doesNotMatch(focused,/^  push:|^  pull_request:/m);
+ assert.match(focused,/npm run test:failed:unit/);
+ assert.match(focused,/npm run test:failed:e2e/);
+ assert.match(main,/unit-failure-report/);
+ assert.match(main,/test-results\/last-run.json/);
+ assert.match(main,/needs: \[unit, browser\]/);
+ assert.match(main,/if: \$\{\{ always\(\) \}\}/);
 });

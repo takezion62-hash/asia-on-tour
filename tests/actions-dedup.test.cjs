@@ -41,7 +41,12 @@ test('唯一の自動フルCIはPR必須チェック、JSON/単体/全PCスマ�
  assert.match(main,/BROWSER_RESULT: \$\{\{ needs\.browser\.result \}\}/);
  assert.match(main,/cancel-in-progress: true/);
  const pkg=require('../package.json');
- assert.match(pkg.scripts['test:unit'],/tests\/\*\.test\.cjs/);
+ assert.equal(pkg.scripts['test:unit'],'node scripts/unit-test-runner.cjs all');
+ const { listedUnitFiles } = require('../scripts/unit-test-runner.cjs');
+ const allTests = listedUnitFiles();
+ assert.ok(allTests.length > 20,'full suite must still include every unit test file');
+ assert.ok(allTests.includes('tests/actions-dedup.test.cjs'));
+ assert.ok(allTests.every(file => file.startsWith('tests/') && file.endsWith('.test.cjs')));
  assert.match(pkg.scripts['test:e2e'],/playwright test/);
  const config=fs.readFileSync(path.resolve(__dirname,'../playwright.config.cjs'),'utf8');
  assert.match(config,/\*\.spec\.cjs/);
