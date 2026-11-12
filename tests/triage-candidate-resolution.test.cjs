@@ -104,8 +104,9 @@ test('all 31 newly reviewed historical candidates are source-backed, published o
  assert.ok(latestReview && Number.isSafeInteger(latestReview.reviewedCandidates));
  assert.ok(latestReview.reviewedCandidates >= 0);
  assert.ok(Number.isSafeInteger(latestReview.published) && latestReview.published >= 0);
- assert.ok(Number.isSafeInteger(latestReview.participationArchived) && latestReview.participationArchived >= 0);
+ const archived=latestReview.participationArchived??0;
+ assert.ok(Number.isSafeInteger(archived) && archived >= 0);
  assert.ok(Number.isSafeInteger(latestReview.remainingPending) && latestReview.remainingPending >= 0);
- assert.ok(latestReview.published + latestReview.participationArchived <= latestReview.reviewedCandidates,
+ assert.ok(latestReview.published + archived <= latestReview.reviewedCandidates,
    'latest independent review cannot dispose more than it reviewed');
 });

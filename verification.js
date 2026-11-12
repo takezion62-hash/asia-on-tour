@@ -106,7 +106,8 @@
     if(!manifest||!Number.isSafeInteger(manifest.count)||!Array.isArray(manifest.recordOrder)||
        !Array.isArray(manifest.shards))throw Error('成績データの索引形式が不正');
     const groups=await Promise.all(manifest.shards.map(async entry=>{
-      if(!/^source-results\\/(?:S[1-9]\\d*|unknown)\\.json$/.test(entry.file))
+      if(typeof entry.file!=='string'||!entry.file.startsWith('source-results/')||
+         !/^(?:S[1-9][0-9]*|unknown)[.]json$/.test(entry.file.slice('source-results/'.length)))
         throw Error('不正なシーズンファイル');
       const rows=await read(entry.file);
       if(!Array.isArray(rows)||rows.length!==entry.count)
