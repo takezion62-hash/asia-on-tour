@@ -36,7 +36,10 @@ const fixtureData = {
 };
 function productionHelpers(data) {
   const context = vm.createContext({ URL, URLSearchParams, siteData: data });
-  vm.runInContext(source.slice(prefixStart, prefixEnd) +
+  // Production loads these bindings in its async bootstrap before defining the
+  // pure helpers. Reproduce that small bootstrap contract in this isolated VM.
+  const setup = "const initialSeason='S43'; const records=siteData.results; const fullResults=null; const manifest={scopes:{},seasonOrder:[],names:[],previews:{}};\n";
+  vm.runInContext(setup + source.slice(prefixStart, prefixEnd) +
     '\nglobalThis.rankingHelpers = { names, individualPrize, classifyTournamentRecord, confirmedPrizeFinalRank, confirmedSkinReward };',
   context, { timeout: 5000 });
   return { ...context.rankingHelpers, series: data.tournaments.axes.find(axis => axis.key === 'series').options.map(option => option.id) };
