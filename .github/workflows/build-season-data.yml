@@ -9,6 +9,7 @@ on:
       - achievements.js
       - rankings.js
       - scripts/build-season-data.cjs
+      - scripts/publish-reviewed-20261112-batch-next.cjs
       - scripts/build-candidate-triage.cjs
       - scripts/candidate-triage-core.cjs
       - .github/workflows/build-season-data.yml
