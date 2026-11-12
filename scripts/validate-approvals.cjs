@@ -141,7 +141,7 @@ function validNov12ReviewedPolicy(r,entry) {
      r.points === r.vrs * 100;
  if (entry.policy === 'verified-trios-qualifier-participation-zero-cash')
    return eventId === 'S32_TriosCashCup' && roundId.includes('Round1') &&
-     r.kind === '予選' && r.prize === 0 && r.matches <= 10 &&
+     r.kind === '参加確認' && r.prize === 0 && r.matches <= 10 &&
      Array.isArray(r.players) && r.players.length === 3 &&
      new Set(r.players).size === 3;
  return false;
