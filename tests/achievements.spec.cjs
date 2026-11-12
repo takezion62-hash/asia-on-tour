@@ -9,6 +9,28 @@ const roster=row=>Array.isArray(row.players)&&row.players.length?row.players:[ro
 const sample=records.find(row=>row.verified===true&&roster(row).length===1)||records.find(row=>row.verified===true);
 const player=roster(sample)[0];
 
+
+// Full-history achievements must be tested with the exact same records as the
+// season-shard reader. Production no longer requests results.json on page load.
+async function mockResults(page, rows) {
+  const indexed=rows.map((row,index)=>({__aotOrder:index,...row}));
+  const manifest={
+    format:1,total:indexed.length,
+    scopes:{
+      all:{id:'all',label:'全期間',count:indexed.length},
+      S42:{id:'S42',label:'CH7 S4',chapter:7,season:4,count:indexed.length,file:'season-data/S42.json'}
+    },
+    seasonOrder:['S42'],
+    names:[...new Set(indexed.flatMap(row=>Array.isArray(row.players)&&row.players.length?row.players:[row.player]).filter(Boolean))],
+    previews:{}
+  };
+  await page.route('**/season-data/*.json',route=>{
+    const file=new URL(route.request().url()).pathname.split('/').at(-1);
+    const payload=file==='manifest.json'?manifest:indexed;
+    return route.fulfill({status:200,contentType:'application/json',body:JSON.stringify(payload)});
+  });
+}
+
 async function openAwards(page){
   await page.locator('[data-profile-tab="analysis"]').click();
   await page.locator('[data-analysis-fold="awards"] > summary').click();
@@ -84,7 +106,7 @@ test('選手名鑑の称号プレビューから本人プロフィールへ移�
 
 test('確認されていない結果だけでは称号は獲得できず、空の状態も案内する',async({page})=>{
   const onlyOne={...sample,id:'achievements-unverified-test',verified:false,reported:true,vrs:15,prize:99999,kind:'賞金決勝',rank:1};
-  await page.route('**/results.json',route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify([onlyOne])}));
+  await mockResults(page, [onlyOne]);
   await page.goto('/?season=all#player='+encodeURIComponent(player));
   await openAwards(page);
   await expandAchievements(page);
@@ -149,9 +171,7 @@ test('0キル現金賞金の特別称号は本人の個人賞金と明示0キル
   const name=(row.players||[row.player])[0];
   const valid={...row,id:'test-special-0kill-cash',player:name,players:[name],kills:0,vrs:0,rank:21,prize:100,verified:true};
   const reported={...valid,id:'test-reported',verified:false,kills:0,prize:500};
-  await page.route('**/results.json',route=>route.fulfill({
-    status:200,contentType:'application/json',body:JSON.stringify([valid,reported])
-  }));
+  await mockResults(page, [valid,reported]);
   await page.goto('/?season=all#player='+encodeURIComponent(name));
   await openAwards(page);
   await expandAchievements(page);
@@ -171,7 +191,7 @@ test('破壊神は人数別の高キル基準、ダブルクラウンはレア�
   expect(row,'ソロの確認済み賞金決勝記録').toBeTruthy();
   const name=row.player;
   const edited={...row,id:'test-destruction-solo-65',kills:65,vrs:1,prize:100,verified:true};
-  await page.route('**/results.json',route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify([edited])}));
+  await mockResults(page, [edited]);
   await page.goto('/?season=all#player='+encodeURIComponent(name));
   await openAwards(page);
   await expandAchievements(page);
@@ -233,7 +253,7 @@ test('二刀流→三刀流→四刀流はソロからスクワッドまでの�
     .find(x=>x.id==='solo-and-team-cash');
   expect(expected.title).toBe('四刀流');
   expect(expected.progress).toBe(4);
-  await page.route('**/results.json',route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify(rows)}));
+  await mockResults(page, rows);
   await page.goto('/?season=all#player='+encodeURIComponent(name));
   await openAwards(page);
   await expandAchievements(page);
@@ -259,7 +279,7 @@ test('ソロ累計キル称号は一覧を開いて確認でき、デュオの�
     {...source,id:'solo-cumulative-final',player:name,players:[name],event:'Solo Victory Cup',kind:'賞金決勝',kills:25,verified:true},
     {...source,id:'duo-kills-excluded',player:name+' / Partner',players:[name,'Partner'],event:'Duos Cash Cup',kills:999,verified:true}
   ];
-  await page.route('**/results.json',route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify(rows)}));
+  await mockResults(page, rows);
   await page.goto('/?season=all#player='+encodeURIComponent(name));
   await openAwards(page);
   await expect(page.locator('#profile-achievements .achievement-collection')).not.toHaveAttribute('open','');
@@ -299,9 +319,7 @@ test('12個の追加称号はPC・スマホの折りたたみプロフィール�
     'zero-build-champion','fncs-finalist','seven-day-traveler']){
     expect(expected.achievements.find(x=>x.id===id).unlocked,id).toBe(true);
   }
-  await page.route('**/results.json',route=>route.fulfill({
-    status:200,contentType:'application/json',body:JSON.stringify(rows)
-  }));
+  await mockResults(page, rows);
   await page.goto('/?season=all#player='+encodeURIComponent(name));
   await openAwards(page);
   const gallery=page.locator('#profile-achievements .achievement-collection');
@@ -337,9 +355,7 @@ test('三冠の支配者はソロ・デュオ・トリオの確認済みVRでエ
  const triple=expected.special.achievements.find(badge=>badge.id==='triple-format-vr');
  expect(triple.unlocked).toBe(true);
  expect(triple.rarity).toBe('epic');
- await page.route('**/results.json',route=>route.fulfill({
-   status:200,contentType:'application/json',body:JSON.stringify([solo,duo,trio])
- }));
+ await mockResults(page, [solo,duo,trio]);
  await page.goto('/?season=all#player='+encodeURIComponent(name));
   await openAwards(page);
  await expandAchievements(page);
@@ -359,7 +375,7 @@ test('秘密の称号は未解放時に名前・条件を伏せ、通常8つの�
   const name=roster(source)[0];
   const row={...source,id:'secret-locked-test',event:'Solo Victory Cup Battle Royale',
     date:'2026-10-01',player:name,players:[name],kind:'予選',rank:20,kills:0,vrs:0,prize:null,verified:true};
-  await page.route('**/results.json',route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify([row])}));
+  await mockResults(page, [row]);
   await page.goto('/?season=all#player='+encodeURIComponent(name));
   await openAwards(page);
   await expect(page.locator('#profile-achievements .achievement-collection')).not.toHaveAttribute('open','');
@@ -387,7 +403,7 @@ test('無音の王冠はソロ決勝0K・0VR・個人賞金で解放し難易度
   const name=roster(source)[0];
   const row={...source,id:'silent-crown-unlocked',event:'Solo Victory Cup Battle Royale',
     date:'2026-10-01',player:name,players:[name],kind:'賞金決勝',rank:13,kills:0,vrs:0,prize:100,verified:true};
-  await page.route('**/results.json',route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify([row])}));
+  await mockResults(page, [row]);
   await page.goto('/?season=all#player='+encodeURIComponent(name));
   await openAwards(page);
   await expandAchievements(page);
@@ -428,7 +444,7 @@ test('11種すべての秘密称号は確認済み複合戦績で解放し、完
   expect(report.secret.total).toBe(11);
   expect(report.secret.earned).toBe(11);
   expect(report.special.total).toBe(31);
-  await page.route('**/results.json',route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify(rows)}));
+  await mockResults(page, rows);
   await page.goto('/?season=all#player='+encodeURIComponent(name));
   await openAwards(page);
   await expandAchievements(page);
