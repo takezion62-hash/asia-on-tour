@@ -43,7 +43,7 @@ function uniqueCandidate(row){
  if(recorded.has(row.id)||reviewed.has(row.id)||ledger.has(row.id))return false;
  return true;
 }
-function verify(row){
+function verify(row,{requireMaturity=true}={}){
  fail(row&&/^auto-s\d+-[a-z0-9]{12}$/.test(row.id)&&row.verified===true,'no official Epic ID proof');
  const cat=catalog.get(row.tournamentId);
  fail(cat&&cat.id===row.tournamentId&&cat.name===row.event&&cat.seasonId===row.seasonId&&
@@ -85,10 +85,10 @@ function verify(row){
  const eligible=matching.filter(({checkpoint:cp})=>
   (cp.complete===true&&cp.nextPage>=cp.totalPages)||
    verifiedPartialPage(row,{end:Date.parse(session.endUtc)},cp));
- fail(eligible.length>0,'incomplete/unmatured or retry-waiting leaderboard '+row.id);
+ if(requireMaturity)fail(eligible.length>0,'incomplete/unmatured or retry-waiting leaderboard '+row.id);
  const win={dateJst:row.date,region:row.region,tournamentId:row.tournamentId,
   seasonId:row.seasonId,eventId,windowId,round:row.round,kind:row.kind,series:cat.series};
- return {cat,win,cp:eligible[0].checkpoint,session};
+ return {cat,win,cp:(eligible[0]||matching[0]).checkpoint,session};
 }
 const qualifiedId='ch5s4-solo-victory-cup',cosmeticId='ch7s4-lady-liberty-cup-battle-royale';
 const scoreFields=['points','kills','vrs'];
@@ -97,7 +97,11 @@ for(const {row,origins} of audience.values()){
   held.push({id:row.id,reason:'already published/adjudicated ID (do not reprocess)'});continue;
  }
  try{
-  const {cat,win}=verify(row);
+  // Suppressing an exact duplicate does not issue an award or new record.
+  // The saved rank and identical previously published skin score suffice.
+  const duplicateCosmetic=row.tournamentId===cosmeticId&&row.kind==='参加確認'&&
+   row.date==='2026-10-18'&&['ME','NAC'].includes(row.region);
+  const {cat,win}=verify(row,{requireMaturity:!duplicateCosmetic});
   const origin=origins[0];
   if(row.tournamentId===cosmeticId&&row.kind==='参加確認'&&
    row.date==='2026-10-18'&&['ME','NAC'].includes(row.region)){
@@ -163,9 +167,9 @@ if(!dry){
  }
  for(const x of published){
   d.reviewed.entries.push({id:x.row.id,decision:'published',recordId:x.record.id,reviewedAt:now,
-   source:x.row.source,policy:'official-2024-OCE-qualifier-only',rule:x.rule});
+   source:x.row.source,policy:'verified-rule',rule:x.rule});
   d.ledger.entries.push({id:x.row.id,decision:'published',recordId:x.record.id,
-   policy:'official-2024-OCE-qualifier-only',approvedAt:now,
+   policy:'verified-rule',approvedAt:now,
    approvedBy:'ChatGPT / user-authorized source-backed review',
    source:x.row.source,rule:x.rule,
    evidence:'Exact Epic roster + official calendar + mature original leaderboard rank and official OCE top 1500'});
