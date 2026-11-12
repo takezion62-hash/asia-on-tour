@@ -96,6 +96,7 @@
     var q=input.value.trim().slice(0,160),date=$('#quickfind-date').value,region=$('#quickfind-region').value;
     $('#quickfind-period').textContent=bridge.seasonLabel()+'の掲載記録を検索中';
     if(!q&&!date&&(region==='all'||!region)){
+      var counts=$('#quickfind-counts');if(counts)counts.textContent='';
       host.innerHTML='<div class="quickfind-prompt"><h2>大会も選手も、ここから一度に探せるよ</h2>'+
         '<p>名前・大会名・開催日・地域を組み合わせて入力。例： <button type="button" data-quick-example="ME 2026/09/22">ME 2026/09/22</button> '+
         '<button type="button" data-quick-example="Victory Cup">Victory Cup</button></p>'+
@@ -144,6 +145,7 @@
     if(result.limit){var status=$('#quickfind-save-status');if(status)status.textContent='お気に入りは最大'+core.MAX_FAVORITES+'名まで登録できるよ';return;}
     if(!result.changed)return;
     favorites=result.items;revision++;
+    var status=$('#quickfind-save-status');if(status)status.textContent='';
     core.saveFavorites(safeStorage(),favorites,known());
     syncButtons();
     favoritesMarkup();
