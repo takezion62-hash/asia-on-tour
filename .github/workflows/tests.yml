@@ -69,6 +69,8 @@ jobs:
         run: npm run validate
       - name: Tracker実績の安全な事前反映テスト（書込なし）
         run: node scripts/apply-verified-tracker-finals.cjs --dry-run
+      - name: S43 NAW Squads決勝3組の本人・賞金・重複検証（書込なし）
+        run: node scripts/apply-verified-s43-squads-finals.cjs --dry-run
       - name: データ専用PRは一時的にシーズン索引を再生成して検査
         if: needs.classify.outputs.mode == 'data'
         run: node scripts/build-season-data.cjs
