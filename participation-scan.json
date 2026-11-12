@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-11-11T22:01:40.118Z",
+  "checkedAt": "2026-11-12T03:39:55.392Z",
   "windows": {
     "epicgames_S42_InoxtagIconCup_NAW/S42_InoxtagIconCup_NAW": {
       "nextPage": 50,
@@ -489,12 +489,12 @@
       "emptyAttempts": 0
     },
     "epicgames_S30_SoloVictoryCashCup_OCE/S30_SoloVictoryCashCup_Event1Round1_OCE": {
-      "nextPage": 2,
-      "pages": 2,
+      "nextPage": 12,
+      "pages": 12,
       "complete": false,
       "coverageLimited": false,
       "totalPages": 100,
-      "lastScanned": "2026-11-07T21:24:21.938Z",
+      "lastScanned": "2026-11-12T03:39:41.680Z",
       "emptyAttempts": 0
     },
     "epicgames_S43_TriosCashCup_NAC/S43_TriosCashCup_Event1_NAC": {
@@ -723,12 +723,12 @@
       "emptyAttempts": 0
     },
     "epicgames_S33_SoloCashCup_NAW/S33_SoloCashCup_Event3Round1_NAW": {
-      "nextPage": 50,
-      "pages": 50,
-      "complete": false,
-      "coverageLimited": false,
+      "nextPage": 60,
+      "pages": 60,
+      "complete": true,
+      "coverageLimited": true,
       "totalPages": 100,
-      "lastScanned": "2026-11-11T22:01:36.581Z",
+      "lastScanned": "2026-11-12T03:39:55.392Z",
       "emptyAttempts": 0
     },
     "epicgames_S43_ArenaCashCup_NAW/S43_ArenaCashCup_Event1_NAW": {
@@ -741,12 +741,12 @@
       "emptyAttempts": 0
     },
     "epicgames_S30_SoloVictoryCashCup_ME/S30_SoloVictoryCashCup_Event1Round2_ME": {
-      "nextPage": 6,
-      "pages": 6,
+      "nextPage": 16,
+      "pages": 16,
       "complete": false,
       "coverageLimited": false,
       "totalPages": 19,
-      "lastScanned": "2026-11-11T15:37:03.796Z",
+      "lastScanned": "2026-11-12T03:39:47.616Z",
       "emptyAttempts": 0
     },
     "epicgames_S30_SoloZBVictoryCashCup_ME/S30_SoloZBVictoryCashCup_Event1Round2_ME": {
@@ -756,6 +756,15 @@
       "coverageLimited": false,
       "totalPages": 18,
       "lastScanned": "2026-11-11T22:01:40.118Z",
+      "emptyAttempts": 0
+    },
+    "epicgames_S43_ArenaCashCup_NAC/S43_ArenaCashCup_Event1_NAC": {
+      "nextPage": 10,
+      "pages": 10,
+      "complete": false,
+      "coverageLimited": false,
+      "totalPages": 83,
+      "lastScanned": "2026-11-12T03:39:29.765Z",
       "emptyAttempts": 0
     }
   }
