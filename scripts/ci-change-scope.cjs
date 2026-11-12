@@ -5,7 +5,6 @@ const fs = require('node:fs');
 const { execFileSync } = require('node:child_process');
 
 const DIRECT_DATA = new Set(['results.json', 'players.json', 'tournaments.json', 'updates.json']);
-const SEASON_DATA = /^season-data\/(?:S[0-9]+|unknown|manifest|ranking-(?:S[0-9]+|unknown|all))\.json$/;
 
 function classify(files) {
   if (!Array.isArray(files) || files.length === 0) return {mode:'full',reason:'no-changes'};
@@ -15,7 +14,7 @@ function classify(files) {
       return {mode:'full',reason:'unsafe-change-type'};
     const p = item.path;
     if (typeof p !== 'string' || p.includes('\0') ||
-        !(DIRECT_DATA.has(p) || SEASON_DATA.test(p)))
+        !DIRECT_DATA.has(p))
       return {mode:'full',reason:'code-or-unknown-change'};
   }
   return {mode:'data',reason:'allowlisted-json-only'};
