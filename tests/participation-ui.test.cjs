@@ -3,7 +3,9 @@ const test=require('node:test'),assert=require('node:assert/strict');
 const fs=require('node:fs'),path=require('node:path');
 const root=path.resolve(__dirname,'..'),read=file=>fs.readFileSync(path.join(root,file),'utf8');
 test('participation panel is separate from money-backed results and has lazy player profile hook',()=>{
- const html=read('index.html'),app=read('app.js'),ui=read('participation-ui.js'),serve=read('scripts/serve.cjs');
+ const html=read('index.html'),app=read('app.js'),ui=read('participation-ui.js');
+ const { buildFileMap } = require('../scripts/serve.cjs');
+ const publicRoutes = buildFileMap(root);
  for(const id of ['participation-archive','participation-month','participation-search','participation-region','participation-table','participation-status']){
   assert.ok(html.includes('id="'+id+'"'),id);
  }
@@ -11,7 +13,8 @@ test('participation panel is separate from money-backed results and has lazy pla
  assert.ok(app.includes('window.AOTParticipation?.renderProfile(info.name)'));
  assert.ok(ui.includes('getMonth(chosen)')&&ui.includes('getIndex()'));
  assert.doesNotMatch(ui,/load\(['\"]results\.json['\"]\)|AotPR\.calculate|prizePerPlayer/,'participation browsing must remain separate from prize/PR calculations');
- assert.ok(serve.includes("'participation-index.json'")&&serve.includes("'/participation/'"));
+ assert.equal(publicRoutes.get('/participation-index.json'), 'participation-index.json');
+ assert.equal(publicRoutes.get('/participation/2026-10.json'), 'participation/2026-10.json');
  assert.doesNotThrow(()=>new Function(ui));
  assert.doesNotThrow(()=>new Function(app));
 });

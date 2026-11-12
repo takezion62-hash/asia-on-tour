@@ -26,6 +26,8 @@ jobs:
         with:
           node-version: '24'
           cache: npm
+      - name: HTMLの公開JS/CSS参照を先に検証
+        run: node --check scripts/serve.cjs && node scripts/site-assets.cjs
       - name: 最小のテスト依存を導入
         run: npm ci --ignore-scripts
       - name: JSON構造・参照・現金賞金を検証
@@ -52,6 +54,8 @@ jobs:
         with:
           node-version: '24'
           cache: npm
+      - name: HTMLの公開JS/CSS参照を先に検証
+        run: node --check scripts/serve.cjs && node scripts/site-assets.cjs
       - name: 最小のテスト依存を導入
         run: npm ci --ignore-scripts
       - name: Chromiumを準備
