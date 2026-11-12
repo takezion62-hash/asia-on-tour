@@ -19,6 +19,8 @@ const ROOT = path.resolve(__dirname, '..');
 const TARGET = path.join(ROOT, 'source-results');
 const sha = data => crypto.createHash('sha256').update(data).digest('hex');
 const currencyCents = value => {
+  // Missing payout is unconfirmed, not confirmed $0; preserve it losslessly.
+  if (value == null) return null;
   if (typeof value !== 'number' || !Number.isFinite(value) || value < 0 ||
       !Number.isSafeInteger(Math.round(value * 100)) ||
       Math.abs(value * 100 - Math.round(value * 100)) > 0.000001)
@@ -35,7 +37,7 @@ function buildSnapshot(records, sourceText, determineSeason = row => seasonOf(ro
   if (typeof sourceText !== 'string' || !sourceText.length)
     throw new Error('Canonical source bytes are required');
   const groups = new Map(), ids = new Set(), order = [];
-  let totalPrizeCents = 0, totalPersonalCents = 0;
+  let totalPrizeCents = 0, totalPersonalCents = 0, unconfirmedPrizeRecords = 0;
   for (const record of records) {
     if (!record || typeof record !== 'object' || Array.isArray(record) ||
         typeof record.id !== 'string' || !record.id ||
@@ -47,7 +49,9 @@ function buildSnapshot(records, sourceText, determineSeason = row => seasonOf(ro
     if (!seasonName(name)) throw new Error('Invalid season bucket: ' + name);
     if (!groups.has(name)) groups.set(name, []);
     groups.get(name).push(record);
-    totalPrizeCents += currencyCents(record.prize);
+    const prize = currencyCents(record.prize);
+    if (prize == null) unconfirmedPrizeRecords++;
+    else totalPrizeCents += prize;
     totalPersonalCents += personalAwardCents(record);
   }
   if (!groups.has('unknown')) groups.set('unknown', []);
@@ -64,7 +68,8 @@ function buildSnapshot(records, sourceText, determineSeason = row => seasonOf(ro
     shards.push({
       seasonId:name, file:'source-results/' + name + '.json',
       count:array.length,
-      teamPrizeCents:array.reduce((sum,r) => sum + currencyCents(r.prize),0),
+      teamPrizeCents:array.reduce((sum,r) => sum + (currencyCents(r.prize) ?? 0),0),
+      unconfirmedPrizeRecords:array.filter(r=>r.prize == null).length,
       personalPrizeCents:array.reduce((sum,r) => sum + personalAwardCents(r),0),
       sha256:sha(content)
     });
@@ -76,6 +81,7 @@ function buildSnapshot(records, sourceText, determineSeason = row => seasonOf(ro
     canonicalSha256:sha(sourceText),
     count:records.length,
     teamPrizeCents:totalPrizeCents,
+    unconfirmedPrizeRecords,
     personalPrizeCents:totalPersonalCents,
     // Needed to reconstruct exact original ordering without changing a record.
     recordOrder:order,
@@ -104,7 +110,7 @@ function verifyRoundTrip(directory, original, expected) {
   if (JSON.stringify(manifest) !== JSON.stringify(expected.manifest))
     throw new Error('Snapshot manifest differs from source');
   const found = new Map(), ids = new Set();
-  let teamPrizeCents = 0, personalPrizeCents = 0;
+  let teamPrizeCents = 0, personalPrizeCents = 0, unconfirmedPrizeRecords = 0;
   for (const entry of manifest.shards) {
     const file = path.join(directory,path.basename(entry.file));
     const contents = fs.readFileSync(file,'utf8');
@@ -113,22 +119,27 @@ function verifyRoundTrip(directory, original, expected) {
     const rows = JSON.parse(contents);
     if (!Array.isArray(rows) || rows.length !== entry.count)
       throw new Error('Shard count mismatch: ' + entry.file);
-    let prize = 0, personal = 0;
+    let prize = 0, personal = 0, unknown = 0;
     for (const row of rows) {
       if (!row || typeof row.id !== 'string' || ids.has(row.id))
         throw new Error('Lost or duplicate record during reconstruction: ' + row?.id);
       ids.add(row.id);
       found.set(row.id,row);
-      prize += currencyCents(row.prize);
+      const amount = currencyCents(row.prize);
+      if (amount == null) unknown++;
+      else prize += amount;
       personal += personalAwardCents(row);
     }
-    if (prize !== entry.teamPrizeCents || personal !== entry.personalPrizeCents)
+    if (prize !== entry.teamPrizeCents || personal !== entry.personalPrizeCents ||
+        unknown !== entry.unconfirmedPrizeRecords)
       throw new Error('Shard prize mismatch: ' + entry.file);
     teamPrizeCents += prize;
     personalPrizeCents += personal;
+    unconfirmedPrizeRecords += unknown;
   }
   if (ids.size !== original.length || ids.size !== manifest.count ||
       teamPrizeCents !== manifest.teamPrizeCents ||
+      unconfirmedPrizeRecords !== manifest.unconfirmedPrizeRecords ||
       personalPrizeCents !== manifest.personalPrizeCents ||
       manifest.recordOrder.length !== original.length)
     throw new Error('Global count, ID or prize total differs from canonical results');
@@ -137,7 +148,7 @@ function verifyRoundTrip(directory, original, expected) {
     if (id !== original[i].id || JSON.stringify(found.get(id)) !== JSON.stringify(original[i]))
       throw new Error('Lossless reconstruction failed at canonical index ' + i + ' / ' + id);
   }
-  return {records:ids.size,teamPrizeCents,personalPrizeCents,
+  return {records:ids.size,teamPrizeCents,personalPrizeCents,unconfirmedPrizeRecords,
     seasons:manifest.shards.length};
 }
 
@@ -170,7 +181,8 @@ if (require.main === module) {
   const result=syncSnapshot({check});
   console.log('Canonical source snapshot '+(check?'verified':'generated')+': '+
     result.records+' records, '+result.seasons+' shards, team prize cents '+
-    result.teamPrizeCents+', personal prize cents '+result.personalPrizeCents+
+    result.teamPrizeCents+', unconfirmed prize records '+result.unconfirmedPrizeRecords+
+    ', personal prize cents '+result.personalPrizeCents+
     ' (results.json unchanged)');
 }
 module.exports={buildSnapshot,checkContents,verifyRoundTrip,syncSnapshot,currencyCents};
