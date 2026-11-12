@@ -48,6 +48,8 @@
     const updateEntries=siteData.updates?.entries||[];
     const candidates=siteData.players.candidates;
     const regions=['ME','EU','NAC','NAW','OCE','BR'];
+    const discovery=window.AOTDiscovery;
+    if(!discovery||discovery.VERSION!==1)throw new Error('Unified discovery module missing');
     const $=s=>document.querySelector(s);
     const rawAll=()=>fullResults||builtIn;
     let selectedSeason=initialSeason;
@@ -271,7 +273,7 @@
     }
 
     const tournamentForRecord=classifyTournamentRecord;
-    const tournamentDefaultFilters=()=>({series:'all',mode:'all',subtype:'all',team:'all',platform:'all',stage:'all',q:''});
+    const tournamentDefaultFilters=()=>({series:'all',mode:'all',subtype:'all',team:'all',platform:'all',stage:'all',q:'',date:'',region:'all',player:''});
     let tournamentBrowseFilters=tournamentDefaultFilters();
     function tournamentLabel(axis,value){return tournamentAxes.find(a=>a.key===axis)?.options.find(o=>o.id===value)?.label||'未確認'}
     const tournamentAxisValues=(t,key)=>key==='series'?[t.series,...(Array.isArray(t.additionalSeries)?t.additionalSeries:[])]:[t[key]];
@@ -279,12 +281,18 @@
       const result=tournamentDefaultFilters();
       for(const axis of tournamentAxes)if(axis.options.some(o=>o.id===filters[axis.key]))result[axis.key]=filters[axis.key];
       if(all().some(e=>e.kind===filters.stage))result.stage=filters.stage;
-      result.q=typeof filters.q==='string'?filters.q:'';
+      result.q=typeof filters.q==='string'?filters.q.slice(0,160):'';
+      result.date=typeof filters.date==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(filters.date)
+        &&Number.isFinite(Date.parse(filters.date))
+        &&new Date(filters.date).toISOString().slice(0,10)===filters.date?filters.date:'';
+      result.region=regions.includes(filters.region)?filters.region:'all';
+      result.player=typeof filters.player==='string'?filters.player.slice(0,80):'';
       return result;
     }
     function tournamentSearchHash(filters={}){
       const f=sanitizeTournamentFilters(filters),params=new URLSearchParams();
-      for(const key of [...tournamentAxes.map(a=>a.key),'stage','q'])if(f[key]&&f[key]!=='all')params.set(key,f[key]);
+      for(const key of [...tournamentAxes.map(a=>a.key),'stage','q','date','region','player'])
+        if(f[key]&&f[key]!=='all')params.set(key,f[key]);
       return '#tournaments'+(params.size?'?'+params.toString():'');
     }
 
@@ -369,7 +377,14 @@
     function tournamentTags(e){const t=classifyTournamentRecord(e);return `<div class="tournament-tags" data-record-classification="${escape(e.id)}">${tournamentAxes.flatMap(axis=>tournamentAxisValues(t,axis.key).map(value=>`<a class="tournament-tag${value==='unknown'?' is-unknown':''}" data-axis="${escape(axis.key)}" data-tournament-tag="${escape(axis.key+':'+value)}" href="${escape(tournamentSearchHref(axis.key,value,false))}" title="${escape(axis.label+'：'+tournamentLabel(axis.key,value))}"><span class="sr-only">${escape(axis.label)}：</span>${escape(tournamentLabel(axis.key,value))}</a>`)).join('')}</div>`}
     function tournamentRecordsMatch(e,filters,skipAxis){
       const t=classifyTournamentRecord(e);
-      return tournamentAxes.every(axis=>axis.key===skipAxis||filters[axis.key]==='all'||tournamentAxisValues(t,axis.key).includes(filters[axis.key]))&&(filters.stage==='all'||e.kind===filters.stage)&&(!filters.q||[t.name,...tournamentAxes.flatMap(a=>tournamentAxisValues(t,a.key).map(value=>tournamentLabel(a.key,value))),t.seasonId].some(s=>String(s).toLowerCase().includes(filters.q.trim().toLowerCase())));
+      if(!tournamentAxes.every(axis=>axis.key===skipAxis||filters[axis.key]==='all'||tournamentAxisValues(t,axis.key).includes(filters[axis.key]))
+         ||filters.stage!=='all'&&e.kind!==filters.stage)return false;
+      return discovery.matchRecord(e,filters,{
+        tournament:t,
+        aliases:siteData.players.confirmedAliases||{},
+        labels:[...tournamentAxes.flatMap(a=>tournamentAxisValues(t,a.key).map(value=>tournamentLabel(a.key,value))),
+          {ME:'中東',EU:'ヨーロッパ',NAC:'北米中部',NAW:'北米西部',OCE:'オセアニア',BR:'ブラジル'}[e.region]||'']
+      });
     }
     function tournamentFilterCounts(axis,filters={}){
       const f=sanitizeTournamentFilters(filters),counts=new Map();
