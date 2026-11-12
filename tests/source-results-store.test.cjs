@@ -71,7 +71,7 @@ test('rejects corrupted shards, mismatched projections, ID collisions and accide
 test('legacy compatibility rejects rewriting a previously published score',t=>{
  const root=fixture(t);
  const changed=sourceRows.map((row,i)=>i===0?{...row,prize:9999}:row);
- fs.writeFileSync(path.join(root,'results.json'),JSON.stringify(changed,null,2)+'\\n');
+ fs.writeFileSync(path.join(root,'results.json'),JSON.stringify(changed,null,2)+'\n');
  assert.throws(()=>importLegacy(root),/legacy writer altered existing record/);
 });
 test('explicit migration bridge updates authoritative shards from a vetted legacy writer',t=>{
