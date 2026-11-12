@@ -35,7 +35,7 @@ const fixtureData = {
   tournaments: { axes: published.tournaments.axes, catalog: categories }
 };
 function productionHelpers(data) {
-  const context = vm.createContext({ URL, URLSearchParams, siteData: data });
+  const context = vm.createContext({ window: { AOTDiscovery: require('../discovery.js') }, URL, URLSearchParams, siteData: data });
   // Production loads these bindings in its async bootstrap before defining the
   // pure helpers. Reproduce that small bootstrap contract in this isolated VM.
   const setup = "const initialSeason='S43'; const records=siteData.results; const fullResults=null; const manifest={scopes:{},seasonOrder:[],names:[],previews:{}};\n";
