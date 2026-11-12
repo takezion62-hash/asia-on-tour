@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-11-12T05:13:53.928Z",
+  "checkedAt": "2026-11-12T09:13:51.849Z",
   "windows": {
     "epicgames_S43_PerformanceEvaluationTrios_EU/S43_PerformanceEvaluation_Event1Round1_EU": {
       "nextPage": 7,
@@ -2549,12 +2549,17 @@
         }
       ],
       "pages": 88,
-      "lastAttemptAt": "2026-11-12T05:13:47.305Z",
+      "lastAttemptAt": "2026-11-12T09:13:36.268Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
       "lastSeenRank": 8800,
       "lastSuccessAt": "2026-11-12T05:13:48.808Z",
-      "totalPages": 100
+      "totalPages": 100,
+      "errorAttempts": 1,
+      "retryAfter": "2026-11-12T15:13:37.522Z",
+      "lastError": "Osirion API HTTP 500 /v1/tournaments/leaderboard",
+      "lastErrorPage": 88,
+      "lastErrorCode": "OSIRION_TRANSIENT"
     },
     "epicgames_S43_ReloadZBDuosCashCup_ME/S43_ReloadZBDuosCashCup_Event1Round1_ME": {
       "nextPage": 53,
@@ -2859,12 +2864,17 @@
         }
       ],
       "pages": 53,
-      "lastAttemptAt": "2026-11-12T05:13:48.808Z",
+      "lastAttemptAt": "2026-11-12T09:13:37.523Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
       "lastSeenRank": 5300,
       "lastSuccessAt": "2026-11-12T05:13:49.968Z",
-      "totalPages": 100
+      "totalPages": 100,
+      "errorAttempts": 1,
+      "retryAfter": "2026-11-12T15:13:38.844Z",
+      "lastError": "Osirion API HTTP 500 /v1/tournaments/leaderboard",
+      "lastErrorPage": 53,
+      "lastErrorCode": "OSIRION_TRANSIENT"
     },
     "epicgames_S43_ReloadZBDuosCashCup_BR/S43_ReloadZBDuosCashCup_Event1Round1_BR": {
       "nextPage": 39,
@@ -2905,12 +2915,17 @@
         }
       ],
       "pages": 39,
-      "lastAttemptAt": "2026-11-12T05:13:49.968Z",
+      "lastAttemptAt": "2026-11-12T09:13:38.844Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
       "lastSeenRank": 3900,
       "lastSuccessAt": "2026-11-12T05:13:51.205Z",
-      "totalPages": 100
+      "totalPages": 100,
+      "errorAttempts": 1,
+      "retryAfter": "2026-11-12T15:13:40.076Z",
+      "lastError": "Osirion API HTTP 500 /v1/tournaments/leaderboard",
+      "lastErrorPage": 39,
+      "lastErrorCode": "OSIRION_TRANSIENT"
     },
     "epicgames_S42_ConsoleVCC_SolosZB_NAW/S42_ConsoleVCC_SolosZB_Event8Round2_NAW": {
       "nextPage": 10,
@@ -5412,12 +5427,17 @@
         }
       ],
       "pages": 27,
-      "lastAttemptAt": "2026-11-12T05:13:52.833Z",
+      "lastAttemptAt": "2026-11-12T09:13:41.217Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
       "lastSeenRank": 2700,
       "lastSuccessAt": "2026-11-12T05:13:53.920Z",
-      "totalPages": 89
+      "totalPages": 89,
+      "errorAttempts": 1,
+      "retryAfter": "2026-11-12T15:13:51.820Z",
+      "lastError": "Osirion API HTTP 500 /v1/tournaments/leaderboard",
+      "lastErrorPage": 27,
+      "lastErrorCode": "OSIRION_TRANSIENT"
     },
     "epicgames_S42_ConsoleVCC_SolosZB_BR/S42_ConsoleVCC_SolosZB_Event8Round1_BR": {
       "nextPage": 100,
@@ -6446,12 +6466,17 @@
         }
       ],
       "pages": 22,
-      "lastAttemptAt": "2026-11-12T05:13:51.205Z",
+      "lastAttemptAt": "2026-11-12T09:13:40.076Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
       "lastSeenRank": 2200,
       "lastSuccessAt": "2026-11-12T05:13:52.833Z",
-      "totalPages": 70
+      "totalPages": 70,
+      "errorAttempts": 1,
+      "retryAfter": "2026-11-12T15:13:41.217Z",
+      "lastError": "Osirion API HTTP 500 /v1/tournaments/leaderboard",
+      "lastErrorPage": 22,
+      "lastErrorCode": "OSIRION_TRANSIENT"
     },
     "epicgames_S42_ConsoleVCC_SolosZB_ME/S42_ConsoleVCC_SolosZB_Event8Round1_ME": {
       "nextPage": 100,
@@ -10654,12 +10679,17 @@
         }
       ],
       "pages": 70,
-      "lastAttemptAt": "2026-11-12T05:13:09.283Z",
+      "lastAttemptAt": "2026-11-12T09:13:31.249Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
       "lastSeenRank": 7000,
       "lastSuccessAt": "2026-11-12T05:13:10.205Z",
-      "totalPages": 84
+      "totalPages": 84,
+      "errorAttempts": 1,
+      "retryAfter": "2026-11-12T15:13:32.657Z",
+      "lastError": "Osirion API HTTP 500 /v1/tournaments/leaderboard",
+      "lastErrorPage": 70,
+      "lastErrorCode": "OSIRION_TRANSIENT"
     },
     "epicgames_S42_ReloadReloadSoloVictoryCup_NAC/S42_ReloadSoloVictoryCup_Event5_Round2_NAC": {
       "nextPage": 8,
@@ -10910,12 +10940,17 @@
         }
       ],
       "pages": 60,
-      "lastAttemptAt": "2026-11-12T05:13:27.425Z",
+      "lastAttemptAt": "2026-11-12T09:13:32.657Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
       "lastSeenRank": 6000,
       "lastSuccessAt": "2026-11-12T05:13:28.747Z",
-      "totalPages": 100
+      "totalPages": 100,
+      "errorAttempts": 1,
+      "retryAfter": "2026-11-12T15:13:33.761Z",
+      "lastError": "Osirion API HTTP 500 /v1/tournaments/leaderboard",
+      "lastErrorPage": 60,
+      "lastErrorCode": "OSIRION_TRANSIENT"
     },
     "epicgames_S42_ReloadReloadSoloVictoryCup_BR/S42_ReloadSoloVictoryCup_Event5_Round2_BR": {
       "nextPage": 4,
@@ -10934,24 +10969,46 @@
       "complete": false,
       "proposals": [],
       "pages": 35,
-      "lastAttemptAt": "2026-11-12T05:13:40.666Z",
+      "lastAttemptAt": "2026-11-12T09:13:33.761Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
       "lastSeenRank": 3500,
       "lastSuccessAt": "2026-11-12T05:13:41.712Z",
-      "totalPages": 80
+      "totalPages": 80,
+      "errorAttempts": 1,
+      "retryAfter": "2026-11-12T15:13:35.149Z",
+      "lastError": "Osirion API HTTP 500 /v1/tournaments/leaderboard",
+      "lastErrorPage": 35,
+      "lastErrorCode": "OSIRION_TRANSIENT"
     },
     "epicgames_S42_ReloadReloadSoloVictoryCup_EU/S42_ReloadSoloVictoryCup_Event5_Round2_EU": {
       "nextPage": 10,
       "complete": false,
       "proposals": [],
       "pages": 10,
-      "lastAttemptAt": "2026-11-12T05:13:46.062Z",
+      "lastAttemptAt": "2026-11-12T09:13:29.073Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
       "lastSeenRank": 1000,
       "lastSuccessAt": "2026-11-12T05:13:47.305Z",
-      "totalPages": 16
+      "totalPages": 16,
+      "errorAttempts": 1,
+      "retryAfter": "2026-11-12T15:13:31.249Z",
+      "lastError": "Osirion API HTTP 500 /v1/tournaments/leaderboard",
+      "lastErrorPage": 10,
+      "lastErrorCode": "OSIRION_TRANSIENT"
+    },
+    "epicgames_S42_ReloadReloadSoloVictoryCup_EU/S42_ReloadSoloVictoryCup_Event5_Round1_EU": {
+      "nextPage": 0,
+      "complete": false,
+      "proposals": [],
+      "pages": 0,
+      "lastAttemptAt": "2026-11-12T09:13:35.149Z",
+      "errorAttempts": 1,
+      "retryAfter": "2026-11-12T15:13:36.267Z",
+      "lastError": "Osirion API HTTP 500 /v1/tournaments/leaderboard",
+      "lastErrorPage": 0,
+      "lastErrorCode": "OSIRION_TRANSIENT"
     }
   }
 }
