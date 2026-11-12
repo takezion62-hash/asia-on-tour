@@ -1,0 +1,50 @@
+name: Temporary AOT verified batch 2026-11-12
+on:
+  push:
+    branches:
+      - reviewed-results/aot-20261112-batch20
+    paths:
+      - scripts/aot-reviewed-batch-20261112-temp.cjs
+      - .github/workflows/aot-reviewed-batch-20261112-temp.yml
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout review branch
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: true
+          fetch-depth: 1
+      - name: Set up Node 24
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '24'
+          cache: npm
+      - name: Install locked dependencies
+        run: npm ci --ignore-scripts
+      - name: Verify source IDs, publish eligible results and separate attendance
+        run: node scripts/aot-reviewed-batch-20261112-temp.cjs
+      - name: Rebuild canonical derived indexes
+        run: |
+          node scripts/build-season-data.cjs
+          node scripts/build-candidate-triage.cjs
+      - name: Validate data and all unit tests
+        run: |
+          npm run validate
+          npm run test:unit
+          node scripts/build-season-data.cjs --check
+          node scripts/build-candidate-triage.cjs --check
+      - name: Commit validated artifacts only and remove temporary runner
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git rm -- scripts/aot-reviewed-batch-20261112-temp.cjs .github/workflows/aot-reviewed-batch-20261112-temp.yml
+          git add -A -- results.json history-sync-review.json history-sync-reviewed.json approval-history.json history-sync-status.json updates.json participation-status.json participation-index.json participation season-data candidate-triage.json
+          git diff --cached --check
+          git commit -m 'review: 17 verified qualifiers, 1 cash final and 2 participation records'
+          git push origin HEAD:reviewed-results/aot-20261112-batch20
