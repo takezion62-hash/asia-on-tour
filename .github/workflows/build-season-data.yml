@@ -9,6 +9,8 @@ on:
       - achievements.js
       - rankings.js
       - scripts/build-season-data.cjs
+      - scripts/build-candidate-triage.cjs
+      - scripts/candidate-triage-core.cjs
       - .github/workflows/build-season-data.yml
   workflow_dispatch:
 permissions:
@@ -28,19 +30,33 @@ jobs:
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: '24'
-      - name: 正本データからシーズン別配信ファイル・事前集計を生成
-        run: |
-          node scripts/build-season-data.cjs
-          node scripts/build-season-data.cjs --check
-      - name: 変更があれば配信ファイルを反映
+      - name: 正本データからシーズン分割と候補確認の軽量索引を再生成
         shell: bash
         run: |
+          set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add -A season-data
-          if git diff --cached --quiet; then
-            echo "Season data already current"
-          else
-            git commit -m "chore(data): refresh season shards and precomputed summaries [skip ci]"
-            git push
-          fi
+          # Do not overwrite a new provider result or manually reviewed publication.
+          for attempt in 1 2 3 4 5; do
+            git fetch origin main
+            git reset --hard origin/main
+            node scripts/build-season-data.cjs
+            node scripts/build-candidate-triage.cjs
+            node scripts/build-season-data.cjs --check
+            node scripts/build-candidate-triage.cjs --check
+            git add -A season-data
+            git add candidate-triage.json
+            if git diff --cached --quiet; then
+              echo "Season and candidate triage indexes are current"
+              exit 0
+            fi
+            git commit -m "chore(data): refresh lightweight season and review indexes [skip ci]"
+            if git push origin HEAD:main; then
+              echo "Published generated indexes without altering results"
+              exit 0
+            fi
+            echo "main moved while updating indexes; retrying from newest source"
+            sleep $((attempt * 2))
+          done
+          echo "::error::Could not publish generated indexes after retries"
+          exit 1
