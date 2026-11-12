@@ -10,6 +10,8 @@ on:
       - rankings.js
       - scripts/build-season-data.cjs
       - scripts/build-source-results.cjs
+      - scripts/source-results-store.cjs
+      - 'source-results/**'
       - scripts/apply-verified-tracker-finals.cjs
       - scripts/apply-verified-s43-squads-finals.cjs
       - 'data/manual-approvals/*-tracker.json'
@@ -45,15 +47,18 @@ jobs:
           for attempt in 1 2 3 4 5; do
             git fetch origin main
             git reset --hard origin/main
+            node scripts/source-results-store.cjs verify
             node scripts/apply-verified-tracker-finals.cjs --dry-run
             node scripts/apply-verified-tracker-finals.cjs
             node scripts/apply-verified-s43-squads-finals.cjs --dry-run
             node scripts/apply-verified-s43-squads-finals.cjs
+            # Legacy one-off publishers are reconciled explicitly, never implicitly.
+            node scripts/source-results-store.cjs import-legacy
             node scripts/validate-data.cjs
             node scripts/validate-updates.cjs
             node scripts/build-season-data.cjs
             node scripts/build-candidate-triage.cjs
-            node scripts/build-source-results.cjs
+            node scripts/source-results-store.cjs verify
             node scripts/build-source-results.cjs --check
             node scripts/build-season-data.cjs --check
             node scripts/build-candidate-triage.cjs --check

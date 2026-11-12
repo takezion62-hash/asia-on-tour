@@ -1,7 +1,7 @@
 'use strict';
 /**
  * Build self-contained, season-scoped published results and compact read models.
- * results.json stays canonical: never infer a season from a record's date.
+ * source-results is canonical: never infer a season from a record's date.
  * Usage: node scripts/build-season-data.cjs [--check]
  */
 const fs = require('node:fs');
@@ -13,8 +13,10 @@ const AsiaAchievements = require('../achievements.js');
 const root = path.resolve(__dirname, '..');
 const output = path.join(root, 'season-data');
 const read = name => fs.readFileSync(path.join(root, name), 'utf8');
-const source = read('results.json');
-const records = JSON.parse(source);
+const {readResults}=require('./source-results-store.cjs');
+const records=readResults(root).rows;
+// Kept only as a hash-checked compatibility projection for existing clients.
+const source=read('results.json');
 const tournaments = JSON.parse(read('tournaments.json')).catalog;
 const players = JSON.parse(read('players.json')).candidates;
 const REGIONS = ['ME', 'EU', 'NAC', 'NAW', 'OCE', 'BR'];

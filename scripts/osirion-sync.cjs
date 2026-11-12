@@ -4,6 +4,7 @@
 // Operations: a source change here triggers both recent and historical review workflows;
 // continue enforcing identity, official-rule, and duplicate checks before publication.
 const fs=require('node:fs'),path=require('node:path');
+const {readResults,publishResults}=require('./source-results-store.cjs');
 const {prepare,maximumMatches,applyProposals}=require('./auto-sync-core.cjs');
 const {evaluate,RULES}=require('./verified-history-approval.cjs');
 const {evaluate:evaluateCosmetics,cutoffForWindow}=require('./automatic-cosmetic-approval.cjs');
@@ -14,8 +15,8 @@ const {evaluate:evaluateDuoQualifier}=require('./automatic-duo-qualifier-approva
 const {scanCoverage}=require('./scan-coverage.cjs');
 const {finishableWindows,remainingPages}=require('./scan-efficiency.cjs');
 const root=path.resolve(__dirname,'..');
-const read=name=>JSON.parse(fs.readFileSync(path.join(root,name),'utf8'));
-const write=(name,obj)=>fs.writeFileSync(path.join(root,name),JSON.stringify(obj,null,2)+'\n');
+const read=name=>name==='results.json'?readResults(root).rows:JSON.parse(fs.readFileSync(path.join(root,name),'utf8'));
+const write=(name,obj)=>name==='results.json'?publishResults(root,obj):fs.writeFileSync(path.join(root,name),JSON.stringify(obj,null,2)+'\n');
 const regions=['ME','EU','NAC','NAW','OCE','BR'];
 const REVIEW_SERIES=new Set(['victory-cup','cash-cup','fncs','performance-evaluation','skin-cup','icon-cup','playstation-cup','unreal-cup','test-cup']);
 const nowJst=utc=>new Date(new Date(utc).getTime()+9*3600000).toISOString().slice(0,10);

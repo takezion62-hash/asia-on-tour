@@ -67,6 +67,8 @@ jobs:
         run: npm ci --ignore-scripts
       - name: JSON構造・参照・現金賞金を検証
         run: npm run validate
+      - name: Verify season shards agree with source manifest and legacy projection
+        run: node scripts/build-source-results.cjs --check
       - name: Tracker実績の安全な事前反映テスト（書込なし）
         run: node scripts/apply-verified-tracker-finals.cjs --dry-run
       - name: S43 NAW Squads決勝3組の本人・賞金・重複検証（書込なし）

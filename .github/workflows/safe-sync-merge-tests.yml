@@ -19,4 +19,4 @@ jobs:
       - name: Verify race-safe replay and latest-data preservation
         run: node --test tests/safe-sync-merge.test.cjs tests/publish-verified-s35-console-duos-20261108.test.cjs tests/publish-reviewed-s30-nac-zero-vr.test.cjs
       - name: Validate current published data, award logic and update ledger
-        run: npm run validate
+        run: npm run validate && node scripts/build-source-results.cjs --check
