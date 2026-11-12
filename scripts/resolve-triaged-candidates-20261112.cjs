@@ -1,4 +1,5 @@
 'use strict';
+// Official S31 Event8 ME/OCE cash uses exact Epic session and $100-per-VR checks.
 // Narrow, repeatable 2026-11-12 resolution of exactly the original evidence-triaged
 // queue. Never infer cash from Round 1/attendance. Never overwrite Tracker scores.
 const path=require('node:path'),fs=require('node:fs'),crypto=require('node:crypto');
