@@ -34,7 +34,7 @@ test('season source split preserves cross-season original ID order, all fields, 
  fixtureSource(dir);
  const state=syncSnapshot({root:dir,out,seasonSelector:seasonOfRecord});
  assert.deepEqual(state,{
-   records:4,teamPrizeCents:25000,personalPrizeCents:25000,seasons:3
+   records:4,teamPrizeCents:25000,personalPrizeCents:25000,unconfirmedPrizeRecords:0,seasons:3
  });
  const manifest=JSON.parse(fs.readFileSync(path.join(out,'manifest.json'),'utf8'));
  assert.deepEqual(manifest.recordOrder,['alpha','beta','gamma','delta']);
@@ -65,6 +65,21 @@ test('shard corruption, missing shard and stale data are rejected rather than tr
    /Obsolete source shard/);
 });
 
+test('unconfirmed null prize stays null and is audited separately from confirmed $0',t=>{
+ const dir=scratch(t),out=path.join(dir,'source-results');
+ const records=[...fixture,{id:'null-prize',seasonId:'S43',prize:null,verified:false,player:'F'}];
+ fixtureSource(dir,records);
+ const result=syncSnapshot({root:dir,out,seasonSelector:seasonOfRecord});
+ assert.equal(result.unconfirmedPrizeRecords,1);
+ assert.equal(result.teamPrizeCents,25000);
+ const shards=JSON.parse(fs.readFileSync(path.join(out,'S43.json'),'utf8'));
+ assert.equal(shards.find(x=>x.id==='null-prize').prize,null);
+ const manifest=JSON.parse(fs.readFileSync(path.join(out,'manifest.json'),'utf8'));
+ assert.equal(manifest.unconfirmedPrizeRecords,1);
+ assert.equal(manifest.shards.find(x=>x.seasonId==='S43').unconfirmedPrizeRecords,1);
+ assert.deepEqual(syncSnapshot({root:dir,out,check:true,seasonSelector:seasonOfRecord}),result);
+});
+
 test('all canonical IDs must be unique; missing IDs and invalid cash never pass',()=>{
  const asText=rows=>JSON.stringify(rows);
  assert.throws(()=>buildSnapshot([fixture[0],fixture[0]],asText(fixture)),/duplicate canonical record ID/);
@@ -79,7 +94,8 @@ test('current canonical results round-trip losslessly into fresh shards with no 
  const rows=JSON.parse(before);
  const result=syncSnapshot({root,out});
  assert.equal(result.records,rows.length);
- assert.equal(result.teamPrizeCents,rows.reduce((sum,r)=>sum+Math.round(r.prize*100),0));
+ assert.equal(result.teamPrizeCents,rows.reduce((sum,r)=>sum+Math.round((r.prize ?? 0)*100),0));
+ assert.equal(result.unconfirmedPrizeRecords,rows.filter(r=>r.prize == null).length);
  assert.equal(new Set(rows.map(r=>r.id)).size,rows.length);
  assert.equal(fs.readFileSync(path.join(root,'results.json'),'utf8'),before);
  assert.deepEqual(syncSnapshot({root,out,check:true}),result);
