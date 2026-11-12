@@ -30,7 +30,16 @@ function summary(rows,id){
   };
 }
 async function mockSeasonResults(page,records){
-  const ordered=records.map((row,index)=>({__aotOrder:index,...row}));
+  // Repeated identical source rows preserve their identity exactly.
+  // A unique fixture-only ordinal would otherwise turn an exact duplicate into
+  // conflicting evidence and cause the ranking validator to discard both rows.
+  const identities=new Map();
+  const ordered=records.map((row,index)=>{
+    const signature=JSON.stringify(row),prior=identities.get(row.id);
+    const order=prior&&prior.signature===signature?prior.order:index;
+    if(!prior)identities.set(row.id,{signature,order});
+    return {__aotOrder:order,...row};
+  });
   const groups=new Map();
   for(const row of ordered){
     const id=/^S\d+$/.test(row.seasonId||'')?row.seasonId:'unknown';
