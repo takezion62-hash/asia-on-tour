@@ -19,7 +19,7 @@ function mergeReports(runRoot = root, outputFile = lastRun) {
   const ids = new Set();
   for (let shard = 1; shard <= 4; shard++) {
     const file = path.join(runRoot, 'site-test-report-' + shard,
-      'test-results', '.last-run.json');
+      'test-results', 'last-run.json');
     if (!fs.existsSync(file))
       throw new Error('Missing Playwright report from shard ' + shard +
         '; re-run the full suite if the browser job never started');
