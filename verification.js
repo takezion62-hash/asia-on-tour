@@ -9,10 +9,10 @@
   // Full integrity checks are computed once per data refresh, not on every
   // tab change, search keystroke, region selection or pagination click.
   let cachedAuditRows=null;
-  const state={tab:'queue',page:0,search:'',region:'all',loaded:false,selected:new Set()};
+  const state={tab:'queue',page:0,search:'',region:'all',year:'all',tournament:'all',triage:'all',loaded:false,selected:new Set()};
   const labels={queue:'確認待ち',duplicates:'重複・大会枠',errors:'不整合',unmapped:'未登録大会',coverage:'収集状況',history:'検証履歴'};
   const required=['results.json','auto-sync-review.json','history-sync-review.json','auto-sync-status.json','history-sync-status.json'];
-  const files=[...required,'history-sync-reviewed.json','updates.json','calendar-history-status.json','calendar-history-index.json','approval-history.json'];
+  const files=[...required,'history-sync-reviewed.json','updates.json','calendar-history-status.json','calendar-history-index.json','approval-history.json','candidate-triage.json'];
   const dom=(tag,cls,content)=>{
     const el=document.createElement(tag);
     if(cls)el.className=cls;
@@ -38,10 +38,16 @@
     if(item.badge)top.append(dom('span','badge '+(item.level||'info'),item.badge));
     top.append(dom('span','itemtitle',item.title||'確認項目'));
     d.append(top);
-    if(state.tab==='queue'&&item.id&&!item.alreadyPublished){
+    if(state.tab==='queue'&&item.id&&!item.alreadyPublished&&
+      !['evidence-conflict','duplicate-risk'].includes(item.triageStatus)){
       const choice=dom('label','audit-select');
       const input=dom('input');input.type='checkbox';input.checked=state.selected.has(item.id);
       input.addEventListener('change',()=>{
+        if(input.checked&&state.selected.size>=20){
+          input.checked=false;
+          $('audit-selected-count').textContent='一度の申請は最大20件まで。候補を絞り込んでね';
+          return;
+        }
         if(input.checked)state.selected.add(item.id);else state.selected.delete(item.id);
         updateSelected();
       });
@@ -50,6 +56,10 @@
     }
     if(item.meta)d.append(dom('div','sub',item.meta));
     if(item.description)d.append(dom('div','sub',item.description));
+    if(item.evidenceText){
+      const note=dom('div','evidence-note '+(item.level==='danger'?'danger':item.level==='warn'?'warn':''),item.evidenceText);
+      d.append(note);
+    }
     if(item.people?.length){
       const p=dom('div','source');
       for(const name of item.people.slice(0,5))p.append(playerLink(name));
@@ -103,14 +113,41 @@
     const reviewApprovals=data['approval-history.json']?.entries||[];
     const updates=data['updates.json']?.entries||[];
     const out={queue:[],duplicates:[],errors:[],unmapped:[],coverage:[],history:[]};
+    // Only accept an index belonging to the current review snapshot. A stale
+    // generated file must never override the live pending list.
+    const snapshot=data['candidate-triage.json'];
+    const active=queue.filter(p=>!p.alreadyPublished);
+    const ids=new Set(active.map(p=>p.id));
+    const fresh=snapshot?.version===1&&Array.isArray(snapshot.queue)&&snapshot.queue.length===ids.size&&
+      snapshot.queue.every(p=>ids.has(p.id))&&
+      snapshot.sourceCheckedAt===[recent.checkedAt,historic.checkedAt].filter(Boolean).sort().at(-1);
+    const triage=new Map(fresh?snapshot.queue.map(p=>[p.id,p]):[]);
+    data.triageFresh=fresh;
+    const statuses={
+      'rules-review':['規則確認待ち','warn'],
+      'partial-scan':['順位表の調査途中','info'],
+      'duplicate-risk':['重複疑い','danger'],
+      'evidence-conflict':['根拠不足・不一致','danger']
+    };
     for(const p of queue){
+      const triageRow=triage.get(p.id),currentStatus=triageRow?.status||'not-indexed';
+      const [statusLabel,level]=p.alreadyPublished?['掲載済み','ok']:statuses[currentStatus]||['追加調査待ち','warn'];
+      const evidence=triageRow?.evidence;
+      const evidenceText=triageRow?[
+        '保存済み順位表：'+(evidence?.exactCheckpoint?'数値とIDを照合':'要再確認'),
+        evidence?.scanComplete?'取得完了':evidence?.observedPartial?'取得途中（確認済みページのみ）':'調査未完了',
+        triageRow.action
+      ].join(' · '):
+        '候補はまだ機械的な照合段階。Epic ID・出典・賞金規則の追加確認が必要';
       out.queue.push({
-        badge:p.alreadyPublished?'掲載ID一致':'確認待ち',
-        level:p.alreadyPublished?'ok':'warn',
+        badge:statusLabel,level,
         title:s(p.player)|| (Array.isArray(p.players)?p.players.join(' / '):'選手不明'),
         description:s(p.reviewReason)||(p.prize==null?'賞金未確認：確定前に公式ルールと本人IDを照合':'追加検証が必要'),
+        evidenceText,
         meta:[p.origin==='history'?'過去大会':'直近',p.date,p.region,p.event,p.round,p.rank!=null?'#'+n(p.rank):'',p.alreadyPublished?'同一IDが掲載済み':''].filter(Boolean).join(' · '),
-        id:p.id,alreadyPublished:p.alreadyPublished,region:p.region,searchText:JSON.stringify(p),ids:p.id?[p.id]:[],link:p.source
+        id:p.id,alreadyPublished:p.alreadyPublished,region:p.region,year:s(p.date).slice(0,4),
+        tournamentId:p.tournamentId||p.event,triageStatus:currentStatus,
+        searchText:JSON.stringify(p)+' '+evidenceText,ids:p.id?[p.id]:[],link:p.source
       });
     }
     for(const x of issues){
@@ -168,11 +205,55 @@
     cachedAuditRows=out;
     return out[state.tab]||[];
   }
+  function populateQueueFilters(){
+    const queue=data.audit?.queue||[];
+    const populate=(id,items,defaultLabel)=>{
+      const select=$(id),selected=select.value;
+      select.replaceChildren(new Option(defaultLabel,'all'));
+      for(const [value,label] of items)select.append(new Option(label,value));
+      select.value=items.some(([value])=>value===selected)?selected:'all';
+      return select.value;
+    };
+    const years=[...new Set(queue.map(p=>p.year).filter(Boolean))].sort().reverse().map(year=>[year,year+'年']);
+    const events=[...new Map(queue.map(p=>[p.tournamentId,[p.tournamentId,
+      (p.meta.split(' · ')[3]||p.tournamentId)]]))].map(([,v])=>v).sort((a,b)=>a[1].localeCompare(b[1],'ja'));
+    state.year=populate('audit-year',years,'全年代');
+    state.tournament=populate('audit-tournament',events,'全大会');
+  }
+  function renderGroups(items){
+    const target=$('audit-groups');target.replaceChildren();
+    if(state.tab!=='queue')return;
+    const summaries=[
+      ['開催年',x=>x.year],
+      ['地域',x=>x.region],
+      ['大会',x=>x.meta.split(' · ')[3]||x.tournamentId||'未分類']
+    ];
+    for(const [title,getKey] of summaries){
+      const counts=new Map();
+      for(const item of items){
+        const name=getKey(item)||'未確認';
+        counts.set(name,(counts.get(name)||0)+1);
+      }
+      const section=dom('section','audit-group');
+      section.append(dom('strong','',title+'別：'+n(items.length)+'件'));
+      const sorted=[...counts].sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0],'ja'));
+      for(const [name,count] of sorted.slice(0,5))section.append(dom('p','',name+' · '+n(count)+'件'));
+      if(sorted.length>5)section.append(dom('p','muted','ほか'+n(sorted.length-5)+'分類'));
+      target.append(section);
+    }
+  }
   function render(){
     if(!state.loaded)return;
     const full=getRows();
     const needle=state.search.toLocaleLowerCase('ja-JP');
-    const found=full.filter(x=>(state.region==='all'||x.region===state.region)&&(!needle||s(x.searchText||[x.title,x.description,x.meta,x.ids?.join(' ')].join(' ')).toLocaleLowerCase('ja-JP').includes(needle)));
+    const queueTab=state.tab==='queue';
+    for(const id of ['audit-year','audit-tournament','audit-triage'])$(id).disabled=!queueTab;
+    const found=full.filter(x=>(state.region==='all'||x.region===state.region)&&
+      (!queueTab||((state.year==='all'||x.year===state.year)&&
+       (state.tournament==='all'||x.tournamentId===state.tournament)&&
+       (state.triage==='all'||x.triageStatus===state.triage)))&&
+      (!needle||s(x.searchText||[x.title,x.description,x.meta,x.ids?.join(' ')].join(' ')).toLocaleLowerCase('ja-JP').includes(needle)));
+    renderGroups(queueTab?found:[]);
     const size=50,pages=Math.max(1,Math.ceil(found.length/size));
     state.page=Math.min(state.page,pages-1);
     const shown=found.slice(state.page*size,(state.page+1)*size);
@@ -205,8 +286,10 @@
     }else{
       state.loaded=true;
       getRows(); // Populate the immutable snapshot before filtering selection.
-      const valid=new Set((data.queue||[]).filter(x=>!x.alreadyPublished).map(x=>x.id));
+      const valid=new Set((data.audit.queue||[]).filter(x=>!x.alreadyPublished&&
+        !['evidence-conflict','duplicate-risk'].includes(x.triageStatus)).map(x=>x.id));
       for(const key of state.selected)if(!valid.has(key))state.selected.delete(key);
+      populateQueueFilters();
       updateSelected();
       const recent=data['auto-sync-status.json'],historic=data['history-sync-status.json'];
       const checked=[recent.checkedAt,historic.checkedAt].filter(Boolean).sort().at(-1);
@@ -215,6 +298,7 @@
       $('audit-data-date').textContent='過去大会の確認範囲：'+(historic.fromDate||'未確認')+' ～ '+(historic.toDate||'未確認');
       loading.className='notice';loading.textContent='掲載済み戦績と自動収集候補を読み込みました。これは機械的な照合候補であり、実際の大会記録の真偽を保証するものではありません。';
       if(failed.length)loading.textContent+=' 補助ファイル未取得：'+failed.join('、');
+      if(!data.triageFresh)loading.textContent+=' 根拠別の詳細分類は更新待ちのため、候補の元データを優先して表示しています。';
       if(cal?.dates?.length===2){
         const note=dom('div','sub','大会カレンダーが参照する過去開催枠の期間：'+cal.dates.join(' ～ ')+'（全件を成績収集済みという意味ではありません）');
         loading.append(note);
@@ -229,6 +313,9 @@
   });
   $('audit-search').addEventListener('input',e=>{state.search=e.target.value;state.page=0;render()});
   $('audit-region').addEventListener('change',e=>{state.region=e.target.value;state.page=0;render()});
+  for(const [id,key] of [['audit-year','year'],['audit-tournament','tournament'],['audit-triage','triage']]){
+    $(id).addEventListener('change',e=>{state[key]=e.target.value;state.page=0;render()});
+  }
   $('audit-prev').addEventListener('click',()=>{if(state.page>0){state.page--;render()}});
   $('audit-next').addEventListener('click',()=>{state.page++;render()});
   $('audit-refresh').addEventListener('click',refresh);
