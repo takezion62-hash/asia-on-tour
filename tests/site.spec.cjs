@@ -108,7 +108,7 @@ test('プロフィール・地域グラフ・別名義・同名別人・共有UR
   }
 });
 
-test('大会タグ検索・大会URL・期間切り替えをデータから照合する', async ({ page }) => {
+test('大会タグ検索・大会URLをデータから照合する', async ({ page }) => {
   test.slow(); // Check the complete catalog and every facet against the current JSON.
   await page.getByRole('button', { name: '大会を探す', exact: true }).click();
   const ids = [...new Set(rows.map(r => tournamentKey(r, data)))];
@@ -123,11 +123,20 @@ test('大会タグ検索・大会URL・期間切り替えをデータから照�
   await page.locator(`[data-open-tournament="${id}"]`).click();
   await page.reload();
   expect((await page.locator('#page-tournament [data-tournament-record]').evaluateAll(es => es.map(e => e.dataset.tournamentRecord))).sort()).toEqual(rows.filter(r => tournamentKey(r, data) === id).map(r => r.id).sort());
+});
+
+test('全シーズン切り替え時のホーム件数・個人賞金をデータから照合する', async ({ page }) => {
+  test.slow(); // Every published season is validated without repeating catalog navigation.
+  // The global beforeEach already opens the dashboard. Re-clicking its mobile
+  // horizontally scrollable nav button after every select races the async season
+  // transition and makes unrelated catalog tests exceed the whole-test timeout.
+  await expect(page.locator('#page-home')).toBeVisible();
   for (const season of [...new Set(rows.map(r => seasonFor(r, data))), 'all']) {
     await page.locator('#season-select').selectOption(season);
-    await page.getByRole('button', { name: 'ダッシュボード', exact: true }).click();
-    await expect(page.locator('#stat-results')).toHaveText(String(summarize(data, season).records));
-    await expect(page.locator('#home-earnings-sum')).toHaveText(money(summarize(data, season).total));
+    await expect(page.locator('#season-select')).toHaveValue(season);
+    const expected=summarize(data, season);
+    await expect(page.locator('#stat-results')).toHaveText(String(expected.records));
+    await expect(page.locator('#home-earnings-sum')).toHaveText(money(expected.total));
   }
 });
 
