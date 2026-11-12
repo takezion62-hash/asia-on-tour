@@ -103,6 +103,49 @@ function validCashFinal(r,entry){
  return (!Array.isArray(r.players)||r.players.length===1)&&r.prize===r.vrs*100
   &&r.teamPrize===undefined&&r.prizePerPlayer===undefined;
 }
+// These three exact review policies were introduced with the 2026-11-12
+// publication batch. Keep their tournament, official rule, phase and $0/$100
+// payout constraints explicit instead of silently accepting unknown policies.
+function validNov12ReviewedPolicy(r,entry) {
+ if (!r || r.verified !== true || r.reviewOnly === true ||
+     !Number.isSafeInteger(r.rank) || r.rank < 1 ||
+     !Number.isSafeInteger(r.vrs) || r.vrs < 0 ||
+     !Number.isSafeInteger(r.matches) || r.matches < 1 || r.vrs > r.matches)
+   return false;
+ let url;
+ try { url = new URL(entry.source); } catch { return false; }
+ if (url.origin !== 'https://www.fortnite.com' ||
+     !url.pathname.startsWith('/competitive/events/') ||
+     url.searchParams.get('region') !== r.region) return false;
+ const eventId = url.pathname.split('/').filter(Boolean).at(-1);
+ const roundId = url.searchParams.get('round') || '';
+ const rules = {
+  S30_SoloVictoryCashCup:'https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules',
+  S30_SoloZBVictoryCashCup:'https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules',
+  S31_SoloVictoryCashCup:'https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-4-official-rules',
+  S32_SoloVictoryCashCup:'https://www.fortnite.com/news/competitive-details-make-your-mark-in-chapter-2-remix',
+  S32_TriosCashCup:'https://www.fortnite.com/news/fortnite-trios-cash-cups-chapter-2-remix-official-rules'
+ };
+ if (entry.rule !== rules[eventId] || !roundId.startsWith(eventId + '_') ||
+     !roundId.endsWith('_' + r.region) ||
+     r.seasonId !== eventId.split('_')[0]) return false;
+ if (entry.policy === 'verified-qualifier')
+   return ['S30_SoloVictoryCashCup','S30_SoloZBVictoryCashCup',
+     'S31_SoloVictoryCashCup','S32_SoloVictoryCashCup'].includes(eventId) &&
+     roundId.includes('Round1') && r.kind === '予選' && r.prize === 0 &&
+     r.matches <= 10;
+ if (entry.policy === 'verified-s32-final-100usd-vr')
+   return eventId === 'S32_SoloVictoryCashCup' &&
+     roundId.includes('Round2') && r.kind === '賞金決勝' &&
+     r.matches <= 3 && r.prize === r.vrs * 100 &&
+     r.points === r.vrs * 100;
+ if (entry.policy === 'verified-trios-qualifier-participation-zero-cash')
+   return eventId === 'S32_TriosCashCup' && roundId.includes('Round1') &&
+     r.kind === '予選' && r.prize === 0 && r.matches <= 10 &&
+     Array.isArray(r.players) && r.players.length === 3 &&
+     new Set(r.players).size === 3;
+ return false;
+}
 function audit(results,ledger,players){
  const errors=[];
  if(ledger?.version!==1||!Array.isArray(ledger.entries))return ['approval-history.json is invalid'];
@@ -113,7 +156,7 @@ function audit(results,ledger,players){
   const rows=results.filter(r=>r.id===entry.recordId);
   if(rows.length!==1){errors.push('Published record missing or duplicate: '+entry.id);continue}
   const r=rows[0];
-  if(entry.decision!=='published'||!['attendance-only','verified-rule','cosmetic-rank','verified-vr','official-final-vr-award'].includes(entry.policy)){
+  if(entry.decision!=='published'||!['attendance-only','verified-rule','cosmetic-rank','verified-vr','official-final-vr-award','verified-qualifier','verified-s32-final-100usd-vr','verified-trios-qualifier-participation-zero-cash'].includes(entry.policy)){
    errors.push('Unknown decision/policy: '+entry.id);continue;
   }
   if(r.source!==entry.source||r.verified!==true)errors.push('Published source or verification flag changed: '+entry.id);
@@ -122,6 +165,9 @@ function audit(results,ledger,players){
   if(entry.policy==='cosmetic-rank'&&(r.kind!=='スキン大会'||r.prize!==0||r.reviewOnly===true||!cosmeticEvaluate(r).eligible))errors.push('Cosmetic winner is outside verified official rank range: '+entry.id);
   if(entry.policy==='verified-vr'&&!(r.kind==='賞金決勝'&&r.seasonId==='S30'&&r.tournamentId==='ch5s3-solo-victory-cup'&&r.region==='ME'&&r.source?.includes('/S30_SoloVictoryCashCup/')&&r.source?.includes('S30_SoloVictoryCashCup_Event7Round2_ME')&&Number.isSafeInteger(r.vrs)&&r.vrs>=1&&r.vrs<=3&&Number.isSafeInteger(r.matches)&&r.matches>=r.vrs&&r.matches<=3&&r.points===r.vrs*100&&r.prize===r.vrs*100&&r.verified===true&&r.reviewOnly!==true))errors.push('Cash final record lacks official per-VR proof: '+entry.id);
   if(entry.policy==='official-final-vr-award'&&!validCashFinal(r,entry))errors.push('Invalid official solo/duo VR award: '+entry.id);
+  if(['verified-qualifier','verified-s32-final-100usd-vr',
+    'verified-trios-qualifier-participation-zero-cash'].includes(entry.policy) &&
+    !validNov12ReviewedPolicy(r,entry))errors.push('Invalid Nov12 source/rule/payout: '+entry.id);
   const collisions=results.filter(x=>x.id!==r.id).map(x=>({id:x.id,reason:collision(x,r,players?.confirmedAliases)})).filter(x=>x.reason);
   if(collisions.length)errors.push('Potential duplicate for approved '+entry.id+': '+collisions.slice(0,4).map(x=>x.id).join(', '));
  }
