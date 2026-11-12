@@ -76,7 +76,9 @@ jobs:
             node --test tests/manual-approval.test.cjs tests/approval-history.test.cjs tests/cosmetic-rank-rules.test.cjs tests/tournament-rules.test.cjs
             # Publish season shards together with the canonical results (bot pushes do not trigger push workflows).
             node scripts/build-season-data.cjs
+            node scripts/build-candidate-triage.cjs
             git add -A season-data
+            git add candidate-triage.json
             git add results.json history-sync-review.json history-sync-reviewed.json approval-history.json history-sync-status.json updates.json participation-index.json participation-status.json participation/2026-10.json participation/2024-09.json
             if git diff --cached --quiet; then
               echo "NOV12_VERIFIED no further pending rows"
@@ -129,7 +131,9 @@ jobs:
             node --test tests/manual-approval.test.cjs tests/approval-history.test.cjs tests/cosmetic-rank-rules.test.cjs tests/tournament-rules.test.cjs
             # Publish season shards together with the canonical results (bot pushes do not trigger push workflows).
             node scripts/build-season-data.cjs
+            node scripts/build-candidate-triage.cjs
             git add -A season-data
+            git add candidate-triage.json
             git add results.json updates.json history-sync-review.json history-sync-reviewed.json history-sync-status.json auto-sync-review.json auto-sync-status.json approval-history.json
             if git diff --cached --quiet; then
               echo "AOT_VERIFIED_NOV11 no new source-verified results to publish"
@@ -161,7 +165,9 @@ jobs:
             node --test tests/manual-approval.test.cjs tests/automatic-cosmetic-approval.test.cjs tests/tournament-rules.test.cjs
             # Publish season shards together with the canonical results (bot pushes do not trigger push workflows).
             node scripts/build-season-data.cjs
+            node scripts/build-candidate-triage.cjs
             git add -A season-data
+            git add candidate-triage.json
             git add results.json auto-sync-review.json history-sync-review.json auto-sync-status.json history-sync-status.json approval-history.json updates.json
             if git diff --cached --quiet; then
               echo "VERIFIED_COSMETIC_REVIEW no new approved records"
@@ -194,7 +200,9 @@ jobs:
             node --test tests/publish-verified-qualifier-batch.test.cjs tests/safe-sync-merge.test.cjs
             # Publish season shards together with the canonical results (bot pushes do not trigger push workflows).
             node scripts/build-season-data.cjs
+            node scripts/build-candidate-triage.cjs
             git add -A season-data
+            git add candidate-triage.json
             git add results.json updates.json history-sync-review.json history-sync-reviewed.json history-sync-status.json approval-history.json participation-index.json
             git add -A participation/
             if git diff --cached --quiet; then
@@ -229,7 +237,9 @@ jobs:
             node --test tests/publish-verified-finals-batch.test.cjs tests/safe-sync-merge.test.cjs
             # Publish season shards together with the canonical results (bot pushes do not trigger push workflows).
             node scripts/build-season-data.cjs
+            node scripts/build-candidate-triage.cjs
             git add -A season-data
+            git add candidate-triage.json
             git add results.json updates.json history-sync-review.json history-sync-reviewed.json history-sync-status.json approval-history.json participation-index.json
             git add -A participation/
             if git diff --cached --quiet; then
@@ -304,7 +314,9 @@ jobs:
             node --test tests/safe-sync-merge.test.cjs
             # Publish season shards together with the canonical results (bot pushes do not trigger push workflows).
             node scripts/build-season-data.cjs
+            node scripts/build-candidate-triage.cjs
             git add -A season-data
+            git add candidate-triage.json
             git add results.json updates.json history-sync-status.json history-sync-review.json history-sync-scan.json
             if git diff --cached --quiet; then
               echo "SAFE_HISTORY_MERGE no new data to publish"
@@ -337,7 +349,9 @@ jobs:
             node --test tests/publish-verified-s35-console-duos-20261108.test.cjs tests/safe-sync-merge.test.cjs
             # Publish season shards together with the canonical results (bot pushes do not trigger push workflows).
             node scripts/build-season-data.cjs
+            node scripts/build-candidate-triage.cjs
             git add -A season-data
+            git add candidate-triage.json
             git add results.json updates.json history-sync-review.json history-sync-reviewed.json history-sync-status.json
             if git diff --cached --quiet; then
               echo "VERIFIED_HISTORY_PUBLICATION already complete; no new rows"
@@ -369,7 +383,9 @@ jobs:
             node --test tests/publish-reviewed-s30-nac-zero-vr.test.cjs tests/safe-sync-merge.test.cjs
             # Publish season shards together with the canonical results (bot pushes do not trigger push workflows).
             node scripts/build-season-data.cjs
+            node scripts/build-candidate-triage.cjs
             git add -A season-data
+            git add candidate-triage.json
             git add results.json updates.json history-sync-review.json history-sync-reviewed.json history-sync-status.json
             if git diff --cached --quiet; then
               echo "S30_VERIFIED_REVIEW_PUBLICATION already complete or no newly confirmed rows"
