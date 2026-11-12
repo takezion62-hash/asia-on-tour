@@ -369,7 +369,7 @@ test('entry, import, and delete controls are absent; only browse inputs remain',
   const markup = html.slice(0, html.indexOf('<script>'));
   assert.doesNotMatch(markup, /<form\b|data-add\b|data-delete\b|type="(?:file|submit)"|id="(?:entry-form|modal-backdrop|import-button|import-file|export-json)"/);
   assert.deepEqual([...markup.matchAll(/<input\b[^>]*type="([^"]+)"/g)].map(match => match[1]).sort(),
-    ['checkbox', 'search', 'search', 'search', 'search']); // results, players, tournaments, and Sources rule lookup; no editing controls
+    ['checkbox', 'checkbox', 'date', 'search', 'search', 'search', 'search', 'search']); // browse-only filters plus device-local favorites; no result-entry controls
   assert.match(markup, /id="source-rule-search"/);
   assert.match(markup, /閲覧専用/);
 });
