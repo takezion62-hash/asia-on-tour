@@ -738,7 +738,7 @@
     }
     function renderTournamentSearch(filters={}){
       const axes=[...tournamentAxes,{key:'stage',label:'大会ラウンド区分',options:tournamentViewStageOptions()}];
-      $('#tournament-content').innerHTML=`<header class="tournament-intro"><p class="tournament-kicker">TOURNAMENTS / ASIA OVERSEAS</p><h1>大会を<span>探す</span></h1><p>大会の形式から、ASIA勢の海外戦績を探す。</p></header><section class="tournament-search-panel" aria-label="大会の検索と絞り込み"><label class="tournament-search-input" for="tournament-query"><span>大会名で検索</span><input id="tournament-query" type="search" value="${escape(filters.q||'')}" placeholder="大会名を入力" aria-label="大会名で検索"></label><div class="tournament-filter-grid">${axes.map(axis=>tournamentViewSelect(axis,filters)).join('')}</div><p class="tournament-round-note">ゲーム形式と予選・決勝は別々に絞り込めます。形式や機種条件を確認できない大会は「未確認」と表示します。</p></section><div class="tournament-browse-heading"><h2>掲載大会</h2><span class="tournament-count" id="tournament-count" aria-live="polite"></span><a class="tournament-reset" href="#tournaments" data-tournament-reset>条件をリセット</a></div><div class="tournament-active-filters" id="tournament-active-filters" aria-label="適用中の条件"></div><details class="tournament-facets"><summary>タグから絞り込む・掲載戦績数を見る</summary><p class="tournament-facet-caption">タグの数字は、ほかの絞り込み条件に一致する戦績の件数です。</p>${tournamentAxes.map(axis=>`<section class="tournament-facet"><h3>${escape(axis.label)}</h3><div class="tournament-facet-options" id="tournament-facet-${escape(axis.key)}"></div></section>`).join('')}</details><div class="tournament-list" id="tournament-list"></div>`;
+      $('#tournament-content').innerHTML=`<header class="tournament-intro"><p class="tournament-kicker">TOURNAMENTS / ASIA OVERSEAS</p><h1>大会を<span>探す</span></h1><p>大会の形式から、ASIA勢の海外戦績を探す。</p></header><section class="tournament-search-panel" aria-label="大会の検索と絞り込み"><label class="tournament-search-input" for="tournament-query"><span>大会名・日付・地域・選手名をまとめて検索</span><input id="tournament-query" type="search" value="${escape(filters.q||'')}" placeholder="大会名を入力" aria-label="大会名で検索"></label><div class="tournament-filter-grid"><div class="tournament-filter-field"><label for="tournament-date">開催日</label><input id="tournament-date" type="date" value="${escape(filters.date||'')}" data-tournament-filter="date"></div><div class="tournament-filter-field"><label for="tournament-region">地域</label><select id="tournament-region" data-tournament-filter="region"><option value="all">すべての地域</option>${regions.map(r=>`<option value="${escape(r)}"${filters.region===r?' selected':''}>${escape(r)}</option>`).join('')}</select></div><div class="tournament-filter-field"><label for="tournament-player">選手名</label><input id="tournament-player" type="search" value="${escape(filters.player||'')}" placeholder="選手名・別名義" data-tournament-filter="player"></div>${axes.map(axis=>tournamentViewSelect(axis,filters)).join('')}</div><p class="tournament-round-note">ゲーム形式と予選・決勝は別々に絞り込めます。形式や機種条件を確認できない大会は「未確認」と表示します。</p></section><div class="tournament-browse-heading"><h2>掲載大会</h2><span class="tournament-count" id="tournament-count" aria-live="polite"></span><a class="tournament-reset" href="#tournaments" data-tournament-reset>条件をリセット</a></div><div class="tournament-active-filters" id="tournament-active-filters" aria-label="適用中の条件"></div><details class="tournament-facets"><summary>タグから絞り込む・掲載戦績数を見る</summary><p class="tournament-facet-caption">タグの数字は、ほかの絞り込み条件に一致する戦績の件数です。</p>${tournamentAxes.map(axis=>`<section class="tournament-facet"><h3>${escape(axis.label)}</h3><div class="tournament-facet-options" id="tournament-facet-${escape(axis.key)}"></div></section>`).join('')}</details><div class="tournament-list" id="tournament-list"></div>`;
       renderTournamentList(filters);
     }
     function tournamentViewCard(t){
@@ -758,6 +758,9 @@
         $(`#tournament-facet-${axis.key}`).innerHTML=counts.map(option=>`<a class="tournament-facet-chip${option.count?'':' is-empty'}" href="${escape(tournamentSearchHref(axis.key,option.id))}" data-tournament-tag="${escape(axis.key+':'+option.id)}" data-tournament-context="search" aria-current="${value===option.id?'true':'false'}"><span>${escape(option.label)}</span><b>${format(option.count)}</b></a>`).join('');
       }
       if(filters.stage&&filters.stage!=='all')active.push(`大会ラウンド区分：${filters.stage}`);
+      if(filters.date)active.push(`開催日：${filters.date}`);
+      if(filters.region&&filters.region!=='all')active.push(`地域：${filters.region}`);
+      if(filters.player)active.push(`選手：${filters.player}`);
       if(filters.q)active.push(`検索：${filters.q}`);
       $('#tournament-active-filters').innerHTML=active.map(value=>`<span class="tournament-active-filter">${escape(value)}</span>`).join('');
       $('#tournament-list').innerHTML=shown.length?shown.map(tournamentViewCard).join(''):'<div class="empty"><div class="emoji">⌕</div><b>条件に合う大会がありません</b><p>大会名やタグの条件を変えるか、条件をリセットしてください。</p></div>';
@@ -1188,13 +1191,13 @@
     let routedHash='';
     let routingReady=false;
     function captureView(){
-      return {...currentView,comparison:compareState?{...compareState,players:[...compareState.players]}:null,season:selectedSeason,scroll:window.scrollY||0,results:{search:$('#search-results').value,region:$('#region-filter').value,stage:$('#stage-filter').value,sort:$('#sort-results').value,prize:$('#prize-only').checked,player:selectedPlayer,page:archivePage},players:{search:$('#search-players').value,sort:$('#player-sort').value},tournaments:{...tournamentBrowseFilters},calendar:{...calendarBrowse},journey:{...journeyState},ranking:{filters:{...rankingFilters},limit:rankingLimit}};
+      return {...currentView,comparison:compareState?{...compareState,players:[...compareState.players]}:null,season:selectedSeason,scroll:window.scrollY||0,results:{search:$('#search-results').value,region:$('#region-filter').value,stage:$('#stage-filter').value,sort:$('#sort-results').value,prize:$('#prize-only').checked,player:selectedPlayer,page:archivePage},players:{search:$('#search-players').value,sort:$('#player-sort').value,favorites:$('#favorites-only').checked},tournaments:{...tournamentBrowseFilters},calendar:{...calendarBrowse},journey:{...journeyState},ranking:{filters:{...rankingFilters},limit:rankingLimit}};
     }
     function restoreBrowseState(view){
       if(view.journey)journeyState={...view.journey};
       if(view.ranking){rankingFilters=sanitizeRankingFilters(view.ranking.filters);rankingLimit=Number.isInteger(view.ranking.limit)&&view.ranking.limit>=30?view.ranking.limit:30;}
       if(view.results){const r=view.results;$('#search-results').value=r.search;$('#region-filter').value=r.region;$('#stage-filter').value=r.stage;$('#sort-results').value=r.sort;$('#prize-only').checked=r.prize;selectedPlayer=r.player;archivePage=Number.isInteger(r.page)&&r.page>0?r.page:1;}
-      if(view.players){$('#search-players').value=view.players.search;$('#player-sort').value=view.players.sort;}
+      if(view.players){$('#search-players').value=view.players.search;$('#player-sort').value=view.players.sort;$('#favorites-only').checked=!!view.players.favorites;}
       if(view.tournaments)tournamentBrowseFilters=sanitizeTournamentFilters(view.tournaments);
       if(view.calendar)calendarBrowse=sanitizeCalendarFilters(view.calendar);
       if(view.comparison)compareState=compareSanitize(view.comparison);
@@ -1226,7 +1229,7 @@
       if(hash==='#tournaments'||hash.startsWith('#tournaments?')){const params=new URLSearchParams(hash.split('?').slice(1).join('?'));return {page:'tournaments',filters:sanitizeTournamentFilters(Object.fromEntries(params))}}
       if(hash==='#players'||hash.startsWith('#players?')){const params=new URLSearchParams(hash.split('?').slice(1).join('?'));return {page:'players',ranking:{filters:sanitizeRankingFilters(Object.fromEntries(params)),limit:30}}}
       const page=hash.slice(1);
-      return {page:['home','results','players','updates','about'].includes(page)?page:'home',name:null};
+      return {page:['home','search','results','players','updates','about'].includes(page)?page:'home',name:null};
     }
     function routeHash(view){
       if(view.page==='profile')return view.invalid?window.location.hash:profileHref(view.name||'');
@@ -1272,9 +1275,10 @@
       document.querySelectorAll('.section').forEach(e=>e.classList.toggle('active',e.id==='page-'+view.page));
       document.querySelectorAll('.nav button').forEach(e=>{const active=e.dataset.page===(view.page==='profile'?'players':view.page==='tournament'?'tournaments':view.page);e.classList.toggle('active',active);e.setAttribute('aria-current',active?'page':'false')});
       if(view.page==='results')renderResults();
+       if(view.page==='search')window.AOTQuickFind?.renderSearch();
       if(view.page==='updates')renderUpdates();
       if(view.page==='players'){renderPlayers();renderRanking()}
-      document.title=view.page==='profile'&&profileInfo(view.name)?view.name+' · ASIA ON TOUR':view.page==='tournament'&&tournamentInfo(view.id)?tournamentInfo(view.id).name+' · ASIA ON TOUR':view.page==='calendar'?'大会カレンダー · ASIA ON TOUR':view.page==='compare'?'選手比較 · ASIA ON TOUR':view.page==='tournaments'?'大会を探す · ASIA ON TOUR':view.page==='updates'?'更新履歴 · ASIA ON TOUR':'ASIA ON TOUR — Fortnite海外遠征トラッカー';
+      document.title=view.page==='profile'&&profileInfo(view.name)?view.name+' · ASIA ON TOUR':view.page==='tournament'&&tournamentInfo(view.id)?tournamentInfo(view.id).name+' · ASIA ON TOUR':view.page==='calendar'?'大会カレンダー · ASIA ON TOUR':view.page==='compare'?'選手比較 · ASIA ON TOUR':view.page==='tournaments'?'大会を探す · ASIA ON TOUR':view.page==='updates'?'更新履歴 · ASIA ON TOUR':view.page==='search'?'まとめて検索 · ASIA ON TOUR':'ASIA ON TOUR — Fortnite海外遠征トラッカー';
       routedHash=window.location.hash;
       window.scrollTo({top:restore?(view.scroll||0):0,behavior:'instant'});
       if(!restore){if(view.page==='profile')$('#profile-title')?.focus?.({preventScroll:true});if(view.page==='tournament')$('#tournament-title')?.focus?.({preventScroll:true});}
@@ -1311,7 +1315,7 @@
       const filters=sanitizeTournamentFilters({...currentView.filters,[key]:value});
       tournamentBrowseFilters=filters;currentView.filters={...filters};
       window.history.replaceState({aot:true,depth:routeDepth,view:captureView()},'',tournamentSearchHash(filters));routedHash=window.location.hash;
-      if(key==='q')renderTournamentList(filters);else renderTournamentSearch(filters);
+      if(key==='q'||key==='player')renderTournamentList(filters);else renderTournamentSearch(filters);
     }
     function initializeRouting(){
       const view=routeFromHash();
@@ -1840,6 +1844,7 @@
       renderProfileStyle(info.name);
       window.AOTParticipation?.renderProfile(info.name);
       window.AsiaProfileLayout?.mount(info.name,seasonScope());
+      window.AOTQuickFind?.decorateProfile(info.name);
       return true;
     }
 
@@ -2228,11 +2233,12 @@
     function renderPlayers(){
       const s=($('#search-players').value||'').trim().toLowerCase();
       const sort=$('#player-sort').value;
-      const signature=JSON.stringify([selectedSeason,s,sort]);
+      const favoriteOnly=$('#favorites-only').checked;
+       const signature=JSON.stringify([selectedSeason,s,sort,favoriteOnly,window.AOTQuickFind?.version()||0]);
       if(!playerListCache||playerListCache.signature!==signature){
-        const shown=selectedSeasonPlayers().filter(p=>[p.name,...(confirmedAliases[p.name]||[])].some(n=>n.toLowerCase().includes(s)));
+        const shown=(favoriteOnly?playerRegistry():selectedSeasonPlayers()).filter(p=>(!favoriteOnly||window.AOTQuickFind?.isFavorite(p.name))&&[p.name,...(confirmedAliases[p.name]||[])].some(n=>n.toLowerCase().includes(s)));
         const byName=seasonPlayerIndex().byName;
-        shown.sort((a,b)=>sort==='name'?a.name.localeCompare(b.name,'ja')
+        shown.sort((a,b)=>sort==='favorite'?(Number(!!window.AOTQuickFind?.isFavorite(b.name))-Number(!!window.AOTQuickFind?.isFavorite(a.name))||a.name.localeCompare(b.name,'ja')):sort==='name'?a.name.localeCompare(b.name,'ja')
           :sort==='events'?(byName.get(b.name)?.length||0)-(byName.get(a.name)?.length||0)||a.name.localeCompare(b.name,'ja')
           :playerPrizeTotal(b.name)-playerPrizeTotal(a.name)||a.name.localeCompare(b.name,'ja'));
         playerListCache={signature,rows:shown};
@@ -2240,6 +2246,7 @@
       }
       const shown=playerListCache.rows;
       $('#all-players').innerHTML=shown.length?shown.slice(0,playerVisibleCount).map(renderPlayerCard).join(''):'<div class="empty">一致する選手はまだいないよ</div>';
+       window.AOTQuickFind?.decoratePlayers();
       updatePlayerListControls(shown.length);
     }
     function showMorePlayers(){
@@ -2248,6 +2255,7 @@
       if(from>=rows.length)return;
       playerVisibleCount=Math.min(from+PLAYER_BATCH_SIZE,rows.length);
       $('#all-players').insertAdjacentHTML('beforeend',rows.slice(from,playerVisibleCount).map(renderPlayerCard).join(''));
+       window.AOTQuickFind?.decoratePlayers();
       updatePlayerListControls(rows.length);
     }
 
@@ -2395,13 +2403,13 @@
       control.addEventListener('input',refreshArchiveFilters);
       control.addEventListener('change',refreshArchiveFilters);
     });
-    $('#search-results').addEventListener('input',()=>{selectedPlayer=null;refreshArchiveFilters()});$('#search-players').addEventListener('input',renderPlayers);$('#player-sort').addEventListener('change',renderPlayers);$('#player-more').addEventListener('click',showMorePlayers);$('#export-csv').addEventListener('click',()=>download('asia-on-tour-results.csv',csvText(visible),'text/csv;charset=utf-8'));
+    $('#search-results').addEventListener('input',()=>{selectedPlayer=null;refreshArchiveFilters()});$('#search-players').addEventListener('input',renderPlayers);$('#player-sort').addEventListener('change',renderPlayers);$('#favorites-only').addEventListener('change',renderPlayers);$('#player-more').addEventListener('click',showMorePlayers);$('#export-csv').addEventListener('click',()=>download('asia-on-tour-results.csv',csvText(visible),'text/csv;charset=utf-8'));
     document.addEventListener('submit',e=>{
       if(e.target.id!=='compare-add-form')return;
       e.preventDefault();
       addComparisonPlayer($('#compare-player-input')?.value);
     });
-    document.addEventListener('input',e=>{if(e.target.id==='tournament-query')updateTournamentFilters('q',e.target.value)});
+    document.addEventListener('input',e=>{if(e.target.id==='tournament-query')updateTournamentFilters('q',e.target.value);else if(e.target.id==='tournament-player')updateTournamentFilters('player',e.target.value)});
     document.addEventListener('change',e=>{if(e.target.dataset.styleFilter&&currentView.page==='profile'){const key=e.target.dataset.styleFilter;if(Object.hasOwn(styleState,key)){styleState[key]=e.target.value;renderProfileStyle(currentView.name)}return}
       if(e.target.id==='compare-style-team'&&currentView.page==='compare'){if(AsiaPlayerStyle.TEAMS.includes(e.target.value)){styleCompareTeam=e.target.value;renderComparisonStyle(compareState)}return}
       if(e.target.id==='season-select'){changeSeason(e.target.value);return}if(e.target.id==='tournament-date-filter'&&currentView.page==='tournament'){showTournamentDate(e.target.value);return}
@@ -2411,9 +2419,10 @@
         if(['region','mode','series'].includes(key))updateComparison({...compareState,[key]:e.target.value},true);
         return;
       }if(e.target.dataset.calendarFilter&&currentView.page==='calendar'){updateCalendarFilter(e.target.dataset.calendarFilter,e.target.value);return}const rankingKey={'ranking-metric':'metric','ranking-mode':'mode','ranking-series':'series','ranking-final-kind':'finalKind'}[e.target.id];if(rankingKey&&currentView.page==='players'){updateRankingFilter(rankingKey,e.target.value);return}if(e.target.dataset.tournamentFilter)updateTournamentFilters(e.target.dataset.tournamentFilter,e.target.value)});
-    selectedSeason=seasonFromUrl();
-    refresh();
-    initializeRouting();
+    window.AOTQuickFind?.bind({rows:()=>all(),players:()=>playerRegistry(),aliases:()=>confirmedAliases,seasonLabel:()=>seasonScope(),tournament:classifyTournamentRecord,profileHref:profileHref,tournamentHref:id=>tournamentHref(id),onFavoritesChanged:()=>{playerListCache=null;if(currentView.page==='players')renderPlayers()}});
+     selectedSeason=seasonFromUrl();
+     refresh();
+     initializeRouting();
     window.AOTParticipation?.subscribePR?.(rows=>{
       if(!Array.isArray(rows))return;
       participationPRRows=rows;
