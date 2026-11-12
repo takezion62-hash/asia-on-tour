@@ -5,9 +5,10 @@
 const fs=require('node:fs'),path=require('node:path');
 const {validateData}=require('./data-checks.cjs');
 const {upsertPublicationLog}=require('./reviewed-publication-core.cjs');
+const {readResults,publishResults}=require('./source-results-store.cjs');
 const root=path.resolve(__dirname,'..');
-const read=file=>JSON.parse(fs.readFileSync(path.join(root,file),'utf8'));
-const save=(file,data)=>fs.writeFileSync(path.join(root,file),JSON.stringify(data,null,2)+'\n');
+const read=file=>file==='results.json'?readResults(root).rows:JSON.parse(fs.readFileSync(path.join(root,file),'utf8'));
+const save=(file,data)=>file==='results.json'?publishResults(root,data):fs.writeFileSync(path.join(root,file),JSON.stringify(data,null,2)+'\n');
 const assert=(ok,message)=>{if(!ok)throw Error('S43_NAW_SQUADS_IMPORT: '+message);};
 const dryRun=process.argv.includes('--dry-run');
 const doc=read('data/manual-approvals/20261110-naw-squads-confirmed.json');

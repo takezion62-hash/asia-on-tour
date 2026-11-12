@@ -11,7 +11,7 @@
   let cachedAuditRows=null;
   const state={tab:'queue',page:0,search:'',region:'all',year:'all',tournament:'all',triage:'all',loaded:false,selected:new Set()};
   const labels={queue:'確認待ち',duplicates:'重複・大会枠',errors:'不整合',unmapped:'未登録大会',coverage:'収集状況',history:'検証履歴'};
-  const required=['results.json','auto-sync-review.json','history-sync-review.json','auto-sync-status.json','history-sync-status.json'];
+  const required=['published-results','auto-sync-review.json','history-sync-review.json','auto-sync-status.json','history-sync-status.json'];
   const files=[...required,'history-sync-reviewed.json','updates.json','calendar-history-status.json','calendar-history-index.json','approval-history.json','candidate-triage.json'];
   const dom=(tag,cls,content)=>{
     const el=document.createElement(tag);
@@ -101,10 +101,43 @@
     if(!resp.ok)throw Error(name+' HTTP '+resp.status);
     return resp.json();
   }
+  async function readPublishedResults(){
+    const manifest=await read('source-results/manifest.json');
+    if(!manifest||!Number.isSafeInteger(manifest.count)||!Array.isArray(manifest.recordOrder)||
+       !Array.isArray(manifest.shards))throw Error('成績データの索引形式が不正');
+    const groups=await Promise.all(manifest.shards.map(async entry=>{
+      if(!/^source-results\\/(?:S[1-9]\\d*|unknown)\\.json$/.test(entry.file))
+        throw Error('不正なシーズンファイル');
+      const rows=await read(entry.file);
+      if(!Array.isArray(rows)||rows.length!==entry.count)
+        throw Error('シーズン別の戦績件数が一致しません');
+      return rows;
+    }));
+    const byId=new Map();
+    let teamCents=0,unknown=0;
+    for(const row of groups.flat()){
+      if(typeof row?.id!=='string'||byId.has(row.id))
+        throw Error('シーズン別の戦績IDが重複しています');
+      byId.set(row.id,row);
+      if(row.prize==null)unknown++;
+      else {
+        const amount=Math.round(row.prize*100);
+        if(!Number.isSafeInteger(amount)||amount<0)
+          throw Error('不正な賞金額');
+        teamCents+=amount;
+      }
+    }
+    if(byId.size!==manifest.count||manifest.recordOrder.length!==manifest.count||
+       teamCents!==manifest.teamPrizeCents||unknown!==manifest.unconfirmedPrizeRecords)
+      throw Error('公開戦績とシーズン索引の集計が一致しません');
+    const records=manifest.recordOrder.map(id=>byId.get(id));
+    if(records.some(row=>!row))throw Error('シーズン別の戦績IDが欠落しています');
+    return records;
+  }
   function getRows(){
     if(!state.loaded)return [];
     if(cachedAuditRows)return cachedAuditRows[state.tab]||[];
-    const records=Array.isArray(data['results.json'])?data['results.json']:[];
+    const records=Array.isArray(data['published-results'])?data['published-results']:[];
     const queue=engine.proposals(data['auto-sync-review.json'],data['history-sync-review.json'],records);
     const issues=engine.inspect(records);
     const historic=data['history-sync-status.json']||{};
@@ -270,7 +303,7 @@
   async function refresh(){
     const button=$('audit-refresh'),loading=$('audit-loading');
     button.disabled=true;cachedAuditRows=null;loading.hidden=false;loading.className='notice';loading.textContent='公開データを照合しています…';
-    const results=await Promise.allSettled(files.map(read));
+    const results=await Promise.allSettled(files.map(name=>name==='published-results'?readPublishedResults():read(name)));
     const failed=[];
     for(let i=0;i<files.length;i++){
       const result=results[i];
