@@ -11,7 +11,7 @@
   "provider": "osirion",
   "linkedPlayers": 594,
   "trackedWindows": 2960,
-  "found": 11,
+  "found": 0,
   "skipped": 11,
   "imported": 21,
   "scannedPages": 96,
@@ -20,7 +20,7 @@
   "alreadyRegistered": 4791,
   "autoApprovedTotal": 2446,
   "invalidCachedCandidates": 1,
-  "manualReviewCandidates": 11,
+  "manualReviewCandidates": 0,
   "autoApprovedCosmeticThisRun": 0,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
@@ -47,10 +47,10 @@
     "S30_Reload",
     "S30_ReloadZB"
   ],
-  "message": "同一Epic ID・大会・全スコア一致の確認候補12件を重複整理し、元のスキン獲得記録の順位9件を公式順位に訂正。賞金と掲載件数は不変。",
-  "manuallyPublished": 1486,
+  "message": "2024年ME/NAC Solo VCの公式本人順位表から11件を安全に追加。未確認賞金を付与せず、既存賞金は保持。",
+  "manuallyPublished": 1497,
   "manuallyResolvedDuplicates": 165,
-  "lastReviewedBatchAt": "2026-11-13T13:45:16.115Z",
+  "lastReviewedBatchAt": "2026-11-13T14:21:13.366Z",
   "manuallyCorrected": 13,
   "lastCorrectedReviewAt": "2026-11-13T13:45:16.115Z",
   "concurrentMerge": {
@@ -263,13 +263,11 @@
     "unrealTeamsWithCash": 2
   },
   "latestManualReview": {
-    "reviewedAt": "2026-11-13T13:45:16.115Z",
-    "reviewedCandidates": 12,
-    "published": 0,
-    "duplicatesResolved": 12,
-    "rankCorrections": 9,
-    "remainingPending": 11,
-    "policy": "Original screenshot-confirmed cosmetics protected; canonical Epic rank reconciled"
+    "reviewedAt": "2026-11-13T14:21:13.366Z",
+    "reviewedCandidates": 11,
+    "published": 11,
+    "remainingPending": 0,
+    "policy": "Exact Epic continuous-prefix + historical official rule + same-event finals/Tracker cutoff"
   },
   "autoApprovedDuoQualifierThisRun": 1,
   "latestParticipationReview": {
