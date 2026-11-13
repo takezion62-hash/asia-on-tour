@@ -17,7 +17,7 @@ on:
       - scripts/apply-s30-me-zb-duos-nonprize-20240607.cjs
       - scripts/apply-s30-me-zb-duos-20240621.cjs
       - scripts/verified-s30-me-zb-duos-20240621.cjs
-      - data/manual-approvals/20240621-me-zb-duos-final-tracker.json
+      - data/manual-approvals/20240621-me-zb-duos-final-proof.json
       - scripts/publish-verified-s32-me-vcup-20241116.cjs
       - scripts/publish-verified-2024-me-nac-last11.cjs
       - scripts/reconcile-s42-cosmetic-ranks-20261113.cjs
