@@ -35,12 +35,14 @@ function decide(row,win,checkpoint,data){
  if(win.tournamentId!==row.tournamentId||win.seasonId!==rule.seasonId||row.seasonId!==rule.seasonId||!rule.eventIds.includes(win.eventId)||!catalog.sourceEventIds.includes(win.eventId))return decline('公式イベントID不一致');
  // Historical NA qualifier cutoffs cannot be mapped broadly to NAC.
  // Allow only exact, source-backed tournament date and Round1 window.
- const historicNac=rule.verifiedLegacyNacWindow;
- const exactLegacyNacQualifier=row.region==='NAC'&&row.kind==='予選'&&
-  historicNac?.dateJst===row.date&&win.dateJst===historicNac.dateJst&&
-  historicNac.windowId===win.windowId&&win.region==='NAC'&&win.kind==='予選';
+ const historicalNac=[rule.verifiedLegacyNacWindow,...(rule.verifiedLegacyNacExtraWindows||[])]
+  .filter(Boolean);
+ const verifiedNacWindow=historicalNac.find(w=>
+  row.region==='NAC'&&row.kind==='予選'&&win.region==='NAC'&&win.kind==='予選'&&
+  w.dateJst===row.date&&w.dateJst===win.dateJst&&w.windowId===win.windowId);
+ const exactLegacyNacQualifier=Boolean(verifiedNacWindow);
  const qualifierCutoff=rule.advance[row.region]||
-  (exactLegacyNacQualifier?historicNac.cutoff:undefined);
+  (exactLegacyNacQualifier?verifiedNacWindow.cutoff:undefined);
  const oldNacZeroFinal=['S30','S31'].includes(rule.seasonId)&&rule.team==='solo'&&
   row.region==='NAC'&&row.kind==='賞金決勝'&&row.vrs===0&&row.prize===null;
  if(row.date!==win.dateJst||row.region!==win.region||
@@ -82,7 +84,7 @@ function decide(row,win,checkpoint,data){
    rec.round=win.round.replace(/\/ 予選$/,'/ 予選突破');
    rec.kind='予選';
    const legacyEvidence=exactLegacyNacQualifier?
-    ' 当該2024年NA Central開催枠の予選通過順位を別途照合: '+historicNac.source:'';
+    ' 当該2024年NA Central開催枠の予選通過順位を別途照合: '+verifiedNacWindow.source:'';
    rec.note='Epic公式規則の予選突破条件に基づき'+row.region+'上位'+qualifierCutoff+
     '名が突破。Osirion順位表'+row.rank+'位のEpic IDと照合。予選賞金$0。規則: '+rule.source+
     legacyEvidence;
