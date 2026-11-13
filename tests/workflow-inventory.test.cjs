@@ -126,4 +126,11 @@ test('records-only CI keeps semantic safety, generated-index checks and PC/mobil
  assert.match(main,/if: needs\.classify\.outputs\.mode == 'full'/);
  assert.match(main,/npm run test:e2e -- tests\/ci-data-smoke\.spec\.cjs/);
  assert.match(main,/run: node scripts\/ci-required-gate\.cjs/);
+ const approval=read('reviewed-candidate-publication.yml');
+ assert.match(approval,/npm run validate/);
+ assert.match(approval,/node scripts\/build-season-data\.cjs --check/);
+ assert.match(approval,/node scripts\/build-candidate-triage\.cjs --check/);
+ assert.match(approval,/tests\/data-validation\.test\.cjs/);
+ assert.doesNotMatch(approval,/npm run test:e2e/);
+ assert.match(approval,/gh pr create/);
 });
