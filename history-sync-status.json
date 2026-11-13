@@ -1,7 +1,7 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-13T10:42:06.031Z",
+  "checkedAt": "2026-11-13T14:36:43.041Z",
   "mode": "review",
   "scope": "history",
   "dateMode": "rolling",
@@ -9,18 +9,18 @@
   "fromDate": "2023-01-01",
   "toDate": "2026-11-13",
   "provider": "osirion",
-  "linkedPlayers": 594,
-  "trackedWindows": 2960,
-  "found": 0,
-  "skipped": 11,
-  "imported": 21,
+  "linkedPlayers": 599,
+  "trackedWindows": 2961,
+  "found": 19,
+  "skipped": 13,
+  "imported": 35,
   "scannedPages": 96,
-  "completedWindows": 477,
+  "completedWindows": 481,
   "identityConflicts": 3,
-  "alreadyRegistered": 4791,
-  "autoApprovedTotal": 2446,
+  "alreadyRegistered": 4840,
+  "autoApprovedTotal": 2481,
   "invalidCachedCandidates": 1,
-  "manualReviewCandidates": 0,
+  "manualReviewCandidates": 19,
   "autoApprovedCosmeticThisRun": 0,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
@@ -28,10 +28,19 @@
   "timeLimitReached": false,
   "retryWindows": 6,
   "transientFailures": 0,
-  "malformedFailures": 0,
-  "skippedLeaderboards": [],
-  "reviewOnlyWindows": 1328,
-  "reviewOnlyCandidates": 0,
+  "malformedFailures": 1,
+  "skippedLeaderboards": [
+    {
+      "window": "epicgames_S42_SoloVictoryCup_OCE/S42_SoloVictoryCup_Event1Round1_OCE",
+      "page": 0,
+      "attempt": 6,
+      "code": "OSIRION_INVALID_LEADERBOARD",
+      "reason": "大会順位表のID/形式が不正 [epicgames_S42_SoloVictoryCup_OCE/S42_SoloVictoryCup_Event1Round1_OCE page=0]: totalPages=0",
+      "retryAfter": "2026-11-15T14:35:02.240Z"
+    }
+  ],
+  "reviewOnlyWindows": 1329,
+  "reviewOnlyCandidates": 8,
   "unmappedEvents": 241,
   "unmappedEventIds": [
     "S30_ConsoleCashCups",
@@ -47,44 +56,44 @@
     "S30_Reload",
     "S30_ReloadZB"
   ],
-  "message": "2024年ME/NAC Solo VCの公式本人順位表から11件を安全に追加。未確認賞金を付与せず、既存賞金は保持。",
+  "message": "最新版と安全統合：新規掲載35件、重複スキップ0件、要確認の競合0件、確認待ち19件。既存の戦績・賞金は保持。",
   "manuallyPublished": 1497,
   "manuallyResolvedDuplicates": 165,
   "lastReviewedBatchAt": "2026-11-13T14:21:13.366Z",
   "manuallyCorrected": 13,
   "lastCorrectedReviewAt": "2026-11-13T13:45:16.115Z",
   "concurrentMerge": {
-    "appended": 21,
+    "appended": 35,
     "alreadyPublished": 0,
     "reviewConflicts": 0,
-    "keptPending": 40,
-    "reconciledAt": "2026-11-13T10:42:13.860Z"
+    "keptPending": 19,
+    "reconciledAt": "2026-11-13T14:36:57.681Z"
   },
   "coverage": {
-    "total": 2960,
-    "completed": 477,
-    "notStarted": 2321,
-    "partial": 156,
-    "retryWaiting": 5,
-    "retryDue": 1,
-    "remaining": 2483,
+    "total": 2961,
+    "completed": 481,
+    "notStarted": 2317,
+    "partial": 157,
+    "retryWaiting": 2,
+    "retryDue": 4,
+    "remaining": 2480,
     "retryCount": 6,
-    "completionPercent": 16.1,
+    "completionPercent": 16.2,
     "byRegion": {
       "OCE": {
-        "total": 522,
-        "completed": 69,
+        "total": 523,
+        "completed": 70,
         "pending": 453
       },
       "ME": {
         "total": 518,
-        "completed": 153,
-        "pending": 365
+        "completed": 155,
+        "pending": 363
       },
       "EU": {
         "total": 538,
-        "completed": 65,
-        "pending": 473
+        "completed": 66,
+        "pending": 472
       },
       "BR": {
         "total": 517,
@@ -105,8 +114,8 @@
     "byYear": {
       "2024": {
         "total": 974,
-        "completed": 127,
-        "pending": 847
+        "completed": 129,
+        "pending": 845
       },
       "2025": {
         "total": 690,
@@ -114,30 +123,19 @@
         "pending": 634
       },
       "2026": {
-        "total": 1296,
-        "completed": 294,
-        "pending": 1002
+        "total": 1297,
+        "completed": 296,
+        "pending": 1001
       }
     },
     "outsideScopeCheckpoints": 0,
     "samples": [
       {
-        "window": "epicgames_S42_SoloVictoryCup_OCE/S42_SoloVictoryCup_Event1Round1_OCE",
-        "date": "2026-09-05",
-        "region": "OCE",
-        "series": "victory-cup",
-        "status": "retryDue",
-        "nextPage": 0,
-        "totalPages": null,
-        "retryAfter": "2026-11-13T10:40:57.825Z",
-        "errorCode": "OSIRION_INVALID_LEADERBOARD"
-      },
-      {
         "window": "epicgames_S30_SoloZBVictoryCashCup_ME/S30_SoloZBVictoryCashCup_Event4Round1_ME",
         "date": "2024-06-25",
         "region": "ME",
         "series": "victory-cup",
-        "status": "retryWaiting",
+        "status": "retryDue",
         "nextPage": 10,
         "totalPages": 100,
         "retryAfter": "2026-11-13T12:42:34.628Z",
@@ -148,7 +146,7 @@
         "date": "2024-06-25",
         "region": "NAC",
         "series": "victory-cup",
-        "status": "retryWaiting",
+        "status": "retryDue",
         "nextPage": 11,
         "totalPages": 100,
         "retryAfter": "2026-11-13T12:42:36.369Z",
@@ -159,7 +157,7 @@
         "date": "2024-07-16",
         "region": "ME",
         "series": "victory-cup",
-        "status": "retryWaiting",
+        "status": "retryDue",
         "nextPage": 11,
         "totalPages": 100,
         "retryAfter": "2026-11-13T12:42:37.979Z",
@@ -170,7 +168,7 @@
         "date": "2024-09-03",
         "region": "ME",
         "series": "victory-cup",
-        "status": "retryWaiting",
+        "status": "retryDue",
         "nextPage": 11,
         "totalPages": 100,
         "retryAfter": "2026-11-13T12:42:39.856Z",
@@ -185,6 +183,17 @@
         "nextPage": 0,
         "totalPages": null,
         "retryAfter": "2026-11-15T09:04:59.639Z",
+        "errorCode": "OSIRION_INVALID_LEADERBOARD"
+      },
+      {
+        "window": "epicgames_S42_SoloVictoryCup_OCE/S42_SoloVictoryCup_Event1Round1_OCE",
+        "date": "2026-09-05",
+        "region": "OCE",
+        "series": "victory-cup",
+        "status": "retryWaiting",
+        "nextPage": 0,
+        "totalPages": null,
+        "retryAfter": "2026-11-15T14:35:02.240Z",
         "errorCode": "OSIRION_INVALID_LEADERBOARD"
       },
       {
@@ -269,7 +278,7 @@
     "remainingPending": 0,
     "policy": "Exact Epic continuous-prefix + historical official rule + same-event finals/Tracker cutoff"
   },
-  "autoApprovedDuoQualifierThisRun": 1,
+  "autoApprovedDuoQualifierThisRun": 0,
   "latestParticipationReview": {
     "reviewedAt": "2026-11-12T02:59:51.445Z",
     "participationPublished": 0,
