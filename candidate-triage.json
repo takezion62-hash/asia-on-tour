@@ -1,7 +1,7 @@
 {
   "version": 1,
   "sourceCheckedAt": "2026-11-07T23:16:39.215Z",
-  "total": 31,
+  "total": 32,
   "alreadyResolved": 0,
   "byYear": [
     {
@@ -14,7 +14,7 @@
     },
     {
       "name": "2026",
-      "count": 13
+      "count": 14
     }
   ],
   "byRegion": [
@@ -32,7 +32,7 @@
     },
     {
       "name": "OCE",
-      "count": 2
+      "count": 3
     }
   ],
   "byTournament": [
@@ -47,6 +47,10 @@
     {
       "name": "HamiKuma Cup Battle Royale / NAW / 2026",
       "count": 3
+    },
+    {
+      "name": "Reload ZB Duos Cash Cup Zero Build / OCE / 2026",
+      "count": 1
     },
     {
       "name": "Solo Cash Cup / OCE / 2025",
@@ -72,7 +76,7 @@
     },
     {
       "name": "rules-review",
-      "count": 1
+      "count": 2
     }
   ],
   "queue": [
@@ -237,6 +241,39 @@
         "seenPages": 1,
         "totalPages": 1,
         "sourceKey": "epicgames_S40_FNCSDivisionalCup_Division1_ME/S40_FNCSDivisionalCup_Division1_Week5Final_ME",
+        "possibleExistingId": null
+      },
+      "rewardState": "cash-unconfirmed"
+    },
+    {
+      "id": "auto-s43-08f4dbe1293e",
+      "origin": "recent",
+      "date": "2026-11-13",
+      "year": "2026",
+      "region": "OCE",
+      "tournamentId": "ch7s5-reload-zero-build-duos-cash-cup",
+      "event": "Reload ZB Duos Cash Cup Zero Build",
+      "round": "Event 1 · Round 2 / 参加確認",
+      "player": "bigsky / Reo",
+      "kind": "参加確認",
+      "rank": 3,
+      "points": 264,
+      "kills": 30,
+      "vrs": 0,
+      "prize": null,
+      "source": "https://www.fortnite.com/competitive/events/S43_ReloadZBDuosCashCup/?region=OCE&round=S43_ReloadZBDuosCashCup_Event1Round2_OCE",
+      "status": "rules-review",
+      "action": "公式規則・賞金・突破・スキン条件を個別確認",
+      "reason": "S36 Console DuosまたはS43 Reload ZB Duosの登録済みRound1ではありません",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": true,
+        "observedPartial": false,
+        "seenPages": 1,
+        "totalPages": 1,
+        "sourceKey": "epicgames_S43_ReloadZBDuosCashCup_OCE/S43_ReloadZBDuosCashCup_Event1Round2_OCE",
         "possibleExistingId": null
       },
       "rewardState": "cash-unconfirmed"
