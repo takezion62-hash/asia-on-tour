@@ -49,7 +49,15 @@ function validateRegistry(doc,tournaments){
       Object.entries(rule.advance).some(([region,value])=>!REGIONS.has(region)||!positive(value)))fail(id,'地域別予選通過順位が不正');
    if(rule.cosmeticRanks!==undefined)fail(id,'Victory Cupにスキン順位は登録不可');
    if(rule.prizePerVictory!==undefined&&(!positive(rule.prizePerVictory)||rule.prizePerVictory>10000))fail(id,'VR賞金単価が不正');
-   if(rule.autoApproval==='verified-duo-qualifier-only'){
+   if(rule.autoApproval==='verified-qualifier-participation'){
+     // The only nonqualifier attendance rule: verified S42 Solo Reload.
+     if(id!=='ch7s4-solo-reload-victory-cup'||rule.seasonId!=='S42'||
+       rule.team!=='solo'||rule.matchCaps['予選']!==8||
+       rule.matchCaps['賞金決勝']!==3||rule.prizePerVictory!==100||
+       JSON.stringify(rule.eventIds)!=='["S42_ReloadSoloVictoryCup","S42_ReloadReloadSoloVictoryCup"]'||
+       JSON.stringify(rule.advance)!=='{"EU":1600,"NAC":800,"NAW":320,"BR":320,"ME":320,"OCE":320}')
+       fail(id,'S42 Solo Reloadの公式予選参加・通過枠以外は承認不可');
+   } else if(rule.autoApproval==='verified-duo-qualifier-only'){
      if(id!=='ch6s3-console-duos-victory'||rule.seasonId!=='S36'||rule.team!=='duo'||
        JSON.stringify(rule.eventIds)!=='["S36_VictoryDuosCup"]'||
        rule.matchCaps['予選']!==7||rule.matchCaps['賞金決勝']!==3||

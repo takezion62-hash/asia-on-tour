@@ -216,3 +216,33 @@ test('only individually verified 2024 NA Central qualifier windows can use NA cu
   assert.equal(decide(otherRec,otherWin,{...checkpoint,proposals:[otherRec]},data).approved,false);
  }
 });
+
+test('S42 Solo Reload verified Round 1 non-qualifiers are attendance-only, never prize or advance',()=>{
+ const win={key:'epicgames_S42_ReloadReloadSoloVictoryCup_ME/S42_ReloadSoloVictoryCup_Event5_Round1_ME',
+  eventId:'S42_ReloadReloadSoloVictoryCup',windowId:'S42_ReloadSoloVictoryCup_Event5_Round1_ME',
+  dateJst:'2026-10-24',region:'ME',seasonId:'S42',
+  tournamentId:'ch7s4-solo-reload-victory-cup',kind:'予選',round:'Event 5 · Round 1 / 予選'};
+ const row0={id:'auto-s42-1029384756ab',date:win.dateJst,region:win.region,seasonId:'S42',
+  tournamentId:win.tournamentId,event:'Solo Reload Victory Cup',round:win.round,
+  kind:win.kind,player:'A',rank:6130,points:120,kills:4,vrs:0,matches:7,prize:0,
+  verified:true,source:source(win)};
+ const data={players:{candidates:[{name:'A'}]},tournaments:{catalog:[{
+  id:win.tournamentId,seasonId:'S42',team:'solo',series:'victory-cup',
+  name:'Solo Reload Victory Cup',sourceEventIds:[win.eventId]}]},results:[]};
+ const cp={complete:true,proposals:[row0]};
+ const out=decide(row0,win,cp,data);
+ assert.equal(out.approved,true,out.reason);
+ assert.equal(out.record.kind,'参加確認');
+ assert.equal(out.record.round,'Event 5 · Round 1 / 参加確認');
+ assert.equal(out.record.prize,0);
+ assert.match(out.record.note,/突破圏外/);
+ const advanced={...row0,rank:320};
+ const good=decide(advanced,win,{...cp,proposals:[advanced]},data);
+ assert.equal(good.approved,true,good.reason);
+ assert.equal(good.record.kind,'予選');
+ assert.equal(good.record.round,'Event 5 · Round 1 / 予選突破');
+ assert.equal(decide({...row0,prize:100},win,{...cp,proposals:[{...row0,prize:100}]},data).approved,false);
+ assert.equal(decide(row0,win,{...cp,proposals:[]},data).approved,false);
+ assert.equal(decide({...row0,matches:9},win,{...cp,proposals:[{...row0,matches:9}]},data).approved,false);
+ assert.equal(decide(row0,win,{...cp,complete:false},data).approved,false);
+});
