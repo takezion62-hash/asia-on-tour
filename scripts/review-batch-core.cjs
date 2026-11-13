@@ -56,6 +56,7 @@ function reviewBatch(db,{limit=100,ids=null,runId='local-1',timestamp=new Date()
  const duplicates=[],held=[],checked=[];
  stats.indexMs=elapsed(begin);
  const evidenceStart=performance.now();
+ let duplicateMs=0;
  // Each group is intentionally processed from the same event-window checkpoint
  // rather than rescanning all stored windows for every candidate.
  for(const group of groups){
@@ -84,7 +85,9 @@ function reviewBatch(db,{limit=100,ids=null,runId='local-1',timestamp=new Date()
     const observedPrefix=verifiedPartialPage(row,{end},checkpoint);
     if(checkpoint.complete!==true&&!observedPrefix)
      throw Error('未取得順位があり、当該行の連続順位表を確認できない');
+    const duplicateStart=performance.now();
     const found=existing.match(row);
+    duplicateMs+=performance.now()-duplicateStart;
     if(found){
      if(!strictDuplicate(found.previous,row))
       throw Error('既存成績に数値差異・同定疑い: '+found.previous.id);
@@ -93,7 +96,9 @@ function reviewBatch(db,{limit=100,ids=null,runId='local-1',timestamp=new Date()
      checked.push({id:row.id,decision:'already-published'});
      continue;
     }
+    const pendingStart=performance.now();
     const pending=accepted.match(row);
+    duplicateMs+=performance.now()-pendingStart;
     if(pending)throw Error('同一バッチ内の重複候補: '+pending.previous.id);
     let policy;
     if(row.reviewOnly===true&&row.kind==='参加確認'&&row.prize===null){
@@ -117,7 +122,8 @@ function reviewBatch(db,{limit=100,ids=null,runId='local-1',timestamp=new Date()
    }catch(error){held.push({id:row.id,player:row.player,reason:error.message})}
   }
  }
- stats.evidenceAndDuplicateMs=elapsed(evidenceStart);
+ stats.duplicateMs=Number(duplicateMs.toFixed(3));
+ stats.evidenceMs=Number((performance.now()-evidenceStart-duplicateMs).toFixed(3));
  const planStart=performance.now();
  let current={...db};
  const published=[];
