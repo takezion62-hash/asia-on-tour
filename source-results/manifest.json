@@ -2,11 +2,11 @@
   "version": 1,
   "role": "generated canonical-source snapshot; results.json remains authoritative in phase 1",
   "canonicalFile": "results.json",
-  "canonicalSha256": "e11163314c4582499ef3563cc6b5dc9cec0bf1c871566f7a152531296b7b850f",
-  "count": 6749,
-  "teamPrizeCents": 6582000,
+  "canonicalSha256": "a0cf52ab65354dff44be0e80257005cdfa76a31aab8b7a7ddac2b50fbc063439",
+  "count": 6759,
+  "teamPrizeCents": 6782000,
   "unconfirmedPrizeRecords": 1003,
-  "personalPrizeCents": 6562000,
+  "personalPrizeCents": 6762000,
   "recordOrder": [
     "s42-me-slenderman-reload-skin-20261021-acris-chacha",
     "s42-me-slenderman-reload-skin-20261021-karf-alpha",
@@ -6756,7 +6756,17 @@
     "s28-me-zb-duos-vc-final-20240120-r16",
     "s28-me-zb-duos-vc-final-20240120-r19",
     "s28-me-zb-duos-vc-final-20240120-r21",
-    "s28-me-zb-duos-vc-final-20240120-r23"
+    "s28-me-zb-duos-vc-final-20240120-r23",
+    "s28-me-zb-duos-vc-final-20231216-r18",
+    "s28-me-zb-duos-vc-final-20231216-r25",
+    "s26-me-zb-duos-vc-final-20231023-r4",
+    "s26-me-zb-duos-vc-final-20231023-r7",
+    "s26-me-zb-duos-vc-final-20231023-r18",
+    "s26-me-zb-duos-vc-final-20231023-r20",
+    "s26-me-zb-duos-vc-final-20231023-r21",
+    "s26-me-zb-duos-vc-final-20231023-r24",
+    "s26-me-zb-duos-vc-final-20231023-r25",
+    "s26-me-zb-duos-vc-final-20231023-r27"
   ],
   "shards": [
     {
@@ -6787,13 +6797,22 @@
       "sha256": "d9394c454e5cc91df6126105564aec13a1c9134b056fbb6c9851f55e1fb570fa"
     },
     {
-      "seasonId": "S28",
-      "file": "source-results/S28.json",
+      "seasonId": "S26",
+      "file": "source-results/S26.json",
       "count": 8,
       "teamPrizeCents": 160000,
       "unconfirmedPrizeRecords": 0,
       "personalPrizeCents": 160000,
-      "sha256": "21cbcae1b72c6f81291ca7c40cd99664f8c5fae378697b1c443cf6b3bbcfb670"
+      "sha256": "85f3fe588f15e4508daf725b48deb3fa162adec226fa74ab9fd30f7f6d6f0892"
+    },
+    {
+      "seasonId": "S28",
+      "file": "source-results/S28.json",
+      "count": 10,
+      "teamPrizeCents": 200000,
+      "unconfirmedPrizeRecords": 0,
+      "personalPrizeCents": 200000,
+      "sha256": "ffa502a15bf36f8fbd10b6364eee5cde6a6a58cce5973a20c2dc2daef32a1d51"
     },
     {
       "seasonId": "S29",
