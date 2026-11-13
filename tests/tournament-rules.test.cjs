@@ -11,8 +11,8 @@ const clone=x=>JSON.parse(JSON.stringify(x));
 
 test('shared official tournament rules include review-only Solo Series Finals and approved types',()=>{
  assert.deepEqual(validateRegistry(registry,tournaments),[]);
- assert.equal(registry.rules.length,21);
- assert.equal(Object.keys(RULES).length,9);
+ assert.equal(registry.rules.length,22);
+ assert.equal(Object.keys(RULES).length,10);
  assert.equal(Object.keys(CUT_OFFS).length,9);
  for(const rule of registry.rules){
   if(rule.series==='victory-cup')assert.strictEqual(RULES[rule.id].source,rule.source);
@@ -238,4 +238,16 @@ test('S42 Lady Liberty Battle Royale NAW official costume cutoffs',()=>{
  assert.equal(evaluate(row).eligible,true);
  assert.equal(evaluate({...row,rank:201}).eligible,false);
  assert.equal(evaluate({...row,source:'https://www.fortnite.com/competitive/events/S42_PurgeCup/?region=ME&round=S42_PurgeCup_ME'}).eligible,false);
+});
+
+test('S32 Remix Solo Victory applies only verified ME rules, not historical NA aliases',()=>{
+ const rule=RULES['ch5s5-solo-victory-cup'];
+ assert.ok(rule);
+ assert.equal(rule.seasonId,'S32');
+ assert.deepEqual(rule.eventIds,['S32_SoloVictoryCashCup']);
+ assert.equal(rule.prizePerVictory,100);
+ assert.equal(rule.advance.ME,2000);
+ assert.equal(rule.advance.NAC,undefined);
+ assert.equal(rule.matchCaps['賞金決勝'],3);
+ assert.match(rule.source,/fortnite.com\\/news\\/competitive-details-make-your-mark-in-chapter-2-remix/);
 });
