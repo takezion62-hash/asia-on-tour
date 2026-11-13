@@ -105,6 +105,8 @@ jobs:
         run: node scripts/apply-s30-me-zb-duos-nonprize-20240607.cjs --dry-run
       - name: 2024/11/16 ME Solo決勝：公式Epic ID・独立した賞金根拠を照合（書込なし）
         run: node scripts/publish-verified-s32-me-vcup-20241116.cjs --dry-run
+      - name: S42スキン大会の順位差9件・重複12件を公式Epic順位で安全照合（書込なし）
+        run: node scripts/reconcile-s42-cosmetic-ranks-20261113.cjs --dry-run
       - name: 戦績データ更新は公開索引・確認待ち索引の正確な一致を確認
         if: needs.classify.outputs.mode == 'data'
         run: |
