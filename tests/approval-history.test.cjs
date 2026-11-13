@@ -129,3 +129,30 @@ test('S31 2024 Event8 OCE/ME cash is $100 only for an exact original Round2 Vict
   }
  }
 });
+
+test('2026 S42 Solo Reload verified nonqualifier is $0 attendance, never an award',()=>{
+ const rule=require('../scripts/verified-history-approval.cjs').RULES['ch7s4-solo-reload-victory-cup'];
+ const id='auto-s42-aaabbbcccddd';
+ const source='https://www.fortnite.com/competitive/events/S42_ReloadReloadSoloVictoryCup/?region=ME&round=S42_ReloadSoloVictoryCup_Event5_Round1_ME';
+ const r={...result,id,date:'2026-10-24',seasonId:'S42',region:'ME',
+  event:'Solo Reload Victory Cup',tournamentId:'ch7s4-solo-reload-victory-cup',
+  round:'Event 5 · Round 1 / 参加確認',kind:'参加確認',rank:6130,
+  points:130,kills:3,vrs:0,matches:5,prize:0,verified:true,source,
+  note:'Epic公式で上位320名が予選突破。突破圏外を本人IDと確認。規則: '+rule.source};
+ const entry={id,recordId:id,decision:'published',policy:'verified-rule',source,rule:rule.source};
+ const ledger={version:1,entries:[entry]};
+ assert.deepEqual(audit([r],ledger,{confirmedAliases:{}}),[]);
+ for(const modified of [
+  {...r,prize:100},
+  {...r,rank:320},
+  {...r,kind:'予選'},
+  {...r,round:'Event 5 · Round 2 / 参加確認'},
+  {...r,source:source.replace('Round1','Round2')},
+  {...r,source:source.replace('region=ME','region=NAC')},
+  {...r,matches:9},
+  {...r,notes:'different',note:'no official rule evidence'},
+  {...r,tournamentId:'ch7s4-solo-victory-cup'}
+ ])assert.ok(audit([modified],ledger,{confirmedAliases:{}}).length>0,
+   'alteration must fail: '+JSON.stringify(modified));
+ assert.ok(audit([r],{version:1,entries:[{...entry,rule:'https://example.com'}]},{confirmedAliases:{}}).length>0);
+});
