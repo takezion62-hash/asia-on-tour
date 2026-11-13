@@ -15457,12 +15457,12 @@
       "id": "auto-s30-1c7844c647ce",
       "decision": "published",
       "recordId": "auto-s30-1c7844c647ce",
-      "policy": "attendance-only",
+      "policy": "verified-tracker-duos-cash-20240621",
       "approvedAt": "2026-11-12T18:30:11.505Z",
       "approvedBy": "ChatGPT / owner-authorized verified review",
       "source": "https://www.fortnite.com/competitive/events/S30_DuosCashCupZB/?region=ME&round=S30_DuosCashCupZB_Event3Round2_ME",
-      "rule": null,
-      "evidence": "Exact Epic account and team roster, canonical official event/calendar, ranked checkpoint with continuous mature rows or complete scan; duplicate check"
+      "rule": "https://www.fortnite.com/news/duos-cash-cups-chapter-5-season-3-official-rules",
+      "evidence": "13th-place $200/team, $100 each by 2024-06-21 original user Tracker screenshot, 2 unique Epic IDs and Epic official cash rules: https://fortnitetracker.com/events/epicgames_S30_DuosCashCupZB_ME?window=S30_DuosCashCupZB_Event3Round2_ME"
     },
     {
       "id": "auto-s30-59e00ad021a8",
@@ -19621,6 +19621,28 @@
       "source": "https://www.fortnite.com/competitive/events/S32_SoloVictoryCashCup/?region=NAC&round=S32_SoloVictoryCashCup_Event3Round1_NAC",
       "rule": "https://www.fortnite.com/news/competitive-details-make-your-mark-in-chapter-2-remix",
       "evidence": "保存済みEpic IDと連続する公式順位表で順位173位・191pt・8K・1VR・5試合を確認。公式予選のNAC上位10000名の突破枠内（173位）。予選賞金$0。当該NAC Event3開催枠のFortnite Tracker規則でも上位10,000人と確認。 公式規則: https://www.fortnite.com/news/competitive-details-make-your-mark-in-chapter-2-remix。予選突破出典: https://fortnitetracker.com/events/epicgames_S32_SoloVictoryCashCup_NAC?page=2&window=S32_SoloVictoryCashCup_Event3Round1_NAC。後続の未取得ページは確認済みとして扱わない。"
+    },
+    {
+      "id": "manual-s30-me-zbduos-20240621-r26",
+      "recordId": "manual-s30-me-zbduos-20240621-r26",
+      "decision": "published",
+      "policy": "verified-tracker-duos-cash-20240621",
+      "approvedAt": "2026-11-13T15:16:13.174Z",
+      "approvedBy": "ChatGPT / owner-authorized Tracker screenshot review",
+      "source": "https://www.fortnite.com/competitive/events/S30_DuosCashCupZB/?region=ME&round=S30_DuosCashCupZB_Event3Round2_ME",
+      "rule": "https://www.fortnite.com/news/duos-cash-cups-chapter-5-season-3-official-rules",
+      "evidence": "2024-06-21 ME ZB Duos Cash Cup official Top25 cash threshold; rank 26/35 $0; 2 unique Tracker Epic IDs: https://fortnitetracker.com/events/epicgames_S30_DuosCashCupZB_ME?window=S30_DuosCashCupZB_Event3Round2_ME"
+    },
+    {
+      "id": "manual-s30-me-zbduos-20240621-r35",
+      "recordId": "manual-s30-me-zbduos-20240621-r35",
+      "decision": "published",
+      "policy": "verified-tracker-duos-cash-20240621",
+      "approvedAt": "2026-11-13T15:16:13.175Z",
+      "approvedBy": "ChatGPT / owner-authorized Tracker screenshot review",
+      "source": "https://www.fortnite.com/competitive/events/S30_DuosCashCupZB/?region=ME&round=S30_DuosCashCupZB_Event3Round2_ME",
+      "rule": "https://www.fortnite.com/news/duos-cash-cups-chapter-5-season-3-official-rules",
+      "evidence": "2024-06-21 ME ZB Duos Cash Cup official Top25 cash threshold; rank 26/35 $0; 2 unique Tracker Epic IDs: https://fortnitetracker.com/events/epicgames_S30_DuosCashCupZB_ME?window=S30_DuosCashCupZB_Event3Round2_ME"
     }
   ]
 }
