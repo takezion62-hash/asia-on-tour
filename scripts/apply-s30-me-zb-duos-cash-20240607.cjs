@@ -155,7 +155,9 @@ if(changes.length)upsertPublicationLog(updates,{
  id:b.id,date:'2026-11-13',
  title:'2024/6/7 ME ZB Duos Cash Cup決勝：10組の賞金額・個人配分を訂正',
  description:'本人ID・ユーザー提供Tracker画像の1〜25位賞金表示を照合。既掲載8件を参加確認から賞金決勝へ修正し、不足2件を追加。総チーム賞金$2400（各2名に正確に配分）。',
- recordIds:changes
+ // Existing eight records are corrections: they remain tied to their original
+ // publication log; only the two newly imported records are new publication IDs.
+ recordIds:added
 });
 const validated=validateData({results,players,tournaments});
 assert(validated.errors.length===0,
