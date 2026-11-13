@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-13T12:55:11.304Z",
+  "reviewedAt": "2026-11-13T13:47:26.221Z",
   "entries": [
     {
       "id": "auto-s43-21408f1d31bc",
@@ -19423,6 +19423,83 @@
       "rule": "https://www.fortnite.com/news/competitive-details-make-your-mark-in-chapter-2-remix",
       "source": "https://www.fortnite.com/competitive/events/S32_SoloVictoryCashCup/?region=ME&round=S32_SoloVictoryCashCup_Event2Round2_ME",
       "evidence": "Saved Epic-ID Event2 Round2 score and 1VR, independent Liquipedia $100 player record: https://liquipedia.net/fortnite/Seljuny/Results"
+    },
+    {
+      "id": "auto-s42-140b7ff0b93e",
+      "decision": "published",
+      "recordId": "auto-s42-140b7ff0b93e",
+      "policy": "attendance-only",
+      "approvedAt": "2026-11-13T13:47:26.221Z",
+      "approvedBy": "takezion62-hash",
+      "rule": null,
+      "source": "https://www.fortnite.com/competitive/events/S42_InoxtagIconCup/?region=NAW&round=S42_InoxtagIconCup_NAW",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s42-01269687093d",
+      "decision": "published",
+      "recordId": "auto-s42-01269687093d",
+      "policy": "attendance-only",
+      "approvedAt": "2026-11-13T13:47:26.221Z",
+      "approvedBy": "takezion62-hash",
+      "rule": null,
+      "source": "https://www.fortnite.com/competitive/events/S42_InoxtagIconCup/?region=NAW&round=S42_InoxtagIconCup_NAW",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s42-960a29dae749",
+      "decision": "published",
+      "recordId": "auto-s42-960a29dae749",
+      "policy": "verified-rule",
+      "approvedAt": "2026-11-13T13:47:26.221Z",
+      "approvedBy": "takezion62-hash",
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-4-official-rules",
+      "source": "https://www.fortnite.com/competitive/events/S42_ReloadReloadSoloVictoryCup/?region=ME&round=S42_ReloadSoloVictoryCup_Event5_Round1_ME",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s42-06ad2ac7ca57",
+      "decision": "published",
+      "recordId": "auto-s42-06ad2ac7ca57",
+      "policy": "verified-rule",
+      "approvedAt": "2026-11-13T13:47:26.221Z",
+      "approvedBy": "takezion62-hash",
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-4-official-rules",
+      "source": "https://www.fortnite.com/competitive/events/S42_ReloadReloadSoloVictoryCup/?region=ME&round=S42_ReloadSoloVictoryCup_Event5_Round1_ME",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s42-c4639cd27eeb",
+      "decision": "published",
+      "recordId": "auto-s42-c4639cd27eeb",
+      "policy": "verified-rule",
+      "approvedAt": "2026-11-13T13:47:26.221Z",
+      "approvedBy": "takezion62-hash",
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-4-official-rules",
+      "source": "https://www.fortnite.com/competitive/events/S42_ReloadReloadSoloVictoryCup/?region=ME&round=S42_ReloadSoloVictoryCup_Event5_Round1_ME",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s42-a4a73ad234c4",
+      "decision": "published",
+      "recordId": "auto-s42-a4a73ad234c4",
+      "policy": "verified-rule",
+      "approvedAt": "2026-11-13T13:47:26.221Z",
+      "approvedBy": "takezion62-hash",
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-4-official-rules",
+      "source": "https://www.fortnite.com/competitive/events/S42_ReloadReloadSoloVictoryCup/?region=ME&round=S42_ReloadSoloVictoryCup_Event5_Round1_ME",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s42-9db299dbed6a",
+      "decision": "published",
+      "recordId": "auto-s42-9db299dbed6a",
+      "policy": "verified-rule",
+      "approvedAt": "2026-11-13T13:47:26.221Z",
+      "approvedBy": "takezion62-hash",
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-4-official-rules",
+      "source": "https://www.fortnite.com/competitive/events/S42_ReloadReloadSoloVictoryCup/?region=ME&round=S42_ReloadSoloVictoryCup_Event5_Round1_ME",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
     }
   ]
 }
