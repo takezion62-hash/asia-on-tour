@@ -71,15 +71,22 @@ test('4つの定期スキャナーはスケジュールとmanualを保持、テ�
   assert.match(yaml,/contents:\s*write/,name+' must retain publication permissions');
  }
 });
-test('管理者の承認PRはvalidate・全unit・PCスマホを各1回だけ通し、手動承認を保持',()=>{
+test('管理者の承認PRは重要データを先に検証し、PCスマホは必須PR CIで保証する',()=>{
  const content=load('reviewed-candidate-publication.yml');
  assert.match(content,/preview_only:/);
  assert.match(content,/NOT_CONFIRMED/);
  assert.match(content,/CONFIRM/);
  assert.match(content,/gh pr create/);
  assert.match(content,/npm run validate/);
- assert.match(content,/npm run test:unit/);
- assert.match(content,/npm run test:e2e/);
+ assert.match(content,/node scripts\/build-season-data\.cjs --check/);
+ assert.match(content,/node scripts\/build-candidate-triage\.cjs --check/);
+ assert.match(content,/node --test/);
+ assert.match(content,/tests\/approval-history\.test\.cjs/);
+ assert.doesNotMatch(content,/npm run test:unit/);
+ assert.doesNotMatch(content,/npm run test:e2e/);
+ const required=load('tests.yml');
+ assert.match(required,/run: node scripts\/ci-required-gate\.cjs/);
+ assert.match(required,/npm run test:e2e/);
  assert.doesNotMatch(content,/run: npm test\s*$/m,'nested npm test duplicates earlier validation/unit jobs');
  assert.doesNotMatch(content,/node --test tests\/manual-approval\.test\.cjs/,
   'explicit single tests repeat full unit suite');
