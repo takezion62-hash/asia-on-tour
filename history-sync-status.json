@@ -11,7 +11,7 @@
   "provider": "osirion",
   "linkedPlayers": 592,
   "trackedWindows": 2960,
-  "found": 17,
+  "found": 9,
   "skipped": 17,
   "imported": 20,
   "scannedPages": 96,
@@ -20,7 +20,7 @@
   "alreadyRegistered": 4710,
   "autoApprovedTotal": 2402,
   "invalidCachedCandidates": 1,
-  "manualReviewCandidates": 17,
+  "manualReviewCandidates": 9,
   "autoApprovedCosmeticThisRun": 0,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
@@ -40,7 +40,7 @@
     }
   ],
   "reviewOnlyWindows": 1328,
-  "reviewOnlyCandidates": 7,
+  "reviewOnlyCandidates": 1,
   "unmappedEvents": 239,
   "unmappedEventIds": [
     "S30_ConsoleCashCups",
@@ -56,10 +56,10 @@
     "S30_Reload",
     "S30_ReloadZB"
   ],
-  "message": "最新版と安全統合：新規掲載20件、重複スキップ0件、要確認の競合0件、確認待ち34件。既存の戦績・賞金は保持。",
-  "manuallyPublished": 1462,
-  "manuallyResolvedDuplicates": 147,
-  "lastReviewedBatchAt": "2026-11-13T09:02:23.968Z",
+  "message": "2024年公式現金賞金0件、完全一致の既存スキン戦績との重複6件を整理。残り9件は順位差等を保留。",
+  "manuallyPublished": 1464,
+  "manuallyResolvedDuplicates": 153,
+  "lastReviewedBatchAt": "2026-11-13T09:38:33.124Z",
   "manuallyCorrected": 4,
   "lastCorrectedReviewAt": "2026-11-07T09:14:30.244Z",
   "concurrentMerge": {

@@ -2,8 +2,8 @@
   "version": 1,
   "role": "generated canonical-source snapshot; results.json remains authoritative in phase 1",
   "canonicalFile": "results.json",
-  "canonicalSha256": "a20976123adc3de32301f884ee6c8ac47cad633516bcafc52f597696785e6363",
-  "count": 6574,
+  "canonicalSha256": "26745c0e51d78f13493c9553b2505550fc93f687a349441f2cece8f5584049ab",
+  "count": 6590,
   "teamPrizeCents": 6042000,
   "unconfirmedPrizeRecords": 987,
   "personalPrizeCents": 6022000,
@@ -6581,7 +6581,23 @@
     "auto-s30-86844e42a8cc",
     "auto-s30-59cc2fd4e71a",
     "auto-s30-3ccaef44d1aa",
-    "auto-s32-a8360ecd3a9e"
+    "auto-s32-a8360ecd3a9e",
+    "auto-s30-598de32ac047",
+    "auto-s30-25a3d1efa037",
+    "auto-s42-9423ee32b8f4",
+    "auto-s42-b7d4dde2b4ea",
+    "auto-s42-bac865e54769",
+    "auto-s42-0f869c741e1c",
+    "auto-s42-649d73d9b9d6",
+    "auto-s42-34adca5aabef",
+    "auto-s42-20623e0fbcfb",
+    "auto-s42-a7dff8b3258f",
+    "auto-s42-2d6ab0452c4e",
+    "auto-s42-76bfe15afd2f",
+    "auto-s42-71fb3daef71c",
+    "auto-s42-81b9a810ec87",
+    "auto-s42-ff8d6ea9844f",
+    "auto-s42-5dcb4a64ada5"
   ],
   "shards": [
     {
@@ -6623,11 +6639,11 @@
     {
       "seasonId": "S30",
       "file": "source-results/S30.json",
-      "count": 1812,
+      "count": 1814,
       "teamPrizeCents": 1190000,
       "unconfirmedPrizeRecords": 112,
       "personalPrizeCents": 1190000,
-      "sha256": "ad3785cdd7066ce468538f35173a58b5ef25260a9ea9503558868e5e2efc6923"
+      "sha256": "a71515b7afe562d19d351cfed5d6c9560569c2fbd3c7724b58e93ef88e9a28ce"
     },
     {
       "seasonId": "S31",
@@ -6722,11 +6738,11 @@
     {
       "seasonId": "S42",
       "file": "source-results/S42.json",
-      "count": 2246,
+      "count": 2260,
       "teamPrizeCents": 1100000,
       "unconfirmedPrizeRecords": 543,
       "personalPrizeCents": 1100000,
-      "sha256": "78500a332e14166ce5c30b89bf31489887027af2a66a4c3287c63d2813e9e4a4"
+      "sha256": "48186b68b42b19b9765a2eee3975cbc7ee9032b1a1eb76a6fef3d78d66e8f5dd"
     },
     {
       "seasonId": "S43",
