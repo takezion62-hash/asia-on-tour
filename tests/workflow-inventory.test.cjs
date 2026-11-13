@@ -11,6 +11,7 @@ const scheduled={
 };
 const permitted=[
  'auto-sync.yml','history-sync.yml','participation-sync.yml','calendar-history.yml',
+ 'review-timing.yml',
  'reviewed-candidate-publication.yml','tests.yml','build-season-data.yml','safe-sync-merge-tests.yml',
  'focused-failure-recheck.yml',
  'scan-coverage-tests.yml','calendar.yml','special-achievements.yml',
