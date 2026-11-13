@@ -47,7 +47,22 @@
         "windowId": "S30_SoloVictoryCashCup_Event6Round1_NAC",
         "cutoff": 5000,
         "source": "https://fortnitetracker.com/events/epicgames_S30_SoloVictoryCashCup_NAC?page=1&window=S30_SoloVictoryCashCup_Event6Round1_NAC"
-      }
+      },
+      "verifiedLegacyNacExtraWindows": [
+        {
+          "dateJst": "2024-06-18",
+          "windowId": "S30_SoloVictoryCashCup_Event3Round1_NAC",
+          "cutoff": 5000,
+          "source": "https://fortnitetracker.com/events/epicgames_S30_SoloVictoryCashCup_NAC?window=S30_SoloVictoryCashCup_Event3Round1_NAC",
+          "allowOutOfCutoffAttendance": true
+        },
+        {
+          "dateJst": "2024-06-25",
+          "windowId": "S30_SoloVictoryCashCup_Event4Round1_NAC",
+          "cutoff": 5000,
+          "source": "https://fortnitetracker.com/events/epicgames_S30_SoloVictoryCashCup_NAC?window=S30_SoloVictoryCashCup_Event4Round1_NAC"
+        }
+      ]
     },
     {
       "id": "ch5s3-zb-solo-victory",
