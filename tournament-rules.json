@@ -184,6 +184,31 @@
       "source": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-4-official-rules"
     },
     {
+      "id": "ch7s4-solo-reload-victory-cup",
+      "seasonId": "S42",
+      "eventIds": [
+        "S42_ReloadSoloVictoryCup",
+        "S42_ReloadReloadSoloVictoryCup"
+      ],
+      "team": "solo",
+      "series": "victory-cup",
+      "matchCaps": {
+        "予選": 8,
+        "賞金決勝": 3
+      },
+      "advance": {
+        "EU": 1600,
+        "NAC": 800,
+        "NAW": 320,
+        "BR": 320,
+        "ME": 320,
+        "OCE": 320
+      },
+      "prizePerVictory": 100,
+      "autoApproval": "verified-qualifier-participation",
+      "source": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-4-official-rules"
+    },
+    {
       "id": "ch7s4-console-zero-build-solo-victory-cup",
       "seasonId": "S42",
       "eventIds": [
