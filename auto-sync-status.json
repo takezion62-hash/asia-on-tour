@@ -1,7 +1,7 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-13T09:08:36.589Z",
+  "checkedAt": "2026-11-13T09:11:26.076Z",
   "mode": "review",
   "scope": "recent",
   "dateMode": null,
@@ -11,16 +11,16 @@
   "provider": "osirion",
   "linkedPlayers": 592,
   "trackedWindows": 103,
-  "found": 10,
+  "found": 14,
   "skipped": 0,
-  "imported": 1,
+  "imported": 0,
   "scannedPages": 50,
   "completedWindows": 63,
   "identityConflicts": 3,
-  "alreadyRegistered": 438,
+  "alreadyRegistered": 439,
   "autoApprovedTotal": 2403,
   "invalidCachedCandidates": 0,
-  "manualReviewCandidates": 10,
+  "manualReviewCandidates": 14,
   "autoApprovedCosmeticThisRun": 0,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
@@ -43,13 +43,13 @@
     "S43_OnePieceBuggyCup_Mobile",
     "S43_OnePieceBuggyCup_ZB"
   ],
-  "message": "最新版と安全統合：新規掲載1件、重複スキップ0件、要確認の競合0件、確認待ち10件。既存の戦績・賞金は保持。",
+  "message": "最新版と安全統合：新規掲載0件、重複スキップ0件、要確認の競合0件、確認待ち14件。既存の戦績・賞金は保持。",
   "concurrentMerge": {
-    "appended": 1,
+    "appended": 0,
     "alreadyPublished": 0,
     "reviewConflicts": 0,
-    "keptPending": 10,
-    "reconciledAt": "2026-11-13T09:08:50.483Z"
+    "keptPending": 14,
+    "reconciledAt": "2026-11-13T09:11:39.279Z"
   },
   "coverage": {
     "total": 103,
@@ -108,7 +108,7 @@
         "region": "EU",
         "series": "victory-cup",
         "status": "partial",
-        "nextPage": 49,
+        "nextPage": 59,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
@@ -119,7 +119,7 @@
         "region": "ME",
         "series": "victory-cup",
         "status": "partial",
-        "nextPage": 70,
+        "nextPage": 80,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
@@ -130,7 +130,7 @@
         "region": "NAW",
         "series": "icon-cup",
         "status": "partial",
-        "nextPage": 34,
+        "nextPage": 35,
         "totalPages": 89,
         "retryAfter": null,
         "errorCode": null
@@ -141,7 +141,7 @@
         "region": "ME",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 87,
+        "nextPage": 97,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
@@ -152,7 +152,7 @@
         "region": "BR",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 67,
+        "nextPage": 77,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
@@ -163,7 +163,7 @@
         "region": "NAW",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 37,
+        "nextPage": 42,
         "totalPages": 70,
         "retryAfter": null,
         "errorCode": null
@@ -174,7 +174,7 @@
         "region": "OCE",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 3,
+        "nextPage": 4,
         "totalPages": 16,
         "retryAfter": null,
         "errorCode": null
@@ -207,7 +207,7 @@
         "region": "ME",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 3,
+        "nextPage": 4,
         "totalPages": 40,
         "retryAfter": null,
         "errorCode": null
@@ -218,7 +218,7 @@
         "region": "NAC",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 12,
+        "nextPage": 13,
         "totalPages": 83,
         "retryAfter": null,
         "errorCode": null
@@ -229,7 +229,7 @@
         "region": "NAW",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 13,
+        "nextPage": 14,
         "totalPages": 37,
         "retryAfter": null,
         "errorCode": null
@@ -238,7 +238,7 @@
   },
   "manuallyPublished": 296,
   "lastReviewedBatchAt": "2026-11-13T09:02:23.968Z",
-  "autoApprovedDuoQualifierThisRun": 1,
+  "autoApprovedDuoQualifierThisRun": 0,
   "latestManualReview": {
     "reviewedAt": "2026-11-12T04:01:32.087Z",
     "reviewedCandidates": 14,

@@ -1,7 +1,7 @@
 {
   "version": 1,
   "sourceCheckedAt": "2026-11-07T23:16:39.215Z",
-  "total": 44,
+  "total": 48,
   "alreadyResolved": 0,
   "byYear": [
     {
@@ -14,13 +14,17 @@
     },
     {
       "name": "2026",
-      "count": 22
+      "count": 26
     }
   ],
   "byRegion": [
     {
+      "name": "EU",
+      "count": 2
+    },
+    {
       "name": "ME",
-      "count": 23
+      "count": 25
     },
     {
       "name": "NAC",
@@ -41,8 +45,12 @@
       "count": 4
     },
     {
+      "name": "Solo Reload Victory Cup / EU / 2026",
+      "count": 2
+    },
+    {
       "name": "Solo Reload Victory Cup / ME / 2026",
-      "count": 10
+      "count": 12
     },
     {
       "name": "Solo Victory Cup Battle Royale / ME / 2024",
@@ -72,7 +80,7 @@
     },
     {
       "name": "partial-scan",
-      "count": 31
+      "count": 35
     },
     {
       "name": "rules-review",
@@ -1203,6 +1211,72 @@
       "rewardState": "cash-unconfirmed"
     },
     {
+      "id": "auto-s42-71fb3daef71c",
+      "origin": "recent",
+      "date": "2026-10-24",
+      "year": "2026",
+      "region": "EU",
+      "tournamentId": "ch7s4-solo-reload-victory-cup",
+      "event": "Solo Reload Victory Cup",
+      "round": "Event 5 · Round 1 / 予選",
+      "player": "R1ze",
+      "kind": "予選",
+      "rank": 5187,
+      "points": 267,
+      "kills": 27,
+      "vrs": 1,
+      "prize": 0,
+      "source": "https://www.fortnite.com/competitive/events/S42_ReloadReloadSoloVictoryCup/?region=EU&round=S42_ReloadSoloVictoryCup_Event5_Round1_EU",
+      "status": "partial-scan",
+      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
+      "reason": "スキン報酬判定の元データではありません",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": false,
+        "observedPartial": true,
+        "seenPages": 59,
+        "totalPages": 100,
+        "sourceKey": "epicgames_S42_ReloadReloadSoloVictoryCup_EU/S42_ReloadSoloVictoryCup_Event5_Round1_EU",
+        "possibleExistingId": null
+      },
+      "rewardState": "source-amount-present-not-verified-by-triage"
+    },
+    {
+      "id": "auto-s42-81b9a810ec87",
+      "origin": "recent",
+      "date": "2026-10-24",
+      "year": "2026",
+      "region": "EU",
+      "tournamentId": "ch7s4-solo-reload-victory-cup",
+      "event": "Solo Reload Victory Cup",
+      "round": "Event 5 · Round 1 / 予選",
+      "player": "ディグダǃ",
+      "kind": "予選",
+      "rank": 5643,
+      "points": 265,
+      "kills": 4,
+      "vrs": 0,
+      "prize": 0,
+      "source": "https://www.fortnite.com/competitive/events/S42_ReloadReloadSoloVictoryCup/?region=EU&round=S42_ReloadSoloVictoryCup_Event5_Round1_EU",
+      "status": "partial-scan",
+      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
+      "reason": "スキン報酬判定の元データではありません",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": false,
+        "observedPartial": true,
+        "seenPages": 59,
+        "totalPages": 100,
+        "sourceKey": "epicgames_S42_ReloadReloadSoloVictoryCup_EU/S42_ReloadSoloVictoryCup_Event5_Round1_EU",
+        "possibleExistingId": null
+      },
+      "rewardState": "source-amount-present-not-verified-by-triage"
+    },
+    {
       "id": "auto-s42-0f869c741e1c",
       "origin": "recent",
       "date": "2026-10-24",
@@ -1228,7 +1302,7 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 70,
+        "seenPages": 80,
         "totalPages": 100,
         "sourceKey": "epicgames_S42_ReloadReloadSoloVictoryCup_ME/S42_ReloadSoloVictoryCup_Event5_Round1_ME",
         "possibleExistingId": null
@@ -1261,7 +1335,7 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 70,
+        "seenPages": 80,
         "totalPages": 100,
         "sourceKey": "epicgames_S42_ReloadReloadSoloVictoryCup_ME/S42_ReloadSoloVictoryCup_Event5_Round1_ME",
         "possibleExistingId": null
@@ -1294,7 +1368,7 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 70,
+        "seenPages": 80,
         "totalPages": 100,
         "sourceKey": "epicgames_S42_ReloadReloadSoloVictoryCup_ME/S42_ReloadSoloVictoryCup_Event5_Round1_ME",
         "possibleExistingId": null
@@ -1327,7 +1401,40 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 70,
+        "seenPages": 80,
+        "totalPages": 100,
+        "sourceKey": "epicgames_S42_ReloadReloadSoloVictoryCup_ME/S42_ReloadSoloVictoryCup_Event5_Round1_ME",
+        "possibleExistingId": null
+      },
+      "rewardState": "source-amount-present-not-verified-by-triage"
+    },
+    {
+      "id": "auto-s42-5dcb4a64ada5",
+      "origin": "recent",
+      "date": "2026-10-24",
+      "year": "2026",
+      "region": "ME",
+      "tournamentId": "ch7s4-solo-reload-victory-cup",
+      "event": "Solo Reload Victory Cup",
+      "round": "Event 5 · Round 1 / 予選",
+      "player": "NŁT shxrkÿǃ",
+      "kind": "予選",
+      "rank": 7537,
+      "points": 63,
+      "kills": 8,
+      "vrs": 0,
+      "prize": 0,
+      "source": "https://www.fortnite.com/competitive/events/S42_ReloadReloadSoloVictoryCup/?region=ME&round=S42_ReloadSoloVictoryCup_Event5_Round1_ME",
+      "status": "partial-scan",
+      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
+      "reason": "スキン報酬判定の元データではありません",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": false,
+        "observedPartial": true,
+        "seenPages": 80,
         "totalPages": 100,
         "sourceKey": "epicgames_S42_ReloadReloadSoloVictoryCup_ME/S42_ReloadSoloVictoryCup_Event5_Round1_ME",
         "possibleExistingId": null
@@ -1360,7 +1467,7 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 70,
+        "seenPages": 80,
         "totalPages": 100,
         "sourceKey": "epicgames_S42_ReloadReloadSoloVictoryCup_ME/S42_ReloadSoloVictoryCup_Event5_Round1_ME",
         "possibleExistingId": null
@@ -1393,7 +1500,7 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 70,
+        "seenPages": 80,
         "totalPages": 100,
         "sourceKey": "epicgames_S42_ReloadReloadSoloVictoryCup_ME/S42_ReloadSoloVictoryCup_Event5_Round1_ME",
         "possibleExistingId": null
@@ -1426,7 +1533,7 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 70,
+        "seenPages": 80,
         "totalPages": 100,
         "sourceKey": "epicgames_S42_ReloadReloadSoloVictoryCup_ME/S42_ReloadSoloVictoryCup_Event5_Round1_ME",
         "possibleExistingId": null
@@ -1459,7 +1566,7 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 70,
+        "seenPages": 80,
         "totalPages": 100,
         "sourceKey": "epicgames_S42_ReloadReloadSoloVictoryCup_ME/S42_ReloadSoloVictoryCup_Event5_Round1_ME",
         "possibleExistingId": null
@@ -1492,7 +1599,7 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 70,
+        "seenPages": 80,
         "totalPages": 100,
         "sourceKey": "epicgames_S42_ReloadReloadSoloVictoryCup_ME/S42_ReloadSoloVictoryCup_Event5_Round1_ME",
         "possibleExistingId": null
@@ -1525,7 +1632,40 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 70,
+        "seenPages": 80,
+        "totalPages": 100,
+        "sourceKey": "epicgames_S42_ReloadReloadSoloVictoryCup_ME/S42_ReloadSoloVictoryCup_Event5_Round1_ME",
+        "possibleExistingId": null
+      },
+      "rewardState": "source-amount-present-not-verified-by-triage"
+    },
+    {
+      "id": "auto-s42-ff8d6ea9844f",
+      "origin": "recent",
+      "date": "2026-10-24",
+      "year": "2026",
+      "region": "ME",
+      "tournamentId": "ch7s4-solo-reload-victory-cup",
+      "event": "Solo Reload Victory Cup",
+      "round": "Event 5 · Round 1 / 予選",
+      "player": "AUR sһхrkÿ",
+      "kind": "予選",
+      "rank": 7129,
+      "points": 72,
+      "kills": 4,
+      "vrs": 0,
+      "prize": 0,
+      "source": "https://www.fortnite.com/competitive/events/S42_ReloadReloadSoloVictoryCup/?region=ME&round=S42_ReloadSoloVictoryCup_Event5_Round1_ME",
+      "status": "partial-scan",
+      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
+      "reason": "スキン報酬判定の元データではありません",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": false,
+        "observedPartial": true,
+        "seenPages": 80,
         "totalPages": 100,
         "sourceKey": "epicgames_S42_ReloadReloadSoloVictoryCup_ME/S42_ReloadSoloVictoryCup_Event5_Round1_ME",
         "possibleExistingId": null
