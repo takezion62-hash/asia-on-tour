@@ -2,6 +2,7 @@
 // Idempotent, source-verified review of original 21 plus 32 newly queued candidates.
 // Use existing vetted review planner; never infer money, cosmetics, or qualification.
 const fs=require('node:fs');
+const crypto=require('node:crypto');
 const path=require('node:path');
 const {loadReviewDb,writeReviewDb}=require('./reviewed-publication-core.cjs');
 const {reviewBatch}=require('./review-batch-core.cjs');
@@ -82,7 +83,8 @@ for(const month of months){
  if(!Array.isArray(data.sessions))throw Error('Invalid calendar archive '+month);
  db.calendar[month]=data.sessions;
 }
-const plan=reviewBatch(db,{ids:target,limit:100,runId:'pending-20261114',
+const fingerprint=crypto.createHash('sha256').update(target.slice().sort().join('|')).digest('hex').slice(0,12);
+const plan=reviewBatch(db,{ids:target,limit:100,runId:'pending-20261114-'+fingerprint,
  timestamp:new Date().toISOString(),actor:'ChatGPT / user authorized confirmed-candidate review'});
 const verdict=validateData({results:plan.next.results,players:db.players,tournaments:db.tournaments});
 if(verdict.errors.length)throw Error('Candidate data validation failed '+JSON.stringify(verdict.errors.slice(0,8)));
