@@ -11,8 +11,8 @@ const clone=x=>JSON.parse(JSON.stringify(x));
 
 test('shared official tournament rules include review-only Solo Series Finals and approved types',()=>{
  assert.deepEqual(validateRegistry(registry,tournaments),[]);
- assert.equal(registry.rules.length,22);
- assert.equal(Object.keys(RULES).length,10);
+ assert.equal(registry.rules.length,23);
+ assert.equal(Object.keys(RULES).length,11);
  assert.equal(Object.keys(CUT_OFFS).length,9);
  for(const rule of registry.rules){
   if(rule.series==='victory-cup')assert.strictEqual(RULES[rule.id].source,rule.source);
@@ -250,4 +250,25 @@ test('S32 Remix Solo Victory applies only verified ME rules, not historical NA a
  assert.equal(rule.advance.NAC,undefined);
  assert.equal(rule.matchCaps['賞金決勝'],3);
  assert.ok(rule.source.includes('fortnite.com/news/competitive-details-make-your-mark-in-chapter-2-remix'));
+});
+
+test('S42 Solo Reload official advancement rules explicitly retain attendance without falsely qualifying',()=>{
+ const x=registry.rules.find(rule=>rule.id==='ch7s4-solo-reload-victory-cup');
+ assert.ok(x);
+ assert.deepEqual(x.eventIds,['S42_ReloadSoloVictoryCup','S42_ReloadReloadSoloVictoryCup']);
+ assert.equal(x.autoApproval,'verified-qualifier-participation');
+ assert.equal(x.matchCaps['予選'],8);
+ assert.equal(x.matchCaps['賞金決勝'],3);
+ assert.equal(x.prizePerVictory,100);
+ assert.deepEqual(x.advance,{EU:1600,NAC:800,NAW:320,BR:320,ME:320,OCE:320});
+ assert.strictEqual(RULES[x.id].source,x.source);
+ for(const mutation of [
+  d=>d.rules.find(y=>y.id===x.id).advance.ME=800,
+  d=>d.rules.find(y=>y.id===x.id).prizePerVictory=200,
+  d=>d.rules.find(y=>y.id===x.id).eventIds.pop(),
+  d=>d.rules.find(y=>y.id==='ch5s3-solo-victory-cup').autoApproval='verified-qualifier-participation'
+ ]){
+  const doc=clone(registry);mutation(doc);
+  assert.ok(validateRegistry(doc,tournaments).length>0);
+ }
 });
