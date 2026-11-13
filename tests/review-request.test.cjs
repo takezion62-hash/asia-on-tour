@@ -30,3 +30,15 @@ test('stale main, mismatched branch, untrusted code edits and non-direct commits
  }
  assert.throws(()=>validateRequest({...req,requestedAt:'2025-01-01T00:00:00.000Z'},ctx),/REVIEW_REQUEST/);
 });
+
+// Regression guard for GitHub repositories that do not allow Actions tokens
+// to create PRs: preserve the verified branch without hiding other failures.
+test('verified-result request falls back to connected App PR only on bot permission denial',()=>{
+ const fs=require('node:fs'),path=require('node:path');
+ const workflow=fs.readFileSync(path.join(__dirname,'../.github/workflows/reviewed-candidate-publication.yml'),'utf8');
+ assert.match(workflow,/GitHub Actions is not permitted to create or approve pull requests/);
+ assert.match(workflow,/AOT_FAST_REQUEST app-pr-needed=\\$BRANCH/);
+ assert.match(workflow,/cat "\\$PR_ERR" >&2\\s+exit 1/);
+ assert.match(workflow,/gh workflow run tests\\.yml/);
+ assert.match(workflow,/pull_request event must pass required CI before merging/);
+});
