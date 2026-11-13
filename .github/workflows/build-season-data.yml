@@ -13,6 +13,10 @@ on:
       - 'source-results/**'
       - scripts/apply-verified-tracker-finals.cjs
       - scripts/apply-verified-s43-squads-finals.cjs
+      - scripts/apply-s30-me-zb-duos-cash-20240607.cjs
+      - scripts/verified-s30-duos-cash-20240607.cjs
+      - scripts/validate-approvals.cjs
+      - 'data/manual-approvals/*-cash-evidence.json'
       - 'data/manual-approvals/*-tracker.json'
       - 'data/manual-approvals/*-squads-confirmed.json'
       - scripts/build-candidate-triage.cjs
@@ -51,7 +55,10 @@ jobs:
             node scripts/apply-verified-tracker-finals.cjs
             node scripts/apply-verified-s43-squads-finals.cjs --dry-run
             node scripts/apply-verified-s43-squads-finals.cjs
+            node scripts/apply-s30-me-zb-duos-cash-20240607.cjs --dry-run
+            node scripts/apply-s30-me-zb-duos-cash-20240607.cjs
             node scripts/validate-data.cjs
+            node scripts/validate-approvals.cjs
             node scripts/validate-updates.cjs
             node scripts/build-season-data.cjs
             node scripts/build-candidate-triage.cjs
@@ -59,7 +66,7 @@ jobs:
             node scripts/build-source-results.cjs --check
             node scripts/build-season-data.cjs --check
             node scripts/build-candidate-triage.cjs --check
-            git add players.json updates.json
+            git add players.json updates.json approval-history.json
             git add -A season-data
             git add -A source-results
             git add candidate-triage.json

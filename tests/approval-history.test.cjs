@@ -129,3 +129,54 @@ test('S31 2024 Event8 OCE/ME cash is $100 only for an exact original Round2 Vict
   }
  }
 });
+
+test('2024-06-07 ME ZB Duos cash: only exact scoreboard results have verified individual payouts',()=>{
+ const C=require('../scripts/verified-s30-duos-cash-20240607.cjs');
+ assert.equal(C.TARGETS.length,10);
+ assert.equal(C.TARGETS.reduce((sum,x)=>sum+x.prize,0),2400);
+ for(const t of C.TARGETS){
+  const names=t.player.split(' / ');
+  const profiles=names.map((name,i)=>({name,url:
+   'https://fortnitetracker.com/profile/all/'+encodeURIComponent(name)+
+   '/events?id='+(i===0?'01234567':'89abcdef')+'-0000-4000-8000-123456789012'}));
+  const row={id:t.id,date:C.DATE,region:C.REGION,seasonId:'S30',
+   chapter:5,season:3,tournamentId:C.TOURNAMENT,event:'ZB Duos Cash Cup',
+   round:C.ROUND,kind:'賞金決勝',player:t.player,players:names,
+   rank:t.rank,points:t.points,kills:t.kills,vrs:t.vrs,matches:t.matches,
+   prize:t.prize,teamPrize:t.prize,prizePerPlayer:t.prize/2,
+   source:C.SOURCE,verified:true,profiles,note:C.TRACKER+' '+C.RULE};
+  const entry={id:t.id,recordId:t.id,decision:'published',policy:C.POLICY,
+   source:C.SOURCE,rule:C.RULE};
+  const ledger={version:1,entries:[entry]};
+  assert.deepEqual(audit([row],ledger,{confirmedAliases:{}}),[],
+   'verified screenshot row must pass '+t.rank);
+  const modifications=[
+   {...row,prize:t.prize+200},{...row,prizePerPlayer:t.prize},
+   {...row,teamPrize:t.prize+200},{...row,rank:t.rank+1},
+   {...row,points:t.points+1},{...row,vrs:t.vrs+1},
+   {...row,matches:t.matches+1},{...row,player:names[1]+' / '+names[0]},
+   {...row,kind:'参加確認'},{...row,round:'Event 1 · Round 1 / 賞金決勝'},
+   {...row,source:C.SOURCE.replace('ME','NAW')},
+   {...row,profiles:[{...profiles[0],url:'not a url'},profiles[1]]}
+  ];
+  for(const changed of modifications)
+   assert.ok(audit([changed],ledger,{confirmedAliases:{}}).length>0,
+    'tampered '+t.rank+' should be rejected: '+JSON.stringify(changed));
+  assert.ok(audit([row],{version:1,entries:[{...entry,policy:'attendance-only'}]},
+   {confirmedAliases:{}}).length>0,'old attendance-only policy must not accept cash');
+ }
+});
+
+test('S42 Reload out-of-cutoff attendance is guarded while cash-final policy is expanded',()=>{
+ const rule=require('../scripts/verified-history-approval.cjs').RULES['ch7s4-solo-reload-victory-cup'];
+ const id='auto-s42-123456abcdef',source='https://www.fortnite.com/competitive/events/S42_ReloadReloadSoloVictoryCup/?region=ME&round=S42_ReloadSoloVictoryCup_Event5_Round1_ME';
+ const r={id,date:'2026-10-24',region:'ME',seasonId:'S42',
+  tournamentId:'ch7s4-solo-reload-victory-cup',event:'Solo Reload Victory Cup',
+  round:'Event 5 · Round 1 / 参加確認',kind:'参加確認',rank:6130,
+  points:88,kills:3,vrs:0,matches:5,prize:0,verified:true,source,
+  player:'A',note:'突破圏外 '+rule.source};
+ const entry={id,recordId:id,decision:'published',policy:'verified-rule',source,rule:rule.source};
+ assert.deepEqual(audit([r],{version:1,entries:[entry]},{confirmedAliases:{}}),[]);
+ assert.ok(audit([{...r,rank:320}],{version:1,entries:[entry]},{confirmedAliases:{}}).length>0);
+ assert.ok(audit([{...r,prize:100}],{version:1,entries:[entry]},{confirmedAliases:{}}).length>0);
+});
