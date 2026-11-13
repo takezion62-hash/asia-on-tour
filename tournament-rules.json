@@ -41,7 +41,13 @@
         "ME": 2000,
         "OCE": 2000
       },
-      "source": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules"
+      "source": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
+      "verifiedLegacyNacWindow": {
+        "dateJst": "2024-07-23",
+        "windowId": "S30_SoloVictoryCashCup_Event6Round1_NAC",
+        "cutoff": 5000,
+        "source": "https://fortnitetracker.com/events/epicgames_S30_SoloVictoryCashCup_NAC?page=1&window=S30_SoloVictoryCashCup_Event6Round1_NAC"
+      }
     },
     {
       "id": "ch5s3-zb-solo-victory",
@@ -101,7 +107,13 @@
       "prizePerVictory": 100,
       "source": "https://www.fortnite.com/news/competitive-details-make-your-mark-in-chapter-2-remix",
       "advanceSource": "https://fortnitetracker.com/events/epicgames_S32_SoloVictoryCashCup_NAC?page=1&window=S32_SoloVictoryCashCup_Event1Round1_NAC",
-      "note": "2024 Chapter 2 Remix: Epic confirms $100 per final win and three final matches; Tracker lists ME top 2,000 advancement. Only verified ME is eligible in this narrow auto-approval rule. Historical unified NA/NAC is intentionally excluded."
+      "note": "2024 Chapter 2 Remix: Epic confirms $100 per final win and three final matches; Tracker lists ME top 2,000 advancement. Only verified ME is eligible in this narrow auto-approval rule. Historical unified NA/NAC is intentionally excluded.",
+      "verifiedLegacyNacWindow": {
+        "dateJst": "2024-11-16",
+        "windowId": "S32_SoloVictoryCashCup_Event2Round1_NAC",
+        "cutoff": 10000,
+        "source": "https://fortnitetracker.com/events/epicgames_S32_SoloVictoryCashCup_NAC?page=9&window=S32_SoloVictoryCashCup_Event2Round1_NAC"
+      }
     },
     {
       "id": "ch5s4-zb-solo-victory",
