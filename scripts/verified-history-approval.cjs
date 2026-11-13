@@ -33,13 +33,18 @@ function decide(row,win,checkpoint,data){
  const catalog=data.tournaments.catalog.find(x=>x.id===row.tournamentId);
  if(!catalog||catalog.team!==(rule.team||'solo')||catalog.series!=='victory-cup'||catalog.seasonId!==rule.seasonId)return decline('大会カタログ不一致');
  if(win.tournamentId!==row.tournamentId||win.seasonId!==rule.seasonId||row.seasonId!==rule.seasonId||!rule.eventIds.includes(win.eventId)||!catalog.sourceEventIds.includes(win.eventId))return decline('公式イベントID不一致');
- // S30/S31 official rules say ALL Regions pay only for Round 2 VRs. NA was
- // a unified qualifier region in 2024: NEVER map its Round 1 cutoff to NAC.
- // Its observed NAC Round 2 zero-VR record is still deterministically $0.
+ // Historical NA qualifier cutoffs cannot be mapped broadly to NAC.
+ // Allow only exact, source-backed tournament date and Round1 window.
+ const historicNac=rule.verifiedLegacyNacWindow;
+ const exactLegacyNacQualifier=row.region==='NAC'&&row.kind==='予選'&&
+  historicNac?.dateJst===row.date&&win.dateJst===historicNac.dateJst&&
+  historicNac.windowId===win.windowId&&win.region==='NAC'&&win.kind==='予選';
+ const qualifierCutoff=rule.advance[row.region]||
+  (exactLegacyNacQualifier?historicNac.cutoff:undefined);
  const oldNacZeroFinal=['S30','S31'].includes(rule.seasonId)&&rule.team==='solo'&&
   row.region==='NAC'&&row.kind==='賞金決勝'&&row.vrs===0&&row.prize===null;
  if(row.date!==win.dateJst||row.region!==win.region||
-  (!Object.hasOwn(rule.advance,row.region)&&!oldNacZeroFinal)||
+  (qualifierCutoff===undefined&&!oldNacZeroFinal)||
   row.round!==win.round||row.kind!==win.kind)
   return decline('開催日・地域・ラウンド不一致');
  if(oldNacZeroFinal&&(row.points!==0||checkpoint.rankingOrderValid!==true||
@@ -60,11 +65,17 @@ function decide(row,win,checkpoint,data){
  if(data.results.some(x=>x.id===row.id||identity(x)===identity(row)))return decline('既存の戦績');
  const rec={...row};
  if(row.kind==='予選'){
-  if(row.rank>rule.advance[row.region]||row.prize!==0)return decline('予選通過条件または賞金値不一致');
-  rec.round=win.round.replace(/\/ 予選$/,'/ 予選突破');
+  if(qualifierCutoff===undefined||row.rank>qualifierCutoff||row.prize!==0)
+   return decline('予選通過条件または賞金値不一致');
+  rec.round=win.round.replace(/\\/ 予選$/,'/ 予選突破');
   rec.kind='予選';
   rec.prize=0;
-  rec.note='Epic公式規則で'+row.region+'上位'+rule.advance[row.region]+'名が予選突破。Osirion順位表の'+row.rank+'位をEpic IDで照合。予選の現金賞金は$0。規則: '+rule.source;
+  const legacyEvidence=exactLegacyNacQualifier?
+   ' 当該2024年NA Central開催枠の予選通過順位を別途照合: '+historicNac.source:'';
+  rec.note='Epic公式規則の予選突破条件に基づき'+row.region+'上位'+qualifierCutoff+
+   '名が突破。Osirion順位表'+row.rank+'位のEpic IDと照合。予選賞金$0。規則: '+rule.source+
+   legacyEvidence;
+
  }else if(row.kind==='賞金決勝'){
   if(row.prize!==null)return decline('APIの賞金額は未確認のまま照合する必要があります');
   // Never guess dollars for a season without a verified payout rule.
