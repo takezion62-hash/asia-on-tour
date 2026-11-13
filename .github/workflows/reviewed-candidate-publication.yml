@@ -92,27 +92,29 @@ jobs:
           node scripts/build-season-data.cjs
           node scripts/build-source-results.cjs --check
           node scripts/build-candidate-triage.cjs
-      - name: Validate data and all unit tests once before browser setup
+      # Publishing only proposes a PR: its required CI gate is responsible
+      # for the full suite or the focused data-only PC/mobile smoke.
+      - name: Validate verified results and generated indexes before proposing
         if: ${{ !inputs.preview_only }}
         run: |
           npm run validate
-          npm run test:unit
-      - name: Install Chromium for complete PC and mobile checks
+          node scripts/build-season-data.cjs --check
+          node scripts/build-candidate-triage.cjs --check
+      - name: Run focused identity, cash, uniqueness and publication regressions
         if: ${{ !inputs.preview_only }}
-        run: npx playwright install --with-deps chromium
-      - name: Run complete PC and mobile browser suite once before PR
-        if: ${{ !inputs.preview_only }}
-        run: npm run test:e2e
-      - name: Preserve complete browser test report
-        if: always()
-        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.0
-        with:
-          name: manual-approval-site-test-report
-          path: |
-            playwright-report/
-            test-results/
-          retention-days: 14
-          if-no-files-found: ignore
+        run: |
+          node --test \
+            tests/data-validation.test.cjs \
+            tests/session-date-consistency.test.cjs \
+            tests/approval-history.test.cjs \
+            tests/update-history.test.cjs \
+            tests/final-round-consistency.test.cjs \
+            tests/tournament-publication-unification.test.cjs \
+            tests/rankings.test.cjs \
+            tests/source-results-store.test.cjs \
+            tests/source-results-split.test.cjs \
+            tests/candidate-triage.test.cjs
+      # Never merge until the required PR gate passes its PC/mobile tests.
       - name: Open an inspectable PR, never write directly to main
         if: ${{ !inputs.preview_only }}
         env:
