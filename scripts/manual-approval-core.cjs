@@ -6,6 +6,7 @@
  */
 const {decide:verifiedRuleDecide}=require('./verified-history-approval.cjs');
 const {evaluate:cosmeticEvaluate}=require('./cosmetic-rank-rules.cjs');
+const {checkpointIndex,checkpointFor:lookupCheckpoint,collisionIndex}=require('./review-batch-index.cjs');
 const allowedRegions=new Set(['ME','EU','NAC','NAW','OCE','BR']);
 const object=x=>x&&typeof x==='object'&&!Array.isArray(x);
 const roster=r=>Array.isArray(r?.players)&&r.players.length?r.players:[r?.player];
@@ -23,6 +24,9 @@ const canon=(name,aliases)=>{
 };
 const lineup=(r,aliases)=>roster(r).map(name=>canon(name,aliases)).sort((a,b)=>a.localeCompare(b,'ja'));
 const matchSig=(r,aliases)=>lineup(r,aliases).join('\u001f');
+// A necessary, never sufficient, collision key. The original collision()
+// still decides every suspected duplicate after this conservative shortlist.
+const collisionKey=(r,aliases)=>JSON.stringify([r.date,r.region,norm(r.event),matchSig(r,aliases)]);
 const stage=r=>{
   const raw=norm(r?.round),src=norm(r?.source);
   let window='';
@@ -89,26 +93,15 @@ function candidatesFor(db){
   }
   return out;
 }
-function checkpointFor(row,scans){
-  let found=null;
-  for(const scan of Object.values(scans||{})){
-    if(!object(scan?.windows))continue;
-    for(const [key,checkpoint] of Object.entries(scan.windows)){
-      for(const candidate of checkpoint.proposals||[]){
-        if(candidate.id!==row.id)continue;
-        if(!equalCandidate(candidate,row))throw Error('API保存記録と候補の内容が異なる: '+row.id);
-        if(found&&found.key!==key)throw Error('複数の異なるAPI開催枠に同じ候補IDが存在: '+row.id);
-        found={key,checkpoint};
-      }
-    }
-  }
-  return found;
-}
+
 function apply(db,input){
   const ids=parseIds(input.ids),policy=input.policy;
   if(!['attendance-only','verified-rule','cosmetic-rank'].includes(policy))throw Error('承認種別はattendance-only / verified-rule / cosmetic-rankのみ');
   if(input.confirmation!=='CONFIRM')throw Error('管理者の明示的なCONFIRMが必要です');
   const sources=candidatesFor(db),catalogs=new Map(db.tournaments.catalog.map(c=>[c.id,c]));
+  const checkpoints=checkpointIndex(db.scans),existingIds=new Map(db.results.map(r=>[r.id,r]));
+  const approvedIds=new Set(db.ledger.entries.map(x=>x.id));
+  const overlapping=collisionIndex(db.results,collisionKey,collision,db.players.confirmedAliases);
   const next={results:db.results.map(r=>({...r})),
     reviews:{auto:{...db.reviews.auto,proposals:[...db.reviews.auto.proposals]},history:{...db.reviews.history,proposals:[...db.reviews.history.proposals]}},
     statuses:{auto:{...db.statuses.auto},history:{...db.statuses.history}},
@@ -116,14 +109,14 @@ function apply(db,input){
     updates:{...db.updates,entries:[...db.updates.entries]}};
   const changes=[],skipped=[];
   for(const id of ids){
-    const found=sources.get(id),old=next.results.find(r=>r.id===id);
+    const found=sources.get(id),old=existingIds.get(id);
     if(!found){
       if(old){skipped.push({id,reason:'同じIDがすでに掲載済み'});continue}
       throw Error('確認待ち一覧に存在しないID: '+id);
     }
     if(old)throw Error('確認待ち候補IDが既存戦績と衝突: '+id);
-    if(next.ledger.entries.some(x=>x.id===id))throw Error('過去に処理済みの候補です: '+id);
-    const row=found.row,catalog=catalogs.get(row.tournamentId),cp=checkpointFor(row,db.scans);
+    if(approvedIds.has(id))throw Error('過去に処理済みの候補です: '+id);
+    const row=found.row,catalog=catalogs.get(row.tournamentId),cp=lookupCheckpoint(row,checkpoints,equalCandidate);
     const ref=new URL(row.source).searchParams.get('round');
     const session=(db.calendar?.[row.date.slice(0,7)]||[]).find(w=>w.sourceWindowId===ref&&w.region===row.region&&w.tournamentId===row.tournamentId);
     validateOriginal(row,cp?.checkpoint,session,catalog,db.players);
@@ -144,17 +137,18 @@ function apply(db,input){
       rule=cosmetic.rule;
     }else{
       const win={key:cp.key,eventId:session.eventId,windowId:session.sourceWindowId,dateJst:session.dateJst,
-        tournamentId:row.tournamentId,seasonId:row.seasonId,region:row.region,round:row.round,kind:row.kind};
+        tournamentId:row.tournamentId,seasonId:row.seasonId,region:row.region,round:row.round,kind:row.kind,
+        end:Date.parse(session.endUtc),allowPartialQualifier:input.allowPartialQualifier===true};
       const decision=verifiedRuleDecide(row,win,cp.checkpoint,{players:db.players,tournaments:db.tournaments,results:next.results});
       if(!decision.approved)throw Error('公式規則による承認条件を満たさない: '+id+' / '+decision.reason);
       record=decision.record;rule=decision.rule;
     }
     if(record.prize!==0&&record.prize!==null)throw Error('金額の自動承認は非対応。個別根拠の確認が必要: '+id);
-    for(const oldRecord of next.results){
-      const reason=collision(oldRecord,record,db.players.confirmedAliases);
-      if(reason)throw Error('重複・開催枠の疑い: '+id+' / '+oldRecord.id+' / '+reason);
-    }
+    const duplicate=overlapping.match(record);
+    if(duplicate)throw Error('重複・開催枠の疑い: '+id+' / '+duplicate.previous.id+' / '+duplicate.reason);
     next.results.push(record);
+    existingIds.set(record.id,record);
+    overlapping.add(record);
     changes.push({id,origin:found.origin,record,rule});
   }
   if(!changes.length)return {next,changes,skipped};
@@ -183,4 +177,4 @@ function apply(db,input){
   next.updates.entries.unshift(entry);
   return {next,changes,skipped};
 }
-module.exports={parseIds,equalCandidate,collision,apply};
+module.exports={parseIds,equalCandidate,collision,collisionKey,validateOriginal,candidatesFor,apply};

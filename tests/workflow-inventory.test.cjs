@@ -11,6 +11,7 @@ const scheduled={
 };
 const permitted=[
  'auto-sync.yml','history-sync.yml','participation-sync.yml','calendar-history.yml',
+ 'review-timing.yml',
  'reviewed-candidate-publication.yml','tests.yml','build-season-data.yml','safe-sync-merge-tests.yml',
  'focused-failure-recheck.yml',
  'scan-coverage-tests.yml','calendar.yml','special-achievements.yml',
@@ -133,4 +134,27 @@ test('records-only CI keeps semantic safety, generated-index checks and PC/mobil
  assert.match(approval,/tests\/data-validation\.test\.cjs/);
  assert.doesNotMatch(approval,/npm run test:e2e/);
  assert.match(approval,/gh pr create/);
+});
+
+test('第2弾レビュー入口は従来の個別承認を残して安全な一括照合・監査を追加',()=>{
+ const entry=read('reviewed-candidate-publication.yml');
+ assert.match(entry,/batch-safe/);
+ assert.match(entry,/manual-ids/);
+ assert.match(entry,/batch_limit:/);
+ assert.match(entry,/node scripts\/review-batch\.cjs/);
+ assert.match(entry,/node scripts\/manual-approval\.cjs/);
+ assert.match(entry,/NOT_CONFIRMED/);
+ assert.match(entry,/CONFIRM/);
+ assert.match(entry,/git add -A source-results season-data review-reports/);
+ assert.match(entry,/gh pr create/);
+ assert.doesNotMatch(entry,/git push origin HEAD:main/);
+ assert.doesNotMatch(entry,/npm run test:e2e/);
+ const timing=read('review-timing.yml');
+ assert.match(timing,/workflow_run:/);
+ assert.match(timing,/Data and site tests/);
+ assert.match(timing,/pages build and deployment/);
+ assert.match(timing,/ref: main/);
+ assert.match(timing,/permissions:\s*\n\s*actions: read\s*\n\s*contents: read/);
+ assert.match(timing,/node scripts\/review-timing\.cjs/);
+ assert.doesNotMatch(timing,/contents: write/);
 });

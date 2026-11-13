@@ -2,9 +2,22 @@ name: AOT reviewed candidate publication request
 on:
   workflow_dispatch:
     inputs:
-      candidate_ids:
-        description: "確認済み候補ID（カンマ区切り、最大20件）"
+      review_mode:
+        description: "選択IDの個別承認か、保存済み順位表を利用した最大100件の一括再照合"
         required: true
+        type: choice
+        default: batch-safe
+        options:
+          - batch-safe
+          - manual-ids
+      batch_limit:
+        description: "batch-safe：今回の候補上限（1〜100）"
+        required: false
+        type: number
+        default: 100
+      candidate_ids:
+        description: "manual-idsでは必須（最大20件）、batch-safeでは空欄で全候補から選択"
+        required: false
         type: string
       publication_policy:
         description: "掲載種別（未確認賞金は自動確定しません）"
@@ -16,7 +29,7 @@ on:
           - verified-rule
           - cosmetic-rank
       confirmation:
-        description: "Epic ID/開催枠/出典を人間が確認したらCONFIRMを選択"
+        description: "Epic ID/開催枠/出典を確認し、実際に掲載PRを作成する場合のみCONFIRM"
         required: true
         type: choice
         default: NOT_CONFIRMED
@@ -39,12 +52,19 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
-      - name: Require main branch and explicit human approval
+      - name: Require main branch and explicit human approval to publish
         env:
           CONFIRM: ${{ inputs.confirmation }}
+          REVIEW_MODE: ${{ inputs.review_mode }}
+          PREVIEW: ${{ inputs.preview_only }}
+          IDS: ${{ inputs.candidate_ids }}
         run: |
           test "$GITHUB_REF" = "refs/heads/main" || { echo "::error::Run this workflow against main only"; exit 1; }
-          test "$CONFIRM" = "CONFIRM" || { echo "::error::Explicit CONFIRM is required"; exit 1; }
+          test "$PREVIEW" = "true" || test "$CONFIRM" = "CONFIRM" || { echo "::error::Explicit CONFIRM required before publishing"; exit 1; }
+          if [[ "$REVIEW_MODE" == "manual-ids" && -z "$IDS" ]]; then
+            echo "::error::manual-ids requires candidate IDs"
+            exit 1
+          fi
       - name: Checkout latest main snapshot
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -58,12 +78,23 @@ jobs:
           cache: npm
       - name: Install locked test dependencies
         run: npm ci --ignore-scripts
-      - name: Validate reviewer selection and generate preview
+      - name: Validate individual selection and generate preview
+        if: ${{ inputs.review_mode == 'manual-ids' }}
         env:
           AOT_APPROVAL_IDS: ${{ inputs.candidate_ids }}
           AOT_APPROVAL_POLICY: ${{ inputs.publication_policy }}
           AOT_APPROVAL_CONFIRMATION: ${{ inputs.confirmation }}
         run: node scripts/manual-approval.cjs --dry-run
+      - name: Batch evidence review, grouped by original Epic event window
+        if: ${{ inputs.review_mode == 'batch-safe' }}
+        env:
+          AOT_BATCH_LIMIT: ${{ inputs.batch_limit }}
+          AOT_BATCH_IDS: ${{ inputs.candidate_ids }}
+        run: |
+          set -euo pipefail
+          ARGS=(--dry-run "--limit=$AOT_BATCH_LIMIT")
+          if [[ -n "$AOT_BATCH_IDS" ]]; then ARGS+=("--ids=$AOT_BATCH_IDS"); fi
+          node scripts/review-batch.cjs "${ARGS[@]}"
       - name: Keep inspectable approval preview
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.0
@@ -72,19 +103,32 @@ jobs:
           path: |
             .manual-approval-summary.md
             .manual-approval-report.json
+            .batch-review-summary.md
+            .batch-review-report.json
           retention-days: 14
           if-no-files-found: ignore
           include-hidden-files: true
       - name: Stop after preview
         if: ${{ inputs.preview_only }}
         run: echo "Preview only, no GitHub branch or result JSON writes."
-      - name: Prepare approved changes
-        if: ${{ !inputs.preview_only }}
+      - name: Prepare individually approved changes
+        if: ${{ !inputs.preview_only && inputs.review_mode == 'manual-ids' }}
         env:
           AOT_APPROVAL_IDS: ${{ inputs.candidate_ids }}
           AOT_APPROVAL_POLICY: ${{ inputs.publication_policy }}
           AOT_APPROVAL_CONFIRMATION: ${{ inputs.confirmation }}
         run: node scripts/manual-approval.cjs
+      - name: Prepare bounded batch-reviewed changes
+        if: ${{ !inputs.preview_only && inputs.review_mode == 'batch-safe' }}
+        env:
+          AOT_BATCH_CONFIRMATION: ${{ inputs.confirmation }}
+          AOT_BATCH_LIMIT: ${{ inputs.batch_limit }}
+          AOT_BATCH_IDS: ${{ inputs.candidate_ids }}
+        run: |
+          set -euo pipefail
+          ARGS=(--apply "--limit=$AOT_BATCH_LIMIT")
+          if [[ -n "$AOT_BATCH_IDS" ]]; then ARGS+=("--ids=$AOT_BATCH_IDS"); fi
+          node scripts/review-batch.cjs "${ARGS[@]}"
       - name: Refresh candidate evidence after approval
         if: ${{ !inputs.preview_only }}
         run: |
@@ -121,8 +165,8 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-          git add -A source-results season-data
-          git add updates.json auto-sync-review.json history-sync-review.json auto-sync-status.json history-sync-status.json approval-history.json candidate-triage.json
+          git add -A source-results season-data review-reports
+          git add updates.json auto-sync-review.json history-sync-review.json auto-sync-status.json history-sync-status.json history-sync-reviewed.json approval-history.json candidate-triage.json
           if git diff --cached --quiet; then
             echo "No publishable candidates (already registered). No PR needed."
             exit 0
@@ -133,8 +177,10 @@ jobs:
           git switch -c "$BRANCH"
           git commit -m "review: propose manually verified candidate results"
           git push -u origin "$BRANCH"
+          BODY=".manual-approval-summary.md"
+          if [[ "${{ inputs.review_mode }}" == "batch-safe" ]]; then BODY=".batch-review-summary.md"; fi
           gh pr create --repo "$GITHUB_REPOSITORY" \
             --base main --head "$BRANCH" \
             --title "Review: safe publication of verified ASIA ON TOUR candidates" \
-            --body-file .manual-approval-summary.md
+            --body-file "$BODY"
           echo "A PR was created. Human review and merge are still required."

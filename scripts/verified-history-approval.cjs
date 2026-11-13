@@ -19,8 +19,13 @@ function decide(row,win,checkpoint,data){
  // A verified 0-VR final has $0 under official VR-only rules. Its observed
  // rows need not wait for thousands of unrelated leaderboard pages.
  // Qualifiers and positive-VR cash still require completed official scans.
+ // Manual batch review may accept a qualifier actually seen in a mature,
+ // contiguous saved prefix, but only with a verified official regional rule.
+ // Scheduled auto-approval keeps its existing, stricter default.
+ const observedQualifier=win?.allowPartialQualifier===true&&row?.kind==='予選'&&
+   row.prize===0&&verifiedPartialPage(row,win,checkpoint);
  if(!checkpoint?.complete&&!(row.kind==='賞金決勝'&&row.vrs===0&&row.prize===null&&
-      verifiedPartialPage(row,win,checkpoint)))
+      verifiedPartialPage(row,win,checkpoint))&&!observedQualifier)
   return decline('順位表の取得が完了していません');
  const rule=RULES[row.tournamentId];
  if(!rule)return decline('未検証のシーズンまたは大会');
