@@ -1,7 +1,7 @@
 {
   "version": 1,
   "sourceCheckedAt": "2026-11-07T23:16:39.215Z",
-  "total": 34,
+  "total": 40,
   "alreadyResolved": 0,
   "byYear": [
     {
@@ -14,13 +14,13 @@
     },
     {
       "name": "2026",
-      "count": 13
+      "count": 19
     }
   ],
   "byRegion": [
     {
       "name": "ME",
-      "count": 21
+      "count": 27
     },
     {
       "name": "NAC",
@@ -47,6 +47,10 @@
     {
       "name": "Solo Cash Cup / NAW / 2025",
       "count": 3
+    },
+    {
+      "name": "Solo Reload Victory Cup / ME / 2026",
+      "count": 6
     },
     {
       "name": "Solo Victory Cup Battle Royale / ME / 2024",
@@ -76,7 +80,7 @@
     },
     {
       "name": "partial-scan",
-      "count": 21
+      "count": 27
     },
     {
       "name": "rules-review",
@@ -1205,6 +1209,204 @@
         "possibleExistingId": null
       },
       "rewardState": "cash-unconfirmed"
+    },
+    {
+      "id": "auto-s42-02ccec5cfb02",
+      "origin": "recent",
+      "date": "2026-10-24",
+      "year": "2026",
+      "region": "ME",
+      "tournamentId": "ch7s4-solo-reload-victory-cup",
+      "event": "Solo Reload Victory Cup",
+      "round": "Event 5 · Round 1 / 予選",
+      "player": "えいど",
+      "kind": "予選",
+      "rank": 8907,
+      "points": 35,
+      "kills": 6,
+      "vrs": 0,
+      "prize": 0,
+      "source": "https://www.fortnite.com/competitive/events/S42_ReloadReloadSoloVictoryCup/?region=ME&round=S42_ReloadSoloVictoryCup_Event5_Round1_ME",
+      "status": "partial-scan",
+      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
+      "reason": "スキン報酬判定の元データではありません",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": false,
+        "observedPartial": true,
+        "seenPages": 90,
+        "totalPages": 100,
+        "sourceKey": "epicgames_S42_ReloadReloadSoloVictoryCup_ME/S42_ReloadSoloVictoryCup_Event5_Round1_ME",
+        "possibleExistingId": null
+      },
+      "rewardState": "source-amount-present-not-verified-by-triage"
+    },
+    {
+      "id": "auto-s42-0c3628a804e3",
+      "origin": "recent",
+      "date": "2026-10-24",
+      "year": "2026",
+      "region": "ME",
+      "tournamentId": "ch7s4-solo-reload-victory-cup",
+      "event": "Solo Reload Victory Cup",
+      "round": "Event 5 · Round 1 / 予選",
+      "player": "Xero AsianReika7",
+      "kind": "予選",
+      "rank": 8609,
+      "points": 41,
+      "kills": 8,
+      "vrs": 0,
+      "prize": 0,
+      "source": "https://www.fortnite.com/competitive/events/S42_ReloadReloadSoloVictoryCup/?region=ME&round=S42_ReloadSoloVictoryCup_Event5_Round1_ME",
+      "status": "partial-scan",
+      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
+      "reason": "スキン報酬判定の元データではありません",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": false,
+        "observedPartial": true,
+        "seenPages": 90,
+        "totalPages": 100,
+        "sourceKey": "epicgames_S42_ReloadReloadSoloVictoryCup_ME/S42_ReloadSoloVictoryCup_Event5_Round1_ME",
+        "possibleExistingId": null
+      },
+      "rewardState": "source-amount-present-not-verified-by-triage"
+    },
+    {
+      "id": "auto-s42-1e35086fd0f4",
+      "origin": "recent",
+      "date": "2026-10-24",
+      "year": "2026",
+      "region": "ME",
+      "tournamentId": "ch7s4-solo-reload-victory-cup",
+      "event": "Solo Reload Victory Cup",
+      "round": "Event 5 · Round 1 / 予選",
+      "player": "李桜 6",
+      "kind": "予選",
+      "rank": 8536,
+      "points": 43,
+      "kills": 0,
+      "vrs": 0,
+      "prize": 0,
+      "source": "https://www.fortnite.com/competitive/events/S42_ReloadReloadSoloVictoryCup/?region=ME&round=S42_ReloadSoloVictoryCup_Event5_Round1_ME",
+      "status": "partial-scan",
+      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
+      "reason": "スキン報酬判定の元データではありません",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": false,
+        "observedPartial": true,
+        "seenPages": 90,
+        "totalPages": 100,
+        "sourceKey": "epicgames_S42_ReloadReloadSoloVictoryCup_ME/S42_ReloadSoloVictoryCup_Event5_Round1_ME",
+        "possibleExistingId": null
+      },
+      "rewardState": "source-amount-present-not-verified-by-triage"
+    },
+    {
+      "id": "auto-s42-80bf85b99613",
+      "origin": "recent",
+      "date": "2026-10-24",
+      "year": "2026",
+      "region": "ME",
+      "tournamentId": "ch7s4-solo-reload-victory-cup",
+      "event": "Solo Reload Victory Cup",
+      "round": "Event 5 · Round 1 / 予選",
+      "player": "Mrs.大森元貴",
+      "kind": "予選",
+      "rank": 8850,
+      "points": 37,
+      "kills": 0,
+      "vrs": 0,
+      "prize": 0,
+      "source": "https://www.fortnite.com/competitive/events/S42_ReloadReloadSoloVictoryCup/?region=ME&round=S42_ReloadSoloVictoryCup_Event5_Round1_ME",
+      "status": "partial-scan",
+      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
+      "reason": "スキン報酬判定の元データではありません",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": false,
+        "observedPartial": true,
+        "seenPages": 90,
+        "totalPages": 100,
+        "sourceKey": "epicgames_S42_ReloadReloadSoloVictoryCup_ME/S42_ReloadSoloVictoryCup_Event5_Round1_ME",
+        "possibleExistingId": null
+      },
+      "rewardState": "source-amount-present-not-verified-by-triage"
+    },
+    {
+      "id": "auto-s42-80db99070ad9",
+      "origin": "recent",
+      "date": "2026-10-24",
+      "year": "2026",
+      "region": "ME",
+      "tournamentId": "ch7s4-solo-reload-victory-cup",
+      "event": "Solo Reload Victory Cup",
+      "round": "Event 5 · Round 1 / 予選",
+      "player": "Marikoro きーさんの弟",
+      "kind": "予選",
+      "rank": 8180,
+      "points": 50,
+      "kills": 2,
+      "vrs": 0,
+      "prize": 0,
+      "source": "https://www.fortnite.com/competitive/events/S42_ReloadReloadSoloVictoryCup/?region=ME&round=S42_ReloadSoloVictoryCup_Event5_Round1_ME",
+      "status": "partial-scan",
+      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
+      "reason": "スキン報酬判定の元データではありません",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": false,
+        "observedPartial": true,
+        "seenPages": 90,
+        "totalPages": 100,
+        "sourceKey": "epicgames_S42_ReloadReloadSoloVictoryCup_ME/S42_ReloadSoloVictoryCup_Event5_Round1_ME",
+        "possibleExistingId": null
+      },
+      "rewardState": "source-amount-present-not-verified-by-triage"
+    },
+    {
+      "id": "auto-s42-d1f2b1b83300",
+      "origin": "recent",
+      "date": "2026-10-24",
+      "year": "2026",
+      "region": "ME",
+      "tournamentId": "ch7s4-solo-reload-victory-cup",
+      "event": "Solo Reload Victory Cup",
+      "round": "Event 5 · Round 1 / 予選",
+      "player": "きみが死ぬまで恋をしたいɞ",
+      "kind": "予選",
+      "rank": 8800,
+      "points": 37,
+      "kills": 3,
+      "vrs": 0,
+      "prize": 0,
+      "source": "https://www.fortnite.com/competitive/events/S42_ReloadReloadSoloVictoryCup/?region=ME&round=S42_ReloadSoloVictoryCup_Event5_Round1_ME",
+      "status": "partial-scan",
+      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
+      "reason": "スキン報酬判定の元データではありません",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": false,
+        "observedPartial": true,
+        "seenPages": 90,
+        "totalPages": 100,
+        "sourceKey": "epicgames_S42_ReloadReloadSoloVictoryCup_ME/S42_ReloadSoloVictoryCup_Event5_Round1_ME",
+        "possibleExistingId": null
+      },
+      "rewardState": "source-amount-present-not-verified-by-triage"
     }
   ],
   "policy": "read-only queue; awards require existing official rule-backed validators and identity/collision proof"
