@@ -1,5 +1,10 @@
 name: AOT reviewed candidate publication request
 on:
+  push:
+    branches:
+      - 'ops/review-request/**'
+    paths:
+      - 'review-requests/launch.json'
   workflow_dispatch:
     inputs:
       review_mode:
@@ -44,11 +49,13 @@ on:
 permissions:
   contents: write
   pull-requests: write
+  actions: write
 concurrency:
   group: aot-provider-history-main
   cancel-in-progress: false
 jobs:
   propose:
+    if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
@@ -184,3 +191,119 @@ jobs:
             --title "Review: safe publication of verified ASIA ON TOUR candidates" \
             --body-file "$BODY"
           echo "A PR was created. Human review and merge are still required."
+
+  fast_request:
+    name: ChatGPT review request → verified data PR + required CI
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout trusted main only (request branch is untrusted data)
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: main
+          fetch-depth: 0
+          persist-credentials: true
+      - name: Set up Node
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '24'
+          cache: npm
+      - name: Fetch only the submitted request JSON, never the request's code
+        env:
+          REQUEST_SHA: ${{ github.sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "$REQUEST_SHA" =~ ^[0-9a-f]{40}$ ]] || exit 1
+          git fetch --no-tags origin "$REQUEST_SHA"
+          git show "$REQUEST_SHA:review-requests/launch.json" > .review-request.json
+      - name: Reject stale, forged or code-changing request branches
+        run: node scripts/review-request.cjs
+      - name: Install locked test dependencies
+        run: npm ci --ignore-scripts
+      - name: Reuse Epic checkpoints across a bounded candidate batch
+        shell: bash
+        run: |
+          set -euo pipefail
+          ARGS=(--dry-run "--limit=$AOT_REQUEST_LIMIT")
+          if [[ -n "$AOT_REQUEST_IDS" ]]; then ARGS+=("--ids=$AOT_REQUEST_IDS"); fi
+          node scripts/review-batch.cjs "${ARGS[@]}"
+      - name: Produce only source-verified changes for an inspectable PR
+        env:
+          AOT_BATCH_CONFIRMATION: CONFIRM
+        shell: bash
+        run: |
+          set -euo pipefail
+          ARGS=(--apply "--limit=$AOT_REQUEST_LIMIT")
+          if [[ -n "$AOT_REQUEST_IDS" ]]; then ARGS+=("--ids=$AOT_REQUEST_IDS"); fi
+          node scripts/review-batch.cjs "${ARGS[@]}"
+      - name: Rebuild and independently validate original data and public indexes
+        shell: bash
+        run: |
+          set -euo pipefail
+          node scripts/source-results-store.cjs verify
+          node scripts/build-season-data.cjs
+          node scripts/build-candidate-triage.cjs
+          node scripts/build-source-results.cjs --check
+          npm run validate
+          node scripts/build-season-data.cjs --check
+          node scripts/build-candidate-triage.cjs --check
+      - name: Regress cash, Epic identity, duplicate and approval logic
+        shell: bash
+        run: |
+          node --test \
+            tests/review-request.test.cjs \
+            tests/review-batch.test.cjs \
+            tests/manual-approval.test.cjs \
+            tests/approval-history.test.cjs \
+            tests/data-validation.test.cjs \
+            tests/reviewed-publication-core.test.cjs \
+            tests/source-results-store.test.cjs \
+            tests/source-results-split.test.cjs \
+            tests/candidate-triage.test.cjs \
+            tests/tournament-rules.test.cjs \
+            tests/session-date-consistency.test.cjs
+      - name: Open data-only PR and explicitly trigger its required CI
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add -A source-results season-data review-reports
+          git add updates.json auto-sync-review.json history-sync-review.json auto-sync-status.json history-sync-status.json history-sync-reviewed.json approval-history.json candidate-triage.json
+          git diff --cached --check
+          if git diff --cached --quiet; then
+            echo "No new evidence-backed results; all unresolved cases stay pending." >> "$GITHUB_STEP_SUMMARY"
+            echo "AOT_FAST_REQUEST no-publishable-change"
+            exit 0
+          fi
+          git fetch --no-tags origin main
+          [[ "$(git rev-parse origin/main)" == "$AOT_REQUEST_BASE" ]] || {
+            echo "::error::main changed during review; refuse to publish stale evidence"
+            exit 1
+          }
+          BRANCH="reviewed-results/$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c "$BRANCH"
+          git commit -m "review: evidence-backed batch $AOT_REQUEST_ID"
+          git push -u origin "$BRANCH"
+          PR_URL="$(gh pr create --repo "$GITHUB_REPOSITORY" --base main --head "$BRANCH" --title "Review: fast verified overseas results ($AOT_REQUEST_ID)" --body-file .batch-review-summary.md)"
+          echo "Created: $PR_URL" >> "$GITHUB_STEP_SUMMARY"
+          # A GITHUB_TOKEN PR does not launch normal pull_request CI.
+          # workflow_dispatch is explicitly permitted. Unknown diffs get full CI.
+          gh workflow run tests.yml --repo "$GITHUB_REPOSITORY" --ref "$BRANCH" -f "review_base_sha=$AOT_REQUEST_BASE"
+          echo "Required CI explicitly dispatched for $BRANCH" >> "$GITHUB_STEP_SUMMARY"
+          echo "AOT_FAST_REQUEST published-pr=$PR_URL"
+      - name: Preserve review evidence and elapsed substage timings
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: reviewed-request-evidence
+          path: |
+            .batch-review-summary.md
+            .batch-review-report.json
+          retention-days: 30
+          include-hidden-files: true
+          if-no-files-found: ignore
