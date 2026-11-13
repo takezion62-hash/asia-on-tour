@@ -249,5 +249,5 @@ test('S32 Remix Solo Victory applies only verified ME rules, not historical NA a
  assert.equal(rule.advance.ME,2000);
  assert.equal(rule.advance.NAC,undefined);
  assert.equal(rule.matchCaps['賞金決勝'],3);
- assert.match(rule.source,/fortnite.com\\/news\\/competitive-details-make-your-mark-in-chapter-2-remix/);
+ assert.ok(rule.source.includes('fortnite.com/news/competitive-details-make-your-mark-in-chapter-2-remix'));
 });
