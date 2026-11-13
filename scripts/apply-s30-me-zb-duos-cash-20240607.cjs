@@ -6,6 +6,7 @@ const fs=require('node:fs'),path=require('node:path');
 const {readResults,publishResults}=require('./source-results-store.cjs');
 const {validateData}=require('./data-checks.cjs');
 const {audit}=require('./validate-approvals.cjs');
+const {validateUpdateLog}=require('./validate-updates.cjs');
 const {upsertPublicationLog}=require('./reviewed-publication-core.cjs');
 const C=require('./verified-s30-duos-cash-20240607.cjs');
 const root=path.resolve(__dirname,'..');
@@ -170,6 +171,10 @@ assert(validated.errors.length===0,
 const historyErrors=audit(results,ledger,players);
 assert(historyErrors.length===0,
  'approval history errors: '+JSON.stringify(historyErrors.slice(0,8)));
+// Ensure old corrections do not duplicate previously published update IDs.
+const updateErrors=validateUpdateLog(results,updates);
+assert(updateErrors.length===0,
+ 'update log errors: '+JSON.stringify(updateErrors.slice(0,8)));
 if(!dryRun&&changes.length){
  publishResults(root,results);
  write('players.json',players);write('approval-history.json',ledger);
