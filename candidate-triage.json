@@ -1,41 +1,25 @@
 {
   "version": 1,
   "sourceCheckedAt": "2026-11-07T23:16:39.215Z",
-  "total": 18,
+  "total": 11,
   "alreadyResolved": 0,
   "byYear": [
     {
       "name": "2024",
       "count": 11
-    },
-    {
-      "name": "2026",
-      "count": 7
     }
   ],
   "byRegion": [
     {
       "name": "ME",
-      "count": 10
+      "count": 5
     },
     {
       "name": "NAC",
       "count": 6
-    },
-    {
-      "name": "NAW",
-      "count": 2
     }
   ],
   "byTournament": [
-    {
-      "name": "Inoxtag Icon Cup Battle Royale / NAW / 2026",
-      "count": 2
-    },
-    {
-      "name": "Solo Reload Victory Cup / ME / 2026",
-      "count": 5
-    },
     {
       "name": "Solo Victory Cup Battle Royale / ME / 2024",
       "count": 5
@@ -52,11 +36,7 @@
     },
     {
       "name": "partial-scan",
-      "count": 8
-    },
-    {
-      "name": "rules-review",
-      "count": 5
+      "count": 6
     }
   ],
   "queue": [
@@ -221,171 +201,6 @@
         "seenPages": 11,
         "totalPages": 100,
         "sourceKey": "epicgames_S31_SoloVictoryCashCup_ME/S31_SoloVictoryCashCup_Event1Round1_ME",
-        "possibleExistingId": null
-      },
-      "rewardState": "source-amount-present-not-verified-by-triage"
-    },
-    {
-      "id": "auto-s42-06ad2ac7ca57",
-      "origin": "recent",
-      "date": "2026-10-24",
-      "year": "2026",
-      "region": "ME",
-      "tournamentId": "ch7s4-solo-reload-victory-cup",
-      "event": "Solo Reload Victory Cup",
-      "round": "Event 5 · Round 1 / 予選",
-      "player": "くろちぐ 7z7z7z7z7z7",
-      "kind": "予選",
-      "rank": 9437,
-      "points": 25,
-      "kills": 2,
-      "vrs": 0,
-      "prize": 0,
-      "source": "https://www.fortnite.com/competitive/events/S42_ReloadReloadSoloVictoryCup/?region=ME&round=S42_ReloadSoloVictoryCup_Event5_Round1_ME",
-      "status": "rules-review",
-      "action": "公式規則・賞金・突破・スキン条件を個別確認",
-      "reason": "スキン報酬判定の元データではありません",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": true,
-        "observedPartial": false,
-        "seenPages": 100,
-        "totalPages": 100,
-        "sourceKey": "epicgames_S42_ReloadReloadSoloVictoryCup_ME/S42_ReloadSoloVictoryCup_Event5_Round1_ME",
-        "possibleExistingId": null
-      },
-      "rewardState": "source-amount-present-not-verified-by-triage"
-    },
-    {
-      "id": "auto-s42-960a29dae749",
-      "origin": "recent",
-      "date": "2026-10-24",
-      "year": "2026",
-      "region": "ME",
-      "tournamentId": "ch7s4-solo-reload-victory-cup",
-      "event": "Solo Reload Victory Cup",
-      "round": "Event 5 · Round 1 / 予選",
-      "player": "瀬田光貴と黒木マティ",
-      "kind": "予選",
-      "rank": 9007,
-      "points": 33,
-      "kills": 5,
-      "vrs": 0,
-      "prize": 0,
-      "source": "https://www.fortnite.com/competitive/events/S42_ReloadReloadSoloVictoryCup/?region=ME&round=S42_ReloadSoloVictoryCup_Event5_Round1_ME",
-      "status": "rules-review",
-      "action": "公式規則・賞金・突破・スキン条件を個別確認",
-      "reason": "スキン報酬判定の元データではありません",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": true,
-        "observedPartial": false,
-        "seenPages": 100,
-        "totalPages": 100,
-        "sourceKey": "epicgames_S42_ReloadReloadSoloVictoryCup_ME/S42_ReloadSoloVictoryCup_Event5_Round1_ME",
-        "possibleExistingId": null
-      },
-      "rewardState": "source-amount-present-not-verified-by-triage"
-    },
-    {
-      "id": "auto-s42-9db299dbed6a",
-      "origin": "recent",
-      "date": "2026-10-24",
-      "year": "2026",
-      "region": "ME",
-      "tournamentId": "ch7s4-solo-reload-victory-cup",
-      "event": "Solo Reload Victory Cup",
-      "round": "Event 5 · Round 1 / 予選",
-      "player": "31歳 タツヒコ",
-      "kind": "予選",
-      "rank": 9976,
-      "points": 17,
-      "kills": 4,
-      "vrs": 0,
-      "prize": 0,
-      "source": "https://www.fortnite.com/competitive/events/S42_ReloadReloadSoloVictoryCup/?region=ME&round=S42_ReloadSoloVictoryCup_Event5_Round1_ME",
-      "status": "rules-review",
-      "action": "公式規則・賞金・突破・スキン条件を個別確認",
-      "reason": "スキン報酬判定の元データではありません",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": true,
-        "observedPartial": false,
-        "seenPages": 100,
-        "totalPages": 100,
-        "sourceKey": "epicgames_S42_ReloadReloadSoloVictoryCup_ME/S42_ReloadSoloVictoryCup_Event5_Round1_ME",
-        "possibleExistingId": null
-      },
-      "rewardState": "source-amount-present-not-verified-by-triage"
-    },
-    {
-      "id": "auto-s42-a4a73ad234c4",
-      "origin": "recent",
-      "date": "2026-10-24",
-      "year": "2026",
-      "region": "ME",
-      "tournamentId": "ch7s4-solo-reload-victory-cup",
-      "event": "Solo Reload Victory Cup",
-      "round": "Event 5 · Round 1 / 予選",
-      "player": "田所V2",
-      "kind": "予選",
-      "rank": 9779,
-      "points": 20,
-      "kills": 5,
-      "vrs": 0,
-      "prize": 0,
-      "source": "https://www.fortnite.com/competitive/events/S42_ReloadReloadSoloVictoryCup/?region=ME&round=S42_ReloadSoloVictoryCup_Event5_Round1_ME",
-      "status": "rules-review",
-      "action": "公式規則・賞金・突破・スキン条件を個別確認",
-      "reason": "スキン報酬判定の元データではありません",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": true,
-        "observedPartial": false,
-        "seenPages": 100,
-        "totalPages": 100,
-        "sourceKey": "epicgames_S42_ReloadReloadSoloVictoryCup_ME/S42_ReloadSoloVictoryCup_Event5_Round1_ME",
-        "possibleExistingId": null
-      },
-      "rewardState": "source-amount-present-not-verified-by-triage"
-    },
-    {
-      "id": "auto-s42-c4639cd27eeb",
-      "origin": "recent",
-      "date": "2026-10-24",
-      "year": "2026",
-      "region": "ME",
-      "tournamentId": "ch7s4-solo-reload-victory-cup",
-      "event": "Solo Reload Victory Cup",
-      "round": "Event 5 · Round 1 / 予選",
-      "player": "Celis やなぎさわつつ上等",
-      "kind": "予選",
-      "rank": 9499,
-      "points": 24,
-      "kills": 5,
-      "vrs": 0,
-      "prize": 0,
-      "source": "https://www.fortnite.com/competitive/events/S42_ReloadReloadSoloVictoryCup/?region=ME&round=S42_ReloadSoloVictoryCup_Event5_Round1_ME",
-      "status": "rules-review",
-      "action": "公式規則・賞金・突破・スキン条件を個別確認",
-      "reason": "スキン報酬判定の元データではありません",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": true,
-        "observedPartial": false,
-        "seenPages": 100,
-        "totalPages": 100,
-        "sourceKey": "epicgames_S42_ReloadReloadSoloVictoryCup_ME/S42_ReloadSoloVictoryCup_Event5_Round1_ME",
         "possibleExistingId": null
       },
       "rewardState": "source-amount-present-not-verified-by-triage"
@@ -587,72 +402,6 @@
         "possibleExistingId": null
       },
       "rewardState": "source-amount-present-not-verified-by-triage"
-    },
-    {
-      "id": "auto-s42-01269687093d",
-      "origin": "recent",
-      "date": "2026-10-26",
-      "year": "2026",
-      "region": "NAW",
-      "tournamentId": "ch7s4-inoxtag-icon-cup-battle-royale",
-      "event": "Inoxtag Icon Cup Battle Royale",
-      "round": "単一開催枠 / 参加確認",
-      "player": "FTW 僕は最低だドビュ / mint",
-      "kind": "参加確認",
-      "rank": 4045,
-      "points": 68,
-      "kills": 11,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S42_InoxtagIconCup/?region=NAW&round=S42_InoxtagIconCup_NAW",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "公式の順位条件を登録していない大会",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 43,
-        "totalPages": 89,
-        "sourceKey": "epicgames_S42_InoxtagIconCup_NAW/S42_InoxtagIconCup_NAW",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s42-140b7ff0b93e",
-      "origin": "recent",
-      "date": "2026-10-26",
-      "year": "2026",
-      "region": "NAW",
-      "tournamentId": "ch7s4-inoxtag-icon-cup-battle-royale",
-      "event": "Inoxtag Icon Cup Battle Royale",
-      "round": "単一開催枠 / 参加確認",
-      "player": "りいち / ZAKURo0O",
-      "kind": "参加確認",
-      "rank": 4041,
-      "points": 68,
-      "kills": 15,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S42_InoxtagIconCup/?region=NAW&round=S42_InoxtagIconCup_NAW",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "公式の順位条件を登録していない大会",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 43,
-        "totalPages": 89,
-        "sourceKey": "epicgames_S42_InoxtagIconCup_NAW/S42_InoxtagIconCup_NAW",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
     }
   ],
   "policy": "read-only queue; awards require existing official rule-backed validators and identity/collision proof"
