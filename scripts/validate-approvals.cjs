@@ -7,6 +7,7 @@ const {collision}=require('./manual-approval-core.cjs');
 const {evaluate:cosmeticEvaluate}=require('./cosmetic-rank-rules.cjs');
 const {RULES}=require('./verified-history-approval.cjs');
 const {verifyCashRow:verifiedJune7DuosCash, POLICY:S30_DUOS_CASH_POLICY}=require('./verified-s30-duos-cash-20240607.cjs');
+const {verifyNonprizeRow:verifiedJune7Zero, POLICY:S30_ZERO_DUOS_POLICY}=require('./verified-s30-duos-nonprize-20240607.cjs');
 const root=path.resolve(__dirname,'..');
 const load=name=>name==='results.json'?readResults(root).rows:JSON.parse(fs.readFileSync(path.join(root,name),'utf8'));
 // New cash-final approval policy: exact official tournament, session, score and
@@ -193,13 +194,14 @@ function audit(results,ledger,players){
   const rows=results.filter(r=>r.id===entry.recordId);
   if(rows.length!==1){errors.push('Published record missing or duplicate: '+entry.id);continue}
   const r=rows[0];
-  if(entry.decision!=='published'||!['attendance-only','verified-rule','cosmetic-rank','verified-vr','official-final-vr-award','verified-qualifier','verified-s32-final-100usd-vr','verified-trios-qualifier-participation-zero-cash',S30_DUOS_CASH_POLICY].includes(entry.policy)){
+  if(entry.decision!=='published'||!['attendance-only','verified-rule','cosmetic-rank','verified-vr','official-final-vr-award','verified-qualifier','verified-s32-final-100usd-vr','verified-trios-qualifier-participation-zero-cash',S30_DUOS_CASH_POLICY,S30_ZERO_DUOS_POLICY].includes(entry.policy)){
    errors.push('Unknown decision/policy: '+entry.id);continue;
   }
   if(r.source!==entry.source||r.verified!==true)errors.push('Published source or verification flag changed: '+entry.id);
   if(entry.policy==='attendance-only'&&(r.kind!=='参加確認'||r.prize!==null||r.reviewOnly===true))errors.push('Participation was changed into unsupported confirmed award: '+entry.id);
   if(entry.policy==='verified-rule'&&(r.prize!==0||r.reviewOnly===true||(!['予選','賞金決勝'].includes(r.kind)&&!validRuleVerifiedReloadAttendance(r,entry))))errors.push('Rule-approved entry has unsupported payout or category: '+entry.id);
   if(entry.policy===S30_DUOS_CASH_POLICY&&!verifiedJune7DuosCash(r,entry))errors.push('Unverified June 7 ME ZB Duos Cash Cup placement or individual payout: '+entry.id);
+  if(entry.policy===S30_ZERO_DUOS_POLICY&&!verifiedJune7Zero(r,entry))errors.push('Unverified June 7 ME ZB Duos zero-prize final or roster: '+entry.id);
   if(entry.policy==='cosmetic-rank'&&(r.kind!=='スキン大会'||r.prize!==0||r.reviewOnly===true||!cosmeticEvaluate(r).eligible))errors.push('Cosmetic winner is outside verified official rank range: '+entry.id);
   if(entry.policy==='verified-vr'&&!(r.kind==='賞金決勝'&&r.seasonId==='S30'&&r.tournamentId==='ch5s3-solo-victory-cup'&&r.region==='ME'&&r.source?.includes('/S30_SoloVictoryCashCup/')&&r.source?.includes('S30_SoloVictoryCashCup_Event7Round2_ME')&&Number.isSafeInteger(r.vrs)&&r.vrs>=1&&r.vrs<=3&&Number.isSafeInteger(r.matches)&&r.matches>=r.vrs&&r.matches<=3&&r.points===r.vrs*100&&r.prize===r.vrs*100&&r.verified===true&&r.reviewOnly!==true))errors.push('Cash final record lacks official per-VR proof: '+entry.id);
   if(entry.policy==='official-final-vr-award'&&!validCashFinal(r,entry))errors.push('Invalid official solo/duo VR award: '+entry.id);
