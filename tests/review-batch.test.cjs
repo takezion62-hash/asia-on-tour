@@ -34,7 +34,7 @@ function fixture(){
  const k2='epicgames_S41_ReloadReloadSoloVictoryCup_ME/S41_ReloadSoloVictoryCup_Round1_Day1_ME';
  const cp=(proposals,props={})=>({complete:false,rankingOrderValid:true,
   pages:4,nextPage:4,totalPages:20,lastSeenRank:400,
-  lastSuccessAt:at,emptyAttempts:0,proposals,...props});
+  lastSuccessAt:at,emptyAttempts:0,proposals:proposals.map(x=>structuredClone(x)),...props});
  return {
   results:[existing,prior],
   players:{candidates:['A','B','D','E'].map(name=>({name})),confirmedAliases:{}},
