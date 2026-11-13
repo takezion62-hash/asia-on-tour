@@ -20,6 +20,14 @@ const TARGETS=[
  {rank:23,player:'MMC KAAN BABA / みるやちぇ',points:132,kills:6,vrs:0,matches:6,prize:200,id:'auto-s30-3b51fd302fd8'},
  {rank:25,player:'りーく / モバイル勢のまかろん',points:120,kills:7,vrs:0,matches:6,prize:200,id:'auto-s30-eaa077924703'}
 ];
+function validProfile(p,name){
+ try{
+  const u=new URL(p?.url);
+  return p?.name===name&&u.protocol==='https:'&&
+   u.hostname==='fortnitetracker.com'&&u.pathname.startsWith('/profile/all/')&&
+   /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(u.searchParams.get('id')||'');
+ }catch{return false}
+}
 function verifyCashRow(row,approval) {
  const t=TARGETS.find(x=>x.id===row?.id);
  if(!t||!row||!approval||approval.id!==t.id||
@@ -33,9 +41,7 @@ function verifyCashRow(row,approval) {
   !Array.isArray(row.players)||row.players.length!==2||
   row.players.join(' / ')!==t.player||
   !Array.isArray(row.profiles)||row.profiles.length!==2||
-  row.profiles.some((p,i)=>p.name!==row.players[i]||
-    typeof p.url!=='string'||!p.url.startsWith('https://fortnitetracker.com/profile/all/')||
-    !/^[0-9a-f]{8}-[0-9a-f-]{27}$/i.test(new URL(p.url).searchParams.get('id')||''))||
+  row.profiles.some((p,i)=>!validProfile(p,row.players[i]))||
   row.rank!==t.rank||row.points!==t.points||row.kills!==t.kills||
   row.vrs!==t.vrs||row.matches!==t.matches||
   row.prize!==t.prize||row.teamPrize!==t.prize||
