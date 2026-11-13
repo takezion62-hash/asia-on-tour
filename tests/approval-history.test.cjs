@@ -180,3 +180,42 @@ test('S42 Reload out-of-cutoff attendance is guarded while cash-final policy is 
  assert.ok(audit([{...r,rank:320}],{version:1,entries:[entry]},{confirmedAliases:{}}).length>0);
  assert.ok(audit([{...r,prize:100}],{version:1,entries:[entry]},{confirmedAliases:{}}).length>0);
 });
+
+test('2024/6/7 ME ZB Duos nonprize finalists retain $0 and the confirmed Αθηνά. alias',()=>{
+ const C=require('../scripts/verified-s30-duos-cash-20240607.cjs');
+ const Z=require('../scripts/verified-s30-duos-nonprize-20240607.cjs');
+ assert.equal(Z.TARGETS.length,3);
+ assert.deepEqual(Z.TARGETS.map(x=>x.rank),[29,32,37]);
+ const greek=Z.TARGETS.find(x=>x.rank===37).members[1];
+ assert.equal(greek.name,'るいぼっと');
+ assert.equal(greek.raw,'Αθηνά.');
+ for(const t of Z.TARGETS){
+  const row={
+   id:t.id,date:C.DATE,region:C.REGION,player:t.members.map(m=>m.name).join(' / '),
+   players:t.members.map(m=>m.name),playerRaw:t.members.map(m=>m.raw).join(' / '),
+   event:'ZB Duos Cash Cup',round:C.ROUND,rank:t.rank,points:t.points,
+   kills:t.kills,vrs:0,matches:t.matches,prize:0,prizePerPlayer:0,teamPrize:0,
+   kind:'賞金決勝',source:C.SOURCE,verified:true,
+   tournamentId:C.TOURNAMENT,seasonId:'S30',chapter:5,season:3,
+   profiles:t.members.map(m=>({name:m.name,url:'https://fortnitetracker.com/profile/all/'+
+    encodeURIComponent(m.raw)+'/events?id='+m.uuid})),
+   note:'賞金圏外 '+C.TRACKER+' '+C.RULE
+  };
+  const entry={id:t.id,recordId:t.id,decision:'published',policy:Z.POLICY,
+   source:C.SOURCE,rule:C.RULE};
+  assert.equal(Z.verifyNonprizeRow(row,entry),true,'valid no-prize source '+t.rank);
+  assert.deepEqual(audit([row],{version:1,entries:[entry]},{confirmedAliases:{}}),[]);
+  for(const corrupted of [
+   {...row,rank:25},{...row,prize:100},{...row,prizePerPlayer:100},
+   {...row,teamPrize:100},{...row,points:row.points+1},{...row,kills:row.kills+1},
+   {...row,vrs:1},{...row,matches:row.matches+1},
+   {...row,kind:'参加確認'},{...row,round:'Event 2 · Round 2 / 賞金決勝'},
+   {...row,playerRaw:'another player'},{...row,profiles:[{...row.profiles[0],url:'https://evil.test'},row.profiles[1]]},
+   {...row,date:'2024-06-13'},{...row,region:'NAC'}
+  ]){
+   assert.equal(Z.verifyNonprizeRow(corrupted,entry),false,
+    'corrupted account/score/cash must be rejected: '+JSON.stringify(corrupted));
+  }
+  assert.equal(Z.verifyNonprizeRow(row,{...entry,policy:'attendance-only'}),false);
+ }
+});
