@@ -2,6 +2,35 @@
   "version": 1,
   "status": "review",
   "checkedAt": "2026-11-07T13:02:44.444Z",
-  "proposals": [],
+  "proposals": [
+    {
+      "id": "auto-s43-03735b175d62",
+      "date": "2026-11-11",
+      "region": "ME",
+      "player": "はりはりはりはりはりはりはりはり",
+      "playerRaw": "はりはりはりはりはりはりはりはり",
+      "event": "Arenas Cash Cup",
+      "round": "Event 1 / 参加確認",
+      "rank": 3361,
+      "points": 16,
+      "kills": 6,
+      "vrs": 0,
+      "prize": null,
+      "kind": "参加確認",
+      "matches": 1,
+      "seasonId": "S43",
+      "chapter": 7,
+      "season": 5,
+      "tournamentId": "ch7s5-arenas-cash-cup",
+      "source": "https://www.fortnite.com/competitive/events/S43_ArenaCashCup/?region=ME&round=S43_ArenaCashCup_Event1_ME",
+      "verified": true,
+      "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+      "reviewOnly": true,
+      "reviewReason": "公式の順位条件を登録していない大会",
+      "teamAccountIds": [
+        "f3ee75e115d246249809381c67f360a7"
+      ]
+    }
+  ],
   "manualReviewedAt": "2026-11-13T23:10:17.661Z"
 }
