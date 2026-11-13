@@ -75,11 +75,6 @@ function observed(r,{allow429}){
  }else assert(cp.lastErrorCode==null&&!cp.lastError,'duplicate candidate checkpoint source error '+r.id);
  return {event,window,session,cp,cat};
 }
-function classify(r,proof){
- const spec=ALLOWED.get([r.seasonId,r.date,r.region,r.tournamentId].join('|'));
- assert(spec&&proof.event===spec.event&&proof.window===r.seasonId+'_'+(spec.event.split('_').slice(1).join('_'))+'_'+spec.round+'_'+r.region ||
-  false,''); // placeholder replaced below
-}
 const published=[],duplicates=[],held=[];
 function classifyExact(r,proof){
  const spec=ALLOWED.get([r.seasonId,r.date,r.region,r.tournamentId].join('|'));
@@ -94,7 +89,7 @@ function classifyExact(r,proof){
  if(spec.kind==='zero-final'){
   assert(proof.cat.team==='solo'&&r.kind==='賞金決勝'&&r.prize===null&&r.points===0&&r.vrs===0&&r.round.includes('Round 2 / 賞金決勝'),
    'cannot verify zero-VR final payout '+r.id);
-  return {kind:'賞金決勝',round:r.round,prize:0,policy:'verified-zero-final',rule:spec.rule,
+  return {kind:'賞金決勝',round:r.round,prize:0,policy:'verified-rule',rule:spec.rule,
    note:'Epic本人ID・公式決勝開催枠・保存済み順位表で0pt/0VR/3試合を確認。保存済みの当該ページは連続取得で有効、続きのページ取得のみHTTP 429で中断。C5S4公式規則は決勝VRのみ賞金付与のため$0。規則: '+spec.rule};
  }
  assert(spec.kind==='attendance'&&r.kind==='参加確認'&&r.reviewOnly===true&&r.prize===null,
