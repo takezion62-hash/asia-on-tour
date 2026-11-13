@@ -1,7 +1,7 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-13T09:42:06.451Z",
+  "checkedAt": "2026-11-13T10:42:06.031Z",
   "mode": "review",
   "scope": "history",
   "dateMode": "rolling",
@@ -9,18 +9,18 @@
   "fromDate": "2023-01-01",
   "toDate": "2026-11-13",
   "provider": "osirion",
-  "linkedPlayers": 592,
+  "linkedPlayers": 594,
   "trackedWindows": 2960,
-  "found": 14,
-  "skipped": 9,
-  "imported": 22,
+  "found": 40,
+  "skipped": 11,
+  "imported": 21,
   "scannedPages": 96,
-  "completedWindows": 476,
+  "completedWindows": 477,
   "identityConflicts": 3,
-  "alreadyRegistered": 4749,
-  "autoApprovedTotal": 2425,
+  "alreadyRegistered": 4791,
+  "autoApprovedTotal": 2446,
   "invalidCachedCandidates": 1,
-  "manualReviewCandidates": 14,
+  "manualReviewCandidates": 40,
   "autoApprovedCosmeticThisRun": 0,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
@@ -31,8 +31,8 @@
   "malformedFailures": 0,
   "skippedLeaderboards": [],
   "reviewOnlyWindows": 1328,
-  "reviewOnlyCandidates": 5,
-  "unmappedEvents": 239,
+  "reviewOnlyCandidates": 18,
+  "unmappedEvents": 241,
   "unmappedEventIds": [
     "S30_ConsoleCashCups",
     "S30_MetallicaCup",
@@ -47,27 +47,27 @@
     "S30_Reload",
     "S30_ReloadZB"
   ],
-  "message": "公式Epic ID・順位・開催枠を検証し17件を掲載。残り14件。未確認賞金を推定しない。",
+  "message": "最新版と安全統合：新規掲載21件、重複スキップ0件、要確認の競合0件、確認待ち40件。既存の戦績・賞金は保持。",
   "manuallyPublished": 1484,
   "manuallyResolvedDuplicates": 153,
   "lastReviewedBatchAt": "2026-11-13T10:38:51.971Z",
   "manuallyCorrected": 4,
   "lastCorrectedReviewAt": "2026-11-07T09:14:30.244Z",
   "concurrentMerge": {
-    "appended": 22,
+    "appended": 21,
     "alreadyPublished": 0,
     "reviewConflicts": 0,
-    "keptPending": 34,
-    "reconciledAt": "2026-11-13T09:42:19.432Z"
+    "keptPending": 40,
+    "reconciledAt": "2026-11-13T10:42:13.860Z"
   },
   "coverage": {
     "total": 2960,
-    "completed": 476,
-    "notStarted": 2327,
-    "partial": 151,
-    "retryWaiting": 6,
-    "retryDue": 0,
-    "remaining": 2484,
+    "completed": 477,
+    "notStarted": 2321,
+    "partial": 156,
+    "retryWaiting": 5,
+    "retryDue": 1,
+    "remaining": 2483,
     "retryCount": 6,
     "completionPercent": 16.1,
     "byRegion": {
@@ -93,8 +93,8 @@
       },
       "NAC": {
         "total": 538,
-        "completed": 78,
-        "pending": 460
+        "completed": 79,
+        "pending": 459
       },
       "NAW": {
         "total": 327,
@@ -105,8 +105,8 @@
     "byYear": {
       "2024": {
         "total": 974,
-        "completed": 126,
-        "pending": 848
+        "completed": 127,
+        "pending": 847
       },
       "2025": {
         "total": 690,
@@ -126,7 +126,7 @@
         "date": "2026-09-05",
         "region": "OCE",
         "series": "victory-cup",
-        "status": "retryWaiting",
+        "status": "retryDue",
         "nextPage": 0,
         "totalPages": null,
         "retryAfter": "2026-11-13T10:40:57.825Z",
@@ -270,7 +270,7 @@
     "remainingPending": 0,
     "policy": "Epic-ID and original mature ranked checkpoint, official C5S3/C5S4 qualifier cutoffs, no inferred awards"
   },
-  "autoApprovedDuoQualifierThisRun": 0,
+  "autoApprovedDuoQualifierThisRun": 1,
   "latestParticipationReview": {
     "reviewedAt": "2026-11-12T02:59:51.445Z",
     "participationPublished": 0,
