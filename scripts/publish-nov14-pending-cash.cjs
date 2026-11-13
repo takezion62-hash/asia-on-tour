@@ -43,7 +43,7 @@ for(const t of V.TARGETS){
  fail(!existsId.has(t.id)&&!ledgerIds.has(t.id)&&!done.has(t.id),'already approved candidate still in queue '+t.id);
  fail(original.verified===true&&V.exactScores(original,t)&&
   original.kind===(t.seasonId==='S43'?'参加確認':'賞金決勝')&&
-  original.prize===null&&original.reviewOnly===(t.seasonId==='S43')&&
+  original.prize===null&&(original.reviewOnly===true)===(t.seasonId==='S43')&&
   (t.seasonId==='S32'||original.players?.join(' / ')===t.player&&
     original.teamAccountIds?.join('/')===t.accountIds.join('/')),'original candidate mismatch '+t.id);
  const eventCat=catalog.get(t.tournamentId),expectedTeam=t.roster?'duo':'solo';
@@ -70,7 +70,7 @@ for(const t of V.TARGETS){
   const qualified=db.results.filter(r=>r.date==='2026-11-08'&&r.region==='OCE'&&
    r.tournamentId===t.tournamentId&&r.player===t.player&&r.rank<=20&&
    /Round 1 \/ 予選突破/.test(r.round)&&r.prize===0&&r.verified===true);
-  fail(qualified.length===1&&qualified[0].teamAccountIds?.join('/')===t.accountIds.join('/'),
+  fail(qualified.length===1&&qualified[0].playerRaw===t.playerRaw&&qualified[0].players?.join(' / ')===t.player,
    'S43 finalists must match the prior verified top-20 qualification');
  }
  fail(!db.results.some(r=>collision(r,original,db.players.confirmedAliases)),
