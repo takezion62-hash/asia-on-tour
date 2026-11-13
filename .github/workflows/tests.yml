@@ -113,6 +113,8 @@ jobs:
         run: node scripts/apply-s26-s28-me-zb-duos-2023.cjs --dry-run
       - name: 2026/11/14 保留の現金賞金：Unger $100・Reoデュオ各$200を独立した証拠で照合
         run: node scripts/publish-nov14-pending-cash.cjs --dry-run
+      - name: 2026/11/14 HamiKuma賞品4組：元のTracker順位を保持して重複候補のみ解決
+        run: node scripts/reconcile-pending-hamikuma-20261114.cjs --dry-run
       - name: 2026/11/14 確認待ち49 ID：元の21件と新規32件の安全な再照合
         run: node scripts/publish-pending-review-20261114.cjs --dry-run
       - name: 2024/11/16 ME Solo決勝：公式Epic ID・独立した賞金根拠を照合（書込なし）
