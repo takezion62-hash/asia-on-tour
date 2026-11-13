@@ -45,3 +45,14 @@ candidateIdsを省略または空にすると未処理候補から最大limit件
 
 候補の照合・重複・書込時間はreview-batch.cjsのJSONレポートに記録し、CI/Pagesは既存の計測Actionで確認。
 目標は公開まで5分以内だが、CIキュー・公開待ち・追加調査の有無によって変わるため保証しない。
+
+## PR作成権限が無い場合（2026-11-13の実運用確認）
+
+リポジトリ設定で「Allow GitHub Actions to create and approve pull requests」が無効な場合、`gh pr create` は権限エラーになる。この場合も、検証済み `reviewed-results/<run id>-<attempt>` ブランチは作成済みなので、**公開失敗ではなく、接続済みGitHub AppによるPR作成待ち**として完了させる。
+
+- ActionsのサマリーにブランチとPR作成URLを残す。権限以外のエラーは引き続き失敗させる
+- ChatGPTの接続済みGitHub Appでそのブランチからmain宛てのPRを作り、通常のpull_request CIを発火させる
+- データ/単体テストとPC・スマホの必須表示テストを確認し、最新mainとの競合を確認してからマージする
+- この代替ルートではPR作成に接続済みアプリの追加操作が必要。GitHub ActionsだけでPR作成を完結するには該当リポジトリ設定を有効化する必要がある
+
+実例: 2026-11-13に27件を照合、14件の安全な掲載をPR #77経由で実施。残り13件は根拠不足として保持。
