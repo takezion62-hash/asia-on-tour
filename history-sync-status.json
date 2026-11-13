@@ -11,7 +11,7 @@
   "provider": "osirion",
   "linkedPlayers": 592,
   "trackedWindows": 2958,
-  "found": 37,
+  "found": 0,
   "skipped": 11,
   "imported": 10,
   "scannedPages": 96,
@@ -20,7 +20,7 @@
   "alreadyRegistered": 4573,
   "autoApprovedTotal": 2344,
   "invalidCachedCandidates": 1,
-  "manualReviewCandidates": 37,
+  "manualReviewCandidates": 0,
   "autoApprovedCosmeticThisRun": 0,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
@@ -31,7 +31,7 @@
   "malformedFailures": 0,
   "skippedLeaderboards": [],
   "reviewOnlyWindows": 1326,
-  "reviewOnlyCandidates": 18,
+  "reviewOnlyCandidates": 0,
   "unmappedEvents": 238,
   "unmappedEventIds": [
     "S30_ConsoleCashCups",
@@ -47,10 +47,10 @@
     "S30_Reload",
     "S30_ReloadZB"
   ],
-  "message": "最新版と安全統合：新規掲載10件、重複スキップ0件、要確認の競合0件、確認待ち37件。既存の戦績・賞金は保持。",
-  "manuallyPublished": 1420,
-  "manuallyResolvedDuplicates": 146,
-  "lastReviewedBatchAt": "2026-11-13T00:25:25.879Z",
+  "message": "確認候補37件の元順位表を照合し、36件を正式掲載・1件は既掲載賞金と重複整理、残り0件。",
+  "manuallyPublished": 1456,
+  "manuallyResolvedDuplicates": 147,
+  "lastReviewedBatchAt": "2026-11-13T03:10:45.250Z",
   "manuallyCorrected": 4,
   "lastCorrectedReviewAt": "2026-11-07T09:14:30.244Z",
   "concurrentMerge": {
@@ -263,12 +263,12 @@
     "unrealTeamsWithCash": 2
   },
   "latestManualReview": {
-    "reviewedAt": "2026-11-13T00:25:25.879Z",
-    "reviewedCandidates": 15,
-    "published": 10,
-    "duplicatesResolved": 5,
+    "reviewedAt": "2026-11-13T03:10:45.250Z",
+    "reviewedCandidates": 37,
+    "published": 36,
+    "duplicatesResolved": 1,
     "remainingPending": 0,
-    "policy": "Original Epic-ID checkpoint rank, official session, mature captured page before subsequent HTTP 429; duplicates require exact equal score + one Tracker rank shift"
+    "policy": "Epic-ID and original mature ranked checkpoint, official C5S3/C5S4 qualifier cutoffs, no inferred awards"
   },
   "autoApprovedDuoQualifierThisRun": 0,
   "latestParticipationReview": {
