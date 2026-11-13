@@ -99,6 +99,8 @@ jobs:
         run: node scripts/apply-verified-tracker-finals.cjs --dry-run
       - name: S43 NAW Squads決勝3組の本人・賞金・重複検証（書込なし）
         run: node scripts/apply-verified-s43-squads-finals.cjs --dry-run
+      - name: 2024/6/7 ME ZB Duos Cash Cup：10組の賞金・個人配分・承認履歴を照合（書込なし）
+        run: node scripts/apply-s30-me-zb-duos-cash-20240607.cjs --dry-run
       - name: 戦績データ更新は公開索引・確認待ち索引の正確な一致を確認
         if: needs.classify.outputs.mode == 'data'
         run: |
