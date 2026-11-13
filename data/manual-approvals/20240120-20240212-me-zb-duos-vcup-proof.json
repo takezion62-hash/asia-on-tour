@@ -1,0 +1,207 @@
+{
+  "version": 1,
+  "batch": {
+    "id": "tracker-s28-me-zb-duos-vcup-20240120-20240212",
+    "region": "ME",
+    "seasonId": "S28",
+    "tournamentId": "ch5s1-zero-build-duos-victory-cup",
+    "eventId": "S28_DuosZBVictoryCashCup",
+    "ruleUrl": "https://www.fortnite.com/news/victory-cash-cups-chapter-5-season-1-official-rules",
+    "source": "https://fortnitetracker.com/events/epicgames_S28_DuosZBVictoryCashCup_ME",
+    "proof": "ユーザー提供2026-11-14 JSTのFortnite Tracker大会結果8枚。2024-02-12 ME Event8 Round2：3組、2024-01-20 ME Event5 Round2：5組。日付はスクリーンショット表示の日本時間を優先（Epic公式発表は米国基準で前日）。1VRにつき各選手$100。本人は12種類のTracker Event Epic UUIDで照合し、Vallhd=Vall、charufn=ちゃる、ptt ろず=ろずを紐付け。支払完了は保証しない。",
+    "teams": [
+      {
+        "date": "2024-02-12",
+        "eventNumber": 8,
+        "round": 2,
+        "windowId": "S28_DuosZBVictoryCashCup_Event8Round2_ME",
+        "rank": 13,
+        "points": 100,
+        "kills": 17,
+        "vrs": 1,
+        "matches": 3,
+        "teamPrize": 200,
+        "members": [
+          {
+            "name": "Vall",
+            "raw": "Vallhd",
+            "url": "https://fortnitetracker.com/profile/all/Vallhd/events?id=c3cbde22-018a-40a2-87c7-d4969aa2d83f"
+          },
+          {
+            "name": "Michael",
+            "raw": "Michael",
+            "url": "https://fortnitetracker.com/profile/all/Michael/events?id=e4d80acb-6e73-4dba-96d5-6aae0e5ac103"
+          }
+        ]
+      },
+      {
+        "date": "2024-02-12",
+        "eventNumber": 8,
+        "round": 2,
+        "windowId": "S28_DuosZBVictoryCashCup_Event8Round2_ME",
+        "rank": 24,
+        "points": 100,
+        "kills": 12,
+        "vrs": 1,
+        "matches": 3,
+        "teamPrize": 200,
+        "members": [
+          {
+            "name": "zerua",
+            "raw": "zerua",
+            "url": "https://fortnitetracker.com/profile/all/zerua/events?id=5600bac6-69e8-441a-a496-e8f11594cf6d"
+          },
+          {
+            "name": "みやぐらーる",
+            "raw": "みやぐらーる",
+            "url": "https://fortnitetracker.com/profile/all/%E3%81%BF%E3%82%84%E3%81%90%E3%82%89%E3%83%BC%E3%82%8B/events?id=dff2ea39-6a1f-44e6-af71-c9d2aa28ebd0"
+          }
+        ]
+      },
+      {
+        "date": "2024-02-12",
+        "eventNumber": 8,
+        "round": 2,
+        "windowId": "S28_DuosZBVictoryCashCup_Event8Round2_ME",
+        "rank": 30,
+        "points": 100,
+        "kills": 2,
+        "vrs": 1,
+        "matches": 2,
+        "teamPrize": 200,
+        "members": [
+          {
+            "name": "Aim",
+            "raw": "Aim",
+            "url": "https://fortnitetracker.com/profile/all/Aim/events?id=8baf28ea-b515-48e6-9232-d03509c13382"
+          },
+          {
+            "name": "ZAZI",
+            "raw": "ZAZI",
+            "url": "https://fortnitetracker.com/profile/all/ZAZI/events?id=f08aad62-9bf0-40d6-beb7-8c7aea8e0a1f"
+          }
+        ]
+      },
+      {
+        "date": "2024-01-20",
+        "eventNumber": 5,
+        "round": 2,
+        "windowId": "S28_DuosZBVictoryCashCup_Event5Round2_ME",
+        "rank": 10,
+        "points": 100,
+        "kills": 15,
+        "vrs": 1,
+        "matches": 2,
+        "teamPrize": 200,
+        "members": [
+          {
+            "name": "Vall",
+            "raw": "Vallhd",
+            "url": "https://fortnitetracker.com/profile/all/Vallhd/events?id=c3cbde22-018a-40a2-87c7-d4969aa2d83f"
+          },
+          {
+            "name": "Michael",
+            "raw": "Michael",
+            "url": "https://fortnitetracker.com/profile/all/Michael/events?id=e4d80acb-6e73-4dba-96d5-6aae0e5ac103"
+          }
+        ]
+      },
+      {
+        "date": "2024-01-20",
+        "eventNumber": 5,
+        "round": 2,
+        "windowId": "S28_DuosZBVictoryCashCup_Event5Round2_ME",
+        "rank": 16,
+        "points": 100,
+        "kills": 17,
+        "vrs": 1,
+        "matches": 3,
+        "teamPrize": 200,
+        "members": [
+          {
+            "name": "俺は第六感を信じる",
+            "raw": "俺は第六感を信じる",
+            "url": "https://fortnitetracker.com/profile/all/%E4%BF%BA%E3%81%AF%E7%AC%AC%E5%85%AD%E6%84%9F%E3%82%92%E4%BF%A1%E3%81%98%E3%82%8B/events?id=6f0e1f77-6406-431a-a91f-e6bd771eb3b7"
+          },
+          {
+            "name": "ちゃる",
+            "raw": "charufn",
+            "url": "https://fortnitetracker.com/profile/all/charufn/events?id=e3d0bd7d-4b8c-4e60-ac46-564918e3e3a1"
+          }
+        ]
+      },
+      {
+        "date": "2024-01-20",
+        "eventNumber": 5,
+        "round": 2,
+        "windowId": "S28_DuosZBVictoryCashCup_Event5Round2_ME",
+        "rank": 19,
+        "points": 100,
+        "kills": 15,
+        "vrs": 1,
+        "matches": 3,
+        "teamPrize": 200,
+        "members": [
+          {
+            "name": "ろず",
+            "raw": "ptt ろず",
+            "url": "https://fortnitetracker.com/profile/all/ptt%20%E3%82%8D%E3%81%9A/events?id=00a599b8-02b5-4bd8-9b85-2cc0a9385784"
+          },
+          {
+            "name": "Stay Alivё",
+            "raw": "Stay Alivё",
+            "url": "https://fortnitetracker.com/profile/all/Stay%20Aliv%D1%91/events?id=7d153870-0713-48c7-815e-27c8c1ff0c92"
+          }
+        ]
+      },
+      {
+        "date": "2024-01-20",
+        "eventNumber": 5,
+        "round": 2,
+        "windowId": "S28_DuosZBVictoryCashCup_Event5Round2_ME",
+        "rank": 21,
+        "points": 100,
+        "kills": 14,
+        "vrs": 1,
+        "matches": 3,
+        "teamPrize": 200,
+        "members": [
+          {
+            "name": "Aim",
+            "raw": "Aim",
+            "url": "https://fortnitetracker.com/profile/all/Aim/events?id=8baf28ea-b515-48e6-9232-d03509c13382"
+          },
+          {
+            "name": "ZAZI",
+            "raw": "ZAZI",
+            "url": "https://fortnitetracker.com/profile/all/ZAZI/events?id=f08aad62-9bf0-40d6-beb7-8c7aea8e0a1f"
+          }
+        ]
+      },
+      {
+        "date": "2024-01-20",
+        "eventNumber": 5,
+        "round": 2,
+        "windowId": "S28_DuosZBVictoryCashCup_Event5Round2_ME",
+        "rank": 23,
+        "points": 100,
+        "kills": 12,
+        "vrs": 1,
+        "matches": 3,
+        "teamPrize": 200,
+        "members": [
+          {
+            "name": "Tayler",
+            "raw": "Tayler",
+            "url": "https://fortnitetracker.com/profile/all/Tayler/events?id=31f184df-3e4e-4d20-b3cc-cd439d8ce705"
+          },
+          {
+            "name": "Shelom",
+            "raw": "Shelom",
+            "url": "https://fortnitetracker.com/profile/all/Shelom/events?id=c2688f57-2c94-4718-80df-e1573cff940b"
+          }
+        ]
+      }
+    ]
+  }
+}
