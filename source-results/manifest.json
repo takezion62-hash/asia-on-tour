@@ -2,8 +2,8 @@
   "version": 1,
   "role": "generated canonical-source snapshot; results.json remains authoritative in phase 1",
   "canonicalFile": "results.json",
-  "canonicalSha256": "056aae737a010b9e376308544ffa7baeaff5196f097afe70e39b8b018780da0f",
-  "count": 6924,
+  "canonicalSha256": "a6a4b30fa7b709785a1743d67ee70ea9e3529367b5ffc91c73ebd81244105b14",
+  "count": 6943,
   "teamPrizeCents": 6832000,
   "unconfirmedPrizeRecords": 1066,
   "personalPrizeCents": 6812000,
@@ -6931,7 +6931,26 @@
     "auto-s32-38e8c096ed16",
     "auto-s32-b5954fb67dd2",
     "auto-s30-23c77f05995a",
-    "auto-s30-f6d8c2bc0f3d"
+    "auto-s30-f6d8c2bc0f3d",
+    "auto-s31-ca8316fde969",
+    "auto-s31-d5d805f3d4a1",
+    "auto-s31-0ff4e3d92185",
+    "auto-s31-4aa29b10762c",
+    "auto-s31-caa05c07f54b",
+    "auto-s31-f0ae87a62122",
+    "auto-s31-b1bfebe5d786",
+    "auto-s31-d3a93d01947e",
+    "auto-s31-d7e62a3bc39e",
+    "auto-s31-6a0f8dda860a",
+    "auto-s31-c93ff6849b93",
+    "auto-s31-b1bc5a0034b5",
+    "auto-s31-7330cb31700b",
+    "auto-s31-3bfdaa37bc0c",
+    "auto-s32-66b5bb9c4829",
+    "auto-s32-faab0d7362bd",
+    "auto-s32-eb99b1736ab3",
+    "auto-s32-5a14d0a9abf7",
+    "auto-s32-87321b5e8e4a"
   ],
   "shards": [
     {
@@ -7000,20 +7019,20 @@
     {
       "seasonId": "S31",
       "file": "source-results/S31.json",
-      "count": 1056,
+      "count": 1070,
       "teamPrizeCents": 1070000,
       "unconfirmedPrizeRecords": 44,
       "personalPrizeCents": 1070000,
-      "sha256": "02024685e93794be95440edab3686f90c2ac37d4964c2a6e8de336e74ea05233"
+      "sha256": "44f5d9fdb1016cdea76d2d6d647625fb15640788ac1ea81b7520ea90844e8b7d"
     },
     {
       "seasonId": "S32",
       "file": "source-results/S32.json",
-      "count": 236,
+      "count": 241,
       "teamPrizeCents": 480000,
       "unconfirmedPrizeRecords": 13,
       "personalPrizeCents": 480000,
-      "sha256": "4af1ce668cb6845037522b1ac5902623c31783226dbee5fbe5b243ac4914aaa7"
+      "sha256": "aaaab21631c11cf60ee9e20db8642b69d2d1656d378f751614be22eef7694b6b"
     },
     {
       "seasonId": "S33",
