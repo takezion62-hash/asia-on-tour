@@ -1,140 +1,33 @@
 {
   "version": 1,
   "sourceCheckedAt": "2026-11-07T23:16:39.215Z",
-  "total": 7,
+  "total": 4,
   "alreadyResolved": 0,
   "byYear": [
     {
       "name": "2024",
-      "count": 7
+      "count": 4
     }
   ],
   "byRegion": [
     {
       "name": "ME",
       "count": 4
-    },
-    {
-      "name": "NAC",
-      "count": 3
     }
   ],
   "byTournament": [
     {
       "name": "Solo Victory Cup Battle Royale / ME / 2024",
       "count": 4
-    },
-    {
-      "name": "Solo Victory Cup Battle Royale / NAC / 2024",
-      "count": 3
     }
   ],
   "byStatus": [
     {
       "name": "partial-scan",
-      "count": 7
+      "count": 4
     }
   ],
   "queue": [
-    {
-      "id": "auto-s30-4971dc93a4bf",
-      "origin": "history",
-      "date": "2024-06-25",
-      "year": "2024",
-      "region": "NAC",
-      "tournamentId": "ch5s3-solo-victory-cup",
-      "event": "Solo Victory Cup Battle Royale",
-      "round": "Event 4 · Round 1 / 予選",
-      "player": "KanA",
-      "kind": "予選",
-      "rank": 936,
-      "points": 154,
-      "kills": 28,
-      "vrs": 1,
-      "prize": 0,
-      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event4Round1_NAC",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "順位表の取得が完了していません",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 10,
-        "totalPages": 100,
-        "sourceKey": "epicgames_S30_SoloVictoryCashCup_NAC/S30_SoloVictoryCashCup_Event4Round1_NAC",
-        "possibleExistingId": null
-      },
-      "rewardState": "source-amount-present-not-verified-by-triage"
-    },
-    {
-      "id": "auto-s30-83698aaf7e11",
-      "origin": "history",
-      "date": "2024-07-23",
-      "year": "2024",
-      "region": "NAC",
-      "tournamentId": "ch5s3-solo-victory-cup",
-      "event": "Solo Victory Cup Battle Royale",
-      "round": "Event 6 · Round 1 / 予選",
-      "player": "Karf",
-      "kind": "予選",
-      "rank": 2647,
-      "points": 141,
-      "kills": 6,
-      "vrs": 0,
-      "prize": 0,
-      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event6Round1_NAC",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "順位表の取得が完了していません",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 28,
-        "totalPages": 100,
-        "sourceKey": "epicgames_S30_SoloVictoryCashCup_NAC/S30_SoloVictoryCashCup_Event6Round1_NAC",
-        "possibleExistingId": null
-      },
-      "rewardState": "source-amount-present-not-verified-by-triage"
-    },
-    {
-      "id": "auto-s30-fca1fbb729ba",
-      "origin": "history",
-      "date": "2024-07-23",
-      "year": "2024",
-      "region": "NAC",
-      "tournamentId": "ch5s3-solo-victory-cup",
-      "event": "Solo Victory Cup Battle Royale",
-      "round": "Event 6 · Round 1 / 予選",
-      "player": "Choco",
-      "kind": "予選",
-      "rank": 2686,
-      "points": 140,
-      "kills": 22,
-      "vrs": 1,
-      "prize": 0,
-      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event6Round1_NAC",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "順位表の取得が完了していません",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 28,
-        "totalPages": 100,
-        "sourceKey": "epicgames_S30_SoloVictoryCashCup_NAC/S30_SoloVictoryCashCup_Event6Round1_NAC",
-        "possibleExistingId": null
-      },
-      "rewardState": "source-amount-present-not-verified-by-triage"
-    },
     {
       "id": "auto-s32-14ce2adc740a",
       "origin": "history",
