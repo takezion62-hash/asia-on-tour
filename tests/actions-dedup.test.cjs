@@ -98,3 +98,15 @@ test('provider APIの互換性プローブはフルCIにはない外部チェッ
  assert.match(on,/^\s+push:\s*$/m);
  assert.match(yaml,/node scripts\/osirion-probe\.cjs/);
 });
+
+test('chat request push is isolated from expensive pre-publication CI, but still demands verified PR CI',()=>{
+ const approval=load('reviewed-candidate-publication.yml');
+ const ci=load('tests.yml');
+ assert.match(triggers('reviewed-candidate-publication.yml'),/ops\/review-request\/\*\*/);
+ assert.match(approval,/if: github\.event_name == 'push'/);
+ assert.match(approval,/if: github\.event_name == 'workflow_dispatch'/);
+ assert.match(approval,/gh workflow run tests\.yml/);
+ assert.match(ci,/review-requests\/launch\.json/);
+ assert.match(ci,/review_base_sha/);
+ assert.match(ci,/needs: \[classify, unit, browser, smoke\]/);
+});
