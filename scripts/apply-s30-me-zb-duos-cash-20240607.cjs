@@ -151,11 +151,18 @@ assert(nextRows.length===10&&
  nextRows.reduce((sum,x)=>sum+x.prizePerPlayer*x.players.length,0)===2400,
  'team and individual cash totals must both equal the screenshot $2400');
 const changes=amended.concat(added);
-if(changes.length)upsertPublicationLog(updates,{
+// Update history recordIds means newly published IDs, not edited existing
+// results. The eight corrected teams already belong to their original
+// review publication: listing them again would double-register old results.
+// Keep the corrections visible in the update description, but link only
+// the two brand-new results in the unique new-publication ID index.
+if(added.length)upsertPublicationLog(updates,{
  id:b.id,date:'2026-11-13',
- title:'2024/6/7 ME ZB Duos Cash Cup決勝：10組の賞金額・個人配分を訂正',
- description:'本人ID・ユーザー提供Tracker画像の1〜25位賞金表示を照合。既掲載8件を参加確認から賞金決勝へ修正し、不足2件を追加。総チーム賞金$2400（各2名に正確に配分）。',
- recordIds:changes
+ title:'2024/6/7 ME ZB Duos Cash Cup決勝：既存8組の賞金訂正と2組追加',
+ description:'本人ID・ユーザー提供Tracker画像の1〜25位賞金表示を照合。既掲載8組（'+
+  amended.join('、')+'）の賞金・個人配分を訂正し、7位と16位の2組を新規追加。'+
+  'チーム賞金合計$2400（2人に均等配分）。訂正済み8件は既存の掲載履歴を保持。',
+ recordIds:added
 });
 const validated=validateData({results,players,tournaments});
 assert(validated.errors.length===0,
