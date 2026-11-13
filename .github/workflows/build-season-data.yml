@@ -16,6 +16,7 @@ on:
       - scripts/apply-s30-me-zb-duos-cash-20240607.cjs
       - scripts/apply-s30-me-zb-duos-nonprize-20240607.cjs
       - scripts/publish-verified-s32-me-vcup-20241116.cjs
+      - scripts/publish-verified-2024-me-nac-last11.cjs
       - scripts/reconcile-s42-cosmetic-ranks-20261113.cjs
       - scripts/verified-s30-duos-nonprize-20240607.cjs
       - data/manual-approvals/20240607-me-zb-duos-zero-finals.json
@@ -66,6 +67,8 @@ jobs:
             node scripts/apply-s30-me-zb-duos-nonprize-20240607.cjs
             node scripts/publish-verified-s32-me-vcup-20241116.cjs --dry-run
             node scripts/publish-verified-s32-me-vcup-20241116.cjs
+            node scripts/publish-verified-2024-me-nac-last11.cjs --dry-run
+            node scripts/publish-verified-2024-me-nac-last11.cjs --apply
             node scripts/reconcile-s42-cosmetic-ranks-20261113.cjs --dry-run
             node scripts/reconcile-s42-cosmetic-ranks-20261113.cjs --apply
             node scripts/validate-data.cjs
@@ -81,6 +84,7 @@ jobs:
             git add history-sync-review.json history-sync-status.json history-sync-reviewed.json
             git add -A season-data
             git add -A source-results
+            git add -A review-reports
             git add -A review-reports
             git add candidate-triage.json
             if git diff --cached --quiet; then
