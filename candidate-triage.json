@@ -1,7 +1,7 @@
 {
   "version": 1,
   "sourceCheckedAt": "2026-11-07T23:16:39.215Z",
-  "total": 19,
+  "total": 21,
   "alreadyResolved": 0,
   "byYear": [
     {
@@ -10,7 +10,7 @@
     },
     {
       "name": "2026",
-      "count": 6
+      "count": 8
     }
   ],
   "byRegion": [
@@ -24,10 +24,14 @@
     },
     {
       "name": "NAW",
-      "count": 5
+      "count": 7
     }
   ],
   "byTournament": [
+    {
+      "name": "Arenas Cash Cup / NAW / 2026",
+      "count": 2
+    },
     {
       "name": "Days of Play PlayStation Cup (Battle Royale) / ME / 2026",
       "count": 1
@@ -56,7 +60,7 @@
     },
     {
       "name": "partial-scan",
-      "count": 16
+      "count": 18
     }
   ],
   "queue": [
@@ -683,6 +687,72 @@
         "seenPages": 2,
         "totalPages": 66,
         "sourceKey": "epicgames_S42_HamiKumaCup_NAW/S42_HamiKumaCup_NAW",
+        "possibleExistingId": null
+      },
+      "rewardState": "cash-unconfirmed"
+    },
+    {
+      "id": "auto-s43-60ffbb4b325c",
+      "origin": "recent",
+      "date": "2026-11-11",
+      "year": "2026",
+      "region": "NAW",
+      "tournamentId": "ch7s5-arenas-cash-cup",
+      "event": "Arenas Cash Cup",
+      "round": "Event 1 / 参加確認",
+      "player": "MMC 最強れっくすたけるFV",
+      "kind": "参加確認",
+      "rank": 1803,
+      "points": 60,
+      "kills": 19,
+      "vrs": 2,
+      "prize": null,
+      "source": "https://www.fortnite.com/competitive/events/S43_ArenaCashCup/?region=NAW&round=S43_ArenaCashCup_Event1_NAW",
+      "status": "partial-scan",
+      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
+      "reason": "公式の順位条件を登録していない大会",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": false,
+        "observedPartial": true,
+        "seenPages": 21,
+        "totalPages": 37,
+        "sourceKey": "epicgames_S43_ArenaCashCup_NAW/S43_ArenaCashCup_Event1_NAW",
+        "possibleExistingId": null
+      },
+      "rewardState": "cash-unconfirmed"
+    },
+    {
+      "id": "auto-s43-65f27228b7e8",
+      "origin": "recent",
+      "date": "2026-11-11",
+      "year": "2026",
+      "region": "NAW",
+      "tournamentId": "ch7s5-arenas-cash-cup",
+      "event": "Arenas Cash Cup",
+      "round": "Event 1 / 参加確認",
+      "player": "ぷりなの",
+      "kind": "参加確認",
+      "rank": 1956,
+      "points": 52,
+      "kills": 18,
+      "vrs": 0,
+      "prize": null,
+      "source": "https://www.fortnite.com/competitive/events/S43_ArenaCashCup/?region=NAW&round=S43_ArenaCashCup_Event1_NAW",
+      "status": "partial-scan",
+      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
+      "reason": "公式の順位条件を登録していない大会",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": false,
+        "observedPartial": true,
+        "seenPages": 21,
+        "totalPages": 37,
+        "sourceKey": "epicgames_S43_ArenaCashCup_NAW/S43_ArenaCashCup_Event1_NAW",
         "possibleExistingId": null
       },
       "rewardState": "cash-unconfirmed"
