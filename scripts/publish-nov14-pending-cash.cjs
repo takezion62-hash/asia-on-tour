@@ -19,13 +19,13 @@ const now=new Date().toISOString();
 const existsId=new Set(db.results.map(x=>x.id));
 const ledgerIds=new Set(db.ledger.entries.map(x=>x.id));
 const done=new Set(db.reviewed.entries.map(x=>x.id));
-const added=[],already=[];
+const added=[],upgraded=[],already=[];
 function readMonth(month){return JSON.parse(fs.readFileSync(path.join(ROOT,'calendar-history',month+'.json'),'utf8'))}
 function cashTotal(rows){return rows.reduce((n,r)=>n+Math.round((r.prize||0)*100),0)}
 function personalTotal(rows){return rows.reduce((n,r)=>n+personalCents(r)*roster(r).length,0)}
 const before={count:db.results.length,cash:cashTotal(db.results),personal:personalTotal(db.results)};
 for(const t of V.TARGETS){
- let original=null,origin=null;
+ let original=null,origin=null,upgrade=null;
  for(const key of ['auto','history']){
   const a=db.reviews[key].proposals.filter(x=>x.id===t.id);
   fail(a.length<=1,'duplicate candidate in scope '+key);
@@ -36,11 +36,30 @@ for(const t of V.TARGETS){
  }
  if(!original){
   const previous=db.results.find(x=>x.id===t.id),entry=db.ledger.entries.find(x=>x.id===t.id);
-  fail(previous&&entry&&V.verifiedCashRow(previous,entry)&&done.has(t.id),
-   'previously published candidate changed or disappeared: '+t.id);
-  already.push(t.id);continue;
+  const past=db.reviewed.entries.find(x=>x.id===t.id);
+  if(previous&&entry&&V.verifiedCashRow(previous,entry)&&done.has(t.id)){
+   already.push(t.id);continue;
+  }
+  // Concurrent auto-sync may have saved the same verified duos final as
+  // attendance-only. Upgrade EXACTLY that row, never append a second row.
+  fail(t.seasonId==='S43'&&previous&&entry&&past&&
+    previous.kind==='参加確認'&&previous.prize===null&&previous.verified===true&&
+    V.exactScores(previous,t)&&
+    entry.policy==='attendance-only'&&entry.decision==='published'&&
+    entry.recordId===t.id&&entry.source===V.official(t)&&
+    past.policy==='attendance-only'&&past.decision==='published'&&
+    past.recordId===t.id&&done.has(t.id),
+    'previous result differs or its original approval is missing: '+t.id);
+  const key='epicgames_'+t.eventId+'_'+t.region+'/'+t.windowId;
+  const originals=Object.values(db.scans).flatMap(scan=>
+    (scan.windows?.[key]?.proposals||[]).filter(p=>
+      p.id===t.id&&V.exactScores(p,t)&&p.reviewOnly===true));
+  fail(originals.length>=1&&originals.every(p=>sameScannedCandidate(p,originals[0])),
+    'original saved Epic-ID score missing for cash upgrade '+t.id);
+  original=originals[0];upgrade={previous,entry,past};
  }
- fail(!existsId.has(t.id)&&!ledgerIds.has(t.id)&&!done.has(t.id),'already approved candidate still in queue '+t.id);
+ if(!upgrade)fail(!existsId.has(t.id)&&!ledgerIds.has(t.id)&&!done.has(t.id),
+  'already approved candidate still in queue '+t.id);
  fail(original.verified===true&&V.exactScores(original,t)&&
   original.kind===(t.seasonId==='S43'?'参加確認':'賞金決勝')&&
   original.prize===null&&(original.reviewOnly===true)===(t.seasonId==='S43')&&
@@ -73,7 +92,7 @@ for(const t of V.TARGETS){
   fail(qualified.length===1&&qualified[0].playerRaw===t.playerRaw&&qualified[0].players?.join(' / ')===t.player,
    'S43 finalists must match the prior verified top-20 qualification');
  }
- fail(!db.results.some(r=>collision(r,original,db.players.confirmedAliases)),
+ fail(!db.results.some(r=>r.id!==t.id&&collision(r,original,db.players.confirmedAliases)),
   'overlapping published record '+t.id);
  const {reviewOnly,reviewReason,...candidate}=original;
  const label=t.seasonId==='S43'?'Event 1 · Round 2 / 賞金決勝':'Event 3 · Round 2 / 賞金決勝';
@@ -86,9 +105,20 @@ for(const t of V.TARGETS){
   approvedAt:now,approvedBy:'ChatGPT / user-authorized source-verified manual review',
   source:row.source,rule:t.rule,evidence:'Same original Epic-ID scoreboard; exact event/round and independent award table'};
  fail(V.verifiedCashRow(row,e),'record disagrees with immutable cash-evidence oracle '+t.id);
- db.results.push(row);db.ledger.entries.push(e);
- db.reviewed.entries.push({id:t.id,decision:'published',recordId:t.id,
-  reviewedAt:now,source:row.source,policy:V.POLICY,rule:t.rule});
+ if(upgrade){
+  const index=db.results.findIndex(x=>x.id===t.id);
+  fail(index>=0,'original attendance row vanished '+t.id);
+  db.results[index]=row;
+  Object.assign(upgrade.entry,e);
+  Object.assign(upgrade.past,{id:t.id,decision:'published',recordId:t.id,
+   reviewedAt:now,source:row.source,policy:V.POLICY,rule:t.rule});
+  upgraded.push(row);
+ }else{
+  db.results.push(row);db.ledger.entries.push(e);
+  db.reviewed.entries.push({id:t.id,decision:'published',recordId:t.id,
+   reviewedAt:now,source:row.source,policy:V.POLICY,rule:t.rule});
+  added.push(row);
+ }
  for(const scope of ['auto','history']){
   const old=db.reviews[scope].proposals.length;
   db.reviews[scope].proposals=db.reviews[scope].proposals.filter(x=>x.id!==t.id);
@@ -101,13 +131,19 @@ for(const t of V.TARGETS){
    db.statuses[scope].lastReviewedBatchAt=now;
   }
  }
- added.push(row);
 }
 fail(db.results.length===before.count+added.length,'count changed unexpectedly');
-fail(cashTotal(db.results)===before.cash+added.reduce((n,r)=>n+r.prize*100,0),
+fail(cashTotal(db.results)===before.cash+[...added,...upgraded].reduce((n,r)=>n+r.prize*100,0),
  'cash total changed unexpectedly');
-fail(personalTotal(db.results)===before.personal+added.reduce((n,r)=>n+r.prize*100,0),
+fail(personalTotal(db.results)===before.personal+[...added,...upgraded].reduce((n,r)=>n+r.prize*100,0),
  'individual cash total changed unexpectedly');
+if(upgraded.length){
+ const id=upgraded[0].id;
+ const history=db.updates.entries.filter(x=>x.recordIds?.includes(id));
+ fail(history.length===1,'original attendance update log missing or duplicated '+id);
+ const correction=' 後日訂正：bigsky / ReoのOCE決勝3位賞金は各$200（チーム$400）。元のEpic本人IDと独立賞金表で検証し、既存IDをそのまま訂正済み。';
+ if(!history[0].description.includes('後日訂正：bigsky / Reo'))history[0].description+=correction;
+}
 if(added.length)upsertPublicationLog(db.updates,{
  id:'nov14-verified-pending-cash-two',
  date:new Date(Date.now()+9*3600000).toISOString().slice(0,10),
@@ -120,11 +156,12 @@ const errors=audit(db.results,db.ledger,db.players);
 fail(!errors.length,'approval audit errors '+JSON.stringify(errors.slice(0,5)));
 const logs=validateUpdateLog(db.results,db.updates);
 fail(!logs.length,'updates validation errors '+JSON.stringify(logs.slice(0,5)));
-if(!dry&&added.length){
+if(!dry&&(added.length||upgraded.length)){
  writeReviewDb(ROOT,db);
  fs.writeFileSync(path.join(ROOT,'history-sync-reviewed.json'),JSON.stringify(db.reviewed,null,2)+'\n');
 }
 console.log('NOV14_PENDING_CASH '+JSON.stringify({mode:dry?'dry-run':'apply',
  added:added.map(r=>({id:r.id,player:r.player,rank:r.rank,kills:r.kills,prize:r.prize})),
+ upgraded:upgraded.map(r=>({id:r.id,player:r.player,rank:r.rank,kills:r.kills,prize:r.prize})),
  already,oldCount:before.count,newCount:db.results.length,
- deltaCash:added.reduce((n,r)=>n+r.prize,0)}));
+ deltaCash:[...added,...upgraded].reduce((n,r)=>n+r.prize,0)}));
