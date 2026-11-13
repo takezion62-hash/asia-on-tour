@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-13T18:09:34.782Z",
+  "reviewedAt": "2026-11-13T18:28:28.335Z",
   "entries": [
     {
       "id": "auto-s43-21408f1d31bc",
@@ -20050,6 +20050,39 @@
       "rule": "https://www.fortnite.com/news/competitive-details-make-your-mark-in-chapter-2-remix",
       "source": "https://www.fortnite.com/competitive/events/S32_SoloVictoryCashCup/?region=ME&round=S32_SoloVictoryCashCup_Event4Round1_ME",
       "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s30-792418efe572",
+      "decision": "published",
+      "recordId": "auto-s30-792418efe572",
+      "policy": "verified-rule",
+      "approvedAt": "2026-11-13T18:28:28.335Z",
+      "approvedBy": "ChatGPT / user-authorized 2026-11-11 GitHub direct publication",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event3Round1_NAC",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
+      "evidence": "Exact Epic account/session/calendar and cached Osirion ranked row; official advancement or zero-VR rule, never guessed prize"
+    },
+    {
+      "id": "auto-s30-de3f84735786",
+      "decision": "published",
+      "recordId": "auto-s30-de3f84735786",
+      "policy": "verified-rule",
+      "approvedAt": "2026-11-13T18:28:28.335Z",
+      "approvedBy": "ChatGPT / user-authorized 2026-11-11 GitHub direct publication",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event3Round1_NAC",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
+      "evidence": "Exact Epic account/session/calendar and cached Osirion ranked row; official advancement or zero-VR rule, never guessed prize"
+    },
+    {
+      "id": "auto-s30-022060aed2ea",
+      "decision": "published",
+      "recordId": "auto-s30-022060aed2ea",
+      "policy": "verified-rule",
+      "approvedAt": "2026-11-13T18:28:28.335Z",
+      "approvedBy": "ChatGPT / user-authorized 2026-11-11 GitHub direct publication",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event3Round1_NAC",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
+      "evidence": "Exact Epic account/session/calendar and cached Osirion ranked row; official advancement or zero-VR rule, never guessed prize"
     }
   ]
 }
