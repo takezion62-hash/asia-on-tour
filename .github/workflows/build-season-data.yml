@@ -15,6 +15,7 @@ on:
       - scripts/apply-verified-s43-squads-finals.cjs
       - scripts/apply-s30-me-zb-duos-cash-20240607.cjs
       - scripts/apply-s30-me-zb-duos-nonprize-20240607.cjs
+      - scripts/publish-verified-s32-me-vcup-20241116.cjs
       - scripts/verified-s30-duos-nonprize-20240607.cjs
       - data/manual-approvals/20240607-me-zb-duos-zero-finals.json
       - scripts/verified-s30-duos-cash-20240607.cjs
@@ -62,6 +63,8 @@ jobs:
             node scripts/apply-s30-me-zb-duos-cash-20240607.cjs
             node scripts/apply-s30-me-zb-duos-nonprize-20240607.cjs --dry-run
             node scripts/apply-s30-me-zb-duos-nonprize-20240607.cjs
+            node scripts/publish-verified-s32-me-vcup-20241116.cjs --dry-run
+            node scripts/publish-verified-s32-me-vcup-20241116.cjs
             node scripts/validate-data.cjs
             node scripts/validate-approvals.cjs
             node scripts/validate-updates.cjs
@@ -72,6 +75,7 @@ jobs:
             node scripts/build-season-data.cjs --check
             node scripts/build-candidate-triage.cjs --check
             git add players.json updates.json approval-history.json
+            git add history-sync-review.json history-sync-status.json history-sync-reviewed.json
             git add -A season-data
             git add -A source-results
             git add candidate-triage.json
