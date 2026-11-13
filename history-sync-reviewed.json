@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-13T22:58:35.047Z",
+  "reviewedAt": "2026-11-13T23:39:30.992Z",
   "description": "Resolved historic review candidates: published, duplicate or participation",
   "entries": [
     {
@@ -27387,6 +27387,24 @@
       "reviewedAt": "2026-11-13T23:09:57.300Z",
       "source": "https://www.fortnite.com/competitive/events/S42_HamiKumaCup/?region=NAW&round=S42_HamiKumaCup_NAW",
       "evidence": "Epic mature leaderboard + earlier user Tracker screenshot + independently published Fortnite.gg rank 57 (Epic queue rank 56 differs by one; original Tracker score/skin kept). https://fortnite.gg/events/epicgames_S42_HamiKumaCup_NAW"
+    },
+    {
+      "id": "auto-s30-23c77f05995a",
+      "decision": "published",
+      "recordId": "auto-s30-23c77f05995a",
+      "reviewedAt": "2026-11-13T23:39:30.992Z",
+      "policy": "verified-rule-and-original-epic-score",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event3Round1_NAC",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules"
+    },
+    {
+      "id": "auto-s30-f6d8c2bc0f3d",
+      "decision": "published",
+      "recordId": "auto-s30-f6d8c2bc0f3d",
+      "reviewedAt": "2026-11-13T23:39:30.992Z",
+      "policy": "verified-rule-and-original-epic-score",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event4Round1_NAC",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules"
     }
   ]
 }
