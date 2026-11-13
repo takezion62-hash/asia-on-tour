@@ -67,7 +67,7 @@ function decide(row,win,checkpoint,data){
  if(row.kind==='予選'){
   if(qualifierCutoff===undefined||row.rank>qualifierCutoff||row.prize!==0)
    return decline('予選通過条件または賞金値不一致');
-  rec.round=win.round.replace(/\\/ 予選$/,'/ 予選突破');
+  rec.round=win.round.replace(/\/ 予選$/,'/ 予選突破');
   rec.kind='予選';
   rec.prize=0;
   const legacyEvidence=exactLegacyNacQualifier?
