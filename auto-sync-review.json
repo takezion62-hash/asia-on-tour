@@ -2,63 +2,6 @@
   "version": 1,
   "status": "review",
   "checkedAt": "2026-11-07T13:02:44.444Z",
-  "proposals": [
-    {
-      "id": "auto-s43-60ffbb4b325c",
-      "date": "2026-11-11",
-      "region": "NAW",
-      "player": "MMC 最強れっくすたけるFV",
-      "playerRaw": "MMC 最強れっくすたけるFV",
-      "event": "Arenas Cash Cup",
-      "round": "Event 1 / 参加確認",
-      "rank": 1803,
-      "points": 60,
-      "kills": 19,
-      "vrs": 2,
-      "prize": null,
-      "kind": "参加確認",
-      "matches": 2,
-      "seasonId": "S43",
-      "chapter": 7,
-      "season": 5,
-      "tournamentId": "ch7s5-arenas-cash-cup",
-      "source": "https://www.fortnite.com/competitive/events/S43_ArenaCashCup/?region=NAW&round=S43_ArenaCashCup_Event1_NAW",
-      "verified": true,
-      "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
-      "reviewOnly": true,
-      "reviewReason": "公式の順位条件を登録していない大会",
-      "teamAccountIds": [
-        "d27be63acdc3435b9a91bf48abd7deb7"
-      ]
-    },
-    {
-      "id": "auto-s43-65f27228b7e8",
-      "date": "2026-11-11",
-      "region": "NAW",
-      "player": "ぷりなの",
-      "playerRaw": "dyd シンプル編集のぷりなの",
-      "event": "Arenas Cash Cup",
-      "round": "Event 1 / 参加確認",
-      "rank": 1956,
-      "points": 52,
-      "kills": 18,
-      "vrs": 0,
-      "prize": null,
-      "kind": "参加確認",
-      "matches": 3,
-      "seasonId": "S43",
-      "chapter": 7,
-      "season": 5,
-      "tournamentId": "ch7s5-arenas-cash-cup",
-      "source": "https://www.fortnite.com/competitive/events/S43_ArenaCashCup/?region=NAW&round=S43_ArenaCashCup_Event1_NAW",
-      "verified": true,
-      "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
-      "reviewOnly": true,
-      "reviewReason": "公式の順位条件を登録していない大会",
-      "teamAccountIds": [
-        "0b7c8bade740430b83e63edf333e64cb"
-      ]
-    }
-  ],
-  "manualReviewedAt": "2026-11-13T13:47:26.221Z"
+  "proposals": [],
+  "manualReviewedAt": "2026-11-13T18:09:34.782Z"
 }

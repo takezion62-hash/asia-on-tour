@@ -2,6 +2,38 @@
   "version": 1,
   "entries": [
     {
+      "id": "review-publication-pending-20261114-verified-rule-1",
+      "date": "2026-11-14",
+      "type": "records",
+      "title": "管理者確認済み戦績 7件を追加",
+      "description": "公式規則に基づく予選突破または決勝0VRのみを確認。未確認賞金なし。",
+      "recordIds": [
+        "auto-s32-10ba113b4b52",
+        "auto-s32-67939e7070f7",
+        "auto-s32-11f4a64b366a",
+        "auto-s32-78d9afa8c65f",
+        "auto-s32-55616049ef3d",
+        "auto-s32-112342e8df46",
+        "auto-s32-ed582e1d73f7"
+      ]
+    },
+    {
+      "id": "review-publication-pending-20261114-attendance-only-1",
+      "date": "2026-11-14",
+      "type": "records",
+      "title": "管理者確認済み戦績 7件を追加",
+      "description": "Epic ID・開催枠・順位表を再照合した出場確認のみ。賞金・予選突破・スキン獲得を未認定。",
+      "recordIds": [
+        "auto-s41-d3b44e842ffb",
+        "auto-s42-85b505f35943",
+        "auto-s42-5d5bba34b73f",
+        "auto-s32-9a4c4bfb5f6e",
+        "auto-s32-51232d4bcf15",
+        "auto-s43-60ffbb4b325c",
+        "auto-s43-65f27228b7e8"
+      ]
+    },
+    {
       "id": "tracker-2023-me-zb-duos-vcup-20231023-20231216",
       "date": "2026-11-14",
       "type": "records",
