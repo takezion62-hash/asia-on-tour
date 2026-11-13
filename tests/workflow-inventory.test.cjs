@@ -109,3 +109,28 @@ test('focused reruns are opt-in diagnostics; normal PR checks still require ever
  assert.match(main,/needs: \[classify, unit, browser, smoke\]/);
  assert.match(main,/if: \$\{\{ always\(\) \}\}/);
 });
+
+test('records-only CI keeps semantic safety, generated-index checks and PC/mobile smoke',()=>{
+ const main=read('tests.yml');
+ assert.match(main,/PUSH_BEFORE_SHA:/);
+ assert.match(main,/PUSH_AFTER_SHA:/);
+ assert.match(main,/GITHUB_REF.*refs\/heads\/main/);
+ assert.match(main,/git show "\$BASE_SHA:scripts\/ci-change-scope\.cjs"/);
+ assert.match(main,/node scripts\/build-season-data\.cjs --check/);
+ assert.match(main,/node scripts\/build-candidate-triage\.cjs --check/);
+ assert.match(main,/tests\/source-results-store\.test\.cjs/);
+ assert.match(main,/tests\/source-results-split\.test\.cjs/);
+ assert.match(main,/tests\/candidate-triage\.test\.cjs/);
+ assert.match(main,/npm run validate/);
+ assert.match(main,/if: needs\.classify\.outputs\.mode == 'data'/);
+ assert.match(main,/if: needs\.classify\.outputs\.mode == 'full'/);
+ assert.match(main,/npm run test:e2e -- tests\/ci-data-smoke\.spec\.cjs/);
+ assert.match(main,/run: node scripts\/ci-required-gate\.cjs/);
+ const approval=read('reviewed-candidate-publication.yml');
+ assert.match(approval,/npm run validate/);
+ assert.match(approval,/node scripts\/build-season-data\.cjs --check/);
+ assert.match(approval,/node scripts\/build-candidate-triage\.cjs --check/);
+ assert.match(approval,/tests\/data-validation\.test\.cjs/);
+ assert.doesNotMatch(approval,/npm run test:e2e/);
+ assert.match(approval,/gh pr create/);
+});

@@ -32,17 +32,27 @@ jobs:
         env:
           PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
           PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          PUSH_BEFORE_SHA: ${{ github.event.before }}
+          PUSH_AFTER_SHA: ${{ github.sha }}
         shell: bash
         run: |
           set -euo pipefail
-          if [[ "$GITHUB_EVENT_NAME" != "pull_request" ||
-                ! "$PR_BASE_SHA" =~ ^[0-9a-fA-F]{40}$ ||
-                ! "$PR_HEAD_SHA" =~ ^[0-9a-fA-F]{40}$ ]]; then
+          # Use the trusted PR base or the previous main commit. A push on
+          # a feature branch, a new branch, a force-created ref, or an
+          # unknown event always runs the full suite.
+          BASE_SHA=""
+          if [[ "$GITHUB_EVENT_NAME" == "pull_request" ]]; then
+            BASE_SHA="$PR_BASE_SHA"
+          elif [[ "$GITHUB_EVENT_NAME" == "push" && "$GITHUB_REF" == "refs/heads/main" ]]; then
+            BASE_SHA="$PUSH_BEFORE_SHA"
+          fi
+          if [[ ! "$BASE_SHA" =~ ^[0-9a-fA-F]{40}$ ||
+                "$BASE_SHA" =~ ^0{40}$ ]]; then
             echo "mode=full" >> "$GITHUB_OUTPUT"
-            echo "reason=non-pr-or-invalid-revision" >> "$GITHUB_OUTPUT"
-          elif git cat-file -e "${PR_BASE_SHA}:scripts/ci-change-scope.cjs" 2>/dev/null; then
-            # Run the published BASE classifier, never a PR-proposed replacement.
-            git show "${PR_BASE_SHA}:scripts/ci-change-scope.cjs" > "$RUNNER_TEMP/aot-trusted-change-scope.cjs"
+            echo "reason=unknown-event-or-base" >> "$GITHUB_OUTPUT"
+          elif git cat-file -e "$BASE_SHA:scripts/ci-change-scope.cjs" 2>/dev/null; then
+            # Never execute a change classifier from the PR/push itself.
+            git show "$BASE_SHA:scripts/ci-change-scope.cjs" > "$RUNNER_TEMP/aot-trusted-change-scope.cjs"
             node "$RUNNER_TEMP/aot-trusted-change-scope.cjs"
           else
             echo "mode=full" >> "$GITHUB_OUTPUT"
@@ -73,9 +83,11 @@ jobs:
         run: node scripts/apply-verified-tracker-finals.cjs --dry-run
       - name: S43 NAW Squads決勝3組の本人・賞金・重複検証（書込なし）
         run: node scripts/apply-verified-s43-squads-finals.cjs --dry-run
-      - name: データ専用PRは一時的にシーズン索引を再生成して検査
+      - name: 戦績データ更新は公開索引・確認待ち索引の正確な一致を確認
         if: needs.classify.outputs.mode == 'data'
-        run: node scripts/build-season-data.cjs
+        run: |
+          node scripts/build-season-data.cjs --check
+          node scripts/build-candidate-triage.cjs --check
       - name: データ専用PRの厳格なユニット回帰テスト
         if: needs.classify.outputs.mode == 'data'
         run: |
@@ -87,7 +99,10 @@ jobs:
             tests/tournament-rules.test.cjs \
             tests/final-round-consistency.test.cjs \
             tests/tournament-publication-unification.test.cjs \
-            tests/rankings.test.cjs
+            tests/rankings.test.cjs \
+            tests/source-results-store.test.cjs \
+            tests/source-results-split.test.cjs \
+            tests/candidate-triage.test.cjs
       - name: コード・不明変更はすべての単体テストを実行
         if: needs.classify.outputs.mode == 'full'
         run: npm run test:unit
@@ -163,8 +178,10 @@ jobs:
           node scripts/site-assets.cjs
           npm ci --ignore-scripts
           npm run validate
-      - name: 最新JSONから一時的なシーズンデータを作成
-        run: node scripts/build-season-data.cjs
+      - name: 公開索引・確認待ち索引が元データと完全一致するか検査
+        run: |
+          node scripts/build-season-data.cjs --check
+          node scripts/build-candidate-triage.cjs --check
       - name: データ専用スモーク用Chromiumを準備
         run: npx playwright install --with-deps chromium
       - name: PC・スマホの最重要画面だけ検査
