@@ -103,6 +103,8 @@ jobs:
         run: node scripts/apply-s30-me-zb-duos-cash-20240607.cjs --dry-run
       - name: 2024/6/7 ME ZB Duos Cash Cup賞金圏外3組の本人・重複・賞金ゼロを照合（書込なし）
         run: node scripts/apply-s30-me-zb-duos-nonprize-20240607.cjs --dry-run
+      - name: 2024/11/16 ME Solo決勝：公式Epic ID・独立した賞金根拠を照合（書込なし）
+        run: node scripts/publish-verified-s32-me-vcup-20241116.cjs --dry-run
       - name: 戦績データ更新は公開索引・確認待ち索引の正確な一致を確認
         if: needs.classify.outputs.mode == 'data'
         run: |
