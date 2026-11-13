@@ -189,6 +189,32 @@ function validRuleVerifiedReloadAttendance(r,entry){
  }catch{return false}
 }
 
+// A legacy NA Central participant in S30 must not be promoted to a finalist.
+function validRuleVerifiedLegacyNacAttendance(r,entry){
+ const rule=RULES['ch5s3-solo-victory-cup'];
+ const window=rule?.verifiedLegacyNacExtraWindows?.find(x=>
+  x.dateJst==='2024-06-18'&&
+  x.windowId==='S30_SoloVictoryCashCup_Event3Round1_NAC'&&
+  x.cutoff===5000&&x.allowOutOfCutoffAttendance===true);
+ if(!window||r?.id!=='auto-s30-23c77f05995a'||
+  r.date!==window.dateJst||r.region!=='NAC'||r.seasonId!=='S30'||
+  r.tournamentId!=='ch5s3-solo-victory-cup'||
+  r.event!=='Solo Victory Cup Battle Royale'||
+  r.player!=='Celis やなぎさわつつ上等'||r.rank!==7040||
+  r.points!==114||r.kills!==6||r.vrs!==0||
+  r.kind!=='参加確認'||r.prize!==0||r.reviewOnly===true||
+  r.verified!==true||r.round!=='Event 3 · Round 1 / 参加確認'||
+  entry?.rule!==rule.source||typeof r.note!=='string'||
+  !r.note.includes('突破圏外')||!r.note.includes(window.source)||
+  !r.note.includes(rule.source))return false;
+ try {
+  const u=new URL(r.source);
+  return u.protocol==='https:'&&u.hostname==='www.fortnite.com'&&
+   u.pathname==='/competitive/events/S30_SoloVictoryCashCup/'&&
+   u.searchParams.size===2&&u.searchParams.get('region')==='NAC'&&
+   u.searchParams.get('round')===window.windowId;
+ }catch{return false}
+}
 function audit(results,ledger,players){
  const errors=[];
  if(ledger?.version!==1||!Array.isArray(ledger.entries))return ['approval-history.json is invalid'];
@@ -204,7 +230,9 @@ function audit(results,ledger,players){
   }
   if(r.source!==entry.source||r.verified!==true)errors.push('Published source or verification flag changed: '+entry.id);
   if(entry.policy==='attendance-only'&&(r.kind!=='参加確認'||r.prize!==null||r.reviewOnly===true))errors.push('Participation was changed into unsupported confirmed award: '+entry.id);
-  if(entry.policy==='verified-rule'&&(r.prize!==0||r.reviewOnly===true||(!['予選','賞金決勝'].includes(r.kind)&&!validRuleVerifiedReloadAttendance(r,entry))))errors.push('Rule-approved entry has unsupported payout or category: '+entry.id);
+  if(entry.policy==='verified-rule'&&(r.prize!==0||r.reviewOnly===true||(!['予選','賞金決勝'].includes(r.kind)&&
+    !validRuleVerifiedReloadAttendance(r,entry)&&
+    !validRuleVerifiedLegacyNacAttendance(r,entry))))errors.push('Rule-approved entry has unsupported payout or category: '+entry.id);
   if(entry.policy===S30_DUOS_CASH_POLICY&&!verifiedJune7DuosCash(r,entry))errors.push('Unverified June 7 ME ZB Duos Cash Cup placement or individual payout: '+entry.id);
   if(entry.policy===S30_ZERO_DUOS_POLICY&&!verifiedJune7Zero(r,entry))errors.push('Unverified June 7 ME ZB Duos zero-prize final or roster: '+entry.id);
   if(entry.policy===S30_JUNE21_POLICY&&!verifiedJune21Duos(r,entry))errors.push('Unverified June 21 ME ZB Duos score, cash, team roster, or Tracker ID: '+entry.id);

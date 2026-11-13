@@ -45,11 +45,19 @@ function decide(row,win,checkpoint,data){
   (exactLegacyNacQualifier?verifiedNacWindow.cutoff:undefined);
  const oldNacZeroFinal=['S30','S31'].includes(rule.seasonId)&&rule.team==='solo'&&
   row.region==='NAC'&&row.kind==='賞金決勝'&&row.vrs===0&&row.prize===null;
+ // S32 (Chapter 2 Remix) also awards cash only for final-round VRs.
+ // Allow exactly two separately documented 2024 NAC cash-final windows;
+ // this does not make their Round 1 qualification rules global.
+ const s32ZeroFinalWindow=rule.seasonId==='S32'&&rule.team==='solo'&&
+  row.region==='NAC'&&row.kind==='賞金決勝'&&row.vrs===0&&row.prize===null&&
+  (['2024-11-09|S32_SoloVictoryCashCup_Event1Round2_NAC',
+    '2024-11-16|S32_SoloVictoryCashCup_Event2Round2_NAC']
+   .includes(row.date+'|'+win.windowId));
  if(row.date!==win.dateJst||row.region!==win.region||
-  (qualifierCutoff===undefined&&!oldNacZeroFinal)||
+  (qualifierCutoff===undefined&&!oldNacZeroFinal&&!s32ZeroFinalWindow)||
   row.round!==win.round||row.kind!==win.kind)
   return decline('開催日・地域・ラウンド不一致');
- if(oldNacZeroFinal&&(row.points!==0||checkpoint.rankingOrderValid!==true||
+ if((oldNacZeroFinal||s32ZeroFinalWindow)&&(row.points!==0||checkpoint.rankingOrderValid!==true||
   !checkpoint.proposals.some(x=>sameScannedCandidate(x,row))))
   return decline('2024 NAC 0VR決勝の保存済み順位表・ポイント整合性が未確認');
  if(!row.id?.startsWith('auto-'+rule.seasonId.toLowerCase()+'-')||row.verified!==true||!Array.isArray(checkpoint.proposals)||!checkpoint.proposals.some(x=>x.id===row.id))return decline('照合済み候補ではありません');
@@ -74,12 +82,14 @@ function decide(row,win,checkpoint,data){
    // Only the Epic-verified S42 Solo Reload tournament can count an
    // out-of-cutoff Round 1 finish as participation without false qualification.
    // This award-free Round 1 row is never an earned prize or a Round 2 entry.
-   if(rule.autoApproval!=='verified-qualifier-participation')
-    return decline('予選突破圏外の参加記録は公式対象大会のみに限定');
+   if(rule.autoApproval!=='verified-qualifier-participation'&&
+      verifiedNacWindow?.allowOutOfCutoffAttendance!==true)
+    return decline('予選突破圏外の参加記録は個別検証された開催枠のみに限定');
    rec.round=win.round.replace(/\/ 予選$/,'/ 参加確認');
    rec.kind='参加確認';
    rec.note='Epic公式規則で'+row.region+'の予選突破は上位'+qualifierCutoff+
-    '名。Osirionで'+row.rank+'位のEpic IDとRound 1出場・結果を確認。突破圏外につき「参加確認」のみ記録し、賞金$0。規則: '+rule.source;
+    '名。保存済みEpic順位表で'+row.rank+'位のアカウントとRound 1出場を確認。突破圏外につき「参加確認」のみ記録し、賞金$0。規則: '+rule.source+
+    (verifiedNacWindow?.allowOutOfCutoffAttendance===true?' 当該NA Central開催枠: '+verifiedNacWindow.source:'');
   }else{
    rec.round=win.round.replace(/\/ 予選$/,'/ 予選突破');
    rec.kind='予選';
