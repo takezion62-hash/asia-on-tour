@@ -117,10 +117,10 @@ for(const team of batch.teams){
  let row,approval;
  if(comparable.length){
   row=comparable[0];
-  assert(team.rank===13&&row.id===target.id&&row.player===target.player&&
+  assert(row.id===target.id&&row.player===target.player&&
    row.source===C.SOURCE&&row.verified===true&&
    ['rank','points','kills','vrs','matches'].every(k=>row[k]===team[k]),
-   'existing row is not the exact 13th place candidate');
+   'existing row does not match the exact saved team and score');
   approval=ledger.entries.find(e=>e.recordId===row.id);
   assert(ledger.entries.filter(e=>e.recordId===row.id).length===1&&
    approval.id===row.id&&approval.source===row.source,
@@ -129,6 +129,7 @@ for(const team of batch.teams){
    assert(C.verifyCashRow(row,approval),'already corrected cash result differs');
    unchanged.push(row.id);continue;
   }
+  assert(team.rank===13,'only the original 13th-place attendance may be corrected');
   assert(row.kind==='参加確認'&&row.round==='Event 3 · Round 2 / 参加確認'&&
    row.prize===null&&approval.policy==='attendance-only'&&
    !row.teamPrize&&!row.prizePerPlayer,
