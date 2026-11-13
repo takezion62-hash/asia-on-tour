@@ -9,8 +9,7 @@ const safePaths=[
  'players.json','tournaments.json','updates.json','approval-history.json',
  'auto-sync-review.json','auto-sync-status.json',
  'history-sync-review.json','history-sync-reviewed.json','history-sync-status.json',
- 'candidate-triage.json','participation-index.json','participation-status.json',
- 'participation/2024-09.json','review-reports/2026-11-13-resolve-15.md',
+ 'candidate-triage.json','review-reports/2026-11-13-resolve-15.md',
  'season-data/S30.json','season-data/unknown.json','season-data/ranking-S30.json',
  'season-data/ranking-unknown.json','season-data/ranking-all.json','season-data/manifest.json'
 ];
@@ -42,6 +41,7 @@ test('scripts, CSS, tests, workflows and unknown files always require full suite
   'tests/site.spec.cjs','tests/ci-data-smoke.spec.cjs',
   '.github/workflows/tests.yml','package.json','package-lock.json',
   'auto-sync-scan.json','history-sync-scan.json',
+  'participation/2024-09.json','participation-index.json','participation-status.json',
   'calendar-history/2026-11.json','data/manual-approvals/new.json',
   'season-data/new-schema.json','season-data/assets/S30.json',
   'source-results/../../other.json','source-results/S0.json',
