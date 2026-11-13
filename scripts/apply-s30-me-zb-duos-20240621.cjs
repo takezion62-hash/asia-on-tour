@@ -16,7 +16,7 @@ const write=(name,value)=>fs.writeFileSync(path.join(ROOT,name),JSON.stringify(v
 const assert=(ok,message)=>{if(!ok)throw Error('S30_ME_ZB_DUOS_20240621: '+message)};
 const args=process.argv.slice(2),dryRun=args.includes('--dry-run');
 assert(args.length===0||(args.length===1&&dryRun),'only --dry-run or no args permitted');
-const doc=read('data/manual-approvals/20240621-me-zb-duos-final-tracker.json'),batch=doc.batch;
+const doc=read('data/manual-approvals/20240621-me-zb-duos-final-proof.json'),batch=doc.batch;
 assert(doc.version===1&&batch?.id==='tracker-s30-me-zb-duos-final-20240621'&&
  batch.date===C.DATE&&batch.region===C.REGION&&batch.seasonId==='S30'&&
  batch.tournamentId===C.TOURNAMENT&&batch.eventId===C.EVENT&&
