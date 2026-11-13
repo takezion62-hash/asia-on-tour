@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-12T23:24:11.797Z",
+  "reviewedAt": "2026-11-13T00:25:25.879Z",
   "description": "Resolved historic review candidates: published, duplicate or participation",
   "entries": [
     {
@@ -25584,6 +25584,136 @@
       "source": "https://www.fortnite.com/competitive/events/S42_ChampionTealKnightFNCSCup/?region=ME&round=S42_ChampionTealKnightFNCSCup_ME",
       "policy": "attendance-only",
       "rule": null
+    },
+    {
+      "id": "auto-s41-8e950bbbae00",
+      "decision": "published",
+      "recordId": "auto-s41-8e950bbbae00",
+      "reviewedAt": "2026-11-13T00:25:25.879Z",
+      "source": "https://www.fortnite.com/competitive/events/S41_PSCupDaysOfPlay/?region=ME&round=S41_PSCupDaysOfPlay_Qualifier_ME",
+      "policy": "attendance-only",
+      "rule": null
+    },
+    {
+      "id": "auto-s30-83bebdb937f0",
+      "decision": "published",
+      "recordId": "auto-s30-83bebdb937f0",
+      "reviewedAt": "2026-11-13T00:25:25.879Z",
+      "source": "https://www.fortnite.com/competitive/events/S30_DuosCashCupZB/?region=ME&round=S30_DuosCashCupZB_Event5Round1_ME",
+      "policy": "attendance-only",
+      "rule": null
+    },
+    {
+      "id": "auto-s30-095c1d0edfbc",
+      "decision": "published",
+      "recordId": "auto-s30-095c1d0edfbc",
+      "reviewedAt": "2026-11-13T00:25:25.879Z",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event6Round1_NAC",
+      "policy": "verified-rule",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules"
+    },
+    {
+      "id": "auto-s30-1483215dfce8",
+      "decision": "published",
+      "recordId": "auto-s30-1483215dfce8",
+      "reviewedAt": "2026-11-13T00:25:25.879Z",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event6Round1_NAC",
+      "policy": "verified-rule",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules"
+    },
+    {
+      "id": "auto-s31-34d62bd38ec2",
+      "decision": "published",
+      "recordId": "auto-s31-34d62bd38ec2",
+      "reviewedAt": "2026-11-13T00:25:25.879Z",
+      "source": "https://www.fortnite.com/competitive/events/S31_SoloVictoryCashCup/?region=ME&round=S31_SoloVictoryCashCup_Event1Round1_ME",
+      "policy": "verified-rule",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-4-official-rules"
+    },
+    {
+      "id": "auto-s31-f01a4e37f369",
+      "decision": "published",
+      "recordId": "auto-s31-f01a4e37f369",
+      "reviewedAt": "2026-11-13T00:25:25.879Z",
+      "source": "https://www.fortnite.com/competitive/events/S31_SoloVictoryCashCup/?region=ME&round=S31_SoloVictoryCashCup_Event1Round1_ME",
+      "policy": "verified-rule",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-4-official-rules"
+    },
+    {
+      "id": "auto-s31-f6b118894425",
+      "decision": "published",
+      "recordId": "auto-s31-f6b118894425",
+      "reviewedAt": "2026-11-13T00:25:25.879Z",
+      "source": "https://www.fortnite.com/competitive/events/S31_SoloVictoryCashCup/?region=ME&round=S31_SoloVictoryCashCup_Event1Round1_ME",
+      "policy": "verified-rule",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-4-official-rules"
+    },
+    {
+      "id": "auto-s31-a2ff6c3fd5a1",
+      "decision": "published",
+      "recordId": "auto-s31-a2ff6c3fd5a1",
+      "reviewedAt": "2026-11-13T00:25:25.879Z",
+      "source": "https://www.fortnite.com/competitive/events/S31_SoloVictoryCashCup/?region=NAC&round=S31_SoloVictoryCashCup_Event2Round2_NAC",
+      "policy": "verified-rule",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-4-official-rules"
+    },
+    {
+      "id": "auto-s41-f9685b2de3b7",
+      "decision": "published",
+      "recordId": "auto-s41-f9685b2de3b7",
+      "reviewedAt": "2026-11-13T00:25:25.879Z",
+      "source": "https://www.fortnite.com/competitive/events/S41_PSCupDaysOfPlay/?region=NAC&round=S41_PSCupDaysOfPlay_Qualifier_NAC",
+      "policy": "attendance-only",
+      "rule": null
+    },
+    {
+      "id": "auto-s41-39525da1acf5",
+      "decision": "published",
+      "recordId": "auto-s41-39525da1acf5",
+      "reviewedAt": "2026-11-13T00:25:25.879Z",
+      "source": "https://www.fortnite.com/competitive/events/S41_PSCupDaysOfPlay/?region=NAC&round=S41_PSCupDaysOfPlay_Qualifier_NAC",
+      "policy": "attendance-only",
+      "rule": null
+    },
+    {
+      "id": "auto-s42-62c4a8a76cd0",
+      "decision": "already-published",
+      "existingId": "s42-me-teal-knight-fncs-cup-skin-20261019-budouame",
+      "reviewedAt": "2026-11-13T00:25:25.879Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_ChampionTealKnightFNCSCup/?region=ME&round=S42_ChampionTealKnightFNCSCup_ME",
+      "note": "Same official event/person and exact points/kills/VR/matches; provider original leaderboard rank 48 vs existing Fortnite Tracker rank 49. Preserve original Tracker published rank, award and record ID."
+    },
+    {
+      "id": "auto-s42-f4587a6acf5d",
+      "decision": "already-published",
+      "existingId": "s42-me-teal-knight-fncs-cup-skin-20261019-bof-popo",
+      "reviewedAt": "2026-11-13T00:25:25.879Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_ChampionTealKnightFNCSCup/?region=ME&round=S42_ChampionTealKnightFNCSCup_ME",
+      "note": "Same official event/person and exact points/kills/VR/matches; provider original leaderboard rank 51 vs existing Fortnite Tracker rank 52. Preserve original Tracker published rank, award and record ID."
+    },
+    {
+      "id": "auto-s42-8102c02bf5b3",
+      "decision": "already-published",
+      "existingId": "s42-me-teal-knight-fncs-cup-skin-20261019-rikram",
+      "reviewedAt": "2026-11-13T00:25:25.879Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_ChampionTealKnightFNCSCup/?region=ME&round=S42_ChampionTealKnightFNCSCup_ME",
+      "note": "Same official event/person and exact points/kills/VR/matches; provider original leaderboard rank 61 vs existing Fortnite Tracker rank 62. Preserve original Tracker published rank, award and record ID."
+    },
+    {
+      "id": "auto-s42-3a99f7b2a280",
+      "decision": "already-published",
+      "existingId": "s42-me-teal-knight-fncs-cup-skin-20261019-murukogi",
+      "reviewedAt": "2026-11-13T00:25:25.879Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_ChampionTealKnightFNCSCup/?region=ME&round=S42_ChampionTealKnightFNCSCup_ME",
+      "note": "Same official event/person and exact points/kills/VR/matches; provider original leaderboard rank 65 vs existing Fortnite Tracker rank 66. Preserve original Tracker published rank, award and record ID."
+    },
+    {
+      "id": "auto-s42-3bf1faec39b0",
+      "decision": "already-published",
+      "existingId": "s42-me-teal-knight-fncs-cup-skin-20261019-raichin",
+      "reviewedAt": "2026-11-13T00:25:25.879Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_ChampionTealKnightFNCSCup/?region=ME&round=S42_ChampionTealKnightFNCSCup_ME",
+      "note": "Same official event/person and exact points/kills/VR/matches; provider original leaderboard rank 80 vs existing Fortnite Tracker rank 81. Preserve original Tracker published rank, award and record ID."
     }
   ]
 }
