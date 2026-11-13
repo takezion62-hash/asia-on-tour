@@ -65,16 +65,28 @@ function decide(row,win,checkpoint,data){
  if(data.results.some(x=>x.id===row.id||identity(x)===identity(row)))return decline('既存の戦績');
  const rec={...row};
  if(row.kind==='予選'){
-  if(qualifierCutoff===undefined||row.rank>qualifierCutoff||row.prize!==0)
+  if(qualifierCutoff===undefined||row.prize!==0)
    return decline('予選通過条件または賞金値不一致');
-  rec.round=win.round.replace(/\/ 予選$/,'/ 予選突破');
-  rec.kind='予選';
   rec.prize=0;
-  const legacyEvidence=exactLegacyNacQualifier?
-   ' 当該2024年NA Central開催枠の予選通過順位を別途照合: '+historicNac.source:'';
-  rec.note='Epic公式規則の予選突破条件に基づき'+row.region+'上位'+qualifierCutoff+
-   '名が突破。Osirion順位表'+row.rank+'位のEpic IDと照合。予選賞金$0。規則: '+rule.source+
-   legacyEvidence;
+  if(row.rank>qualifierCutoff){
+   // Only the Epic-verified S42 Solo Reload tournament can count an
+   // out-of-cutoff Round 1 finish as participation without false qualification.
+   // This award-free Round 1 row is never an earned prize or a Round 2 entry.
+   if(rule.autoApproval!=='verified-qualifier-participation')
+    return decline('予選突破圏外の参加記録は公式対象大会のみに限定');
+   rec.round=win.round.replace(/\/ 予選$/,'/ 参加確認');
+   rec.kind='参加確認';
+   rec.note='Epic公式規則で'+row.region+'の予選突破は上位'+qualifierCutoff+
+    '名。Osirionで'+row.rank+'位のEpic IDとRound 1出場・結果を確認。突破圏外につき「参加確認」のみ記録し、賞金$0。規則: '+rule.source;
+  }else{
+   rec.round=win.round.replace(/\/ 予選$/,'/ 予選突破');
+   rec.kind='予選';
+   const legacyEvidence=exactLegacyNacQualifier?
+    ' 当該2024年NA Central開催枠の予選通過順位を別途照合: '+historicNac.source:'';
+   rec.note='Epic公式規則の予選突破条件に基づき'+row.region+'上位'+qualifierCutoff+
+    '名が突破。Osirion順位表'+row.rank+'位のEpic IDと照合。予選賞金$0。規則: '+rule.source+
+    legacyEvidence;
+  }
 
  }else if(row.kind==='賞金決勝'){
   if(row.prize!==null)return decline('APIの賞金額は未確認のまま照合する必要があります');
