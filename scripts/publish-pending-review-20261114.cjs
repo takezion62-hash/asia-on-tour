@@ -1,7 +1,8 @@
 'use strict';
-// Safe review of the 21 candidates retained in AOT's November queue.
+// Idempotent, source-verified review of original 21 plus 32 newly queued candidates.
 // Use existing vetted review planner; never infer money, cosmetics, or qualification.
 const fs=require('node:fs');
+const crypto=require('node:crypto');
 const path=require('node:path');
 const {loadReviewDb,writeReviewDb}=require('./reviewed-publication-core.cjs');
 const {reviewBatch}=require('./review-batch-core.cjs');
@@ -30,14 +31,43 @@ const TARGET_IDS=[
   "auto-s32-112342e8df46",
   "auto-s32-ed582e1d73f7",
   "auto-s43-60ffbb4b325c",
-  "auto-s43-65f27228b7e8"
+  "auto-s43-65f27228b7e8",
+  "auto-s30-0df37b8bb3e4",
+  "auto-s33-10328c7e715b",
+  "auto-s33-cba2d3993bcc",
+  "auto-s32-1db8aa1fd238",
+  "auto-s30-21502d4a139d",
+  "auto-s30-fa2e55c3db26",
+  "auto-s30-1520fe64806a",
+  "auto-s30-5f89c43fb372",
+  "auto-s30-da898a9eefc9",
+  "auto-s30-7ac25144921d",
+  "auto-s30-342c1ab58187",
+  "auto-s30-2780ce99f338",
+  "auto-s30-3705dc51aa16",
+  "auto-s30-1a3f98e85164",
+  "auto-s40-c4642b244e47",
+  "auto-s42-a4f23e465769",
+  "auto-s42-3a0928bcea33",
+  "auto-s42-ae4a638cae05",
+  "auto-s42-027d2fec9672",
+  "auto-s42-e0849e185983",
+  "auto-s42-c2d38ed980c2",
+  "auto-s42-9e5c628c9fcb",
+  "auto-s42-5899e5eee3d7",
+  "auto-s42-26910da5cdac",
+  "auto-s32-9916ca6a90eb",
+  "auto-s32-38e8c096ed16",
+  "auto-s32-b5954fb67dd2",
+  "auto-s43-08f4dbe1293e"
 ];
 const args=process.argv.slice(2),dry=args.includes('--dry-run');
 if(!(args.length===0||(args.length===1&&dry)))throw Error('Only --dry-run or no arguments accepted');
 const db=loadReviewDb(ROOT);
 db.reviewed=JSON.parse(fs.readFileSync(path.join(ROOT,'history-sync-reviewed.json'),'utf8'));
 const available=new Set([...db.reviews.auto.proposals,...db.reviews.history.proposals].map(x=>x.id));
-const target=TARGET_IDS.filter(x=>available.has(x));
+const target=[...new Set([...TARGET_IDS.filter(x=>available.has(x)),...available])];
+if(target.length>100)throw Error('Pending review exceeds bounded 100-item safety limit');
 const oldCash=rs=>rs.reduce((n,x)=>n+Math.round((x.prize||0)*100),0);
 const oldPersonal=rs=>rs.reduce((n,x)=>n+personalCents(x)*roster(x).length,0);
 if(target.length===0){
@@ -53,7 +83,8 @@ for(const month of months){
  if(!Array.isArray(data.sessions))throw Error('Invalid calendar archive '+month);
  db.calendar[month]=data.sessions;
 }
-const plan=reviewBatch(db,{ids:target,limit:100,runId:'pending-20261114',
+const fingerprint=crypto.createHash('sha256').update(target.slice().sort().join('|')).digest('hex').slice(0,12);
+const plan=reviewBatch(db,{ids:target,limit:100,runId:'pending-20261114-'+fingerprint,
  timestamp:new Date().toISOString(),actor:'ChatGPT / user authorized confirmed-candidate review'});
 const verdict=validateData({results:plan.next.results,players:db.players,tournaments:db.tournaments});
 if(verdict.errors.length)throw Error('Candidate data validation failed '+JSON.stringify(verdict.errors.slice(0,8)));
@@ -66,7 +97,7 @@ const updates=validateUpdateLog(plan.next.results,plan.next.updates);
 if(updates.length)throw Error('Update log failed '+JSON.stringify(updates.slice(0,5)));
 const report={
  mode:dry?'dry-run':'apply',pending:target.length,
- alreadyResolved:TARGET_IDS.length-target.length,
+ alreadyResolved:TARGET_IDS.filter(x=>!available.has(x)).length,additionalDiscovered:target.filter(x=>!TARGET_IDS.includes(x)).length,
  added:plan.published.length,duplicates:plan.duplicates.length,
  held:plan.held.length,oldCount:db.results.length,newCount:plan.next.results.length,
  addedRecords:plan.published,dups:plan.duplicates,
