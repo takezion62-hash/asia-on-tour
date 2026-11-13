@@ -2,11 +2,11 @@
   "version": 1,
   "role": "generated canonical-source snapshot; results.json remains authoritative in phase 1",
   "canonicalFile": "results.json",
-  "canonicalSha256": "222e24ee34b84c8888a987454fa6e5d6490d08d6ef8c1bb390a8517b5de7f768",
-  "count": 6736,
-  "teamPrizeCents": 6322000,
+  "canonicalSha256": "1e39d734d4576a7c991f985abfa14e24c24d456d808f5ddbb78be03c321ce4ff",
+  "count": 6741,
+  "teamPrizeCents": 6422000,
   "unconfirmedPrizeRecords": 1003,
-  "personalPrizeCents": 6302000,
+  "personalPrizeCents": 6402000,
   "recordOrder": [
     "s42-me-slenderman-reload-skin-20261021-acris-chacha",
     "s42-me-slenderman-reload-skin-20261021-karf-alpha",
@@ -6743,7 +6743,12 @@
     "auto-s32-8624f97eb57f",
     "auto-s32-711da96e9be4",
     "manual-s30-me-zbduos-20240621-r26",
-    "manual-s30-me-zbduos-20240621-r35"
+    "manual-s30-me-zbduos-20240621-r35",
+    "s29-me-zb-duos-vc-final-20240506-14",
+    "s29-me-zb-duos-vc-final-20240506-16",
+    "s29-me-zb-duos-vc-final-20240506-19",
+    "s29-me-zb-duos-vc-final-20240506-21",
+    "s29-me-zb-duos-vc-final-20240506-22"
   ],
   "shards": [
     {
@@ -6776,11 +6781,11 @@
     {
       "seasonId": "S29",
       "file": "source-results/S29.json",
-      "count": 5,
-      "teamPrizeCents": 100000,
+      "count": 10,
+      "teamPrizeCents": 200000,
       "unconfirmedPrizeRecords": 0,
-      "personalPrizeCents": 100000,
-      "sha256": "8001326239eb35fbb2ce6e20b8b4f1e7ec4b1d057fe15d9711f979f36093d45f"
+      "personalPrizeCents": 200000,
+      "sha256": "6b911ba72ebf4a900330fc934cf41663aa82073a056f12d0fa429da68ffad35f"
     },
     {
       "seasonId": "S30",
