@@ -19,6 +19,7 @@ on:
       - scripts/apply-s29-me-zb-duos-20240506.cjs
       - scripts/apply-s28-me-zb-duos-20240120-20240212.cjs
       - scripts/apply-s26-s28-me-zb-duos-2023.cjs
+      - scripts/publish-pending-review-20261114.cjs
       - scripts/verified-s26-s28-me-zb-duos-2023.cjs
       - data/manual-approvals/20231023-20231216-me-zb-duos-vcup-proof.json
       - scripts/verified-s28-me-zb-duos-20240120-20240212.cjs
@@ -85,6 +86,8 @@ jobs:
             node scripts/apply-s28-me-zb-duos-20240120-20240212.cjs
             node scripts/apply-s26-s28-me-zb-duos-2023.cjs --dry-run
             node scripts/apply-s26-s28-me-zb-duos-2023.cjs
+            node scripts/publish-pending-review-20261114.cjs --dry-run
+            node scripts/publish-pending-review-20261114.cjs
             node scripts/publish-verified-s32-me-vcup-20241116.cjs --dry-run
             node scripts/publish-verified-s32-me-vcup-20241116.cjs
             node scripts/publish-verified-2024-me-nac-last11.cjs --dry-run
@@ -102,6 +105,7 @@ jobs:
             node scripts/build-candidate-triage.cjs --check
             git add players.json updates.json approval-history.json
             git add history-sync-review.json history-sync-status.json history-sync-reviewed.json
+            git add auto-sync-review.json auto-sync-status.json
             git add -A season-data
             git add -A source-results
             git add -A review-reports
