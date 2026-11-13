@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-11-13T21:02:49.489Z",
+  "checkedAt": "2026-11-13T23:05:17.874Z",
   "windows": {
     "epicgames_S43_PerformanceEvaluationTrios_EU/S43_PerformanceEvaluation_Event1Round1_EU": {
       "nextPage": 7,
@@ -5117,7 +5117,7 @@
       "totalPages": 10
     },
     "epicgames_S42_InoxtagIconCup_NAW/S42_InoxtagIconCup_NAW": {
-      "nextPage": 63,
+      "nextPage": 73,
       "complete": false,
       "proposals": [
         {
@@ -5469,12 +5469,12 @@
           ]
         }
       ],
-      "pages": 63,
-      "lastAttemptAt": "2026-11-13T21:01:59.208Z",
+      "pages": 73,
+      "lastAttemptAt": "2026-11-13T23:04:45.640Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 6300,
-      "lastSuccessAt": "2026-11-13T21:02:00.111Z",
+      "lastSeenRank": 7300,
+      "lastSuccessAt": "2026-11-13T23:04:46.383Z",
       "totalPages": 89
     },
     "epicgames_S42_ConsoleVCC_SolosZB_BR/S42_ConsoleVCC_SolosZB_Event8Round1_BR": {
@@ -14100,8 +14100,8 @@
       "totalPages": 40
     },
     "epicgames_S43_ArenaCashCup_NAW/S43_ArenaCashCup_Event1_NAW": {
-      "nextPage": 31,
-      "complete": false,
+      "nextPage": 37,
+      "complete": true,
       "proposals": [
         {
           "id": "auto-s43-5e3c6f5324b6",
@@ -14188,60 +14188,89 @@
           ]
         }
       ],
-      "pages": 31,
-      "lastAttemptAt": "2026-11-13T21:02:07.594Z",
+      "pages": 37,
+      "lastAttemptAt": "2026-11-13T23:04:20.555Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 3100,
-      "lastSuccessAt": "2026-11-13T21:02:08.280Z",
+      "lastSeenRank": 3629,
+      "lastSuccessAt": "2026-11-13T23:04:20.790Z",
       "totalPages": 37
     },
     "epicgames_S43_ArenaCashCup_NAC/S43_ArenaCashCup_Event1_NAC": {
-      "nextPage": 26,
+      "nextPage": 36,
       "complete": false,
       "proposals": [],
-      "pages": 26,
-      "lastAttemptAt": "2026-11-13T21:02:22.897Z",
+      "pages": 36,
+      "lastAttemptAt": "2026-11-13T23:05:06.649Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 2600,
-      "lastSuccessAt": "2026-11-13T21:02:28.636Z",
+      "lastSeenRank": 3600,
+      "lastSuccessAt": "2026-11-13T23:05:07.176Z",
       "totalPages": 83
     },
     "epicgames_S43_ArenaCashCup_BR/S43_ArenaCashCup_Event1_BR": {
-      "nextPage": 8,
-      "complete": false,
-      "proposals": [],
-      "pages": 8,
-      "lastAttemptAt": "2026-11-13T21:02:44.624Z",
-      "emptyAttempts": 0,
-      "rankingOrderValid": true,
-      "lastSeenRank": 800,
-      "lastSuccessAt": "2026-11-13T21:02:45.778Z",
-      "totalPages": 43
-    },
-    "epicgames_S43_ArenaCashCup_EU/S43_ArenaCashCup_Event1_EU": {
-      "nextPage": 3,
-      "complete": false,
-      "proposals": [],
-      "pages": 3,
-      "lastAttemptAt": "2026-11-13T21:02:45.778Z",
-      "emptyAttempts": 0,
-      "rankingOrderValid": true,
-      "lastSeenRank": 300,
-      "lastSuccessAt": "2026-11-13T21:02:47.008Z",
-      "totalPages": 100
-    },
-    "epicgames_S43_ArenaCashCup_ME/S43_ArenaCashCup_Event1_ME": {
       "nextPage": 17,
       "complete": false,
       "proposals": [],
       "pages": 17,
-      "lastAttemptAt": "2026-11-13T21:02:40.000Z",
+      "lastAttemptAt": "2026-11-13T23:05:11.638Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
       "lastSeenRank": 1700,
-      "lastSuccessAt": "2026-11-13T21:02:40.792Z",
+      "lastSuccessAt": "2026-11-13T23:05:12.042Z",
+      "totalPages": 43
+    },
+    "epicgames_S43_ArenaCashCup_EU/S43_ArenaCashCup_Event1_EU": {
+      "nextPage": 4,
+      "complete": false,
+      "proposals": [],
+      "pages": 4,
+      "lastAttemptAt": "2026-11-13T23:05:12.042Z",
+      "emptyAttempts": 0,
+      "rankingOrderValid": true,
+      "lastSeenRank": 400,
+      "lastSuccessAt": "2026-11-13T23:05:12.541Z",
+      "totalPages": 100
+    },
+    "epicgames_S43_ArenaCashCup_ME/S43_ArenaCashCup_Event1_ME": {
+      "nextPage": 27,
+      "complete": false,
+      "proposals": [
+        {
+          "id": "auto-s43-eab16058c5e5",
+          "date": "2026-11-11",
+          "region": "ME",
+          "player": "テルハルル",
+          "playerRaw": "BoF てるはるるの相方popo",
+          "event": "Arenas Cash Cup",
+          "round": "Event 1 / 参加確認",
+          "rank": 2319,
+          "points": 56,
+          "kills": 17,
+          "vrs": 0,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 6,
+          "seasonId": "S43",
+          "chapter": 7,
+          "season": 5,
+          "tournamentId": "ch7s5-arenas-cash-cup",
+          "source": "https://www.fortnite.com/competitive/events/S43_ArenaCashCup/?region=ME&round=S43_ArenaCashCup_Event1_ME",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "teamAccountIds": [
+            "4ca4fb7d0e20494a8eecfe03bb15e331"
+          ]
+        }
+      ],
+      "pages": 27,
+      "lastAttemptAt": "2026-11-13T23:04:55.271Z",
+      "emptyAttempts": 0,
+      "rankingOrderValid": true,
+      "lastSeenRank": 2700,
+      "lastSuccessAt": "2026-11-13T23:04:57.780Z",
       "totalPages": 40
     },
     "epicgames_S43_ArenaCashCup_OCE/S43_ArenaCashCup_Event1_OCE": {
@@ -14337,6 +14366,118 @@
       "lastSeenRank": 26,
       "lastSuccessAt": "2026-11-13T21:02:49.480Z",
       "totalPages": 1
+    },
+    "epicgames_S43_ReloadZBDuosCashCup_ME/S43_ReloadZBDuosCashCup_Event1Round2_ME": {
+      "nextPage": 1,
+      "complete": true,
+      "proposals": [],
+      "pages": 1,
+      "lastAttemptAt": "2026-11-13T23:05:12.541Z",
+      "emptyAttempts": 0,
+      "rankingOrderValid": true,
+      "lastSeenRank": 19,
+      "lastSuccessAt": "2026-11-13T23:05:13.000Z",
+      "totalPages": 1
+    },
+    "epicgames_S43_PerformanceEvaluationTrios_EU/S43_PerformanceEvaluation_Event2Round1_EU": {
+      "nextPage": 1,
+      "complete": true,
+      "proposals": [],
+      "pages": 1,
+      "lastAttemptAt": "2026-11-13T23:05:13.000Z",
+      "emptyAttempts": 0,
+      "rankingOrderValid": true,
+      "lastSeenRank": 100,
+      "lastSuccessAt": "2026-11-13T23:05:14.875Z",
+      "totalPages": 7
+    },
+    "epicgames_S43_ReloadZBDuosCashCup_NAC/S43_ReloadZBDuosCashCup_Event1Round1_NAC": {
+      "nextPage": 1,
+      "complete": false,
+      "proposals": [
+        {
+          "id": "auto-s43-eb44d13d18f8",
+          "date": "2026-11-09",
+          "region": "NAC",
+          "player": "bigsky / Reo",
+          "playerRaw": "tzd Ackermanǃ / IGNUM Reo",
+          "event": "Reload ZB Duos Cash Cup Zero Build",
+          "round": "Event 1 · Round 1 / 参加確認",
+          "rank": 32,
+          "points": 555,
+          "kills": 94,
+          "vrs": 3,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 10,
+          "seasonId": "S43",
+          "chapter": 7,
+          "season": 5,
+          "tournamentId": "ch7s5-reload-zero-build-duos-cash-cup",
+          "source": "https://www.fortnite.com/competitive/events/S43_ReloadZBDuosCashCup/?region=NAC&round=S43_ReloadZBDuosCashCup_Event1Round1_NAC",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "bigsky",
+            "Reo"
+          ],
+          "teamAccountIds": [
+            "0d77cc7e6bda47d48183890d973ec508",
+            "25945a39f1564a22aab8ea7808feac98"
+          ]
+        }
+      ],
+      "pages": 1,
+      "lastAttemptAt": "2026-11-13T23:05:14.875Z",
+      "emptyAttempts": 0,
+      "rankingOrderValid": true,
+      "lastSeenRank": 100,
+      "lastSuccessAt": "2026-11-13T23:05:15.744Z",
+      "totalPages": 100
+    },
+    "epicgames_S42_InoxtagIconCup_NAC/S42_InoxtagIconCup_NAC": {
+      "nextPage": 1,
+      "complete": false,
+      "proposals": [
+        {
+          "id": "auto-s42-45c12dff1421",
+          "date": "2026-10-26",
+          "region": "NAC",
+          "player": "逆襲のクイヤ. / りんたろう",
+          "playerRaw": "con Si Dē R Ae. / ONYX りんたろうʕᵒᴥᵒʔ",
+          "event": "Inoxtag Icon Cup Battle Royale",
+          "round": "単一開催枠 / 参加確認",
+          "rank": 53,
+          "points": 423,
+          "kills": 52,
+          "vrs": 1,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 9,
+          "seasonId": "S42",
+          "chapter": 7,
+          "season": 4,
+          "tournamentId": "ch7s4-inoxtag-icon-cup-battle-royale",
+          "source": "https://www.fortnite.com/competitive/events/S42_InoxtagIconCup/?region=NAC&round=S42_InoxtagIconCup_NAC",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "逆襲のクイヤ.",
+            "りんたろう"
+          ]
+        }
+      ],
+      "pages": 1,
+      "lastAttemptAt": "2026-11-13T23:05:15.744Z",
+      "emptyAttempts": 0,
+      "rankingOrderValid": true,
+      "lastSeenRank": 100,
+      "lastSuccessAt": "2026-11-13T23:05:17.866Z",
+      "totalPages": 100
     }
   }
 }

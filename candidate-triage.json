@@ -1,7 +1,7 @@
 {
   "version": 1,
   "sourceCheckedAt": "2026-11-07T23:16:39.215Z",
-  "total": 32,
+  "total": 33,
   "alreadyResolved": 0,
   "byYear": [
     {
@@ -14,7 +14,7 @@
     },
     {
       "name": "2026",
-      "count": 6
+      "count": 7
     }
   ],
   "byRegion": [
@@ -24,7 +24,7 @@
     },
     {
       "name": "ME",
-      "count": 3
+      "count": 4
     },
     {
       "name": "NAC",
@@ -40,6 +40,10 @@
     }
   ],
   "byTournament": [
+    {
+      "name": "Arenas Cash Cup / ME / 2026",
+      "count": 1
+    },
     {
       "name": "Elite Kado Thorne Cup Reload / EU / 2026",
       "count": 1
@@ -80,7 +84,7 @@
     },
     {
       "name": "partial-scan",
-      "count": 28
+      "count": 29
     }
   ],
   "queue": [
@@ -1136,6 +1140,39 @@
         "seenPages": 2,
         "totalPages": 100,
         "sourceKey": "epicgames_S42_EliteKadoThorneCup_EU/S42_EliteKadoThorneCup_EU",
+        "possibleExistingId": null
+      },
+      "rewardState": "cash-unconfirmed"
+    },
+    {
+      "id": "auto-s43-eab16058c5e5",
+      "origin": "recent",
+      "date": "2026-11-11",
+      "year": "2026",
+      "region": "ME",
+      "tournamentId": "ch7s5-arenas-cash-cup",
+      "event": "Arenas Cash Cup",
+      "round": "Event 1 / 参加確認",
+      "player": "テルハルル",
+      "kind": "参加確認",
+      "rank": 2319,
+      "points": 56,
+      "kills": 17,
+      "vrs": 0,
+      "prize": null,
+      "source": "https://www.fortnite.com/competitive/events/S43_ArenaCashCup/?region=ME&round=S43_ArenaCashCup_Event1_ME",
+      "status": "partial-scan",
+      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
+      "reason": "公式の順位条件を登録していない大会",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": false,
+        "observedPartial": true,
+        "seenPages": 27,
+        "totalPages": 40,
+        "sourceKey": "epicgames_S43_ArenaCashCup_ME/S43_ArenaCashCup_Event1_ME",
         "possibleExistingId": null
       },
       "rewardState": "cash-unconfirmed"
