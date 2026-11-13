@@ -189,3 +189,30 @@ test('S32 Remix ME saved partial zero-VR final is $0, while unknown positive cas
  assert.equal(decide({...player,vrs:1},win,scan,db).approved,false);
  assert.equal(decide({...player,region:'NAC'},win,scan,db).approved,false);
 });
+
+test('only individually verified 2024 NA Central qualifier windows can use NA cutoffs',()=>{
+ const scenarios=[
+  ['S30','ch5s3-solo-victory-cup','S30_SoloVictoryCashCup','2024-07-23',6,5000],
+  ['S32','ch5s5-solo-victory-cup','S32_SoloVictoryCashCup','2024-11-16',2,10000]
+ ];
+ for(const [sid,id,eventId,date,event,cutoff] of scenarios){
+  const win={eventId,windowId:eventId+'_Event'+event+'Round1_NAC',region:'NAC',
+   seasonId:sid,tournamentId:id,dateJst:date,kind:'予選',
+   round:'Event '+event+' · Round 1 / 予選'};
+  const rec={id:'auto-'+sid.toLowerCase()+'-123456789012',date,region:'NAC',
+   seasonId:sid,tournamentId:id,kind:'予選',round:win.round,
+   player:'A',rank:cutoff,points:140,kills:3,vrs:0,matches:7,prize:0,
+   verified:true,source:source(win)};
+  const data={players:{candidates:[{name:'A'}]},tournaments:{catalog:[{
+   id,seasonId:sid,team:'solo',series:'victory-cup',sourceEventIds:[eventId]}]},results:[]};
+  const checkpoint={complete:true,proposals:[rec]};
+  const out=decide(rec,win,checkpoint,data);
+  assert.equal(out.approved,true,out.reason);
+  assert.equal(out.record.prize,0);
+  assert.match(out.record.note,/fortnitetracker.com/);
+  assert.equal(decide({...rec,rank:cutoff+1},win,{...checkpoint,proposals:[{...rec,rank:cutoff+1}]},data).approved,false);
+  const otherWin={...win,windowId:eventId+'_Event'+(event+1)+'Round1_NAC'};
+  const otherRec={...rec,source:source(otherWin)};
+  assert.equal(decide(otherRec,otherWin,{...checkpoint,proposals:[otherRec]},data).approved,false);
+ }
+});
