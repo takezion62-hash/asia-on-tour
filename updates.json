@@ -2,6 +2,24 @@
   "version": 1,
   "entries": [
     {
+      "id": "s42-cosmetic-rank-reconcile-20261113",
+      "date": "2026-11-13",
+      "type": "records",
+      "title": "S42のスキン大会：既掲載9件を公式順位に訂正、重複候補12件を整理",
+      "description": "2026/10/19 NAW Teal Knight、10/21 ME/NAW Slender Man Cup。保存済みEpic公式順位・同一Epic ID・ポイント/キル/VR/試合数を照合。Tracker画像由来の順位のみ9件訂正し、3件は完全一致。12件とも重複掲載せず、既存のスキン獲得・個人ID・賞金$0を保持。",
+      "recordIds": [
+        "s42-naw-teal-knight-fncs-cup-skin-20261019-rise",
+        "s42-me-slenderman-reload-skin-20261021-acris-chacha",
+        "s42-me-slenderman-reload-skin-20261021-yuragi-shirus",
+        "s42-me-slenderman-reload-skin-20261021-rad-celis",
+        "s42-me-slenderman-reload-skin-20261021-karf-alpha",
+        "s42-naw-slenderman-reload-skin-20261021-yama-piyopiyo",
+        "s42-naw-slenderman-reload-skin-20261021-celisyanagisawa-plank",
+        "s42-naw-slenderman-reload-skin-20261021-ozaki-tob",
+        "s42-naw-slenderman-reload-skin-20261021-yukinya-tanaka"
+      ]
+    },
+    {
       "id": "s32-me-vcup-e2-final-positive-vr-20261113",
       "date": "2026-11-13",
       "type": "records",

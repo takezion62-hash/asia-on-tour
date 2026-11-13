@@ -11,7 +11,7 @@
   "provider": "osirion",
   "linkedPlayers": 594,
   "trackedWindows": 2960,
-  "found": 23,
+  "found": 11,
   "skipped": 11,
   "imported": 21,
   "scannedPages": 96,
@@ -20,7 +20,7 @@
   "alreadyRegistered": 4791,
   "autoApprovedTotal": 2446,
   "invalidCachedCandidates": 1,
-  "manualReviewCandidates": 23,
+  "manualReviewCandidates": 11,
   "autoApprovedCosmeticThisRun": 0,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
@@ -31,7 +31,7 @@
   "malformedFailures": 0,
   "skippedLeaderboards": [],
   "reviewOnlyWindows": 1328,
-  "reviewOnlyCandidates": 12,
+  "reviewOnlyCandidates": 0,
   "unmappedEvents": 241,
   "unmappedEventIds": [
     "S30_ConsoleCashCups",
@@ -47,12 +47,12 @@
     "S30_Reload",
     "S30_ReloadZB"
   ],
-  "message": "2024年11月ME Solo Victory Cup決勝2件、1VR=$100を独立資料で確認して追加。既存成績は変更なし。",
+  "message": "同一Epic ID・大会・全スコア一致の確認候補12件を重複整理し、元のスキン獲得記録の順位9件を公式順位に訂正。賞金と掲載件数は不変。",
   "manuallyPublished": 1486,
-  "manuallyResolvedDuplicates": 153,
-  "lastReviewedBatchAt": "2026-11-13T12:55:11.304Z",
-  "manuallyCorrected": 4,
-  "lastCorrectedReviewAt": "2026-11-07T09:14:30.244Z",
+  "manuallyResolvedDuplicates": 165,
+  "lastReviewedBatchAt": "2026-11-13T13:45:16.115Z",
+  "manuallyCorrected": 13,
+  "lastCorrectedReviewAt": "2026-11-13T13:45:16.115Z",
   "concurrentMerge": {
     "appended": 21,
     "alreadyPublished": 0,
@@ -263,11 +263,13 @@
     "unrealTeamsWithCash": 2
   },
   "latestManualReview": {
-    "reviewedAt": "2026-11-13T12:55:11.304Z",
-    "reviewedCandidates": 2,
-    "published": 2,
-    "remainingPending": 23,
-    "policy": "Exact Epic ID + official $100/VR rules + independent historical payouts"
+    "reviewedAt": "2026-11-13T13:45:16.115Z",
+    "reviewedCandidates": 12,
+    "published": 0,
+    "duplicatesResolved": 12,
+    "rankCorrections": 9,
+    "remainingPending": 11,
+    "policy": "Original screenshot-confirmed cosmetics protected; canonical Epic rank reconciled"
   },
   "autoApprovedDuoQualifierThisRun": 1,
   "latestParticipationReview": {

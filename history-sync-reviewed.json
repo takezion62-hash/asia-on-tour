@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-13T12:55:11.304Z",
+  "reviewedAt": "2026-11-13T13:45:16.115Z",
   "description": "Resolved historic review candidates: published, duplicate or participation",
   "entries": [
     {
@@ -26726,6 +26726,138 @@
       "source": "https://www.fortnite.com/competitive/events/S32_SoloVictoryCashCup/?region=ME&round=S32_SoloVictoryCashCup_Event2Round2_ME",
       "officialRules": "https://www.fortnite.com/news/competitive-details-make-your-mark-in-chapter-2-remix",
       "independentEvidence": "https://liquipedia.net/fortnite/Seljuny/Results"
+    },
+    {
+      "id": "auto-s42-3c18c5cad756",
+      "decision": "already-published",
+      "existingId": "s42-naw-teal-knight-fncs-cup-skin-20261019-rise",
+      "reviewedAt": "2026-11-13T13:45:16.115Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_ChampionTealKnightFNCSCup/?region=NAW&round=S42_ChampionTealKnightFNCSCup_NAW",
+      "originalRank": 96,
+      "officialRank": 95,
+      "policy": "verified-duplicate-with-official-rank",
+      "note": "Original screenshot-confirmed cosmetic outcome retained; saved Epic-ID rank and all score fields matched. Cash kept at $0."
+    },
+    {
+      "id": "auto-s42-7565a2a6d314",
+      "decision": "already-published",
+      "existingId": "s42-me-slenderman-reload-skin-20261021-acris-chacha",
+      "reviewedAt": "2026-11-13T13:45:16.115Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_SlenderManCup/?region=ME&round=S42_SlenderManCup_ME",
+      "originalRank": 31,
+      "officialRank": 30,
+      "policy": "verified-duplicate-with-official-rank",
+      "note": "Original screenshot-confirmed cosmetic outcome retained; saved Epic-ID rank and all score fields matched. Cash kept at $0."
+    },
+    {
+      "id": "auto-s42-ca5a20ece8cd",
+      "decision": "already-published",
+      "existingId": "s42-me-slenderman-reload-skin-20261021-yuragi-shirus",
+      "reviewedAt": "2026-11-13T13:45:16.115Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_SlenderManCup/?region=ME&round=S42_SlenderManCup_ME",
+      "originalRank": 48,
+      "officialRank": 46,
+      "policy": "verified-duplicate-with-official-rank",
+      "note": "Original screenshot-confirmed cosmetic outcome retained; saved Epic-ID rank and all score fields matched. Cash kept at $0."
+    },
+    {
+      "id": "auto-s42-e433103f17ab",
+      "decision": "already-published",
+      "existingId": "s42-me-slenderman-reload-skin-20261021-rad-celis",
+      "reviewedAt": "2026-11-13T13:45:16.115Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_SlenderManCup/?region=ME&round=S42_SlenderManCup_ME",
+      "originalRank": 44,
+      "officialRank": 43,
+      "policy": "verified-duplicate-with-official-rank",
+      "note": "Original screenshot-confirmed cosmetic outcome retained; saved Epic-ID rank and all score fields matched. Cash kept at $0."
+    },
+    {
+      "id": "auto-s42-ff1c2ecd23e2",
+      "decision": "already-published",
+      "existingId": "s42-me-slenderman-reload-skin-20261021-karf-alpha",
+      "reviewedAt": "2026-11-13T13:45:16.115Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_SlenderManCup/?region=ME&round=S42_SlenderManCup_ME",
+      "originalRank": 19,
+      "officialRank": 18,
+      "policy": "verified-duplicate-with-official-rank",
+      "note": "Original screenshot-confirmed cosmetic outcome retained; saved Epic-ID rank and all score fields matched. Cash kept at $0."
+    },
+    {
+      "id": "auto-s42-303fd06e5e50",
+      "decision": "already-published",
+      "existingId": "s42-naw-slenderman-reload-skin-20261021-yama-piyopiyo",
+      "reviewedAt": "2026-11-13T13:45:16.115Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_SlenderManCup/?region=NAW&round=S42_SlenderManCup_NAW",
+      "originalRank": 78,
+      "officialRank": 76,
+      "policy": "verified-duplicate-with-official-rank",
+      "note": "Original screenshot-confirmed cosmetic outcome retained; saved Epic-ID rank and all score fields matched. Cash kept at $0."
+    },
+    {
+      "id": "auto-s42-3f2ae449ebe9",
+      "decision": "already-published",
+      "existingId": "s42-naw-slenderman-reload-skin-20261021-menta-shiroka",
+      "reviewedAt": "2026-11-13T13:45:16.115Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_SlenderManCup/?region=NAW&round=S42_SlenderManCup_NAW",
+      "originalRank": 18,
+      "officialRank": 18,
+      "policy": "verified-duplicate-with-official-rank",
+      "note": "Original screenshot-confirmed cosmetic outcome retained; saved Epic-ID rank and all score fields matched. Cash kept at $0."
+    },
+    {
+      "id": "auto-s42-595558a50431",
+      "decision": "already-published",
+      "existingId": "s42-naw-slenderman-reload-skin-20261021-celisyanagisawa-plank",
+      "reviewedAt": "2026-11-13T13:45:16.115Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_SlenderManCup/?region=NAW&round=S42_SlenderManCup_NAW",
+      "originalRank": 54,
+      "officialRank": 52,
+      "policy": "verified-duplicate-with-official-rank",
+      "note": "Original screenshot-confirmed cosmetic outcome retained; saved Epic-ID rank and all score fields matched. Cash kept at $0."
+    },
+    {
+      "id": "auto-s42-b9000678c370",
+      "decision": "already-published",
+      "existingId": "s42-naw-slenderman-reload-skin-20261021-ozaki-tob",
+      "reviewedAt": "2026-11-13T13:45:16.115Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_SlenderManCup/?region=NAW&round=S42_SlenderManCup_NAW",
+      "originalRank": 73,
+      "officialRank": 71,
+      "policy": "verified-duplicate-with-official-rank",
+      "note": "Original screenshot-confirmed cosmetic outcome retained; saved Epic-ID rank and all score fields matched. Cash kept at $0."
+    },
+    {
+      "id": "auto-s42-ba6bb8b52eb0",
+      "decision": "already-published",
+      "existingId": "s42-naw-slenderman-reload-skin-20261021-yukinya-tanaka",
+      "reviewedAt": "2026-11-13T13:45:16.115Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_SlenderManCup/?region=NAW&round=S42_SlenderManCup_NAW",
+      "originalRank": 93,
+      "officialRank": 90,
+      "policy": "verified-duplicate-with-official-rank",
+      "note": "Original screenshot-confirmed cosmetic outcome retained; saved Epic-ID rank and all score fields matched. Cash kept at $0."
+    },
+    {
+      "id": "auto-s42-d2d8c6beba04",
+      "decision": "already-published",
+      "existingId": "s42-naw-slenderman-reload-skin-20261021-takaya-babucchi",
+      "reviewedAt": "2026-11-13T13:45:16.115Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_SlenderManCup/?region=NAW&round=S42_SlenderManCup_NAW",
+      "originalRank": 15,
+      "officialRank": 15,
+      "policy": "verified-duplicate-with-official-rank",
+      "note": "Original screenshot-confirmed cosmetic outcome retained; saved Epic-ID rank and all score fields matched. Cash kept at $0."
+    },
+    {
+      "id": "auto-s42-eab7f89bedb5",
+      "decision": "already-published",
+      "existingId": "s42-naw-slenderman-reload-skin-20261021-kol-guppafv",
+      "reviewedAt": "2026-11-13T13:45:16.115Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_SlenderManCup/?region=NAW&round=S42_SlenderManCup_NAW",
+      "originalRank": 4,
+      "officialRank": 4,
+      "policy": "verified-duplicate-with-official-rank",
+      "note": "Original screenshot-confirmed cosmetic outcome retained; saved Epic-ID rank and all score fields matched. Cash kept at $0."
     }
   ]
 }
