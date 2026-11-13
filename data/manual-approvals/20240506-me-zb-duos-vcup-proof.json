@@ -1,0 +1,117 @@
+{
+  "version": 1,
+  "batch": {
+    "id": "tracker-s29-me-zb-duos-vcup-final-20240506",
+    "date": "2024-05-06",
+    "region": "ME",
+    "seasonId": "S29",
+    "tournamentId": "ch5s2-zero-build-duos-victory-cup",
+    "eventId": "S29_DuosZBVictoryCashCup",
+    "windowId": "S29_DuosZBVictoryCashCup_Event7Round2_ME",
+    "source": "https://fortnitetracker.com/events/epicgames_S29_DuosZBVictoryCashCup_ME?window=S29_DuosZBVictoryCashCup_Event7Round2_ME",
+    "ruleUrl": "https://www.fortnite.com/news/victory-cash-cups-chapter-5-season-2-official-rules",
+    "note": "ユーザー提供2026-11-14 JST、Fortnite Tracker 2024-05-06 ME Zero Build Duos Victory Cup Event7 Round2 賞金獲得者5枚（14位、16位、19位、21位、22位）と10人の本人Tracker Epic ID。各チーム100pt/1VR/3試合・チーム$200（選手各$100）。ユーザー指定のcanonical alias るいぼっと=Αθηνά.、ふりすく=Frisk_freedomを維持。",
+    "teams": [
+      {
+        "rank": 14,
+        "points": 100,
+        "kills": 16,
+        "vrs": 1,
+        "matches": 3,
+        "teamPrize": 200,
+        "members": [
+          {
+            "name": "Fraymy",
+            "raw": "Fraymy",
+            "url": "https://fortnitetracker.com/profile/all/Fraymy/events?id=88181029-896a-4a04-81fd-a93d63d9a8d1"
+          },
+          {
+            "name": "RyoIT",
+            "raw": "RyoIT",
+            "url": "https://fortnitetracker.com/profile/all/RyoIT/events?id=f4cd4eba-e078-4e02-999a-c7f8d911b4c8"
+          }
+        ]
+      },
+      {
+        "rank": 16,
+        "points": 100,
+        "kills": 14,
+        "vrs": 1,
+        "matches": 3,
+        "teamPrize": 200,
+        "members": [
+          {
+            "name": "るいぼっと",
+            "raw": "Αθηνά.",
+            "url": "https://fortnitetracker.com/profile/all/%CE%91%CE%B8%CE%B7%CE%BD%CE%AC./events?id=f495a2a6-295c-4c5d-923a-ab6795439bec"
+          },
+          {
+            "name": "mask off420",
+            "raw": "mask off420",
+            "url": "https://fortnitetracker.com/profile/all/mask%20off420/events?id=f4c4a11a-03ab-4831-9cae-2ce13c2eeae7"
+          }
+        ]
+      },
+      {
+        "rank": 19,
+        "points": 100,
+        "kills": 13,
+        "vrs": 1,
+        "matches": 3,
+        "teamPrize": 200,
+        "members": [
+          {
+            "name": "ねふぁ",
+            "raw": "ねふぁ",
+            "url": "https://fortnitetracker.com/profile/all/%E3%81%AD%E3%81%B5%E3%81%81/events?id=8cbdd28f-a8bd-43ff-abb6-d26b982a76e3"
+          },
+          {
+            "name": "ruporupo",
+            "raw": "ruporupo",
+            "url": "https://fortnitetracker.com/profile/all/ruporupo/events?id=f3be0e8f-1469-479f-aef2-0f281bc59e6b"
+          }
+        ]
+      },
+      {
+        "rank": 21,
+        "points": 100,
+        "kills": 8,
+        "vrs": 1,
+        "matches": 3,
+        "teamPrize": 200,
+        "members": [
+          {
+            "name": "僕の番だ",
+            "raw": "僕の番だ",
+            "url": "https://fortnitetracker.com/profile/all/%E5%83%95%E3%81%AE%E7%95%AA%E3%81%A0/events?id=7b6a0852-1c2a-4b15-a03e-560aaf04353b"
+          },
+          {
+            "name": "ふりすく",
+            "raw": "Frisk_freedom",
+            "url": "https://fortnitetracker.com/profile/all/Frisk_freedom/events?id=8ad1ccd8-fc11-441c-898e-1b56d85da004"
+          }
+        ]
+      },
+      {
+        "rank": 22,
+        "points": 100,
+        "kills": 6,
+        "vrs": 1,
+        "matches": 3,
+        "teamPrize": 200,
+        "members": [
+          {
+            "name": "Aim",
+            "raw": "Aim",
+            "url": "https://fortnitetracker.com/profile/all/Aim/events?id=8baf28ea-b515-48e6-9232-d03509c13382"
+          },
+          {
+            "name": "ZAZI",
+            "raw": "ZAZI",
+            "url": "https://fortnitetracker.com/profile/all/ZAZI/events?id=f08aad62-9bf0-40d6-beb7-8c7aea8e0a1f"
+          }
+        ]
+      }
+    ]
+  }
+}
