@@ -17,6 +17,9 @@ on:
       - scripts/apply-s30-me-zb-duos-nonprize-20240607.cjs
       - scripts/apply-s30-me-zb-duos-20240621.cjs
       - scripts/apply-s29-me-zb-duos-20240506.cjs
+      - scripts/apply-s28-me-zb-duos-20240120-20240212.cjs
+      - scripts/verified-s28-me-zb-duos-20240120-20240212.cjs
+      - data/manual-approvals/20240120-20240212-me-zb-duos-vcup-proof.json
       - scripts/verified-s29-me-zb-duos-20240506.cjs
       - data/manual-approvals/20240506-me-zb-duos-vcup-proof.json
       - scripts/verified-s30-me-zb-duos-20240621.cjs
@@ -75,6 +78,8 @@ jobs:
             node scripts/apply-s30-me-zb-duos-20240621.cjs
             node scripts/apply-s29-me-zb-duos-20240506.cjs --dry-run
             node scripts/apply-s29-me-zb-duos-20240506.cjs
+            node scripts/apply-s28-me-zb-duos-20240120-20240212.cjs --dry-run
+            node scripts/apply-s28-me-zb-duos-20240120-20240212.cjs
             node scripts/publish-verified-s32-me-vcup-20241116.cjs --dry-run
             node scripts/publish-verified-s32-me-vcup-20241116.cjs
             node scripts/publish-verified-2024-me-nac-last11.cjs --dry-run
