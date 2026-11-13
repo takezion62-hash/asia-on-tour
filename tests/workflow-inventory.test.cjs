@@ -158,3 +158,25 @@ test('第2弾レビュー入口は従来の個別承認を残して安全な一�
  assert.match(timing,/node scripts\/review-timing\.cjs/);
  assert.doesNotMatch(timing,/contents: write/);
 });
+
+test('第3弾はワークフロー数を増やさず依頼ブランチを安全に受け付ける',()=>{
+ const entry=read('reviewed-candidate-publication.yml');
+ assert.match(entry,/ops\/review-request\/\*\*/);
+ assert.match(entry,/review-requests\/launch\.json/);
+ assert.match(entry,/ref: main/);
+ assert.match(entry,/node scripts\/review-request\.cjs/);
+ assert.match(entry,/node scripts\/review-batch\.cjs/);
+ assert.match(entry,/actions: write/);
+ assert.match(entry,/gh pr create/);
+ assert.match(entry,/gh workflow run tests\.yml/);
+ assert.match(entry,/review_base_sha=\$AOT_REQUEST_BASE/);
+ assert.match(entry,/git diff --cached --check/);
+ assert.match(entry,/No new evidence-backed results/);
+ assert.doesNotMatch(entry,/git push origin HEAD:main/);
+ const tests=read('tests.yml');
+ assert.match(tests,/DISPATCH_BASE_SHA:/);
+ assert.match(tests,/review_base_sha:/);
+ assert.match(tests,/git merge-base --is-ancestor "\$BASE_SHA" refs\/remotes\/origin\/main/);
+ assert.match(tests,/git show "\$BASE_SHA:scripts\/ci-change-scope\.cjs"/);
+ assert.match(tests,/npm run test:e2e -- tests\/ci-data-smoke\.spec\.cjs/);
+});

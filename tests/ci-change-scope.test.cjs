@@ -87,3 +87,31 @@ test('PR and main-only push detect trusted SHAs and unknown events fall back to 
  assert.equal(detect(pr,()=>{throw Error('Git failed')}).mode,'full');
  assert.equal(detect(pr,()=>Buffer.from('M\0source-results/S30.json')).mode,'full');
 });
+
+test('trusted dispatched reviewed-results commit gets fast data-only CI only with main ancestry',()=>{
+ const base='a'.repeat(40),head='b'.repeat(40);
+ const env={GITHUB_EVENT_NAME:'workflow_dispatch',
+  GITHUB_REF:'refs/heads/reviewed-results/123456-1',
+  DISPATCH_BASE_SHA:base,GITHUB_SHA:head};
+ const calls=[];
+ const safeGit=(program,args)=>{
+  assert.equal(program,'git');calls.push(args);
+  if(args[0]==='merge-base')return Buffer.alloc(0);
+  return Buffer.from('M\0source-results/S30.json\0M\0source-results/manifest.json\0');
+ };
+ assert.equal(detect(env,safeGit).mode,'data');
+ assert.deepEqual(calls.slice(0,2),[
+  ['merge-base','--is-ancestor',base,head],
+  ['merge-base','--is-ancestor',base,'refs/remotes/origin/main']
+ ]);
+ assert.equal(detect({...env,GITHUB_REF:'refs/heads/reviewed-results/evil'},safeGit).mode,'full');
+ assert.equal(detect({...env,DISPATCH_BASE_SHA:'HEAD~1'},safeGit).mode,'full');
+ const untrusted=(program,args)=>{
+  if(args[0]==='merge-base')throw Error('not reachable from main');
+  return Buffer.from('M\0source-results/S30.json\0M\0source-results/manifest.json\0');
+ };
+ assert.equal(detect(env,untrusted).mode,'full');
+ const codeDiff=(program,args)=>args[0]==='merge-base'?Buffer.alloc(0):
+  Buffer.from('M\0source-results/S30.json\0M\0source-results/manifest.json\0M\0scripts/ci-change-scope.cjs\0');
+ assert.equal(detect(env,codeDiff).mode,'full');
+});
