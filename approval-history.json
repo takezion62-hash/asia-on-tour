@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-13T12:27:59.386Z",
+  "reviewedAt": "2026-11-13T12:55:11.304Z",
   "entries": [
     {
       "id": "auto-s43-21408f1d31bc",
@@ -19401,6 +19401,28 @@
       "rule": "https://www.fortnite.com/news/competitive-details-make-your-mark-in-chapter-2-remix",
       "source": "https://www.fortnite.com/competitive/events/S32_SoloVictoryCashCup/?region=ME&round=S32_SoloVictoryCashCup_Event3Round1_ME",
       "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s32-14ce2adc740a",
+      "decision": "published",
+      "recordId": "auto-s32-14ce2adc740a",
+      "policy": "verified-s32-final-100usd-vr",
+      "approvedAt": "2026-11-13T12:55:11.301Z",
+      "approvedBy": "ChatGPT (user-authorized GitHub integration)",
+      "rule": "https://www.fortnite.com/news/competitive-details-make-your-mark-in-chapter-2-remix",
+      "source": "https://www.fortnite.com/competitive/events/S32_SoloVictoryCashCup/?region=ME&round=S32_SoloVictoryCashCup_Event2Round2_ME",
+      "evidence": "Saved Epic-ID Event2 Round2 score and 1VR, independent Liquipedia $100 player record: https://liquipedia.net/fortnite/Nalu/Results"
+    },
+    {
+      "id": "auto-s32-834f7c4de343",
+      "decision": "published",
+      "recordId": "auto-s32-834f7c4de343",
+      "policy": "verified-s32-final-100usd-vr",
+      "approvedAt": "2026-11-13T12:55:11.304Z",
+      "approvedBy": "ChatGPT (user-authorized GitHub integration)",
+      "rule": "https://www.fortnite.com/news/competitive-details-make-your-mark-in-chapter-2-remix",
+      "source": "https://www.fortnite.com/competitive/events/S32_SoloVictoryCashCup/?region=ME&round=S32_SoloVictoryCashCup_Event2Round2_ME",
+      "evidence": "Saved Epic-ID Event2 Round2 score and 1VR, independent Liquipedia $100 player record: https://liquipedia.net/fortnite/Seljuny/Results"
     }
   ]
 }

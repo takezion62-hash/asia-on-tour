@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-13T10:38:51.971Z",
+  "reviewedAt": "2026-11-13T12:55:11.304Z",
   "description": "Resolved historic review candidates: published, duplicate or participation",
   "entries": [
     {
@@ -26706,6 +26706,26 @@
       "source": "https://www.fortnite.com/competitive/events/S32_TriosCashCup/?region=ME&round=S32_TriosCashCup_Event5Round1_ME",
       "policy": "attendance-only",
       "rule": null
+    },
+    {
+      "id": "auto-s32-14ce2adc740a",
+      "decision": "published",
+      "recordId": "auto-s32-14ce2adc740a",
+      "reviewedAt": "2026-11-13T12:55:11.301Z",
+      "policy": "verified-s32-final-100usd-vr",
+      "source": "https://www.fortnite.com/competitive/events/S32_SoloVictoryCashCup/?region=ME&round=S32_SoloVictoryCashCup_Event2Round2_ME",
+      "officialRules": "https://www.fortnite.com/news/competitive-details-make-your-mark-in-chapter-2-remix",
+      "independentEvidence": "https://liquipedia.net/fortnite/Nalu/Results"
+    },
+    {
+      "id": "auto-s32-834f7c4de343",
+      "decision": "published",
+      "recordId": "auto-s32-834f7c4de343",
+      "reviewedAt": "2026-11-13T12:55:11.304Z",
+      "policy": "verified-s32-final-100usd-vr",
+      "source": "https://www.fortnite.com/competitive/events/S32_SoloVictoryCashCup/?region=ME&round=S32_SoloVictoryCashCup_Event2Round2_ME",
+      "officialRules": "https://www.fortnite.com/news/competitive-details-make-your-mark-in-chapter-2-remix",
+      "independentEvidence": "https://liquipedia.net/fortnite/Seljuny/Results"
     }
   ]
 }

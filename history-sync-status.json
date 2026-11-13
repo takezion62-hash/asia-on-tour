@@ -11,7 +11,7 @@
   "provider": "osirion",
   "linkedPlayers": 594,
   "trackedWindows": 2960,
-  "found": 25,
+  "found": 23,
   "skipped": 11,
   "imported": 21,
   "scannedPages": 96,
@@ -20,7 +20,7 @@
   "alreadyRegistered": 4791,
   "autoApprovedTotal": 2446,
   "invalidCachedCandidates": 1,
-  "manualReviewCandidates": 25,
+  "manualReviewCandidates": 23,
   "autoApprovedCosmeticThisRun": 0,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
@@ -47,10 +47,10 @@
     "S30_Reload",
     "S30_ReloadZB"
   ],
-  "message": "最新版と安全統合：新規掲載21件、重複スキップ0件、要確認の競合0件、確認待ち40件。既存の戦績・賞金は保持。",
-  "manuallyPublished": 1484,
+  "message": "2024年11月ME Solo Victory Cup決勝2件、1VR=$100を独立資料で確認して追加。既存成績は変更なし。",
+  "manuallyPublished": 1486,
   "manuallyResolvedDuplicates": 153,
-  "lastReviewedBatchAt": "2026-11-13T10:38:51.971Z",
+  "lastReviewedBatchAt": "2026-11-13T12:55:11.304Z",
   "manuallyCorrected": 4,
   "lastCorrectedReviewAt": "2026-11-07T09:14:30.244Z",
   "concurrentMerge": {
@@ -263,12 +263,11 @@
     "unrealTeamsWithCash": 2
   },
   "latestManualReview": {
-    "reviewedAt": "2026-11-13T03:10:45.250Z",
-    "reviewedCandidates": 37,
-    "published": 36,
-    "duplicatesResolved": 1,
-    "remainingPending": 0,
-    "policy": "Epic-ID and original mature ranked checkpoint, official C5S3/C5S4 qualifier cutoffs, no inferred awards"
+    "reviewedAt": "2026-11-13T12:55:11.304Z",
+    "reviewedCandidates": 2,
+    "published": 2,
+    "remainingPending": 23,
+    "policy": "Exact Epic ID + official $100/VR rules + independent historical payouts"
   },
   "autoApprovedDuoQualifierThisRun": 1,
   "latestParticipationReview": {
