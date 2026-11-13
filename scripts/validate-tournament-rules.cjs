@@ -27,6 +27,22 @@ function validateRegistry(doc,tournaments){
   if(!url||url.protocol!=='https:'||!URL_HOSTS.has(url.hostname)||url.username||url.password||url.hash)fail(id,'Epic公式規則URLが不正');
   if(!object(rule.matchCaps)||!Object.keys(rule.matchCaps).length||
      Object.entries(rule.matchCaps).some(([name,value])=>!['予選','賞金決勝','スキン大会','単一ラウンド','Performance決勝'].includes(name)||!positive(value)||value>40))fail(id,'公式試合数上限が不正');
+  // Unify old NA with NAC only for individually verified event/window IDs.
+  // Any other NA or NAC conversion remains forbidden by default.
+  if(rule.verifiedLegacyNacWindow!==undefined){
+   const approved={
+    'ch5s3-solo-victory-cup':{
+     dateJst:'2024-07-23',windowId:'S30_SoloVictoryCashCup_Event6Round1_NAC',
+     cutoff:5000,source:'https://fortnitetracker.com/events/epicgames_S30_SoloVictoryCashCup_NAC?page=1&window=S30_SoloVictoryCashCup_Event6Round1_NAC'},
+    'ch5s5-solo-victory-cup':{
+     dateJst:'2024-11-16',windowId:'S32_SoloVictoryCashCup_Event2Round1_NAC',
+     cutoff:10000,source:'https://fortnitetracker.com/events/epicgames_S32_SoloVictoryCashCup_NAC?page=9&window=S32_SoloVictoryCashCup_Event2Round1_NAC'}
+   }[id];
+   if(!approved||!object(rule.verifiedLegacyNacWindow)||
+     Object.keys(rule.verifiedLegacyNacWindow).sort().join(',')!=='cutoff,dateJst,source,windowId'||
+     Object.keys(approved).some(k=>rule.verifiedLegacyNacWindow[k]!==approved[k]))
+     fail(id,'2024年NA Centralの個別検証済み開催枠以外の地域対応は不可');
+  }
   if(rule.series==='victory-cup'){
    if(!positive(rule.matchCaps?.['予選'])||!positive(rule.matchCaps?.['賞金決勝']))fail(id,'Victory Cupの予選/決勝試合数上限が不足');
    if(!object(rule.advance)||!Object.keys(rule.advance).length||
