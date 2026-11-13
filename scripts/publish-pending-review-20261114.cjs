@@ -75,6 +75,6 @@ const report={
 if(!dry&&(plan.published.length||plan.duplicates.length)){
  writeReviewDb(ROOT,plan.next);
  fs.writeFileSync(path.join(ROOT,'history-sync-reviewed.json'),
-  JSON.stringify(plan.next.reviewed,null,2)+'\\n');
+  JSON.stringify(plan.next.reviewed,null,2)+'\n');
 }
 console.log('PENDING_REVIEW_20261114 '+JSON.stringify(report));
