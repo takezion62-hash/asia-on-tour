@@ -111,6 +111,8 @@ jobs:
         run: node scripts/apply-s28-me-zb-duos-20240120-20240212.cjs --dry-run
       - name: 2023/10/23・12/16 ME S26/S28 ZB Duos Victory Cup：10組の本人ID・賞金・重複を照合（書込なし）
         run: node scripts/apply-s26-s28-me-zb-duos-2023.cjs --dry-run
+      - name: 2026/11/14 確認待ち21件：既存のEpic本人ID・成熟した順位表・重複を一括照合
+        run: node scripts/publish-pending-review-20261114.cjs --dry-run
       - name: 2024/11/16 ME Solo決勝：公式Epic ID・独立した賞金根拠を照合（書込なし）
         run: node scripts/publish-verified-s32-me-vcup-20241116.cjs --dry-run
       - name: 2024 ME/NAC Solo VC残り11件：公式Epic ID・決勝出場・NAC突破条件・0VR報酬を照合
