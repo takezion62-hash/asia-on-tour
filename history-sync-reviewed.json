@@ -27009,10 +27009,10 @@
       "id": "auto-s43-08f4dbe1293e",
       "decision": "published",
       "recordId": "auto-s43-08f4dbe1293e",
-      "reviewedAt": "2026-11-13T22:26:01.028Z",
+      "reviewedAt": "2026-11-13T23:09:38.069Z",
       "source": "https://www.fortnite.com/competitive/events/S43_ReloadZBDuosCashCup/?region=OCE&round=S43_ReloadZBDuosCashCup_Event1Round2_OCE",
-      "policy": "attendance-only",
-      "rule": null
+      "policy": "verified-nov14-pending-cash",
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-zero-build-reload-cash-cups-chapter-7-mini-season-official-rules"
     },
     {
       "id": "auto-s33-10328c7e715b",
@@ -27354,6 +27354,39 @@
       "source": "https://www.fortnite.com/competitive/events/S33_SoloCashCup/?region=NAW&round=S33_SoloCashCup_Event4Round2_NAW",
       "policy": "attendance-only",
       "rule": null
+    },
+    {
+      "id": "auto-s32-eb755a2d9ea4",
+      "decision": "published",
+      "recordId": "auto-s32-eb755a2d9ea4",
+      "reviewedAt": "2026-11-13T23:09:38.069Z",
+      "source": "https://www.fortnite.com/competitive/events/S32_SoloVictoryCashCup/?region=NAC&round=S32_SoloVictoryCashCup_Event3Round2_NAC",
+      "policy": "verified-nov14-pending-cash",
+      "rule": "https://www.fortnite.com/news/competitive-details-make-your-mark-in-chapter-2-remix"
+    },
+    {
+      "id": "auto-s42-020f0ae10c3b",
+      "decision": "already-published",
+      "existingId": "s42-naw-hamikuma-br-trios-skin-20261025-kusachan-rurumaru-nijiirobeta",
+      "reviewedAt": "2026-11-13T23:09:57.300Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_HamiKumaCup/?region=NAW&round=S42_HamiKumaCup_NAW",
+      "evidence": "Epic mature leaderboard + earlier user Tracker screenshot + independently published Fortnite.gg rank 46 (Epic queue rank 45 differs by one; original Tracker score/skin kept). https://fortnite.gg/events/epicgames_S42_HamiKumaCup_NAW"
+    },
+    {
+      "id": "auto-s42-8edeaf466d81",
+      "decision": "already-published",
+      "existingId": "s42-naw-hamikuma-br-trios-skin-20261025-hiro-fisker-kereyushi",
+      "reviewedAt": "2026-11-13T23:09:57.300Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_HamiKumaCup/?region=NAW&round=S42_HamiKumaCup_NAW",
+      "evidence": "Epic mature leaderboard + earlier user Tracker screenshot + independently published Fortnite.gg rank 55 (Epic queue rank 54 differs by one; original Tracker score/skin kept). https://fortnite.gg/events/epicgames_S42_HamiKumaCup_NAW"
+    },
+    {
+      "id": "auto-s42-86bfaeeec308",
+      "decision": "already-published",
+      "existingId": "s42-naw-hamikuma-br-trios-skin-20261025-minto-alpha-miteru",
+      "reviewedAt": "2026-11-13T23:09:57.300Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_HamiKumaCup/?region=NAW&round=S42_HamiKumaCup_NAW",
+      "evidence": "Epic mature leaderboard + earlier user Tracker screenshot + independently published Fortnite.gg rank 57 (Epic queue rank 56 differs by one; original Tracker score/skin kept). https://fortnite.gg/events/epicgames_S42_HamiKumaCup_NAW"
     }
   ]
 }

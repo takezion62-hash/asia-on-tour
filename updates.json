@@ -2,6 +2,67 @@
   "version": 1,
   "entries": [
     {
+      "id": "review-publication-pending-20261114-bcb0d87fd10c-verified-rule-1",
+      "date": "2026-11-14",
+      "type": "records",
+      "title": "管理者確認済み戦績 3件を追加",
+      "description": "公式規則に基づく予選突破または決勝0VRのみを確認。未確認賞金なし。",
+      "recordIds": [
+        "auto-s32-9916ca6a90eb",
+        "auto-s32-38e8c096ed16",
+        "auto-s32-b5954fb67dd2"
+      ]
+    },
+    {
+      "id": "review-publication-pending-20261114-bcb0d87fd10c-attendance-only-2",
+      "date": "2026-11-14",
+      "type": "records",
+      "title": "管理者確認済み戦績 1件を追加",
+      "description": "Epic ID・開催枠・順位表を再照合した出場確認のみ。賞金・予選突破・スキン獲得を未認定。",
+      "recordIds": [
+        "auto-s33-495ada7f1f27"
+      ]
+    },
+    {
+      "id": "review-publication-pending-20261114-bcb0d87fd10c-attendance-only-1",
+      "date": "2026-11-14",
+      "type": "records",
+      "title": "管理者確認済み戦績 20件を追加",
+      "description": "Epic ID・開催枠・順位表を再照合した出場確認のみ。賞金・予選突破・スキン獲得を未認定。",
+      "recordIds": [
+        "auto-s43-eab16058c5e5",
+        "auto-s33-1d157e3d0cdc",
+        "auto-s33-65b8b55ee25b",
+        "auto-s33-0297c0809957",
+        "auto-s33-eb0d55084b02",
+        "auto-s33-196169583a3e",
+        "auto-s33-e824ce3acd2a",
+        "auto-s33-25f85841cdda",
+        "auto-s33-454572a9d7af",
+        "auto-s30-5f94cde9a4f4",
+        "auto-s30-60fc45a6cf0a",
+        "auto-s30-d885470495e1",
+        "auto-s40-febfe213037b",
+        "auto-s40-b133abb86522",
+        "auto-s42-63a5d645555d",
+        "auto-s33-0a09189f46e5",
+        "auto-s33-c29e48b5f703",
+        "auto-s33-6afdb6570691",
+        "auto-s33-27e6d4d91104",
+        "auto-s33-dfad3d829c64"
+      ]
+    },
+    {
+      "id": "nov14-verified-pending-cash-two",
+      "date": "2026-11-14",
+      "type": "records",
+      "title": "確認待ち2024 Unger + 2026 OCE Reo / bigskyの賞金を検証掲載",
+      "description": "2024 NAC Solo VC決勝1VR＝$100、2026 OCE Reload ZB Duos Cash Cup決勝3位＝選手各$200（チーム$400）。本人ID・公式順位表・独立賞金根拠を照合。過去成績を保持。",
+      "recordIds": [
+        "auto-s32-eb755a2d9ea4"
+      ]
+    },
+    {
       "id": "auto-sync-20261113230517",
       "date": "2026-11-14",
       "type": "records",
@@ -109,7 +170,7 @@
       "date": "2026-11-14",
       "type": "records",
       "title": "公式順位表再検証：予選・決勝・参加実績22件を掲載",
-      "description": "Epic本人ID・大会枠・成熟した保存済み順位表の完全照合。2026 S42予選/決勝0VR、2024公式突破条件、現金賞金未確定の参加記録を分離。未確認の賞金やスキン獲得は推定していない。",
+      "description": "Epic本人ID・大会枠・成熟した保存済み順位表の完全照合。2026 S42予選/決勝0VR、2024公式突破条件、現金賞金未確定の参加記録を分離。未確認の賞金やスキン獲得は推定していない。 後日訂正：bigsky / ReoのOCE決勝3位賞金は各$200（チーム$400）。元のEpic本人IDと独立賞金表で検証し、既存IDをそのまま訂正済み。",
       "recordIds": [
         "auto-s43-08f4dbe1293e",
         "auto-s33-10328c7e715b",

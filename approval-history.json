@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-13T22:58:35.047Z",
+  "reviewedAt": "2026-11-13T23:10:17.661Z",
   "entries": [
     {
       "id": "auto-s43-21408f1d31bc",
@@ -20099,12 +20099,12 @@
       "id": "auto-s43-08f4dbe1293e",
       "decision": "published",
       "recordId": "auto-s43-08f4dbe1293e",
-      "policy": "attendance-only",
-      "approvedAt": "2026-11-13T22:26:01.028Z",
-      "approvedBy": "ChatGPT / owner-authorized verified review",
+      "policy": "verified-nov14-pending-cash",
+      "approvedAt": "2026-11-13T23:09:38.069Z",
+      "approvedBy": "ChatGPT / user-authorized source-verified manual review",
       "source": "https://www.fortnite.com/competitive/events/S43_ReloadZBDuosCashCup/?region=OCE&round=S43_ReloadZBDuosCashCup_Event1Round2_OCE",
-      "rule": null,
-      "evidence": "Exact Epic account and team roster, canonical official event/calendar, ranked checkpoint with continuous mature rows or complete scan; duplicate check"
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-zero-build-reload-cash-cups-chapter-7-mini-season-official-rules",
+      "evidence": "Same original Epic-ID scoreboard; exact event/round and independent award table"
     },
     {
       "id": "auto-s33-10328c7e715b",
@@ -20512,6 +20512,281 @@
       "source": "https://www.fortnite.com/competitive/events/S33_SoloCashCup/?region=NAW&round=S33_SoloCashCup_Event4Round2_NAW",
       "rule": null,
       "evidence": "Exact Epic account and team roster, canonical official event/calendar, ranked checkpoint with continuous mature rows or complete scan; duplicate check"
+    },
+    {
+      "id": "auto-s32-eb755a2d9ea4",
+      "recordId": "auto-s32-eb755a2d9ea4",
+      "decision": "published",
+      "policy": "verified-nov14-pending-cash",
+      "approvedAt": "2026-11-13T23:09:38.069Z",
+      "approvedBy": "ChatGPT / user-authorized source-verified manual review",
+      "source": "https://www.fortnite.com/competitive/events/S32_SoloVictoryCashCup/?region=NAC&round=S32_SoloVictoryCashCup_Event3Round2_NAC",
+      "rule": "https://www.fortnite.com/news/competitive-details-make-your-mark-in-chapter-2-remix",
+      "evidence": "Same original Epic-ID scoreboard; exact event/round and independent award table"
+    },
+    {
+      "id": "auto-s43-eab16058c5e5",
+      "decision": "published",
+      "recordId": "auto-s43-eab16058c5e5",
+      "policy": "attendance-only",
+      "approvedAt": "2026-11-13T23:10:17.661Z",
+      "approvedBy": "ChatGPT / user authorized confirmed-candidate review",
+      "rule": null,
+      "source": "https://www.fortnite.com/competitive/events/S43_ArenaCashCup/?region=ME&round=S43_ArenaCashCup_Event1_ME",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s33-1d157e3d0cdc",
+      "decision": "published",
+      "recordId": "auto-s33-1d157e3d0cdc",
+      "policy": "attendance-only",
+      "approvedAt": "2026-11-13T23:10:17.661Z",
+      "approvedBy": "ChatGPT / user authorized confirmed-candidate review",
+      "rule": null,
+      "source": "https://www.fortnite.com/competitive/events/S33_SoloCashCup/?region=OCE&round=S33_SoloCashCup_Event4Round1_OCE",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s33-65b8b55ee25b",
+      "decision": "published",
+      "recordId": "auto-s33-65b8b55ee25b",
+      "policy": "attendance-only",
+      "approvedAt": "2026-11-13T23:10:17.661Z",
+      "approvedBy": "ChatGPT / user authorized confirmed-candidate review",
+      "rule": null,
+      "source": "https://www.fortnite.com/competitive/events/S33_SoloCashCup/?region=OCE&round=S33_SoloCashCup_Event4Round1_OCE",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s33-0297c0809957",
+      "decision": "published",
+      "recordId": "auto-s33-0297c0809957",
+      "policy": "attendance-only",
+      "approvedAt": "2026-11-13T23:10:17.661Z",
+      "approvedBy": "ChatGPT / user authorized confirmed-candidate review",
+      "rule": null,
+      "source": "https://www.fortnite.com/competitive/events/S33_SoloCashCup/?region=OCE&round=S33_SoloCashCup_Event4Round1_OCE",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s33-eb0d55084b02",
+      "decision": "published",
+      "recordId": "auto-s33-eb0d55084b02",
+      "policy": "attendance-only",
+      "approvedAt": "2026-11-13T23:10:17.661Z",
+      "approvedBy": "ChatGPT / user authorized confirmed-candidate review",
+      "rule": null,
+      "source": "https://www.fortnite.com/competitive/events/S33_SoloCashCup/?region=OCE&round=S33_SoloCashCup_Event4Round1_OCE",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s33-196169583a3e",
+      "decision": "published",
+      "recordId": "auto-s33-196169583a3e",
+      "policy": "attendance-only",
+      "approvedAt": "2026-11-13T23:10:17.661Z",
+      "approvedBy": "ChatGPT / user authorized confirmed-candidate review",
+      "rule": null,
+      "source": "https://www.fortnite.com/competitive/events/S33_SoloCashCup/?region=OCE&round=S33_SoloCashCup_Event4Round1_OCE",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s33-e824ce3acd2a",
+      "decision": "published",
+      "recordId": "auto-s33-e824ce3acd2a",
+      "policy": "attendance-only",
+      "approvedAt": "2026-11-13T23:10:17.661Z",
+      "approvedBy": "ChatGPT / user authorized confirmed-candidate review",
+      "rule": null,
+      "source": "https://www.fortnite.com/competitive/events/S33_SoloCashCup/?region=OCE&round=S33_SoloCashCup_Event4Round1_OCE",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s33-25f85841cdda",
+      "decision": "published",
+      "recordId": "auto-s33-25f85841cdda",
+      "policy": "attendance-only",
+      "approvedAt": "2026-11-13T23:10:17.661Z",
+      "approvedBy": "ChatGPT / user authorized confirmed-candidate review",
+      "rule": null,
+      "source": "https://www.fortnite.com/competitive/events/S33_SoloCashCup/?region=OCE&round=S33_SoloCashCup_Event4Round1_OCE",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s33-454572a9d7af",
+      "decision": "published",
+      "recordId": "auto-s33-454572a9d7af",
+      "policy": "attendance-only",
+      "approvedAt": "2026-11-13T23:10:17.661Z",
+      "approvedBy": "ChatGPT / user authorized confirmed-candidate review",
+      "rule": null,
+      "source": "https://www.fortnite.com/competitive/events/S33_SoloCashCup/?region=OCE&round=S33_SoloCashCup_Event4Round1_OCE",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s30-5f94cde9a4f4",
+      "decision": "published",
+      "recordId": "auto-s30-5f94cde9a4f4",
+      "policy": "attendance-only",
+      "approvedAt": "2026-11-13T23:10:17.661Z",
+      "approvedBy": "ChatGPT / user authorized confirmed-candidate review",
+      "rule": null,
+      "source": "https://www.fortnite.com/competitive/events/S30_DuosCashCupZB/?region=ME&round=S30_DuosCashCupZB_Event4Round1_ME",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s30-60fc45a6cf0a",
+      "decision": "published",
+      "recordId": "auto-s30-60fc45a6cf0a",
+      "policy": "attendance-only",
+      "approvedAt": "2026-11-13T23:10:17.661Z",
+      "approvedBy": "ChatGPT / user authorized confirmed-candidate review",
+      "rule": null,
+      "source": "https://www.fortnite.com/competitive/events/S30_DuosCashCupZB/?region=ME&round=S30_DuosCashCupZB_Event4Round1_ME",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s30-d885470495e1",
+      "decision": "published",
+      "recordId": "auto-s30-d885470495e1",
+      "policy": "attendance-only",
+      "approvedAt": "2026-11-13T23:10:17.661Z",
+      "approvedBy": "ChatGPT / user authorized confirmed-candidate review",
+      "rule": null,
+      "source": "https://www.fortnite.com/competitive/events/S30_DuosCashCupZB/?region=ME&round=S30_DuosCashCupZB_Event4Round1_ME",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s40-febfe213037b",
+      "decision": "published",
+      "recordId": "auto-s40-febfe213037b",
+      "policy": "attendance-only",
+      "approvedAt": "2026-11-13T23:10:17.661Z",
+      "approvedBy": "ChatGPT / user authorized confirmed-candidate review",
+      "rule": null,
+      "source": "https://www.fortnite.com/competitive/events/S40_FNCSDivisionalCup_Division1/?region=NAW&round=S40_FNCSDivisionalCup_Division1_Week1Day2_NAW",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s40-b133abb86522",
+      "decision": "published",
+      "recordId": "auto-s40-b133abb86522",
+      "policy": "attendance-only",
+      "approvedAt": "2026-11-13T23:10:17.661Z",
+      "approvedBy": "ChatGPT / user authorized confirmed-candidate review",
+      "rule": null,
+      "source": "https://www.fortnite.com/competitive/events/S40_FNCSDivisionalCup_Division1/?region=NAW&round=S40_FNCSDivisionalCup_Division1_Week1Day2_NAW",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s42-63a5d645555d",
+      "decision": "published",
+      "recordId": "auto-s42-63a5d645555d",
+      "policy": "attendance-only",
+      "approvedAt": "2026-11-13T23:10:17.661Z",
+      "approvedBy": "ChatGPT / user authorized confirmed-candidate review",
+      "rule": null,
+      "source": "https://www.fortnite.com/competitive/events/S42_EliteKadoThorneCup/?region=EU&round=S42_EliteKadoThorneCup_EU",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s33-0a09189f46e5",
+      "decision": "published",
+      "recordId": "auto-s33-0a09189f46e5",
+      "policy": "attendance-only",
+      "approvedAt": "2026-11-13T23:10:17.661Z",
+      "approvedBy": "ChatGPT / user authorized confirmed-candidate review",
+      "rule": null,
+      "source": "https://www.fortnite.com/competitive/events/S33_SoloCashCup/?region=NAW&round=S33_SoloCashCup_Event5Round1_NAW",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s33-c29e48b5f703",
+      "decision": "published",
+      "recordId": "auto-s33-c29e48b5f703",
+      "policy": "attendance-only",
+      "approvedAt": "2026-11-13T23:10:17.661Z",
+      "approvedBy": "ChatGPT / user authorized confirmed-candidate review",
+      "rule": null,
+      "source": "https://www.fortnite.com/competitive/events/S33_SoloCashCup/?region=NAW&round=S33_SoloCashCup_Event5Round1_NAW",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s33-6afdb6570691",
+      "decision": "published",
+      "recordId": "auto-s33-6afdb6570691",
+      "policy": "attendance-only",
+      "approvedAt": "2026-11-13T23:10:17.661Z",
+      "approvedBy": "ChatGPT / user authorized confirmed-candidate review",
+      "rule": null,
+      "source": "https://www.fortnite.com/competitive/events/S33_SoloCashCup/?region=NAW&round=S33_SoloCashCup_Event5Round1_NAW",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s33-27e6d4d91104",
+      "decision": "published",
+      "recordId": "auto-s33-27e6d4d91104",
+      "policy": "attendance-only",
+      "approvedAt": "2026-11-13T23:10:17.661Z",
+      "approvedBy": "ChatGPT / user authorized confirmed-candidate review",
+      "rule": null,
+      "source": "https://www.fortnite.com/competitive/events/S33_SoloCashCup/?region=NAW&round=S33_SoloCashCup_Event5Round1_NAW",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s33-dfad3d829c64",
+      "decision": "published",
+      "recordId": "auto-s33-dfad3d829c64",
+      "policy": "attendance-only",
+      "approvedAt": "2026-11-13T23:10:17.661Z",
+      "approvedBy": "ChatGPT / user authorized confirmed-candidate review",
+      "rule": null,
+      "source": "https://www.fortnite.com/competitive/events/S33_SoloCashCup/?region=NAW&round=S33_SoloCashCup_Event5Round1_NAW",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s33-495ada7f1f27",
+      "decision": "published",
+      "recordId": "auto-s33-495ada7f1f27",
+      "policy": "attendance-only",
+      "approvedAt": "2026-11-13T23:10:17.661Z",
+      "approvedBy": "ChatGPT / user authorized confirmed-candidate review",
+      "rule": null,
+      "source": "https://www.fortnite.com/competitive/events/S33_SoloCashCup/?region=NAW&round=S33_SoloCashCup_Event5Round1_NAW",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s32-9916ca6a90eb",
+      "decision": "published",
+      "recordId": "auto-s32-9916ca6a90eb",
+      "policy": "verified-rule",
+      "approvedAt": "2026-11-13T23:10:17.661Z",
+      "approvedBy": "ChatGPT / user authorized confirmed-candidate review",
+      "rule": "https://www.fortnite.com/news/competitive-details-make-your-mark-in-chapter-2-remix",
+      "source": "https://www.fortnite.com/competitive/events/S32_SoloVictoryCashCup/?region=NAC&round=S32_SoloVictoryCashCup_Event4Round1_NAC",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s32-38e8c096ed16",
+      "decision": "published",
+      "recordId": "auto-s32-38e8c096ed16",
+      "policy": "verified-rule",
+      "approvedAt": "2026-11-13T23:10:17.661Z",
+      "approvedBy": "ChatGPT / user authorized confirmed-candidate review",
+      "rule": "https://www.fortnite.com/news/competitive-details-make-your-mark-in-chapter-2-remix",
+      "source": "https://www.fortnite.com/competitive/events/S32_SoloVictoryCashCup/?region=NAC&round=S32_SoloVictoryCashCup_Event4Round1_NAC",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s32-b5954fb67dd2",
+      "decision": "published",
+      "recordId": "auto-s32-b5954fb67dd2",
+      "policy": "verified-rule",
+      "approvedAt": "2026-11-13T23:10:17.661Z",
+      "approvedBy": "ChatGPT / user authorized confirmed-candidate review",
+      "rule": "https://www.fortnite.com/news/competitive-details-make-your-mark-in-chapter-2-remix",
+      "source": "https://www.fortnite.com/competitive/events/S32_SoloVictoryCashCup/?region=NAC&round=S32_SoloVictoryCashCup_Event4Round1_NAC",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
     }
   ]
 }
