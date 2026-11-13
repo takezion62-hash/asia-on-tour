@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-12T23:49:14.265Z",
+  "reviewedAt": "2026-11-13T00:25:25.879Z",
   "entries": [
     {
       "id": "auto-s43-21408f1d31bc",
@@ -17223,6 +17223,116 @@
       "rule": null,
       "source": "https://www.fortnite.com/competitive/events/S30_DuosCashCupZB/?region=ME&round=S30_DuosCashCupZB_Event1Round1_ME",
       "evidence": "Original saved Epic-ID leaderboard rank/score, exact official calendar session and source URL; mature and continuous checkpoint; no inferred prize or cosmetic reward"
+    },
+    {
+      "id": "auto-s41-8e950bbbae00",
+      "decision": "published",
+      "recordId": "auto-s41-8e950bbbae00",
+      "approvedAt": "2026-11-13T00:25:25.879Z",
+      "policy": "attendance-only",
+      "approvedBy": "ChatGPT / user-authorized evidence review",
+      "rule": null,
+      "source": "https://www.fortnite.com/competitive/events/S41_PSCupDaysOfPlay/?region=ME&round=S41_PSCupDaysOfPlay_Qualifier_ME",
+      "evidence": "Exact saved Epic account/score, official session and mature contiguous observed leaderboard pages; subsequent HTTP 429 confined to unseen pages; no inferred cash"
+    },
+    {
+      "id": "auto-s30-83bebdb937f0",
+      "decision": "published",
+      "recordId": "auto-s30-83bebdb937f0",
+      "approvedAt": "2026-11-13T00:25:25.879Z",
+      "policy": "attendance-only",
+      "approvedBy": "ChatGPT / user-authorized evidence review",
+      "rule": null,
+      "source": "https://www.fortnite.com/competitive/events/S30_DuosCashCupZB/?region=ME&round=S30_DuosCashCupZB_Event5Round1_ME",
+      "evidence": "Exact saved Epic account/score, official session and mature contiguous observed leaderboard pages; subsequent HTTP 429 confined to unseen pages; no inferred cash"
+    },
+    {
+      "id": "auto-s30-095c1d0edfbc",
+      "decision": "published",
+      "recordId": "auto-s30-095c1d0edfbc",
+      "approvedAt": "2026-11-13T00:25:25.879Z",
+      "policy": "verified-rule",
+      "approvedBy": "ChatGPT / user-authorized evidence review",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event6Round1_NAC",
+      "evidence": "Exact saved Epic account/score, official session and mature contiguous observed leaderboard pages; subsequent HTTP 429 confined to unseen pages; no inferred cash"
+    },
+    {
+      "id": "auto-s30-1483215dfce8",
+      "decision": "published",
+      "recordId": "auto-s30-1483215dfce8",
+      "approvedAt": "2026-11-13T00:25:25.879Z",
+      "policy": "verified-rule",
+      "approvedBy": "ChatGPT / user-authorized evidence review",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event6Round1_NAC",
+      "evidence": "Exact saved Epic account/score, official session and mature contiguous observed leaderboard pages; subsequent HTTP 429 confined to unseen pages; no inferred cash"
+    },
+    {
+      "id": "auto-s31-34d62bd38ec2",
+      "decision": "published",
+      "recordId": "auto-s31-34d62bd38ec2",
+      "approvedAt": "2026-11-13T00:25:25.879Z",
+      "policy": "verified-rule",
+      "approvedBy": "ChatGPT / user-authorized evidence review",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-4-official-rules",
+      "source": "https://www.fortnite.com/competitive/events/S31_SoloVictoryCashCup/?region=ME&round=S31_SoloVictoryCashCup_Event1Round1_ME",
+      "evidence": "Exact saved Epic account/score, official session and mature contiguous observed leaderboard pages; subsequent HTTP 429 confined to unseen pages; no inferred cash"
+    },
+    {
+      "id": "auto-s31-f01a4e37f369",
+      "decision": "published",
+      "recordId": "auto-s31-f01a4e37f369",
+      "approvedAt": "2026-11-13T00:25:25.879Z",
+      "policy": "verified-rule",
+      "approvedBy": "ChatGPT / user-authorized evidence review",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-4-official-rules",
+      "source": "https://www.fortnite.com/competitive/events/S31_SoloVictoryCashCup/?region=ME&round=S31_SoloVictoryCashCup_Event1Round1_ME",
+      "evidence": "Exact saved Epic account/score, official session and mature contiguous observed leaderboard pages; subsequent HTTP 429 confined to unseen pages; no inferred cash"
+    },
+    {
+      "id": "auto-s31-f6b118894425",
+      "decision": "published",
+      "recordId": "auto-s31-f6b118894425",
+      "approvedAt": "2026-11-13T00:25:25.879Z",
+      "policy": "verified-rule",
+      "approvedBy": "ChatGPT / user-authorized evidence review",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-4-official-rules",
+      "source": "https://www.fortnite.com/competitive/events/S31_SoloVictoryCashCup/?region=ME&round=S31_SoloVictoryCashCup_Event1Round1_ME",
+      "evidence": "Exact saved Epic account/score, official session and mature contiguous observed leaderboard pages; subsequent HTTP 429 confined to unseen pages; no inferred cash"
+    },
+    {
+      "id": "auto-s31-a2ff6c3fd5a1",
+      "decision": "published",
+      "recordId": "auto-s31-a2ff6c3fd5a1",
+      "approvedAt": "2026-11-13T00:25:25.879Z",
+      "policy": "verified-rule",
+      "approvedBy": "ChatGPT / user-authorized evidence review",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-4-official-rules",
+      "source": "https://www.fortnite.com/competitive/events/S31_SoloVictoryCashCup/?region=NAC&round=S31_SoloVictoryCashCup_Event2Round2_NAC",
+      "evidence": "Exact saved Epic account/score, official session and mature contiguous observed leaderboard pages; subsequent HTTP 429 confined to unseen pages; no inferred cash"
+    },
+    {
+      "id": "auto-s41-f9685b2de3b7",
+      "decision": "published",
+      "recordId": "auto-s41-f9685b2de3b7",
+      "approvedAt": "2026-11-13T00:25:25.879Z",
+      "policy": "attendance-only",
+      "approvedBy": "ChatGPT / user-authorized evidence review",
+      "rule": null,
+      "source": "https://www.fortnite.com/competitive/events/S41_PSCupDaysOfPlay/?region=NAC&round=S41_PSCupDaysOfPlay_Qualifier_NAC",
+      "evidence": "Exact saved Epic account/score, official session and mature contiguous observed leaderboard pages; subsequent HTTP 429 confined to unseen pages; no inferred cash"
+    },
+    {
+      "id": "auto-s41-39525da1acf5",
+      "decision": "published",
+      "recordId": "auto-s41-39525da1acf5",
+      "approvedAt": "2026-11-13T00:25:25.879Z",
+      "policy": "attendance-only",
+      "approvedBy": "ChatGPT / user-authorized evidence review",
+      "rule": null,
+      "source": "https://www.fortnite.com/competitive/events/S41_PSCupDaysOfPlay/?region=NAC&round=S41_PSCupDaysOfPlay_Qualifier_NAC",
+      "evidence": "Exact saved Epic account/score, official session and mature contiguous observed leaderboard pages; subsequent HTTP 429 confined to unseen pages; no inferred cash"
     }
   ]
 }

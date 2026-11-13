@@ -2,6 +2,25 @@
   "version": 1,
   "entries": [
     {
+      "id": "pending-evidence-continuation-20261113",
+      "date": "2026-11-13",
+      "type": "records",
+      "title": "保留候補の再検証：10件を追加、既掲載重複5件を整理",
+      "description": "大会終了後の連続取得済みEpic本人ID順位表で確認できた部分だけを使用。未取得後続ページは429により保留したまま。予選公式基準・決勝0VR・参加確認を区別し、現金賞金・スキンを推定せず、既存のTracker順位を保持。",
+      "recordIds": [
+        "auto-s41-8e950bbbae00",
+        "auto-s30-83bebdb937f0",
+        "auto-s30-095c1d0edfbc",
+        "auto-s30-1483215dfce8",
+        "auto-s31-34d62bd38ec2",
+        "auto-s31-f01a4e37f369",
+        "auto-s31-f6b118894425",
+        "auto-s31-a2ff6c3fd5a1",
+        "auto-s41-f9685b2de3b7",
+        "auto-s41-39525da1acf5"
+      ]
+    },
+    {
       "id": "pending-evidence-verified-20261113",
       "date": "2026-11-13",
       "type": "records",
