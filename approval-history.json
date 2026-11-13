@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-13T09:02:23.968Z",
+  "reviewedAt": "2026-11-13T09:11:26.337Z",
   "entries": [
     {
       "id": "auto-s43-21408f1d31bc",
@@ -18532,6 +18532,17 @@
       "approvedAt": "2026-11-13T09:02:23.968Z",
       "approvedBy": "ChatGPT / owner-authorized verified historical review",
       "evidence": "Exact saved Epic account+team IDs, event, official session calendar, original ranking/VR score and tournament-specific payout/advancement rules"
+    },
+    {
+      "id": "auto-s32-a8360ecd3a9e",
+      "decision": "published",
+      "recordId": "auto-s32-a8360ecd3a9e",
+      "policy": "verified-rule",
+      "approvedAt": "2026-11-13T09:11:26.337Z",
+      "approvedBy": "takezion62-hash",
+      "rule": "https://www.fortnite.com/news/competitive-details-make-your-mark-in-chapter-2-remix",
+      "source": "https://www.fortnite.com/competitive/events/S32_SoloVictoryCashCup/?region=NAC&round=S32_SoloVictoryCashCup_Event2Round1_NAC",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
     }
   ]
 }
