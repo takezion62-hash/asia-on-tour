@@ -289,13 +289,28 @@ jobs:
           git switch -c "$BRANCH"
           git commit -m "review: evidence-backed batch $AOT_REQUEST_ID"
           git push -u origin "$BRANCH"
-          PR_URL="$(gh pr create --repo "$GITHUB_REPOSITORY" --base main --head "$BRANCH" --title "Review: fast verified overseas results ($AOT_REQUEST_ID)" --body-file .batch-review-summary.md)"
-          echo "Created: $PR_URL" >> "$GITHUB_STEP_SUMMARY"
-          # A GITHUB_TOKEN PR does not launch normal pull_request CI.
-          # workflow_dispatch is explicitly permitted. Unknown diffs get full CI.
-          gh workflow run tests.yml --repo "$GITHUB_REPOSITORY" --ref "$BRANCH" -f "review_base_sha=$AOT_REQUEST_BASE"
-          echo "Required CI explicitly dispatched for $BRANCH" >> "$GITHUB_STEP_SUMMARY"
-          echo "AOT_FAST_REQUEST published-pr=$PR_URL"
+          # Prefer Actions PR creation when repository settings permit it.
+          # When disabled, keep the verified branch and hand off only PR creation
+          # to the connected GitHub App (which also triggers normal pull_request CI).
+          PR_ERR="$(mktemp)"
+          if PR_URL="$(gh pr create --repo "$GITHUB_REPOSITORY" --base main --head "$BRANCH" --title "Review: fast verified overseas results ($AOT_REQUEST_ID)" --body-file .batch-review-summary.md 2>"$PR_ERR")"; then
+            echo "Created: $PR_URL" >> "$GITHUB_STEP_SUMMARY"
+            # GITHUB_TOKEN-created PRs do not launch normal pull_request CI.
+            gh workflow run tests.yml --repo "$GITHUB_REPOSITORY" --ref "$BRANCH" -f "review_base_sha=$AOT_REQUEST_BASE"
+            echo "Required CI explicitly dispatched for $BRANCH" >> "$GITHUB_STEP_SUMMARY"
+            echo "AOT_FAST_REQUEST published-pr=$PR_URL"
+          elif grep -q 'GitHub Actions is not permitted to create or approve pull requests' "$PR_ERR"; then
+            echo "::warning::GitHub Actions cannot create PRs with current repository settings; verified result branch is preserved."
+            echo "### Connected GitHub App PR handoff" >> "$GITHUB_STEP_SUMMARY"
+            echo "- Review branch: \`$BRANCH\`" >> "$GITHUB_STEP_SUMMARY"
+            echo "- Open PR via connected GitHub App: https://github.com/$GITHUB_REPOSITORY/compare/main...$BRANCH?expand=1" >> "$GITHUB_STEP_SUMMARY"
+            echo "- Its pull_request event must pass required CI before merging; never publish directly to main." >> "$GITHUB_STEP_SUMMARY"
+            echo "AOT_FAST_REQUEST app-pr-needed=$BRANCH"
+          else
+            cat "$PR_ERR" >&2
+            exit 1
+          fi
+          rm -f "$PR_ERR"
       - name: Preserve review evidence and elapsed substage timings
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
