@@ -2,8 +2,8 @@
   "version": 1,
   "role": "generated canonical-source snapshot; results.json remains authoritative in phase 1",
   "canonicalFile": "results.json",
-  "canonicalSha256": "26745c0e51d78f13493c9553b2505550fc93f687a349441f2cece8f5584049ab",
-  "count": 6590,
+  "canonicalSha256": "375b0ff2dbd9133a80d93ad46c0b884fa9183764e5bbae4ed1b4fca863d509a8",
+  "count": 6612,
   "teamPrizeCents": 6042000,
   "unconfirmedPrizeRecords": 987,
   "personalPrizeCents": 6022000,
@@ -6597,7 +6597,29 @@
     "auto-s42-71fb3daef71c",
     "auto-s42-81b9a810ec87",
     "auto-s42-ff8d6ea9844f",
-    "auto-s42-5dcb4a64ada5"
+    "auto-s42-5dcb4a64ada5",
+    "auto-s32-f3f3b6304f67",
+    "auto-s32-7d1372a21c25",
+    "auto-s32-c0a9e01b98f2",
+    "auto-s32-aa680b698439",
+    "auto-s31-38de03a8951f",
+    "auto-s31-057f193c8a54",
+    "auto-s31-23230b2b5dd2",
+    "auto-s31-cbd81360cc60",
+    "auto-s31-8141dedb7a65",
+    "auto-s32-196f6341fd78",
+    "auto-s32-24241ad178c0",
+    "auto-s32-5b1fd42be1ae",
+    "auto-s32-71e4a4e9fd16",
+    "auto-s32-9c95d7077e36",
+    "auto-s32-7f01017d060f",
+    "auto-s32-0bea68b8b4ad",
+    "auto-s32-e57dffe96b98",
+    "auto-s32-3216390b7ea5",
+    "auto-s32-39f6bc320f96",
+    "auto-s32-08f9e013c454",
+    "auto-s32-ed71624afc23",
+    "auto-s32-9b7d914e5484"
   ],
   "shards": [
     {
@@ -6648,20 +6670,20 @@
     {
       "seasonId": "S31",
       "file": "source-results/S31.json",
-      "count": 1037,
+      "count": 1042,
       "teamPrizeCents": 1070000,
       "unconfirmedPrizeRecords": 44,
       "personalPrizeCents": 1070000,
-      "sha256": "ad31b2a758d5a3024a6c551fa51f42103acd565f6e7803ce1fc4ffded9281dcf"
+      "sha256": "d228766ccabb1b3c339893f75c07a9d89b257ba2fd6c32b800eb08d625738ca4"
     },
     {
       "seasonId": "S32",
       "file": "source-results/S32.json",
-      "count": 90,
+      "count": 107,
       "teamPrizeCents": 450000,
       "unconfirmedPrizeRecords": 10,
       "personalPrizeCents": 450000,
-      "sha256": "1b058021ef6831f5ff6eef7f35273a42343c7eaf244a63e3b1874cb0e8028ba3"
+      "sha256": "f89f34805490ffd9a961e061845aa8c1e24b8402edc5bd19a2656a26c1ef1762"
     },
     {
       "seasonId": "S33",

@@ -1,7 +1,7 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-13T09:06:16.809Z",
+  "checkedAt": "2026-11-13T09:42:06.451Z",
   "mode": "review",
   "scope": "history",
   "dateMode": "rolling",
@@ -11,36 +11,27 @@
   "provider": "osirion",
   "linkedPlayers": 592,
   "trackedWindows": 2960,
-  "found": 9,
-  "skipped": 17,
-  "imported": 20,
+  "found": 34,
+  "skipped": 9,
+  "imported": 22,
   "scannedPages": 96,
-  "completedWindows": 472,
+  "completedWindows": 476,
   "identityConflicts": 3,
-  "alreadyRegistered": 4710,
-  "autoApprovedTotal": 2402,
+  "alreadyRegistered": 4749,
+  "autoApprovedTotal": 2425,
   "invalidCachedCandidates": 1,
-  "manualReviewCandidates": 9,
+  "manualReviewCandidates": 34,
   "autoApprovedCosmeticThisRun": 0,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
   "autoApprovedUnrealThisRun": 0,
   "timeLimitReached": false,
-  "retryWindows": 7,
+  "retryWindows": 6,
   "transientFailures": 0,
-  "malformedFailures": 1,
-  "skippedLeaderboards": [
-    {
-      "window": "epicgames_S42_SoloVictoryCup_OCE/S42_SoloVictoryCup_Event1Round2_OCE",
-      "page": 0,
-      "attempt": 6,
-      "code": "OSIRION_INVALID_LEADERBOARD",
-      "reason": "大会順位表のID/形式が不正 [epicgames_S42_SoloVictoryCup_OCE/S42_SoloVictoryCup_Event1Round2_OCE page=0]: totalPages=0",
-      "retryAfter": "2026-11-15T09:04:59.639Z"
-    }
-  ],
+  "malformedFailures": 0,
+  "skippedLeaderboards": [],
   "reviewOnlyWindows": 1328,
-  "reviewOnlyCandidates": 1,
+  "reviewOnlyCandidates": 22,
   "unmappedEvents": 239,
   "unmappedEventIds": [
     "S30_ConsoleCashCups",
@@ -56,29 +47,29 @@
     "S30_Reload",
     "S30_ReloadZB"
   ],
-  "message": "2024年公式現金賞金0件、完全一致の既存スキン戦績との重複6件を整理。残り9件は順位差等を保留。",
+  "message": "最新版と安全統合：新規掲載22件、重複スキップ0件、要確認の競合0件、確認待ち34件。既存の戦績・賞金は保持。",
   "manuallyPublished": 1464,
   "manuallyResolvedDuplicates": 153,
   "lastReviewedBatchAt": "2026-11-13T09:38:33.124Z",
   "manuallyCorrected": 4,
   "lastCorrectedReviewAt": "2026-11-07T09:14:30.244Z",
   "concurrentMerge": {
-    "appended": 20,
+    "appended": 22,
     "alreadyPublished": 0,
     "reviewConflicts": 0,
     "keptPending": 34,
-    "reconciledAt": "2026-11-13T09:06:29.884Z"
+    "reconciledAt": "2026-11-13T09:42:19.432Z"
   },
   "coverage": {
     "total": 2960,
-    "completed": 472,
-    "notStarted": 2333,
-    "partial": 148,
+    "completed": 476,
+    "notStarted": 2327,
+    "partial": 151,
     "retryWaiting": 6,
-    "retryDue": 1,
-    "remaining": 2488,
-    "retryCount": 7,
-    "completionPercent": 15.9,
+    "retryDue": 0,
+    "remaining": 2484,
+    "retryCount": 6,
+    "completionPercent": 16.1,
     "byRegion": {
       "OCE": {
         "total": 522,
@@ -87,8 +78,8 @@
       },
       "ME": {
         "total": 518,
-        "completed": 150,
-        "pending": 368
+        "completed": 153,
+        "pending": 365
       },
       "EU": {
         "total": 538,
@@ -107,40 +98,29 @@
       },
       "NAW": {
         "total": 327,
-        "completed": 63,
-        "pending": 264
+        "completed": 64,
+        "pending": 263
       }
     },
     "byYear": {
       "2024": {
         "total": 974,
-        "completed": 124,
-        "pending": 850
+        "completed": 126,
+        "pending": 848
       },
       "2025": {
         "total": 690,
-        "completed": 55,
-        "pending": 635
+        "completed": 56,
+        "pending": 634
       },
       "2026": {
         "total": 1296,
-        "completed": 293,
-        "pending": 1003
+        "completed": 294,
+        "pending": 1002
       }
     },
     "outsideScopeCheckpoints": 0,
     "samples": [
-      {
-        "window": "epicgames_S41_PSCupDaysOfPlay_NAC/S41_PSCupDaysOfPlay_Qualifier_NAC",
-        "date": "2026-06-08",
-        "region": "NAC",
-        "series": "playstation-cup",
-        "status": "retryDue",
-        "nextPage": 1,
-        "totalPages": 100,
-        "retryAfter": "2026-11-13T05:26:38.322Z",
-        "errorCode": "OSIRION_TRANSIENT"
-      },
       {
         "window": "epicgames_S42_SoloVictoryCup_OCE/S42_SoloVictoryCup_Event1Round1_OCE",
         "date": "2026-09-05",
@@ -259,6 +239,17 @@
         "status": "partial",
         "nextPage": 2,
         "totalPages": 100,
+        "retryAfter": null,
+        "errorCode": null
+      },
+      {
+        "window": "epicgames_S30_SoloVictoryCashCup_NAC/S30_SoloVictoryCashCup_Event1Round2_NAC",
+        "date": "2024-06-04",
+        "region": "NAC",
+        "series": "victory-cup",
+        "status": "partial",
+        "nextPage": 2,
+        "totalPages": 48,
         "retryAfter": null,
         "errorCode": null
       }
