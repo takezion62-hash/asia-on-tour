@@ -1,0 +1,78 @@
+{
+  "version": 1,
+  "batch": {
+    "id": "tracker-s30-me-zb-duos-final-20240621",
+    "date": "2024-06-21",
+    "region": "ME",
+    "tournamentId": "ch5s3-zb-duos-cash",
+    "seasonId": "S30",
+    "eventId": "S30_DuosCashCupZB",
+    "windowId": "S30_DuosCashCupZB_Event3Round2_ME",
+    "source": "https://fortnitetracker.com/events/epicgames_S30_DuosCashCupZB_ME?window=S30_DuosCashCupZB_Event3Round2_ME",
+    "ruleUrl": "https://www.fortnite.com/news/duos-cash-cups-chapter-5-season-3-official-rules",
+    "cashCutoff": 25,
+    "note": "ユーザー提供2026-11-13 Fortnite Tracker ME 2024-06-21 ZB Duos Cash Cup Event3 Round2最終順位3枚・両選手のTracker本人プロフィールID。順位13=チーム$200/各$100、順位26/35=公式上位25組賞金圏外$0。既存13位は賞金未確定から訂正、未掲載2組は別IDで追加。",
+    "teams": [
+      {
+        "rank": 13,
+        "points": 165,
+        "kills": 9,
+        "vrs": 1,
+        "matches": 6,
+        "teamPrize": 200,
+        "members": [
+          {
+            "name": "MMC KAAN BABA",
+            "raw": "MMC KAAN BABA",
+            "url": "https://fortnitetracker.com/profile/all/MMC%20KAAN%20BABA/events?id=2bf3a503-80fa-49ff-a655-2c23c2e384cf"
+          },
+          {
+            "name": "みるやちぇ",
+            "raw": "みるやちぇ",
+            "url": "https://fortnitetracker.com/profile/all/%E3%81%BF%E3%82%8B%E3%82%84%E3%81%A1%E3%81%87/events?id=dd786061-211a-46fb-b849-4687e32189b9"
+          }
+        ]
+      },
+      {
+        "rank": 26,
+        "points": 98,
+        "kills": 6,
+        "vrs": 0,
+        "matches": 6,
+        "teamPrize": 0,
+        "members": [
+          {
+            "name": "るかぽりん",
+            "raw": "しょうきurzb",
+            "url": "https://fortnitetracker.com/profile/all/%E3%81%97%E3%82%87%E3%81%86%E3%81%8Durzb/events?id=968ebdb8-0fa4-4b94-8558-a66766fb6141"
+          },
+          {
+            "name": "かわあと",
+            "raw": "Blue_P かわあと",
+            "url": "https://fortnitetracker.com/profile/all/Blue_P%20%E3%81%8B%E3%82%8F%E3%81%82%E3%81%A8/events?id=af2b53e2-556f-4fa3-9330-38f439bee18a"
+          }
+        ]
+      },
+      {
+        "rank": 35,
+        "points": 30,
+        "kills": 0,
+        "vrs": 0,
+        "matches": 4,
+        "teamPrize": 0,
+        "members": [
+          {
+            "name": "なずな",
+            "raw": "TsV なずねぎ",
+            "url": "https://fortnitetracker.com/profile/all/TsV%20%E3%81%AA%E3%81%9A%E3%81%AD%E3%81%8E/events?id=801068c3-cddd-4d65-8d56-8722a9d253e4"
+          },
+          {
+            "name": "R10 ⒶⓁⓅⒽⒶ",
+            "raw": "R10 ⒶⓁⓅⒽⒶ",
+            "url": "https://fortnitetracker.com/profile/all/R10%20%E2%92%B6%E2%93%81%E2%93%85%E2%92%BD%E2%92%B6/events?id=b1c907cc-3e7a-4891-bf99-c7155fed87b1"
+          }
+        ]
+      }
+    ]
+  }
+}

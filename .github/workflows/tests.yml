@@ -103,6 +103,8 @@ jobs:
         run: node scripts/apply-s30-me-zb-duos-cash-20240607.cjs --dry-run
       - name: 2024/6/7 ME ZB Duos Cash Cup賞金圏外3組の本人・重複・賞金ゼロを照合（書込なし）
         run: node scripts/apply-s30-me-zb-duos-nonprize-20240607.cjs --dry-run
+      - name: 2024/6/21 ME ZB Duos Cash Cup：13位賞金訂正・26/35位の賞金ゼロ・本人IDと重複検証
+        run: node scripts/apply-s30-me-zb-duos-20240621.cjs --dry-run
       - name: 2024/11/16 ME Solo決勝：公式Epic ID・独立した賞金根拠を照合（書込なし）
         run: node scripts/publish-verified-s32-me-vcup-20241116.cjs --dry-run
       - name: 2024 ME/NAC Solo VC残り11件：公式Epic ID・決勝出場・NAC突破条件・0VR報酬を照合
