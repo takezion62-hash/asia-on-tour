@@ -167,3 +167,52 @@ test('S42 Console ZB Solo Round 2 pays $0 for verified 0VR and $100 for 1VR',()=
  const one={...x,vrs:1};assert.equal(decide(one,w2,{complete:true,proposals:[one]},db).record.prize,100);
  assert.equal(decide({...x,matches:4},w2,{complete:true,proposals:[{...x,matches:4}]},db).approved,false);
 });
+
+test('S32 Remix ME saved partial zero-VR final is $0, while unknown positive cash stays pending',()=>{
+ const win={eventId:'S32_SoloVictoryCashCup',windowId:'S32_SoloVictoryCashCup_Event2Round2_ME',
+  region:'ME',seasonId:'S32',tournamentId:'ch5s5-solo-victory-cup',
+  dateJst:'2024-11-16',end:Date.parse('2024-11-16T06:00:00Z'),
+  kind:'賞金決勝',round:'Event 2 · Round 2 / 賞金決勝'};
+ const item={id:win.tournamentId,seasonId:'S32',team:'solo',series:'victory-cup',
+  sourceEventIds:[win.eventId],name:'Solo Victory Cup Battle Royale'};
+ const player={id:'auto-s32-123456789012',date:win.dateJst,region:'ME',seasonId:'S32',
+  tournamentId:win.tournamentId,kind:win.kind,round:win.round,
+  player:'Mofu',rank:211,points:0,kills:6,vrs:0,matches:3,prize:null,
+  verified:true,source:source(win)};
+ const scan={complete:false,rankingOrderValid:true,proposals:[player],nextPage:3,
+  pages:3,totalPages:18,lastSeenRank:230,lastSuccessAt:'2024-11-17T00:00:00.000Z',
+  emptyAttempts:0,lastErrorCode:null,lastError:null,retryAfter:null};
+ const db={players:{candidates:[{name:'Mofu'}]},tournaments:{catalog:[item]},results:[]};
+ const accepted=decide(player,win,scan,db);
+ assert.equal(accepted.approved,true);
+ assert.equal(accepted.record.prize,0);
+ assert.equal(decide({...player,vrs:1},win,scan,db).approved,false);
+ assert.equal(decide({...player,region:'NAC'},win,scan,db).approved,false);
+});
+
+test('only individually verified 2024 NA Central qualifier windows can use NA cutoffs',()=>{
+ const scenarios=[
+  ['S30','ch5s3-solo-victory-cup','S30_SoloVictoryCashCup','2024-07-23',6,5000],
+  ['S32','ch5s5-solo-victory-cup','S32_SoloVictoryCashCup','2024-11-16',2,10000]
+ ];
+ for(const [sid,id,eventId,date,event,cutoff] of scenarios){
+  const win={eventId,windowId:eventId+'_Event'+event+'Round1_NAC',region:'NAC',
+   seasonId:sid,tournamentId:id,dateJst:date,kind:'予選',
+   round:'Event '+event+' · Round 1 / 予選'};
+  const rec={id:'auto-'+sid.toLowerCase()+'-123456789012',date,region:'NAC',
+   seasonId:sid,tournamentId:id,kind:'予選',round:win.round,
+   player:'A',rank:cutoff,points:140,kills:3,vrs:0,matches:7,prize:0,
+   verified:true,source:source(win)};
+  const data={players:{candidates:[{name:'A'}]},tournaments:{catalog:[{
+   id,seasonId:sid,team:'solo',series:'victory-cup',sourceEventIds:[eventId]}]},results:[]};
+  const checkpoint={complete:true,proposals:[rec]};
+  const out=decide(rec,win,checkpoint,data);
+  assert.equal(out.approved,true,out.reason);
+  assert.equal(out.record.prize,0);
+  assert.match(out.record.note,/fortnitetracker.com/);
+  assert.equal(decide({...rec,rank:cutoff+1},win,{...checkpoint,proposals:[{...rec,rank:cutoff+1}]},data).approved,false);
+  const otherWin={...win,windowId:eventId+'_Event'+(event+1)+'Round1_NAC'};
+  const otherRec={...rec,source:source(otherWin)};
+  assert.equal(decide(otherRec,otherWin,{...checkpoint,proposals:[otherRec]},data).approved,false);
+ }
+});

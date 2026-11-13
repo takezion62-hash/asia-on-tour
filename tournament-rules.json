@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-11",
+  "updatedAt": "2026-11-13",
   "description": "Epic公式規則で確認した大会ルール。Unreal Cupもチーム順位と確認済みEpic IDを照合し、賞金圏内は地域別チーム/個人賞金を、圏外は$0として自動掲載（本人資格・支払確認とは別）。S36 Console Duos・S43 Reload ZB Duosの公式Round 1上位突破／全参加$0を、本人照合済み結果に限り安全に記録。Round 2賞金は推定しない。S42 Console Zero Build Solo Victory Cupは公式上位通過と決勝VR1回$100を個別登録。",
   "rules": [
     {
@@ -41,7 +41,13 @@
         "ME": 2000,
         "OCE": 2000
       },
-      "source": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules"
+      "source": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
+      "verifiedLegacyNacWindow": {
+        "dateJst": "2024-07-23",
+        "windowId": "S30_SoloVictoryCashCup_Event6Round1_NAC",
+        "cutoff": 5000,
+        "source": "https://fortnitetracker.com/events/epicgames_S30_SoloVictoryCashCup_NAC?page=1&window=S30_SoloVictoryCashCup_Event6Round1_NAC"
+      }
     },
     {
       "id": "ch5s3-zb-solo-victory",
@@ -82,6 +88,32 @@
         "OCE": 1500
       },
       "source": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-4-official-rules"
+    },
+    {
+      "id": "ch5s5-solo-victory-cup",
+      "seasonId": "S32",
+      "eventIds": [
+        "S32_SoloVictoryCashCup"
+      ],
+      "team": "solo",
+      "series": "victory-cup",
+      "matchCaps": {
+        "予選": 7,
+        "賞金決勝": 3
+      },
+      "advance": {
+        "ME": 2000
+      },
+      "prizePerVictory": 100,
+      "source": "https://www.fortnite.com/news/competitive-details-make-your-mark-in-chapter-2-remix",
+      "advanceSource": "https://fortnitetracker.com/events/epicgames_S32_SoloVictoryCashCup_ME?window=S32_SoloVictoryCashCup_Event2Round1_ME",
+      "note": "2024 Chapter 2 Remix: Epic confirms $100 per final win and three final matches. Fortnite Tracker Middle East event details confirm top 2,000 qualifiers. Narrow only ME here; historical North America qualifying applies exclusively to separately verified window records.",
+      "verifiedLegacyNacWindow": {
+        "dateJst": "2024-11-16",
+        "windowId": "S32_SoloVictoryCashCup_Event2Round1_NAC",
+        "cutoff": 10000,
+        "source": "https://fortnitetracker.com/events/epicgames_S32_SoloVictoryCashCup_NAC?page=9&window=S32_SoloVictoryCashCup_Event2Round1_NAC"
+      }
     },
     {
       "id": "ch5s4-zb-solo-victory",
