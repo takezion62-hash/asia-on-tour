@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-13T10:38:51.971Z",
+  "reviewedAt": "2026-11-13T12:27:59.386Z",
   "entries": [
     {
       "id": "auto-s43-21408f1d31bc",
@@ -19236,6 +19236,171 @@
       "source": "https://www.fortnite.com/competitive/events/S30_DuosCashCupZB/?region=ME&round=S30_DuosCashCupZB_Event1Round2_ME",
       "rule": "https://www.fortnite.com/news/duos-cash-cups-chapter-5-season-3-official-rules",
       "evidence": "2024-06-07 ME ZB Duos Event1 Round2 scoreboard rank 29/32/37, noncash; official rules and 2 Tracker account IDs: https://fortnitetracker.com/events/epicgames_S30_DuosCashCupZB_ME?window=S30_DuosCashCupZB_Event1Round2_ME"
+    },
+    {
+      "id": "auto-s30-f1f230b31866",
+      "decision": "published",
+      "recordId": "auto-s30-f1f230b31866",
+      "policy": "attendance-only",
+      "approvedAt": "2026-11-13T12:27:59.386Z",
+      "approvedBy": "takezion62-hash",
+      "rule": null,
+      "source": "https://www.fortnite.com/competitive/events/S30_DuosCashCupZB/?region=ME&round=S30_DuosCashCupZB_Event5Round1_ME",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s30-8989b7dca73f",
+      "decision": "published",
+      "recordId": "auto-s30-8989b7dca73f",
+      "policy": "attendance-only",
+      "approvedAt": "2026-11-13T12:27:59.386Z",
+      "approvedBy": "takezion62-hash",
+      "rule": null,
+      "source": "https://www.fortnite.com/competitive/events/S30_DuosCashCupZB/?region=ME&round=S30_DuosCashCupZB_Event5Round1_ME",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s30-077544fe5f21",
+      "decision": "published",
+      "recordId": "auto-s30-077544fe5f21",
+      "policy": "attendance-only",
+      "approvedAt": "2026-11-13T12:27:59.386Z",
+      "approvedBy": "takezion62-hash",
+      "rule": null,
+      "source": "https://www.fortnite.com/competitive/events/S30_DuosCashCupZB/?region=ME&round=S30_DuosCashCupZB_Event5Round1_ME",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s41-5d471e10a5cd",
+      "decision": "published",
+      "recordId": "auto-s41-5d471e10a5cd",
+      "policy": "attendance-only",
+      "approvedAt": "2026-11-13T12:27:59.386Z",
+      "approvedBy": "takezion62-hash",
+      "rule": null,
+      "source": "https://www.fortnite.com/competitive/events/S41_PSCupDaysOfPlay/?region=ME&round=S41_PSCupDaysOfPlay_Qualifier_ME",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s41-ac1598964733",
+      "decision": "published",
+      "recordId": "auto-s41-ac1598964733",
+      "policy": "attendance-only",
+      "approvedAt": "2026-11-13T12:27:59.386Z",
+      "approvedBy": "takezion62-hash",
+      "rule": null,
+      "source": "https://www.fortnite.com/competitive/events/S41_PSCupDaysOfPlay/?region=ME&round=S41_PSCupDaysOfPlay_Qualifier_ME",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s42-677b19db4594",
+      "decision": "published",
+      "recordId": "auto-s42-677b19db4594",
+      "policy": "attendance-only",
+      "approvedAt": "2026-11-13T12:27:59.386Z",
+      "approvedBy": "takezion62-hash",
+      "rule": null,
+      "source": "https://www.fortnite.com/competitive/events/S42_SlenderManCup/?region=NAW&round=S42_SlenderManCup_NAW",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s30-45743336c176",
+      "decision": "published",
+      "recordId": "auto-s30-45743336c176",
+      "policy": "verified-rule",
+      "approvedAt": "2026-11-13T12:27:59.386Z",
+      "approvedBy": "takezion62-hash",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event6Round1_NAC",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s32-b399116c6d2e",
+      "decision": "published",
+      "recordId": "auto-s32-b399116c6d2e",
+      "policy": "verified-rule",
+      "approvedAt": "2026-11-13T12:27:59.386Z",
+      "approvedBy": "takezion62-hash",
+      "rule": "https://www.fortnite.com/news/competitive-details-make-your-mark-in-chapter-2-remix",
+      "source": "https://www.fortnite.com/competitive/events/S32_SoloVictoryCashCup/?region=ME&round=S32_SoloVictoryCashCup_Event3Round1_ME",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s32-12e311d9fcce",
+      "decision": "published",
+      "recordId": "auto-s32-12e311d9fcce",
+      "policy": "verified-rule",
+      "approvedAt": "2026-11-13T12:27:59.386Z",
+      "approvedBy": "takezion62-hash",
+      "rule": "https://www.fortnite.com/news/competitive-details-make-your-mark-in-chapter-2-remix",
+      "source": "https://www.fortnite.com/competitive/events/S32_SoloVictoryCashCup/?region=ME&round=S32_SoloVictoryCashCup_Event3Round1_ME",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s32-7ab37c96b4c1",
+      "decision": "published",
+      "recordId": "auto-s32-7ab37c96b4c1",
+      "policy": "verified-rule",
+      "approvedAt": "2026-11-13T12:27:59.386Z",
+      "approvedBy": "takezion62-hash",
+      "rule": "https://www.fortnite.com/news/competitive-details-make-your-mark-in-chapter-2-remix",
+      "source": "https://www.fortnite.com/competitive/events/S32_SoloVictoryCashCup/?region=ME&round=S32_SoloVictoryCashCup_Event3Round1_ME",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s32-cf8e6f4838a8",
+      "decision": "published",
+      "recordId": "auto-s32-cf8e6f4838a8",
+      "policy": "verified-rule",
+      "approvedAt": "2026-11-13T12:27:59.386Z",
+      "approvedBy": "takezion62-hash",
+      "rule": "https://www.fortnite.com/news/competitive-details-make-your-mark-in-chapter-2-remix",
+      "source": "https://www.fortnite.com/competitive/events/S32_SoloVictoryCashCup/?region=ME&round=S32_SoloVictoryCashCup_Event3Round1_ME",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s32-39400031f606",
+      "decision": "published",
+      "recordId": "auto-s32-39400031f606",
+      "policy": "verified-rule",
+      "approvedAt": "2026-11-13T12:27:59.386Z",
+      "approvedBy": "takezion62-hash",
+      "rule": "https://www.fortnite.com/news/competitive-details-make-your-mark-in-chapter-2-remix",
+      "source": "https://www.fortnite.com/competitive/events/S32_SoloVictoryCashCup/?region=ME&round=S32_SoloVictoryCashCup_Event3Round1_ME",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s32-41f26acc0f9e",
+      "decision": "published",
+      "recordId": "auto-s32-41f26acc0f9e",
+      "policy": "verified-rule",
+      "approvedAt": "2026-11-13T12:27:59.386Z",
+      "approvedBy": "takezion62-hash",
+      "rule": "https://www.fortnite.com/news/competitive-details-make-your-mark-in-chapter-2-remix",
+      "source": "https://www.fortnite.com/competitive/events/S32_SoloVictoryCashCup/?region=ME&round=S32_SoloVictoryCashCup_Event3Round1_ME",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s32-47e22a499433",
+      "decision": "published",
+      "recordId": "auto-s32-47e22a499433",
+      "policy": "verified-rule",
+      "approvedAt": "2026-11-13T12:27:59.386Z",
+      "approvedBy": "takezion62-hash",
+      "rule": "https://www.fortnite.com/news/competitive-details-make-your-mark-in-chapter-2-remix",
+      "source": "https://www.fortnite.com/competitive/events/S32_SoloVictoryCashCup/?region=ME&round=S32_SoloVictoryCashCup_Event3Round1_ME",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s32-9522d81a1962",
+      "decision": "published",
+      "recordId": "auto-s32-9522d81a1962",
+      "policy": "verified-rule",
+      "approvedAt": "2026-11-13T12:27:59.386Z",
+      "approvedBy": "takezion62-hash",
+      "rule": "https://www.fortnite.com/news/competitive-details-make-your-mark-in-chapter-2-remix",
+      "source": "https://www.fortnite.com/competitive/events/S32_SoloVictoryCashCup/?region=ME&round=S32_SoloVictoryCashCup_Event3Round1_ME",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
     }
   ]
 }
