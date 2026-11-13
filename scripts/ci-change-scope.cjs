@@ -7,11 +7,10 @@ const META=new Set([
  'players.json','tournaments.json','updates.json','approval-history.json',
  'auto-sync-review.json','auto-sync-status.json',
  'history-sync-review.json','history-sync-reviewed.json','history-sync-status.json',
- 'candidate-triage.json','participation-index.json','participation-status.json'
+ 'candidate-triage.json'
 ]);
 const SOURCE_SHARD=/^source-results\/(?:S[1-9]\d*|unknown)\.json$/;
 const OUTPUT=/^season-data\/(?:S[1-9]\d*|unknown|ranking-(?:S[1-9]\d*|unknown|all)|manifest)\.json$/;
-const ATTENDANCE=/^participation\/\d{4}-\d{2}\.json$/;
 const REVIEW_REPORT=/^review-reports\/\d{4}-\d{2}-\d{2}(?:-[a-z0-9-]+)?\.md$/;
 const SOURCE_MANIFEST='source-results/manifest.json';
 function classify(files){
@@ -28,7 +27,7 @@ function classify(files){
   seen.add(p);
   if(SOURCE_SHARD.test(p)){shard=true;continue}
   if(p===SOURCE_MANIFEST){manifest=true;continue}
-  if(META.has(p)||OUTPUT.test(p)||ATTENDANCE.test(p)||REVIEW_REPORT.test(p))continue;
+  if(META.has(p)||OUTPUT.test(p)||REVIEW_REPORT.test(p))continue;
   return {mode:'full',reason:'code-or-unknown-change'};
  }
  // Metadata-only and generated-only changes are never a records-only PR.
