@@ -2,11 +2,11 @@
   "version": 1,
   "role": "generated canonical-source snapshot; results.json remains authoritative in phase 1",
   "canonicalFile": "results.json",
-  "canonicalSha256": "1e39d734d4576a7c991f985abfa14e24c24d456d808f5ddbb78be03c321ce4ff",
-  "count": 6741,
-  "teamPrizeCents": 6422000,
+  "canonicalSha256": "e11163314c4582499ef3563cc6b5dc9cec0bf1c871566f7a152531296b7b850f",
+  "count": 6749,
+  "teamPrizeCents": 6582000,
   "unconfirmedPrizeRecords": 1003,
-  "personalPrizeCents": 6402000,
+  "personalPrizeCents": 6562000,
   "recordOrder": [
     "s42-me-slenderman-reload-skin-20261021-acris-chacha",
     "s42-me-slenderman-reload-skin-20261021-karf-alpha",
@@ -6748,7 +6748,15 @@
     "s29-me-zb-duos-vc-final-20240506-16",
     "s29-me-zb-duos-vc-final-20240506-19",
     "s29-me-zb-duos-vc-final-20240506-21",
-    "s29-me-zb-duos-vc-final-20240506-22"
+    "s29-me-zb-duos-vc-final-20240506-22",
+    "s28-me-zb-duos-vc-final-20240212-r13",
+    "s28-me-zb-duos-vc-final-20240212-r24",
+    "s28-me-zb-duos-vc-final-20240212-r30",
+    "s28-me-zb-duos-vc-final-20240120-r10",
+    "s28-me-zb-duos-vc-final-20240120-r16",
+    "s28-me-zb-duos-vc-final-20240120-r19",
+    "s28-me-zb-duos-vc-final-20240120-r21",
+    "s28-me-zb-duos-vc-final-20240120-r23"
   ],
   "shards": [
     {
@@ -6777,6 +6785,15 @@
       "unconfirmedPrizeRecords": 0,
       "personalPrizeCents": 60000,
       "sha256": "d9394c454e5cc91df6126105564aec13a1c9134b056fbb6c9851f55e1fb570fa"
+    },
+    {
+      "seasonId": "S28",
+      "file": "source-results/S28.json",
+      "count": 8,
+      "teamPrizeCents": 160000,
+      "unconfirmedPrizeRecords": 0,
+      "personalPrizeCents": 160000,
+      "sha256": "21cbcae1b72c6f81291ca7c40cd99664f8c5fae378697b1c443cf6b3bbcfb670"
     },
     {
       "seasonId": "S29",
