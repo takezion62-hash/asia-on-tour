@@ -52,10 +52,19 @@ function detect(env=process.env,git=execFileSync){
   before=env.PR_BASE_SHA;after=env.PR_HEAD_SHA;
  }else if(env.GITHUB_EVENT_NAME==='push'&&env.GITHUB_REF==='refs/heads/main'){
   before=env.PUSH_BEFORE_SHA;after=env.PUSH_AFTER_SHA;
+ }else if(env.GITHUB_EVENT_NAME==='workflow_dispatch'&&
+  /^refs\/heads\/reviewed-results\/[0-9]+-[0-9]+$/.test(env.GITHUB_REF||'')){
+  before=env.DISPATCH_BASE_SHA;after=env.GITHUB_SHA;
  }else return {mode:'full',reason:'unsupported-event-or-branch'};
  if(!safeSha(before)||!safeSha(after))
   return {mode:'full',reason:'invalid-commit-ids'};
  try{
+  if(env.GITHUB_EVENT_NAME==='workflow_dispatch'){
+   // A dispatcher must prove the saved base is from trusted main AND
+   // an ancestor of this exact generated-results branch head.
+   git('git',['merge-base','--is-ancestor',before,after]);
+   git('git',['merge-base','--is-ancestor',before,'refs/remotes/origin/main']);
+  }
   const changes=git('git',[
    'diff','--no-ext-diff','--no-textconv','--no-renames',
    '--name-status','-z',before,after,'--'
