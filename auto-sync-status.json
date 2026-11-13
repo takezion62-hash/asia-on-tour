@@ -1,7 +1,7 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-12T23:23:11.421Z",
+  "checkedAt": "2026-11-13T01:23:35.055Z",
   "mode": "review",
   "scope": "recent",
   "dateMode": null,
@@ -10,17 +10,17 @@
   "toDate": null,
   "provider": "osirion",
   "linkedPlayers": 592,
-  "trackedWindows": 103,
-  "found": 0,
-  "skipped": 2,
+  "trackedWindows": 102,
+  "found": 12,
+  "skipped": 0,
   "imported": 0,
   "scannedPages": 50,
-  "completedWindows": 62,
+  "completedWindows": 64,
   "identityConflicts": 3,
-  "alreadyRegistered": 418,
-  "autoApprovedTotal": 2312,
+  "alreadyRegistered": 443,
+  "autoApprovedTotal": 2334,
   "invalidCachedCandidates": 0,
-  "manualReviewCandidates": 0,
+  "manualReviewCandidates": 12,
   "autoApprovedCosmeticThisRun": 0,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
@@ -30,7 +30,7 @@
   "transientFailures": 0,
   "malformedFailures": 0,
   "skippedLeaderboards": [],
-  "reviewOnlyWindows": 67,
+  "reviewOnlyWindows": 66,
   "reviewOnlyCandidates": 0,
   "unmappedEvents": 8,
   "unmappedEventIds": [
@@ -43,29 +43,29 @@
     "S43_OnePieceBuggyCup_Mobile",
     "S43_OnePieceBuggyCup_ZB"
   ],
-  "message": "公式Epic ID・順位・開催枠を検証し25件を掲載。残り0件。未確認賞金を推定しない。",
+  "message": "最新版と安全統合：新規掲載0件、重複スキップ0件、要確認の競合0件、確認待ち12件。既存の戦績・賞金は保持。",
   "concurrentMerge": {
     "appended": 0,
     "alreadyPublished": 0,
     "reviewConflicts": 0,
-    "keptPending": 25,
-    "reconciledAt": "2026-11-12T23:23:21.450Z"
+    "keptPending": 12,
+    "reconciledAt": "2026-11-13T01:23:44.884Z"
   },
   "coverage": {
-    "total": 103,
-    "completed": 62,
-    "notStarted": 27,
-    "partial": 14,
+    "total": 102,
+    "completed": 64,
+    "notStarted": 26,
+    "partial": 12,
     "retryWaiting": 0,
     "retryDue": 0,
-    "remaining": 41,
+    "remaining": 38,
     "retryCount": 0,
-    "completionPercent": 60.2,
+    "completionPercent": 62.7,
     "byRegion": {
       "NAC": {
-        "total": 20,
+        "total": 19,
         "completed": 12,
-        "pending": 8
+        "pending": 7
       },
       "OCE": {
         "total": 16,
@@ -79,13 +79,13 @@
       },
       "EU": {
         "total": 19,
-        "completed": 11,
-        "pending": 8
+        "completed": 12,
+        "pending": 7
       },
       "BR": {
         "total": 16,
-        "completed": 9,
-        "pending": 7
+        "completed": 10,
+        "pending": 6
       },
       "NAW": {
         "total": 16,
@@ -95,31 +95,20 @@
     },
     "byYear": {
       "2026": {
-        "total": 103,
-        "completed": 62,
-        "pending": 41
+        "total": 102,
+        "completed": 64,
+        "pending": 38
       }
     },
     "outsideScopeCheckpoints": 0,
     "samples": [
-      {
-        "window": "epicgames_S42_ReloadReloadSoloVictoryCup_BR/S42_ReloadSoloVictoryCup_Event5_Round1_BR",
-        "date": "2026-10-24",
-        "region": "BR",
-        "series": "victory-cup",
-        "status": "partial",
-        "nextPage": 75,
-        "totalPages": 80,
-        "retryAfter": null,
-        "errorCode": null
-      },
       {
         "window": "epicgames_S42_ReloadReloadSoloVictoryCup_EU/S42_ReloadSoloVictoryCup_Event5_Round1_EU",
         "date": "2026-10-24",
         "region": "EU",
         "series": "victory-cup",
         "status": "partial",
-        "nextPage": 19,
+        "nextPage": 29,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
@@ -130,7 +119,7 @@
         "region": "ME",
         "series": "victory-cup",
         "status": "partial",
-        "nextPage": 40,
+        "nextPage": 50,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
@@ -141,19 +130,8 @@
         "region": "NAW",
         "series": "icon-cup",
         "status": "partial",
-        "nextPage": 31,
+        "nextPage": 32,
         "totalPages": 89,
-        "retryAfter": null,
-        "errorCode": null
-      },
-      {
-        "window": "epicgames_S43_ReloadZBDuosCashCup_EU/S43_ReloadZBDuosCashCup_Event1Round1_EU",
-        "date": "2026-11-08",
-        "region": "EU",
-        "series": "cash-cup",
-        "status": "partial",
-        "nextPage": 93,
-        "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
       },
@@ -163,7 +141,7 @@
         "region": "ME",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 57,
+        "nextPage": 67,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
@@ -174,7 +152,7 @@
         "region": "BR",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 43,
+        "nextPage": 47,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
@@ -185,7 +163,7 @@
         "region": "NAW",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 26,
+        "nextPage": 27,
         "totalPages": 70,
         "retryAfter": null,
         "errorCode": null
@@ -231,6 +209,28 @@
         "status": "partial",
         "nextPage": 1,
         "totalPages": 40,
+        "retryAfter": null,
+        "errorCode": null
+      },
+      {
+        "window": "epicgames_S43_ArenaCashCup_NAC/S43_ArenaCashCup_Event1_NAC",
+        "date": "2026-11-11",
+        "region": "NAC",
+        "series": "cash-cup",
+        "status": "partial",
+        "nextPage": 10,
+        "totalPages": 83,
+        "retryAfter": null,
+        "errorCode": null
+      },
+      {
+        "window": "epicgames_S43_ArenaCashCup_NAW/S43_ArenaCashCup_Event1_NAW",
+        "date": "2026-11-11",
+        "region": "NAW",
+        "series": "cash-cup",
+        "status": "partial",
+        "nextPage": 11,
+        "totalPages": 37,
         "retryAfter": null,
         "errorCode": null
       }
