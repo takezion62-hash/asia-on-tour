@@ -95,52 +95,8 @@ jobs:
         run: npm run validate
       - name: Verify season shards agree with source manifest and legacy projection
         run: node scripts/build-source-results.cjs --check
-      - name: Tracker実績の安全な事前反映テスト（書込なし）
-        run: node scripts/apply-verified-tracker-finals.cjs --dry-run
-      - name: S43 NAW Squads決勝3組の本人・賞金・重複検証（書込なし）
-        run: node scripts/apply-verified-s43-squads-finals.cjs --dry-run
-      - name: 2024/6/7 ME ZB Duos Cash Cup：10組の賞金・個人配分・承認履歴を照合（書込なし）
-        run: node scripts/apply-s30-me-zb-duos-cash-20240607.cjs --dry-run
-      - name: 2024/6/7 ME ZB Duos Cash Cup賞金圏外3組の本人・重複・賞金ゼロを照合（書込なし）
-        run: node scripts/apply-s30-me-zb-duos-nonprize-20240607.cjs --dry-run
-      - name: 2024/6/21 ME ZB Duos Cash Cup：13位賞金訂正・26/35位の賞金ゼロ・本人IDと重複検証
-        run: node scripts/apply-s30-me-zb-duos-20240621.cjs --dry-run
-      - name: 2024/5/6 ME ZB Duos Victory Cup：5組の本人IDと1VR=$100/人の賞金検証
-        run: node scripts/apply-s29-me-zb-duos-20240506.cjs --dry-run
-      - name: 2024/1/20・2/12 ME S28 ZB Duos Victory Cup：8組の本人ID・賞金・重複・シーズン登録を照合
-        run: node scripts/apply-s28-me-zb-duos-20240120-20240212.cjs --dry-run
-      - name: 2023/10/23・12/16 ME S26/S28 ZB Duos Victory Cup：10組の本人ID・賞金・重複を照合（書込なし）
-        run: node scripts/apply-s26-s28-me-zb-duos-2023.cjs --dry-run
-      - name: 2023/6/19・6/26 ME S25 ZB Duos Victory Cup：10組・2VR賞金・本人Epic UUIDを検証（書込なし）
-        run: node scripts/apply-s25-me-zb-duos-2023.cjs --dry-run
-      - name: 2022 OCE・2023 ME・2024 NAC：PlayStation/S25 Duos10件の順位賞金・本人ID・重複検証
-        run: node scripts/apply-ps-cups-2022-2024-nov14.cjs --dry-run
-      - name: 2025 NAC Unreal Cup / 2026 NAW Solo VC / 2025 NAW Console Duos：7名/組を厳密照合（書込なし）
-        run: node scripts/apply-s37-s39-s40-awards7.cjs --dry-run
-      - name: 2025 OCE Console Duos / 2026 OCE Console ZB Solo 5件の本人と賞金を確認（書込なし）
-        run: node scripts/apply-s37-s41-oce-five.cjs --dry-run
-      - name: 2024年 ME Trios 2件の賞金修正とEU Unreal・ME Trios新規2件（書込なし）
-        run: node scripts/apply-eu-unreal-me-trios-four.cjs --dry-run
-      - name: Kame 2022 Elite Week4 / 2024 ME Duos Event5 決勝の2組・賞金とEpic ID（書込なし）
-        run: node scripts/apply-kame-me-duos-two.cjs --dry-run
-      - name: S41 Console ZB賞金4件とS42 OCE重複3件の厳密な本人・賞金・統合テスト
-        run: node scripts/apply-s41-console-zb-oce-reconcile.cjs --dry-run
-      - name: 2024 ME Boter FNCS7組・ME Duos Cash1組と2025 NAW Squads1組の本人・賞金・重複テスト
-        run: node scripts/apply-boter-s31-s38-nine.cjs --dry-run
-      - name: 2024 NAC ZB Solo7件・Zero Build Duos3件の本人ID・1VR賞金・重複テスト
-        run: node scripts/apply-nac-s29-s30-zb-vc-ten.cjs --dry-run
-      - name: 2026/11/14 保留の現金賞金：Unger $100・Reoデュオ各$200を独立した証拠で照合
-        run: node scripts/publish-nov14-pending-cash.cjs --dry-run
-      - name: 2026/11/14 HamiKuma賞品4組：元のTracker順位を保持して重複候補のみ解決
-        run: node scripts/reconcile-pending-hamikuma-20261114.cjs --dry-run
-      - name: 2026/11/14 確認待ち49 ID：元の21件と新規32件の安全な再照合
-        run: node scripts/publish-pending-review-20261114.cjs --dry-run
-      - name: 2024/11/16 ME Solo決勝：公式Epic ID・独立した賞金根拠を照合（書込なし）
-        run: node scripts/publish-verified-s32-me-vcup-20241116.cjs --dry-run
-      - name: 2024 ME/NAC Solo VC残り11件：公式Epic ID・決勝出場・NAC突破条件・0VR報酬を照合
-        run: node scripts/publish-verified-2024-me-nac-last11.cjs --dry-run
-      - name: S42スキン大会の順位差9件・重複12件を公式Epic順位で安全照合（書込なし）
-        run: node scripts/reconcile-s42-cosmetic-ranks-20261113.cjs --dry-run
+      - name: 過去大会23本の検証を安全に並列化（すべて--dry-run・全件必須）
+        run: node scripts/run-historical-dry-runs.cjs
       - name: 戦績データ更新は公開索引・確認待ち索引の正確な一致を確認
         if: needs.classify.outputs.mode == 'data'
         run: |
