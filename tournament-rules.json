@@ -1014,7 +1014,8 @@
       "team": "duo",
       "series": "cash-cup",
       "matchCaps": {
-        "単一ラウンド": 12
+        "単一ラウンド": 12,
+        "賞金決勝": 6
       },
       "advance": {
         "EU": 20,
@@ -1034,8 +1035,167 @@
         {
           "text": "公式規則2.2.1: Round 1は最大12試合、各地域上位20組がRound 2進出。Round 1には現金賞金なし。",
           "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-zero-build-reload-cash-cups-chapter-7-mini-season-official-rules"
+        },
+        {
+          "text": "2026-11-14 ユーザー提供Fortnite Tracker Prize Pool画像：全地域Round 1上位20デュオが通過、Round 2は最大6試合。Round 2 OCE/ME/BR/NAWの個人賞金は1位$300、2位$250、3位$200、4位$150、5位$100。",
+          "url": "https://fortnitetracker.com/events/epicgames_S43_ReloadZBDuosCashCup_OCE?window=S43_ReloadZBDuosCashCup_Event1Round2_OCE"
+        },
+        {
+          "text": "2026-11-14 ユーザー提供Fortnite Tracker Prize Pool画像：Round 2 EU/NACの個人賞金は1位$600、2位$450、3位$300、4位$200、5位$150、6〜8位$100。Epic公式規則Attachment Cのチーム賞金と照合。",
+          "url": "https://fortnitetracker.com/events/epicgames_S43_ReloadZBDuosCashCup_EU"
+        },
+        {
+          "text": "Epic公式大会規則2.2.1とAttachment C：予選上位20チーム、決勝最大6試合、賞金はデュオで均等配分。",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-zero-build-reload-cash-cups-chapter-7-mini-season-official-rules"
         }
-      ]
+      ],
+      "cashFinalAutoApproval": "verified-duo-round2-rank",
+      "cashPrizes": {
+        "basis": "per-player",
+        "currency": "USD",
+        "tiers": {
+          "OCE": [
+            {
+              "through": 1,
+              "perPlayer": 300
+            },
+            {
+              "through": 2,
+              "perPlayer": 250
+            },
+            {
+              "through": 3,
+              "perPlayer": 200
+            },
+            {
+              "through": 4,
+              "perPlayer": 150
+            },
+            {
+              "through": 5,
+              "perPlayer": 100
+            }
+          ],
+          "ME": [
+            {
+              "through": 1,
+              "perPlayer": 300
+            },
+            {
+              "through": 2,
+              "perPlayer": 250
+            },
+            {
+              "through": 3,
+              "perPlayer": 200
+            },
+            {
+              "through": 4,
+              "perPlayer": 150
+            },
+            {
+              "through": 5,
+              "perPlayer": 100
+            }
+          ],
+          "NAW": [
+            {
+              "through": 1,
+              "perPlayer": 300
+            },
+            {
+              "through": 2,
+              "perPlayer": 250
+            },
+            {
+              "through": 3,
+              "perPlayer": 200
+            },
+            {
+              "through": 4,
+              "perPlayer": 150
+            },
+            {
+              "through": 5,
+              "perPlayer": 100
+            }
+          ],
+          "BR": [
+            {
+              "through": 1,
+              "perPlayer": 300
+            },
+            {
+              "through": 2,
+              "perPlayer": 250
+            },
+            {
+              "through": 3,
+              "perPlayer": 200
+            },
+            {
+              "through": 4,
+              "perPlayer": 150
+            },
+            {
+              "through": 5,
+              "perPlayer": 100
+            }
+          ],
+          "EU": [
+            {
+              "through": 1,
+              "perPlayer": 600
+            },
+            {
+              "through": 2,
+              "perPlayer": 450
+            },
+            {
+              "through": 3,
+              "perPlayer": 300
+            },
+            {
+              "through": 4,
+              "perPlayer": 200
+            },
+            {
+              "through": 5,
+              "perPlayer": 150
+            },
+            {
+              "through": 8,
+              "perPlayer": 100
+            }
+          ],
+          "NAC": [
+            {
+              "through": 1,
+              "perPlayer": 600
+            },
+            {
+              "through": 2,
+              "perPlayer": 450
+            },
+            {
+              "through": 3,
+              "perPlayer": 300
+            },
+            {
+              "through": 4,
+              "perPlayer": 200
+            },
+            {
+              "through": 5,
+              "perPlayer": 150
+            },
+            {
+              "through": 8,
+              "perPlayer": 100
+            }
+          ]
+        }
+      }
     },
     {
       "id": "ch7s4-override-kingdom-hearts-cup",
