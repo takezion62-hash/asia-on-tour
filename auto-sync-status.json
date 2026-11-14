@@ -1,7 +1,7 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-14T07:59:58.912Z",
+  "checkedAt": "2026-11-14T09:00:11.192Z",
   "mode": "review",
   "scope": "recent",
   "dateMode": null,
@@ -10,7 +10,7 @@
   "toDate": null,
   "provider": "osirion",
   "linkedPlayers": 632,
-  "trackedWindows": 89,
+  "trackedWindows": 90,
   "found": 0,
   "skipped": 0,
   "imported": 0,
@@ -30,7 +30,7 @@
   "transientFailures": 0,
   "malformedFailures": 0,
   "skippedLeaderboards": [],
-  "reviewOnlyWindows": 67,
+  "reviewOnlyWindows": 68,
   "reviewOnlyCandidates": 0,
   "unmappedEvents": 8,
   "unmappedEventIds": [
@@ -49,18 +49,18 @@
     "alreadyPublished": 0,
     "reviewConflicts": 0,
     "keptPending": 0,
-    "reconciledAt": "2026-11-14T08:00:16.493Z"
+    "reconciledAt": "2026-11-14T09:00:25.827Z"
   },
   "coverage": {
-    "total": 89,
+    "total": 90,
     "completed": 70,
-    "notStarted": 9,
+    "notStarted": 10,
     "partial": 10,
     "retryWaiting": 0,
     "retryDue": 0,
-    "remaining": 19,
+    "remaining": 20,
     "retryCount": 0,
-    "completionPercent": 78.7,
+    "completionPercent": 77.8,
     "byRegion": {
       "OCE": {
         "total": 12,
@@ -88,16 +88,16 @@
         "pending": 4
       },
       "NAW": {
-        "total": 13,
+        "total": 14,
         "completed": 11,
-        "pending": 2
+        "pending": 3
       }
     },
     "byYear": {
       "2026": {
-        "total": 89,
+        "total": 90,
         "completed": 70,
-        "pending": 19
+        "pending": 20
       }
     },
     "outsideScopeCheckpoints": 14,
@@ -108,7 +108,7 @@
         "region": "EU",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 1,
+        "nextPage": 2,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
@@ -119,7 +119,7 @@
         "region": "BR",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 7,
+        "nextPage": 12,
         "totalPages": 31,
         "retryAfter": null,
         "errorCode": null
@@ -130,7 +130,7 @@
         "region": "NAC",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 3,
+        "nextPage": 4,
         "totalPages": 77,
         "retryAfter": null,
         "errorCode": null
@@ -141,7 +141,7 @@
         "region": "NAW",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 41,
+        "nextPage": 51,
         "totalPages": 52,
         "retryAfter": null,
         "errorCode": null
@@ -152,7 +152,7 @@
         "region": "BR",
         "series": "icon-cup",
         "status": "partial",
-        "nextPage": 6,
+        "nextPage": 7,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
@@ -163,7 +163,7 @@
         "region": "EU",
         "series": "icon-cup",
         "status": "partial",
-        "nextPage": 6,
+        "nextPage": 7,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
@@ -174,7 +174,7 @@
         "region": "ME",
         "series": "icon-cup",
         "status": "partial",
-        "nextPage": 2,
+        "nextPage": 3,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
@@ -185,7 +185,7 @@
         "region": "NAC",
         "series": "icon-cup",
         "status": "partial",
-        "nextPage": 27,
+        "nextPage": 37,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
@@ -196,7 +196,7 @@
         "region": "NAC",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 49,
+        "nextPage": 59,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
@@ -207,7 +207,7 @@
         "region": "EU",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 59,
+        "nextPage": 69,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
