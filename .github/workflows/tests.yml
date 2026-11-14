@@ -98,7 +98,7 @@ jobs:
         run: npm run validate
       - name: Verify season shards agree with source manifest and legacy projection
         run: node scripts/build-source-results.cjs --check
-      - name: 過去大会23本の検証を安全に並列化（すべて--dry-run・全件必須）
+      - name: 過去大会の検証を安全に並列化（すべて--dry-run・全件必須）
         run: node scripts/run-historical-dry-runs.cjs
       - name: 戦績データ更新は公開索引・確認待ち索引の正確な一致を確認
         if: needs.classify.outputs.mode == 'data'
