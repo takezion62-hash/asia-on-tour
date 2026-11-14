@@ -103,7 +103,7 @@ function verifyCashRow(row,entry){
  const t=TARGETS.find(x=>x.id===row?.id);
  if(!t||!row||!entry||entry.id!==t.id||entry.recordId!==t.id||entry.policy!==POLICY||entry.decision!=='published'||entry.source!==t.sourceTracker||entry.rule!==t.rule||payout(t)!==t.prize)return false;
  const fields=['id','date','seasonId','chapter','season','region','tournamentId','event','round','rank','points','matches','kills','vrs','prize','prizePerPlayer','source'];
- for(const k of fields){if(row[k==='$'?'':k]!==t[k==='source'?'sourceTracker':k])return false}
+ for(const k of fields){if(row[k]!==t[k==='source'?'sourceTracker':k])return false}
  if(row.teamPrize!==t.prize||row.kind!=='賞金決勝'||row.verified!==true||row.reviewOnly===true||row.player!==t.players.join(' / ')||row.playerRaw!==t.playerRaw)return false;
  if(JSON.stringify(row.players)!==JSON.stringify(t.players))return false;
  if(!Array.isArray(row.profiles)||row.profiles.length!==2||!row.profiles.every((p,i)=>p.name===t.players[i]&&uuid(p.url)===t.uuids[i]))return false;
