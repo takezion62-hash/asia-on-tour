@@ -1,7 +1,7 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-14T22:18:46.332Z",
+  "checkedAt": "2026-11-14T23:57:02.403Z",
   "mode": "review",
   "scope": "history",
   "dateMode": "rolling",
@@ -11,36 +11,27 @@
   "provider": "osirion",
   "linkedPlayers": 638,
   "trackedWindows": 3009,
-  "found": 30,
-  "skipped": 20,
-  "imported": 10,
+  "found": 72,
+  "skipped": 22,
+  "imported": 1,
   "scannedPages": 96,
-  "completedWindows": 543,
+  "completedWindows": 547,
   "identityConflicts": 3,
-  "alreadyRegistered": 5272,
-  "autoApprovedTotal": 2666,
+  "alreadyRegistered": 5303,
+  "autoApprovedTotal": 2674,
   "invalidCachedCandidates": 1,
-  "manualReviewCandidates": 30,
-  "autoApprovedCosmeticThisRun": 1,
+  "manualReviewCandidates": 72,
+  "autoApprovedCosmeticThisRun": 0,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
   "autoApprovedUnrealThisRun": 0,
   "timeLimitReached": false,
   "retryWindows": 8,
   "transientFailures": 0,
-  "malformedFailures": 1,
-  "skippedLeaderboards": [
-    {
-      "window": "epicgames_S31_TriosCashCup_ME/S31_TriosCashCup_Event2Round2_ME",
-      "page": 0,
-      "attempt": 2,
-      "code": "OSIRION_INVALID_LEADERBOARD",
-      "reason": "大会順位表のID/形式が不正 [epicgames_S31_TriosCashCup_ME/S31_TriosCashCup_Event2Round2_ME page=0]: totalPages=0",
-      "retryAfter": "2026-11-15T10:17:15.341Z"
-    }
-  ],
+  "malformedFailures": 0,
+  "skippedLeaderboards": [],
   "reviewOnlyWindows": 1377,
-  "reviewOnlyCandidates": 2,
+  "reviewOnlyCandidates": 19,
   "unmappedEvents": 236,
   "unmappedEventIds": [
     "S30_ConsoleCashCups",
@@ -56,29 +47,29 @@
     "S30_Reload",
     "S30_ReloadZB"
   ],
-  "message": "最新版と安全統合：新規掲載10件、重複スキップ0件、要確認の競合0件、確認待ち51件。既存の戦績・賞金は保持。",
+  "message": "最新版と安全統合：新規掲載1件、重複スキップ0件、要確認の競合0件、確認待ち72件。既存の戦績・賞金は保持。",
   "manuallyPublished": 1631,
   "manuallyResolvedDuplicates": 169,
   "lastReviewedBatchAt": "2026-11-14T22:15:48.710Z",
   "manuallyCorrected": 13,
   "lastCorrectedReviewAt": "2026-11-13T13:45:16.115Z",
   "concurrentMerge": {
-    "appended": 10,
+    "appended": 1,
     "alreadyPublished": 0,
     "reviewConflicts": 0,
-    "keptPending": 51,
-    "reconciledAt": "2026-11-14T22:18:55.970Z"
+    "keptPending": 72,
+    "reconciledAt": "2026-11-14T23:57:06.389Z"
   },
   "coverage": {
     "total": 3009,
-    "completed": 543,
-    "notStarted": 2286,
-    "partial": 172,
+    "completed": 547,
+    "notStarted": 2280,
+    "partial": 174,
     "retryWaiting": 8,
     "retryDue": 0,
-    "remaining": 2466,
+    "remaining": 2462,
     "retryCount": 8,
-    "completionPercent": 18,
+    "completionPercent": 18.2,
     "byRegion": {
       "OCE": {
         "total": 531,
@@ -87,18 +78,18 @@
       },
       "ME": {
         "total": 527,
-        "completed": 170,
-        "pending": 357
+        "completed": 172,
+        "pending": 355
       },
       "EU": {
         "total": 547,
-        "completed": 73,
-        "pending": 474
+        "completed": 74,
+        "pending": 473
       },
       "BR": {
         "total": 525,
-        "completed": 52,
-        "pending": 473
+        "completed": 53,
+        "pending": 472
       },
       "NAC": {
         "total": 546,
@@ -114,8 +105,8 @@
     "byYear": {
       "2024": {
         "total": 984,
-        "completed": 144,
-        "pending": 840
+        "completed": 145,
+        "pending": 839
       },
       "2025": {
         "total": 702,
@@ -124,8 +115,8 @@
       },
       "2026": {
         "total": 1323,
-        "completed": 331,
-        "pending": 992
+        "completed": 334,
+        "pending": 989
       }
     },
     "outsideScopeCheckpoints": 0,
@@ -278,7 +269,7 @@
     "remainingPending": 0,
     "policy": "Exact Epic continuous-prefix + historical official rule + same-event finals/Tracker cutoff"
   },
-  "autoApprovedDuoQualifierThisRun": 1,
+  "autoApprovedDuoQualifierThisRun": 0,
   "latestParticipationReview": {
     "reviewedAt": "2026-11-12T02:59:51.445Z",
     "participationPublished": 0,
