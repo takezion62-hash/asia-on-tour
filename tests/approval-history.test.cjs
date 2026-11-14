@@ -219,3 +219,46 @@ test('2024/6/7 ME ZB Duos nonprize finalists retain $0 and the confirmed Αθη�
   assert.equal(Z.verifyNonprizeRow(row,{...entry,policy:'attendance-only'}),false);
  }
 });
+
+test('2024-06-18 NAC Event3 nonqualifier attendance accepts only two original Epic rows',()=>{
+ const rules=require('../scripts/verified-history-approval.cjs').RULES;
+ const rule=rules['ch5s3-solo-victory-cup'];
+ const window=rule.verifiedLegacyNacExtraWindows.find(w=>
+  w.dateJst==='2024-06-18'&&w.windowId==='S30_SoloVictoryCashCup_Event3Round1_NAC');
+ assert.equal(window.cutoff,5000);
+ const source='https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round='+window.windowId;
+ const base={date:'2024-06-18',region:'NAC',seasonId:'S30',
+  tournamentId:'ch5s3-solo-victory-cup',event:'Solo Victory Cup Battle Royale',
+  round:'Event 3 · Round 1 / 参加確認',kind:'参加確認',
+  prize:0,verified:true,reviewOnly:false,source,
+  note:'公式順位では突破圏外。規則: '+rule.source+' 当該開催枠: '+window.source};
+ for(const record of [
+  {id:'auto-s30-23c77f05995a',player:'Celis やなぎさわつつ上等',
+   rank:7040,points:114,kills:6,vrs:0,matches:4},
+  {id:'auto-s30-552fce5922b8',player:'むーこにっく',
+   rank:8150,points:109,kills:17,vrs:1,matches:4}
+ ]){
+  const r={...base,...record};
+  const entry={id:r.id,recordId:r.id,decision:'published',policy:'verified-rule',
+   source,rule:rule.source};
+  const ledger={version:1,entries:[entry]};
+  assert.deepEqual(audit([r],ledger,{confirmedAliases:{}}),[],
+   'original attendee must pass: '+r.player);
+  for(const changed of [
+   {...r,id:'auto-s30-000000000001'}, {...r,rank:4999},
+   {...r,rank:r.rank+1},{...r,points:r.points+1},
+   {...r,kills:r.kills+1},{...r,vrs:r.vrs+1},
+   {...r,prize:100},{...r,kind:'予選'},
+   {...r,round:'Event 3 · Round 2 / 参加確認'},
+   {...r,source:source.replace('region=NAC','region=ME')},
+   {...r,note:'invalid'}, {...r,reviewOnly:true}
+  ]){
+   assert.ok(audit([changed],ledger,{confirmedAliases:{}}).length>0,
+    'tampered candidate must fail: '+r.player+' '+JSON.stringify(changed));
+  }
+  if(r.player==='むーこにっく'){
+   assert.ok(audit([{...r,matches:3}],ledger,{confirmedAliases:{}}).length>0,
+    'original attendance match count must not be forged');
+  }
+ }
+});
