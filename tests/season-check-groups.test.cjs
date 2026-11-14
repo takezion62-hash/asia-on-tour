@@ -11,7 +11,7 @@ test('every known season and all-time scope is checked exactly once in bounded g
  const flattened=groups.flat();
  assert.deepEqual(flattened,[...ids,'all']);
  assert.equal(new Set(flattened).size,flattened.length);
- assert.deepEqual(groups.at(-1),['all']);
+ assert.equal(groups.at(-1).at(-1),'all','Full-archive check must be last');
 });
 
 test('unknown seasons and a newly added season remain in exhaustive test coverage',()=>{
