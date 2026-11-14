@@ -2,11 +2,11 @@
   "version": 1,
   "role": "generated canonical-source snapshot; results.json remains authoritative in phase 1",
   "canonicalFile": "results.json",
-  "canonicalSha256": "f6f9d17fe18a904b685b20c2bc374205677843d7735f8e5427cd3ffb8723f04a",
-  "count": 7176,
-  "teamPrizeCents": 7867000,
+  "canonicalSha256": "b878fed8f25da4ebf236dd21986c2161f8ca3391e449f9135c15fbb6628097a6",
+  "count": 7186,
+  "teamPrizeCents": 8017000,
   "unconfirmedPrizeRecords": 1172,
-  "personalPrizeCents": 7847000,
+  "personalPrizeCents": 7997000,
   "recordOrder": [
     "s42-me-slenderman-reload-skin-20261021-acris-chacha",
     "s42-me-slenderman-reload-skin-20261021-karf-alpha",
@@ -7183,7 +7183,17 @@
     "s31-me-boter-fncs-final-20240907-ria-noa",
     "s31-me-boter-fncs-final-20240907-babucchi-goat",
     "s31-me-boter-fncs-final-20240907-meip-yama",
-    "s31-me-boter-fncs-final-20240907-sutea-teddy"
+    "s31-me-boter-fncs-final-20240907-sutea-teddy",
+    "s30-nac-zb-solo-vc-final-20240625-ipf-masternyada",
+    "s30-nac-zb-solo-vc-final-20240625-lnano",
+    "s30-nac-zb-solo-vc-final-20240625-urzb-maito",
+    "s30-nac-zb-solo-vc-final-20240625-wicxsy",
+    "s30-nac-zb-solo-vc-final-20240625-rintaro",
+    "s30-nac-zb-solo-vc-final-20240618-seljuny",
+    "s30-nac-zb-solo-vc-final-20240618-rintaro",
+    "s29-nac-zb-duos-vc-final-20240425-teitei-kana",
+    "s29-nac-zb-duos-vc-final-20240425-favsie-rintaro",
+    "s29-nac-zb-duos-vc-final-20240425-tara-p1ng"
   ],
   "shards": [
     {
@@ -7234,20 +7244,20 @@
     {
       "seasonId": "S29",
       "file": "source-results/S29.json",
-      "count": 10,
-      "teamPrizeCents": 200000,
+      "count": 13,
+      "teamPrizeCents": 280000,
       "unconfirmedPrizeRecords": 0,
-      "personalPrizeCents": 200000,
-      "sha256": "6b911ba72ebf4a900330fc934cf41663aa82073a056f12d0fa429da68ffad35f"
+      "personalPrizeCents": 280000,
+      "sha256": "aed39b774e2a82d097369f05b41c044381c3aaedcfc52c67d92bbd43209ac04b"
     },
     {
       "seasonId": "S30",
       "file": "source-results/S30.json",
-      "count": 1923,
-      "teamPrizeCents": 1450000,
+      "count": 1930,
+      "teamPrizeCents": 1520000,
       "unconfirmedPrizeRecords": 140,
-      "personalPrizeCents": 1450000,
-      "sha256": "52a20db7c7c794884f567ade956059be411fb79ec4fe1c29e9c9ff466f8c6ad8"
+      "personalPrizeCents": 1520000,
+      "sha256": "94f270812505c7de44c1e9ae96324626cd40da1affa1c19a51f377b757285536"
     },
     {
       "seasonId": "S31",
