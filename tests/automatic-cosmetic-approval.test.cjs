@@ -108,3 +108,38 @@ test('One Piece Buggy BR is auto-approved only for registered cosmetics with exa
   assert.equal(decide(candidate,window,cp(candidate),{...db,results:[candidate]}).approved,false);
  }
 });
+
+test('Buggy ZB duo and Mobile solo cosmetic payouts use independent official windows',()=>{
+ const variants=[
+ {id:'ch7s5-one-piece-buggy-cup-zero-build',event:'S43_OnePieceBuggyCup_ZB',
+  name:'One Piece: Buggy Cup Zero Build',team:'duo',matches:11,ranks:{OCE:50,ME:50,EU:525,BR:100,NAC:375,NAW:100}},
+ {id:'ch7s5-one-piece-buggy-mobile-cup',event:'S43_OnePieceBuggyCup_Mobile',
+  name:'One Piece: Buggy Mobile Cup',team:'solo',matches:8,ranks:{OCE:30,ME:30,EU:200,BR:30,NAC:150,NAW:30}}
+ ];
+ for(const variant of variants)for(const [region,rank] of Object.entries(variant.ranks)){
+  const win={...w,key:'epicgames_'+variant.event+'_'+region+'/'+variant.event+'_'+region,
+   eventId:variant.event,windowId:variant.event+'_'+region,seasonId:'S43',
+   tournamentId:variant.id,region,series:'skin-cup',kind:'参加確認',
+   dateJst:'2026-11-14',round:'単一開催枠 / 参加確認'};
+  const candidate={...row,id:'auto-buggy-'+variant.team+'-'+region,region,
+   date:win.dateJst,player:variant.team==='solo'?'A':'A / B',
+   players:variant.team==='solo'?undefined:['A','B'],
+   tournamentId:variant.id,event:variant.name,
+   rank,matches:variant.matches,source:source(win)};
+  const db=data();db.tournaments.catalog=[{id:variant.id,seasonId:'S43',
+   series:'skin-cup',team:variant.team,name:variant.name,sourceEventIds:[variant.event]}];
+  assert.equal(cutoffForWindow(win),rank);
+  const approved=decide(candidate,win,cp(candidate),db);
+  assert.equal(approved.approved,true,variant.id+' '+region+' '+approved.reason);
+  assert.equal(approved.record.kind,'スキン大会');
+  assert.equal(approved.record.prize,0);
+  assert.equal(approved.record.rank,rank);
+  assert.equal(decide({...candidate,rank:rank+1},win,cp({...candidate,rank:rank+1}),db).approved,false,'out of cutoff');
+  assert.equal(decide({...candidate,matches:variant.matches+1},win,cp({...candidate,matches:variant.matches+1}),db).approved,false,'over match cap');
+  assert.equal(decide(candidate,{...win,eventId:'S43_OnePieceZoroCup_ZB'},cp(candidate),db).approved,false,'different event');
+  assert.equal(decide(candidate,win,cp(candidate,false),db).approved,false,'unverified page');
+  assert.equal(decide(candidate,win,cp(candidate),{...db,results:[candidate]}).approved,false,'duplicate published record');
+  if(variant.team==='duo')assert.equal(decide({...candidate,players:['A']},win,cp({...candidate,players:['A']}),db).approved,false,'missing teammate');
+  else assert.equal(decide({...candidate,players:['A','B']},win,cp({...candidate,players:['A','B']}),db).approved,false,'fake duo in solo');
+ }
+});
