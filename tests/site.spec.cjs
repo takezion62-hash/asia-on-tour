@@ -122,7 +122,13 @@ test('大会タグ検索・大会URLをデータから照合する', async ({ pa
   const id = ids[0];
   await page.locator(`[data-open-tournament="${id}"]`).click();
   await page.reload();
-  expect((await page.locator('#page-tournament [data-tournament-record]').evaluateAll(es => es.map(e => e.dataset.tournamentRecord))).sort()).toEqual(rows.filter(r => tournamentKey(r, data) === id).map(r => r.id).sort());
+  const expectedIds = rows.filter(r => tournamentKey(r, data) === id).map(r => r.id).sort();
+  // Deep-linked tournament results load asynchronously after reload; never
+  // interpret the loading placeholder as an empty tournament record set.
+  await expect(page.locator('#page-tournament')).toBeVisible();
+  const rendered = page.locator('#page-tournament [data-tournament-record]');
+  await expect(rendered).toHaveCount(expectedIds.length, { timeout: 20_000 });
+  expect((await rendered.evaluateAll(es => es.map(e => e.dataset.tournamentRecord))).sort()).toEqual(expectedIds);
 });
 
 test('全シーズン切り替え時のホーム件数・個人賞金をデータから照合する', async ({ page }) => {

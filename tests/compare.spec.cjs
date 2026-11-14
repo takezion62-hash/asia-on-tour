@@ -51,7 +51,11 @@ test('2人を比較して3人目を追加・除外でき、比較リンクに全
 });
 test('入力ミス・重複を弾き、3人が上限で名前の誤名寄せをしない',async({page})=>{
  await page.goto(compareURL());
+ // Wait for asynchronous comparison URL restoration before submitting input.
+ await expect(page.locator('[data-compare-summary]')).toHaveCount(2);
+ await expect(page.locator('#compare-player-input')).toBeEnabled();
  await page.locator('#compare-player-input').fill('shiroka');
+ await expect(page.locator('#compare-player-input')).toHaveValue('shiroka');
  await page.locator('#compare-add-form button[type="submit"]').click();
  await expect(page.locator('#compare-add-error')).toContainText('候補一覧');
  await expect(page.locator('[data-compare-summary]')).toHaveCount(2);
