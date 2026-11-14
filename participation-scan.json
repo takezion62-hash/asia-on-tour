@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-11-13T21:35:24.111Z",
+  "checkedAt": "2026-11-14T03:35:53.861Z",
   "windows": {
     "epicgames_S42_InoxtagIconCup_NAW/S42_InoxtagIconCup_NAW": {
       "nextPage": 50,
@@ -372,12 +372,12 @@
       "emptyAttempts": 0
     },
     "epicgames_S43_OnePieceZoroCup_BR/S43_OnePieceZoroCup_BR": {
-      "nextPage": 40,
-      "pages": 40,
-      "complete": true,
-      "coverageLimited": true,
+      "nextPage": 50,
+      "pages": 50,
+      "complete": false,
+      "coverageLimited": false,
       "totalPages": 100,
-      "lastScanned": "2026-11-08T15:23:51.881Z",
+      "lastScanned": "2026-11-14T03:35:13.426Z",
       "emptyAttempts": 0
     },
     "epicgames_S30_SoloVictoryCashCup_ME/S30_SoloVictoryCashCup_Event7Round1_ME": {
@@ -936,21 +936,39 @@
       "emptyAttempts": 0
     },
     "epicgames_S30_SoloVictoryCashCup_ME/S30_SoloVictoryCashCup_Event2Round1_ME": {
+      "nextPage": 20,
+      "pages": 20,
+      "complete": false,
+      "coverageLimited": false,
+      "totalPages": 100,
+      "lastScanned": "2026-11-14T03:35:21.069Z",
+      "emptyAttempts": 0
+    },
+    "epicgames_S30_SoloVictoryCashCup_BR/S30_SoloVictoryCashCup_Event1Round2_BR": {
+      "nextPage": 19,
+      "pages": 19,
+      "complete": false,
+      "coverageLimited": false,
+      "totalPages": 20,
+      "lastScanned": "2026-11-14T03:35:53.861Z",
+      "emptyAttempts": 0
+    },
+    "epicgames_S43_ReloadZBDuosCashCup_EU/S43_ReloadZBDuosCashCup_Event1Round2_EU": {
+      "nextPage": 1,
+      "pages": 1,
+      "complete": true,
+      "coverageLimited": false,
+      "totalPages": 1,
+      "lastScanned": "2026-11-14T03:35:04.258Z",
+      "emptyAttempts": 0
+    },
+    "epicgames_S33_SoloCashCup_OCE/S33_SoloCashCup_Event4Round1_OCE": {
       "nextPage": 10,
       "pages": 10,
       "complete": false,
       "coverageLimited": false,
       "totalPages": 100,
-      "lastScanned": "2026-11-13T21:34:49.567Z",
-      "emptyAttempts": 0
-    },
-    "epicgames_S30_SoloVictoryCashCup_BR/S30_SoloVictoryCashCup_Event1Round2_BR": {
-      "nextPage": 10,
-      "pages": 10,
-      "complete": false,
-      "coverageLimited": false,
-      "totalPages": 20,
-      "lastScanned": "2026-11-13T21:35:24.111Z",
+      "lastScanned": "2026-11-14T03:35:34.697Z",
       "emptyAttempts": 0
     }
   }
