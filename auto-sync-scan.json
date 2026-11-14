@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-11-14T20:50:46.923Z",
+  "checkedAt": "2026-11-14T23:53:38.593Z",
   "windows": {
     "epicgames_S43_PerformanceEvaluationTrios_EU/S43_PerformanceEvaluation_Event1Round1_EU": {
       "nextPage": 7,
@@ -14636,15 +14636,15 @@
       "totalPages": 100
     },
     "epicgames_S42_InoxtagIconCup_BR/S42_InoxtagIconCup_BR": {
-      "nextPage": 78,
+      "nextPage": 88,
       "complete": false,
       "proposals": [],
-      "pages": 78,
-      "lastAttemptAt": "2026-11-14T20:50:08.875Z",
+      "pages": 88,
+      "lastAttemptAt": "2026-11-14T23:53:11.661Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 7800,
-      "lastSuccessAt": "2026-11-14T20:50:10.624Z",
+      "lastSeenRank": 8800,
+      "lastSuccessAt": "2026-11-14T23:53:12.501Z",
       "totalPages": 100
     },
     "epicgames_S42_ArenaCashCup_NAW/S42_ArenaCashCup_Event1_NAW": {
@@ -14660,15 +14660,15 @@
       "totalPages": 52
     },
     "epicgames_S42_InoxtagIconCup_EU/S42_InoxtagIconCup_EU": {
-      "nextPage": 64,
+      "nextPage": 74,
       "complete": false,
       "proposals": [],
-      "pages": 64,
-      "lastAttemptAt": "2026-11-14T20:50:18.576Z",
+      "pages": 74,
+      "lastAttemptAt": "2026-11-14T23:53:28.889Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 6400,
-      "lastSuccessAt": "2026-11-14T20:50:19.619Z",
+      "lastSeenRank": 7400,
+      "lastSuccessAt": "2026-11-14T23:53:29.847Z",
       "totalPages": 100
     },
     "epicgames_S43_ReloadZBDuosCashCup_BR/S43_ReloadZBDuosCashCup_Event1Round2_BR": {
@@ -14742,15 +14742,15 @@
       "totalPages": 1
     },
     "epicgames_S42_ArenaCashCup_NAC/S42_ArenaCashCup_Event1_NAC": {
-      "nextPage": 50,
+      "nextPage": 60,
       "complete": false,
       "proposals": [],
-      "pages": 50,
-      "lastAttemptAt": "2026-11-14T20:50:28.353Z",
+      "pages": 60,
+      "lastAttemptAt": "2026-11-14T23:53:18.102Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 5000,
-      "lastSuccessAt": "2026-11-14T20:50:28.998Z",
+      "lastSeenRank": 6000,
+      "lastSuccessAt": "2026-11-14T23:53:18.599Z",
       "totalPages": 77
     },
     "epicgames_S42_ArenaCashCup_BR/S42_ArenaCashCup_Event1_BR": {
@@ -14795,7 +14795,7 @@
       "totalPages": 31
     },
     "epicgames_S42_InoxtagIconCup_ME/S42_InoxtagIconCup_ME": {
-      "nextPage": 37,
+      "nextPage": 38,
       "complete": false,
       "proposals": [
         {
@@ -14973,25 +14973,35 @@
           ]
         }
       ],
-      "pages": 37,
-      "lastAttemptAt": "2026-11-14T20:50:37.799Z",
+      "pages": 38,
+      "lastAttemptAt": "2026-11-14T23:53:30.745Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 3700,
-      "lastSuccessAt": "2026-11-14T20:50:38.458Z",
-      "totalPages": 100
+      "lastSeenRank": 3800,
+      "lastSuccessAt": "2026-11-14T23:53:30.745Z",
+      "totalPages": 100,
+      "errorAttempts": 1,
+      "retryAfter": "2026-11-15T05:53:31.732Z",
+      "lastError": "Osirion API HTTP 429 /v1/tournaments/leaderboard",
+      "lastErrorPage": 38,
+      "lastErrorCode": "OSIRION_TRANSIENT"
     },
     "epicgames_S42_ArenaCashCup_EU/S42_ArenaCashCup_Event1_EU": {
-      "nextPage": 16,
+      "nextPage": 17,
       "complete": false,
       "proposals": [],
-      "pages": 16,
-      "lastAttemptAt": "2026-11-14T20:50:42.407Z",
+      "pages": 17,
+      "lastAttemptAt": "2026-11-14T23:53:32.620Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 1600,
-      "lastSuccessAt": "2026-11-14T20:50:43.291Z",
-      "totalPages": 100
+      "lastSeenRank": 1700,
+      "lastSuccessAt": "2026-11-14T23:53:32.620Z",
+      "totalPages": 100,
+      "errorAttempts": 1,
+      "retryAfter": "2026-11-15T05:53:33.606Z",
+      "lastError": "Osirion API HTTP 429 /v1/tournaments/leaderboard",
+      "lastErrorPage": 17,
+      "lastErrorCode": "OSIRION_TRANSIENT"
     },
     "epicgames_S43_ReloadZBDuosCashCup_NAW/S43_ReloadZBDuosCashCup_Event1Round2_NAW": {
       "nextPage": 1,
@@ -15545,8 +15555,8 @@
       "totalPages": 100
     },
     "epicgames_S43_TriosCashCup_ME/S43_TriosCashCup_Event2_ME": {
-      "nextPage": 1,
-      "complete": false,
+      "nextPage": 10,
+      "complete": true,
       "proposals": [
         {
           "id": "auto-s43-5d7288916513",
@@ -15617,15 +15627,309 @@
             "2daef93ef0d443769f65c315f7244149",
             "a6578a7fcd9947268771b4ee64d53789"
           ]
+        },
+        {
+          "id": "auto-s43-ba38aa8652c1",
+          "date": "2026-11-14",
+          "region": "ME",
+          "player": "まぁ / こいる / Jaemon",
+          "playerRaw": "STX まぁǃ / こいるやけん / Jaemon.K",
+          "event": "Trios Cash Cup Battle Royale",
+          "round": "Event 2 / 参加確認",
+          "rank": 221,
+          "points": 278,
+          "kills": 45,
+          "vrs": 0,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 10,
+          "seasonId": "S43",
+          "chapter": 7,
+          "season": 5,
+          "tournamentId": "ch7s5-trios-cash-cup",
+          "source": "https://www.fortnite.com/competitive/events/S43_TriosCashCup/?region=ME&round=S43_TriosCashCup_Event2_ME",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "まぁ",
+            "こいる",
+            "Jaemon"
+          ],
+          "teamAccountIds": [
+            "177f0551e829457aad8fbe6e3d84fe3c",
+            "50ca67e787cd415ab26692cac0e326c8",
+            "dcc5f4df088a4bcab4058b9b0fb2f97c"
+          ]
+        },
+        {
+          "id": "auto-s43-dcbd419b8505",
+          "date": "2026-11-14",
+          "region": "ME",
+          "player": "Xeno / R1ze / Zagouの弟",
+          "playerRaw": "REBEL ぜのぽったー / Helix R1ze 777 / NŁT zagouの弟",
+          "event": "Trios Cash Cup Battle Royale",
+          "round": "Event 2 / 参加確認",
+          "rank": 281,
+          "points": 261,
+          "kills": 31,
+          "vrs": 1,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 8,
+          "seasonId": "S43",
+          "chapter": 7,
+          "season": 5,
+          "tournamentId": "ch7s5-trios-cash-cup",
+          "source": "https://www.fortnite.com/competitive/events/S43_TriosCashCup/?region=ME&round=S43_TriosCashCup_Event2_ME",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "Xeno",
+            "R1ze",
+            "Zagouの弟"
+          ],
+          "teamAccountIds": [
+            "0a00aafaf3e44dceb1e69de37908e040",
+            "2fda3f8f2c2749f5b57daee2c7c8b3f0",
+            "aa5a5f035ef24a8c90b003dcf9385b8e"
+          ]
+        },
+        {
+          "id": "auto-s43-d28d20824cb2",
+          "date": "2026-11-14",
+          "region": "ME",
+          "player": "Stain / Job / ZAZI",
+          "playerRaw": "E36 StainY281 / Job 17ǃ / LYNX ZAZI 咲",
+          "event": "Trios Cash Cup Battle Royale",
+          "round": "Event 2 / 参加確認",
+          "rank": 445,
+          "points": 211,
+          "kills": 30,
+          "vrs": 0,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 10,
+          "seasonId": "S43",
+          "chapter": 7,
+          "season": 5,
+          "tournamentId": "ch7s5-trios-cash-cup",
+          "source": "https://www.fortnite.com/competitive/events/S43_TriosCashCup/?region=ME&round=S43_TriosCashCup_Event2_ME",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "Stain",
+            "Job",
+            "ZAZI"
+          ],
+          "teamAccountIds": [
+            "268fddd59748458ea78b23ad3bae9ac5",
+            "dcd62fd578bb43819c33ac13c0138164",
+            "f08aad629bf040d6beb78c7aea8e0a1f"
+          ]
+        },
+        {
+          "id": "auto-s43-eb135417b428",
+          "date": "2026-11-14",
+          "region": "ME",
+          "player": "ひろ / そみー / Plank",
+          "playerRaw": "UC.ひろ / UC.そみー / Celis Yhwach.",
+          "event": "Trios Cash Cup Battle Royale",
+          "round": "Event 2 / 参加確認",
+          "rank": 465,
+          "points": 205,
+          "kills": 11,
+          "vrs": 0,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 9,
+          "seasonId": "S43",
+          "chapter": 7,
+          "season": 5,
+          "tournamentId": "ch7s5-trios-cash-cup",
+          "source": "https://www.fortnite.com/competitive/events/S43_TriosCashCup/?region=ME&round=S43_TriosCashCup_Event2_ME",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "ひろ",
+            "そみー",
+            "Plank"
+          ],
+          "teamAccountIds": [
+            "2c9f23381150494b829de21b3f9e541d",
+            "61fe8404740046688b1fb5c984ddb602",
+            "97f0138a1b8d45e2a7ad756b914f2790"
+          ]
+        },
+        {
+          "id": "auto-s43-718cad09c879",
+          "date": "2026-11-14",
+          "region": "ME",
+          "player": "EXV mAximum24 / おらんげ / すかい",
+          "playerRaw": "EXV mAximum24 / みかんわおらんげ / AtlanticSkyx",
+          "event": "Trios Cash Cup Battle Royale",
+          "round": "Event 2 / 参加確認",
+          "rank": 654,
+          "points": 123,
+          "kills": 14,
+          "vrs": 0,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 6,
+          "seasonId": "S43",
+          "chapter": 7,
+          "season": 5,
+          "tournamentId": "ch7s5-trios-cash-cup",
+          "source": "https://www.fortnite.com/competitive/events/S43_TriosCashCup/?region=ME&round=S43_TriosCashCup_Event2_ME",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "EXV mAximum24",
+            "おらんげ",
+            "すかい"
+          ],
+          "teamAccountIds": [
+            "94a5d597b2904965a38aca3f3b0061d3",
+            "a8cf2c5c664243eb9a44c7a15913d473",
+            "fba14a7d6fc342ba9599c6afa9f2c568"
+          ]
+        },
+        {
+          "id": "auto-s43-f24e222751a0",
+          "date": "2026-11-14",
+          "region": "ME",
+          "player": "Choco / huggyfv / くどう そうた",
+          "playerRaw": "nagisa furukawaǃ / STX Huggy / くどう そうた",
+          "event": "Trios Cash Cup Battle Royale",
+          "round": "Event 2 / 参加確認",
+          "rank": 675,
+          "points": 116,
+          "kills": 32,
+          "vrs": 0,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 7,
+          "seasonId": "S43",
+          "chapter": 7,
+          "season": 5,
+          "tournamentId": "ch7s5-trios-cash-cup",
+          "source": "https://www.fortnite.com/competitive/events/S43_TriosCashCup/?region=ME&round=S43_TriosCashCup_Event2_ME",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "Choco",
+            "huggyfv",
+            "くどう そうた"
+          ],
+          "teamAccountIds": [
+            "2b094ce46d094e268301c560f9b1d8c3",
+            "c640a465776d4417bd9ebedee4c68928",
+            "fff9c3c3ea2f401481a1977d95287e2a"
+          ]
         }
       ],
+      "pages": 10,
+      "lastAttemptAt": "2026-11-14T23:53:02.765Z",
+      "emptyAttempts": 0,
+      "rankingOrderValid": true,
+      "lastSeenRank": 974,
+      "lastSuccessAt": "2026-11-14T23:53:03.297Z",
+      "totalPages": 10
+    },
+    "epicgames_S43_TriosCashCup_EU/S43_TriosCashCup_Event2_EU": {
+      "nextPage": 1,
+      "complete": false,
+      "proposals": [],
       "pages": 1,
-      "lastAttemptAt": "2026-11-14T20:50:46.621Z",
+      "lastAttemptAt": "2026-11-14T23:53:34.057Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
       "lastSeenRank": 100,
-      "lastSuccessAt": "2026-11-14T20:50:46.913Z",
-      "totalPages": 10
+      "lastSuccessAt": "2026-11-14T23:53:34.057Z",
+      "totalPages": 74,
+      "errorAttempts": 1,
+      "retryAfter": "2026-11-15T05:53:35.041Z",
+      "lastError": "Osirion API HTTP 429 /v1/tournaments/leaderboard",
+      "lastErrorPage": 1,
+      "lastErrorCode": "OSIRION_TRANSIENT"
+    },
+    "epicgames_S43_OnePieceBuggyCup_ZB_BR/S43_OnePieceBuggyCup_ZB_BR": {
+      "nextPage": 1,
+      "complete": false,
+      "proposals": [],
+      "pages": 1,
+      "lastAttemptAt": "2026-11-14T23:53:35.488Z",
+      "emptyAttempts": 0,
+      "rankingOrderValid": true,
+      "lastSeenRank": 100,
+      "lastSuccessAt": "2026-11-14T23:53:35.488Z",
+      "totalPages": 100,
+      "errorAttempts": 1,
+      "retryAfter": "2026-11-15T05:53:36.475Z",
+      "lastError": "Osirion API HTTP 429 /v1/tournaments/leaderboard",
+      "lastErrorPage": 1,
+      "lastErrorCode": "OSIRION_TRANSIENT"
+    },
+    "epicgames_S43_OnePieceBuggyCup_Mobile_BR/S43_OnePieceBuggyCup_Mobile_BR": {
+      "nextPage": 1,
+      "complete": true,
+      "proposals": [
+        {
+          "id": "auto-s43-05a83130a229",
+          "date": "2026-11-14",
+          "region": "BR",
+          "player": "RVL ぐれーぷふぁんぼーい",
+          "playerRaw": "RVL xxx",
+          "event": "One Piece: Buggy Mobile Cup",
+          "round": "単一開催枠 / 参加確認",
+          "rank": 24,
+          "points": 276,
+          "kills": 32,
+          "vrs": 2,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 7,
+          "seasonId": "S43",
+          "chapter": 7,
+          "season": 5,
+          "tournamentId": "ch7s5-one-piece-buggy-mobile-cup",
+          "source": "https://www.fortnite.com/competitive/events/S43_OnePieceBuggyCup_Mobile/?region=BR&round=S43_OnePieceBuggyCup_Mobile_BR",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。"
+        }
+      ],
+      "pages": 1,
+      "lastAttemptAt": "2026-11-14T23:53:36.475Z",
+      "emptyAttempts": 0,
+      "rankingOrderValid": true,
+      "lastSeenRank": 100,
+      "lastSuccessAt": "2026-11-14T23:53:37.589Z",
+      "totalPages": 26
+    },
+    "epicgames_S43_OnePieceBuggyCup_EU/S43_OnePieceBuggyCup_EU": {
+      "nextPage": 0,
+      "complete": false,
+      "proposals": [],
+      "pages": 0,
+      "lastAttemptAt": "2026-11-14T23:53:37.589Z",
+      "errorAttempts": 1,
+      "retryAfter": "2026-11-15T05:53:38.585Z",
+      "lastError": "Osirion API HTTP 429 /v1/tournaments/leaderboard",
+      "lastErrorPage": 0,
+      "lastErrorCode": "OSIRION_TRANSIENT"
     }
   }
 }
