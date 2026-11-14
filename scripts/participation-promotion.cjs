@@ -154,6 +154,7 @@ function plan(context,state=emptyState(),history=emptyHistory(),{now=Date.now(),
     before:{kind:row.kind,round:row.round,prize:row.prize},
     after:{kind:result.record.kind,round:result.record.round,prize:result.record.prize,
       prizePerPlayer:result.record.prizePerPlayer},
+    beforeRow:JSON.parse(JSON.stringify(row)),
     beforeSha256:hash(row),afterSha256:hash(result.record),
     proof:{file:result.file,key:result.key,lastSuccessAt:result.lastSuccessAt,
       ruleSha256:ruleFingerprints[row.tournamentId]},approvedAt:new Date(now).toISOString()});
