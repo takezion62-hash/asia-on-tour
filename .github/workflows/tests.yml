@@ -113,6 +113,8 @@ jobs:
         run: node scripts/apply-s26-s28-me-zb-duos-2023.cjs --dry-run
       - name: 2023/6/19・6/26 ME S25 ZB Duos Victory Cup：10組・2VR賞金・本人Epic UUIDを検証（書込なし）
         run: node scripts/apply-s25-me-zb-duos-2023.cjs --dry-run
+      - name: 2022 OCE・2023 ME・2024 NAC：PlayStation/S25 Duos10件の順位賞金・本人ID・重複検証
+        run: node scripts/apply-ps-cups-2022-2024-nov14.cjs --dry-run
       - name: 2026/11/14 保留の現金賞金：Unger $100・Reoデュオ各$200を独立した証拠で照合
         run: node scripts/publish-nov14-pending-cash.cjs --dry-run
       - name: 2026/11/14 HamiKuma賞品4組：元のTracker順位を保持して重複候補のみ解決
