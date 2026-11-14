@@ -1,0 +1,195 @@
+{
+  "version": 1,
+  "batch": {
+    "id": "tracker-20261114-eu-unreal-me-trios-four",
+    "note": "4 user-supplied screenshots. Two ME 2024-11-08 existing records are prize corrections, not new appearances. Prize is placement-based not victory-based. The listed 2024-10-20 date follows user-facing JST screenshot (ME Tracker event 2024-10-19 UTC).",
+    "entries": [
+      {
+        "id": "s39-eu-1million-unreal-20251221-r919-zazi-tossy",
+        "operation": "add",
+        "screenshot": 1,
+        "date": "2025-12-21",
+        "seasonId": "S39",
+        "chapter": 7,
+        "season": 1,
+        "region": "EU",
+        "tournamentId": "ch7s1-one-million-unreal-cup",
+        "event": "$1 Million Unreal Cup",
+        "round": "Session 1 / 賞金決勝",
+        "kind": "賞金決勝",
+        "rank": 919,
+        "points": 275,
+        "matches": 8,
+        "kills": 13,
+        "vrs": 2,
+        "prize": 200,
+        "prizePerPlayer": 100,
+        "players": [
+          "ZAZI",
+          "Tossy"
+        ],
+        "raw": [
+          "LYNX ZAZI 咲",
+          "zst tossÿ3k."
+        ],
+        "sourceOfficial": "https://www.fortnite.com/competitive/events/S39_1MillionUnrealCup/?region=EU&round=S39_1MillionUnrealCup_EU",
+        "sourceTracker": "https://fortnitetracker.com/events/epicgames_S39_1MillionUnrealCup_EU?window=S39_1MillionUnrealCup_EU",
+        "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/1-million-dollar-unreal-cup-chapter-7-season-1-official-rules",
+        "profiles": [
+          {
+            "name": "ZAZI",
+            "url": "https://fortnitetracker.com/profile/all/LYNX%20ZAZI%20%E5%92%B2/events?id=f08aad62-9bf0-40d6-beb7-8c7aea8e0a1f"
+          },
+          {
+            "name": "Tossy",
+            "url": "https://fortnitetracker.com/profile/all/zst%20toss%C3%BF3k./events?id=ffbecf98-e3cb-4383-9e63-9559064a4a50"
+          }
+        ]
+      },
+      {
+        "id": "auto-s32-5841f054e733",
+        "operation": "correct",
+        "screenshot": 2,
+        "date": "2024-11-08",
+        "seasonId": "S32",
+        "chapter": 5,
+        "season": 5,
+        "region": "ME",
+        "tournamentId": "ch5s5-trios-cash",
+        "event": "Trios Cash Cup",
+        "round": "Event 1 · Round 2 / 賞金決勝",
+        "kind": "賞金決勝",
+        "rank": 16,
+        "points": 109,
+        "matches": 6,
+        "kills": 11,
+        "vrs": 0,
+        "prize": 300,
+        "prizePerPlayer": 100,
+        "players": [
+          "Choco",
+          "こいる",
+          "Jaemon"
+        ],
+        "raw": [
+          "Choco",
+          "こいる",
+          "Jaemon"
+        ],
+        "sourceOfficial": "https://www.fortnite.com/competitive/events/S32_TriosCashCup/?region=ME&round=S32_TriosCashCup_Event1Round2_ME",
+        "sourceTracker": "https://fortnitetracker.com/events/epicgames_S32_TriosCashCup_ME?window=S32_TriosCashCup_Event1Round2_ME",
+        "rule": "https://www.fortnite.com/news/fortnite-trios-cash-cups-chapter-2-remix-official-rules",
+        "profiles": [
+          {
+            "name": "Choco",
+            "url": "https://fortnitetracker.com/profile/all/Choco/events?id=2b094ce4-6d09-4e26-8301-c560f9b1d8c3"
+          },
+          {
+            "name": "こいる",
+            "url": "https://fortnitetracker.com/profile/all/%E3%81%93%E3%81%84%E3%82%8B/events?id=50ca67e7-87cd-415a-b266-92cac0e326c8"
+          },
+          {
+            "name": "Jaemon",
+            "url": "https://fortnitetracker.com/profile/all/Jaemon/events?id=dcc5f4df-088a-4bca-b405-8b9b0fb2f97c"
+          }
+        ]
+      },
+      {
+        "id": "auto-s32-df12a93419a4",
+        "operation": "correct",
+        "screenshot": 3,
+        "date": "2024-11-08",
+        "seasonId": "S32",
+        "chapter": 5,
+        "season": 5,
+        "region": "ME",
+        "tournamentId": "ch5s5-trios-cash",
+        "event": "Trios Cash Cup",
+        "round": "Event 1 · Round 2 / 賞金決勝",
+        "kind": "賞金決勝",
+        "rank": 24,
+        "points": 56,
+        "matches": 6,
+        "kills": 7,
+        "vrs": 0,
+        "prize": 300,
+        "prizePerPlayer": 100,
+        "players": [
+          "Stain",
+          "ぷろぼこ",
+          "ZAZI"
+        ],
+        "raw": [
+          "Stain",
+          "Puroboko",
+          "ZAZI"
+        ],
+        "sourceOfficial": "https://www.fortnite.com/competitive/events/S32_TriosCashCup/?region=ME&round=S32_TriosCashCup_Event1Round2_ME",
+        "sourceTracker": "https://fortnitetracker.com/events/epicgames_S32_TriosCashCup_ME?window=S32_TriosCashCup_Event1Round2_ME",
+        "rule": "https://www.fortnite.com/news/fortnite-trios-cash-cups-chapter-2-remix-official-rules",
+        "profiles": [
+          {
+            "name": "Stain",
+            "url": "https://fortnitetracker.com/profile/all/Stain/events?id=268fddd5-9748-458e-a78b-23ad3bae9ac5"
+          },
+          {
+            "name": "ぷろぼこ",
+            "url": "https://fortnitetracker.com/profile/all/Puroboko/events?id=7992a13b-46a2-4f30-a29b-4b6fa67c99e1"
+          },
+          {
+            "name": "ZAZI",
+            "url": "https://fortnitetracker.com/profile/all/LYNX%20ZAZI%20%E5%92%B2/events?id=f08aad62-9bf0-40d6-beb7-8c7aea8e0a1f"
+          }
+        ]
+      },
+      {
+        "id": "s31-me-trios-cash-20241020-event3-final-r10-stain-puroboko-zazi",
+        "operation": "add",
+        "screenshot": 4,
+        "date": "2024-10-20",
+        "seasonId": "S31",
+        "chapter": 5,
+        "season": 4,
+        "region": "ME",
+        "tournamentId": "ch5s4-trios-cash",
+        "event": "Trios Cash Cup",
+        "round": "Event 3 · Round 2 / 賞金決勝",
+        "kind": "賞金決勝",
+        "rank": 10,
+        "points": 402,
+        "matches": 7,
+        "kills": 23,
+        "vrs": 3,
+        "prize": 300,
+        "prizePerPlayer": 100,
+        "players": [
+          "Stain",
+          "ぷろぼこ",
+          "ZAZI"
+        ],
+        "raw": [
+          "Stain",
+          "Puroboko",
+          "ZAZI"
+        ],
+        "sourceOfficial": "https://www.fortnite.com/competitive/events/S31_TriosCashCup/?region=ME&round=S31_TriosCashCup_Event3Round2_ME",
+        "sourceTracker": "https://fortnitetracker.com/events/epicgames_S31_TriosCashCup_ME?window=S31_TriosCashCup_Event3Round2_ME",
+        "rule": "https://www.fortnite.com/news/fortnite-trios-cash-cups-chapter-5-season-4-official-rules",
+        "profiles": [
+          {
+            "name": "Stain",
+            "url": "https://fortnitetracker.com/profile/all/Stain/events?id=268fddd5-9748-458e-a78b-23ad3bae9ac5"
+          },
+          {
+            "name": "ぷろぼこ",
+            "url": "https://fortnitetracker.com/profile/all/Puroboko/events?id=7992a13b-46a2-4f30-a29b-4b6fa67c99e1"
+          },
+          {
+            "name": "ZAZI",
+            "url": "https://fortnitetracker.com/profile/all/LYNX%20ZAZI%20%E5%92%B2/events?id=f08aad62-9bf0-40d6-beb7-8c7aea8e0a1f"
+          }
+        ]
+      }
+    ]
+  }
+}
