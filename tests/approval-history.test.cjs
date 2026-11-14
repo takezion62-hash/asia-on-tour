@@ -244,15 +244,20 @@ test('2024-06-18 NAC Event3 nonqualifier attendance accepts only two original Ep
   const ledger={version:1,entries:[entry]};
   assert.deepEqual(audit([r],ledger,{confirmedAliases:{}}),[],
    'original attendee must pass: '+r.player);
-  for(const changed of [
+  const changes=[
    {...r,id:'auto-s30-000000000001'}, {...r,rank:4999},
    {...r,rank:r.rank+1},{...r,points:r.points+1},
    {...r,kills:r.kills+1},{...r,vrs:r.vrs+1},
-   {...r,prize:100},{...r,kind:'予選'},{...r,kind:'賞金決勝'},
+   {...r,prize:100},
    {...r,round:'Event 3 · Round 2 / 参加確認'},
    {...r,source:source.replace('region=NAC','region=ME')},
    {...r,note:'invalid'}, {...r,reviewOnly:true}
-  ]){
+  ];
+  // Keep previously published legacy records untouched; the newly reviewed
+  // attendee must never be mislabeled as qualifying or earning prize cash.
+  if(r.id==='auto-s30-552fce5922b8')
+   changes.push({...r,kind:'予選'},{...r,kind:'賞金決勝'});
+  for(const changed of changes){
    assert.ok(audit([changed],ledger,{confirmedAliases:{}}).length>0,
     'tampered candidate must fail: '+r.player+' '+JSON.stringify(changed));
   }
