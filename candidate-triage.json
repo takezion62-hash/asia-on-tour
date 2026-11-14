@@ -1,21 +1,37 @@
 {
   "version": 1,
   "sourceCheckedAt": "2026-11-07T23:16:39.215Z",
-  "total": 2,
+  "total": 4,
   "alreadyResolved": 0,
   "byYear": [
     {
       "name": "2024",
       "count": 2
+    },
+    {
+      "name": "2026",
+      "count": 2
     }
   ],
   "byRegion": [
     {
+      "name": "EU",
+      "count": 1
+    },
+    {
       "name": "NAC",
-      "count": 2
+      "count": 3
     }
   ],
   "byTournament": [
+    {
+      "name": "Arenas Cash Cup / NAC / 2026",
+      "count": 1
+    },
+    {
+      "name": "Reload ZB Duos Cash Cup Zero Build / EU / 2026",
+      "count": 1
+    },
     {
       "name": "Solo Victory Cup Battle Royale / NAC / 2024",
       "count": 2
@@ -28,6 +44,10 @@
     },
     {
       "name": "partial-scan",
+      "count": 2
+    },
+    {
+      "name": "rules-review",
       "count": 1
     }
   ],
@@ -66,6 +86,39 @@
       "rewardState": "cash-unconfirmed"
     },
     {
+      "id": "auto-s43-83ec104c8e6f",
+      "origin": "recent",
+      "date": "2026-11-14",
+      "year": "2026",
+      "region": "EU",
+      "tournamentId": "ch7s5-reload-zero-build-duos-cash-cup",
+      "event": "Reload ZB Duos Cash Cup Zero Build",
+      "round": "Event 1 · Round 2 / 参加確認",
+      "player": "bigsky / Reo",
+      "kind": "参加確認",
+      "rank": 10,
+      "points": 174,
+      "kills": 20,
+      "vrs": 0,
+      "prize": null,
+      "source": "https://www.fortnite.com/competitive/events/S43_ReloadZBDuosCashCup/?region=EU&round=S43_ReloadZBDuosCashCup_Event1Round2_EU",
+      "status": "rules-review",
+      "action": "公式規則・賞金・突破・スキン条件を個別確認",
+      "reason": "S36 Console DuosまたはS43 Reload ZB Duosの登録済みRound1ではありません",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": true,
+        "observedPartial": false,
+        "seenPages": 1,
+        "totalPages": 1,
+        "sourceKey": "epicgames_S43_ReloadZBDuosCashCup_EU/S43_ReloadZBDuosCashCup_Event1Round2_EU",
+        "possibleExistingId": null
+      },
+      "rewardState": "cash-unconfirmed"
+    },
+    {
       "id": "auto-s32-8f74d57250ad",
       "origin": "history",
       "date": "2024-11-26",
@@ -94,6 +147,39 @@
         "seenPages": 6,
         "totalPages": 92,
         "sourceKey": "epicgames_S32_SoloVictoryCashCup_NAC/S32_SoloVictoryCashCup_Event4Round2_NAC",
+        "possibleExistingId": null
+      },
+      "rewardState": "cash-unconfirmed"
+    },
+    {
+      "id": "auto-s43-0f12c7f11ecd",
+      "origin": "recent",
+      "date": "2026-11-11",
+      "year": "2026",
+      "region": "NAC",
+      "tournamentId": "ch7s5-arenas-cash-cup",
+      "event": "Arenas Cash Cup",
+      "round": "Event 1 / 参加確認",
+      "player": "kuro",
+      "kind": "参加確認",
+      "rank": 5965,
+      "points": 30,
+      "kills": 11,
+      "vrs": 1,
+      "prize": null,
+      "source": "https://www.fortnite.com/competitive/events/S43_ArenaCashCup/?region=NAC&round=S43_ArenaCashCup_Event1_NAC",
+      "status": "partial-scan",
+      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
+      "reason": "公式の順位条件を登録していない大会",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": false,
+        "observedPartial": true,
+        "seenPages": 66,
+        "totalPages": 83,
+        "sourceKey": "epicgames_S43_ArenaCashCup_NAC/S43_ArenaCashCup_Event1_NAC",
         "possibleExistingId": null
       },
       "rewardState": "cash-unconfirmed"

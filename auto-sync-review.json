@@ -2,6 +2,68 @@
   "version": 1,
   "status": "review",
   "checkedAt": "2026-11-07T13:02:44.444Z",
-  "proposals": [],
+  "proposals": [
+    {
+      "id": "auto-s43-0f12c7f11ecd",
+      "date": "2026-11-11",
+      "region": "NAC",
+      "player": "kuro",
+      "playerRaw": "dyd kuro",
+      "event": "Arenas Cash Cup",
+      "round": "Event 1 / 参加確認",
+      "rank": 5965,
+      "points": 30,
+      "kills": 11,
+      "vrs": 1,
+      "prize": null,
+      "kind": "参加確認",
+      "matches": 1,
+      "seasonId": "S43",
+      "chapter": 7,
+      "season": 5,
+      "tournamentId": "ch7s5-arenas-cash-cup",
+      "source": "https://www.fortnite.com/competitive/events/S43_ArenaCashCup/?region=NAC&round=S43_ArenaCashCup_Event1_NAC",
+      "verified": true,
+      "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+      "reviewOnly": true,
+      "reviewReason": "公式の順位条件を登録していない大会",
+      "teamAccountIds": [
+        "eb549746e37c4f61ab7baf60c7a9ba66"
+      ]
+    },
+    {
+      "id": "auto-s43-83ec104c8e6f",
+      "date": "2026-11-14",
+      "region": "EU",
+      "player": "bigsky / Reo",
+      "playerRaw": "tzd Ackermanǃ / IGNUM Reo",
+      "event": "Reload ZB Duos Cash Cup Zero Build",
+      "round": "Event 1 · Round 2 / 参加確認",
+      "rank": 10,
+      "points": 174,
+      "kills": 20,
+      "vrs": 0,
+      "prize": null,
+      "kind": "参加確認",
+      "matches": 6,
+      "seasonId": "S43",
+      "chapter": 7,
+      "season": 5,
+      "tournamentId": "ch7s5-reload-zero-build-duos-cash-cup",
+      "source": "https://www.fortnite.com/competitive/events/S43_ReloadZBDuosCashCup/?region=EU&round=S43_ReloadZBDuosCashCup_Event1Round2_EU",
+      "verified": true,
+      "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+      "reviewOnly": true,
+      "reviewReason": "S36 Console DuosまたはS43 Reload ZB Duosの登録済みRound1ではありません",
+      "players": [
+        "bigsky",
+        "Reo"
+      ],
+      "teamAccountIds": [
+        "0d77cc7e6bda47d48183890d973ec508",
+        "25945a39f1564a22aab8ea7808feac98"
+      ]
+    }
+  ],
   "manualReviewedAt": "2026-11-13T23:58:52.780Z"
 }
