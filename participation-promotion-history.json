@@ -1,0 +1,63 @@
+{
+  "version": 1,
+  "entries": [
+    {
+      "id": "auto-s43-83ec104c8e6f",
+      "date": "2026-11-14",
+      "region": "EU",
+      "tournamentId": "ch7s5-reload-zero-build-duos-cash-cup",
+      "player": "bigsky / Reo",
+      "before": {
+        "kind": "参加確認",
+        "round": "Event 1 · Round 2 / 参加確認",
+        "prize": null
+      },
+      "after": {
+        "kind": "賞金決勝",
+        "round": "Event 1 · Round 2 / 賞金決勝",
+        "prize": 0,
+        "prizePerPlayer": 0
+      },
+      "beforeRow": {
+        "id": "auto-s43-83ec104c8e6f",
+        "date": "2026-11-14",
+        "region": "EU",
+        "player": "bigsky / Reo",
+        "playerRaw": "tzd Ackermanǃ / IGNUM Reo",
+        "event": "Reload ZB Duos Cash Cup Zero Build",
+        "round": "Event 1 · Round 2 / 参加確認",
+        "rank": 10,
+        "points": 174,
+        "kills": 20,
+        "vrs": 0,
+        "prize": null,
+        "kind": "参加確認",
+        "matches": 6,
+        "seasonId": "S43",
+        "chapter": 7,
+        "season": 5,
+        "tournamentId": "ch7s5-reload-zero-build-duos-cash-cup",
+        "source": "https://www.fortnite.com/competitive/events/S43_ReloadZBDuosCashCup/?region=EU&round=S43_ReloadZBDuosCashCup_Event1Round2_EU",
+        "verified": true,
+        "note": "管理者がEpic ID・公式大会ウィンドウ・Osirion順位表の参加と数値を再確認。予選突破・賞金・スキン獲得は未確認のため加算しない。出典: https://www.fortnite.com/competitive/events/S43_ReloadZBDuosCashCup/?region=EU&round=S43_ReloadZBDuosCashCup_Event1Round2_EU",
+        "players": [
+          "bigsky",
+          "Reo"
+        ],
+        "teamAccountIds": [
+          "0d77cc7e6bda47d48183890d973ec508",
+          "25945a39f1564a22aab8ea7808feac98"
+        ]
+      },
+      "beforeSha256": "3c2c4c152729cdfa516b4ae77e03927760675b6d095079be1742679849125efa",
+      "afterSha256": "130131429b2d5591bdb659ebd6bdc80cdfc14ec614ed8dfbd48514e32466dd6e",
+      "proof": {
+        "file": "auto-sync-scan.json",
+        "key": "epicgames_S43_ReloadZBDuosCashCup_EU/S43_ReloadZBDuosCashCup_Event1Round2_EU",
+        "lastSuccessAt": "2026-11-14T05:03:54.426Z",
+        "ruleSha256": "21de3070f89297cae18adbe00634a5e3c1f754b12e04489b5817c5ae19b73376"
+      },
+      "approvedAt": "2026-11-14T09:43:36.606Z"
+    }
+  ]
+}

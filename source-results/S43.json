@@ -4308,13 +4308,13 @@
     "player": "bigsky / Reo",
     "playerRaw": "tzd Ackermanǃ / IGNUM Reo",
     "event": "Reload ZB Duos Cash Cup Zero Build",
-    "round": "Event 1 · Round 2 / 参加確認",
+    "round": "Event 1 · Round 2 / 賞金決勝",
     "rank": 10,
     "points": 174,
     "kills": 20,
     "vrs": 0,
-    "prize": null,
-    "kind": "参加確認",
+    "prize": 0,
+    "kind": "賞金決勝",
     "matches": 6,
     "seasonId": "S43",
     "chapter": 7,
@@ -4322,7 +4322,7 @@
     "tournamentId": "ch7s5-reload-zero-build-duos-cash-cup",
     "source": "https://www.fortnite.com/competitive/events/S43_ReloadZBDuosCashCup/?region=EU&round=S43_ReloadZBDuosCashCup_Event1Round2_EU",
     "verified": true,
-    "note": "管理者がEpic ID・公式大会ウィンドウ・Osirion順位表の参加と数値を再確認。予選突破・賞金・スキン獲得は未確認のため加算しない。出典: https://www.fortnite.com/competitive/events/S43_ReloadZBDuosCashCup/?region=EU&round=S43_ReloadZBDuosCashCup_Event1Round2_EU",
+    "note": "S43 Reload ZB Duos Cash Cup EU Event 1 Round 2公式順位表10位。個人賞金$0、デュオ合計$0。賞金圏外のため$0。本人Epic ID2名・全順位表・開催日時・公式規則を照合。受給資格と支払完了は未確認。規則: https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-zero-build-reload-cash-cups-chapter-7-mini-season-official-rules",
     "players": [
       "bigsky",
       "Reo"
@@ -4330,7 +4330,8 @@
     "teamAccountIds": [
       "0d77cc7e6bda47d48183890d973ec508",
       "25945a39f1564a22aab8ea7808feac98"
-    ]
+    ],
+    "prizePerPlayer": 0
   },
   {
     "id": "auto-s43-5d24260ada13",
