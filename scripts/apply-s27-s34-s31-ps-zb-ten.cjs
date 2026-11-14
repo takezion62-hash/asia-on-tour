@@ -132,7 +132,7 @@ for(const t of V.TARGETS){
  '・各選手$'+t.prizePerPlayer+'。公式賞金条件と照合。現金の入金自体は未確認。Tracker: '+
  t.sourceTracker+' Rule: '+t.rule;
  const row={id:t.id,date:t.date,region:t.region,event:t.event,round:t.round,
-  kind:t.prize>0?'賞金決勝':'決勝',
+  kind:'賞金決勝',
   player:t.players.join(' / '),playerRaw:t.playerRaw,players:[...t.players],
   profiles:t.profiles.map(p=>({name:p.name,url:p.url})),
   teamAccountIds:t.profiles.map(p=>p.id.replace(/-/g,'')),
