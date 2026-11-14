@@ -49,7 +49,7 @@ test('Every locked screenshot team/solo has its exact official source and Epic U
    {...row,vrs:t.vrs+1},{...row,prize:t.prize+100},
    {...row,round:'Qualifiers'},{...row,verified:false},
    {...row,profiles:[{...x.profiles[0],url:x.profiles[0].url.replace(t.uuids[0],'ffffffff-ffff-ffff-ffff-ffffffffffff')},...x.profiles.slice(1)]},
-   {...row,source:row.source.replace('OCE','ME').replace('NAC','ME')},
+   {...row,source:row.source+'#tampered'},
    {...row,note:'unverified'}
   ];
   for(const changed of invalid){
