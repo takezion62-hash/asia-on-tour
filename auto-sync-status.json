@@ -1,7 +1,7 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-14T10:29:48.276Z",
+  "checkedAt": "2026-11-14T10:49:56.015Z",
   "mode": "review",
   "scope": "recent",
   "dateMode": null,
@@ -10,19 +10,19 @@
   "toDate": null,
   "provider": "osirion",
   "linkedPlayers": 632,
-  "trackedWindows": 96,
+  "trackedWindows": 108,
   "found": 0,
   "skipped": 0,
-  "imported": 2,
+  "imported": 1,
   "scannedPages": 50,
-  "completedWindows": 73,
+  "completedWindows": 76,
   "identityConflicts": 3,
-  "alreadyRegistered": 249,
-  "autoApprovedTotal": 2614,
+  "alreadyRegistered": 251,
+  "autoApprovedTotal": 2618,
   "invalidCachedCandidates": 0,
   "manualReviewCandidates": 0,
-  "autoApprovedCosmeticThisRun": 2,
-  "autoApprovedCashThisRun": 0,
+  "autoApprovedCosmeticThisRun": 0,
+  "autoApprovedCashThisRun": 1,
   "autoApprovedPerformanceThisRun": 0,
   "autoApprovedUnrealThisRun": 0,
   "timeLimitReached": false,
@@ -30,73 +30,71 @@
   "transientFailures": 0,
   "malformedFailures": 0,
   "skippedLeaderboards": [],
-  "reviewOnlyWindows": 74,
+  "reviewOnlyWindows": 86,
   "reviewOnlyCandidates": 0,
-  "unmappedEvents": 7,
+  "unmappedEvents": 5,
   "unmappedEventIds": [
     "S42_ArenaTestCup",
     "S42_HamiKumaCup_ZB",
     "S42_HamiKumaMobileCup",
     "S42_InoxtagIconCup_ZB",
-    "S42_InoxtagIconMobileCup",
-    "S43_OnePieceBuggyCup_Mobile",
-    "S43_OnePieceBuggyCup_ZB"
+    "S42_InoxtagIconMobileCup"
   ],
-  "message": "Epic公式順位表と開催枠で6件を通常結果へ掲載。残り0件。",
+  "message": "最新版と安全統合：新規掲載1件、重複スキップ0件、要確認の競合0件、確認待ち0件。既存の戦績・賞金は保持。",
   "concurrentMerge": {
-    "appended": 2,
+    "appended": 1,
     "alreadyPublished": 0,
     "reviewConflicts": 0,
     "keptPending": 0,
-    "reconciledAt": "2026-11-14T10:30:05.575Z"
+    "reconciledAt": "2026-11-14T10:50:14.476Z"
   },
   "coverage": {
-    "total": 96,
-    "completed": 73,
-    "notStarted": 13,
-    "partial": 10,
+    "total": 108,
+    "completed": 76,
+    "notStarted": 25,
+    "partial": 7,
     "retryWaiting": 0,
     "retryDue": 0,
-    "remaining": 23,
+    "remaining": 32,
     "retryCount": 0,
-    "completionPercent": 76,
+    "completionPercent": 70.4,
     "byRegion": {
       "ME": {
-        "total": 15,
+        "total": 17,
         "completed": 11,
-        "pending": 4
+        "pending": 6
       },
       "EU": {
-        "total": 19,
-        "completed": 14,
-        "pending": 5
+        "total": 21,
+        "completed": 15,
+        "pending": 6
       },
       "BR": {
-        "total": 15,
+        "total": 17,
         "completed": 12,
-        "pending": 3
-      },
-      "NAC": {
-        "total": 19,
-        "completed": 14,
         "pending": 5
       },
+      "NAC": {
+        "total": 21,
+        "completed": 14,
+        "pending": 7
+      },
       "NAW": {
-        "total": 15,
-        "completed": 13,
-        "pending": 2
+        "total": 17,
+        "completed": 14,
+        "pending": 3
       },
       "OCE": {
-        "total": 13,
-        "completed": 9,
-        "pending": 4
+        "total": 15,
+        "completed": 10,
+        "pending": 5
       }
     },
     "byYear": {
       "2026": {
-        "total": 96,
-        "completed": 73,
-        "pending": 23
+        "total": 108,
+        "completed": 76,
+        "pending": 32
       }
     },
     "outsideScopeCheckpoints": 14,
@@ -107,7 +105,7 @@
         "region": "EU",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 5,
+        "nextPage": 6,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
@@ -118,7 +116,7 @@
         "region": "NAC",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 7,
+        "nextPage": 10,
         "totalPages": 77,
         "retryAfter": null,
         "errorCode": null
@@ -129,7 +127,7 @@
         "region": "BR",
         "series": "icon-cup",
         "status": "partial",
-        "nextPage": 28,
+        "nextPage": 38,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
@@ -140,7 +138,7 @@
         "region": "EU",
         "series": "icon-cup",
         "status": "partial",
-        "nextPage": 14,
+        "nextPage": 24,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
@@ -151,7 +149,7 @@
         "region": "ME",
         "series": "icon-cup",
         "status": "partial",
-        "nextPage": 6,
+        "nextPage": 7,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
@@ -162,7 +160,7 @@
         "region": "NAC",
         "series": "icon-cup",
         "status": "partial",
-        "nextPage": 67,
+        "nextPage": 77,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
@@ -173,41 +171,8 @@
         "region": "NAC",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 89,
-        "totalPages": 100,
-        "retryAfter": null,
-        "errorCode": null
-      },
-      {
-        "window": "epicgames_S43_ArenaCashCup_EU/S43_ArenaCashCup_Event1_EU",
-        "date": "2026-11-11",
-        "region": "EU",
-        "series": "cash-cup",
-        "status": "partial",
         "nextPage": 99,
         "totalPages": 100,
-        "retryAfter": null,
-        "errorCode": null
-      },
-      {
-        "window": "epicgames_S43_OnePieceBuggyCup_NAW/S43_OnePieceBuggyCup_NAW",
-        "date": "2026-11-14",
-        "region": "NAW",
-        "series": "skin-cup",
-        "status": "partial",
-        "nextPage": 1,
-        "totalPages": 100,
-        "retryAfter": null,
-        "errorCode": null
-      },
-      {
-        "window": "epicgames_S43_TriosCashCup_OCE/S43_TriosCashCup_Event2_OCE",
-        "date": "2026-11-14",
-        "region": "OCE",
-        "series": "cash-cup",
-        "status": "partial",
-        "nextPage": 1,
-        "totalPages": 4,
         "retryAfter": null,
         "errorCode": null
       },
@@ -227,6 +192,39 @@
         "date": "2026-10-25",
         "region": "OCE",
         "series": "cash-cup",
+        "status": "notStarted",
+        "nextPage": 0,
+        "totalPages": null,
+        "retryAfter": null,
+        "errorCode": null
+      },
+      {
+        "window": "epicgames_S42_HamiKumaCup_BR/S42_HamiKumaCup_BR",
+        "date": "2026-10-25",
+        "region": "BR",
+        "series": "skin-cup",
+        "status": "notStarted",
+        "nextPage": 0,
+        "totalPages": null,
+        "retryAfter": null,
+        "errorCode": null
+      },
+      {
+        "window": "epicgames_S42_HamiKumaCup_EU/S42_HamiKumaCup_EU",
+        "date": "2026-10-25",
+        "region": "EU",
+        "series": "skin-cup",
+        "status": "notStarted",
+        "nextPage": 0,
+        "totalPages": null,
+        "retryAfter": null,
+        "errorCode": null
+      },
+      {
+        "window": "epicgames_S42_HamiKumaCup_ME/S42_HamiKumaCup_ME",
+        "date": "2026-10-25",
+        "region": "ME",
+        "series": "skin-cup",
         "status": "notStarted",
         "nextPage": 0,
         "totalPages": null,
