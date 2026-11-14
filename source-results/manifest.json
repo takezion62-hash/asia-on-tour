@@ -2,8 +2,8 @@
   "version": 1,
   "role": "generated canonical-source snapshot; results.json remains authoritative in phase 1",
   "canonicalFile": "results.json",
-  "canonicalSha256": "6b03399365cdaa3d4f23811b9527565f1fcf0e8477053a3fc65c040d342a4c19",
-  "count": 7111,
+  "canonicalSha256": "7b2ec7cd04974350c128fb01c9543bd5ade0b91ed54babaadc4b9ab0123f8274",
+  "count": 7118,
   "teamPrizeCents": 7597000,
   "unconfirmedPrizeRecords": 1141,
   "personalPrizeCents": 7577000,
@@ -7118,7 +7118,14 @@
     "auto-s40-874580fbf876",
     "auto-s40-f4ef87500a39",
     "auto-s40-8050f8c0a1c3",
-    "auto-s40-0f1c7be20044"
+    "auto-s40-0f1c7be20044",
+    "auto-s31-418240090347",
+    "auto-s31-927907e8bcc7",
+    "auto-s32-084b803b095c",
+    "auto-s32-9cff9a61ddd8",
+    "auto-s43-5a892be59bf3",
+    "auto-s43-b825159e0d12",
+    "auto-s43-a49c2a33761d"
   ],
   "shards": [
     {
@@ -7187,20 +7194,20 @@
     {
       "seasonId": "S31",
       "file": "source-results/S31.json",
-      "count": 1093,
+      "count": 1095,
       "teamPrizeCents": 1150000,
       "unconfirmedPrizeRecords": 54,
       "personalPrizeCents": 1150000,
-      "sha256": "4c84c53fce8d2b6c8b3b58316422c417182f6eca161fd4ecaa215d0d01df6cae"
+      "sha256": "e8f70715610b33cff19978241308ac5f7eb64d707ac17869f0d53f43629d9cf8"
     },
     {
       "seasonId": "S32",
       "file": "source-results/S32.json",
-      "count": 255,
+      "count": 257,
       "teamPrizeCents": 540000,
       "unconfirmedPrizeRecords": 11,
       "personalPrizeCents": 540000,
-      "sha256": "f75c19ad65f82a095638b3359d0c550c59c06915f910a0a34b33d620de650180"
+      "sha256": "44929dfbe05c087a02e606aa81d2ced0cb557236a5be6ca3ed24ed17151af263"
     },
     {
       "seasonId": "S33",
@@ -7286,11 +7293,11 @@
     {
       "seasonId": "S43",
       "file": "source-results/S43.json",
-      "count": 159,
+      "count": 162,
       "teamPrizeCents": 45000,
       "unconfirmedPrizeRecords": 35,
       "personalPrizeCents": 45000,
-      "sha256": "3f6a9fd3045beff6899263c28f1719ddc2266e82b51f12af6889e8a90814ae49"
+      "sha256": "d24a125a802c5b7ba32fd2b0c5962292588fe36175fb7c32f437b2fae35795db"
     },
     {
       "seasonId": "unknown",
