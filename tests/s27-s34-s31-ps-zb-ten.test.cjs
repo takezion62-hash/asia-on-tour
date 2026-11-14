@@ -46,7 +46,7 @@ test('original Epic UUIDs, placement money, cash-free row and approval policy ca
    prizePerPlayer:t.prizePerPlayer,player:t.players.join(' / '),playerRaw:t.playerRaw,
    players:[...t.players],profiles:t.profiles.map(p=>({name:p.name,url:p.url})),
    teamAccountIds:t.profiles.map(p=>p.id.replace(/-/g,'')),source:t.sourceTracker,
-   verified:true,kind:t.prize>0?'賞金決勝':'決勝',
+   verified:true,kind:'賞金決勝',
    note:'各選手$'+t.prizePerPlayer+' '+t.sourceTracker+' '+t.rule};
   const e={id:t.id,recordId:t.id,policy:V.POLICY,decision:'published',source:t.sourceTracker,rule:t.rule};
   assert.equal(V.verifyRow(row,e),true,t.id);
