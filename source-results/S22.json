@@ -314,5 +314,55 @@
     "profileUrl": "https://fortnitetracker.com/profile/all/KanA/events?id=ce198d52-d8e4-4400-a8a8-44a769eeccb7",
     "teamPrize": 200,
     "prizePerPlayer": 200
+  },
+  {
+    "id": "s22-me-elite-weekly-finals-20221023-kame-zazi",
+    "date": "2022-10-23",
+    "region": "ME",
+    "player": "Kame / ZAZI",
+    "players": [
+      "Kame",
+      "ZAZI"
+    ],
+    "profiles": [
+      {
+        "name": "Kame",
+        "url": "https://fortnitetracker.com/profile/all/Kame%20/events?id=20be8b17-b7eb-4b7d-b2b4-69004da9abaa"
+      },
+      {
+        "name": "ZAZI",
+        "url": "https://fortnitetracker.com/profile/all/ZAZI/events?id=f08aad62-9bf0-40d6-beb7-8c7aea8e0a1f"
+      }
+    ],
+    "teamAccountIds": [
+      "20be8b17b7eb4b7db2b469004da9abaa",
+      "f08aad629bf040d6beb78c7aea8e0a1f"
+    ],
+    "teamPrize": 400,
+    "prizePerPlayer": 200,
+    "playerRaw": "Kame / ZAZI",
+    "event": "Elite Cup Weekly Finals",
+    "round": "Week 4 · Finals / 賞金決勝",
+    "rank": 38,
+    "points": 72,
+    "kills": 8,
+    "vrs": 0,
+    "prize": 400,
+    "kind": "賞金決勝",
+    "matches": 6,
+    "seasonId": "S22",
+    "chapter": 3,
+    "season": 4,
+    "tournamentId": "ch3s4-elite-cup-weekly-finals",
+    "source": "https://fortnitetracker.com/events/epicgames_S22_DivisionalCups_Elite_Finals_ME?window=S22_DivisionalCups_Elite_Finals_ME_Week4_v2",
+    "verified": true,
+    "note": "ユーザー提供Fortnite Tracker画像「スクリーンショット (1794).png」と両選手のEpic IDを照合。2022-10-23 ME Elite Cup Weekly Finals Week 4 · Finals / 賞金決勝：38位・72pt・6試合・8チームキル・0VR。Epic公式賞金規則：チーム$400、各選手$200。順位賞金であり実際の入金は未確認。Tracker: https://fortnitetracker.com/events/epicgames_S22_DivisionalCups_Elite_Finals_ME?window=S22_DivisionalCups_Elite_Finals_ME_Week4_v2 Rule: https://www.fortnite.com/news/fortnite-divisional-play-chapter-3-season-4-official-rules",
+    "trackerStats": {
+      "verified": true,
+      "source": "https://fortnitetracker.com/events/epicgames_S22_DivisionalCups_Elite_Finals_ME?window=S22_DivisionalCups_Elite_Finals_ME_Week4_v2",
+      "avgPlace": 35,
+      "avgTimeAliveSeconds": 635,
+      "kdRatio": 1.33
+    }
   }
 ]

@@ -2,6 +2,83 @@
   "version": 1,
   "entries": [
     {
+      "id": "review-publication-pending-20261114-967d4fbbbef9-verified-rule-1",
+      "date": "2026-11-14",
+      "type": "records",
+      "title": "管理者確認済み戦績 8件を追加",
+      "description": "公式規則に基づく予選突破または決勝0VRのみを確認。未確認賞金なし。",
+      "recordIds": [
+        "auto-s30-3bb1c1fa8448",
+        "auto-s30-d6cc38d6d9e3",
+        "auto-s30-97e35fee4dfa",
+        "auto-s30-956b7fe811e9",
+        "auto-s30-faa9a0d661ed",
+        "auto-s30-57de8c37d9a2",
+        "auto-s30-f1b31b7b0b52",
+        "auto-s30-36fd9cb32ed4"
+      ]
+    },
+    {
+      "id": "review-publication-pending-20261114-967d4fbbbef9-attendance-only-2",
+      "date": "2026-11-14",
+      "type": "records",
+      "title": "管理者確認済み戦績 11件を追加",
+      "description": "Epic ID・開催枠・順位表を再照合した出場確認のみ。賞金・予選突破・スキン獲得を未認定。",
+      "recordIds": [
+        "auto-s33-0638146e7bf6",
+        "auto-s33-f720bf631fe8",
+        "auto-s31-e7f0ebfa5c0f",
+        "auto-s31-44443d345840",
+        "auto-s31-54a701b39126",
+        "auto-s31-b7726de79b55",
+        "auto-s31-68cd540a9962",
+        "auto-s31-44bc1fbdfa9d",
+        "auto-s31-5c50de070a98",
+        "auto-s31-c030831970f2",
+        "auto-s31-d0fea6b93627"
+      ]
+    },
+    {
+      "id": "review-publication-pending-20261114-967d4fbbbef9-attendance-only-1",
+      "date": "2026-11-14",
+      "type": "records",
+      "title": "管理者確認済み戦績 20件を追加",
+      "description": "Epic ID・開催枠・順位表を再照合した出場確認のみ。賞金・予選突破・スキン獲得を未認定。",
+      "recordIds": [
+        "auto-s42-fd42718cf68a",
+        "auto-s30-fafaeb578a90",
+        "auto-s30-c670cae627e9",
+        "auto-s30-06e24fd31fcb",
+        "auto-s33-3e41539a0e5c",
+        "auto-s33-7b49480c956f",
+        "auto-s33-e9c1c3427233",
+        "auto-s33-370069601220",
+        "auto-s33-ea1c573070ec",
+        "auto-s33-e34158164e6e",
+        "auto-s33-663b19052e4b",
+        "auto-s33-fe7a4ae75b7b",
+        "auto-s33-4214020eab47",
+        "auto-s33-8897995f6e62",
+        "auto-s33-3fa66a992bc3",
+        "auto-s33-2508a510f225",
+        "auto-s33-bf01e9301415",
+        "auto-s33-e2916c1e7730",
+        "auto-s33-58a1061f7d0a",
+        "auto-s33-888ad08f6c9a"
+      ]
+    },
+    {
+      "id": "tracker-20261114-kame-me-duos-two",
+      "date": "2026-11-14",
+      "type": "records",
+      "title": "Kame：2022 ME Elite Cupと2024 ME Duos Cash Cup決勝2件を追加",
+      "description": "本人とRyle/ZAZIのEpicアカウントID、Fortnite Trackerの順位・キル・VR・賞金画像、Epic公式地域別賞金表で確認。2022/10/23 38位$400、2024/10/4 40位$200（どちらもチーム賞金・各選手半額）。既存の2022/10/30 Week5記録を保持。合計チーム賞金+$600。実際の受領は未確認。",
+      "recordIds": [
+        "s31-me-duos-cash-final-20241004-kame-ryle",
+        "s22-me-elite-weekly-finals-20221023-kame-zazi"
+      ]
+    },
+    {
       "id": "auto-sync-20261114112520",
       "date": "2026-11-14",
       "type": "records",
