@@ -2430,6 +2430,32 @@
       ]
     },
     {
+      "id": "ch4s3-zero-build-duos-victory-cup",
+      "name": "Zero Build Duos Victory Cup",
+      "chapter": 4,
+      "season": 3,
+      "seasonId": "S25",
+      "sourceEventIds": [
+        "S25_DuosZBVictoryCashCup"
+      ],
+      "series": "victory-cup",
+      "mode": "zero-build",
+      "subtype": "zero-build-duos-victory-cup",
+      "team": "duo",
+      "platform": "cross-platform",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "2023年6月19日（Event1 Round2）と6月26日（Event2 Round2）ME、計10チーム。ユーザー提供Fortnite Tracker決勝画像と両選手Epic UUIDで本人確認。",
+          "url": "https://fortnitetracker.com/events/epicgames_S25_DuosZBVictoryCashCup_ME?window=S25_DuosZBVictoryCashCup_Event1Round2_ME"
+        },
+        {
+          "text": "Epic公式 Chapter 4 Season 3 Victory Cash Cups 規則（ZBデュオ決勝は1VRにつき各選手$100）。",
+          "url": "https://www.fortnite.com/news/victory-cash-cups-chapter-4-season-3-official-rules"
+        }
+      ]
+    },
+    {
       "id": "ch4s3-playstation-cup-zero-build",
       "name": "PlayStation Cup Zero Build",
       "chapter": 4,
