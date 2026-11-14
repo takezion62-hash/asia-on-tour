@@ -544,6 +544,169 @@
       ]
     },
     {
+      "id": "ch7s5-arenas-cash-cup",
+      "seasonId": "S43",
+      "eventIds": [
+        "S43_ArenaCashCup"
+      ],
+      "team": "solo",
+      "series": "cash-cup",
+      "matchCaps": {
+        "単一ラウンド": 12
+      },
+      "sessionMinutes": 120,
+      "rankedEligibility": {
+        "mode": "arenas-boxfights",
+        "minimumRank": "Platinum"
+      },
+      "cashPrizes": {
+        "basis": "per-player",
+        "currency": "USD",
+        "tiers": {
+          "OCE": [
+            {
+              "through": 1,
+              "perPlayer": 300
+            },
+            {
+              "through": 2,
+              "perPlayer": 200
+            },
+            {
+              "through": 3,
+              "perPlayer": 100
+            }
+          ],
+          "ME": [
+            {
+              "through": 1,
+              "perPlayer": 300
+            },
+            {
+              "through": 2,
+              "perPlayer": 200
+            },
+            {
+              "through": 3,
+              "perPlayer": 100
+            }
+          ],
+          "NAW": [
+            {
+              "through": 1,
+              "perPlayer": 500
+            },
+            {
+              "through": 2,
+              "perPlayer": 300
+            },
+            {
+              "through": 3,
+              "perPlayer": 200
+            },
+            {
+              "through": 4,
+              "perPlayer": 150
+            },
+            {
+              "through": 5,
+              "perPlayer": 100
+            }
+          ],
+          "BR": [
+            {
+              "through": 1,
+              "perPlayer": 500
+            },
+            {
+              "through": 2,
+              "perPlayer": 300
+            },
+            {
+              "through": 3,
+              "perPlayer": 200
+            },
+            {
+              "through": 4,
+              "perPlayer": 150
+            },
+            {
+              "through": 5,
+              "perPlayer": 100
+            }
+          ],
+          "EU": [
+            {
+              "through": 1,
+              "perPlayer": 1000
+            },
+            {
+              "through": 2,
+              "perPlayer": 750
+            },
+            {
+              "through": 3,
+              "perPlayer": 500
+            },
+            {
+              "through": 4,
+              "perPlayer": 300
+            },
+            {
+              "through": 6,
+              "perPlayer": 200
+            },
+            {
+              "through": 10,
+              "perPlayer": 100
+            }
+          ],
+          "NAC": [
+            {
+              "through": 1,
+              "perPlayer": 750
+            },
+            {
+              "through": 2,
+              "perPlayer": 500
+            },
+            {
+              "through": 3,
+              "perPlayer": 400
+            },
+            {
+              "through": 4,
+              "perPlayer": 300
+            },
+            {
+              "through": 5,
+              "perPlayer": 200
+            },
+            {
+              "through": 7,
+              "perPlayer": 100
+            }
+          ]
+        }
+      },
+      "autoApproval": "verified-team-rank",
+      "source": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/arenas-cash-cup-chapter-7-mini-season-official-rules",
+      "evidence": [
+        {
+          "text": "Epic公式2026/11/1 Arenas Cash Cup規則2.2.1：Solo・Arenas Boxfights、プラチナ以上、1セッション約2時間、最大12試合。2026/11/10・11/24 Event 1/2。各順位の賞金は個人宛。ゲーム形式は通常BRとは区別。",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/arenas-cash-cup-chapter-7-mini-season-official-rules"
+        },
+        {
+          "text": "Epic公式Attachment C：OCE/ME 1位$300 2位$200 3位$100、NAW/BR 1位$500 2位$300 3位$200 4位$150 5位$100。EU 1位$1000 2位$750 3位$500 4位$300 5～6位$200 7～10位$100。NAC 1位$750 2位$500 3位$400 4位$300 5位$200 6～7位$100。",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/arenas-cash-cup-chapter-7-mini-season-official-rules"
+        },
+        {
+          "text": "ユーザー提供2026/11/14 Fortnite Tracker賞金画面4枚（OCE・ME、NAW・BR、EU、NAC）を公式の全地域個人賞金表と照合。Top #6やTop #10は累積順位上限を示す。",
+          "url": "https://fortnitetracker.com/events/epicgames_S43_ArenaCashCup_EU?window=S43_ArenaCashCup_Event1_EU"
+        }
+      ]
+    },
+    {
       "id": "ch7s5-performance-evaluation-trios",
       "seasonId": "S43",
       "series": "performance-evaluation",
