@@ -248,7 +248,7 @@ test('2024-06-18 NAC Event3 nonqualifier attendance accepts only two original Ep
    {...r,id:'auto-s30-000000000001'}, {...r,rank:4999},
    {...r,rank:r.rank+1},{...r,points:r.points+1},
    {...r,kills:r.kills+1},{...r,vrs:r.vrs+1},
-   {...r,prize:100},{...r,kind:'予選'},
+   {...r,prize:100},{...r,kind:'予選'},{...r,kind:'賞金決勝'},
    {...r,round:'Event 3 · Round 2 / 参加確認'},
    {...r,source:source.replace('region=NAC','region=ME')},
    {...r,note:'invalid'}, {...r,reviewOnly:true}
