@@ -2,8 +2,8 @@
   "version": 1,
   "role": "generated canonical-source snapshot; results.json remains authoritative in phase 1",
   "canonicalFile": "results.json",
-  "canonicalSha256": "899c7a9b841ec810cc778f97bd6defc5403611a34c155df108dfdb56153316fb",
-  "count": 7163,
+  "canonicalSha256": "a14d3d0800cfe258759b4d36551170513f3535ee8759a029c5170c2b990db06f",
+  "count": 7167,
   "teamPrizeCents": 7667000,
   "unconfirmedPrizeRecords": 1172,
   "personalPrizeCents": 7647000,
@@ -7170,7 +7170,11 @@
     "s41-eu-console-zb-solo-vc-final-20260622-demonkurage",
     "s41-me-console-zb-solo-vc-final-20260726-demonkurage",
     "s41-me-console-zb-solo-vc-final-20260726-magurohoppe",
-    "s41-me-console-zb-solo-vc-final-20260726-tarakokuchibiru"
+    "s41-me-console-zb-solo-vc-final-20260726-tarakokuchibiru",
+    "auto-s43-25eb6ca56252",
+    "auto-s43-a2924b34c359",
+    "auto-s43-5e3f91edc998",
+    "auto-s43-4eb7fcf078ba"
   ],
   "shards": [
     {
@@ -7338,11 +7342,11 @@
     {
       "seasonId": "S43",
       "file": "source-results/S43.json",
-      "count": 165,
+      "count": 169,
       "teamPrizeCents": 45000,
       "unconfirmedPrizeRecords": 35,
       "personalPrizeCents": 45000,
-      "sha256": "408a27357f27cab87719656ffd902f9d69781b08d78ca50798fd4ab030a22a58"
+      "sha256": "4399c35c5727ba31f91f87e2656fa63d18c9072d61f01f3d554e4e2187316d97"
     },
     {
       "seasonId": "unknown",
