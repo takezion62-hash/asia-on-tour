@@ -123,3 +123,69 @@ test('prize-free verified Cash Cup team can publish from mature continuous parti
  assert.equal(decide(unpaid,w,{...partial(unpaid),rankingOrderValid:false},db()).approved,false);
  assert.equal(decide(unpaid,w,{...partial(unpaid),lastSeenRank:400},db()).approved,false);
 });
+
+// S43 Reload ZB Duos Round 2: six matches, all six regions, per-player tiers.
+const reloadRule=RULES['ch7s5-reload-zero-build-duos-cash-cup'];
+const reloadEvent='S43_ReloadZBDuosCashCup',reloadNames=['A','B'],reloadIds=['a'.repeat(32),'b'.repeat(32)];
+function reloadWin(region='OCE',event=1){
+ const id=reloadEvent+'_Event'+event+'Round2_'+region;
+ return {key:'epicgames_'+reloadEvent+'_'+region+'/'+id,eventId:reloadEvent,windowId:id,
+  tournamentId:reloadRule.id,seasonId:'S43',region,series:'cash-cup',kind:'参加確認',
+  round:'Event '+event+' · Round 2 / 参加確認',dateJst:'2026-11-13',
+  startUtc:'2026-11-13T07:00:00Z',end:Date.parse('2026-11-13T09:15:00Z')};
+}
+function reloadRow(rank,w=reloadWin()){
+ return {id:'auto-s43-abc123456789',date:w.dateJst,region:w.region,seasonId:'S43',
+  tournamentId:reloadRule.id,event:'Reload ZB Duos Cash Cup Zero Build',
+  round:w.round,kind:'参加確認',player:'A / B',players:reloadNames,
+  teamAccountIds:reloadIds,rank,points:400,kills:10,vrs:0,matches:6,
+  prize:null,reviewOnly:true,verified:true,source:url(w)};
+}
+function reloadDb(w=reloadWin()){
+ return {players:{candidates:reloadNames.map(name=>({name}))},
+  verifiedAccounts:reloadIds.map((epicAccountId,i)=>({epicAccountId,player:reloadNames[i],confirmed:true})),
+  tournaments:{catalog:[{id:reloadRule.id,series:'cash-cup',team:'duo',seasonId:'S43',
+   name:'Reload ZB Duos Cash Cup Zero Build',sourceEventIds:[reloadEvent]}]},
+  schedule:{sessions:[{eventId:reloadEvent,seasonId:'S43',region:w.region,
+   name:'Reload ZB Duos Cash Cup Zero Build',dateJst:w.dateJst,
+   round:'Event 1 · Round 2',stage:'決勝',startUtc:w.startUtc}]},results:[],updates:{entries:[]}};
+}
+test('S43 Reload ZB Duos final cash tiers match official per-player payouts in every overseas region',()=>{
+ assert.equal(reloadRule.autoApproval,'verified-duo-qualifier-only');
+ assert.equal(reloadRule.cashFinalAutoApproval,'verified-duo-round2-rank');
+ for(const region of ['OCE','ME','NAW','BR','EU','NAC']){
+  const w=reloadWin(region),base=reloadDb(w);
+  assert.equal(cashLimitForWindow(w),20);
+  const amounts=['EU','NAC'].includes(region)?[600,450,300,200,150,100,100,100]:[300,250,200,150,100,0,0,0];
+  for(const [i,share] of amounts.entries()){
+   const r=reloadRow(i+1,w),out=decide(r,w,checkpoint(r),base);
+   assert.equal(out.approved,true,region+' rank '+(i+1)+': '+out.reason);
+   assert.equal(out.record.prizePerPlayer,share);
+   assert.equal(out.record.prize,share*2);
+   assert.equal(out.record.round,'Event 1 · Round 2 / 賞金決勝');
+   assert.equal(out.record.teamAccountIds,undefined);
+  }
+  const out=decide(reloadRow(20,w),w,checkpoint(reloadRow(20,w)),base);
+  assert.equal(out.approved,true,out.reason);
+  assert.equal(out.record.prize,0);
+ }
+});
+test('S43 Reload ZB Duos strictly rejects unfinished rankings, forged prizes, unverified IDs and Round 1',()=>{
+ const w=reloadWin(),r=reloadRow(3,w),data=reloadDb(w);
+ const good=checkpoint(r);
+ assert.equal(decide(r,w,good,data).approved,true);
+ assert.equal(decide(r,w,{...good,complete:false},data).approved,false);
+ assert.equal(decide(r,w,{...good,rankingOrderValid:false},data).approved,false);
+ assert.equal(decide({...r,prize:600},w,good,data).approved,false);
+ assert.equal(decide({...r,teamAccountIds:[reloadIds[0],reloadIds[0]]},w,good,data).approved,false);
+ assert.equal(decide(r,w,good,{...data,verifiedAccounts:[]}).approved,false);
+ assert.equal(decide(r,w,good,{...data,schedule:{sessions:[]}}).approved,false);
+ assert.equal(decide({...r,rank:21},w,checkpoint({...r,rank:21}),data).approved,false);
+ assert.equal(decide({...r,matches:7},w,checkpoint({...r,matches:7}),data).approved,false);
+ const w1={...w,windowId:reloadEvent+'_Event1Round1_OCE',round:'Event 1 · Round 1 / 参加確認'};
+ assert.equal(cashLimitForWindow(w1),null);
+ assert.equal(decide(reloadRow(3,w1),w1,checkpoint(reloadRow(3,w1)),data).approved,false);
+ const published=decide(r,w,good,data).record;
+ data.results.push(published);
+ assert.equal(decide(r,w,good,data).approved,false);
+});
