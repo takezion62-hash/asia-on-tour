@@ -35,7 +35,7 @@ test('Separate immutable oracle agrees with screenshots, Epic UUIDs and position
    source:t.sourceOfficial,verified:true,
    note:'Screenshot '+item.screenshot+' Tracker: '+t.sourceTracker+' Rule: '+t.rule+' 各選手$'+t.prizePerPlayer};
   const entry={id:t.id,recordId:t.id,decision:'published',policy:V.POLICY,
-   source:t.sourceTracker,rule:t.rule};
+   source:t.sourceOfficial,rule:t.rule};
   assert.equal(V.verifyCashRow(row,entry),true,t.id);
   assert.deepEqual(audit([row],{version:1,entries:[entry]},{confirmedAliases:{}}),[],t.id);
   const changes=[
