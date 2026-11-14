@@ -3,6 +3,7 @@ on:
   workflow_run:
     workflows:
       - Data and site tests
+      - Rebuild lightweight season data
       - pages build and deployment
     types: [completed]
 permissions:
