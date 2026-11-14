@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-13T23:58:52.780Z",
+  "reviewedAt": "2026-11-14T00:25:10.284Z",
   "entries": [
     {
       "id": "auto-s43-21408f1d31bc",
@@ -21028,6 +21028,17 @@
       "approvedBy": "takezion62-hash",
       "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
       "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event6Round1_NAC",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s30-552fce5922b8",
+      "decision": "published",
+      "recordId": "auto-s30-552fce5922b8",
+      "policy": "verified-rule",
+      "approvedAt": "2026-11-14T00:25:10.284Z",
+      "approvedBy": "takezion62-hash",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event3Round1_NAC",
       "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
     }
   ]
