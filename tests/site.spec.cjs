@@ -3,6 +3,7 @@ const { test, expect } = require('@playwright/test');
 const fs = require('node:fs/promises');
 const path = require('node:path');
 const { loadData, validateData, summarize, roster, personalCents, seasonFor, tournamentFor, tournamentKey } = require('../scripts/data-checks.cjs');
+const { seasonCheckGroups } = require('./season-check-groups.cjs');
 const data = loadData(path.join(__dirname, '..')).data;
 const rows = data.results;
 const money = value => '$' + value.toLocaleString('ja-JP');
@@ -131,19 +132,56 @@ test('大会タグ検索・大会URLをデータから照合する', async ({ pa
   expect((await rendered.evaluateAll(es => es.map(e => e.dataset.tournamentRecord))).sort()).toEqual(expectedIds);
 });
 
-test('全シーズン切り替え時のホーム件数・個人賞金をデータから照合する', async ({ page }) => {
-  test.slow(); // Every published season is validated without repeating catalog navigation.
-  // The global beforeEach already opens the dashboard. Re-clicking its mobile
-  // horizontally scrollable nav button after every select races the async season
-  // transition and makes unrelated catalog tests exceed the whole-test timeout.
-  await expect(page.locator('#page-home')).toBeVisible();
-  for (const season of [...new Set(rows.map(r => seasonFor(r, data))), 'all']) {
-    await page.locator('#season-select').selectOption(season);
-    await expect(page.locator('#season-select')).toHaveValue(season);
-    const expected=summarize(data, season);
-    await expect(page.locator('#stat-results')).toHaveText(String(expected.records));
-    await expect(page.locator('#home-earnings-sum')).toHaveText(money(expected.total));
-  }
+// Check every season (including unknown and all) exactly once, but split
+// the long browser loop into independent short tests to isolate regressions.
+const seasonChecks=seasonCheckGroups(rows.map(row=>seasonFor(row,data)),4);
+seasonChecks.forEach((group,index)=>{
+  test('シーズン切り替え時の件数・個人賞金を照合する ('+(index+1)+'/'+seasonChecks.length+': '+group.join(', ')+')',async ({page},testInfo)=>{
+    // Each group gets its own browser and timeout, without skipping seasons.
+    // The global beforeEach already opens all-seasons dashboard.
+    await expect(page.locator('#page-home')).toBeVisible();
+    const errors=[];
+    page.on('pageerror',error=>errors.push('pageerror: '+error.message));
+    page.on('console',message=>{
+      if(message.type()==='error')errors.push('console: '+message.text());
+    });
+    page.on('requestfailed',request=>{
+      if(request.url().includes('/season-data/'))
+        errors.push('shard request failed: '+request.url()+' '+(request.failure()?.errorText||'unknown'));
+    });
+    for(const season of group){
+      await test.step('シーズン '+season+' — 掲載件数・確認済み個人賞金',async()=>{
+        const expected=summarize(data,season);
+        try{
+          await page.locator('#season-select').selectOption(season);
+          // selectOption only signals input/change; it does not wait for the
+          // async shard load. The site updates the URL after committing it.
+          await expect.poll(()=>new URL(page.url()).searchParams.get('season'),
+            {message:'シーズン '+season+' のURLが更新されない'}).toBe(season);
+          await expect(page.locator('#stat-results'),'シーズン '+season+' の戦績件数')
+            .toHaveText(String(expected.records));
+          await expect(page.locator('#home-earnings-sum'),'シーズン '+season+' の確認済み個人賞金')
+            .toHaveText(money(expected.total));
+          expect(errors,'シーズン '+season+' までに発生したブラウザーエラー').toEqual([]);
+        }catch(error){
+          const read=async selector=>page.locator(selector).first().textContent().catch(()=>null);
+          const diagnostics={
+            season,group:index+1,groupCount:seasonChecks.length,expected,
+            selected:await page.locator('#season-select').inputValue().catch(()=>null),
+            actualResults:await read('#stat-results'),
+            actualPrize:await read('#home-earnings-sum'),
+            url:page.url(),
+            browserErrors:errors.slice(-20),
+            error:String(error?.message||error)
+          };
+          await testInfo.attach('season-'+season+'-failure.json',{
+            body:JSON.stringify(diagnostics,null,2),contentType:'application/json'
+          });
+          throw error;
+        }
+      });
+    }
+  });
 });
 
 test('主要画面で横はみ出しと閲覧者向け編集機能の復活がない', async ({ page }) => {
