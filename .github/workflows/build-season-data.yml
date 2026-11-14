@@ -23,6 +23,9 @@ on:
       - scripts/apply-ps-cups-2022-2024-nov14.cjs
       - scripts/apply-s37-s39-s40-awards7.cjs
       - scripts/verified-s37-s39-s40-awards7.cjs
+      - scripts/apply-s37-s41-oce-five.cjs
+      - scripts/verified-s37-s41-oce-five.cjs
+      - data/manual-approvals/20261114-s37-s41-oce-five-proof.json
       - data/manual-approvals/20261114-s37-s39-s40-awards7-proof.json
       - scripts/verified-ps-cups-2022-2024-nov14.cjs
       - data/manual-approvals/20261114-s22-s25-s31-ps-zb-10-proof.json
@@ -106,6 +109,8 @@ jobs:
             node scripts/apply-ps-cups-2022-2024-nov14.cjs
             node scripts/apply-s37-s39-s40-awards7.cjs --dry-run
             node scripts/apply-s37-s39-s40-awards7.cjs
+            node scripts/apply-s37-s41-oce-five.cjs --dry-run
+            node scripts/apply-s37-s41-oce-five.cjs
             node scripts/publish-nov14-pending-cash.cjs --dry-run
             node scripts/publish-nov14-pending-cash.cjs
             node scripts/reconcile-pending-hamikuma-20261114.cjs --dry-run
