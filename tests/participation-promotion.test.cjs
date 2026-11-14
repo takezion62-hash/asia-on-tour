@@ -154,3 +154,32 @@ test('stable score comparison permits a new admin note but not changed points',(
  x.publicRow.points++;
  assert.equal(sameEvidence(x.publicRow,x.raw),false);
 });
+
+test('legacy attendance-only approval permits ONLY proof-backed in-place S43 Reload ZB final promotion',()=>{
+ const {audit}=require('../scripts/validate-approvals.cjs');
+ const {context,publicRow}=fixture();
+ const result=plan(context,emptyState(),emptyHistory(),{now:NOW,batchSize:5});
+ assert.equal(result.summary.promoted,1);
+ const approved=result.results[0];
+ const entry={version:1,entries:[{id:approved.id,recordId:approved.id,
+   decision:'published',policy:'attendance-only',source:publicRow.source}]};
+ const makeEvidence=(results=result.results,history=result.history)=>({...context,results,history});
+ assert.deepEqual(audit(result.results,entry,{confirmedAliases:{}},
+  {promotionEvidence:makeEvidence()}),[]);
+ for(const [label,mutate] of [
+  ['cash forgery',x=>{x.rows[0].prize=200}],
+  ['rank forgery',x=>{x.rows[0].rank=9}],
+  ['payout forgery',x=>{x.rows[0].prizePerPlayer=100}],
+  ['source forgery',x=>{x.rows[0].source='https://other.example'}],
+  ['proof removed',x=>{x.history.entries=[]}],
+  ['old row forged',x=>{x.history.entries[0].beforeRow.rank=8}],
+  ['wrong window proof',x=>{x.history.entries[0].proof.key='forged'}],
+  ['rule tampered',x=>{x.rules.rules.find(r=>r.id===publicRow.tournamentId).cashPrizes.tiers.EU[0].perPlayer=900}]
+ ]){
+  const x={rows:clone(result.results),history:clone(result.history),rules:clone(context.rules)};
+  mutate(x);
+  const found=audit(x.rows,entry,{confirmedAliases:{}},{
+   promotionEvidence:{...makeEvidence(x.rows,x.history),rules:x.rules}});
+  assert.ok(found.some(s=>s.includes('unsupported confirmed award')),label);
+ }
+});
