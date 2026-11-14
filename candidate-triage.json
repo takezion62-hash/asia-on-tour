@@ -1,7 +1,7 @@
 {
   "version": 1,
   "sourceCheckedAt": "2026-11-07T23:16:39.215Z",
-  "total": 16,
+  "total": 19,
   "alreadyResolved": 0,
   "byYear": [
     {
@@ -11,12 +11,20 @@
     {
       "name": "2025",
       "count": 1
+    },
+    {
+      "name": "2026",
+      "count": 3
     }
   ],
   "byRegion": [
     {
+      "name": "BR",
+      "count": 1
+    },
+    {
       "name": "ME",
-      "count": 3
+      "count": 5
     },
     {
       "name": "NAC",
@@ -28,6 +36,14 @@
     }
   ],
   "byTournament": [
+    {
+      "name": "Arenas Cash Cup / BR / 2026",
+      "count": 1
+    },
+    {
+      "name": "Inoxtag Icon Cup Battle Royale / ME / 2026",
+      "count": 2
+    },
     {
       "name": "PlayStation SypherPK Cup / NAC / 2024",
       "count": 2
@@ -52,11 +68,11 @@
     },
     {
       "name": "partial-scan",
-      "count": 10
+      "count": 12
     },
     {
       "name": "rules-review",
-      "count": 4
+      "count": 5
     }
   ],
   "queue": [
@@ -254,6 +270,39 @@
         "seenPages": 100,
         "totalPages": 100,
         "sourceKey": "epicgames_S33_SoloCashCup_OCE/S33_SoloCashCup_Event4Round1_OCE",
+        "possibleExistingId": null
+      },
+      "rewardState": "cash-unconfirmed"
+    },
+    {
+      "id": "auto-s42-200b8dae6126",
+      "origin": "recent",
+      "date": "2026-10-26",
+      "year": "2026",
+      "region": "BR",
+      "tournamentId": "ch7s4-arenas-cash-cup",
+      "event": "Arenas Cash Cup",
+      "round": "Event 1 / 参加確認",
+      "player": "あいむらま",
+      "kind": "参加確認",
+      "rank": 2597,
+      "points": 16,
+      "kills": 4,
+      "vrs": 0,
+      "prize": null,
+      "source": "https://www.fortnite.com/competitive/events/S42_ArenaCashCup/?region=BR&round=S42_ArenaCashCup_Event1_BR",
+      "status": "rules-review",
+      "action": "公式規則・賞金・突破・スキン条件を個別確認",
+      "reason": "公式の順位条件を登録していない大会",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": true,
+        "observedPartial": false,
+        "seenPages": 31,
+        "totalPages": 31,
+        "sourceKey": "epicgames_S42_ArenaCashCup_BR/S42_ArenaCashCup_Event1_BR",
         "possibleExistingId": null
       },
       "rewardState": "cash-unconfirmed"
@@ -584,6 +633,72 @@
         "seenPages": 10,
         "totalPages": 92,
         "sourceKey": "epicgames_S32_SoloVictoryCashCup_NAC/S32_SoloVictoryCashCup_Event4Round2_NAC",
+        "possibleExistingId": null
+      },
+      "rewardState": "cash-unconfirmed"
+    },
+    {
+      "id": "auto-s42-985d58366051",
+      "origin": "recent",
+      "date": "2026-10-26",
+      "year": "2026",
+      "region": "ME",
+      "tournamentId": "ch7s4-inoxtag-icon-cup-battle-royale",
+      "event": "Inoxtag Icon Cup Battle Royale",
+      "round": "単一開催枠 / 参加確認",
+      "player": "Ascend かな / KAME",
+      "kind": "参加確認",
+      "rank": 457,
+      "points": 309,
+      "kills": 5,
+      "vrs": 0,
+      "prize": null,
+      "source": "https://www.fortnite.com/competitive/events/S42_InoxtagIconCup/?region=ME&round=S42_InoxtagIconCup_ME",
+      "status": "partial-scan",
+      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
+      "reason": "公式の順位条件を登録していない大会",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": false,
+        "observedPartial": true,
+        "seenPages": 5,
+        "totalPages": 100,
+        "sourceKey": "epicgames_S42_InoxtagIconCup_ME/S42_InoxtagIconCup_ME",
+        "possibleExistingId": null
+      },
+      "rewardState": "cash-unconfirmed"
+    },
+    {
+      "id": "auto-s42-c0359f643bec",
+      "origin": "recent",
+      "date": "2026-10-26",
+      "year": "2026",
+      "region": "ME",
+      "tournamentId": "ch7s4-inoxtag-icon-cup-battle-royale",
+      "event": "Inoxtag Icon Cup Battle Royale",
+      "round": "単一開催枠 / 参加確認",
+      "player": "ns tmu / あまひこ",
+      "kind": "参加確認",
+      "rank": 423,
+      "points": 312,
+      "kills": 11,
+      "vrs": 0,
+      "prize": null,
+      "source": "https://www.fortnite.com/competitive/events/S42_InoxtagIconCup/?region=ME&round=S42_InoxtagIconCup_ME",
+      "status": "partial-scan",
+      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
+      "reason": "公式の順位条件を登録していない大会",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": false,
+        "observedPartial": true,
+        "seenPages": 5,
+        "totalPages": 100,
+        "sourceKey": "epicgames_S42_InoxtagIconCup_ME/S42_InoxtagIconCup_ME",
         "possibleExistingId": null
       },
       "rewardState": "cash-unconfirmed"
