@@ -1,24 +1,24 @@
 {
   "version": 1,
   "sourceCheckedAt": "2026-11-07T23:16:39.215Z",
-  "total": 3,
+  "total": 2,
   "alreadyResolved": 0,
   "byYear": [
     {
       "name": "2024",
-      "count": 3
+      "count": 2
     }
   ],
   "byRegion": [
     {
       "name": "NAC",
-      "count": 3
+      "count": 2
     }
   ],
   "byTournament": [
     {
       "name": "Solo Victory Cup Battle Royale / NAC / 2024",
-      "count": 3
+      "count": 2
     }
   ],
   "byStatus": [
@@ -28,7 +28,7 @@
     },
     {
       "name": "partial-scan",
-      "count": 2
+      "count": 1
     }
   ],
   "queue": [
@@ -64,39 +64,6 @@
         "possibleExistingId": null
       },
       "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s30-552fce5922b8",
-      "origin": "history",
-      "date": "2024-06-18",
-      "year": "2024",
-      "region": "NAC",
-      "tournamentId": "ch5s3-solo-victory-cup",
-      "event": "Solo Victory Cup Battle Royale",
-      "round": "Event 3 · Round 1 / 予選",
-      "player": "むーこにっく",
-      "kind": "予選",
-      "rank": 8150,
-      "points": 109,
-      "kills": 17,
-      "vrs": 1,
-      "prize": 0,
-      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event3Round1_NAC",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "順位表の取得が完了していません",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 91,
-        "totalPages": 100,
-        "sourceKey": "epicgames_S30_SoloVictoryCashCup_NAC/S30_SoloVictoryCashCup_Event3Round1_NAC",
-        "possibleExistingId": null
-      },
-      "rewardState": "source-amount-present-not-verified-by-triage"
     },
     {
       "id": "auto-s32-8f74d57250ad",
