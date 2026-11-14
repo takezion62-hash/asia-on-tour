@@ -1,6 +1,7 @@
 'use strict';
 const test=require('node:test'),assert=require('node:assert/strict');
 const {decide,evaluate}=require('../scripts/verified-history-approval.cjs');
+const {applyProposals}=require('../scripts/auto-sync-core.cjs');
 const w={key:'epicgames_S41_ReloadReloadSoloVictoryCup_ME/S41_ReloadSoloVictoryCup_Round1_Day1_ME',eventId:'S41_ReloadReloadSoloVictoryCup',windowId:'S41_ReloadSoloVictoryCup_Round1_Day1_ME',region:'ME',dateJst:'2026-08-01',seasonId:'S41',tournamentId:'ch7s3-solo-reload-victory-cup',kind:'予選',round:'Day 1 · Round 1 / 予選'};
 const catalog={id:w.tournamentId,name:'Solo Reload Victory Cup',sourceEventIds:[w.eventId],series:'victory-cup',seasonId:'S41',team:'solo'};
 const source=(win)=>'https://www.fortnite.com/competitive/events/'+win.eventId+'/?region='+win.region+'&round='+win.windowId;
@@ -236,6 +237,13 @@ test('S42 Solo Reload verified Round 1 non-qualifiers are attendance-only, never
  assert.equal(out.record.round,'Event 5 · Round 1 / 参加確認');
  assert.equal(out.record.prize,0);
  assert.match(out.record.note,/突破圏外/);
+ const checked=evaluate([row0],[win],{[win.key]:cp},data);
+ assert.equal(checked.approved.length,1);
+ const published={results:[],updates:{entries:[]}};
+ const verifiedParticipationIds=new Set(checked.approved.filter(x=>x.kind==='参加確認'&&x.reviewOnly!==true&&x.verified===true&&x.prize===0).map(x=>x.id));
+ assert.equal(applyProposals(published,checked.approved,'2026-11-14T06:00:00Z',{verifiedParticipationIds}),1);
+ assert.equal(published.results[0].kind,'参加確認');
+ assert.equal(published.results[0].prize,0);
  const advanced={...row0,rank:320};
  const good=decide(advanced,win,{...cp,proposals:[advanced]},data);
  assert.equal(good.approved,true,good.reason);

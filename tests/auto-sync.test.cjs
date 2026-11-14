@@ -38,3 +38,20 @@ test('official historical S42 match limits reject inconsistent rows',()=>{
  const invalidFinal=prepare({entries:[entry(a,{eventId:win.eventId,windowId:win.windowId,matches:4})]},config,data);
  assert.equal(invalidFinal.proposals.length,0);
 });
+
+// The generic publisher must reject attendance unless the strict, independent
+// historical rule verifier explicitly grants the exact ID.
+test('participation needs a verified rule grant and always pays $0',()=>{
+ const {data,config}=setup();
+ const normal=prepare({entries:[entry(a)]},config,data).proposals[0];
+ const attendance={...normal,kind:'参加確認',round:'Event 1 · Round 1 / 参加確認',prize:0};
+ const grant={verifiedParticipationIds:new Set([attendance.id])};
+ assert.throws(()=>applyProposals(data,[attendance],'2026-11-14T06:00:00Z'),/未検証大会/);
+ assert.throws(()=>applyProposals(data,[{...attendance,reviewOnly:true}],'2026-11-14T06:00:00Z',grant),/未検証大会/);
+ assert.throws(()=>applyProposals(data,[{...attendance,prize:100}],'2026-11-14T06:00:00Z',grant),/未検証大会/);
+ assert.throws(()=>applyProposals(data,[{...attendance,verified:false}],'2026-11-14T06:00:00Z',grant),/未検証大会/);
+ assert.equal(data.results.length,0);
+ assert.equal(applyProposals(data,[attendance],'2026-11-14T06:00:00Z',grant),1);
+ assert.equal(data.results[0].kind,'参加確認');
+ assert.equal(data.results[0].prize,0);
+});

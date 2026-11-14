@@ -78,9 +78,13 @@ function prepare(feed,config,data){
   }
   return {proposals,skipped,linkedPlayers:accounts.size,windows:windows.size};
 }
-function applyProposals(data,proposals,timestamp){
+function applyProposals(data,proposals,timestamp,{verifiedParticipationIds=new Set()}={}){
   if(!proposals.length)return 0;
-  if(proposals.some(x=>x.reviewOnly===true||x.kind==='参加確認'))throw Error('未検証大会の候補は公開登録できません');
+  // Participation needs a separate, rule-verified grant from the historical
+  // Victory Cup evaluator. Ordinary review-only candidates remain blocked.
+  if(proposals.some(x=>x.reviewOnly===true||
+    (x.kind==='参加確認'&&!(verifiedParticipationIds.has(x.id)&&x.verified===true&&x.prize===0))))
+    throw Error('未検証大会の候補は公開登録できません');
   const ids=new Set(data.results.map(x=>x.id));
   if(proposals.some(x=>ids.has(x.id)))throw Error('コミット前の重複');
   data.results.push(...proposals);
