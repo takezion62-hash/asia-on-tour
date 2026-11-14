@@ -125,6 +125,8 @@ jobs:
         run: node scripts/apply-kame-me-duos-two.cjs --dry-run
       - name: S41 Console ZB賞金4件とS42 OCE重複3件の厳密な本人・賞金・統合テスト
         run: node scripts/apply-s41-console-zb-oce-reconcile.cjs --dry-run
+      - name: 2024 ME Boter FNCS7組・ME Duos Cash1組と2025 NAW Squads1組の本人・賞金・重複テスト
+        run: node scripts/apply-boter-s31-s38-nine.cjs --dry-run
       - name: 2026/11/14 保留の現金賞金：Unger $100・Reoデュオ各$200を独立した証拠で照合
         run: node scripts/publish-nov14-pending-cash.cjs --dry-run
       - name: 2026/11/14 HamiKuma賞品4組：元のTracker順位を保持して重複候補のみ解決
