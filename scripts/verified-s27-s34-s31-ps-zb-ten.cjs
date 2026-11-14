@@ -165,7 +165,7 @@ const TARGETS=[
     "season": 2,
     "tournamentId": "ch6s2-playstation-cup",
     "event": "PlayStation Cup",
-    "round": "Final / 賞金なし",
+    "round": "Final / 賞金決勝",
     "eventId": "S34_PlaystationCup",
     "windowId": "S34_PlaystationCupFinal_NAW",
     "rank": 64,
@@ -398,7 +398,7 @@ function verifyRow(r,e){
  payout(t)!==t.prize||t.prize!==t.prizePerPlayer*t.players.length)return false;
  for(const k of ['id','date','region','seasonId','chapter','season','tournamentId','event','round','rank','points','matches','kills','vrs','prize','prizePerPlayer'])
   if(r[k]!==t[k])return false;
- if(r.kind!==(t.prize>0?'賞金決勝':'決勝')||r.source!==t.sourceTracker||r.teamPrize!==t.prize||
+ if(r.kind!=='賞金決勝'||r.source!==t.sourceTracker||r.teamPrize!==t.prize||
  r.verified!==true||r.reviewOnly===true||r.player!==t.players.join(' / ')||
  r.playerRaw!==t.playerRaw||JSON.stringify(r.players)!==JSON.stringify(t.players))return false;
  if(!Array.isArray(r.profiles)||r.profiles.length!==t.profiles.length||
