@@ -78,7 +78,7 @@ function fingerprint(row,rule,hits,slot,accounts){
   accounts:accounts.filter(a=>row.teamAccountIds?.includes(a.epicAccountId))});
 }
 function inspect(row,context,hits,slot,now){
- if(row.kind!=='参加確認'||row.prize!==null||row.verified!==true||
+ if(row.kind!=='参加確認'||row.prize!==null||row.verified!==true||row.reviewOnly===true||
   !/^auto-s43-[a-f0-9]{12}$/.test(row.id||''))return {reason:'公開済み参加確認の形式が不正'};
  if(!hits.length)return {reason:'保存済みの同一公式順位表がありません'};
  if(hits.some(h=>!sameEvidence(row,h.original)))return {reason:'保存済み順位表と公開済み成績が一致しません'};
@@ -99,7 +99,9 @@ function inspect(row,context,hits,slot,now){
   schedule:context.schedule,verifiedAccounts:context.verifiedAccounts
  },now);
  if(!decision.approved)return {reason:decision.reason||'大会固有の自動承認に失敗'};
- const proposed=decision.record;
+ // Preserve any existing, separately verified profile/identity metadata.
+ // The award adapter may only amend stage, cash and the explanatory note.
+ const proposed={...row,...decision.record};
  if(proposed.id!==row.id||!sameEvidence({...proposed,kind:row.kind,round:row.round,prize:row.prize,
    teamAccountIds:row.teamAccountIds},row)||
   !['賞金決勝'].includes(proposed.kind)||!Number.isFinite(proposed.prize)||
@@ -130,8 +132,8 @@ function plan(context,state=emptyState(),history=emptyHistory(),{now=Date.now(),
   const identity=sourceWindow(row);
   const slot=identity?officialSlot(row,identity,context.schedule):null;
   const signature=fingerprint(row,rule,hits,slot,context.verifiedAccounts||[]);
-  if(checked[row.id]?.signature===signature&&!checked[row.id].timePending)continue;
   if(historyIds.has(row.id))throw Error('PROMOTION previously upgraded ID is still participation: '+row.id);
+  if(checked[row.id]?.signature===signature&&!checked[row.id].timePending)continue;
   considered.push({row,hits,slot,signature});
  }
  // Earlier date and stable ID first; no giant leaderboard rescans or unbounded work.
