@@ -2,10 +2,10 @@
   "version": 1,
   "role": "generated canonical-source snapshot; results.json remains authoritative in phase 1",
   "canonicalFile": "results.json",
-  "canonicalSha256": "7cf5f37cf81e4caff7a2d1ba430fb4b1242ed254f13874214399c7b111c5539b",
-  "count": 7064,
+  "canonicalSha256": "2b016594f92abbab776a931458b35cf8bb9f4beeabfd81420842da8df12f5a44",
+  "count": 7079,
   "teamPrizeCents": 7597000,
-  "unconfirmedPrizeRecords": 1111,
+  "unconfirmedPrizeRecords": 1120,
   "personalPrizeCents": 7577000,
   "recordOrder": [
     "s42-me-slenderman-reload-skin-20261021-acris-chacha",
@@ -7071,7 +7071,22 @@
     "auto-s42-52a95e916383",
     "auto-s42-6daae6759758",
     "auto-s43-cbcddd7e8813",
-    "auto-s43-fe6a68ae19da"
+    "auto-s43-fe6a68ae19da",
+    "auto-s30-ab726da74226",
+    "auto-s30-75cff7cb45b0",
+    "auto-s30-98e40dd25dd9",
+    "auto-s30-4300316a2160",
+    "auto-s30-0d727114297e",
+    "auto-s30-7a937b9c6140",
+    "auto-s30-bd575d425a7f",
+    "auto-s30-0646e7948cda",
+    "auto-s33-f301463cf60f",
+    "auto-s33-53c99883f64d",
+    "auto-s33-c67f1587c11d",
+    "auto-s33-f2b0bdce7333",
+    "auto-s33-002a5255c555",
+    "auto-s33-522883089ef3",
+    "auto-s33-6667ddbcf545"
   ],
   "shards": [
     {
@@ -7131,11 +7146,11 @@
     {
       "seasonId": "S30",
       "file": "source-results/S30.json",
-      "count": 1894,
+      "count": 1902,
       "teamPrizeCents": 1450000,
-      "unconfirmedPrizeRecords": 132,
+      "unconfirmedPrizeRecords": 134,
       "personalPrizeCents": 1450000,
-      "sha256": "9f56e66e2272c2470a31091c4794070a12cc0e04ec3f786a42a10c0f7806d584"
+      "sha256": "cd7aba1e85ea2a0e04b64bd78572baa7f11f4792e254c0e3c4c3383c3f6d34d0"
     },
     {
       "seasonId": "S31",
@@ -7158,11 +7173,11 @@
     {
       "seasonId": "S33",
       "file": "source-results/S33.json",
-      "count": 242,
+      "count": 249,
       "teamPrizeCents": 72000,
-      "unconfirmedPrizeRecords": 125,
+      "unconfirmedPrizeRecords": 132,
       "personalPrizeCents": 72000,
-      "sha256": "631aace80cb57d1e22a0ba586b82e2e6be8242152621634555c9f7d2e9215783"
+      "sha256": "e5ddca9075145b3de1ba9ee2385ff4a7784306202e48d0629ab2cc964fc199e1"
     },
     {
       "seasonId": "S35",
