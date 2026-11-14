@@ -36,6 +36,7 @@ function fixture(){
 }
 test('S43 EU 10th place upgrades the SAME published ID to official $0 final',()=>{
  const {context,publicRow}=fixture();
+ publicRow.profiles=[{name:'Reo',url:'https://fortnitetracker.com/profile/all/Reo/events?id=25945a39-f156-4a22-aab8-ea7808feac98'}];
  const res=plan(context,emptyState(),emptyHistory(),{now:NOW,batchSize:5});
  assert.deepEqual(res.summary.changedRules,['ch7s5-reload-zero-build-duos-cash-cup']);
  assert.equal(res.summary.promoted,1);
@@ -49,6 +50,8 @@ test('S43 EU 10th place upgrades the SAME published ID to official $0 final',()=
  assert.equal(final.round,'Event 1 · Round 2 / 賞金決勝');
  assert.equal(final.prize,0);
  assert.equal(final.prizePerPlayer,0);
+ assert.deepEqual(final.profiles,publicRow.profiles);
+ assert.deepEqual(final.teamAccountIds,publicRow.teamAccountIds);
  assert.match(final.note,/公式順位表10位/);
  assert.equal(res.history.entries[0].id,publicRow.id);
  assert.equal(res.history.entries[0].before.prize,null);
@@ -61,6 +64,7 @@ test('S43 EU 10th place upgrades the SAME published ID to official $0 final',()=
 test('mutated published score, wrong Epic ID, and unconfirmed roster are held',()=>{
  for(const [name,mutate] of [
   ['changed score',x=>{x.context.results[0].rank=9}],
+  ['published reviewOnly',x=>{x.context.results[0].reviewOnly=true}],
   ['changed Epic ID',x=>{x.context.results[0].teamAccountIds[0]='a'.repeat(32)}],
   ['unknown account',x=>{x.context.verifiedAccounts=[]}],
   ['non unique roster',x=>{x.context.results[0].players=['Reo','Reo']}]
