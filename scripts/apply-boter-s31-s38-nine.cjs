@@ -66,7 +66,7 @@ for(const t of V.TARGETS){
   fail(names.has(p.name)&&owners.get(p.name)===p.name&&p.name===t.players[i]&&
    V.uuid(p.url)===p.id,'unverified original Epic ID for '+t.id+' '+p.name);
   const trackerAlias=p.raw;
-  fail(owners.get(trackerAlias)===p.name||trackerAlias===p.name,
+  fail(owners.get(trackerAlias)===p.name||trackerAlias.trim()===p.name,
    'Tracker display name/alias belongs to a different player '+p.name+' '+trackerAlias);
   for(const r of results){
    for(const rp of r.profiles||[]){
