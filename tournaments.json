@@ -1076,6 +1076,32 @@
       ]
     },
     {
+      "id": "ch5s4-playstation-sypherpk-cup",
+      "name": "PlayStation SypherPK Cup",
+      "chapter": 5,
+      "season": 4,
+      "seasonId": "S31",
+      "sourceEventIds": [
+        "S31_PlaystationSypherPKCup"
+      ],
+      "series": "playstation-cup",
+      "mode": "battle-royale",
+      "subtype": "playstation-sypherpk-cup",
+      "team": "solo",
+      "platform": "playstation",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "2024年9月2日NAC PlayStation SypherPK Cup決勝、p1ng69位$300・Aim89位$200（提供画像2・3枚目）、Epic IDを確認。",
+          "url": "https://fortnitetracker.com/events/epicgames_S31_PlaystationSypherPKCup_NAC?window=S31_PlaystationSypherPKCup_Final_NAC"
+        },
+        {
+          "text": "Epic公式Chapter 5 Season 4 PlayStation SypherPK Cup賞金、NA 61〜75位$300・76〜100位$200。",
+          "url": "https://www.fortnite.com/news/playstation-sypherpk-cup-chapter-5-season-4-official-rules"
+        }
+      ]
+    },
+    {
       "id": "ch5s4-solo-victory-cup",
       "name": "Solo Victory Cup Battle Royale",
       "chapter": 5,
@@ -2538,6 +2564,32 @@
         {
           "text": "2022/6/30 JST ME Event1 Round2：Aim 6位・10キル・1VR・賞金$200、ITACHI 55位、raru 71位、Ehre そーだむ99位（後3名賞金なし）。ユーザー提供Tracker画像で確認。",
           "url": "https://fortnitetracker.com/events/epicgames_S21_SoloCashCup_ME?window=S21_SoloCashCup_ME_Event1_Round2"
+        }
+      ]
+    },
+    {
+      "id": "ch3s4-playstation-cup-september",
+      "name": "PlayStation Cup",
+      "chapter": 3,
+      "season": 4,
+      "seasonId": "S22",
+      "sourceEventIds": [
+        "S22_PlaystationCupSep"
+      ],
+      "series": "playstation-cup",
+      "mode": "battle-royale",
+      "subtype": "playstation-cup",
+      "team": "solo",
+      "platform": "playstation",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "2022年9月25日OCE PlayStation Cup決勝、提供画像4〜10枚で7名の順位・得点・キル・VR・各賞金とEpic IDを確認。",
+          "url": "https://fortnitetracker.com/events/epicgames_S22_PlaystationCupSep_OCE?window=S22_PlaystationCupSep_OCE_Final"
+        },
+        {
+          "text": "Epic公式Chapter 3 Season 4 PlayStation Cup規則、OCE賞金9位$450／11〜90位$200。",
+          "url": "https://www.fortnite.com/news/fortnite-playstation-cup-chapter-3-season-4-official-rules-september-2022"
         }
       ]
     },
