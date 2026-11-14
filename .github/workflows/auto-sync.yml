@@ -13,6 +13,7 @@ on:
       - "scripts/auto-sync-core.cjs"
       - "scripts/automatic-cosmetic-approval.cjs"
       - "scripts/automatic-cash-approval.cjs"
+      - "scripts/participation-promotion.cjs"
       - "scripts/automatic-unreal-approval.cjs"
       - "scripts/automatic-performance-approval.cjs"
       - "tournament-rules.json"
@@ -115,4 +116,51 @@ jobs:
             sleep $((attempt * 3))
           done
           echo "SAFE_RECENT_MERGE failed after 5 conflict-safe attempts"
+          exit 1
+
+      - name: Safely promote saved verified attendance in a bounded batch
+        env:
+          AOT_PROMOTION_BATCH_SIZE: 5
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # This is a local checkpoint replay, not a second provider search.
+          # Refresh main each attempt to avoid overwriting the latest canonical
+          # records written by historical approval or manual review.
+          for attempt in 1 2 3 4 5; do
+            echo "PROMOTION_ATTEMPT $attempt/5"
+            git fetch origin main
+            git reset --hard origin/main
+            node scripts/source-results-store.cjs verify
+            node scripts/participation-promotion.cjs --dry-run
+            node scripts/participation-promotion.cjs
+            npm run validate
+            node --test tests/participation-promotion.test.cjs tests/automatic-cash-approval.test.cjs
+            # Writes only altered season/result shard files and affected
+            # aggregate rankings; no worldwide provider or historic rescan.
+            node scripts/build-season-data.cjs
+            node scripts/build-candidate-triage.cjs
+            git add -A -- source-results/ season-data/
+            git add -- candidate-triage.json
+            if [ -f participation-promotion-state.json ]; then
+              git add -- participation-promotion-state.json
+            fi
+            if [ -f participation-promotion-history.json ]; then
+              git add -- participation-promotion-history.json
+            fi
+            if git diff --cached --quiet; then
+              echo "PROMOTION_NO_CHANGES unchanged official rule and stored proof"
+              exit 0
+            fi
+            git commit -m "data: reverify attendance in place with official proof and preserved IDs"
+            if git push origin HEAD:main; then
+              echo "PROMOTION_PUBLISHED changes published safely on main"
+              exit 0
+            fi
+            echo "PROMOTION_RETRY main moved; re-evaluate canonical data"
+            sleep $((attempt * 3))
+          done
+          echo "::error::PROMOTION failed to publish after five safe retries"
           exit 1
