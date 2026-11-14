@@ -2,11 +2,11 @@
   "version": 1,
   "role": "generated canonical-source snapshot; results.json remains authoritative in phase 1",
   "canonicalFile": "results.json",
-  "canonicalSha256": "a14d3d0800cfe258759b4d36551170513f3535ee8759a029c5170c2b990db06f",
-  "count": 7167,
-  "teamPrizeCents": 7667000,
+  "canonicalSha256": "f6f9d17fe18a904b685b20c2bc374205677843d7735f8e5427cd3ffb8723f04a",
+  "count": 7176,
+  "teamPrizeCents": 7867000,
   "unconfirmedPrizeRecords": 1172,
-  "personalPrizeCents": 7647000,
+  "personalPrizeCents": 7847000,
   "recordOrder": [
     "s42-me-slenderman-reload-skin-20261021-acris-chacha",
     "s42-me-slenderman-reload-skin-20261021-karf-alpha",
@@ -7174,7 +7174,16 @@
     "auto-s43-25eb6ca56252",
     "auto-s43-a2924b34c359",
     "auto-s43-5e3f91edc998",
-    "auto-s43-4eb7fcf078ba"
+    "auto-s43-4eb7fcf078ba",
+    "s38-naw-squads-vc-final-20251110-aster-pegu-miyaguraru-rintaro",
+    "s31-me-duos-cash-20240913-stain-puroboko",
+    "s31-me-boter-fncs-final-20240907-kuya-rintaro",
+    "s31-me-boter-fncs-final-20240907-stain-puroboko",
+    "s31-me-boter-fncs-final-20240907-minipiyo-zerokun",
+    "s31-me-boter-fncs-final-20240907-ria-noa",
+    "s31-me-boter-fncs-final-20240907-babucchi-goat",
+    "s31-me-boter-fncs-final-20240907-meip-yama",
+    "s31-me-boter-fncs-final-20240907-sutea-teddy"
   ],
   "shards": [
     {
@@ -7243,11 +7252,11 @@
     {
       "seasonId": "S31",
       "file": "source-results/S31.json",
-      "count": 1105,
-      "teamPrizeCents": 1170000,
+      "count": 1113,
+      "teamPrizeCents": 1330000,
       "unconfirmedPrizeRecords": 63,
-      "personalPrizeCents": 1170000,
-      "sha256": "2235b3d417a57afdf0b824e46ed70e17d604f40d38737fac10baad3dbe309fa4"
+      "personalPrizeCents": 1330000,
+      "sha256": "ccd195b3d1f881a8a5ead2a38adcbda330328c17cfaebe0d85ec5c511bcb8834"
     },
     {
       "seasonId": "S32",
@@ -7297,11 +7306,11 @@
     {
       "seasonId": "S38",
       "file": "source-results/S38.json",
-      "count": 9,
-      "teamPrizeCents": 170000,
+      "count": 10,
+      "teamPrizeCents": 210000,
       "unconfirmedPrizeRecords": 0,
-      "personalPrizeCents": 150000,
-      "sha256": "4a08d5fb53f1ae2427fa0183553d5529247db5a2bd6e7c7e906925cdf4218fa6"
+      "personalPrizeCents": 190000,
+      "sha256": "99e4c47d3b4dce04e0d74946209c669ca5a7b57e70ea3c649eeac371aad14a76"
     },
     {
       "seasonId": "S39",
