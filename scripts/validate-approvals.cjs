@@ -3,7 +3,7 @@ const {readResults}=require('./source-results-store.cjs');
 // Checks that previously manually approved rows remain present and safe after
 // later scheduled syncs or PR rebases. Does not claim to verify Epic's facts.
 const fs=require('node:fs'),path=require('node:path');
-const {collision}=require('./manual-approval-core.cjs');
+const {collision,collisionKey}=require('./manual-approval-core.cjs');
 const {evaluate:cosmeticEvaluate}=require('./cosmetic-rank-rules.cjs');
 const {RULES}=require('./verified-history-approval.cjs');
 const {verifyCashRow:verifiedJune7DuosCash, POLICY:S30_DUOS_CASH_POLICY}=require('./verified-s30-duos-cash-20240607.cjs');
@@ -300,11 +300,26 @@ function audit(results,ledger,players,{promotionEvidence}={}){
 
  const errors=[];
  if(ledger?.version!==1||!Array.isArray(ledger.entries))return ['approval-history.json is invalid'];
+ // Index the current snapshot once; all historical approval rules below stay
+ // unchanged. collisionKey is a *necessary* (not sufficient) condition for
+ // collision(), so every candidate still gets the original full check.
+ // Keep the source order to preserve the first four diagnostic IDs.
+ const rowsById=new Map(),overlapByKey=new Map();
+ const aliases=players?.confirmedAliases;
+ for(const row of results){
+  const idMatches=rowsById.get(row.id)||[];
+  idMatches.push(row);
+  rowsById.set(row.id,idMatches);
+  const key=collisionKey(row,aliases);
+  const overlaps=overlapByKey.get(key)||[];
+  overlaps.push(row);
+  overlapByKey.set(key,overlaps);
+ }
  const ids=new Set();
  for(const entry of ledger.entries){
   if(!entry||typeof entry.id!=='string'||ids.has(entry.id)){errors.push('Invalid or repeated approval history ID');continue}
   ids.add(entry.id);
-  const rows=results.filter(r=>r.id===entry.recordId);
+  const rows=rowsById.get(entry.recordId)||[];
   if(rows.length!==1){errors.push('Published record missing or duplicate: '+entry.id);continue}
   const r=rows[0];
   if(entry.decision!=='published'||!['attendance-only','verified-rule','cosmetic-rank','verified-vr','official-final-vr-award','verified-qualifier','verified-s32-final-100usd-vr','verified-trios-qualifier-participation-zero-cash',S30_DUOS_CASH_POLICY,S30_ZERO_DUOS_POLICY,S30_JUNE21_POLICY,S29_ME_ZB_DUOS_POLICY,S28_ME_ZB_DUOS_POLICY,S26_S28_ME_ZB_DUOS_2023_POLICY,S25_ME_ZB_DUOS_2023_POLICY,S22_S25_S31_PS_20261114_POLICY,S37_S39_S40_SEVEN_CASH_POLICY,S37_S41_OCE_FIVE_CASH_POLICY,EU_UNREAL_ME_TRIOS_FOUR_POLICY,KAME_ME_DUOS_TWO_POLICY,S41_CONSOLE_ZB_FOUR_POLICY,B0TER_S31_S38_NINE_POLICY,NAC_S29_S30_ZB_VC_TEN_POLICY,S27_S34_S31_PS_ZB_TEN_POLICY,NOV14_PENDING_CASH_POLICY].includes(entry.policy)){
@@ -349,7 +364,7 @@ function audit(results,ledger,players,{promotionEvidence}={}){
   if(['verified-qualifier','verified-s32-final-100usd-vr',
     'verified-trios-qualifier-participation-zero-cash'].includes(entry.policy) &&
     !validNov12ReviewedPolicy(r,entry))errors.push('Invalid Nov12 source/rule/payout: '+entry.id);
-  const collisions=results.filter(x=>x.id!==r.id).map(x=>({id:x.id,reason:collision(x,r,players?.confirmedAliases)})).filter(x=>x.reason);
+  const collisions=(overlapByKey.get(collisionKey(r,aliases))||[]).filter(x=>x.id!==r.id).map(x=>({id:x.id,reason:collision(x,r,aliases)})).filter(x=>x.reason);
   if(collisions.length)errors.push('Potential duplicate for approved '+entry.id+': '+collisions.slice(0,4).map(x=>x.id).join(', '));
  }
  return errors;
