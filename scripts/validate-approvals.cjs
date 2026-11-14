@@ -237,6 +237,14 @@ function audit(results,ledger,players){
   }
   if(r.source!==entry.source||r.verified!==true)errors.push('Published source or verification flag changed: '+entry.id);
   if(entry.policy==='attendance-only'&&(r.kind!=='参加確認'||r.prize!==null||r.reviewOnly===true))errors.push('Participation was changed into unsupported confirmed award: '+entry.id);
+  // The June 18, 2024 NAC Round 1 cutoff was top 5,000.
+  // A player outside the cutoff can never be retroactively relabeled a
+  // qualifier or cash finalist, even if the ledger policy is verified-rule.
+  if(entry.policy==='verified-rule'&&r.date==='2024-06-18'&&r.region==='NAC'&&
+   r.seasonId==='S30'&&r.tournamentId==='ch5s3-solo-victory-cup'&&
+   r.source?.includes('S30_SoloVictoryCashCup_Event3Round1_NAC')&&
+   Number.isSafeInteger(r.rank)&&r.rank>5000&&r.kind!=='参加確認')
+   errors.push('2024 NAC out-of-cutoff attendance was promoted to qualifier or finalist: '+entry.id);
   if(entry.policy==='verified-rule'&&(r.prize!==0||r.reviewOnly===true||(!['予選','賞金決勝'].includes(r.kind)&&
     !validRuleVerifiedReloadAttendance(r,entry)&&
     !validRuleVerifiedLegacyNacAttendance(r,entry))))errors.push('Rule-approved entry has unsupported payout or category: '+entry.id);
