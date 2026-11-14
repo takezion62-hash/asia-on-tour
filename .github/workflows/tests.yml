@@ -1,7 +1,10 @@
 name: Data and site tests
 
 on:
+  # Feature branches are verified by pull_request only, avoiding duplicate
+  # push + pull_request suites. Keep post-merge checks on main.
   push:
+    branches: [main]
     # Docs-only pushes do not change public data or executable site behavior.
     paths-ignore:
       - '**/*.md'
