@@ -2,11 +2,11 @@
   "version": 1,
   "role": "generated canonical-source snapshot; results.json remains authoritative in phase 1",
   "canonicalFile": "results.json",
-  "canonicalSha256": "fd2f9e349f020de20fc9b42e26916ba41cf2533d66d5ac0b9d717d79cf0cc596",
-  "count": 6992,
-  "teamPrizeCents": 7427000,
+  "canonicalSha256": "c23dc293eaae6bb8dfe5a01f629d893c54ca83151297fddea8ceb6ad9d792729",
+  "count": 6997,
+  "teamPrizeCents": 7487000,
   "unconfirmedPrizeRecords": 1085,
-  "personalPrizeCents": 7407000,
+  "personalPrizeCents": 7467000,
   "recordOrder": [
     "s42-me-slenderman-reload-skin-20261021-acris-chacha",
     "s42-me-slenderman-reload-skin-20261021-karf-alpha",
@@ -6999,7 +6999,12 @@
     "s37-naw-console-duos-vc-20250928-r1",
     "s37-naw-console-duos-vc-20250928-r5",
     "s37-naw-console-duos-vc-20250928-r9",
-    "s37-naw-console-duos-vc-20250928-r13"
+    "s37-naw-console-duos-vc-20250928-r13",
+    "s37-oce-console-duos-vc-20251004-r6",
+    "s41-oce-console-zb-solo-vc-20260621-r1",
+    "s41-oce-console-zb-solo-vc-20260621-r6",
+    "s41-oce-console-zb-solo-vc-20260621-r15",
+    "s41-oce-console-zb-solo-vc-20260614-r25"
   ],
   "shards": [
     {
@@ -7113,11 +7118,11 @@
     {
       "seasonId": "S37",
       "file": "source-results/S37.json",
-      "count": 16,
-      "teamPrizeCents": 240000,
+      "count": 17,
+      "teamPrizeCents": 260000,
       "unconfirmedPrizeRecords": 0,
-      "personalPrizeCents": 240000,
-      "sha256": "6c69b2f0040521670e8c3108ab8a0bc0906495587107cfe2d9b044ad6d5af4e8"
+      "personalPrizeCents": 260000,
+      "sha256": "a58767a66c8e81c94b198090cb201be31aaddf66529cb4ba9c4b63ad30f21e0c"
     },
     {
       "seasonId": "S38",
@@ -7149,11 +7154,11 @@
     {
       "seasonId": "S41",
       "file": "source-results/S41.json",
-      "count": 417,
-      "teamPrizeCents": 300000,
+      "count": 421,
+      "teamPrizeCents": 340000,
       "unconfirmedPrizeRecords": 67,
-      "personalPrizeCents": 300000,
-      "sha256": "a5f527c7284f3302e146cf121b967485a569be6f2ed71f1b810b60024f2c9279"
+      "personalPrizeCents": 340000,
+      "sha256": "2468887347fe237b5a2de382a30ff5f191b70bdd01ea284507f38b1d582d5759"
     },
     {
       "seasonId": "S42",
