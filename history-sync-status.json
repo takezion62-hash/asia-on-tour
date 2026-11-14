@@ -11,7 +11,7 @@
   "provider": "osirion",
   "linkedPlayers": 632,
   "trackedWindows": 2995,
-  "found": 36,
+  "found": 8,
   "skipped": 17,
   "imported": 3,
   "scannedPages": 96,
@@ -20,7 +20,7 @@
   "alreadyRegistered": 5145,
   "autoApprovedTotal": 2617,
   "invalidCachedCandidates": 1,
-  "manualReviewCandidates": 36,
+  "manualReviewCandidates": 8,
   "autoApprovedCosmeticThisRun": 0,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
@@ -40,7 +40,7 @@
     }
   ],
   "reviewOnlyWindows": 1363,
-  "reviewOnlyCandidates": 23,
+  "reviewOnlyCandidates": 2,
   "unmappedEvents": 237,
   "unmappedEventIds": [
     "S30_ConsoleCashCups",
@@ -56,10 +56,10 @@
     "S30_Reload",
     "S30_ReloadZB"
   ],
-  "message": "最新版と安全統合：新規掲載3件、重複スキップ0件、要確認の競合0件、確認待ち36件。既存の戦績・賞金は保持。",
-  "manuallyPublished": 1579,
+  "message": "公式Epic ID・順位・開催枠を検証し21件を掲載。残り8件。未確認賞金を推定しない。",
+  "manuallyPublished": 1607,
   "manuallyResolvedDuplicates": 169,
-  "lastReviewedBatchAt": "2026-11-14T10:44:05.939Z",
+  "lastReviewedBatchAt": "2026-11-14T11:18:29.557Z",
   "manuallyCorrected": 13,
   "lastCorrectedReviewAt": "2026-11-13T13:45:16.115Z",
   "concurrentMerge": {
