@@ -1458,6 +1458,7 @@
         {id:'zero-build',name:'ゼロビルド'},
         {id:'reload',name:'リロード'},
         {id:'reload-zero-build',name:'リロード ZB'},
+        {id:'arenas-boxfights',name:'Arenas Boxfights'},
         {id:'unknown',name:'形式未確認'}
       ];
       const counts=new Map(modes.map(mode=>[mode.id,0]));
