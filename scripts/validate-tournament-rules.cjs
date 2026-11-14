@@ -109,12 +109,23 @@ function validateRegistry(doc,tournaments){
      if(id!=='ch7s5-reload-zero-build-duos-cash-cup'||rule.seasonId!=='S43'||
        rule.team!=='duo'||JSON.stringify(rule.eventIds)!=='["S43_ReloadZBDuosCashCup"]'||
        rule.matchCaps['単一ラウンド']!==12||
-       Object.keys(rule.matchCaps).length!==1||
+       rule.matchCaps['賞金決勝']!==6||
+       Object.keys(rule.matchCaps).sort().join(',')!=='単一ラウンド,賞金決勝'||
        Object.keys(rule.advance||{}).sort().join(',')!=='BR,EU,ME,NAC,NAW,OCE'||
        Object.values(rule.advance||{}).some(x=>x!==20)||
        rule.rankedEligibility?.mode!=='reload'||rule.rankedEligibility?.minimumRank!=='Platinum'||
-       rule.cashPrizes!==undefined||rule.prizePerVictory!==undefined||rule.cosmeticRanks!==undefined)
-       fail(id,'S43 Reload ZB Duosの公式Round1上位20・12試合条件のみ自動承認');
+       rule.cashFinalAutoApproval!=='verified-duo-round2-rank'||
+       rule.prizePerVictory!==undefined||rule.cosmeticRanks!==undefined)
+       fail(id,'S43 Reload ZB Duosの公式Round1上位20・12試合／Round2最大6試合の条件が不正');
+     const short=[300,250,200,150,100].map((perPlayer,i)=>({through:i+1,perPlayer}));
+     const long=[{through:1,perPlayer:600},{through:2,perPlayer:450},
+       {through:3,perPlayer:300},{through:4,perPlayer:200},
+       {through:5,perPlayer:150},{through:8,perPlayer:100}];
+     if(rule.cashPrizes?.basis!=='per-player'||rule.cashPrizes?.currency!=='USD'||
+       Object.keys(rule.cashPrizes?.tiers||{}).sort().join(',')!=='BR,EU,ME,NAC,NAW,OCE'||
+       ['OCE','ME','NAW','BR'].some(region=>JSON.stringify(rule.cashPrizes.tiers[region])!==JSON.stringify(short))||
+       ['EU','NAC'].some(region=>JSON.stringify(rule.cashPrizes.tiers[region])!==JSON.stringify(long)))
+       fail(id,'S43 Reload ZB Duosの公式地域別Round2個人賞金表に矛盾');
    } else {
    // Cash Cup rules may be displayed, but are not eligible for automatic payout
    // publication until team identity, session completion and eligibility checks exist.

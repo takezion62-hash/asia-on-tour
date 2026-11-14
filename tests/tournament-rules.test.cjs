@@ -194,17 +194,23 @@ test('S39 NAW Solo Series Finals has verified tier thresholds and stays review-o
  assert.equal(CUT_OFFS[rule.id],undefined);
 });
 
-test('official S36 console and S43 Reload duo Round1 scopes are strictly registered',()=>{
+test('official S36 console and S43 Reload duo Round1/2 scopes are strictly registered',()=>{
  const consoleCup=registry.rules.find(r=>r.id==='ch6s3-console-duos-victory');
  const reload=registry.rules.find(r=>r.id==='ch7s5-reload-zero-build-duos-cash-cup');
  assert.equal(consoleCup.autoApproval,'verified-duo-qualifier-only');
  assert.equal(consoleCup.advance.NAW,250);assert.equal(consoleCup.advance.NAC,500);
  assert.equal(reload.advance.OCE,20);assert.equal(reload.autoApproval,'verified-duo-qualifier-only');
  assert.equal(reload.matchCaps['単一ラウンド'],12);
- assert.equal(reload.cashPrizes,undefined,'Round2 cash is not inferred from Round1');
+ assert.equal(reload.matchCaps['賞金決勝'],6);
+ assert.equal(reload.cashFinalAutoApproval,'verified-duo-round2-rank');
+ assert.equal(reload.cashPrizes.basis,'per-player');
+ assert.deepEqual(reload.cashPrizes.tiers.OCE.map(x=>x.perPlayer),[300,250,200,150,100]);
+ assert.deepEqual(reload.cashPrizes.tiers.EU.map(x=>x.perPlayer),[600,450,300,200,150,100]);
  for(const mutation of [
   doc=>doc.rules.find(r=>r.id===reload.id).advance.OCE=25,
   doc=>doc.rules.find(r=>r.id===reload.id).cashPrizes={basis:'per-player',currency:'USD'},
+  doc=>doc.rules.find(r=>r.id===reload.id).cashPrizes.tiers.NAC[0].perPlayer=601,
+  doc=>doc.rules.find(r=>r.id===reload.id).matchCaps['賞金決勝']=12,
   doc=>doc.rules.find(r=>r.id===consoleCup.id).advance.NAW=500,
   doc=>doc.rules.find(r=>r.id===consoleCup.id).prizePerVictory=100
  ]){
