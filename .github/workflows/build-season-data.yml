@@ -19,6 +19,9 @@ on:
       - scripts/apply-s29-me-zb-duos-20240506.cjs
       - scripts/apply-s28-me-zb-duos-20240120-20240212.cjs
       - scripts/apply-s26-s28-me-zb-duos-2023.cjs
+      - scripts/apply-s25-me-zb-duos-2023.cjs
+      - scripts/verified-s25-me-zb-duos-2023.cjs
+      - data/manual-approvals/20230619-26-me-zb-duos-vcup-proof.json
       - scripts/publish-pending-review-20261114.cjs
       - scripts/publish-nov14-pending-cash.cjs
       - scripts/reconcile-pending-hamikuma-20261114.cjs
@@ -91,6 +94,8 @@ jobs:
             node scripts/apply-s28-me-zb-duos-20240120-20240212.cjs
             node scripts/apply-s26-s28-me-zb-duos-2023.cjs --dry-run
             node scripts/apply-s26-s28-me-zb-duos-2023.cjs
+            node scripts/apply-s25-me-zb-duos-2023.cjs --dry-run
+            node scripts/apply-s25-me-zb-duos-2023.cjs
             node scripts/publish-nov14-pending-cash.cjs --dry-run
             node scripts/publish-nov14-pending-cash.cjs
             node scripts/reconcile-pending-hamikuma-20261114.cjs --dry-run
