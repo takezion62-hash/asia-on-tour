@@ -40,12 +40,15 @@ for(const [canonical,aliases] of Object.entries(players.confirmedAliases)){
  }
 }
 const existingUuid=new Map();
+// Fail closed on Epic IDs used by this batch; legacy unrelated UUID conflicts
+// should not block registration of independently verified June 2023 players.
+const targetUuids=new Set(V.TARGETS.flatMap(t=>t.ids));
 for(const r of results){
  const profiles=Array.isArray(r.profiles)?r.profiles:
   r.profileUrl?[{name:r.player,url:r.profileUrl}]:[];
  for(const p of profiles){
   const uid=V.uuid(p.url);
-  if(!uid)continue;
+  if(!uid||!targetUuids.has(uid))continue;
   const owner=aliasOwners.get(p.name)||p.name;
   assert(!existingUuid.has(uid)||existingUuid.get(uid)===owner,
    'existing Epic UUID belongs to conflicting owners: '+uid);
