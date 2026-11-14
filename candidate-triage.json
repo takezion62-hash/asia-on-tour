@@ -1,7 +1,7 @@
 {
   "version": 1,
   "sourceCheckedAt": "2026-11-07T23:16:39.215Z",
-  "total": 52,
+  "total": 53,
   "alreadyResolved": 0,
   "byYear": [
     {
@@ -11,12 +11,16 @@
     {
       "name": "2025",
       "count": 18
+    },
+    {
+      "name": "2026",
+      "count": 1
     }
   ],
   "byRegion": [
     {
       "name": "ME",
-      "count": 19
+      "count": 20
     },
     {
       "name": "NAC",
@@ -32,6 +36,10 @@
     }
   ],
   "byTournament": [
+    {
+      "name": "Inoxtag Icon Cup Battle Royale / ME / 2026",
+      "count": 1
+    },
     {
       "name": "PlayStation SypherPK Cup / ME / 2024",
       "count": 8
@@ -72,7 +80,7 @@
     },
     {
       "name": "partial-scan",
-      "count": 50
+      "count": 51
     }
   ],
   "queue": [
@@ -1788,6 +1796,39 @@
         "seenPages": 14,
         "totalPages": 100,
         "sourceKey": "epicgames_S33_SoloCashCup_NAW/S33_SoloCashCup_Event5Round1_NAW",
+        "possibleExistingId": null
+      },
+      "rewardState": "cash-unconfirmed"
+    },
+    {
+      "id": "auto-s42-fd42718cf68a",
+      "origin": "recent",
+      "date": "2026-10-26",
+      "year": "2026",
+      "region": "ME",
+      "tournamentId": "ch7s4-inoxtag-icon-cup-battle-royale",
+      "event": "Inoxtag Icon Cup Battle Royale",
+      "round": "単一開催枠 / 参加確認",
+      "player": "おーばーとしょうたwwwww / Shiroka",
+      "kind": "参加確認",
+      "rank": 721,
+      "points": 281,
+      "kills": 23,
+      "vrs": 1,
+      "prize": null,
+      "source": "https://www.fortnite.com/competitive/events/S42_InoxtagIconCup/?region=ME&round=S42_InoxtagIconCup_ME",
+      "status": "partial-scan",
+      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
+      "reason": "公式の順位条件を登録していない大会",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": false,
+        "observedPartial": true,
+        "seenPages": 12,
+        "totalPages": 100,
+        "sourceKey": "epicgames_S42_InoxtagIconCup_ME/S42_InoxtagIconCup_ME",
         "possibleExistingId": null
       },
       "rewardState": "cash-unconfirmed"

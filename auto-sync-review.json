@@ -2,6 +2,36 @@
   "version": 1,
   "status": "review",
   "checkedAt": "2026-11-07T13:02:44.444Z",
-  "proposals": [],
+  "proposals": [
+    {
+      "id": "auto-s42-fd42718cf68a",
+      "date": "2026-10-26",
+      "region": "ME",
+      "player": "おーばーとしょうたwwwww / Shiroka",
+      "playerRaw": "spe ウォルピスカーターv2 / IGM Shiroka 凛",
+      "event": "Inoxtag Icon Cup Battle Royale",
+      "round": "単一開催枠 / 参加確認",
+      "rank": 721,
+      "points": 281,
+      "kills": 23,
+      "vrs": 1,
+      "prize": null,
+      "kind": "参加確認",
+      "matches": 9,
+      "seasonId": "S42",
+      "chapter": 7,
+      "season": 4,
+      "tournamentId": "ch7s4-inoxtag-icon-cup-battle-royale",
+      "source": "https://www.fortnite.com/competitive/events/S42_InoxtagIconCup/?region=ME&round=S42_InoxtagIconCup_ME",
+      "verified": true,
+      "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+      "reviewOnly": true,
+      "reviewReason": "公式の順位条件を登録していない大会",
+      "players": [
+        "おーばーとしょうたwwwww",
+        "Shiroka"
+      ]
+    }
+  ],
   "manualReviewedAt": "2026-11-14T11:18:28.502Z"
 }
