@@ -79,20 +79,26 @@
       }).join('');
       return '<div class="source-rule-cash-region"><h4>'+esc(region)+'</h4>'+rows+'</div>';
     }).join('');
-    const eligible=Object.entries(rule.rankedEligibility||{}).map(([event,rank])=>
-      'Event '+esc(event)+': '+esc(rank)+'以上').join(' / ');
+    const arenas=rule.team==='solo'&&rule.rankedEligibility?.mode==='arenas-boxfights';
+    const eligible=arenas
+      ?'Arenas Ranked '+esc(rule.rankedEligibility.minimumRank)+'以上（現行または前シーズン）'
+      :Object.entries(rule.rankedEligibility||{}).map(([event,rank])=>
+        'Event '+esc(event)+': '+esc(rank)+'以上').join(' / ');
     const supported=new Set(Object.keys(award?.tiers||{}));
     const sessions=state.sessions.filter(s=>rule.eventIds.includes(s.eventId)&&
       supported.has(s.region)&&(state.region==='all'||s.region===state.region))
       .sort((a,b)=>a.startUtc.localeCompare(b.startUtc)||a.region.localeCompare(b.region));
     const scheduleHtml=sessions.length?'<details class="source-rule-dates"><summary>開催日程（日本時間・登録済み地域）</summary><div>'+
       sessions.map(s=>'<p><strong>'+esc(s.region)+'</strong> '+esc(s.round)+' · '+esc(s.dateJst)+
-      ' '+esc(s.timeJst)+'〜（約3時間）</p>').join('')+'</div></details>':'';
-    return '<div class="source-rule-fact"><span>個人賞金（USD・チーム3名それぞれ）</span>'+
+      ' '+esc(s.timeJst)+'〜（約'+fmtNumber(rule.sessionMinutes||180)+'分）</p>').join('')+'</div></details>':'';
+    const members=rule.team==='solo'?1:rule.team==='duo'?2:rule.team==='trio'?3:4;
+    const format=arenas?'Arenas Boxfights・ソロ':'通常BR・'+(members===3?'トリオ':'チーム');
+    return '<div class="source-rule-fact"><span>個人賞金（USD・'+(arenas?'ソロ':'チーム'+members+'名それぞれ')+'）</span>'+
       '<div class="source-rule-cash-grid">'+sections+'</div></div>'+
-      '<div class="source-rule-fact"><span>参加ランク条件（BRランク）</span><strong>'+esc(eligible)+'</strong></div>'+
+      '<div class="source-rule-fact"><span>開催形式</span><strong>'+esc(format)+' / 最大'+fmtNumber(rule.matchCaps?.['単一ラウンド'])+'試合</strong></div>'+
+      '<div class="source-rule-fact"><span>参加ランク条件（'+(arenas?'Arenas':'BR')+'ランク）</span><strong>'+eligible+'</strong></div>'+
       scheduleHtml+
-      '<p class="source-rule-warning">※ 公式地域別賞金表と照合済みの全チームは、3名すべてのEpic ID・完了した開催枠・順位・既存戦績を確認できた場合に自動掲載します。賞金圏外は$0として掲載します。本人の受給資格・賞金支払完了は未確認です。</p>';
+      '<p class="source-rule-warning">※ 公式地域別賞金表・本人Epic ID'+members+'名分・完了した開催枠・順位・既存戦績を照合した成績のみ自動掲載します。賞金圏外は$0として掲載します。本人の受給資格・賞金支払完了は未確認です。</p>';
   }
   // The Unreal Cup source table reports TEAM earnings. Each eligible duo member earns half.
   function unrealMarkup(rule){
