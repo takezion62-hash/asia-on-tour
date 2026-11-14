@@ -2,8 +2,8 @@
   "version": 1,
   "role": "generated canonical-source snapshot; results.json remains authoritative in phase 1",
   "canonicalFile": "results.json",
-  "canonicalSha256": "948211a650be5e13f8531088439ea035460fbf8d6d99675ac570c5ab10d00f20",
-  "count": 7001,
+  "canonicalSha256": "6e9c3f7762d5c726840695088d98d82fbb91609f288ca633c556ed9831ce73a6",
+  "count": 7003,
   "teamPrizeCents": 7597000,
   "unconfirmedPrizeRecords": 1085,
   "personalPrizeCents": 7577000,
@@ -7008,7 +7008,9 @@
     "s39-eu-1million-unreal-20251221-r919-zazi-tossy",
     "s31-me-trios-cash-20241020-event3-final-r10-stain-puroboko-zazi",
     "auto-s43-0f12c7f11ecd",
-    "auto-s43-83ec104c8e6f"
+    "auto-s43-83ec104c8e6f",
+    "auto-s43-5d24260ada13",
+    "auto-s43-3fb3291ac20f"
   ],
   "shards": [
     {
@@ -7176,11 +7178,11 @@
     {
       "seasonId": "S43",
       "file": "source-results/S43.json",
-      "count": 154,
+      "count": 156,
       "teamPrizeCents": 45000,
       "unconfirmedPrizeRecords": 36,
       "personalPrizeCents": 45000,
-      "sha256": "c9c0afc89cf7e7d4b012c3f6cde5e3464b85eb1d959abb31feb3ba91788f3341"
+      "sha256": "8d17180e4e4c77fa77fc9230d45e87d3039f6e68f8d5293144c7010597fbc8ee"
     },
     {
       "seasonId": "unknown",

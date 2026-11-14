@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-11-14T05:03:54.434Z",
+  "checkedAt": "2026-11-14T06:51:09.006Z",
   "windows": {
     "epicgames_S43_PerformanceEvaluationTrios_EU/S43_PerformanceEvaluation_Event1Round1_EU": {
       "nextPage": 7,
@@ -14197,7 +14197,7 @@
       "totalPages": 37
     },
     "epicgames_S43_ArenaCashCup_NAC/S43_ArenaCashCup_Event1_NAC": {
-      "nextPage": 66,
+      "nextPage": 76,
       "complete": false,
       "proposals": [
         {
@@ -14229,12 +14229,12 @@
           ]
         }
       ],
-      "pages": 66,
-      "lastAttemptAt": "2026-11-14T05:03:04.811Z",
+      "pages": 76,
+      "lastAttemptAt": "2026-11-14T06:50:32.546Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 6600,
-      "lastSuccessAt": "2026-11-14T05:03:05.715Z",
+      "lastSeenRank": 7600,
+      "lastSuccessAt": "2026-11-14T06:50:33.371Z",
       "totalPages": 83
     },
     "epicgames_S43_ArenaCashCup_BR/S43_ArenaCashCup_Event1_BR": {
@@ -14250,15 +14250,15 @@
       "totalPages": 43
     },
     "epicgames_S43_ArenaCashCup_EU/S43_ArenaCashCup_Event1_EU": {
-      "nextPage": 29,
+      "nextPage": 39,
       "complete": false,
       "proposals": [],
-      "pages": 29,
-      "lastAttemptAt": "2026-11-14T05:03:15.917Z",
+      "pages": 39,
+      "lastAttemptAt": "2026-11-14T06:50:41.069Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 2900,
-      "lastSuccessAt": "2026-11-14T05:03:16.905Z",
+      "lastSeenRank": 3900,
+      "lastSuccessAt": "2026-11-14T06:50:41.758Z",
       "totalPages": 100
     },
     "epicgames_S43_ArenaCashCup_ME/S43_ArenaCashCup_Event1_ME": {
@@ -14449,7 +14449,7 @@
       "totalPages": 7
     },
     "epicgames_S43_ReloadZBDuosCashCup_NAC/S43_ReloadZBDuosCashCup_Event1Round1_NAC": {
-      "nextPage": 19,
+      "nextPage": 29,
       "complete": false,
       "proposals": [
         {
@@ -14517,18 +14517,84 @@
             "089efc6653494ead997a8ba493d45568",
             "3a27ceb09f00436eb9c2dc6a4f1ff914"
           ]
+        },
+        {
+          "id": "auto-s43-5d24260ada13",
+          "date": "2026-11-09",
+          "region": "NAC",
+          "player": "まぁ / huggyfv",
+          "playerRaw": "STX まぁǃ / STX Huggy",
+          "event": "Reload ZB Duos Cash Cup Zero Build",
+          "round": "Event 1 · Round 1 / 参加確認",
+          "rank": 2197,
+          "points": 377,
+          "kills": 74,
+          "vrs": 2,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 10,
+          "seasonId": "S43",
+          "chapter": 7,
+          "season": 5,
+          "tournamentId": "ch7s5-reload-zero-build-duos-cash-cup",
+          "source": "https://www.fortnite.com/competitive/events/S43_ReloadZBDuosCashCup/?region=NAC&round=S43_ReloadZBDuosCashCup_Event1Round1_NAC",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "まぁ",
+            "huggyfv"
+          ],
+          "teamAccountIds": [
+            "177f0551e829457aad8fbe6e3d84fe3c",
+            "c640a465776d4417bd9ebedee4c68928"
+          ]
+        },
+        {
+          "id": "auto-s43-3fb3291ac20f",
+          "date": "2026-11-09",
+          "region": "NAC",
+          "player": "こがね / まろやかれおちゃあいと",
+          "playerRaw": "Zst kogane / 爆運まろやかれおちゃあいと爆運",
+          "event": "Reload ZB Duos Cash Cup Zero Build",
+          "round": "Event 1 · Round 1 / 参加確認",
+          "rank": 2615,
+          "points": 361,
+          "kills": 73,
+          "vrs": 2,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 9,
+          "seasonId": "S43",
+          "chapter": 7,
+          "season": 5,
+          "tournamentId": "ch7s5-reload-zero-build-duos-cash-cup",
+          "source": "https://www.fortnite.com/competitive/events/S43_ReloadZBDuosCashCup/?region=NAC&round=S43_ReloadZBDuosCashCup_Event1Round1_NAC",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "こがね",
+            "まろやかれおちゃあいと"
+          ],
+          "teamAccountIds": [
+            "0247b9620f5e49709904d2d659995926",
+            "71df52357f7340aa9cd9fbb1945f97c8"
+          ]
         }
       ],
-      "pages": 19,
-      "lastAttemptAt": "2026-11-14T05:03:38.803Z",
+      "pages": 29,
+      "lastAttemptAt": "2026-11-14T06:50:56.564Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 1900,
-      "lastSuccessAt": "2026-11-14T05:03:39.685Z",
+      "lastSeenRank": 2900,
+      "lastSuccessAt": "2026-11-14T06:50:57.236Z",
       "totalPages": 100
     },
     "epicgames_S42_InoxtagIconCup_NAC/S42_InoxtagIconCup_NAC": {
-      "nextPage": 4,
+      "nextPage": 9,
       "complete": false,
       "proposals": [
         {
@@ -14561,48 +14627,48 @@
           ]
         }
       ],
-      "pages": 4,
-      "lastAttemptAt": "2026-11-14T05:03:51.242Z",
+      "pages": 9,
+      "lastAttemptAt": "2026-11-14T06:51:00.938Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 400,
-      "lastSuccessAt": "2026-11-14T05:03:51.987Z",
+      "lastSeenRank": 900,
+      "lastSuccessAt": "2026-11-14T06:51:05.382Z",
       "totalPages": 100
     },
     "epicgames_S42_InoxtagIconCup_BR/S42_InoxtagIconCup_BR": {
-      "nextPage": 3,
+      "nextPage": 4,
       "complete": false,
       "proposals": [],
-      "pages": 3,
-      "lastAttemptAt": "2026-11-14T05:03:51.987Z",
+      "pages": 4,
+      "lastAttemptAt": "2026-11-14T06:51:05.382Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 300,
-      "lastSuccessAt": "2026-11-14T05:03:52.796Z",
+      "lastSeenRank": 400,
+      "lastSuccessAt": "2026-11-14T06:51:06.608Z",
       "totalPages": 100
     },
     "epicgames_S42_ArenaCashCup_NAW/S42_ArenaCashCup_Event1_NAW": {
-      "nextPage": 11,
+      "nextPage": 21,
       "complete": false,
       "proposals": [],
-      "pages": 11,
-      "lastAttemptAt": "2026-11-14T05:03:50.621Z",
+      "pages": 21,
+      "lastAttemptAt": "2026-11-14T06:50:48.479Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 1100,
-      "lastSuccessAt": "2026-11-14T05:03:51.242Z",
+      "lastSeenRank": 2100,
+      "lastSuccessAt": "2026-11-14T06:50:49.133Z",
       "totalPages": 52
     },
     "epicgames_S42_InoxtagIconCup_EU/S42_InoxtagIconCup_EU": {
-      "nextPage": 3,
+      "nextPage": 4,
       "complete": false,
       "proposals": [],
-      "pages": 3,
-      "lastAttemptAt": "2026-11-14T05:03:52.796Z",
+      "pages": 4,
+      "lastAttemptAt": "2026-11-14T06:51:06.608Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 300,
-      "lastSuccessAt": "2026-11-14T05:03:53.655Z",
+      "lastSeenRank": 400,
+      "lastSuccessAt": "2026-11-14T06:51:07.279Z",
       "totalPages": 100
     },
     "epicgames_S43_ReloadZBDuosCashCup_BR/S43_ReloadZBDuosCashCup_Event1Round2_BR": {
@@ -14662,6 +14728,42 @@
       "lastSeenRank": 19,
       "lastSuccessAt": "2026-11-14T05:03:54.426Z",
       "totalPages": 1
+    },
+    "epicgames_S43_ReloadZBDuosCashCup_NAC/S43_ReloadZBDuosCashCup_Event1Round2_NAC": {
+      "nextPage": 1,
+      "complete": true,
+      "proposals": [],
+      "pages": 1,
+      "lastAttemptAt": "2026-11-14T06:51:07.279Z",
+      "emptyAttempts": 0,
+      "rankingOrderValid": true,
+      "lastSeenRank": 20,
+      "lastSuccessAt": "2026-11-14T06:51:07.722Z",
+      "totalPages": 1
+    },
+    "epicgames_S42_ArenaCashCup_NAC/S42_ArenaCashCup_Event1_NAC": {
+      "nextPage": 1,
+      "complete": false,
+      "proposals": [],
+      "pages": 1,
+      "lastAttemptAt": "2026-11-14T06:51:07.722Z",
+      "emptyAttempts": 0,
+      "rankingOrderValid": true,
+      "lastSeenRank": 100,
+      "lastSuccessAt": "2026-11-14T06:51:08.273Z",
+      "totalPages": 77
+    },
+    "epicgames_S42_ArenaCashCup_BR/S42_ArenaCashCup_Event1_BR": {
+      "nextPage": 1,
+      "complete": false,
+      "proposals": [],
+      "pages": 1,
+      "lastAttemptAt": "2026-11-14T06:51:08.273Z",
+      "emptyAttempts": 0,
+      "rankingOrderValid": true,
+      "lastSeenRank": 100,
+      "lastSuccessAt": "2026-11-14T06:51:08.999Z",
+      "totalPages": 31
     }
   }
 }
