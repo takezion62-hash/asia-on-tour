@@ -263,11 +263,19 @@ test('入力データを変更せず、全てのランキングで空配列を�
 test('実データの全期間と各シーズンで既存賞金ランキングの個人額・件数・並び順と一致する', () => {
   const helpers = productionHelpers(published);
   const before = JSON.stringify(published);
-  const seasons = ['all', ...new Set(published.results.map(row => seasonFor(row, published)))];
-  for (const season of seasons) {
-    const records = published.results.filter(row => season === 'all' || seasonFor(row, published) === season);
+  // Derive every season membership with the unchanged production oracle.
+  // summarize(data, season) would rescan the complete catalog for each row
+  // in every period; providing exactly that period's rows with season='all'
+  // avoids the redundant rescan without changing the independent cash oracle.
+  const rowsBySeason = new Map();
+  for (const row of published.results) {
+    const season = seasonFor(row, published);
+    if (!rowsBySeason.has(season)) rowsBySeason.set(season, []);
+    rowsBySeason.get(season).push(row);
+  }
+  for (const [season, records] of [['all', published.results], ...rowsBySeason]) {
     const report = buildRankings(records, { metric: 'prize' }, helpers);
-    const old = summarize(published, season);
+    const old = summarize({ ...published, results: records }, 'all');
     assert.deepEqual(report.rows.map(row => ({ name: row.name, total: row.value, events: row.prizeEvents })), old.ranking, season);
     assert.equal(report.totalPrize, old.total, season);
     assert.equal(report.recordCount, records.length, season);

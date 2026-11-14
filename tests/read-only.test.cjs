@@ -952,8 +952,13 @@ test('tournament catalog and detail routes retain all records once and separate 
   assert.equal(new Set(catalog.map(card => card.id)).size, catalog.length);
   assert.equal(app.get('tournament-count').textContent, `${tournamentCards(app).length.toLocaleString('ja-JP')}大会 · ${records.length.toLocaleString('ja-JP')}戦績`);
   const allIds = [];
+  const recordById = new Map(records.map(row => [row.id, row]));
+  assert.equal(recordById.size, records.length, 'Source result IDs must be unique');
   for (const card of catalog) {
-    const direct = boot(script, { hash: `#tournament=${encodeURIComponent(card.id)}` });
+    // Drive every real tournament route through one VM, rather than rebuilding
+    // the full 7k+ record application for each tournament in the catalog.
+    app.hash(`#tournament=${encodeURIComponent(card.id)}`);
+    const direct = app;
     assert.deepEqual(activePage(direct), ['page-tournament'], card.id);
     const ids = tournamentRecordIds(direct);
     assert.ok(ids.length, card.id);
@@ -964,7 +969,7 @@ test('tournament catalog and detail routes retain all records once and separate 
       .filter(([, attributes]) => /data-tournament-record=/.test(attributes));
     for (const [, attributes, content] of rendered) {
       const id = decode(attributes.match(/data-tournament-record="([^"]+)"/)[1]);
-      const record = records.find(record => record.id === id);
+      const record = recordById.get(id);
       assert.equal(plain(markedContent(content, 'data-tournament-metric', 'rank')), key(record)[4], id);
       for (const metric of ['points', 'kills', 'vrs']) {
         assert.equal(plain(markedContent(content, 'data-tournament-metric', metric)),
@@ -987,7 +992,7 @@ test('tournament catalog and detail routes retain all records once and separate 
     for (const session of sessions) {
       const sessionIds = [...session.matchAll(/data-tournament-record="([^"]+)"/g)].map(([, id]) => decode(id));
       assert.ok(sessionIds.length, card.id);
-      const rows = sessionIds.map(id => records.find(record => record.id === id));
+      const rows = sessionIds.map(id => recordById.get(id));
       assert.ok(rows.every(Boolean), card.id);
       for (const axis of ['date', 'region']) assert.equal(new Set(rows.map(record => record[axis])).size, 1, `${card.id}: ${axis}`);
       // Within one official session, kind may differ by confirmed cash/cosmetic reward status.
@@ -999,6 +1004,12 @@ test('tournament catalog and detail routes retain all records once and separate 
     assert.deepEqual(sessionDates, sessionDates.slice().sort((a, b) => b.localeCompare(a)), card.id);
   }
   assert.deepEqual(allIds.sort(), records.map(record => record.id).sort());
+  // Also retain direct cold-start deep-link coverage, independent of in-app navigation.
+  for (const card of [catalog[0], catalog.at(-1)]) {
+    const opened = boot(script, { hash: `#tournament=${encodeURIComponent(card.id)}` });
+    assert.deepEqual(activePage(opened), ['page-tournament'], card.id);
+    assert.ok(tournamentRecordIds(opened).length, card.id);
+  }
 });
 
 
@@ -1318,11 +1329,20 @@ const seasonFixtures = () => {
 
 test('season choices and aggregate values follow the registered JSON without fixed counts or totals', () => {
   const app = boot(script, { search: '' });
-  const registered = new Set(records.map(row => seasonFor(row, data)));
+  // Use the real season resolver once per record, then pass the exact selected
+  // rows to the independent oracle. This avoids repeated all-record rescans.
+  const rowsBySeason = new Map();
+  for (const row of records) {
+    const season = seasonFor(row, data);
+    if (!rowsBySeason.has(season)) rowsBySeason.set(season, []);
+    rowsBySeason.get(season).push(row);
+  }
+  const registered = new Set(rowsBySeason.keys());
   assert.deepEqual(new Set(seasonChoices(app).map(s => s.id)), new Set(['all', ...registered]));
   for (const period of ['all', ...registered]) {
     chooseSeason(app, period);
-    const expected = summarize(data, period);
+    const selected = period === 'all' ? records : rowsBySeason.get(period);
+    const expected = summarize({ ...data, results: selected }, 'all');
     assert.equal(Number(app.get('stat-results').textContent), expected.records);
     assert.equal(Number(app.get('stat-players').textContent), expected.players);
     assert.equal(app.get('home-earnings-sum').textContent, currency(expected.total));
