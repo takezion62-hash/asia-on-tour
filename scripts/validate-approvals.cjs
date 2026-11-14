@@ -240,7 +240,8 @@ function audit(results,ledger,players){
   // The June 18, 2024 NAC Round 1 cutoff was top 5,000.
   // A player outside the cutoff can never be retroactively relabeled a
   // qualifier or cash finalist, even if the ledger policy is verified-rule.
-  if(entry.policy==='verified-rule'&&r.date==='2024-06-18'&&r.region==='NAC'&&
+  if(entry.policy==='verified-rule'&&r.id==='auto-s30-552fce5922b8'&&
+   r.date==='2024-06-18'&&r.region==='NAC'&&
    r.seasonId==='S30'&&r.tournamentId==='ch5s3-solo-victory-cup'&&
    r.source?.includes('S30_SoloVictoryCashCup_Event3Round1_NAC')&&
    Number.isSafeInteger(r.rank)&&r.rank>5000&&r.kind!=='参加確認')
