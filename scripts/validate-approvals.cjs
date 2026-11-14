@@ -21,6 +21,7 @@ const {verifyCashRow:verifiedKameMeDuoCash, POLICY:KAME_ME_DUOS_TWO_POLICY}=requ
 const {verifyCashRow:verifiedS41ConsoleZbCash, POLICY:S41_CONSOLE_ZB_FOUR_POLICY}=require('./verified-s41-console-zb-oce-reconcile.cjs');
 const {verifyCashRow:verifiedBoterS31S38Nine, POLICY:B0TER_S31_S38_NINE_POLICY}=require('./verified-boter-s31-s38-nine.cjs');
 const {verifyCashRow:verifiedNacZbTen, POLICY:NAC_S29_S30_ZB_VC_TEN_POLICY}=require('./verified-nac-s29-s30-zb-vc-ten.cjs');
+const {verifyRow:verifiedS27S34S31Cash, POLICY:S27_S34_S31_PS_ZB_TEN_POLICY}=require('./verified-s27-s34-s31-ps-zb-ten.cjs');
 const {verifiedCashRow:verifiedNov14Cash, POLICY:NOV14_PENDING_CASH_POLICY}=require('./verified-nov14-pending-cash.cjs');
 const root=path.resolve(__dirname,'..');
 const load=name=>name==='results.json'?readResults(root).rows:JSON.parse(fs.readFileSync(path.join(root,name),'utf8'));
@@ -306,7 +307,7 @@ function audit(results,ledger,players,{promotionEvidence}={}){
   const rows=results.filter(r=>r.id===entry.recordId);
   if(rows.length!==1){errors.push('Published record missing or duplicate: '+entry.id);continue}
   const r=rows[0];
-  if(entry.decision!=='published'||!['attendance-only','verified-rule','cosmetic-rank','verified-vr','official-final-vr-award','verified-qualifier','verified-s32-final-100usd-vr','verified-trios-qualifier-participation-zero-cash',S30_DUOS_CASH_POLICY,S30_ZERO_DUOS_POLICY,S30_JUNE21_POLICY,S29_ME_ZB_DUOS_POLICY,S28_ME_ZB_DUOS_POLICY,S26_S28_ME_ZB_DUOS_2023_POLICY,S25_ME_ZB_DUOS_2023_POLICY,S22_S25_S31_PS_20261114_POLICY,S37_S39_S40_SEVEN_CASH_POLICY,S37_S41_OCE_FIVE_CASH_POLICY,EU_UNREAL_ME_TRIOS_FOUR_POLICY,KAME_ME_DUOS_TWO_POLICY,S41_CONSOLE_ZB_FOUR_POLICY,B0TER_S31_S38_NINE_POLICY,NAC_S29_S30_ZB_VC_TEN_POLICY,NOV14_PENDING_CASH_POLICY].includes(entry.policy)){
+  if(entry.decision!=='published'||!['attendance-only','verified-rule','cosmetic-rank','verified-vr','official-final-vr-award','verified-qualifier','verified-s32-final-100usd-vr','verified-trios-qualifier-participation-zero-cash',S30_DUOS_CASH_POLICY,S30_ZERO_DUOS_POLICY,S30_JUNE21_POLICY,S29_ME_ZB_DUOS_POLICY,S28_ME_ZB_DUOS_POLICY,S26_S28_ME_ZB_DUOS_2023_POLICY,S25_ME_ZB_DUOS_2023_POLICY,S22_S25_S31_PS_20261114_POLICY,S37_S39_S40_SEVEN_CASH_POLICY,S37_S41_OCE_FIVE_CASH_POLICY,EU_UNREAL_ME_TRIOS_FOUR_POLICY,KAME_ME_DUOS_TWO_POLICY,S41_CONSOLE_ZB_FOUR_POLICY,B0TER_S31_S38_NINE_POLICY,NAC_S29_S30_ZB_VC_TEN_POLICY,S27_S34_S31_PS_ZB_TEN_POLICY,NOV14_PENDING_CASH_POLICY].includes(entry.policy)){
    errors.push('Unknown decision/policy: '+entry.id);continue;
   }
   if(r.source!==entry.source||r.verified!==true)errors.push('Published source or verification flag changed: '+entry.id);
@@ -340,6 +341,7 @@ function audit(results,ledger,players,{promotionEvidence}={}){
   if(entry.policy===S41_CONSOLE_ZB_FOUR_POLICY&&!verifiedS41ConsoleZbCash(r,entry))errors.push('Incorrect screenshot-verified S41 Console ZB event, original Epic UUID, VR cash or rank: '+entry.id);
   if(entry.policy===B0TER_S31_S38_NINE_POLICY&&!verifiedBoterS31S38Nine(r,entry))errors.push('Incorrect verified Boter FNCS, ME Duos Cash, or NAW Squads 2024/2025 cash score/identity: '+entry.id);
   if(entry.policy===NAC_S29_S30_ZB_VC_TEN_POLICY&&!verifiedNacZbTen(r,entry))errors.push('Incorrect 2024 NAC S29/S30 ZB Solo/Duos Victory Cup screenshot result or Epic UUID: '+entry.id);
+  if(entry.policy===S27_S34_S31_PS_ZB_TEN_POLICY&&!verifiedS27S34S31Cash(r,entry))errors.push('Incorrect 2023 NAC ZB Duos, 2025 NAW PlayStation or 2024 ME SypherPK screenshot result or UUID: '+entry.id);
   if(entry.policy===NOV14_PENDING_CASH_POLICY&&!verifiedNov14Cash(r,entry))errors.push('Unverified Nov14 pending cash candidate, Epic ranking, original account ID, prize tier, or award evidence: '+entry.id);
   if(entry.policy==='cosmetic-rank'&&(r.kind!=='スキン大会'||r.prize!==0||r.reviewOnly===true||!cosmeticEvaluate(r).eligible))errors.push('Cosmetic winner is outside verified official rank range: '+entry.id);
   if(entry.policy==='verified-vr'&&!(r.kind==='賞金決勝'&&r.seasonId==='S30'&&r.tournamentId==='ch5s3-solo-victory-cup'&&r.region==='ME'&&r.source?.includes('/S30_SoloVictoryCashCup/')&&r.source?.includes('S30_SoloVictoryCashCup_Event7Round2_ME')&&Number.isSafeInteger(r.vrs)&&r.vrs>=1&&r.vrs<=3&&Number.isSafeInteger(r.matches)&&r.matches>=r.vrs&&r.matches<=3&&r.points===r.vrs*100&&r.prize===r.vrs*100&&r.verified===true&&r.reviewOnly!==true))errors.push('Cash final record lacks official per-VR proof: '+entry.id);
