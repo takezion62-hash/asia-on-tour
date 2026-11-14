@@ -1,7 +1,7 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-14T10:27:06.847Z",
+  "checkedAt": "2026-11-14T10:47:29.393Z",
   "mode": "review",
   "scope": "history",
   "dateMode": "rolling",
@@ -10,38 +10,38 @@
   "toDate": "2026-11-14",
   "provider": "osirion",
   "linkedPlayers": 632,
-  "trackedWindows": 2983,
-  "found": 8,
-  "skipped": 18,
-  "imported": 8,
+  "trackedWindows": 2995,
+  "found": 36,
+  "skipped": 17,
+  "imported": 3,
   "scannedPages": 96,
-  "completedWindows": 519,
+  "completedWindows": 528,
   "identityConflicts": 3,
-  "alreadyRegistered": 5122,
-  "autoApprovedTotal": 2612,
+  "alreadyRegistered": 5145,
+  "autoApprovedTotal": 2617,
   "invalidCachedCandidates": 1,
-  "manualReviewCandidates": 8,
+  "manualReviewCandidates": 36,
   "autoApprovedCosmeticThisRun": 0,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
   "autoApprovedUnrealThisRun": 0,
   "timeLimitReached": false,
-  "retryWindows": 3,
+  "retryWindows": 4,
   "transientFailures": 0,
   "malformedFailures": 1,
   "skippedLeaderboards": [
     {
-      "window": "epicgames_S31_TriosCashCup_ME/S31_TriosCashCup_Event2Round1_ME",
+      "window": "epicgames_S31_TriosCashCup_ME/S31_TriosCashCup_Event2Round2_ME",
       "page": 0,
       "attempt": 1,
       "code": "OSIRION_INVALID_LEADERBOARD",
-      "reason": "大会順位表のID/形式が不正 [epicgames_S31_TriosCashCup_ME/S31_TriosCashCup_Event2Round1_ME page=0]: totalPages=0",
-      "retryAfter": "2026-11-14T16:26:47.641Z"
+      "reason": "大会順位表のID/形式が不正 [epicgames_S31_TriosCashCup_ME/S31_TriosCashCup_Event2Round2_ME page=0]: totalPages=0",
+      "retryAfter": "2026-11-14T16:47:10.351Z"
     }
   ],
-  "reviewOnlyWindows": 1351,
-  "reviewOnlyCandidates": 2,
-  "unmappedEvents": 239,
+  "reviewOnlyWindows": 1363,
+  "reviewOnlyCandidates": 23,
+  "unmappedEvents": 237,
   "unmappedEventIds": [
     "S30_ConsoleCashCups",
     "S30_MetallicaCup",
@@ -56,76 +56,76 @@
     "S30_Reload",
     "S30_ReloadZB"
   ],
-  "message": "公式Epic ID・順位・開催枠を検証し9件を掲載。残り8件。未確認賞金を推定しない。",
+  "message": "最新版と安全統合：新規掲載3件、重複スキップ0件、要確認の競合0件、確認待ち36件。既存の戦績・賞金は保持。",
   "manuallyPublished": 1579,
   "manuallyResolvedDuplicates": 169,
   "lastReviewedBatchAt": "2026-11-14T10:44:05.939Z",
   "manuallyCorrected": 13,
   "lastCorrectedReviewAt": "2026-11-13T13:45:16.115Z",
   "concurrentMerge": {
-    "appended": 8,
+    "appended": 3,
     "alreadyPublished": 0,
     "reviewConflicts": 0,
-    "keptPending": 23,
-    "reconciledAt": "2026-11-14T10:27:25.690Z"
+    "keptPending": 36,
+    "reconciledAt": "2026-11-14T10:47:46.765Z"
   },
   "coverage": {
-    "total": 2983,
-    "completed": 519,
-    "notStarted": 2291,
-    "partial": 170,
-    "retryWaiting": 3,
+    "total": 2995,
+    "completed": 528,
+    "notStarted": 2296,
+    "partial": 167,
+    "retryWaiting": 4,
     "retryDue": 0,
-    "remaining": 2464,
-    "retryCount": 3,
-    "completionPercent": 17.4,
+    "remaining": 2467,
+    "retryCount": 4,
+    "completionPercent": 17.6,
     "byRegion": {
       "OCE": {
-        "total": 527,
-        "completed": 77,
-        "pending": 450
+        "total": 529,
+        "completed": 78,
+        "pending": 451
       },
       "ME": {
-        "total": 522,
-        "completed": 167,
-        "pending": 355
+        "total": 524,
+        "completed": 168,
+        "pending": 356
       },
       "EU": {
-        "total": 542,
-        "completed": 69,
-        "pending": 473
+        "total": 544,
+        "completed": 70,
+        "pending": 474
       },
       "BR": {
-        "total": 521,
+        "total": 523,
         "completed": 51,
-        "pending": 470
+        "pending": 472
       },
       "NAC": {
-        "total": 542,
-        "completed": 84,
+        "total": 544,
+        "completed": 86,
         "pending": 458
       },
       "NAW": {
-        "total": 329,
-        "completed": 71,
-        "pending": 258
+        "total": 331,
+        "completed": 75,
+        "pending": 256
       }
     },
     "byYear": {
       "2024": {
         "total": 984,
-        "completed": 138,
-        "pending": 846
+        "completed": 140,
+        "pending": 844
       },
       "2025": {
         "total": 690,
-        "completed": 64,
-        "pending": 626
+        "completed": 66,
+        "pending": 624
       },
       "2026": {
-        "total": 1309,
-        "completed": 317,
-        "pending": 992
+        "total": 1321,
+        "completed": 322,
+        "pending": 999
       }
     },
     "outsideScopeCheckpoints": 0,
@@ -139,6 +139,17 @@
         "nextPage": 0,
         "totalPages": null,
         "retryAfter": "2026-11-14T16:26:47.641Z",
+        "errorCode": "OSIRION_INVALID_LEADERBOARD"
+      },
+      {
+        "window": "epicgames_S31_TriosCashCup_ME/S31_TriosCashCup_Event2Round2_ME",
+        "date": "2024-10-14",
+        "region": "ME",
+        "series": "cash-cup",
+        "status": "retryWaiting",
+        "nextPage": 0,
+        "totalPages": null,
+        "retryAfter": "2026-11-14T16:47:10.351Z",
         "errorCode": "OSIRION_INVALID_LEADERBOARD"
       },
       {
@@ -248,17 +259,6 @@
         "status": "partial",
         "nextPage": 2,
         "totalPages": 19,
-        "retryAfter": null,
-        "errorCode": null
-      },
-      {
-        "window": "epicgames_S30_SoloVictoryCashCup_NAC/S30_SoloVictoryCashCup_Event2Round2_NAC",
-        "date": "2024-06-11",
-        "region": "NAC",
-        "series": "victory-cup",
-        "status": "partial",
-        "nextPage": 2,
-        "totalPages": 48,
         "retryAfter": null,
         "errorCode": null
       }
