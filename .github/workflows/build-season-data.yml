@@ -27,6 +27,9 @@ on:
       - scripts/verified-s37-s41-oce-five.cjs
       - scripts/apply-eu-unreal-me-trios-four.cjs
       - scripts/verified-eu-unreal-me-trios-four.cjs
+      - scripts/apply-kame-me-duos-two.cjs
+      - scripts/verified-kame-me-duos-two.cjs
+      - data/manual-approvals/20261114-kame-me-duos-two-proof.json
       - data/manual-approvals/20261114-eu-unreal-me-trios-four-proof.json
       - data/manual-approvals/20261114-s37-s41-oce-five-proof.json
       - data/manual-approvals/20261114-s37-s39-s40-awards7-proof.json
@@ -116,6 +119,8 @@ jobs:
             node scripts/apply-s37-s41-oce-five.cjs
             node scripts/apply-eu-unreal-me-trios-four.cjs --dry-run
             node scripts/apply-eu-unreal-me-trios-four.cjs
+            node scripts/apply-kame-me-duos-two.cjs --dry-run
+            node scripts/apply-kame-me-duos-two.cjs
             node scripts/publish-nov14-pending-cash.cjs --dry-run
             node scripts/publish-nov14-pending-cash.cjs
             node scripts/reconcile-pending-hamikuma-20261114.cjs --dry-run

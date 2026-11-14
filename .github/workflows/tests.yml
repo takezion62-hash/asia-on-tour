@@ -121,6 +121,8 @@ jobs:
         run: node scripts/apply-s37-s41-oce-five.cjs --dry-run
       - name: 2024年 ME Trios 2件の賞金修正とEU Unreal・ME Trios新規2件（書込なし）
         run: node scripts/apply-eu-unreal-me-trios-four.cjs --dry-run
+      - name: Kame 2022 Elite Week4 / 2024 ME Duos Event5 決勝の2組・賞金とEpic ID（書込なし）
+        run: node scripts/apply-kame-me-duos-two.cjs --dry-run
       - name: 2026/11/14 保留の現金賞金：Unger $100・Reoデュオ各$200を独立した証拠で照合
         run: node scripts/publish-nov14-pending-cash.cjs --dry-run
       - name: 2026/11/14 HamiKuma賞品4組：元のTracker順位を保持して重複候補のみ解決
