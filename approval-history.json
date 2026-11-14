@@ -22736,6 +22736,50 @@
       "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
       "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=OCE&round=S30_SoloVictoryCashCup_Event7Round1_OCE",
       "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "s41-eu-console-zb-solo-vc-final-20260622-demonkurage",
+      "recordId": "s41-eu-console-zb-solo-vc-final-20260622-demonkurage",
+      "decision": "published",
+      "policy": "tracker-20261114-s41-console-zb-four-vr-awards",
+      "approvedAt": "2026-11-14T12:25:46.595Z",
+      "approvedBy": "ChatGPT / user-authorized 2026-11-14 screenshots",
+      "source": "https://fortnitetracker.com/events/epicgames_S41_ConsoleVCC_SolosZB_EU?window=S41_ConsoleVCC_SolosZB_Event2Round2_EU",
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-3-official-rules",
+      "evidence": "Original screenshot 2026-11-14 uploaded image 1 (EU 2026-06-22), Epic UUID 1ec763a9-ecbf-4b13-85d3-702e7a64b22c, official final window and $100 per VR"
+    },
+    {
+      "id": "s41-me-console-zb-solo-vc-final-20260726-demonkurage",
+      "recordId": "s41-me-console-zb-solo-vc-final-20260726-demonkurage",
+      "decision": "published",
+      "policy": "tracker-20261114-s41-console-zb-four-vr-awards",
+      "approvedAt": "2026-11-14T12:25:46.599Z",
+      "approvedBy": "ChatGPT / user-authorized 2026-11-14 screenshots",
+      "source": "https://fortnitetracker.com/events/epicgames_S41_ConsoleVCC_SolosZB_ME?window=S41_ConsoleVCC_SolosZB_Event4Round2_ME",
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-3-official-rules",
+      "evidence": "Original screenshot 2026-11-14 uploaded image 2 (ME 2026-07-26), Epic UUID 1ec763a9-ecbf-4b13-85d3-702e7a64b22c, official final window and $100 per VR"
+    },
+    {
+      "id": "s41-me-console-zb-solo-vc-final-20260726-magurohoppe",
+      "recordId": "s41-me-console-zb-solo-vc-final-20260726-magurohoppe",
+      "decision": "published",
+      "policy": "tracker-20261114-s41-console-zb-four-vr-awards",
+      "approvedAt": "2026-11-14T12:25:46.602Z",
+      "approvedBy": "ChatGPT / user-authorized 2026-11-14 screenshots",
+      "source": "https://fortnitetracker.com/events/epicgames_S41_ConsoleVCC_SolosZB_ME?window=S41_ConsoleVCC_SolosZB_Event4Round2_ME",
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-3-official-rules",
+      "evidence": "Original screenshot 2026-11-14 uploaded image 3 (ME 2026-07-26), Epic UUID 21884020-9c99-4339-9c81-6cba567693bf, official final window and $100 per VR"
+    },
+    {
+      "id": "s41-me-console-zb-solo-vc-final-20260726-tarakokuchibiru",
+      "recordId": "s41-me-console-zb-solo-vc-final-20260726-tarakokuchibiru",
+      "decision": "published",
+      "policy": "tracker-20261114-s41-console-zb-four-vr-awards",
+      "approvedAt": "2026-11-14T12:25:46.605Z",
+      "approvedBy": "ChatGPT / user-authorized 2026-11-14 screenshots",
+      "source": "https://fortnitetracker.com/events/epicgames_S41_ConsoleVCC_SolosZB_ME?window=S41_ConsoleVCC_SolosZB_Event4Round2_ME",
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-3-official-rules",
+      "evidence": "Original screenshot 2026-11-14 uploaded image 4 (ME 2026-07-26), Epic UUID 9f0f2857-4e0a-4882-ae93-960c79cee8b4, official final window and $100 per VR"
     }
   ]
 }
