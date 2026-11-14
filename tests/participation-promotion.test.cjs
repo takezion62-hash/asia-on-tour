@@ -144,8 +144,7 @@ test('unrelated rule updates do not invalidate an unchanged candidate-specific p
  const x=fixture();x.checkpoint.complete=false;
  const first=plan(x.context,emptyState(),emptyHistory(),{now:NOW});
  x.context.rules=clone(x.context.rules);
- x.context.rules.rules.find(r=>r.id!=='ch7s5-reload-zero-build-duos-cash-cup').evidence.push({
-  text:'unrelated change',url:'https://www.fortnite.com'});
+ x.context.rules.rules.find(r=>r.id!=='ch7s5-reload-zero-build-duos-cash-cup').unrelatedTestField='irrelevant rule revision';
  const second=plan(x.context,first.state,first.history,{now:NOW});
  assert.equal(second.summary.processed,0);
 });
