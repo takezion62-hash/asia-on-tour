@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-14T18:14:50.915Z",
+  "reviewedAt": "2026-11-14T22:15:48.710Z",
   "description": "Resolved historic review candidates: published, duplicate or participation",
   "entries": [
     {
@@ -28051,6 +28051,186 @@
       "recordId": "auto-s42-5398f73ec27c",
       "reviewedAt": "2026-11-14T18:14:50.915Z",
       "source": "https://www.fortnite.com/competitive/events/S42_InoxtagIconCup/?region=ME&round=S42_InoxtagIconCup_ME",
+      "policy": "attendance-only",
+      "rule": null
+    },
+    {
+      "id": "auto-s30-58b4e596f4bb",
+      "decision": "published",
+      "recordId": "auto-s30-58b4e596f4bb",
+      "reviewedAt": "2026-11-14T22:15:46.016Z",
+      "policy": "verified-rule-and-original-epic-score",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event4Round1_NAC",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules"
+    },
+    {
+      "id": "auto-s30-406ce4f036fd",
+      "decision": "published",
+      "recordId": "auto-s30-406ce4f036fd",
+      "reviewedAt": "2026-11-14T22:15:46.016Z",
+      "policy": "verified-rule-and-original-epic-score",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event4Round1_NAC",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules"
+    },
+    {
+      "id": "auto-s30-10dd5798fdaf",
+      "decision": "published",
+      "recordId": "auto-s30-10dd5798fdaf",
+      "reviewedAt": "2026-11-14T22:15:46.983Z",
+      "policy": "verified-rule",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event5Round1_NAC",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules"
+    },
+    {
+      "id": "auto-s30-d83a21cc5082",
+      "decision": "published",
+      "recordId": "auto-s30-d83a21cc5082",
+      "reviewedAt": "2026-11-14T22:15:46.983Z",
+      "policy": "verified-rule",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event5Round1_NAC",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules"
+    },
+    {
+      "id": "auto-s30-92aba1dfb9bb",
+      "decision": "published",
+      "recordId": "auto-s30-92aba1dfb9bb",
+      "reviewedAt": "2026-11-14T22:15:46.983Z",
+      "policy": "verified-rule",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event5Round1_NAC",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules"
+    },
+    {
+      "id": "auto-s30-13f149d4415e",
+      "decision": "published",
+      "recordId": "auto-s30-13f149d4415e",
+      "reviewedAt": "2026-11-14T22:15:46.983Z",
+      "policy": "verified-rule",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event5Round1_NAC",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules"
+    },
+    {
+      "id": "auto-s30-184663796563",
+      "decision": "published",
+      "recordId": "auto-s30-184663796563",
+      "reviewedAt": "2026-11-14T22:15:47.666Z",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=ME&round=S30_SoloZBVictoryCashCup_Event6Round1_ME",
+      "policy": "verified-rule",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules"
+    },
+    {
+      "id": "auto-s30-c68b5f7ce400",
+      "decision": "published",
+      "recordId": "auto-s30-c68b5f7ce400",
+      "reviewedAt": "2026-11-14T22:15:47.666Z",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=ME&round=S30_SoloZBVictoryCashCup_Event6Round1_ME",
+      "policy": "verified-rule",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules"
+    },
+    {
+      "id": "auto-s30-63e2da03c51b",
+      "decision": "published",
+      "recordId": "auto-s30-63e2da03c51b",
+      "reviewedAt": "2026-11-14T22:15:47.666Z",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=ME&round=S30_SoloZBVictoryCashCup_Event6Round1_ME",
+      "policy": "verified-rule",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules"
+    },
+    {
+      "id": "auto-s30-8852af55dd84",
+      "decision": "published",
+      "recordId": "auto-s30-8852af55dd84",
+      "reviewedAt": "2026-11-14T22:15:47.666Z",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=ME&round=S30_SoloZBVictoryCashCup_Event6Round1_ME",
+      "policy": "verified-rule",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules"
+    },
+    {
+      "id": "auto-s30-515b2ae642e6",
+      "decision": "published",
+      "recordId": "auto-s30-515b2ae642e6",
+      "reviewedAt": "2026-11-14T22:15:47.666Z",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=ME&round=S30_SoloZBVictoryCashCup_Event6Round1_ME",
+      "policy": "verified-rule",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules"
+    },
+    {
+      "id": "auto-s41-b76352809cdb",
+      "decision": "published",
+      "recordId": "auto-s41-b76352809cdb",
+      "reviewedAt": "2026-11-14T22:15:48.710Z",
+      "source": "https://www.fortnite.com/competitive/events/S41_PSTypicalGamer/?region=OCE&round=S41_PSTypicalGamer_Qualifier_OCE",
+      "policy": "attendance-only",
+      "rule": null
+    },
+    {
+      "id": "auto-s30-85b7da9af023",
+      "decision": "published",
+      "recordId": "auto-s30-85b7da9af023",
+      "reviewedAt": "2026-11-14T22:15:48.710Z",
+      "source": "https://www.fortnite.com/competitive/events/S30_DuosCashCupZB/?region=ME&round=S30_DuosCashCupZB_Event8Round1_ME",
+      "policy": "attendance-only",
+      "rule": null
+    },
+    {
+      "id": "auto-s30-8506775a3bc6",
+      "decision": "published",
+      "recordId": "auto-s30-8506775a3bc6",
+      "reviewedAt": "2026-11-14T22:15:48.710Z",
+      "source": "https://www.fortnite.com/competitive/events/S30_DuosCashCupZB/?region=ME&round=S30_DuosCashCupZB_Event8Round1_ME",
+      "policy": "attendance-only",
+      "rule": null
+    },
+    {
+      "id": "auto-s33-ec86d23a4ed6",
+      "decision": "published",
+      "recordId": "auto-s33-ec86d23a4ed6",
+      "reviewedAt": "2026-11-14T22:15:48.710Z",
+      "source": "https://www.fortnite.com/competitive/events/S33_SoloCashCup/?region=NAW&round=S33_SoloCashCup_Event5Round1_NAW",
+      "policy": "attendance-only",
+      "rule": null
+    },
+    {
+      "id": "auto-s33-18ddd743ca33",
+      "decision": "published",
+      "recordId": "auto-s33-18ddd743ca33",
+      "reviewedAt": "2026-11-14T22:15:48.710Z",
+      "source": "https://www.fortnite.com/competitive/events/S33_SoloCashCup/?region=NAW&round=S33_SoloCashCup_Event5Round1_NAW",
+      "policy": "attendance-only",
+      "rule": null
+    },
+    {
+      "id": "auto-s33-b251906ead53",
+      "decision": "published",
+      "recordId": "auto-s33-b251906ead53",
+      "reviewedAt": "2026-11-14T22:15:48.710Z",
+      "source": "https://www.fortnite.com/competitive/events/S33_SoloCashCup/?region=NAW&round=S33_SoloCashCup_Event5Round1_NAW",
+      "policy": "attendance-only",
+      "rule": null
+    },
+    {
+      "id": "auto-s33-a64bd000c12b",
+      "decision": "published",
+      "recordId": "auto-s33-a64bd000c12b",
+      "reviewedAt": "2026-11-14T22:15:48.710Z",
+      "source": "https://www.fortnite.com/competitive/events/S33_SoloCashCup/?region=NAW&round=S33_SoloCashCup_Event5Round1_NAW",
+      "policy": "attendance-only",
+      "rule": null
+    },
+    {
+      "id": "auto-s33-2b0c39d5b5c5",
+      "decision": "published",
+      "recordId": "auto-s33-2b0c39d5b5c5",
+      "reviewedAt": "2026-11-14T22:15:48.710Z",
+      "source": "https://www.fortnite.com/competitive/events/S33_SoloCashCup/?region=NAW&round=S33_SoloCashCup_Event5Round1_NAW",
+      "policy": "attendance-only",
+      "rule": null
+    },
+    {
+      "id": "auto-s33-93882bb2543c",
+      "decision": "published",
+      "recordId": "auto-s33-93882bb2543c",
+      "reviewedAt": "2026-11-14T22:15:48.710Z",
+      "source": "https://www.fortnite.com/competitive/events/S33_SoloCashCup/?region=NAW&round=S33_SoloCashCup_Event5Round1_NAW",
       "policy": "attendance-only",
       "rule": null
     }
