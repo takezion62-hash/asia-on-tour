@@ -2,8 +2,8 @@
   "version": 1,
   "role": "generated canonical-source snapshot; results.json remains authoritative in phase 1",
   "canonicalFile": "results.json",
-  "canonicalSha256": "9e05b6569ca6213323ae8de28bdfe77a4fab85772fb1b54a6c6226bcd0dc520f",
-  "count": 7054,
+  "canonicalSha256": "753dcb5afda58096b5e97532d471628d9f5e4635430b0b04f1f4d1e5c74c8429",
+  "count": 7062,
   "teamPrizeCents": 7597000,
   "unconfirmedPrizeRecords": 1111,
   "personalPrizeCents": 7577000,
@@ -7061,7 +7061,15 @@
     "auto-s30-9c70845809f6",
     "auto-s30-a4673a3e5cae",
     "auto-s30-905e7e115e26",
-    "auto-s30-2106ec2b5761"
+    "auto-s30-2106ec2b5761",
+    "auto-s31-c850907ddac8",
+    "auto-s31-d35f8a66bd6e",
+    "auto-s31-188e99645e19",
+    "auto-s31-856ba8194bea",
+    "auto-s32-51ad65168d0e",
+    "auto-s32-eb30bff9afbd",
+    "auto-s42-52a95e916383",
+    "auto-s42-6daae6759758"
   ],
   "shards": [
     {
@@ -7130,20 +7138,20 @@
     {
       "seasonId": "S31",
       "file": "source-results/S31.json",
-      "count": 1088,
+      "count": 1092,
       "teamPrizeCents": 1150000,
       "unconfirmedPrizeRecords": 54,
       "personalPrizeCents": 1150000,
-      "sha256": "dbf82cdb71afbf54ac9b871663e0ed9d991624822b4638d95a286338dabba07a"
+      "sha256": "1eb0cb15d6be9c028093ffee79f1f9ca6015d8f9af594ca1a06c441d2fb2ced5"
     },
     {
       "seasonId": "S32",
       "file": "source-results/S32.json",
-      "count": 251,
+      "count": 253,
       "teamPrizeCents": 540000,
       "unconfirmedPrizeRecords": 11,
       "personalPrizeCents": 540000,
-      "sha256": "eba9532578aa2b9ad60438e77645979e4409d80aa691ff8e83cd94a629acfe99"
+      "sha256": "c1bf79c49b95627e07fa854ff4d39f5bb515b8245533b2182fd5df339cd7bfdc"
     },
     {
       "seasonId": "S33",
@@ -7220,11 +7228,11 @@
     {
       "seasonId": "S42",
       "file": "source-results/S42.json",
-      "count": 2299,
+      "count": 2301,
       "teamPrizeCents": 1100000,
       "unconfirmedPrizeRecords": 565,
       "personalPrizeCents": 1100000,
-      "sha256": "a50e73c5b55bde964b980134b28dbaae732b08ec65bdeeff83f5333200621ee0"
+      "sha256": "e8b5c51cb6b174b1a1e3cf80e26e4564696e430d8fb6fe7989d9826d51aeeaf8"
     },
     {
       "seasonId": "S43",
