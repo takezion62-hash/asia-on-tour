@@ -2721,6 +2721,35 @@
           "url": "https://fortnitetracker.com/events/epicgames_S22_DivisionalCups_Elite_Finals_ME?window=S22_DivisionalCups_Elite_Finals_ME_Week5_v2"
         }
       ]
+    },
+    {
+      "id": "ch5s4-boter-fncs-cup",
+      "name": "Boter FNCS Cup",
+      "chapter": 5,
+      "season": 4,
+      "seasonId": "S31",
+      "sourceEventIds": [
+        "S31_InfluencerCup"
+      ],
+      "series": "victory-cup",
+      "additionalSeries": [
+        "fncs"
+      ],
+      "mode": "battle-royale",
+      "subtype": "boter-fncs-cup",
+      "team": "duo",
+      "platform": "cross-platform",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "Epic Games FNCS Influencer Cups Chapter 5 Season 4 公式規則。MEはRound 1の上位1,000チームが決勝進出、Round 2は最大3試合、1VRにつきチーム$200（各$100）。",
+          "url": "https://www.fortnite.com/news/fncs-influencer-cups-chapter-5-season-4-official-rules"
+        },
+        {
+          "text": "Fortnite Tracker S31_InfluencerCup_MEのBoter FNCS Cup Round2（UTC 2024/9/6、JST 2024/9/7）順位表およびユーザー提供2026/11/14の選手詳細スクリーンショット。",
+          "url": "https://fortnitetracker.com/events/epicgames_S31_InfluencerCup_ME?window=S31_InfluencerCup_Round2_ME"
+        }
+      ]
     }
   ]
 }
