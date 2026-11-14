@@ -11,9 +11,9 @@ const clone=x=>JSON.parse(JSON.stringify(x));
 
 test('shared official tournament rules include review-only Solo Series Finals and approved types',()=>{
  assert.deepEqual(validateRegistry(registry,tournaments),[]);
- assert.equal(registry.rules.length,24);
+ assert.equal(registry.rules.length,26);
  assert.equal(Object.keys(RULES).length,11);
- assert.equal(Object.keys(CUT_OFFS).length,10);
+ assert.equal(Object.keys(CUT_OFFS).length,12);
  for(const rule of registry.rules){
   if(rule.series==='victory-cup')assert.strictEqual(RULES[rule.id].source,rule.source);
   if(rule.series==='cash-cup'){
@@ -307,5 +307,51 @@ test('S43 Buggy BR regional cosmetic cutoffs exactly match official Attachment C
    region+' wrong ZB session');
   assert.equal(evaluate({...row,source:row.source.replace('OnePieceBuggyCup','OnePieceZoroCup')}).eligible,false,
    region+' wrong event');
+ }
+});
+
+test('Buggy Zero Build and Mobile inherit Zoro cutoff shapes but not Zoro event IDs',()=>{
+ const base='ch7s5-one-piece-buggy',zero=registry.rules.find(r=>r.id===base+'-cup-zero-build'),
+   mobile=registry.rules.find(r=>r.id===base+'-mobile-cup');
+ const zoroZero=registry.rules.find(r=>r.id==='ch7s5-one-piece-zoro-cup-zero-build'),
+   zoroMobile=registry.rules.find(r=>r.id==='ch7s5-one-piece-zoro-mobile-cup');
+ assert.ok(zero&&mobile);
+ assert.deepEqual(zero.cosmeticRanks,zoroZero.cosmeticRanks);
+ assert.deepEqual(mobile.cosmeticRanks,zoroMobile.cosmeticRanks);
+ assert.deepEqual(zero.eventIds,['S43_OnePieceBuggyCup_ZB']);
+ assert.deepEqual(mobile.eventIds,['S43_OnePieceBuggyCup_Mobile']);
+ assert.equal(zero.team,'duo');
+ assert.equal(mobile.team,'solo');
+ assert.equal(zero.matchCaps['スキン大会'],11);
+ assert.equal(mobile.matchCaps['スキン大会'],8);
+ assert.equal(zero.autoApproval,'verified-team-rank');
+ assert.equal(mobile.autoApproval,'verified-team-rank');
+ assert.equal(CUT_OFFS[zero.id].eventId,'S43_OnePieceBuggyCup_ZB');
+ assert.equal(CUT_OFFS[mobile.id].eventId,'S43_OnePieceBuggyCup_Mobile');
+ const zc=tournaments.catalog.find(x=>x.id===zero.id),
+  mc=tournaments.catalog.find(x=>x.id===mobile.id);
+ assert.equal(zc.name,'One Piece: Buggy Cup Zero Build');
+ assert.equal(zc.mode,'zero-build');
+ assert.equal(zc.team,'duo');
+ assert.equal(mc.name,'One Piece: Buggy Mobile Cup');
+ assert.equal(mc.mode,'reload-zero-build');
+ assert.equal(mc.team,'solo');
+ assert.equal(mc.platform,'mobile');
+ for(const r of [zero,mobile]){
+  assert.equal(r.series,'skin-cup');
+  assert.equal(r.source,'https://www.fortnite.com/competitive/rules-guidelines/rules-library/one-piece-buggy-cup-chapter-7-mini-season-official-rules');
+  assert.equal(tournaments.axes.find(a=>a.key==='subtype').options.filter(o=>o.id===tournaments.catalog.find(x=>x.id===r.id).subtype).length,1);
+  for(const [region,cutoff] of Object.entries(r.cosmeticRanks)){
+   assert.ok(Number.isSafeInteger(cutoff));
+   const baseRow={id:'auto-s43-buggy-probe',seasonId:'S43',chapter:7,season:5,
+    tournamentId:r.id,verified:true,kind:'参加確認',region,rank:cutoff,
+    matches:r.matchCaps['スキン大会'],kills:3,vrs:0,
+    source:'https://www.fortnite.com/competitive/events/'+r.eventIds[0]+'/?region='+region+'&round='+r.eventIds[0]+'_'+region};
+   const {evaluate}=require('../scripts/cosmetic-rank-rules.cjs');
+   assert.equal(evaluate(baseRow).eligible,true,r.id+' '+region+' cutoff');
+   assert.equal(evaluate({...baseRow,rank:cutoff+1}).eligible,false,'outside rank');
+   assert.equal(evaluate({...baseRow,matches:baseRow.matches+1}).eligible,false,'too many matches');
+   assert.equal(evaluate({...baseRow,source:baseRow.source.replace(r.eventIds[0],zoroZero.eventIds[0])}).eligible,false,'cross-event forged source');
+  }
  }
 });
