@@ -79,3 +79,32 @@ test('official skin reward rank can publish from a mature continuous verified pa
  assert.equal(decide(row,win,{...partial,retryAfter:'2030-01-01T00:00:00Z'},data()).approved,false);
  assert.equal(decide({...row,rank:51},win,{...partial,proposals:[{...row,rank:51}]},data()).approved,false);
 });
+
+
+test('One Piece Buggy BR is auto-approved only for registered cosmetics with exact Epic window and verified roster',()=>{
+ const id='ch7s5-one-piece-buggy-cup-battle-royale',evt='S43_OnePieceBuggyCup';
+ const cutoffs={OCE:50,ME:50,EU:525,NAC:375,BR:100,NAW:100};
+ const dates={OCE:'2026-11-13',ME:'2026-11-14',EU:'2026-11-14',
+  NAC:'2026-11-14',BR:'2026-11-14',NAW:'2026-11-14'};
+ for(const [region,rank] of Object.entries(cutoffs)){
+  const window={...w,key:'epicgames_'+evt+'_'+region+'/'+evt+'_'+region,
+   eventId:evt,windowId:evt+'_'+region,seasonId:'S43',tournamentId:id,region,
+   dateJst:dates[region],series:'skin-cup',kind:'参加確認',round:'単一開催枠 / 参加確認'};
+  const candidate={...row,id:'auto-s43-buggy-'+region.toLowerCase(),date:window.dateJst,
+   region,tournamentId:id,event:'One Piece: Buggy Cup Battle Royale',
+   rank,matches:11,source:source(window)};
+  const db=data();db.tournaments.catalog=[{id,seasonId:'S43',series:'skin-cup',
+   team:'duo',name:candidate.event,sourceEventIds:[evt]}];
+  assert.equal(cutoffForWindow(window),rank);
+  const result=decide(candidate,window,cp(candidate),db);
+  assert.equal(result.approved,true,region+' rank '+rank);
+  assert.equal(result.record.kind,'スキン大会');
+  assert.equal(result.record.prize,0);
+  assert.equal(result.record.rank,rank);
+  assert.equal(decide({...candidate,rank:rank+1},window,cp({...candidate,rank:rank+1}),db).approved,false);
+  assert.equal(decide({...candidate,matches:12},window,cp({...candidate,matches:12}),db).approved,false);
+  assert.equal(decide(candidate,{...window,eventId:evt+'_ZB'},cp(candidate),db).approved,false);
+  assert.equal(decide(candidate,window,cp(candidate,false),db).approved,false);
+  assert.equal(decide(candidate,window,cp(candidate),{...db,results:[candidate]}).approved,false);
+ }
+});

@@ -11,9 +11,9 @@ const clone=x=>JSON.parse(JSON.stringify(x));
 
 test('shared official tournament rules include review-only Solo Series Finals and approved types',()=>{
  assert.deepEqual(validateRegistry(registry,tournaments),[]);
- assert.equal(registry.rules.length,23);
+ assert.equal(registry.rules.length,24);
  assert.equal(Object.keys(RULES).length,11);
- assert.equal(Object.keys(CUT_OFFS).length,9);
+ assert.equal(Object.keys(CUT_OFFS).length,10);
  for(const rule of registry.rules){
   if(rule.series==='victory-cup')assert.strictEqual(RULES[rule.id].source,rule.source);
   if(rule.series==='cash-cup'){
@@ -276,5 +276,36 @@ test('S42 Solo Reload official advancement rules explicitly retain attendance wi
  ]){
   const doc=clone(registry);mutation(doc);
   assert.ok(validateRegistry(doc,tournaments).length>0);
+ }
+});
+
+
+test('S43 Buggy BR regional cosmetic cutoffs exactly match official Attachment C, isolated from ZB and Mobile',()=>{
+ const id='ch7s5-one-piece-buggy-cup-battle-royale';
+ const r=registry.rules.find(x=>x.id===id);
+ const t=tournaments.catalog.find(x=>x.id===id);
+ assert.ok(r&&t);
+ assert.equal(t.name,'One Piece: Buggy Cup Battle Royale');
+ assert.equal(t.mode,'battle-royale');
+ assert.equal(t.team,'duo');
+ assert.equal(r.series,'skin-cup');
+ assert.equal(r.autoApproval,'verified-team-rank');
+ assert.deepEqual(r.eventIds,['S43_OnePieceBuggyCup']);
+ assert.equal(CUT_OFFS[id].eventId,'S43_OnePieceBuggyCup');
+ assert.equal(r.matchCaps['スキン大会'],11);
+ assert.deepEqual(r.cosmeticRanks,{OCE:50,ME:50,EU:525,BR:100,NAC:375,NAW:100});
+ assert.equal(r.source,'https://www.fortnite.com/competitive/rules-guidelines/rules-library/one-piece-buggy-cup-chapter-7-mini-season-official-rules');
+ for(const [region,cutoff] of Object.entries(r.cosmeticRanks)){
+  const {evaluate}=require('../scripts/cosmetic-rank-rules.cjs');
+  const row={id:'auto-s43-buggytest',tournamentId:id,seasonId:'S43',chapter:7,season:5,
+   verified:true,kind:'参加確認',region,rank:cutoff,matches:11,vrs:0,kills:10,
+   source:'https://www.fortnite.com/competitive/events/S43_OnePieceBuggyCup/?region='+region+'&round=S43_OnePieceBuggyCup_'+region};
+  assert.equal(evaluate(row).eligible,true,region+' top '+cutoff);
+  assert.equal(evaluate({...row,rank:cutoff+1}).eligible,false,region+' rank outside cutoff');
+  assert.equal(evaluate({...row,matches:12}).eligible,false,region+' max matches');
+  assert.equal(evaluate({...row,source:row.source.replace('S43_OnePieceBuggyCup/','S43_OnePieceBuggyCup_ZB/')}).eligible,false,
+   region+' wrong ZB session');
+  assert.equal(evaluate({...row,source:row.source.replace('OnePieceBuggyCup','OnePieceZoroCup')}).eligible,false,
+   region+' wrong event');
  }
 });
