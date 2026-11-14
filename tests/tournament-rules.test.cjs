@@ -11,7 +11,7 @@ const clone=x=>JSON.parse(JSON.stringify(x));
 
 test('shared official tournament rules include review-only Solo Series Finals and approved types',()=>{
  assert.deepEqual(validateRegistry(registry,tournaments),[]);
- assert.equal(registry.rules.length,26);
+ assert.equal(registry.rules.length,27);
  assert.equal(Object.keys(RULES).length,11);
  assert.equal(Object.keys(CUT_OFFS).length,12);
  for(const rule of registry.rules){
@@ -354,4 +354,49 @@ test('Buggy Zero Build and Mobile inherit Zoro cutoff shapes but not Zoro event 
    assert.equal(evaluate({...baseRow,source:baseRow.source.replace(r.eventIds[0],zoroZero.eventIds[0])}).eligible,false,'cross-event forged source');
   }
  }
+});
+
+
+test('S43 Arenas Boxfights Cash Cup: one existing solo event, 12-match cap, official six-region personal payouts',()=>{
+ const r=registry.rules.find(x=>x.id==='ch7s5-arenas-cash-cup');
+ const c=tournaments.catalog.find(x=>x.id===r.id);
+ assert.ok(r&&c);
+ assert.equal(tournaments.catalog.filter(x=>x.id===r.id).length,1);
+ assert.equal(r.series,'cash-cup');
+ assert.equal(r.autoApproval,'verified-team-rank');
+ assert.equal(r.team,'solo');
+ assert.equal(c.team,'solo');
+ assert.equal(c.mode,'arenas-boxfights');
+ assert.equal(c.platform,'cross-platform');
+ assert.deepEqual(r.eventIds,['S43_ArenaCashCup']);
+ assert.deepEqual(r.matchCaps,{'単一ラウンド':12});
+ assert.equal(r.sessionMinutes,120);
+ assert.deepEqual(r.rankedEligibility,{mode:'arenas-boxfights',minimumRank:'Platinum'});
+ assert.deepEqual(r.cashPrizes.tiers,{
+  OCE:[{through:1,perPlayer:300},{through:2,perPlayer:200},{through:3,perPlayer:100}],
+  ME:[{through:1,perPlayer:300},{through:2,perPlayer:200},{through:3,perPlayer:100}],
+  NAW:[{through:1,perPlayer:500},{through:2,perPlayer:300},{through:3,perPlayer:200},{through:4,perPlayer:150},{through:5,perPlayer:100}],
+  BR:[{through:1,perPlayer:500},{through:2,perPlayer:300},{through:3,perPlayer:200},{through:4,perPlayer:150},{through:5,perPlayer:100}],
+  EU:[{through:1,perPlayer:1000},{through:2,perPlayer:750},{through:3,perPlayer:500},{through:4,perPlayer:300},{through:6,perPlayer:200},{through:10,perPlayer:100}],
+  NAC:[{through:1,perPlayer:750},{through:2,perPlayer:500},{through:3,perPlayer:400},{through:4,perPlayer:300},{through:5,perPlayer:200},{through:7,perPlayer:100}]
+ });
+ const formats=tournaments.axes.find(x=>x.key==='mode').options;
+ assert.equal(formats.filter(x=>x.id==='arenas-boxfights').length,1);
+ const {cashPrize}=require('../scripts/automatic-cash-approval.cjs');
+ assert.equal(cashPrize(r,'EU',5),200);
+ assert.equal(cashPrize(r,'EU',6),200);
+ assert.equal(cashPrize(r,'EU',7),100);
+ assert.equal(cashPrize(r,'EU',10),100);
+ assert.equal(cashPrize(r,'EU',11),0);
+ assert.equal(cashPrize(r,'NAC',6),100);
+ assert.equal(cashPrize(r,'NAC',7),100);
+ assert.equal(cashPrize(r,'NAC',8),0);
+ const change=fn=>{const d=clone(registry);fn(d.rules.find(x=>x.id===r.id));return validateRegistry(d,tournaments).join('\n')};
+ assert.match(change(x=>{x.cashPrizes.tiers.EU[4].through=5}),/Arenas Cash Cup/);
+ assert.match(change(x=>{x.cashPrizes.tiers.NAC[5].perPlayer=101}),/Arenas Cash Cup/);
+ assert.match(change(x=>{x.rankedEligibility.minimumRank='Diamond'}),/Arenas Solo/);
+ assert.match(change(x=>{x.team='duo'}),/Arenas Solo/);
+ assert.match(change(x=>{x.eventIds=['S42_ArenaCashCup']}),/Arenas Solo/);
+ assert.match(change(x=>{x.matchCaps['単一ラウンド']=11}),/Arenas Solo/);
+ assert.match(change(x=>{x.autoApproval='review-only'}),/Arenas Solo/);
 });
