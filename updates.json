@@ -2,6 +2,53 @@
   "version": 1,
   "entries": [
     {
+      "id": "review-publication-pending-20261114-e3a98beff40c-verified-rule-1",
+      "date": "2026-11-15",
+      "type": "records",
+      "title": "管理者確認済み戦績 2件を追加",
+      "description": "公式規則に基づく予選突破または決勝0VRのみを確認。未確認賞金なし。",
+      "recordIds": [
+        "auto-s30-20938773a2c1",
+        "auto-s30-aad15adb09e0"
+      ]
+    },
+    {
+      "id": "review-publication-pending-20261114-e3a98beff40c-attendance-only-1",
+      "date": "2026-11-15",
+      "type": "records",
+      "title": "管理者確認済み戦績 8件を追加",
+      "description": "Epic ID・開催枠・順位表を再照合した出場確認のみ。賞金・予選突破・スキン獲得を未認定。",
+      "recordIds": [
+        "auto-s41-245dba3c8519",
+        "auto-s41-589b08785656",
+        "auto-s30-1885f34f64e2",
+        "auto-s33-d9594fd7e0ff",
+        "auto-s33-f53b581f3add",
+        "auto-s33-5d6e48438a60",
+        "auto-s33-4e39a46e67aa",
+        "auto-s33-4c2daece890b"
+      ]
+    },
+    {
+      "id": "tracker-20261114-nac-s27-naw-s34-me-s31-ten",
+      "date": "2026-11-14",
+      "type": "records",
+      "title": "NAC 2023 ZB Duos2組・NAW 2025 PS Cup3件・ME 2024 SypherPK5件を追加",
+      "description": "ユーザー提供画像10枚の10戦績（9賞金・1賞金0）を照合。2023/11/28・12/1 NAC ZB Duos各1VR、2025/5/1 NAW PlayStation Cup2名各$500と64位れっどうぃんぐ$0、2024/9/2 ME PlayStation SypherPK Cup5名各$200。個人配分賞金合計$2,400、既存記録と選手を保持。ちからv2はちからV2に統一、ptt れっどにゃんぐはれっどうぃんぐの別名義。新規選手は永瀬さらLOVEじょーじ396。入金自体は未確認。",
+      "recordIds": [
+        "s27-nac-zb-duos-vc-final-20231201-yuttari-rintaro",
+        "s27-nac-zb-duos-vc-final-20231128-yuttari-rintaro",
+        "s34-naw-playstation-cup-final-20250501-rintaro",
+        "s34-naw-playstation-cup-final-20250501-p1ng",
+        "s34-naw-playstation-cup-final-20250501-redwing",
+        "s31-me-ps-sypherpk-final-20240902-rintaro",
+        "s31-me-ps-sypherpk-final-20240902-progon",
+        "s31-me-ps-sypherpk-final-20240902-asuka",
+        "s31-me-ps-sypherpk-final-20240902-chikara",
+        "s31-me-ps-sypherpk-final-20240902-nagase"
+      ]
+    },
+    {
       "id": "auto-sync-20261114142853",
       "date": "2026-11-14",
       "type": "records",

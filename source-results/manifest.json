@@ -2,11 +2,11 @@
   "version": 1,
   "role": "generated canonical-source snapshot; results.json remains authoritative in phase 1",
   "canonicalFile": "results.json",
-  "canonicalSha256": "c5de4fd9d35365882e0c2c32f9b377aefdea0e354f30d2b69e29ed5d54f9be3e",
-  "count": 7193,
-  "teamPrizeCents": 8017000,
-  "unconfirmedPrizeRecords": 1172,
-  "personalPrizeCents": 7997000,
+  "canonicalSha256": "bdc5246b47da6b63f657871c64e6d79fe58c40b5c11b5b02629bb6fb44b680b8",
+  "count": 7213,
+  "teamPrizeCents": 8257000,
+  "unconfirmedPrizeRecords": 1180,
+  "personalPrizeCents": 8237000,
   "recordOrder": [
     "s42-me-slenderman-reload-skin-20261021-acris-chacha",
     "s42-me-slenderman-reload-skin-20261021-karf-alpha",
@@ -7200,7 +7200,27 @@
     "auto-s31-23f53b3e5a5d",
     "auto-s30-c63f3942dcc9",
     "auto-s43-fd3f5dd4ebb6",
-    "auto-s43-172cdb2576de"
+    "auto-s43-172cdb2576de",
+    "s27-nac-zb-duos-vc-final-20231201-yuttari-rintaro",
+    "s27-nac-zb-duos-vc-final-20231128-yuttari-rintaro",
+    "s34-naw-playstation-cup-final-20250501-rintaro",
+    "s34-naw-playstation-cup-final-20250501-p1ng",
+    "s34-naw-playstation-cup-final-20250501-redwing",
+    "s31-me-ps-sypherpk-final-20240902-rintaro",
+    "s31-me-ps-sypherpk-final-20240902-progon",
+    "s31-me-ps-sypherpk-final-20240902-asuka",
+    "s31-me-ps-sypherpk-final-20240902-chikara",
+    "s31-me-ps-sypherpk-final-20240902-nagase",
+    "auto-s41-245dba3c8519",
+    "auto-s41-589b08785656",
+    "auto-s30-1885f34f64e2",
+    "auto-s33-d9594fd7e0ff",
+    "auto-s33-f53b581f3add",
+    "auto-s33-5d6e48438a60",
+    "auto-s33-4e39a46e67aa",
+    "auto-s33-4c2daece890b",
+    "auto-s30-20938773a2c1",
+    "auto-s30-aad15adb09e0"
   ],
   "shards": [
     {
@@ -7240,6 +7260,15 @@
       "sha256": "85f3fe588f15e4508daf725b48deb3fa162adec226fa74ab9fd30f7f6d6f0892"
     },
     {
+      "seasonId": "S27",
+      "file": "source-results/S27.json",
+      "count": 2,
+      "teamPrizeCents": 40000,
+      "unconfirmedPrizeRecords": 0,
+      "personalPrizeCents": 40000,
+      "sha256": "2905e281e25c38008ea2a41a5d5b3c6c3cfc93d3fe0eda4e2cc43c4c0fff1d69"
+    },
+    {
       "seasonId": "S28",
       "file": "source-results/S28.json",
       "count": 10,
@@ -7260,20 +7289,20 @@
     {
       "seasonId": "S30",
       "file": "source-results/S30.json",
-      "count": 1934,
+      "count": 1937,
       "teamPrizeCents": 1520000,
-      "unconfirmedPrizeRecords": 140,
+      "unconfirmedPrizeRecords": 141,
       "personalPrizeCents": 1520000,
-      "sha256": "9384de8fd52d3d0345ae1a3de21fa04c864d172831772df96602f701ff7d8d66"
+      "sha256": "7668f83b69c7510eb2e0ae59ea698c64041361463c4e02d647dd95e200752206"
     },
     {
       "seasonId": "S31",
       "file": "source-results/S31.json",
-      "count": 1114,
-      "teamPrizeCents": 1330000,
+      "count": 1119,
+      "teamPrizeCents": 1430000,
       "unconfirmedPrizeRecords": 63,
-      "personalPrizeCents": 1330000,
-      "sha256": "f2de4e9ad2eb5f23d2801a129ccca0411c89cb0a4d800604f13e1da397e7ca20"
+      "personalPrizeCents": 1430000,
+      "sha256": "a205ad14ea90a41647ea7a61c8a00d40015489b88299717a80861f2b123cb83c"
     },
     {
       "seasonId": "S32",
@@ -7287,11 +7316,20 @@
     {
       "seasonId": "S33",
       "file": "source-results/S33.json",
-      "count": 273,
+      "count": 278,
       "teamPrizeCents": 72000,
-      "unconfirmedPrizeRecords": 156,
+      "unconfirmedPrizeRecords": 161,
       "personalPrizeCents": 72000,
-      "sha256": "bb921c985bd99d0c8f4460d8808931d37329098ba8a2f156f8b97692a9a628f9"
+      "sha256": "903c903a265a302d3ae60662a0b614a119421bbcdacd210d9cf65342172a1169"
+    },
+    {
+      "seasonId": "S34",
+      "file": "source-results/S34.json",
+      "count": 3,
+      "teamPrizeCents": 100000,
+      "unconfirmedPrizeRecords": 0,
+      "personalPrizeCents": 100000,
+      "sha256": "d4cc1760597db6546229af56d4b867bfad8b17a17ec3bdf884e553daf63fd289"
     },
     {
       "seasonId": "S35",
@@ -7350,11 +7388,11 @@
     {
       "seasonId": "S41",
       "file": "source-results/S41.json",
-      "count": 432,
+      "count": 434,
       "teamPrizeCents": 380000,
-      "unconfirmedPrizeRecords": 74,
+      "unconfirmedPrizeRecords": 76,
       "personalPrizeCents": 380000,
-      "sha256": "a9c4e0735e7abbc3fdf79189a9cba10b4d20f0f5795b7a3d6fd48491b32df42a"
+      "sha256": "bd2324fca39c6d2020d9da50269d2ede76c6b9ebe5ad1035ceab9a0591c413cc"
     },
     {
       "seasonId": "S42",
