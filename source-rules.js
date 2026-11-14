@@ -30,14 +30,40 @@
   // Ranking thresholds are inclusive: 'Top #5' after '#3' applies to 4th–5th.
   // All amounts in this branch are per player, not full trio totals.
   function cashMarkup(rule){
-    // Round1-only official qualification data: there is no verified cash table.
+    // Round 1 qualification and Round 2 cash have independent validators.
+    // Only show Round 2 payouts when the exact rule table is registered.
     if(rule.autoApproval==='verified-duo-qualifier-only'){
+      const finalVerified=rule.cashFinalAutoApproval==='verified-duo-round2-rank'&&
+        rule.cashPrizes?.basis==='per-player'&&rule.cashPrizes.currency==='USD'&&
+        rule.matchCaps?.['賞金決勝']===6;
+      const finalRegions=state.region==='all'?regionLabels:[state.region];
+      const finalSections=finalVerified?finalRegions.map(region=>{
+        const tiers=rule.cashPrizes.tiers?.[region];
+        if(!tiers?.length)return '<div class="source-rule-cash-region is-unknown"><strong>'+esc(region)+'</strong><span>決勝賞金表未登録</span></div>';
+        let last=0;
+        const rows=tiers.map(tier=>{
+          const first=last+1;
+          const rank=first===tier.through?fmtNumber(first)+'位':fmtNumber(first)+'〜'+fmtNumber(tier.through)+'位';
+          last=tier.through;
+          return '<div class="source-rule-cash-tier"><span>'+esc(rank)+'</span><strong>$'+fmtNumber(tier.perPlayer)+'</strong></div>';
+        }).join('');
+        return '<div class="source-rule-cash-region"><h4>'+esc(region)+'</h4>'+rows+'</div>';
+      }).join(''):'';
+      const finalMarkup=finalVerified
+        ?'<div class="source-rule-fact"><span>Round 2 決勝の個人賞金（USD・デュオ各選手）</span>'+
+          '<div class="source-rule-cash-grid">'+finalSections+'</div></div>'+
+          '<div class="source-rule-fact"><span>Round 2 決勝</span><strong>最大'+
+            fmtNumber(rule.matchCaps['賞金決勝'])+'試合 · デュオのチーム賞金は表示額の2倍 · 賞金圏外は$0</strong></div>'
+        :'';
+      const note=finalVerified
+        ?'Round 2は完了した公式順位表・開催日時・2人のEpic ID・地域別賞金表が一致した場合だけ賞金を自動掲載します。賞金圏外は$0。受給資格や支払い完了は未確認です。'
+        :'Round 2の現金賞金額はこの規則から推定しません。';
       return '<div class="source-rule-fact"><span>Round 1 の決勝進出条件</span>'+
         '<div class="source-rule-regions">'+regionRows(rule.advance,'予選突破順位')+'</div></div>'+
         '<div class="source-rule-fact"><span>Round 1 出場記録</span><strong>最大'+
-        fmtNumber(rule.matchCaps['単一ラウンド'])+
-        '試合 · 予選現金賞金 $0 · 決勝の賞金は個別に確認</strong></div>'+
-        '<p class="source-rule-warning">※ Epic公式ルールの地域別通過ラインに基づき、本人Epic ID・保存済み順位表・開催日時を照合したRound 1成績を自動掲載します。通過圏外は「予選」として掲載し、決勝進出とは区別します。Round 2の現金賞金額はこの規則から推定しません。</p>';
+        fmtNumber(rule.matchCaps['単一ラウンド'])+'試合 · 予選現金賞金 $0</strong></div>'+
+        finalMarkup+
+        '<p class="source-rule-warning">※ Epic公式ルールの地域別通過ラインに基づき、本人Epic ID・保存済み順位表・開催日時を照合したRound 1成績を自動掲載します。通過圏外は「予選」として掲載し、決勝進出とは区別します。'+note+'</p>';
     }
     const award=rule.cashPrizes;
     const selected=state.region==='all'?regionLabels:[state.region];
@@ -130,7 +156,7 @@
       ' · '+esc(seriesLabel[entry.series]||entry.series||'大会')+'</span>'+
       '<h3>'+esc(entry.name)+'</h3>'+
       '<p>'+esc(modeLabel[entry.team]||entry.team||'形式未確認')+' / '+esc(entry.mode||'モード未確認')+'</p></div>'+
-      '<span class="source-rule-state '+(present?'is-ready':'is-pending')+'">'+(present?(rule?.autoApproval==='review-only'?'公式規則登録済み・確認専用':rule?.autoApproval==='verified-team-rank'?(rule.series==='unreal-cup'?'公式賞金表で自動掲載・圏外$0':'公式規則登録済み・全順位を自動掲載'):rule?.autoApproval==='verified-performance-vr'?'予選突破・決勝VRを自動掲載':rule?.autoApproval==='verified-duo-qualifier-only'?'予選突破・参加$0を自動掲載':'公式規則登録済み'):'ルール未登録')+'</span></div>'+
+      '<span class="source-rule-state '+(present?'is-ready':'is-pending')+'">'+(present?(rule?.autoApproval==='review-only'?'公式規則登録済み・確認専用':rule?.autoApproval==='verified-team-rank'?(rule.series==='unreal-cup'?'公式賞金表で自動掲載・圏外$0':'公式規則登録済み・全順位を自動掲載'):rule?.autoApproval==='verified-performance-vr'?'予選突破・決勝VRを自動掲載':rule?.cashFinalAutoApproval==='verified-duo-round2-rank'?'予選突破・決勝賞金を自動掲載':rule?.autoApproval==='verified-duo-qualifier-only'?'予選突破・参加$0を自動掲載':'公式規則登録済み'):'ルール未登録')+'</span></div>'+
       details+
       '<details class="source-rule-identifiers"><summary>大会ID・適用範囲</summary><div>'+ids.map(id=>'<code>'+esc(id)+'</code>').join('')+
       '<p>公式規則が確認済みでも、本人Epic ID・地域・開催枠・順位表の検証が必要です</p></div></details>'+

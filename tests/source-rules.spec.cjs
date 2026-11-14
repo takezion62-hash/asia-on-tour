@@ -132,3 +132,42 @@ test('Unreal Cup shows all 7 regional prize tiers and separate duo personal shar
  expect(errors).toEqual([]);
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth+2)).toBe(true);
 });
+
+
+test('S43 Reload ZB Duos About card shows both top-20 qualification and official Round 2 per-player prizes',async({page})=>{
+ const errors=[];page.on('pageerror',error=>errors.push(error.message));
+ await page.goto('/?season=all#about');
+ await expect(page.locator('#source-rule-overview')).toContainText(`公式規則登録 ${officialRuleCount}`);
+ await page.locator('#source-rule-search').fill('Reload ZB Duos Cash Cup');
+ const card=page.locator('.source-rule-card[data-rule-id="ch7s5-reload-zero-build-duos-cash-cup"]');
+ await expect(card).toBeVisible();
+ await expect(card).toContainText('予選突破・決勝賞金を自動掲載');
+ await expect(card).toContainText('Round 1 の決勝進出条件');
+ await expect(card).toContainText('最大12試合');
+ await expect(card).toContainText('予選現金賞金 $0');
+ await expect(card).toContainText('Round 2 決勝の個人賞金');
+ await expect(card).toContainText('最大6試合');
+ await expect(card).toContainText('表示額の2倍');
+ await expect(card.locator('.source-rule-cash-region')).toHaveCount(6);
+ await page.locator('#source-rule-region').selectOption('EU');
+ await expect(card.locator('.source-rule-cash-region')).toHaveCount(1);
+ await expect(card).toContainText('EU 上位20');
+ await expect(card).toContainText('1位');
+ await expect(card).toContainText('$600');
+ await expect(card).toContainText('6〜8位');
+ await expect(card).toContainText('$100');
+ await page.locator('#source-rule-region').selectOption('OCE');
+ await expect(card).toContainText('OCE 上位20');
+ await expect(card).toContainText('1位');
+ await expect(card).toContainText('$300');
+ await expect(card).toContainText('5位');
+ await expect(card).toContainText('$100');
+ await expect(card).not.toContainText('6〜8位');
+ await page.locator('#source-rule-region').selectOption('NAC');
+ await expect(card).toContainText('$600');
+ await page.locator('#source-rule-region').selectOption('ME');
+ await expect(card).toContainText('$300');
+ await expect(card).not.toContainText('決勝の賞金は個別に確認');
+ expect(errors).toEqual([]);
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth+2)).toBe(true);
+});
