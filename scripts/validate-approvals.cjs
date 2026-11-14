@@ -196,12 +196,19 @@ function validRuleVerifiedLegacyNacAttendance(r,entry){
   x.dateJst==='2024-06-18'&&
   x.windowId==='S30_SoloVictoryCashCup_Event3Round1_NAC'&&
   x.cutoff===5000&&x.allowOutOfCutoffAttendance===true);
- if(!window||r?.id!=='auto-s30-23c77f05995a'||
+ // Accept only the two account-ID/score-verified out-of-cutoff participants
+  // for this exact June 18 NAC event. No general legacy NAC attendance bypass.
+  const approvedRows=[
+   {id:'auto-s30-23c77f05995a',player:'Celis やなぎさわつつ上等',
+    rank:7040,points:114,kills:6,vrs:0},
+   {id:'auto-s30-552fce5922b8',player:'むーこにっく',
+    rank:8150,points:109,kills:17,vrs:1,matches:4}
+  ];
+  const exact=approvedRows.some(x=>Object.entries(x).every(([key,value])=>r?.[key]===value));
+  if(!window||!exact||r.rank<=window.cutoff||
   r.date!==window.dateJst||r.region!=='NAC'||r.seasonId!=='S30'||
   r.tournamentId!=='ch5s3-solo-victory-cup'||
   r.event!=='Solo Victory Cup Battle Royale'||
-  r.player!=='Celis やなぎさわつつ上等'||r.rank!==7040||
-  r.points!==114||r.kills!==6||r.vrs!==0||
   r.kind!=='参加確認'||r.prize!==0||r.reviewOnly===true||
   r.verified!==true||r.round!=='Event 3 · Round 1 / 参加確認'||
   entry?.rule!==rule.source||typeof r.note!=='string'||
