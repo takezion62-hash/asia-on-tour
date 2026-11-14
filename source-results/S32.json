@@ -998,13 +998,13 @@
     "player": "Choco / こいる / Jaemon",
     "playerRaw": "nagisa furukawaǃ / こいるやけん / Jaemon.K",
     "event": "Trios Cash Cup",
-    "round": "Event 1 · Round 2 / 参加確認",
+    "round": "Event 1 · Round 2 / 賞金決勝",
     "rank": 16,
     "points": 109,
     "kills": 11,
     "vrs": 0,
-    "prize": null,
-    "kind": "参加確認",
+    "prize": 300,
+    "kind": "賞金決勝",
     "matches": 6,
     "seasonId": "S32",
     "chapter": 5,
@@ -1012,11 +1012,32 @@
     "tournamentId": "ch5s5-trios-cash",
     "source": "https://www.fortnite.com/competitive/events/S32_TriosCashCup/?region=ME&round=S32_TriosCashCup_Event1Round2_ME",
     "verified": true,
-    "note": "本人Epic IDと公式開催日・地域・出典の保存済み順位表で参加・順位・得点・キル・VRを確認。現金賞金・進出・スキン獲得は未確認。出典: https://www.fortnite.com/competitive/events/S32_TriosCashCup/?region=ME&round=S32_TriosCashCup_Event1Round2_ME",
+    "note": "ユーザー提供Trackerスクショ2とチーム全員のEpic UUIDを照合。2024-11-08 ME Trios Cash Cup Event 1 · Round 2 / 賞金決勝 16位、109pt、6試合、11チームキル、0VR。Epic公式賞金規則によりチーム$300、各選手$100。VR数による賞金加算ではなく順位による報酬。実際の入金は未確認。 Tracker: https://fortnitetracker.com/events/epicgames_S32_TriosCashCup_ME?window=S32_TriosCashCup_Event1Round2_ME Rule: https://www.fortnite.com/news/fortnite-trios-cash-cups-chapter-2-remix-official-rules",
     "players": [
       "Choco",
       "こいる",
       "Jaemon"
+    ],
+    "teamPrize": 300,
+    "prizePerPlayer": 100,
+    "profiles": [
+      {
+        "name": "Choco",
+        "url": "https://fortnitetracker.com/profile/all/Choco/events?id=2b094ce4-6d09-4e26-8301-c560f9b1d8c3"
+      },
+      {
+        "name": "こいる",
+        "url": "https://fortnitetracker.com/profile/all/%E3%81%93%E3%81%84%E3%82%8B/events?id=50ca67e7-87cd-415a-b266-92cac0e326c8"
+      },
+      {
+        "name": "Jaemon",
+        "url": "https://fortnitetracker.com/profile/all/Jaemon/events?id=dcc5f4df-088a-4bca-b405-8b9b0fb2f97c"
+      }
+    ],
+    "teamAccountIds": [
+      "2b094ce46d094e268301c560f9b1d8c3",
+      "50ca67e787cd415ab26692cac0e326c8",
+      "dcc5f4df088a4bcab4058b9b0fb2f97c"
     ]
   },
   {
@@ -1026,13 +1047,13 @@
     "player": "Stain / ぷろぼこ / ZAZI",
     "playerRaw": "E36 StainY281 / ぷろぼこTakethetop / LYNX ZAZI 咲",
     "event": "Trios Cash Cup",
-    "round": "Event 1 · Round 2 / 参加確認",
+    "round": "Event 1 · Round 2 / 賞金決勝",
     "rank": 24,
     "points": 56,
     "kills": 7,
     "vrs": 0,
-    "prize": null,
-    "kind": "参加確認",
+    "prize": 300,
+    "kind": "賞金決勝",
     "matches": 6,
     "seasonId": "S32",
     "chapter": 5,
@@ -1040,11 +1061,32 @@
     "tournamentId": "ch5s5-trios-cash",
     "source": "https://www.fortnite.com/competitive/events/S32_TriosCashCup/?region=ME&round=S32_TriosCashCup_Event1Round2_ME",
     "verified": true,
-    "note": "本人Epic IDと公式開催日・地域・出典の保存済み順位表で参加・順位・得点・キル・VRを確認。現金賞金・進出・スキン獲得は未確認。出典: https://www.fortnite.com/competitive/events/S32_TriosCashCup/?region=ME&round=S32_TriosCashCup_Event1Round2_ME",
+    "note": "ユーザー提供Trackerスクショ3とチーム全員のEpic UUIDを照合。2024-11-08 ME Trios Cash Cup Event 1 · Round 2 / 賞金決勝 24位、56pt、6試合、7チームキル、0VR。Epic公式賞金規則によりチーム$300、各選手$100。VR数による賞金加算ではなく順位による報酬。実際の入金は未確認。 Tracker: https://fortnitetracker.com/events/epicgames_S32_TriosCashCup_ME?window=S32_TriosCashCup_Event1Round2_ME Rule: https://www.fortnite.com/news/fortnite-trios-cash-cups-chapter-2-remix-official-rules",
     "players": [
       "Stain",
       "ぷろぼこ",
       "ZAZI"
+    ],
+    "teamPrize": 300,
+    "prizePerPlayer": 100,
+    "profiles": [
+      {
+        "name": "Stain",
+        "url": "https://fortnitetracker.com/profile/all/Stain/events?id=268fddd5-9748-458e-a78b-23ad3bae9ac5"
+      },
+      {
+        "name": "ぷろぼこ",
+        "url": "https://fortnitetracker.com/profile/all/Puroboko/events?id=7992a13b-46a2-4f30-a29b-4b6fa67c99e1"
+      },
+      {
+        "name": "ZAZI",
+        "url": "https://fortnitetracker.com/profile/all/LYNX%20ZAZI%20%E5%92%B2/events?id=f08aad62-9bf0-40d6-beb7-8c7aea8e0a1f"
+      }
+    ],
+    "teamAccountIds": [
+      "268fddd59748458ea78b23ad3bae9ac5",
+      "7992a13b46a24f30a29b4b6fa67c99e1",
+      "f08aad629bf040d6beb78c7aea8e0a1f"
     ]
   },
   {

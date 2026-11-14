@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-14T00:27:27.056Z",
+  "reviewedAt": "2026-11-14T05:38:13.489Z",
   "entries": [
     {
       "id": "auto-s43-21408f1d31bc",
@@ -12817,23 +12817,47 @@
       "id": "auto-s32-5841f054e733",
       "decision": "published",
       "recordId": "auto-s32-5841f054e733",
-      "policy": "attendance-only",
-      "approvedAt": "2026-11-12T06:40:33.552Z",
-      "approvedBy": "ChatGPT / owner-authorized verified review",
+      "policy": "verified-20261114-eu-unreal-me-trios-four",
+      "approvedAt": "2026-11-14T05:36:48.150Z",
+      "approvedBy": "ChatGPT / 2026-11-14 screenshots and Epic official rules",
       "source": "https://www.fortnite.com/competitive/events/S32_TriosCashCup/?region=ME&round=S32_TriosCashCup_Event1Round2_ME",
-      "rule": null,
-      "evidence": "Exact Epic account and team roster, canonical official event/calendar, ranked checkpoint with continuous mature rows or complete scan; duplicate check"
+      "rule": "https://www.fortnite.com/news/fortnite-trios-cash-cups-chapter-2-remix-official-rules",
+      "evidence": "Saved Tracker screenshot 2 (https://fortnitetracker.com/events/epicgames_S32_TriosCashCup_ME?window=S32_TriosCashCup_Event1Round2_ME), original Epic UUIDs and official rank-prize bracket",
+      "previousReview": {
+        "id": "auto-s32-5841f054e733",
+        "decision": "published",
+        "recordId": "auto-s32-5841f054e733",
+        "policy": "attendance-only",
+        "approvedAt": "2026-11-12T06:40:33.552Z",
+        "approvedBy": "ChatGPT / owner-authorized verified review",
+        "source": "https://www.fortnite.com/competitive/events/S32_TriosCashCup/?region=ME&round=S32_TriosCashCup_Event1Round2_ME",
+        "rule": null,
+        "evidence": "Exact Epic account and team roster, canonical official event/calendar, ranked checkpoint with continuous mature rows or complete scan; duplicate check"
+      },
+      "correction": "attendance-only to verified rank-cash award"
     },
     {
       "id": "auto-s32-df12a93419a4",
       "decision": "published",
       "recordId": "auto-s32-df12a93419a4",
-      "policy": "attendance-only",
-      "approvedAt": "2026-11-12T06:40:33.552Z",
-      "approvedBy": "ChatGPT / owner-authorized verified review",
+      "policy": "verified-20261114-eu-unreal-me-trios-four",
+      "approvedAt": "2026-11-14T05:36:48.151Z",
+      "approvedBy": "ChatGPT / 2026-11-14 screenshots and Epic official rules",
       "source": "https://www.fortnite.com/competitive/events/S32_TriosCashCup/?region=ME&round=S32_TriosCashCup_Event1Round2_ME",
-      "rule": null,
-      "evidence": "Exact Epic account and team roster, canonical official event/calendar, ranked checkpoint with continuous mature rows or complete scan; duplicate check"
+      "rule": "https://www.fortnite.com/news/fortnite-trios-cash-cups-chapter-2-remix-official-rules",
+      "evidence": "Saved Tracker screenshot 3 (https://fortnitetracker.com/events/epicgames_S32_TriosCashCup_ME?window=S32_TriosCashCup_Event1Round2_ME), original Epic UUIDs and official rank-prize bracket",
+      "previousReview": {
+        "id": "auto-s32-df12a93419a4",
+        "decision": "published",
+        "recordId": "auto-s32-df12a93419a4",
+        "policy": "attendance-only",
+        "approvedAt": "2026-11-12T06:40:33.552Z",
+        "approvedBy": "ChatGPT / owner-authorized verified review",
+        "source": "https://www.fortnite.com/competitive/events/S32_TriosCashCup/?region=ME&round=S32_TriosCashCup_Event1Round2_ME",
+        "rule": null,
+        "evidence": "Exact Epic account and team roster, canonical official event/calendar, ranked checkpoint with continuous mature rows or complete scan; duplicate check"
+      },
+      "correction": "attendance-only to verified rank-cash award"
     },
     {
       "id": "auto-s30-cb77f7137bca",
@@ -21392,6 +21416,50 @@
       "source": "https://fortnitetracker.com/events/epicgames_S41_ConsoleVCC_SolosZB_OCE?window=S41_ConsoleVCC_SolosZB_Event1Round2_OCE",
       "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-3-official-rules",
       "evidence": "Five submitted screenshots, verified Epic account IDs, official award payout"
+    },
+    {
+      "id": "s39-eu-1million-unreal-20251221-r919-zazi-tossy",
+      "recordId": "s39-eu-1million-unreal-20251221-r919-zazi-tossy",
+      "decision": "published",
+      "policy": "verified-20261114-eu-unreal-me-trios-four",
+      "approvedAt": "2026-11-14T05:36:48.149Z",
+      "approvedBy": "ChatGPT / 2026-11-14 screenshots and Epic official rules",
+      "source": "https://www.fortnite.com/competitive/events/S39_1MillionUnrealCup/?region=EU&round=S39_1MillionUnrealCup_EU",
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/1-million-dollar-unreal-cup-chapter-7-season-1-official-rules",
+      "evidence": "Saved Tracker screenshot 1 (https://fortnitetracker.com/events/epicgames_S39_1MillionUnrealCup_EU?window=S39_1MillionUnrealCup_EU), original Epic UUIDs and official rank-prize bracket"
+    },
+    {
+      "id": "s31-me-trios-cash-20241020-event3-final-r10-stain-puroboko-zazi",
+      "recordId": "s31-me-trios-cash-20241020-event3-final-r10-stain-puroboko-zazi",
+      "decision": "published",
+      "policy": "verified-20261114-eu-unreal-me-trios-four",
+      "approvedAt": "2026-11-14T05:36:48.152Z",
+      "approvedBy": "ChatGPT / 2026-11-14 screenshots and Epic official rules",
+      "source": "https://www.fortnite.com/competitive/events/S31_TriosCashCup/?region=ME&round=S31_TriosCashCup_Event3Round2_ME",
+      "rule": "https://www.fortnite.com/news/fortnite-trios-cash-cups-chapter-5-season-4-official-rules",
+      "evidence": "Saved Tracker screenshot 4 (https://fortnitetracker.com/events/epicgames_S31_TriosCashCup_ME?window=S31_TriosCashCup_Event3Round2_ME), original Epic UUIDs and official rank-prize bracket"
+    },
+    {
+      "id": "auto-s43-0f12c7f11ecd",
+      "decision": "published",
+      "recordId": "auto-s43-0f12c7f11ecd",
+      "policy": "attendance-only",
+      "approvedAt": "2026-11-14T05:38:13.489Z",
+      "approvedBy": "ChatGPT / user authorized confirmed-candidate review",
+      "rule": null,
+      "source": "https://www.fortnite.com/competitive/events/S43_ArenaCashCup/?region=NAC&round=S43_ArenaCashCup_Event1_NAC",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s43-83ec104c8e6f",
+      "decision": "published",
+      "recordId": "auto-s43-83ec104c8e6f",
+      "policy": "attendance-only",
+      "approvedAt": "2026-11-14T05:38:13.489Z",
+      "approvedBy": "ChatGPT / user authorized confirmed-candidate review",
+      "rule": null,
+      "source": "https://www.fortnite.com/competitive/events/S43_ReloadZBDuosCashCup/?region=EU&round=S43_ReloadZBDuosCashCup_Event1Round2_EU",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
     }
   ]
 }

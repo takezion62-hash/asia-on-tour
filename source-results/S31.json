@@ -25688,5 +25688,54 @@
     "profileUrl": "https://fortnitetracker.com/profile/all/Aim/events?id=8baf28ea-b515-48e6-9232-d03509c13382",
     "teamPrize": 200,
     "prizePerPlayer": 200
+  },
+  {
+    "id": "s31-me-trios-cash-20241020-event3-final-r10-stain-puroboko-zazi",
+    "date": "2024-10-20",
+    "seasonId": "S31",
+    "chapter": 5,
+    "season": 4,
+    "region": "ME",
+    "tournamentId": "ch5s4-trios-cash",
+    "event": "Trios Cash Cup",
+    "round": "Event 3 · Round 2 / 賞金決勝",
+    "kind": "賞金決勝",
+    "player": "Stain / ぷろぼこ / ZAZI",
+    "playerRaw": "Stain / Puroboko / ZAZI",
+    "players": [
+      "Stain",
+      "ぷろぼこ",
+      "ZAZI"
+    ],
+    "rank": 10,
+    "points": 402,
+    "matches": 7,
+    "kills": 23,
+    "vrs": 3,
+    "prize": 300,
+    "teamPrize": 300,
+    "prizePerPlayer": 100,
+    "source": "https://www.fortnite.com/competitive/events/S31_TriosCashCup/?region=ME&round=S31_TriosCashCup_Event3Round2_ME",
+    "verified": true,
+    "profiles": [
+      {
+        "name": "Stain",
+        "url": "https://fortnitetracker.com/profile/all/Stain/events?id=268fddd5-9748-458e-a78b-23ad3bae9ac5"
+      },
+      {
+        "name": "ぷろぼこ",
+        "url": "https://fortnitetracker.com/profile/all/Puroboko/events?id=7992a13b-46a2-4f30-a29b-4b6fa67c99e1"
+      },
+      {
+        "name": "ZAZI",
+        "url": "https://fortnitetracker.com/profile/all/LYNX%20ZAZI%20%E5%92%B2/events?id=f08aad62-9bf0-40d6-beb7-8c7aea8e0a1f"
+      }
+    ],
+    "teamAccountIds": [
+      "268fddd59748458ea78b23ad3bae9ac5",
+      "7992a13b46a24f30a29b4b6fa67c99e1",
+      "f08aad629bf040d6beb78c7aea8e0a1f"
+    ],
+    "note": "ユーザー提供Trackerスクショ4とチーム全員のEpic UUIDを照合。2024-10-20 ME Trios Cash Cup Event 3 · Round 2 / 賞金決勝 10位、402pt、7試合、23チームキル、3VR。Epic公式賞金規則によりチーム$300、各選手$100。VR数による賞金加算ではなく順位による報酬。実際の入金は未確認。 Tracker: https://fortnitetracker.com/events/epicgames_S31_TriosCashCup_ME?window=S31_TriosCashCup_Event3Round2_ME Rule: https://www.fortnite.com/news/fortnite-trios-cash-cups-chapter-5-season-4-official-rules"
   }
 ]

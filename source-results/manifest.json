@@ -2,11 +2,11 @@
   "version": 1,
   "role": "generated canonical-source snapshot; results.json remains authoritative in phase 1",
   "canonicalFile": "results.json",
-  "canonicalSha256": "c23dc293eaae6bb8dfe5a01f629d893c54ca83151297fddea8ceb6ad9d792729",
-  "count": 6997,
-  "teamPrizeCents": 7487000,
+  "canonicalSha256": "948211a650be5e13f8531088439ea035460fbf8d6d99675ac570c5ab10d00f20",
+  "count": 7001,
+  "teamPrizeCents": 7597000,
   "unconfirmedPrizeRecords": 1085,
-  "personalPrizeCents": 7467000,
+  "personalPrizeCents": 7577000,
   "recordOrder": [
     "s42-me-slenderman-reload-skin-20261021-acris-chacha",
     "s42-me-slenderman-reload-skin-20261021-karf-alpha",
@@ -7004,7 +7004,11 @@
     "s41-oce-console-zb-solo-vc-20260621-r1",
     "s41-oce-console-zb-solo-vc-20260621-r6",
     "s41-oce-console-zb-solo-vc-20260621-r15",
-    "s41-oce-console-zb-solo-vc-20260614-r25"
+    "s41-oce-console-zb-solo-vc-20260614-r25",
+    "s39-eu-1million-unreal-20251221-r919-zazi-tossy",
+    "s31-me-trios-cash-20241020-event3-final-r10-stain-puroboko-zazi",
+    "auto-s43-0f12c7f11ecd",
+    "auto-s43-83ec104c8e6f"
   ],
   "shards": [
     {
@@ -7073,20 +7077,20 @@
     {
       "seasonId": "S31",
       "file": "source-results/S31.json",
-      "count": 1072,
-      "teamPrizeCents": 1120000,
+      "count": 1073,
+      "teamPrizeCents": 1150000,
       "unconfirmedPrizeRecords": 44,
-      "personalPrizeCents": 1120000,
-      "sha256": "0cb4028e3e4a2ffe9c7efa90934a25a4e901131b63527fb012f1302cb5670384"
+      "personalPrizeCents": 1150000,
+      "sha256": "a963cd98aa5e65515ba87347dde8aebe0e78248f1beef9a5601dfeddbd9bce44"
     },
     {
       "seasonId": "S32",
       "file": "source-results/S32.json",
       "count": 241,
-      "teamPrizeCents": 480000,
-      "unconfirmedPrizeRecords": 13,
-      "personalPrizeCents": 480000,
-      "sha256": "aaaab21631c11cf60ee9e20db8642b69d2d1656d378f751614be22eef7694b6b"
+      "teamPrizeCents": 540000,
+      "unconfirmedPrizeRecords": 11,
+      "personalPrizeCents": 540000,
+      "sha256": "6f0f668800cf778dee1cd2449e5286b19ee00a6a5f7ef837660fd693758d849e"
     },
     {
       "seasonId": "S33",
@@ -7136,11 +7140,11 @@
     {
       "seasonId": "S39",
       "file": "source-results/S39.json",
-      "count": 147,
-      "teamPrizeCents": 710000,
+      "count": 148,
+      "teamPrizeCents": 730000,
       "unconfirmedPrizeRecords": 2,
-      "personalPrizeCents": 710000,
-      "sha256": "73820a0c23be72c08b7564873dcc78520253e78d94bf7fa358ce91450d38067e"
+      "personalPrizeCents": 730000,
+      "sha256": "77034d25d94c253569d8e3f73d5799e120172766c525c6083c54ce2a5bc4ad9e"
     },
     {
       "seasonId": "S40",
@@ -7172,11 +7176,11 @@
     {
       "seasonId": "S43",
       "file": "source-results/S43.json",
-      "count": 152,
+      "count": 154,
       "teamPrizeCents": 45000,
-      "unconfirmedPrizeRecords": 34,
+      "unconfirmedPrizeRecords": 36,
       "personalPrizeCents": 45000,
-      "sha256": "e823227849d3ddc5e82600ecf443a9d7e4dd458f45b95e4779ac3eab34b37634"
+      "sha256": "c9c0afc89cf7e7d4b012c3f6cde5e3464b85eb1d959abb31feb3ba91788f3341"
     },
     {
       "seasonId": "unknown",
