@@ -34,7 +34,12 @@ function cashLimitForWindow(win){
   return final&&rule.matchCaps['賞金決勝']===6?20:null;
  }
  const match=win.windowId.match(new RegExp('^'+escaped+'_Event([1-9][0-9]*)_'+win.region+'$'));
- if(!match||!Object.hasOwn(rule.rankedEligibility,String(Number(match[1]))))return null;
+ const arenas=rule.id==='ch7s5-arenas-cash-cup'&&rule.seasonId==='S43'&&
+   rule.team==='solo'&&rule.eventIds.length===1&&rule.eventIds[0]==='S43_ArenaCashCup'&&
+   rule.rankedEligibility?.mode==='arenas-boxfights'&&
+   rule.rankedEligibility?.minimumRank==='Platinum'&&
+   rule.matchCaps?.['単一ラウンド']===12;
+ if(!match||(!arenas&&!Object.hasOwn(rule.rankedEligibility,String(Number(match[1])))))return null;
  const tiers=rule.cashPrizes.tiers?.[win.region];
  return tiers?.length?tiers[tiers.length-1].through:null;
 }
@@ -168,7 +173,7 @@ function decide(row,win,checkpoint,data){
  const ids=row.teamAccountIds;
  if(!Array.isArray(ids)||ids.length!==expected||new Set(ids).size!==expected||
   ids.some(id=>typeof id!=='string'||!/^[0-9a-f]{32}$/.test(id)))
-  return decline('チームのEpic ID3名分が欠落または重複');
+  return decline('開催形式に必要なEpic IDが欠落または重複');
  const accounts=new Map((data.verifiedAccounts||[])
   .filter(x=>x?.confirmed===true&&typeof x.epicAccountId==='string')
   .map(x=>[x.epicAccountId,x.player]));

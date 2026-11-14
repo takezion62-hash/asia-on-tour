@@ -138,7 +138,32 @@ function validateRegistry(doc,tournaments){
    ))fail(id,'自動承認には正確なイベントIDと個人賞金・試合数の条件が必要');
    if(!positive(rule.matchCaps?.['単一ラウンド']))fail(id,'Cash Cupの試合数上限が必要');
    if(rule.advance!==undefined||rule.cosmeticRanks!==undefined||rule.prizePerVictory!==undefined)fail(id,'Cash Cupに他大会の報酬条件が混在しています');
-   if(!object(rule.rankedEligibility)||
+   // Arenas Solo is distinct from the three Trios BR ranked events.
+   const arenaRank=id==='ch7s5-arenas-cash-cup'&&rule.seasonId==='S43'&&
+      rule.team==='solo'&&JSON.stringify(rule.eventIds)==='["S43_ArenaCashCup"]'&&
+      JSON.stringify(rule.rankedEligibility)==='{"mode":"arenas-boxfights","minimumRank":"Platinum"}'&&
+      rule.sessionMinutes===120&&
+      Object.keys(rule.matchCaps||{}).join(',')==='単一ラウンド'&&
+      rule.matchCaps['単一ラウンド']===12;
+   if(id==='ch7s5-arenas-cash-cup'){
+     if(!arenaRank||rule.autoApproval!=='verified-team-rank')
+       fail(id,'S43 Arenas Solo・Platinum以上・12試合／2時間の公式条件が不正');
+     const short=[300,200,100].map((perPlayer,i)=>({through:i+1,perPlayer}));
+     const medium=[500,300,200,150,100].map((perPlayer,i)=>({through:i+1,perPlayer}));
+     const eu=[{through:1,perPlayer:1000},{through:2,perPlayer:750},
+       {through:3,perPlayer:500},{through:4,perPlayer:300},
+       {through:6,perPlayer:200},{through:10,perPlayer:100}];
+     const nac=[{through:1,perPlayer:750},{through:2,perPlayer:500},
+       {through:3,perPlayer:400},{through:4,perPlayer:300},
+       {through:5,perPlayer:200},{through:7,perPlayer:100}];
+     if(rule.cashPrizes?.basis!=='per-player'||rule.cashPrizes?.currency!=='USD'||
+        Object.keys(rule.cashPrizes?.tiers||{}).sort().join(',')!=='BR,EU,ME,NAC,NAW,OCE'||
+        ['OCE','ME'].some(region=>JSON.stringify(rule.cashPrizes.tiers[region])!==JSON.stringify(short))||
+        ['NAW','BR'].some(region=>JSON.stringify(rule.cashPrizes.tiers[region])!==JSON.stringify(medium))||
+        JSON.stringify(rule.cashPrizes.tiers.EU)!==JSON.stringify(eu)||
+        JSON.stringify(rule.cashPrizes.tiers.NAC)!==JSON.stringify(nac))
+       fail(id,'S43 Arenas Cash Cup公式個人賞金表が不一致');
+   }else if(!object(rule.rankedEligibility)||
       Object.entries(rule.rankedEligibility).some(([event,value])=>!['1','2','3'].includes(event)||!['Diamond','Champion'].includes(value)))
       fail(id,'参加ランク条件が不正');
    if(!object(rule.cashPrizes)||rule.cashPrizes.basis!=='per-player'||rule.cashPrizes.currency!=='USD'||

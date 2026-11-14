@@ -189,3 +189,70 @@ test('S43 Reload ZB Duos strictly rejects unfinished rankings, forged prizes, un
  data.results.push(published);
  assert.equal(decide(r,w,good,data).approved,false);
 });
+
+
+test('S43 Arena solo auto-approval uses official six-region payouts for both events with exact verified Epic ID',()=>{
+ const r=RULES['ch7s5-arenas-cash-cup'],eid='S43_ArenaCashCup';
+ assert.equal(r.autoApproval,'verified-team-rank');
+ const scheduleByRegion={
+  OCE:['2026-11-10','2026-11-10T07:00:00Z'],
+  ME:['2026-11-11','2026-11-10T15:00:00Z'],
+  EU:['2026-11-11','2026-11-10T18:00:00Z'],
+  BR:['2026-11-11','2026-11-10T21:00:00Z'],
+  NAC:['2026-11-11','2026-11-11T00:00:00Z'],
+  NAW:['2026-11-11','2026-11-11T02:00:00Z']
+ };
+ const dataFor=(win)=>({
+  tournaments:{catalog:[{id:r.id,series:'cash-cup',team:'solo',seasonId:'S43',
+   name:'Arenas Cash Cup',sourceEventIds:[eid]}]},
+  players:{candidates:[{name:'A'}]},
+  verifiedAccounts:[{epicAccountId:'a'.repeat(32),player:'A',confirmed:true}],
+  schedule:{sessions:[{eventId:eid,seasonId:'S43',name:'Arenas Cash Cup',
+   region:win.region,dateJst:win.dateJst,round:'Event '+Number(win.windowId.match(/Event([0-9]+)/)[1]),
+   startUtc:win.startUtc,stage:'単一ラウンド'}]},
+  results:[]
+ });
+ for(const [region,[dateJst,startUtc]] of Object.entries(scheduleByRegion)){
+  const ladders=r.cashPrizes.tiers[region];
+  for(const eventNo of [1,2]){
+   const now=eventNo===1?startUtc:new Date(Date.parse(startUtc)+14*86400000).toISOString();
+   const day=eventNo===1?dateJst:new Date(Date.parse(dateJst+'T00:00:00Z')+14*86400000).toISOString().slice(0,10);
+   const windowId=eid+'_Event'+eventNo+'_'+region;
+   const win={eventId:eid,windowId,seasonId:'S43',tournamentId:r.id,region,
+     dateJst:day,startUtc:now,series:'cash-cup',kind:'参加確認',
+     round:'Event '+eventNo+' / 参加確認'};
+   const make=(rank,recordId='auto-s43-123456abcdef')=>({
+    id:recordId,seasonId:'S43',date:day,region,tournamentId:r.id,
+    event:'Arenas Cash Cup',round:win.round,kind:'参加確認',
+    player:'A',teamAccountIds:['a'.repeat(32)],
+    rank,points:280,kills:20,vrs:2,matches:12,prize:null,verified:true,
+    reviewOnly:true,reviewReason:'未検証',
+    source:'https://www.fortnite.com/competitive/events/'+eid+'/?region='+region+'&round='+windowId
+   });
+   assert.equal(cashLimitForWindow(win),ladders.at(-1).through,region+' Event '+eventNo);
+   const sample=[1,ladders.at(-1).through,ladders.at(-1).through+1];
+   for(const rank of sample){
+    const item=make(rank),out=decide(item,win,checkpoint(item),dataFor(win));
+    assert.equal(out.approved,true,region+' Event '+eventNo+' '+rank+': '+out.reason);
+    assert.equal(out.record.kind,'賞金決勝');
+    assert.equal(out.record.prize,cashPrize(r,region,rank));
+    assert.equal(out.record.prizePerPlayer,cashPrize(r,region,rank));
+    assert.equal(out.record.teamAccountIds,undefined);
+    assert.equal(out.record.verified,true);
+   }
+   const item=make(1);
+   const broken=[
+    [{...item,matches:13},win,checkpoint({...item,matches:13}),dataFor(win)],
+    [{...item,teamAccountIds:[]},win,checkpoint({...item,teamAccountIds:[]}),dataFor(win)],
+    [{...item,teamAccountIds:['b'.repeat(32)]},win,checkpoint({...item,teamAccountIds:['b'.repeat(32)]}),dataFor(win)],
+    [item,{...win,eventId:'S42_ArenaCashCup'},checkpoint(item),dataFor(win)],
+    [item,{...win,startUtc:'2026-01-01T00:00:00Z'},checkpoint(item),dataFor(win)],
+    [item,win,checkpoint(item,false),dataFor(win)],
+    [item,win,checkpoint(item),{...dataFor(win),results:[item]}]
+   ];
+   for(const [cand,w,cp,db] of broken){
+    assert.equal(decide(cand,w,cp,db).approved,false,'must hold ambiguous '+region+' event '+eventNo);
+   }
+  }
+ }
+});

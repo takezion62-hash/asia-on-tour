@@ -71,6 +71,10 @@
           "label": "Reloadゼロビルド"
         },
         {
+          "id": "arenas-boxfights",
+          "label": "Arenas Boxfights"
+        },
+        {
           "id": "unknown",
           "label": "未確認"
         }
@@ -1459,14 +1463,11 @@
         "S43_ArenaCashCup"
       ],
       "series": "cash-cup",
-      "mode": "unknown",
+      "mode": "arenas-boxfights",
       "subtype": "arenas-cash-cup",
       "team": "solo",
-      "platform": "unknown",
-      "unknownFields": [
-        "mode",
-        "platform"
-      ],
+      "platform": "cross-platform",
+      "unknownFields": [],
       "evidence": [
         {
           "text": "Epic S43公式大会ページでArenasを確認。公式規則のソロ設定と照合。Arenasは既存のmode列にないため未確認扱い。",
@@ -1474,6 +1475,10 @@
         },
         {
           "text": "Epic公式大会規則（成績や賞金額は別途確認）",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/arenas-cash-cup-chapter-7-mini-season-official-rules"
+        },
+        {
+          "text": "公式規則2.2.1のSolo・Arenas設定、および公式Arenas Boxfightsのゲーム形式を照合。通常BR・Zero Build・Reloadとは独立したArenas Boxfightsを大会形式として登録。複数プラットフォームに対応。",
           "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/arenas-cash-cup-chapter-7-mini-season-official-rules"
         }
       ]

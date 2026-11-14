@@ -171,3 +171,34 @@ test('S43 Reload ZB Duos About card shows both top-20 qualification and official
  expect(errors).toEqual([]);
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth+2)).toBe(true);
 });
+
+
+test('Arenas Solo Cash Cup displays true 2h duration, Platinum eligibility and EU/NAC individual tiers',async({page})=>{
+ await page.goto('/?season=all#about');
+ await page.locator('#source-rule-search').fill('arenas cash');
+ const card=page.locator('.source-rule-card[data-rule-id="ch7s5-arenas-cash-cup"]');
+ await expect(card).toBeVisible();
+ await expect(card).toContainText('Arenas Boxfights・ソロ');
+ await expect(card).toContainText('最大12試合');
+ await expect(card).toContainText('Arenas Ranked Platinum以上');
+ await expect(card).toContainText('ソロ');
+ await expect(card).not.toContainText('チーム3名');
+ await expect(card).toContainText('約120分');
+ await page.locator('#source-rule-region').selectOption('EU');
+ await expect(card).toContainText('5〜6位');
+ await expect(card).toContainText('$200');
+ await expect(card).toContainText('7〜10位');
+ await expect(card).toContainText('$100');
+ await expect(card).toContainText('$1,000');
+ await page.locator('#source-rule-region').selectOption('NAC');
+ await expect(card).toContainText('6〜7位');
+ await expect(card).toContainText('$100');
+ await page.locator('#source-rule-region').selectOption('NAW');
+ await expect(card).toContainText('4位');
+ await expect(card).toContainText('$150');
+ await page.locator('#source-rule-region').selectOption('OCE');
+ await expect(card).toContainText('$300');
+ await page.locator('#source-rule-region').selectOption('ME');
+ await expect(card).toContainText('$200');
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth+2)).toBe(true);
+});
