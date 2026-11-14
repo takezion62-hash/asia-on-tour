@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-11-14T06:52:29.990Z",
+  "checkedAt": "2026-11-14T09:31:39.829Z",
   "windows": {
     "epicgames_S42_InoxtagIconCup_NAW/S42_InoxtagIconCup_NAW": {
       "nextPage": 50,
@@ -564,21 +564,21 @@
       "emptyAttempts": 0
     },
     "epicgames_S30_SoloVictoryCashCup_OCE/S30_SoloVictoryCashCup_Event1Round2_OCE": {
-      "nextPage": 17,
-      "pages": 17,
-      "complete": false,
+      "nextPage": 19,
+      "pages": 19,
+      "complete": true,
       "coverageLimited": false,
       "totalPages": 19,
-      "lastScanned": "2026-11-14T06:52:01.675Z",
+      "lastScanned": "2026-11-14T09:31:34.032Z",
       "emptyAttempts": 0
     },
     "epicgames_S43_ReloadZBDuosCashCup_EU/S43_ReloadZBDuosCashCup_Event1Round1_EU": {
-      "nextPage": 12,
-      "pages": 12,
+      "nextPage": 22,
+      "pages": 22,
       "complete": false,
       "coverageLimited": false,
       "totalPages": 100,
-      "lastScanned": "2026-11-08T21:24:47.365Z",
+      "lastScanned": "2026-11-14T09:31:08.303Z",
       "emptyAttempts": 0
     },
     "epicgames_S43_ReloadZBDuosCashCup_BR/S43_ReloadZBDuosCashCup_Event1Round1_BR": {
@@ -936,12 +936,12 @@
       "emptyAttempts": 0
     },
     "epicgames_S30_SoloVictoryCashCup_ME/S30_SoloVictoryCashCup_Event2Round1_ME": {
-      "nextPage": 30,
-      "pages": 30,
+      "nextPage": 40,
+      "pages": 40,
       "complete": false,
       "coverageLimited": false,
       "totalPages": 100,
-      "lastScanned": "2026-11-14T06:52:09.678Z",
+      "lastScanned": "2026-11-14T09:31:17.263Z",
       "emptyAttempts": 0
     },
     "epicgames_S30_SoloVictoryCashCup_BR/S30_SoloVictoryCashCup_Event1Round2_BR": {
@@ -963,12 +963,12 @@
       "emptyAttempts": 0
     },
     "epicgames_S33_SoloCashCup_OCE/S33_SoloCashCup_Event4Round1_OCE": {
-      "nextPage": 20,
-      "pages": 20,
+      "nextPage": 30,
+      "pages": 30,
       "complete": false,
       "coverageLimited": false,
       "totalPages": 100,
-      "lastScanned": "2026-11-14T06:52:22.511Z",
+      "lastScanned": "2026-11-14T09:31:32.733Z",
       "emptyAttempts": 0
     },
     "epicgames_S43_ReloadZBDuosCashCup_NAC/S43_ReloadZBDuosCashCup_Event1Round2_NAC": {
@@ -987,6 +987,24 @@
       "coverageLimited": false,
       "totalPages": 19,
       "lastScanned": "2026-11-14T06:52:29.990Z",
+      "emptyAttempts": 0
+    },
+    "epicgames_S43_ReloadZBDuosCashCup_NAW/S43_ReloadZBDuosCashCup_Event1Round2_NAW": {
+      "nextPage": 1,
+      "pages": 1,
+      "complete": true,
+      "coverageLimited": false,
+      "totalPages": 1,
+      "lastScanned": "2026-11-14T09:30:56.893Z",
+      "emptyAttempts": 0
+    },
+    "epicgames_S30_SoloVictoryCashCup_NAC/S30_SoloVictoryCashCup_Event1Round1_NAC": {
+      "nextPage": 7,
+      "pages": 7,
+      "complete": false,
+      "coverageLimited": false,
+      "totalPages": 100,
+      "lastScanned": "2026-11-14T09:31:39.829Z",
       "emptyAttempts": 0
     }
   }
