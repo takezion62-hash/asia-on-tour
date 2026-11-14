@@ -13,7 +13,7 @@ const {evaluate:evaluatePerformance,qualifierCutoff,evaluationStage}=require('./
 const {evaluate:evaluateUnreal,unrealWindow}=require('./automatic-unreal-approval.cjs');
 const {evaluate:evaluateDuoQualifier}=require('./automatic-duo-qualifier-approval.cjs');
 const {scanCoverage}=require('./scan-coverage.cjs');
-const {finishableWindows,remainingPages}=require('./scan-efficiency.cjs');
+const {finishableWindows,remainingPages,windowPageAllowance,leastCoveredBucket}=require('./scan-efficiency.cjs');
 const root=path.resolve(__dirname,'..');
 const read=name=>name==='results.json'?readResults(root).rows:JSON.parse(fs.readFileSync(path.join(root,name),'utf8'));
 const write=(name,obj)=>name==='results.json'?publishResults(root,obj):fs.writeFileSync(path.join(root,name),JSON.stringify(obj,null,2)+'\n');
@@ -436,6 +436,18 @@ function selectHistoricalWindows(windows,state,config,time=Date.now(),records=[]
   const ruleBacked=fresh.filter(w=>w.series==='victory-cup'&&Object.hasOwn(RULES,w.tournamentId));
   add(ruleBacked.length?ruleBacked:fresh);
  }
+ // Add at most two slots for the least-covered historical YEAR and REGION.
+ // Previously protected retries, focus, year/series quotas, candidate evidence
+ // and near-finish checkpoints are selected first. Smaller batches are unchanged.
+ if(limit>=18&&selected.length<limit){
+  const coverage=scanCoverage(windows,state,time);
+  const year=leastCoveredBucket(coverage.byYear);
+  if(year)add(pending.filter(w=>w.dateJst.slice(0,4)===year));
+  if(selected.length<limit){
+   const region=leastCoveredBucket(coverage.byRegion);
+   if(region)add(pending.filter(w=>w.region===region));
+  }
+ }
  // Give previously unscanned windows a protected share of the history budget.
  // This complements the year quotas, due retries, finishable boards and recent
  // rounds above; do not starve them to chase all 2,000+ unseen windows at once.
@@ -501,6 +513,23 @@ async function main(){
  const skippedLeaderboards=[];
  const maxRunMinutes=historical?Math.min(14,Math.max(2,Number.isFinite(config.maxRunMinutes)?config.maxRunMinutes:12)):14;
  const scanDeadline=Date.now()+maxRunMinutes*60000;
+ if(historical){
+  const byYear={},byRegion={};
+  let resumed=0,finishable=0,unstarted=0;
+  for(const w of active){
+   const cp=state.windows[w.key],pages=cp?.complete?null:remainingPages(cp);
+   const year=w.dateJst.slice(0,4);
+   byYear[year]=(byYear[year]||0)+1;
+   byRegion[w.region]=(byRegion[w.region]||0)+1;
+   if(Number.isSafeInteger(cp?.nextPage)&&cp.nextPage>0)resumed++;
+   else unstarted++;
+   if(pages!==null&&pages<=Math.min(Math.max(config.maxPagesPerWindowPerRun||budget,1),50))finishable++;
+  }
+  console.log('OSIRION_HISTORY_SCAN_PLAN '+JSON.stringify({
+   selected:active.length,pageBudget:budget,byYear,byRegion,
+   resumed,unstarted,finishable
+  }));
+ }
  let timeLimitReached=false;
  for(let windowIndex=0;windowIndex<active.length;windowIndex++){
   if(Date.now()>=scanDeadline){timeLimitReached=true;break}
@@ -513,9 +542,10 @@ async function main(){
    previous||{nextPage:0,complete:false,proposals:[],pages:0,...(win.series==='unreal-cup'?{epicIdsRetained:true}:{})};
   let pagesThisWindow=0;
   const limit=Math.min(Math.max(config.maxPagesPerWindowPerRun||budget,1),50);
-  // Preserve at least two leaderboard pages for remaining windows when backfilling multiple years.
-  const reserved=Math.max(0,active.length-windowIndex-1)*(historical?2:1);
-  const perWindowLimit=Math.max(0,Math.min(limit,budget-reserved));
+  // Finish up to two near-complete historical leaderboards later in the
+  // queue; preserve the minimum for every other window without expanding
+  // the total page budget.
+  const perWindowLimit=windowPageAllowance(active,state,windowIndex,budget,limit,historical);
   while(budget>0&&pagesThisWindow<perWindowLimit&&!checkpoint.complete){
    if(Date.now()>=scanDeadline){timeLimitReached=true;break}
    const page=checkpoint.nextPage;
