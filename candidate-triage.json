@@ -1,64 +1,28 @@
 {
   "version": 1,
   "sourceCheckedAt": "2026-11-07T23:16:39.215Z",
-  "total": 19,
+  "total": 10,
   "alreadyResolved": 0,
   "byYear": [
     {
       "name": "2024",
-      "count": 15
-    },
-    {
-      "name": "2025",
-      "count": 1
-    },
-    {
-      "name": "2026",
-      "count": 3
+      "count": 10
     }
   ],
   "byRegion": [
     {
-      "name": "BR",
-      "count": 1
-    },
-    {
-      "name": "ME",
-      "count": 5
-    },
-    {
       "name": "NAC",
-      "count": 12
-    },
-    {
-      "name": "OCE",
-      "count": 1
+      "count": 10
     }
   ],
   "byTournament": [
-    {
-      "name": "Arenas Cash Cup / BR / 2026",
-      "count": 1
-    },
-    {
-      "name": "Inoxtag Icon Cup Battle Royale / ME / 2026",
-      "count": 2
-    },
     {
       "name": "PlayStation SypherPK Cup / NAC / 2024",
       "count": 2
     },
     {
-      "name": "Solo Cash Cup / OCE / 2025",
-      "count": 1
-    },
-    {
       "name": "Solo Victory Cup Battle Royale / NAC / 2024",
-      "count": 10
-    },
-    {
-      "name": "Trios Cash Cup / ME / 2024",
-      "count": 3
+      "count": 8
     }
   ],
   "byStatus": [
@@ -68,11 +32,7 @@
     },
     {
       "name": "partial-scan",
-      "count": 12
-    },
-    {
-      "name": "rules-review",
-      "count": 5
+      "count": 8
     }
   ],
   "queue": [
@@ -141,237 +101,6 @@
         "possibleExistingId": "s31-nac-playstation-sypherpk-final-20240902-r89"
       },
       "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s31-2d1a324241f4",
-      "origin": "history",
-      "date": "2024-10-07",
-      "year": "2024",
-      "region": "ME",
-      "tournamentId": "ch5s4-trios-cash",
-      "event": "Trios Cash Cup",
-      "round": "Event 1 · Round 2 / 参加確認",
-      "player": "Ouxzxz / Jaax / Jaemon",
-      "kind": "参加確認",
-      "rank": 50,
-      "points": 251,
-      "kills": 13,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S31_TriosCashCup/?region=ME&round=S31_TriosCashCup_Event1Round2_ME",
-      "status": "rules-review",
-      "action": "公式規則・賞金・突破・スキン条件を個別確認",
-      "reason": "確認専用大会は自動承認不可",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": true,
-        "observedPartial": false,
-        "seenPages": 2,
-        "totalPages": 2,
-        "sourceKey": "epicgames_S31_TriosCashCup_ME/S31_TriosCashCup_Event1Round2_ME",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s31-bb52c7711cc9",
-      "origin": "history",
-      "date": "2024-10-07",
-      "year": "2024",
-      "region": "ME",
-      "tournamentId": "ch5s4-trios-cash",
-      "event": "Trios Cash Cup",
-      "round": "Event 1 · Round 2 / 参加確認",
-      "player": "112345abcde / Razl / RADWIMPSǃ",
-      "kind": "参加確認",
-      "rank": 103,
-      "points": 162,
-      "kills": 8,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S31_TriosCashCup/?region=ME&round=S31_TriosCashCup_Event1Round2_ME",
-      "status": "rules-review",
-      "action": "公式規則・賞金・突破・スキン条件を個別確認",
-      "reason": "確認専用大会は自動承認不可",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": true,
-        "observedPartial": false,
-        "seenPages": 2,
-        "totalPages": 2,
-        "sourceKey": "epicgames_S31_TriosCashCup_ME/S31_TriosCashCup_Event1Round2_ME",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s31-d0c3950c528c",
-      "origin": "history",
-      "date": "2024-10-07",
-      "year": "2024",
-      "region": "ME",
-      "tournamentId": "ch5s4-trios-cash",
-      "event": "Trios Cash Cup",
-      "round": "Event 1 · Round 2 / 参加確認",
-      "player": "Zagou / Raito / Zerokun",
-      "kind": "参加確認",
-      "rank": 41,
-      "points": 268,
-      "kills": 15,
-      "vrs": 1,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S31_TriosCashCup/?region=ME&round=S31_TriosCashCup_Event1Round2_ME",
-      "status": "rules-review",
-      "action": "公式規則・賞金・突破・スキン条件を個別確認",
-      "reason": "確認専用大会は自動承認不可",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": true,
-        "observedPartial": false,
-        "seenPages": 2,
-        "totalPages": 2,
-        "sourceKey": "epicgames_S31_TriosCashCup_ME/S31_TriosCashCup_Event1Round2_ME",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s33-f7642cd7e001",
-      "origin": "history",
-      "date": "2025-01-17",
-      "year": "2025",
-      "region": "OCE",
-      "tournamentId": "ch6s1-solo-cash",
-      "event": "Solo Cash Cup",
-      "round": "Event 4 · Round 1 / 参加確認",
-      "player": "funny たけえもん",
-      "kind": "参加確認",
-      "rank": 9589,
-      "points": 2,
-      "kills": 1,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S33_SoloCashCup/?region=OCE&round=S33_SoloCashCup_Event4Round1_OCE",
-      "status": "rules-review",
-      "action": "公式規則・賞金・突破・スキン条件を個別確認",
-      "reason": "確認専用大会は自動承認不可",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": true,
-        "observedPartial": false,
-        "seenPages": 100,
-        "totalPages": 100,
-        "sourceKey": "epicgames_S33_SoloCashCup_OCE/S33_SoloCashCup_Event4Round1_OCE",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s42-200b8dae6126",
-      "origin": "recent",
-      "date": "2026-10-26",
-      "year": "2026",
-      "region": "BR",
-      "tournamentId": "ch7s4-arenas-cash-cup",
-      "event": "Arenas Cash Cup",
-      "round": "Event 1 / 参加確認",
-      "player": "あいむらま",
-      "kind": "参加確認",
-      "rank": 2597,
-      "points": 16,
-      "kills": 4,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S42_ArenaCashCup/?region=BR&round=S42_ArenaCashCup_Event1_BR",
-      "status": "rules-review",
-      "action": "公式規則・賞金・突破・スキン条件を個別確認",
-      "reason": "公式の順位条件を登録していない大会",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": true,
-        "observedPartial": false,
-        "seenPages": 31,
-        "totalPages": 31,
-        "sourceKey": "epicgames_S42_ArenaCashCup_BR/S42_ArenaCashCup_Event1_BR",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s30-2c5103b65bcf",
-      "origin": "history",
-      "date": "2024-06-25",
-      "year": "2024",
-      "region": "NAC",
-      "tournamentId": "ch5s3-solo-victory-cup",
-      "event": "Solo Victory Cup Battle Royale",
-      "round": "Event 4 · Round 1 / 予選",
-      "player": "渡良瀬佳乃",
-      "kind": "予選",
-      "rank": 2907,
-      "points": 132,
-      "kills": 4,
-      "vrs": 1,
-      "prize": 0,
-      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event4Round1_NAC",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "順位表の取得が完了していません",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 31,
-        "totalPages": 100,
-        "sourceKey": "epicgames_S30_SoloVictoryCashCup_NAC/S30_SoloVictoryCashCup_Event4Round1_NAC",
-        "possibleExistingId": null
-      },
-      "rewardState": "source-amount-present-not-verified-by-triage"
-    },
-    {
-      "id": "auto-s30-9c70845809f6",
-      "origin": "history",
-      "date": "2024-06-25",
-      "year": "2024",
-      "region": "NAC",
-      "tournamentId": "ch5s3-solo-victory-cup",
-      "event": "Solo Victory Cup Battle Royale",
-      "round": "Event 4 · Round 1 / 予選",
-      "player": "112345abcde",
-      "kind": "予選",
-      "rank": 3069,
-      "points": 131,
-      "kills": 16,
-      "vrs": 0,
-      "prize": 0,
-      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event4Round1_NAC",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "順位表の取得が完了していません",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 31,
-        "totalPages": 100,
-        "sourceKey": "epicgames_S30_SoloVictoryCashCup_NAC/S30_SoloVictoryCashCup_Event4Round1_NAC",
-        "possibleExistingId": null
-      },
-      "rewardState": "source-amount-present-not-verified-by-triage"
     },
     {
       "id": "auto-s30-2106ec2b5761",
@@ -633,72 +362,6 @@
         "seenPages": 10,
         "totalPages": 92,
         "sourceKey": "epicgames_S32_SoloVictoryCashCup_NAC/S32_SoloVictoryCashCup_Event4Round2_NAC",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s42-985d58366051",
-      "origin": "recent",
-      "date": "2026-10-26",
-      "year": "2026",
-      "region": "ME",
-      "tournamentId": "ch7s4-inoxtag-icon-cup-battle-royale",
-      "event": "Inoxtag Icon Cup Battle Royale",
-      "round": "単一開催枠 / 参加確認",
-      "player": "Ascend かな / KAME",
-      "kind": "参加確認",
-      "rank": 457,
-      "points": 309,
-      "kills": 5,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S42_InoxtagIconCup/?region=ME&round=S42_InoxtagIconCup_ME",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "公式の順位条件を登録していない大会",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 5,
-        "totalPages": 100,
-        "sourceKey": "epicgames_S42_InoxtagIconCup_ME/S42_InoxtagIconCup_ME",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s42-c0359f643bec",
-      "origin": "recent",
-      "date": "2026-10-26",
-      "year": "2026",
-      "region": "ME",
-      "tournamentId": "ch7s4-inoxtag-icon-cup-battle-royale",
-      "event": "Inoxtag Icon Cup Battle Royale",
-      "round": "単一開催枠 / 参加確認",
-      "player": "ns tmu / あまひこ",
-      "kind": "参加確認",
-      "rank": 423,
-      "points": 312,
-      "kills": 11,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S42_InoxtagIconCup/?region=ME&round=S42_InoxtagIconCup_ME",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "公式の順位条件を登録していない大会",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 5,
-        "totalPages": 100,
-        "sourceKey": "epicgames_S42_InoxtagIconCup_ME/S42_InoxtagIconCup_ME",
         "possibleExistingId": null
       },
       "rewardState": "cash-unconfirmed"
