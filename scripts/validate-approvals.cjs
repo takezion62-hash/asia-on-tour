@@ -227,7 +227,72 @@ function validRuleVerifiedLegacyNacAttendance(r,entry){
    u.searchParams.get('round')===window.windowId;
  }catch{return false}
 }
-function audit(results,ledger,players){
+// An attendance-only approval in the existing manual ledger may be upgraded
+// only with a separate immutable before/after audit, full saved Epic leaderboard
+// and the SAME strict tournament-specific approval logic as first publication.
+function verifiedPublishedPromotion(row,entry,evidence){
+ if(!evidence||!Array.isArray(evidence.results)||!Array.isArray(evidence.scanDocs)||
+  !evidence.history||evidence.history.version!==1||
+  !Array.isArray(evidence.history.entries)||row?.kind!=='賞金決勝'||
+  row?.verified!==true||row?.reviewOnly===true||row?.prize===null)return false;
+ const {checkpointsFor,officialSlot,sourceWindow,inspect}=require('./participation-promotion.cjs');
+ const crypto=require('node:crypto');
+ const fingerprint=value=>crypto.createHash('sha256').update(JSON.stringify(value)).digest('hex');
+ const matches=evidence.history.entries.filter(h=>h?.id===row.id);
+ if(matches.length!==1)return false;
+ const h=matches[0],before=h.beforeRow;
+ if(!before||before.id!==entry.recordId||before.id!==row.id||
+  before.kind!=='参加確認'||before.prize!==null||before.verified!==true||
+  before.reviewOnly===true||before.source!==entry.source||
+  h.before?.kind!=='参加確認'||h.before?.round!==before.round||
+  h.before?.prize!==before.prize||
+  h.after?.kind!==row.kind||h.after?.round!==row.round||
+  h.after?.prize!==row.prize||h.after?.prizePerPlayer!==row.prizePerPlayer||
+  h.beforeSha256!==fingerprint(before)||h.afterSha256!==fingerprint(row))
+  return false;
+ const rule=evidence.rules?.rules?.find(x=>x.id===before.tournamentId);
+ if(!rule||h.proof?.ruleSha256!==fingerprint(rule))return false;
+ if(h.proof?.file!=='auto-sync-scan.json'&&
+    h.proof?.file!=='history-sync-scan.json')return false;
+ const time=Date.parse(h.approvedAt);
+ if(!Number.isFinite(time))return false;
+ const identity=sourceWindow(before);
+ if(!identity||h.proof.key!==identity.key)return false;
+ const hits=checkpointsFor(before,evidence.scanDocs);
+ const proof=hits.find(x=>x.file===h.proof.file&&x.identity.key===h.proof.key);
+ if(!proof||!Number.isFinite(Date.parse(proof.cp.lastSuccessAt))||
+  Date.parse(proof.cp.lastSuccessAt)<Date.parse(h.proof.lastSuccessAt))return false;
+ const slot=officialSlot(before,identity,evidence.schedule);
+ const priorResults=evidence.results.map(x=>x.id===row.id?before:x);
+ if(priorResults.filter(x=>x.id===row.id).length!==1)return false;
+ const result=inspect(before,{...evidence,results:priorResults},hits,slot,time);
+ return !!result.record&&fingerprint(result.record)===h.afterSha256&&
+  JSON.stringify(result.record)===JSON.stringify(row);
+}
+function audit(results,ledger,players,{promotionEvidence}={}){
+ let loadedPromotionEvidence=promotionEvidence;
+ let loaded=false;
+ const evidence=()=>{
+  if(!loaded){
+   loaded=true;
+   if(loadedPromotionEvidence===undefined){
+    try{
+     const file='participation-promotion-history.json';
+     const history=load(file);
+     const scanDocs=['auto-sync-scan.json','history-sync-scan.json']
+      .filter(name=>fs.existsSync(path.join(root,name)))
+      .map(name=>({name,data:load(name)}));
+     const {linkedAccounts}=require('./osirion-sync.cjs');
+     loadedPromotionEvidence={history,scanDocs,results,players,
+      tournaments:load('tournaments.json'),schedule:load('schedule.json'),
+      rules:load('tournament-rules.json'),
+      verifiedAccounts:linkedAccounts({results,players}).accounts};
+    }catch{loadedPromotionEvidence=null}
+   }
+  }
+  return loadedPromotionEvidence;
+ };
+
  const errors=[];
  if(ledger?.version!==1||!Array.isArray(ledger.entries))return ['approval-history.json is invalid'];
  const ids=new Set();
@@ -241,7 +306,9 @@ function audit(results,ledger,players){
    errors.push('Unknown decision/policy: '+entry.id);continue;
   }
   if(r.source!==entry.source||r.verified!==true)errors.push('Published source or verification flag changed: '+entry.id);
-  if(entry.policy==='attendance-only'&&(r.kind!=='参加確認'||r.prize!==null||r.reviewOnly===true))errors.push('Participation was changed into unsupported confirmed award: '+entry.id);
+  if(entry.policy==='attendance-only'&&(r.kind!=='参加確認'||r.prize!==null||r.reviewOnly===true)&&
+     !verifiedPublishedPromotion(r,entry,evidence()))
+    errors.push('Participation was changed into unsupported confirmed award: '+entry.id);
   // The June 18, 2024 NAC Round 1 cutoff was top 5,000.
   // A player outside the cutoff can never be retroactively relabeled a
   // qualifier or cash finalist, even if the ledger policy is verified-rule.
@@ -282,4 +349,4 @@ if(require.main===module){
  if(errors.length){for(const e of errors)console.error('ERROR '+e);process.exitCode=1;}
  else console.log('Manual approval ledger validation OK');
 }
-module.exports={audit};
+module.exports={audit,verifiedPublishedPromotion};
