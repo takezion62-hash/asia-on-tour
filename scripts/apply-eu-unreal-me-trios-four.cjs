@@ -64,7 +64,12 @@ for(const t of V.TARGETS){
  fail(same.length<=1,'conflicting duplicate with same competition '+t.id);
  const row=results.find(r=>r.id===t.id),approved=ledger.entries.filter(e=>e.recordId===t.id);
  if(row&&approved.length===1&&V.verifyCashRow(row,approved[0])){existing.push(t.id);continue;}
- fail(!approved.length,'previously approved row has a different policy or cash: '+t.id);
+ if(t.operation==='correct'){
+  fail(approved.length===1&&approved[0].policy==='attendance-only'&&
+   approved[0].decision==='published'&&approved[0].source===t.sourceOfficial&&
+   approved[0].rule===null,
+   'only a prior attendance-only ledger entry can be promoted: '+t.id);
+ }else fail(!approved.length,'previously approved result has another ledger policy: '+t.id);
  const profiles=t.profiles.map(p=>({...p}));
  const accountIds=t.uuids.map(x=>x.replace(/-/g,''));
  const note='ユーザー提供Trackerスクショ'+item.screenshot+'とチーム全員のEpic UUIDを照合。'+
@@ -97,8 +102,12 @@ for(const t of V.TARGETS){
  }
  const entry={id:t.id,recordId:t.id,decision:'published',policy:V.POLICY,
   approvedAt:new Date().toISOString(),approvedBy:'ChatGPT / 2026-11-14 screenshots and Epic official rules',
-  source:t.sourceTracker,rule:t.rule,evidence:'Saved screenshot, original verified Epic account UUIDs and official rank-prize bracket'};
- ledger.entries.push(entry);
+  source:t.sourceOfficial,rule:t.rule,evidence:'Saved Tracker screenshot '+item.screenshot+' ('+t.sourceTracker+'), original Epic UUIDs and official rank-prize bracket'};
+ if(t.operation==='correct'){
+  // No duplicate ledger IDs: preserve the original attendance approval as a nested audit trail.
+  const previous=approved[0],prior={...previous};
+  Object.assign(previous,entry,{previousReview:prior,correction:'attendance-only to verified rank-cash award'});
+ }else ledger.entries.push(entry);
  fail(V.verifyCashRow(results.find(r=>r.id===t.id),entry),'created/updated award failed independent audit '+t.id);
 }
 fail(seen.size===4&&doc.batch.entries.every(x=>seen.has(x.id)),'unknown evidence entry');
