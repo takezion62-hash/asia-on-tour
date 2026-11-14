@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-13",
+  "updatedAt": "2026-11-14",
   "description": "Epic公式規則で確認した大会ルール。Unreal Cupもチーム順位と確認済みEpic IDを照合し、賞金圏内は地域別チーム/個人賞金を、圏外は$0として自動掲載（本人資格・支払確認とは別）。S36 Console Duos・S43 Reload ZB Duosの公式Round 1上位突破／全参加$0を、本人照合済み結果に限り安全に記録。Round 2賞金は推定しない。S42 Console Zero Build Solo Victory Cupは公式上位通過と決勝VR1回$100を個別登録。",
   "rules": [
     {
@@ -253,6 +253,36 @@
       },
       "prizePerVictory": 100,
       "source": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-4-official-rules"
+    },
+    {
+      "id": "ch7s5-one-piece-buggy-cup-battle-royale",
+      "seasonId": "S43",
+      "eventIds": [
+        "S43_OnePieceBuggyCup"
+      ],
+      "team": "duo",
+      "series": "skin-cup",
+      "chapter": 7,
+      "season": 5,
+      "matchCaps": {
+        "スキン大会": 11
+      },
+      "cosmeticRanks": {
+        "OCE": 50,
+        "ME": 50,
+        "EU": 525,
+        "BR": 100,
+        "NAC": 375,
+        "NAW": 100
+      },
+      "autoApproval": "verified-team-rank",
+      "source": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/one-piece-buggy-cup-chapter-7-mini-season-official-rules",
+      "evidence": [
+        {
+          "text": "Epic公式規則Attachment C Battle Royale（Zero Build/Mobileとは別枠）。OCE/ME上位50組、EU上位525組、NAC上位375組、BR/NAW上位100組がBuggy衣装・Buggy Knives・Buggy's Coatなどのゲーム内コスメ報酬対象。デュオ最大11試合、現金賞金$0。実物賞品の受給・配布完了は保証しない。",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/one-piece-buggy-cup-chapter-7-mini-season-official-rules"
+        }
+      ]
     },
     {
       "id": "ch7s5-one-piece-zoro-cup-battle-royale",
