@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-14T15:45:35.011Z",
+  "reviewedAt": "2026-11-14T18:14:50.915Z",
   "entries": [
     {
       "id": "auto-s43-21408f1d31bc",
@@ -23242,6 +23242,39 @@
       "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
       "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event4Round1_NAC",
       "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s30-6cbbb6b74820",
+      "decision": "published",
+      "recordId": "auto-s30-6cbbb6b74820",
+      "policy": "verified-rule",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event6Round1_NAC",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
+      "approvedAt": "2026-11-14T18:14:50.062Z",
+      "approvedBy": "ChatGPT / owner-authorized verified historical review",
+      "evidence": "Exact saved Epic account+team IDs, event, official session calendar, original ranking/VR score and tournament-specific payout/advancement rules"
+    },
+    {
+      "id": "auto-s42-02c1c5dab795",
+      "decision": "published",
+      "recordId": "auto-s42-02c1c5dab795",
+      "policy": "attendance-only",
+      "approvedAt": "2026-11-14T18:14:50.915Z",
+      "approvedBy": "ChatGPT / owner-authorized verified review",
+      "source": "https://www.fortnite.com/competitive/events/S42_InoxtagIconCup/?region=ME&round=S42_InoxtagIconCup_ME",
+      "rule": null,
+      "evidence": "Exact Epic account and team roster, canonical official event/calendar, ranked checkpoint with continuous mature rows or complete scan; duplicate check"
+    },
+    {
+      "id": "auto-s42-5398f73ec27c",
+      "decision": "published",
+      "recordId": "auto-s42-5398f73ec27c",
+      "policy": "attendance-only",
+      "approvedAt": "2026-11-14T18:14:50.915Z",
+      "approvedBy": "ChatGPT / owner-authorized verified review",
+      "source": "https://www.fortnite.com/competitive/events/S42_InoxtagIconCup/?region=ME&round=S42_InoxtagIconCup_ME",
+      "rule": null,
+      "evidence": "Exact Epic account and team roster, canonical official event/calendar, ranked checkpoint with continuous mature rows or complete scan; duplicate check"
     }
   ]
 }
