@@ -331,6 +331,36 @@
       "source": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/one-piece-zoro-cup-chapter-7-mini-season-official-rules"
     },
     {
+      "id": "ch7s5-one-piece-buggy-mobile-cup",
+      "seasonId": "S43",
+      "eventIds": [
+        "S43_OnePieceBuggyCup_Mobile"
+      ],
+      "team": "solo",
+      "series": "skin-cup",
+      "chapter": 7,
+      "season": 5,
+      "matchCaps": {
+        "スキン大会": 8
+      },
+      "cosmeticRanks": {
+        "OCE": 30,
+        "ME": 30,
+        "EU": 200,
+        "BR": 30,
+        "NAC": 150,
+        "NAW": 30
+      },
+      "autoApproval": "verified-team-rank",
+      "source": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/one-piece-buggy-cup-chapter-7-mini-season-official-rules",
+      "evidence": [
+        {
+          "text": "Epic公式2026年11月12日付Buggy Cup規則2.2.2 / Attachment C Mobile：モバイル用Reloadソロ大会（最大8試合）。OCE/ME/BR/NAW上位30名、EU上位200名、NAC上位150名がBuggy衣装・Buggy Knives・Buggy's Coatなどのゲーム内報酬対象。現金賞金はない。実物賞品は地域・受給資格などを別途確認。",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/one-piece-buggy-cup-chapter-7-mini-season-official-rules"
+        }
+      ]
+    },
+    {
       "id": "ch7s5-trios-cash-cup",
       "seasonId": "S43",
       "eventIds": [
@@ -1003,6 +1033,36 @@
         {
           "text": "Epic公式規則のAttachment C Zero Build：OCE/ME上位50組、EU上位525組、BR上位100組、NAC上位375組、NAW上位100組の各選手がゾロ衣装・ゲーム内コスメ報酬圏内。現金賞金なし。現物賞品は別途受領条件あり。",
           "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/one-piece-zoro-cup-chapter-7-mini-season-official-rules"
+        }
+      ]
+    },
+    {
+      "id": "ch7s5-one-piece-buggy-cup-zero-build",
+      "seasonId": "S43",
+      "eventIds": [
+        "S43_OnePieceBuggyCup_ZB"
+      ],
+      "team": "duo",
+      "series": "skin-cup",
+      "chapter": 7,
+      "season": 5,
+      "matchCaps": {
+        "スキン大会": 11
+      },
+      "cosmeticRanks": {
+        "OCE": 50,
+        "ME": 50,
+        "EU": 525,
+        "BR": 100,
+        "NAC": 375,
+        "NAW": 100
+      },
+      "autoApproval": "verified-team-rank",
+      "source": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/one-piece-buggy-cup-chapter-7-mini-season-official-rules",
+      "evidence": [
+        {
+          "text": "Epic公式2026年11月12日付Buggy Cup規則2.2.1 / Attachment C Zero Build：独立したゼロビルド・デュオ大会（最大11試合）。OCE/ME上位50組、EU上位525組、NAC上位375組、BR/NAW上位100組の各選手がBuggy衣装・Buggy Knives・Buggy's Coatなどのゲーム内報酬対象。現金賞金はない。実物賞品は地域・受給資格などを別途確認。",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/one-piece-buggy-cup-chapter-7-mini-season-official-rules"
         }
       ]
     },
