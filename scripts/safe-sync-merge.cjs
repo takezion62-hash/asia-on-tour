@@ -7,6 +7,7 @@ const fs=require('node:fs');
 const path=require('node:path');
 const crypto=require('node:crypto');
 const {readResults,publishResults}=require('./source-results-store.cjs');
+const {decide:verifyHistoricalVictory}=require('./verified-history-approval.cjs');
 const VALID_SCOPES=new Set(['history','auto']);
 const SOURCE_FILES=[
   'players.json','tournaments.json','tournament-rules.json',
@@ -106,7 +107,36 @@ function mergeCheckpoint(base,scan,latest,conflicts,windowId){
  if(output.complete){delete output.retryAfter;delete output.lastError}
  return output;
 }
-function mergeSnapshots(scope,base,scanned,latest,reviewed={version:1,entries:[]}){
+// Re-check historical participation against the immutable Epic leaderboard
+// checkpoint and official season-specific rules. Never trust review-only rows.
+function verifiedHistoryAttendance(candidate,scanned,base,approvalData){
+ if(!approvalData?.players||!approvalData?.tournaments||
+   candidate?.kind!=='参加確認'||candidate?.prize!==0||
+   candidate?.verified!==true||candidate?.reviewOnly===true)return false;
+ const checkpoints=scanned.docs?.['history-sync-scan.json']?.windows;
+ if(!checkpoints||typeof checkpoints!=='object')return false;
+ const matching=Object.entries(checkpoints).filter(([,cp])=>
+   cp?.proposals?.some(p=>p?.id===candidate.id));
+ if(matching.length!==1)return false;
+ const [key,checkpoint]=matching[0];
+ const original=checkpoint.proposals.find(p=>p.id===candidate.id);
+ if(original.kind!=='予選'||original.prize!==0||original.verified!==true||
+   original.reviewOnly===true)return false;
+ try{
+  const url=new URL(original.source);
+  const route=url.pathname.match(/^\/competitive\/events\/([^/]+)\/$/);
+  if(!route)return false;
+  const eventId=decodeURIComponent(route[1]),windowId=url.searchParams.get('round');
+  if(key!=='epicgames_'+eventId+'_'+original.region+'/'+windowId)return false;
+  const win={key,eventId,windowId,region:original.region,
+    dateJst:original.date,seasonId:original.seasonId,tournamentId:original.tournamentId,
+    kind:original.kind,round:original.round,series:'victory-cup'};
+  const verdict=verifyHistoricalVictory(original,win,checkpoint,{
+   ...approvalData,results:base.docs['results.json']});
+  return verdict.approved===true&&stringify(verdict.record)===stringify(candidate);
+ }catch{return false}
+}
+function mergeSnapshots(scope,base,scanned,latest,reviewed={version:1,entries:[]},approvalData=null){
  assertSnapshot(base,scope);assertSnapshot(scanned,scope);assertSnapshot(latest,scope);
  if(changedSources(base.sources,scanned.sources).length)fail('approval inputs changed during scan');
  if(changedSources(base.sources,latest.sources).length)
@@ -134,7 +164,9 @@ function mergeSnapshots(scope,base,scanned,latest,reviewed={version:1,entries:[]
  for(const candidate of c[rFile]){
   if(baseIds.has(candidate.id))continue;
   if(candidate.verified!==true||candidate.reviewOnly===true||
-      candidate.kind==='参加確認'||candidate.prize===undefined)
+      (candidate.kind==='参加確認'&&
+       (scope!=='history'||!verifiedHistoryAttendance(candidate,scanned,base,approvalData)))||
+      candidate.prize===undefined)
    fail('scanner attempted an unverified publication: '+candidate.id);
   if(reviewedIds.has(candidate.id)){duplicates.push(candidate.id);continue}
   const same=existing.get(candidate.id);
@@ -254,10 +286,12 @@ if(require.main===module){
    const scanned=JSON.parse(fs.readFileSync(args[1],'utf8'));
    const latest=snapshot(scope);
    const ledger=read(path.resolve(__dirname,'..'),'history-sync-reviewed.json');
-   const output=mergeSnapshots(scope,base,scanned,latest,ledger);
+   const approvalData={players:read(path.resolve(__dirname,'..'),'players.json'),
+    tournaments:read(path.resolve(__dirname,'..'),'tournaments.json')};
+   const output=mergeSnapshots(scope,base,scanned,latest,ledger,approvalData);
    saveMerged(scope,output);
    console.log('AOT_SAFE_SYNC_MERGED '+JSON.stringify(output.report));
   }else fail('unknown action '+action);
  }catch(error){console.error('AOT_SAFE_SYNC_ERROR '+error.stack);process.exitCode=1}
 }
-module.exports={snapshot,mergeSnapshots,logicalKey,roundKey,mergeCheckpoint,changedSources};
+module.exports={snapshot,mergeSnapshots,verifiedHistoryAttendance,logicalKey,roundKey,mergeCheckpoint,changedSources};

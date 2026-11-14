@@ -173,3 +173,45 @@ test('history and recent workflows refresh and rescan after identity change with
   assert.ok(workflow.includes('merge '+scope),name+' retains fail-closed merge');
  }
 });
+
+// Regression: a rule-backed out-of-cutoff Round1 participant must survive
+// safe concurrent merge, but false participation and prizes must not.
+test('historical merge re-verifies official zero-cash Victory Cup participation',()=>{
+ const {decide}=require('../scripts/verified-history-approval.cjs');
+ const x=scenario('history');
+ const win={key:'epicgames_S42_ReloadReloadSoloVictoryCup_ME/S42_ReloadSoloVictoryCup_Event5_Round1_ME',
+  eventId:'S42_ReloadReloadSoloVictoryCup',windowId:'S42_ReloadSoloVictoryCup_Event5_Round1_ME',
+  region:'ME',dateJst:'2026-10-24',seasonId:'S42',tournamentId:'ch7s4-solo-reload-victory-cup',
+  kind:'予選',round:'Event 5 · Round 1 / 予選',series:'victory-cup'};
+ const original={id:'auto-s42-1029384756ab',date:win.dateJst,region:win.region,
+  seasonId:win.seasonId,tournamentId:win.tournamentId,event:'Solo Reload Victory Cup',
+  round:win.round,kind:'予選',player:'A',rank:6130,points:120,kills:4,vrs:0,
+  matches:7,prize:0,verified:true,
+  source:'https://www.fortnite.com/competitive/events/'+win.eventId+'/?region='+win.region+'&round='+win.windowId};
+ const cp={complete:true,rankingOrderValid:true,proposals:[original]};
+ const approvalData={players:{candidates:[{name:'A'}]},
+  tournaments:{catalog:[{id:win.tournamentId,seasonId:'S42',team:'solo',series:'victory-cup',
+   name:'Solo Reload Victory Cup',sourceEventIds:[win.eventId]}]}};
+ const choice=decide(original,win,cp,{...approvalData,results:x.base.docs['results.json']});
+ assert.equal(choice.approved,true,choice.reason);
+ assert.equal(choice.record.kind,'参加確認');
+ x.scanned.docs['results.json'].push(choice.record);
+ x.scanned.docs['updates.json'].entries[0].recordIds.push(original.id);
+ x.scanned.docs['history-sync-scan.json'].windows[win.key]=cp;
+ const ledger={version:1,entries:[]};
+ const merged=mergeSnapshots('history',x.base,x.scanned,x.latest,ledger,approvalData);
+ assert.equal(merged.report.appended,2);
+ assert.equal(merged.docs['results.json'].find(r=>r.id===original.id).prize,0);
+ const missing=clone(x.scanned);
+ delete missing.docs['history-sync-scan.json'].windows[win.key];
+ assert.throws(()=>mergeSnapshots('history',x.base,missing,x.latest,ledger,approvalData),/unverified publication/);
+ for(const changed of [{rank:6129},{prize:100},{reviewOnly:true},{verified:false}]){
+  const altered=clone(x.scanned);
+  Object.assign(altered.docs['results.json'].at(-1),changed);
+  assert.throws(()=>mergeSnapshots('history',x.base,altered,x.latest,ledger,approvalData),/unverified publication/);
+ }
+ const y=scenario('auto');
+ y.scanned.docs['results.json'].push(choice.record);
+ y.scanned.docs['updates.json'].entries[0].recordIds.push(original.id);
+ assert.throws(()=>mergeSnapshots('auto',y.base,y.scanned,y.latest,ledger,approvalData),/unverified publication/);
+});
