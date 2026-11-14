@@ -2754,6 +2754,58 @@
           "url": "https://fortnitetracker.com/events/epicgames_S31_InfluencerCup_ME?window=S31_InfluencerCup_Round2_ME"
         }
       ]
+    },
+    {
+      "id": "ch4og-zero-build-duos-victory-cup",
+      "name": "Zero Build Duos Victory Cup",
+      "chapter": 4,
+      "season": 5,
+      "seasonId": "S27",
+      "sourceEventIds": [
+        "S27_DuosZBVictoryCashCup"
+      ],
+      "series": "victory-cup",
+      "mode": "zero-build",
+      "subtype": "zero-build-duos-victory-cup",
+      "team": "duo",
+      "platform": "cross-platform",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "Epic Games 2023 November Victory Cash Cups公式規則。ZB Duos Round2で1VRにつき各選手$100。Fortnite OG Seasonの大会。",
+          "url": "https://www.fortnite.com/news/victory-cash-cups-november-2023-official-rules"
+        },
+        {
+          "text": "ユーザー提供Tracker画像：2023/11/28 Event5と2023/12/1 Event2のNA決勝",
+          "url": "https://fortnitetracker.com/events/epicgames_S27_DuosZBVictoryCashCup_NAC?window=S27_DuosZBVictoryCashCup_Event2Round2_NAC"
+        }
+      ]
+    },
+    {
+      "id": "ch6s2-playstation-cup",
+      "name": "PlayStation Cup",
+      "chapter": 6,
+      "season": 2,
+      "seasonId": "S34",
+      "sourceEventIds": [
+        "S34_PlaystationCup"
+      ],
+      "series": "playstation-cup",
+      "mode": "battle-royale",
+      "subtype": "playstation-cup",
+      "team": "solo",
+      "platform": "playstation",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "Epic Games 2025 Chapter6 Season2 PlayStation Cup公式規則。NAW決勝の6〜40位は各$500、41位以下は賞金なし。",
+          "url": "https://www.fortnite.com/news/playstation-cup-chapter-6-season-2-official-rules"
+        },
+        {
+          "text": "Tracker S34_PlaystationCupFinal_NAW 2025/5/1決勝",
+          "url": "https://fortnitetracker.com/events/epicgames_S34_PlaystationCup_NAW?window=S34_PlaystationCupFinal_NAW"
+        }
+      ]
     }
   ]
 }

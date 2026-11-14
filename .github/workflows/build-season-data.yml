@@ -33,6 +33,9 @@ on:
       - scripts/verified-boter-s31-s38-nine.cjs
       - scripts/apply-nac-s29-s30-zb-vc-ten.cjs
       - scripts/verified-nac-s29-s30-zb-vc-ten.cjs
+      - scripts/apply-s27-s34-s31-ps-zb-ten.cjs
+      - scripts/verified-s27-s34-s31-ps-zb-ten.cjs
+      - data/manual-approvals/20261114-s27-s34-s31-ps-zb-ten-proof.json
       - data/manual-approvals/20261114-nac-s29-s30-zb-vc-ten-proof.json
       - data/manual-approvals/20261114-boter7-me-duos-s38-squad-nine-proof.json
       - scripts/verified-s41-console-zb-oce-reconcile.cjs
@@ -136,6 +139,8 @@ jobs:
             node scripts/apply-boter-s31-s38-nine.cjs
             node scripts/apply-nac-s29-s30-zb-vc-ten.cjs --dry-run
             node scripts/apply-nac-s29-s30-zb-vc-ten.cjs
+            node scripts/apply-s27-s34-s31-ps-zb-ten.cjs --dry-run
+            node scripts/apply-s27-s34-s31-ps-zb-ten.cjs
             node scripts/publish-nov14-pending-cash.cjs --dry-run
             node scripts/publish-nov14-pending-cash.cjs
             node scripts/reconcile-pending-hamikuma-20261114.cjs --dry-run
