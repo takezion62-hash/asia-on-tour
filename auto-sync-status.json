@@ -1,7 +1,7 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-14T07:11:32.432Z",
+  "checkedAt": "2026-11-14T07:59:58.912Z",
   "mode": "review",
   "scope": "recent",
   "dateMode": null,
@@ -18,7 +18,7 @@
   "completedWindows": 70,
   "identityConflicts": 3,
   "alreadyRegistered": 246,
-  "autoApprovedTotal": 2585,
+  "autoApprovedTotal": 2604,
   "invalidCachedCandidates": 0,
   "manualReviewCandidates": 0,
   "autoApprovedCosmeticThisRun": 0,
@@ -49,13 +49,13 @@
     "alreadyPublished": 0,
     "reviewConflicts": 0,
     "keptPending": 0,
-    "reconciledAt": "2026-11-14T07:11:50.014Z"
+    "reconciledAt": "2026-11-14T08:00:16.493Z"
   },
   "coverage": {
     "total": 89,
     "completed": 70,
-    "notStarted": 10,
-    "partial": 9,
+    "notStarted": 9,
+    "partial": 10,
     "retryWaiting": 0,
     "retryDue": 0,
     "remaining": 19,
@@ -103,12 +103,23 @@
     "outsideScopeCheckpoints": 14,
     "samples": [
       {
+        "window": "epicgames_S42_ArenaCashCup_EU/S42_ArenaCashCup_Event1_EU",
+        "date": "2026-10-25",
+        "region": "EU",
+        "series": "cash-cup",
+        "status": "partial",
+        "nextPage": 1,
+        "totalPages": 100,
+        "retryAfter": null,
+        "errorCode": null
+      },
+      {
         "window": "epicgames_S42_ArenaCashCup_BR/S42_ArenaCashCup_Event1_BR",
         "date": "2026-10-26",
         "region": "BR",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 2,
+        "nextPage": 7,
         "totalPages": 31,
         "retryAfter": null,
         "errorCode": null
@@ -119,7 +130,7 @@
         "region": "NAC",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 2,
+        "nextPage": 3,
         "totalPages": 77,
         "retryAfter": null,
         "errorCode": null
@@ -130,7 +141,7 @@
         "region": "NAW",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 31,
+        "nextPage": 41,
         "totalPages": 52,
         "retryAfter": null,
         "errorCode": null
@@ -141,7 +152,7 @@
         "region": "BR",
         "series": "icon-cup",
         "status": "partial",
-        "nextPage": 5,
+        "nextPage": 6,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
@@ -152,7 +163,7 @@
         "region": "EU",
         "series": "icon-cup",
         "status": "partial",
-        "nextPage": 5,
+        "nextPage": 6,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
@@ -163,7 +174,7 @@
         "region": "ME",
         "series": "icon-cup",
         "status": "partial",
-        "nextPage": 1,
+        "nextPage": 2,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
@@ -174,7 +185,7 @@
         "region": "NAC",
         "series": "icon-cup",
         "status": "partial",
-        "nextPage": 17,
+        "nextPage": 27,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
@@ -185,7 +196,7 @@
         "region": "NAC",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 39,
+        "nextPage": 49,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
@@ -196,7 +207,7 @@
         "region": "EU",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 49,
+        "nextPage": 59,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
@@ -206,17 +217,6 @@
         "date": "2026-10-24",
         "region": "OCE",
         "series": "skin-cup",
-        "status": "notStarted",
-        "nextPage": 0,
-        "totalPages": null,
-        "retryAfter": null,
-        "errorCode": null
-      },
-      {
-        "window": "epicgames_S42_ArenaCashCup_EU/S42_ArenaCashCup_Event1_EU",
-        "date": "2026-10-25",
-        "region": "EU",
-        "series": "cash-cup",
         "status": "notStarted",
         "nextPage": 0,
         "totalPages": null,
