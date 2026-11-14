@@ -2,8 +2,8 @@
   "version": 1,
   "role": "generated canonical-source snapshot; results.json remains authoritative in phase 1",
   "canonicalFile": "results.json",
-  "canonicalSha256": "b878fed8f25da4ebf236dd21986c2161f8ca3391e449f9135c15fbb6628097a6",
-  "count": 7186,
+  "canonicalSha256": "40de8ca7da9e975e7635830bbadf9ae61060ce4980a2f29491e1d6b15b7b837a",
+  "count": 7189,
   "teamPrizeCents": 8017000,
   "unconfirmedPrizeRecords": 1172,
   "personalPrizeCents": 7997000,
@@ -7193,7 +7193,10 @@
     "s30-nac-zb-solo-vc-final-20240618-rintaro",
     "s29-nac-zb-duos-vc-final-20240425-teitei-kana",
     "s29-nac-zb-duos-vc-final-20240425-favsie-rintaro",
-    "s29-nac-zb-duos-vc-final-20240425-tara-p1ng"
+    "s29-nac-zb-duos-vc-final-20240425-tara-p1ng",
+    "auto-s30-bfc80b765dfc",
+    "auto-s30-b9cf35d0c66a",
+    "auto-s30-a412ca4bb5c9"
   ],
   "shards": [
     {
@@ -7253,11 +7256,11 @@
     {
       "seasonId": "S30",
       "file": "source-results/S30.json",
-      "count": 1930,
+      "count": 1933,
       "teamPrizeCents": 1520000,
       "unconfirmedPrizeRecords": 140,
       "personalPrizeCents": 1520000,
-      "sha256": "94f270812505c7de44c1e9ae96324626cd40da1affa1c19a51f377b757285536"
+      "sha256": "0751ab8aaf4e728830c3a2208cfd2c6d1020eb2ace06b5b4c788b95224bbd2b6"
     },
     {
       "seasonId": "S31",
