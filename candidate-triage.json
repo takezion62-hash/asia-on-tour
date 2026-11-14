@@ -1,18 +1,18 @@
 {
   "version": 1,
   "sourceCheckedAt": "2026-11-07T23:16:39.215Z",
-  "total": 10,
+  "total": 7,
   "alreadyResolved": 0,
   "byYear": [
     {
       "name": "2024",
-      "count": 10
+      "count": 7
     }
   ],
   "byRegion": [
     {
       "name": "NAC",
-      "count": 10
+      "count": 7
     }
   ],
   "byTournament": [
@@ -22,7 +22,7 @@
     },
     {
       "name": "Solo Victory Cup Battle Royale / NAC / 2024",
-      "count": 8
+      "count": 5
     }
   ],
   "byStatus": [
@@ -32,7 +32,7 @@
     },
     {
       "name": "partial-scan",
-      "count": 8
+      "count": 5
     }
   ],
   "queue": [
@@ -101,105 +101,6 @@
         "possibleExistingId": "s31-nac-playstation-sypherpk-final-20240902-r89"
       },
       "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s30-2106ec2b5761",
-      "origin": "history",
-      "date": "2024-07-23",
-      "year": "2024",
-      "region": "NAC",
-      "tournamentId": "ch5s3-solo-victory-cup",
-      "event": "Solo Victory Cup Battle Royale",
-      "round": "Event 6 · Round 1 / 予選",
-      "player": "白組 shink",
-      "kind": "予選",
-      "rank": 6117,
-      "points": 121,
-      "kills": 12,
-      "vrs": 1,
-      "prize": 0,
-      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event6Round1_NAC",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "順位表の取得が完了していません",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 63,
-        "totalPages": 100,
-        "sourceKey": "epicgames_S30_SoloVictoryCashCup_NAC/S30_SoloVictoryCashCup_Event6Round1_NAC",
-        "possibleExistingId": null
-      },
-      "rewardState": "source-amount-present-not-verified-by-triage"
-    },
-    {
-      "id": "auto-s30-905e7e115e26",
-      "origin": "history",
-      "date": "2024-07-23",
-      "year": "2024",
-      "region": "NAC",
-      "tournamentId": "ch5s3-solo-victory-cup",
-      "event": "Solo Victory Cup Battle Royale",
-      "round": "Event 6 · Round 1 / 予選",
-      "player": "渡良瀬佳乃",
-      "kind": "予選",
-      "rank": 6051,
-      "points": 122,
-      "kills": 3,
-      "vrs": 0,
-      "prize": 0,
-      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event6Round1_NAC",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "順位表の取得が完了していません",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 63,
-        "totalPages": 100,
-        "sourceKey": "epicgames_S30_SoloVictoryCashCup_NAC/S30_SoloVictoryCashCup_Event6Round1_NAC",
-        "possibleExistingId": null
-      },
-      "rewardState": "source-amount-present-not-verified-by-triage"
-    },
-    {
-      "id": "auto-s30-a4673a3e5cae",
-      "origin": "history",
-      "date": "2024-07-23",
-      "year": "2024",
-      "region": "NAC",
-      "tournamentId": "ch5s3-solo-victory-cup",
-      "event": "Solo Victory Cup Battle Royale",
-      "round": "Event 6 · Round 1 / 予選",
-      "player": "明太釜玉うどん4玉とり天追加で",
-      "kind": "予選",
-      "rank": 5239,
-      "points": 125,
-      "kills": 0,
-      "vrs": 1,
-      "prize": 0,
-      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event6Round1_NAC",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "順位表の取得が完了していません",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 63,
-        "totalPages": 100,
-        "sourceKey": "epicgames_S30_SoloVictoryCashCup_NAC/S30_SoloVictoryCashCup_Event6Round1_NAC",
-        "possibleExistingId": null
-      },
-      "rewardState": "source-amount-present-not-verified-by-triage"
     },
     {
       "id": "auto-s32-02577ef4430c",
