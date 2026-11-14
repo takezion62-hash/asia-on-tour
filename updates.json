@@ -2,6 +2,45 @@
   "version": 1,
   "entries": [
     {
+      "id": "review-publication-pending-20261114-d719c5fa3044-verified-rule-1",
+      "date": "2026-11-15",
+      "type": "records",
+      "title": "管理者確認済み戦績 10件を追加",
+      "description": "公式規則に基づく予選突破または決勝0VRのみを確認。未確認賞金なし。",
+      "recordIds": [
+        "auto-s30-75cf0e2ac111",
+        "auto-s30-55faa417fc31",
+        "auto-s30-a0a39a6e3588",
+        "auto-s30-d03097342d60",
+        "auto-s30-0a50d2485dfc",
+        "auto-s30-6c46c339e0fb",
+        "auto-s30-40a449e2a850",
+        "auto-s30-60f8361a398c",
+        "auto-s32-f4f642d530f0",
+        "auto-s32-4a6e218e405a"
+      ]
+    },
+    {
+      "id": "review-publication-pending-20261114-d719c5fa3044-attendance-only-1",
+      "date": "2026-11-15",
+      "type": "records",
+      "title": "管理者確認済み戦績 11件を追加",
+      "description": "Epic ID・開催枠・順位表を再照合した出場確認のみ。賞金・予選突破・スキン獲得を未認定。",
+      "recordIds": [
+        "auto-s30-cd342f0b920a",
+        "auto-s33-5d0af01d707b",
+        "auto-s33-02e3f44f4472",
+        "auto-s33-c6fb75f96672",
+        "auto-s33-95f0135da660",
+        "auto-s33-cb6d202ccda1",
+        "auto-s33-f2412f1bd2a4",
+        "auto-s33-b7a45973b853",
+        "auto-s33-bd0a10f9c89a",
+        "auto-s33-1580adee34fa",
+        "auto-s33-3e483597ebab"
+      ]
+    },
+    {
       "id": "auto-sync-20261114221846",
       "date": "2026-11-15",
       "type": "records",
