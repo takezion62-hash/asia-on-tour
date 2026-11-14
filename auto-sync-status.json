@@ -1,7 +1,7 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-14T09:00:11.192Z",
+  "checkedAt": "2026-11-14T09:24:22.987Z",
   "mode": "review",
   "scope": "recent",
   "dateMode": null,
@@ -15,7 +15,7 @@
   "skipped": 0,
   "imported": 0,
   "scannedPages": 50,
-  "completedWindows": 70,
+  "completedWindows": 71,
   "identityConflicts": 3,
   "alreadyRegistered": 246,
   "autoApprovedTotal": 2604,
@@ -49,18 +49,18 @@
     "alreadyPublished": 0,
     "reviewConflicts": 0,
     "keptPending": 0,
-    "reconciledAt": "2026-11-14T09:00:25.827Z"
+    "reconciledAt": "2026-11-14T09:24:40.459Z"
   },
   "coverage": {
     "total": 90,
-    "completed": 70,
+    "completed": 71,
     "notStarted": 10,
-    "partial": 10,
+    "partial": 9,
     "retryWaiting": 0,
     "retryDue": 0,
-    "remaining": 20,
+    "remaining": 19,
     "retryCount": 0,
-    "completionPercent": 77.8,
+    "completionPercent": 78.9,
     "byRegion": {
       "OCE": {
         "total": 12,
@@ -89,15 +89,15 @@
       },
       "NAW": {
         "total": 14,
-        "completed": 11,
-        "pending": 3
+        "completed": 12,
+        "pending": 2
       }
     },
     "byYear": {
       "2026": {
         "total": 90,
-        "completed": 70,
-        "pending": 20
+        "completed": 71,
+        "pending": 19
       }
     },
     "outsideScopeCheckpoints": 14,
@@ -108,7 +108,7 @@
         "region": "EU",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 2,
+        "nextPage": 3,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
@@ -119,7 +119,7 @@
         "region": "BR",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 12,
+        "nextPage": 22,
         "totalPages": 31,
         "retryAfter": null,
         "errorCode": null
@@ -130,19 +130,8 @@
         "region": "NAC",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 4,
+        "nextPage": 5,
         "totalPages": 77,
-        "retryAfter": null,
-        "errorCode": null
-      },
-      {
-        "window": "epicgames_S42_ArenaCashCup_NAW/S42_ArenaCashCup_Event1_NAW",
-        "date": "2026-10-26",
-        "region": "NAW",
-        "series": "cash-cup",
-        "status": "partial",
-        "nextPage": 51,
-        "totalPages": 52,
         "retryAfter": null,
         "errorCode": null
       },
@@ -152,7 +141,7 @@
         "region": "BR",
         "series": "icon-cup",
         "status": "partial",
-        "nextPage": 7,
+        "nextPage": 12,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
@@ -163,7 +152,7 @@
         "region": "EU",
         "series": "icon-cup",
         "status": "partial",
-        "nextPage": 7,
+        "nextPage": 8,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
@@ -174,7 +163,7 @@
         "region": "ME",
         "series": "icon-cup",
         "status": "partial",
-        "nextPage": 3,
+        "nextPage": 4,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
@@ -185,7 +174,7 @@
         "region": "NAC",
         "series": "icon-cup",
         "status": "partial",
-        "nextPage": 37,
+        "nextPage": 47,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
@@ -196,7 +185,7 @@
         "region": "NAC",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 59,
+        "nextPage": 69,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
@@ -207,7 +196,7 @@
         "region": "EU",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 69,
+        "nextPage": 79,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
@@ -227,6 +216,17 @@
         "window": "epicgames_S42_ArenaCashCup_ME/S42_ArenaCashCup_Event1_ME",
         "date": "2026-10-25",
         "region": "ME",
+        "series": "cash-cup",
+        "status": "notStarted",
+        "nextPage": 0,
+        "totalPages": null,
+        "retryAfter": null,
+        "errorCode": null
+      },
+      {
+        "window": "epicgames_S42_ArenaCashCup_OCE/S42_ArenaCashCup_Event1_OCE",
+        "date": "2026-10-25",
+        "region": "OCE",
         "series": "cash-cup",
         "status": "notStarted",
         "nextPage": 0,
