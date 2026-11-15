@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-15T03:17:13.563Z",
+  "reviewedAt": "2026-11-15T06:30:32.267Z",
   "entries": [
     {
       "id": "auto-s43-21408f1d31bc",
@@ -24903,6 +24903,39 @@
       "source": "https://fortnitetracker.com/events/epicgames_S36_SquidGroundVictoryDuosCup_NAW?window=S36_VictoryDuosCup_Event6Round2_NAW",
       "rule": "https://www.fortnite.com/competitive/events/S36_SquidGroundVictoryDuosCup/?region=NAW",
       "evidence": "User screenshot 13th + 2 exact UUIDs; NAW Event6 Round2, 1VR=$200 duo"
+    },
+    {
+      "id": "auto-s42-fa8b63f46032",
+      "decision": "published",
+      "recordId": "auto-s42-fa8b63f46032",
+      "policy": "attendance-only",
+      "approvedAt": "2026-11-15T06:30:32.267Z",
+      "approvedBy": "ChatGPT / user authorized confirmed-candidate review",
+      "rule": null,
+      "source": "https://www.fortnite.com/competitive/events/S42_InoxtagIconCup/?region=OCE&round=S42_InoxtagIconCup_OCE",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s42-60b936d78d01",
+      "decision": "published",
+      "recordId": "auto-s42-60b936d78d01",
+      "policy": "attendance-only",
+      "approvedAt": "2026-11-15T06:30:32.267Z",
+      "approvedBy": "ChatGPT / user authorized confirmed-candidate review",
+      "rule": null,
+      "source": "https://www.fortnite.com/competitive/events/S42_InoxtagIconCup/?region=OCE&round=S42_InoxtagIconCup_OCE",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s43-3bc1ddc1b7c7",
+      "decision": "published",
+      "recordId": "auto-s43-3bc1ddc1b7c7",
+      "policy": "attendance-only",
+      "approvedAt": "2026-11-15T06:30:32.267Z",
+      "approvedBy": "ChatGPT / user authorized confirmed-candidate review",
+      "rule": null,
+      "source": "https://www.fortnite.com/competitive/events/S43_TriosCashCup/?region=NAW&round=S43_TriosCashCup_Event2_NAW",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
     }
   ]
 }
