@@ -2840,6 +2840,32 @@
           "url": "https://www.fortnite.com/news/console-champions-cup-chapter-4-season-4-official-rules"
         }
       ]
+    },
+    {
+      "id": "ch5s4-reload-duos-cash-cup-console",
+      "name": "Reload Duos Cash Cup (Console)",
+      "chapter": 5,
+      "season": 4,
+      "seasonId": "S31",
+      "sourceEventIds": [
+        "S31_PlatformReloadDuosCashCupConsole"
+      ],
+      "series": "cash-cup",
+      "mode": "reload",
+      "subtype": "duos-cash-cup",
+      "team": "duo",
+      "platform": "console",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "ユーザー提供の2024/9/28（JST）MEコンソールReloadデュオ決勝Tracker順位表。Event 4 Round 2、5位チーム$200・各選手$100。",
+          "url": "https://fortnitetracker.com/events/epicgames_S31_PlatformReloadDuosCashCupConsole_ME?window=S31_PlatformReloadDuosCashCupConsole_Event4Round2_ME"
+        },
+        {
+          "text": "Epic公式 Reload Platform Duos Cash Cups Chapter 5 Season 4 規則。Console/Reload/Duosと地域別賞金表を確認。",
+          "url": "https://www.fortnite.com/news/reload-platform-duos-cash-cups-chapter-5-season-4-official-rules"
+        }
+      ]
     }
   ]
 }

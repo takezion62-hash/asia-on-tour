@@ -2,11 +2,11 @@
   "version": 1,
   "role": "generated canonical-source snapshot; results.json remains authoritative in phase 1",
   "canonicalFile": "results.json",
-  "canonicalSha256": "b59edc833ebad4306d6a13dc2dc0c7a7b9658753bdb6edb39b69a06691e488f3",
-  "count": 7496,
-  "teamPrizeCents": 8781000,
+  "canonicalSha256": "4a94b8b396e46e7345756429c40b94240ad97c3b300bd18a4457e7572b76f3ae",
+  "count": 7497,
+  "teamPrizeCents": 8801000,
   "unconfirmedPrizeRecords": 1253,
-  "personalPrizeCents": 8761000,
+  "personalPrizeCents": 8781000,
   "recordOrder": [
     "s42-me-slenderman-reload-skin-20261021-acris-chacha",
     "s42-me-slenderman-reload-skin-20261021-karf-alpha",
@@ -7503,7 +7503,8 @@
     "auto-s30-ec85c1a33c97",
     "auto-s30-22fc2ad50370",
     "auto-s42-2d82955cb86a",
-    "auto-s36-55f2cea0065f"
+    "auto-s36-55f2cea0065f",
+    "s31-me-console-reload-duos-final-20240928-kurama-p1ng"
   ],
   "shards": [
     {
@@ -7581,11 +7582,11 @@
     {
       "seasonId": "S31",
       "file": "source-results/S31.json",
-      "count": 1136,
-      "teamPrizeCents": 1470000,
+      "count": 1137,
+      "teamPrizeCents": 1490000,
       "unconfirmedPrizeRecords": 63,
-      "personalPrizeCents": 1470000,
-      "sha256": "9e3f9b5d8c3c0dcd2a99e47ec93cb168550f592173e620d4086f23d1489f18f7"
+      "personalPrizeCents": 1490000,
+      "sha256": "183a29654423a01a8e02c73402ce5c6f11cae9a327242f4c490a10ac968059b2"
     },
     {
       "seasonId": "S32",
@@ -7684,7 +7685,7 @@
       "teamPrizeCents": 1070000,
       "unconfirmedPrizeRecords": 571,
       "personalPrizeCents": 1070000,
-      "sha256": "d8d57bae042dc80caba023db43bab040e6cc98f00f7e82b99478e98731ea129b"
+      "sha256": "0c1d215fae934376755fda160e7721d9ac793dcb6bf5deda303fbc8c141f0f00"
     },
     {
       "seasonId": "S43",
