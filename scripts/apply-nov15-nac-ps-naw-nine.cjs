@@ -42,7 +42,6 @@ const newNameStyles={
  'ASFA 法的処置':'AS',
  'しかねき':'SK',
  'せのくるです':'SN',
- 'くまえふぶい':'KM',
  'ℭhromeRet.Player':'CR',
  'ぴぃたこ':'PT',
  '私は3本のガーベラを君に贈ります':'GB',
@@ -77,6 +76,21 @@ for(const t of V.TARGETS){
    known.add(n);owners.set(n,n);newNames.push(n);
   }
   must(owners.get(n)===n,'canonical name belongs to another identity '+n);
+  // Screenshot nickname くまえふぶい is the SAME account as the existing
+  // Cue.Ganondorf profile (Epic UUID 5aa76ea4-2a16-4e4e-ac2a-e3da5a0d8ed2).
+  // Add the user-confirmed nickname as an alias; never create a second player.
+  if(t.id==='s37-naw-console-duos-final-20251026-kumafv-chromeret'&&n==='Cue.Ganondorf'){
+   must(t.confirmedDisplayAlias==='くまえふぶい'&&
+    t.existingCanonicalName===n&&p.id==='5aa76ea4-2a16-4e4e-ac2a-e3da5a0d8ed2',
+    'existing Cue.Ganondorf identity or submitted nickname changed');
+   const nick=t.confirmedDisplayAlias;
+   must(!owners.has(nick)||owners.get(nick)===n,'nickname already belongs to a different account');
+   if(!owners.has(nick)){
+    if(!players.confirmedAliases[n])players.confirmedAliases[n]=[];
+    must(Array.isArray(players.confirmedAliases[n]),'canonical nickname list missing');
+    players.confirmedAliases[n].push(nick);owners.set(nick,n);newAliases.push({name:n,raw:nick});
+   }
+  }
   if(p.raw!==n&&owners.get(p.raw)!==n){
    must(!owners.has(p.raw),'raw Tracker name already belongs to another person '+p.raw);
    if(!players.confirmedAliases[n])players.confirmedAliases[n]=[];
