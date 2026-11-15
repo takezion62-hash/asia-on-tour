@@ -39,6 +39,9 @@ function expected(t){
  if(!known||[t.tournamentId,t.event,t.eventId,t.windowId,t.round,t.chapter,t.season].some((v,i)=>v!==known[i])||
     t.rule!==RULES[t.seasonId]||
     t.sourceTracker!=='https://fortnitetracker.com/events/epicgames_'+t.eventId+'_'+t.region+'?window='+t.windowId)return false;
+ if(t.id==='s37-naw-console-duos-final-20251026-kumafv-chromeret'&&
+    (t.players[0]!=='Cue.Ganondorf'||t.profiles[0].name!=='Cue.Ganondorf'||
+    t.confirmedDisplayAlias!=='くまえふぶい'||t.existingCanonicalName!=='Cue.Ganondorf'))return false;
  if(t.seasonId==='S36')return t.players.length===1&&t.playerRaw==='boltzZzero0oǃ'&&
    t.originalKind==='参加確認'&&t.originalRound==='Final / 参加確認'&&
    t.originalPrize===null&&t.originalSource==='https://www.fortnite.com/competitive/events/S36_PlayStationCup/?region=NAC&round=S36_PlayStationCup_Final_NAC'&&t.prize===240;
