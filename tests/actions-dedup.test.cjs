@@ -39,7 +39,7 @@ test('PRの必須CIは変更範囲を安全判定し、必要なら全テスト�
  assert.match(main,/needs: \[classify, unit, browser, browser-focused, smoke\]/);
  assert.match(main,/if: needs\.classify\.outputs\.mode == 'full'/);
  assert.match(main,/if: needs\.classify\.outputs\.mode == 'data'/);
- assert.match(main,/FOCUSED_BROWSER_RESULT: \\$\\{\\{ needs\\.browser-focused\\.result \\}\\}/);
+ assert.match(main,/FOCUSED_BROWSER_RESULT: \$\{\{ needs\.browser-focused\.result \}\}/);
  assert.match(main,/name: 変更画面だけPC・スマホテスト/);
  assert.match(main,/UNIT_RESULT: \$\{\{ needs\.unit\.result \}\}/);
  assert.match(main,/BROWSER_RESULT: \$\{\{ needs\.browser\.result \}\}/);
