@@ -4,7 +4,7 @@
 // ci-change-scope.cjs from the trusted base SHA.
 const fs=require('node:fs');
 const path=require('node:path');
-const ROOT=path.resolve(__dirname,'..');
+const ROOT=process.env.GITHUB_WORKSPACE||path.resolve(__dirname,'..');
 const unitFile=/^tests\/[a-z0-9._-]+\.test\.cjs$/;
 const specFile=/^tests\/[a-z0-9._-]+\.spec\.cjs$/;
 const publisher=/^scripts\/(?:apply|publish|reconcile)-[a-z0-9.-]+\.cjs$/;
