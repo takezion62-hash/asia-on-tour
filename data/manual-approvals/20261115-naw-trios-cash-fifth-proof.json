@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "checkedAt": "2026-11-15",
+  "basis": "Independent official top-five leaderboard and Tracker per-player NAW cash prize table. Existing scanner's Epic account IDs are retained without alteration; page completion is not asserted.",
+  "proofs": [
+    {
+      "recordId": "auto-s43-3bc1ddc1b7c7",
+      "date": "2026-11-15",
+      "region": "NAW",
+      "tournamentId": "ch7s5-trios-cash-cup",
+      "eventId": "S43_TriosCashCup",
+      "windowId": "S43_TriosCashCup_Event2_NAW",
+      "players": [
+        "ちからV2",
+        "kumo",
+        "Mofu"
+      ],
+      "playerRaw": "NEXUS ちからV2ǃ / kumofvǃ / RC MOFU 16ǃ",
+      "displayNames": [
+        "NEXUS ちからV2ǃ",
+        "kumofvǃ",
+        "RC MOFU 16ǃ"
+      ],
+      "teamAccountIds": [
+        "2512ed089c99409fb69d2cc3de7c35c6",
+        "705ab3a767ae4e6cb41243796ec3de22",
+        "b78631905b9847c38d347af8ea94d4b5"
+      ],
+      "rank": 5,
+      "points": 441,
+      "kills": 90,
+      "vrs": 2,
+      "matches": 9,
+      "perPlayerUSD": 150,
+      "officialLeaderboard": "https://www.fortnite.com/competitive/events/S43_TriosCashCup/leaderboard?defId=S43_TriosCashCup_LeaderboardDef&region=NAW&round=S43_TriosCashCup_Event2_NAW",
+      "trackerPrizeTable": "https://fortnitetracker.com/events/epicgames_S43_TriosCashCup_NAW?window=S43_TriosCashCup_Event2_NAW"
+    }
+  ]
+}
