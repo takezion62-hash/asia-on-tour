@@ -1,7 +1,7 @@
 {
   "version": 1,
   "sourceCheckedAt": "2026-11-07T23:16:39.215Z",
-  "total": 33,
+  "total": 34,
   "alreadyResolved": 0,
   "byYear": [
     {
@@ -10,12 +10,16 @@
     },
     {
       "name": "2026",
-      "count": 2
+      "count": 3
     }
   ],
   "byRegion": [
     {
       "name": "EU",
+      "count": 1
+    },
+    {
+      "name": "ME",
       "count": 1
     },
     {
@@ -30,6 +34,10 @@
   "byTournament": [
     {
       "name": "Console Solo Victory Cup (ZB) / EU / 2026",
+      "count": 1
+    },
+    {
+      "name": "Inoxtag Icon Cup Battle Royale / ME / 2026",
       "count": 1
     },
     {
@@ -48,7 +56,7 @@
     },
     {
       "name": "partial-scan",
-      "count": 30
+      "count": 31
     },
     {
       "name": "rules-review",
@@ -1144,6 +1152,39 @@
         "possibleExistingId": null
       },
       "rewardState": "source-amount-present-not-verified-by-triage"
+    },
+    {
+      "id": "auto-s42-b6a207a16465",
+      "origin": "recent",
+      "date": "2026-10-26",
+      "year": "2026",
+      "region": "ME",
+      "tournamentId": "ch7s4-inoxtag-icon-cup-battle-royale",
+      "event": "Inoxtag Icon Cup Battle Royale",
+      "round": "単一開催枠 / 参加確認",
+      "player": "Mrs.大森元貴 / メラメラしてんじゃねーよ",
+      "kind": "参加確認",
+      "rank": 6642,
+      "points": 80,
+      "kills": 7,
+      "vrs": 0,
+      "prize": null,
+      "source": "https://www.fortnite.com/competitive/events/S42_InoxtagIconCup/?region=ME&round=S42_InoxtagIconCup_ME",
+      "status": "partial-scan",
+      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
+      "reason": "公式の順位条件を登録していない大会",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": false,
+        "observedPartial": true,
+        "seenPages": 68,
+        "totalPages": 100,
+        "sourceKey": "epicgames_S42_InoxtagIconCup_ME/S42_InoxtagIconCup_ME",
+        "possibleExistingId": null
+      },
+      "rewardState": "cash-unconfirmed"
     }
   ],
   "policy": "read-only queue; awards require existing official rule-backed validators and identity/collision proof"
