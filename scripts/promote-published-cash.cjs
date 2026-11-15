@@ -9,6 +9,7 @@
  */
 const fs=require('node:fs');
 const path=require('node:path');
+const crypto=require('node:crypto');
 const root=path.resolve(__dirname,'..');
 const {readResults,publishResults}=require('./source-results-store.cjs');
 const {RULES,cashPrize,cashLimitForWindow,decide}=require('./automatic-cash-approval.cjs');
@@ -18,18 +19,20 @@ const fields=['id','date','region','player','playerRaw','event','round','rank','
  'kills','vrs','prize','kind','matches','seasonId','chapter','season','tournamentId',
  'source','verified','players','teamAccountIds'];
 const json=x=>JSON.stringify(x);
+const sha256=x=>crypto.createHash('sha256').update(json(x)).digest('hex');
+const HISTORY_FILE='cash-promotion-history.json';
 const matchPublished=(published,candidate)=>
  published?.verified===true&&published.kind==='参加確認'&&published.prize===null&&
  candidate?.verified===true&&candidate.reviewOnly===true&&
  fields.every(key=>json(published[key])===json(candidate[key]));
 function indexedProposals(...documents){
  const index=new Map();
- for(const doc of documents){
+ for(const [documentIndex,doc] of documents.entries()){
   for(const [key,cp] of Object.entries(doc?.windows||{})){
    if(cp?.rankingOrderValid!==true||!Array.isArray(cp.proposals))continue;
    for(const candidate of cp.proposals){
     if(!candidate?.id||!candidate.reviewOnly)continue;
-    const previous=index.get(candidate.id),next={key,cp,candidate};
+    const previous=index.get(candidate.id),next={key,cp,candidate,documentIndex};
     if(!previous||(!previous.cp.complete&&cp.complete)||
       (previous.cp.complete===cp.complete&&Date.parse(cp.lastSuccessAt||0)>Date.parse(previous.cp.lastSuccessAt||0)))
      index.set(candidate.id,next);
@@ -123,7 +126,12 @@ function plan({results,players,tournaments,schedule,scanDocs,proofs,limit=5}){
   updated[index]=next;
   changes.push({id:old.id,player:old.player,region:old.region,rank:old.rank,
    individualPrize:next.prizePerPlayer,teamPrize:next.prize,
-   proof:officialProof?'official-top-five':'completed-provider-scan'});
+   proof:officialProof?'official-top-five':'completed-provider-scan',
+   beforeRow:old,beforeSha256:sha256(old),afterSha256:sha256(next),
+   evidence:{documentIndex:found.documentIndex,key:found.key,
+    lastSuccessAt:found.cp.lastSuccessAt,ruleSha256:sha256(rule),
+    proofType:officialProof?'official-top-five':'completed-provider-scan'},
+   approvedAt:new Date().toISOString()});
  }
  if(updated.length!==results.length||new Set(updated.map(r=>r.id)).size!==results.length)
   throw Error('CASH_PROMOTION lost or duplicated records');
@@ -141,7 +149,15 @@ function main(){
   schedule:read('schedule.json'),scanDocs:[read('auto-sync-scan.json'),read('history-sync-scan.json')],
   proofs:read('data/manual-approvals/20261115-naw-trios-cash-fifth-proof.json').proofs};
  const outcome=plan(payload);
- if(apply&&outcome.changes.length)publishResults(root,outcome.updated);
+ if(apply&&outcome.changes.length){
+  const file=path.join(root,HISTORY_FILE);
+  const history=fs.existsSync(file)?JSON.parse(fs.readFileSync(file,'utf8')):{version:1,entries:[]};
+  if(history.version!==1||!Array.isArray(history.entries))throw Error('CASH_PROMOTION invalid audit history');
+  const recorded=new Set(history.entries.map(e=>e.id));
+  if(outcome.changes.some(e=>recorded.has(e.id)))throw Error('CASH_PROMOTION duplicate historical audit entry');
+  publishResults(root,outcome.updated);
+  fs.writeFileSync(file,JSON.stringify({version:1,entries:[...outcome.changes,...history.entries]},null,2)+'\n');
+ }
  console.log('PUBLISHED_CASH_PROMOTION '+JSON.stringify({mode:dry?'dry-run':'apply',
   count:outcome.changes.length,changes:outcome.changes,unchangedCount:results.length-outcome.changes.length}));
 }
