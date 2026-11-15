@@ -276,6 +276,44 @@ function verifiedPublishedPromotion(row,entry,evidence){
  return !!result.record&&fingerprint(result.record)===h.afterSha256&&
   JSON.stringify(result.record)===JSON.stringify(row);
 }
+// Exact screenshot / tracker UUID oracle for the 2025-08-02 NAW Squid Grounds final.
+// Only these seven pairs qualify under this policy; not a blanket approval.
+const S36_SQUID_NAW_SEVEN={
+ 4:[3,16,['EXV mAximum24','94a5d597-b290-4965-a38a-ca3f3b0061d3'],['えありー','bf6b915c-60d9-4e09-a7e1-55165440e01b']],
+ 5:[3,12,['Reo','25945a39-f156-4a22-aab8-ea7808feac98'],['ろみぃ','765aceae-b41b-44f7-9d8b-dd28fa6f6367']],
+ 9:[2,5,['asvaswgernb','34db6afd-2ce0-46be-8554-a813face02df'],['p1ng','9766622e-ec65-443f-b8cf-2b860838c19d']],
+ 10:[3,5,['なずな','801068c3-cddd-4d65-8d56-8722a9d253e4'],['お前らグラファいってないんｗｗ','fecbcdd3-237d-4d29-bdf5-973bb2d5c596']],
+ 11:[3,3,['ふーくんかっこいいǃǃ','cc2a8ff9-810e-4a8f-8402-0b61b62a878b'],['goat playerfnbr','e8815502-3abd-4dc7-a5ae-013c4d7dc00c']],
+ 12:[3,2,['くりたる','02463a80-d495-4907-b95d-2e0bf0bfa887'],['内海ゆうま','1c2dca5c-ae09-4ffe-87ae-6176911eb7be']],
+ 13:[3,0,['ふぃる','b8ee0fe8-a574-4c3c-a37b-b746388064ec'],['がちのシャーク','d02e4ebd-1504-4724-bbcc-81263cee3779']]
+};
+const S36_SQUID_SOURCE='https://fortnitetracker.com/events/epicgames_S36_SquidGroundVictoryDuosCup_NAW?window=S36_VictoryDuosCup_Event6Round2_NAW';
+const S36_SQUID_RULE='https://www.fortnite.com/competitive/events/S36_SquidGroundVictoryDuosCup/?region=NAW';
+function validS36Squid7(r,entry){
+ const e=S36_SQUID_NAW_SEVEN[r?.rank];
+ if(!e||!entry||r.date!=='2025-08-02'||r.region!=='NAW'||
+    r.seasonId!=='S36'||r.chapter!==6||r.season!==3||
+    r.event!=='Squid Grounds Cash Cup'||r.tournamentId!=='ch6s3-squid-grounds-cash-cup'||
+    r.round!=='Event 6 · Round 2 / 賞金決勝'||r.kind!=='賞金決勝'||
+    r.id!=='s36-naw-squid-grounds-20250802-final-r'+r.rank||
+    r.points!==100||r.matches!==e[0]||r.kills!==e[1]||r.vrs!==1||
+    r.prize!==200||r.teamPrize!==200||r.prizePerPlayer!==100||
+    r.verified!==true||r.reviewOnly===true||
+    r.source!==S36_SQUID_SOURCE||entry.source!==r.source||
+    entry.rule!==S36_SQUID_RULE||entry.recordId!==r.id||
+    !Array.isArray(r.players)||r.players.length!==2||
+    !Array.isArray(r.profiles)||r.profiles.length!==2||
+    !Array.isArray(r.teamAccountIds)||r.teamAccountIds.length!==2||
+    r.player!==r.players.join(' / '))return false;
+ return [0,1].every(i=>{
+   let p=r.profiles[i],n=e[2+i][0],id=e[2+i][1];
+   try{return r.players[i]===n&&p.name===n&&
+      new URL(p.url).searchParams.get('id')?.toLowerCase()===id&&
+      r.teamAccountIds[i]===id.replace(/-/g,'')}
+   catch{return false}
+ });
+}
+
 function audit(results,ledger,players,{promotionEvidence}={}){
  let loadedPromotionEvidence=promotionEvidence;
  let loaded=false;
@@ -324,7 +362,7 @@ function audit(results,ledger,players,{promotionEvidence}={}){
   const rows=rowsById.get(entry.recordId)||[];
   if(rows.length!==1){errors.push('Published record missing or duplicate: '+entry.id);continue}
   const r=rows[0];
-  if(entry.decision!=='published'||!['attendance-only','verified-rule','cosmetic-rank','verified-vr','official-final-vr-award','verified-qualifier','verified-s32-final-100usd-vr','verified-trios-qualifier-participation-zero-cash',S30_DUOS_CASH_POLICY,S30_ZERO_DUOS_POLICY,S30_JUNE21_POLICY,S29_ME_ZB_DUOS_POLICY,S28_ME_ZB_DUOS_POLICY,S26_S28_ME_ZB_DUOS_2023_POLICY,S25_ME_ZB_DUOS_2023_POLICY,S22_S25_S31_PS_20261114_POLICY,S37_S39_S40_SEVEN_CASH_POLICY,S37_S41_OCE_FIVE_CASH_POLICY,EU_UNREAL_ME_TRIOS_FOUR_POLICY,KAME_ME_DUOS_TWO_POLICY,S41_CONSOLE_ZB_FOUR_POLICY,B0TER_S31_S38_NINE_POLICY,NAC_S29_S30_ZB_VC_TEN_POLICY,S27_S34_S31_PS_ZB_TEN_POLICY,ME_S31_PS_S26_CONSOLE_TEN_POLICY,NOV14_PENDING_CASH_POLICY,NOV15_NINE_POLICY].includes(entry.policy)){
+  if(entry.decision!=='published'||!['attendance-only','verified-rule','cosmetic-rank','verified-vr','official-final-vr-award','verified-qualifier','verified-s32-final-100usd-vr','verified-trios-qualifier-participation-zero-cash',S30_DUOS_CASH_POLICY,S30_ZERO_DUOS_POLICY,S30_JUNE21_POLICY,S29_ME_ZB_DUOS_POLICY,S28_ME_ZB_DUOS_POLICY,S26_S28_ME_ZB_DUOS_2023_POLICY,S25_ME_ZB_DUOS_2023_POLICY,S22_S25_S31_PS_20261114_POLICY,S37_S39_S40_SEVEN_CASH_POLICY,S37_S41_OCE_FIVE_CASH_POLICY,EU_UNREAL_ME_TRIOS_FOUR_POLICY,KAME_ME_DUOS_TWO_POLICY,S41_CONSOLE_ZB_FOUR_POLICY,B0TER_S31_S38_NINE_POLICY,NAC_S29_S30_ZB_VC_TEN_POLICY,S27_S34_S31_PS_ZB_TEN_POLICY,ME_S31_PS_S26_CONSOLE_TEN_POLICY,NOV14_PENDING_CASH_POLICY,NOV15_NINE_POLICY,'verified-s36-squid-naw-seven'].includes(entry.policy)){
    errors.push('Unknown decision/policy: '+entry.id);continue;
   }
   if(r.source!==entry.source||r.verified!==true)errors.push('Published source or verification flag changed: '+entry.id);
@@ -362,6 +400,7 @@ function audit(results,ledger,players,{promotionEvidence}={}){
   if(entry.policy===ME_S31_PS_S26_CONSOLE_TEN_POLICY&&!verifiedMePsConsoleTen(r,entry))errors.push('Incorrect 2023 ME Console Champions or 2024 ME SypherPK screenshot result, prize or Epic UUID: '+entry.id);
   if(entry.policy===NOV14_PENDING_CASH_POLICY&&!verifiedNov14Cash(r,entry))errors.push('Unverified Nov14 pending cash candidate, Epic ranking, original account ID, prize tier, or award evidence: '+entry.id);
    if(entry.policy===NOV15_NINE_POLICY&&!verifiedNov15Nine(r,entry))errors.push('Unverified Nov15 S29 NAC ZB / S36 PlayStation / S37 NAW Console original Epic UUID, placement, score or cash: '+entry.id);
+  if(entry.policy==='verified-s36-squid-naw-seven'&&!validS36Squid7(r,entry))errors.push('Unverified S36 NAW Squid Grounds duo Epic UUID, rank, kills or cash: '+entry.id);
   if(entry.policy==='cosmetic-rank'&&(r.kind!=='スキン大会'||r.prize!==0||r.reviewOnly===true||!cosmeticEvaluate(r).eligible))errors.push('Cosmetic winner is outside verified official rank range: '+entry.id);
   if(entry.policy==='verified-vr'&&!(r.kind==='賞金決勝'&&r.seasonId==='S30'&&r.tournamentId==='ch5s3-solo-victory-cup'&&r.region==='ME'&&r.source?.includes('/S30_SoloVictoryCashCup/')&&r.source?.includes('S30_SoloVictoryCashCup_Event7Round2_ME')&&Number.isSafeInteger(r.vrs)&&r.vrs>=1&&r.vrs<=3&&Number.isSafeInteger(r.matches)&&r.matches>=r.vrs&&r.matches<=3&&r.points===r.vrs*100&&r.prize===r.vrs*100&&r.verified===true&&r.reviewOnly!==true))errors.push('Cash final record lacks official per-VR proof: '+entry.id);
   if(entry.policy==='official-final-vr-award'&&!validCashFinal(r,entry))errors.push('Invalid official solo/duo VR award: '+entry.id);
