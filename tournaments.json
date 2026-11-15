@@ -47,6 +47,10 @@
         {
           "id": "elite-cup",
           "label": "Elite Cup"
+        },
+        {
+          "id": "console-champions-cup",
+          "label": "Console Champions Cup"
         }
       ]
     },
@@ -299,6 +303,10 @@
         {
           "id": "boter-fncs-cup",
           "label": "Boter FNCS Cup"
+        },
+        {
+          "id": "zero-build-console-champions-cup",
+          "label": "Zero Build Console Champions Cup"
         }
       ]
     },
@@ -2804,6 +2812,32 @@
         {
           "text": "Tracker S34_PlaystationCupFinal_NAW 2025/5/1決勝",
           "url": "https://fortnitetracker.com/events/epicgames_S34_PlaystationCup_NAW?window=S34_PlaystationCupFinal_NAW"
+        }
+      ]
+    },
+    {
+      "id": "ch4s4-zero-build-console-champions-cup",
+      "name": "Zero Build Console Champions Cup",
+      "chapter": 4,
+      "season": 4,
+      "seasonId": "S26",
+      "sourceEventIds": [
+        "S26_ConsoleChampionsCupZB"
+      ],
+      "series": "console-champions-cup",
+      "mode": "zero-build",
+      "subtype": "zero-build-console-champions-cup",
+      "team": "duo",
+      "platform": "console",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "2023-10-30 ME Final。ユーザー提供Tracker画像8枚と16名分のEpic UUIDを照合。2、4、5、7位のみ賞金。",
+          "url": "https://fortnitetracker.com/events/epicgames_S26_ConsoleChampionsCupZB_ME?window=S26_ConsoleChampionsCupZB_ME_Final"
+        },
+        {
+          "text": "Epic公式 Chapter 4 Season 4 Console Champions Cup Zero Build部門のMEチーム賞金：2位$550、4位$400、5位$350、7位$300、16位以下$0。",
+          "url": "https://www.fortnite.com/news/console-champions-cup-chapter-4-season-4-official-rules"
         }
       ]
     }
