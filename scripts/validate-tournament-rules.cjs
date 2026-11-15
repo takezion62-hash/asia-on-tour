@@ -65,7 +65,19 @@ function validateRegistry(doc,tournaments){
   if(rule.series==='victory-cup'){
    if(!positive(rule.matchCaps?.['予選'])||!positive(rule.matchCaps?.['賞金決勝']))fail(id,'Victory Cupの予選/決勝試合数上限が不足');
    if(!object(rule.advance)||!Object.keys(rule.advance).length||
-      Object.entries(rule.advance).some(([region,value])=>!REGIONS.has(region)||!positive(value)))fail(id,'地域別予選通過順位が不正');
+      Object.entries(rule.advance).some(([region,value])=>(!REGIONS.has(region)&&!(id==='ch7s5-squads-victory-cup'&&region==='ASIA'))||!positive(value)))fail(id,'地域別予選通過順位が不正');
+   // S43 Squads Battle Royale: one final win = 100pt, $50 per player,
+   // or $200 across four members. Never silently change another event.
+   if(id==='ch7s5-squads-victory-cup'&&(
+     rule.seasonId!=='S43'||rule.team!=='squad'||
+     JSON.stringify(rule.eventIds)!=='["S43_SquadsVictoryCup"]'||
+     rule.matchCaps['予選']!==8||rule.matchCaps['賞金決勝']!==3||
+     JSON.stringify(Object.keys(rule.advance).sort())!==JSON.stringify(['ASIA','BR','EU','ME','NAC','NAW','OCE'])||
+     rule.advance.EU!==300||rule.advance.NAC!==200||
+     ['ASIA','BR','ME','NAW','OCE'].some(region=>rule.advance[region]!==120)||
+     rule.prizePerVictory!==50||rule.teamPrizePerVictory!==200||
+     rule.finalWinPoints!==100||rule.autoApproval!==undefined
+   ))fail(id,'S43 Squads予選通過・決勝VR100pt・個人$50/チーム$200の公式条件が不一致');
    if(rule.cosmeticRanks!==undefined)fail(id,'Victory Cupにスキン順位は登録不可');
    if(rule.prizePerVictory!==undefined&&(!positive(rule.prizePerVictory)||rule.prizePerVictory>10000))fail(id,'VR賞金単価が不正');
    if(rule.autoApproval==='verified-qualifier-participation'){
