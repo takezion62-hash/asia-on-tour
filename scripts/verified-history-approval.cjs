@@ -29,6 +29,12 @@ function decide(row,win,checkpoint,data){
   return decline('順位表の取得が完了していません');
  const rule=RULES[row.tournamentId];
  if(!rule)return decline('未検証のシーズンまたは大会');
+  // Generic VR approval credits one record. An S43 squad record represents
+  // four people, and needs $200/team/VR, not $50/record/VR.
+  // Keep qualification in the dedicated verified-squad workflow and final
+  // awards in the separately screenshot-verified squad import workflow.
+  if(rule.id==='ch7s5-squads-victory-cup')
+   return decline('S43 Squadsは個人$50・チーム$200を区別する専用検証フローのみ掲載');
  if(rule.autoApproval==='verified-duo-qualifier-only')return decline('デュオ予選は公式Round1専用検証で判定');
  const catalog=data.tournaments.catalog.find(x=>x.id===row.tournamentId);
  if(!catalog||catalog.team!==(rule.team||'solo')||catalog.series!=='victory-cup'||catalog.seasonId!==rule.seasonId)return decline('大会カタログ不一致');

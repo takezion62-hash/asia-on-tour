@@ -91,7 +91,11 @@ test('official S41/S42 cutoffs are region and mode specific, never guessed for o
  assert.equal(advancementLimit(w('S42','ch7s4-console-zero-build-solo-victory-cup','EU')),2000);
  assert.equal(advancementLimit(w('S41','ch7s3-solo-reload-victory-cup','NAW')),320);
  assert.equal(advancementLimit(w('S42','ch7s4-reload-duos-victory-cup','ME')),120);
- assert.equal(advancementLimit(w('S43','ch7s5-squads-victory-cup','NAW')),null);
+ // S43 squad official regional cutoffs are registered; unrecognized regions stay unconfirmed.
+ assert.equal(advancementLimit(w('S43','ch7s5-squads-victory-cup','NAW')),120);
+ assert.equal(advancementLimit(w('S43','ch7s5-squads-victory-cup','NAC')),200);
+ assert.equal(advancementLimit(w('S43','ch7s5-squads-victory-cup','EU')),300);
+ assert.equal(advancementLimit(w('S43','ch7s5-squads-victory-cup','UNKNOWN')),null);
  assert.equal(advancementLimit(w('S42','ch7s4-solo-victory-cup','NAW','賞金決勝')),null);
 });
 

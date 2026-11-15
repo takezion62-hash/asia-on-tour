@@ -147,14 +147,18 @@
     const cash=['victory-cup','performance-evaluation'].includes(rule?.series)
       ?'<div class="source-rule-fact"><span>決勝賞金</span><strong>'+(
         Number.isFinite(rule.prizePerVictory)
-          ?'決勝1VRにつき'+(rule.series==='performance-evaluation'?'各選手':'')+'$'+fmtNumber(rule.prizePerVictory)+'（規則上）'
+          ?(rule.team==='squad'&&Number.isFinite(rule.teamPrizePerVictory)
+            ?'決勝1VRにつき各選手$'+fmtNumber(rule.prizePerVictory)+'（チーム合計$'+fmtNumber(rule.teamPrizePerVictory)+'）'
+            :'決勝1VRにつき'+(rule.series==='performance-evaluation'?'各選手':'')+'$'+fmtNumber(rule.prizePerVictory)+'（規則上）')
           :'VRごとの賞金単価は未登録（0VRは$0で記録可能）'
       )+'</strong></div>':'';
     const evalNote=rule?.series==='performance-evaluation'?
       '<p class="source-rule-warning">※ S43開催枠の通過対象は上位26。公式規則本文の一般表記は33のため、現行イベントの報酬欄・ユーザー確認に基づき26を採用。決勝はVR100ポイントにつき個人$400、チーム$1,200です。支払・資格審査完了までは未確認。</p>':'';
+    const squadsNote=rule?.id==='ch7s5-squads-victory-cup'?
+      '<p class="source-rule-warning">※ Round 1は地域別通過枠で判定し賞金$0。Round 2はビクロイのみ1VR=100ptで、最大3VR。各選手$50/VR、4名チーム合計$200/VR（3VRなら個人$150・チーム$600）。予選・決勝とも本人IDと順位表を検証し、未確認の賞金は掲載しません。</p>':'';
     const matchCaps=Object.entries(rule?.matchCaps||{}).map(([stage,limit])=>esc(stage)+' 最大'+fmtNumber(limit)+'試合').join(' / ');
     const details=present?
-      '<div class="source-rule-facts">'+conditions+cash+evalNote+
+      '<div class="source-rule-facts">'+conditions+cash+evalNote+squadsNote+
       '<div class="source-rule-fact"><span>試合数の上限</span><strong>'+esc(matchCaps||'未登録')+'</strong></div></div>'
       :'<p class="source-rule-warning">公式の地域別通過・賞金・スキン獲得条件は未登録です。順位だけから報酬を自動認定しません。</p>';
     return '<article class="source-rule-card" data-rule-id="'+esc(entry.id)+'">'+
