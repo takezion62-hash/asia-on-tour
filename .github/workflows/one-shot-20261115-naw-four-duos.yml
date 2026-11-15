@@ -24,6 +24,8 @@ jobs:
           node-version: '24'
       - name: 登録前の正本データ・マニフェスト整合性
         run: node scripts/source-results-store.cjs verify
+      - name: 登録スクリプトの構文検証
+        run: node --check scripts/one-shot-20261115-naw-four-duos.cjs
       - name: ユーザー画像・既存pegu別名・Epic ID・重複・賞金のdry-run
         run: node scripts/one-shot-20261115-naw-four-duos.cjs --dry-run
       - name: 4件を追加して既存選手と新規選手を紐付け
