@@ -2,6 +2,70 @@
   "version": 1,
   "entries": [
     {
+      "id": "review-publication-pending-20261114-f31b80abd2ec-verified-rule-1",
+      "date": "2026-11-15",
+      "type": "records",
+      "title": "管理者確認済み戦績 17件を追加",
+      "description": "公式規則に基づく予選突破または決勝0VRのみを確認。未確認賞金なし。",
+      "recordIds": [
+        "auto-s30-e9d39087caec",
+        "auto-s30-3f44b41c4b08",
+        "auto-s30-893f3357757f",
+        "auto-s30-0e3826af4725",
+        "auto-s30-6766aa4c5d25",
+        "auto-s30-abfa81587bbd",
+        "auto-s30-6423f9e149f2",
+        "auto-s30-5211123126cc",
+        "auto-s30-684c5a7927e8",
+        "auto-s30-254708b7b82d",
+        "auto-s30-549a99234be7",
+        "auto-s30-97bfbbf215e5",
+        "auto-s30-22dc897cc934",
+        "auto-s30-bdf684a38f6e",
+        "auto-s30-e8890f4ee34e",
+        "auto-s30-68efc5ac94a6",
+        "auto-s30-b5a85ff529c0"
+      ]
+    },
+    {
+      "id": "review-publication-pending-20261114-f31b80abd2ec-attendance-only-1",
+      "date": "2026-11-15",
+      "type": "records",
+      "title": "管理者確認済み戦績 10件を追加",
+      "description": "Epic ID・開催枠・順位表を再照合した出場確認のみ。賞金・予選突破・スキン獲得を未認定。",
+      "recordIds": [
+        "auto-s41-f40fa0679acb",
+        "auto-s32-363f78f0fe38",
+        "auto-s33-195c48f82202",
+        "auto-s33-ff8f1af1bd86",
+        "auto-s33-5b2d1c48305f",
+        "auto-s33-c96c682f520b",
+        "auto-s33-dd5f6b2b75a7",
+        "auto-s33-f6e0a2c3c5cc",
+        "auto-s33-5c9956d59572",
+        "auto-s33-142d50666852"
+      ]
+    },
+    {
+      "id": "tracker-20261115-me-s31-ps-s26-console-zb-ten",
+      "date": "2026-11-15",
+      "type": "records",
+      "title": "ME 2024 SypherPK2件と2023 ZB Console Champions Cup決勝8組",
+      "description": "ユーザー提供画像10枚・各選手Epic UUIDを照合。2024/9/2 ME PlayStation SypherPK Cup決勝92位TakoBeL・94位Solary Kurаmа各$200。2023/10/30 ME Zero Build Console Champions Cup決勝2位$550、4位$400、5位$350、7位$300、24/33/35/46位$0の8組。新規プロフィール5名、既存選手を維持、Eliy=Tracker Wcr oco名義。チーム賞金$2,000・個人配分合計$2,000。賞金なしも同じ決勝枠へ統合、実際の支払いは未確認。",
+      "recordIds": [
+        "s31-me-ps-sypherpk-final-20240902-takobel",
+        "s31-me-ps-sypherpk-final-20240902-solary-kurama",
+        "s26-me-zb-console-champions-final-20231030-shinou-asuka",
+        "s26-me-zb-console-champions-final-20231030-alive-alivenoah",
+        "s26-me-zb-console-champions-final-20231030-hero-rintaro",
+        "s26-me-zb-console-champions-final-20231030-kyoukai-kana",
+        "s26-me-zb-console-champions-final-20231030-112345-beautiful",
+        "s26-me-zb-console-champions-final-20231030-meip-mar",
+        "s26-me-zb-console-champions-final-20231030-raru-mv",
+        "s26-me-zb-console-champions-final-20231030-eliy-p1ng"
+      ]
+    },
+    {
       "id": "auto-sync-20261114235702",
       "date": "2026-11-15",
       "type": "records",
