@@ -98,6 +98,8 @@ jobs:
         run: npm run validate
       - name: Verify season shards agree with source manifest and legacy projection
         run: node scripts/build-source-results.cjs --check
+      - name: S32 NAC Event3/4の開催日と元順位表を照合（掲載せずプレビュー）
+        run: node scripts/publish-s32-nac-event3-4-zero-vr-review.cjs --dry-run
       - name: 過去大会の検証を安全に並列化（すべて--dry-run・全件必須）
         run: node scripts/run-historical-dry-runs.cjs
       - name: 戦績データ更新は公開索引・確認待ち索引の正確な一致を確認

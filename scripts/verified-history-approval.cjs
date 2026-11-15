@@ -45,13 +45,16 @@ function decide(row,win,checkpoint,data){
   (exactLegacyNacQualifier?verifiedNacWindow.cutoff:undefined);
  const oldNacZeroFinal=['S30','S31'].includes(rule.seasonId)&&rule.team==='solo'&&
   row.region==='NAC'&&row.kind==='賞金決勝'&&row.vrs===0&&row.prize===null;
- // S32 (Chapter 2 Remix) also awards cash only for final-round VRs.
- // Allow exactly two separately documented 2024 NAC cash-final windows;
- // this does not make their Round 1 qualification rules global.
+ // S32 (Chapter 2 Remix) pays cash only for final-round VRs.
+ // Exact four NAC Round 2 windows were independently checked against the
+ // 2024-11 archived Epic calendar and Fortnite Tracker event schedule.
+ // Never infer an NAC Round 1 qualification cutoff from this allowlist.
  const s32ZeroFinalWindow=rule.seasonId==='S32'&&rule.team==='solo'&&
   row.region==='NAC'&&row.kind==='賞金決勝'&&row.vrs===0&&row.prize===null&&
   (['2024-11-09|S32_SoloVictoryCashCup_Event1Round2_NAC',
-    '2024-11-16|S32_SoloVictoryCashCup_Event2Round2_NAC']
+    '2024-11-16|S32_SoloVictoryCashCup_Event2Round2_NAC',
+    '2024-11-23|S32_SoloVictoryCashCup_Event3Round2_NAC',
+    '2024-11-26|S32_SoloVictoryCashCup_Event4Round2_NAC']
    .includes(row.date+'|'+win.windowId));
  if(row.date!==win.dateJst||row.region!==win.region||
   (qualifierCutoff===undefined&&!oldNacZeroFinal&&!s32ZeroFinalWindow)||
