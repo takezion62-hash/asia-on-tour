@@ -38,6 +38,8 @@ on:
       - scripts/apply-s31-ps-s26-console-zb-ten.cjs
       - scripts/verified-s31-ps-s26-console-zb-ten.cjs
       - scripts/apply-nov15-nac-ps-naw-nine.cjs
+      - scripts/promote-published-cash.cjs
+      - data/manual-approvals/20261115-naw-trios-cash-fifth-proof.json
       - scripts/verified-nov15-nac-ps-naw-nine.cjs
       - data/manual-approvals/20261115-nac-s29-ps-s36-naw-s37-nine-proof.json
       - data/manual-approvals/20261115-me-s31-ps-s26-console-zb-ten-proof.json
@@ -152,6 +154,9 @@ jobs:
             node scripts/apply-s31-ps-s26-console-zb-ten.cjs
             node scripts/apply-nov15-nac-ps-naw-nine.cjs --dry-run
             node scripts/apply-nov15-nac-ps-naw-nine.cjs
+            node scripts/promote-published-cash.cjs --dry-run
+            node scripts/promote-published-cash.cjs --apply
+            node --test tests/published-cash-promotion.test.cjs
             node scripts/publish-nov14-pending-cash.cjs --dry-run
             node scripts/publish-nov14-pending-cash.cjs
             node scripts/reconcile-pending-hamikuma-20261114.cjs --dry-run

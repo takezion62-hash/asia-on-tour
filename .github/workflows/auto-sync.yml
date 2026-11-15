@@ -13,6 +13,7 @@ on:
       - "scripts/auto-sync-core.cjs"
       - "scripts/automatic-cosmetic-approval.cjs"
       - "scripts/automatic-cash-approval.cjs"
+      - "scripts/promote-published-cash.cjs"
       - "scripts/participation-promotion.cjs"
       - "scripts/automatic-unreal-approval.cjs"
       - "scripts/automatic-performance-approval.cjs"
@@ -136,7 +137,10 @@ jobs:
             node scripts/source-results-store.cjs verify
             node scripts/participation-promotion.cjs --dry-run
             node scripts/participation-promotion.cjs
+            node scripts/promote-published-cash.cjs --dry-run
+            node scripts/promote-published-cash.cjs --apply
             npm run validate
+            node --test tests/published-cash-promotion.test.cjs
             node --test tests/participation-promotion.test.cjs tests/automatic-cash-approval.test.cjs
             # Writes only altered season/result shard files and affected
             # aggregate rankings; no worldwide provider or historic rescan.

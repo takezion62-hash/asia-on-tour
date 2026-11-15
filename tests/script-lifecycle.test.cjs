@@ -135,8 +135,9 @@ test('14件のJST開催日修正と4件の重複解消は古い実行ファイ�
  const results=require('./production-results.cjs');
  const byId=new Map(results.map(r=>[r.id,r]));
  assert.equal(byId.size,results.length,'published IDs must remain unique');
+ // Epic's NAW Event 5 is October 17 JST, not Event 3 on October 13.
  const dates={
-  's42-naw-reload-solo-20261017-taiga':'2026-10-13',
+  's42-naw-reload-solo-20261017-taiga':'2026-10-17',
   's42-naw-reload-solo-20261002-shiroka':'2026-10-03',
   'official-shiroka-champion-2026':'2026-09-21',
   's42-me-megaman-cup-20260908-maguro-osydd':'2026-09-09',
@@ -157,8 +158,17 @@ test('14件のJST開催日修正と4件の重複解消は古い実行ファイ�
   assert.ok(row,'JST-corrected achievement must remain: '+id);
   assert.equal(row.date,date,'JST event date changed for '+id);
   assert.ok(row.source,'original result source must remain for '+id);
-  assert.match(row.note||'',/開催日表記をEpic大会ウィンドウの日本時間/,
-   'JST correction evidence must remain for '+id);
+  if(id==='s42-naw-reload-solo-20261017-taiga'){
+   // This record was independently reconciled from the user's screenshot:
+   // the old Event 3 Oct 13 wording was corrected to Event 4 Oct 17.
+   assert.match(row.note||'',/旧表示の2026-10-13 Event 3 決勝・5位を修正。正しくは2026-10-17 NAW Solo Reload Victory Cup Event 4 Round 2 決勝4位/,
+    'specific correction evidence must remain for '+id);
+   assert.match(row.note||'',/fortnitetracker\.com\/events\/epicgames_S42_ReloadReloadSoloVictoryCup_NAW/,
+    'corrected event source evidence must remain for '+id);
+  }else{
+   assert.match(row.note||'',/開催日表記をEpic大会ウィンドウの日本時間/,
+    'JST correction evidence must remain for '+id);
+  }
  }
  const duplicates={
   'auto-s42-0b675770d2ed':'s42-nac-solo-vc-final-20260913-blaze',
