@@ -173,7 +173,9 @@ if(added.length||promoted.length){
  updates.entries.unshift({id:proof.batch.id,date:'2026-11-15',type:'records',
   title:'2024 NAC ZB Duos／2025 NAC PlayStation／2025 NAW Console Duos決勝：9件',
   description:'画像10枚とEpic UUIDを厳格照合。2024/4/4 NAC Zero Buildデュオ4組（各$200）、2025/7/27 NAC PlayStation決勝p1ngの既存参加確認を88位$240に補完、2025/10/26 NAW Consoleデュオ4組（各$200）。チーム賞金+$1,840、重複ゼロ。',
-  recordIds:added.concat(promoted).map(r=>r.id)});
+  // Existing p1ng was already announced in an earlier update; its cash correction
+  // is described above but must NOT repeat its ID in the new-record announcement.
+  recordIds:added.map(r=>r.id)});
 }
 const report=validateData({results,players,tournaments});
 must(!report.errors.length,'data integrity '+JSON.stringify(report.errors.slice(0,8)));
