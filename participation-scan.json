@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-11-15T15:27:56.021Z",
+  "checkedAt": "2026-11-15T21:26:14.164Z",
   "windows": {
     "epicgames_S42_InoxtagIconCup_NAW/S42_InoxtagIconCup_NAW": {
       "nextPage": 60,
@@ -48,12 +48,12 @@
       "emptyAttempts": 0
     },
     "epicgames_S42_ConsoleVCC_SolosZB_NAW/S42_ConsoleVCC_SolosZB_Event8Round1_NAW": {
-      "nextPage": 50,
-      "pages": 50,
-      "complete": false,
-      "coverageLimited": false,
+      "nextPage": 60,
+      "pages": 60,
+      "complete": true,
+      "coverageLimited": true,
       "totalPages": 100,
-      "lastScanned": "2026-11-09T03:41:33.630Z",
+      "lastScanned": "2026-11-15T21:25:54.356Z",
       "emptyAttempts": 0
     },
     "epicgames_S41_PSTypicalGamer_BR/S41_PSTypicalGamer_Final_BR": {
@@ -936,12 +936,12 @@
       "emptyAttempts": 0
     },
     "epicgames_S30_SoloVictoryCashCup_ME/S30_SoloVictoryCashCup_Event2Round1_ME": {
-      "nextPage": 50,
-      "pages": 50,
-      "complete": false,
-      "coverageLimited": false,
+      "nextPage": 60,
+      "pages": 60,
+      "complete": true,
+      "coverageLimited": true,
       "totalPages": 100,
-      "lastScanned": "2026-11-15T15:27:47.504Z",
+      "lastScanned": "2026-11-15T21:26:06.024Z",
       "emptyAttempts": 0
     },
     "epicgames_S30_SoloVictoryCashCup_BR/S30_SoloVictoryCashCup_Event1Round2_BR": {
@@ -1080,12 +1080,12 @@
       "emptyAttempts": 0
     },
     "epicgames_S33_SoloCashCup_NAW/S33_SoloCashCup_Event5Round1_NAW": {
-      "nextPage": 20,
-      "pages": 20,
+      "nextPage": 30,
+      "pages": 30,
       "complete": false,
       "coverageLimited": false,
       "totalPages": 100,
-      "lastScanned": "2026-11-15T15:27:56.021Z",
+      "lastScanned": "2026-11-15T21:26:14.164Z",
       "emptyAttempts": 0
     },
     "epicgames_S30_DuosCashCup_OCE/S30_DuosCashCup_Event1Round1_OCE": {
@@ -1095,6 +1095,15 @@
       "coverageLimited": false,
       "totalPages": 51,
       "lastScanned": "2026-11-15T09:32:29.441Z",
+      "emptyAttempts": 0
+    },
+    "epicgames_S43_ReloadZBDuosCashCup_EU/S43_ReloadZBDuosCashCup_Event2Round1_EU": {
+      "nextPage": 10,
+      "pages": 10,
+      "complete": false,
+      "coverageLimited": false,
+      "totalPages": 100,
+      "lastScanned": "2026-11-15T21:25:46.350Z",
       "emptyAttempts": 0
     }
   }
