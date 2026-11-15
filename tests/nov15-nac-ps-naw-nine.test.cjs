@@ -14,6 +14,11 @@ test('nine screenshot proofs have immutable score, Epic UUID, team/personal awar
  assert.equal(V.FIXED.length,9);
  assert.equal(new Set(V.TARGETS.map(x=>x.id)).size,9);
  assert.equal(V.TARGETS.reduce((s,t)=>s+t.prize,0),1840);
+ const linked=V.TARGETS.find(t=>t.id==='s37-naw-console-duos-final-20251026-kumafv-chromeret');
+ assert.equal(linked.players[0],'Cue.Ganondorf');
+ assert.equal(linked.confirmedDisplayAlias,'くまえふぶい');
+ assert.equal(linked.profiles[0].id,'5aa76ea4-2a16-4e4e-ac2a-e3da5a0d8ed2');
+ assert.equal(V.expected({...linked,confirmedDisplayAlias:'someone else'}),false);
  assert.deepEqual(V.TARGETS.map(t=>[t.seasonId,t.date,t.region,t.rank,t.kills,t.vrs,t.prize]),[
   ['S29','2024-04-04','NAC',20,21,1,200],
   ['S29','2024-04-04','NAC',67,12,1,200],
