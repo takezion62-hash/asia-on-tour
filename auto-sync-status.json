@@ -1,24 +1,24 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-15T14:06:30.582Z",
+  "checkedAt": "2026-11-15T16:53:33.915Z",
   "mode": "review",
   "scope": "recent",
   "dateMode": null,
-  "selectedWindows": 5,
+  "selectedWindows": 3,
   "fromDate": null,
   "toDate": null,
   "provider": "osirion",
   "linkedPlayers": 665,
-  "trackedWindows": 96,
+  "trackedWindows": 95,
   "found": 0,
   "skipped": 0,
-  "imported": 3,
-  "scannedPages": 44,
+  "imported": 1,
+  "scannedPages": 30,
   "completedWindows": 92,
   "identityConflicts": 3,
-  "alreadyRegistered": 181,
-  "autoApprovedTotal": 2791,
+  "alreadyRegistered": 185,
+  "autoApprovedTotal": 2808,
   "invalidCachedCandidates": 0,
   "manualReviewCandidates": 0,
   "autoApprovedCosmeticThisRun": 0,
@@ -30,7 +30,7 @@
   "transientFailures": 0,
   "malformedFailures": 0,
   "skippedLeaderboards": [],
-  "reviewOnlyWindows": 84,
+  "reviewOnlyWindows": 83,
   "reviewOnlyCandidates": 0,
   "unmappedEvents": 3,
   "unmappedEventIds": [
@@ -38,30 +38,25 @@
     "S42_InoxtagIconCup_ZB",
     "S42_InoxtagIconMobileCup"
   ],
-  "message": "最新版と安全統合：新規掲載3件、重複スキップ0件、要確認の競合0件、確認待ち0件。既存の戦績・賞金は保持。",
+  "message": "最新版と安全統合：新規掲載1件、重複スキップ0件、要確認の競合0件、確認待ち0件。既存の戦績・賞金は保持。",
   "concurrentMerge": {
-    "appended": 3,
+    "appended": 1,
     "alreadyPublished": 0,
     "reviewConflicts": 0,
     "keptPending": 0,
-    "reconciledAt": "2026-11-15T14:06:34.152Z"
+    "reconciledAt": "2026-11-15T16:53:38.386Z"
   },
   "coverage": {
-    "total": 96,
+    "total": 95,
     "completed": 92,
     "notStarted": 0,
-    "partial": 4,
+    "partial": 3,
     "retryWaiting": 0,
     "retryDue": 0,
-    "remaining": 4,
+    "remaining": 3,
     "retryCount": 0,
-    "completionPercent": 95.8,
+    "completionPercent": 96.8,
     "byRegion": {
-      "EU": {
-        "total": 19,
-        "completed": 17,
-        "pending": 2
-      },
       "ME": {
         "total": 14,
         "completed": 13,
@@ -71,6 +66,11 @@
         "total": 15,
         "completed": 15,
         "pending": 0
+      },
+      "EU": {
+        "total": 18,
+        "completed": 17,
+        "pending": 1
       },
       "NAC": {
         "total": 19,
@@ -90,31 +90,20 @@
     },
     "byYear": {
       "2026": {
-        "total": 96,
+        "total": 95,
         "completed": 92,
-        "pending": 4
+        "pending": 3
       }
     },
-    "outsideScopeCheckpoints": 27,
+    "outsideScopeCheckpoints": 28,
     "samples": [
-      {
-        "window": "epicgames_S42_ArenaCashCup_EU/S42_ArenaCashCup_Event1_EU",
-        "date": "2026-10-25",
-        "region": "EU",
-        "series": "cash-cup",
-        "status": "partial",
-        "nextPage": 57,
-        "totalPages": 100,
-        "retryAfter": null,
-        "errorCode": null
-      },
       {
         "window": "epicgames_S42_InoxtagIconCup_ME/S42_InoxtagIconCup_ME",
         "date": "2026-10-26",
         "region": "ME",
         "series": "icon-cup",
         "status": "partial",
-        "nextPage": 78,
+        "nextPage": 88,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
@@ -125,7 +114,7 @@
         "region": "EU",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 41,
+        "nextPage": 51,
         "totalPages": 74,
         "retryAfter": null,
         "errorCode": null
@@ -136,7 +125,7 @@
         "region": "OCE",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 27,
+        "nextPage": 37,
         "totalPages": 50,
         "retryAfter": null,
         "errorCode": null
@@ -145,7 +134,7 @@
   },
   "manuallyPublished": 320,
   "lastReviewedBatchAt": "2026-11-15T02:30:48.549Z",
-  "autoApprovedDuoQualifierThisRun": 3,
+  "autoApprovedDuoQualifierThisRun": 1,
   "latestManualReview": {
     "reviewedAt": "2026-11-12T04:01:32.087Z",
     "reviewedCandidates": 14,
