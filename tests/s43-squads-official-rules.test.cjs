@@ -64,4 +64,6 @@ test('SOURCES script remains valid Javascript and distinguishes squad/team cash'
  assert.doesNotThrow(()=>new Function(ui),'SOURCES JS must parse before expensive browser suites');
  assert.match(ui,/teamPrizePerVictory/);
  assert.match(ui,/squadsNote/);
+ assert.match(ui,/conditions\+cash\+evalNote\+squadsNote\+/,'SOURCES must reference both runtime variables separately');
+ assert.doesNotMatch(ui,/evalNotesquadsNote/,'Concatenated undefined identifier breaks all SOURCES cards');
 });
