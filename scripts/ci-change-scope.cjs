@@ -14,7 +14,45 @@ const SOURCE_SHARD=/^source-results\/(?:S[1-9]\d*|unknown)\.json$/;
 const OUTPUT=/^season-data\/(?:S[1-9]\d*|unknown|ranking-(?:S[1-9]\d*|unknown|all)|manifest)\.json$/;
 const REVIEW_REPORT=/^review-reports\/\d{4}-\d{2}-\d{2}(?:-[a-z0-9-]+)?\.md$/;
 const SOURCE_MANIFEST='source-results/manifest.json';
-function classify(files,{workflowBefore,workflowAfter}={}){
+// Pure roster-alias additions can use the same strict data CI as a source
+// publication, but ONLY when the trusted base and proposed JSON prove that
+// canonical players and all existing alias ownership are unchanged.
+function appendOnlyPlayerAliases(beforeText,afterText){
+ if(typeof beforeText!=='string'||typeof afterText!=='string'||
+    beforeText.length>2*1024*1024||afterText.length>2*1024*1024)return false;
+ let old,next;
+ try{old=JSON.parse(beforeText);next=JSON.parse(afterText)}catch{return false}
+ const plain=x=>x!==null&&typeof x==='object'&&!Array.isArray(x);
+ if(!plain(old)||!plain(next)||
+    JSON.stringify(Object.keys(old).sort())!==JSON.stringify(Object.keys(next).sort())||
+    !Array.isArray(old.candidates)||!Array.isArray(next.candidates)||
+    JSON.stringify(old.candidates)!==JSON.stringify(next.candidates)||
+    !plain(old.confirmedAliases)||!plain(next.confirmedAliases))return false;
+ // No extra top-level file payload may change.
+ for(const key of Object.keys(old))
+   if(key!=='confirmedAliases'&&JSON.stringify(old[key])!==JSON.stringify(next[key]))return false;
+ const names=old.candidates.map(p=>p?.name);
+ if(names.some(n=>typeof n!=='string'||!n)||new Set(names).size!==names.length)return false;
+ const canonical=new Set(names),claimed=new Map(names.map(n=>[n,n]));
+ const previous=old.confirmedAliases,current=next.confirmedAliases;
+ let added=0;
+ for(const [owner,aliases] of Object.entries(current)){
+  if(!canonical.has(owner)||!Array.isArray(aliases))return false;
+  const before=Object.prototype.hasOwnProperty.call(previous,owner)?previous[owner]:[];
+  if(!Array.isArray(before)||aliases.length<before.length||
+     before.some((value,i)=>aliases[i]!==value))return false;
+  for(let i=0;i<aliases.length;i++){
+   const alias=aliases[i];
+   if(typeof alias!=='string'||!alias.trim()||alias.length>1024||
+      claimed.has(alias))return false;
+   claimed.set(alias,owner);
+   if(i>=before.length){if(alias.length>256)return false;added++}
+  }
+ }
+ if(Object.keys(previous).some(owner=>!Object.prototype.hasOwnProperty.call(current,owner)))return false;
+ return added>0;
+}
+function classify(files,{workflowBefore,workflowAfter,playersBefore,playersAfter}={}){
  if(!Array.isArray(files)||files.length===0)return {mode:'full',reason:'no-changes'};
  if(files.length>3000)return {mode:'full',reason:'too-many-changes'};
  let shard=false,manifest=false,allData=true;
@@ -33,10 +71,21 @@ function classify(files,{workflowBefore,workflowAfter}={}){
   // Unknown paths remain rejected by the allowlisted, trusted focused selector.
   continue;
  }
- // A single source shard and the corresponding manifest are mandatory for the
- // existing data-only fast path; no mixed code+data bypass is permitted.
+ // Canonical records + manifest: safe, strict data-only verification.
  if(allData && shard && manifest)return {mode:'data',reason:'verified-records-paths-only'};
- if(shard||manifest)return {mode:'full',reason:'mixed-or-incomplete-source-store-diff'};
+ // A player alias append has no new result IDs or cash: compare BOTH trusted
+ // base and proposed JSON, and forbid approvals, source edits or unrelated files.
+ if(allData&&!shard&&!manifest&&seen.has('players.json')&&
+    [...seen].every(p=>p==='players.json'||p==='candidate-triage.json'||OUTPUT.test(p))&&
+    appendOnlyPlayerAliases(playersBefore,playersAfter))
+   return {mode:'data',reason:'append-only-player-aliases'};
+ // Data and executable code in the same PR must NEVER bypass full CI. Split
+ // into validation/test PR first, then canonical data-only PR after merge.
+ if(shard&&manifest&&!allData)
+   return {mode:'full',reason:'mixed-data-and-code-split-pr'};
+ if(shard||manifest)return {mode:'full',reason:'incomplete-source-store-or-unsafe-mixed-diff'};
+ if(seen.has('players.json'))
+   return {mode:'full',reason:'unsafe-or-unverified-player-metadata-diff'};
  const choice=focused.select(files);
  if(!choice)return {mode:'full',reason:'code-or-unknown-change'};
  if(files.some(x=>x.path==='.github/workflows/build-season-data.yml')&&
@@ -80,14 +129,23 @@ function detect(env=process.env,git=execFileSync){
    '--name-status','-z',before,after,'--'
   ],{maxBuffer:8*1024*1024});
   const files=parseNameStatus(changes);
-  let workflowBefore,workflowAfter;
+  let workflowBefore,workflowAfter,playersBefore,playersAfter;
   if(files.some(x=>x.path==='.github/workflows/build-season-data.yml')){
    workflowBefore=git('git',['show',before+':.github/workflows/build-season-data.yml'],
     {maxBuffer:2*1024*1024}).toString('utf8');
    workflowAfter=git('git',['show',after+':.github/workflows/build-season-data.yml'],
     {maxBuffer:2*1024*1024}).toString('utf8');
   }
-  return classify(files,{workflowBefore,workflowAfter});
+  // Read identities only for a potential roster-only data PR. All other
+  // changes stay on the existing fail-closed code/data classification paths.
+  if(files.some(x=>x.path==='players.json')&&
+     !files.some(x=>x.path.startsWith('source-results/'))){
+   playersBefore=git('git',['show',before+':players.json'],
+    {maxBuffer:2*1024*1024}).toString('utf8');
+   playersAfter=git('git',['show',after+':players.json'],
+    {maxBuffer:2*1024*1024}).toString('utf8');
+  }
+  return classify(files,{workflowBefore,workflowAfter,playersBefore,playersAfter});
  }catch{return {mode:'full',reason:'git-diff-failed'}}
 }
 if(require.main===module){
@@ -100,4 +158,4 @@ if(require.main===module){
    'publisher_files='+(result.publisherFiles||[]).join(' ')+'\n');
  console.log('Change-aware CI: '+result.mode+' ('+result.reason+')');
 }
-module.exports={classify,parseNameStatus,detect,safeSha};
+module.exports={classify,appendOnlyPlayerAliases,parseNameStatus,detect,safeSha};
