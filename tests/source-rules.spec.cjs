@@ -202,3 +202,24 @@ test('Arenas Solo Cash Cup displays true 2h duration, Platinum eligibility and E
  await expect(card).toContainText('$200');
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth+2)).toBe(true);
 });
+
+test('S43 Squads Victory Cup shows region cutoffs and per-player/team final cash without page errors',async({page})=>{
+ const errors=[];page.on('pageerror',error=>errors.push(error.message));
+ await page.goto('/?season=all#about');
+ await expect(page.locator('#source-rule-overview')).toContainText(`公式規則登録 ${officialRuleCount}`);
+ await page.locator('#source-rule-search').fill('squads victory');
+ const card=page.locator('.source-rule-card[data-rule-id="ch7s5-squads-victory-cup"]');
+ await expect(card).toBeVisible();
+ await expect(card).toContainText('最大8試合');
+ await expect(card).toContainText('最大3試合');
+ await expect(card).toContainText('各選手$50');
+ await expect(card).toContainText('チーム合計$200');
+ await expect(card).toContainText('1VR=100pt');
+ await page.locator('#source-rule-region').selectOption('EU');
+ await expect(card).toContainText('上位300');
+ await page.locator('#source-rule-region').selectOption('NAC');
+ await expect(card).toContainText('上位200');
+ await page.locator('#source-rule-region').selectOption('NAW');
+ await expect(card).toContainText('上位120');
+ expect(errors).toEqual([]);
+});
