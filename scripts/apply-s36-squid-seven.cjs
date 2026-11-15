@@ -145,7 +145,7 @@ function main(){
  must(new Set(results.map(r=>r.id)).size===results.length,'duplicate record IDs');
  must(results.length===originalCount+added.length,'record loss');
  const nextCash=results.reduce((n,r)=>n+personalCents(r)*roster(r).length,0);
- must(nextCash-originalCash===added.length*200,'incorrect total cash delta');
+ must(nextCash-originalCash===added.length*20000,'incorrect total cash delta');
  if(added.length){
    must(!updates.entries.some(e=>e.id===BATCH),'duplicate announcement');
    updates.entries.unshift({id:BATCH,date:'2026-11-15',type:'records',
@@ -167,7 +167,7 @@ function main(){
  }
  console.log('S36_SQUID7 '+JSON.stringify({dry,added:added.length,already:already.length,
   renamedHistoricalRecords:renamed,newPlayers,newAliases,
-  cashDelta:nextCash-originalCash,totalRecords:results.length}));
+  cashDelta:(nextCash-originalCash)/100,totalRecords:results.length}));
 }
 if(require.main===module)main();
 module.exports={PROOF,POLICY,BATCH,SOURCE,RULE};
