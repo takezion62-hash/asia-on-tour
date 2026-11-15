@@ -2,6 +2,36 @@
   "version": 1,
   "status": "review",
   "checkedAt": "2026-11-07T13:02:44.444Z",
-  "proposals": [],
+  "proposals": [
+    {
+      "id": "auto-s42-0e0c0bc2634c",
+      "date": "2026-10-25",
+      "region": "OCE",
+      "player": "はるぴん / NXFZ 今更だって僕は言うかな",
+      "playerRaw": "harupinehgdnhdez / fortis かわちゃんしー別班",
+      "event": "Inoxtag Icon Cup Battle Royale",
+      "round": "単一開催枠 / 参加確認",
+      "rank": 791,
+      "points": 242,
+      "kills": 1,
+      "vrs": 0,
+      "prize": null,
+      "kind": "参加確認",
+      "matches": 7,
+      "seasonId": "S42",
+      "chapter": 7,
+      "season": 4,
+      "tournamentId": "ch7s4-inoxtag-icon-cup-battle-royale",
+      "source": "https://www.fortnite.com/competitive/events/S42_InoxtagIconCup/?region=OCE&round=S42_InoxtagIconCup_OCE",
+      "verified": true,
+      "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+      "reviewOnly": true,
+      "reviewReason": "公式の順位条件を登録していない大会",
+      "players": [
+        "はるぴん",
+        "NXFZ 今更だって僕は言うかな"
+      ]
+    }
+  ],
   "manualReviewedAt": "2026-11-14T22:15:47.666Z"
 }

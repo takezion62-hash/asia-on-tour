@@ -1,7 +1,7 @@
 {
   "version": 1,
   "sourceCheckedAt": "2026-11-07T23:16:39.215Z",
-  "total": 42,
+  "total": 43,
   "alreadyResolved": 0,
   "byYear": [
     {
@@ -11,6 +11,10 @@
     {
       "name": "2025",
       "count": 8
+    },
+    {
+      "name": "2026",
+      "count": 1
     }
   ],
   "byRegion": [
@@ -25,9 +29,17 @@
     {
       "name": "NAW",
       "count": 8
+    },
+    {
+      "name": "OCE",
+      "count": 1
     }
   ],
   "byTournament": [
+    {
+      "name": "Inoxtag Icon Cup Battle Royale / OCE / 2026",
+      "count": 1
+    },
     {
       "name": "PlayStation SypherPK Cup / ME / 2024",
       "count": 7
@@ -60,7 +72,7 @@
     },
     {
       "name": "partial-scan",
-      "count": 33
+      "count": 34
     }
   ],
   "queue": [
@@ -1446,6 +1458,39 @@
         "seenPages": 74,
         "totalPages": 100,
         "sourceKey": "epicgames_S33_SoloCashCup_NAW/S33_SoloCashCup_Event5Round1_NAW",
+        "possibleExistingId": null
+      },
+      "rewardState": "cash-unconfirmed"
+    },
+    {
+      "id": "auto-s42-0e0c0bc2634c",
+      "origin": "recent",
+      "date": "2026-10-25",
+      "year": "2026",
+      "region": "OCE",
+      "tournamentId": "ch7s4-inoxtag-icon-cup-battle-royale",
+      "event": "Inoxtag Icon Cup Battle Royale",
+      "round": "単一開催枠 / 参加確認",
+      "player": "はるぴん / NXFZ 今更だって僕は言うかな",
+      "kind": "参加確認",
+      "rank": 791,
+      "points": 242,
+      "kills": 1,
+      "vrs": 0,
+      "prize": null,
+      "source": "https://www.fortnite.com/competitive/events/S42_InoxtagIconCup/?region=OCE&round=S42_InoxtagIconCup_OCE",
+      "status": "partial-scan",
+      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
+      "reason": "公式の順位条件を登録していない大会",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": false,
+        "observedPartial": true,
+        "seenPages": 10,
+        "totalPages": 79,
+        "sourceKey": "epicgames_S42_InoxtagIconCup_OCE/S42_InoxtagIconCup_OCE",
         "possibleExistingId": null
       },
       "rewardState": "cash-unconfirmed"
