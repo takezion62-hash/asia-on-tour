@@ -9,6 +9,7 @@
  */
 const fs=require('node:fs');
 const path=require('node:path');
+const crypto=require('node:crypto');
 const root=path.resolve(__dirname,'..');
 const {readResults,publishResults}=require('./source-results-store.cjs');
 const {RULES,cashPrize,cashLimitForWindow,decide}=require('./automatic-cash-approval.cjs');
@@ -18,18 +19,20 @@ const fields=['id','date','region','player','playerRaw','event','round','rank','
  'kills','vrs','prize','kind','matches','seasonId','chapter','season','tournamentId',
  'source','verified','players','teamAccountIds'];
 const json=x=>JSON.stringify(x);
+const sha256=x=>crypto.createHash('sha256').update(json(x)).digest('hex');
+const HISTORY_FILE='cash-promotion-history.json';
 const matchPublished=(published,candidate)=>
  published?.verified===true&&published.kind==='参加確認'&&published.prize===null&&
  candidate?.verified===true&&candidate.reviewOnly===true&&
  fields.every(key=>json(published[key])===json(candidate[key]));
 function indexedProposals(...documents){
  const index=new Map();
- for(const doc of documents){
+ for(const [documentIndex,doc] of documents.entries()){
   for(const [key,cp] of Object.entries(doc?.windows||{})){
    if(cp?.rankingOrderValid!==true||!Array.isArray(cp.proposals))continue;
    for(const candidate of cp.proposals){
     if(!candidate?.id||!candidate.reviewOnly)continue;
-    const previous=index.get(candidate.id),next={key,cp,candidate};
+    const previous=index.get(candidate.id),next={key,cp,candidate,documentIndex};
     if(!previous||(!previous.cp.complete&&cp.complete)||
       (previous.cp.complete===cp.complete&&Date.parse(cp.lastSuccessAt||0)>Date.parse(previous.cp.lastSuccessAt||0)))
      index.set(candidate.id,next);
@@ -123,7 +126,12 @@ function plan({results,players,tournaments,schedule,scanDocs,proofs,limit=5}){
   updated[index]=next;
   changes.push({id:old.id,player:old.player,region:old.region,rank:old.rank,
    individualPrize:next.prizePerPlayer,teamPrize:next.prize,
-   proof:officialProof?'official-top-five':'completed-provider-scan'});
+   proof:officialProof?'official-top-five':'completed-provider-scan',
+   beforeRow:old,beforeSha256:sha256(old),afterSha256:sha256(next),
+   evidence:{documentIndex:found.documentIndex,key:found.key,
+    lastSuccessAt:found.cp.lastSuccessAt,ruleSha256:sha256(rule),
+    proofType:officialProof?'official-top-five':'completed-provider-scan'},
+   approvedAt:new Date().toISOString()});
  }
  if(updated.length!==results.length||new Set(updated.map(r=>r.id)).size!==results.length)
   throw Error('CASH_PROMOTION lost or duplicated records');
@@ -141,9 +149,53 @@ function main(){
   schedule:read('schedule.json'),scanDocs:[read('auto-sync-scan.json'),read('history-sync-scan.json')],
   proofs:read('data/manual-approvals/20261115-naw-trios-cash-fifth-proof.json').proofs};
  const outcome=plan(payload);
- if(apply&&outcome.changes.length)publishResults(root,outcome.updated);
+ if(apply&&outcome.changes.length){
+  const file=path.join(root,HISTORY_FILE);
+  const history=fs.existsSync(file)?JSON.parse(fs.readFileSync(file,'utf8')):{version:1,entries:[]};
+  if(history.version!==1||!Array.isArray(history.entries))throw Error('CASH_PROMOTION invalid audit history');
+  const recorded=new Set(history.entries.map(e=>e.id));
+  if(outcome.changes.some(e=>recorded.has(e.id)))throw Error('CASH_PROMOTION duplicate historical audit entry');
+  publishResults(root,outcome.updated);
+  fs.writeFileSync(file,JSON.stringify({version:1,entries:[...outcome.changes,...history.entries]},null,2)+'\n');
+ }
  console.log('PUBLISHED_CASH_PROMOTION '+JSON.stringify({mode:dry?'dry-run':'apply',
   count:outcome.changes.length,changes:outcome.changes,unchangedCount:results.length-outcome.changes.length}));
 }
+// Reverify every published attendance upgrade from the original approval ledger,
+// complete saved Epic checkpoint (or pinned official top-five) and immutable
+// before/after fingerprints. The public row alone never proves an award.
+function verifyHistoricalPromotion(row,entry,context,historyEntry,proofs){
+ const h=historyEntry,before=h?.beforeRow;
+ if(!before||!entry||!context||!Array.isArray(context.results)||
+   !Array.isArray(context.scanDocs)||!Array.isArray(proofs)||
+   before.id!==row?.id||entry.recordId!==row.id||entry.source!==row.source||
+   before.source!==entry.source||before.kind!=='参加確認'||
+   before.prize!==null||before.verified!==true||row.kind!=='賞金決勝'||
+   row.verified!==true||row.reviewOnly===true||
+   h.beforeSha256!==sha256(before)||h.afterSha256!==sha256(row)||
+   h.rank!==row.rank||h.teamPrize!==row.prize||
+   h.individualPrize!==row.prizePerPlayer||
+   !Number.isFinite(Date.parse(h.approvedAt)))return false;
+ const rule=RULES[before.tournamentId],info=h.evidence;
+ if(!rule||!info||info.ruleSha256!==sha256(rule)||
+   !Number.isSafeInteger(info.documentIndex)||info.documentIndex<0||
+   info.documentIndex>=context.scanDocs.length)return false;
+ const cp=context.scanDocs[info.documentIndex]?.windows?.[info.key];
+ if(!cp||cp.rankingOrderValid!==true||!cp.proposals?.some(p=>matchPublished(before,p))||
+   !Number.isFinite(Date.parse(cp.lastSuccessAt))||
+   Date.parse(cp.lastSuccessAt)<Date.parse(info.lastSuccessAt))return false;
+ if(info.proofType!=='completed-provider-scan'&&info.proofType!=='official-top-five')return false;
+ if(info.proofType==='completed-provider-scan'&&cp.complete!==true)return false;
+ const originalIndex=context.results.findIndex(r=>r.id===row.id);
+ if(originalIndex<0||context.results.filter(r=>r.id===row.id).length!==1)return false;
+ const prior=[before,...context.results.filter(r=>r.id!==row.id)];
+ const replayProof=proofs.filter(p=>p.recordId===row.id);
+ try{
+  const replay=plan({...context,results:prior,proofs:replayProof,limit:1});
+  return replay.changes.length===1&&replay.changes[0].id===row.id&&
+   replay.changes[0].proof===info.proofType&&
+   json(replay.updated[0])===json(row);
+ }catch{return false}
+}
 if(require.main===module){try{main()}catch(e){console.error(e.stack);process.exitCode=1}}
-module.exports={matchPublished,sourceWindow,independentlyVerified,indexedProposals,plan};
+module.exports={matchPublished,sourceWindow,independentlyVerified,indexedProposals,plan,verifyHistoricalPromotion};

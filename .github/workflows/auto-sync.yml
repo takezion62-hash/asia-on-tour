@@ -148,6 +148,7 @@ jobs:
             node scripts/build-candidate-triage.cjs
             git add -A -- source-results/ season-data/
             git add -- candidate-triage.json
+            if [ -f cash-promotion-history.json ]; then git add cash-promotion-history.json; fi
             if [ -f participation-promotion-state.json ]; then
               git add -- participation-promotion-state.json
             fi

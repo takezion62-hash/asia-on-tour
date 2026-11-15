@@ -276,6 +276,24 @@ function verifiedPublishedPromotion(row,entry,evidence){
  return !!result.record&&fingerprint(result.record)===h.afterSha256&&
   JSON.stringify(result.record)===JSON.stringify(row);
 }
+// Cash Cup attendance can also be promoted, but ONLY with a persisted,
+// exact before/after audit and a fresh replay of the original rule-backed
+// approval, against the saved verified leaderboard. No blanket cash inference.
+function verifiedCashPromotion(row,entry,results,players){
+ try{
+  const history=load('cash-promotion-history.json');
+  if(history?.version!==1||!Array.isArray(history.entries))return false;
+  const hits=history.entries.filter(h=>h.id===row.id);
+  if(hits.length!==1)return false;
+  const proofs=load('data/manual-approvals/20261115-naw-trios-cash-fifth-proof.json');
+  const context={results,players,tournaments:load('tournaments.json'),
+   schedule:load('schedule.json'),
+   scanDocs:[load('auto-sync-scan.json'),load('history-sync-scan.json')]};
+  const {verifyHistoricalPromotion}=require('./promote-published-cash.cjs');
+  return verifyHistoricalPromotion(row,entry,context,hits[0],proofs.proofs);
+ }catch{return false}
+}
+
 // Exact screenshot / tracker UUID oracle for the 2025-08-02 NAW Squid Grounds final.
 // Only these seven pairs qualify under this policy; not a blanket approval.
 const S36_SQUID_NAW_SEVEN={
@@ -367,7 +385,8 @@ function audit(results,ledger,players,{promotionEvidence}={}){
   }
   if(r.source!==entry.source||r.verified!==true)errors.push('Published source or verification flag changed: '+entry.id);
   if(entry.policy==='attendance-only'&&(r.kind!=='参加確認'||r.prize!==null||r.reviewOnly===true)&&
-     !verifiedPublishedPromotion(r,entry,evidence()))
+     !verifiedPublishedPromotion(r,entry,evidence())&&
+     !verifiedCashPromotion(r,entry,results,players))
     errors.push('Participation was changed into unsupported confirmed award: '+entry.id);
   // The June 18, 2024 NAC Round 1 cutoff was top 5,000.
   // A player outside the cutoff can never be retroactively relabeled a
