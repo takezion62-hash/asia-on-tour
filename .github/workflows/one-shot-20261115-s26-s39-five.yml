@@ -1,0 +1,60 @@
+name: Temporary ingest five S26 ME and S39 NAW duos
+on:
+  push:
+    branches: [data/20261115-s26-s39-five-duos]
+    paths:
+      - '.github/workflows/one-shot-20261115-s26-s39-five.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: one-shot-five-duos-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  apply:
+    name: 5成績・本人Epic IDと重複の確認
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: true
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '24'
+      - name: 正本を検証
+        run: node scripts/source-results-store.cjs verify
+      - name: ユーザー画像・10人のEpic UUID・名義と大会重複をdry-run
+        run: node scripts/one-shot-20261115-s26-s39-five-duos.cjs --dry-run
+      - name: 5件を追加、既存選手へ賞金を統合
+        run: node scripts/one-shot-20261115-s26-s39-five-duos.cjs
+      - name: 公開用成績と全ランキングを再生成
+        run: |
+          node scripts/build-season-data.cjs
+          node scripts/build-candidate-triage.cjs
+      - name: 賞金・本人ID・JSON・索引整合性と関連単体テスト
+        run: |
+          node scripts/validate-data.cjs
+          node scripts/validate-approvals.cjs
+          node scripts/validate-updates.cjs
+          node scripts/source-results-store.cjs verify
+          node scripts/build-source-results.cjs --check
+          node scripts/build-season-data.cjs --check
+          node scripts/build-candidate-triage.cjs --check
+          node --test tests/data-validation.test.cjs tests/approval-history.test.cjs tests/source-results-store.test.cjs tests/session-date-consistency.test.cjs tests/tournament-rules.test.cjs tests/final-round-consistency.test.cjs
+      - name: データだけを専用ブランチへコミット
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add players.json candidate-triage.json
+          git add -A source-results season-data
+          git diff --cached --check
+          git diff --cached --name-only
+          if git diff --cached --quiet; then
+            echo '::error::No verified result data changed'
+            exit 1
+          fi
+          git commit -m 'data: add five ME 2023 and NAW 2025 duo finals'
+          git push origin HEAD:data/20261115-s26-s39-five-duos
