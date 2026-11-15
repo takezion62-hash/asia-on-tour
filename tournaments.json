@@ -2866,6 +2866,28 @@
           "url": "https://www.fortnite.com/news/reload-platform-duos-cash-cups-chapter-5-season-4-official-rules"
         }
       ]
+    },
+    {
+      "id": "ch7s1-fncs-division-1",
+      "name": "FNCS Division 1",
+      "chapter": 7,
+      "season": 1,
+      "seasonId": "S39",
+      "sourceEventIds": [
+        "S39_FNCSDivisionalCup_Division1"
+      ],
+      "series": "fncs",
+      "mode": "battle-royale",
+      "subtype": "fncs-division-1",
+      "team": "duo",
+      "platform": "cross-platform",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "ユーザー提供2026/3/8 ME Week5 Final。17位、132pt、6試合、9K、0VR、チーム賞金$200・各$100",
+          "url": "https://fortnitetracker.com/events/epicgames_S39_FNCSDivisionalCup_Division1_ME?window=S39_FNCSDivisionalCup_Division1_Week5Final_ME"
+        }
+      ]
     }
   ]
 }

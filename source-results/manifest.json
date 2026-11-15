@@ -2,11 +2,11 @@
   "version": 1,
   "role": "generated canonical-source snapshot; results.json remains authoritative in phase 1",
   "canonicalFile": "results.json",
-  "canonicalSha256": "b914d942c2e993d37af733ec4f38b322ee30001297812277f0ef3a1a4c1df8e7",
-  "count": 7515,
-  "teamPrizeCents": 8801000,
+  "canonicalSha256": "23d7253d889d75c20b11f1f3ac66d90acfec86120a60c5a64d0b05fb7e40d927",
+  "count": 7525,
+  "teamPrizeCents": 8961000,
   "unconfirmedPrizeRecords": 1255,
-  "personalPrizeCents": 8781000,
+  "personalPrizeCents": 8941000,
   "recordOrder": [
     "s42-me-slenderman-reload-skin-20261021-acris-chacha",
     "s42-me-slenderman-reload-skin-20261021-karf-alpha",
@@ -7522,7 +7522,17 @@
     "auto-s30-6546d554e9e0",
     "auto-s42-e12dba4b1eae",
     "auto-s42-57d73f4f4bf7",
-    "auto-s42-376fc9fdf13d"
+    "auto-s42-376fc9fdf13d",
+    "s40-me-solo-vc-final-20260406-svbl",
+    "s40-me-solo-vc-final-20260406-meah",
+    "s40-me-solo-vc-final-20260406-jaemon",
+    "s40-me-solo-vc-final-20260406-xeno",
+    "s39-me-fncs-div1-week5-final-20260308-meah-riam",
+    "s39-me-duos-vc-final-20260120-meah-riam",
+    "s26-me-zb-duos-vc-final-20231009-nanu-emer4i",
+    "s26-me-zb-duos-vc-final-20231009-kaan-miru",
+    "s26-me-zb-duos-vc-final-20231009-kiorabi-melon",
+    "s26-me-zb-duos-vc-final-20231009-banao-tomato"
   ],
   "shards": [
     {
@@ -7555,11 +7565,11 @@
     {
       "seasonId": "S26",
       "file": "source-results/S26.json",
-      "count": 16,
-      "teamPrizeCents": 320000,
+      "count": 20,
+      "teamPrizeCents": 400000,
       "unconfirmedPrizeRecords": 0,
-      "personalPrizeCents": 320000,
-      "sha256": "281ce8605a7c1925aa14c5b8c1c3e6bc831b3211eb06ca1769a8d8002d56dc27"
+      "personalPrizeCents": 400000,
+      "sha256": "efd41734bb4164181a92fdea2b2e35e716a427f08cdf296499cc54563f6fbe10"
     },
     {
       "seasonId": "S27",
@@ -7672,20 +7682,20 @@
     {
       "seasonId": "S39",
       "file": "source-results/S39.json",
-      "count": 148,
-      "teamPrizeCents": 730000,
+      "count": 150,
+      "teamPrizeCents": 770000,
       "unconfirmedPrizeRecords": 2,
-      "personalPrizeCents": 730000,
-      "sha256": "fca459a5740ba2a2abfbb4ac670d624b9112982ad1f8e8da5870f2b1f9a54514"
+      "personalPrizeCents": 770000,
+      "sha256": "daed52de2cf954e7afbbb9ffcd4aa1aa76e7d74e14be519f481edcc493da6de2"
     },
     {
       "seasonId": "S40",
       "file": "source-results/S40.json",
-      "count": 128,
-      "teamPrizeCents": 165000,
+      "count": 132,
+      "teamPrizeCents": 205000,
       "unconfirmedPrizeRecords": 57,
-      "personalPrizeCents": 165000,
-      "sha256": "db21d8d2aa052fd134e5ee173200c908b6d76d230761cbdf817e3e2561386081"
+      "personalPrizeCents": 205000,
+      "sha256": "60234b06345e2816d86ed67f95571e1981088a73a0bb5602c1660ebc4104cb41"
     },
     {
       "seasonId": "S41",
