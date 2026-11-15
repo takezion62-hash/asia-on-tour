@@ -86,7 +86,11 @@ function independentlyVerified(proof,published,candidate,win,checkpoint,rule){
 function plan({results,players,tournaments,schedule,scanDocs,proofs,limit=5}){
  const checkpoints=indexedProposals(...scanDocs),proofById=new Map(proofs.map(p=>[p.recordId,p]));
  const updated=results.slice(),changes=[];
- for(let index=0;index<updated.length&&changes.length<limit;index++){
+ // Explicitly corroborated official rankings take priority over old backfill.
+ const pinned=proofs.map(p=>updated.findIndex(r=>r.id===p.recordId)).filter(i=>i>=0);
+ const order=[...new Set([...pinned,...updated.map((_,i)=>i)])];
+ for(const index of order){
+  if(changes.length>=limit)break;
   const old=updated[index],rule=RULES[old?.tournamentId];
   if(old?.kind!=='参加確認'||old.prize!==null||old.verified!==true||
    !rule||rule.autoApproval!=='verified-team-rank')continue;
