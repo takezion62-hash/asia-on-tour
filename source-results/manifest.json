@@ -2,8 +2,8 @@
   "version": 1,
   "role": "generated canonical-source snapshot; results.json remains authoritative in phase 1",
   "canonicalFile": "results.json",
-  "canonicalSha256": "7f6acaf5c9244412c593024505a605b83932c823974166e03d51382cf7cb8f62",
-  "count": 7534,
+  "canonicalSha256": "ef1106b05663dd992b6ecb0279ccfa63df9f1d17e331dfdabffd9a1bc12d17e2",
+  "count": 7535,
   "teamPrizeCents": 9161000,
   "unconfirmedPrizeRecords": 1255,
   "personalPrizeCents": 9141000,
@@ -7541,7 +7541,8 @@
     "s39-naw-reload-duos-vc-final-20251214-bonbaby-teddy",
     "s39-naw-reload-duos-vc-final-20251214-pegu-rura",
     "s36-naw-console-duos-vc-final-20250628-pegu-rura",
-    "s36-naw-console-duos-vc-final-20250628-okotto-asufaro"
+    "s36-naw-console-duos-vc-final-20250628-okotto-asufaro",
+    "auto-s30-d34b29167bfd"
   ],
   "shards": [
     {
@@ -7610,11 +7611,11 @@
     {
       "seasonId": "S30",
       "file": "source-results/S30.json",
-      "count": 2016,
+      "count": 2017,
       "teamPrizeCents": 1520000,
       "unconfirmedPrizeRecords": 144,
       "personalPrizeCents": 1520000,
-      "sha256": "5c7de2294b478dd44005ca2e3c541d578a1d9719e82bccf3a8910752ed6d13a8"
+      "sha256": "6aad3ef61e989f8059f12faa1f2ff3e692867ab8a48a3a864ae3a277370abfe5"
     },
     {
       "seasonId": "S31",
