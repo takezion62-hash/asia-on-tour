@@ -35,7 +35,8 @@ test('NAW fifth place has exact, named, separate tournament and Epic-ID proof',(
   const win=sourceWindow(record,rule,read('schedule.json'));
   assert.ok(win);
   assert.equal(win.key,key);
-  assert.equal(scan.windows[key].complete,false);
+  // Scans may finish in later scheduled runs; both states preserve the evidence.
+  assert.equal(scan.windows[key].rankingOrderValid,true);
   assert.equal(independentlyVerified(proof,record,candidate,win,scan.windows[key],rule),true);
   assert.equal(independentlyVerified({...proof,perPlayerUSD:300},record,candidate,win,scan.windows[key],rule),false);
   assert.equal(independentlyVerified({...proof,kills:91},record,candidate,win,scan.windows[key],rule),false);
@@ -63,9 +64,15 @@ test('promotion keeps the same public ID and awards USD150 to each of three play
   assert.equal(after.prize,450);
   assert.equal(after.prizePerPlayer,150);
   assert.equal(output.changes[0].id,TARGET);
-  // The proof cannot be weakened by amending amounts or the roster.
+  // A completed and ordered provider scan independently proves the payout;
+  // otherwise the exact official top-five proof is mandatory.
   const wrong=plan({...p,proofs:[{...proof,points:440}]});
-  assert.equal(wrong.updated.find(r=>r.id===TARGET).prize,null);
+  if(scan.windows[key].complete===true){
+   assert.equal(wrong.updated.find(r=>r.id===TARGET).prize,450);
+   assert.equal(wrong.changes.find(x=>x.id===TARGET)?.proof,'completed-provider-scan');
+  }else{
+   assert.equal(wrong.updated.find(r=>r.id===TARGET).prize,null);
+  }
  }else{
   assert.equal(before.kind,'賞金決勝');
   assert.equal(before.prize,450);
