@@ -158,7 +158,7 @@
       '<p class="source-rule-warning">※ Round 1は地域別通過枠で判定し賞金$0。Round 2はビクロイのみ1VR=100ptで、最大3VR。各選手$50/VR、4名チーム合計$200/VR（3VRなら個人$150・チーム$600）。予選・決勝とも本人IDと順位表を検証し、未確認の賞金は掲載しません。</p>':'';
     const matchCaps=Object.entries(rule?.matchCaps||{}).map(([stage,limit])=>esc(stage)+' 最大'+fmtNumber(limit)+'試合').join(' / ');
     const details=present?
-      '<div class="source-rule-facts">'+conditions+cash+evalNotesquadsNote+
+      '<div class="source-rule-facts">'+conditions+cash+evalNote+squadsNote+
       '<div class="source-rule-fact"><span>試合数の上限</span><strong>'+esc(matchCaps||'未登録')+'</strong></div></div>'
       :'<p class="source-rule-warning">公式の地域別通過・賞金・スキン獲得条件は未登録です。順位だけから報酬を自動認定しません。</p>';
     return '<article class="source-rule-card" data-rule-id="'+esc(entry.id)+'">'+
