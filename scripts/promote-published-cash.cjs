@@ -161,5 +161,41 @@ function main(){
  console.log('PUBLISHED_CASH_PROMOTION '+JSON.stringify({mode:dry?'dry-run':'apply',
   count:outcome.changes.length,changes:outcome.changes,unchangedCount:results.length-outcome.changes.length}));
 }
+// Reverify every published attendance upgrade from the original approval ledger,
+// complete saved Epic checkpoint (or pinned official top-five) and immutable
+// before/after fingerprints. The public row alone never proves an award.
+function verifyHistoricalPromotion(row,entry,context,historyEntry,proofs){
+ const h=historyEntry,before=h?.beforeRow;
+ if(!before||!entry||!context||!Array.isArray(context.results)||
+   !Array.isArray(context.scanDocs)||!Array.isArray(proofs)||
+   before.id!==row?.id||entry.recordId!==row.id||entry.source!==row.source||
+   before.source!==entry.source||before.kind!=='参加確認'||
+   before.prize!==null||before.verified!==true||row.kind!=='賞金決勝'||
+   row.verified!==true||row.reviewOnly===true||
+   h.beforeSha256!==sha256(before)||h.afterSha256!==sha256(row)||
+   h.rank!==row.rank||h.teamPrize!==row.prize||
+   h.individualPrize!==row.prizePerPlayer||
+   !Number.isFinite(Date.parse(h.approvedAt)))return false;
+ const rule=RULES[before.tournamentId],info=h.evidence;
+ if(!rule||!info||info.ruleSha256!==sha256(rule)||
+   !Number.isSafeInteger(info.documentIndex)||info.documentIndex<0||
+   info.documentIndex>=context.scanDocs.length)return false;
+ const cp=context.scanDocs[info.documentIndex]?.windows?.[info.key];
+ if(!cp||cp.rankingOrderValid!==true||!cp.proposals?.some(p=>matchPublished(before,p))||
+   !Number.isFinite(Date.parse(cp.lastSuccessAt))||
+   Date.parse(cp.lastSuccessAt)<Date.parse(info.lastSuccessAt))return false;
+ if(info.proofType!=='completed-provider-scan'&&info.proofType!=='official-top-five')return false;
+ if(info.proofType==='completed-provider-scan'&&cp.complete!==true)return false;
+ const originalIndex=context.results.findIndex(r=>r.id===row.id);
+ if(originalIndex<0||context.results.filter(r=>r.id===row.id).length!==1)return false;
+ const prior=[before,...context.results.filter(r=>r.id!==row.id)];
+ const replayProof=proofs.filter(p=>p.recordId===row.id);
+ try{
+  const replay=plan({...context,results:prior,proofs:replayProof,limit:1});
+  return replay.changes.length===1&&replay.changes[0].id===row.id&&
+   replay.changes[0].proof===info.proofType&&
+   json(replay.updated[0])===json(row);
+ }catch{return false}
+}
 if(require.main===module){try{main()}catch(e){console.error(e.stack);process.exitCode=1}}
-module.exports={matchPublished,sourceWindow,independentlyVerified,indexedProposals,plan};
+module.exports={matchPublished,sourceWindow,independentlyVerified,indexedProposals,plan,verifyHistoricalPromotion};
