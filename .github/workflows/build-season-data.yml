@@ -165,6 +165,8 @@ jobs:
             node scripts/publish-nov14-pending-cash.cjs
             node scripts/reconcile-pending-hamikuma-20261114.cjs --dry-run
             node scripts/reconcile-pending-hamikuma-20261114.cjs
+            node scripts/publish-reviewonly-round1-20261116.cjs --dry-run
+            node scripts/publish-reviewonly-round1-20261116.cjs
             node scripts/publish-pending-review-20261114.cjs --dry-run
             node scripts/publish-pending-review-20261114.cjs
             node scripts/publish-verified-s32-me-vcup-20241116.cjs --dry-run
@@ -175,8 +177,6 @@ jobs:
             node scripts/reconcile-s42-cosmetic-ranks-20261113.cjs --apply
             node scripts/publish-s32-nac-event3-4-zero-vr-review.cjs --dry-run
             node scripts/publish-s32-nac-event3-4-zero-vr-review.cjs --apply
-            node scripts/publish-reviewonly-round1-20261116.cjs --dry-run
-            node scripts/publish-reviewonly-round1-20261116.cjs
             node --test tests/reviewonly-round1-20261116.test.cjs
             node scripts/validate-data.cjs
             node scripts/validate-approvals.cjs
