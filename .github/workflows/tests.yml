@@ -31,6 +31,7 @@ jobs:
     timeout-minutes: 5
     outputs:
       mode: ${{ steps.scope.outputs.mode }}
+      reason: ${{ steps.scope.outputs.reason }}
       unit_files: ${{ steps.scope.outputs.unit_files }}
       browser_files: ${{ steps.scope.outputs.browser_files }}
       publisher_files: ${{ steps.scope.outputs.publisher_files }}
@@ -83,6 +84,33 @@ jobs:
             echo "mode=full" >> "$GITHUB_OUTPUT"
             echo "reason=classifier-not-yet-on-base" >> "$GITHUB_OUTPUT"
           fi
+
+      - name: 選択されたテスト範囲と分割PR方針を表示
+        if: always()
+        shell: bash
+        env:
+          CI_SCOPE_MODE: ${{ steps.scope.outputs.mode }}
+          CI_SCOPE_REASON: ${{ steps.scope.outputs.reason }}
+          CI_SCOPE_UNIT: ${{ steps.scope.outputs.unit_files }}
+          CI_SCOPE_BROWSER: ${{ steps.scope.outputs.browser_files }}
+        run: |
+          {
+            echo '### ASIA ON TOUR テスト範囲の安全判定'
+            echo "- **実行方式:** ${CI_SCOPE_MODE:-判定失敗}"
+            echo "- **判定理由:** ${CI_SCOPE_REASON:-不明}"
+            if [[ "$CI_SCOPE_MODE" == data ]]; then
+              echo '- **検証:** JSON・本人ID・賞金・重複・索引整合性・重要画面のPC/スマホスモーク'
+            elif [[ "$CI_SCOPE_MODE" == focused ]]; then
+              echo '- **検証:** 共通の必須整合性 + 関連単体テスト + 変更画面のみPC/スマホ'
+              echo "- **対象単体テスト:** ${CI_SCOPE_UNIT:-なし}"
+              echo "- **対象画面テスト:** ${CI_SCOPE_BROWSER:-なし}"
+            elif [[ "$CI_SCOPE_MODE" == full ]]; then
+              echo '- **検証:** 全単体・PC/スマホ全画面 (安全優先)'
+            fi
+            if [[ "$CI_SCOPE_REASON" == mixed-data-and-code-split-pr ]]; then
+              echo '- **次回の改善:** 本人ID/賞金の検証コードと対応テストだけを先にPRでマージし、その後の成績・名義変更は別のデータ専用PRに分ける'
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
 
   unit:
     needs: [classify]
