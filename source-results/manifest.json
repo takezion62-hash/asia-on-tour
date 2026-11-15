@@ -2,11 +2,11 @@
   "version": 1,
   "role": "generated canonical-source snapshot; results.json remains authoritative in phase 1",
   "canonicalFile": "results.json",
-  "canonicalSha256": "23d7253d889d75c20b11f1f3ac66d90acfec86120a60c5a64d0b05fb7e40d927",
-  "count": 7525,
-  "teamPrizeCents": 8961000,
+  "canonicalSha256": "f7e6be50b57a90335d7999aa0177b8ae5d63c550ee2769e2a5365276b401b26f",
+  "count": 7530,
+  "teamPrizeCents": 9061000,
   "unconfirmedPrizeRecords": 1255,
-  "personalPrizeCents": 8941000,
+  "personalPrizeCents": 9041000,
   "recordOrder": [
     "s42-me-slenderman-reload-skin-20261021-acris-chacha",
     "s42-me-slenderman-reload-skin-20261021-karf-alpha",
@@ -7532,7 +7532,12 @@
     "s26-me-zb-duos-vc-final-20231009-nanu-emer4i",
     "s26-me-zb-duos-vc-final-20231009-kaan-miru",
     "s26-me-zb-duos-vc-final-20231009-kiorabi-melon",
-    "s26-me-zb-duos-vc-final-20231009-banao-tomato"
+    "s26-me-zb-duos-vc-final-20231009-banao-tomato",
+    "s26-me-zb-duos-vc-final-20231009-favsie-meah",
+    "s26-me-zb-duos-vc-final-20231009-snowfake-charufn",
+    "s39-naw-reload-duos-vc-final-20251221-rakua-banao",
+    "s39-naw-reload-duos-vc-final-20251221-rara-fugu",
+    "s39-naw-reload-duos-vc-final-20251221-asvas-rura"
   ],
   "shards": [
     {
@@ -7565,11 +7570,11 @@
     {
       "seasonId": "S26",
       "file": "source-results/S26.json",
-      "count": 20,
-      "teamPrizeCents": 400000,
+      "count": 22,
+      "teamPrizeCents": 440000,
       "unconfirmedPrizeRecords": 0,
-      "personalPrizeCents": 400000,
-      "sha256": "efd41734bb4164181a92fdea2b2e35e716a427f08cdf296499cc54563f6fbe10"
+      "personalPrizeCents": 440000,
+      "sha256": "fae38985838036b7d94437895ce790809c77724bbf5612d0883468521b3b84cc"
     },
     {
       "seasonId": "S27",
@@ -7682,11 +7687,11 @@
     {
       "seasonId": "S39",
       "file": "source-results/S39.json",
-      "count": 150,
-      "teamPrizeCents": 770000,
+      "count": 153,
+      "teamPrizeCents": 830000,
       "unconfirmedPrizeRecords": 2,
-      "personalPrizeCents": 770000,
-      "sha256": "daed52de2cf954e7afbbb9ffcd4aa1aa76e7d74e14be519f481edcc493da6de2"
+      "personalPrizeCents": 830000,
+      "sha256": "8394f7461bb001a3ac78d1d9155b9f3b4ad6d8a5ebc8db2141feb0c5e4a592cb"
     },
     {
       "seasonId": "S40",
