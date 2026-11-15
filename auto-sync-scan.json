@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-11-15T05:06:14.019Z",
+  "checkedAt": "2026-11-15T09:00:54.977Z",
   "windows": {
     "epicgames_S43_PerformanceEvaluationTrios_EU/S43_PerformanceEvaluation_Event1Round1_EU": {
       "nextPage": 7,
@@ -14795,7 +14795,7 @@
       "totalPages": 31
     },
     "epicgames_S42_InoxtagIconCup_ME/S42_InoxtagIconCup_ME": {
-      "nextPage": 38,
+      "nextPage": 48,
       "complete": false,
       "proposals": [
         {
@@ -14973,35 +14973,25 @@
           ]
         }
       ],
-      "pages": 38,
-      "lastAttemptAt": "2026-11-14T23:53:30.745Z",
+      "pages": 48,
+      "lastAttemptAt": "2026-11-15T08:59:46.771Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 3800,
-      "lastSuccessAt": "2026-11-14T23:53:30.745Z",
-      "totalPages": 100,
-      "errorAttempts": 1,
-      "retryAfter": "2026-11-15T05:53:31.732Z",
-      "lastError": "Osirion API HTTP 429 /v1/tournaments/leaderboard",
-      "lastErrorPage": 38,
-      "lastErrorCode": "OSIRION_TRANSIENT"
+      "lastSeenRank": 4800,
+      "lastSuccessAt": "2026-11-15T08:59:47.604Z",
+      "totalPages": 100
     },
     "epicgames_S42_ArenaCashCup_EU/S42_ArenaCashCup_Event1_EU": {
-      "nextPage": 17,
+      "nextPage": 27,
       "complete": false,
       "proposals": [],
-      "pages": 17,
-      "lastAttemptAt": "2026-11-14T23:53:32.620Z",
+      "pages": 27,
+      "lastAttemptAt": "2026-11-15T09:00:08.436Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 1700,
-      "lastSuccessAt": "2026-11-14T23:53:32.620Z",
-      "totalPages": 100,
-      "errorAttempts": 1,
-      "retryAfter": "2026-11-15T05:53:33.606Z",
-      "lastError": "Osirion API HTTP 429 /v1/tournaments/leaderboard",
-      "lastErrorPage": 17,
-      "lastErrorCode": "OSIRION_TRANSIENT"
+      "lastSeenRank": 2700,
+      "lastSuccessAt": "2026-11-15T09:00:09.437Z",
+      "totalPages": 100
     },
     "epicgames_S43_ReloadZBDuosCashCup_NAW/S43_ReloadZBDuosCashCup_Event1Round2_NAW": {
       "nextPage": 1,
@@ -15848,38 +15838,28 @@
       "totalPages": 10
     },
     "epicgames_S43_TriosCashCup_EU/S43_TriosCashCup_Event2_EU": {
-      "nextPage": 1,
+      "nextPage": 11,
       "complete": false,
       "proposals": [],
-      "pages": 1,
-      "lastAttemptAt": "2026-11-14T23:53:34.057Z",
+      "pages": 11,
+      "lastAttemptAt": "2026-11-15T09:00:21.634Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 100,
-      "lastSuccessAt": "2026-11-14T23:53:34.057Z",
-      "totalPages": 74,
-      "errorAttempts": 1,
-      "retryAfter": "2026-11-15T05:53:35.041Z",
-      "lastError": "Osirion API HTTP 429 /v1/tournaments/leaderboard",
-      "lastErrorPage": 1,
-      "lastErrorCode": "OSIRION_TRANSIENT"
+      "lastSeenRank": 1100,
+      "lastSuccessAt": "2026-11-15T09:00:22.208Z",
+      "totalPages": 74
     },
     "epicgames_S43_OnePieceBuggyCup_ZB_BR/S43_OnePieceBuggyCup_ZB_BR": {
-      "nextPage": 1,
-      "complete": false,
+      "nextPage": 2,
+      "complete": true,
       "proposals": [],
-      "pages": 1,
-      "lastAttemptAt": "2026-11-14T23:53:35.488Z",
+      "pages": 2,
+      "lastAttemptAt": "2026-11-15T09:00:22.208Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 100,
-      "lastSuccessAt": "2026-11-14T23:53:35.488Z",
-      "totalPages": 100,
-      "errorAttempts": 1,
-      "retryAfter": "2026-11-15T05:53:36.475Z",
-      "lastError": "Osirion API HTTP 429 /v1/tournaments/leaderboard",
-      "lastErrorPage": 1,
-      "lastErrorCode": "OSIRION_TRANSIENT"
+      "lastSeenRank": 200,
+      "lastSuccessAt": "2026-11-15T09:00:22.796Z",
+      "totalPages": 100
     },
     "epicgames_S43_OnePieceBuggyCup_Mobile_BR/S43_OnePieceBuggyCup_Mobile_BR": {
       "nextPage": 1,
@@ -15920,16 +15900,16 @@
       "totalPages": 26
     },
     "epicgames_S43_OnePieceBuggyCup_EU/S43_OnePieceBuggyCup_EU": {
-      "nextPage": 0,
-      "complete": false,
+      "nextPage": 6,
+      "complete": true,
       "proposals": [],
-      "pages": 0,
-      "lastAttemptAt": "2026-11-14T23:53:37.589Z",
-      "errorAttempts": 1,
-      "retryAfter": "2026-11-15T05:53:38.585Z",
-      "lastError": "Osirion API HTTP 429 /v1/tournaments/leaderboard",
-      "lastErrorPage": 0,
-      "lastErrorCode": "OSIRION_TRANSIENT"
+      "pages": 6,
+      "lastAttemptAt": "2026-11-15T09:00:26.599Z",
+      "emptyAttempts": 0,
+      "rankingOrderValid": true,
+      "lastSeenRank": 600,
+      "lastSuccessAt": "2026-11-15T09:00:27.276Z",
+      "totalPages": 100
     },
     "epicgames_S43_TriosCashCup_BR/S43_TriosCashCup_Event2_BR": {
       "nextPage": 16,
@@ -16432,19 +16412,19 @@
       "totalPages": 11
     },
     "epicgames_S42_ArenaCashCup_ME/S42_ArenaCashCup_Event1_ME": {
-      "nextPage": 20,
-      "complete": false,
+      "nextPage": 27,
+      "complete": true,
       "proposals": [],
-      "pages": 20,
-      "lastAttemptAt": "2026-11-15T05:05:38.963Z",
+      "pages": 27,
+      "lastAttemptAt": "2026-11-15T09:00:42.258Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 2000,
-      "lastSuccessAt": "2026-11-15T05:05:40.025Z",
+      "lastSeenRank": 2606,
+      "lastSuccessAt": "2026-11-15T09:00:42.694Z",
       "totalPages": 27
     },
     "epicgames_S42_InoxtagIconCup_OCE/S42_InoxtagIconCup_OCE": {
-      "nextPage": 20,
+      "nextPage": 21,
       "complete": false,
       "proposals": [
         {
@@ -16593,16 +16573,16 @@
           ]
         }
       ],
-      "pages": 20,
-      "lastAttemptAt": "2026-11-15T05:05:50.969Z",
+      "pages": 21,
+      "lastAttemptAt": "2026-11-15T09:00:54.024Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 2000,
-      "lastSuccessAt": "2026-11-15T05:05:58.140Z",
+      "lastSeenRank": 2100,
+      "lastSuccessAt": "2026-11-15T09:00:54.968Z",
       "totalPages": 79
     },
     "epicgames_S43_TriosCashCup_NAW/S43_TriosCashCup_Event2_NAW": {
-      "nextPage": 10,
+      "nextPage": 14,
       "complete": false,
       "proposals": [
         {
@@ -16921,24 +16901,24 @@
           ]
         }
       ],
-      "pages": 10,
-      "lastAttemptAt": "2026-11-15T05:06:01.972Z",
+      "pages": 14,
+      "lastAttemptAt": "2026-11-15T09:00:51.294Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 1000,
-      "lastSuccessAt": "2026-11-15T05:06:02.412Z",
+      "lastSeenRank": 1400,
+      "lastSuccessAt": "2026-11-15T09:00:51.957Z",
       "totalPages": 17
     },
     "epicgames_S43_TriosCashCup_NAC/S43_TriosCashCup_Event2_NAC": {
-      "nextPage": 10,
+      "nextPage": 11,
       "complete": false,
       "proposals": [],
-      "pages": 10,
-      "lastAttemptAt": "2026-11-15T05:06:07.227Z",
+      "pages": 11,
+      "lastAttemptAt": "2026-11-15T09:00:51.957Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 1000,
-      "lastSuccessAt": "2026-11-15T05:06:07.817Z",
+      "lastSeenRank": 1100,
+      "lastSuccessAt": "2026-11-15T09:00:54.024Z",
       "totalPages": 35
     },
     "epicgames_S42_ArenaCashCup_OCE/S42_ArenaCashCup_Event1_OCE": {
