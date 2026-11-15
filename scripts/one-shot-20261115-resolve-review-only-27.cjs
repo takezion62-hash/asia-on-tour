@@ -185,8 +185,10 @@ function main(dryRun){
  assert(remaining.every(x=>!ids.includes(x.id)));
  const resultIds=new Set(plan.next.results.map(r=>r.id));
  assert.equal(resultIds.size,plan.next.results.length);
- assert(results.every(x=>plan.next.results.find(r=>r.id===x.id)===x),
-  'prepublished records changed unexpectedly');
+ assert(results.every(x=>{
+  const saved=plan.next.results.find(r=>r.id===x.id);
+  return saved&&JSON.stringify(saved)===JSON.stringify(x);
+ }), 'prepublished records changed unexpectedly');
  const status={...plan.next.statuses.history,
   found:remaining.length,manualReviewCandidates:remaining.length,
   reviewOnlyCandidates:remaining.filter(r=>r.reviewOnly===true).length,
