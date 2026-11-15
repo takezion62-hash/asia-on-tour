@@ -3,6 +3,7 @@
 // commit (PR base or pre-push main), never from the proposed new code.
 const fs=require('node:fs');
 const {execFileSync}=require('node:child_process');
+const focused=require('./ci-focused-scope.cjs');
 const META=new Set([
  'players.json','tournaments.json','updates.json','approval-history.json',
  'auto-sync-review.json','auto-sync-status.json',
@@ -13,10 +14,10 @@ const SOURCE_SHARD=/^source-results\/(?:S[1-9]\d*|unknown)\.json$/;
 const OUTPUT=/^season-data\/(?:S[1-9]\d*|unknown|ranking-(?:S[1-9]\d*|unknown|all)|manifest)\.json$/;
 const REVIEW_REPORT=/^review-reports\/\d{4}-\d{2}-\d{2}(?:-[a-z0-9-]+)?\.md$/;
 const SOURCE_MANIFEST='source-results/manifest.json';
-function classify(files){
+function classify(files,{workflowBefore,workflowAfter}={}){
  if(!Array.isArray(files)||files.length===0)return {mode:'full',reason:'no-changes'};
  if(files.length>3000)return {mode:'full',reason:'too-many-changes'};
- let shard=false,manifest=false;
+ let shard=false,manifest=false,allData=true;
  const seen=new Set();
  for(const item of files){
   if(!item||!['A','M'].includes(item.status))
@@ -28,11 +29,20 @@ function classify(files){
   if(SOURCE_SHARD.test(p)){shard=true;continue}
   if(p===SOURCE_MANIFEST){manifest=true;continue}
   if(META.has(p)||OUTPUT.test(p)||REVIEW_REPORT.test(p))continue;
-  return {mode:'full',reason:'code-or-unknown-change'};
+  allData=false;
+  // Unknown paths remain rejected by the allowlisted, trusted focused selector.
+  continue;
  }
- // Metadata-only and generated-only changes are never a records-only PR.
- if(!shard||!manifest)return {mode:'full',reason:'incomplete-source-store-diff'};
- return {mode:'data',reason:'verified-records-paths-only'};
+ // A single source shard and the corresponding manifest are mandatory for the
+ // existing data-only fast path; no mixed code+data bypass is permitted.
+ if(allData && shard && manifest)return {mode:'data',reason:'verified-records-paths-only'};
+ if(shard||manifest)return {mode:'full',reason:'mixed-or-incomplete-source-store-diff'};
+ const choice=focused.select(files);
+ if(!choice)return {mode:'full',reason:'code-or-unknown-change'};
+ if(files.some(x=>x.path==='.github/workflows/build-season-data.yml')&&
+    !focused.appendOnlyPublisher(workflowBefore,workflowAfter,choice.publisherFiles))
+  return {mode:'full',reason:'unsafe-publisher-workflow-diff'};
+ return choice;
 }
 function parseNameStatus(buffer){
  if(!Buffer.isBuffer(buffer)||!buffer.length||buffer[buffer.length-1]!==0)
@@ -69,13 +79,25 @@ function detect(env=process.env,git=execFileSync){
    'diff','--no-ext-diff','--no-textconv','--no-renames',
    '--name-status','-z',before,after,'--'
   ],{maxBuffer:8*1024*1024});
-  return classify(parseNameStatus(changes));
+  const files=parseNameStatus(changes);
+  let workflowBefore,workflowAfter;
+  if(files.some(x=>x.path==='.github/workflows/build-season-data.yml')){
+   workflowBefore=git('git',['show',before+':.github/workflows/build-season-data.yml'],
+    {maxBuffer:2*1024*1024}).toString('utf8');
+   workflowAfter=git('git',['show',after+':.github/workflows/build-season-data.yml'],
+    {maxBuffer:2*1024*1024}).toString('utf8');
+  }
+  return classify(files,{workflowBefore,workflowAfter});
  }catch{return {mode:'full',reason:'git-diff-failed'}}
 }
 if(require.main===module){
  const result=detect();
  if(process.env.GITHUB_OUTPUT)
-  fs.appendFileSync(process.env.GITHUB_OUTPUT,'mode='+result.mode+'\nreason='+result.reason+'\n');
+  fs.appendFileSync(process.env.GITHUB_OUTPUT,
+   'mode='+result.mode+'\nreason='+result.reason+'\n'+
+   'unit_files='+(result.unitFiles||[]).join(' ')+'\n'+
+   'browser_files='+(result.browserFiles||[]).join(' ')+'\n'+
+   'publisher_files='+(result.publisherFiles||[]).join(' ')+'\n');
  console.log('Change-aware CI: '+result.mode+' ('+result.reason+')');
 }
 module.exports={classify,parseNameStatus,detect,safeSha};

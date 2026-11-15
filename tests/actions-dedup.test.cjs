@@ -19,7 +19,7 @@ const focused=[
  'tournament-rules-check.yml',
  'unreal-auto-check.yml'
 ];
-test('6種類の専用回帰チェックは手動実行可能、push/PRではメインの全件テストに集約',()=>{
+test('6種類の専用回帰チェックは手動実行可能、push/PRではメインの変更範囲対応テストに集約',()=>{
  for(const name of focused){
   const trigger=triggers(name);
   assert.match(trigger,/^\s+workflow_dispatch:\s*$/m,name);
@@ -27,7 +27,7 @@ test('6種類の専用回帰チェックは手動実行可能、push/PRではメ
   assert.match(load(name),/^jobs:\s*$/m,name+' diagnostic job must remain available');
  }
 });
-test('唯一の自動フルCIはPR必須チェック、JSON/単体/全PCスマホを維持しdocsだけのpushを省く',()=>{
+test('PRの必須CIは変更範囲を安全判定し、必要なら全テストへ戻しdocsだけのpushを省く',()=>{
  const main=load('tests.yml'),on=triggers('tests.yml');
  assert.match(on,/^\s+push:\s*$/m);
  assert.match(on,/^\s+pull_request:\s*$/m);
@@ -36,9 +36,11 @@ test('唯一の自動フルCIはPR必須チェック、JSON/単体/全PCスマ�
  assert.match(main,/run: npm run validate/);
  assert.match(main,/run: npm run test:unit/);
  assert.match(main,/run: npm run test:e2e -- --shard=\$\{\{ matrix\.shard \}\}\/4/);
- assert.match(main,/needs: \[classify, unit, browser, smoke\]/);
+ assert.match(main,/needs: \[classify, unit, browser, browser-focused, smoke\]/);
  assert.match(main,/if: needs\.classify\.outputs\.mode == 'full'/);
  assert.match(main,/if: needs\.classify\.outputs\.mode == 'data'/);
+ assert.match(main,/FOCUSED_BROWSER_RESULT: \$\{\{ needs\.browser-focused\.result \}\}/);
+ assert.match(main,/name: 変更画面だけPC・スマホテスト/);
  assert.match(main,/UNIT_RESULT: \$\{\{ needs\.unit\.result \}\}/);
  assert.match(main,/BROWSER_RESULT: \$\{\{ needs\.browser\.result \}\}/);
  assert.match(main,/cancel-in-progress: true/);
@@ -108,5 +110,5 @@ test('chat request push is isolated from expensive pre-publication CI, but still
  assert.match(approval,/gh workflow run tests\.yml/);
  assert.match(ci,/review-requests\/launch\.json/);
  assert.match(ci,/review_base_sha/);
- assert.match(ci,/needs: \[classify, unit, browser, smoke\]/);
+ assert.match(ci,/needs: \[classify, unit, browser, browser-focused, smoke\]/);
 });

@@ -1,0 +1,136 @@
+name: Nightly full CI (03:00 JST)
+on:
+  # 18:00 UTC is 03:00 JST the next day (Japan has no DST).
+  schedule:
+    - cron: '0 18 * * *'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: nightly-full-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  unit:
+    name: 夜間・全単体テストとデータ/賞金監査
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '24'
+          cache: npm
+      - name: 依存と公開アセットを検査
+        run: |
+          npm ci --ignore-scripts
+          node --check scripts/serve.cjs
+          node scripts/site-assets.cjs
+      - name: すべての戦績・大会・賞金・承認・索引の整合性を確認
+        run: |
+          npm run validate
+          node scripts/build-source-results.cjs --check
+          node scripts/build-season-data.cjs --check
+          node scripts/build-candidate-triage.cjs --check
+      - name: 全過去大会の書き込みなしリハーサル
+        run: |
+          node scripts/publish-s32-nac-event3-4-zero-vr-review.cjs --dry-run
+          node scripts/run-historical-dry-runs.cjs
+      - name: 全単体・回帰テスト
+        run: npm run test:unit
+      - name: 失敗した単体テストを保存
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: nightly-unit-failures
+          path: test-results/unit-last-failed.json
+          retention-days: 14
+          if-no-files-found: ignore
+
+  browser:
+    name: 夜間・全PCスマホ画面テスト (shard ${{ matrix.shard }}/4)
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [1, 2, 3, 4]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '24'
+          cache: npm
+      - name: 依存とPC・スマホブラウザを準備
+        run: |
+          npm ci --ignore-scripts
+          node scripts/site-assets.cjs
+          npx playwright install --with-deps chromium
+      - name: 全画面を4分割・PC/スマホ両方で検査
+        run: npm run test:e2e -- --shard=${{ matrix.shard }}/4
+      - name: 失敗した画面の診断情報を保存
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: nightly-browser-${{ matrix.shard }}
+          path: |
+            playwright-report/
+            test-results/
+          if-no-files-found: ignore
+          retention-days: 14
+
+  report:
+    name: 夜間エラー記録・修正Issue作成
+    if: ${{ always() }}
+    needs: [unit, browser]
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - name: 失敗時は既存Issueへ追記、なければ作成
+        if: ${{ github.event_name == 'schedule' && (needs.unit.result != 'success' || needs.browser.result != 'success') }}
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          UNIT_RESULT: ${{ needs.unit.result }}
+          BROWSER_RESULT: ${{ needs.browser.result }}
+        run: |
+          set -euo pipefail
+          title='[CI] 夜間フルテスト失敗'
+          existing="$(gh issue list -R "$GH_REPO" --state open --json number,title --limit 100 \
+            --jq '.[] | select(.title == "[CI] 夜間フルテスト失敗") | .number' | head -n 1)"
+          body="$(mktemp)"
+          {
+            echo "## 03:00 JST 夜間フルテストで失敗"
+            echo ""
+            echo "- 実行ログ・失敗テスト・スクリーンショット: $RUN_URL"
+            echo "- 単体・賞金・本人ID監査: $UNIT_RESULT"
+            echo "- PC/スマホ画面テスト: $BROWSER_RESULT"
+            echo ""
+            echo "### 安全な修正手順"
+            echo "1. ログと失敗アーティファクトから原因を確認"
+            echo "2. 最小修正を新規PRへ提案（自動で未検証コードをマージしない）"
+            echo "3. 変更に関連する必須検証を通してからPRをマージ"
+          } > "$body"
+          if [[ -n "$existing" ]]; then
+            gh issue comment "$existing" -R "$GH_REPO" --body-file "$body"
+          else
+            gh issue create -R "$GH_REPO" --title "$title" --body-file "$body"
+          fi
+      - name: 夜間全テスト結果を失敗として確実に表示
+        env:
+          UNIT_RESULT: ${{ needs.unit.result }}
+          BROWSER_RESULT: ${{ needs.browser.result }}
+        run: |
+          if [[ "$UNIT_RESULT" != success || "$BROWSER_RESULT" != success ]]; then
+            echo "::error::Nightly full regression failed; inspect the run and its issue"
+            exit 1
+          fi
+          echo "Nightly full regression passed"

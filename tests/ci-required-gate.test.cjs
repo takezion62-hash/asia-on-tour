@@ -2,8 +2,8 @@
 const test=require('node:test');
 const assert=require('node:assert/strict');
 const {evaluate}=require('../scripts/ci-required-gate.cjs');
-const full={scopeResult:'success',mode:'full',unitResult:'success',browserResult:'success',smokeResult:'skipped'};
-const data={scopeResult:'success',mode:'data',unitResult:'success',browserResult:'skipped',smokeResult:'success'};
+const full={scopeResult:'success',mode:'full',unitResult:'success',browserResult:'success',smokeResult:'skipped',focusedBrowserResult:'skipped'};
+const data={scopeResult:'success',mode:'data',unitResult:'success',browserResult:'skipped',smokeResult:'success',focusedBrowserResult:'skipped'};
 
 test('full mode approves only when every browser shard and unit pass',()=>{
  assert.equal(evaluate(full).ok,true);
@@ -29,4 +29,23 @@ test('unsafe classifier, missing unit, unknown mode, or no context never approve
      assert.equal(evaluate({...x,mode}).ok,false);
  }
  assert.equal(evaluate({}).ok,false);
+});
+
+const focused={scopeResult:'success',mode:'focused',unitResult:'success',
+ browserResult:'skipped',smokeResult:'skipped',focusedBrowserResult:'skipped',focusedBrowserRequired:'false'};
+test('focused mode requires all critical validation plus optional relevant PC/mobile test',()=>{
+ assert.equal(evaluate(focused).ok,true);
+ const ui={...focused,focusedBrowserRequired:'true',focusedBrowserResult:'success'};
+ assert.equal(evaluate(ui).ok,true);
+ for(const result of ['failure','skipped','cancelled',null])
+  assert.equal(evaluate({...ui,focusedBrowserResult:result}).ok,false,String(result));
+ for(const value of [null,'', 'maybe'])
+  assert.equal(evaluate({...focused,focusedBrowserRequired:value}).ok,false);
+ assert.equal(evaluate({...focused,unitResult:'failure'}).ok,false);
+ assert.equal(evaluate({...focused,browserResult:'success'}).ok,false);
+ assert.equal(evaluate({...focused,smokeResult:'success'}).ok,false);
+});
+test('full or data modes reject unexpected focused browser results',()=>{
+ assert.equal(evaluate({...full,focusedBrowserResult:'failure'}).ok,false);
+ assert.equal(evaluate({...data,focusedBrowserResult:'success'}).ok,false);
 });

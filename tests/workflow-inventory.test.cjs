@@ -11,7 +11,7 @@ const scheduled={
 };
 const permitted=[
  'auto-sync.yml','history-sync.yml','participation-sync.yml','calendar-history.yml',
- 'review-timing.yml',
+ 'review-timing.yml','nightly-full-tests.yml',
  'reviewed-candidate-publication.yml','tests.yml','build-season-data.yml','safe-sync-merge-tests.yml',
  'focused-failure-recheck.yml',
  'scan-coverage-tests.yml','calendar.yml','special-achievements.yml',
@@ -69,7 +69,7 @@ test('parallel checks keep the original required status fail-closed',()=>{
  assert.match(browser,/if: always\(\)/);
  assert.match(browser,/name: site-test-report/);
  assert.match(gate,/name: JSON検証・単体テスト・PCスマホ回帰テスト/);
- assert.match(gate,/needs: \[classify, unit, browser, smoke\]/);
+ assert.match(gate,/needs: \[classify, unit, browser, browser-focused, smoke\]/);
  assert.match(gate,/run: node scripts\/ci-required-gate\.cjs/);
  const classify=block('classify'),smoke=block('smoke');
  assert.match(classify,/fetch-depth: 0/);
@@ -98,7 +98,7 @@ test('browser suite retains both device projects, bounded concurrency, retries a
 });
 
 
-test('focused reruns are opt-in diagnostics; normal PR checks still require every unit/browser shard',()=>{
+test('focused failure rechecks stay diagnostics; changed PRs keep the same strict required gate',()=>{
  const focused=read('focused-failure-recheck.yml'),main=read('tests.yml');
  assert.match(focused,/workflow_dispatch:/);
  assert.match(focused,/name: Failed tests only \(NOT full-suite approval\)/);
@@ -107,7 +107,7 @@ test('focused reruns are opt-in diagnostics; normal PR checks still require ever
  assert.match(focused,/npm run test:failed:e2e/);
  assert.match(main,/unit-failure-report/);
  assert.match(main,/test-results\/last-run.json/);
- assert.match(main,/needs: \[classify, unit, browser, smoke\]/);
+ assert.match(main,/needs: \[classify, unit, browser, browser-focused, smoke\]/);
  assert.match(main,/if: \$\{\{ always\(\) \}\}/);
 });
 
@@ -179,4 +179,28 @@ test('第3弾はワークフロー数を増やさず依頼ブランチを安全�
  assert.match(tests,/git merge-base --is-ancestor "\$BASE_SHA" refs\/remotes\/origin\/main/);
  assert.match(tests,/git show "\$BASE_SHA:scripts\/ci-change-scope\.cjs"/);
  assert.match(tests,/npm run test:e2e -- tests\/ci-data-smoke\.spec\.cjs/);
+});
+
+test('03:00 JST nightly full suite is scheduled daily and creates deduplicated incident issue',()=>{
+ const nightly=read('nightly-full-tests.yml');
+ assert.match(nightly,/cron: '0 18 \* \* \*'/);
+ assert.match(nightly,/workflow_dispatch:/);
+ assert.match(nightly,/npm run test:unit/);
+ assert.match(nightly,/npm run validate/);
+ assert.match(nightly,/node scripts\/build-season-data.cjs --check/);
+ assert.match(nightly,/node scripts\/run-historical-dry-runs.cjs/);
+ assert.match(nightly,/npm run test:e2e -- --shard=/);
+ assert.match(nightly,/name: 夜間・全PCスマホ画面テスト/);
+ assert.match(nightly,/issues: write/);
+ assert.match(nightly,/gh issue list/);
+ assert.match(nightly,/gh issue create/);
+ assert.match(nightly,/gh issue comment/);
+ assert.doesNotMatch(nightly,/git push|--force/);
+ const main=read('tests.yml');
+ assert.match(main,/name: 変更画面だけPC・スマホテスト/);
+ assert.match(main,/FOCUSED_UNIT_FILES:/);
+ assert.match(main,/FOCUSED_BROWSER_FILES:/);
+ assert.match(main,/FOCUSED_PUBLISHER_FILES:/);
+ assert.match(main,/FOCUSED_BROWSER_RESULT:/);
+ assert.match(main,/run: node scripts\/ci-focused-tests.cjs/);
 });
