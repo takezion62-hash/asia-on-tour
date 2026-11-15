@@ -2,7 +2,7 @@
   "version": 1,
   "batch": {
     "id": "tracker-20261115-nac-s29-ps-s36-naw-s37-nine",
-    "description": "Screenshots 1846-1855 supplied by user. Four S29 NAC ZB Duos Event5 wins, S36 NAC PlayStation Final p1ng pre-existing attendance cash upgrade $240, four S37 NAW Console Duos Event10 wins. Per-team reward $200 for one VR, per-player $100.",
+    "description": "Screenshots 1846-1855 supplied by user. Four S29 NAC ZB Duos Event5 wins, S36 NAC PlayStation Final p1ng pre-existing attendance cash upgrade $240, four S37 NAW Console Duos Event10 wins. Per-team reward $200 for one VR, per-player $100. Existing player Cue.Ganondorf is confirmed by the same Epic UUID as screenshot nickname くまえふぶい; record is linked to the existing profile, not duplicated.",
     "targets": [
       {
         "date": "2024-04-04",
@@ -233,12 +233,12 @@
         "prize": 200,
         "prizePerPlayer": 100,
         "players": [
-          "くまえふぶい",
+          "Cue.Ganondorf",
           "ℭhromeRet.Player"
         ],
         "profiles": [
           {
-            "name": "くまえふぶい",
+            "name": "Cue.Ganondorf",
             "raw": "Cue.ガノンドロフ愛好家",
             "id": "5aa76ea4-2a16-4e4e-ac2a-e3da5a0d8ed2",
             "url": "https://fortnitetracker.com/profile/all/Cue.%E3%82%AC%E3%83%8E%E3%83%B3%E3%83%89%E3%83%AD%E3%83%95%E6%84%9B%E5%A5%BD%E5%AE%B6/events?id=5aa76ea4-2a16-4e4e-ac2a-e3da5a0d8ed2"
@@ -251,7 +251,9 @@
           }
         ],
         "playerRaw": "Cue.ガノンドロフ愛好家 / ℭhromeRet.Player",
-        "screenshot": "スクリーンショット (1851).png"
+        "screenshot": "スクリーンショット (1851).png",
+        "confirmedDisplayAlias": "くまえふぶい",
+        "existingCanonicalName": "Cue.Ganondorf"
       },
       {
         "date": "2025-10-26",
