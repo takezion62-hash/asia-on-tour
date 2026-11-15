@@ -1,7 +1,7 @@
 'use strict';
 const test=require('node:test');
 const assert=require('node:assert/strict');
-const {classify,parseNameStatus,detect,safeSha}=require('../scripts/ci-change-scope.cjs');
+const {classify,appendOnlyPlayerAliases,parseNameStatus,detect,safeSha}=require('../scripts/ci-change-scope.cjs');
 const c=(status,path)=>({status,path});
 const sha='a'.repeat(40),other='b'.repeat(40);
 const store=[c('M','source-results/S30.json'),c('M','source-results/manifest.json')];
@@ -21,6 +21,77 @@ test('review-approval and generated read models are safe only with updated canon
  assert.equal(classify(store).mode,'data');
  assert.equal(classify([...store,c('A','source-results/S44.json')]).mode,'data');
 });
+const beforeRoster={candidates:[{name:'Alpha',initials:'A'},{name:'Beta',initials:'B'}],
+ confirmedAliases:{Alpha:['old-alpha']}};
+const afterRoster={...beforeRoster,confirmedAliases:{
+ Alpha:['old-alpha','Alpha-name'],Beta:['second-name']
+}};
+const aliasInput={
+ playersBefore:JSON.stringify(beforeRoster),playersAfter:JSON.stringify(afterRoster)
+};
+test('append-only aliases are safe data updates with strict base/proposed JSON comparison',()=>{
+ assert.equal(appendOnlyPlayerAliases(aliasInput.playersBefore,aliasInput.playersAfter),true);
+ const files=[c('M','players.json'),c('M','season-data/manifest.json'),
+  c('M','season-data/ranking-all.json'),c('M','candidate-triage.json')];
+ assert.deepEqual(classify(files,aliasInput),{mode:'data',reason:'append-only-player-aliases'});
+ assert.equal(classify(files).mode,'full','unverified roster without trusted blobs');
+ assert.equal(classify([c('M','players.json')],aliasInput).mode,'data');
+ assert.equal(classify([...files,c('M','approval-history.json')],aliasInput).mode,'full');
+ assert.equal(classify([...files,c('M','updates.json')],aliasInput).mode,'full');
+ assert.equal(classify([...files,c('M','tournaments.json')],aliasInput).mode,'full');
+ assert.equal(classify([...files,c('M','scripts/validate-approvals.cjs')],aliasInput).mode,'full');
+});
+test('a roster edit cannot silently delete, merge or reassign an identity in fast mode',()=>{
+ const cases=[
+  beforeRoster,
+  {...beforeRoster,candidates:[{name:'Alpha'},...beforeRoster.candidates.slice(1)]},
+  {...afterRoster,confirmedAliases:{Alpha:['Alpha-name','old-alpha'],Beta:['second-name']}},
+  {...afterRoster,confirmedAliases:{Alpha:['Alpha-name'],Beta:['second-name']}},
+  {...afterRoster,confirmedAliases:{Alpha:['old-alpha','Beta'],Beta:['second-name']}},
+  {...afterRoster,confirmedAliases:{Alpha:['old-alpha','Alpha-name'],Beta:['Alpha-name']}},
+  {...afterRoster,confirmedAliases:{Alpha:['old-alpha','Alpha-name'],Ghost:['not-in-roster']}},
+  {...afterRoster,confirmedAliases:{Alpha:['old-alpha','Alpha-name'],Beta:['second-name','second-name']}},
+  {...afterRoster,unknownSecurityKey:true},
+  {...beforeRoster,confirmedAliases:{Alpha:['old-alpha','']}},
+ ];
+ for(const [i,changed] of cases.entries()){
+  const input={playersBefore:aliasInput.playersBefore,playersAfter:JSON.stringify(changed)};
+  assert.equal(appendOnlyPlayerAliases(input.playersBefore,input.playersAfter),false,String(i));
+  assert.equal(classify([c('M','players.json')],input).mode,'full',String(i));
+ }
+ assert.equal(appendOnlyPlayerAliases('{invalid',aliasInput.playersAfter),false);
+ assert.equal(classify([c('D','players.json')],aliasInput).mode,'full');
+});
+test('a source data + validator change stays FULL until PRs are separated',()=>{
+ const mixed=[...store,c('M','scripts/validate-approvals.cjs')];
+ assert.deepEqual(classify(mixed),{mode:'full',reason:'mixed-data-and-code-split-pr'});
+ assert.equal(classify([c('M','source-results/S30.json')]).mode,'full');
+ assert.equal(classify([c('M','source-results/manifest.json')]).mode,'full');
+ const code=classify([c('M','scripts/validate-approvals.cjs')]);
+ assert.equal(code.mode,'focused');
+ for(const file of ['tests/data-validation.test.cjs','tests/approval-history.test.cjs',
+  'tests/source-results-store.test.cjs'])assert.ok(code.unitFiles.includes(file));
+ assert.deepEqual(code.browserFiles,[]);
+});
+test('trusted git show of both roster revisions is mandatory for alias-only fast mode',()=>{
+ const pr={GITHUB_EVENT_NAME:'pull_request',PR_BASE_SHA:sha,PR_HEAD_SHA:other};
+ const calls=[];
+ const mock=(program,args)=>{
+  assert.equal(program,'git');calls.push(args);
+  if(args[0]==='diff')return Buffer.from('M\0players.json\0M\0season-data/manifest.json\0');
+  if(args[0]==='show'&&args[1]===sha+':players.json')return Buffer.from(aliasInput.playersBefore);
+  if(args[0]==='show'&&args[1]===other+':players.json')return Buffer.from(aliasInput.playersAfter);
+  throw Error('Unexpected git call');
+ };
+ assert.equal(detect(pr,mock).mode,'data');
+ assert.deepEqual(calls.filter(args=>args[0]==='show'),[
+  ['show',sha+':players.json'],['show',other+':players.json']]);
+ assert.equal(detect(pr,(program,args)=>{
+  if(args[0]==='show')throw Error('no trusted base roster');
+  return Buffer.from('M\0players.json\0');
+ }).mode,'full');
+});
+
 test('real-world review-publication file combinations use the fast path',()=>{
  const changes=[
   'approval-history.json','candidate-triage.json','history-sync-review.json',
