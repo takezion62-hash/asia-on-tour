@@ -39,8 +39,7 @@ test('S32 NAC Event 3 and 4 official archived Round 2 dates allow verified 0-VR/
   assert.equal(decide({...row,round:'Event '+event+' · Round 1 / 予選'},win,{...checkpoint,proposals:[{...row,round:'Event '+event+' · Round 1 / 予選'}]},data).approved,false);
   assert.equal(decide(row,win,{...checkpoint,proposals:[]},data).approved,false);
   const qualified={...row,id:'auto-s32-123456789013',round:'Event '+event+' · Round 1 / 予選',
-    kind:'予選',prize:0,vrs:0,points:160,source:source(eventId(event)+'_Event'+event+'Round1_NAC')};
-  function eventId(x){return x}
+    kind:'予選',prize:0,vrs:0,points:160,source:source(event+'_Event'+event+'Round1_NAC')};
   const qWin={...win,windowId:event+'_Event'+event+'Round1_NAC',round:qualified.round,kind:qualified.kind};
   qualified.source=source(qWin.windowId);
   assert.equal(decide(qualified,qWin,{...checkpoint,complete:true,proposals:[qualified]},data).approved,false,
