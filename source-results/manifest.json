@@ -2,10 +2,10 @@
   "version": 1,
   "role": "generated canonical-source snapshot; results.json remains authoritative in phase 1",
   "canonicalFile": "results.json",
-  "canonicalSha256": "986069dd67ca47dde476808160e385a18d7145dd07044ac87f12f1b961c0e095",
-  "count": 7549,
+  "canonicalSha256": "d7cb1b90ecea09f67a0c59af2a94828d2c4b660d81e3e69e96a1148bb3210b2b",
+  "count": 7564,
   "teamPrizeCents": 9161000,
-  "unconfirmedPrizeRecords": 1255,
+  "unconfirmedPrizeRecords": 1270,
   "personalPrizeCents": 9141000,
   "recordOrder": [
     "s42-me-slenderman-reload-skin-20261021-acris-chacha",
@@ -7556,7 +7556,22 @@
     "auto-s32-c66c4c3cd679",
     "auto-s32-ca88c078250f",
     "auto-s42-a69c709d320b",
-    "auto-s30-05e579569668"
+    "auto-s30-05e579569668",
+    "auto-s40-74c32db7d8cc",
+    "auto-s40-3ba93124edb1",
+    "auto-s33-04d828b06777",
+    "auto-s33-2c90a3198b58",
+    "auto-s33-d54f808f97ee",
+    "auto-s33-c7a7710475a2",
+    "auto-s33-e3795269140e",
+    "auto-s33-1daded7e03a3",
+    "auto-s33-d3dd3a0bfd30",
+    "auto-s33-87522da43720",
+    "auto-s33-0ac02bc3a48e",
+    "auto-s33-565644c9b5f5",
+    "auto-s33-9b2799c7103a",
+    "auto-s33-cd6321c43359",
+    "auto-s33-84f6b474909b"
   ],
   "shards": [
     {
@@ -7652,11 +7667,11 @@
     {
       "seasonId": "S33",
       "file": "source-results/S33.json",
-      "count": 322,
+      "count": 335,
       "teamPrizeCents": 72000,
-      "unconfirmedPrizeRecords": 205,
+      "unconfirmedPrizeRecords": 218,
       "personalPrizeCents": 72000,
-      "sha256": "659b8fa4dbca92acc2ba264ade1a7789e74ccfca9cb90311002b6c0ff2bfa3e4"
+      "sha256": "c4381ae95632ef7758e3c8f5cbf018cfe41b491e733fd6c7e65484484cdf6d53"
     },
     {
       "seasonId": "S34",
@@ -7715,11 +7730,11 @@
     {
       "seasonId": "S40",
       "file": "source-results/S40.json",
-      "count": 132,
+      "count": 134,
       "teamPrizeCents": 205000,
-      "unconfirmedPrizeRecords": 57,
+      "unconfirmedPrizeRecords": 59,
       "personalPrizeCents": 205000,
-      "sha256": "60234b06345e2816d86ed67f95571e1981088a73a0bb5602c1660ebc4104cb41"
+      "sha256": "acabfd8f286296c3b29767e901d16ef597af5e7dcf82824956af74ed86bf5052"
     },
     {
       "seasonId": "S41",
