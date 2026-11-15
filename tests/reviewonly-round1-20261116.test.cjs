@@ -54,3 +54,15 @@ test('2026-03-08 ME FNCS Division 1 existing 17th award stays a single $200 team
  assert.deepEqual(r.players,['meah','RiaM']);
  assert.equal(rows.filter(x=>x.id===p.candidateId).length,0);
 });
+
+test('safe manual approval executes before broad pending-review backfill in season rebuild',()=>{
+ const workflow=fs.readFileSync(path.join(root,'.github/workflows/build-season-data.yml'),'utf8');
+ const first='            node scripts/publish-reviewonly-round1-20261116.cjs --dry-run';
+ const apply='            node scripts/publish-reviewonly-round1-20261116.cjs\n';
+ const broad='            node scripts/publish-pending-review-20261114.cjs --dry-run';
+ assert.equal(workflow.split(first).length-1,1,'no duplicate manual dry-run');
+ assert.equal(workflow.split(apply).length-1,1,'exactly one manual publication');
+ assert.ok(workflow.indexOf(first)<workflow.indexOf(apply));
+ assert.ok(workflow.indexOf(apply)<workflow.indexOf(broad),
+  'broad auto-backfill must not preempt nine manually checked prizes');
+});
