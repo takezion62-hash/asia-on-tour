@@ -1,0 +1,63 @@
+name: Temporary resolve 27 history review-only candidates
+on:
+  push:
+    branches: [data/20261115-resolve-review-only-27]
+    paths:
+      - '.github/workflows/one-shot-20261115-review-only-27.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: one-shot-review-only-27-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  apply:
+    name: 27確認候補・15掲載・12重複の本人照合と登録
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: true
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '24'
+      - name: スクリプト構文・既存正本のハッシュとデータ整合性を確認
+        run: |
+          node --check scripts/one-shot-20261115-resolve-review-only-27.cjs
+          node scripts/source-results-store.cjs verify
+      - name: 保存済みEpic順位表と日程・12重複・15参加記録をdry-run照合
+        run: node scripts/one-shot-20261115-resolve-review-only-27.cjs --dry-run
+      - name: 検証済み15人の参加記録を掲載、既存12件の二重登録を解消
+        run: node scripts/one-shot-20261115-resolve-review-only-27.cjs
+      - name: 公開シーズン索引・確認待ち候補を再生成
+        run: |
+          node scripts/build-season-data.cjs
+          node scripts/build-candidate-triage.cjs
+      - name: 本人ID・賞金・重複・JSON・検証センター・単体回帰の必須検証
+        run: |
+          node scripts/validate-data.cjs
+          node scripts/validate-approvals.cjs
+          node scripts/validate-updates.cjs
+          node scripts/source-results-store.cjs verify
+          node scripts/build-source-results.cjs --check
+          node scripts/build-season-data.cjs --check
+          node scripts/build-candidate-triage.cjs --check
+          node --test tests/manual-approval.test.cjs tests/candidate-triage.test.cjs tests/review-batch.test.cjs tests/review-request.test.cjs tests/data-validation.test.cjs tests/source-results-store.test.cjs tests/session-date-consistency.test.cjs tests/historical-dry-runs.test.cjs
+      - name: 出典照合済みのデータとレビュー台帳だけをブランチにコミット
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A source-results season-data
+          git add candidate-triage.json history-sync-review.json history-sync-status.json
+          git add history-sync-reviewed.json approval-history.json updates.json
+          git diff --cached --check
+          git diff --cached --name-only
+          if git diff --cached --quiet; then
+            echo '::error::No verified historical review results were changed'
+            exit 1
+          fi
+          git commit -m 'data: publish 15 verified attendance records and resolve 12 duplicates'
+          git push origin HEAD:data/20261115-resolve-review-only-27
