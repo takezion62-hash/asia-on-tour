@@ -1,7 +1,7 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-15T10:27:24.298Z",
+  "checkedAt": "2026-11-15T14:28:26.615Z",
   "mode": "review",
   "scope": "history",
   "dateMode": "rolling",
@@ -11,27 +11,27 @@
   "provider": "osirion",
   "linkedPlayers": 665,
   "trackedWindows": 3172,
-  "found": 33,
-  "skipped": 16,
-  "imported": 14,
+  "found": 41,
+  "skipped": 10,
+  "imported": 16,
   "scannedPages": 96,
-  "completedWindows": 570,
+  "completedWindows": 578,
   "identityConflicts": 3,
-  "alreadyRegistered": 5473,
-  "autoApprovedTotal": 2779,
+  "alreadyRegistered": 5502,
+  "autoApprovedTotal": 2807,
   "invalidCachedCandidates": 1,
-  "manualReviewCandidates": 33,
+  "manualReviewCandidates": 41,
   "autoApprovedCosmeticThisRun": 0,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
   "autoApprovedUnrealThisRun": 0,
   "timeLimitReached": false,
-  "retryWindows": 5,
+  "retryWindows": 4,
   "transientFailures": 0,
   "malformedFailures": 0,
   "skippedLeaderboards": [],
   "reviewOnlyWindows": 1540,
-  "reviewOnlyCandidates": 0,
+  "reviewOnlyCandidates": 8,
   "unmappedEvents": 234,
   "unmappedEventIds": [
     "S30_ConsoleCashCups",
@@ -47,29 +47,29 @@
     "S30_Reload",
     "S30_ReloadZB"
   ],
-  "message": "確認専用候補27件を保存済みEpic順位表・公式開催枠・大会マスターで再照合：参加記録15件を追加、既存賞金記録12件は再掲載せず重複解消。未確認賞金・スキン・通過は認定しない。",
+  "message": "最新版と安全統合：新規掲載16件、重複スキップ0件、要確認の競合0件、確認待ち41件。既存の戦績・賞金は保持。",
   "manuallyPublished": 1657,
   "manuallyResolvedDuplicates": 169,
   "lastReviewedBatchAt": "2026-11-15T10:24:16.808Z",
   "manuallyCorrected": 13,
   "lastCorrectedReviewAt": "2026-11-13T13:45:16.115Z",
   "concurrentMerge": {
-    "appended": 14,
+    "appended": 16,
     "alreadyPublished": 0,
     "reviewConflicts": 0,
-    "keptPending": 60,
-    "reconciledAt": "2026-11-15T10:27:28.912Z"
+    "keptPending": 41,
+    "reconciledAt": "2026-11-15T14:28:32.279Z"
   },
   "coverage": {
     "total": 3172,
-    "completed": 570,
-    "notStarted": 2413,
-    "partial": 184,
+    "completed": 578,
+    "notStarted": 2407,
+    "partial": 183,
     "retryWaiting": 2,
-    "retryDue": 3,
-    "remaining": 2602,
-    "retryCount": 5,
-    "completionPercent": 18,
+    "retryDue": 2,
+    "remaining": 2594,
+    "retryCount": 4,
+    "completionPercent": 18.2,
     "byRegion": {
       "OCE": {
         "total": 562,
@@ -78,8 +78,8 @@
       },
       "ME": {
         "total": 555,
-        "completed": 176,
-        "pending": 379
+        "completed": 179,
+        "pending": 376
       },
       "EU": {
         "total": 575,
@@ -88,25 +88,25 @@
       },
       "BR": {
         "total": 554,
-        "completed": 58,
-        "pending": 496
+        "completed": 61,
+        "pending": 493
       },
       "NAC": {
         "total": 574,
-        "completed": 92,
-        "pending": 482
+        "completed": 93,
+        "pending": 481
       },
       "NAW": {
         "total": 352,
-        "completed": 83,
-        "pending": 269
+        "completed": 84,
+        "pending": 268
       }
     },
     "byYear": {
       "2024": {
         "total": 1035,
-        "completed": 147,
-        "pending": 888
+        "completed": 149,
+        "pending": 886
       },
       "2025": {
         "total": 702,
@@ -115,23 +115,12 @@
       },
       "2026": {
         "total": 1435,
-        "completed": 351,
-        "pending": 1084
+        "completed": 357,
+        "pending": 1078
       }
     },
     "outsideScopeCheckpoints": 0,
     "samples": [
-      {
-        "window": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event1Round2_NAC",
-        "date": "2024-06-04",
-        "region": "NAC",
-        "series": "victory-cup",
-        "status": "retryDue",
-        "nextPage": 8,
-        "totalPages": 45,
-        "retryAfter": "2026-11-15T08:32:45.245Z",
-        "errorCode": "OSIRION_TRANSIENT"
-      },
       {
         "window": "epicgames_S42_SoloVictoryCup_OCE/S42_SoloVictoryCup_Event1Round2_OCE",
         "date": "2026-09-05",
@@ -250,6 +239,17 @@
         "status": "partial",
         "nextPage": 3,
         "totalPages": 100,
+        "retryAfter": null,
+        "errorCode": null
+      },
+      {
+        "window": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event1Round2_NAC",
+        "date": "2024-06-04",
+        "region": "NAC",
+        "series": "victory-cup",
+        "status": "partial",
+        "nextPage": 20,
+        "totalPages": 45,
         "retryAfter": null,
         "errorCode": null
       }
