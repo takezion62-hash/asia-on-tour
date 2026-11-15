@@ -65,7 +65,7 @@ if(proposed.length){
  const u=new URL(o.source),v=new URL(r.source);
  assert(u.hostname==='fortnitetracker.com'&&v.hostname==='www.fortnite.com'&&
   u.searchParams.get('window')===v.searchParams.get('round')&&
-  o.source===duplicate.source,'FNCS official event identity mismatch');
+  r.source===duplicate.source,'FNCS official event identity mismatch');
  const cp=checkpointFor(r,cpIndex,equalCandidate)?.checkpoint;
  assert(cp?.rankingOrderValid===true&&cp.nextPage>0&&cp.lastSeenRank>=r.rank&&
   cp.proposals?.some(x=>x.id===r.id&&equalCandidate(x,r)),'FNCS saved official rank not found');
