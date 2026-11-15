@@ -85,11 +85,14 @@ function run(dry){
   assert.equal(newRow.prize,2*newRow.prizePerPlayer);
   assert(newRow.teamAccountIds.every((id,i)=>
     id===new URL(newRow.profiles[i].url).searchParams.get('id')?.replace(/-/g,'')));
-  assert(original.rows.every(r=>! (r.seasonId===newRow.seasonId&&r.region===newRow.region&&
-   r.date===newRow.date&&r.event===newRow.event&&r.round===newRow.round&&
-   (r.rank===newRow.rank || (Array.isArray(r.players)&&r.players.some(n=>newRow.players.includes(n))) ||
-    (Array.isArray(r.teamAccountIds)&&r.teamAccountIds.some(id=>newRow.teamAccountIds.includes(id))))),
-    'Potential duplicate event/rank/identity: '+newRow.id);
+  const duplicate=original.rows.some(r=>{
+   if(r.seasonId!==newRow.seasonId||r.region!==newRow.region||
+      r.date!==newRow.date||r.event!==newRow.event||r.round!==newRow.round)return false;
+   return r.rank===newRow.rank||
+      (Array.isArray(r.players)&&r.players.some(n=>newRow.players.includes(n)))||
+      (Array.isArray(r.teamAccountIds)&&r.teamAccountIds.some(id=>newRow.teamAccountIds.includes(id)));
+  });
+  assert(!duplicate,'Potential duplicate event/rank/identity: '+newRow.id);
  }
  assert.equal(new Set(additions.map(r=>r.id)).size,4);
  const next=[...original.rows,...additions];
