@@ -58,3 +58,10 @@ test('Official S43 Squads scope/cutoffs/points/prizes are immutable under valida
   assert.notDeepEqual(validateRegistry(doc,tournaments),[],JSON.stringify(copy));
  }
 });
+
+test('SOURCES script remains valid Javascript and distinguishes squad/team cash',()=>{
+ const ui=fs.readFileSync(path.join(root,'source-rules.js'),'utf8');
+ assert.doesNotThrow(()=>new Function(ui),'SOURCES JS must parse before expensive browser suites');
+ assert.match(ui,/teamPrizePerVictory/);
+ assert.match(ui,/squadsNote/);
+});
