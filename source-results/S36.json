@@ -8004,13 +8004,13 @@
     "player": "p1ng",
     "playerRaw": "boltzZzero0oǃ",
     "event": "PlayStation Cup",
-    "round": "Final / 参加確認",
+    "round": "Final / 賞金決勝",
     "rank": 88,
     "points": 19,
     "kills": 0,
     "vrs": 0,
-    "prize": null,
-    "kind": "参加確認",
+    "prize": 240,
+    "kind": "賞金決勝",
     "matches": 5,
     "seasonId": "S36",
     "chapter": 6,
@@ -8018,7 +8018,22 @@
     "tournamentId": "ch6s3-playstation-cup",
     "source": "https://www.fortnite.com/competitive/events/S36_PlayStationCup/?region=NAC&round=S36_PlayStationCup_Final_NAC",
     "verified": true,
-    "note": "本人Epic IDと公式開催日・地域・出典の保存済み順位表で参加・順位・得点・キル・VRを確認。現金賞金・進出・スキン獲得は未確認。出典: https://www.fortnite.com/competitive/events/S36_PlayStationCup/?region=NAC&round=S36_PlayStationCup_Final_NAC"
+    "note": "2026/11/15提供画像 スクリーンショット (1850).png と各Epic UUID・公式賞金表を照合。2025-07-27 NAC PlayStation Cup Final / 賞金決勝、88位、19pt、5試合、0K、0VR。個人$240。支払い完了は未確認。 Tracker: https://fortnitetracker.com/events/epicgames_S36_PlayStationCup_NAC?window=S36_PlayStationCup_Final_NAC Rule: https://www.fortnite.com/news/playstation-cup-chapter-6-season-3-official-rules 賞金未確認だった既存参加確認を同一IDのまま補完。元の表示名 boltzZzero0oǃ。",
+    "teamPrize": 240,
+    "prizePerPlayer": 240,
+    "players": [
+      "p1ng"
+    ],
+    "profiles": [
+      {
+        "name": "p1ng",
+        "url": "https://fortnitetracker.com/profile/all/p1ng/events?id=9766622e-ec65-443f-b8cf-2b860838c19d"
+      }
+    ],
+    "teamAccountIds": [
+      "9766622eec65443fb8cf2b860838c19d"
+    ],
+    "profileUrl": "https://fortnitetracker.com/profile/all/p1ng/events?id=9766622e-ec65-443f-b8cf-2b860838c19d"
   },
   {
     "id": "auto-s36-3579de39955a",

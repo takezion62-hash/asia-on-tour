@@ -2,6 +2,59 @@
   "version": 1,
   "entries": [
     {
+      "id": "review-publication-pending-20261114-2a8673e9dd0d-verified-rule-1",
+      "date": "2026-11-15",
+      "type": "records",
+      "title": "管理者確認済み戦績 1件を追加",
+      "description": "公式規則に基づく予選突破または決勝0VRのみを確認。未確認賞金なし。",
+      "recordIds": [
+        "auto-s30-37816e02eda0"
+      ]
+    },
+    {
+      "id": "review-publication-pending-20261114-2a8673e9dd0d-attendance-only-1",
+      "date": "2026-11-15",
+      "type": "records",
+      "title": "管理者確認済み戦績 17件を追加",
+      "description": "Epic ID・開催枠・順位表を再照合した出場確認のみ。賞金・予選突破・スキン獲得を未認定。",
+      "recordIds": [
+        "auto-s41-703b8ff523de",
+        "auto-s33-11f274098ce3",
+        "auto-s33-8cd87edcea76",
+        "auto-s33-6114c688aaa6",
+        "auto-s33-bf0870f29250",
+        "auto-s33-c64c00ff9a77",
+        "auto-s33-35674ab0ea9c",
+        "auto-s34-a0b92dfb170c",
+        "auto-s34-8bed2aa3c176",
+        "auto-s34-0a9f7d241fe5",
+        "auto-s34-122ef3baee16",
+        "auto-s34-a62f9e7da7f6",
+        "auto-s34-f3bb867fe4cc",
+        "auto-s34-c3817bdd8261",
+        "auto-s34-458ef2551ed8",
+        "auto-s34-a06bc57dd614",
+        "auto-s34-d572995248a7"
+      ]
+    },
+    {
+      "id": "tracker-20261115-nac-s29-ps-s36-naw-s37-nine",
+      "date": "2026-11-15",
+      "type": "records",
+      "title": "2024 NAC ZB Duos／2025 NAC PlayStation／2025 NAW Console Duos決勝：9件",
+      "description": "画像10枚とEpic UUIDを厳格照合。2024/4/4 NAC Zero Buildデュオ4組（各$200）、2025/7/27 NAC PlayStation決勝p1ngの既存参加確認を88位$240に補完、2025/10/26 NAW Consoleデュオ4組（各$200）。チーム賞金+$1,840、重複ゼロ。",
+      "recordIds": [
+        "s29-nac-zb-duos-vc-final-20240404-nannan-svbl",
+        "s29-nac-zb-duos-vc-final-20240404-kurama-p1ng",
+        "s29-nac-zb-duos-vc-final-20240404-prurun-asfa",
+        "s29-nac-zb-duos-vc-final-20240404-shikaneki-senokuru",
+        "s37-naw-console-duos-final-20251026-kumafv-chromeret",
+        "s37-naw-console-duos-final-20251026-piitako-gerbera",
+        "s37-naw-console-duos-final-20251026-seljuny-p1ng",
+        "s37-naw-console-duos-final-20251026-mat4dor-hakkun"
+      ]
+    },
+    {
       "id": "auto-sync-20261115023318",
       "date": "2026-11-15",
       "type": "records",
