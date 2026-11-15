@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-14",
+  "updatedAt": "2026-11-15",
   "description": "Epic公式規則で確認した大会ルール。Unreal Cupもチーム順位と確認済みEpic IDを照合し、賞金圏内は地域別チーム/個人賞金を、圏外は$0として自動掲載（本人資格・支払確認とは別）。S36 Console Duos・S43 Reload ZB Duosの公式Round 1上位突破／全参加$0を、本人照合済み結果に限り安全に記録。Round 2賞金は推定しない。S42 Console Zero Build Solo Victory Cupは公式上位通過と決勝VR1回$100を個別登録。",
   "rules": [
     {
@@ -253,6 +253,39 @@
       },
       "prizePerVictory": 100,
       "source": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-4-official-rules"
+    },
+    {
+      "id": "ch7s5-squads-victory-cup",
+      "seasonId": "S43",
+      "eventIds": [
+        "S43_SquadsVictoryCup"
+      ],
+      "team": "squad",
+      "series": "victory-cup",
+      "matchCaps": {
+        "予選": 8,
+        "賞金決勝": 3
+      },
+      "advance": {
+        "EU": 300,
+        "NAC": 200,
+        "NAW": 120,
+        "OCE": 120,
+        "ME": 120,
+        "BR": 120,
+        "ASIA": 120
+      },
+      "prizePerVictory": 50,
+      "teamPrizePerVictory": 200,
+      "finalWinPoints": 100,
+      "source": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-squads-victory-cup-chapter-7-mini-season-official-rules",
+      "note": "2026年11月Event 1/2共通。Round 1は8試合・2時間で現金賞金$0、EU上位300/NAC上位200/その他地域上位120チームが進出。Round 2は最大3試合・1時間。ビクロイのみ100pt、チーム賞金1VR=$200（各選手$50）。決勝の賞金・選手ID・開催枠・重複を照合してから掲載し、未確認結果は掲載しない。",
+      "evidence": [
+        {
+          "text": "Epic公式規則 Attachment A/C、Fortnite TrackerのEvent2（2026-11-23/24）予選・決勝画面で進出枠/勝利ポイント/個人賞金を確認。",
+          "url": "https://fortnitetracker.com/events/epicgames_S43_SquadsVictoryCup_NAC?window=S43_SquadsVictoryCup_Event2_Round2_NAC"
+        }
+      ]
     },
     {
       "id": "ch7s5-one-piece-buggy-cup-battle-royale",
