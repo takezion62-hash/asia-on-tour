@@ -31,6 +31,9 @@ jobs:
     timeout-minutes: 5
     outputs:
       mode: ${{ steps.scope.outputs.mode }}
+      unit_files: ${{ steps.scope.outputs.unit_files }}
+      browser_files: ${{ steps.scope.outputs.browser_files }}
+      publisher_files: ${{ steps.scope.outputs.publisher_files }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -69,10 +72,13 @@ jobs:
                 "$BASE_SHA" =~ ^0{40}$ ]]; then
             echo "mode=full" >> "$GITHUB_OUTPUT"
             echo "reason=unknown-event-or-base" >> "$GITHUB_OUTPUT"
-          elif git cat-file -e "$BASE_SHA:scripts/ci-change-scope.cjs" 2>/dev/null; then
+          elif git cat-file -e "$BASE_SHA:scripts/ci-change-scope.cjs" 2>/dev/null &&
+               git cat-file -e "$BASE_SHA:scripts/ci-focused-scope.cjs" 2>/dev/null; then
             # Never execute a change classifier from the PR/push itself.
-            git show "$BASE_SHA:scripts/ci-change-scope.cjs" > "$RUNNER_TEMP/aot-trusted-change-scope.cjs"
-            node "$RUNNER_TEMP/aot-trusted-change-scope.cjs"
+            mkdir -p "$RUNNER_TEMP/aot-trusted-scope"
+            git show "$BASE_SHA:scripts/ci-change-scope.cjs" > "$RUNNER_TEMP/aot-trusted-scope/ci-change-scope.cjs"
+            git show "$BASE_SHA:scripts/ci-focused-scope.cjs" > "$RUNNER_TEMP/aot-trusted-scope/ci-focused-scope.cjs"
+            node "$RUNNER_TEMP/aot-trusted-scope/ci-change-scope.cjs"
           else
             echo "mode=full" >> "$GITHUB_OUTPUT"
             echo "reason=classifier-not-yet-on-base" >> "$GITHUB_OUTPUT"
@@ -99,8 +105,10 @@ jobs:
       - name: Verify season shards agree with source manifest and legacy projection
         run: node scripts/build-source-results.cjs --check
       - name: S32 NAC Event3/4の開催日と元順位表を照合（掲載せずプレビュー）
+        if: needs.classify.outputs.mode == 'full'
         run: node scripts/publish-s32-nac-event3-4-zero-vr-review.cjs --dry-run
-      - name: 過去大会の検証を安全に並列化（すべて--dry-run・全件必須）
+      - name: 過去大会の全検証（不明変更の保守的なフルテスト用）
+        if: needs.classify.outputs.mode == 'full'
         run: node scripts/run-historical-dry-runs.cjs
       - name: 戦績データ更新は公開索引・確認待ち索引の正確な一致を確認
         if: needs.classify.outputs.mode == 'data'
@@ -122,6 +130,16 @@ jobs:
             tests/source-results-store.test.cjs \
             tests/source-results-split.test.cjs \
             tests/candidate-triage.test.cjs
+      - name: 変更に関連する単体テストと共通の賞金・本人ID回帰テスト
+        if: needs.classify.outputs.mode == 'focused'
+        env:
+          FOCUSED_UNIT_FILES: ${{ needs.classify.outputs.unit_files }}
+        run: node scripts/ci-focused-tests.cjs unit
+      - name: 変更された過去大会の掲載処理だけ安全にdry-run
+        if: needs.classify.outputs.mode == 'focused' && needs.classify.outputs.publisher_files != ''
+        env:
+          FOCUSED_PUBLISHER_FILES: ${{ needs.classify.outputs.publisher_files }}
+        run: node scripts/ci-focused-tests.cjs publisher
       - name: コード・不明変更はすべての単体テストを実行
         if: needs.classify.outputs.mode == 'full'
         run: npm run test:unit
@@ -179,6 +197,39 @@ jobs:
           if-no-files-found: ignore
           retention-days: 7
 
+  browser-focused:
+    needs: [classify]
+    if: needs.classify.outputs.mode == 'focused' && needs.classify.outputs.browser_files != ''
+    name: 変更画面だけPC・スマホテスト
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '24'
+          cache: npm
+      - name: HTML公開アセットと構文を検証
+        run: node --check scripts/serve.cjs && node scripts/site-assets.cjs
+      - name: 最小の依存とブラウザを準備
+        run: |
+          npm ci --ignore-scripts
+          npx playwright install --with-deps chromium
+      - name: 関連画面をPCとスマホの両方で検証
+        env:
+          FOCUSED_BROWSER_FILES: ${{ needs.classify.outputs.browser_files }}
+        run: node scripts/ci-focused-tests.cjs browser
+      - name: 対象画面の失敗レポートを保存
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: focused-browser-report
+          path: |
+            playwright-report/
+            test-results/
+          if-no-files-found: ignore
+          retention-days: 7
+
   smoke:
     name: データ専用PRのPC・スマホ軽量表示確認
     needs: [classify]
@@ -218,7 +269,7 @@ jobs:
 
   test:
     name: JSON検証・単体テスト・PCスマホ回帰テスト
-    needs: [classify, unit, browser, smoke]
+    needs: [classify, unit, browser, browser-focused, smoke]
     if: ${{ always() }}
     runs-on: ubuntu-latest
     timeout-minutes: 2
@@ -231,4 +282,6 @@ jobs:
           UNIT_RESULT: ${{ needs.unit.result }}
           BROWSER_RESULT: ${{ needs.browser.result }}
           SMOKE_RESULT: ${{ needs.smoke.result }}
+          FOCUSED_BROWSER_RESULT: ${{ needs.browser-focused.result }}
+          FOCUSED_BROWSER_REQUIRED: ${{ needs.classify.outputs.browser_files != '' }}
         run: node scripts/ci-required-gate.cjs
