@@ -112,7 +112,7 @@ for(const t of V.TARGETS){
   t.date+' '+t.region+' '+t.event+' '+t.round+'、'+t.rank+'位、'+t.points+
   'pt、'+t.matches+'試合、'+t.kills+(duo?'チーム':'')+'K、'+t.vrs+'VR。'+
   (duo?'チーム$'+t.prize+'・各選手$'+t.prizePerPlayer:'個人$240')+
-  '。支払い完了は未確認。 Tracker: '+t.sourceTracker+' Rule: '+t.rule;
+  '。支払い完了は未確認。'+(t.confirmedDisplayAlias?' ユーザー提供名義「'+t.confirmedDisplayAlias+'」は既存の'+t.existingCanonicalName+'と同一Epic UUID。':'')+' Tracker: '+t.sourceTracker+' Rule: '+t.rule;
  if(existing){
   must(hist.length===1,'missing or multiple existing approval history '+t.id);
   if(V.verifyRow(existing,hist[0])){already.push(t.id);continue}
