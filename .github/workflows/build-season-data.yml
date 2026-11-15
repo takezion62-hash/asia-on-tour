@@ -57,6 +57,10 @@ on:
       - data/manual-approvals/20261114-s22-s25-s31-ps-zb-10-proof.json
       - scripts/verified-s25-me-zb-duos-2023.cjs
       - data/manual-approvals/20230619-26-me-zb-duos-vcup-proof.json
+      - scripts/publish-reviewonly-round1-20261116.cjs
+      - scripts/verified-reviewonly-round1-20261116.cjs
+      - data/manual-approvals/20261116-reviewonly-10.json
+      - tests/reviewonly-round1-20261116.test.cjs
       - scripts/publish-pending-review-20261114.cjs
       - scripts/publish-nov14-pending-cash.cjs
       - scripts/reconcile-pending-hamikuma-20261114.cjs
@@ -171,6 +175,9 @@ jobs:
             node scripts/reconcile-s42-cosmetic-ranks-20261113.cjs --apply
             node scripts/publish-s32-nac-event3-4-zero-vr-review.cjs --dry-run
             node scripts/publish-s32-nac-event3-4-zero-vr-review.cjs --apply
+            node scripts/publish-reviewonly-round1-20261116.cjs --dry-run
+            node scripts/publish-reviewonly-round1-20261116.cjs
+            node --test tests/reviewonly-round1-20261116.test.cjs
             node scripts/validate-data.cjs
             node scripts/validate-approvals.cjs
             node scripts/validate-updates.cjs
