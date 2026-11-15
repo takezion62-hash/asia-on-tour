@@ -285,7 +285,7 @@ const S36_SQUID_NAW_SEVEN={
  10:[3,5,['なずな','801068c3-cddd-4d65-8d56-8722a9d253e4'],['お前らグラファいってないんｗｗ','fecbcdd3-237d-4d29-bdf5-973bb2d5c596']],
  11:[3,3,['ふーくんかっこいいǃǃ','cc2a8ff9-810e-4a8f-8402-0b61b62a878b'],['goat playerfnbr','e8815502-3abd-4dc7-a5ae-013c4d7dc00c']],
  12:[3,2,['くりたる','02463a80-d495-4907-b95d-2e0bf0bfa887'],['内海ゆうま','1c2dca5c-ae09-4ffe-87ae-6176911eb7be']],
- 13:[3,0,['ふぃる','b8ee0fe8-a574-4c3c-a37b-b746388064ec'],['がちのシャーク','d02e4ebd-1504-4724-bbcc-81263cee3779']]
+ 13:[3,0,['ふぃる','b8ee0fe8-a574-4c3c-a37b-b746388064ec'],['めるんやけん','d02e4ebd-1504-4724-bbcc-81263cee3779']]
 };
 const S36_SQUID_SOURCE='https://fortnitetracker.com/events/epicgames_S36_SquidGroundVictoryDuosCup_NAW?window=S36_VictoryDuosCup_Event6Round2_NAW';
 const S36_SQUID_RULE='https://www.fortnite.com/competitive/events/S36_SquidGroundVictoryDuosCup/?region=NAW';
