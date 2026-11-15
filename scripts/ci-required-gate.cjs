@@ -1,16 +1,15 @@
 'use strict';
-// The existing required status name is shared by both scopes. A skipped
-// browser job is permitted ONLY for a trusted, successful data-only PR whose
-// PC/mobile smoke also passed. All other skips or unknown modes fail.
+// Preserve the existing required status: every allowed skip must match the
+// trusted change scope; failed, absent, cancelled or unexpected jobs fail shut.
 function evaluate({scopeResult,mode,unitResult,browserResult,smokeResult,focusedBrowserResult,focusedBrowserRequired}) {
  if (scopeResult !== 'success' || unitResult !== 'success')
    return {ok:false,reason:'classification-or-validation-failed'};
  if (mode === 'full') return {
-   ok:browserResult === 'success' && smokeResult === 'skipped' && focusedBrowserResult !== 'success',
+   ok:browserResult === 'success' && smokeResult === 'skipped' && focusedBrowserResult === 'skipped',
    reason:'full-requires-every-browser-shard'
  };
  if (mode === 'data') return {
-   ok:browserResult === 'skipped' && smokeResult === 'success' && focusedBrowserResult !== 'success',
+   ok:browserResult === 'skipped' && smokeResult === 'success' && focusedBrowserResult === 'skipped',
    reason:'data-requires-pc-mobile-smoke'
  };
  if (mode === 'focused') return {
