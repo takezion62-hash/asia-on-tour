@@ -1,11 +1,11 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-16T17:25:30.893Z",
+  "checkedAt": "2026-11-16T20:59:30.960Z",
   "mode": "review",
   "scope": "recent",
   "dateMode": null,
-  "selectedWindows": 3,
+  "selectedWindows": 1,
   "fromDate": null,
   "toDate": null,
   "provider": "osirion",
@@ -13,11 +13,11 @@
   "trackedWindows": 92,
   "found": 0,
   "skipped": 0,
-  "imported": 1,
-  "scannedPages": 26,
-  "completedWindows": 91,
+  "imported": 0,
+  "scannedPages": 10,
+  "completedWindows": 92,
   "identityConflicts": 3,
-  "alreadyRegistered": 219,
+  "alreadyRegistered": 220,
   "autoApprovedTotal": 3077,
   "invalidCachedCandidates": 0,
   "manualReviewCandidates": 0,
@@ -36,24 +36,24 @@
   "unmappedEventIds": [
     "S42_ArenaTestCup"
   ],
-  "message": "最新版と安全統合：新規掲載1件、重複スキップ0件、要確認の競合0件、確認待ち0件。既存の戦績・賞金は保持。",
+  "message": "最新版と安全統合：新規掲載0件、重複スキップ0件、要確認の競合0件、確認待ち0件。既存の戦績・賞金は保持。",
   "concurrentMerge": {
-    "appended": 1,
+    "appended": 0,
     "alreadyPublished": 0,
     "reviewConflicts": 0,
     "keptPending": 0,
-    "reconciledAt": "2026-11-16T17:25:36.804Z"
+    "reconciledAt": "2026-11-16T20:59:34.773Z"
   },
   "coverage": {
     "total": 92,
-    "completed": 91,
+    "completed": 92,
     "notStarted": 0,
-    "partial": 1,
+    "partial": 0,
     "retryWaiting": 0,
     "retryDue": 0,
-    "remaining": 1,
+    "remaining": 0,
     "retryCount": 0,
-    "completionPercent": 98.9,
+    "completionPercent": 100,
     "byRegion": {
       "EU": {
         "total": 18,
@@ -62,8 +62,8 @@
       },
       "NAC": {
         "total": 18,
-        "completed": 17,
-        "pending": 1
+        "completed": 18,
+        "pending": 0
       },
       "OCE": {
         "total": 14,
@@ -89,28 +89,16 @@
     "byYear": {
       "2026": {
         "total": 92,
-        "completed": 91,
-        "pending": 1
+        "completed": 92,
+        "pending": 0
       }
     },
     "outsideScopeCheckpoints": 36,
-    "samples": [
-      {
-        "window": "epicgames_S43_ReloadZBDuosCashCup_NAC/S43_ReloadZBDuosCashCup_Event2Round1_NAC",
-        "date": "2026-11-16",
-        "region": "NAC",
-        "series": "cash-cup",
-        "status": "partial",
-        "nextPage": 90,
-        "totalPages": 100,
-        "retryAfter": null,
-        "errorCode": null
-      }
-    ]
+    "samples": []
   },
   "manuallyPublished": 320,
   "lastReviewedBatchAt": "2026-11-16T07:18:28.727Z",
-  "autoApprovedDuoQualifierThisRun": 1,
+  "autoApprovedDuoQualifierThisRun": 0,
   "latestManualReview": {
     "reviewedAt": "2026-11-12T04:01:32.087Z",
     "reviewedCandidates": 14,
