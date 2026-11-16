@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-11-16T06:49:00.443Z",
+  "checkedAt": "2026-11-16T07:13:13.717Z",
   "windows": {
     "epicgames_S43_PerformanceEvaluationTrios_EU/S43_PerformanceEvaluation_Event1Round1_EU": {
       "nextPage": 7,
@@ -17441,7 +17441,7 @@
       "totalPages": 50
     },
     "epicgames_S43_ReloadZBDuosCashCup_EU/S43_ReloadZBDuosCashCup_Event2Round1_EU": {
-      "nextPage": 50,
+      "nextPage": 60,
       "complete": false,
       "proposals": [
         {
@@ -17544,16 +17544,16 @@
           ]
         }
       ],
-      "pages": 50,
-      "lastAttemptAt": "2026-11-16T06:48:23.593Z",
+      "pages": 60,
+      "lastAttemptAt": "2026-11-16T07:12:40.613Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 5000,
-      "lastSuccessAt": "2026-11-16T06:48:24.594Z",
+      "lastSeenRank": 6000,
+      "lastSuccessAt": "2026-11-16T07:12:41.657Z",
       "totalPages": 100
     },
     "epicgames_S43_ReloadZBDuosCashCup_ME/S43_ReloadZBDuosCashCup_Event2Round1_ME": {
-      "nextPage": 50,
+      "nextPage": 60,
       "complete": false,
       "proposals": [
         {
@@ -18116,18 +18116,84 @@
             "64b1abb476f240d293d1e72ea210f465",
             "933df4d6fc284729a2384925bf36567d"
           ]
+        },
+        {
+          "id": "auto-s43-0f1514fd180d",
+          "date": "2026-11-15",
+          "region": "ME",
+          "player": "こがね / まならんど",
+          "playerRaw": "Zst kogane / Mancity Demon.",
+          "event": "Reload ZB Duos Cash Cup Zero Build",
+          "round": "Event 2 · Round 1 / 参加確認",
+          "rank": 5308,
+          "points": 234,
+          "kills": 39,
+          "vrs": 1,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 6,
+          "seasonId": "S43",
+          "chapter": 7,
+          "season": 5,
+          "tournamentId": "ch7s5-reload-zero-build-duos-cash-cup",
+          "source": "https://www.fortnite.com/competitive/events/S43_ReloadZBDuosCashCup/?region=ME&round=S43_ReloadZBDuosCashCup_Event2Round1_ME",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "こがね",
+            "まならんど"
+          ],
+          "teamAccountIds": [
+            "0247b9620f5e49709904d2d659995926",
+            "3306fd030cd14e3db13aa3e433f2718e"
+          ]
+        },
+        {
+          "id": "auto-s43-7726166109f4",
+          "date": "2026-11-15",
+          "region": "ME",
+          "player": "らずのっと / fuwa",
+          "playerRaw": "GRE RazNotfvǃ / zst fuwaǃ",
+          "event": "Reload ZB Duos Cash Cup Zero Build",
+          "round": "Event 2 · Round 1 / 参加確認",
+          "rank": 5881,
+          "points": 212,
+          "kills": 40,
+          "vrs": 0,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 5,
+          "seasonId": "S43",
+          "chapter": 7,
+          "season": 5,
+          "tournamentId": "ch7s5-reload-zero-build-duos-cash-cup",
+          "source": "https://www.fortnite.com/competitive/events/S43_ReloadZBDuosCashCup/?region=ME&round=S43_ReloadZBDuosCashCup_Event2Round1_ME",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "らずのっと",
+            "fuwa"
+          ],
+          "teamAccountIds": [
+            "9f6ae11302434c8899251bac599c71ea",
+            "ef02d0f2fcd1499b870f2f2c6888ce9c"
+          ]
         }
       ],
-      "pages": 50,
-      "lastAttemptAt": "2026-11-16T06:48:32.416Z",
+      "pages": 60,
+      "lastAttemptAt": "2026-11-16T07:12:49.746Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 5000,
-      "lastSuccessAt": "2026-11-16T06:48:33.217Z",
+      "lastSeenRank": 6000,
+      "lastSuccessAt": "2026-11-16T07:12:50.436Z",
       "totalPages": 100
     },
     "epicgames_S43_ReloadZBDuosCashCup_BR/S43_ReloadZBDuosCashCup_Event2Round1_BR": {
-      "nextPage": 40,
+      "nextPage": 50,
       "complete": false,
       "proposals": [
         {
@@ -18197,16 +18263,16 @@
           ]
         }
       ],
-      "pages": 40,
-      "lastAttemptAt": "2026-11-16T06:48:41.458Z",
+      "pages": 50,
+      "lastAttemptAt": "2026-11-16T07:12:58.054Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 4000,
-      "lastSuccessAt": "2026-11-16T06:48:42.220Z",
+      "lastSeenRank": 5000,
+      "lastSuccessAt": "2026-11-16T07:12:58.893Z",
       "totalPages": 100
     },
     "epicgames_S43_ReloadZBDuosCashCup_NAC/S43_ReloadZBDuosCashCup_Event2Round1_NAC": {
-      "nextPage": 30,
+      "nextPage": 40,
       "complete": false,
       "proposals": [
         {
@@ -18408,16 +18474,16 @@
           ]
         }
       ],
-      "pages": 30,
-      "lastAttemptAt": "2026-11-16T06:48:50.245Z",
+      "pages": 40,
+      "lastAttemptAt": "2026-11-16T07:13:04.736Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 3000,
-      "lastSuccessAt": "2026-11-16T06:48:50.882Z",
+      "lastSeenRank": 4000,
+      "lastSuccessAt": "2026-11-16T07:13:05.377Z",
       "totalPages": 100
     },
     "epicgames_S43_ReloadZBDuosCashCup_NAW/S43_ReloadZBDuosCashCup_Event2Round1_NAW": {
-      "nextPage": 20,
+      "nextPage": 30,
       "complete": false,
       "proposals": [
         {
@@ -18619,12 +18685,12 @@
           ]
         }
       ],
-      "pages": 20,
-      "lastAttemptAt": "2026-11-16T06:48:59.625Z",
+      "pages": 30,
+      "lastAttemptAt": "2026-11-16T07:13:13.012Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 2000,
-      "lastSuccessAt": "2026-11-16T06:49:00.433Z",
+      "lastSeenRank": 3000,
+      "lastSuccessAt": "2026-11-16T07:13:13.710Z",
       "totalPages": 76
     }
   }
