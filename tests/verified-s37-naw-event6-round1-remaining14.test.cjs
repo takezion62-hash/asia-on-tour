@@ -5,7 +5,7 @@ const fs=require('node:fs'),path=require('node:path');
 const ROOT=path.resolve(__dirname,'..');
 const {readResults}=require('../scripts/source-results-store.cjs');
 const {collision}=require('../scripts/manual-approval-core.cjs');
-const {POLICY,RULE,SOURCE,SPECS,CUTOFF,ARCHIVE_COMMIT,ARCHIVE_BLOB,getSpec,matchesOriginal,expectedKind,expectedRound,validatedRecord}=
+const {POLICY,RULE,SOURCE,SPECS,CUTOFF,ARCHIVE_COMMIT,ARCHIVE_BLOB,getSpec,matchesOriginal,removeResolvedPending,expectedKind,expectedRound,validatedRecord}=
  require('../scripts/verified-s37-naw-event6-round1-remaining14.cjs');
 const candidates=JSON.parse(fs.readFileSync(path.join(ROOT,'history-sync-review.json'),'utf8')).proposals;
 const results=readResults(ROOT).rows;
@@ -30,8 +30,12 @@ test('exact 14 candidates, 8 qualifiers and 6 attendance-only, no duplicate IDs'
   const existing=results.filter(x=>x.id===spec.id);
   const pending=candidates.filter(x=>x.id===spec.id);
   if(existing.length){
-   assert.equal(existing.length,1);assert.equal(pending.length,0);
+   assert.equal(existing.length,1);
    assert.ok(validatedRecord(existing[0],ledger.find(x=>x.id===spec.id)));
+   // This test also runs on the migration PR before the main queue is repaired.
+   assert.ok(pending.length===0||pending.length===1);
+   if(pending.length)assert.ok(matchesOriginal(pending[0],spec),
+    'stale queue entry must match the original exact proof');
   }else{
    assert.equal(pending.length,1);
    assert.ok(matchesOriginal(pending[0],spec));
@@ -90,4 +94,21 @@ test('immutable pristine 12-page evidence predates later transient API failures'
    assert.ok(verifiedPartialPage(active,{end:archiveEnd},cp));
   }else assert.ok(existing&&validatedRecord(existing,ledger.find(x=>x.id===spec.id)));
  }
+});
+
+test('already-published IDs are removed by ID and only once, without losing other candidates',()=>{
+ const ids=SPECS.map(s=>s.id);
+ const originals=ids.map(id=>({id}));
+ const unrelated={id:'auto-s37-unrelated',player:'unrelated'};
+ const queue=[...originals,unrelated];
+ const remaining=removeResolvedPending(queue,originals.map(x=>x.id));
+ assert.equal(remaining.length,1);
+ assert.equal(remaining[0],unrelated);
+ assert.equal(queue.length,originals.length+1);
+ assert.throws(()=>removeResolvedPending(remaining,ids),/missing/,
+  're-cleaning a resolved candidate should never silently mutate the queue');
+ assert.throws(()=>removeResolvedPending(queue,[...originals.map(x=>x.id),'missing']),/missing/);
+ assert.throws(()=>removeResolvedPending(queue,[...originals.map(x=>x.id),originals[0]?.id]),/invalid/);
+ const forged=[...queue,{...originals[0]}];
+ assert.throws(()=>removeResolvedPending(forged,originals.map(x=>x.id)),/duplicate/);
 });

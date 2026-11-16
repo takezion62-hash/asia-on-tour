@@ -39,6 +39,16 @@ function matchesOriginal(candidate,spec){
   JSON.stringify(candidate.players)===JSON.stringify(spec.players)&&
   ['rank','points','kills','vrs','matches'].every(field=>candidate[field]===spec[field]);
 }
+// Remove only named, previously proof-pinned IDs, never a whole event's queue.
+// Reject duplicate or absent ID requests rather than silently skipping.
+function removeResolvedPending(proposals,ids){
+ if(!Array.isArray(proposals)||!Array.isArray(ids)||new Set(ids).size!==ids.length)
+  throw Error('S37_NAW_EVENT6 invalid pending cleanup inputs');
+ const matching=proposals.filter(x=>ids.includes(x.id));
+ if(matching.length!==ids.length||new Set(matching.map(x=>x.id)).size!==ids.length)
+  throw Error('S37_NAW_EVENT6 missing or duplicate pending record');
+ return proposals.filter(x=>!ids.includes(x.id));
+}
 function expectedKind(spec){return spec.rank<=CUTOFF?'予選':'参加確認'}
 function expectedRound(spec){return 'Event 6 · Round 1 / '+(spec.rank<=CUTOFF?'予選突破':'参加確認')}
 function validatedRecord(row,entry){
@@ -61,4 +71,4 @@ function validatedRecord(row,entry){
   row.note.includes('上位250')&&row.note.includes('賞金$0')&&
   row.note.includes('未完了')&&row.note.includes(ARCHIVE_BLOB);
 }
-module.exports={POLICY,RULE,SOURCE,EVENT,WINDOW,KEY,CUTOFF,ARCHIVE_COMMIT,ARCHIVE_BLOB,SPECS,getSpec,matchesOriginal,expectedKind,expectedRound,validatedRecord};
+module.exports={POLICY,RULE,SOURCE,EVENT,WINDOW,KEY,CUTOFF,ARCHIVE_COMMIT,ARCHIVE_BLOB,SPECS,getSpec,matchesOriginal,removeResolvedPending,expectedKind,expectedRound,validatedRecord};

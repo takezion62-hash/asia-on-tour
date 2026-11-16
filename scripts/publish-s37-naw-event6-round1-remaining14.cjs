@@ -71,14 +71,25 @@ requireValid(db.tournaments.catalog.some(x=>x.id==='ch6s4-console-duos-victory'&
  'official tournament catalog changed');
 const history=db.reviews.history.proposals,pending=new Map(history.map(x=>[x.id,x]));
 const existingReviews=new Set(db.reviewed.entries.map(x=>x.id));
-const now=new Date().toISOString(),added=[],already=[];
+const now=new Date().toISOString(),added=[],already=[],stalePending=[];
 for(const spec of proof.SPECS){
  requireValid(!isExplicitlyHeld(spec.id),'an explicit hold overrides batch: '+spec.id);
  const old=db.results.filter(x=>x.id===spec.id);
  const ledger=db.ledger.entries.filter(x=>x.id===spec.id);
  if(old.length){
   requireValid(old.length===1&&ledger.length===1&&proof.validatedRecord(old[0],ledger[0])&&
-   !pending.has(spec.id)&&existingReviews.has(spec.id),'existing published data mismatch: '+spec.id);
+   existingReviews.has(spec.id),'existing published data mismatch: '+spec.id);
+  // Repair the historical bug where the publisher compared an ID Set with
+  // whole objects, leaving an already-published candidate in the raw queue.
+  // Never remove an entry whose original identity or rank has changed.
+  if(pending.has(spec.id)){
+   const row=pending.get(spec.id);
+   requireValid(proof.matchesOriginal(row,spec)&&
+    checkpoint.proposals.filter(x=>sameScannedCandidate(x,row)).length===1&&
+    liveCheckpoint.proposals.filter(x=>sameScannedCandidate(x,row)).length===1,
+    'published candidate still pending but its original proof differs: '+spec.id);
+   stalePending.push(spec.id);
+  }
   already.push(spec.id);
   continue;
  }
@@ -115,9 +126,9 @@ for(const spec of proof.SPECS){
   reviewedAt:now,policy:proof.POLICY,rule:proof.RULE,source:proof.SOURCE});
  added.push({id:spec.id,player:record.player,rank:record.rank,kind:record.kind,prize:record.prize});
 }
-if(added.length){
- const ids=new Set(added.map(x=>x.id));
- db.reviews.history.proposals=history.filter(x=>!ids.has(x));
+const resolvedIds=[...added.map(x=>x.id),...stalePending];
+if(resolvedIds.length){
+ db.reviews.history.proposals=proof.removeResolvedPending(history,resolvedIds);
  db.reviews.history.manualReviewedAt=now;
  db.statuses.history.found=db.reviews.history.proposals.length;
  db.statuses.history.manualReviewCandidates=db.reviews.history.proposals.length;
@@ -126,7 +137,7 @@ if(added.length){
  db.statuses.history.lastReviewedBatchAt=now;
  db.ledger.reviewedAt=now;db.reviewed.reviewedAt=now;
  const jst=new Date(Date.parse(now)+9*3600000).toISOString().slice(0,10);
- upsertPublicationLog(db.updates,{
+ if(added.length)upsertPublicationLog(db.updates,{
   id:'verified-s37-naw-event6-round1-remaining14-20261116',date:jst,
   title:'NAW 2025 Console Duos予選成績14件を追加',
   description:'保存済み成熟・連続順位表とEpic本人情報、NAW上位250の公式規則を個別照合。予選突破8件、参加確認6件、予選賞金$0。',
@@ -144,7 +155,7 @@ if(added.length){
  }
 }
 console.log('S37_NAW_EVENT6_REMAINING14 '+JSON.stringify({mode:dry?'dry-run':'apply',
- selected:proof.SPECS.length,published:added.length,already:already.length,added,
+ selected:proof.SPECS.length,published:added.length,already:already.length,stalePendingResolved:stalePending.length,added,
  remainingPending:db.reviews.history.proposals.length,
  originalCount:db.results.length-added.length,afterCount:db.results.length,
  addedPersonalPrize:0,addedTeamPrize:0}));
