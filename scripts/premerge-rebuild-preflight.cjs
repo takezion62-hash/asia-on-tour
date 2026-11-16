@@ -26,7 +26,8 @@ function parseWorkflow(workflow){
  assert(typeof workflow==='string','workflow content unavailable');
  const start=workflow.indexOf(FIRST),end=workflow.indexOf(NEXT,start);
  assert(start>=0&&end>start,'rebuild command boundaries missing or changed');
- assert(workflow.indexOf(FIRST,start+FIRST.length)===-1,'multiple rebuild command blocks');
+ // The source verification command legitimately occurs twice: at the start
+ // and after publishing. Only the first starts the replay block.
  const lines=workflow.slice(start,end).split('\n').filter(line=>line.trim());
  const steps=lines.map((line,index)=>{
   const match=line.match(RULE);
