@@ -2,10 +2,10 @@
   "version": 1,
   "role": "generated canonical-source snapshot; results.json remains authoritative in phase 1",
   "canonicalFile": "results.json",
-  "canonicalSha256": "2444fbfca86d99ca0d791995c821ea703748d05db85e6913489d352cc6e3d0ef",
-  "count": 8062,
+  "canonicalSha256": "4951be0f26407f80d0f52efc8bd4d82371db28a8b9baff1fc590157b43142947",
+  "count": 8071,
   "teamPrizeCents": 9206000,
-  "unconfirmedPrizeRecords": 1407,
+  "unconfirmedPrizeRecords": 1416,
   "personalPrizeCents": 9186000,
   "recordOrder": [
     "s42-me-slenderman-reload-skin-20261021-acris-chacha",
@@ -8069,7 +8069,16 @@
     "auto-s34-7ed124918dee",
     "auto-s31-7765f69f7d04",
     "auto-s34-1943c492debc",
-    "auto-s39-56d9e9060fa7"
+    "auto-s39-56d9e9060fa7",
+    "auto-s31-66eb2cfcaa66",
+    "auto-s31-687124f03577",
+    "auto-s31-01598ff13e0b",
+    "auto-s31-da2bc1c4eab1",
+    "auto-s31-cac42f18b719",
+    "auto-s31-f19ffd1ebf5c",
+    "auto-s39-f7aba7237e16",
+    "auto-s31-bf08a145b6fc",
+    "auto-s31-68af511f63ec"
   ],
   "shards": [
     {
@@ -8147,11 +8156,11 @@
     {
       "seasonId": "S31",
       "file": "source-results/S31.json",
-      "count": 1141,
+      "count": 1149,
       "teamPrizeCents": 1490000,
-      "unconfirmedPrizeRecords": 67,
+      "unconfirmedPrizeRecords": 75,
       "personalPrizeCents": 1490000,
-      "sha256": "9d2efb653c06d0431a666e591634687013d02b3cddc72bfd8e6db4d772c358c5"
+      "sha256": "630c863e6bc3c259ada88be21014bfd59dfe23e9dc7cf0675510350b804815ba"
     },
     {
       "seasonId": "S32",
@@ -8219,11 +8228,11 @@
     {
       "seasonId": "S39",
       "file": "source-results/S39.json",
-      "count": 163,
+      "count": 164,
       "teamPrizeCents": 870000,
-      "unconfirmedPrizeRecords": 10,
+      "unconfirmedPrizeRecords": 11,
       "personalPrizeCents": 870000,
-      "sha256": "30fbc74542194f187a69c9674acfd1ffa8cf245d0e8aa37f305aa380bc87c0a6"
+      "sha256": "ca5b76fef4d45142eeafca1fb9b25ff796360508465719e50b4d45cc9f0d6b2a"
     },
     {
       "seasonId": "S40",

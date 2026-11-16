@@ -1,12 +1,12 @@
 {
   "version": 1,
   "sourceCheckedAt": "2026-11-07T23:16:39.215Z",
-  "total": 155,
+  "total": 146,
   "alreadyResolved": 0,
   "byYear": [
     {
       "name": "2024",
-      "count": 95
+      "count": 87
     },
     {
       "name": "2025",
@@ -14,7 +14,7 @@
     },
     {
       "name": "2026",
-      "count": 15
+      "count": 14
     }
   ],
   "byRegion": [
@@ -24,7 +24,7 @@
     },
     {
       "name": "ME",
-      "count": 13
+      "count": 4
     },
     {
       "name": "NAC",
@@ -53,16 +53,8 @@
       "count": 3
     },
     {
-      "name": "FNCS Division 1 / ME / 2026",
-      "count": 1
-    },
-    {
       "name": "PlayStation Cup / ME / 2025",
       "count": 2
-    },
-    {
-      "name": "Reload Duos Cash Cup (Console) / ME / 2024",
-      "count": 8
     },
     {
       "name": "Reload Duos Victory Cup / NAW / 2025",
@@ -92,11 +84,11 @@
     },
     {
       "name": "partial-scan",
-      "count": 47
+      "count": 39
     },
     {
       "name": "rules-review",
-      "count": 45
+      "count": 44
     }
   ],
   "queue": [
@@ -3236,39 +3228,6 @@
       "rewardState": "cash-unconfirmed"
     },
     {
-      "id": "auto-s39-f7aba7237e16",
-      "origin": "history",
-      "date": "2026-02-11",
-      "year": "2026",
-      "region": "ME",
-      "tournamentId": "ch7s1-fncs-division-1",
-      "event": "FNCS Division 1",
-      "round": "単一開催枠 / 参加確認",
-      "player": "meah / RiaM",
-      "kind": "参加確認",
-      "rank": 208,
-      "points": 52,
-      "kills": 16,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S39_FNCSDivisionalCup_Division1/?region=ME&round=S39_FNCSDivisionalCup_Division1_Week2Day2_ME",
-      "status": "rules-review",
-      "action": "公式規則・賞金・突破・スキン条件を個別確認",
-      "reason": "確認専用大会は自動承認不可",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": true,
-        "observedPartial": false,
-        "seenPages": 3,
-        "totalPages": 3,
-        "sourceKey": "epicgames_S39_FNCSDivisionalCup_Division1_ME/S39_FNCSDivisionalCup_Division1_Week2Day2_ME",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
       "id": "auto-s41-2381163d55ca",
       "origin": "history",
       "date": "2026-06-15",
@@ -4884,270 +4843,6 @@
         "possibleExistingId": null
       },
       "rewardState": "source-amount-present-not-verified-by-triage"
-    },
-    {
-      "id": "auto-s31-01598ff13e0b",
-      "origin": "history",
-      "date": "2024-09-21",
-      "year": "2024",
-      "region": "ME",
-      "tournamentId": "ch5s4-reload-duos-cash-cup-console",
-      "event": "Reload Duos Cash Cup (Console)",
-      "round": "Event 3 · Round 1 / 参加確認",
-      "player": "らぶ / Cue.Ganondorf",
-      "kind": "参加確認",
-      "rank": 147,
-      "points": 53,
-      "kills": 33,
-      "vrs": 2,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S31_PlatformReloadDuosCashCupConsole/?region=ME&round=S31_PlatformReloadDuosCashCupConsole_Event3Round1_ME",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "確認専用大会は自動承認不可",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 12,
-        "totalPages": 100,
-        "sourceKey": "epicgames_S31_PlatformReloadDuosCashCupConsole_ME/S31_PlatformReloadDuosCashCupConsole_Event3Round1_ME",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s31-66eb2cfcaa66",
-      "origin": "history",
-      "date": "2024-09-21",
-      "year": "2024",
-      "region": "ME",
-      "tournamentId": "ch5s4-reload-duos-cash-cup-console",
-      "event": "Reload Duos Cash Cup (Console)",
-      "round": "Event 3 · Round 1 / 参加確認",
-      "player": "くりたる / らずのっと",
-      "kind": "参加確認",
-      "rank": 36,
-      "points": 65,
-      "kills": 42,
-      "vrs": 2,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S31_PlatformReloadDuosCashCupConsole/?region=ME&round=S31_PlatformReloadDuosCashCupConsole_Event3Round1_ME",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "確認専用大会は自動承認不可",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 12,
-        "totalPages": 100,
-        "sourceKey": "epicgames_S31_PlatformReloadDuosCashCupConsole_ME/S31_PlatformReloadDuosCashCupConsole_Event3Round1_ME",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s31-687124f03577",
-      "origin": "history",
-      "date": "2024-09-21",
-      "year": "2024",
-      "region": "ME",
-      "tournamentId": "ch5s4-reload-duos-cash-cup-console",
-      "event": "Reload Duos Cash Cup (Console)",
-      "round": "Event 3 · Round 1 / 参加確認",
-      "player": "AUR t3eny 19ǃ / しこぴよフォートナイト",
-      "kind": "参加確認",
-      "rank": 135,
-      "points": 54,
-      "kills": 26,
-      "vrs": 2,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S31_PlatformReloadDuosCashCupConsole/?region=ME&round=S31_PlatformReloadDuosCashCupConsole_Event3Round1_ME",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "確認専用大会は自動承認不可",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 12,
-        "totalPages": 100,
-        "sourceKey": "epicgames_S31_PlatformReloadDuosCashCupConsole_ME/S31_PlatformReloadDuosCashCupConsole_Event3Round1_ME",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s31-cac42f18b719",
-      "origin": "history",
-      "date": "2024-09-21",
-      "year": "2024",
-      "region": "ME",
-      "tournamentId": "ch5s4-reload-duos-cash-cup-console",
-      "event": "Reload Duos Cash Cup (Console)",
-      "round": "Event 3 · Round 1 / 参加確認",
-      "player": "ゆあもにーさまの歌を聴けぇǃ / ふぃる",
-      "kind": "参加確認",
-      "rank": 209,
-      "points": 51,
-      "kills": 27,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S31_PlatformReloadDuosCashCupConsole/?region=ME&round=S31_PlatformReloadDuosCashCupConsole_Event3Round1_ME",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "確認専用大会は自動承認不可",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 12,
-        "totalPages": 100,
-        "sourceKey": "epicgames_S31_PlatformReloadDuosCashCupConsole_ME/S31_PlatformReloadDuosCashCupConsole_Event3Round1_ME",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s31-da2bc1c4eab1",
-      "origin": "history",
-      "date": "2024-09-21",
-      "year": "2024",
-      "region": "ME",
-      "tournamentId": "ch5s4-reload-duos-cash-cup-console",
-      "event": "Reload Duos Cash Cup (Console)",
-      "round": "Event 3 · Round 1 / 参加確認",
-      "player": "きおらび / SN Season",
-      "kind": "参加確認",
-      "rank": 190,
-      "points": 51,
-      "kills": 51,
-      "vrs": 2,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S31_PlatformReloadDuosCashCupConsole/?region=ME&round=S31_PlatformReloadDuosCashCupConsole_Event3Round1_ME",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "確認専用大会は自動承認不可",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 12,
-        "totalPages": 100,
-        "sourceKey": "epicgames_S31_PlatformReloadDuosCashCupConsole_ME/S31_PlatformReloadDuosCashCupConsole_Event3Round1_ME",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s31-f19ffd1ebf5c",
-      "origin": "history",
-      "date": "2024-09-21",
-      "year": "2024",
-      "region": "ME",
-      "tournamentId": "ch5s4-reload-duos-cash-cup-console",
-      "event": "Reload Duos Cash Cup (Console)",
-      "round": "Event 3 · Round 1 / 参加確認",
-      "player": "るかぽりん / みずるん",
-      "kind": "参加確認",
-      "rank": 840,
-      "points": 37,
-      "kills": 49,
-      "vrs": 1,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S31_PlatformReloadDuosCashCupConsole/?region=ME&round=S31_PlatformReloadDuosCashCupConsole_Event3Round1_ME",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "確認専用大会は自動承認不可",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 12,
-        "totalPages": 100,
-        "sourceKey": "epicgames_S31_PlatformReloadDuosCashCupConsole_ME/S31_PlatformReloadDuosCashCupConsole_Event3Round1_ME",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s31-68af511f63ec",
-      "origin": "history",
-      "date": "2024-10-19",
-      "year": "2024",
-      "region": "ME",
-      "tournamentId": "ch5s4-reload-duos-cash-cup-console",
-      "event": "Reload Duos Cash Cup (Console)",
-      "round": "Event 7 / 参加確認",
-      "player": "おこっとふー / ふぃる",
-      "kind": "参加確認",
-      "rank": 632,
-      "points": 80,
-      "kills": 45,
-      "vrs": 1,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S31_PlatformReloadDuosCashCupConsole/?region=ME&round=S31_PlatformReloadDuosCashCupConsole_Event7_ME",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "確認専用大会は自動承認不可",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 12,
-        "totalPages": 74,
-        "sourceKey": "epicgames_S31_PlatformReloadDuosCashCupConsole_ME/S31_PlatformReloadDuosCashCupConsole_Event7_ME",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s31-bf08a145b6fc",
-      "origin": "history",
-      "date": "2024-10-19",
-      "year": "2024",
-      "region": "ME",
-      "tournamentId": "ch5s4-reload-duos-cash-cup-console",
-      "event": "Reload Duos Cash Cup (Console)",
-      "round": "Event 7 / 参加確認",
-      "player": "Reeton120fps- / Mofu",
-      "kind": "参加確認",
-      "rank": 51,
-      "points": 171,
-      "kills": 117,
-      "vrs": 2,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S31_PlatformReloadDuosCashCupConsole/?region=ME&round=S31_PlatformReloadDuosCashCupConsole_Event7_ME",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "確認専用大会は自動承認不可",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 12,
-        "totalPages": 74,
-        "sourceKey": "epicgames_S31_PlatformReloadDuosCashCupConsole_ME/S31_PlatformReloadDuosCashCupConsole_Event7_ME",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
     },
     {
       "id": "auto-s41-fd9646fe2a06",
