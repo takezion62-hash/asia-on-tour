@@ -536,6 +536,7 @@ async function main(){
  const skippedLeaderboards=[];
  const maxRunMinutes=historical?Math.min(14,Math.max(2,Number.isFinite(config.maxRunMinutes)?config.maxRunMinutes:12)):14;
  const scanDeadline=Date.now()+maxRunMinutes*60000;
+ let reviewRecoverySummary=null;
  if(historical){
   const byYear={},byRegion={};
   let resumed=0,finishable=0,unstarted=0;
@@ -550,6 +551,12 @@ async function main(){
   }
   const recoveryCandidates=recoveryShortlist(active,state,pendingReviews,data.results,
    {perWindowCap:config.maxPagesPerWindowPerRun||12});
+  reviewRecoverySummary={selectedWindows:recoveryCandidates.length,
+   candidateCount:recoveryCandidates.reduce((n,x)=>n+x.candidateCount,0),
+   cashUnconfirmedCount:recoveryCandidates.reduce((n,x)=>n+x.cashCandidates,0),
+   selected:recoveryCandidates.slice(0,6).map(x=>({window:x.windowKey,
+    remainingPages:x.remainingPages,candidateCount:x.candidateCount,
+    cashUnconfirmedCount:x.cashCandidates}))};
   console.log('OSIRION_HISTORY_SCAN_PLAN '+JSON.stringify({
    selected:active.length,pageBudget:budget,byYear,byRegion,
    resumed,unstarted,finishable,
@@ -696,7 +703,7 @@ async function main(){
  const reviewOnlyWindows=windows.filter(w=>w.series!=='victory-cup').length;
  const reviewOnlyCandidates=unique.size?Array.from(unique.values()).filter(p=>p.reviewOnly===true).length:0;
  const cumulativeApprovals=data.updates.entries.filter(x=>x.title?.startsWith('公式規則で自動承認：')).reduce((sum,x)=>sum+(x.recordIds?.length||0),0);
- const status={version:1,state:'checked',checkedAt:stamp,mode:'review',scope:historical?'history':'recent',dateMode:historical?(storedConfig.toDate==='rolling'?'rolling':'fixed'):null,selectedWindows:active.length,fromDate:historical?config.fromDate:null,toDate:historical?config.toDate:null,provider:'osirion',linkedPlayers:accounts.length,trackedWindows:windows.length,found:unique.size,skipped:invalidRows,imported,scannedPages:scanned,completedWindows:finished,identityConflicts:conflicts.length,alreadyRegistered:recordedFromReview,autoApprovedTotal:cumulativeApprovals,invalidCachedCandidates:invalidCached,manualReviewCandidates:manuallyHeld,autoApprovedParticipationThisRun:verifiedParticipationIds.size,autoApprovedCosmeticThisRun:importedCosmetics,autoApprovedCashThisRun:cash.approved.length,autoApprovedPerformanceThisRun:performance.approved.length,autoApprovedUnrealThisRun:unreal.approved.length,autoApprovedDuoQualifierThisRun:duo.approved.length,timeLimitReached,retryWindows:coverage.retryCount,coverage,transientFailures,malformedFailures,skippedLeaderboards:skippedLeaderboards.slice(0,15),reviewOnlyWindows,reviewOnlyCandidates,unmappedEvents:unmapped.length,unmappedEventIds:unmapped.slice(0,12),message:'Osirionで'+accounts.length+'アカウントIDを追跡。今回の公式規則による自動承認'+imported+'件、追加確認待ち'+unique.size+'件、名義照合保留'+conflicts.length+'件。'};
+ const status={version:1,state:'checked',checkedAt:stamp,mode:'review',scope:historical?'history':'recent',dateMode:historical?(storedConfig.toDate==='rolling'?'rolling':'fixed'):null,selectedWindows:active.length,fromDate:historical?config.fromDate:null,toDate:historical?config.toDate:null,provider:'osirion',linkedPlayers:accounts.length,trackedWindows:windows.length,found:unique.size,skipped:invalidRows,imported,scannedPages:scanned,completedWindows:finished,identityConflicts:conflicts.length,alreadyRegistered:recordedFromReview,autoApprovedTotal:cumulativeApprovals,invalidCachedCandidates:invalidCached,manualReviewCandidates:manuallyHeld,autoApprovedParticipationThisRun:verifiedParticipationIds.size,autoApprovedCosmeticThisRun:importedCosmetics,autoApprovedCashThisRun:cash.approved.length,autoApprovedPerformanceThisRun:performance.approved.length,autoApprovedUnrealThisRun:unreal.approved.length,autoApprovedDuoQualifierThisRun:duo.approved.length,timeLimitReached,retryWindows:coverage.retryCount,coverage,...(historical?{reviewRecovery:reviewRecoverySummary}:{}),transientFailures,malformedFailures,skippedLeaderboards:skippedLeaderboards.slice(0,15),reviewOnlyWindows,reviewOnlyCandidates,unmappedEvents:unmapped.length,unmappedEventIds:unmapped.slice(0,12),message:'Osirionで'+accounts.length+'アカウントIDを追跡。今回の公式規則による自動承認'+imported+'件、追加確認待ち'+unique.size+'件、名義照合保留'+conflicts.length+'件。'};
  state.checkedAt=stamp;
  write(prefix+'-scan.json',state);
  write(prefix+'-review.json',{version:1,status:'review',checkedAt:stamp,proposals:[...unique.values()]});
