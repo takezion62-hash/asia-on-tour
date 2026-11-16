@@ -1,7 +1,7 @@
 'use strict';
 const test=require('node:test'),assert=require('node:assert/strict');
 const fs=require('node:fs'),path=require('node:path'),os=require('node:os');
-const {parseWorkflow,runSteps,copyToTemp}=
+const {parseWorkflow,runSteps,copyToTemp,inspect}=
  require('../scripts/premerge-rebuild-preflight.cjs');
 const root=path.resolve(__dirname,'..');
 const workflow=fs.readFileSync(path.join(root,'.github/workflows/build-season-data.yml'),'utf8');
@@ -73,4 +73,26 @@ test('disposable source copy is independent from the original files',()=>{
   if(clone)fs.rmSync(clone,{recursive:true,force:true});
   fs.rmSync(source,{recursive:true,force:true});
  }
+});
+
+test('triage guard counts both recent and historical unresolved IDs without double counting',()=>{
+ const dir=fs.mkdtempSync(path.join(os.tmpdir(),'aot-triage-sample-'));
+ const put=(file,data)=>{
+  const target=path.join(dir,file);
+  fs.mkdirSync(path.dirname(target),{recursive:true});
+  fs.writeFileSync(target,JSON.stringify(data)+'\n');
+ };
+ try{
+  put('source-results/manifest.json',{count:2,recordOrder:['published','old']});
+  put('history-sync-review.json',{proposals:[
+   {id:'history'},{id:'dup'},{id:'published'},{id:'reviewed'}
+  ]});
+  put('auto-sync-review.json',{proposals:[{id:'recent'},{id:'dup'},{id:'old'}]});
+  put('history-sync-reviewed.json',{entries:[{id:'reviewed'}]});
+  put('approval-history.json',{entries:[{id:'one'}]});
+  const info=inspect(dir);
+  assert.equal(info.published,2);
+  assert.equal(info.pending,3); // history, recent and duplicate ID once
+  assert.equal(info.approvals,1);
+ }finally{fs.rmSync(dir,{recursive:true,force:true})}
 });
