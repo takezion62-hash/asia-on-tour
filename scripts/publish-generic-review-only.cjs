@@ -67,7 +67,8 @@ function reconcileHeld(db,{timestamp=new Date().toISOString()}={}){
    // Do not permit arbitrary legacy updates or unrelated record IDs.
    const legacyHeldBatch=update.id==='verified-review-round5-49e46653b38e'&&
     update.type==='records'&&Array.isArray(update.recordIds)&&
-    update.recordIds.length===2&&
+    update.recordIds.length>=1&&update.recordIds.length<=2&&
+    update.recordIds.includes(id)&&
     update.recordIds.every(x=>MANIFEST.held.some(h=>h.id===x));
    assert((update.type==='records'&&update.id?.startsWith('review-publication-'))||legacyHeldBatch,
     'unknown update history entry references a held candidate '+id);
