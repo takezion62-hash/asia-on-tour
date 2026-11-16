@@ -366,62 +366,18 @@
       },
       "decision": "zero-round1",
       "ruleId": "s33-2025-naw-solo-cash-event6-round1"
+    }
+  ],
+  "held": [
+    {
+      "id": "auto-s34-74d1f337746f",
+      "reason": "Saved Epic roster UUID not available; source verification pending",
+      "source": "https://www.fortnite.com/competitive/events/S34_PlaystationCup/?region=ME&round=S34_PlaystationCupFinal_ME"
     },
     {
-      "candidate": {
-        "id": "auto-s34-74d1f337746f",
-        "date": "2025-05-01",
-        "region": "ME",
-        "player": "モバイル勢のまかろん",
-        "playerRaw": "BRN 916GonLuck",
-        "event": "PlayStation Cup",
-        "round": "単一開催枠 / 参加確認",
-        "rank": 56,
-        "points": 63,
-        "kills": 6,
-        "vrs": 0,
-        "prize": null,
-        "kind": "参加確認",
-        "matches": 6,
-        "seasonId": "S34",
-        "chapter": 6,
-        "season": 2,
-        "tournamentId": "ch6s2-playstation-cup",
-        "source": "https://www.fortnite.com/competitive/events/S34_PlaystationCup/?region=ME&round=S34_PlaystationCupFinal_ME",
-        "verified": true,
-        "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
-        "reviewOnly": true,
-        "reviewReason": "確認専用大会は自動承認不可"
-      },
-      "decision": "attendance-only"
-    },
-    {
-      "candidate": {
-        "id": "auto-s34-04720ffe5218",
-        "date": "2025-05-01",
-        "region": "ME",
-        "player": "くりたる",
-        "playerRaw": "FTW kulitalu 10ǃ",
-        "event": "PlayStation Cup",
-        "round": "単一開催枠 / 参加確認",
-        "rank": 64,
-        "points": 47,
-        "kills": 2,
-        "vrs": 0,
-        "prize": null,
-        "kind": "参加確認",
-        "matches": 6,
-        "seasonId": "S34",
-        "chapter": 6,
-        "season": 2,
-        "tournamentId": "ch6s2-playstation-cup",
-        "source": "https://www.fortnite.com/competitive/events/S34_PlaystationCup/?region=ME&round=S34_PlaystationCupFinal_ME",
-        "verified": true,
-        "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
-        "reviewOnly": true,
-        "reviewReason": "確認専用大会は自動承認不可"
-      },
-      "decision": "attendance-only"
+      "id": "auto-s34-04720ffe5218",
+      "reason": "Saved Epic roster UUID not available; source verification pending",
+      "source": "https://www.fortnite.com/competitive/events/S34_PlaystationCup/?region=ME&round=S34_PlaystationCupFinal_ME"
     }
   ]
 }
