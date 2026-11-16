@@ -1,7 +1,8 @@
 'use strict';
 // Preserve the existing required status: every allowed skip must match the
 // trusted change scope; failed, absent, cancelled or unexpected jobs fail shut.
-function evaluate({scopeResult,mode,unitResult,browserResult,smokeResult,focusedBrowserResult,focusedBrowserRequired}) {
+function evaluate({scopeResult,mode,unitResult,browserResult,smokeResult,focusedBrowserResult,focusedBrowserRequired,preflightResult}) {
+ if(preflightResult!=='success')return {ok:false,reason:'pre-merge-rebuild-preflight-not-successful'};
  if (scopeResult !== 'success' || unitResult !== 'success')
    return {ok:false,reason:'classification-or-validation-failed'};
  if (mode === 'full') return {
@@ -24,6 +25,7 @@ function evaluate({scopeResult,mode,unitResult,browserResult,smokeResult,focused
 if(require.main===module){
  const input={
    scopeResult:process.env.SCOPE_RESULT,
+   preflightResult:process.env.PREFLIGHT_RESULT,
    mode:process.env.MODE,
    unitResult:process.env.UNIT_RESULT,
    browserResult:process.env.BROWSER_RESULT,

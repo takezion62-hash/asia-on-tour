@@ -2,8 +2,8 @@
 const test=require('node:test');
 const assert=require('node:assert/strict');
 const {evaluate}=require('../scripts/ci-required-gate.cjs');
-const full={scopeResult:'success',mode:'full',unitResult:'success',browserResult:'success',smokeResult:'skipped',focusedBrowserResult:'skipped'};
-const data={scopeResult:'success',mode:'data',unitResult:'success',browserResult:'skipped',smokeResult:'success',focusedBrowserResult:'skipped'};
+const full={scopeResult:'success',mode:'full',preflightResult:'success',unitResult:'success',browserResult:'success',smokeResult:'skipped',focusedBrowserResult:'skipped'};
+const data={scopeResult:'success',mode:'data',preflightResult:'success',unitResult:'success',browserResult:'skipped',smokeResult:'success',focusedBrowserResult:'skipped'};
 
 test('full mode approves only when every browser shard and unit pass',()=>{
  assert.equal(evaluate(full).ok,true);
@@ -31,7 +31,7 @@ test('unsafe classifier, missing unit, unknown mode, or no context never approve
  assert.equal(evaluate({}).ok,false);
 });
 
-const focused={scopeResult:'success',mode:'focused',unitResult:'success',
+const focused={scopeResult:'success',mode:'focused',preflightResult:'success',unitResult:'success',
  browserResult:'skipped',smokeResult:'skipped',focusedBrowserResult:'skipped',focusedBrowserRequired:'false'};
 test('focused mode requires all critical validation plus optional relevant PC/mobile test',()=>{
  assert.equal(evaluate(focused).ok,true);
@@ -48,4 +48,14 @@ test('focused mode requires all critical validation plus optional relevant PC/mo
 test('full or data modes reject unexpected focused browser results',()=>{
  assert.equal(evaluate({...full,focusedBrowserResult:'failure'}).ok,false);
  assert.equal(evaluate({...data,focusedBrowserResult:'success'}).ok,false);
+});
+
+test('pre-merge production rebuild must pass in full, data and focused modes',()=>{
+ for(const base of [full,data,focused]){
+  for(const preflightResult of ['skipped','failure','cancelled','',null,undefined]){
+   assert.equal(evaluate({...base,preflightResult}).ok,false,
+    'preflight='+String(preflightResult)+' mode='+base.mode);
+  }
+  assert.equal(evaluate({...base,preflightResult:'success'}).ok,true);
+ }
 });

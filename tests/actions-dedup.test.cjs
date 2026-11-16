@@ -36,11 +36,14 @@ test('PRの必須CIは変更範囲を安全判定し、必要なら全テスト�
  assert.match(main,/run: npm run validate/);
  assert.match(main,/run: npm run test:unit/);
  assert.match(main,/run: npm run test:e2e -- --shard=\$\{\{ matrix\.shard \}\}\/4/);
- assert.match(main,/needs: \[classify, unit, browser, browser-focused, smoke\]/);
+ assert.match(main,/needs: \[classify, unit, browser, browser-focused, smoke, preflight\]/);
  assert.match(main,/if: needs\.classify\.outputs\.mode == 'full'/);
  assert.match(main,/if: needs\.classify\.outputs\.mode == 'data'/);
  assert.match(main,/FOCUSED_BROWSER_RESULT: \$\{\{ needs\.browser-focused\.result \}\}/);
  assert.match(main,/name: 変更画面だけPC・スマホテスト/);
+ assert.match(main,/name: 公開前・本番再生成の統合テスト（隔離コピー）/);
+ assert.match(main,/run: node scripts\/premerge-rebuild-preflight\.cjs/);
+ assert.match(main,/PREFLIGHT_RESULT: \$\{\{ needs\.preflight\.result \}\}/);
  assert.match(main,/UNIT_RESULT: \$\{\{ needs\.unit\.result \}\}/);
  assert.match(main,/BROWSER_RESULT: \$\{\{ needs\.browser\.result \}\}/);
  assert.match(main,/cancel-in-progress: true/);
@@ -110,5 +113,5 @@ test('chat request push is isolated from expensive pre-publication CI, but still
  assert.match(approval,/gh workflow run tests\.yml/);
  assert.match(ci,/review-requests\/launch\.json/);
  assert.match(ci,/review_base_sha/);
- assert.match(ci,/needs: \[classify, unit, browser, browser-focused, smoke\]/);
+ assert.match(ci,/needs: \[classify, unit, browser, browser-focused, smoke, preflight\]/);
 });
