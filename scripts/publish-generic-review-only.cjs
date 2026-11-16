@@ -3,6 +3,7 @@
 // No guessed rules, no amount inference and no publication from the queue alone.
 const fs=require('node:fs'),path=require('node:path');
 const {loadReviewDb,writeReviewDb}=require('./reviewed-publication-core.cjs');
+const {publishResults}=require('./source-results-store.cjs');
 const {apply,candidatesFor,equalCandidate}=require('./manual-approval-core.cjs');
 const {checkpointIndex,checkpointFor}=require('./review-batch-index.cjs');
 const {sameScannedCandidate}=require('./verified-partial-page.cjs');
@@ -222,13 +223,23 @@ function plan(db,decisions,{timestamp=new Date().toISOString()}={}){
 function main(){
  const argv=process.argv.slice(2),dry=argv.includes('--dry-run');
  assert(argv.length===0||(argv.length===1&&dry),'only --dry-run supported');
- const db=loadReviewDb(ROOT);
+ const db=loadReviewDb(ROOT),originalIds=new Set(db.results.map(r=>r.id));
  db.reviewed=JSON.parse(fs.readFileSync(path.join(ROOT,'history-sync-reviewed.json'),'utf8'));
  assert(Array.isArray(db.reviewed.entries),'reviewed ledger invalid');
  const all=approvals();
  const restored=reconcileHeld(db);
  const result=plan(db,all);
  if(!dry&&(result.changes.length||restored)){
+  if(restored){
+   const afterIds=new Set(result.next.results.map(r=>r.id));
+   const dropped=[...originalIds].filter(id=>!afterIds.has(id));
+   const allowed=new Set(MANIFEST.held?.map(x=>x.id)||[]);
+   assert(dropped.length===restored&&dropped.every(id=>allowed.has(id)),
+    'unexpected source-result deletion outside exact reviewed hold IDs');
+   // The source store normally forbids EVERY deletion. Only this explicitly
+   // verified, bounded two-ID reconciliation receives narrow opt-in.
+   publishResults(ROOT,result.next.results,{allowRemoval:true});
+  }
   writeReviewDb(ROOT,result.next);
   fs.writeFileSync(path.join(ROOT,'history-sync-reviewed.json'),
    JSON.stringify(result.next.reviewed,null,2)+'\n');
