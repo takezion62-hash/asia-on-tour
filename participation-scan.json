@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-11-15T21:26:14.164Z",
+  "checkedAt": "2026-11-16T03:53:03.825Z",
   "windows": {
     "epicgames_S42_InoxtagIconCup_NAW/S42_InoxtagIconCup_NAW": {
       "nextPage": 60,
@@ -12,12 +12,12 @@
       "emptyAttempts": 0
     },
     "epicgames_S41_FNCSCommunityCup_ME/S41_FNCSCommunityCup_ME": {
-      "nextPage": 50,
-      "pages": 50,
-      "complete": false,
-      "coverageLimited": false,
+      "nextPage": 60,
+      "pages": 60,
+      "complete": true,
+      "coverageLimited": true,
       "totalPages": 100,
-      "lastScanned": "2026-11-09T09:46:37.495Z",
+      "lastScanned": "2026-11-16T03:52:46.943Z",
       "emptyAttempts": 0
     },
     "epicgames_S41_PSTypicalGamer_ME/S41_PSTypicalGamer_Final_ME": {
@@ -1080,12 +1080,12 @@
       "emptyAttempts": 0
     },
     "epicgames_S33_SoloCashCup_NAW/S33_SoloCashCup_Event5Round1_NAW": {
-      "nextPage": 30,
-      "pages": 30,
+      "nextPage": 40,
+      "pages": 40,
       "complete": false,
       "coverageLimited": false,
       "totalPages": 100,
-      "lastScanned": "2026-11-15T21:26:14.164Z",
+      "lastScanned": "2026-11-16T03:53:03.825Z",
       "emptyAttempts": 0
     },
     "epicgames_S30_DuosCashCup_OCE/S30_DuosCashCup_Event1Round1_OCE": {
@@ -1104,6 +1104,24 @@
       "coverageLimited": false,
       "totalPages": 100,
       "lastScanned": "2026-11-15T21:25:46.350Z",
+      "emptyAttempts": 0
+    },
+    "epicgames_S43_ReloadZBDuosCashCup_NAC/S43_ReloadZBDuosCashCup_Event2Round1_NAC": {
+      "nextPage": 10,
+      "pages": 10,
+      "complete": false,
+      "coverageLimited": false,
+      "totalPages": 100,
+      "lastScanned": "2026-11-16T03:52:39.305Z",
+      "emptyAttempts": 0
+    },
+    "epicgames_S30_SoloZBVictoryCashCup_ME/S30_SoloZBVictoryCashCup_Event2Round1_ME": {
+      "nextPage": 10,
+      "pages": 10,
+      "complete": false,
+      "coverageLimited": false,
+      "totalPages": 64,
+      "lastScanned": "2026-11-16T03:52:56.579Z",
       "emptyAttempts": 0
     }
   }
