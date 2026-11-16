@@ -87,10 +87,20 @@ function inspect(root){
  const load=name=>JSON.parse(fs.readFileSync(path.join(root,name),'utf8'));
  const src=load('source-results/manifest.json');
  const queue=load('history-sync-review.json');
+ const recent=load('auto-sync-review.json');
+ const reviewed=load('history-sync-reviewed.json');
  const ledger=load('approval-history.json');
- assert(Number.isSafeInteger(src.count)&&Array.isArray(queue.proposals)&&
-  Array.isArray(ledger.entries),'invalid sandbox source or audit ledger');
- return {published:src.count,pending:queue.proposals.length,
+ assert(Number.isSafeInteger(src.count)&&Array.isArray(src.recordOrder)&&
+  Array.isArray(queue.proposals)&&Array.isArray(recent.proposals)&&
+  Array.isArray(reviewed.entries)&&Array.isArray(ledger.entries),
+  'invalid sandbox source or review/approval ledger');
+ // Triage counts unresolved DISTINCT IDs across both scanners. A candidate
+ // already represented in published results or the reviewed ledger is resolved.
+ const resolved=new Set([...src.recordOrder,...reviewed.entries.map(x=>x.id)]);
+ const pending=new Set([...queue.proposals,...recent.proposals]
+  .filter(x=>x&&typeof x.id==='string'&&!resolved.has(x.id))
+  .map(x=>x.id)).size;
+ return {published:src.count,pending,
   approvals:ledger.entries.length,sourceHash:hash(fs.readFileSync(path.join(root,'source-results/manifest.json')))};
 }
 
