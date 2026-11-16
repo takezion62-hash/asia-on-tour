@@ -1,7 +1,7 @@
 {
   "version": 1,
   "sourceCheckedAt": "2026-11-07T23:16:39.215Z",
-  "total": 153,
+  "total": 149,
   "alreadyResolved": 0,
   "byYear": [
     {
@@ -10,7 +10,7 @@
     },
     {
       "name": "2025",
-      "count": 61
+      "count": 57
     },
     {
       "name": "2026",
@@ -32,7 +32,7 @@
     },
     {
       "name": "NAW",
-      "count": 44
+      "count": 40
     },
     {
       "name": "OCE",
@@ -46,7 +46,7 @@
     },
     {
       "name": "Duos Console Victory Cash Cup / NAW / 2025",
-      "count": 35
+      "count": 31
     },
     {
       "name": "Duos Console Victory Cash Cup / OCE / 2025",
@@ -88,7 +88,7 @@
     },
     {
       "name": "partial-scan",
-      "count": 71
+      "count": 67
     },
     {
       "name": "rules-review",
@@ -4585,39 +4585,6 @@
       "rewardState": "source-amount-present-not-verified-by-triage"
     },
     {
-      "id": "auto-s37-53b9f3b97c1d",
-      "origin": "history",
-      "date": "2025-09-28",
-      "year": "2025",
-      "region": "NAW",
-      "tournamentId": "ch6s4-console-duos-victory",
-      "event": "Duos Console Victory Cash Cup",
-      "round": "Event 6 · Round 1 / 予選",
-      "player": "きおらび / SN Season",
-      "kind": "予選",
-      "rank": 40,
-      "points": 259,
-      "kills": 43,
-      "vrs": 1,
-      "prize": 0,
-      "source": "https://www.fortnite.com/competitive/events/S37_ConsoleDuosCashCups/?region=NAW&round=S37_ConsoleDuosCashCups_Event6Round1_NAW",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "順位表の取得が完了していません",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 12,
-        "totalPages": 62,
-        "sourceKey": "epicgames_S37_ConsoleDuosCashCups_NAW/S37_ConsoleDuosCashCups_Event6Round1_NAW",
-        "possibleExistingId": null
-      },
-      "rewardState": "source-amount-present-not-verified-by-triage"
-    },
-    {
       "id": "auto-s37-59a231e13359",
       "origin": "history",
       "date": "2025-09-28",
@@ -4816,72 +4783,6 @@
       "rewardState": "source-amount-present-not-verified-by-triage"
     },
     {
-      "id": "auto-s37-b1fc6e573046",
-      "origin": "history",
-      "date": "2025-09-28",
-      "year": "2025",
-      "region": "NAW",
-      "tournamentId": "ch6s4-console-duos-victory",
-      "event": "Duos Console Victory Cash Cup",
-      "round": "Event 6 · Round 1 / 予選",
-      "player": "Botえもん / すかい",
-      "kind": "予選",
-      "rank": 59,
-      "points": 250,
-      "kills": 27,
-      "vrs": 2,
-      "prize": 0,
-      "source": "https://www.fortnite.com/competitive/events/S37_ConsoleDuosCashCups/?region=NAW&round=S37_ConsoleDuosCashCups_Event6Round1_NAW",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "順位表の取得が完了していません",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 12,
-        "totalPages": 62,
-        "sourceKey": "epicgames_S37_ConsoleDuosCashCups_NAW/S37_ConsoleDuosCashCups_Event6Round1_NAW",
-        "possibleExistingId": null
-      },
-      "rewardState": "source-amount-present-not-verified-by-triage"
-    },
-    {
-      "id": "auto-s37-ba492cfcb3fa",
-      "origin": "history",
-      "date": "2025-09-28",
-      "year": "2025",
-      "region": "NAW",
-      "tournamentId": "ch6s4-console-duos-victory",
-      "event": "Duos Console Victory Cash Cup",
-      "round": "Event 6 · Round 1 / 予選",
-      "player": "りーく / ちからV2",
-      "kind": "予選",
-      "rank": 54,
-      "points": 253,
-      "kills": 46,
-      "vrs": 1,
-      "prize": 0,
-      "source": "https://www.fortnite.com/competitive/events/S37_ConsoleDuosCashCups/?region=NAW&round=S37_ConsoleDuosCashCups_Event6Round1_NAW",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "順位表の取得が完了していません",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 12,
-        "totalPages": 62,
-        "sourceKey": "epicgames_S37_ConsoleDuosCashCups_NAW/S37_ConsoleDuosCashCups_Event6Round1_NAW",
-        "possibleExistingId": null
-      },
-      "rewardState": "source-amount-present-not-verified-by-triage"
-    },
-    {
       "id": "auto-s37-c579947451a3",
       "origin": "history",
       "date": "2025-09-28",
@@ -4929,39 +4830,6 @@
       "points": 234,
       "kills": 33,
       "vrs": 0,
-      "prize": 0,
-      "source": "https://www.fortnite.com/competitive/events/S37_ConsoleDuosCashCups/?region=NAW&round=S37_ConsoleDuosCashCups_Event6Round1_NAW",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "順位表の取得が完了していません",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 12,
-        "totalPages": 62,
-        "sourceKey": "epicgames_S37_ConsoleDuosCashCups_NAW/S37_ConsoleDuosCashCups_Event6Round1_NAW",
-        "possibleExistingId": null
-      },
-      "rewardState": "source-amount-present-not-verified-by-triage"
-    },
-    {
-      "id": "auto-s37-e5101bad430d",
-      "origin": "history",
-      "date": "2025-09-28",
-      "year": "2025",
-      "region": "NAW",
-      "tournamentId": "ch6s4-console-duos-victory",
-      "event": "Duos Console Victory Cash Cup",
-      "round": "Event 6 · Round 1 / 予選",
-      "player": "でーもんくらげǃ / ももち",
-      "kind": "予選",
-      "rank": 220,
-      "points": 221,
-      "kills": 40,
-      "vrs": 1,
       "prize": 0,
       "source": "https://www.fortnite.com/competitive/events/S37_ConsoleDuosCashCups/?region=NAW&round=S37_ConsoleDuosCashCups_Event6Round1_NAW",
       "status": "partial-scan",
