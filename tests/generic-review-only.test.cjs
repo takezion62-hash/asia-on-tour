@@ -3,7 +3,7 @@ const test=require('node:test'),assert=require('node:assert/strict');
 const fs=require('node:fs'),path=require('node:path');
 const root=path.resolve(__dirname,'..');
 const core=require('../scripts/generic-review-only-core.cjs');
-const {plan}=require('../scripts/publish-generic-review-only.cjs');
+const {plan,reconcileHeld}=require('../scripts/publish-generic-review-only.cjs');
 const {loadReviewDb}=require('../scripts/reviewed-publication-core.cjs');
 const {audit}=require('../scripts/validate-approvals.cjs');
 const manual=core.MANIFEST;
@@ -62,7 +62,10 @@ test('officially approved zero-cash record is audited byte-for-byte against orig
  assert.equal(core.verifyPublishedZero(r,{...entry,recordHash:'0'.repeat(64)},a),false);
 });
 test('complete selected manual batch remains idempotent, cash-neutral and ledger-valid',()=>{
- const db=evidence(),before=db.results.length;
+ const db=evidence();
+ const restored=reconcileHeld(db);
+ assert.ok(restored===0||restored===2);
+ const before=db.results.length;
  const result=plan(db,core.approvals());
  assert.equal(result.changes.length+result.already,core.approvals().length);
  assert.equal(result.next.results.length,before+result.changes.length);
@@ -89,4 +92,25 @@ test('generic publisher runs before fallback backfill and stage-one full replay 
  const steps=parseWorkflow(workflow).map(tokens=>tokens.join(' '));
  assert.ok(steps.indexOf('scripts/publish-generic-review-only.cjs')<
   steps.indexOf('scripts/publish-pending-review-20261114.cjs'));
+});
+
+test('explicitly held PlayStation candidates cannot be silently published by legacy batch fallback',()=>{
+ const db=evidence();
+ const restored=reconcileHeld(db);
+ assert.ok(restored===0||restored===2);
+ const held=core.MANIFEST.held;
+ assert.equal(held.length,2);
+ for(const h of held){
+  assert.equal(db.results.some(x=>x.id===h.id),false);
+  assert.equal(db.reviews.history.proposals.filter(x=>x.id===h.id).length,1);
+ }
+ const {reviewBatch}=require('../scripts/review-batch-core.cjs');
+ const outcome=reviewBatch(db,{ids:held.map(x=>x.id),limit:20,
+  runId:'test-generic-explicit-held-ids',timestamp:'2026-11-16T05:40:00Z'});
+ assert.equal(outcome.published.length,0);
+ assert.equal(outcome.duplicates.length,0);
+ assert.equal(outcome.held.length,2);
+ assert.ok(outcome.held.every(x=>x.reason.includes('承認保留')));
+ assert.equal(outcome.next.results.length,db.results.length);
+ assert.equal(audit(db.results,db.ledger,db.players).length,0);
 });

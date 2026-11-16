@@ -1,7 +1,7 @@
 'use strict';
 const test=require('node:test'),assert=require('node:assert/strict');
 const fs=require('node:fs'),path=require('node:path'),os=require('node:os');
-const {parseWorkflow,runSteps,copyToTemp,inspect}=
+const {parseWorkflow,runSteps,copyToTemp,inspect,retainedOrExactHeldReversal}=
  require('../scripts/premerge-rebuild-preflight.cjs');
 const root=path.resolve(__dirname,'..');
 const workflow=fs.readFileSync(path.join(root,'.github/workflows/build-season-data.yml'),'utf8');
@@ -95,4 +95,24 @@ test('triage guard counts both recent and historical unresolved IDs without doub
   assert.equal(info.pending,3); // history, recent and duplicate ID once
   assert.equal(info.approvals,1);
  }finally{fs.rmSync(dir,{recursive:true,force:true})}
+});
+
+test('preflight allows only the exact original attendance record and ledger to be returned to review hold',()=>{
+ const old={version:1,entries:[
+  {id:'hold',recordId:'hold',source:'https://www.fortnite.com/competitive/events/X/?region=ME&round=R',
+   decision:'published',policy:'attendance-only',approvedAt:'2026-11-16T05:30:00Z'},
+  {id:'safe',recordId:'safe',decision:'published',policy:'verified-rule'}]};
+ const next={version:1,entries:[old.entries[1]]};
+ const before={recordOrder:['safe','hold']},after={recordOrder:['safe']};
+ const proof={held:[{id:'hold',candidate:{id:'hold',verified:true,reviewOnly:true,
+  prize:null,source:old.entries[0].source}}]};
+ assert.equal(retainedOrExactHeldReversal(old,next,before,after,proof),true);
+ assert.equal(retainedOrExactHeldReversal(old,old,before,before,proof),true);
+ assert.equal(retainedOrExactHeldReversal(old,next,before,after,{held:[]}),false);
+ assert.equal(retainedOrExactHeldReversal(old,next,before,{recordOrder:['safe','hold']},proof),false);
+ assert.equal(retainedOrExactHeldReversal(old,next,{recordOrder:['safe','hold','unrelated']},after,proof),false);
+ assert.equal(retainedOrExactHeldReversal(old,next,before,after,{held:[{
+  id:'hold',candidate:{...proof.held[0].candidate,teamAccountIds:['forged']}}]}),false);
+ assert.equal(retainedOrExactHeldReversal(old,next,before,after,{held:[{
+  id:'hold',candidate:{...proof.held[0].candidate,source:'https://example.com'}}]}),false);
 });
