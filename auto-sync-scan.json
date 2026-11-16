@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-11-16T09:45:27.750Z",
+  "checkedAt": "2026-11-16T10:19:52.974Z",
   "windows": {
     "epicgames_S43_PerformanceEvaluationTrios_EU/S43_PerformanceEvaluation_Event1Round1_EU": {
       "nextPage": 7,
@@ -17441,7 +17441,7 @@
       "totalPages": 50
     },
     "epicgames_S43_ReloadZBDuosCashCup_EU/S43_ReloadZBDuosCashCup_Event2Round1_EU": {
-      "nextPage": 80,
+      "nextPage": 90,
       "complete": false,
       "proposals": [
         {
@@ -17544,16 +17544,16 @@
           ]
         }
       ],
-      "pages": 80,
-      "lastAttemptAt": "2026-11-16T09:44:47.108Z",
+      "pages": 90,
+      "lastAttemptAt": "2026-11-16T10:19:13.656Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 8000,
-      "lastSuccessAt": "2026-11-16T09:44:50.293Z",
+      "lastSeenRank": 9000,
+      "lastSuccessAt": "2026-11-16T10:19:15.268Z",
       "totalPages": 100
     },
     "epicgames_S43_ReloadZBDuosCashCup_ME/S43_ReloadZBDuosCashCup_Event2Round1_ME": {
-      "nextPage": 80,
+      "nextPage": 90,
       "complete": false,
       "proposals": [
         {
@@ -18250,16 +18250,16 @@
           ]
         }
       ],
-      "pages": 80,
-      "lastAttemptAt": "2026-11-16T09:44:56.437Z",
+      "pages": 90,
+      "lastAttemptAt": "2026-11-16T10:19:25.258Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 8000,
-      "lastSuccessAt": "2026-11-16T09:44:57.103Z",
+      "lastSeenRank": 9000,
+      "lastSuccessAt": "2026-11-16T10:19:26.232Z",
       "totalPages": 100
     },
     "epicgames_S43_ReloadZBDuosCashCup_BR/S43_ReloadZBDuosCashCup_Event2Round1_BR": {
-      "nextPage": 70,
+      "nextPage": 80,
       "complete": false,
       "proposals": [
         {
@@ -18362,16 +18362,16 @@
           ]
         }
       ],
-      "pages": 70,
-      "lastAttemptAt": "2026-11-16T09:45:02.586Z",
+      "pages": 80,
+      "lastAttemptAt": "2026-11-16T10:19:33.727Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 7000,
-      "lastSuccessAt": "2026-11-16T09:45:04.005Z",
+      "lastSeenRank": 8000,
+      "lastSuccessAt": "2026-11-16T10:19:34.471Z",
       "totalPages": 100
     },
     "epicgames_S43_ReloadZBDuosCashCup_NAC/S43_ReloadZBDuosCashCup_Event2Round1_NAC": {
-      "nextPage": 60,
+      "nextPage": 70,
       "complete": false,
       "proposals": [
         {
@@ -18606,16 +18606,16 @@
           ]
         }
       ],
-      "pages": 60,
-      "lastAttemptAt": "2026-11-16T09:45:26.150Z",
+      "pages": 70,
+      "lastAttemptAt": "2026-11-16T10:19:51.858Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 6000,
-      "lastSuccessAt": "2026-11-16T09:45:27.743Z",
+      "lastSeenRank": 7000,
+      "lastSuccessAt": "2026-11-16T10:19:52.965Z",
       "totalPages": 100
     },
     "epicgames_S43_ReloadZBDuosCashCup_NAW/S43_ReloadZBDuosCashCup_Event2Round1_NAW": {
-      "nextPage": 50,
+      "nextPage": 60,
       "complete": false,
       "proposals": [
         {
@@ -18881,14 +18881,47 @@
             "39945a32ce554fb0803f279235d5433a",
             "9b42679699ef41c99349e15c60890634"
           ]
+        },
+        {
+          "id": "auto-s43-155aa4110597",
+          "date": "2026-11-16",
+          "region": "NAW",
+          "player": "ダグトリオ大将fv / ディグダǃ",
+          "playerRaw": "ダグトリオ大将fv / ディグダǃ",
+          "event": "Reload ZB Duos Cash Cup Zero Build",
+          "round": "Event 2 · Round 1 / 参加確認",
+          "rank": 5262,
+          "points": 84,
+          "kills": 16,
+          "vrs": 0,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 4,
+          "seasonId": "S43",
+          "chapter": 7,
+          "season": 5,
+          "tournamentId": "ch7s5-reload-zero-build-duos-cash-cup",
+          "source": "https://www.fortnite.com/competitive/events/S43_ReloadZBDuosCashCup/?region=NAW&round=S43_ReloadZBDuosCashCup_Event2Round1_NAW",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "ダグトリオ大将fv",
+            "ディグダǃ"
+          ],
+          "teamAccountIds": [
+            "64b1abb476f240d293d1e72ea210f465",
+            "933df4d6fc284729a2384925bf36567d"
+          ]
         }
       ],
-      "pages": 50,
-      "lastAttemptAt": "2026-11-16T09:45:16.202Z",
+      "pages": 60,
+      "lastAttemptAt": "2026-11-16T10:19:41.841Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 5000,
-      "lastSuccessAt": "2026-11-16T09:45:16.977Z",
+      "lastSeenRank": 6000,
+      "lastSuccessAt": "2026-11-16T10:19:42.544Z",
       "totalPages": 76
     }
   }
