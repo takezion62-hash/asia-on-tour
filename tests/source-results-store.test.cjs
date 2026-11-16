@@ -96,6 +96,7 @@ test('all canonical publish modes reject exactly pinned held IDs without touchin
 });
 test('canonical guard still allows safe recovery of a previously contaminated snapshot',t=>{
  const root=fixture(t),held=MANIFEST.held[0];
+ const originalManifest=readResults(root).manifest;
  const oldRow={...sourceRows[0],id:held.id,player:held.candidate.player,prize:null};
  const contaminated=[...sourceRows,oldRow],original=JSON.stringify(contaminated,null,2)+'\n';
  const snapshot=buildSnapshot(contaminated,original,row=>row.seasonId);
@@ -107,8 +108,8 @@ test('canonical guard still allows safe recovery of a previously contaminated sn
  const report=publishResults(root,sourceRows,{allowRemoval:true});
  assert.equal(report.count,sourceRows.length);
  assert.deepEqual(readResults(root).rows,sourceRows);
- assert.equal(readResults(root).manifest.teamPrizeCents,80000);
- assert.equal(readResults(root).manifest.personalPrizeCents,80000);
+ assert.equal(readResults(root).manifest.teamPrizeCents,originalManifest.teamPrizeCents);
+ assert.equal(readResults(root).manifest.personalPrizeCents,originalManifest.personalPrizeCents);
 });
 test('legacy compatibility rejects rewriting a previously published score',t=>{
  const root=fixture(t);
