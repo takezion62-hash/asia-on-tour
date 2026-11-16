@@ -59,3 +59,22 @@ test('Every screenshot cash result matches event session, roster, rank, VR, Epic
   }
  }
 });
+
+test('S37 NAW qualifying Round1 and cash Round2 do not collide even at same rank and duo',()=>{
+ const final=V.TARGETS.find(x=>x.id==='s37-naw-console-duos-vc-20250928-r1');
+ assert.ok(final);
+ const qualifier={id:'auto-s37-e5101bad430d',date:final.date,region:final.region,
+  seasonId:final.seasonId,tournamentId:final.tournamentId,event:final.event,
+  round:'Event 6 · Round 1 / 予選突破',kind:'予選',
+  player:final.player,players:[...final.players],rank:220};
+ assert.equal(V.awardCollision(qualifier,final),false);
+ assert.equal(V.awardCollision({...qualifier,rank:final.rank},final),false,
+  'same rank in another round is not cash-final duplication');
+ assert.equal(V.awardCollision({...qualifier,round:final.round},final),true);
+ assert.equal(V.awardCollision({...qualifier,id:final.id},final),true,
+  'exact target ID is a conflict regardless of round');
+ const separate={...qualifier,round:final.round,rank:final.rank,player:'unrelated',
+  players:['unrelated','other']};
+ assert.equal(V.awardCollision(separate,final),true,'same final rank conflicts');
+ assert.equal(V.awardCollision({...separate,rank:999},final),false);
+});
