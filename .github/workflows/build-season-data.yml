@@ -174,6 +174,8 @@ jobs:
             node scripts/publish-generic-review-only.cjs --dry-run
             node scripts/publish-generic-review-only.cjs
             node --test tests/generic-review-only.test.cjs
+            node scripts/publish-s37-oce-console-round1-three.cjs --dry-run
+            node scripts/publish-s37-oce-console-round1-three.cjs
             node scripts/publish-pending-review-20261114.cjs --dry-run
             node scripts/publish-pending-review-20261114.cjs
             node scripts/publish-verified-s32-me-vcup-20241116.cjs --dry-run
