@@ -1,7 +1,7 @@
 'use strict';
 const {test}=require('node:test');
 const assert=require('node:assert/strict');
-const {historicalPriorityAudit}=require('../scripts/osirion-sync.cjs');
+const {historicalPriorityAudit,selectHistoricalWindows}=require('../scripts/osirion-sync.cjs');
 const win=(key,date)=>({key,dateJst:date,region:'ME',series:'cash-cup',kind:'予選',tournamentId:'test',windowId:key,end:Date.parse(date)});
 test('audit ranks known evidence ahead of unknown windows without changing checkpoints',()=>{
  const windows=[win('a','2024-01-01'),win('b','2024-02-01')];
@@ -20,4 +20,16 @@ test('audit excludes completed and retry-waiting windows',()=>{
  const result=historicalPriorityAudit(windows,state,[],{now:Date.parse('2026-11-16T00:00:00Z')});
  assert.equal(result.eligible,1);
  assert.equal(result.top[0].key,'ready');
+});
+
+test('history selection uses remaining slots for resumable checkpoints without starving new windows',()=>{
+ const windows=Array.from({length:35},(_,i)=>({...win('new-'+i,'2024-02-01'),end:Date.parse('2024-02-01')+i*1000}));
+ const partial={...win('partial','2024-01-01'),end:Date.parse('2024-01-01')};
+ windows.push(partial);
+ const state={windows:{partial:{nextPage:40,totalPages:100}}};
+ const config={maxWindowsPerRun:12,minUnstartedWindowsPerRun:6,maxPagesPerWindowPerRun:12};
+ const chosen=selectHistoricalWindows(windows,state,config,Date.parse('2026-11-16'),[],[]);
+ assert.equal(chosen.length,12);
+ assert.ok(chosen.some(w=>w.key==='partial'));
+ assert.ok(chosen.filter(w=>w.key!=='partial').length>=6);
 });

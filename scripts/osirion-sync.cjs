@@ -524,6 +524,24 @@ function selectHistoricalWindows(windows,state,config,time=Date.now(),records=[]
   if(selected.length>=limit)break;
   if(!selected.some(w=>w.series===series))add(pending.filter(w=>w.series===series));
  }
+ // Use the remaining slots on resumable checkpoints before opening more large boards.
+ // Protected year/region/series and unstarted quotas above are unaffected.
+ const resumable=pending.filter(w=>{
+  const cp=state.windows[w.key];
+  return !seen.has(w.key)&&Number.isSafeInteger(cp?.nextPage)&&cp.nextPage>0;
+ }).sort((a,b)=>{
+  const pagesA=remainingPages(state.windows[a.key]);
+  const pagesB=remainingPages(state.windows[b.key]);
+  const boundedA=pagesA!==null&&pagesA<=Math.max(1,config.maxPagesPerWindowPerRun||12);
+  const boundedB=pagesB!==null&&pagesB<=Math.max(1,config.maxPagesPerWindowPerRun||12);
+  if(boundedA!==boundedB)return boundedA?-1:1;
+  if(boundedA&&pagesA!==pagesB)return pagesA-pagesB;
+  return priority(a,b);
+ });
+ for(const w of resumable){
+  if(selected.length>=limit)break;
+  selected.push(w);seen.add(w.key);
+ }
  for(const w of pending.slice().sort(priority)){
   if(selected.length>=limit)break;
   if(!seen.has(w.key)){selected.push(w);seen.add(w.key)}
