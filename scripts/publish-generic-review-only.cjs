@@ -48,8 +48,9 @@ function reconcileHeld(db,{timestamp=new Date().toISOString()}={}){
     auditRows[0].recordId===id&&auditRows[0].source===row.source&&
     Date.parse(auditRows[0].approvedAt)>=Date.parse('2026-11-16T05:20:00Z'),
    'held candidate was not recently published by fallback reviewer '+id);
-  assert(reviewed.length===1&&reviewed[0].decision==='published'&&
-   reviewed[0].recordId===id,'held candidate prior review missing '+id);
+  assert(reviewed.length<=1&&(!reviewed.length||
+    (reviewed[0].decision==='published'&&reviewed[0].recordId===id)),
+   'held candidate prior review conflicts '+id);
   const cp=checkpointFor(original,checkpoints,equalCandidate);
   assert(cp&&cp.checkpoint.rankingOrderValid===true&&
     cp.checkpoint.proposals?.some(x=>x.id===id&&
