@@ -243,4 +243,15 @@ function verifyCashRow(row,e){
  (solo?row.profileUrl===profiles[0].url:!row.profileUrl)&&
  typeof row.note==='string'&&row.note.includes(t.source)&&row.note.includes(t.rule));
 }
-module.exports={TARGETS,POLICY,uuid,price,verifyCashRow};
+function awardCollision(row,target){
+ if(!row||!target)return false;
+ if(row.id===target.id)return true;
+ if(row.seasonId!==target.seasonId||row.date!==target.date||
+  row.region!==target.region||row.tournamentId!==target.tournamentId||
+  row.event!==target.event||row.round!==target.round)return false;
+ const sameRoster=Array.isArray(row.players)&&
+  JSON.stringify([...row.players].sort())===JSON.stringify([...target.players].sort());
+ return row.rank===target.rank||sameRoster||
+  (target.players.length===1&&row.player===target.player);
+}
+module.exports={TARGETS,POLICY,uuid,price,verifyCashRow,awardCollision};
