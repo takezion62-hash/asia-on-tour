@@ -9,10 +9,93 @@ const {sameScannedCandidate}=require('./verified-partial-page.cjs');
 const {validateData}=require('./data-checks.cjs');
 const {audit}=require('./validate-approvals.cjs');
 const {validateUpdateLog}=require('./validate-updates.cjs');
-const {POLICY,sha,approvals,pinnedRule,sameStoredEvidence,
+const {POLICY,MANIFEST,sha,approvals,pinnedRule,sameStoredEvidence,
  zeroNote,verifyPublishedZero}=require('./generic-review-only-core.cjs');
 const ROOT=path.resolve(__dirname,'..');
 function assert(ok,msg){if(!ok)throw Error('GENERIC_REVIEW '+msg)}
+// Fail-closed reconciliation: a legacy broad reviewer mistakenly published
+// an explicitly held candidate despite missing the original Epic UUID.
+// Return ONLY the pinned, originally documented result IDs to the queue.
+// Existing unrelated records, cash and audit entries must be untouched.
+function reconcileHeld(db,{timestamp=new Date().toISOString()}={}){
+ let restored=0;
+ const ids=new Set();
+ const checkpoints=checkpointIndex(db.scans);
+ for(const hold of MANIFEST.held||[]){
+  const original=hold.candidate,id=hold.id;
+  assert(original&&original.id===id&&!original.teamAccountIds&&
+   original.reviewOnly===true&&original.verified===true&&
+   original.prize===null&&original.kind==='参加確認',
+   'held snapshot not source-verifiable '+id);
+  assert(!ids.has(id),'duplicated held candidate '+id);
+  ids.add(id);
+  const results=db.results.filter(r=>r.id===id);
+  const pending=[...db.reviews.auto.proposals,...db.reviews.history.proposals]
+   .filter(r=>r.id===id);
+  assert(results.length<=1&&pending.length<=1&&!(results.length&&pending.length),
+   'held candidate has conflicting published and pending copies '+id);
+  if(!results.length){
+   assert(pending.length===1&&sameStoredEvidence(pending[0],original),
+    'held candidate missing and not queued '+id);
+   continue;
+  }
+  const row=results[0],auditRows=db.ledger.entries.filter(e=>e.id===id),
+   reviewed=db.reviewed.entries.filter(e=>e.id===id);
+  assert(row.kind==='参加確認'&&row.prize===null&&row.verified===true&&
+    row.source===original.source&&sameStoredEvidence(row,original),
+   'cannot reverse verified or altered held entry '+id);
+  assert(auditRows.length===1&&auditRows[0].policy==='attendance-only'&&
+    auditRows[0].recordId===id&&auditRows[0].source===row.source&&
+    Date.parse(auditRows[0].approvedAt)>=Date.parse('2026-11-16T05:20:00Z'),
+   'held candidate was not recently published by fallback reviewer '+id);
+  assert(reviewed.length===1&&reviewed[0].decision==='published'&&
+   reviewed[0].recordId===id,'held candidate prior review missing '+id);
+  const cp=checkpointFor(original,checkpoints,equalCandidate);
+  assert(cp&&cp.checkpoint.rankingOrderValid===true&&
+    cp.checkpoint.proposals?.some(x=>x.id===id&&
+      sameScannedCandidate(x,original)),
+   'original held Epic checkpoint is missing '+id);
+  let seenLog=false;
+  const changed=[];
+  for(const update of db.updates.entries){
+   if(!Array.isArray(update.recordIds)||!update.recordIds.includes(id)){
+    changed.push(update);continue;
+   }
+   assert(update.type==='records'&&update.id?.startsWith('review-publication-'),
+    'unknown update history entry references a held candidate '+id);
+   seenLog=true;
+   update.recordIds=update.recordIds.filter(x=>x!==id);
+   if(update.recordIds.length){
+    if(/^管理者確認済み戦績 \d+件を追加$/.test(update.title||''))
+     update.title='管理者確認済み戦績 '+update.recordIds.length+'件を追加';
+    changed.push(update);
+   }
+  }
+  assert(seenLog,'held candidate update reference missing '+id);
+  db.updates.entries=changed;
+  db.results=db.results.filter(r=>r.id!==id);
+  db.ledger.entries=db.ledger.entries.filter(e=>e.id!==id);
+  db.reviewed.entries=db.reviewed.entries.filter(e=>e.id!==id);
+  db.reviews.history.proposals.push(original);
+  restored++;
+ }
+ if(restored){
+  db.reviews.history.manualReviewedAt=timestamp;
+  db.statuses.history.found=db.reviews.history.proposals.length;
+  db.statuses.history.manualReviewCandidates=db.reviews.history.proposals.length;
+  db.statuses.history.reviewOnlyCandidates=db.reviews.history.proposals
+   .filter(r=>r.reviewOnly===true).length;
+  db.statuses.history.manualReviewProcessed=Math.max(0,
+   (db.statuses.history.manualReviewProcessed||0)-restored);
+  db.statuses.history.manualReviewResolvedAt=timestamp;
+  db.reviewed.reviewedAt=timestamp;
+  db.ledger.reviewedAt=timestamp;
+  assert(new Set(db.results.map(r=>r.id)).size===db.results.length,
+   'duplicate results after held recovery');
+ }
+ return restored;
+}
+
 function plan(db,decisions,{timestamp=new Date().toISOString()}={}){
  const pending=candidatesFor(db),index=checkpointIndex(db.scans),
   existing=new Map(db.results.map(r=>[r.id,r])),
@@ -142,14 +225,15 @@ function main(){
  db.reviewed=JSON.parse(fs.readFileSync(path.join(ROOT,'history-sync-reviewed.json'),'utf8'));
  assert(Array.isArray(db.reviewed.entries),'reviewed ledger invalid');
  const all=approvals();
+ const restored=reconcileHeld(db);
  const result=plan(db,all);
- if(!dry&&result.changes.length){
+ if(!dry&&(result.changes.length||restored)){
   writeReviewDb(ROOT,result.next);
   fs.writeFileSync(path.join(ROOT,'history-sync-reviewed.json'),
    JSON.stringify(result.next.reviewed,null,2)+'\n');
  }
  console.log('GENERIC_REVIEW_RESULT '+JSON.stringify({
-  dry,manualApprovals:all.length,verified:result.verified,
+  dry,manualApprovals:all.length,verified:result.verified,restoredHeld:restored,
   added:result.changes.length,alreadyPublished:result.already,
   cashAdded:0,resultsBefore:db.results.length,
   resultsAfter:result.next.results.length,
@@ -157,4 +241,4 @@ function main(){
  }));
 }
 if(require.main===module){try{main()}catch(err){console.error(err.stack||err);process.exitCode=1}}
-module.exports={plan,main};
+module.exports={plan,reconcileHeld,main};
