@@ -6,7 +6,8 @@ const os=require('node:os');
 const path=require('node:path');
 const crypto=require('node:crypto');
 const {buildSnapshot}=require('../scripts/build-source-results.cjs');
-const {readResults,publishResults,importLegacy}=require('../scripts/source-results-store.cjs');
+const {readResults,publishResults,importLegacy,assertNoExplicitlyHeld}=require('../scripts/source-results-store.cjs');
+const {MANIFEST}=require('../scripts/generic-review-only-core.cjs');
 const ROOT=path.resolve(__dirname,'..');
 const sourceRows=[
  {id:'A1',seasonId:'S30',chapter:5,season:3,player:'First',
@@ -38,6 +39,8 @@ test('production season shards reconstruct ID order, count and payouts without l
  const content=JSON.stringify(rows,null,2)+'\n';
  assert.equal(crypto.createHash('sha256').update(content).digest('hex'),manifest.canonicalSha256);
  assert.equal(new Set(rows.map(x=>x.id)).size,rows.length);
+ assert.doesNotThrow(()=>assertNoExplicitlyHeld(rows),
+  'published canonical results must not contain manual-held Epic IDs');
  assert.equal(manifest.shards.reduce((n,s)=>n+s.count,0),rows.length);
  assert.equal(manifest.shards.reduce((n,s)=>n+s.teamPrizeCents,0),manifest.teamPrizeCents);
  assert.equal(manifest.shards.reduce((n,s)=>n+s.personalPrizeCents,0),manifest.personalPrizeCents);
@@ -71,6 +74,42 @@ test('rejects corrupted shards, mismatched projections, ID collisions and accide
  const next=[...sourceRows,{...sourceRows[0],id:'B2'}];
  assert.equal(publishResults(root,next).added,1);
  assert.deepEqual(readResults(root).rows,next);
+});
+test('all canonical publish modes reject exactly pinned held IDs without touching results or prize totals',t=>{
+ const root=fixture(t),manifestPath=path.join(root,'source-results','manifest.json');
+ const beforeManifest=fs.readFileSync(manifestPath,'utf8');
+ const before=readResults(root);
+ assert.equal(MANIFEST.held.length,2);
+ for(const held of MANIFEST.held){
+  const candidate={...sourceRows[0],id:held.id,player:held.candidate.player,prize:null};
+  const proposed=[...sourceRows,candidate];
+  for(const options of [{},{legacyWriter:true},{allowRemoval:true}]){
+   assert.throws(()=>publishResults(root,proposed,options),
+    new RegExp('SOURCE_RESULTS refused explicitly held candidate: '+held.id));
+  }
+  assert.throws(()=>assertNoExplicitlyHeld(proposed),/explicitly held candidate/);
+ }
+ assert.equal(fs.readFileSync(manifestPath,'utf8'),beforeManifest);
+ assert.deepEqual(readResults(root).rows,before.rows);
+ assert.equal(readResults(root).manifest.teamPrizeCents,before.manifest.teamPrizeCents);
+ assert.equal(readResults(root).manifest.personalPrizeCents,before.manifest.personalPrizeCents);
+});
+test('canonical guard still allows safe recovery of a previously contaminated snapshot',t=>{
+ const root=fixture(t),held=MANIFEST.held[0];
+ const originalManifest=readResults(root).manifest;
+ const oldRow={...sourceRows[0],id:held.id,player:held.candidate.player,prize:null};
+ const contaminated=[...sourceRows,oldRow],original=JSON.stringify(contaminated,null,2)+'\n';
+ const snapshot=buildSnapshot(contaminated,original,row=>row.seasonId);
+ for(const [name,content] of snapshot.files)
+  fs.writeFileSync(path.join(root,'source-results',name),content);
+ fs.writeFileSync(path.join(root,'results.json'),original);
+ assert.equal(readResults(root).rows.length,sourceRows.length+1);
+ assert.throws(()=>assertNoExplicitlyHeld(readResults(root).rows),/explicitly held candidate/);
+ const report=publishResults(root,sourceRows,{allowRemoval:true});
+ assert.equal(report.count,sourceRows.length);
+ assert.deepEqual(readResults(root).rows,sourceRows);
+ assert.equal(readResults(root).manifest.teamPrizeCents,originalManifest.teamPrizeCents);
+ assert.equal(readResults(root).manifest.personalPrizeCents,originalManifest.personalPrizeCents);
 });
 test('legacy compatibility rejects rewriting a previously published score',t=>{
  const root=fixture(t);
