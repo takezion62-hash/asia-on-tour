@@ -1,7 +1,7 @@
 {
   "version": 1,
   "sourceCheckedAt": "2026-11-07T23:16:39.215Z",
-  "total": 159,
+  "total": 156,
   "alreadyResolved": 0,
   "byYear": [
     {
@@ -10,7 +10,7 @@
     },
     {
       "name": "2025",
-      "count": 67
+      "count": 64
     },
     {
       "name": "2026",
@@ -36,7 +36,7 @@
     },
     {
       "name": "OCE",
-      "count": 9
+      "count": 6
     }
   ],
   "byTournament": [
@@ -50,7 +50,7 @@
     },
     {
       "name": "Duos Console Victory Cash Cup / OCE / 2025",
-      "count": 9
+      "count": 6
     },
     {
       "name": "PlayStation Cup / ME / 2025",
@@ -92,7 +92,7 @@
     },
     {
       "name": "rules-review",
-      "count": 50
+      "count": 47
     }
   ],
   "queue": [
@@ -1549,72 +1549,6 @@
       "rewardState": "cash-unconfirmed"
     },
     {
-      "id": "auto-s37-233e43e48432",
-      "origin": "history",
-      "date": "2025-08-24",
-      "year": "2025",
-      "region": "OCE",
-      "tournamentId": "ch6s4-console-duos-victory",
-      "event": "Duos Console Victory Cash Cup",
-      "round": "Event 2 · Round 1 / 予選",
-      "player": "Reeton120fps- / Mofu",
-      "kind": "予選",
-      "rank": 1570,
-      "points": 46,
-      "kills": 14,
-      "vrs": 0,
-      "prize": 0,
-      "source": "https://www.fortnite.com/competitive/events/S37_ConsoleDuosCashCups/?region=OCE&round=S37_ConsoleDuosCashCups_Event2Round1_OCE",
-      "status": "rules-review",
-      "action": "公式規則・賞金・突破・スキン条件を個別確認",
-      "reason": "未検証のシーズンまたは大会",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": true,
-        "observedPartial": false,
-        "seenPages": 26,
-        "totalPages": 26,
-        "sourceKey": "epicgames_S37_ConsoleDuosCashCups_OCE/S37_ConsoleDuosCashCups_Event2Round1_OCE",
-        "possibleExistingId": null
-      },
-      "rewardState": "source-amount-present-not-verified-by-triage"
-    },
-    {
-      "id": "auto-s37-27b3227250e3",
-      "origin": "history",
-      "date": "2025-08-24",
-      "year": "2025",
-      "region": "OCE",
-      "tournamentId": "ch6s4-console-duos-victory",
-      "event": "Duos Console Victory Cash Cup",
-      "round": "Event 2 · Round 1 / 予選",
-      "player": "レザリク / りくとかい",
-      "kind": "予選",
-      "rank": 1389,
-      "points": 58,
-      "kills": 1,
-      "vrs": 0,
-      "prize": 0,
-      "source": "https://www.fortnite.com/competitive/events/S37_ConsoleDuosCashCups/?region=OCE&round=S37_ConsoleDuosCashCups_Event2Round1_OCE",
-      "status": "rules-review",
-      "action": "公式規則・賞金・突破・スキン条件を個別確認",
-      "reason": "順位表の取得が完了していません",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": true,
-        "observedPartial": false,
-        "seenPages": 26,
-        "totalPages": 26,
-        "sourceKey": "epicgames_S37_ConsoleDuosCashCups_OCE/S37_ConsoleDuosCashCups_Event2Round1_OCE",
-        "possibleExistingId": null
-      },
-      "rewardState": "source-amount-present-not-verified-by-triage"
-    },
-    {
       "id": "auto-s37-85d054e61434",
       "origin": "history",
       "date": "2025-08-24",
@@ -1667,39 +1601,6 @@
       "status": "rules-review",
       "action": "公式規則・賞金・突破・スキン条件を個別確認",
       "reason": "未検証のシーズンまたは大会",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": true,
-        "observedPartial": false,
-        "seenPages": 26,
-        "totalPages": 26,
-        "sourceKey": "epicgames_S37_ConsoleDuosCashCups_OCE/S37_ConsoleDuosCashCups_Event2Round1_OCE",
-        "possibleExistingId": null
-      },
-      "rewardState": "source-amount-present-not-verified-by-triage"
-    },
-    {
-      "id": "auto-s37-d4b35b1e7aa2",
-      "origin": "history",
-      "date": "2025-08-24",
-      "year": "2025",
-      "region": "OCE",
-      "tournamentId": "ch6s4-console-duos-victory",
-      "event": "Duos Console Victory Cash Cup",
-      "round": "Event 2 · Round 1 / 予選",
-      "player": "りむた / かめてぃん",
-      "kind": "予選",
-      "rank": 241,
-      "points": 183,
-      "kills": 28,
-      "vrs": 1,
-      "prize": 0,
-      "source": "https://www.fortnite.com/competitive/events/S37_ConsoleDuosCashCups/?region=OCE&round=S37_ConsoleDuosCashCups_Event2Round1_OCE",
-      "status": "rules-review",
-      "action": "公式規則・賞金・突破・スキン条件を個別確認",
-      "reason": "順位表の取得が完了していません",
       "evidence": {
         "officialSource": true,
         "exactCheckpoint": true,
