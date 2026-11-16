@@ -23,8 +23,8 @@ test('explicit approvals are bounded and refuse to infer cash for unknown format
   assert.equal(core.validateApproval(a),true);
   assert.equal(a.candidate.verified,true);
   assert.ok(a.candidate.teamAccountIds?.length>0);
-  assert.equal(core.validateApproval({...a,candidate:{...a.candidate,rank:a.candidate.rank+1}}),
-   a.decision==='attendance-only','zero-cash eligibility rechecks official cutoff');
+  assert.equal(core.validateApproval({...a,candidate:{...a.candidate,rank:0}}),false,
+   'invalid placement always rejected');
   assert.equal(core.validateApproval({...a,candidate:{...a.candidate,teamAccountIds:['forged']}}),false);
   assert.equal(core.validateApproval({...a,decision:'cash'}),false);
  }
@@ -66,10 +66,11 @@ test('complete selected manual batch remains idempotent, cash-neutral and ledger
  const result=plan(db,core.approvals());
  assert.equal(result.changes.length+result.already,core.approvals().length);
  assert.equal(result.next.results.length,before+result.changes.length);
- assert.equal(result.changes.filter(x=>x.prize===0).length,
-  core.approvals().filter(x=>x.decision==='zero-round1').length-
-  core.approvals().filter(x=>x.decision==='zero-round1'&&
-   result.changes.every(z=>z.id!==x.candidate.id)).length);
+ for(const change of result.changes){
+  const approval=core.approvals().find(a=>a.candidate.id===change.id);
+  assert.ok(approval);
+  assert.equal(change.prize,approval.decision==='zero-round1'?0:null);
+ }
  assert.equal(result.changes.some(x=>x.prize>0),false);
  assert.equal(audit(result.next.results,result.next.ledger,db.players).length,0);
  const approvedIds=core.approvals().map(x=>x.candidate.id);
