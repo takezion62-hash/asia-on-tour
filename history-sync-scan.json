@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-11-16T16:03:58.182Z",
+  "checkedAt": "2026-11-16T18:33:54.967Z",
   "windows": {
     "epicgames_S42_SoloVictoryCup_NAW/S42_SoloVictoryCup_Event3Round1_NAW": {
       "nextPage": 9,
@@ -27147,7 +27147,7 @@
       "lastSuccessAt": "2026-11-11T04:29:59.057Z"
     },
     "epicgames_S41_FNCSCommunityCup_EU/S41_FNCSCommunityCup_EU": {
-      "nextPage": 31,
+      "nextPage": 32,
       "complete": false,
       "proposals": [
         {
@@ -27209,17 +27209,17 @@
           ]
         }
       ],
-      "pages": 31,
+      "pages": 32,
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 3100,
+      "lastSeenRank": 3200,
       "totalPages": 100,
-      "lastAttemptAt": "2026-11-16T11:03:32.513Z",
-      "lastSuccessAt": "2026-11-16T11:03:32.513Z",
+      "lastAttemptAt": "2026-11-16T18:33:46.953Z",
+      "lastSuccessAt": "2026-11-16T18:33:46.953Z",
       "errorAttempts": 1,
-      "retryAfter": "2026-11-16T17:03:33.501Z",
+      "retryAfter": "2026-11-17T00:33:47.957Z",
       "lastError": "Osirion API HTTP 429 /v1/tournaments/leaderboard",
-      "lastErrorPage": 31,
+      "lastErrorPage": 32,
       "lastErrorCode": "OSIRION_TRANSIENT"
     },
     "epicgames_S43_SoloReloadTestCup_EU/S43_SoloReloadTestCup_EU": {
@@ -53829,20 +53829,20 @@
       "totalPages": 3
     },
     "epicgames_S43_SoloReloadTestCup_BR/S43_SoloReloadTestCup_BR": {
-      "nextPage": 27,
+      "nextPage": 28,
       "complete": false,
       "proposals": [],
-      "pages": 27,
-      "lastAttemptAt": "2026-11-16T11:03:34.434Z",
+      "pages": 28,
+      "lastAttemptAt": "2026-11-16T18:33:48.773Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 2700,
-      "lastSuccessAt": "2026-11-16T11:03:34.434Z",
+      "lastSeenRank": 2800,
+      "lastSuccessAt": "2026-11-16T18:33:48.773Z",
       "totalPages": 100,
       "errorAttempts": 1,
-      "retryAfter": "2026-11-16T17:03:35.419Z",
+      "retryAfter": "2026-11-17T00:33:49.784Z",
       "lastError": "Osirion API HTTP 429 /v1/tournaments/leaderboard",
-      "lastErrorPage": 27,
+      "lastErrorPage": 28,
       "lastErrorCode": "OSIRION_TRANSIENT"
     },
     "epicgames_S31_SoloVictoryCashCup_ME/S31_SoloVictoryCashCup_Event4Round2_ME": {
@@ -88618,7 +88618,7 @@
       "totalPages": 18
     },
     "epicgames_S30_SoloVictoryCashCup_NAC/S30_SoloVictoryCashCup_Event4Round1_NAC": {
-      "nextPage": 78,
+      "nextPage": 79,
       "complete": false,
       "proposals": [
         {
@@ -89151,17 +89151,17 @@
           "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。"
         }
       ],
-      "pages": 78,
-      "lastAttemptAt": "2026-11-16T11:03:39.644Z",
+      "pages": 79,
+      "lastAttemptAt": "2026-11-16T18:33:53.938Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 7800,
-      "lastSuccessAt": "2026-11-16T11:03:39.644Z",
+      "lastSeenRank": 7900,
+      "lastSuccessAt": "2026-11-16T18:33:53.938Z",
       "totalPages": 100,
       "errorAttempts": 1,
-      "retryAfter": "2026-11-16T17:03:40.628Z",
+      "retryAfter": "2026-11-17T00:33:54.944Z",
       "lastError": "Osirion API HTTP 429 /v1/tournaments/leaderboard",
-      "lastErrorPage": 78,
+      "lastErrorPage": 79,
       "lastErrorCode": "OSIRION_TRANSIENT"
     },
     "epicgames_S30_SoloVictoryCashCup_NAC/S30_SoloVictoryCashCup_Event4Round2_NAC": {
@@ -95071,15 +95071,15 @@
         }
       ],
       "pages": 17,
-      "lastAttemptAt": "2026-11-16T07:16:57.683Z",
+      "lastAttemptAt": "2026-11-16T18:32:29.552Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
       "lastSeenRank": 1700,
       "lastSuccessAt": "2026-11-16T07:16:57.683Z",
       "totalPages": 100,
-      "errorAttempts": 1,
-      "retryAfter": "2026-11-16T13:16:58.744Z",
-      "lastError": "Osirion API HTTP 429 /v1/tournaments/leaderboard",
+      "errorAttempts": 2,
+      "retryAfter": "2026-11-17T00:32:31.147Z",
+      "lastError": "Osirion API HTTP 500 /v1/tournaments/leaderboard",
       "lastErrorPage": 17,
       "lastErrorCode": "OSIRION_TRANSIENT"
     },
@@ -95375,7 +95375,7 @@
       "totalPages": 1
     },
     "epicgames_S41_PSTypicalGamer_OCE/S41_PSTypicalGamer_Qualifier_OCE": {
-      "nextPage": 76,
+      "nextPage": 77,
       "complete": false,
       "proposals": [
         {
@@ -95879,17 +95879,17 @@
           "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。"
         }
       ],
-      "pages": 76,
-      "lastAttemptAt": "2026-11-16T11:03:30.566Z",
+      "pages": 77,
+      "lastAttemptAt": "2026-11-16T18:33:45.162Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 7600,
-      "lastSuccessAt": "2026-11-16T11:03:30.566Z",
+      "lastSeenRank": 7700,
+      "lastSuccessAt": "2026-11-16T18:33:45.162Z",
       "totalPages": 87,
       "errorAttempts": 1,
-      "retryAfter": "2026-11-16T17:03:31.553Z",
+      "retryAfter": "2026-11-17T00:33:46.165Z",
       "lastError": "Osirion API HTTP 429 /v1/tournaments/leaderboard",
-      "lastErrorPage": 76,
+      "lastErrorPage": 77,
       "lastErrorCode": "OSIRION_TRANSIENT"
     },
     "epicgames_S42_ChampionFocusFNCSCup_BR/S42_ChampionFocusFNCSCup_BR": {
@@ -149661,16 +149661,21 @@
       "totalPages": 66
     },
     "epicgames_S42_ConsoleVCC_SolosZB_BR/S42_ConsoleVCC_SolosZB_Event4Round1_BR": {
-      "nextPage": 2,
+      "nextPage": 3,
       "complete": false,
       "proposals": [],
-      "pages": 2,
-      "lastAttemptAt": "2026-11-13T14:36:15.531Z",
+      "pages": 3,
+      "lastAttemptAt": "2026-11-16T18:32:53.822Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 200,
-      "lastSuccessAt": "2026-11-13T14:36:16.505Z",
-      "totalPages": 100
+      "lastSeenRank": 300,
+      "lastSuccessAt": "2026-11-16T18:32:53.822Z",
+      "totalPages": 100,
+      "errorAttempts": 1,
+      "retryAfter": "2026-11-17T00:32:54.843Z",
+      "lastError": "Osirion API HTTP 429 /v1/tournaments/leaderboard",
+      "lastErrorPage": 3,
+      "lastErrorCode": "OSIRION_TRANSIENT"
     },
     "epicgames_S32_SoloVictoryCashCup_NAC/S32_SoloVictoryCashCup_Event3Round2_NAC": {
       "nextPage": 94,
@@ -151697,7 +151702,7 @@
       "totalPages": 100
     },
     "epicgames_S32_SoloVictoryCashCup_NAC/S32_SoloVictoryCashCup_Event4Round2_NAC": {
-      "nextPage": 62,
+      "nextPage": 63,
       "complete": false,
       "proposals": [
         {
@@ -152322,17 +152327,17 @@
           "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。現金賞金の確定情報なし。"
         }
       ],
-      "pages": 62,
-      "lastAttemptAt": "2026-11-16T11:03:37.861Z",
+      "pages": 63,
+      "lastAttemptAt": "2026-11-16T18:33:52.052Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 6200,
-      "lastSuccessAt": "2026-11-16T11:03:37.861Z",
+      "lastSeenRank": 6300,
+      "lastSuccessAt": "2026-11-16T18:33:52.052Z",
       "totalPages": 92,
       "errorAttempts": 1,
-      "retryAfter": "2026-11-16T17:03:38.847Z",
+      "retryAfter": "2026-11-17T00:33:53.064Z",
       "lastError": "Osirion API HTTP 429 /v1/tournaments/leaderboard",
-      "lastErrorPage": 62,
+      "lastErrorPage": 63,
       "lastErrorCode": "OSIRION_TRANSIENT"
     },
     "epicgames_S33_SoloCashCup_OCE/S33_SoloCashCup_Event4Round2_OCE": {
@@ -158914,12 +158919,17 @@
         }
       ],
       "pages": 32,
-      "lastAttemptAt": "2026-11-16T16:03:00.188Z",
+      "lastAttemptAt": "2026-11-16T18:32:36.649Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
       "lastSeenRank": 3200,
       "lastSuccessAt": "2026-11-16T16:03:01.171Z",
-      "totalPages": 72
+      "totalPages": 72,
+      "errorAttempts": 1,
+      "retryAfter": "2026-11-17T00:32:38.583Z",
+      "lastError": "Osirion API HTTP 500 /v1/tournaments/leaderboard",
+      "lastErrorPage": 32,
+      "lastErrorCode": "OSIRION_TRANSIENT"
     },
     "epicgames_S43_OnePieceBuggyCup_NAC/S43_OnePieceBuggyCup_NAC": {
       "nextPage": 4,
@@ -159989,7 +159999,7 @@
       "totalPages": 46
     },
     "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event4Round2_NAC": {
-      "nextPage": 36,
+      "nextPage": 37,
       "complete": false,
       "proposals": [
         {
@@ -160453,17 +160463,17 @@
           "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。現金賞金の確定情報なし。"
         }
       ],
-      "pages": 36,
-      "lastAttemptAt": "2026-11-16T11:03:36.242Z",
+      "pages": 37,
+      "lastAttemptAt": "2026-11-16T18:33:50.397Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 3600,
-      "lastSuccessAt": "2026-11-16T11:03:36.242Z",
+      "lastSeenRank": 3700,
+      "lastSuccessAt": "2026-11-16T18:33:50.397Z",
       "totalPages": 46,
       "errorAttempts": 1,
-      "retryAfter": "2026-11-16T17:03:37.226Z",
+      "retryAfter": "2026-11-17T00:33:51.401Z",
       "lastError": "Osirion API HTTP 429 /v1/tournaments/leaderboard",
-      "lastErrorPage": 36,
+      "lastErrorPage": 37,
       "lastErrorCode": "OSIRION_TRANSIENT"
     },
     "epicgames_S43_OnePieceBuggyCup_Mobile_NAC/S43_OnePieceBuggyCup_Mobile_NAC": {
@@ -164003,12 +164013,17 @@
         }
       ],
       "pages": 40,
-      "lastAttemptAt": "2026-11-16T16:03:02.201Z",
+      "lastAttemptAt": "2026-11-16T18:32:38.583Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
       "lastSeenRank": 4000,
       "lastSuccessAt": "2026-11-16T16:03:03.223Z",
-      "totalPages": 100
+      "totalPages": 100,
+      "errorAttempts": 1,
+      "retryAfter": "2026-11-17T00:32:40.157Z",
+      "lastError": "Osirion API HTTP 500 /v1/tournaments/leaderboard",
+      "lastErrorPage": 40,
+      "lastErrorCode": "OSIRION_TRANSIENT"
     },
     "epicgames_S43_OnePieceBuggyCup_ZB_ME/S43_OnePieceBuggyCup_ZB_ME": {
       "nextPage": 1,
@@ -165447,12 +165462,17 @@
         }
       ],
       "pages": 37,
-      "lastAttemptAt": "2026-11-16T16:02:36.970Z",
+      "lastAttemptAt": "2026-11-16T18:32:31.148Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
       "lastSeenRank": 3700,
       "lastSuccessAt": "2026-11-16T16:02:37.673Z",
-      "totalPages": 45
+      "totalPages": 45,
+      "errorAttempts": 1,
+      "retryAfter": "2026-11-17T00:32:33.246Z",
+      "lastError": "Osirion API HTTP 500 /v1/tournaments/leaderboard",
+      "lastErrorPage": 37,
+      "lastErrorCode": "OSIRION_TRANSIENT"
     },
     "epicgames_S43_OnePieceBuggyCup_ME/S43_OnePieceBuggyCup_ME": {
       "nextPage": 1,
@@ -166179,7 +166199,7 @@
       "totalPages": 3
     },
     "epicgames_S34_PlaystationCup_ME/S34_PlaystationCupQualifier1_ME": {
-      "nextPage": 17,
+      "nextPage": 18,
       "complete": false,
       "proposals": [
         {
@@ -166758,13 +166778,18 @@
           "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。"
         }
       ],
-      "pages": 17,
-      "lastAttemptAt": "2026-11-16T16:03:20.540Z",
+      "pages": 18,
+      "lastAttemptAt": "2026-11-16T18:32:49.698Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 1700,
-      "lastSuccessAt": "2026-11-16T16:03:21.221Z",
-      "totalPages": 100
+      "lastSeenRank": 1800,
+      "lastSuccessAt": "2026-11-16T18:32:49.698Z",
+      "totalPages": 100,
+      "errorAttempts": 1,
+      "retryAfter": "2026-11-17T00:32:50.712Z",
+      "lastError": "Osirion API HTTP 429 /v1/tournaments/leaderboard",
+      "lastErrorPage": 18,
+      "lastErrorCode": "OSIRION_TRANSIENT"
     },
     "epicgames_S43_OnePieceBuggyCup_Mobile_NAW/S43_OnePieceBuggyCup_Mobile_NAW": {
       "nextPage": 1,
@@ -167900,12 +167925,17 @@
         }
       ],
       "pages": 10,
-      "lastAttemptAt": "2026-11-16T16:03:06.729Z",
+      "lastAttemptAt": "2026-11-16T18:32:45.821Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
       "lastSeenRank": 1000,
       "lastSuccessAt": "2026-11-16T16:03:07.840Z",
-      "totalPages": 100
+      "totalPages": 100,
+      "errorAttempts": 1,
+      "retryAfter": "2026-11-17T00:32:47.228Z",
+      "lastError": "Osirion API HTTP 429 /v1/tournaments/leaderboard",
+      "lastErrorPage": 10,
+      "lastErrorCode": "OSIRION_TRANSIENT"
     },
     "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event8Round2_NAC": {
       "nextPage": 18,
@@ -168557,12 +168587,17 @@
         }
       ],
       "pages": 18,
-      "lastAttemptAt": "2026-11-16T16:03:57.209Z",
+      "lastAttemptAt": "2026-11-16T18:32:44.343Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
       "lastSeenRank": 1800,
       "lastSuccessAt": "2026-11-16T16:03:58.158Z",
-      "totalPages": 45
+      "totalPages": 45,
+      "errorAttempts": 1,
+      "retryAfter": "2026-11-17T00:32:45.821Z",
+      "lastError": "Osirion API HTTP 500 /v1/tournaments/leaderboard",
+      "lastErrorPage": 18,
+      "lastErrorCode": "OSIRION_TRANSIENT"
     },
     "epicgames_S38_SquadsVictoryCup_NAW/S38_SquadsVictoryCup_Round2_Day1_NAW": {
       "nextPage": 1,
@@ -170488,12 +170523,17 @@
       "complete": false,
       "proposals": [],
       "pages": 4,
-      "lastAttemptAt": "2026-11-16T16:03:19.316Z",
+      "lastAttemptAt": "2026-11-16T18:32:47.709Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
       "lastSeenRank": 400,
       "lastSuccessAt": "2026-11-16T16:03:19.908Z",
-      "totalPages": 74
+      "totalPages": 74,
+      "errorAttempts": 1,
+      "retryAfter": "2026-11-17T00:32:48.735Z",
+      "lastError": "Osirion API HTTP 429 /v1/tournaments/leaderboard",
+      "lastErrorPage": 4,
+      "lastErrorCode": "OSIRION_TRANSIENT"
     },
     "epicgames_S43_TriosCashCup_NAW/S43_TriosCashCup_Event2_NAW": {
       "nextPage": 7,
@@ -170536,12 +170576,17 @@
         }
       ],
       "pages": 7,
-      "lastAttemptAt": "2026-11-16T16:03:03.965Z",
+      "lastAttemptAt": "2026-11-16T18:32:40.158Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
       "lastSeenRank": 700,
       "lastSuccessAt": "2026-11-16T16:03:05.007Z",
-      "totalPages": 17
+      "totalPages": 17,
+      "errorAttempts": 1,
+      "retryAfter": "2026-11-17T00:32:44.342Z",
+      "lastError": "Osirion API HTTP 500 /v1/tournaments/leaderboard",
+      "lastErrorPage": 7,
+      "lastErrorCode": "OSIRION_TRANSIENT"
     },
     "epicgames_S36_SquidGroundVictoryDuosCup_NAW/S36_VictoryDuosCup_Event6Round1_NAW": {
       "nextPage": 4,
@@ -171752,12 +171797,17 @@
         }
       ],
       "pages": 24,
-      "lastAttemptAt": "2026-11-16T16:02:47.508Z",
+      "lastAttemptAt": "2026-11-16T18:32:33.247Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
       "lastSeenRank": 2400,
       "lastSuccessAt": "2026-11-16T16:02:48.518Z",
-      "totalPages": 62
+      "totalPages": 62,
+      "errorAttempts": 1,
+      "retryAfter": "2026-11-17T00:32:34.814Z",
+      "lastError": "Osirion API HTTP 500 /v1/tournaments/leaderboard",
+      "lastErrorPage": 24,
+      "lastErrorCode": "OSIRION_TRANSIENT"
     },
     "epicgames_S42_ReloadReloadSoloVictoryCup_ME/S42_ReloadSoloVictoryCup_Event5_Round1_ME": {
       "nextPage": 4,
@@ -171808,16 +171858,215 @@
       "totalPages": 1
     },
     "epicgames_S31_PlatformReloadDuosCashCupConsole_ME/S31_PlatformReloadDuosCashCupConsole_Event3Round1_ME": {
-      "nextPage": 0,
+      "nextPage": 12,
       "complete": false,
-      "proposals": [],
-      "pages": 0,
-      "lastAttemptAt": "2026-11-16T11:03:28.230Z",
-      "errorAttempts": 1,
-      "retryAfter": "2026-11-16T17:03:29.221Z",
-      "lastError": "Osirion API HTTP 429 /v1/tournaments/leaderboard",
-      "lastErrorPage": 0,
-      "lastErrorCode": "OSIRION_TRANSIENT"
+      "proposals": [
+        {
+          "id": "auto-s31-66eb2cfcaa66",
+          "date": "2024-09-21",
+          "region": "ME",
+          "player": "くりたる / らずのっと",
+          "playerRaw": "FTW kulitalu 10ǃ / GRE RazNotfvǃ",
+          "event": "Reload Duos Cash Cup (Console)",
+          "round": "Event 3 · Round 1 / 参加確認",
+          "rank": 36,
+          "points": 65,
+          "kills": 42,
+          "vrs": 2,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 7,
+          "seasonId": "S31",
+          "chapter": 5,
+          "season": 4,
+          "tournamentId": "ch5s4-reload-duos-cash-cup-console",
+          "source": "https://www.fortnite.com/competitive/events/S31_PlatformReloadDuosCashCupConsole/?region=ME&round=S31_PlatformReloadDuosCashCupConsole_Event3Round1_ME",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "くりたる",
+            "らずのっと"
+          ],
+          "teamAccountIds": [
+            "02463a80d4954907b95d2e0bf0bfa887",
+            "9f6ae11302434c8899251bac599c71ea"
+          ]
+        },
+        {
+          "id": "auto-s31-687124f03577",
+          "date": "2024-09-21",
+          "region": "ME",
+          "player": "AUR t3eny 19ǃ / しこぴよフォートナイト",
+          "playerRaw": "AUR t3eny 19ǃ / しこぴよフォートナイト",
+          "event": "Reload Duos Cash Cup (Console)",
+          "round": "Event 3 · Round 1 / 参加確認",
+          "rank": 135,
+          "points": 54,
+          "kills": 26,
+          "vrs": 2,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 7,
+          "seasonId": "S31",
+          "chapter": 5,
+          "season": 4,
+          "tournamentId": "ch5s4-reload-duos-cash-cup-console",
+          "source": "https://www.fortnite.com/competitive/events/S31_PlatformReloadDuosCashCupConsole/?region=ME&round=S31_PlatformReloadDuosCashCupConsole_Event3Round1_ME",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "AUR t3eny 19ǃ",
+            "しこぴよフォートナイト"
+          ],
+          "teamAccountIds": [
+            "047f53cb64354354abe8dc8e75fbfb75",
+            "b23d3ab82739446c8e6787a874a11e01"
+          ]
+        },
+        {
+          "id": "auto-s31-01598ff13e0b",
+          "date": "2024-09-21",
+          "region": "ME",
+          "player": "らぶ / Cue.Ganondorf",
+          "playerRaw": "rebel らぶ / Cue.ましゅぴっぴch",
+          "event": "Reload Duos Cash Cup (Console)",
+          "round": "Event 3 · Round 1 / 参加確認",
+          "rank": 147,
+          "points": 53,
+          "kills": 33,
+          "vrs": 2,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 6,
+          "seasonId": "S31",
+          "chapter": 5,
+          "season": 4,
+          "tournamentId": "ch5s4-reload-duos-cash-cup-console",
+          "source": "https://www.fortnite.com/competitive/events/S31_PlatformReloadDuosCashCupConsole/?region=ME&round=S31_PlatformReloadDuosCashCupConsole_Event3Round1_ME",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "らぶ",
+            "Cue.Ganondorf"
+          ],
+          "teamAccountIds": [
+            "35ee1f92f347430ebc30c2eae8650bb0",
+            "5aa76ea42a164e4eac2ae3da5a0d8ed2"
+          ]
+        },
+        {
+          "id": "auto-s31-da2bc1c4eab1",
+          "date": "2024-09-21",
+          "region": "ME",
+          "player": "きおらび / SN Season",
+          "playerRaw": "きおらび / SN Season",
+          "event": "Reload Duos Cash Cup (Console)",
+          "round": "Event 3 · Round 1 / 参加確認",
+          "rank": 190,
+          "points": 51,
+          "kills": 51,
+          "vrs": 2,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 7,
+          "seasonId": "S31",
+          "chapter": 5,
+          "season": 4,
+          "tournamentId": "ch5s4-reload-duos-cash-cup-console",
+          "source": "https://www.fortnite.com/competitive/events/S31_PlatformReloadDuosCashCupConsole/?region=ME&round=S31_PlatformReloadDuosCashCupConsole_Event3Round1_ME",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "きおらび",
+            "SN Season"
+          ],
+          "teamAccountIds": [
+            "7dcdf989faa347fbbab8c2228abb4142",
+            "b1a8dec9b1134b7e8acd83e7ac2f6789"
+          ]
+        },
+        {
+          "id": "auto-s31-cac42f18b719",
+          "date": "2024-09-21",
+          "region": "ME",
+          "player": "ゆあもにーさまの歌を聴けぇǃ / ふぃる",
+          "playerRaw": "本田ゆうトリオ / ポルターガイストǃ",
+          "event": "Reload Duos Cash Cup (Console)",
+          "round": "Event 3 · Round 1 / 参加確認",
+          "rank": 209,
+          "points": 51,
+          "kills": 27,
+          "vrs": 0,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 7,
+          "seasonId": "S31",
+          "chapter": 5,
+          "season": 4,
+          "tournamentId": "ch5s4-reload-duos-cash-cup-console",
+          "source": "https://www.fortnite.com/competitive/events/S31_PlatformReloadDuosCashCupConsole/?region=ME&round=S31_PlatformReloadDuosCashCupConsole_Event3Round1_ME",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "ゆあもにーさまの歌を聴けぇǃ",
+            "ふぃる"
+          ],
+          "teamAccountIds": [
+            "ac2b248c25bf4fa5b446b599dfd25b9a",
+            "b8ee0fe8a5744c3ca37bb746388064ec"
+          ]
+        },
+        {
+          "id": "auto-s31-f19ffd1ebf5c",
+          "date": "2024-09-21",
+          "region": "ME",
+          "player": "るかぽりん / みずるん",
+          "playerRaw": "urzb るかぽりん / A_α みずるんぼっとǃ",
+          "event": "Reload Duos Cash Cup (Console)",
+          "round": "Event 3 · Round 1 / 参加確認",
+          "rank": 840,
+          "points": 37,
+          "kills": 49,
+          "vrs": 1,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 6,
+          "seasonId": "S31",
+          "chapter": 5,
+          "season": 4,
+          "tournamentId": "ch5s4-reload-duos-cash-cup-console",
+          "source": "https://www.fortnite.com/competitive/events/S31_PlatformReloadDuosCashCupConsole/?region=ME&round=S31_PlatformReloadDuosCashCupConsole_Event3Round1_ME",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "るかぽりん",
+            "みずるん"
+          ],
+          "teamAccountIds": [
+            "968ebdb80fa44b948558a66766fb6141",
+            "be3e638a499d4096ad0fa23f746233f5"
+          ]
+        }
+      ],
+      "pages": 12,
+      "lastAttemptAt": "2026-11-16T18:33:20.049Z",
+      "emptyAttempts": 0,
+      "rankingOrderValid": true,
+      "lastSeenRank": 1200,
+      "lastSuccessAt": "2026-11-16T18:33:20.728Z",
+      "totalPages": 100
     },
     "epicgames_S42_ReloadReloadSoloVictoryCup_NAC/S42_ReloadSoloVictoryCup_Event5_Round1_NAC": {
       "nextPage": 9,
@@ -171832,8 +172081,8 @@
       "totalPages": 100
     },
     "epicgames_S39_FNCSDivisionalCup_Division1_ME/S39_FNCSDivisionalCup_Division1_Week2Day2_ME": {
-      "nextPage": 2,
-      "complete": false,
+      "nextPage": 3,
+      "complete": true,
       "proposals": [
         {
           "id": "auto-s39-56d9e9060fa7",
@@ -171863,14 +172112,43 @@
             "あくりあ",
             "かめてぃん"
           ]
+        },
+        {
+          "id": "auto-s39-f7aba7237e16",
+          "date": "2026-02-11",
+          "region": "ME",
+          "player": "meah / RiaM",
+          "playerRaw": "HaPpySumitOr1110 / A1st RiaMǃ",
+          "event": "FNCS Division 1",
+          "round": "単一開催枠 / 参加確認",
+          "rank": 208,
+          "points": 52,
+          "kills": 16,
+          "vrs": 0,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 9,
+          "seasonId": "S39",
+          "chapter": 7,
+          "season": 1,
+          "tournamentId": "ch7s1-fncs-division-1",
+          "source": "https://www.fortnite.com/competitive/events/S39_FNCSDivisionalCup_Division1/?region=ME&round=S39_FNCSDivisionalCup_Division1_Week2Day2_ME",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "meah",
+            "RiaM"
+          ]
         }
       ],
-      "pages": 2,
-      "lastAttemptAt": "2026-11-16T16:03:23.944Z",
+      "pages": 3,
+      "lastAttemptAt": "2026-11-16T18:32:47.228Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 200,
-      "lastSuccessAt": "2026-11-16T16:03:24.618Z",
+      "lastSeenRank": 238,
+      "lastSuccessAt": "2026-11-16T18:32:47.709Z",
       "totalPages": 3
     },
     "epicgames_S31_PlatformReloadDuosCashCupConsole_ME/S31_PlatformReloadDuosCashCupConsole_Event3Round2_ME": {
@@ -171919,6 +172197,214 @@
       "retryAfter": "2026-11-16T22:03:28.148Z",
       "lastError": "Osirion API HTTP 429 /v1/tournaments/leaderboard",
       "lastErrorPage": 0,
+      "lastErrorCode": "OSIRION_TRANSIENT"
+    },
+    "epicgames_S42_ReloadReloadSoloVictoryCup_NAW/S42_ReloadSoloVictoryCup_Event5_Round1_NAW": {
+      "nextPage": 0,
+      "complete": false,
+      "proposals": [],
+      "pages": 0,
+      "lastAttemptAt": "2026-11-16T18:32:34.814Z",
+      "errorAttempts": 1,
+      "retryAfter": "2026-11-17T00:32:36.649Z",
+      "lastError": "Osirion API HTTP 500 /v1/tournaments/leaderboard",
+      "lastErrorPage": 0,
+      "lastErrorCode": "OSIRION_TRANSIENT"
+    },
+    "epicgames_S33_SoloCashCup_OCE/S33_SoloCashCup_Event7Round2_OCE": {
+      "nextPage": 1,
+      "complete": false,
+      "proposals": [],
+      "pages": 1,
+      "lastAttemptAt": "2026-11-16T18:32:55.885Z",
+      "emptyAttempts": 0,
+      "rankingOrderValid": true,
+      "lastSeenRank": 100,
+      "lastSuccessAt": "2026-11-16T18:32:55.885Z",
+      "totalPages": 6,
+      "errorAttempts": 1,
+      "retryAfter": "2026-11-17T00:32:56.901Z",
+      "lastError": "Osirion API HTTP 429 /v1/tournaments/leaderboard",
+      "lastErrorPage": 1,
+      "lastErrorCode": "OSIRION_TRANSIENT"
+    },
+    "epicgames_S31_PlatformReloadDuosCashCupConsole_ME/S31_PlatformReloadDuosCashCupConsole_Event7_ME": {
+      "nextPage": 12,
+      "complete": false,
+      "proposals": [
+        {
+          "id": "auto-s31-bf08a145b6fc",
+          "date": "2024-10-19",
+          "region": "ME",
+          "player": "Reeton120fps- / Mofu",
+          "playerRaw": "Reeton120fps- / RC MOFU 16ǃ",
+          "event": "Reload Duos Cash Cup (Console)",
+          "round": "Event 7 / 参加確認",
+          "rank": 51,
+          "points": 171,
+          "kills": 117,
+          "vrs": 2,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 7,
+          "seasonId": "S31",
+          "chapter": 5,
+          "season": 4,
+          "tournamentId": "ch5s4-reload-duos-cash-cup-console",
+          "source": "https://www.fortnite.com/competitive/events/S31_PlatformReloadDuosCashCupConsole/?region=ME&round=S31_PlatformReloadDuosCashCupConsole_Event7_ME",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "Reeton120fps-",
+            "Mofu"
+          ],
+          "teamAccountIds": [
+            "7746178b77434e30b5a7fef78e550537",
+            "b78631905b9847c38d347af8ea94d4b5"
+          ]
+        },
+        {
+          "id": "auto-s31-68af511f63ec",
+          "date": "2024-10-19",
+          "region": "ME",
+          "player": "おこっとふー / ふぃる",
+          "playerRaw": "おこっとふー / ポルターガイストǃ",
+          "event": "Reload Duos Cash Cup (Console)",
+          "round": "Event 7 / 参加確認",
+          "rank": 632,
+          "points": 80,
+          "kills": 45,
+          "vrs": 1,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 5,
+          "seasonId": "S31",
+          "chapter": 5,
+          "season": 4,
+          "tournamentId": "ch5s4-reload-duos-cash-cup-console",
+          "source": "https://www.fortnite.com/competitive/events/S31_PlatformReloadDuosCashCupConsole/?region=ME&round=S31_PlatformReloadDuosCashCupConsole_Event7_ME",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "おこっとふー",
+            "ふぃる"
+          ],
+          "teamAccountIds": [
+            "027c5e963b4b4c2c8e823070b1638de4",
+            "b8ee0fe8a5744c3ca37bb746388064ec"
+          ]
+        }
+      ],
+      "pages": 12,
+      "lastAttemptAt": "2026-11-16T18:33:30.948Z",
+      "emptyAttempts": 0,
+      "rankingOrderValid": true,
+      "lastSeenRank": 1200,
+      "lastSuccessAt": "2026-11-16T18:33:31.671Z",
+      "totalPages": 74
+    },
+    "epicgames_S31_TriosCashCup_ME/S31_TriosCashCup_Event3Round2_ME": {
+      "nextPage": 2,
+      "complete": true,
+      "proposals": [],
+      "pages": 2,
+      "lastAttemptAt": "2026-11-16T18:33:32.406Z",
+      "emptyAttempts": 0,
+      "rankingOrderValid": true,
+      "lastSeenRank": 187,
+      "lastSuccessAt": "2026-11-16T18:33:33.088Z",
+      "totalPages": 2
+    },
+    "epicgames_S31_TriosCashCup_ME/S31_TriosCashCup_Event4Round1_ME": {
+      "nextPage": 11,
+      "complete": false,
+      "proposals": [
+        {
+          "id": "auto-s31-6ba1a7092617",
+          "date": "2024-10-26",
+          "region": "ME",
+          "player": "3peace / Jaemon / RyoIT",
+          "playerRaw": "NEXUS 3peace / Jaemon.K / りょうITだに",
+          "event": "Trios Cash Cup",
+          "round": "Event 4 · Round 1 / 参加確認",
+          "rank": 139,
+          "points": 292,
+          "kills": 78,
+          "vrs": 2,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 5,
+          "seasonId": "S31",
+          "chapter": 5,
+          "season": 4,
+          "tournamentId": "ch5s4-trios-cash",
+          "source": "https://www.fortnite.com/competitive/events/S31_TriosCashCup/?region=ME&round=S31_TriosCashCup_Event4Round1_ME",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "3peace",
+            "Jaemon",
+            "RyoIT"
+          ],
+          "teamAccountIds": [
+            "bc21e86cc3cf4761a52906a8e4fd910b",
+            "dcc5f4df088a4bcab4058b9b0fb2f97c",
+            "f4cd4ebae0784e02999ac7f8d911b4c8"
+          ]
+        },
+        {
+          "id": "auto-s31-89772400e55a",
+          "date": "2024-10-26",
+          "region": "ME",
+          "player": "Stain / ぷろぼこ / ZAZI",
+          "playerRaw": "E36 StainY281 / ONYX プロボコ 7 / LYNX ZAZI 咲",
+          "event": "Trios Cash Cup",
+          "round": "Event 4 · Round 1 / 参加確認",
+          "rank": 216,
+          "points": 277,
+          "kills": 90,
+          "vrs": 2,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 5,
+          "seasonId": "S31",
+          "chapter": 5,
+          "season": 4,
+          "tournamentId": "ch5s4-trios-cash",
+          "source": "https://www.fortnite.com/competitive/events/S31_TriosCashCup/?region=ME&round=S31_TriosCashCup_Event4Round1_ME",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "Stain",
+            "ぷろぼこ",
+            "ZAZI"
+          ],
+          "teamAccountIds": [
+            "268fddd59748458ea78b23ad3bae9ac5",
+            "7992a13b46a24f30a29b4b6fa67c99e1",
+            "f08aad629bf040d6beb78c7aea8e0a1f"
+          ]
+        }
+      ],
+      "pages": 11,
+      "lastAttemptAt": "2026-11-16T18:33:43.347Z",
+      "emptyAttempts": 0,
+      "rankingOrderValid": true,
+      "lastSeenRank": 1100,
+      "lastSuccessAt": "2026-11-16T18:33:43.347Z",
+      "totalPages": 61,
+      "errorAttempts": 1,
+      "retryAfter": "2026-11-17T00:33:44.352Z",
+      "lastError": "Osirion API HTTP 429 /v1/tournaments/leaderboard",
+      "lastErrorPage": 11,
       "lastErrorCode": "OSIRION_TRANSIENT"
     }
   }
