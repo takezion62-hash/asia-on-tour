@@ -98,13 +98,15 @@ test('immutable pristine 12-page evidence predates later transient API failures'
 
 test('already-published IDs are removed by ID and only once, without losing other candidates',()=>{
  const ids=SPECS.map(s=>s.id);
- const originals=ids.map(id=>candidates.find(x=>x.id===id)).filter(Boolean);
+ const originals=ids.map(id=>({id}));
  const unrelated={id:'auto-s37-unrelated',player:'unrelated'};
  const queue=[...originals,unrelated];
  const remaining=removeResolvedPending(queue,originals.map(x=>x.id));
  assert.equal(remaining.length,1);
  assert.equal(remaining[0],unrelated);
  assert.equal(queue.length,originals.length+1);
+ assert.throws(()=>removeResolvedPending(remaining,ids),/missing/,
+  're-cleaning a resolved candidate should never silently mutate the queue');
  assert.throws(()=>removeResolvedPending(queue,[...originals.map(x=>x.id),'missing']),/missing/);
  assert.throws(()=>removeResolvedPending(queue,[...originals.map(x=>x.id),originals[0]?.id]),/invalid/);
  const forged=[...queue,{...originals[0]}];
