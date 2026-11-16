@@ -5,6 +5,7 @@ const path=require('node:path'),crypto=require('node:crypto');
 const {createPublicationFiles}=require('./reviewed-publication-core.cjs');
 const {sameScannedCandidate,verifiedPartialPage}=require('./verified-partial-page.cjs');
 const {collision}=require('./manual-approval-core.cjs');
+const {isExplicitlyHeld}=require('./generic-review-only-core.cjs');
 const {read,write}=createPublicationFiles(path.resolve(__dirname,'..'));
 const dry=process.argv.includes('--dry-run'),now=new Date().toISOString();
 const RULE42='https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-4-official-rules';
@@ -107,6 +108,11 @@ function verify(r,origin,choice){
  requireValid(!data.results.some(x=>collision(x,r,aliases)),'possible duplicate record - hold');
 }
 for(const {r,origin} of selected){
+ // Never re-publish a source-pinned held row that the safe recovery restores.
+ if(isExplicitlyHeld(r.id)){
+  held.push({id:r.id,origin,player:r.player,reason:'Original Epic roster UUID is still unverified; pinned manual hold'});
+  continue;
+ }
  const choice=classify(r);
  if(!choice)continue;
  scopeCounts[origin]++;

@@ -94,6 +94,14 @@ test('generic publisher runs before fallback backfill and stage-one full replay 
   steps.indexOf('scripts/publish-pending-review-20261114.cjs'));
 });
 
+test('legacy round-five auto publisher respects exact manual hold before eligibility checks',()=>{
+ const roundFive=fs.readFileSync(path.join(root,'scripts/publish-verified-review-round5.cjs'),'utf8');
+ const guard=roundFive.indexOf('if(isExplicitlyHeld(r.id))');
+ const classifier=roundFive.indexOf('const choice=classify(r);');
+ assert.ok(guard>=0&&classifier>guard,'held candidates must be skipped before classification');
+ for(const hold of manual.held)assert.equal(core.isExplicitlyHeld(hold.id),true);
+ assert.equal(core.isExplicitlyHeld('auto-s34-unrelated'),false);
+});
 test('explicitly held PlayStation candidates cannot be silently published by legacy batch fallback',()=>{
  const db=evidence();
  const restored=reconcileHeld(db);
