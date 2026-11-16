@@ -125,6 +125,36 @@ function runSteps(root,steps,run=spawnSync){
  }
 }
 
+// The normal rule is strict monotonic publication and approval history.
+// The sole exception is a proof-pinned review-only hold reconciliation: each
+// removed public result must correspond 1:1 to its own removed attendance
+// ledger ID, an exact manual held candidate with missing original Epic UUID,
+// and a recently created fallback approval. No other deletion is permitted.
+function retainedOrExactHeldReversal(beforeLedger,afterLedger,beforeStore,afterStore,proof){
+ if(!Array.isArray(beforeLedger?.entries)||!Array.isArray(afterLedger?.entries)||
+   !Array.isArray(beforeStore?.recordOrder)||!Array.isArray(afterStore?.recordOrder)||
+   !Array.isArray(proof?.held))return false;
+ const oldLedger=new Map(beforeLedger.entries.map(x=>[x.id,x]));
+ const nextLedger=new Set(afterLedger.entries.map(x=>x.id));
+ const nextRecords=new Set(afterStore.recordOrder);
+ const droppedLedger=beforeLedger.entries.filter(x=>!nextLedger.has(x.id));
+ const droppedRecords=beforeStore.recordOrder.filter(x=>!nextRecords.has(x));
+ if(!droppedLedger.length&&!droppedRecords.length)return true;
+ if(!droppedLedger.length||droppedLedger.length!==droppedRecords.length||
+   droppedLedger.length>proof.held.length||new Set(droppedRecords).size!==droppedRecords.length)return false;
+ const held=new Map(proof.held.map(x=>[x.id,x]));
+ return droppedRecords.every(id=>{
+  const entry=oldLedger.get(id),pin=held.get(id);
+  return !!pin?.candidate&&pin.candidate.id===id&&
+   pin.candidate.verified===true&&pin.candidate.reviewOnly===true&&
+   pin.candidate.teamAccountIds===undefined&&pin.candidate.prize===null&&
+   entry?.decision==='published'&&entry.recordId===id&&
+   entry.policy==='attendance-only'&&entry.source===pin.candidate.source&&
+   Date.parse(entry.approvedAt)>=Date.parse('2026-11-16T05:20:00Z')&&
+   !nextLedger.has(id);
+ });
+}
+
 function execute({root=ROOT,run=spawnSync,copy=copyToTemp}={}){
  const workflow=fs.readFileSync(path.join(root,WORKFLOW),'utf8');
  const steps=parseWorkflow(workflow);
@@ -142,7 +172,14 @@ function execute({root=ROOT,run=spawnSync,copy=copyToTemp}={}){
   const triage=JSON.parse(fs.readFileSync(path.join(temp,'candidate-triage.json'),'utf8'));
   assert(generated.total===after.published,'season manifest lost published results');
   assert(triage.total===after.pending,'triage queue diverged from review list');
-  assert(after.approvals>=before.approvals,'existing approval history was dropped');
+  const beforeLedger=JSON.parse(fs.readFileSync(path.join(root,'approval-history.json'),'utf8'));
+  const afterLedger=JSON.parse(fs.readFileSync(path.join(temp,'approval-history.json'),'utf8'));
+  const beforeSource=JSON.parse(fs.readFileSync(path.join(root,'source-results/manifest.json'),'utf8'));
+  const afterSource=JSON.parse(fs.readFileSync(path.join(temp,'source-results/manifest.json'),'utf8'));
+  const heldProof=JSON.parse(fs.readFileSync(path.join(root,
+   'data/manual-approvals/review-only-generic-v1.json'),'utf8'));
+  assert(retainedOrExactHeldReversal(beforeLedger,afterLedger,beforeSource,afterSource,heldProof),
+   'unexpected result or approval history deletion (not an exact proof-pinned held ID)');
   for(const [file,sha] of originals)
    assert(hash(fs.readFileSync(path.join(root,file)))===sha,'original checkout mutated: '+file);
   const summary={status:'success',steps:steps.length,elapsedMs:Math.round(performance.now()-start),
@@ -155,4 +192,4 @@ function execute({root=ROOT,run=spawnSync,copy=copyToTemp}={}){
 if(require.main===module){
  try{execute()}catch(error){console.error(error.stack||error);process.exitCode=1}
 }
-module.exports={parseWorkflow,copyToTemp,inspect,runSteps,execute};
+module.exports={parseWorkflow,copyToTemp,inspect,runSteps,execute,retainedOrExactHeldReversal};
