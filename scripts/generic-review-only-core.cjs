@@ -90,6 +90,9 @@ function verifyPublishedZero(row,entry,approval){
   !sameStoredEvidence(r,row)||row.note!==zeroNote(r,rule))return false;
  return true;
 }
+// The manual review hold takes precedence over broad legacy publishers.
+// These IDs must remain pending until the missing original Epic UUID is verified.
+const isExplicitlyHeld=id=>MANIFEST.held.some(h=>h.id===id);
 function approvals(){
  if(MANIFEST.version!==1||!Array.isArray(MANIFEST.approvals)||
     MANIFEST.approvals.length>100)throw Error('GENERIC_REVIEW invalid manual manifest');
@@ -102,4 +105,4 @@ function approvals(){
  return MANIFEST.approvals;
 }
 module.exports={POLICY,RULES,MANIFEST,sha,approvals,pinnedRule,validateApproval,
- sameStoredEvidence,convertedRow,zeroNote,verifyPublishedZero};
+ sameStoredEvidence,convertedRow,zeroNote,verifyPublishedZero,isExplicitlyHeld};
