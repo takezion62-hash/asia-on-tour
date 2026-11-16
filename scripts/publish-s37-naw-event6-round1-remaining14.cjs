@@ -23,6 +23,18 @@ const session=sessions.find(x=>x.sourceWindowId===proof.WINDOW&&x.eventId===proo
 requireValid(!!session,'official event session missing');
 const checkpoint=db.scans.history.windows[proof.KEY];
 const end=Date.parse(session.endUtc),observed=Date.parse(checkpoint?.lastSuccessAt||'');
+// Diagnostic metadata only (never print participants or unreviewed private data).
+console.log('S37_NAW_EVENT6_CHECKPOINT '+JSON.stringify({
+ hasCheckpoint:!!checkpoint,complete:checkpoint?.complete,
+ rankingOrderValid:checkpoint?.rankingOrderValid,
+ pages:checkpoint?.pages,nextPage:checkpoint?.nextPage,totalPages:checkpoint?.totalPages,
+ lastSeenRank:checkpoint?.lastSeenRank,emptyAttempts:checkpoint?.emptyAttempts,
+ lastError:checkpoint?.lastError,lastErrorCode:checkpoint?.lastErrorCode,
+ retryAfter:checkpoint?.retryAfter,lastSuccessAt:checkpoint?.lastSuccessAt,
+ proposals:checkpoint?.proposals?.length,
+ observedCandidates:proof.SPECS.filter(s=>checkpoint?.proposals?.some(x=>x.id===s.id)).length,
+ sessionEndedAt:session.endUtc
+}));
 requireValid(checkpoint&&checkpoint.rankingOrderValid===true&&
  Number.isSafeInteger(checkpoint.nextPage)&&checkpoint.nextPage>=1&&
  Number.isSafeInteger(checkpoint.pages)&&checkpoint.pages===checkpoint.nextPage&&
