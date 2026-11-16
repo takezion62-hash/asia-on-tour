@@ -41,5 +41,9 @@
   "autoApprovePerformance": true,
   "autoApproveUnreal": true,
   "autoApproveDuoQualifier": true,
-  "minUnstartedWindowsPerRun": 6
+  "minUnstartedWindowsPerRun": 6,
+  "reviewRecovery": {
+    "enabled": true,
+    "maxWindows": 4
+  }
 }
