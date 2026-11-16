@@ -1,7 +1,7 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-16T02:43:51.794Z",
+  "checkedAt": "2026-11-16T04:08:15.779Z",
   "mode": "review",
   "scope": "history",
   "dateMode": "rolling",
@@ -11,60 +11,27 @@
   "provider": "osirion",
   "linkedPlayers": 665,
   "trackedWindows": 3176,
-  "found": 34,
-  "skipped": 9,
-  "imported": 11,
+  "found": 62,
+  "skipped": 15,
+  "imported": 14,
   "scannedPages": 96,
-  "completedWindows": 594,
+  "completedWindows": 600,
   "identityConflicts": 3,
-  "alreadyRegistered": 5580,
-  "autoApprovedTotal": 2864,
+  "alreadyRegistered": 5608,
+  "autoApprovedTotal": 2878,
   "invalidCachedCandidates": 1,
-  "manualReviewCandidates": 34,
+  "manualReviewCandidates": 62,
   "autoApprovedCosmeticThisRun": 0,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
   "autoApprovedUnrealThisRun": 0,
   "timeLimitReached": false,
   "retryWindows": 9,
-  "transientFailures": 3,
-  "malformedFailures": 1,
-  "skippedLeaderboards": [
-    {
-      "window": "epicgames_S42_SoloVictoryCup_OCE/S42_SoloVictoryCup_Event1Round1_OCE",
-      "page": 0,
-      "attempt": 7,
-      "code": "OSIRION_INVALID_LEADERBOARD",
-      "reason": "大会順位表のID/形式が不正 [epicgames_S42_SoloVictoryCup_OCE/S42_SoloVictoryCup_Event1Round1_OCE page=0]: totalPages=0",
-      "retryAfter": "2026-11-18T02:41:56.587Z"
-    },
-    {
-      "window": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event5Round2_NAC",
-      "page": 30,
-      "attempt": 1,
-      "code": "OSIRION_TRANSIENT",
-      "reason": "Osirion API HTTP 429 /v1/tournaments/leaderboard",
-      "retryAfter": "2026-11-16T08:43:20.857Z"
-    },
-    {
-      "window": "epicgames_S43_SquadsVictoryCup_OCE/S43_SquadsVictoryCup_Event1_Round1_OCE",
-      "page": 1,
-      "attempt": 1,
-      "code": "OSIRION_TRANSIENT",
-      "reason": "Osirion API HTTP 429 /v1/tournaments/leaderboard",
-      "retryAfter": "2026-11-16T08:43:22.939Z"
-    },
-    {
-      "window": "epicgames_S36_VictoryDuosCup_OCE/S36_VictoryDuosCup_Event3Round1_OCE",
-      "page": 3,
-      "attempt": 1,
-      "code": "OSIRION_TRANSIENT",
-      "reason": "Osirion API HTTP 429 /v1/tournaments/leaderboard",
-      "retryAfter": "2026-11-16T08:43:24.749Z"
-    }
-  ],
+  "transientFailures": 0,
+  "malformedFailures": 0,
+  "skippedLeaderboards": [],
   "reviewOnlyWindows": 1544,
-  "reviewOnlyCandidates": 0,
+  "reviewOnlyCandidates": 13,
   "unmappedEvents": 234,
   "unmappedEventIds": [
     "S30_ConsoleCashCups",
@@ -80,29 +47,29 @@
     "S30_Reload",
     "S30_ReloadZB"
   ],
-  "message": "公式Epic ID・順位・開催枠を検証し16件を掲載。残り34件。未確認賞金を推定しない。",
+  "message": "最新版と安全統合：新規掲載14件、重複スキップ0件、要確認の競合0件、確認待ち62件。既存の戦績・賞金は保持。",
   "manuallyPublished": 1698,
   "manuallyResolvedDuplicates": 169,
   "lastReviewedBatchAt": "2026-11-16T04:05:20.108Z",
   "manuallyCorrected": 13,
   "lastCorrectedReviewAt": "2026-11-13T13:45:16.115Z",
   "concurrentMerge": {
-    "appended": 11,
+    "appended": 14,
     "alreadyPublished": 0,
     "reviewConflicts": 0,
-    "keptPending": 51,
-    "reconciledAt": "2026-11-16T02:43:56.511Z"
+    "keptPending": 62,
+    "reconciledAt": "2026-11-16T04:08:21.438Z"
   },
   "coverage": {
     "total": 3176,
-    "completed": 594,
-    "notStarted": 2394,
+    "completed": 600,
+    "notStarted": 2388,
     "partial": 179,
     "retryWaiting": 9,
     "retryDue": 0,
-    "remaining": 2582,
+    "remaining": 2576,
     "retryCount": 9,
-    "completionPercent": 18.7,
+    "completionPercent": 18.9,
     "byRegion": {
       "OCE": {
         "total": 562,
@@ -111,45 +78,45 @@
       },
       "ME": {
         "total": 556,
-        "completed": 182,
-        "pending": 374
+        "completed": 183,
+        "pending": 373
       },
       "EU": {
         "total": 576,
-        "completed": 79,
-        "pending": 497
+        "completed": 80,
+        "pending": 496
       },
       "BR": {
         "total": 555,
-        "completed": 67,
-        "pending": 488
+        "completed": 68,
+        "pending": 487
       },
       "NAC": {
         "total": 575,
-        "completed": 96,
-        "pending": 479
+        "completed": 97,
+        "pending": 478
       },
       "NAW": {
         "total": 352,
-        "completed": 85,
-        "pending": 267
+        "completed": 87,
+        "pending": 265
       }
     },
     "byYear": {
       "2024": {
         "total": 1035,
-        "completed": 150,
-        "pending": 885
+        "completed": 151,
+        "pending": 884
       },
       "2025": {
         "total": 702,
-        "completed": 74,
-        "pending": 628
+        "completed": 76,
+        "pending": 626
       },
       "2026": {
         "total": 1439,
-        "completed": 370,
-        "pending": 1069
+        "completed": 373,
+        "pending": 1066
       }
     },
     "outsideScopeCheckpoints": 0,
@@ -314,5 +281,36 @@
   },
   "autoApprovedParticipationThisRun": 0,
   "manualReviewProcessed": 37,
-  "manualReviewResolvedAt": "2026-11-15T23:36:15.821Z"
+  "manualReviewResolvedAt": "2026-11-15T23:36:15.821Z",
+  "reviewRecovery": {
+    "selectedWindows": 4,
+    "candidateCount": 13,
+    "cashUnconfirmedCount": 8,
+    "selected": [
+      {
+        "window": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event1Round2_NAC",
+        "remainingPages": 19,
+        "candidateCount": 2,
+        "cashUnconfirmedCount": 2
+      },
+      {
+        "window": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event7Round2_NAC",
+        "remainingPages": 41,
+        "candidateCount": 3,
+        "cashUnconfirmedCount": 3
+      },
+      {
+        "window": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event6Round2_NAC",
+        "remainingPages": 44,
+        "candidateCount": 3,
+        "cashUnconfirmedCount": 3
+      },
+      {
+        "window": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event5Round1_NAC",
+        "remainingPages": 97,
+        "candidateCount": 5,
+        "cashUnconfirmedCount": 0
+      }
+    ]
+  }
 }
