@@ -1,7 +1,7 @@
 {
   "version": 1,
   "sourceCheckedAt": "2026-11-07T23:16:39.215Z",
-  "total": 156,
+  "total": 153,
   "alreadyResolved": 0,
   "byYear": [
     {
@@ -10,7 +10,7 @@
     },
     {
       "name": "2025",
-      "count": 64
+      "count": 61
     },
     {
       "name": "2026",
@@ -36,7 +36,7 @@
     },
     {
       "name": "OCE",
-      "count": 6
+      "count": 3
     }
   ],
   "byTournament": [
@@ -50,7 +50,7 @@
     },
     {
       "name": "Duos Console Victory Cash Cup / OCE / 2025",
-      "count": 6
+      "count": 3
     },
     {
       "name": "PlayStation Cup / ME / 2025",
@@ -92,7 +92,7 @@
     },
     {
       "name": "rules-review",
-      "count": 47
+      "count": 44
     }
   ],
   "queue": [
@@ -1547,105 +1547,6 @@
         "possibleExistingId": null
       },
       "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s37-85d054e61434",
-      "origin": "history",
-      "date": "2025-08-24",
-      "year": "2025",
-      "region": "OCE",
-      "tournamentId": "ch6s4-console-duos-victory",
-      "event": "Duos Console Victory Cash Cup",
-      "round": "Event 2 · Round 1 / 予選",
-      "player": "かぷせるてぃーてぃーTTていてい / TONIGHTREET",
-      "kind": "予選",
-      "rank": 685,
-      "points": 131,
-      "kills": 33,
-      "vrs": 1,
-      "prize": 0,
-      "source": "https://www.fortnite.com/competitive/events/S37_ConsoleDuosCashCups/?region=OCE&round=S37_ConsoleDuosCashCups_Event2Round1_OCE",
-      "status": "rules-review",
-      "action": "公式規則・賞金・突破・スキン条件を個別確認",
-      "reason": "順位表の取得が完了していません",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": true,
-        "observedPartial": false,
-        "seenPages": 26,
-        "totalPages": 26,
-        "sourceKey": "epicgames_S37_ConsoleDuosCashCups_OCE/S37_ConsoleDuosCashCups_Event2Round1_OCE",
-        "possibleExistingId": null
-      },
-      "rewardState": "source-amount-present-not-verified-by-triage"
-    },
-    {
-      "id": "auto-s37-a08eeaafb647",
-      "origin": "history",
-      "date": "2025-08-24",
-      "year": "2025",
-      "region": "OCE",
-      "tournamentId": "ch6s4-console-duos-victory",
-      "event": "Duos Console Victory Cash Cup",
-      "round": "Event 2 · Round 1 / 予選",
-      "player": "まろやかれおちゃあいと / 軍神 心湊 壱輝",
-      "kind": "予選",
-      "rank": 1498,
-      "points": 50,
-      "kills": 13,
-      "vrs": 0,
-      "prize": 0,
-      "source": "https://www.fortnite.com/competitive/events/S37_ConsoleDuosCashCups/?region=OCE&round=S37_ConsoleDuosCashCups_Event2Round1_OCE",
-      "status": "rules-review",
-      "action": "公式規則・賞金・突破・スキン条件を個別確認",
-      "reason": "未検証のシーズンまたは大会",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": true,
-        "observedPartial": false,
-        "seenPages": 26,
-        "totalPages": 26,
-        "sourceKey": "epicgames_S37_ConsoleDuosCashCups_OCE/S37_ConsoleDuosCashCups_Event2Round1_OCE",
-        "possibleExistingId": null
-      },
-      "rewardState": "source-amount-present-not-verified-by-triage"
-    },
-    {
-      "id": "auto-s37-e9a45b59e489",
-      "origin": "history",
-      "date": "2025-08-24",
-      "year": "2025",
-      "region": "OCE",
-      "tournamentId": "ch6s4-console-duos-victory",
-      "event": "Duos Console Victory Cash Cup",
-      "round": "Event 2 · Round 1 / 予選",
-      "player": "Kkkkfdjdfdufdu / 白組 shink",
-      "kind": "予選",
-      "rank": 1571,
-      "points": 46,
-      "kills": 10,
-      "vrs": 0,
-      "prize": 0,
-      "source": "https://www.fortnite.com/competitive/events/S37_ConsoleDuosCashCups/?region=OCE&round=S37_ConsoleDuosCashCups_Event2Round1_OCE",
-      "status": "rules-review",
-      "action": "公式規則・賞金・突破・スキン条件を個別確認",
-      "reason": "未検証のシーズンまたは大会",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": true,
-        "observedPartial": false,
-        "seenPages": 26,
-        "totalPages": 26,
-        "sourceKey": "epicgames_S37_ConsoleDuosCashCups_OCE/S37_ConsoleDuosCashCups_Event2Round1_OCE",
-        "possibleExistingId": null
-      },
-      "rewardState": "source-amount-present-not-verified-by-triage"
     },
     {
       "id": "auto-s37-20561d92eebb",
