@@ -88,12 +88,10 @@ for(const item of entries){
   }
   existingUUIDs.set(uuid,name);
  }
- const collisions=results.filter(r=>r.seasonId===t.seasonId&&r.date===t.date&&
-   r.region===t.region&&r.tournamentId===t.tournamentId&&
-   (r.id===t.id||r.rank===t.rank||
-    (Array.isArray(r.players)&&
-     JSON.stringify([...r.players].sort())===JSON.stringify([...t.players].sort()))||
-    (t.players.length===1&&r.player===t.player)));
+ // The same duo can have a separately published Round 1 qualifier and
+ // a Round 2 cash final on the same date. Only compare collisions within
+ // the target award round; the exact target ID remains globally unique.
+ const collisions=results.filter(r=>V.awardCollision(r,t));
  must(collisions.length<=1,'duplicate matches for same tournament: '+t.id);
  if(collisions.length){
   const row=collisions[0],matches=ledger.entries.filter(e=>e.recordId===row.id);
