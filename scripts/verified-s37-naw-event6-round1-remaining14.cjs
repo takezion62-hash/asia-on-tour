@@ -8,6 +8,8 @@ const EVENT='S37_ConsoleDuosCashCups';
 const WINDOW='S37_ConsoleDuosCashCups_Event6Round1_NAW';
 const KEY='epicgames_'+EVENT+'_NAW/'+WINDOW;
 const CUTOFF=250;
+const ARCHIVE_COMMIT='ad4aec18e61a6d528398f92e7440d87d02c10399';
+const ARCHIVE_BLOB='6af9cc80993405327bf07ef8620bfaddc717d7d1';
 const SPECS=Object.freeze([
  Object.freeze({"id":"auto-s37-8389b10646aa","player":"らる / まろやかれおちゃあいと","playerRaw":"はあちゃまっちゃまーwwǃǃӜ / 爆運まろやかれおちゃあいと爆運","players":["らる","まろやかれおちゃあいと"],"rank":19,"points":278,"kills":50,"vrs":0,"matches":6}),
  Object.freeze({"id":"auto-s37-05934e51dc7d","player":"VLZ 対面の極意 / CALM かずにょっす","playerRaw":"VLZ 対面の極意 / CALM かずにょっす","players":["VLZ 対面の極意","CALM かずにょっす"],"rank":96,"points":239,"kills":24,"vrs":1,"matches":5}),
@@ -45,6 +47,7 @@ function validatedRecord(row,entry){
   entry.recordId===spec.id&&entry.policy===POLICY&&
   entry.rule===RULE&&entry.source===SOURCE&&
   entry.evidence?.includes('mature contiguous observed leaderboard')===true&&
+  entry.evidence?.includes(ARCHIVE_BLOB)===true&&
   row.id===spec.id&&row.date==='2025-09-28'&&row.region==='NAW'&&
   row.seasonId==='S37'&&row.chapter===6&&row.season===4&&
   row.tournamentId==='ch6s4-console-duos-victory'&&
@@ -56,6 +59,6 @@ function validatedRecord(row,entry){
   ['rank','points','kills','vrs','matches'].every(field=>row[field]===spec[field])&&
   typeof row.note==='string'&&row.note.includes(RULE)&&
   row.note.includes('上位250')&&row.note.includes('賞金$0')&&
-  row.note.includes('未完了');
+  row.note.includes('未完了')&&row.note.includes(ARCHIVE_BLOB);
 }
-module.exports={POLICY,RULE,SOURCE,EVENT,WINDOW,KEY,CUTOFF,SPECS,getSpec,matchesOriginal,expectedKind,expectedRound,validatedRecord};
+module.exports={POLICY,RULE,SOURCE,EVENT,WINDOW,KEY,CUTOFF,ARCHIVE_COMMIT,ARCHIVE_BLOB,SPECS,getSpec,matchesOriginal,expectedKind,expectedRound,validatedRecord};
