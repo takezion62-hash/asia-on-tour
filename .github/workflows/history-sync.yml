@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - "scripts/osirion-sync.cjs"
+      - "scripts/review-recovery-priority.cjs"
       - "scripts/automatic-duo-qualifier-approval.cjs"
       - "scripts/verified-partial-page.cjs"
       - "scripts/audit-pending-history-20261108.cjs"
