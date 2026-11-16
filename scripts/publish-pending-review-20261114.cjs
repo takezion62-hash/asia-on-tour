@@ -66,7 +66,10 @@ if(!(args.length===0||(args.length===1&&dry)))throw Error('Only --dry-run or no 
 const db=loadReviewDb(ROOT);
 db.reviewed=JSON.parse(fs.readFileSync(path.join(ROOT,'history-sync-reviewed.json'),'utf8'));
 const available=new Set([...db.reviews.auto.proposals,...db.reviews.history.proposals].map(x=>x.id));
-const target=[...new Set([...TARGET_IDS.filter(x=>available.has(x)),...available])];
+// A growing pending queue is not an error: review at most 100 entries per run,
+// leaving all later candidates untouched for subsequent dedicated reviews.
+const queued=[...new Set([...TARGET_IDS.filter(x=>available.has(x)),...available])];
+const target=queued.slice(0,100),deferred=queued.length-target.length;
 if(target.length>100)throw Error('Pending review exceeds bounded 100-item safety limit');
 const oldCash=rs=>rs.reduce((n,x)=>n+Math.round((x.prize||0)*100),0);
 const oldPersonal=rs=>rs.reduce((n,x)=>n+personalCents(x)*roster(x).length,0);
@@ -96,7 +99,7 @@ if(approvals.length)throw Error('Approval audit failed '+JSON.stringify(approval
 const updates=validateUpdateLog(plan.next.results,plan.next.updates);
 if(updates.length)throw Error('Update log failed '+JSON.stringify(updates.slice(0,5)));
 const report={
- mode:dry?'dry-run':'apply',pending:target.length,
+ mode:dry?'dry-run':'apply',pending:target.length,deferred,
  alreadyResolved:TARGET_IDS.filter(x=>!available.has(x)).length,additionalDiscovered:target.filter(x=>!TARGET_IDS.includes(x)).length,
  added:plan.published.length,duplicates:plan.duplicates.length,
  held:plan.held.length,oldCount:db.results.length,newCount:plan.next.results.length,
