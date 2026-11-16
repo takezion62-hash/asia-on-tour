@@ -2,6 +2,35 @@
   "version": 1,
   "entries": [
     {
+      "id": "review-publication-pending-20261114-f8acd0396a01-verified-rule-1",
+      "date": "2026-11-16",
+      "type": "records",
+      "title": "管理者確認済み戦績 3件を追加",
+      "description": "公式規則に基づく予選突破または決勝0VRのみを確認。未確認賞金なし。",
+      "recordIds": [
+        "auto-s30-e2b0e1e276da",
+        "auto-s30-24ac8dfbf447",
+        "auto-s30-2a437d27b1a9"
+      ]
+    },
+    {
+      "id": "review-publication-pending-20261114-f8acd0396a01-attendance-only-1",
+      "date": "2026-11-16",
+      "type": "records",
+      "title": "管理者確認済み戦績 8件を追加",
+      "description": "Epic ID・開催枠・順位表を再照合した出場確認のみ。賞金・予選突破・スキン獲得を未認定。",
+      "recordIds": [
+        "auto-s41-9d1ccb131f32",
+        "auto-s33-803db062bfa7",
+        "auto-s33-d87f36771d03",
+        "auto-s34-73c142493716",
+        "auto-s34-d19c304bb799",
+        "auto-s34-1d83d02660db",
+        "auto-s34-69fdaf5a7a8e",
+        "auto-s34-185a5464d2e0"
+      ]
+    },
+    {
       "id": "auto-sync-20261116072131",
       "date": "2026-11-16",
       "type": "records",
@@ -175,17 +204,6 @@
         "auto-s30-2ec8f3579677",
         "auto-s30-00f4b40c1a09",
         "auto-s30-81b3410173ce"
-      ]
-    },
-    {
-      "id": "verified-review-round5-49e46653b38e",
-      "date": "2026-11-16",
-      "type": "records",
-      "title": "公式順位表再検証：予選・決勝・参加実績2件を掲載",
-      "description": "Epic本人ID・大会枠・成熟した保存済み順位表の完全照合。2026 S42予選/決勝0VR、2024公式突破条件、現金賞金未確定の参加記録を分離。未確認の賞金やスキン獲得は推定していない。",
-      "recordIds": [
-        "auto-s34-74d1f337746f",
-        "auto-s34-04720ffe5218"
       ]
     },
     {

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-16T07:18:30.524Z",
+  "reviewedAt": "2026-11-16T08:36:49.144Z",
   "entries": [
     {
       "id": "auto-s43-21408f1d31bc",
@@ -26056,28 +26056,6 @@
       "evidence": "Exact saved official Epic ID, score, calendar window and regional official payout/qualification rule"
     },
     {
-      "id": "auto-s34-74d1f337746f",
-      "decision": "published",
-      "recordId": "auto-s34-74d1f337746f",
-      "policy": "attendance-only",
-      "approvedAt": "2026-11-16T06:44:45.369Z",
-      "approvedBy": "ChatGPT / owner-authorized verified review",
-      "source": "https://www.fortnite.com/competitive/events/S34_PlaystationCup/?region=ME&round=S34_PlaystationCupFinal_ME",
-      "rule": null,
-      "evidence": "Exact Epic account and team roster, canonical official event/calendar, ranked checkpoint with continuous mature rows or complete scan; duplicate check"
-    },
-    {
-      "id": "auto-s34-04720ffe5218",
-      "decision": "published",
-      "recordId": "auto-s34-04720ffe5218",
-      "policy": "attendance-only",
-      "approvedAt": "2026-11-16T06:44:45.369Z",
-      "approvedBy": "ChatGPT / owner-authorized verified review",
-      "source": "https://www.fortnite.com/competitive/events/S34_PlaystationCup/?region=ME&round=S34_PlaystationCupFinal_ME",
-      "rule": null,
-      "evidence": "Exact Epic account and team roster, canonical official event/calendar, ranked checkpoint with continuous mature rows or complete scan; duplicate check"
-    },
-    {
       "id": "auto-s41-719cc4dc23cf",
       "decision": "published",
       "recordId": "auto-s41-719cc4dc23cf",
@@ -26340,6 +26318,127 @@
       "source": "https://www.fortnite.com/competitive/events/S33_SoloCashCup/?region=NAW&round=S33_SoloCashCup_Event6Round1_NAW",
       "rule": null,
       "evidence": "Exact Epic account and team roster, canonical official event/calendar, ranked checkpoint with continuous mature rows or complete scan; duplicate check"
+    },
+    {
+      "id": "auto-s41-9d1ccb131f32",
+      "decision": "published",
+      "recordId": "auto-s41-9d1ccb131f32",
+      "policy": "attendance-only",
+      "approvedAt": "2026-11-16T08:36:49.144Z",
+      "approvedBy": "ChatGPT / user authorized confirmed-candidate review",
+      "rule": null,
+      "source": "https://www.fortnite.com/competitive/events/S41_PSTypicalGamer/?region=OCE&round=S41_PSTypicalGamer_Qualifier_OCE",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s33-803db062bfa7",
+      "decision": "published",
+      "recordId": "auto-s33-803db062bfa7",
+      "policy": "attendance-only",
+      "approvedAt": "2026-11-16T08:36:49.144Z",
+      "approvedBy": "ChatGPT / user authorized confirmed-candidate review",
+      "rule": null,
+      "source": "https://www.fortnite.com/competitive/events/S33_SoloCashCup/?region=NAW&round=S33_SoloCashCup_Event6Round1_NAW",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s33-d87f36771d03",
+      "decision": "published",
+      "recordId": "auto-s33-d87f36771d03",
+      "policy": "attendance-only",
+      "approvedAt": "2026-11-16T08:36:49.144Z",
+      "approvedBy": "ChatGPT / user authorized confirmed-candidate review",
+      "rule": null,
+      "source": "https://www.fortnite.com/competitive/events/S33_SoloCashCup/?region=NAW&round=S33_SoloCashCup_Event6Round1_NAW",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s34-73c142493716",
+      "decision": "published",
+      "recordId": "auto-s34-73c142493716",
+      "policy": "attendance-only",
+      "approvedAt": "2026-11-16T08:36:49.144Z",
+      "approvedBy": "ChatGPT / user authorized confirmed-candidate review",
+      "rule": null,
+      "source": "https://www.fortnite.com/competitive/events/S34_PlaystationCup/?region=ME&round=S34_PlaystationCupQualifier1_ME",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s34-d19c304bb799",
+      "decision": "published",
+      "recordId": "auto-s34-d19c304bb799",
+      "policy": "attendance-only",
+      "approvedAt": "2026-11-16T08:36:49.144Z",
+      "approvedBy": "ChatGPT / user authorized confirmed-candidate review",
+      "rule": null,
+      "source": "https://www.fortnite.com/competitive/events/S34_PlaystationCup/?region=ME&round=S34_PlaystationCupQualifier1_ME",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s34-1d83d02660db",
+      "decision": "published",
+      "recordId": "auto-s34-1d83d02660db",
+      "policy": "attendance-only",
+      "approvedAt": "2026-11-16T08:36:49.144Z",
+      "approvedBy": "ChatGPT / user authorized confirmed-candidate review",
+      "rule": null,
+      "source": "https://www.fortnite.com/competitive/events/S34_PlaystationCup/?region=ME&round=S34_PlaystationCupQualifier1_ME",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s34-69fdaf5a7a8e",
+      "decision": "published",
+      "recordId": "auto-s34-69fdaf5a7a8e",
+      "policy": "attendance-only",
+      "approvedAt": "2026-11-16T08:36:49.144Z",
+      "approvedBy": "ChatGPT / user authorized confirmed-candidate review",
+      "rule": null,
+      "source": "https://www.fortnite.com/competitive/events/S34_PlaystationCup/?region=ME&round=S34_PlaystationCupQualifier1_ME",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s34-185a5464d2e0",
+      "decision": "published",
+      "recordId": "auto-s34-185a5464d2e0",
+      "policy": "attendance-only",
+      "approvedAt": "2026-11-16T08:36:49.144Z",
+      "approvedBy": "ChatGPT / user authorized confirmed-candidate review",
+      "rule": null,
+      "source": "https://www.fortnite.com/competitive/events/S34_PlaystationCup/?region=ME&round=S34_PlaystationCupQualifier1_ME",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s30-e2b0e1e276da",
+      "decision": "published",
+      "recordId": "auto-s30-e2b0e1e276da",
+      "policy": "verified-rule",
+      "approvedAt": "2026-11-16T08:36:49.144Z",
+      "approvedBy": "ChatGPT / user authorized confirmed-candidate review",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=OCE&round=S30_SoloVictoryCashCup_Event7Round1_OCE",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s30-24ac8dfbf447",
+      "decision": "published",
+      "recordId": "auto-s30-24ac8dfbf447",
+      "policy": "verified-rule",
+      "approvedAt": "2026-11-16T08:36:49.144Z",
+      "approvedBy": "ChatGPT / user authorized confirmed-candidate review",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=OCE&round=S30_SoloVictoryCashCup_Event7Round1_OCE",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s30-2a437d27b1a9",
+      "decision": "published",
+      "recordId": "auto-s30-2a437d27b1a9",
+      "policy": "verified-rule",
+      "approvedAt": "2026-11-16T08:36:49.144Z",
+      "approvedBy": "ChatGPT / user authorized confirmed-candidate review",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=OCE&round=S30_SoloVictoryCashCup_Event7Round1_OCE",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
     }
   ]
 }
