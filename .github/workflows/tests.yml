@@ -142,6 +142,8 @@ jobs:
         with:
           node-version: '24'
           cache: npm
+      - name: 保留成績の公開混入を先に監査（賞金・更新履歴・確認待ちを含む）
+        run: node scripts/audit-held-publication.cjs
       - name: HTMLの公開JS/CSS参照を先に検証
         run: node --check scripts/serve.cjs && node scripts/site-assets.cjs
       - name: 最小のテスト依存を導入
