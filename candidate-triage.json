@@ -1,20 +1,20 @@
 {
   "version": 1,
   "sourceCheckedAt": "2026-11-07T23:16:39.215Z",
-  "total": 74,
+  "total": 63,
   "alreadyResolved": 0,
   "byYear": [
     {
       "name": "2024",
-      "count": 42
+      "count": 41
     },
     {
       "name": "2025",
-      "count": 29
+      "count": 20
     },
     {
       "name": "2026",
-      "count": 3
+      "count": 2
     }
   ],
   "byRegion": [
@@ -23,20 +23,16 @@
       "count": 1
     },
     {
-      "name": "ME",
-      "count": 1
-    },
-    {
       "name": "NAC",
       "count": 41
     },
     {
       "name": "NAW",
-      "count": 27
+      "count": 18
     },
     {
       "name": "OCE",
-      "count": 4
+      "count": 3
     }
   ],
   "byTournament": [
@@ -53,19 +49,7 @@
       "count": 3
     },
     {
-      "name": "PlayStation Typical Gamer Icon Cup Battle Royale / OCE / 2026",
-      "count": 1
-    },
-    {
-      "name": "Solo Cash Cup / NAW / 2025",
-      "count": 9
-    },
-    {
       "name": "Squads Victory Cup Battle Royale / NAW / 2026",
-      "count": 1
-    },
-    {
-      "name": "Trios Cash Cup / ME / 2024",
       "count": 1
     },
     {
@@ -80,7 +64,7 @@
     },
     {
       "name": "partial-scan",
-      "count": 48
+      "count": 37
     },
     {
       "name": "rules-review",
@@ -2135,336 +2119,6 @@
       "rewardState": "source-amount-present-not-verified-by-triage"
     },
     {
-      "id": "auto-s32-9783a6e83a84",
-      "origin": "history",
-      "date": "2024-11-16",
-      "year": "2024",
-      "region": "ME",
-      "tournamentId": "ch5s5-trios-cash",
-      "event": "Trios Cash Cup",
-      "round": "Event 4 · Round 1 / 参加確認",
-      "player": "R1ze / Zagouの弟 / goat playerfnbr",
-      "kind": "参加確認",
-      "rank": 2018,
-      "points": 134,
-      "kills": 17,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S32_TriosCashCup/?region=ME&round=S32_TriosCashCup_Event4Round1_ME",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "確認専用大会は自動承認不可",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 27,
-        "totalPages": 66,
-        "sourceKey": "epicgames_S32_TriosCashCup_ME/S32_TriosCashCup_Event4Round1_ME",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s33-0653cb74d237",
-      "origin": "history",
-      "date": "2025-02-02",
-      "year": "2025",
-      "region": "NAW",
-      "tournamentId": "ch6s1-solo-cash",
-      "event": "Solo Cash Cup",
-      "round": "Event 6 · Round 1 / 参加確認",
-      "player": "AMORIS たかやIGL",
-      "kind": "参加確認",
-      "rank": 6823,
-      "points": 75,
-      "kills": 4,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S33_SoloCashCup/?region=NAW&round=S33_SoloCashCup_Event6Round1_NAW",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "確認専用大会は自動承認不可",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 80,
-        "totalPages": 100,
-        "sourceKey": "epicgames_S33_SoloCashCup_NAW/S33_SoloCashCup_Event6Round1_NAW",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s33-107101feb67e",
-      "origin": "history",
-      "date": "2025-02-02",
-      "year": "2025",
-      "region": "NAW",
-      "tournamentId": "ch6s1-solo-cash",
-      "event": "Solo Cash Cup",
-      "round": "Event 6 · Round 1 / 参加確認",
-      "player": "gents らにりあハンバーガー",
-      "kind": "参加確認",
-      "rank": 6920,
-      "points": 73,
-      "kills": 8,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S33_SoloCashCup/?region=NAW&round=S33_SoloCashCup_Event6Round1_NAW",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "確認専用大会は自動承認不可",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 80,
-        "totalPages": 100,
-        "sourceKey": "epicgames_S33_SoloCashCup_NAW/S33_SoloCashCup_Event6Round1_NAW",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s33-187a897a2734",
-      "origin": "history",
-      "date": "2025-02-02",
-      "year": "2025",
-      "region": "NAW",
-      "tournamentId": "ch6s1-solo-cash",
-      "event": "Solo Cash Cup",
-      "round": "Event 6 · Round 1 / 参加確認",
-      "player": "れすぶゆりる",
-      "kind": "参加確認",
-      "rank": 7284,
-      "points": 67,
-      "kills": 7,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S33_SoloCashCup/?region=NAW&round=S33_SoloCashCup_Event6Round1_NAW",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "確認専用大会は自動承認不可",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 80,
-        "totalPages": 100,
-        "sourceKey": "epicgames_S33_SoloCashCup_NAW/S33_SoloCashCup_Event6Round1_NAW",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s33-53a8ec420ad1",
-      "origin": "history",
-      "date": "2025-02-02",
-      "year": "2025",
-      "region": "NAW",
-      "tournamentId": "ch6s1-solo-cash",
-      "event": "Solo Cash Cup",
-      "round": "Event 6 · Round 1 / 参加確認",
-      "player": "りくとかい",
-      "kind": "参加確認",
-      "rank": 6940,
-      "points": 73,
-      "kills": 3,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S33_SoloCashCup/?region=NAW&round=S33_SoloCashCup_Event6Round1_NAW",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "確認専用大会は自動承認不可",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 80,
-        "totalPages": 100,
-        "sourceKey": "epicgames_S33_SoloCashCup_NAW/S33_SoloCashCup_Event6Round1_NAW",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s33-9c1720c59c29",
-      "origin": "history",
-      "date": "2025-02-02",
-      "year": "2025",
-      "region": "NAW",
-      "tournamentId": "ch6s1-solo-cash",
-      "event": "Solo Cash Cup",
-      "round": "Event 6 · Round 1 / 参加確認",
-      "player": "軍神 心湊 壱輝",
-      "kind": "参加確認",
-      "rank": 7908,
-      "points": 59,
-      "kills": 2,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S33_SoloCashCup/?region=NAW&round=S33_SoloCashCup_Event6Round1_NAW",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "確認専用大会は自動承認不可",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 80,
-        "totalPages": 100,
-        "sourceKey": "epicgames_S33_SoloCashCup_NAW/S33_SoloCashCup_Event6Round1_NAW",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s33-c23eb62e05ae",
-      "origin": "history",
-      "date": "2025-02-02",
-      "year": "2025",
-      "region": "NAW",
-      "tournamentId": "ch6s1-solo-cash",
-      "event": "Solo Cash Cup",
-      "round": "Event 6 · Round 1 / 参加確認",
-      "player": "白組 shink",
-      "kind": "参加確認",
-      "rank": 7158,
-      "points": 69,
-      "kills": 4,
-      "vrs": 1,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S33_SoloCashCup/?region=NAW&round=S33_SoloCashCup_Event6Round1_NAW",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "確認専用大会は自動承認不可",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 80,
-        "totalPages": 100,
-        "sourceKey": "epicgames_S33_SoloCashCup_NAW/S33_SoloCashCup_Event6Round1_NAW",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s33-d982b3d05ff2",
-      "origin": "history",
-      "date": "2025-02-02",
-      "year": "2025",
-      "region": "NAW",
-      "tournamentId": "ch6s1-solo-cash",
-      "event": "Solo Cash Cup",
-      "round": "Event 6 · Round 1 / 参加確認",
-      "player": "渡良瀬佳乃",
-      "kind": "参加確認",
-      "rank": 7375,
-      "points": 66,
-      "kills": 2,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S33_SoloCashCup/?region=NAW&round=S33_SoloCashCup_Event6Round1_NAW",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "確認専用大会は自動承認不可",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 80,
-        "totalPages": 100,
-        "sourceKey": "epicgames_S33_SoloCashCup_NAW/S33_SoloCashCup_Event6Round1_NAW",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s33-e6f202d59c13",
-      "origin": "history",
-      "date": "2025-02-02",
-      "year": "2025",
-      "region": "NAW",
-      "tournamentId": "ch6s1-solo-cash",
-      "event": "Solo Cash Cup",
-      "round": "Event 6 · Round 1 / 参加確認",
-      "player": "Anastasyaǃ3",
-      "kind": "参加確認",
-      "rank": 7958,
-      "points": 58,
-      "kills": 7,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S33_SoloCashCup/?region=NAW&round=S33_SoloCashCup_Event6Round1_NAW",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "確認専用大会は自動承認不可",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 80,
-        "totalPages": 100,
-        "sourceKey": "epicgames_S33_SoloCashCup_NAW/S33_SoloCashCup_Event6Round1_NAW",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s33-f53e3fb59895",
-      "origin": "history",
-      "date": "2025-02-02",
-      "year": "2025",
-      "region": "NAW",
-      "tournamentId": "ch6s1-solo-cash",
-      "event": "Solo Cash Cup",
-      "round": "Event 6 · Round 1 / 参加確認",
-      "player": "Yama",
-      "kind": "参加確認",
-      "rank": 7857,
-      "points": 59,
-      "kills": 5,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S33_SoloCashCup/?region=NAW&round=S33_SoloCashCup_Event6Round1_NAW",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "確認専用大会は自動承認不可",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 80,
-        "totalPages": 100,
-        "sourceKey": "epicgames_S33_SoloCashCup_NAW/S33_SoloCashCup_Event6Round1_NAW",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
       "id": "auto-s41-fd9646fe2a06",
       "origin": "history",
       "date": "2026-06-14",
@@ -2496,39 +2150,6 @@
         "possibleExistingId": null
       },
       "rewardState": "source-amount-present-not-verified-by-triage"
-    },
-    {
-      "id": "auto-s41-719cc4dc23cf",
-      "origin": "history",
-      "date": "2026-07-29",
-      "year": "2026",
-      "region": "OCE",
-      "tournamentId": "ch7s3-playstation-typical-gamer-icon-cup-battle-royale",
-      "event": "PlayStation Typical Gamer Icon Cup Battle Royale",
-      "round": "Qualifier / 参加確認",
-      "player": "MMC 最強れっくすたけるFV",
-      "kind": "参加確認",
-      "rank": 6029,
-      "points": 16,
-      "kills": 2,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S41_PSTypicalGamer/?region=OCE&round=S41_PSTypicalGamer_Qualifier_OCE",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "確認専用大会は自動承認不可",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 65,
-        "totalPages": 87,
-        "sourceKey": "epicgames_S41_PSTypicalGamer_OCE/S41_PSTypicalGamer_Qualifier_OCE",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
     }
   ],
   "policy": "read-only queue; awards require existing official rule-backed validators and identity/collision proof"
