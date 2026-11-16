@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-11-16T07:13:13.717Z",
+  "checkedAt": "2026-11-16T08:37:06.601Z",
   "windows": {
     "epicgames_S43_PerformanceEvaluationTrios_EU/S43_PerformanceEvaluation_Event1Round1_EU": {
       "nextPage": 7,
@@ -17441,7 +17441,7 @@
       "totalPages": 50
     },
     "epicgames_S43_ReloadZBDuosCashCup_EU/S43_ReloadZBDuosCashCup_Event2Round1_EU": {
-      "nextPage": 60,
+      "nextPage": 70,
       "complete": false,
       "proposals": [
         {
@@ -17544,16 +17544,16 @@
           ]
         }
       ],
-      "pages": 60,
-      "lastAttemptAt": "2026-11-16T07:12:40.613Z",
+      "pages": 70,
+      "lastAttemptAt": "2026-11-16T08:36:04.795Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 6000,
-      "lastSuccessAt": "2026-11-16T07:12:41.657Z",
+      "lastSeenRank": 7000,
+      "lastSuccessAt": "2026-11-16T08:36:05.611Z",
       "totalPages": 100
     },
     "epicgames_S43_ReloadZBDuosCashCup_ME/S43_ReloadZBDuosCashCup_Event2Round1_ME": {
-      "nextPage": 60,
+      "nextPage": 70,
       "complete": false,
       "proposals": [
         {
@@ -18182,18 +18182,84 @@
             "9f6ae11302434c8899251bac599c71ea",
             "ef02d0f2fcd1499b870f2f2c6888ce9c"
           ]
+        },
+        {
+          "id": "auto-s43-9c571b9e787c",
+          "date": "2026-11-15",
+          "region": "ME",
+          "player": "SE-Y yunaǃ / Wonder of U",
+          "playerRaw": "SE-Y yunaǃ / T1 demuś 10ǃǃ",
+          "event": "Reload ZB Duos Cash Cup Zero Build",
+          "round": "Event 2 · Round 1 / 参加確認",
+          "rank": 6151,
+          "points": 201,
+          "kills": 36,
+          "vrs": 1,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 6,
+          "seasonId": "S43",
+          "chapter": 7,
+          "season": 5,
+          "tournamentId": "ch7s5-reload-zero-build-duos-cash-cup",
+          "source": "https://www.fortnite.com/competitive/events/S43_ReloadZBDuosCashCup/?region=ME&round=S43_ReloadZBDuosCashCup_Event2Round1_ME",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "SE-Y yunaǃ",
+            "Wonder of U"
+          ],
+          "teamAccountIds": [
+            "80a59392e44e413fb9288478fe7bf2bb",
+            "8bf9579c86cd4ba4a5a8739edda8d014"
+          ]
+        },
+        {
+          "id": "auto-s43-bbe14e6d4c04",
+          "date": "2026-11-15",
+          "region": "ME",
+          "player": "Karf / rara",
+          "playerRaw": "faction karf 17ǃ / LYNX raratteÿ",
+          "event": "Reload ZB Duos Cash Cup Zero Build",
+          "round": "Event 2 · Round 1 / 参加確認",
+          "rank": 6402,
+          "points": 191,
+          "kills": 43,
+          "vrs": 1,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 7,
+          "seasonId": "S43",
+          "chapter": 7,
+          "season": 5,
+          "tournamentId": "ch7s5-reload-zero-build-duos-cash-cup",
+          "source": "https://www.fortnite.com/competitive/events/S43_ReloadZBDuosCashCup/?region=ME&round=S43_ReloadZBDuosCashCup_Event2Round1_ME",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "Karf",
+            "rara"
+          ],
+          "teamAccountIds": [
+            "09b8e741496a44288ed910b84ae3a935",
+            "3f961b086225468aacaa8b6ba77cfb69"
+          ]
         }
       ],
-      "pages": 60,
-      "lastAttemptAt": "2026-11-16T07:12:49.746Z",
+      "pages": 70,
+      "lastAttemptAt": "2026-11-16T08:36:13.197Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 6000,
-      "lastSuccessAt": "2026-11-16T07:12:50.436Z",
+      "lastSeenRank": 7000,
+      "lastSuccessAt": "2026-11-16T08:36:13.911Z",
       "totalPages": 100
     },
     "epicgames_S43_ReloadZBDuosCashCup_BR/S43_ReloadZBDuosCashCup_Event2Round1_BR": {
-      "nextPage": 50,
+      "nextPage": 60,
       "complete": false,
       "proposals": [
         {
@@ -18261,18 +18327,51 @@
             "25945a39f1564a22aab8ea7808feac98",
             "2b08f9919df14bbd90ae95db167db8cf"
           ]
+        },
+        {
+          "id": "auto-s43-b5c76cc40d80",
+          "date": "2026-11-16",
+          "region": "BR",
+          "player": "resれすまるっくす / yuyuudai",
+          "playerRaw": "byknではありま千円ちょうだい / TRSRx",
+          "event": "Reload ZB Duos Cash Cup Zero Build",
+          "round": "Event 2 · Round 1 / 参加確認",
+          "rank": 5988,
+          "points": 225,
+          "kills": 31,
+          "vrs": 0,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 6,
+          "seasonId": "S43",
+          "chapter": 7,
+          "season": 5,
+          "tournamentId": "ch7s5-reload-zero-build-duos-cash-cup",
+          "source": "https://www.fortnite.com/competitive/events/S43_ReloadZBDuosCashCup/?region=BR&round=S43_ReloadZBDuosCashCup_Event2Round1_BR",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "resれすまるっくす",
+            "yuyuudai"
+          ],
+          "teamAccountIds": [
+            "7f911cccf3ac4d93afdc0b0864949ded",
+            "95e40cb0c2334e11a112421f88178822"
+          ]
         }
       ],
-      "pages": 50,
-      "lastAttemptAt": "2026-11-16T07:12:58.054Z",
+      "pages": 60,
+      "lastAttemptAt": "2026-11-16T08:36:22.545Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 5000,
-      "lastSuccessAt": "2026-11-16T07:12:58.893Z",
+      "lastSeenRank": 6000,
+      "lastSuccessAt": "2026-11-16T08:36:23.263Z",
       "totalPages": 100
     },
     "epicgames_S43_ReloadZBDuosCashCup_NAC/S43_ReloadZBDuosCashCup_Event2Round1_NAC": {
-      "nextPage": 40,
+      "nextPage": 50,
       "complete": false,
       "proposals": [
         {
@@ -18472,18 +18571,51 @@
             "0247b9620f5e49709904d2d659995926",
             "e5237f320b4345e69d52ffe1965e474d"
           ]
+        },
+        {
+          "id": "auto-s43-512383cb6db9",
+          "date": "2026-11-16",
+          "region": "NAC",
+          "player": "bigsky / Reo",
+          "playerRaw": "tzd Ackermanǃ / IGNUM Reo",
+          "event": "Reload ZB Duos Cash Cup Zero Build",
+          "round": "Event 2 · Round 1 / 参加確認",
+          "rank": 4673,
+          "points": 304,
+          "kills": 65,
+          "vrs": 2,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 9,
+          "seasonId": "S43",
+          "chapter": 7,
+          "season": 5,
+          "tournamentId": "ch7s5-reload-zero-build-duos-cash-cup",
+          "source": "https://www.fortnite.com/competitive/events/S43_ReloadZBDuosCashCup/?region=NAC&round=S43_ReloadZBDuosCashCup_Event2Round1_NAC",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "bigsky",
+            "Reo"
+          ],
+          "teamAccountIds": [
+            "0d77cc7e6bda47d48183890d973ec508",
+            "25945a39f1564a22aab8ea7808feac98"
+          ]
         }
       ],
-      "pages": 40,
-      "lastAttemptAt": "2026-11-16T07:13:04.736Z",
+      "pages": 50,
+      "lastAttemptAt": "2026-11-16T08:36:37.054Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 4000,
-      "lastSuccessAt": "2026-11-16T07:13:05.377Z",
+      "lastSeenRank": 5000,
+      "lastSuccessAt": "2026-11-16T08:36:37.887Z",
       "totalPages": 100
     },
     "epicgames_S43_ReloadZBDuosCashCup_NAW/S43_ReloadZBDuosCashCup_Event2Round1_NAW": {
-      "nextPage": 30,
+      "nextPage": 40,
       "complete": false,
       "proposals": [
         {
@@ -18683,14 +18815,80 @@
             "177f0551e829457aad8fbe6e3d84fe3c",
             "7f9d9b48f9a54690a4ea7ae552188592"
           ]
+        },
+        {
+          "id": "auto-s43-fd945a3ca9c1",
+          "date": "2026-11-16",
+          "region": "NAW",
+          "player": "rakirye / ぴの",
+          "playerRaw": "lynx rαk1rye 7ǃ / ecs rakirye 猫",
+          "event": "Reload ZB Duos Cash Cup Zero Build",
+          "round": "Event 2 · Round 1 / 参加確認",
+          "rank": 3061,
+          "points": 212,
+          "kills": 38,
+          "vrs": 0,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 8,
+          "seasonId": "S43",
+          "chapter": 7,
+          "season": 5,
+          "tournamentId": "ch7s5-reload-zero-build-duos-cash-cup",
+          "source": "https://www.fortnite.com/competitive/events/S43_ReloadZBDuosCashCup/?region=NAW&round=S43_ReloadZBDuosCashCup_Event2Round1_NAW",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "rakirye",
+            "ぴの"
+          ],
+          "teamAccountIds": [
+            "cfb4372cbc4745f58bdff7d6b18bc173",
+            "dfe8247789b34ad598defca2d8cb1497"
+          ]
+        },
+        {
+          "id": "auto-s43-472c99e1cc4d",
+          "date": "2026-11-16",
+          "region": "NAW",
+          "player": "じんくん / Ryle",
+          "playerRaw": "33 coldeathǃ / Ryle ay лол 7",
+          "event": "Reload ZB Duos Cash Cup Zero Build",
+          "round": "Event 2 · Round 1 / 参加確認",
+          "rank": 3614,
+          "points": 175,
+          "kills": 42,
+          "vrs": 0,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 6,
+          "seasonId": "S43",
+          "chapter": 7,
+          "season": 5,
+          "tournamentId": "ch7s5-reload-zero-build-duos-cash-cup",
+          "source": "https://www.fortnite.com/competitive/events/S43_ReloadZBDuosCashCup/?region=NAW&round=S43_ReloadZBDuosCashCup_Event2Round1_NAW",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "じんくん",
+            "Ryle"
+          ],
+          "teamAccountIds": [
+            "39945a32ce554fb0803f279235d5433a",
+            "9b42679699ef41c99349e15c60890634"
+          ]
         }
       ],
-      "pages": 30,
-      "lastAttemptAt": "2026-11-16T07:13:13.012Z",
+      "pages": 40,
+      "lastAttemptAt": "2026-11-16T08:37:05.654Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 3000,
-      "lastSuccessAt": "2026-11-16T07:13:13.710Z",
+      "lastSeenRank": 4000,
+      "lastSuccessAt": "2026-11-16T08:37:06.593Z",
       "totalPages": 76
     }
   }
