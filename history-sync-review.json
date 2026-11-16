@@ -3059,76 +3059,6 @@
       "reviewReason": "未検証のシーズンまたは大会"
     },
     {
-      "id": "auto-s31-058353ccc095",
-      "date": "2024-10-19",
-      "region": "ME",
-      "player": "Aster / meah / Teddy",
-      "playerRaw": "ONYX KatEvolved / HaPpySumitOr1110 / faction teddy",
-      "event": "Trios Cash Cup",
-      "round": "Event 3 · Round 1 / 参加確認",
-      "rank": 1537,
-      "points": 197,
-      "kills": 28,
-      "vrs": 2,
-      "prize": null,
-      "kind": "参加確認",
-      "matches": 6,
-      "seasonId": "S31",
-      "chapter": 5,
-      "season": 4,
-      "tournamentId": "ch5s4-trios-cash",
-      "source": "https://www.fortnite.com/competitive/events/S31_TriosCashCup/?region=ME&round=S31_TriosCashCup_Event3Round1_ME",
-      "verified": true,
-      "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
-      "reviewOnly": true,
-      "reviewReason": "確認専用大会は自動承認不可",
-      "players": [
-        "Aster",
-        "meah",
-        "Teddy"
-      ],
-      "teamAccountIds": [
-        "0165b42f4fa64033852c86b2c8fa2c71",
-        "51942f08b9c34f3ebb125dd3e13fafa6",
-        "bc21ab3c0a5f4da8b83c7b085084aae0"
-      ]
-    },
-    {
-      "id": "auto-s31-e047f8ba75ca",
-      "date": "2024-10-19",
-      "region": "ME",
-      "player": "もんぶ / あくりあ / Hagane",
-      "playerRaw": "tzd monbu_fn / gents あくりあハンバーガー / 神里綾華 ʕᵒᵒʔ",
-      "event": "Trios Cash Cup",
-      "round": "Event 3 · Round 1 / 参加確認",
-      "rank": 2212,
-      "points": 152,
-      "kills": 41,
-      "vrs": 0,
-      "prize": null,
-      "kind": "参加確認",
-      "matches": 8,
-      "seasonId": "S31",
-      "chapter": 5,
-      "season": 4,
-      "tournamentId": "ch5s4-trios-cash",
-      "source": "https://www.fortnite.com/competitive/events/S31_TriosCashCup/?region=ME&round=S31_TriosCashCup_Event3Round1_ME",
-      "verified": true,
-      "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
-      "reviewOnly": true,
-      "reviewReason": "確認専用大会は自動承認不可",
-      "players": [
-        "もんぶ",
-        "あくりあ",
-        "Hagane"
-      ],
-      "teamAccountIds": [
-        "53d48aa991974fae9b5197efb73290f8",
-        "852a62b1d38b4072b1c201460f27a9ca",
-        "8ef7f1f04ba44de6989c230574666feb"
-      ]
-    },
-    {
       "id": "auto-s30-7039a99db314",
       "date": "2024-06-25",
       "region": "NAC",
@@ -3343,72 +3273,6 @@
       "verified": true,
       "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。",
       "reviewReason": "順位表の取得が完了していません"
-    },
-    {
-      "id": "auto-s36-42ea45521ea1",
-      "date": "2025-08-02",
-      "region": "NAW",
-      "player": "くりたる / 内海ゆうま",
-      "playerRaw": "FTW kulitalu 10ǃ / チータルタル弁当ネギトッピング",
-      "event": "Squid Grounds Cash Cup",
-      "round": "Event 6 · Round 1 / 参加確認",
-      "rank": 224,
-      "points": 225,
-      "kills": 34,
-      "vrs": 1,
-      "prize": null,
-      "kind": "参加確認",
-      "matches": 7,
-      "seasonId": "S36",
-      "chapter": 6,
-      "season": 3,
-      "tournamentId": "ch6s3-squid-grounds-cash-cup",
-      "source": "https://www.fortnite.com/competitive/events/S36_SquidGroundVictoryDuosCup/?region=NAW&round=S36_VictoryDuosCup_Event6Round1_NAW",
-      "verified": true,
-      "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
-      "reviewOnly": true,
-      "reviewReason": "確認専用大会は自動承認不可",
-      "players": [
-        "くりたる",
-        "内海ゆうま"
-      ],
-      "teamAccountIds": [
-        "02463a80d4954907b95d2e0bf0bfa887",
-        "1c2dca5cae094ffe87ae6176911eb7be"
-      ]
-    },
-    {
-      "id": "auto-s36-5a4eb075cc72",
-      "date": "2025-08-02",
-      "region": "NAW",
-      "player": "ふぃる / めるんやけん",
-      "playerRaw": "ポルターガイストǃ / がちのシャーク",
-      "event": "Squid Grounds Cash Cup",
-      "round": "Event 6 · Round 1 / 参加確認",
-      "rank": 245,
-      "points": 223,
-      "kills": 26,
-      "vrs": 1,
-      "prize": null,
-      "kind": "参加確認",
-      "matches": 5,
-      "seasonId": "S36",
-      "chapter": 6,
-      "season": 3,
-      "tournamentId": "ch6s3-squid-grounds-cash-cup",
-      "source": "https://www.fortnite.com/competitive/events/S36_SquidGroundVictoryDuosCup/?region=NAW&round=S36_VictoryDuosCup_Event6Round1_NAW",
-      "verified": true,
-      "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
-      "reviewOnly": true,
-      "reviewReason": "確認専用大会は自動承認不可",
-      "players": [
-        "ふぃる",
-        "めるんやけん"
-      ],
-      "teamAccountIds": [
-        "b8ee0fe8a5744c3ca37bb746388064ec",
-        "d02e4ebd15044724bbcc81263cee3779"
-      ]
     },
     {
       "id": "auto-s37-8389b10646aa",
@@ -3803,5 +3667,5 @@
       "reviewReason": "順位表の取得が完了していません"
     }
   ],
-  "manualReviewedAt": "2026-11-16T14:54:53.175Z"
+  "manualReviewedAt": "2026-11-16T16:00:54.137Z"
 }

@@ -1,16 +1,16 @@
 {
   "version": 1,
   "sourceCheckedAt": "2026-11-07T23:16:39.215Z",
-  "total": 149,
+  "total": 145,
   "alreadyResolved": 0,
   "byYear": [
     {
       "name": "2024",
-      "count": 78
+      "count": 76
     },
     {
       "name": "2025",
-      "count": 57
+      "count": 55
     },
     {
       "name": "2026",
@@ -24,7 +24,7 @@
     },
     {
       "name": "ME",
-      "count": 17
+      "count": 15
     },
     {
       "name": "NAC",
@@ -32,7 +32,7 @@
     },
     {
       "name": "NAW",
-      "count": 40
+      "count": 38
     },
     {
       "name": "OCE",
@@ -69,14 +69,6 @@
       "count": 1
     },
     {
-      "name": "Squid Grounds Cash Cup / NAW / 2025",
-      "count": 2
-    },
-    {
-      "name": "Trios Cash Cup / ME / 2024",
-      "count": 2
-    },
-    {
       "name": "ZB Solo Victory Cup / NAC / 2024",
       "count": 76
     }
@@ -88,7 +80,7 @@
     },
     {
       "name": "partial-scan",
-      "count": 67
+      "count": 63
     },
     {
       "name": "rules-review",
@@ -4352,138 +4344,6 @@
         "possibleExistingId": null
       },
       "rewardState": "source-amount-present-not-verified-by-triage"
-    },
-    {
-      "id": "auto-s31-058353ccc095",
-      "origin": "history",
-      "date": "2024-10-19",
-      "year": "2024",
-      "region": "ME",
-      "tournamentId": "ch5s4-trios-cash",
-      "event": "Trios Cash Cup",
-      "round": "Event 3 · Round 1 / 参加確認",
-      "player": "Aster / meah / Teddy",
-      "kind": "参加確認",
-      "rank": 1537,
-      "points": 197,
-      "kills": 28,
-      "vrs": 2,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S31_TriosCashCup/?region=ME&round=S31_TriosCashCup_Event3Round1_ME",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "確認専用大会は自動承認不可",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 26,
-        "totalPages": 72,
-        "sourceKey": "epicgames_S31_TriosCashCup_ME/S31_TriosCashCup_Event3Round1_ME",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s31-e047f8ba75ca",
-      "origin": "history",
-      "date": "2024-10-19",
-      "year": "2024",
-      "region": "ME",
-      "tournamentId": "ch5s4-trios-cash",
-      "event": "Trios Cash Cup",
-      "round": "Event 3 · Round 1 / 参加確認",
-      "player": "もんぶ / あくりあ / Hagane",
-      "kind": "参加確認",
-      "rank": 2212,
-      "points": 152,
-      "kills": 41,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S31_TriosCashCup/?region=ME&round=S31_TriosCashCup_Event3Round1_ME",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "確認専用大会は自動承認不可",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 26,
-        "totalPages": 72,
-        "sourceKey": "epicgames_S31_TriosCashCup_ME/S31_TriosCashCup_Event3Round1_ME",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s36-42ea45521ea1",
-      "origin": "history",
-      "date": "2025-08-02",
-      "year": "2025",
-      "region": "NAW",
-      "tournamentId": "ch6s3-squid-grounds-cash-cup",
-      "event": "Squid Grounds Cash Cup",
-      "round": "Event 6 · Round 1 / 参加確認",
-      "player": "くりたる / 内海ゆうま",
-      "kind": "参加確認",
-      "rank": 224,
-      "points": 225,
-      "kills": 34,
-      "vrs": 1,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S36_SquidGroundVictoryDuosCup/?region=NAW&round=S36_VictoryDuosCup_Event6Round1_NAW",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "確認専用大会は自動承認不可",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 4,
-        "totalPages": 76,
-        "sourceKey": "epicgames_S36_SquidGroundVictoryDuosCup_NAW/S36_VictoryDuosCup_Event6Round1_NAW",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s36-5a4eb075cc72",
-      "origin": "history",
-      "date": "2025-08-02",
-      "year": "2025",
-      "region": "NAW",
-      "tournamentId": "ch6s3-squid-grounds-cash-cup",
-      "event": "Squid Grounds Cash Cup",
-      "round": "Event 6 · Round 1 / 参加確認",
-      "player": "ふぃる / めるんやけん",
-      "kind": "参加確認",
-      "rank": 245,
-      "points": 223,
-      "kills": 26,
-      "vrs": 1,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S36_SquidGroundVictoryDuosCup/?region=NAW&round=S36_VictoryDuosCup_Event6Round1_NAW",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "確認専用大会は自動承認不可",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 4,
-        "totalPages": 76,
-        "sourceKey": "epicgames_S36_SquidGroundVictoryDuosCup_NAW/S36_VictoryDuosCup_Event6Round1_NAW",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
     },
     {
       "id": "auto-s37-05934e51dc7d",

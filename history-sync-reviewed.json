@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-16T14:54:53.175Z",
+  "reviewedAt": "2026-11-16T16:00:54.137Z",
   "description": "Resolved historic review candidates: published, duplicate or participation",
   "entries": [
     {
@@ -30204,6 +30204,42 @@
       "policy": "verified-s37-naw-console-event6-round1-four-20261116",
       "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-duos-console-victory-cash-cups-chapter-6-season-4-official-rules?region=NAC",
       "source": "https://www.fortnite.com/competitive/events/S37_ConsoleDuosCashCups/?region=NAW&round=S37_ConsoleDuosCashCups_Event6Round1_NAW"
+    },
+    {
+      "id": "auto-s31-058353ccc095",
+      "decision": "published",
+      "recordId": "auto-s31-058353ccc095",
+      "reviewedAt": "2026-11-16T16:00:54.137Z",
+      "source": "https://www.fortnite.com/competitive/events/S31_TriosCashCup/?region=ME&round=S31_TriosCashCup_Event3Round1_ME",
+      "policy": "attendance-only",
+      "rule": null
+    },
+    {
+      "id": "auto-s31-e047f8ba75ca",
+      "decision": "published",
+      "recordId": "auto-s31-e047f8ba75ca",
+      "reviewedAt": "2026-11-16T16:00:54.137Z",
+      "source": "https://www.fortnite.com/competitive/events/S31_TriosCashCup/?region=ME&round=S31_TriosCashCup_Event3Round1_ME",
+      "policy": "attendance-only",
+      "rule": null
+    },
+    {
+      "id": "auto-s36-42ea45521ea1",
+      "decision": "published",
+      "recordId": "auto-s36-42ea45521ea1",
+      "reviewedAt": "2026-11-16T16:00:54.137Z",
+      "source": "https://www.fortnite.com/competitive/events/S36_SquidGroundVictoryDuosCup/?region=NAW&round=S36_VictoryDuosCup_Event6Round1_NAW",
+      "policy": "attendance-only",
+      "rule": null
+    },
+    {
+      "id": "auto-s36-5a4eb075cc72",
+      "decision": "published",
+      "recordId": "auto-s36-5a4eb075cc72",
+      "reviewedAt": "2026-11-16T16:00:54.137Z",
+      "source": "https://www.fortnite.com/competitive/events/S36_SquidGroundVictoryDuosCup/?region=NAW&round=S36_VictoryDuosCup_Event6Round1_NAW",
+      "policy": "attendance-only",
+      "rule": null
     }
   ]
 }
