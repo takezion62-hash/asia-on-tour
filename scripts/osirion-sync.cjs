@@ -14,6 +14,7 @@ const {evaluate:evaluateUnreal,unrealWindow}=require('./automatic-unreal-approva
 const {evaluate:evaluateDuoQualifier}=require('./automatic-duo-qualifier-approval.cjs');
 const {scanCoverage}=require('./scan-coverage.cjs');
 const {finishableWindows,remainingPages,windowPageAllowance,leastCoveredBucket}=require('./scan-efficiency.cjs');
+const {recoveryShortlist}=require('./review-recovery-priority.cjs');
 const root=path.resolve(__dirname,'..');
 const read=name=>name==='results.json'?readResults(root).rows:JSON.parse(fs.readFileSync(path.join(root,name),'utf8'));
 const write=(name,obj)=>name==='results.json'?publishResults(root,obj):fs.writeFileSync(path.join(root,name),JSON.stringify(obj,null,2)+'\n');
@@ -375,7 +376,7 @@ function historicalPriority(state,records,evidence=historicalEvidenceIndex(recor
  };
  return (a,b)=>score(b)-score(a)||a.end-b.end;
 }
-function selectHistoricalWindows(windows,state,config,time=Date.now(),records=[]){
+function selectHistoricalWindows(windows,state,config,time=Date.now(),records=[],reviewRows=[]){
  const pending=windows.filter(w=>{
   const cp=state.windows[w.key];
   return (!cp?.complete||(w.series==='unreal-cup'&&cp?.epicIdsRetained!==true))&&(!cp?.retryAfter||Date.parse(cp.retryAfter)<=time);
@@ -411,17 +412,38 @@ function selectHistoricalWindows(windows,state,config,time=Date.now(),records=[]
    add(pending.filter(w=>w.dateJst.startsWith(year)&&(series==='victory-cup'?w.series==='victory-cup':w.series!=='victory-cup')));
   }
  }
- // Reserve one follow-up slot for a partial leaderboard with an already
- // observed identity-linked candidate. This accelerates finishing evidence,
- // but does not authorize cash, qualification, or cosmetic awards.
- if(selected.length<limit){
-  const alreadyPublished=new Set(records.map(x=>x.id));
-  const candidateWindows=pending.filter(w=>{
-   const cp=state.windows[w.key];
-   return cp&&!cp.complete&&cp.nextPage>0&&Array.isArray(cp.proposals)&&
-    cp.proposals.some(x=>x.verified===true&&!alreadyPublished.has(x.id));
-  });
-  if(candidateWindows.length)add(candidateWindows);
+ // Stage 2: recover exact checkpoint-matched pending reviews. Protect the
+ // previously selected retry, official-rule and year/series quotas. Preserve
+ // at least minUnstartedWindowsPerRun new discoveries for geographic coverage.
+ if(config.reviewRecovery?.enabled===true){
+  const cap=Math.max(0,Math.min(4,Number.isInteger(config.reviewRecovery.maxWindows)?
+    config.reviewRecovery.maxWindows:3));
+  const queue=recoveryShortlist(pending,state,reviewRows,records,
+   {now:time,perWindowCap:config.maxPagesPerWindowPerRun||12});
+  const chosen=queue.filter(x=>seen.has(x.windowKey)).length;
+  const minimum=Math.min(limit,Math.max(0,Number.isInteger(config.minUnstartedWindowsPerRun)?
+    config.minUnstartedWindowsPerRun:0));
+  const unstarted=selected.filter(w=>!state.windows[w.key]?.nextPage).length;
+  // Reserve a future recent window and an unstarted slice when possible.
+  const room=Math.max(0,limit-selected.length-Math.max(0,minimum-unstarted)-1);
+  let added=0;
+  for(const item of queue){
+   if(added>=Math.max(0,cap-chosen)||added>=room)break;
+   if(!seen.has(item.windowKey)){
+    selected.push(item.window);seen.add(item.windowKey);added++;
+   }
+  }
+ }else{
+  // Legacy candidate follow-up remains unchanged until the flag is enabled.
+  if(selected.length<limit){
+   const alreadyPublished=new Set(records.map(x=>x.id));
+   const candidateWindows=pending.filter(w=>{
+    const cp=state.windows[w.key];
+    return cp&&!cp.complete&&cp.nextPage>0&&Array.isArray(cp.proposals)&&
+     cp.proposals.some(x=>x.verified===true&&!alreadyPublished.has(x.id));
+   });
+   if(candidateWindows.length)add(candidateWindows);
+  }
  }
  // Safely finish up to two already scanned leaderboards within one per-window page limit.
  // Year/series quotas and due retries above remain protected.
@@ -506,7 +528,8 @@ async function main(){
  const unmapped=discoverUnmapped(all,data.tournaments.catalog,config);
  const state=read(prefix+'-scan.json');
  if(state.version!==1||!state.windows||typeof state.windows!=='object')throw Error('checkpoint invalid');
- const active=historical?selectHistoricalWindows(windows,state,config,Date.now(),data.results):selectActiveWindows(windows,state,config);
+ const pendingReviews=historical?read('history-sync-review.json').proposals:[];
+ const active=historical?selectHistoricalWindows(windows,state,config,Date.now(),data.results,pendingReviews):selectActiveWindows(windows,state,config);
  const previewConfig={version:1,accounts,windows:active.map(w=>({eventId:w.eventId,windowId:w.windowId,dateJst:w.dateJst,region:w.region,seasonId:w.seasonId,tournamentId:w.tournamentId,kind:w.kind,round:w.round}))};
  // Historical backfill can inspect more pages, but always yields before the Actions job limit.
  let budget=Math.min(Math.max(config.maxPagesPerRun||30,1),historical?96:50),scanned=0,invalidRows=0,transientFailures=0,malformedFailures=0;
@@ -525,9 +548,17 @@ async function main(){
    else unstarted++;
    if(pages!==null&&pages<=Math.min(Math.max(config.maxPagesPerWindowPerRun||budget,1),50))finishable++;
   }
+  const recoveryCandidates=recoveryShortlist(active,state,pendingReviews,data.results,
+   {perWindowCap:config.maxPagesPerWindowPerRun||12});
   console.log('OSIRION_HISTORY_SCAN_PLAN '+JSON.stringify({
    selected:active.length,pageBudget:budget,byYear,byRegion,
-   resumed,unstarted,finishable
+   resumed,unstarted,finishable,
+   recoveryWindows:recoveryCandidates.length,
+   recoveryCandidates:recoveryCandidates.reduce((n,x)=>n+x.candidateCount,0),
+   unknownCashCandidates:recoveryCandidates.reduce((n,x)=>n+x.cashCandidates,0),
+   recovery:recoveryCandidates.slice(0,6).map(x=>({window:x.windowKey,
+    remainingPages:x.remainingPages,candidateCount:x.candidateCount,
+    unknownCashCandidates:x.cashCandidates,finishable:x.finishable}))
   }));
  }
  let timeLimitReached=false;
