@@ -1,12 +1,12 @@
 {
   "version": 1,
   "sourceCheckedAt": "2026-11-07T23:16:39.215Z",
-  "total": 156,
+  "total": 153,
   "alreadyResolved": 0,
   "byYear": [
     {
       "name": "2024",
-      "count": 78
+      "count": 75
     },
     {
       "name": "2025",
@@ -28,7 +28,7 @@
     },
     {
       "name": "NAC",
-      "count": 71
+      "count": 68
     },
     {
       "name": "NAW",
@@ -78,7 +78,7 @@
     },
     {
       "name": "Solo Victory Cup Battle Royale / NAC / 2024",
-      "count": 4
+      "count": 1
     },
     {
       "name": "Solo Victory Cup Battle Royale / OCE / 2024",
@@ -112,7 +112,7 @@
     },
     {
       "name": "partial-scan",
-      "count": 68
+      "count": 65
     },
     {
       "name": "rules-review",
@@ -4574,105 +4574,6 @@
         "possibleExistingId": null
       },
       "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s31-717235c2aed7",
-      "origin": "history",
-      "date": "2024-09-10",
-      "year": "2024",
-      "region": "NAC",
-      "tournamentId": "ch5s4-solo-victory-cup",
-      "event": "Solo Victory Cup Battle Royale",
-      "round": "Event 2 · Round 1 / 予選",
-      "player": "らりむ",
-      "kind": "予選",
-      "rank": 923,
-      "points": 161,
-      "kills": 5,
-      "vrs": 2,
-      "prize": 0,
-      "source": "https://www.fortnite.com/competitive/events/S31_SoloVictoryCashCup/?region=NAC&round=S31_SoloVictoryCashCup_Event2Round1_NAC",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "順位表の取得が完了していません",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 10,
-        "totalPages": 100,
-        "sourceKey": "epicgames_S31_SoloVictoryCashCup_NAC/S31_SoloVictoryCashCup_Event2Round1_NAC",
-        "possibleExistingId": null
-      },
-      "rewardState": "source-amount-present-not-verified-by-triage"
-    },
-    {
-      "id": "auto-s31-780ba30d22b3",
-      "origin": "history",
-      "date": "2024-09-10",
-      "year": "2024",
-      "region": "NAC",
-      "tournamentId": "ch5s4-solo-victory-cup",
-      "event": "Solo Victory Cup Battle Royale",
-      "round": "Event 2 · Round 1 / 予選",
-      "player": "Raito",
-      "kind": "予選",
-      "rank": 977,
-      "points": 160,
-      "kills": 16,
-      "vrs": 2,
-      "prize": 0,
-      "source": "https://www.fortnite.com/competitive/events/S31_SoloVictoryCashCup/?region=NAC&round=S31_SoloVictoryCashCup_Event2Round1_NAC",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "順位表の取得が完了していません",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 10,
-        "totalPages": 100,
-        "sourceKey": "epicgames_S31_SoloVictoryCashCup_NAC/S31_SoloVictoryCashCup_Event2Round1_NAC",
-        "possibleExistingId": null
-      },
-      "rewardState": "source-amount-present-not-verified-by-triage"
-    },
-    {
-      "id": "auto-s31-7d709aad0235",
-      "origin": "history",
-      "date": "2024-09-10",
-      "year": "2024",
-      "region": "NAC",
-      "tournamentId": "ch5s4-solo-victory-cup",
-      "event": "Solo Victory Cup Battle Royale",
-      "round": "Event 2 · Round 1 / 予選",
-      "player": "Unger",
-      "kind": "予選",
-      "rank": 803,
-      "points": 164,
-      "kills": 29,
-      "vrs": 1,
-      "prize": 0,
-      "source": "https://www.fortnite.com/competitive/events/S31_SoloVictoryCashCup/?region=NAC&round=S31_SoloVictoryCashCup_Event2Round1_NAC",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "順位表の取得が完了していません",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 10,
-        "totalPages": 100,
-        "sourceKey": "epicgames_S31_SoloVictoryCashCup_NAC/S31_SoloVictoryCashCup_Event2Round1_NAC",
-        "possibleExistingId": null
-      },
-      "rewardState": "source-amount-present-not-verified-by-triage"
     },
     {
       "id": "auto-s34-44cec9321f72",
