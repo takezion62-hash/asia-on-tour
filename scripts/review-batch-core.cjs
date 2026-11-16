@@ -12,6 +12,7 @@ const {verifiedPartialPage}=require('./verified-partial-page.cjs');
 const {checkpointIndex,checkpointFor,collisionIndex,eventWindow,groupCandidates}=
  require('./review-batch-index.cjs');
 const {performance}=require('node:perf_hooks');
+const {MANIFEST:EXPLICIT_REVIEW_MANIFEST}=require('./generic-review-only-core.cjs');
 
 const elapsed=s=>Number((performance.now()-s).toFixed(3));
 const entryList=(db)=>{
@@ -62,6 +63,8 @@ function reviewBatch(db,{limit=100,ids=null,runId='local-1',timestamp=new Date()
  for(const group of groups){
   for(const row of group.items){
    try{
+    if(EXPLICIT_REVIEW_MANIFEST.held?.some(x=>x.id===row.id))
+     throw Error('本人Epic UUIDなどの証拠が未確認のため承認保留');
     if(recordIds.has(row.id)||ledgerIds.has(row.id)||reviewedIds.has(row.id))
      throw Error('既存ID・承認履歴と衝突');
     const win=eventWindow(row);
