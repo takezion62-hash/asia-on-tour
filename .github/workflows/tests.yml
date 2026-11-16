@@ -112,6 +112,24 @@ jobs:
             fi
           } >> "$GITHUB_STEP_SUMMARY"
 
+  preflight:
+    needs: [classify]
+    if: needs.classify.result == 'success'
+    name: 公開前・本番再生成の統合テスト（隔離コピー）
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '24'
+      - name: 本番と同順で全掲載処理・監査・索引生成を作業コピーに再現
+        run: node scripts/premerge-rebuild-preflight.cjs
+
   unit:
     needs: [classify]
     if: needs.classify.result == 'success'
@@ -300,7 +318,7 @@ jobs:
 
   test:
     name: JSON検証・単体テスト・PCスマホ回帰テスト
-    needs: [classify, unit, browser, browser-focused, smoke]
+    needs: [classify, unit, browser, browser-focused, smoke, preflight]
     if: ${{ always() }}
     runs-on: ubuntu-latest
     timeout-minutes: 2
@@ -310,6 +328,7 @@ jobs:
         env:
           SCOPE_RESULT: ${{ needs.classify.result }}
           MODE: ${{ needs.classify.outputs.mode }}
+          PREFLIGHT_RESULT: ${{ needs.preflight.result }}
           UNIT_RESULT: ${{ needs.unit.result }}
           BROWSER_RESULT: ${{ needs.browser.result }}
           SMOKE_RESULT: ${{ needs.smoke.result }}
