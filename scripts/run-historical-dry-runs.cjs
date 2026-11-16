@@ -32,6 +32,7 @@ const BATCHES = Object.freeze([
   'scripts/publish-nov14-pending-cash.cjs',
   'scripts/reconcile-pending-hamikuma-20261114.cjs',
   'scripts/publish-s37-oce-console-round1-three.cjs',
+  'scripts/publish-s37-oce-console-round1-second-three.cjs',
   'scripts/publish-pending-review-20261114.cjs',
   'scripts/publish-verified-s32-me-vcup-20241116.cjs',
   'scripts/publish-verified-2024-me-nac-last11.cjs',
