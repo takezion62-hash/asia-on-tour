@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-16T05:53:55.237Z",
+  "reviewedAt": "2026-11-16T06:44:45.369Z",
   "entries": [
     {
       "id": "auto-s43-21408f1d31bc",
@@ -26010,6 +26010,72 @@
       "evidence": "Exact original Epic UUID, score, event window and official zero-cash Round 1 cutoff. Rule-backed non-qualification, no inferred cash.",
       "candidateHash": "e48ff35e7eb697adf4c4e75424ac23e36e7315dfc7ebd47689f3f57e3c128b7d",
       "recordHash": "01b74518d34d0447b4dd44b8b09f1e7ba5d9659159549a9a6547f32df634a644"
+    },
+    {
+      "id": "auto-s30-a5f8dad0034e",
+      "decision": "published",
+      "recordId": "auto-s30-a5f8dad0034e",
+      "policy": "verified-rule",
+      "approvedAt": "2026-11-16T06:44:42.718Z",
+      "approvedBy": "ChatGPT / user-authorized 2026-11-11 GitHub direct publication",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event4Round1_NAC",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
+      "evidence": "Exact Epic account/session/calendar and cached Osirion ranked row; official advancement or zero-VR rule, never guessed prize"
+    },
+    {
+      "id": "auto-s30-22d7c754aa5f",
+      "decision": "published",
+      "recordId": "auto-s30-22d7c754aa5f",
+      "policy": "verified-rule",
+      "approvedAt": "2026-11-16T06:44:43.844Z",
+      "approvedBy": "ChatGPT / user-authorized original Epic review",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event5Round1_NAC",
+      "evidence": "Exact saved official Epic ID, score, calendar window and regional official payout/qualification rule"
+    },
+    {
+      "id": "auto-s30-b0cb8c6d6cac",
+      "decision": "published",
+      "recordId": "auto-s30-b0cb8c6d6cac",
+      "policy": "verified-rule",
+      "approvedAt": "2026-11-16T06:44:43.844Z",
+      "approvedBy": "ChatGPT / user-authorized original Epic review",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event5Round1_NAC",
+      "evidence": "Exact saved official Epic ID, score, calendar window and regional official payout/qualification rule"
+    },
+    {
+      "id": "auto-s30-a6349a633c60",
+      "decision": "published",
+      "recordId": "auto-s30-a6349a633c60",
+      "policy": "verified-rule",
+      "approvedAt": "2026-11-16T06:44:43.844Z",
+      "approvedBy": "ChatGPT / user-authorized original Epic review",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event5Round1_NAC",
+      "evidence": "Exact saved official Epic ID, score, calendar window and regional official payout/qualification rule"
+    },
+    {
+      "id": "auto-s34-74d1f337746f",
+      "decision": "published",
+      "recordId": "auto-s34-74d1f337746f",
+      "policy": "attendance-only",
+      "approvedAt": "2026-11-16T06:44:45.369Z",
+      "approvedBy": "ChatGPT / owner-authorized verified review",
+      "source": "https://www.fortnite.com/competitive/events/S34_PlaystationCup/?region=ME&round=S34_PlaystationCupFinal_ME",
+      "rule": null,
+      "evidence": "Exact Epic account and team roster, canonical official event/calendar, ranked checkpoint with continuous mature rows or complete scan; duplicate check"
+    },
+    {
+      "id": "auto-s34-04720ffe5218",
+      "decision": "published",
+      "recordId": "auto-s34-04720ffe5218",
+      "policy": "attendance-only",
+      "approvedAt": "2026-11-16T06:44:45.369Z",
+      "approvedBy": "ChatGPT / owner-authorized verified review",
+      "source": "https://www.fortnite.com/competitive/events/S34_PlaystationCup/?region=ME&round=S34_PlaystationCupFinal_ME",
+      "rule": null,
+      "evidence": "Exact Epic account and team roster, canonical official event/calendar, ranked checkpoint with continuous mature rows or complete scan; duplicate check"
     }
   ]
 }
