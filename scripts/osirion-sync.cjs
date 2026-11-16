@@ -362,6 +362,28 @@ function historicalEvidenceIndex(records){
   return evidence;
  };
 }
+// Explain ranking without changing publication eligibility or scan checkpoints.
+function historicalPriorityAudit(windows,state,records,{limit=100,now=Date.now()}={}){
+ const evidence=historicalEvidenceIndex(records);
+ const ranked=windows.filter(w=>{
+  const cp=state.windows?.[w.key];
+  return (!cp?.complete||(w.series==='unreal-cup'&&cp?.epicIdsRetained!==true))&&
+   (!cp?.retryAfter||Date.parse(cp.retryAfter)<=now);
+ }).map(w=>{
+  const cp=state.windows?.[w.key]||{};
+  const approvedRule=(Object.hasOwn(RULES,w.tournamentId)&&w.series==='victory-cup')||
+   cutoffForWindow(w)!==null||cashLimitForWindow(w)!==null||
+   evaluationStage(w)!==null||unrealWindow(w)!==null;
+  const progress=cp.totalPages>0?Math.round(Math.min(1,(cp.nextPage||0)/cp.totalPages)*90):0;
+  const proof=evidence(w);
+  return {key:w.key,date:w.dateJst,region:w.region,series:w.series,
+   score:(approvedRule?150:0)+progress+proof+(w.kind==='賞金決勝'?12:0)+(w.kind==='参加確認'?3:0),
+   reasons:{officialRule:approvedRule?150:0,progress,existingEvidence:proof,
+    round:w.kind==='賞金決勝'?12:w.kind==='参加確認'?3:0}};
+ });
+ ranked.sort((a,b)=>b.score-a.score||a.date.localeCompare(b.date)||a.key.localeCompare(b.key));
+ return {eligible:ranked.length,top:ranked.slice(0,Math.max(0,Math.min(500,Number.isSafeInteger(limit)?limit:100)))};
+}
 function historicalPriority(state,records,evidence=historicalEvidenceIndex(records)){
  const scores=new WeakMap();
  const score=w=>{
@@ -711,4 +733,4 @@ async function main(){
  console.log((historical?'OSIRION_HISTORY_REVIEW ':'OSIRION_REVIEW ')+JSON.stringify({scannedPages:scanned,linkedPlayers:accounts.length,identityConflicts:conflicts.length,windows:windows.length,unmappedEvents:unmapped.length,proposals:unique.size,imported,participation:verifiedParticipationIds.size,cosmetic:importedCosmetics,cash:cash.approved.length,performance:performance.approved.length,unreal:unreal.approved.length,duo:duo.approved.length,finished,transientFailures,malformedFailures,heldWindows:skippedLeaderboards.length}));
 }
 if(require.main===module)main().catch(e=>{console.error('OSIRION_SYNC_ERROR '+e.stack);process.exitCode=1});
-module.exports={identity,linkedAccounts,parseStage,parseReviewStage,discover,discoverUnmapped,selectActiveWindows,selectHistoricalWindows,historicalEvidenceScore,historicalEvidenceIndex,resolveHistoricalScope,fetchJson,advancementLimit,normalizeRow,getTournaments,getLeaderboard,leaderboardResponseError,recoverableLeaderboardFailure,holdLeaderboardWindow,holdEmptyFirstPage,transientLeaderboardFailure,main};
+module.exports={identity,linkedAccounts,parseStage,parseReviewStage,discover,discoverUnmapped,selectActiveWindows,selectHistoricalWindows,historicalEvidenceScore,historicalEvidenceIndex,historicalPriorityAudit,resolveHistoricalScope,fetchJson,advancementLimit,normalizeRow,getTournaments,getLeaderboard,leaderboardResponseError,recoverableLeaderboardFailure,holdLeaderboardWindow,holdEmptyFirstPage,transientLeaderboardFailure,main};
