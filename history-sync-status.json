@@ -1,7 +1,7 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-16T04:08:15.779Z",
+  "checkedAt": "2026-11-16T06:47:40.728Z",
   "mode": "review",
   "scope": "history",
   "dateMode": "rolling",
@@ -10,28 +10,28 @@
   "toDate": "2026-11-16",
   "provider": "osirion",
   "linkedPlayers": 665,
-  "trackedWindows": 3176,
-  "found": 45,
-  "skipped": 15,
-  "imported": 14,
+  "trackedWindows": 3177,
+  "found": 74,
+  "skipped": 9,
+  "imported": 8,
   "scannedPages": 96,
-  "completedWindows": 600,
+  "completedWindows": 606,
   "identityConflicts": 3,
-  "alreadyRegistered": 5608,
-  "autoApprovedTotal": 2878,
+  "alreadyRegistered": 5639,
+  "autoApprovedTotal": 2901,
   "invalidCachedCandidates": 1,
-  "manualReviewCandidates": 45,
+  "manualReviewCandidates": 74,
   "autoApprovedCosmeticThisRun": 0,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
   "autoApprovedUnrealThisRun": 0,
   "timeLimitReached": false,
-  "retryWindows": 9,
+  "retryWindows": 8,
   "transientFailures": 0,
   "malformedFailures": 0,
   "skippedLeaderboards": [],
-  "reviewOnlyWindows": 1544,
-  "reviewOnlyCandidates": 0,
+  "reviewOnlyWindows": 1545,
+  "reviewOnlyCandidates": 11,
   "unmappedEvents": 234,
   "unmappedEventIds": [
     "S30_ConsoleCashCups",
@@ -47,97 +47,86 @@
     "S30_Reload",
     "S30_ReloadZB"
   ],
-  "message": "公式Epic ID・順位・開催枠を検証し2件を掲載。残り45件。未確認賞金を推定しない。",
+  "message": "最新版と安全統合：新規掲載8件、重複スキップ0件、要確認の競合0件、確認待ち74件。既存の戦績・賞金は保持。",
   "manuallyPublished": 1704,
   "manuallyResolvedDuplicates": 169,
   "lastReviewedBatchAt": "2026-11-16T06:44:45.369Z",
   "manuallyCorrected": 13,
   "lastCorrectedReviewAt": "2026-11-13T13:45:16.115Z",
   "concurrentMerge": {
-    "appended": 14,
+    "appended": 8,
     "alreadyPublished": 0,
     "reviewConflicts": 0,
-    "keptPending": 62,
-    "reconciledAt": "2026-11-16T04:08:21.438Z"
+    "keptPending": 74,
+    "reconciledAt": "2026-11-16T06:47:44.871Z"
   },
   "coverage": {
-    "total": 3176,
-    "completed": 600,
-    "notStarted": 2388,
-    "partial": 179,
-    "retryWaiting": 9,
-    "retryDue": 0,
-    "remaining": 2576,
-    "retryCount": 9,
-    "completionPercent": 18.9,
+    "total": 3177,
+    "completed": 606,
+    "notStarted": 2383,
+    "partial": 180,
+    "retryWaiting": 6,
+    "retryDue": 2,
+    "remaining": 2571,
+    "retryCount": 8,
+    "completionPercent": 19.1,
     "byRegion": {
       "OCE": {
         "total": 562,
-        "completed": 85,
-        "pending": 477
+        "completed": 86,
+        "pending": 476
       },
       "ME": {
         "total": 556,
-        "completed": 183,
-        "pending": 373
+        "completed": 184,
+        "pending": 372
       },
       "EU": {
         "total": 576,
-        "completed": 80,
-        "pending": 496
+        "completed": 81,
+        "pending": 495
       },
       "BR": {
         "total": 555,
-        "completed": 68,
-        "pending": 487
+        "completed": 69,
+        "pending": 486
       },
       "NAC": {
         "total": 575,
-        "completed": 97,
-        "pending": 478
+        "completed": 98,
+        "pending": 477
       },
       "NAW": {
-        "total": 352,
-        "completed": 87,
+        "total": 353,
+        "completed": 88,
         "pending": 265
       }
     },
     "byYear": {
       "2024": {
         "total": 1035,
-        "completed": 151,
-        "pending": 884
+        "completed": 152,
+        "pending": 883
       },
       "2025": {
         "total": 702,
-        "completed": 76,
-        "pending": 626
+        "completed": 78,
+        "pending": 624
       },
       "2026": {
-        "total": 1439,
-        "completed": 373,
-        "pending": 1066
+        "total": 1440,
+        "completed": 376,
+        "pending": 1064
       }
     },
     "outsideScopeCheckpoints": 0,
     "samples": [
       {
-        "window": "epicgames_S41_PSTypicalGamer_OCE/S41_PSTypicalGamer_Qualifier_OCE",
-        "date": "2026-07-29",
-        "region": "OCE",
-        "series": "icon-cup",
-        "status": "retryWaiting",
-        "nextPage": 53,
-        "totalPages": 87,
-        "retryAfter": "2026-11-16T04:18:48.641Z",
-        "errorCode": "OSIRION_TRANSIENT"
-      },
-      {
         "window": "epicgames_S41_PSCupDaysOfPlay_ME/S41_PSCupDaysOfPlay_Qualifier_ME",
         "date": "2026-06-07",
         "region": "ME",
         "series": "playstation-cup",
-        "status": "retryWaiting",
+        "status": "retryDue",
         "nextPage": 28,
         "totalPages": 96,
         "retryAfter": "2026-11-16T04:18:50.763Z",
@@ -148,7 +137,7 @@
         "date": "2024-10-13",
         "region": "ME",
         "series": "cash-cup",
-        "status": "retryWaiting",
+        "status": "retryDue",
         "nextPage": 0,
         "totalPages": null,
         "retryAfter": "2026-11-16T06:34:43.446Z",
@@ -252,6 +241,17 @@
         "totalPages": 19,
         "retryAfter": null,
         "errorCode": null
+      },
+      {
+        "window": "epicgames_S30_SoloVictoryCashCup_EU/S30_SoloVictoryCashCup_Event1Round2_EU",
+        "date": "2024-06-04",
+        "region": "EU",
+        "series": "victory-cup",
+        "status": "partial",
+        "nextPage": 30,
+        "totalPages": 68,
+        "retryAfter": null,
+        "errorCode": null
       }
     ]
   },
@@ -289,25 +289,25 @@
     "selected": [
       {
         "window": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event1Round2_NAC",
-        "remainingPages": 19,
+        "remainingPages": 7,
         "candidateCount": 2,
         "cashUnconfirmedCount": 2
       },
       {
         "window": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event7Round2_NAC",
-        "remainingPages": 41,
+        "remainingPages": 37,
         "candidateCount": 3,
         "cashUnconfirmedCount": 3
       },
       {
         "window": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event6Round2_NAC",
-        "remainingPages": 44,
+        "remainingPages": 42,
         "candidateCount": 3,
         "cashUnconfirmedCount": 3
       },
       {
         "window": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event5Round1_NAC",
-        "remainingPages": 97,
+        "remainingPages": 95,
         "candidateCount": 5,
         "cashUnconfirmedCount": 0
       }
