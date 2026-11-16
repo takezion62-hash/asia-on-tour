@@ -9,6 +9,7 @@ const fs=require('node:fs');
 const path=require('node:path');
 const crypto=require('node:crypto');
 const {personalCents,roster,sourceInfo}=require('./data-checks.cjs');
+const {isExplicitlyHeld}=require('./generic-review-only-core.cjs');
 const ROOT=path.resolve(__dirname,'..');
 const sha=x=>crypto.createHash('sha256').update(x).digest('hex');
 const cents=x=>{
@@ -23,6 +24,13 @@ const readJson=file=>JSON.parse(fs.readFileSync(file,'utf8'));
 const formatted=rows=>JSON.stringify(rows,null,2)+'\n';
 const stockPath=root=>path.join(root,'source-results','manifest.json');
 const isProductionRoot=root=>path.resolve(root)===ROOT;
+// Canonical publication is the last line of defense against old publisher paths.
+// Never allow an explicitly held candidate to become a public result. Reading
+// remains permitted so a previously contaminated source can be safely repaired.
+function assertNoExplicitlyHeld(rows){
+ const forbidden=rows.find(row=>isExplicitlyHeld(row?.id));
+ if(forbidden)throw Error('SOURCE_RESULTS refused explicitly held candidate: '+forbidden.id);
+}
 
 function readResults(root=ROOT,{verifyProjection=false}={}){
  const manifestFile=stockPath(root);
@@ -121,6 +129,9 @@ function atomicallyWrite(file,contents){
 }
 function publishResults(root,rows,{legacyWriter=false,allowRemoval=false}={}){
  if(!Array.isArray(rows))throw Error('SOURCE_RESULTS expected array');
+ // Applies to normal, legacy, conflict-safe merge and correction write modes.
+ // The held manifest must be explicitly revised with new source proof first.
+ assertNoExplicitlyHeld(rows);
  const current=readResults(root,{verifyProjection:false});
  if(current.fixture){
   // Isolated unit-test fixtures created without source-results are not migrated.
@@ -196,9 +207,11 @@ if(require.main===module){
   if(command==='verify'){
    const {rows,manifest}=readResults();
    if(!manifest)throw Error('No source manifest');
+   // Also catch direct shard/manifest edits which bypass publishResults.
+   assertNoExplicitlyHeld(rows);
    console.log('SOURCE_RESULTS_VERIFIED '+JSON.stringify({count:rows.length,shards:manifest.shards.length,
     teamPrizeCents:manifest.teamPrizeCents,personalPrizeCents:manifest.personalPrizeCents}));
   }else throw Error('Use verify (legacy imports are retired)');
  }catch(error){console.error(error.stack);process.exitCode=1}
 }
-module.exports={readResults,publishResults,importLegacy,seasonSelector};
+module.exports={readResults,publishResults,importLegacy,seasonSelector,assertNoExplicitlyHeld};
