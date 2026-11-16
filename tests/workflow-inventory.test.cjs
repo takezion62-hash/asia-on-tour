@@ -69,7 +69,7 @@ test('parallel checks keep the original required status fail-closed',()=>{
  assert.match(browser,/if: always\(\)/);
  assert.match(browser,/name: site-test-report/);
  assert.match(gate,/name: JSON検証・単体テスト・PCスマホ回帰テスト/);
- assert.match(gate,/needs: \[classify, unit, browser, browser-focused, smoke\]/);
+ assert.match(gate,/needs: \[classify, unit, browser, browser-focused, smoke, preflight\]/);
  assert.match(gate,/run: node scripts\/ci-required-gate\.cjs/);
  const classify=block('classify'),smoke=block('smoke');
  assert.match(classify,/fetch-depth: 0/);
@@ -107,7 +107,7 @@ test('focused failure rechecks stay diagnostics; changed PRs keep the same stric
  assert.match(focused,/npm run test:failed:e2e/);
  assert.match(main,/unit-failure-report/);
  assert.match(main,/test-results\/last-run.json/);
- assert.match(main,/needs: \[classify, unit, browser, browser-focused, smoke\]/);
+ assert.match(main,/needs: \[classify, unit, browser, browser-focused, smoke, preflight\]/);
  assert.match(main,/if: \$\{\{ always\(\) \}\}/);
 });
 
