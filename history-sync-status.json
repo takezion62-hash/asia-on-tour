@@ -11,7 +11,7 @@
   "provider": "osirion",
   "linkedPlayers": 665,
   "trackedWindows": 3177,
-  "found": 97,
+  "found": 95,
   "skipped": 10,
   "imported": 13,
   "scannedPages": 96,
@@ -20,7 +20,7 @@
   "alreadyRegistered": 5748,
   "autoApprovedTotal": 2992,
   "invalidCachedCandidates": 1,
-  "manualReviewCandidates": 97,
+  "manualReviewCandidates": 95,
   "autoApprovedCosmeticThisRun": 0,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
@@ -96,10 +96,10 @@
     "S30_Reload",
     "S30_ReloadZB"
   ],
-  "message": "公式Epic ID・順位・開催枠を検証し19件を掲載。残り97件。未確認賞金を推定しない。",
-  "manuallyPublished": 1749,
+  "message": "公式予選突破2件を通常成績に追加。重複0件を解消。残り確認待ち95件。未確認賞金は推定しない。",
+  "manuallyPublished": 1751,
   "manuallyResolvedDuplicates": 169,
-  "lastReviewedBatchAt": "2026-11-16T08:46:59.108Z",
+  "lastReviewedBatchAt": "2026-11-16T08:47:11.288Z",
   "manuallyCorrected": 13,
   "lastCorrectedReviewAt": "2026-11-13T13:45:16.115Z",
   "concurrentMerge": {
@@ -312,13 +312,11 @@
     "unrealTeamsWithCash": 2
   },
   "latestManualReview": {
-    "reviewedAt": "2026-11-15T00:43:18.861Z",
-    "reviewedCandidates": 1,
-    "published": 0,
-    "remainingPending": 44,
-    "duplicatesResolved": 0,
-    "participationArchived": 1,
-    "policy": "Epic ID + official calendar + mature original ranked checkpoint; 2024 $100/VR; NAW top200 costume"
+    "reviewedAt": "2026-11-16T08:47:11.288Z",
+    "reviewedCandidates": 2,
+    "published": 2,
+    "remainingPending": 95,
+    "policy": "Official 2024 solo qualification cutoffs and exact verified saved Epic-ID ranked rows; no inferred cash"
   },
   "autoApprovedDuoQualifierThisRun": 0,
   "latestParticipationReview": {
