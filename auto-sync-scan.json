@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-11-15T20:51:16.030Z",
+  "checkedAt": "2026-11-16T01:37:32.057Z",
   "windows": {
     "epicgames_S43_PerformanceEvaluationTrios_EU/S43_PerformanceEvaluation_Event1Round1_EU": {
       "nextPage": 7,
@@ -15867,15 +15867,51 @@
       "totalPages": 10
     },
     "epicgames_S43_TriosCashCup_EU/S43_TriosCashCup_Event2_EU": {
-      "nextPage": 61,
+      "nextPage": 71,
       "complete": false,
-      "proposals": [],
-      "pages": 61,
-      "lastAttemptAt": "2026-11-15T20:51:01.884Z",
+      "proposals": [
+        {
+          "id": "auto-s43-b55faedf0293",
+          "date": "2026-11-14",
+          "region": "EU",
+          "player": "ひろ / そみー / Plank",
+          "playerRaw": "UC.ひろ / UC.そみー / Celis Yhwach.",
+          "event": "Trios Cash Cup Battle Royale",
+          "round": "Event 2 / 参加確認",
+          "rank": 6299,
+          "points": 112,
+          "kills": 11,
+          "vrs": 0,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 7,
+          "seasonId": "S43",
+          "chapter": 7,
+          "season": 5,
+          "tournamentId": "ch7s5-trios-cash-cup",
+          "source": "https://www.fortnite.com/competitive/events/S43_TriosCashCup/?region=EU&round=S43_TriosCashCup_Event2_EU",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "ひろ",
+            "そみー",
+            "Plank"
+          ],
+          "teamAccountIds": [
+            "2c9f23381150494b829de21b3f9e541d",
+            "61fe8404740046688b1fb5c984ddb602",
+            "97f0138a1b8d45e2a7ad756b914f2790"
+          ]
+        }
+      ],
+      "pages": 71,
+      "lastAttemptAt": "2026-11-16T01:36:45.849Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 6100,
-      "lastSuccessAt": "2026-11-15T20:51:02.611Z",
+      "lastSeenRank": 7100,
+      "lastSuccessAt": "2026-11-16T01:36:46.609Z",
       "totalPages": 74
     },
     "epicgames_S43_OnePieceBuggyCup_ZB_BR/S43_OnePieceBuggyCup_ZB_BR": {
@@ -16963,8 +16999,8 @@
       "totalPages": 11
     },
     "epicgames_S43_ReloadZBDuosCashCup_OCE/S43_ReloadZBDuosCashCup_Event2Round1_OCE": {
-      "nextPage": 47,
-      "complete": false,
+      "nextPage": 50,
+      "complete": true,
       "proposals": [
         {
           "id": "auto-s43-1dc84202294d",
@@ -17396,16 +17432,16 @@
           ]
         }
       ],
-      "pages": 47,
-      "lastAttemptAt": "2026-11-15T20:50:55.469Z",
+      "pages": 50,
+      "lastAttemptAt": "2026-11-16T01:36:24.487Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 4700,
-      "lastSuccessAt": "2026-11-15T20:50:56.068Z",
+      "lastSeenRank": 4924,
+      "lastSuccessAt": "2026-11-16T01:36:32.156Z",
       "totalPages": 50
     },
     "epicgames_S43_ReloadZBDuosCashCup_EU/S43_ReloadZBDuosCashCup_Event2Round1_EU": {
-      "nextPage": 10,
+      "nextPage": 20,
       "complete": false,
       "proposals": [
         {
@@ -17475,16 +17511,16 @@
           ]
         }
       ],
-      "pages": 10,
-      "lastAttemptAt": "2026-11-15T20:51:07.645Z",
+      "pages": 20,
+      "lastAttemptAt": "2026-11-16T01:36:54.294Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 1000,
-      "lastSuccessAt": "2026-11-15T20:51:08.178Z",
+      "lastSeenRank": 2000,
+      "lastSuccessAt": "2026-11-16T01:36:55.040Z",
       "totalPages": 100
     },
     "epicgames_S43_ReloadZBDuosCashCup_ME/S43_ReloadZBDuosCashCup_Event2Round1_ME": {
-      "nextPage": 10,
+      "nextPage": 20,
       "complete": false,
       "proposals": [
         {
@@ -17851,12 +17887,91 @@
           ]
         }
       ],
+      "pages": 20,
+      "lastAttemptAt": "2026-11-16T01:37:24.860Z",
+      "emptyAttempts": 0,
+      "rankingOrderValid": true,
+      "lastSeenRank": 2000,
+      "lastSuccessAt": "2026-11-16T01:37:25.703Z",
+      "totalPages": 100
+    },
+    "epicgames_S43_ReloadZBDuosCashCup_BR/S43_ReloadZBDuosCashCup_Event2Round1_BR": {
+      "nextPage": 10,
+      "complete": false,
+      "proposals": [
+        {
+          "id": "auto-s43-eeeb5af1fd1c",
+          "date": "2026-11-16",
+          "region": "BR",
+          "player": "こはこっこ / SH助けて勝つシューター",
+          "playerRaw": "ZEN Gachikokko / SH助けて勝つシューター",
+          "event": "Reload ZB Duos Cash Cup Zero Build",
+          "round": "Event 2 · Round 1 / 参加確認",
+          "rank": 142,
+          "points": 500,
+          "kills": 59,
+          "vrs": 3,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 11,
+          "seasonId": "S43",
+          "chapter": 7,
+          "season": 5,
+          "tournamentId": "ch7s5-reload-zero-build-duos-cash-cup",
+          "source": "https://www.fortnite.com/competitive/events/S43_ReloadZBDuosCashCup/?region=BR&round=S43_ReloadZBDuosCashCup_Event2Round1_BR",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "こはこっこ",
+            "SH助けて勝つシューター"
+          ],
+          "teamAccountIds": [
+            "80d396e3ef33460683e00e0cc2624b2d",
+            "f7fc35f942344bc2a3ca5140b7820cc5"
+          ]
+        },
+        {
+          "id": "auto-s43-b7fe2d68af71",
+          "date": "2026-11-16",
+          "region": "BR",
+          "player": "Reo / りむた",
+          "playerRaw": "IGNUM Reo / A_α Rimuta",
+          "event": "Reload ZB Duos Cash Cup Zero Build",
+          "round": "Event 2 · Round 1 / 参加確認",
+          "rank": 307,
+          "points": 476,
+          "kills": 66,
+          "vrs": 3,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 12,
+          "seasonId": "S43",
+          "chapter": 7,
+          "season": 5,
+          "tournamentId": "ch7s5-reload-zero-build-duos-cash-cup",
+          "source": "https://www.fortnite.com/competitive/events/S43_ReloadZBDuosCashCup/?region=BR&round=S43_ReloadZBDuosCashCup_Event2Round1_BR",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "Reo",
+            "りむた"
+          ],
+          "teamAccountIds": [
+            "25945a39f1564a22aab8ea7808feac98",
+            "2b08f9919df14bbd90ae95db167db8cf"
+          ]
+        }
+      ],
       "pages": 10,
-      "lastAttemptAt": "2026-11-15T20:51:15.314Z",
+      "lastAttemptAt": "2026-11-16T01:37:31.362Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
       "lastSeenRank": 1000,
-      "lastSuccessAt": "2026-11-15T20:51:16.021Z",
+      "lastSuccessAt": "2026-11-16T01:37:32.051Z",
       "totalPages": 100
     }
   }
