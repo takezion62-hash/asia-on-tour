@@ -73,9 +73,9 @@ function plan(db,decisions,{timestamp=new Date().toISOString()}={}){
  }
  const changes=[];
  for(const type of ['attendance-only','zero-round1']){
-  const group=grouped[type];if(!group.length)continue;
-  const ids=group.map(x=>x.candidate.id);
-  assert(ids.length<=20,'bounded maximum 20 approvals per policy batch');
+  const all=grouped[type];if(!all.length)continue;
+  for(let start=0;start<all.length;start+=20){
+  const group=all.slice(start,start+20),ids=group.map(x=>x.candidate.id);
   const runId='generic-review-'+type+'-'+sha(ids.slice().sort()).slice(0,16);
   const result=apply(next,{ids,confirmation:'CONFIRM',
    policy:'attendance-only',runId,timestamp,
@@ -110,6 +110,7 @@ function plan(db,decisions,{timestamp=new Date().toISOString()}={}){
     reviewedAt:timestamp,source:record.source,policy:entry.policy,rule:entry.rule
    });
    changes.push({id,kind:record.kind,prize:record.prize,decision:type});
+  }
   }
  }
  if(changes.length){
