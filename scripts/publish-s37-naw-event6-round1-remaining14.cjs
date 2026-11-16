@@ -21,32 +21,51 @@ const sessions=JSON.parse(fs.readFileSync(path.join(ROOT,'calendar-history/2025-
 const session=sessions.find(x=>x.sourceWindowId===proof.WINDOW&&x.eventId===proof.EVENT&&
  x.region==='NAW'&&x.dateJst==='2025-09-28'&&x.tournamentId==='ch6s4-console-duos-victory');
 requireValid(!!session,'official event session missing');
-const checkpoint=db.scans.history.windows[proof.KEY];
+const liveCheckpoint=db.scans.history.windows[proof.KEY];
+// Pin the earlier pristine 12/62-page checkpoint by an immutable Git blob.
+// A later HTTP 500 on an unscanned page must not erase already verified rows.
+const archive=JSON.parse(fs.readFileSync(path.join(ROOT,'data/manual-approvals/s37-naw-event6-round1-mature-checkpoint-20261116.json'),'utf8'));
+requireValid(archive.version===1&&archive.source?.repository==='takezion62-hash/asia-on-tour'&&
+ archive.source.commit===proof.ARCHIVE_COMMIT&&archive.source.blobSha===proof.ARCHIVE_BLOB&&
+ archive.source.key===proof.KEY,
+ 'locked original Git evidence provenance mismatch');
+const checkpoint=archive.checkpoint;
 const end=Date.parse(session.endUtc),observed=Date.parse(checkpoint?.lastSuccessAt||'');
-// Diagnostic metadata only (never print participants or unreviewed private data).
-console.log('S37_NAW_EVENT6_CHECKPOINT '+JSON.stringify({
- hasCheckpoint:!!checkpoint,complete:checkpoint?.complete,
- rankingOrderValid:checkpoint?.rankingOrderValid,
- pages:checkpoint?.pages,nextPage:checkpoint?.nextPage,totalPages:checkpoint?.totalPages,
- lastSeenRank:checkpoint?.lastSeenRank,emptyAttempts:checkpoint?.emptyAttempts,
- lastError:checkpoint?.lastError,lastErrorCode:checkpoint?.lastErrorCode,
- retryAfter:checkpoint?.retryAfter,lastSuccessAt:checkpoint?.lastSuccessAt,
- proposals:checkpoint?.proposals?.length,
- observedCandidates:proof.SPECS.filter(s=>checkpoint?.proposals?.some(x=>x.id===s.id)).length,
- sessionEndedAt:session.endUtc
-}));
-requireValid(checkpoint&&checkpoint.rankingOrderValid===true&&
- Number.isSafeInteger(checkpoint.nextPage)&&checkpoint.nextPage>=1&&
- Number.isSafeInteger(checkpoint.pages)&&checkpoint.pages===checkpoint.nextPage&&
- Number.isSafeInteger(checkpoint.totalPages)&&checkpoint.totalPages>=checkpoint.nextPage&&
- Number.isSafeInteger(checkpoint.lastSeenRank)&&
+requireValid(checkpoint&&checkpoint.complete===false&&
+ checkpoint.rankingOrderValid===true&&checkpoint.pages===12&&
+ checkpoint.nextPage===12&&checkpoint.totalPages===62&&
  checkpoint.lastSeenRank>=Math.max(...proof.SPECS.map(x=>x.rank))&&
  checkpoint.emptyAttempts===0&&!checkpoint.lastError&&!checkpoint.lastErrorCode&&!checkpoint.retryAfter&&
- Array.isArray(checkpoint.proposals)&&
+ Array.isArray(checkpoint.proposals)&&checkpoint.proposals.length===18&&
  Number.isFinite(observed)&&Number.isFinite(end)&&observed-end>4*3600000,
- 'original mature contiguous leaderboard prefix incomplete, stale or errored');
-requireValid(checkpoint.complete===true||checkpoint.totalPages>checkpoint.nextPage,
- 'incomplete leaderboard must retain unscanned page count');
+ 'immutable 12-page source evidence must be pristine, mature and contiguous');
+// The live scan may have continued beyond the archived prefix. It must still
+// contain the same verified rows. Only an error on the NEXT unscanned page is
+// tolerated; changed rows, malformed scans or gaps always stop publication.
+requireValid(liveCheckpoint&&liveCheckpoint.rankingOrderValid===true&&
+ Number.isSafeInteger(liveCheckpoint.pages)&&liveCheckpoint.pages>=checkpoint.pages&&
+ liveCheckpoint.nextPage===liveCheckpoint.pages&&
+ Number.isSafeInteger(liveCheckpoint.totalPages)&&liveCheckpoint.totalPages>=liveCheckpoint.pages&&
+ Number.isSafeInteger(liveCheckpoint.lastSeenRank)&&
+ liveCheckpoint.lastSeenRank>=checkpoint.lastSeenRank&&
+ liveCheckpoint.emptyAttempts===0&&Array.isArray(liveCheckpoint.proposals)&&
+ Date.parse(liveCheckpoint.lastSuccessAt)>=observed,
+ 'current leaderboard does not preserve the locked clean prefix');
+if(liveCheckpoint.lastError||liveCheckpoint.lastErrorCode||liveCheckpoint.retryAfter){
+ requireValid(liveCheckpoint.complete===false&&
+  liveCheckpoint.lastErrorCode==='OSIRION_TRANSIENT'&&
+  Number.isSafeInteger(liveCheckpoint.lastErrorPage)&&
+  liveCheckpoint.lastErrorPage===liveCheckpoint.nextPage&&
+  liveCheckpoint.lastErrorPage>=checkpoint.pages,
+  'only a transient error on a later unscanned page can be tolerated');
+}
+console.log('S37_NAW_EVENT6_LOCKED_EVIDENCE '+JSON.stringify({
+ archivedBlob:proof.ARCHIVE_BLOB,archivedPages:checkpoint.pages,
+ livePages:liveCheckpoint.pages,liveLastSeenRank:liveCheckpoint.lastSeenRank,
+ liveDeferredPage:liveCheckpoint.lastErrorPage||null,
+ liveErrorCode:liveCheckpoint.lastErrorCode||null,
+ selected:proof.SPECS.length
+}));
 requireValid(db.tournaments.catalog.some(x=>x.id==='ch6s4-console-duos-victory'&&
  x.team==='duo'&&x.seasonId==='S37'&&x.sourceEventIds?.includes(proof.EVENT)),
  'official tournament catalog changed');
@@ -66,7 +85,8 @@ for(const spec of proof.SPECS){
  requireValid(ledger.length===0&&!existingReviews.has(spec.id),'unpublished approval already exists: '+spec.id);
  const row=pending.get(spec.id);
  requireValid(proof.matchesOriginal(row,spec),'pinned candidate rank, Epic names or values changed: '+spec.id);
- requireValid(checkpoint.proposals.filter(x=>sameScannedCandidate(x,row)).length===1,
+ requireValid(checkpoint.proposals.filter(x=>sameScannedCandidate(x,row)).length===1&&
+  liveCheckpoint.proposals.filter(x=>sameScannedCandidate(x,row)).length===1,
   'unique exact saved Epic leaderboard candidate missing: '+spec.id);
  if(checkpoint.complete!==true)requireValid(verifiedPartialPage(row,{end},checkpoint),
   'observed leaderboard pages are not mature, contiguous and error-free: '+spec.id);
@@ -81,8 +101,9 @@ for(const spec of proof.SPECS){
    '公式規則ではNAW上位250チームがRound2進出。'+
    (spec.rank<=proof.CUTOFF?'上位250の予選突破を確認。':'上位250外なので参加確認のみ。')+
    'Round1賞金$0（決勝の賞金は別の成績で判断）。'+
-   '公式規則: '+proof.RULE+' 順位表: '+proof.SOURCE};
- const evidence='mature contiguous observed leaderboard; verified exact original Epic duo, rank and stats; official NAW top250; no inferred Round1 cash';
+   '公式規則: '+proof.RULE+' 順位表: '+proof.SOURCE+
+   ' 保存済み正常取得ページのGit blob: '+proof.ARCHIVE_BLOB};
+ const evidence='mature contiguous observed leaderboard from pinned original Git blob '+proof.ARCHIVE_BLOB+'; verified exact Epic duo/rank/stats; official NAW top250; no inferred Round1 cash';
  requireValid(proof.validatedRecord(record,{id:spec.id,recordId:spec.id,decision:'published',
   policy:proof.POLICY,rule:proof.RULE,source:proof.SOURCE,evidence}),
   'result proof failure: '+spec.id);
