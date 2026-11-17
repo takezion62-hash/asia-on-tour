@@ -19,6 +19,12 @@ const context={results,players,tournaments,schedule,scanDocs,
   verifiedAccounts:accountInfo.accounts,rules:load('tournament-rules.json')};
 const cashHist=load('cash-promotion-history.json'),reloadHist=load('participation-promotion-history.json');
 const ids=['auto-s43-d4e4db0f245a','auto-s43-5bc1cca43d3e','auto-s43-83ec104c8e6f','auto-s43-3bc1ddc1b7c7'];
+const auditModule=require('./validate-approvals.cjs');
+const approvalLedger=load('approval-history.json');
+const proofContext={...context,history:reloadHist};
+const directAudit=auditModule.audit(results,approvalLedger,players,{promotionEvidence:proofContext});
+const defaultAudit=auditModule.audit(results,approvalLedger,players);
+console.log('AUDIT_COMPARE '+JSON.stringify({defaultErrors:defaultAudit,providedEvidenceErrors:directAudit}));
 for(const id of ids){
  const after=results.find(r=>r.id===id),h=cashHist.entries.find(h=>h.id===id)||reloadHist.entries.find(h=>h.id===id);
  if(!after||!h){console.log('PROMO_DIAG',JSON.stringify({id,missing:!after?'row':'history'}));continue;}
@@ -65,6 +71,7 @@ for(const id of ids){
   const official=sourceIdentity?reload.officialSlot(before,sourceIdentity,schedule):null;
   const inspected=reload.inspect(before,context,hits,official,Date.parse(h.approvedAt));
   const originalLedger=load('approval-history.json').entries.find(x=>x.recordId===id);
+  details.directReloadVerify=auditModule.verifiedPublishedPromotion(after,originalLedger,proofContext);
   details.reloadLedger={policy:originalLedger?.policy,recordId:originalLedger?.recordId,
    sourceMatches:originalLedger?.source===after.source,
    windowMatches:h.proof?.key===sourceIdentity?.key,
