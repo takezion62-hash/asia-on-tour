@@ -89,14 +89,41 @@ function validateRegistry(doc,tournaments){
        JSON.stringify(rule.advance)!=='{"EU":1600,"NAC":800,"NAW":320,"BR":320,"ME":320,"OCE":320}')
        fail(id,'S42 Solo Reloadの公式予選参加・通過枠以外は承認不可');
    } else if(rule.autoApproval==='verified-duo-qualifier-only'){
-     if(id!=='ch6s3-console-duos-victory'||rule.seasonId!=='S36'||rule.team!=='duo'||
-       JSON.stringify(rule.eventIds)!=='["S36_VictoryDuosCup"]'||
-       rule.matchCaps['予選']!==7||rule.matchCaps['賞金決勝']!==3||
-       rule.prizePerVictory!==undefined||
-       Object.keys(rule.advance).sort().join(',')!=='BR,EU,ME,NAC,NAW,OCE'||
-       ['EU','NAC'].some(r=>rule.advance[r]!==500)||
-       ['BR','ME','NAW','OCE'].some(r=>rule.advance[r]!==250))
-       fail(id,'2025年S36 Console Duosの公式予選地域条件のみ自動承認');
+     // Only explicitly pinned historical/current Duos Round1 rules can
+     // publish $0 attendance / qualification; Round2 cash stays separate.
+     const duoTemplates={
+       'ch6s3-console-duos-victory':{
+         season:'S36',eventId:'S36_VictoryDuosCup',round1:7,round2:3,
+         EU:500,NAC:500,minor:250,source:'https://www.fortnite.com/news/fortnite-duos-console-victory-cash-cups-chapter-6-season-3-official-rules',
+         individual:null,teamCash:null,requireIds:false
+       },
+       'ch6s4-console-duos-victory':{
+         season:'S37',eventId:'S37_ConsoleDuosCashCups',round1:7,round2:3,
+         EU:500,NAC:500,minor:250,source:'https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-duos-console-victory-cash-cups-chapter-6-season-4-official-rules',
+         individual:100,teamCash:200,requireIds:true
+       },
+       'ch7s4-reload-duos-victory-cup':{
+         season:'S42',eventId:'S42_ReloadDuosVictoryCup',round1:10,round2:3,
+         EU:300,NAC:300,minor:120,source:'https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-4-official-rules',
+         individual:100,teamCash:200,requireIds:true
+       }
+     };
+     const expected=duoTemplates[id],minors=['NAW','BR','OCE','ME'];
+     if(!expected||rule.seasonId!==expected.season||rule.team!=='duo'||
+       JSON.stringify(rule.eventIds)!==JSON.stringify([expected.eventId])||
+       rule.matchCaps['予選']!==expected.round1||
+       rule.matchCaps['賞金決勝']!==expected.round2||
+       Object.keys(rule.advance||{}).sort().join(',')!=='BR,EU,ME,NAC,NAW,OCE'||
+       rule.advance?.EU!==expected.EU||rule.advance?.NAC!==expected.NAC||
+       minors.some(r=>rule.advance?.[r]!==expected.minor)||
+       rule.source!==expected.source||
+       (expected.individual===null?rule.prizePerVictory!==undefined:
+         rule.prizePerVictory!==expected.individual)||
+       (expected.teamCash===null?rule.teamPrizePerVictory!==undefined:
+         rule.teamPrizePerVictory!==expected.teamCash)||
+       (expected.requireIds?rule.requireVerifiedRoster!==true:
+         rule.requireVerifiedRoster!==undefined))
+       fail(id,'デュオ予選の大会ID・開催形式・本人ID・地域別通過順位・決勝賞金単価が公式規則と不一致');
    } else if(rule.autoApproval!==undefined)fail(id,'Victory Cupの未対応自動承認方式');
   }else if(rule.series==='performance-evaluation'){
    if(rule.autoApproval!=='verified-performance-vr'||rule.seasonId!=='S43'||
