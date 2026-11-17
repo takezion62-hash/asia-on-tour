@@ -62,6 +62,9 @@ on:
       - scripts/verified-s37-console-round1-oce7-naw9-23.cjs
       - data/manual-approvals/s30-nac-zb-solo-round1-85-proof-20261117.json
       - scripts/verified-s30-nac-zb-solo-round1-85.cjs
+      - data/manual-approvals/s37-console-round2-zero-vr-20-snapshot-20261117.json
+      - scripts/verified-s37-console-round2-zero-vr-20.cjs
+      - scripts/publish-s37-console-round2-zero-vr-20.cjs
       - scripts/publish-s30-nac-zb-solo-round1-85.cjs
       - scripts/publish-s37-console-round1-oce7-naw9-23.cjs
       - scripts/publish-s37-naw-event6-round1-remaining14.cjs
@@ -199,6 +202,8 @@ jobs:
             node scripts/publish-s37-console-round1-oce7-naw9-23.cjs
             node scripts/publish-s30-nac-zb-solo-round1-85.cjs --dry-run
             node scripts/publish-s30-nac-zb-solo-round1-85.cjs
+            node scripts/publish-s37-console-round2-zero-vr-20.cjs --dry-run
+            node scripts/publish-s37-console-round2-zero-vr-20.cjs
             node scripts/publish-pending-review-20261114.cjs --dry-run
             node scripts/publish-pending-review-20261114.cjs
             node scripts/publish-verified-s32-me-vcup-20241116.cjs --dry-run
