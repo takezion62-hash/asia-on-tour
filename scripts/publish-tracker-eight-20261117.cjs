@@ -23,14 +23,14 @@ must(ledger.version===1&&Array.isArray(ledger.entries)&&
  updates.version===1&&Array.isArray(updates.entries),'invalid log formats');
 const known=new Set(players.candidates.map(p=>p.name));
 const aliases=players.confirmedAliases||{};
-const observedAccountOwners=new Map();
+const observedAccountOwners=new Map(),ambiguousHistoricalIds=new Set();
 for(const row of results){
  for(const p of row.profiles||[]){
   const id=seal.profileId(p);if(!id)continue;
   const owner=observedAccountOwners.get(id);
   if(owner&&owner!==p.name&&!((aliases[owner]||[]).includes(p.name))&&
      !((aliases[p.name]||[]).includes(owner)))
-   throw Error('PREEXISTING_PROFILE_ACCOUNT_CONFLICT '+id);
+   ambiguousHistoricalIds.add(id);
   observedAccountOwners.set(id,p.name);
  }
 }
@@ -46,6 +46,7 @@ for(const s of proof.newResults){
   must(id&&uri.protocol==='https:'&&uri.hostname==='fortnitetracker.com',
    'profile ID invalid '+p.name);
   const old=observedAccountOwners.get(id);
+  must(!ambiguousHistoricalIds.has(id),'target UUID has conflicting historical owners '+id);
   must(!old||old===p.name||(aliases[p.name]||[]).includes(old),
    'same Epic account linked to different player '+id);
   observedAccountOwners.set(id,p.name);
