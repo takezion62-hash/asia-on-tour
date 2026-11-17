@@ -1,5 +1,5 @@
 'use strict';
-// Seven one-VR zero-build cash finals from full 45/45-page original EU? NAC leaderboard.
+// Seven one-VR zero-build cash finals from full 45/45-page original NAC leaderboard.
 // S30 Chapter 5 Season 3: individual $100 for each Round 2 VR.
 const POLICY='verified-s30-nac-zb-solo-r2-seven-vr-20261117';
 const RULE="https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules";
