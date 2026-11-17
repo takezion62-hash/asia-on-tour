@@ -1,12 +1,12 @@
 {
   "version": 1,
   "sourceCheckedAt": "2026-11-07T23:16:39.215Z",
-  "total": 30,
+  "total": 23,
   "alreadyResolved": 0,
   "byYear": [
     {
       "name": "2024",
-      "count": 19
+      "count": 12
     },
     {
       "name": "2025",
@@ -28,7 +28,7 @@
     },
     {
       "name": "NAC",
-      "count": 17
+      "count": 10
     },
     {
       "name": "NAW",
@@ -62,7 +62,7 @@
     },
     {
       "name": "ZB Solo Victory Cup / NAC / 2024",
-      "count": 17
+      "count": 10
     }
   ],
   "byStatus": [
@@ -76,7 +76,7 @@
     },
     {
       "name": "rules-review",
-      "count": 11
+      "count": 4
     }
   ],
   "queue": [
@@ -607,237 +607,6 @@
         "possibleExistingId": null
       },
       "rewardState": "source-amount-present-not-verified-by-triage"
-    },
-    {
-      "id": "auto-s30-22bf6da5b90e",
-      "origin": "history",
-      "date": "2024-06-04",
-      "year": "2024",
-      "region": "NAC",
-      "tournamentId": "ch5s3-zb-solo-victory",
-      "event": "ZB Solo Victory Cup",
-      "round": "Event 1 · Round 2 / 賞金決勝",
-      "player": "ちからV2",
-      "kind": "賞金決勝",
-      "rank": 41,
-      "points": 100,
-      "kills": 12,
-      "vrs": 1,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=NAC&round=S30_SoloZBVictoryCashCup_Event1Round2_NAC",
-      "status": "rules-review",
-      "action": "公式規則・賞金・突破・スキン条件を個別確認",
-      "reason": "順位表の取得が完了していません",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": true,
-        "observedPartial": false,
-        "seenPages": 45,
-        "totalPages": 45,
-        "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event1Round2_NAC",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s30-2e86feed363a",
-      "origin": "history",
-      "date": "2024-06-04",
-      "year": "2024",
-      "region": "NAC",
-      "tournamentId": "ch5s3-zb-solo-victory",
-      "event": "ZB Solo Victory Cup",
-      "round": "Event 1 · Round 2 / 賞金決勝",
-      "player": "ひょっこりもりりん",
-      "kind": "賞金決勝",
-      "rank": 67,
-      "points": 100,
-      "kills": 8,
-      "vrs": 1,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=NAC&round=S30_SoloZBVictoryCashCup_Event1Round2_NAC",
-      "status": "rules-review",
-      "action": "公式規則・賞金・突破・スキン条件を個別確認",
-      "reason": "順位表の取得が完了していません",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": true,
-        "observedPartial": false,
-        "seenPages": 45,
-        "totalPages": 45,
-        "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event1Round2_NAC",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s30-3b4837d76900",
-      "origin": "history",
-      "date": "2024-07-16",
-      "year": "2024",
-      "region": "NAC",
-      "tournamentId": "ch5s3-zb-solo-victory",
-      "event": "ZB Solo Victory Cup",
-      "round": "Event 5 · Round 2 / 賞金決勝",
-      "player": "TakoBeL",
-      "kind": "賞金決勝",
-      "rank": 63,
-      "points": 100,
-      "kills": 8,
-      "vrs": 1,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=NAC&round=S30_SoloZBVictoryCashCup_Event5Round2_NAC",
-      "status": "rules-review",
-      "action": "公式規則・賞金・突破・スキン条件を個別確認",
-      "reason": "順位表の取得が完了していません",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": true,
-        "observedPartial": false,
-        "seenPages": 45,
-        "totalPages": 45,
-        "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event5Round2_NAC",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s30-54270253e968",
-      "origin": "history",
-      "date": "2024-07-16",
-      "year": "2024",
-      "region": "NAC",
-      "tournamentId": "ch5s3-zb-solo-victory",
-      "event": "ZB Solo Victory Cup",
-      "round": "Event 5 · Round 2 / 賞金決勝",
-      "player": "zerua",
-      "kind": "賞金決勝",
-      "rank": 98,
-      "points": 100,
-      "kills": 4,
-      "vrs": 1,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=NAC&round=S30_SoloZBVictoryCashCup_Event5Round2_NAC",
-      "status": "rules-review",
-      "action": "公式規則・賞金・突破・スキン条件を個別確認",
-      "reason": "順位表の取得が完了していません",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": true,
-        "observedPartial": false,
-        "seenPages": 45,
-        "totalPages": 45,
-        "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event5Round2_NAC",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s30-000a713b1ecc",
-      "origin": "history",
-      "date": "2024-07-30",
-      "year": "2024",
-      "region": "NAC",
-      "tournamentId": "ch5s3-zb-solo-victory",
-      "event": "ZB Solo Victory Cup",
-      "round": "Event 7 · Round 2 / 賞金決勝",
-      "player": "まぐろのほっぺ",
-      "kind": "賞金決勝",
-      "rank": 87,
-      "points": 100,
-      "kills": 5,
-      "vrs": 1,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=NAC&round=S30_SoloZBVictoryCashCup_Event7Round2_NAC",
-      "status": "rules-review",
-      "action": "公式規則・賞金・突破・スキン条件を個別確認",
-      "reason": "順位表の取得が完了していません",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": true,
-        "observedPartial": false,
-        "seenPages": 45,
-        "totalPages": 45,
-        "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event7Round2_NAC",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s30-67994e2d2de8",
-      "origin": "history",
-      "date": "2024-07-30",
-      "year": "2024",
-      "region": "NAC",
-      "tournamentId": "ch5s3-zb-solo-victory",
-      "event": "ZB Solo Victory Cup",
-      "round": "Event 7 · Round 2 / 賞金決勝",
-      "player": "みるやちぇ",
-      "kind": "賞金決勝",
-      "rank": 47,
-      "points": 100,
-      "kills": 11,
-      "vrs": 1,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=NAC&round=S30_SoloZBVictoryCashCup_Event7Round2_NAC",
-      "status": "rules-review",
-      "action": "公式規則・賞金・突破・スキン条件を個別確認",
-      "reason": "順位表の取得が完了していません",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": true,
-        "observedPartial": false,
-        "seenPages": 45,
-        "totalPages": 45,
-        "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event7Round2_NAC",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s30-9ee62ca0e426",
-      "origin": "history",
-      "date": "2024-07-30",
-      "year": "2024",
-      "region": "NAC",
-      "tournamentId": "ch5s3-zb-solo-victory",
-      "event": "ZB Solo Victory Cup",
-      "round": "Event 7 · Round 2 / 賞金決勝",
-      "player": "Dark",
-      "kind": "賞金決勝",
-      "rank": 46,
-      "points": 100,
-      "kills": 11,
-      "vrs": 1,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=NAC&round=S30_SoloZBVictoryCashCup_Event7Round2_NAC",
-      "status": "rules-review",
-      "action": "公式規則・賞金・突破・スキン条件を個別確認",
-      "reason": "順位表の取得が完了していません",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": true,
-        "observedPartial": false,
-        "seenPages": 45,
-        "totalPages": 45,
-        "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event7Round2_NAC",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
     },
     {
       "id": "auto-s34-04720ffe5218",
