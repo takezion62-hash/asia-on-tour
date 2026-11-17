@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-11-17T09:49:24.295Z",
+  "checkedAt": "2026-11-17T15:42:24.717Z",
   "windows": {
     "epicgames_S42_InoxtagIconCup_NAW/S42_InoxtagIconCup_NAW": {
       "nextPage": 60,
@@ -309,12 +309,12 @@
       "emptyAttempts": 0
     },
     "epicgames_S30_SoloVictoryCashCup_ME/S30_SoloVictoryCashCup_Event6Round1_ME": {
-      "nextPage": 50,
-      "pages": 50,
-      "complete": false,
-      "coverageLimited": false,
+      "nextPage": 60,
+      "pages": 60,
+      "complete": true,
+      "coverageLimited": true,
       "totalPages": 100,
-      "lastScanned": "2026-11-10T21:29:10.122Z",
+      "lastScanned": "2026-11-17T15:41:54.742Z",
       "emptyAttempts": 0
     },
     "epicgames_S43_OnePieceZoroCup_EU/S43_OnePieceZoroCup_EU": {
@@ -1108,12 +1108,12 @@
       "emptyAttempts": 0
     },
     "epicgames_S43_ReloadZBDuosCashCup_NAC/S43_ReloadZBDuosCashCup_Event2Round1_NAC": {
-      "nextPage": 50,
-      "pages": 50,
-      "complete": false,
-      "coverageLimited": false,
+      "nextPage": 60,
+      "pages": 60,
+      "complete": true,
+      "coverageLimited": true,
       "totalPages": 100,
-      "lastScanned": "2026-11-17T09:48:50.127Z",
+      "lastScanned": "2026-11-17T15:41:42.370Z",
       "emptyAttempts": 0
     },
     "epicgames_S30_SoloZBVictoryCashCup_ME/S30_SoloZBVictoryCashCup_Event2Round1_ME": {
@@ -1153,12 +1153,12 @@
       "emptyAttempts": 0
     },
     "epicgames_S30_DuosCashCupZB_OCE/S30_DuosCashCupZB_Event1Round1_OCE": {
-      "nextPage": 1,
-      "pages": 1,
+      "nextPage": 5,
+      "pages": 5,
       "complete": false,
       "coverageLimited": false,
       "totalPages": 10,
-      "lastScanned": "2026-11-16T21:38:42.590Z",
+      "lastScanned": "2026-11-17T15:42:24.717Z",
       "emptyAttempts": 0
     },
     "epicgames_S30_SoloZBVictoryCashCup_ME/S30_SoloZBVictoryCashCup_Event2Round2_ME": {
@@ -1202,6 +1202,24 @@
       "emptyAttempts": 0,
       "retryAfter": "2026-11-17T15:49:09.438Z",
       "lastError": "Osirion API HTTP 429 /v1/tournaments/leaderboard"
+    },
+    "epicgames_S30_SoloVictoryCashCup_NAC/S30_SoloVictoryCashCup_Event2Round1_NAC": {
+      "nextPage": 10,
+      "pages": 10,
+      "complete": false,
+      "coverageLimited": false,
+      "totalPages": 100,
+      "lastScanned": "2026-11-17T15:42:04.943Z",
+      "emptyAttempts": 0
+    },
+    "epicgames_S33_SoloCashCup_NAW/S33_SoloCashCup_Event7Round2_NAW": {
+      "nextPage": 6,
+      "pages": 6,
+      "complete": true,
+      "coverageLimited": false,
+      "totalPages": 6,
+      "lastScanned": "2026-11-17T15:42:09.300Z",
+      "emptyAttempts": 0
     }
   }
 }
