@@ -2,11 +2,11 @@
   "version": 1,
   "role": "generated canonical-source snapshot; results.json remains authoritative in phase 1",
   "canonicalFile": "results.json",
-  "canonicalSha256": "54a37447215f14cbf07090ecb4a7f26a14bf024d2fb4cc1023e64a7a4e53be54",
-  "count": 8371,
-  "teamPrizeCents": 9356000,
-  "unconfirmedPrizeRecords": 1453,
-  "personalPrizeCents": 9336000,
+  "canonicalSha256": "663b84a559c913088f46b08c57b545b0bffa743918188440220ee838ce07e889",
+  "count": 8377,
+  "teamPrizeCents": 9476000,
+  "unconfirmedPrizeRecords": 1451,
+  "personalPrizeCents": 9456000,
   "recordOrder": [
     "s42-me-slenderman-reload-skin-20261021-acris-chacha",
     "s42-me-slenderman-reload-skin-20261021-karf-alpha",
@@ -8378,7 +8378,13 @@
     "auto-s42-76653c873ff2",
     "auto-s42-cea6716f3f9d",
     "auto-s42-64452416808d",
-    "auto-s42-40ef932e7580"
+    "auto-s42-40ef932e7580",
+    "manual-s37-oce-console-duos-20250920-chikara-rura",
+    "manual-s37-oce-console-duos-20250831-chikara-rura",
+    "manual-s39-naw-unreal-20251221-mofu-rinneman",
+    "manual-s39-naw-unreal-20251221-raeyache-naokin",
+    "manual-s39-naw-unreal-20251221-toax-jagareet",
+    "manual-s39-oce-reload-duos-20251207-mofu-rinneman"
   ],
   "shards": [
     {
@@ -8510,11 +8516,11 @@
     {
       "seasonId": "S37",
       "file": "source-results/S37.json",
-      "count": 93,
-      "teamPrizeCents": 340000,
+      "count": 95,
+      "teamPrizeCents": 400000,
       "unconfirmedPrizeRecords": 0,
-      "personalPrizeCents": 340000,
-      "sha256": "36d14a19cea830ffa64c2a4c0858a5215c1bb32ddb83453ddae3d606e5dbf1b0"
+      "personalPrizeCents": 400000,
+      "sha256": "35f62074a9e9a78d64ef65d70a85de29ce105ca43eb576c2cfd2cafb8863b8d6"
     },
     {
       "seasonId": "S38",
@@ -8528,11 +8534,11 @@
     {
       "seasonId": "S39",
       "file": "source-results/S39.json",
-      "count": 177,
-      "teamPrizeCents": 870000,
+      "count": 181,
+      "teamPrizeCents": 920000,
       "unconfirmedPrizeRecords": 19,
-      "personalPrizeCents": 870000,
-      "sha256": "ac478f6f13b38f8c8141785f8b9ca99718cbe249709f34bb84609976a2c4c135"
+      "personalPrizeCents": 920000,
+      "sha256": "259687b264c71efee2858b7a8e3e93e217eefec72948ae6d253d8ae348ed0746"
     },
     {
       "seasonId": "S40",
@@ -8547,10 +8553,10 @@
       "seasonId": "S41",
       "file": "source-results/S41.json",
       "count": 461,
-      "teamPrizeCents": 390000,
-      "unconfirmedPrizeRecords": 90,
-      "personalPrizeCents": 390000,
-      "sha256": "ab31de4a0ccceed52b676d8927e85e3d122280535751681c145de763abb974d6"
+      "teamPrizeCents": 400000,
+      "unconfirmedPrizeRecords": 88,
+      "personalPrizeCents": 400000,
+      "sha256": "c20170e736f87ca048ba1bd7ee627c31a17ef4dcea5ae3c26d48d61b509920af"
     },
     {
       "seasonId": "S42",

@@ -2,6 +2,21 @@
   "version": 1,
   "entries": [
     {
+      "id": "verified-tracker-eight-20261117",
+      "date": "2026-11-17",
+      "type": "records",
+      "title": "Tracker決勝6戦績を追加・Days of Play NAC決勝2戦績の賞金を訂正",
+      "description": "2025年OCE Console Duos（2件）、NAW Unreal Cup（3件）、OCE Reload Duos（1件）を本人Epic IDとTracker画像、Epic公式規則で照合して掲載。さらに既存の2026年Days of Play PlayStation Cup NAC決勝93位・98位を公式賞金表に従い各$50へ修正。新規チーム合計$1,100、既存2件修正$100。Minipiyo/ちからV2既存213位は重複登録していない。",
+      "recordIds": [
+        "manual-s37-oce-console-duos-20250920-chikara-rura",
+        "manual-s37-oce-console-duos-20250831-chikara-rura",
+        "manual-s39-naw-unreal-20251221-mofu-rinneman",
+        "manual-s39-naw-unreal-20251221-raeyache-naokin",
+        "manual-s39-naw-unreal-20251221-toax-jagareet",
+        "manual-s39-oce-reload-duos-20251207-mofu-rinneman"
+      ]
+    },
+    {
       "id": "auto-sync-20261117081136",
       "date": "2026-11-17",
       "type": "records",
