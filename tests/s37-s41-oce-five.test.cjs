@@ -60,3 +60,22 @@ test('Every screenshot cash result matches event session, roster, rank, VR, Epic
   }
  }
 });
+
+test('same OCE duo Round1 qualifier cannot block independent verified Round2 cash',()=>{
+ const final=V.TARGETS.find(x=>x.seasonId==='S37'&&x.date==='2025-10-04'&&x.rank===6);
+ assert.ok(final);
+ const qualifier={id:'auto-s37-3a3350526a5d',
+  date:final.date,region:final.region,seasonId:final.seasonId,
+  tournamentId:final.tournamentId,event:final.event,
+  round:'Event 7 · Round 1 / 予選突破',kind:'予選',
+  player:final.player,players:[...final.players],rank:20};
+ assert.equal(V.awardCollision(qualifier,final),false);
+ assert.equal(V.awardCollision({...qualifier,rank:final.rank},final),false,
+  'even matching ranks across different rounds are not duplicate finals');
+ assert.equal(V.awardCollision({...qualifier,round:final.round},final),true);
+ assert.equal(V.awardCollision({...qualifier,id:final.id},final),true);
+ const other={...qualifier,id:'another',round:final.round,rank:final.rank,
+  player:'different player',players:['other','person']};
+ assert.equal(V.awardCollision(other,final),true,'same final rank conflicts');
+ assert.equal(V.awardCollision({...other,rank:999},final),false);
+});
