@@ -28151,5 +28151,75 @@
       "dcc5f4df088a4bcab4058b9b0fb2f97c",
       "f4cd4ebae0784e02999ac7f8d911b4c8"
     ]
+  },
+  {
+    "id": "auto-s31-6ba1a7092617",
+    "date": "2024-10-26",
+    "region": "ME",
+    "player": "3peace / Jaemon / RyoIT",
+    "playerRaw": "NEXUS 3peace / Jaemon.K / りょうITだに",
+    "event": "Trios Cash Cup",
+    "round": "Event 4 · Round 1 / 予選突破",
+    "rank": 139,
+    "points": 292,
+    "kills": 78,
+    "vrs": 2,
+    "prize": 0,
+    "kind": "予選",
+    "matches": 5,
+    "seasonId": "S31",
+    "chapter": 5,
+    "season": 4,
+    "tournamentId": "ch5s4-trios-cash",
+    "source": "https://www.fortnite.com/competitive/events/S31_TriosCashCup/?region=ME&round=S31_TriosCashCup_Event4Round1_ME",
+    "verified": true,
+    "note": "Epic/Osirion順位表の正常に取得済み11/61ページの本人ID・順位・得点・キル・VRを照合。後続ページにHTTP一時エラーがあるため全順位表の取得済みとはしない。2024年ME Trios Cash Cup上位198チームのため予選突破。Round1賞金$0、決勝賞金とは分ける。 上位198の基準を公式規則で確認。 公式規則: https://www.fortnite.com/news/fortnite-trios-cash-cups-chapter-5-season-4-official-rules 元順位表: https://www.fortnite.com/competitive/events/S31_TriosCashCup/?region=ME&round=S31_TriosCashCup_Event4Round1_ME 固定された旧順位表Git blob: 43d4af41369f1e3fc30baf60c84de9b8062ff47b 証拠: 9d87332517857016dab9fa76a2f97b1b7d719c77",
+    "players": [
+      "3peace",
+      "Jaemon",
+      "RyoIT"
+    ],
+    "teamAccountIds": [
+      "bc21e86cc3cf4761a52906a8e4fd910b",
+      "dcc5f4df088a4bcab4058b9b0fb2f97c",
+      "f4cd4ebae0784e02999ac7f8d911b4c8"
+    ],
+    "teamPrize": 0,
+    "prizePerPlayer": 0
+  },
+  {
+    "id": "auto-s31-89772400e55a",
+    "date": "2024-10-26",
+    "region": "ME",
+    "player": "Stain / ぷろぼこ / ZAZI",
+    "playerRaw": "E36 StainY281 / ONYX プロボコ 7 / LYNX ZAZI 咲",
+    "event": "Trios Cash Cup",
+    "round": "Event 4 · Round 1 / 参加確認",
+    "rank": 216,
+    "points": 277,
+    "kills": 90,
+    "vrs": 2,
+    "prize": 0,
+    "kind": "参加確認",
+    "matches": 5,
+    "seasonId": "S31",
+    "chapter": 5,
+    "season": 4,
+    "tournamentId": "ch5s4-trios-cash",
+    "source": "https://www.fortnite.com/competitive/events/S31_TriosCashCup/?region=ME&round=S31_TriosCashCup_Event4Round1_ME",
+    "verified": true,
+    "note": "Epic/Osirion順位表の正常に取得済み11/61ページの本人ID・順位・得点・キル・VRを照合。後続ページにHTTP一時エラーがあるため全順位表の取得済みとはしない。2024年ME Trios Cash Cup上位198チームの圏外なので参加確認のみ。Round1賞金$0。 上位198の基準を公式規則で確認。 公式規則: https://www.fortnite.com/news/fortnite-trios-cash-cups-chapter-5-season-4-official-rules 元順位表: https://www.fortnite.com/competitive/events/S31_TriosCashCup/?region=ME&round=S31_TriosCashCup_Event4Round1_ME 固定された旧順位表Git blob: 43d4af41369f1e3fc30baf60c84de9b8062ff47b 証拠: 9d87332517857016dab9fa76a2f97b1b7d719c77",
+    "players": [
+      "Stain",
+      "ぷろぼこ",
+      "ZAZI"
+    ],
+    "teamAccountIds": [
+      "268fddd59748458ea78b23ad3bae9ac5",
+      "7992a13b46a24f30a29b4b6fa67c99e1",
+      "f08aad629bf040d6beb78c7aea8e0a1f"
+    ],
+    "teamPrize": 0,
+    "prizePerPlayer": 0
   }
 ]

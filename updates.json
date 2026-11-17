@@ -2,6 +2,54 @@
   "version": 1,
   "entries": [
     {
+      "id": "verified-six-later-page-transient-20261117",
+      "date": "2026-11-17",
+      "type": "records",
+      "title": "後続ページAPIエラーから本人確認済み6成績を回復",
+      "description": "NAC決勝0VRの2名、NAW Console Duos予選参加2チーム、ME Trios予選1チーム・参加1チーム、賞金加算なし。",
+      "recordIds": [
+        "auto-s30-152692d409d8",
+        "auto-s30-9f795aaece95",
+        "auto-s37-14d44ba0ee8a",
+        "auto-s37-a40ae8acd39b",
+        "auto-s31-6ba1a7092617",
+        "auto-s31-89772400e55a"
+      ]
+    },
+    {
+      "id": "verified-s30-s37-s43-recovered-twelve-20261117",
+      "date": "2026-11-17",
+      "type": "records",
+      "title": "旧Git正常順位表からNAC・NAWの12成績を安全に復元",
+      "description": "S30決勝7名各$100、S30予選1名、S37 Console Duos予選参加3チーム、S43 Squads予選突破1チーム。旧正常順位表を照合。",
+      "recordIds": [
+        "auto-s30-98604567f817",
+        "auto-s30-bcdd26ba55d0",
+        "auto-s30-cf20e298bf17",
+        "auto-s30-0bc9080a1ae0",
+        "auto-s30-4144692b17ff",
+        "auto-s30-c02df30c9cba",
+        "auto-s30-92ad181b2a33",
+        "auto-s30-1f16b12c4b18",
+        "auto-s37-c890fce1b50d",
+        "auto-s37-b1753da953d7",
+        "auto-s37-188c92111225",
+        "auto-s43-aa67e196a6d7"
+      ]
+    },
+    {
+      "id": "verified-s38-s41-safe3-20261117",
+      "date": "2026-11-17",
+      "type": "records",
+      "title": "NAW Squad決勝とEU Console Solo予選の3件を掲載",
+      "description": "NAW Squad決勝0VRの1件とEU Console Zero Build Solo予選突破2件。追加賞金なし。",
+      "recordIds": [
+        "auto-s38-ffce77bbc7f8",
+        "auto-s41-fd9646fe2a06",
+        "auto-s41-765445325715"
+      ]
+    },
+    {
       "id": "verified-s30-nac-zb-solo-round2-seven-wins-20261117",
       "date": "2026-11-17",
       "type": "records",
