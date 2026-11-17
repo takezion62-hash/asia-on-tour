@@ -1,12 +1,12 @@
 {
   "version": 1,
   "sourceCheckedAt": "2026-11-07T23:16:39.215Z",
-  "total": 168,
+  "total": 162,
   "alreadyResolved": 0,
   "byYear": [
     {
       "name": "2024",
-      "count": 101
+      "count": 95
     },
     {
       "name": "2025",
@@ -24,7 +24,7 @@
     },
     {
       "name": "ME",
-      "count": 10
+      "count": 4
     },
     {
       "name": "NAC",
@@ -73,10 +73,6 @@
       "count": 2
     },
     {
-      "name": "ZB Solo Victory Cup / ME / 2024",
-      "count": 6
-    },
-    {
       "name": "ZB Solo Victory Cup / NAC / 2024",
       "count": 93
     }
@@ -88,7 +84,7 @@
     },
     {
       "name": "partial-scan",
-      "count": 94
+      "count": 88
     },
     {
       "name": "rules-review",
@@ -3557,204 +3553,6 @@
         "seenPages": 2,
         "totalPages": 100,
         "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event6Round1_NAC",
-        "possibleExistingId": null
-      },
-      "rewardState": "source-amount-present-not-verified-by-triage"
-    },
-    {
-      "id": "auto-s30-4bf4ff4c788f",
-      "origin": "history",
-      "date": "2024-07-30",
-      "year": "2024",
-      "region": "ME",
-      "tournamentId": "ch5s3-zb-solo-victory",
-      "event": "ZB Solo Victory Cup",
-      "round": "Event 7 · Round 1 / 予選",
-      "player": "mentos1k7",
-      "kind": "予選",
-      "rank": 1204,
-      "points": 117,
-      "kills": 27,
-      "vrs": 1,
-      "prize": 0,
-      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=ME&round=S30_SoloZBVictoryCashCup_Event7Round1_ME",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "順位表の取得が完了していません",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 14,
-        "totalPages": 100,
-        "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_ME/S30_SoloZBVictoryCashCup_Event7Round1_ME",
-        "possibleExistingId": null
-      },
-      "rewardState": "source-amount-present-not-verified-by-triage"
-    },
-    {
-      "id": "auto-s30-7e0dc53c8ff9",
-      "origin": "history",
-      "date": "2024-07-30",
-      "year": "2024",
-      "region": "ME",
-      "tournamentId": "ch5s3-zb-solo-victory",
-      "event": "ZB Solo Victory Cup",
-      "round": "Event 7 · Round 1 / 予選",
-      "player": "鳥馬麦黄粉",
-      "kind": "予選",
-      "rank": 1306,
-      "points": 116,
-      "kills": 10,
-      "vrs": 0,
-      "prize": 0,
-      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=ME&round=S30_SoloZBVictoryCashCup_Event7Round1_ME",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "順位表の取得が完了していません",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 14,
-        "totalPages": 100,
-        "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_ME/S30_SoloZBVictoryCashCup_Event7Round1_ME",
-        "possibleExistingId": null
-      },
-      "rewardState": "source-amount-present-not-verified-by-triage"
-    },
-    {
-      "id": "auto-s30-9bb22d0e2e4f",
-      "origin": "history",
-      "date": "2024-07-30",
-      "year": "2024",
-      "region": "ME",
-      "tournamentId": "ch5s3-zb-solo-victory",
-      "event": "ZB Solo Victory Cup",
-      "round": "Event 7 · Round 1 / 予選",
-      "player": "朝比奈まふゆӝ",
-      "kind": "予選",
-      "rank": 1322,
-      "points": 116,
-      "kills": 5,
-      "vrs": 0,
-      "prize": 0,
-      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=ME&round=S30_SoloZBVictoryCashCup_Event7Round1_ME",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "順位表の取得が完了していません",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 14,
-        "totalPages": 100,
-        "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_ME/S30_SoloZBVictoryCashCup_Event7Round1_ME",
-        "possibleExistingId": null
-      },
-      "rewardState": "source-amount-present-not-verified-by-triage"
-    },
-    {
-      "id": "auto-s30-e1ecd3b7f1a2",
-      "origin": "history",
-      "date": "2024-07-30",
-      "year": "2024",
-      "region": "ME",
-      "tournamentId": "ch5s3-zb-solo-victory",
-      "event": "ZB Solo Victory Cup",
-      "round": "Event 7 · Round 1 / 予選",
-      "player": "みずるん",
-      "kind": "予選",
-      "rank": 1274,
-      "points": 116,
-      "kills": 11,
-      "vrs": 1,
-      "prize": 0,
-      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=ME&round=S30_SoloZBVictoryCashCup_Event7Round1_ME",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "順位表の取得が完了していません",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 14,
-        "totalPages": 100,
-        "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_ME/S30_SoloZBVictoryCashCup_Event7Round1_ME",
-        "possibleExistingId": null
-      },
-      "rewardState": "source-amount-present-not-verified-by-triage"
-    },
-    {
-      "id": "auto-s30-e5360eb9372d",
-      "origin": "history",
-      "date": "2024-07-30",
-      "year": "2024",
-      "region": "ME",
-      "tournamentId": "ch5s3-zb-solo-victory",
-      "event": "ZB Solo Victory Cup",
-      "round": "Event 7 · Round 1 / 予選",
-      "player": "Minipiyo",
-      "kind": "予選",
-      "rank": 1266,
-      "points": 116,
-      "kills": 25,
-      "vrs": 1,
-      "prize": 0,
-      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=ME&round=S30_SoloZBVictoryCashCup_Event7Round1_ME",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "順位表の取得が完了していません",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 14,
-        "totalPages": 100,
-        "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_ME/S30_SoloZBVictoryCashCup_Event7Round1_ME",
-        "possibleExistingId": null
-      },
-      "rewardState": "source-amount-present-not-verified-by-triage"
-    },
-    {
-      "id": "auto-s30-f612ef148b30",
-      "origin": "history",
-      "date": "2024-07-30",
-      "year": "2024",
-      "region": "ME",
-      "tournamentId": "ch5s3-zb-solo-victory",
-      "event": "ZB Solo Victory Cup",
-      "round": "Event 7 · Round 1 / 予選",
-      "player": "rakua",
-      "kind": "予選",
-      "rank": 1305,
-      "points": 116,
-      "kills": 10,
-      "vrs": 0,
-      "prize": 0,
-      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=ME&round=S30_SoloZBVictoryCashCup_Event7Round1_ME",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "順位表の取得が完了していません",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 14,
-        "totalPages": 100,
-        "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_ME/S30_SoloZBVictoryCashCup_Event7Round1_ME",
         "possibleExistingId": null
       },
       "rewardState": "source-amount-present-not-verified-by-triage"
