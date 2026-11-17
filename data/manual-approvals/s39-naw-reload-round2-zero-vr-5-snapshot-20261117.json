@@ -1,0 +1,189 @@
+{
+  "version": 1,
+  "source": {
+    "repository": "takezion62-hash/asia-on-tour",
+    "blobSha": "43d4af41369f1e3fc30baf60c84de9b8062ff47b",
+    "checkedAt": "2026-11-17T02:37:32.942Z"
+  },
+  "windows": [
+    {
+      "date": "2025-12-14",
+      "eventNo": 3,
+      "key": "epicgames_S39_ReloadCashVictoryCup_Dec_NAW/S39_ReloadCashVictoryCup_Event3Round2_NAW",
+      "window": "S39_ReloadCashVictoryCup_Event3Round2_NAW",
+      "sessionEndUtc": "2025-12-14T06:00:00.000Z",
+      "count": 3,
+      "pages": 2,
+      "checkpoint": {
+        "nextPage": 2,
+        "complete": true,
+        "proposals": [
+          {
+            "id": "auto-s39-0cdce5beb2a3",
+            "date": "2025-12-14",
+            "region": "NAW",
+            "player": "でーもんくらげǃ / ももち",
+            "playerRaw": "でーもんくらげǃ / Ascend JerenX",
+            "event": "Reload Duos Victory Cup",
+            "round": "Event 3 · Round 2 / 賞金決勝",
+            "rank": 36,
+            "points": 0,
+            "kills": 9,
+            "vrs": 0,
+            "prize": null,
+            "kind": "賞金決勝",
+            "matches": 3,
+            "seasonId": "S39",
+            "chapter": 7,
+            "season": 1,
+            "tournamentId": "ch7s1-reload-duos-victory",
+            "source": "https://www.fortnite.com/competitive/events/S39_ReloadCashVictoryCup_Dec/?region=NAW&round=S39_ReloadCashVictoryCup_Event3Round2_NAW",
+            "verified": true,
+            "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。現金賞金の確定情報なし。",
+            "players": [
+              "でーもんくらげǃ",
+              "ももち"
+            ]
+          },
+          {
+            "id": "auto-s39-bb953d3b5bc8",
+            "date": "2025-12-14",
+            "region": "NAW",
+            "player": "REINER / Astell",
+            "playerRaw": "Blue_P reinerǃǃ / NŁT Astell fvǃ",
+            "event": "Reload Duos Victory Cup",
+            "round": "Event 3 · Round 2 / 賞金決勝",
+            "rank": 82,
+            "points": 0,
+            "kills": 4,
+            "vrs": 0,
+            "prize": null,
+            "kind": "賞金決勝",
+            "matches": 3,
+            "seasonId": "S39",
+            "chapter": 7,
+            "season": 1,
+            "tournamentId": "ch7s1-reload-duos-victory",
+            "source": "https://www.fortnite.com/competitive/events/S39_ReloadCashVictoryCup_Dec/?region=NAW&round=S39_ReloadCashVictoryCup_Event3Round2_NAW",
+            "verified": true,
+            "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。現金賞金の確定情報なし。",
+            "players": [
+              "REINER",
+              "Astell"
+            ]
+          },
+          {
+            "id": "auto-s39-94b2ebbcba7c",
+            "date": "2025-12-14",
+            "region": "NAW",
+            "player": "ゆの / FA かっちゃん",
+            "playerRaw": "NŁT りんねまんとゆの / FA かっちゃん",
+            "event": "Reload Duos Victory Cup",
+            "round": "Event 3 · Round 2 / 賞金決勝",
+            "rank": 110,
+            "points": 0,
+            "kills": 1,
+            "vrs": 0,
+            "prize": null,
+            "kind": "賞金決勝",
+            "matches": 3,
+            "seasonId": "S39",
+            "chapter": 7,
+            "season": 1,
+            "tournamentId": "ch7s1-reload-duos-victory",
+            "source": "https://www.fortnite.com/competitive/events/S39_ReloadCashVictoryCup_Dec/?region=NAW&round=S39_ReloadCashVictoryCup_Event3Round2_NAW",
+            "verified": true,
+            "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。現金賞金の確定情報なし。",
+            "players": [
+              "ゆの",
+              "FA かっちゃん"
+            ]
+          }
+        ],
+        "pages": 2,
+        "lastAttemptAt": "2026-11-16T07:16:30.816Z",
+        "emptyAttempts": 0,
+        "rankingOrderValid": true,
+        "lastSeenRank": 115,
+        "lastSuccessAt": "2026-11-16T07:16:31.472Z",
+        "totalPages": 2
+      }
+    },
+    {
+      "date": "2025-12-21",
+      "eventNo": 6,
+      "key": "epicgames_S39_ReloadCashVictoryCup_Dec_NAW/S39_ReloadCashVictoryCup_Event6Round2_NAW",
+      "window": "S39_ReloadCashVictoryCup_Event6Round2_NAW",
+      "sessionEndUtc": "2025-12-21T01:00:00.000Z",
+      "count": 2,
+      "pages": 2,
+      "checkpoint": {
+        "nextPage": 2,
+        "complete": true,
+        "proposals": [
+          {
+            "id": "auto-s39-1500f2d29d96",
+            "date": "2025-12-21",
+            "region": "NAW",
+            "player": "ゆの / FA かっちゃん",
+            "playerRaw": "NŁT りんねまんとゆの / FA かっちゃん",
+            "event": "Reload Duos Victory Cup",
+            "round": "Event 6 · Round 2 / 賞金決勝",
+            "rank": 30,
+            "points": 0,
+            "kills": 12,
+            "vrs": 0,
+            "prize": null,
+            "kind": "賞金決勝",
+            "matches": 3,
+            "seasonId": "S39",
+            "chapter": 7,
+            "season": 1,
+            "tournamentId": "ch7s1-reload-duos-victory",
+            "source": "https://www.fortnite.com/competitive/events/S39_ReloadCashVictoryCup_Dec/?region=NAW&round=S39_ReloadCashVictoryCup_Event6Round2_NAW",
+            "verified": true,
+            "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。現金賞金の確定情報なし。",
+            "players": [
+              "ゆの",
+              "FA かっちゃん"
+            ]
+          },
+          {
+            "id": "auto-s39-1b5466ac6f72",
+            "date": "2025-12-21",
+            "region": "NAW",
+            "player": "ぶゆ / hst basil",
+            "playerRaw": "Lit Buyureyli / hst basil",
+            "event": "Reload Duos Victory Cup",
+            "round": "Event 6 · Round 2 / 賞金決勝",
+            "rank": 68,
+            "points": 0,
+            "kills": 4,
+            "vrs": 0,
+            "prize": null,
+            "kind": "賞金決勝",
+            "matches": 2,
+            "seasonId": "S39",
+            "chapter": 7,
+            "season": 1,
+            "tournamentId": "ch7s1-reload-duos-victory",
+            "source": "https://www.fortnite.com/competitive/events/S39_ReloadCashVictoryCup_Dec/?region=NAW&round=S39_ReloadCashVictoryCup_Event6Round2_NAW",
+            "verified": true,
+            "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。現金賞金の確定情報なし。",
+            "players": [
+              "ぶゆ",
+              "hst basil"
+            ]
+          }
+        ],
+        "pages": 2,
+        "lastAttemptAt": "2026-11-16T07:19:59.128Z",
+        "emptyAttempts": 0,
+        "rankingOrderValid": true,
+        "lastSeenRank": 112,
+        "lastSuccessAt": "2026-11-16T07:19:59.437Z",
+        "totalPages": 2
+      }
+    }
+  ]
+}
