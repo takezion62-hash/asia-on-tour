@@ -36,7 +36,7 @@ for(const id of ids){
   cashReplay:null,reloadReplay:null};
  if(cashHist.entries.some(x=>x.id===id)){
   const originalLedger=load('approval-history.json').entries.find(x=>x.recordId===id);
-  details.cashVerify=cash.verifyHistoricalPromotion(after,originalLedger,context,h,proofs);
+  details.cashVerify=cash.verifyHistoricalPromotion(after,originalLedger,{...context,scanDocs:scanDocs.map(x=>x.data)},h,proofs);
   const index=cash.indexedProposals(...scanDocs.map(x=>x.data)),found=index.get(id);
   const win=found?cash.sourceWindow(before,rule,schedule):null;
   const cashAuto=require('./automatic-cash-approval.cjs');
@@ -55,7 +55,7 @@ for(const id of ids){
    verdictAmt:verdict?.record?.prize,
    ledgerPolicy:originalLedger?.policy,ledgerSourceMatches:originalLedger?.source===after.source};
   try{
-   const replay=cash.plan({...context,results:[before,...results.filter(x=>x.id!==id)],
+   const replay=cash.plan({...context,scanDocs:scanDocs.map(x=>x.data),results:[before,...results.filter(x=>x.id!==id)],
     proofs:proofs.filter(p=>p.recordId===id),limit:1});
    details.cashReplay={changes:replay.changes.map(x=>({id:x.id,rank:x.rank,amount:x.teamPrize})),
     outputMatches:JSON.stringify(replay.updated[0])===JSON.stringify(after)};
