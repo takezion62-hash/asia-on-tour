@@ -1,0 +1,83 @@
+{
+  "version": 1,
+  "reviewedAt": "2026-11-17",
+  "basis": "Original attendance-only ledger retained. Exact original rows, screenshot and official NAC $50 rule replayed.",
+  "entries": [
+    {
+      "id": "auto-s41-8f7f939170b8",
+      "originalPolicy": "attendance-only",
+      "source": "https://www.fortnite.com/competitive/events/S41_PSCupDaysOfPlay/?region=NAC&round=S41_PSCupDaysOfPlay_Final_NAC",
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/days-of-play-playstation-cup-chapter-7-season-3-official-rules",
+      "beforeSha256": "1cd3610eb6b3d7c2b5c15e00986c7b0809f9fc03271ddccbcd696e04dde585ee",
+      "afterSha256": "f22e627e5895f61b041c4e8561d35dedbf3fa4ec9ba94cddabb3ae68c6c26672",
+      "before": {
+        "id": "auto-s41-8f7f939170b8",
+        "date": "2026-06-11",
+        "region": "NAC",
+        "player": "ちからV2",
+        "playerRaw": "NEXUS ちからV2ǃ",
+        "event": "Days of Play PlayStation Cup (Battle Royale)",
+        "round": "Final / 参加確認",
+        "rank": 93,
+        "points": 3,
+        "kills": 1,
+        "vrs": 0,
+        "prize": null,
+        "kind": "参加確認",
+        "matches": 4,
+        "seasonId": "S41",
+        "chapter": 7,
+        "season": 3,
+        "tournamentId": "ch7s3-days-of-play-playstation-cup-br",
+        "source": "https://www.fortnite.com/competitive/events/S41_PSCupDaysOfPlay/?region=NAC&round=S41_PSCupDaysOfPlay_Final_NAC",
+        "verified": true,
+        "note": "管理者がEpic ID・公式大会ウィンドウ・Osirion順位表の参加と数値を再確認。予選突破・賞金・スキン獲得は未確認のため加算しない。出典: https://www.fortnite.com/competitive/events/S41_PSCupDaysOfPlay/?region=NAC&round=S41_PSCupDaysOfPlay_Final_NAC"
+      },
+      "award": {
+        "region": "NAC",
+        "rank": 93,
+        "perPlayerUSD": 50,
+        "ruleSection": "Attachment C - NAC 76th–100th",
+        "image": "1897"
+      }
+    },
+    {
+      "id": "auto-s41-dac735a621e2",
+      "originalPolicy": "attendance-only",
+      "source": "https://www.fortnite.com/competitive/events/S41_PSCupDaysOfPlay/?region=NAC&round=S41_PSCupDaysOfPlay_Final_NAC",
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/days-of-play-playstation-cup-chapter-7-season-3-official-rules",
+      "beforeSha256": "fcef1027404c590b7cbc4d704b28f0d493f7e4817e77eea87dfd5dd0c221776c",
+      "afterSha256": "0b2189b5e34d7874c1d0e395d467090913a2394f0c31bea291e4a488d44fbc7b",
+      "before": {
+        "id": "auto-s41-dac735a621e2",
+        "date": "2026-06-11",
+        "region": "NAC",
+        "player": "Mofu",
+        "playerRaw": "RC MOFU 16ǃ",
+        "event": "Days of Play PlayStation Cup (Battle Royale)",
+        "round": "Final / 参加確認",
+        "rank": 98,
+        "points": 0,
+        "kills": 0,
+        "vrs": 0,
+        "prize": null,
+        "kind": "参加確認",
+        "matches": 1,
+        "seasonId": "S41",
+        "chapter": 7,
+        "season": 3,
+        "tournamentId": "ch7s3-days-of-play-playstation-cup-br",
+        "source": "https://www.fortnite.com/competitive/events/S41_PSCupDaysOfPlay/?region=NAC&round=S41_PSCupDaysOfPlay_Final_NAC",
+        "verified": true,
+        "note": "管理者がEpic ID・公式大会ウィンドウ・Osirion順位表の参加と数値を再確認。予選突破・賞金・スキン獲得は未確認のため加算しない。出典: https://www.fortnite.com/competitive/events/S41_PSCupDaysOfPlay/?region=NAC&round=S41_PSCupDaysOfPlay_Final_NAC"
+      },
+      "award": {
+        "region": "NAC",
+        "rank": 98,
+        "perPlayerUSD": 50,
+        "ruleSection": "Attachment C - NAC 76th–100th",
+        "image": "1898"
+      }
+    }
+  ]
+}
