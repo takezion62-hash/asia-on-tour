@@ -37,6 +37,23 @@ for(const id of ids){
  if(cashHist.entries.some(x=>x.id===id)){
   const originalLedger=load('approval-history.json').entries.find(x=>x.recordId===id);
   details.cashVerify=cash.verifyHistoricalPromotion(after,originalLedger,context,h,proofs);
+  const index=cash.indexedProposals(...scanDocs.map(x=>x.data)),found=index.get(id);
+  const win=found?cash.sourceWindow(before,rule,schedule):null;
+  const cashAuto=require('./automatic-cash-approval.cjs');
+  let verdict=null;
+  if(win&&found){
+   const candidate=found.candidate,roster=candidate.players||[candidate.player];
+   verdict=cashAuto.decide(candidate,win,found.cp,{
+    results:results.filter(x=>x.id!==id),players,tournaments,schedule,
+    verifiedAccounts:roster.map((player,i)=>({player,epicAccountId:candidate.teamAccountIds?.[i],confirmed:true}))
+   });
+  }
+  details.cashStages={originalMatchesCandidate:found?cash.matchPublished(before,found.candidate):null,
+   found:!!found,checkpointKey:found?.key,win:!!win,
+   winKey:win?.key,cutoff:win?cashAuto.cashLimitForWindow(win):null,
+   verdict:verdict?.approved,reason:verdict?.reason||null,
+   verdictAmt:verdict?.record?.prize,
+   ledgerPolicy:originalLedger?.policy,ledgerSourceMatches:originalLedger?.source===after.source};
   try{
    const replay=cash.plan({...context,results:[before,...results.filter(x=>x.id!==id)],
     proofs:proofs.filter(p=>p.recordId===id),limit:1});
@@ -47,6 +64,11 @@ for(const id of ids){
   const sourceIdentity=reload.sourceWindow(before),hits=reload.checkpointsFor(before,scanDocs);
   const official=sourceIdentity?reload.officialSlot(before,sourceIdentity,schedule):null;
   const inspected=reload.inspect(before,context,hits,official,Date.parse(h.approvedAt));
+  const originalLedger=load('approval-history.json').entries.find(x=>x.recordId===id);
+  details.reloadLedger={policy:originalLedger?.policy,recordId:originalLedger?.recordId,
+   sourceMatches:originalLedger?.source===after.source,
+   windowMatches:h.proof?.key===sourceIdentity?.key,
+   ruleHashMatches:h.proof?.ruleSha256===hash(rule)};
   details.reloadReplay={hits:hits.map(x=>x.file),hasSlot:!!official,
    recordMatches:inspected.record?JSON.stringify(inspected.record)===JSON.stringify(after):false,
    reason:inspected.reason||null};
