@@ -13,7 +13,7 @@ function roundInfo(win){
   win.kind!==(rule.series==='cash-cup'?'参加確認':'予選')||win.series!==rule.series||
   !Object.hasOwn(rule.advance,win.region))return null;
  const escaped=win.eventId.replace(/[.*+?^$\{\}()|[\]\\]/g,'\\$&');
- const m=win.windowId?.match(new RegExp('^'+escaped+'_Event([1-9][0-9]*)Round1_'+win.region+'$'));
+ const m=win.windowId?.match(new RegExp('^'+escaped+'_Event([1-9][0-9]*)_?Round1_'+win.region+'$'));
  return m?{rule,event:Number(m[1]),cutoff:rule.advance[win.region]}:null;
 }
 function sameRound(a,b){
@@ -32,7 +32,7 @@ function sameRound(a,b){
 }
 function decide(row,win,cp,data,now=Date.now()){
  const info=roundInfo(win),rule=info?.rule;
- if(!rule)return decline('S36 Console DuosまたはS43 Reload ZB Duosの登録済みRound1ではありません');
+ if(!rule)return decline('公式ルールで指定されたデュオRound1ではありません');
  const recent=rule.series==='cash-cup';
  if(!row||row.verified!==true||!/^auto-s[0-9]+-[a-f0-9]{12}$/.test(row.id||'')||
   row.seasonId!==rule.seasonId||row.tournamentId!==rule.id||
@@ -62,12 +62,15 @@ function decide(row,win,cp,data,now=Date.now()){
   return decline('両選手の名鑑照合が不一致');
  const known=(data.verifiedAccounts||[]).filter(x=>x.confirmed===true);
  if(people.some(name=>!known.some(x=>x.player===name)))return decline('本人Epicアカウント照合が未完了');
- if(recent){
+ // Newly enabled S37/S42 historical Victory Duo rules require exact paired Epic IDs.
+ if(recent||rule.requireVerifiedRoster===true){
   const ids=row.teamAccountIds;
   if(!Array.isArray(ids)||ids.length!==2||new Set(ids).size!==2||
    ids.some((id,i)=>typeof id!=='string'||!/^[0-9a-f]{32}$/.test(id)||
     !known.some(x=>x.player===people[i]&&x.epicAccountId===id)))
    return decline('チーム2名の確定Epic IDが不一致');
+ }
+ if(recent){
   const schedule=data.schedule?.sessions?.filter(s=>s.eventId===win.eventId&&
    s.region===win.region&&s.dateJst===win.dateJst&&
    s.round==='Event '+info.event+' · Round 1'&&s.stage==='予選'&&

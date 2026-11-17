@@ -140,6 +140,14 @@
     const ids=rule?.eventIds?.length?rule.eventIds:entry.sourceEventIds||[];
     const url=safeUrl(rule?.source);
     const eventUrl=ids[0]?safeUrl('https://www.fortnite.com/competitive/events/'+encodeURIComponent(ids[0])+'/'):null;
+    // Catalog evidence is a research lead, never an auto-approval rule.
+    // Link only directly to Epic rule documents, never to untrusted hosts.
+    const researchLinks=present?[]:[...new Set((entry.evidence||[]).map(e=>safeUrl(e.url))
+      .filter(Boolean).filter(u=>{
+        const pathname=new URL(u).pathname;
+        return pathname.startsWith('/competitive/rules-guidelines/rules-library/')||
+          pathname.startsWith('/news/');
+      }))].slice(0,3);
     const conditions=rule?.series==='unreal-cup'?unrealMarkup(rule):rule?.series==='cash-cup'?cashMarkup(rule):
       rule?.cosmeticRanks
       ?'<div class="source-rule-fact"><span>スキン獲得対象順位</span><div class="source-rule-regions">'+regionRows(rule.cosmeticRanks,'スキン獲得ライン')+'</div></div>'
@@ -147,7 +155,7 @@
     const cash=['victory-cup','performance-evaluation'].includes(rule?.series)
       ?'<div class="source-rule-fact"><span>決勝賞金</span><strong>'+(
         Number.isFinite(rule.prizePerVictory)
-          ?(rule.team==='squad'&&Number.isFinite(rule.teamPrizePerVictory)
+          ?(['squad','duo'].includes(rule.team)&&Number.isFinite(rule.teamPrizePerVictory)
             ?'決勝1VRにつき各選手$'+fmtNumber(rule.prizePerVictory)+'（チーム合計$'+fmtNumber(rule.teamPrizePerVictory)+'）'
             :'決勝1VRにつき'+(rule.series==='performance-evaluation'?'各選手':'')+'$'+fmtNumber(rule.prizePerVictory)+'（規則上）')
           :'VRごとの賞金単価は未登録（0VRは$0で記録可能）'
@@ -160,7 +168,10 @@
     const details=present?
       '<div class="source-rule-facts">'+conditions+cash+evalNote+squadsNote+
       '<div class="source-rule-fact"><span>試合数の上限</span><strong>'+esc(matchCaps||'未登録')+'</strong></div></div>'
-      :'<p class="source-rule-warning">公式の地域別通過・賞金・スキン獲得条件は未登録です。順位だけから報酬を自動認定しません。</p>';
+      :'<div class="source-rule-facts"><div class="source-rule-fact"><span>現在の調査状況</span>'+
+        '<strong>'+(researchLinks.length?'Epic公式資料の参照先あり · 条件の登録待ち':'公式条件の調査待ち')+'</strong></div>'+
+        '<p class="source-rule-warning">大会の名称・形式は大会カタログに登録済みですが、地域別通過・賞金・スキン獲得条件はルールマスター未登録です。'+
+        '公式資料へのリンクがあっても自動承認は有効化されません。順位だけから報酬を認定しません。</p></div>';
     return '<article class="source-rule-card" data-rule-id="'+esc(entry.id)+'">'+
       '<div class="source-rule-title"><div><span class="source-rule-season">'+esc(entry.seasonId||'シーズン不明')+
       ' · '+esc(seriesLabel[entry.series]||entry.series||'大会')+'</span>'+
@@ -172,6 +183,7 @@
       '<p>公式規則が確認済みでも、本人Epic ID・地域・開催枠・順位表の検証が必要です</p></div></details>'+
       '<div class="source-rule-links">'+
       (url?'<a href="'+esc(url)+'" target="_blank" rel="noopener noreferrer">Epic公式大会ルール ↗</a>':'')+
+      researchLinks.map((link,index)=>'<a href="'+esc(link)+'" target="_blank" rel="noopener noreferrer">公式ルール資料 '+(index+1)+' ↗</a>').join('')+
       (eventUrl?'<a href="'+esc(eventUrl)+'" target="_blank" rel="noopener noreferrer">公式大会ページ ↗</a>':'')+
       '</div></article>';
   }

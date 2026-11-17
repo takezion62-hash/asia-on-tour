@@ -79,12 +79,20 @@ test('cash, name, score, verified status and round tampering cannot pass approva
   assert.equal(proof.validateRecord(r,{...e,rule:'https://example.com'}),false);
  }
 });
-test('original 8/6 rank 829 stays excluded from the selected 17 proofs',()=>{
+test('original 8/6 rank 829 stays excluded from the archived eight-page 17-proof batch',()=>{
  const g=proof.GROUPS.find(x=>x.eventNo===8);
  assert.equal(g.count,17);assert.equal(g.oldPages,8);
  assert.ok(proof.SPECS.filter(x=>x.eventNo===8).every(x=>x.rank<=800));
- assert.ok(pending.some(x=>x.date==='2024-08-06'&&x.rank===829)&&
-  !proof.SPECS.some(x=>x.date==='2024-08-06'&&x.rank===829));
+ const archived=snapshot.windows.find(x=>x.key===g.key);
+ assert.equal(archived.checkpoint.lastSeenRank,800);
+ assert.ok(!archived.checkpoint.proposals.some(x=>x.rank===829));
+ assert.ok(!proof.SPECS.some(x=>x.date==='2024-08-06'&&x.rank===829));
+ // The live pending queue may change after later manual reviews, but those
+ // cannot retroactively authorize rank 829 under this 17-result proof.
+ for(const row of published.filter(x=>x.date==='2024-08-06'&&x.region==='NAC'&&
+   x.tournamentId==='ch5s3-zb-solo-victory'&&x.rank===829)){
+  assert.notEqual(ledger.find(x=>x.recordId===row.id)?.policy,proof.POLICY);
+ }
 });
 test('cleanup only by exact unique ID and preserves unrelated pending entries',()=>{
  const ids=proof.SPECS.map(s=>s.id);
