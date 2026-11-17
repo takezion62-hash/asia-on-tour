@@ -90,7 +90,14 @@ test('official S41/S42 cutoffs are region and mode specific, never guessed for o
  assert.equal(advancementLimit(w('S42','ch7s4-console-zero-build-solo-victory-cup','NAW')),1000);
  assert.equal(advancementLimit(w('S42','ch7s4-console-zero-build-solo-victory-cup','EU')),2000);
  assert.equal(advancementLimit(w('S41','ch7s3-solo-reload-victory-cup','NAW')),320);
- assert.equal(advancementLimit(w('S42','ch7s4-reload-duos-victory-cup','ME')),120);
+ // Verified S42 duo Round1 cutoffs must be applied ONLY by the strict
+ // two-Epic-ID validator, never through the generic solo-like path.
+ assert.equal(advancementLimit(w('S42','ch7s4-reload-duos-victory-cup','ME')),null);
+ const {roundInfo}=require('../scripts/automatic-duo-qualifier-approval.cjs');
+ const duo={seasonId:'S42',tournamentId:'ch7s4-reload-duos-victory-cup',
+  region:'ME',series:'victory-cup',kind:'予選',eventId:'S42_ReloadDuosVictoryCup',
+  windowId:'S42_ReloadDuosVictoryCup_Event1Round1_ME'};
+ assert.equal(roundInfo(duo).cutoff,120);
  // S43 squad official regional cutoffs are registered; unrecognized regions stay unconfirmed.
  assert.equal(advancementLimit(w('S43','ch7s5-squads-victory-cup','NAW')),120);
  assert.equal(advancementLimit(w('S43','ch7s5-squads-victory-cup','NAC')),200);
