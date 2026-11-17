@@ -1,0 +1,55 @@
+name: Materialize S37 Console Duos five user results
+on:
+  push:
+    branches: [data/s37-five-console-duos-20261117]
+permissions:
+  contents: write
+  actions: write
+jobs:
+  materialize:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: true
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - name: Dry-run exact screenshot/UUID, calendar date, duplicate and award checks
+        run: node scripts/publish-s37-console-five-20261117.cjs --dry-run
+      - name: Canonically publish five verified duo finals and regenerate indexes
+        run: |
+          node scripts/publish-s37-console-five-20261117.cjs
+          node scripts/build-season-data.cjs
+          node scripts/build-candidate-triage.cjs
+      - name: Verify strict full source, awards, aliases, histories and screenshot regression
+        run: |
+          npm run validate
+          node scripts/source-results-store.cjs verify
+          node scripts/build-source-results.cjs --check
+          node scripts/build-season-data.cjs --check
+          node scripts/build-candidate-triage.cjs --check
+          node --test tests/verified-s37-console-five.test.cjs
+      - name: Commit verified data only and submit to full mandatory CI
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add -A source-results season-data
+          git add players.json updates.json approval-history.json candidate-triage.json
+          git diff --cached --name-only | tee /tmp/changed-files.txt
+          if grep -Ev '^(source-results/|season-data/|players\.json$|updates\.json$|approval-history\.json$|candidate-triage\.json$)' /tmp/changed-files.txt; then
+            echo "::error::Unexpected modified data file"
+            exit 1
+          fi
+          test -s /tmp/changed-files.txt
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "data: publish five user-verified S37 duo cash finals [skip ci]"
+          git push origin HEAD:data/s37-five-console-duos-20261117
+          gh workflow run tests.yml --ref data/s37-five-console-duos-20261117
