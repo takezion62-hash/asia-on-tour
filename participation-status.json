@@ -1,7 +1,7 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-16T21:38:42.590Z",
+  "checkedAt": "2026-11-17T03:42:01.605Z",
   "scope": "participation",
   "provider": "osirion",
   "fromDate": "2024-05-29",
@@ -9,18 +9,16 @@
   "linkedPlayers": 665,
   "identityConflicts": 3,
   "trackedWindows": 3172,
-  "completedWindows": 77,
-  "partialWindows": 19,
+  "completedWindows": 79,
+  "partialWindows": 21,
   "pagesScanned": 40,
-  "invalidRows": 3,
+  "invalidRows": 7,
   "emptyPages": 0,
   "failedWindows": 0,
-  "newRecords": 1,
+  "newRecords": 17,
   "prunedPublished": 0,
-  "total": 429,
+  "total": 446,
   "months": 18,
   "skippedPublished": 0,
-  "message": "Epic ID確認済み出場戦績：人手確認で2件追加。現金賞金やスキン獲得は推定しない。",
-  "lastManualReviewAt": "2026-11-17T02:34:15.710Z",
-  "manualReviewPublished": 2
+  "message": "Epic IDで本人照合した出場戦績を月別に保存。公式通過枠外の判定以外は通過未確認。賞金・AOT PR・称号には加算しません。全順位表を無制限には調査しません。"
 }
