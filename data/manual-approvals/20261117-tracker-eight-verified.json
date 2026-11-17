@@ -1,0 +1,251 @@
+{
+  "version": 1,
+  "receivedOn": "2026-11-17",
+  "basis": "User-supplied 8 untouched Fortnite Tracker screenshots (1891)-(1898), user-supplied permanent Epic-profile UUID links, and corresponding official Epic tournament rulebooks; original image files remain in conversation upload.",
+  "rules": {
+    "S37": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-duos-console-victory-cash-cups-chapter-6-season-4-official-rules",
+    "S39Unreal": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/1-million-dollar-unreal-cup-chapter-7-season-1-official-rules",
+    "S39Reload": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-1-official-rules",
+    "S41": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/days-of-play-playstation-cup-chapter-7-season-3-official-rules"
+  },
+  "newResults": [
+    {
+      "id": "manual-s37-oce-console-duos-20250920-chikara-rura",
+      "image": "1891",
+      "date": "2025-09-20",
+      "seasonId": "S37",
+      "region": "OCE",
+      "tournamentId": "ch6s4-console-duos-victory",
+      "eventId": "S37_ConsoleDuosCashCups",
+      "windowId": "S37_ConsoleDuosCashCups_Event5Round2_OCE",
+      "round": "Event 5 · Round 2 / 賞金決勝",
+      "players": [
+        {
+          "name": "ちからV2",
+          "url": "https://fortnitetracker.com/profile/all/%E3%81%A1%E3%81%8B%E3%82%89v2/events?id=2512ed08-9c99-409f-b69d-2cc3de7c35c6"
+        },
+        {
+          "name": "Rura",
+          "url": "https://fortnitetracker.com/profile/all/Rura/events?id=d5e9dc74-c49e-4825-bd81-a9d69056c683"
+        }
+      ],
+      "raw": [
+        "ちからv2",
+        "Rura"
+      ],
+      "rank": 9,
+      "points": 100,
+      "kills": 9,
+      "vrs": 1,
+      "matches": 2,
+      "teamUSD": 200,
+      "eachUSD": 100,
+      "rule": "S37"
+    },
+    {
+      "id": "manual-s37-oce-console-duos-20250831-chikara-rura",
+      "image": "1892",
+      "date": "2025-08-31",
+      "seasonId": "S37",
+      "region": "OCE",
+      "tournamentId": "ch6s4-console-duos-victory",
+      "eventId": "S37_ConsoleDuosCashCups",
+      "windowId": "S37_ConsoleDuosCashCups_Event3Round2_OCE",
+      "round": "Event 3 · Round 2 / 賞金決勝",
+      "players": [
+        {
+          "name": "ちからV2",
+          "url": "https://fortnitetracker.com/profile/all/%E3%81%A1%E3%81%8B%E3%82%89v2/events?id=2512ed08-9c99-409f-b69d-2cc3de7c35c6"
+        },
+        {
+          "name": "Rura",
+          "url": "https://fortnitetracker.com/profile/all/Rura/events?id=d5e9dc74-c49e-4825-bd81-a9d69056c683"
+        }
+      ],
+      "raw": [
+        "ちからv2",
+        "Rura"
+      ],
+      "rank": 1,
+      "points": 200,
+      "kills": 17,
+      "vrs": 2,
+      "matches": 3,
+      "teamUSD": 400,
+      "eachUSD": 200,
+      "rule": "S37"
+    },
+    {
+      "id": "manual-s39-naw-unreal-20251221-mofu-rinneman",
+      "image": "1893",
+      "date": "2025-12-21",
+      "seasonId": "S39",
+      "region": "NAW",
+      "tournamentId": "ch7s1-one-million-unreal-cup",
+      "eventId": "S39_1MillionUnrealCup",
+      "windowId": "S39_1MillionUnrealCup_NAW",
+      "round": "Session 1 / 賞金決勝",
+      "players": [
+        {
+          "name": "Mofu",
+          "url": "https://fortnitetracker.com/profile/all/Mofu/events?id=b7863190-5b98-47c3-8d34-7af8ea94d4b5"
+        },
+        {
+          "name": "りんねまん",
+          "url": "https://fortnitetracker.com/profile/all/%E3%82%8A%E3%82%93%E3%81%AD%E3%81%BE%E3%82%93/events?id=cf6f3adc-4755-4611-8b18-cf1b7101c8b5"
+        }
+      ],
+      "raw": [
+        "Mofu",
+        "りんねまん"
+      ],
+      "rank": 209,
+      "points": 273,
+      "kills": 38,
+      "vrs": 1,
+      "matches": 9,
+      "teamUSD": 100,
+      "eachUSD": 50,
+      "rule": "S39Unreal"
+    },
+    {
+      "id": "manual-s39-naw-unreal-20251221-raeyache-naokin",
+      "image": "1894",
+      "date": "2025-12-21",
+      "seasonId": "S39",
+      "region": "NAW",
+      "tournamentId": "ch7s1-one-million-unreal-cup",
+      "eventId": "S39_1MillionUnrealCup",
+      "windowId": "S39_1MillionUnrealCup_NAW",
+      "round": "Session 1 / 賞金決勝",
+      "players": [
+        {
+          "name": "Raeyache",
+          "url": "https://fortnitetracker.com/profile/all/Raeyache/events?id=50e40200-155b-4c9a-8f4e-0fb4335796df"
+        },
+        {
+          "name": "なおきん",
+          "url": "https://fortnitetracker.com/profile/all/hst%20999/events?id=d3519730-e79e-4727-af4e-df9ba4422463"
+        }
+      ],
+      "raw": [
+        "Raeyache",
+        "hst 999"
+      ],
+      "rank": 221,
+      "points": 272,
+      "kills": 47,
+      "vrs": 1,
+      "matches": 10,
+      "teamUSD": 100,
+      "eachUSD": 50,
+      "rule": "S39Unreal"
+    },
+    {
+      "id": "manual-s39-naw-unreal-20251221-toax-jagareet",
+      "image": "1895",
+      "date": "2025-12-21",
+      "seasonId": "S39",
+      "region": "NAW",
+      "tournamentId": "ch7s1-one-million-unreal-cup",
+      "eventId": "S39_1MillionUnrealCup",
+      "windowId": "S39_1MillionUnrealCup_NAW",
+      "round": "Session 1 / 賞金決勝",
+      "players": [
+        {
+          "name": "とあっくす",
+          "url": "https://fortnitetracker.com/profile/all/ftw%20Kak%C3%A1DelPiero/events?id=6c0186bd-1aea-4369-b8f4-b5ea5d76f8b3"
+        },
+        {
+          "name": "Jagareet",
+          "url": "https://fortnitetracker.com/profile/all/Jagareet/events?id=982b0f99-1952-475d-9bfd-79cd3e74b242"
+        }
+      ],
+      "raw": [
+        "ftw KakáDelPiero",
+        "Jagareet"
+      ],
+      "rank": 218,
+      "points": 272,
+      "kills": 22,
+      "vrs": 2,
+      "matches": 10,
+      "teamUSD": 100,
+      "eachUSD": 50,
+      "rule": "S39Unreal"
+    },
+    {
+      "id": "manual-s39-oce-reload-duos-20251207-mofu-rinneman",
+      "image": "1896",
+      "date": "2025-12-07",
+      "seasonId": "S39",
+      "region": "OCE",
+      "tournamentId": "ch7s1-reload-duos-victory",
+      "eventId": "S39_ReloadCashVictoryCup_Dec",
+      "windowId": "S39_ReloadCashVictoryCup_Event1Round2_mg_OCE",
+      "round": "Event 1 · Round 2 / 賞金決勝",
+      "players": [
+        {
+          "name": "Mofu",
+          "url": "https://fortnitetracker.com/profile/all/Mofu/events?id=b7863190-5b98-47c3-8d34-7af8ea94d4b5"
+        },
+        {
+          "name": "りんねまん",
+          "url": "https://fortnitetracker.com/profile/all/%E3%82%8A%E3%82%93%E3%81%AD%E3%81%BE%E3%82%93/events?id=cf6f3adc-4755-4611-8b18-cf1b7101c8b5"
+        }
+      ],
+      "raw": [
+        "Mofu",
+        "りんねまん"
+      ],
+      "rank": 13,
+      "points": 100,
+      "kills": 7,
+      "vrs": 1,
+      "matches": 3,
+      "teamUSD": 200,
+      "eachUSD": 100,
+      "rule": "S39Reload"
+    }
+  ],
+  "corrections": [
+    {
+      "id": "auto-s41-8f7f939170b8",
+      "image": "1897",
+      "seasonId": "S41",
+      "date": "2026-06-11",
+      "region": "NAC",
+      "player": "ちからV2",
+      "raw": "NEXUS ちからV2ǃ",
+      "tournamentId": "ch7s3-days-of-play-playstation-cup-br",
+      "eventId": "S41_PSCupDaysOfPlay",
+      "windowId": "S41_PSCupDaysOfPlay_Final_NAC",
+      "rank": 93,
+      "points": 3,
+      "kills": 1,
+      "vrs": 0,
+      "matches": 4,
+      "prizeUSD": 50,
+      "rule": "S41"
+    },
+    {
+      "id": "auto-s41-dac735a621e2",
+      "image": "1898",
+      "seasonId": "S41",
+      "date": "2026-06-11",
+      "region": "NAC",
+      "player": "Mofu",
+      "raw": "RC MOFU 16ǃ",
+      "tournamentId": "ch7s3-days-of-play-playstation-cup-br",
+      "eventId": "S41_PSCupDaysOfPlay",
+      "windowId": "S41_PSCupDaysOfPlay_Final_NAC",
+      "rank": 98,
+      "points": 0,
+      "kills": 0,
+      "vrs": 0,
+      "matches": 1,
+      "prizeUSD": 50,
+      "rule": "S41"
+    }
+  ]
+}
