@@ -4,6 +4,7 @@ const {POLICY:S37_OCE_CONSOLE_ROUND1_POLICY,validatedRecord:validS37OceConsoleRo
 const {POLICY:S37_OCE_CONSOLE_ROUND1_SECOND_POLICY,validatedRecord:validS37OceConsoleRound1Second}=require('./verified-s37-oce-console-round1-second-three.cjs');
 const {POLICY:S37_NAW_EVENT6_ROUND1_POLICY,validatedRecord:validS37NawEvent6Round1}=require('./verified-s37-naw-console-event6-round1-four.cjs');
 const {POLICY:S37_NAW_EVENT6_REMAINING14_POLICY,validatedRecord:validS37NawEvent6Remaining14}=require('./verified-s37-naw-event6-round1-remaining14.cjs');
+const {POLICY:S37_CONSOLE_BULK23_POLICY,validateRecord:validS37ConsoleBulk23}=require('./verified-s37-console-round1-oce7-naw9-23.cjs');
 const {POLICY:REVIEWONLY_NONPRIZE_POLICY,verifiedNonprizeRow}=require('./verified-reviewonly-round1-20261116.cjs');
 const {POLICY:GENERIC_ZERO_POLICY,MANIFEST:GENERIC_REVIEW_MANIFEST,verifyPublishedZero}=require('./generic-review-only-core.cjs');
 // Checks that previously manually approved rows remain present and safe after
@@ -386,7 +387,7 @@ function audit(results,ledger,players,{promotionEvidence}={}){
   const rows=rowsById.get(entry.recordId)||[];
   if(rows.length!==1){errors.push('Published record missing or duplicate: '+entry.id);continue}
   const r=rows[0];
-  if(entry.decision!=='published'||!['attendance-only','verified-rule','cosmetic-rank','verified-vr','official-final-vr-award','verified-qualifier','verified-s32-final-100usd-vr','verified-trios-qualifier-participation-zero-cash',S30_DUOS_CASH_POLICY,S30_ZERO_DUOS_POLICY,S30_JUNE21_POLICY,S29_ME_ZB_DUOS_POLICY,S28_ME_ZB_DUOS_POLICY,S26_S28_ME_ZB_DUOS_2023_POLICY,S25_ME_ZB_DUOS_2023_POLICY,S22_S25_S31_PS_20261114_POLICY,S37_S39_S40_SEVEN_CASH_POLICY,S37_S41_OCE_FIVE_CASH_POLICY,EU_UNREAL_ME_TRIOS_FOUR_POLICY,KAME_ME_DUOS_TWO_POLICY,S41_CONSOLE_ZB_FOUR_POLICY,B0TER_S31_S38_NINE_POLICY,NAC_S29_S30_ZB_VC_TEN_POLICY,S27_S34_S31_PS_ZB_TEN_POLICY,ME_S31_PS_S26_CONSOLE_TEN_POLICY,NOV14_PENDING_CASH_POLICY,NOV15_NINE_POLICY,'verified-s36-squid-naw-seven',REVIEWONLY_NONPRIZE_POLICY,GENERIC_ZERO_POLICY,S37_OCE_CONSOLE_ROUND1_POLICY,S37_OCE_CONSOLE_ROUND1_SECOND_POLICY,S37_NAW_EVENT6_ROUND1_POLICY,S37_NAW_EVENT6_REMAINING14_POLICY].includes(entry.policy)){
+  if(entry.decision!=='published'||!['attendance-only','verified-rule','cosmetic-rank','verified-vr','official-final-vr-award','verified-qualifier','verified-s32-final-100usd-vr','verified-trios-qualifier-participation-zero-cash',S30_DUOS_CASH_POLICY,S30_ZERO_DUOS_POLICY,S30_JUNE21_POLICY,S29_ME_ZB_DUOS_POLICY,S28_ME_ZB_DUOS_POLICY,S26_S28_ME_ZB_DUOS_2023_POLICY,S25_ME_ZB_DUOS_2023_POLICY,S22_S25_S31_PS_20261114_POLICY,S37_S39_S40_SEVEN_CASH_POLICY,S37_S41_OCE_FIVE_CASH_POLICY,EU_UNREAL_ME_TRIOS_FOUR_POLICY,KAME_ME_DUOS_TWO_POLICY,S41_CONSOLE_ZB_FOUR_POLICY,B0TER_S31_S38_NINE_POLICY,NAC_S29_S30_ZB_VC_TEN_POLICY,S27_S34_S31_PS_ZB_TEN_POLICY,ME_S31_PS_S26_CONSOLE_TEN_POLICY,NOV14_PENDING_CASH_POLICY,NOV15_NINE_POLICY,'verified-s36-squid-naw-seven',REVIEWONLY_NONPRIZE_POLICY,GENERIC_ZERO_POLICY,S37_OCE_CONSOLE_ROUND1_POLICY,S37_OCE_CONSOLE_ROUND1_SECOND_POLICY,S37_NAW_EVENT6_ROUND1_POLICY,S37_NAW_EVENT6_REMAINING14_POLICY,S37_CONSOLE_BULK23_POLICY].includes(entry.policy)){
    errors.push('Unknown decision/policy: '+entry.id);continue;
   }
   if(r.source!==entry.source||r.verified!==true)errors.push('Published source or verification flag changed: '+entry.id);
@@ -398,6 +399,8 @@ function audit(results,ledger,players,{promotionEvidence}={}){
     errors.push('S37 NAW Console Event6 Round1 four-team identity, qualifier rank or zero payout changed: '+entry.id);
   if(entry.policy===S37_NAW_EVENT6_REMAINING14_POLICY&&!validS37NawEvent6Remaining14(r,entry))
     errors.push('S37 NAW Event6 Round1 14-team rank, identity or zero payout changed: '+entry.id);
+  if(entry.policy===S37_CONSOLE_BULK23_POLICY&&!validS37ConsoleBulk23(r,entry))
+    errors.push('S37 Console Round1 OCE7 NAW9 23-row rank, duo, source or zero cash changed: '+entry.id);
   if(entry.policy===GENERIC_ZERO_POLICY){
     const match=GENERIC_REVIEW_MANIFEST.approvals?.filter(a=>a.candidate?.id===entry.id)||[];
     if(match.length!==1||!verifyPublishedZero(r,entry,match[0]))
