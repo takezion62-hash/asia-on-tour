@@ -84,3 +84,65 @@ test('queue reviewReason is not evidence; only that field may vary from immutabl
  const tampered={...queued,points:501};
  assert.equal(decide(tampered,w,state,db(w),now).approved,false);
 });
+
+const newDuoCup=(season,region)=>{
+ const isReload=season==='S42';
+ const eventId=isReload?'S42_ReloadDuosVictoryCup':'S37_ConsoleDuosCashCups';
+ const tournamentId=isReload?'ch7s4-reload-duos-victory-cup':'ch6s4-console-duos-victory';
+ const w={...win('S36',region),seasonId:season,eventId,tournamentId,
+   dateJst:isReload?'2026-10-24':'2025-09-28',
+   startUtc:isReload?'2026-10-24T03:00:00Z':'2025-09-28T03:00:00Z',
+   end:Date.parse(isReload?'2026-10-24T05:00:00Z':'2025-09-28T05:00:00Z'),
+   windowId:eventId+'_Event1'+(isReload?'_':'')+'Round1_'+region};
+ w.key='epicgames_'+eventId+'_'+region+'/'+w.windowId;
+ const name=isReload?'Reload Duos Victory Cup':'Duos Console Victory Cash Cup';
+ const candidate={...row(w,1),event:name,matches:isReload?10:7,teamAccountIds:[...ids]};
+ const d=db(w);d.tournaments.catalog[0].name=name;
+ return {w,candidate,d};
+};
+test('S37 Console Duos Round1 can record verified EU/NAC 500th or 501st as $0 only',()=>{
+ const {w,candidate,d}=newDuoCup('S37','NAC');
+ assert.equal(roundInfo(w).cutoff,500);
+ const included={...candidate,rank:500},outside={...candidate,rank:501};
+ let out=decide(included,w,cp(included,true),d,now);
+ assert.equal(out.approved,true,out.reason);
+ assert.equal(out.qualified,true);assert.equal(out.record.prize,0);
+ assert.equal(out.record.teamAccountIds,undefined);
+ assert.match(out.record.round,/予選突破$/);
+ out=decide(outside,w,cp(outside,true),d,now);
+ assert.equal(out.approved,true,out.reason);
+ assert.equal(out.qualified,false);assert.equal(out.record.prize,0);
+ assert.match(out.record.round,/\/ 予選$/);
+});
+test('S42 Reload Duos Round1 supports _EventN_Round1 and EU300 / ME120 thresholds',()=>{
+ for(const [region,cutoff] of [['EU',300],['ME',120]]){
+  const {w,candidate,d}=newDuoCup('S42',region);
+  assert.equal(roundInfo(w).cutoff,cutoff);
+  const at={...candidate,rank:cutoff},after={...candidate,rank:cutoff+1};
+  const accept=decide(at,w,cp(at,true),d,now);
+  assert.equal(accept.approved,true,accept.reason);
+  assert.equal(accept.qualified,true);
+  assert.equal(accept.record.prize,0);
+  const outside=decide(after,w,cp(after,true),d,now);
+  assert.equal(outside.approved,true,outside.reason);
+  assert.equal(outside.qualified,false);
+  assert.equal(outside.record.prize,0);
+ }
+});
+test('S37 and S42 duo approvals reject missing/mismatched UUID, partial roster and Round2',()=>{
+ for(const season of ['S37','S42']){
+  const {w,candidate,d}=newDuoCup(season,'NAW');
+  assert.equal(decide({...candidate,teamAccountIds:undefined},w,
+    cp({...candidate,teamAccountIds:undefined},true),d,now).approved,false);
+  assert.equal(decide({...candidate,teamAccountIds:[ids[1],ids[0]]},w,
+    cp({...candidate,teamAccountIds:[ids[1],ids[0]]},true),d,now).approved,false);
+  assert.equal(decide({...candidate,players:['A']},w,
+    cp({...candidate,players:['A']},true),d,now).approved,false);
+  assert.equal(decide({...candidate,matches:99},w,
+    cp({...candidate,matches:99},true),d,now).approved,false);
+  const badWin={...w,kind:'賞金決勝',round:w.round.replace('予選','賞金決勝'),
+    windowId:w.windowId.replace('Round1','Round2')};
+  assert.equal(decide(candidate,badWin,cp(candidate,true),d,now).approved,false);
+  assert.equal(decide(candidate,w,{...cp(candidate,true),rankingOrderValid:false},d,now).approved,false);
+ }
+});
