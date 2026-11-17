@@ -101,3 +101,26 @@ test('same-day published Round 2 finals are not duplicate Round 1 results',()=>{
  for(const s of proof.SPECS)for(const f of finals)
   assert.equal(collision(f,row(s),{}),'',s.id+' / '+f.id);
 });
+
+test('archived source blob attribution and event cutoff are stable after rebase',()=>{
+ const byEvent=new Map(proof.GROUPS.map(g=>[g.eventNo,g]));
+ assert.equal(byEvent.size,9);
+ for(const g of proof.GROUPS){
+  assert.ok(g.oldPages>0&&g.oldLastSeenRank>=g.rankMax);
+  assert.equal(g.oldCommit.length,40);
+  assert.equal(g.oldBlob.length,40);
+  if(g.eventNo===8){
+   assert.equal(g.oldBlob,'6af9cc80993405327bf07ef8620bfaddc717d7d1');
+   assert.equal(g.rankMax,800);
+  }else{
+   assert.equal(g.oldBlob,'43d4af41369f1e3fc30baf60c84de9b8062ff47b');
+  }
+ }
+ for(const s of proof.SPECS){
+  assert.ok(byEvent.has(s.eventNo));
+  assert.equal(s.date,byEvent.get(s.eventNo).date);
+  assert.ok(s.rank<=byEvent.get(s.eventNo).oldLastSeenRank);
+  assert.ok(s.rank<=5000);
+  assert.ok(s.source.endsWith('Event'+s.eventNo+'Round1_NAC'));
+ }
+});
