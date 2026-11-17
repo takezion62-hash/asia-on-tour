@@ -1,0 +1,137 @@
+{
+  "version": 1,
+  "source": {
+    "repository": "takezion62-hash/asia-on-tour",
+    "scanBlob": "43d4af41369f1e3fc30baf60c84de9b8062ff47b",
+    "reviewBlob": "28bb99d9179c8cd935be8bd8134ae328347e6bbd",
+    "triageBlob": "c7472c53c9b170df0f5f21bc5b47330ceb8b870e",
+    "checkedAt": "2026-11-07T23:16:39.215Z"
+  },
+  "groups": [
+    {
+      "key": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event1Round2_NAC",
+      "window": "S30_SoloZBVictoryCashCup_Event1Round2_NAC",
+      "date": "2024-06-04",
+      "eventNo": 1,
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=NAC&round=S30_SoloZBVictoryCashCup_Event1Round2_NAC",
+      "seenPages": 45,
+      "totalPages": 45,
+      "rankMax": 67
+    },
+    {
+      "key": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event5Round2_NAC",
+      "window": "S30_SoloZBVictoryCashCup_Event5Round2_NAC",
+      "date": "2024-07-16",
+      "eventNo": 5,
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=NAC&round=S30_SoloZBVictoryCashCup_Event5Round2_NAC",
+      "seenPages": 45,
+      "totalPages": 45,
+      "rankMax": 98
+    },
+    {
+      "key": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event7Round2_NAC",
+      "window": "S30_SoloZBVictoryCashCup_Event7Round2_NAC",
+      "date": "2024-07-30",
+      "eventNo": 7,
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=NAC&round=S30_SoloZBVictoryCashCup_Event7Round2_NAC",
+      "seenPages": 45,
+      "totalPages": 45,
+      "rankMax": 87
+    }
+  ],
+  "specs": [
+    {
+      "id": "auto-s30-22bf6da5b90e",
+      "player": "ちからV2",
+      "playerRaw": "NEXUS ちからV2ǃ",
+      "rank": 41,
+      "points": 100,
+      "kills": 12,
+      "vrs": 1,
+      "matches": 3,
+      "date": "2024-06-04",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=NAC&round=S30_SoloZBVictoryCashCup_Event1Round2_NAC",
+      "eventNo": 1
+    },
+    {
+      "id": "auto-s30-2e86feed363a",
+      "player": "ひょっこりもりりん",
+      "playerRaw": "BRN ひょっこりもりりん",
+      "rank": 67,
+      "points": 100,
+      "kills": 8,
+      "vrs": 1,
+      "matches": 3,
+      "date": "2024-06-04",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=NAC&round=S30_SoloZBVictoryCashCup_Event1Round2_NAC",
+      "eventNo": 1
+    },
+    {
+      "id": "auto-s30-3b4837d76900",
+      "player": "TakoBeL",
+      "playerRaw": "LYNX TakoBeL",
+      "rank": 63,
+      "points": 100,
+      "kills": 8,
+      "vrs": 1,
+      "matches": 3,
+      "date": "2024-07-16",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=NAC&round=S30_SoloZBVictoryCashCup_Event5Round2_NAC",
+      "eventNo": 5
+    },
+    {
+      "id": "auto-s30-54270253e968",
+      "player": "zerua",
+      "playerRaw": "Faction 朝倉未来",
+      "rank": 98,
+      "points": 100,
+      "kills": 4,
+      "vrs": 1,
+      "matches": 3,
+      "date": "2024-07-16",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=NAC&round=S30_SoloZBVictoryCashCup_Event5Round2_NAC",
+      "eventNo": 5
+    },
+    {
+      "id": "auto-s30-000a713b1ecc",
+      "player": "まぐろのほっぺ",
+      "playerRaw": "まぐろのほっぺ",
+      "rank": 87,
+      "points": 100,
+      "kills": 5,
+      "vrs": 1,
+      "matches": 3,
+      "date": "2024-07-30",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=NAC&round=S30_SoloZBVictoryCashCup_Event7Round2_NAC",
+      "eventNo": 7
+    },
+    {
+      "id": "auto-s30-67994e2d2de8",
+      "player": "みるやちぇ",
+      "playerRaw": "orz MilkÿGotyǃ",
+      "rank": 47,
+      "points": 100,
+      "kills": 11,
+      "vrs": 1,
+      "matches": 3,
+      "date": "2024-07-30",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=NAC&round=S30_SoloZBVictoryCashCup_Event7Round2_NAC",
+      "eventNo": 7
+    },
+    {
+      "id": "auto-s30-9ee62ca0e426",
+      "player": "Dark",
+      "playerRaw": "Dxrkÿzǃ",
+      "rank": 46,
+      "points": 100,
+      "kills": 11,
+      "vrs": 1,
+      "matches": 3,
+      "date": "2024-07-30",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=NAC&round=S30_SoloZBVictoryCashCup_Event7Round2_NAC",
+      "eventNo": 7
+    }
+  ],
+  "officialRule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
+  "decision": "only exact 7 complete-round2 1VR results; $100 per individual; payment completion not established"
+}

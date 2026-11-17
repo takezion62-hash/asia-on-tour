@@ -6,8 +6,8 @@ const path = require('node:path');
 const {BATCHES, PARALLEL, runBatches, failedChecks} =
   require('../scripts/run-historical-dry-runs.cjs');
 
-test('all 34 historical evidence checks remain registered exactly once', () => {
-  assert.equal(BATCHES.length, 34);
+test('all 35 historical evidence checks remain registered exactly once', () => {
+  assert.equal(BATCHES.length, 35);
   assert.equal(new Set(BATCHES).size, BATCHES.length);
   for (const script of BATCHES) {
     assert.match(script, /^scripts\/[a-z0-9-]+\.cjs$/);
