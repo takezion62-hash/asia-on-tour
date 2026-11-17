@@ -88,12 +88,9 @@ for(const item of entries){
   }
   existingUUIDs.set(uuid,name);
  }
- const collisions=results.filter(r=>r.seasonId===t.seasonId&&r.date===t.date&&
-   r.region===t.region&&r.tournamentId===t.tournamentId&&
-   (r.id===t.id||r.rank===t.rank||
-    (Array.isArray(r.players)&&
-     JSON.stringify([...r.players].sort())===JSON.stringify([...t.players].sort()))||
-    (t.players.length===1&&r.player===t.player)));
+ // A Round1 qualifier can precede a separately verified Round2 cash final.
+ // Compare exact IDs globally, then detect collisions only in the award round.
+ const collisions=results.filter(r=>V.awardCollision(r,t));
  must(collisions.length<=1,'duplicate matches for same tournament: '+t.id);
  if(collisions.length){
   const row=collisions[0],matches=ledger.entries.filter(e=>e.recordId===row.id);
