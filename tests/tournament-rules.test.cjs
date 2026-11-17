@@ -11,8 +11,8 @@ const clone=x=>JSON.parse(JSON.stringify(x));
 
 test('shared official tournament rules include review-only Solo Series Finals and approved types',()=>{
  assert.deepEqual(validateRegistry(registry,tournaments),[]);
- assert.equal(registry.rules.length,28);
- assert.equal(Object.keys(RULES).length,12);
+ assert.equal(registry.rules.length,30);
+ assert.equal(Object.keys(RULES).length,14);
  assert.equal(Object.keys(CUT_OFFS).length,12);
  for(const rule of registry.rules){
   if(rule.series==='victory-cup')assert.strictEqual(RULES[rule.id].source,rule.source);
@@ -399,4 +399,34 @@ test('S43 Arenas Boxfights Cash Cup: one existing solo event, 12-match cap, offi
  assert.match(change(x=>{x.eventIds=['S42_ArenaCashCup']}),/Arenas Solo/);
  assert.match(change(x=>{x.matchCaps['単一ラウンド']=11}),/Arenas Solo/);
  assert.match(change(x=>{x.autoApproval='review-only'}),/Arenas Solo/);
+});
+
+test('S37 Console and S42 Reload Duos official thresholds are exact, cash stays Round2-only',()=>{
+ const cases=[
+  ['ch6s4-console-duos-victory','S37','S37_ConsoleDuosCashCups',7,500,250],
+  ['ch7s4-reload-duos-victory-cup','S42','S42_ReloadDuosVictoryCup',10,300,120]
+ ];
+ for(const [id,season,event,cap,major,minor] of cases){
+  const rule=registry.rules.find(x=>x.id===id);
+  assert.ok(rule);assert.equal(rule.seasonId,season);
+  assert.deepEqual(rule.eventIds,[event]);
+  assert.equal(rule.autoApproval,'verified-duo-qualifier-only');
+  assert.equal(rule.requireVerifiedRoster,true);
+  assert.equal(rule.team,'duo');
+  assert.deepEqual(rule.matchCaps,{'予選':cap,'賞金決勝':3});
+  assert.deepEqual(rule.advance,{EU:major,NAC:major,NAW:minor,OCE:minor,ME:minor,BR:minor});
+  assert.equal(rule.teamPrizePerVictory,200);
+  assert.equal(rule.prizePerVictory,100);
+  for(const change of [
+   x=>{x.advance.NAW=major},
+   x=>{x.matchCaps['予選']++},
+   x=>{x.teamPrizePerVictory=100},
+   x=>{x.prizePerVictory=200},
+   x=>{x.requireVerifiedRoster=false},
+   x=>{x.eventIds=['FAKE']}
+  ]){
+   const copy=clone(registry);change(copy.rules.find(x=>x.id===id));
+   assert.notDeepEqual(validateRegistry(copy,tournaments),[],id+' tampering must be denied');
+  }
+ }
 });
