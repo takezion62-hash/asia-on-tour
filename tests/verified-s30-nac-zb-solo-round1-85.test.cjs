@@ -111,7 +111,9 @@ test('archived source blob attribution and event cutoff are stable after rebase'
   assert.equal(g.oldBlob.length,40);
   if(g.eventNo===8){
    assert.equal(g.oldBlob,'6af9cc80993405327bf07ef8620bfaddc717d7d1');
-   assert.equal(g.rankMax,800);
+   assert.equal(g.oldLastSeenRank,800);
+   assert.equal(g.rankMax,709);
+   assert.ok(g.rankMax<g.oldLastSeenRank,'only ranks supported by original pages are included');
   }else{
    assert.equal(g.oldBlob,'43d4af41369f1e3fc30baf60c84de9b8062ff47b');
   }
