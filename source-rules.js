@@ -156,7 +156,8 @@
       ?'<div class="source-rule-fact"><span>決勝賞金</span><strong>'+(
         Number.isFinite(rule.prizePerVictory)
           ?(['squad','duo'].includes(rule.team)&&Number.isFinite(rule.teamPrizePerVictory)
-            ?'決勝1VRにつき各選手
+            ?'決勝1VRにつき各選手$'+fmtNumber(rule.prizePerVictory)+'（チーム合計$'+fmtNumber(rule.teamPrizePerVictory)+'）'
+            :'決勝1VRにつき'+(rule.series==='performance-evaluation'?'各選手':'')+'$'+fmtNumber(rule.prizePerVictory)+'（規則上）')
           :'VRごとの賞金単価は未登録（0VRは$0で記録可能）'
       )+'</strong></div>':'';
     const evalNote=rule?.series==='performance-evaluation'?
