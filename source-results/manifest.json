@@ -2,11 +2,11 @@
   "version": 1,
   "role": "generated canonical-source snapshot; results.json remains authoritative in phase 1",
   "canonicalFile": "results.json",
-  "canonicalSha256": "f3a3260b69620c72aa1e562a7f1c6d03c7b3d7a608961b9d90cf24da83e54623",
-  "count": 8395,
-  "teamPrizeCents": 9476000,
+  "canonicalSha256": "21a1702499795d32efe97125a60600532c741073f980edae784be1b922a92470",
+  "count": 8400,
+  "teamPrizeCents": 9576000,
   "unconfirmedPrizeRecords": 1455,
-  "personalPrizeCents": 9456000,
+  "personalPrizeCents": 9556000,
   "recordOrder": [
     "s42-me-slenderman-reload-skin-20261021-acris-chacha",
     "s42-me-slenderman-reload-skin-20261021-karf-alpha",
@@ -8402,7 +8402,12 @@
     "auto-s30-1943525c407a",
     "auto-s30-a5789323516d",
     "auto-s42-4bedc82598d6",
-    "auto-s42-e620bdfc931c"
+    "auto-s42-e620bdfc931c",
+    "manual-s37-naw-console-duos-20250915-r8-rakua-kmyt",
+    "manual-s37-naw-console-duos-20250915-r9-aoneko-mofu",
+    "manual-s37-naw-console-duos-20250915-r10-pegu-firu",
+    "manual-s37-naw-console-duos-20250915-r14-dynamic-bot",
+    "manual-s37-oce-console-duos-20251025-r4-mofu-macaron"
   ],
   "shards": [
     {
@@ -8534,11 +8539,11 @@
     {
       "seasonId": "S37",
       "file": "source-results/S37.json",
-      "count": 95,
-      "teamPrizeCents": 400000,
+      "count": 100,
+      "teamPrizeCents": 500000,
       "unconfirmedPrizeRecords": 0,
-      "personalPrizeCents": 400000,
-      "sha256": "35f62074a9e9a78d64ef65d70a85de29ce105ca43eb576c2cfd2cafb8863b8d6"
+      "personalPrizeCents": 500000,
+      "sha256": "5806b5bdf413ffee479dc4318281df1dd4c219ca7539ba0743cc28f43c41e1ca"
     },
     {
       "seasonId": "S38",
