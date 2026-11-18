@@ -37,7 +37,7 @@ let added=[];
 for(const x of verified.manifest.rows){
  const source=reviews.proposals.filter(z=>z.id===x.id);
  fail(source.length===1&&sameScannedCandidate(source[0],x),'candidate changed '+x.id);
- fail(verifiedPartialPage(x,{end},scan),'rank not in mature prefix '+x.id);
+ fail((scan.complete===true&&scan.pages>=scan.totalPages)||verifiedPartialPage(x,{end},scan),'rank not in mature completed/prefix leaderboard '+x.id);
  fail(scan.proposals.filter(z=>z.id===x.id&&sameScannedCandidate(z,x)).length===1,
   'saved exact score and Epic ID mismatch '+x.id);
  fail(x.players.every(n=>known.has(n))&&x.teamAccountIds.every(y=>/^[0-9a-f]{32}$/.test(y)),
