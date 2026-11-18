@@ -49,7 +49,34 @@ for(const original of proof.manifest.rows){
     'Round'+(original.kind==='予選'?1:2)+'_'+original.region&&
   rule.eventIds.includes(eventId),'official event and Round ID mismatch '+original.id);
  const key='epicgames_'+eventId+'_'+original.region+'/'+windowId;
- const cp=scans[key];must(cp?.rankingOrderValid===true&&cp.proposals?.filter(x=>
+ const currentCp=scans[key];
+ let cp=currentCp;
+ // A later provider transient on page 5 must not invalidate a previously
+ // verified, contiguous 4-page prefix containing these exact 15 candidates.
+ // Require BOTH the original pre-error source checkpoint and the latest
+ // checkpoint to agree on candidate, region, score, rank and Epic pair.
+ if(original.seasonId==='S35'&&original.date==='2025-05-24'&&
+  original.kind==='予選'&&currentCp?.lastErrorCode==='OSIRION_TRANSIENT'){
+  const archive=load('data/manual-approvals/20261118-s35-me-event2-clean-prefix.json');
+  must(archive.version===1&&
+   archive.sourceCommit==='ad1d06e4b08d757f8ecdb5417bd5e580cc37d8a1'&&
+   archive.key===key&&
+   key==='epicgames_S35_VictoryDuosCup_ME/S35_VictoryDuosCup_Event2Round1_ME',
+   'archived source identity differs '+original.id);
+  const originalCp=archive.checkpoint;
+  must(originalCp.complete===false&&originalCp.rankingOrderValid===true&&
+   originalCp.pages===4&&originalCp.nextPage===4&&
+   originalCp.totalPages===73&&originalCp.lastSeenRank===400&&
+   !originalCp.lastErrorCode&&!originalCp.lastError&&!originalCp.retryAfter&&
+   originalCp.emptyAttempts===0&&
+   originalCp.proposals?.filter(x=>sameScannedCandidate(x,original)).length===1&&
+   currentCp.rankingOrderValid===true&&currentCp.lastSeenRank>=originalCp.lastSeenRank&&
+   currentCp.nextPage>=originalCp.nextPage&&
+   currentCp.proposals?.filter(x=>sameScannedCandidate(x,original)).length===1,
+   'archived clean prefix not independently confirmed in latest scan '+original.id);
+  cp=originalCp;
+ }
+ must(cp?.rankingOrderValid===true&&cp.proposals?.filter(x=>
   sameScannedCandidate(x,original)).length===1,'original leaderboard score differs '+original.id);
  const month=original.date.slice(0,7);
  if(!calendar.has(month))calendar.set(month,load('calendar-history/'+month+'.json').sessions);
