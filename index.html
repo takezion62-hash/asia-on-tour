@@ -863,7 +863,7 @@
   <link rel="stylesheet" href="./player-style.css?v=four-axis-v6-20261112">
   <link rel="stylesheet" href="./tracker-summary.css?v=tracker-basics-v1-20261110">
   <link rel="stylesheet" href="./compare.css?v=1">
-  <link rel="stylesheet" href="./auto-sync-ui.css?v=1">
+  <link rel="stylesheet" href="./auto-sync-ui.css?v=2-new-player-backfill">
   <link rel="stylesheet" href="./participation.css?v=participation-batch-20261110-r1">
   <link rel="stylesheet" href="./source-rules.css?v=3">
   <link rel="stylesheet" href="./discovery-ui.css?v=1">
@@ -990,6 +990,22 @@
           <h2 id="auto-sync-heading">成績の自動更新 <span>AUTO SYNC</span></h2>
           <p>登録済み選手の海外大会成績を追跡する仕組みです。確認済みEpic IDと大会ウィンドウだけを対象とし、未確認の賞金は推測しません。</p>
           <div id="auto-sync-status" class="auto-sync-status" aria-live="polite">確認中…</div>
+          <section class="auto-sync-delta" aria-labelledby="new-player-backfill-heading">
+            <div class="auto-sync-delta-head">
+              <div>
+                <p class="auto-sync-delta-kicker">NEW PLAYER / HISTORY DELTA</p>
+                <h3 id="new-player-backfill-heading">新規選手の過去成績差分調査</h3>
+              </div>
+              <span class="auto-sync-delta-mode">直近2シーズン優先</span>
+            </div>
+            <p>新しく本人確認できたEpic IDを、以前に調査完了した大会と再照合する機能です。同じ大会はまとめて調べ、通常の過去大会調査とAPIの取得予算を共有します。</p>
+            <div id="new-player-backfill-status" class="auto-sync-status auto-sync-delta-stats" aria-live="polite">差分調査の状況を確認中…</div>
+            <div class="auto-sync-controls">
+              <button type="button" class="btn ghost" id="new-player-backfill-refresh">差分調査の状況を更新</button>
+              <a href="https://github.com/takezion62-hash/asia-on-tour/blob/main/docs/new-player-history-backfill.md" target="_blank" rel="noopener noreferrer">本人Epic IDの登録方法 ↗</a>
+            </div>
+            <p class="auto-sync-delta-note">※ 数値は直近の自動スキャン1回分。発見候補はそのまま賞金確定・掲載を意味しません。本人照合や公式大会ルールの承認を経て公開されます。</p>
+          </section>
           <p><a href="./verification.html" style="color:#8fe7ef;font-weight:800;text-decoration:underline">🔍 データ検証センターで確認待ち・重複疑いをまとめて見る ↗</a></p>
           <div class="auto-sync-controls">
             <button type="button" class="btn ghost" id="auto-sync-refresh">最新状況を確認</button>
@@ -1087,7 +1103,7 @@
   <script src="./discovery.js?v=discovery-20261112" defer></script>
   <script src="./discovery-ui.js?v=1" defer></script>
   <script src="./app.js?v=discovery-and-season-shards-20261112" defer></script>
-  <script src="./auto-sync-ui.js?v=4-approval-reasons" defer></script>
+  <script src="./auto-sync-ui.js?v=5-new-player-backfill" defer></script>
   <script src="./source-rules.js?v=9-arena-cash-20261114" defer></script>
 </body>
 </html>
