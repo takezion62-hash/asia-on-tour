@@ -197,7 +197,7 @@ async function fetchJson(url,opts={}){
    if(body?.success===false)throw Error('Osirion API error');
    return body;
   }catch(error){
-   if(attempt===attempts-1||!transientLeaderboardFailure(error))throw error;
+   if(attempt===attempts-1||(opts.stopOnRateLimit&&providerRateLimitFailure(error))||!transientLeaderboardFailure(error))throw error;
    if(retryDelayMs)await new Promise(resolve=>setTimeout(resolve,retryDelayMs*(attempt+1)));
   }
  }
@@ -210,6 +210,10 @@ async function getTournaments(historical=false){
   for(const item of response.tournaments)if(typeof item.eventId==='string')all.set(item.eventId,item);
  }
  return [...all.values()];
+}
+function providerRateLimitFailure(error){
+ const message=String(error?.message||error);
+ return /Osirion API HTTP 429\b/i.test(message);
 }
 function transientLeaderboardFailure(error){
  const msg=String(error?.message||error);
@@ -278,7 +282,9 @@ function holdLeaderboardWindow(checkpoint,error,win,page,time=Date.now()){
 }
 async function getLeaderboard(win,page){
  const params=new URLSearchParams({leaderboardEventId:win.fullEventId,leaderboardEventWindowId:win.windowId,page:String(page)});
- const result=await fetchJson('https://fnapi.osirion.gg/v1/tournaments/leaderboard?'+params);
+ // Do not immediately retry a quota-denied scoreboard. Preserve its checkpoint
+ // for a later scheduled run instead.
+ const result=await fetchJson('https://fnapi.osirion.gg/v1/tournaments/leaderboard?'+params,{stopOnRateLimit:true});
  const l=result?.leaderboard;
  const issue=leaderboardResponseError(win,page,l);
  if(issue)throw issue;
@@ -569,6 +575,7 @@ async function main(){
  const state=read(prefix+'-scan.json');
  if(state.version!==1||!state.windows||typeof state.windows!=='object')throw Error('checkpoint invalid');
  const pendingReviews=historical?read('history-sync-review.json').proposals:[];
+ const previousHistoricalStatus=historical?read('history-sync-status.json'):null;
  const active=historical?selectHistoricalWindows(windows,state,config,Date.now(),data.results,pendingReviews):selectActiveWindows(windows,state,config);
  // Capture ranking before checkpoint mutations; reporting does not affect selection.
  const priorityAudit=historical?historicalPriorityAudit(windows,state,data.results,{limit:50}):null;
@@ -611,10 +618,11 @@ async function main(){
     unknownCashCandidates:x.cashCandidates,finishable:x.finishable}))
   }));
  }
- let timeLimitReached=false;
+ let timeLimitReached=false,rateLimited=false,rateLimitRetryAfter=null,processedWindows=0;
  for(let windowIndex=0;windowIndex<active.length;windowIndex++){
   if(Date.now()>=scanDeadline){timeLimitReached=true;break}
   const win=active[windowIndex];
+  processedWindows++;
   const previous=state.windows[win.key];
   // Pre-2026 Unreal caches lack the original two Epic IDs. Re-fetch once; never
   // approve from a stale completed review-only checkpoint.
@@ -646,7 +654,11 @@ async function main(){
     if(skipped.code==='OSIRION_TRANSIENT')transientFailures++;
     else malformedFailures++;
     console.warn('OSIRION_LEADERBOARD_HELD '+JSON.stringify(skipped));
-    break; // Preserve previous confirmed pages, continue with other windows.
+    if(providerRateLimitFailure(error)){
+     rateLimited=true;
+     rateLimitRetryAfter=skipped.retryAfter;
+    }
+    break; // On 429 pause provider scanning; otherwise continue to another window.
    }
    if(page===0&&l.entries.length===0){
     const held=holdEmptyFirstPage(checkpoint,win);
@@ -680,6 +692,14 @@ async function main(){
    checkpoint.complete=checkpoint.nextPage>=l.totalPages||crossed;
   }
   state.windows[win.key]=checkpoint;
+  if(rateLimited){
+   console.warn('OSIRION_PROVIDER_RATE_LIMIT_PAUSE '+JSON.stringify({
+    window:win.key,page:checkpoint.nextPage,processedWindows,scannedPages:scanned,
+    retryAfter:rateLimitRetryAfter,savedPages:checkpoint.pages,
+    action:'checkpoint saved; defer further provider calls until a later run'
+   }));
+   break;
+  }
   if(budget<=0)break;
  }
  const coverage=scanCoverage(windows,state,Date.now());
@@ -743,15 +763,19 @@ async function main(){
  const proposals=pending.filter(x=>!importedIds.has(x.id)).map(x=>reasons.has(x.id)?{...x,reviewReason:reasons.get(x.id)}:x);
  const unique=new Map(proposals.map(x=>[x.id,x]));
  const finished=Object.entries(state.windows).filter(([key,w])=>eligible.has(key)&&w.complete).length;
+ const previousFinished=Number.isSafeInteger(previousHistoricalStatus?.completedWindows)?previousHistoricalStatus.completedWindows:0;
+ const newlyCompletedWindows=historical?Math.max(0,finished-previousFinished):null;
  const reviewOnlyWindows=windows.filter(w=>w.series!=='victory-cup').length;
  const reviewOnlyCandidates=unique.size?Array.from(unique.values()).filter(p=>p.reviewOnly===true).length:0;
  const cumulativeApprovals=data.updates.entries.filter(x=>x.title?.startsWith('公式規則で自動承認：')).reduce((sum,x)=>sum+(x.recordIds?.length||0),0);
- const status={version:1,state:'checked',checkedAt:stamp,mode:'review',scope:historical?'history':'recent',dateMode:historical?(storedConfig.toDate==='rolling'?'rolling':'fixed'):null,selectedWindows:active.length,fromDate:historical?config.fromDate:null,toDate:historical?config.toDate:null,provider:'osirion',linkedPlayers:accounts.length,trackedWindows:windows.length,found:unique.size,skipped:invalidRows,imported,scannedPages:scanned,completedWindows:finished,identityConflicts:conflicts.length,alreadyRegistered:recordedFromReview,autoApprovedTotal:cumulativeApprovals,invalidCachedCandidates:invalidCached,manualReviewCandidates:manuallyHeld,autoApprovedParticipationThisRun:verifiedParticipationIds.size,autoApprovedCosmeticThisRun:importedCosmetics,autoApprovedCashThisRun:cash.approved.length,autoApprovedPerformanceThisRun:performance.approved.length,autoApprovedUnrealThisRun:unreal.approved.length,autoApprovedDuoQualifierThisRun:duo.approved.length,timeLimitReached,retryWindows:coverage.retryCount,coverage,...(historical?{reviewRecovery:reviewRecoverySummary,priorityAudit:{...priorityAudit,selected:selectedPriority}}:{}),transientFailures,malformedFailures,skippedLeaderboards:skippedLeaderboards.slice(0,15),reviewOnlyWindows,reviewOnlyCandidates,unmappedEvents:unmapped.length,unmappedEventIds:unmapped.slice(0,12),message:'Osirionで'+accounts.length+'アカウントIDを追跡。今回の公式規則による自動承認'+imported+'件、追加確認待ち'+unique.size+'件、名義照合保留'+conflicts.length+'件。'};
+ const status={version:1,state:'checked',checkedAt:stamp,mode:'review',scope:historical?'history':'recent',dateMode:historical?(storedConfig.toDate==='rolling'?'rolling':'fixed'):null,selectedWindows:active.length,fromDate:historical?config.fromDate:null,toDate:historical?config.toDate:null,provider:'osirion',linkedPlayers:accounts.length,trackedWindows:windows.length,found:unique.size,skipped:invalidRows,imported,scannedPages:scanned,completedWindows:finished,identityConflicts:conflicts.length,alreadyRegistered:recordedFromReview,autoApprovedTotal:cumulativeApprovals,invalidCachedCandidates:invalidCached,manualReviewCandidates:manuallyHeld,autoApprovedParticipationThisRun:verifiedParticipationIds.size,autoApprovedCosmeticThisRun:importedCosmetics,autoApprovedCashThisRun:cash.approved.length,autoApprovedPerformanceThisRun:performance.approved.length,autoApprovedUnrealThisRun:unreal.approved.length,autoApprovedDuoQualifierThisRun:duo.approved.length,timeLimitReached,processedWindows,providerRateLimitPaused:rateLimited,providerRateLimitRetryAfter:rateLimitRetryAfter,
+  ...(historical?{newlyCompletedWindows}:{}),retryWindows:coverage.retryCount,coverage,...(historical?{reviewRecovery:reviewRecoverySummary,priorityAudit:{...priorityAudit,selected:selectedPriority}}:{}),transientFailures,malformedFailures,skippedLeaderboards:skippedLeaderboards.slice(0,15),reviewOnlyWindows,reviewOnlyCandidates,unmappedEvents:unmapped.length,unmappedEventIds:unmapped.slice(0,12),message:'Osirionで'+accounts.length+'アカウントIDを追跡。今回の公式規則による自動承認'+imported+'件、追加確認待ち'+unique.size+'件、名義照合保留'+conflicts.length+'件。'};
  state.checkedAt=stamp;
  write(prefix+'-scan.json',state);
  write(prefix+'-review.json',{version:1,status:'review',checkedAt:stamp,proposals:[...unique.values()]});
  write(prefix+'-status.json',status);
- console.log((historical?'OSIRION_HISTORY_REVIEW ':'OSIRION_REVIEW ')+JSON.stringify({scannedPages:scanned,linkedPlayers:accounts.length,identityConflicts:conflicts.length,windows:windows.length,unmappedEvents:unmapped.length,proposals:unique.size,imported,participation:verifiedParticipationIds.size,cosmetic:importedCosmetics,cash:cash.approved.length,performance:performance.approved.length,unreal:unreal.approved.length,duo:duo.approved.length,finished,transientFailures,malformedFailures,heldWindows:skippedLeaderboards.length}));
+ console.log((historical?'OSIRION_HISTORY_REVIEW ':'OSIRION_REVIEW ')+JSON.stringify({scannedPages:scanned,linkedPlayers:accounts.length,identityConflicts:conflicts.length,windows:windows.length,unmappedEvents:unmapped.length,proposals:unique.size,imported,participation:verifiedParticipationIds.size,cosmetic:importedCosmetics,cash:cash.approved.length,performance:performance.approved.length,unreal:unreal.approved.length,duo:duo.approved.length,finished,processedWindows,rateLimited,rateLimitRetryAfter,newlyCompletedWindows,
+  transientFailures,malformedFailures,heldWindows:skippedLeaderboards.length}));
 }
 if(require.main===module)main().catch(e=>{console.error('OSIRION_SYNC_ERROR '+e.stack);process.exitCode=1});
-module.exports={identity,linkedAccounts,parseStage,parseReviewStage,discover,discoverUnmapped,selectActiveWindows,selectHistoricalWindows,historicalEvidenceScore,historicalEvidenceIndex,historicalPriorityAudit,resolveHistoricalScope,fetchJson,advancementLimit,normalizeRow,getTournaments,getLeaderboard,leaderboardResponseError,recoverableLeaderboardFailure,holdLeaderboardWindow,holdEmptyFirstPage,transientLeaderboardFailure,main};
+module.exports={identity,linkedAccounts,parseStage,parseReviewStage,discover,discoverUnmapped,selectActiveWindows,selectHistoricalWindows,historicalEvidenceScore,historicalEvidenceIndex,historicalPriorityAudit,resolveHistoricalScope,fetchJson,advancementLimit,normalizeRow,getTournaments,getLeaderboard,leaderboardResponseError,recoverableLeaderboardFailure,holdLeaderboardWindow,holdEmptyFirstPage,transientLeaderboardFailure,providerRateLimitFailure,main};
