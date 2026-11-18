@@ -34,6 +34,9 @@ test('Both historic ME final attendance rows remain proof-locked, prize unknown 
 });
 test('The last two candidates leave the review queue, cash total unchanged and update log complete',()=>{
  assert.equal(read('history-sync-review.json').proposals.length,0);
+ const holds=read('data/manual-approvals/review-only-generic-v1.json').held;
+ assert.equal(holds.filter(x=>proof.IDS.includes(x.id)).length,0,
+  'only independently verified Epic originals may be released from historical hold');
  const rows=readResults(root).rows.filter(x=>proof.IDS.includes(x.id));
  assert.equal(rows.length,2);
  assert.deepEqual(rows.map(x=>[x.player,x.rank,x.points,x.kills,x.vrs,x.matches]),[
