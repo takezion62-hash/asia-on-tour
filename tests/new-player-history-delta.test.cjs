@@ -106,6 +106,22 @@ test('HTTP 429 stops all delta requests, keeps completed pages and defers the sa
  const blocked=await harness(state,[account(A,'Old'),account(B,'NewB')],async()=>{throw Error('should not fetch held newest cup')},{pageBudget:0});
  assert.equal(blocked.pagesScanned,0);
 });
+test('empty original first page never counts as completed player recheck',async()=>{
+ const scan=checkpoint();
+ enrollDelta(scan,[account(A,'Old')],all,'2026-11-18T07:00:00Z');
+ let calls=0;
+ const stats=await harness(scan,[account(A,'Old'),account(B,'New')],async()=>{
+  calls++;return {totalPages:1,entries:[]};
+ });
+ assert.equal(calls,2,'other completed windows may be visited after malformed response');
+ assert.equal(stats.windowsCompleted,0);
+ assert.equal(stats.pagesScanned,0);
+ assert.equal(stats.heldWindows,2);
+ assert.equal(stats.pendingWindows,3);
+ assert.equal(scan.windows[s43.key].complete,true);
+ assert.equal(scan.newPlayerBackfill.work[s43.key].nextPage,0);
+ assert.ok(scan.newPlayerBackfill.work[s43.key].retryAfter);
+});
 test('only explicitly verified Epic ID or matching Fortnite Tracker URL allows a no-results player to enter scan roster',()=>{
  const uuid='aabbccdd-1234-5678-90ab-cdef12345678';
  const fixed='c'.repeat(32);
