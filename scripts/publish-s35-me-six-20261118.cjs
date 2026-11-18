@@ -37,6 +37,7 @@ let added=[];
 for(const x of verified.manifest.rows){
  const source=reviews.proposals.filter(z=>z.id===x.id);
  fail(source.length===1&&sameScannedCandidate(source[0],x),'candidate changed '+x.id);
+ console.log('S35_SIX_CHECKPOINT '+JSON.stringify({id:x.id,complete:scan.complete,pages:scan.pages,nextPage:scan.nextPage,totalPages:scan.totalPages,lastSeenRank:scan.lastSeenRank,lastSuccessAt:scan.lastSuccessAt,lastErrorCode:scan.lastErrorCode,lastError:scan.lastError,retryAfter:scan.retryAfter,emptyAttempts:scan.emptyAttempts,hasCandidate:scan.proposals.some(z=>z.id===x.id),end}));
  fail((scan.complete===true&&scan.pages>=scan.totalPages)||verifiedPartialPage(x,{end},scan),'rank not in mature completed/prefix leaderboard '+x.id);
  fail(scan.proposals.filter(z=>z.id===x.id&&sameScannedCandidate(z,x)).length===1,
   'saved exact score and Epic ID mismatch '+x.id);
