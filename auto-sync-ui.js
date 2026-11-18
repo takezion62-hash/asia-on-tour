@@ -62,6 +62,51 @@
     }else{const p=document.createElement('p');p.textContent='未完了の開催枠なし';box.append(p);}
     root.append(box);
   }
+
+  const deltaArea=document.getElementById('new-player-backfill-status');
+  const deltaBtn=document.getElementById('new-player-backfill-refresh');
+  const safeCount=(number,suffix)=>Number.isSafeInteger(number)&&number>=0?fmt(number)+suffix:'—';
+  const jst=text=>{
+    const stamp=typeof text==='string'?Date.parse(text):NaN;
+    return Number.isFinite(stamp)?new Date(stamp).toLocaleString('ja-JP',{timeZone:'Asia/Tokyo'}):'—';
+  };
+
+  // The status is emitted by the existing historical scanner. This panel is
+  // read-only: a newly discovered proposal is NOT necessarily a published row.
+  function renderNewPlayerBackfill(status){
+    if(!deltaArea)return;
+    const data=status?.newPlayerBackfill;
+    if(!data||typeof data!=='object'||Array.isArray(data)){
+      deltaArea.textContent='差分調査の実行結果はまだありません。過去大会の初回実行後に表示されます。';
+      return;
+    }
+    const values=[
+      ['今回検出した新規Epic ID',safeCount(data.newAccounts,'件')],
+      ['再調査待ちの開催枠',safeCount(data.pendingWindows,'枠')],
+      ['今回確認した開催枠',safeCount(data.windowsVisited,'枠')],
+      ['今回再調査が完了した枠',safeCount(data.windowsCompleted,'枠')],
+      ['今回取得した順位表',safeCount(data.pagesScanned,'ページ')],
+      ['今回発見した確認候補',safeCount(data.proposalsFound,'件')],
+      ['今回の再試行保留',safeCount(data.heldWindows,'枠')],
+      ['最新の過去大会チェック',jst(status.checkedAt)]
+    ];
+    deltaArea.replaceChildren(...values.map(([label,value])=>field(label,value)));
+    const note=document.createElement('p');note.className='auto-sync-message';
+    if(data.rateLimited===true){
+      const retry=jst(data.retryAfter);
+      note.textContent='APIアクセス制限により新規取得を中断しました。確認済みページと再調査の進捗は保持しています。再試行可能時刻：'+retry;
+    }else if(data.initialized===true){
+      note.textContent='初回登録済みEpic IDの基準化が完了。次回以降、新しく確認されたEpic IDが差分調査の対象になります。';
+    }else if(Number.isSafeInteger(data.pendingWindows)&&data.pendingWindows>0){
+      note.textContent='差分調査を段階的に実施中。直近2シーズンを優先し、APIの使用量を抑えて調査済み大会を再確認しています。';
+    }else if(data.newAccounts===0&&data.pendingWindows===0){
+      note.textContent='現在は新しい本人確認済みEpic IDの登録待ちです。登録後は過去に調査完了した大会も順次再確認します。';
+    }else{
+      note.textContent='直近の差分調査結果です。新規候補は既存の本人・大会・賞金審査を経てから掲載されます。';
+    }
+    deltaArea.append(note);
+  }
+
   async function refresh(){
     btn.disabled=true;area.textContent='確認中…';candidates.textContent='候補を確認中…';
     try{
@@ -96,12 +141,15 @@
   async function refreshHistory(){
     if(!historyArea||!historyCandidates||!historyBtn)return;
     historyBtn.disabled=true;
+    if(deltaBtn)deltaBtn.disabled=true;
     historyArea.textContent='過去大会の調査状況を確認中…';
+    if(deltaArea)deltaArea.textContent='差分調査の状況を確認中…';
     try{
       const response=await fetch(new URL('history-sync-status.json',base),{cache:'no-store'});
       if(!response.ok)throw Error('history status HTTP '+response.status);
       const status=await response.json();
       if(status.version!==1||status.scope!=='history')throw Error('unknown history status');
+      renderNewPlayerBackfill(status);
       const checked=status.checkedAt?new Date(status.checkedAt).toLocaleString('ja-JP',{timeZone:'Asia/Tokyo'}):'未実行';
       historyArea.replaceChildren(
         field('対象期間',(status.fromDate||'—')+' ～ '+(status.toDate||'—')),
@@ -141,8 +189,14 @@
     }catch{
       historyArea.textContent='過去大会の調査状況を取得できません。';
       historyCandidates.textContent='—';
-    }finally{historyBtn.disabled=false;}
+      if(deltaArea)deltaArea.textContent='差分調査の情報を取得できませんでした。';
+    }finally{
+      historyBtn.disabled=false;
+      if(deltaBtn)deltaBtn.disabled=false;
+    }
   }
   if(historyBtn){historyBtn.addEventListener('click',refreshHistory);refreshHistory();}
+  if(deltaBtn)deltaBtn.addEventListener('click',refreshHistory);
+  btn.addEventListener('click',refreshHistory);
 
 })();

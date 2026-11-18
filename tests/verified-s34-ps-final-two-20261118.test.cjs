@@ -32,8 +32,14 @@ test('Both historic ME final attendance rows remain proof-locked, prize unknown 
   }
  }
 });
-test('The last two candidates leave the review queue, cash total unchanged and update log complete',()=>{
- assert.equal(read('history-sync-review.json').proposals.length,0);
+test('Both independently approved PlayStation entries stay out of the live review queue with cash unchanged',()=>{
+ const pending=read('history-sync-review.json').proposals;
+ // New, unrelated candidates can appear through ordinary automatic backfill.
+ // Never dismiss them merely to satisfy a historic "queue empty" assertion.
+ assert.equal(new Set(pending.map(x=>x.id)).size,pending.length,
+  'review queue must not contain duplicate IDs');
+ assert.ok(pending.every(x=>!proof.IDS.includes(x.id)),
+  'both independently adjudicated Epic originals must remain resolved');
  const holds=read('data/manual-approvals/review-only-generic-v1.json').held;
  assert.equal(holds.filter(x=>proof.IDS.includes(x.id)).length,0,
   'only independently verified Epic originals may be released from historical hold');

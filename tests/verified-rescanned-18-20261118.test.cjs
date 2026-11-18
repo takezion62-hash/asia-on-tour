@@ -49,9 +49,13 @@ test('S30 14 and S35 2 attendance plus S37 two 0VR cash-free finals; two held Pl
  assert.ok([...s30,...s35].every(x=>x.kind==='参加確認'&&x.prize===0&&x.round.endsWith('参加確認')));
  assert.ok(s37.every(x=>x.kind==='賞金決勝'&&x.vrs===0&&x.prize===0&&x.points===0));
  const remaining=read('history-sync-review.json').proposals;
- assert.ok(remaining.length<=2);
- assert.ok(remaining.every(x=>x.seasonId==='S34'&&x.tournamentId==='ch6s2-playstation-cup'));
- assert.ok(remaining.every(x=>!evidence.IDS.includes(x.id)));
+ // The review queue is live: fresh, unrelated historical discoveries may be
+ // added after this batch was published. Verify only its adjudicated IDs stay
+ // absent instead of asserting a stale global queue size or season.
+ assert.equal(new Set(remaining.map(x=>x.id)).size,remaining.length,
+  'pending historical candidate IDs must remain unique');
+ assert.ok(remaining.every(x=>!evidence.IDS.includes(x.id)),
+  'the 18 independently approved results must never reappear as pending');
  const update=read('updates.json').entries.find(x=>x.id==='verified-original-epic-followup18-20261118');
  assert.equal(update.recordIds.length,18);
 });
