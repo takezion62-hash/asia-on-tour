@@ -1,7 +1,7 @@
 {
   "version": 1,
   "sourceCheckedAt": "2026-11-07T23:16:39.215Z",
-  "total": 51,
+  "total": 48,
   "alreadyResolved": 0,
   "byYear": [
     {
@@ -10,7 +10,7 @@
     },
     {
       "name": "2025",
-      "count": 27
+      "count": 24
     }
   ],
   "byRegion": [
@@ -24,7 +24,7 @@
     },
     {
       "name": "NAW",
-      "count": 17
+      "count": 14
     }
   ],
   "byTournament": [
@@ -39,10 +39,6 @@
     {
       "name": "PlayStation Cup / ME / 2025",
       "count": 2
-    },
-    {
-      "name": "Squid Grounds Cash Cup / NAW / 2025",
-      "count": 3
     },
     {
       "name": "ZB Solo Victory Cup / NAC / 2024",
@@ -60,7 +56,7 @@
     },
     {
       "name": "rules-review",
-      "count": 5
+      "count": 2
     }
   ],
   "queue": [
@@ -654,105 +650,6 @@
         "seenPages": 1,
         "totalPages": 1,
         "sourceKey": "epicgames_S34_PlaystationCup_ME/S34_PlaystationCupFinal_ME",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s36-18e307b1862e",
-      "origin": "history",
-      "date": "2025-07-19",
-      "year": "2025",
-      "region": "NAW",
-      "tournamentId": "ch6s3-squid-grounds-cash-cup",
-      "event": "Squid Grounds Cash Cup",
-      "round": "Event 4 · Round 2 / 参加確認",
-      "player": "AUR shxrk 無 / おろないと",
-      "kind": "参加確認",
-      "rank": 231,
-      "points": 0,
-      "kills": 0,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S36_SquidGroundVictoryDuosCup/?region=NAW&round=S36_VictoryDuosCup_Event4Round2_NAW",
-      "status": "rules-review",
-      "action": "公式規則・賞金・突破・スキン条件を個別確認",
-      "reason": "確認専用大会は自動承認不可",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": true,
-        "observedPartial": false,
-        "seenPages": 3,
-        "totalPages": 3,
-        "sourceKey": "epicgames_S36_SquidGroundVictoryDuosCup_NAW/S36_VictoryDuosCup_Event4Round2_NAW",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s36-41e61bfad34a",
-      "origin": "history",
-      "date": "2025-07-19",
-      "year": "2025",
-      "region": "NAW",
-      "tournamentId": "ch6s3-squid-grounds-cash-cup",
-      "event": "Squid Grounds Cash Cup",
-      "round": "Event 4 · Round 2 / 参加確認",
-      "player": "れすぶゆりる / りくとかい",
-      "kind": "参加確認",
-      "rank": 242,
-      "points": 0,
-      "kills": 0,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S36_SquidGroundVictoryDuosCup/?region=NAW&round=S36_VictoryDuosCup_Event4Round2_NAW",
-      "status": "rules-review",
-      "action": "公式規則・賞金・突破・スキン条件を個別確認",
-      "reason": "確認専用大会は自動承認不可",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": true,
-        "observedPartial": false,
-        "seenPages": 3,
-        "totalPages": 3,
-        "sourceKey": "epicgames_S36_SquidGroundVictoryDuosCup_NAW/S36_VictoryDuosCup_Event4Round2_NAW",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s36-5d963f28815a",
-      "origin": "history",
-      "date": "2025-07-19",
-      "year": "2025",
-      "region": "NAW",
-      "tournamentId": "ch6s3-squid-grounds-cash-cup",
-      "event": "Squid Grounds Cash Cup",
-      "round": "Event 4 · Round 2 / 参加確認",
-      "player": "Choco / ふぐ",
-      "kind": "参加確認",
-      "rank": 243,
-      "points": 0,
-      "kills": 0,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S36_SquidGroundVictoryDuosCup/?region=NAW&round=S36_VictoryDuosCup_Event4Round2_NAW",
-      "status": "rules-review",
-      "action": "公式規則・賞金・突破・スキン条件を個別確認",
-      "reason": "確認専用大会は自動承認不可",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": true,
-        "observedPartial": false,
-        "seenPages": 3,
-        "totalPages": 3,
-        "sourceKey": "epicgames_S36_SquidGroundVictoryDuosCup_NAW/S36_VictoryDuosCup_Event4Round2_NAW",
         "possibleExistingId": null
       },
       "rewardState": "cash-unconfirmed"

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-17T23:57:50.174Z",
+  "reviewedAt": "2026-11-18T00:47:26.872Z",
   "entries": [
     {
       "id": "auto-s43-21408f1d31bc",
@@ -31795,6 +31795,39 @@
       "candidateSha256": "646adae69282630cbc713ad4c4d640e76930782f1fc1bdbb009a3562a79306e6",
       "recordSha256": "9f05d877f7c3aae0fa024355e045f1b399708f9c64ab6cbd5555e0d1e66ce2ac",
       "evidence": "Exact saved original Epic leaderboard candidate, two player account UUIDs, official session and May 2025 Victory/qualifier conditions"
+    },
+    {
+      "id": "auto-s36-18e307b1862e",
+      "decision": "published",
+      "recordId": "auto-s36-18e307b1862e",
+      "policy": "attendance-only",
+      "approvedAt": "2026-11-18T00:47:26.872Z",
+      "approvedBy": "ChatGPT / owner-authorized verified review",
+      "source": "https://www.fortnite.com/competitive/events/S36_SquidGroundVictoryDuosCup/?region=NAW&round=S36_VictoryDuosCup_Event4Round2_NAW",
+      "rule": null,
+      "evidence": "Exact Epic account and team roster, canonical official event/calendar, ranked checkpoint with continuous mature rows or complete scan; duplicate check"
+    },
+    {
+      "id": "auto-s36-41e61bfad34a",
+      "decision": "published",
+      "recordId": "auto-s36-41e61bfad34a",
+      "policy": "attendance-only",
+      "approvedAt": "2026-11-18T00:47:26.872Z",
+      "approvedBy": "ChatGPT / owner-authorized verified review",
+      "source": "https://www.fortnite.com/competitive/events/S36_SquidGroundVictoryDuosCup/?region=NAW&round=S36_VictoryDuosCup_Event4Round2_NAW",
+      "rule": null,
+      "evidence": "Exact Epic account and team roster, canonical official event/calendar, ranked checkpoint with continuous mature rows or complete scan; duplicate check"
+    },
+    {
+      "id": "auto-s36-5d963f28815a",
+      "decision": "published",
+      "recordId": "auto-s36-5d963f28815a",
+      "policy": "attendance-only",
+      "approvedAt": "2026-11-18T00:47:26.872Z",
+      "approvedBy": "ChatGPT / owner-authorized verified review",
+      "source": "https://www.fortnite.com/competitive/events/S36_SquidGroundVictoryDuosCup/?region=NAW&round=S36_VictoryDuosCup_Event4Round2_NAW",
+      "rule": null,
+      "evidence": "Exact Epic account and team roster, canonical official event/calendar, ranked checkpoint with continuous mature rows or complete scan; duplicate check"
     }
   ]
 }
