@@ -27,6 +27,7 @@ on:
       - "scripts/publish-verified-finals-batch.cjs"
       - "scripts/publish-reviewed-s30-nac-zero-vr.cjs"
       - "scripts/scan-coverage.cjs"
+      - "scripts/history-sync-health.cjs"
       - "scripts/safe-sync-merge.cjs"
       - "scripts/verified-history-approval.cjs"
       - "scripts/auto-sync-core.cjs"
@@ -438,3 +439,7 @@ jobs:
           done
           echo "S30_VERIFIED_REVIEW_PUBLICATION failed after conflict-safe retries"
           exit 1
+
+      - name: Show historical progress and provider cooldown in run summary
+        if: success()
+        run: node scripts/history-sync-health.cjs

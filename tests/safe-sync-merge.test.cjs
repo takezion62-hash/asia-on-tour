@@ -69,10 +69,26 @@ test('history/recent: replay scan additions without overwriting new manual resul
   assert.equal(docs['updates.json'].entries[1].id,'manual-log');
   assert.ok(docs['updates.json'].entries.some(e=>e.id==='new-log'));
   assert.deepEqual(docs[x.p+'-review.json'].proposals.map(e=>e.id),['another-hold','held-only']);
+  assert.equal(docs[x.p+'-review.json'].checkedAt,'2026-11-07T11:00:00Z',
+   'provider scan timestamp must advance on a conflict-safe review merge');
   assert.equal(docs[x.p+'-scan.json'].windows['e/w'].nextPage,2);
   assert.equal(docs[x.p+'-scan.json'].windows['new/event'].nextPage,3);
   assert.equal(docs[x.p+'-status.json'].manuallyPublished,51);
   assert.equal(docs[x.p+'-status.json'].found,2);
+ }
+});
+test('review freshness moves forward, preserving newer manual timestamps and every pending candidate',()=>{
+ for(const scope of PREFIXES){
+  const x=scenario(scope);
+  x.latest.docs[x.p+'-review.json'].checkedAt='2026-11-07T12:00:00Z';
+  const out=mergeSnapshots(scope,x.base,x.scanned,x.latest);
+  assert.equal(out.docs[x.p+'-review.json'].checkedAt,'2026-11-07T12:00:00Z');
+  assert.deepEqual(out.docs[x.p+'-review.json'].proposals.map(row=>row.id),
+   ['another-hold','held-only']);
+  x.latest.docs[x.p+'-review.json'].checkedAt='2026-11-07T10:00:00Z';
+  x.scanned.docs[x.p+'-review.json'].checkedAt='2026-11-07T10:45:00Z';
+  const next=mergeSnapshots(scope,x.base,x.scanned,x.latest);
+  assert.equal(next.docs[x.p+'-review.json'].checkedAt,'2026-11-07T11:00:00Z');
  }
 });
 test('race/retry idempotency: same scanned delta already safely merged is never written twice',()=>{

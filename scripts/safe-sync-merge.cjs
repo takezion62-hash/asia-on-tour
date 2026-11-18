@@ -235,6 +235,12 @@ function mergeSnapshots(scope,base,scanned,latest,reviewed={version:1,entries:[]
   checkpoint.windows[key]=mergeCheckpoint(baseWin[key],value,checkpoint.windows[key],conflicts,key);
  }
  checkpoint.checkedAt=[checkpoint.checkedAt,c[cFile].checkedAt].filter(Boolean).sort().at(-1);
+ // The previous merge kept remote review.checkedAt unchanged, making the review
+ // screen look frozen despite successful provider scans. Refresh only its time:
+ // manual adjudications and review candidates continue to be merged safely.
+ review.checkedAt=[review.checkedAt,c[qFile].checkedAt,checkpoint.checkedAt]
+  .filter(x=>typeof x==='string'&&Number.isFinite(Date.parse(x)))
+  .sort((a,b)=>Date.parse(a)-Date.parse(b)).at(-1)||review.checkedAt||null;
  const scanStatus=c[sFile],latestStatus=n[sFile],stamp=scanStatus.checkedAt||'';
  const status=stamp>String(latestStatus.checkedAt||'')?{...latestStatus,...scanStatus}:{...scanStatus,...latestStatus};
  // Manual adjudications performed while the scan ran ALWAYS take precedence.
