@@ -1,7 +1,7 @@
 'use strict';
 const test=require('node:test');
 const assert=require('node:assert/strict');
-const {mergeSnapshots,logicalKey,mergeCheckpoint,changedSources}=require('../scripts/safe-sync-merge.cjs');
+const {mergeSnapshots,logicalKey,mergeCheckpoint,mergeNewPlayerBackfill,changedSources}=require('../scripts/safe-sync-merge.cjs');
 const clone=x=>JSON.parse(JSON.stringify(x));
 const ROW=id=>({
  id,date:'2026-11-07',region:'NAC',tournamentId:'s43-solo-vc',seasonId:'S43',
@@ -90,6 +90,34 @@ test('review freshness moves forward, preserving newer manual timestamps and eve
   const next=mergeSnapshots(scope,x.base,x.scanned,x.latest);
   assert.equal(next.docs[x.p+'-review.json'].checkedAt,'2026-11-07T11:00:00Z');
  }
+});
+test('history delta enrollment and page cursors survive source-verified merge to newer main',()=>{
+ const x=scenario('history'),file='history-sync-scan.json';
+ const staged={version:1,initializedAt:'2026-11-18T08:00:00Z',
+  knownAccountIds:['a'.repeat(32),'b'.repeat(32)],
+  work:{'test-window':{nextPage:2,pages:2,accountIds:['b'.repeat(32)]}},enrolledCount:1};
+ x.scanned.docs[file].newPlayerBackfill=clone(staged);
+ const out=mergeSnapshots('history',x.base,x.scanned,x.latest);
+ assert.deepEqual(out.docs[file].newPlayerBackfill,staged);
+ assert.equal(out.report.appended,1);
+ const base2=SNAP('history',clone(out.docs)),scan2=clone(base2),latest2=clone(base2);
+ scan2.docs[file].newPlayerBackfill.work['test-window'].nextPage=3;
+ scan2.docs[file].newPlayerBackfill.work['test-window'].pages=3;
+ const next=mergeSnapshots('history',base2,scan2,latest2);
+ assert.equal(next.docs[file].newPlayerBackfill.work['test-window'].nextPage,3);
+ const concurrent=clone(base2);
+ concurrent.docs[file].newPlayerBackfill.work['test-window'].nextPage=4;
+ assert.throws(()=>mergeSnapshots('history',base2,scan2,concurrent),
+  /concurrent new-player delta checkpoints differ/);
+});
+test('new-player backfill merge preserves remote state on read-only scans',()=>{
+ const baseline={version:1,initializedAt:'2026-11-18T08:00:00Z',
+  knownAccountIds:['a'.repeat(32)],work:{},enrolledCount:0};
+ const later=clone(baseline);
+ later.knownAccountIds.push('b'.repeat(32));
+ assert.deepEqual(mergeNewPlayerBackfill(baseline,baseline,later),later);
+ assert.deepEqual(mergeNewPlayerBackfill(baseline,later,baseline),later);
+ assert.deepEqual(mergeNewPlayerBackfill(undefined,baseline,undefined),baseline);
 });
 test('race/retry idempotency: same scanned delta already safely merged is never written twice',()=>{
  const x=scenario();let a=mergeSnapshots(x.scope,x.base,x.scanned,x.latest);
