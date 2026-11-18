@@ -1,12 +1,12 @@
 {
   "version": 1,
   "sourceCheckedAt": "2026-11-18T13:04:05.933Z",
-  "total": 18,
+  "total": 14,
   "alreadyResolved": 0,
   "byYear": [
     {
       "name": "2024",
-      "count": 13
+      "count": 9
     },
     {
       "name": "2025",
@@ -16,7 +16,7 @@
   "byRegion": [
     {
       "name": "NAC",
-      "count": 13
+      "count": 9
     },
     {
       "name": "NAW",
@@ -29,10 +29,6 @@
       "count": 5
     },
     {
-      "name": "Solo Victory Cup Battle Royale / NAC / 2024",
-      "count": 4
-    },
-    {
       "name": "ZB Solo Victory Cup / NAC / 2024",
       "count": 9
     }
@@ -40,7 +36,7 @@
   "byStatus": [
     {
       "name": "partial-scan",
-      "count": 13
+      "count": 9
     },
     {
       "name": "rules-review",
@@ -212,138 +208,6 @@
         "possibleExistingId": null
       },
       "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s30-12adba7f4ba2",
-      "origin": "history",
-      "date": "2024-07-16",
-      "year": "2024",
-      "region": "NAC",
-      "tournamentId": "ch5s3-solo-victory-cup",
-      "event": "Solo Victory Cup Battle Royale",
-      "round": "Event 5 · Round 1 / 予選",
-      "player": "じんくん",
-      "kind": "予選",
-      "rank": 5753,
-      "points": 123,
-      "kills": 14,
-      "vrs": 1,
-      "prize": 0,
-      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event5Round1_NAC",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "順位表の取得が完了していません",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 60,
-        "totalPages": 100,
-        "sourceKey": "epicgames_S30_SoloVictoryCashCup_NAC/S30_SoloVictoryCashCup_Event5Round1_NAC",
-        "possibleExistingId": null
-      },
-      "rewardState": "source-amount-present-not-verified-by-triage"
-    },
-    {
-      "id": "auto-s30-37f0deaf5515",
-      "origin": "history",
-      "date": "2024-07-16",
-      "year": "2024",
-      "region": "NAC",
-      "tournamentId": "ch5s3-solo-victory-cup",
-      "event": "Solo Victory Cup Battle Royale",
-      "round": "Event 5 · Round 1 / 予選",
-      "player": "wickesy",
-      "kind": "予選",
-      "rank": 5942,
-      "points": 122,
-      "kills": 31,
-      "vrs": 1,
-      "prize": 0,
-      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event5Round1_NAC",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "順位表の取得が完了していません",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 60,
-        "totalPages": 100,
-        "sourceKey": "epicgames_S30_SoloVictoryCashCup_NAC/S30_SoloVictoryCashCup_Event5Round1_NAC",
-        "possibleExistingId": null
-      },
-      "rewardState": "source-amount-present-not-verified-by-triage"
-    },
-    {
-      "id": "auto-s30-a8f711ff63dd",
-      "origin": "history",
-      "date": "2024-07-16",
-      "year": "2024",
-      "region": "NAC",
-      "tournamentId": "ch5s3-solo-victory-cup",
-      "event": "Solo Victory Cup Battle Royale",
-      "round": "Event 5 · Round 1 / 予選",
-      "player": "candyz1a",
-      "kind": "予選",
-      "rank": 5901,
-      "points": 123,
-      "kills": 7,
-      "vrs": 0,
-      "prize": 0,
-      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event5Round1_NAC",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "順位表の取得が完了していません",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 60,
-        "totalPages": 100,
-        "sourceKey": "epicgames_S30_SoloVictoryCashCup_NAC/S30_SoloVictoryCashCup_Event5Round1_NAC",
-        "possibleExistingId": null
-      },
-      "rewardState": "source-amount-present-not-verified-by-triage"
-    },
-    {
-      "id": "auto-s30-becc944b924f",
-      "origin": "history",
-      "date": "2024-07-16",
-      "year": "2024",
-      "region": "NAC",
-      "tournamentId": "ch5s3-solo-victory-cup",
-      "event": "Solo Victory Cup Battle Royale",
-      "round": "Event 5 · Round 1 / 予選",
-      "player": "yorufnzǃ",
-      "kind": "予選",
-      "rank": 5066,
-      "points": 126,
-      "kills": 4,
-      "vrs": 1,
-      "prize": 0,
-      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event5Round1_NAC",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "順位表の取得が完了していません",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 60,
-        "totalPages": 100,
-        "sourceKey": "epicgames_S30_SoloVictoryCashCup_NAC/S30_SoloVictoryCashCup_Event5Round1_NAC",
-        "possibleExistingId": null
-      },
-      "rewardState": "source-amount-present-not-verified-by-triage"
     },
     {
       "id": "auto-s30-05706d3b51c2",
