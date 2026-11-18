@@ -16,7 +16,7 @@ jobs:
           node-version: '24'
           cache: npm
       - run: npm ci --ignore-scripts
-      - name: Fail-closed dry-run: every immutable original Epic UUID and page proof
+      - name: "Fail-closed dry-run: every immutable original Epic UUID and page proof"
         run: node scripts/publish-rescanned-32-20261118.cjs --dry-run
       - name: Materialize only verified 32 and rebuild indexes
         run: |
