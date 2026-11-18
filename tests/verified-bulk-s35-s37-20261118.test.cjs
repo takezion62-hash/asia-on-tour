@@ -34,7 +34,7 @@ test('all 38 records are published, no duplicate UUID/source identity and audit 
  assert.equal(total,200);
  assert.equal(audit(rows,ledger,players).length,0);
 });
-test('all 38 source-locked candidates remain absent from unresolved triage',()=>{
+test('all 38 candidates remain published and absent from current pending triage',()=>{
  const pending=load('history-sync-review.json').proposals;
  assert.equal(pending.filter(x=>source.manifest.rows.some(y=>y.id===x.id)).length,0);
  const held=load('candidate-triage.json').queue;
