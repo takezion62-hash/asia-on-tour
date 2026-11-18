@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-18T04:57:00.000Z",
+  "reviewedAt": "2026-11-18T09:07:22.324Z",
   "description": "Resolved historic review candidates: published, duplicate or participation",
   "entries": [
     {
@@ -33552,6 +33552,33 @@
       "reviewedAt": "2026-11-18T04:57:00.000Z",
       "source": "https://www.fortnite.com/competitive/events/S34_PlaystationCup/?region=ME&round=S34_PlaystationCupFinal_ME",
       "policy": "verified-s34-me-playstation-final-attendance-two-20261118"
+    },
+    {
+      "id": "auto-s34-ebd655dd374a",
+      "decision": "published",
+      "recordId": "auto-s34-ebd655dd374a",
+      "reviewedAt": "2026-11-18T09:07:22.324Z",
+      "source": "https://www.fortnite.com/competitive/events/S34_PlaystationCup/?region=NAW&round=S34_PlaystationCupQualifier1_NAW",
+      "policy": "attendance-only",
+      "rule": null
+    },
+    {
+      "id": "auto-s39-770ba3b6c0f5",
+      "decision": "published",
+      "recordId": "auto-s39-770ba3b6c0f5",
+      "reviewedAt": "2026-11-18T09:07:22.324Z",
+      "source": "https://www.fortnite.com/competitive/events/S39_FNCSDivisionalCup_Division1/?region=ME&round=S39_FNCSDivisionalCup_Division1_Week4Day1_ME",
+      "policy": "attendance-only",
+      "rule": null
+    },
+    {
+      "id": "auto-s39-8753d9537fd5",
+      "decision": "published",
+      "recordId": "auto-s39-8753d9537fd5",
+      "reviewedAt": "2026-11-18T09:07:22.324Z",
+      "source": "https://www.fortnite.com/competitive/events/S39_FNCSDivisionalCup_Division1/?region=ME&round=S39_FNCSDivisionalCup_Division1_Week4Day1_ME",
+      "policy": "attendance-only",
+      "rule": null
     }
   ]
 }
