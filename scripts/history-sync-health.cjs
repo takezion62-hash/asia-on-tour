@@ -21,7 +21,15 @@ function describe(status,now=Date.now()){
   retryDue:n(status.coverage?.counts?.retryDue),
   rateLimited:status.providerRateLimitPaused===true,
   retryAfter:status.providerRateLimitRetryAfter||null,
-  transientFailures:n(status.transientFailures)
+  transientFailures:n(status.transientFailures),
+  newPlayerBackfill:{
+   initialized:status.newPlayerBackfill?.initialized===true,
+   newAccounts:n(status.newPlayerBackfill?.newAccounts),
+   pendingWindows:n(status.newPlayerBackfill?.pendingWindows),
+   pagesScanned:n(status.newPlayerBackfill?.pagesScanned),
+   proposalsFound:n(status.newPlayerBackfill?.proposalsFound),
+   windowsCompleted:n(status.newPlayerBackfill?.windowsCompleted)
+  }
  };
 }
 function report(view){
@@ -37,6 +45,9 @@ function report(view){
   '| 今回追加した成績 | '+view.imported+' |',
   '| 取得先の429制限による中断 | '+(view.rateLimited?'あり':'なし')+' |',
   '| API再試行待ち | '+view.retryWaiting+' |',
+  '| 新規選手の過去大会差分調査：今回取得 | '+view.newPlayerBackfill.pagesScanned+'ページ |',
+  '| 新規選手の過去大会差分調査：新候補 | '+view.newPlayerBackfill.proposalsFound+'件 |',
+  '| 新規選手の過去大会差分調査：残り | '+view.newPlayerBackfill.pendingWindows+'開催枠 |',
   ''
  ];
  if(view.rateLimited)lines.push('取得元のHTTP 429で新規アクセスを中断し、確認済みページを保持。再試行時刻: '+(view.retryAfter||'未指定')+'。');
