@@ -11,7 +11,7 @@ const {decide:verifyHistoricalVictory}=require('./verified-history-approval.cjs'
 const VALID_SCOPES=new Set(['history','auto']);
 const SOURCE_FILES=[
   'players.json','tournaments.json','tournament-rules.json',
-  'scripts/osirion-sync.cjs','scripts/auto-sync-core.cjs',
+  'scripts/osirion-sync.cjs','scripts/new-player-history-delta.cjs','scripts/auto-sync-core.cjs',
   'scripts/verified-history-approval.cjs',
   'scripts/source-results-store.cjs','scripts/build-source-results.cjs',
   'scripts/automatic-cash-approval.cjs',
@@ -106,6 +106,16 @@ function mergeCheckpoint(base,scan,latest,conflicts,windowId){
  output.complete=Boolean(scan.complete||latest.complete);
  if(output.complete){delete output.retryAfter;delete output.lastError}
  return output;
+}
+// Preserve identity delta checkpoints across conflict-safe replays. A competing
+// delta writer must not silently erase the other writer's progress or account
+// enrollment; the workflow will safely retry instead.
+function mergeNewPlayerBackfill(base,scanned,latest){
+ const a=stringify(base),b=stringify(scanned),c=stringify(latest);
+ if(a===b)return latest===undefined?undefined:clone(latest);
+ if(a===c)return scanned===undefined?undefined:clone(scanned);
+ if(b===c)return scanned===undefined?undefined:clone(scanned);
+ fail('concurrent new-player delta checkpoints differ; retry from latest main');
 }
 // Re-check historical participation against the immutable Epic leaderboard
 // checkpoint and official season-specific rules. Never trust review-only rows.
@@ -234,6 +244,12 @@ function mergeSnapshots(scope,base,scanned,latest,reviewed={version:1,entries:[]
   if(stringify(value)===stringify(baseWin[key]))continue;
   checkpoint.windows[key]=mergeCheckpoint(baseWin[key],value,checkpoint.windows[key],conflicts,key);
  }
+ if(scope==='history'){
+  const mergedDelta=mergeNewPlayerBackfill(b[cFile].newPlayerBackfill,
+   c[cFile].newPlayerBackfill,n[cFile].newPlayerBackfill);
+  if(mergedDelta!==undefined)checkpoint.newPlayerBackfill=mergedDelta;
+  else delete checkpoint.newPlayerBackfill;
+ }
  checkpoint.checkedAt=[checkpoint.checkedAt,c[cFile].checkedAt].filter(Boolean).sort().at(-1);
  // The previous merge kept remote review.checkedAt unchanged, making the review
  // screen look frozen despite successful provider scans. Refresh only its time:
@@ -300,4 +316,4 @@ if(require.main===module){
   }else fail('unknown action '+action);
  }catch(error){console.error('AOT_SAFE_SYNC_ERROR '+error.stack);process.exitCode=1}
 }
-module.exports={snapshot,mergeSnapshots,verifiedHistoryAttendance,logicalKey,roundKey,mergeCheckpoint,changedSources};
+module.exports={snapshot,mergeSnapshots,verifiedHistoryAttendance,logicalKey,roundKey,mergeCheckpoint,mergeNewPlayerBackfill,changedSources};

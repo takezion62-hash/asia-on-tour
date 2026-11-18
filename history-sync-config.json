@@ -45,5 +45,12 @@
   "reviewRecovery": {
     "enabled": true,
     "maxWindows": 4
+  },
+  "newPlayerBackfill": {
+    "enabled": true,
+    "priorityRecentSeasons": 2,
+    "maxPagesPerRun": 4,
+    "maxWindowsPerRun": 2,
+    "maxPagesPerWindowPerRun": 2
   }
 }

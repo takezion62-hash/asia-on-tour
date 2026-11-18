@@ -15,6 +15,7 @@ const {evaluate:evaluateDuoQualifier}=require('./automatic-duo-qualifier-approva
 const {scanCoverage}=require('./scan-coverage.cjs');
 const {finishableWindows,remainingPages,windowPageAllowance,leastCoveredBucket}=require('./scan-efficiency.cjs');
 const {recoveryShortlist}=require('./review-recovery-priority.cjs');
+const {runDelta:runNewPlayerDelta}=require('./new-player-history-delta.cjs');
 const root=path.resolve(__dirname,'..');
 const read=name=>name==='results.json'?readResults(root).rows:JSON.parse(fs.readFileSync(path.join(root,name),'utf8'));
 const write=(name,obj)=>name==='results.json'?publishResults(root,obj):fs.writeFileSync(path.join(root,name),JSON.stringify(obj,null,2)+'\n');
@@ -53,6 +54,32 @@ function linkedAccounts(data){
    const id=identity(entry.url);if(!id||typeof entry.name!=='string')continue;
    if(!map.has(id))map.set(id,new Set());map.get(id).add(entry.name);
   }
+ }
+ // New players without any published results can opt into historical tracing
+ // only with an owner-verified exact Epic ID or confirmed Fortnite Tracker URL.
+ // Never infer an identity from a name, alias or unconfirmed profile page.
+ for(const p of data.players.candidates){
+  if(p.epicAccountVerified!==true)continue;
+  const direct=typeof p.epicAccountId==='string'&&/^[0-9a-f]{32}$/i.test(p.epicAccountId)?
+   p.epicAccountId.toLowerCase():null;
+  let fromTracker=null;
+  if(typeof p.trackerProfileUrl==='string'){
+   try{
+    const uri=new URL(p.trackerProfileUrl);
+    if(['fortnitetracker.com','www.fortnitetracker.com'].includes(uri.hostname.toLowerCase())&&
+       uri.pathname.startsWith('/profile/all/'))
+     fromTracker=identity(p.trackerProfileUrl);
+   }catch{}
+  }
+  // If both identifiers were supplied, they must be identical.
+  if((p.epicAccountId&&!direct)||(p.trackerProfileUrl&&!fromTracker)||
+    (direct&&fromTracker&&direct!==fromTracker)||(!direct&&!fromTracker)){
+   conflicts.push({name:p.name,reason:'本人Epic IDまたはTracker URLを安全に照合できない'});
+   continue;
+  }
+  const id=direct||fromTracker;
+  if(!map.has(id))map.set(id,new Set());
+  map.get(id).add(p.name);
  }
  const accounts=[];
  for(const [id,names] of map){
@@ -587,6 +614,34 @@ async function main(){
  const maxRunMinutes=historical?Math.min(14,Math.max(2,Number.isFinite(config.maxRunMinutes)?config.maxRunMinutes:12)):14;
  const scanDeadline=Date.now()+maxRunMinutes*60000;
  let reviewRecoverySummary=null;
+ let timeLimitReached=false,rateLimited=false,rateLimitRetryAfter=null,processedWindows=0;
+ let playerBackfill=null;
+ if(historical){
+  const deltaConfig=config.newPlayerBackfill||{};
+  if(deltaConfig.enabled!==false){
+   const stats=await runNewPlayerDelta({
+    scan:state,accounts,windows,
+    fetchPage:getLeaderboard,normalize:normalizeRow,
+    prepare:(feed,preview)=>prepare(feed,preview,data),
+    previewFor:win=>({version:1,accounts,windows:[{
+     eventId:win.eventId,windowId:win.windowId,dateJst:win.dateJst,
+     region:win.region,seasonId:win.seasonId,tournamentId:win.tournamentId,
+     kind:win.kind,round:win.round
+    }]}),
+    holdFailure:holdLeaderboardWindow,rateLimitFailure:providerRateLimitFailure,
+    recoverableFailure:recoverableLeaderboardFailure,
+    now:Date.now(),latestSeasons:Math.min(2,Math.max(1,deltaConfig.priorityRecentSeasons??2)),
+    // Share the existing 96-page historical API budget.
+    pageBudget:Math.min(4,Math.max(0,deltaConfig.maxPagesPerRun??4),budget),
+    windowBudget:Math.min(2,Math.max(0,deltaConfig.maxWindowsPerRun??2)),
+    pagesPerWindow:Math.min(2,Math.max(1,deltaConfig.maxPagesPerWindowPerRun??2))
+   });
+   playerBackfill=stats;
+   budget-=stats.pagesScanned;scanned+=stats.pagesScanned;
+   if(stats.rateLimited){rateLimited=true;rateLimitRetryAfter=stats.retryAfter;transientFailures++;}
+   console.log('OSIRION_NEW_PLAYER_BACKFILL '+JSON.stringify(stats));
+  }
+ }
  if(historical){
   const byYear={},byRegion={};
   let resumed=0,finishable=0,unstarted=0;
@@ -618,8 +673,8 @@ async function main(){
     unknownCashCandidates:x.cashCandidates,finishable:x.finishable}))
   }));
  }
- let timeLimitReached=false,rateLimited=false,rateLimitRetryAfter=null,processedWindows=0;
  for(let windowIndex=0;windowIndex<active.length;windowIndex++){
+  if(rateLimited)break;
   if(Date.now()>=scanDeadline){timeLimitReached=true;break}
   const win=active[windowIndex];
   processedWindows++;
@@ -769,7 +824,7 @@ async function main(){
  const reviewOnlyCandidates=unique.size?Array.from(unique.values()).filter(p=>p.reviewOnly===true).length:0;
  const cumulativeApprovals=data.updates.entries.filter(x=>x.title?.startsWith('公式規則で自動承認：')).reduce((sum,x)=>sum+(x.recordIds?.length||0),0);
  const status={version:1,state:'checked',checkedAt:stamp,mode:'review',scope:historical?'history':'recent',dateMode:historical?(storedConfig.toDate==='rolling'?'rolling':'fixed'):null,selectedWindows:active.length,fromDate:historical?config.fromDate:null,toDate:historical?config.toDate:null,provider:'osirion',linkedPlayers:accounts.length,trackedWindows:windows.length,found:unique.size,skipped:invalidRows,imported,scannedPages:scanned,completedWindows:finished,identityConflicts:conflicts.length,alreadyRegistered:recordedFromReview,autoApprovedTotal:cumulativeApprovals,invalidCachedCandidates:invalidCached,manualReviewCandidates:manuallyHeld,autoApprovedParticipationThisRun:verifiedParticipationIds.size,autoApprovedCosmeticThisRun:importedCosmetics,autoApprovedCashThisRun:cash.approved.length,autoApprovedPerformanceThisRun:performance.approved.length,autoApprovedUnrealThisRun:unreal.approved.length,autoApprovedDuoQualifierThisRun:duo.approved.length,timeLimitReached,processedWindows,providerRateLimitPaused:rateLimited,providerRateLimitRetryAfter:rateLimitRetryAfter,
-  ...(historical?{newlyCompletedWindows}:{}),retryWindows:coverage.retryCount,coverage,...(historical?{reviewRecovery:reviewRecoverySummary,priorityAudit:{...priorityAudit,selected:selectedPriority}}:{}),transientFailures,malformedFailures,skippedLeaderboards:skippedLeaderboards.slice(0,15),reviewOnlyWindows,reviewOnlyCandidates,unmappedEvents:unmapped.length,unmappedEventIds:unmapped.slice(0,12),message:'Osirionで'+accounts.length+'アカウントIDを追跡。今回の公式規則による自動承認'+imported+'件、追加確認待ち'+unique.size+'件、名義照合保留'+conflicts.length+'件。'};
+  ...(historical?{newlyCompletedWindows,newPlayerBackfill:playerBackfill}:{}),retryWindows:coverage.retryCount,coverage,...(historical?{reviewRecovery:reviewRecoverySummary,priorityAudit:{...priorityAudit,selected:selectedPriority}}:{}),transientFailures,malformedFailures,skippedLeaderboards:skippedLeaderboards.slice(0,15),reviewOnlyWindows,reviewOnlyCandidates,unmappedEvents:unmapped.length,unmappedEventIds:unmapped.slice(0,12),message:'Osirionで'+accounts.length+'アカウントIDを追跡。今回の公式規則による自動承認'+imported+'件、追加確認待ち'+unique.size+'件、名義照合保留'+conflicts.length+'件。'};
  state.checkedAt=stamp;
  write(prefix+'-scan.json',state);
  write(prefix+'-review.json',{version:1,status:'review',checkedAt:stamp,proposals:[...unique.values()]});

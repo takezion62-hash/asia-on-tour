@@ -31,3 +31,17 @@ test('scan freshness warns only after eight hours and accepts older checkpoints 
  assert.match(report(stale),/8時間以上/);
  assert.throws(()=>describe({checkedAt:'invalid'}),/valid scan checkpoint/);
 });
+
+test('operator summary distinguishes small new-player backfill from normal history scans',()=>{
+ const status={checkedAt:'2026-11-18T08:00:00Z',
+  trackedWindows:3177,completedWindows:677,scannedPages:18,
+  newPlayerBackfill:{initialized:false,newAccounts:2,pendingWindows:19,
+   pagesScanned:4,proposalsFound:3,windowsCompleted:1}};
+ const v=describe(status,Date.parse('2026-11-18T08:01:00Z'));
+ assert.equal(v.newPlayerBackfill.newAccounts,2);
+ assert.equal(v.newPlayerBackfill.pendingWindows,19);
+ assert.equal(v.newPlayerBackfill.pagesScanned,4);
+ assert.equal(v.newPlayerBackfill.proposalsFound,3);
+ assert.match(report(v),/差分調査：今回取得 \| 4ページ/);
+ assert.match(report(v),/差分調査：残り \| 19開催枠/);
+});
