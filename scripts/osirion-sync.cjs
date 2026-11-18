@@ -15,6 +15,7 @@ const {evaluate:evaluateDuoQualifier}=require('./automatic-duo-qualifier-approva
 const {scanCoverage}=require('./scan-coverage.cjs');
 const {finishableWindows,remainingPages,windowPageAllowance,leastCoveredBucket}=require('./scan-efficiency.cjs');
 const {recoveryShortlist}=require('./review-recovery-priority.cjs');
+const {runDelta:runNewPlayerDelta}=require('./new-player-history-delta.cjs');
 const root=path.resolve(__dirname,'..');
 const read=name=>name==='results.json'?readResults(root).rows:JSON.parse(fs.readFileSync(path.join(root,name),'utf8'));
 const write=(name,obj)=>name==='results.json'?publishResults(root,obj):fs.writeFileSync(path.join(root,name),JSON.stringify(obj,null,2)+'\n');
@@ -53,6 +54,32 @@ function linkedAccounts(data){
    const id=identity(entry.url);if(!id||typeof entry.name!=='string')continue;
    if(!map.has(id))map.set(id,new Set());map.get(id).add(entry.name);
   }
+ }
+ // New players without any published results can opt into historical tracing
+ // only with an owner-verified exact Epic ID or confirmed Fortnite Tracker URL.
+ // Never infer an identity from a name, alias or unconfirmed profile page.
+ for(const p of data.players.candidates){
+  if(p.epicAccountVerified!==true)continue;
+  const direct=typeof p.epicAccountId==='string'&&/^[0-9a-f]{32}$/i.test(p.epicAccountId)?
+   p.epicAccountId.toLowerCase():null;
+  let fromTracker=null;
+  if(typeof p.trackerProfileUrl==='string'){
+   try{
+    const uri=new URL(p.trackerProfileUrl);
+    if(['fortnitetracker.com','www.fortnitetracker.com'].includes(uri.hostname.toLowerCase())&&
+       uri.pathname.startsWith('/profile/all/'))
+     fromTracker=identity(p.trackerProfileUrl);
+   }catch{}
+  }
+  // If both identifiers were supplied, they must be identical.
+  if((p.epicAccountId&&!direct)||(p.trackerProfileUrl&&!fromTracker)||
+    (direct&&fromTracker&&direct!==fromTracker)||(!direct&&!fromTracker)){
+   conflicts.push({name:p.name,reason:'本人Epic IDまたはTracker URLを安全に照合できない'});
+   continue;
+  }
+  const id=direct||fromTracker;
+  if(!map.has(id))map.set(id,new Set());
+  map.get(id).add(p.name);
  }
  const accounts=[];
  for(const [id,names] of map){
