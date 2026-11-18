@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-17",
+  "updatedAt": "2026-11-18",
   "description": "Epic公式規則で確認した大会ルール。Unreal Cupもチーム順位と確認済みEpic IDを照合し、賞金圏内は地域別チーム/個人賞金を、圏外は$0として自動掲載（本人資格・支払確認とは別）。S36 Console Duos・S43 Reload ZB Duosの公式Round 1上位突破／全参加$0を、本人照合済み結果に限り安全に記録。Round 2賞金は推定しない。S42 Console Zero Build Solo Victory Cupは公式上位通過と決勝VR1回$100を個別登録。 S37 Console DuosおよびS42 Reload Duosの公式Round1上位突破・参加$0を、保存済み順位表と選手2名のEpicアカウントID・開催枠一致に限定して安全な自動承認に追加。Round2賞金は自動推定しない。",
   "rules": [
     {
@@ -1628,6 +1628,31 @@
       "requireVerifiedRoster": true,
       "source": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-victory-cups-chapter-7-season-4-official-rules",
       "note": "2026 Chapter 7 Season 4 Reload Duos。Round1：最大10試合、EU/NAC上位300組、NAW/OCE/ME/BR上位120組が決勝進出。予選$0。Round2：最大3試合、1VRにつきチーム$200（各選手$100）。この更新の自動承認は本人2名のEpic ID照合済みRound1の$0参加・突破記録のみ。決勝賞金は手動検証対象。"
+    },
+    {
+      "id": "ch6s2-console-duos-victory",
+      "seasonId": "S35",
+      "eventIds": [
+        "S35_VictoryDuosCup"
+      ],
+      "team": "duo",
+      "series": "victory-cup",
+      "matchCaps": {
+        "予選": 7,
+        "賞金決勝": 3
+      },
+      "advance": {
+        "EU": 500,
+        "NAC": 500,
+        "NAW": 250,
+        "OCE": 250,
+        "ME": 250,
+        "BR": 250
+      },
+      "prizePerVictory": 100,
+      "teamPrizePerVictory": 200,
+      "source": "https://www.fortnite.com/news/fortnite-duos-console-victory-cash-cups-may-2025-official-rules",
+      "note": "2025年5月17/24/31開催のConsole Duos Victory Cash Cup。Round 1最大7試合、EU/NAC上位500組、その他地域上位250組がRound 2へ。Round 2最大3試合、1VRにつきチーム$200・個人各$100。自動賞金承認は許可せず、Epic本人ID・開催枠・成熟済み順位表・賞金規則の専門検証でのみ掲載。"
     }
   ]
 }
