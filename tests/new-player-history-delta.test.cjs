@@ -108,18 +108,19 @@ test('HTTP 429 stops all delta requests, keeps completed pages and defers the sa
 });
 test('only explicitly verified Epic ID or matching Fortnite Tracker URL allows a no-results player to enter scan roster',()=>{
  const uuid='aabbccdd-1234-5678-90ab-cdef12345678';
- const fixed='aabbccdd1234567890abcdef12345678';
+ const fixed='c'.repeat(32);
  const data={results:[],players:{confirmedAliases:{},candidates:[
   {name:'Explicit',epicAccountVerified:true,epicAccountId:fixed},
   {name:'Tracker',epicAccountVerified:true,trackerProfileUrl:'https://fortnitetracker.com/profile/all/Tracker/events?id='+uuid},
   {name:'NotVerified',epicAccountId:B},
-  {name:'BadHost',epicAccountVerified:true,trackerProfileUrl:'https://fake.example/profile/all/Tracker/events?id='+uuid}
+  {name:'BadHost',epicAccountVerified:true,trackerProfileUrl:'https://fake.example/profile/all/Tracker/events?id='+uuid},
+  {name:'Mismatched',epicAccountVerified:true,epicAccountId:B,trackerProfileUrl:'https://fortnitetracker.com/profile/all/Mismatched/events?id='+uuid}
  ]}};
  const out=linkedAccounts(data);
- assert.deepEqual(out.accounts.map(x=>x.player).sort(),['Explicit']);
+ assert.deepEqual(out.accounts.map(x=>x.player).sort(),['Explicit','Tracker']);
  assert.equal(out.conflicts.length,2);
  // Identical direct ID and linked profile URL is allowed for one player.
  data.players.candidates=data.players.candidates.slice(0,1);
- data.players.candidates[0].trackerProfileUrl='https://fortnitetracker.com/profile/all/Explicit/events?id='+uuid;
+ data.players.candidates[0].trackerProfileUrl='https://fortnitetracker.com/profile/all/Explicit/events?id=cccccccc-cccc-cccc-cccc-cccccccccccc';
  assert.equal(linkedAccounts(data).accounts.length,1);
 });
