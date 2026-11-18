@@ -1,7 +1,7 @@
 {
   "version": 1,
   "sourceCheckedAt": "2026-11-07T23:16:39.215Z",
-  "total": 76,
+  "total": 70,
   "alreadyResolved": 0,
   "byYear": [
     {
@@ -10,13 +10,13 @@
     },
     {
       "name": "2025",
-      "count": 44
+      "count": 38
     }
   ],
   "byRegion": [
     {
       "name": "ME",
-      "count": 10
+      "count": 4
     },
     {
       "name": "NAC",
@@ -30,7 +30,7 @@
   "byTournament": [
     {
       "name": "Duos Console Victory Cash Cup / ME / 2025",
-      "count": 8
+      "count": 2
     },
     {
       "name": "Duos Console Victory Cash Cup / NAW / 2025",
@@ -60,7 +60,7 @@
     },
     {
       "name": "rules-review",
-      "count": 14
+      "count": 8
     }
   ],
   "queue": [
@@ -921,204 +921,6 @@
         "possibleExistingId": null
       },
       "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s35-1d8317e62e26",
-      "origin": "history",
-      "date": "2025-05-17",
-      "year": "2025",
-      "region": "ME",
-      "tournamentId": "ch6s2-console-duos-victory",
-      "event": "Duos Console Victory Cash Cup",
-      "round": "Event 1 · Round 1 / 予選",
-      "player": "Acris 0x / DIE Peterbot 23ǃ",
-      "kind": "予選",
-      "rank": 284,
-      "points": 213,
-      "kills": 21,
-      "vrs": 1,
-      "prize": 0,
-      "source": "https://www.fortnite.com/competitive/events/S35_VictoryDuosCup/?region=ME&round=S35_VictoryDuosCup_Event1Round1_ME",
-      "status": "rules-review",
-      "action": "公式規則・賞金・突破・スキン条件を個別確認",
-      "reason": "順位表の取得が完了していません",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": true,
-        "observedPartial": false,
-        "seenPages": 5,
-        "totalPages": 75,
-        "sourceKey": "epicgames_S35_VictoryDuosCup_ME/S35_VictoryDuosCup_Event1Round1_ME",
-        "possibleExistingId": null
-      },
-      "rewardState": "source-amount-present-not-verified-by-triage"
-    },
-    {
-      "id": "auto-s35-1dae8998aef9",
-      "origin": "history",
-      "date": "2025-05-17",
-      "year": "2025",
-      "region": "ME",
-      "tournamentId": "ch6s2-console-duos-victory",
-      "event": "Duos Console Victory Cash Cup",
-      "round": "Event 1 · Round 1 / 予選",
-      "player": "Solary Kurаmа / p1ng",
-      "kind": "予選",
-      "rank": 275,
-      "points": 214,
-      "kills": 25,
-      "vrs": 0,
-      "prize": 0,
-      "source": "https://www.fortnite.com/competitive/events/S35_VictoryDuosCup/?region=ME&round=S35_VictoryDuosCup_Event1Round1_ME",
-      "status": "rules-review",
-      "action": "公式規則・賞金・突破・スキン条件を個別確認",
-      "reason": "順位表の取得が完了していません",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": true,
-        "observedPartial": false,
-        "seenPages": 5,
-        "totalPages": 75,
-        "sourceKey": "epicgames_S35_VictoryDuosCup_ME/S35_VictoryDuosCup_Event1Round1_ME",
-        "possibleExistingId": null
-      },
-      "rewardState": "source-amount-present-not-verified-by-triage"
-    },
-    {
-      "id": "auto-s35-2feccd077d35",
-      "origin": "history",
-      "date": "2025-05-17",
-      "year": "2025",
-      "region": "ME",
-      "tournamentId": "ch6s2-console-duos-victory",
-      "event": "Duos Console Victory Cash Cup",
-      "round": "Event 1 · Round 1 / 予選",
-      "player": "えありー / すかい",
-      "kind": "予選",
-      "rank": 280,
-      "points": 213,
-      "kills": 29,
-      "vrs": 1,
-      "prize": 0,
-      "source": "https://www.fortnite.com/competitive/events/S35_VictoryDuosCup/?region=ME&round=S35_VictoryDuosCup_Event1Round1_ME",
-      "status": "rules-review",
-      "action": "公式規則・賞金・突破・スキン条件を個別確認",
-      "reason": "順位表の取得が完了していません",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": true,
-        "observedPartial": false,
-        "seenPages": 5,
-        "totalPages": 75,
-        "sourceKey": "epicgames_S35_VictoryDuosCup_ME/S35_VictoryDuosCup_Event1Round1_ME",
-        "possibleExistingId": null
-      },
-      "rewardState": "source-amount-present-not-verified-by-triage"
-    },
-    {
-      "id": "auto-s35-70945663bd3e",
-      "origin": "history",
-      "date": "2025-05-17",
-      "year": "2025",
-      "region": "ME",
-      "tournamentId": "ch6s2-console-duos-victory",
-      "event": "Duos Console Victory Cash Cup",
-      "round": "Event 1 · Round 1 / 予選",
-      "player": "kaf / Rura",
-      "kind": "予選",
-      "rank": 228,
-      "points": 219,
-      "kills": 34,
-      "vrs": 1,
-      "prize": 0,
-      "source": "https://www.fortnite.com/competitive/events/S35_VictoryDuosCup/?region=ME&round=S35_VictoryDuosCup_Event1Round1_ME",
-      "status": "rules-review",
-      "action": "公式規則・賞金・突破・スキン条件を個別確認",
-      "reason": "順位表の取得が完了していません",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": true,
-        "observedPartial": false,
-        "seenPages": 5,
-        "totalPages": 75,
-        "sourceKey": "epicgames_S35_VictoryDuosCup_ME/S35_VictoryDuosCup_Event1Round1_ME",
-        "possibleExistingId": null
-      },
-      "rewardState": "source-amount-present-not-verified-by-triage"
-    },
-    {
-      "id": "auto-s35-abfa67e68898",
-      "origin": "history",
-      "date": "2025-05-17",
-      "year": "2025",
-      "region": "ME",
-      "tournamentId": "ch6s2-console-duos-victory",
-      "event": "Duos Console Victory Cash Cup",
-      "round": "Event 1 · Round 1 / 予選",
-      "player": "ふぃる / Amo",
-      "kind": "予選",
-      "rank": 395,
-      "points": 202,
-      "kills": 18,
-      "vrs": 0,
-      "prize": 0,
-      "source": "https://www.fortnite.com/competitive/events/S35_VictoryDuosCup/?region=ME&round=S35_VictoryDuosCup_Event1Round1_ME",
-      "status": "rules-review",
-      "action": "公式規則・賞金・突破・スキン条件を個別確認",
-      "reason": "順位表の取得が完了していません",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": true,
-        "observedPartial": false,
-        "seenPages": 5,
-        "totalPages": 75,
-        "sourceKey": "epicgames_S35_VictoryDuosCup_ME/S35_VictoryDuosCup_Event1Round1_ME",
-        "possibleExistingId": null
-      },
-      "rewardState": "source-amount-present-not-verified-by-triage"
-    },
-    {
-      "id": "auto-s35-baf1676e9290",
-      "origin": "history",
-      "date": "2025-05-17",
-      "year": "2025",
-      "region": "ME",
-      "tournamentId": "ch6s2-console-duos-victory",
-      "event": "Duos Console Victory Cash Cup",
-      "round": "Event 1 · Round 1 / 予選",
-      "player": "Hakkun / あすふぁろず",
-      "kind": "予選",
-      "rank": 313,
-      "points": 210,
-      "kills": 29,
-      "vrs": 0,
-      "prize": 0,
-      "source": "https://www.fortnite.com/competitive/events/S35_VictoryDuosCup/?region=ME&round=S35_VictoryDuosCup_Event1Round1_ME",
-      "status": "rules-review",
-      "action": "公式規則・賞金・突破・スキン条件を個別確認",
-      "reason": "順位表の取得が完了していません",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": true,
-        "observedPartial": false,
-        "seenPages": 5,
-        "totalPages": 75,
-        "sourceKey": "epicgames_S35_VictoryDuosCup_ME/S35_VictoryDuosCup_Event1Round1_ME",
-        "possibleExistingId": null
-      },
-      "rewardState": "source-amount-present-not-verified-by-triage"
     },
     {
       "id": "auto-s30-040dcc04c0b2",
