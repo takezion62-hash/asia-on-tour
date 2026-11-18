@@ -1,7 +1,7 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-18T02:26:38.480Z",
+  "checkedAt": "2026-11-18T06:23:36.757Z",
   "mode": "review",
   "scope": "recent",
   "dateMode": null,
@@ -18,7 +18,7 @@
   "completedWindows": 92,
   "identityConflicts": 3,
   "alreadyRegistered": 220,
-  "autoApprovedTotal": 3169,
+  "autoApprovedTotal": 3178,
   "invalidCachedCandidates": 0,
   "manualReviewCandidates": 0,
   "autoApprovedCosmeticThisRun": 0,
@@ -42,7 +42,7 @@
     "alreadyPublished": 0,
     "reviewConflicts": 0,
     "keptPending": 0,
-    "reconciledAt": "2026-11-18T02:26:44.570Z"
+    "reconciledAt": "2026-11-18T06:23:41.668Z"
   },
   "coverage": {
     "total": 92,
@@ -109,5 +109,8 @@
     "policy": "Exact Epic ID, official session and original mature leaderboard; verified OCE S31 qualifier only"
   },
   "manuallyResolvedDuplicates": 47,
-  "autoApprovedParticipationThisRun": 0
+  "autoApprovedParticipationThisRun": 0,
+  "processedWindows": 0,
+  "providerRateLimitPaused": false,
+  "providerRateLimitRetryAfter": null
 }
