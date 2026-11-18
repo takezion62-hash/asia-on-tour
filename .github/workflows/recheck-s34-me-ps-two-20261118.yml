@@ -1,0 +1,30 @@
+name: Check two held S34 ME PlayStation original Epic IDs
+on:
+  push:
+    branches: [research/s34-me-ps-original-two-20261118]
+permissions:
+  contents: write
+jobs:
+  check-source:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - name: Independently refetch original S34 Middle East final leaderboard page
+        run: node scripts/recheck-s34-me-ps-two-20261118.cjs
+      - name: Preserve proof without adding unverified public records
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add data/manual-approvals/20261118-s34-me-ps-final-two-recheck.json
+          test "$(git diff --cached --name-only | wc -l)" -eq 1
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "evidence: research held S34 ME PlayStation final Epic identities [skip ci]"
+          git push origin HEAD:research/s34-me-ps-original-two-20261118
