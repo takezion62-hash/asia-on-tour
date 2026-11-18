@@ -91,3 +91,17 @@ test('Four new event catalog identities are different, keeping BR and Zero Build
   assert.deepEqual(match[0].sourceEventIds,[s.eventId]);
  }
 });
+
+test('full snapshot dry-run proves publishability without touching any source shard, identity or previous prize',()=>{
+ const crypto=require('node:crypto');
+ const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(path.join(root,p))).digest('hex');
+ const sensitive=['source-results/manifest.json','players.json','approval-history.json','updates.json'];
+ const before=sensitive.map(sha);
+ const {apply}=require('../scripts/apply-ps-finals-ten-20261118.cjs');
+ const summary=apply({dryRun:true});
+ assert.equal(summary.added+summary.alreadyPublished,10);
+ assert.equal(summary.newPlayers.length,summary.added===0?0:4);
+ assert.equal(summary.addedPrize,summary.added===0?0:1150);
+ assert.deepEqual(sensitive.map(sha),before,
+  'dry run must not write over published scores, prizes or player identities');
+});
