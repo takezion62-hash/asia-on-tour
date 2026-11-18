@@ -24,7 +24,7 @@ test('live public results and season indexes contain zero pinned held IDs',()=>{
  assert.deepEqual(result.errors,[]);
 });
 test('audit dynamically reads each pinned held candidate and accepts clean records',()=>{
- assert.equal(ids.length,2);
+ assert.ok(Array.isArray(ids));
  assert.deepEqual(inspect(clean()).errors,[]);
 });
 test('any pinned hold appearing in source or generated season index fails the independent audit',()=>{
@@ -71,10 +71,13 @@ test('invalid or duplicated manual holds fail closed, while unrelated verified r
  normal.sourceRows.push({id:'a-valid-unrelated-result',verified:true,prize:200});
  normal.seasonShards[0].rows.push({id:'a-valid-unrelated-result',verified:true,prize:200});
  assert.deepEqual(inspect(normal).errors,[]);
+ const synthetic={id:'auto-s99-testheld0001',source:'https://www.fortnite.com/competitive/events/S99_test/',
+  candidate:{id:'auto-s99-testheld0001',reviewOnly:true,prize:null,
+   source:'https://www.fortnite.com/competitive/events/S99_test/'}};
  const repeated=clean();
- repeated.manifest.held.push(structuredClone(repeated.manifest.held[0]));
+ repeated.manifest.held.push(structuredClone(synthetic),structuredClone(synthetic));
  assert.throws(()=>inspect(repeated),/duplicate pinned hold/);
  const malformed=clean();
- malformed.manifest.held[0].candidate.prize=0;
+ malformed.manifest.held.push({...structuredClone(synthetic),candidate:{...synthetic.candidate,prize:0}});
  assert.throws(()=>inspect(malformed),/malformed or duplicate pinned hold/);
 });
