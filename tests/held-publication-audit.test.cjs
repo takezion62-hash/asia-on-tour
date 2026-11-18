@@ -4,27 +4,35 @@ const assert=require('node:assert/strict');
 const {inspect,audit}=require('../scripts/audit-held-publication.cjs');
 const {MANIFEST}=require('../scripts/generic-review-only-core.cjs');
 
-const ids=MANIFEST.held.map(h=>h.id);
+const proof=require('../scripts/verified-s34-ps-final-two-20261118.cjs');
+// Keep negative hold tests active after the two proven source accounts are released.
+const fixtureHeld=proof.proof.verified.map(p=>({
+ id:p.original.id,source:p.original.source,candidate:structuredClone(p.original),
+ reason:'Synthetic held-account fixture; release evidence intentionally absent'
+}));
+const ids=fixtureHeld.map(h=>h.id);
 function clean(){
  return {
-  manifest:structuredClone(MANIFEST),
+  manifest:{...structuredClone(MANIFEST),held:structuredClone(fixtureHeld)},
   sourceRows:[{id:'safe-record'}],
   seasonShards:[{file:'season-data/S34.json',rows:[{id:'safe-record'}]}],
   updates:{entries:[{id:'safe-news',recordIds:['safe-record']}]},
   ledger:{entries:[{id:'safe-record',recordId:'safe-record'}]},
   reviewed:{entries:[{id:'safe-record',recordId:'safe-record'}]},
   autoReview:{proposals:[]},
-  historyReview:{proposals:MANIFEST.held.map(h=>structuredClone(h.candidate))}
+  historyReview:{proposals:fixtureHeld.map(h=>structuredClone(h.candidate))}
  };
 }
 test('live public results and season indexes contain zero pinned held IDs',()=>{
  const result=audit();
- assert.equal(result.held,ids.length);
+ assert.equal(result.held,MANIFEST.held.length);
+ assert.equal(MANIFEST.held.length,0);
+ assert.deepEqual(ids,proof.IDS);
  assert.ok(result.checkedSeasonShards>=1);
  assert.deepEqual(result.errors,[]);
 });
 test('audit dynamically reads each pinned held candidate and accepts clean records',()=>{
- assert.equal(ids.length,2);
+ assert.ok(Array.isArray(ids));
  assert.deepEqual(inspect(clean()).errors,[]);
 });
 test('any pinned hold appearing in source or generated season index fails the independent audit',()=>{
@@ -59,7 +67,7 @@ test('held rows must remain exactly once in pending review until proof is suppli
   missing.historyReview.proposals=missing.historyReview.proposals.filter(x=>x.id!==id);
   assert.ok(inspect(missing).errors.some(e=>e.id===id&&/確認待ち登録/.test(e.message)));
   const duplicate=clean();
-  duplicate.autoReview.proposals.push(structuredClone(MANIFEST.held.find(x=>x.id===id).candidate));
+  duplicate.autoReview.proposals.push(structuredClone(fixtureHeld.find(x=>x.id===id).candidate));
   assert.ok(inspect(duplicate).errors.some(e=>e.id===id&&/確認待ち登録/.test(e.message)));
   const altered=clean();
   altered.historyReview.proposals.find(x=>x.id===id).source='https://example.com/changed';
@@ -71,10 +79,13 @@ test('invalid or duplicated manual holds fail closed, while unrelated verified r
  normal.sourceRows.push({id:'a-valid-unrelated-result',verified:true,prize:200});
  normal.seasonShards[0].rows.push({id:'a-valid-unrelated-result',verified:true,prize:200});
  assert.deepEqual(inspect(normal).errors,[]);
+ const synthetic={id:'auto-s99-testheld0001',source:'https://www.fortnite.com/competitive/events/S99_test/',
+  candidate:{id:'auto-s99-testheld0001',reviewOnly:true,prize:null,
+   source:'https://www.fortnite.com/competitive/events/S99_test/'}};
  const repeated=clean();
- repeated.manifest.held.push(structuredClone(repeated.manifest.held[0]));
+ repeated.manifest.held.push(structuredClone(synthetic),structuredClone(synthetic));
  assert.throws(()=>inspect(repeated),/duplicate pinned hold/);
  const malformed=clean();
- malformed.manifest.held[0].candidate.prize=0;
+ malformed.manifest.held.push({...structuredClone(synthetic),candidate:{...synthetic.candidate,prize:0}});
  assert.throws(()=>inspect(malformed),/malformed or duplicate pinned hold/);
 });

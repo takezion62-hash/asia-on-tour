@@ -1,99 +1,12 @@
 {
   "version": 1,
   "sourceCheckedAt": "2026-11-07T23:16:39.215Z",
-  "total": 2,
+  "total": 0,
   "alreadyResolved": 0,
-  "byYear": [
-    {
-      "name": "2025",
-      "count": 2
-    }
-  ],
-  "byRegion": [
-    {
-      "name": "ME",
-      "count": 2
-    }
-  ],
-  "byTournament": [
-    {
-      "name": "PlayStation Cup / ME / 2025",
-      "count": 2
-    }
-  ],
-  "byStatus": [
-    {
-      "name": "rules-review",
-      "count": 2
-    }
-  ],
-  "queue": [
-    {
-      "id": "auto-s34-04720ffe5218",
-      "origin": "history",
-      "date": "2025-05-01",
-      "year": "2025",
-      "region": "ME",
-      "tournamentId": "ch6s2-playstation-cup",
-      "event": "PlayStation Cup",
-      "round": "単一開催枠 / 参加確認",
-      "player": "くりたる",
-      "kind": "参加確認",
-      "rank": 64,
-      "points": 47,
-      "kills": 2,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S34_PlaystationCup/?region=ME&round=S34_PlaystationCupFinal_ME",
-      "status": "rules-review",
-      "action": "公式規則・賞金・突破・スキン条件を個別確認",
-      "reason": "確認専用大会は自動承認不可",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": true,
-        "observedPartial": false,
-        "seenPages": 1,
-        "totalPages": 1,
-        "sourceKey": "epicgames_S34_PlaystationCup_ME/S34_PlaystationCupFinal_ME",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s34-74d1f337746f",
-      "origin": "history",
-      "date": "2025-05-01",
-      "year": "2025",
-      "region": "ME",
-      "tournamentId": "ch6s2-playstation-cup",
-      "event": "PlayStation Cup",
-      "round": "単一開催枠 / 参加確認",
-      "player": "モバイル勢のまかろん",
-      "kind": "参加確認",
-      "rank": 56,
-      "points": 63,
-      "kills": 6,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S34_PlaystationCup/?region=ME&round=S34_PlaystationCupFinal_ME",
-      "status": "rules-review",
-      "action": "公式規則・賞金・突破・スキン条件を個別確認",
-      "reason": "確認専用大会は自動承認不可",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": true,
-        "observedPartial": false,
-        "seenPages": 1,
-        "totalPages": 1,
-        "sourceKey": "epicgames_S34_PlaystationCup_ME/S34_PlaystationCupFinal_ME",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    }
-  ],
+  "byYear": [],
+  "byRegion": [],
+  "byTournament": [],
+  "byStatus": [],
+  "queue": [],
   "policy": "read-only queue; awards require existing official rule-backed validators and identity/collision proof"
 }

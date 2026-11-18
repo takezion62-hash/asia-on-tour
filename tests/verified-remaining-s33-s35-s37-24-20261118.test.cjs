@@ -57,7 +57,10 @@ test('S33 NAW completed six-page Round2 attendance leaves unknown cash unknown',
  assert.ok(rows.every(x=>x.kind==='参加確認'&&x.prize===null));
  const queue=read('history-sync-review.json').proposals;
  for(const row of rows)assert.ok(!queue.some(x=>x.id===row.id));
- // The two S34 PlayStation records lack original UUID evidence and stay queued.
- assert.equal(queue.filter(x=>x.seasonId==='S34'&&
-  x.tournamentId==='ch6s2-playstation-cup').length,2);
+ // Both originally held S34 finalists now have exact source-verified Epic IDs.
+ const s34=require('../scripts/verified-s34-ps-final-two-20261118.cjs');
+ assert.equal(s34.validateProof(),true);
+ assert.equal(queue.filter(x=>s34.IDS.includes(x.id)).length,0);
+ const all=readResults(root).rows;
+ assert.ok(s34.IDS.every(id=>all.some(x=>x.id===id&&x.prize===null&&x.kind==='参加確認')));
 });

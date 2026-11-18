@@ -2,6 +2,7 @@
 const {readResults}=require('./source-results-store.cjs');
 const {POLICY:ORIGINAL32_POLICY,verifyPublished:validOriginal32}=require('./verified-rescanned-32-20261118.cjs');
 const {POLICY:FOLLOWUP18_POLICY,verifyPublished:validFollowup18}=require('./verified-rescanned-18-20261118.cjs');
+const {POLICY:S34_PS_TWO_POLICY,verifyPublished:validS34PsTwo}=require('./verified-s34-ps-final-two-20261118.cjs');
 const {POLICY:FOLLOWUP_24_POLICY,verifyPublished:validFollowup24}=require('./verified-remaining-s33-s35-s37-24-20261118.cjs');
 const {POLICY:BULK_S35_S37_DUOS_POLICY,verifyPublished:validBulkS35S37Duos}=require('./verified-bulk-s35-s37-20261118.cjs');
 const {POLICY:S37_FIVE_NEW_POLICY,verifyPublished:verifyS37FiveNew}=require('./verified-s37-console-five.cjs');
@@ -401,7 +402,7 @@ function audit(results,ledger,players,{promotionEvidence}={}){
   const rows=rowsById.get(entry.recordId)||[];
   if(rows.length!==1){errors.push('Published record missing or duplicate: '+entry.id);continue}
   const r=rows[0];
-  if(entry.decision!=='published'||!['attendance-only','verified-rule','cosmetic-rank','verified-vr','official-final-vr-award','verified-qualifier','verified-s32-final-100usd-vr','verified-trios-qualifier-participation-zero-cash',S30_DUOS_CASH_POLICY,S30_ZERO_DUOS_POLICY,S30_JUNE21_POLICY,S29_ME_ZB_DUOS_POLICY,S28_ME_ZB_DUOS_POLICY,S26_S28_ME_ZB_DUOS_2023_POLICY,S25_ME_ZB_DUOS_2023_POLICY,S22_S25_S31_PS_20261114_POLICY,S37_S39_S40_SEVEN_CASH_POLICY,S37_S41_OCE_FIVE_CASH_POLICY,EU_UNREAL_ME_TRIOS_FOUR_POLICY,KAME_ME_DUOS_TWO_POLICY,S41_CONSOLE_ZB_FOUR_POLICY,B0TER_S31_S38_NINE_POLICY,NAC_S29_S30_ZB_VC_TEN_POLICY,S27_S34_S31_PS_ZB_TEN_POLICY,ME_S31_PS_S26_CONSOLE_TEN_POLICY,NOV14_PENDING_CASH_POLICY,NOV15_NINE_POLICY,'verified-s36-squid-naw-seven',REVIEWONLY_NONPRIZE_POLICY,GENERIC_ZERO_POLICY,S37_OCE_CONSOLE_ROUND1_POLICY,S37_OCE_CONSOLE_ROUND1_SECOND_POLICY,S37_NAW_EVENT6_ROUND1_POLICY,S37_NAW_EVENT6_REMAINING14_POLICY,S37_CONSOLE_BULK23_POLICY,S30_NAC_ZB_SOLO85_POLICY,S37_ROUND2_ZERO20_POLICY,S39_RELOAD_ZERO5_POLICY,S41_EU_CONSOLE_ZB_R2_11_POLICY,S30_NAC_ZB_R2_SEVEN_POLICY,S38_S41_SAFE3_POLICY,S30_S37_S43_TWELVE_POLICY,DEFERRED_PAGE_SIX_POLICY,NOV17_TRACKER_POLICY,S37_FIVE_NEW_POLICY,BULK_S35_S37_DUOS_POLICY,FOLLOWUP_24_POLICY,ORIGINAL32_POLICY,FOLLOWUP18_POLICY].includes(entry.policy)){
+  if(entry.decision!=='published'||!['attendance-only','verified-rule','cosmetic-rank','verified-vr','official-final-vr-award','verified-qualifier','verified-s32-final-100usd-vr','verified-trios-qualifier-participation-zero-cash',S30_DUOS_CASH_POLICY,S30_ZERO_DUOS_POLICY,S30_JUNE21_POLICY,S29_ME_ZB_DUOS_POLICY,S28_ME_ZB_DUOS_POLICY,S26_S28_ME_ZB_DUOS_2023_POLICY,S25_ME_ZB_DUOS_2023_POLICY,S22_S25_S31_PS_20261114_POLICY,S37_S39_S40_SEVEN_CASH_POLICY,S37_S41_OCE_FIVE_CASH_POLICY,EU_UNREAL_ME_TRIOS_FOUR_POLICY,KAME_ME_DUOS_TWO_POLICY,S41_CONSOLE_ZB_FOUR_POLICY,B0TER_S31_S38_NINE_POLICY,NAC_S29_S30_ZB_VC_TEN_POLICY,S27_S34_S31_PS_ZB_TEN_POLICY,ME_S31_PS_S26_CONSOLE_TEN_POLICY,NOV14_PENDING_CASH_POLICY,NOV15_NINE_POLICY,'verified-s36-squid-naw-seven',REVIEWONLY_NONPRIZE_POLICY,GENERIC_ZERO_POLICY,S37_OCE_CONSOLE_ROUND1_POLICY,S37_OCE_CONSOLE_ROUND1_SECOND_POLICY,S37_NAW_EVENT6_ROUND1_POLICY,S37_NAW_EVENT6_REMAINING14_POLICY,S37_CONSOLE_BULK23_POLICY,S30_NAC_ZB_SOLO85_POLICY,S37_ROUND2_ZERO20_POLICY,S39_RELOAD_ZERO5_POLICY,S41_EU_CONSOLE_ZB_R2_11_POLICY,S30_NAC_ZB_R2_SEVEN_POLICY,S38_S41_SAFE3_POLICY,S30_S37_S43_TWELVE_POLICY,DEFERRED_PAGE_SIX_POLICY,NOV17_TRACKER_POLICY,S37_FIVE_NEW_POLICY,BULK_S35_S37_DUOS_POLICY,FOLLOWUP_24_POLICY,ORIGINAL32_POLICY,FOLLOWUP18_POLICY,S34_PS_TWO_POLICY].includes(entry.policy)){
    errors.push('Unknown decision/policy: '+entry.id);continue;
   }
   if(r.source!==entry.source||r.verified!==true)errors.push('Published source or verification flag changed: '+entry.id);
@@ -435,6 +436,8 @@ function audit(results,ledger,players,{promotionEvidence}={}){
     errors.push('Original 32 Epic account UUID/scoreboard page, official Round1 cash and qualification proof changed: '+entry.id);
   if(entry.policy===FOLLOWUP18_POLICY&&!validFollowup18(r,entry))
     errors.push('Followup 18 original Epic UUIDs, scoreboard rank, official 0VR payout or attendance proof changed: '+entry.id);
+  if(entry.policy===S34_PS_TWO_POLICY&&!validS34PsTwo(r,entry))
+    errors.push('S34 PlayStation original Epic UUID, rank, unconfirmed cash or Finals session changed: '+entry.id);
   if(entry.policy===FOLLOWUP_24_POLICY&&!validFollowup24(r,entry))
     errors.push('Followup 24 source-locked Epic UUID, original rank, qualification or 0VR cash proof changed: '+entry.id);
   if(entry.policy===BULK_S35_S37_DUOS_POLICY&&!validBulkS35S37Duos(r,entry))
