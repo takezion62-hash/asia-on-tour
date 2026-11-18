@@ -42,5 +42,8 @@ test('The last two candidates leave the review queue, cash total unchanged and u
  assert.deepEqual(rows.map(x=>[x.player,x.rank,x.points,x.kills,x.vrs,x.matches]),[
   ['モバイル勢のまかろん',56,63,6,0,6],['くりたる',64,47,2,0,6]]);
  assert.ok(rows.every(x=>x.prize===null));
+ const {personalCents}=require('../scripts/data-checks.cjs');
+ assert.ok(rows.every(x=>personalCents(x)===0),
+  'unverified PlayStation awards must never be counted in personal cash rankings');
  assert.equal(read('updates.json').entries.find(x=>x.id==='verified-s34-me-playstation-two-20261118').recordIds.length,2);
 });
