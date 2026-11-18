@@ -2888,6 +2888,110 @@
           "url": "https://fortnitetracker.com/events/epicgames_S39_FNCSDivisionalCup_Division1_ME?window=S39_FNCSDivisionalCup_Division1_Week5Final_ME"
         }
       ]
+    },
+    {
+      "id": "ch5s3-playstation-cup-br",
+      "name": "PlayStation Cup Battle Royale",
+      "chapter": 5,
+      "season": 3,
+      "seasonId": "S30",
+      "sourceEventIds": [
+        "S30_PlaystationCupJune"
+      ],
+      "series": "playstation-cup",
+      "mode": "battle-royale",
+      "subtype": "playstation-cup",
+      "team": "solo",
+      "platform": "playstation",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "2024年6月29日OCE Battle Royale決勝。Mofu 6位 / 95pt / 2VR / $300。ユーザー順位表画像4枚目を照合。",
+          "url": "https://fortnitetracker.com/events/epicgames_S30_PlaystationCupJune_OCE?window=S30_PlaystationCupJune_Final_OCE"
+        },
+        {
+          "text": "Chapter 5 Season 3 PlayStation Cup公式規則：OCE決勝6位 $300。",
+          "url": "https://www.fortnite.com/news/fortnite-playstation-cup-chapter-5-season-3-official-rules"
+        }
+      ]
+    },
+    {
+      "id": "ch5s3-playstation-cup-zb",
+      "name": "PlayStation Cup Zero Build",
+      "chapter": 5,
+      "season": 3,
+      "seasonId": "S30",
+      "sourceEventIds": [
+        "S30_PlaystationCupZBJune"
+      ],
+      "series": "playstation-cup",
+      "mode": "zero-build",
+      "subtype": "playstation-cup",
+      "team": "solo",
+      "platform": "playstation",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "2024年6月30日OCE Zero Build決勝。とまと（別人）25位、VRS 41位、はるぱか56位、Mofu83位。ユーザー画像7〜10枚目。",
+          "url": "https://fortnitetracker.com/events/epicgames_S30_PlaystationCupZBJune_OCE?window=S30_PlaystationCupZBJune_Final_OCE"
+        },
+        {
+          "text": "Chapter 5 Season 3公式規則：OCE 11〜100位 $100。",
+          "url": "https://www.fortnite.com/news/fortnite-playstation-cup-chapter-5-season-3-official-rules"
+        }
+      ]
+    },
+    {
+      "id": "ch6s1-playstation-cup",
+      "name": "PlayStation Cup",
+      "chapter": 6,
+      "season": 1,
+      "seasonId": "S33",
+      "sourceEventIds": [
+        "S33_PlaystationCup"
+      ],
+      "series": "playstation-cup",
+      "mode": "battle-royale",
+      "subtype": "playstation-cup",
+      "team": "solo",
+      "platform": "playstation",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "2024年12月8日ME PlayStation Cup決勝。Mofu36位 $250、xyxyxyxyxyxyzz93位賞金圏外。ユーザー画像5・6枚目。",
+          "url": "https://fortnitetracker.com/events/epicgames_S33_PlaystationCup_ME?window=S33_PlaystationCupFinal_ME"
+        },
+        {
+          "text": "Chapter 6 Season 1公式規則：ME 6〜40位 $250、41位以下は賞金対象外。",
+          "url": "https://www.fortnite.com/news/playstation-cup-chapter-6-season-1-official-rules"
+        }
+      ]
+    },
+    {
+      "id": "ch6s4-playstation-cup",
+      "name": "PlayStation Cup",
+      "chapter": 6,
+      "season": 4,
+      "seasonId": "S37",
+      "sourceEventIds": [
+        "S37_PlayStationCup"
+      ],
+      "series": "playstation-cup",
+      "mode": "battle-royale",
+      "subtype": "playstation-cup",
+      "team": "solo",
+      "platform": "playstation",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "2025年9月4日OCE PlayStation Cup決勝。Mofu10位$200、Saku41位・ごんた84位は賞金圏外。ユーザー画像1〜3枚目。",
+          "url": "https://fortnitetracker.com/events/epicgames_S37_PlayStationCup_OCE?window=S37_PlayStationCup_Final_OCE"
+        },
+        {
+          "text": "Chapter 6 Season 4 PlayStation Cup公式規則：OCE 6〜40位 $200、41位以下は賞金対象外。",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/playstation-cup-chapter-6-season-4-official-rules"
+        }
+      ]
     }
   ]
 }
