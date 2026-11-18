@@ -51,6 +51,10 @@
         {
           "id": "console-champions-cup",
           "label": "Console Champions Cup"
+        },
+        {
+          "id": "nvidia-cup",
+          "label": "NVIDIA Cup"
         }
       ]
     },
@@ -307,6 +311,10 @@
         {
           "id": "zero-build-console-champions-cup",
           "label": "Zero Build Console Champions Cup"
+        },
+        {
+          "id": "nvidia-geforce-rtx-cup",
+          "label": "NVIDIA GeForce RTX Cup"
         }
       ]
     },
@@ -2990,6 +2998,42 @@
         {
           "text": "Chapter 6 Season 4 PlayStation Cup公式規則：OCE 6〜40位 $200、41位以下は賞金対象外。",
           "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/playstation-cup-chapter-6-season-4-official-rules"
+        }
+      ]
+    },
+    {
+      "id": "ch7s1-nvidia-geforce-rtx-cup",
+      "name": "NVIDIA GeForce RTX Cup",
+      "chapter": 7,
+      "season": 1,
+      "seasonId": "S39",
+      "sourceEventIds": [
+        "S39_NvidiaCup"
+      ],
+      "series": "nvidia-cup",
+      "mode": "battle-royale",
+      "subtype": "nvidia-geforce-rtx-cup",
+      "team": "solo",
+      "platform": "cross-platform",
+      "unknownFields": [],
+      "overview": {
+        "dateJST": "2025-12-22",
+        "format": "Solo · Build",
+        "rounds": 1,
+        "maxMatches": 10,
+        "durationMinutes": 180,
+        "cashTopRank": 40,
+        "rtx5080WinnerRank": 1,
+        "rustBucketBackBlingPoints": 8
+      },
+      "evidence": [
+        {
+          "text": "Epic公式：NAWの賞金1〜40位、優勝RTX 5080、8ptでRust Bucket。Solo Build、10試合、3時間の単一ラウンド。",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/nvidia-geforce-rtx-cup-official-rules"
+        },
+        {
+          "text": "Fortnite Tracker NAWの1ラウンド順位表・賞金表（ユーザー画像1917〜1924照合）。",
+          "url": "https://fortnitetracker.com/events/epicgames_S39_NvidiaCup_NAW?window=S39_NvidiaCup_NAW"
         }
       ]
     }

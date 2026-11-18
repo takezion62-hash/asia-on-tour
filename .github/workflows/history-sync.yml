@@ -6,6 +6,9 @@ on:
     paths:
       - "scripts/osirion-sync.cjs"
       - "scripts/apply-ps-finals-ten-20261118.cjs"
+      - "scripts/apply-unreal-nvidia-six-20261118.cjs"
+      - "scripts/verified-unreal-nvidia-six-20261118.cjs"
+      - "data/manual-approvals/20261118-unreal-nvidia-six.json"
       - "scripts/verified-ps-finals-ten-20261118.cjs"
       - "data/manual-approvals/20261118-ps-four-finals-ten.json"
       - "tournaments.json"
@@ -330,6 +333,39 @@ jobs:
             fi
             if [ "${attempt}" -ge 5 ]; then
               echo "::error::PS_FINALS_TEN main advanced during publishing; no unsafe overwrite"
+              exit 1
+            fi
+            sleep $((attempt * 3))
+          done
+
+      - name: Publish six source-verified NAC Unreal and NAW NVIDIA results
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          for attempt in 1 2 3 4 5; do
+            git fetch origin main
+            git reset --hard origin/main
+            node scripts/apply-unreal-nvidia-six-20261118.cjs --dry-run
+            node scripts/apply-unreal-nvidia-six-20261118.cjs
+            npm run validate
+            node --test tests/verified-unreal-nvidia-six-20261118.test.cjs tests/approval-history.test.cjs
+            node scripts/build-season-data.cjs
+            node scripts/build-candidate-triage.cjs
+            git add players.json approval-history.json updates.json candidate-triage.json
+            git add -A source-results/ season-data/
+            if git diff --cached --quiet; then
+              echo "UNREAL_NVIDIA_SIX all already published"
+              break
+            fi
+            git commit -m "data: publish six verified Unreal and NVIDIA results"
+            if git push origin HEAD:main; then
+              echo "UNREAL_NVIDIA_SIX published to main"
+              break
+            fi
+            if [ "$attempt" -ge 5 ]; then
+              echo "::error::UNREAL_NVIDIA_SIX main advanced too often; no unsafe overwrite"
               exit 1
             fi
             sleep $((attempt * 3))
