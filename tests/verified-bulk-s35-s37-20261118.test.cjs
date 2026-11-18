@@ -34,10 +34,9 @@ test('all 38 records are published, no duplicate UUID/source identity and audit 
  assert.equal(total,200);
  assert.equal(audit(rows,ledger,players).length,0);
 });
-test('all 38 candidates removed from review queue, but unresolved conflicts remain',()=>{
+test('all 38 source-locked candidates remain absent from unresolved triage',()=>{
  const pending=load('history-sync-review.json').proposals;
  assert.equal(pending.filter(x=>source.manifest.rows.some(y=>y.id===x.id)).length,0);
  const held=load('candidate-triage.json').queue;
- assert.ok(held.some(x=>x.tournamentId==='ch6s2-playstation-cup'));
- assert.ok(held.some(x=>x.tournamentId==='ch5s3-zb-solo-victory'));
+ assert.equal(held.filter(x=>source.manifest.rows.some(y=>y.id===x.id)).length,0);
 });
