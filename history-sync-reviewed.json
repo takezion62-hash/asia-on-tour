@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-18T13:13:09.102Z",
+  "reviewedAt": "2026-11-18T18:24:43.176Z",
   "description": "Resolved historic review candidates: published, duplicate or participation",
   "entries": [
     {
@@ -33615,6 +33615,24 @@
       "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event5Round1_NAC",
       "policy": "verified-rule",
       "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules"
+    },
+    {
+      "id": "auto-s34-8a0aa90d9611",
+      "decision": "published",
+      "recordId": "auto-s34-8a0aa90d9611",
+      "reviewedAt": "2026-11-18T18:24:43.176Z",
+      "source": "https://www.fortnite.com/competitive/events/S34_PlaystationCup/?region=NAW&round=S34_PlaystationCupQualifier1_NAW",
+      "policy": "attendance-only",
+      "rule": null
+    },
+    {
+      "id": "auto-s34-09b23a5243df",
+      "decision": "published",
+      "recordId": "auto-s34-09b23a5243df",
+      "reviewedAt": "2026-11-18T18:24:43.176Z",
+      "source": "https://www.fortnite.com/competitive/events/S34_PlaystationCup/?region=NAW&round=S34_PlaystationCupQualifier1_NAW",
+      "policy": "attendance-only",
+      "rule": null
     }
   ]
 }

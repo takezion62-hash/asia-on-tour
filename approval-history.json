@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-18T13:13:09.102Z",
+  "reviewedAt": "2026-11-18T18:24:43.176Z",
   "entries": [
     {
       "id": "auto-s43-21408f1d31bc",
@@ -33073,6 +33073,28 @@
       "originalHash": "44ada59e087e543a33991873f851503588f75dc86255eaf0e51fd33bcea5e605",
       "recordHash": "d23d485af25ae32c08893c1e9f27a94246bc60abf8fbeef459268cfa2aff75a5",
       "evidence": "Owner screenshots 1-10 (PlayStation Finals 2024/2025), fixed Tracker Epic account UUID, score and official placements"
+    },
+    {
+      "id": "auto-s34-8a0aa90d9611",
+      "decision": "published",
+      "recordId": "auto-s34-8a0aa90d9611",
+      "policy": "attendance-only",
+      "approvedAt": "2026-11-18T18:24:43.176Z",
+      "approvedBy": "ChatGPT / owner-authorized verified review",
+      "source": "https://www.fortnite.com/competitive/events/S34_PlaystationCup/?region=NAW&round=S34_PlaystationCupQualifier1_NAW",
+      "rule": null,
+      "evidence": "Exact Epic account and team roster, canonical official event/calendar, ranked checkpoint with continuous mature rows or complete scan; duplicate check"
+    },
+    {
+      "id": "auto-s34-09b23a5243df",
+      "decision": "published",
+      "recordId": "auto-s34-09b23a5243df",
+      "policy": "attendance-only",
+      "approvedAt": "2026-11-18T18:24:43.176Z",
+      "approvedBy": "ChatGPT / owner-authorized verified review",
+      "source": "https://www.fortnite.com/competitive/events/S34_PlaystationCup/?region=NAW&round=S34_PlaystationCupQualifier1_NAW",
+      "rule": null,
+      "evidence": "Exact Epic account and team roster, canonical official event/calendar, ranked checkpoint with continuous mature rows or complete scan; duplicate check"
     }
   ]
 }

@@ -1,7 +1,7 @@
 {
   "version": 1,
   "sourceCheckedAt": "2026-11-18T13:15:17.932Z",
-  "total": 22,
+  "total": 20,
   "alreadyResolved": 0,
   "byYear": [
     {
@@ -10,7 +10,7 @@
     },
     {
       "name": "2025",
-      "count": 9
+      "count": 7
     }
   ],
   "byRegion": [
@@ -20,7 +20,7 @@
     },
     {
       "name": "NAW",
-      "count": 7
+      "count": 5
     },
     {
       "name": "OCE",
@@ -37,10 +37,6 @@
       "count": 2
     },
     {
-      "name": "PlayStation Cup / NAW / 2025",
-      "count": 2
-    },
-    {
       "name": "ZB Solo Victory Cup / NAC / 2024",
       "count": 13
     }
@@ -49,10 +45,6 @@
     {
       "name": "evidence-conflict",
       "count": 13
-    },
-    {
-      "name": "partial-scan",
-      "count": 2
     },
     {
       "name": "rules-review",
@@ -716,72 +708,6 @@
         "seenPages": 3,
         "totalPages": 3,
         "sourceKey": "epicgames_S37_ConsoleDuosCashCups_OCE/S37_ConsoleDuosCashCups_Event5Round2_OCE",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s34-09b23a5243df",
-      "origin": "history",
-      "date": "2025-04-30",
-      "year": "2025",
-      "region": "NAW",
-      "tournamentId": "ch6s2-playstation-cup",
-      "event": "PlayStation Cup",
-      "round": "単一開催枠 / 参加確認",
-      "player": "瀬田光貴と黒木マティ",
-      "kind": "参加確認",
-      "rank": 8191,
-      "points": 47,
-      "kills": 1,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S34_PlaystationCup/?region=NAW&round=S34_PlaystationCupQualifier1_NAW",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "確認専用大会は自動承認不可",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 90,
-        "totalPages": 100,
-        "sourceKey": "epicgames_S34_PlaystationCup_NAW/S34_PlaystationCupQualifier1_NAW",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s34-8a0aa90d9611",
-      "origin": "history",
-      "date": "2025-04-30",
-      "year": "2025",
-      "region": "NAW",
-      "tournamentId": "ch6s2-playstation-cup",
-      "event": "PlayStation Cup",
-      "round": "単一開催枠 / 参加確認",
-      "player": "朝比奈まふゆӝ",
-      "kind": "参加確認",
-      "rank": 8055,
-      "points": 48,
-      "kills": 1,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S34_PlaystationCup/?region=NAW&round=S34_PlaystationCupQualifier1_NAW",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "確認専用大会は自動承認不可",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 90,
-        "totalPages": 100,
-        "sourceKey": "epicgames_S34_PlaystationCup_NAW/S34_PlaystationCupQualifier1_NAW",
         "possibleExistingId": null
       },
       "rewardState": "cash-unconfirmed"
