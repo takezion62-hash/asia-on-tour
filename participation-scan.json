@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-11-18T06:22:46.249Z",
+  "checkedAt": "2026-11-18T08:45:42.137Z",
   "windows": {
     "epicgames_S42_InoxtagIconCup_NAW/S42_InoxtagIconCup_NAW": {
       "nextPage": 60,
@@ -381,12 +381,12 @@
       "emptyAttempts": 0
     },
     "epicgames_S30_SoloVictoryCashCup_ME/S30_SoloVictoryCashCup_Event7Round1_ME": {
-      "nextPage": 50,
-      "pages": 50,
-      "complete": false,
-      "coverageLimited": false,
+      "nextPage": 60,
+      "pages": 60,
+      "complete": true,
+      "coverageLimited": true,
       "totalPages": 100,
-      "lastScanned": "2026-11-11T09:45:51.464Z",
+      "lastScanned": "2026-11-18T08:45:27.030Z",
       "emptyAttempts": 0
     },
     "epicgames_S43_OnePieceZoroCup_NAC/S43_OnePieceZoroCup_NAC": {
@@ -1027,12 +1027,12 @@
       "emptyAttempts": 0
     },
     "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event1Round1_NAC": {
-      "nextPage": 40,
-      "pages": 40,
+      "nextPage": 50,
+      "pages": 50,
       "complete": false,
       "coverageLimited": false,
       "totalPages": 100,
-      "lastScanned": "2026-11-18T06:22:37.531Z",
+      "lastScanned": "2026-11-18T08:45:34.985Z",
       "emptyAttempts": 0,
       "lastError": "Osirion API HTTP 429 /v1/tournaments/leaderboard"
     },
@@ -1223,12 +1223,12 @@
       "emptyAttempts": 0
     },
     "epicgames_S43_ReloadZBDuosCashCup_BR/S43_ReloadZBDuosCashCup_Event2Round1_BR": {
-      "nextPage": 20,
-      "pages": 20,
+      "nextPage": 30,
+      "pages": 30,
       "complete": false,
       "coverageLimited": false,
       "totalPages": 100,
-      "lastScanned": "2026-11-18T06:22:21.172Z",
+      "lastScanned": "2026-11-18T08:45:19.155Z",
       "emptyAttempts": 0
     },
     "epicgames_S30_DuosCashCup_EU/S30_DuosCashCup_Event1Round1_EU": {
@@ -1241,6 +1241,15 @@
       "emptyAttempts": 0,
       "retryAfter": "2026-11-18T12:22:44.527Z",
       "lastError": "Osirion API HTTP 429 /v1/tournaments/leaderboard"
+    },
+    "epicgames_S33_SoloCashCup_NAW/S33_SoloCashCup_Event8Round1_NAW": {
+      "nextPage": 10,
+      "pages": 10,
+      "complete": false,
+      "coverageLimited": false,
+      "totalPages": 100,
+      "lastScanned": "2026-11-18T08:45:42.136Z",
+      "emptyAttempts": 0
     }
   }
 }
