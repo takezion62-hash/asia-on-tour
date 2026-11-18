@@ -27,7 +27,7 @@ const TARGETS=Object.freeze([
  ['S33MEBR','Mofu',36,118,10,6,0,250,5,'b7863190-5b98-47c3-8d34-7af8ea94d4b5'],
  ['S33MEBR','xyxyxyxyxyxyzz',93,7,0,3,0,0,6,'2efa4bef-89c2-4bec-95aa-1f4041aa5aac'],
  ['S30OCEZB','とまと',25,59,9,6,0,100,7,'6e8019af-c259-4664-b5e1-7273c365d316'],
- ['S30OCEZB','VRS k3nz1xJR',41,35,2,5,0,100,8,'35ac3b8d-870d-40d5-b25d-aec767721188'],
+ ['S30OCEZB','ぱやぱやの和田もひ',41,35,2,5,0,100,8,'35ac3b8d-870d-40d5-b25d-aec767721188'],
  ['S30OCEZB','はるぱか',56,22,7,6,0,100,9,'e3837a9f-26f0-4f83-bd9e-08f101fbc107'],
  ['S30OCEZB','Mofu',83,5,1,4,0,100,10,'b7863190-5b98-47c3-8d34-7af8ea94d4b5']
 ]);
@@ -60,7 +60,7 @@ function validateProof(){
  must(DOC?.version===1&&DOC.batch?.id==='owner-ps-finals-10-20261118'&&
   DOC.batch.reviewedOn==='2026-11-18'&&Array.isArray(DOC.batch.entries)&&
   DOC.batch.entries.length===TARGETS.length&&
-  DOC.expected?.rows===10&&DOC.expected.newPlayers===3&&
+  DOC.expected?.rows===10&&DOC.expected.newPlayers===2&&
   DOC.expected.teamPrize===1150,'wrong fixed batch');
  const seenIds=new Set(),seenUuidName=new Map();
  for(let i=0;i<TARGETS.length;i++){
@@ -89,6 +89,7 @@ function validateProof(){
   if(player==='とまと')must(x.playerRaw==='とまと','verified existing tomato raw identity mismatch');
   if(player==='ごんた')must(x.playerRaw==='GR go gonta go','confirmed Gonta alias mismatch');
   if(player==='はるぱか')must(x.playerRaw==='Lit どうみてもはるぱか','confirmed Harupaka display mismatch');
+  if(player==='ぱやぱやの和田もひ')must(x.playerRaw==='VRS k3nz1xJR','verified same-Epic VRS historical alias mismatch');
  }
  must(DOC.batch.entries.reduce((n,x)=>n+x.prize,0)===1150,'total reward mismatch');
  return true;
@@ -100,7 +101,8 @@ function project(x){
   (x.prize===0?'公式順位別賞金範囲外につき現金$0。':
    'Epic公式順位別賞金$'+x.prize+'を確認（受領済みかは未確認）。')+
   ' 大会順位表: '+x.source+' 公式規則: '+x.rule+
-  (x.player==='とまと'?' 2026年9月12日OCE Console ZB Solo VCの登録とEpic IDが一致。':'');
+  (x.player==='とまと'?' 2026年9月12日OCE Console ZB Solo VCの登録とEpic IDが一致。':'')+
+  (x.player==='ぱやぱやの和田もひ'?' 2023年6月19日ME ZB Duos VC登録とEpic IDが一致（当時の名義: ぱやぱやの和田もひ）。':'');
  return {id:x.id,date:x.date,region:x.region,player:x.player,playerRaw:x.playerRaw,
   event:x.event,round:'Final / 賞金決勝',rank:x.rank,points:x.points,
   matches:x.matches,kills:x.kills,vrs:x.vrs,prize:x.prize,

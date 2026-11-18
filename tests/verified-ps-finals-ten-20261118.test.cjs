@@ -78,6 +78,23 @@ test('2024 OCE PlayStation tomato reuses same verified Epic identity as 2026 OCE
  assert.ok(current.confirmedAliases['とまと'].includes('HELIX BRN とまと'));
  assert.equal(v.project(newTomato).player,'とまと');
 });
+test('VRS k3nz1xJR reuses 2023 ME zero-build player by exact Epic UUID and keeps raw name',()=>{
+ const source=readResults(root).rows;
+ const earlier=source.find(x=>x.id==='s25-me-zb-duos-vc-final-20230619-r14');
+ assert.ok(earlier,'existing 2023 historical cash row must stay intact');
+ const original=earlier.profiles.find(x=>x.name==='ぱやぱやの和田もひ');
+ assert.ok(original);
+ const current=doc.batch.entries.find(x=>x.id==='ps-s30-oce-s30ocezb-final-20240630-r41');
+ assert.ok(current);
+ assert.equal(current.player,'ぱやぱやの和田もひ');
+ assert.equal(current.playerRaw,'VRS k3nz1xJR');
+ assert.equal(v.uuid(current.profileUrl),'35ac3b8d-870d-40d5-b25d-aec767721188');
+ assert.equal(v.uuid(original.url),v.uuid(current.profileUrl));
+ assert.ok(read('players.json').candidates.some(x=>x.name===current.player));
+ const projected=v.project(current);
+ assert.equal(projected.player,'ぱやぱやの和田もひ');
+ assert.equal(projected.playerRaw,'VRS k3nz1xJR');
+});
 test('all ten records are published exactly once after deployment, or none before rollout',()=>{
  const results=readResults(root).rows,ledger=read('approval-history.json').entries;
  const targets=doc.batch.entries.map(x=>x.id),present=results.filter(x=>targets.includes(x.id));
@@ -109,7 +126,7 @@ test('full snapshot dry-run proves publishability without touching any source sh
  const {apply}=require('../scripts/apply-ps-finals-ten-20261118.cjs');
  const summary=apply({dryRun:true});
  assert.equal(summary.added+summary.alreadyPublished,10);
- assert.equal(summary.newPlayers.length,summary.added===0?0:3);
+ assert.equal(summary.newPlayers.length,summary.added===0?0:2);
  assert.equal(summary.addedPrize,summary.added===0?0:1150);
  assert.deepEqual(sensitive.map(sha),before,
   'dry run must not write over published scores, prizes or player identities');

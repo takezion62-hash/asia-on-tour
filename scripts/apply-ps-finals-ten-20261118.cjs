@@ -47,7 +47,7 @@ function apply({dryRun=false}={}){
  }
  const initial={count:rows.length,team:rows.reduce((n,x)=>n+Math.round((x.prize||0)*100),0),
   personal:rows.reduce((n,x)=>n+personalCents(x)*roster(x).length,0)};
- const allowedNew=new Set(['xyxyxyxyxyxyzz','VRS k3nz1xJR','はるぱか']);
+ const allowedNew=new Set(['xyxyxyxyxyxyzz','はるぱか']);
  const newPlayers=[],added=[],existing=[];
  const takenRanks=new Set();
  const checks=tournaments.catalog;
@@ -74,6 +74,16 @@ function apply({dryRun=false}={}){
      'キル・賞金$'+x.prize+'（本人Epic ID・公式順位別賞金確認）。',
     epicAccountVerified:true,trackerProfileUrl:x.profileUrl});
    known.add(x.player);aliases.set(x.player,x.player);newPlayers.push(x.player);
+  }
+  if(x.player==='ぱやぱやの和田もひ'){
+   must(x.playerRaw==='VRS k3nz1xJR','wrong verified historical name for same Epic account');
+   must(!aliases.has(x.playerRaw)||aliases.get(x.playerRaw)===x.player,
+    'a confirmed alias belongs to another player '+x.playerRaw);
+   const names=players.confirmedAliases[x.player]||[];
+   must(Array.isArray(names),'invalid aliases for historical player '+x.player);
+   if(!names.includes(x.playerRaw))names.push(x.playerRaw);
+   players.confirmedAliases[x.player]=names;
+   aliases.set(x.playerRaw,x.player);
   }
   identityOwners.set(epicUuid,x.player);
   const candidates=rows.filter(r=>r.date===x.date&&r.region===x.region&&
@@ -103,7 +113,7 @@ function apply({dryRun=false}={}){
  if(added.length){
   upsertPublicationLog(updates,{id:'owner-ps-finals-10-20261118',date:'2026-11-18',
    title:'PlayStation Cup過去4大会：Mofu・Saku・ごんた・新規選手など10件',
-   description:'提供画像10枚と本人Epic ID・公式順位別賞金を照合。S30 OCE BR/ZB、S33 ME、S37 OCEの10成績を追記。賞金獲得7件・賞金圏外3件。2024年・2026年の「とまと」を本人Epic IDで統合。新規賞金合計$1,150。',
+   description:'提供画像10枚と本人Epic ID・公式順位別賞金を照合。S30 OCE BR/ZB、S33 ME、S37 OCEの10成績を追記。賞金獲得7件・賞金圏外3件。同Epic IDの2024年・2026年「とまと」、2023年・2024年の「ぱやぱやの和田もひ」/「VRS k3nz1xJR」をそれぞれ統合。新規賞金合計$1,150。',
    recordIds:added.map(x=>x.id)});
  }
  const dataErrors=validateData({results:rows,players,tournaments});
