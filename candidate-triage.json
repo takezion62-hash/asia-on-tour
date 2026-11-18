@@ -1,12 +1,12 @@
 {
   "version": 1,
-  "sourceCheckedAt": "2026-11-18T13:15:17.932Z",
-  "total": 20,
+  "sourceCheckedAt": "2026-11-18T18:27:13.614Z",
+  "total": 27,
   "alreadyResolved": 0,
   "byYear": [
     {
       "name": "2024",
-      "count": 13
+      "count": 20
     },
     {
       "name": "2025",
@@ -24,7 +24,7 @@
     },
     {
       "name": "OCE",
-      "count": 2
+      "count": 9
     }
   ],
   "byTournament": [
@@ -37,6 +37,10 @@
       "count": 2
     },
     {
+      "name": "PlayStation Cup Zero Build / OCE / 2024",
+      "count": 7
+    },
+    {
       "name": "ZB Solo Victory Cup / NAC / 2024",
       "count": 13
     }
@@ -45,6 +49,10 @@
     {
       "name": "evidence-conflict",
       "count": 13
+    },
+    {
+      "name": "partial-scan",
+      "count": 7
     },
     {
       "name": "rules-review",
@@ -708,6 +716,237 @@
         "seenPages": 3,
         "totalPages": 3,
         "sourceKey": "epicgames_S37_ConsoleDuosCashCups_OCE/S37_ConsoleDuosCashCups_Event5Round2_OCE",
+        "possibleExistingId": null
+      },
+      "rewardState": "cash-unconfirmed"
+    },
+    {
+      "id": "auto-s30-728786a6ab5d",
+      "origin": "history",
+      "date": "2024-05-30",
+      "year": "2024",
+      "region": "OCE",
+      "tournamentId": "ch5s3-playstation-cup-zb",
+      "event": "PlayStation Cup Zero Build",
+      "round": "単一開催枠 / 参加確認",
+      "player": "ぱやぱやの和田もひ",
+      "kind": "参加確認",
+      "rank": 40,
+      "points": 120,
+      "kills": 7,
+      "vrs": 2,
+      "prize": null,
+      "source": "https://www.fortnite.com/competitive/events/S30_PlaystationCupZBJune/?region=OCE&round=S30_PlaystationCupZBJune_Qualifier1_OCE",
+      "status": "partial-scan",
+      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
+      "reason": "確認専用大会は自動承認不可",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": false,
+        "observedPartial": true,
+        "seenPages": 2,
+        "totalPages": 21,
+        "sourceKey": "epicgames_S30_PlaystationCupZBJune_OCE/S30_PlaystationCupZBJune_Qualifier1_OCE",
+        "possibleExistingId": null
+      },
+      "rewardState": "cash-unconfirmed"
+    },
+    {
+      "id": "auto-s30-8f83d69f288b",
+      "origin": "history",
+      "date": "2024-05-30",
+      "year": "2024",
+      "region": "OCE",
+      "tournamentId": "ch5s3-playstation-cup-zb",
+      "event": "PlayStation Cup Zero Build",
+      "round": "単一開催枠 / 参加確認",
+      "player": "そそふぃん",
+      "kind": "参加確認",
+      "rank": 61,
+      "points": 115,
+      "kills": 8,
+      "vrs": 0,
+      "prize": null,
+      "source": "https://www.fortnite.com/competitive/events/S30_PlaystationCupZBJune/?region=OCE&round=S30_PlaystationCupZBJune_Qualifier1_OCE",
+      "status": "partial-scan",
+      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
+      "reason": "確認専用大会は自動承認不可",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": false,
+        "observedPartial": true,
+        "seenPages": 2,
+        "totalPages": 21,
+        "sourceKey": "epicgames_S30_PlaystationCupZBJune_OCE/S30_PlaystationCupZBJune_Qualifier1_OCE",
+        "possibleExistingId": null
+      },
+      "rewardState": "cash-unconfirmed"
+    },
+    {
+      "id": "auto-s30-9e8a03a93376",
+      "origin": "history",
+      "date": "2024-05-30",
+      "year": "2024",
+      "region": "OCE",
+      "tournamentId": "ch5s3-playstation-cup-zb",
+      "event": "PlayStation Cup Zero Build",
+      "round": "単一開催枠 / 参加確認",
+      "player": "朝比奈まふゆӝ",
+      "kind": "参加確認",
+      "rank": 185,
+      "points": 88,
+      "kills": 6,
+      "vrs": 1,
+      "prize": null,
+      "source": "https://www.fortnite.com/competitive/events/S30_PlaystationCupZBJune/?region=OCE&round=S30_PlaystationCupZBJune_Qualifier1_OCE",
+      "status": "partial-scan",
+      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
+      "reason": "確認専用大会は自動承認不可",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": false,
+        "observedPartial": true,
+        "seenPages": 2,
+        "totalPages": 21,
+        "sourceKey": "epicgames_S30_PlaystationCupZBJune_OCE/S30_PlaystationCupZBJune_Qualifier1_OCE",
+        "possibleExistingId": null
+      },
+      "rewardState": "cash-unconfirmed"
+    },
+    {
+      "id": "auto-s30-a9867fde5048",
+      "origin": "history",
+      "date": "2024-05-30",
+      "year": "2024",
+      "region": "OCE",
+      "tournamentId": "ch5s3-playstation-cup-zb",
+      "event": "PlayStation Cup Zero Build",
+      "round": "単一開催枠 / 参加確認",
+      "player": "Mofu",
+      "kind": "参加確認",
+      "rank": 14,
+      "points": 141,
+      "kills": 31,
+      "vrs": 1,
+      "prize": null,
+      "source": "https://www.fortnite.com/competitive/events/S30_PlaystationCupZBJune/?region=OCE&round=S30_PlaystationCupZBJune_Qualifier1_OCE",
+      "status": "partial-scan",
+      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
+      "reason": "確認専用大会は自動承認不可",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": false,
+        "observedPartial": true,
+        "seenPages": 2,
+        "totalPages": 21,
+        "sourceKey": "epicgames_S30_PlaystationCupZBJune_OCE/S30_PlaystationCupZBJune_Qualifier1_OCE",
+        "possibleExistingId": null
+      },
+      "rewardState": "cash-unconfirmed"
+    },
+    {
+      "id": "auto-s30-d4212d49048a",
+      "origin": "history",
+      "date": "2024-05-30",
+      "year": "2024",
+      "region": "OCE",
+      "tournamentId": "ch5s3-playstation-cup-zb",
+      "event": "PlayStation Cup Zero Build",
+      "round": "単一開催枠 / 参加確認",
+      "player": "かぷせるてぃーてぃーTTていてい",
+      "kind": "参加確認",
+      "rank": 66,
+      "points": 113,
+      "kills": 19,
+      "vrs": 0,
+      "prize": null,
+      "source": "https://www.fortnite.com/competitive/events/S30_PlaystationCupZBJune/?region=OCE&round=S30_PlaystationCupZBJune_Qualifier1_OCE",
+      "status": "partial-scan",
+      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
+      "reason": "確認専用大会は自動承認不可",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": false,
+        "observedPartial": true,
+        "seenPages": 2,
+        "totalPages": 21,
+        "sourceKey": "epicgames_S30_PlaystationCupZBJune_OCE/S30_PlaystationCupZBJune_Qualifier1_OCE",
+        "possibleExistingId": null
+      },
+      "rewardState": "cash-unconfirmed"
+    },
+    {
+      "id": "auto-s30-e55526ce1cd4",
+      "origin": "history",
+      "date": "2024-05-30",
+      "year": "2024",
+      "region": "OCE",
+      "tournamentId": "ch5s3-playstation-cup-zb",
+      "event": "PlayStation Cup Zero Build",
+      "round": "単一開催枠 / 参加確認",
+      "player": "はるぱか",
+      "kind": "参加確認",
+      "rank": 2,
+      "points": 162,
+      "kills": 38,
+      "vrs": 3,
+      "prize": null,
+      "source": "https://www.fortnite.com/competitive/events/S30_PlaystationCupZBJune/?region=OCE&round=S30_PlaystationCupZBJune_Qualifier1_OCE",
+      "status": "partial-scan",
+      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
+      "reason": "確認専用大会は自動承認不可",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": false,
+        "observedPartial": true,
+        "seenPages": 2,
+        "totalPages": 21,
+        "sourceKey": "epicgames_S30_PlaystationCupZBJune_OCE/S30_PlaystationCupZBJune_Qualifier1_OCE",
+        "possibleExistingId": null
+      },
+      "rewardState": "cash-unconfirmed"
+    },
+    {
+      "id": "auto-s30-fc34c4223a60",
+      "origin": "history",
+      "date": "2024-05-30",
+      "year": "2024",
+      "region": "OCE",
+      "tournamentId": "ch5s3-playstation-cup-zb",
+      "event": "PlayStation Cup Zero Build",
+      "round": "単一開催枠 / 参加確認",
+      "player": "とまと",
+      "kind": "参加確認",
+      "rank": 42,
+      "points": 120,
+      "kills": 7,
+      "vrs": 1,
+      "prize": null,
+      "source": "https://www.fortnite.com/competitive/events/S30_PlaystationCupZBJune/?region=OCE&round=S30_PlaystationCupZBJune_Qualifier1_OCE",
+      "status": "partial-scan",
+      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
+      "reason": "確認専用大会は自動承認不可",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": false,
+        "observedPartial": true,
+        "seenPages": 2,
+        "totalPages": 21,
+        "sourceKey": "epicgames_S30_PlaystationCupZBJune_OCE/S30_PlaystationCupZBJune_Qualifier1_OCE",
         "possibleExistingId": null
       },
       "rewardState": "cash-unconfirmed"
