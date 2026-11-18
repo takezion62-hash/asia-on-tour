@@ -1,0 +1,486 @@
+{
+  "version": 1,
+  "sourceCommit": "ad1d06e4b08d757f8ecdb5417bd5e580cc37d8a1",
+  "sourceFile": "history-sync-scan.json",
+  "sourceCheckedAt": "2026-11-17T14:41:18.679Z",
+  "key": "epicgames_S35_VictoryDuosCup_ME/S35_VictoryDuosCup_Event2Round1_ME",
+  "description": "Only Event2 S35 ME Round1 old contiguous 4-page verified prefix; source update later retried after next page and must be independently matched with newer row/UUID/rank. Never authorizes cash or uncatalogued windows.",
+  "checkpoint": {
+    "nextPage": 4,
+    "complete": false,
+    "proposals": [
+      {
+        "id": "auto-s35-1f7cfbb457b3",
+        "date": "2025-05-24",
+        "region": "ME",
+        "player": "kuki / TEITEI",
+        "playerRaw": "kuk1 ψ / kyojiguchi",
+        "event": "Duos Console Victory Cash Cup",
+        "round": "Event 2 · Round 1 / 予選",
+        "rank": 13,
+        "points": 285,
+        "kills": 40,
+        "vrs": 1,
+        "prize": 0,
+        "kind": "予選",
+        "matches": 7,
+        "seasonId": "S35",
+        "chapter": 6,
+        "season": 2,
+        "tournamentId": "ch6s2-console-duos-victory",
+        "source": "https://www.fortnite.com/competitive/events/S35_VictoryDuosCup/?region=ME&round=S35_VictoryDuosCup_Event2Round1_ME",
+        "verified": true,
+        "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。",
+        "players": [
+          "kuki",
+          "TEITEI"
+        ],
+        "teamAccountIds": [
+          "8ac98b96d3da4c1c8f915b50b089805b",
+          "b410ecc863424e7b96a143815cbd2a0d"
+        ]
+      },
+      {
+        "id": "auto-s35-667d0a3116ac",
+        "date": "2025-05-24",
+        "region": "ME",
+        "player": "seljuny / ちゃる",
+        "playerRaw": "alpha s3awesomer / charufn",
+        "event": "Duos Console Victory Cash Cup",
+        "round": "Event 2 · Round 1 / 予選",
+        "rank": 38,
+        "points": 262,
+        "kills": 38,
+        "vrs": 2,
+        "prize": 0,
+        "kind": "予選",
+        "matches": 7,
+        "seasonId": "S35",
+        "chapter": 6,
+        "season": 2,
+        "tournamentId": "ch6s2-console-duos-victory",
+        "source": "https://www.fortnite.com/competitive/events/S35_VictoryDuosCup/?region=ME&round=S35_VictoryDuosCup_Event2Round1_ME",
+        "verified": true,
+        "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。",
+        "players": [
+          "seljuny",
+          "ちゃる"
+        ],
+        "teamAccountIds": [
+          "1e2bd6cc12614993928642aed3d4f1e4",
+          "e3d0bd7d4b8c4e60ac46564918e3e3a1"
+        ]
+      },
+      {
+        "id": "auto-s35-e5d7218e627a",
+        "date": "2025-05-24",
+        "region": "ME",
+        "player": "ごんた / あくりあ",
+        "playerRaw": "GR go gonta go / gents あくりあハンバーガー",
+        "event": "Duos Console Victory Cash Cup",
+        "round": "Event 2 · Round 1 / 予選",
+        "rank": 68,
+        "points": 251,
+        "kills": 29,
+        "vrs": 1,
+        "prize": 0,
+        "kind": "予選",
+        "matches": 7,
+        "seasonId": "S35",
+        "chapter": 6,
+        "season": 2,
+        "tournamentId": "ch6s2-console-duos-victory",
+        "source": "https://www.fortnite.com/competitive/events/S35_VictoryDuosCup/?region=ME&round=S35_VictoryDuosCup_Event2Round1_ME",
+        "verified": true,
+        "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。",
+        "players": [
+          "ごんた",
+          "あくりあ"
+        ],
+        "teamAccountIds": [
+          "848254b0e67347d2b5c2d242eca99a2d",
+          "852a62b1d38b4072b1c201460f27a9ca"
+        ]
+      },
+      {
+        "id": "auto-s35-2f59f3a28c07",
+        "date": "2025-05-24",
+        "region": "ME",
+        "player": "ぴぃたこ / 私は3本のガーベラを君に贈ります",
+        "playerRaw": "ぴぃたこ / 私は3本のガーベラを君に贈ります",
+        "event": "Duos Console Victory Cash Cup",
+        "round": "Event 2 · Round 1 / 予選",
+        "rank": 78,
+        "points": 248,
+        "kills": 46,
+        "vrs": 0,
+        "prize": 0,
+        "kind": "予選",
+        "matches": 7,
+        "seasonId": "S35",
+        "chapter": 6,
+        "season": 2,
+        "tournamentId": "ch6s2-console-duos-victory",
+        "source": "https://www.fortnite.com/competitive/events/S35_VictoryDuosCup/?region=ME&round=S35_VictoryDuosCup_Event2Round1_ME",
+        "verified": true,
+        "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。",
+        "players": [
+          "ぴぃたこ",
+          "私は3本のガーベラを君に贈ります"
+        ],
+        "teamAccountIds": [
+          "6ecdddc1b76646959d49d76b778f7660",
+          "a56d84b6fc144b5cb47b0a0ddd7ccfb1"
+        ]
+      },
+      {
+        "id": "auto-s35-795283029427",
+        "date": "2025-05-24",
+        "region": "ME",
+        "player": "p1ng / しこぴよフォートナイト",
+        "playerRaw": "boltzZzero0oǃ / しこぴよフォートナイト",
+        "event": "Duos Console Victory Cash Cup",
+        "round": "Event 2 · Round 1 / 予選",
+        "rank": 94,
+        "points": 244,
+        "kills": 42,
+        "vrs": 0,
+        "prize": 0,
+        "kind": "予選",
+        "matches": 7,
+        "seasonId": "S35",
+        "chapter": 6,
+        "season": 2,
+        "tournamentId": "ch6s2-console-duos-victory",
+        "source": "https://www.fortnite.com/competitive/events/S35_VictoryDuosCup/?region=ME&round=S35_VictoryDuosCup_Event2Round1_ME",
+        "verified": true,
+        "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。",
+        "players": [
+          "p1ng",
+          "しこぴよフォートナイト"
+        ],
+        "teamAccountIds": [
+          "9766622eec65443fb8cf2b860838c19d",
+          "b23d3ab82739446c8e6787a874a11e01"
+        ]
+      },
+      {
+        "id": "auto-s35-cd8d4c7288b1",
+        "date": "2025-05-24",
+        "region": "ME",
+        "player": "asvaswgernb / Teddy",
+        "playerRaw": "asvaswgernb / faction teddy",
+        "event": "Duos Console Victory Cash Cup",
+        "round": "Event 2 · Round 1 / 予選",
+        "rank": 99,
+        "points": 243,
+        "kills": 39,
+        "vrs": 1,
+        "prize": 0,
+        "kind": "予選",
+        "matches": 7,
+        "seasonId": "S35",
+        "chapter": 6,
+        "season": 2,
+        "tournamentId": "ch6s2-console-duos-victory",
+        "source": "https://www.fortnite.com/competitive/events/S35_VictoryDuosCup/?region=ME&round=S35_VictoryDuosCup_Event2Round1_ME",
+        "verified": true,
+        "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。",
+        "players": [
+          "asvaswgernb",
+          "Teddy"
+        ],
+        "teamAccountIds": [
+          "34db6afd2ce046be8554a813face02df",
+          "bc21ab3c0a5f4da8b83c7b085084aae0"
+        ]
+      },
+      {
+        "id": "auto-s35-6a5ff50424ff",
+        "date": "2025-05-24",
+        "region": "ME",
+        "player": "えいぶか / あすふぁろず",
+        "playerRaw": "s2 ほんまにふわかろん雑魚 / あすふぁろず",
+        "event": "Duos Console Victory Cash Cup",
+        "round": "Event 2 · Round 1 / 予選",
+        "rank": 113,
+        "points": 241,
+        "kills": 21,
+        "vrs": 1,
+        "prize": 0,
+        "kind": "予選",
+        "matches": 7,
+        "seasonId": "S35",
+        "chapter": 6,
+        "season": 2,
+        "tournamentId": "ch6s2-console-duos-victory",
+        "source": "https://www.fortnite.com/competitive/events/S35_VictoryDuosCup/?region=ME&round=S35_VictoryDuosCup_Event2Round1_ME",
+        "verified": true,
+        "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。",
+        "players": [
+          "えいぶか",
+          "あすふぁろず"
+        ],
+        "teamAccountIds": [
+          "c5fe2606d7af4bf3a9c400b75f2fe3ba",
+          "de58135a20f245168875431fd8dd9fc3"
+        ]
+      },
+      {
+        "id": "auto-s35-43aa5aea0874",
+        "date": "2025-05-24",
+        "region": "ME",
+        "player": "まぁ / ちからV2",
+        "playerRaw": "STX まぁǃ / NEXUS ちからV2ǃ",
+        "event": "Duos Console Victory Cash Cup",
+        "round": "Event 2 · Round 1 / 予選",
+        "rank": 114,
+        "points": 240,
+        "kills": 42,
+        "vrs": 2,
+        "prize": 0,
+        "kind": "予選",
+        "matches": 7,
+        "seasonId": "S35",
+        "chapter": 6,
+        "season": 2,
+        "tournamentId": "ch6s2-console-duos-victory",
+        "source": "https://www.fortnite.com/competitive/events/S35_VictoryDuosCup/?region=ME&round=S35_VictoryDuosCup_Event2Round1_ME",
+        "verified": true,
+        "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。",
+        "players": [
+          "まぁ",
+          "ちからV2"
+        ],
+        "teamAccountIds": [
+          "177f0551e829457aad8fbe6e3d84fe3c",
+          "2512ed089c99409fb69d2cc3de7c35c6"
+        ]
+      },
+      {
+        "id": "auto-s35-09687e1d1aad",
+        "date": "2025-05-24",
+        "region": "ME",
+        "player": "ねむじすた / Grape",
+        "playerRaw": "Alpha nemuj1st / שًٍَِّ今際の際שًٍَِّ",
+        "event": "Duos Console Victory Cash Cup",
+        "round": "Event 2 · Round 1 / 予選",
+        "rank": 166,
+        "points": 231,
+        "kills": 21,
+        "vrs": 1,
+        "prize": 0,
+        "kind": "予選",
+        "matches": 6,
+        "seasonId": "S35",
+        "chapter": 6,
+        "season": 2,
+        "tournamentId": "ch6s2-console-duos-victory",
+        "source": "https://www.fortnite.com/competitive/events/S35_VictoryDuosCup/?region=ME&round=S35_VictoryDuosCup_Event2Round1_ME",
+        "verified": true,
+        "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。",
+        "players": [
+          "ねむじすた",
+          "Grape"
+        ],
+        "teamAccountIds": [
+          "602ad4a029464542b0c8e03490fe3c93",
+          "7a19efe1b04c47b19963a30a95276437"
+        ]
+      },
+      {
+        "id": "auto-s35-986018e0b155",
+        "date": "2025-05-24",
+        "region": "ME",
+        "player": "Aim / Asuka",
+        "playerRaw": "awetatewateweawa / VOLARE Asuka",
+        "event": "Duos Console Victory Cash Cup",
+        "round": "Event 2 · Round 1 / 予選",
+        "rank": 181,
+        "points": 229,
+        "kills": 18,
+        "vrs": 1,
+        "prize": 0,
+        "kind": "予選",
+        "matches": 7,
+        "seasonId": "S35",
+        "chapter": 6,
+        "season": 2,
+        "tournamentId": "ch6s2-console-duos-victory",
+        "source": "https://www.fortnite.com/competitive/events/S35_VictoryDuosCup/?region=ME&round=S35_VictoryDuosCup_Event2Round1_ME",
+        "verified": true,
+        "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。",
+        "players": [
+          "Aim",
+          "Asuka"
+        ],
+        "teamAccountIds": [
+          "8baf28eab51548e69232d03509c13382",
+          "c34fb8f4e6da4345a26cd5bf33847f52"
+        ]
+      },
+      {
+        "id": "auto-s35-c6a76ffe0d6d",
+        "date": "2025-05-24",
+        "region": "ME",
+        "player": "かぷせるてぃーてぃーTTていてい / めるんやけん",
+        "playerRaw": "Pollo 17 ǃ ǃ / がちのシャーク",
+        "event": "Duos Console Victory Cash Cup",
+        "round": "Event 2 · Round 1 / 予選",
+        "rank": 195,
+        "points": 226,
+        "kills": 22,
+        "vrs": 0,
+        "prize": 0,
+        "kind": "予選",
+        "matches": 6,
+        "seasonId": "S35",
+        "chapter": 6,
+        "season": 2,
+        "tournamentId": "ch6s2-console-duos-victory",
+        "source": "https://www.fortnite.com/competitive/events/S35_VictoryDuosCup/?region=ME&round=S35_VictoryDuosCup_Event2Round1_ME",
+        "verified": true,
+        "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。",
+        "players": [
+          "かぷせるてぃーてぃーTTていてい",
+          "めるんやけん"
+        ],
+        "teamAccountIds": [
+          "10a89ca8d9c140368cc3f4eac47bcc40",
+          "d02e4ebd15044724bbcc81263cee3779"
+        ]
+      },
+      {
+        "id": "auto-s35-0b44f4817167",
+        "date": "2025-05-24",
+        "region": "ME",
+        "player": "おこっとふー / センス0",
+        "playerRaw": "おこっとふー / 光オロチs",
+        "event": "Duos Console Victory Cash Cup",
+        "round": "Event 2 · Round 1 / 予選",
+        "rank": 226,
+        "points": 222,
+        "kills": 28,
+        "vrs": 0,
+        "prize": 0,
+        "kind": "予選",
+        "matches": 7,
+        "seasonId": "S35",
+        "chapter": 6,
+        "season": 2,
+        "tournamentId": "ch6s2-console-duos-victory",
+        "source": "https://www.fortnite.com/competitive/events/S35_VictoryDuosCup/?region=ME&round=S35_VictoryDuosCup_Event2Round1_ME",
+        "verified": true,
+        "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。",
+        "players": [
+          "おこっとふー",
+          "センス0"
+        ],
+        "teamAccountIds": [
+          "027c5e963b4b4c2c8e823070b1638de4",
+          "80daace64aeb4ceda3bd61ccc810f101"
+        ]
+      },
+      {
+        "id": "auto-s35-99ec406f9012",
+        "date": "2025-05-24",
+        "region": "ME",
+        "player": "きおらび / SN Season",
+        "playerRaw": "きおらび / SN Season",
+        "event": "Duos Console Victory Cash Cup",
+        "round": "Event 2 · Round 1 / 予選",
+        "rank": 231,
+        "points": 221,
+        "kills": 50,
+        "vrs": 1,
+        "prize": 0,
+        "kind": "予選",
+        "matches": 7,
+        "seasonId": "S35",
+        "chapter": 6,
+        "season": 2,
+        "tournamentId": "ch6s2-console-duos-victory",
+        "source": "https://www.fortnite.com/competitive/events/S35_VictoryDuosCup/?region=ME&round=S35_VictoryDuosCup_Event2Round1_ME",
+        "verified": true,
+        "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。",
+        "players": [
+          "きおらび",
+          "SN Season"
+        ],
+        "teamAccountIds": [
+          "7dcdf989faa347fbbab8c2228abb4142",
+          "b1a8dec9b1134b7e8acd83e7ac2f6789"
+        ]
+      },
+      {
+        "id": "auto-s35-95e8d0ef79e7",
+        "date": "2025-05-24",
+        "region": "ME",
+        "player": "fct MLBfn7 / 白組 shink",
+        "playerRaw": "fct MLBfn7 / 白組 shink",
+        "event": "Duos Console Victory Cash Cup",
+        "round": "Event 2 · Round 1 / 予選",
+        "rank": 298,
+        "points": 214,
+        "kills": 9,
+        "vrs": 0,
+        "prize": 0,
+        "kind": "予選",
+        "matches": 5,
+        "seasonId": "S35",
+        "chapter": 6,
+        "season": 2,
+        "tournamentId": "ch6s2-console-duos-victory",
+        "source": "https://www.fortnite.com/competitive/events/S35_VictoryDuosCup/?region=ME&round=S35_VictoryDuosCup_Event2Round1_ME",
+        "verified": true,
+        "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。",
+        "players": [
+          "fct MLBfn7",
+          "白組 shink"
+        ],
+        "teamAccountIds": [
+          "b477a8cdaa984dc9b037758d9dd85018",
+          "defcd30bcd734eb08dea70af6d83b2a5"
+        ]
+      },
+      {
+        "id": "auto-s35-de9e8f4a22d2",
+        "date": "2025-05-24",
+        "region": "ME",
+        "player": "VLZ 対面の極意 / DynamicCart1801",
+        "playerRaw": "VLZ 対面の極意 / DynamicCart1801",
+        "event": "Duos Console Victory Cash Cup",
+        "round": "Event 2 · Round 1 / 予選",
+        "rank": 308,
+        "points": 213,
+        "kills": 32,
+        "vrs": 1,
+        "prize": 0,
+        "kind": "予選",
+        "matches": 7,
+        "seasonId": "S35",
+        "chapter": 6,
+        "season": 2,
+        "tournamentId": "ch6s2-console-duos-victory",
+        "source": "https://www.fortnite.com/competitive/events/S35_VictoryDuosCup/?region=ME&round=S35_VictoryDuosCup_Event2Round1_ME",
+        "verified": true,
+        "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。",
+        "players": [
+          "VLZ 対面の極意",
+          "DynamicCart1801"
+        ],
+        "teamAccountIds": [
+          "5c8913af3a134f0cb3c9365ee281aada",
+          "77e63d1aa5324bfe9ff4fa01c875aa73"
+        ]
+      }
+    ],
+    "pages": 4,
+    "lastAttemptAt": "2026-11-17T14:40:48.296Z",
+    "emptyAttempts": 0,
+    "rankingOrderValid": true,
+    "lastSeenRank": 400,
+    "lastSuccessAt": "2026-11-17T14:40:49.146Z",
+    "totalPages": 73
+  }
+}
