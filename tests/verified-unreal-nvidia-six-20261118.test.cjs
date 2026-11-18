@@ -43,7 +43,7 @@ test('existing canonical players and their confirmed aliases are never replaced'
  const rise=rows.find(r=>r.id==='s39-naw-1million-unreal-cup-20251221-qjac-rise');
  assert.ok(rise&&rise.profiles.some(p=>p.name==='Rise'&&V.uuid(p.url)==='635ed9f3-69cf-4720-b1ec-25e0575fd76b'));
  const mac=rows.find(r=>r.id==='s39-naw-solo-series-finals-20260126-macaron');
- assert.ok(mac&&V.uuid(mac.profileUrl)==='facede25-f8fd-4f47-be4d-ecb0796abd33');
+ assert.ok(mac&&mac.profiles.some(p=>p.name==='モバイル勢のまかろん'&&V.uuid(p.url)==='facede25-f8fd-4f47-be4d-ecb0796abd33'));
 });
 test('NVIDIA Solo Build is registered separately from Unreal Duos with official overview',()=>{
  const t=read('tournaments.json'),a=t.catalog.find(c=>c.id==='ch7s1-nvidia-geforce-rtx-cup');
