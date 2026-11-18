@@ -1,6 +1,6 @@
 'use strict';
 const test=require('node:test'),assert=require('node:assert/strict');
-const {identity,linkedAccounts,parseStage,discover,discoverUnmapped,selectHistoricalWindows,historicalEvidenceScore,historicalEvidenceIndex,resolveHistoricalScope,selectActiveWindows,fetchJson,advancementLimit,transientLeaderboardFailure,normalizeRow,getLeaderboard,leaderboardResponseError,recoverableLeaderboardFailure,holdLeaderboardWindow,holdEmptyFirstPage}=require('../scripts/osirion-sync.cjs');
+const {identity,linkedAccounts,parseStage,discover,discoverUnmapped,selectHistoricalWindows,historicalEvidenceScore,historicalEvidenceIndex,resolveHistoricalScope,selectActiveWindows,fetchJson,advancementLimit,transientLeaderboardFailure,normalizeRow,getLeaderboard,leaderboardResponseError,recoverableLeaderboardFailure,holdLeaderboardWindow,holdEmptyFirstPage,providerRateLimitFailure}=require('../scripts/osirion-sync.cjs');
 const f='https://fortnitetracker.com/profile/all/Alpha/events?id=8a57ac58-f937-4de2-81b7-9abd070c7ae8';
 test('Tracker UUID can map to the same 32-char account ID after strict validation',()=>{
  assert.equal(identity(f),'8a57ac58f9374de281b79abd070c7ae8');
@@ -187,6 +187,29 @@ test('transient API failures preserve history checkpoints instead of publishing 
  assert.equal(transientLeaderboardFailure(new Error('大会順位表のID/形式が不正')),false);
 });
 
+test('HTTP 429 pauses a leaderboard before a redundant retry and retains the verified checkpoint',async()=>{
+ const error=new Error('Osirion API HTTP 429 /v1/tournaments/leaderboard');
+ assert.equal(providerRateLimitFailure(error),true);
+ assert.equal(providerRateLimitFailure(new Error('Osirion API HTTP 503 /v1/tournaments/leaderboard')),false);
+ assert.equal(providerRateLimitFailure(new Error('Osirion API HTTP 4290')),false);
+ const originalFetch=globalThis.fetch;
+ const win={key:'epicgames_S30_test_NAC/window',fullEventId:'epicgames_S30_test_NAC',windowId:'window',eventId:'S30_test',region:'NAC'};
+ let calls=0;
+ try{
+  globalThis.fetch=async()=>{calls++;return {ok:false,status:429}};
+  await assert.rejects(getLeaderboard(win,2),/Osirion API HTTP 429/);
+  assert.equal(calls,1,'429 must not make another quota-denied attempt in the same page');
+ }finally{globalThis.fetch=originalFetch}
+ const time=Date.parse('2026-11-18T00:00:00Z');
+ const checkpoint={nextPage:2,pages:2,complete:false,proposals:[{id:'source-verified'}]};
+ const held=holdLeaderboardWindow(checkpoint,error,win,2,time);
+ assert.equal(checkpoint.nextPage,2);
+ assert.equal(checkpoint.pages,2);
+ assert.deepEqual(checkpoint.proposals,[{id:'source-verified'}]);
+ assert.equal(checkpoint.complete,false);
+ assert.equal(held.code,'OSIRION_TRANSIENT');
+ assert.equal(held.retryAfter,'2026-11-18T06:00:00.000Z');
+});
 test('rolling historical date expands every day with a completion lag, and fixed dates remain supported',()=>{
  const config={fromDate:'2024-05-29',toDate:'rolling',minLagMinutes:240};
  assert.equal(resolveHistoricalScope(config,Date.parse('2026-11-05T03:00:00Z')).toDate,'2026-11-05');
