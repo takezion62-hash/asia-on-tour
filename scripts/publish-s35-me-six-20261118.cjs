@@ -37,8 +37,14 @@ let added=[];
 for(const x of verified.manifest.rows){
  const source=reviews.proposals.filter(z=>z.id===x.id);
  fail(source.length===1&&sameScannedCandidate(source[0],x),'candidate changed '+x.id);
- console.log('S35_SIX_CHECKPOINT '+JSON.stringify({id:x.id,complete:scan.complete,pages:scan.pages,nextPage:scan.nextPage,totalPages:scan.totalPages,lastSeenRank:scan.lastSeenRank,lastSuccessAt:scan.lastSuccessAt,lastErrorCode:scan.lastErrorCode,lastError:scan.lastError,retryAfter:scan.retryAfter,emptyAttempts:scan.emptyAttempts,hasCandidate:scan.proposals.some(z=>z.id===x.id),end}));
- fail((scan.complete===true&&scan.pages>=scan.totalPages)||verifiedPartialPage(x,{end},scan),'rank not in mature completed/prefix leaderboard '+x.id);
+ // Some historical cursors mark complete after a bounded scan despite
+ // totalPages still being larger. Never trust the flag by itself:
+ // verify the same mature, contiguous prefix with complete normalized false.
+ const trulyComplete=scan.complete===true&&scan.pages>=scan.totalPages;
+ const observedPrefix=scan.pages<scan.totalPages&&
+   verifiedPartialPage(x,{end},{...scan,complete:false});
+ fail(trulyComplete||observedPrefix,
+  'rank not in a verified mature contiguous saved prefix '+x.id);
  fail(scan.proposals.filter(z=>z.id===x.id&&sameScannedCandidate(z,x)).length===1,
   'saved exact score and Epic ID mismatch '+x.id);
  fail(x.players.every(n=>known.has(n))&&x.teamAccountIds.every(y=>/^[0-9a-f]{32}$/.test(y)),
