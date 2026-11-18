@@ -5,6 +5,10 @@ on:
     branches: [main]
     paths:
       - "scripts/osirion-sync.cjs"
+      - "scripts/apply-ps-finals-ten-20261118.cjs"
+      - "scripts/verified-ps-finals-ten-20261118.cjs"
+      - "data/manual-approvals/20261118-ps-four-finals-ten.json"
+      - "tournaments.json"
       - "scripts/new-player-history-delta.cjs"
       - "players.json"
       - "scripts/review-recovery-priority.cjs"
@@ -294,6 +298,40 @@ jobs:
               exit 1
             fi
             echo "Main advanced; reload and reverify before retrying"
+            sleep $((attempt * 3))
+          done
+
+      - name: Publish verified 2024 and 2025 OCE/ME PlayStation final scores from ten owner screenshots
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          for attempt in 1 2 3 4 5; do
+            echo "PS_FINALS_TEN attempt ${attempt}/5"
+            git fetch origin main
+            git reset --hard origin/main
+            node scripts/apply-ps-finals-ten-20261118.cjs --dry-run
+            node scripts/apply-ps-finals-ten-20261118.cjs
+            npm run validate
+            node --test tests/verified-ps-finals-ten-20261118.test.cjs tests/approval-history.test.cjs
+            node scripts/build-season-data.cjs
+            node scripts/build-candidate-triage.cjs
+            git add players.json approval-history.json updates.json candidate-triage.json
+            git add -A source-results/ season-data/
+            if git diff --cached --quiet; then
+              echo "PS_FINALS_TEN all ten verified results already published"
+              break
+            fi
+            git commit -m "data: publish ten owner-verified OCE/ME PlayStation finals, prizes and distinct identities"
+            if git push origin HEAD:main; then
+              echo "PS_FINALS_TEN published without modifying previous awards"
+              break
+            fi
+            if [ "${attempt}" -ge 5 ]; then
+              echo "::error::PS_FINALS_TEN main advanced during publishing; no unsafe overwrite"
+              exit 1
+            fi
             sleep $((attempt * 3))
           done
 
