@@ -57,17 +57,26 @@ test('published row and ledger are locked against score, cash, profile, date, to
   assert.equal(v.verifyRow(row,{...entry,recordHash:'tampered'}),false);
  }
 });
-test('existing tomato account is NOT the separate 2024 OCE PS ZB tomato',()=>{
+test('2024 OCE PlayStation tomato reuses same verified Epic identity as 2026 OCE result',()=>{
  const current=read('players.json');
  assert.ok(current.candidates.some(x=>x.name==='とまと'));
- const newTomato=doc.batch.entries.find(x=>x.player.startsWith('とまと（'));
- assert.equal(newTomato.player,'とまと（PS Cup 2024・別選手）');
+ const newTomato=doc.batch.entries.find(x=>x.id==='ps-s30-oce-s30ocezb-final-20240630-r25');
+ assert.ok(newTomato);
+ assert.equal(newTomato.player,'とまと');
  assert.equal(newTomato.playerRaw,'とまと');
  assert.equal(v.uuid(newTomato.profileUrl),'6e8019af-c259-4664-b5e1-7273c365d316');
- assert.ok(!current.confirmedAliases['とまと']?.includes(newTomato.player),
-  'do not resolve the distinct Epic ID to previous same-name owner');
- const entry=v.project(newTomato);
- assert.notEqual(entry.player,'とまと');
+ const rows=readResults(root).rows;
+ const existing=rows.find(x=>x.id==='s42-oce-console-zb-solo-vc-final-20260912-tomato');
+ assert.ok(existing,'source evidence for existing 2026 OCE player is required');
+ assert.equal(existing.player,'とまと');
+ assert.equal(v.uuid(existing.profileUrl),v.uuid(newTomato.profileUrl));
+ const historical=rows.find(x=>x.id==='s26-me-zb-duos-vc-final-20231009-banao-tomato');
+ assert.ok(historical,'preserve earlier 2023 ME team result');
+ const olderId=v.uuid(historical.profiles.find(x=>x.name==='とまと')?.url);
+ assert.ok(olderId);
+ assert.notEqual(olderId,v.uuid(newTomato.profileUrl),'2023 profile has a different Epic account; do not silently rewrite it');
+ assert.ok(current.confirmedAliases['とまと'].includes('HELIX BRN とまと'));
+ assert.equal(v.project(newTomato).player,'とまと');
 });
 test('all ten records are published exactly once after deployment, or none before rollout',()=>{
  const results=readResults(root).rows,ledger=read('approval-history.json').entries;
@@ -100,7 +109,7 @@ test('full snapshot dry-run proves publishability without touching any source sh
  const {apply}=require('../scripts/apply-ps-finals-ten-20261118.cjs');
  const summary=apply({dryRun:true});
  assert.equal(summary.added+summary.alreadyPublished,10);
- assert.equal(summary.newPlayers.length,summary.added===0?0:4);
+ assert.equal(summary.newPlayers.length,summary.added===0?0:3);
  assert.equal(summary.addedPrize,summary.added===0?0:1150);
  assert.deepEqual(sensitive.map(sha),before,
   'dry run must not write over published scores, prizes or player identities');

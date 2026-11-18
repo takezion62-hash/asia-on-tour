@@ -1,7 +1,7 @@
 'use strict';
 // Replay-safe one-shot publication of ten user-submitted PlayStation Finals rows.
 // Never overwrite an earlier result, infer a cash bracket or coalesce the
-// separate 2024 Zero Build "とまと" with the existing same-name player.
+// confirmed 2024/2026 OCE "とまと" identity or change existing scores.
 const fs=require('node:fs'),path=require('node:path');
 const {readResults,publishResults}=require('./source-results-store.cjs');
 const {validateData,personalCents,roster}=require('./data-checks.cjs');
@@ -47,7 +47,7 @@ function apply({dryRun=false}={}){
  }
  const initial={count:rows.length,team:rows.reduce((n,x)=>n+Math.round((x.prize||0)*100),0),
   personal:rows.reduce((n,x)=>n+personalCents(x)*roster(x).length,0)};
- const allowedNew=new Set(['xyxyxyxyxyxyzz','とまと（PS Cup 2024・別選手）','VRS k3nz1xJR','はるぱか']);
+ const allowedNew=new Set(['xyxyxyxyxyxyzz','VRS k3nz1xJR','はるぱか']);
  const newPlayers=[],added=[],existing=[];
  const takenRanks=new Set();
  const checks=tournaments.catalog;
@@ -67,12 +67,10 @@ function apply({dryRun=false}={}){
   if(!known.has(x.player)){
    must(allowedNew.has(x.player),'unapproved new canonical player '+x.player);
    must(!aliases.has(x.player),'player label conflicts with existing alias '+x.player);
-   const display=x.player==='とまと（PS Cup 2024・別選手）'?'とまと':'';
    players.candidates.push({name:x.player,
     initials:Array.from(x.player).slice(0,2).join(''),
     accent:players.candidates.length%2?'cyan':'violet',
-    desc:(display?'既存の「とまと」とEpic IDが異なる別人。':'')+
-     x.date+' '+x.region+' '+x.event+'決勝'+x.rank+'位・'+x.kills+
+    desc:x.date+' '+x.region+' '+x.event+'決勝'+x.rank+'位・'+x.kills+
      'キル・賞金$'+x.prize+'（本人Epic ID・公式順位別賞金確認）。',
     epicAccountVerified:true,trackerProfileUrl:x.profileUrl});
    known.add(x.player);aliases.set(x.player,x.player);newPlayers.push(x.player);
@@ -105,7 +103,7 @@ function apply({dryRun=false}={}){
  if(added.length){
   upsertPublicationLog(updates,{id:'owner-ps-finals-10-20261118',date:'2026-11-18',
    title:'PlayStation Cup過去4大会：Mofu・Saku・ごんた・新規選手など10件',
-   description:'提供画像10枚と本人Epic ID・公式順位別賞金を照合。S30 OCE BR/ZB、S33 ME、S37 OCEの10成績を追記。賞金獲得7件・賞金圏外3件。既存の「とまと」と別人を識別。新規賞金合計$1,150。',
+   description:'提供画像10枚と本人Epic ID・公式順位別賞金を照合。S30 OCE BR/ZB、S33 ME、S37 OCEの10成績を追記。賞金獲得7件・賞金圏外3件。2024年・2026年の「とまと」を本人Epic IDで統合。新規賞金合計$1,150。',
    recordIds:added.map(x=>x.id)});
  }
  const dataErrors=validateData({results:rows,players,tournaments});
