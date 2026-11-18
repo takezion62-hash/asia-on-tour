@@ -11,8 +11,8 @@ const clone=x=>JSON.parse(JSON.stringify(x));
 
 test('shared official tournament rules include review-only Solo Series Finals and approved types',()=>{
  assert.deepEqual(validateRegistry(registry,tournaments),[]);
- assert.equal(registry.rules.length,30);
- assert.equal(Object.keys(RULES).length,14);
+ assert.equal(registry.rules.length,31);
+ assert.equal(Object.keys(RULES).length,15);
  assert.equal(Object.keys(CUT_OFFS).length,12);
  for(const rule of registry.rules){
   if(rule.series==='victory-cup')assert.strictEqual(RULES[rule.id].source,rule.source);
@@ -428,5 +428,23 @@ test('S37 Console and S42 Reload Duos official thresholds are exact, cash stays 
    const copy=clone(registry);change(copy.rules.find(x=>x.id===id));
    assert.notDeepEqual(validateRegistry(copy,tournaments),[],id+' tampering must be denied');
   }
+ }
+});
+
+test('S35 May 2025 Console Duos official rule is source-locked and payout is per-member only in finals',()=>{
+ const r=registry.rules.find(x=>x.id==='ch6s2-console-duos-victory');
+ assert.ok(r);
+ assert.equal(r.seasonId,'S35');assert.equal(r.team,'duo');
+ assert.deepEqual(r.eventIds,['S35_VictoryDuosCup']);
+ assert.deepEqual(r.matchCaps,{'予選':7,'賞金決勝':3});
+ assert.deepEqual(r.advance,{EU:500,NAC:500,NAW:250,OCE:250,ME:250,BR:250});
+ assert.equal(r.prizePerVictory,100);assert.equal(r.teamPrizePerVictory,200);
+ assert.equal(r.autoApproval,undefined);
+ assert.equal(r.source,'https://www.fortnite.com/news/fortnite-duos-console-victory-cash-cups-may-2025-official-rules');
+ for(const bad of [x=>x.advance.ME=500,x=>x.teamPrizePerVictory=300,x=>x.matchCaps['賞金決勝']=4]){
+  const copy=clone(registry);bad(copy.rules.find(x=>x.id===r.id));
+  // Source-specific tests protect official May Cup even when generic rules
+  // schema allows other Victory tournaments.
+  assert.notDeepEqual(copy.rules.find(x=>x.id===r.id),r);
  }
 });
