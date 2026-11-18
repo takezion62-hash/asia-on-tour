@@ -74,7 +74,7 @@ test('render uses accurate latest historical run metrics and makes an empty queu
  const txt=app.elements.get('new-player-backfill-status').textContent;
  assert.match(txt,/今回検出した新規Epic ID0件/);
  assert.match(txt,/再調査待ちの開催枠0枠/);
- assert.match(txt,/今回見つかった確認候補0件/);
+ assert.match(txt,/今回発見した確認候補0件/);
  assert.match(txt,/現在は新しい本人確認済みEpic IDの登録待ちです/);
  assert.match(txt,/最新の過去大会チェック/);
  assert.ok(app.calls.includes('history-sync-status.json'));
