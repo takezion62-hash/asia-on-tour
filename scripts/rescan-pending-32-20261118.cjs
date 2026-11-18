@@ -1,4 +1,5 @@
 'use strict';
+(async()=>{
 // Re-fetch only observed candidate pages from the original Osirion provider.
 // This is a read-only research job: no results are published and no awards
 // are inferred from a partial leaderboard.
@@ -127,3 +128,5 @@ console.log('TARGETED_ORIGINAL_ACCOUNT_RESCAN '+JSON.stringify({checked:ids.leng
  verified:verifiedRows.length,held:held.length,byReason:reasons,
  pages:Object.keys(pagesFetched).length,pageErrors:out.apiPageErrors,
  byWindow:[...originalKeys.keys()].map(k=>({key:k,verified:verifiedRows.filter(x=>x.windowKey===k).length}))}));
+
+})().catch(e=>{console.error('TARGETED_RESCAN_FAILURE '+e.stack);process.exitCode=1;});
