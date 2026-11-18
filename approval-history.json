@@ -32840,6 +32840,32 @@
       "epicUuidSha256": "589756bb105b816bba13c022a561e6c813ec0e30712545b40b814314f854219a",
       "recordSha256": "47a1291b582aa5b36faee156a2148a64650d9b93b4a01e93fca50868d5256e96",
       "evidence": "Pinned independently refetched original Epic source blob 4e5686b6aba03339924d306680a8be07a647a56d; original account UUIDs, rank, score, page and official $0 condition"
+    },
+    {
+      "id": "auto-s34-74d1f337746f",
+      "recordId": "auto-s34-74d1f337746f",
+      "decision": "published",
+      "policy": "verified-s34-me-playstation-final-attendance-two-20261118",
+      "approvedAt": "2026-11-18T04:57:00.000Z",
+      "approvedBy": "ChatGPT / owner authorized Epic source recheck",
+      "source": "https://www.fortnite.com/competitive/events/S34_PlaystationCup/?region=ME&round=S34_PlaystationCupFinal_ME",
+      "candidateSha256": "1f4c79f059fe1b0d7bd5859a52d4df1a071c29caf30526c13a146fe872a82855",
+      "epicUuidSha256": "fa785caf3b996717d80432430b30de394a350addf7321bd2ab603e3af90156b7",
+      "recordSha256": "4ab02cff1bba89561b5be10a8b9a7af52c3d728cfde9044f48fb2bea740271cb",
+      "evidence": "Pinned independently fetched original Epic Finals score blob e31a83cdf028c780f0713d9b33a971146d1e51b4; exact Epic UUID identity, original rank and score; no cash award inferred"
+    },
+    {
+      "id": "auto-s34-04720ffe5218",
+      "recordId": "auto-s34-04720ffe5218",
+      "decision": "published",
+      "policy": "verified-s34-me-playstation-final-attendance-two-20261118",
+      "approvedAt": "2026-11-18T04:57:00.000Z",
+      "approvedBy": "ChatGPT / owner authorized Epic source recheck",
+      "source": "https://www.fortnite.com/competitive/events/S34_PlaystationCup/?region=ME&round=S34_PlaystationCupFinal_ME",
+      "candidateSha256": "635c7d650c6eef615f2d4877d49f632e39bd57ac2d752449daace2f9532b9b46",
+      "epicUuidSha256": "e9a4883043ca135e0d0ac399b0472c5a28bb4fe0d17a96569495d210b1db1b70",
+      "recordSha256": "45859ea8648f08593da549b1031196543d9c8bb0e0eb823df936ccfee24101cb",
+      "evidence": "Pinned independently fetched original Epic Finals score blob e31a83cdf028c780f0713d9b33a971146d1e51b4; exact Epic UUID identity, original rank and score; no cash award inferred"
     }
   ]
 }

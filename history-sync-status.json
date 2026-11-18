@@ -11,7 +11,7 @@
   "provider": "osirion",
   "linkedPlayers": 669,
   "trackedWindows": 3177,
-  "found": 2,
+  "found": 0,
   "skipped": 7,
   "imported": 2,
   "scannedPages": 96,
@@ -20,7 +20,7 @@
   "alreadyRegistered": 6402,
   "autoApprovedTotal": 3169,
   "invalidCachedCandidates": 1,
-  "manualReviewCandidates": 2,
+  "manualReviewCandidates": 0,
   "autoApprovedCosmeticThisRun": 0,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
@@ -72,10 +72,10 @@
     "S30_Reload",
     "S30_ReloadZB"
   ],
-  "message": "本人Epic UUID・元順位表・公式開催枠を再照合し18件を$0で掲載。未確定のPlayStation Cup 2件は保留。未取得ページや賞金は推定せず既存の全戦績・賞金を保持。",
+  "message": "Epic元順位表の本人UUIDとスコアを直接再照合してS34 ME PlayStation Cup決勝参加2件を掲載。現金賞金は未確認のためnullを維持し、賞金ランキングへの加算なし。現存確認待ち0件。",
   "manuallyPublished": 2147,
   "manuallyResolvedDuplicates": 169,
-  "lastReviewedBatchAt": "2026-11-18T04:47:00.000Z",
+  "lastReviewedBatchAt": "2026-11-18T04:57:00.000Z",
   "manuallyCorrected": 13,
   "lastCorrectedReviewAt": "2026-11-13T13:45:16.115Z",
   "concurrentMerge": {
@@ -303,7 +303,7 @@
     "notIncludedInPrizeTotals": true
   },
   "autoApprovedParticipationThisRun": 0,
-  "manualReviewProcessed": 122,
+  "manualReviewProcessed": 124,
   "manualReviewResolvedAt": "2026-11-18T03:09:23.691Z",
   "reviewRecovery": {
     "selectedWindows": 4,
