@@ -630,7 +630,7 @@ async function main(){
     }]}),
     holdFailure:holdLeaderboardWindow,rateLimitFailure:providerRateLimitFailure,
     recoverableFailure:recoverableLeaderboardFailure,
-    now:Date.now(),latestSeasons:2,
+    now:Date.now(),latestSeasons:Math.min(2,Math.max(1,deltaConfig.priorityRecentSeasons??2)),
     // Share the existing 96-page historical API budget.
     pageBudget:Math.min(4,Math.max(0,deltaConfig.maxPagesPerRun??4),budget),
     windowBudget:Math.min(2,Math.max(0,deltaConfig.maxWindowsPerRun??2)),
