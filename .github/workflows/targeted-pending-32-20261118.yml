@@ -1,0 +1,32 @@
+name: Targeted 32 historical Epic account rescans
+on:
+  push:
+    branches: [data/rescan-pending-verified-32-20261118]
+permissions:
+  contents: write
+jobs:
+  verify-original-uuid:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 19
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - name: Fetch original leaderboard pages and match original exact Epic UUIDs
+        run: node scripts/rescan-pending-32-20261118.cjs
+      - name: Commit source-only proof, not any public results
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add data/manual-approvals/20261118-targeted-32-original-epic-proof.json
+          git diff --cached --name-only | tee /tmp/changed.txt
+          test "$(wc -l </tmp/changed.txt)" -eq 1
+          grep -Fxq "data/manual-approvals/20261118-targeted-32-original-epic-proof.json" /tmp/changed.txt
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "evidence: rescan 32 original Epic-account leaderboard results [skip ci]"
+          git push origin HEAD:data/rescan-pending-verified-32-20261118
