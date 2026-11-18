@@ -62,7 +62,7 @@ for(const key of keys){
  cp.nextPage!==cp.pages||!Number.isSafeInteger(cp.totalPages)||
  cp.lastSeenRank!==cp.pages*100||cp.lastError||cp.lastErrorCode||cp.retryAfter||
  cp.emptyAttempts||!Number.isFinite(Date.parse(cp.lastSuccessAt))||
- Date.now()-Date.parse(cp.lastSuccessAt)<14400000)
+ Date.parse(cp.lastSuccessAt)>Date.now()+300000)
   throw Error('Checkpoint must have an error-free mature consecutive page prefix: '+key);
  originalKeys.set(key,{key,pages:cp.pages,totalPages:cp.totalPages,nextPage:cp.nextPage,
   lastSeenRank:cp.lastSeenRank,lastSuccessAt:cp.lastSuccessAt,
@@ -79,6 +79,7 @@ for(const id of ids){
  const key='epicgames_'+ev+'_'+region+'/'+windowId,meta=originalKeys.get(key);
  if(!meta||!Number.isSafeInteger(row.rank)||row.rank<1||row.rank>meta.lastSeenRank||
  row.verified!==true||row.prize!==0||row.kind!=='予選'||
+ Date.now()-Date.parse(row.date+'T23:59:59Z')<14400000||
  url.protocol!=='https:'||url.hostname!=='www.fortnite.com'||
  url.searchParams.size!==2)
  {held.push({id,reason:'not a verified source-locked prefix candidate'});continue;}
