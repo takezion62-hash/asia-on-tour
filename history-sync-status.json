@@ -11,7 +11,7 @@
   "provider": "osirion",
   "linkedPlayers": 669,
   "trackedWindows": 3177,
-  "found": 20,
+  "found": 2,
   "skipped": 7,
   "imported": 2,
   "scannedPages": 96,
@@ -20,7 +20,7 @@
   "alreadyRegistered": 6402,
   "autoApprovedTotal": 3169,
   "invalidCachedCandidates": 1,
-  "manualReviewCandidates": 20,
+  "manualReviewCandidates": 2,
   "autoApprovedCosmeticThisRun": 0,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
@@ -72,10 +72,10 @@
     "S30_Reload",
     "S30_ReloadZB"
   ],
-  "message": "原文順位表を再取得して本人Epic UUIDを照合、32件のRound1を掲載。残る20件は証拠未確定のため保留。今回の追加賞金$0。",
+  "message": "本人Epic UUID・元順位表・公式開催枠を再照合し18件を$0で掲載。未確定のPlayStation Cup 2件は保留。未取得ページや賞金は推定せず既存の全戦績・賞金を保持。",
   "manuallyPublished": 2147,
   "manuallyResolvedDuplicates": 169,
-  "lastReviewedBatchAt": "2026-11-18T03:09:23.691Z",
+  "lastReviewedBatchAt": "2026-11-18T04:47:00.000Z",
   "manuallyCorrected": 13,
   "lastCorrectedReviewAt": "2026-11-13T13:45:16.115Z",
   "concurrentMerge": {
@@ -303,7 +303,7 @@
     "notIncludedInPrizeTotals": true
   },
   "autoApprovedParticipationThisRun": 0,
-  "manualReviewProcessed": 104,
+  "manualReviewProcessed": 122,
   "manualReviewResolvedAt": "2026-11-18T03:09:23.691Z",
   "reviewRecovery": {
     "selectedWindows": 4,
