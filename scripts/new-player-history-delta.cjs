@@ -112,7 +112,7 @@ async function runDelta({
     board=await fetchPage(win,page);
     if(!board||!Number.isSafeInteger(board.totalPages)||board.totalPages<1||
       board.totalPages>MAX_PROVIDER_PAGES||!Array.isArray(board.entries)||
-      (board.entries.length===0&&page<board.totalPages-1))
+      (board.entries.length===0&&(page===0||page<board.totalPages-1)))
       throw Object.assign(new Error('Malformed original Epic scoreboard page'),{code:'OSIRION_INVALID_LEADERBOARD'});
     if(page>=board.totalPages)throw Object.assign(new Error('Original leaderboard page beyond total'),{code:'OSIRION_INVALID_LEADERBOARD'});
     const ranks=board.entries.map(row=>row.rank);
