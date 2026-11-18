@@ -36,7 +36,7 @@ function validateProof(){
    r.tournamentId==='ch6s2-playstation-cup'&&
    r.event==='PlayStation Cup'&&r.source===URL&&
    r.round==='単一開催枠 / 参加確認'&&r.kind==='参加確認'&&
-   r.prize===null&&r.verified===true&&r.reviewOnly!==true&&
+   r.prize===null&&r.verified===true&&r.reviewOnly===true&&
    p.observedPage===0&&p.windowKey===proof.event.key&&
    Array.isArray(p.teamAccountIds)&&p.teamAccountIds.length===1&&
    /^[0-9a-f]{32}$/.test(p.teamAccountIds[0]),
