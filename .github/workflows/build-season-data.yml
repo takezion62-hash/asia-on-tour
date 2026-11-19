@@ -11,6 +11,9 @@ on:
       - scripts/build-source-results.cjs
       - scripts/source-results-store.cjs
       - 'source-results/**'
+      - scripts/apply-s30-eu-zb-solo-eight-20261119.cjs
+      - scripts/verified-s30-eu-zb-solo-eight-20261119.cjs
+      - data/manual-approvals/20261119-s30-eu-zb-solo-eight.json
       - scripts/apply-verified-tracker-finals.cjs
       - scripts/apply-verified-s43-squads-finals.cjs
       - scripts/apply-s30-me-zb-duos-cash-20240607.cjs
@@ -156,6 +159,8 @@ jobs:
             git fetch origin main
             git reset --hard origin/main
             node scripts/source-results-store.cjs verify
+            node scripts/apply-s30-eu-zb-solo-eight-20261119.cjs --dry-run
+            node scripts/apply-s30-eu-zb-solo-eight-20261119.cjs
             node scripts/apply-verified-tracker-finals.cjs --dry-run
             node scripts/apply-verified-tracker-finals.cjs
             node scripts/apply-verified-s43-squads-finals.cjs --dry-run
