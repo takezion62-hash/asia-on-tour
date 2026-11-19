@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-18",
+  "updatedAt": "2026-11-19",
   "description": "Epic公式規則で確認した大会ルール。Unreal Cupもチーム順位と確認済みEpic IDを照合し、賞金圏内は地域別チーム/個人賞金を、圏外は$0として自動掲載（本人資格・支払確認とは別）。S36 Console Duos・S43 Reload ZB Duosの公式Round 1上位突破／全参加$0を、本人照合済み結果に限り安全に記録。Round 2賞金は推定しない。S42 Console Zero Build Solo Victory Cupは公式上位通過と決勝VR1回$100を個別登録。 S37 Console DuosおよびS42 Reload Duosの公式Round1上位突破・参加$0を、保存済み順位表と選手2名のEpicアカウントID・開催枠一致に限定して安全な自動承認に追加。Round2賞金は自動推定しない。",
   "rules": [
     {
@@ -1653,6 +1653,473 @@
       "teamPrizePerVictory": 200,
       "source": "https://www.fortnite.com/news/fortnite-duos-console-victory-cash-cups-may-2025-official-rules",
       "note": "2025年5月17/24/31開催のConsole Duos Victory Cash Cup。Round 1最大7試合、EU/NAC上位500組、その他地域上位250組がRound 2へ。Round 2最大3試合、1VRにつきチーム$200・個人各$100。自動賞金承認は許可せず、Epic本人ID・開催枠・成熟済み順位表・賞金規則の専門検証でのみ掲載。"
+    },
+    {
+      "id": "ch7s1-nvidia-geforce-rtx-cup",
+      "seasonId": "S39",
+      "eventIds": [
+        "S39_NvidiaCup"
+      ],
+      "team": "solo",
+      "series": "nvidia-cup",
+      "chapter": 7,
+      "season": 1,
+      "matchCaps": {
+        "単一ラウンド": 10
+      },
+      "sessionMinutes": 180,
+      "sessionSchedule": {
+        "officialDate": "2025-12-21",
+        "regionTimezone": "in-game",
+        "archivedSessionFile": "calendar-history/2025-12.json"
+      },
+      "rankedEligibility": {
+        "minimumRank": "Gold",
+        "eligibleModes": [
+          "battle-royale",
+          "zero-build",
+          "reload"
+        ],
+        "mustRankInEventRegion": true
+      },
+      "participation": {
+        "minimumAge": 13,
+        "minimumAccountLevel": 350,
+        "twoFactorAuthentication": true,
+        "minPriorEpicTournaments": 14,
+        "priorTournamentWindowDays": 180,
+        "oneAccountPerSession": true
+      },
+      "crossPlatform": true,
+      "scoring": {
+        "source": "in-game",
+        "placementPoints": null,
+        "eliminationPoints": null,
+        "tiebreakers": [
+          "total-points",
+          "victory-royales",
+          "average-eliminations",
+          "average-placement",
+          "survival-seconds"
+        ]
+      },
+      "cashPrizes": {
+        "basis": "per-player",
+        "currency": "USD",
+        "tiers": {
+          "OCE": [
+            {
+              "through": 1,
+              "perPlayer": 1000
+            },
+            {
+              "through": 2,
+              "perPlayer": 750
+            },
+            {
+              "through": 3,
+              "perPlayer": 600
+            },
+            {
+              "through": 4,
+              "perPlayer": 500
+            },
+            {
+              "through": 5,
+              "perPlayer": 450
+            },
+            {
+              "through": 6,
+              "perPlayer": 400
+            },
+            {
+              "through": 7,
+              "perPlayer": 350
+            },
+            {
+              "through": 8,
+              "perPlayer": 300
+            },
+            {
+              "through": 9,
+              "perPlayer": 250
+            },
+            {
+              "through": 10,
+              "perPlayer": 200
+            },
+            {
+              "through": 25,
+              "perPlayer": 150
+            },
+            {
+              "through": 40,
+              "perPlayer": 100
+            }
+          ],
+          "ASIA": [
+            {
+              "through": 1,
+              "perPlayer": 1000
+            },
+            {
+              "through": 2,
+              "perPlayer": 750
+            },
+            {
+              "through": 3,
+              "perPlayer": 600
+            },
+            {
+              "through": 4,
+              "perPlayer": 500
+            },
+            {
+              "through": 5,
+              "perPlayer": 450
+            },
+            {
+              "through": 6,
+              "perPlayer": 400
+            },
+            {
+              "through": 7,
+              "perPlayer": 350
+            },
+            {
+              "through": 8,
+              "perPlayer": 300
+            },
+            {
+              "through": 9,
+              "perPlayer": 250
+            },
+            {
+              "through": 10,
+              "perPlayer": 200
+            },
+            {
+              "through": 25,
+              "perPlayer": 150
+            },
+            {
+              "through": 40,
+              "perPlayer": 100
+            }
+          ],
+          "ME": [
+            {
+              "through": 1,
+              "perPlayer": 1000
+            },
+            {
+              "through": 2,
+              "perPlayer": 750
+            },
+            {
+              "through": 3,
+              "perPlayer": 600
+            },
+            {
+              "through": 4,
+              "perPlayer": 500
+            },
+            {
+              "through": 5,
+              "perPlayer": 450
+            },
+            {
+              "through": 6,
+              "perPlayer": 400
+            },
+            {
+              "through": 7,
+              "perPlayer": 350
+            },
+            {
+              "through": 8,
+              "perPlayer": 300
+            },
+            {
+              "through": 9,
+              "perPlayer": 250
+            },
+            {
+              "through": 10,
+              "perPlayer": 200
+            },
+            {
+              "through": 25,
+              "perPlayer": 150
+            },
+            {
+              "through": 40,
+              "perPlayer": 100
+            }
+          ],
+          "EU": [
+            {
+              "through": 1,
+              "perPlayer": 4000
+            },
+            {
+              "through": 2,
+              "perPlayer": 3000
+            },
+            {
+              "through": 3,
+              "perPlayer": 2000
+            },
+            {
+              "through": 4,
+              "perPlayer": 1500
+            },
+            {
+              "through": 5,
+              "perPlayer": 1250
+            },
+            {
+              "through": 6,
+              "perPlayer": 1000
+            },
+            {
+              "through": 7,
+              "perPlayer": 900
+            },
+            {
+              "through": 8,
+              "perPlayer": 800
+            },
+            {
+              "through": 9,
+              "perPlayer": 700
+            },
+            {
+              "through": 10,
+              "perPlayer": 600
+            },
+            {
+              "through": 20,
+              "perPlayer": 500
+            },
+            {
+              "through": 30,
+              "perPlayer": 400
+            },
+            {
+              "through": 50,
+              "perPlayer": 300
+            },
+            {
+              "through": 75,
+              "perPlayer": 200
+            },
+            {
+              "through": 100,
+              "perPlayer": 100
+            }
+          ],
+          "BR": [
+            {
+              "through": 1,
+              "perPlayer": 1000
+            },
+            {
+              "through": 2,
+              "perPlayer": 750
+            },
+            {
+              "through": 3,
+              "perPlayer": 600
+            },
+            {
+              "through": 4,
+              "perPlayer": 500
+            },
+            {
+              "through": 5,
+              "perPlayer": 450
+            },
+            {
+              "through": 6,
+              "perPlayer": 400
+            },
+            {
+              "through": 7,
+              "perPlayer": 350
+            },
+            {
+              "through": 8,
+              "perPlayer": 300
+            },
+            {
+              "through": 9,
+              "perPlayer": 250
+            },
+            {
+              "through": 10,
+              "perPlayer": 200
+            },
+            {
+              "through": 25,
+              "perPlayer": 150
+            },
+            {
+              "through": 40,
+              "perPlayer": 100
+            }
+          ],
+          "NAC": [
+            {
+              "through": 1,
+              "perPlayer": 2500
+            },
+            {
+              "through": 2,
+              "perPlayer": 1500
+            },
+            {
+              "through": 3,
+              "perPlayer": 1250
+            },
+            {
+              "through": 4,
+              "perPlayer": 1000
+            },
+            {
+              "through": 5,
+              "perPlayer": 750
+            },
+            {
+              "through": 6,
+              "perPlayer": 500
+            },
+            {
+              "through": 7,
+              "perPlayer": 450
+            },
+            {
+              "through": 8,
+              "perPlayer": 400
+            },
+            {
+              "through": 9,
+              "perPlayer": 350
+            },
+            {
+              "through": 10,
+              "perPlayer": 300
+            },
+            {
+              "through": 20,
+              "perPlayer": 250
+            },
+            {
+              "through": 30,
+              "perPlayer": 200
+            },
+            {
+              "through": 50,
+              "perPlayer": 150
+            },
+            {
+              "through": 75,
+              "perPlayer": 100
+            }
+          ],
+          "NAW": [
+            {
+              "through": 1,
+              "perPlayer": 1000
+            },
+            {
+              "through": 2,
+              "perPlayer": 750
+            },
+            {
+              "through": 3,
+              "perPlayer": 600
+            },
+            {
+              "through": 4,
+              "perPlayer": 500
+            },
+            {
+              "through": 5,
+              "perPlayer": 450
+            },
+            {
+              "through": 6,
+              "perPlayer": 400
+            },
+            {
+              "through": 7,
+              "perPlayer": 350
+            },
+            {
+              "through": 8,
+              "perPlayer": 300
+            },
+            {
+              "through": 9,
+              "perPlayer": 250
+            },
+            {
+              "through": 10,
+              "perPlayer": 200
+            },
+            {
+              "through": 25,
+              "perPlayer": 150
+            },
+            {
+              "through": 40,
+              "perPlayer": 100
+            }
+          ]
+        }
+      },
+      "hardwarePrizes": {
+        "name": "NVIDIA GeForce RTX 5080",
+        "approxRetailValueUSD": 999.99,
+        "cashEquivalent": false,
+        "topRanks": {
+          "EU": 4,
+          "NAC": 3,
+          "NAW": 1,
+          "BR": 1,
+          "ME": 1,
+          "OCE": 1,
+          "ASIA": 1
+        }
+      },
+      "cosmeticReward": {
+        "name": "Rust Bucket",
+        "type": "back-bling",
+        "minimumPoints": 8,
+        "cashEquivalent": false,
+        "confirmedReceiptRequired": false
+      },
+      "autoApproval": "verified-team-rank",
+      "source": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/nvidia-geforce-rtx-cup-official-rules",
+      "evidence": [
+        {
+          "text": "Epic公式2025/12/16規則2.2.1、2.2.2、3.1、3.3、3.6.3、3.6.6：ソロ通常BR、クロスプレイ、約3時間で最大10試合。対象地域でBR/ZB/Reloadゴールド以上、13歳以上、350レベル、2FA有効、直近180日で別々のEpic大会14回以上。同点時の5段階判定。Attachment Aの得点詳細はゲーム内表示に従うため推定しない。",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/nvidia-geforce-rtx-cup-official-rules"
+        },
+        {
+          "text": "Epic公式Attachment C全7地域：EUは100位まで、NACは75位まで、NAW/BR/ME/OCE/ASIAは40位まで現金賞金。別テーブルを全順位境界で保存し、1位額EU$4,000・NAC$2,500・他地域$1,000。順位の現金獲得資格と実際の受領は区別する。",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/nvidia-geforce-rtx-cup-official-rules"
+        },
+        {
+          "text": "Epic公式Attachment C：NVIDIA GeForce RTX 5080の対象はEU 1〜4位、NAC 1〜3位、その他5地域1位。Rust Bucketバックアクセサリーは8ポイント以上。GPU参考小売価格$999.99は現金賞金に計上しない。",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/nvidia-geforce-rtx-cup-official-rules"
+        },
+        {
+          "text": "Epic公式大会ページ：S39_NvidiaCupは地域ごとの単一開催枠。公式規則の日付は2025/12/21だが、日本時間では2025/12/21と12/22に地域別開催。日付・時刻は保存済み公式カレンダーの正確な枠を優先。",
+          "url": "https://www.fortnite.com/competitive/events/S39_NvidiaCup/?region=NAW"
+        }
+      ]
     }
   ]
 }

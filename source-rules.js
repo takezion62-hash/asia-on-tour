@@ -15,7 +15,7 @@
     }catch{return null}
   };
   const regionLabels=['ME','EU','NAC','NAW','OCE','BR'];
-  const seriesLabel={ 'victory-cup':'Victory Cup','cash-cup':'Cash Cup','skin-cup':'スキン大会','icon-cup':'Icon Cup','fncs':'FNCS','performance-evaluation':'Performance Evaluation','playstation-cup':'PlayStation Cup','unreal-cup':'Unreal Cup','test-cup':'Test Cup' };
+  const seriesLabel={ 'victory-cup':'Victory Cup','cash-cup':'Cash Cup','skin-cup':'スキン大会','icon-cup':'Icon Cup','fncs':'FNCS','performance-evaluation':'Performance Evaluation','playstation-cup':'PlayStation Cup','unreal-cup':'Unreal Cup','nvidia-cup':'NVIDIA Cup','test-cup':'Test Cup' };
   const modeLabel={solo:'ソロ',duo:'デュオ',trio:'トリオ',squad:'スクワッド'};
   const fmtNumber=value=>Number(value).toLocaleString('ja-JP');
   const state={catalog:[],rules:new Map(),sessions:[],search:'',region:'all',status:'registered',visible:12};
@@ -29,6 +29,28 @@
 
   // Ranking thresholds are inclusive: 'Top #5' after '#3' applies to 4th–5th.
   // All amounts in this branch are per player, not full trio totals.
+  // NVIDIA official per-region individual cash tiers; hardware is not cash.
+  function nvidiaMarkup(rule){
+    const regions=state.region==='all'?[...regionLabels,'ASIA']:[state.region];
+    const blocks=regions.map(region=>{
+      const tiers=rule.cashPrizes?.tiers?.[region]||[];
+      let last=0;
+      return '<div class="source-rule-cash-region"><h4>'+esc(region)+'</h4>'+tiers.map(x=>{
+        const first=last+1;last=x.through;
+        const label=first===last?fmtNumber(first)+'位':fmtNumber(first)+'〜'+fmtNumber(last)+'位';
+        return '<div class="source-rule-cash-tier"><span>'+esc(label)+'</span><strong>$'+fmtNumber(x.perPlayer)+'</strong></div>';
+      }).join('')+'</div>';
+    }).join('');
+    const gpu=regions.map(x=>x+'上位'+rule.hardwarePrizes.topRanks[x]+'位').join(' / ');
+    return '<div class="source-rule-fact"><span>地域別個人現金賞金（USD）</span><div class="source-rule-cash-grid">'+blocks+'</div></div>'+
+     '<div class="source-rule-fact"><span>大会形式</span><strong>通常BRソロ・クロスプレイ・最大10試合・約3時間</strong></div>'+
+     '<div class="source-rule-fact"><span>参加条件</span><strong>ゴールド以上（BR/ZB/Reload）、Lv350、2FA、直近180日で異なるEpic大会14回以上、原則13歳以上</strong></div>'+
+     '<div class="source-rule-fact"><span>RTX 5080 現物賞</span><strong>'+esc(gpu)+'</strong></div>'+
+     '<div class="source-rule-fact"><span>コスメ</span><strong>8pt以上：Rust Bucketバックアクセサリー</strong></div>'+
+     '<div class="source-rule-fact"><span>同点時</span><strong>合計Pt→VR→平均キル→平均順位→生存時間</strong></div>'+
+     '<p class="source-rule-warning">※ 具体的な配点はゲーム内表示に従います。GPU・コスメは現金ランキングに算入せず、実受領も未確認。自動掲載は公式全順位表と本人Epic ID・開催枠の照合後のみ。</p>';
+  }
+
   function cashMarkup(rule){
     // Round 1 qualification and Round 2 cash have independent validators.
     // Only show Round 2 payouts when the exact rule table is registered.
@@ -148,7 +170,7 @@
         return pathname.startsWith('/competitive/rules-guidelines/rules-library/')||
           pathname.startsWith('/news/');
       }))].slice(0,3);
-    const conditions=rule?.series==='unreal-cup'?unrealMarkup(rule):rule?.series==='cash-cup'?cashMarkup(rule):
+    const conditions=rule?.series==='unreal-cup'?unrealMarkup(rule):rule?.series==='nvidia-cup'?nvidiaMarkup(rule):rule?.series==='cash-cup'?cashMarkup(rule):
       rule?.cosmeticRanks
       ?'<div class="source-rule-fact"><span>スキン獲得対象順位</span><div class="source-rule-regions">'+regionRows(rule.cosmeticRanks,'スキン獲得ライン')+'</div></div>'
       :'<div class="source-rule-fact"><span>予選突破の地域別条件</span><div class="source-rule-regions">'+regionRows(rule?.advance,'予選通過順位')+'</div></div>';

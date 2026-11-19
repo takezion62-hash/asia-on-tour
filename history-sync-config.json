@@ -26,7 +26,8 @@
     "icon-cup",
     "playstation-cup",
     "unreal-cup",
-    "test-cup"
+    "test-cup",
+    "nvidia-cup"
   ],
   "maxPagesPerWindowPerRun": 12,
   "priorityReview": {
@@ -52,5 +53,6 @@
     "maxPagesPerRun": 4,
     "maxWindowsPerRun": 2,
     "maxPagesPerWindowPerRun": 2
-  }
+  },
+  "autoApproveNvidia": true
 }

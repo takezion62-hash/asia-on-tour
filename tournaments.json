@@ -3018,15 +3018,40 @@
       "unknownFields": [],
       "overview": {
         "dateJST": "2025-12-22",
-        "format": "Solo · Build",
+        "format": "Solo · Battle Royale (Build)",
         "rounds": 1,
         "maxMatches": 10,
         "durationMinutes": 180,
         "cashTopRank": 40,
         "rtx5080WinnerRank": 1,
-        "rustBucketBackBlingPoints": 8
+        "rustBucketBackBlingPoints": 8,
+        "regionalCashCutoffs": {
+          "EU": 100,
+          "NAC": 75,
+          "NAW": 40,
+          "BR": 40,
+          "ME": 40,
+          "OCE": 40,
+          "ASIA": 40
+        },
+        "regionalGpuCutoffs": {
+          "EU": 4,
+          "NAC": 3,
+          "NAW": 1,
+          "BR": 1,
+          "ME": 1,
+          "OCE": 1,
+          "ASIA": 1
+        },
+        "eligibility": "ゴールド以上（BR/ZB/Reload）、EpicアカウントLv350・2FA・直近180日14大会出場",
+        "prizeBasis": "per-player-by-rank",
+        "scoringSource": "in-game"
       },
       "evidence": [
+        {
+          "text": "Epic公式2025年12月16日規則：全7地域別個人賞金、GPU現物賞と8pt Rust Bucket、参加ランク・Lv350・過去180日14大会要件。得点配分はゲーム内表示に従う。",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/nvidia-geforce-rtx-cup-official-rules"
+        },
         {
           "text": "Epic公式：NAWの賞金1〜40位、優勝RTX 5080、8ptでRust Bucket。Solo Build、10試合、3時間の単一ラウンド。",
           "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/nvidia-geforce-rtx-cup-official-rules"

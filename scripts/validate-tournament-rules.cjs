@@ -18,7 +18,7 @@ function validateRegistry(doc,tournaments){
   const t=catalog.get(id);
   if(!t){fail(id,'登録済み大会カタログにありません');continue}
   if(rule.seasonId!==t.seasonId||rule.team!==t.team||rule.series!==t.series)fail(id,'シーズン/チーム/シリーズが一致しません');
-  if(!['victory-cup','skin-cup','cash-cup','performance-evaluation','unreal-cup'].includes(rule.series))fail(id,'対応していないルールシリーズです');
+  if(!['victory-cup','skin-cup','cash-cup','performance-evaluation','unreal-cup','nvidia-cup'].includes(rule.series))fail(id,'対応していないルールシリーズです');
   if(!Array.isArray(rule.eventIds)||!rule.eventIds.length||new Set(rule.eventIds).size!==rule.eventIds.length||
       rule.eventIds.some(x=>typeof x!=='string'||!t.sourceEventIds.includes(x)))fail(id,'EpicイベントIDがカタログと不一致');
   if(!TEAMS.has(rule.team))fail(id,'チーム形式が不正');
@@ -267,6 +267,70 @@ function validateRegistry(doc,tournaments){
    }
    if(rule.advance!==undefined||rule.prizePerVictory!==undefined||rule.cosmeticRanks!==undefined)
      fail(id,'Unreal Cupに予選通過・VR単価・スキン賞を混在させない');
+  }else if(rule.series==='nvidia-cup'){
+   // Pinned to Epic's one-off S39 NVIDIA event. Never treat GPU ARV as prize USD.
+   const expectedSmall=[[1,1000],[2,750],[3,600],[4,500],[5,450],[6,400],
+    [7,350],[8,300],[9,250],[10,200],[25,150],[40,100]]
+    .map(([through,perPlayer])=>({through,perPlayer}));
+   const expectedEU=[[1,4000],[2,3000],[3,2000],[4,1500],[5,1250],
+    [6,1000],[7,900],[8,800],[9,700],[10,600],[20,500],
+    [30,400],[50,300],[75,200],[100,100]]
+    .map(([through,perPlayer])=>({through,perPlayer}));
+   const expectedNAC=[[1,2500],[2,1500],[3,1250],[4,1000],[5,750],
+    [6,500],[7,450],[8,400],[9,350],[10,300],[20,250],
+    [30,200],[50,150],[75,100]]
+    .map(([through,perPlayer])=>({through,perPlayer}));
+   const expectedRegions=['OCE','ASIA','ME','EU','BR','NAC','NAW'];
+   if(id!=='ch7s1-nvidia-geforce-rtx-cup'||rule.seasonId!=='S39'||
+      rule.team!=='solo'||rule.chapter!==7||rule.season!==1||
+      JSON.stringify(rule.eventIds)!=='["S39_NvidiaCup"]'||
+      rule.autoApproval!=='verified-team-rank'||
+      t.platform!=='cross-platform'||t.mode!=='battle-royale')
+      fail(id,'NVIDIA Cupの公式イベントID・通常BRソロ・自動承認モードに矛盾');
+   if(JSON.stringify(rule.matchCaps)!=='{"単一ラウンド":10}'||
+      rule.sessionMinutes!==180||rule.crossPlatform!==true||
+      rule.sessionSchedule?.officialDate!=='2025-12-21'||
+      rule.sessionSchedule?.regionTimezone!=='in-game'||
+      rule.sessionSchedule?.archivedSessionFile!=='calendar-history/2025-12.json')
+      fail(id,'NVIDIA Cupの単一セッション・10試合・3時間・地域別開催時間が不正');
+   if(rule.rankedEligibility?.minimumRank!=='Gold'||
+      JSON.stringify(rule.rankedEligibility?.eligibleModes)!=='["battle-royale","zero-build","reload"]'||
+      rule.rankedEligibility?.mustRankInEventRegion!==true||
+      rule.participation?.minimumAge!==13||rule.participation?.minimumAccountLevel!==350||
+      rule.participation?.twoFactorAuthentication!==true||
+      rule.participation?.minPriorEpicTournaments!==14||
+      rule.participation?.priorTournamentWindowDays!==180||
+      rule.participation?.oneAccountPerSession!==true)
+      fail(id,'NVIDIA CupのEpic公式参加要件（ゴールド・レベル350・過去14大会など）が不正');
+   if(rule.scoring?.source!=='in-game'||rule.scoring?.placementPoints!==null||
+      rule.scoring?.eliminationPoints!==null||
+      JSON.stringify(rule.scoring?.tiebreakers)!==JSON.stringify(
+       ['total-points','victory-royales','average-eliminations','average-placement','survival-seconds']))
+      fail(id,'NVIDIA Cupのゲーム内ポイント方式・同点順位判定が不正');
+   const prize=rule.cashPrizes;
+   if(prize?.basis!=='per-player'||prize.currency!=='USD'||
+      !object(prize.tiers)||Object.keys(prize.tiers).sort().join(',')!==expectedRegions.slice().sort().join(','))
+      fail(id,'NVIDIA Cupの全7地域個人賞金マスターが不足');
+   else for(const region of expectedRegions){
+      const expected=region==='EU'?expectedEU:region==='NAC'?expectedNAC:expectedSmall;
+      if(JSON.stringify(prize.tiers[region])!==JSON.stringify(expected))
+        fail(id,'NVIDIA Cupの'+region+'公式順位別賞金額が変更されています');
+   }
+   if(rule.hardwarePrizes?.name!=='NVIDIA GeForce RTX 5080'||
+      rule.hardwarePrizes?.approxRetailValueUSD!==999.99||
+      rule.hardwarePrizes?.cashEquivalent!==false||
+      JSON.stringify(rule.hardwarePrizes?.topRanks)!==
+       '{"EU":4,"NAC":3,"NAW":1,"BR":1,"ME":1,"OCE":1,"ASIA":1}')
+      fail(id,'NVIDIA CupのGPU順位対象と現金換算禁止が不正');
+   if(rule.cosmeticReward?.name!=='Rust Bucket'||
+      rule.cosmeticReward?.type!=='back-bling'||
+      rule.cosmeticReward?.minimumPoints!==8||
+      rule.cosmeticReward?.cashEquivalent!==false||
+      rule.cosmeticReward?.confirmedReceiptRequired!==false)
+      fail(id,'NVIDIA Cupの8ポイントコスメ・非現金扱いが不正');
+   if(rule.advance!==undefined||rule.prizePerVictory!==undefined||
+      rule.teamPrizePerVictory!==undefined||rule.cosmeticRanks!==undefined)
+      fail(id,'NVIDIA Cupは順位賞金。VR単価・予選・コスメ順位を混在させない');
   }else if(rule.series==='skin-cup'){
    if(!positive(rule.matchCaps?.['スキン大会']))fail(id,'スキン大会の試合数上限が必要');
    if(!positive(rule.chapter)||!positive(rule.season)||rule.chapter!==t.chapter||rule.season!==t.season)fail(id,'チャプター/シーズン不一致');

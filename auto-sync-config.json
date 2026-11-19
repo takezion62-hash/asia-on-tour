@@ -17,12 +17,14 @@
     "skin-cup",
     "icon-cup",
     "playstation-cup",
-    "unreal-cup"
+    "unreal-cup",
+    "nvidia-cup"
   ],
   "maxPagesPerWindowPerRun": 10,
   "autoApproveCosmetic": true,
   "autoApproveCash": true,
   "autoApprovePerformance": true,
   "autoApproveUnreal": true,
-  "autoApproveDuoQualifier": true
+  "autoApproveDuoQualifier": true,
+  "autoApproveNvidia": true
 }
