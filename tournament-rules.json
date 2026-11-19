@@ -1,7 +1,7 @@
 {
   "version": 1,
   "updatedAt": "2026-11-19",
-  "description": "Epic公式規則で確認した大会ルール。Unreal Cupもチーム順位と確認済みEpic IDを照合し、賞金圏内は地域別チーム/個人賞金を、圏外は$0として自動掲載（本人資格・支払確認とは別）。S36 Console Duos・S43 Reload ZB Duosの公式Round 1上位突破／全参加$0を、本人照合済み結果に限り安全に記録。Round 2賞金は推定しない。S42 Console Zero Build Solo Victory Cupは公式上位通過と決勝VR1回$100を個別登録。 S37 Console DuosおよびS42 Reload Duosの公式Round1上位突破・参加$0を、保存済み順位表と選手2名のEpicアカウントID・開催枠一致に限定して安全な自動承認に追加。Round2賞金は自動推定しない。 NVIDIA GeForce RTX Cupの公式7地域賞金表・参加条件・RTX 5080・8ptコスメ報酬を登録（本人・開催枠照合までは確認専用）。",
+  "description": "Epic公式規則で確認した大会ルール。Unreal Cupもチーム順位と確認済みEpic IDを照合し、賞金圏内は地域別チーム/個人賞金を、圏外は$0として自動掲載（本人資格・支払確認とは別）。S36 Console Duos・S43 Reload ZB Duosの公式Round 1上位突破／全参加$0を、本人照合済み結果に限り安全に記録。Round 2賞金は推定しない。S42 Console Zero Build Solo Victory Cupは公式上位通過と決勝VR1回$100を個別登録。 S37 Console DuosおよびS42 Reload Duosの公式Round1上位突破・参加$0を、保存済み順位表と選手2名のEpicアカウントID・開催枠一致に限定して安全な自動承認に追加。Round2賞金は自動推定しない。 NVIDIA GeForce RTX Cupの公式7地域賞金表・参加条件・RTX 5080・8ptコスメ報酬を登録（厳格な本人・順位・開催枠検証で順位賞金を自動承認）。",
   "rules": [
     {
       "id": "ch5s3-squads-victory-cup",
@@ -1574,7 +1574,7 @@
         "item": "Rust Bucket Back Bling",
         "minimumPoints": 8
       },
-      "autoApproval": "review-only",
+      "autoApproval": "verified-solo-rank",
       "source": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/nvidia-geforce-rtx-cup-official-rules",
       "evidence": [
         {
@@ -1586,7 +1586,7 @@
           "url": "https://fortnitetracker.com/events/epicgames_S39_NvidiaCup_NAW?window=S39_NvidiaCup_NAW"
         }
       ],
-      "note": "1ラウンド・クロスプラットフォーム。現金賞金は各選手分で、圏外は$0。GPU/コスメは現金に換算しない。イベント参加資格や実際の受給・支払いを順位だけで確定しない。本人Epic ID・地域・開催回・公式/Tracker順位の個別照合後に手動承認する（自動承認処理は未実装）。"
+      "note": "1ラウンド・クロスプラットフォーム。現金賞金は各選手分で、圏外は$0。GPU/コスメは現金に換算しない。イベント参加資格や実際の受給・支払いを順位だけで確定しない。本人Epic ID・地域・開催回・公式/Tracker順位の個別照合後に公式ルール・完全な順位表・確認済みEpic ID・開催枠の全項目が一致する場合のみ自動承認し、賞金圏外は$0。"
     },
     {
       "id": "ch7s1-solo-series-finals",
