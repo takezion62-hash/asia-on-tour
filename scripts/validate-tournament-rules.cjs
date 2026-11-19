@@ -224,7 +224,7 @@ function validateRegistry(doc,tournaments){
   }else if(rule.series==='nvidia-cup'){
    if(id!=='ch7s1-nvidia-geforce-rtx-cup'||rule.seasonId!=='S39'||
      rule.team!=='solo'||JSON.stringify(rule.eventIds)!=='["S39_NvidiaCup"]'||
-     rule.autoApproval!=='review-only')fail(id,'RTX Cupは本人照合まで確認専用として登録');
+     rule.autoApproval!=='verified-solo-rank')fail(id,'RTX Cupは本人・順位・開催枠一致時のみ自動承認');
    if(Object.keys(rule.matchCaps||{}).join(',')!=='単一ラウンド'||
      rule.matchCaps['単一ラウンド']!==10||rule.sessionMinutes!==180||
      JSON.stringify(rule.sessionDates)!=='["2025-12-21"]')
