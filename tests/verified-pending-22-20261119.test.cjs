@@ -3,6 +3,7 @@ const test=require('node:test'),assert=require('node:assert/strict'),fs=require(
 const ROOT=path.resolve(__dirname,'..'),read=f=>JSON.parse(fs.readFileSync(path.join(ROOT,f),'utf8'));
 const {readResults}=require('../scripts/source-results-store.cjs');
 const V=require('../scripts/verified-pending-22-20261119.cjs');
+const {validPriorPublished}=require('../scripts/publish-pending-22-20261119.cjs');
 const {sameScannedCandidate}=require('../scripts/verified-partial-page.cjs');
 test('source evidence blob fixes exactly 22 observed original ranked results and 4 windows',()=>{
  assert.equal(V.validateProof(),true);
@@ -51,7 +52,7 @@ test('originally observed source rows still match archived pending and source ch
   const cp=scan[group.key];
   for(const row of group.targetRows){
    const result=published.get(row.id);
-   if(result){assert.equal(V.verifyPublished(result,read('approval-history.json').entries.find(x=>x.id===row.id)),true);continue;}
+   if(result){assert.equal(validPriorPublished(result,read('approval-history.json').entries.find(x=>x.id===row.id),row),true);continue;}
    assert.ok(cp?.proposals.some(x=>sameScannedCandidate(x,row)),row.id);
    assert.ok(review.some(x=>sameScannedCandidate(x,row)),row.id);
   }
@@ -74,10 +75,26 @@ test('dry run is immutable and all pending are either absent or fully published'
  const before=files.map(sha);
  const {publish}=require('../scripts/publish-pending-22-20261119.cjs');
  const report=publish({dryRun:true});
- assert.equal(report.selected,22);assert.ok(report.added===0||report.added===22);
+ const alreadyPublished=new Set(readResults(ROOT).rows.map(x=>x.id));
+ const missing=V.allRows().filter(x=>!alreadyPublished.has(x.id)).map(x=>V.publish(x));
+ assert.equal(report.selected,22);assert.equal(report.added,missing.length);
  assert.equal(report.added+report.already,22);assert.equal(report.newCash,0);
- assert.equal(report.qualifiers,report.added?12:0);
- assert.equal(report.attendance,report.added?3:0);
- assert.equal(report.finalZero,report.added?7:0);
+ assert.equal(report.qualifiers,missing.filter(x=>x.kind==='予選').length);
+ assert.equal(report.attendance,missing.filter(x=>x.kind==='参加確認').length);
+ assert.equal(report.finalZero,missing.filter(x=>x.kind==='賞金決勝').length);
  assert.deepEqual(files.map(sha),before,'dry run wrote to canonical files');
+});
+
+test('already source-verified 2024 NAC Round1 participants are not duplicated or rewritten',()=>{
+ const source=V.allRows().filter(x=>['auto-s30-23b2d7c0bb7d','auto-s30-ea826f9c2ebf'].includes(x.id));
+ const rows=readResults(ROOT).rows,entries=read('approval-history.json').entries;
+ for(const old of source){
+  const record=rows.find(x=>x.id===old.id);
+  if(!record)continue;
+  const approved=entries.find(x=>x.id===old.id);
+  assert.equal(validPriorPublished(record,approved,old),true);
+  assert.equal(validPriorPublished({...record,prize:100},approved,old),false);
+  assert.equal(validPriorPublished({...record,rank:record.rank+1},approved,old),false);
+  assert.equal(validPriorPublished({...record,source:'https://example.org'},approved,old),false);
+ }
 });
