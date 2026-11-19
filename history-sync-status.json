@@ -1,46 +1,37 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-19T14:43:39.574Z",
+  "checkedAt": "2026-11-19T23:53:44.669Z",
   "mode": "review",
   "scope": "history",
   "dateMode": "rolling",
   "selectedWindows": 24,
   "fromDate": "2023-01-01",
-  "toDate": "2026-11-19",
+  "toDate": "2026-11-20",
   "provider": "osirion",
-  "linkedPlayers": 674,
-  "trackedWindows": 3237,
-  "found": 14,
-  "skipped": 3,
-  "imported": 0,
-  "scannedPages": 60,
-  "completedWindows": 697,
+  "linkedPlayers": 676,
+  "trackedWindows": 3238,
+  "found": 46,
+  "skipped": 17,
+  "imported": 2,
+  "scannedPages": 96,
+  "completedWindows": 699,
   "identityConflicts": 3,
-  "alreadyRegistered": 6644,
-  "autoApprovedTotal": 3261,
+  "alreadyRegistered": 6661,
+  "autoApprovedTotal": 3263,
   "invalidCachedCandidates": 1,
-  "manualReviewCandidates": 14,
+  "manualReviewCandidates": 46,
   "autoApprovedCosmeticThisRun": 0,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
   "autoApprovedUnrealThisRun": 0,
   "timeLimitReached": false,
-  "retryWindows": 7,
-  "transientFailures": 1,
+  "retryWindows": 5,
+  "transientFailures": 0,
   "malformedFailures": 0,
-  "skippedLeaderboards": [
-    {
-      "window": "epicgames_S39_NvidiaCup_OCE/S39_NvidiaCup_OCE",
-      "page": 0,
-      "attempt": 1,
-      "code": "OSIRION_TRANSIENT",
-      "reason": "Osirion API HTTP 429 /v1/tournaments/leaderboard",
-      "retryAfter": "2026-11-19T20:43:39.557Z"
-    }
-  ],
-  "reviewOnlyWindows": 1605,
-  "reviewOnlyCandidates": 10,
+  "skippedLeaderboards": [],
+  "reviewOnlyWindows": 1606,
+  "reviewOnlyCandidates": 30,
   "unmappedEvents": 229,
   "unmappedEventIds": [
     "S30_ConsoleCashCups",
@@ -56,29 +47,29 @@
     "S30_d4vd_Cup",
     "S31_FNCSCommunityCups_KunoRenzo"
   ],
-  "message": "最新版と安全統合：新規掲載0件、重複スキップ0件、要確認の競合0件、確認待ち31件。既存の戦績・賞金は保持。",
+  "message": "最新版と安全統合：新規掲載2件、重複スキップ0件、要確認の競合0件、確認待ち46件。既存の戦績・賞金は保持。",
   "manuallyPublished": 2199,
   "manuallyResolvedDuplicates": 169,
   "lastReviewedBatchAt": "2026-11-19T10:58:14.205Z",
   "manuallyCorrected": 13,
   "lastCorrectedReviewAt": "2026-11-13T13:45:16.115Z",
   "concurrentMerge": {
-    "appended": 0,
+    "appended": 2,
     "alreadyPublished": 0,
     "reviewConflicts": 0,
-    "keptPending": 31,
-    "reconciledAt": "2026-11-19T14:43:43.441Z"
+    "keptPending": 46,
+    "reconciledAt": "2026-11-19T23:53:51.147Z"
   },
   "coverage": {
-    "total": 3237,
-    "completed": 697,
-    "notStarted": 2339,
-    "partial": 194,
-    "retryWaiting": 7,
+    "total": 3238,
+    "completed": 699,
+    "notStarted": 2335,
+    "partial": 199,
+    "retryWaiting": 5,
     "retryDue": 0,
-    "remaining": 2540,
-    "retryCount": 7,
-    "completionPercent": 21.5,
+    "remaining": 2539,
+    "retryCount": 5,
+    "completionPercent": 21.6,
     "byRegion": {
       "OCE": {
         "total": 573,
@@ -87,12 +78,12 @@
       },
       "ME": {
         "total": 567,
-        "completed": 208,
-        "pending": 359
+        "completed": 209,
+        "pending": 358
       },
       "EU": {
-        "total": 587,
-        "completed": 83,
+        "total": 588,
+        "completed": 84,
         "pending": 504
       },
       "BR": {
@@ -123,35 +114,13 @@
         "pending": 611
       },
       "2026": {
-        "total": 1440,
-        "completed": 413,
-        "pending": 1027
+        "total": 1441,
+        "completed": 415,
+        "pending": 1026
       }
     },
     "outsideScopeCheckpoints": 0,
     "samples": [
-      {
-        "window": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event8Round1_NAC",
-        "date": "2024-08-06",
-        "region": "NAC",
-        "series": "victory-cup",
-        "status": "retryWaiting",
-        "nextPage": 75,
-        "totalPages": 100,
-        "retryAfter": "2026-11-19T16:59:59.233Z",
-        "errorCode": "OSIRION_TRANSIENT"
-      },
-      {
-        "window": "epicgames_S39_NvidiaCup_OCE/S39_NvidiaCup_OCE",
-        "date": "2025-12-21",
-        "region": "OCE",
-        "series": "nvidia-cup",
-        "status": "retryWaiting",
-        "nextPage": 0,
-        "totalPages": null,
-        "retryAfter": "2026-11-19T20:43:39.557Z",
-        "errorCode": "OSIRION_TRANSIENT"
-      },
       {
         "window": "epicgames_S42_SoloVictoryCup_OCE/S42_SoloVictoryCup_Event1Round2_OCE",
         "date": "2026-09-05",
@@ -261,6 +230,28 @@
         "totalPages": 19,
         "retryAfter": null,
         "errorCode": null
+      },
+      {
+        "window": "epicgames_S30_SoloVictoryCashCup_EU/S30_SoloVictoryCashCup_Event1Round2_EU",
+        "date": "2024-06-04",
+        "region": "EU",
+        "series": "victory-cup",
+        "status": "partial",
+        "nextPage": 30,
+        "totalPages": 68,
+        "retryAfter": null,
+        "errorCode": null
+      },
+      {
+        "window": "epicgames_S30_SoloVictoryCashCup_NAC/S30_SoloVictoryCashCup_Event1Round1_NAC",
+        "date": "2024-06-04",
+        "region": "NAC",
+        "series": "victory-cup",
+        "status": "partial",
+        "nextPage": 2,
+        "totalPages": 100,
+        "retryAfter": null,
+        "errorCode": null
       }
     ]
   },
@@ -278,7 +269,7 @@
     "remainingPending": 6,
     "policy": "Official 2024 solo qualification cutoffs and exact verified saved Epic-ID ranked rows; no inferred cash"
   },
-  "autoApprovedDuoQualifierThisRun": 0,
+  "autoApprovedDuoQualifierThisRun": 1,
   "latestParticipationReview": {
     "reviewedAt": "2026-11-17T02:34:15.710Z",
     "participationPublished": 2,
@@ -291,19 +282,19 @@
   "manualReviewResolvedAt": "2026-11-18T03:09:23.691Z",
   "reviewRecovery": {
     "selectedWindows": 1,
-    "candidateCount": 1,
+    "candidateCount": 2,
     "cashUnconfirmedCount": 0,
     "selected": [
       {
         "window": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event5Round1_NAC",
-        "remainingPages": 53,
-        "candidateCount": 1,
+        "remainingPages": 41,
+        "candidateCount": 2,
         "cashUnconfirmedCount": 0
       }
     ]
   },
   "priorityAudit": {
-    "eligible": 2535,
+    "eligible": 2536,
     "top": [
       {
         "key": "epicgames_S43_TriosCashCup_EU/S43_TriosCashCup_Event2_EU",
@@ -319,14 +310,27 @@
         }
       },
       {
+        "key": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event8Round1_NAC",
+        "date": "2024-08-06",
+        "region": "NAC",
+        "series": "victory-cup",
+        "score": 318,
+        "reasons": {
+          "officialRule": 150,
+          "progress": 68,
+          "existingEvidence": 100,
+          "round": 0
+        }
+      },
+      {
         "key": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event5Round1_NAC",
         "date": "2024-07-16",
         "region": "NAC",
         "series": "victory-cup",
-        "score": 292,
+        "score": 303,
         "reasons": {
           "officialRule": 150,
-          "progress": 42,
+          "progress": 53,
           "existingEvidence": 100,
           "round": 0
         }
@@ -336,10 +340,23 @@
         "date": "2025-08-18",
         "region": "NAW",
         "series": "victory-cup",
-        "score": 283,
+        "score": 297,
         "reasons": {
           "officialRule": 150,
-          "progress": 33,
+          "progress": 47,
+          "existingEvidence": 100,
+          "round": 0
+        }
+      },
+      {
+        "key": "epicgames_S42_ReloadDuosVictoryCup_NAW/S42_ReloadDuosVictoryCup_Event1_Round1_NAW",
+        "date": "2026-08-25",
+        "region": "NAW",
+        "series": "victory-cup",
+        "score": 293,
+        "reasons": {
+          "officialRule": 150,
+          "progress": 43,
           "existingEvidence": 100,
           "round": 0
         }
@@ -358,19 +375,6 @@
         }
       },
       {
-        "key": "epicgames_S42_ReloadDuosVictoryCup_NAW/S42_ReloadDuosVictoryCup_Event1_Round1_NAW",
-        "date": "2026-08-25",
-        "region": "NAW",
-        "series": "victory-cup",
-        "score": 282,
-        "reasons": {
-          "officialRule": 150,
-          "progress": 32,
-          "existingEvidence": 100,
-          "round": 0
-        }
-      },
-      {
         "key": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event7Round1_NAC",
         "date": "2024-07-30",
         "region": "NAC",
@@ -381,6 +385,19 @@
           "progress": 28,
           "existingEvidence": 100,
           "round": 0
+        }
+      },
+      {
+        "key": "epicgames_S39_NvidiaCup_NAW/S39_NvidiaCup_NAW",
+        "date": "2025-12-22",
+        "region": "NAW",
+        "series": "nvidia-cup",
+        "score": 275,
+        "reasons": {
+          "officialRule": 150,
+          "progress": 22,
+          "existingEvidence": 100,
+          "round": 3
         }
       },
       {
@@ -407,19 +424,6 @@
           "progress": 16,
           "existingEvidence": 100,
           "round": 0
-        }
-      },
-      {
-        "key": "epicgames_S39_NvidiaCup_NAW/S39_NvidiaCup_NAW",
-        "date": "2025-12-22",
-        "region": "NAW",
-        "series": "nvidia-cup",
-        "score": 264,
-        "reasons": {
-          "officialRule": 150,
-          "progress": 11,
-          "existingEvidence": 100,
-          "round": 3
         }
       },
       {
@@ -941,27 +945,21 @@
           "existingEvidence": 70,
           "round": 12
         }
-      },
-      {
-        "key": "epicgames_S31_SoloVictoryCashCup_EU/S31_SoloVictoryCashCup_Event5Round1_EU",
-        "date": "2024-10-01",
-        "region": "EU",
-        "series": "victory-cup",
-        "score": 223,
-        "reasons": {
-          "officialRule": 150,
-          "progress": 3,
-          "existingEvidence": 70,
-          "round": 0
-        }
       }
     ],
     "selected": [
       {
-        "key": "epicgames_S33_SoloCashCup_OCE/S33_SoloCashCup_Event8Round2_OCE",
-        "date": "2025-02-18",
-        "region": "OCE",
-        "series": "cash-cup",
+        "key": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event8Round1_NAC",
+        "date": "2024-08-06",
+        "region": "NAC",
+        "series": "victory-cup",
+        "kind": "予選"
+      },
+      {
+        "key": "epicgames_S43_PerformanceEvaluationTrios_EU/S43_PerformanceEvaluation_Event3Round1_EU",
+        "date": "2026-11-20",
+        "region": "EU",
+        "series": "performance-evaluation",
         "kind": "参加確認"
       },
       {
@@ -1070,13 +1068,6 @@
         "kind": "予選"
       },
       {
-        "key": "epicgames_S30_SoloZBVictoryCashCup_EU/S30_SoloZBVictoryCashCup_Event2Round2_EU",
-        "date": "2024-06-11",
-        "region": "EU",
-        "series": "victory-cup",
-        "kind": "賞金決勝"
-      },
-      {
         "key": "epicgames_S42_MadisonBeerIconCup_OCE/S42_MadisonBeerIconCup_OCE",
         "date": "2026-09-24",
         "region": "OCE",
@@ -1127,14 +1118,14 @@
       }
     ]
   },
-  "processedWindows": 7,
-  "providerRateLimitPaused": true,
-  "providerRateLimitRetryAfter": "2026-11-19T20:43:39.557Z",
-  "newlyCompletedWindows": 1,
+  "processedWindows": 24,
+  "providerRateLimitPaused": false,
+  "providerRateLimitRetryAfter": null,
+  "newlyCompletedWindows": 2,
   "newPlayerBackfill": {
     "initialized": false,
-    "newAccounts": 1,
-    "pendingWindows": 696,
+    "newAccounts": 2,
+    "pendingWindows": 697,
     "pagesScanned": 4,
     "windowsVisited": 2,
     "windowsCompleted": 0,
