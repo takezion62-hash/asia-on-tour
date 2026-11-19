@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-19T08:55:20.125Z",
+  "reviewedAt": "2026-11-19T10:58:02.120Z",
   "description": "Resolved historic review candidates: published, duplicate or participation",
   "entries": [
     {
@@ -33894,6 +33894,87 @@
       "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=NAC&round=S30_SoloZBVictoryCashCup_Event8Round1_NAC",
       "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
       "reviewedAt": "2026-11-19T08:55:20.125Z"
+    },
+    {
+      "id": "auto-s30-ecfa9f12a6df",
+      "decision": "published",
+      "recordId": "auto-s30-ecfa9f12a6df",
+      "reviewedAt": "2026-11-19T10:58:02.120Z",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event5Round1_NAC",
+      "policy": "verified-rule",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules"
+    },
+    {
+      "id": "auto-s42-29a3fe9ba6c3",
+      "decision": "published",
+      "recordId": "auto-s42-29a3fe9ba6c3",
+      "reviewedAt": "2026-11-19T10:58:02.120Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_MadisonBeerIconCup/?region=OCE&round=S42_MadisonBeerIconCup_OCE",
+      "policy": "attendance-only",
+      "rule": null
+    },
+    {
+      "id": "auto-s34-713a3c75f7ff",
+      "decision": "published",
+      "recordId": "auto-s34-713a3c75f7ff",
+      "reviewedAt": "2026-11-19T10:58:02.120Z",
+      "source": "https://www.fortnite.com/competitive/events/S34_PlaystationCup/?region=ME&round=S34_PlaystationCupQualifier1_ME",
+      "policy": "attendance-only",
+      "rule": null
+    },
+    {
+      "id": "auto-s34-6e300bb25ed5",
+      "decision": "published",
+      "recordId": "auto-s34-6e300bb25ed5",
+      "reviewedAt": "2026-11-19T10:58:02.120Z",
+      "source": "https://www.fortnite.com/competitive/events/S34_PlaystationCup/?region=ME&round=S34_PlaystationCupQualifier1_ME",
+      "policy": "attendance-only",
+      "rule": null
+    },
+    {
+      "id": "auto-s34-70b0ed63b105",
+      "decision": "published",
+      "recordId": "auto-s34-70b0ed63b105",
+      "reviewedAt": "2026-11-19T10:58:02.120Z",
+      "source": "https://www.fortnite.com/competitive/events/S34_PlaystationCup/?region=ME&round=S34_PlaystationCupQualifier1_ME",
+      "policy": "attendance-only",
+      "rule": null
+    },
+    {
+      "id": "auto-s30-2fb012e8e268",
+      "decision": "published",
+      "recordId": "auto-s30-2fb012e8e268",
+      "reviewedAt": "2026-11-19T10:58:02.120Z",
+      "source": "https://www.fortnite.com/competitive/events/S30_PlaystationCupZBJune/?region=OCE&round=S30_PlaystationCupZBJune_Qualifier2_OCE",
+      "policy": "attendance-only",
+      "rule": null
+    },
+    {
+      "id": "auto-s30-7e7addfc73e6",
+      "decision": "published",
+      "recordId": "auto-s30-7e7addfc73e6",
+      "reviewedAt": "2026-11-19T10:58:02.120Z",
+      "source": "https://www.fortnite.com/competitive/events/S30_PlaystationCupZBJune/?region=OCE&round=S30_PlaystationCupZBJune_Qualifier2_OCE",
+      "policy": "attendance-only",
+      "rule": null
+    },
+    {
+      "id": "auto-s30-d8ddc8407183",
+      "decision": "published",
+      "recordId": "auto-s30-d8ddc8407183",
+      "reviewedAt": "2026-11-19T10:58:02.120Z",
+      "source": "https://www.fortnite.com/competitive/events/S30_PlaystationCupJune/?region=OCE&round=S30_PlaystationCupJune_Qualifier2_OCE",
+      "policy": "attendance-only",
+      "rule": null
+    },
+    {
+      "id": "auto-s30-99375eb821f9",
+      "decision": "published",
+      "recordId": "auto-s30-99375eb821f9",
+      "reviewedAt": "2026-11-19T10:58:02.120Z",
+      "source": "https://www.fortnite.com/competitive/events/S30_PlaystationCupJune/?region=OCE&round=S30_PlaystationCupJune_Qualifier2_OCE",
+      "policy": "attendance-only",
+      "rule": null
     }
   ]
 }

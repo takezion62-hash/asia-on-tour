@@ -1,56 +1,36 @@
 {
   "version": 1,
   "sourceCheckedAt": "2026-11-19T08:59:14.187Z",
-  "total": 20,
+  "total": 11,
   "alreadyResolved": 0,
   "byYear": [
     {
       "name": "2024",
-      "count": 16
-    },
-    {
-      "name": "2025",
-      "count": 3
-    },
-    {
-      "name": "2026",
-      "count": 1
+      "count": 11
     }
   ],
   "byRegion": [
     {
       "name": "ME",
-      "count": 8
+      "count": 5
     },
     {
       "name": "NAC",
-      "count": 2
+      "count": 1
     },
     {
       "name": "OCE",
-      "count": 10
+      "count": 5
     }
   ],
   "byTournament": [
     {
-      "name": "Madison Beer Icon Cup Reload / OCE / 2026",
-      "count": 1
-    },
-    {
-      "name": "PlayStation Cup / ME / 2025",
-      "count": 3
-    },
-    {
       "name": "PlayStation Cup Battle Royale / OCE / 2024",
-      "count": 3
+      "count": 1
     },
     {
       "name": "PlayStation Cup Zero Build / OCE / 2024",
-      "count": 6
-    },
-    {
-      "name": "Solo Victory Cup Battle Royale / NAC / 2024",
-      "count": 1
+      "count": 4
     },
     {
       "name": "ZB Solo Victory Cup / ME / 2024",
@@ -68,11 +48,7 @@
     },
     {
       "name": "partial-scan",
-      "count": 14
-    },
-    {
-      "name": "rules-review",
-      "count": 1
+      "count": 6
     }
   ],
   "queue": [
@@ -238,171 +214,6 @@
         "totalPages": 1,
         "sourceKey": "epicgames_S30_PlaystationCupZBJune_OCE/S30_PlaystationCupZBJune_Final_OCE",
         "possibleExistingId": "ps-s30-oce-s30ocezb-final-20240630-r25"
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s30-ecfa9f12a6df",
-      "origin": "history",
-      "date": "2024-07-16",
-      "year": "2024",
-      "region": "NAC",
-      "tournamentId": "ch5s3-solo-victory-cup",
-      "event": "Solo Victory Cup Battle Royale",
-      "round": "Event 5 · Round 1 / 予選",
-      "player": "Zagouの弟",
-      "kind": "予選",
-      "rank": 9739,
-      "points": 109,
-      "kills": 7,
-      "vrs": 1,
-      "prize": 0,
-      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event5Round1_NAC",
-      "status": "rules-review",
-      "action": "公式規則・賞金・突破・スキン条件を個別確認",
-      "reason": "開催日・地域・ラウンド不一致",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": true,
-        "observedPartial": false,
-        "seenPages": 100,
-        "totalPages": 100,
-        "sourceKey": "epicgames_S30_SoloVictoryCashCup_NAC/S30_SoloVictoryCashCup_Event5Round1_NAC",
-        "possibleExistingId": null
-      },
-      "rewardState": "source-amount-present-not-verified-by-triage"
-    },
-    {
-      "id": "auto-s30-2fb012e8e268",
-      "origin": "history",
-      "date": "2024-06-07",
-      "year": "2024",
-      "region": "OCE",
-      "tournamentId": "ch5s3-playstation-cup-zb",
-      "event": "PlayStation Cup Zero Build",
-      "round": "単一開催枠 / 参加確認",
-      "player": "かぷせるてぃーてぃーTTていてい",
-      "kind": "参加確認",
-      "rank": 77,
-      "points": 111,
-      "kills": 18,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S30_PlaystationCupZBJune/?region=OCE&round=S30_PlaystationCupZBJune_Qualifier2_OCE",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "確認専用大会は自動承認不可",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 2,
-        "totalPages": 23,
-        "sourceKey": "epicgames_S30_PlaystationCupZBJune_OCE/S30_PlaystationCupZBJune_Qualifier2_OCE",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s30-7e7addfc73e6",
-      "origin": "history",
-      "date": "2024-06-07",
-      "year": "2024",
-      "region": "OCE",
-      "tournamentId": "ch5s3-playstation-cup-zb",
-      "event": "PlayStation Cup Zero Build",
-      "round": "単一開催枠 / 参加確認",
-      "player": "朝比奈まふゆӝ",
-      "kind": "参加確認",
-      "rank": 132,
-      "points": 97,
-      "kills": 9,
-      "vrs": 1,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S30_PlaystationCupZBJune/?region=OCE&round=S30_PlaystationCupZBJune_Qualifier2_OCE",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "確認専用大会は自動承認不可",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 2,
-        "totalPages": 23,
-        "sourceKey": "epicgames_S30_PlaystationCupZBJune_OCE/S30_PlaystationCupZBJune_Qualifier2_OCE",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s30-99375eb821f9",
-      "origin": "history",
-      "date": "2024-06-08",
-      "year": "2024",
-      "region": "OCE",
-      "tournamentId": "ch5s3-playstation-cup-br",
-      "event": "PlayStation Cup Battle Royale",
-      "round": "単一開催枠 / 参加確認",
-      "player": "ぱやぱやの和田もひ",
-      "kind": "参加確認",
-      "rank": 69,
-      "points": 110,
-      "kills": 8,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S30_PlaystationCupJune/?region=OCE&round=S30_PlaystationCupJune_Qualifier2_OCE",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "確認専用大会は自動承認不可",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 2,
-        "totalPages": 34,
-        "sourceKey": "epicgames_S30_PlaystationCupJune_OCE/S30_PlaystationCupJune_Qualifier2_OCE",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s30-d8ddc8407183",
-      "origin": "history",
-      "date": "2024-06-08",
-      "year": "2024",
-      "region": "OCE",
-      "tournamentId": "ch5s3-playstation-cup-br",
-      "event": "PlayStation Cup Battle Royale",
-      "round": "単一開催枠 / 参加確認",
-      "player": "Mofu",
-      "kind": "参加確認",
-      "rank": 14,
-      "points": 140,
-      "kills": 28,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S30_PlaystationCupJune/?region=OCE&round=S30_PlaystationCupJune_Qualifier2_OCE",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "確認専用大会は自動承認不可",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 2,
-        "totalPages": 34,
-        "sourceKey": "epicgames_S30_PlaystationCupJune_OCE/S30_PlaystationCupJune_Qualifier2_OCE",
-        "possibleExistingId": null
       },
       "rewardState": "cash-unconfirmed"
     },
@@ -603,138 +414,6 @@
         "possibleExistingId": null
       },
       "rewardState": "source-amount-present-not-verified-by-triage"
-    },
-    {
-      "id": "auto-s34-6e300bb25ed5",
-      "origin": "history",
-      "date": "2025-04-30",
-      "year": "2025",
-      "region": "ME",
-      "tournamentId": "ch6s2-playstation-cup",
-      "event": "PlayStation Cup",
-      "round": "単一開催枠 / 参加確認",
-      "player": "ねむじすた",
-      "kind": "参加確認",
-      "rank": 3262,
-      "points": 136,
-      "kills": 3,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S34_PlaystationCup/?region=ME&round=S34_PlaystationCupQualifier1_ME",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "確認専用大会は自動承認不可",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 34,
-        "totalPages": 100,
-        "sourceKey": "epicgames_S34_PlaystationCup_ME/S34_PlaystationCupQualifier1_ME",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s34-70b0ed63b105",
-      "origin": "history",
-      "date": "2025-04-30",
-      "year": "2025",
-      "region": "ME",
-      "tournamentId": "ch6s2-playstation-cup",
-      "event": "PlayStation Cup",
-      "round": "単一開催枠 / 参加確認",
-      "player": "MAT4DOR.",
-      "kind": "参加確認",
-      "rank": 3385,
-      "points": 133,
-      "kills": 10,
-      "vrs": 1,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S34_PlaystationCup/?region=ME&round=S34_PlaystationCupQualifier1_ME",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "確認専用大会は自動承認不可",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 34,
-        "totalPages": 100,
-        "sourceKey": "epicgames_S34_PlaystationCup_ME/S34_PlaystationCupQualifier1_ME",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s34-713a3c75f7ff",
-      "origin": "history",
-      "date": "2025-04-30",
-      "year": "2025",
-      "region": "ME",
-      "tournamentId": "ch6s2-playstation-cup",
-      "event": "PlayStation Cup",
-      "round": "単一開催枠 / 参加確認",
-      "player": "いずべすと",
-      "kind": "参加確認",
-      "rank": 3203,
-      "points": 137,
-      "kills": 4,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S34_PlaystationCup/?region=ME&round=S34_PlaystationCupQualifier1_ME",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "確認専用大会は自動承認不可",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 34,
-        "totalPages": 100,
-        "sourceKey": "epicgames_S34_PlaystationCup_ME/S34_PlaystationCupQualifier1_ME",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s42-29a3fe9ba6c3",
-      "origin": "history",
-      "date": "2026-09-24",
-      "year": "2026",
-      "region": "OCE",
-      "tournamentId": "ch7s4-madison-beer-icon-cup-reload",
-      "event": "Madison Beer Icon Cup Reload",
-      "round": "単一開催枠 / 参加確認",
-      "player": "Stay Alivё / らず",
-      "kind": "参加確認",
-      "rank": 2916,
-      "points": 186,
-      "kills": 63,
-      "vrs": 1,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S42_MadisonBeerIconCup/?region=OCE&round=S42_MadisonBeerIconCup_OCE",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "確認専用大会は自動承認不可",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 30,
-        "totalPages": 77,
-        "sourceKey": "epicgames_S42_MadisonBeerIconCup_OCE/S42_MadisonBeerIconCup_OCE",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
     }
   ],
   "policy": "read-only queue; awards require existing official rule-backed validators and identity/collision proof"

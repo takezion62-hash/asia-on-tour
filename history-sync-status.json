@@ -11,7 +11,7 @@
   "provider": "osirion",
   "linkedPlayers": 673,
   "trackedWindows": 3231,
-  "found": 20,
+  "found": 11,
   "skipped": 14,
   "imported": 5,
   "scannedPages": 96,
@@ -20,7 +20,7 @@
   "alreadyRegistered": 6605,
   "autoApprovedTotal": 3261,
   "invalidCachedCandidates": 1,
-  "manualReviewCandidates": 20,
+  "manualReviewCandidates": 11,
   "autoApprovedCosmeticThisRun": 0,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
@@ -40,7 +40,7 @@
     }
   ],
   "reviewOnlyWindows": 1599,
-  "reviewOnlyCandidates": 13,
+  "reviewOnlyCandidates": 5,
   "unmappedEvents": 229,
   "unmappedEventIds": [
     "S30_ConsoleCashCups",
@@ -56,10 +56,10 @@
     "S30_d4vd_Cup",
     "S31_FNCSCommunityCups_KunoRenzo"
   ],
-  "message": "最新版と安全統合：新規掲載5件、重複スキップ0件、要確認の競合0件、確認待ち20件。既存の戦績・賞金は保持。",
-  "manuallyPublished": 2185,
+  "message": "公式Epic ID・順位・開催枠を検証し9件を掲載。残り11件。未確認賞金を推定しない。",
+  "manuallyPublished": 2194,
   "manuallyResolvedDuplicates": 169,
-  "lastReviewedBatchAt": "2026-11-19T08:55:20.125Z",
+  "lastReviewedBatchAt": "2026-11-19T10:58:02.120Z",
   "manuallyCorrected": 13,
   "lastCorrectedReviewAt": "2026-11-13T13:45:16.115Z",
   "concurrentMerge": {
