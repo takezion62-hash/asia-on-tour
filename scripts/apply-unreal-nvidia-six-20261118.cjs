@@ -10,6 +10,12 @@ const V=require('./verified-unreal-nvidia-six-20261118.cjs');
 const ROOT=path.resolve(__dirname,'..'),read=f=>JSON.parse(fs.readFileSync(path.join(ROOT,f),'utf8'));
 const write=(f,d)=>fs.writeFileSync(path.join(ROOT,f),JSON.stringify(d,null,2)+'\n');
 const must=(x,m)=>{if(!x)throw Error('UNREAL_NVIDIA_SIX '+m)};
+function orderPublicationLog(updates){
+ must(Array.isArray(updates?.entries),'missing update entries');
+ // Historical screenshot batches can be published after newer dated updates.
+ // Keep original order for entries with the same date (stable Array#sort).
+ updates.entries.sort((a,b)=>b.date.localeCompare(a.date));
+}
 function apply({dryRun=false}={}){
  must(V.validateProof()===true,'screenshot proof changed');
  const rows=readResults(ROOT).rows,players=read('players.json'),tournaments=read('tournaments.json');
@@ -77,6 +83,9 @@ function apply({dryRun=false}={}){
   title:'2025 NAC Unreal・NAW NVIDIA GeForce RTX Cup 6成績',
   description:'画像1916〜1924とEpic本人UUID・公式順位別賞金を確認。NAC Unreal 1093位デュオ$100（個人各$50）。NAW NVIDIAソロ33/36位各$100、53/69/71位各$0。NVIDIAは単一ラウンド・通常BRソロ・10試合/3時間、40位まで賞金、8pt Rust Bucket対象。追加賞金計$300。',
   recordIds:added.map(x=>x.id)});
+ // The shared upsert prepends new notices, but the archive is strictly date-descending.
+ // A reviewed 2026-11-18 batch can arrive after another 2026-11-19 announcement.
+ if(added.length)orderPublicationLog(updates);
  const errors=validateData({results:rows,players,tournaments}).errors;
  must(!errors.length,'data validation: '+JSON.stringify(errors.slice(0,6)));
  const bad=audit(rows,ledger,players);must(!bad.length,'approval audit: '+JSON.stringify(bad.slice(0,6)));
@@ -93,4 +102,4 @@ if(require.main===module)try{
  const args=process.argv.slice(2);must(args.length===0||(args.length===1&&args[0]==='--dry-run'),'usage: [--dry-run]');
  apply({dryRun:args.includes('--dry-run')});
 }catch(error){console.error(error.stack);process.exitCode=1}
-module.exports={apply};
+module.exports={apply,orderPublicationLog};

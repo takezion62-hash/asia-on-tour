@@ -75,3 +75,21 @@ test('full snapshot dry-run passes and cannot mutate canonical source, player id
  assert.equal(status.addedCash,status.added?300:0);
  assert.deepEqual(paths.map(sha),before);
 });
+test('a historical six-result publication is inserted below newer update dates, retaining equal-date order',()=>{
+ const {orderPublicationLog}=require('../scripts/apply-unreal-nvidia-six-20261118.cjs');
+ const current=read('updates.json').entries;
+ assert.ok(current.some(x=>x.date>'2026-11-18'),'fixture must contain a newer release');
+ const marker={id:'owner-s39-unreal-nvidia-six-20261118',date:'2026-11-18',type:'records',title:'six records',description:'test',recordIds:[]};
+ const original=current.map(x=>x.id);
+ const sample={entries:[marker,...current]};
+ orderPublicationLog(sample);
+ const dates=sample.entries.map(x=>x.date);
+ assert.ok(dates.every((x,i)=>i===0||dates[i-1]>=x),'all dates must stay descending');
+ assert.equal(sample.entries.filter(x=>x.id===marker.id).length,1);
+ assert.equal(sample.entries.length,current.length+1);
+ const preserved=sample.entries.filter(x=>x!==marker);
+ assert.deepEqual(preserved.map(x=>x.id),original,'never change existing row order or IDs');
+ const i=sample.entries.indexOf(marker);
+ assert.ok(i>0&&sample.entries[i-1].date>='2026-11-18');
+ assert.ok(i===sample.entries.length-1||sample.entries[i+1].date<='2026-11-18');
+});
