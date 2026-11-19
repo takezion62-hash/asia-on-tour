@@ -7,6 +7,9 @@ on:
       - "scripts/osirion-sync.cjs"
       - "scripts/apply-ps-finals-ten-20261118.cjs"
       - "scripts/apply-unreal-nvidia-six-20261118.cjs"
+      - "scripts/publish-pending-22-20261119.cjs"
+      - "scripts/verified-pending-22-20261119.cjs"
+      - "data/manual-approvals/20261119-verified-pending-22.json"
       - "scripts/verified-unreal-nvidia-six-20261118.cjs"
       - "data/manual-approvals/20261118-unreal-nvidia-six.json"
       - "scripts/verified-ps-finals-ten-20261118.cjs"
@@ -366,6 +369,39 @@ jobs:
             fi
             if [ "$attempt" -ge 5 ]; then
               echo "::error::UNREAL_NVIDIA_SIX main advanced too often; no unsafe overwrite"
+              exit 1
+            fi
+            sleep $((attempt * 3))
+          done
+
+      - name: Publish original source-observed 22 held historical records with exact official thresholds
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          for attempt in 1 2 3 4 5; do
+            git fetch origin main
+            git reset --hard origin/main
+            node scripts/publish-pending-22-20261119.cjs --dry-run
+            node scripts/publish-pending-22-20261119.cjs
+            npm run validate
+            node --test tests/verified-pending-22-20261119.test.cjs tests/approval-history.test.cjs
+            node scripts/build-season-data.cjs
+            node scripts/build-candidate-triage.cjs
+            git add history-sync-review.json history-sync-reviewed.json history-sync-status.json approval-history.json updates.json candidate-triage.json
+            git add -A source-results/ season-data/
+            if git diff --cached --quiet; then
+              echo "PENDING22 all 22 source-verified records already published"
+              break
+            fi
+            git commit -m "data: publish 22 source-verified historical pending records with $0 additional cash"
+            if git push origin HEAD:main; then
+              echo "PENDING22 published to main safely"
+              break
+            fi
+            if [ "$attempt" -ge 5 ]; then
+              echo "::error::PENDING22 main kept advancing; no force push or partial publication"
               exit 1
             fi
             sleep $((attempt * 3))
