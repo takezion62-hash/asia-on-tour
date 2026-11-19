@@ -15,7 +15,7 @@
     }catch{return null}
   };
   const regionLabels=['ME','EU','NAC','NAW','OCE','BR'];
-  const seriesLabel={ 'victory-cup':'Victory Cup','cash-cup':'Cash Cup','skin-cup':'スキン大会','icon-cup':'Icon Cup','fncs':'FNCS','performance-evaluation':'Performance Evaluation','playstation-cup':'PlayStation Cup','unreal-cup':'Unreal Cup','test-cup':'Test Cup' };
+  const seriesLabel={ 'victory-cup':'Victory Cup','cash-cup':'Cash Cup','skin-cup':'スキン大会','icon-cup':'Icon Cup','fncs':'FNCS','performance-evaluation':'Performance Evaluation','playstation-cup':'PlayStation Cup','unreal-cup':'Unreal Cup','nvidia-cup':'NVIDIA Cup','test-cup':'Test Cup' };
   const modeLabel={solo:'ソロ',duo:'デュオ',trio:'トリオ',squad:'スクワッド'};
   const fmtNumber=value=>Number(value).toLocaleString('ja-JP');
   const state={catalog:[],rules:new Map(),sessions:[],search:'',region:'all',status:'registered',visible:12};
@@ -135,6 +135,43 @@
       '賞金圏外は$0。全順位の取得完了・Epic ID・地域・開催回・既存記録が一致した場合に自動掲載し、未確認の候補は保留します。'+
       '本人の受給資格・支払い完了は別途確認が必要です。</p>';
   }
+
+  function nvidiaMarkup(rule){
+    const regions=state.region==='all'?['OCE','ASIA','ME','EU','BR','NAC','NAW']:[state.region];
+    const sections=regions.map(region=>{
+      const tiers=rule.cashPrizes?.tiers?.[region];
+      if(!tiers?.length)return '<div class="source-rule-cash-region is-unknown"><strong>'+esc(region)+'</strong> 賞金表未登録</div>';
+      let previous=0;
+      const rows=tiers.map(tier=>{
+        const from=previous+1;previous=tier.through;
+        const label=from===tier.through?fmtNumber(from)+'位':fmtNumber(from)+'〜'+fmtNumber(tier.through)+'位';
+        return '<div class="source-rule-cash-tier source-rule-unreal-tier"><span>'+esc(label)+'</span>'+
+          '<div><strong>1人 $'+fmtNumber(tier.perPlayer)+'</strong></div></div>';
+      }).join('');
+      return '<div class="source-rule-cash-region"><h4>'+esc(region)+' · 上位'+fmtNumber(tiers.at(-1).through)+'名</h4>'+rows+'</div>';
+    }).join('');
+    const hardware=regions.map(region=>{
+      const cutoff=rule.hardwarePrizes?.rankCutoffs?.[region];
+      return '<div class="source-rule-cash-tier"><span>'+esc(region)+'</span><strong>'+fmtNumber(cutoff)+'位以内</strong></div>';
+    }).join('');
+    return '<div class="source-rule-fact"><span>地域別賞金表（USD・選手1人あたり）</span>'+
+      '<div class="source-rule-cash-grid source-rule-unreal-grid">'+sections+'</div></div>'+
+      '<div class="source-rule-fact"><span>RTX 5080 現物賞品</span>'+
+      '<div class="source-rule-cash-grid source-rule-unreal-grid">'+hardware+'</div></div>'+
+      '<div class="source-rule-fact"><span>コスメ報酬</span><strong>'+esc(rule.cosmeticPrizes.item)+
+      ' · 8ポイント以上（受領状況は別途確認）</strong></div>'+
+      '<div class="source-rule-fact"><span>参加条件</span><strong>ソロ / BR・ゼロビルド・Reloadのいずれかのランクでゴールド以上 / 13歳以上'+
+      ' / Epicレベル350以上 / 2段階認証 / 過去180日間に異なる公式大会14回以上参加</strong></div>'+
+      '<div class="source-rule-fact"><span>開催形式</span><strong>クロスプラットフォーム・単一ラウンド / 約'+
+      fmtNumber(rule.sessionMinutes)+'分 / 最大'+fmtNumber(rule.matchCaps['単一ラウンド'])+'試合</strong></div>'+
+      '<div class="source-rule-fact"><span>開催日</span><strong>公式規則：'+
+      (rule.sessionDates||[]).map(esc).join('・')+'（地域ごとの現地日付。NAWは日本時間2025-12-22）</strong></div>'+
+      '<div class="source-rule-fact"><span>ポイント・同点時</span><strong>順位/撃破の配点はゲーム内表示が公式。'+
+      '同点時は総ポイント → VR数 → 平均キル → 平均順位 → 合計生存時間</strong></div>'+
+      '<p class="source-rule-warning">※ 現金は各選手の規定額を記録し、圏外は$0。RTX 5080とRust Bucketは現金賞金に換算しません。'+
+      '全順位表・本人Epic ID・開催地域・開催回・順位の完全照合が取れた場合のみ自動承認します。'+
+      '賞金・賞品の実際の受給資格と支払・配布は別途審査が必要です。</p>';
+  }
   function ruleMarkup(entry){
     const rule=state.rules.get(entry.id),present=Boolean(rule);
     const ids=rule?.eventIds?.length?rule.eventIds:entry.sourceEventIds||[];
@@ -148,7 +185,7 @@
         return pathname.startsWith('/competitive/rules-guidelines/rules-library/')||
           pathname.startsWith('/news/');
       }))].slice(0,3);
-    const conditions=rule?.series==='unreal-cup'?unrealMarkup(rule):rule?.series==='cash-cup'?cashMarkup(rule):
+    const conditions=rule?.series==='nvidia-cup'?nvidiaMarkup(rule):rule?.series==='unreal-cup'?unrealMarkup(rule):rule?.series==='cash-cup'?cashMarkup(rule):
       rule?.cosmeticRanks
       ?'<div class="source-rule-fact"><span>スキン獲得対象順位</span><div class="source-rule-regions">'+regionRows(rule.cosmeticRanks,'スキン獲得ライン')+'</div></div>'
       :'<div class="source-rule-fact"><span>予選突破の地域別条件</span><div class="source-rule-regions">'+regionRows(rule?.advance,'予選通過順位')+'</div></div>';
@@ -177,7 +214,7 @@
       ' · '+esc(seriesLabel[entry.series]||entry.series||'大会')+'</span>'+
       '<h3>'+esc(entry.name)+'</h3>'+
       '<p>'+esc(modeLabel[entry.team]||entry.team||'形式未確認')+' / '+esc(entry.mode||'モード未確認')+'</p></div>'+
-      '<span class="source-rule-state '+(present?'is-ready':'is-pending')+'">'+(present?(rule?.autoApproval==='review-only'?'公式規則登録済み・確認専用':rule?.autoApproval==='verified-team-rank'?(rule.series==='unreal-cup'?'公式賞金表で自動掲載・圏外$0':'公式規則登録済み・全順位を自動掲載'):rule?.autoApproval==='verified-performance-vr'?'予選突破・決勝VRを自動掲載':rule?.cashFinalAutoApproval==='verified-duo-round2-rank'?'予選突破・決勝賞金を自動掲載':rule?.autoApproval==='verified-duo-qualifier-only'?'予選突破・参加$0を自動掲載':'公式規則登録済み'):'ルール未登録')+'</span></div>'+
+      '<span class="source-rule-state '+(present?'is-ready':'is-pending')+'">'+(present?(rule?.autoApproval==='verified-solo-rank'?'公式賞金表・本人ID照合で自動掲載':rule?.autoApproval==='review-only'?'公式規則登録済み・確認専用':rule?.autoApproval==='verified-team-rank'?(rule.series==='unreal-cup'?'公式賞金表で自動掲載・圏外$0':'公式規則登録済み・全順位を自動掲載'):rule?.autoApproval==='verified-performance-vr'?'予選突破・決勝VRを自動掲載':rule?.cashFinalAutoApproval==='verified-duo-round2-rank'?'予選突破・決勝賞金を自動掲載':rule?.autoApproval==='verified-duo-qualifier-only'?'予選突破・参加$0を自動掲載':'公式規則登録済み'):'ルール未登録')+'</span></div>'+
       details+
       '<details class="source-rule-identifiers"><summary>大会ID・適用範囲</summary><div>'+ids.map(id=>'<code>'+esc(id)+'</code>').join('')+
       '<p>公式規則が確認済みでも、本人Epic ID・地域・開催枠・順位表の検証が必要です</p></div></details>'+
