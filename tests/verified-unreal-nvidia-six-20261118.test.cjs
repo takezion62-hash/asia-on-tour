@@ -79,7 +79,9 @@ test('a historical six-result publication is inserted below newer update dates, 
  const {orderPublicationLog}=require('../scripts/apply-unreal-nvidia-six-20261118.cjs');
  const current=read('updates.json').entries;
  assert.ok(current.some(x=>x.date>'2026-11-18'),'fixture must contain a newer release');
- const marker={id:'owner-s39-unreal-nvidia-six-20261118',date:'2026-11-18',type:'records',title:'six records',description:'test',recordIds:[]};
+ // Use a unique synthetic marker: the real six-result notice may already exist
+ // during post-publication audit, and should never be duplicated in this fixture.
+ const marker={id:'test-only-update-order-20261118',date:'2026-11-18',type:'records',title:'synthetic historical insert',description:'test fixture only',recordIds:[]};
  const original=current.map(x=>x.id);
  const sample={entries:[marker,...current]};
  orderPublicationLog(sample);
