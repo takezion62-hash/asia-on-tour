@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-11-18T22:26:08.771Z",
+  "checkedAt": "2026-11-19T10:49:59.513Z",
   "windows": {
     "epicgames_S42_InoxtagIconCup_NAW/S42_InoxtagIconCup_NAW": {
       "nextPage": 60,
@@ -489,12 +489,12 @@
       "emptyAttempts": 0
     },
     "epicgames_S30_SoloVictoryCashCup_OCE/S30_SoloVictoryCashCup_Event1Round1_OCE": {
-      "nextPage": 12,
-      "pages": 12,
+      "nextPage": 22,
+      "pages": 22,
       "complete": false,
       "coverageLimited": false,
       "totalPages": 100,
-      "lastScanned": "2026-11-12T03:39:41.680Z",
+      "lastScanned": "2026-11-19T10:49:40.917Z",
       "emptyAttempts": 0
     },
     "epicgames_S43_TriosCashCup_NAC/S43_TriosCashCup_Event1_NAC": {
@@ -1182,12 +1182,12 @@
       "emptyAttempts": 0
     },
     "epicgames_S33_SoloCashCup_NAW/S33_SoloCashCup_Event7Round1_NAW": {
-      "nextPage": 26,
-      "pages": 26,
+      "nextPage": 36,
+      "pages": 36,
       "complete": false,
       "coverageLimited": false,
       "totalPages": 100,
-      "lastScanned": "2026-11-18T22:26:02.936Z",
+      "lastScanned": "2026-11-19T10:49:59.513Z",
       "emptyAttempts": 0,
       "lastError": "Osirion API HTTP 429 /v1/tournaments/leaderboard"
     },
@@ -1221,12 +1221,12 @@
       "emptyAttempts": 0
     },
     "epicgames_S43_ReloadZBDuosCashCup_BR/S43_ReloadZBDuosCashCup_Event2Round1_BR": {
-      "nextPage": 50,
-      "pages": 50,
-      "complete": false,
-      "coverageLimited": false,
+      "nextPage": 60,
+      "pages": 60,
+      "complete": true,
+      "coverageLimited": true,
       "totalPages": 100,
-      "lastScanned": "2026-11-18T22:25:40.822Z",
+      "lastScanned": "2026-11-19T10:49:28.788Z",
       "emptyAttempts": 0
     },
     "epicgames_S30_DuosCashCup_EU/S30_DuosCashCup_Event1Round1_EU": {
@@ -1250,12 +1250,12 @@
       "emptyAttempts": 0
     },
     "epicgames_S30_PlaystationCupZBJune_OCE/S30_PlaystationCupZBJune_Qualifier1_OCE": {
-      "nextPage": 8,
-      "pages": 8,
+      "nextPage": 18,
+      "pages": 18,
       "complete": false,
       "coverageLimited": false,
       "totalPages": 21,
-      "lastScanned": "2026-11-18T22:26:08.771Z",
+      "lastScanned": "2026-11-19T10:49:48.985Z",
       "emptyAttempts": 0
     }
   }
