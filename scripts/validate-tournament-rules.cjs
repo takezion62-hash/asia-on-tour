@@ -18,7 +18,7 @@ function validateRegistry(doc,tournaments){
   const t=catalog.get(id);
   if(!t){fail(id,'登録済み大会カタログにありません');continue}
   if(rule.seasonId!==t.seasonId||rule.team!==t.team||rule.series!==t.series)fail(id,'シーズン/チーム/シリーズが一致しません');
-  if(!['victory-cup','skin-cup','cash-cup','performance-evaluation','unreal-cup'].includes(rule.series))fail(id,'対応していないルールシリーズです');
+  if(!['victory-cup','skin-cup','cash-cup','performance-evaluation','unreal-cup','nvidia-cup'].includes(rule.series))fail(id,'対応していないルールシリーズです');
   if(!Array.isArray(rule.eventIds)||!rule.eventIds.length||new Set(rule.eventIds).size!==rule.eventIds.length||
       rule.eventIds.some(x=>typeof x!=='string'||!t.sourceEventIds.includes(x)))fail(id,'EpicイベントIDがカタログと不一致');
   if(!TEAMS.has(rule.team))fail(id,'チーム形式が不正');
@@ -221,6 +221,44 @@ function validateRegistry(doc,tournaments){
      if(tiers[0]?.through!==1)fail(id,region+'の1位賞金が未登録');
    }
    }
+  }else if(rule.series==='nvidia-cup'){
+   if(id!=='ch7s1-nvidia-geforce-rtx-cup'||rule.seasonId!=='S39'||
+     rule.team!=='solo'||JSON.stringify(rule.eventIds)!=='["S39_NvidiaCup"]'||
+     rule.autoApproval!=='review-only')fail(id,'RTX Cupは本人照合まで確認専用として登録');
+   if(Object.keys(rule.matchCaps||{}).join(',')!=='単一ラウンド'||
+     rule.matchCaps['単一ラウンド']!==10||rule.sessionMinutes!==180||
+     JSON.stringify(rule.sessionDates)!=='["2025-12-21"]')
+     fail(id,'RTX Cupの開催日・3時間・最大10試合が不一致');
+   if(JSON.stringify(rule.rankedEligibility)!==JSON.stringify({
+      modes:['battle-royale','zero-build','reload'],minimumRank:'Gold'
+     })||JSON.stringify(rule.participation)!==JSON.stringify({
+      minimumAge:13,minimumAccountLevel:350,twoFactorAuthentication:true,
+      minimumDistinctEpicTournaments:14,lookbackDays:180
+     }))fail(id,'RTX Cupの公式参加条件が不一致');
+   if(rule.scoring?.method!=='in-game'||JSON.stringify(rule.scoring?.tiebreakers)!==
+     JSON.stringify(['total-points','victory-royales','average-eliminations','average-placement','survival-seconds']))
+     fail(id,'公式ポイント配点はゲーム内規定・同点処理順が不一致');
+   const shared=[[1,1000],[2,750],[3,600],[4,500],[5,450],[6,400],[7,350],[8,300],[9,250],[10,200],[25,150],[40,100]];
+   const eu=[[1,4000],[2,3000],[3,2000],[4,1500],[5,1250],[6,1000],[7,900],[8,800],[9,700],[10,600],[20,500],[30,400],[50,300],[75,200],[100,100]];
+   const nac=[[1,2500],[2,1500],[3,1250],[4,1000],[5,750],[6,500],[7,450],[8,400],[9,350],[10,300],[20,250],[30,200],[50,150],[75,100]];
+   const cash=rule.cashPrizes;
+   if(cash?.basis!=='per-player'||cash.currency!=='USD'||
+     Object.keys(cash.tiers||{}).sort().join(',')!==UNREAL_REGIONS.slice().sort().join(','))
+     fail(id,'RTX Cupは7地域の個人賞金表が必要');
+   else for(const region of UNREAL_REGIONS){
+     const expected=(region==='EU'?eu:region==='NAC'?nac:shared).map(([through,perPlayer])=>({through,perPlayer}));
+     if(JSON.stringify(cash.tiers[region])!==JSON.stringify(expected))
+       fail(id,region+'のRTX Cup公式賞金表に差異');
+   }
+   if(rule.hardwarePrizes?.item!=='NVIDIA GEFORCE RTX 5080'||
+     JSON.stringify(rule.hardwarePrizes?.rankCutoffs)!==JSON.stringify({
+       OCE:1,ASIA:1,ME:1,EU:4,BR:1,NAC:3,NAW:1
+     })||rule.hardwarePrizes.approximateRetailValueUSD!==999.99||
+     rule.cosmeticPrizes?.item!=='Rust Bucket Back Bling'||
+     rule.cosmeticPrizes?.minimumPoints!==8)
+     fail(id,'RTX 5080対象順位と8ptコスメ条件に差異');
+   if(rule.advance!==undefined||rule.prizePerVictory!==undefined||rule.cosmeticRanks!==undefined)
+     fail(id,'RTX Cupの別大会ルールを混在させない');
   }else if(rule.series==='unreal-cup'){
    if(rule.id!=='ch7s1-one-million-unreal-cup'||rule.seasonId!=='S39'||
      rule.team!=='duo'||JSON.stringify(rule.eventIds)!=='["S39_1MillionUnrealCup"]'||
