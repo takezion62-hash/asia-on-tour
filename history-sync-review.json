@@ -1,7 +1,7 @@
 {
   "version": 1,
   "status": "review",
-  "checkedAt": "2026-11-18T18:27:13.614Z",
+  "checkedAt": "2026-11-19T04:55:44.559Z",
   "proposals": [
     {
       "id": "auto-s37-2319df57be56",
@@ -538,6 +538,54 @@
         "c6380b39b2e04e5f82924ae2b3c407b8"
       ],
       "reviewReason": "公式ルールで指定されたデュオRound1ではありません"
+    },
+    {
+      "id": "auto-s30-23b2d7c0bb7d",
+      "date": "2024-07-16",
+      "region": "NAC",
+      "player": "Plank",
+      "playerRaw": "Celis Yhwach.",
+      "event": "Solo Victory Cup Battle Royale",
+      "round": "Event 5 · Round 1 / 予選",
+      "rank": 8402,
+      "points": 114,
+      "kills": 1,
+      "vrs": 0,
+      "prize": 0,
+      "kind": "予選",
+      "matches": 7,
+      "seasonId": "S30",
+      "chapter": 5,
+      "season": 3,
+      "tournamentId": "ch5s3-solo-victory-cup",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event5Round1_NAC",
+      "verified": true,
+      "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。",
+      "reviewReason": "順位表の取得が完了していません"
+    },
+    {
+      "id": "auto-s30-ea826f9c2ebf",
+      "date": "2024-07-16",
+      "region": "NAC",
+      "player": "フォシア",
+      "playerRaw": "REBEL フォシアで検索",
+      "event": "Solo Victory Cup Battle Royale",
+      "round": "Event 5 · Round 1 / 予選",
+      "rank": 8465,
+      "points": 113,
+      "kills": 7,
+      "vrs": 1,
+      "prize": 0,
+      "kind": "予選",
+      "matches": 7,
+      "seasonId": "S30",
+      "chapter": 5,
+      "season": 3,
+      "tournamentId": "ch5s3-solo-victory-cup",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event5Round1_NAC",
+      "verified": true,
+      "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。",
+      "reviewReason": "順位表の取得が完了していません"
     }
   ],
   "manualReviewedAt": "2026-11-18T23:15:06.706Z"

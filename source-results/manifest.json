@@ -2,8 +2,8 @@
   "version": 1,
   "role": "generated canonical-source snapshot; results.json remains authoritative in phase 1",
   "canonicalFile": "results.json",
-  "canonicalSha256": "881f9aad22080573fa499784afef985e4891c660d071b6a58552bc6346f29704",
-  "count": 8703,
+  "canonicalSha256": "364dadf763d23a5c4e3955f208af69554a949379d5394f604816702524fd402f",
+  "count": 8733,
   "teamPrizeCents": 9741000,
   "unconfirmedPrizeRecords": 1552,
   "personalPrizeCents": 9721000,
@@ -8710,7 +8710,37 @@
     "owner-s39-naw-nvidia-20251222-r36",
     "owner-s39-naw-nvidia-20251222-r53",
     "owner-s39-naw-nvidia-20251222-r69",
-    "owner-s39-naw-nvidia-20251222-r71"
+    "owner-s39-naw-nvidia-20251222-r71",
+    "auto-s37-67c5b4f78d0c",
+    "auto-s37-683c47cf9048",
+    "auto-s37-9e74c5b715b5",
+    "auto-s37-285867ea8dd2",
+    "auto-s37-4b82d57ca843",
+    "auto-s37-773745228568",
+    "auto-s37-d324f607b578",
+    "auto-s37-2c84d369652c",
+    "auto-s37-63fa8322611e",
+    "auto-s37-2039c2dcdcb2",
+    "auto-s37-781d2c9fbb9f",
+    "auto-s37-e24bfc0b77a2",
+    "auto-s37-2bdaa7f8107a",
+    "auto-s37-6ead3c749063",
+    "auto-s37-2dc7204f966d",
+    "auto-s37-e551af88e489",
+    "auto-s37-b167bc0be6e8",
+    "auto-s37-d51d624cfbb8",
+    "auto-s37-53b4924a2a1a",
+    "auto-s37-eb21553e31e3",
+    "auto-s37-115b56eaed3e",
+    "auto-s37-11c57ce28a37",
+    "auto-s37-4b915a730476",
+    "auto-s42-edd619e73e76",
+    "auto-s42-cd9650acbcf6",
+    "auto-s42-0c2b62138601",
+    "auto-s42-6e13cac02a31",
+    "auto-s42-845a02957deb",
+    "auto-s42-fc50711bd2c3",
+    "auto-s42-dc93ae332d87"
   ],
   "shards": [
     {
@@ -8842,11 +8872,11 @@
     {
       "seasonId": "S37",
       "file": "source-results/S37.json",
-      "count": 146,
+      "count": 169,
       "teamPrizeCents": 520000,
       "unconfirmedPrizeRecords": 0,
       "personalPrizeCents": 520000,
-      "sha256": "91f5ed29d4eecee0d45032a32393d828b371e8e05b8d7ed0a18d0a007900d1c3"
+      "sha256": "bf1528f19cfc326448dd290cfcad52a2305176dce2a0ed0bdb71635b71260bed"
     },
     {
       "seasonId": "S38",
@@ -8887,11 +8917,11 @@
     {
       "seasonId": "S42",
       "file": "source-results/S42.json",
-      "count": 2426,
+      "count": 2433,
       "teamPrizeCents": 1070000,
       "unconfirmedPrizeRecords": 572,
       "personalPrizeCents": 1070000,
-      "sha256": "9868aa054232bce2a7043fe67e7a8b40f1ee61c1698e7b2b8ca98f4e11e7ea55"
+      "sha256": "a70a7058de77353906a1fb49ae699cb945f9a57165895dc00582ffb1b3da26a6"
     },
     {
       "seasonId": "S43",
