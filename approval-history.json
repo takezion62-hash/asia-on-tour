@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-18T23:15:06.706Z",
+  "reviewedAt": "2026-11-19T08:38:46.578Z",
   "entries": [
     {
       "id": "auto-s43-21408f1d31bc",
@@ -33250,6 +33250,28 @@
       "originalHash": "a0209db71efb8b52dcf10ca1a43ac90f8fb9703b09a5db1685898ea8d4a884ad",
       "recordHash": "d2905d319884960806044c2004fc35b73098a960de07ab7acc1d742dc78d6c75",
       "evidence": "Owner images 1916–1924 with exact source, rank, Epic identity, official NAW/NAC prize tiers"
+    },
+    {
+      "id": "auto-s30-23b2d7c0bb7d",
+      "decision": "published",
+      "recordId": "auto-s30-23b2d7c0bb7d",
+      "policy": "verified-rule",
+      "approvedAt": "2026-11-19T08:38:46.578Z",
+      "approvedBy": "ChatGPT / owner-authorized verified review",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event5Round1_NAC",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
+      "evidence": "Exact Epic account and team roster, canonical official event/calendar, ranked checkpoint with continuous mature rows or complete scan; duplicate check"
+    },
+    {
+      "id": "auto-s30-ea826f9c2ebf",
+      "decision": "published",
+      "recordId": "auto-s30-ea826f9c2ebf",
+      "policy": "verified-rule",
+      "approvedAt": "2026-11-19T08:38:46.578Z",
+      "approvedBy": "ChatGPT / owner-authorized verified review",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloVictoryCashCup/?region=NAC&round=S30_SoloVictoryCashCup_Event5Round1_NAC",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
+      "evidence": "Exact Epic account and team roster, canonical official event/calendar, ranked checkpoint with continuous mature rows or complete scan; duplicate check"
     }
   ]
 }
