@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-11-19T11:00:02.116Z",
+  "checkedAt": "2026-11-19T22:31:55.393Z",
   "windows": {
     "epicgames_S42_InoxtagIconCup_NAW/S42_InoxtagIconCup_NAW": {
       "nextPage": 60,
@@ -787,13 +787,13 @@
       "emptyAttempts": 0
     },
     "epicgames_S30_SoloVictoryCashCup_EU/S30_SoloVictoryCashCup_Event1Round1_EU": {
-      "nextPage": 7,
-      "pages": 7,
+      "nextPage": 17,
+      "pages": 17,
       "complete": false,
       "coverageLimited": false,
       "lastError": "Osirion API HTTP 500 /v1/tournaments/leaderboard",
       "totalPages": 100,
-      "lastScanned": "2026-11-12T15:45:31.817Z",
+      "lastScanned": "2026-11-19T22:31:24.737Z",
       "emptyAttempts": 0
     },
     "epicgames_S43_SquadsVictoryCup_NAW/S43_SquadsVictoryCup_Event1_Round1_NAW": {
@@ -1101,12 +1101,12 @@
       "emptyAttempts": 0
     },
     "epicgames_S43_ReloadZBDuosCashCup_EU/S43_ReloadZBDuosCashCup_Event2Round1_EU": {
-      "nextPage": 20,
-      "pages": 20,
+      "nextPage": 30,
+      "pages": 30,
       "complete": false,
       "coverageLimited": false,
       "totalPages": 100,
-      "lastScanned": "2026-11-19T10:59:32.935Z",
+      "lastScanned": "2026-11-19T22:31:15.982Z",
       "emptyAttempts": 0
     },
     "epicgames_S43_ReloadZBDuosCashCup_NAC/S43_ReloadZBDuosCashCup_Event2Round1_NAC": {
@@ -1183,12 +1183,12 @@
       "emptyAttempts": 0
     },
     "epicgames_S33_SoloCashCup_NAW/S33_SoloCashCup_Event7Round1_NAW": {
-      "nextPage": 46,
-      "pages": 46,
+      "nextPage": 56,
+      "pages": 56,
       "complete": false,
       "coverageLimited": false,
       "totalPages": 100,
-      "lastScanned": "2026-11-19T10:59:58.058Z",
+      "lastScanned": "2026-11-19T22:31:55.393Z",
       "emptyAttempts": 0,
       "lastError": "Osirion API HTTP 429 /v1/tournaments/leaderboard"
     },
@@ -1266,6 +1266,15 @@
       "coverageLimited": false,
       "retryAfter": "2026-11-19T16:59:58.209Z",
       "lastError": "Osirion API HTTP 429 /v1/tournaments/leaderboard"
+    },
+    "epicgames_S30_PlaystationCupZBJune_OCE/S30_PlaystationCupZBJune_Qualifier2_OCE": {
+      "nextPage": 10,
+      "pages": 10,
+      "complete": false,
+      "coverageLimited": false,
+      "totalPages": 23,
+      "lastScanned": "2026-11-19T22:31:32.946Z",
+      "emptyAttempts": 0
     }
   }
 }
