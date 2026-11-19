@@ -11,6 +11,7 @@ const {evaluate:evaluateCosmetics,cutoffForWindow}=require('./automatic-cosmetic
 const {evaluate:evaluateCash,cashLimitForWindow}=require('./automatic-cash-approval.cjs');
 const {evaluate:evaluatePerformance,qualifierCutoff,evaluationStage}=require('./automatic-performance-approval.cjs');
 const {evaluate:evaluateUnreal,unrealWindow}=require('./automatic-unreal-approval.cjs');
+const {evaluate:evaluateNvidia,nvidiaWindow}=require('./automatic-nvidia-approval.cjs');
 const {evaluate:evaluateDuoQualifier}=require('./automatic-duo-qualifier-approval.cjs');
 const {scanCoverage}=require('./scan-coverage.cjs');
 const {finishableWindows,remainingPages,windowPageAllowance,leastCoveredBucket}=require('./scan-efficiency.cjs');
@@ -20,7 +21,7 @@ const root=path.resolve(__dirname,'..');
 const read=name=>name==='results.json'?readResults(root).rows:JSON.parse(fs.readFileSync(path.join(root,name),'utf8'));
 const write=(name,obj)=>name==='results.json'?publishResults(root,obj):fs.writeFileSync(path.join(root,name),JSON.stringify(obj,null,2)+'\n');
 const regions=['ME','EU','NAC','NAW','OCE','BR'];
-const REVIEW_SERIES=new Set(['victory-cup','cash-cup','fncs','performance-evaluation','skin-cup','icon-cup','playstation-cup','unreal-cup','test-cup']);
+const REVIEW_SERIES=new Set(['victory-cup','cash-cup','fncs','performance-evaluation','skin-cup','icon-cup','playstation-cup','unreal-cup','nvidia-cup','test-cup']);
 const nowJst=utc=>new Date(new Date(utc).getTime()+9*3600000).toISOString().slice(0,10);
 // The history window must follow new competitions after the initial 2024-2026 backfill.
 function resolveHistoricalScope(config,time=Date.now()){
@@ -322,7 +323,7 @@ async function getLeaderboard(win,page){
 function selectActiveWindows(windows,state,config,time=Date.now()){
  const pending=windows.filter(w=>{
   const item=state.windows[w.key];
-  return (!item?.complete||(w.series==='unreal-cup'&&item?.epicIdsRetained!==true))&&(!item?.retryAfter||Date.parse(item.retryAfter)<=time);
+  return (!item?.complete||(['unreal-cup','nvidia-cup'].includes(w.series)&&item?.epicIdsRetained!==true))&&(!item?.retryAfter||Date.parse(item.retryAfter)<=time);
  });
  const limit=Math.max(1,config.maxWindowsPerRun||2),selected=[],seen=new Set();
  const due=w=>{const t=Date.parse(state.windows[w.key]?.retryAfter||'');return Number.isFinite(t)&&t<=time};
@@ -400,13 +401,13 @@ function historicalPriorityAudit(windows,state,records,{limit=100,now=Date.now()
  const evidence=historicalEvidenceIndex(records);
  const ranked=windows.filter(w=>{
   const cp=state.windows?.[w.key];
-  return (!cp?.complete||(w.series==='unreal-cup'&&cp?.epicIdsRetained!==true))&&
+  return (!cp?.complete||(['unreal-cup','nvidia-cup'].includes(w.series)&&cp?.epicIdsRetained!==true))&&
    (!cp?.retryAfter||Date.parse(cp.retryAfter)<=now);
  }).map(w=>{
   const cp=state.windows?.[w.key]||{};
   const approvedRule=(Object.hasOwn(RULES,w.tournamentId)&&w.series==='victory-cup')||
    cutoffForWindow(w)!==null||cashLimitForWindow(w)!==null||
-   evaluationStage(w)!==null||unrealWindow(w)!==null;
+   evaluationStage(w)!==null||unrealWindow(w)!==null||nvidiaWindow(w)!==null;
   const progress=cp.totalPages>0?Math.round(Math.min(1,(cp.nextPage||0)/cp.totalPages)*90):0;
   const proof=evidence(w);
   return {key:w.key,date:w.dateJst,region:w.region,series:w.series,
@@ -424,7 +425,7 @@ function historicalPriority(state,records,evidence=historicalEvidenceIndex(recor
   const cp=state.windows[w.key];
   const fraction=cp?.totalPages>0?Math.min(1,(cp.nextPage||0)/cp.totalPages):0;
   // Keep the same rank rules and ordering; only avoid repeated computation.
-  const approvedRule=(Object.hasOwn(RULES,w.tournamentId)&&w.series==='victory-cup')||cutoffForWindow(w)!==null||cashLimitForWindow(w)!==null||evaluationStage(w)!==null||unrealWindow(w)!==null;
+  const approvedRule=(Object.hasOwn(RULES,w.tournamentId)&&w.series==='victory-cup')||cutoffForWindow(w)!==null||cashLimitForWindow(w)!==null||evaluationStage(w)!==null||unrealWindow(w)!==null||nvidiaWindow(w)!==null;
   const value=(approvedRule?150:0)+Math.round(fraction*90)+evidence(w)+(w.kind==='賞金決勝'?12:0)+(w.kind==='参加確認'?3:0);
   scores.set(w,value);
   return value;
@@ -434,7 +435,7 @@ function historicalPriority(state,records,evidence=historicalEvidenceIndex(recor
 function selectHistoricalWindows(windows,state,config,time=Date.now(),records=[],reviewRows=[]){
  const pending=windows.filter(w=>{
   const cp=state.windows[w.key];
-  return (!cp?.complete||(w.series==='unreal-cup'&&cp?.epicIdsRetained!==true))&&(!cp?.retryAfter||Date.parse(cp.retryAfter)<=time);
+  return (!cp?.complete||(['unreal-cup','nvidia-cup'].includes(w.series)&&cp?.epicIdsRetained!==true))&&(!cp?.retryAfter||Date.parse(cp.retryAfter)<=time);
  });
  const years=[...new Set(pending.map(w=>w.dateJst.slice(0,4)))].sort((a,b)=>a.localeCompare(b));
  const limit=Math.max(1,config.maxWindowsPerRun||6),selected=[],seen=new Set();
@@ -459,7 +460,7 @@ function selectHistoricalWindows(windows,state,config,time=Date.now(),records=[]
  // Prioritize one eligible ranked cosmetic session without starving the backfill.
  if(selected.length<limit)add(pending.filter(w=>cutoffForWindow(w)!==null));
  // Prioritize a previously reviewed $1M Unreal region to complete a full final leaderboard.
- if(selected.length<limit)add(pending.filter(w=>unrealWindow(w)!==null));
+ if(selected.length<limit)add(pending.filter(w=>unrealWindow(w)!==null||nvidiaWindow(w)!==null));
  // One Victory and one other-series slot per year; remaining slots target known historical evidence.
  for(const series of ['victory-cup','other']){
   for(const year of years){
@@ -681,9 +682,9 @@ async function main(){
   const previous=state.windows[win.key];
   // Pre-2026 Unreal caches lack the original two Epic IDs. Re-fetch once; never
   // approve from a stale completed review-only checkpoint.
-  const checkpoint=win.series==='unreal-cup'&&previous?.epicIdsRetained!==true?
+  const checkpoint=['unreal-cup','nvidia-cup'].includes(win.series)&&previous?.epicIdsRetained!==true?
    {nextPage:0,complete:false,proposals:[],pages:0,epicIdsRetained:true}:
-   previous||{nextPage:0,complete:false,proposals:[],pages:0,...(win.series==='unreal-cup'?{epicIdsRetained:true}:{})};
+   previous||{nextPage:0,complete:false,proposals:[],pages:0,...(['unreal-cup','nvidia-cup'].includes(win.series)?{epicIdsRetained:true}:{})};
   let pagesThisWindow=0;
   const limit=Math.min(Math.max(config.maxPagesPerWindowPerRun||budget,1),50);
   // Finish up to two near-complete historical leaderboards later in the
@@ -790,10 +791,13 @@ async function main(){
   evaluatePerformance(pending,windows,state.windows,{...data,results:[...data.results,...verified.approved,...cosmetic.approved,...cash.approved]}):{approved:[],held:[]};
  const unreal=(config.autoApproveUnreal===true)?
   evaluateUnreal(pending,windows,state.windows,{...data,results:[...data.results,...verified.approved,...cosmetic.approved,...cash.approved,...performance.approved]}):{approved:[],held:[]};
+ const nvidia=(config.autoApproveNvidia===true)?
+  evaluateNvidia(pending,windows,state.windows,{...data,results:[...data.results,...verified.approved,
+   ...cosmetic.approved,...cash.approved,...performance.approved,...unreal.approved]}):{approved:[],held:[]};
  const duo=(config.autoApproveDuoQualifier===true)?
   evaluateDuoQualifier(pending,windows,state.windows,{...data,results:[...data.results,...verified.approved,
-   ...cosmetic.approved,...cash.approved,...performance.approved,...unreal.approved]}):{approved:[],held:[]};
- const approved=[...verified.approved,...cosmetic.approved,...cash.approved,...performance.approved,...unreal.approved,...duo.approved];
+   ...cosmetic.approved,...cash.approved,...performance.approved,...unreal.approved,...nvidia.approved]}):{approved:[],held:[]};
+ const approved=[...verified.approved,...cosmetic.approved,...cash.approved,...performance.approved,...unreal.approved,...nvidia.approved,...duo.approved];
  // Only the narrow historical Victory Cup rule evaluator can authorize
  // out-of-cutoff participation. Never extend this grant to review-only series.
  const verifiedParticipationIds=new Set(verified.approved.filter(x=>
@@ -804,6 +808,7 @@ async function main(){
  for(const hold of cash.held)reasons.set(hold.id,hold.reason);
  for(const hold of performance.held)reasons.set(hold.id,hold.reason);
  for(const hold of unreal.held)reasons.set(hold.id,hold.reason);
+ for(const hold of nvidia.held)reasons.set(hold.id,hold.reason);
  for(const hold of duo.held)reasons.set(hold.id,hold.reason);
  for(const row of approved)importedIds.add(row.id);
  manuallyHeld=pending.length-approved.length;
