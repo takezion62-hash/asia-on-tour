@@ -46,6 +46,7 @@ on:
       - "scripts/automatic-cosmetic-approval.cjs"
       - "scripts/automatic-cash-approval.cjs"
       - "scripts/automatic-unreal-approval.cjs"
+      - "scripts/automatic-nvidia-approval.cjs"
       - "scripts/automatic-performance-approval.cjs"
       - "tournament-rules.json"
       - "scripts/validate-tournament-rules.cjs"
