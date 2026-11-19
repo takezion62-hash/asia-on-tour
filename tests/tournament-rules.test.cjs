@@ -11,7 +11,7 @@ const clone=x=>JSON.parse(JSON.stringify(x));
 
 test('shared official tournament rules include review-only Solo Series Finals and approved types',()=>{
  assert.deepEqual(validateRegistry(registry,tournaments),[]);
- assert.equal(registry.rules.length,31);
+ assert.equal(registry.rules.length,32);
  assert.equal(Object.keys(RULES).length,15);
  assert.equal(Object.keys(CUT_OFFS).length,12);
  for(const rule of registry.rules){
