@@ -1,7 +1,7 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-19T11:00:43.229Z",
+  "checkedAt": "2026-11-19T17:23:47.128Z",
   "mode": "review",
   "scope": "recent",
   "dateMode": null,
@@ -9,7 +9,7 @@
   "fromDate": null,
   "toDate": null,
   "provider": "osirion",
-  "linkedPlayers": 673,
+  "linkedPlayers": 674,
   "trackedWindows": 92,
   "found": 0,
   "skipped": 0,
@@ -32,9 +32,12 @@
   "skippedLeaderboards": [],
   "reviewOnlyWindows": 80,
   "reviewOnlyCandidates": 0,
-  "unmappedEvents": 1,
+  "unmappedEvents": 4,
   "unmappedEventIds": [
-    "S42_ArenaTestCup"
+    "S42_ArenaTestCup",
+    "S43_OverwatchWidowmakerCup",
+    "S43_OverwatchWidowmakerCup_Mobile",
+    "S43_OverwatchWidowmakerCup_ZB"
   ],
   "message": "最新版と安全統合：新規掲載0件、重複スキップ0件、要確認の競合0件、確認待ち0件。既存の戦績・賞金は保持。",
   "concurrentMerge": {
@@ -42,7 +45,7 @@
     "alreadyPublished": 0,
     "reviewConflicts": 0,
     "keptPending": 0,
-    "reconciledAt": "2026-11-19T11:00:49.780Z"
+    "reconciledAt": "2026-11-19T17:23:52.166Z"
   },
   "coverage": {
     "total": 92,
