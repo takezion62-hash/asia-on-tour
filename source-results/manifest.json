@@ -2,11 +2,11 @@
   "version": 1,
   "role": "generated canonical-source snapshot; results.json remains authoritative in phase 1",
   "canonicalFile": "results.json",
-  "canonicalSha256": "574e47f300a3b87b38871013f5d01d3824d7f8f0625c41e9773ff44d02188b4b",
-  "count": 8697,
-  "teamPrizeCents": 9711000,
+  "canonicalSha256": "881f9aad22080573fa499784afef985e4891c660d071b6a58552bc6346f29704",
+  "count": 8703,
+  "teamPrizeCents": 9741000,
   "unconfirmedPrizeRecords": 1552,
-  "personalPrizeCents": 9691000,
+  "personalPrizeCents": 9721000,
   "recordOrder": [
     "s42-me-slenderman-reload-skin-20261021-acris-chacha",
     "s42-me-slenderman-reload-skin-20261021-karf-alpha",
@@ -8704,7 +8704,13 @@
     "auto-s30-fc34c4223a60",
     "auto-s30-8f83d69f288b",
     "auto-s30-d4212d49048a",
-    "auto-s30-9e8a03a93376"
+    "auto-s30-9e8a03a93376",
+    "owner-s39-nac-unreal-20251221-r1093",
+    "owner-s39-naw-nvidia-20251222-r33",
+    "owner-s39-naw-nvidia-20251222-r36",
+    "owner-s39-naw-nvidia-20251222-r53",
+    "owner-s39-naw-nvidia-20251222-r69",
+    "owner-s39-naw-nvidia-20251222-r71"
   ],
   "shards": [
     {
@@ -8854,11 +8860,11 @@
     {
       "seasonId": "S39",
       "file": "source-results/S39.json",
-      "count": 188,
-      "teamPrizeCents": 920000,
+      "count": 194,
+      "teamPrizeCents": 950000,
       "unconfirmedPrizeRecords": 26,
-      "personalPrizeCents": 920000,
-      "sha256": "14ce27f20ec62f8bfebb410f4c1a346d9618d26fe389534da3b568f0ef827dca"
+      "personalPrizeCents": 950000,
+      "sha256": "adc868ee0bc9d9937dd8bec044a36d3d9199d2186de85dc67098340663242a0c"
     },
     {
       "seasonId": "S40",
