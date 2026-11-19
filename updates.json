@@ -2,6 +2,52 @@
   "version": 1,
   "entries": [
     {
+      "id": "review-publication-pending-20261114-3cff178c2f2d-attendance-only-1",
+      "date": "2026-11-19",
+      "type": "records",
+      "title": "管理者確認済み戦績 20件を追加",
+      "description": "Epic ID・開催枠・順位表を再照合した出場確認のみ。賞金・予選突破・スキン獲得を未認定。",
+      "recordIds": [
+        "auto-s39-bb938bcee2cd",
+        "auto-s39-f8d4903eee2b",
+        "auto-s39-91d014651518",
+        "auto-s39-a826742ab8aa",
+        "auto-s39-ddedc4f1230a",
+        "auto-s39-12f91ce4d7e6",
+        "auto-s39-143ba8b32aed",
+        "auto-s39-fe3e504614f5",
+        "auto-s39-e0cfbba774d3",
+        "auto-s39-503da218a0e1",
+        "auto-s39-97a24ad4e321",
+        "auto-s39-76cdba254a6c",
+        "auto-s39-a8593d4533a5",
+        "auto-s39-62b719c706f3",
+        "auto-s39-d86e9a90cac9",
+        "auto-s39-ed61c04b1b3f",
+        "auto-s39-8406bcb7cf10",
+        "auto-s39-af1aa62e0527",
+        "auto-s39-fe4d3ab863ce",
+        "auto-s39-aff96c8c6c9c"
+      ]
+    },
+    {
+      "id": "owner-s30-eu-zb-solo-eight-20261119",
+      "date": "2026-11-19",
+      "type": "records",
+      "title": "2024 EU ZB Solo Victory Cup決勝 8成績・個人賞金$800",
+      "description": "2024/6/18 Event3、6/25 Event4、8/13 Event9の計8件。本人Epic UUIDと画像1928〜1935の結果を確認。各選手1VR・$100。8/13の一部Tracker表示$0はEpic公式1VR=$100およびユーザー補足に従い修正。既存成績に変更なし。",
+      "recordIds": [
+        "owner-s30-eu-zb-solo-final-20240813-r36",
+        "owner-s30-eu-zb-solo-final-20240813-r91",
+        "owner-s30-eu-zb-solo-final-20240813-r167",
+        "owner-s30-eu-zb-solo-final-20240813-r176",
+        "owner-s30-eu-zb-solo-final-20240625-r37",
+        "owner-s30-eu-zb-solo-final-20240625-r130",
+        "owner-s30-eu-zb-solo-final-20240618-r128",
+        "owner-s30-eu-zb-solo-final-20240618-r169"
+      ]
+    },
+    {
       "id": "manual-qualifiers-20261111-68c314e608f4aeec",
       "date": "2026-11-19",
       "type": "records",
