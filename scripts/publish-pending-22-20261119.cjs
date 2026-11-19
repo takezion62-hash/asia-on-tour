@@ -11,6 +11,21 @@ const {validateUpdateLog}=require('./validate-updates.cjs');
 const V=require('./verified-pending-22-20261119.cjs');
 const ROOT=path.resolve(__dirname,'..'),dry=process.argv.includes('--dry-run');
 const must=(ok,why)=>{if(!ok)throw Error('PUBLISH_PENDING22 '+why)};
+function validPriorPublished(record,entry,original){
+ if(!record||!entry||!original||record.id!==original.id||entry.id!==original.id||
+  entry.recordId!==record.id||entry.decision!=='published'||entry.source!==original.source||
+  record.source!==original.source||record.verified!==true)return false;
+ if(V.verifyPublished(record,entry))return true;
+ // Other authorized writer has already added two out-of-cutoff S30 solo
+ // attendance rows under its previous verified-rule policy. Never replace them.
+ if(entry.policy!=='verified-rule'||original.seasonId!=='S30'||original.rank<=5000||
+  original.tournamentId!=='ch5s3-solo-victory-cup'||record.kind!=='予選'||
+  record.round!==original.round||record.prize!==0||
+  entry.rule!==V.RULES.S30||!String(record.note||'').includes('突破実績には加算しない'))return false;
+ const fixed=['id','date','region','player','playerRaw','event','rank','points',
+  'kills','vrs','matches','seasonId','chapter','season','tournamentId','source','verified'];
+ return fixed.every(k=>JSON.stringify(record[k])===JSON.stringify(original[k]));
+}
 function publish({dryRun=dry}={}){
  must(V.validateProof()===true,'frozen leaderboard proof changed');
  const db=loadReviewDb(ROOT);
@@ -52,7 +67,7 @@ function publish({dryRun=dry}={}){
    must(scannedRows.length===1&&sameScannedCandidate(scannedRows[0],original),
     'latest observed Epic scoreboard changed '+original.id);
    if(pre.length){
-    must(pre.length===1&&entries.length===1&&V.verifyPublished(pre[0],entries[0])&&
+    must(pre.length===1&&entries.length===1&&validPriorPublished(pre[0],entries[0],original)&&
      reviewedIds.has(original.id),'already published score was mutated '+original.id);
     if(pendingRow){
      must(sameScannedCandidate(pendingRow,original),'stale pending record differs '+original.id);
@@ -74,8 +89,8 @@ function publish({dryRun=dry}={}){
    existingIds.add(original.id);added.push(row);cleared.push(original.id);
   }
  }
- must(added.length+already.length===22&&(added.length===0||added.length===22),
-  'batch must be all 22 or already fully published');
+ must(added.length+already.length===22,
+  'all 22 must be verified either newly published or pre-published without mutation');
  must(db.results.length===before.rows+added.length&&
   db.results.reduce((n,x)=>n+Math.round((x.prize||0)*100),0)===before.team&&
   db.results.reduce((n,x)=>n+personalCents(x)*roster(x).length,0)===before.individual,
@@ -124,4 +139,4 @@ if(require.main===module)try{
   'usage: [--dry-run]');
  publish({dryRun:args.includes('--dry-run')});
 }catch(e){console.error(e.stack);process.exitCode=1;}
-module.exports={publish};
+module.exports={publish,validPriorPublished};
