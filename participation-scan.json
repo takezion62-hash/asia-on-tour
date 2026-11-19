@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-11-19T10:49:59.513Z",
+  "checkedAt": "2026-11-19T11:00:02.116Z",
   "windows": {
     "epicgames_S42_InoxtagIconCup_NAW/S42_InoxtagIconCup_NAW": {
       "nextPage": 60,
@@ -498,12 +498,12 @@
       "emptyAttempts": 0
     },
     "epicgames_S43_TriosCashCup_NAC/S43_TriosCashCup_Event1_NAC": {
-      "nextPage": 22,
-      "pages": 22,
+      "nextPage": 32,
+      "pages": 32,
       "complete": false,
       "coverageLimited": false,
       "totalPages": 100,
-      "lastScanned": "2026-11-12T15:45:12.295Z",
+      "lastScanned": "2026-11-19T10:59:41.815Z",
       "emptyAttempts": 0,
       "lastError": "Osirion API HTTP 500 /v1/tournaments/leaderboard"
     },
@@ -681,14 +681,15 @@
       "emptyAttempts": 0
     },
     "epicgames_S43_SquadsVictoryCup_BR/S43_SquadsVictoryCup_Event1_Round1_BR": {
-      "nextPage": 20,
-      "pages": 20,
+      "nextPage": 21,
+      "pages": 21,
       "complete": false,
       "coverageLimited": false,
       "totalPages": 47,
-      "lastScanned": "2026-11-16T21:38:25.590Z",
+      "lastScanned": "2026-11-19T11:00:01.966Z",
       "emptyAttempts": 0,
-      "lastError": "Osirion API HTTP 500 /v1/tournaments/leaderboard"
+      "lastError": "Osirion API HTTP 429 /v1/tournaments/leaderboard",
+      "retryAfter": "2026-11-19T17:00:02.116Z"
     },
     "epicgames_S43_SquadsVictoryCup_NAC/S43_SquadsVictoryCup_Event1_Round2_NAC": {
       "nextPage": 2,
@@ -796,26 +797,26 @@
       "emptyAttempts": 0
     },
     "epicgames_S43_SquadsVictoryCup_NAW/S43_SquadsVictoryCup_Event1_Round1_NAW": {
-      "nextPage": 24,
-      "pages": 24,
+      "nextPage": 25,
+      "pages": 25,
       "complete": false,
       "coverageLimited": false,
       "lastError": "Osirion API HTTP 429 /v1/tournaments/leaderboard",
       "totalPages": 43,
-      "lastScanned": "2026-11-18T06:22:45.193Z",
+      "lastScanned": "2026-11-19T10:59:59.435Z",
       "emptyAttempts": 0,
-      "retryAfter": "2026-11-18T12:22:45.279Z"
+      "retryAfter": "2026-11-19T16:59:59.585Z"
     },
     "epicgames_S43_SquadsVictoryCup_NAC/S43_SquadsVictoryCup_Event1_Round1_NAC": {
-      "nextPage": 14,
-      "pages": 14,
+      "nextPage": 15,
+      "pages": 15,
       "complete": false,
       "coverageLimited": false,
       "lastError": "Osirion API HTTP 429 /v1/tournaments/leaderboard",
       "totalPages": 86,
-      "lastScanned": "2026-11-18T06:22:46.164Z",
+      "lastScanned": "2026-11-19T11:00:00.706Z",
       "emptyAttempts": 0,
-      "retryAfter": "2026-11-18T12:22:46.249Z"
+      "retryAfter": "2026-11-19T17:00:00.859Z"
     },
     "epicgames_S30_SoloZBVictoryCashCup_EU/S30_SoloZBVictoryCashCup_Event1Round1_EU": {
       "nextPage": 1,
@@ -1100,12 +1101,12 @@
       "emptyAttempts": 0
     },
     "epicgames_S43_ReloadZBDuosCashCup_EU/S43_ReloadZBDuosCashCup_Event2Round1_EU": {
-      "nextPage": 10,
-      "pages": 10,
+      "nextPage": 20,
+      "pages": 20,
       "complete": false,
       "coverageLimited": false,
       "totalPages": 100,
-      "lastScanned": "2026-11-15T21:25:46.350Z",
+      "lastScanned": "2026-11-19T10:59:32.935Z",
       "emptyAttempts": 0
     },
     "epicgames_S43_ReloadZBDuosCashCup_NAC/S43_ReloadZBDuosCashCup_Event2Round1_NAC": {
@@ -1182,12 +1183,12 @@
       "emptyAttempts": 0
     },
     "epicgames_S33_SoloCashCup_NAW/S33_SoloCashCup_Event7Round1_NAW": {
-      "nextPage": 36,
-      "pages": 36,
+      "nextPage": 46,
+      "pages": 46,
       "complete": false,
       "coverageLimited": false,
       "totalPages": 100,
-      "lastScanned": "2026-11-19T10:49:59.513Z",
+      "lastScanned": "2026-11-19T10:59:58.058Z",
       "emptyAttempts": 0,
       "lastError": "Osirion API HTTP 429 /v1/tournaments/leaderboard"
     },
@@ -1250,13 +1251,21 @@
       "emptyAttempts": 0
     },
     "epicgames_S30_PlaystationCupZBJune_OCE/S30_PlaystationCupZBJune_Qualifier1_OCE": {
-      "nextPage": 18,
-      "pages": 18,
-      "complete": false,
+      "nextPage": 21,
+      "pages": 21,
+      "complete": true,
       "coverageLimited": false,
       "totalPages": 21,
-      "lastScanned": "2026-11-19T10:49:48.985Z",
+      "lastScanned": "2026-11-19T10:59:44.069Z",
       "emptyAttempts": 0
+    },
+    "epicgames_S30_PlaystationCupZBJune_ME/S30_PlaystationCupZBJune_Qualifier1_ME": {
+      "nextPage": 0,
+      "pages": 0,
+      "complete": false,
+      "coverageLimited": false,
+      "retryAfter": "2026-11-19T16:59:58.209Z",
+      "lastError": "Osirion API HTTP 429 /v1/tournaments/leaderboard"
     }
   }
 }
