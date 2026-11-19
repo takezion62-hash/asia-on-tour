@@ -169,7 +169,7 @@
       '<div class="source-rule-fact"><span>ポイント・同点時</span><strong>順位/撃破の配点はゲーム内表示が公式。'+
       '同点時は総ポイント → VR数 → 平均キル → 平均順位 → 合計生存時間</strong></div>'+
       '<p class="source-rule-warning">※ 現金は各選手の規定額を記録し、圏外は$0。RTX 5080とRust Bucketは現金賞金に換算しません。'+
-      '本人Epic ID・開催地域・開催回・順位表を照合するまで確認専用（自動承認は未対応）です。'+
+      '全順位表・本人Epic ID・開催地域・開催回・順位の完全照合が取れた場合のみ自動承認します。'+
       '賞金・賞品の実際の受給資格と支払・配布は別途審査が必要です。</p>';
   }
   function ruleMarkup(entry){
@@ -214,7 +214,7 @@
       ' · '+esc(seriesLabel[entry.series]||entry.series||'大会')+'</span>'+
       '<h3>'+esc(entry.name)+'</h3>'+
       '<p>'+esc(modeLabel[entry.team]||entry.team||'形式未確認')+' / '+esc(entry.mode||'モード未確認')+'</p></div>'+
-      '<span class="source-rule-state '+(present?'is-ready':'is-pending')+'">'+(present?(rule?.autoApproval==='review-only'?'公式規則登録済み・確認専用':rule?.autoApproval==='verified-team-rank'?(rule.series==='unreal-cup'?'公式賞金表で自動掲載・圏外$0':'公式規則登録済み・全順位を自動掲載'):rule?.autoApproval==='verified-performance-vr'?'予選突破・決勝VRを自動掲載':rule?.cashFinalAutoApproval==='verified-duo-round2-rank'?'予選突破・決勝賞金を自動掲載':rule?.autoApproval==='verified-duo-qualifier-only'?'予選突破・参加$0を自動掲載':'公式規則登録済み'):'ルール未登録')+'</span></div>'+
+      '<span class="source-rule-state '+(present?'is-ready':'is-pending')+'">'+(present?(rule?.autoApproval==='verified-solo-rank'?'公式賞金表・本人ID照合で自動掲載':rule?.autoApproval==='review-only'?'公式規則登録済み・確認専用':rule?.autoApproval==='verified-team-rank'?(rule.series==='unreal-cup'?'公式賞金表で自動掲載・圏外$0':'公式規則登録済み・全順位を自動掲載'):rule?.autoApproval==='verified-performance-vr'?'予選突破・決勝VRを自動掲載':rule?.cashFinalAutoApproval==='verified-duo-round2-rank'?'予選突破・決勝賞金を自動掲載':rule?.autoApproval==='verified-duo-qualifier-only'?'予選突破・参加$0を自動掲載':'公式規則登録済み'):'ルール未登録')+'</span></div>'+
       details+
       '<details class="source-rule-identifiers"><summary>大会ID・適用範囲</summary><div>'+ids.map(id=>'<code>'+esc(id)+'</code>').join('')+
       '<p>公式規則が確認済みでも、本人Epic ID・地域・開催枠・順位表の検証が必要です</p></div></details>'+
