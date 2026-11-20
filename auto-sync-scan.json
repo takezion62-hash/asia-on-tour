@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-11-20T12:54:58.114Z",
+  "checkedAt": "2026-11-20T17:58:23.358Z",
   "windows": {
     "epicgames_S43_PerformanceEvaluationTrios_EU/S43_PerformanceEvaluation_Event1Round1_EU": {
       "nextPage": 7,
@@ -19081,6 +19081,109 @@
       "rankingOrderValid": true,
       "lastSeenRank": 26,
       "lastSuccessAt": "2026-11-20T12:54:58.106Z",
+      "totalPages": 1
+    },
+    "epicgames_S43_OverwatchWidowmakerCup_OCE/S43_OverwatchWidowmakerCup_OCE": {
+      "nextPage": 1,
+      "complete": true,
+      "proposals": [],
+      "pages": 1,
+      "lastAttemptAt": "2026-11-20T17:58:19.744Z",
+      "emptyAttempts": 0,
+      "rankingOrderValid": true,
+      "lastSeenRank": 100,
+      "lastSuccessAt": "2026-11-20T17:58:20.950Z",
+      "totalPages": 46
+    },
+    "epicgames_S43_OverwatchWidowmakerCup_ZB_OCE/S43_OverwatchWidowmakerCup_ZB_OCE": {
+      "nextPage": 1,
+      "complete": true,
+      "proposals": [
+        {
+          "id": "auto-s43-ea0da51e2308",
+          "date": "2026-11-20",
+          "region": "OCE",
+          "player": "rsl ふちの弟 / ぜろむの弟",
+          "playerRaw": "wave go sura go / 約束と希望の少女ぜろりん",
+          "event": "Overwatch: Widowmaker Cup Zero Build",
+          "round": "単一開催枠 / 参加確認",
+          "rank": 19,
+          "points": 458,
+          "kills": 33,
+          "vrs": 0,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 11,
+          "seasonId": "S43",
+          "chapter": 7,
+          "season": 5,
+          "tournamentId": "ch7s5-overwatch-widowmaker-cup-zero-build",
+          "source": "https://www.fortnite.com/competitive/events/S43_OverwatchWidowmakerCup_ZB/?region=OCE&round=S43_OverwatchWidowmakerCup_ZB_OCE",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "rsl ふちの弟",
+            "ぜろむの弟"
+          ],
+          "teamAccountIds": [
+            "37fae8ec22bd4cc4955aa46e228d23c3",
+            "972d5d8de9174e03817ce237b559bb10"
+          ]
+        },
+        {
+          "id": "auto-s43-0d78daeea093",
+          "date": "2026-11-20",
+          "region": "OCE",
+          "player": "まろやかれおちゃあいと / 軍神 心湊 壱輝",
+          "playerRaw": "りきとあいといきりょうた4人家族 / 爆運はくあいっき大西りきと爆運",
+          "event": "Overwatch: Widowmaker Cup Zero Build",
+          "round": "単一開催枠 / 参加確認",
+          "rank": 28,
+          "points": 434,
+          "kills": 63,
+          "vrs": 2,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 10,
+          "seasonId": "S43",
+          "chapter": 7,
+          "season": 5,
+          "tournamentId": "ch7s5-overwatch-widowmaker-cup-zero-build",
+          "source": "https://www.fortnite.com/competitive/events/S43_OverwatchWidowmakerCup_ZB/?region=OCE&round=S43_OverwatchWidowmakerCup_ZB_OCE",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "まろやかれおちゃあいと",
+            "軍神 心湊 壱輝"
+          ],
+          "teamAccountIds": [
+            "71df52357f7340aa9cd9fbb1945f97c8",
+            "e5237f320b4345e69d52ffe1965e474d"
+          ]
+        }
+      ],
+      "pages": 1,
+      "lastAttemptAt": "2026-11-20T17:58:20.950Z",
+      "emptyAttempts": 0,
+      "rankingOrderValid": true,
+      "lastSeenRank": 100,
+      "lastSuccessAt": "2026-11-20T17:58:22.697Z",
+      "totalPages": 31
+    },
+    "epicgames_S43_ReloadZBDuosCashCup_OCE/S43_ReloadZBDuosCashCup_Event2Round2_OCE": {
+      "nextPage": 1,
+      "complete": true,
+      "proposals": [],
+      "pages": 1,
+      "lastAttemptAt": "2026-11-20T17:58:22.697Z",
+      "emptyAttempts": 0,
+      "rankingOrderValid": true,
+      "lastSeenRank": 18,
+      "lastSuccessAt": "2026-11-20T17:58:23.349Z",
       "totalPages": 1
     }
   }
