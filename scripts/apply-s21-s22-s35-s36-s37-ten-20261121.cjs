@@ -23,7 +23,7 @@ function apply({dryRun=false}={}){
   for(const alt of values){must(!aliases.has(alt)||aliases.get(alt)===name,
    'ambiguous existing alias: '+alt);aliases.set(alt,name);}
  }
- for(const name of ['Hakkun','TEITEI','Asuka','あおねこ','モバイル勢のまかろん','かぷせるてぃーてぃーTTていてい'])
+ for(const name of ['Hakkun','TEITEI','Asuka','あおねこ','モバイル勢のまかろん','かぷせるてぃーてぃーTTていてい','めるんやけん'])
   must(known.has(name),'previously verified player missing: '+name);
  must(aliases.get('RAGE Hakkun')==='Hakkun'&&
    aliases.get('Celis あおねこ416')==='あおねこ'&&
@@ -94,11 +94,12 @@ function apply({dryRun=false}={}){
  }
  must(added.length+existing.length===10&&(added.length===0||added.length===10),
   'partial import rejected');
- must(newPlayers.length===(added.length?6:0),'unexpected new player count');
+ must(newPlayers.length===(added.length?5:0),'unexpected new player count');
  must(JSON.stringify(newAliases)===JSON.stringify(added.length?[
   {name:'Hakkun',raw:'TGR はっくん'},
   {name:'irodori',raw:'FA irodori'},
-  {name:'かぷせるてぃーてぃーTTていてい',raw:'Pollo 17 ǃ ǃ'}]:[]),'unexpected alias changes');
+  {name:'かぷせるてぃーてぃーTTていてい',raw:'Pollo 17 ǃ ǃ'},
+  {name:'めるんやけん',raw:'YAKOTA6x'}]:[]),'unexpected alias changes');
  const winnings=added.reduce((n,r)=>n+Math.round(r.prize*100),0);
  must(rows.length===before.records+added.length&&
   rows.reduce((n,r)=>n+Math.round((r.prize||0)*100),0)===before.team+winnings&&
@@ -107,7 +108,7 @@ function apply({dryRun=false}={}){
  if(added.length){
   upsertPublicationLog(updates,{id:'owner-s21-s22-s35-s36-s37-ten-20261121',
    date:'2026-11-21',title:'2022 PlayStation Cup＋2025 NAWデュオ決勝 計10件・$2,000',
-   description:'ユーザー画像1960〜1969で10開催成績を照合。S35・S36・S37のNAWデュオ決勝6組＝合計6VR、チーム賞金$1,200（各選手$100）。S21のOCE・S22のNAW PlayStation決勝4件＝順位賞金$800（0VR・個人$200）。Epic公式開催IDと本人UUIDによる照合、重複防止、新規6名・別名義3件。',
+   description:'ユーザー画像1960〜1969で10開催成績を照合。S35・S36・S37のNAWデュオ決勝6組＝合計6VR、チーム賞金$1,200（各選手$100）。S21のOCE・S22のNAW PlayStation決勝4件＝順位賞金$800（0VR・個人$200）。Epic公式開催IDと本人UUIDによる照合、重複防止、新規5名・別名義4件。',
    recordIds:added.map(x=>x.id)});
   updates.entries.sort((a,b)=>b.date.localeCompare(a.date));
  }
