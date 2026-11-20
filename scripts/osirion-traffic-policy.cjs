@@ -31,7 +31,7 @@ function trafficPlan({historical,config,historyStatus,recentStatus,now=Date.now(
   configuredPages:configured,
   pageBudget:Math.min(configured,pageCap),
   // Sequential API calls are deliberately spaced; no parallel probe bursts.
-  minRequestIntervalMs:historical?1000:800,
+  minRequestIntervalMs:historical?1500:1200,
   reason:until>now?'shared-provider-429-cooldown':recovering?'cautious-recovery':'steady-state'
  };
 }
