@@ -1,22 +1,22 @@
 {
   "version": 1,
   "sourceCheckedAt": "2026-11-20T17:58:23.358Z",
-  "total": 43,
+  "total": 39,
   "alreadyResolved": 0,
   "byYear": [
     {
       "name": "2024",
-      "count": 33
+      "count": 31
     },
     {
       "name": "2025",
-      "count": 10
+      "count": 8
     }
   ],
   "byRegion": [
     {
       "name": "ME",
-      "count": 4
+      "count": 2
     },
     {
       "name": "NAC",
@@ -24,7 +24,7 @@
     },
     {
       "name": "NAW",
-      "count": 7
+      "count": 5
     },
     {
       "name": "OCE",
@@ -34,7 +34,7 @@
   "byTournament": [
     {
       "name": "NVIDIA GeForce RTX Cup / NAW / 2025",
-      "count": 7
+      "count": 5
     },
     {
       "name": "PlayStation Cup / ME / 2024",
@@ -47,10 +47,6 @@
     {
       "name": "PlayStation Cup Battle Royale / OCE / 2024",
       "count": 1
-    },
-    {
-      "name": "PlayStation Cup Zero Build / ME / 2024",
-      "count": 2
     },
     {
       "name": "PlayStation Cup Zero Build / OCE / 2024",
@@ -72,11 +68,7 @@
     },
     {
       "name": "partial-scan",
-      "count": 26
-    },
-    {
-      "name": "rules-review",
-      "count": 2
+      "count": 24
     }
   ],
   "queue": [
@@ -572,72 +564,6 @@
         "totalPages": 100,
         "sourceKey": "epicgames_S39_NvidiaCup_NAW/S39_NvidiaCup_NAW",
         "possibleExistingId": "owner-s39-naw-nvidia-20251222-r36"
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s30-887877268109",
-      "origin": "history",
-      "date": "2024-06-30",
-      "year": "2024",
-      "region": "ME",
-      "tournamentId": "ch5s3-playstation-cup-zb",
-      "event": "PlayStation Cup Zero Build",
-      "round": "Final / 参加確認",
-      "player": "1度だけこの壁を越えさせてやる",
-      "kind": "参加確認",
-      "rank": 48,
-      "points": 28,
-      "kills": 4,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S30_PlaystationCupZBJune/?region=ME&round=S30_PlaystationCupZBJune_Final_ME",
-      "status": "rules-review",
-      "action": "公式規則・賞金・突破・スキン条件を個別確認",
-      "reason": "確認専用大会は自動承認不可",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": true,
-        "observedPartial": false,
-        "seenPages": 1,
-        "totalPages": 1,
-        "sourceKey": "epicgames_S30_PlaystationCupZBJune_ME/S30_PlaystationCupZBJune_Final_ME",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s30-a0d3cd0c947d",
-      "origin": "history",
-      "date": "2024-06-30",
-      "year": "2024",
-      "region": "ME",
-      "tournamentId": "ch5s3-playstation-cup-zb",
-      "event": "PlayStation Cup Zero Build",
-      "round": "Final / 参加確認",
-      "player": "ホーリーファカオくん",
-      "kind": "参加確認",
-      "rank": 94,
-      "points": 3,
-      "kills": 0,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S30_PlaystationCupZBJune/?region=ME&round=S30_PlaystationCupZBJune_Final_ME",
-      "status": "rules-review",
-      "action": "公式規則・賞金・突破・スキン条件を個別確認",
-      "reason": "確認専用大会は自動承認不可",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": true,
-        "observedPartial": false,
-        "seenPages": 1,
-        "totalPages": 1,
-        "sourceKey": "epicgames_S30_PlaystationCupZBJune_ME/S30_PlaystationCupZBJune_Final_ME",
-        "possibleExistingId": null
       },
       "rewardState": "cash-unconfirmed"
     },
@@ -1432,72 +1358,6 @@
         "possibleExistingId": null
       },
       "rewardState": "source-amount-present-not-verified-by-triage"
-    },
-    {
-      "id": "auto-s39-c0df8d1bb3b6",
-      "origin": "history",
-      "date": "2025-12-22",
-      "year": "2025",
-      "region": "NAW",
-      "tournamentId": "ch7s1-nvidia-geforce-rtx-cup",
-      "event": "NVIDIA GeForce RTX Cup",
-      "round": "単一開催枠 / 参加確認",
-      "player": "ns tmu",
-      "kind": "参加確認",
-      "rank": 3890,
-      "points": 110,
-      "kills": 5,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S39_NvidiaCup/?region=NAW&round=S39_NvidiaCup_NAW",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "全ページ連続の順位表・Epic ID付完全スナップショットが未確認",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 40,
-        "totalPages": 100,
-        "sourceKey": "epicgames_S39_NvidiaCup_NAW/S39_NvidiaCup_NAW",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s39-e18e4b012504",
-      "origin": "history",
-      "date": "2025-12-22",
-      "year": "2025",
-      "region": "NAW",
-      "tournamentId": "ch7s1-nvidia-geforce-rtx-cup",
-      "event": "NVIDIA GeForce RTX Cup",
-      "round": "単一開催枠 / 参加確認",
-      "player": "ぜろむ",
-      "kind": "参加確認",
-      "rank": 3970,
-      "points": 107,
-      "kills": 7,
-      "vrs": 1,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S39_NvidiaCup/?region=NAW&round=S39_NvidiaCup_NAW",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "全ページ連続の順位表・Epic ID付完全スナップショットが未確認",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 40,
-        "totalPages": 100,
-        "sourceKey": "epicgames_S39_NvidiaCup_NAW/S39_NvidiaCup_NAW",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
     }
   ],
   "policy": "read-only queue; awards require existing official rule-backed validators and identity/collision proof"

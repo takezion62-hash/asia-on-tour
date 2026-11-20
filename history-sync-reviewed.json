@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-20T18:00:15.654Z",
+  "reviewedAt": "2026-11-20T18:00:25.417Z",
   "description": "Resolved historic review candidates: published, duplicate or participation",
   "entries": [
     {
@@ -34415,6 +34415,42 @@
       "source": "https://www.fortnite.com/competitive/events/S31_SoloVictoryCashCup/?region=NAC&round=S31_SoloVictoryCashCup_Event2Round1_NAC",
       "officialRules": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-4-official-rules",
       "evidence": "Official calendar, Epic account match, mature original ranked checkpoint"
+    },
+    {
+      "id": "auto-s39-c0df8d1bb3b6",
+      "decision": "published",
+      "recordId": "auto-s39-c0df8d1bb3b6",
+      "reviewedAt": "2026-11-20T18:00:25.417Z",
+      "source": "https://www.fortnite.com/competitive/events/S39_NvidiaCup/?region=NAW&round=S39_NvidiaCup_NAW",
+      "policy": "attendance-only",
+      "rule": null
+    },
+    {
+      "id": "auto-s39-e18e4b012504",
+      "decision": "published",
+      "recordId": "auto-s39-e18e4b012504",
+      "reviewedAt": "2026-11-20T18:00:25.417Z",
+      "source": "https://www.fortnite.com/competitive/events/S39_NvidiaCup/?region=NAW&round=S39_NvidiaCup_NAW",
+      "policy": "attendance-only",
+      "rule": null
+    },
+    {
+      "id": "auto-s30-887877268109",
+      "decision": "published",
+      "recordId": "auto-s30-887877268109",
+      "reviewedAt": "2026-11-20T18:00:25.417Z",
+      "source": "https://www.fortnite.com/competitive/events/S30_PlaystationCupZBJune/?region=ME&round=S30_PlaystationCupZBJune_Final_ME",
+      "policy": "attendance-only",
+      "rule": null
+    },
+    {
+      "id": "auto-s30-a0d3cd0c947d",
+      "decision": "published",
+      "recordId": "auto-s30-a0d3cd0c947d",
+      "reviewedAt": "2026-11-20T18:00:25.417Z",
+      "source": "https://www.fortnite.com/competitive/events/S30_PlaystationCupZBJune/?region=ME&round=S30_PlaystationCupZBJune_Final_ME",
+      "policy": "attendance-only",
+      "rule": null
     }
   ]
 }
