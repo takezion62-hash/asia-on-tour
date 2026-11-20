@@ -1,24 +1,24 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-19T17:23:47.128Z",
+  "checkedAt": "2026-11-20T01:46:43.536Z",
   "mode": "review",
   "scope": "recent",
   "dateMode": null,
-  "selectedWindows": 0,
+  "selectedWindows": 1,
   "fromDate": null,
   "toDate": null,
   "provider": "osirion",
-  "linkedPlayers": 674,
-  "trackedWindows": 92,
+  "linkedPlayers": 676,
+  "trackedWindows": 93,
   "found": 0,
   "skipped": 0,
   "imported": 0,
-  "scannedPages": 0,
-  "completedWindows": 92,
+  "scannedPages": 1,
+  "completedWindows": 93,
   "identityConflicts": 3,
   "alreadyRegistered": 220,
-  "autoApprovedTotal": 3261,
+  "autoApprovedTotal": 3263,
   "invalidCachedCandidates": 0,
   "manualReviewCandidates": 0,
   "autoApprovedCosmeticThisRun": 0,
@@ -30,7 +30,7 @@
   "transientFailures": 0,
   "malformedFailures": 0,
   "skippedLeaderboards": [],
-  "reviewOnlyWindows": 80,
+  "reviewOnlyWindows": 81,
   "reviewOnlyCandidates": 0,
   "unmappedEvents": 4,
   "unmappedEventIds": [
@@ -45,11 +45,11 @@
     "alreadyPublished": 0,
     "reviewConflicts": 0,
     "keptPending": 0,
-    "reconciledAt": "2026-11-19T17:23:52.166Z"
+    "reconciledAt": "2026-11-20T01:46:48.819Z"
   },
   "coverage": {
-    "total": 92,
-    "completed": 92,
+    "total": 93,
+    "completed": 93,
     "notStarted": 0,
     "partial": 0,
     "retryWaiting": 0,
@@ -59,8 +59,8 @@
     "completionPercent": 100,
     "byRegion": {
       "EU": {
-        "total": 18,
-        "completed": 18,
+        "total": 19,
+        "completed": 19,
         "pending": 0
       },
       "NAC": {
@@ -91,8 +91,8 @@
     },
     "byYear": {
       "2026": {
-        "total": 92,
-        "completed": 92,
+        "total": 93,
+        "completed": 93,
         "pending": 0
       }
     },
@@ -113,7 +113,7 @@
   },
   "manuallyResolvedDuplicates": 47,
   "autoApprovedParticipationThisRun": 0,
-  "processedWindows": 0,
+  "processedWindows": 1,
   "providerRateLimitPaused": false,
   "providerRateLimitRetryAfter": null
 }
