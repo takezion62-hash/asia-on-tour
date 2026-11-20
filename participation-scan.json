@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-11-19T22:31:55.393Z",
+  "checkedAt": "2026-11-20T05:34:23.926Z",
   "windows": {
     "epicgames_S42_InoxtagIconCup_NAW/S42_InoxtagIconCup_NAW": {
       "nextPage": 60,
@@ -390,12 +390,12 @@
       "emptyAttempts": 0
     },
     "epicgames_S43_OnePieceZoroCup_NAC/S43_OnePieceZoroCup_NAC": {
-      "nextPage": 46,
-      "pages": 46,
+      "nextPage": 56,
+      "pages": 56,
       "complete": false,
       "coverageLimited": false,
       "totalPages": 100,
-      "lastScanned": "2026-11-12T16:03:33.643Z",
+      "lastScanned": "2026-11-20T05:33:59.029Z",
       "emptyAttempts": 0
     },
     "epicgames_S43_OnePieceZoroCup_NAW/S43_OnePieceZoroCup_NAW": {
@@ -1183,12 +1183,12 @@
       "emptyAttempts": 0
     },
     "epicgames_S33_SoloCashCup_NAW/S33_SoloCashCup_Event7Round1_NAW": {
-      "nextPage": 56,
-      "pages": 56,
+      "nextPage": 59,
+      "pages": 59,
       "complete": false,
       "coverageLimited": false,
       "totalPages": 100,
-      "lastScanned": "2026-11-19T22:31:55.393Z",
+      "lastScanned": "2026-11-20T05:34:23.926Z",
       "emptyAttempts": 0,
       "lastError": "Osirion API HTTP 429 /v1/tournaments/leaderboard"
     },
@@ -1268,12 +1268,21 @@
       "lastError": "Osirion API HTTP 429 /v1/tournaments/leaderboard"
     },
     "epicgames_S30_PlaystationCupZBJune_OCE/S30_PlaystationCupZBJune_Qualifier2_OCE": {
-      "nextPage": 10,
-      "pages": 10,
+      "nextPage": 20,
+      "pages": 20,
       "complete": false,
       "coverageLimited": false,
       "totalPages": 23,
-      "lastScanned": "2026-11-19T22:31:32.946Z",
+      "lastScanned": "2026-11-20T05:34:19.435Z",
+      "emptyAttempts": 0
+    },
+    "epicgames_S43_PerformanceEvaluationTrios_EU/S43_PerformanceEvaluation_Event3Round2_EU": {
+      "nextPage": 1,
+      "pages": 1,
+      "complete": true,
+      "coverageLimited": false,
+      "totalPages": 1,
+      "lastScanned": "2026-11-20T05:33:40.880Z",
       "emptyAttempts": 0
     }
   }
