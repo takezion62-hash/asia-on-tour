@@ -2,6 +2,51 @@
   "version": 1,
   "entries": [
     {
+      "id": "review-publication-pending-20261114-8c30673ca56e-verified-rule-1",
+      "date": "2026-11-21",
+      "type": "records",
+      "title": "管理者確認済み戦績 2件を追加",
+      "description": "公式規則に基づく予選突破または決勝0VRのみを確認。未確認賞金なし。",
+      "recordIds": [
+        "auto-s32-173d54cc5b89",
+        "auto-s32-81e753881ef0"
+      ]
+    },
+    {
+      "id": "review-publication-pending-20261114-8c30673ca56e-attendance-only-1",
+      "date": "2026-11-21",
+      "type": "records",
+      "title": "管理者確認済み戦績 6件を追加",
+      "description": "Epic ID・開催枠・順位表を再照合した出場確認のみ。賞金・予選突破・スキン獲得を未認定。",
+      "recordIds": [
+        "auto-s39-19e4e471b94b",
+        "auto-s30-fc7843cf0a32",
+        "auto-s30-b36edfdc89f6",
+        "auto-s39-0f19567d6691",
+        "auto-s39-fcab1e50fda3",
+        "auto-s39-070acabe40b7"
+      ]
+    },
+    {
+      "id": "owner-s21-s22-s35-s36-s37-ten-20261121",
+      "date": "2026-11-21",
+      "type": "records",
+      "title": "2022 PlayStation Cup＋2025 NAWデュオ決勝 計10件・$2,000",
+      "description": "ユーザー画像1960〜1969で10開催成績を照合。S35・S36・S37のNAWデュオ決勝6組＝合計6VR、チーム賞金$1,200（各選手$100）。S21のOCE・S22のNAW PlayStation決勝4件＝順位賞金$800（0VR・個人$200）。Epic公式開催IDと本人UUIDによる照合、重複防止、新規5名・別名義4件。",
+      "recordIds": [
+        "owner-s37-naw-duo-20250825-r10",
+        "owner-s36-naw-duo-20250726-r13",
+        "owner-s35-naw-duo-20250518-r6",
+        "owner-s35-naw-duo-20250518-r10",
+        "owner-s35-naw-duo-20250518-r12",
+        "owner-s35-naw-duo-20250518-r14",
+        "owner-s22-naw-ps-20221130-r78",
+        "owner-s22-naw-ps-20221130-r96",
+        "owner-s21-oce-ps-20220724-r42",
+        "owner-s21-oce-ps-20220724-r51"
+      ]
+    },
+    {
       "id": "auto-sync-20261120164402",
       "date": "2026-11-21",
       "type": "records",
