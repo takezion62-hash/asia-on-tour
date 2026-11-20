@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-11-20T05:34:23.926Z",
+  "checkedAt": "2026-11-20T10:39:02.590Z",
   "windows": {
     "epicgames_S42_InoxtagIconCup_NAW/S42_InoxtagIconCup_NAW": {
       "nextPage": 60,
@@ -767,12 +767,12 @@
       "lastError": "Osirion API HTTP 429 /v1/tournaments/leaderboard"
     },
     "epicgames_S43_ArenaCashCup_NAC/S43_ArenaCashCup_Event1_NAC": {
-      "nextPage": 40,
-      "pages": 40,
+      "nextPage": 50,
+      "pages": 50,
       "complete": false,
       "coverageLimited": false,
       "totalPages": 83,
-      "lastScanned": "2026-11-12T21:33:52.795Z",
+      "lastScanned": "2026-11-20T10:38:23.626Z",
       "emptyAttempts": 0,
       "lastError": "Osirion API HTTP 500 /v1/tournaments/leaderboard"
     },
@@ -1183,12 +1183,12 @@
       "emptyAttempts": 0
     },
     "epicgames_S33_SoloCashCup_NAW/S33_SoloCashCup_Event7Round1_NAW": {
-      "nextPage": 59,
-      "pages": 59,
-      "complete": false,
-      "coverageLimited": false,
+      "nextPage": 60,
+      "pages": 60,
+      "complete": true,
+      "coverageLimited": true,
       "totalPages": 100,
-      "lastScanned": "2026-11-20T05:34:23.926Z",
+      "lastScanned": "2026-11-20T10:38:59.943Z",
       "emptyAttempts": 0,
       "lastError": "Osirion API HTTP 429 /v1/tournaments/leaderboard"
     },
@@ -1260,20 +1260,22 @@
       "emptyAttempts": 0
     },
     "epicgames_S30_PlaystationCupZBJune_ME/S30_PlaystationCupZBJune_Qualifier1_ME": {
-      "nextPage": 0,
-      "pages": 0,
+      "nextPage": 10,
+      "pages": 10,
       "complete": false,
       "coverageLimited": false,
-      "retryAfter": "2026-11-19T16:59:58.209Z",
-      "lastError": "Osirion API HTTP 429 /v1/tournaments/leaderboard"
+      "lastError": "Osirion API HTTP 429 /v1/tournaments/leaderboard",
+      "totalPages": 36,
+      "lastScanned": "2026-11-20T10:38:58.572Z",
+      "emptyAttempts": 0
     },
     "epicgames_S30_PlaystationCupZBJune_OCE/S30_PlaystationCupZBJune_Qualifier2_OCE": {
-      "nextPage": 20,
-      "pages": 20,
+      "nextPage": 22,
+      "pages": 22,
       "complete": false,
       "coverageLimited": false,
       "totalPages": 23,
-      "lastScanned": "2026-11-20T05:34:19.435Z",
+      "lastScanned": "2026-11-20T10:39:02.590Z",
       "emptyAttempts": 0
     },
     "epicgames_S43_PerformanceEvaluationTrios_EU/S43_PerformanceEvaluation_Event3Round2_EU": {
@@ -1283,6 +1285,15 @@
       "coverageLimited": false,
       "totalPages": 1,
       "lastScanned": "2026-11-20T05:33:40.880Z",
+      "emptyAttempts": 0
+    },
+    "epicgames_S43_PerformanceEvaluationTrios_NAC/S43_PerformanceEvaluation_Event3Round2_NAC": {
+      "nextPage": 1,
+      "pages": 1,
+      "complete": true,
+      "coverageLimited": false,
+      "totalPages": 1,
+      "lastScanned": "2026-11-20T10:38:08.341Z",
       "emptyAttempts": 0
     }
   }
