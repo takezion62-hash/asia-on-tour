@@ -614,7 +614,22 @@ async function main(){
  const {accounts,conflicts}=linkedAccounts(data);
  data.verifiedAccounts=accounts;
  if(!accounts.length)throw Error('追跡対象のIDがありません');
- const all=await getTournaments(historical);
+ let all;
+ try{all=await getTournaments(historical)}
+ catch(error){
+  // Discovery is also an Osirion request. An HTTP429 here must establish the
+  // same persisted cross-workflow cooldown as a leaderboard HTTP429.
+  if(!providerRateLimitFailure(error))throw error;
+  const retryAfter=new Date(Date.now()+6*3600000).toISOString();
+  const oldStatus=read(prefix+'-status.json');
+  write(prefix+'-status.json',{...oldStatus,checkedAt:new Date().toISOString(),
+   scannedPages:0,processedWindows:0,imported:0,newlyCompletedWindows:0,
+   providerRateLimitPaused:true,providerRateLimitRetryAfter:retryAfter,
+   providerTraffic:{...traffic,...providerPacer.metrics(),discoveryRateLimited:true}});
+  console.warn('OSIRION_DISCOVERY_RATE_LIMIT '+JSON.stringify({retryAfter,
+   scope:historical?'history':'recent',action:'persist shared cooldown; retain scan checkpoint'}));
+  return;
+ }
  const windows=discover(all,data.tournaments.catalog,config);
  const unmapped=discoverUnmapped(all,data.tournaments.catalog,config);
  const state=read(prefix+'-scan.json');
