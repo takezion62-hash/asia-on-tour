@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "month": "2022-07",
+  "sessions": [
+    {
+      "id": "epicgames_S21_PlaystationCupJuly_OCE/S21_PlaystationCupJuly_OCE_Final",
+      "seasonId": "S21",
+      "name": "PlayStation Cup",
+      "eventId": "S21_PlaystationCupJuly",
+      "region": "OCE",
+      "tournamentId": "ch3s3-playstation-cup-july",
+      "series": "playstation-cup",
+      "mode": "battle-royale",
+      "round": "Final",
+      "stage": "単一ラウンド",
+      "sourceWindowId": "S21_PlaystationCupJuly_OCE_Final",
+      "startUtc": "2022-07-24T07:00:00.000Z",
+      "endUtc": "2022-07-24T10:15:00.000Z",
+      "dateJst": "2022-07-24",
+      "timeJst": "16:00",
+      "url": "https://www.fortnite.com/competitive/events/S21_PlaystationCupJuly/?region=OCE&round=S21_PlaystationCupJuly_OCE_Final"
+    }
+  ]
+}
