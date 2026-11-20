@@ -71,7 +71,8 @@ function validateProof(){
    y.sourceEventIds.includes(meta.eventId)&&y.team===meta.team&&
    y.mode==='battle-royale'&&y.name===meta.event);
   fail(t.length===1,'invalid tournament type: '+shot);
-  fail(t[0].evidence?.some(z=>z.url===meta.rule),'official payout source missing: '+shot);
+  fail(t[0].evidence?.some(z=>z.url===meta.rule)||rules.some(z=>z.id===meta.tournamentId&&z.source===meta.rule),
+   'official tournament or rulebook payout source missing: '+shot);
   const month=get('calendar-history/'+meta.date.slice(0,7)+'.json');
   fail(month.month===meta.date.slice(0,7)&&month.sessions.filter(z=>z.eventId===meta.eventId&&
    z.sourceWindowId===meta.windowId&&z.dateJst===meta.date&&z.region===meta.region&&
