@@ -2162,6 +2162,10 @@
         {
           "text": "Epic Games公式大会ページで2025年7〜8月のSquid Grounds Cash CupをDuos / Battle Royaleとして確認。現金賞金・通過者は別途照合が必要。",
           "url": "https://www.fortnite.com/competitive/events/S36_SquidGroundVictoryDuosCup/?region=NAC"
+        },
+        {
+          "text": "ユーザー提供2025-07-26 NAW Squid Grounds Cash Cup Event5 Round2の13位・1VRチーム。Epic公式大会ページでRound2のデュオVRに$200、本人プロフィールIDと順位表を画像1961で照合。",
+          "url": "https://www.fortnite.com/competitive/events/S36_SquidGroundVictoryDuosCup/?region=NAW"
         }
       ]
     },
@@ -2793,6 +2797,58 @@
         {
           "text": "2022/6/30 JST ME Event1 Round2：Aim 6位・10キル・1VR・賞金$200、ITACHI 55位、raru 71位、Ehre そーだむ99位（後3名賞金なし）。ユーザー提供Tracker画像で確認。",
           "url": "https://fortnitetracker.com/events/epicgames_S21_SoloCashCup_ME?window=S21_SoloCashCup_ME_Event1_Round2"
+        }
+      ]
+    },
+    {
+      "id": "ch3s3-playstation-cup-july",
+      "name": "PlayStation Cup",
+      "chapter": 3,
+      "season": 3,
+      "seasonId": "S21",
+      "sourceEventIds": [
+        "S21_PlaystationCupJuly"
+      ],
+      "series": "playstation-cup",
+      "mode": "battle-royale",
+      "subtype": "playstation-cup",
+      "team": "solo",
+      "platform": "playstation",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "2022年7月24日OCE PlayStation Cup決勝。ユーザー提供スクリーンショット1968〜1969のまなくん42位・モバイル勢のまかろん51位をTrackerの指定本人Epic IDと照合、各$200（0VR）。",
+          "url": "https://fortnitetracker.com/events/epicgames_S21_PlaystationCupJuly_OCE?window=S21_PlaystationCupJuly_OCE_Final"
+        },
+        {
+          "text": "Epic公式Chapter 3 Season 3 July 2022 PlayStation Cup規則：OCE決勝11〜90位は$200（順位賞）。",
+          "url": "https://www.fortnite.com/news/fortnite-playstation-cup-chapter-3-season-3-official-rules-july-2022"
+        }
+      ]
+    },
+    {
+      "id": "ch3s4-playstation-cup-november",
+      "name": "PlayStation Cup",
+      "chapter": 3,
+      "season": 4,
+      "seasonId": "S22",
+      "sourceEventIds": [
+        "S22_PlaystationCupNov"
+      ],
+      "series": "playstation-cup",
+      "mode": "battle-royale",
+      "subtype": "playstation-cup",
+      "team": "solo",
+      "platform": "playstation",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "2022年11月30日NAW PlayStation Cup決勝。ユーザー提供スクリーンショット1966〜1967のまなくん78位・モバイル勢のまかろん96位をTrackerの指定本人Epic IDと照合、各$200（0VR）。",
+          "url": "https://fortnitetracker.com/events/epicgames_S22_PlaystationCupNov_NAW?window=S22_PlaystationCupNov_NAW_Final"
+        },
+        {
+          "text": "Epic公式Chapter 3 Season 4 November 2022 PlayStation Cup規則：NA West決勝51〜100位は$200（順位賞）。",
+          "url": "https://www.fortnite.com/news/fortnite-playstation-cup-chapter-3-season-4-official-rules-november-2022"
         }
       ]
     },

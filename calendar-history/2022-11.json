@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "month": "2022-11",
+  "sessions": [
+    {
+      "id": "epicgames_S22_PlaystationCupNov_NAW/S22_PlaystationCupNov_NAW_Final",
+      "seasonId": "S22",
+      "name": "PlayStation Cup",
+      "eventId": "S22_PlaystationCupNov",
+      "region": "NAW",
+      "tournamentId": "ch3s4-playstation-cup-november",
+      "series": "playstation-cup",
+      "mode": "battle-royale",
+      "round": "Final",
+      "stage": "単一ラウンド",
+      "sourceWindowId": "S22_PlaystationCupNov_NAW_Final",
+      "startUtc": "2022-11-30T01:00:00.000Z",
+      "endUtc": "2022-11-30T04:00:00.000Z",
+      "dateJst": "2022-11-30",
+      "timeJst": "10:00",
+      "url": "https://www.fortnite.com/competitive/events/S22_PlaystationCupNov/?region=NAW&round=S22_PlaystationCupNov_NAW_Final"
+    }
+  ]
+}
