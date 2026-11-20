@@ -319,6 +319,14 @@
         {
           "id": "nvidia-geforce-rtx-cup",
           "label": "NVIDIA GeForce RTX Cup"
+        },
+        {
+          "id": "overwatch-widowmaker-cup-zero-build",
+          "label": "Overwatch: Widowmaker Cup Zero Build"
+        },
+        {
+          "id": "overwatch-widowmaker-mobile-cup",
+          "label": "Overwatch: Widowmaker Mobile Cup"
         }
       ]
     },
@@ -2184,6 +2192,66 @@
         {
           "text": "Fortnite Tracker大会ID・通常Battle Royale（Duos Build）・最大11試合、地域別の報酬境界と開始時刻を照合。",
           "url": "https://fortnitetracker.com/events/epicgames_S43_OverwatchWidowmakerCup_NAC"
+        }
+      ]
+    },
+    {
+      "id": "ch7s5-overwatch-widowmaker-cup-zero-build",
+      "name": "Overwatch: Widowmaker Cup Zero Build",
+      "chapter": 7,
+      "season": 5,
+      "seasonId": "S43",
+      "sourceEventIds": [
+        "S43_OverwatchWidowmakerCup_ZB"
+      ],
+      "series": "skin-cup",
+      "mode": "zero-build",
+      "subtype": "overwatch-widowmaker-cup-zero-build",
+      "team": "duo",
+      "platform": "cross-platform",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "Epic公式ルール2026-11-19 2.2.1 / Attachment C Zero Build：通常Battle Royaleとは完全に別のデュオ・ゼロビルド開催枠、1セッション約3時間・最大11試合。OCE/ME上位50組、EU上位500組、NAC上位350組、BR/NAW上位100組。各選手にWidowmaker衣装、Widowmaker's Fangツルハシ、Widow's Kissバックアクセサリー。8ポイント以上でWidowmaker's Markスプレー。現金賞金$0。",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/overwatch-widowmaker-cup-chapter-7-mini-season-official-rules"
+        },
+        {
+          "text": "Epic公式ゼロビルド大会。開催枠 S43_OverwatchWidowmakerCup_ZB（通常BR / Mobileとは独立）。",
+          "url": "https://www.fortnite.com/competitive/events/S43_OverwatchWidowmakerCup_ZB/?region=EU"
+        },
+        {
+          "text": "Fortnite TrackerのZero Buildデュオ順位表・開催時刻を照合。",
+          "url": "https://fortnitetracker.com/events/epicgames_S43_OverwatchWidowmakerCup_ZB_OCE"
+        }
+      ]
+    },
+    {
+      "id": "ch7s5-overwatch-widowmaker-mobile-cup",
+      "name": "Overwatch: Widowmaker Mobile Cup",
+      "chapter": 7,
+      "season": 5,
+      "seasonId": "S43",
+      "sourceEventIds": [
+        "S43_OverwatchWidowmakerCup_Mobile"
+      ],
+      "series": "skin-cup",
+      "mode": "reload-zero-build",
+      "subtype": "overwatch-widowmaker-mobile-cup",
+      "team": "solo",
+      "platform": "mobile",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "Epic公式ルール2026-11-19 2.2.2 / Attachment C Mobile：タッチ操作限定のReloadソロ・Zero Build、約75分・最大8試合。OCE/ME/BR/NAW上位30名、EU上位200名、NAC上位150名。Widowmaker衣装、Widowmaker's Fangツルハシ、Widow's Kissバックアクセサリー。5ポイント以上でWidowmaker's Markスプレー。現金賞金$0。BR/ZBの8ポイント報酬とは区別。",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/overwatch-widowmaker-cup-chapter-7-mini-season-official-rules"
+        },
+        {
+          "text": "Epic公式Mobileソロ開催枠 S43_OverwatchWidowmakerCup_Mobile。BR / ZBとは独立。",
+          "url": "https://www.fortnite.com/competitive/events/S43_OverwatchWidowmakerCup_Mobile/?region=EU"
+        },
+        {
+          "text": "Fortnite TrackerおよびFortnite.GGのタッチ操作限定Reloadソロ・地域別UTC開始時刻を照合。",
+          "url": "https://fortnitetracker.com/events/epicgames_S43_OverwatchWidowmakerCup_Mobile_OCE"
         }
       ]
     },
