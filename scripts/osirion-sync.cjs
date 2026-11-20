@@ -604,7 +604,8 @@ async function main(){
  // BEFORE querying Osirion so scheduled runs cannot create another quota spike.
  const traffic=trafficPlan({historical,config,
    historyStatus:read('history-sync-status.json'),
-   recentStatus:read('auto-sync-status.json')});
+   recentStatus:read('auto-sync-status.json'),
+   participationStatus:read('participation-status.json')});
  console.log('OSIRION_TRAFFIC_PLAN '+JSON.stringify(traffic));
  if(traffic.skip){
   console.warn('OSIRION_SHARED_COOLDOWN_SKIP '+JSON.stringify({
