@@ -23,6 +23,10 @@ const read=name=>name==='results.json'?readResults(root).rows:JSON.parse(fs.read
 const write=(name,obj)=>name==='results.json'?publishResults(root,obj):fs.writeFileSync(path.join(root,name),JSON.stringify(obj,null,2)+'\n');
 const regions=['ME','EU','NAC','NAW','OCE','BR'];
 let providerPacer=null;
+function configureProviderPacing(intervalMs){
+ providerPacer=createPacer({intervalMs});
+ return providerPacer;
+}
 const REVIEW_SERIES=new Set(['victory-cup','cash-cup','fncs','performance-evaluation','skin-cup','icon-cup','playstation-cup','unreal-cup','nvidia-cup','test-cup']);
 const nowJst=utc=>new Date(new Date(utc).getTime()+9*3600000).toISOString().slice(0,10);
 // The history window must follow new competitions after the initial 2024-2026 backfill.
@@ -609,7 +613,7 @@ async function main(){
   }));
   return;
  }
- providerPacer=createPacer({intervalMs:traffic.minRequestIntervalMs});
+ configureProviderPacing(traffic.minRequestIntervalMs);
  const data={results:read('results.json'),players:read('players.json'),tournaments:read('tournaments.json'),schedule:read('schedule.json'),updates:read('updates.json')};
  const {accounts,conflicts}=linkedAccounts(data);
  data.verifiedAccounts=accounts;
@@ -870,4 +874,4 @@ async function main(){
   transientFailures,malformedFailures,heldWindows:skippedLeaderboards.length}));
 }
 if(require.main===module)main().catch(e=>{console.error('OSIRION_SYNC_ERROR '+e.stack);process.exitCode=1});
-module.exports={identity,linkedAccounts,parseStage,parseReviewStage,discover,discoverUnmapped,selectActiveWindows,selectHistoricalWindows,historicalEvidenceScore,historicalEvidenceIndex,historicalPriorityAudit,resolveHistoricalScope,fetchJson,advancementLimit,normalizeRow,getTournaments,getLeaderboard,leaderboardResponseError,recoverableLeaderboardFailure,holdLeaderboardWindow,holdEmptyFirstPage,transientLeaderboardFailure,providerRateLimitFailure,main};
+module.exports={identity,linkedAccounts,parseStage,parseReviewStage,discover,discoverUnmapped,selectActiveWindows,selectHistoricalWindows,historicalEvidenceScore,historicalEvidenceIndex,historicalPriorityAudit,resolveHistoricalScope,fetchJson,advancementLimit,normalizeRow,getTournaments,getLeaderboard,leaderboardResponseError,recoverableLeaderboardFailure,holdLeaderboardWindow,holdEmptyFirstPage,transientLeaderboardFailure,providerRateLimitFailure,configureProviderPacing,main};
