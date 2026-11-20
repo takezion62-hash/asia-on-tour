@@ -327,6 +327,14 @@
         {
           "id": "overwatch-widowmaker-mobile-cup",
           "label": "Overwatch: Widowmaker Mobile Cup"
+        },
+        {
+          "id": "days-of-play-playstation-cup-zero-build",
+          "label": "Days of Play PlayStation Cup (Zero Build)"
+        },
+        {
+          "id": "mobile-reload-mini-venture-victory-cup",
+          "label": "Mobile Reload (Mini Venture) Victory Cup"
         }
       ]
     },
@@ -2707,6 +2715,10 @@
         {
           "text": "Epic IDごとのFortnite Trackerイベントプロフィール照合。",
           "url": "https://fortnitetracker.com/profile/all/Laimustk/events?id=49c0b08e-1e72-45c1-bd34-3682d10d1043"
+        },
+        {
+          "text": "Epic公式2023年6月PlayStation Zero BuildのBR地域決勝51〜75位に$150支給。",
+          "url": "https://www.fortnite.com/news/fortnite-playstation-cup-chapter-4-season-3-official-rules-june-2023"
         }
       ]
     },
@@ -3192,6 +3204,58 @@
         {
           "text": "Fortnite Tracker NAWの1ラウンド順位表・賞金表（ユーザー画像1917〜1924照合）。",
           "url": "https://fortnitetracker.com/events/epicgames_S39_NvidiaCup_NAW?window=S39_NvidiaCup_NAW"
+        }
+      ]
+    },
+    {
+      "id": "ch7s3-days-of-play-playstation-cup-zb",
+      "name": "Days of Play PlayStation Cup (Zero Build)",
+      "chapter": 7,
+      "season": 3,
+      "seasonId": "S41",
+      "sourceEventIds": [
+        "S41_PSCupDaysOfPlay_ZB"
+      ],
+      "series": "playstation-cup",
+      "mode": "zero-build",
+      "subtype": "days-of-play-playstation-cup-zero-build",
+      "team": "solo",
+      "platform": "playstation",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "Epic公式規則：OCE 2026-06-09 Zero Build決勝1位は順位賞金$1,000、Victory Royale回数とは独立。",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/days-of-play-playstation-cup-chapter-7-season-3-official-rules"
+        },
+        {
+          "text": "Fortnite Tracker OCE ゼロビルド決勝 2026年6月9日。",
+          "url": "https://fortnitetracker.com/events/epicgames_S41_PSCupDaysOfPlay_ZB_OCE?window=S41_PSCupDaysOfPlay_ZB_Final_OCE"
+        }
+      ]
+    },
+    {
+      "id": "ch7s4-mobile-reload-mini-venture-victory-cup",
+      "name": "Mobile Reload (Mini Venture) Victory Cup",
+      "chapter": 7,
+      "season": 4,
+      "seasonId": "S42",
+      "sourceEventIds": [
+        "S42_MobileVictoryCup_ReloadminiV"
+      ],
+      "series": "victory-cup",
+      "mode": "reload-zero-build",
+      "subtype": "mobile-reload-mini-venture-victory-cup",
+      "team": "solo",
+      "platform": "mobile",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "Epic公式：Mobile Mini VentureはSoloのZero Build Reload、決勝Round 2のVictory Royaleごとに個人$50。",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-mobile-victory-cups-chapter-7-season-4-official-rules"
+        },
+        {
+          "text": "Fortnite Tracker EU 2026-09-20 Event 1 Round 2決勝。",
+          "url": "https://fortnitetracker.com/events/epicgames_S42_MobileVictoryCup_ReloadminiV_EU?window=S42_MobileVictoryCup_Event1_Round2_EU"
         }
       ]
     }
