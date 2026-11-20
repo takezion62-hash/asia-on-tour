@@ -11,7 +11,7 @@
   "provider": "osirion",
   "linkedPlayers": 676,
   "trackedWindows": 3238,
-  "found": 23,
+  "found": 17,
   "skipped": 17,
   "imported": 2,
   "scannedPages": 96,
@@ -20,7 +20,7 @@
   "alreadyRegistered": 6661,
   "autoApprovedTotal": 3263,
   "invalidCachedCandidates": 1,
-  "manualReviewCandidates": 23,
+  "manualReviewCandidates": 17,
   "autoApprovedCosmeticThisRun": 0,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
@@ -47,10 +47,10 @@
     "S30_d4vd_Cup",
     "S31_FNCSCommunityCups_KunoRenzo"
   ],
-  "message": "公式Epic ID・順位・開催枠を検証し20件を掲載。残り23件。未確認賞金を推定しない。",
-  "manuallyPublished": 2219,
+  "message": "公式予選突破6件を通常成績に追加。重複0件を解消。残り確認待ち17件。未確認賞金は推定しない。",
+  "manuallyPublished": 2225,
   "manuallyResolvedDuplicates": 169,
-  "lastReviewedBatchAt": "2026-11-20T05:28:58.481Z",
+  "lastReviewedBatchAt": "2026-11-20T05:29:17.032Z",
   "manuallyCorrected": 13,
   "lastCorrectedReviewAt": "2026-11-13T13:45:16.115Z",
   "concurrentMerge": {
@@ -263,13 +263,11 @@
     "unrealTeamsWithCash": 2
   },
   "latestManualReview": {
-    "reviewedAt": "2026-11-20T05:28:44.562Z",
-    "reviewedCandidates": 3,
-    "published": 0,
-    "remainingPending": 43,
-    "duplicatesResolved": 0,
-    "participationArchived": 3,
-    "policy": "Epic ID + official calendar + mature original ranked checkpoint; 2024 $100/VR; NAW top200 costume"
+    "reviewedAt": "2026-11-20T05:29:17.032Z",
+    "reviewedCandidates": 6,
+    "published": 6,
+    "remainingPending": 17,
+    "policy": "Official 2024 solo qualification cutoffs and exact verified saved Epic-ID ranked rows; no inferred cash"
   },
   "autoApprovedDuoQualifierThisRun": 1,
   "latestParticipationReview": {
