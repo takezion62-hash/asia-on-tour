@@ -30,7 +30,7 @@ test('PlayStation cash final participation is preserved despite rank 41+ zero wi
   assert.equal(row.round,'Final / 賞金決勝');
   assert.equal(row.region,'NAW');
   assert.equal(row.event,'PlayStation Cup');
-  assert.match(row.note,/決勝参加は確認/);
+  assert.match(row.note,/決勝出場は確認/);
   assert.equal(row.players.length,1);
   assert.equal(row.profileUrl,x.profileUrls[0]);
   assert.ok(x.rank>40);
@@ -83,7 +83,7 @@ test('approval snapshots reject any modification to payouts, ranks, team, Epic U
   const r=V.project(x),a=V.approval(x);
   assert.equal(V.verifyRow(r,a),true);
   for(const [field,value] of [['rank',x.rank+1],['prize',x.prize+100],
-   ['prizePerPlayer',200],['teamPrize',0],['vrs',x.vrs+1],
+   ['prizePerPlayer',200],['teamPrize',x.teamPrize===0?100:0],['vrs',x.vrs+1],
    ['kills',x.kills+1],['matches',x.matches+1],['points',x.points+1],
    ['players',['偽名']],['profiles',[]],['kind','参加確認'],['round','Round 1'],
    ['source','https://example.com']]){
