@@ -83,3 +83,13 @@ test('no mandatory sleeping between requests when a test disables pacing',async(
  assert.equal(slept,0);
  assert.equal(pacer.metrics().requests,2);
 });
+
+test('tournament discovery never retries a quota-denied catalog immediately',async()=>{
+ const {getTournaments}=require('../scripts/osirion-sync.cjs');
+ const original=globalThis.fetch;let calls=0;
+ try{
+  globalThis.fetch=async()=>{calls++;return {ok:false,status:429}};
+  await assert.rejects(getTournaments(true),/Osirion API HTTP 429/);
+  assert.equal(calls,1,'no additional requests after first catalog HTTP429');
+ }finally{globalThis.fetch=original}
+});
