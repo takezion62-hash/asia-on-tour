@@ -2,6 +2,66 @@
   "version": 1,
   "entries": [
     {
+      "id": "review-publication-pending-20261114-8e33902b169e-verified-rule-1",
+      "date": "2026-11-21",
+      "type": "records",
+      "title": "管理者確認済み戦績 6件を追加",
+      "description": "公式規則に基づく予選突破または決勝0VRのみを確認。未確認賞金なし。",
+      "recordIds": [
+        "auto-s30-0b454162b234",
+        "auto-s30-58a0f629c7ab",
+        "auto-s30-549d68ec0738",
+        "auto-s30-5b1a6ea9fecc",
+        "auto-s32-c93657ccc90b",
+        "auto-s32-fac97ad5affd"
+      ]
+    },
+    {
+      "id": "review-publication-pending-20261114-8e33902b169e-attendance-only-1",
+      "date": "2026-11-21",
+      "type": "records",
+      "title": "管理者確認済み戦績 17件を追加",
+      "description": "Epic ID・開催枠・順位表を再照合した出場確認のみ。賞金・予選突破・スキン獲得を未認定。",
+      "recordIds": [
+        "auto-s39-73c32aa0ff06",
+        "auto-s39-94e2631fa3ba",
+        "auto-s37-632890df244e",
+        "auto-s37-884f5f37bd3e",
+        "auto-s37-705c8da0e54f",
+        "auto-s37-cb076efadae8",
+        "auto-s37-498cb0312dc6",
+        "auto-s37-5e185364c446",
+        "auto-s37-ad05463c0211",
+        "auto-s37-e42b04ec9630",
+        "auto-s37-9e4c8f17d545",
+        "auto-s37-236832646d56",
+        "auto-s37-3080bf3cc9b4",
+        "auto-s37-07e62fe673ef",
+        "auto-s37-ae76149db8d3",
+        "auto-s39-ea95af6f8ee9",
+        "auto-s39-20ae2d118172"
+      ]
+    },
+    {
+      "id": "owner-s21-s25-s41-s42-ten-20261121",
+      "date": "2026-11-21",
+      "type": "records",
+      "title": "2022/2023 PlayStation＋2026 Mobile Reload ZB 決勝10件・$1,700",
+      "description": "画像1970〜1979：S21 OCE決勝5件（62/67位各$200、91/94/95位$0）、S41 OCE Days of Play ZB優勝$1,000、S25 BR PlayStation ZB 53位$150、S42 EU Mobile Reload Mini Venture ZBの1VR各$50を3名。本人Epic UUIDと公式規則で確認し、賞金の送金完了は未確認。",
+      "recordIds": [
+        "owner-s21-oce-ps-20220724-r62",
+        "owner-s21-oce-ps-20220724-r67",
+        "owner-s21-oce-ps-20220724-r91",
+        "owner-s21-oce-ps-20220724-r94",
+        "owner-s21-oce-ps-20220724-r95",
+        "owner-s41-oce-days-zb-20260609-r1",
+        "owner-s25-br-ps-zb-20230620-r53",
+        "owner-s42-eu-mobile-20260920-r17",
+        "owner-s42-eu-mobile-20260920-r42",
+        "owner-s42-eu-mobile-20260920-r47"
+      ]
+    },
+    {
       "id": "verified-review-round5-2061d2c3d6c5",
       "date": "2026-11-21",
       "type": "records",
