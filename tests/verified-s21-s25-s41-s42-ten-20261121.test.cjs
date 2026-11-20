@@ -29,16 +29,16 @@ test('ten immutable Epic UUIDs, correct season and tournament window',()=>{
   assert.equal(z.name,name);assert.equal(z.rawName,raw);
   assert.equal(z.epicUUID,id);assert.equal(V.epicId(z.profileUrl),id);
   assert.equal(z.windowId,m.windowId);assert.equal(z.tournamentId,m.tournamentId);
-  assert.equal(z.round,s==='S42'?'Event 1 · Round 2 / 賞金決勝':cash?'Final / 賞金決勝':'Final / 決勝');
+  assert.equal(z.round,s==='S42'?'Event 1 · Round 2 / 賞金決勝':'Final / 賞金決勝');
  }
  for(const name of ['KENTAch','KanA','モバイル勢のまかろん','Reo','れぼりゅーしょん'])
   assert.ok(p.candidates.some(z=>z.name===name),name);
  assert.ok(p.confirmedAliases['れぼりゅーしょん'].includes('YOTTAれぼりゅーしゅん'));
 });
-test('2022 OCE ranks 91, 94, 95 are recorded as noncash final attendance',()=>{
+test('2022 OCE ranks 91, 94, 95 remain zero-cash rows of the same cash final',()=>{
  for(const z of V.DOC.batch.entries.filter(x=>x.seasonId==='S21'&&x.rank>90)){
   const r=V.project(z);
-  assert.equal(r.kind,'決勝');assert.equal(r.vrs,0);assert.equal(r.prize,0);
+  assert.equal(r.kind,'賞金決勝');assert.equal(r.vrs,0);assert.equal(r.prize,0);
  }
  for(const z of V.DOC.batch.entries.filter(x=>x.seasonId==='S21'&&x.rank<=90)){
   const r=V.project(z);
