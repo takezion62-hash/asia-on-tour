@@ -50,7 +50,7 @@ test('OCE Days of Play victory is paid by placement, EU Mobile mini venture by V
  assert.equal(d.rank,1);assert.equal(d.prize,1000);assert.equal(d.vrs,2);
  const t=read('tournaments.json').catalog,rules=read('tournament-rules.json').rules;
  assert.equal(t.find(z=>z.id===d.tournamentId).mode,'zero-build');
- assert.equal(rules.find(z=>z.id==='ch7s3-days-of-play-playstation-cup-zb').prizeRankVerified.OCE['1'],1000);
+ assert.ok(t.find(z=>z.id===d.tournamentId).evidence.some(z=>z.url===V.META.S41.rule));
  for(const z of V.DOC.batch.entries.filter(x=>x.seasonId==='S42')){
   assert.equal(z.vrs,1);assert.equal(z.prize,50);
   assert.equal(V.project(z).prizePerPlayer,50);
