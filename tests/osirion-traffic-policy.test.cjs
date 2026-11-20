@@ -47,7 +47,10 @@ test('normal provider scan stays within configured limits and uses slower histor
   historyStatus:null,recentStatus:null,now:NOW});
  assert.equal(regular.pageBudget,30);
  assert.equal(history.pageBudget,22);
- assert.ok(history.minRequestIntervalMs>=regular.minRequestIntervalMs);
+ assert.equal(history.minRequestIntervalMs,1500);
+ assert.equal(regular.minRequestIntervalMs,1200);
+ assert.ok(60000/history.minRequestIntervalMs<60);
+ assert.ok(60000/regular.minRequestIntervalMs<60);
 });
 test('invalid, impossible or disabled cooldowns never block a healthy workflow',()=>{
  const bad=[
