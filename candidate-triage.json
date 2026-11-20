@@ -1,22 +1,30 @@
 {
   "version": 1,
-  "sourceCheckedAt": "2026-11-20T01:46:43.536Z",
-  "total": 17,
+  "sourceCheckedAt": "2026-11-20T05:32:36.373Z",
+  "total": 26,
   "alreadyResolved": 0,
   "byYear": [
     {
       "name": "2024",
-      "count": 12
+      "count": 17
     },
     {
       "name": "2025",
       "count": 5
+    },
+    {
+      "name": "2026",
+      "count": 4
     }
   ],
   "byRegion": [
     {
+      "name": "ME",
+      "count": 6
+    },
+    {
       "name": "NAC",
-      "count": 7
+      "count": 10
     },
     {
       "name": "NAW",
@@ -29,8 +37,16 @@
   ],
   "byTournament": [
     {
+      "name": "FNCS Division 1 / ME / 2026",
+      "count": 4
+    },
+    {
       "name": "NVIDIA GeForce RTX Cup / NAW / 2025",
       "count": 5
+    },
+    {
+      "name": "PlayStation Cup / ME / 2024",
+      "count": 2
     },
     {
       "name": "PlayStation Cup Battle Royale / OCE / 2024",
@@ -41,18 +57,26 @@
       "count": 4
     },
     {
+      "name": "Solo Victory Cup Battle Royale / NAC / 2024",
+      "count": 2
+    },
+    {
       "name": "ZB Solo Victory Cup / NAC / 2024",
-      "count": 7
+      "count": 8
     }
   ],
   "byStatus": [
     {
       "name": "duplicate-risk",
-      "count": 10
+      "count": 12
     },
     {
       "name": "partial-scan",
-      "count": 7
+      "count": 10
+    },
+    {
+      "name": "rules-review",
+      "count": 4
     }
   ],
   "queue": [
@@ -222,6 +246,72 @@
       "rewardState": "cash-unconfirmed"
     },
     {
+      "id": "auto-s33-9a9e4a9f2302",
+      "origin": "history",
+      "date": "2024-12-08",
+      "year": "2024",
+      "region": "ME",
+      "tournamentId": "ch6s1-playstation-cup",
+      "event": "PlayStation Cup",
+      "round": "単一開催枠 / 参加確認",
+      "player": "xyxyxyxyxyxyzz",
+      "kind": "参加確認",
+      "rank": 93,
+      "points": 7,
+      "kills": 0,
+      "vrs": 0,
+      "prize": null,
+      "source": "https://www.fortnite.com/competitive/events/S33_PlaystationCup/?region=ME&round=S33_PlaystationCupFinal_ME",
+      "status": "duplicate-risk",
+      "action": "既存の同一選手・ラウンドと突合（自動統合しない）",
+      "reason": "確認専用大会は自動承認不可",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": true,
+        "observedPartial": false,
+        "seenPages": 1,
+        "totalPages": 1,
+        "sourceKey": "epicgames_S33_PlaystationCup_ME/S33_PlaystationCupFinal_ME",
+        "possibleExistingId": "ps-s33-me-s33mebr-final-20241208-r93"
+      },
+      "rewardState": "cash-unconfirmed"
+    },
+    {
+      "id": "auto-s33-f41570d9396f",
+      "origin": "history",
+      "date": "2024-12-08",
+      "year": "2024",
+      "region": "ME",
+      "tournamentId": "ch6s1-playstation-cup",
+      "event": "PlayStation Cup",
+      "round": "単一開催枠 / 参加確認",
+      "player": "Mofu",
+      "kind": "参加確認",
+      "rank": 36,
+      "points": 118,
+      "kills": 10,
+      "vrs": 0,
+      "prize": null,
+      "source": "https://www.fortnite.com/competitive/events/S33_PlaystationCup/?region=ME&round=S33_PlaystationCupFinal_ME",
+      "status": "duplicate-risk",
+      "action": "既存の同一選手・ラウンドと突合（自動統合しない）",
+      "reason": "確認専用大会は自動承認不可",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": true,
+        "observedPartial": false,
+        "seenPages": 1,
+        "totalPages": 1,
+        "sourceKey": "epicgames_S33_PlaystationCup_ME/S33_PlaystationCupFinal_ME",
+        "possibleExistingId": "ps-s33-me-s33mebr-final-20241208-r36"
+      },
+      "rewardState": "cash-unconfirmed"
+    },
+    {
       "id": "auto-s39-25299cf460e5",
       "origin": "history",
       "date": "2025-12-22",
@@ -247,7 +337,7 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 36,
+        "seenPages": 38,
         "totalPages": 100,
         "sourceKey": "epicgames_S39_NvidiaCup_NAW/S39_NvidiaCup_NAW",
         "possibleExistingId": "owner-s39-naw-nvidia-20251222-r33"
@@ -280,7 +370,7 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 36,
+        "seenPages": 38,
         "totalPages": 100,
         "sourceKey": "epicgames_S39_NvidiaCup_NAW/S39_NvidiaCup_NAW",
         "possibleExistingId": "owner-s39-naw-nvidia-20251222-r53"
@@ -313,7 +403,7 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 36,
+        "seenPages": 38,
         "totalPages": 100,
         "sourceKey": "epicgames_S39_NvidiaCup_NAW/S39_NvidiaCup_NAW",
         "possibleExistingId": "owner-s39-naw-nvidia-20251222-r71"
@@ -346,7 +436,7 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 36,
+        "seenPages": 38,
         "totalPages": 100,
         "sourceKey": "epicgames_S39_NvidiaCup_NAW/S39_NvidiaCup_NAW",
         "possibleExistingId": "owner-s39-naw-nvidia-20251222-r69"
@@ -379,10 +469,142 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 36,
+        "seenPages": 38,
         "totalPages": 100,
         "sourceKey": "epicgames_S39_NvidiaCup_NAW/S39_NvidiaCup_NAW",
         "possibleExistingId": "owner-s39-naw-nvidia-20251222-r36"
+      },
+      "rewardState": "cash-unconfirmed"
+    },
+    {
+      "id": "auto-s39-10c503df6e7f",
+      "origin": "history",
+      "date": "2026-03-03",
+      "year": "2026",
+      "region": "ME",
+      "tournamentId": "ch7s1-fncs-division-1",
+      "event": "FNCS Division 1",
+      "round": "単一開催枠 / 参加確認",
+      "player": "Stain / Job",
+      "kind": "参加確認",
+      "rank": 305,
+      "points": 64,
+      "kills": 14,
+      "vrs": 0,
+      "prize": null,
+      "source": "https://www.fortnite.com/competitive/events/S39_FNCSDivisionalCup_Division1/?region=ME&round=S39_FNCSDivisionalCup_Division1_Week5Day1_ME",
+      "status": "rules-review",
+      "action": "公式規則・賞金・突破・スキン条件を個別確認",
+      "reason": "確認専用大会は自動承認不可",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": true,
+        "observedPartial": false,
+        "seenPages": 4,
+        "totalPages": 4,
+        "sourceKey": "epicgames_S39_FNCSDivisionalCup_Division1_ME/S39_FNCSDivisionalCup_Division1_Week5Day1_ME",
+        "possibleExistingId": null
+      },
+      "rewardState": "cash-unconfirmed"
+    },
+    {
+      "id": "auto-s39-217331f07938",
+      "origin": "history",
+      "date": "2026-03-03",
+      "year": "2026",
+      "region": "ME",
+      "tournamentId": "ch7s1-fncs-division-1",
+      "event": "FNCS Division 1",
+      "round": "単一開催枠 / 参加確認",
+      "player": "meah / RiaM",
+      "kind": "参加確認",
+      "rank": 39,
+      "points": 341,
+      "kills": 25,
+      "vrs": 0,
+      "prize": null,
+      "source": "https://www.fortnite.com/competitive/events/S39_FNCSDivisionalCup_Division1/?region=ME&round=S39_FNCSDivisionalCup_Division1_Week5Day1_ME",
+      "status": "rules-review",
+      "action": "公式規則・賞金・突破・スキン条件を個別確認",
+      "reason": "確認専用大会は自動承認不可",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": true,
+        "observedPartial": false,
+        "seenPages": 4,
+        "totalPages": 4,
+        "sourceKey": "epicgames_S39_FNCSDivisionalCup_Division1_ME/S39_FNCSDivisionalCup_Division1_Week5Day1_ME",
+        "possibleExistingId": null
+      },
+      "rewardState": "cash-unconfirmed"
+    },
+    {
+      "id": "auto-s39-2c33fc53302d",
+      "origin": "history",
+      "date": "2026-03-03",
+      "year": "2026",
+      "region": "ME",
+      "tournamentId": "ch7s1-fncs-division-1",
+      "event": "FNCS Division 1",
+      "round": "単一開催枠 / 参加確認",
+      "player": "Asuka / Rabbit",
+      "kind": "参加確認",
+      "rank": 169,
+      "points": 181,
+      "kills": 15,
+      "vrs": 0,
+      "prize": null,
+      "source": "https://www.fortnite.com/competitive/events/S39_FNCSDivisionalCup_Division1/?region=ME&round=S39_FNCSDivisionalCup_Division1_Week5Day1_ME",
+      "status": "rules-review",
+      "action": "公式規則・賞金・突破・スキン条件を個別確認",
+      "reason": "確認専用大会は自動承認不可",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": true,
+        "observedPartial": false,
+        "seenPages": 4,
+        "totalPages": 4,
+        "sourceKey": "epicgames_S39_FNCSDivisionalCup_Division1_ME/S39_FNCSDivisionalCup_Division1_Week5Day1_ME",
+        "possibleExistingId": null
+      },
+      "rewardState": "cash-unconfirmed"
+    },
+    {
+      "id": "auto-s39-f3c3881cc81c",
+      "origin": "history",
+      "date": "2026-03-03",
+      "year": "2026",
+      "region": "ME",
+      "tournamentId": "ch7s1-fncs-division-1",
+      "event": "FNCS Division 1",
+      "round": "単一開催枠 / 参加確認",
+      "player": "huggyfv / rakirye",
+      "kind": "参加確認",
+      "rank": 43,
+      "points": 337,
+      "kills": 23,
+      "vrs": 0,
+      "prize": null,
+      "source": "https://www.fortnite.com/competitive/events/S39_FNCSDivisionalCup_Division1/?region=ME&round=S39_FNCSDivisionalCup_Division1_Week5Day1_ME",
+      "status": "rules-review",
+      "action": "公式規則・賞金・突破・スキン条件を個別確認",
+      "reason": "確認専用大会は自動承認不可",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": true,
+        "observedPartial": false,
+        "seenPages": 4,
+        "totalPages": 4,
+        "sourceKey": "epicgames_S39_FNCSDivisionalCup_Division1_ME/S39_FNCSDivisionalCup_Division1_Week5Day1_ME",
+        "possibleExistingId": null
       },
       "rewardState": "cash-unconfirmed"
     },
@@ -412,7 +634,7 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 71,
+        "seenPages": 73,
         "totalPages": 100,
         "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event5Round1_NAC",
         "possibleExistingId": null
@@ -445,7 +667,7 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 71,
+        "seenPages": 73,
         "totalPages": 100,
         "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event5Round1_NAC",
         "possibleExistingId": null
@@ -478,7 +700,7 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 71,
+        "seenPages": 73,
         "totalPages": 100,
         "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event5Round1_NAC",
         "possibleExistingId": null
@@ -511,7 +733,40 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 33,
+        "seenPages": 35,
+        "totalPages": 100,
+        "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event7Round1_NAC",
+        "possibleExistingId": null
+      },
+      "rewardState": "source-amount-present-not-verified-by-triage"
+    },
+    {
+      "id": "auto-s30-fedbdc5d9d46",
+      "origin": "history",
+      "date": "2024-07-30",
+      "year": "2024",
+      "region": "NAC",
+      "tournamentId": "ch5s3-zb-solo-victory",
+      "event": "ZB Solo Victory Cup",
+      "round": "Event 7 · Round 1 / 予選",
+      "player": "しこぴよフォートナイト",
+      "kind": "予選",
+      "rank": 3358,
+      "points": 111,
+      "kills": 5,
+      "vrs": 0,
+      "prize": 0,
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=NAC&round=S30_SoloZBVictoryCashCup_Event7Round1_NAC",
+      "status": "partial-scan",
+      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
+      "reason": "順位表の取得が完了していません",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": false,
+        "observedPartial": true,
+        "seenPages": 35,
         "totalPages": 100,
         "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event7Round1_NAC",
         "possibleExistingId": null
@@ -544,7 +799,7 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 87,
+        "seenPages": 89,
         "totalPages": 100,
         "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event8Round1_NAC",
         "possibleExistingId": null
@@ -577,7 +832,7 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 87,
+        "seenPages": 89,
         "totalPages": 100,
         "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event8Round1_NAC",
         "possibleExistingId": null
@@ -610,9 +865,75 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 87,
+        "seenPages": 89,
         "totalPages": 100,
         "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event8Round1_NAC",
+        "possibleExistingId": null
+      },
+      "rewardState": "source-amount-present-not-verified-by-triage"
+    },
+    {
+      "id": "auto-s31-56c4e7a0845b",
+      "origin": "history",
+      "date": "2024-09-10",
+      "year": "2024",
+      "region": "NAC",
+      "tournamentId": "ch5s4-solo-victory-cup",
+      "event": "Solo Victory Cup Battle Royale",
+      "round": "Event 2 · Round 1 / 予選",
+      "player": "112345abcde",
+      "kind": "予選",
+      "rank": 1796,
+      "points": 149,
+      "kills": 16,
+      "vrs": 1,
+      "prize": 0,
+      "source": "https://www.fortnite.com/competitive/events/S31_SoloVictoryCashCup/?region=NAC&round=S31_SoloVictoryCashCup_Event2Round1_NAC",
+      "status": "partial-scan",
+      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
+      "reason": "順位表の取得が完了していません",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": false,
+        "observedPartial": true,
+        "seenPages": 19,
+        "totalPages": 100,
+        "sourceKey": "epicgames_S31_SoloVictoryCashCup_NAC/S31_SoloVictoryCashCup_Event2Round1_NAC",
+        "possibleExistingId": null
+      },
+      "rewardState": "source-amount-present-not-verified-by-triage"
+    },
+    {
+      "id": "auto-s31-8eec7d81d0eb",
+      "origin": "history",
+      "date": "2024-09-10",
+      "year": "2024",
+      "region": "NAC",
+      "tournamentId": "ch5s4-solo-victory-cup",
+      "event": "Solo Victory Cup Battle Royale",
+      "round": "Event 2 · Round 1 / 予選",
+      "player": "ria",
+      "kind": "予選",
+      "rank": 1618,
+      "points": 151,
+      "kills": 21,
+      "vrs": 1,
+      "prize": 0,
+      "source": "https://www.fortnite.com/competitive/events/S31_SoloVictoryCashCup/?region=NAC&round=S31_SoloVictoryCashCup_Event2Round1_NAC",
+      "status": "partial-scan",
+      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
+      "reason": "順位表の取得が完了していません",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": false,
+        "observedPartial": true,
+        "seenPages": 19,
+        "totalPages": 100,
+        "sourceKey": "epicgames_S31_SoloVictoryCashCup_NAC/S31_SoloVictoryCashCup_Event2Round1_NAC",
         "possibleExistingId": null
       },
       "rewardState": "source-amount-present-not-verified-by-triage"
