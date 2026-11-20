@@ -50,6 +50,39 @@ test('Performance Evaluation only includes EU/NAC sessions confirmed by official
  assert.equal(rows.filter(x=>x.stage==='予選').length,8);
  assert.equal(rows.filter(x=>x.stage==='決勝').length,8);
 });
+test('Widowmaker Zero Build and Mobile add twelve unique overseas sessions with correct JST starts',()=>{
+ const base='S43_OverwatchWidowmakerCup',zb=base+'_ZB',mobile=base+'_Mobile';
+ const cases=[
+  {id:zb,mode:'zero-build',utc:{OCE:'2026-11-20T07:00:00Z',ME:'2026-11-20T15:00:00Z',
+   EU:'2026-11-20T18:00:00Z',BR:'2026-11-20T21:00:00Z',
+   NAC:'2026-11-21T00:00:00Z',NAW:'2026-11-21T02:00:00Z'}},
+  {id:mobile,mode:'reload-zero-build',utc:{OCE:'2026-11-20T06:00:00Z',ME:'2026-11-20T14:00:00Z',
+   EU:'2026-11-20T17:00:00Z',BR:'2026-11-20T20:00:00Z',
+   NAC:'2026-11-20T23:00:00Z',NAW:'2026-11-21T01:00:00Z'}}
+ ];
+ for(const x of cases){
+  const rows=data.sessions.filter(s=>s.eventId===x.id);
+  assert.equal(rows.length,6,x.id);
+  for(const [region,stamp] of Object.entries(x.utc)){
+   const matched=rows.filter(s=>s.region===region);
+   assert.equal(matched.length,1,x.id+' '+region);
+   const row=matched[0],date=new Date(new Date(stamp).getTime()+9*3600000).toISOString();
+   assert.equal(row.startUtc,stamp);assert.equal(row.mode,x.mode);
+   assert.equal(row.dateJst,date.slice(0,10));assert.equal(row.timeJst,date.slice(11,16));
+   assert.equal(row.round,'Session 1');assert.equal(row.series,'skin-cup');
+   assert.equal(row.stage,'単一ラウンド');assert.equal(row.rewardType,'cosmetic');
+   assert.equal(row.url,'https://www.fortnite.com/competitive/events/'+x.id+'/?region='+region);
+  }
+ }
+ for(const region of regions){
+  const dates=cases.map(x=>data.sessions.find(s=>s.eventId===x.id&&s.region===region));
+  assert.equal(new Date(dates[0].startUtc).getTime()-new Date(dates[1].startUtc).getTime(),3600000,
+   region+' Mobile must start exactly 60 minutes before ZB');
+ }
+ assert.equal(new Set(data.sessions.map(s=>s.id)).size,data.sessions.length);
+ assert.equal(data.sessions.filter(s=>[base,zb,mobile].includes(s.eventId)).length,18);
+});
+
 test('Overwatch Widowmaker BR has six source-backed overseas sessions and keeps ZB/Mobile separate',()=>{
  const id='S43_OverwatchWidowmakerCup';
  const rows=data.sessions.filter(x=>x.eventId===id);

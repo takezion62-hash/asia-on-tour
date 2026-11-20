@@ -311,6 +311,29 @@ function validateRegistry(doc,tournaments){
    if(!object(rule.cosmeticRanks)||!Object.keys(rule.cosmeticRanks).length||
       Object.entries(rule.cosmeticRanks).some(([region,value])=>!REGIONS.has(region)||!positive(value)))fail(id,'スキン獲得順位が不正');
    if(rule.prizePerVictory!==undefined||rule.advance!==undefined)fail(id,'スキン大会に現金賞金や予選通過を混在させないでください');
+   // Independently lock the other two Widowmaker modes to Attachment C.
+   // A Mobile score must never inherit the Zero Build / BR duo rewards.
+   if(id==='ch7s5-overwatch-widowmaker-cup-zero-build'||
+      id==='ch7s5-overwatch-widowmaker-mobile-cup'){
+    const mobile=id.endsWith('-mobile-cup');
+    const official='https://www.fortnite.com/competitive/rules-guidelines/rules-library/overwatch-widowmaker-cup-chapter-7-mini-season-official-rules';
+    const ranks=mobile?{OCE:30,ME:30,EU:200,BR:30,NAC:150,NAW:30}
+      :{OCE:50,ME:50,EU:500,BR:100,NAC:350,NAW:100};
+    const eventId=mobile?'S43_OverwatchWidowmakerCup_Mobile':'S43_OverwatchWidowmakerCup_ZB';
+    const cosmetics=['Widowmaker Outfit',"Widowmaker's Fang Pickaxe","Widow's Kiss Back Bling"];
+    if(rule.source!==official||rule.team!==(mobile?'solo':'duo')||
+       t.mode!==(mobile?'reload-zero-build':'zero-build')||
+       t.platform!==(mobile?'mobile':'cross-platform')||
+       rule.sessionMinutes!==(mobile?75:180)||
+       JSON.stringify(rule.eventIds)!==JSON.stringify([eventId])||
+       rule.matchCaps?.['スキン大会']!==(mobile?8:11)||
+       JSON.stringify(rule.cosmeticRanks)!==JSON.stringify(ranks)||
+       JSON.stringify(rule.cosmeticPrizes?.rankRewards)!==JSON.stringify(cosmetics)||
+       rule.cosmeticPrizes?.minimumPoints!==(mobile?5:8)||
+       rule.cosmeticPrizes?.spray!=="Widowmaker's Mark Spray"||
+       rule.autoApproval!=='verified-team-rank')
+       fail(id,'公式Widowmaker ZB/Mobileの別部門・地域別順位・コスメ報酬が不正');
+   }
    // Official 2026-11-19 Epic Battle Royale BRANCH of the Widowmaker event.
    // Separate Zero Build & touch-only Mobile event IDs must never share its cutoffs.
    if(id==='ch7s5-overwatch-widowmaker-cup-battle-royale'){

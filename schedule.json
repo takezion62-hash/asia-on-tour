@@ -4,7 +4,7 @@
   "seasonLabel": "CH7 Mini-Season",
   "checkedAt": "2026-11-06",
   "timezone": "Asia/Tokyo",
-  "note": "Confirmed overseas competitive sessions from Epic Games competitive event schedules; UTC starts converted to JST. Snapshot, not live. Region-locked FNCS (including FNCS Solos Reload Qualifiers, Heats, LCQ and Finals) excluded. FNCS Division 1 may be added if officially announced. Schedules and cosmetics are not archive results or confirmed player rewards. One Piece: Zoro Cup Battle Royale's six overseas 2026-11-06/07 UTC sessions were checked against the event schedule on 2026-11-06; cosmetic rewards are not player result records. Addendum 2026-11-20: six verified overseas Overwatch: Widowmaker Cup BR Duos sessions (OCE, ME, EU, BR, NAC, NAW), checked against Epic event pages and Fortnite Tracker UTC windows. Other regions/Zero Build/Mobile are distinct. No participation or prize claims inferred.",
+  "note": "Confirmed overseas competitive sessions from Epic Games competitive event schedules; UTC starts converted to JST. Snapshot, not live. Region-locked FNCS (including FNCS Solos Reload Qualifiers, Heats, LCQ and Finals) excluded. FNCS Division 1 may be added if officially announced. Schedules and cosmetics are not archive results or confirmed player rewards. One Piece: Zoro Cup Battle Royale's six overseas 2026-11-06/07 UTC sessions were checked against the event schedule on 2026-11-06; cosmetic rewards are not player result records. Addendum 2026-11-20: six verified overseas Overwatch: Widowmaker Cup BR Duos sessions (OCE, ME, EU, BR, NAC, NAW), checked against Epic event pages and Fortnite Tracker UTC windows. Other regions/Zero Build/Mobile are distinct. No participation or prize claims inferred. Addendum 2026-11-20: separate six-region Widowmaker Zero Build Duos and touch-only Mobile Reload Solo sessions verified against Epic event IDs and Fortnite Tracker/Fortnite.GG UTC schedules. Mobile starts one hour before BR/ZB in each region. No results or prizes inferred.",
   "sessions": [
     {
       "id": "s43_performanceevaluationtrios-eu-2026-11-05-1700-event-1-round-1",
@@ -1771,6 +1771,22 @@
       "url": "https://www.fortnite.com/competitive/events/S43_PerformanceEvaluationTrios/?region=NAC"
     },
     {
+      "id": "s43overwatchwidowmakercupmobile-oce-2026-11-20-0600-session-1",
+      "seasonId": "S43",
+      "name": "Overwatch: Widowmaker Mobile Cup",
+      "eventId": "S43_OverwatchWidowmakerCup_Mobile",
+      "region": "OCE",
+      "series": "skin-cup",
+      "mode": "reload-zero-build",
+      "round": "Session 1",
+      "stage": "単一ラウンド",
+      "startUtc": "2026-11-20T06:00:00Z",
+      "dateJst": "2026-11-20",
+      "timeJst": "15:00",
+      "url": "https://www.fortnite.com/competitive/events/S43_OverwatchWidowmakerCup_Mobile/?region=OCE",
+      "rewardType": "cosmetic"
+    },
+    {
       "id": "s43_overwatchwidowmakercup-oce-2026-11-20-0700-session-1",
       "seasonId": "S43",
       "name": "Overwatch: Widowmaker Cup Battle Royale",
@@ -1784,6 +1800,22 @@
       "dateJst": "2026-11-20",
       "timeJst": "16:00",
       "url": "https://www.fortnite.com/competitive/events/S43_OverwatchWidowmakerCup/?region=OCE",
+      "rewardType": "cosmetic"
+    },
+    {
+      "id": "s43overwatchwidowmakercupzb-oce-2026-11-20-0700-session-1",
+      "seasonId": "S43",
+      "name": "Overwatch: Widowmaker Cup Zero Build",
+      "eventId": "S43_OverwatchWidowmakerCup_ZB",
+      "region": "OCE",
+      "series": "skin-cup",
+      "mode": "zero-build",
+      "round": "Session 1",
+      "stage": "単一ラウンド",
+      "startUtc": "2026-11-20T07:00:00Z",
+      "dateJst": "2026-11-20",
+      "timeJst": "16:00",
+      "url": "https://www.fortnite.com/competitive/events/S43_OverwatchWidowmakerCup_ZB/?region=OCE",
       "rewardType": "cosmetic"
     },
     {
@@ -1802,6 +1834,22 @@
       "url": "https://www.fortnite.com/competitive/events/S43_ReloadZBDuosCashCup/?region=OCE"
     },
     {
+      "id": "s43overwatchwidowmakercupmobile-me-2026-11-20-1400-session-1",
+      "seasonId": "S43",
+      "name": "Overwatch: Widowmaker Mobile Cup",
+      "eventId": "S43_OverwatchWidowmakerCup_Mobile",
+      "region": "ME",
+      "series": "skin-cup",
+      "mode": "reload-zero-build",
+      "round": "Session 1",
+      "stage": "単一ラウンド",
+      "startUtc": "2026-11-20T14:00:00Z",
+      "dateJst": "2026-11-20",
+      "timeJst": "23:00",
+      "url": "https://www.fortnite.com/competitive/events/S43_OverwatchWidowmakerCup_Mobile/?region=ME",
+      "rewardType": "cosmetic"
+    },
+    {
       "id": "s43_overwatchwidowmakercup-me-2026-11-20-1500-session-1",
       "seasonId": "S43",
       "name": "Overwatch: Widowmaker Cup Battle Royale",
@@ -1815,6 +1863,22 @@
       "dateJst": "2026-11-21",
       "timeJst": "00:00",
       "url": "https://www.fortnite.com/competitive/events/S43_OverwatchWidowmakerCup/?region=ME",
+      "rewardType": "cosmetic"
+    },
+    {
+      "id": "s43overwatchwidowmakercupzb-me-2026-11-20-1500-session-1",
+      "seasonId": "S43",
+      "name": "Overwatch: Widowmaker Cup Zero Build",
+      "eventId": "S43_OverwatchWidowmakerCup_ZB",
+      "region": "ME",
+      "series": "skin-cup",
+      "mode": "zero-build",
+      "round": "Session 1",
+      "stage": "単一ラウンド",
+      "startUtc": "2026-11-20T15:00:00Z",
+      "dateJst": "2026-11-21",
+      "timeJst": "00:00",
+      "url": "https://www.fortnite.com/competitive/events/S43_OverwatchWidowmakerCup_ZB/?region=ME",
       "rewardType": "cosmetic"
     },
     {
@@ -1833,6 +1897,22 @@
       "url": "https://www.fortnite.com/competitive/events/S43_ReloadZBDuosCashCup/?region=ME"
     },
     {
+      "id": "s43overwatchwidowmakercupmobile-eu-2026-11-20-1700-session-1",
+      "seasonId": "S43",
+      "name": "Overwatch: Widowmaker Mobile Cup",
+      "eventId": "S43_OverwatchWidowmakerCup_Mobile",
+      "region": "EU",
+      "series": "skin-cup",
+      "mode": "reload-zero-build",
+      "round": "Session 1",
+      "stage": "単一ラウンド",
+      "startUtc": "2026-11-20T17:00:00Z",
+      "dateJst": "2026-11-21",
+      "timeJst": "02:00",
+      "url": "https://www.fortnite.com/competitive/events/S43_OverwatchWidowmakerCup_Mobile/?region=EU",
+      "rewardType": "cosmetic"
+    },
+    {
       "id": "s43_overwatchwidowmakercup-eu-2026-11-20-1800-session-1",
       "seasonId": "S43",
       "name": "Overwatch: Widowmaker Cup Battle Royale",
@@ -1846,6 +1926,22 @@
       "dateJst": "2026-11-21",
       "timeJst": "03:00",
       "url": "https://www.fortnite.com/competitive/events/S43_OverwatchWidowmakerCup/?region=EU",
+      "rewardType": "cosmetic"
+    },
+    {
+      "id": "s43overwatchwidowmakercupzb-eu-2026-11-20-1800-session-1",
+      "seasonId": "S43",
+      "name": "Overwatch: Widowmaker Cup Zero Build",
+      "eventId": "S43_OverwatchWidowmakerCup_ZB",
+      "region": "EU",
+      "series": "skin-cup",
+      "mode": "zero-build",
+      "round": "Session 1",
+      "stage": "単一ラウンド",
+      "startUtc": "2026-11-20T18:00:00Z",
+      "dateJst": "2026-11-21",
+      "timeJst": "03:00",
+      "url": "https://www.fortnite.com/competitive/events/S43_OverwatchWidowmakerCup_ZB/?region=EU",
       "rewardType": "cosmetic"
     },
     {
@@ -1864,6 +1960,22 @@
       "url": "https://www.fortnite.com/competitive/events/S43_ReloadZBDuosCashCup/?region=EU"
     },
     {
+      "id": "s43overwatchwidowmakercupmobile-br-2026-11-20-2000-session-1",
+      "seasonId": "S43",
+      "name": "Overwatch: Widowmaker Mobile Cup",
+      "eventId": "S43_OverwatchWidowmakerCup_Mobile",
+      "region": "BR",
+      "series": "skin-cup",
+      "mode": "reload-zero-build",
+      "round": "Session 1",
+      "stage": "単一ラウンド",
+      "startUtc": "2026-11-20T20:00:00Z",
+      "dateJst": "2026-11-21",
+      "timeJst": "05:00",
+      "url": "https://www.fortnite.com/competitive/events/S43_OverwatchWidowmakerCup_Mobile/?region=BR",
+      "rewardType": "cosmetic"
+    },
+    {
       "id": "s43_overwatchwidowmakercup-br-2026-11-20-2100-session-1",
       "seasonId": "S43",
       "name": "Overwatch: Widowmaker Cup Battle Royale",
@@ -1877,6 +1989,22 @@
       "dateJst": "2026-11-21",
       "timeJst": "06:00",
       "url": "https://www.fortnite.com/competitive/events/S43_OverwatchWidowmakerCup/?region=BR",
+      "rewardType": "cosmetic"
+    },
+    {
+      "id": "s43overwatchwidowmakercupzb-br-2026-11-20-2100-session-1",
+      "seasonId": "S43",
+      "name": "Overwatch: Widowmaker Cup Zero Build",
+      "eventId": "S43_OverwatchWidowmakerCup_ZB",
+      "region": "BR",
+      "series": "skin-cup",
+      "mode": "zero-build",
+      "round": "Session 1",
+      "stage": "単一ラウンド",
+      "startUtc": "2026-11-20T21:00:00Z",
+      "dateJst": "2026-11-21",
+      "timeJst": "06:00",
+      "url": "https://www.fortnite.com/competitive/events/S43_OverwatchWidowmakerCup_ZB/?region=BR",
       "rewardType": "cosmetic"
     },
     {
@@ -1895,6 +2023,22 @@
       "url": "https://www.fortnite.com/competitive/events/S43_ReloadZBDuosCashCup/?region=BR"
     },
     {
+      "id": "s43overwatchwidowmakercupmobile-nac-2026-11-20-2300-session-1",
+      "seasonId": "S43",
+      "name": "Overwatch: Widowmaker Mobile Cup",
+      "eventId": "S43_OverwatchWidowmakerCup_Mobile",
+      "region": "NAC",
+      "series": "skin-cup",
+      "mode": "reload-zero-build",
+      "round": "Session 1",
+      "stage": "単一ラウンド",
+      "startUtc": "2026-11-20T23:00:00Z",
+      "dateJst": "2026-11-21",
+      "timeJst": "08:00",
+      "url": "https://www.fortnite.com/competitive/events/S43_OverwatchWidowmakerCup_Mobile/?region=NAC",
+      "rewardType": "cosmetic"
+    },
+    {
       "id": "s43_overwatchwidowmakercup-nac-2026-11-21-0000-session-1",
       "seasonId": "S43",
       "name": "Overwatch: Widowmaker Cup Battle Royale",
@@ -1908,6 +2052,22 @@
       "dateJst": "2026-11-21",
       "timeJst": "09:00",
       "url": "https://www.fortnite.com/competitive/events/S43_OverwatchWidowmakerCup/?region=NAC",
+      "rewardType": "cosmetic"
+    },
+    {
+      "id": "s43overwatchwidowmakercupzb-nac-2026-11-21-0000-session-1",
+      "seasonId": "S43",
+      "name": "Overwatch: Widowmaker Cup Zero Build",
+      "eventId": "S43_OverwatchWidowmakerCup_ZB",
+      "region": "NAC",
+      "series": "skin-cup",
+      "mode": "zero-build",
+      "round": "Session 1",
+      "stage": "単一ラウンド",
+      "startUtc": "2026-11-21T00:00:00Z",
+      "dateJst": "2026-11-21",
+      "timeJst": "09:00",
+      "url": "https://www.fortnite.com/competitive/events/S43_OverwatchWidowmakerCup_ZB/?region=NAC",
       "rewardType": "cosmetic"
     },
     {
@@ -1926,6 +2086,22 @@
       "url": "https://www.fortnite.com/competitive/events/S43_ReloadZBDuosCashCup/?region=NAC"
     },
     {
+      "id": "s43overwatchwidowmakercupmobile-naw-2026-11-21-0100-session-1",
+      "seasonId": "S43",
+      "name": "Overwatch: Widowmaker Mobile Cup",
+      "eventId": "S43_OverwatchWidowmakerCup_Mobile",
+      "region": "NAW",
+      "series": "skin-cup",
+      "mode": "reload-zero-build",
+      "round": "Session 1",
+      "stage": "単一ラウンド",
+      "startUtc": "2026-11-21T01:00:00Z",
+      "dateJst": "2026-11-21",
+      "timeJst": "10:00",
+      "url": "https://www.fortnite.com/competitive/events/S43_OverwatchWidowmakerCup_Mobile/?region=NAW",
+      "rewardType": "cosmetic"
+    },
+    {
       "id": "s43_overwatchwidowmakercup-naw-2026-11-21-0200-session-1",
       "seasonId": "S43",
       "name": "Overwatch: Widowmaker Cup Battle Royale",
@@ -1939,6 +2115,22 @@
       "dateJst": "2026-11-21",
       "timeJst": "11:00",
       "url": "https://www.fortnite.com/competitive/events/S43_OverwatchWidowmakerCup/?region=NAW",
+      "rewardType": "cosmetic"
+    },
+    {
+      "id": "s43overwatchwidowmakercupzb-naw-2026-11-21-0200-session-1",
+      "seasonId": "S43",
+      "name": "Overwatch: Widowmaker Cup Zero Build",
+      "eventId": "S43_OverwatchWidowmakerCup_ZB",
+      "region": "NAW",
+      "series": "skin-cup",
+      "mode": "zero-build",
+      "round": "Session 1",
+      "stage": "単一ラウンド",
+      "startUtc": "2026-11-21T02:00:00Z",
+      "dateJst": "2026-11-21",
+      "timeJst": "11:00",
+      "url": "https://www.fortnite.com/competitive/events/S43_OverwatchWidowmakerCup_ZB/?region=NAW",
       "rewardType": "cosmetic"
     },
     {
