@@ -2154,6 +2154,36 @@
       ]
     },
     {
+      "id": "ch7s5-overwatch-widowmaker-cup-battle-royale",
+      "name": "Overwatch: Widowmaker Cup Battle Royale",
+      "chapter": 7,
+      "season": 5,
+      "seasonId": "S43",
+      "sourceEventIds": [
+        "S43_OverwatchWidowmakerCup"
+      ],
+      "series": "skin-cup",
+      "mode": "battle-royale",
+      "subtype": "overwatch-widowmaker-cup-battle-royale",
+      "team": "duo",
+      "platform": "cross-platform",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "Epic公式2026年11月19日公開 Overwatch: Widowmaker Cup規則2.2.1：通常Battle RoyaleとZero Buildは別枠のデュオ・各セッション約3時間、最大11試合。Attachment C（Battle Royale）：OCE/ME上位50組、EU上位500組、NAC上位350組、BR/NAW上位100組、ASIA上位50組がWidowmaker衣装・Widowmaker's Fangツルハシ・Widow's Kissバックアクセサリーのゲーム内報酬圏内。全地域8ptでWidowmaker's Markスプレー。現金賞金はなし、アイテム配布や受給資格の最終確認は別途必要。",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/overwatch-widowmaker-cup-chapter-7-mini-season-official-rules"
+        },
+        {
+          "text": "Epic公式大会（2026年11月20〜21日、6地域の時刻はTracker/Epicで個別照合）。通常BRデュオのイベントIDはS43_OverwatchWidowmakerCup。Zero Build版S43_OverwatchWidowmakerCup_ZB、Mobile版S43_OverwatchWidowmakerCup_Mobileとは別。",
+          "url": "https://www.fortnite.com/competitive/events/S43_OverwatchWidowmakerCup/?region=EU"
+        },
+        {
+          "text": "Fortnite Tracker大会ID・通常Battle Royale（Duos Build）・最大11試合、地域別の報酬境界と開始時刻を照合。",
+          "url": "https://fortnitetracker.com/events/epicgames_S43_OverwatchWidowmakerCup_NAC"
+        }
+      ]
+    },
+    {
       "id": "ch7s5-one-piece-buggy-cup-battle-royale",
       "name": "One Piece: Buggy Cup Battle Royale",
       "chapter": 7,
