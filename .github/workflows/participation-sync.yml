@@ -7,6 +7,7 @@ on:
       - "scripts/participation-archive.cjs"
       - "scripts/participation-sync.cjs"
       - "scripts/osirion-sync.cjs"
+      - "scripts/osirion-traffic-policy.cjs"
       - "scripts/auto-sync-core.cjs"
       - "participation-config.json"
       - ".github/workflows/participation-sync.yml"
@@ -16,7 +17,7 @@ on:
 permissions:
   contents: write
 concurrency:
-  group: aot-provider-participation-main
+  group: aot-provider-results-main
   cancel-in-progress: false
 jobs:
   participation:
@@ -31,8 +32,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
-      - name: Delay participation API calls
-        run: sleep 75
       - name: Scan confirmed Epic-ID players, not all public leaderboard participants
         run: node scripts/participation-sync.cjs
       - name: Validate published achievements and participation safety
