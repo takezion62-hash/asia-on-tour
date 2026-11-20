@@ -31,10 +31,15 @@ test('the exact original Epic UUIDs map to the right sixteen account links',()=>
  }
  assert.equal(V.DOC.batch.entries.flatMap(x=>x.profileUrls).length,16);
  const p=read('players.json');
- for(const name of ['Hakkun','TEITEI','Asuka','あおねこ','モバイル勢のまかろん'])
+ for(const name of ['Hakkun','TEITEI','Asuka','あおねこ','モバイル勢のまかろん','かぷせるてぃーてぃーTTていてい'])
   assert.ok(p.candidates.some(x=>x.name===name));
  assert.ok(p.confirmedAliases['Hakkun'].includes('RAGE Hakkun'));
  assert.ok(p.confirmedAliases['あおねこ'].includes('Celis あおねこ416'));
+ const same=V.DOC.batch.entries[4];
+ assert.deepEqual(same.playerNames,['かぷせるてぃーてぃーTTていてい','YAKOTA6x']);
+ assert.equal(same.rawNames[0],'Pollo 17 ǃ ǃ');
+ assert.equal(V.epicId(same.profileUrls[0]),'10a89ca8-d9c1-4036-8cc3-f4eac47bcc40');
+ assert.ok(p.candidates.find(z=>z.name==='かぷせるてぃーてぃーTTていてい')?.desc?.includes('10a89ca8-d9c1-4036-8cc3-f4eac47bcc40'));
 });
 test('six duo Victory Royale results earn team $200 but only $100 per player',()=>{
  for(const x of V.DOC.batch.entries.slice(0,6)){
@@ -88,7 +93,8 @@ test('publisher dry run is all-or-none, idempotent and does not alter old result
  assert.equal(status.vr,status.added?6:0);
  assert.deepEqual(status.newPlayers,status.added?V.DOC.expected.newPlayers:[]);
  assert.deepEqual(status.newAliases,status.added?
-   [{name:'Hakkun',raw:'TGR はっくん'},{name:'irodori',raw:'FA irodori'}]:[]);
+   [{name:'Hakkun',raw:'TGR はっくん'},{name:'irodori',raw:'FA irodori'},
+    {name:'かぷせるてぃーてぃーTTていてい',raw:'Pollo 17 ǃ ǃ'}]:[]);
  assert.deepEqual(files.map(sha),before);
  const rows=readResults(ROOT).rows,ids=new Set(V.DOC.batch.entries.map(x=>x.id));
  const present=rows.filter(x=>ids.has(x.id));
