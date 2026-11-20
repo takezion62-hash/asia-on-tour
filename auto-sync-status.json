@@ -1,24 +1,24 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-20T01:46:43.536Z",
+  "checkedAt": "2026-11-20T07:19:44.766Z",
   "mode": "review",
   "scope": "recent",
   "dateMode": null,
-  "selectedWindows": 1,
+  "selectedWindows": 2,
   "fromDate": null,
   "toDate": null,
   "provider": "osirion",
   "linkedPlayers": 676,
-  "trackedWindows": 93,
+  "trackedWindows": 95,
   "found": 0,
   "skipped": 0,
   "imported": 0,
-  "scannedPages": 1,
-  "completedWindows": 93,
+  "scannedPages": 2,
+  "completedWindows": 95,
   "identityConflicts": 3,
   "alreadyRegistered": 220,
-  "autoApprovedTotal": 3263,
+  "autoApprovedTotal": 3269,
   "invalidCachedCandidates": 0,
   "manualReviewCandidates": 0,
   "autoApprovedCosmeticThisRun": 0,
@@ -30,12 +30,11 @@
   "transientFailures": 0,
   "malformedFailures": 0,
   "skippedLeaderboards": [],
-  "reviewOnlyWindows": 81,
+  "reviewOnlyWindows": 83,
   "reviewOnlyCandidates": 0,
-  "unmappedEvents": 4,
+  "unmappedEvents": 3,
   "unmappedEventIds": [
     "S42_ArenaTestCup",
-    "S43_OverwatchWidowmakerCup",
     "S43_OverwatchWidowmakerCup_Mobile",
     "S43_OverwatchWidowmakerCup_ZB"
   ],
@@ -45,11 +44,11 @@
     "alreadyPublished": 0,
     "reviewConflicts": 0,
     "keptPending": 0,
-    "reconciledAt": "2026-11-20T01:46:48.819Z"
+    "reconciledAt": "2026-11-20T07:19:49.435Z"
   },
   "coverage": {
-    "total": 93,
-    "completed": 93,
+    "total": 95,
+    "completed": 95,
     "notStarted": 0,
     "partial": 0,
     "retryWaiting": 0,
@@ -59,13 +58,13 @@
     "completionPercent": 100,
     "byRegion": {
       "EU": {
-        "total": 19,
-        "completed": 19,
+        "total": 20,
+        "completed": 20,
         "pending": 0
       },
       "NAC": {
-        "total": 18,
-        "completed": 18,
+        "total": 19,
+        "completed": 19,
         "pending": 0
       },
       "OCE": {
@@ -91,8 +90,8 @@
     },
     "byYear": {
       "2026": {
-        "total": 93,
-        "completed": 93,
+        "total": 95,
+        "completed": 95,
         "pending": 0
       }
     },
@@ -113,7 +112,21 @@
   },
   "manuallyResolvedDuplicates": 47,
   "autoApprovedParticipationThisRun": 0,
-  "processedWindows": 1,
+  "processedWindows": 2,
   "providerRateLimitPaused": false,
-  "providerRateLimitRetryAfter": null
+  "providerRateLimitRetryAfter": null,
+  "providerTraffic": {
+    "skip": false,
+    "retryAfter": null,
+    "recovering": false,
+    "historical": false,
+    "participation": false,
+    "configuredPages": 50,
+    "pageBudget": 30,
+    "minRequestIntervalMs": 1200,
+    "reason": "steady-state",
+    "requests": 8,
+    "waitedMs": 5146,
+    "intervalMs": 1200
+  }
 }
