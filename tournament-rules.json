@@ -328,6 +328,86 @@
       ]
     },
     {
+      "id": "ch7s5-overwatch-widowmaker-cup-zero-build",
+      "seasonId": "S43",
+      "eventIds": [
+        "S43_OverwatchWidowmakerCup_ZB"
+      ],
+      "team": "duo",
+      "series": "skin-cup",
+      "chapter": 7,
+      "season": 5,
+      "matchCaps": {
+        "スキン大会": 11
+      },
+      "sessionMinutes": 180,
+      "cosmeticRanks": {
+        "OCE": 50,
+        "ME": 50,
+        "EU": 500,
+        "BR": 100,
+        "NAC": 350,
+        "NAW": 100
+      },
+      "cosmeticPrizes": {
+        "rankRewards": [
+          "Widowmaker Outfit",
+          "Widowmaker's Fang Pickaxe",
+          "Widow's Kiss Back Bling"
+        ],
+        "spray": "Widowmaker's Mark Spray",
+        "minimumPoints": 8
+      },
+      "autoApproval": "verified-team-rank",
+      "source": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/overwatch-widowmaker-cup-chapter-7-mini-season-official-rules",
+      "evidence": [
+        {
+          "text": "Epic Games公式2026-11-19 ルール2.2.1 / Attachment C Zero Build：Zero Buildデュオ、約180分、最大11試合。順位報酬は地域別上位{\"OCE\":50,\"ME\":50,\"EU\":500,\"BR\":100,\"NAC\":350,\"NAW\":100}、8ポイント以上でWidowmaker's Markスプレー。ゲーム内コスメのみ・現金賞金$0。Battle Royale / Zero Build / MobileのイベントID、参加形式、受給条件は独立。本人Epic IDと開催枠が確定したときだけ報酬対象として判定し、実際の配布完了は主張しない。",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/overwatch-widowmaker-cup-chapter-7-mini-season-official-rules"
+        }
+      ]
+    },
+    {
+      "id": "ch7s5-overwatch-widowmaker-mobile-cup",
+      "seasonId": "S43",
+      "eventIds": [
+        "S43_OverwatchWidowmakerCup_Mobile"
+      ],
+      "team": "solo",
+      "series": "skin-cup",
+      "chapter": 7,
+      "season": 5,
+      "matchCaps": {
+        "スキン大会": 8
+      },
+      "sessionMinutes": 75,
+      "cosmeticRanks": {
+        "OCE": 30,
+        "ME": 30,
+        "EU": 200,
+        "BR": 30,
+        "NAC": 150,
+        "NAW": 30
+      },
+      "cosmeticPrizes": {
+        "rankRewards": [
+          "Widowmaker Outfit",
+          "Widowmaker's Fang Pickaxe",
+          "Widow's Kiss Back Bling"
+        ],
+        "spray": "Widowmaker's Mark Spray",
+        "minimumPoints": 5
+      },
+      "autoApproval": "verified-team-rank",
+      "source": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/overwatch-widowmaker-cup-chapter-7-mini-season-official-rules",
+      "evidence": [
+        {
+          "text": "Epic Games公式2026-11-19 ルール2.2.2 / Attachment C Mobile：Mobileタッチ操作限定Reloadソロ、約75分、最大8試合。順位報酬は地域別上位{\"OCE\":30,\"ME\":30,\"EU\":200,\"BR\":30,\"NAC\":150,\"NAW\":30}、5ポイント以上でWidowmaker's Markスプレー。ゲーム内コスメのみ・現金賞金$0。Battle Royale / Zero Build / MobileのイベントID、参加形式、受給条件は独立。本人Epic IDと開催枠が確定したときだけ報酬対象として判定し、実際の配布完了は主張しない。",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/overwatch-widowmaker-cup-chapter-7-mini-season-official-rules"
+        }
+      ]
+    },
+    {
       "id": "ch7s5-one-piece-buggy-cup-battle-royale",
       "seasonId": "S43",
       "eventIds": [
