@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-19",
+  "updatedAt": "2026-11-20",
   "description": "Epic公式規則で確認した大会ルール。Unreal Cupもチーム順位と確認済みEpic IDを照合し、賞金圏内は地域別チーム/個人賞金を、圏外は$0として自動掲載（本人資格・支払確認とは別）。S36 Console Duos・S43 Reload ZB Duosの公式Round 1上位突破／全参加$0を、本人照合済み結果に限り安全に記録。Round 2賞金は推定しない。S42 Console Zero Build Solo Victory Cupは公式上位通過と決勝VR1回$100を個別登録。 S37 Console DuosおよびS42 Reload Duosの公式Round1上位突破・参加$0を、保存済み順位表と選手2名のEpicアカウントID・開催枠一致に限定して安全な自動承認に追加。Round2賞金は自動推定しない。 NVIDIA GeForce RTX Cupの公式7地域賞金表・参加条件・RTX 5080・8ptコスメ報酬を登録（厳格な本人・順位・開催枠検証で順位賞金を自動承認）。",
   "rules": [
     {
@@ -284,6 +284,46 @@
         {
           "text": "Epic公式規則 Attachment A/C、Fortnite TrackerのEvent2（2026-11-23/24）予選・決勝画面で進出枠/勝利ポイント/個人賞金を確認。",
           "url": "https://fortnitetracker.com/events/epicgames_S43_SquadsVictoryCup_NAC?window=S43_SquadsVictoryCup_Event2_Round2_NAC"
+        }
+      ]
+    },
+    {
+      "id": "ch7s5-overwatch-widowmaker-cup-battle-royale",
+      "seasonId": "S43",
+      "eventIds": [
+        "S43_OverwatchWidowmakerCup"
+      ],
+      "team": "duo",
+      "series": "skin-cup",
+      "chapter": 7,
+      "season": 5,
+      "matchCaps": {
+        "スキン大会": 11
+      },
+      "sessionMinutes": 180,
+      "cosmeticRanks": {
+        "OCE": 50,
+        "ME": 50,
+        "EU": 500,
+        "BR": 100,
+        "NAC": 350,
+        "NAW": 100
+      },
+      "cosmeticPrizes": {
+        "rankRewards": [
+          "Widowmaker Outfit",
+          "Widowmaker's Fang Pickaxe",
+          "Widow's Kiss Back Bling"
+        ],
+        "spray": "Widowmaker's Mark Spray",
+        "minimumPoints": 8
+      },
+      "autoApproval": "verified-team-rank",
+      "source": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/overwatch-widowmaker-cup-chapter-7-mini-season-official-rules",
+      "evidence": [
+        {
+          "text": "Epic Games公式2026/11/19 Overwatch: Widowmaker Cup規則2.2.1 / Attachment C Battle Royale：デュオのBR 1セッション約3時間・最大11試合。OCE/ME上位50組、EU上位500組、NAC上位350組、BR/NAW上位100組、ASIA上位50組の各選手にWidowmaker衣装、Widowmaker's Fangツルハシ、Widow's Kissバックアクセサリー。全地域8pt以上でWidowmaker's Markスプレー。ゲーム内コスメのみ、現金賞金$0。Zero Build / Mobileとは別大会。本人・完了順位表が未確認ならコスメ獲得済みと判定しない。",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/overwatch-widowmaker-cup-chapter-7-mini-season-official-rules"
         }
       ]
     },
