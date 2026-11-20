@@ -69,8 +69,17 @@ test('4つの定期スキャナーはスケジュールとmanualを保持、テ�
   const on=triggers(name),yaml=load(name);
   assert.ok(on.includes("cron: '"+cron+"'"),name+' schedule must remain untouched');
   assert.match(on,/^\s+workflow_dispatch:\s*$/m,name);
-  assert.match(on,/^\s+push:\s*$/m,name+' still reacts to operational code changes');
-  assert.ok(on.includes(code),name+' must watch real implementation changes');
+  if(name==='participation-sync.yml'){
+   // Provider workflows share a 1-running/1-pending concurrency group.
+   // On a 3-way push, GitHub cancels an older pending provider job.
+   // Keep participation scheduled/manual, with its code still executed there.
+   assert.doesNotMatch(on,/^\s+push:\s*$/m,'participation must not join the same push burst');
+   assert.match(yaml,/run:\s*node scripts\/participation-sync\.cjs/,
+    'participation script must still run under schedule/manual dispatch');
+  }else{
+   assert.match(on,/^\s+push:\s*$/m,name+' still reacts to operational code changes');
+   assert.ok(on.includes(code),name+' must watch real implementation changes');
+  }
   assert.doesNotMatch(on,/^\s+-\s*["']?tests\//m,name+' should not run an API scan only for test files');
   assert.match(yaml,/cancel-in-progress:\s*false/,name+' must serialize data writers safely');
   assert.match(yaml,/contents:\s*write/,name+' must retain publication permissions');
