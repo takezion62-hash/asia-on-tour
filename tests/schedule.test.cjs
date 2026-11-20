@@ -50,6 +50,33 @@ test('Performance Evaluation only includes EU/NAC sessions confirmed by official
  assert.equal(rows.filter(x=>x.stage==='予選').length,8);
  assert.equal(rows.filter(x=>x.stage==='決勝').length,8);
 });
+test('Overwatch Widowmaker BR has six source-backed overseas sessions and keeps ZB/Mobile separate',()=>{
+ const id='S43_OverwatchWidowmakerCup';
+ const rows=data.sessions.filter(x=>x.eventId===id);
+ assert.equal(rows.length,6);
+ const expected={OCE:['2026-11-20T07:00:00Z','2026-11-20','16:00'],
+  ME:['2026-11-20T15:00:00Z','2026-11-21','00:00'],
+  EU:['2026-11-20T18:00:00Z','2026-11-21','03:00'],
+  BR:['2026-11-20T21:00:00Z','2026-11-21','06:00'],
+  NAC:['2026-11-21T00:00:00Z','2026-11-21','09:00'],
+  NAW:['2026-11-21T02:00:00Z','2026-11-21','11:00']};
+ for(const [region,[utc,date,time]] of Object.entries(expected)){
+  const matches=rows.filter(x=>x.region===region);
+  assert.equal(matches.length,1);
+  const x=matches[0];
+  assert.deepEqual([x.startUtc,x.dateJst,x.timeJst],[utc,date,time]);
+  assert.equal(x.series,'skin-cup');
+  assert.equal(x.mode,'battle-royale');
+  assert.equal(x.round,'Session 1');
+  assert.equal(x.stage,'単一ラウンド');
+  assert.equal(x.rewardType,'cosmetic');
+  assert.equal(x.url,'https://www.fortnite.com/competitive/events/'+id+'/?region='+region);
+ }
+ assert.ok(!rows.some(x=>/Mobile|_ZB/.test(x.eventId)));
+ assert.equal(data.sessions.filter(x=>x.id.startsWith('s43_overwatchwidowmakercup-')).length,6);
+ assert.equal(new Set(data.sessions.map(x=>x.id)).size,data.sessions.length);
+});
+
 test('regional UTC starts convert to JST including overnight and cross-month timestamps',()=>{
  const get=(id,region,round)=>data.sessions.find(x=>x.eventId===id&&x.region===region&&x.round===round);
  const br=get('S43_TriosCashCup','BR','Event 1');
