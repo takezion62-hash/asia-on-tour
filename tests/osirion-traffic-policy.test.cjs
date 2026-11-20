@@ -96,3 +96,31 @@ test('tournament discovery never retries a quota-denied catalog immediately',asy
   assert.equal(calls,1,'no additional requests after first catalog HTTP429');
  }finally{globalThis.fetch=original}
 });
+
+test('participation is the third shared cooldown participant and has a reduced budget',()=>{
+ const participationStatus=report({start:NOW-hours(2),retry:NOW+hours(4)});
+ for(const [historical,participation] of [[true,false],[false,false],[true,true]]){
+  const plan=trafficPlan({historical,participation,
+   config:{maxPagesPerRun:40},historyStatus:null,recentStatus:null,participationStatus,now:NOW});
+  assert.equal(plan.skip,true);
+  assert.equal(plan.retryAfter,participationStatus.providerRateLimitRetryAfter);
+ }
+ const recovery=trafficPlan({historical:true,participation:true,config:{maxPagesPerRun:40},
+  historyStatus:null,recentStatus:null,
+  participationStatus:report({start:NOW-hours(7),retry:NOW-hours(1)}),now:NOW});
+ assert.equal(recovery.skip,false);
+ assert.equal(recovery.pageBudget,8);
+ assert.equal(recovery.minRequestIntervalMs,1500);
+ const normal=trafficPlan({historical:true,participation:true,config:{maxPagesPerRun:40},
+  historyStatus:null,recentStatus:null,participationStatus:null,now:NOW});
+ assert.equal(normal.pageBudget,24);
+});
+test('all provider workflow types share one concurrency group to prevent quota bursts',()=>{
+ const fs=require('node:fs'),path=require('node:path');
+ const root=path.resolve(__dirname,'..');
+ for(const file of ['auto-sync.yml','history-sync.yml','participation-sync.yml']){
+  const yaml=fs.readFileSync(path.join(root,'.github/workflows',file),'utf8');
+  assert.match(yaml,/group: aot-provider-results-main/);
+  assert.match(yaml,/cancel-in-progress: false/);
+ }
+});
