@@ -1,14 +1,14 @@
 {
   "version": 1,
-  "checkedAt": "2026-11-19T10:34:04.062Z",
+  "checkedAt": "2026-11-20T07:15:15.387Z",
   "source": "Osirion public beta / Epic tournament IDs",
-  "count": 11376,
+  "count": 11381,
   "dates": [
     "2024-05-29",
-    "2026-11-18"
+    "2026-11-20"
   ],
   "months": 31,
-  "changed": false,
+  "changed": true,
   "unmappedCount": 0,
   "unmappedSample": [],
   "unmappedDetails": [],
@@ -16,6 +16,6 @@
     "outside supported regions": 20,
     "region-locked FNCS": 356,
     "invalid region window": 65,
-    "future or invalid timestamps": 90
+    "future or invalid timestamps": 103
   }
 }
