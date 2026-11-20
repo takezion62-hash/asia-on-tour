@@ -11,9 +11,16 @@ const clone=x=>JSON.parse(JSON.stringify(x));
 
 test('shared official tournament rules include review-only Solo Series Finals and approved types',()=>{
  assert.deepEqual(validateRegistry(registry,tournaments),[]);
- assert.equal(registry.rules.length,35);
- assert.equal(Object.keys(RULES).length,15);
+ assert.equal(registry.rules.length,36);
+ assert.equal(Object.keys(RULES).length,16);
  assert.equal(Object.keys(CUT_OFFS).length,15);
+ const mobile=registry.rules.find(x=>x.id==='ch7s4-mobile-reload-mini-venture-victory-cup');
+ assert.ok(mobile,'S42 EU Mobile Mini Venture rule remains registered');
+ assert.deepEqual(mobile.eventIds,['S42_MobileVictoryCup_ReloadminiV']);
+ assert.equal(mobile.prizePerVictory,50);
+ assert.equal(mobile.mode,'reload-zero-build');
+ assert.deepEqual(mobile.advance,{EU:176,NAC:144,NAW:80,BR:80,ME:80,OCE:80});
+ assert.equal(RULES[mobile.id].source,mobile.source);
  for(const rule of registry.rules){
   if(rule.series==='victory-cup')assert.strictEqual(RULES[rule.id].source,rule.source);
   if(rule.series==='cash-cup'){
