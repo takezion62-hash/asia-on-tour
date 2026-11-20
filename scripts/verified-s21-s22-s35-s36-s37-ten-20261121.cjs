@@ -18,7 +18,7 @@ const GOLD=Object.freeze([
  [1961,'S36',13,['宇宙に行く兄弟募集','モバイル勢のまかろん'],['宇宙に行く兄弟募集','モバイル勢のまかろん'],['d49c5aba-1a4b-416f-8d10-ea56c4871ec5','facede25-f8fd-4f47-be4d-ecb0796abd33'],100,3,5,1,200],
  [1962,'S35',6,['TEITEI','Asuka'],['TEITEI','Asuka'],['b410ecc8-6342-4e7b-96a1-43815cbd2a0d','c34fb8f4-e6da-4345-a26c-d5bf33847f52'],100,3,19,1,200],
  [1963,'S35',10,['あおねこ','irodori'],['Celis あおねこ416','FA irodori'],['32fab8de-7cd0-41a1-aa87-fabf285e40f0','d9ff98ed-cdcb-461e-b818-0a7b2ce594c4'],100,3,11,1,200],
- [1964,'S35',12,['かぷせるてぃーてぃーTTていてい','YAKOTA6x'],['Pollo 17 ǃ ǃ','YAKOTA6x'],['10a89ca8-d9c1-4036-8cc3-f4eac47bcc40','d02e4ebd-1504-4724-bbcc-81263cee3779'],100,3,10,1,200],
+ [1964,'S35',12,['かぷせるてぃーてぃーTTていてい','めるんやけん'],['Pollo 17 ǃ ǃ','YAKOTA6x'],['10a89ca8-d9c1-4036-8cc3-f4eac47bcc40','d02e4ebd-1504-4724-bbcc-81263cee3779'],100,3,10,1,200],
  [1965,'S35',14,['Shirochan on PS4','モバイル勢のまかろん'],['Shirochan on PS4','モバイル勢のまかろん'],['6727836a-4b40-44f6-b699-960c0d9c993d','facede25-f8fd-4f47-be4d-ecb0796abd33'],100,2,2,1,200],
  [1966,'S22',78,['まなくん'],['まなくん'],['ef76081c-71fa-42f7-a03a-6bf1e036213b'],15,6,4,0,200],
  [1967,'S22',96,['モバイル勢のまかろん'],['モバイル勢のまかろん'],['facede25-f8fd-4f47-be4d-ecb0796abd33'],4,6,1,0,200],
@@ -38,7 +38,7 @@ function validateProof(){
  fail(DOC.version===1&&b?.id==='owner-s21-s22-s35-s36-s37-ten-20261121'&&
   b.reviewedOn==='2026-11-21'&&b.entries?.length===10&&e?.rows===10&&
   e.duoRows===6&&e.soloRows===4&&e.duoVRs===6&&e.teamPrize===2000&&
-  e.personalPrize===2000&&e.newPlayers?.length===6&&e.newAliases?.length===3,'batch data changed');
+  e.personalPrize===2000&&e.newPlayers?.length===5&&e.newAliases?.length===4,'batch data changed');
  const catalog=get('tournaments.json').catalog,rules=get('tournament-rules.json').rules;
  const checkS35=rules.find(x=>x.id==='ch6s2-console-duos-victory');
  const checkS37=rules.find(x=>x.id==='ch6s4-console-duos-victory');
