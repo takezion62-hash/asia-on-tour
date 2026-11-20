@@ -124,3 +124,14 @@ test('all provider workflow types share one concurrency group to prevent quota b
   assert.match(yaml,/cancel-in-progress: false/);
  }
 });
+
+test('participation uses schedule/manual dispatch so simultaneous push does not drop a third queued provider run',()=>{
+ const fs=require('node:fs'),path=require('node:path');
+ const yaml=fs.readFileSync(path.resolve(__dirname,'../.github/workflows/participation-sync.yml'),'utf8');
+ const header=yaml.slice(0,yaml.indexOf('permissions:'));
+ assert.match(header,/^on:\n/m);
+ assert.doesNotMatch(header,/^  push:/m);
+ assert.match(header,/^  schedule:/m);
+ assert.match(header,/^  workflow_dispatch:/m);
+ assert.match(yaml,/group: aot-provider-results-main/);
+});
