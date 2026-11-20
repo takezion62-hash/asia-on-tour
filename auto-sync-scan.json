@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-11-20T08:26:13.299Z",
+  "checkedAt": "2026-11-20T12:54:58.114Z",
   "windows": {
     "epicgames_S43_PerformanceEvaluationTrios_EU/S43_PerformanceEvaluation_Event1Round1_EU": {
       "nextPage": 7,
@@ -19057,6 +19057,30 @@
       "rankingOrderValid": true,
       "lastSeenRank": 26,
       "lastSuccessAt": "2026-11-20T07:19:44.755Z",
+      "totalPages": 1
+    },
+    "epicgames_S43_OverwatchWidowmakerCup_Mobile_OCE/S43_OverwatchWidowmakerCup_Mobile_OCE": {
+      "nextPage": 1,
+      "complete": true,
+      "proposals": [],
+      "pages": 1,
+      "lastAttemptAt": "2026-11-20T12:54:55.960Z",
+      "emptyAttempts": 0,
+      "rankingOrderValid": true,
+      "lastSeenRank": 100,
+      "lastSuccessAt": "2026-11-20T12:54:57.140Z",
+      "totalPages": 11
+    },
+    "epicgames_S43_PerformanceEvaluationTrios_NAC/S43_PerformanceEvaluation_Event3Round2_NAC": {
+      "nextPage": 1,
+      "complete": true,
+      "proposals": [],
+      "pages": 1,
+      "lastAttemptAt": "2026-11-20T12:54:57.140Z",
+      "emptyAttempts": 0,
+      "rankingOrderValid": true,
+      "lastSeenRank": 26,
+      "lastSuccessAt": "2026-11-20T12:54:58.106Z",
       "totalPages": 1
     }
   }

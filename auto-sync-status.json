@@ -1,24 +1,24 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-20T08:26:13.299Z",
+  "checkedAt": "2026-11-20T12:54:58.114Z",
   "mode": "review",
   "scope": "recent",
   "dateMode": null,
-  "selectedWindows": 0,
+  "selectedWindows": 2,
   "fromDate": null,
   "toDate": null,
   "provider": "osirion",
-  "linkedPlayers": 676,
-  "trackedWindows": 95,
+  "linkedPlayers": 684,
+  "trackedWindows": 97,
   "found": 0,
   "skipped": 0,
   "imported": 0,
-  "scannedPages": 0,
-  "completedWindows": 95,
+  "scannedPages": 2,
+  "completedWindows": 97,
   "identityConflicts": 3,
   "alreadyRegistered": 220,
-  "autoApprovedTotal": 3269,
+  "autoApprovedTotal": 3275,
   "invalidCachedCandidates": 0,
   "manualReviewCandidates": 0,
   "autoApprovedCosmeticThisRun": 0,
@@ -30,7 +30,7 @@
   "transientFailures": 0,
   "malformedFailures": 0,
   "skippedLeaderboards": [],
-  "reviewOnlyWindows": 83,
+  "reviewOnlyWindows": 85,
   "reviewOnlyCandidates": 0,
   "unmappedEvents": 1,
   "unmappedEventIds": [
@@ -42,11 +42,11 @@
     "alreadyPublished": 0,
     "reviewConflicts": 0,
     "keptPending": 0,
-    "reconciledAt": "2026-11-20T08:26:30.782Z"
+    "reconciledAt": "2026-11-20T12:55:02.932Z"
   },
   "coverage": {
-    "total": 95,
-    "completed": 95,
+    "total": 97,
+    "completed": 97,
     "notStarted": 0,
     "partial": 0,
     "retryWaiting": 0,
@@ -61,13 +61,13 @@
         "pending": 0
       },
       "NAC": {
-        "total": 19,
-        "completed": 19,
+        "total": 20,
+        "completed": 20,
         "pending": 0
       },
       "OCE": {
-        "total": 14,
-        "completed": 14,
+        "total": 15,
+        "completed": 15,
         "pending": 0
       },
       "ME": {
@@ -88,8 +88,8 @@
     },
     "byYear": {
       "2026": {
-        "total": 95,
-        "completed": 95,
+        "total": 97,
+        "completed": 97,
         "pending": 0
       }
     },
@@ -110,7 +110,7 @@
   },
   "manuallyResolvedDuplicates": 47,
   "autoApprovedParticipationThisRun": 0,
-  "processedWindows": 0,
+  "processedWindows": 2,
   "providerRateLimitPaused": false,
   "providerRateLimitRetryAfter": null,
   "providerTraffic": {
@@ -123,8 +123,8 @@
     "pageBudget": 30,
     "minRequestIntervalMs": 1200,
     "reason": "steady-state",
-    "requests": 6,
-    "waitedMs": 1964,
+    "requests": 8,
+    "waitedMs": 2557,
     "intervalMs": 1200
   }
 }
