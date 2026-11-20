@@ -2,8 +2,8 @@
   "version": 1,
   "role": "generated canonical-source snapshot; results.json remains authoritative in phase 1",
   "canonicalFile": "results.json",
-  "canonicalSha256": "9d6f5959b8a3c90d7c715dfb434b8573c5479e8c9ef7229a196fb2dfa8142f69",
-  "count": 8901,
+  "canonicalSha256": "8c293b6e92f342c017fa75856a8a02acac9622abd586d70d42cb91fc7a8255a7",
+  "count": 8902,
   "teamPrizeCents": 10171000,
   "unconfirmedPrizeRecords": 1630,
   "personalPrizeCents": 10151000,
@@ -8908,7 +8908,8 @@
     "owner-s37-naw-playstation-final-20250905-r96",
     "owner-s37-naw-console-duos-final-20250825-r4",
     "owner-s37-naw-console-duos-final-20250825-r8",
-    "owner-s37-naw-console-duos-final-20250825-r9"
+    "owner-s37-naw-console-duos-final-20250825-r9",
+    "auto-s43-19e356f9c238"
   ],
   "shards": [
     {
@@ -9094,11 +9095,11 @@
     {
       "seasonId": "S43",
       "file": "source-results/S43.json",
-      "count": 276,
+      "count": 277,
       "teamPrizeCents": 90000,
       "unconfirmedPrizeRecords": 33,
       "personalPrizeCents": 90000,
-      "sha256": "c6ef91d883654b1b324fd9bd7cb90eea0596a524ef54bf4104899d85236c353a"
+      "sha256": "fd7f864df1cb5a773d1795cba52bfcd001256611c7d459dbecb824711ce46e7e"
     },
     {
       "seasonId": "unknown",
