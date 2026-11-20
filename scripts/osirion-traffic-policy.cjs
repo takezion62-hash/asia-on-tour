@@ -12,26 +12,26 @@ function validLimitReport(status){
     until<checked||until-checked>MAX_VALID_COOLDOWN)return null;
  return {checked,until};
 }
-function trafficPlan({historical,config,historyStatus,recentStatus,now=Date.now()}){
+function trafficPlan({historical,participation=false,config,historyStatus,recentStatus,participationStatus,now=Date.now()}){
  if(typeof historical!=='boolean'||!config||!Number.isFinite(now))
    throw new Error('Invalid Osirion traffic-plan input');
  const configured=Number(config.maxPagesPerRun);
  if(!Number.isSafeInteger(configured)||configured<1)
    throw new Error('Provider maxPagesPerRun must be a positive integer');
- const reports=[validLimitReport(historyStatus),validLimitReport(recentStatus)]
+ const reports=[validLimitReport(historyStatus),validLimitReport(recentStatus),validLimitReport(participationStatus)]
    .filter(Boolean).filter(x=>x.checked<=now+5*60*1000);
  const until=Math.max(0,...reports.map(x=>x.until).filter(x=>x>now));
  const recovering=reports.some(x=>x.until<=now&&now-x.until<=12*HOUR);
- const pageCap=historical?(recovering?24:48):(recovering?12:30);
+ const pageCap=participation?(recovering?8:24):historical?(recovering?24:48):(recovering?12:30);
  return {
   skip:until>now,
   retryAfter:until>now?new Date(until).toISOString():null,
   recovering,
-  historical,
+  historical,participation,
   configuredPages:configured,
   pageBudget:Math.min(configured,pageCap),
   // Sequential API calls are deliberately spaced; no parallel probe bursts.
-  minRequestIntervalMs:historical?1500:1200,
+  minRequestIntervalMs:historical||participation?1500:1200,
   reason:until>now?'shared-provider-429-cooldown':recovering?'cautious-recovery':'steady-state'
  };
 }
