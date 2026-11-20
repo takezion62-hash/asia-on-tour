@@ -14,6 +14,9 @@ on:
       - scripts/apply-s28-nac-zb-duos-three-20261119.cjs
       - scripts/verified-s28-nac-zb-duos-three-20261119.cjs
       - data/manual-approvals/20261119-s28-nac-zb-duos-three.json
+      - scripts/apply-s37-naw-ps-zero-console-three-20261120.cjs
+      - scripts/verified-s37-naw-ps-zero-console-three-20261120.cjs
+      - data/manual-approvals/20261120-s37-naw-ps-zero-console-three.json
       - scripts/apply-s30-oce-s37-naw-ten-20261120.cjs
       - scripts/verified-s30-oce-s37-naw-ten-20261120.cjs
       - data/manual-approvals/20261120-s30-oce-s37-naw-ten.json
@@ -167,6 +170,8 @@ jobs:
             node scripts/source-results-store.cjs verify
             node scripts/apply-s28-nac-zb-duos-three-20261119.cjs --dry-run
             node scripts/apply-s28-nac-zb-duos-three-20261119.cjs
+            node scripts/apply-s37-naw-ps-zero-console-three-20261120.cjs --dry-run
+            node scripts/apply-s37-naw-ps-zero-console-three-20261120.cjs
             node scripts/apply-s30-oce-s37-naw-ten-20261120.cjs --dry-run
             node scripts/apply-s30-oce-s37-naw-ten-20261120.cjs
             node scripts/apply-s30-eu-zb-solo-eight-20261119.cjs --dry-run
