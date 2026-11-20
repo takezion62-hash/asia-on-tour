@@ -2222,26 +2222,6 @@
       "note": "2025年5月17/24/31開催のConsole Duos Victory Cash Cup。Round 1最大7試合、EU/NAC上位500組、その他地域上位250組がRound 2へ。Round 2最大3試合、1VRにつきチーム$200・個人各$100。自動賞金承認は許可せず、Epic本人ID・開催枠・成熟済み順位表・賞金規則の専門検証でのみ掲載。"
     },
     {
-      "id": "ch7s3-days-of-play-playstation-cup-zb",
-      "seasonId": "S41",
-      "eventIds": [
-        "S41_PSCupDaysOfPlay_ZB"
-      ],
-      "team": "solo",
-      "series": "playstation-cup",
-      "chapter": 7,
-      "season": 3,
-      "matchCaps": {
-        "賞金決勝": 6
-      },
-      "prizeRankVerified": {
-        "OCE": {
-          "1": 1000
-        }
-      },
-      "source": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/days-of-play-playstation-cup-chapter-7-season-3-official-rules"
-    },
-    {
       "id": "ch7s4-mobile-reload-mini-venture-victory-cup",
       "seasonId": "S42",
       "eventIds": [
@@ -2257,7 +2237,15 @@
       },
       "prizePerVictory": 50,
       "mode": "reload-zero-build",
-      "source": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-mobile-victory-cups-chapter-7-season-4-official-rules"
+      "source": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-mobile-victory-cups-chapter-7-season-4-official-rules",
+      "advance": {
+        "EU": 176,
+        "NAC": 144,
+        "NAW": 80,
+        "BR": 80,
+        "ME": 80,
+        "OCE": 80
+      }
     }
   ]
 }
