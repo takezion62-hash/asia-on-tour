@@ -49,8 +49,7 @@ function validateProof(){
    x.date===m.date&&x.region===m.region&&x.event===m.event&&x.eventId===m.eventId&&
    x.windowId===m.windowId&&x.tournamentId===m.tournamentId&&x.chapter===m.chapter&&
    x.season===m.season&&x.mode===m.mode&&x.rule===m.rule&&x.source===source&&
-   x.round===(s==='S42'?'Event 1 · Round 2 / 賞金決勝':
-      prize>0?'Final / 賞金決勝':'Final / 決勝')&&
+   x.round===(s==='S42'?'Event 1 · Round 2 / 賞金決勝':'Final / 賞金決勝')&&
    x.name===name&&x.rawName===raw&&x.epicUUID===uid&&epicId(x.profileUrl)===uid&&
    x.rank===rank&&x.points===points&&x.matches===matches&&x.kills===kills&&
    x.vrs===vrs&&x.prize===prize,'altered source screenshot '+shot);
@@ -86,7 +85,7 @@ function project(x){
  return {id:x.id,date:x.date,region:x.region,player:x.name,players:[x.name],
   playerRaw:x.rawName,event:x.event,round:x.round,rank:x.rank,points:x.points,
   matches:x.matches,kills:x.kills,vrs:x.vrs,prize:x.prize,
-  prizePerPlayer:x.prize,teamPrize:x.prize,kind:pos?'決勝':'賞金決勝',
+  prizePerPlayer:x.prize,teamPrize:x.prize,kind:'賞金決勝',
   seasonId:s,chapter:x.chapter,season:x.season,tournamentId:x.tournamentId,
   source:x.source,profileUrl:x.profileUrl,profiles:[{name:x.name,url:x.profileUrl}],
   verified:true,note};
