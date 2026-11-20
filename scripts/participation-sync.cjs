@@ -2,7 +2,8 @@
 // Independent best-effort, bounded scanner for players already linked to an Epic ID.
 // It never writes results.json, updates.json, PR data or achievement data.
 const fs=require('node:fs'),path=require('node:path');
-const {linkedAccounts,discover,normalizeRow,getTournaments,getLeaderboard,advancementLimit,historicalEvidenceScore}=require('./osirion-sync.cjs');
+const {linkedAccounts,discover,normalizeRow,getTournaments,getLeaderboard,advancementLimit,historicalEvidenceScore,providerRateLimitFailure,configureProviderPacing}=require('./osirion-sync.cjs');
+const {trafficPlan}=require('./osirion-traffic-policy.cjs');
 const {prepare}=require('./auto-sync-core.cjs');
 const {appendArchive}=require('./participation-archive.cjs');
 const {finishableWindows}=require('./scan-efficiency.cjs');
@@ -52,12 +53,36 @@ async function main(){
  if(!accounts.length)throw Error('No linked Epic accounts; refusing empty sync');
  const state=read('participation-scan.json');
  if(state.version!==1||!state.windows||typeof state.windows!=='object')throw Error('invalid participation scan state');
- const all=await getTournaments(true);
+ const traffic=trafficPlan({historical:true,participation:true,config,
+  historyStatus:read('history-sync-status.json'),
+  recentStatus:read('auto-sync-status.json'),
+  participationStatus:read('participation-status.json')});
+ console.log('OSIRION_PARTICIPATION_TRAFFIC_PLAN '+JSON.stringify(traffic));
+ if(traffic.skip){
+  console.warn('PARTICIPATION_SHARED_COOLDOWN_SKIP '+JSON.stringify({
+   retryAfter:traffic.retryAfter,action:'keep saved participant checkpoints; resume on next run'}));
+  return;
+ }
+ const pacer=configureProviderPacing(traffic.minRequestIntervalMs);
+ let all;
+ try{all=await getTournaments(true)}
+ catch(error){
+  if(!providerRateLimitFailure(error))throw error;
+  const retryAfter=new Date(Date.now()+6*3600000).toISOString();
+  write('participation-status.json',{...read('participation-status.json'),
+   checkedAt:new Date().toISOString(),pagesScanned:0,newRecords:0,
+   providerRateLimitPaused:true,providerRateLimitRetryAfter:retryAfter,
+   providerTraffic:{...traffic,...pacer.metrics(),discoveryRateLimited:true}});
+  console.warn('PARTICIPATION_DISCOVERY_RATE_LIMIT '+JSON.stringify({retryAfter}));
+  return;
+ }
  const found=discover(all,data.tournaments.catalog,{...config,toDate:nowJst()},Date.now());
  const selected=chooseWindows(found,state,config,Date.now(),data.results);
- let remaining=config.maxPagesPerRun,pagesScanned=0,invalid=0,empty=0,failed=0;
+ let remaining=Math.min(config.maxPagesPerRun,traffic.pageBudget),pagesScanned=0,invalid=0,empty=0,failed=0;
+ let rateLimited=false,rateLimitRetryAfter=null;
  const items=[];
  for(const win of selected){
+  if(rateLimited)break;
   const checkpoint=state.windows[win.key]||{nextPage:0,pages:0,complete:false,coverageLimited:false};
   if(checkpoint.coverageLimited&&checkpoint.nextPage<(config.maxPagesPerWindowTotal||40)){checkpoint.complete=false;checkpoint.coverageLimited=false}
   if(checkpoint.nextPage>=(config.maxPagesPerWindowTotal||40))continue;
@@ -93,11 +118,15 @@ async function main(){
    }catch(error){
     checkpoint.retryAfter=new Date(Date.now()+6*3600000).toISOString();
     checkpoint.lastError=String(error.message).slice(0,200);
-    failed++;break;
+    failed++;
+    if(providerRateLimitFailure(error)){
+     rateLimited=true;rateLimitRetryAfter=checkpoint.retryAfter;
+    }
+    break;
    }
   }
   state.windows[win.key]=checkpoint;
-  if(!remaining)break;
+  if(rateLimited||!remaining)break;
  }
  const stamp=new Date().toISOString();
  const saved=appendArchive(root,items,data.results,{checkedAt:stamp});
@@ -107,6 +136,8 @@ async function main(){
   trackedWindows:found.length,completedWindows:entries.filter(([,x])=>x.complete).length,
   partialWindows:entries.filter(([,x])=>x.coverageLimited).length,
   pagesScanned,invalidRows:invalid,emptyPages:empty,failedWindows:failed,
+   providerRateLimitPaused:rateLimited,providerRateLimitRetryAfter:rateLimitRetryAfter,
+   providerTraffic:{...traffic,...pacer.metrics()},
   newRecords:saved.added,prunedPublished:saved.prunedPublished||0,total:saved.total,months:saved.months,skippedPublished:saved.skippedPublished,
   message:'Epic IDで本人照合した出場戦績を月別に保存。公式通過枠外の判定以外は通過未確認。賞金・AOT PR・称号には加算しません。全順位表を無制限には調査しません。'};
  state.checkedAt=stamp;
