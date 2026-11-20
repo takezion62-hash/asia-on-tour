@@ -2,11 +2,11 @@
   "version": 1,
   "role": "generated canonical-source snapshot; results.json remains authoritative in phase 1",
   "canonicalFile": "results.json",
-  "canonicalSha256": "0667b3c69088eda291460f55d3e8c13127079b376e3af0de591da13c85109697",
-  "count": 8891,
-  "teamPrizeCents": 10111000,
+  "canonicalSha256": "9d6f5959b8a3c90d7c715dfb434b8573c5479e8c9ef7229a196fb2dfa8142f69",
+  "count": 8901,
+  "teamPrizeCents": 10171000,
   "unconfirmedPrizeRecords": 1630,
-  "personalPrizeCents": 10091000,
+  "personalPrizeCents": 10151000,
   "recordOrder": [
     "s42-me-slenderman-reload-skin-20261021-acris-chacha",
     "s42-me-slenderman-reload-skin-20261021-karf-alpha",
@@ -8898,7 +8898,17 @@
     "auto-s30-5b81274483f4",
     "auto-s30-03431ca6d4dd",
     "auto-s32-4baf2adde476",
-    "auto-s32-c461ad437344"
+    "auto-s32-c461ad437344",
+    "owner-s37-naw-playstation-final-20250905-r48",
+    "owner-s37-naw-playstation-final-20250905-r67",
+    "owner-s37-naw-playstation-final-20250905-r68",
+    "owner-s37-naw-playstation-final-20250905-r74",
+    "owner-s37-naw-playstation-final-20250905-r81",
+    "owner-s37-naw-playstation-final-20250905-r84",
+    "owner-s37-naw-playstation-final-20250905-r96",
+    "owner-s37-naw-console-duos-final-20250825-r4",
+    "owner-s37-naw-console-duos-final-20250825-r8",
+    "owner-s37-naw-console-duos-final-20250825-r9"
   ],
   "shards": [
     {
@@ -9030,11 +9040,11 @@
     {
       "seasonId": "S37",
       "file": "source-results/S37.json",
-      "count": 186,
-      "teamPrizeCents": 680000,
+      "count": 196,
+      "teamPrizeCents": 740000,
       "unconfirmedPrizeRecords": 3,
-      "personalPrizeCents": 680000,
-      "sha256": "a74441b0000a0fabeab08c93249c6a9180fb73df5132b967d278b06f08e31b12"
+      "personalPrizeCents": 740000,
+      "sha256": "0ac7667b8d37c9b6fdd824c6dead3ac4c895ba80e9b83e18033dc0ba7168205d"
     },
     {
       "seasonId": "S38",
