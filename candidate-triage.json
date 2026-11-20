@@ -1,7 +1,7 @@
 {
   "version": 1,
   "sourceCheckedAt": "2026-11-20T08:26:13.299Z",
-  "total": 33,
+  "total": 28,
   "alreadyResolved": 0,
   "byYear": [
     {
@@ -10,17 +10,13 @@
     },
     {
       "name": "2025",
-      "count": 8
-    },
-    {
-      "name": "2026",
-      "count": 2
+      "count": 5
     }
   ],
   "byRegion": [
     {
       "name": "ME",
-      "count": 4
+      "count": 2
     },
     {
       "name": "NAC",
@@ -32,14 +28,10 @@
     },
     {
       "name": "OCE",
-      "count": 8
+      "count": 5
     }
   ],
   "byTournament": [
-    {
-      "name": "FNCS Division 1 / ME / 2026",
-      "count": 2
-    },
     {
       "name": "NVIDIA GeForce RTX Cup / NAW / 2025",
       "count": 5
@@ -47,10 +39,6 @@
     {
       "name": "PlayStation Cup / ME / 2024",
       "count": 2
-    },
-    {
-      "name": "PlayStation Cup / OCE / 2025",
-      "count": 3
     },
     {
       "name": "PlayStation Cup Battle Royale / OCE / 2024",
@@ -76,7 +64,7 @@
     },
     {
       "name": "partial-scan",
-      "count": 21
+      "count": 16
     }
   ],
   "queue": [
@@ -1003,171 +991,6 @@
         "possibleExistingId": null
       },
       "rewardState": "source-amount-present-not-verified-by-triage"
-    },
-    {
-      "id": "auto-s37-15f561afaa66",
-      "origin": "history",
-      "date": "2025-09-03",
-      "year": "2025",
-      "region": "OCE",
-      "tournamentId": "ch6s4-playstation-cup",
-      "event": "PlayStation Cup",
-      "round": "Qualifier / 参加確認",
-      "player": "Saku",
-      "kind": "参加確認",
-      "rank": 18,
-      "points": 317,
-      "kills": 22,
-      "vrs": 1,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S37_PlayStationCup/?region=OCE&round=S37_PlayStationCup_Qualifier_OCE",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "確認専用大会は自動承認不可",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 2,
-        "totalPages": 68,
-        "sourceKey": "epicgames_S37_PlayStationCup_OCE/S37_PlayStationCup_Qualifier_OCE",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s37-60cdeba9634b",
-      "origin": "history",
-      "date": "2025-09-03",
-      "year": "2025",
-      "region": "OCE",
-      "tournamentId": "ch6s4-playstation-cup",
-      "event": "PlayStation Cup",
-      "round": "Qualifier / 参加確認",
-      "player": "ごんた",
-      "kind": "参加確認",
-      "rank": 29,
-      "points": 300,
-      "kills": 7,
-      "vrs": 1,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S37_PlayStationCup/?region=OCE&round=S37_PlayStationCup_Qualifier_OCE",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "確認専用大会は自動承認不可",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 2,
-        "totalPages": 68,
-        "sourceKey": "epicgames_S37_PlayStationCup_OCE/S37_PlayStationCup_Qualifier_OCE",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s37-6167a0ef4e34",
-      "origin": "history",
-      "date": "2025-09-03",
-      "year": "2025",
-      "region": "OCE",
-      "tournamentId": "ch6s4-playstation-cup",
-      "event": "PlayStation Cup",
-      "round": "Qualifier / 参加確認",
-      "player": "Mofu",
-      "kind": "参加確認",
-      "rank": 82,
-      "points": 276,
-      "kills": 28,
-      "vrs": 1,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S37_PlayStationCup/?region=OCE&round=S37_PlayStationCup_Qualifier_OCE",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "確認専用大会は自動承認不可",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 2,
-        "totalPages": 68,
-        "sourceKey": "epicgames_S37_PlayStationCup_OCE/S37_PlayStationCup_Qualifier_OCE",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s39-7e02366fce22",
-      "origin": "history",
-      "date": "2026-03-04",
-      "year": "2026",
-      "region": "ME",
-      "tournamentId": "ch7s1-fncs-division-1",
-      "event": "FNCS Division 1",
-      "round": "単一開催枠 / 参加確認",
-      "player": "huggyfv / rakirye",
-      "kind": "参加確認",
-      "rank": 58,
-      "points": 293,
-      "kills": 12,
-      "vrs": 1,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S39_FNCSDivisionalCup_Division1/?region=ME&round=S39_FNCSDivisionalCup_Division1_Week5Day2_ME",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "確認専用大会は自動承認不可",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 2,
-        "totalPages": 4,
-        "sourceKey": "epicgames_S39_FNCSDivisionalCup_Division1_ME/S39_FNCSDivisionalCup_Division1_Week5Day2_ME",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s39-f10d6ba22c7e",
-      "origin": "history",
-      "date": "2026-03-04",
-      "year": "2026",
-      "region": "ME",
-      "tournamentId": "ch7s1-fncs-division-1",
-      "event": "FNCS Division 1",
-      "round": "単一開催枠 / 参加確認",
-      "player": "meah / RiaM",
-      "kind": "参加確認",
-      "rank": 44,
-      "points": 317,
-      "kills": 15,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S39_FNCSDivisionalCup_Division1/?region=ME&round=S39_FNCSDivisionalCup_Division1_Week5Day2_ME",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "確認専用大会は自動承認不可",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 2,
-        "totalPages": 4,
-        "sourceKey": "epicgames_S39_FNCSDivisionalCup_Division1_ME/S39_FNCSDivisionalCup_Division1_Week5Day2_ME",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
     }
   ],
   "policy": "read-only queue; awards require existing official rule-backed validators and identity/collision proof"
