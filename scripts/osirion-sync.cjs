@@ -17,10 +17,16 @@ const {scanCoverage}=require('./scan-coverage.cjs');
 const {finishableWindows,remainingPages,windowPageAllowance,leastCoveredBucket}=require('./scan-efficiency.cjs');
 const {recoveryShortlist}=require('./review-recovery-priority.cjs');
 const {runDelta:runNewPlayerDelta}=require('./new-player-history-delta.cjs');
+const {trafficPlan,createPacer}=require('./osirion-traffic-policy.cjs');
 const root=path.resolve(__dirname,'..');
 const read=name=>name==='results.json'?readResults(root).rows:JSON.parse(fs.readFileSync(path.join(root,name),'utf8'));
 const write=(name,obj)=>name==='results.json'?publishResults(root,obj):fs.writeFileSync(path.join(root,name),JSON.stringify(obj,null,2)+'\n');
 const regions=['ME','EU','NAC','NAW','OCE','BR'];
+let providerPacer=null;
+function configureProviderPacing(intervalMs){
+ providerPacer=createPacer({intervalMs});
+ return providerPacer;
+}
 const REVIEW_SERIES=new Set(['victory-cup','cash-cup','fncs','performance-evaluation','skin-cup','icon-cup','playstation-cup','unreal-cup','nvidia-cup','test-cup']);
 const nowJst=utc=>new Date(new Date(utc).getTime()+9*3600000).toISOString().slice(0,10);
 // The history window must follow new competitions after the initial 2024-2026 backfill.
@@ -219,6 +225,7 @@ async function fetchJson(url,opts={}){
  const retryDelayMs=Number.isFinite(opts.retryDelayMs)?Math.max(opts.retryDelayMs,0):800;
  for(let attempt=0;attempt<attempts;attempt++){
   try{
+   if(providerPacer)await providerPacer.beforeRequest();
    const response=await fetch(url,{headers:{accept:'application/json'},signal:AbortSignal.timeout(25000)});
    if(!response.ok)throw Error('Osirion API HTTP '+response.status+' '+new URL(url).pathname);
    const body=await response.json();
@@ -233,7 +240,7 @@ async function fetchJson(url,opts={}){
 async function getTournaments(historical=false){
  const all=new Map();
  for(const region of regions){
-  const response=await fetchJson('https://fnapi.osirion.gg/v1/tournaments?'+new URLSearchParams({region,includeHistoricData:historical?'true':'false'}));
+  const response=await fetchJson('https://fnapi.osirion.gg/v1/tournaments?'+new URLSearchParams({region,includeHistoricData:historical?'true':'false'}),{stopOnRateLimit:true});
   if(!Array.isArray(response.tournaments))throw Error('大会一覧の形式が変わりました');
   for(const item of response.tournaments)if(typeof item.eventId==='string')all.set(item.eventId,item);
  }
@@ -593,11 +600,41 @@ async function main(){
  }
  if(!config.enabled||config.provider!=='osirion'){console.log('OSIRION_SYNC_DISABLED');return}
  if(config.mode!=='review')throw Error('Osirionの自動公開は安全性検証が完了するまで無効です');
+ // Jobs share GitHub concurrency. Their committed 429 cooldowns must be checked
+ // BEFORE querying Osirion so scheduled runs cannot create another quota spike.
+ const traffic=trafficPlan({historical,config,
+   historyStatus:read('history-sync-status.json'),
+   recentStatus:read('auto-sync-status.json'),
+   participationStatus:read('participation-status.json')});
+ console.log('OSIRION_TRAFFIC_PLAN '+JSON.stringify(traffic));
+ if(traffic.skip){
+  console.warn('OSIRION_SHARED_COOLDOWN_SKIP '+JSON.stringify({
+   scope:historical?'history':'recent',retryAfter:traffic.retryAfter,
+   reason:traffic.reason,action:'preserve checkpoints; retry on next scheduled run'
+  }));
+  return;
+ }
+ configureProviderPacing(traffic.minRequestIntervalMs);
  const data={results:read('results.json'),players:read('players.json'),tournaments:read('tournaments.json'),schedule:read('schedule.json'),updates:read('updates.json')};
  const {accounts,conflicts}=linkedAccounts(data);
  data.verifiedAccounts=accounts;
  if(!accounts.length)throw Error('追跡対象のIDがありません');
- const all=await getTournaments(historical);
+ let all;
+ try{all=await getTournaments(historical)}
+ catch(error){
+  // Discovery is also an Osirion request. An HTTP429 here must establish the
+  // same persisted cross-workflow cooldown as a leaderboard HTTP429.
+  if(!providerRateLimitFailure(error))throw error;
+  const retryAfter=new Date(Date.now()+6*3600000).toISOString();
+  const oldStatus=read(prefix+'-status.json');
+  write(prefix+'-status.json',{...oldStatus,checkedAt:new Date().toISOString(),
+   scannedPages:0,processedWindows:0,imported:0,newlyCompletedWindows:0,
+   providerRateLimitPaused:true,providerRateLimitRetryAfter:retryAfter,
+   providerTraffic:{...traffic,...providerPacer.metrics(),discoveryRateLimited:true}});
+  console.warn('OSIRION_DISCOVERY_RATE_LIMIT '+JSON.stringify({retryAfter,
+   scope:historical?'history':'recent',action:'persist shared cooldown; retain scan checkpoint'}));
+  return;
+ }
  const windows=discover(all,data.tournaments.catalog,config);
  const unmapped=discoverUnmapped(all,data.tournaments.catalog,config);
  const state=read(prefix+'-scan.json');
@@ -610,7 +647,7 @@ async function main(){
  const selectedPriority=historical?active.map(w=>({key:w.key,date:w.dateJst,region:w.region,series:w.series,kind:w.kind})):null;
  const previewConfig={version:1,accounts,windows:active.map(w=>({eventId:w.eventId,windowId:w.windowId,dateJst:w.dateJst,region:w.region,seasonId:w.seasonId,tournamentId:w.tournamentId,kind:w.kind,round:w.round}))};
  // Historical backfill can inspect more pages, but always yields before the Actions job limit.
- let budget=Math.min(Math.max(config.maxPagesPerRun||30,1),historical?96:50),scanned=0,invalidRows=0,transientFailures=0,malformedFailures=0;
+ let budget=Math.min(traffic.pageBudget,historical?96:50),scanned=0,invalidRows=0,transientFailures=0,malformedFailures=0;
  const skippedLeaderboards=[];
  const maxRunMinutes=historical?Math.min(14,Math.max(2,Number.isFinite(config.maxRunMinutes)?config.maxRunMinutes:12)):14;
  const scanDeadline=Date.now()+maxRunMinutes*60000;
@@ -828,7 +865,7 @@ async function main(){
  const reviewOnlyWindows=windows.filter(w=>w.series!=='victory-cup').length;
  const reviewOnlyCandidates=unique.size?Array.from(unique.values()).filter(p=>p.reviewOnly===true).length:0;
  const cumulativeApprovals=data.updates.entries.filter(x=>x.title?.startsWith('公式規則で自動承認：')).reduce((sum,x)=>sum+(x.recordIds?.length||0),0);
- const status={version:1,state:'checked',checkedAt:stamp,mode:'review',scope:historical?'history':'recent',dateMode:historical?(storedConfig.toDate==='rolling'?'rolling':'fixed'):null,selectedWindows:active.length,fromDate:historical?config.fromDate:null,toDate:historical?config.toDate:null,provider:'osirion',linkedPlayers:accounts.length,trackedWindows:windows.length,found:unique.size,skipped:invalidRows,imported,scannedPages:scanned,completedWindows:finished,identityConflicts:conflicts.length,alreadyRegistered:recordedFromReview,autoApprovedTotal:cumulativeApprovals,invalidCachedCandidates:invalidCached,manualReviewCandidates:manuallyHeld,autoApprovedParticipationThisRun:verifiedParticipationIds.size,autoApprovedCosmeticThisRun:importedCosmetics,autoApprovedCashThisRun:cash.approved.length,autoApprovedPerformanceThisRun:performance.approved.length,autoApprovedUnrealThisRun:unreal.approved.length,autoApprovedDuoQualifierThisRun:duo.approved.length,timeLimitReached,processedWindows,providerRateLimitPaused:rateLimited,providerRateLimitRetryAfter:rateLimitRetryAfter,
+ const status={version:1,state:'checked',checkedAt:stamp,mode:'review',scope:historical?'history':'recent',dateMode:historical?(storedConfig.toDate==='rolling'?'rolling':'fixed'):null,selectedWindows:active.length,fromDate:historical?config.fromDate:null,toDate:historical?config.toDate:null,provider:'osirion',linkedPlayers:accounts.length,trackedWindows:windows.length,found:unique.size,skipped:invalidRows,imported,scannedPages:scanned,completedWindows:finished,identityConflicts:conflicts.length,alreadyRegistered:recordedFromReview,autoApprovedTotal:cumulativeApprovals,invalidCachedCandidates:invalidCached,manualReviewCandidates:manuallyHeld,autoApprovedParticipationThisRun:verifiedParticipationIds.size,autoApprovedCosmeticThisRun:importedCosmetics,autoApprovedCashThisRun:cash.approved.length,autoApprovedPerformanceThisRun:performance.approved.length,autoApprovedUnrealThisRun:unreal.approved.length,autoApprovedDuoQualifierThisRun:duo.approved.length,timeLimitReached,processedWindows,providerRateLimitPaused:rateLimited,providerRateLimitRetryAfter:rateLimitRetryAfter,providerTraffic:{...traffic,...providerPacer.metrics()},
   ...(historical?{newlyCompletedWindows,newPlayerBackfill:playerBackfill}:{}),retryWindows:coverage.retryCount,coverage,...(historical?{reviewRecovery:reviewRecoverySummary,priorityAudit:{...priorityAudit,selected:selectedPriority}}:{}),transientFailures,malformedFailures,skippedLeaderboards:skippedLeaderboards.slice(0,15),reviewOnlyWindows,reviewOnlyCandidates,unmappedEvents:unmapped.length,unmappedEventIds:unmapped.slice(0,12),message:'Osirionで'+accounts.length+'アカウントIDを追跡。今回の公式規則による自動承認'+imported+'件、追加確認待ち'+unique.size+'件、名義照合保留'+conflicts.length+'件。'};
  state.checkedAt=stamp;
  write(prefix+'-scan.json',state);
@@ -838,4 +875,4 @@ async function main(){
   transientFailures,malformedFailures,heldWindows:skippedLeaderboards.length}));
 }
 if(require.main===module)main().catch(e=>{console.error('OSIRION_SYNC_ERROR '+e.stack);process.exitCode=1});
-module.exports={identity,linkedAccounts,parseStage,parseReviewStage,discover,discoverUnmapped,selectActiveWindows,selectHistoricalWindows,historicalEvidenceScore,historicalEvidenceIndex,historicalPriorityAudit,resolveHistoricalScope,fetchJson,advancementLimit,normalizeRow,getTournaments,getLeaderboard,leaderboardResponseError,recoverableLeaderboardFailure,holdLeaderboardWindow,holdEmptyFirstPage,transientLeaderboardFailure,providerRateLimitFailure,main};
+module.exports={identity,linkedAccounts,parseStage,parseReviewStage,discover,discoverUnmapped,selectActiveWindows,selectHistoricalWindows,historicalEvidenceScore,historicalEvidenceIndex,historicalPriorityAudit,resolveHistoricalScope,fetchJson,advancementLimit,normalizeRow,getTournaments,getLeaderboard,leaderboardResponseError,recoverableLeaderboardFailure,holdLeaderboardWindow,holdEmptyFirstPage,transientLeaderboardFailure,providerRateLimitFailure,configureProviderPacing,main};

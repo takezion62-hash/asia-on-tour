@@ -21,6 +21,7 @@ function describe(status,now=Date.now()){
   retryDue:n(status.coverage?.counts?.retryDue),
   rateLimited:status.providerRateLimitPaused===true,
   retryAfter:status.providerRateLimitRetryAfter||null,
+  traffic:status.providerTraffic||null,
   transientFailures:n(status.transientFailures),
   newPlayerBackfill:{
    initialized:status.newPlayerBackfill?.initialized===true,
@@ -41,6 +42,9 @@ function report(view){
   '| 調査済み / 総開催枠 | '+view.completedWindows+' / '+view.totalWindows+' |',
   '| 未完了の開催枠 | '+view.unfinishedWindows+' |',
   '| 今回の取得ページ | '+view.scannedPages+' |',
+  '| 今回のAPIリクエスト | '+(view.traffic?.requests??'未計測')+' |',
+  '| 429後の省リクエスト再開 | '+(view.traffic?.recovering?'あり':'なし')+' |',
+  '| 1回の取得ページ予算 | '+(view.traffic?.pageBudget??'未計測')+' |',
   '| 今回完了した開催枠 | '+view.completedThisRun+' |',
   '| 今回追加した成績 | '+view.imported+' |',
   '| 取得先の429制限による中断 | '+(view.rateLimited?'あり':'なし')+' |',
