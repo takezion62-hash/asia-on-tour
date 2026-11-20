@@ -2,6 +2,49 @@
   "version": 1,
   "entries": [
     {
+      "id": "review-publication-pending-20261114-7309e2a3d5c4-verified-rule-1",
+      "date": "2026-11-20",
+      "type": "records",
+      "title": "管理者確認済み戦績 2件を追加",
+      "description": "公式規則に基づく予選突破または決勝0VRのみを確認。未確認賞金なし。",
+      "recordIds": [
+        "auto-s32-4baf2adde476",
+        "auto-s32-c461ad437344"
+      ]
+    },
+    {
+      "id": "review-publication-pending-20261114-7309e2a3d5c4-attendance-only-1",
+      "date": "2026-11-20",
+      "type": "records",
+      "title": "管理者確認済み戦績 4件を追加",
+      "description": "Epic ID・開催枠・順位表を再照合した出場確認のみ。賞金・予選突破・スキン獲得を未認定。",
+      "recordIds": [
+        "auto-s39-e7682381922e",
+        "auto-s39-12bce825903d",
+        "auto-s30-5b81274483f4",
+        "auto-s30-03431ca6d4dd"
+      ]
+    },
+    {
+      "id": "owner-s30-oce-zb-s37-naw-ten-20261120",
+      "date": "2026-11-20",
+      "type": "records",
+      "title": "2024 OCE ZB Solo + 2025 NAW PlayStation決勝 10件・個人賞金$2,300",
+      "description": "画像1939〜1941・1943〜1949で本人Epic ID、キル、順位、VRと賞金を照合。OCE Event4 Round2：6人・7VR・$700。NAW PlayStation Cup Final：Jaemon・モバイル勢のまかろん・sena・ちからV2の4人、各0VR・順位賞金$400。りむたの別名A_α Rimutaを追加。既存データは変更なし。",
+      "recordIds": [
+        "owner-s30-oce-zb-solo-final-20240624-r3",
+        "owner-s30-oce-zb-solo-final-20240624-r16",
+        "owner-s30-oce-zb-solo-final-20240624-r23",
+        "owner-s30-oce-zb-solo-final-20240624-r30",
+        "owner-s30-oce-zb-solo-final-20240624-r42",
+        "owner-s30-oce-zb-solo-final-20240624-r49",
+        "owner-s37-naw-playstation-final-20250905-r11",
+        "owner-s37-naw-playstation-final-20250905-r33",
+        "owner-s37-naw-playstation-final-20250905-r36",
+        "owner-s37-naw-playstation-final-20250905-r37"
+      ]
+    },
+    {
       "id": "auto-sync-20261120091410",
       "date": "2026-11-20",
       "type": "records",
