@@ -201,9 +201,15 @@
       '<p class="source-rule-warning">※ S43開催枠の通過対象は上位26。公式規則本文の一般表記は33のため、現行イベントの報酬欄・ユーザー確認に基づき26を採用。決勝はVR100ポイントにつき個人$400、チーム$1,200です。支払・資格審査完了までは未確認。</p>':'';
     const squadsNote=rule?.id==='ch7s5-squads-victory-cup'?
       '<p class="source-rule-warning">※ Round 1は地域別通過枠で判定し賞金$0。Round 2はビクロイのみ1VR=100ptで、最大3VR。各選手$50/VR、4名チーム合計$200/VR（3VRなら個人$150・チーム$600）。予選・決勝とも本人IDと順位表を検証し、未確認の賞金は掲載しません。</p>':'';
+    const cosmeticDetail=rule?.cosmeticPrizes?.rankRewards?.length?
+      '<div class="source-rule-fact"><span>上位入賞のゲーム内報酬</span><strong>'+
+      rule.cosmeticPrizes.rankRewards.map(esc).join(' / ')+'</strong></div>'+
+      '<div class="source-rule-fact"><span>参加ポイント報酬</span><strong>'+
+      fmtNumber(rule.cosmeticPrizes.minimumPoints)+'ptで'+esc(rule.cosmeticPrizes.spray)+'</strong></div>'+
+      '<p class="source-rule-warning">※通常Battle Royaleデュオの独立開催枠。Zero Build・Mobile版と報酬圏を混ぜません。現金賞金は$0、スキン等の実際の配布・受給資格は別途確認が必要です。本人IDと保存済み順位表を照合した場合に限り順位報酬として掲載します。</p>':'';
     const matchCaps=Object.entries(rule?.matchCaps||{}).map(([stage,limit])=>esc(stage)+' 最大'+fmtNumber(limit)+'試合').join(' / ');
     const details=present?
-      '<div class="source-rule-facts">'+conditions+cash+evalNote+squadsNote+
+      '<div class="source-rule-facts">'+conditions+cash+evalNote+squadsNote+cosmeticDetail+
       '<div class="source-rule-fact"><span>試合数の上限</span><strong>'+esc(matchCaps||'未登録')+'</strong></div></div>'
       :'<div class="source-rule-facts"><div class="source-rule-fact"><span>現在の調査状況</span>'+
         '<strong>'+(researchLinks.length?'Epic公式資料の参照先あり · 条件の登録待ち':'公式条件の調査待ち')+'</strong></div>'+

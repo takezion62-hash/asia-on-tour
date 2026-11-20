@@ -11,9 +11,9 @@ const clone=x=>JSON.parse(JSON.stringify(x));
 
 test('shared official tournament rules include review-only Solo Series Finals and approved types',()=>{
  assert.deepEqual(validateRegistry(registry,tournaments),[]);
- assert.equal(registry.rules.length,32);
+ assert.equal(registry.rules.length,33);
  assert.equal(Object.keys(RULES).length,15);
- assert.equal(Object.keys(CUT_OFFS).length,12);
+ assert.equal(Object.keys(CUT_OFFS).length,13);
  for(const rule of registry.rules){
   if(rule.series==='victory-cup')assert.strictEqual(RULES[rule.id].source,rule.source);
   if(rule.series==='cash-cup'){
@@ -27,6 +27,46 @@ test('shared official tournament rules include review-only Solo Series Finals an
    assert.deepEqual(CUT_OFFS[rule.id].ranks,rule.cosmeticRanks);
   }
  }
+});
+
+test('S43 Overwatch Widowmaker Cup BR has official six-region cosmetics and exact distinct IDs',()=>{
+ const id='ch7s5-overwatch-widowmaker-cup-battle-royale';
+ const r=registry.rules.find(x=>x.id===id);
+ const tournament=tournaments.catalog.find(x=>x.id===id);
+ assert.ok(r&&tournament);
+ assert.equal(tournament.mode,'battle-royale');
+ assert.equal(tournament.team,'duo');
+ assert.equal(tournament.series,'skin-cup');
+ assert.deepEqual(tournament.sourceEventIds,['S43_OverwatchWidowmakerCup']);
+ assert.deepEqual(r.eventIds,['S43_OverwatchWidowmakerCup']);
+ assert.deepEqual(r.cosmeticRanks,{OCE:50,ME:50,EU:500,BR:100,NAC:350,NAW:100});
+ assert.equal(r.matchCaps['スキン大会'],11);
+ assert.equal(r.sessionMinutes,180);
+ assert.deepEqual(r.cosmeticPrizes.rankRewards,[
+  'Widowmaker Outfit',"Widowmaker's Fang Pickaxe","Widow's Kiss Back Bling"]);
+ assert.equal(r.cosmeticPrizes.spray,"Widowmaker's Mark Spray");
+ assert.equal(r.cosmeticPrizes.minimumPoints,8);
+ assert.equal(r.autoApproval,'verified-team-rank');
+ assert.equal(CUT_OFFS[id].eventId,'S43_OverwatchWidowmakerCup');
+ assert.ok(r.source.includes('overwatch-widowmaker-cup-chapter-7-mini-season-official-rules'));
+ const {evaluate}=require('../scripts/cosmetic-rank-rules.cjs');
+ const source=region=>'https://www.fortnite.com/competitive/events/S43_OverwatchWidowmakerCup/?region='+region+
+  '&round=S43_OverwatchWidowmakerCup_'+region;
+ for(const [region,rank] of Object.entries(r.cosmeticRanks)){
+  const row={tournamentId:id,seasonId:'S43',chapter:7,season:5,
+   verified:true,kind:'参加確認',region,rank,points:100,matches:11,kills:12,vrs:1,source:source(region)};
+  assert.equal(evaluate(row).eligible,true,region+' cutoff must include last eligible team');
+  assert.equal(evaluate({...row,rank:rank+1}).eligible,false,region+' rank cutoff must be inclusive only');
+  assert.equal(evaluate({...row,source:row.source.replace('S43_OverwatchWidowmakerCup/', 'S43_OverwatchWidowmakerCup_ZB/')}).eligible,false);
+  assert.equal(evaluate({...row,source:row.source.replace('S43_OverwatchWidowmakerCup/', 'S43_OverwatchWidowmakerCup_Mobile/')}).eligible,false);
+  assert.equal(evaluate({...row,prize:100}).eligible,true,'reward rule is rank-only; cash is separately protected by auto publisher');
+ }
+ const wrong=clone(registry);
+ wrong.rules.find(x=>x.id===id).cosmeticRanks.EU=525;
+ assert.match(validateRegistry(wrong,tournaments).join('\\n'),/Widowmaker BR/);
+ const mistaken=clone(registry);
+ mistaken.rules.find(x=>x.id===id).eventIds=['S43_OverwatchWidowmakerCup_ZB'];
+ assert.match(validateRegistry(mistaken,tournaments).join('\\n'),/イベントID|Widowmaker BR/);
 });
 
 test('S43 One Piece Zoro Zero Build is separate from BR and Mobile with verified cosmetics',()=>{

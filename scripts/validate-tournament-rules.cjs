@@ -311,6 +311,22 @@ function validateRegistry(doc,tournaments){
    if(!object(rule.cosmeticRanks)||!Object.keys(rule.cosmeticRanks).length||
       Object.entries(rule.cosmeticRanks).some(([region,value])=>!REGIONS.has(region)||!positive(value)))fail(id,'スキン獲得順位が不正');
    if(rule.prizePerVictory!==undefined||rule.advance!==undefined)fail(id,'スキン大会に現金賞金や予選通過を混在させないでください');
+   // Official 2026-11-19 Epic Battle Royale BRANCH of the Widowmaker event.
+   // Separate Zero Build & touch-only Mobile event IDs must never share its cutoffs.
+   if(id==='ch7s5-overwatch-widowmaker-cup-battle-royale'){
+    const official='https://www.fortnite.com/competitive/rules-guidelines/rules-library/overwatch-widowmaker-cup-chapter-7-mini-season-official-rules';
+    const cutoffs={OCE:50,ME:50,EU:500,BR:100,NAC:350,NAW:100};
+    const items=['Widowmaker Outfit',"Widowmaker's Fang Pickaxe","Widow's Kiss Back Bling"];
+    if(rule.source!==official||rule.team!=='duo'||rule.sessionMinutes!==180||
+       JSON.stringify(rule.eventIds)!=='["S43_OverwatchWidowmakerCup"]'||
+       rule.matchCaps?.['スキン大会']!==11||
+       JSON.stringify(rule.cosmeticRanks)!==JSON.stringify(cutoffs)||
+       JSON.stringify(rule.cosmeticPrizes?.rankRewards)!==JSON.stringify(items)||
+       rule.cosmeticPrizes?.minimumPoints!==8||
+       rule.cosmeticPrizes?.spray!=="Widowmaker's Mark Spray"||
+       rule.autoApproval!=='verified-team-rank')
+      fail(id,'公式Widowmaker BRの地域別順位・報酬・別イベントIDが不正');
+   }
   }
  }
  return errors;

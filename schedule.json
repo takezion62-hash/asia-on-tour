@@ -4,7 +4,7 @@
   "seasonLabel": "CH7 Mini-Season",
   "checkedAt": "2026-11-06",
   "timezone": "Asia/Tokyo",
-  "note": "Confirmed overseas competitive sessions from Epic Games competitive event schedules; UTC starts converted to JST. Snapshot, not live. Region-locked FNCS (including FNCS Solos Reload Qualifiers, Heats, LCQ and Finals) excluded. FNCS Division 1 may be added if officially announced. Schedules and cosmetics are not archive results or confirmed player rewards. One Piece: Zoro Cup Battle Royale's six overseas 2026-11-06/07 UTC sessions were checked against the event schedule on 2026-11-06; cosmetic rewards are not player result records.",
+  "note": "Confirmed overseas competitive sessions from Epic Games competitive event schedules; UTC starts converted to JST. Snapshot, not live. Region-locked FNCS (including FNCS Solos Reload Qualifiers, Heats, LCQ and Finals) excluded. FNCS Division 1 may be added if officially announced. Schedules and cosmetics are not archive results or confirmed player rewards. One Piece: Zoro Cup Battle Royale's six overseas 2026-11-06/07 UTC sessions were checked against the event schedule on 2026-11-06; cosmetic rewards are not player result records. Addendum 2026-11-20: six verified overseas Overwatch: Widowmaker Cup BR Duos sessions (OCE, ME, EU, BR, NAC, NAW), checked against Epic event pages and Fortnite Tracker UTC windows. Other regions/Zero Build/Mobile are distinct. No participation or prize claims inferred.",
   "sessions": [
     {
       "id": "s43_performanceevaluationtrios-eu-2026-11-05-1700-event-1-round-1",
@@ -343,22 +343,6 @@
       "url": "https://www.fortnite.com/competitive/events/S43_ReloadZBDuosCashCup/?region=NAW"
     },
     {
-      "id": "s43_rankedcupreloadduos_zb-oce-2026-11-09-0700-event-2",
-      "seasonId": "S43",
-      "name": "Duos Reload Ranked Cup Zero Build",
-      "eventId": "S43_RankedCupReloadDuos_ZB",
-      "region": "OCE",
-      "series": "ranked-cup",
-      "mode": "reload-zero-build",
-      "round": "Event 2",
-      "stage": "単一ラウンド",
-      "startUtc": "2026-11-09T07:00:00Z",
-      "dateJst": "2026-11-09",
-      "timeJst": "16:00",
-      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupReloadDuos_ZB/?region=OCE",
-      "rewardType": "cosmetic"
-    },
-    {
       "id": "s43_rankedcupreloadduos-oce-2026-11-09-0700-event-2",
       "seasonId": "S43",
       "name": "Duos Reload Ranked Cup Battle Royale",
@@ -372,6 +356,22 @@
       "dateJst": "2026-11-09",
       "timeJst": "16:00",
       "url": "https://www.fortnite.com/competitive/events/S43_RankedCupReloadDuos/?region=OCE",
+      "rewardType": "cosmetic"
+    },
+    {
+      "id": "s43_rankedcupreloadduos_zb-oce-2026-11-09-0700-event-2",
+      "seasonId": "S43",
+      "name": "Duos Reload Ranked Cup Zero Build",
+      "eventId": "S43_RankedCupReloadDuos_ZB",
+      "region": "OCE",
+      "series": "ranked-cup",
+      "mode": "reload-zero-build",
+      "round": "Event 2",
+      "stage": "単一ラウンド",
+      "startUtc": "2026-11-09T07:00:00Z",
+      "dateJst": "2026-11-09",
+      "timeJst": "16:00",
+      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupReloadDuos_ZB/?region=OCE",
       "rewardType": "cosmetic"
     },
     {
@@ -405,22 +405,6 @@
       "url": "https://www.fortnite.com/competitive/events/S43_SquadsVictoryCup/?region=OCE"
     },
     {
-      "id": "s43_rankedcupreloadduos_zb-me-2026-11-09-1500-event-2",
-      "seasonId": "S43",
-      "name": "Duos Reload Ranked Cup Zero Build",
-      "eventId": "S43_RankedCupReloadDuos_ZB",
-      "region": "ME",
-      "series": "ranked-cup",
-      "mode": "reload-zero-build",
-      "round": "Event 2",
-      "stage": "単一ラウンド",
-      "startUtc": "2026-11-09T15:00:00Z",
-      "dateJst": "2026-11-10",
-      "timeJst": "00:00",
-      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupReloadDuos_ZB/?region=ME",
-      "rewardType": "cosmetic"
-    },
-    {
       "id": "s43_rankedcupreloadduos-me-2026-11-09-1500-event-2",
       "seasonId": "S43",
       "name": "Duos Reload Ranked Cup Battle Royale",
@@ -434,6 +418,22 @@
       "dateJst": "2026-11-10",
       "timeJst": "00:00",
       "url": "https://www.fortnite.com/competitive/events/S43_RankedCupReloadDuos/?region=ME",
+      "rewardType": "cosmetic"
+    },
+    {
+      "id": "s43_rankedcupreloadduos_zb-me-2026-11-09-1500-event-2",
+      "seasonId": "S43",
+      "name": "Duos Reload Ranked Cup Zero Build",
+      "eventId": "S43_RankedCupReloadDuos_ZB",
+      "region": "ME",
+      "series": "ranked-cup",
+      "mode": "reload-zero-build",
+      "round": "Event 2",
+      "stage": "単一ラウンド",
+      "startUtc": "2026-11-09T15:00:00Z",
+      "dateJst": "2026-11-10",
+      "timeJst": "00:00",
+      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupReloadDuos_ZB/?region=ME",
       "rewardType": "cosmetic"
     },
     {
@@ -452,22 +452,6 @@
       "url": "https://www.fortnite.com/competitive/events/S43_SquadsVictoryCup/?region=ME"
     },
     {
-      "id": "s43_rankedcupreloadduos_zb-eu-2026-11-09-1800-event-2",
-      "seasonId": "S43",
-      "name": "Duos Reload Ranked Cup Zero Build",
-      "eventId": "S43_RankedCupReloadDuos_ZB",
-      "region": "EU",
-      "series": "ranked-cup",
-      "mode": "reload-zero-build",
-      "round": "Event 2",
-      "stage": "単一ラウンド",
-      "startUtc": "2026-11-09T18:00:00Z",
-      "dateJst": "2026-11-10",
-      "timeJst": "03:00",
-      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupReloadDuos_ZB/?region=EU",
-      "rewardType": "cosmetic"
-    },
-    {
       "id": "s43_rankedcupreloadduos-eu-2026-11-09-1800-event-2",
       "seasonId": "S43",
       "name": "Duos Reload Ranked Cup Battle Royale",
@@ -481,6 +465,22 @@
       "dateJst": "2026-11-10",
       "timeJst": "03:00",
       "url": "https://www.fortnite.com/competitive/events/S43_RankedCupReloadDuos/?region=EU",
+      "rewardType": "cosmetic"
+    },
+    {
+      "id": "s43_rankedcupreloadduos_zb-eu-2026-11-09-1800-event-2",
+      "seasonId": "S43",
+      "name": "Duos Reload Ranked Cup Zero Build",
+      "eventId": "S43_RankedCupReloadDuos_ZB",
+      "region": "EU",
+      "series": "ranked-cup",
+      "mode": "reload-zero-build",
+      "round": "Event 2",
+      "stage": "単一ラウンド",
+      "startUtc": "2026-11-09T18:00:00Z",
+      "dateJst": "2026-11-10",
+      "timeJst": "03:00",
+      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupReloadDuos_ZB/?region=EU",
       "rewardType": "cosmetic"
     },
     {
@@ -514,22 +514,6 @@
       "url": "https://www.fortnite.com/competitive/events/S43_SquadsVictoryCup/?region=ME"
     },
     {
-      "id": "s43_rankedcupreloadduos_zb-br-2026-11-09-2100-event-2",
-      "seasonId": "S43",
-      "name": "Duos Reload Ranked Cup Zero Build",
-      "eventId": "S43_RankedCupReloadDuos_ZB",
-      "region": "BR",
-      "series": "ranked-cup",
-      "mode": "reload-zero-build",
-      "round": "Event 2",
-      "stage": "単一ラウンド",
-      "startUtc": "2026-11-09T21:00:00Z",
-      "dateJst": "2026-11-10",
-      "timeJst": "06:00",
-      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupReloadDuos_ZB/?region=BR",
-      "rewardType": "cosmetic"
-    },
-    {
       "id": "s43_rankedcupreloadduos-br-2026-11-09-2100-event-2",
       "seasonId": "S43",
       "name": "Duos Reload Ranked Cup Battle Royale",
@@ -543,6 +527,22 @@
       "dateJst": "2026-11-10",
       "timeJst": "06:00",
       "url": "https://www.fortnite.com/competitive/events/S43_RankedCupReloadDuos/?region=BR",
+      "rewardType": "cosmetic"
+    },
+    {
+      "id": "s43_rankedcupreloadduos_zb-br-2026-11-09-2100-event-2",
+      "seasonId": "S43",
+      "name": "Duos Reload Ranked Cup Zero Build",
+      "eventId": "S43_RankedCupReloadDuos_ZB",
+      "region": "BR",
+      "series": "ranked-cup",
+      "mode": "reload-zero-build",
+      "round": "Event 2",
+      "stage": "単一ラウンド",
+      "startUtc": "2026-11-09T21:00:00Z",
+      "dateJst": "2026-11-10",
+      "timeJst": "06:00",
+      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupReloadDuos_ZB/?region=BR",
       "rewardType": "cosmetic"
     },
     {
@@ -576,20 +576,19 @@
       "url": "https://www.fortnite.com/competitive/events/S43_SquadsVictoryCup/?region=EU"
     },
     {
-      "id": "s43_rankedcupreloadduos_zb-nac-2026-11-10-0000-event-2",
+      "id": "s43_squadsvictorycup-br-2026-11-10-0000-event-1-round-2",
       "seasonId": "S43",
-      "name": "Duos Reload Ranked Cup Zero Build",
-      "eventId": "S43_RankedCupReloadDuos_ZB",
-      "region": "NAC",
-      "series": "ranked-cup",
-      "mode": "reload-zero-build",
-      "round": "Event 2",
-      "stage": "単一ラウンド",
+      "name": "Squads Victory Cup Battle Royale",
+      "eventId": "S43_SquadsVictoryCup",
+      "region": "BR",
+      "series": "victory-cup",
+      "mode": "battle-royale",
+      "round": "Event 1 · Round 2",
+      "stage": "決勝",
       "startUtc": "2026-11-10T00:00:00Z",
       "dateJst": "2026-11-10",
       "timeJst": "09:00",
-      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupReloadDuos_ZB/?region=NAC",
-      "rewardType": "cosmetic"
+      "url": "https://www.fortnite.com/competitive/events/S43_SquadsVictoryCup/?region=BR"
     },
     {
       "id": "s43_rankedcupreloadduos-nac-2026-11-10-0000-event-2",
@@ -608,19 +607,20 @@
       "rewardType": "cosmetic"
     },
     {
-      "id": "s43_squadsvictorycup-br-2026-11-10-0000-event-1-round-2",
+      "id": "s43_rankedcupreloadduos_zb-nac-2026-11-10-0000-event-2",
       "seasonId": "S43",
-      "name": "Squads Victory Cup Battle Royale",
-      "eventId": "S43_SquadsVictoryCup",
-      "region": "BR",
-      "series": "victory-cup",
-      "mode": "battle-royale",
-      "round": "Event 1 · Round 2",
-      "stage": "決勝",
+      "name": "Duos Reload Ranked Cup Zero Build",
+      "eventId": "S43_RankedCupReloadDuos_ZB",
+      "region": "NAC",
+      "series": "ranked-cup",
+      "mode": "reload-zero-build",
+      "round": "Event 2",
+      "stage": "単一ラウンド",
       "startUtc": "2026-11-10T00:00:00Z",
       "dateJst": "2026-11-10",
       "timeJst": "09:00",
-      "url": "https://www.fortnite.com/competitive/events/S43_SquadsVictoryCup/?region=BR"
+      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupReloadDuos_ZB/?region=NAC",
+      "rewardType": "cosmetic"
     },
     {
       "id": "s43_squadsvictorycup-nac-2026-11-10-0000-event-1-round-1",
@@ -638,22 +638,6 @@
       "url": "https://www.fortnite.com/competitive/events/S43_SquadsVictoryCup/?region=NAC"
     },
     {
-      "id": "s43_rankedcupreloadduos_zb-naw-2026-11-10-0200-event-2",
-      "seasonId": "S43",
-      "name": "Duos Reload Ranked Cup Zero Build",
-      "eventId": "S43_RankedCupReloadDuos_ZB",
-      "region": "NAW",
-      "series": "ranked-cup",
-      "mode": "reload-zero-build",
-      "round": "Event 2",
-      "stage": "単一ラウンド",
-      "startUtc": "2026-11-10T02:00:00Z",
-      "dateJst": "2026-11-10",
-      "timeJst": "11:00",
-      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupReloadDuos_ZB/?region=NAW",
-      "rewardType": "cosmetic"
-    },
-    {
       "id": "s43_rankedcupreloadduos-naw-2026-11-10-0200-event-2",
       "seasonId": "S43",
       "name": "Duos Reload Ranked Cup Battle Royale",
@@ -667,6 +651,22 @@
       "dateJst": "2026-11-10",
       "timeJst": "11:00",
       "url": "https://www.fortnite.com/competitive/events/S43_RankedCupReloadDuos/?region=NAW",
+      "rewardType": "cosmetic"
+    },
+    {
+      "id": "s43_rankedcupreloadduos_zb-naw-2026-11-10-0200-event-2",
+      "seasonId": "S43",
+      "name": "Duos Reload Ranked Cup Zero Build",
+      "eventId": "S43_RankedCupReloadDuos_ZB",
+      "region": "NAW",
+      "series": "ranked-cup",
+      "mode": "reload-zero-build",
+      "round": "Event 2",
+      "stage": "単一ラウンド",
+      "startUtc": "2026-11-10T02:00:00Z",
+      "dateJst": "2026-11-10",
+      "timeJst": "11:00",
+      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupReloadDuos_ZB/?region=NAW",
       "rewardType": "cosmetic"
     },
     {
@@ -730,22 +730,6 @@
       "url": "https://www.fortnite.com/competitive/events/S43_ArenaCashCup/?region=OCE"
     },
     {
-      "id": "s43_rankedcupsolo_zb-oce-2026-11-10-0700-event-2",
-      "seasonId": "S43",
-      "name": "Solo Ranked Cup Zero Build",
-      "eventId": "S43_RankedCupSolo_ZB",
-      "region": "OCE",
-      "series": "ranked-cup",
-      "mode": "zero-build",
-      "round": "Event 2",
-      "stage": "単一ラウンド",
-      "startUtc": "2026-11-10T07:00:00Z",
-      "dateJst": "2026-11-10",
-      "timeJst": "16:00",
-      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupSolo_ZB/?region=OCE",
-      "rewardType": "cosmetic"
-    },
-    {
       "id": "s43_rankedcupsolo-oce-2026-11-10-0700-event-2",
       "seasonId": "S43",
       "name": "Solo Ranked Cup Battle Royale",
@@ -759,6 +743,22 @@
       "dateJst": "2026-11-10",
       "timeJst": "16:00",
       "url": "https://www.fortnite.com/competitive/events/S43_RankedCupSolo/?region=OCE",
+      "rewardType": "cosmetic"
+    },
+    {
+      "id": "s43_rankedcupsolo_zb-oce-2026-11-10-0700-event-2",
+      "seasonId": "S43",
+      "name": "Solo Ranked Cup Zero Build",
+      "eventId": "S43_RankedCupSolo_ZB",
+      "region": "OCE",
+      "series": "ranked-cup",
+      "mode": "zero-build",
+      "round": "Event 2",
+      "stage": "単一ラウンド",
+      "startUtc": "2026-11-10T07:00:00Z",
+      "dateJst": "2026-11-10",
+      "timeJst": "16:00",
+      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupSolo_ZB/?region=OCE",
       "rewardType": "cosmetic"
     },
     {
@@ -777,22 +777,6 @@
       "url": "https://www.fortnite.com/competitive/events/S43_ArenaCashCup/?region=ME"
     },
     {
-      "id": "s43_rankedcupsolo_zb-me-2026-11-10-1500-event-2",
-      "seasonId": "S43",
-      "name": "Solo Ranked Cup Zero Build",
-      "eventId": "S43_RankedCupSolo_ZB",
-      "region": "ME",
-      "series": "ranked-cup",
-      "mode": "zero-build",
-      "round": "Event 2",
-      "stage": "単一ラウンド",
-      "startUtc": "2026-11-10T15:00:00Z",
-      "dateJst": "2026-11-11",
-      "timeJst": "00:00",
-      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupSolo_ZB/?region=ME",
-      "rewardType": "cosmetic"
-    },
-    {
       "id": "s43_rankedcupsolo-me-2026-11-10-1500-event-2",
       "seasonId": "S43",
       "name": "Solo Ranked Cup Battle Royale",
@@ -806,6 +790,22 @@
       "dateJst": "2026-11-11",
       "timeJst": "00:00",
       "url": "https://www.fortnite.com/competitive/events/S43_RankedCupSolo/?region=ME",
+      "rewardType": "cosmetic"
+    },
+    {
+      "id": "s43_rankedcupsolo_zb-me-2026-11-10-1500-event-2",
+      "seasonId": "S43",
+      "name": "Solo Ranked Cup Zero Build",
+      "eventId": "S43_RankedCupSolo_ZB",
+      "region": "ME",
+      "series": "ranked-cup",
+      "mode": "zero-build",
+      "round": "Event 2",
+      "stage": "単一ラウンド",
+      "startUtc": "2026-11-10T15:00:00Z",
+      "dateJst": "2026-11-11",
+      "timeJst": "00:00",
+      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupSolo_ZB/?region=ME",
       "rewardType": "cosmetic"
     },
     {
@@ -824,22 +824,6 @@
       "url": "https://www.fortnite.com/competitive/events/S43_ArenaCashCup/?region=EU"
     },
     {
-      "id": "s43_rankedcupsolo_zb-eu-2026-11-10-1800-event-2",
-      "seasonId": "S43",
-      "name": "Solo Ranked Cup Zero Build",
-      "eventId": "S43_RankedCupSolo_ZB",
-      "region": "EU",
-      "series": "ranked-cup",
-      "mode": "zero-build",
-      "round": "Event 2",
-      "stage": "単一ラウンド",
-      "startUtc": "2026-11-10T18:00:00Z",
-      "dateJst": "2026-11-11",
-      "timeJst": "03:00",
-      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupSolo_ZB/?region=EU",
-      "rewardType": "cosmetic"
-    },
-    {
       "id": "s43_rankedcupsolo-eu-2026-11-10-1800-event-2",
       "seasonId": "S43",
       "name": "Solo Ranked Cup Battle Royale",
@@ -853,6 +837,22 @@
       "dateJst": "2026-11-11",
       "timeJst": "03:00",
       "url": "https://www.fortnite.com/competitive/events/S43_RankedCupSolo/?region=EU",
+      "rewardType": "cosmetic"
+    },
+    {
+      "id": "s43_rankedcupsolo_zb-eu-2026-11-10-1800-event-2",
+      "seasonId": "S43",
+      "name": "Solo Ranked Cup Zero Build",
+      "eventId": "S43_RankedCupSolo_ZB",
+      "region": "EU",
+      "series": "ranked-cup",
+      "mode": "zero-build",
+      "round": "Event 2",
+      "stage": "単一ラウンド",
+      "startUtc": "2026-11-10T18:00:00Z",
+      "dateJst": "2026-11-11",
+      "timeJst": "03:00",
+      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupSolo_ZB/?region=EU",
       "rewardType": "cosmetic"
     },
     {
@@ -871,22 +871,6 @@
       "url": "https://www.fortnite.com/competitive/events/S43_ArenaCashCup/?region=BR"
     },
     {
-      "id": "s43_rankedcupsolo_zb-br-2026-11-10-2100-event-2",
-      "seasonId": "S43",
-      "name": "Solo Ranked Cup Zero Build",
-      "eventId": "S43_RankedCupSolo_ZB",
-      "region": "BR",
-      "series": "ranked-cup",
-      "mode": "zero-build",
-      "round": "Event 2",
-      "stage": "単一ラウンド",
-      "startUtc": "2026-11-10T21:00:00Z",
-      "dateJst": "2026-11-11",
-      "timeJst": "06:00",
-      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupSolo_ZB/?region=BR",
-      "rewardType": "cosmetic"
-    },
-    {
       "id": "s43_rankedcupsolo-br-2026-11-10-2100-event-2",
       "seasonId": "S43",
       "name": "Solo Ranked Cup Battle Royale",
@@ -900,6 +884,22 @@
       "dateJst": "2026-11-11",
       "timeJst": "06:00",
       "url": "https://www.fortnite.com/competitive/events/S43_RankedCupSolo/?region=BR",
+      "rewardType": "cosmetic"
+    },
+    {
+      "id": "s43_rankedcupsolo_zb-br-2026-11-10-2100-event-2",
+      "seasonId": "S43",
+      "name": "Solo Ranked Cup Zero Build",
+      "eventId": "S43_RankedCupSolo_ZB",
+      "region": "BR",
+      "series": "ranked-cup",
+      "mode": "zero-build",
+      "round": "Event 2",
+      "stage": "単一ラウンド",
+      "startUtc": "2026-11-10T21:00:00Z",
+      "dateJst": "2026-11-11",
+      "timeJst": "06:00",
+      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupSolo_ZB/?region=BR",
       "rewardType": "cosmetic"
     },
     {
@@ -918,22 +918,6 @@
       "url": "https://www.fortnite.com/competitive/events/S43_ArenaCashCup/?region=NAC"
     },
     {
-      "id": "s43_rankedcupsolo_zb-nac-2026-11-11-0000-event-2",
-      "seasonId": "S43",
-      "name": "Solo Ranked Cup Zero Build",
-      "eventId": "S43_RankedCupSolo_ZB",
-      "region": "NAC",
-      "series": "ranked-cup",
-      "mode": "zero-build",
-      "round": "Event 2",
-      "stage": "単一ラウンド",
-      "startUtc": "2026-11-11T00:00:00Z",
-      "dateJst": "2026-11-11",
-      "timeJst": "09:00",
-      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupSolo_ZB/?region=NAC",
-      "rewardType": "cosmetic"
-    },
-    {
       "id": "s43_rankedcupsolo-nac-2026-11-11-0000-event-2",
       "seasonId": "S43",
       "name": "Solo Ranked Cup Battle Royale",
@@ -947,6 +931,22 @@
       "dateJst": "2026-11-11",
       "timeJst": "09:00",
       "url": "https://www.fortnite.com/competitive/events/S43_RankedCupSolo/?region=NAC",
+      "rewardType": "cosmetic"
+    },
+    {
+      "id": "s43_rankedcupsolo_zb-nac-2026-11-11-0000-event-2",
+      "seasonId": "S43",
+      "name": "Solo Ranked Cup Zero Build",
+      "eventId": "S43_RankedCupSolo_ZB",
+      "region": "NAC",
+      "series": "ranked-cup",
+      "mode": "zero-build",
+      "round": "Event 2",
+      "stage": "単一ラウンド",
+      "startUtc": "2026-11-11T00:00:00Z",
+      "dateJst": "2026-11-11",
+      "timeJst": "09:00",
+      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupSolo_ZB/?region=NAC",
       "rewardType": "cosmetic"
     },
     {
@@ -965,22 +965,6 @@
       "url": "https://www.fortnite.com/competitive/events/S43_ArenaCashCup/?region=NAW"
     },
     {
-      "id": "s43_rankedcupsolo_zb-naw-2026-11-11-0200-event-2",
-      "seasonId": "S43",
-      "name": "Solo Ranked Cup Zero Build",
-      "eventId": "S43_RankedCupSolo_ZB",
-      "region": "NAW",
-      "series": "ranked-cup",
-      "mode": "zero-build",
-      "round": "Event 2",
-      "stage": "単一ラウンド",
-      "startUtc": "2026-11-11T02:00:00Z",
-      "dateJst": "2026-11-11",
-      "timeJst": "11:00",
-      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupSolo_ZB/?region=NAW",
-      "rewardType": "cosmetic"
-    },
-    {
       "id": "s43_rankedcupsolo-naw-2026-11-11-0200-event-2",
       "seasonId": "S43",
       "name": "Solo Ranked Cup Battle Royale",
@@ -994,6 +978,22 @@
       "dateJst": "2026-11-11",
       "timeJst": "11:00",
       "url": "https://www.fortnite.com/competitive/events/S43_RankedCupSolo/?region=NAW",
+      "rewardType": "cosmetic"
+    },
+    {
+      "id": "s43_rankedcupsolo_zb-naw-2026-11-11-0200-event-2",
+      "seasonId": "S43",
+      "name": "Solo Ranked Cup Zero Build",
+      "eventId": "S43_RankedCupSolo_ZB",
+      "region": "NAW",
+      "series": "ranked-cup",
+      "mode": "zero-build",
+      "round": "Event 2",
+      "stage": "単一ラウンド",
+      "startUtc": "2026-11-11T02:00:00Z",
+      "dateJst": "2026-11-11",
+      "timeJst": "11:00",
+      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupSolo_ZB/?region=NAW",
       "rewardType": "cosmetic"
     },
     {
@@ -1327,22 +1327,6 @@
       "url": "https://www.fortnite.com/competitive/events/S43_ReloadZBDuosCashCup/?region=NAW"
     },
     {
-      "id": "s43_rankedcupreloadduos_zb-oce-2026-11-16-0700-event-3",
-      "seasonId": "S43",
-      "name": "Duos Reload Ranked Cup Zero Build",
-      "eventId": "S43_RankedCupReloadDuos_ZB",
-      "region": "OCE",
-      "series": "ranked-cup",
-      "mode": "reload-zero-build",
-      "round": "Event 3",
-      "stage": "単一ラウンド",
-      "startUtc": "2026-11-16T07:00:00Z",
-      "dateJst": "2026-11-16",
-      "timeJst": "16:00",
-      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupReloadDuos_ZB/?region=OCE",
-      "rewardType": "cosmetic"
-    },
-    {
       "id": "s43_rankedcupreloadduos-oce-2026-11-16-0700-event-3",
       "seasonId": "S43",
       "name": "Duos Reload Ranked Cup Battle Royale",
@@ -1359,19 +1343,19 @@
       "rewardType": "cosmetic"
     },
     {
-      "id": "s43_rankedcupreloadduos_zb-me-2026-11-16-1500-event-3",
+      "id": "s43_rankedcupreloadduos_zb-oce-2026-11-16-0700-event-3",
       "seasonId": "S43",
       "name": "Duos Reload Ranked Cup Zero Build",
       "eventId": "S43_RankedCupReloadDuos_ZB",
-      "region": "ME",
+      "region": "OCE",
       "series": "ranked-cup",
       "mode": "reload-zero-build",
       "round": "Event 3",
       "stage": "単一ラウンド",
-      "startUtc": "2026-11-16T15:00:00Z",
-      "dateJst": "2026-11-17",
-      "timeJst": "00:00",
-      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupReloadDuos_ZB/?region=ME",
+      "startUtc": "2026-11-16T07:00:00Z",
+      "dateJst": "2026-11-16",
+      "timeJst": "16:00",
+      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupReloadDuos_ZB/?region=OCE",
       "rewardType": "cosmetic"
     },
     {
@@ -1391,19 +1375,19 @@
       "rewardType": "cosmetic"
     },
     {
-      "id": "s43_rankedcupreloadduos_zb-eu-2026-11-16-1800-event-3",
+      "id": "s43_rankedcupreloadduos_zb-me-2026-11-16-1500-event-3",
       "seasonId": "S43",
       "name": "Duos Reload Ranked Cup Zero Build",
       "eventId": "S43_RankedCupReloadDuos_ZB",
-      "region": "EU",
+      "region": "ME",
       "series": "ranked-cup",
       "mode": "reload-zero-build",
       "round": "Event 3",
       "stage": "単一ラウンド",
-      "startUtc": "2026-11-16T18:00:00Z",
+      "startUtc": "2026-11-16T15:00:00Z",
       "dateJst": "2026-11-17",
-      "timeJst": "03:00",
-      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupReloadDuos_ZB/?region=EU",
+      "timeJst": "00:00",
+      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupReloadDuos_ZB/?region=ME",
       "rewardType": "cosmetic"
     },
     {
@@ -1423,19 +1407,19 @@
       "rewardType": "cosmetic"
     },
     {
-      "id": "s43_rankedcupreloadduos_zb-br-2026-11-16-2100-event-3",
+      "id": "s43_rankedcupreloadduos_zb-eu-2026-11-16-1800-event-3",
       "seasonId": "S43",
       "name": "Duos Reload Ranked Cup Zero Build",
       "eventId": "S43_RankedCupReloadDuos_ZB",
-      "region": "BR",
+      "region": "EU",
       "series": "ranked-cup",
       "mode": "reload-zero-build",
       "round": "Event 3",
       "stage": "単一ラウンド",
-      "startUtc": "2026-11-16T21:00:00Z",
+      "startUtc": "2026-11-16T18:00:00Z",
       "dateJst": "2026-11-17",
-      "timeJst": "06:00",
-      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupReloadDuos_ZB/?region=BR",
+      "timeJst": "03:00",
+      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupReloadDuos_ZB/?region=EU",
       "rewardType": "cosmetic"
     },
     {
@@ -1455,19 +1439,19 @@
       "rewardType": "cosmetic"
     },
     {
-      "id": "s43_rankedcupreloadduos_zb-nac-2026-11-17-0000-event-3",
+      "id": "s43_rankedcupreloadduos_zb-br-2026-11-16-2100-event-3",
       "seasonId": "S43",
       "name": "Duos Reload Ranked Cup Zero Build",
       "eventId": "S43_RankedCupReloadDuos_ZB",
-      "region": "NAC",
+      "region": "BR",
       "series": "ranked-cup",
       "mode": "reload-zero-build",
       "round": "Event 3",
       "stage": "単一ラウンド",
-      "startUtc": "2026-11-17T00:00:00Z",
+      "startUtc": "2026-11-16T21:00:00Z",
       "dateJst": "2026-11-17",
-      "timeJst": "09:00",
-      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupReloadDuos_ZB/?region=NAC",
+      "timeJst": "06:00",
+      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupReloadDuos_ZB/?region=BR",
       "rewardType": "cosmetic"
     },
     {
@@ -1487,19 +1471,19 @@
       "rewardType": "cosmetic"
     },
     {
-      "id": "s43_rankedcupreloadduos_zb-naw-2026-11-17-0200-event-3",
+      "id": "s43_rankedcupreloadduos_zb-nac-2026-11-17-0000-event-3",
       "seasonId": "S43",
       "name": "Duos Reload Ranked Cup Zero Build",
       "eventId": "S43_RankedCupReloadDuos_ZB",
-      "region": "NAW",
+      "region": "NAC",
       "series": "ranked-cup",
       "mode": "reload-zero-build",
       "round": "Event 3",
       "stage": "単一ラウンド",
-      "startUtc": "2026-11-17T02:00:00Z",
+      "startUtc": "2026-11-17T00:00:00Z",
       "dateJst": "2026-11-17",
-      "timeJst": "11:00",
-      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupReloadDuos_ZB/?region=NAW",
+      "timeJst": "09:00",
+      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupReloadDuos_ZB/?region=NAC",
       "rewardType": "cosmetic"
     },
     {
@@ -1519,19 +1503,19 @@
       "rewardType": "cosmetic"
     },
     {
-      "id": "s43_rankedcupsolo_zb-oce-2026-11-17-0700-event-3",
+      "id": "s43_rankedcupreloadduos_zb-naw-2026-11-17-0200-event-3",
       "seasonId": "S43",
-      "name": "Solo Ranked Cup Zero Build",
-      "eventId": "S43_RankedCupSolo_ZB",
-      "region": "OCE",
+      "name": "Duos Reload Ranked Cup Zero Build",
+      "eventId": "S43_RankedCupReloadDuos_ZB",
+      "region": "NAW",
       "series": "ranked-cup",
-      "mode": "zero-build",
+      "mode": "reload-zero-build",
       "round": "Event 3",
       "stage": "単一ラウンド",
-      "startUtc": "2026-11-17T07:00:00Z",
+      "startUtc": "2026-11-17T02:00:00Z",
       "dateJst": "2026-11-17",
-      "timeJst": "16:00",
-      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupSolo_ZB/?region=OCE",
+      "timeJst": "11:00",
+      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupReloadDuos_ZB/?region=NAW",
       "rewardType": "cosmetic"
     },
     {
@@ -1551,19 +1535,19 @@
       "rewardType": "cosmetic"
     },
     {
-      "id": "s43_rankedcupsolo_zb-me-2026-11-17-1500-event-3",
+      "id": "s43_rankedcupsolo_zb-oce-2026-11-17-0700-event-3",
       "seasonId": "S43",
       "name": "Solo Ranked Cup Zero Build",
       "eventId": "S43_RankedCupSolo_ZB",
-      "region": "ME",
+      "region": "OCE",
       "series": "ranked-cup",
       "mode": "zero-build",
       "round": "Event 3",
       "stage": "単一ラウンド",
-      "startUtc": "2026-11-17T15:00:00Z",
-      "dateJst": "2026-11-18",
-      "timeJst": "00:00",
-      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupSolo_ZB/?region=ME",
+      "startUtc": "2026-11-17T07:00:00Z",
+      "dateJst": "2026-11-17",
+      "timeJst": "16:00",
+      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupSolo_ZB/?region=OCE",
       "rewardType": "cosmetic"
     },
     {
@@ -1583,19 +1567,19 @@
       "rewardType": "cosmetic"
     },
     {
-      "id": "s43_rankedcupsolo_zb-eu-2026-11-17-1800-event-3",
+      "id": "s43_rankedcupsolo_zb-me-2026-11-17-1500-event-3",
       "seasonId": "S43",
       "name": "Solo Ranked Cup Zero Build",
       "eventId": "S43_RankedCupSolo_ZB",
-      "region": "EU",
+      "region": "ME",
       "series": "ranked-cup",
       "mode": "zero-build",
       "round": "Event 3",
       "stage": "単一ラウンド",
-      "startUtc": "2026-11-17T18:00:00Z",
+      "startUtc": "2026-11-17T15:00:00Z",
       "dateJst": "2026-11-18",
-      "timeJst": "03:00",
-      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupSolo_ZB/?region=EU",
+      "timeJst": "00:00",
+      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupSolo_ZB/?region=ME",
       "rewardType": "cosmetic"
     },
     {
@@ -1615,19 +1599,19 @@
       "rewardType": "cosmetic"
     },
     {
-      "id": "s43_rankedcupsolo_zb-br-2026-11-17-2100-event-3",
+      "id": "s43_rankedcupsolo_zb-eu-2026-11-17-1800-event-3",
       "seasonId": "S43",
       "name": "Solo Ranked Cup Zero Build",
       "eventId": "S43_RankedCupSolo_ZB",
-      "region": "BR",
+      "region": "EU",
       "series": "ranked-cup",
       "mode": "zero-build",
       "round": "Event 3",
       "stage": "単一ラウンド",
-      "startUtc": "2026-11-17T21:00:00Z",
+      "startUtc": "2026-11-17T18:00:00Z",
       "dateJst": "2026-11-18",
-      "timeJst": "06:00",
-      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupSolo_ZB/?region=BR",
+      "timeJst": "03:00",
+      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupSolo_ZB/?region=EU",
       "rewardType": "cosmetic"
     },
     {
@@ -1647,19 +1631,19 @@
       "rewardType": "cosmetic"
     },
     {
-      "id": "s43_rankedcupsolo_zb-nac-2026-11-18-0000-event-3",
+      "id": "s43_rankedcupsolo_zb-br-2026-11-17-2100-event-3",
       "seasonId": "S43",
       "name": "Solo Ranked Cup Zero Build",
       "eventId": "S43_RankedCupSolo_ZB",
-      "region": "NAC",
+      "region": "BR",
       "series": "ranked-cup",
       "mode": "zero-build",
       "round": "Event 3",
       "stage": "単一ラウンド",
-      "startUtc": "2026-11-18T00:00:00Z",
+      "startUtc": "2026-11-17T21:00:00Z",
       "dateJst": "2026-11-18",
-      "timeJst": "09:00",
-      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupSolo_ZB/?region=NAC",
+      "timeJst": "06:00",
+      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupSolo_ZB/?region=BR",
       "rewardType": "cosmetic"
     },
     {
@@ -1679,19 +1663,19 @@
       "rewardType": "cosmetic"
     },
     {
-      "id": "s43_rankedcupsolo_zb-naw-2026-11-18-0200-event-3",
+      "id": "s43_rankedcupsolo_zb-nac-2026-11-18-0000-event-3",
       "seasonId": "S43",
       "name": "Solo Ranked Cup Zero Build",
       "eventId": "S43_RankedCupSolo_ZB",
-      "region": "NAW",
+      "region": "NAC",
       "series": "ranked-cup",
       "mode": "zero-build",
       "round": "Event 3",
       "stage": "単一ラウンド",
-      "startUtc": "2026-11-18T02:00:00Z",
+      "startUtc": "2026-11-18T00:00:00Z",
       "dateJst": "2026-11-18",
-      "timeJst": "11:00",
-      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupSolo_ZB/?region=NAW",
+      "timeJst": "09:00",
+      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupSolo_ZB/?region=NAC",
       "rewardType": "cosmetic"
     },
     {
@@ -1708,6 +1692,22 @@
       "dateJst": "2026-11-18",
       "timeJst": "11:00",
       "url": "https://www.fortnite.com/competitive/events/S43_RankedCupSolo/?region=NAW",
+      "rewardType": "cosmetic"
+    },
+    {
+      "id": "s43_rankedcupsolo_zb-naw-2026-11-18-0200-event-3",
+      "seasonId": "S43",
+      "name": "Solo Ranked Cup Zero Build",
+      "eventId": "S43_RankedCupSolo_ZB",
+      "region": "NAW",
+      "series": "ranked-cup",
+      "mode": "zero-build",
+      "round": "Event 3",
+      "stage": "単一ラウンド",
+      "startUtc": "2026-11-18T02:00:00Z",
+      "dateJst": "2026-11-18",
+      "timeJst": "11:00",
+      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupSolo_ZB/?region=NAW",
       "rewardType": "cosmetic"
     },
     {
@@ -1771,6 +1771,22 @@
       "url": "https://www.fortnite.com/competitive/events/S43_PerformanceEvaluationTrios/?region=NAC"
     },
     {
+      "id": "s43_overwatchwidowmakercup-oce-2026-11-20-0700-session-1",
+      "seasonId": "S43",
+      "name": "Overwatch: Widowmaker Cup Battle Royale",
+      "eventId": "S43_OverwatchWidowmakerCup",
+      "region": "OCE",
+      "series": "skin-cup",
+      "mode": "battle-royale",
+      "round": "Session 1",
+      "stage": "単一ラウンド",
+      "startUtc": "2026-11-20T07:00:00Z",
+      "dateJst": "2026-11-20",
+      "timeJst": "16:00",
+      "url": "https://www.fortnite.com/competitive/events/S43_OverwatchWidowmakerCup/?region=OCE",
+      "rewardType": "cosmetic"
+    },
+    {
       "id": "s43_reloadzbduoscashcup-oce-2026-11-20-0700-event-2-round-2",
       "seasonId": "S43",
       "name": "Reload ZB Duos Cash Cup Zero Build",
@@ -1784,6 +1800,22 @@
       "dateJst": "2026-11-20",
       "timeJst": "16:00",
       "url": "https://www.fortnite.com/competitive/events/S43_ReloadZBDuosCashCup/?region=OCE"
+    },
+    {
+      "id": "s43_overwatchwidowmakercup-me-2026-11-20-1500-session-1",
+      "seasonId": "S43",
+      "name": "Overwatch: Widowmaker Cup Battle Royale",
+      "eventId": "S43_OverwatchWidowmakerCup",
+      "region": "ME",
+      "series": "skin-cup",
+      "mode": "battle-royale",
+      "round": "Session 1",
+      "stage": "単一ラウンド",
+      "startUtc": "2026-11-20T15:00:00Z",
+      "dateJst": "2026-11-21",
+      "timeJst": "00:00",
+      "url": "https://www.fortnite.com/competitive/events/S43_OverwatchWidowmakerCup/?region=ME",
+      "rewardType": "cosmetic"
     },
     {
       "id": "s43_reloadzbduoscashcup-me-2026-11-20-1500-event-2-round-2",
@@ -1801,6 +1833,22 @@
       "url": "https://www.fortnite.com/competitive/events/S43_ReloadZBDuosCashCup/?region=ME"
     },
     {
+      "id": "s43_overwatchwidowmakercup-eu-2026-11-20-1800-session-1",
+      "seasonId": "S43",
+      "name": "Overwatch: Widowmaker Cup Battle Royale",
+      "eventId": "S43_OverwatchWidowmakerCup",
+      "region": "EU",
+      "series": "skin-cup",
+      "mode": "battle-royale",
+      "round": "Session 1",
+      "stage": "単一ラウンド",
+      "startUtc": "2026-11-20T18:00:00Z",
+      "dateJst": "2026-11-21",
+      "timeJst": "03:00",
+      "url": "https://www.fortnite.com/competitive/events/S43_OverwatchWidowmakerCup/?region=EU",
+      "rewardType": "cosmetic"
+    },
+    {
       "id": "s43_reloadzbduoscashcup-eu-2026-11-20-1800-event-2-round-2",
       "seasonId": "S43",
       "name": "Reload ZB Duos Cash Cup Zero Build",
@@ -1814,6 +1862,22 @@
       "dateJst": "2026-11-21",
       "timeJst": "03:00",
       "url": "https://www.fortnite.com/competitive/events/S43_ReloadZBDuosCashCup/?region=EU"
+    },
+    {
+      "id": "s43_overwatchwidowmakercup-br-2026-11-20-2100-session-1",
+      "seasonId": "S43",
+      "name": "Overwatch: Widowmaker Cup Battle Royale",
+      "eventId": "S43_OverwatchWidowmakerCup",
+      "region": "BR",
+      "series": "skin-cup",
+      "mode": "battle-royale",
+      "round": "Session 1",
+      "stage": "単一ラウンド",
+      "startUtc": "2026-11-20T21:00:00Z",
+      "dateJst": "2026-11-21",
+      "timeJst": "06:00",
+      "url": "https://www.fortnite.com/competitive/events/S43_OverwatchWidowmakerCup/?region=BR",
+      "rewardType": "cosmetic"
     },
     {
       "id": "s43_reloadzbduoscashcup-br-2026-11-20-2100-event-2-round-2",
@@ -1831,6 +1895,22 @@
       "url": "https://www.fortnite.com/competitive/events/S43_ReloadZBDuosCashCup/?region=BR"
     },
     {
+      "id": "s43_overwatchwidowmakercup-nac-2026-11-21-0000-session-1",
+      "seasonId": "S43",
+      "name": "Overwatch: Widowmaker Cup Battle Royale",
+      "eventId": "S43_OverwatchWidowmakerCup",
+      "region": "NAC",
+      "series": "skin-cup",
+      "mode": "battle-royale",
+      "round": "Session 1",
+      "stage": "単一ラウンド",
+      "startUtc": "2026-11-21T00:00:00Z",
+      "dateJst": "2026-11-21",
+      "timeJst": "09:00",
+      "url": "https://www.fortnite.com/competitive/events/S43_OverwatchWidowmakerCup/?region=NAC",
+      "rewardType": "cosmetic"
+    },
+    {
       "id": "s43_reloadzbduoscashcup-nac-2026-11-21-0000-event-2-round-2",
       "seasonId": "S43",
       "name": "Reload ZB Duos Cash Cup Zero Build",
@@ -1844,6 +1924,22 @@
       "dateJst": "2026-11-21",
       "timeJst": "09:00",
       "url": "https://www.fortnite.com/competitive/events/S43_ReloadZBDuosCashCup/?region=NAC"
+    },
+    {
+      "id": "s43_overwatchwidowmakercup-naw-2026-11-21-0200-session-1",
+      "seasonId": "S43",
+      "name": "Overwatch: Widowmaker Cup Battle Royale",
+      "eventId": "S43_OverwatchWidowmakerCup",
+      "region": "NAW",
+      "series": "skin-cup",
+      "mode": "battle-royale",
+      "round": "Session 1",
+      "stage": "単一ラウンド",
+      "startUtc": "2026-11-21T02:00:00Z",
+      "dateJst": "2026-11-21",
+      "timeJst": "11:00",
+      "url": "https://www.fortnite.com/competitive/events/S43_OverwatchWidowmakerCup/?region=NAW",
+      "rewardType": "cosmetic"
     },
     {
       "id": "s43_reloadzbduoscashcup-naw-2026-11-21-0200-event-2-round-2",
@@ -1951,22 +2047,6 @@
       "url": "https://www.fortnite.com/competitive/events/S43_TriosCashCup/?region=NAW"
     },
     {
-      "id": "s43_rankedcupreloadduos_zb-oce-2026-11-23-0700-event-4",
-      "seasonId": "S43",
-      "name": "Duos Reload Ranked Cup Zero Build",
-      "eventId": "S43_RankedCupReloadDuos_ZB",
-      "region": "OCE",
-      "series": "ranked-cup",
-      "mode": "reload-zero-build",
-      "round": "Event 4",
-      "stage": "単一ラウンド",
-      "startUtc": "2026-11-23T07:00:00Z",
-      "dateJst": "2026-11-23",
-      "timeJst": "16:00",
-      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupReloadDuos_ZB/?region=OCE",
-      "rewardType": "cosmetic"
-    },
-    {
       "id": "s43_rankedcupreloadduos-oce-2026-11-23-0700-event-4",
       "seasonId": "S43",
       "name": "Duos Reload Ranked Cup Battle Royale",
@@ -1980,6 +2060,22 @@
       "dateJst": "2026-11-23",
       "timeJst": "16:00",
       "url": "https://www.fortnite.com/competitive/events/S43_RankedCupReloadDuos/?region=OCE",
+      "rewardType": "cosmetic"
+    },
+    {
+      "id": "s43_rankedcupreloadduos_zb-oce-2026-11-23-0700-event-4",
+      "seasonId": "S43",
+      "name": "Duos Reload Ranked Cup Zero Build",
+      "eventId": "S43_RankedCupReloadDuos_ZB",
+      "region": "OCE",
+      "series": "ranked-cup",
+      "mode": "reload-zero-build",
+      "round": "Event 4",
+      "stage": "単一ラウンド",
+      "startUtc": "2026-11-23T07:00:00Z",
+      "dateJst": "2026-11-23",
+      "timeJst": "16:00",
+      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupReloadDuos_ZB/?region=OCE",
       "rewardType": "cosmetic"
     },
     {
@@ -2013,22 +2109,6 @@
       "url": "https://www.fortnite.com/competitive/events/S43_SquadsVictoryCup/?region=OCE"
     },
     {
-      "id": "s43_rankedcupreloadduos_zb-me-2026-11-23-1500-event-4",
-      "seasonId": "S43",
-      "name": "Duos Reload Ranked Cup Zero Build",
-      "eventId": "S43_RankedCupReloadDuos_ZB",
-      "region": "ME",
-      "series": "ranked-cup",
-      "mode": "reload-zero-build",
-      "round": "Event 4",
-      "stage": "単一ラウンド",
-      "startUtc": "2026-11-23T15:00:00Z",
-      "dateJst": "2026-11-24",
-      "timeJst": "00:00",
-      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupReloadDuos_ZB/?region=ME",
-      "rewardType": "cosmetic"
-    },
-    {
       "id": "s43_rankedcupreloadduos-me-2026-11-23-1500-event-4",
       "seasonId": "S43",
       "name": "Duos Reload Ranked Cup Battle Royale",
@@ -2042,6 +2122,22 @@
       "dateJst": "2026-11-24",
       "timeJst": "00:00",
       "url": "https://www.fortnite.com/competitive/events/S43_RankedCupReloadDuos/?region=ME",
+      "rewardType": "cosmetic"
+    },
+    {
+      "id": "s43_rankedcupreloadduos_zb-me-2026-11-23-1500-event-4",
+      "seasonId": "S43",
+      "name": "Duos Reload Ranked Cup Zero Build",
+      "eventId": "S43_RankedCupReloadDuos_ZB",
+      "region": "ME",
+      "series": "ranked-cup",
+      "mode": "reload-zero-build",
+      "round": "Event 4",
+      "stage": "単一ラウンド",
+      "startUtc": "2026-11-23T15:00:00Z",
+      "dateJst": "2026-11-24",
+      "timeJst": "00:00",
+      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupReloadDuos_ZB/?region=ME",
       "rewardType": "cosmetic"
     },
     {
@@ -2060,22 +2156,6 @@
       "url": "https://www.fortnite.com/competitive/events/S43_SquadsVictoryCup/?region=ME"
     },
     {
-      "id": "s43_rankedcupreloadduos_zb-eu-2026-11-23-1800-event-4",
-      "seasonId": "S43",
-      "name": "Duos Reload Ranked Cup Zero Build",
-      "eventId": "S43_RankedCupReloadDuos_ZB",
-      "region": "EU",
-      "series": "ranked-cup",
-      "mode": "reload-zero-build",
-      "round": "Event 4",
-      "stage": "単一ラウンド",
-      "startUtc": "2026-11-23T18:00:00Z",
-      "dateJst": "2026-11-24",
-      "timeJst": "03:00",
-      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupReloadDuos_ZB/?region=EU",
-      "rewardType": "cosmetic"
-    },
-    {
       "id": "s43_rankedcupreloadduos-eu-2026-11-23-1800-event-4",
       "seasonId": "S43",
       "name": "Duos Reload Ranked Cup Battle Royale",
@@ -2089,6 +2169,22 @@
       "dateJst": "2026-11-24",
       "timeJst": "03:00",
       "url": "https://www.fortnite.com/competitive/events/S43_RankedCupReloadDuos/?region=EU",
+      "rewardType": "cosmetic"
+    },
+    {
+      "id": "s43_rankedcupreloadduos_zb-eu-2026-11-23-1800-event-4",
+      "seasonId": "S43",
+      "name": "Duos Reload Ranked Cup Zero Build",
+      "eventId": "S43_RankedCupReloadDuos_ZB",
+      "region": "EU",
+      "series": "ranked-cup",
+      "mode": "reload-zero-build",
+      "round": "Event 4",
+      "stage": "単一ラウンド",
+      "startUtc": "2026-11-23T18:00:00Z",
+      "dateJst": "2026-11-24",
+      "timeJst": "03:00",
+      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupReloadDuos_ZB/?region=EU",
       "rewardType": "cosmetic"
     },
     {
@@ -2122,22 +2218,6 @@
       "url": "https://www.fortnite.com/competitive/events/S43_SquadsVictoryCup/?region=ME"
     },
     {
-      "id": "s43_rankedcupreloadduos_zb-br-2026-11-23-2100-event-4",
-      "seasonId": "S43",
-      "name": "Duos Reload Ranked Cup Zero Build",
-      "eventId": "S43_RankedCupReloadDuos_ZB",
-      "region": "BR",
-      "series": "ranked-cup",
-      "mode": "reload-zero-build",
-      "round": "Event 4",
-      "stage": "単一ラウンド",
-      "startUtc": "2026-11-23T21:00:00Z",
-      "dateJst": "2026-11-24",
-      "timeJst": "06:00",
-      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupReloadDuos_ZB/?region=BR",
-      "rewardType": "cosmetic"
-    },
-    {
       "id": "s43_rankedcupreloadduos-br-2026-11-23-2100-event-4",
       "seasonId": "S43",
       "name": "Duos Reload Ranked Cup Battle Royale",
@@ -2151,6 +2231,22 @@
       "dateJst": "2026-11-24",
       "timeJst": "06:00",
       "url": "https://www.fortnite.com/competitive/events/S43_RankedCupReloadDuos/?region=BR",
+      "rewardType": "cosmetic"
+    },
+    {
+      "id": "s43_rankedcupreloadduos_zb-br-2026-11-23-2100-event-4",
+      "seasonId": "S43",
+      "name": "Duos Reload Ranked Cup Zero Build",
+      "eventId": "S43_RankedCupReloadDuos_ZB",
+      "region": "BR",
+      "series": "ranked-cup",
+      "mode": "reload-zero-build",
+      "round": "Event 4",
+      "stage": "単一ラウンド",
+      "startUtc": "2026-11-23T21:00:00Z",
+      "dateJst": "2026-11-24",
+      "timeJst": "06:00",
+      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupReloadDuos_ZB/?region=BR",
       "rewardType": "cosmetic"
     },
     {
@@ -2184,20 +2280,19 @@
       "url": "https://www.fortnite.com/competitive/events/S43_SquadsVictoryCup/?region=EU"
     },
     {
-      "id": "s43_rankedcupreloadduos_zb-nac-2026-11-24-0000-event-4",
+      "id": "s43_squadsvictorycup-br-2026-11-24-0000-event-2-round-2",
       "seasonId": "S43",
-      "name": "Duos Reload Ranked Cup Zero Build",
-      "eventId": "S43_RankedCupReloadDuos_ZB",
-      "region": "NAC",
-      "series": "ranked-cup",
-      "mode": "reload-zero-build",
-      "round": "Event 4",
-      "stage": "単一ラウンド",
+      "name": "Squads Victory Cup Battle Royale",
+      "eventId": "S43_SquadsVictoryCup",
+      "region": "BR",
+      "series": "victory-cup",
+      "mode": "battle-royale",
+      "round": "Event 2 · Round 2",
+      "stage": "決勝",
       "startUtc": "2026-11-24T00:00:00Z",
       "dateJst": "2026-11-24",
       "timeJst": "09:00",
-      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupReloadDuos_ZB/?region=NAC",
-      "rewardType": "cosmetic"
+      "url": "https://www.fortnite.com/competitive/events/S43_SquadsVictoryCup/?region=BR"
     },
     {
       "id": "s43_rankedcupreloadduos-nac-2026-11-24-0000-event-4",
@@ -2216,19 +2311,20 @@
       "rewardType": "cosmetic"
     },
     {
-      "id": "s43_squadsvictorycup-br-2026-11-24-0000-event-2-round-2",
+      "id": "s43_rankedcupreloadduos_zb-nac-2026-11-24-0000-event-4",
       "seasonId": "S43",
-      "name": "Squads Victory Cup Battle Royale",
-      "eventId": "S43_SquadsVictoryCup",
-      "region": "BR",
-      "series": "victory-cup",
-      "mode": "battle-royale",
-      "round": "Event 2 · Round 2",
-      "stage": "決勝",
+      "name": "Duos Reload Ranked Cup Zero Build",
+      "eventId": "S43_RankedCupReloadDuos_ZB",
+      "region": "NAC",
+      "series": "ranked-cup",
+      "mode": "reload-zero-build",
+      "round": "Event 4",
+      "stage": "単一ラウンド",
       "startUtc": "2026-11-24T00:00:00Z",
       "dateJst": "2026-11-24",
       "timeJst": "09:00",
-      "url": "https://www.fortnite.com/competitive/events/S43_SquadsVictoryCup/?region=BR"
+      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupReloadDuos_ZB/?region=NAC",
+      "rewardType": "cosmetic"
     },
     {
       "id": "s43_squadsvictorycup-nac-2026-11-24-0000-event-2-round-1",
@@ -2246,22 +2342,6 @@
       "url": "https://www.fortnite.com/competitive/events/S43_SquadsVictoryCup/?region=NAC"
     },
     {
-      "id": "s43_rankedcupreloadduos_zb-naw-2026-11-24-0200-event-4",
-      "seasonId": "S43",
-      "name": "Duos Reload Ranked Cup Zero Build",
-      "eventId": "S43_RankedCupReloadDuos_ZB",
-      "region": "NAW",
-      "series": "ranked-cup",
-      "mode": "reload-zero-build",
-      "round": "Event 4",
-      "stage": "単一ラウンド",
-      "startUtc": "2026-11-24T02:00:00Z",
-      "dateJst": "2026-11-24",
-      "timeJst": "11:00",
-      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupReloadDuos_ZB/?region=NAW",
-      "rewardType": "cosmetic"
-    },
-    {
       "id": "s43_rankedcupreloadduos-naw-2026-11-24-0200-event-4",
       "seasonId": "S43",
       "name": "Duos Reload Ranked Cup Battle Royale",
@@ -2275,6 +2355,22 @@
       "dateJst": "2026-11-24",
       "timeJst": "11:00",
       "url": "https://www.fortnite.com/competitive/events/S43_RankedCupReloadDuos/?region=NAW",
+      "rewardType": "cosmetic"
+    },
+    {
+      "id": "s43_rankedcupreloadduos_zb-naw-2026-11-24-0200-event-4",
+      "seasonId": "S43",
+      "name": "Duos Reload Ranked Cup Zero Build",
+      "eventId": "S43_RankedCupReloadDuos_ZB",
+      "region": "NAW",
+      "series": "ranked-cup",
+      "mode": "reload-zero-build",
+      "round": "Event 4",
+      "stage": "単一ラウンド",
+      "startUtc": "2026-11-24T02:00:00Z",
+      "dateJst": "2026-11-24",
+      "timeJst": "11:00",
+      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupReloadDuos_ZB/?region=NAW",
       "rewardType": "cosmetic"
     },
     {
@@ -2338,22 +2434,6 @@
       "url": "https://www.fortnite.com/competitive/events/S43_ArenaCashCup/?region=OCE"
     },
     {
-      "id": "s43_rankedcupsolo_zb-oce-2026-11-24-0700-event-4",
-      "seasonId": "S43",
-      "name": "Solo Ranked Cup Zero Build",
-      "eventId": "S43_RankedCupSolo_ZB",
-      "region": "OCE",
-      "series": "ranked-cup",
-      "mode": "zero-build",
-      "round": "Event 4",
-      "stage": "単一ラウンド",
-      "startUtc": "2026-11-24T07:00:00Z",
-      "dateJst": "2026-11-24",
-      "timeJst": "16:00",
-      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupSolo_ZB/?region=OCE",
-      "rewardType": "cosmetic"
-    },
-    {
       "id": "s43_rankedcupsolo-oce-2026-11-24-0700-event-4",
       "seasonId": "S43",
       "name": "Solo Ranked Cup Battle Royale",
@@ -2367,6 +2447,22 @@
       "dateJst": "2026-11-24",
       "timeJst": "16:00",
       "url": "https://www.fortnite.com/competitive/events/S43_RankedCupSolo/?region=OCE",
+      "rewardType": "cosmetic"
+    },
+    {
+      "id": "s43_rankedcupsolo_zb-oce-2026-11-24-0700-event-4",
+      "seasonId": "S43",
+      "name": "Solo Ranked Cup Zero Build",
+      "eventId": "S43_RankedCupSolo_ZB",
+      "region": "OCE",
+      "series": "ranked-cup",
+      "mode": "zero-build",
+      "round": "Event 4",
+      "stage": "単一ラウンド",
+      "startUtc": "2026-11-24T07:00:00Z",
+      "dateJst": "2026-11-24",
+      "timeJst": "16:00",
+      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupSolo_ZB/?region=OCE",
       "rewardType": "cosmetic"
     },
     {
@@ -2385,22 +2481,6 @@
       "url": "https://www.fortnite.com/competitive/events/S43_ArenaCashCup/?region=ME"
     },
     {
-      "id": "s43_rankedcupsolo_zb-me-2026-11-24-1500-event-4",
-      "seasonId": "S43",
-      "name": "Solo Ranked Cup Zero Build",
-      "eventId": "S43_RankedCupSolo_ZB",
-      "region": "ME",
-      "series": "ranked-cup",
-      "mode": "zero-build",
-      "round": "Event 4",
-      "stage": "単一ラウンド",
-      "startUtc": "2026-11-24T15:00:00Z",
-      "dateJst": "2026-11-25",
-      "timeJst": "00:00",
-      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupSolo_ZB/?region=ME",
-      "rewardType": "cosmetic"
-    },
-    {
       "id": "s43_rankedcupsolo-me-2026-11-24-1500-event-4",
       "seasonId": "S43",
       "name": "Solo Ranked Cup Battle Royale",
@@ -2414,6 +2494,22 @@
       "dateJst": "2026-11-25",
       "timeJst": "00:00",
       "url": "https://www.fortnite.com/competitive/events/S43_RankedCupSolo/?region=ME",
+      "rewardType": "cosmetic"
+    },
+    {
+      "id": "s43_rankedcupsolo_zb-me-2026-11-24-1500-event-4",
+      "seasonId": "S43",
+      "name": "Solo Ranked Cup Zero Build",
+      "eventId": "S43_RankedCupSolo_ZB",
+      "region": "ME",
+      "series": "ranked-cup",
+      "mode": "zero-build",
+      "round": "Event 4",
+      "stage": "単一ラウンド",
+      "startUtc": "2026-11-24T15:00:00Z",
+      "dateJst": "2026-11-25",
+      "timeJst": "00:00",
+      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupSolo_ZB/?region=ME",
       "rewardType": "cosmetic"
     },
     {
@@ -2432,22 +2528,6 @@
       "url": "https://www.fortnite.com/competitive/events/S43_ArenaCashCup/?region=EU"
     },
     {
-      "id": "s43_rankedcupsolo_zb-eu-2026-11-24-1800-event-4",
-      "seasonId": "S43",
-      "name": "Solo Ranked Cup Zero Build",
-      "eventId": "S43_RankedCupSolo_ZB",
-      "region": "EU",
-      "series": "ranked-cup",
-      "mode": "zero-build",
-      "round": "Event 4",
-      "stage": "単一ラウンド",
-      "startUtc": "2026-11-24T18:00:00Z",
-      "dateJst": "2026-11-25",
-      "timeJst": "03:00",
-      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupSolo_ZB/?region=EU",
-      "rewardType": "cosmetic"
-    },
-    {
       "id": "s43_rankedcupsolo-eu-2026-11-24-1800-event-4",
       "seasonId": "S43",
       "name": "Solo Ranked Cup Battle Royale",
@@ -2461,6 +2541,22 @@
       "dateJst": "2026-11-25",
       "timeJst": "03:00",
       "url": "https://www.fortnite.com/competitive/events/S43_RankedCupSolo/?region=EU",
+      "rewardType": "cosmetic"
+    },
+    {
+      "id": "s43_rankedcupsolo_zb-eu-2026-11-24-1800-event-4",
+      "seasonId": "S43",
+      "name": "Solo Ranked Cup Zero Build",
+      "eventId": "S43_RankedCupSolo_ZB",
+      "region": "EU",
+      "series": "ranked-cup",
+      "mode": "zero-build",
+      "round": "Event 4",
+      "stage": "単一ラウンド",
+      "startUtc": "2026-11-24T18:00:00Z",
+      "dateJst": "2026-11-25",
+      "timeJst": "03:00",
+      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupSolo_ZB/?region=EU",
       "rewardType": "cosmetic"
     },
     {
@@ -2479,22 +2575,6 @@
       "url": "https://www.fortnite.com/competitive/events/S43_ArenaCashCup/?region=BR"
     },
     {
-      "id": "s43_rankedcupsolo_zb-br-2026-11-24-2100-event-4",
-      "seasonId": "S43",
-      "name": "Solo Ranked Cup Zero Build",
-      "eventId": "S43_RankedCupSolo_ZB",
-      "region": "BR",
-      "series": "ranked-cup",
-      "mode": "zero-build",
-      "round": "Event 4",
-      "stage": "単一ラウンド",
-      "startUtc": "2026-11-24T21:00:00Z",
-      "dateJst": "2026-11-25",
-      "timeJst": "06:00",
-      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupSolo_ZB/?region=BR",
-      "rewardType": "cosmetic"
-    },
-    {
       "id": "s43_rankedcupsolo-br-2026-11-24-2100-event-4",
       "seasonId": "S43",
       "name": "Solo Ranked Cup Battle Royale",
@@ -2508,6 +2588,22 @@
       "dateJst": "2026-11-25",
       "timeJst": "06:00",
       "url": "https://www.fortnite.com/competitive/events/S43_RankedCupSolo/?region=BR",
+      "rewardType": "cosmetic"
+    },
+    {
+      "id": "s43_rankedcupsolo_zb-br-2026-11-24-2100-event-4",
+      "seasonId": "S43",
+      "name": "Solo Ranked Cup Zero Build",
+      "eventId": "S43_RankedCupSolo_ZB",
+      "region": "BR",
+      "series": "ranked-cup",
+      "mode": "zero-build",
+      "round": "Event 4",
+      "stage": "単一ラウンド",
+      "startUtc": "2026-11-24T21:00:00Z",
+      "dateJst": "2026-11-25",
+      "timeJst": "06:00",
+      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupSolo_ZB/?region=BR",
       "rewardType": "cosmetic"
     },
     {
@@ -2526,22 +2622,6 @@
       "url": "https://www.fortnite.com/competitive/events/S43_ArenaCashCup/?region=NAC"
     },
     {
-      "id": "s43_rankedcupsolo_zb-nac-2026-11-25-0000-event-4",
-      "seasonId": "S43",
-      "name": "Solo Ranked Cup Zero Build",
-      "eventId": "S43_RankedCupSolo_ZB",
-      "region": "NAC",
-      "series": "ranked-cup",
-      "mode": "zero-build",
-      "round": "Event 4",
-      "stage": "単一ラウンド",
-      "startUtc": "2026-11-25T00:00:00Z",
-      "dateJst": "2026-11-25",
-      "timeJst": "09:00",
-      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupSolo_ZB/?region=NAC",
-      "rewardType": "cosmetic"
-    },
-    {
       "id": "s43_rankedcupsolo-nac-2026-11-25-0000-event-4",
       "seasonId": "S43",
       "name": "Solo Ranked Cup Battle Royale",
@@ -2555,6 +2635,22 @@
       "dateJst": "2026-11-25",
       "timeJst": "09:00",
       "url": "https://www.fortnite.com/competitive/events/S43_RankedCupSolo/?region=NAC",
+      "rewardType": "cosmetic"
+    },
+    {
+      "id": "s43_rankedcupsolo_zb-nac-2026-11-25-0000-event-4",
+      "seasonId": "S43",
+      "name": "Solo Ranked Cup Zero Build",
+      "eventId": "S43_RankedCupSolo_ZB",
+      "region": "NAC",
+      "series": "ranked-cup",
+      "mode": "zero-build",
+      "round": "Event 4",
+      "stage": "単一ラウンド",
+      "startUtc": "2026-11-25T00:00:00Z",
+      "dateJst": "2026-11-25",
+      "timeJst": "09:00",
+      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupSolo_ZB/?region=NAC",
       "rewardType": "cosmetic"
     },
     {
@@ -2573,22 +2669,6 @@
       "url": "https://www.fortnite.com/competitive/events/S43_ArenaCashCup/?region=NAW"
     },
     {
-      "id": "s43_rankedcupsolo_zb-naw-2026-11-25-0200-event-4",
-      "seasonId": "S43",
-      "name": "Solo Ranked Cup Zero Build",
-      "eventId": "S43_RankedCupSolo_ZB",
-      "region": "NAW",
-      "series": "ranked-cup",
-      "mode": "zero-build",
-      "round": "Event 4",
-      "stage": "単一ラウンド",
-      "startUtc": "2026-11-25T02:00:00Z",
-      "dateJst": "2026-11-25",
-      "timeJst": "11:00",
-      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupSolo_ZB/?region=NAW",
-      "rewardType": "cosmetic"
-    },
-    {
       "id": "s43_rankedcupsolo-naw-2026-11-25-0200-event-4",
       "seasonId": "S43",
       "name": "Solo Ranked Cup Battle Royale",
@@ -2602,6 +2682,22 @@
       "dateJst": "2026-11-25",
       "timeJst": "11:00",
       "url": "https://www.fortnite.com/competitive/events/S43_RankedCupSolo/?region=NAW",
+      "rewardType": "cosmetic"
+    },
+    {
+      "id": "s43_rankedcupsolo_zb-naw-2026-11-25-0200-event-4",
+      "seasonId": "S43",
+      "name": "Solo Ranked Cup Zero Build",
+      "eventId": "S43_RankedCupSolo_ZB",
+      "region": "NAW",
+      "series": "ranked-cup",
+      "mode": "zero-build",
+      "round": "Event 4",
+      "stage": "単一ラウンド",
+      "startUtc": "2026-11-25T02:00:00Z",
+      "dateJst": "2026-11-25",
+      "timeJst": "11:00",
+      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupSolo_ZB/?region=NAW",
       "rewardType": "cosmetic"
     },
     {
@@ -2665,22 +2761,6 @@
       "url": "https://www.fortnite.com/competitive/events/S43_PerformanceEvaluationTrios/?region=NAC"
     },
     {
-      "id": "s43_rankedcupreloadduos_zb-oce-2026-11-30-0700-event-5",
-      "seasonId": "S43",
-      "name": "Duos Reload Ranked Cup Zero Build",
-      "eventId": "S43_RankedCupReloadDuos_ZB",
-      "region": "OCE",
-      "series": "ranked-cup",
-      "mode": "reload-zero-build",
-      "round": "Event 5",
-      "stage": "単一ラウンド",
-      "startUtc": "2026-11-30T07:00:00Z",
-      "dateJst": "2026-11-30",
-      "timeJst": "16:00",
-      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupReloadDuos_ZB/?region=OCE",
-      "rewardType": "cosmetic"
-    },
-    {
       "id": "s43_rankedcupreloadduos-oce-2026-11-30-0700-event-5",
       "seasonId": "S43",
       "name": "Duos Reload Ranked Cup Battle Royale",
@@ -2697,19 +2777,19 @@
       "rewardType": "cosmetic"
     },
     {
-      "id": "s43_rankedcupreloadduos_zb-me-2026-11-30-1500-event-5",
+      "id": "s43_rankedcupreloadduos_zb-oce-2026-11-30-0700-event-5",
       "seasonId": "S43",
       "name": "Duos Reload Ranked Cup Zero Build",
       "eventId": "S43_RankedCupReloadDuos_ZB",
-      "region": "ME",
+      "region": "OCE",
       "series": "ranked-cup",
       "mode": "reload-zero-build",
       "round": "Event 5",
       "stage": "単一ラウンド",
-      "startUtc": "2026-11-30T15:00:00Z",
-      "dateJst": "2026-12-01",
-      "timeJst": "00:00",
-      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupReloadDuos_ZB/?region=ME",
+      "startUtc": "2026-11-30T07:00:00Z",
+      "dateJst": "2026-11-30",
+      "timeJst": "16:00",
+      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupReloadDuos_ZB/?region=OCE",
       "rewardType": "cosmetic"
     },
     {
@@ -2729,19 +2809,19 @@
       "rewardType": "cosmetic"
     },
     {
-      "id": "s43_rankedcupreloadduos_zb-eu-2026-11-30-1800-event-5",
+      "id": "s43_rankedcupreloadduos_zb-me-2026-11-30-1500-event-5",
       "seasonId": "S43",
       "name": "Duos Reload Ranked Cup Zero Build",
       "eventId": "S43_RankedCupReloadDuos_ZB",
-      "region": "EU",
+      "region": "ME",
       "series": "ranked-cup",
       "mode": "reload-zero-build",
       "round": "Event 5",
       "stage": "単一ラウンド",
-      "startUtc": "2026-11-30T18:00:00Z",
+      "startUtc": "2026-11-30T15:00:00Z",
       "dateJst": "2026-12-01",
-      "timeJst": "03:00",
-      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupReloadDuos_ZB/?region=EU",
+      "timeJst": "00:00",
+      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupReloadDuos_ZB/?region=ME",
       "rewardType": "cosmetic"
     },
     {
@@ -2761,19 +2841,19 @@
       "rewardType": "cosmetic"
     },
     {
-      "id": "s43_rankedcupreloadduos_zb-br-2026-11-30-2100-event-5",
+      "id": "s43_rankedcupreloadduos_zb-eu-2026-11-30-1800-event-5",
       "seasonId": "S43",
       "name": "Duos Reload Ranked Cup Zero Build",
       "eventId": "S43_RankedCupReloadDuos_ZB",
-      "region": "BR",
+      "region": "EU",
       "series": "ranked-cup",
       "mode": "reload-zero-build",
       "round": "Event 5",
       "stage": "単一ラウンド",
-      "startUtc": "2026-11-30T21:00:00Z",
+      "startUtc": "2026-11-30T18:00:00Z",
       "dateJst": "2026-12-01",
-      "timeJst": "06:00",
-      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupReloadDuos_ZB/?region=BR",
+      "timeJst": "03:00",
+      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupReloadDuos_ZB/?region=EU",
       "rewardType": "cosmetic"
     },
     {
@@ -2793,19 +2873,19 @@
       "rewardType": "cosmetic"
     },
     {
-      "id": "s43_rankedcupreloadduos_zb-nac-2026-12-01-0000-event-5",
+      "id": "s43_rankedcupreloadduos_zb-br-2026-11-30-2100-event-5",
       "seasonId": "S43",
       "name": "Duos Reload Ranked Cup Zero Build",
       "eventId": "S43_RankedCupReloadDuos_ZB",
-      "region": "NAC",
+      "region": "BR",
       "series": "ranked-cup",
       "mode": "reload-zero-build",
       "round": "Event 5",
       "stage": "単一ラウンド",
-      "startUtc": "2026-12-01T00:00:00Z",
+      "startUtc": "2026-11-30T21:00:00Z",
       "dateJst": "2026-12-01",
-      "timeJst": "09:00",
-      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupReloadDuos_ZB/?region=NAC",
+      "timeJst": "06:00",
+      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupReloadDuos_ZB/?region=BR",
       "rewardType": "cosmetic"
     },
     {
@@ -2825,19 +2905,19 @@
       "rewardType": "cosmetic"
     },
     {
-      "id": "s43_rankedcupreloadduos_zb-naw-2026-12-01-0200-event-5",
+      "id": "s43_rankedcupreloadduos_zb-nac-2026-12-01-0000-event-5",
       "seasonId": "S43",
       "name": "Duos Reload Ranked Cup Zero Build",
       "eventId": "S43_RankedCupReloadDuos_ZB",
-      "region": "NAW",
+      "region": "NAC",
       "series": "ranked-cup",
       "mode": "reload-zero-build",
       "round": "Event 5",
       "stage": "単一ラウンド",
-      "startUtc": "2026-12-01T02:00:00Z",
+      "startUtc": "2026-12-01T00:00:00Z",
       "dateJst": "2026-12-01",
-      "timeJst": "11:00",
-      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupReloadDuos_ZB/?region=NAW",
+      "timeJst": "09:00",
+      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupReloadDuos_ZB/?region=NAC",
       "rewardType": "cosmetic"
     },
     {
@@ -2857,19 +2937,19 @@
       "rewardType": "cosmetic"
     },
     {
-      "id": "s43_rankedcupsolo_zb-oce-2026-12-01-0700-event-5",
+      "id": "s43_rankedcupreloadduos_zb-naw-2026-12-01-0200-event-5",
       "seasonId": "S43",
-      "name": "Solo Ranked Cup Zero Build",
-      "eventId": "S43_RankedCupSolo_ZB",
-      "region": "OCE",
+      "name": "Duos Reload Ranked Cup Zero Build",
+      "eventId": "S43_RankedCupReloadDuos_ZB",
+      "region": "NAW",
       "series": "ranked-cup",
-      "mode": "zero-build",
+      "mode": "reload-zero-build",
       "round": "Event 5",
       "stage": "単一ラウンド",
-      "startUtc": "2026-12-01T07:00:00Z",
+      "startUtc": "2026-12-01T02:00:00Z",
       "dateJst": "2026-12-01",
-      "timeJst": "16:00",
-      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupSolo_ZB/?region=OCE",
+      "timeJst": "11:00",
+      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupReloadDuos_ZB/?region=NAW",
       "rewardType": "cosmetic"
     },
     {
@@ -2889,19 +2969,19 @@
       "rewardType": "cosmetic"
     },
     {
-      "id": "s43_rankedcupsolo_zb-me-2026-12-01-1500-event-5",
+      "id": "s43_rankedcupsolo_zb-oce-2026-12-01-0700-event-5",
       "seasonId": "S43",
       "name": "Solo Ranked Cup Zero Build",
       "eventId": "S43_RankedCupSolo_ZB",
-      "region": "ME",
+      "region": "OCE",
       "series": "ranked-cup",
       "mode": "zero-build",
       "round": "Event 5",
       "stage": "単一ラウンド",
-      "startUtc": "2026-12-01T15:00:00Z",
-      "dateJst": "2026-12-02",
-      "timeJst": "00:00",
-      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupSolo_ZB/?region=ME",
+      "startUtc": "2026-12-01T07:00:00Z",
+      "dateJst": "2026-12-01",
+      "timeJst": "16:00",
+      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupSolo_ZB/?region=OCE",
       "rewardType": "cosmetic"
     },
     {
@@ -2921,19 +3001,19 @@
       "rewardType": "cosmetic"
     },
     {
-      "id": "s43_rankedcupsolo_zb-eu-2026-12-01-1800-event-5",
+      "id": "s43_rankedcupsolo_zb-me-2026-12-01-1500-event-5",
       "seasonId": "S43",
       "name": "Solo Ranked Cup Zero Build",
       "eventId": "S43_RankedCupSolo_ZB",
-      "region": "EU",
+      "region": "ME",
       "series": "ranked-cup",
       "mode": "zero-build",
       "round": "Event 5",
       "stage": "単一ラウンド",
-      "startUtc": "2026-12-01T18:00:00Z",
+      "startUtc": "2026-12-01T15:00:00Z",
       "dateJst": "2026-12-02",
-      "timeJst": "03:00",
-      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupSolo_ZB/?region=EU",
+      "timeJst": "00:00",
+      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupSolo_ZB/?region=ME",
       "rewardType": "cosmetic"
     },
     {
@@ -2953,19 +3033,19 @@
       "rewardType": "cosmetic"
     },
     {
-      "id": "s43_rankedcupsolo_zb-br-2026-12-01-2100-event-5",
+      "id": "s43_rankedcupsolo_zb-eu-2026-12-01-1800-event-5",
       "seasonId": "S43",
       "name": "Solo Ranked Cup Zero Build",
       "eventId": "S43_RankedCupSolo_ZB",
-      "region": "BR",
+      "region": "EU",
       "series": "ranked-cup",
       "mode": "zero-build",
       "round": "Event 5",
       "stage": "単一ラウンド",
-      "startUtc": "2026-12-01T21:00:00Z",
+      "startUtc": "2026-12-01T18:00:00Z",
       "dateJst": "2026-12-02",
-      "timeJst": "06:00",
-      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupSolo_ZB/?region=BR",
+      "timeJst": "03:00",
+      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupSolo_ZB/?region=EU",
       "rewardType": "cosmetic"
     },
     {
@@ -2985,19 +3065,19 @@
       "rewardType": "cosmetic"
     },
     {
-      "id": "s43_rankedcupsolo_zb-nac-2026-12-02-0000-event-5",
+      "id": "s43_rankedcupsolo_zb-br-2026-12-01-2100-event-5",
       "seasonId": "S43",
       "name": "Solo Ranked Cup Zero Build",
       "eventId": "S43_RankedCupSolo_ZB",
-      "region": "NAC",
+      "region": "BR",
       "series": "ranked-cup",
       "mode": "zero-build",
       "round": "Event 5",
       "stage": "単一ラウンド",
-      "startUtc": "2026-12-02T00:00:00Z",
+      "startUtc": "2026-12-01T21:00:00Z",
       "dateJst": "2026-12-02",
-      "timeJst": "09:00",
-      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupSolo_ZB/?region=NAC",
+      "timeJst": "06:00",
+      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupSolo_ZB/?region=BR",
       "rewardType": "cosmetic"
     },
     {
@@ -3017,19 +3097,19 @@
       "rewardType": "cosmetic"
     },
     {
-      "id": "s43_rankedcupsolo_zb-naw-2026-12-02-0200-event-5",
+      "id": "s43_rankedcupsolo_zb-nac-2026-12-02-0000-event-5",
       "seasonId": "S43",
       "name": "Solo Ranked Cup Zero Build",
       "eventId": "S43_RankedCupSolo_ZB",
-      "region": "NAW",
+      "region": "NAC",
       "series": "ranked-cup",
       "mode": "zero-build",
       "round": "Event 5",
       "stage": "単一ラウンド",
-      "startUtc": "2026-12-02T02:00:00Z",
+      "startUtc": "2026-12-02T00:00:00Z",
       "dateJst": "2026-12-02",
-      "timeJst": "11:00",
-      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupSolo_ZB/?region=NAW",
+      "timeJst": "09:00",
+      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupSolo_ZB/?region=NAC",
       "rewardType": "cosmetic"
     },
     {
@@ -3046,6 +3126,22 @@
       "dateJst": "2026-12-02",
       "timeJst": "11:00",
       "url": "https://www.fortnite.com/competitive/events/S43_RankedCupSolo/?region=NAW",
+      "rewardType": "cosmetic"
+    },
+    {
+      "id": "s43_rankedcupsolo_zb-naw-2026-12-02-0200-event-5",
+      "seasonId": "S43",
+      "name": "Solo Ranked Cup Zero Build",
+      "eventId": "S43_RankedCupSolo_ZB",
+      "region": "NAW",
+      "series": "ranked-cup",
+      "mode": "zero-build",
+      "round": "Event 5",
+      "stage": "単一ラウンド",
+      "startUtc": "2026-12-02T02:00:00Z",
+      "dateJst": "2026-12-02",
+      "timeJst": "11:00",
+      "url": "https://www.fortnite.com/competitive/events/S43_RankedCupSolo_ZB/?region=NAW",
       "rewardType": "cosmetic"
     }
   ]
