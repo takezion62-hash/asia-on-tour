@@ -730,30 +730,6 @@
       "reviewReason": "確認専用大会は自動承認不可"
     },
     {
-      "id": "auto-s31-0b092ec0da05",
-      "date": "2024-09-10",
-      "region": "NAC",
-      "player": "Harukiyo",
-      "playerRaw": "DFM Harukiyo",
-      "event": "Solo Victory Cup Battle Royale",
-      "round": "Event 2 · Round 1 / 予選",
-      "rank": 2318,
-      "points": 144,
-      "kills": 21,
-      "vrs": 1,
-      "prize": 0,
-      "kind": "予選",
-      "matches": 7,
-      "seasonId": "S31",
-      "chapter": 5,
-      "season": 4,
-      "tournamentId": "ch5s4-solo-victory-cup",
-      "source": "https://www.fortnite.com/competitive/events/S31_SoloVictoryCashCup/?region=NAC&round=S31_SoloVictoryCashCup_Event2Round1_NAC",
-      "verified": true,
-      "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。",
-      "reviewReason": "順位表の取得が完了していません"
-    },
-    {
       "id": "auto-s30-3610764653f7",
       "date": "2024-07-30",
       "region": "NAC",
@@ -826,5 +802,5 @@
       "reviewReason": "順位表の取得が完了していません"
     }
   ],
-  "manualReviewedAt": "2026-11-20T10:36:56.599Z"
+  "manualReviewedAt": "2026-11-20T16:40:18.978Z"
 }
