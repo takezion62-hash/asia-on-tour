@@ -14,6 +14,9 @@ on:
       - scripts/apply-s28-nac-zb-duos-three-20261119.cjs
       - scripts/verified-s28-nac-zb-duos-three-20261119.cjs
       - data/manual-approvals/20261119-s28-nac-zb-duos-three.json
+      - scripts/apply-mobile-series-ten-20261121.cjs
+      - scripts/verified-mobile-series-ten-20261121.cjs
+      - data/manual-approvals/20261121-mobile-series-ten.json
       - scripts/apply-mobile-series-nine-20261121.cjs
       - scripts/verified-mobile-series-nine-20261121.cjs
       - data/manual-approvals/20261121-mobile-series-nine.json
@@ -179,6 +182,8 @@ jobs:
             node scripts/source-results-store.cjs verify
             node scripts/apply-s28-nac-zb-duos-three-20261119.cjs --dry-run
             node scripts/apply-s28-nac-zb-duos-three-20261119.cjs
+            node scripts/apply-mobile-series-ten-20261121.cjs --dry-run
+            node scripts/apply-mobile-series-ten-20261121.cjs
             node scripts/apply-mobile-series-nine-20261121.cjs --dry-run
             node scripts/apply-mobile-series-nine-20261121.cjs
             node scripts/apply-s21-s25-s41-s42-ten-20261121.cjs --dry-run
