@@ -3354,6 +3354,8 @@
       "season": 3,
       "seasonId": "S41",
       "sourceEventIds": [
+        "S41_MobileSeriesHeat2",
+        "S41_MobileSeriesHeat1",
         "S41_MobileSeriesHeat3",
         "S41_MobileSeriesHeat4"
       ],
@@ -3375,6 +3377,36 @@
         {
           "text": "Epic公式2026 August Heats NAW/NAC賞金帯：NAC9-12位$150、NAW9-16位$100。各Heat上位4名のみQualifier Sessionに進出。",
           "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-mobile-series-chapter-7-official-rules"
+        },
+        {
+          "text": "OCE 2026-06-20 Heat 1 と 2026-07-25 Heat 2：各Heat上位4名のみ次段階へ進出。賞金獲得者は進出と独立して記録。",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-mobile-series-chapter-7-official-rules"
+        }
+      ]
+    },
+    {
+      "id": "ch7s3-mobile-reload-mini-venture-victory-cup",
+      "name": "Mobile Reload (Mini Venture) Victory Cup",
+      "chapter": 7,
+      "season": 3,
+      "seasonId": "S41",
+      "sourceEventIds": [
+        "S41_MobileVictoryCup_ReloadminiV"
+      ],
+      "series": "victory-cup",
+      "mode": "reload-zero-build",
+      "subtype": "mobile-reload-mini-venture-victory-cup",
+      "team": "solo",
+      "platform": "mobile",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "Epic公式Ch7S3：Mobile Reload (Mini Venture)はZero Build Reload Solo。Round 2の1Victory Royaleごとに個人$50。",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-mobile-victory-cups-chapter-7-season-3-official-rules"
+        },
+        {
+          "text": "Fortnite Tracker OCE Day 1 Round 2、2026-06-21。",
+          "url": "https://fortnitetracker.com/events/epicgames_S41_MobileVictoryCup_ReloadminiV_OCE?window=S41_MobileVictoryCup_Day1_Round2_ReloadminiV_OCE"
         }
       ]
     },
