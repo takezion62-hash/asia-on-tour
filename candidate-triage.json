@@ -1,12 +1,12 @@
 {
   "version": 1,
-  "sourceCheckedAt": "2026-11-21T07:44:11.710Z",
-  "total": 62,
+  "sourceCheckedAt": "2026-11-21T13:46:52.463Z",
+  "total": 65,
   "alreadyResolved": 0,
   "byYear": [
     {
       "name": "2024",
-      "count": 42
+      "count": 45
     },
     {
       "name": "2025",
@@ -19,12 +19,16 @@
   ],
   "byRegion": [
     {
+      "name": "BR",
+      "count": 1
+    },
+    {
       "name": "ME",
       "count": 2
     },
     {
       "name": "NAC",
-      "count": 32
+      "count": 34
     },
     {
       "name": "NAW",
@@ -65,8 +69,12 @@
       "count": 4
     },
     {
+      "name": "ZB Solo Victory Cup / BR / 2024",
+      "count": 1
+    },
+    {
       "name": "ZB Solo Victory Cup / NAC / 2024",
-      "count": 32
+      "count": 34
     },
     {
       "name": "ZB Solo Victory Cup / OCE / 2024",
@@ -80,7 +88,7 @@
     },
     {
       "name": "partial-scan",
-      "count": 35
+      "count": 38
     }
   ],
   "queue": [
@@ -1001,7 +1009,7 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 13,
+        "seenPages": 15,
         "totalPages": 100,
         "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event1Round1_NAC",
         "possibleExistingId": null
@@ -1034,7 +1042,7 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 13,
+        "seenPages": 15,
         "totalPages": 100,
         "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event1Round1_NAC",
         "possibleExistingId": null
@@ -1067,7 +1075,40 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 13,
+        "seenPages": 15,
+        "totalPages": 100,
+        "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event1Round1_NAC",
+        "possibleExistingId": null
+      },
+      "rewardState": "source-amount-present-not-verified-by-triage"
+    },
+    {
+      "id": "auto-s30-9ea03e167335",
+      "origin": "history",
+      "date": "2024-06-04",
+      "year": "2024",
+      "region": "NAC",
+      "tournamentId": "ch5s3-zb-solo-victory",
+      "event": "ZB Solo Victory Cup",
+      "round": "Event 1 · Round 1 / 予選",
+      "player": "おろないと",
+      "kind": "予選",
+      "rank": 1497,
+      "points": 111,
+      "kills": 18,
+      "vrs": 0,
+      "prize": 0,
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=NAC&round=S30_SoloZBVictoryCashCup_Event1Round1_NAC",
+      "status": "partial-scan",
+      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
+      "reason": "順位表の取得が完了していません",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": false,
+        "observedPartial": true,
+        "seenPages": 15,
         "totalPages": 100,
         "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event1Round1_NAC",
         "possibleExistingId": null
@@ -1100,7 +1141,7 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 4,
+        "seenPages": 6,
         "totalPages": 18,
         "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_OCE/S30_SoloZBVictoryCashCup_Event2Round2_OCE",
         "possibleExistingId": null
@@ -1133,7 +1174,7 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 4,
+        "seenPages": 6,
         "totalPages": 18,
         "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_OCE/S30_SoloZBVictoryCashCup_Event2Round2_OCE",
         "possibleExistingId": null
@@ -1166,12 +1207,45 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 4,
+        "seenPages": 6,
         "totalPages": 18,
         "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_OCE/S30_SoloZBVictoryCashCup_Event2Round2_OCE",
         "possibleExistingId": null
       },
       "rewardState": "cash-unconfirmed"
+    },
+    {
+      "id": "auto-s30-be18337a582f",
+      "origin": "history",
+      "date": "2024-06-18",
+      "year": "2024",
+      "region": "BR",
+      "tournamentId": "ch5s3-zb-solo-victory",
+      "event": "ZB Solo Victory Cup",
+      "round": "Event 3 · Round 1 / 予選",
+      "player": "112345abcde",
+      "kind": "予選",
+      "rank": 1331,
+      "points": 113,
+      "kills": 22,
+      "vrs": 0,
+      "prize": 0,
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=BR&round=S30_SoloZBVictoryCashCup_Event3Round1_BR",
+      "status": "partial-scan",
+      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
+      "reason": "順位表の取得が完了していません",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": false,
+        "observedPartial": true,
+        "seenPages": 14,
+        "totalPages": 100,
+        "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_BR/S30_SoloZBVictoryCashCup_Event3Round1_BR",
+        "possibleExistingId": null
+      },
+      "rewardState": "source-amount-present-not-verified-by-triage"
     },
     {
       "id": "auto-s30-1a2f41538bf8",
@@ -1199,7 +1273,7 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 58,
+        "seenPages": 60,
         "totalPages": 100,
         "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event7Round1_NAC",
         "possibleExistingId": null
@@ -1232,7 +1306,7 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 58,
+        "seenPages": 60,
         "totalPages": 100,
         "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event7Round1_NAC",
         "possibleExistingId": null
@@ -1265,7 +1339,7 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 58,
+        "seenPages": 60,
         "totalPages": 100,
         "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event7Round1_NAC",
         "possibleExistingId": null
@@ -1298,7 +1372,7 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 58,
+        "seenPages": 60,
         "totalPages": 100,
         "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event7Round1_NAC",
         "possibleExistingId": null
@@ -1331,7 +1405,7 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 58,
+        "seenPages": 60,
         "totalPages": 100,
         "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event7Round1_NAC",
         "possibleExistingId": null
@@ -1364,7 +1438,7 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 58,
+        "seenPages": 60,
         "totalPages": 100,
         "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event7Round1_NAC",
         "possibleExistingId": null
@@ -1397,7 +1471,7 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 58,
+        "seenPages": 60,
         "totalPages": 100,
         "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event7Round1_NAC",
         "possibleExistingId": null
@@ -1430,7 +1504,7 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 58,
+        "seenPages": 60,
         "totalPages": 100,
         "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event7Round1_NAC",
         "possibleExistingId": null
@@ -1463,7 +1537,7 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 58,
+        "seenPages": 60,
         "totalPages": 100,
         "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event7Round1_NAC",
         "possibleExistingId": null
@@ -1496,7 +1570,7 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 58,
+        "seenPages": 60,
         "totalPages": 100,
         "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event7Round1_NAC",
         "possibleExistingId": null
@@ -1529,7 +1603,7 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 58,
+        "seenPages": 60,
         "totalPages": 100,
         "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event7Round1_NAC",
         "possibleExistingId": null
@@ -1562,7 +1636,7 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 58,
+        "seenPages": 60,
         "totalPages": 100,
         "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event7Round1_NAC",
         "possibleExistingId": null
@@ -1595,7 +1669,7 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 58,
+        "seenPages": 60,
         "totalPages": 100,
         "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event7Round1_NAC",
         "possibleExistingId": null
@@ -1628,7 +1702,7 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 58,
+        "seenPages": 60,
         "totalPages": 100,
         "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event7Round1_NAC",
         "possibleExistingId": null
@@ -1661,7 +1735,7 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 58,
+        "seenPages": 60,
         "totalPages": 100,
         "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event7Round1_NAC",
         "possibleExistingId": null
@@ -1694,7 +1768,7 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 58,
+        "seenPages": 60,
         "totalPages": 100,
         "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event7Round1_NAC",
         "possibleExistingId": null
@@ -1727,7 +1801,7 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 58,
+        "seenPages": 60,
         "totalPages": 100,
         "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event7Round1_NAC",
         "possibleExistingId": null
@@ -1760,7 +1834,7 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 58,
+        "seenPages": 60,
         "totalPages": 100,
         "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event7Round1_NAC",
         "possibleExistingId": null
@@ -1793,7 +1867,7 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 58,
+        "seenPages": 60,
         "totalPages": 100,
         "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event7Round1_NAC",
         "possibleExistingId": null
@@ -1826,7 +1900,7 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 24,
+        "seenPages": 26,
         "totalPages": 100,
         "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event9Round1_NAC",
         "possibleExistingId": null
@@ -1859,7 +1933,7 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 24,
+        "seenPages": 26,
         "totalPages": 100,
         "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event9Round1_NAC",
         "possibleExistingId": null
@@ -1892,7 +1966,7 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 24,
+        "seenPages": 26,
         "totalPages": 100,
         "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event9Round1_NAC",
         "possibleExistingId": null
@@ -1925,7 +1999,7 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 24,
+        "seenPages": 26,
         "totalPages": 100,
         "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event9Round1_NAC",
         "possibleExistingId": null
@@ -1958,7 +2032,7 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 24,
+        "seenPages": 26,
         "totalPages": 100,
         "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event9Round1_NAC",
         "possibleExistingId": null
@@ -1991,7 +2065,7 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 24,
+        "seenPages": 26,
         "totalPages": 100,
         "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event9Round1_NAC",
         "possibleExistingId": null
@@ -2024,7 +2098,40 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 24,
+        "seenPages": 26,
+        "totalPages": 100,
+        "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event9Round1_NAC",
+        "possibleExistingId": null
+      },
+      "rewardState": "source-amount-present-not-verified-by-triage"
+    },
+    {
+      "id": "auto-s30-a5b190cbfc2c",
+      "origin": "history",
+      "date": "2024-08-13",
+      "year": "2024",
+      "region": "NAC",
+      "tournamentId": "ch5s3-zb-solo-victory",
+      "event": "ZB Solo Victory Cup",
+      "round": "Event 9 · Round 1 / 予選",
+      "player": "はむたろう",
+      "kind": "予選",
+      "rank": 2418,
+      "points": 121,
+      "kills": 9,
+      "vrs": 1,
+      "prize": 0,
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=NAC&round=S30_SoloZBVictoryCashCup_Event9Round1_NAC",
+      "status": "partial-scan",
+      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
+      "reason": "順位表の取得が完了していません",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": false,
+        "observedPartial": true,
+        "seenPages": 26,
         "totalPages": 100,
         "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event9Round1_NAC",
         "possibleExistingId": null
@@ -2057,7 +2164,7 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 24,
+        "seenPages": 26,
         "totalPages": 100,
         "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event9Round1_NAC",
         "possibleExistingId": null
@@ -2090,7 +2197,7 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 24,
+        "seenPages": 26,
         "totalPages": 100,
         "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event9Round1_NAC",
         "possibleExistingId": null
@@ -2123,7 +2230,7 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 24,
+        "seenPages": 26,
         "totalPages": 100,
         "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event9Round1_NAC",
         "possibleExistingId": null
