@@ -903,7 +903,9 @@ function verifyRow(row,entry){
   entry.source===item.source.source&&entry.rule===RULE&&
   entry.originalHash===sha(item)&&entry.recordHash===sha(row)&&
   row.verified===true&&
-  /^保存済みEpic\/Osirion本人ID順位表/.test(row.note));
+  /^保存済みEpic\/Osirion本人ID順位表/.test(row.note)&&
+  Boolean(row.note.match(/先頭(\d+\/\d+)ページ/u))&&
+  JSON.stringify(row)===JSON.stringify(project(item,row.note.match(/先頭(\d+\/\d+)ページ/u)[1])));
 }
 validateProof();
 module.exports={POLICY,RULE,EVENT,TOURNAMENT,CUTOFF,DOC,GOLD,validateProof,project,approval,verifyRow};
