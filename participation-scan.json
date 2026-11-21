@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-11-21T10:19:56.514Z",
+  "checkedAt": "2026-11-21T20:42:13.793Z",
   "windows": {
     "epicgames_S42_InoxtagIconCup_NAW/S42_InoxtagIconCup_NAW": {
       "nextPage": 60,
@@ -318,12 +318,12 @@
       "emptyAttempts": 0
     },
     "epicgames_S43_OnePieceZoroCup_EU/S43_OnePieceZoroCup_EU": {
-      "nextPage": 50,
-      "pages": 50,
-      "complete": false,
-      "coverageLimited": false,
+      "nextPage": 60,
+      "pages": 60,
+      "complete": true,
+      "coverageLimited": true,
       "totalPages": 100,
-      "lastScanned": "2026-11-12T23:23:57.719Z",
+      "lastScanned": "2026-11-21T20:42:08.314Z",
       "emptyAttempts": 0
     },
     "epicgames_S36_VictoryDuosCup_EU/S36_VictoryDuosCup_Event1Round2_EU": {
@@ -1258,13 +1258,13 @@
       "emptyAttempts": 0
     },
     "epicgames_S30_PlaystationCupZBJune_ME/S30_PlaystationCupZBJune_Qualifier1_ME": {
-      "nextPage": 24,
-      "pages": 24,
+      "nextPage": 28,
+      "pages": 28,
       "complete": false,
       "coverageLimited": false,
       "lastError": "Osirion API HTTP 429 /v1/tournaments/leaderboard",
       "totalPages": 36,
-      "lastScanned": "2026-11-21T10:19:56.514Z",
+      "lastScanned": "2026-11-21T20:42:13.793Z",
       "emptyAttempts": 0
     },
     "epicgames_S30_PlaystationCupZBJune_OCE/S30_PlaystationCupZBJune_Qualifier2_OCE": {
@@ -1304,12 +1304,12 @@
       "emptyAttempts": 0
     },
     "epicgames_S43_OverwatchWidowmakerCup_NAW/S43_OverwatchWidowmakerCup_NAW": {
-      "nextPage": 10,
-      "pages": 10,
+      "nextPage": 20,
+      "pages": 20,
       "complete": false,
       "coverageLimited": false,
       "totalPages": 100,
-      "lastScanned": "2026-11-21T10:19:26.200Z",
+      "lastScanned": "2026-11-21T20:41:49.436Z",
       "emptyAttempts": 0
     }
   }
