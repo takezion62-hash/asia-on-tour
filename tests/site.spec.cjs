@@ -375,3 +375,26 @@ test('大会詳細で予選・決勝・賞金獲得を独立表示し、全戦�
   }
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth+1)).toBe(true);
 });
+
+
+test('大会カレンダーは証拠付き旧PlayStation・Cash Cup Round 1を予選表示し、Round 2は誤変更しない',async ({page})=>{
+  const look=async (season,date,event,expectedStage,expectedRound)=>{
+    const month=date.slice(0,7);
+    await page.goto('/?season='+encodeURIComponent(season)+'#calendar?month='+
+      encodeURIComponent(month)+'&date='+date+'&scope=results');
+    const card=page.locator('.calendar-event').filter({hasText:event}).filter({hasText:expectedRound}).first();
+    await expect(card).toBeVisible();
+    await expect(card.locator('.calendar-event-tag')).toContainText([expectedStage],{useInnerText:true});
+    await expect(card).toContainText(expectedRound);
+    return card;
+  };
+  const playstation=await look('S34','2025-04-30','PlayStation Cup','予選','Qualifier / 予選');
+  const link=playstation.locator('[data-open-tournament]').first();
+  await expect(link).toHaveAttribute('data-tournament-kind','予選');
+  await link.click();
+  await expect(page.locator('#page-tournament')).toBeVisible();
+  const cash=await look('S33','2025-01-18','Solo Cash Cup','予選','Event 4 · Round 1 / 予選');
+  await expect(cash.locator('[data-open-tournament]').first()).toHaveAttribute('data-tournament-kind','予選');
+  const finalAttendance=await look('S33','2025-02-03','Solo Cash Cup','参加確認','Event 6 · Round 2 / 参加確認');
+  await expect(finalAttendance.locator('[data-open-tournament]').first()).toHaveAttribute('data-tournament-kind','参加確認');
+});
