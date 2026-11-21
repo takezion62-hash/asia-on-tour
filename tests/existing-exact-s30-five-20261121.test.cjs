@@ -5,8 +5,8 @@ const {apply}=require('../scripts/reconcile-existing-s30-five-20261121.cjs');
 test('five S30 exact PlayStation final candidates are already represented by published results',()=>{
  assert.equal(V.validateProof(),true);
  assert.equal(V.DOC.batch.records.length,5);
- assert.equal(new Set(V.DOC.batch.records.map(x=>x.candidate.id)).size,22);
- assert.equal(new Set(V.DOC.batch.records.map(x=>x.existing.id)).size,22);
+ assert.equal(new Set(V.DOC.batch.records.map(x=>x.candidate.id)).size,5);
+ assert.equal(new Set(V.DOC.batch.records.map(x=>x.existing.id)).size,5);
  for(const item of V.DOC.batch.records){
   assert.ok(V.matchCandidate(item.candidate,item));
   assert.ok(V.matchPublished(item.existing,item));
