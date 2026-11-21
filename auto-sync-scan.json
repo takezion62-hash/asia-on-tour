@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-11-21T07:10:22.536Z",
+  "checkedAt": "2026-11-21T16:10:25.250Z",
   "windows": {
     "epicgames_S43_PerformanceEvaluationTrios_EU/S43_PerformanceEvaluation_Event1Round1_EU": {
       "nextPage": 7,
@@ -19802,6 +19802,275 @@
       "lastSeenRank": 400,
       "lastSuccessAt": "2026-11-21T07:10:22.524Z",
       "totalPages": 100
+    },
+    "epicgames_S43_OverwatchWidowmakerCup_NAW/S43_OverwatchWidowmakerCup_NAW": {
+      "nextPage": 2,
+      "complete": true,
+      "proposals": [
+        {
+          "id": "auto-s43-1c1b8d1e42f1",
+          "date": "2026-11-21",
+          "region": "NAW",
+          "player": "のこのこ / にじいろベタ",
+          "playerRaw": "IGNUM-S のこのこ / Æ IGNITE.にじいろベタ",
+          "event": "Overwatch: Widowmaker Cup Battle Royale",
+          "round": "単一開催枠 / 参加確認",
+          "rank": 45,
+          "points": 445,
+          "kills": 48,
+          "vrs": 1,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 9,
+          "seasonId": "S43",
+          "chapter": 7,
+          "season": 5,
+          "tournamentId": "ch7s5-overwatch-widowmaker-cup-battle-royale",
+          "source": "https://www.fortnite.com/competitive/events/S43_OverwatchWidowmakerCup/?region=NAW&round=S43_OverwatchWidowmakerCup_NAW",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "のこのこ",
+            "にじいろベタ"
+          ],
+          "teamAccountIds": [
+            "89f7cf5dd25043b4b6b6c62197215db5",
+            "fa24325cff6241f7b2da8e0400e132a8"
+          ]
+        },
+        {
+          "id": "auto-s43-4b4af6dd5894",
+          "date": "2026-11-21",
+          "region": "NAW",
+          "player": "こいる / くどう そうた",
+          "playerRaw": "こいるやけん / meruafn6",
+          "event": "Overwatch: Widowmaker Cup Battle Royale",
+          "round": "単一開催枠 / 参加確認",
+          "rank": 61,
+          "points": 439,
+          "kills": 64,
+          "vrs": 1,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 11,
+          "seasonId": "S43",
+          "chapter": 7,
+          "season": 5,
+          "tournamentId": "ch7s5-overwatch-widowmaker-cup-battle-royale",
+          "source": "https://www.fortnite.com/competitive/events/S43_OverwatchWidowmakerCup/?region=NAW&round=S43_OverwatchWidowmakerCup_NAW",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "こいる",
+            "くどう そうた"
+          ],
+          "teamAccountIds": [
+            "50ca67e787cd415ab26692cac0e326c8",
+            "fff9c3c3ea2f401481a1977d95287e2a"
+          ]
+        },
+        {
+          "id": "auto-s43-caa510ab28ce",
+          "date": "2026-11-21",
+          "region": "NAW",
+          "player": "ふんふん / くさちゃん",
+          "playerRaw": "GENIUS ふんふん / GENIUS くさちゃんskrr",
+          "event": "Overwatch: Widowmaker Cup Battle Royale",
+          "round": "単一開催枠 / 参加確認",
+          "rank": 66,
+          "points": 435,
+          "kills": 57,
+          "vrs": 1,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 11,
+          "seasonId": "S43",
+          "chapter": 7,
+          "season": 5,
+          "tournamentId": "ch7s5-overwatch-widowmaker-cup-battle-royale",
+          "source": "https://www.fortnite.com/competitive/events/S43_OverwatchWidowmakerCup/?region=NAW&round=S43_OverwatchWidowmakerCup_NAW",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "ふんふん",
+            "くさちゃん"
+          ],
+          "teamAccountIds": [
+            "59c0cda2aed64844a28f93b271ace4a2",
+            "850c756b65d94a2aa0bd82472d8d64a2"
+          ]
+        }
+      ],
+      "pages": 2,
+      "lastAttemptAt": "2026-11-21T16:10:20.247Z",
+      "emptyAttempts": 0,
+      "rankingOrderValid": true,
+      "lastSeenRank": 200,
+      "lastSuccessAt": "2026-11-21T16:10:21.426Z",
+      "totalPages": 100
+    },
+    "epicgames_S43_OverwatchWidowmakerCup_ZB_NAW/S43_OverwatchWidowmakerCup_ZB_NAW": {
+      "nextPage": 2,
+      "complete": true,
+      "proposals": [
+        {
+          "id": "auto-s43-5c368d084dd2",
+          "date": "2026-11-21",
+          "region": "NAW",
+          "player": "じんくん / しいら",
+          "playerRaw": "33 coldeathǃ / NE C-RA ｼｲﾗｧｧｧ",
+          "event": "Overwatch: Widowmaker Cup Zero Build",
+          "round": "単一開催枠 / 参加確認",
+          "rank": 6,
+          "points": 505,
+          "kills": 64,
+          "vrs": 3,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 10,
+          "seasonId": "S43",
+          "chapter": 7,
+          "season": 5,
+          "tournamentId": "ch7s5-overwatch-widowmaker-cup-zero-build",
+          "source": "https://www.fortnite.com/competitive/events/S43_OverwatchWidowmakerCup_ZB/?region=NAW&round=S43_OverwatchWidowmakerCup_ZB_NAW",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "じんくん",
+            "しいら"
+          ],
+          "teamAccountIds": [
+            "39945a32ce554fb0803f279235d5433a",
+            "f910b0aef0f64c50942913ef6ca628eb"
+          ]
+        },
+        {
+          "id": "auto-s43-24d95ed9c207",
+          "date": "2026-11-21",
+          "region": "NAW",
+          "player": "そーすきむ / Silent",
+          "playerRaw": "NŁT きむ / NŁT dxfyodds",
+          "event": "Overwatch: Widowmaker Cup Zero Build",
+          "round": "単一開催枠 / 参加確認",
+          "rank": 18,
+          "points": 471,
+          "kills": 63,
+          "vrs": 3,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 11,
+          "seasonId": "S43",
+          "chapter": 7,
+          "season": 5,
+          "tournamentId": "ch7s5-overwatch-widowmaker-cup-zero-build",
+          "source": "https://www.fortnite.com/competitive/events/S43_OverwatchWidowmakerCup_ZB/?region=NAW&round=S43_OverwatchWidowmakerCup_ZB_NAW",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "そーすきむ",
+            "Silent"
+          ],
+          "teamAccountIds": [
+            "87a1c23bddb1423ea0ec34a0c2e28fdd",
+            "fb46adbc4d3647da9a730d02fef90a80"
+          ]
+        },
+        {
+          "id": "auto-s43-8999150444bd",
+          "date": "2026-11-21",
+          "region": "NAW",
+          "player": "Yanagi / MV.demonking鬼龍覇気",
+          "playerRaw": "ptt やなぎんちょすだにょん / MV.demonking鬼龍覇気",
+          "event": "Overwatch: Widowmaker Cup Zero Build",
+          "round": "単一開催枠 / 参加確認",
+          "rank": 45,
+          "points": 448,
+          "kills": 96,
+          "vrs": 2,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 11,
+          "seasonId": "S43",
+          "chapter": 7,
+          "season": 5,
+          "tournamentId": "ch7s5-overwatch-widowmaker-cup-zero-build",
+          "source": "https://www.fortnite.com/competitive/events/S43_OverwatchWidowmakerCup_ZB/?region=NAW&round=S43_OverwatchWidowmakerCup_ZB_NAW",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "Yanagi",
+            "MV.demonking鬼龍覇気"
+          ],
+          "teamAccountIds": [
+            "14d52114ff9741ffb23c61f07b225f61",
+            "76e9d1fc92b340b08340802609fc4d5c"
+          ]
+        },
+        {
+          "id": "auto-s43-77d141c9b581",
+          "date": "2026-11-21",
+          "region": "NAW",
+          "player": "FTW 僕は最低だドビュ / mint",
+          "playerRaw": "FTW 音楽家中村 / FTW mint",
+          "event": "Overwatch: Widowmaker Cup Zero Build",
+          "round": "単一開催枠 / 参加確認",
+          "rank": 89,
+          "points": 428,
+          "kills": 55,
+          "vrs": 2,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 11,
+          "seasonId": "S43",
+          "chapter": 7,
+          "season": 5,
+          "tournamentId": "ch7s5-overwatch-widowmaker-cup-zero-build",
+          "source": "https://www.fortnite.com/competitive/events/S43_OverwatchWidowmakerCup_ZB/?region=NAW&round=S43_OverwatchWidowmakerCup_ZB_NAW",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "FTW 僕は最低だドビュ",
+            "mint"
+          ],
+          "teamAccountIds": [
+            "5caf936f99b844d8814098cda67e38a9",
+            "e1f6997e3e194ae6b38f095999ae1c32"
+          ]
+        }
+      ],
+      "pages": 2,
+      "lastAttemptAt": "2026-11-21T16:10:22.650Z",
+      "emptyAttempts": 0,
+      "rankingOrderValid": true,
+      "lastSeenRank": 200,
+      "lastSuccessAt": "2026-11-21T16:10:24.669Z",
+      "totalPages": 100
+    },
+    "epicgames_S43_ReloadZBDuosCashCup_NAW/S43_ReloadZBDuosCashCup_Event2Round2_NAW": {
+      "nextPage": 1,
+      "complete": true,
+      "proposals": [],
+      "pages": 1,
+      "lastAttemptAt": "2026-11-21T16:10:24.669Z",
+      "emptyAttempts": 0,
+      "rankingOrderValid": true,
+      "lastSeenRank": 19,
+      "lastSuccessAt": "2026-11-21T16:10:25.241Z",
+      "totalPages": 1
     }
   }
 }

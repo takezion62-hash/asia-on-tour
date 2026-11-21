@@ -1,27 +1,27 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-21T07:10:22.536Z",
+  "checkedAt": "2026-11-21T16:10:25.250Z",
   "mode": "review",
   "scope": "recent",
   "dateMode": null,
-  "selectedWindows": 2,
+  "selectedWindows": 3,
   "fromDate": null,
   "toDate": null,
   "provider": "osirion",
-  "linkedPlayers": 694,
-  "trackedWindows": 117,
+  "linkedPlayers": 695,
+  "trackedWindows": 120,
   "found": 0,
   "skipped": 0,
-  "imported": 5,
-  "scannedPages": 8,
-  "completedWindows": 117,
+  "imported": 7,
+  "scannedPages": 5,
+  "completedWindows": 120,
   "identityConflicts": 3,
-  "alreadyRegistered": 231,
-  "autoApprovedTotal": 3311,
+  "alreadyRegistered": 236,
+  "autoApprovedTotal": 3328,
   "invalidCachedCandidates": 0,
   "manualReviewCandidates": 0,
-  "autoApprovedCosmeticThisRun": 5,
+  "autoApprovedCosmeticThisRun": 7,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
   "autoApprovedUnrealThisRun": 0,
@@ -30,7 +30,7 @@
   "transientFailures": 0,
   "malformedFailures": 0,
   "skippedLeaderboards": [],
-  "reviewOnlyWindows": 105,
+  "reviewOnlyWindows": 108,
   "reviewOnlyCandidates": 0,
   "unmappedEvents": 3,
   "unmappedEventIds": [
@@ -38,17 +38,17 @@
     "S43_PlayStationCup",
     "S43_PlayStationCup_ZB"
   ],
-  "message": "最新版と安全統合：新規掲載5件、重複スキップ0件、要確認の競合0件、確認待ち0件。既存の戦績・賞金は保持。",
+  "message": "最新版と安全統合：新規掲載7件、重複スキップ0件、要確認の競合0件、確認待ち0件。既存の戦績・賞金は保持。",
   "concurrentMerge": {
-    "appended": 5,
+    "appended": 7,
     "alreadyPublished": 0,
     "reviewConflicts": 0,
     "keptPending": 0,
-    "reconciledAt": "2026-11-21T07:10:29.356Z"
+    "reconciledAt": "2026-11-21T16:10:31.106Z"
   },
   "coverage": {
-    "total": 117,
-    "completed": 117,
+    "total": 120,
+    "completed": 120,
     "notStarted": 0,
     "partial": 0,
     "retryWaiting": 0,
@@ -83,15 +83,15 @@
         "pending": 0
       },
       "NAW": {
-        "total": 15,
-        "completed": 15,
+        "total": 18,
+        "completed": 18,
         "pending": 0
       }
     },
     "byYear": {
       "2026": {
-        "total": 117,
-        "completed": 117,
+        "total": 120,
+        "completed": 120,
         "pending": 0
       }
     },
@@ -112,7 +112,7 @@
   },
   "manuallyResolvedDuplicates": 47,
   "autoApprovedParticipationThisRun": 0,
-  "processedWindows": 2,
+  "processedWindows": 3,
   "providerRateLimitPaused": false,
   "providerRateLimitRetryAfter": null,
   "providerTraffic": {
@@ -125,8 +125,8 @@
     "pageBudget": 30,
     "minRequestIntervalMs": 1200,
     "reason": "steady-state",
-    "requests": 14,
-    "waitedMs": 7967,
+    "requests": 11,
+    "waitedMs": 6426,
     "intervalMs": 1200
   }
 }
