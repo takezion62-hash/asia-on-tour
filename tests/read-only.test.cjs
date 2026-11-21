@@ -877,6 +877,19 @@ test('the complete individual prize ranking keeps its original order, amounts an
 });
 
 const tournamentAxes = ['series', 'mode', 'subtype', 'team', 'platform'];
+// Independent expected stage used by exhaustive read-only filtering assertions.
+// Only a known qualifier's attendance changes its DISPLAY stage, never the
+// recorded advancement status, award, result ID, source or payout.
+const displayedQualifierStage = (record, tournament = tournamentFor(record, data)) => {
+  if (record.kind !== '参加確認') return record.kind;
+  const label = String(record.round || '');
+  if (tournament?.series === 'playstation-cup'
+      && /^Qualifier\s*\/\s*参加確認$/iu.test(label)) return '予選';
+  if (tournament?.series === 'victory-cup'
+      && /^(?:(?:Event|Day|Week)\s*\d+\s*·\s*)?Round\s*1\s*\/\s*参加確認$/iu.test(label)) return '予選';
+  return record.kind;
+};
+
 // Audited against the season-specific source pages and rules. Similar names
 // intentionally occupy separate rows instead of sharing a guessed classifier.
 function tournamentTags(markup) {
@@ -1100,7 +1113,7 @@ test('all five tournament facets and free text use AND filtering with stage sepa
     const expectedRecords = records.filter(record => {
       const meta = tournamentFor(record, data) || Object.fromEntries(tournamentAxes.map(axis => [axis, 'unknown']));
       return tournamentAxes.every(axis => !filters[axis] || filters[axis] === 'all' || (axis==='series'?[meta.series,...(meta.additionalSeries||[])].includes(filters[axis]):meta[axis]===filters[axis])) &&
-        (!filters.stage || filters.stage === 'all' || record.kind === filters.stage) &&
+        (!filters.stage || filters.stage === 'all' || displayedQualifierStage(record, meta) === filters.stage) &&
         (!filters.q || record.event.toLowerCase().includes(filters.q.toLowerCase()));
     });
     const expectedNames = [...new Map(expectedRecords.map(record => [tournamentKey(record, data), record.event])).values()].sort();
@@ -1260,7 +1273,7 @@ test('visible facet counts reflect matching records and exclude only their own a
     : meta[axis] === value;
   const filtered = (entry, axis, filters) =>
     tournamentAxes.every(other => other === axis || !filters[other] || tagged(entry.meta, other, filters[other])) &&
-    (!filters.stage || entry.record.kind === filters.stage);
+    (!filters.stage || displayedQualifierStage(entry.record, entry.meta) === filters.stage);
   const assertCounts = filters => {
     for (const axis of tournamentAxes) {
       const chips = [...app.get(`tournament-facet-${axis}`).innerHTML.matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/g)]
