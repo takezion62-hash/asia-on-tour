@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-20T18:00:25.417Z",
+  "reviewedAt": "2026-11-21T02:50:18.920Z",
   "description": "Resolved historic review candidates: published, duplicate or participation",
   "entries": [
     {
@@ -34451,6 +34451,26 @@
       "source": "https://www.fortnite.com/competitive/events/S30_PlaystationCupZBJune/?region=ME&round=S30_PlaystationCupZBJune_Final_ME",
       "policy": "attendance-only",
       "rule": null
+    },
+    {
+      "id": "auto-s31-f5fedb4bc6e5",
+      "decision": "participation-archived",
+      "recordId": "participation-7615af5042951461cdf2",
+      "reviewedAt": "2026-11-21T02:50:18.920Z",
+      "policy": "Epic-evidenced-attendance-only",
+      "source": "https://www.fortnite.com/competitive/events/S31_SoloVictoryCashCup/?region=NAC&round=S31_SoloVictoryCashCup_Event2Round1_NAC",
+      "officialRules": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-4-official-rules",
+      "evidence": "Official calendar, Epic account match, mature original ranked checkpoint"
+    },
+    {
+      "id": "auto-s31-916bca838a96",
+      "decision": "participation-archived",
+      "recordId": "participation-a6633bec1ae1ebd862e3",
+      "reviewedAt": "2026-11-21T02:50:18.920Z",
+      "policy": "Epic-evidenced-attendance-only",
+      "source": "https://www.fortnite.com/competitive/events/S31_SoloVictoryCashCup/?region=NAC&round=S31_SoloVictoryCashCup_Event2Round1_NAC",
+      "officialRules": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-4-official-rules",
+      "evidence": "Official calendar, Epic account match, mature original ranked checkpoint"
     }
   ]
 }
