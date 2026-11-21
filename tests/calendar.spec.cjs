@@ -6,39 +6,32 @@ const data = loadData(path.join(__dirname,'..')).data;
 const rows = data.results;
 const month = [...new Set(rows.map(row => row.date.slice(0,7)))].sort().at(-1);
 const forMonth = rows.filter(row => row.date.startsWith(month));
-// Calendar groups a leaderboard by official tournament session, not by the
-// reward status of each participant (qualifier, skin winner, or attendance).
-const cosmeticSingleRound=new Set([
- 'ch7s3-champion-aphrodite-fncs-cup-battle-royale',
- 'ch7s4-madison-beer-icon-cup-reload',
- 'ch7s5-one-piece-zoro-cup-battle-royale',
- 'ch7s5-one-piece-zoro-mobile-cup'
-]);
-// Verified qualifier leaderboard attendance is not proof of advancement.
-// Calendar grouping uses the phase of the *event*, not each player's outcome.
-const qualifierParticipation=(kind,id,round)=>{
- if(kind!=='参加確認')return false;
- const series=data.tournaments.catalog.find(t=>t.id===id)?.series;
- const label=String(round||'').trim();
- return (series==='playstation-cup'&&/^Qualifier\s*\/\s*参加確認$/iu.test(label))
-   ||(series==='victory-cup'
-     &&/^(?:(?:Event|Day|Week)\s*\d+\s*·\s*)?Round\s*1\s*\/\s*参加確認$/iu.test(label));
+// The expected calendar grouping must follow the actual production stage
+// normalization. This includes verified qualifier attendance, legacy
+// PlayStation source window IDs, and paid final/skin exceptions. Using the
+// production functions here avoids drifting test-only copies of those rules.
+const fs = require('node:fs');
+const vm = require('node:vm');
+const app = fs.readFileSync(path.join(__dirname,'..','app.js'),'utf8');
+const begin = app.indexOf('    function isQualifyingParticipation(');
+const finish = app.indexOf('    // Calendar-only result scope;',begin);
+if(begin<0||finish<=begin)throw new Error('Calendar classifier boundary changed');
+const stageLogic = vm.runInNewContext('(function(){'+app.slice(begin,finish)+
+  ';return {canonicalTournamentRound,canonicalTournamentKind}})()',{
+  tournamentCatalog:data.tournaments.catalog,
+  all:()=>rows,
+  classifyTournamentRecord:row=>({id:tournamentKey(row,data)})
+});
+const stageFor = row => {
+  const id=tournamentKey(row,data);
+  return {id,
+    round:stageLogic.canonicalTournamentRound(row.round,row.kind,id,row.date,row.region,row.source),
+    kind:stageLogic.canonicalTournamentKind(row.kind,id,row.round,row.source)};
 };
 const sessionKey = row => {
- const id=tournamentKey(row,data);
- let round=String(row.round||'').trim(),kind=row.kind||'';
- if(id==='ch7s1-one-million-unreal-cup'&&/^(?:Session\s*1|単一開催枠)\s*\//iu.test(round)){
-   round='Session 1 / 賞金決勝';kind='賞金決勝';
- }else if(cosmeticSingleRound.has(id)&&/^(?:Session\s*1|単一開催枠)\s*\//iu.test(round)){
-   round='Session 1 / スキン大会';kind='スキン大会';
- }else if(id==='ch7s2-fncs-division-1'&&/^Week\s*\d+\s*·\s*Final\s*\//iu.test(round)){
-   round=round.replace(/\/\s*(?:参加確認|賞金決勝)$/u,'/ 賞金決勝');kind='賞金決勝';
- }else if(kind==='予選'||qualifierParticipation(kind,id,round)){
-   round=round.replace(/\/\s*(?:予選(?:突破|通過)?|参加確認)$/u,'/ 予選');kind='予選';
- }
- return JSON.stringify([row.date,row.region,id,round,kind]);
+  const stage=stageFor(row);
+  return JSON.stringify([row.date,row.region,stage.id,stage.round,stage.kind]);
 };
-
 
 test('2025 PlayStation / Console qualifier participation shares one 予選 card and keeps cash finals separate',async({page})=>{
  const cases=[
@@ -107,7 +100,7 @@ test('地域と予選フィルター、日付選択、大会・選手リンク�
   await page.goto('/?season=all#calendar?month='+targetMonth);
   await page.locator('#calendar-region').selectOption('ME');
   await page.locator('#calendar-stage').selectOption('予選');
-  const matching=rows.filter(row=>row.date.startsWith(targetMonth)&&row.region==='ME'&&row.kind==='予選');
+  const matching=rows.filter(row=>row.date.startsWith(targetMonth)&&row.region==='ME'&&stageFor(row).kind==='予選');
   expect(matching.length).toBeGreaterThan(0);
   await expect(page.locator('.calendar-month-head small')).toContainText(new Set(matching.map(sessionKey)).size+'開催枠');
   const date=matching[0].date;

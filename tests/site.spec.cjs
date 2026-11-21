@@ -337,9 +337,20 @@ test('大会詳細で予選・決勝・賞金獲得を独立表示し、全戦�
     if(row.kind==='予選')return true;
     if(row.kind!=='参加確認')return false;
     const series=data.tournaments.catalog.find(t=>t.id===tournamentKey(row,data))?.series;
-    return (series==='playstation-cup'&&/^Qualifier\s*\/\s*参加確認$/iu.test(String(row.round||'')))
-      ||(series==='victory-cup'
-        &&/^(?:(?:Event|Day|Week)\s*\d+\s*·\s*)?Round\s*1\s*\/\s*参加確認$/iu.test(String(row.round||'')));
+    const label=String(row.round||'').trim();
+    if(!series)return false;
+    if(/^Qualifier(?:\s+\d+)?\s*\/\s*参加確認$/iu.test(label))return true;
+    if(['cash-cup','victory-cup','performance-evaluation',
+        'playstation-cup','console-champions-cup'].includes(series)
+       &&/^(?:(?:Event|Day|Week)\s*\d+\s*·\s*)?Round\s*1\s*\/\s*参加確認$/iu.test(label))
+      return true;
+    if(series==='playstation-cup'
+      &&/^単一開催枠\s*\/\s*参加確認$/u.test(label)
+      &&/^https:\/\/(?:www\.)?(?:fortnite\.com|fortnitetracker\.com)\//iu.test(String(row.source||''))){
+      const windowId=String(row.source).match(/[?&](?:round|window)=([^&#]+)/iu)?.[1]||'';
+      return /Qualifier\d*(?:[_-]|$)/iu.test(windowId);
+    }
+    return false;
   };
   const modes={
     all:expected,
@@ -363,4 +374,27 @@ test('大会詳細で予選・決勝・賞金獲得を独立表示し、全戦�
     await expect(page.locator('.tournament-detail-summary')).toContainText(expected.length.toLocaleString('ja-JP'));
   }
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth+1)).toBe(true);
+});
+
+
+test('大会カレンダーは証拠付き旧PlayStation・Cash Cup Round 1を予選表示し、Round 2は誤変更しない',async ({page})=>{
+  const look=async (season,date,event,expectedStage,expectedRound)=>{
+    const month=date.slice(0,7);
+    await page.goto('/?season='+encodeURIComponent(season)+'#calendar?month='+
+      encodeURIComponent(month)+'&date='+date+'&scope=results');
+    const card=page.locator('.calendar-event').filter({hasText:event}).filter({hasText:expectedRound}).first();
+    await expect(card).toBeVisible();
+    await expect(card.locator('.calendar-event-top .calendar-event-tag').nth(1)).toHaveText(expectedStage);
+    await expect(card).toContainText(expectedRound);
+    return card;
+  };
+  const playstation=await look('S34','2025-04-30','PlayStation Cup','予選','Qualifier 1 / 予選');
+  const link=playstation.locator('[data-open-tournament]').first();
+  await expect(link).toHaveAttribute('data-tournament-kind','予選');
+  await link.click();
+  await expect(page.locator('#page-tournament')).toBeVisible();
+  const cash=await look('S33','2025-01-18','Solo Cash Cup','予選','Event 4 · Round 1 / 予選');
+  await expect(cash.locator('[data-open-tournament]').first()).toHaveAttribute('data-tournament-kind','予選');
+  const finalAttendance=await look('S33','2025-02-03','Solo Cash Cup','参加確認','Event 6 · Round 2 / 参加確認');
+  await expect(finalAttendance.locator('[data-open-tournament]').first()).toHaveAttribute('data-tournament-kind','参加確認');
 });
