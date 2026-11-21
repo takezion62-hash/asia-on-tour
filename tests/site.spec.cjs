@@ -337,9 +337,20 @@ test('大会詳細で予選・決勝・賞金獲得を独立表示し、全戦�
     if(row.kind==='予選')return true;
     if(row.kind!=='参加確認')return false;
     const series=data.tournaments.catalog.find(t=>t.id===tournamentKey(row,data))?.series;
-    return (series==='playstation-cup'&&/^Qualifier\s*\/\s*参加確認$/iu.test(String(row.round||'')))
-      ||(series==='victory-cup'
-        &&/^(?:(?:Event|Day|Week)\s*\d+\s*·\s*)?Round\s*1\s*\/\s*参加確認$/iu.test(String(row.round||'')));
+    const label=String(row.round||'').trim();
+    if(!series)return false;
+    if(/^Qualifier(?:\s+\d+)?\s*\/\s*参加確認$/iu.test(label))return true;
+    if(['cash-cup','victory-cup','performance-evaluation',
+        'playstation-cup','console-champions-cup'].includes(series)
+       &&/^(?:(?:Event|Day|Week)\s*\d+\s*·\s*)?Round\s*1\s*\/\s*参加確認$/iu.test(label))
+      return true;
+    if(series==='playstation-cup'
+      &&/^単一開催枠\s*\/\s*参加確認$/u.test(label)
+      &&/^https:\/\/(?:www\.)?(?:fortnite\.com|fortnitetracker\.com)\//iu.test(String(row.source||''))){
+      const windowId=String(row.source).match(/[?&](?:round|window)=([^&#]+)/iu)?.[1]||'';
+      return /Qualifier\d*(?:[_-]|$)/iu.test(windowId);
+    }
+    return false;
   };
   const modes={
     all:expected,
