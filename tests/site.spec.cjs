@@ -388,7 +388,7 @@ test('大会カレンダーは証拠付き旧PlayStation・Cash Cup Round 1を�
     await expect(card).toContainText(expectedRound);
     return card;
   };
-  const playstation=await look('S34','2025-04-30','PlayStation Cup','予選','Qualifier / 予選');
+  const playstation=await look('S34','2025-04-30','PlayStation Cup','予選','Qualifier 1 / 予選');
   const link=playstation.locator('[data-open-tournament]').first();
   await expect(link).toHaveAttribute('data-tournament-kind','予選');
   await link.click();
