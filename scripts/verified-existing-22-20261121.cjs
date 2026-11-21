@@ -24,7 +24,9 @@ const GOLD=Object.freeze([
       "prize": null,
       "seasonId": "S33",
       "tournamentId": "ch6s1-playstation-cup",
-      "source": "https://www.fortnite.com/competitive/events/S33_PlaystationCup/?region=ME&round=S33_PlaystationCupFinal_ME"
+      "source": "https://www.fortnite.com/competitive/events/S33_PlaystationCup/?region=ME&round=S33_PlaystationCupFinal_ME",
+      "reviewOnly": true,
+      "reviewReason": "確認専用大会は自動承認不可"
     },
     "existing": {
       "id": "ps-s33-me-s33mebr-final-20241208-r36",
@@ -63,7 +65,9 @@ const GOLD=Object.freeze([
       "prize": null,
       "seasonId": "S33",
       "tournamentId": "ch6s1-playstation-cup",
-      "source": "https://www.fortnite.com/competitive/events/S33_PlaystationCup/?region=ME&round=S33_PlaystationCupFinal_ME"
+      "source": "https://www.fortnite.com/competitive/events/S33_PlaystationCup/?region=ME&round=S33_PlaystationCupFinal_ME",
+      "reviewOnly": true,
+      "reviewReason": "確認専用大会は自動承認不可"
     },
     "existing": {
       "id": "ps-s33-me-s33mebr-final-20241208-r93",
@@ -102,7 +106,9 @@ const GOLD=Object.freeze([
       "prize": null,
       "seasonId": "S37",
       "tournamentId": "ch6s4-playstation-cup",
-      "source": "https://www.fortnite.com/competitive/events/S37_PlayStationCup/?region=OCE&round=S37_PlayStationCup_Final_OCE"
+      "source": "https://www.fortnite.com/competitive/events/S37_PlayStationCup/?region=OCE&round=S37_PlayStationCup_Final_OCE",
+      "reviewOnly": true,
+      "reviewReason": "確認専用大会は自動承認不可"
     },
     "existing": {
       "id": "ps-s37-oce-s37oce-final-20250904-r10",
@@ -141,7 +147,9 @@ const GOLD=Object.freeze([
       "prize": null,
       "seasonId": "S37",
       "tournamentId": "ch6s4-playstation-cup",
-      "source": "https://www.fortnite.com/competitive/events/S37_PlayStationCup/?region=OCE&round=S37_PlayStationCup_Final_OCE"
+      "source": "https://www.fortnite.com/competitive/events/S37_PlayStationCup/?region=OCE&round=S37_PlayStationCup_Final_OCE",
+      "reviewOnly": true,
+      "reviewReason": "確認専用大会は自動承認不可"
     },
     "existing": {
       "id": "ps-s37-oce-s37oce-final-20250904-r41",
@@ -180,7 +188,9 @@ const GOLD=Object.freeze([
       "prize": null,
       "seasonId": "S37",
       "tournamentId": "ch6s4-playstation-cup",
-      "source": "https://www.fortnite.com/competitive/events/S37_PlayStationCup/?region=OCE&round=S37_PlayStationCup_Final_OCE"
+      "source": "https://www.fortnite.com/competitive/events/S37_PlayStationCup/?region=OCE&round=S37_PlayStationCup_Final_OCE",
+      "reviewOnly": true,
+      "reviewReason": "確認専用大会は自動承認不可"
     },
     "existing": {
       "id": "ps-s37-oce-s37oce-final-20250904-r84",
@@ -219,7 +229,9 @@ const GOLD=Object.freeze([
       "prize": null,
       "seasonId": "S37",
       "tournamentId": "ch6s4-playstation-cup",
-      "source": "https://www.fortnite.com/competitive/events/S37_PlayStationCup/?region=NAW&round=S37_PlayStationCup_Final_NAW"
+      "source": "https://www.fortnite.com/competitive/events/S37_PlayStationCup/?region=NAW&round=S37_PlayStationCup_Final_NAW",
+      "reviewOnly": true,
+      "reviewReason": "確認専用大会は自動承認不可"
     },
     "existing": {
       "id": "owner-s37-naw-playstation-final-20250905-r11",
@@ -258,7 +270,9 @@ const GOLD=Object.freeze([
       "prize": null,
       "seasonId": "S37",
       "tournamentId": "ch6s4-playstation-cup",
-      "source": "https://www.fortnite.com/competitive/events/S37_PlayStationCup/?region=NAW&round=S37_PlayStationCup_Final_NAW"
+      "source": "https://www.fortnite.com/competitive/events/S37_PlayStationCup/?region=NAW&round=S37_PlayStationCup_Final_NAW",
+      "reviewOnly": true,
+      "reviewReason": "確認専用大会は自動承認不可"
     },
     "existing": {
       "id": "owner-s37-naw-playstation-final-20250905-r33",
@@ -297,7 +311,9 @@ const GOLD=Object.freeze([
       "prize": null,
       "seasonId": "S37",
       "tournamentId": "ch6s4-playstation-cup",
-      "source": "https://www.fortnite.com/competitive/events/S37_PlayStationCup/?region=NAW&round=S37_PlayStationCup_Final_NAW"
+      "source": "https://www.fortnite.com/competitive/events/S37_PlayStationCup/?region=NAW&round=S37_PlayStationCup_Final_NAW",
+      "reviewOnly": true,
+      "reviewReason": "確認専用大会は自動承認不可"
     },
     "existing": {
       "id": "owner-s37-naw-playstation-final-20250905-r36",
@@ -336,7 +352,9 @@ const GOLD=Object.freeze([
       "prize": null,
       "seasonId": "S37",
       "tournamentId": "ch6s4-playstation-cup",
-      "source": "https://www.fortnite.com/competitive/events/S37_PlayStationCup/?region=NAW&round=S37_PlayStationCup_Final_NAW"
+      "source": "https://www.fortnite.com/competitive/events/S37_PlayStationCup/?region=NAW&round=S37_PlayStationCup_Final_NAW",
+      "reviewOnly": true,
+      "reviewReason": "確認専用大会は自動承認不可"
     },
     "existing": {
       "id": "owner-s37-naw-playstation-final-20250905-r37",
@@ -375,7 +393,9 @@ const GOLD=Object.freeze([
       "prize": null,
       "seasonId": "S37",
       "tournamentId": "ch6s4-playstation-cup",
-      "source": "https://www.fortnite.com/competitive/events/S37_PlayStationCup/?region=NAW&round=S37_PlayStationCup_Final_NAW"
+      "source": "https://www.fortnite.com/competitive/events/S37_PlayStationCup/?region=NAW&round=S37_PlayStationCup_Final_NAW",
+      "reviewOnly": true,
+      "reviewReason": "確認専用大会は自動承認不可"
     },
     "existing": {
       "id": "owner-s37-naw-playstation-final-20250905-r48",
@@ -414,7 +434,9 @@ const GOLD=Object.freeze([
       "prize": null,
       "seasonId": "S37",
       "tournamentId": "ch6s4-playstation-cup",
-      "source": "https://www.fortnite.com/competitive/events/S37_PlayStationCup/?region=NAW&round=S37_PlayStationCup_Final_NAW"
+      "source": "https://www.fortnite.com/competitive/events/S37_PlayStationCup/?region=NAW&round=S37_PlayStationCup_Final_NAW",
+      "reviewOnly": true,
+      "reviewReason": "確認専用大会は自動承認不可"
     },
     "existing": {
       "id": "owner-s37-naw-playstation-final-20250905-r67",
@@ -453,7 +475,9 @@ const GOLD=Object.freeze([
       "prize": null,
       "seasonId": "S37",
       "tournamentId": "ch6s4-playstation-cup",
-      "source": "https://www.fortnite.com/competitive/events/S37_PlayStationCup/?region=NAW&round=S37_PlayStationCup_Final_NAW"
+      "source": "https://www.fortnite.com/competitive/events/S37_PlayStationCup/?region=NAW&round=S37_PlayStationCup_Final_NAW",
+      "reviewOnly": true,
+      "reviewReason": "確認専用大会は自動承認不可"
     },
     "existing": {
       "id": "owner-s37-naw-playstation-final-20250905-r68",
@@ -492,7 +516,9 @@ const GOLD=Object.freeze([
       "prize": null,
       "seasonId": "S37",
       "tournamentId": "ch6s4-playstation-cup",
-      "source": "https://www.fortnite.com/competitive/events/S37_PlayStationCup/?region=NAW&round=S37_PlayStationCup_Final_NAW"
+      "source": "https://www.fortnite.com/competitive/events/S37_PlayStationCup/?region=NAW&round=S37_PlayStationCup_Final_NAW",
+      "reviewOnly": true,
+      "reviewReason": "確認専用大会は自動承認不可"
     },
     "existing": {
       "id": "owner-s37-naw-playstation-final-20250905-r74",
@@ -531,7 +557,9 @@ const GOLD=Object.freeze([
       "prize": null,
       "seasonId": "S37",
       "tournamentId": "ch6s4-playstation-cup",
-      "source": "https://www.fortnite.com/competitive/events/S37_PlayStationCup/?region=NAW&round=S37_PlayStationCup_Final_NAW"
+      "source": "https://www.fortnite.com/competitive/events/S37_PlayStationCup/?region=NAW&round=S37_PlayStationCup_Final_NAW",
+      "reviewOnly": true,
+      "reviewReason": "確認専用大会は自動承認不可"
     },
     "existing": {
       "id": "owner-s37-naw-playstation-final-20250905-r81",
@@ -570,7 +598,9 @@ const GOLD=Object.freeze([
       "prize": null,
       "seasonId": "S37",
       "tournamentId": "ch6s4-playstation-cup",
-      "source": "https://www.fortnite.com/competitive/events/S37_PlayStationCup/?region=NAW&round=S37_PlayStationCup_Final_NAW"
+      "source": "https://www.fortnite.com/competitive/events/S37_PlayStationCup/?region=NAW&round=S37_PlayStationCup_Final_NAW",
+      "reviewOnly": true,
+      "reviewReason": "確認専用大会は自動承認不可"
     },
     "existing": {
       "id": "owner-s37-naw-playstation-final-20250905-r84",
@@ -609,7 +639,9 @@ const GOLD=Object.freeze([
       "prize": null,
       "seasonId": "S37",
       "tournamentId": "ch6s4-playstation-cup",
-      "source": "https://www.fortnite.com/competitive/events/S37_PlayStationCup/?region=NAW&round=S37_PlayStationCup_Final_NAW"
+      "source": "https://www.fortnite.com/competitive/events/S37_PlayStationCup/?region=NAW&round=S37_PlayStationCup_Final_NAW",
+      "reviewOnly": true,
+      "reviewReason": "確認専用大会は自動承認不可"
     },
     "existing": {
       "id": "owner-s37-naw-playstation-final-20250905-r96",
@@ -648,7 +680,9 @@ const GOLD=Object.freeze([
       "prize": null,
       "seasonId": "S39",
       "tournamentId": "ch7s1-nvidia-geforce-rtx-cup",
-      "source": "https://www.fortnite.com/competitive/events/S39_NvidiaCup/?region=NAW&round=S39_NvidiaCup_NAW"
+      "source": "https://www.fortnite.com/competitive/events/S39_NvidiaCup/?region=NAW&round=S39_NvidiaCup_NAW",
+      "reviewOnly": true,
+      "reviewReason": "全ページ連続の順位表・Epic ID付完全スナップショットが未確認"
     },
     "existing": {
       "id": "owner-s39-naw-nvidia-20251222-r33",
@@ -687,7 +721,9 @@ const GOLD=Object.freeze([
       "prize": null,
       "seasonId": "S39",
       "tournamentId": "ch7s1-nvidia-geforce-rtx-cup",
-      "source": "https://www.fortnite.com/competitive/events/S39_NvidiaCup/?region=NAW&round=S39_NvidiaCup_NAW"
+      "source": "https://www.fortnite.com/competitive/events/S39_NvidiaCup/?region=NAW&round=S39_NvidiaCup_NAW",
+      "reviewOnly": true,
+      "reviewReason": "全ページ連続の順位表・Epic ID付完全スナップショットが未確認"
     },
     "existing": {
       "id": "owner-s39-naw-nvidia-20251222-r36",
@@ -726,7 +762,9 @@ const GOLD=Object.freeze([
       "prize": null,
       "seasonId": "S39",
       "tournamentId": "ch7s1-nvidia-geforce-rtx-cup",
-      "source": "https://www.fortnite.com/competitive/events/S39_NvidiaCup/?region=NAW&round=S39_NvidiaCup_NAW"
+      "source": "https://www.fortnite.com/competitive/events/S39_NvidiaCup/?region=NAW&round=S39_NvidiaCup_NAW",
+      "reviewOnly": true,
+      "reviewReason": "全ページ連続の順位表・Epic ID付完全スナップショットが未確認"
     },
     "existing": {
       "id": "owner-s39-naw-nvidia-20251222-r53",
@@ -765,7 +803,9 @@ const GOLD=Object.freeze([
       "prize": null,
       "seasonId": "S39",
       "tournamentId": "ch7s1-nvidia-geforce-rtx-cup",
-      "source": "https://www.fortnite.com/competitive/events/S39_NvidiaCup/?region=NAW&round=S39_NvidiaCup_NAW"
+      "source": "https://www.fortnite.com/competitive/events/S39_NvidiaCup/?region=NAW&round=S39_NvidiaCup_NAW",
+      "reviewOnly": true,
+      "reviewReason": "全ページ連続の順位表・Epic ID付完全スナップショットが未確認"
     },
     "existing": {
       "id": "owner-s39-naw-nvidia-20251222-r69",
@@ -804,7 +844,9 @@ const GOLD=Object.freeze([
       "prize": null,
       "seasonId": "S39",
       "tournamentId": "ch7s1-nvidia-geforce-rtx-cup",
-      "source": "https://www.fortnite.com/competitive/events/S39_NvidiaCup/?region=NAW&round=S39_NvidiaCup_NAW"
+      "source": "https://www.fortnite.com/competitive/events/S39_NvidiaCup/?region=NAW&round=S39_NvidiaCup_NAW",
+      "reviewOnly": true,
+      "reviewReason": "全ページ連続の順位表・Epic ID付完全スナップショットが未確認"
     },
     "existing": {
       "id": "owner-s39-naw-nvidia-20251222-r71",
@@ -843,7 +885,9 @@ const GOLD=Object.freeze([
       "prize": null,
       "seasonId": "S41",
       "tournamentId": "ch7s3-days-of-play-playstation-cup-zb",
-      "source": "https://www.fortnite.com/competitive/events/S41_PSCupDaysOfPlay_ZB/?region=OCE&round=S41_PSCupDaysOfPlay_ZB_Final_OCE"
+      "source": "https://www.fortnite.com/competitive/events/S41_PSCupDaysOfPlay_ZB/?region=OCE&round=S41_PSCupDaysOfPlay_ZB_Final_OCE",
+      "reviewOnly": true,
+      "reviewReason": "確認専用大会は自動承認不可"
     },
     "existing": {
       "id": "owner-s41-oce-days-zb-20260609-r1",
@@ -867,7 +911,8 @@ const GOLD=Object.freeze([
 ]);
 const fail=(ok,message)=>{if(!ok)throw Error('EXACT_EXISTING_22_PROOF '+message)};
 const fields=['id','date','region','event','player','playerRaw','round','kind',
- 'rank','points','kills','vrs','matches','prize','seasonId','tournamentId','source'];
+ 'rank','points','kills','vrs','matches','prize','seasonId','tournamentId','source',
+ 'reviewOnly','reviewReason'];
 const oldFields=['id','date','region','event','player','rank','points','kills','vrs',
  'matches','seasonId','tournamentId','kind','round','prize','source'];
 const same=(a,b,fields)=>fields.every(k=>a[k]===b[k]);
@@ -900,7 +945,7 @@ function validateProof(){
    'duplicate ID or published ID reused '+c.id);
   seen.add(c.id);oldSeen.add(e.id);
   fail(c.kind==='参加確認'&&e.kind==='賞金決勝'&&
-   c.verified===true&&c.reviewReason==='順位表の取得が完了していません'&&
+   c.verified===true&&typeof c.reviewReason==='string'&&c.reviewReason.length>0&&
    c.date===e.date&&c.region===e.region&&c.event===e.event&&
    c.player===e.player&&c.rank===e.rank&&c.points===e.points&&
    c.kills===e.kills&&c.vrs===e.vrs&&c.seasonId===e.seasonId&&
