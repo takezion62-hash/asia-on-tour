@@ -113,6 +113,9 @@ on:
       - scripts/publish-s41-eu-console-zb-solo-round2-eleven.cjs
       - scripts/publish-s39-naw-reload-round2-zero-vr-5.cjs
       - scripts/publish-s37-console-round2-zero-vr-20.cjs
+      - scripts/publish-s30-clean-partial-38-20261121.cjs
+      - scripts/verified-s30-clean-partial-38-20261121.cjs
+      - data/manual-approvals/20261121-s30-clean-partial-38.json
       - scripts/publish-s30-zb-review-eleven-20261121.cjs
       - scripts/verified-s30-zb-review-eleven-20261121.cjs
       - data/manual-approvals/20261121-s30-zb-reviewed-eleven.json
@@ -275,6 +278,8 @@ jobs:
             node scripts/publish-s30-nac-zb-solo-round1-85.cjs
             node scripts/publish-s30-zb-review-eleven-20261121.cjs --dry-run
             node scripts/publish-s30-zb-review-eleven-20261121.cjs
+            node scripts/publish-s30-clean-partial-38-20261121.cjs --dry-run
+            node scripts/publish-s30-clean-partial-38-20261121.cjs
             node scripts/publish-s37-console-round2-zero-vr-20.cjs --dry-run
             node scripts/publish-s37-console-round2-zero-vr-20.cjs
             node scripts/publish-s39-naw-reload-round2-zero-vr-5.cjs --dry-run
