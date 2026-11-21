@@ -3284,6 +3284,10 @@
         {
           "text": "Fortnite Tracker EU 2026-09-20 Event 1 Round 2決勝。",
           "url": "https://fortnitetracker.com/events/epicgames_S42_MobileVictoryCup_ReloadminiV_EU?window=S42_MobileVictoryCup_Event1_Round2_EU"
+        },
+        {
+          "text": "Tracker ME 2026/10/11 Event4 Round2。ソロMini Venture 1VRあたり個人$50。",
+          "url": "https://fortnitetracker.com/events/epicgames_S42_MobileVictoryCup_ReloadminiV_ME?window=S42_MobileVictoryCup_Event4_Round2_ME"
         }
       ]
     },
@@ -3314,6 +3318,10 @@
         {
           "text": "Tracker EU January Qualifier 3はSolo Zero Build。",
           "url": "https://fortnitetracker.com/events/epicgames_S39_MobileSeriesCupJanQual_EU?window=S39_MobileSeriesCup_JanQualifier3_EU"
+        },
+        {
+          "text": "Tracker OCE 2026/01/12 January Qualifier 3賞金付きOpen Qualifier。順位賞金と原則地域1位のGroup Stage進出は分けて管理。",
+          "url": "https://fortnitetracker.com/events/epicgames_S39_MobileSeriesCupJanQual_OCE?window=S39_MobileSeriesCup_JanQualifier3_OCE"
         }
       ]
     },
@@ -3344,6 +3352,10 @@
         {
           "text": "Tracker EU February Qualifier 6はSolo Zero Build。",
           "url": "https://fortnitetracker.com/events/epicgames_S39_MobileSeriesCupFebQual_EU?window=S39_MobileSeriesCup_FebQualifier6_EU"
+        },
+        {
+          "text": "Tracker OCE 2026/02/22 February Qualifier 6。同一地域・日付・ラウンド・賞金カテゴリ内の戦績は1開催枠へ統合。",
+          "url": "https://fortnitetracker.com/events/epicgames_S39_MobileSeriesCupFebQual_OCE?window=S39_MobileSeriesCup_FebQualifier6_OCE"
         }
       ]
     },
@@ -3459,6 +3471,36 @@
         {
           "text": "2026年6月以前は各地域1位のみMobile Series Group Stage進出。順位賞金は次段階進出とは別。",
           "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-mobile-series-chapter-7-official-rules"
+        },
+        {
+          "text": "Tracker BR 2026/04/20 MarQualifier9・2026/05/18 MarQualifier11。window名のMarは変更せず開催日の実日付を採用。",
+          "url": "https://fortnitetracker.com/events/epicgames_S40_MobileSeriesCupQual_BR?window=S40_MobileSeriesCup_MarQualifier9_BR"
+        }
+      ]
+    },
+    {
+      "id": "ch7s3-mobile-series-monthly-qualifier",
+      "name": "Mobile Series",
+      "chapter": 7,
+      "season": 3,
+      "seasonId": "S41",
+      "sourceEventIds": [
+        "S41_MobileSeriesCupQual"
+      ],
+      "series": "mobile-series",
+      "mode": "zero-build",
+      "subtype": "mobile-series-monthly-qualifier",
+      "team": "solo",
+      "platform": "mobile",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "Epic Mobile Series Chapter 7公式規定。モバイルBlitz Royaleソロの賞金付きQualifier。順位賞金・予選通過・VRは別概念として扱う。",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-mobile-series-chapter-7-official-rules"
+        },
+        {
+          "text": "Tracker ME 2026/08/01 March名のQualifier13（実開催日基準）。Reoが1位・19キル・0VR・個人順位賞金$1,200。",
+          "url": "https://fortnitetracker.com/events/epicgames_S41_MobileSeriesCupQual_ME?window=S41_MobileSeriesCup_MarQualifier13_ME"
         }
       ]
     },
