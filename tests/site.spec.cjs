@@ -331,9 +331,19 @@ test('大会詳細で予選・決勝・賞金獲得を独立表示し、全戦�
   expect(candidates.length).toBeGreaterThan(0);
   candidates.sort((a,b)=>b[1].length-a[1].length);
   const [id,expected]=candidates[0];
+  // "予選" now includes attendance-only records from this same qualifier
+  // leaderboard, without turning their outcomes into confirmed advancement.
+  const displayQualifier=row=>{
+    if(row.kind==='予選')return true;
+    if(row.kind!=='参加確認')return false;
+    const series=data.tournaments.catalog.find(t=>t.id===tournamentKey(row,data))?.series;
+    return (series==='playstation-cup'&&/^Qualifier\s*\/\s*参加確認$/iu.test(String(row.round||'')))
+      ||(series==='victory-cup'
+        &&/^(?:(?:Event|Day|Week)\s*\d+\s*·\s*)?Round\s*1\s*\/\s*参加確認$/iu.test(String(row.round||'')));
+  };
   const modes={
     all:expected,
-    qualifier:expected.filter(row=>row.kind==='予選'),
+    qualifier:expected.filter(displayQualifier),
     final:expected.filter(row=>finalKinds.has(row.kind)),
     prize:expected.filter(row=>row.verified===true&&row.prize>0&&!['予選','スキン大会','コスメ大会'].includes(row.kind))
   };
