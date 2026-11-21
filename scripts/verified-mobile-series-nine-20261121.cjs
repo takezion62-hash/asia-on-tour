@@ -86,7 +86,7 @@ function validateProof(){
    x.kind==='賞金決勝'&&x.rule===m.rule&&x.source===trackerFor(m)&&
    x.name===name&&x.rawName===name&&x.epicUUID===uid&&
    epicId(x.profileUrl)===uid&&
-   decodeURIComponent(new URL(x.profileUrl).pathname.split('/').at(-1))===name&&
+   decodeURIComponent(new URL(x.profileUrl).pathname.split('/').at(-2))===name&&
    x.rank===rank&&x.points===points&&x.matches===matches&&
    x.kills===kills&&x.vrs===vrs&&x.prize===prize,
    'altered screenshot '+shot);
