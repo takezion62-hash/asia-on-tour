@@ -1,28 +1,28 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-20T22:41:13.899Z",
+  "checkedAt": "2026-11-21T06:45:28.469Z",
   "mode": "review",
   "scope": "recent",
   "dateMode": null,
-  "selectedWindows": 5,
+  "selectedWindows": 10,
   "fromDate": null,
   "toDate": null,
   "provider": "osirion",
-  "linkedPlayers": 693,
-  "trackedWindows": 105,
+  "linkedPlayers": 694,
+  "trackedWindows": 115,
   "found": 0,
-  "skipped": 2,
-  "imported": 5,
-  "scannedPages": 7,
-  "completedWindows": 105,
+  "skipped": 0,
+  "imported": 4,
+  "scannedPages": 23,
+  "completedWindows": 115,
   "identityConflicts": 3,
-  "alreadyRegistered": 222,
-  "autoApprovedTotal": 3287,
+  "alreadyRegistered": 227,
+  "autoApprovedTotal": 3306,
   "invalidCachedCandidates": 0,
   "manualReviewCandidates": 0,
   "autoApprovedCosmeticThisRun": 4,
-  "autoApprovedCashThisRun": 1,
+  "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
   "autoApprovedUnrealThisRun": 0,
   "timeLimitReached": false,
@@ -30,7 +30,7 @@
   "transientFailures": 0,
   "malformedFailures": 0,
   "skippedLeaderboards": [],
-  "reviewOnlyWindows": 93,
+  "reviewOnlyWindows": 103,
   "reviewOnlyCandidates": 0,
   "unmappedEvents": 3,
   "unmappedEventIds": [
@@ -38,17 +38,17 @@
     "S43_PlayStationCup",
     "S43_PlayStationCup_ZB"
   ],
-  "message": "最新版と安全統合：新規掲載5件、重複スキップ0件、要確認の競合0件、確認待ち0件。既存の戦績・賞金は保持。",
+  "message": "最新版と安全統合：新規掲載4件、重複スキップ0件、要確認の競合0件、確認待ち0件。既存の戦績・賞金は保持。",
   "concurrentMerge": {
-    "appended": 5,
+    "appended": 4,
     "alreadyPublished": 0,
     "reviewConflicts": 0,
     "keptPending": 0,
-    "reconciledAt": "2026-11-20T22:41:20.732Z"
+    "reconciledAt": "2026-11-21T06:45:35.426Z"
   },
   "coverage": {
-    "total": 105,
-    "completed": 105,
+    "total": 115,
+    "completed": 115,
     "notStarted": 0,
     "partial": 0,
     "retryWaiting": 0,
@@ -58,13 +58,13 @@
     "completionPercent": 100,
     "byRegion": {
       "EU": {
-        "total": 21,
-        "completed": 21,
+        "total": 24,
+        "completed": 24,
         "pending": 0
       },
       "NAC": {
-        "total": 20,
-        "completed": 20,
+        "total": 22,
+        "completed": 22,
         "pending": 0
       },
       "OCE": {
@@ -78,20 +78,20 @@
         "pending": 0
       },
       "BR": {
-        "total": 14,
-        "completed": 14,
+        "total": 18,
+        "completed": 18,
         "pending": 0
       },
       "NAW": {
-        "total": 14,
-        "completed": 14,
+        "total": 15,
+        "completed": 15,
         "pending": 0
       }
     },
     "byYear": {
       "2026": {
-        "total": 105,
-        "completed": 105,
+        "total": 115,
+        "completed": 115,
         "pending": 0
       }
     },
@@ -112,7 +112,7 @@
   },
   "manuallyResolvedDuplicates": 47,
   "autoApprovedParticipationThisRun": 0,
-  "processedWindows": 5,
+  "processedWindows": 10,
   "providerRateLimitPaused": false,
   "providerRateLimitRetryAfter": null,
   "providerTraffic": {
@@ -125,8 +125,8 @@
     "pageBudget": 30,
     "minRequestIntervalMs": 1200,
     "reason": "steady-state",
-    "requests": 13,
-    "waitedMs": 6733,
+    "requests": 29,
+    "waitedMs": 14441,
     "intervalMs": 1200
   }
 }
