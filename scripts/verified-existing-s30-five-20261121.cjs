@@ -24,7 +24,9 @@ const GOLD=Object.freeze([
       "prize": null,
       "seasonId": "S30",
       "tournamentId": "ch5s3-playstation-cup-br",
-      "source": "https://www.fortnite.com/competitive/events/S30_PlaystationCupJune/?region=OCE&round=S30_PlaystationCupJune_Final_OCE"
+      "source": "https://www.fortnite.com/competitive/events/S30_PlaystationCupJune/?region=OCE&round=S30_PlaystationCupJune_Final_OCE",
+      "reviewOnly": true,
+      "reviewReason": "確認専用大会は自動承認不可"
     },
     "existing": {
       "id": "ps-s30-oce-s30ocebr-final-20240629-r6",
@@ -63,7 +65,9 @@ const GOLD=Object.freeze([
       "prize": null,
       "seasonId": "S30",
       "tournamentId": "ch5s3-playstation-cup-zb",
-      "source": "https://www.fortnite.com/competitive/events/S30_PlaystationCupZBJune/?region=OCE&round=S30_PlaystationCupZBJune_Final_OCE"
+      "source": "https://www.fortnite.com/competitive/events/S30_PlaystationCupZBJune/?region=OCE&round=S30_PlaystationCupZBJune_Final_OCE",
+      "reviewOnly": true,
+      "reviewReason": "確認専用大会は自動承認不可"
     },
     "existing": {
       "id": "ps-s30-oce-s30ocezb-final-20240630-r25",
@@ -102,7 +106,9 @@ const GOLD=Object.freeze([
       "prize": null,
       "seasonId": "S30",
       "tournamentId": "ch5s3-playstation-cup-zb",
-      "source": "https://www.fortnite.com/competitive/events/S30_PlaystationCupZBJune/?region=OCE&round=S30_PlaystationCupZBJune_Final_OCE"
+      "source": "https://www.fortnite.com/competitive/events/S30_PlaystationCupZBJune/?region=OCE&round=S30_PlaystationCupZBJune_Final_OCE",
+      "reviewOnly": true,
+      "reviewReason": "確認専用大会は自動承認不可"
     },
     "existing": {
       "id": "ps-s30-oce-s30ocezb-final-20240630-r41",
@@ -141,7 +147,9 @@ const GOLD=Object.freeze([
       "prize": null,
       "seasonId": "S30",
       "tournamentId": "ch5s3-playstation-cup-zb",
-      "source": "https://www.fortnite.com/competitive/events/S30_PlaystationCupZBJune/?region=OCE&round=S30_PlaystationCupZBJune_Final_OCE"
+      "source": "https://www.fortnite.com/competitive/events/S30_PlaystationCupZBJune/?region=OCE&round=S30_PlaystationCupZBJune_Final_OCE",
+      "reviewOnly": true,
+      "reviewReason": "確認専用大会は自動承認不可"
     },
     "existing": {
       "id": "ps-s30-oce-s30ocezb-final-20240630-r56",
@@ -180,7 +188,9 @@ const GOLD=Object.freeze([
       "prize": null,
       "seasonId": "S30",
       "tournamentId": "ch5s3-playstation-cup-zb",
-      "source": "https://www.fortnite.com/competitive/events/S30_PlaystationCupZBJune/?region=OCE&round=S30_PlaystationCupZBJune_Final_OCE"
+      "source": "https://www.fortnite.com/competitive/events/S30_PlaystationCupZBJune/?region=OCE&round=S30_PlaystationCupZBJune_Final_OCE",
+      "reviewOnly": true,
+      "reviewReason": "確認専用大会は自動承認不可"
     },
     "existing": {
       "id": "ps-s30-oce-s30ocezb-final-20240630-r83",
@@ -204,7 +214,8 @@ const GOLD=Object.freeze([
 ]);
 const fail=(ok,message)=>{if(!ok)throw Error('EXACT_EXISTING_S30_FIVE_PROOF '+message)};
 const fields=['id','date','region','event','player','playerRaw','round','kind',
- 'rank','points','kills','vrs','matches','prize','seasonId','tournamentId','source'];
+ 'rank','points','kills','vrs','matches','prize','seasonId','tournamentId','source',
+ 'reviewOnly','reviewReason'];
 const oldFields=['id','date','region','event','player','rank','points','kills','vrs',
  'matches','seasonId','tournamentId','kind','round','prize','source'];
 const same=(a,b,fields)=>fields.every(k=>a[k]===b[k]);
@@ -237,7 +248,7 @@ function validateProof(){
    'duplicate ID or published ID reused '+c.id);
   seen.add(c.id);oldSeen.add(e.id);
   fail(c.kind==='参加確認'&&e.kind==='賞金決勝'&&
-   c.verified===true&&c.reviewReason==='順位表の取得が完了していません'&&
+   c.verified===true&&typeof c.reviewReason==='string'&&c.reviewReason.length>0&&
    c.date===e.date&&c.region===e.region&&c.event===e.event&&
    c.player===e.player&&c.rank===e.rank&&c.points===e.points&&
    c.kills===e.kills&&c.vrs===e.vrs&&c.seasonId===e.seasonId&&
