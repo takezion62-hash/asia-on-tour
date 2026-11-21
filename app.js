@@ -274,13 +274,16 @@
 
     const tournamentForRecord=classifyTournamentRecord;
     const tournamentDefaultFilters=()=>({series:'all',mode:'all',subtype:'all',team:'all',platform:'all',stage:'all',q:'',date:'',region:'all',player:''});
+    // Results and taxonomy are immutable within a page session. Never rescan
+    // and reclassify the full archive for each filter, tag link, or route.
+    const tournamentStageOptionsCache=new Map();
     let tournamentBrowseFilters=tournamentDefaultFilters();
     function tournamentLabel(axis,value){return tournamentAxes.find(a=>a.key===axis)?.options.find(o=>o.id===value)?.label||'未確認'}
     const tournamentAxisValues=(t,key)=>key==='series'?[t.series,...(Array.isArray(t.additionalSeries)?t.additionalSeries:[])]:[t[key]];
     function sanitizeTournamentFilters(filters={}){
       const result=tournamentDefaultFilters();
       for(const axis of tournamentAxes)if(axis.options.some(o=>o.id===filters[axis.key]))result[axis.key]=filters[axis.key];
-      if(all().some(e=>canonicalTournamentKind(e.kind,classifyTournamentRecord(e).id,e.round)===filters.stage))result.stage=filters.stage;
+      if(filters.stage&&filters.stage!=='all'&&tournamentViewStageOptions().some(o=>o.id===filters.stage))result.stage=filters.stage;
       result.q=typeof filters.q==='string'?filters.q.slice(0,160):'';
       result.date=typeof filters.date==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(filters.date)
         &&Number.isFinite(Date.parse(filters.date))
@@ -497,7 +500,7 @@
       if(regions.includes(value.region))f.region=value.region;
       for(const axis of ['series','mode'])
         if(tournamentAxes.find(item=>item.key===axis)?.options.some(option=>option.id===value[axis])||(axis==='series'&&value[axis]==='ranked-cup'))f[axis]=value[axis];
-      if(rawAll().some(e=>canonicalTournamentKind(e.kind,classifyTournamentRecord(e).id,e.round)===value.stage)||value.stage==='単一ラウンド')f.stage=value.stage;
+      if(value.stage==='単一ラウンド'||(value.stage&&value.stage!=='all'&&tournamentViewStageOptions().some(o=>o.id===value.stage)))f.stage=value.stage;
       if(['all','scheduled','results'].includes(value.scope))f.scope=value.scope;
       return f;
     }
@@ -745,7 +748,21 @@
       return t.seasonId||'シーズン未確認';
     }
     function tournamentViewStageOptions(){
-      return [...new Set(all().map(e=>canonicalTournamentKind(e.kind,classifyTournamentRecord(e).id,e.round)).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'ja')).map(id=>({id,label:id}));
+      if(!tournamentStageOptionsCache.has(selectedSeason)){
+        const stages=new Set();
+        for(const row of all()){
+          // Most records already have their final display stage. Expensive
+          // tournament classification is only needed for exceptional labels.
+          const needsNormalization=row.kind==='参加確認'||row.kind==='決勝'
+            ||(/^(?:Session\\s*1|単一開催枠)\\s*\\//iu.test(String(row.round||'')));
+          const kind=needsNormalization
+            ?canonicalTournamentKind(row.kind,classifyTournamentRecord(row).id,row.round)
+            :row.kind;
+          if(kind)stages.add(kind);
+        }
+        tournamentStageOptionsCache.set(selectedSeason,[...stages].sort((a,b)=>a.localeCompare(b,'ja')).map(id=>({id,label:id})));
+      }
+      return tournamentStageOptionsCache.get(selectedSeason);
     }
     function tournamentViewSelect(axis,filters){
       const selected=filters[axis.key]||'all';
@@ -794,7 +811,9 @@
     // Only explicit round labels establish a confirmed qualifier in these summaries.
     const tournamentFinalKinds=new Set(['賞金決勝','Practice決勝','Performance決勝','決勝']);
     const tournamentIsConfirmedQualifier=e=>e.verified===true&&e.kind==='予選'&&!!AotPR.qualificationEvidence(e,classifyTournamentRecord(e));
-    const tournamentPhase=e=>canonicalTournamentKind(e.kind,classifyTournamentRecord(e).id,e.round)==='予選'?'qualifier':tournamentFinalKinds.has(e.kind)?'final':'other';
+    const tournamentPhase=e=>e.kind==='予選'||(e.kind==='参加確認'
+      &&isQualifyingParticipation(e.kind,classifyTournamentRecord(e).id,e.round))
+      ?'qualifier':tournamentFinalKinds.has(e.kind)?'final':'other';
     let tournamentProgressMode='all',tournamentProgressId=null;
     function tournamentProgressSummary(records){
       const qualifiers=records.filter(e=>tournamentPhase(e)==='qualifier');
