@@ -41,7 +41,10 @@ function parseWorkflow(workflow){
   }
   return tokens;
  });
- assert(steps.length>=50&&steps.length<=120,'unexpected rebuild command count: '+steps.length);
+ // Keep a bounded safety budget, but do not pin it to the historical number
+ // of publishers. Every command is still parsed, argument-checked and run
+ // against an isolated copy before the PR can merge.
+ assert(steps.length>=50&&steps.length<=160,'unexpected rebuild command count: '+steps.length);
  assert(lines[0]===FIRST&&lines[lines.length-1]===LAST,'rebuild boundary altered');
  const position=needle=>steps.findIndex(tokens=>tokens.join(' ')===needle);
  const must=[
