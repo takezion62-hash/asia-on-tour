@@ -28,7 +28,7 @@ function apply({dryRun=false}={}){
  }
  for(const player of [...V.DOC.expected.knownPlayers,...V.DOC.expected.newPlayers])
   must(known.has(player),'existing canonical profile missing: '+player);
- const uids=new Set(V.GOLD.map(z=>z[5])),owners=new Map();
+ const uids=new Set(V.GOLD.map(z=>z[4])),owners=new Map();
  const capture=(url,name)=>{
   const uid=V.epicId(url);if(!uids.has(uid))return;
   const canonical=aliases.get(name)||name;
