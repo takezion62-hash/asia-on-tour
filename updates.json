@@ -2,6 +2,55 @@
   "version": 1,
   "entries": [
     {
+      "id": "review-publication-pending-20261114-fd565472472b-verified-rule-1",
+      "date": "2026-11-21",
+      "type": "records",
+      "title": "管理者確認済み戦績 3件を追加",
+      "description": "公式規則に基づく予選突破または決勝0VRのみを確認。未確認賞金なし。",
+      "recordIds": [
+        "auto-s30-ceee8b8a3898",
+        "auto-s30-5ca673f7c28a",
+        "auto-s30-0aeb3652f53c"
+      ]
+    },
+    {
+      "id": "review-publication-pending-20261114-fd565472472b-attendance-only-1",
+      "date": "2026-11-21",
+      "type": "records",
+      "title": "管理者確認済み戦績 10件を追加",
+      "description": "Epic ID・開催枠・順位表を再照合した出場確認のみ。賞金・予選突破・スキン獲得を未認定。",
+      "recordIds": [
+        "auto-s31-847c7252e133",
+        "auto-s39-ee39fd5a7f1e",
+        "auto-s39-fe638aec780c",
+        "auto-s39-0b668e90c1c8",
+        "auto-s39-823e40b777dd",
+        "auto-s41-396b5931ab56",
+        "auto-s41-aa424a4844b0",
+        "auto-s41-5052cfb434d2",
+        "auto-s41-1630b4851318",
+        "auto-s41-7c485e982846"
+      ]
+    },
+    {
+      "id": "owner-s39-s41-s42-mobile-nine-20261121",
+      "date": "2026-11-21",
+      "type": "records",
+      "title": "Mobile Series Heats・QualifierとMobile Victory Cup 9成績・$1,750",
+      "description": "画像1986〜1994：S39 EU 2026年1月/2月Mobile Series賞金付きQualifier計4件($1,300)、S41 EU 6月Heats10位$150（Heats突破なし）、6/29 Mobile Battle Royale決勝1VR=$100、S42 NAC 9/27 Mini Venture ZB Reload決勝3件1VR=$50（計$200）。Mobile Seriesの順位賞金とGroup Stage進出を区別し、4人の既存プロフィールに統合。実際の賞金送金は未確認。",
+      "recordIds": [
+        "owner-s41-eu-br-20260629-r22",
+        "owner-s41-eu-heat-20260621-r10",
+        "owner-s39-eu-feb-20260223-r9",
+        "owner-s39-eu-feb-20260223-r12",
+        "owner-s39-eu-jan-20260113-r4",
+        "owner-s39-eu-jan-20260113-r12",
+        "owner-s42-nac-mini-20260927-r8",
+        "owner-s42-nac-mini-20260927-r26",
+        "owner-s42-nac-mini-20260927-r34"
+      ]
+    },
+    {
       "id": "auto-sync-20261121025850",
       "date": "2026-11-21",
       "type": "records",
