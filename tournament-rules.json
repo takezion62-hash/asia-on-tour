@@ -2246,6 +2246,32 @@
         "ME": 80,
         "OCE": 80
       }
+    },
+    {
+      "id": "ch7s3-mobile-reload-mini-venture-victory-cup",
+      "seasonId": "S41",
+      "eventIds": [
+        "S41_MobileVictoryCup_ReloadminiV"
+      ],
+      "team": "solo",
+      "series": "victory-cup",
+      "chapter": 7,
+      "season": 3,
+      "matchCaps": {
+        "予選": 8,
+        "賞金決勝": 6
+      },
+      "prizePerVictory": 50,
+      "mode": "reload-zero-build",
+      "source": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-mobile-victory-cups-chapter-7-season-3-official-rules",
+      "advance": {
+        "EU": 176,
+        "NAC": 144,
+        "NAW": 80,
+        "BR": 80,
+        "ME": 80,
+        "OCE": 80
+      }
     }
   ]
 }
