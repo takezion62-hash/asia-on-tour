@@ -355,6 +355,14 @@
         {
           "id": "mobile-battle-royale-victory-cup",
           "label": "Mobile Battle Royale Victory Cup"
+        },
+        {
+          "id": "mobile-series-monthly-qualifier",
+          "label": "Mobile Series Monthly Qualifier"
+        },
+        {
+          "id": "mobile-reload-elite-stronghold-victory-cup",
+          "label": "Mobile Reload (Elite Stronghold) Victory Cup"
         }
       ]
     },
@@ -3346,7 +3354,8 @@
       "season": 3,
       "seasonId": "S41",
       "sourceEventIds": [
-        "S41_MobileSeriesHeat3"
+        "S41_MobileSeriesHeat3",
+        "S41_MobileSeriesHeat4"
       ],
       "series": "mobile-series",
       "mode": "zero-build",
@@ -3362,6 +3371,10 @@
         {
           "text": "Tracker EU Heat 3 JuneはSolo Zero Build、6月開催で10位$150。",
           "url": "https://fortnitetracker.com/events/epicgames_S41_MobileSeriesHeat3_EU?window=S41_MobileSeriesHeat3June_EU"
+        },
+        {
+          "text": "Epic公式2026 August Heats NAW/NAC賞金帯：NAC9-12位$150、NAW9-16位$100。各Heat上位4名のみQualifier Sessionに進出。",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-mobile-series-chapter-7-official-rules"
         }
       ]
     },
@@ -3388,6 +3401,58 @@
         {
           "text": "Tracker EU Day 2 Round 2に個人100pt/1VR/$100。",
           "url": "https://fortnitetracker.com/events/epicgames_S41_MobileVictoryCup_BR_EU?window=S41_MobileVictoryCup_Day2_Round2_BR_EU"
+        }
+      ]
+    },
+    {
+      "id": "ch7s2-mobile-series-monthly-qualifier",
+      "name": "Mobile Series",
+      "chapter": 7,
+      "season": 2,
+      "seasonId": "S40",
+      "sourceEventIds": [
+        "S40_MobileSeriesCupQual"
+      ],
+      "series": "mobile-series",
+      "mode": "zero-build",
+      "subtype": "mobile-series-monthly-qualifier",
+      "team": "solo",
+      "platform": "mobile",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "Mobile Series March-named Tracker qualifier window IDs 8,10 were held on April 6 and May 4, 2026. NAW placement cash: rank 6=$250, ranks 10–11=$200, according to Epic's original Mobile Series NAW table. Event is touch-only Blitz Royale; the zero-build bucket is a site taxonomy, not regular BR or Reload.",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/1-million-dollar-fortnite-mobile-series-battle-it-out-in-blitz"
+        },
+        {
+          "text": "2026年6月以前は各地域1位のみMobile Series Group Stage進出。順位賞金は次段階進出とは別。",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-mobile-series-chapter-7-official-rules"
+        }
+      ]
+    },
+    {
+      "id": "ch7s3-mobile-reload-elite-stronghold-victory-cup",
+      "name": "Mobile Reload (Elite Stronghold) Victory Cup",
+      "chapter": 7,
+      "season": 3,
+      "seasonId": "S41",
+      "sourceEventIds": [
+        "S41_MobileVictoryCup_RES"
+      ],
+      "series": "victory-cup",
+      "mode": "reload",
+      "subtype": "mobile-reload-elite-stronghold-victory-cup",
+      "team": "solo",
+      "platform": "mobile",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "Epic Ch7S3 Mobile Reload (Elite Stronghold) uses Solo Reload BUILD mode (distinct from Zero Build variant), Round 2 45 minutes / max3 matches, individual 1VR=$100.",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-mobile-victory-cups-chapter-7-season-3-official-rules"
+        },
+        {
+          "text": "NAW Day 5 Round 2 tracker 2026-08-18",
+          "url": "https://fortnitetracker.com/events/epicgames_S41_MobileVictoryCup_RES_NAW?window=S41_MobileVictoryCup_Day5_Round2_RES_NAW"
         }
       ]
     }
