@@ -395,6 +395,8 @@ test('大会カレンダーは証拠付き旧PlayStation・Cash Cup Round 1を�
   await expect(page.locator('#page-tournament')).toBeVisible();
   const cash=await look('S33','2025-01-18','Solo Cash Cup','予選','Event 4 · Round 1 / 予選');
   await expect(cash.locator('[data-open-tournament]').first()).toHaveAttribute('data-tournament-kind','予選');
-  const finalAttendance=await look('S33','2025-02-03','Solo Cash Cup','参加確認','Event 6 · Round 2 / 参加確認');
-  await expect(finalAttendance.locator('[data-open-tournament]').first()).toHaveAttribute('data-tournament-kind','参加確認');
+  // Explicit source Round 2 is a Finals session even for an attendance-only
+  // record. This is display classification; original cash remains unknown.
+  const finalAttendance=await look('S33','2025-02-03','Solo Cash Cup','賞金決勝','Event 6 · Round 2 / 賞金決勝');
+  await expect(finalAttendance.locator('[data-open-tournament]').first()).toHaveAttribute('data-tournament-kind','賞金決勝');
 });

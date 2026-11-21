@@ -20,7 +20,8 @@ const stageLogic = vm.runInNewContext('(function(){'+app.slice(begin,finish)+
   ';return {canonicalTournamentRound,canonicalTournamentKind}})()',{
   tournamentCatalog:data.tournaments.catalog,
   all:()=>rows,
-  classifyTournamentRecord:row=>({id:tournamentKey(row,data)})
+  classifyTournamentRecord:row=>({id:tournamentKey(row,data)}),
+  URL
 });
 const stageFor = row => {
   const id=tournamentKey(row,data);

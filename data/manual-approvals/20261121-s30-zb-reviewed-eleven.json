@@ -1,0 +1,370 @@
+{
+  "version": 1,
+  "batch": {
+    "id": "source-reviewed-s30-zb-11-20261121",
+    "reviewedOn": "2026-11-21",
+    "source": "Official Epic competition window + Osirion saved verified player leaderboard, historical review snapshot; Chapter 5 Season 3 2024 Victory Cup rules",
+    "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
+    "entries": [
+      {
+        "source": {
+          "id": "auto-s30-59b4d410041c",
+          "date": "2024-06-03",
+          "region": "OCE",
+          "player": "Hagane",
+          "playerRaw": "神里綾華KASHIRA",
+          "event": "ZB Solo Victory Cup",
+          "round": "Event 1 · Round 2 / 賞金決勝",
+          "rank": 33,
+          "points": 100,
+          "kills": 6,
+          "vrs": 1,
+          "prize": null,
+          "kind": "賞金決勝",
+          "matches": 3,
+          "seasonId": "S30",
+          "chapter": 5,
+          "season": 3,
+          "tournamentId": "ch5s3-zb-solo-victory",
+          "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=OCE&round=S30_SoloZBVictoryCashCup_Event1Round2_OCE",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。現金賞金の確定情報なし。",
+          "reviewReason": "順位表の取得が完了していません"
+        },
+        "expected": {
+          "kind": "賞金決勝",
+          "prize": 100,
+          "round": "Event 1 · Round 2 / 賞金決勝",
+          "qualification": null
+        }
+      },
+      {
+        "source": {
+          "id": "auto-s30-11e3e41c81e8",
+          "date": "2024-07-16",
+          "region": "NAC",
+          "player": "vurаdd0",
+          "playerRaw": "Chateau vuraddo",
+          "event": "ZB Solo Victory Cup",
+          "round": "Event 5 · Round 1 / 予選",
+          "rank": 4639,
+          "points": 100,
+          "kills": 15,
+          "vrs": 0,
+          "prize": 0,
+          "kind": "予選",
+          "matches": 7,
+          "seasonId": "S30",
+          "chapter": 5,
+          "season": 3,
+          "tournamentId": "ch5s3-zb-solo-victory",
+          "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=NAC&round=S30_SoloZBVictoryCashCup_Event5Round1_NAC",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。",
+          "reviewReason": "順位表の取得が完了していません"
+        },
+        "expected": {
+          "kind": "予選",
+          "prize": 0,
+          "round": "Event 5 · Round 1 / 予選突破",
+          "qualification": "advanced"
+        }
+      },
+      {
+        "source": {
+          "id": "auto-s30-1358b2da104b",
+          "date": "2024-07-16",
+          "region": "NAC",
+          "player": "すかい",
+          "playerRaw": "AtlanticSkyx",
+          "event": "ZB Solo Victory Cup",
+          "round": "Event 5 · Round 1 / 予選",
+          "rank": 5356,
+          "points": 95,
+          "kills": 29,
+          "vrs": 0,
+          "prize": 0,
+          "kind": "予選",
+          "matches": 7,
+          "seasonId": "S30",
+          "chapter": 5,
+          "season": 3,
+          "tournamentId": "ch5s3-zb-solo-victory",
+          "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=NAC&round=S30_SoloZBVictoryCashCup_Event5Round1_NAC",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。",
+          "reviewReason": "順位表の取得が完了していません"
+        },
+        "expected": {
+          "kind": "予選",
+          "prize": 0,
+          "round": "Event 5 · Round 1 / 予選",
+          "qualification": "not-advanced"
+        }
+      },
+      {
+        "source": {
+          "id": "auto-s30-b7075ca92603",
+          "date": "2024-07-16",
+          "region": "NAC",
+          "player": "いずべすと",
+          "playerRaw": "この心臓に花束を",
+          "event": "ZB Solo Victory Cup",
+          "round": "Event 5 · Round 1 / 予選",
+          "rank": 6033,
+          "points": 91,
+          "kills": 9,
+          "vrs": 0,
+          "prize": 0,
+          "kind": "予選",
+          "matches": 7,
+          "seasonId": "S30",
+          "chapter": 5,
+          "season": 3,
+          "tournamentId": "ch5s3-zb-solo-victory",
+          "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=NAC&round=S30_SoloZBVictoryCashCup_Event5Round1_NAC",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。",
+          "reviewReason": "順位表の取得が完了していません"
+        },
+        "expected": {
+          "kind": "予選",
+          "prize": 0,
+          "round": "Event 5 · Round 1 / 予選",
+          "qualification": "not-advanced"
+        }
+      },
+      {
+        "source": {
+          "id": "auto-s30-7e9095c39d3c",
+          "date": "2024-07-16",
+          "region": "NAC",
+          "player": "らず",
+          "playerRaw": "Herbらずずずずずずずずずずず",
+          "event": "ZB Solo Victory Cup",
+          "round": "Event 5 · Round 1 / 予選",
+          "rank": 7653,
+          "points": 81,
+          "kills": 15,
+          "vrs": 0,
+          "prize": 0,
+          "kind": "予選",
+          "matches": 7,
+          "seasonId": "S30",
+          "chapter": 5,
+          "season": 3,
+          "tournamentId": "ch5s3-zb-solo-victory",
+          "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=NAC&round=S30_SoloZBVictoryCashCup_Event5Round1_NAC",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。",
+          "reviewReason": "順位表の取得が完了していません"
+        },
+        "expected": {
+          "kind": "予選",
+          "prize": 0,
+          "round": "Event 5 · Round 1 / 予選",
+          "qualification": "not-advanced"
+        }
+      },
+      {
+        "source": {
+          "id": "auto-s30-0c50c4d4cb6d",
+          "date": "2024-07-16",
+          "region": "NAC",
+          "player": "きみが死ぬまで恋をしたいɞ",
+          "playerRaw": "きみが死ぬまで恋をしたいɞ",
+          "event": "ZB Solo Victory Cup",
+          "round": "Event 5 · Round 1 / 予選",
+          "rank": 9146,
+          "points": 73,
+          "kills": 17,
+          "vrs": 0,
+          "prize": 0,
+          "kind": "予選",
+          "matches": 7,
+          "seasonId": "S30",
+          "chapter": 5,
+          "season": 3,
+          "tournamentId": "ch5s3-zb-solo-victory",
+          "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=NAC&round=S30_SoloZBVictoryCashCup_Event5Round1_NAC",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。",
+          "reviewReason": "順位表の取得が完了していません"
+        },
+        "expected": {
+          "kind": "予選",
+          "prize": 0,
+          "round": "Event 5 · Round 1 / 予選",
+          "qualification": "not-advanced"
+        }
+      },
+      {
+        "source": {
+          "id": "auto-s30-08d7c3a10b08",
+          "date": "2024-07-16",
+          "region": "NAC",
+          "player": "らずのっと",
+          "playerRaw": "gre y2k.",
+          "event": "ZB Solo Victory Cup",
+          "round": "Event 5 · Round 1 / 予選",
+          "rank": 9341,
+          "points": 72,
+          "kills": 16,
+          "vrs": 0,
+          "prize": 0,
+          "kind": "予選",
+          "matches": 6,
+          "seasonId": "S30",
+          "chapter": 5,
+          "season": 3,
+          "tournamentId": "ch5s3-zb-solo-victory",
+          "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=NAC&round=S30_SoloZBVictoryCashCup_Event5Round1_NAC",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。",
+          "reviewReason": "順位表の取得が完了していません"
+        },
+        "expected": {
+          "kind": "予選",
+          "prize": 0,
+          "round": "Event 5 · Round 1 / 予選",
+          "qualification": "not-advanced"
+        }
+      },
+      {
+        "source": {
+          "id": "auto-s30-b8c50b0ea96e",
+          "date": "2024-08-06",
+          "region": "NAC",
+          "player": "まめいし",
+          "playerRaw": "TsV 请给我一点运气",
+          "event": "ZB Solo Victory Cup",
+          "round": "Event 8 · Round 1 / 予選",
+          "rank": 6491,
+          "points": 92,
+          "kills": 3,
+          "vrs": 0,
+          "prize": 0,
+          "kind": "予選",
+          "matches": 7,
+          "seasonId": "S30",
+          "chapter": 5,
+          "season": 3,
+          "tournamentId": "ch5s3-zb-solo-victory",
+          "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=NAC&round=S30_SoloZBVictoryCashCup_Event8Round1_NAC",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。",
+          "reviewReason": "順位表の取得が完了していません"
+        },
+        "expected": {
+          "kind": "予選",
+          "prize": 0,
+          "round": "Event 8 · Round 1 / 予選",
+          "qualification": "not-advanced"
+        }
+      },
+      {
+        "source": {
+          "id": "auto-s30-53dc4ddf8c44",
+          "date": "2024-08-06",
+          "region": "NAC",
+          "player": "NexF 秋鹿七緒",
+          "playerRaw": "NexF 秋鹿七緒",
+          "event": "ZB Solo Victory Cup",
+          "round": "Event 8 · Round 1 / 予選",
+          "rank": 7296,
+          "points": 87,
+          "kills": 9,
+          "vrs": 0,
+          "prize": 0,
+          "kind": "予選",
+          "matches": 7,
+          "seasonId": "S30",
+          "chapter": 5,
+          "season": 3,
+          "tournamentId": "ch5s3-zb-solo-victory",
+          "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=NAC&round=S30_SoloZBVictoryCashCup_Event8Round1_NAC",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。",
+          "reviewReason": "順位表の取得が完了していません"
+        },
+        "expected": {
+          "kind": "予選",
+          "prize": 0,
+          "round": "Event 8 · Round 1 / 予選",
+          "qualification": "not-advanced"
+        }
+      },
+      {
+        "source": {
+          "id": "auto-s30-8b36ae88d5a3",
+          "date": "2024-08-06",
+          "region": "NAC",
+          "player": "mаkise",
+          "playerRaw": "mаkise",
+          "event": "ZB Solo Victory Cup",
+          "round": "Event 8 · Round 1 / 予選",
+          "rank": 8199,
+          "points": 82,
+          "kills": 12,
+          "vrs": 0,
+          "prize": 0,
+          "kind": "予選",
+          "matches": 6,
+          "seasonId": "S30",
+          "chapter": 5,
+          "season": 3,
+          "tournamentId": "ch5s3-zb-solo-victory",
+          "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=NAC&round=S30_SoloZBVictoryCashCup_Event8Round1_NAC",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。",
+          "reviewReason": "順位表の取得が完了していません"
+        },
+        "expected": {
+          "kind": "予選",
+          "prize": 0,
+          "round": "Event 8 · Round 1 / 予選",
+          "qualification": "not-advanced"
+        }
+      },
+      {
+        "source": {
+          "id": "auto-s30-b34b54bc7fc5",
+          "date": "2024-08-06",
+          "region": "NAC",
+          "player": "モバイル勢のまかろん",
+          "playerRaw": "BRN 916GonLuck",
+          "event": "ZB Solo Victory Cup",
+          "round": "Event 8 · Round 1 / 予選",
+          "rank": 9586,
+          "points": 75,
+          "kills": 18,
+          "vrs": 0,
+          "prize": 0,
+          "kind": "予選",
+          "matches": 7,
+          "seasonId": "S30",
+          "chapter": 5,
+          "season": 3,
+          "tournamentId": "ch5s3-zb-solo-victory",
+          "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=NAC&round=S30_SoloZBVictoryCashCup_Event8Round1_NAC",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。",
+          "reviewReason": "順位表の取得が完了していません"
+        },
+        "expected": {
+          "kind": "予選",
+          "prize": 0,
+          "round": "Event 8 · Round 1 / 予選",
+          "qualification": "not-advanced"
+        }
+      }
+    ]
+  },
+  "expected": {
+    "rows": 11,
+    "qualifiers": 10,
+    "finals": 1,
+    "personalPrize": 100,
+    "qualifierAdvances": 1
+  }
+}

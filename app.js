@@ -334,6 +334,29 @@
       }
       return false;
     }
+    // An explicitly named Finals window is a Finals session even when a source
+    // uploader saved its participant as attendance-only. Display-only: never
+    // turn an unknown individual prize into $0 or a confirmed paid award.
+    function isFinalParticipation(kind,tournamentId,round,source=''){
+      if(kind!=='参加確認')return false;
+      const series=tournamentCatalog.find(t=>t.id===tournamentId)?.series;
+      if(!['playstation-cup','victory-cup','cash-cup',
+            'performance-evaluation','console-champions-cup'].includes(series))return false;
+      let url;
+      try{url=new URL(String(source||''))}catch{return false}
+      if(url.protocol!=='https:'||
+        !['www.fortnite.com','fortnite.com','fortnitetracker.com'].includes(url.hostname))
+        return false;
+      const windowId=url.searchParams.get('round')||url.searchParams.get('window')||'';
+      if(!windowId)return false;
+      // 'S33_PlaystationCupFinal_ME' and 'S30_PlaystationCupZBJune_Final_OCE'
+      // are both unmistakably finals; a single unnumbered Nvidia session is not.
+      if(series==='playstation-cup'&&/Final(?:[_-]|$)/iu.test(windowId))return true;
+      if(['victory-cup','cash-cup','performance-evaluation',
+          'console-champions-cup'].includes(series)
+         &&/(?:Round2|Final)(?:[_-]|$)/iu.test(windowId))return true;
+      return false;
+    }
     function canonicalTournamentRound(round,kind,tournamentId,date,region,source=''){
       let label=String(round||'').trim();
       if(tournamentId==='ch7s1-one-million-unreal-cup'&&/^(?:Session\s*1|単一開催枠)\s*\//iu.test(label))
@@ -344,6 +367,13 @@
       if(tournamentId==='ch7s2-fncs-division-1'
          &&/^Week\s*\d+\s*·\s*Final\s*\//iu.test(label))
         return label.replace(/\/\s*(?:参加確認|賞金決勝)$/u,'/ 賞金決勝');
+      if(isFinalParticipation(kind,tournamentId,label,source)){
+        // Explicit Finals and legacy unnumbered imports share the original
+        // Finals leaderboard, regardless of whether an individual won cash.
+        if(/^単一開催枠\s*\/\s*参加確認$/u.test(label))
+          return 'Final / 賞金決勝';
+        return label.replace(/\/\s*参加確認$/u,'/ 賞金決勝');
+      }
       if(isQualifyingParticipation(kind,tournamentId,label,source)
          &&/^単一開催枠\s*\/\s*参加確認$/u.test(label)){
         // Keep explicit Qualifier1 / Qualifier2 windows distinct if an
@@ -374,6 +404,7 @@
     }
     function canonicalTournamentKind(kind,tournamentId,round,source=''){
       if(isQualifyingParticipation(kind,tournamentId,round,source))return '予選';
+      if(isFinalParticipation(kind,tournamentId,round,source))return '賞金決勝';
       if(tournamentId==='ch7s1-one-million-unreal-cup'&&/^(?:Session\s*1|単一開催枠)\s*\//iu.test(String(round||'')))return '賞金決勝';
       if(['ch7s3-champion-aphrodite-fncs-cup-battle-royale','ch7s4-madison-beer-icon-cup-reload','ch7s4-inoxtag-icon-cup-battle-royale','ch7s4-elite-kado-thorne-cup-reload','ch7s5-one-piece-zoro-cup-battle-royale','ch7s5-one-piece-zoro-mobile-cup'].includes(tournamentId)
         &&/^(?:Session\s*1|単一開催枠)\s*\//iu.test(String(round||'')))return 'スキン大会';
