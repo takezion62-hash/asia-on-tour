@@ -754,7 +754,7 @@
           // Most records already have their final display stage. Expensive
           // tournament classification is only needed for exceptional labels.
           const needsNormalization=row.kind==='参加確認'||row.kind==='決勝'
-            ||(/^(?:Session\\s*1|単一開催枠)\\s*\\//iu.test(String(row.round||'')));
+            ||/^(?:Session\s*1|単一開催枠)\s*\//iu.test(String(row.round||''));
           const kind=needsNormalization
             ?canonicalTournamentKind(row.kind,classifyTournamentRecord(row).id,row.round)
             :row.kind;
