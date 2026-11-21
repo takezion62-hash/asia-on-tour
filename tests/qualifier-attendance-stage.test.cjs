@@ -54,7 +54,7 @@ test('legacy PlayStation single placeholder is a qualifier ONLY with source-wind
   matching({date:'2024-12-07',region:'ME',event:'PlayStation Cup',round:'単一開催枠',sourceIncludes:'Qualifier1'}),
   matching({date:'2025-04-30',region:'NAW',event:'PlayStation Cup',round:'単一開催枠',sourceIncludes:'Qualifier1'})
  ];
- for(const row of samples)assert.deepEqual(stage(row),{kind:'予選',round:'Qualifier / 予選'});
+ for(const row of samples)assert.deepEqual(stage(row),{kind:'予選',round:'Qualifier 1 / 予選'});
  const t=samples[1],id=tournamentKey(t,data);
  const without={...t,source:''},untrusted={...t,source:'https://not-epic.example/?round=S34_PlaystationCupQualifier1_NAW'};
  assert.equal(stage(without).kind,'参加確認');
