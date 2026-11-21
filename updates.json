@@ -2,6 +2,52 @@
   "version": 1,
   "entries": [
     {
+      "id": "review-publication-pending-20261114-32919f92011d-verified-rule-1",
+      "date": "2026-11-21",
+      "type": "records",
+      "title": "管理者確認済み戦績 4件を追加",
+      "description": "公式規則に基づく予選突破または決勝0VRのみを確認。未確認賞金なし。",
+      "recordIds": [
+        "auto-s30-7c98f94aa477",
+        "auto-s30-6432d7abb94f",
+        "auto-s30-dcd5eb70533f",
+        "auto-s30-75fb255e734b"
+      ]
+    },
+    {
+      "id": "review-publication-pending-20261114-32919f92011d-attendance-only-1",
+      "date": "2026-11-21",
+      "type": "records",
+      "title": "管理者確認済み戦績 5件を追加",
+      "description": "Epic ID・開催枠・順位表を再照合した出場確認のみ。賞金・予選突破・スキン獲得を未認定。",
+      "recordIds": [
+        "auto-s39-9a0159f2f761",
+        "auto-s39-80a8923ec694",
+        "auto-s40-ef118d79bae8",
+        "auto-s40-8ecb17e737c3",
+        "auto-s41-8bfee9b643b1"
+      ]
+    },
+    {
+      "id": "owner-s40-s41-s42-mobile-ten-20261121",
+      "date": "2026-11-21",
+      "type": "records",
+      "title": "Mobile Series Heats・QualifierとMobile Victory Cup 10成績・$1,200",
+      "description": "画像1〜10：S40 NAW 4/6・5/4 Mobile Series賞金付きQualifier3件($650)、S41 NAC/NAW 8/16 Heat4各1件($250・上位4名未達)、S41 NAW 8/18 Elite Stronghold Reload決勝1VR=$100、S42 NAW 10/18 Mini Venture Zero Build Reload決勝4件1VR=$50（計$200）。4既存プロフィールに紐づけ、Grapeは確認済み別名で統一。順位賞金と突破は別判定。実際の振込完了は未確認。",
+      "recordIds": [
+        "owner-s41-nac-nacHeat-20260816-r10",
+        "owner-s42-naw-nawMini-20261018-r14",
+        "owner-s42-naw-nawMini-20261018-r16",
+        "owner-s42-naw-nawMini-20261018-r17",
+        "owner-s42-naw-nawMini-20261018-r18",
+        "owner-s41-naw-elite-20260818-r10",
+        "owner-s41-naw-nawHeat-20260816-r13",
+        "owner-s40-naw-may-20260504-r10",
+        "owner-s40-naw-may-20260504-r11",
+        "owner-s40-naw-apr-20260406-r6"
+      ]
+    },
+    {
       "id": "auto-sync-20261121033638",
       "date": "2026-11-21",
       "type": "records",
