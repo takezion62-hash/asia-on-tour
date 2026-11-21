@@ -304,8 +304,15 @@ test('大会全体のページで開催日を選び、同じ日付の掲載結�
   expect(allRows.length).toBeGreaterThan(expected.length);
   expect(expected.length).toBeGreaterThan(0);
   await page.goto('/?season=all#tournament='+id);
+  // The all-season tournament detail is hydrated after the route is opened.
+  // Under parallel PC/mobile CI jobs, its data can finish loading after the
+  // default 5-second locator timeout. Wait for the actual tournament heading
+  // before asserting the date navigator instead of treating hydration lag as
+  // a missing feature. Keep the final DOM and record-count assertions intact.
+  await expect(page.locator('#page-tournament')).toBeVisible({timeout:20000});
+  await expect(page.locator('#tournament-title')).toBeVisible({timeout:20000});
   const datePanel=page.locator('.tournament-date-navigator');
-  await expect(datePanel).toBeVisible();
+  await expect(datePanel).toBeVisible({timeout:15000});
   await expect(datePanel).toContainText('開催日から探す');
   await expect(datePanel.locator('#tournament-date-filter')).toHaveValue('all');
   await expect(datePanel.locator('select option')).toHaveCount(dates.length+1);
