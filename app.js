@@ -345,8 +345,13 @@
          &&/^Week\s*\d+\s*·\s*Final\s*\//iu.test(label))
         return label.replace(/\/\s*(?:参加確認|賞金決勝)$/u,'/ 賞金決勝');
       if(isQualifyingParticipation(kind,tournamentId,label,source)
-         &&/^単一開催枠\s*\/\s*参加確認$/u.test(label))
-        return 'Qualifier / 予選';
+         &&/^単一開催枠\s*\/\s*参加確認$/u.test(label)){
+        // Keep explicit Qualifier1 / Qualifier2 windows distinct if an
+        // historical importer omitted the numbered stage in its label.
+        const windowId=String(source||'').match(/[?&](?:round|window)=([^&#]+)/iu)?.[1]||'';
+        const qualifierNo=windowId.match(/Qualifier(\d+)(?:[_-]|$)/iu)?.[1];
+        return 'Qualifier'+(qualifierNo?' '+qualifierNo:'')+' / 予選';
+      }
       if(kind==='予選'||isQualifyingParticipation(kind,tournamentId,label,source))
         label=label.replace(/\/\s*(?:予選(?:突破|通過)?|参加確認)$/u,'/ 予選');
       const unnamed=label.match(/^Round\s*(\d+)\s*\/\s*賞金決勝（Event番号未確認）$/iu);
