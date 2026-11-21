@@ -114,6 +114,12 @@ on:
       - scripts/publish-s39-naw-reload-round2-zero-vr-5.cjs
       - scripts/publish-s37-console-round2-zero-vr-20.cjs
       - scripts/publish-s30-clean-partial-38-20261121.cjs
+      - scripts/reconcile-existing-22-20261121.cjs
+      - scripts/reconcile-existing-s30-five-20261121.cjs
+      - scripts/verified-existing-s30-five-20261121.cjs
+      - data/manual-approvals/20261121-exact-s30-five-already-published.json
+      - scripts/verified-existing-22-20261121.cjs
+      - data/manual-approvals/20261121-exact-22-already-published.json
       - scripts/verified-s30-clean-partial-38-20261121.cjs
       - data/manual-approvals/20261121-s30-clean-partial-38.json
       - scripts/publish-s30-zb-review-eleven-20261121.cjs
@@ -280,6 +286,10 @@ jobs:
             node scripts/publish-s30-zb-review-eleven-20261121.cjs
             node scripts/publish-s30-clean-partial-38-20261121.cjs --dry-run
             node scripts/publish-s30-clean-partial-38-20261121.cjs
+            node scripts/reconcile-existing-22-20261121.cjs --dry-run
+            node scripts/reconcile-existing-22-20261121.cjs
+            node scripts/reconcile-existing-s30-five-20261121.cjs --dry-run
+            node scripts/reconcile-existing-s30-five-20261121.cjs
             node scripts/publish-s37-console-round2-zero-vr-20.cjs --dry-run
             node scripts/publish-s37-console-round2-zero-vr-20.cjs
             node scripts/publish-s39-naw-reload-round2-zero-vr-5.cjs --dry-run
