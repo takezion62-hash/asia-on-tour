@@ -882,11 +882,20 @@ const tournamentAxes = ['series', 'mode', 'subtype', 'team', 'platform'];
 // recorded advancement status, award, result ID, source or payout.
 const displayedQualifierStage = (record, tournament = tournamentFor(record, data)) => {
   if (record.kind !== '参加確認') return record.kind;
-  const label = String(record.round || '');
-  if (tournament?.series === 'playstation-cup'
-      && /^Qualifier\s*\/\s*参加確認$/iu.test(label)) return '予選';
-  if (tournament?.series === 'victory-cup'
-      && /^(?:(?:Event|Day|Week)\s*\d+\s*·\s*)?Round\s*1\s*\/\s*参加確認$/iu.test(label)) return '予選';
+  const series = tournament?.series;
+  const label = String(record.round || '').trim();
+  if (!series) return record.kind;
+  if (/^Qualifier(?:\s+\d+)?\s*\/\s*参加確認$/iu.test(label)) return '予選';
+  if (['cash-cup','victory-cup','performance-evaluation',
+      'playstation-cup','console-champions-cup'].includes(series)
+    && /^(?:(?:Event|Day|Week)\s*\d+\s*·\s*)?Round\s*1\s*\/\s*参加確認$/iu.test(label))
+    return '予選';
+  if (series === 'playstation-cup'
+    && /^単一開催枠\s*\/\s*参加確認$/u.test(label)
+    && /^https:\/\/(?:www\.)?(?:fortnite\.com|fortnitetracker\.com)\//iu.test(String(record.source || ''))) {
+    const windowId = String(record.source).match(/[?&](?:round|window)=([^&#]+)/iu)?.[1] || '';
+    if (/Qualifier\d*(?:[_-]|$)/iu.test(windowId)) return '予選';
+  }
   return record.kind;
 };
 
