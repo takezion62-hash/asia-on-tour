@@ -2,6 +2,37 @@
   "version": 1,
   "entries": [
     {
+      "id": "review-publication-pending-20261114-b88b7acbdafc-attendance-only-1",
+      "date": "2026-11-21",
+      "type": "records",
+      "title": "管理者確認済み戦績 3件を追加",
+      "description": "Epic ID・開催枠・順位表を再照合した出場確認のみ。賞金・予選突破・スキン獲得を未認定。",
+      "recordIds": [
+        "auto-s42-a08f888b2669",
+        "auto-s40-2ef48af1ace2",
+        "auto-s40-e55273e69b18"
+      ]
+    },
+    {
+      "id": "owner-mobile-jan-oct-extra-ten-20261121",
+      "date": "2026-11-21",
+      "type": "records",
+      "title": "Mobile Series S39–S41とS42 Mini Venture 10成績・$3,750",
+      "description": "画像2018〜2027：S39 OCE 1月Qualifier3の4名、2月Qualifier6のまかろん1名、S40 BR 4月・5月各1名、S41 ME 8月Reo1名、S42 ME 10月Mini Venture決勝Reo/まかろん2名。既存OCE 2月の3成績と同じ開催枠に統合。賞金合計$3,750・10VR。klutzfnmを本人IDで新規追加。順位賞金とVR賞金および進出を区別。振込完了は未確認。",
+      "recordIds": [
+        "owner-s39-oce-febOce-20260222-r9",
+        "owner-s39-oce-janOce-20260112-r1",
+        "owner-s39-oce-janOce-20260112-r2",
+        "owner-s39-oce-janOce-20260112-r5",
+        "owner-s39-oce-janOce-20260112-r10",
+        "owner-s40-br-mayBr-20260518-r14",
+        "owner-s40-br-aprBr-20260420-r4",
+        "owner-s42-me-octMe-20261011-r10",
+        "owner-s42-me-octMe-20261011-r14",
+        "owner-s41-me-augMe-20260801-r1"
+      ]
+    },
+    {
       "id": "auto-sync-20261121074411",
       "date": "2026-11-21",
       "type": "records",
