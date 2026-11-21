@@ -1,7 +1,7 @@
 {
   "version": 1,
   "sourceCheckedAt": "2026-11-21T02:53:27.289Z",
-  "total": 57,
+  "total": 55,
   "alreadyResolved": 0,
   "byYear": [
     {
@@ -10,7 +10,7 @@
     },
     {
       "name": "2025",
-      "count": 21
+      "count": 19
     }
   ],
   "byRegion": [
@@ -24,21 +24,17 @@
     },
     {
       "name": "NAW",
-      "count": 17
+      "count": 16
     },
     {
       "name": "OCE",
-      "count": 10
+      "count": 9
     }
   ],
   "byTournament": [
     {
       "name": "NVIDIA GeForce RTX Cup / NAW / 2025",
-      "count": 6
-    },
-    {
-      "name": "NVIDIA GeForce RTX Cup / OCE / 2025",
-      "count": 1
+      "count": 5
     },
     {
       "name": "PlayStation Cup / ME / 2024",
@@ -76,7 +72,7 @@
     },
     {
       "name": "partial-scan",
-      "count": 27
+      "count": 25
     },
     {
       "name": "rules-review",
@@ -1898,72 +1894,6 @@
         "possibleExistingId": null
       },
       "rewardState": "source-amount-present-not-verified-by-triage"
-    },
-    {
-      "id": "auto-s39-e542d9edf916",
-      "origin": "history",
-      "date": "2025-12-21",
-      "year": "2025",
-      "region": "OCE",
-      "tournamentId": "ch7s1-nvidia-geforce-rtx-cup",
-      "event": "NVIDIA GeForce RTX Cup",
-      "round": "単一開催枠 / 参加確認",
-      "player": "ひょっこりもりりん",
-      "kind": "参加確認",
-      "rank": 1702,
-      "points": 147,
-      "kills": 6,
-      "vrs": 1,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S39_NvidiaCup/?region=OCE&round=S39_NvidiaCup_OCE",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "全ページ連続の順位表・Epic ID付完全スナップショットが未確認",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 18,
-        "totalPages": 92,
-        "sourceKey": "epicgames_S39_NvidiaCup_OCE/S39_NvidiaCup_OCE",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s39-b3117dccd1b8",
-      "origin": "history",
-      "date": "2025-12-22",
-      "year": "2025",
-      "region": "NAW",
-      "tournamentId": "ch7s1-nvidia-geforce-rtx-cup",
-      "event": "NVIDIA GeForce RTX Cup",
-      "round": "単一開催枠 / 参加確認",
-      "player": "miryfn",
-      "kind": "参加確認",
-      "rank": 4395,
-      "points": 97,
-      "kills": 2,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S39_NvidiaCup/?region=NAW&round=S39_NvidiaCup_NAW",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "全ページ連続の順位表・Epic ID付完全スナップショットが未確認",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 45,
-        "totalPages": 100,
-        "sourceKey": "epicgames_S39_NvidiaCup_NAW/S39_NvidiaCup_NAW",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
     }
   ],
   "policy": "read-only queue; awards require existing official rule-backed validators and identity/collision proof"

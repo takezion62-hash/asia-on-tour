@@ -1066,62 +1066,6 @@
       "reviewReason": "順位表の取得が完了していません"
     },
     {
-      "id": "auto-s39-b3117dccd1b8",
-      "date": "2025-12-22",
-      "region": "NAW",
-      "player": "miryfn",
-      "playerRaw": "miryfn",
-      "event": "NVIDIA GeForce RTX Cup",
-      "round": "単一開催枠 / 参加確認",
-      "rank": 4395,
-      "points": 97,
-      "kills": 2,
-      "vrs": 0,
-      "prize": null,
-      "kind": "参加確認",
-      "matches": 6,
-      "seasonId": "S39",
-      "chapter": 7,
-      "season": 1,
-      "tournamentId": "ch7s1-nvidia-geforce-rtx-cup",
-      "source": "https://www.fortnite.com/competitive/events/S39_NvidiaCup/?region=NAW&round=S39_NvidiaCup_NAW",
-      "verified": true,
-      "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
-      "reviewOnly": true,
-      "reviewReason": "全ページ連続の順位表・Epic ID付完全スナップショットが未確認",
-      "teamAccountIds": [
-        "38d45fda432a4bb8924ca16dd313ae3f"
-      ]
-    },
-    {
-      "id": "auto-s39-e542d9edf916",
-      "date": "2025-12-21",
-      "region": "OCE",
-      "player": "ひょっこりもりりん",
-      "playerRaw": "BRN ひょっこりもりりん",
-      "event": "NVIDIA GeForce RTX Cup",
-      "round": "単一開催枠 / 参加確認",
-      "rank": 1702,
-      "points": 147,
-      "kills": 6,
-      "vrs": 1,
-      "prize": null,
-      "kind": "参加確認",
-      "matches": 4,
-      "seasonId": "S39",
-      "chapter": 7,
-      "season": 1,
-      "tournamentId": "ch7s1-nvidia-geforce-rtx-cup",
-      "source": "https://www.fortnite.com/competitive/events/S39_NvidiaCup/?region=OCE&round=S39_NvidiaCup_OCE",
-      "verified": true,
-      "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
-      "reviewOnly": true,
-      "reviewReason": "全ページ連続の順位表・Epic ID付完全スナップショットが未確認",
-      "teamAccountIds": [
-        "0a3f3ca1195046fba4d509fc2e8a7a91"
-      ]
-    },
-    {
       "id": "auto-s30-ceee8b8a3898",
       "date": "2024-06-03",
       "region": "OCE",
@@ -1421,5 +1365,5 @@
       "reviewReason": "確認専用大会は自動承認不可"
     }
   ],
-  "manualReviewedAt": "2026-11-21T02:54:54.412Z"
+  "manualReviewedAt": "2026-11-21T02:55:26.915Z"
 }
