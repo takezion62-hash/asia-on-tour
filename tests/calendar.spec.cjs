@@ -14,6 +14,16 @@ const cosmeticSingleRound=new Set([
  'ch7s5-one-piece-zoro-cup-battle-royale',
  'ch7s5-one-piece-zoro-mobile-cup'
 ]);
+// Verified qualifier leaderboard attendance is not proof of advancement.
+// Calendar grouping uses the phase of the *event*, not each player's outcome.
+const qualifierParticipation=(kind,id,round)=>{
+ if(kind!=='参加確認')return false;
+ const series=data.tournaments.catalog.find(t=>t.id===id)?.series;
+ const label=String(round||'').trim();
+ return (series==='playstation-cup'&&/^Qualifier\s*\/\s*参加確認$/iu.test(label))
+   ||(series==='victory-cup'
+     &&/^(?:(?:Event|Day|Week)\s*\d+\s*·\s*)?Round\s*1\s*\/\s*参加確認$/iu.test(label));
+};
 const sessionKey = row => {
  const id=tournamentKey(row,data);
  let round=String(row.round||'').trim(),kind=row.kind||'';
@@ -23,11 +33,57 @@ const sessionKey = row => {
    round='Session 1 / スキン大会';kind='スキン大会';
  }else if(id==='ch7s2-fncs-division-1'&&/^Week\s*\d+\s*·\s*Final\s*\//iu.test(round)){
    round=round.replace(/\/\s*(?:参加確認|賞金決勝)$/u,'/ 賞金決勝');kind='賞金決勝';
- }else if(kind==='予選'){
-   round=round.replace(/\/\s*予選(?:突破|通過)$/u,'/ 予選');
+ }else if(kind==='予選'||qualifierParticipation(kind,id,round)){
+   round=round.replace(/\/\s*(?:予選(?:突破|通過)?|参加確認)$/u,'/ 予選');kind='予選';
  }
  return JSON.stringify([row.date,row.region,id,round,kind]);
 };
+
+
+test('2025 PlayStation / Console qualifier participation shares one 予選 card and keeps cash finals separate',async({page})=>{
+ const cases=[
+  {date:'2025-09-03',region:'OCE',event:'PlayStation Cup',prefix:'Qualifier',count:3},
+  {date:'2025-09-04',region:'NAW',event:'PlayStation Cup',prefix:'Qualifier',count:13},
+  {date:'2025-09-28',region:'NAW',event:'Duos Console Victory Cash Cup',prefix:'Event 6 · Round 1',count:23},
+  {date:'2025-10-04',region:'OCE',event:'Duos Console Victory Cash Cup',prefix:'Event 7 · Round 1',count:13},
+  {date:'2025-10-19',region:'NAW',event:'Duos Console Victory Cash Cup',prefix:'Event 9 · Round 1',count:24}
+ ];
+ for(const item of cases){
+  const source=rows.filter(row=>row.date===item.date&&row.region===item.region
+    &&row.event===item.event&&String(row.round).startsWith(item.prefix)
+    &&['予選','参加確認'].includes(row.kind));
+  expect(source.length,item.date+' original entries must remain intact').toBe(item.count);
+  expect(new Set(source.map(row=>row.kind))).toEqual(
+    item.prefix==='Qualifier'?new Set(['参加確認']):new Set(['予選','参加確認']));
+  expect(new Set(source.map(sessionKey)).size,'one shared qualifying leaderboard').toBe(1);
+  const month=item.date.slice(0,7);
+  await page.goto('/?season=all#calendar?month='+month+'&date='+item.date+
+    '&region='+item.region+'&stage=予選&scope=results');
+  await expect(page.locator('#calendar-stage')).toHaveValue('予選');
+  const cards=page.locator('.calendar-event').filter({has:page.locator('h3 a',{hasText:item.event})})
+    .filter({hasText:item.prefix+' / 予選'});
+  await expect(cards,item.date+' '+item.event).toHaveCount(1);
+  await expect(cards).toContainText('掲載済み：'+item.count+'戦績');
+  await expect(cards).not.toContainText('参加確認');
+  if(item.date==='2025-09-28'){
+   const link=cards.locator('h3 a');
+   await link.click();
+   await expect(page.locator('#page-tournament')).toBeVisible();
+   const seen=await page.locator('[data-tournament-record]').evaluateAll(
+     els=>els.map(el=>el.getAttribute('data-tournament-record')).sort());
+   expect(seen,'calendar deep link includes both advancement and attendance')
+     .toEqual(source.map(row=>row.id).sort());
+   expect(source.filter(row=>row.kind==='予選').length).toBe(12);
+   expect(source.filter(row=>row.kind==='参加確認').length).toBe(11);
+  }
+ }
+ // "予選" must never combine Event 6 Round 2's separate cash final.
+ await page.goto('/?season=all#calendar?month=2025-09&date=2025-09-28&region=NAW&scope=results');
+ const cards=page.locator('.calendar-event').filter({has:page.locator('h3 a',{hasText:'Duos Console Victory Cash Cup'})});
+ await expect(cards).toHaveCount(2);
+ await expect(cards.filter({hasText:'Event 6 · Round 1 / 予選'})).toHaveCount(1);
+ await expect(cards.filter({hasText:'Event 6 · Round 2 / 賞金決勝'})).toHaveCount(1);
+});
 
 test('大会カレンダーは掲載日だけから生成し、開催枠を重複集計しない', async ({ page }) => {
   const errors=[];page.on('pageerror',error=>errors.push(error.message));
