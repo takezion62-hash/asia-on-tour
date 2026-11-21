@@ -55,6 +55,10 @@
         {
           "id": "nvidia-cup",
           "label": "NVIDIA Cup"
+        },
+        {
+          "id": "mobile-series",
+          "label": "Mobile Series"
         }
       ]
     },
@@ -335,6 +339,22 @@
         {
           "id": "mobile-reload-mini-venture-victory-cup",
           "label": "Mobile Reload (Mini Venture) Victory Cup"
+        },
+        {
+          "id": "mobile-series-january-qualifier",
+          "label": "Mobile Series January Qualifier"
+        },
+        {
+          "id": "mobile-series-february-qualifier",
+          "label": "Mobile Series February Qualifier"
+        },
+        {
+          "id": "mobile-series-heats",
+          "label": "Mobile Series Heats"
+        },
+        {
+          "id": "mobile-battle-royale-victory-cup",
+          "label": "Mobile Battle Royale Victory Cup"
         }
       ]
     },
@@ -3256,6 +3276,118 @@
         {
           "text": "Fortnite Tracker EU 2026-09-20 Event 1 Round 2決勝。",
           "url": "https://fortnitetracker.com/events/epicgames_S42_MobileVictoryCup_ReloadminiV_EU?window=S42_MobileVictoryCup_Event1_Round2_EU"
+        }
+      ]
+    },
+    {
+      "id": "ch7s1-mobile-series-january-qualifier",
+      "name": "Mobile Series",
+      "chapter": 7,
+      "season": 1,
+      "seasonId": "S39",
+      "sourceEventIds": [
+        "S39_MobileSeriesCupJanQual"
+      ],
+      "series": "mobile-series",
+      "mode": "zero-build",
+      "subtype": "mobile-series-january-qualifier",
+      "team": "solo",
+      "platform": "mobile",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "2025-12-03 Epic発表：Mobile Seriesはタッチ操作限定Blitz Royaleソロ。1〜2月Open QualifierはEU順位賞金4位$700、9〜12位$200。上位入賞と次段階進出は区別。",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/1-million-dollar-fortnite-mobile-series-battle-it-out-in-blitz"
+        },
+        {
+          "text": "EpicのMobile Series公式規則では2026年6月1日より前、QualifierからGroup Stageへの原則進出枠は各地域1位。",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-mobile-series-chapter-7-official-rules"
+        },
+        {
+          "text": "Tracker EU January Qualifier 3はSolo Zero Build。",
+          "url": "https://fortnitetracker.com/events/epicgames_S39_MobileSeriesCupJanQual_EU?window=S39_MobileSeriesCup_JanQualifier3_EU"
+        }
+      ]
+    },
+    {
+      "id": "ch7s1-mobile-series-february-qualifier",
+      "name": "Mobile Series",
+      "chapter": 7,
+      "season": 1,
+      "seasonId": "S39",
+      "sourceEventIds": [
+        "S39_MobileSeriesCupFebQual"
+      ],
+      "series": "mobile-series",
+      "mode": "zero-build",
+      "subtype": "mobile-series-february-qualifier",
+      "team": "solo",
+      "platform": "mobile",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "2025-12-03 Epic発表：Mobile Series 2026年2月Open QualifierのEU9〜12位は個人$200。2026年6月より前のGroup Stage進出は原則各地域1位のみ。",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/1-million-dollar-fortnite-mobile-series-battle-it-out-in-blitz"
+        },
+        {
+          "text": "Epic Mobile Series正式ルールの旧期間と現行段階を区別。",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-mobile-series-chapter-7-official-rules"
+        },
+        {
+          "text": "Tracker EU February Qualifier 6はSolo Zero Build。",
+          "url": "https://fortnitetracker.com/events/epicgames_S39_MobileSeriesCupFebQual_EU?window=S39_MobileSeriesCup_FebQualifier6_EU"
+        }
+      ]
+    },
+    {
+      "id": "ch7s3-mobile-series-heats",
+      "name": "Mobile Series Heats",
+      "chapter": 7,
+      "season": 3,
+      "seasonId": "S41",
+      "sourceEventIds": [
+        "S41_MobileSeriesHeat3"
+      ],
+      "series": "mobile-series",
+      "mode": "zero-build",
+      "subtype": "mobile-series-heats",
+      "team": "solo",
+      "platform": "mobile",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "Epic公式：Heatsから次のQualifierへの進出は各Heatの上位4名。EU9〜12位には順位賞金$150。Heats賞金獲得とHeats突破は別判定。",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-mobile-series-chapter-7-official-rules"
+        },
+        {
+          "text": "Tracker EU Heat 3 JuneはSolo Zero Build、6月開催で10位$150。",
+          "url": "https://fortnitetracker.com/events/epicgames_S41_MobileSeriesHeat3_EU?window=S41_MobileSeriesHeat3June_EU"
+        }
+      ]
+    },
+    {
+      "id": "ch7s3-mobile-battle-royale-victory-cup",
+      "name": "Mobile Battle Royale Victory Cup",
+      "chapter": 7,
+      "season": 3,
+      "seasonId": "S41",
+      "sourceEventIds": [
+        "S41_MobileVictoryCup_BR"
+      ],
+      "series": "victory-cup",
+      "mode": "battle-royale",
+      "subtype": "mobile-battle-royale-victory-cup",
+      "team": "solo",
+      "platform": "mobile",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "Epic公式Chapter 7 Season 3 Mobile Battle Royale Victory Cup Round 2、Victory Royale 1回につき個人賞金$100。",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-mobile-victory-cups-chapter-7-season-3-official-rules"
+        },
+        {
+          "text": "Tracker EU Day 2 Round 2に個人100pt/1VR/$100。",
+          "url": "https://fortnitetracker.com/events/epicgames_S41_MobileVictoryCup_BR_EU?window=S41_MobileVictoryCup_Day2_Round2_BR_EU"
         }
       ]
     }
