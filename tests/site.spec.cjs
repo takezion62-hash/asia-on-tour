@@ -384,7 +384,7 @@ test('大会カレンダーは証拠付き旧PlayStation・Cash Cup Round 1を�
       encodeURIComponent(month)+'&date='+date+'&scope=results');
     const card=page.locator('.calendar-event').filter({hasText:event}).filter({hasText:expectedRound}).first();
     await expect(card).toBeVisible();
-    await expect(card.locator('.calendar-event-tag')).toContainText([expectedStage],{useInnerText:true});
+    await expect(card.locator('.calendar-event-top .calendar-event-tag').nth(1)).toHaveText(expectedStage);
     await expect(card).toContainText(expectedRound);
     return card;
   };
