@@ -2,6 +2,45 @@
   "version": 1,
   "entries": [
     {
+      "id": "review-publication-pending-20261114-0bd82ca297cd-verified-rule-1",
+      "date": "2026-11-21",
+      "type": "records",
+      "title": "管理者確認済み戦績 1件を追加",
+      "description": "公式規則に基づく予選突破または決勝0VRのみを確認。未確認賞金なし。",
+      "recordIds": [
+        "auto-s30-b2de0eb69814"
+      ]
+    },
+    {
+      "id": "review-publication-pending-20261114-0bd82ca297cd-attendance-only-1",
+      "date": "2026-11-21",
+      "type": "records",
+      "title": "管理者確認済み戦績 1件を追加",
+      "description": "Epic ID・開催枠・順位表を再照合した出場確認のみ。賞金・予選突破・スキン獲得を未認定。",
+      "recordIds": [
+        "auto-s42-696e2cc53eeb"
+      ]
+    },
+    {
+      "id": "owner-s39-s41-mobile-oce-naw-ten-20261121",
+      "date": "2026-11-21",
+      "type": "records",
+      "title": "Mobile Series 2月Qualifier・OCE Heats・Mini Venture 10成績・$2,550",
+      "description": "画像2008〜2017：S39の2026/2/22 OCE・2/23 NAW Mobile Series February Qualifier6各3成績、S41 OCE 6/20 Heat1・7/25 Heat2計3成績、S41 OCE 6/21 Mini Venture Reload決勝1VR=$50。6既存プロフィールに統合しGrapeは確認済み別名で統一。賞金合計$2,550・9VR。Heatsの入賞賞金は上位4名進出と区別。実際の振込完了は未確認。",
+      "recordIds": [
+        "owner-s39-naw-nawFeb-20260223-r2",
+        "owner-s39-naw-nawFeb-20260223-r6",
+        "owner-s39-naw-nawFeb-20260223-r13",
+        "owner-s41-oce-julyHeat-20260725-r11",
+        "owner-s41-oce-julyHeat-20260725-r13",
+        "owner-s41-oce-juneMini-20260621-r9",
+        "owner-s41-oce-juneHeat-20260620-r8",
+        "owner-s39-oce-oceFeb-20260222-r1",
+        "owner-s39-oce-oceFeb-20260222-r6",
+        "owner-s39-oce-oceFeb-20260222-r7"
+      ]
+    },
+    {
       "id": "auto-sync-20261121064528",
       "date": "2026-11-21",
       "type": "records",

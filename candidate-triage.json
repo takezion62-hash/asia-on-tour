@@ -1,12 +1,12 @@
 {
   "version": 1,
   "sourceCheckedAt": "2026-11-21T06:45:28.469Z",
-  "total": 70,
+  "total": 68,
   "alreadyResolved": 0,
   "byYear": [
     {
       "name": "2024",
-      "count": 49
+      "count": 48
     },
     {
       "name": "2025",
@@ -14,7 +14,7 @@
     },
     {
       "name": "2026",
-      "count": 2
+      "count": 1
     }
   ],
   "byRegion": [
@@ -32,16 +32,12 @@
     },
     {
       "name": "OCE",
-      "count": 15
+      "count": 13
     }
   ],
   "byTournament": [
     {
       "name": "Days of Play PlayStation Cup (Zero Build) / OCE / 2026",
-      "count": 1
-    },
-    {
-      "name": "Madison Beer Icon Cup Reload / OCE / 2026",
       "count": 1
     },
     {
@@ -74,7 +70,7 @@
     },
     {
       "name": "ZB Solo Victory Cup / OCE / 2024",
-      "count": 5
+      "count": 4
     }
   ],
   "byStatus": [
@@ -84,7 +80,7 @@
     },
     {
       "name": "partial-scan",
-      "count": 32
+      "count": 30
     },
     {
       "name": "rules-review",
@@ -1347,39 +1343,6 @@
       "rewardState": "source-amount-present-not-verified-by-triage"
     },
     {
-      "id": "auto-s30-b2de0eb69814",
-      "origin": "history",
-      "date": "2024-06-03",
-      "year": "2024",
-      "region": "OCE",
-      "tournamentId": "ch5s3-zb-solo-victory",
-      "event": "ZB Solo Victory Cup",
-      "round": "Event 1 · Round 1 / 予選",
-      "player": "suisei_s",
-      "kind": "予選",
-      "rank": 1117,
-      "points": 56,
-      "kills": 12,
-      "vrs": 0,
-      "prize": 0,
-      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=OCE&round=S30_SoloZBVictoryCashCup_Event1Round1_OCE",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "順位表の取得が完了していません",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 13,
-        "totalPages": 25,
-        "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_OCE/S30_SoloZBVictoryCashCup_Event1Round1_OCE",
-        "possibleExistingId": null
-      },
-      "rewardState": "source-amount-present-not-verified-by-triage"
-    },
-    {
       "id": "auto-s30-025a7f86db1e",
       "origin": "history",
       "date": "2024-06-04",
@@ -2368,39 +2331,6 @@
         "possibleExistingId": null
       },
       "rewardState": "source-amount-present-not-verified-by-triage"
-    },
-    {
-      "id": "auto-s42-696e2cc53eeb",
-      "origin": "history",
-      "date": "2026-09-24",
-      "year": "2026",
-      "region": "OCE",
-      "tournamentId": "ch7s4-madison-beer-icon-cup-reload",
-      "event": "Madison Beer Icon Cup Reload",
-      "round": "単一開催枠 / 参加確認",
-      "player": "む る こ ぎǃlalala / ないとめあ しんどろーむǃǃ",
-      "kind": "参加確認",
-      "rank": 5444,
-      "points": 52,
-      "kills": 10,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S42_MadisonBeerIconCup/?region=OCE&round=S42_MadisonBeerIconCup_OCE",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "確認専用大会は自動承認不可",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 55,
-        "totalPages": 77,
-        "sourceKey": "epicgames_S42_MadisonBeerIconCup_OCE/S42_MadisonBeerIconCup_OCE",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
     }
   ],
   "policy": "read-only queue; awards require existing official rule-backed validators and identity/collision proof"
