@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-11-22T10:24:32.364Z",
+  "checkedAt": "2026-11-22T20:52:37.423Z",
   "windows": {
     "epicgames_S42_InoxtagIconCup_NAW/S42_InoxtagIconCup_NAW": {
       "nextPage": 60,
@@ -536,12 +536,12 @@
       "emptyAttempts": 0
     },
     "epicgames_S30_SoloZBVictoryCashCup_OCE/S30_SoloZBVictoryCashCup_Event1Round1_OCE": {
-      "nextPage": 12,
-      "pages": 12,
+      "nextPage": 22,
+      "pages": 22,
       "complete": false,
       "coverageLimited": false,
       "totalPages": 25,
-      "lastScanned": "2026-11-13T03:39:12.342Z",
+      "lastScanned": "2026-11-22T20:52:30.919Z",
       "emptyAttempts": 0
     },
     "epicgames_S43_ReloadZBDuosCashCup_OCE/S43_ReloadZBDuosCashCup_Event1Round1_OCE": {
@@ -1319,6 +1319,24 @@
       "coverageLimited": false,
       "totalPages": 9,
       "lastScanned": "2026-11-22T10:24:09.022Z",
+      "emptyAttempts": 0
+    },
+    "epicgames_S43_TriosCashCup_EU/S43_TriosCashCup_Event3_EU": {
+      "nextPage": 10,
+      "pages": 10,
+      "complete": false,
+      "coverageLimited": false,
+      "totalPages": 87,
+      "lastScanned": "2026-11-22T20:52:16.481Z",
+      "emptyAttempts": 0
+    },
+    "epicgames_S30_PlaystationCupJune_ME/S30_PlaystationCupJune_Qualifier1_ME": {
+      "nextPage": 4,
+      "pages": 4,
+      "complete": false,
+      "coverageLimited": false,
+      "totalPages": 51,
+      "lastScanned": "2026-11-22T20:52:37.423Z",
       "emptyAttempts": 0
     }
   }
