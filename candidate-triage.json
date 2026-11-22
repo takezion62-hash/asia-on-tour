@@ -1,12 +1,12 @@
 {
   "version": 1,
   "sourceCheckedAt": "2026-11-22T08:53:50.310Z",
-  "total": 9,
+  "total": 7,
   "alreadyResolved": 0,
   "byYear": [
     {
       "name": "2024",
-      "count": 5
+      "count": 3
     },
     {
       "name": "2025",
@@ -20,7 +20,7 @@
   "byRegion": [
     {
       "name": "NAC",
-      "count": 5
+      "count": 3
     },
     {
       "name": "NAW",
@@ -45,10 +45,6 @@
       "count": 1
     },
     {
-      "name": "Solo Victory Cup Battle Royale / NAC / 2024",
-      "count": 2
-    },
-    {
       "name": "ZB Solo Victory Cup / NAC / 2024",
       "count": 3
     }
@@ -56,7 +52,7 @@
   "byStatus": [
     {
       "name": "partial-scan",
-      "count": 9
+      "count": 7
     }
   ],
   "queue": [
@@ -155,72 +151,6 @@
         "seenPages": 30,
         "totalPages": 100,
         "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event9Round1_NAC",
-        "possibleExistingId": null
-      },
-      "rewardState": "source-amount-present-not-verified-by-triage"
-    },
-    {
-      "id": "auto-s31-b6e8091d26a1",
-      "origin": "history",
-      "date": "2024-09-10",
-      "year": "2024",
-      "region": "NAC",
-      "tournamentId": "ch5s4-solo-victory-cup",
-      "event": "Solo Victory Cup Battle Royale",
-      "round": "Event 2 · Round 1 / 予選",
-      "player": "p1ng",
-      "kind": "予選",
-      "rank": 4047,
-      "points": 132,
-      "kills": 14,
-      "vrs": 1,
-      "prize": 0,
-      "source": "https://www.fortnite.com/competitive/events/S31_SoloVictoryCashCup/?region=NAC&round=S31_SoloVictoryCashCup_Event2Round1_NAC",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "順位表の取得が完了していません",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 41,
-        "totalPages": 100,
-        "sourceKey": "epicgames_S31_SoloVictoryCashCup_NAC/S31_SoloVictoryCashCup_Event2Round1_NAC",
-        "possibleExistingId": null
-      },
-      "rewardState": "source-amount-present-not-verified-by-triage"
-    },
-    {
-      "id": "auto-s31-c23e5e021f45",
-      "origin": "history",
-      "date": "2024-09-10",
-      "year": "2024",
-      "region": "NAC",
-      "tournamentId": "ch5s4-solo-victory-cup",
-      "event": "Solo Victory Cup Battle Royale",
-      "round": "Event 2 · Round 1 / 予選",
-      "player": "逆襲のクイヤ.",
-      "kind": "予選",
-      "rank": 4060,
-      "points": 132,
-      "kills": 10,
-      "vrs": 1,
-      "prize": 0,
-      "source": "https://www.fortnite.com/competitive/events/S31_SoloVictoryCashCup/?region=NAC&round=S31_SoloVictoryCashCup_Event2Round1_NAC",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "順位表の取得が完了していません",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 41,
-        "totalPages": 100,
-        "sourceKey": "epicgames_S31_SoloVictoryCashCup_NAC/S31_SoloVictoryCashCup_Event2Round1_NAC",
         "possibleExistingId": null
       },
       "rewardState": "source-amount-present-not-verified-by-triage"
