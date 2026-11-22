@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-22T22:48:02.284Z",
+  "reviewedAt": "2026-11-22T22:48:16.750Z",
   "entries": [
     {
       "id": "auto-s43-21408f1d31bc",
@@ -37359,6 +37359,50 @@
       "rule": "https://www.fortnite.com/news/competitive-details-make-your-mark-in-chapter-2-remix",
       "source": "https://www.fortnite.com/competitive/events/S32_SoloVictoryCashCup/?region=NAC&round=S32_SoloVictoryCashCup_Event2Round1_NAC",
       "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s39-bbe9d794a7de",
+      "decision": "published",
+      "recordId": "auto-s39-bbe9d794a7de",
+      "policy": "attendance-only",
+      "approvedAt": "2026-11-22T22:48:16.750Z",
+      "approvedBy": "ChatGPT / owner-authorized verified review",
+      "source": "https://www.fortnite.com/competitive/events/S39_NvidiaCup/?region=OCE&round=S39_NvidiaCup_OCE",
+      "rule": null,
+      "evidence": "Exact Epic account and team roster, canonical official event/calendar, ranked checkpoint with continuous mature rows or complete scan; duplicate check"
+    },
+    {
+      "id": "auto-s39-c2715455ee6e",
+      "decision": "published",
+      "recordId": "auto-s39-c2715455ee6e",
+      "policy": "attendance-only",
+      "approvedAt": "2026-11-22T22:48:16.750Z",
+      "approvedBy": "ChatGPT / owner-authorized verified review",
+      "source": "https://www.fortnite.com/competitive/events/S39_NvidiaCup/?region=OCE&round=S39_NvidiaCup_OCE",
+      "rule": null,
+      "evidence": "Exact Epic account and team roster, canonical official event/calendar, ranked checkpoint with continuous mature rows or complete scan; duplicate check"
+    },
+    {
+      "id": "auto-s39-ff047ac49d0a",
+      "decision": "published",
+      "recordId": "auto-s39-ff047ac49d0a",
+      "policy": "attendance-only",
+      "approvedAt": "2026-11-22T22:48:16.750Z",
+      "approvedBy": "ChatGPT / owner-authorized verified review",
+      "source": "https://www.fortnite.com/competitive/events/S39_NvidiaCup/?region=OCE&round=S39_NvidiaCup_OCE",
+      "rule": null,
+      "evidence": "Exact Epic account and team roster, canonical official event/calendar, ranked checkpoint with continuous mature rows or complete scan; duplicate check"
+    },
+    {
+      "id": "auto-s39-19889c1b76ff",
+      "decision": "published",
+      "recordId": "auto-s39-19889c1b76ff",
+      "policy": "attendance-only",
+      "approvedAt": "2026-11-22T22:48:16.750Z",
+      "approvedBy": "ChatGPT / owner-authorized verified review",
+      "source": "https://www.fortnite.com/competitive/events/S39_NvidiaCup/?region=OCE&round=S39_NvidiaCup_OCE",
+      "rule": null,
+      "evidence": "Exact Epic account and team roster, canonical official event/calendar, ranked checkpoint with continuous mature rows or complete scan; duplicate check"
     }
   ]
 }
