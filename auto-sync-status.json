@@ -1,7 +1,7 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-21T21:40:01.107Z",
+  "checkedAt": "2026-11-22T06:50:35.939Z",
   "mode": "review",
   "scope": "recent",
   "dateMode": null,
@@ -18,7 +18,7 @@
   "completedWindows": 120,
   "identityConflicts": 3,
   "alreadyRegistered": 243,
-  "autoApprovedTotal": 3328,
+  "autoApprovedTotal": 3334,
   "invalidCachedCandidates": 0,
   "manualReviewCandidates": 0,
   "autoApprovedCosmeticThisRun": 0,
@@ -44,7 +44,7 @@
     "alreadyPublished": 0,
     "reviewConflicts": 0,
     "keptPending": 0,
-    "reconciledAt": "2026-11-21T21:40:07.692Z"
+    "reconciledAt": "2026-11-22T06:50:39.980Z"
   },
   "coverage": {
     "total": 120,
@@ -126,7 +126,7 @@
     "minRequestIntervalMs": 1200,
     "reason": "steady-state",
     "requests": 6,
-    "waitedMs": 3964,
+    "waitedMs": 3114,
     "intervalMs": 1200
   }
 }
