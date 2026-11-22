@@ -1,24 +1,24 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-22T06:50:35.939Z",
+  "checkedAt": "2026-11-22T16:17:37.660Z",
   "mode": "review",
   "scope": "recent",
   "dateMode": null,
-  "selectedWindows": 0,
+  "selectedWindows": 1,
   "fromDate": null,
   "toDate": null,
   "provider": "osirion",
-  "linkedPlayers": 695,
-  "trackedWindows": 120,
+  "linkedPlayers": 697,
+  "trackedWindows": 121,
   "found": 0,
   "skipped": 0,
   "imported": 0,
-  "scannedPages": 0,
-  "completedWindows": 120,
+  "scannedPages": 9,
+  "completedWindows": 121,
   "identityConflicts": 3,
   "alreadyRegistered": 243,
-  "autoApprovedTotal": 3334,
+  "autoApprovedTotal": 3349,
   "invalidCachedCandidates": 0,
   "manualReviewCandidates": 0,
   "autoApprovedCosmeticThisRun": 0,
@@ -30,7 +30,7 @@
   "transientFailures": 0,
   "malformedFailures": 0,
   "skippedLeaderboards": [],
-  "reviewOnlyWindows": 108,
+  "reviewOnlyWindows": 109,
   "reviewOnlyCandidates": 0,
   "unmappedEvents": 3,
   "unmappedEventIds": [
@@ -44,11 +44,11 @@
     "alreadyPublished": 0,
     "reviewConflicts": 0,
     "keptPending": 0,
-    "reconciledAt": "2026-11-22T06:50:39.980Z"
+    "reconciledAt": "2026-11-22T16:17:43.929Z"
   },
   "coverage": {
-    "total": 120,
-    "completed": 120,
+    "total": 121,
+    "completed": 121,
     "notStarted": 0,
     "partial": 0,
     "retryWaiting": 0,
@@ -68,8 +68,8 @@
         "pending": 0
       },
       "OCE": {
-        "total": 18,
-        "completed": 18,
+        "total": 19,
+        "completed": 19,
         "pending": 0
       },
       "ME": {
@@ -90,8 +90,8 @@
     },
     "byYear": {
       "2026": {
-        "total": 120,
-        "completed": 120,
+        "total": 121,
+        "completed": 121,
         "pending": 0
       }
     },
@@ -112,7 +112,7 @@
   },
   "manuallyResolvedDuplicates": 47,
   "autoApprovedParticipationThisRun": 0,
-  "processedWindows": 0,
+  "processedWindows": 1,
   "providerRateLimitPaused": false,
   "providerRateLimitRetryAfter": null,
   "providerTraffic": {
@@ -125,8 +125,8 @@
     "pageBudget": 30,
     "minRequestIntervalMs": 1200,
     "reason": "steady-state",
-    "requests": 6,
-    "waitedMs": 3114,
+    "requests": 15,
+    "waitedMs": 6159,
     "intervalMs": 1200
   }
 }

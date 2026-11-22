@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-11-22T06:50:35.939Z",
+  "checkedAt": "2026-11-22T16:17:37.660Z",
   "windows": {
     "epicgames_S43_PerformanceEvaluationTrios_EU/S43_PerformanceEvaluation_Event1Round1_EU": {
       "nextPage": 7,
@@ -20071,6 +20071,18 @@
       "lastSeenRank": 19,
       "lastSuccessAt": "2026-11-21T16:10:25.241Z",
       "totalPages": 1
+    },
+    "epicgames_S43_TriosCashCup_OCE/S43_TriosCashCup_Event3_OCE": {
+      "nextPage": 9,
+      "complete": true,
+      "proposals": [],
+      "pages": 9,
+      "lastAttemptAt": "2026-11-22T16:17:36.985Z",
+      "emptyAttempts": 0,
+      "rankingOrderValid": true,
+      "lastSeenRank": 806,
+      "lastSuccessAt": "2026-11-22T16:17:37.648Z",
+      "totalPages": 9
     }
   }
 }
