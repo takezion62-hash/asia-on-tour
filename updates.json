@@ -2,6 +2,29 @@
   "version": 1,
   "entries": [
     {
+      "id": "review-publication-pending-20261114-b17bd8d59625-verified-rule-1",
+      "date": "2026-11-22",
+      "type": "records",
+      "title": "管理者確認済み戦績 3件を追加",
+      "description": "公式規則に基づく予選突破または決勝0VRのみを確認。未確認賞金なし。",
+      "recordIds": [
+        "auto-s32-084129c428f1",
+        "auto-s32-93787b897e76",
+        "auto-s32-4e14374c808c"
+      ]
+    },
+    {
+      "id": "review-publication-pending-20261114-b17bd8d59625-attendance-only-1",
+      "date": "2026-11-22",
+      "type": "records",
+      "title": "管理者確認済み戦績 2件を追加",
+      "description": "Epic ID・開催枠・順位表を再照合した出場確認のみ。賞金・予選突破・スキン獲得を未認定。",
+      "recordIds": [
+        "auto-s42-f89daf1bc4b8",
+        "auto-s40-a5e151f6b8d5"
+      ]
+    },
+    {
       "id": "auto-sync-20261122112555",
       "date": "2026-11-22",
       "type": "records",
