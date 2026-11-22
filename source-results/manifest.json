@@ -2,8 +2,8 @@
   "version": 1,
   "role": "generated canonical-source snapshot; results.json remains authoritative in phase 1",
   "canonicalFile": "results.json",
-  "canonicalSha256": "e84fb8c8c3f181209895938cba12c0a38a5dea88362a013045501b3a3372c7bf",
-  "count": 9132,
+  "canonicalSha256": "9c6ee836e1ee50333301b4e5f7240ff81ea1c5f7f7361015ffc6046b6c2bcb8f",
+  "count": 9141,
   "teamPrizeCents": 11506000,
   "unconfirmedPrizeRecords": 1678,
   "personalPrizeCents": 11486000,
@@ -9139,7 +9139,16 @@
     "auto-s30-81baeda7398f",
     "auto-s30-74267437dbbd",
     "auto-s30-9962e14cf0d7",
-    "auto-s30-b107a0d5425a"
+    "auto-s30-b107a0d5425a",
+    "auto-s30-e4bc01df6c7f",
+    "auto-s30-4740b0efb760",
+    "auto-s30-5c708c2d2a55",
+    "auto-s30-cda46496ad05",
+    "auto-s30-83318f0cf781",
+    "auto-s30-26faa7f634e5",
+    "auto-s39-a899afac8090",
+    "auto-s39-89fcb265b852",
+    "auto-s40-ea5151d35408"
   ],
   "shards": [
     {
@@ -9208,11 +9217,11 @@
     {
       "seasonId": "S30",
       "file": "source-results/S30.json",
-      "count": 2569,
+      "count": 2575,
       "teamPrizeCents": 1920000,
       "unconfirmedPrizeRecords": 172,
       "personalPrizeCents": 1920000,
-      "sha256": "a5b99be6dab5457f7c1b80edfbb66eaf144b0f83859289fa5f61fb4a37c9acb1"
+      "sha256": "5e2d64c477e6e96287cf07b2e869bb0c06b197a9428085161f457348f870ee69"
     },
     {
       "seasonId": "S31",
@@ -9289,20 +9298,20 @@
     {
       "seasonId": "S39",
       "file": "source-results/S39.json",
-      "count": 287,
+      "count": 289,
       "teamPrizeCents": 1490000,
       "unconfirmedPrizeRecords": 104,
       "personalPrizeCents": 1490000,
-      "sha256": "a77d8169d80866d510afc9f5f760ae5316473cb284799eabf62fd386e3e98af2"
+      "sha256": "d78d8c6a3f778bd27f22a47be5cf460a0da2896bf0ba7e71ef52b8bba3f97b69"
     },
     {
       "seasonId": "S40",
       "file": "source-results/S40.json",
-      "count": 143,
+      "count": 144,
       "teamPrizeCents": 320000,
       "unconfirmedPrizeRecords": 63,
       "personalPrizeCents": 320000,
-      "sha256": "e7f1bde2248ffa03af91c8e6b7f61375634d65b622f2ba652afd899ad5e3e649"
+      "sha256": "2bb43b27c8aacacaa14704ea305a0f67a2dc5dc2ea540a0c223734ba3d0846c5"
     },
     {
       "seasonId": "S41",
