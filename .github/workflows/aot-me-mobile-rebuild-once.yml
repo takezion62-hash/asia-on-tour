@@ -1,0 +1,43 @@
+name: Temporary ME Mobile Series generated-data rebuild
+on:
+  push:
+    branches:
+      - data/me-mobile-series-20261122
+    paths:
+      - .github/workflows/aot-me-mobile-rebuild-once.yml
+
+permissions:
+  contents: write
+
+jobs:
+  rebuild:
+    if: github.ref == 'refs/heads/data/me-mobile-series-20261122'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: true
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '24'
+      - name: Verify canonical source and rebuild generated read models
+        run: |
+          node scripts/source-results-store.cjs verify
+          node scripts/build-season-data.cjs
+          node scripts/build-candidate-triage.cjs
+          node scripts/build-season-data.cjs --check
+          node scripts/build-candidate-triage.cjs --check
+      - name: Commit generated indexes on this PR branch only
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add season-data candidate-triage.json
+          if git diff --cached --quiet; then
+            echo 'Generated read models already current.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'data: regenerate season and triage read models for ME mobile results'
+          git push origin HEAD:refs/heads/data/me-mobile-series-20261122
