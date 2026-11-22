@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-11-22T00:44:38.819Z",
+  "checkedAt": "2026-11-22T10:24:32.364Z",
   "windows": {
     "epicgames_S42_InoxtagIconCup_NAW/S42_InoxtagIconCup_NAW": {
       "nextPage": 60,
@@ -855,12 +855,12 @@
       "emptyAttempts": 0
     },
     "epicgames_S30_SoloVictoryCashCup_EU/S30_SoloVictoryCashCup_Event1Round2_EU": {
-      "nextPage": 3,
-      "pages": 3,
+      "nextPage": 13,
+      "pages": 13,
       "complete": false,
       "coverageLimited": false,
       "totalPages": 68,
-      "lastScanned": "2026-11-12T23:24:34.791Z",
+      "lastScanned": "2026-11-22T10:24:24.663Z",
       "emptyAttempts": 0
     },
     "epicgames_S43_PerformanceEvaluationTrios_EU/S43_PerformanceEvaluation_Event2Round2_EU": {
@@ -1240,12 +1240,12 @@
       "lastError": "Osirion API HTTP 429 /v1/tournaments/leaderboard"
     },
     "epicgames_S33_SoloCashCup_NAW/S33_SoloCashCup_Event8Round1_NAW": {
-      "nextPage": 23,
-      "pages": 23,
+      "nextPage": 24,
+      "pages": 24,
       "complete": false,
       "coverageLimited": false,
       "totalPages": 100,
-      "lastScanned": "2026-11-20T22:00:40.161Z",
+      "lastScanned": "2026-11-22T10:24:32.364Z",
       "emptyAttempts": 0
     },
     "epicgames_S30_PlaystationCupZBJune_OCE/S30_PlaystationCupZBJune_Qualifier1_OCE": {
@@ -1258,13 +1258,13 @@
       "emptyAttempts": 0
     },
     "epicgames_S30_PlaystationCupZBJune_ME/S30_PlaystationCupZBJune_Qualifier1_ME": {
-      "nextPage": 32,
-      "pages": 32,
-      "complete": false,
+      "nextPage": 36,
+      "pages": 36,
+      "complete": true,
       "coverageLimited": false,
       "lastError": "Osirion API HTTP 429 /v1/tournaments/leaderboard",
       "totalPages": 36,
-      "lastScanned": "2026-11-22T00:44:38.819Z",
+      "lastScanned": "2026-11-22T10:24:30.532Z",
       "emptyAttempts": 0
     },
     "epicgames_S30_PlaystationCupZBJune_OCE/S30_PlaystationCupZBJune_Qualifier2_OCE": {
@@ -1310,6 +1310,15 @@
       "coverageLimited": false,
       "totalPages": 100,
       "lastScanned": "2026-11-22T00:44:15.522Z",
+      "emptyAttempts": 0
+    },
+    "epicgames_S43_TriosCashCup_OCE/S43_TriosCashCup_Event3_OCE": {
+      "nextPage": 9,
+      "pages": 9,
+      "complete": true,
+      "coverageLimited": false,
+      "totalPages": 9,
+      "lastScanned": "2026-11-22T10:24:09.022Z",
       "emptyAttempts": 0
     }
   }
