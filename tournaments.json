@@ -89,6 +89,10 @@
         {
           "id": "unknown",
           "label": "未確認"
+        },
+        {
+          "id": "blitz",
+          "label": "Blitz"
         }
       ]
     },
@@ -363,6 +367,18 @@
         {
           "id": "mobile-reload-elite-stronghold-victory-cup",
           "label": "Mobile Reload (Elite Stronghold) Victory Cup"
+        },
+        {
+          "id": "blitz-mobile-cup",
+          "label": "Blitz Mobile Cup"
+        },
+        {
+          "id": "mobile-zero-build-victory-cup",
+          "label": "Mobile Zero Build Victory Cup"
+        },
+        {
+          "id": "mobile-zero-build-reload-elite-stronghold-victory-cup",
+          "label": "Mobile Zero Build Reload (Elite Stronghold) Victory Cup"
         }
       ]
     },
@@ -3527,6 +3543,84 @@
         {
           "text": "NAW Day 5 Round 2 tracker 2026-08-18",
           "url": "https://fortnitetracker.com/events/epicgames_S41_MobileVictoryCup_RES_NAW?window=S41_MobileVictoryCup_Day5_Round2_RES_NAW"
+        }
+      ]
+    },
+    {
+      "id": "ch6s5-blitz-mobile-cup",
+      "name": "Blitz Mobile Cup",
+      "chapter": 6,
+      "season": 5,
+      "seasonId": "S38",
+      "sourceEventIds": [
+        "S38_BlitzMobileCup"
+      ],
+      "series": "victory-cup",
+      "mode": "blitz",
+      "subtype": "blitz-mobile-cup",
+      "team": "solo",
+      "platform": "mobile",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "Epic公式2025年11月Mobile Cups規則：Blitz Mobile Cupはタッチ操作限定ソロ、各週6回予選のあと上位16人がWeek Final進出、決勝順位により賞金付与。",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-mobile-cups-november-2025-official-rules"
+        },
+        {
+          "text": "ユーザー提供Tracker画像：2025-11-24 ME Week 2 Finalの14位$100。",
+          "url": "https://fortnitetracker.com/events/epicgames_S38_BlitzMobileCup_ME?window=S38_BlitzMobileCup_Week2Final_ME"
+        }
+      ]
+    },
+    {
+      "id": "ch7s3-mobile-zero-build-victory-cup",
+      "name": "Mobile Zero Build Victory Cup",
+      "chapter": 7,
+      "season": 3,
+      "seasonId": "S41",
+      "sourceEventIds": [
+        "S41_MobileVictoryCup_ZB"
+      ],
+      "series": "victory-cup",
+      "mode": "zero-build",
+      "subtype": "mobile-zero-build-victory-cup",
+      "team": "solo",
+      "platform": "mobile",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "Epic公式Ch7S3 Mobile Zero Build Victory Cupはソロ通常Zero Build。Round 2のVRごと個人$100。Mobile Battle RoyaleやMobile Zero Build Reloadとは別大会。",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-mobile-victory-cups-chapter-7-season-3-official-rules"
+        },
+        {
+          "text": "NAW 2026-08-04 Day 4 Round 2の賞金付き開催枠。",
+          "url": "https://fortnitetracker.com/events/epicgames_S41_MobileVictoryCup_ZB_NAW?window=S41_MobileVictoryCup_Day4_Round2_ZB_NAW"
+        }
+      ]
+    },
+    {
+      "id": "ch7s3-mobile-zero-build-reload-elite-stronghold-victory-cup",
+      "name": "Mobile Zero Build Reload (Elite Stronghold) Victory Cup",
+      "chapter": 7,
+      "season": 3,
+      "seasonId": "S41",
+      "sourceEventIds": [
+        "S41_MobileVictoryCup_ZBReload"
+      ],
+      "series": "victory-cup",
+      "mode": "reload-zero-build",
+      "subtype": "mobile-zero-build-reload-elite-stronghold-victory-cup",
+      "team": "solo",
+      "platform": "mobile",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "Epic公式Ch7S3 Mobile Zero Build Reload (Elite Stronghold) Victory Cupはソロ、Round 2は最大3試合、1VRあたり個人$100。通常Reload (Elite Stronghold)と別のZero Build Reload部門。",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-mobile-victory-cups-chapter-7-season-3-official-rules"
+        },
+        {
+          "text": "2026-07-26 OCE / ME Day 3 Round 2。",
+          "url": "https://fortnitetracker.com/events/epicgames_S41_MobileVictoryCup_ZBReload_ME?window=S41_MobileVictoryCup_Day3_Round2_ZBReload_ME"
         }
       ]
     }
