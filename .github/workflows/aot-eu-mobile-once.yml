@@ -1,0 +1,101 @@
+name: One-time reviewed EU mobile source publication
+on:
+  push:
+    branches:
+      - data/eu-mobile-results-20261122-night
+    paths:
+      - .github/workflows/aot-eu-mobile-once.yml
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    if: github.ref == 'refs/heads/data/eu-mobile-results-20261122-night'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: true
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '24'
+      - name: Validate canonical source and append reviewed EU records
+        shell: bash
+        run: |
+          set -euo pipefail
+          node scripts/source-results-store.cjs verify
+          node <<'NODE'
+          'use strict';
+          const fs=require('node:fs');
+          const path=require('node:path');
+          const {readResults,publishResults}=require('./scripts/source-results-store.cjs');
+          const root=process.cwd(),read=f=>JSON.parse(fs.readFileSync(path.join(root,f),'utf8'));
+          const write=(f,v)=>fs.writeFileSync(path.join(root,f),JSON.stringify(v,null,2)+'\n');
+          const batch=read('.aot-eu-mobile-20261122.json');
+          if(batch.version!==1||!Array.isArray(batch.rows)||batch.rows.length!==10||
+             batch.rows.reduce((a,b)=>a+b.prize,0)!==1250||
+             new Set(batch.rows.map(r=>r.source)).size!==5)
+            throw Error('Invalid expected EU mobile batch totals');
+          const original=readResults(root).rows;
+          const ids=new Set(original.map(r=>r.id));
+          const existingWindows=new Set(original.map(r=>r.region+'|'+r.source+'|'+r.profileUrl));
+          const newIds=new Set(),canonicalPlayers=new Set(read('players.json').candidates.map(p=>p.name));
+          const newPerson=batch.addPlayer.name;
+          if(canonicalPlayers.has(newPerson))throw Error('New player already exists');
+          for(const row of batch.rows){
+            if(row.region!=='EU'||!row.verified||row.kind!=='賞金決勝'||
+               !row.source?.startsWith('https://fortnitetracker.com/events/')||
+               !row.profileUrl?.startsWith('https://fortnitetracker.com/profile/all/')||
+               !Number.isInteger(row.kills)||!Number.isInteger(row.vrs)||
+               !Number.isInteger(row.rank)||!Number.isInteger(row.matches)||
+               row.matches<1||row.rank<1||row.prizePerPlayer!==row.prize||
+               row.teamPrize!==row.prize||ids.has(row.id)||newIds.has(row.id)||
+               existingWindows.has(row.region+'|'+row.source+'|'+row.profileUrl)||
+               (!canonicalPlayers.has(row.player)&&row.player!==newPerson))
+              throw Error('Invalid or duplicate record '+row.id);
+            newIds.add(row.id);
+          }
+          const catalog=read('tournaments.json').catalog;
+          for(const row of batch.rows){
+            const match=catalog.find(t=>t.id===row.tournamentId);
+            if(!match||match.seasonId!==row.seasonId||
+               !match.sourceEventIds.some(id=>row.source.includes('epicgames_'+id+'_EU')))
+              throw Error('Tournament taxonomy mismatch: '+row.id);
+          }
+          const players=read('players.json');
+          players.candidates.push(batch.addPlayer);
+          const updates=read('updates.json');
+          if(updates.entries.some(x=>x.id===batch.history.id))throw Error('Duplicate history');
+          if(JSON.stringify(batch.history.recordIds)!==JSON.stringify(batch.rows.map(r=>r.id)))
+            throw Error('History record references mismatch');
+          updates.entries.unshift(batch.history);
+          write('players.json',players);
+          write('updates.json',updates);
+          const result=publishResults(root,[...original,...batch.rows],{legacyWriter:true});
+          if(result.count!==original.length+10||
+             !['S41','S42'].every(s=>result.changedShards.includes(s)))
+            throw Error('Wrong canonical published summary '+JSON.stringify(result));
+          console.log('EU_MOBILE_SOURCE_PUBLISHED '+JSON.stringify(result));
+          NODE
+          node scripts/source-results-store.cjs verify
+          node scripts/build-source-results.cjs --check
+          node scripts/build-season-data.cjs
+          node scripts/build-candidate-triage.cjs
+          node scripts/build-season-data.cjs --check
+          node scripts/build-candidate-triage.cjs --check
+      - name: Commit checked source and generated read models on PR branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add players.json updates.json source-results season-data candidate-triage.json
+          git diff --cached --check
+          if git diff --cached --quiet; then
+            echo "Nothing changed in EU mobile batch."
+            exit 1
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'data: publish ten EU mobile records with refreshed rankings'
+          git push origin HEAD:refs/heads/data/eu-mobile-results-20261122-night
