@@ -13,6 +13,7 @@ const {evaluate:evaluatePerformance,qualifierCutoff,evaluationStage}=require('./
 const {evaluate:evaluateUnreal,unrealWindow}=require('./automatic-unreal-approval.cjs');
 const {evaluate:evaluateNvidia,nvidiaWindow}=require('./automatic-nvidia-approval.cjs');
 const {evaluate:evaluateDuoQualifier}=require('./automatic-duo-qualifier-approval.cjs');
+const {evaluate:evaluatePlayStation,stageFor:playstationStageFor}=require('./automatic-playstation-approval.cjs');
 const {scanCoverage}=require('./scan-coverage.cjs');
 const {finishableWindows,remainingPages,windowPageAllowance,leastCoveredBucket}=require('./scan-efficiency.cjs');
 const {recoveryShortlist}=require('./review-recovery-priority.cjs');
@@ -330,7 +331,7 @@ async function getLeaderboard(win,page){
 function selectActiveWindows(windows,state,config,time=Date.now()){
  const pending=windows.filter(w=>{
   const item=state.windows[w.key];
-  return (!item?.complete||(['unreal-cup','nvidia-cup'].includes(w.series)&&item?.epicIdsRetained!==true))&&(!item?.retryAfter||Date.parse(item.retryAfter)<=time);
+  return (!item?.complete||(['unreal-cup','nvidia-cup','playstation-cup'].includes(w.series)&&item?.epicIdsRetained!==true))&&(!item?.retryAfter||Date.parse(item.retryAfter)<=time);
  });
  const limit=Math.max(1,config.maxWindowsPerRun||2),selected=[],seen=new Set();
  const due=w=>{const t=Date.parse(state.windows[w.key]?.retryAfter||'');return Number.isFinite(t)&&t<=time};
@@ -408,13 +409,13 @@ function historicalPriorityAudit(windows,state,records,{limit=100,now=Date.now()
  const evidence=historicalEvidenceIndex(records);
  const ranked=windows.filter(w=>{
   const cp=state.windows?.[w.key];
-  return (!cp?.complete||(['unreal-cup','nvidia-cup'].includes(w.series)&&cp?.epicIdsRetained!==true))&&
+  return (!cp?.complete||(['unreal-cup','nvidia-cup','playstation-cup'].includes(w.series)&&cp?.epicIdsRetained!==true))&&
    (!cp?.retryAfter||Date.parse(cp.retryAfter)<=now);
  }).map(w=>{
   const cp=state.windows?.[w.key]||{};
   const approvedRule=(Object.hasOwn(RULES,w.tournamentId)&&w.series==='victory-cup')||
    cutoffForWindow(w)!==null||cashLimitForWindow(w)!==null||
-   evaluationStage(w)!==null||unrealWindow(w)!==null||nvidiaWindow(w)!==null;
+   evaluationStage(w)!==null||unrealWindow(w)!==null||nvidiaWindow(w)!==null||playstationStageFor(w)!==null;
   const progress=cp.totalPages>0?Math.round(Math.min(1,(cp.nextPage||0)/cp.totalPages)*90):0;
   const proof=evidence(w);
   return {key:w.key,date:w.dateJst,region:w.region,series:w.series,
@@ -432,7 +433,7 @@ function historicalPriority(state,records,evidence=historicalEvidenceIndex(recor
   const cp=state.windows[w.key];
   const fraction=cp?.totalPages>0?Math.min(1,(cp.nextPage||0)/cp.totalPages):0;
   // Keep the same rank rules and ordering; only avoid repeated computation.
-  const approvedRule=(Object.hasOwn(RULES,w.tournamentId)&&w.series==='victory-cup')||cutoffForWindow(w)!==null||cashLimitForWindow(w)!==null||evaluationStage(w)!==null||unrealWindow(w)!==null||nvidiaWindow(w)!==null;
+  const approvedRule=(Object.hasOwn(RULES,w.tournamentId)&&w.series==='victory-cup')||cutoffForWindow(w)!==null||cashLimitForWindow(w)!==null||evaluationStage(w)!==null||unrealWindow(w)!==null||nvidiaWindow(w)!==null||playstationStageFor(w)!==null;
   const value=(approvedRule?150:0)+Math.round(fraction*90)+evidence(w)+(w.kind==='賞金決勝'?12:0)+(w.kind==='参加確認'?3:0);
   scores.set(w,value);
   return value;
@@ -442,7 +443,7 @@ function historicalPriority(state,records,evidence=historicalEvidenceIndex(recor
 function selectHistoricalWindows(windows,state,config,time=Date.now(),records=[],reviewRows=[]){
  const pending=windows.filter(w=>{
   const cp=state.windows[w.key];
-  return (!cp?.complete||(['unreal-cup','nvidia-cup'].includes(w.series)&&cp?.epicIdsRetained!==true))&&(!cp?.retryAfter||Date.parse(cp.retryAfter)<=time);
+  return (!cp?.complete||(['unreal-cup','nvidia-cup','playstation-cup'].includes(w.series)&&cp?.epicIdsRetained!==true))&&(!cp?.retryAfter||Date.parse(cp.retryAfter)<=time);
  });
  const years=[...new Set(pending.map(w=>w.dateJst.slice(0,4)))].sort((a,b)=>a.localeCompare(b));
  const limit=Math.max(1,config.maxWindowsPerRun||6),selected=[],seen=new Set();
@@ -719,9 +720,9 @@ async function main(){
   const previous=state.windows[win.key];
   // Pre-2026 Unreal caches lack the original two Epic IDs. Re-fetch once; never
   // approve from a stale completed review-only checkpoint.
-  const checkpoint=['unreal-cup','nvidia-cup'].includes(win.series)&&previous?.epicIdsRetained!==true?
+  const checkpoint=['unreal-cup','nvidia-cup','playstation-cup'].includes(win.series)&&previous?.epicIdsRetained!==true?
    {nextPage:0,complete:false,proposals:[],pages:0,epicIdsRetained:true}:
-   previous||{nextPage:0,complete:false,proposals:[],pages:0,...(['unreal-cup','nvidia-cup'].includes(win.series)?{epicIdsRetained:true}:{})};
+   previous||{nextPage:0,complete:false,proposals:[],pages:0,...(['unreal-cup','nvidia-cup','playstation-cup'].includes(win.series)?{epicIdsRetained:true}:{})};
   let pagesThisWindow=0;
   const limit=Math.min(Math.max(config.maxPagesPerWindowPerRun||budget,1),50);
   // Finish up to two near-complete historical leaderboards later in the
@@ -766,7 +767,12 @@ async function main(){
    delete checkpoint.lastErrorPage;
    delete checkpoint.lastErrorCode;
    // A malformed middle page was handled above with a per-window retry.
-   const cutoff=(historical?advancementLimit(win):null)??cutoffForWindow(win)??(config.autoApprovePerformance===true?qualifierCutoff(win):null);
+   // Only the first 100 visible PlayStation qualifier/final ranks are needed for
+   // the official Top80 qualifying slots and payout tiers. Also retain 81-100
+   // participant standings when source score and Epic UUID are confirmed.
+   const psStage=playstationStageFor(win);
+   const psCutoff=psStage?100:null;
+   const cutoff=(historical?advancementLimit(win):null)??cutoffForWindow(win)??psCutoff??(config.autoApprovePerformance===true?qualifierCutoff(win):null);
    const pageRanks=l.entries.map(e=>e.rank);
    const ordered=pageRanks.every((rank,i)=>Number.isSafeInteger(rank)&&rank>=1&&(i===0||rank>=pageRanks[i-1]));
    const followsPrevious=checkpoint.lastSeenRank==null||pageRanks.length===0||pageRanks[0]>=checkpoint.lastSeenRank;
@@ -834,11 +840,15 @@ async function main(){
  const duo=(config.autoApproveDuoQualifier===true)?
   evaluateDuoQualifier(pending,windows,state.windows,{...data,results:[...data.results,...verified.approved,
    ...cosmetic.approved,...cash.approved,...performance.approved,...unreal.approved,...nvidia.approved]}):{approved:[],held:[]};
- const approved=[...verified.approved,...cosmetic.approved,...cash.approved,...performance.approved,...unreal.approved,...nvidia.approved,...duo.approved];
+ const playstation=(config.autoApprovePlayStation===true)?
+  evaluatePlayStation(pending,windows,state.windows,{...data,results:[...data.results,...verified.approved,
+   ...cosmetic.approved,...cash.approved,...performance.approved,...unreal.approved,...nvidia.approved,...duo.approved]}):{approved:[],held:[],participationIds:[]};
+ const approved=[...verified.approved,...cosmetic.approved,...cash.approved,...performance.approved,...unreal.approved,...nvidia.approved,...duo.approved,...playstation.approved];
  // Only the narrow historical Victory Cup rule evaluator can authorize
  // out-of-cutoff participation. Never extend this grant to review-only series.
  const verifiedParticipationIds=new Set(verified.approved.filter(x=>
   x.kind==='参加確認'&&x.reviewOnly!==true&&x.verified===true&&x.prize===0).map(x=>x.id));
+ for(const id of playstation.participationIds)verifiedParticipationIds.add(id);
  importedCosmetics=cosmetic.approved.length;
  for(const hold of verified.held)reasons.set(hold.id,hold.reason);
  for(const hold of cosmetic.held)if(!reasons.has(hold.id))reasons.set(hold.id,hold.reason);
@@ -847,13 +857,14 @@ async function main(){
  for(const hold of unreal.held)reasons.set(hold.id,hold.reason);
  for(const hold of nvidia.held)reasons.set(hold.id,hold.reason);
  for(const hold of duo.held)reasons.set(hold.id,hold.reason);
+ for(const hold of playstation.held)reasons.set(hold.id,hold.reason);
  for(const row of approved)importedIds.add(row.id);
  manuallyHeld=pending.length-approved.length;
  imported=applyProposals(data,approved,stamp,{verifiedParticipationIds});
  if(imported){
   const entry=data.updates.entries[0];
   entry.title='公式規則で自動承認：'+(historical?'過去大会':'新着大会')+imported+'戦績';
-  entry.description='公式規則・地域別順位・本人確認済みEpic ID・順位表・既存戦績を照合。予選突破・突破圏外の参加確認（'+verifiedParticipationIds.size+'件）、公式VR賞金、スキン（'+importedCosmetics+'件）、公式賞金表によるCash Cup（'+cash.approved.length+'件／賞金圏外$0含む）、S43 Performance Evaluation（'+performance.approved.length+'件）、S39 Unreal Cup（'+unreal.approved.length+'件／チーム・個人賞金、圏外$0）、公式デュオ予選（'+duo.approved.length+'件／突破と圏外参加を区別・$0）を自動掲載。支払い完了や未確認の賞金は推定しない。';
+  entry.description='公式規則・地域別順位・本人確認済みEpic ID・順位表・既存戦績を照合。予選突破・突破圏外の参加確認（'+verifiedParticipationIds.size+'件）、公式VR賞金、スキン（'+importedCosmetics+'件）、公式賞金表によるCash Cup（'+cash.approved.length+'件／賞金圏外$0含む）、S43 Performance Evaluation（'+performance.approved.length+'件）、S39 Unreal Cup（'+unreal.approved.length+'件／チーム・個人賞金、圏外$0）、公式デュオ予選（'+duo.approved.length+'件／突破と圏外参加を区別・$0）、S43 PlayStation BR/ZB（'+playstation.approved.length+'件／Top80・順位賞金・圏外$0を区別）を自動掲載。支払い完了や未確認の賞金は推定しない。';
   write('results.json',data.results);
   write('updates.json',data.updates);
  }
@@ -865,13 +876,13 @@ async function main(){
  const reviewOnlyWindows=windows.filter(w=>w.series!=='victory-cup').length;
  const reviewOnlyCandidates=unique.size?Array.from(unique.values()).filter(p=>p.reviewOnly===true).length:0;
  const cumulativeApprovals=data.updates.entries.filter(x=>x.title?.startsWith('公式規則で自動承認：')).reduce((sum,x)=>sum+(x.recordIds?.length||0),0);
- const status={version:1,state:'checked',checkedAt:stamp,mode:'review',scope:historical?'history':'recent',dateMode:historical?(storedConfig.toDate==='rolling'?'rolling':'fixed'):null,selectedWindows:active.length,fromDate:historical?config.fromDate:null,toDate:historical?config.toDate:null,provider:'osirion',linkedPlayers:accounts.length,trackedWindows:windows.length,found:unique.size,skipped:invalidRows,imported,scannedPages:scanned,completedWindows:finished,identityConflicts:conflicts.length,alreadyRegistered:recordedFromReview,autoApprovedTotal:cumulativeApprovals,invalidCachedCandidates:invalidCached,manualReviewCandidates:manuallyHeld,autoApprovedParticipationThisRun:verifiedParticipationIds.size,autoApprovedCosmeticThisRun:importedCosmetics,autoApprovedCashThisRun:cash.approved.length,autoApprovedPerformanceThisRun:performance.approved.length,autoApprovedUnrealThisRun:unreal.approved.length,autoApprovedDuoQualifierThisRun:duo.approved.length,timeLimitReached,processedWindows,providerRateLimitPaused:rateLimited,providerRateLimitRetryAfter:rateLimitRetryAfter,providerTraffic:{...traffic,...providerPacer.metrics()},
+ const status={version:1,state:'checked',checkedAt:stamp,mode:'review',scope:historical?'history':'recent',dateMode:historical?(storedConfig.toDate==='rolling'?'rolling':'fixed'):null,selectedWindows:active.length,fromDate:historical?config.fromDate:null,toDate:historical?config.toDate:null,provider:'osirion',linkedPlayers:accounts.length,trackedWindows:windows.length,found:unique.size,skipped:invalidRows,imported,scannedPages:scanned,completedWindows:finished,identityConflicts:conflicts.length,alreadyRegistered:recordedFromReview,autoApprovedTotal:cumulativeApprovals,invalidCachedCandidates:invalidCached,manualReviewCandidates:manuallyHeld,autoApprovedParticipationThisRun:verifiedParticipationIds.size,autoApprovedCosmeticThisRun:importedCosmetics,autoApprovedCashThisRun:cash.approved.length,autoApprovedPerformanceThisRun:performance.approved.length,autoApprovedUnrealThisRun:unreal.approved.length,autoApprovedDuoQualifierThisRun:duo.approved.length,autoApprovedPlayStationThisRun:playstation.approved.length,timeLimitReached,processedWindows,providerRateLimitPaused:rateLimited,providerRateLimitRetryAfter:rateLimitRetryAfter,providerTraffic:{...traffic,...providerPacer.metrics()},
   ...(historical?{newlyCompletedWindows,newPlayerBackfill:playerBackfill}:{}),retryWindows:coverage.retryCount,coverage,...(historical?{reviewRecovery:reviewRecoverySummary,priorityAudit:{...priorityAudit,selected:selectedPriority}}:{}),transientFailures,malformedFailures,skippedLeaderboards:skippedLeaderboards.slice(0,15),reviewOnlyWindows,reviewOnlyCandidates,unmappedEvents:unmapped.length,unmappedEventIds:unmapped.slice(0,12),message:'Osirionで'+accounts.length+'アカウントIDを追跡。今回の公式規則による自動承認'+imported+'件、追加確認待ち'+unique.size+'件、名義照合保留'+conflicts.length+'件。'};
  state.checkedAt=stamp;
  write(prefix+'-scan.json',state);
  write(prefix+'-review.json',{version:1,status:'review',checkedAt:stamp,proposals:[...unique.values()]});
  write(prefix+'-status.json',status);
- console.log((historical?'OSIRION_HISTORY_REVIEW ':'OSIRION_REVIEW ')+JSON.stringify({scannedPages:scanned,linkedPlayers:accounts.length,identityConflicts:conflicts.length,windows:windows.length,unmappedEvents:unmapped.length,proposals:unique.size,imported,participation:verifiedParticipationIds.size,cosmetic:importedCosmetics,cash:cash.approved.length,performance:performance.approved.length,unreal:unreal.approved.length,duo:duo.approved.length,finished,processedWindows,rateLimited,rateLimitRetryAfter,newlyCompletedWindows,
+ console.log((historical?'OSIRION_HISTORY_REVIEW ':'OSIRION_REVIEW ')+JSON.stringify({scannedPages:scanned,linkedPlayers:accounts.length,identityConflicts:conflicts.length,windows:windows.length,unmappedEvents:unmapped.length,proposals:unique.size,imported,participation:verifiedParticipationIds.size,cosmetic:importedCosmetics,cash:cash.approved.length,performance:performance.approved.length,unreal:unreal.approved.length,duo:duo.approved.length,playstation:playstation.approved.length,finished,processedWindows,rateLimited,rateLimitRetryAfter,newlyCompletedWindows,
   transientFailures,malformedFailures,heldWindows:skippedLeaderboards.length}));
 }
 if(require.main===module)main().catch(e=>{console.error('OSIRION_SYNC_ERROR '+e.stack);process.exitCode=1});

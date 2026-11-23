@@ -18,7 +18,7 @@ function validateRegistry(doc,tournaments){
   const t=catalog.get(id);
   if(!t){fail(id,'登録済み大会カタログにありません');continue}
   if(rule.seasonId!==t.seasonId||rule.team!==t.team||rule.series!==t.series)fail(id,'シーズン/チーム/シリーズが一致しません');
-  if(!['victory-cup','skin-cup','cash-cup','performance-evaluation','unreal-cup','nvidia-cup'].includes(rule.series))fail(id,'対応していないルールシリーズです');
+  if(!['victory-cup','skin-cup','cash-cup','playstation-cup','performance-evaluation','unreal-cup','nvidia-cup'].includes(rule.series))fail(id,'対応していないルールシリーズです');
   if(!Array.isArray(rule.eventIds)||!rule.eventIds.length||new Set(rule.eventIds).size!==rule.eventIds.length||
       rule.eventIds.some(x=>typeof x!=='string'||!t.sourceEventIds.includes(x)))fail(id,'EpicイベントIDがカタログと不一致');
   if(!TEAMS.has(rule.team))fail(id,'チーム形式が不正');
@@ -142,6 +142,47 @@ function validateRegistry(doc,tournaments){
      fail(id,'S43決勝VR単価・ポイント・参加条件が不正');
    if(rule.cashPrizes!==undefined||rule.cosmeticRanks!==undefined)
      fail(id,'Performance Evaluationに他大会の賞金条件を混在させない');
+  }else if(rule.series==='playstation-cup'){
+   // November 20, 2026 official Epic rule: independent BR and ZB solo,
+   // two rounds, per-person rank cash. Never infer dollars from victory royales.
+   const source='https://www.fortnite.com/competitive/rules-guidelines/rules-library/playstation-cup-chapter-7-mini-season-official-rules';
+   const zb=id==='ch7s5-playstation-cup-zero-build';
+   const br=id==='ch7s5-playstation-cup-battle-royale';
+   const event=zb?'S43_PlayStationCup_ZB':'S43_PlayStationCup';
+   const mode=zb?'zero-build':'battle-royale';
+   const regions=['OCE','ASIA','ME','EU','BR','NAC','NAW'];
+   if((!br&&!zb)||rule.seasonId!=='S43'||t.chapter!==7||t.season!==5||
+      rule.chapter!==7||rule.season!==5||rule.team!=='solo'||t.team!=='solo'||
+      rule.mode!==mode||t.mode!==mode||rule.platform!=='playstation'||t.platform!=='playstation'||
+      JSON.stringify(rule.eventIds)!==JSON.stringify([event])||
+      rule.source!==source||rule.autoApproval!=='verified-playstation-solo'||
+      JSON.stringify(rule.matchCaps)!==JSON.stringify({'予選':11,'賞金決勝':6})||
+      rule.sessionMinutes!==180||rule.finalSessionMinutes!==160||
+      JSON.stringify(rule.roundWindows)!==JSON.stringify({qualifier:'Qualifier',final:'Final'})||
+      JSON.stringify(Object.keys(rule.advance||{}).sort())!==JSON.stringify(regions.slice().sort())||
+      regions.some(region=>rule.advance?.[region]!==80))
+      fail(id,'S43 PlayStationの別モード・予選80位・PS4/PS5限定・開催構成が不一致');
+   if(JSON.stringify(rule.scoring)!==JSON.stringify({method:'in-game',tiebreakers:[
+      'total-points','victory-royales','average-eliminations','average-placement','survival-seconds'
+   ]})||JSON.stringify(rule.cosmeticPrizes)!==JSON.stringify({
+      minimumPoints:8,spray:'Froggory Stance Spray'
+   })||rule.prizePerVictory!==undefined||rule.cosmeticRanks!==undefined)
+      fail(id,'PlayStationのゲーム内配点・同点順位・8ptスプレーと現金賞金の分離が不正');
+   const shared=[[1,750],[2,500],[3,450],[4,400],[5,350],[6,300],[7,250],[8,200],[9,150],[10,100],[25,50]];
+   const eu=[[1,4000],[2,2000],[3,1500],[4,1000],[5,800],[6,600],[7,500],[8,400],[9,350],[10,300],[20,250],[30,150],[50,100]];
+   const nac=[[1,2500],[2,1500],[3,1000],[4,800],[5,600],[6,500],[7,400],[8,300],[9,250],[10,200],[20,150],[30,100],[50,50]];
+   const cash=rule.cashPrizes;
+   if(cash?.basis!=='per-player'||cash?.currency!=='USD'||
+      JSON.stringify(Object.keys(cash?.tiers||{}).sort())!==JSON.stringify(regions.slice().sort()))
+      fail(id,'PlayStation決勝の全7地域個人賞金表が不足');
+   else for(const region of regions){
+      const expected=(region==='EU'?eu:region==='NAC'?nac:shared)
+        .map(([through,perPlayer])=>({through,perPlayer}));
+      if(JSON.stringify(cash.tiers[region])!==JSON.stringify(expected))
+       fail(id,region+' PlayStationの公式順位別個人賞金表に差異');
+   }
+   if(rule.rankedEligibility!==undefined||rule.teamPrizePerVictory!==undefined)
+     fail(id,'別大会のランク条件・チーム賞金を流用しない');
   }else if(rule.series==='cash-cup'){
    if(rule.autoApproval==='verified-duo-qualifier-only'){
      // Strictly no Round 2 cash inference: only official Round 1 results, $0.

@@ -379,6 +379,14 @@
         {
           "id": "mobile-zero-build-reload-elite-stronghold-victory-cup",
           "label": "Mobile Zero Build Reload (Elite Stronghold) Victory Cup"
+        },
+        {
+          "id": "playstation-cup-battle-royale",
+          "label": "PlayStation Cup Battle Royale"
+        },
+        {
+          "id": "playstation-cup-zero-build",
+          "label": "PlayStation Cup Zero Build"
         }
       ]
     },
@@ -3621,6 +3629,66 @@
         {
           "text": "2026-07-26 OCE / ME Day 3 Round 2。",
           "url": "https://fortnitetracker.com/events/epicgames_S41_MobileVictoryCup_ZBReload_ME?window=S41_MobileVictoryCup_Day3_Round2_ZBReload_ME"
+        }
+      ]
+    },
+    {
+      "id": "ch7s5-playstation-cup-battle-royale",
+      "name": "PlayStation Cup Battle Royale",
+      "chapter": 7,
+      "season": 5,
+      "seasonId": "S43",
+      "sourceEventIds": [
+        "S43_PlayStationCup"
+      ],
+      "series": "playstation-cup",
+      "mode": "battle-royale",
+      "subtype": "playstation-cup-battle-royale",
+      "team": "solo",
+      "platform": "playstation",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "Epic公式2026年11月20日PlayStation Cup Chapter7 Mini-Season規則：BR/ZBの2つの独立したSolo競技、PS4・PS5限定、Round1最大11試合/3時間・全地域上位80名が決勝、決勝最大6試合/160分、地域別最終順位による個人現金賞金。予選8pt以上のFroggory Stanceスプレーは現金賞金と別。",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/playstation-cup-chapter-7-mini-season-official-rules"
+        },
+        {
+          "text": "2026年11月23日予選と公式の別モード大会ページ・開催枠の確認。",
+          "url": "https://www.fortnite.com/competitive/events/S43_PlayStationCup/?region=ASIA"
+        },
+        {
+          "text": "Fortnite TrackerのS43固有イベントIDと予選/決勝の別開催枠を照合。",
+          "url": "https://fortnitetracker.com/events/epicgames_S43_PlayStationCup_ASIA?window=S43_PlayStationCup_Qualifier_ASIA"
+        }
+      ]
+    },
+    {
+      "id": "ch7s5-playstation-cup-zero-build",
+      "name": "PlayStation Cup Zero Build",
+      "chapter": 7,
+      "season": 5,
+      "seasonId": "S43",
+      "sourceEventIds": [
+        "S43_PlayStationCup_ZB"
+      ],
+      "series": "playstation-cup",
+      "mode": "zero-build",
+      "subtype": "playstation-cup-zero-build",
+      "team": "solo",
+      "platform": "playstation",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "Epic公式2026年11月20日PlayStation Cup Chapter7 Mini-Season規則：BR/ZBの2つの独立したSolo競技、PS4・PS5限定、Round1最大11試合/3時間・全地域上位80名が決勝、決勝最大6試合/160分、地域別最終順位による個人現金賞金。予選8pt以上のFroggory Stanceスプレーは現金賞金と別。",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/playstation-cup-chapter-7-mini-season-official-rules"
+        },
+        {
+          "text": "2026年11月23日予選と公式の別モード大会ページ・開催枠の確認。",
+          "url": "https://www.fortnite.com/competitive/events/S43_PlayStationCup_ZB/?region=ASIA"
+        },
+        {
+          "text": "Fortnite TrackerのS43固有イベントIDと予選/決勝の別開催枠を照合。",
+          "url": "https://fortnitetracker.com/events/epicgames_S43_PlayStationCup_ZB_ASIA?window=S43_PlayStationCup_ZB_Qualifier_ASIA"
         }
       ]
     }

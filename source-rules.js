@@ -100,6 +100,30 @@
       scheduleHtml+
       '<p class="source-rule-warning">※ 公式地域別賞金表・本人Epic ID'+members+'名分・完了した開催枠・順位・既存戦績を照合した成績のみ自動掲載します。賞金圏外は$0として掲載します。本人の受給資格・賞金支払完了は未確認です。</p>';
   }
+  // Verified S43 PlayStation Cup: separate BR and Zero Build cash/qualifiers.
+  function playstationMarkup(rule){
+    const regions=state.region==='all'?[...regionLabels,'ASIA']:[state.region];
+    const cashRows=regions.map(region=>{
+      const tiers=rule.cashPrizes?.tiers?.[region];
+      if(!tiers?.length)return '<div class="source-rule-cash-region is-unknown">'+esc(region)+'：決勝賞金未確認</div>';
+      let prev=0;
+      const rows=tiers.map(tier=>{
+        const first=prev+1;prev=tier.through;
+        const rank=first===tier.through?fmtNumber(first)+'位':fmtNumber(first)+'〜'+fmtNumber(tier.through)+'位';
+        return '<div class="source-rule-cash-tier"><span>'+esc(rank)+'</span><strong>USD '+fmtNumber(tier.perPlayer)+'</strong></div>';
+      }).join('');
+      return '<div class="source-rule-cash-region"><h4>'+esc(region)+'</h4>'+rows+'</div>';
+    }).join('');
+    const mode=rule.mode==='zero-build'?'Zero Build':'Battle Royale';
+    return '<div class="source-rule-fact"><span>開催モードと資格</span><strong>PlayStation Cup '+esc(mode)+' / ソロ / PS4・PS5</strong></div>'+
+      '<div class="source-rule-fact"><span>予選</span><strong>最大'+fmtNumber(rule.matchCaps['予選'])+'試合・約'+fmtNumber(rule.sessionMinutes)+'分・各地域上位80名が決勝進出・現金賞金USD 0</strong></div>'+
+      '<div class="source-rule-fact"><span>決勝</span><strong>最大'+fmtNumber(rule.matchCaps['賞金決勝'])+'試合・約'+fmtNumber(rule.finalSessionMinutes)+'分・最終順位の個人賞金（VR回数とは独立）</strong></div>'+
+      '<div class="source-rule-fact"><span>地域別決勝個人賞金</span><div class="source-rule-cash-grid">'+cashRows+'</div></div>'+
+      '<div class="source-rule-fact"><span>予選のコスメ条件</span><strong>8pt以上：'+esc(rule.cosmeticPrizes.spray)+'（現金賞金とは別）</strong></div>'+
+      '<div class="source-rule-fact"><span>同点処理</span><strong>総ポイント → VR数 → 平均キル → 平均順位 → 生存時間</strong></div>'+
+      '<p class="source-rule-warning">※ BRとZero Buildは別々のEpic大会ID。上位80位のみ決勝進出。81位以下は本人・開催枠を検証できた場合のみ参加記録とし、予選の賞金はUSD 0。決勝賞金はVRではなく地域別最終順位で判定します。参加資格・賞金支払・コスメ配布の完了は別途確認が必要です。</p>';
+  }
+
   // The Unreal Cup source table reports TEAM earnings. Each eligible duo member earns half.
   function unrealMarkup(rule){
     const award=rule.cashPrizes;
@@ -185,7 +209,7 @@
         return pathname.startsWith('/competitive/rules-guidelines/rules-library/')||
           pathname.startsWith('/news/');
       }))].slice(0,3);
-    const conditions=rule?.series==='nvidia-cup'?nvidiaMarkup(rule):rule?.series==='unreal-cup'?unrealMarkup(rule):rule?.series==='cash-cup'?cashMarkup(rule):
+    const conditions=rule?.series==='playstation-cup'?playstationMarkup(rule):rule?.series==='nvidia-cup'?nvidiaMarkup(rule):rule?.series==='unreal-cup'?unrealMarkup(rule):rule?.series==='cash-cup'?cashMarkup(rule):
       rule?.cosmeticRanks
       ?'<div class="source-rule-fact"><span>スキン獲得対象順位</span><div class="source-rule-regions">'+regionRows(rule.cosmeticRanks,'スキン獲得ライン')+'</div></div>'
       :'<div class="source-rule-fact"><span>予選突破の地域別条件</span><div class="source-rule-regions">'+regionRows(rule?.advance,'予選通過順位')+'</div></div>';
