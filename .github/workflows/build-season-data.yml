@@ -41,6 +41,8 @@ on:
       - scripts/apply-s30-eu-zb-solo-eight-20261119.cjs
       - scripts/verified-s30-eu-zb-solo-eight-20261119.cjs
       - data/manual-approvals/20261119-s30-eu-zb-solo-eight.json
+      - scripts/publish-s43-trios-event3-20261122.cjs
+      - data/manual-approvals/20261123-s43-trios-event3-ten.json
       - scripts/apply-verified-tracker-finals.cjs
       - scripts/apply-verified-s43-squads-finals.cjs
       - scripts/apply-s30-me-zb-duos-cash-20240607.cjs
@@ -225,6 +227,8 @@ jobs:
             node scripts/apply-verified-tracker-finals.cjs
             node scripts/apply-verified-s43-squads-finals.cjs --dry-run
             node scripts/apply-verified-s43-squads-finals.cjs
+            node scripts/publish-s43-trios-event3-20261122.cjs --dry-run
+            node scripts/publish-s43-trios-event3-20261122.cjs
             node scripts/apply-s30-me-zb-duos-cash-20240607.cjs --dry-run
             node scripts/apply-s30-me-zb-duos-cash-20240607.cjs
             node scripts/apply-s30-me-zb-duos-nonprize-20240607.cjs --dry-run
