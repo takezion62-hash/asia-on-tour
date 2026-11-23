@@ -331,7 +331,7 @@ async function getLeaderboard(win,page){
 function selectActiveWindows(windows,state,config,time=Date.now()){
  const pending=windows.filter(w=>{
   const item=state.windows[w.key];
-  return (!item?.complete||(['unreal-cup','nvidia-cup'].includes(w.series)&&item?.epicIdsRetained!==true))&&(!item?.retryAfter||Date.parse(item.retryAfter)<=time);
+  return (!item?.complete||(['unreal-cup','nvidia-cup','playstation-cup'].includes(w.series)&&item?.epicIdsRetained!==true))&&(!item?.retryAfter||Date.parse(item.retryAfter)<=time);
  });
  const limit=Math.max(1,config.maxWindowsPerRun||2),selected=[],seen=new Set();
  const due=w=>{const t=Date.parse(state.windows[w.key]?.retryAfter||'');return Number.isFinite(t)&&t<=time};
@@ -409,13 +409,13 @@ function historicalPriorityAudit(windows,state,records,{limit=100,now=Date.now()
  const evidence=historicalEvidenceIndex(records);
  const ranked=windows.filter(w=>{
   const cp=state.windows?.[w.key];
-  return (!cp?.complete||(['unreal-cup','nvidia-cup'].includes(w.series)&&cp?.epicIdsRetained!==true))&&
+  return (!cp?.complete||(['unreal-cup','nvidia-cup','playstation-cup'].includes(w.series)&&cp?.epicIdsRetained!==true))&&
    (!cp?.retryAfter||Date.parse(cp.retryAfter)<=now);
  }).map(w=>{
   const cp=state.windows?.[w.key]||{};
   const approvedRule=(Object.hasOwn(RULES,w.tournamentId)&&w.series==='victory-cup')||
    cutoffForWindow(w)!==null||cashLimitForWindow(w)!==null||
-   evaluationStage(w)!==null||unrealWindow(w)!==null||nvidiaWindow(w)!==null;
+   evaluationStage(w)!==null||unrealWindow(w)!==null||nvidiaWindow(w)!==null||playstationStageFor(w)!==null;
   const progress=cp.totalPages>0?Math.round(Math.min(1,(cp.nextPage||0)/cp.totalPages)*90):0;
   const proof=evidence(w);
   return {key:w.key,date:w.dateJst,region:w.region,series:w.series,
@@ -433,7 +433,7 @@ function historicalPriority(state,records,evidence=historicalEvidenceIndex(recor
   const cp=state.windows[w.key];
   const fraction=cp?.totalPages>0?Math.min(1,(cp.nextPage||0)/cp.totalPages):0;
   // Keep the same rank rules and ordering; only avoid repeated computation.
-  const approvedRule=(Object.hasOwn(RULES,w.tournamentId)&&w.series==='victory-cup')||cutoffForWindow(w)!==null||cashLimitForWindow(w)!==null||evaluationStage(w)!==null||unrealWindow(w)!==null||nvidiaWindow(w)!==null;
+  const approvedRule=(Object.hasOwn(RULES,w.tournamentId)&&w.series==='victory-cup')||cutoffForWindow(w)!==null||cashLimitForWindow(w)!==null||evaluationStage(w)!==null||unrealWindow(w)!==null||nvidiaWindow(w)!==null||playstationStageFor(w)!==null;
   const value=(approvedRule?150:0)+Math.round(fraction*90)+evidence(w)+(w.kind==='賞金決勝'?12:0)+(w.kind==='参加確認'?3:0);
   scores.set(w,value);
   return value;
@@ -443,7 +443,7 @@ function historicalPriority(state,records,evidence=historicalEvidenceIndex(recor
 function selectHistoricalWindows(windows,state,config,time=Date.now(),records=[],reviewRows=[]){
  const pending=windows.filter(w=>{
   const cp=state.windows[w.key];
-  return (!cp?.complete||(['unreal-cup','nvidia-cup'].includes(w.series)&&cp?.epicIdsRetained!==true))&&(!cp?.retryAfter||Date.parse(cp.retryAfter)<=time);
+  return (!cp?.complete||(['unreal-cup','nvidia-cup','playstation-cup'].includes(w.series)&&cp?.epicIdsRetained!==true))&&(!cp?.retryAfter||Date.parse(cp.retryAfter)<=time);
  });
  const years=[...new Set(pending.map(w=>w.dateJst.slice(0,4)))].sort((a,b)=>a.localeCompare(b));
  const limit=Math.max(1,config.maxWindowsPerRun||6),selected=[],seen=new Set();
@@ -720,9 +720,9 @@ async function main(){
   const previous=state.windows[win.key];
   // Pre-2026 Unreal caches lack the original two Epic IDs. Re-fetch once; never
   // approve from a stale completed review-only checkpoint.
-  const checkpoint=['unreal-cup','nvidia-cup'].includes(win.series)&&previous?.epicIdsRetained!==true?
+  const checkpoint=['unreal-cup','nvidia-cup','playstation-cup'].includes(win.series)&&previous?.epicIdsRetained!==true?
    {nextPage:0,complete:false,proposals:[],pages:0,epicIdsRetained:true}:
-   previous||{nextPage:0,complete:false,proposals:[],pages:0,...(['unreal-cup','nvidia-cup'].includes(win.series)?{epicIdsRetained:true}:{})};
+   previous||{nextPage:0,complete:false,proposals:[],pages:0,...(['unreal-cup','nvidia-cup','playstation-cup'].includes(win.series)?{epicIdsRetained:true}:{})};
   let pagesThisWindow=0;
   const limit=Math.min(Math.max(config.maxPagesPerWindowPerRun||budget,1),50);
   // Finish up to two near-complete historical leaderboards later in the
