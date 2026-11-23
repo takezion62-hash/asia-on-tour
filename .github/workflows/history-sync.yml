@@ -36,8 +36,6 @@ on:
       - "scripts/publish-verified-nov12-pending.cjs"
       - "scripts/resolve-triaged-candidates-20261112.cjs"
       - "scripts/reconcile-exact-epic-rank-three.cjs"
-      - "scripts/publish-s43-trios-event3-20261122.cjs"
-      - "data/manual-approvals/20261123-s43-trios-event3-ten.json"
       - ".github/workflows/history-sync.yml"
       - "scripts/publish-verified-finals-batch.cjs"
       - "scripts/publish-reviewed-s30-nac-zero-vr.cjs"
@@ -80,44 +78,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '24'
-      # User-verified Tracker Event 3 captures. Only the 10 frozen, distinct
-      # OCE/ME teams pass; all are out of the official top-five cash bracket.
-      # The script is idempotent and must validate the ledger before writing.
-      - name: Publish 2026-11-22 S43 OCE/ME Trios 10 screenshot-backed teams
-        shell: bash
-        run: |
-          set -euo pipefail
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          for attempt in 1 2 3 4 5; do
-            git fetch origin main
-            git reset --hard origin/main
-            node scripts/publish-s43-trios-event3-20261122.cjs --dry-run
-            node --test tests/s43-trios-event3-20261122.test.cjs
-            node scripts/publish-s43-trios-event3-20261122.cjs
-            npm run validate
-            node scripts/build-season-data.cjs
-            node scripts/build-candidate-triage.cjs
-            node scripts/build-source-results.cjs --check
-            node scripts/build-season-data.cjs --check
-            git add -A source-results season-data
-            git add players.json approval-history.json updates.json candidate-triage.json
-            if git diff --cached --quiet; then
-              echo "S43_TRIOS_EVENT3 all ten screenshot-verified teams already present"
-              break
-            fi
-            git commit -m "data: publish ten verified S43 OCE/ME Event3 trio teams with zero cash"
-            if git push origin HEAD:main; then
-              echo "S43_TRIOS_EVENT3 published ten teams with official zero-cash brackets"
-              break
-            fi
-            if [[ "$attempt" -ge 5 ]]; then
-              echo "::error::S43_TRIOS_EVENT3 safe update exhausted retries"
-              exit 1
-            fi
-            sleep "$((attempt*2))"
-          done
-
       - name: Resolve exact source-verified triage candidates and publish safely
         shell: bash
         run: |
