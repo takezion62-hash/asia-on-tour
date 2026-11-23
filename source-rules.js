@@ -14,7 +14,7 @@
       return url.protocol==='https:'&&['www.fortnite.com','fortnite.com'].includes(url.hostname)?url.href:null;
     }catch{return null}
   };
-  const regionLabels=['ME','EU','NAC','NAW','OCE','BR','ASIA'];
+  const regionLabels=['ME','EU','NAC','NAW','OCE','BR'];
   const seriesLabel={ 'victory-cup':'Victory Cup','cash-cup':'Cash Cup','skin-cup':'スキン大会','icon-cup':'Icon Cup','fncs':'FNCS','performance-evaluation':'Performance Evaluation','playstation-cup':'PlayStation Cup','unreal-cup':'Unreal Cup','nvidia-cup':'NVIDIA Cup','test-cup':'Test Cup' };
   const modeLabel={solo:'ソロ',duo:'デュオ',trio:'トリオ',squad:'スクワッド'};
   const fmtNumber=value=>Number(value).toLocaleString('ja-JP');
@@ -101,7 +101,7 @@
       '<p class="source-rule-warning">※ 公式地域別賞金表・本人Epic ID'+members+'名分・完了した開催枠・順位・既存戦績を照合した成績のみ自動掲載します。賞金圏外は$0として掲載します。本人の受給資格・賞金支払完了は未確認です。</p>';
   }
   function playstationMarkup(rule){
-    const regions=state.region==='all'?regionLabels:[state.region];
+    const regions=state.region==='all'?[...regionLabels,'ASIA']:[state.region];
     const sections=regions.map(region=>{
       const tiers=rule.cashPrizes?.tiers?.[region];
       if(!tiers?.length)return '<div class="source-rule-cash-region is-unknown"><strong>'+esc(region)+'</strong> 決勝賞金表未登録</div>';
