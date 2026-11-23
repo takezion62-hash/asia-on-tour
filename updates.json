@@ -2,6 +2,50 @@
   "version": 1,
   "entries": [
     {
+      "id": "review-publication-pending-20261114-233748db5819-verified-rule-1",
+      "date": "2026-11-23",
+      "type": "records",
+      "title": "管理者確認済み戦績 2件を追加",
+      "description": "公式規則に基づく予選突破または決勝0VRのみを確認。未確認賞金なし。",
+      "recordIds": [
+        "auto-s30-f71d31f49445",
+        "auto-s30-e5fd67b5d7ae"
+      ]
+    },
+    {
+      "id": "review-publication-pending-20261114-233748db5819-attendance-only-1",
+      "date": "2026-11-23",
+      "type": "records",
+      "title": "管理者確認済み戦績 5件を追加",
+      "description": "Epic ID・開催枠・順位表を再照合した出場確認のみ。賞金・予選突破・スキン獲得を未認定。",
+      "recordIds": [
+        "auto-s40-0c9d6498050a",
+        "auto-s39-54cf8298c7fb",
+        "auto-s40-ff164dbe7704",
+        "auto-s40-117bb4c0c239",
+        "auto-s40-52842cdaee77"
+      ]
+    },
+    {
+      "id": "tracker-s43-trios-20261122-oce-me-ten",
+      "date": "2026-11-23",
+      "type": "records",
+      "title": "2026/11/22 S43 OCE/ME Trios Cash Cup 10組の順位・参加成績",
+      "description": "提供された10枚のTracker画面と30個の本人UUIDを照合。OCE/MEの公式順位賞金は上位5組まで、対象10組は全員$0。シーズン・名鑑・承認記録を安全に更新。",
+      "recordIds": [
+        "manual-s43-trios-20261122-oce-r519",
+        "manual-s43-trios-20261122-oce-r549",
+        "manual-s43-trios-20261122-me-r51",
+        "manual-s43-trios-20261122-me-r59",
+        "manual-s43-trios-20261122-me-r109",
+        "manual-s43-trios-20261122-me-r110",
+        "manual-s43-trios-20261122-me-r111",
+        "manual-s43-trios-20261122-me-r119",
+        "manual-s43-trios-20261122-me-r134",
+        "manual-s43-trios-20261122-me-r162"
+      ]
+    },
+    {
       "id": "auto-sync-20261123064743",
       "date": "2026-11-23",
       "type": "records",
