@@ -468,31 +468,6 @@
       "reviewReason": "公式ルールで指定されたデュオRound1ではありません"
     },
     {
-      "id": "auto-s40-5f526ddc8869",
-      "date": "2026-04-29",
-      "region": "OCE",
-      "player": "まろやかれおちゃあいと",
-      "playerRaw": "りきとあいといきりょうた4人家族",
-      "event": "PlayStation Clix Cup (Battle Royale)",
-      "round": "Qualifier / 参加確認",
-      "rank": 1012,
-      "points": 154,
-      "kills": 29,
-      "vrs": 0,
-      "prize": null,
-      "kind": "参加確認",
-      "matches": 7,
-      "seasonId": "S40",
-      "chapter": 7,
-      "season": 2,
-      "tournamentId": "ch7s2-playstation-clix-cup-br",
-      "source": "https://www.fortnite.com/competitive/events/S40_PlayStationCupClix/?region=OCE&round=S40_PlayStationCupClix_Qualifier_OCE",
-      "verified": true,
-      "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
-      "reviewOnly": true,
-      "reviewReason": "確認専用大会は自動承認不可"
-    },
-    {
       "id": "auto-s30-87b629a36738",
       "date": "2024-06-04",
       "region": "NAC",
@@ -563,95 +538,6 @@
       "verified": true,
       "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。",
       "reviewReason": "順位表の取得が完了していません"
-    },
-    {
-      "id": "auto-s31-cda7a33c0539",
-      "date": "2024-09-21",
-      "region": "ME",
-      "player": "MAT4DOR. / NYa めろ神",
-      "playerRaw": "MAT4DOR. / NYa めろ神",
-      "event": "Reload Duos Cash Cup (Console)",
-      "round": "Event 3 · Round 1 / 参加確認",
-      "rank": 3411,
-      "points": 18,
-      "kills": 13,
-      "vrs": 1,
-      "prize": null,
-      "kind": "参加確認",
-      "matches": 3,
-      "seasonId": "S31",
-      "chapter": 5,
-      "season": 4,
-      "tournamentId": "ch5s4-reload-duos-cash-cup-console",
-      "source": "https://www.fortnite.com/competitive/events/S31_PlatformReloadDuosCashCupConsole/?region=ME&round=S31_PlatformReloadDuosCashCupConsole_Event3Round1_ME",
-      "verified": true,
-      "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
-      "reviewOnly": true,
-      "reviewReason": "確認専用大会は自動承認不可",
-      "players": [
-        "MAT4DOR.",
-        "NYa めろ神"
-      ],
-      "teamAccountIds": [
-        "17b382b1e9be42a1b8d5b961c04fa963",
-        "b38fc891925e47f4a76b9a7b0e5123d0"
-      ]
-    },
-    {
-      "id": "auto-s39-6e9e76cb651a",
-      "date": "2025-12-21",
-      "region": "OCE",
-      "player": "bigsky",
-      "playerRaw": "tzd Ackermanǃ",
-      "event": "NVIDIA GeForce RTX Cup",
-      "round": "単一開催枠 / 参加確認",
-      "rank": 3860,
-      "points": 64,
-      "kills": 5,
-      "vrs": 0,
-      "prize": null,
-      "kind": "参加確認",
-      "matches": 4,
-      "seasonId": "S39",
-      "chapter": 7,
-      "season": 1,
-      "tournamentId": "ch7s1-nvidia-geforce-rtx-cup",
-      "source": "https://www.fortnite.com/competitive/events/S39_NvidiaCup/?region=OCE&round=S39_NvidiaCup_OCE",
-      "verified": true,
-      "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
-      "reviewOnly": true,
-      "reviewReason": "全ページ連続の順位表・Epic ID付完全スナップショットが未確認",
-      "teamAccountIds": [
-        "0d77cc7e6bda47d48183890d973ec508"
-      ]
-    },
-    {
-      "id": "auto-s39-d0d933204440",
-      "date": "2025-12-21",
-      "region": "OCE",
-      "player": "falcon 6xω",
-      "playerRaw": "falcon 6xω",
-      "event": "NVIDIA GeForce RTX Cup",
-      "round": "単一開催枠 / 参加確認",
-      "rank": 3885,
-      "points": 63,
-      "kills": 7,
-      "vrs": 0,
-      "prize": null,
-      "kind": "参加確認",
-      "matches": 1,
-      "seasonId": "S39",
-      "chapter": 7,
-      "season": 1,
-      "tournamentId": "ch7s1-nvidia-geforce-rtx-cup",
-      "source": "https://www.fortnite.com/competitive/events/S39_NvidiaCup/?region=OCE&round=S39_NvidiaCup_OCE",
-      "verified": true,
-      "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
-      "reviewOnly": true,
-      "reviewReason": "全ページ連続の順位表・Epic ID付完全スナップショットが未確認",
-      "teamAccountIds": [
-        "91daec98be17480a9086a588526de349"
-      ]
     },
     {
       "id": "auto-s43-1f211248e60b",
@@ -958,72 +844,6 @@
       ]
     },
     {
-      "id": "auto-s40-8a39db39e8c9",
-      "date": "2026-05-20",
-      "region": "NAW",
-      "player": "たろう / SPINZ",
-      "playerRaw": "RC たろう / RC SPINZ",
-      "event": "FNCS Division 1",
-      "round": "単一開催枠 / 参加確認",
-      "rank": 137,
-      "points": 224,
-      "kills": 13,
-      "vrs": 1,
-      "prize": null,
-      "kind": "参加確認",
-      "matches": 11,
-      "seasonId": "S40",
-      "chapter": 7,
-      "season": 2,
-      "tournamentId": "ch7s2-fncs-division-1",
-      "source": "https://www.fortnite.com/competitive/events/S40_FNCSDivisionalCup_Division1/?region=NAW&round=S40_FNCSDivisionalCup_Division1_Week5Day2_NAW",
-      "verified": true,
-      "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
-      "reviewOnly": true,
-      "reviewReason": "確認専用大会は自動承認不可",
-      "players": [
-        "たろう",
-        "SPINZ"
-      ],
-      "teamAccountIds": [
-        "9c226d03957b4bd4a3826b50008a22d1",
-        "f4319d8dc8d74ab7b5a4fc0f2fc107b5"
-      ]
-    },
-    {
-      "id": "auto-s40-fa766a89203b",
-      "date": "2026-05-20",
-      "region": "NAW",
-      "player": "Raito / huggyfv",
-      "playerRaw": "Xx田中来斗xX / stx huggyfvǃ",
-      "event": "FNCS Division 1",
-      "round": "単一開催枠 / 参加確認",
-      "rank": 192,
-      "points": 165,
-      "kills": 13,
-      "vrs": 0,
-      "prize": null,
-      "kind": "参加確認",
-      "matches": 10,
-      "seasonId": "S40",
-      "chapter": 7,
-      "season": 2,
-      "tournamentId": "ch7s2-fncs-division-1",
-      "source": "https://www.fortnite.com/competitive/events/S40_FNCSDivisionalCup_Division1/?region=NAW&round=S40_FNCSDivisionalCup_Division1_Week5Day2_NAW",
-      "verified": true,
-      "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
-      "reviewOnly": true,
-      "reviewReason": "確認専用大会は自動承認不可",
-      "players": [
-        "Raito",
-        "huggyfv"
-      ],
-      "teamAccountIds": [
-        "83558d8a3873485da25c7f0787ec70c6",
-        "c640a465776d4417bd9ebedee4c68928"
-      ]
-    },
-    {
       "id": "auto-s30-09f5ed1a4ec5",
       "date": "2024-07-15",
       "region": "OCE",
@@ -1048,5 +868,5 @@
       "reviewReason": "順位表の取得が完了していません"
     }
   ],
-  "manualReviewedAt": "2026-11-23T08:32:46.339Z"
+  "manualReviewedAt": "2026-11-23T15:11:15.806Z"
 }
