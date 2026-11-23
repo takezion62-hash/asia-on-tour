@@ -33,6 +33,11 @@ const key=t=>t.region+':'+t.rank;
 const recordId=t=>'manual-s43-trios-20261122-'+t.region.toLowerCase()+'-r'+t.rank;
 const officialUrl=t=>'https://www.fortnite.com/competitive/events/'+EVENT+'/?region='+t.region+'&round='+EVENT+'_Event3_'+t.region;
 const normId=s=>typeof s==='string'?s.replace(/-/g,'').toLowerCase():'';
+// 2026-11-22 ME #111 account is already published in a prior season under
+// its canonical name. Keep the screenshot's historical name as an alias;
+// never create a second player for the same Tracker/Epic profile UUID.
+const canonicalName=m=>m.name==='るた'&&normId(m.uuid)==='56db84f033784ee9b303da349abd3d6d'
+ ? 'Crs くるただにょりーǃǃ':m.name;
 function verifyProof(doc,rules){
  fail(doc?.version===1&&doc.checkedAt==='2026-11-23'&&doc.date===DATE&&
   doc.eventId===EVENT&&doc.tournamentId===TOURNAMENT&&doc.ruleUrl===RULE&&
@@ -81,7 +86,7 @@ function entryFor(t,when){
   evidence:'Tracker screenshot #'+t.screenshot+'; three original Epic UUID profile URLs; exact Event3 rank/points/matches/eliminations/VR; official OCE/ME top5 cash bracket (rank '+t.rank+' = $0 per player).'};
 }
 function rowFor(t){
- const names=t.members.map(m=>m.name),raw=t.members.map(m=>m.raw);
+ const names=t.members.map(canonicalName),raw=t.members.map(m=>m.raw);
  return {id:recordId(t),date:DATE,region:t.region,player:names.join(' / '),
   playerRaw:raw.join(' / '),event:'Trios Cash Cup Battle Royale',
   round:'Event 3 / 賞金決勝',rank:t.rank,points:t.points,kills:t.kills,
@@ -125,29 +130,33 @@ function publish({dryRun=false}={}){
   fail(!oldIds.has(row.id)&&same.length===0&&!priorApproval.has(row.id),
     'colliding old result: '+row.id);
   for(const m of item.members){
-   fail(!aliasOwner.has(m.name)||aliasOwner.get(m.name)===m.name,
-    'player canonical name already owned by another alias: '+m.name);
-   fail(!aliasOwner.has(m.raw)||aliasOwner.get(m.raw)===m.name,
+   const canonical=canonicalName(m);
+   fail(!aliasOwner.has(canonical)||aliasOwner.get(canonical)===canonical,
+    'player canonical name already owned by another alias: '+canonical);
+   fail(!aliasOwner.has(m.raw)||aliasOwner.get(m.raw)===canonical,
     'Tracker identity belongs to a different player: '+m.raw);
-   if(!known.has(m.name)){
+   fail(!aliasOwner.has(m.name)||aliasOwner.get(m.name)===canonical,
+    'Owner-provided historical alias belongs to another player: '+m.name);
+   if(!known.has(canonical)){
     db.players.candidates.push({
-     name:m.name,initials:m.name.slice(0,2).toUpperCase(),
+     name:canonical,initials:canonical.slice(0,2).toUpperCase(),
      accent:['cyan','pink','violet'][addedPlayers.length%3],
      desc:DATE+' '+item.region+' Trios Cash Cup Battle Royale Event3、'+item.rank+
       '位・'+item.points+'pt・'+item.kills+'チームキル・'+item.vrs+
       'VR、個人現金賞金$0。Tracker表示名「'+m.raw+
       '」。本人Epic UUID付きプロフィールと提供画像で照合済み。'
     });
-    known.add(m.name);addedPlayers.push(m.name);
+    known.add(canonical);addedPlayers.push(canonical);
    }
    // Use the user-confirmed original display name as a historical alias.
    // Do not claim it is a distinct competitor from the confirmed canonical name.
-   if(m.raw!==m.name){
-    if(!Array.isArray(db.players.confirmedAliases[m.name]))
-     db.players.confirmedAliases[m.name]=[];
-    if(!db.players.confirmedAliases[m.name].includes(m.raw))
-     db.players.confirmedAliases[m.name].push(m.raw);
-    aliasOwner.set(m.raw,m.name);
+   for(const alias of new Set([m.raw,m.name])){
+    if(alias===canonical)continue;
+    if(!Array.isArray(db.players.confirmedAliases[canonical]))
+     db.players.confirmedAliases[canonical]=[];
+    if(!db.players.confirmedAliases[canonical].includes(alias))
+     db.players.confirmedAliases[canonical].push(alias);
+    aliasOwner.set(alias,canonical);
    }
   }
   db.results.push(row);db.ledger.entries.push(entry);oldIds.add(row.id);
