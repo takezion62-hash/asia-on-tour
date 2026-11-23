@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-11-22T16:17:37.660Z",
+  "checkedAt": "2026-11-23T00:55:35.478Z",
   "windows": {
     "epicgames_S43_PerformanceEvaluationTrios_EU/S43_PerformanceEvaluation_Event1Round1_EU": {
       "nextPage": 7,
@@ -20083,6 +20083,288 @@
       "lastSeenRank": 806,
       "lastSuccessAt": "2026-11-22T16:17:37.648Z",
       "totalPages": 9
+    },
+    "epicgames_S43_TriosCashCup_BR/S43_TriosCashCup_Event3_BR": {
+      "nextPage": 10,
+      "complete": false,
+      "proposals": [],
+      "pages": 10,
+      "lastAttemptAt": "2026-11-23T00:54:56.647Z",
+      "emptyAttempts": 0,
+      "rankingOrderValid": true,
+      "lastSeenRank": 1000,
+      "lastSuccessAt": "2026-11-23T00:54:57.894Z",
+      "totalPages": 21
+    },
+    "epicgames_S43_TriosCashCup_EU/S43_TriosCashCup_Event3_EU": {
+      "nextPage": 10,
+      "complete": false,
+      "proposals": [],
+      "pages": 10,
+      "lastAttemptAt": "2026-11-23T00:55:11.617Z",
+      "emptyAttempts": 0,
+      "rankingOrderValid": true,
+      "lastSeenRank": 1000,
+      "lastSuccessAt": "2026-11-23T00:55:12.829Z",
+      "totalPages": 87
+    },
+    "epicgames_S43_TriosCashCup_ME/S43_TriosCashCup_Event3_ME": {
+      "nextPage": 10,
+      "complete": true,
+      "proposals": [
+        {
+          "id": "auto-s43-16b41e49fef3",
+          "date": "2026-11-22",
+          "region": "ME",
+          "player": "りありー / おーばーとしょうたwwwww / Shiroka",
+          "playerRaw": "spe りありー / spe ウォルピスカーターv2 / IGM Shiroka 凛",
+          "event": "Trios Cash Cup Battle Royale",
+          "round": "Event 3 / 参加確認",
+          "rank": 251,
+          "points": 262,
+          "kills": 39,
+          "vrs": 0,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 11,
+          "seasonId": "S43",
+          "chapter": 7,
+          "season": 5,
+          "tournamentId": "ch7s5-trios-cash-cup",
+          "source": "https://www.fortnite.com/competitive/events/S43_TriosCashCup/?region=ME&round=S43_TriosCashCup_Event3_ME",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "りありー",
+            "おーばーとしょうたwwwww",
+            "Shiroka"
+          ],
+          "teamAccountIds": [
+            "2daef93ef0d443769f65c315f7244149",
+            "8a46c44a62a54600bb94263068b9a0ea",
+            "a6578a7fcd9947268771b4ee64d53789"
+          ]
+        },
+        {
+          "id": "auto-s43-5d05ceb02317",
+          "date": "2026-11-22",
+          "region": "ME",
+          "player": "ももち / Hakkun / candyz1a",
+          "playerRaw": "Ascend JerenX / TGR はっくん / blue p candyz1a",
+          "event": "Trios Cash Cup Battle Royale",
+          "round": "Event 3 / 参加確認",
+          "rank": 366,
+          "points": 218,
+          "kills": 23,
+          "vrs": 0,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 10,
+          "seasonId": "S43",
+          "chapter": 7,
+          "season": 5,
+          "tournamentId": "ch7s5-trios-cash-cup",
+          "source": "https://www.fortnite.com/competitive/events/S43_TriosCashCup/?region=ME&round=S43_TriosCashCup_Event3_ME",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "ももち",
+            "Hakkun",
+            "candyz1a"
+          ],
+          "teamAccountIds": [
+            "619038af055c4f49a2418eb04439de8e",
+            "63826005a9c24444b113589813cde1d8",
+            "f5c1ab9cc1ca429eaa3c167c90da2121"
+          ]
+        },
+        {
+          "id": "auto-s43-b90d665a6df0",
+          "date": "2026-11-22",
+          "region": "ME",
+          "player": "ぷりなの / 飛べないトリッピー / kuro",
+          "playerRaw": "dyd シンプル編集のぷりなの / Moet 飛べないとりっぴー / dyd kuro",
+          "event": "Trios Cash Cup Battle Royale",
+          "round": "Event 3 / 参加確認",
+          "rank": 488,
+          "points": 167,
+          "kills": 29,
+          "vrs": 0,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 9,
+          "seasonId": "S43",
+          "chapter": 7,
+          "season": 5,
+          "tournamentId": "ch7s5-trios-cash-cup",
+          "source": "https://www.fortnite.com/competitive/events/S43_TriosCashCup/?region=ME&round=S43_TriosCashCup_Event3_ME",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "ぷりなの",
+            "飛べないトリッピー",
+            "kuro"
+          ],
+          "teamAccountIds": [
+            "0b7c8bade740430b83e63edf333e64cb",
+            "5f7060dd68df4ee39da4156bef660968",
+            "eb549746e37c4f61ab7baf60c7a9ba66"
+          ]
+        },
+        {
+          "id": "auto-s43-7f36e39cbd62",
+          "date": "2026-11-22",
+          "region": "ME",
+          "player": "Karf / huggyfv / chacha",
+          "playerRaw": "faction karfǃ / stx huggyfvǃ / twitter chachafn",
+          "event": "Trios Cash Cup Battle Royale",
+          "round": "Event 3 / 参加確認",
+          "rank": 557,
+          "points": 122,
+          "kills": 40,
+          "vrs": 0,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 8,
+          "seasonId": "S43",
+          "chapter": 7,
+          "season": 5,
+          "tournamentId": "ch7s5-trios-cash-cup",
+          "source": "https://www.fortnite.com/competitive/events/S43_TriosCashCup/?region=ME&round=S43_TriosCashCup_Event3_ME",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "Karf",
+            "huggyfv",
+            "chacha"
+          ],
+          "teamAccountIds": [
+            "09b8e741496a44288ed910b84ae3a935",
+            "c640a465776d4417bd9ebedee4c68928",
+            "ecce3c61edab487aa24326d176f84c25"
+          ]
+        },
+        {
+          "id": "auto-s43-4039acd6045e",
+          "date": "2026-11-22",
+          "region": "ME",
+          "player": "こがね / らる / まろやかれおちゃあいと",
+          "playerRaw": "Zst kogane / らるニキ LIZAǃǃӜ / りきとあいといきりょうた4人家族",
+          "event": "Trios Cash Cup Battle Royale",
+          "round": "Event 3 / 参加確認",
+          "rank": 714,
+          "points": 58,
+          "kills": 16,
+          "vrs": 0,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 4,
+          "seasonId": "S43",
+          "chapter": 7,
+          "season": 5,
+          "tournamentId": "ch7s5-trios-cash-cup",
+          "source": "https://www.fortnite.com/competitive/events/S43_TriosCashCup/?region=ME&round=S43_TriosCashCup_Event3_ME",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "こがね",
+            "らる",
+            "まろやかれおちゃあいと"
+          ],
+          "teamAccountIds": [
+            "0247b9620f5e49709904d2d659995926",
+            "3e0dee00fce0412db865d2844e1e5317",
+            "71df52357f7340aa9cd9fbb1945f97c8"
+          ]
+        },
+        {
+          "id": "auto-s43-078ab02237c4",
+          "date": "2026-11-22",
+          "region": "ME",
+          "player": "しんたうおw / いずみうおw / てんせいうおw",
+          "playerRaw": "しんたうおｗ / AbyssでBBSなレグくん / てんせいうおｗ",
+          "event": "Trios Cash Cup Battle Royale",
+          "round": "Event 3 / 参加確認",
+          "rank": 756,
+          "points": 45,
+          "kills": 9,
+          "vrs": 0,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 4,
+          "seasonId": "S43",
+          "chapter": 7,
+          "season": 5,
+          "tournamentId": "ch7s5-trios-cash-cup",
+          "source": "https://www.fortnite.com/competitive/events/S43_TriosCashCup/?region=ME&round=S43_TriosCashCup_Event3_ME",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "しんたうおw",
+            "いずみうおw",
+            "てんせいうおw"
+          ],
+          "teamAccountIds": [
+            "170579f718ae4c40ad388742e5294cd1",
+            "6095cbeb76b0420c9f06f1c37277da8c",
+            "67705cef26e64defb29983e694cd246b"
+          ]
+        },
+        {
+          "id": "auto-s43-089836970eba",
+          "date": "2026-11-22",
+          "region": "ME",
+          "player": "あおねこ / meath / なおきん",
+          "playerRaw": "Celis あおねこ416 / zst boltzZzero0 / hst 999",
+          "event": "Trios Cash Cup Battle Royale",
+          "round": "Event 3 / 参加確認",
+          "rank": 787,
+          "points": 37,
+          "kills": 10,
+          "vrs": 0,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 3,
+          "seasonId": "S43",
+          "chapter": 7,
+          "season": 5,
+          "tournamentId": "ch7s5-trios-cash-cup",
+          "source": "https://www.fortnite.com/competitive/events/S43_TriosCashCup/?region=ME&round=S43_TriosCashCup_Event3_ME",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "あおねこ",
+            "meath",
+            "なおきん"
+          ],
+          "teamAccountIds": [
+            "32fab8de7cd041a1aa87fabf285e40f0",
+            "5d58d012509f401cb2c3cfe872ed1d17",
+            "d3519730e79e4727af4edf9ba4422463"
+          ]
+        }
+      ],
+      "pages": 10,
+      "lastAttemptAt": "2026-11-23T00:55:34.509Z",
+      "emptyAttempts": 0,
+      "rankingOrderValid": true,
+      "lastSeenRank": 929,
+      "lastSuccessAt": "2026-11-23T00:55:35.469Z",
+      "totalPages": 10
     }
   }
 }

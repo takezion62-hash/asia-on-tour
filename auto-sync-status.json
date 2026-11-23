@@ -1,28 +1,28 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-22T16:17:37.660Z",
+  "checkedAt": "2026-11-23T00:55:35.478Z",
   "mode": "review",
   "scope": "recent",
   "dateMode": null,
-  "selectedWindows": 1,
+  "selectedWindows": 3,
   "fromDate": null,
   "toDate": null,
   "provider": "osirion",
   "linkedPlayers": 697,
-  "trackedWindows": 121,
+  "trackedWindows": 124,
   "found": 0,
   "skipped": 0,
-  "imported": 0,
-  "scannedPages": 9,
-  "completedWindows": 121,
+  "imported": 7,
+  "scannedPages": 30,
+  "completedWindows": 122,
   "identityConflicts": 3,
   "alreadyRegistered": 243,
-  "autoApprovedTotal": 3349,
+  "autoApprovedTotal": 3363,
   "invalidCachedCandidates": 0,
   "manualReviewCandidates": 0,
   "autoApprovedCosmeticThisRun": 0,
-  "autoApprovedCashThisRun": 0,
+  "autoApprovedCashThisRun": 7,
   "autoApprovedPerformanceThisRun": 0,
   "autoApprovedUnrealThisRun": 0,
   "timeLimitReached": false,
@@ -30,7 +30,7 @@
   "transientFailures": 0,
   "malformedFailures": 0,
   "skippedLeaderboards": [],
-  "reviewOnlyWindows": 109,
+  "reviewOnlyWindows": 112,
   "reviewOnlyCandidates": 0,
   "unmappedEvents": 3,
   "unmappedEventIds": [
@@ -38,29 +38,29 @@
     "S43_PlayStationCup",
     "S43_PlayStationCup_ZB"
   ],
-  "message": "最新版と安全統合：新規掲載0件、重複スキップ0件、要確認の競合0件、確認待ち0件。既存の戦績・賞金は保持。",
+  "message": "最新版と安全統合：新規掲載7件、重複スキップ0件、要確認の競合0件、確認待ち0件。既存の戦績・賞金は保持。",
   "concurrentMerge": {
-    "appended": 0,
+    "appended": 7,
     "alreadyPublished": 0,
     "reviewConflicts": 0,
     "keptPending": 0,
-    "reconciledAt": "2026-11-22T16:17:43.929Z"
+    "reconciledAt": "2026-11-23T00:55:41.200Z"
   },
   "coverage": {
-    "total": 121,
-    "completed": 121,
+    "total": 124,
+    "completed": 122,
     "notStarted": 0,
-    "partial": 0,
+    "partial": 2,
     "retryWaiting": 0,
     "retryDue": 0,
-    "remaining": 0,
+    "remaining": 2,
     "retryCount": 0,
-    "completionPercent": 100,
+    "completionPercent": 98.4,
     "byRegion": {
       "EU": {
-        "total": 24,
+        "total": 25,
         "completed": 24,
-        "pending": 0
+        "pending": 1
       },
       "NAC": {
         "total": 24,
@@ -73,14 +73,14 @@
         "pending": 0
       },
       "ME": {
-        "total": 18,
-        "completed": 18,
+        "total": 19,
+        "completed": 19,
         "pending": 0
       },
       "BR": {
-        "total": 18,
+        "total": 19,
         "completed": 18,
-        "pending": 0
+        "pending": 1
       },
       "NAW": {
         "total": 18,
@@ -90,13 +90,36 @@
     },
     "byYear": {
       "2026": {
-        "total": 121,
-        "completed": 121,
-        "pending": 0
+        "total": 124,
+        "completed": 122,
+        "pending": 2
       }
     },
     "outsideScopeCheckpoints": 36,
-    "samples": []
+    "samples": [
+      {
+        "window": "epicgames_S43_TriosCashCup_EU/S43_TriosCashCup_Event3_EU",
+        "date": "2026-11-22",
+        "region": "EU",
+        "series": "cash-cup",
+        "status": "partial",
+        "nextPage": 10,
+        "totalPages": 87,
+        "retryAfter": null,
+        "errorCode": null
+      },
+      {
+        "window": "epicgames_S43_TriosCashCup_BR/S43_TriosCashCup_Event3_BR",
+        "date": "2026-11-23",
+        "region": "BR",
+        "series": "cash-cup",
+        "status": "partial",
+        "nextPage": 10,
+        "totalPages": 21,
+        "retryAfter": null,
+        "errorCode": null
+      }
+    ]
   },
   "manuallyPublished": 320,
   "lastReviewedBatchAt": "2026-11-16T07:18:28.727Z",
@@ -112,7 +135,7 @@
   },
   "manuallyResolvedDuplicates": 47,
   "autoApprovedParticipationThisRun": 0,
-  "processedWindows": 1,
+  "processedWindows": 3,
   "providerRateLimitPaused": false,
   "providerRateLimitRetryAfter": null,
   "providerTraffic": {
@@ -125,8 +148,8 @@
     "pageBudget": 30,
     "minRequestIntervalMs": 1200,
     "reason": "steady-state",
-    "requests": 15,
-    "waitedMs": 6159,
+    "requests": 36,
+    "waitedMs": 8429,
     "intervalMs": 1200
   }
 }
