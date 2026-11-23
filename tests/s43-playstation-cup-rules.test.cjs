@@ -98,7 +98,7 @@ test('top80 qualifier advances, rank81 is attendance only and no cash or spray-a
    assert.match(result.record.note,/スプレー/);
    assert.equal(result.record.reviewOnly,undefined);
   }
-  const result=evaluate([outside],[w],{[w.key]:cp(outside)},db);
+  const result=evaluate([outside],[w],{[w.key]:cp(outside)},db,now(w));
   assert.deepEqual(result.participationIds,[outside.id]);
   assert.equal(applyProposals(db,result.approved,new Date(now(w)).toISOString(),
    {verifiedParticipationIds:new Set(result.participationIds)}),1);
