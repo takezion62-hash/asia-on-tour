@@ -31,6 +31,17 @@ test('cash is from official top-five rank brackets, never from VR',()=>{
  assert.equal(proof.teams.find(t=>t.region==='ME'&&t.rank===51).vrs,1);
  assert.equal(proof.teams.find(t=>t.region==='OCE'&&t.rank===549).kills,23);
 });
+test('existing ME #111 Epic UUID resolves to the canonical Crs player, preserving historical raw name',()=>{
+ const t=proof.teams.find(x=>x.region==='ME'&&x.rank===111);
+ const row=rowFor(t);
+ assert.ok(t);
+ assert.equal(t.members[2].name,'るた');
+ assert.equal(t.members[2].raw,'Crs るた');
+ assert.equal(t.members[2].uuid,'56db84f0-3378-4ee9-b303-da349abd3d6d');
+ assert.equal(row.players[2],'Crs くるただにょりーǃǃ');
+ assert.ok(row.playerRaw.endsWith('Crs るた'));
+ assert.equal(row.profiles[2].name,'Crs くるただにょりーǃǃ');
+});
 test('refuses altered tournament, points, team, roster link or payout policy',()=>{
  for(const change of [
   doc=>{doc.teams[0].points++},
