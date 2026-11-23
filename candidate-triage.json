@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "sourceCheckedAt": "2026-11-23T14:41:12.365Z",
-  "total": 37,
+  "sourceCheckedAt": "2026-11-23T15:10:20.546Z",
+  "total": 43,
   "alreadyResolved": 0,
   "byYear": [
     {
@@ -14,7 +14,7 @@
     },
     {
       "name": "2026",
-      "count": 12
+      "count": 18
     }
   ],
   "byRegion": [
@@ -36,7 +36,7 @@
     },
     {
       "name": "OCE",
-      "count": 5
+      "count": 11
     }
   ],
   "byTournament": [
@@ -55,6 +55,10 @@
     {
       "name": "PlayStation Clix Cup (Battle Royale) / OCE / 2026",
       "count": 1
+    },
+    {
+      "name": "PlayStation Cup Zero Build / OCE / 2026",
+      "count": 6
     },
     {
       "name": "Reload Duos Cash Cup (Console) / ME / 2024",
@@ -92,11 +96,11 @@
     },
     {
       "name": "partial-scan",
-      "count": 23
+      "count": 28
     },
     {
       "name": "rules-review",
-      "count": 7
+      "count": 8
     }
   ],
   "queue": [
@@ -561,6 +565,39 @@
         "possibleExistingId": null
       },
       "rewardState": "cash-unconfirmed"
+    },
+    {
+      "id": "auto-s43-e3fa35592fe1",
+      "origin": "recent",
+      "date": "2026-11-23",
+      "year": "2026",
+      "region": "OCE",
+      "tournamentId": "ch7s5-squads-victory-cup",
+      "event": "Squads Victory Cup Battle Royale",
+      "round": "Event 2 · Round 1 / 予選",
+      "player": "こがね / まならんど / らる / まろやかれおちゃあいと",
+      "kind": "予選",
+      "rank": 455,
+      "points": 181,
+      "kills": 39,
+      "vrs": 1,
+      "prize": 0,
+      "source": "https://www.fortnite.com/competitive/events/S43_SquadsVictoryCup/?region=OCE&round=S43_SquadsVictoryCup_Event2_Round1_OCE",
+      "status": "rules-review",
+      "action": "公式規則・賞金・突破・スキン条件を個別確認",
+      "reason": "スキン報酬判定の元データではありません",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": true,
+        "observedPartial": false,
+        "seenPages": 12,
+        "totalPages": 12,
+        "sourceKey": "epicgames_S43_SquadsVictoryCup_OCE/S43_SquadsVictoryCup_Event2_Round1_OCE",
+        "possibleExistingId": null
+      },
+      "rewardState": "source-amount-present-not-verified-by-triage"
     },
     {
       "id": "auto-s30-491857dfda8d",
@@ -1281,7 +1318,7 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 1,
+        "seenPages": 11,
         "totalPages": 20,
         "sourceKey": "epicgames_S43_TriosCashCup_NAW/S43_TriosCashCup_Event3_NAW",
         "possibleExistingId": null
@@ -1289,37 +1326,202 @@
       "rewardState": "cash-unconfirmed"
     },
     {
-      "id": "auto-s43-e3fa35592fe1",
+      "id": "auto-s43-0dabc3c04e3e",
       "origin": "recent",
       "date": "2026-11-23",
       "year": "2026",
       "region": "OCE",
-      "tournamentId": "ch7s5-squads-victory-cup",
-      "event": "Squads Victory Cup Battle Royale",
-      "round": "Event 2 · Round 1 / 予選",
-      "player": "こがね / まならんど / らる / まろやかれおちゃあいと",
-      "kind": "予選",
-      "rank": 455,
-      "points": 181,
-      "kills": 39,
-      "vrs": 1,
-      "prize": 0,
-      "source": "https://www.fortnite.com/competitive/events/S43_SquadsVictoryCup/?region=OCE&round=S43_SquadsVictoryCup_Event2_Round1_OCE",
+      "tournamentId": "ch7s5-playstation-cup-zero-build",
+      "event": "PlayStation Cup Zero Build",
+      "round": "Qualifier / 参加確認",
+      "player": "ろみぃ",
+      "kind": "参加確認",
+      "rank": 44,
+      "points": 365,
+      "kills": 27,
+      "vrs": 2,
+      "prize": null,
+      "source": "https://www.fortnite.com/competitive/events/S43_PlayStationCup_ZB/?region=OCE&round=S43_PlayStationCup_ZB_Qualifier_OCE",
       "status": "partial-scan",
       "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "スキン報酬判定の元データではありません",
+      "reason": "完了した保存済み順位表・本人Epic IDの連続性が未確認",
       "evidence": {
         "officialSource": true,
         "exactCheckpoint": true,
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 10,
-        "totalPages": 12,
-        "sourceKey": "epicgames_S43_SquadsVictoryCup_OCE/S43_SquadsVictoryCup_Event2_Round1_OCE",
+        "seenPages": 1,
+        "totalPages": 48,
+        "sourceKey": "epicgames_S43_PlayStationCup_ZB_OCE/S43_PlayStationCup_ZB_Qualifier_OCE",
         "possibleExistingId": null
       },
-      "rewardState": "source-amount-present-not-verified-by-triage"
+      "rewardState": "cash-unconfirmed"
+    },
+    {
+      "id": "auto-s43-751377e5e500",
+      "origin": "recent",
+      "date": "2026-11-23",
+      "year": "2026",
+      "region": "OCE",
+      "tournamentId": "ch7s5-playstation-cup-zero-build",
+      "event": "PlayStation Cup Zero Build",
+      "round": "Qualifier / 参加確認",
+      "player": "ぬぬぬぬぬぬぬぬwww覚醒WWW",
+      "kind": "参加確認",
+      "rank": 46,
+      "points": 365,
+      "kills": 37,
+      "vrs": 1,
+      "prize": null,
+      "source": "https://www.fortnite.com/competitive/events/S43_PlayStationCup_ZB/?region=OCE&round=S43_PlayStationCup_ZB_Qualifier_OCE",
+      "status": "partial-scan",
+      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
+      "reason": "完了した保存済み順位表・本人Epic IDの連続性が未確認",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": false,
+        "observedPartial": true,
+        "seenPages": 1,
+        "totalPages": 48,
+        "sourceKey": "epicgames_S43_PlayStationCup_ZB_OCE/S43_PlayStationCup_ZB_Qualifier_OCE",
+        "possibleExistingId": null
+      },
+      "rewardState": "cash-unconfirmed"
+    },
+    {
+      "id": "auto-s43-bcfd8809c08f",
+      "origin": "recent",
+      "date": "2026-11-23",
+      "year": "2026",
+      "region": "OCE",
+      "tournamentId": "ch7s5-playstation-cup-zero-build",
+      "event": "PlayStation Cup Zero Build",
+      "round": "Qualifier / 参加確認",
+      "player": "とまと",
+      "kind": "参加確認",
+      "rank": 15,
+      "points": 390,
+      "kills": 14,
+      "vrs": 0,
+      "prize": null,
+      "source": "https://www.fortnite.com/competitive/events/S43_PlayStationCup_ZB/?region=OCE&round=S43_PlayStationCup_ZB_Qualifier_OCE",
+      "status": "partial-scan",
+      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
+      "reason": "完了した保存済み順位表・本人Epic IDの連続性が未確認",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": false,
+        "observedPartial": true,
+        "seenPages": 1,
+        "totalPages": 48,
+        "sourceKey": "epicgames_S43_PlayStationCup_ZB_OCE/S43_PlayStationCup_ZB_Qualifier_OCE",
+        "possibleExistingId": null
+      },
+      "rewardState": "cash-unconfirmed"
+    },
+    {
+      "id": "auto-s43-c68ba79f4e22",
+      "origin": "recent",
+      "date": "2026-11-23",
+      "year": "2026",
+      "region": "OCE",
+      "tournamentId": "ch7s5-playstation-cup-zero-build",
+      "event": "PlayStation Cup Zero Build",
+      "round": "Qualifier / 参加確認",
+      "player": "Reo",
+      "kind": "参加確認",
+      "rank": 12,
+      "points": 397,
+      "kills": 26,
+      "vrs": 1,
+      "prize": null,
+      "source": "https://www.fortnite.com/competitive/events/S43_PlayStationCup_ZB/?region=OCE&round=S43_PlayStationCup_ZB_Qualifier_OCE",
+      "status": "partial-scan",
+      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
+      "reason": "完了した保存済み順位表・本人Epic IDの連続性が未確認",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": false,
+        "observedPartial": true,
+        "seenPages": 1,
+        "totalPages": 48,
+        "sourceKey": "epicgames_S43_PlayStationCup_ZB_OCE/S43_PlayStationCup_ZB_Qualifier_OCE",
+        "possibleExistingId": null
+      },
+      "rewardState": "cash-unconfirmed"
+    },
+    {
+      "id": "auto-s43-f73a7e516323",
+      "origin": "recent",
+      "date": "2026-11-23",
+      "year": "2026",
+      "region": "OCE",
+      "tournamentId": "ch7s5-playstation-cup-zero-build",
+      "event": "PlayStation Cup Zero Build",
+      "round": "Qualifier / 参加確認",
+      "player": "bigsky",
+      "kind": "参加確認",
+      "rank": 54,
+      "points": 361,
+      "kills": 32,
+      "vrs": 1,
+      "prize": null,
+      "source": "https://www.fortnite.com/competitive/events/S43_PlayStationCup_ZB/?region=OCE&round=S43_PlayStationCup_ZB_Qualifier_OCE",
+      "status": "partial-scan",
+      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
+      "reason": "完了した保存済み順位表・本人Epic IDの連続性が未確認",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": false,
+        "observedPartial": true,
+        "seenPages": 1,
+        "totalPages": 48,
+        "sourceKey": "epicgames_S43_PlayStationCup_ZB_OCE/S43_PlayStationCup_ZB_Qualifier_OCE",
+        "possibleExistingId": null
+      },
+      "rewardState": "cash-unconfirmed"
+    },
+    {
+      "id": "auto-s43-fbe0d0f4763e",
+      "origin": "recent",
+      "date": "2026-11-23",
+      "year": "2026",
+      "region": "OCE",
+      "tournamentId": "ch7s5-playstation-cup-zero-build",
+      "event": "PlayStation Cup Zero Build",
+      "round": "Qualifier / 参加確認",
+      "player": "MushyGoose6356",
+      "kind": "参加確認",
+      "rank": 71,
+      "points": 355,
+      "kills": 7,
+      "vrs": 0,
+      "prize": null,
+      "source": "https://www.fortnite.com/competitive/events/S43_PlayStationCup_ZB/?region=OCE&round=S43_PlayStationCup_ZB_Qualifier_OCE",
+      "status": "partial-scan",
+      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
+      "reason": "完了した保存済み順位表・本人Epic IDの連続性が未確認",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": false,
+        "observedPartial": true,
+        "seenPages": 1,
+        "totalPages": 48,
+        "sourceKey": "epicgames_S43_PlayStationCup_ZB_OCE/S43_PlayStationCup_ZB_Qualifier_OCE",
+        "possibleExistingId": null
+      },
+      "rewardState": "cash-unconfirmed"
     }
   ],
   "policy": "read-only queue; awards require existing official rule-backed validators and identity/collision proof"
