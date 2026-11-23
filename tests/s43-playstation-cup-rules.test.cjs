@@ -33,6 +33,21 @@ function database(){return {tournaments,players:{candidates:[{name:'A'}]},
 const cp=r=>({complete:true,rankingOrderValid:true,epicIdsRetained:true,
  proposals:[r],lastSeenRank:100,nextPage:2,totalPages:500});
 const now=w=>w.end+6*3600000;
+test('Osirion review retains original Epic account UUID for both PlayStation modes',()=>{
+ const {prepare}=require('../scripts/auto-sync-core.cjs');
+ for(const eventId of [BR,ZB]){
+  const w=win(eventId),conf={version:1,accounts:[{epicAccountId:UUID,player:'A',confirmed:true}],
+   windows:[{eventId,windowId:w.windowId,dateJst:w.dateJst,region:w.region,kind:w.kind,
+     round:w.round,tournamentId:w.tournamentId,seasonId:'S43'}]};
+  const result=prepare({entries:[{eventId,windowId:w.windowId,teamAccountIds:[UUID],
+   rank:80,points:100,kills:4,vrs:0,matches:6,rawName:'A'}]},conf,{
+     tournaments,players:{candidates:[{name:'A'}]},results:[]});
+  assert.equal(result.proposals.length,1,eventId);
+  assert.deepEqual(result.proposals[0].teamAccountIds,[UUID]);
+  assert.equal(result.proposals[0].reviewOnly,true);
+  assert.equal(result.proposals[0].prize,null);
+ }
+});
 test('official S43 BR and Zero Build are separate PS4/PS5 solo contests',()=>{
  assert.deepEqual(validateRegistry(registry,tournaments),[]);
  assert.equal(Object.keys(RULES).length,2);
