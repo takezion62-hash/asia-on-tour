@@ -1,0 +1,221 @@
+name: One-time manually evidenced pending result resolution
+on:
+  push:
+    branches:
+      - data/manual-reviewed-remaining26-20261123
+    paths:
+      - .github/workflows/aot-reviewed-original-26-once.yml
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    if: github.ref == 'refs/heads/data/manual-reviewed-remaining26-20261123'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: true
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '24'
+      - name: Validate original Epic checkpoints and record only earned/confirmed results
+        shell: bash
+        run: |
+          set -euo pipefail
+          node scripts/source-results-store.cjs verify
+          node <<'NODE'
+          'use strict';
+          const fs=require('node:fs'),path=require('node:path');
+          const root=process.cwd(),load=f=>JSON.parse(fs.readFileSync(path.join(root,f),'utf8'));
+          const save=(f,j)=>fs.writeFileSync(path.join(root,f),JSON.stringify(j,null,2)+'\n');
+          const {readResults,publishResults}=require('./scripts/source-results-store.cjs');
+          const {verifiedPartialPage,sameScannedCandidate}=require('./scripts/verified-partial-page.cjs');
+          const {collision}=require('./scripts/manual-approval-core.cjs');
+          const evidence=load('.aot-manual-scan-26-20261123.json');
+          const review=load('history-sync-review.json');
+          const scan=load('history-sync-scan.json');
+          const status=load('history-sync-status.json');
+          const players=load('players.json');
+          const tournaments=load('tournaments.json');
+          const ledger=load('approval-history.json');
+          const reviewed=load('history-sync-reviewed.json');
+          const updates=load('updates.json');
+          const current=readResults(root).rows;
+          if(evidence.version!==1||evidence.entries.length!==26||
+             review.proposals.length!==26||current.length!==9216)
+             throw Error('Preflight: source/candidate counts have changed; refuse stale import');
+          const known=new Set(players.candidates.map(x=>x.name));
+          const catalogs=new Map(tournaments.catalog.map(x=>[x.id,x]));
+          const originals=new Map(review.proposals.map(x=>[x.id,x]));
+          const existingIds=new Set(current.map(x=>x.id));
+          const oldApprovalIds=new Set([...(ledger.entries||[]),...(reviewed.entries||[])].map(x=>x.id));
+          const pinnedIds=new Set();
+          const calendars=new Map();
+          const newRecords=[],evidenceLog=[];
+          const dateCheck=(a,b)=>a.slice(0,10)===b;
+          for(const pin of evidence.entries){
+            if(pinnedIds.has(pin.id)||oldApprovalIds.has(pin.id)||existingIds.has(pin.id))
+              throw Error('Duplicate candidate or approval ID: '+pin.id);
+            pinnedIds.add(pin.id);
+            const row=originals.get(pin.id);
+            if(!row||row.verified!==true||!/^auto-s(?:30|35|37)-[a-f0-9]{12}$/.test(row.id)||
+               !['id','date','region','player','rank','points','kills','vrs','matches','source','tournamentId','kind','seasonId'].every(k=>row[k]===pin[k])||
+               JSON.stringify(row.teamAccountIds||null)!==JSON.stringify(pin.teamAccountIds||null)||
+               !Number.isSafeInteger(row.rank)||row.rank<1||
+               !Number.isSafeInteger(row.kills)||!Number.isSafeInteger(row.vrs)||
+               !Number.isSafeInteger(row.matches)||row.matches<1||row.vrs>row.matches)
+              throw Error('Candidate differs from pinned original: '+pin.id);
+            const catalog=catalogs.get(row.tournamentId);
+            const roster=Array.isArray(row.players)&&row.players.length?row.players:[row.player];
+            if(!catalog||catalog.name!==row.event||catalog.seasonId!==row.seasonId||
+               roster.length!==({solo:1,duo:2}[catalog.team])||
+               roster.join(' / ')!==row.player||roster.some(x=>!known.has(x))||
+               new Set(roster).size!==roster.length)
+              throw Error('Official tournament / canonical player mismatch: '+row.id);
+            const u=new URL(row.source);
+            const windowId=u.searchParams.get('round');
+            const eventId=u.pathname.match(/^\/competitive\/events\/([^/]+)\/$/)?.[1];
+            if(u.protocol!=='https:'||u.hostname!=='www.fortnite.com'||
+               u.searchParams.get('region')!==row.region||
+               !eventId||!catalog.sourceEventIds.includes(eventId)||!windowId||
+               !windowId.startsWith(row.seasonId+'_')||!windowId.endsWith('_'+row.region))
+              throw Error('Official source URL mismatch: '+row.id);
+            const cpKey='epicgames_'+eventId+'_'+row.region+'/'+windowId;
+            const checkpoint=scan.windows[cpKey];
+            if(!checkpoint||checkpoint.rankingOrderValid!==true||
+               !checkpoint.proposals?.some(x=>x.id===row.id&&sameScannedCandidate(x,row))||
+               !Number.isSafeInteger(checkpoint.lastSeenRank)||
+               checkpoint.lastSeenRank<row.rank||checkpoint.emptyAttempts>0||
+               checkpoint.lastErrorCode||checkpoint.lastError||checkpoint.retryAfter)
+              throw Error('Original saved Epic leaderboard mismatch: '+row.id);
+            const month=row.date.slice(0,7);
+            if(!calendars.has(month))calendars.set(month,load('calendar-history/'+month+'.json').sessions);
+            const session=calendars.get(month).find(x=>x.eventId===eventId&&
+              x.sourceWindowId===windowId&&x.region===row.region&&
+              x.tournamentId===row.tournamentId&&x.dateJst===row.date&&
+              x.seasonId===row.seasonId);
+            if(!session)throw Error('Original calendar event window mismatch: '+row.id);
+            if(!checkpoint.complete&&!verifiedPartialPage(row,{end:Date.parse(session.endUtc)},checkpoint))
+              throw Error('Candidate was not witnessed in a mature contiguous page prefix: '+row.id);
+            if(checkpoint.complete&&(!Number.isSafeInteger(checkpoint.totalPages)||
+               checkpoint.nextPage!==checkpoint.totalPages))
+              throw Error('Completed checkpoint page count mismatch: '+row.id);
+            let approved,rule,policy;
+            if(row.seasonId==='S30'){
+              if(row.region!=='NAC'||row.tournamentId!=='ch5s3-zb-solo-victory'||
+                 eventId!=='S30_SoloZBVictoryCashCup'||row.kind!=='予選'||
+                 !windowId.includes('Round1_NAC')||row.prize!==0||roster.length!==1)
+                throw Error('Unrecognized historical Round1 record: '+row.id);
+              // Original 2024 NA -> present NAC classification is not an automatic advancement authorization.
+              // Preserve only witnessed Round1 rank, score, kills, VR, and attendance with zero cash.
+              approved={...row,kind:'参加確認',round:row.round.replace(/\/ 予選$/,'/ 参加確認'),
+                prize:0,note:'保存済みEpicアカウントID・公式開催枠と成熟した連続順位表でRound 1出場・順位・得点・キル・VRを個別確認。2024年の旧NA地域枠を現在のNACに自動的に同一視せず、予選突破は未認定。Round 1の現金賞金は$0。規則: '+evidence.ruleForNAC+' / 元データ: '+row.source};
+              rule=evidence.ruleForNAC;policy='manual-original-epic-attendance-only';
+            }else if(['S35','S37'].includes(row.seasonId)){
+              const s35=row.seasonId==='S35';
+              if(row.region!=='NAW'||row.kind!=='賞金決勝'||row.vrs!==0||
+                 row.prize!==null||row.points!==0||roster.length!==2||
+                 !Array.isArray(row.teamAccountIds)||row.teamAccountIds.length!==2||
+                 !row.teamAccountIds.every(id=>/^[a-f0-9]{32}$/.test(id))||
+                 new Set(row.teamAccountIds).size!==2||
+                 (s35?(row.date!=='2025-05-18'||windowId!=='S35_VictoryDuosCup_Event1Round2_NAW'||
+                    checkpoint.complete!==true||checkpoint.totalPages!==3):
+                   (row.date!=='2025-08-25'||windowId!=='S37_ConsoleDuosCashCups_Event2Round2_NAW'||
+                    checkpoint.nextPage!==2||checkpoint.totalPages!==3)))
+                throw Error('Not one of the 16 original evidenced zero-VR Duo finals: '+row.id);
+              rule=s35?evidence.ruleForS35:evidence.ruleForS37;
+              policy='manual-original-epic-zero-vr-duos';
+              approved={...row,prize:0,teamPrize:0,prizePerPlayer:0,
+                note:'公式Epic大会のRound2決勝。保存済みの連続順位表と本人2名のEpic UUIDで順位・試合・キル・0VRを検証。公式規則は1VRあたりチーム$200（個人各$100）なので0VRはチーム・個人賞金とも$0。'+
+                (checkpoint.complete?'順位表全3ページ確認済み。':'大会全体の残りページは未取得だが、このチームの順位は取得済み2/3ページに含まれ、順序・成熟時刻を検証。')+
+                ' 賞金支払い実績を主張しない。規則: '+rule+' / 元データ: '+row.source};
+            }else throw Error('Unexpected season');
+            for(const old of [...current,...newRecords]){
+              if(old.id===approved.id||collision(old,approved,players.confirmedAliases))
+                throw Error('Potential same-account/window duplicate: '+approved.id+' / '+old.id);
+            }
+            delete approved.reviewReason;
+            delete approved.reviewOnly;
+            newRecords.push(approved);
+            evidenceLog.push({id:approved.id,player:approved.player,rank:approved.rank,kind:approved.kind,
+               prize:approved.prize,source:approved.source,checkpoint:cpKey,
+               checkpointPages:checkpoint.nextPage+'/'+checkpoint.totalPages,policy,rule});
+          }
+          if(newRecords.length!==26||pinnedIds.size!==26||new Set(newRecords.map(x=>x.id)).size!==26||
+             newRecords.some(x=>x.prize!==0))
+            throw Error('Final manually reviewed record count/reward mismatch');
+          if(ledger.entries.some(x=>pinnedIds.has(x.id))||
+             reviewed.entries.some(x=>pinnedIds.has(x.id)))throw Error('Old approval history collision');
+          const timestamp=new Date().toISOString(),today=new Date(Date.now()+9*3600000).toISOString().slice(0,10);
+          const entryId='manual-original-epic-26-20261123';
+          if(updates.entries.some(x=>x.id===entryId))throw Error('Duplicate update history ID');
+          review.proposals=review.proposals.filter(x=>!pinnedIds.has(x.id));
+          if(review.proposals.length!==0)throw Error('Unresolved candidate count changed');
+          review.manualReviewedAt=timestamp;
+          status.found=0;
+          status.manualReviewCandidates=0;
+          status.reviewOnlyCandidates=0;
+          status.manuallyPublished=(status.manuallyPublished||0)+newRecords.length;
+          status.lastReviewedBatchAt=timestamp;
+          ledger.reviewedAt=timestamp;
+          ledger.entries.push(...evidenceLog.map(x=>({id:x.id,decision:'published',recordId:x.id,
+            policy:x.policy,approvedAt:timestamp,approvedBy:'ChatGPT / individually validated manual official evidence',
+            rule:x.rule,source:x.source,evidence:'Pinned Epic original UUID/roster, mature contiguous leaderboard and official payout rules; cash remains $0.'})));
+          reviewed.reviewedAt=timestamp;
+          reviewed.entries.push(...evidenceLog.map(x=>({id:x.id,decision:'published',recordId:x.id,
+            reviewedAt:timestamp,policy:x.policy,rule:x.rule,source:x.source,
+            evidence:'Exact original Epic account/team, official calendar window and ranked saved scan; no positive cash or inferred advancement.'})));
+          updates.entries.unshift({id:entryId,date:today,type:'records',
+            title:'過去確認待ち26件を公式順位表・大会規則で個別確認して掲載',
+            description:'S30 NAC ZB Solo予選10件は参加・順位のみ（予選突破は未認定）。S35 NAWデュオ決勝6件は完全な3/3ページで0VR=$0。S37 NAWデュオ決勝10件は成熟した連続2/3ページで個別順位を確認し0VR=$0。全26件はEpic本人アカウント、元順位表、大会window、公式規則、既存戦績との重複を検証。賞金増分$0。',
+            recordIds:newRecords.map(x=>x.id)});
+          save('history-sync-review.json',review);
+          save('history-sync-status.json',status);
+          save('approval-history.json',ledger);
+          save('history-sync-reviewed.json',reviewed);
+          save('updates.json',updates);
+          const out=publishResults(root,[...current,...newRecords],{legacyWriter:true});
+          if(out.count!==current.length+26||
+             !['S30','S35','S37'].every(s=>out.changedShards.includes(s)))
+             throw Error('Unexpected result source publish outcome: '+JSON.stringify(out));
+          const report=[
+            '# ASIA ON TOUR — manually verified 26 pending historical records',
+            '',
+            '- Source: original exact Epic account ID, official window and mature saved leaderboard prefix',
+            '- Records: 26 (S30 NAC Round1 attendance 10; S35 NAW complete 0VR finals 6; S37 NAW ranked-prefix 0VR finals 10)',
+            '- Cash added: $0; historical NAC advancement not inferred',
+            '- Source records: '+current.length+' → '+out.count,
+            '',
+            '| Name | Date | Region | Rank | Type | Cash | Original ID |',
+            '|---|---|---|---:|---|---:|---|',
+            ...newRecords.map(x=>'| '+x.player+' | '+x.date+' | '+x.region+' | '+x.rank+' | '+x.kind+' | $0 | '+x.id+' |'),
+            '',
+            'Source rules: '+evidence.ruleForNAC+' ; '+evidence.ruleForS35+' ; '+evidence.ruleForS37,
+            ''
+          ].join('\n');
+          fs.mkdirSync(path.join(root,'review-reports'),{recursive:true});
+          fs.writeFileSync(path.join(root,'review-reports','2026-11-23-manual-original-26.md'),report);
+          console.log('AOT_MANUAL_26_PUBLISHED '+JSON.stringify({count:newRecords.length,sourceBefore:current.length,
+            sourceAfter:out.count,cashAdded:0,bySeason:newRecords.reduce((o,r)=>(o[r.seasonId]=(o[r.seasonId]||0)+1,o),{})}));
+          NODE
+          node scripts/source-results-store.cjs verify
+          node scripts/build-season-data.cjs
+          node scripts/build-candidate-triage.cjs
+          node scripts/build-source-results.cjs --check
+          node scripts/build-season-data.cjs --check
+          node scripts/build-candidate-triage.cjs --check
+          npm run validate
+      - name: Commit reviewed and verified source to PR branch only
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add source-results season-data candidate-triage.json history-sync-review.json history-sync-status.json history-sync-reviewed.json approval-history.json updates.json review-reports/2026-11-23-manual-original-26.md
+          git diff --cached --check
+          if git diff --cached --quiet; then echo 'No approved results were produced'; exit 1; fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'review: publish 26 manually confirmed historical records with no cash inferred'
+          git push origin HEAD:refs/heads/data/manual-reviewed-remaining26-20261123
