@@ -93,7 +93,7 @@ function rowFor(t){
   vrs:t.vrs,prize:0,kind:'賞金決勝',matches:t.matches,seasonId:'S43',
   chapter:7,season:5,tournamentId:TOURNAMENT,source:officialUrl(t),verified:true,
   players:names,prizePerPlayer:0,teamAccountIds:t.members.map(m=>normId(m.uuid)),
-  profiles:t.members.map(m=>({name:m.name,url:m.url})),
+  profiles:t.members.map(m=>({name:canonicalName(m),url:m.url})),
   note:'Fortnite Trackerスクリーンショット#'+t.screenshot+'と3選手のEpic UUID付き本人プロフィールを照合。'+DATE+' '+t.region+' Trios Cash Cup Event3、'+t.rank+'位・'+t.points+'pt・'+t.matches+'試合・'+t.kills+'キル・'+t.vrs+'VR。Epic公式ルールでOCE/MEの現金賞金対象は上位5組、'+t.rank+'位は圏外のため個人$0、チーム$0（VR数は賞金判定に用いない）。出典: '+t.trackerEventUrl+' 規則: '+RULE};
 }
 function publish({dryRun=false}={}){
