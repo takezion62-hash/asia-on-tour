@@ -72,7 +72,7 @@ function prepare(feed,config,data){
     if(members.length>1)rec.players=members;
     // Award and duo qualifier verification need original Epic IDs, not just names.
     // IDs are kept in review checkpoints only; published duo records strip them.
-    if(['cash-cup','performance-evaluation','unreal-cup','nvidia-cup'].includes(win.catalog.series)||
+    if(['cash-cup','performance-evaluation','unreal-cup','nvidia-cup','playstation-cup'].includes(win.catalog.series)||
        win.catalog.team==='duo')rec.teamAccountIds=ids;
     if(cashConfirmed&&members.length>1&&Number.isFinite(x.prizePerPlayer)&&x.prizePerPlayer>0&&x.prizePerPlayer*members.length<=prize)rec.prizePerPlayer=x.prizePerPlayer;
     proposals.push(rec);seen.add(deDup);
