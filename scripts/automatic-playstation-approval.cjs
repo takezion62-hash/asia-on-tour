@@ -113,7 +113,7 @@ function decide(row,win,cp,data,now=Date.now()){
       '資格確認・支払完了は未確認。規則: '+rule.source},
    rule:rule.source};
 }
-function evaluate(proposals,windows,checkpoints,data){
+function evaluate(proposals,windows,checkpoints,data,now=Date.now()){
  const byKey=new Map((windows||[]).map(w=>[w.key,w]));
  const results=[...(data.results||[])],approved=[],held=[],participationIds=[];
  for(const row of proposals||[]){
@@ -122,7 +122,7 @@ function evaluate(proposals,windows,checkpoints,data){
      cp?.proposals?.some(x=>x.id===row.id));
    if(matches.length!==1){held.push({id:row.id,reason:'開催枠スナップショット重複または欠落'});continue}
    const [[key,cp]]=matches,win=byKey.get(key);
-   const decision=decide(row,win,cp,{...data,results});
+   const decision=decide(row,win,cp,{...data,results},now);
    if(decision.approved){
      approved.push(decision.record);results.push(decision.record);
      if(decision.participation)participationIds.push(decision.record.id);
