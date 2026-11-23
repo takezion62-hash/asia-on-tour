@@ -1,7 +1,73 @@
 {
   "version": 1,
   "status": "review",
-  "checkedAt": "2026-11-23T00:55:35.478Z",
-  "proposals": [],
+  "checkedAt": "2026-11-23T14:41:12.365Z",
+  "proposals": [
+    {
+      "id": "auto-s43-e3fa35592fe1",
+      "date": "2026-11-23",
+      "region": "OCE",
+      "player": "こがね / まならんど / らる / まろやかれおちゃあいと",
+      "playerRaw": "Zst kogane / Mancity Demon. / らるニキ LIZAǃǃӜ / りきとあいといきりょうた4人家族",
+      "event": "Squads Victory Cup Battle Royale",
+      "round": "Event 2 · Round 1 / 予選",
+      "rank": 455,
+      "points": 181,
+      "kills": 39,
+      "vrs": 1,
+      "prize": 0,
+      "kind": "予選",
+      "matches": 8,
+      "seasonId": "S43",
+      "chapter": 7,
+      "season": 5,
+      "tournamentId": "ch7s5-squads-victory-cup",
+      "source": "https://www.fortnite.com/competitive/events/S43_SquadsVictoryCup/?region=OCE&round=S43_SquadsVictoryCup_Event2_Round1_OCE",
+      "verified": true,
+      "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。",
+      "players": [
+        "こがね",
+        "まならんど",
+        "らる",
+        "まろやかれおちゃあいと"
+      ],
+      "reviewReason": "スキン報酬判定の元データではありません"
+    },
+    {
+      "id": "auto-s43-124828953341",
+      "date": "2026-11-23",
+      "region": "NAW",
+      "player": "ちからV2 / kumo / Mofu",
+      "playerRaw": "NEXUS ちからV2ǃ / orz kumofvǃ / RC MOFU 16ǃ",
+      "event": "Trios Cash Cup Battle Royale",
+      "round": "Event 3 / 参加確認",
+      "rank": 9,
+      "points": 439,
+      "kills": 83,
+      "vrs": 3,
+      "prize": null,
+      "kind": "参加確認",
+      "matches": 10,
+      "seasonId": "S43",
+      "chapter": 7,
+      "season": 5,
+      "tournamentId": "ch7s5-trios-cash-cup",
+      "source": "https://www.fortnite.com/competitive/events/S43_TriosCashCup/?region=NAW&round=S43_TriosCashCup_Event3_NAW",
+      "verified": true,
+      "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+      "reviewOnly": true,
+      "reviewReason": "順位表の連続した上位順位の取得が完了していません",
+      "players": [
+        "ちからV2",
+        "kumo",
+        "Mofu"
+      ],
+      "teamAccountIds": [
+        "2512ed089c99409fb69d2cc3de7c35c6",
+        "705ab3a767ae4e6cb41243796ec3de22",
+        "b78631905b9847c38d347af8ea94d4b5"
+      ]
+    }
+  ],
   "manualReviewedAt": "2026-11-16T07:18:28.727Z"
 }

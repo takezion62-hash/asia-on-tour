@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-11-23T00:55:35.478Z",
+  "checkedAt": "2026-11-23T14:41:12.365Z",
   "windows": {
     "epicgames_S43_PerformanceEvaluationTrios_EU/S43_PerformanceEvaluation_Event1Round1_EU": {
       "nextPage": 7,
@@ -20085,27 +20085,63 @@
       "totalPages": 9
     },
     "epicgames_S43_TriosCashCup_BR/S43_TriosCashCup_Event3_BR": {
-      "nextPage": 10,
+      "nextPage": 20,
       "complete": false,
-      "proposals": [],
-      "pages": 10,
-      "lastAttemptAt": "2026-11-23T00:54:56.647Z",
+      "proposals": [
+        {
+          "id": "auto-s43-1c4078995093",
+          "date": "2026-11-23",
+          "region": "BR",
+          "player": "bigsky / りむた / こはこっこ",
+          "playerRaw": "tzd Ackermanǃ / A_α Rimuta / ZEN Gachikokko",
+          "event": "Trios Cash Cup Battle Royale",
+          "round": "Event 3 / 参加確認",
+          "rank": 1018,
+          "points": 214,
+          "kills": 13,
+          "vrs": 0,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 7,
+          "seasonId": "S43",
+          "chapter": 7,
+          "season": 5,
+          "tournamentId": "ch7s5-trios-cash-cup",
+          "source": "https://www.fortnite.com/competitive/events/S43_TriosCashCup/?region=BR&round=S43_TriosCashCup_Event3_BR",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "bigsky",
+            "りむた",
+            "こはこっこ"
+          ],
+          "teamAccountIds": [
+            "0d77cc7e6bda47d48183890d973ec508",
+            "2b08f9919df14bbd90ae95db167db8cf",
+            "80d396e3ef33460683e00e0cc2624b2d"
+          ]
+        }
+      ],
+      "pages": 20,
+      "lastAttemptAt": "2026-11-23T14:40:59.165Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 1000,
-      "lastSuccessAt": "2026-11-23T00:54:57.894Z",
+      "lastSeenRank": 2000,
+      "lastSuccessAt": "2026-11-23T14:41:00.074Z",
       "totalPages": 21
     },
     "epicgames_S43_TriosCashCup_EU/S43_TriosCashCup_Event3_EU": {
-      "nextPage": 10,
+      "nextPage": 18,
       "complete": false,
       "proposals": [],
-      "pages": 10,
-      "lastAttemptAt": "2026-11-23T00:55:11.617Z",
+      "pages": 18,
+      "lastAttemptAt": "2026-11-23T14:41:08.836Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 1000,
-      "lastSuccessAt": "2026-11-23T00:55:12.829Z",
+      "lastSeenRank": 1800,
+      "lastSuccessAt": "2026-11-23T14:41:10.354Z",
       "totalPages": 87
     },
     "epicgames_S43_TriosCashCup_ME/S43_TriosCashCup_Event3_ME": {
@@ -20365,6 +20401,108 @@
       "lastSeenRank": 929,
       "lastSuccessAt": "2026-11-23T00:55:35.469Z",
       "totalPages": 10
+    },
+    "epicgames_S43_SquadsVictoryCup_OCE/S43_SquadsVictoryCup_Event2_Round1_OCE": {
+      "nextPage": 10,
+      "complete": false,
+      "proposals": [
+        {
+          "id": "auto-s43-e3fa35592fe1",
+          "date": "2026-11-23",
+          "region": "OCE",
+          "player": "こがね / まならんど / らる / まろやかれおちゃあいと",
+          "playerRaw": "Zst kogane / Mancity Demon. / らるニキ LIZAǃǃӜ / りきとあいといきりょうた4人家族",
+          "event": "Squads Victory Cup Battle Royale",
+          "round": "Event 2 · Round 1 / 予選",
+          "rank": 455,
+          "points": 181,
+          "kills": 39,
+          "vrs": 1,
+          "prize": 0,
+          "kind": "予選",
+          "matches": 8,
+          "seasonId": "S43",
+          "chapter": 7,
+          "season": 5,
+          "tournamentId": "ch7s5-squads-victory-cup",
+          "source": "https://www.fortnite.com/competitive/events/S43_SquadsVictoryCup/?region=OCE&round=S43_SquadsVictoryCup_Event2_Round1_OCE",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。",
+          "players": [
+            "こがね",
+            "まならんど",
+            "らる",
+            "まろやかれおちゃあいと"
+          ]
+        }
+      ],
+      "pages": 10,
+      "lastAttemptAt": "2026-11-23T14:40:43.760Z",
+      "emptyAttempts": 0,
+      "rankingOrderValid": true,
+      "lastSeenRank": 1000,
+      "lastSuccessAt": "2026-11-23T14:40:44.862Z",
+      "totalPages": 12
+    },
+    "epicgames_S43_TriosCashCup_NAW/S43_TriosCashCup_Event3_NAW": {
+      "nextPage": 1,
+      "complete": false,
+      "proposals": [
+        {
+          "id": "auto-s43-124828953341",
+          "date": "2026-11-23",
+          "region": "NAW",
+          "player": "ちからV2 / kumo / Mofu",
+          "playerRaw": "NEXUS ちからV2ǃ / orz kumofvǃ / RC MOFU 16ǃ",
+          "event": "Trios Cash Cup Battle Royale",
+          "round": "Event 3 / 参加確認",
+          "rank": 9,
+          "points": 439,
+          "kills": 83,
+          "vrs": 3,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 10,
+          "seasonId": "S43",
+          "chapter": 7,
+          "season": 5,
+          "tournamentId": "ch7s5-trios-cash-cup",
+          "source": "https://www.fortnite.com/competitive/events/S43_TriosCashCup/?region=NAW&round=S43_TriosCashCup_Event3_NAW",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "ちからV2",
+            "kumo",
+            "Mofu"
+          ],
+          "teamAccountIds": [
+            "2512ed089c99409fb69d2cc3de7c35c6",
+            "705ab3a767ae4e6cb41243796ec3de22",
+            "b78631905b9847c38d347af8ea94d4b5"
+          ]
+        }
+      ],
+      "pages": 1,
+      "lastAttemptAt": "2026-11-23T14:41:10.354Z",
+      "emptyAttempts": 0,
+      "rankingOrderValid": true,
+      "lastSeenRank": 100,
+      "lastSuccessAt": "2026-11-23T14:41:10.567Z",
+      "totalPages": 20
+    },
+    "epicgames_S43_TriosCashCup_NAC/S43_TriosCashCup_Event3_NAC": {
+      "nextPage": 1,
+      "complete": false,
+      "proposals": [],
+      "pages": 1,
+      "lastAttemptAt": "2026-11-23T14:41:10.567Z",
+      "emptyAttempts": 0,
+      "rankingOrderValid": true,
+      "lastSeenRank": 100,
+      "lastSuccessAt": "2026-11-23T14:41:12.355Z",
+      "totalPages": 44
     }
   }
 }

@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "sourceCheckedAt": "2026-11-23T09:50:19.361Z",
-  "total": 36,
+  "sourceCheckedAt": "2026-11-23T14:41:12.365Z",
+  "total": 37,
   "alreadyResolved": 0,
   "byYear": [
     {
@@ -14,7 +14,7 @@
     },
     {
       "name": "2026",
-      "count": 11
+      "count": 12
     }
   ],
   "byRegion": [
@@ -36,7 +36,7 @@
     },
     {
       "name": "OCE",
-      "count": 4
+      "count": 5
     }
   ],
   "byTournament": [
@@ -58,6 +58,10 @@
     },
     {
       "name": "Reload Duos Cash Cup (Console) / ME / 2024",
+      "count": 1
+    },
+    {
+      "name": "Squads Victory Cup Battle Royale / OCE / 2026",
       "count": 1
     },
     {
@@ -88,7 +92,7 @@
     },
     {
       "name": "partial-scan",
-      "count": 22
+      "count": 23
     },
     {
       "name": "rules-review",
@@ -1253,7 +1257,7 @@
     },
     {
       "id": "auto-s43-124828953341",
-      "origin": "history",
+      "origin": "history+recent",
       "date": "2026-11-23",
       "year": "2026",
       "region": "NAW",
@@ -1277,12 +1281,45 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 2,
+        "seenPages": 1,
         "totalPages": 20,
         "sourceKey": "epicgames_S43_TriosCashCup_NAW/S43_TriosCashCup_Event3_NAW",
         "possibleExistingId": null
       },
       "rewardState": "cash-unconfirmed"
+    },
+    {
+      "id": "auto-s43-e3fa35592fe1",
+      "origin": "recent",
+      "date": "2026-11-23",
+      "year": "2026",
+      "region": "OCE",
+      "tournamentId": "ch7s5-squads-victory-cup",
+      "event": "Squads Victory Cup Battle Royale",
+      "round": "Event 2 · Round 1 / 予選",
+      "player": "こがね / まならんど / らる / まろやかれおちゃあいと",
+      "kind": "予選",
+      "rank": 455,
+      "points": 181,
+      "kills": 39,
+      "vrs": 1,
+      "prize": 0,
+      "source": "https://www.fortnite.com/competitive/events/S43_SquadsVictoryCup/?region=OCE&round=S43_SquadsVictoryCup_Event2_Round1_OCE",
+      "status": "partial-scan",
+      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
+      "reason": "スキン報酬判定の元データではありません",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": false,
+        "observedPartial": true,
+        "seenPages": 10,
+        "totalPages": 12,
+        "sourceKey": "epicgames_S43_SquadsVictoryCup_OCE/S43_SquadsVictoryCup_Event2_Round1_OCE",
+        "possibleExistingId": null
+      },
+      "rewardState": "source-amount-present-not-verified-by-triage"
     }
   ],
   "policy": "read-only queue; awards require existing official rule-backed validators and identity/collision proof"
