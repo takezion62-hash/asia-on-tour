@@ -35,6 +35,9 @@ function decide(row,win,checkpoint,data){
   // awards in the separately screenshot-verified squad import workflow.
   if(rule.id==='ch7s5-squads-victory-cup')
    return decline('S43 Squadsは個人$50・チーム$200を区別する専用検証フローのみ掲載');
+ if(rule.id==='ch6s4-console-duos-victory'&&row.date==='2025-08-25'&&
+    row.region==='NAW'&&row.kind==='賞金決勝')
+  return require('./verified-s37-20250825-zero-final.cjs').decide(row,win,checkpoint,data,rule);
  if(rule.autoApproval==='verified-duo-qualifier-only')return decline('デュオ予選は公式Round1専用検証で判定');
  const catalog=data.tournaments.catalog.find(x=>x.id===row.tournamentId);
  if(!catalog||catalog.team!==(rule.team||'solo')||catalog.series!=='victory-cup'||catalog.seasonId!==rule.seasonId)return decline('大会カタログ不一致');
