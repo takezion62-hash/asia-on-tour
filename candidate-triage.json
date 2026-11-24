@@ -1,12 +1,12 @@
 {
   "version": 1,
   "sourceCheckedAt": "2026-11-24T11:54:47.534Z",
-  "total": 88,
+  "total": 87,
   "alreadyResolved": 0,
   "byYear": [
     {
       "name": "2024",
-      "count": 40
+      "count": 39
     },
     {
       "name": "2025",
@@ -32,7 +32,7 @@
     },
     {
       "name": "NAC",
-      "count": 23
+      "count": 22
     },
     {
       "name": "NAW",
@@ -66,7 +66,7 @@
     },
     {
       "name": "Solo Victory Cup Battle Royale / NAC / 2024",
-      "count": 2
+      "count": 1
     },
     {
       "name": "Squads Victory Cup Battle Royale / ME / 2026",
@@ -100,7 +100,7 @@
   "byStatus": [
     {
       "name": "partial-scan",
-      "count": 49
+      "count": 48
     },
     {
       "name": "rules-review",
@@ -2480,39 +2480,6 @@
         "seenPages": 52,
         "totalPages": 100,
         "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event9Round1_NAC",
-        "possibleExistingId": null
-      },
-      "rewardState": "source-amount-present-not-verified-by-triage"
-    },
-    {
-      "id": "auto-s31-38d828f9ab24",
-      "origin": "history",
-      "date": "2024-09-10",
-      "year": "2024",
-      "region": "NAC",
-      "tournamentId": "ch5s4-solo-victory-cup",
-      "event": "Solo Victory Cup Battle Royale",
-      "round": "Event 2 · Round 1 / 予選",
-      "player": "candyz1a",
-      "kind": "予選",
-      "rank": 6267,
-      "points": 122,
-      "kills": 17,
-      "vrs": 1,
-      "prize": 0,
-      "source": "https://www.fortnite.com/competitive/events/S31_SoloVictoryCashCup/?region=NAC&round=S31_SoloVictoryCashCup_Event2Round1_NAC",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "順位表の取得が完了していません",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 63,
-        "totalPages": 100,
-        "sourceKey": "epicgames_S31_SoloVictoryCashCup_NAC/S31_SoloVictoryCashCup_Event2Round1_NAC",
         "possibleExistingId": null
       },
       "rewardState": "source-amount-present-not-verified-by-triage"

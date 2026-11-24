@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-24T12:11:50.110Z",
+  "reviewedAt": "2026-11-24T12:12:00.002Z",
   "description": "Resolved historic review candidates: published, duplicate or participation",
   "entries": [
     {
@@ -35854,6 +35854,16 @@
         "prizePerPlayer": 0
       },
       "note": "完全一致の既掲載戦績。新規賞金・順位・戦績を変更せず候補のみ解消。"
+    },
+    {
+      "id": "auto-s31-38d828f9ab24",
+      "decision": "participation-archived",
+      "recordId": "participation-e89b2b3a4cd87b86d813",
+      "reviewedAt": "2026-11-24T12:12:00.002Z",
+      "policy": "Epic-evidenced-attendance-only",
+      "source": "https://www.fortnite.com/competitive/events/S31_SoloVictoryCashCup/?region=NAC&round=S31_SoloVictoryCashCup_Event2Round1_NAC",
+      "officialRules": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-4-official-rules",
+      "evidence": "Official calendar, Epic account match, mature original ranked checkpoint"
     }
   ]
 }
