@@ -1,4 +1,5 @@
 'use strict';
+const {individualRankPrize,payingRank,matchCap}=require('./tournament-rule-engine.cjs');
 // Opt-in, tournament-rule-backed Cash Cup publication for verified teams, including prize-free finishing ranks.
 // All other Cash Cups remain review-only until a complete official payout rule is registered.
 const {verifiedPartialPage,FOUR_HOURS,sameScannedCandidate}=require('./verified-partial-page.cjs');
@@ -11,17 +12,7 @@ const RULES=Object.freeze(Object.fromEntries(
 const people=row=>Array.isArray(row?.players)&&row.players.length?row.players:[row?.player];
 const teamKey=row=>people(row).slice().sort((a,b)=>a.localeCompare(b,'ja')).join('|');
 const decline=reason=>({approved:false,reason});
-function cashPrize(rule,region,rank){
- if(!Number.isSafeInteger(rank)||rank<1)return null;
- const tiers=rule?.cashPrizes?.tiers?.[region];
- if(!Array.isArray(tiers)||!tiers.length)return null;
- // Ranges are inclusive: top #10 following top #5 covers sixth through tenth.
- for(const tier of tiers){
-  if(rank<=tier.through)return tier.perPlayer;
- }
- // Rank beyond the last awarded place has no cash prize.
- return 0;
-}
+const cashPrize=individualRankPrize;
 function cashLimitForWindow(win){
  const rule=RULES[win?.tournamentId];
  if(!rule||win.series!=='cash-cup'||win.kind!=='参加確認'||
@@ -40,8 +31,7 @@ function cashLimitForWindow(win){
    rule.rankedEligibility?.minimumRank==='Platinum'&&
    rule.matchCaps?.['単一ラウンド']===12;
  if(!match||(!arenas&&!Object.hasOwn(rule.rankedEligibility,String(Number(match[1])))))return null;
- const tiers=rule.cashPrizes.tiers?.[win.region];
- return tiers?.length?tiers[tiers.length-1].through:null;
+ return payingRank(rule,win.region);
 }
 function sameEvent(a,b){
  if(a.tournamentId!==b.tournamentId||a.date!==b.date||a.region!==b.region||
@@ -179,7 +169,8 @@ function decide(row,win,checkpoint,data){
   .map(x=>[x.epicAccountId,x.player]));
  if(ids.some((id,i)=>accounts.get(id)!==lineup[i]))
   return decline('Epic IDと選手名の対応が一致しません');
- const max=rule.matchCaps['単一ラウンド'];
+ const max=matchCap(rule,'単一ラウンド');
+ if(max===null)return decline('公式試合数上限が未登録');
  if(!Number.isSafeInteger(row.matches)||row.matches<1||row.matches>max||
   !Number.isSafeInteger(row.vrs)||row.vrs<0||row.vrs>row.matches||
   !Number.isSafeInteger(row.rank)||row.rank<1||

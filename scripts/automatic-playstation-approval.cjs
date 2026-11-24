@@ -1,4 +1,5 @@
 'use strict';
+const {individualRankPrize,matchCap,qualifies,namedRound}=require('./tournament-rule-engine.cjs');
 // Epic 2026-11-20 S43 PlayStation Cup official regulations.
 // Independently classify PS4/PS5 Solo Battle Royale and Zero Build.
 // Only source-backed known Epic accounts and complete, mature scoreboard
@@ -9,24 +10,15 @@ const RULES=Object.freeze(Object.fromEntries(require('../tournament-rules.json')
  .map(x=>[x.id,x])));
 const REGIONS=new Set(['ME','EU','NAC','NAW','OCE','BR']); // ASIA is not an overseas region.
 const decline=reason=>({approved:false,reason});
-function payout(rule,region,rank){
- if(!Number.isSafeInteger(rank)||rank<1)return null;
- const tiers=rule?.cashPrizes?.tiers?.[region];
- if(!Array.isArray(tiers)||!tiers.length)return null;
- return tiers.find(x=>rank<=x.through)?.perPlayer??0;
-}
+const payout=individualRankPrize;
 function stageFor(win){
  const rule=RULES[win?.tournamentId];
  if(!rule||rule.seasonId!=='S43'||win.series!=='playstation-cup'||
    win.seasonId!==rule.seasonId||win.kind!=='参加確認'||
    !rule.eventIds.includes(win.eventId)||!REGIONS.has(win.region)||
    win.tournamentId!==rule.id)return null;
- const id=win.eventId+'_',region=win.region;
- if(win.windowId===id+'Qualifier_'+region&&win.round==='Qualifier / 参加確認')
-  return {rule,final:false};
- if(win.windowId===id+'Final_'+region&&win.round==='Final / 参加確認')
-  return {rule,final:true};
- return null;
+ const stage=namedRound(rule,win);
+ return stage?{rule,final:stage.stage==='賞金決勝'}:null;
 }
 function sameSession(a,b){
  if(a?.tournamentId!==b?.tournamentId||a?.region!==b?.region||
@@ -69,7 +61,8 @@ function decide(row,win,cp,data,now=Date.now()){
  const accounts=(data.verifiedAccounts||[]).filter(x=>
    x.confirmed===true&&x.epicAccountId===ids[0]&&x.player===row.player);
  if(accounts.length!==1)return decline('既存選手と確定EpicアカウントIDが一致しません');
- const cap=rule.matchCaps[stage.final?'賞金決勝':'予選'];
+ const cap=matchCap(rule,stage.final?'賞金決勝':'予選');
+ if(cap===null)return decline('公式試合数上限が未登録');
  if(!Number.isSafeInteger(row.rank)||row.rank<1||
    !Number.isSafeInteger(row.points)||row.points<0||
    !Number.isSafeInteger(row.kills)||row.kills<0||
@@ -90,7 +83,8 @@ function decide(row,win,cp,data,now=Date.now()){
    return decline('同一Epic選手・開催枠の戦績が掲載済み');
  const {reviewOnly,reviewReason,teamAccountIds,note,...base}=row;
  if(!stage.final){
-   const qualified=row.rank<=rule.advance[win.region];
+   const qualified=qualifies(rule,win.region,row.rank);
+   if(qualified===null)return decline('公式予選突破条件が未登録');
    return {approved:true,participation:!qualified,
      record:{...base,
        kind:qualified?'予選':'参加確認',

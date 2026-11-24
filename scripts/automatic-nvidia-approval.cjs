@@ -1,4 +1,5 @@
 'use strict';
+const {individualRankPrize,validMatchCount}=require('./tournament-rule-engine.cjs');
 // S39 NVIDIA GeForce RTX Cup: exact single-session Solo cash payout.
 // Confirm full official leaderboard, Epic account identity and archived event window.
 // Hardware/cosmetic awards are not converted into cash or claimed as delivered.
@@ -8,12 +9,7 @@ const RULES=Object.freeze(Object.fromEntries(require('../tournament-rules.json')
 const archive=require('../calendar-history/2025-12.json').sessions;
 const REGIONS=['EU','NAC','NAW','BR','ME','OCE'];
 const decline=reason=>({approved:false,reason});
-function payout(rule,region,rank){
- if(!Number.isSafeInteger(rank)||rank<1)return null;
- const tiers=rule?.cashPrizes?.tiers?.[region];
- if(!Array.isArray(tiers)||!tiers.length)return null;
- return tiers.find(t=>rank<=t.through)?.perPlayer??0;
-}
+const payout=individualRankPrize;
 function nvidiaWindow(win){
  const rule=RULES[win?.tournamentId];
  if(!rule||win.series!=='nvidia-cup'||win.seasonId!==rule.seasonId||
@@ -75,7 +71,7 @@ function decide(row,win,checkpoint,data){
    !Number.isSafeInteger(row.kills)||row.kills<0||
    !Number.isSafeInteger(row.vrs)||row.vrs<0||
    !Number.isSafeInteger(row.matches)||row.matches<1||
-   row.matches>rule.matchCaps['単一ラウンド']||row.vrs>row.matches)
+   !validMatchCount(rule,'単一ラウンド',row.matches)||row.vrs>row.matches)
    return decline('順位・ポイント・キル・VR・試合数が不正');
  let url;
  try{url=new URL(row.source)}catch{}

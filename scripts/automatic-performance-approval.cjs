@@ -1,4 +1,5 @@
 'use strict';
+const {advancementCutoff,matchCap,qualifies,individualVrPrize}=require('./tournament-rule-engine.cjs');
 // S43 Trios Performance Evaluation: exact EU/NAC Round 1 top 26 and Round 2
 // personal $400 per VR. Legacy seasons and other event formats stay review-only.
 const {verifiedPartialPage}=require('./verified-partial-page.cjs');
@@ -21,7 +22,7 @@ function evaluationStage(win){
 }
 function qualifierCutoff(win){
  const state=evaluationStage(win);
- return state?.round===1?state.rule.advance[win.region]:null;
+ return state?.round===1?advancementCutoff(state.rule,win.region):null;
 }
 function sameAppearance(left,right){
  if(left.tournamentId!==right.tournamentId||left.date!==right.date||
@@ -79,7 +80,8 @@ function decide(row,win,checkpoint,data){
     .map(x=>[x.epicAccountId,x.player]));
  if(ids.some((id,i)=>accounts.get(id)!==people[i]))
   return decline('Epic IDと掲載選手名の照合が不一致');
- const limit=rule.matchCaps[state.round===1?'予選':'Performance決勝'];
+ const limit=matchCap(rule,state.round===1?'予選':'Performance決勝');
+ if(limit===null)return decline('公式試合数上限が未登録');
  if(!Number.isSafeInteger(row.rank)||row.rank<1||
     !Number.isSafeInteger(row.points)||row.points<0||
     !Number.isSafeInteger(row.kills)||row.kills<0||
@@ -99,7 +101,7 @@ function decide(row,win,checkpoint,data){
  const {reviewOnly,reviewReason,teamAccountIds,note,...base}=row;
  let record;
  if(state.round===1){
-   if(row.rank>rule.advance[win.region])return decline('上位26位に入っていない予選参加候補');
+   if(qualifies(rule,win.region,row.rank)!==true)return decline('上位26位に入っていない予選参加候補');
    record={...base,kind:'予選',
      round:win.round.replace(/\/\s*参加確認$/u,'/ 予選突破'),prize:0,
      note:'S43 Performance Evaluation '+win.region+'・Event '+state.event+
@@ -111,7 +113,8 @@ function decide(row,win,checkpoint,data){
    // checked separately from the actual VR count to catch incomplete data.
    if(row.points!==row.vrs*rule.finalWinPoints)
      return decline('Round 2の獲得ポイントとVR数に矛盾');
-   const perPlayer=row.vrs*rule.prizePerVictory;
+   const perPlayer=individualVrPrize(rule,row.vrs);
+   if(perPlayer===null)return decline('公式VR賞金が未登録または不正');
    record={...base,kind:'Performance決勝',
      round:win.round.replace(/\/\s*参加確認$/u,'/ Performance決勝'),
      prize:perPlayer*expected,prizePerPlayer:perPlayer,

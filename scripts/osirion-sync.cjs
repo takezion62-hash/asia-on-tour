@@ -1,4 +1,5 @@
 'use strict';
+const {advancementCutoff}=require('./tournament-rule-engine.cjs');
 // Osirion data provider. The regular workflow is review-only; the historical workflow
 // may auto-approve only narrowly allow-listed Victory Cup rows with official rules.
 // Operations: a source change here triggers both recent and historical review workflows;
@@ -200,7 +201,7 @@ function advancementLimit(win){
  if(documented?.autoApproval==='verified-duo-qualifier-only')return null; // Preserve prize-free participation below cutoff.
  if(documented&&documented.seasonId===win.seasonId&&
     (!win.eventId||documented.eventIds.includes(win.eventId)))
-  return documented.advance?.[win.region]||null;
+  return advancementCutoff(documented,win.region);
  if((type==='ch7s3-solo-victory-cup'||type==='ch7s4-solo-victory-cup')&&['S41','S42'].includes(win.seasonId))return isEU?4000:isNAC?2000:800;
  if(['S41','S42'].includes(win.seasonId)&&type.endsWith('-solo-reload-victory-cup'))return isEU?1600:isNAC?800:320;
  if(win.seasonId==='S42'&&type.endsWith('-console-zero-build-solo-victory-cup'))return isEU||isNAC?2000:1000;
