@@ -20,7 +20,7 @@
   "alreadyRegistered": 7159,
   "autoApprovedTotal": 3554,
   "invalidCachedCandidates": 1,
-  "manualReviewCandidates": 69,
+  "manualReviewCandidates": 67,
   "autoApprovedCosmeticThisRun": 0,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
@@ -47,10 +47,10 @@
     "S30_d4vd_Cup",
     "S31_FNCSCommunityCups_KunoRenzo"
   ],
-  "message": "最新版と安全統合：新規掲載24件、重複スキップ0件、要確認の競合0件、確認待ち69件。既存の戦績・賞金は保持。",
+  "message": "確認候補を原本再照合：正式0件、出場2件、既掲載重複0件。残り67件。",
   "manuallyPublished": 2329,
   "manuallyResolvedDuplicates": 196,
-  "lastReviewedBatchAt": "2026-11-24T13:47:02.861Z",
+  "lastReviewedBatchAt": "2026-11-24T23:16:30.112Z",
   "manuallyCorrected": 13,
   "lastCorrectedReviewAt": "2026-11-13T13:45:16.115Z",
   "concurrentMerge": {
@@ -263,20 +263,20 @@
     "unrealTeamsWithCash": 2
   },
   "latestManualReview": {
-    "reviewedAt": "2026-11-24T12:27:46.213Z",
-    "reviewedCandidates": 1,
+    "reviewedAt": "2026-11-24T23:16:30.112Z",
+    "reviewedCandidates": 2,
     "published": 0,
-    "remainingPending": 88,
+    "remainingPending": 67,
     "duplicatesResolved": 0,
-    "participationArchived": 1,
+    "participationArchived": 2,
     "policy": "Epic ID + official calendar + mature original ranked checkpoint; 2024 $100/VR; NAW top200 costume"
   },
   "autoApprovedDuoQualifierThisRun": 0,
   "latestParticipationReview": {
-    "reviewedAt": "2026-11-24T12:27:46.213Z",
-    "participationPublished": 1,
+    "reviewedAt": "2026-11-24T23:16:30.112Z",
+    "participationPublished": 2,
     "duplicatesResolved": 0,
-    "remainingPending": 88,
+    "remainingPending": 67,
     "notIncludedInPrizeTotals": true
   },
   "autoApprovedParticipationThisRun": 0,
