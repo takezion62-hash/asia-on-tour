@@ -1,7 +1,7 @@
 {
   "version": 1,
   "sourceCheckedAt": "2026-11-24T10:14:03.694Z",
-  "total": 82,
+  "total": 77,
   "alreadyResolved": 0,
   "byYear": [
     {
@@ -10,11 +10,11 @@
     },
     {
       "name": "2025",
-      "count": 8
+      "count": 7
     },
     {
       "name": "2026",
-      "count": 47
+      "count": 43
     }
   ],
   "byRegion": [
@@ -40,21 +40,13 @@
     },
     {
       "name": "OCE",
-      "count": 17
+      "count": 12
     }
   ],
   "byTournament": [
     {
       "name": "Duos Console Victory Cash Cup / NAW / 2025",
       "count": 7
-    },
-    {
-      "name": "NVIDIA GeForce RTX Cup / OCE / 2025",
-      "count": 1
-    },
-    {
-      "name": "PlayStation Clix Cup (Battle Royale) / OCE / 2026",
-      "count": 4
     },
     {
       "name": "PlayStation Cup Zero Build / NAW / 2026",
@@ -104,7 +96,7 @@
     },
     {
       "name": "partial-scan",
-      "count": 44
+      "count": 39
     },
     {
       "name": "rules-review",
@@ -2256,171 +2248,6 @@
         "possibleExistingId": null
       },
       "rewardState": "source-amount-present-not-verified-by-triage"
-    },
-    {
-      "id": "auto-s39-79db99a8b7ff",
-      "origin": "history",
-      "date": "2025-12-21",
-      "year": "2025",
-      "region": "OCE",
-      "tournamentId": "ch7s1-nvidia-geforce-rtx-cup",
-      "event": "NVIDIA GeForce RTX Cup",
-      "round": "単一開催枠 / 参加確認",
-      "player": "GR ここより世界に痛みを",
-      "kind": "参加確認",
-      "rank": 4716,
-      "points": 44,
-      "kills": 2,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S39_NvidiaCup/?region=OCE&round=S39_NvidiaCup_OCE",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "全ページ連続の順位表・Epic ID付完全スナップショットが未確認",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 48,
-        "totalPages": 92,
-        "sourceKey": "epicgames_S39_NvidiaCup_OCE/S39_NvidiaCup_OCE",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s40-098da498ffd7",
-      "origin": "history",
-      "date": "2026-04-29",
-      "year": "2026",
-      "region": "OCE",
-      "tournamentId": "ch7s2-playstation-clix-cup-br",
-      "event": "PlayStation Clix Cup (Battle Royale)",
-      "round": "Qualifier / 参加確認",
-      "player": "misshinyache32",
-      "kind": "参加確認",
-      "rank": 1636,
-      "points": 104,
-      "kills": 6,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S40_PlayStationCupClix/?region=OCE&round=S40_PlayStationCupClix_Qualifier_OCE",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "確認専用大会は自動承認不可",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 17,
-        "totalPages": 60,
-        "sourceKey": "epicgames_S40_PlayStationCupClix_OCE/S40_PlayStationCupClix_Qualifier_OCE",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s40-34e1546b4418",
-      "origin": "history",
-      "date": "2026-04-29",
-      "year": "2026",
-      "region": "OCE",
-      "tournamentId": "ch7s2-playstation-clix-cup-br",
-      "event": "PlayStation Clix Cup (Battle Royale)",
-      "round": "Qualifier / 参加確認",
-      "player": "でーびるれめる",
-      "kind": "参加確認",
-      "rank": 1681,
-      "points": 101,
-      "kills": 10,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S40_PlayStationCupClix/?region=OCE&round=S40_PlayStationCupClix_Qualifier_OCE",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "確認専用大会は自動承認不可",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 17,
-        "totalPages": 60,
-        "sourceKey": "epicgames_S40_PlayStationCupClix_OCE/S40_PlayStationCupClix_Qualifier_OCE",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s40-5d616fc324c1",
-      "origin": "history",
-      "date": "2026-04-29",
-      "year": "2026",
-      "region": "OCE",
-      "tournamentId": "ch7s2-playstation-clix-cup-br",
-      "event": "PlayStation Clix Cup (Battle Royale)",
-      "round": "Qualifier / 参加確認",
-      "player": "Ares.Mea",
-      "kind": "参加確認",
-      "rank": 1605,
-      "points": 106,
-      "kills": 22,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S40_PlayStationCupClix/?region=OCE&round=S40_PlayStationCupClix_Qualifier_OCE",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "確認専用大会は自動承認不可",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 17,
-        "totalPages": 60,
-        "sourceKey": "epicgames_S40_PlayStationCupClix_OCE/S40_PlayStationCupClix_Qualifier_OCE",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s40-ef0801aafdea",
-      "origin": "history",
-      "date": "2026-04-29",
-      "year": "2026",
-      "region": "OCE",
-      "tournamentId": "ch7s2-playstation-clix-cup-br",
-      "event": "PlayStation Clix Cup (Battle Royale)",
-      "round": "Qualifier / 参加確認",
-      "player": "MV.demonking鬼龍覇気",
-      "kind": "参加確認",
-      "rank": 1665,
-      "points": 102,
-      "kills": 17,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S40_PlayStationCupClix/?region=OCE&round=S40_PlayStationCupClix_Qualifier_OCE",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "確認専用大会は自動承認不可",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 17,
-        "totalPages": 60,
-        "sourceKey": "epicgames_S40_PlayStationCupClix_OCE/S40_PlayStationCupClix_Qualifier_OCE",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
     },
     {
       "id": "auto-s43-21347a4bda90",
