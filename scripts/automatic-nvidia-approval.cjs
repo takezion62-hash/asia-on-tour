@@ -1,24 +1,17 @@
 'use strict';
+const {selectRules,eventWindow}=require('./tournament-approval-policy.cjs');
 const {individualRankPrize,validMatchCount}=require('./tournament-rule-engine.cjs');
 // S39 NVIDIA GeForce RTX Cup: exact single-session Solo cash payout.
 // Confirm full official leaderboard, Epic account identity and archived event window.
 // Hardware/cosmetic awards are not converted into cash or claimed as delivered.
-const RULES=Object.freeze(Object.fromEntries(require('../tournament-rules.json').rules
- .filter(x=>x.series==='nvidia-cup'&&x.autoApproval==='verified-solo-rank')
- .map(x=>[x.id,x])));
+const RULES=selectRules('nvidia');
 const archive=require('../calendar-history/2025-12.json').sessions;
 const REGIONS=['EU','NAC','NAW','BR','ME','OCE'];
 const decline=reason=>({approved:false,reason});
 const payout=individualRankPrize;
 function nvidiaWindow(win){
  const rule=RULES[win?.tournamentId];
- if(!rule||win.series!=='nvidia-cup'||win.seasonId!==rule.seasonId||
-   win.eventId!=='S39_NvidiaCup'||win.tournamentId!==rule.id||
-   !rule.eventIds.includes(win.eventId)||win.kind!=='参加確認'||
-   win.round!=='単一開催枠 / 参加確認'||
-   !REGIONS.includes(win.region)||
-   win.windowId!=='S39_NvidiaCup_'+win.region||
-   !rule.cashPrizes?.tiers?.[win.region])return null;
+ if(!rule||win.eventId!=='S39_NvidiaCup'||win.round!=='単一開催枠 / 参加確認'||!eventWindow(rule,win,{format:'single'})||!rule.cashPrizes?.tiers?.[win.region])return null;
  return rule;
 }
 function sameSession(a,b){

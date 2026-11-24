@@ -1,13 +1,12 @@
 'use strict';
+const {selectRules}=require('./tournament-approval-policy.cjs');
 const {advancementCutoff,validMatchCount,individualVrPrize}=require('./tournament-rule-engine.cjs');
 // Narrow, rule-backed auto approval. Only allow-listed historical events qualify.
 // A zero-VR final can be recorded as $0 because the rules pay per final-round VR.
 // Positive cash requires a season-specific verified payout rule; unknown events remain in manual review.
 // Single source of truth: the same versioned official rules shown under SOURCES.
 const {verifiedPartialPage,sameScannedCandidate}=require('./verified-partial-page.cjs');
-const RULES=Object.freeze(Object.fromEntries(
- require('../tournament-rules.json').rules.filter(rule=>rule.series==='victory-cup')
-  .map(rule=>[rule.id,Object.freeze(rule)])));
+const RULES=Object.freeze(Object.fromEntries(Object.entries(selectRules('verified')).map(([id,rule])=>[id,Object.freeze(rule)])));
 const roundId=x=>{
  const match=String(x||'').match(/(?:Event\s*(\d+)|Day\s*(\d+)).*Round\s*([12])/i);
  return match?(match[1]?'event'+Number(match[1]):'day'+Number(match[2]))+'/round'+match[3]:String(x||'');

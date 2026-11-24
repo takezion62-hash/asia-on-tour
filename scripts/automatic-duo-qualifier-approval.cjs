@@ -1,21 +1,18 @@
 'use strict';
+const {selectRules,eventWindow}=require('./tournament-approval-policy.cjs');
 const {advancementCutoff,matchCap}=require('./tournament-rule-engine.cjs');
 // Epic-rule-verified duo Round 1 results. Qualifying != merely participating.
 // Cash is $0 in Round 1; never infer Round 2 winnings from these standings.
 const {verifiedPartialPage,FOUR_HOURS,sameScannedCandidate}=require('./verified-partial-page.cjs');
-const RULES=Object.freeze(Object.fromEntries(require('../tournament-rules.json').rules
- .filter(r=>r.autoApproval==='verified-duo-qualifier-only').map(r=>[r.id,r])));
+const RULES=selectRules('duo');
 const decline=reason=>({approved:false,reason});
 const members=r=>Array.isArray(r?.players)?r.players:[r?.player];
 const rosterKey=r=>members(r).slice().sort((a,b)=>a.localeCompare(b,'ja')).join('|');
 function roundInfo(win){
  const rule=RULES[win?.tournamentId];
- if(!rule||win.seasonId!==rule.seasonId||!rule.eventIds.includes(win.eventId)||
-  win.kind!==(rule.series==='cash-cup'?'参加確認':'予選')||win.series!==rule.series||
-  advancementCutoff(rule,win.region)===null)return null;
- const escaped=win.eventId.replace(/[.*+?^$\{\}()|[\]\\]/g,'\\$&');
- const m=win.windowId?.match(new RegExp('^'+escaped+'_Event([1-9][0-9]*)_?Round1_'+win.region+'$'));
- return m?{rule,event:Number(m[1]),cutoff:advancementCutoff(rule,win.region)}:null;
+ if(!rule||advancementCutoff(rule,win.region)===null)return null;
+ const m=eventWindow(rule,win,{kind:rule.series==='cash-cup'?'参加確認':'予選',rounds:[1],optionalSeparator:true});
+ return m?{rule,event:m.event,cutoff:advancementCutoff(rule,win.region)}:null;
 }
 function sameRound(a,b){
  if(a.date!==b.date||a.region!==b.region||a.tournamentId!==b.tournamentId||

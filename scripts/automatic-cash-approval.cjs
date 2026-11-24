@@ -1,36 +1,29 @@
 'use strict';
+const {selectRules,eventWindow}=require('./tournament-approval-policy.cjs');
 const {individualRankPrize,payingRank,matchCap}=require('./tournament-rule-engine.cjs');
 // Opt-in, tournament-rule-backed Cash Cup publication for verified teams, including prize-free finishing ranks.
 // All other Cash Cups remain review-only until a complete official payout rule is registered.
 const {verifiedPartialPage,FOUR_HOURS,sameScannedCandidate}=require('./verified-partial-page.cjs');
 const {sameRound}=require('./automatic-duo-qualifier-approval.cjs');
-const RULES=Object.freeze(Object.fromEntries(
- require('../tournament-rules.json').rules
-  .filter(rule=>rule.series==='cash-cup'&&(rule.autoApproval==='verified-team-rank'||rule.cashFinalAutoApproval==='verified-duo-round2-rank'))
-  .map(rule=>[rule.id,rule])
-));
+const RULES=selectRules('cash');
 const people=row=>Array.isArray(row?.players)&&row.players.length?row.players:[row?.player];
 const teamKey=row=>people(row).slice().sort((a,b)=>a.localeCompare(b,'ja')).join('|');
 const decline=reason=>({approved:false,reason});
 const cashPrize=individualRankPrize;
 function cashLimitForWindow(win){
  const rule=RULES[win?.tournamentId];
- if(!rule||win.series!=='cash-cup'||win.kind!=='参加確認'||
-  win.seasonId!==rule.seasonId||!rule.eventIds.includes(win.eventId))return null;
- if(typeof win.windowId!=='string'||typeof win.region!=='string')return null;
- const escaped=win.eventId.replace(/[.*+?^$\{\}()|[\]\\]/g,'\\$&');
+ if(!rule)return null;
  if(rule.cashFinalAutoApproval==='verified-duo-round2-rank'){
-  const final=win.windowId.match(new RegExp('^'+escaped+'_Event([1-9][0-9]*)Round2_'+win.region+'$'));
-  // The final has at most twenty qualified duos. Include unpaid finishers.
-  return final&&rule.matchCaps['賞金決勝']===6?20:null;
+  const final=eventWindow(rule,win,{rounds:[2]});
+  return final&&rule.matchCaps['賞金決勝']===6&&rule.advance?.[win.region]===20?20:null;
  }
- const match=win.windowId.match(new RegExp('^'+escaped+'_Event([1-9][0-9]*)_'+win.region+'$'));
+ const match=eventWindow(rule,win,{format:'event'});
  const arenas=rule.id==='ch7s5-arenas-cash-cup'&&rule.seasonId==='S43'&&
    rule.team==='solo'&&rule.eventIds.length===1&&rule.eventIds[0]==='S43_ArenaCashCup'&&
    rule.rankedEligibility?.mode==='arenas-boxfights'&&
    rule.rankedEligibility?.minimumRank==='Platinum'&&
    rule.matchCaps?.['単一ラウンド']===12;
- if(!match||(!arenas&&!Object.hasOwn(rule.rankedEligibility,String(Number(match[1])))))return null;
+ if(!match||(!arenas&&!Object.hasOwn(rule.rankedEligibility,String(match.event))))return null;
  return payingRank(rule,win.region);
 }
 function sameEvent(a,b){

@@ -1,9 +1,9 @@
 'use strict';
+const {selectRules,eventWindow}=require('./tournament-approval-policy.cjs');
 const {teamRankPrize,validMatchCount}=require('./tournament-rule-engine.cjs');
 // $1M Unreal Cup S39: official single-session duo prize ladder. Exact full leaderboard,
 // all two Epic IDs and dated Epic window must match. Never count prizes from VR alone.
-const RULES=Object.freeze(Object.fromEntries(require('../tournament-rules.json').rules
- .filter(x=>x.series==='unreal-cup'&&x.autoApproval==='verified-team-rank').map(x=>[x.id,x])));
+const RULES=selectRules('unreal');
 const archive=[...require('../calendar-history/2025-12.json').sessions,
  ...require('../calendar-history/2026-01.json').sessions];
 const roster=x=>Array.isArray(x?.players)&&x.players.length?x.players:[x?.player];
@@ -12,12 +12,7 @@ const decline=reason=>({approved:false,reason});
 const payout=teamRankPrize;
 function unrealWindow(win){
  const rule=RULES[win?.tournamentId];
- if(!rule||win.series!=='unreal-cup'||win.seasonId!==rule.seasonId||
-    win.eventId!=='S39_1MillionUnrealCup'||win.kind!=='参加確認'||
-    win.tournamentId!==rule.id||!rule.eventIds.includes(win.eventId)||
-    win.windowId!=='S39_1MillionUnrealCup_'+win.region||
-    !['EU','NAC','NAW','BR','ME','OCE'].includes(win.region)||
-    !rule.cashPrizes.tiers[win.region])return null;
+ if(!rule||win.eventId!=='S39_1MillionUnrealCup'||!eventWindow(rule,win,{format:'single'})||!rule.cashPrizes.tiers[win.region])return null;
  return rule;
 }
 function sameSession(left,right){

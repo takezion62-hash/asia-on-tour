@@ -1,24 +1,18 @@
 'use strict';
+const {selectRules,eventWindow}=require('./tournament-approval-policy.cjs');
 const {advancementCutoff,matchCap,qualifies,individualVrPrize}=require('./tournament-rule-engine.cjs');
 // S43 Trios Performance Evaluation: exact EU/NAC Round 1 top 26 and Round 2
 // personal $400 per VR. Legacy seasons and other event formats stay review-only.
 const {verifiedPartialPage}=require('./verified-partial-page.cjs');
-const RULES=Object.freeze(Object.fromEntries(
- require('../tournament-rules.json').rules
- .filter(rule=>rule.series==='performance-evaluation'&&rule.autoApproval==='verified-performance-vr')
- .map(rule=>[rule.id,rule])
-));
+const RULES=selectRules('performance');
 const roster=row=>Array.isArray(row?.players)&&row.players.length?row.players:[row?.player];
 const teamSignature=row=>roster(row).slice().sort((a,b)=>a.localeCompare(b,'ja')).join('|');
 const decline=reason=>({approved:false,reason});
 function evaluationStage(win){
  const rule=RULES[win?.tournamentId];
- if(!rule||win.series!=='performance-evaluation'||win.kind!=='参加確認'||
-    win.seasonId!==rule.seasonId||!rule.eventIds.includes(win.eventId)||
-    typeof win.windowId!=='string')return null;
- const match=win.windowId.match(/^S43_PerformanceEvaluation_Event([1-9][0-9]*)Round([12])_(EU|NAC)$/);
- if(!match||match[3]!==win.region||!Object.hasOwn(rule.advance,win.region))return null;
- return {rule,event:Number(match[1]),round:Number(match[2])};
+ if(!rule||!['EU','NAC'].includes(win.region)||advancementCutoff(rule,win.region)===null)return null;
+ const stage=eventWindow(rule,win);
+ return stage?{rule,event:stage.event,round:stage.round}:null;
 }
 function qualifierCutoff(win){
  const state=evaluationStage(win);

@@ -7,14 +7,15 @@ const {advancementCutoff}=require('./tournament-rule-engine.cjs');
 const fs=require('node:fs'),path=require('node:path');
 const {readResults,publishResults}=require('./source-results-store.cjs');
 const {prepare,maximumMatches,applyProposals}=require('./auto-sync-core.cjs');
-const {evaluate,RULES}=require('./verified-history-approval.cjs');
-const {evaluate:evaluateCosmetics,cutoffForWindow}=require('./automatic-cosmetic-approval.cjs');
-const {evaluate:evaluateCash,cashLimitForWindow}=require('./automatic-cash-approval.cjs');
-const {evaluate:evaluatePerformance,qualifierCutoff,evaluationStage}=require('./automatic-performance-approval.cjs');
-const {evaluate:evaluateUnreal,unrealWindow}=require('./automatic-unreal-approval.cjs');
-const {evaluate:evaluateNvidia,nvidiaWindow}=require('./automatic-nvidia-approval.cjs');
-const {evaluate:evaluateDuoQualifier}=require('./automatic-duo-qualifier-approval.cjs');
-const {evaluate:evaluatePlayStation,stageFor:playstationStageFor}=require('./automatic-playstation-approval.cjs');
+const {RULES}=require('./verified-history-approval.cjs');
+const {requiresCheckpointEpicIds}=require('./tournament-approval-policy.cjs');
+const {runApprovals}=require('./tournament-approval-router.cjs');
+const {cutoffForWindow}=require('./automatic-cosmetic-approval.cjs');
+const {cashLimitForWindow}=require('./automatic-cash-approval.cjs');
+const {qualifierCutoff,evaluationStage}=require('./automatic-performance-approval.cjs');
+const {unrealWindow}=require('./automatic-unreal-approval.cjs');
+const {nvidiaWindow}=require('./automatic-nvidia-approval.cjs');
+const {stageFor:playstationStageFor}=require('./automatic-playstation-approval.cjs');
 const {scanCoverage}=require('./scan-coverage.cjs');
 const {finishableWindows,remainingPages,windowPageAllowance,leastCoveredBucket}=require('./scan-efficiency.cjs');
 const {recoveryShortlist}=require('./review-recovery-priority.cjs');
@@ -332,7 +333,7 @@ async function getLeaderboard(win,page){
 function selectActiveWindows(windows,state,config,time=Date.now()){
  const pending=windows.filter(w=>{
   const item=state.windows[w.key];
-  return (!item?.complete||(['unreal-cup','nvidia-cup','playstation-cup'].includes(w.series)&&item?.epicIdsRetained!==true))&&(!item?.retryAfter||Date.parse(item.retryAfter)<=time);
+  return (!item?.complete||(requiresCheckpointEpicIds(w.series)&&item?.epicIdsRetained!==true))&&(!item?.retryAfter||Date.parse(item.retryAfter)<=time);
  });
  const limit=Math.max(1,config.maxWindowsPerRun||2),selected=[],seen=new Set();
  const due=w=>{const t=Date.parse(state.windows[w.key]?.retryAfter||'');return Number.isFinite(t)&&t<=time};
@@ -410,7 +411,7 @@ function historicalPriorityAudit(windows,state,records,{limit=100,now=Date.now()
  const evidence=historicalEvidenceIndex(records);
  const ranked=windows.filter(w=>{
   const cp=state.windows?.[w.key];
-  return (!cp?.complete||(['unreal-cup','nvidia-cup','playstation-cup'].includes(w.series)&&cp?.epicIdsRetained!==true))&&
+  return (!cp?.complete||(requiresCheckpointEpicIds(w.series)&&cp?.epicIdsRetained!==true))&&
    (!cp?.retryAfter||Date.parse(cp.retryAfter)<=now);
  }).map(w=>{
   const cp=state.windows?.[w.key]||{};
@@ -444,7 +445,7 @@ function historicalPriority(state,records,evidence=historicalEvidenceIndex(recor
 function selectHistoricalWindows(windows,state,config,time=Date.now(),records=[],reviewRows=[]){
  const pending=windows.filter(w=>{
   const cp=state.windows[w.key];
-  return (!cp?.complete||(['unreal-cup','nvidia-cup','playstation-cup'].includes(w.series)&&cp?.epicIdsRetained!==true))&&(!cp?.retryAfter||Date.parse(cp.retryAfter)<=time);
+  return (!cp?.complete||(requiresCheckpointEpicIds(w.series)&&cp?.epicIdsRetained!==true))&&(!cp?.retryAfter||Date.parse(cp.retryAfter)<=time);
  });
  const years=[...new Set(pending.map(w=>w.dateJst.slice(0,4)))].sort((a,b)=>a.localeCompare(b));
  const limit=Math.max(1,config.maxWindowsPerRun||6),selected=[],seen=new Set();
@@ -721,9 +722,9 @@ async function main(){
   const previous=state.windows[win.key];
   // Pre-2026 Unreal caches lack the original two Epic IDs. Re-fetch once; never
   // approve from a stale completed review-only checkpoint.
-  const checkpoint=['unreal-cup','nvidia-cup','playstation-cup'].includes(win.series)&&previous?.epicIdsRetained!==true?
+  const checkpoint=requiresCheckpointEpicIds(win.series)&&previous?.epicIdsRetained!==true?
    {nextPage:0,complete:false,proposals:[],pages:0,epicIdsRetained:true}:
-   previous||{nextPage:0,complete:false,proposals:[],pages:0,...(['unreal-cup','nvidia-cup','playstation-cup'].includes(win.series)?{epicIdsRetained:true}:{})};
+   previous||{nextPage:0,complete:false,proposals:[],pages:0,...(requiresCheckpointEpicIds(win.series)?{epicIdsRetained:true}:{})};
   let pagesThisWindow=0;
   const limit=Math.min(Math.max(config.maxPagesPerWindowPerRun||budget,1),50);
   // Finish up to two near-complete historical leaderboards later in the
@@ -823,42 +824,11 @@ async function main(){
  const stamp=new Date().toISOString();
  let imported=0,manuallyHeld=0,importedCosmetics=0;
  const importedIds=new Set(),reasons=new Map();
- const verified=(historical&&config.autoApproveVerified===true)?
-  evaluate(pending,windows,state.windows,data):{approved:[],held:[]};
- // Rule-backed cosmetics can be published in both recent and historical scans.
- // A positive-VR cash prize remains excluded without an independent verified payout.
- const cosmetic=(config.autoApproveCosmetic===true)?
-  evaluateCosmetics(pending,windows,state.windows,{...data,results:[...data.results,...verified.approved]}):{approved:[],held:[]};
- const cash=(config.autoApproveCash===true)?
-  evaluateCash(pending,windows,state.windows,{...data,results:[...data.results,...verified.approved,...cosmetic.approved]}):{approved:[],held:[]};
- const performance=(config.autoApprovePerformance===true)?
-  evaluatePerformance(pending,windows,state.windows,{...data,results:[...data.results,...verified.approved,...cosmetic.approved,...cash.approved]}):{approved:[],held:[]};
- const unreal=(config.autoApproveUnreal===true)?
-  evaluateUnreal(pending,windows,state.windows,{...data,results:[...data.results,...verified.approved,...cosmetic.approved,...cash.approved,...performance.approved]}):{approved:[],held:[]};
- const nvidia=(config.autoApproveNvidia===true)?
-  evaluateNvidia(pending,windows,state.windows,{...data,results:[...data.results,...verified.approved,
-   ...cosmetic.approved,...cash.approved,...performance.approved,...unreal.approved]}):{approved:[],held:[]};
- const duo=(config.autoApproveDuoQualifier===true)?
-  evaluateDuoQualifier(pending,windows,state.windows,{...data,results:[...data.results,...verified.approved,
-   ...cosmetic.approved,...cash.approved,...performance.approved,...unreal.approved,...nvidia.approved]}):{approved:[],held:[]};
- const playstation=(config.autoApprovePlayStation===true)?
-  evaluatePlayStation(pending,windows,state.windows,{...data,results:[...data.results,...verified.approved,
-   ...cosmetic.approved,...cash.approved,...performance.approved,...unreal.approved,...nvidia.approved,...duo.approved]}):{approved:[],held:[],participationIds:[]};
- const approved=[...verified.approved,...cosmetic.approved,...cash.approved,...performance.approved,...unreal.approved,...nvidia.approved,...duo.approved,...playstation.approved];
- // Only the narrow historical Victory Cup rule evaluator can authorize
- // out-of-cutoff participation. Never extend this grant to review-only series.
- const verifiedParticipationIds=new Set(verified.approved.filter(x=>
-  x.kind==='参加確認'&&x.reviewOnly!==true&&x.verified===true&&x.prize===0).map(x=>x.id));
- for(const id of playstation.participationIds)verifiedParticipationIds.add(id);
+ const {batches,approved,reasons:routeReasons,verifiedParticipationIds}=runApprovals(
+  pending,windows,state.windows,data,config,{historical,initialReasons:reasons});
+ const {verified,cosmetic,cash,performance,unreal,nvidia,duo,playstation}=batches;
  importedCosmetics=cosmetic.approved.length;
- for(const hold of verified.held)reasons.set(hold.id,hold.reason);
- for(const hold of cosmetic.held)if(!reasons.has(hold.id))reasons.set(hold.id,hold.reason);
- for(const hold of cash.held)reasons.set(hold.id,hold.reason);
- for(const hold of performance.held)reasons.set(hold.id,hold.reason);
- for(const hold of unreal.held)reasons.set(hold.id,hold.reason);
- for(const hold of nvidia.held)reasons.set(hold.id,hold.reason);
- for(const hold of duo.held)reasons.set(hold.id,hold.reason);
- for(const hold of playstation.held)reasons.set(hold.id,hold.reason);
+ for(const [id,reason] of routeReasons)reasons.set(id,reason);
  for(const row of approved)importedIds.add(row.id);
  manuallyHeld=pending.length-approved.length;
  imported=applyProposals(data,approved,stamp,{verifiedParticipationIds});
