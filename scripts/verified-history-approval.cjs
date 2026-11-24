@@ -1,4 +1,5 @@
 'use strict';
+const {advancementCutoff,validMatchCount,individualVrPrize}=require('./tournament-rule-engine.cjs');
 // Narrow, rule-backed auto approval. Only allow-listed historical events qualify.
 // A zero-VR final can be recorded as $0 because the rules pay per final-round VR.
 // Positive cash requires a season-specific verified payout rule; unknown events remain in manual review.
@@ -50,7 +51,7 @@ function decide(row,win,checkpoint,data){
   row.region==='NAC'&&row.kind==='予選'&&win.region==='NAC'&&win.kind==='予選'&&
   w.dateJst===row.date&&w.dateJst===win.dateJst&&w.windowId===win.windowId);
  const exactLegacyNacQualifier=Boolean(verifiedNacWindow);
- const qualifierCutoff=rule.advance[row.region]||
+ const qualifierCutoff=advancementCutoff(rule,row.region)||
   (exactLegacyNacQualifier?verifiedNacWindow.cutoff:undefined);
  const oldNacZeroFinal=['S30','S31'].includes(rule.seasonId)&&rule.team==='solo'&&
   row.region==='NAC'&&row.kind==='賞金決勝'&&row.vrs===0&&row.prize===null;
@@ -78,7 +79,7 @@ function decide(row,win,checkpoint,data){
     ||lineup.some(name=>!data.players.candidates.some(x=>x.name===name))
     ||lineup.join(' / ')!==row.player)return decline('名鑑と照合できない選手');
  if(!Number.isSafeInteger(row.rank)||row.rank<1||!Number.isSafeInteger(row.points)||row.points<0||!Number.isSafeInteger(row.kills)||row.kills<0||!Number.isSafeInteger(row.vrs)||row.vrs<0||!Number.isSafeInteger(row.matches)||row.matches<1||row.vrs>row.matches)return decline('不正または未確定の成績');
- if(row.matches>rule.matchCaps[row.kind])return decline('公式試合数上限との矛盾');
+ if(!validMatchCount(rule,row.kind,row.matches))return decline('公式試合数上限との矛盾');
  try{
   const source=new URL(row.source);
   const path='/competitive/events/'+encodeURIComponent(win.eventId)+'/';
@@ -115,11 +116,12 @@ function decide(row,win,checkpoint,data){
  }else if(row.kind==='賞金決勝'){
   if(row.prize!==null)return decline('APIの賞金額は未確認のまま照合する必要があります');
   // Never guess dollars for a season without a verified payout rule.
-  if(row.vrs>0&&(!Number.isSafeInteger(rule.prizePerVictory)||rule.prizePerVictory<=0))
+  const amount=individualVrPrize(rule,row.vrs,{allowUnknownZero:true});
+  if(amount===null)
    return decline('正確なVRごとの賞金規則が未登録');
   rec.round=win.round;
   rec.kind='賞金決勝';
-  rec.prize=row.vrs*(rule.prizePerVictory||0);
+  rec.prize=amount;
   rec.note=row.vrs>0?
    'Epic公式規則で決勝VR1回あたり$'+rule.prizePerVictory+'。Osirionの'+row.vrs+
    'VRから規則上の獲得賞金$'+rec.prize+'を算定。本人資格審査・支払完了までは未確認。規則: '+rule.source:

@@ -1,4 +1,5 @@
 'use strict';
+const {advancementCutoff,matchCap}=require('./tournament-rule-engine.cjs');
 // Epic-rule-verified duo Round 1 results. Qualifying != merely participating.
 // Cash is $0 in Round 1; never infer Round 2 winnings from these standings.
 const {verifiedPartialPage,FOUR_HOURS,sameScannedCandidate}=require('./verified-partial-page.cjs');
@@ -11,10 +12,10 @@ function roundInfo(win){
  const rule=RULES[win?.tournamentId];
  if(!rule||win.seasonId!==rule.seasonId||!rule.eventIds.includes(win.eventId)||
   win.kind!==(rule.series==='cash-cup'?'参加確認':'予選')||win.series!==rule.series||
-  !Object.hasOwn(rule.advance,win.region))return null;
+  advancementCutoff(rule,win.region)===null)return null;
  const escaped=win.eventId.replace(/[.*+?^$\{\}()|[\]\\]/g,'\\$&');
  const m=win.windowId?.match(new RegExp('^'+escaped+'_Event([1-9][0-9]*)_?Round1_'+win.region+'$'));
- return m?{rule,event:Number(m[1]),cutoff:rule.advance[win.region]}:null;
+ return m?{rule,event:Number(m[1]),cutoff:advancementCutoff(rule,win.region)}:null;
 }
 function sameRound(a,b){
  if(a.date!==b.date||a.region!==b.region||a.tournamentId!==b.tournamentId||
@@ -77,7 +78,8 @@ function decide(row,win,cp,data,now=Date.now()){
    Date.parse(s.startUtc)===Date.parse(win.startUtc));
   if(schedule?.length!==1)return decline('Round1の公式カレンダー・開催開始時刻が不一致');
  }
- const cap=recent?rule.matchCaps['単一ラウンド']:rule.matchCaps['予選'];
+ const cap=matchCap(rule,recent?'単一ラウンド':'予選');
+ if(cap===null)return decline('公式試合数上限が未登録');
  if(!Number.isSafeInteger(row.matches)||row.matches<1||row.matches>cap||
   !Number.isSafeInteger(row.points)||row.points<0||
   !Number.isSafeInteger(row.kills)||row.kills<0||
