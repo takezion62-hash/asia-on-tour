@@ -1,7 +1,7 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-24T02:55:25.633Z",
+  "checkedAt": "2026-11-24T09:51:29.372Z",
   "mode": "review",
   "scope": "recent",
   "dateMode": null,
@@ -10,17 +10,17 @@
   "toDate": null,
   "provider": "osirion",
   "linkedPlayers": 717,
-  "trackedWindows": 138,
-  "found": 21,
+  "trackedWindows": 149,
+  "found": 30,
   "skipped": 0,
   "imported": 0,
   "scannedPages": 30,
-  "completedWindows": 129,
+  "completedWindows": 131,
   "identityConflicts": 3,
   "alreadyRegistered": 266,
-  "autoApprovedTotal": 3407,
+  "autoApprovedTotal": 3422,
   "invalidCachedCandidates": 0,
-  "manualReviewCandidates": 21,
+  "manualReviewCandidates": 30,
   "autoApprovedCosmeticThisRun": 0,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
@@ -30,40 +30,38 @@
   "transientFailures": 0,
   "malformedFailures": 0,
   "skippedLeaderboards": [],
-  "reviewOnlyWindows": 120,
-  "reviewOnlyCandidates": 0,
-  "unmappedEvents": 1,
-  "unmappedEventIds": [
-    "S42_ArenaTestCup"
-  ],
-  "message": "最新版と安全統合：新規掲載0件、重複スキップ0件、要確認の競合0件、確認待ち21件。既存の戦績・賞金は保持。",
+  "reviewOnlyWindows": 126,
+  "reviewOnlyCandidates": 6,
+  "unmappedEvents": 0,
+  "unmappedEventIds": [],
+  "message": "最新版と安全統合：新規掲載0件、重複スキップ0件、要確認の競合0件、確認待ち30件。既存の戦績・賞金は保持。",
   "concurrentMerge": {
     "appended": 0,
     "alreadyPublished": 0,
     "reviewConflicts": 0,
-    "keptPending": 21,
-    "reconciledAt": "2026-11-24T02:55:32.243Z"
+    "keptPending": 30,
+    "reconciledAt": "2026-11-24T09:51:35.757Z"
   },
   "coverage": {
-    "total": 138,
-    "completed": 129,
-    "notStarted": 3,
-    "partial": 6,
+    "total": 149,
+    "completed": 131,
+    "notStarted": 10,
+    "partial": 8,
     "retryWaiting": 0,
     "retryDue": 0,
-    "remaining": 9,
+    "remaining": 18,
     "retryCount": 0,
-    "completionPercent": 93.5,
+    "completionPercent": 87.9,
     "byRegion": {
       "EU": {
         "total": 29,
-        "completed": 25,
-        "pending": 4
+        "completed": 26,
+        "pending": 3
       },
       "NAC": {
-        "total": 25,
-        "completed": 24,
-        "pending": 1
+        "total": 29,
+        "completed": 25,
+        "pending": 4
       },
       "OCE": {
         "total": 23,
@@ -76,21 +74,21 @@
         "pending": 3
       },
       "BR": {
-        "total": 19,
+        "total": 23,
         "completed": 19,
-        "pending": 0
+        "pending": 4
       },
       "NAW": {
-        "total": 19,
+        "total": 22,
         "completed": 18,
-        "pending": 1
+        "pending": 4
       }
     },
     "byYear": {
       "2026": {
-        "total": 138,
-        "completed": 129,
-        "pending": 9
+        "total": 149,
+        "completed": 131,
+        "pending": 18
       }
     },
     "outsideScopeCheckpoints": 36,
@@ -101,7 +99,7 @@
         "region": "EU",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 29,
+        "nextPage": 30,
         "totalPages": 87,
         "retryAfter": null,
         "errorCode": null
@@ -112,7 +110,7 @@
         "region": "NAC",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 5,
+        "nextPage": 6,
         "totalPages": 44,
         "retryAfter": null,
         "errorCode": null
@@ -123,19 +121,19 @@
         "region": "NAW",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 12,
+        "nextPage": 13,
         "totalPages": 20,
         "retryAfter": null,
         "errorCode": null
       },
       {
-        "window": "epicgames_S43_PlayStationCup_EU/S43_PlayStationCup_Qualifier_EU",
+        "window": "epicgames_S43_PlayStationCup_NAW/S43_PlayStationCup_Qualifier_NAW",
         "date": "2026-11-24",
-        "region": "EU",
+        "region": "NAW",
         "series": "playstation-cup",
         "status": "partial",
         "nextPage": 1,
-        "totalPages": 100,
+        "totalPages": 52,
         "retryAfter": null,
         "errorCode": null
       },
@@ -145,7 +143,7 @@
         "region": "EU",
         "series": "victory-cup",
         "status": "partial",
-        "nextPage": 10,
+        "nextPage": 20,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
@@ -156,8 +154,41 @@
         "region": "ME",
         "series": "victory-cup",
         "status": "partial",
-        "nextPage": 9,
+        "nextPage": 19,
         "totalPages": 23,
+        "retryAfter": null,
+        "errorCode": null
+      },
+      {
+        "window": "epicgames_S43_SquadsVictoryCup_NAC/S43_SquadsVictoryCup_Event2_Round1_NAC",
+        "date": "2026-11-24",
+        "region": "NAC",
+        "series": "victory-cup",
+        "status": "partial",
+        "nextPage": 1,
+        "totalPages": 67,
+        "retryAfter": null,
+        "errorCode": null
+      },
+      {
+        "window": "epicgames_S43_SquadsVictoryCup_NAW/S43_SquadsVictoryCup_Event2_Round1_NAW",
+        "date": "2026-11-24",
+        "region": "NAW",
+        "series": "victory-cup",
+        "status": "partial",
+        "nextPage": 2,
+        "totalPages": 37,
+        "retryAfter": null,
+        "errorCode": null
+      },
+      {
+        "window": "epicgames_S43_PlayStationCup_BR/S43_PlayStationCup_Qualifier_BR",
+        "date": "2026-11-24",
+        "region": "BR",
+        "series": "playstation-cup",
+        "status": "notStarted",
+        "nextPage": 0,
+        "totalPages": null,
         "retryAfter": null,
         "errorCode": null
       },
@@ -173,9 +204,9 @@
         "errorCode": null
       },
       {
-        "window": "epicgames_S43_PlayStationCup_ZB_EU/S43_PlayStationCup_ZB_Qualifier_EU",
+        "window": "epicgames_S43_PlayStationCup_NAC/S43_PlayStationCup_Qualifier_NAC",
         "date": "2026-11-24",
-        "region": "EU",
+        "region": "NAC",
         "series": "playstation-cup",
         "status": "notStarted",
         "nextPage": 0,
@@ -184,9 +215,9 @@
         "errorCode": null
       },
       {
-        "window": "epicgames_S43_PlayStationCup_ZB_ME/S43_PlayStationCup_ZB_Qualifier_ME",
+        "window": "epicgames_S43_PlayStationCup_ZB_BR/S43_PlayStationCup_ZB_Qualifier_BR",
         "date": "2026-11-24",
-        "region": "ME",
+        "region": "BR",
         "series": "playstation-cup",
         "status": "notStarted",
         "nextPage": 0,
@@ -224,7 +255,7 @@
     "minRequestIntervalMs": 1200,
     "reason": "steady-state",
     "requests": 36,
-    "waitedMs": 11215,
+    "waitedMs": 8295,
     "intervalMs": 1200
   },
   "autoApprovedPlayStationThisRun": 0
