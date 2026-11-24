@@ -8,6 +8,7 @@ const path=require('node:path');
 const crypto=require('node:crypto');
 const {readResults,publishResults}=require('./source-results-store.cjs');
 const {decide:verifyHistoricalVictory}=require('./verified-history-approval.cjs');
+const {newestDiscoveryReport}=require('./unmapped-tournament-discovery.cjs');
 const VALID_SCOPES=new Set(['history','auto']);
 const SOURCE_FILES=[
   'players.json','tournaments.json','tournament-rules.json',
@@ -17,7 +18,13 @@ const SOURCE_FILES=[
   'scripts/automatic-cash-approval.cjs',
   'scripts/automatic-cosmetic-approval.cjs',
   'scripts/automatic-performance-approval.cjs',
-  'scripts/automatic-unreal-approval.cjs'
+  'scripts/automatic-unreal-approval.cjs',
+  'scripts/unmapped-tournament-discovery.cjs',
+  'scripts/tournament-registration-preview.cjs',
+  'scripts/tournament-rule-engine.cjs',
+  'scripts/tournament-approval-policy.cjs',
+  'scripts/tournament-approval-router.cjs',
+  'scripts/validate-tournament-rules.cjs'
 ];
 const read=(root,file)=>file==='results.json'?readResults(root).rows:JSON.parse(fs.readFileSync(path.join(root,file),'utf8'));
 const stringify=x=>JSON.stringify(x);
@@ -259,6 +266,10 @@ function mergeSnapshots(scope,base,scanned,latest,reviewed={version:1,entries:[]
   .sort((a,b)=>Date.parse(a)-Date.parse(b)).at(-1)||review.checkedAt||null;
  const scanStatus=c[sFile],latestStatus=n[sFile],stamp=scanStatus.checkedAt||'';
  const status=stamp>String(latestStatus.checkedAt||'')?{...latestStatus,...scanStatus}:{...scanStatus,...latestStatus};
+ // Discovery freshness is separate from manual status timestamps. Preserve
+ // the newest successful provider snapshot, even when a later scan is rate-limited.
+ const discovery=newestDiscoveryReport(scanStatus.unmappedDiscovery,latestStatus.unmappedDiscovery);
+ if(discovery!==undefined)status.unmappedDiscovery=discovery;
  // Manual adjudications performed while the scan ran ALWAYS take precedence.
  for(const [k,v] of Object.entries(latestStatus))
   if(/^manual|^lastCorrectedReviewAt$|^lastReviewedBatchAt$/.test(k))status[k]=v;
