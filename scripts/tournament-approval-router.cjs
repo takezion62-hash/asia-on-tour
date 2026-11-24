@@ -8,6 +8,7 @@ function reasonRoute(row,catalog){
  const rule=ruleById.get(row?.tournamentId);
  if(!rule||!catalog||catalog.series!==rule.series||catalog.seasonId!==rule.seasonId)return null;
  const routes=policyIds(rule);
+ if(routes.includes('squads'))return 'squads';
  if(routes.includes('duo')){
   if(row.kind==='予選'||/Round 1\s*\//.test(row.round||''))return 'duo';
   if(routes.includes('cash')&&/Round 2\s*\//.test(row.round||''))return 'cash';
