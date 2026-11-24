@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-11-24T01:57:28.021Z",
+  "checkedAt": "2026-11-24T12:59:15.818Z",
   "windows": {
     "epicgames_S42_InoxtagIconCup_NAW/S42_InoxtagIconCup_NAW": {
       "nextPage": 60,
@@ -417,12 +417,12 @@
       "emptyAttempts": 0
     },
     "epicgames_S30_SquadsVictoryCashCup_NAC/S30_SquadsVictoryCashCup_Event1Round1_NAC": {
-      "nextPage": 27,
-      "pages": 27,
+      "nextPage": 37,
+      "pages": 37,
       "complete": false,
       "coverageLimited": false,
       "totalPages": 100,
-      "lastScanned": "2026-11-13T15:33:16.263Z",
+      "lastScanned": "2026-11-24T12:58:57.854Z",
       "emptyAttempts": 0
     },
     "epicgames_S43_TriosCashCup_OCE/S43_TriosCashCup_Event1_OCE": {
@@ -1240,12 +1240,12 @@
       "lastError": "Osirion API HTTP 429 /v1/tournaments/leaderboard"
     },
     "epicgames_S33_SoloCashCup_NAW/S33_SoloCashCup_Event8Round1_NAW": {
-      "nextPage": 24,
-      "pages": 24,
+      "nextPage": 26,
+      "pages": 26,
       "complete": false,
       "coverageLimited": false,
       "totalPages": 100,
-      "lastScanned": "2026-11-22T10:24:32.364Z",
+      "lastScanned": "2026-11-24T12:59:15.818Z",
       "emptyAttempts": 0
     },
     "epicgames_S30_PlaystationCupZBJune_OCE/S30_PlaystationCupZBJune_Qualifier1_OCE": {
@@ -1331,12 +1331,12 @@
       "emptyAttempts": 0
     },
     "epicgames_S30_PlaystationCupJune_ME/S30_PlaystationCupJune_Qualifier1_ME": {
-      "nextPage": 16,
-      "pages": 16,
+      "nextPage": 26,
+      "pages": 26,
       "complete": false,
       "coverageLimited": false,
       "totalPages": 51,
-      "lastScanned": "2026-11-24T01:57:28.021Z",
+      "lastScanned": "2026-11-24T12:59:12.856Z",
       "emptyAttempts": 0
     },
     "epicgames_S43_TriosCashCup_BR/S43_TriosCashCup_Event3_BR": {
@@ -1364,6 +1364,15 @@
       "coverageLimited": false,
       "totalPages": 100,
       "lastScanned": "2026-11-24T01:56:46.327Z",
+      "emptyAttempts": 0
+    },
+    "epicgames_S43_SquadsVictoryCup_NAW/S43_SquadsVictoryCup_Event2_Round2_NAW": {
+      "nextPage": 2,
+      "pages": 2,
+      "complete": true,
+      "coverageLimited": false,
+      "totalPages": 2,
+      "lastScanned": "2026-11-24T12:58:39.720Z",
       "emptyAttempts": 0
     }
   }
