@@ -1,7 +1,7 @@
 {
   "version": 1,
   "status": "review",
-  "checkedAt": "2026-11-24T13:45:52.956Z",
+  "checkedAt": "2026-11-24T14:54:10.707Z",
   "proposals": [
     {
       "id": "auto-s43-df6cd868029d",
@@ -62,6 +62,118 @@
         "Tossy"
       ],
       "reviewReason": "4選手の元Epic ID・候補IDの再照合が必要"
+    },
+    {
+      "id": "auto-s43-1dff859729dc",
+      "date": "2026-11-24",
+      "region": "NAC",
+      "player": "Reo",
+      "playerRaw": "IGNUM Reo",
+      "event": "PlayStation Cup Zero Build",
+      "round": "Qualifier / 参加確認",
+      "rank": 45,
+      "points": 392,
+      "kills": 29,
+      "vrs": 0,
+      "prize": null,
+      "kind": "参加確認",
+      "matches": 11,
+      "seasonId": "S43",
+      "chapter": 7,
+      "season": 5,
+      "tournamentId": "ch7s5-playstation-cup-zero-build",
+      "source": "https://www.fortnite.com/competitive/events/S43_PlayStationCup_ZB/?region=NAC&round=S43_PlayStationCup_ZB_Qualifier_NAC",
+      "verified": true,
+      "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+      "reviewOnly": true,
+      "reviewReason": "完了した保存済み順位表・本人Epic IDの連続性が未確認",
+      "teamAccountIds": [
+        "25945a39f1564a22aab8ea7808feac98"
+      ]
+    },
+    {
+      "id": "auto-s43-9c29619ba7f5",
+      "date": "2026-11-24",
+      "region": "NAC",
+      "player": "ぬぬぬぬぬぬぬぬwww覚醒WWW",
+      "playerRaw": "Mask Taishy",
+      "event": "PlayStation Cup Zero Build",
+      "round": "Qualifier / 参加確認",
+      "rank": 69,
+      "points": 383,
+      "kills": 30,
+      "vrs": 1,
+      "prize": null,
+      "kind": "参加確認",
+      "matches": 9,
+      "seasonId": "S43",
+      "chapter": 7,
+      "season": 5,
+      "tournamentId": "ch7s5-playstation-cup-zero-build",
+      "source": "https://www.fortnite.com/competitive/events/S43_PlayStationCup_ZB/?region=NAC&round=S43_PlayStationCup_ZB_Qualifier_NAC",
+      "verified": true,
+      "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+      "reviewOnly": true,
+      "reviewReason": "完了した保存済み順位表・本人Epic IDの連続性が未確認",
+      "teamAccountIds": [
+        "d910bdaa6bbc40b28dd8e5530bd10075"
+      ]
+    },
+    {
+      "id": "auto-s43-d42dc64fc5bb",
+      "date": "2026-11-24",
+      "region": "NAC",
+      "player": "めいる",
+      "playerRaw": "MGApusheensyaaz",
+      "event": "PlayStation Cup Zero Build",
+      "round": "Qualifier / 参加確認",
+      "rank": 86,
+      "points": 374,
+      "kills": 27,
+      "vrs": 0,
+      "prize": null,
+      "kind": "参加確認",
+      "matches": 11,
+      "seasonId": "S43",
+      "chapter": 7,
+      "season": 5,
+      "tournamentId": "ch7s5-playstation-cup-zero-build",
+      "source": "https://www.fortnite.com/competitive/events/S43_PlayStationCup_ZB/?region=NAC&round=S43_PlayStationCup_ZB_Qualifier_NAC",
+      "verified": true,
+      "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+      "reviewOnly": true,
+      "reviewReason": "完了した保存済み順位表・本人Epic IDの連続性が未確認",
+      "teamAccountIds": [
+        "2afccdfc1f6a402aa5d3a5024332d8ef"
+      ]
+    },
+    {
+      "id": "auto-s43-fec03731beb7",
+      "date": "2026-11-24",
+      "region": "NAC",
+      "player": "るかぽりん",
+      "playerRaw": "urzb るかぽりん",
+      "event": "PlayStation Cup Zero Build",
+      "round": "Qualifier / 参加確認",
+      "rank": 92,
+      "points": 372,
+      "kills": 26,
+      "vrs": 1,
+      "prize": null,
+      "kind": "参加確認",
+      "matches": 9,
+      "seasonId": "S43",
+      "chapter": 7,
+      "season": 5,
+      "tournamentId": "ch7s5-playstation-cup-zero-build",
+      "source": "https://www.fortnite.com/competitive/events/S43_PlayStationCup_ZB/?region=NAC&round=S43_PlayStationCup_ZB_Qualifier_NAC",
+      "verified": true,
+      "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+      "reviewOnly": true,
+      "reviewReason": "完了した保存済み順位表・本人Epic IDの連続性が未確認",
+      "teamAccountIds": [
+        "968ebdb80fa44b948558a66766fb6141"
+      ]
     }
   ],
   "manualReviewedAt": "2026-11-24T13:06:30.535Z"

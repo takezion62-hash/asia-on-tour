@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "sourceCheckedAt": "2026-11-24T13:50:44.826Z",
-  "total": 71,
+  "sourceCheckedAt": "2026-11-24T14:54:10.707Z",
+  "total": 75,
   "alreadyResolved": 0,
   "byYear": [
     {
@@ -14,7 +14,7 @@
     },
     {
       "name": "2026",
-      "count": 9
+      "count": 13
     }
   ],
   "byRegion": [
@@ -32,7 +32,7 @@
     },
     {
       "name": "NAC",
-      "count": 33
+      "count": 37
     },
     {
       "name": "NAW",
@@ -59,6 +59,10 @@
     {
       "name": "Overwatch: Widowmaker Cup Battle Royale / ME / 2026",
       "count": 1
+    },
+    {
+      "name": "PlayStation Cup Zero Build / NAC / 2026",
+      "count": 4
     },
     {
       "name": "Solo Victory Cup Battle Royale / NAC / 2024",
@@ -92,7 +96,7 @@
   "byStatus": [
     {
       "name": "partial-scan",
-      "count": 56
+      "count": 60
     },
     {
       "name": "rules-review",
@@ -2411,6 +2415,138 @@
       "rewardState": "cash-unconfirmed"
     },
     {
+      "id": "auto-s43-1dff859729dc",
+      "origin": "recent",
+      "date": "2026-11-24",
+      "year": "2026",
+      "region": "NAC",
+      "tournamentId": "ch7s5-playstation-cup-zero-build",
+      "event": "PlayStation Cup Zero Build",
+      "round": "Qualifier / 参加確認",
+      "player": "Reo",
+      "kind": "参加確認",
+      "rank": 45,
+      "points": 392,
+      "kills": 29,
+      "vrs": 0,
+      "prize": null,
+      "source": "https://www.fortnite.com/competitive/events/S43_PlayStationCup_ZB/?region=NAC&round=S43_PlayStationCup_ZB_Qualifier_NAC",
+      "status": "partial-scan",
+      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
+      "reason": "完了した保存済み順位表・本人Epic IDの連続性が未確認",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": false,
+        "observedPartial": true,
+        "seenPages": 1,
+        "totalPages": 100,
+        "sourceKey": "epicgames_S43_PlayStationCup_ZB_NAC/S43_PlayStationCup_ZB_Qualifier_NAC",
+        "possibleExistingId": null
+      },
+      "rewardState": "cash-unconfirmed"
+    },
+    {
+      "id": "auto-s43-9c29619ba7f5",
+      "origin": "recent",
+      "date": "2026-11-24",
+      "year": "2026",
+      "region": "NAC",
+      "tournamentId": "ch7s5-playstation-cup-zero-build",
+      "event": "PlayStation Cup Zero Build",
+      "round": "Qualifier / 参加確認",
+      "player": "ぬぬぬぬぬぬぬぬwww覚醒WWW",
+      "kind": "参加確認",
+      "rank": 69,
+      "points": 383,
+      "kills": 30,
+      "vrs": 1,
+      "prize": null,
+      "source": "https://www.fortnite.com/competitive/events/S43_PlayStationCup_ZB/?region=NAC&round=S43_PlayStationCup_ZB_Qualifier_NAC",
+      "status": "partial-scan",
+      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
+      "reason": "完了した保存済み順位表・本人Epic IDの連続性が未確認",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": false,
+        "observedPartial": true,
+        "seenPages": 1,
+        "totalPages": 100,
+        "sourceKey": "epicgames_S43_PlayStationCup_ZB_NAC/S43_PlayStationCup_ZB_Qualifier_NAC",
+        "possibleExistingId": null
+      },
+      "rewardState": "cash-unconfirmed"
+    },
+    {
+      "id": "auto-s43-d42dc64fc5bb",
+      "origin": "recent",
+      "date": "2026-11-24",
+      "year": "2026",
+      "region": "NAC",
+      "tournamentId": "ch7s5-playstation-cup-zero-build",
+      "event": "PlayStation Cup Zero Build",
+      "round": "Qualifier / 参加確認",
+      "player": "めいる",
+      "kind": "参加確認",
+      "rank": 86,
+      "points": 374,
+      "kills": 27,
+      "vrs": 0,
+      "prize": null,
+      "source": "https://www.fortnite.com/competitive/events/S43_PlayStationCup_ZB/?region=NAC&round=S43_PlayStationCup_ZB_Qualifier_NAC",
+      "status": "partial-scan",
+      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
+      "reason": "完了した保存済み順位表・本人Epic IDの連続性が未確認",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": false,
+        "observedPartial": true,
+        "seenPages": 1,
+        "totalPages": 100,
+        "sourceKey": "epicgames_S43_PlayStationCup_ZB_NAC/S43_PlayStationCup_ZB_Qualifier_NAC",
+        "possibleExistingId": null
+      },
+      "rewardState": "cash-unconfirmed"
+    },
+    {
+      "id": "auto-s43-fec03731beb7",
+      "origin": "recent",
+      "date": "2026-11-24",
+      "year": "2026",
+      "region": "NAC",
+      "tournamentId": "ch7s5-playstation-cup-zero-build",
+      "event": "PlayStation Cup Zero Build",
+      "round": "Qualifier / 参加確認",
+      "player": "るかぽりん",
+      "kind": "参加確認",
+      "rank": 92,
+      "points": 372,
+      "kills": 26,
+      "vrs": 1,
+      "prize": null,
+      "source": "https://www.fortnite.com/competitive/events/S43_PlayStationCup_ZB/?region=NAC&round=S43_PlayStationCup_ZB_Qualifier_NAC",
+      "status": "partial-scan",
+      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
+      "reason": "完了した保存済み順位表・本人Epic IDの連続性が未確認",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": false,
+        "observedPartial": true,
+        "seenPages": 1,
+        "totalPages": 100,
+        "sourceKey": "epicgames_S43_PlayStationCup_ZB_NAC/S43_PlayStationCup_ZB_Qualifier_NAC",
+        "possibleExistingId": null
+      },
+      "rewardState": "cash-unconfirmed"
+    },
+    {
       "id": "auto-s43-cc6b99b77e85",
       "origin": "recent",
       "date": "2026-11-24",
@@ -2436,7 +2572,7 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 21,
+        "seenPages": 31,
         "totalPages": 37,
         "sourceKey": "epicgames_S43_SquadsVictoryCup_NAW/S43_SquadsVictoryCup_Event2_Round1_NAW",
         "possibleExistingId": null
