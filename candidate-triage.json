@@ -1,12 +1,12 @@
 {
   "version": 1,
-  "sourceCheckedAt": "2026-11-23T15:14:56.910Z",
-  "total": 34,
+  "sourceCheckedAt": "2026-11-24T01:16:10.792Z",
+  "total": 47,
   "alreadyResolved": 0,
   "byYear": [
     {
       "name": "2024",
-      "count": 19
+      "count": 25
     },
     {
       "name": "2025",
@@ -14,17 +14,21 @@
     },
     {
       "name": "2026",
-      "count": 8
+      "count": 15
     }
   ],
   "byRegion": [
     {
+      "name": "EU",
+      "count": 2
+    },
+    {
       "name": "ME",
-      "count": 7
+      "count": 12
     },
     {
       "name": "NAC",
-      "count": 14
+      "count": 18
     },
     {
       "name": "NAW",
@@ -32,13 +36,21 @@
     },
     {
       "name": "OCE",
-      "count": 6
+      "count": 8
     }
   ],
   "byTournament": [
     {
       "name": "Duos Console Victory Cash Cup / NAW / 2025",
       "count": 7
+    },
+    {
+      "name": "Solo Victory Cup Battle Royale / NAC / 2024",
+      "count": 3
+    },
+    {
+      "name": "Squads Victory Cup Battle Royale / ME / 2026",
+      "count": 5
     },
     {
       "name": "Squads Victory Cup Battle Royale / OCE / 2026",
@@ -49,8 +61,16 @@
       "count": 7
     },
     {
+      "name": "Trios Cash Cup Battle Royale / OCE / 2026",
+      "count": 2
+    },
+    {
+      "name": "ZB Solo Victory Cup / EU / 2024",
+      "count": 2
+    },
+    {
       "name": "ZB Solo Victory Cup / NAC / 2024",
-      "count": 14
+      "count": 15
     },
     {
       "name": "ZB Solo Victory Cup / OCE / 2024",
@@ -60,15 +80,15 @@
   "byStatus": [
     {
       "name": "duplicate-risk",
-      "count": 7
+      "count": 9
     },
     {
       "name": "partial-scan",
-      "count": 19
+      "count": 25
     },
     {
       "name": "rules-review",
-      "count": 8
+      "count": 13
     }
   ],
   "queue": [
@@ -300,6 +320,72 @@
         "totalPages": 10,
         "sourceKey": "epicgames_S43_TriosCashCup_ME/S43_TriosCashCup_Event3_ME",
         "possibleExistingId": "manual-s43-trios-20261122-me-r109"
+      },
+      "rewardState": "cash-unconfirmed"
+    },
+    {
+      "id": "auto-s43-3f539cc87e7e",
+      "origin": "history",
+      "date": "2026-11-22",
+      "year": "2026",
+      "region": "OCE",
+      "tournamentId": "ch7s5-trios-cash-cup",
+      "event": "Trios Cash Cup Battle Royale",
+      "round": "Event 3 / 参加確認",
+      "player": "XSET Reetϟ / かなはむだお / スイッチ勢黒猫",
+      "kind": "参加確認",
+      "rank": 519,
+      "points": 136,
+      "kills": 7,
+      "vrs": 0,
+      "prize": null,
+      "source": "https://www.fortnite.com/competitive/events/S43_TriosCashCup/?region=OCE&round=S43_TriosCashCup_Event3_OCE",
+      "status": "duplicate-risk",
+      "action": "既存の同一選手・ラウンドと突合（自動統合しない）",
+      "reason": "同一開催枠・同一チームがすでに掲載されています",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": true,
+        "observedPartial": false,
+        "seenPages": 9,
+        "totalPages": 9,
+        "sourceKey": "epicgames_S43_TriosCashCup_OCE/S43_TriosCashCup_Event3_OCE",
+        "possibleExistingId": "manual-s43-trios-20261122-oce-r519"
+      },
+      "rewardState": "cash-unconfirmed"
+    },
+    {
+      "id": "auto-s43-8cf8746aebb2",
+      "origin": "history",
+      "date": "2026-11-22",
+      "year": "2026",
+      "region": "OCE",
+      "tournamentId": "ch7s5-trios-cash-cup",
+      "event": "Trios Cash Cup Battle Royale",
+      "round": "Event 3 / 参加確認",
+      "player": "zfa-a200PXMPMANM / ZFA-A 200PXMPMAN / 78123819",
+      "kind": "参加確認",
+      "rank": 549,
+      "points": 119,
+      "kills": 23,
+      "vrs": 0,
+      "prize": null,
+      "source": "https://www.fortnite.com/competitive/events/S43_TriosCashCup/?region=OCE&round=S43_TriosCashCup_Event3_OCE",
+      "status": "duplicate-risk",
+      "action": "既存の同一選手・ラウンドと突合（自動統合しない）",
+      "reason": "同一開催枠・同一チームがすでに掲載されています",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": true,
+        "observedPartial": false,
+        "seenPages": 9,
+        "totalPages": 9,
+        "sourceKey": "epicgames_S43_TriosCashCup_OCE/S43_TriosCashCup_Event3_OCE",
+        "possibleExistingId": "manual-s43-trios-20261122-oce-r549"
       },
       "rewardState": "cash-unconfirmed"
     },
@@ -568,6 +654,171 @@
       "rewardState": "source-amount-present-not-verified-by-triage"
     },
     {
+      "id": "auto-s43-114aaac387f8",
+      "origin": "history",
+      "date": "2026-11-24",
+      "year": "2026",
+      "region": "ME",
+      "tournamentId": "ch7s5-squads-victory-cup",
+      "event": "Squads Victory Cup Battle Royale",
+      "round": "Event 2 · Round 2 / 賞金決勝",
+      "player": "くりたる / じんくん / Ryle / あおっち",
+      "kind": "賞金決勝",
+      "rank": 60,
+      "points": 0,
+      "kills": 11,
+      "vrs": 0,
+      "prize": null,
+      "source": "https://www.fortnite.com/competitive/events/S43_SquadsVictoryCup/?region=ME&round=S43_SquadsVictoryCup_Event2_Round2_ME",
+      "status": "rules-review",
+      "action": "公式規則・賞金・突破・スキン条件を個別確認",
+      "reason": "S43 Squadsは個人$50・チーム$200を区別する専用検証フローのみ掲載",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": true,
+        "observedPartial": false,
+        "seenPages": 2,
+        "totalPages": 2,
+        "sourceKey": "epicgames_S43_SquadsVictoryCup_ME/S43_SquadsVictoryCup_Event2_Round2_ME",
+        "possibleExistingId": null
+      },
+      "rewardState": "cash-unconfirmed"
+    },
+    {
+      "id": "auto-s43-2f3eee9bc726",
+      "origin": "history",
+      "date": "2026-11-24",
+      "year": "2026",
+      "region": "ME",
+      "tournamentId": "ch7s5-squads-victory-cup",
+      "event": "Squads Victory Cup Battle Royale",
+      "round": "Event 2 · Round 2 / 賞金決勝",
+      "player": "明太釜玉うどん4玉とり天追加で / さばべる / おーばーとしょうたwwwww / Shiroka",
+      "kind": "賞金決勝",
+      "rank": 92,
+      "points": 0,
+      "kills": 4,
+      "vrs": 0,
+      "prize": null,
+      "source": "https://www.fortnite.com/competitive/events/S43_SquadsVictoryCup/?region=ME&round=S43_SquadsVictoryCup_Event2_Round2_ME",
+      "status": "rules-review",
+      "action": "公式規則・賞金・突破・スキン条件を個別確認",
+      "reason": "S43 Squadsは個人$50・チーム$200を区別する専用検証フローのみ掲載",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": true,
+        "observedPartial": false,
+        "seenPages": 2,
+        "totalPages": 2,
+        "sourceKey": "epicgames_S43_SquadsVictoryCup_ME/S43_SquadsVictoryCup_Event2_Round2_ME",
+        "possibleExistingId": null
+      },
+      "rewardState": "cash-unconfirmed"
+    },
+    {
+      "id": "auto-s43-716561efc0ef",
+      "origin": "history",
+      "date": "2026-11-24",
+      "year": "2026",
+      "region": "ME",
+      "tournamentId": "ch7s5-squads-victory-cup",
+      "event": "Squads Victory Cup Battle Royale",
+      "round": "Event 2 · Round 2 / 賞金決勝",
+      "player": "Aster / nezah / みやぐらーる / Reim",
+      "kind": "賞金決勝",
+      "rank": 95,
+      "points": 0,
+      "kills": 2,
+      "vrs": 0,
+      "prize": null,
+      "source": "https://www.fortnite.com/competitive/events/S43_SquadsVictoryCup/?region=ME&round=S43_SquadsVictoryCup_Event2_Round2_ME",
+      "status": "rules-review",
+      "action": "公式規則・賞金・突破・スキン条件を個別確認",
+      "reason": "S43 Squadsは個人$50・チーム$200を区別する専用検証フローのみ掲載",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": true,
+        "observedPartial": false,
+        "seenPages": 2,
+        "totalPages": 2,
+        "sourceKey": "epicgames_S43_SquadsVictoryCup_ME/S43_SquadsVictoryCup_Event2_Round2_ME",
+        "possibleExistingId": null
+      },
+      "rewardState": "cash-unconfirmed"
+    },
+    {
+      "id": "auto-s43-7c30b96ec7db",
+      "origin": "history",
+      "date": "2026-11-24",
+      "year": "2026",
+      "region": "ME",
+      "tournamentId": "ch7s5-squads-victory-cup",
+      "event": "Squads Victory Cup Battle Royale",
+      "round": "Event 2 · Round 2 / 賞金決勝",
+      "player": "Minipiyo / ちからV2 / kumo / Teddy",
+      "kind": "賞金決勝",
+      "rank": 89,
+      "points": 0,
+      "kills": 5,
+      "vrs": 0,
+      "prize": null,
+      "source": "https://www.fortnite.com/competitive/events/S43_SquadsVictoryCup/?region=ME&round=S43_SquadsVictoryCup_Event2_Round2_ME",
+      "status": "rules-review",
+      "action": "公式規則・賞金・突破・スキン条件を個別確認",
+      "reason": "S43 Squadsは個人$50・チーム$200を区別する専用検証フローのみ掲載",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": true,
+        "observedPartial": false,
+        "seenPages": 2,
+        "totalPages": 2,
+        "sourceKey": "epicgames_S43_SquadsVictoryCup_ME/S43_SquadsVictoryCup_Event2_Round2_ME",
+        "possibleExistingId": null
+      },
+      "rewardState": "cash-unconfirmed"
+    },
+    {
+      "id": "auto-s43-80ec18c340bb",
+      "origin": "history",
+      "date": "2026-11-24",
+      "year": "2026",
+      "region": "ME",
+      "tournamentId": "ch7s5-squads-victory-cup",
+      "event": "Squads Victory Cup Battle Royale",
+      "round": "Event 2 · Round 2 / 賞金決勝",
+      "player": "まぁ / huggyfv / Jaemon / くどう そうた",
+      "kind": "賞金決勝",
+      "rank": 64,
+      "points": 0,
+      "kills": 10,
+      "vrs": 0,
+      "prize": null,
+      "source": "https://www.fortnite.com/competitive/events/S43_SquadsVictoryCup/?region=ME&round=S43_SquadsVictoryCup_Event2_Round2_ME",
+      "status": "rules-review",
+      "action": "公式規則・賞金・突破・スキン条件を個別確認",
+      "reason": "S43 Squadsは個人$50・チーム$200を区別する専用検証フローのみ掲載",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": true,
+        "observedPartial": false,
+        "seenPages": 2,
+        "totalPages": 2,
+        "sourceKey": "epicgames_S43_SquadsVictoryCup_ME/S43_SquadsVictoryCup_Event2_Round2_ME",
+        "possibleExistingId": null
+      },
+      "rewardState": "cash-unconfirmed"
+    },
+    {
       "id": "auto-s30-491857dfda8d",
       "origin": "history",
       "date": "2024-06-04",
@@ -593,7 +844,7 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 31,
+        "seenPages": 33,
         "totalPages": 100,
         "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event1Round1_NAC",
         "possibleExistingId": null
@@ -626,7 +877,7 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 31,
+        "seenPages": 33,
         "totalPages": 100,
         "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event1Round1_NAC",
         "possibleExistingId": null
@@ -659,7 +910,7 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 31,
+        "seenPages": 33,
         "totalPages": 100,
         "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event1Round1_NAC",
         "possibleExistingId": null
@@ -692,7 +943,7 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 31,
+        "seenPages": 33,
         "totalPages": 100,
         "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event1Round1_NAC",
         "possibleExistingId": null
@@ -725,7 +976,7 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 31,
+        "seenPages": 33,
         "totalPages": 100,
         "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event1Round1_NAC",
         "possibleExistingId": null
@@ -758,7 +1009,7 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 4,
+        "seenPages": 6,
         "totalPages": 19,
         "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_OCE/S30_SoloZBVictoryCashCup_Event5Round2_OCE",
         "possibleExistingId": null
@@ -791,7 +1042,7 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 4,
+        "seenPages": 6,
         "totalPages": 19,
         "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_OCE/S30_SoloZBVictoryCashCup_Event5Round2_OCE",
         "possibleExistingId": null
@@ -824,7 +1075,7 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 4,
+        "seenPages": 6,
         "totalPages": 19,
         "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_OCE/S30_SoloZBVictoryCashCup_Event5Round2_OCE",
         "possibleExistingId": null
@@ -857,7 +1108,7 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 4,
+        "seenPages": 6,
         "totalPages": 19,
         "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_OCE/S30_SoloZBVictoryCashCup_Event5Round2_OCE",
         "possibleExistingId": null
@@ -890,9 +1141,75 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 4,
+        "seenPages": 6,
         "totalPages": 19,
         "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_OCE/S30_SoloZBVictoryCashCup_Event5Round2_OCE",
+        "possibleExistingId": null
+      },
+      "rewardState": "cash-unconfirmed"
+    },
+    {
+      "id": "auto-s30-8f373ca85b12",
+      "origin": "history",
+      "date": "2024-07-16",
+      "year": "2024",
+      "region": "EU",
+      "tournamentId": "ch5s3-zb-solo-victory",
+      "event": "ZB Solo Victory Cup",
+      "round": "Event 5 · Round 1 / 予選",
+      "player": "みずるん",
+      "kind": "予選",
+      "rank": 108,
+      "points": 181,
+      "kills": 6,
+      "vrs": 1,
+      "prize": 0,
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=EU&round=S30_SoloZBVictoryCashCup_Event5Round1_EU",
+      "status": "partial-scan",
+      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
+      "reason": "順位表の取得が完了していません",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": false,
+        "observedPartial": true,
+        "seenPages": 2,
+        "totalPages": 100,
+        "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_EU/S30_SoloZBVictoryCashCup_Event5Round1_EU",
+        "possibleExistingId": null
+      },
+      "rewardState": "source-amount-present-not-verified-by-triage"
+    },
+    {
+      "id": "auto-s30-97f38903a790",
+      "origin": "history",
+      "date": "2024-07-16",
+      "year": "2024",
+      "region": "EU",
+      "tournamentId": "ch5s3-zb-solo-victory",
+      "event": "ZB Solo Victory Cup",
+      "round": "Event 5 · Round 2 / 賞金決勝",
+      "player": "TakoBeL",
+      "kind": "賞金決勝",
+      "rank": 86,
+      "points": 100,
+      "kills": 10,
+      "vrs": 1,
+      "prize": null,
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=EU&round=S30_SoloZBVictoryCashCup_Event5Round2_EU",
+      "status": "partial-scan",
+      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
+      "reason": "順位表の取得が完了していません",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": false,
+        "observedPartial": true,
+        "seenPages": 2,
+        "totalPages": 66,
+        "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_EU/S30_SoloZBVictoryCashCup_Event5Round2_EU",
         "possibleExistingId": null
       },
       "rewardState": "cash-unconfirmed"
@@ -923,7 +1240,7 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 73,
+        "seenPages": 75,
         "totalPages": 100,
         "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event7Round1_NAC",
         "possibleExistingId": null
@@ -956,7 +1273,7 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 73,
+        "seenPages": 75,
         "totalPages": 100,
         "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event7Round1_NAC",
         "possibleExistingId": null
@@ -989,7 +1306,7 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 42,
+        "seenPages": 44,
         "totalPages": 100,
         "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event9Round1_NAC",
         "possibleExistingId": null
@@ -1022,7 +1339,40 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 42,
+        "seenPages": 44,
+        "totalPages": 100,
+        "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event9Round1_NAC",
+        "possibleExistingId": null
+      },
+      "rewardState": "source-amount-present-not-verified-by-triage"
+    },
+    {
+      "id": "auto-s30-2f5f953cb570",
+      "origin": "history",
+      "date": "2024-08-13",
+      "year": "2024",
+      "region": "NAC",
+      "tournamentId": "ch5s3-zb-solo-victory",
+      "event": "ZB Solo Victory Cup",
+      "round": "Event 9 · Round 1 / 予選",
+      "player": "とまと",
+      "kind": "予選",
+      "rank": 4311,
+      "points": 106,
+      "kills": 7,
+      "vrs": 0,
+      "prize": 0,
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=NAC&round=S30_SoloZBVictoryCashCup_Event9Round1_NAC",
+      "status": "partial-scan",
+      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
+      "reason": "順位表の取得が完了していません",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": false,
+        "observedPartial": true,
+        "seenPages": 44,
         "totalPages": 100,
         "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event9Round1_NAC",
         "possibleExistingId": null
@@ -1055,7 +1405,7 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 42,
+        "seenPages": 44,
         "totalPages": 100,
         "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event9Round1_NAC",
         "possibleExistingId": null
@@ -1088,7 +1438,7 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 42,
+        "seenPages": 44,
         "totalPages": 100,
         "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event9Round1_NAC",
         "possibleExistingId": null
@@ -1121,7 +1471,7 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 42,
+        "seenPages": 44,
         "totalPages": 100,
         "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event9Round1_NAC",
         "possibleExistingId": null
@@ -1154,7 +1504,7 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 42,
+        "seenPages": 44,
         "totalPages": 100,
         "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event9Round1_NAC",
         "possibleExistingId": null
@@ -1187,9 +1537,108 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 42,
+        "seenPages": 44,
         "totalPages": 100,
         "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event9Round1_NAC",
+        "possibleExistingId": null
+      },
+      "rewardState": "source-amount-present-not-verified-by-triage"
+    },
+    {
+      "id": "auto-s32-0b2e69e6b34e",
+      "origin": "history",
+      "date": "2024-11-16",
+      "year": "2024",
+      "region": "NAC",
+      "tournamentId": "ch5s5-solo-victory-cup",
+      "event": "Solo Victory Cup Battle Royale",
+      "round": "Event 2 · Round 1 / 予選",
+      "player": "どんぐり",
+      "kind": "予選",
+      "rank": 3174,
+      "points": 139,
+      "kills": 7,
+      "vrs": 2,
+      "prize": 0,
+      "source": "https://www.fortnite.com/competitive/events/S32_SoloVictoryCashCup/?region=NAC&round=S32_SoloVictoryCashCup_Event2Round1_NAC",
+      "status": "partial-scan",
+      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
+      "reason": "順位表の取得が完了していません",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": false,
+        "observedPartial": true,
+        "seenPages": 33,
+        "totalPages": 100,
+        "sourceKey": "epicgames_S32_SoloVictoryCashCup_NAC/S32_SoloVictoryCashCup_Event2Round1_NAC",
+        "possibleExistingId": null
+      },
+      "rewardState": "source-amount-present-not-verified-by-triage"
+    },
+    {
+      "id": "auto-s32-151563d7deaa",
+      "origin": "history",
+      "date": "2024-11-16",
+      "year": "2024",
+      "region": "NAC",
+      "tournamentId": "ch5s5-solo-victory-cup",
+      "event": "Solo Victory Cup Battle Royale",
+      "round": "Event 2 · Round 1 / 予選",
+      "player": "ちからV2",
+      "kind": "予選",
+      "rank": 3198,
+      "points": 139,
+      "kills": 12,
+      "vrs": 1,
+      "prize": 0,
+      "source": "https://www.fortnite.com/competitive/events/S32_SoloVictoryCashCup/?region=NAC&round=S32_SoloVictoryCashCup_Event2Round1_NAC",
+      "status": "partial-scan",
+      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
+      "reason": "順位表の取得が完了していません",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": false,
+        "observedPartial": true,
+        "seenPages": 33,
+        "totalPages": 100,
+        "sourceKey": "epicgames_S32_SoloVictoryCashCup_NAC/S32_SoloVictoryCashCup_Event2Round1_NAC",
+        "possibleExistingId": null
+      },
+      "rewardState": "source-amount-present-not-verified-by-triage"
+    },
+    {
+      "id": "auto-s32-723407ec26c2",
+      "origin": "history",
+      "date": "2024-11-16",
+      "year": "2024",
+      "region": "NAC",
+      "tournamentId": "ch5s5-solo-victory-cup",
+      "event": "Solo Victory Cup Battle Royale",
+      "round": "Event 2 · Round 1 / 予選",
+      "player": "ぱな",
+      "kind": "予選",
+      "rank": 3264,
+      "points": 139,
+      "kills": 7,
+      "vrs": 0,
+      "prize": 0,
+      "source": "https://www.fortnite.com/competitive/events/S32_SoloVictoryCashCup/?region=NAC&round=S32_SoloVictoryCashCup_Event2Round1_NAC",
+      "status": "partial-scan",
+      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
+      "reason": "順位表の取得が完了していません",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": false,
+        "observedPartial": true,
+        "seenPages": 33,
+        "totalPages": 100,
+        "sourceKey": "epicgames_S32_SoloVictoryCashCup_NAC/S32_SoloVictoryCashCup_Event2Round1_NAC",
         "possibleExistingId": null
       },
       "rewardState": "source-amount-present-not-verified-by-triage"
