@@ -9,6 +9,7 @@ const crypto=require('node:crypto');
 const {readResults,publishResults}=require('./source-results-store.cjs');
 const {decide:verifyHistoricalVictory}=require('./verified-history-approval.cjs');
 const {newestDiscoveryReport}=require('./unmapped-tournament-discovery.cjs');
+const {sameScannedCandidate}=require('./verified-partial-page.cjs');
 const VALID_SCOPES=new Set(['history','auto']);
 const SOURCE_FILES=[
   'players.json','tournaments.json','tournament-rules.json',
@@ -24,7 +25,12 @@ const SOURCE_FILES=[
   'scripts/tournament-rule-engine.cjs',
   'scripts/tournament-approval-policy.cjs',
   'scripts/tournament-approval-router.cjs',
-  'scripts/validate-tournament-rules.cjs'
+  'scripts/validate-tournament-rules.cjs',
+  'scripts/saved-candidate-recheck.cjs',
+  'scripts/automatic-duo-qualifier-approval.cjs',
+  'scripts/automatic-nvidia-approval.cjs',
+  'scripts/automatic-playstation-approval.cjs',
+  'scripts/verified-partial-page.cjs'
 ];
 const read=(root,file)=>file==='results.json'?readResults(root).rows:JSON.parse(fs.readFileSync(path.join(root,file),'utf8'));
 const stringify=x=>JSON.stringify(x);
@@ -234,6 +240,15 @@ function mergeSnapshots(scope,base,scanned,latest,reviewed={version:1,entries:[]
  const review=clone(n[qFile]);
  const baseReviewIds=new Set(b[qFile].proposals.map(x=>x.id));
  const reviewIds=new Set(review.proposals.map(x=>x.id));
+ // Accept a reason-only refresh only if the remote candidate is still the
+ // exact untouched base row. Manual concurrent edits or new evidence win.
+ const baseReviewById=new Map(b[qFile].proposals.map(x=>[x.id,x]));
+ const scanReviewById=new Map(c[qFile].proposals.map(x=>[x.id,x]));
+ review.proposals=review.proposals.map(row=>{
+  const before=baseReviewById.get(row.id),after=scanReviewById.get(row.id);
+  return before&&after&&stringify(before)===stringify(row)&&sameScannedCandidate(before,after)&&
+   typeof after.reviewReason==='string'?{...row,reviewReason:after.reviewReason}:row;
+ });
  const queueExtra=c[qFile].proposals.filter(x=>!baseReviewIds.has(x.id));
  const candidates=[...queueExtra,...conflicts.map(x=>{
   const row=c[rFile].find(r=>r.id===x.id);

@@ -270,3 +270,16 @@ test('discovery report freshness survives later manual status updates and old sc
  x.scanned.docs[file].unmappedDiscovery=older;x.latest.docs[file].unmappedDiscovery=newer;
  assert.deepEqual(mergeSnapshots(x.scope,x.base,x.scanned,x.latest).docs[file].unmappedDiscovery,newer);
 });
+
+test('reason-only updates replay only over untouched remote pending candidates',()=>{
+ const x=scenario('history'),file=x.p+'-review.json';
+ const row={id:'pending-reason',rank:5,reviewReason:'old'};
+ x.base.docs[file].proposals=[row];
+ x.latest.docs[file].proposals=[{...row}];
+ x.scanned.docs[file].proposals=[{...row,reviewReason:'correct route'}];
+ assert.equal(mergeSnapshots(x.scope,x.base,x.scanned,x.latest).docs[file].proposals[0].reviewReason,'correct route');
+ x.latest.docs[file].proposals[0].reviewReason='manual reason';
+ assert.equal(mergeSnapshots(x.scope,x.base,x.scanned,x.latest).docs[file].proposals[0].reviewReason,'manual reason');
+ x.latest.docs[file].proposals=[{...row}];x.scanned.docs[file].proposals[0].rank=6;
+ assert.equal(mergeSnapshots(x.scope,x.base,x.scanned,x.latest).docs[file].proposals[0].rank,5);
+});
