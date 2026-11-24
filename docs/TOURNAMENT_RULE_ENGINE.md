@@ -16,3 +16,14 @@
 `tournament-approval-router.cjs` は既存承認方式の順番・設定フラグ・過去大会限定・重複防止用結果スナップショット・保留理由・参加確認権限を維持する。Reload ZB Duosの予選と決勝は別方式のまま。review-only、未知の方式は自動承認しない。
 
 既存方式に適合する大会は正確な公式ID・承認方式・ルールを登録し、共通経路を利用できる。固有の公式資料検証、開催日時、旧NA例外、専用報酬、本人IDと順位表の安全条件、既存バリデーターは維持する。新大会の無条件承認ではない。公開済み成績・賞金・ルール数値は変更しない。
+
+## 第3段階：新大会登録の読み取り専用診断
+
+- `npm run tournament:preview -- --template`：公式資料で埋める空のJSONひな型。
+- `npm run tournament:preview -- --draft /tmp/new-cup.json`：catalog、rule、regions、windows を入力して診断。
+- `npm run tournament:preview -- --id ch7s5-playstation-cup-battle-royale`：既存登録の診断。
+- `node --test tests/tournament-registration-preview.test.cjs`：専用テスト。
+
+missing は不足、errors は矛盾・既存バリデーターのエラー、review は追加確認。suggested は承認方式候補、routeReport は現行設定、coverage は地域別順位ライン、windowReport は開催枠形式。status は blocked / review-only / needs-verification / preview-ready。registrationPreview は構造上の追加候補JSON（既存カタログをそのまま使用する場合は catalog が null）。**すべての新大会は追加検証必須、automaticPublicationAuthorized は常に false**。
+
+windows は tournamentId / seasonId / series / eventId / region / kind / windowId / round を公式開催枠から指定。地域・ラウンド例の形式チェックは実際の開催日時や順位表を確認したことにはならない。公式根拠本文・対象開催枠・承認アダプター・本人ID・重複を別途確認し、既存バリデーターの固有条件を弱めない。全コマンド読み取り専用。戦績・設定・ルールを自動編集しない。
