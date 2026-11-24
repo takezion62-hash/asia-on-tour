@@ -1,22 +1,18 @@
 'use strict';
+const {selectRules,matchesWindow}=require('./tournament-approval-policy.cjs');
 const {individualRankPrize,matchCap,qualifies,namedRound}=require('./tournament-rule-engine.cjs');
 // Epic 2026-11-20 S43 PlayStation Cup official regulations.
 // Independently classify PS4/PS5 Solo Battle Royale and Zero Build.
 // Only source-backed known Epic accounts and complete, mature scoreboard
 // checkpoints qualify. Finals pay by PLACEMENT, never by VR count.
 const {sameScannedCandidate,FOUR_HOURS}=require('./verified-partial-page.cjs');
-const RULES=Object.freeze(Object.fromEntries(require('../tournament-rules.json').rules
- .filter(x=>x.series==='playstation-cup'&&x.autoApproval==='verified-playstation-solo')
- .map(x=>[x.id,x])));
+const RULES=selectRules('playstation');
 const REGIONS=new Set(['ME','EU','NAC','NAW','OCE','BR']); // ASIA is not an overseas region.
 const decline=reason=>({approved:false,reason});
 const payout=individualRankPrize;
 function stageFor(win){
  const rule=RULES[win?.tournamentId];
- if(!rule||rule.seasonId!=='S43'||win.series!=='playstation-cup'||
-   win.seasonId!==rule.seasonId||win.kind!=='参加確認'||
-   !rule.eventIds.includes(win.eventId)||!REGIONS.has(win.region)||
-   win.tournamentId!==rule.id)return null;
+ if(!rule||rule.seasonId!=='S43'||!matchesWindow(rule,win,'参加確認'))return null;
  const stage=namedRound(rule,win);
  return stage?{rule,final:stage.stage==='賞金決勝'}:null;
 }

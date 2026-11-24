@@ -1,4 +1,5 @@
 'use strict';
+const {selectRules}=require('./tournament-approval-policy.cjs');
 const {matchCap,cosmeticCutoff}=require('./tournament-rule-engine.cjs');
 // Rank-based cosmetic classification. In-game rewards only; physical goods and actual
 // item delivery may require residence/eligibility checks and are never asserted here.
@@ -21,7 +22,7 @@ const supplementalRules=[
   source:'https://www.fortnite.com/competitive/events/S42_StreetFighterCup/',
   evidence:'https://fortnitetracker.com/events/epicgames_S42_StreetFighterCup_ME'}
 ];
-const cosmeticRules=[...require('../tournament-rules.json').rules.filter(rule=>rule.series==='skin-cup'),...supplementalRules];
+const cosmeticRules=[...Object.values(selectRules('cosmetic')),...supplementalRules];
 const RULE_URL=cosmeticRules[0]?.source||'';
 const CUT_OFFS=Object.freeze(Object.fromEntries(cosmeticRules.map(rule=>[rule.id,Object.freeze({
  eventId:rule.eventIds[0],seasonId:rule.seasonId,chapter:rule.chapter,season:rule.season,
