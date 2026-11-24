@@ -44,6 +44,7 @@ function windowRoutes(rule,win,routes){
   if(eventWindow(rule,win,{kind:win.kind,rounds:[round],optionalSeparator:true})||
    (win.windowId.startsWith(win.eventId+'_')&&new RegExp('^_Round'+round+'_Day[1-9][0-9]*_'+win.region+'$').test(win.windowId.slice(win.eventId.length))))ids.push('verified');
  }
+ if(routes.includes('consoleDuos')&&['予選','賞金決勝'].includes(win.kind)&&eventWindow(rule,win,{kind:win.kind,rounds:[win.kind==='予選'?1:2],optionalSeparator:true}))ids.push('consoleDuos');
  if(routes.includes('squads')&&['予選','賞金決勝'].includes(win.kind)&&eventWindow(rule,win,{kind:win.kind,rounds:[win.kind==='予選'?1:2],optionalSeparator:true}))ids.push('squads');
  if(routes.includes('duo')&&eventWindow(rule,win,{kind:rule.series==='cash-cup'?'参加確認':'予選',rounds:[1],optionalSeparator:true}))ids.push('duo');
  if(routes.includes('cash')&&eventWindow(rule,win,rule.cashFinalAutoApproval==='verified-duo-round2-rank'?{rounds:[2]}:{format:'event'}))ids.push('cash');

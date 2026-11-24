@@ -13,7 +13,8 @@ const old={
  nvidia:r=>r.series==='nvidia-cup'&&r.autoApproval==='verified-solo-rank',
  duo:r=>r.autoApproval==='verified-duo-qualifier-only',
  playstation:r=>r.series==='playstation-cup'&&r.autoApproval==='verified-playstation-solo',
- squads:r=>r.id==='ch7s5-squads-victory-cup'
+ squads:r=>r.id==='ch7s5-squads-victory-cup',
+ consoleDuos:r=>['ch6s2-console-duos-victory','ch6s4-console-duos-victory'].includes(r.id)
 };
 test('all official rules preserve old route selection; unknown and review-only are denied',()=>{
  for(const p of P.POLICIES)assert.deepEqual(Object.keys(P.selectRules(p.id)).sort(),rules.filter(old[p.id]).map(r=>r.id).sort(),p.id);
