@@ -1,7 +1,7 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-24T10:14:03.694Z",
+  "checkedAt": "2026-11-24T13:45:52.956Z",
   "mode": "review",
   "scope": "recent",
   "dateMode": null,
@@ -11,16 +11,16 @@
   "provider": "osirion",
   "linkedPlayers": 717,
   "trackedWindows": 150,
-  "found": 29,
+  "found": 2,
   "skipped": 0,
-  "imported": 6,
+  "imported": 13,
   "scannedPages": 30,
-  "completedWindows": 133,
+  "completedWindows": 135,
   "identityConflicts": 3,
-  "alreadyRegistered": 266,
-  "autoApprovedTotal": 3428,
+  "alreadyRegistered": 291,
+  "autoApprovedTotal": 3530,
   "invalidCachedCandidates": 0,
-  "manualReviewCandidates": 29,
+  "manualReviewCandidates": 2,
   "autoApprovedCosmeticThisRun": 0,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
@@ -34,24 +34,24 @@
   "reviewOnlyCandidates": 0,
   "unmappedEvents": 0,
   "unmappedEventIds": [],
-  "message": "公式Epic ID・順位・開催枠を検証し5件を掲載。残り29件。未確認賞金を推定しない。",
+  "message": "最新版と安全統合：新規掲載13件、重複スキップ0件、要確認の競合0件、確認待ち2件。既存の戦績・賞金は保持。",
   "concurrentMerge": {
-    "appended": 6,
+    "appended": 13,
     "alreadyPublished": 0,
     "reviewConflicts": 0,
-    "keptPending": 34,
-    "reconciledAt": "2026-11-24T10:14:11.012Z"
+    "keptPending": 2,
+    "reconciledAt": "2026-11-24T13:46:00.738Z"
   },
   "coverage": {
     "total": 150,
-    "completed": 133,
-    "notStarted": 9,
+    "completed": 135,
+    "notStarted": 7,
     "partial": 8,
     "retryWaiting": 0,
     "retryDue": 0,
-    "remaining": 17,
+    "remaining": 15,
     "retryCount": 0,
-    "completionPercent": 88.7,
+    "completionPercent": 90,
     "byRegion": {
       "EU": {
         "total": 29,
@@ -80,15 +80,15 @@
       },
       "NAW": {
         "total": 23,
-        "completed": 19,
-        "pending": 4
+        "completed": 21,
+        "pending": 2
       }
     },
     "byYear": {
       "2026": {
         "total": 150,
-        "completed": 133,
-        "pending": 17
+        "completed": 135,
+        "pending": 15
       }
     },
     "outsideScopeCheckpoints": 36,
@@ -99,7 +99,7 @@
         "region": "EU",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 31,
+        "nextPage": 32,
         "totalPages": 87,
         "retryAfter": null,
         "errorCode": null
@@ -110,7 +110,7 @@
         "region": "NAC",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 7,
+        "nextPage": 8,
         "totalPages": 44,
         "retryAfter": null,
         "errorCode": null
@@ -121,19 +121,30 @@
         "region": "NAW",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 14,
+        "nextPage": 15,
         "totalPages": 20,
         "retryAfter": null,
         "errorCode": null
       },
       {
-        "window": "epicgames_S43_PlayStationCup_ZB_NAW/S43_PlayStationCup_ZB_Qualifier_NAW",
+        "window": "epicgames_S43_PlayStationCup_NAC/S43_PlayStationCup_Qualifier_NAC",
         "date": "2026-11-24",
-        "region": "NAW",
+        "region": "NAC",
         "series": "playstation-cup",
         "status": "partial",
         "nextPage": 1,
-        "totalPages": 46,
+        "totalPages": 100,
+        "retryAfter": null,
+        "errorCode": null
+      },
+      {
+        "window": "epicgames_S43_SquadsVictoryCup_BR/S43_SquadsVictoryCup_Event2_Round2_BR",
+        "date": "2026-11-24",
+        "region": "BR",
+        "series": "victory-cup",
+        "status": "partial",
+        "nextPage": 1,
+        "totalPages": 2,
         "retryAfter": null,
         "errorCode": null
       },
@@ -143,7 +154,7 @@
         "region": "EU",
         "series": "victory-cup",
         "status": "partial",
-        "nextPage": 30,
+        "nextPage": 40,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
@@ -154,7 +165,7 @@
         "region": "NAC",
         "series": "victory-cup",
         "status": "partial",
-        "nextPage": 2,
+        "nextPage": 5,
         "totalPages": 67,
         "retryAfter": null,
         "errorCode": null
@@ -165,19 +176,8 @@
         "region": "NAW",
         "series": "victory-cup",
         "status": "partial",
-        "nextPage": 11,
+        "nextPage": 21,
         "totalPages": 37,
-        "retryAfter": null,
-        "errorCode": null
-      },
-      {
-        "window": "epicgames_S43_SquadsVictoryCup_NAW/S43_SquadsVictoryCup_Event2_Round2_NAW",
-        "date": "2026-11-24",
-        "region": "NAW",
-        "series": "victory-cup",
-        "status": "partial",
-        "nextPage": 1,
-        "totalPages": 2,
         "retryAfter": null,
         "errorCode": null
       },
@@ -204,9 +204,9 @@
         "errorCode": null
       },
       {
-        "window": "epicgames_S43_PlayStationCup_NAC/S43_PlayStationCup_Qualifier_NAC",
+        "window": "epicgames_S43_PlayStationCup_ZB_BR/S43_PlayStationCup_ZB_Qualifier_BR",
         "date": "2026-11-24",
-        "region": "NAC",
+        "region": "BR",
         "series": "playstation-cup",
         "status": "notStarted",
         "nextPage": 0,
@@ -215,9 +215,9 @@
         "errorCode": null
       },
       {
-        "window": "epicgames_S43_PlayStationCup_ZB_BR/S43_PlayStationCup_ZB_Qualifier_BR",
+        "window": "epicgames_S43_PlayStationCup_ZB_EU/S43_PlayStationCup_ZB_Qualifier_EU",
         "date": "2026-11-24",
-        "region": "BR",
+        "region": "EU",
         "series": "playstation-cup",
         "status": "notStarted",
         "nextPage": 0,
@@ -255,8 +255,19 @@
     "minRequestIntervalMs": 1200,
     "reason": "steady-state",
     "requests": 36,
-    "waitedMs": 5437,
+    "waitedMs": 8892,
     "intervalMs": 1200
   },
-  "autoApprovedPlayStationThisRun": 6
+  "autoApprovedPlayStationThisRun": 0,
+  "autoApprovedSquadsThisRun": 13,
+  "autoApprovedConsoleDuosThisRun": 0,
+  "unmappedDiscovery": {
+    "version": 1,
+    "provider": "osirion",
+    "scope": "recent",
+    "observedAt": "2026-11-24T13:45:01.455Z",
+    "totalEvents": 0,
+    "entries": [],
+    "automaticPublicationAuthorized": false
+  }
 }
