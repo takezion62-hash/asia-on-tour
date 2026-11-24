@@ -11,7 +11,7 @@
   "provider": "osirion",
   "linkedPlayers": 717,
   "trackedWindows": 3367,
-  "found": 77,
+  "found": 68,
   "skipped": 10,
   "imported": 5,
   "scannedPages": 48,
@@ -20,7 +20,7 @@
   "alreadyRegistered": 7075,
   "autoApprovedTotal": 3480,
   "invalidCachedCandidates": 1,
-  "manualReviewCandidates": 77,
+  "manualReviewCandidates": 68,
   "autoApprovedCosmeticThisRun": 0,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
@@ -31,7 +31,7 @@
   "malformedFailures": 0,
   "skippedLeaderboards": [],
   "reviewOnlyWindows": 1663,
-  "reviewOnlyCandidates": 15,
+  "reviewOnlyCandidates": 6,
   "unmappedEvents": 221,
   "unmappedEventIds": [
     "S30_ConsoleCashCups",
@@ -47,7 +47,7 @@
     "S30_d4vd_Cup",
     "S31_FNCSCommunityCups_KunoRenzo"
   ],
-  "message": "最新版と安全統合：新規掲載5件、重複スキップ0件、要確認の競合0件、確認待ち77件。既存の戦績・賞金は保持。",
+  "message": "完全一致の既掲載重複候補9件を自動解消。戦績・賞金変更なし。残り確認待ち68件。",
   "manuallyPublished": 2316,
   "manuallyResolvedDuplicates": 196,
   "lastReviewedBatchAt": "2026-11-24T11:50:59.542Z",
@@ -25297,5 +25297,7 @@
       }
     ],
     "automaticPublicationAuthorized": false
-  }
+  },
+  "autoResolvedDuplicates": 9,
+  "lastAutoDuplicateReviewAt": "2026-11-24T12:11:50.110Z"
 }

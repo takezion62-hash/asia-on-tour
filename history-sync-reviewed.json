@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-24T10:15:09.028Z",
+  "reviewedAt": "2026-11-24T12:11:50.110Z",
   "description": "Resolved historic review candidates: published, duplicate or participation",
   "entries": [
     {
@@ -35512,6 +35512,348 @@
       "source": "https://www.fortnite.com/competitive/events/S39_NvidiaCup/?region=OCE&round=S39_NvidiaCup_OCE",
       "policy": "attendance-only",
       "rule": null
+    },
+    {
+      "id": "auto-s43-1f211248e60b",
+      "decision": "already-published",
+      "existingId": "manual-s43-trios-20261122-me-r51",
+      "reviewedAt": "2026-11-24T12:11:50.110Z",
+      "source": "https://www.fortnite.com/competitive/events/S43_TriosCashCup/?region=ME&round=S43_TriosCashCup_Event3_ME",
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-trios-cash-cups-chapter-7-mini-season-official-rules",
+      "policy": "exact-epic-window-score-cash-duplicate-v1",
+      "evidence": {
+        "windowKey": "epicgames_S43_TriosCashCup_ME/S43_TriosCashCup_Event3_ME",
+        "checkpointScope": "history",
+        "lastSuccessAt": "2026-11-23T06:46:58.708Z",
+        "roster": [
+          {
+            "epicAccountId": "556abff4657c4b25b743e70b2574f97a",
+            "player": "Saku"
+          },
+          {
+            "epicAccountId": "c1c86fd6aae74912bf205197dabded6e",
+            "player": "顎"
+          },
+          {
+            "epicAccountId": "f910b0aef0f64c50942913ef6ca628eb",
+            "player": "しいら"
+          }
+        ],
+        "stats": {
+          "rank": 51,
+          "points": 352,
+          "kills": 62,
+          "vrs": 1,
+          "matches": 11
+        },
+        "prize": 0,
+        "prizePerPlayer": 0
+      },
+      "note": "完全一致の既掲載戦績。新規賞金・順位・戦績を変更せず候補のみ解消。"
+    },
+    {
+      "id": "auto-s43-1bed4c0dccb3",
+      "decision": "already-published",
+      "existingId": "manual-s43-trios-20261122-me-r59",
+      "reviewedAt": "2026-11-24T12:11:50.110Z",
+      "source": "https://www.fortnite.com/competitive/events/S43_TriosCashCup/?region=ME&round=S43_TriosCashCup_Event3_ME",
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-trios-cash-cups-chapter-7-mini-season-official-rules",
+      "policy": "exact-epic-window-score-cash-duplicate-v1",
+      "evidence": {
+        "windowKey": "epicgames_S43_TriosCashCup_ME/S43_TriosCashCup_Event3_ME",
+        "checkpointScope": "history",
+        "lastSuccessAt": "2026-11-23T06:46:58.708Z",
+        "roster": [
+          {
+            "epicAccountId": "62fd0cfef7924dd9bc47aab50f66735f",
+            "player": "a72wxdxczha"
+          },
+          {
+            "epicAccountId": "72601ffe64964085b95129f18321dec2",
+            "player": "arim"
+          },
+          {
+            "epicAccountId": "fa24325cff6241f7b2da8e0400e132a8",
+            "player": "にじいろベタ"
+          }
+        ],
+        "stats": {
+          "rank": 59,
+          "points": 346,
+          "kills": 22,
+          "vrs": 1,
+          "matches": 11
+        },
+        "prize": 0,
+        "prizePerPlayer": 0
+      },
+      "note": "完全一致の既掲載戦績。新規賞金・順位・戦績を変更せず候補のみ解消。"
+    },
+    {
+      "id": "auto-s43-c31541ae60af",
+      "decision": "already-published",
+      "existingId": "manual-s43-trios-20261122-me-r109",
+      "reviewedAt": "2026-11-24T12:11:50.110Z",
+      "source": "https://www.fortnite.com/competitive/events/S43_TriosCashCup/?region=ME&round=S43_TriosCashCup_Event3_ME",
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-trios-cash-cups-chapter-7-mini-season-official-rules",
+      "policy": "exact-epic-window-score-cash-duplicate-v1",
+      "evidence": {
+        "windowKey": "epicgames_S43_TriosCashCup_ME/S43_TriosCashCup_Event3_ME",
+        "checkpointScope": "history",
+        "lastSuccessAt": "2026-11-23T06:46:58.708Z",
+        "roster": [
+          {
+            "epicAccountId": "37bd2aa5301a4b6ea29bd4fddec9346f",
+            "player": "がおおおおおおおおおおおお"
+          },
+          {
+            "epicAccountId": "4801c07b80b544b0b055cbf771439bd9",
+            "player": "ふとしぃ"
+          },
+          {
+            "epicAccountId": "921e73d47b174c1887e366e0b25b5453",
+            "player": "ポテットくらげ"
+          }
+        ],
+        "stats": {
+          "rank": 109,
+          "points": 317,
+          "kills": 22,
+          "vrs": 1,
+          "matches": 8
+        },
+        "prize": 0,
+        "prizePerPlayer": 0
+      },
+      "note": "完全一致の既掲載戦績。新規賞金・順位・戦績を変更せず候補のみ解消。"
+    },
+    {
+      "id": "auto-s43-6a6762f823c6",
+      "decision": "already-published",
+      "existingId": "manual-s43-trios-20261122-me-r110",
+      "reviewedAt": "2026-11-24T12:11:50.110Z",
+      "source": "https://www.fortnite.com/competitive/events/S43_TriosCashCup/?region=ME&round=S43_TriosCashCup_Event3_ME",
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-trios-cash-cups-chapter-7-mini-season-official-rules",
+      "policy": "exact-epic-window-score-cash-duplicate-v1",
+      "evidence": {
+        "windowKey": "epicgames_S43_TriosCashCup_ME/S43_TriosCashCup_Event3_ME",
+        "checkpointScope": "history",
+        "lastSuccessAt": "2026-11-23T06:46:58.708Z",
+        "roster": [
+          {
+            "epicAccountId": "30b480d3ac524342aa461e911dff11a6",
+            "player": "IPF STANDRY"
+          },
+          {
+            "epicAccountId": "87ef08b6972b4bdab99e62e6459d8e7d",
+            "player": "ウン！ボクつよい！"
+          },
+          {
+            "epicAccountId": "cafadebf3b0045d59867c6ddd24e963a",
+            "player": "IPF ねめしす"
+          }
+        ],
+        "stats": {
+          "rank": 110,
+          "points": 316,
+          "kills": 19,
+          "vrs": 0,
+          "matches": 11
+        },
+        "prize": 0,
+        "prizePerPlayer": 0
+      },
+      "note": "完全一致の既掲載戦績。新規賞金・順位・戦績を変更せず候補のみ解消。"
+    },
+    {
+      "id": "auto-s43-509c91281def",
+      "decision": "already-published",
+      "existingId": "manual-s43-trios-20261122-me-r111",
+      "reviewedAt": "2026-11-24T12:11:50.110Z",
+      "source": "https://www.fortnite.com/competitive/events/S43_TriosCashCup/?region=ME&round=S43_TriosCashCup_Event3_ME",
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-trios-cash-cups-chapter-7-mini-season-official-rules",
+      "policy": "exact-epic-window-score-cash-duplicate-v1",
+      "evidence": {
+        "windowKey": "epicgames_S43_TriosCashCup_ME/S43_TriosCashCup_Event3_ME",
+        "checkpointScope": "history",
+        "lastSuccessAt": "2026-11-23T06:46:58.708Z",
+        "roster": [
+          {
+            "epicAccountId": "191ce7a93e8942c98bedeb5745155c49",
+            "player": "Faze benjyfishyε"
+          },
+          {
+            "epicAccountId": "290d92997edd4ca5ae3201f2dc94fca7",
+            "player": "NBL ぐんさん PULISIC"
+          },
+          {
+            "epicAccountId": "56db84f033784ee9b303da349abd3d6d",
+            "player": "Crs くるただにょりーǃǃ"
+          }
+        ],
+        "stats": {
+          "rank": 111,
+          "points": 316,
+          "kills": 8,
+          "vrs": 0,
+          "matches": 9
+        },
+        "prize": 0,
+        "prizePerPlayer": 0
+      },
+      "note": "完全一致の既掲載戦績。新規賞金・順位・戦績を変更せず候補のみ解消。"
+    },
+    {
+      "id": "auto-s43-7dea3f862c0d",
+      "decision": "already-published",
+      "existingId": "manual-s43-trios-20261122-me-r119",
+      "reviewedAt": "2026-11-24T12:11:50.110Z",
+      "source": "https://www.fortnite.com/competitive/events/S43_TriosCashCup/?region=ME&round=S43_TriosCashCup_Event3_ME",
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-trios-cash-cups-chapter-7-mini-season-official-rules",
+      "policy": "exact-epic-window-score-cash-duplicate-v1",
+      "evidence": {
+        "windowKey": "epicgames_S43_TriosCashCup_ME/S43_TriosCashCup_Event3_ME",
+        "checkpointScope": "history",
+        "lastSuccessAt": "2026-11-23T06:46:58.708Z",
+        "roster": [
+          {
+            "epicAccountId": "53e782331f1f436697bde963f48c291a",
+            "player": "kamiti-akyuma1"
+          },
+          {
+            "epicAccountId": "6b223b5889994ae4ad5b6270ad3e8184",
+            "player": "merefishy"
+          },
+          {
+            "epicAccountId": "cd2e2ca95a9f42f8b3be11a8b64a13d4",
+            "player": "ワンパンで一目惚れ"
+          }
+        ],
+        "stats": {
+          "rank": 119,
+          "points": 311,
+          "kills": 8,
+          "vrs": 0,
+          "matches": 9
+        },
+        "prize": 0,
+        "prizePerPlayer": 0
+      },
+      "note": "完全一致の既掲載戦績。新規賞金・順位・戦績を変更せず候補のみ解消。"
+    },
+    {
+      "id": "auto-s43-5c6d2aefc129",
+      "decision": "already-published",
+      "existingId": "manual-s43-trios-20261122-me-r162",
+      "reviewedAt": "2026-11-24T12:11:50.110Z",
+      "source": "https://www.fortnite.com/competitive/events/S43_TriosCashCup/?region=ME&round=S43_TriosCashCup_Event3_ME",
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-trios-cash-cups-chapter-7-mini-season-official-rules",
+      "policy": "exact-epic-window-score-cash-duplicate-v1",
+      "evidence": {
+        "windowKey": "epicgames_S43_TriosCashCup_ME/S43_TriosCashCup_Event3_ME",
+        "checkpointScope": "history",
+        "lastSuccessAt": "2026-11-23T06:46:58.708Z",
+        "roster": [
+          {
+            "epicAccountId": "602ad4a029464542b0c8e03490fe3c93",
+            "player": "ねむじすた"
+          },
+          {
+            "epicAccountId": "6727836a4b4044f6b699960c0d9c993d",
+            "player": "Shirochan on PS4"
+          },
+          {
+            "epicAccountId": "b06402be9f3641d08890ae1c299f8e1c",
+            "player": "かに1128."
+          }
+        ],
+        "stats": {
+          "rank": 162,
+          "points": 293,
+          "kills": 8,
+          "vrs": 0,
+          "matches": 11
+        },
+        "prize": 0,
+        "prizePerPlayer": 0
+      },
+      "note": "完全一致の既掲載戦績。新規賞金・順位・戦績を変更せず候補のみ解消。"
+    },
+    {
+      "id": "auto-s43-3f539cc87e7e",
+      "decision": "already-published",
+      "existingId": "manual-s43-trios-20261122-oce-r519",
+      "reviewedAt": "2026-11-24T12:11:50.110Z",
+      "source": "https://www.fortnite.com/competitive/events/S43_TriosCashCup/?region=OCE&round=S43_TriosCashCup_Event3_OCE",
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-trios-cash-cups-chapter-7-mini-season-official-rules",
+      "policy": "exact-epic-window-score-cash-duplicate-v1",
+      "evidence": {
+        "windowKey": "epicgames_S43_TriosCashCup_OCE/S43_TriosCashCup_Event3_OCE",
+        "checkpointScope": "history",
+        "lastSuccessAt": "2026-11-22T17:26:35.295Z",
+        "roster": [
+          {
+            "epicAccountId": "6063ea7e93ac4770be1f7e8449e96201",
+            "player": "XSET Reetϟ"
+          },
+          {
+            "epicAccountId": "98cf48af9fc24d47979e1da9d11c2426",
+            "player": "かなはむだお"
+          },
+          {
+            "epicAccountId": "be831e1a87854555b0ceb7a0f518e686",
+            "player": "スイッチ勢黒猫"
+          }
+        ],
+        "stats": {
+          "rank": 519,
+          "points": 136,
+          "kills": 7,
+          "vrs": 0,
+          "matches": 6
+        },
+        "prize": 0,
+        "prizePerPlayer": 0
+      },
+      "note": "完全一致の既掲載戦績。新規賞金・順位・戦績を変更せず候補のみ解消。"
+    },
+    {
+      "id": "auto-s43-8cf8746aebb2",
+      "decision": "already-published",
+      "existingId": "manual-s43-trios-20261122-oce-r549",
+      "reviewedAt": "2026-11-24T12:11:50.110Z",
+      "source": "https://www.fortnite.com/competitive/events/S43_TriosCashCup/?region=OCE&round=S43_TriosCashCup_Event3_OCE",
+      "rule": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-trios-cash-cups-chapter-7-mini-season-official-rules",
+      "policy": "exact-epic-window-score-cash-duplicate-v1",
+      "evidence": {
+        "windowKey": "epicgames_S43_TriosCashCup_OCE/S43_TriosCashCup_Event3_OCE",
+        "checkpointScope": "history",
+        "lastSuccessAt": "2026-11-22T17:26:35.295Z",
+        "roster": [
+          {
+            "epicAccountId": "0af12130a2f64df9aac79f0504ed5abb",
+            "player": "zfa-a200PXMPMANM"
+          },
+          {
+            "epicAccountId": "0b346c67b5414216becfeaac9c67b2ae",
+            "player": "ZFA-A 200PXMPMAN"
+          },
+          {
+            "epicAccountId": "785d03c5ef7840f7a92357df654adee1",
+            "player": "78123819"
+          }
+        ],
+        "stats": {
+          "rank": 549,
+          "points": 119,
+          "kills": 23,
+          "vrs": 0,
+          "matches": 5
+        },
+        "prize": 0,
+        "prizePerPlayer": 0
+      },
+      "note": "完全一致の既掲載戦績。新規賞金・順位・戦績を変更せず候補のみ解消。"
     }
   ]
 }

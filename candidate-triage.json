@@ -1,7 +1,7 @@
 {
   "version": 1,
   "sourceCheckedAt": "2026-11-24T11:54:47.534Z",
-  "total": 97,
+  "total": 88,
   "alreadyResolved": 0,
   "byYear": [
     {
@@ -14,7 +14,7 @@
     },
     {
       "name": "2026",
-      "count": 47
+      "count": 38
     }
   ],
   "byRegion": [
@@ -28,7 +28,7 @@
     },
     {
       "name": "ME",
-      "count": 29
+      "count": 22
     },
     {
       "name": "NAC",
@@ -40,7 +40,7 @@
     },
     {
       "name": "OCE",
-      "count": 16
+      "count": 14
     }
   ],
   "byTournament": [
@@ -81,14 +81,6 @@
       "count": 1
     },
     {
-      "name": "Trios Cash Cup Battle Royale / ME / 2026",
-      "count": 7
-    },
-    {
-      "name": "Trios Cash Cup Battle Royale / OCE / 2026",
-      "count": 2
-    },
-    {
       "name": "ZB Solo Victory Cup / BR / 2024",
       "count": 5
     },
@@ -107,10 +99,6 @@
   ],
   "byStatus": [
     {
-      "name": "duplicate-risk",
-      "count": 9
-    },
-    {
       "name": "partial-scan",
       "count": 49
     },
@@ -120,303 +108,6 @@
     }
   ],
   "queue": [
-    {
-      "id": "auto-s43-1bed4c0dccb3",
-      "origin": "history",
-      "date": "2026-11-22",
-      "year": "2026",
-      "region": "ME",
-      "tournamentId": "ch7s5-trios-cash-cup",
-      "event": "Trios Cash Cup Battle Royale",
-      "round": "Event 3 / 参加確認",
-      "player": "a72wxdxczha / arim / にじいろベタ",
-      "kind": "参加確認",
-      "rank": 59,
-      "points": 346,
-      "kills": 22,
-      "vrs": 1,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S43_TriosCashCup/?region=ME&round=S43_TriosCashCup_Event3_ME",
-      "status": "duplicate-risk",
-      "action": "既存の同一選手・ラウンドと突合（自動統合しない）",
-      "reason": "同一開催枠・同一チームがすでに掲載されています",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": true,
-        "observedPartial": false,
-        "seenPages": 10,
-        "totalPages": 10,
-        "sourceKey": "epicgames_S43_TriosCashCup_ME/S43_TriosCashCup_Event3_ME",
-        "possibleExistingId": "manual-s43-trios-20261122-me-r59"
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s43-1f211248e60b",
-      "origin": "history",
-      "date": "2026-11-22",
-      "year": "2026",
-      "region": "ME",
-      "tournamentId": "ch7s5-trios-cash-cup",
-      "event": "Trios Cash Cup Battle Royale",
-      "round": "Event 3 / 参加確認",
-      "player": "Saku / 顎 / しいら",
-      "kind": "参加確認",
-      "rank": 51,
-      "points": 352,
-      "kills": 62,
-      "vrs": 1,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S43_TriosCashCup/?region=ME&round=S43_TriosCashCup_Event3_ME",
-      "status": "duplicate-risk",
-      "action": "既存の同一選手・ラウンドと突合（自動統合しない）",
-      "reason": "同一開催枠・同一チームがすでに掲載されています",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": true,
-        "observedPartial": false,
-        "seenPages": 10,
-        "totalPages": 10,
-        "sourceKey": "epicgames_S43_TriosCashCup_ME/S43_TriosCashCup_Event3_ME",
-        "possibleExistingId": "manual-s43-trios-20261122-me-r51"
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s43-509c91281def",
-      "origin": "history",
-      "date": "2026-11-22",
-      "year": "2026",
-      "region": "ME",
-      "tournamentId": "ch7s5-trios-cash-cup",
-      "event": "Trios Cash Cup Battle Royale",
-      "round": "Event 3 / 参加確認",
-      "player": "Faze benjyfishyε / NBL ぐんさん PULISIC / Crs くるただにょりーǃǃ",
-      "kind": "参加確認",
-      "rank": 111,
-      "points": 316,
-      "kills": 8,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S43_TriosCashCup/?region=ME&round=S43_TriosCashCup_Event3_ME",
-      "status": "duplicate-risk",
-      "action": "既存の同一選手・ラウンドと突合（自動統合しない）",
-      "reason": "同一開催枠・同一チームがすでに掲載されています",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": true,
-        "observedPartial": false,
-        "seenPages": 10,
-        "totalPages": 10,
-        "sourceKey": "epicgames_S43_TriosCashCup_ME/S43_TriosCashCup_Event3_ME",
-        "possibleExistingId": "manual-s43-trios-20261122-me-r111"
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s43-5c6d2aefc129",
-      "origin": "history",
-      "date": "2026-11-22",
-      "year": "2026",
-      "region": "ME",
-      "tournamentId": "ch7s5-trios-cash-cup",
-      "event": "Trios Cash Cup Battle Royale",
-      "round": "Event 3 / 参加確認",
-      "player": "ねむじすた / Shirochan on PS4 / かに1128.",
-      "kind": "参加確認",
-      "rank": 162,
-      "points": 293,
-      "kills": 8,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S43_TriosCashCup/?region=ME&round=S43_TriosCashCup_Event3_ME",
-      "status": "duplicate-risk",
-      "action": "既存の同一選手・ラウンドと突合（自動統合しない）",
-      "reason": "同一開催枠・同一チームがすでに掲載されています",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": true,
-        "observedPartial": false,
-        "seenPages": 10,
-        "totalPages": 10,
-        "sourceKey": "epicgames_S43_TriosCashCup_ME/S43_TriosCashCup_Event3_ME",
-        "possibleExistingId": "manual-s43-trios-20261122-me-r162"
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s43-6a6762f823c6",
-      "origin": "history",
-      "date": "2026-11-22",
-      "year": "2026",
-      "region": "ME",
-      "tournamentId": "ch7s5-trios-cash-cup",
-      "event": "Trios Cash Cup Battle Royale",
-      "round": "Event 3 / 参加確認",
-      "player": "IPF STANDRY / ウン！ボクつよい！ / IPF ねめしす",
-      "kind": "参加確認",
-      "rank": 110,
-      "points": 316,
-      "kills": 19,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S43_TriosCashCup/?region=ME&round=S43_TriosCashCup_Event3_ME",
-      "status": "duplicate-risk",
-      "action": "既存の同一選手・ラウンドと突合（自動統合しない）",
-      "reason": "同一開催枠・同一チームがすでに掲載されています",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": true,
-        "observedPartial": false,
-        "seenPages": 10,
-        "totalPages": 10,
-        "sourceKey": "epicgames_S43_TriosCashCup_ME/S43_TriosCashCup_Event3_ME",
-        "possibleExistingId": "manual-s43-trios-20261122-me-r110"
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s43-7dea3f862c0d",
-      "origin": "history",
-      "date": "2026-11-22",
-      "year": "2026",
-      "region": "ME",
-      "tournamentId": "ch7s5-trios-cash-cup",
-      "event": "Trios Cash Cup Battle Royale",
-      "round": "Event 3 / 参加確認",
-      "player": "kamiti-akyuma1 / merefishy / ワンパンで一目惚れ",
-      "kind": "参加確認",
-      "rank": 119,
-      "points": 311,
-      "kills": 8,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S43_TriosCashCup/?region=ME&round=S43_TriosCashCup_Event3_ME",
-      "status": "duplicate-risk",
-      "action": "既存の同一選手・ラウンドと突合（自動統合しない）",
-      "reason": "同一開催枠・同一チームがすでに掲載されています",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": true,
-        "observedPartial": false,
-        "seenPages": 10,
-        "totalPages": 10,
-        "sourceKey": "epicgames_S43_TriosCashCup_ME/S43_TriosCashCup_Event3_ME",
-        "possibleExistingId": "manual-s43-trios-20261122-me-r119"
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s43-c31541ae60af",
-      "origin": "history",
-      "date": "2026-11-22",
-      "year": "2026",
-      "region": "ME",
-      "tournamentId": "ch7s5-trios-cash-cup",
-      "event": "Trios Cash Cup Battle Royale",
-      "round": "Event 3 / 参加確認",
-      "player": "がおおおおおおおおおおおお / ふとしぃ / ポテットくらげ",
-      "kind": "参加確認",
-      "rank": 109,
-      "points": 317,
-      "kills": 22,
-      "vrs": 1,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S43_TriosCashCup/?region=ME&round=S43_TriosCashCup_Event3_ME",
-      "status": "duplicate-risk",
-      "action": "既存の同一選手・ラウンドと突合（自動統合しない）",
-      "reason": "同一開催枠・同一チームがすでに掲載されています",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": true,
-        "observedPartial": false,
-        "seenPages": 10,
-        "totalPages": 10,
-        "sourceKey": "epicgames_S43_TriosCashCup_ME/S43_TriosCashCup_Event3_ME",
-        "possibleExistingId": "manual-s43-trios-20261122-me-r109"
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s43-3f539cc87e7e",
-      "origin": "history",
-      "date": "2026-11-22",
-      "year": "2026",
-      "region": "OCE",
-      "tournamentId": "ch7s5-trios-cash-cup",
-      "event": "Trios Cash Cup Battle Royale",
-      "round": "Event 3 / 参加確認",
-      "player": "XSET Reetϟ / かなはむだお / スイッチ勢黒猫",
-      "kind": "参加確認",
-      "rank": 519,
-      "points": 136,
-      "kills": 7,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S43_TriosCashCup/?region=OCE&round=S43_TriosCashCup_Event3_OCE",
-      "status": "duplicate-risk",
-      "action": "既存の同一選手・ラウンドと突合（自動統合しない）",
-      "reason": "同一開催枠・同一チームがすでに掲載されています",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": true,
-        "observedPartial": false,
-        "seenPages": 9,
-        "totalPages": 9,
-        "sourceKey": "epicgames_S43_TriosCashCup_OCE/S43_TriosCashCup_Event3_OCE",
-        "possibleExistingId": "manual-s43-trios-20261122-oce-r519"
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s43-8cf8746aebb2",
-      "origin": "history",
-      "date": "2026-11-22",
-      "year": "2026",
-      "region": "OCE",
-      "tournamentId": "ch7s5-trios-cash-cup",
-      "event": "Trios Cash Cup Battle Royale",
-      "round": "Event 3 / 参加確認",
-      "player": "zfa-a200PXMPMANM / ZFA-A 200PXMPMAN / 78123819",
-      "kind": "参加確認",
-      "rank": 549,
-      "points": 119,
-      "kills": 23,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S43_TriosCashCup/?region=OCE&round=S43_TriosCashCup_Event3_OCE",
-      "status": "duplicate-risk",
-      "action": "既存の同一選手・ラウンドと突合（自動統合しない）",
-      "reason": "同一開催枠・同一チームがすでに掲載されています",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": true,
-        "observedPartial": false,
-        "seenPages": 9,
-        "totalPages": 9,
-        "sourceKey": "epicgames_S43_TriosCashCup_OCE/S43_TriosCashCup_Event3_OCE",
-        "possibleExistingId": "manual-s43-trios-20261122-oce-r549"
-      },
-      "rewardState": "cash-unconfirmed"
-    },
     {
       "id": "auto-s30-1ab82fa32286",
       "origin": "history",
