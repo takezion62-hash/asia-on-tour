@@ -2,10 +2,10 @@
   "version": 1,
   "role": "generated canonical-source snapshot; results.json remains authoritative in phase 1",
   "canonicalFile": "results.json",
-  "canonicalSha256": "278a0bf775ff311a6a596bb99525d597c1b698f52aacfa5af60f5a6465c31a51",
-  "count": 9482,
+  "canonicalSha256": "03dc4be7d148e3577360493f0ebf21fb62936608e7f01c09feaac88967c74b36",
+  "count": 9530,
   "teamPrizeCents": 12106000,
-  "unconfirmedPrizeRecords": 1731,
+  "unconfirmedPrizeRecords": 1752,
   "personalPrizeCents": 12086000,
   "recordOrder": [
     "s42-me-slenderman-reload-skin-20261021-acris-chacha",
@@ -9489,7 +9489,55 @@
     "auto-s43-19263e3d4ee9",
     "auto-s43-3d4bff843c06",
     "auto-s43-4c0aa34dc056",
-    "auto-s43-d4a0306bd737"
+    "auto-s43-d4a0306bd737",
+    "auto-s40-5916f12482df",
+    "auto-s40-eb3af2f9419d",
+    "auto-s40-25928070cd4c",
+    "auto-s39-3fa4c81fb3aa",
+    "auto-s39-c6fb643d1fea",
+    "auto-s39-c079db9121c3",
+    "auto-s41-fa455d4774a3",
+    "auto-s41-cadc6d1d9ce1",
+    "auto-s41-1e09f9b869be",
+    "auto-s41-8d4611eb32c2",
+    "auto-s41-0dfa67011baf",
+    "auto-s35-16ce6d713ab3",
+    "auto-s35-79679a52ed66",
+    "auto-s35-5475b62798a1",
+    "auto-s35-6e304a96c885",
+    "auto-s35-ab406550a059",
+    "auto-s35-e38b8dc71b79",
+    "auto-s37-315f20e96c59",
+    "auto-s35-552dbed16510",
+    "auto-s35-b96439665b5b",
+    "auto-s35-0d0c17f887ad",
+    "auto-s35-52c8414607ad",
+    "auto-s35-661473fd83be",
+    "auto-s35-11c2af31076f",
+    "auto-s35-cf49d0f46b54",
+    "auto-s35-3a884d2d5a4b",
+    "auto-s35-11341704653e",
+    "auto-s35-ed7ff13c1f42",
+    "auto-s30-aeb5cdb52808",
+    "auto-s30-1077fc2a7649",
+    "auto-s30-24a7e23b8363",
+    "auto-s30-130bc081e4ab",
+    "auto-s30-20e8f007fa49",
+    "auto-s30-a323435fdf8a",
+    "auto-s37-4bd33c2597c9",
+    "auto-s43-1dff859729dc",
+    "auto-s43-9c29619ba7f5",
+    "auto-s43-d42dc64fc5bb",
+    "auto-s43-fec03731beb7",
+    "auto-s39-b50ba96ff6fa",
+    "auto-s39-416599b42980",
+    "auto-s39-c8fa9a0538d1",
+    "auto-s41-a1caf54e3fe2",
+    "auto-s41-e95db5f65732",
+    "auto-s41-81e8b944e309",
+    "auto-s41-f873fb761070",
+    "auto-s41-1420177d49f2",
+    "auto-s41-457db188febb"
   ],
   "shards": [
     {
@@ -9558,11 +9606,11 @@
     {
       "seasonId": "S30",
       "file": "source-results/S30.json",
-      "count": 2721,
+      "count": 2727,
       "teamPrizeCents": 1920000,
       "unconfirmedPrizeRecords": 172,
       "personalPrizeCents": 1920000,
-      "sha256": "b46f0d6bbeaa4ebdc5ceff45a297ae3db4819b528b2e775870b8c9b6484edec9"
+      "sha256": "855bb7f175e18cc3c939bb8b97d5ac4dd4aa3c11b1c3b408e25811fb3c529bd7"
     },
     {
       "seasonId": "S31",
@@ -9603,11 +9651,11 @@
     {
       "seasonId": "S35",
       "file": "source-results/S35.json",
-      "count": 79,
+      "count": 95,
       "teamPrizeCents": 140000,
       "unconfirmedPrizeRecords": 0,
       "personalPrizeCents": 140000,
-      "sha256": "ef1d10dd8b7db481fa74c2806f7909045415bc77f05c3bc7ba1afd1a3dca59ae"
+      "sha256": "1e6a377c4eb60bf3d0060ed02520c82aabf787335a2721453197049231c20e40"
     },
     {
       "seasonId": "S36",
@@ -9621,11 +9669,11 @@
     {
       "seasonId": "S37",
       "file": "source-results/S37.json",
-      "count": 225,
+      "count": 227,
       "teamPrizeCents": 760000,
       "unconfirmedPrizeRecords": 16,
       "personalPrizeCents": 760000,
-      "sha256": "410137113ebef6baeeb0da1828153087dbbf5c4c52eb53fc0fe230d501813621"
+      "sha256": "1ac434b4646726dba14af2ae834dc7276bb5adcc8ada16d29e8e60939382f614"
     },
     {
       "seasonId": "S38",
@@ -9639,29 +9687,29 @@
     {
       "seasonId": "S39",
       "file": "source-results/S39.json",
-      "count": 313,
+      "count": 319,
       "teamPrizeCents": 1590000,
-      "unconfirmedPrizeRecords": 125,
+      "unconfirmedPrizeRecords": 131,
       "personalPrizeCents": 1590000,
-      "sha256": "fc3787f15dc6dbab38bc5619406968f0ac0ef2da5c88a29675b5c9dbd42a7ee5"
+      "sha256": "7ab606fc261dfdf7b7da17fa4978e967c8a9bbffdbffbee78bfa590515725381"
     },
     {
       "seasonId": "S40",
       "file": "source-results/S40.json",
-      "count": 183,
+      "count": 186,
       "teamPrizeCents": 530000,
       "unconfirmedPrizeRecords": 80,
       "personalPrizeCents": 530000,
-      "sha256": "5338a126dde21522a2b256d9effdfcdf8fd2ea5435998138e1a193d06b2c1f74"
+      "sha256": "0482e2fd437b3eea7b449b5ce9cff4c2241db21cd4c75bff4be569e10efff0c7"
     },
     {
       "seasonId": "S41",
       "file": "source-results/S41.json",
-      "count": 488,
+      "count": 499,
       "teamPrizeCents": 940000,
-      "unconfirmedPrizeRecords": 94,
+      "unconfirmedPrizeRecords": 105,
       "personalPrizeCents": 940000,
-      "sha256": "795755ce6573f47615393866d04c4bf4a563bf30a56283849d1578bc4dcb2faf"
+      "sha256": "6dd044bb75a0d9376ee3be57bd3cc638c1384f5c10050ba9f661625e563d65f0"
     },
     {
       "seasonId": "S42",
@@ -9675,11 +9723,11 @@
     {
       "seasonId": "S43",
       "file": "source-results/S43.json",
-      "count": 382,
+      "count": 386,
       "teamPrizeCents": 90000,
-      "unconfirmedPrizeRecords": 45,
+      "unconfirmedPrizeRecords": 49,
       "personalPrizeCents": 90000,
-      "sha256": "6a74d8da651a348bcfb96e8ba1bd3765bed476b5751cfc8197c8bb91b3edf759"
+      "sha256": "f6ab960f6d55db0523741da4e4d549905ecfa4c58434214f3fb1c497f6e3a59b"
     },
     {
       "seasonId": "unknown",

@@ -2,6 +2,87 @@
   "version": 1,
   "entries": [
     {
+      "id": "verified-review-round5-3730c8cd6cc8",
+      "date": "2026-11-25",
+      "type": "records",
+      "title": "公式順位表再検証：予選・決勝・参加実績13件を掲載",
+      "description": "Epic本人ID・大会枠・成熟した保存済み順位表の完全照合。2026 S42予選/決勝0VR、2024公式突破条件、現金賞金未確定の参加記録を分離。未確認の賞金やスキン獲得は推定していない。",
+      "recordIds": [
+        "auto-s43-1dff859729dc",
+        "auto-s43-9c29619ba7f5",
+        "auto-s43-d42dc64fc5bb",
+        "auto-s43-fec03731beb7",
+        "auto-s39-b50ba96ff6fa",
+        "auto-s39-416599b42980",
+        "auto-s39-c8fa9a0538d1",
+        "auto-s41-a1caf54e3fe2",
+        "auto-s41-e95db5f65732",
+        "auto-s41-81e8b944e309",
+        "auto-s41-f873fb761070",
+        "auto-s41-1420177d49f2",
+        "auto-s41-457db188febb"
+      ]
+    },
+    {
+      "id": "auto-saved-review-20261124134902",
+      "date": "2026-11-24",
+      "type": "records",
+      "title": "公式規則で自動承認：保存済み過去大会17戦績",
+      "description": "追加APIなしで成熟済み完全順位表・本人Epic ID・公式開催枠・既存公式承認ルールを再照合。賞金額や受給資格を推測せず、既存戦績を保持して追記。",
+      "recordIds": [
+        "auto-s35-16ce6d713ab3",
+        "auto-s35-79679a52ed66",
+        "auto-s35-5475b62798a1",
+        "auto-s35-6e304a96c885",
+        "auto-s35-ab406550a059",
+        "auto-s35-e38b8dc71b79",
+        "auto-s37-315f20e96c59",
+        "auto-s35-552dbed16510",
+        "auto-s35-b96439665b5b",
+        "auto-s35-0d0c17f887ad",
+        "auto-s35-52c8414607ad",
+        "auto-s35-661473fd83be",
+        "auto-s35-11c2af31076f",
+        "auto-s35-cf49d0f46b54",
+        "auto-s35-3a884d2d5a4b",
+        "auto-s35-11341704653e",
+        "auto-s35-ed7ff13c1f42"
+      ]
+    },
+    {
+      "id": "auto-sync-20261124135044",
+      "date": "2026-11-24",
+      "type": "records",
+      "title": "公式規則で自動承認：過去大会7戦績",
+      "description": "公式規則・地域別順位・本人確認済みEpic ID・順位表・既存戦績を照合。予選突破・突破圏外の参加確認（0件）、公式VR賞金、スキン（0件）、公式賞金表によるCash Cup（0件／賞金圏外$0含む）、S43 Performance Evaluation（0件）、S39 Unreal Cup（0件／チーム・個人賞金、圏外$0）、公式デュオ予選（0件／突破と圏外参加を区別・$0）、S43 PlayStation BR/ZB（0件／Top80・順位賞金・圏外$0を区別）、S43 Squads（0件／予選・決勝個人/チーム賞金）、Console Duos S35/S37（1件）を自動掲載。支払い完了や未確認の賞金は推定しない。",
+      "recordIds": [
+        "auto-s30-aeb5cdb52808",
+        "auto-s30-1077fc2a7649",
+        "auto-s30-24a7e23b8363",
+        "auto-s30-130bc081e4ab",
+        "auto-s30-20e8f007fa49",
+        "auto-s30-a323435fdf8a",
+        "auto-s37-4bd33c2597c9"
+      ]
+    },
+    {
+      "id": "verified-review-round5-479871b04c16",
+      "date": "2026-11-24",
+      "type": "records",
+      "title": "公式順位表再検証：予選・決勝・参加実績8件を掲載",
+      "description": "Epic本人ID・大会枠・成熟した保存済み順位表の完全照合。2026 S42予選/決勝0VR、2024公式突破条件、現金賞金未確定の参加記録を分離。未確認の賞金やスキン獲得は推定していない。",
+      "recordIds": [
+        "auto-s39-3fa4c81fb3aa",
+        "auto-s39-c6fb643d1fea",
+        "auto-s39-c079db9121c3",
+        "auto-s41-fa455d4774a3",
+        "auto-s41-cadc6d1d9ce1",
+        "auto-s41-1e09f9b869be",
+        "auto-s41-8d4611eb32c2",
+        "auto-s41-0dfa67011baf"
+      ]
+    },
+    {
       "id": "auto-sync-20261124134552",
       "date": "2026-11-24",
       "type": "records",
@@ -9475,7 +9556,7 @@
       "date": "2026-11-11",
       "type": "records",
       "title": "Solo/Duos Cash Cup・PlayStation Cupの公式順位を掲載",
-      "description": "公式順位表・Epic ID・進出条件を再照合し、通常の遠征結果へ206件掲載。賞金が確認できない結果を推定せず、予選と決勝・現金$0を区別。",
+      "description": "公式順位表・Epic ID・進出条件を再照合し、通常の遠征結果へ209件掲載。賞金が確認できない結果を推定せず、予選と決勝・現金$0を区別。",
       "recordIds": [
         "auto-s31-3e80feaf4fbe",
         "auto-s31-2802d7d51af0",
@@ -9682,7 +9763,10 @@
         "auto-s40-1191245f8905",
         "auto-s40-d882e822cf4d",
         "auto-s40-6087910cfddf",
-        "auto-s40-7dcb60a1eddb"
+        "auto-s40-7dcb60a1eddb",
+        "auto-s40-5916f12482df",
+        "auto-s40-eb3af2f9419d",
+        "auto-s40-25928070cd4c"
       ]
     },
     {
