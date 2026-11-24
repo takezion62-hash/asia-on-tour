@@ -2,10 +2,10 @@
   "version": 1,
   "role": "generated canonical-source snapshot; results.json remains authoritative in phase 1",
   "canonicalFile": "results.json",
-  "canonicalSha256": "278a0bf775ff311a6a596bb99525d597c1b698f52aacfa5af60f5a6465c31a51",
-  "count": 9482,
+  "canonicalSha256": "356179d5cd0f62231f6d0ff0f0793607080baf1e49d53d64aef44dbbd6191e69",
+  "count": 9493,
   "teamPrizeCents": 12106000,
-  "unconfirmedPrizeRecords": 1731,
+  "unconfirmedPrizeRecords": 1739,
   "personalPrizeCents": 12086000,
   "recordOrder": [
     "s42-me-slenderman-reload-skin-20261021-acris-chacha",
@@ -9489,7 +9489,18 @@
     "auto-s43-19263e3d4ee9",
     "auto-s43-3d4bff843c06",
     "auto-s43-4c0aa34dc056",
-    "auto-s43-d4a0306bd737"
+    "auto-s43-d4a0306bd737",
+    "auto-s40-5916f12482df",
+    "auto-s40-eb3af2f9419d",
+    "auto-s40-25928070cd4c",
+    "auto-s39-3fa4c81fb3aa",
+    "auto-s39-c6fb643d1fea",
+    "auto-s39-c079db9121c3",
+    "auto-s41-fa455d4774a3",
+    "auto-s41-cadc6d1d9ce1",
+    "auto-s41-1e09f9b869be",
+    "auto-s41-8d4611eb32c2",
+    "auto-s41-0dfa67011baf"
   ],
   "shards": [
     {
@@ -9639,29 +9650,29 @@
     {
       "seasonId": "S39",
       "file": "source-results/S39.json",
-      "count": 313,
+      "count": 316,
       "teamPrizeCents": 1590000,
-      "unconfirmedPrizeRecords": 125,
+      "unconfirmedPrizeRecords": 128,
       "personalPrizeCents": 1590000,
-      "sha256": "fc3787f15dc6dbab38bc5619406968f0ac0ef2da5c88a29675b5c9dbd42a7ee5"
+      "sha256": "11f4b70d1938d0fcf6b456d752fd36a02aeb9fb2faade75be4d3034ddc531199"
     },
     {
       "seasonId": "S40",
       "file": "source-results/S40.json",
-      "count": 183,
+      "count": 186,
       "teamPrizeCents": 530000,
       "unconfirmedPrizeRecords": 80,
       "personalPrizeCents": 530000,
-      "sha256": "5338a126dde21522a2b256d9effdfcdf8fd2ea5435998138e1a193d06b2c1f74"
+      "sha256": "0482e2fd437b3eea7b449b5ce9cff4c2241db21cd4c75bff4be569e10efff0c7"
     },
     {
       "seasonId": "S41",
       "file": "source-results/S41.json",
-      "count": 488,
+      "count": 493,
       "teamPrizeCents": 940000,
-      "unconfirmedPrizeRecords": 94,
+      "unconfirmedPrizeRecords": 99,
       "personalPrizeCents": 940000,
-      "sha256": "795755ce6573f47615393866d04c4bf4a563bf30a56283849d1578bc4dcb2faf"
+      "sha256": "66a8139c917037e33d1f45e9a6516ff945fde696cafc591b0e8273126f0723e4"
     },
     {
       "seasonId": "S42",
