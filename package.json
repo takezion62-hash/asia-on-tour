@@ -13,7 +13,8 @@
     "test:source": "node --test tests/source-results-store.test.cjs tests/source-results-split.test.cjs",
     "audit:phase3": "node scripts/audit-legacy-results.cjs",
     "tournament:preview": "node scripts/tournament-registration-preview.cjs",
-    "tournament:discover": "node scripts/unmapped-tournament-discovery.cjs"
+    "tournament:discover": "node scripts/unmapped-tournament-discovery.cjs",
+    "review:duplicates": "node scripts/resolve-exact-duplicates.cjs --dry-run"
   },
   "engines": {
     "node": ">=22"

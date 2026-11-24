@@ -35,6 +35,8 @@ on:
       - "scripts/publish-verified-legacy-finals-and-duplicates.cjs"
       - "scripts/publish-verified-nov12-pending.cjs"
       - "scripts/resolve-triaged-candidates-20261112.cjs"
+      - "scripts/resolve-exact-duplicates.cjs"
+      - "scripts/exact-duplicate-resolution.cjs"
       - "scripts/reconcile-exact-epic-rank-three.cjs"
       - ".github/workflows/history-sync.yml"
       - "scripts/publish-verified-finals-batch.cjs"
@@ -92,10 +94,12 @@ jobs:
           for attempt in 1 2 3 4 5; do
             git fetch origin main
             git reset --hard origin/main
+            node scripts/resolve-exact-duplicates.cjs --dry-run
+            node scripts/resolve-exact-duplicates.cjs --apply
             node scripts/resolve-triaged-candidates-20261112.cjs --dry-run
             node scripts/resolve-triaged-candidates-20261112.cjs
             npm run validate
-            node --test tests/verified-partial-page.test.cjs tests/participation-archive.test.cjs tests/tournament-rules.test.cjs
+            node --test tests/verified-partial-page.test.cjs tests/participation-archive.test.cjs tests/tournament-rules.test.cjs tests/exact-duplicate-resolution.test.cjs
             node scripts/build-season-data.cjs
             node scripts/build-candidate-triage.cjs
             git add updates.json history-sync-review.json auto-sync-review.json history-sync-reviewed.json approval-history.json history-sync-status.json auto-sync-status.json participation-index.json participation-status.json candidate-triage.json
