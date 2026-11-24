@@ -27,3 +27,14 @@
 missing は不足、errors は矛盾・既存バリデーターのエラー、review は追加確認。suggested は承認方式候補、routeReport は現行設定、coverage は地域別順位ライン、windowReport は開催枠形式。status は blocked / review-only / needs-verification / preview-ready。registrationPreview は構造上の追加候補JSON（既存カタログをそのまま使用する場合は catalog が null）。**すべての新大会は追加検証必須、automaticPublicationAuthorized は常に false**。
 
 windows は tournamentId / seasonId / series / eventId / region / kind / windowId / round を公式開催枠から指定。地域・ラウンド例の形式チェックは実際の開催日時や順位表を確認したことにはならない。公式根拠本文・対象開催枠・承認アダプター・本人ID・重複を別途確認し、既存バリデーターの固有条件を弱めない。全コマンド読み取り専用。戦績・設定・ルールを自動編集しない。
+
+## 第4段階：未登録大会の自動発見・診断連携
+
+Osirionの既存大会一覧から、従来の未登録イベント検出条件を変えずに詳細を採取する。追加API呼び出し・順位表走査は行わない。新着／過去のステータスJSONに `unmappedDiscovery` として全検出イベントID・提供元表示名・観測地域・JST日付範囲・開催枠数・地域ごとの新しい3枠までの代表サンプル・診断不足項目を記録。BR/ZB/Mobileの別IDは分離。同じ開催枠IDの時刻矛盾を表示し、未確認ルールは推測しない。
+
+- `npm run tournament:discover`：両スコープの最新成功スナップショットを正確なIDで統合。登録済みIDは除外。重複する新着／過去の開催枠数は合算しない。
+- `npm run tournament:discover -- --event S43_ExampleCup`：観測情報と第3段階の未入力ひな型・診断不足項目・調査チェックリストをJSONで出力。表示名とイベントIDだけを候補値にする。観測地域は公式対象地域ではないので、ひな型のregions・windowsは未入力のまま。公式規則・分類・報酬は別途照合。
+- 初回の成功スキャンまでは旧ステータスの件数・先頭IDのみ表示。429等の失敗で既存の成功スナップショットを消さない。最新観測時刻は手動更新のcheckedAtと独立して比較する。
+- 各スコープは最新の成功観測のみであり、過去の候補全体を永続蓄積する台帳ではない。設定の追跡期間や提供元データ外の大会を網羅しない。
+
+`automaticPublicationAuthorized` は常に false。既存カタログ・大会ルール・賞金・戦績・承認設定の自動書き換えはしない。取得元のイベントページ候補URLは公式規則の検証済み証拠とは区別する。
