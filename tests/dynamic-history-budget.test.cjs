@@ -1,0 +1,65 @@
+'use strict';
+const test=require('node:test'),assert=require('node:assert/strict');
+const {planBudget,allowance,summary}=require('../scripts/dynamic-history-budget.cjs');
+const {recoveryShortlist,REVIEW_REASON}=require('../scripts/review-recovery-priority.cjs');
+const now=Date.parse('2026-11-24T13:00:00Z');
+const w=(key,series='victory-cup')=>({key,series});
+function fixture(){
+ const active=Array.from({length:24},(_,i)=>w('w'+i)),state={windows:{}};
+ for(let i=6;i<24;i++)state.windows['w'+i]={complete:false,nextPage:10,totalPages:100};
+ state.windows.w6.totalPages=21;state.windows.w7.totalPages=25;
+ state.windows.w8.totalPages=14;
+ const recovery=[{windowKey:'w6',candidateCount:2,cashCandidates:2},{windowKey:'w7',candidateCount:12,cashCandidates:0},{windowKey:'w8',candidateCount:3,cashCandidates:0}];
+ return {active,state,recovery};
+}
+test('48-page steady state completes an 11-page and a 4-page candidate board, preserves six fresh slots',()=>{
+ const x=fixture(),before=JSON.stringify(x);
+ const p=planBudget(x.active,x.state,x.recovery,{budget:48,minUnstarted:6,now});
+ const by=Object.fromEntries(p.items.map(i=>[i.key,i.pages]));
+ assert.equal(by.w6,11);assert.equal(by.w8,4);
+ assert.ok(by.w7>2);assert.equal(p.planned,48);
+ for(let i=0;i<6;i++)assert.ok(by['w'+i]>=2);
+ assert.ok(p.items.every(i=>i.pages<=12));assert.equal(JSON.stringify(x),before);
+ assert.ok(summary(p).groups.recovery.plannedPages<=Math.floor(48*.6));
+});
+test('low budget, due retry, delayed retry, completed and stale Epic ID checkpoints',()=>{
+ const x=fixture();x.state.windows.w9={nextPage:0,retryAfter:'2026-11-23T00:00:00Z'};
+ x.state.windows.w10={nextPage:1,totalPages:5,retryAfter:'2026-11-25T00:00:00Z'};
+ x.state.windows.w11={complete:true,nextPage:4,totalPages:4};
+ x.active[12].series='nvidia-cup';x.state.windows.w12={complete:true,epicIdsRetained:false};
+ for(const budget of [0,1,6,12,20,24,44,48,96]){
+  const p=planBudget(x.active,x.state,x.recovery,{budget,minUnstarted:6,now});
+  assert.ok(p.planned<=budget);assert.equal(p.items[10].pages,0);assert.equal(p.items[11].pages,0);
+  if(budget)assert.ok(p.items[9].pages>=1);
+  assert.equal(p.items[12].cap,12);
+  let left=budget;
+  for(let i=0;i<p.items.length;i++){const n=allowance(p,i,left);assert.ok(n>=0&&n<=p.items[i].cap);left-=n}
+  assert.ok(left>=0);
+ }
+});
+test('allocation cap and future reservation survive early completion and zero budget',()=>{
+ const x=fixture(),p=planBudget(x.active,x.state,x.recovery,{budget:44,now});
+ let left=44;
+ for(let i=0;i<p.items.length;i++){
+  const n=allowance(p,i,left);assert.ok(n<=p.items[i].pages);
+  left-=i===0?0:n;
+ }
+ assert.ok(left>=0);assert.equal(allowance(p,0,0),0);
+ assert.throws(()=>planBudget([x.active[0],x.active[0]],x.state,[],{budget:4}));
+});
+test('additional recovery reasons require configured route, exact source and intact page chain',()=>{
+ const event='S39_NvidiaCup',windowId=event+'_OCE',key='epicgames_'+event+'_OCE/'+windowId;
+ const win={key,eventId:event,windowId,seasonId:'S39',dateJst:'2025-12-21',region:'OCE',series:'nvidia-cup',tournamentId:'ch7s1-nvidia-geforce-rtx-cup',kind:'参加確認',round:'単一ラウンド / 参加確認'};
+ const row={id:'test-nvidia',seasonId:win.seasonId,date:win.dateJst,region:win.region,tournamentId:win.tournamentId,kind:win.kind,round:win.round,rank:40,verified:true,prize:null,source:'https://www.fortnite.com/competitive/events/'+event+'/?region=OCE&round='+windowId,reviewReason:'全ページ連続の順位表・Epic ID付完全スナップショットが未確認'};
+ const cp={complete:false,nextPage:3,pages:3,totalPages:6,lastSeenRank:300,rankingOrderValid:true,epicIdsRetained:true,proposals:[{...row}]};
+ const config={autoApproveNvidia:true};
+ const plan=(r=row,c=cp,cfg=config,reviewedIds=[])=>recoveryShortlist([win],{windows:{[key]:c}},[r],[],{config:cfg,now,reviewedIds});
+ assert.equal(plan().length,1);assert.equal(plan()[0].cashCandidates,1);
+ assert.equal(plan(row,cp,{}).length,0);
+ assert.equal(plan({...row,reviewReason:'本人ID不一致'}).length,0);
+ assert.equal(plan(row,{...cp,pages:2}).length,0);
+ assert.equal(plan(row,{...cp,epicIdsRetained:false}).length,0);
+ assert.equal(plan(row,{...cp,retryAfter:'2026-11-25T00:00:00Z'}).length,0);
+ assert.equal(plan(row,cp,config,[row.id]).length,0);
+ assert.equal(plan({...row,rank:41}).length,0);
+});

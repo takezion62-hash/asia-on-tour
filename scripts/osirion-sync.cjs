@@ -22,6 +22,7 @@ const {stageFor:playstationStageFor}=require('./automatic-playstation-approval.c
 const {scanCoverage}=require('./scan-coverage.cjs');
 const {finishableWindows,remainingPages,windowPageAllowance,leastCoveredBucket}=require('./scan-efficiency.cjs');
 const {recoveryShortlist}=require('./review-recovery-priority.cjs');
+const {planBudget,allowance:dynamicAllowance,summary:budgetSummary}=require('./dynamic-history-budget.cjs');
 const {runDelta:runNewPlayerDelta}=require('./new-player-history-delta.cjs');
 const {trafficPlan,createPacer}=require('./osirion-traffic-policy.cjs');
 const root=path.resolve(__dirname,'..');
@@ -492,7 +493,7 @@ function selectHistoricalWindows(windows,state,config,time=Date.now(),records=[]
   const cap=Math.max(0,Math.min(4,Number.isInteger(config.reviewRecovery.maxWindows)?
     config.reviewRecovery.maxWindows:3));
   const queue=recoveryShortlist(pending,state,reviewRows,records,
-   {now:time,perWindowCap:config.maxPagesPerWindowPerRun||12});
+   {now:time,perWindowCap:config.maxPagesPerWindowPerRun||12,...(config.dynamicReviewBudget?.enabled===true?{config}: {})});
   const chosen=queue.filter(x=>seen.has(x.windowKey)).length;
   const minimum=Math.min(limit,Math.max(0,Number.isInteger(config.minUnstartedWindowsPerRun)?
     config.minUnstartedWindowsPerRun:0));
@@ -718,7 +719,14 @@ async function main(){
  if(state.version!==1||!state.windows||typeof state.windows!=='object')throw Error('checkpoint invalid');
  const pendingReviews=historical?read('history-sync-review.json').proposals:[];
  const previousHistoricalStatus=historical?read('history-sync-status.json'):null;
- const active=historical?selectHistoricalWindows(windows,state,config,Date.now(),data.results,pendingReviews):selectActiveWindows(windows,state,config);
+ const dynamic=historical&&config.dynamicReviewBudget?.enabled===true&&config.reviewRecovery?.enabled===true;
+ const reviewLedger=dynamic?read('history-sync-reviewed.json').entries:[];
+ const approvalLedger=dynamic?read('approval-history.json').entries:[];
+ const suppressed=new Set([...reviewLedger,...approvalLedger].map(x=>x.id));
+ const recoveryRows=dynamic?pendingReviews.filter(x=>!suppressed.has(x.id)):pendingReviews;
+ const deltaReserve=config.newPlayerBackfill?.enabled!==false?Math.min(4,Math.max(0,config.newPlayerBackfill?.maxPagesPerRun??4)):0;
+ const selectionConfig=dynamic?{...config,maxWindowsPerRun:Math.min(config.maxWindowsPerRun||6,Math.max(1,traffic.pageBudget-deltaReserve))}:config;
+ const active=historical?selectHistoricalWindows(windows,state,selectionConfig,Date.now(),data.results,recoveryRows):selectActiveWindows(windows,state,config);
  // Capture ranking before checkpoint mutations; reporting does not affect selection.
  const priorityAudit=historical?historicalPriorityAudit(windows,state,data.results,{limit:50}):null;
  const selectedPriority=historical?active.map(w=>({key:w.key,date:w.dateJst,region:w.region,series:w.series,kind:w.kind})):null;
@@ -730,13 +738,14 @@ async function main(){
  const scanDeadline=Date.now()+maxRunMinutes*60000;
  let reviewRecoverySummary=null;
  let timeLimitReached=false,rateLimited=false,rateLimitRetryAfter=null,processedWindows=0;
- let playerBackfill=null;
+ let playerBackfill=null,deltaAttempts=0,allocation=null;
+ const allocationObserved={};
  if(historical){
   const deltaConfig=config.newPlayerBackfill||{};
   if(deltaConfig.enabled!==false){
    const stats=await runNewPlayerDelta({
     scan:state,accounts,windows,
-    fetchPage:getLeaderboard,normalize:normalizeRow,
+    fetchPage:dynamic?async(w,p)=>{deltaAttempts++;return getLeaderboard(w,p)}:getLeaderboard,normalize:normalizeRow,
     prepare:(feed,preview)=>prepare(feed,preview,data),
     previewFor:win=>({version:1,accounts,windows:[{
      eventId:win.eventId,windowId:win.windowId,dateJst:win.dateJst,
@@ -752,7 +761,7 @@ async function main(){
     pagesPerWindow:Math.min(2,Math.max(1,deltaConfig.maxPagesPerWindowPerRun??2))
    });
    playerBackfill=stats;
-   budget-=stats.pagesScanned;scanned+=stats.pagesScanned;
+   budget-=dynamic?deltaAttempts:stats.pagesScanned;scanned+=stats.pagesScanned;
    if(stats.rateLimited){rateLimited=true;rateLimitRetryAfter=stats.retryAfter;transientFailures++;}
    console.log('OSIRION_NEW_PLAYER_BACKFILL '+JSON.stringify(stats));
   }
@@ -769,8 +778,11 @@ async function main(){
    else unstarted++;
    if(pages!==null&&pages<=Math.min(Math.max(config.maxPagesPerWindowPerRun||budget,1),50))finishable++;
   }
-  const recoveryCandidates=recoveryShortlist(active,state,pendingReviews,data.results,
-   {perWindowCap:config.maxPagesPerWindowPerRun||12});
+  const recoveryCandidates=recoveryShortlist(active,state,recoveryRows,data.results,
+   {perWindowCap:config.maxPagesPerWindowPerRun||12,...(dynamic?{config}: {})});
+  if(dynamic&&recoveryCandidates.length&&!rateLimited)allocation=planBudget(active,state,recoveryCandidates,{
+   budget:Math.max(0,budget),perWindowCap:Math.min(50,Math.max(1,config.maxPagesPerWindowPerRun||12)),
+   minUnstarted:Math.max(0,config.minUnstartedWindowsPerRun||0),maxRecoveryPercent:config.dynamicReviewBudget.maxRecoveryPercent??60});
   reviewRecoverySummary={selectedWindows:recoveryCandidates.length,
    candidateCount:recoveryCandidates.reduce((n,x)=>n+x.candidateCount,0),
    cashUnconfirmedCount:recoveryCandidates.reduce((n,x)=>n+x.cashCandidates,0),
@@ -792,7 +804,6 @@ async function main(){
   if(rateLimited)break;
   if(Date.now()>=scanDeadline){timeLimitReached=true;break}
   const win=active[windowIndex];
-  processedWindows++;
   const previous=state.windows[win.key];
   // Pre-2026 Unreal caches lack the original two Epic IDs. Re-fetch once; never
   // approve from a stale completed review-only checkpoint.
@@ -804,13 +815,18 @@ async function main(){
   // Finish up to two near-complete historical leaderboards later in the
   // queue; preserve the minimum for every other window without expanding
   // the total page budget.
-  const perWindowLimit=windowPageAllowance(active,state,windowIndex,budget,limit,historical);
+  const perWindowLimit=allocation?dynamicAllowance(allocation,windowIndex,Math.max(0,budget)):windowPageAllowance(active,state,windowIndex,budget,limit,historical);
+  if(perWindowLimit<=0)continue;
+  processedWindows++;
+  const usage=allocationObserved[win.key]={attempted:0,scanned:0};
   while(budget>0&&pagesThisWindow<perWindowLimit&&!checkpoint.complete){
    if(Date.now()>=scanDeadline){timeLimitReached=true;break}
    const page=checkpoint.nextPage;
    checkpoint.lastAttemptAt=new Date().toISOString();
    let l;
    try{
+    if(dynamic)budget--;
+    usage.attempted++;
     l=await getLeaderboard(win,page);
     if(!l.entries.length&&page>0&&page<l.totalPages-1){
      const issue=new Error('順位表に未期待の空ページ: '+win.key+' page '+page);
@@ -861,7 +877,7 @@ async function main(){
    const found=prepare({entries:entries.filter(Boolean)},previewConfig,data).proposals;
    const already=new Set(checkpoint.proposals.map(x=>x.id));
    for(const row of found)if(!already.has(row.id)){checkpoint.proposals.push(row);already.add(row.id)}
-   checkpoint.nextPage=page+1;checkpoint.pages++;scanned++;budget--;pagesThisWindow++;
+   checkpoint.nextPage=page+1;checkpoint.pages++;scanned++;if(!dynamic)budget--;pagesThisWindow++;usage.scanned++;
    checkpoint.lastSuccessAt=new Date().toISOString();
    checkpoint.totalPages=l.totalPages;
    checkpoint.complete=checkpoint.nextPage>=l.totalPages||crossed;
@@ -922,7 +938,7 @@ async function main(){
  const reviewOnlyCandidates=unique.size?Array.from(unique.values()).filter(p=>p.reviewOnly===true).length:0;
  const cumulativeApprovals=data.updates.entries.filter(x=>x.title?.startsWith('公式規則で自動承認：')).reduce((sum,x)=>sum+(x.recordIds?.length||0),0);
  const status={version:1,state:'checked',checkedAt:stamp,mode:'review',scope:historical?'history':'recent',dateMode:historical?(storedConfig.toDate==='rolling'?'rolling':'fixed'):null,selectedWindows:active.length,fromDate:historical?config.fromDate:null,toDate:historical?config.toDate:null,provider:'osirion',linkedPlayers:accounts.length,trackedWindows:windows.length,found:unique.size,skipped:invalidRows,imported,scannedPages:scanned,completedWindows:finished,identityConflicts:conflicts.length,alreadyRegistered:recordedFromReview,autoApprovedTotal:cumulativeApprovals,invalidCachedCandidates:invalidCached,manualReviewCandidates:manuallyHeld,autoApprovedParticipationThisRun:verifiedParticipationIds.size,autoApprovedCosmeticThisRun:importedCosmetics,autoApprovedCashThisRun:cash.approved.length,autoApprovedPerformanceThisRun:performance.approved.length,autoApprovedUnrealThisRun:unreal.approved.length,autoApprovedDuoQualifierThisRun:duo.approved.length,autoApprovedPlayStationThisRun:playstation.approved.length,autoApprovedSquadsThisRun:squads.approved.length,autoApprovedConsoleDuosThisRun:consoleDuos.approved.length,timeLimitReached,processedWindows,providerRateLimitPaused:rateLimited,providerRateLimitRetryAfter:rateLimitRetryAfter,providerTraffic:{...traffic,...providerPacer.metrics()},
-  ...(historical?{newlyCompletedWindows,newPlayerBackfill:playerBackfill,savedRecheck}:{}),retryWindows:coverage.retryCount,coverage,...(historical?{reviewRecovery:reviewRecoverySummary,priorityAudit:{...priorityAudit,selected:selectedPriority}}:{}),transientFailures,malformedFailures,skippedLeaderboards:skippedLeaderboards.slice(0,15),reviewOnlyWindows,reviewOnlyCandidates,unmappedEvents:unmapped.length,unmappedEventIds:unmapped.slice(0,12),unmappedDiscovery,message:'Osirionで'+accounts.length+'アカウントIDを追跡。今回の公式規則による自動承認'+imported+'件、追加確認待ち'+unique.size+'件、名義照合保留'+conflicts.length+'件。'};
+  ...(historical?{newlyCompletedWindows,newPlayerBackfill:playerBackfill,savedRecheck}:{}),retryWindows:coverage.retryCount,coverage,...(historical?{reviewRecovery:reviewRecoverySummary,dynamicReviewBudget:dynamic?{enabled:true,applied:Boolean(allocation),deltaAttempts,remainingPageBudget:Math.max(0,budget),...(allocation?budgetSummary(allocation,allocationObserved):{})}:null,priorityAudit:{...priorityAudit,selected:selectedPriority}}:{}),transientFailures,malformedFailures,skippedLeaderboards:skippedLeaderboards.slice(0,15),reviewOnlyWindows,reviewOnlyCandidates,unmappedEvents:unmapped.length,unmappedEventIds:unmapped.slice(0,12),unmappedDiscovery,message:'Osirionで'+accounts.length+'アカウントIDを追跡。今回の公式規則による自動承認'+imported+'件、追加確認待ち'+unique.size+'件、名義照合保留'+conflicts.length+'件。'};
  state.checkedAt=stamp;
  write(prefix+'-scan.json',state);
  write(prefix+'-review.json',{version:1,status:'review',checkedAt:stamp,proposals:[...unique.values()]});
