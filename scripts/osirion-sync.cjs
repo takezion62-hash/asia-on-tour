@@ -835,7 +835,7 @@ async function main(){
    // participant standings when source score and Epic UUID are confirmed.
    const psStage=playstationStageFor(win);
    const psCutoff=psStage?100:null;
-   const cutoff=(historical?advancementLimit(win):null)??cutoffForWindow(win)??psCutoff??(config.autoApprovePerformance===true?qualifierCutoff(win):null);
+   const cutoff=(historical&&!(config.autoApproveSquads===true&&win.tournamentId==='ch7s5-squads-victory-cup')?advancementLimit(win):null)??cutoffForWindow(win)??psCutoff??(config.autoApprovePerformance===true?qualifierCutoff(win):null);
    const pageRanks=l.entries.map(e=>e.rank);
    const ordered=pageRanks.every((rank,i)=>Number.isSafeInteger(rank)&&rank>=1&&(i===0||rank>=pageRanks[i-1]));
    const followsPrevious=checkpoint.lastSeenRank==null||pageRanks.length===0||pageRanks[0]>=checkpoint.lastSeenRank;
@@ -887,7 +887,7 @@ async function main(){
  const importedIds=new Set(),reasons=new Map();
  const {batches,approved,reasons:routeReasons,verifiedParticipationIds}=runApprovals(
   pending,windows,state.windows,data,config,{historical,initialReasons:reasons});
- const {verified,cosmetic,cash,performance,unreal,nvidia,duo,playstation}=batches;
+ const {verified,cosmetic,cash,performance,unreal,nvidia,duo,playstation,squads}=batches;
  importedCosmetics=cosmetic.approved.length;
  for(const [id,reason] of routeReasons)reasons.set(id,reason);
  for(const row of approved)importedIds.add(row.id);
@@ -896,7 +896,7 @@ async function main(){
  if(imported){
   const entry=data.updates.entries[0];
   entry.title='公式規則で自動承認：'+(historical?'過去大会':'新着大会')+imported+'戦績';
-  entry.description='公式規則・地域別順位・本人確認済みEpic ID・順位表・既存戦績を照合。予選突破・突破圏外の参加確認（'+verifiedParticipationIds.size+'件）、公式VR賞金、スキン（'+importedCosmetics+'件）、公式賞金表によるCash Cup（'+cash.approved.length+'件／賞金圏外$0含む）、S43 Performance Evaluation（'+performance.approved.length+'件）、S39 Unreal Cup（'+unreal.approved.length+'件／チーム・個人賞金、圏外$0）、公式デュオ予選（'+duo.approved.length+'件／突破と圏外参加を区別・$0）、S43 PlayStation BR/ZB（'+playstation.approved.length+'件／Top80・順位賞金・圏外$0を区別）を自動掲載。支払い完了や未確認の賞金は推定しない。';
+  entry.description='公式規則・地域別順位・本人確認済みEpic ID・順位表・既存戦績を照合。予選突破・突破圏外の参加確認（'+verifiedParticipationIds.size+'件）、公式VR賞金、スキン（'+importedCosmetics+'件）、公式賞金表によるCash Cup（'+cash.approved.length+'件／賞金圏外$0含む）、S43 Performance Evaluation（'+performance.approved.length+'件）、S39 Unreal Cup（'+unreal.approved.length+'件／チーム・個人賞金、圏外$0）、公式デュオ予選（'+duo.approved.length+'件／突破と圏外参加を区別・$0）、S43 PlayStation BR/ZB（'+playstation.approved.length+'件／Top80・順位賞金・圏外$0を区別）、S43 Squads（'+squads.approved.length+'件／予選・決勝個人/チーム賞金）を自動掲載。支払い完了や未確認の賞金は推定しない。';
   write('results.json',data.results);
   write('updates.json',data.updates);
  }
@@ -908,7 +908,7 @@ async function main(){
  const reviewOnlyWindows=windows.filter(w=>w.series!=='victory-cup').length;
  const reviewOnlyCandidates=unique.size?Array.from(unique.values()).filter(p=>p.reviewOnly===true).length:0;
  const cumulativeApprovals=data.updates.entries.filter(x=>x.title?.startsWith('公式規則で自動承認：')).reduce((sum,x)=>sum+(x.recordIds?.length||0),0);
- const status={version:1,state:'checked',checkedAt:stamp,mode:'review',scope:historical?'history':'recent',dateMode:historical?(storedConfig.toDate==='rolling'?'rolling':'fixed'):null,selectedWindows:active.length,fromDate:historical?config.fromDate:null,toDate:historical?config.toDate:null,provider:'osirion',linkedPlayers:accounts.length,trackedWindows:windows.length,found:unique.size,skipped:invalidRows,imported,scannedPages:scanned,completedWindows:finished,identityConflicts:conflicts.length,alreadyRegistered:recordedFromReview,autoApprovedTotal:cumulativeApprovals,invalidCachedCandidates:invalidCached,manualReviewCandidates:manuallyHeld,autoApprovedParticipationThisRun:verifiedParticipationIds.size,autoApprovedCosmeticThisRun:importedCosmetics,autoApprovedCashThisRun:cash.approved.length,autoApprovedPerformanceThisRun:performance.approved.length,autoApprovedUnrealThisRun:unreal.approved.length,autoApprovedDuoQualifierThisRun:duo.approved.length,autoApprovedPlayStationThisRun:playstation.approved.length,timeLimitReached,processedWindows,providerRateLimitPaused:rateLimited,providerRateLimitRetryAfter:rateLimitRetryAfter,providerTraffic:{...traffic,...providerPacer.metrics()},
+ const status={version:1,state:'checked',checkedAt:stamp,mode:'review',scope:historical?'history':'recent',dateMode:historical?(storedConfig.toDate==='rolling'?'rolling':'fixed'):null,selectedWindows:active.length,fromDate:historical?config.fromDate:null,toDate:historical?config.toDate:null,provider:'osirion',linkedPlayers:accounts.length,trackedWindows:windows.length,found:unique.size,skipped:invalidRows,imported,scannedPages:scanned,completedWindows:finished,identityConflicts:conflicts.length,alreadyRegistered:recordedFromReview,autoApprovedTotal:cumulativeApprovals,invalidCachedCandidates:invalidCached,manualReviewCandidates:manuallyHeld,autoApprovedParticipationThisRun:verifiedParticipationIds.size,autoApprovedCosmeticThisRun:importedCosmetics,autoApprovedCashThisRun:cash.approved.length,autoApprovedPerformanceThisRun:performance.approved.length,autoApprovedUnrealThisRun:unreal.approved.length,autoApprovedDuoQualifierThisRun:duo.approved.length,autoApprovedPlayStationThisRun:playstation.approved.length,autoApprovedSquadsThisRun:squads.approved.length,timeLimitReached,processedWindows,providerRateLimitPaused:rateLimited,providerRateLimitRetryAfter:rateLimitRetryAfter,providerTraffic:{...traffic,...providerPacer.metrics()},
   ...(historical?{newlyCompletedWindows,newPlayerBackfill:playerBackfill,savedRecheck}:{}),retryWindows:coverage.retryCount,coverage,...(historical?{reviewRecovery:reviewRecoverySummary,priorityAudit:{...priorityAudit,selected:selectedPriority}}:{}),transientFailures,malformedFailures,skippedLeaderboards:skippedLeaderboards.slice(0,15),reviewOnlyWindows,reviewOnlyCandidates,unmappedEvents:unmapped.length,unmappedEventIds:unmapped.slice(0,12),unmappedDiscovery,message:'Osirionで'+accounts.length+'アカウントIDを追跡。今回の公式規則による自動承認'+imported+'件、追加確認待ち'+unique.size+'件、名義照合保留'+conflicts.length+'件。'};
  state.checkedAt=stamp;
  write(prefix+'-scan.json',state);

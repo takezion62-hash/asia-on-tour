@@ -44,6 +44,7 @@ function windowRoutes(rule,win,routes){
   if(eventWindow(rule,win,{kind:win.kind,rounds:[round],optionalSeparator:true})||
    (win.windowId.startsWith(win.eventId+'_')&&new RegExp('^_Round'+round+'_Day[1-9][0-9]*_'+win.region+'$').test(win.windowId.slice(win.eventId.length))))ids.push('verified');
  }
+ if(routes.includes('squads')&&['予選','賞金決勝'].includes(win.kind)&&eventWindow(rule,win,{kind:win.kind,rounds:[win.kind==='予選'?1:2],optionalSeparator:true}))ids.push('squads');
  if(routes.includes('duo')&&eventWindow(rule,win,{kind:rule.series==='cash-cup'?'参加確認':'予選',rounds:[1],optionalSeparator:true}))ids.push('duo');
  if(routes.includes('cash')&&eventWindow(rule,win,rule.cashFinalAutoApproval==='verified-duo-round2-rank'?{rounds:[2]}:{format:'event'}))ids.push('cash');
  if(routes.includes('performance')&&['EU','NAC'].includes(win.region)&&eventWindow(rule,win))ids.push('performance');
@@ -140,7 +141,7 @@ function diagnose(input,{registry,tournaments,recent={},history={}}){
  if(routes.length&&!routeReport.some(x=>x.configured&&(x.recent||x.history)))hold('config','現在の新着・過去大会設定では無効');
  if(!registered&&routes.some(x=>['performance','unreal','nvidia','playstation','duo'].includes(x)))hold('adapter','シーズン／イベント固有の承認条件と公式日程の追加確認が必要');
  if(!registered&&rule.series==='victory-cup'&&rule.team!=='solo')hold('adapter','チームVR賞金の専用承認確認が必要');
- if(rule.id==='ch7s5-squads-victory-cup')hold('adapter','S43 Squadsは専用検証フローのみ');
+ if(rule.id==='ch7s5-squads-victory-cup')hold('adapter','S43 Squadsは専用4人Epic ID・公式カレンダー・決勝100pt/VR検証が必要');
  if(input.windows!==undefined&&!Array.isArray(input.windows))err('windows','配列が必要');
  for(const [i,w] of (Array.isArray(input.windows)?input.windows:[]).entries()){
   const matched=windowRoutes(rule,w,routes);

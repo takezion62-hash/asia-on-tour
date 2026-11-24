@@ -12,7 +12,8 @@ const old={
  unreal:r=>r.series==='unreal-cup'&&r.autoApproval==='verified-team-rank',
  nvidia:r=>r.series==='nvidia-cup'&&r.autoApproval==='verified-solo-rank',
  duo:r=>r.autoApproval==='verified-duo-qualifier-only',
- playstation:r=>r.series==='playstation-cup'&&r.autoApproval==='verified-playstation-solo'
+ playstation:r=>r.series==='playstation-cup'&&r.autoApproval==='verified-playstation-solo',
+ squads:r=>r.id==='ch7s5-squads-victory-cup'
 };
 test('all official rules preserve old route selection; unknown and review-only are denied',()=>{
  for(const p of P.POLICIES)assert.deepEqual(Object.keys(P.selectRules(p.id)).sort(),rules.filter(old[p.id]).map(r=>r.id).sort(),p.id);
@@ -82,6 +83,6 @@ test('unrelated broad evaluators cannot overwrite a victory hold; dual round pol
  const config=Object.fromEntries(P.POLICIES.map(p=>[p.flag,true]));
  const data={results:[],tournaments:{catalog:[squad,duo]}};
  const result=runApprovals(pending,[],{},data,config,{historical:true,load:p=>({evaluate:()=>({approved:[],held:pending.map(r=>({id:r.id,reason:p.id}))})})});
- assert.equal(result.reasons.get('squad'),'verified');
+ assert.equal(result.reasons.get('squad'),'squads');
  assert.equal(result.reasons.get('r1'),'duo');assert.equal(result.reasons.get('r2'),'cash');
 });

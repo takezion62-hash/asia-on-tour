@@ -17,6 +17,7 @@ on:
       - "scripts/tournament-approval-policy.cjs"
       - "scripts/tournament-approval-router.cjs"
       - "scripts/saved-candidate-recheck.cjs"
+      - "scripts/automatic-squads-approval.cjs"
       - "scripts/tournament-registration-preview.cjs"
       - "scripts/unmapped-tournament-discovery.cjs"
       - "scripts/automatic-cosmetic-approval.cjs"
@@ -63,7 +64,7 @@ jobs:
       - name: Validate data and run sync unit tests
         run: |
           npm run validate
-          node --test tests/auto-sync.test.cjs tests/osirion-sync.test.cjs tests/verified-partial-page.test.cjs tests/non-victory-auto-sync.test.cjs tests/automatic-cosmetic-approval.test.cjs tests/cosmetic-rank-rules.test.cjs tests/automatic-cash-approval.test.cjs tests/automatic-unreal-approval.test.cjs tests/automatic-performance-approval.test.cjs tests/tournament-rules.test.cjs tests/tournament-rule-engine.test.cjs tests/s43-playstation-cup-rules.test.cjs tests/tournament-approval-policy.test.cjs tests/unmapped-tournament-discovery.test.cjs tests/tournament-registration-preview.test.cjs tests/saved-candidate-recheck.test.cjs
+          node --test tests/auto-sync.test.cjs tests/osirion-sync.test.cjs tests/verified-partial-page.test.cjs tests/non-victory-auto-sync.test.cjs tests/automatic-cosmetic-approval.test.cjs tests/cosmetic-rank-rules.test.cjs tests/automatic-cash-approval.test.cjs tests/automatic-unreal-approval.test.cjs tests/automatic-performance-approval.test.cjs tests/tournament-rules.test.cjs tests/tournament-rule-engine.test.cjs tests/s43-playstation-cup-rules.test.cjs tests/tournament-approval-policy.test.cjs tests/unmapped-tournament-discovery.test.cjs tests/tournament-registration-preview.test.cjs tests/saved-candidate-recheck.test.cjs tests/automatic-squads-approval.test.cjs
       - name: Preserve verified recent scan output
         run: node scripts/safe-sync-merge.cjs snapshot auto "$RUNNER_TEMP/aot-auto-scanned.json"
       - name: Reconcile and commit onto newest main (conflict-safe)

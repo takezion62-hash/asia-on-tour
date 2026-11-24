@@ -10,6 +10,7 @@ const {readResults,publishResults}=require('./source-results-store.cjs');
 const {decide:verifyHistoricalVictory}=require('./verified-history-approval.cjs');
 const {newestDiscoveryReport}=require('./unmapped-tournament-discovery.cjs');
 const {sameScannedCandidate}=require('./verified-partial-page.cjs');
+const {ID:SQUADS_ID,overlaps:squadOverlap}=require('./automatic-squads-approval.cjs');
 const VALID_SCOPES=new Set(['history','auto']);
 const SOURCE_FILES=[
   'players.json','tournaments.json','tournament-rules.json',
@@ -30,7 +31,10 @@ const SOURCE_FILES=[
   'scripts/automatic-duo-qualifier-approval.cjs',
   'scripts/automatic-nvidia-approval.cjs',
   'scripts/automatic-playstation-approval.cjs',
-  'scripts/verified-partial-page.cjs'
+  'scripts/verified-partial-page.cjs',
+  'scripts/automatic-squads-approval.cjs',
+  'schedule.json',
+  'data/manual-approvals/review-only-generic-v1.json'
 ];
 const read=(root,file)=>file==='results.json'?readResults(root).rows:JSON.parse(fs.readFileSync(path.join(root,file),'utf8'));
 const stringify=x=>JSON.stringify(x);
@@ -198,6 +202,10 @@ function mergeSnapshots(scope,base,scanned,latest,reviewed={version:1,entries:[]
    else conflicts.push({id:candidate.id,reason:'different score for existing ID',source:candidate.source});
    continue;
   }
+  if(candidate.tournamentId===SQUADS_ID){
+   const overlap=[...existing.values()].find(old=>squadOverlap(old,candidate,approvalData?.players?.confirmedAliases));
+   if(overlap){conflicts.push({id:candidate.id,existingId:overlap.id,reason:'same squad window/rank or overlapping mixed roster',source:candidate.source});continue}
+  }
   const logical=semantic.get(logicalKey(candidate));
   if(logical){
    const fields=['rank','points','kills','vrs','matches','prize','prizePerPlayer'];
@@ -251,7 +259,9 @@ function mergeSnapshots(scope,base,scanned,latest,reviewed={version:1,entries:[]
  });
  const queueExtra=c[qFile].proposals.filter(x=>!baseReviewIds.has(x.id));
  const candidates=[...queueExtra,...conflicts.map(x=>{
-  const row=c[rFile].find(r=>r.id===x.id);
+  const published=c[rFile].find(r=>r.id===x.id);
+  const original=published?.tournamentId===SQUADS_ID?Object.values(c[cFile].windows).flatMap(cp=>cp.proposals||[]).filter(p=>p.id===x.id):[];
+  const row=published?.tournamentId===SQUADS_ID?(original.length===1?original[0]:null):published;
   return row?{...row,reviewReason:'自動掲載を保留：競合 '+x.reason+(x.existingId?'（既存 '+x.existingId+'）':'')} :null;
  }).filter(Boolean)];
  for(const row of candidates){
