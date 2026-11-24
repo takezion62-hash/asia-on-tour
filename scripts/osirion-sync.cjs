@@ -10,6 +10,7 @@ const {prepare,maximumMatches,applyProposals}=require('./auto-sync-core.cjs');
 const {RULES}=require('./verified-history-approval.cjs');
 const {requiresCheckpointEpicIds}=require('./tournament-approval-policy.cjs');
 const {runApprovals}=require('./tournament-approval-router.cjs');
+const {recheckSaved}=require('./saved-candidate-recheck.cjs');
 const {buildDiscoveryReport}=require('./unmapped-tournament-discovery.cjs');
 const {cutoffForWindow}=require('./automatic-cosmetic-approval.cjs');
 const {cashLimitForWindow}=require('./automatic-cash-approval.cjs');
@@ -597,6 +598,53 @@ function selectHistoricalWindows(windows,state,config,time=Date.now(),records=[]
  }
  return selected;
 }
+// Reconstruct only exact, unambiguous saved official calendar sessions. Reuse
+// discover() so historical date/region/series and round filters are identical.
+function savedCalendarWindows(queue,catalog,config,now=Date.now()){
+ const groups=new Map(),conflicts=new Set();
+ for(const month of new Set(queue.map(r=>r.date?.slice(0,7)))){
+  if(!/^\d{4}-\d{2}$/.test(month||''))continue;
+  const file='calendar-history/'+month+'.json';
+  if(!fs.existsSync(path.join(root,file)))continue;
+  for(const session of read(file).sessions||[]){
+   if(!session.eventId||!session.sourceWindowId||!session.startUtc||!session.endUtc)continue;
+   const full='epicgames_'+session.eventId+'_'+session.region,key=full+'/'+session.sourceWindowId;
+   if(!queue.some(r=>r.source===session.url&&r.date===session.dateJst&&r.tournamentId===session.tournamentId&&r.seasonId===session.seasonId&&r.region===session.region))continue;
+   if(groups.has(key)){conflicts.add(key);continue}
+   groups.set(key,{eventId:full,eventWindows:[{eventWindowId:session.sourceWindowId,beginTime:session.startUtc,endTime:session.endUtc}]});
+  }
+ }
+ return discover([...groups].filter(([k])=>!conflicts.has(k)).map(([,v])=>v),catalog,config,now);
+}
+function recheckBeforeProvider(config){
+ const now=Date.now(),stamp=new Date(now).toISOString(),prefix='history-sync';
+ const queue=read(prefix+'-review.json'),state=read(prefix+'-scan.json');
+ const data={results:read('results.json'),players:read('players.json'),tournaments:read('tournaments.json'),schedule:read('schedule.json'),updates:read('updates.json')};
+ const reviewed=read('history-sync-reviewed.json'),ledger=read('approval-history.json');
+ if(!Array.isArray(reviewed.entries)||!Array.isArray(ledger.entries))throw Error('invalid review ledger');
+ data.verifiedAccounts=linkedAccounts(data).accounts;
+ const windows=savedCalendarWindows(queue.proposals,data.tournaments.catalog,config,now);
+ const plan=recheckSaved({queue,checkpoints:state.windows,windows,data,config,now,
+  reviewedIds:[...reviewed.entries,...ledger.entries].map(x=>x.id),otherQueue:read('auto-sync-review.json').proposals});
+ const imported=applyProposals(data,plan.approved,stamp);
+ if(imported){
+  const log=data.updates.entries[0];
+  // Separate ID from the subsequent live scan, even in the same second.
+  log.id=log.id.replace('auto-sync-','auto-saved-review-');
+  log.title='公式規則で自動承認：保存済み過去大会'+imported+'戦績';
+  log.description='追加APIなしで成熟済み完全順位表・本人Epic ID・公式開催枠・既存公式承認ルールを再照合。賞金額や受給資格を推測せず、既存戦績を保持して追記。';
+  write('results.json',data.results);write('updates.json',data.updates);
+ }
+ const summary={checkedAt:stamp,checked:plan.checked,imported,reasonUpdates:plan.reasonUpdates,heldEvidence:plan.held,apiRequests:0};
+ if(imported||plan.reasonUpdates){
+  write(prefix+'-review.json',{...queue,proposals:plan.next});
+  const status=read(prefix+'-status.json');
+  write(prefix+'-status.json',{...status,found:plan.next.length,manualReviewCandidates:plan.next.length,
+   reviewOnlyCandidates:plan.next.filter(x=>x.reviewOnly===true).length,savedRecheck:summary});
+ }
+ console.log('AOT_SAVED_RECHECK '+JSON.stringify(summary));
+ return summary;
+}
 async function main(){
  const historical=process.argv.includes('--history');
  const prefix=historical?'history-sync':'auto-sync';
@@ -608,6 +656,7 @@ async function main(){
  }
  if(!config.enabled||config.provider!=='osirion'){console.log('OSIRION_SYNC_DISABLED');return}
  if(config.mode!=='review')throw Error('Osirionの自動公開は安全性検証が完了するまで無効です');
+ const savedRecheck=historical?recheckBeforeProvider(config):null;
  // Jobs share GitHub concurrency. Their committed 429 cooldowns must be checked
  // BEFORE querying Osirion so scheduled runs cannot create another quota spike.
  const traffic=trafficPlan({historical,config,
@@ -860,7 +909,7 @@ async function main(){
  const reviewOnlyCandidates=unique.size?Array.from(unique.values()).filter(p=>p.reviewOnly===true).length:0;
  const cumulativeApprovals=data.updates.entries.filter(x=>x.title?.startsWith('公式規則で自動承認：')).reduce((sum,x)=>sum+(x.recordIds?.length||0),0);
  const status={version:1,state:'checked',checkedAt:stamp,mode:'review',scope:historical?'history':'recent',dateMode:historical?(storedConfig.toDate==='rolling'?'rolling':'fixed'):null,selectedWindows:active.length,fromDate:historical?config.fromDate:null,toDate:historical?config.toDate:null,provider:'osirion',linkedPlayers:accounts.length,trackedWindows:windows.length,found:unique.size,skipped:invalidRows,imported,scannedPages:scanned,completedWindows:finished,identityConflicts:conflicts.length,alreadyRegistered:recordedFromReview,autoApprovedTotal:cumulativeApprovals,invalidCachedCandidates:invalidCached,manualReviewCandidates:manuallyHeld,autoApprovedParticipationThisRun:verifiedParticipationIds.size,autoApprovedCosmeticThisRun:importedCosmetics,autoApprovedCashThisRun:cash.approved.length,autoApprovedPerformanceThisRun:performance.approved.length,autoApprovedUnrealThisRun:unreal.approved.length,autoApprovedDuoQualifierThisRun:duo.approved.length,autoApprovedPlayStationThisRun:playstation.approved.length,timeLimitReached,processedWindows,providerRateLimitPaused:rateLimited,providerRateLimitRetryAfter:rateLimitRetryAfter,providerTraffic:{...traffic,...providerPacer.metrics()},
-  ...(historical?{newlyCompletedWindows,newPlayerBackfill:playerBackfill}:{}),retryWindows:coverage.retryCount,coverage,...(historical?{reviewRecovery:reviewRecoverySummary,priorityAudit:{...priorityAudit,selected:selectedPriority}}:{}),transientFailures,malformedFailures,skippedLeaderboards:skippedLeaderboards.slice(0,15),reviewOnlyWindows,reviewOnlyCandidates,unmappedEvents:unmapped.length,unmappedEventIds:unmapped.slice(0,12),unmappedDiscovery,message:'Osirionで'+accounts.length+'アカウントIDを追跡。今回の公式規則による自動承認'+imported+'件、追加確認待ち'+unique.size+'件、名義照合保留'+conflicts.length+'件。'};
+  ...(historical?{newlyCompletedWindows,newPlayerBackfill:playerBackfill,savedRecheck}:{}),retryWindows:coverage.retryCount,coverage,...(historical?{reviewRecovery:reviewRecoverySummary,priorityAudit:{...priorityAudit,selected:selectedPriority}}:{}),transientFailures,malformedFailures,skippedLeaderboards:skippedLeaderboards.slice(0,15),reviewOnlyWindows,reviewOnlyCandidates,unmappedEvents:unmapped.length,unmappedEventIds:unmapped.slice(0,12),unmappedDiscovery,message:'Osirionで'+accounts.length+'アカウントIDを追跡。今回の公式規則による自動承認'+imported+'件、追加確認待ち'+unique.size+'件、名義照合保留'+conflicts.length+'件。'};
  state.checkedAt=stamp;
  write(prefix+'-scan.json',state);
  write(prefix+'-review.json',{version:1,status:'review',checkedAt:stamp,proposals:[...unique.values()]});

@@ -53,7 +53,7 @@ test('router keeps old order, flags, snapshots, review reasons and narrow partic
  assert.deepEqual(order,P.POLICIES.map(p=>p.id));
  assert.deepEqual(result.approved.map(r=>r.id),order);
  assert.deepEqual([...result.verifiedParticipationIds],['verified','playstation']);
- assert.equal(result.reasons.get('same'),'playstation');
+ assert.equal(result.reasons.has('same'),false);
  assert.deepEqual(data.results,[{id:'prior'}]);
  order.length=0;
  runApprovals(pending,windows,cp,data,all,{historical:false,load});
@@ -73,4 +73,15 @@ test('Epic ID retention matches former series and team conditions',()=>{
   assert.equal(P.requiresCheckpointEpicIds(r.series),['unreal-cup','nvidia-cup','playstation-cup'].includes(r.series));
   assert.equal(P.retainsCandidateEpicIds(r.series,r.team),['cash-cup','performance-evaluation','unreal-cup','nvidia-cup','playstation-cup'].includes(r.series)||r.team==='duo');
  }
+});
+
+test('unrelated broad evaluators cannot overwrite a victory hold; dual round policy is specific',()=>{
+ const squad=get('ch7s5-squads-victory-cup'),duo=get('ch7s5-reload-zero-build-duos-cash-cup');
+ const pending=[{id:'squad',tournamentId:squad.id,kind:'予選'},{id:'r1',tournamentId:duo.id,round:'Event 3 · Round 1 / 参加確認'},
+  {id:'r2',tournamentId:duo.id,round:'Event 3 · Round 2 / 参加確認'}];
+ const config=Object.fromEntries(P.POLICIES.map(p=>[p.flag,true]));
+ const data={results:[],tournaments:{catalog:[squad,duo]}};
+ const result=runApprovals(pending,[],{},data,config,{historical:true,load:p=>({evaluate:()=>({approved:[],held:pending.map(r=>({id:r.id,reason:p.id}))})})});
+ assert.equal(result.reasons.get('squad'),'verified');
+ assert.equal(result.reasons.get('r1'),'duo');assert.equal(result.reasons.get('r2'),'cash');
 });

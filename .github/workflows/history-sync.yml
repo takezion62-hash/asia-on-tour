@@ -47,6 +47,7 @@ on:
       - "scripts/tournament-rule-engine.cjs"
       - "scripts/tournament-approval-policy.cjs"
       - "scripts/tournament-approval-router.cjs"
+      - "scripts/saved-candidate-recheck.cjs"
       - "scripts/tournament-registration-preview.cjs"
       - "scripts/unmapped-tournament-discovery.cjs"
       - "scripts/automatic-cosmetic-approval.cjs"
@@ -425,7 +426,7 @@ jobs:
       - name: Validate unchanged public data and tests
         run: |
           npm run validate
-          node --test tests/auto-sync.test.cjs tests/osirion-sync.test.cjs tests/verified-partial-page.test.cjs tests/non-victory-auto-sync.test.cjs tests/verified-history-approval.test.cjs tests/automatic-cosmetic-approval.test.cjs tests/cosmetic-rank-rules.test.cjs tests/automatic-cash-approval.test.cjs tests/automatic-unreal-approval.test.cjs tests/automatic-performance-approval.test.cjs tests/tournament-rules.test.cjs tests/tournament-rule-engine.test.cjs tests/s43-playstation-cup-rules.test.cjs tests/tournament-approval-policy.test.cjs tests/unmapped-tournament-discovery.test.cjs tests/tournament-registration-preview.test.cjs
+          node --test tests/auto-sync.test.cjs tests/osirion-sync.test.cjs tests/verified-partial-page.test.cjs tests/non-victory-auto-sync.test.cjs tests/verified-history-approval.test.cjs tests/automatic-cosmetic-approval.test.cjs tests/cosmetic-rank-rules.test.cjs tests/automatic-cash-approval.test.cjs tests/automatic-unreal-approval.test.cjs tests/automatic-performance-approval.test.cjs tests/tournament-rules.test.cjs tests/tournament-rule-engine.test.cjs tests/s43-playstation-cup-rules.test.cjs tests/tournament-approval-policy.test.cjs tests/unmapped-tournament-discovery.test.cjs tests/tournament-registration-preview.test.cjs tests/saved-candidate-recheck.test.cjs
       - name: Preserve the verified scan output before refreshing main
         run: node scripts/safe-sync-merge.cjs snapshot history "$RUNNER_TEMP/aot-history-scanned.json"
       - name: Reconcile and commit verified history onto newest main (conflict-safe)
