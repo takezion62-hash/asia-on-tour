@@ -259,3 +259,14 @@ test('historical merge re-verifies official zero-cash Victory Cup participation'
  y.scanned.docs['updates.json'].entries[0].recordIds.push(original.id);
  assert.throws(()=>mergeSnapshots('auto',y.base,y.scanned,y.latest,ledger,approvalData),/unverified publication/);
 });
+
+test('discovery report freshness survives later manual status updates and old scanner retries',()=>{
+ const x=scenario('history'),file=x.p+'-status.json';
+ const discovery=(observedAt,eventId)=>({version:1,provider:'osirion',scope:'history',observedAt,totalEvents:1,entries:[{eventId}],automaticPublicationAuthorized:false});
+ const older=discovery('2026-11-07T10:00:00Z','S43_OlderCup'),newer=discovery('2026-11-07T11:00:00Z','S43_NewerCup');
+ x.scanned.docs[file].unmappedDiscovery=newer;x.latest.docs[file].unmappedDiscovery=older;
+ x.latest.docs[file].checkedAt='2026-11-07T12:00:00Z';
+ assert.deepEqual(mergeSnapshots(x.scope,x.base,x.scanned,x.latest).docs[file].unmappedDiscovery,newer);
+ x.scanned.docs[file].unmappedDiscovery=older;x.latest.docs[file].unmappedDiscovery=newer;
+ assert.deepEqual(mergeSnapshots(x.scope,x.base,x.scanned,x.latest).docs[file].unmappedDiscovery,newer);
+});

@@ -10,6 +10,7 @@ const {prepare,maximumMatches,applyProposals}=require('./auto-sync-core.cjs');
 const {RULES}=require('./verified-history-approval.cjs');
 const {requiresCheckpointEpicIds}=require('./tournament-approval-policy.cjs');
 const {runApprovals}=require('./tournament-approval-router.cjs');
+const {buildDiscoveryReport}=require('./unmapped-tournament-discovery.cjs');
 const {cutoffForWindow}=require('./automatic-cosmetic-approval.cjs');
 const {cashLimitForWindow}=require('./automatic-cash-approval.cjs');
 const {qualifierCutoff,evaluationStage}=require('./automatic-performance-approval.cjs');
@@ -160,8 +161,8 @@ function discover(all,catalog,opts,time=Date.now()){
  return [...selected.values()].sort((a,b)=>a.end-b.end);
 }
 // Report uncatalogued eligible tournament IDs rather than guessing their formats.
-function discoverUnmapped(all,catalog,opts,time=Date.now()){
- const days=Number.isInteger(opts.lookbackDays)?opts.lookbackDays:7,missing=new Set();
+function discoverUnmappedObservations(all,catalog,opts,time=Date.now()){
+ const days=Number.isInteger(opts.lookbackDays)?opts.lookbackDays:7,observations=[];
  for(const tournament of all){
   const full=typeof tournament.eventId==='string'?tournament.eventId:'',match=full.match(/^epicgames_(S[0-9]+_.+)_([A-Z]{2,4})$/);
   if(!match||!regions.includes(match[2]))continue;
@@ -178,16 +179,20 @@ function discoverUnmapped(all,catalog,opts,time=Date.now()){
   if(!isVictory&&!isFncsDiv1&&![...tracked].some(s=>s!=='victory-cup'&&s!=='fncs'))continue;
   if(/^S\d+_FNCS/i.test(base)&&!isFncsDiv1&&!cosmeticCup)continue;
   if(catalog.some(x=>x.seasonId===base.split('_')[0]&&x.sourceEventIds?.includes(base)))continue;
-  const relevant=(tournament.eventWindows||[]).some(w=>{
+  const relevant=(tournament.eventWindows||[]).filter(w=>{
    const end=Date.parse(w.endTime),begin=Date.parse(w.beginTime);
    if(typeof w.eventWindowId!=='string'||!w.eventWindowId.endsWith('_'+region)||!Number.isFinite(end)||!Number.isFinite(begin))return false;
    // Historic catalog gaps must also be visible; never publish an unmapped event.
    if(opts.fromDate&&opts.toDate)return nowJst(w.beginTime)>=opts.fromDate&&nowJst(w.beginTime)<=opts.toDate&&end<=time;
    return end>=time-days*86400000&&end<=time+14*86400000;
   });
-  if(relevant)missing.add(base);
+  for(const w of relevant)observations.push({eventId:base,fullEventId:full,region,title,
+   windowId:w.eventWindowId,startUtc:new Date(Date.parse(w.beginTime)).toISOString(),endUtc:new Date(Date.parse(w.endTime)).toISOString()});
  }
- return [...missing].sort();
+ return observations;
+}
+function discoverUnmapped(all,catalog,opts,time=Date.now()){
+ return [...new Set(discoverUnmappedObservations(all,catalog,opts,time).map(x=>x.eventId))].sort();
 }
 // Only official, season-specific Round 1 advancement cutoffs are trusted.
 // Unmapped seasons/types remain review-only without an inferred cutoff.
@@ -639,7 +644,14 @@ async function main(){
   return;
  }
  const windows=discover(all,data.tournaments.catalog,config);
- const unmapped=discoverUnmapped(all,data.tournaments.catalog,config);
+ const discoveryTime=Date.now();
+ const unmappedObservations=discoverUnmappedObservations(all,data.tournaments.catalog,config,discoveryTime);
+ const unmapped=[...new Set(unmappedObservations.map(x=>x.eventId))].sort();
+ const unmappedDiscovery=buildDiscoveryReport(unmappedObservations,{
+  registry:read('tournament-rules.json'),tournaments:data.tournaments,
+  recent:historical?read('auto-sync-config.json'):storedConfig,
+  history:historical?storedConfig:read('history-sync-config.json')
+ },{scope:historical?'history':'recent',observedAt:new Date(discoveryTime).toISOString()});
  const state=read(prefix+'-scan.json');
  if(state.version!==1||!state.windows||typeof state.windows!=='object')throw Error('checkpoint invalid');
  const pendingReviews=historical?read('history-sync-review.json').proposals:[];
@@ -848,7 +860,7 @@ async function main(){
  const reviewOnlyCandidates=unique.size?Array.from(unique.values()).filter(p=>p.reviewOnly===true).length:0;
  const cumulativeApprovals=data.updates.entries.filter(x=>x.title?.startsWith('公式規則で自動承認：')).reduce((sum,x)=>sum+(x.recordIds?.length||0),0);
  const status={version:1,state:'checked',checkedAt:stamp,mode:'review',scope:historical?'history':'recent',dateMode:historical?(storedConfig.toDate==='rolling'?'rolling':'fixed'):null,selectedWindows:active.length,fromDate:historical?config.fromDate:null,toDate:historical?config.toDate:null,provider:'osirion',linkedPlayers:accounts.length,trackedWindows:windows.length,found:unique.size,skipped:invalidRows,imported,scannedPages:scanned,completedWindows:finished,identityConflicts:conflicts.length,alreadyRegistered:recordedFromReview,autoApprovedTotal:cumulativeApprovals,invalidCachedCandidates:invalidCached,manualReviewCandidates:manuallyHeld,autoApprovedParticipationThisRun:verifiedParticipationIds.size,autoApprovedCosmeticThisRun:importedCosmetics,autoApprovedCashThisRun:cash.approved.length,autoApprovedPerformanceThisRun:performance.approved.length,autoApprovedUnrealThisRun:unreal.approved.length,autoApprovedDuoQualifierThisRun:duo.approved.length,autoApprovedPlayStationThisRun:playstation.approved.length,timeLimitReached,processedWindows,providerRateLimitPaused:rateLimited,providerRateLimitRetryAfter:rateLimitRetryAfter,providerTraffic:{...traffic,...providerPacer.metrics()},
-  ...(historical?{newlyCompletedWindows,newPlayerBackfill:playerBackfill}:{}),retryWindows:coverage.retryCount,coverage,...(historical?{reviewRecovery:reviewRecoverySummary,priorityAudit:{...priorityAudit,selected:selectedPriority}}:{}),transientFailures,malformedFailures,skippedLeaderboards:skippedLeaderboards.slice(0,15),reviewOnlyWindows,reviewOnlyCandidates,unmappedEvents:unmapped.length,unmappedEventIds:unmapped.slice(0,12),message:'Osirionで'+accounts.length+'アカウントIDを追跡。今回の公式規則による自動承認'+imported+'件、追加確認待ち'+unique.size+'件、名義照合保留'+conflicts.length+'件。'};
+  ...(historical?{newlyCompletedWindows,newPlayerBackfill:playerBackfill}:{}),retryWindows:coverage.retryCount,coverage,...(historical?{reviewRecovery:reviewRecoverySummary,priorityAudit:{...priorityAudit,selected:selectedPriority}}:{}),transientFailures,malformedFailures,skippedLeaderboards:skippedLeaderboards.slice(0,15),reviewOnlyWindows,reviewOnlyCandidates,unmappedEvents:unmapped.length,unmappedEventIds:unmapped.slice(0,12),unmappedDiscovery,message:'Osirionで'+accounts.length+'アカウントIDを追跡。今回の公式規則による自動承認'+imported+'件、追加確認待ち'+unique.size+'件、名義照合保留'+conflicts.length+'件。'};
  state.checkedAt=stamp;
  write(prefix+'-scan.json',state);
  write(prefix+'-review.json',{version:1,status:'review',checkedAt:stamp,proposals:[...unique.values()]});
@@ -857,4 +869,4 @@ async function main(){
   transientFailures,malformedFailures,heldWindows:skippedLeaderboards.length}));
 }
 if(require.main===module)main().catch(e=>{console.error('OSIRION_SYNC_ERROR '+e.stack);process.exitCode=1});
-module.exports={identity,linkedAccounts,parseStage,parseReviewStage,discover,discoverUnmapped,selectActiveWindows,selectHistoricalWindows,historicalEvidenceScore,historicalEvidenceIndex,historicalPriorityAudit,resolveHistoricalScope,fetchJson,advancementLimit,normalizeRow,getTournaments,getLeaderboard,leaderboardResponseError,recoverableLeaderboardFailure,holdLeaderboardWindow,holdEmptyFirstPage,transientLeaderboardFailure,providerRateLimitFailure,configureProviderPacing,main};
+module.exports={identity,linkedAccounts,parseStage,parseReviewStage,discover,discoverUnmapped,discoverUnmappedObservations,selectActiveWindows,selectHistoricalWindows,historicalEvidenceScore,historicalEvidenceIndex,historicalPriorityAudit,resolveHistoricalScope,fetchJson,advancementLimit,normalizeRow,getTournaments,getLeaderboard,leaderboardResponseError,recoverableLeaderboardFailure,holdLeaderboardWindow,holdEmptyFirstPage,transientLeaderboardFailure,providerRateLimitFailure,configureProviderPacing,main};
