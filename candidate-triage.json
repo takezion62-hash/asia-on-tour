@@ -1,7 +1,7 @@
 {
   "version": 1,
   "sourceCheckedAt": "2026-11-24T11:40:50.380Z",
-  "total": 87,
+  "total": 85,
   "alreadyResolved": 0,
   "byYear": [
     {
@@ -14,7 +14,7 @@
     },
     {
       "name": "2026",
-      "count": 46
+      "count": 44
     }
   ],
   "byRegion": [
@@ -40,17 +40,13 @@
     },
     {
       "name": "OCE",
-      "count": 12
+      "count": 10
     }
   ],
   "byTournament": [
     {
       "name": "Duos Console Victory Cash Cup / NAW / 2025",
       "count": 7
-    },
-    {
-      "name": "PlayStation Clix Cup (Battle Royale) / OCE / 2026",
-      "count": 2
     },
     {
       "name": "PlayStation Cup Zero Build / NAW / 2026",
@@ -104,7 +100,7 @@
     },
     {
       "name": "partial-scan",
-      "count": 40
+      "count": 38
     },
     {
       "name": "rules-review",
@@ -2619,72 +2615,6 @@
         "possibleExistingId": null
       },
       "rewardState": "source-amount-present-not-verified-by-triage"
-    },
-    {
-      "id": "auto-s40-a9db2974af60",
-      "origin": "history",
-      "date": "2026-04-29",
-      "year": "2026",
-      "region": "OCE",
-      "tournamentId": "ch7s2-playstation-clix-cup-br",
-      "event": "PlayStation Clix Cup (Battle Royale)",
-      "round": "Qualifier / 参加確認",
-      "player": "resれすまるっくす",
-      "kind": "参加確認",
-      "rank": 1980,
-      "points": 84,
-      "kills": 3,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S40_PlayStationCupClix/?region=OCE&round=S40_PlayStationCupClix_Qualifier_OCE",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "確認専用大会は自動承認不可",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 21,
-        "totalPages": 60,
-        "sourceKey": "epicgames_S40_PlayStationCupClix_OCE/S40_PlayStationCupClix_Qualifier_OCE",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s40-dc9195ea5bc2",
-      "origin": "history",
-      "date": "2026-04-29",
-      "year": "2026",
-      "region": "OCE",
-      "tournamentId": "ch7s2-playstation-clix-cup-br",
-      "event": "PlayStation Clix Cup (Battle Royale)",
-      "round": "Qualifier / 参加確認",
-      "player": "モバイル勢のまかろん",
-      "kind": "参加確認",
-      "rank": 1969,
-      "points": 84,
-      "kills": 15,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S40_PlayStationCupClix/?region=OCE&round=S40_PlayStationCupClix_Qualifier_OCE",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "確認専用大会は自動承認不可",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 21,
-        "totalPages": 60,
-        "sourceKey": "epicgames_S40_PlayStationCupClix_OCE/S40_PlayStationCupClix_Qualifier_OCE",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
     },
     {
       "id": "auto-s43-21347a4bda90",
