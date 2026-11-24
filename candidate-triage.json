@@ -1,12 +1,12 @@
 {
   "version": 1,
   "sourceCheckedAt": "2026-11-24T10:18:43.516Z",
-  "total": 87,
+  "total": 77,
   "alreadyResolved": 0,
   "byYear": [
     {
       "name": "2024",
-      "count": 34
+      "count": 26
     },
     {
       "name": "2025",
@@ -14,17 +14,13 @@
     },
     {
       "name": "2026",
-      "count": 46
+      "count": 44
     }
   ],
   "byRegion": [
     {
-      "name": "BR",
-      "count": 1
-    },
-    {
       "name": "EU",
-      "count": 2
+      "count": 1
     },
     {
       "name": "ME",
@@ -32,7 +28,7 @@
     },
     {
       "name": "NAC",
-      "count": 20
+      "count": 18
     },
     {
       "name": "NAW",
@@ -40,7 +36,7 @@
     },
     {
       "name": "OCE",
-      "count": 16
+      "count": 10
     }
   ],
   "byTournament": [
@@ -49,16 +45,8 @@
       "count": 7
     },
     {
-      "name": "PlayStation Clix Cup (Battle Royale) / OCE / 2026",
-      "count": 2
-    },
-    {
       "name": "PlayStation Cup Zero Build / NAW / 2026",
       "count": 5
-    },
-    {
-      "name": "Solo Victory Cup Battle Royale / NAC / 2024",
-      "count": 2
     },
     {
       "name": "Squads Victory Cup Battle Royale / ME / 2026",
@@ -81,12 +69,8 @@
       "count": 2
     },
     {
-      "name": "ZB Solo Victory Cup / BR / 2024",
-      "count": 1
-    },
-    {
       "name": "ZB Solo Victory Cup / EU / 2024",
-      "count": 2
+      "count": 1
     },
     {
       "name": "ZB Solo Victory Cup / NAC / 2024",
@@ -94,7 +78,7 @@
     },
     {
       "name": "ZB Solo Victory Cup / OCE / 2024",
-      "count": 11
+      "count": 7
     }
   ],
   "byStatus": [
@@ -104,7 +88,7 @@
     },
     {
       "name": "partial-scan",
-      "count": 42
+      "count": 32
     },
     {
       "name": "rules-review",
@@ -1829,39 +1813,6 @@
       "rewardState": "source-amount-present-not-verified-by-triage"
     },
     {
-      "id": "auto-s30-8ad4b0ccc8e1",
-      "origin": "history",
-      "date": "2024-07-16",
-      "year": "2024",
-      "region": "BR",
-      "tournamentId": "ch5s3-zb-solo-victory",
-      "event": "ZB Solo Victory Cup",
-      "round": "Event 5 · Round 1 / 予選",
-      "player": "おろないと",
-      "kind": "予選",
-      "rank": 23,
-      "points": 213,
-      "kills": 14,
-      "vrs": 0,
-      "prize": 0,
-      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=BR&round=S30_SoloZBVictoryCashCup_Event5Round1_BR",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "順位表の取得が完了していません",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 2,
-        "totalPages": 100,
-        "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_BR/S30_SoloZBVictoryCashCup_Event5Round1_BR",
-        "possibleExistingId": null
-      },
-      "rewardState": "source-amount-present-not-verified-by-triage"
-    },
-    {
       "id": "auto-s30-97f38903a790",
       "origin": "history",
       "date": "2024-07-16",
@@ -1893,39 +1844,6 @@
         "possibleExistingId": null
       },
       "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s30-05d5a4d4cb96",
-      "origin": "history",
-      "date": "2024-07-22",
-      "year": "2024",
-      "region": "OCE",
-      "tournamentId": "ch5s3-zb-solo-victory",
-      "event": "ZB Solo Victory Cup",
-      "round": "Event 6 · Round 1 / 予選",
-      "player": "Hagane",
-      "kind": "予選",
-      "rank": 9,
-      "points": 203,
-      "kills": 32,
-      "vrs": 1,
-      "prize": 0,
-      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=OCE&round=S30_SoloZBVictoryCashCup_Event6Round1_OCE",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "順位表の取得が完了していません",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 2,
-        "totalPages": 100,
-        "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_OCE/S30_SoloZBVictoryCashCup_Event6Round1_OCE",
-        "possibleExistingId": null
-      },
-      "rewardState": "source-amount-present-not-verified-by-triage"
     },
     {
       "id": "auto-s30-4ad46acfd79a",
@@ -1961,39 +1879,6 @@
       "rewardState": "cash-unconfirmed"
     },
     {
-      "id": "auto-s30-58eaeaf3fc0a",
-      "origin": "history",
-      "date": "2024-07-22",
-      "year": "2024",
-      "region": "OCE",
-      "tournamentId": "ch5s3-zb-solo-victory",
-      "event": "ZB Solo Victory Cup",
-      "round": "Event 6 · Round 1 / 予選",
-      "player": "hoimin",
-      "kind": "予選",
-      "rank": 3,
-      "points": 225,
-      "kills": 22,
-      "vrs": 2,
-      "prize": 0,
-      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=OCE&round=S30_SoloZBVictoryCashCup_Event6Round1_OCE",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "順位表の取得が完了していません",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 2,
-        "totalPages": 100,
-        "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_OCE/S30_SoloZBVictoryCashCup_Event6Round1_OCE",
-        "possibleExistingId": null
-      },
-      "rewardState": "source-amount-present-not-verified-by-triage"
-    },
-    {
       "id": "auto-s30-68f81cbb213a",
       "origin": "history",
       "date": "2024-07-22",
@@ -2025,105 +1910,6 @@
         "possibleExistingId": null
       },
       "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s30-f7457dbb88a7",
-      "origin": "history",
-      "date": "2024-07-22",
-      "year": "2024",
-      "region": "OCE",
-      "tournamentId": "ch5s3-zb-solo-victory",
-      "event": "ZB Solo Victory Cup",
-      "round": "Event 6 · Round 1 / 予選",
-      "player": "ぴぐれ",
-      "kind": "予選",
-      "rank": 176,
-      "points": 134,
-      "kills": 15,
-      "vrs": 1,
-      "prize": 0,
-      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=OCE&round=S30_SoloZBVictoryCashCup_Event6Round1_OCE",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "順位表の取得が完了していません",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 2,
-        "totalPages": 100,
-        "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_OCE/S30_SoloZBVictoryCashCup_Event6Round1_OCE",
-        "possibleExistingId": null
-      },
-      "rewardState": "source-amount-present-not-verified-by-triage"
-    },
-    {
-      "id": "auto-s30-f871c072d84e",
-      "origin": "history",
-      "date": "2024-07-22",
-      "year": "2024",
-      "region": "OCE",
-      "tournamentId": "ch5s3-zb-solo-victory",
-      "event": "ZB Solo Victory Cup",
-      "round": "Event 6 · Round 1 / 予選",
-      "player": "MushyGoose6356",
-      "kind": "予選",
-      "rank": 71,
-      "points": 156,
-      "kills": 8,
-      "vrs": 0,
-      "prize": 0,
-      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=OCE&round=S30_SoloZBVictoryCashCup_Event6Round1_OCE",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "順位表の取得が完了していません",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 2,
-        "totalPages": 100,
-        "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_OCE/S30_SoloZBVictoryCashCup_Event6Round1_OCE",
-        "possibleExistingId": null
-      },
-      "rewardState": "source-amount-present-not-verified-by-triage"
-    },
-    {
-      "id": "auto-s30-1e32f0444068",
-      "origin": "history",
-      "date": "2024-07-23",
-      "year": "2024",
-      "region": "EU",
-      "tournamentId": "ch5s3-zb-solo-victory",
-      "event": "ZB Solo Victory Cup",
-      "round": "Event 6 · Round 1 / 予選",
-      "player": "TakoBeL",
-      "kind": "予選",
-      "rank": 129,
-      "points": 176,
-      "kills": 24,
-      "vrs": 2,
-      "prize": 0,
-      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=EU&round=S30_SoloZBVictoryCashCup_Event6Round1_EU",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "順位表の取得が完了していません",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 2,
-        "totalPages": 100,
-        "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_EU/S30_SoloZBVictoryCashCup_Event6Round1_EU",
-        "possibleExistingId": null
-      },
-      "rewardState": "source-amount-present-not-verified-by-triage"
     },
     {
       "id": "auto-s30-7611a39eafef",
@@ -2487,138 +2273,6 @@
         "possibleExistingId": null
       },
       "rewardState": "source-amount-present-not-verified-by-triage"
-    },
-    {
-      "id": "auto-s32-3c8253a7863f",
-      "origin": "history",
-      "date": "2024-11-16",
-      "year": "2024",
-      "region": "NAC",
-      "tournamentId": "ch5s5-solo-victory-cup",
-      "event": "Solo Victory Cup Battle Royale",
-      "round": "Event 2 · Round 1 / 予選",
-      "player": "sena",
-      "kind": "予選",
-      "rank": 3464,
-      "points": 137,
-      "kills": 12,
-      "vrs": 1,
-      "prize": 0,
-      "source": "https://www.fortnite.com/competitive/events/S32_SoloVictoryCashCup/?region=NAC&round=S32_SoloVictoryCashCup_Event2Round1_NAC",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "順位表の取得が完了していません",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 35,
-        "totalPages": 100,
-        "sourceKey": "epicgames_S32_SoloVictoryCashCup_NAC/S32_SoloVictoryCashCup_Event2Round1_NAC",
-        "possibleExistingId": null
-      },
-      "rewardState": "source-amount-present-not-verified-by-triage"
-    },
-    {
-      "id": "auto-s32-435e4f932f32",
-      "origin": "history",
-      "date": "2024-11-16",
-      "year": "2024",
-      "region": "NAC",
-      "tournamentId": "ch5s5-solo-victory-cup",
-      "event": "Solo Victory Cup Battle Royale",
-      "round": "Event 2 · Round 1 / 予選",
-      "player": "センス0",
-      "kind": "予選",
-      "rank": 3431,
-      "points": 138,
-      "kills": 4,
-      "vrs": 0,
-      "prize": 0,
-      "source": "https://www.fortnite.com/competitive/events/S32_SoloVictoryCashCup/?region=NAC&round=S32_SoloVictoryCashCup_Event2Round1_NAC",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "順位表の取得が完了していません",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 35,
-        "totalPages": 100,
-        "sourceKey": "epicgames_S32_SoloVictoryCashCup_NAC/S32_SoloVictoryCashCup_Event2Round1_NAC",
-        "possibleExistingId": null
-      },
-      "rewardState": "source-amount-present-not-verified-by-triage"
-    },
-    {
-      "id": "auto-s40-46376ffa6d3d",
-      "origin": "history",
-      "date": "2026-04-29",
-      "year": "2026",
-      "region": "OCE",
-      "tournamentId": "ch7s2-playstation-clix-cup-br",
-      "event": "PlayStation Clix Cup (Battle Royale)",
-      "round": "Qualifier / 参加確認",
-      "player": "kmyt",
-      "kind": "参加確認",
-      "rank": 1858,
-      "points": 89,
-      "kills": 9,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S40_PlayStationCupClix/?region=OCE&round=S40_PlayStationCupClix_Qualifier_OCE",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "確認専用大会は自動承認不可",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 19,
-        "totalPages": 60,
-        "sourceKey": "epicgames_S40_PlayStationCupClix_OCE/S40_PlayStationCupClix_Qualifier_OCE",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s40-9af0f00b2d6b",
-      "origin": "history",
-      "date": "2026-04-29",
-      "year": "2026",
-      "region": "OCE",
-      "tournamentId": "ch7s2-playstation-clix-cup-br",
-      "event": "PlayStation Clix Cup (Battle Royale)",
-      "round": "Qualifier / 参加確認",
-      "player": "Mofu",
-      "kind": "参加確認",
-      "rank": 1892,
-      "points": 87,
-      "kills": 17,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S40_PlayStationCupClix/?region=OCE&round=S40_PlayStationCupClix_Qualifier_OCE",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "確認専用大会は自動承認不可",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 19,
-        "totalPages": 60,
-        "sourceKey": "epicgames_S40_PlayStationCupClix_OCE/S40_PlayStationCupClix_Qualifier_OCE",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
     },
     {
       "id": "auto-s43-21347a4bda90",
