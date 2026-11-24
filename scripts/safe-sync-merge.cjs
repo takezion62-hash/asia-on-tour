@@ -11,6 +11,8 @@ const {decide:verifyHistoricalVictory}=require('./verified-history-approval.cjs'
 const {newestDiscoveryReport}=require('./unmapped-tournament-discovery.cjs');
 const {sameScannedCandidate}=require('./verified-partial-page.cjs');
 const {ID:SQUADS_ID,overlaps:squadOverlap}=require('./automatic-squads-approval.cjs');
+const {isConsole,overlaps:consoleOverlap}=require('./automatic-console-duos-approval.cjs');
+const teamOverlapProtected=id=>id===SQUADS_ID||isConsole(id);
 const VALID_SCOPES=new Set(['history','auto']);
 const SOURCE_FILES=[
   'players.json','tournaments.json','tournament-rules.json',
@@ -33,6 +35,11 @@ const SOURCE_FILES=[
   'scripts/automatic-playstation-approval.cjs',
   'scripts/verified-partial-page.cjs',
   'scripts/automatic-squads-approval.cjs',
+  'scripts/automatic-console-duos-approval.cjs',
+  'calendar-history/2025-05.json',
+  'calendar-history/2025-08.json',
+  'calendar-history/2025-09.json',
+  'calendar-history/2025-10.json',
   'schedule.json',
   'data/manual-approvals/review-only-generic-v1.json'
 ];
@@ -202,8 +209,9 @@ function mergeSnapshots(scope,base,scanned,latest,reviewed={version:1,entries:[]
    else conflicts.push({id:candidate.id,reason:'different score for existing ID',source:candidate.source});
    continue;
   }
-  if(candidate.tournamentId===SQUADS_ID){
-   const overlap=[...existing.values()].find(old=>squadOverlap(old,candidate,approvalData?.players?.confirmedAliases));
+  if(teamOverlapProtected(candidate.tournamentId)){
+   const check=isConsole(candidate.tournamentId)?consoleOverlap:squadOverlap;
+   const overlap=[...existing.values()].find(old=>check(old,candidate,approvalData?.players?.confirmedAliases));
    if(overlap){conflicts.push({id:candidate.id,existingId:overlap.id,reason:'same squad window/rank or overlapping mixed roster',source:candidate.source});continue}
   }
   const logical=semantic.get(logicalKey(candidate));
@@ -260,8 +268,8 @@ function mergeSnapshots(scope,base,scanned,latest,reviewed={version:1,entries:[]
  const queueExtra=c[qFile].proposals.filter(x=>!baseReviewIds.has(x.id));
  const candidates=[...queueExtra,...conflicts.map(x=>{
   const published=c[rFile].find(r=>r.id===x.id);
-  const original=published?.tournamentId===SQUADS_ID?Object.values(c[cFile].windows).flatMap(cp=>cp.proposals||[]).filter(p=>p.id===x.id):[];
-  const row=published?.tournamentId===SQUADS_ID?(original.length===1?original[0]:null):published;
+  const original=teamOverlapProtected(published?.tournamentId)?Object.values(c[cFile].windows).flatMap(cp=>cp.proposals||[]).filter(p=>p.id===x.id):[];
+  const row=teamOverlapProtected(published?.tournamentId)?(original.length===1?original[0]:null):published;
   return row?{...row,reviewReason:'自動掲載を保留：競合 '+x.reason+(x.existingId?'（既存 '+x.existingId+'）':'')} :null;
  }).filter(Boolean)];
  for(const row of candidates){

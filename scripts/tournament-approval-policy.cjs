@@ -13,10 +13,11 @@ const POLICIES=Object.freeze([
  {id:'nvidia',flag:'autoApproveNvidia',series:['nvidia-cup'],modes:['verified-solo-rank'],adapter:'./automatic-nvidia-approval.cjs'},
  {id:'duo',flag:'autoApproveDuoQualifier',series:['victory-cup','cash-cup'],modes:['verified-duo-qualifier-only'],adapter:'./automatic-duo-qualifier-approval.cjs'},
  {id:'playstation',flag:'autoApprovePlayStation',series:['playstation-cup'],modes:['verified-playstation-solo'],adapter:'./automatic-playstation-approval.cjs'},
- {id:'squads',flag:'autoApproveSquads',series:['victory-cup'],modes:[undefined],adapter:'./automatic-squads-approval.cjs'}
+ {id:'squads',flag:'autoApproveSquads',series:['victory-cup'],modes:[undefined],adapter:'./automatic-squads-approval.cjs'},
+ {id:'consoleDuos',flag:'autoApproveConsoleDuos',series:['victory-cup'],modes:[undefined,'verified-duo-qualifier-only'],adapter:'./automatic-console-duos-approval.cjs'}
 ].map(p=>Object.freeze({...p,series:Object.freeze(p.series),modes:Object.freeze(p.modes)})));
 function supports(p,r){
- return Boolean(p&&r&&(p.id!=='squads'||(r.id==='ch7s5-squads-victory-cup'&&r.seasonId==='S43'&&r.team==='squad'))&&p.series.includes(r.series)&&TEAMS.includes(r.team)&&r.autoApproval!=='review-only'&&
+ return Boolean(p&&r&&(p.id!=='squads'||(r.id==='ch7s5-squads-victory-cup'&&r.seasonId==='S43'&&r.team==='squad'))&&(p.id!=='consoleDuos'||(r.team==='duo'&&((r.id==='ch6s2-console-duos-victory'&&r.seasonId==='S35')||(r.id==='ch6s4-console-duos-victory'&&r.seasonId==='S37'))))&&p.series.includes(r.series)&&TEAMS.includes(r.team)&&r.autoApproval!=='review-only'&&
   (p.modes.includes(r.autoApproval)||(p.extra&&r.autoApproval==='verified-duo-qualifier-only'&&r.cashFinalAutoApproval===p.extra)));
 }
 function policyIds(rule){return POLICIES.filter(p=>supports(p,rule)).map(p=>p.id)}

@@ -4,10 +4,11 @@ const {rules}=require('../tournament-rules.json');
 const ruleById=new Map(rules.map(r=>[r.id,r]));
 // Keep award decisions unchanged; only accept a relevant adapter's hold reason.
 // A dual-policy tournament uses the qualifier route for Round 1 and cash for Round 2.
-function reasonRoute(row,catalog){
+function reasonRoute(row,catalog,config){
  const rule=ruleById.get(row?.tournamentId);
  if(!rule||!catalog||catalog.series!==rule.series||catalog.seasonId!==rule.seasonId)return null;
  const routes=policyIds(rule);
+ if(routes.includes('consoleDuos')&&config?.autoApproveConsoleDuos===true)return 'consoleDuos';
  if(routes.includes('squads'))return 'squads';
  if(routes.includes('duo')){
   if(row.kind==='予選'||/Round 1\s*\//.test(row.round||''))return 'duo';
@@ -22,13 +23,17 @@ function reasonRoute(row,catalog){
 function runApprovals(pending,windows,checkpoints,data,config,{historical=false,initialReasons=[],load=p=>require(p.adapter)}={}){
  const batches={},approved=[],reasons=new Map(initialReasons),verifiedParticipationIds=new Set();
  const catalog=new Map((data.tournaments?.catalog||[]).map(t=>[t.id,t]));
- const relevant=new Map(pending.map(row=>[row.id,reasonRoute(row,catalog.get(row.tournamentId))]));
+ const relevant=new Map(pending.map(row=>[row.id,reasonRoute(row,catalog.get(row.tournamentId),config)]));
  const enabledRoutes=new Set();
 
  for(const policy of POLICIES){
   const enabled=config?.[policy.flag]===true&&(!policy.historicalOnly||historical);
   if(enabled)enabledRoutes.add(policy.id);
-  const result=enabled?load(policy).evaluate(pending,windows,checkpoints,
+  // Dedicated Console Duos takes exclusive ownership when enabled; legacy
+  // qualifier and pinned final paths cannot bypass its stricter checks.
+  const input=policy.id!=='consoleDuos'&&config?.autoApproveConsoleDuos===true&&pending.some(r=>relevant.get(r.id)==='consoleDuos')?
+   pending.filter(r=>relevant.get(r.id)!=='consoleDuos'):pending;
+  const result=enabled?load(policy).evaluate(input,windows,checkpoints,
    policy.id==='verified'?data:{...data,results:[...data.results,...approved]}):{approved:[],held:[]};
   batches[policy.id]=result;
   approved.push(...result.approved);

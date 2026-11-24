@@ -64,7 +64,11 @@ function recheckSaved({queue,checkpoints,windows,data,config,reviewedIds=[],othe
    win.tournamentId!==row.tournamentId||win.kind!==row.kind||win.round!==row.round||cat.name!==row.event){
    held.push({id:row.id,reason:'公式開催枠・保存済み候補の一致を確認できない'});continue;
   }
-  if(!mature(proof[0].cp,win,row,now)){
+  // Allow the dedicated Console Duos adapter's exact mature qualifier prefix,
+  // including legacy cutoff-complete snapshots; never relax final evidence.
+  const consolePrefix=config.autoApproveConsoleDuos===true&&row.kind==='予選'&&
+   require('./automatic-console-duos-approval.cjs').qualifierEvidence(row,win,proof[0].cp,now);
+  if(!mature(proof[0].cp,win,row,now)&&!consolePrefix){
    held.push({id:row.id,reason:'成熟済み完全順位表が未確認'});continue;
   }
   if(!identityProof(row,win,data.verifiedAccounts||[],cat.team)){
