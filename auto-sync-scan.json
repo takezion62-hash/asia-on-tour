@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-11-24T09:51:29.372Z",
+  "checkedAt": "2026-11-24T10:14:03.694Z",
   "windows": {
     "epicgames_S43_PerformanceEvaluationTrios_EU/S43_PerformanceEvaluation_Event1Round1_EU": {
       "nextPage": 7,
@@ -20133,15 +20133,15 @@
       "totalPages": 21
     },
     "epicgames_S43_TriosCashCup_EU/S43_TriosCashCup_Event3_EU": {
-      "nextPage": 30,
+      "nextPage": 31,
       "complete": false,
       "proposals": [],
-      "pages": 30,
-      "lastAttemptAt": "2026-11-24T09:51:24.667Z",
+      "pages": 31,
+      "lastAttemptAt": "2026-11-24T10:13:53.117Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 3000,
-      "lastSuccessAt": "2026-11-24T09:51:26.260Z",
+      "lastSeenRank": 3100,
+      "lastSuccessAt": "2026-11-24T10:13:54.365Z",
       "totalPages": 87
     },
     "epicgames_S43_TriosCashCup_ME/S43_TriosCashCup_Event3_ME": {
@@ -20445,7 +20445,7 @@
       "totalPages": 12
     },
     "epicgames_S43_TriosCashCup_NAW/S43_TriosCashCup_Event3_NAW": {
-      "nextPage": 13,
+      "nextPage": 14,
       "complete": false,
       "proposals": [
         {
@@ -20764,24 +20764,24 @@
           ]
         }
       ],
-      "pages": 13,
-      "lastAttemptAt": "2026-11-24T09:51:22.123Z",
+      "pages": 14,
+      "lastAttemptAt": "2026-11-24T10:13:43.588Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 1300,
-      "lastSuccessAt": "2026-11-24T09:51:24.667Z",
+      "lastSeenRank": 1400,
+      "lastSuccessAt": "2026-11-24T10:13:53.117Z",
       "totalPages": 20
     },
     "epicgames_S43_TriosCashCup_NAC/S43_TriosCashCup_Event3_NAC": {
-      "nextPage": 6,
+      "nextPage": 7,
       "complete": false,
       "proposals": [],
-      "pages": 6,
-      "lastAttemptAt": "2026-11-24T09:51:26.260Z",
+      "pages": 7,
+      "lastAttemptAt": "2026-11-24T10:13:54.365Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 600,
-      "lastSuccessAt": "2026-11-24T09:51:27.361Z",
+      "lastSeenRank": 700,
+      "lastSuccessAt": "2026-11-24T10:13:55.695Z",
       "totalPages": 44
     },
     "epicgames_S43_SquadsVictoryCup_OCE/S43_SquadsVictoryCup_Event2_Round2_OCE": {
@@ -21004,15 +21004,15 @@
       "totalPages": 3
     },
     "epicgames_S43_SquadsVictoryCup_EU/S43_SquadsVictoryCup_Event2_Round1_EU": {
-      "nextPage": 20,
+      "nextPage": 30,
       "complete": false,
       "proposals": [],
-      "pages": 20,
-      "lastAttemptAt": "2026-11-24T09:51:15.662Z",
+      "pages": 30,
+      "lastAttemptAt": "2026-11-24T10:13:23.875Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 2000,
-      "lastSuccessAt": "2026-11-24T09:51:17.046Z",
+      "lastSeenRank": 3000,
+      "lastSuccessAt": "2026-11-24T10:13:25.618Z",
       "totalPages": 100
     },
     "epicgames_S43_SquadsVictoryCup_ME/S43_SquadsVictoryCup_Event2_Round2_ME": {
@@ -21174,8 +21174,8 @@
       "totalPages": 2
     },
     "epicgames_S43_SquadsVictoryCup_ME/S43_SquadsVictoryCup_Event2_Round1_ME": {
-      "nextPage": 19,
-      "complete": false,
+      "nextPage": 23,
+      "complete": true,
       "proposals": [
         {
           "id": "auto-s43-462a05f4ce4f",
@@ -21642,12 +21642,12 @@
           ]
         }
       ],
-      "pages": 19,
-      "lastAttemptAt": "2026-11-24T09:51:02.109Z",
+      "pages": 23,
+      "lastAttemptAt": "2026-11-24T10:13:10.648Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 1900,
-      "lastSuccessAt": "2026-11-24T09:51:03.227Z",
+      "lastSeenRank": 2233,
+      "lastSuccessAt": "2026-11-24T10:13:11.542Z",
       "totalPages": 23
     },
     "epicgames_S43_PlayStationCup_EU/S43_PlayStationCup_Qualifier_EU": {
@@ -21676,7 +21676,7 @@
       "totalPages": 2
     },
     "epicgames_S43_SquadsVictoryCup_NAW/S43_SquadsVictoryCup_Event2_Round1_NAW": {
-      "nextPage": 2,
+      "nextPage": 11,
       "complete": false,
       "proposals": [
         {
@@ -21736,31 +21736,147 @@
             "rakirye",
             "くどう そうた"
           ]
+        },
+        {
+          "id": "auto-s43-3d4bff843c06",
+          "date": "2026-11-24",
+          "region": "NAW",
+          "player": "りあにー / ひろ / そみー / Plank",
+          "playerRaw": "REBEL りあにー / UC.ひろ / UC.そみー / Celis ArdaGüler",
+          "event": "Squads Victory Cup Battle Royale",
+          "round": "Event 2 · Round 1 / 予選",
+          "rank": 246,
+          "points": 273,
+          "kills": 36,
+          "vrs": 3,
+          "prize": 0,
+          "kind": "予選",
+          "matches": 7,
+          "seasonId": "S43",
+          "chapter": 7,
+          "season": 5,
+          "tournamentId": "ch7s5-squads-victory-cup",
+          "source": "https://www.fortnite.com/competitive/events/S43_SquadsVictoryCup/?region=NAW&round=S43_SquadsVictoryCup_Event2_Round1_NAW",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。",
+          "players": [
+            "りあにー",
+            "ひろ",
+            "そみー",
+            "Plank"
+          ]
+        },
+        {
+          "id": "auto-s43-cc6b99b77e85",
+          "date": "2026-11-24",
+          "region": "NAW",
+          "player": "guppafv / meath / Smile / Tossy",
+          "playerRaw": "wsr guppafvǃ 528 / zst boltzZzero0 / nxfzgdfsfgavxlq4 / zst とっしーごーてぃーW",
+          "event": "Squads Victory Cup Battle Royale",
+          "round": "Event 2 · Round 1 / 予選",
+          "rank": 274,
+          "points": 270,
+          "kills": 55,
+          "vrs": 1,
+          "prize": 0,
+          "kind": "予選",
+          "matches": 8,
+          "seasonId": "S43",
+          "chapter": 7,
+          "season": 5,
+          "tournamentId": "ch7s5-squads-victory-cup",
+          "source": "https://www.fortnite.com/competitive/events/S43_SquadsVictoryCup/?region=NAW&round=S43_SquadsVictoryCup_Event2_Round1_NAW",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。",
+          "players": [
+            "guppafv",
+            "meath",
+            "Smile",
+            "Tossy"
+          ]
+        },
+        {
+          "id": "auto-s43-4c0aa34dc056",
+          "date": "2026-11-24",
+          "region": "NAW",
+          "player": "Aster / nezah / みやぐらーる / りんたろう",
+          "playerRaw": "ONYX 9 / 明日は冬が綺麗でしたね / orz miyA H2H / ONYX りんたろうʕᵒᴥᵒʔ",
+          "event": "Squads Victory Cup Battle Royale",
+          "round": "Event 2 · Round 1 / 予選",
+          "rank": 458,
+          "points": 252,
+          "kills": 50,
+          "vrs": 1,
+          "prize": 0,
+          "kind": "予選",
+          "matches": 7,
+          "seasonId": "S43",
+          "chapter": 7,
+          "season": 5,
+          "tournamentId": "ch7s5-squads-victory-cup",
+          "source": "https://www.fortnite.com/competitive/events/S43_SquadsVictoryCup/?region=NAW&round=S43_SquadsVictoryCup_Event2_Round1_NAW",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。",
+          "players": [
+            "Aster",
+            "nezah",
+            "みやぐらーる",
+            "りんたろう"
+          ]
+        },
+        {
+          "id": "auto-s43-d4a0306bd737",
+          "date": "2026-11-24",
+          "region": "NAW",
+          "player": "ちからV2 / kumo / かめてぃん / Teddy",
+          "playerRaw": "NEXUS ちからV2ǃ / orz kumofvǃ / かめてぃん.魔女 / faction teddy",
+          "event": "Squads Victory Cup Battle Royale",
+          "round": "Event 2 · Round 1 / 予選",
+          "rank": 629,
+          "points": 239,
+          "kills": 74,
+          "vrs": 2,
+          "prize": 0,
+          "kind": "予選",
+          "matches": 8,
+          "seasonId": "S43",
+          "chapter": 7,
+          "season": 5,
+          "tournamentId": "ch7s5-squads-victory-cup",
+          "source": "https://www.fortnite.com/competitive/events/S43_SquadsVictoryCup/?region=NAW&round=S43_SquadsVictoryCup_Event2_Round1_NAW",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。",
+          "players": [
+            "ちからV2",
+            "kumo",
+            "かめてぃん",
+            "Teddy"
+          ]
         }
       ],
-      "pages": 2,
-      "lastAttemptAt": "2026-11-24T09:51:20.524Z",
+      "pages": 11,
+      "lastAttemptAt": "2026-11-24T10:13:35.516Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 200,
-      "lastSuccessAt": "2026-11-24T09:51:21.718Z",
+      "lastSeenRank": 1100,
+      "lastSuccessAt": "2026-11-24T10:13:36.802Z",
       "totalPages": 37
     },
     "epicgames_S43_SquadsVictoryCup_NAC/S43_SquadsVictoryCup_Event2_Round1_NAC": {
-      "nextPage": 1,
+      "nextPage": 2,
       "complete": false,
       "proposals": [],
-      "pages": 1,
-      "lastAttemptAt": "2026-11-24T09:51:21.718Z",
+      "pages": 2,
+      "lastAttemptAt": "2026-11-24T10:13:36.802Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 100,
-      "lastSuccessAt": "2026-11-24T09:51:22.123Z",
+      "lastSeenRank": 200,
+      "lastSuccessAt": "2026-11-24T10:13:37.814Z",
       "totalPages": 67
     },
     "epicgames_S43_PlayStationCup_NAW/S43_PlayStationCup_Qualifier_NAW": {
-      "nextPage": 1,
-      "complete": false,
+      "nextPage": 2,
+      "complete": true,
       "proposals": [
         {
           "id": "auto-s43-3e5d8ec1ed5c",
@@ -21931,14 +22047,210 @@
           ]
         }
       ],
-      "pages": 1,
+      "pages": 2,
       "epicIdsRetained": true,
-      "lastAttemptAt": "2026-11-24T09:51:28.361Z",
+      "lastAttemptAt": "2026-11-24T10:13:55.695Z",
+      "emptyAttempts": 0,
+      "rankingOrderValid": true,
+      "lastSeenRank": 200,
+      "lastSuccessAt": "2026-11-24T10:13:56.623Z",
+      "totalPages": 52
+    },
+    "epicgames_S43_SquadsVictoryCup_NAW/S43_SquadsVictoryCup_Event2_Round2_NAW": {
+      "nextPage": 1,
+      "complete": false,
+      "proposals": [
+        {
+          "id": "auto-s43-2dec6d274598",
+          "date": "2026-11-24",
+          "region": "NAW",
+          "player": "まぁ / Astell / zerua / Zagou",
+          "playerRaw": "STX まぁǃ / NŁT Astell fvǃ / Faction 朝倉未来 / Zagou",
+          "event": "Squads Victory Cup Battle Royale",
+          "round": "Event 2 · Round 2 / 賞金決勝",
+          "rank": 34,
+          "points": 0,
+          "kills": 15,
+          "vrs": 0,
+          "prize": null,
+          "kind": "賞金決勝",
+          "matches": 2,
+          "seasonId": "S43",
+          "chapter": 7,
+          "season": 5,
+          "tournamentId": "ch7s5-squads-victory-cup",
+          "source": "https://www.fortnite.com/competitive/events/S43_SquadsVictoryCup/?region=NAW&round=S43_SquadsVictoryCup_Event2_Round2_NAW",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。現金賞金の確定情報なし。",
+          "players": [
+            "まぁ",
+            "Astell",
+            "zerua",
+            "Zagou"
+          ]
+        }
+      ],
+      "pages": 1,
+      "lastAttemptAt": "2026-11-24T10:13:37.814Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
       "lastSeenRank": 100,
-      "lastSuccessAt": "2026-11-24T09:51:29.354Z",
-      "totalPages": 52
+      "lastSuccessAt": "2026-11-24T10:13:43.588Z",
+      "totalPages": 2
+    },
+    "epicgames_S43_PlayStationCup_ZB_NAW/S43_PlayStationCup_ZB_Qualifier_NAW": {
+      "nextPage": 1,
+      "complete": false,
+      "proposals": [
+        {
+          "id": "auto-s43-309f51336ebc",
+          "date": "2026-11-24",
+          "region": "NAW",
+          "player": "SH助けて勝つシューター",
+          "playerRaw": "SH助けて勝つシューター",
+          "event": "PlayStation Cup Zero Build",
+          "round": "Qualifier / 参加確認",
+          "rank": 11,
+          "points": 421,
+          "kills": 21,
+          "vrs": 0,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 10,
+          "seasonId": "S43",
+          "chapter": 7,
+          "season": 5,
+          "tournamentId": "ch7s5-playstation-cup-zero-build",
+          "source": "https://www.fortnite.com/competitive/events/S43_PlayStationCup_ZB/?region=NAW&round=S43_PlayStationCup_ZB_Qualifier_NAW",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "teamAccountIds": [
+            "f7fc35f942344bc2a3ca5140b7820cc5"
+          ]
+        },
+        {
+          "id": "auto-s43-7986e9792639",
+          "date": "2026-11-24",
+          "region": "NAW",
+          "player": "朝比奈まふゆӝ",
+          "playerRaw": "ily 不可思議のカルテ",
+          "event": "PlayStation Cup Zero Build",
+          "round": "Qualifier / 参加確認",
+          "rank": 41,
+          "points": 378,
+          "kills": 8,
+          "vrs": 3,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 10,
+          "seasonId": "S43",
+          "chapter": 7,
+          "season": 5,
+          "tournamentId": "ch7s5-playstation-cup-zero-build",
+          "source": "https://www.fortnite.com/competitive/events/S43_PlayStationCup_ZB/?region=NAW&round=S43_PlayStationCup_ZB_Qualifier_NAW",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "teamAccountIds": [
+            "006cbf8032c548f6b9430ad5bb596daa"
+          ]
+        },
+        {
+          "id": "auto-s43-a9c6472f10e9",
+          "date": "2026-11-24",
+          "region": "NAW",
+          "player": "yotta guɿäʙöɴ-ɷ-",
+          "playerRaw": "yotta guɿäʙöɴ-ɷ-",
+          "event": "PlayStation Cup Zero Build",
+          "round": "Qualifier / 参加確認",
+          "rank": 42,
+          "points": 376,
+          "kills": 6,
+          "vrs": 1,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 10,
+          "seasonId": "S43",
+          "chapter": 7,
+          "season": 5,
+          "tournamentId": "ch7s5-playstation-cup-zero-build",
+          "source": "https://www.fortnite.com/competitive/events/S43_PlayStationCup_ZB/?region=NAW&round=S43_PlayStationCup_ZB_Qualifier_NAW",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "teamAccountIds": [
+            "389794a16b874df9b41234d9da42f2a3"
+          ]
+        },
+        {
+          "id": "auto-s43-e988b4d70c0b",
+          "date": "2026-11-24",
+          "region": "NAW",
+          "player": "ろみぃ",
+          "playerRaw": "INNMU Reo",
+          "event": "PlayStation Cup Zero Build",
+          "round": "Qualifier / 参加確認",
+          "rank": 56,
+          "points": 366,
+          "kills": 33,
+          "vrs": 1,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 9,
+          "seasonId": "S43",
+          "chapter": 7,
+          "season": 5,
+          "tournamentId": "ch7s5-playstation-cup-zero-build",
+          "source": "https://www.fortnite.com/competitive/events/S43_PlayStationCup_ZB/?region=NAW&round=S43_PlayStationCup_ZB_Qualifier_NAW",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "teamAccountIds": [
+            "765aceaeb41b44f79d8bdd28fa6f6367"
+          ]
+        },
+        {
+          "id": "auto-s43-21347a4bda90",
+          "date": "2026-11-24",
+          "region": "NAW",
+          "player": "まぐろのほっぺ",
+          "playerRaw": "まぐろのほっぺ",
+          "event": "PlayStation Cup Zero Build",
+          "round": "Qualifier / 参加確認",
+          "rank": 81,
+          "points": 356,
+          "kills": 9,
+          "vrs": 0,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 10,
+          "seasonId": "S43",
+          "chapter": 7,
+          "season": 5,
+          "tournamentId": "ch7s5-playstation-cup-zero-build",
+          "source": "https://www.fortnite.com/competitive/events/S43_PlayStationCup_ZB/?region=NAW&round=S43_PlayStationCup_ZB_Qualifier_NAW",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "teamAccountIds": [
+            "218840209c9943399c816cba567693bf"
+          ]
+        }
+      ],
+      "pages": 1,
+      "epicIdsRetained": true,
+      "lastAttemptAt": "2026-11-24T10:13:56.623Z",
+      "emptyAttempts": 0,
+      "rankingOrderValid": true,
+      "lastSeenRank": 100,
+      "lastSuccessAt": "2026-11-24T10:14:03.682Z",
+      "totalPages": 46
     }
   }
 }
