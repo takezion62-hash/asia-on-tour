@@ -12,7 +12,7 @@ const scheduled={
 const permitted=[
  'auto-sync.yml','history-sync.yml','participation-sync.yml','calendar-history.yml',
  'review-timing.yml','nightly-full-tests.yml',
- 'reviewed-candidate-publication.yml','tests.yml','build-season-data.yml','safe-sync-merge-tests.yml',
+ 'reviewed-candidate-publication.yml','published-attendance-recheck.yml','tests.yml','build-season-data.yml','safe-sync-merge-tests.yml',
  'focused-failure-recheck.yml',
  'scan-coverage-tests.yml','calendar.yml','special-achievements.yml',
  'tournament-rules-check.yml','unreal-auto-check.yml','osirion-probe.yml'
@@ -203,4 +203,31 @@ test('03:00 JST nightly full suite is scheduled daily and creates deduplicated i
  assert.match(main,/FOCUSED_PUBLISHER_FILES:/);
  assert.match(main,/FOCUSED_BROWSER_RESULT:/);
  assert.match(main,/run: node scripts\/ci-focused-tests.cjs/);
+});
+
+test('published attendance recheck is a reusable offline preview with explicitly confirmed data PRs',()=>{
+ const workflow=read('published-attendance-recheck.yml');
+ const preview=workflow.slice(workflow.indexOf('  preview:\n'),workflow.indexOf('  prepare:\n'));
+ const prepare=workflow.slice(workflow.indexOf('  prepare:\n'));
+ assert.ok(preview.length>0&&prepare.length>0);
+ assert.match(workflow,/^permissions:\s*\n  contents: read/m);
+ assert.match(workflow,/group: aot-provider-history-main/);
+ assert.match(workflow,/cancel-in-progress: false/);
+ assert.match(workflow,/preview_only:[\s\S]*?default: true/);
+ assert.doesNotMatch(workflow,/^  (schedule|push):/m);
+ assert.match(preview,/github.event_name == 'pull_request' \|\| inputs.preview_only/);
+ assert.match(preview,/persist-credentials: false/);
+ assert.match(preview,/published-attendance-phase5\.cjs --dry-run/);
+ assert.doesNotMatch(preview,/contents: write|--apply|git push|gh pr create/);
+ assert.match(prepare,/github.event_name == 'workflow_dispatch' && !inputs.preview_only/);
+ assert.match(prepare,/test "\$GITHUB_REF" = refs\/heads\/main/);
+ assert.match(prepare,/test "\$CONFIRMATION" = CONFIRM/);
+ assert.match(prepare,/ref: main/);
+ assert.match(prepare,/published-attendance-phase5\.cjs --apply/);
+ assert.match(prepare,/npm run validate/);
+ assert.match(prepare,/git diff --cached --check/);
+ assert.match(prepare,/test "\$\(git rev-parse origin\/main\)" = "\$BASE"/);
+ assert.match(prepare,/gh pr create --base main/);
+ assert.match(prepare,/gh workflow run tests\.yml/);
+ assert.doesNotMatch(prepare,/gh pr merge|git push origin HEAD:main|git push origin main/);
 });
