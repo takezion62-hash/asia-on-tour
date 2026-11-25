@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-25T12:56:07.453Z",
+  "reviewedAt": "2026-11-25T13:06:35.200Z",
   "entries": [
     {
       "id": "auto-s43-21408f1d31bc",
@@ -39152,6 +39152,116 @@
       "source": "https://www.fortnite.com/competitive/events/S39_NvidiaCup/?region=OCE&round=S39_NvidiaCup_OCE",
       "rule": null,
       "evidence": "Exact Epic account and team roster, canonical official event/calendar, ranked checkpoint with continuous mature rows or complete scan; duplicate check"
+    },
+    {
+      "id": "auto-s40-afed51b54e21",
+      "decision": "published",
+      "recordId": "auto-s40-afed51b54e21",
+      "policy": "attendance-only",
+      "approvedAt": "2026-11-25T13:06:35.200Z",
+      "approvedBy": "ChatGPT / user authorized confirmed-candidate review",
+      "rule": null,
+      "source": "https://www.fortnite.com/competitive/events/S40_PlayStationCupClix/?region=OCE&round=S40_PlayStationCupClix_Qualifier_OCE",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s41-6cdb0685015b",
+      "decision": "published",
+      "recordId": "auto-s41-6cdb0685015b",
+      "policy": "attendance-only",
+      "approvedAt": "2026-11-25T13:06:35.200Z",
+      "approvedBy": "ChatGPT / user authorized confirmed-candidate review",
+      "rule": null,
+      "source": "https://www.fortnite.com/competitive/events/S41_FNCSDivisionalCup_Division1/?region=ME&round=S41_FNCSDivisionalCup_Division1_Week4Day2_ME",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s30-904570296819",
+      "decision": "published",
+      "recordId": "auto-s30-904570296819",
+      "policy": "verified-rule",
+      "approvedAt": "2026-11-25T13:06:35.200Z",
+      "approvedBy": "ChatGPT / user authorized confirmed-candidate review",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=BR&round=S30_SoloZBVictoryCashCup_Event8Round1_BR",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s30-e5447b299481",
+      "decision": "published",
+      "recordId": "auto-s30-e5447b299481",
+      "policy": "verified-rule",
+      "approvedAt": "2026-11-25T13:06:35.200Z",
+      "approvedBy": "ChatGPT / user authorized confirmed-candidate review",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=OCE&round=S30_SoloZBVictoryCashCup_Event8Round1_OCE",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s30-8bd68d17b4e0",
+      "decision": "published",
+      "recordId": "auto-s30-8bd68d17b4e0",
+      "policy": "verified-rule",
+      "approvedAt": "2026-11-25T13:06:35.200Z",
+      "approvedBy": "ChatGPT / user authorized confirmed-candidate review",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=OCE&round=S30_SoloZBVictoryCashCup_Event8Round1_OCE",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s30-4302fee392d0",
+      "decision": "published",
+      "recordId": "auto-s30-4302fee392d0",
+      "policy": "verified-rule",
+      "approvedAt": "2026-11-25T13:06:35.200Z",
+      "approvedBy": "ChatGPT / user authorized confirmed-candidate review",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=OCE&round=S30_SoloZBVictoryCashCup_Event8Round1_OCE",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s30-e86fdf626207",
+      "decision": "published",
+      "recordId": "auto-s30-e86fdf626207",
+      "policy": "verified-rule",
+      "approvedAt": "2026-11-25T13:06:35.200Z",
+      "approvedBy": "ChatGPT / user authorized confirmed-candidate review",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=OCE&round=S30_SoloZBVictoryCashCup_Event9Round1_OCE",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s30-974b562d8a95",
+      "decision": "published",
+      "recordId": "auto-s30-974b562d8a95",
+      "policy": "verified-rule",
+      "approvedAt": "2026-11-25T13:06:35.200Z",
+      "approvedBy": "ChatGPT / user authorized confirmed-candidate review",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=OCE&round=S30_SoloZBVictoryCashCup_Event9Round1_OCE",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s30-dd5f562b2945",
+      "decision": "published",
+      "recordId": "auto-s30-dd5f562b2945",
+      "policy": "verified-rule",
+      "approvedAt": "2026-11-25T13:06:35.200Z",
+      "approvedBy": "ChatGPT / user authorized confirmed-candidate review",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=OCE&round=S30_SoloZBVictoryCashCup_Event9Round1_OCE",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
+    },
+    {
+      "id": "auto-s30-47f25b6ebfe8",
+      "decision": "published",
+      "recordId": "auto-s30-47f25b6ebfe8",
+      "policy": "verified-rule",
+      "approvedAt": "2026-11-25T13:06:35.200Z",
+      "approvedBy": "ChatGPT / user authorized confirmed-candidate review",
+      "rule": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=OCE&round=S30_SoloZBVictoryCashCup_Event9Round1_OCE",
+      "evidence": "Exact saved API candidate, verified Epic ID, official event window, duplicate check. No inferred cash or cosmetic payout."
     }
   ]
 }

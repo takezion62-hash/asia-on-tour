@@ -11,7 +11,7 @@
   "provider": "osirion",
   "linkedPlayers": 717,
   "trackedWindows": 3379,
-  "found": 51,
+  "found": 41,
   "skipped": 12,
   "imported": 33,
   "scannedPages": 46,
@@ -20,7 +20,7 @@
   "alreadyRegistered": 7256,
   "autoApprovedTotal": 3642,
   "invalidCachedCandidates": 1,
-  "manualReviewCandidates": 51,
+  "manualReviewCandidates": 41,
   "autoApprovedCosmeticThisRun": 0,
   "autoApprovedCashThisRun": 0,
   "autoApprovedPerformanceThisRun": 0,
@@ -40,7 +40,7 @@
     }
   ],
   "reviewOnlyWindows": 1675,
-  "reviewOnlyCandidates": 2,
+  "reviewOnlyCandidates": 0,
   "unmappedEvents": 224,
   "unmappedEventIds": [
     "S30_ConsoleCashCups",
