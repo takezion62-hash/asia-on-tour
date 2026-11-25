@@ -61,3 +61,14 @@ test('Phase 5 application preserves ID, input and team prize allocation',()=>{
  assert.equal(out.audit.entries.length,1);assert.equal(JSON.stringify(s),before);
  assert.throws(()=>applyPreview(s,{...report,proposals:[{...report.proposals[0],after:{...report.proposals[0].after,prize:99999}}]}),/differs/);
 });
+
+test('promotion note preserves verified evidence when adapter omits its note',()=>{
+ const {promotionNote}=require('../scripts/published-attendance-recheck.cjs');
+ const old={note:'元の出典メモ',source:'https://www.fortnite.com/competitive/events/example/'};
+ const next={kind:'予選',prize:0};
+ for(const note of [undefined,null,'','   ']){
+  const result=promotionNote(old,{...next,note});
+  assert.match(result,/元の出典メモ/);assert.match(result,/予選/);assert.ok(result.includes(old.source));
+ }
+ assert.equal(promotionNote(old,{...next,note:'公式規則による承認済み'}),'公式規則による承認済み');
+});
