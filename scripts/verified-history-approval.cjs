@@ -115,6 +115,13 @@ function decide(row,win,checkpoint,data,now=Date.now()){
  if(row.kind==='予選'){
   if(qualifierCutoff===undefined||row.prize!==0)
    return decline('予選通過条件または賞金値不一致');
+  if(rule.id==='ch5s3-zb-solo-victory'&&exactLegacyNacQualifier){
+   const {matureFullLeaderboard,candidateObserved}=require('./verified-partial-page.cjs');
+   if(row.rank>qualifierCutoff||(!qualifierPrefix&&!(matureFullLeaderboard(row,win,checkpoint,now)&&
+    candidateObserved(row,checkpoint,{unique:true})&&
+    require('./saved-candidate-recheck.cjs').identityProof(row,win,data.verifiedAccounts||[],'solo'))))
+    return decline('S30 ZB NAC予選の本人ID・成熟済み順位表を再確認');
+  }
   rec.prize=0;
   if(row.rank>qualifierCutoff){
    // Only the Epic-verified S42 Solo Reload tournament can count an
