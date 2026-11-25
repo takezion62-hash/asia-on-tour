@@ -321,6 +321,7 @@ test('ホームの注目選手・記録は掲載された確認済み戦績か�
 
 
 test('大会詳細で予選・決勝・賞金獲得を独立表示し、全戦績へ戻せる', async ({ page }) => {
+  test.slow(); // Largest published tournament: four full render/filter passes, including the mobile layout.
   const finalKinds=new Set(['賞金決勝','Practice決勝','Performance決勝','決勝']);
   const groups=new Map();
   for(const row of rows){
