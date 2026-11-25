@@ -8,7 +8,7 @@ const {linkedAccounts}=require('./osirion-sync.cjs');
 const ps=require('./automatic-playstation-approval.cjs');
 const nv=require('./automatic-nvidia-approval.cjs');
 const cash=require('./automatic-cash-approval.cjs');
-const {FOUR_HOURS}=require('./verified-partial-page.cjs');
+const {leaderboardCoverage,coversRankBoundary}=require('./verified-partial-page.cjs');
 const {individualRankPrize}=require('./tournament-rule-engine.cjs');
 const ROOT=path.resolve(__dirname,'..'),HISTORY='attendance-award-recheck-history.json';
 const SCANS=['auto-sync-scan.json','history-sync-scan.json'];
@@ -54,13 +54,8 @@ function officialSlot(row,rule,context){
  return matches.length===1?{...ident,slot:matches[0]}:null;
 }
 function checkpointProof(cp,row,kind,rule,slot,now){
- if(!cp||cp.rankingOrderValid!==true||!Array.isArray(cp.proposals)||
-  cp.lastError||cp.lastErrorCode||cp.retryAfter||cp.emptyAttempts>0||
-  !Number.isSafeInteger(cp.nextPage)||cp.nextPage<1||cp.pages!==cp.nextPage||
-  !Number.isSafeInteger(cp.totalPages)||cp.totalPages<cp.nextPage||
-  !Number.isSafeInteger(cp.lastSeenRank)||cp.lastSeenRank<row.rank)return null;
- const end=Date.parse(slot.endUtc),observed=Date.parse(cp.lastSuccessAt||'');
- if(!Number.isFinite(observed)||observed<end+FOUR_HOURS||now<end+FOUR_HOURS||observed>now+300000)return null;
+ const end=Date.parse(slot.endUtc),coverage=leaderboardCoverage(row,{end},cp,now);
+ if(coverage.kind==='invalid'||!Array.isArray(cp.proposals))return null;
  const hits=cp.proposals.filter(c=>c.id===row.id);
  if(hits.length!==1||!exact(row,hits[0]))return null;
  // Only the dedicated NVIDIA adapter can grant positive cash from a mature
@@ -69,8 +64,9 @@ function checkpointProof(cp,row,kind,rule,slot,now){
   nv.prizePrefixEvidence(hits[0],{eventId:slot.eventId,windowId:slot.sourceWindowId,
    tournamentId:row.tournamentId,seasonId:row.seasonId,region:row.region,
    dateJst:row.date,series:rule.series,round:row.round,kind:row.kind,end},cp,now);
- if(!nvidiaPrefix&&(cp.complete!==true||
-  (cp.nextPage!==cp.totalPages&&!(kind==='qualifier'&&cp.lastSeenRank>=rule.advance[row.region]))))return null;
+ const qualifierCapped=coverage.kind==='cutoff-complete'&&kind==='qualifier'&&
+  coversRankBoundary(coverage,rule.advance[row.region],{inclusive:true});
+ if(!nvidiaPrefix&&coverage.kind!=='full'&&!qualifierCapped)return null;
  return {...Object.fromEntries(['complete','rankingOrderValid','epicIdsRetained','nextPage','pages','totalPages','lastSeenRank','lastSuccessAt','emptyAttempts'].filter(k=>cp[k]!==undefined).map(k=>[k,cp[k]])),proposals:[hits[0]]};
 }
 function inspect(row,entry,context,proof,now){

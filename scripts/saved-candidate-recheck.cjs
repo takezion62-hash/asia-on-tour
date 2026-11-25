@@ -2,7 +2,7 @@
 // Read-only evidence planner. No API calls, no new rules. Only exact evidence
 // admitted by the existing scheduled approval adapters may create records.
 const crypto=require('node:crypto');
-const {sameScannedCandidate,FOUR_HOURS}=require('./verified-partial-page.cjs');
+const {sameScannedCandidate,matureFullLeaderboard}=require('./verified-partial-page.cjs');
 const {sourceWindow}=require('./review-recovery-priority.cjs');
 const {runApprovals}=require('./tournament-approval-router.cjs');
 const {MANIFEST}=require('./generic-review-only-core.cjs');
@@ -28,12 +28,7 @@ function identityProof(row,win,accounts,team){
  return row.id==='auto-'+row.seasonId.toLowerCase()+'-'+hash;
 }
 function mature(cp,win,row,now){
- const observed=Date.parse(cp?.lastSuccessAt||'');
- return cp?.complete===true&&cp.rankingOrderValid===true&&Number.isSafeInteger(cp.totalPages)&&cp.totalPages>0&&
-  cp.nextPage===cp.totalPages&&cp.pages===cp.nextPage&&Number.isSafeInteger(cp.lastSeenRank)&&cp.lastSeenRank>=row.rank&&
-  !cp.lastError&&!cp.lastErrorCode&&!cp.retryAfter&&!(cp.emptyAttempts>0)&&
-  Number.isFinite(observed)&&Number.isFinite(win.end)&&now-win.end>=FOUR_HOURS&&
-  observed-win.end>=FOUR_HOURS&&observed<=now+300000;
+ return matureFullLeaderboard(row,win,cp,now);
 }
 function recheckSaved({queue,checkpoints,windows,data,config,reviewedIds=[],otherQueue=[],now=Date.now()}){
  const pending=queue.proposals,done=new Set([...data.results.map(x=>x.id),...reviewedIds]);
