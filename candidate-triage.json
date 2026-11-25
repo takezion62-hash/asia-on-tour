@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "sourceCheckedAt": "2026-11-25T03:39:25.011Z",
+  "sourceCheckedAt": "2026-11-25T05:46:45.259Z",
   "total": 37,
   "alreadyResolved": 0,
   "byYear": [
@@ -60,11 +60,11 @@
   "byStatus": [
     {
       "name": "partial-scan",
-      "count": 28
+      "count": 27
     },
     {
       "name": "rules-review",
-      "count": 9
+      "count": 10
     }
   ],
   "queue": [
@@ -295,6 +295,39 @@
         "seenPages": 19,
         "totalPages": 19,
         "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_OCE/S30_SoloZBVictoryCashCup_Event6Round2_OCE",
+        "possibleExistingId": null
+      },
+      "rewardState": "cash-unconfirmed"
+    },
+    {
+      "id": "auto-s30-aca31e249fa5",
+      "origin": "history",
+      "date": "2024-07-29",
+      "year": "2024",
+      "region": "OCE",
+      "tournamentId": "ch5s3-zb-solo-victory",
+      "event": "ZB Solo Victory Cup",
+      "round": "Event 7 · Round 2 / 賞金決勝",
+      "player": "FA かっちゃん",
+      "kind": "賞金決勝",
+      "rank": 29,
+      "points": 100,
+      "kills": 8,
+      "vrs": 1,
+      "prize": null,
+      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=OCE&round=S30_SoloZBVictoryCashCup_Event7Round2_OCE",
+      "status": "rules-review",
+      "action": "公式規則・賞金・突破・スキン条件を個別確認",
+      "reason": "正確なVRごとの賞金規則が未登録",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": true,
+        "observedPartial": false,
+        "seenPages": 19,
+        "totalPages": 19,
+        "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_OCE/S30_SoloZBVictoryCashCup_Event7Round2_OCE",
         "possibleExistingId": null
       },
       "rewardState": "cash-unconfirmed"
@@ -721,42 +754,9 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 3,
+        "seenPages": 10,
         "totalPages": 66,
         "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_EU/S30_SoloZBVictoryCashCup_Event5Round2_EU",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s30-aca31e249fa5",
-      "origin": "history",
-      "date": "2024-07-29",
-      "year": "2024",
-      "region": "OCE",
-      "tournamentId": "ch5s3-zb-solo-victory",
-      "event": "ZB Solo Victory Cup",
-      "round": "Event 7 · Round 2 / 賞金決勝",
-      "player": "FA かっちゃん",
-      "kind": "賞金決勝",
-      "rank": 29,
-      "points": 100,
-      "kills": 8,
-      "vrs": 1,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=OCE&round=S30_SoloZBVictoryCashCup_Event7Round2_OCE",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "順位表の取得が完了していません",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 9,
-        "totalPages": 19,
-        "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_OCE/S30_SoloZBVictoryCashCup_Event7Round2_OCE",
         "possibleExistingId": null
       },
       "rewardState": "cash-unconfirmed"

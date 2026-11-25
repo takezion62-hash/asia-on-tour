@@ -2,8 +2,8 @@
   "version": 1,
   "role": "generated canonical-source snapshot; results.json remains authoritative in phase 1",
   "canonicalFile": "results.json",
-  "canonicalSha256": "44915dc14dc9bb542e13ae43c10fbf950ac293e854fd01db05fbc0c4b9ab7802",
-  "count": 9595,
+  "canonicalSha256": "1cf8766259a8ca171f42b1645c1616f3fb2eafb6df9e6e364657b012aa3a2d84",
+  "count": 9611,
   "teamPrizeCents": 12106000,
   "unconfirmedPrizeRecords": 1763,
   "personalPrizeCents": 12086000,
@@ -9602,7 +9602,23 @@
     "auto-s30-211759ad5850",
     "auto-s30-9efa25de348f",
     "auto-s30-dab7e52c27fa",
-    "auto-s30-77e1e37d2352"
+    "auto-s30-77e1e37d2352",
+    "auto-s30-868588b67cfc",
+    "auto-s30-093fe2a816e7",
+    "auto-s30-965ff9e571a7",
+    "auto-s30-6b7bd07f18c5",
+    "auto-s30-718383111d0b",
+    "auto-s30-f997bcdccad7",
+    "auto-s30-7ce6dbd238a4",
+    "auto-s30-f1dd19124ab9",
+    "auto-s30-5f6e3314ef0b",
+    "auto-s30-606d40b95b09",
+    "auto-s30-bc193cb92e46",
+    "auto-s30-93bdbc8e382b",
+    "auto-s30-c41b37b86f4a",
+    "auto-s30-f5e3b6f1b00d",
+    "auto-s30-89415b6d1253",
+    "auto-s43-8cb66ff63173"
   ],
   "shards": [
     {
@@ -9671,11 +9687,11 @@
     {
       "seasonId": "S30",
       "file": "source-results/S30.json",
-      "count": 2768,
+      "count": 2783,
       "teamPrizeCents": 1920000,
       "unconfirmedPrizeRecords": 172,
       "personalPrizeCents": 1920000,
-      "sha256": "1097819e0c9ad0586997f2476c624651ea85d8e6d7eca15e632fb91466c9ec6f"
+      "sha256": "3118266b0150cf4a04a114a80c74c528c19664ea91be1d9f65cab6df88f2887b"
     },
     {
       "seasonId": "S31",
@@ -9788,11 +9804,11 @@
     {
       "seasonId": "S43",
       "file": "source-results/S43.json",
-      "count": 389,
+      "count": 390,
       "teamPrizeCents": 90000,
       "unconfirmedPrizeRecords": 50,
       "personalPrizeCents": 90000,
-      "sha256": "173d47e4c3600d2696a282380c87b99718dbc4d7f56287549e8eabd9e9a8aeb5"
+      "sha256": "8a5b89abb1bd1e9ec09e2536c0ccfa2ec2aa65f7cc7b92ea4cb34aed17d33bf3"
     },
     {
       "seasonId": "unknown",
