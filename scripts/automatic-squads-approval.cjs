@@ -2,7 +2,7 @@
 // Only the registered S43 Squads BR rules; never use the generic solo VR route.
 const {selectRules,eventWindow}=require('./tournament-approval-policy.cjs');
 const {advancementCutoff,validMatchCount,individualVrPrize}=require('./tournament-rule-engine.cjs');
-const {sameScannedCandidate,verifiedPartialPage,FOUR_HOURS}=require('./verified-partial-page.cjs');
+const {sameScannedCandidate,verifiedQualifierPrefix,FOUR_HOURS}=require('./verified-partial-page.cjs');
 const {identityProof,mature}=require('./saved-candidate-recheck.cjs');
 const {MANIFEST}=require('./generic-review-only-core.cjs');
 const {collision}=require('./manual-approval-core.cjs');
@@ -78,8 +78,7 @@ function decide(row,win,cp,data,now=Date.now()){
   return decline('保存済み順位表と候補が完全一致しない');
  // Historical qualifier scans can stop after crossing the official cutoff.
  // Such a checkpoint proves only the observed rank, not the complete board.
- const capped=stage.round===1&&cp.complete===true&&cp.nextPage<cp.totalPages&&cp.lastSeenRank>stage.cutoff&&row.rank<=stage.cutoff;
- const prefix=stage.round===1&&verifiedPartialPage(row,win,capped?{...cp,complete:false}:cp,now);
+ const prefix=stage.round===1&&verifiedQualifierPrefix(row,win,cp,stage.cutoff,now);
  if(!mature(cp,win,row,now)&&!prefix)return decline('成熟した連続順位表の取得が完了していません');
  if(data.results.some(old=>overlaps(old,row,data.players.confirmedAliases)))return decline('同一開催枠の既掲載チーム・混成チームとの重複疑い');
  const {reviewReason,reviewOnly,teamAccountIds,...record}=row;

@@ -14,24 +14,66 @@ function sameScannedCandidate(a,b){
  const {reviewReason:_b,...right}=b;
  return JSON.stringify(left)===JSON.stringify(right);
 }
-function verifiedPartialPage(row,win,checkpoint,now=Date.now()){
- if(!row||!win||!checkpoint||checkpoint.complete===true||
-  checkpoint.rankingOrderValid!==true||!Array.isArray(checkpoint.proposals)||
-  !checkpoint.proposals.some(x=>sameScannedCandidate(x,row)))return false;
- if(!valid(checkpoint.nextPage)||checkpoint.nextPage<1||
-  !valid(checkpoint.pages)||checkpoint.pages!==checkpoint.nextPage||
-  !valid(checkpoint.totalPages)||checkpoint.totalPages<=checkpoint.nextPage||
-  !valid(checkpoint.lastSeenRank)||!valid(row.rank)||row.rank<1||
-  row.rank>checkpoint.lastSeenRank)return false;
- // An empty/malformed API page or a pending retry must not be bypassed.
- if(checkpoint.lastErrorCode||checkpoint.lastError||checkpoint.retryAfter||
-  checkpoint.emptyAttempts>0||checkpoint.rankingOrderValid===false)return false;
- const observedAt=Date.parse(checkpoint.lastSuccessAt||'');
- if(!Number.isFinite(win.end)||!Number.isFinite(observedAt)||
-  !Number.isFinite(now)||now-win.end<FOUR_HOURS||
-  observedAt-win.end<FOUR_HOURS||observedAt>now+5*60*1000)return false;
- // Source, payout rules, verified Epic roster, rank limits and duplicate checks
- // remain the responsibility of the appropriate rule-specific approver.
- return true;
+// Classify only the saved scan's structural and time evidence. Never grant an
+// award, choose a rule, or infer completion from the presence of one player.
+// "cutoff-complete" is a scanner stop marker, NOT a fully fetched board and
+// NOT proof of any particular cutoff unless a caller supplies that cutoff.
+const invalid=reason=>({kind:'invalid',reason});
+function leaderboardCoverage(row,win,cp,now=Date.now()){
+ if(!row||!win||!cp)return invalid('missing-input');
+ if(cp.rankingOrderValid!==true)return invalid('rank-order');
+ if(!valid(cp.nextPage)||cp.nextPage<1||!valid(cp.pages)||cp.pages!==cp.nextPage||
+  !valid(cp.totalPages)||cp.totalPages<cp.nextPage)return invalid('page-continuity');
+ if(!valid(cp.lastSeenRank)||!valid(row.rank)||row.rank<1||row.rank>cp.lastSeenRank)
+  return invalid('rank-not-covered');
+ if(cp.lastErrorCode||cp.lastError||cp.retryAfter||cp.emptyAttempts>0)
+  return invalid('retry-or-error');
+ const observed=Date.parse(cp.lastSuccessAt||'');
+ if(!Number.isFinite(win.end)||!Number.isFinite(observed)||!Number.isFinite(now)||
+  now-win.end<FOUR_HOURS||observed-win.end<FOUR_HOURS||observed>now+300000)
+  return invalid('not-mature');
+ if(cp.nextPage===cp.totalPages&&cp.complete!==true)return invalid('completion-mismatch');
+ // Legacy checkpoints without a completion flag could already pass the
+ // observed-row gate. Preserve that compatibility, not the full-board claim.
+ if(cp.complete!==true&&cp.complete!==false&&cp.complete!==undefined)
+  return invalid('completion-mismatch');
+ const kind=cp.nextPage===cp.totalPages?'full':cp.complete===true?'cutoff-complete':'partial';
+ return {kind,reason:null,pages:cp.pages,totalPages:cp.totalPages,lastSeenRank:cp.lastSeenRank};
 }
-module.exports={verifiedPartialPage,FOUR_HOURS,sameScannedCandidate};
+function candidateObserved(row,cp,{unique=false}={}){
+ if(!Array.isArray(cp?.proposals))return false;
+ if(unique&&(!row?.id||cp.proposals.filter(x=>x?.id===row.id).length!==1))return false;
+ return cp.proposals.some(x=>sameScannedCandidate(x,row));
+}
+// Public compatibility helpers retain their original roles. Full coverage
+// does not itself check candidate identity: callers already do so separately.
+function matureFullLeaderboard(row,win,cp,now=Date.now()){
+ return leaderboardCoverage(row,win,cp,now).kind==='full';
+}
+function verifiedPartialPage(row,win,cp,now=Date.now()){
+ return leaderboardCoverage(row,win,cp,now).kind==='partial'&&candidateObserved(row,cp);
+}
+// Use only an explicitly supplied, verified regional cutoff. Crossing it
+// means lastSeenRank > cutoff, not merely observing a prize-winning rank.
+function coversRankBoundary(coverage,cutoff,{inclusive=false}={}){
+ return !!coverage&&['full','partial','cutoff-complete'].includes(coverage.kind)&&
+  Number.isSafeInteger(cutoff)&&cutoff>0&&
+  (inclusive?coverage.lastSeenRank>=cutoff:coverage.lastSeenRank>cutoff);
+}
+function verifiedRankBoundary(row,win,cp,cutoff,{now=Date.now(),allowCutoffComplete=false,
+ requireEpicIds=false,unique=false}={}){
+ const coverage=leaderboardCoverage(row,win,cp,now);
+ if(coverage.kind!=='partial'&&!(allowCutoffComplete&&coverage.kind==='cutoff-complete'))return false;
+ return (!requireEpicIds||cp.epicIdsRetained===true)&&candidateObserved(row,cp,{unique})&&
+  coversRankBoundary(coverage,cutoff);
+}
+// Existing Console Duos/Squads qualifiers accept an observed ordinary
+// partial row; legacy cutoff-stopped scans additionally need the actual
+// qualification boundary and an in-cutoff row. No final-policy opt-in here.
+function verifiedQualifierPrefix(row,win,cp,cutoff,now=Date.now()){
+ if(verifiedPartialPage(row,win,cp,now))return true;
+ return cp?.complete===true&&Number.isSafeInteger(cutoff)&&row?.rank<=cutoff&&
+  verifiedRankBoundary(row,win,cp,cutoff,{now,allowCutoffComplete:true});
+}
+module.exports={verifiedPartialPage,FOUR_HOURS,sameScannedCandidate,leaderboardCoverage,
+ matureFullLeaderboard,candidateObserved,coversRankBoundary,verifiedRankBoundary,verifiedQualifierPrefix};

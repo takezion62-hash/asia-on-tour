@@ -3,7 +3,7 @@
 // other Duo series retain their former policies; no inferred VR payout.
 const {selectRules,eventWindow}=require('./tournament-approval-policy.cjs');
 const {advancementCutoff,validMatchCount,individualVrPrize}=require('./tournament-rule-engine.cjs');
-const {sameScannedCandidate,verifiedPartialPage}=require('./verified-partial-page.cjs');
+const {sameScannedCandidate,verifiedQualifierPrefix}=require('./verified-partial-page.cjs');
 const {identityProof,mature}=require('./saved-candidate-recheck.cjs');
 const {MANIFEST}=require('./generic-review-only-core.cjs');
 const {collision}=require('./manual-approval-core.cjs');
@@ -62,8 +62,7 @@ function sessionFor(win,sessions){
 function qualifierEvidence(row,win,cp,now){
  const stage=stageFor(win);
  if(stage?.round!==1)return false;
- const capped=cp?.complete===true&&cp.nextPage<cp.totalPages&&cp.lastSeenRank>stage.cutoff&&row.rank<=stage.cutoff;
- return verifiedPartialPage(row,win,capped?{...cp,complete:false}:cp,now);
+ return verifiedQualifierPrefix(row,win,cp,stage.cutoff,now);
 }
 function decide(row,win,cp,data,now=Date.now()){
  const stage=stageFor(win),rule=stage?.rule;

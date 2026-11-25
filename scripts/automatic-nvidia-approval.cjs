@@ -1,7 +1,7 @@
 'use strict';
 const {selectRules,eventWindow}=require('./tournament-approval-policy.cjs');
 const {individualRankPrize,validMatchCount,payingRank}=require('./tournament-rule-engine.cjs');
-const {verifiedPartialPage}=require('./verified-partial-page.cjs');
+const {verifiedRankBoundary}=require('./verified-partial-page.cjs');
 // S39 NVIDIA GeForce RTX Cup: exact single-session Solo cash payout.
 // Full leaderboard or mature, continuous prefix beyond the entire cash tier.
 // Epic account identity and archived event window are still mandatory.
@@ -27,12 +27,10 @@ function prizePrefixEvidence(row,win,cp,now=Date.now()){
  if(!rule||row?.tournamentId!==rule.id||row.seasonId!==rule.seasonId||
   row.region!==win.region||row.date!==win.dateJst||row.round!==win.round||
   row.kind!=='参加確認'||row.verified!==true||row.reviewOnly!==true||row.prize!==null||
-  cp?.epicIdsRetained!==true||cp.complete!==false||
-  !Array.isArray(cp.proposals)||cp.proposals.filter(x=>x.id===row.id).length!==1)return false;
+  cp?.complete!==false)return false;
  const cutoff=payingRank(rule,win.region),amount=payout(rule,win.region,row.rank);
  return Number.isSafeInteger(cutoff)&&Number.isSafeInteger(amount)&&amount>0&&
-  Number.isSafeInteger(cp.lastSeenRank)&&cp.lastSeenRank>cutoff&&
-  verifiedPartialPage(row,win,cp,now);
+  verifiedRankBoundary(row,win,cp,cutoff,{now,requireEpicIds:true,unique:true});
 }
 function decide(row,win,checkpoint,data,now=Date.now()){
  const rule=nvidiaWindow(win);
