@@ -58,6 +58,9 @@ test('Phase 5 application preserves ID, input and team prize allocation',()=>{
  const out=applyPreview(s,report);
  assert.equal(out.results.length,1);assert.equal(out.results[0].id,s.data.results[0].id);
  assert.equal(out.results[0].prize,1200);assert.equal(out.results[0].prizePerPlayer,400);
+ assert.equal(typeof report.proposals[0].after.note,'string');
+ assert.ok(report.proposals[0].after.note.trim());
+ assert.equal(out.results[0].note,report.proposals[0].after.note);
  assert.equal(out.audit.entries.length,1);assert.equal(JSON.stringify(s),before);
  assert.throws(()=>applyPreview(s,{...report,proposals:[{...report.proposals[0],after:{...report.proposals[0].after,prize:99999}}]}),/differs/);
 });
