@@ -10,6 +10,7 @@ const {readResults,publishResults}=require('./source-results-store.cjs');
 const {decide:verifyHistoricalVictory}=require('./verified-history-approval.cjs');
 const {newestDiscoveryReport}=require('./unmapped-tournament-discovery.cjs');
 const {sameScannedCandidate}=require('./verified-partial-page.cjs');
+const {measure:measureAutomation}=require('./automation-metrics.cjs');
 const {ID:SQUADS_ID,overlaps:squadOverlap}=require('./automatic-squads-approval.cjs');
 const {isConsole,overlaps:consoleOverlap}=require('./automatic-console-duos-approval.cjs');
 const teamOverlapProtected=id=>id===SQUADS_ID||isConsole(id);
@@ -316,6 +317,9 @@ function mergeSnapshots(scope,base,scanned,latest,reviewed={version:1,entries:[]
  status.concurrentMerge={appended:appended.length,alreadyPublished:duplicates.length,
   reviewConflicts:conflicts.length,keptPending:review.proposals.length,
   reconciledAt:new Date().toISOString()};
+ const metrics=measureAutomation({scope,base,scanned,latest,review,appended,reviewedIds,conflicts,duplicates});
+ if(metrics!==undefined)status.automationMetrics=metrics;
+ else delete status.automationMetrics;
  status.message='最新版と安全統合：新規掲載'+appended.length+'件、重複スキップ'+duplicates.length+
   '件、要確認の競合'+conflicts.length+'件、確認待ち'+review.proposals.length+'件。既存の戦績・賞金は保持。';
  return {docs:{[rFile]:results,[uFile]:updates,[qFile]:review,[cFile]:checkpoint,[sFile]:status},

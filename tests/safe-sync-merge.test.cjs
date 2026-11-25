@@ -283,3 +283,47 @@ test('reason-only updates replay only over untouched remote pending candidates',
  x.latest.docs[file].proposals=[{...row}];x.scanned.docs[file].proposals[0].rank=6;
  assert.equal(mergeSnapshots(x.scope,x.base,x.scanned,x.latest).docs[file].proposals[0].rank,5);
 });
+
+test('automation metrics distinguish old backlog, new discoveries, concurrent manual actions and retries',()=>{
+ for(const scope of PREFIXES){
+  const x=scenario(scope),q=x.p+'-review.json',s=x.p+'-status.json';
+  const old={...x.row,reviewReason:'順位表不足'},stale=ROW('already');
+  const manual={...ROW('manual-held'),date:'2026-11-10'};
+  x.base.docs[q].proposals=[old,stale,manual];
+  x.latest.docs[q].proposals.push(old,stale,manual);
+  const a=mergeSnapshots(scope,x.base,x.scanned,x.latest,{version:1,entries:[{id:manual.id,decision:'published'}]});
+  const m=a.docs[s].automationMetrics, v=m.latest;
+  assert.equal(v.pendingAtStart,3);assert.equal(v.oldPublished,1);
+  assert.equal(v.oldDuplicateResolved,1);assert.equal(v.oldOtherRemoved,1);
+  assert.equal(v.newCandidates,1);assert.equal(v.newPublished,0);
+  assert.equal(v.autoResolutionRate,66.67);assert.equal(v.autoPublicationRate,25);
+  assert.equal(v.concurrentPublishedOrReviewed,1);assert.equal(v.pendingAtEnd,2);
+  assert.equal(m.rolling.last7Runs.autoResolutionRate,66.67);
+  const replay=mergeSnapshots(scope,x.base,x.scanned,SNAP(scope,clone(a.docs)),{version:1,entries:[{id:manual.id,decision:'published'}]});
+  assert.deepEqual(replay.docs[s].automationMetrics,m);
+ }
+});
+test('automation metrics exclude unproven duplicates, skip stale no-op runs and return null for zero denominators',()=>{
+ const {measure,exactPublished,aggregate}=require('../scripts/automation-metrics.cjs');
+ const x=scenario(),q=x.p+'-review.json',s=x.p+'-status.json';
+ assert.equal(exactPublished({...ROW('already'),prize:null},ROW('already')),false);
+ assert.equal(exactPublished({...ROW('already'),rank:1},ROW('already')),false);
+ const a=mergeSnapshots(x.scope,x.base,x.scanned,x.latest);
+ assert.equal(a.docs[s].automationMetrics.latest.autoResolutionRate,null);
+ assert.equal(a.docs[s].automationMetrics.latest.newCandidatePublicationRate,50);
+ const latest=SNAP(x.scope,clone(a.docs));
+ const skipped=mergeSnapshots(x.scope,latest,clone(latest),latest);
+ assert.deepEqual(skipped.docs[s].automationMetrics,a.docs[s].automationMetrics);
+ const empty=aggregate([]);
+ assert.equal(empty.autoResolutionRate,null);assert.equal(empty.autoPublicationRate,null);
+});
+test('saved-only recheck is measured without inheriting old provider traffic',()=>{
+ const x=scenario(),q=x.p+'-review.json',s=x.p+'-status.json',k=x.p+'-scan.json';
+ x.base.docs[q].proposals=[x.row];x.latest.docs[q].proposals.push(x.row);
+ x.scanned.docs[k]=clone(x.base.docs[k]);
+ x.scanned.docs[s].savedRecheck={checkedAt:'2026-11-07T11:00:00Z',checked:1,reasonUpdates:0,heldEvidence:0};
+ x.scanned.docs[s].scannedPages=48;x.scanned.docs[s].providerTraffic={requests:99};
+ const v=mergeSnapshots(x.scope,x.base,x.scanned,x.latest).docs[s].automationMetrics.latest;
+ assert.equal(v.mode,'saved-recheck');assert.equal(v.oldPublished,1);assert.equal(v.providerRequests,null);
+ assert.equal(v.scannedPages,null);assert.equal(v.savedRecheck.checked,1);
+});
