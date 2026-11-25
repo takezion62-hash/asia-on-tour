@@ -12,6 +12,21 @@ const ROOT=path.resolve(__dirname,'..');
 const read=name=>JSON.parse(fs.readFileSync(path.join(ROOT,name),'utf8'));
 const write=(name,obj)=>fs.writeFileSync(path.join(ROOT,name),JSON.stringify(obj,null,2)+'\n');
 const must=(cond,msg)=>{if(!cond)throw Error('HISTORIC_TEN_PUBLISH '+msg)};
+// A verified Round 1 is a different official window, even on the same day
+// with the same roster or rank. Unknown or inconsistent sources stay conflicts.
+function isDistinctVerifiedQualifier(r,x){
+ if(r.id===x.id||r.verified!==true||x.team!=='duo'||
+  r.date!==x.date||r.region!==x.region||r.tournamentId!==x.tournamentId||
+  !['予選','参加確認'].includes(r.kind)||
+  !/^Event [0-9]+ · Round 2 \/ 賞金決勝$/.test(x.round)||
+  !/Round2_/.test(x.windowId))return false;
+ const prefix=x.round.replace('Round 2 / 賞金決勝','Round 1');
+ if(typeof r.round!=='string'||!r.round.startsWith(prefix+' / '))return false;
+ const w=x.windowId.replace('Round2_','Round1_');
+ const epic='https://www.fortnite.com/competitive/events/'+x.eventId+'/?region='+x.region+'&round='+w;
+ const tracker='https://fortnitetracker.com/events/epicgames_'+x.eventId+'_'+x.region+'?window='+w;
+ return r.source===epic||r.source===tracker;
+}
 function apply({dryRun=false}={}){
  must(V.validateProof()===true,'screenshot, rank or official rule proof missing');
  const rows=readResults(ROOT).rows,players=read('players.json'),
@@ -76,7 +91,7 @@ function apply({dryRun=false}={}){
    }
   }
   const meta=V.META[x.seasonId],ids=x.profileUrls.map(V.epicId),names=x.playerNames;
-  const conflicts=rows.filter(r=>r.id===x.id||(r.date===x.date&&r.region===x.region&&
+  const conflicts=rows.filter(r=>r.id===x.id||(!isDistinctVerifiedQualifier(r,x)&&r.date===x.date&&r.region===x.region&&
    (r.tournamentId===x.tournamentId||r.source===x.source)&&
    (r.rank===x.rank||(r.players||[r.player]).some(n=>names.includes(aliases.get(n)||n))||
    (r.profiles||[]).some(p=>ids.includes(V.epicId(p.url)))||
@@ -133,4 +148,4 @@ if(require.main===module)try{
  must(args.length===0||(args.length===1&&args[0]==='--dry-run'),'Usage: [--dry-run]');
  apply({dryRun:args.includes('--dry-run')});
 }catch(err){console.error(err.stack);process.exitCode=1;}
-module.exports={apply};
+module.exports={apply,isDistinctVerifiedQualifier};

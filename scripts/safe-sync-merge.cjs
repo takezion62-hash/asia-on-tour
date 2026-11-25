@@ -17,6 +17,7 @@ const VALID_SCOPES=new Set(['history','auto']);
 const SOURCE_FILES=[
   'players.json','tournaments.json','tournament-rules.json',
   'scripts/osirion-sync.cjs','scripts/new-player-history-delta.cjs','scripts/auto-sync-core.cjs',
+  'scripts/dynamic-history-budget.cjs','scripts/review-recovery-priority.cjs','scripts/scan-efficiency.cjs',
   'scripts/verified-history-approval.cjs',
   'scripts/source-results-store.cjs','scripts/build-source-results.cjs',
   'scripts/automatic-cash-approval.cjs',

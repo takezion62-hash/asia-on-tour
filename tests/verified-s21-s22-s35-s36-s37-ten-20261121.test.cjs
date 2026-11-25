@@ -3,7 +3,7 @@ const test=require('node:test'),assert=require('node:assert/strict'),
  fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
 const ROOT=path.resolve(__dirname,'..'),V=require('../scripts/verified-s21-s22-s35-s36-s37-ten-20261121.cjs');
 const {readResults}=require('../scripts/source-results-store.cjs');
-const {apply}=require('../scripts/apply-s21-s22-s35-s36-s37-ten-20261121.cjs');
+const {apply,isDistinctVerifiedQualifier}=require('../scripts/apply-s21-s22-s35-s36-s37-ten-20261121.cjs');
 const read=name=>JSON.parse(fs.readFileSync(path.join(ROOT,name),'utf8'));
 test('screenshots 1960–1969 preserve every rank, kills, games, prizes and VR',()=>{
  assert.equal(V.validateProof(),true);
@@ -103,4 +103,14 @@ test('publisher dry run is all-or-none, idempotent and does not alter old result
  const present=rows.filter(x=>ids.has(x.id));
  assert.ok(present.length===0||present.length===10);
  assert.equal(new Set(rows.map(x=>x.id)).size,rows.length);
+});
+
+test('verified qualifiers never conflict with the frozen same-day final, but unknown or same-window evidence does',()=>{
+ const x=V.DOC.batch.entries.find(e=>e.id==='owner-s35-naw-duo-20250518-r6');
+ const final=V.project(x),w=x.windowId.replace('Round2_','Round1_');
+ const q={...final,id:'auto-s35-qualifier-test',kind:'予選',round:'Event 1 · Round 1 / 予選突破',rank:41,prize:0,prizePerPlayer:0,source:'https://www.fortnite.com/competitive/events/'+x.eventId+'/?region='+x.region+'&round='+w};
+ assert.equal(isDistinctVerifiedQualifier(q,x),true);
+ assert.equal(isDistinctVerifiedQualifier({...q,rank:x.rank},x),true);
+ assert.equal(isDistinctVerifiedQualifier({...q,source:'https://fortnitetracker.com/events/epicgames_'+x.eventId+'_'+x.region+'?window='+w},x),true);
+ for(const bad of [final,{...q,id:x.id},{...q,source:final.source},{...q,source:'https://example.org/'},{...q,verified:false},{...q,kind:'賞金決勝'},{...q,round:final.round},{...q,region:'ME'},{...q,source:q.source.replace(w,w.replace('Event1','Event2'))}])assert.equal(isDistinctVerifiedQualifier(bad,x),false);
 });

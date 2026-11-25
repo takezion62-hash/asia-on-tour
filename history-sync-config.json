@@ -57,5 +57,9 @@
   "autoApproveNvidia": true,
   "autoApprovePlayStation": true,
   "autoApproveSquads": true,
-  "autoApproveConsoleDuos": true
+  "autoApproveConsoleDuos": true,
+  "dynamicReviewBudget": {
+    "enabled": true,
+    "maxRecoveryPercent": 60
+  }
 }
