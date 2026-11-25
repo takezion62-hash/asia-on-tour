@@ -50,3 +50,14 @@ test('already promoted record is not reconsidered; absent protection input fails
  const d=fixture();d.data.results[0].kind='予選';assert.equal(plan(d).attendance,0);
  delete d.ledger;assert.throws(()=>plan(d),/Incomplete/);
 });
+
+test('Phase 5 application preserves ID, input and team prize allocation',()=>{
+ const {applyPreview}=require('../scripts/published-attendance-phase5.cjs');
+ const s=fixture(2);s.oldAudit={version:1,entries:[]};
+ const report=plan(s),before=JSON.stringify(s);
+ const out=applyPreview(s,report);
+ assert.equal(out.results.length,1);assert.equal(out.results[0].id,s.data.results[0].id);
+ assert.equal(out.results[0].prize,1200);assert.equal(out.results[0].prizePerPlayer,400);
+ assert.equal(out.audit.entries.length,1);assert.equal(JSON.stringify(s),before);
+ assert.throws(()=>applyPreview(s,{...report,proposals:[{...report.proposals[0],after:{...report.proposals[0].after,prize:99999}}]}),/differs/);
+});
