@@ -270,3 +270,17 @@ test('known solo final VR cash uses unique mature saved row and deterministic ve
  const bad={...x,points:0};assert.equal(decide(bad,f,{...cp,proposals:[bad]},d,now).approved,false);
  assert.equal(decide(x,{...f,windowId:f.windowId.replace('Round2','Round1')},cp,d,now).approved,false);
 });
+
+test('historical solo top320 qualification crosses official boundary and rechecks saved rows without API',()=>{
+ const f={...w,series:'victory-cup',end:Date.parse('2026-08-01T06:00:00Z')};
+ const epicAccountId='a'.repeat(32),id='auto-s41-'+require('node:crypto').createHash('sha256').update(JSON.stringify([f.eventId+'/'+f.windowId,[epicAccountId]])).digest('hex').slice(0,12);
+ const r={...row,id,rank:320},now=f.end+48*3600000,d={...data(),verifiedAccounts:[{epicAccountId,player:'A',confirmed:true}]};
+ const cp={complete:false,rankingOrderValid:true,nextPage:4,pages:4,totalPages:30,lastSeenRank:321,lastSuccessAt:new Date(f.end+5*3600000).toISOString(),proposals:[r]};
+ const out=decide(r,f,cp,d,now);assert.equal(out.approved,true,out.reason);assert.match(out.record.round,/予選突破$/);assert.equal(out.record.prize,0);assert.match(out.record.note,/全ページ未取得/);
+ for(const bad of [{...cp,lastSeenRank:320},{...cp,proposals:[r,r]},{...cp,lastErrorCode:'429'}])assert.equal(decide(r,f,bad,d,now).approved,false);
+ assert.equal(decide(r,f,cp,data(),now).approved,false);
+ const loser={...r,rank:321};assert.equal(decide(loser,f,{...cp,proposals:[loser]},d,now).approved,false);
+ const re=require('../scripts/saved-candidate-recheck.cjs').recheckSaved,input={queue:{proposals:[r]},checkpoints:{[f.key]:cp},windows:[f],data:d,config:{autoApproveVerified:true},now};
+ assert.equal(re(input).approved.length,1);assert.equal(re({...input,config:{}}).approved.length,0);
+ assert.equal(re({...input,checkpoints:{[f.key]:{...cp,complete:true}}}).approved.length,1);
+});

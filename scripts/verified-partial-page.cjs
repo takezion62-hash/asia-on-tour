@@ -75,6 +75,20 @@ function verifiedQualifierPrefix(row,win,cp,cutoff,now=Date.now()){
  return cp?.complete===true&&Number.isSafeInteger(cutoff)&&row?.rank<=cutoff&&
   verifiedRankBoundary(row,win,cp,cutoff,{now,allowCutoffComplete:true});
 }
+// Strict new qualifier route: a confirmed in-cutoff row, and the saved
+// prefix actually crosses the documented regional advancement boundary.
+// Callers still own official round mapping, account identity and collisions.
+function verifiedQualification(row,win,cp,rule,cutoff,{now=Date.now(),requireEpicIds=false,matchStage='予選'}={}){
+ const cap=rule?.matchCaps?.[matchStage];
+ if(!row||!win||!rule||row.verified!==true||
+  !Number.isSafeInteger(cutoff)||cutoff<1||!Number.isSafeInteger(row.rank)||row.rank<1||row.rank>cutoff||
+  row.tournamentId!==rule.id||win.tournamentId!==rule.id||row.seasonId!==rule.seasonId||
+  win.seasonId!==rule.seasonId||row.region!==win.region||row.date!==win.dateJst||
+  row.kind!==win.kind||row.round!==win.round||!rule.eventIds?.includes(win.eventId)||
+  !Number.isSafeInteger(cap)||cap<1||!Number.isSafeInteger(row.matches)||row.matches<1||row.matches>cap||
+  !valid(row.vrs)||row.vrs>row.matches||!valid(row.points)||!valid(row.kills))return false;
+ return verifiedRankBoundary(row,win,cp,cutoff,{now,allowCutoffComplete:true,requireEpicIds,unique:true});
+}
 // VR awards depend on the observed final record, not a payout rank boundary.
 // The adapter supplies documented rules and validates identity and window.
 function verifiedVrFinal(row,win,cp,rule,{now=Date.now(),stage='賞金決勝',requirePoints=false}={}){
@@ -91,5 +105,5 @@ function verifiedVrFinal(row,win,cp,rule,{now=Date.now(),stage='賞金決勝',re
   row.points!==row.vrs*rule.finalWinPoints)return false;
  return leaderboardCoverage(row,win,cp,now).kind==='partial'&&candidateObserved(row,cp,{unique:true});
 }
-module.exports={verifiedVrFinal,verifiedPartialPage,FOUR_HOURS,sameScannedCandidate,leaderboardCoverage,
+module.exports={verifiedQualification,verifiedVrFinal,verifiedPartialPage,FOUR_HOURS,sameScannedCandidate,leaderboardCoverage,
  matureFullLeaderboard,candidateObserved,coversRankBoundary,verifiedRankBoundary,verifiedQualifierPrefix};

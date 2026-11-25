@@ -146,3 +146,13 @@ test('S37 and S42 duo approvals reject missing/mismatched UUID, partial roster a
   assert.equal(decide(candidate,w,{...cp(candidate,true),rankingOrderValid:false},d,now).approved,false);
  }
 });
+
+test('saved Reload ZB duo qualification uses deterministic identity and verified top20 boundary',()=>{
+ const w=win(),id='auto-s43-'+require('node:crypto').createHash('sha256').update(JSON.stringify([w.eventId+'/'+w.windowId,ids])).digest('hex').slice(0,12);
+ const r=row(w,20,id),d=db(w),p={...cp(r),lastSeenRank:21};
+ const re=require('../scripts/saved-candidate-recheck.cjs').recheckSaved,input={queue:{proposals:[r]},checkpoints:{[w.key]:p},windows:[w],data:d,config:{autoApproveDuoQualifier:true},now};
+ const out=re(input);assert.equal(out.approved.length,1,JSON.stringify(out));assert.equal(out.approved[0].prize,0);assert.match(out.approved[0].round,/予選突破$/);
+ assert.equal(re({...input,checkpoints:{[w.key]:{...p,lastSeenRank:20}}}).approved.length,0);
+ assert.equal(re({...input,checkpoints:{[w.key]:{...p,complete:true}}}).approved.length,1);
+ assert.equal(re({...input,config:{}}).approved.length,0);
+});

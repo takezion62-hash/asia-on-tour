@@ -5,7 +5,7 @@ const {advancementCutoff,validMatchCount,individualVrPrize}=require('./tournamen
 // A zero-VR final can be recorded as $0 because the rules pay per final-round VR.
 // Positive cash requires a season-specific verified payout rule; unknown events remain in manual review.
 // Single source of truth: the same versioned official rules shown under SOURCES.
-const {verifiedPartialPage,sameScannedCandidate,verifiedVrFinal}=require('./verified-partial-page.cjs');
+const {verifiedPartialPage,sameScannedCandidate,verifiedVrFinal,verifiedQualification}=require('./verified-partial-page.cjs');
 const RULES=Object.freeze(Object.fromEntries(Object.entries(selectRules('verified')).map(([id,rule])=>[id,Object.freeze(rule)])));
 const roundId=x=>{
  const match=String(x||'').match(/(?:Event\s*(\d+)|Day\s*(\d+)).*Round\s*([12])/i);
@@ -23,19 +23,39 @@ function vrPrefixEvidence(row,win,cp,data,now=Date.now()){
   row.points<=0||!verifiedVrFinal(row,win,cp,rule,{now}))return false;
  return require('./saved-candidate-recheck.cjs').identityProof(row,win,data.verifiedAccounts||[],'solo');
 }
+function legacyNacQualifier(row,win,rule){
+ return [rule.verifiedLegacyNacWindow,...(rule.verifiedLegacyNacExtraWindows||[])].filter(Boolean).find(w=>
+  row.region==='NAC'&&row.kind==='予選'&&win.region==='NAC'&&win.kind==='予選'&&
+  w.dateJst===row.date&&w.dateJst===win.dateJst&&w.windowId===win.windowId);
+}
+function qualificationEvidence(row,win,cp,data,now=Date.now()){
+ const rule=RULES[row?.tournamentId];
+ if(!rule||!['solo','squad'].includes(rule.team)||rule.id==='ch7s5-squads-victory-cup'||
+  rule.autoApproval==='verified-duo-qualifier-only'||row.kind!=='予選'||row.reviewOnly===true||
+  row.prize!==0||win?.series!=='victory-cup'||typeof win.windowId!=='string')return false;
+ const event=win.windowId.match(/Event([1-9][0-9]*)_?Round1_(ME|EU|NAC|NAW|OCE|BR)$/);
+ const day=win.windowId.match(/_Round1_Day([1-9][0-9]*)_(ME|EU|NAC|NAW|OCE|BR)$/);
+ const stage=event||day;
+ if(!stage||stage[2]!==win.region||
+  win.round!==(event?'Event ':'Day ')+Number(stage[1])+' · Round 1 / 予選')return false;
+ const cutoff=advancementCutoff(rule,row.region)??legacyNacQualifier(row,win,rule)?.cutoff;
+ return verifiedQualification(row,win,cp,rule,cutoff,{now})&&
+  require('./saved-candidate-recheck.cjs').identityProof(row,win,data.verifiedAccounts||[],rule.team);
+}
 function decide(row,win,checkpoint,data,now=Date.now()){
  if(row?.reviewOnly===true||row?.kind==='参加確認'||win?.kind==='参加確認'||(win?.series&&win.series!=='victory-cup'))return decline('確認専用大会は自動承認不可');
  // A verified 0-VR final has $0 under official VR-only rules. Its observed
  // rows need not wait for thousands of unrelated leaderboard pages.
- // Positive solo VR cash may use an exact mature observed final; qualifiers unchanged.
+ // Positive solo VR cash and verified in-cutoff qualifiers can use mature saved prefixes.
  // Manual batch review may accept a qualifier actually seen in a mature,
  // contiguous saved prefix, but only with a verified official regional rule.
  // Scheduled auto-approval keeps its existing, stricter default.
  const observedQualifier=win?.allowPartialQualifier===true&&row?.kind==='予選'&&
    row.prize===0&&verifiedPartialPage(row,win,checkpoint);
  const vrPrefix=vrPrefixEvidence(row,win,checkpoint,data,now);
+ const qualifierPrefix=qualificationEvidence(row,win,checkpoint,data,now);
  if(!checkpoint?.complete&&!(row.kind==='賞金決勝'&&row.vrs===0&&row.prize===null&&
-      verifiedPartialPage(row,win,checkpoint,now))&&!observedQualifier&&!vrPrefix)
+      verifiedPartialPage(row,win,checkpoint,now))&&!observedQualifier&&!vrPrefix&&!qualifierPrefix)
   return decline('順位表の取得が完了していません');
  const rule=RULES[row.tournamentId];
  if(!rule)return decline('未検証のシーズンまたは大会');
@@ -54,11 +74,7 @@ function decide(row,win,checkpoint,data,now=Date.now()){
  if(win.tournamentId!==row.tournamentId||win.seasonId!==rule.seasonId||row.seasonId!==rule.seasonId||!rule.eventIds.includes(win.eventId)||!catalog.sourceEventIds.includes(win.eventId))return decline('公式イベントID不一致');
  // Historical NA qualifier cutoffs cannot be mapped broadly to NAC.
  // Allow only exact, source-backed tournament date and Round1 window.
- const historicalNac=[rule.verifiedLegacyNacWindow,...(rule.verifiedLegacyNacExtraWindows||[])]
-  .filter(Boolean);
- const verifiedNacWindow=historicalNac.find(w=>
-  row.region==='NAC'&&row.kind==='予選'&&win.region==='NAC'&&win.kind==='予選'&&
-  w.dateJst===row.date&&w.dateJst===win.dateJst&&w.windowId===win.windowId);
+ const verifiedNacWindow=legacyNacQualifier(row,win,rule);
  const exactLegacyNacQualifier=Boolean(verifiedNacWindow);
  const qualifierCutoff=advancementCutoff(rule,row.region)||
   (exactLegacyNacQualifier?verifiedNacWindow.cutoff:undefined);
@@ -118,7 +134,7 @@ function decide(row,win,checkpoint,data,now=Date.now()){
    const legacyEvidence=exactLegacyNacQualifier?
     ' 当該2024年NA Central開催枠の予選通過順位を別途照合: '+verifiedNacWindow.source:'';
    rec.note='Epic公式規則の予選突破条件に基づき'+row.region+'上位'+qualifierCutoff+
-    '名が突破。Osirion順位表'+row.rank+'位のEpic IDと照合。予選賞金$0。規則: '+rule.source+
+    '名が突破。Osirion順位表'+row.rank+'位のEpic IDと照合。'+(qualifierPrefix&&checkpoint.complete!==true?'終了4時間後以降の連続順位表で通過ライン超過を確認（'+checkpoint.pages+'/'+checkpoint.totalPages+'ページ、全ページ未取得）。':'')+'予選賞金$0。規則: '+rule.source+
     legacyEvidence;
   }
 
@@ -155,4 +171,4 @@ function evaluate(proposals,windows,checkpoints,data){
  }
  return {approved,held};
 }
-module.exports={RULES,identity,vrPrefixEvidence,decide,evaluate};
+module.exports={RULES,identity,vrPrefixEvidence,qualificationEvidence,decide,evaluate};

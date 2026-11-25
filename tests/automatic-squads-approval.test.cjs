@@ -90,3 +90,13 @@ test('partial squad final supports legacy omitted IDs only with exact unique det
  const forged=make();forged.row.id=forged.cp.proposals[0].id='auto-s43-000000000000';
  assert.equal(check(forged).approved,false);
 });
+
+test('saved S43 Squads qualified prefix supports exact legacy identity; no new out-of-cutoff approval',()=>{
+ const x=fixture(1,'ME',120);Object.assign(x.cp,{complete:false,nextPage:2,pages:2,totalPages:20,lastSeenRank:121});
+ const re=require('../scripts/saved-candidate-recheck.cjs').recheckSaved,input={queue:{proposals:[x.row]},checkpoints:{[x.win.key]:x.cp},windows:[x.win],data:x.data,config:{autoApproveSquads:true},now};
+ const out=re(input);assert.equal(out.approved.length,1,JSON.stringify(out));assert.match(out.approved[0].round,/予選突破$/);assert.equal(out.approved[0].prize,0);
+ assert.equal(re({...input,checkpoints:{[x.win.key]:{...x.cp,lastSeenRank:120}}}).approved.length,0);
+ assert.equal(re({...input,checkpoints:{[x.win.key]:{...x.cp,complete:true}}}).approved.length,1);
+ const outside=fixture(1,'ME',121);Object.assign(outside.cp,{complete:false,nextPage:2,pages:2,totalPages:20,lastSeenRank:150});
+ assert.equal(re({...input,queue:{proposals:[outside.row]},checkpoints:{[outside.win.key]:outside.cp}}).approved.length,0);
+});

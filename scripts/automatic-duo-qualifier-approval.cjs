@@ -3,7 +3,7 @@ const {selectRules,eventWindow}=require('./tournament-approval-policy.cjs');
 const {advancementCutoff,matchCap}=require('./tournament-rule-engine.cjs');
 // Epic-rule-verified duo Round 1 results. Qualifying != merely participating.
 // Cash is $0 in Round 1; never infer Round 2 winnings from these standings.
-const {verifiedPartialPage,FOUR_HOURS,sameScannedCandidate}=require('./verified-partial-page.cjs');
+const {verifiedPartialPage,FOUR_HOURS,sameScannedCandidate,verifiedQualification}=require('./verified-partial-page.cjs');
 const RULES=selectRules('duo');
 const decline=reason=>({approved:false,reason});
 const members=r=>Array.isArray(r?.players)?r.players:[r?.player];
@@ -27,6 +27,17 @@ function sameRound(a,b){
  };
  const left=sig(a),right=sig(b);
  return !left||!right||left===right;
+}
+// Offline recheck uses the stricter boundary evidence. Existing live
+// participation handling remains available under its former policy.
+function qualificationEvidence(row,win,cp,data,now=Date.now()){
+ const info=roundInfo(win),rule=info?.rule;
+ if(!rule||!row)return false;
+ const recent=rule.series==='cash-cup';
+ return row.kind===(recent?'参加確認':'予選')&&row.prize===(recent?null:0)&&
+  Boolean(row.reviewOnly)===recent&&
+  verifiedQualification(row,win,cp,rule,info.cutoff,{now,matchStage:recent?'単一ラウンド':'予選'})&&
+  require('./saved-candidate-recheck.cjs').identityProof(row,win,data.verifiedAccounts||[],'duo');
 }
 function decide(row,win,cp,data,now=Date.now()){
  const info=roundInfo(win),rule=info?.rule;
@@ -116,4 +127,4 @@ function evaluate(proposals,windows,checkpoints,data){
  }
  return {approved,held};
 }
-module.exports={RULES,roundInfo,sameRound,decide,evaluate};
+module.exports={RULES,roundInfo,sameRound,qualificationEvidence,decide,evaluate};
