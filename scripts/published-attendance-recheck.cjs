@@ -11,6 +11,12 @@ const same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
 const roster=r=>Array.isArray(r.players)?r.players:[r.player];
 const exact=(a,b)=>fields.every(k=>same(a[k],b[k]))&&same(roster(a),roster(b));
 const nonnegative=n=>Number.isSafeInteger(n)&&n>=0;
+// Some existing award adapters preserve a blank/absent candidate note.
+function promotionNote(old,next){
+ if(typeof next.note==='string'&&next.note.trim())return next.note;
+ const previous=typeof old.note==='string'&&old.note.trim()?old.note.trim()+' ':'';
+ return previous+'保存済み順位表・本人Epic ID・公式開催枠と既存承認規則を再照合し、'+next.kind+'・賞金USD '+next.prize+'に再分類。出典: '+old.source;
+}
 const awardKinds=new Set(['予選','賞金決勝','Performance決勝']);
 function planPublishedAttendance({data,scans,windows,config,ledger,reviewedIds,otherQueue=[],now=Date.now()}){
  if(!Array.isArray(data?.results)||!Array.isArray(data?.verifiedAccounts)||
@@ -68,7 +74,7 @@ function planPublishedAttendance({data,scans,windows,config,ledger,reviewedIds,o
    source:old.source,before:{kind:old.kind,round:old.round,prize:old.prize},
    after:{kind:next.kind,round:next.round,prize:next.prize,
    ...(next.teamPrize!==undefined?{teamPrize:next.teamPrize}:{}),
-   ...(next.prizePerPlayer!==undefined?{prizePerPlayer:next.prizePerPlayer}:{}),note:next.note}});
+   ...(next.prizePerPlayer!==undefined?{prizePerPlayer:next.prizePerPlayer}:{}),note:promotionNote(old,next)}});
  }
  return {version:1,dryRun:true,attendance:attendance.length,checked:eligible.length,
   proposed:proposals.length,held:held.length,proposals,holds:held};
@@ -79,4 +85,4 @@ if(require.main===module){
  const input=JSON.parse(fs.readFileSync(process.argv[2],'utf8'));
  process.stdout.write(JSON.stringify(planPublishedAttendance(input),null,2)+'\n');
 }
-module.exports={planPublishedAttendance};
+module.exports={planPublishedAttendance,promotionNote};
