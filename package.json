@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "validate": "node scripts/source-results-store.cjs verify && node scripts/audit-held-publication.cjs && node scripts/validate-data.cjs && node scripts/validate-updates.cjs && node scripts/validate-approvals.cjs && node scripts/validate-tournament-rules.cjs && node scripts/audit-legacy-results.cjs",
+    "validate": "node scripts/source-results-store.cjs verify && node scripts/audit-held-publication.cjs && node scripts/validate-data.cjs && node scripts/validate-updates.cjs && node scripts/validate-approvals.cjs && node scripts/validate-tournament-rules.cjs && node scripts/audit-legacy-results.cjs && node scripts/published-attendance-phase5.cjs --verify-history",
     "test:unit": "node scripts/unit-test-runner.cjs all",
     "test:e2e": "playwright test",
     "test": "npm run validate && npm run test:unit && npm run test:e2e",
@@ -14,7 +14,8 @@
     "audit:phase3": "node scripts/audit-legacy-results.cjs",
     "tournament:preview": "node scripts/tournament-registration-preview.cjs",
     "tournament:discover": "node scripts/unmapped-tournament-discovery.cjs",
-    "review:duplicates": "node scripts/resolve-exact-duplicates.cjs --dry-run"
+    "review:duplicates": "node scripts/resolve-exact-duplicates.cjs --dry-run",
+    "review:published-attendance": "node scripts/published-attendance-phase5.cjs --dry-run"
   },
   "engines": {
     "node": ">=22"
