@@ -2,6 +2,237 @@
   "version": 1,
   "entries": [
     {
+      "id": "auto-s39-bb938bcee2cd",
+      "beforeRow": {
+        "id": "auto-s39-bb938bcee2cd",
+        "date": "2025-12-22",
+        "region": "NAW",
+        "player": "Unger",
+        "playerRaw": "EDGE Unger",
+        "event": "NVIDIA GeForce RTX Cup",
+        "round": "単一開催枠 / 参加確認",
+        "rank": 21,
+        "points": 355,
+        "kills": 40,
+        "vrs": 2,
+        "prize": null,
+        "kind": "参加確認",
+        "matches": 9,
+        "seasonId": "S39",
+        "chapter": 7,
+        "season": 1,
+        "tournamentId": "ch7s1-nvidia-geforce-rtx-cup",
+        "source": "https://www.fortnite.com/competitive/events/S39_NvidiaCup/?region=NAW&round=S39_NvidiaCup_NAW",
+        "verified": true,
+        "note": "管理者がEpic ID・公式大会ウィンドウ・Osirion順位表の参加と数値を再確認。予選突破・賞金・スキン獲得は未確認のため加算しない。出典: https://www.fortnite.com/competitive/events/S39_NvidiaCup/?region=NAW&round=S39_NvidiaCup_NAW",
+        "teamAccountIds": [
+          "dd35e4094645459a95dd0fabc0e9a31e"
+        ]
+      },
+      "beforeSha256": "849ce6c987aef5825ffe8c1dc209229e1d6f82e9dd7fb6d4f16b24f8c298f50e",
+      "afterSha256": "ffd7a1b8ed543c83b6fa948a086f73302ea0e686070dd5f5f03b9638b3c20292",
+      "proof": {
+        "file": "history-sync-scan.json",
+        "key": "epicgames_S39_NvidiaCup_NAW/S39_NvidiaCup_NAW",
+        "ruleSha256": "328cc62add4ce2559d5d9103844096e8a0a0965386a068b7497c0bafa7eff606",
+        "checkpoint": {
+          "complete": false,
+          "rankingOrderValid": true,
+          "epicIdsRetained": true,
+          "nextPage": 63,
+          "pages": 63,
+          "totalPages": 100,
+          "lastSeenRank": 6300,
+          "lastSuccessAt": "2026-11-25T05:46:10.140Z",
+          "emptyAttempts": 0,
+          "proposals": [
+            {
+              "id": "auto-s39-bb938bcee2cd",
+              "date": "2025-12-22",
+              "region": "NAW",
+              "player": "Unger",
+              "playerRaw": "EDGE Unger",
+              "event": "NVIDIA GeForce RTX Cup",
+              "round": "単一開催枠 / 参加確認",
+              "rank": 21,
+              "points": 355,
+              "kills": 40,
+              "vrs": 2,
+              "prize": null,
+              "kind": "参加確認",
+              "matches": 9,
+              "seasonId": "S39",
+              "chapter": 7,
+              "season": 1,
+              "tournamentId": "ch7s1-nvidia-geforce-rtx-cup",
+              "source": "https://www.fortnite.com/competitive/events/S39_NvidiaCup/?region=NAW&round=S39_NvidiaCup_NAW",
+              "verified": true,
+              "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+              "reviewOnly": true,
+              "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+              "teamAccountIds": [
+                "dd35e4094645459a95dd0fabc0e9a31e"
+              ]
+            }
+          ]
+        }
+      },
+      "proofSha256": "9b3d49c3e0a10d70089fe7c2ef7de2f35c85a735ff94e41136fd3e52b2b5ef92",
+      "approvedAt": "2026-11-25T10:09:10.613Z"
+    },
+    {
+      "id": "auto-s39-300a40de3903",
+      "beforeRow": {
+        "id": "auto-s39-300a40de3903",
+        "date": "2025-12-21",
+        "region": "OCE",
+        "player": "MAT4DOR.",
+        "playerRaw": "MAT4DOR.",
+        "event": "NVIDIA GeForce RTX Cup",
+        "round": "単一開催枠 / 参加確認",
+        "rank": 11,
+        "points": 386,
+        "kills": 28,
+        "vrs": 2,
+        "prize": null,
+        "kind": "参加確認",
+        "matches": 9,
+        "seasonId": "S39",
+        "chapter": 7,
+        "season": 1,
+        "tournamentId": "ch7s1-nvidia-geforce-rtx-cup",
+        "source": "https://www.fortnite.com/competitive/events/S39_NvidiaCup/?region=OCE&round=S39_NvidiaCup_OCE",
+        "verified": true,
+        "note": "本人Epic IDと公式開催日・地域・出典の保存済み順位表で参加・順位・得点・キル・VRを確認。現金賞金・進出・スキン獲得は未確認。出典: https://www.fortnite.com/competitive/events/S39_NvidiaCup/?region=OCE&round=S39_NvidiaCup_OCE"
+      },
+      "beforeSha256": "60f24c8a7b0fa75fbaf2e436a772209b8de4f8156ed9ed53dfd3f841033b6957",
+      "afterSha256": "9fd209676e1336ebad82731e3c63f15710bf6ea953eade0b7bacdd76cb9cddd6",
+      "proof": {
+        "file": "history-sync-scan.json",
+        "key": "epicgames_S39_NvidiaCup_OCE/S39_NvidiaCup_OCE",
+        "ruleSha256": "328cc62add4ce2559d5d9103844096e8a0a0965386a068b7497c0bafa7eff606",
+        "checkpoint": {
+          "complete": false,
+          "rankingOrderValid": true,
+          "epicIdsRetained": true,
+          "nextPage": 57,
+          "pages": 57,
+          "totalPages": 92,
+          "lastSeenRank": 5700,
+          "lastSuccessAt": "2026-11-25T05:46:17.664Z",
+          "emptyAttempts": 0,
+          "proposals": [
+            {
+              "id": "auto-s39-300a40de3903",
+              "date": "2025-12-21",
+              "region": "OCE",
+              "player": "MAT4DOR.",
+              "playerRaw": "MAT4DOR.",
+              "event": "NVIDIA GeForce RTX Cup",
+              "round": "単一開催枠 / 参加確認",
+              "rank": 11,
+              "points": 386,
+              "kills": 28,
+              "vrs": 2,
+              "prize": null,
+              "kind": "参加確認",
+              "matches": 9,
+              "seasonId": "S39",
+              "chapter": 7,
+              "season": 1,
+              "tournamentId": "ch7s1-nvidia-geforce-rtx-cup",
+              "source": "https://www.fortnite.com/competitive/events/S39_NvidiaCup/?region=OCE&round=S39_NvidiaCup_OCE",
+              "verified": true,
+              "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+              "reviewOnly": true,
+              "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+              "teamAccountIds": [
+                "17b382b1e9be42a1b8d5b961c04fa963"
+              ]
+            }
+          ]
+        }
+      },
+      "proofSha256": "43bc8f9e8ef5e4cdb8a4f6f2dd0cb18529219e8aa4f9ef433f285ac4f3a4d9a9",
+      "approvedAt": "2026-11-25T10:09:10.613Z"
+    },
+    {
+      "id": "auto-s39-950dc8a1c98b",
+      "beforeRow": {
+        "id": "auto-s39-950dc8a1c98b",
+        "date": "2025-12-21",
+        "region": "OCE",
+        "player": "モバイル勢のまかろん",
+        "playerRaw": "BRN 916GonLuck",
+        "event": "NVIDIA GeForce RTX Cup",
+        "round": "単一開催枠 / 参加確認",
+        "rank": 39,
+        "points": 340,
+        "kills": 9,
+        "vrs": 0,
+        "prize": null,
+        "kind": "参加確認",
+        "matches": 10,
+        "seasonId": "S39",
+        "chapter": 7,
+        "season": 1,
+        "tournamentId": "ch7s1-nvidia-geforce-rtx-cup",
+        "source": "https://www.fortnite.com/competitive/events/S39_NvidiaCup/?region=OCE&round=S39_NvidiaCup_OCE",
+        "verified": true,
+        "note": "本人Epic IDと公式開催日・地域・出典の保存済み順位表で参加・順位・得点・キル・VRを確認。現金賞金・進出・スキン獲得は未確認。出典: https://www.fortnite.com/competitive/events/S39_NvidiaCup/?region=OCE&round=S39_NvidiaCup_OCE"
+      },
+      "beforeSha256": "670c474db7e168769001b38ac150aa1373e9c6c1c424c56c1c6e3e426d647dfb",
+      "afterSha256": "115b6f4a4b3bf85e98c1bb6f8a5d23fae04329d369ce8a2ad07482a029216e50",
+      "proof": {
+        "file": "history-sync-scan.json",
+        "key": "epicgames_S39_NvidiaCup_OCE/S39_NvidiaCup_OCE",
+        "ruleSha256": "328cc62add4ce2559d5d9103844096e8a0a0965386a068b7497c0bafa7eff606",
+        "checkpoint": {
+          "complete": false,
+          "rankingOrderValid": true,
+          "epicIdsRetained": true,
+          "nextPage": 57,
+          "pages": 57,
+          "totalPages": 92,
+          "lastSeenRank": 5700,
+          "lastSuccessAt": "2026-11-25T05:46:17.664Z",
+          "emptyAttempts": 0,
+          "proposals": [
+            {
+              "id": "auto-s39-950dc8a1c98b",
+              "date": "2025-12-21",
+              "region": "OCE",
+              "player": "モバイル勢のまかろん",
+              "playerRaw": "BRN 916GonLuck",
+              "event": "NVIDIA GeForce RTX Cup",
+              "round": "単一開催枠 / 参加確認",
+              "rank": 39,
+              "points": 340,
+              "kills": 9,
+              "vrs": 0,
+              "prize": null,
+              "kind": "参加確認",
+              "matches": 10,
+              "seasonId": "S39",
+              "chapter": 7,
+              "season": 1,
+              "tournamentId": "ch7s1-nvidia-geforce-rtx-cup",
+              "source": "https://www.fortnite.com/competitive/events/S39_NvidiaCup/?region=OCE&round=S39_NvidiaCup_OCE",
+              "verified": true,
+              "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+              "reviewOnly": true,
+              "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+              "teamAccountIds": [
+                "facede25f8fd4f47be4decb0796abd33"
+              ]
+            }
+          ]
+        }
+      },
+      "proofSha256": "ea093685dc519f91c22b61c156e8dfd10e7ac2d88da650237c6ab6943ecef8db",
+      "approvedAt": "2026-11-25T10:09:10.613Z"
+    },
+    {
       "id": "auto-s43-124828953341",
       "beforeRow": {
         "id": "auto-s43-124828953341",
