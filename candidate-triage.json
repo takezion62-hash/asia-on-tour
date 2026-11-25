@@ -1,7 +1,7 @@
 {
   "version": 1,
   "sourceCheckedAt": "2026-11-25T12:02:25.574Z",
-  "total": 47,
+  "total": 42,
   "alreadyResolved": 0,
   "byYear": [
     {
@@ -9,12 +9,8 @@
       "count": 40
     },
     {
-      "name": "2025",
-      "count": 1
-    },
-    {
       "name": "2026",
-      "count": 6
+      "count": 2
     }
   ],
   "byRegion": [
@@ -40,22 +36,10 @@
     },
     {
       "name": "OCE",
-      "count": 17
+      "count": 12
     }
   ],
   "byTournament": [
-    {
-      "name": "Days of Play PlayStation Cup (Battle Royale) / OCE / 2026",
-      "count": 2
-    },
-    {
-      "name": "NVIDIA GeForce RTX Cup / OCE / 2025",
-      "count": 1
-    },
-    {
-      "name": "PlayStation Clix Cup (Battle Royale) / OCE / 2026",
-      "count": 2
-    },
     {
       "name": "Squads Victory Cup Battle Royale / ME / 2026",
       "count": 1
@@ -84,7 +68,7 @@
   "byStatus": [
     {
       "name": "partial-scan",
-      "count": 37
+      "count": 32
     },
     {
       "name": "rules-review",
@@ -1477,171 +1461,6 @@
         "possibleExistingId": null
       },
       "rewardState": "source-amount-present-not-verified-by-triage"
-    },
-    {
-      "id": "auto-s39-8db67a0d56c0",
-      "origin": "history",
-      "date": "2025-12-21",
-      "year": "2025",
-      "region": "OCE",
-      "tournamentId": "ch7s1-nvidia-geforce-rtx-cup",
-      "event": "NVIDIA GeForce RTX Cup",
-      "round": "単一開催枠 / 参加確認",
-      "player": "Lisa",
-      "kind": "参加確認",
-      "rank": 5799,
-      "points": 29,
-      "kills": 1,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S39_NvidiaCup/?region=OCE&round=S39_NvidiaCup_OCE",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "全ページ連続の順位表・Epic ID付完全スナップショットが未確認",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 58,
-        "totalPages": 92,
-        "sourceKey": "epicgames_S39_NvidiaCup_OCE/S39_NvidiaCup_OCE",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s40-895a69641efa",
-      "origin": "history",
-      "date": "2026-04-29",
-      "year": "2026",
-      "region": "OCE",
-      "tournamentId": "ch7s2-playstation-clix-cup-br",
-      "event": "PlayStation Clix Cup (Battle Royale)",
-      "round": "Qualifier / 参加確認",
-      "player": "らずのっと",
-      "kind": "参加確認",
-      "rank": 3353,
-      "points": 40,
-      "kills": 5,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S40_PlayStationCupClix/?region=OCE&round=S40_PlayStationCupClix_Qualifier_OCE",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "対象大会・ラウンドの自動承認方式が未登録",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 34,
-        "totalPages": 60,
-        "sourceKey": "epicgames_S40_PlayStationCupClix_OCE/S40_PlayStationCupClix_Qualifier_OCE",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s40-cff8511efca1",
-      "origin": "history",
-      "date": "2026-04-29",
-      "year": "2026",
-      "region": "OCE",
-      "tournamentId": "ch7s2-playstation-clix-cup-br",
-      "event": "PlayStation Clix Cup (Battle Royale)",
-      "round": "Qualifier / 参加確認",
-      "player": "FitSquirrel1261",
-      "kind": "参加確認",
-      "rank": 3305,
-      "points": 41,
-      "kills": 5,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S40_PlayStationCupClix/?region=OCE&round=S40_PlayStationCupClix_Qualifier_OCE",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "対象大会・ラウンドの自動承認方式が未登録",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 34,
-        "totalPages": 60,
-        "sourceKey": "epicgames_S40_PlayStationCupClix_OCE/S40_PlayStationCupClix_Qualifier_OCE",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s41-75b5b2db87cb",
-      "origin": "history",
-      "date": "2026-06-07",
-      "year": "2026",
-      "region": "OCE",
-      "tournamentId": "ch7s3-days-of-play-playstation-cup-br",
-      "event": "Days of Play PlayStation Cup (Battle Royale)",
-      "round": "Qualifier / 参加確認",
-      "player": "おらんげ",
-      "kind": "参加確認",
-      "rank": 71,
-      "points": 108,
-      "kills": 24,
-      "vrs": 1,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S41_PSCupDaysOfPlay/?region=OCE&round=S41_PSCupDaysOfPlay_Qualifier_OCE",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "対象大会・ラウンドの自動承認方式が未登録",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 1,
-        "totalPages": 48,
-        "sourceKey": "epicgames_S41_PSCupDaysOfPlay_OCE/S41_PSCupDaysOfPlay_Qualifier_OCE",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s41-89a70003aa20",
-      "origin": "history",
-      "date": "2026-06-07",
-      "year": "2026",
-      "region": "OCE",
-      "tournamentId": "ch7s3-days-of-play-playstation-cup-br",
-      "event": "Days of Play PlayStation Cup (Battle Royale)",
-      "round": "Qualifier / 参加確認",
-      "player": "rsl ふちの弟",
-      "kind": "参加確認",
-      "rank": 88,
-      "points": 104,
-      "kills": 5,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S41_PSCupDaysOfPlay/?region=OCE&round=S41_PSCupDaysOfPlay_Qualifier_OCE",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "対象大会・ラウンドの自動承認方式が未登録",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 1,
-        "totalPages": 48,
-        "sourceKey": "epicgames_S41_PSCupDaysOfPlay_OCE/S41_PSCupDaysOfPlay_Qualifier_OCE",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
     }
   ],
   "policy": "read-only queue; awards require existing official rule-backed validators and identity/collision proof"
