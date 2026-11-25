@@ -115,3 +115,18 @@ test('partial EU/NAC evaluation Round2 publishes proven zero-VR teams only',()=>
  const top26=getRow(qualifier,10,0);
  assert.equal(decide(top26,{...qualifier,end:win.end},partial(top26),data(qualifier)).approved,false);
 });
+
+test('Performance positive VR final prefix requires all three identities and correct 100 points per VR',()=>{
+ const w={...makeWin(2,'EU'),end:Date.parse('2026-11-06T07:00:00Z')};
+ const r={...getRow(w,3,2),id:'auto-s43-'+require('node:crypto').createHash('sha256').update(JSON.stringify([w.eventId+'/'+w.windowId,ids])).digest('hex').slice(0,12)};
+ const now=w.end+48*3600000,p={complete:false,rankingOrderValid:true,nextPage:1,pages:1,totalPages:2,lastSeenRank:10,lastSuccessAt:new Date(w.end+5*3600000).toISOString(),proposals:[r]};
+ const d=data(w),out=decide(r,w,p,d,now);
+ assert.equal(out.approved,true,out.reason);assert.equal(out.record.prize,2400);assert.equal(out.record.prizePerPlayer,800);
+ assert.match(out.record.note,/全ページ未取得/);
+ for(const bad of [{...p,proposals:[r,r]},{...p,rankingOrderValid:false},{...p,lastErrorCode:'429'}])assert.equal(decide(r,w,bad,d,now).approved,false);
+ const wrong={...r,points:100};assert.equal(decide(wrong,w,{...p,proposals:[wrong]},d,now).approved,false);
+ assert.equal(decide(r,w,p,{...d,verifiedAccounts:d.verifiedAccounts.slice(0,2)},now).approved,false);
+ const re=require('../scripts/saved-candidate-recheck.cjs').recheckSaved;
+ const offline=re({queue:{proposals:[r]},checkpoints:{[w.key]:p},windows:[w],data:d,config:{autoApprovePerformance:true},now});
+ assert.equal(offline.approved.length,1,JSON.stringify(offline));assert.equal(offline.approved[0].prize,2400);
+});

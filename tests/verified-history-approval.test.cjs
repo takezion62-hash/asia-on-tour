@@ -254,3 +254,19 @@ test('S42 Solo Reload verified Round 1 non-qualifiers are attendance-only, never
  assert.equal(decide({...row0,matches:9},win,{...cp,proposals:[{...row0,matches:9}]},data).approved,false);
  assert.equal(decide(row0,win,{...cp,complete:false},data).approved,false);
 });
+
+test('known solo final VR cash uses unique mature saved row and deterministic verified Epic ID',()=>{
+ const f={...w,series:'victory-cup',end:Date.parse('2026-08-01T06:00:00Z'),
+  windowId:'S41_ReloadSoloVictoryCup_Round2_Day1_ME',kind:'賞金決勝',round:'Day 1 · Round 2 / 賞金決勝'};
+ const epicAccountId='a'.repeat(32),id='auto-s41-'+require('node:crypto').createHash('sha256').update(JSON.stringify([f.eventId+'/'+f.windowId,[epicAccountId]])).digest('hex').slice(0,12);
+ const x={...row,id,kind:f.kind,round:f.round,rank:1,points:100,vrs:1,matches:3,prize:null,source:source(f)};
+ const now=f.end+48*3600000,cp={complete:false,rankingOrderValid:true,nextPage:1,pages:1,totalPages:30,lastSeenRank:100,lastSuccessAt:new Date(f.end+5*3600000).toISOString(),proposals:[x]};
+ const d={...data(),verifiedAccounts:[{epicAccountId,player:'A',confirmed:true}]};
+ const out=decide(x,f,cp,d,now);assert.equal(out.approved,true,out.reason);assert.equal(out.record.prize,100);
+ assert.match(out.record.note,/全ページ未取得/);
+ for(const bad of [{...cp,proposals:[x,x]},{...cp,pages:0},{...cp,retryAfter:'pending'},{...cp,lastSuccessAt:new Date(f.end+3600000).toISOString()}])
+  assert.equal(decide(x,f,bad,d,now).approved,false);
+ assert.equal(decide(x,f,cp,data(),now).approved,false);
+ const bad={...x,points:0};assert.equal(decide(bad,f,{...cp,proposals:[bad]},d,now).approved,false);
+ assert.equal(decide(x,{...f,windowId:f.windowId.replace('Round2','Round1')},cp,d,now).approved,false);
+});

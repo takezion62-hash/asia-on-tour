@@ -32,13 +32,18 @@ test('both seasons: 0/1/2/3VR exact $100/player $200/team, no data mutation',()=
   assert.equal(JSON.stringify(x),before);assert.equal(out.record.teamAccountIds,undefined);
  }
 });
-test('historical cutoff-complete qualifier is rechecked offline; finals require fully fetched pages',()=>{
+test('historical cutoff-complete qualifier and mature observed final are rechecked offline',()=>{
  const x=fixture('S35',1,'NAW',20);
  Object.assign(x.cp,{complete:true,totalPages:91,nextPage:3,pages:3,lastSeenRank:300});
  const out=recheckSaved({queue:{proposals:[x.row]},checkpoints:{[x.win.key]:x.cp},windows:[x.win],data:x.data,config:{autoApproveConsoleDuos:true},now});
  assert.equal(out.approved.length,1);assert.equal(out.next.length,0);
  const y=fixture();Object.assign(y.cp,{complete:false,totalPages:3,nextPage:2,pages:2,lastSeenRank:200});
- assert.equal(check(y).approved,false);
+ assert.equal(check(y).approved,true);
+ assert.equal(check(y).record.prize,200);
+ assert.match(check(y).record.note,/全ページ未取得/);
+ const offline=recheckSaved({queue:{proposals:[y.row]},checkpoints:{[y.win.key]:y.cp},windows:[y.win],data:y.data,config:{autoApproveConsoleDuos:true},now});
+ assert.equal(offline.approved.length,1);assert.equal(offline.approved[0].prize,200);
+ y.cp.lastErrorCode='429';assert.equal(check(y).approved,false);
 });
 test('wrong Epic ID, calendar, source, score, rank, payout, hold, maturity or conflicting roster cannot publish',()=>{
  for(const edit of [
