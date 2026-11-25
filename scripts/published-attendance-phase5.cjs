@@ -76,7 +76,24 @@ function applyPreview(snapshot,report){
  if(entries.length!==changes.size||results.length!==snapshot.data.results.length)throw Error('Phase 5 lost results');
  return {results,entries,audit:{version:1,entries:[...entries,...snapshot.oldAudit.entries]}};
 }
+function verifyHistory(root=ROOT){
+ if(!fs.existsSync(path.join(root,AUDIT)))return 0;
+ const audit=read(root,AUDIT),rows=readResults(root).rows,byId=new Map(rows.map(r=>[r.id,r]));
+ if(audit.version!==1||!Array.isArray(audit.entries))throw Error('Invalid Phase 5 audit');
+ const ids=new Set();
+ for(const h of audit.entries){
+  const r=byId.get(h.id);
+  if(ids.has(h.id)||!r||r.source!==h.source||h.before?.kind!=='参加確認'||
+   !['予選','賞金決勝','Performance決勝'].includes(h.after?.kind)||
+   h.after.kind!==r.kind||h.after.round!==r.round||h.after.prize!==r.prize||
+   !/^[a-f0-9]{64}$/.test(h.beforeSha256)||hash(r)!==h.afterSha256||
+   !Number.isFinite(Date.parse(h.approvedAt)))throw Error('Invalid Phase 5 correction audit '+h.id);
+  ids.add(h.id);
+ }
+ return ids.size;
+}
 function run(root=ROOT,{apply=false,now=Date.now()}={}){
+ verifyHistory(root);
  const s=loadSnapshot(root,now),preview=planPublishedAttendance(s),planned=applyPreview(s,preview);
  // Manual attendance-only ledger records are handled exclusively by the existing
  // immutable proof verifier. Do not bypass or rewrite the original ledger.
@@ -101,7 +118,7 @@ function run(root=ROOT,{apply=false,now=Date.now()}={}){
  const errors=[...check.errors,...validateUpdateLog(corrections.results,updates)];
  if(errors.length)throw Error('Phase 5 validation failed '+JSON.stringify(errors.slice(0,5)));
  const manualChanges=corrections.changes.map(h=>{const r=correctedById.get(h.id);return {id:h.id,player:r.player,source:r.source,kind:r.kind,round:r.round,prize:r.prize,prizePerPlayer:r.prizePerPlayer}});
- const report={...preview,manualChanges,manualHeld:corrections.held,totalChanges:count,
+ const report={...preview,dryRun:!apply,manualChanges,manualHeld:corrections.held,totalChanges:count,
   publishedBefore:s.data.results.length,publishedAfter:corrections.results.length,additionalProviderRequests:0};
  if(apply&&count){
   publishResults(root,corrections.results);
@@ -114,10 +131,11 @@ function run(root=ROOT,{apply=false,now=Date.now()}={}){
 if(require.main===module){
  try{
   const mode=process.argv[2];
+  if(mode==='--verify-history'&&process.argv.length===3){console.log('Phase 5 correction history: '+verifyHistory(ROOT));process.exit(0)}
   if(process.argv.length!==3||!['--dry-run','--apply'].includes(mode))throw Error('Usage: --dry-run or --apply');
   if(mode==='--apply'&&process.env.AOT_PHASE5_CONFIRMATION!=='CONFIRM')throw Error('Explicit CONFIRM required');
   const report=run(ROOT,{apply:mode==='--apply'});
   process.stdout.write(JSON.stringify(report,null,2)+'\n');
  }catch(e){console.error(e.stack);process.exitCode=1}
 }
-module.exports={buildWindows,loadSnapshot,applyPreview,run};
+module.exports={buildWindows,loadSnapshot,applyPreview,run,verifyHistory};
