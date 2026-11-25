@@ -1,6 +1,6 @@
 'use strict';
-// Read-only evidence planner. No API calls, no new rules, no partial-page
-// relaxation. Only existing scheduled approval adapters may create records.
+// Read-only evidence planner. No API calls, no new rules. Only exact evidence
+// admitted by the existing scheduled approval adapters may create records.
 const crypto=require('node:crypto');
 const {sameScannedCandidate,FOUR_HOURS}=require('./verified-partial-page.cjs');
 const {sourceWindow}=require('./review-recovery-priority.cjs');
@@ -68,7 +68,9 @@ function recheckSaved({queue,checkpoints,windows,data,config,reviewedIds=[],othe
   // including legacy cutoff-complete snapshots; never relax final evidence.
   const consolePrefix=config.autoApproveConsoleDuos===true&&row.kind==='予選'&&
    require('./automatic-console-duos-approval.cjs').qualifierEvidence(row,win,proof[0].cp,now);
-  if(!mature(proof[0].cp,win,row,now)&&!consolePrefix){
+  const nvidiaPrefix=config.autoApproveNvidia===true&&
+   require('./automatic-nvidia-approval.cjs').prizePrefixEvidence(proof[0].row,win,proof[0].cp,now);
+  if(!mature(proof[0].cp,win,row,now)&&!consolePrefix&&!nvidiaPrefix){
    held.push({id:row.id,reason:'成熟済み完全順位表が未確認'});continue;
   }
   if(!identityProof(row,win,data.verifiedAccounts||[],cat.team)){

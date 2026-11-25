@@ -41,3 +41,26 @@ test('a disabled route holds and refreshes only the reason, never publishes',()=
  const out=recheckSaved(d);assert.equal(out.approved.length,0);assert.equal(out.reasonUpdates,1);
  assert.equal(out.next[0].reviewReason,'対象大会の自動承認設定が無効');
 });
+
+test('offline NVIDIA recheck uses exact mature positive cash prefix, not a full-scan fiction',()=>{
+ const session=require('../calendar-history/2025-12.json').sessions.find(s=>s.eventId==='S39_NvidiaCup'&&s.region==='NAW');
+ const eventId=session.eventId,windowId=session.sourceWindowId,key='epicgames_'+eventId+'_NAW/'+windowId;
+ const epicAccountId='a'.repeat(32),player='NVIDIA confirmed solo';
+ const id='auto-s39-'+crypto.createHash('sha256').update(JSON.stringify([eventId+'/'+windowId,[epicAccountId]])).digest('hex').slice(0,12);
+ const row={id,date:session.dateJst,region:'NAW',tournamentId:session.tournamentId,seasonId:'S39',event:session.name,
+  player,teamAccountIds:[epicAccountId],kind:'参加確認',round:'単一開催枠 / 参加確認',rank:21,points:345,kills:7,vrs:0,matches:9,
+  verified:true,reviewOnly:true,prize:null,source:session.url};
+ const win={key,eventId,windowId,region:'NAW',dateJst:row.date,tournamentId:row.tournamentId,seasonId:'S39',series:'nvidia-cup',
+  kind:row.kind,round:row.round,startUtc:session.startUtc,end:Date.parse(session.endUtc)};
+ const cp={complete:false,rankingOrderValid:true,epicIdsRetained:true,totalPages:100,nextPage:1,pages:1,lastSeenRank:100,
+  lastSuccessAt:new Date(win.end+5*3600000).toISOString(),proposals:[{...row}]};
+ const db={queue:{proposals:[row]},checkpoints:{[key]:cp},windows:[win],data:{results:[],players:{candidates:[{name:player}]},
+  tournaments:require('../tournaments.json'),verifiedAccounts:[{epicAccountId,player,confirmed:true}]},
+  config:{autoApproveNvidia:true},now:win.end+48*3600000};
+ const before=JSON.stringify(db),out=recheckSaved(db);
+ assert.equal(out.approved.length,1,JSON.stringify(out));assert.equal(out.approved[0].prize,150);
+ assert.equal(out.next.length,0);assert.equal(JSON.stringify(db),before);
+ assert.equal(recheckSaved({...db,config:{}}).approved.length,0);
+ assert.equal(recheckSaved({...db,checkpoints:{[key]:{...cp,lastSeenRank:40}}}).approved.length,0);
+ assert.equal(recheckSaved({...db,reviewedIds:[id]}).approved.length,0);
+});

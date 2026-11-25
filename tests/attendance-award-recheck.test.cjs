@@ -37,3 +37,20 @@ test('production dry run checks actual saved evidence, preserves all IDs and lea
  }
  assert.deepEqual([manifest,ledger,M.HISTORY].map(n=>fs.existsSync(path.join(ROOT,n))?fs.readFileSync(path.join(ROOT,n),'utf8'):null),before);
 });
+
+test('NVIDIA positive prize prefix is frozen accurately; other cash still needs all pages',()=>{
+ const nv=require('../scripts/automatic-nvidia-approval.cjs');
+ const n=nv.RULES['ch7s1-nvidia-geforce-rtx-cup'];
+ const slot=read('calendar-history/2025-12.json').sessions.find(x=>x.eventId==='S39_NvidiaCup'&&x.region==='NAW');
+ const old={id:'auto-s39-example',kind:'参加確認',round:'単一開催枠 / 参加確認',verified:true,prize:null,rank:21,region:'NAW',seasonId:'S39',date:slot.dateJst,tournamentId:n.id};
+ const candidate={...old,reviewOnly:true,teamAccountIds:['a'.repeat(32)]};
+ const end=Date.parse(slot.endUtc),now=end+48*3600000;
+ const cp={complete:false,rankingOrderValid:true,epicIdsRetained:true,pages:1,nextPage:1,totalPages:100,lastSeenRank:100,lastSuccessAt:new Date(end+5*3600000).toISOString(),proposals:[candidate]};
+ const frozen=M.checkpointProof(cp,old,'cash',n,slot,now);
+ assert.ok(frozen);assert.equal(frozen.complete,false);
+ assert.equal(frozen.nextPage,1);assert.equal(frozen.totalPages,100);
+ assert.deepEqual(M.checkpointProof(frozen,old,'cash',n,slot,now),frozen);
+ assert.equal(M.checkpointProof({...cp,lastSeenRank:40},old,'cash',n,slot,now),null);
+ assert.equal(M.checkpointProof({...cp,lastErrorCode:'429'},old,'cash',n,slot,now),null);
+ assert.equal(M.checkpointProof(cp,old,'cash',rule,slot,now),null);
+});

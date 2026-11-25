@@ -105,3 +105,28 @@ test('modified official payout or hardware cutoffs fail rule registry validation
  assert.match(errors,/賞金表/);
  assert.match(errors,/RTX 5080/);
 });
+
+test('mature NVIDIA cash prefix beyond the official regional cutoff approves without pretending full completion',()=>{
+ const {d,row,cp}=candidate(21);
+ const now=win.end+48*3600000;
+ const partial={...cp,complete:false,nextPage:1,pages:1,totalPages:100,
+  lastSeenRank:100,lastSuccessAt:new Date(win.end+5*3600000).toISOString(),emptyAttempts:0};
+ const v=decide(row,win,partial,d,now);
+ assert.equal(v.approved,true,v.reason);assert.equal(v.record.prize,150);
+ assert.match(v.record.note,/全ページ未取得/);assert.equal(partial.complete,false);
+ const invalid=[
+  {...partial,lastSeenRank:40},{...partial,lastSeenRank:39},{...partial,pages:0},
+  {...partial,rankingOrderValid:false},{...partial,epicIdsRetained:false},
+  {...partial,nextPage:100},{...partial,emptyAttempts:1},{...partial,lastErrorCode:'429'},
+  {...partial,retryAfter:new Date(now+1000).toISOString()},
+  {...partial,lastSuccessAt:new Date(win.end+3600000).toISOString()},
+  {...partial,lastSuccessAt:new Date(now+3600000).toISOString()},
+  {...partial,proposals:[row,row]},{...partial,proposals:[{...row,rank:20}]}
+ ];
+ for(const bad of invalid)assert.equal(decide(row,win,bad,d,now).approved,false);
+ assert.equal(decide(row,win,partial,{...d,verifiedAccounts:[]},now).approved,false);
+ assert.equal(decide(row,win,partial,{...d,results:[{...row,id:'existing'}]},now).approved,false);
+ const zero=candidate(41);
+ assert.equal(decide(zero.row,win,{...partial,proposals:[zero.row]},zero.d,now).approved,false);
+ assert.equal(decide(row,{...win,end:win.end+1000},partial,d,now).approved,false);
+});

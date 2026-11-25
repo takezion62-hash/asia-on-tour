@@ -1,8 +1,10 @@
 'use strict';
 const {selectRules,eventWindow}=require('./tournament-approval-policy.cjs');
-const {individualRankPrize,validMatchCount}=require('./tournament-rule-engine.cjs');
+const {individualRankPrize,validMatchCount,payingRank}=require('./tournament-rule-engine.cjs');
+const {verifiedPartialPage}=require('./verified-partial-page.cjs');
 // S39 NVIDIA GeForce RTX Cup: exact single-session Solo cash payout.
-// Confirm full official leaderboard, Epic account identity and archived event window.
+// Full leaderboard or mature, continuous prefix beyond the entire cash tier.
+// Epic account identity and archived event window are still mandatory.
 // Hardware/cosmetic awards are not converted into cash or claimed as delivered.
 const RULES=selectRules('nvidia');
 const archive=require('../calendar-history/2025-12.json').sessions;
@@ -18,20 +20,34 @@ function sameSession(a,b){
  return a.tournamentId===b.tournamentId&&a.date===b.date&&
    a.region===b.region&&(a.player===b.player||a.rank===b.rank);
 }
-function decide(row,win,checkpoint,data){
+// Deliberately limited to positive NVIDIA cash awards, not other tournaments,
+ // hardware awards, zero-cash rows or an arbitrary observed rank.
+function prizePrefixEvidence(row,win,cp,now=Date.now()){
+ const rule=nvidiaWindow(win);
+ if(!rule||row?.tournamentId!==rule.id||row.seasonId!==rule.seasonId||
+  row.region!==win.region||row.date!==win.dateJst||row.round!==win.round||
+  row.kind!=='参加確認'||row.verified!==true||row.reviewOnly!==true||row.prize!==null||
+  cp?.epicIdsRetained!==true||cp.complete!==false||
+  !Array.isArray(cp.proposals)||cp.proposals.filter(x=>x.id===row.id).length!==1)return false;
+ const cutoff=payingRank(rule,win.region),amount=payout(rule,win.region,row.rank);
+ return Number.isSafeInteger(cutoff)&&Number.isSafeInteger(amount)&&amount>0&&
+  Number.isSafeInteger(cp.lastSeenRank)&&cp.lastSeenRank>cutoff&&
+  verifiedPartialPage(row,win,cp,now);
+}
+function decide(row,win,checkpoint,data,now=Date.now()){
  const rule=nvidiaWindow(win);
  if(!rule)return decline('登録済みのS39 NVIDIA大会・地域・開催枠に一致しません');
  if(!row||!/^auto-s39-[0-9a-f]{12}$/.test(row.id||'')||
    row.verified!==true||row.reviewOnly!==true||
    row.kind!=='参加確認'||row.prize!==null)
    return decline('確認済みAPI参加候補の属性が不正');
- if(!checkpoint?.complete||checkpoint.rankingOrderValid!==true||
-   checkpoint.epicIdsRetained!==true||
-   !Number.isSafeInteger(checkpoint.nextPage)||
-   !Number.isSafeInteger(checkpoint.totalPages)||
-   checkpoint.totalPages<1||checkpoint.nextPage!==checkpoint.totalPages||
-   !Array.isArray(checkpoint.proposals)||
-   !checkpoint.proposals.some(x=>JSON.stringify(x)===JSON.stringify(row)))
+ const full=checkpoint?.complete===true&&checkpoint.rankingOrderValid===true&&
+   checkpoint.epicIdsRetained===true&&Number.isSafeInteger(checkpoint.nextPage)&&
+   Number.isSafeInteger(checkpoint.totalPages)&&checkpoint.totalPages>=1&&
+   checkpoint.nextPage===checkpoint.totalPages&&Array.isArray(checkpoint.proposals)&&
+   checkpoint.proposals.some(x=>JSON.stringify(x)===JSON.stringify(row));
+ const prefix=!full&&prizePrefixEvidence(row,win,checkpoint,now);
+ if(!full&&!prefix)
    return decline('全ページ連続の順位表・Epic ID付完全スナップショットが未確認');
  const catalog=data.tournaments?.catalog?.find(x=>x.id===rule.id);
  if(!catalog||catalog.name!==row.event||catalog.team!=='solo'||
@@ -84,7 +100,7 @@ function decide(row,win,checkpoint,data){
    kind:'賞金決勝',round:'Session 1 / 賞金決勝',prize,
    note:'2025 NVIDIA GeForce RTX Cup '+win.region+' '+row.rank+'位。'+
      (prize?'Epic公式個人賞金$'+prize+'を順位で照合。':'公式賞金圏外のため現金$0。')+
-     '全ページ・公式日時・本人Epic ID・既存記録との重複を検査。'+
+     (prefix?'開催終了4時間以降の連続順位表が公式賞金圏を越えていること（上位'+payingRank(rule,win.region)+'名、取得済み'+checkpoint.nextPage+'/'+checkpoint.totalPages+'ページ）を確認。全ページ未取得。公式日時・本人Epic ID・既存記録との重複を検査。':'全ページ・公式日時・本人Epic ID・既存記録との重複を検査。')+
      'GPU・コスメ報酬の受取および現金の支払完了は未確認。公式規則: '+rule.source},
    rule:rule.source};
 }
@@ -106,4 +122,4 @@ function evaluate(proposals,windows,checkpoints,data){
  }
  return {approved,held};
 }
-module.exports={RULES,payout,nvidiaWindow,sameSession,decide,evaluate};
+module.exports={RULES,payout,nvidiaWindow,sameSession,prizePrefixEvidence,decide,evaluate};

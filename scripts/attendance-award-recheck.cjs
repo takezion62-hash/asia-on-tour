@@ -54,18 +54,23 @@ function officialSlot(row,rule,context){
  return matches.length===1?{...ident,slot:matches[0]}:null;
 }
 function checkpointProof(cp,row,kind,rule,slot,now){
- if(cp?.complete!==true||cp.rankingOrderValid!==true||!Array.isArray(cp.proposals)||
+ if(!cp||cp.rankingOrderValid!==true||!Array.isArray(cp.proposals)||
   cp.lastError||cp.lastErrorCode||cp.retryAfter||cp.emptyAttempts>0||
   !Number.isSafeInteger(cp.nextPage)||cp.nextPage<1||cp.pages!==cp.nextPage||
   !Number.isSafeInteger(cp.totalPages)||cp.totalPages<cp.nextPage||
   !Number.isSafeInteger(cp.lastSeenRank)||cp.lastSeenRank<row.rank)return null;
  const end=Date.parse(slot.endUtc),observed=Date.parse(cp.lastSuccessAt||'');
  if(!Number.isFinite(observed)||observed<end+FOUR_HOURS||now<end+FOUR_HOURS||observed>now+300000)return null;
- // A PlayStation qualifier is complete for the top-80 cutoff when the
- // ordered continuous prefix passes that boundary. Cash still needs all pages.
- if(cp.nextPage!==cp.totalPages&&!(kind==='qualifier'&&cp.lastSeenRank>=rule.advance[row.region]))return null;
  const hits=cp.proposals.filter(c=>c.id===row.id);
  if(hits.length!==1||!exact(row,hits[0]))return null;
+ // Only the dedicated NVIDIA adapter can grant positive cash from a mature
+ // partial leaderboard. Never fake complete=true in the frozen audit proof.
+ const nvidiaPrefix=kind==='cash'&&rule.id==='ch7s1-nvidia-geforce-rtx-cup'&&
+  nv.prizePrefixEvidence(hits[0],{eventId:slot.eventId,windowId:slot.sourceWindowId,
+   tournamentId:row.tournamentId,seasonId:row.seasonId,region:row.region,
+   dateJst:row.date,series:rule.series,round:row.round,kind:row.kind,end},cp,now);
+ if(!nvidiaPrefix&&(cp.complete!==true||
+  (cp.nextPage!==cp.totalPages&&!(kind==='qualifier'&&cp.lastSeenRank>=rule.advance[row.region]))))return null;
  return {...Object.fromEntries(['complete','rankingOrderValid','epicIdsRetained','nextPage','pages','totalPages','lastSeenRank','lastSuccessAt','emptyAttempts'].filter(k=>cp[k]!==undefined).map(k=>[k,cp[k]])),proposals:[hits[0]]};
 }
 function inspect(row,entry,context,proof,now){
