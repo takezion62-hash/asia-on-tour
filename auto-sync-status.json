@@ -1,7 +1,7 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-25T03:34:53.308Z",
+  "checkedAt": "2026-11-25T12:02:25.574Z",
   "mode": "review",
   "scope": "recent",
   "dateMode": null,
@@ -10,15 +10,15 @@
   "toDate": null,
   "provider": "osirion",
   "linkedPlayers": 717,
-  "trackedWindows": 157,
+  "trackedWindows": 162,
   "found": 2,
   "skipped": 0,
-  "imported": 0,
+  "imported": 4,
   "scannedPages": 30,
-  "completedWindows": 141,
+  "completedWindows": 142,
   "identityConflicts": 3,
-  "alreadyRegistered": 308,
-  "autoApprovedTotal": 3603,
+  "alreadyRegistered": 310,
+  "autoApprovedTotal": 3609,
   "invalidCachedCandidates": 0,
   "manualReviewCandidates": 2,
   "autoApprovedCosmeticThisRun": 0,
@@ -30,7 +30,7 @@
   "transientFailures": 0,
   "malformedFailures": 0,
   "skippedLeaderboards": [],
-  "reviewOnlyWindows": 133,
+  "reviewOnlyWindows": 138,
   "reviewOnlyCandidates": 0,
   "unmappedEvents": 3,
   "unmappedEventIds": [
@@ -38,24 +38,24 @@
     "S43_ScottPilgrimCup_Mobile",
     "S43_ScottPilgrimCup_ZB"
   ],
-  "message": "最新版と安全統合：新規掲載0件、重複スキップ0件、要確認の競合0件、確認待ち2件。既存の戦績・賞金は保持。",
+  "message": "最新版と安全統合：新規掲載4件、重複スキップ0件、要確認の競合0件、確認待ち2件。既存の戦績・賞金は保持。",
   "concurrentMerge": {
-    "appended": 0,
+    "appended": 4,
     "alreadyPublished": 0,
     "reviewConflicts": 0,
     "keptPending": 2,
-    "reconciledAt": "2026-11-25T11:07:35.194Z"
+    "reconciledAt": "2026-11-25T12:02:33.672Z"
   },
   "coverage": {
-    "total": 157,
-    "completed": 141,
-    "notStarted": 7,
+    "total": 162,
+    "completed": 142,
+    "notStarted": 11,
     "partial": 9,
     "retryWaiting": 0,
     "retryDue": 0,
-    "remaining": 16,
+    "remaining": 20,
     "retryCount": 0,
-    "completionPercent": 89.8,
+    "completionPercent": 87.7,
     "byRegion": {
       "EU": {
         "total": 31,
@@ -63,9 +63,9 @@
         "pending": 4
       },
       "NAC": {
-        "total": 29,
+        "total": 31,
         "completed": 27,
-        "pending": 2
+        "pending": 4
       },
       "OCE": {
         "total": 25,
@@ -78,21 +78,21 @@
         "pending": 3
       },
       "BR": {
-        "total": 24,
+        "total": 25,
         "completed": 20,
-        "pending": 4
+        "pending": 5
       },
       "NAW": {
-        "total": 23,
-        "completed": 22,
-        "pending": 1
+        "total": 25,
+        "completed": 23,
+        "pending": 2
       }
     },
     "byYear": {
       "2026": {
-        "total": 157,
-        "completed": 141,
-        "pending": 16
+        "total": 162,
+        "completed": 142,
+        "pending": 20
       }
     },
     "outsideScopeCheckpoints": 36,
@@ -103,7 +103,7 @@
         "region": "EU",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 35,
+        "nextPage": 36,
         "totalPages": 86,
         "retryAfter": null,
         "errorCode": null
@@ -114,7 +114,7 @@
         "region": "NAC",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 11,
+        "nextPage": 12,
         "totalPages": 44,
         "retryAfter": null,
         "errorCode": null
@@ -125,7 +125,7 @@
         "region": "NAW",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 18,
+        "nextPage": 19,
         "totalPages": 20,
         "retryAfter": null,
         "errorCode": null
@@ -136,7 +136,7 @@
         "region": "BR",
         "series": "victory-cup",
         "status": "partial",
-        "nextPage": 5,
+        "nextPage": 8,
         "totalPages": 34,
         "retryAfter": null,
         "errorCode": null
@@ -147,7 +147,7 @@
         "region": "EU",
         "series": "victory-cup",
         "status": "partial",
-        "nextPage": 70,
+        "nextPage": 80,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
@@ -158,7 +158,7 @@
         "region": "NAC",
         "series": "victory-cup",
         "status": "partial",
-        "nextPage": 25,
+        "nextPage": 35,
         "totalPages": 66,
         "retryAfter": null,
         "errorCode": null
@@ -169,7 +169,7 @@
         "region": "BR",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 1,
+        "nextPage": 2,
         "totalPages": 4,
         "retryAfter": null,
         "errorCode": null
@@ -180,7 +180,7 @@
         "region": "EU",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 2,
+        "nextPage": 3,
         "totalPages": 13,
         "retryAfter": null,
         "errorCode": null
@@ -191,7 +191,7 @@
         "region": "ME",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 1,
+        "nextPage": 2,
         "totalPages": 4,
         "retryAfter": null,
         "errorCode": null
@@ -259,17 +259,17 @@
     "minRequestIntervalMs": 1200,
     "reason": "steady-state",
     "requests": 36,
-    "waitedMs": 7841,
+    "waitedMs": 6625,
     "intervalMs": 1200
   },
-  "autoApprovedPlayStationThisRun": 2,
+  "autoApprovedPlayStationThisRun": 4,
   "autoApprovedSquadsThisRun": 0,
   "autoApprovedConsoleDuosThisRun": 0,
   "unmappedDiscovery": {
     "version": 1,
     "provider": "osirion",
     "scope": "recent",
-    "observedAt": "2026-11-25T03:34:01.399Z",
+    "observedAt": "2026-11-25T12:01:35.621Z",
     "totalEvents": 3,
     "entries": [
       {
@@ -553,5 +553,99 @@
       }
     ],
     "automaticPublicationAuthorized": false
+  },
+  "automationMetrics": {
+    "version": 1,
+    "scope": "auto",
+    "latest": {
+      "runId": "e87ca700a3168ee820fd6eb5",
+      "measuredAt": "2026-11-25T12:02:25.574Z",
+      "mode": "provider-scan",
+      "pendingAtStart": 2,
+      "newCandidates": 4,
+      "observedCandidates": 6,
+      "oldPublished": 0,
+      "oldDuplicateResolved": 0,
+      "oldPendingAfter": 2,
+      "oldOtherRemoved": 0,
+      "published": 4,
+      "newPublished": 4,
+      "newPendingAfter": 0,
+      "newOtherNotPublished": 0,
+      "autoResolutionRate": 0,
+      "autoPublicationRate": 66.67,
+      "newCandidatePublicationRate": 100,
+      "pendingAtEnd": 2,
+      "concurrentPublishedOrReviewed": 0,
+      "skippedApprovalDuplicates": 0,
+      "conflicts": 0,
+      "scannedPages": 30,
+      "providerRequests": 36,
+      "savedRecheck": null
+    },
+    "runs": [
+      {
+        "runId": "e87ca700a3168ee820fd6eb5",
+        "measuredAt": "2026-11-25T12:02:25.574Z",
+        "mode": "provider-scan",
+        "pendingAtStart": 2,
+        "newCandidates": 4,
+        "observedCandidates": 6,
+        "oldPublished": 0,
+        "oldDuplicateResolved": 0,
+        "oldPendingAfter": 2,
+        "oldOtherRemoved": 0,
+        "published": 4,
+        "newPublished": 4,
+        "newPendingAfter": 0,
+        "newOtherNotPublished": 0,
+        "autoResolutionRate": 0,
+        "autoPublicationRate": 66.67,
+        "newCandidatePublicationRate": 100,
+        "pendingAtEnd": 2,
+        "concurrentPublishedOrReviewed": 0,
+        "skippedApprovalDuplicates": 0,
+        "conflicts": 0,
+        "scannedPages": 30,
+        "providerRequests": 36,
+        "savedRecheck": null
+      }
+    ],
+    "rolling": {
+      "last7Runs": {
+        "runs": 1,
+        "pendingAtStart": 2,
+        "newCandidates": 4,
+        "observedCandidates": 6,
+        "oldPublished": 0,
+        "oldDuplicateResolved": 0,
+        "oldPendingAfter": 2,
+        "oldOtherRemoved": 0,
+        "published": 4,
+        "newPublished": 4,
+        "newPendingAfter": 0,
+        "newOtherNotPublished": 0,
+        "autoResolutionRate": 0,
+        "autoPublicationRate": 66.67,
+        "newCandidatePublicationRate": 100
+      },
+      "last30Runs": {
+        "runs": 1,
+        "pendingAtStart": 2,
+        "newCandidates": 4,
+        "observedCandidates": 6,
+        "oldPublished": 0,
+        "oldDuplicateResolved": 0,
+        "oldPendingAfter": 2,
+        "oldOtherRemoved": 0,
+        "published": 4,
+        "newPublished": 4,
+        "newPendingAfter": 0,
+        "newOtherNotPublished": 0,
+        "autoResolutionRate": 0,
+        "autoPublicationRate": 66.67,
+        "newCandidatePublicationRate": 100
+      }
+    }
   }
 }
