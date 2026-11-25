@@ -8,8 +8,9 @@ const {linkedAccounts}=require('./osirion-sync.cjs');
 const ps=require('./automatic-playstation-approval.cjs');
 const nv=require('./automatic-nvidia-approval.cjs');
 const cash=require('./automatic-cash-approval.cjs');
+const unreal=require('./automatic-unreal-approval.cjs');
 const {leaderboardCoverage,coversRankBoundary}=require('./verified-partial-page.cjs');
-const {individualRankPrize}=require('./tournament-rule-engine.cjs');
+const {individualRankPrize,teamRankPrize}=require('./tournament-rule-engine.cjs');
 const ROOT=path.resolve(__dirname,'..'),HISTORY='attendance-award-recheck-history.json';
 const SCANS=['auto-sync-scan.json','history-sync-scan.json'];
 const json=JSON.stringify,hash=x=>crypto.createHash('sha256').update(json(x)).digest('hex');
@@ -18,11 +19,14 @@ const roster=r=>r.players||[r.player];
 const fields=['id','date','region','player','playerRaw','event','round','rank','points','kills','vrs','prize','kind','matches','seasonId','chapter','season','tournamentId','source','verified','players'];
 function route(row){
  if(row?.kind!=='参加確認'||row.prize!==null||row.verified!==true||row.reviewOnly===true)return null;
- const p=ps.RULES[row.tournamentId],n=nv.RULES[row.tournamentId],c=cash.RULES[row.tournamentId];
+ const p=ps.RULES[row.tournamentId],n=nv.RULES[row.tournamentId],c=cash.RULES[row.tournamentId],u=unreal.RULES[row.tournamentId];
  if(p&&row.round==='Qualifier / 参加確認'&&Number.isSafeInteger(row.rank)&&row.rank>=1&&row.rank<=p.advance?.[row.region])return {adapter:ps,rule:p,kind:'qualifier'};
  if(p&&row.round==='Final / 参加確認'&&individualRankPrize(p,row.region,row.rank)>0)return {adapter:ps,rule:p,kind:'cash'};
  if(n&&individualRankPrize(n,row.region,row.rank)>0)return {adapter:nv,rule:n,kind:'cash'};
- if(c?.id==='ch7s5-trios-cash-cup'&&individualRankPrize(c,row.region,row.rank)>0)return {adapter:cash,rule:c,kind:'cash'};
+ if(u&&teamRankPrize(u,row.region,row.rank)?.team>0)return {adapter:unreal,rule:u,kind:'cash'};
+ if(c&&individualRankPrize(c,row.region,row.rank)>0&&(
+   c.cashFinalAutoApproval==='verified-duo-round2-rank'?/^Event [1-9][0-9]* · Round 2 \/ 参加確認$/.test(row.round):
+   /^Event [1-9][0-9]* \/ 参加確認$/.test(row.round)))return {adapter:cash,rule:c,kind:'cash'};
  return null;
 }
 function identity(row,rule){
@@ -58,15 +62,15 @@ function checkpointProof(cp,row,kind,rule,slot,now){
  if(coverage.kind==='invalid'||!Array.isArray(cp.proposals))return null;
  const hits=cp.proposals.filter(c=>c.id===row.id);
  if(hits.length!==1||!exact(row,hits[0]))return null;
- // Only the dedicated NVIDIA adapter can grant positive cash from a mature
- // partial leaderboard. Never fake complete=true in the frozen audit proof.
- const nvidiaPrefix=kind==='cash'&&rule.id==='ch7s1-nvidia-geforce-rtx-cup'&&
-  nv.prizePrefixEvidence(hits[0],{eventId:slot.eventId,windowId:slot.sourceWindowId,
-   tournamentId:row.tournamentId,seasonId:row.seasonId,region:row.region,
-   dateJst:row.date,series:rule.series,round:row.round,kind:row.kind,end},cp,now);
+ // Only a registered rank-cash adapter may authorize a positive award.
+ const adapter=[nv,cash,unreal,ps].find(a=>a.RULES[rule.id]);
+ const rankCashPrefix=kind==='cash'&&adapter?.prizePrefixEvidence(hits[0],{
+   eventId:slot.eventId,windowId:slot.sourceWindowId,tournamentId:row.tournamentId,
+   seasonId:row.seasonId,region:row.region,dateJst:row.date,series:rule.series,
+   round:row.round,kind:row.kind,end},cp,now);
  const qualifierCapped=coverage.kind==='cutoff-complete'&&kind==='qualifier'&&
   coversRankBoundary(coverage,rule.advance[row.region],{inclusive:true});
- if(!nvidiaPrefix&&coverage.kind!=='full'&&!qualifierCapped)return null;
+ if(!rankCashPrefix&&coverage.kind!=='full'&&!qualifierCapped)return null;
  return {...Object.fromEntries(['complete','rankingOrderValid','epicIdsRetained','nextPage','pages','totalPages','lastSeenRank','lastSuccessAt','emptyAttempts'].filter(k=>cp[k]!==undefined).map(k=>[k,cp[k]])),proposals:[hits[0]]};
 }
 function inspect(row,entry,context,proof,now){

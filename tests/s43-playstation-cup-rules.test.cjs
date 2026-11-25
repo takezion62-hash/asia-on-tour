@@ -153,3 +153,16 @@ test('official payout, top80, event ID, mode, spray and caps are immutable under
   }
  }
 });
+
+test('both PlayStation final modes use the actual regional cash boundary; qualifier policy is unchanged',()=>{
+ for(const eventId of [BR,ZB])for(const region of ['OCE','EU']){
+  const w=win(eventId,'Final',region),r=row(w,1),cutoff=region==='EU'?50:25;
+  const p={...cp(r),complete:false,pages:1,nextPage:1,totalPages:10,lastSeenRank:cutoff+1,lastSuccessAt:new Date(w.end+5*3600000).toISOString()};
+  const out=decide(r,w,p,database(),now(w));assert.equal(out.approved,true,out.reason);
+  assert.equal(out.record.prize,payout(ruleFor(eventId),region,1));assert.match(out.record.note,/全ページ未取得/);
+  for(const bad of [{...p,lastSeenRank:cutoff},{...p,epicIdsRetained:false},{...p,proposals:[r,r]},{...p,retryAfter:'pending'}])
+   assert.equal(decide(r,w,bad,database(),now(w)).approved,false);
+  const q=win(eventId,'Qualifier',region),qr=row(q,1);
+  assert.equal(decide(qr,q,{...p,proposals:[qr],lastSeenRank:100},database(),now(q)).approved,false);
+ }
+});

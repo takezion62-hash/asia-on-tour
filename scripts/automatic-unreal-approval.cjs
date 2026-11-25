@@ -1,6 +1,7 @@
 'use strict';
 const {selectRules,eventWindow}=require('./tournament-approval-policy.cjs');
-const {teamRankPrize,validMatchCount}=require('./tournament-rule-engine.cjs');
+const {teamRankPrize,validMatchCount,payingRank}=require('./tournament-rule-engine.cjs');
+const {verifiedRankBoundary}=require('./verified-partial-page.cjs');
 // $1M Unreal Cup S39: official single-session duo prize ladder. Exact full leaderboard,
 // all two Epic IDs and dated Epic window must match. Never count prizes from VR alone.
 const RULES=selectRules('unreal');
@@ -22,16 +23,26 @@ function sameSession(left,right){
  // a different round description but must still block duplicate cash.
  return true;
 }
-function decide(row,win,checkpoint,data){
+function prizePrefixEvidence(row,win,cp,now=Date.now()){
+ const rule=unrealWindow(win);
+ if(!rule||row?.tournamentId!==rule.id||row.seasonId!==win.seasonId||row.region!==win.region||
+  row.date!==win.dateJst||row.round!==win.round||row.kind!=='参加確認'||row.verified!==true||
+  row.reviewOnly!==true||row.prize!==null||cp?.complete!==false)return false;
+ const award=payout(rule,win.region,row.rank);
+ return !!award&&award.team>0&&verifiedRankBoundary(row,win,cp,payingRank(rule,win.region,'per-team'),
+  {now,requireEpicIds:true,unique:true});
+}
+function decide(row,win,checkpoint,data,now=Date.now()){
  const rule=unrealWindow(win);
  if(!rule)return decline('S39 Unreal Cupの正確な大会・地域・開催枠ではありません');
  if(!row||row.id?.match(/^auto-s39-[a-f0-9]{12}$/)==null||row.verified!==true||
     row.reviewOnly!==true||row.kind!=='参加確認'||row.prize!==null)
    return decline('確認済みAPI候補の属性が不正');
- if(!checkpoint?.complete||checkpoint.rankingOrderValid!==true||
+ const prefix=prizePrefixEvidence(row,win,checkpoint,now);
+ if(!prefix&&(!checkpoint?.complete||checkpoint.rankingOrderValid!==true||
     !Number.isSafeInteger(checkpoint.nextPage)||checkpoint.nextPage!==checkpoint.totalPages||
     checkpoint.epicIdsRetained!==true||!Array.isArray(checkpoint.proposals)||
-    !checkpoint.proposals.some(x=>JSON.stringify(x)===JSON.stringify(row)))
+    !checkpoint.proposals.some(x=>JSON.stringify(x)===JSON.stringify(row))))
    return decline('全ページ連続順位・本人Epic ID付きの完全なスナップショットが未確認');
  const tournament=data.tournaments?.catalog?.find(x=>x.id===rule.id);
  if(!tournament||tournament.name!==row.event||tournament.seasonId!==rule.seasonId||
@@ -81,7 +92,7 @@ function decide(row,win,checkpoint,data){
    note:'2025年$1 Million Unreal Cup '+win.region+' '+row.rank+'位。Epic公式のチーム賞金$'+
     award.team+'（2人それぞれ$'+award.perPlayer+'）。'+
     (award.team===0?'賞金圏外を$0で記録。':'規定の賞金獲得順位を公式規則で確認。')+
-    '公式開催枠、全順位ページの連続性、2人の確認済みEpic ID、重複を照合。受給資格や支払完了は未確認。規則: '+rule.source},
+    (prefix?'終了4時間後以降の連続順位表が公式賞金圏（上位'+payingRank(rule,win.region,'per-team')+'組）を越えたことを確認。取得済み'+checkpoint.nextPage+'/'+checkpoint.totalPages+'ページ（全ページ未取得）。公式開催枠、2人の確認済みEpic ID、重複を照合。':'公式開催枠、全順位ページの連続性、2人の確認済みEpic ID、重複を照合。')+'受給資格や支払完了は未確認。規則: '+rule.source},
    rule:rule.source};
 }
 function evaluate(proposals,windows,checkpoints,data){
@@ -100,4 +111,4 @@ function evaluate(proposals,windows,checkpoints,data){
  }
  return {approved,held};
 }
-module.exports={RULES,payout,unrealWindow,sameSession,decide,evaluate};
+module.exports={RULES,payout,unrealWindow,sameSession,prizePrefixEvidence,decide,evaluate};

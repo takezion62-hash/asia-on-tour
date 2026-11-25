@@ -54,3 +54,16 @@ test('NVIDIA positive prize prefix is frozen accurately; other cash still needs 
  assert.equal(M.checkpointProof({...cp,lastErrorCode:'429'},old,'cash',n,slot,now),null);
  assert.equal(M.checkpointProof(cp,old,'cash',rule,slot,now),null);
 });
+
+test('registered PlayStation final partial proof is frozen, but cannot authorize a qualifier or wrong regional boundary',()=>{
+ const slot=read('calendar-history/2026-11.json').sessions.find(s=>s.tournamentId===rule.id&&s.region==='OCE'&&s.stage==='決勝');
+ assert.ok(slot,'official PlayStation final missing');
+ const old={...row,round:'Final / 参加確認',rank:20,seasonId:rule.seasonId,date:slot.dateJst};
+ const candidate={...old,reviewOnly:true,teamAccountIds:['a'.repeat(32)]};
+ const end=Date.parse(slot.endUtc),now=end+48*3600000;
+ const cp={complete:false,rankingOrderValid:true,epicIdsRetained:true,pages:1,nextPage:1,totalPages:10,lastSeenRank:100,lastSuccessAt:new Date(end+5*3600000).toISOString(),proposals:[candidate]};
+ const frozen=M.checkpointProof(cp,old,'cash',rule,slot,now);
+ assert.ok(frozen);assert.equal(frozen.complete,false);assert.deepEqual(M.checkpointProof(frozen,old,'cash',rule,slot,now),frozen);
+ assert.equal(M.checkpointProof({...cp,lastSeenRank:25},old,'cash',rule,slot,now),null);
+ assert.equal(M.checkpointProof(cp,old,'qualifier',rule,slot,now),null);
+});

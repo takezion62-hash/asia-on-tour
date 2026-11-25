@@ -137,3 +137,14 @@ test('large official standings remain valid for Unreal and legacy cash cups',asy
   assert.equal(cash.totalPages,175);
  }finally{globalThis.fetch=original}
 });
+
+test('Unreal positive cash requires the regional per-team payout boundary and both Epic IDs',()=>{
+ const {d,row,cp}=candidate(),now=win.end+48*3600000;
+ const p={...cp,complete:false,pages:3,nextPage:3,totalPages:100,lastSeenRank:300,lastSuccessAt:new Date(win.end+5*3600000).toISOString()};
+ const out=decide(row,win,p,d,now);assert.equal(out.approved,true,out.reason);
+ assert.equal(out.record.prize,100);assert.equal(out.record.prizePerPlayer,50);assert.match(out.record.note,/全ページ未取得/);
+ for(const bad of [{...p,lastSeenRank:250},{...p,epicIdsRetained:false},{...p,lastErrorCode:'429'},{...p,proposals:[row,row]},{...p,lastSuccessAt:new Date(win.end+3600000).toISOString()}])
+  assert.equal(decide(row,win,bad,d,now).approved,false);
+ assert.equal(decide(row,win,p,{...d,verifiedAccounts:d.verifiedAccounts.slice(0,1)},now).approved,false);
+ const unpaid=candidate(251);assert.equal(decide(unpaid.row,win,{...p,proposals:[unpaid.row]},unpaid.d,now).approved,false);
+});

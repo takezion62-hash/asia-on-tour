@@ -64,3 +64,11 @@ test('offline NVIDIA recheck uses exact mature positive cash prefix, not a full-
  assert.equal(recheckSaved({...db,checkpoints:{[key]:{...cp,lastSeenRank:40}}}).approved.length,0);
  assert.equal(recheckSaved({...db,reviewedIds:[id]}).approved.length,0);
 });
+
+test('offline saved Trios positive cash uses the same official mature payout prefix',()=>{
+ const db=fixture(),r=db.queue.proposals[0],cp=db.checkpoints[key];
+ r.rank=1;cp.proposals[0].rank=1;cp.complete=false;cp.nextPage=1;cp.pages=1;
+ const out=recheckSaved(db);assert.equal(out.approved.length,1,JSON.stringify(out));assert.equal(out.approved[0].prize,900);
+ assert.equal(recheckSaved({...db,config:{}}).approved.length,0);
+ assert.equal(recheckSaved({...db,checkpoints:{[key]:{...cp,lastSeenRank:1}}}).approved.length,0);
+});

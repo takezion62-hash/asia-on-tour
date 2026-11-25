@@ -1,11 +1,11 @@
 'use strict';
 const {selectRules,matchesWindow}=require('./tournament-approval-policy.cjs');
-const {individualRankPrize,matchCap,qualifies,namedRound}=require('./tournament-rule-engine.cjs');
+const {individualRankPrize,matchCap,qualifies,namedRound,payingRank}=require('./tournament-rule-engine.cjs');
 // Epic 2026-11-20 S43 PlayStation Cup official regulations.
 // Independently classify PS4/PS5 Solo Battle Royale and Zero Build.
 // Only source-backed known Epic accounts and complete, mature scoreboard
 // checkpoints qualify. Finals pay by PLACEMENT, never by VR count.
-const {sameScannedCandidate,FOUR_HOURS}=require('./verified-partial-page.cjs');
+const {sameScannedCandidate,FOUR_HOURS,verifiedRankBoundary}=require('./verified-partial-page.cjs');
 const RULES=selectRules('playstation');
 const REGIONS=new Set(['ME','EU','NAC','NAW','OCE','BR']); // ASIA is not an overseas region.
 const decline=reason=>({approved:false,reason});
@@ -25,6 +25,15 @@ function sameSession(a,b){
  // Do not turn a manually reported, source-unclear match into a duplicate.
  return String(a.round||'').includes('Final')===String(b.round||'').includes('Final');
 }
+function prizePrefixEvidence(row,win,cp,now=Date.now()){
+ const stage=stageFor(win),rule=stage?.rule;
+ if(!stage?.final||row?.tournamentId!==rule.id||row.seasonId!==win.seasonId||row.region!==win.region||
+  row.date!==win.dateJst||row.round!==win.round||row.kind!=='参加確認'||row.verified!==true||
+  row.reviewOnly!==true||row.prize!==null||cp?.complete!==false)return false;
+ const amount=payout(rule,win.region,row.rank);
+ return Number.isSafeInteger(amount)&&amount>0&&verifiedRankBoundary(row,win,cp,payingRank(rule,win.region),
+  {now,requireEpicIds:true,unique:true});
+}
 function decide(row,win,cp,data,now=Date.now()){
  const stage=stageFor(win),rule=stage?.rule;
  if(!stage)return decline('公式S43 PlayStation BR/ZBのRound1/Finalと一致しません');
@@ -32,9 +41,10 @@ function decide(row,win,cp,data,now=Date.now()){
    row.kind!=='参加確認'||row.prize!==null||
    !/^auto-s43-[a-f0-9]{12}$/.test(row.id||''))
    return decline('公開前のEpic公式スキャン候補属性が不一致');
- if(!cp||cp.complete!==true||cp.rankingOrderValid!==true||
+ const prefix=prizePrefixEvidence(row,win,cp,now);
+ if(!prefix&&(!cp||cp.complete!==true||cp.rankingOrderValid!==true||
    cp.epicIdsRetained!==true||!Array.isArray(cp.proposals)||
-   cp.proposals.filter(x=>sameScannedCandidate(x,row)).length!==1)
+   cp.proposals.filter(x=>sameScannedCandidate(x,row)).length!==1))
    return decline('完了した保存済み順位表・本人Epic IDの連続性が未確認');
  if(!Number.isFinite(win.end)||now-win.end<FOUR_HOURS||
    !Number.isFinite(Date.parse(win.startUtc))||Date.parse(win.startUtc)>=win.end)
@@ -99,7 +109,8 @@ function decide(row,win,cp,data,now=Date.now()){
    record:{...base,kind:'賞金決勝',round:'Final / 賞金決勝',
      prize,note:'2026 PlayStation Cup '+rule.mode+' '+win.region+'決勝'+row.rank+
       '位。公式Attachment Cの個人順位賞金$'+prize+
-      '（VR '+row.vrs+'回とは独立）。全順位表・Epic ID・公式開催枠・重複を照合。'+
+      '（VR '+row.vrs+'回とは独立）。'+
+      (prefix?'終了4時間後以降の連続順位表が公式賞金圏（上位'+payingRank(rule,win.region)+'名）を越えたことを確認。取得済み'+cp.nextPage+'/'+cp.totalPages+'ページ（全ページ未取得）。Epic ID・公式開催枠・重複を照合。':'全順位表・Epic ID・公式開催枠・重複を照合。')+
       '資格確認・支払完了は未確認。規則: '+rule.source},
    rule:rule.source};
 }
@@ -120,4 +131,4 @@ function evaluate(proposals,windows,checkpoints,data,now=Date.now()){
  }
  return {approved,held,participationIds};
 }
-module.exports={RULES,payout,stageFor,sameSession,decide,evaluate};
+module.exports={RULES,payout,stageFor,sameSession,prizePrefixEvidence,decide,evaluate};

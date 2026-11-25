@@ -65,7 +65,12 @@ function recheckSaved({queue,checkpoints,windows,data,config,reviewedIds=[],othe
    require('./automatic-console-duos-approval.cjs').qualifierEvidence(row,win,proof[0].cp,now);
   const nvidiaPrefix=config.autoApproveNvidia===true&&
    require('./automatic-nvidia-approval.cjs').prizePrefixEvidence(proof[0].row,win,proof[0].cp,now);
-  if(!mature(proof[0].cp,win,row,now)&&!consolePrefix&&!nvidiaPrefix){
+  const rankCashPrefix=[
+   ['autoApproveCash','./automatic-cash-approval.cjs'],
+   ['autoApproveUnreal','./automatic-unreal-approval.cjs'],
+   ['autoApprovePlayStation','./automatic-playstation-approval.cjs']
+  ].some(([flag,adapter])=>config[flag]===true&&require(adapter).prizePrefixEvidence(proof[0].row,win,proof[0].cp,now));
+  if(!mature(proof[0].cp,win,row,now)&&!consolePrefix&&!nvidiaPrefix&&!rankCashPrefix){
    held.push({id:row.id,reason:'成熟済み完全順位表が未確認'});continue;
   }
   if(!identityProof(row,win,data.verifiedAccounts||[],cat.team)){
