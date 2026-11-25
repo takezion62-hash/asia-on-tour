@@ -13,8 +13,8 @@ const ROOT=path.resolve(__dirname,'..'),AUDIT='published-attendance-phase5-histo
 const read=(root,name)=>JSON.parse(fs.readFileSync(path.join(root,name),'utf8'));
 const write=(root,name,value)=>fs.writeFileSync(path.join(root,name),JSON.stringify(value,null,2)+'\n');
 const hash=x=>crypto.createHash('sha256').update(JSON.stringify(x)).digest('hex');
-function buildWindows(results,catalog,sessions){
- const byId=new Map(catalog.map(t=>[t.id,t])),wanted=new Set(results.filter(r=>r.kind==='参加確認').map(sourceWindow).filter(Boolean));
+function buildWindows(results,catalog,sessions,{allKinds=false}={}){
+ const byId=new Map(catalog.map(t=>[t.id,t])),wanted=new Set(results.filter(r=>allKinds||r.kind==='参加確認').map(sourceWindow).filter(Boolean));
  const windows=[];
  for(const s of sessions){
   const t=byId.get(s.tournamentId);
