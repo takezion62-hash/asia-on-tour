@@ -1,7 +1,7 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-25T13:01:40.700Z",
+  "checkedAt": "2026-11-25T14:25:30.312Z",
   "mode": "review",
   "scope": "recent",
   "dateMode": null,
@@ -10,19 +10,19 @@
   "toDate": null,
   "provider": "osirion",
   "linkedPlayers": 717,
-  "trackedWindows": 162,
+  "trackedWindows": 163,
   "found": 2,
   "skipped": 0,
-  "imported": 0,
+  "imported": 3,
   "scannedPages": 30,
-  "completedWindows": 143,
+  "completedWindows": 147,
   "identityConflicts": 3,
   "alreadyRegistered": 314,
-  "autoApprovedTotal": 3642,
+  "autoApprovedTotal": 3645,
   "invalidCachedCandidates": 0,
   "manualReviewCandidates": 2,
   "autoApprovedCosmeticThisRun": 0,
-  "autoApprovedCashThisRun": 0,
+  "autoApprovedCashThisRun": 3,
   "autoApprovedPerformanceThisRun": 0,
   "autoApprovedUnrealThisRun": 0,
   "timeLimitReached": false,
@@ -30,7 +30,7 @@
   "transientFailures": 0,
   "malformedFailures": 0,
   "skippedLeaderboards": [],
-  "reviewOnlyWindows": 138,
+  "reviewOnlyWindows": 139,
   "reviewOnlyCandidates": 0,
   "unmappedEvents": 3,
   "unmappedEventIds": [
@@ -38,29 +38,29 @@
     "S43_ScottPilgrimCup_Mobile",
     "S43_ScottPilgrimCup_ZB"
   ],
-  "message": "最新版と安全統合：新規掲載0件、重複スキップ0件、要確認の競合0件、確認待ち2件。既存の戦績・賞金は保持。",
+  "message": "最新版と安全統合：新規掲載3件、重複スキップ0件、要確認の競合0件、確認待ち2件。既存の戦績・賞金は保持。",
   "concurrentMerge": {
-    "appended": 0,
+    "appended": 3,
     "alreadyPublished": 0,
     "reviewConflicts": 0,
     "keptPending": 2,
-    "reconciledAt": "2026-11-25T13:01:47.771Z"
+    "reconciledAt": "2026-11-25T14:25:36.358Z"
   },
   "coverage": {
-    "total": 162,
-    "completed": 143,
+    "total": 163,
+    "completed": 147,
     "notStarted": 10,
-    "partial": 9,
+    "partial": 6,
     "retryWaiting": 0,
     "retryDue": 0,
-    "remaining": 19,
+    "remaining": 16,
     "retryCount": 0,
-    "completionPercent": 88.3,
+    "completionPercent": 90.2,
     "byRegion": {
       "EU": {
         "total": 31,
-        "completed": 27,
-        "pending": 4
+        "completed": 28,
+        "pending": 3
       },
       "NAC": {
         "total": 31,
@@ -68,19 +68,19 @@
         "pending": 4
       },
       "OCE": {
-        "total": 25,
-        "completed": 23,
+        "total": 26,
+        "completed": 24,
         "pending": 2
       },
       "ME": {
         "total": 25,
-        "completed": 22,
-        "pending": 3
+        "completed": 23,
+        "pending": 2
       },
       "BR": {
         "total": 25,
-        "completed": 20,
-        "pending": 5
+        "completed": 21,
+        "pending": 4
       },
       "NAW": {
         "total": 25,
@@ -90,9 +90,9 @@
     },
     "byYear": {
       "2026": {
-        "total": 162,
-        "completed": 143,
-        "pending": 19
+        "total": 163,
+        "completed": 147,
+        "pending": 16
       }
     },
     "outsideScopeCheckpoints": 36,
@@ -103,7 +103,7 @@
         "region": "EU",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 37,
+        "nextPage": 38,
         "totalPages": 86,
         "retryAfter": null,
         "errorCode": null
@@ -114,7 +114,7 @@
         "region": "NAC",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 13,
+        "nextPage": 14,
         "totalPages": 44,
         "retryAfter": null,
         "errorCode": null
@@ -125,19 +125,8 @@
         "region": "BR",
         "series": "victory-cup",
         "status": "partial",
-        "nextPage": 11,
+        "nextPage": 14,
         "totalPages": 34,
-        "retryAfter": null,
-        "errorCode": null
-      },
-      {
-        "window": "epicgames_S43_SquadsVictoryCup_EU/S43_SquadsVictoryCup_Event2_Round1_EU",
-        "date": "2026-11-24",
-        "region": "EU",
-        "series": "victory-cup",
-        "status": "partial",
-        "nextPage": 90,
-        "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
       },
@@ -147,19 +136,8 @@
         "region": "NAC",
         "series": "victory-cup",
         "status": "partial",
-        "nextPage": 45,
+        "nextPage": 55,
         "totalPages": 66,
-        "retryAfter": null,
-        "errorCode": null
-      },
-      {
-        "window": "epicgames_S43_ArenaCashCup_BR/S43_ArenaCashCup_Event2_BR",
-        "date": "2026-11-25",
-        "region": "BR",
-        "series": "cash-cup",
-        "status": "partial",
-        "nextPage": 3,
-        "totalPages": 4,
         "retryAfter": null,
         "errorCode": null
       },
@@ -169,19 +147,8 @@
         "region": "EU",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 4,
+        "nextPage": 5,
         "totalPages": 13,
-        "retryAfter": null,
-        "errorCode": null
-      },
-      {
-        "window": "epicgames_S43_ArenaCashCup_ME/S43_ArenaCashCup_Event2_ME",
-        "date": "2026-11-25",
-        "region": "ME",
-        "series": "cash-cup",
-        "status": "partial",
-        "nextPage": 3,
-        "totalPages": 4,
         "retryAfter": null,
         "errorCode": null
       },
@@ -191,7 +158,7 @@
         "region": "NAW",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 1,
+        "nextPage": 2,
         "totalPages": 4,
         "retryAfter": null,
         "errorCode": null
@@ -220,6 +187,39 @@
       },
       {
         "window": "epicgames_S43_PlayStationCup_ME/S43_PlayStationCup_Qualifier_ME",
+        "date": "2026-11-24",
+        "region": "ME",
+        "series": "playstation-cup",
+        "status": "notStarted",
+        "nextPage": 0,
+        "totalPages": null,
+        "retryAfter": null,
+        "errorCode": null
+      },
+      {
+        "window": "epicgames_S43_PlayStationCup_ZB_BR/S43_PlayStationCup_ZB_Qualifier_BR",
+        "date": "2026-11-24",
+        "region": "BR",
+        "series": "playstation-cup",
+        "status": "notStarted",
+        "nextPage": 0,
+        "totalPages": null,
+        "retryAfter": null,
+        "errorCode": null
+      },
+      {
+        "window": "epicgames_S43_PlayStationCup_ZB_EU/S43_PlayStationCup_ZB_Qualifier_EU",
+        "date": "2026-11-24",
+        "region": "EU",
+        "series": "playstation-cup",
+        "status": "notStarted",
+        "nextPage": 0,
+        "totalPages": null,
+        "retryAfter": null,
+        "errorCode": null
+      },
+      {
+        "window": "epicgames_S43_PlayStationCup_ZB_ME/S43_PlayStationCup_ZB_Qualifier_ME",
         "date": "2026-11-24",
         "region": "ME",
         "series": "playstation-cup",
@@ -259,7 +259,7 @@
     "minRequestIntervalMs": 1200,
     "reason": "steady-state",
     "requests": 36,
-    "waitedMs": 5151,
+    "waitedMs": 5839,
     "intervalMs": 1200
   },
   "autoApprovedPlayStationThisRun": 0,
@@ -269,7 +269,7 @@
     "version": 1,
     "provider": "osirion",
     "scope": "recent",
-    "observedAt": "2026-11-25T13:00:58.170Z",
+    "observedAt": "2026-11-25T14:24:38.269Z",
     "totalEvents": 3,
     "entries": [
       {
@@ -558,23 +558,23 @@
     "version": 1,
     "scope": "auto",
     "latest": {
-      "runId": "259e52e47bc52f933ed1565d",
-      "measuredAt": "2026-11-25T13:01:40.700Z",
+      "runId": "1545e8ebfa397db7e4b56dd2",
+      "measuredAt": "2026-11-25T14:25:30.312Z",
       "mode": "provider-scan",
       "pendingAtStart": 2,
-      "newCandidates": 0,
-      "observedCandidates": 2,
+      "newCandidates": 3,
+      "observedCandidates": 5,
       "oldPublished": 0,
       "oldDuplicateResolved": 0,
       "oldPendingAfter": 2,
       "oldOtherRemoved": 0,
-      "published": 0,
-      "newPublished": 0,
+      "published": 3,
+      "newPublished": 3,
       "newPendingAfter": 0,
       "newOtherNotPublished": 0,
       "autoResolutionRate": 0,
-      "autoPublicationRate": 0,
-      "newCandidatePublicationRate": null,
+      "autoPublicationRate": 60,
+      "newCandidatePublicationRate": 100,
       "pendingAtEnd": 2,
       "concurrentPublishedOrReviewed": 0,
       "skippedApprovalDuplicates": 0,
@@ -635,41 +635,67 @@
         "scannedPages": 30,
         "providerRequests": 36,
         "savedRecheck": null
+      },
+      {
+        "runId": "1545e8ebfa397db7e4b56dd2",
+        "measuredAt": "2026-11-25T14:25:30.312Z",
+        "mode": "provider-scan",
+        "pendingAtStart": 2,
+        "newCandidates": 3,
+        "observedCandidates": 5,
+        "oldPublished": 0,
+        "oldDuplicateResolved": 0,
+        "oldPendingAfter": 2,
+        "oldOtherRemoved": 0,
+        "published": 3,
+        "newPublished": 3,
+        "newPendingAfter": 0,
+        "newOtherNotPublished": 0,
+        "autoResolutionRate": 0,
+        "autoPublicationRate": 60,
+        "newCandidatePublicationRate": 100,
+        "pendingAtEnd": 2,
+        "concurrentPublishedOrReviewed": 0,
+        "skippedApprovalDuplicates": 0,
+        "conflicts": 0,
+        "scannedPages": 30,
+        "providerRequests": 36,
+        "savedRecheck": null
       }
     ],
     "rolling": {
       "last7Runs": {
-        "runs": 2,
-        "pendingAtStart": 4,
-        "newCandidates": 4,
-        "observedCandidates": 8,
+        "runs": 3,
+        "pendingAtStart": 6,
+        "newCandidates": 7,
+        "observedCandidates": 13,
         "oldPublished": 0,
         "oldDuplicateResolved": 0,
-        "oldPendingAfter": 4,
+        "oldPendingAfter": 6,
         "oldOtherRemoved": 0,
-        "published": 4,
-        "newPublished": 4,
+        "published": 7,
+        "newPublished": 7,
         "newPendingAfter": 0,
         "newOtherNotPublished": 0,
         "autoResolutionRate": 0,
-        "autoPublicationRate": 50,
+        "autoPublicationRate": 53.85,
         "newCandidatePublicationRate": 100
       },
       "last30Runs": {
-        "runs": 2,
-        "pendingAtStart": 4,
-        "newCandidates": 4,
-        "observedCandidates": 8,
+        "runs": 3,
+        "pendingAtStart": 6,
+        "newCandidates": 7,
+        "observedCandidates": 13,
         "oldPublished": 0,
         "oldDuplicateResolved": 0,
-        "oldPendingAfter": 4,
+        "oldPendingAfter": 6,
         "oldOtherRemoved": 0,
-        "published": 4,
-        "newPublished": 4,
+        "published": 7,
+        "newPublished": 7,
         "newPendingAfter": 0,
         "newOtherNotPublished": 0,
         "autoResolutionRate": 0,
-        "autoPublicationRate": 50,
+        "autoPublicationRate": 53.85,
         "newCandidatePublicationRate": 100
       }
     }
