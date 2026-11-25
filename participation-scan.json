@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-11-25T11:48:55.737Z",
+  "checkedAt": "2026-11-25T23:24:22.312Z",
   "windows": {
     "epicgames_S42_InoxtagIconCup_NAW/S42_InoxtagIconCup_NAW": {
       "nextPage": 60,
@@ -372,12 +372,12 @@
       "emptyAttempts": 0
     },
     "epicgames_S43_OnePieceZoroCup_BR/S43_OnePieceZoroCup_BR": {
-      "nextPage": 50,
-      "pages": 50,
-      "complete": false,
-      "coverageLimited": false,
+      "nextPage": 60,
+      "pages": 60,
+      "complete": true,
+      "coverageLimited": true,
       "totalPages": 100,
-      "lastScanned": "2026-11-14T03:35:13.426Z",
+      "lastScanned": "2026-11-25T23:23:47.013Z",
       "emptyAttempts": 0
     },
     "epicgames_S30_SoloVictoryCashCup_ME/S30_SoloVictoryCashCup_Event7Round1_ME": {
@@ -1240,12 +1240,12 @@
       "lastError": "Osirion API HTTP 429 /v1/tournaments/leaderboard"
     },
     "epicgames_S33_SoloCashCup_NAW/S33_SoloCashCup_Event8Round1_NAW": {
-      "nextPage": 29,
-      "pages": 29,
+      "nextPage": 32,
+      "pages": 32,
       "complete": false,
       "coverageLimited": false,
       "totalPages": 100,
-      "lastScanned": "2026-11-24T23:41:05.051Z",
+      "lastScanned": "2026-11-25T23:24:22.312Z",
       "emptyAttempts": 0
     },
     "epicgames_S30_PlaystationCupZBJune_OCE/S30_PlaystationCupZBJune_Qualifier1_OCE": {
@@ -1331,12 +1331,12 @@
       "emptyAttempts": 0
     },
     "epicgames_S30_PlaystationCupJune_ME/S30_PlaystationCupJune_Qualifier1_ME": {
-      "nextPage": 36,
-      "pages": 36,
+      "nextPage": 46,
+      "pages": 46,
       "complete": false,
       "coverageLimited": false,
       "totalPages": 51,
-      "lastScanned": "2026-11-24T23:41:01.023Z",
+      "lastScanned": "2026-11-25T23:24:17.155Z",
       "emptyAttempts": 0
     },
     "epicgames_S43_TriosCashCup_BR/S43_TriosCashCup_Event3_BR": {
@@ -1391,6 +1391,15 @@
       "coverageLimited": false,
       "totalPages": 1,
       "lastScanned": "2026-11-25T11:48:42.757Z",
+      "emptyAttempts": 0
+    },
+    "epicgames_S43_PlayStationCup_ME/S43_PlayStationCup_Final_ME": {
+      "nextPage": 1,
+      "pages": 1,
+      "complete": true,
+      "coverageLimited": false,
+      "totalPages": 1,
+      "lastScanned": "2026-11-25T23:23:31.826Z",
       "emptyAttempts": 0
     }
   }
