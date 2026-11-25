@@ -33,10 +33,12 @@ test('all four final VR counts award exactly 50/person and 200/team per VR',()=>
   assert.equal(out.record.prizePerPlayer,50*vrs);assert.equal(JSON.stringify(x),before);
  }
 });
-test('mature qualifier prefix works, but positive/zero finals require full board',()=>{
+test('mature qualifier and exact observed final prefixes work without full board',()=>{
  for(const round of [1,2]){
   const x=fixture(round);Object.assign(x.cp,{complete:false,nextPage:1,pages:1,totalPages:20,lastSeenRank:50});
-  assert.equal(check(x).approved,round===1);
+  const out=check(x);assert.equal(out.approved,true,out.reason);
+  assert.equal(out.record.prize,round===1?0:200);
+  if(round===2)assert.match(out.record.note,/全ページ未取得/);
  }
  const x=fixture(1,'ME',100);Object.assign(x.cp,{complete:true,nextPage:2,pages:2,totalPages:20,lastSeenRank:130});
  assert.equal(check(x).approved,true);
@@ -63,4 +65,28 @@ test('router permits dedicated route only with explicit opt-in; generic historic
  assert.equal(runApprovals([x.row],[x.win],cp,x.data,{autoApproveVerified:true},{historical:true}).approved.length,0);
  assert.equal(runApprovals([x.row],[x.win],cp,x.data,{autoApproveSquads:true},{historical:false}).approved.length,1);
  assert.equal(evaluate([x.row],[x.win],{...cp,other:x.cp},x.data,now).approved.length,0);
+});
+
+test('partial squad final never accepts mismatched points, missing ID or blocked pages',()=>{
+ for(const vrs of [0,1,2,3]){
+  const x=fixture(2,'ME',7,vrs);Object.assign(x.cp,{complete:false,nextPage:1,pages:1,totalPages:5,lastSeenRank:50});
+  assert.equal(check(x).record.prize,200*vrs);assert.equal(check(x).record.prizePerPlayer,50*vrs);
+  x.row.points=x.cp.proposals[0].points=99;assert.equal(check(x).approved,false);
+ }
+ const x=fixture();Object.assign(x.cp,{complete:false,nextPage:1,pages:1,totalPages:5,lastSeenRank:50});
+ x.data.verifiedAccounts.pop();assert.equal(check(x).approved,false);
+});
+
+test('partial squad final supports legacy omitted IDs only with exact unique deterministic identity proof',()=>{
+ const make=()=>{const x=fixture();Object.assign(x.cp,{complete:false,nextPage:1,pages:1,totalPages:5,lastSeenRank:50});return x;};
+ const legacy=make();assert.equal(legacy.row.teamAccountIds,undefined);
+ const result=check(legacy);assert.equal(result.approved,true,result.reason);assert.equal(result.record.prize,200);
+ const explicit=make();explicit.row.teamAccountIds=[...ids];explicit.cp.proposals=[{...explicit.row}];
+ assert.equal(check(explicit).approved,true);
+ const wrong=make();wrong.row.teamAccountIds=[ids[1],ids[0],ids[2],ids[3]];wrong.cp.proposals=[{...wrong.row}];
+ assert.equal(check(wrong).approved,false);
+ const ambiguous=make();ambiguous.data.verifiedAccounts.push({player:names[0],epicAccountId:'e'.repeat(32),confirmed:true});
+ assert.equal(check(ambiguous).approved,false);
+ const forged=make();forged.row.id=forged.cp.proposals[0].id='auto-s43-000000000000';
+ assert.equal(check(forged).approved,false);
 });

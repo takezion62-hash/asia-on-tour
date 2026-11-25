@@ -3,7 +3,7 @@
 // other Duo series retain their former policies; no inferred VR payout.
 const {selectRules,eventWindow}=require('./tournament-approval-policy.cjs');
 const {advancementCutoff,validMatchCount,individualVrPrize}=require('./tournament-rule-engine.cjs');
-const {sameScannedCandidate,verifiedQualifierPrefix}=require('./verified-partial-page.cjs');
+const {sameScannedCandidate,verifiedQualifierPrefix,verifiedVrFinal}=require('./verified-partial-page.cjs');
 const {identityProof,mature}=require('./saved-candidate-recheck.cjs');
 const {MANIFEST}=require('./generic-review-only-core.cjs');
 const {collision}=require('./manual-approval-core.cjs');
@@ -64,6 +64,12 @@ function qualifierEvidence(row,win,cp,now){
  if(stage?.round!==1)return false;
  return verifiedQualifierPrefix(row,win,cp,stage.cutoff,now);
 }
+function vrPrefixEvidence(row,win,cp,data,now=Date.now()){
+ const stage=stageFor(win),rule=stage?.rule;
+ return stage?.round===2&&row?.kind==='賞金決勝'&&row.reviewOnly!==true&&row.rank<=stage.cutoff&&
+  verifiedVrFinal(row,win,cp,rule,{now})&&row.points===row.vrs*100&&
+  Array.isArray(row.teamAccountIds)&&identityProof(row,win,data.verifiedAccounts||[],'duo');
+}
 function decide(row,win,cp,data,now=Date.now()){
  const stage=stageFor(win),rule=stage?.rule;
  if(!rule||!row||row.tournamentId!==rule.id||row.seasonId!==rule.seasonId||row.verified!==true||
@@ -83,7 +89,8 @@ function decide(row,win,cp,data,now=Date.now()){
   !validMatchCount(rule,row.kind,row.matches)||row.vrs>row.matches)return decline('順位・試合数・成績の不一致');
  if(!Array.isArray(cp?.proposals)||cp.proposals.filter(p=>p.id===row.id).length!==1||
   !cp.proposals.some(p=>sameScannedCandidate(p,row)))return decline('保存済み順位表と候補が完全一致しない');
- if(!mature(cp,win,row,now)&&!qualifierEvidence(row,win,cp,now))return decline('成熟した連続順位表の取得が完了していません');
+ const vrPrefix=vrPrefixEvidence(row,win,cp,data,now);
+ if(!mature(cp,win,row,now)&&!qualifierEvidence(row,win,cp,now)&&!vrPrefix)return decline('成熟した連続順位表の取得が完了していません');
  if(data.results.some(old=>overlaps(old,row,data.players.confirmedAliases)))return decline('同一開催枠の既掲載チーム・混成チームとの重複疑い');
  const {reviewReason,reviewOnly,teamAccountIds,...record}=row;
  if(stage.round===1){
@@ -99,7 +106,7 @@ function decide(row,win,cp,data,now=Date.now()){
   const perPlayer=individualVrPrize(rule,row.vrs);
   if(perPlayer===null||perPlayer*2!==rule.teamPrizePerVictory*row.vrs)return decline('公式チーム賞金配分が不一致');
   record.prize=perPlayer*2;record.prizePerPlayer=perPlayer;
-  record.note='本人Epic ID2名・公式開催枠・完全順位表で'+row.vrs+'VR（'+row.points+'pt）を照合。個人$'+perPlayer+
+  record.note='本人Epic ID2名・公式開催枠・'+(vrPrefix?'終了4時間後以降の連続順位表（'+cp.nextPage+'/'+cp.totalPages+'ページ、全ページ未取得）':'完全順位表')+'で'+row.vrs+'VR（'+row.points+'pt）を照合。個人$'+perPlayer+
    '、チーム合計$'+record.prize+'。公式規則上の賞金、受給資格・支払完了は未確認。規則: '+rule.source;
  }
  return {approved:true,record,rule:rule.source};
@@ -122,4 +129,4 @@ function evaluate(rows,windows,checkpoints,data,now=Date.now()){
  }
  return {approved,held};
 }
-module.exports={RULES,isConsole,stageFor,sessionFor,qualifierEvidence,overlaps,decide,evaluate};
+module.exports={RULES,isConsole,stageFor,sessionFor,qualifierEvidence,overlaps,vrPrefixEvidence,decide,evaluate};

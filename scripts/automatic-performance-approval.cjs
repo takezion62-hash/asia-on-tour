@@ -3,7 +3,7 @@ const {selectRules,eventWindow}=require('./tournament-approval-policy.cjs');
 const {advancementCutoff,matchCap,qualifies,individualVrPrize}=require('./tournament-rule-engine.cjs');
 // S43 Trios Performance Evaluation: exact EU/NAC Round 1 top 26 and Round 2
 // personal $400 per VR. Legacy seasons and other event formats stay review-only.
-const {verifiedPartialPage}=require('./verified-partial-page.cjs');
+const {verifiedPartialPage,verifiedVrFinal}=require('./verified-partial-page.cjs');
 const RULES=selectRules('performance');
 const roster=row=>Array.isArray(row?.players)&&row.players.length?row.players:[row?.player];
 const teamSignature=row=>roster(row).slice().sort((a,b)=>a.localeCompare(b,'ja')).join('|');
@@ -36,18 +36,25 @@ function sameAppearance(left,right){
  const pa=phase(left),pb=phase(right);
  return !pa||!pb||pa===pb;
 }
-function decide(row,win,checkpoint,data){
+function vrPrefixEvidence(row,win,cp,data,now=Date.now()){
+ const state=evaluationStage(win),rule=state?.rule;
+ return state?.round===2&&row?.kind==='参加確認'&&row.reviewOnly===true&&row.vrs>0&&
+  row.rank<=advancementCutoff(rule,win.region)&&
+  verifiedVrFinal(row,win,cp,rule,{now,stage:'Performance決勝',requirePoints:true})&&
+  Array.isArray(row.teamAccountIds)&&require('./saved-candidate-recheck.cjs').identityProof(row,win,data.verifiedAccounts||[],'trio');
+}
+function decide(row,win,checkpoint,data,now=Date.now()){
  const state=evaluationStage(win),rule=state?.rule;
  if(!rule)return decline('公式ルールで登録されたS43 EU/NAC Performance Evaluationではありません');
  if(!row?.reviewOnly||row.kind!=='参加確認'||row.prize!==null||row.verified!==true||
     !/^auto-s43-[0-9a-f]{12}$/.test(row.id||''))
   return decline('確定したAPI参加候補と一致しません');
- // A 0-VR Round 2 is a known $0. Positive payouts and Round 1
- // advancement continue to require the completed leaderboard.
+ // Preserve the existing zero-VR route and qualify positive VR separately.
  const zeroVrFinal=state.round===2&&row.vrs===0&&row.points===0;
+ const vrPrefix=vrPrefixEvidence(row,win,checkpoint,data,now);
  if(checkpoint?.rankingOrderValid!==true||!Array.isArray(checkpoint?.proposals)||
     !checkpoint.proposals.some(p=>JSON.stringify(p)===JSON.stringify(row))||
-    (!checkpoint.complete&&!(zeroVrFinal&&verifiedPartialPage(row,win,checkpoint))))
+    (!checkpoint.complete&&!vrPrefix&&!(zeroVrFinal&&verifiedPartialPage(row,win,checkpoint,now))))
   return decline('順位表の全取得または通過ラインまでの正しい並びが未確認');
  const tournament=data.tournaments?.catalog?.find(t=>t.id===rule.id);
  if(!tournament||tournament.name!==row.event||tournament.team!=='trio'||
@@ -115,7 +122,7 @@ function decide(row,win,checkpoint,data){
      note:'S43 Performance Evaluation '+win.region+'・Event '+state.event+
       'の決勝'+row.vrs+'VRを確認。1VRにつき選手1人$'+rule.prizePerVictory+
       '、個人賞金$'+perPlayer+'、チーム総額$'+(perPlayer*expected)+
-      '（公式規則上）。本人の受給資格審査・実際の支払いは未確認。規則: '+rule.source};
+      '（公式規則上）。'+(vrPrefix?'終了4時間後以降の連続順位表・全3名のEpic IDを照合（'+checkpoint.nextPage+'/'+checkpoint.totalPages+'ページ、全ページ未取得）。':'')+'本人の受給資格審査・実際の支払いは未確認。規則: '+rule.source};
  }
  return {approved:true,record,rule:rule.source};
 }
@@ -135,4 +142,4 @@ function evaluate(proposals,windows,checkpoints,data){
  }
  return {approved,held};
 }
-module.exports={RULES,evaluationStage,qualifierCutoff,sameAppearance,decide,evaluate};
+module.exports={RULES,evaluationStage,qualifierCutoff,sameAppearance,vrPrefixEvidence,decide,evaluate};

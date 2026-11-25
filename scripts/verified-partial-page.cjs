@@ -75,5 +75,21 @@ function verifiedQualifierPrefix(row,win,cp,cutoff,now=Date.now()){
  return cp?.complete===true&&Number.isSafeInteger(cutoff)&&row?.rank<=cutoff&&
   verifiedRankBoundary(row,win,cp,cutoff,{now,allowCutoffComplete:true});
 }
-module.exports={verifiedPartialPage,FOUR_HOURS,sameScannedCandidate,leaderboardCoverage,
+// VR awards depend on the observed final record, not a payout rank boundary.
+// The adapter supplies documented rules and validates identity and window.
+function verifiedVrFinal(row,win,cp,rule,{now=Date.now(),stage='賞金決勝',requirePoints=false}={}){
+ const cap=rule?.matchCaps?.[stage],price=rule?.prizePerVictory;
+ if(!row||!win||!rule||row.verified!==true||row.prize!==null||cp?.complete!==false||
+  row.tournamentId!==rule.id||win.tournamentId!==rule.id||row.seasonId!==rule.seasonId||
+  win.seasonId!==rule.seasonId||row.region!==win.region||row.date!==win.dateJst||
+  row.kind!==win.kind||row.round!==win.round||!rule.eventIds?.includes(win.eventId)||
+  !Number.isSafeInteger(price)||price<=0||!Number.isSafeInteger(cap)||cap<1||
+  !Number.isSafeInteger(row.matches)||row.matches<1||row.matches>cap||
+  !valid(row.vrs)||row.vrs>row.matches||!valid(row.points)||!valid(row.kills))return false;
+ if(requirePoints&&(!Number.isSafeInteger(rule.finalWinPoints)||rule.finalWinPoints<=0))return false;
+ if(Number.isSafeInteger(rule.finalWinPoints)&&rule.finalWinPoints>0&&
+  row.points!==row.vrs*rule.finalWinPoints)return false;
+ return leaderboardCoverage(row,win,cp,now).kind==='partial'&&candidateObserved(row,cp,{unique:true});
+}
+module.exports={verifiedVrFinal,verifiedPartialPage,FOUR_HOURS,sameScannedCandidate,leaderboardCoverage,
  matureFullLeaderboard,candidateObserved,coversRankBoundary,verifiedRankBoundary,verifiedQualifierPrefix};

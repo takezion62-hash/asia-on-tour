@@ -2,7 +2,7 @@
 // Only the registered S43 Squads BR rules; never use the generic solo VR route.
 const {selectRules,eventWindow}=require('./tournament-approval-policy.cjs');
 const {advancementCutoff,validMatchCount,individualVrPrize}=require('./tournament-rule-engine.cjs');
-const {sameScannedCandidate,verifiedQualifierPrefix,FOUR_HOURS}=require('./verified-partial-page.cjs');
+const {sameScannedCandidate,verifiedQualifierPrefix,verifiedVrFinal,FOUR_HOURS}=require('./verified-partial-page.cjs');
 const {identityProof,mature}=require('./saved-candidate-recheck.cjs');
 const {MANIFEST}=require('./generic-review-only-core.cjs');
 const {collision}=require('./manual-approval-core.cjs');
@@ -58,6 +58,15 @@ function sessionFor(win,schedule){
   (s.sourceWindowId!==undefined&&s.sourceWindowId!==win.windowId))return null;
  return s;
 }
+function vrPrefixEvidence(row,win,cp,data,now=Date.now()){
+ const stage=stageFor(win),rule=RULE;
+ return stage?.round===2&&row?.kind==='賞金決勝'&&row.reviewOnly!==true&&row.rank<=stage.cutoff&&
+  verifiedVrFinal(row,win,cp,rule,{now,requirePoints:true})&&row.points===row.vrs*100&&
+  // Legacy squad snapshots omit the UUID array. identityProof reconstructs
+  // it only from unique verified account/name mappings and checks the exact
+  // original deterministic candidate ID. Explicit malformed IDs still fail.
+  identityProof(row,win,data.verifiedAccounts||[],'squad');
+}
 function decide(row,win,cp,data,now=Date.now()){
  const stage=stageFor(win);
  if(!stage||!row||row.tournamentId!==ID||row.seasonId!=='S43'||row.verified!==true||
@@ -79,7 +88,8 @@ function decide(row,win,cp,data,now=Date.now()){
  // Historical qualifier scans can stop after crossing the official cutoff.
  // Such a checkpoint proves only the observed rank, not the complete board.
  const prefix=stage.round===1&&verifiedQualifierPrefix(row,win,cp,stage.cutoff,now);
- if(!mature(cp,win,row,now)&&!prefix)return decline('成熟した連続順位表の取得が完了していません');
+ const vrPrefix=vrPrefixEvidence(row,win,cp,data,now);
+ if(!mature(cp,win,row,now)&&!prefix&&!vrPrefix)return decline('成熟した連続順位表の取得が完了していません');
  if(data.results.some(old=>overlaps(old,row,data.players.confirmedAliases)))return decline('同一開催枠の既掲載チーム・混成チームとの重複疑い');
  const {reviewReason,reviewOnly,teamAccountIds,...record}=row;
  if(stage.round===1){
@@ -95,7 +105,7 @@ function decide(row,win,cp,data,now=Date.now()){
   const perPlayer=individualVrPrize(RULE,row.vrs);
   if(perPlayer===null||perPlayer*4!==RULE.teamPrizePerVictory*row.vrs)return decline('公式チーム賞金配分が不一致');
   record.prize=perPlayer*4;record.prizePerPlayer=perPlayer;
-  record.note='本人Epic ID4名・公式開催枠・完全順位表で'+row.vrs+'VR（'+row.points+'pt）を照合。個人$'+perPlayer+
+  record.note='本人Epic ID4名・公式開催枠・'+(vrPrefix?'終了4時間後以降の連続順位表（'+cp.nextPage+'/'+cp.totalPages+'ページ、全ページ未取得）':'完全順位表')+'で'+row.vrs+'VR（'+row.points+'pt）を照合。個人$'+perPlayer+
    '、チーム合計$'+record.prize+'。公式規則上の賞金、受給資格・支払完了は未確認。規則: '+SOURCE;
  }
  return {approved:true,record,rule:SOURCE};
@@ -118,4 +128,4 @@ function evaluate(rows,windows,checkpoints,data,now=Date.now()){
  }
  return {approved,held};
 }
-module.exports={ID,RULES,stageFor,sessionFor,overlaps,decide,evaluate};
+module.exports={ID,RULES,stageFor,sessionFor,overlaps,vrPrefixEvidence,decide,evaluate};

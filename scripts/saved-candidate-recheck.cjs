@@ -70,7 +70,13 @@ function recheckSaved({queue,checkpoints,windows,data,config,reviewedIds=[],othe
    ['autoApproveUnreal','./automatic-unreal-approval.cjs'],
    ['autoApprovePlayStation','./automatic-playstation-approval.cjs']
   ].some(([flag,adapter])=>config[flag]===true&&require(adapter).prizePrefixEvidence(proof[0].row,win,proof[0].cp,now));
-  if(!mature(proof[0].cp,win,row,now)&&!consolePrefix&&!nvidiaPrefix&&!rankCashPrefix){
+  const vrPrefix=[
+   ['autoApproveVerified','./verified-history-approval.cjs'],
+   ['autoApprovePerformance','./automatic-performance-approval.cjs'],
+   ['autoApproveConsoleDuos','./automatic-console-duos-approval.cjs'],
+   ['autoApproveSquads','./automatic-squads-approval.cjs']
+  ].some(([flag,adapter])=>config[flag]===true&&require(adapter).vrPrefixEvidence(proof[0].row,win,proof[0].cp,data,now));
+  if(!mature(proof[0].cp,win,row,now)&&!consolePrefix&&!nvidiaPrefix&&!rankCashPrefix&&!vrPrefix){
    held.push({id:row.id,reason:'成熟済み完全順位表が未確認'});continue;
   }
   if(!identityProof(row,win,data.verifiedAccounts||[],cat.team)){
@@ -84,7 +90,7 @@ function recheckSaved({queue,checkpoints,windows,data,config,reviewedIds=[],othe
  // Participation grants require a different replay verifier; do not expand
  // offline publication to those or unknown prize/unsupported result kinds.
  const approved=outcome.approved.filter(r=>r.verified===true&&r.reviewOnly!==true&&
-  ['予選','賞金決勝','スキン大会'].includes(r.kind)&&Number.isFinite(r.prize)&&r.prize>=0);
+  ['予選','賞金決勝','スキン大会','Performance決勝'].includes(r.kind)&&Number.isFinite(r.prize)&&r.prize>=0);
  const ids=new Set(approved.map(x=>x.id));
  if(ids.size!==approved.length)throw Error('duplicate offline approval IDs');
  for(const row of eligible){

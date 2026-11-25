@@ -5,7 +5,7 @@ const {advancementCutoff,validMatchCount,individualVrPrize}=require('./tournamen
 // A zero-VR final can be recorded as $0 because the rules pay per final-round VR.
 // Positive cash requires a season-specific verified payout rule; unknown events remain in manual review.
 // Single source of truth: the same versioned official rules shown under SOURCES.
-const {verifiedPartialPage,sameScannedCandidate}=require('./verified-partial-page.cjs');
+const {verifiedPartialPage,sameScannedCandidate,verifiedVrFinal}=require('./verified-partial-page.cjs');
 const RULES=Object.freeze(Object.fromEntries(Object.entries(selectRules('verified')).map(([id,rule])=>[id,Object.freeze(rule)])));
 const roundId=x=>{
  const match=String(x||'').match(/(?:Event\s*(\d+)|Day\s*(\d+)).*Round\s*([12])/i);
@@ -14,18 +14,28 @@ const roundId=x=>{
 const participants=r=>Array.isArray(r.players)&&r.players.length?r.players:[r.player];
 const identity=r=>[r.date,r.region,r.tournamentId,roundId(r.round),participants(r).slice().sort().join('|')].join('::');
 const decline=reason=>({approved:false,reason});
-function decide(row,win,checkpoint,data){
+function vrPrefixEvidence(row,win,cp,data,now=Date.now()){
+ const rule=RULES[row?.tournamentId];
+ if(!rule||rule.team!=='solo'||row.kind!=='賞金決勝'||row.reviewOnly===true||row.vrs<=0||
+  win?.series!=='victory-cup'||!/Round2(?:_|$)/.test(win.windowId||'')||
+  !win.windowId.endsWith('_'+win.region)||!win.round.includes('Round 2')||
+  !Number.isSafeInteger(advancementCutoff(rule,win.region))||row.rank>advancementCutoff(rule,win.region)||
+  row.points<=0||!verifiedVrFinal(row,win,cp,rule,{now}))return false;
+ return require('./saved-candidate-recheck.cjs').identityProof(row,win,data.verifiedAccounts||[],'solo');
+}
+function decide(row,win,checkpoint,data,now=Date.now()){
  if(row?.reviewOnly===true||row?.kind==='参加確認'||win?.kind==='参加確認'||(win?.series&&win.series!=='victory-cup'))return decline('確認専用大会は自動承認不可');
  // A verified 0-VR final has $0 under official VR-only rules. Its observed
  // rows need not wait for thousands of unrelated leaderboard pages.
- // Qualifiers and positive-VR cash still require completed official scans.
+ // Positive solo VR cash may use an exact mature observed final; qualifiers unchanged.
  // Manual batch review may accept a qualifier actually seen in a mature,
  // contiguous saved prefix, but only with a verified official regional rule.
  // Scheduled auto-approval keeps its existing, stricter default.
  const observedQualifier=win?.allowPartialQualifier===true&&row?.kind==='予選'&&
    row.prize===0&&verifiedPartialPage(row,win,checkpoint);
+ const vrPrefix=vrPrefixEvidence(row,win,checkpoint,data,now);
  if(!checkpoint?.complete&&!(row.kind==='賞金決勝'&&row.vrs===0&&row.prize===null&&
-      verifiedPartialPage(row,win,checkpoint))&&!observedQualifier)
+      verifiedPartialPage(row,win,checkpoint,now))&&!observedQualifier&&!vrPrefix)
   return decline('順位表の取得が完了していません');
  const rule=RULES[row.tournamentId];
  if(!rule)return decline('未検証のシーズンまたは大会');
@@ -123,7 +133,7 @@ function decide(row,win,checkpoint,data){
   rec.prize=amount;
   rec.note=row.vrs>0?
    'Epic公式規則で決勝VR1回あたり$'+rule.prizePerVictory+'。Osirionの'+row.vrs+
-   'VRから規則上の獲得賞金$'+rec.prize+'を算定。本人資格審査・支払完了までは未確認。規則: '+rule.source:
+   'VRから規則上の獲得賞金$'+rec.prize+'を算定。'+(vrPrefix?'終了4時間後以降の連続順位表・本人Epic IDを照合（'+checkpoint.nextPage+'/'+checkpoint.totalPages+'ページ、全ページ未取得）。':'')+'本人資格審査・支払完了までは未確認。規則: '+rule.source:
    'Epic公式規則は決勝のVRごとに賞金を付与。Osirionで決勝0VRを確認したため現金賞金$0。規則: '+rule.source;
  }else return decline('対象外ラウンド');
  return {approved:true,record:rec,rule:rule.source};
@@ -145,4 +155,4 @@ function evaluate(proposals,windows,checkpoints,data){
  }
  return {approved,held};
 }
-module.exports={RULES,identity,decide,evaluate};
+module.exports={RULES,identity,vrPrefixEvidence,decide,evaluate};
