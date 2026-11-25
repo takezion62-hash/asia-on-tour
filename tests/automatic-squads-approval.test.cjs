@@ -76,3 +76,17 @@ test('partial squad final never accepts mismatched points, missing ID or blocked
  const x=fixture();Object.assign(x.cp,{complete:false,nextPage:1,pages:1,totalPages:5,lastSeenRank:50});
  x.data.verifiedAccounts.pop();assert.equal(check(x).approved,false);
 });
+
+test('partial squad final supports legacy omitted IDs only with exact unique deterministic identity proof',()=>{
+ const make=()=>{const x=fixture();Object.assign(x.cp,{complete:false,nextPage:1,pages:1,totalPages:5,lastSeenRank:50});return x;};
+ const legacy=make();assert.equal(legacy.row.teamAccountIds,undefined);
+ const result=check(legacy);assert.equal(result.approved,true,result.reason);assert.equal(result.record.prize,200);
+ const explicit=make();explicit.row.teamAccountIds=[...ids];explicit.cp.proposals=[{...explicit.row}];
+ assert.equal(check(explicit).approved,true);
+ const wrong=make();wrong.row.teamAccountIds=[ids[1],ids[0],ids[2],ids[3]];wrong.cp.proposals=[{...wrong.row}];
+ assert.equal(check(wrong).approved,false);
+ const ambiguous=make();ambiguous.data.verifiedAccounts.push({player:names[0],epicAccountId:'e'.repeat(32),confirmed:true});
+ assert.equal(check(ambiguous).approved,false);
+ const forged=make();forged.row.id=forged.cp.proposals[0].id='auto-s43-000000000000';
+ assert.equal(check(forged).approved,false);
+});

@@ -62,7 +62,10 @@ function vrPrefixEvidence(row,win,cp,data,now=Date.now()){
  const stage=stageFor(win),rule=RULE;
  return stage?.round===2&&row?.kind==='賞金決勝'&&row.reviewOnly!==true&&row.rank<=stage.cutoff&&
   verifiedVrFinal(row,win,cp,rule,{now,requirePoints:true})&&row.points===row.vrs*100&&
-  Array.isArray(row.teamAccountIds)&&identityProof(row,win,data.verifiedAccounts||[],'squad');
+  // Legacy squad snapshots omit the UUID array. identityProof reconstructs
+  // it only from unique verified account/name mappings and checks the exact
+  // original deterministic candidate ID. Explicit malformed IDs still fail.
+  identityProof(row,win,data.verifiedAccounts||[],'squad');
 }
 function decide(row,win,cp,data,now=Date.now()){
  const stage=stageFor(win);
