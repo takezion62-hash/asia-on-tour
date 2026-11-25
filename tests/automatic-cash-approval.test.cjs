@@ -119,7 +119,10 @@ test('prize-free verified Cash Cup team can publish from mature continuous parti
  assert.equal(result.approved,true,result.reason);
  assert.equal(result.record.prize,0);
  assert.equal(result.record.prizePerPlayer,0);
- assert.equal(decide(winner,w,partial(winner),db()).approved,false,'cash must wait for complete leaderboard');
+ const won=decide(winner,w,partial(winner),db());
+ assert.equal(won.approved,true,won.reason);assert.equal(won.record.prize,600);
+ assert.match(won.record.note,/全ページ未取得/);
+ assert.equal(decide(winner,w,{...partial(winner),lastSeenRank:5},db()).approved,false);
  assert.equal(decide(unpaid,w,{...partial(unpaid),rankingOrderValid:false},db()).approved,false);
  assert.equal(decide(unpaid,w,{...partial(unpaid),lastSeenRank:400},db()).approved,false);
 });
@@ -255,4 +258,21 @@ test('S43 Arena solo auto-approval uses official six-region payouts for both eve
    }
   }
  }
+});
+
+test('positive cash prefix rejects unobserved rows, retries and immature evidence',()=>{
+ const w={...window(),end:Date.parse('2026-11-07T06:00:00Z')},r=row(3,w);
+ const now=w.end+48*3600000,p={complete:false,rankingOrderValid:true,pages:1,nextPage:1,totalPages:10,lastSeenRank:100,lastSuccessAt:new Date(w.end+5*3600000).toISOString(),proposals:[r]};
+ assert.equal(decide(r,w,p,db(),now).record.prize,600);
+ for(const bad of [{...p,lastSeenRank:5},{...p,pages:0},{...p,retryAfter:'pending'},{...p,proposals:[r,r]},{...p,lastSuccessAt:new Date(w.end+3600000).toISOString()}])
+  assert.equal(decide(r,w,bad,db(),now).approved,false);
+ const wrong=db();wrong.verifiedAccounts.pop();assert.equal(decide(r,w,p,wrong,now).approved,false);
+});
+test('Reload ZB Duos Round 2 uses its actual regional cash cutoff, not Round 1 or the 20-team cap',()=>{
+ const w=reloadWin(),r=reloadRow(3,w),d=reloadDb(w),now=w.end+48*3600000;
+ const p={complete:false,rankingOrderValid:true,pages:1,nextPage:1,totalPages:2,lastSeenRank:6,lastSuccessAt:new Date(w.end+5*3600000).toISOString(),proposals:[r]};
+ const out=decide(r,w,p,d,now);assert.equal(out.approved,true,out.reason);
+ assert.ok(out.record.prize>0);assert.match(out.record.note,/全ページ未取得/);
+ assert.equal(decide(r,w,{...p,lastSeenRank:5},d,now).approved,false);
+ assert.equal(decide(r,{...w,windowId:w.windowId.replace('Round2','Round1')},p,d,now).approved,false);
 });

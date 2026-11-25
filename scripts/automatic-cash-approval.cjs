@@ -3,7 +3,7 @@ const {selectRules,eventWindow}=require('./tournament-approval-policy.cjs');
 const {individualRankPrize,payingRank,matchCap}=require('./tournament-rule-engine.cjs');
 // Opt-in, tournament-rule-backed Cash Cup publication for verified teams, including prize-free finishing ranks.
 // All other Cash Cups remain review-only until a complete official payout rule is registered.
-const {verifiedPartialPage,FOUR_HOURS,sameScannedCandidate}=require('./verified-partial-page.cjs');
+const {verifiedPartialPage,verifiedRankBoundary,FOUR_HOURS,sameScannedCandidate}=require('./verified-partial-page.cjs');
 const {sameRound}=require('./automatic-duo-qualifier-approval.cjs');
 const RULES=selectRules('cash');
 const people=row=>Array.isArray(row?.players)&&row.players.length?row.players:[row?.player];
@@ -25,6 +25,20 @@ function cashLimitForWindow(win){
    rule.matchCaps?.['単一ラウンド']===12;
  if(!match||(!arenas&&!Object.hasOwn(rule.rankedEligibility,String(match.event))))return null;
  return payingRank(rule,win.region);
+}
+// Only registered cash windows; Reload Round 2's participant cap (20) is not its paying rank.
+function prizePrefixEvidence(row,win,cp,now=Date.now()){
+ const rule=RULES[row?.tournamentId];
+ if(!rule||row?.verified!==true||row.reviewOnly!==true||row.kind!=='参加確認'||row.prize!==null||
+  row.tournamentId!==win?.tournamentId||row.seasonId!==win.seasonId||row.region!==win.region||
+  row.date!==win.dateJst||row.round!==win.round||row.kind!==win.kind||
+  cp?.complete!==false||cashLimitForWindow(win)===null)return false;
+ const cutoff=payingRank(rule,win.region),amount=cashPrize(rule,win.region,row.rank);
+ return Number.isSafeInteger(amount)&&amount>0&&verifiedRankBoundary(row,win,cp,cutoff,{now,unique:true});
+}
+function prefixNote(cp,rule,region){
+ return '終了4時間後以降の連続順位表が公式賞金圏（上位'+payingRank(rule,region)+'組/名）を越えたことを確認。'+
+  '取得済み'+cp.nextPage+'/'+cp.totalPages+'ページ（全ページ未取得）。';
 }
 function sameEvent(a,b){
  if(a.tournamentId!==b.tournamentId||a.date!==b.date||a.region!==b.region||
@@ -54,9 +68,10 @@ function decideReloadDuoFinal(row,win,checkpoint,data,now=Date.now()){
    win.round!=='Event '+Number(match[1])+' · Round 2 / 参加確認'||
    cashLimitForWindow(win)!==20)
   return decline('公式決勝の開催枠・イベント回が不一致');
- if(!checkpoint?.complete||checkpoint.rankingOrderValid!==true||
+ const prefix=prizePrefixEvidence(row,win,checkpoint,now);
+ if(!prefix&&(!checkpoint?.complete||checkpoint.rankingOrderValid!==true||
    !Array.isArray(checkpoint.proposals)||
-   !checkpoint.proposals.some(x=>sameScannedCandidate(x,row)))
+   !checkpoint.proposals.some(x=>sameScannedCandidate(x,row))))
   return decline('決勝の完全な公式順位表が確認できません');
  if(!Number.isFinite(win.end)||now-win.end<FOUR_HOURS)
   return decline('決勝終了後の確定期間が経過していません');
@@ -113,24 +128,24 @@ function decideReloadDuoFinal(row,win,checkpoint,data,now=Date.now()){
   note:'S43 Reload ZB Duos Cash Cup '+win.region+' Event '+Number(match[1])+
    ' Round 2公式順位表'+row.rank+'位。個人賞金$'+share+
    '、デュオ合計$'+teamCash+'。'+(share===0?'賞金圏外のため$0。':'Epic Attachment Cの地域別順位賞金を適用。')+
-   '本人Epic ID2名・全順位表・開催日時・公式規則を照合。受給資格と支払完了は未確認。規則: '+rule.source
+   (prefix?prefixNote(checkpoint,rule,win.region)+'本人Epic ID2名・開催日時・公式規則を照合。':'本人Epic ID2名・全順位表・開催日時・公式規則を照合。')+'受給資格と支払完了は未確認。規則: '+rule.source
  },rule:rule.source};
 }
-function decide(row,win,checkpoint,data){
+function decide(row,win,checkpoint,data,now=Date.now()){
  const rule=RULES[row?.tournamentId];
  if(!rule)return decline('公式賞金ルールが自動掲載対応として登録されていません');
- if(rule.cashFinalAutoApproval==='verified-duo-round2-rank')return decideReloadDuoFinal(row,win,checkpoint,data);
+ if(rule.cashFinalAutoApproval==='verified-duo-round2-rank')return decideReloadDuoFinal(row,win,checkpoint,data,now);
  if(!row?.reviewOnly||row.kind!=='参加確認'||row.prize!==null||row.verified!==true)
   return decline('確認済みのCash Cup参加候補ではありません');
  if(!/^auto-s[0-9]+-[a-f0-9]{12}$/.test(row.id||''))return decline('公式スキャン候補ID不一致');
  const cutoff=cashLimitForWindow(win);
  if(cutoff===null)return decline('開催枠・イベント番号・地域の公式条件が未確認');
- // Out-of-prize ranks pay $0 regardless of later pages. Do not grant cash
- // from a partial leaderboard; cash-eligible ranks still require completion.
+ // Preserve existing zero-cash and full-scan routes.
  const zeroCash=cashPrize(rule,win?.region,row.rank)===0;
+ const prefix=prizePrefixEvidence(row,win,checkpoint,now);
  if(checkpoint?.rankingOrderValid!==true||!Array.isArray(checkpoint?.proposals)||
   !checkpoint.proposals.some(x=>JSON.stringify(x)===JSON.stringify(row))||
-  (!checkpoint.complete&&!(zeroCash&&verifiedPartialPage(row,win,checkpoint))))
+  (!checkpoint.complete&&!prefix&&!(zeroCash&&verifiedPartialPage(row,win,checkpoint,now))))
   return decline('順位表の連続した上位順位の取得が完了していません');
  const catalog=data.tournaments?.catalog?.find(x=>x.id===row.tournamentId);
  if(!catalog||catalog.series!=='cash-cup'||catalog.team!==rule.team||
@@ -189,7 +204,7 @@ function decide(row,win,checkpoint,data){
   note:'Epic公式賞金規則で'+win.region+'・Event '+event+'の'+row.rank+
    '位は個人賞金USD '+share+'、チーム合計USD '+cash+'。'+
    (share===0?'賞金圏外のため現金賞金は0。':'公式地域別順位の賞金額を適用。')+
-   '保存済みOsirion順位表、'+expected+
+   (prefix?prefixNote(checkpoint,rule,win.region):'')+'保存済みOsirion順位表、'+expected+
    '名の既知Epic ID、公式開催日時を照合済み。受給資格の審査・支払完了は未確認。規則: '+rule.source};
  return {approved:true,record,rule:rule.source};
 }
@@ -209,4 +224,4 @@ function evaluate(proposals,windows,checkpoints,data){
  }
  return {approved,held};
 }
-module.exports={RULES,cashPrize,cashLimitForWindow,sameEvent,decideReloadDuoFinal,decide,evaluate};
+module.exports={RULES,cashPrize,cashLimitForWindow,prizePrefixEvidence,sameEvent,decideReloadDuoFinal,decide,evaluate};
