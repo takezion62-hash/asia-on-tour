@@ -130,3 +130,19 @@ test('Performance positive VR final prefix requires all three identities and cor
  const offline=re({queue:{proposals:[r]},checkpoints:{[w.key]:p},windows:[w],data:d,config:{autoApprovePerformance:true},now});
  assert.equal(offline.approved.length,1,JSON.stringify(offline));assert.equal(offline.approved[0].prize,2400);
 });
+
+test('Performance Round1 exact top26 prefix, never inferred from final or out-of-cutoff row',()=>{
+ for(const region of ['EU','NAC']){
+  const w={...makeWin(1,region),end:Date.parse(makeWin(1,region).startUtc)+2*3600000};
+  const r={...getRow(w,26,0),id:'auto-s43-'+require('node:crypto').createHash('sha256').update(JSON.stringify([w.eventId+'/'+w.windowId,ids])).digest('hex').slice(0,12)};
+  const now=w.end+48*3600000,d=data(w),p={complete:false,rankingOrderValid:true,nextPage:1,pages:1,totalPages:20,lastSeenRank:27,lastSuccessAt:new Date(w.end+5*3600000).toISOString(),proposals:[r]};
+  const out=decide(r,w,p,d,now);assert.equal(out.approved,true,out.reason);assert.equal(out.record.prize,0);assert.match(out.record.round,/予選突破$/);assert.match(out.record.note,/全ページ未取得/);
+  for(const bad of [{...p,lastSeenRank:26},{...p,proposals:[r,r]},{...p,retryAfter:'pending'},{...p,pages:0}])assert.equal(decide(r,w,bad,d,now).approved,false);
+  assert.equal(decide(r,w,p,{...d,verifiedAccounts:d.verifiedAccounts.slice(0,2)},now).approved,false);
+  const loser={...r,rank:27};assert.equal(decide(loser,w,{...p,proposals:[loser]},d,now).approved,false);
+  const re=require('../scripts/saved-candidate-recheck.cjs').recheckSaved;
+  const input={queue:{proposals:[r]},checkpoints:{[w.key]:p},windows:[w],data:d,config:{autoApprovePerformance:true},now};
+  assert.equal(re(input).approved.length,1);
+  assert.equal(re({...input,checkpoints:{[w.key]:{...p,complete:true}}}).approved.length,1);
+ }
+});

@@ -76,7 +76,14 @@ function recheckSaved({queue,checkpoints,windows,data,config,reviewedIds=[],othe
    ['autoApproveConsoleDuos','./automatic-console-duos-approval.cjs'],
    ['autoApproveSquads','./automatic-squads-approval.cjs']
   ].some(([flag,adapter])=>config[flag]===true&&require(adapter).vrPrefixEvidence(proof[0].row,win,proof[0].cp,data,now));
-  if(!mature(proof[0].cp,win,row,now)&&!consolePrefix&&!nvidiaPrefix&&!rankCashPrefix&&!vrPrefix){
+  const qualifyingPrefix=[
+   ['autoApproveVerified','./verified-history-approval.cjs'],
+   ['autoApprovePerformance','./automatic-performance-approval.cjs'],
+   ['autoApprovePlayStation','./automatic-playstation-approval.cjs'],
+   ['autoApproveDuoQualifier','./automatic-duo-qualifier-approval.cjs'],
+   ['autoApproveSquads','./automatic-squads-approval.cjs']
+  ].some(([flag,adapter])=>config[flag]===true&&require(adapter).qualificationEvidence(proof[0].row,win,proof[0].cp,data,now));
+  if(!mature(proof[0].cp,win,row,now)&&!consolePrefix&&!nvidiaPrefix&&!rankCashPrefix&&!vrPrefix&&!qualifyingPrefix){
    held.push({id:row.id,reason:'成熟済み完全順位表が未確認'});continue;
   }
   if(!identityProof(row,win,data.verifiedAccounts||[],cat.team)){

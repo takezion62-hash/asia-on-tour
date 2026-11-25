@@ -5,7 +5,7 @@ const {individualRankPrize,matchCap,qualifies,namedRound,payingRank}=require('./
 // Independently classify PS4/PS5 Solo Battle Royale and Zero Build.
 // Only source-backed known Epic accounts and complete, mature scoreboard
 // checkpoints qualify. Finals pay by PLACEMENT, never by VR count.
-const {sameScannedCandidate,FOUR_HOURS,verifiedRankBoundary}=require('./verified-partial-page.cjs');
+const {sameScannedCandidate,FOUR_HOURS,verifiedRankBoundary,verifiedQualification}=require('./verified-partial-page.cjs');
 const RULES=selectRules('playstation');
 const REGIONS=new Set(['ME','EU','NAC','NAW','OCE','BR']); // ASIA is not an overseas region.
 const decline=reason=>({approved:false,reason});
@@ -34,6 +34,12 @@ function prizePrefixEvidence(row,win,cp,now=Date.now()){
  return Number.isSafeInteger(amount)&&amount>0&&verifiedRankBoundary(row,win,cp,payingRank(rule,win.region),
   {now,requireEpicIds:true,unique:true});
 }
+function qualificationEvidence(row,win,cp,data,now=Date.now()){
+ const stage=stageFor(win),rule=stage?.rule;
+ return !!stage&&!stage.final&&row?.kind==='参加確認'&&row.reviewOnly===true&&row.prize===null&&
+  verifiedQualification(row,win,cp,rule,rule.advance?.[win.region],{now,requireEpicIds:true})&&
+  Array.isArray(row.teamAccountIds)&&require('./saved-candidate-recheck.cjs').identityProof(row,win,data.verifiedAccounts||[],'solo');
+}
 function decide(row,win,cp,data,now=Date.now()){
  const stage=stageFor(win),rule=stage?.rule;
  if(!stage)return decline('公式S43 PlayStation BR/ZBのRound1/Finalと一致しません');
@@ -42,7 +48,8 @@ function decide(row,win,cp,data,now=Date.now()){
    !/^auto-s43-[a-f0-9]{12}$/.test(row.id||''))
    return decline('公開前のEpic公式スキャン候補属性が不一致');
  const prefix=prizePrefixEvidence(row,win,cp,now);
- if(!prefix&&(!cp||cp.complete!==true||cp.rankingOrderValid!==true||
+ const qualifierPrefix=qualificationEvidence(row,win,cp,data,now);
+ if(!prefix&&!qualifierPrefix&&(!cp||cp.complete!==true||cp.rankingOrderValid!==true||
    cp.epicIdsRetained!==true||!Array.isArray(cp.proposals)||
    cp.proposals.filter(x=>sameScannedCandidate(x,row)).length!==1))
    return decline('完了した保存済み順位表・本人Epic IDの連続性が未確認');
@@ -100,7 +107,7 @@ function decide(row,win,cp,data,now=Date.now()){
         '位。上位'+rule.advance[win.region]+'名だけが決勝進出。'+
         (qualified?'予選突破。':'決勝進出圏外の出場確認。')+
         '予選の現金賞金$0。8pt以上はFroggory Stanceスプレー対象だが配布状況は未確認。'+
-        'BR/ZBを区別し、Epic ID・完了順位表・開催日時・重複を照合。規則: '+rule.source},
+        (qualifierPrefix&&cp.complete!==true?'BR/ZBを区別し、本人Epic ID・終了4時間後以降の連続順位表で通過ライン超過を確認（'+cp.pages+'/'+cp.totalPages+'ページ、全ページ未取得）。開催日時・重複を照合。規則: ':'BR/ZBを区別し、Epic ID・完了順位表・開催日時・重複を照合。規則: ')+rule.source},
      rule:rule.source};
  }
  const prize=payout(rule,win.region,row.rank);
@@ -131,4 +138,4 @@ function evaluate(proposals,windows,checkpoints,data,now=Date.now()){
  }
  return {approved,held,participationIds};
 }
-module.exports={RULES,payout,stageFor,sameSession,prizePrefixEvidence,decide,evaluate};
+module.exports={RULES,payout,stageFor,sameSession,prizePrefixEvidence,qualificationEvidence,decide,evaluate};

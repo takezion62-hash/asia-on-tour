@@ -2,7 +2,7 @@
 // Only the registered S43 Squads BR rules; never use the generic solo VR route.
 const {selectRules,eventWindow}=require('./tournament-approval-policy.cjs');
 const {advancementCutoff,validMatchCount,individualVrPrize}=require('./tournament-rule-engine.cjs');
-const {sameScannedCandidate,verifiedQualifierPrefix,verifiedVrFinal,FOUR_HOURS}=require('./verified-partial-page.cjs');
+const {sameScannedCandidate,verifiedQualifierPrefix,verifiedVrFinal,FOUR_HOURS,verifiedQualification}=require('./verified-partial-page.cjs');
 const {identityProof,mature}=require('./saved-candidate-recheck.cjs');
 const {MANIFEST}=require('./generic-review-only-core.cjs');
 const {collision}=require('./manual-approval-core.cjs');
@@ -57,6 +57,12 @@ function sessionFor(win,schedule){
   (s.endUtc!==undefined&&Date.parse(s.endUtc)!==win.end)||
   (s.sourceWindowId!==undefined&&s.sourceWindowId!==win.windowId))return null;
  return s;
+}
+function qualificationEvidence(row,win,cp,data,now=Date.now()){
+ const stage=stageFor(win);
+ return stage?.round===1&&row?.kind==='予選'&&row.prize===0&&row.reviewOnly!==true&&
+  verifiedQualification(row,win,cp,RULE,stage.cutoff,{now})&&
+  identityProof(row,win,data.verifiedAccounts||[],'squad');
 }
 function vrPrefixEvidence(row,win,cp,data,now=Date.now()){
  const stage=stageFor(win),rule=RULE;
@@ -128,4 +134,4 @@ function evaluate(rows,windows,checkpoints,data,now=Date.now()){
  }
  return {approved,held};
 }
-module.exports={ID,RULES,stageFor,sessionFor,overlaps,vrPrefixEvidence,decide,evaluate};
+module.exports={ID,RULES,stageFor,sessionFor,overlaps,vrPrefixEvidence,qualificationEvidence,decide,evaluate};

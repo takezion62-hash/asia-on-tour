@@ -166,3 +166,19 @@ test('both PlayStation final modes use the actual regional cash boundary; qualif
   assert.equal(decide(qr,q,{...p,proposals:[qr],lastSeenRank:100},database(),now(q)).approved,false);
  }
 });
+
+test('PlayStation BR/ZB partial qualification needs crossed top80 and exact deterministic identity',()=>{
+ for(const eventId of [BR,ZB])for(const region of ['OCE','EU']){
+  const w=win(eventId,'Qualifier',region),d=database();
+  const id='auto-s43-'+require('node:crypto').createHash('sha256').update(JSON.stringify([w.eventId+'/'+w.windowId,[UUID]])).digest('hex').slice(0,12);
+  const r=row(w,80,id),p={...cp(r),complete:false,pages:1,nextPage:1,totalPages:10,lastSeenRank:81,lastSuccessAt:new Date(w.end+5*3600000).toISOString()};
+  const out=decide(r,w,p,d,now(w));assert.equal(out.approved,true,out.reason);assert.equal(out.record.kind,'予選');assert.equal(out.record.prize,0);assert.match(out.record.round,/予選突破$/);
+  assert.match(out.record.note,/全ページ未取得/);
+  for(const bad of [{...p,lastSeenRank:80},{...p,proposals:[r,r]},{...p,lastErrorCode:'429'},{...p,epicIdsRetained:false},{...p,lastSuccessAt:new Date(w.end+3600000).toISOString()}])
+   assert.equal(decide(r,w,bad,d,now(w)).approved,false);
+  const outside={...r,rank:81};assert.equal(decide(outside,w,{...p,proposals:[outside]},d,now(w)).approved,false);
+  const re=require('../scripts/saved-candidate-recheck.cjs').recheckSaved;
+  const input={queue:{proposals:[r]},checkpoints:{[w.key]:p},windows:[w],data:d,config:{autoApprovePlayStation:true},now:now(w)};
+  assert.equal(re(input).approved.length,1);assert.equal(re({...input,config:{}}).approved.length,0);
+ }
+});
