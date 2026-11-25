@@ -54,6 +54,26 @@ function validateRegistry(doc,tournaments){
      {dateJst:'2024-06-25',windowId:'S30_SoloVictoryCashCup_Event4Round1_NAC',
       cutoff:5000,source:'https://fortnitetracker.com/events/epicgames_S30_SoloVictoryCashCup_NAC?window=S30_SoloVictoryCashCup_Event4Round1_NAC'}
     ],
+    'ch5s3-zb-solo-victory':[
+  {
+    "dateJst": "2024-06-04",
+    "windowId": "S30_SoloZBVictoryCashCup_Event1Round1_NAC",
+    "cutoff": 5000,
+    "source": "https://fortnitetracker.com/events/epicgames_S30_SoloZBVictoryCashCup_NAC?page=1&window=S30_SoloZBVictoryCashCup_Event1Round1_NAC"
+  },
+  {
+    "dateJst": "2024-07-30",
+    "windowId": "S30_SoloZBVictoryCashCup_Event7Round1_NAC",
+    "cutoff": 5000,
+    "source": "https://fortnitetracker.com/events/epicgames_S30_SoloZBVictoryCashCup_NAC?window=S30_SoloZBVictoryCashCup_Event7Round1_NAC"
+  },
+  {
+    "dateJst": "2024-08-13",
+    "windowId": "S30_SoloZBVictoryCashCup_Event9Round1_NAC",
+    "cutoff": 5000,
+    "source": "https://fortnitetracker.com/events/epicgames_s30_solozbvictorycashcup_nac?window=S30_SoloZBVictoryCashCup_Event9Round1_NAC"
+  }
+],
     'ch5s5-solo-victory-cup':[
      {dateJst:'2024-11-26',windowId:'S32_SoloVictoryCashCup_Event4Round1_NAC',
       cutoff:10000,source:'https://fortnitetracker.com/events/epicgames_S32_SoloVictoryCashCup_NAC?window=S32_SoloVictoryCashCup_Event4Round1_NAC'}
@@ -78,6 +98,10 @@ function validateRegistry(doc,tournaments){
      rule.prizePerVictory!==50||rule.teamPrizePerVictory!==200||
      rule.finalWinPoints!==100||rule.autoApproval!==undefined
    ))fail(id,'S43 Squads予選通過・決勝VR100pt・個人$50/チーム$200の公式条件が不一致');
+   if(['ch5s3-solo-victory-cup','ch5s3-zb-solo-victory','ch5s4-solo-victory-cup','ch5s4-zb-solo-victory'].includes(id)&&
+    (rule.team!=='solo'||rule.prizePerVictory!==100||rule.matchCaps['予選']!==7||rule.matchCaps['賞金決勝']!==3||
+     rule.advance.NAC!==undefined||rule.advance.NAW!==undefined))
+    fail(id,'2024 Solo BR/ZB公式決勝1VR=$100・試合上限・旧NA地域対応が不一致');
    if(rule.cosmeticRanks!==undefined)fail(id,'Victory Cupにスキン順位は登録不可');
    if(rule.prizePerVictory!==undefined&&(!positive(rule.prizePerVictory)||rule.prizePerVictory>10000))fail(id,'VR賞金単価が不正');
    if(rule.autoApproval==='verified-qualifier-participation'){
