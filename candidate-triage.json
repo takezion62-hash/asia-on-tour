@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "sourceCheckedAt": "2026-11-24T23:20:24.691Z",
+  "sourceCheckedAt": "2026-11-25T00:46:07.288Z",
   "total": 72,
   "alreadyResolved": 0,
   "byYear": [
@@ -92,11 +92,11 @@
   "byStatus": [
     {
       "name": "partial-scan",
-      "count": 63
+      "count": 62
     },
     {
       "name": "rules-review",
-      "count": 9
+      "count": 10
     }
   ],
   "queue": [
@@ -393,6 +393,39 @@
         "seenPages": 23,
         "totalPages": 23,
         "sourceKey": "epicgames_S43_SquadsVictoryCup_ME/S43_SquadsVictoryCup_Event2_Round1_ME",
+        "possibleExistingId": null
+      },
+      "rewardState": "source-amount-present-not-verified-by-triage"
+    },
+    {
+      "id": "auto-s43-cc6b99b77e85",
+      "origin": "recent",
+      "date": "2026-11-24",
+      "year": "2026",
+      "region": "NAW",
+      "tournamentId": "ch7s5-squads-victory-cup",
+      "event": "Squads Victory Cup Battle Royale",
+      "round": "Event 2 · Round 1 / 予選",
+      "player": "guppafv / meath / Smile / Tossy",
+      "kind": "予選",
+      "rank": 274,
+      "points": 270,
+      "kills": 55,
+      "vrs": 1,
+      "prize": 0,
+      "source": "https://www.fortnite.com/competitive/events/S43_SquadsVictoryCup/?region=NAW&round=S43_SquadsVictoryCup_Event2_Round1_NAW",
+      "status": "rules-review",
+      "action": "公式規則・賞金・突破・スキン条件を個別確認",
+      "reason": "4選手の元Epic ID・候補IDの再照合が必要",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": true,
+        "observedPartial": false,
+        "seenPages": 37,
+        "totalPages": 37,
+        "sourceKey": "epicgames_S43_SquadsVictoryCup_NAW/S43_SquadsVictoryCup_Event2_Round1_NAW",
         "possibleExistingId": null
       },
       "rewardState": "source-amount-present-not-verified-by-triage"
@@ -2442,39 +2475,6 @@
         "possibleExistingId": null
       },
       "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s43-cc6b99b77e85",
-      "origin": "recent",
-      "date": "2026-11-24",
-      "year": "2026",
-      "region": "NAW",
-      "tournamentId": "ch7s5-squads-victory-cup",
-      "event": "Squads Victory Cup Battle Royale",
-      "round": "Event 2 · Round 1 / 予選",
-      "player": "guppafv / meath / Smile / Tossy",
-      "kind": "予選",
-      "rank": 274,
-      "points": 270,
-      "kills": 55,
-      "vrs": 1,
-      "prize": 0,
-      "source": "https://www.fortnite.com/competitive/events/S43_SquadsVictoryCup/?region=NAW&round=S43_SquadsVictoryCup_Event2_Round1_NAW",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "4選手の元Epic ID・候補IDの再照合が必要",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 31,
-        "totalPages": 37,
-        "sourceKey": "epicgames_S43_SquadsVictoryCup_NAW/S43_SquadsVictoryCup_Event2_Round1_NAW",
-        "possibleExistingId": null
-      },
-      "rewardState": "source-amount-present-not-verified-by-triage"
     }
   ],
   "policy": "read-only queue; awards require existing official rule-backed validators and identity/collision proof"
