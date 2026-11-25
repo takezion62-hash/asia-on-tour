@@ -394,6 +394,17 @@ function audit(results,ledger,players,{promotionEvidence}={}){
   return loadedPromotionEvidence;
  };
 
+ let awardRecheckEvidence;
+ const recheckedAward=(row,entry)=>{
+  try{
+   if(awardRecheckEvidence===undefined){
+    const M=require('./attendance-award-recheck.cjs');
+    awardRecheckEvidence=fs.existsSync(path.join(root,M.HISTORY))?{
+     M,history:load(M.HISTORY),context:M.loadContext(root,{results,players,withScans:false})}:null;
+   }
+   return !!awardRecheckEvidence&&awardRecheckEvidence.M.verifyPromotion(row,entry,awardRecheckEvidence.context,awardRecheckEvidence.history);
+  }catch{return false}
+ };
  const errors=[];
  if(ledger?.version!==1||!Array.isArray(ledger.entries))return ['approval-history.json is invalid'];
  // Index the current snapshot once; all historical approval rules below stay
@@ -478,6 +489,7 @@ function audit(results,ledger,players,{promotionEvidence}={}){
   if(entry.policy==='attendance-only'&&(r.kind!=='参加確認'||r.prize!==null||r.reviewOnly===true)&&
      !verifiedPublishedPromotion(r,entry,evidence())&&
      !verifiedCashPromotion(r,entry,results,players)&&
+     !recheckedAward(r,entry)&&
      !validNov17S41Award(r,entry))
     errors.push('Participation was changed into unsupported confirmed award: '+entry.id);
   // The June 18, 2024 NAC Round 1 cutoff was top 5,000.

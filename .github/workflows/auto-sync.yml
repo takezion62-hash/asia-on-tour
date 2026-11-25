@@ -25,6 +25,7 @@ on:
       - "scripts/automatic-cash-approval.cjs"
       - "scripts/promote-published-cash.cjs"
       - "scripts/participation-promotion.cjs"
+      - "scripts/attendance-award-recheck.cjs"
       - "scripts/automatic-unreal-approval.cjs"
       - "scripts/automatic-performance-approval.cjs"
       - "tournament-rules.json"
@@ -147,10 +148,12 @@ jobs:
             node scripts/source-results-store.cjs verify
             node scripts/participation-promotion.cjs --dry-run
             node scripts/participation-promotion.cjs
+            node scripts/attendance-award-recheck.cjs --dry-run
+            node scripts/attendance-award-recheck.cjs --apply
             node scripts/promote-published-cash.cjs --dry-run
             node scripts/promote-published-cash.cjs --apply
             npm run validate
-            node --test tests/published-cash-promotion.test.cjs
+            node --test tests/published-cash-promotion.test.cjs tests/attendance-award-recheck.test.cjs
             node --test tests/participation-promotion.test.cjs tests/automatic-cash-approval.test.cjs
             # Writes only altered season/result shard files and affected
             # aggregate rankings; no worldwide provider or historic rescan.
@@ -159,6 +162,7 @@ jobs:
             git add -A -- source-results/ season-data/
             git add -- candidate-triage.json
             if [ -f cash-promotion-history.json ]; then git add cash-promotion-history.json; fi
+            if [ -f attendance-award-recheck-history.json ]; then git add attendance-award-recheck-history.json; fi
             if [ -f participation-promotion-state.json ]; then
               git add -- participation-promotion-state.json
             fi
