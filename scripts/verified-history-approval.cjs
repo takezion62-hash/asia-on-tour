@@ -140,6 +140,16 @@ function decide(row,win,checkpoint,data,now=Date.now()){
 
  }else if(row.kind==='賞金決勝'){
   if(row.prize!==null)return decline('APIの賞金額は未確認のまま照合する必要があります');
+  // Newly enabled historical solo cash must replay an exact mature saved
+  // result with deterministic verified identity, even for a complete scan.
+  if(['ch5s3-solo-victory-cup','ch5s3-zb-solo-victory','ch5s4-solo-victory-cup','ch5s4-zb-solo-victory'].includes(rule.id)&&row.vrs>0){
+   const {matureFullLeaderboard,candidateObserved}=require('./verified-partial-page.cjs');
+   const expected=win.eventId+'_Event'+String(win.round).match(/^Event ([1-9][0-9]*) · Round 2 \/ 賞金決勝$/u)?.[1]+'Round2_'+win.region;
+   if(win.windowId!==expected||row.rank>qualifierCutoff||row.points<=0||
+    (!vrPrefix&&!(matureFullLeaderboard(row,win,checkpoint,now)&&candidateObserved(row,checkpoint,{unique:true})&&
+      require('./saved-candidate-recheck.cjs').identityProof(row,win,data.verifiedAccounts||[],'solo'))))
+    return decline('2024 Solo決勝の本人ID・成熟済み順位表・開催枠を再確認');
+  }
   // Never guess dollars for a season without a verified payout rule.
   const amount=individualVrPrize(rule,row.vrs,{allowUnknownZero:true});
   if(amount===null)
