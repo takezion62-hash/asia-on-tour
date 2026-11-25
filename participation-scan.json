@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-11-24T23:41:05.051Z",
+  "checkedAt": "2026-11-25T11:48:55.737Z",
   "windows": {
     "epicgames_S42_InoxtagIconCup_NAW/S42_InoxtagIconCup_NAW": {
       "nextPage": 60,
@@ -471,12 +471,12 @@
       "emptyAttempts": 0
     },
     "epicgames_S30_SoloVictoryCashCup_OCE/S30_SoloVictoryCashCup_Event6Round1_OCE": {
-      "nextPage": 50,
-      "pages": 50,
+      "nextPage": 57,
+      "pages": 57,
       "complete": false,
       "coverageLimited": false,
       "totalPages": 100,
-      "lastScanned": "2026-11-13T21:34:38.071Z",
+      "lastScanned": "2026-11-25T11:48:55.737Z",
       "emptyAttempts": 0
     },
     "epicgames_S33_SoloCashCup_NAW/S33_SoloCashCup_Event5Round2_NAW": {
@@ -1382,6 +1382,15 @@
       "coverageLimited": false,
       "totalPages": 1,
       "lastScanned": "2026-11-24T23:40:25.923Z",
+      "emptyAttempts": 0
+    },
+    "epicgames_S43_PlayStationCup_ZB_NAW/S43_PlayStationCup_ZB_Final_NAW": {
+      "nextPage": 1,
+      "pages": 1,
+      "complete": true,
+      "coverageLimited": false,
+      "totalPages": 1,
+      "lastScanned": "2026-11-25T11:48:42.757Z",
       "emptyAttempts": 0
     }
   }
