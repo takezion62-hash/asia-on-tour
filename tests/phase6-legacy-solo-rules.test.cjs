@@ -48,3 +48,13 @@ test('S30 ZB NAC qualifiers are only exact three sourced windows, no blanket map
  const {row,win,cp,data}=fixture(ids[1],{event:8,date:'2024-08-06',region:'NAC',round:1,rank:1});
  assert.equal(decide(row,win,cp,data,now).approved,false);
 });
+
+test('real saved legacy queue can be previewed without provider calls or publication',()=>{
+ const {preview}=require('../scripts/phase6-legacy-solo-preview.cjs');
+ const report=preview();
+ assert.equal(report.dryRun,true);assert.equal(report.additionalProviderRequests,0);
+ assert.ok(report.checked<=report.pending);
+ assert.equal(new Set(report.approved.map(x=>x.id)).size,report.approved.length);
+ for(const row of report.approved)assert.ok(row.kind==='予選'?row.prize===0:row.kind==='賞金決勝'&&[0,100,200,300].includes(row.prize));
+ console.log('PHASE6_LEGACY_PREVIEW '+JSON.stringify({pending:report.pending,checked:report.checked,approved:report.approved.length,additionalProviderRequests:0}));
+});
