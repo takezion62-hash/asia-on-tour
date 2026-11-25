@@ -110,7 +110,7 @@ test('プロフィール・地域グラフ・別名義・同名別人・共有UR
 });
 
 test('大会タグ検索・大会URLをデータから照合する', async ({ page }) => {
-  test.slow(); // Check the complete catalog and every facet against the current JSON.
+  test.setTimeout(180_000); // Full catalog facets and deep-link reload can exceed 135s on shared CI runners.
   await page.getByRole('button', { name: '大会を探す', exact: true }).click();
   const ids = [...new Set(rows.map(r => tournamentKey(r, data)))];
   await expect(page.locator('#tournament-count')).toHaveText(ids.length.toLocaleString('ja-JP') + '大会 · ' + rows.length.toLocaleString('ja-JP') + '戦績');
@@ -137,6 +137,7 @@ test('大会タグ検索・大会URLをデータから照合する', async ({ pa
 const seasonChecks=seasonCheckGroups(rows.map(row=>seasonFor(row,data)),4);
 seasonChecks.forEach((group,index)=>{
   test('シーズン切り替え時の件数・個人賞金を照合する ('+(index+1)+'/'+seasonChecks.length+': '+group.join(', ')+')',async ({page},testInfo)=>{
+    test.slow(); // Up to four real season loads plus the full-archive setup; allow 135s, retain all assertions.
     // Each group gets its own browser and timeout, without skipping seasons.
     // The global beforeEach already opens all-seasons dashboard.
     await expect(page.locator('#page-home')).toBeVisible();
