@@ -64,7 +64,10 @@ function applyPreview(snapshot,report){
   if(ids.has(old.id)||old.kind!=='参加確認'||hash(p.before)!==hash({kind:old.kind,round:old.round,prize:old.prize}))
    throw Error('Phase 5 protected or stale ID '+old.id);
   const {prizePerPlayer,teamPrize,...base}=old;
-  const next={...base,...p.after,note:p.note};
+  // The planner stores the evidence note inside after, not at proposal root.
+  // Do not overwrite it with an undefined top-level field.
+  const next={...base,...p.after};
+  if(typeof next.note!=='string'||!next.note.trim())throw Error('Phase 5 missing evidence note '+old.id);
   if(next.id!==old.id)throw Error('Phase 5 ID changed');
   if(Array.isArray(next.players)&&next.players.length>1&&next.prize>0&&
    (!Number.isSafeInteger(next.prizePerPlayer)||next.prizePerPlayer*next.players.length!==next.prize))
