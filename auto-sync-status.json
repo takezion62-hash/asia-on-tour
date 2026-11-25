@@ -1,7 +1,7 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-25T12:02:25.574Z",
+  "checkedAt": "2026-11-25T13:01:40.700Z",
   "mode": "review",
   "scope": "recent",
   "dateMode": null,
@@ -13,12 +13,12 @@
   "trackedWindows": 162,
   "found": 2,
   "skipped": 0,
-  "imported": 4,
+  "imported": 0,
   "scannedPages": 30,
-  "completedWindows": 142,
+  "completedWindows": 143,
   "identityConflicts": 3,
-  "alreadyRegistered": 310,
-  "autoApprovedTotal": 3609,
+  "alreadyRegistered": 314,
+  "autoApprovedTotal": 3642,
   "invalidCachedCandidates": 0,
   "manualReviewCandidates": 2,
   "autoApprovedCosmeticThisRun": 0,
@@ -38,24 +38,24 @@
     "S43_ScottPilgrimCup_Mobile",
     "S43_ScottPilgrimCup_ZB"
   ],
-  "message": "FNCS・Performance・Days of Playの検証済み順位2件を通常一覧へ掲載。確認待ち2件。",
+  "message": "最新版と安全統合：新規掲載0件、重複スキップ0件、要確認の競合0件、確認待ち2件。既存の戦績・賞金は保持。",
   "concurrentMerge": {
-    "appended": 4,
+    "appended": 0,
     "alreadyPublished": 0,
     "reviewConflicts": 0,
     "keptPending": 2,
-    "reconciledAt": "2026-11-25T12:02:33.672Z"
+    "reconciledAt": "2026-11-25T13:01:47.771Z"
   },
   "coverage": {
     "total": 162,
-    "completed": 142,
-    "notStarted": 11,
+    "completed": 143,
+    "notStarted": 10,
     "partial": 9,
     "retryWaiting": 0,
     "retryDue": 0,
-    "remaining": 20,
+    "remaining": 19,
     "retryCount": 0,
-    "completionPercent": 87.7,
+    "completionPercent": 88.3,
     "byRegion": {
       "EU": {
         "total": 31,
@@ -84,15 +84,15 @@
       },
       "NAW": {
         "total": 25,
-        "completed": 23,
-        "pending": 2
+        "completed": 24,
+        "pending": 1
       }
     },
     "byYear": {
       "2026": {
         "total": 162,
-        "completed": 142,
-        "pending": 20
+        "completed": 143,
+        "pending": 19
       }
     },
     "outsideScopeCheckpoints": 36,
@@ -103,7 +103,7 @@
         "region": "EU",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 36,
+        "nextPage": 37,
         "totalPages": 86,
         "retryAfter": null,
         "errorCode": null
@@ -114,19 +114,8 @@
         "region": "NAC",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 12,
+        "nextPage": 13,
         "totalPages": 44,
-        "retryAfter": null,
-        "errorCode": null
-      },
-      {
-        "window": "epicgames_S43_TriosCashCup_NAW/S43_TriosCashCup_Event3_NAW",
-        "date": "2026-11-23",
-        "region": "NAW",
-        "series": "cash-cup",
-        "status": "partial",
-        "nextPage": 19,
-        "totalPages": 20,
         "retryAfter": null,
         "errorCode": null
       },
@@ -136,7 +125,7 @@
         "region": "BR",
         "series": "victory-cup",
         "status": "partial",
-        "nextPage": 8,
+        "nextPage": 11,
         "totalPages": 34,
         "retryAfter": null,
         "errorCode": null
@@ -147,7 +136,7 @@
         "region": "EU",
         "series": "victory-cup",
         "status": "partial",
-        "nextPage": 80,
+        "nextPage": 90,
         "totalPages": 100,
         "retryAfter": null,
         "errorCode": null
@@ -158,7 +147,7 @@
         "region": "NAC",
         "series": "victory-cup",
         "status": "partial",
-        "nextPage": 35,
+        "nextPage": 45,
         "totalPages": 66,
         "retryAfter": null,
         "errorCode": null
@@ -169,7 +158,7 @@
         "region": "BR",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 2,
+        "nextPage": 3,
         "totalPages": 4,
         "retryAfter": null,
         "errorCode": null
@@ -180,7 +169,7 @@
         "region": "EU",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 3,
+        "nextPage": 4,
         "totalPages": 13,
         "retryAfter": null,
         "errorCode": null
@@ -191,7 +180,18 @@
         "region": "ME",
         "series": "cash-cup",
         "status": "partial",
-        "nextPage": 2,
+        "nextPage": 3,
+        "totalPages": 4,
+        "retryAfter": null,
+        "errorCode": null
+      },
+      {
+        "window": "epicgames_S43_ArenaCashCup_NAW/S43_ArenaCashCup_Event2_NAW",
+        "date": "2026-11-25",
+        "region": "NAW",
+        "series": "cash-cup",
+        "status": "partial",
+        "nextPage": 1,
         "totalPages": 4,
         "retryAfter": null,
         "errorCode": null
@@ -259,17 +259,17 @@
     "minRequestIntervalMs": 1200,
     "reason": "steady-state",
     "requests": 36,
-    "waitedMs": 6625,
+    "waitedMs": 5151,
     "intervalMs": 1200
   },
-  "autoApprovedPlayStationThisRun": 4,
+  "autoApprovedPlayStationThisRun": 0,
   "autoApprovedSquadsThisRun": 0,
   "autoApprovedConsoleDuosThisRun": 0,
   "unmappedDiscovery": {
     "version": 1,
     "provider": "osirion",
     "scope": "recent",
-    "observedAt": "2026-11-25T12:01:35.621Z",
+    "observedAt": "2026-11-25T13:00:58.170Z",
     "totalEvents": 3,
     "entries": [
       {
@@ -558,23 +558,23 @@
     "version": 1,
     "scope": "auto",
     "latest": {
-      "runId": "e87ca700a3168ee820fd6eb5",
-      "measuredAt": "2026-11-25T12:02:25.574Z",
+      "runId": "259e52e47bc52f933ed1565d",
+      "measuredAt": "2026-11-25T13:01:40.700Z",
       "mode": "provider-scan",
       "pendingAtStart": 2,
-      "newCandidates": 4,
-      "observedCandidates": 6,
+      "newCandidates": 0,
+      "observedCandidates": 2,
       "oldPublished": 0,
       "oldDuplicateResolved": 0,
       "oldPendingAfter": 2,
       "oldOtherRemoved": 0,
-      "published": 4,
-      "newPublished": 4,
+      "published": 0,
+      "newPublished": 0,
       "newPendingAfter": 0,
       "newOtherNotPublished": 0,
       "autoResolutionRate": 0,
-      "autoPublicationRate": 66.67,
-      "newCandidatePublicationRate": 100,
+      "autoPublicationRate": 0,
+      "newCandidatePublicationRate": null,
       "pendingAtEnd": 2,
       "concurrentPublishedOrReviewed": 0,
       "skippedApprovalDuplicates": 0,
@@ -609,41 +609,67 @@
         "scannedPages": 30,
         "providerRequests": 36,
         "savedRecheck": null
+      },
+      {
+        "runId": "259e52e47bc52f933ed1565d",
+        "measuredAt": "2026-11-25T13:01:40.700Z",
+        "mode": "provider-scan",
+        "pendingAtStart": 2,
+        "newCandidates": 0,
+        "observedCandidates": 2,
+        "oldPublished": 0,
+        "oldDuplicateResolved": 0,
+        "oldPendingAfter": 2,
+        "oldOtherRemoved": 0,
+        "published": 0,
+        "newPublished": 0,
+        "newPendingAfter": 0,
+        "newOtherNotPublished": 0,
+        "autoResolutionRate": 0,
+        "autoPublicationRate": 0,
+        "newCandidatePublicationRate": null,
+        "pendingAtEnd": 2,
+        "concurrentPublishedOrReviewed": 0,
+        "skippedApprovalDuplicates": 0,
+        "conflicts": 0,
+        "scannedPages": 30,
+        "providerRequests": 36,
+        "savedRecheck": null
       }
     ],
     "rolling": {
       "last7Runs": {
-        "runs": 1,
-        "pendingAtStart": 2,
+        "runs": 2,
+        "pendingAtStart": 4,
         "newCandidates": 4,
-        "observedCandidates": 6,
+        "observedCandidates": 8,
         "oldPublished": 0,
         "oldDuplicateResolved": 0,
-        "oldPendingAfter": 2,
+        "oldPendingAfter": 4,
         "oldOtherRemoved": 0,
         "published": 4,
         "newPublished": 4,
         "newPendingAfter": 0,
         "newOtherNotPublished": 0,
         "autoResolutionRate": 0,
-        "autoPublicationRate": 66.67,
+        "autoPublicationRate": 50,
         "newCandidatePublicationRate": 100
       },
       "last30Runs": {
-        "runs": 1,
-        "pendingAtStart": 2,
+        "runs": 2,
+        "pendingAtStart": 4,
         "newCandidates": 4,
-        "observedCandidates": 6,
+        "observedCandidates": 8,
         "oldPublished": 0,
         "oldDuplicateResolved": 0,
-        "oldPendingAfter": 2,
+        "oldPendingAfter": 4,
         "oldOtherRemoved": 0,
         "published": 4,
         "newPublished": 4,
         "newPendingAfter": 0,
         "newOtherNotPublished": 0,
         "autoResolutionRate": 0,
-        "autoPublicationRate": 66.67,
+        "autoPublicationRate": 50,
         "newCandidatePublicationRate": 100
       }
     }
