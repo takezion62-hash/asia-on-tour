@@ -27,7 +27,9 @@ test('canonical prior player identities reused with exact Tracker Epic UUID',()=
  for(let i=0;i<V.GOLD.length;i++){
   const [shot,stage,rank,name,uid,points,games,kills,vrs,cash]=V.GOLD[i];
   const x=V.DOC.batch.entries[i],m=V.M[stage];
-  assert.ok(nameSet.has(name));
+  const resolved=nameSet.has(name)?[name]:Object.entries(p.confirmedAliases).filter(([owner,alts])=>nameSet.has(owner)&&alts.includes(name)).map(([owner])=>owner);
+  assert.equal(resolved.length,1,'unique confirmed canonical identity '+name);
+  if(name==='yotta guɿäʙöɴ-ɷ-'&&!nameSet.has(name))assert.equal(resolved[0],'gurabon');
   assert.equal(x.name,name);assert.equal(x.rawName,name);assert.equal(x.epicUUID,uid);
   assert.equal(V.epicId(x.profileUrl),uid);
   assert.equal(x.id,V.idFor(stage,rank));
