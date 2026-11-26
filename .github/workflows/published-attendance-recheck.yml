@@ -1,5 +1,10 @@
 name: AOT published attendance recheck
 on:
+  push:
+    branches:
+      - 'ops/attendance-recheck/**'
+    paths:
+      - 'review-requests/attendance-recheck.json'
   pull_request:
     paths:
       - 'scripts/published-attendance*.cjs'
@@ -42,7 +47,7 @@ jobs:
           path: phase5-preview.json
           retention-days: 14
   prepare:
-    if: github.event_name == 'workflow_dispatch' && !inputs.preview_only
+    if: (github.event_name == 'workflow_dispatch' && !inputs.preview_only) || (github.event_name == 'push' && !github.event.deleted)
     permissions:
       contents: write
       pull-requests: write
@@ -51,6 +56,7 @@ jobs:
     timeout-minutes: 20
     steps:
       - name: Require trusted main and explicit approval
+        if: github.event_name == 'workflow_dispatch'
         env:
           CONFIRMATION: ${{ inputs.confirmation }}
         run: |
@@ -63,20 +69,41 @@ jobs:
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
         with:
           node-version: '24'
+      # The request branch is data only. Never check out or execute its code.
+      - name: Read and validate the single-file request against trusted main
+        if: github.event_name == 'push'
+        env:
+          REQUEST_SHA: ${{ github.sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "$REQUEST_SHA" =~ ^[0-9a-f]{40}$ ]]
+          git fetch --no-tags origin "$REQUEST_SHA"
+          test "$(git cat-file -s "$REQUEST_SHA:review-requests/attendance-recheck.json")" -le 4096
+          git show "$REQUEST_SHA:review-requests/attendance-recheck.json" > .attendance-request.json
+          node scripts/published-attendance-request.cjs
       - name: Prepare validated correction on local checkout
+        id: correction
         env:
           AOT_PHASE5_CONFIRMATION: CONFIRM
         run: |
+          set -euo pipefail
           git rev-parse HEAD > .phase5-base
+          if [[ "$GITHUB_EVENT_NAME" == push ]]; then
+            test "$(cat .phase5-base)" = "$AOT_ATTENDANCE_REQUEST_BASE"
+          fi
           node scripts/published-attendance-phase5.cjs --apply > phase5-preview.json
+          node -e 'const r=require("./phase5-preview.json");if(!Number.isSafeInteger(r.totalChanges)||r.totalChanges<0||r.additionalProviderRequests!==0||r.publishedBefore!==r.publishedAfter)throw Error("Invalid correction report");console.log("has_changes="+(r.totalChanges>0));' >> "$GITHUB_OUTPUT"
+          node -e 'const r=require("./phase5-preview.json");console.log(JSON.stringify({attendance:r.attendance,checked:r.checked,totalChanges:r.totalChanges,additionalProviderRequests:r.additionalProviderRequests}));' >> "$GITHUB_STEP_SUMMARY"
           node scripts/build-season-data.cjs
           node scripts/build-candidate-triage.cjs
           node scripts/build-source-results.cjs --check
           npm run validate
           node scripts/build-season-data.cjs --check
           node scripts/build-candidate-triage.cjs --check
-          node --test tests/published-attendance-recheck.test.cjs tests/published-attendance-phase5.test.cjs tests/approval-history.test.cjs tests/update-history.test.cjs
+          node --test tests/published-attendance-request.test.cjs tests/published-attendance-recheck.test.cjs tests/published-attendance-phase5.test.cjs tests/approval-history.test.cjs tests/update-history.test.cjs
       - name: Propose data-only branch, never merge automatically
+        if: steps.correction.outputs.has_changes == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -100,11 +127,13 @@ jobs:
           git switch -c "$BRANCH"
           git commit -m "review: published attendance corrections"
           git push -u origin "$BRANCH"
+          echo "AOT_ATTENDANCE_REQUEST verified-branch=$BRANCH base=$BASE"
           if gh pr create --base main --head "$BRANCH" --title "Review: Phase 5 published attendance corrections" --body "Offline evidence replay; existing IDs and registration history preserved. Review CI before merging."; then
             gh workflow run tests.yml --ref "$BRANCH" -f "review_base_sha=$BASE"
           else
             echo "::warning::PR creation failed; data branch preserved for connected GitHub App review: $BRANCH"
             echo "https://github.com/$GITHUB_REPOSITORY/compare/main...$BRANCH?expand=1" >> "$GITHUB_STEP_SUMMARY"
+            echo "AOT_ATTENDANCE_REQUEST app-pr-needed=$BRANCH"
           fi
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         if: always()
