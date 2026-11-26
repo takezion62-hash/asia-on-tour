@@ -2,10 +2,10 @@
   "version": 1,
   "role": "generated canonical-source snapshot; results.json remains authoritative in phase 1",
   "canonicalFile": "results.json",
-  "canonicalSha256": "7a1d47487d458defeca58e084b3d02101a5eed60e2fa788e81f146811b325c5d",
-  "count": 9761,
+  "canonicalSha256": "0f7ceb220c7b581294594ba27b0942d06d9665ca6d7d5e2a12e60cad684827eb",
+  "count": 9765,
   "teamPrizeCents": 12391000,
-  "unconfirmedPrizeRecords": 1757,
+  "unconfirmedPrizeRecords": 1761,
   "personalPrizeCents": 12371000,
   "recordOrder": [
     "s42-me-slenderman-reload-skin-20261021-acris-chacha",
@@ -9768,7 +9768,11 @@
     "auto-s35-1d9844baa00d",
     "auto-s35-410c6df7ae59",
     "auto-s35-37adc5e9c3fc",
-    "auto-s35-d9a2d94b9e89"
+    "auto-s35-d9a2d94b9e89",
+    "auto-s39-0aee542b1341",
+    "auto-s42-6b83f70fb041",
+    "auto-s42-9f1043475bd4",
+    "auto-s42-651ea2970276"
   ],
   "shards": [
     {
@@ -9918,11 +9922,11 @@
     {
       "seasonId": "S39",
       "file": "source-results/S39.json",
-      "count": 326,
+      "count": 327,
       "teamPrizeCents": 1630000,
-      "unconfirmedPrizeRecords": 135,
+      "unconfirmedPrizeRecords": 136,
       "personalPrizeCents": 1630000,
-      "sha256": "e3df5f6464376ceff79f83c581275af636760ed0d592016228afc27b90c9c8db"
+      "sha256": "1dd842d9587a1ca95622c44b18bc8f3bf1f6b919c4d3fd90f1201cc598061815"
     },
     {
       "seasonId": "S40",
@@ -9945,11 +9949,11 @@
     {
       "seasonId": "S42",
       "file": "source-results/S42.json",
-      "count": 2465,
+      "count": 2468,
       "teamPrizeCents": 1195000,
-      "unconfirmedPrizeRecords": 579,
+      "unconfirmedPrizeRecords": 582,
       "personalPrizeCents": 1195000,
-      "sha256": "50a555d47d42cb9a68e99f436b78805e55928ae7f8799836aa315e92ba7b2b61"
+      "sha256": "69922c500cdadaee2e16bfe59ea50987fbe3092063fd489d0547627c3a418c61"
     },
     {
       "seasonId": "S43",
