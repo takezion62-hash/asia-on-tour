@@ -371,6 +371,7 @@ function validS36Squid7(r,entry){
 }
 
 function audit(results,ledger,players,{promotionEvidence}={}){
+ const {verifyHistoricalRow}=require('./confirmed-player-renames-20261126.cjs');
  let loadedPromotionEvidence=promotionEvidence;
  let loaded=false;
  const evidence=()=>{
@@ -461,7 +462,7 @@ function audit(results,ledger,players,{promotionEvidence}={}){
     errors.push('S30 NAC ZB Solo 45-page original 1VR $100 winner evidence or identity changed: '+entry.id);
   if(entry.policy===S30_ZB_REVIEW_ELEVEN_POLICY&&!validS30ReviewEleven(r,entry))
     errors.push('S30 NAC Round1 or OCE Round2 verified review result, rank, award, or qualifier cutoff altered: '+entry.id);
-  if(entry.policy===S30_CLEAN_PARTIAL_38_POLICY&&!validS30CleanPartial38(r,entry))
+  if(entry.policy===S30_CLEAN_PARTIAL_38_POLICY&&!verifyHistoricalRow(validS30CleanPartial38,r,entry,players))
     errors.push('S30 clean-prefix official Epic ID, original rank, cash or top5000 cutoff altered: '+entry.id);
   if(entry.policy===NINE_RULES_POLICY&&!validNineRules(r,entry))
     errors.push('Nine reviewed source-backed participant stages, Epic identity, original rank or $0 cash altered: '+entry.id);
@@ -518,14 +519,14 @@ function audit(results,ledger,players,{promotionEvidence}={}){
   if(entry.policy===S37_NAW_PS_ZERO_CONSOLE_THREE_POLICY&&!validS37NawPsZeroConsoleThree(r,entry))errors.push('Invalid NAW S37 PlayStation no-cash final and Console Duo original screenshot or Epic identity: '+entry.id);
   if(entry.policy===S21_S22_S35_S36_S37_TEN_POLICY&&!validHistoricalTen(r,entry))errors.push('Invalid 2022 PlayStation / 2025 NAW Duo 10 screenshots, ranks, Epic IDs or payout: '+entry.id);
   if(entry.policy===S21_S25_S41_S42_TEN_POLICY&&!validTen1970(r,entry))errors.push('Invalid owner screenshots 1970-1979 original Epic UUID, final rank, type or prize: '+entry.id);
-  if(entry.policy===MOBILE_NINE_POLICY&&!validMobileNine(r,entry))errors.push('Mobile Series screenshots 1986-1994 staged awards, UUID or scoring proof altered: '+entry.id);
-  if(entry.policy===MOBILE_TEN_POLICY&&!validMobileTen(r,entry))errors.push('Mobile Series 10 screenshots, original Epic ID, stage cash or prize rule altered: '+entry.id);
-  if(entry.policy===MOBILE_OCE_NAW_TEN_POLICY&&!validMobileOceNawTen(r,entry))errors.push('Invalid OCE/NAW mobile screenshot 2008-2017, exact Epic UUID, rank, award or VR: '+entry.id);
-  if(entry.policy===MOBILE_EXTRA_TEN_POLICY&&!validMobileExtraTen(r,entry))errors.push('Mobile screenshot 2018-2027 differs from locked Epic UUID, stage, award, or VR: '+entry.id);
+  if(entry.policy===MOBILE_NINE_POLICY&&!verifyHistoricalRow(validMobileNine,r,entry,players))errors.push('Mobile Series screenshots 1986-1994 staged awards, UUID or scoring proof altered: '+entry.id);
+  if(entry.policy===MOBILE_TEN_POLICY&&!verifyHistoricalRow(validMobileTen,r,entry,players))errors.push('Mobile Series 10 screenshots, original Epic ID, stage cash or prize rule altered: '+entry.id);
+  if(entry.policy===MOBILE_OCE_NAW_TEN_POLICY&&!verifyHistoricalRow(validMobileOceNawTen,r,entry,players))errors.push('Invalid OCE/NAW mobile screenshot 2008-2017, exact Epic UUID, rank, award or VR: '+entry.id);
+  if(entry.policy===MOBILE_EXTRA_TEN_POLICY&&!verifyHistoricalRow(validMobileExtraTen,r,entry,players))errors.push('Mobile screenshot 2018-2027 differs from locked Epic UUID, stage, award, or VR: '+entry.id);
   if(entry.policy===S28_NAC_ZB_DUOS_3_POLICY&&!validS28NacZbDuos3(r,entry))errors.push('Invalid S28 NAC Zero Build Duos original screenshots, Epic accounts, $100 per player or event window: '+entry.id);
   if(entry.policy===PENDING22_POLICY&&!validPending22(r,entry))errors.push('Original 22 Epic source-observed score, member, round or $0 payout was modified: '+entry.id);
   if(entry.policy===S22_S25_S31_PS_20261114_POLICY&&!verified2022to2024PSCups(r,entry))errors.push('Unverified September 2022/2024 PlayStation Cup or June 2023 ZB Duos placement, cash bracket, Epic ID or tournament window: '+entry.id);
-  if(entry.policy===S37_S39_S40_SEVEN_CASH_POLICY&&!verifiedSevenCash(r,entry))errors.push('Unverified S37 console duos, S39 Unreal Cup or S40 Solo VC exact screenshot/VR/cash/Epic identity: '+entry.id);
+  if(entry.policy===S37_S39_S40_SEVEN_CASH_POLICY&&!verifyHistoricalRow(verifiedSevenCash,r,entry,players))errors.push('Unverified S37 console duos, S39 Unreal Cup or S40 Solo VC exact screenshot/VR/cash/Epic identity: '+entry.id);
   if(entry.policy===S37_S41_OCE_FIVE_CASH_POLICY&&!verifiedOceFiveCash(r,entry))errors.push('Unverified OCE 2025 S37 console duo or 2026 S41 zero-build solo cash score/VR/Epic ID: '+entry.id);
   if(entry.policy===EU_UNREAL_ME_TRIOS_FOUR_POLICY&&!verifiedFourCash(r,entry))errors.push('Incorrect EU Unreal 919 prize or ME S31/S32 trios placement/cash/identity after correction: '+entry.id);
   if(entry.policy===KAME_ME_DUOS_TWO_POLICY&&!verifiedKameMeDuoCash(r,entry))errors.push('Incorrect 2022/2024 Kame duo Week 4/Event 5 rank, cash, Epic identities or screenshot evidence: '+entry.id);
