@@ -214,7 +214,16 @@ test('published attendance recheck is a reusable offline preview with explicitly
  assert.match(workflow,/group: aot-provider-history-main/);
  assert.match(workflow,/cancel-in-progress: false/);
  assert.match(workflow,/preview_only:[\s\S]*?default: true/);
- assert.doesNotMatch(workflow,/^  (schedule|push):/m);
+ assert.doesNotMatch(workflow,/^  schedule:/m);
+ // The direct-operation route is deliberately limited to a single request file.
+ const push=workflow.slice(workflow.indexOf('  push:\n'),workflow.indexOf('  pull_request:\n'));
+ assert.equal(push,"  push:\n    branches:\n      - 'ops/attendance-recheck/**'\n    paths:\n      - 'review-requests/attendance-recheck.json'\n");
+ assert.match(prepare,/github.event_name == 'push' && !github.event.deleted/);
+ assert.match(prepare,/git show "\$REQUEST_SHA:review-requests\/attendance-recheck\.json"/);
+ assert.match(prepare,/node scripts\/published-attendance-request\.cjs/);
+ assert.ok(prepare.indexOf('node scripts/published-attendance-request.cjs')<prepare.indexOf('published-attendance-phase5.cjs --apply'));
+ assert.match(prepare,/test "\$\(cat \.phase5-base\)" = "\$AOT_ATTENDANCE_REQUEST_BASE"/);
+ assert.match(prepare,/steps\.correction\.outputs\.has_changes == 'true'/);
  assert.match(preview,/github.event_name == 'pull_request' \|\| inputs.preview_only/);
  assert.match(preview,/persist-credentials: false/);
  assert.match(preview,/published-attendance-phase5\.cjs --dry-run/);
