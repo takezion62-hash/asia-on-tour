@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-23",
-  "description": "Epic公式規則で確認した大会ルール。Unreal Cupもチーム順位と確認済みEpic IDを照合し、賞金圏内は地域別チーム/個人賞金を、圏外は$0として自動掲載（本人資格・支払確認とは別）。S36 Console Duos・S43 Reload ZB Duosの公式Round 1上位突破／全参加$0を、本人照合済み結果に限り安全に記録。Round 2賞金は推定しない。S42 Console Zero Build Solo Victory Cupは公式上位通過と決勝VR1回$100を個別登録。 S37 Console DuosおよびS42 Reload Duosの公式Round1上位突破・参加$0を、保存済み順位表と選手2名のEpicアカウントID・開催枠一致に限定して安全な自動承認に追加。Round2賞金は自動推定しない。 NVIDIA GeForce RTX Cupの公式7地域賞金表・参加条件・RTX 5080・8ptコスメ報酬を登録（厳格な本人・順位・開催枠検証で順位賞金を自動承認）。 S43 PlayStation CupのBR・Zero Buildを別大会として追加。Solo/PS4・PS5、各地域Top80予選通過、決勝順位の地域別現金賞金と8ptコスメを別管理。確定したEpic ID・スコア・開催日時・重複に限り安全な自動更新に利用。",
+  "updatedAt": "2026-11-25",
+  "description": "Epic公式規則で確認した大会ルール。Unreal Cupもチーム順位と確認済みEpic IDを照合し、賞金圏内は地域別チーム/個人賞金を、圏外は$0として自動掲載（本人資格・支払確認とは別）。S36 Console Duos・S43 Reload ZB Duosの公式Round 1上位突破／全参加$0を、本人照合済み結果に限り安全に記録。Round 2賞金は推定しない。S42 Console Zero Build Solo Victory Cupは公式上位通過と決勝VR1回$100を個別登録。 S37 Console DuosおよびS42 Reload Duosの公式Round1上位突破・参加$0を、保存済み順位表と選手2名のEpicアカウントID・開催枠一致に限定して安全な自動承認に追加。Round2賞金は自動推定しない。 NVIDIA GeForce RTX Cupの公式7地域賞金表・参加条件・RTX 5080・8ptコスメ報酬を登録（厳格な本人・順位・開催枠検証で順位賞金を自動承認）。 S43 PlayStation CupのBR・Zero Buildを別大会として追加。Solo/PS4・PS5、各地域Top80予選通過、決勝順位の地域別現金賞金と8ptコスメを別管理。確定したEpic ID・スコア・開催日時・重複に限り安全な自動更新に利用。 S30/S31のSolo BR・ZB決勝は公式Attachment Cで1VR=$100。S30 ZB NAC予選は個別確認済み3開催枠のみ上位5,000を適用。",
   "rules": [
     {
       "id": "ch5s3-squads-victory-cup",
@@ -62,7 +62,8 @@
           "cutoff": 5000,
           "source": "https://fortnitetracker.com/events/epicgames_S30_SoloVictoryCashCup_NAC?window=S30_SoloVictoryCashCup_Event4Round1_NAC"
         }
-      ]
+      ],
+      "prizePerVictory": 100
     },
     {
       "id": "ch5s3-zb-solo-victory",
@@ -82,7 +83,28 @@
         "ME": 2000,
         "OCE": 2000
       },
-      "source": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules"
+      "source": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-3-official-rules",
+      "prizePerVictory": 100,
+      "verifiedLegacyNacExtraWindows": [
+        {
+          "dateJst": "2024-06-04",
+          "windowId": "S30_SoloZBVictoryCashCup_Event1Round1_NAC",
+          "cutoff": 5000,
+          "source": "https://fortnitetracker.com/events/epicgames_S30_SoloZBVictoryCashCup_NAC?page=1&window=S30_SoloZBVictoryCashCup_Event1Round1_NAC"
+        },
+        {
+          "dateJst": "2024-07-30",
+          "windowId": "S30_SoloZBVictoryCashCup_Event7Round1_NAC",
+          "cutoff": 5000,
+          "source": "https://fortnitetracker.com/events/epicgames_S30_SoloZBVictoryCashCup_NAC?window=S30_SoloZBVictoryCashCup_Event7Round1_NAC"
+        },
+        {
+          "dateJst": "2024-08-13",
+          "windowId": "S30_SoloZBVictoryCashCup_Event9Round1_NAC",
+          "cutoff": 5000,
+          "source": "https://fortnitetracker.com/events/epicgames_s30_solozbvictorycashcup_nac?window=S30_SoloZBVictoryCashCup_Event9Round1_NAC"
+        }
+      ]
     },
     {
       "id": "ch5s4-solo-victory-cup",
@@ -102,7 +124,8 @@
         "ME": 2000,
         "OCE": 1500
       },
-      "source": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-4-official-rules"
+      "source": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-4-official-rules",
+      "prizePerVictory": 100
     },
     {
       "id": "ch5s5-solo-victory-cup",
@@ -156,7 +179,8 @@
         "ME": 1000,
         "OCE": 600
       },
-      "source": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-4-official-rules"
+      "source": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-4-official-rules",
+      "prizePerVictory": 100
     },
     {
       "id": "ch7s3-solo-reload-victory-cup",
