@@ -1,12 +1,12 @@
 {
   "version": 1,
   "sourceCheckedAt": "2026-11-26T05:46:38.656Z",
-  "total": 45,
+  "total": 44,
   "alreadyResolved": 0,
   "byYear": [
     {
       "name": "2024",
-      "count": 43
+      "count": 42
     },
     {
       "name": "2026",
@@ -16,7 +16,7 @@
   "byRegion": [
     {
       "name": "EU",
-      "count": 2
+      "count": 1
     },
     {
       "name": "ME",
@@ -46,7 +46,7 @@
     },
     {
       "name": "ZB Solo Victory Cup / EU / 2024",
-      "count": 2
+      "count": 1
     },
     {
       "name": "ZB Solo Victory Cup / NAC / 2024",
@@ -60,7 +60,7 @@
   "byStatus": [
     {
       "name": "partial-scan",
-      "count": 32
+      "count": 31
     },
     {
       "name": "rules-review",
@@ -1090,39 +1090,6 @@
         "possibleExistingId": null
       },
       "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s30-ec2c64ca2e7c",
-      "origin": "history",
-      "date": "2024-08-13",
-      "year": "2024",
-      "region": "EU",
-      "tournamentId": "ch5s3-zb-solo-victory",
-      "event": "ZB Solo Victory Cup",
-      "round": "Event 9 · Round 1 / 予選",
-      "player": "Botえもん",
-      "kind": "予選",
-      "rank": 69,
-      "points": 194,
-      "kills": 23,
-      "vrs": 1,
-      "prize": 0,
-      "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=EU&round=S30_SoloZBVictoryCashCup_Event9Round1_EU",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "順位表の取得が完了していません",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 2,
-        "totalPages": 100,
-        "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_EU/S30_SoloZBVictoryCashCup_Event9Round1_EU",
-        "possibleExistingId": null
-      },
-      "rewardState": "source-amount-present-not-verified-by-triage"
     },
     {
       "id": "auto-s30-22d60f8a1624",
