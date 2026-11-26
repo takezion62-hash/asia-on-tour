@@ -46,4 +46,23 @@ function historicalContext(context){
  return {reverse,context:{...context,players,results:context.results.map(r=>renameRow(r,reverse)),
   verifiedAccounts:context.verifiedAccounts.map(a=>({...a,player:name(a.player,reverse)}))}};
 }
-module.exports={CHANGES,forward,renameRow,renamePlayers,historicalContext};
+// Exact historical record IDs whose proofs predate these three renames.
+const PINNED=new Map([
+ ['s39-nac-1million-unreal-20251221-r109','Lucci'],
+ ...['owner-s42-nac-mini-20260927-r34','owner-s42-naw-nawMini-20261018-r14',
+ 'owner-s40-naw-may-20260504-r10','owner-s39-oce-oceFeb-20260222-r7',
+ 'owner-s39-oce-janOce-20260112-r5','auto-s30-d3982fa9d1e4','auto-s30-ae7bd85b5dc2'].map(id=>[id,'gurabon'])
+]);
+function verifyHistoricalRow(verify,row,entry,players){
+ if(verify(row,entry))return true;
+ const fresh=PINNED.get(row?.id),pair=CHANGES.find(x=>x[1]===fresh);
+ if(!pair||!players?.candidates||!players?.confirmedAliases)return false;
+ const old=pair[0];
+ if(!players.candidates.some(p=>p.name===fresh)||players.candidates.some(p=>p.name===old)||
+    !(players.confirmedAliases[fresh]||[]).includes(old)||
+    !(row.players||[row.player]).includes(fresh))return false;
+ // The original verifier still checks every original proof field and hash.
+ // Only the exact canonical spelling is restored; raw names and URLs stay intact.
+ return verify(renameRow(row,new Map([[fresh,old]])),entry);
+}
+module.exports={CHANGES,forward,renameRow,renamePlayers,historicalContext,verifyHistoricalRow};
