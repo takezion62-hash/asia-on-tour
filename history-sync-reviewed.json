@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-26T11:33:50.003Z",
+  "reviewedAt": "2026-11-26T11:34:12.983Z",
   "description": "Resolved historic review candidates: published, duplicate or participation",
   "entries": [
     {
@@ -36337,6 +36337,42 @@
       "source": "https://www.fortnite.com/competitive/events/S31_SoloVictoryCashCup/?region=NAC&round=S31_SoloVictoryCashCup_Event2Round1_NAC",
       "officialRules": "https://www.fortnite.com/news/fortnite-victory-cash-cups-chapter-5-season-4-official-rules",
       "evidence": "Official calendar, Epic account match, mature original ranked checkpoint"
+    },
+    {
+      "id": "auto-s39-95c819846787",
+      "decision": "published",
+      "recordId": "auto-s39-95c819846787",
+      "reviewedAt": "2026-11-26T11:34:12.983Z",
+      "source": "https://www.fortnite.com/competitive/events/S39_NvidiaCup/?region=NAW&round=S39_NvidiaCup_NAW",
+      "policy": "attendance-only",
+      "rule": null
+    },
+    {
+      "id": "auto-s42-07cc9960a452",
+      "decision": "published",
+      "recordId": "auto-s42-07cc9960a452",
+      "reviewedAt": "2026-11-26T11:34:12.983Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_FNCSDivisionalCup_Division1/?region=ME&round=S42_FNCSDivisionalCup_Division1_Event2_ME",
+      "policy": "attendance-only",
+      "rule": null
+    },
+    {
+      "id": "auto-s42-45029e93a45c",
+      "decision": "published",
+      "recordId": "auto-s42-45029e93a45c",
+      "reviewedAt": "2026-11-26T11:34:12.983Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_FNCSDivisionalCup_Division1/?region=ME&round=S42_FNCSDivisionalCup_Division1_Event2_ME",
+      "policy": "attendance-only",
+      "rule": null
+    },
+    {
+      "id": "auto-s42-994e6b64b5d2",
+      "decision": "published",
+      "recordId": "auto-s42-994e6b64b5d2",
+      "reviewedAt": "2026-11-26T11:34:12.983Z",
+      "source": "https://www.fortnite.com/competitive/events/S42_FNCSDivisionalCup_Division1/?region=ME&round=S42_FNCSDivisionalCup_Division1_Event2_ME",
+      "policy": "attendance-only",
+      "rule": null
     }
   ]
 }
