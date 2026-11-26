@@ -43,7 +43,7 @@ function decide(row,win,checkpoint,data){
   const {leaderboardCoverage,candidateObserved,coversRankBoundary}=require('./verified-partial-page.cjs');
   const coverage=leaderboardCoverage(row,win,checkpoint);
   if(!candidateObserved(row,checkpoint,{unique:true})||
-     !coversRankBoundary(coverage,cutoff,{inclusive:true})||
+     (coverage.kind!=='full'&&!coversRankBoundary(coverage,cutoff,{inclusive:true}))||
      !require('./saved-candidate-recheck.cjs').identityProof(row,win,data.verifiedAccounts||[],catalog.team)||
      !Number.isSafeInteger(row.points)||row.points<0)
    return decline('Scott Pilgrimの本人ID・成熟済み順位表・報酬順位を再確認');
