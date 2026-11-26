@@ -223,3 +223,17 @@ test('S43 Squads Victory Cup shows region cutoffs and per-player/team final cash
  await expect(card).toContainText('上位120');
  expect(errors).toEqual([]);
 });
+
+test('Scott Pilgrimの公式3部門は順位とポイント報酬を分けて表示する',async({page})=>{
+ await page.goto('/?season=all#about');
+ await page.locator('#source-rule-search').fill('Scott Pilgrim');
+ await page.locator('#source-rule-region').selectOption('EU');
+ const cards=page.locator('#source-rules .source-rule-card');
+ await expect(cards).toHaveCount(3);
+ for(const suffix of ['cup-battle-royale','cup-zero-build','mobile-cup']){
+  const card=cards.filter({has:page.locator('h3')}).and(page.locator('[data-rule-id="ch7s5-scott-pilgrim-'+suffix+'"]'));
+  await expect(card).toContainText(suffix==='mobile-cup'?'上位200':'上位500');
+  await expect(card).toContainText(suffix==='mobile-cup'?'5ptでScott! Emoticon':'8ptでScott! Emoticon');
+  await expect(card).toContainText('Scott Pilgrim Outfit');
+ }
+});

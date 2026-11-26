@@ -37,6 +37,17 @@ function decide(row,win,checkpoint,data){
  const maxMatches=CUT_OFFS[row.tournamentId].maxMatches;
  if(!Number.isSafeInteger(row.matches)||row.matches<1||row.matches>maxMatches)
   return decline('公式試合数上限と一致しません');
+ // Scott Pilgrim uses the shared evidence gate introduced in phases 1–5.
+ // A cutoff-stopped scan may count only if it actually covers the reward line.
+ if(row.tournamentId.startsWith('ch7s5-scott-pilgrim-')){
+  const {leaderboardCoverage,candidateObserved,coversRankBoundary}=require('./verified-partial-page.cjs');
+  const coverage=leaderboardCoverage(row,win,checkpoint);
+  if(!candidateObserved(row,checkpoint,{unique:true})||
+     (coverage.kind!=='full'&&!coversRankBoundary(coverage,cutoff,{inclusive:true}))||
+     !require('./saved-candidate-recheck.cjs').identityProof(row,win,data.verifiedAccounts||[],catalog.team)||
+     !Number.isSafeInteger(row.points)||row.points<0)
+   return decline('Scott Pilgrimの本人ID・成熟済み順位表・報酬順位を再確認');
+ }
  const outcome=evaluateRank(row);
  if(!outcome.eligible)return decline(outcome.reason);
  if(row.rank>cutoff)return decline('報酬順位の対象外');

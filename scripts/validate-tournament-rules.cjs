@@ -376,6 +376,24 @@ function validateRegistry(doc,tournaments){
    if(!object(rule.cosmeticRanks)||!Object.keys(rule.cosmeticRanks).length||
       Object.entries(rule.cosmeticRanks).some(([region,value])=>!REGIONS.has(region)||!positive(value)))fail(id,'スキン獲得順位が不正');
    if(rule.prizePerVictory!==undefined||rule.advance!==undefined)fail(id,'スキン大会に現金賞金や予選通過を混在させないでください');
+   // Scott Pilgrim: distinct BR, ZB and touch-only Mobile event IDs.
+   if(id.startsWith('ch7s5-scott-pilgrim-')){
+    const suffix=id.slice('ch7s5-scott-pilgrim-'.length);
+    const mode={'cup-battle-royale':'battle-royale','cup-zero-build':'zero-build','mobile-cup':'reload-zero-build'}[suffix];
+    const mobile=suffix==='mobile-cup',eventId='S43_ScottPilgrimCup'+(mobile?'_Mobile':suffix==='cup-zero-build'?'_ZB':'');
+    const ranks=mobile?{OCE:30,ME:30,EU:200,BR:30,NAC:150,NAW:30}:{OCE:50,ME:50,EU:500,BR:100,NAC:350,NAW:100};
+    const official='https://www.fortnite.com/competitive/rules-guidelines/rules-library/scott-pilgrim-cup-chapter-7-mini-season-official-rules';
+    if(!mode||rule.seasonId!=='S43'||rule.source!==official||rule.team!==(mobile?'solo':'duo')||
+       t.mode!==mode||t.platform!==(mobile?'mobile':'cross-platform')||
+       rule.sessionMinutes!==(mobile?75:180)||JSON.stringify(rule.eventIds)!==JSON.stringify([eventId])||
+       JSON.stringify(t.sourceEventIds)!==JSON.stringify([eventId])||
+       rule.matchCaps?.['スキン大会']!==(mobile?8:11)||
+       JSON.stringify(rule.cosmeticRanks)!==JSON.stringify(ranks)||
+       JSON.stringify(rule.cosmeticPrizes?.rankRewards)!==JSON.stringify(['Scott Pilgrim Outfit','Scott’s 1-UP! Back Bling'])||
+       rule.cosmeticPrizes?.emoticon!=='Scott! Emoticon'||rule.cosmeticPrizes?.minimumPoints!==(mobile?5:8)||
+       rule.cosmeticPrizes?.spray!==undefined||rule.cashPrizes!==undefined||rule.autoApproval!=='verified-team-rank')
+      fail(id,'Scott Pilgrim公式部門・順位・エモート・試合上限が不一致');
+   }
    // Independently lock the other two Widowmaker modes to Attachment C.
    // A Mobile score must never inherit the Zero Build / BR duo rewards.
    if(id==='ch7s5-overwatch-widowmaker-cup-zero-build'||

@@ -229,11 +229,11 @@
       '<div class="source-rule-fact"><span>上位入賞のゲーム内報酬</span><strong>'+
       rule.cosmeticPrizes.rankRewards.map(esc).join(' / ')+'</strong></div>'+
       '<div class="source-rule-fact"><span>参加ポイント報酬</span><strong>'+
-      fmtNumber(rule.cosmeticPrizes.minimumPoints)+'ptで'+esc(rule.cosmeticPrizes.spray)+'</strong></div>'+
+      fmtNumber(rule.cosmeticPrizes.minimumPoints)+'ptで'+esc(rule.cosmeticPrizes.emoticon||rule.cosmeticPrizes.spray)+'</strong></div>'+
       '<div class="source-rule-fact"><span>開催部門</span><strong>'+
       esc(rule.team==='solo'?'Mobile / タッチ操作限定・Reload Zero Build / ソロ':entry.mode==='zero-build'?'Zero Build / デュオ':'Battle Royale / デュオ')+
       (Number.isSafeInteger(rule.sessionMinutes)?' / 約'+fmtNumber(rule.sessionMinutes)+'分':'')+'</strong></div>'+
-      '<p class="source-rule-warning">※ 3つのWidowmaker部門は各々別の大会ID・形式・報酬圏。現金賞金は$0。衣装等の実際の配布・受給資格は別途確認が必要です。本人Epic IDと保存済み順位表を照合した場合に限り順位報酬として掲載します。スプレーは順位賞とは別の獲得条件です。</p>':'';
+      '<p class="source-rule-warning">※ 各部門は別の大会ID・形式・報酬圏。現金賞金は$0。衣装等の実際の配布・受給資格は別途確認が必要です。本人Epic IDと保存済み順位表を照合した場合に限り順位報酬として掲載します。ポイント報酬は順位賞とは別の獲得条件です。</p>':'';
     const matchCaps=Object.entries(rule?.matchCaps||{}).map(([stage,limit])=>esc(stage)+' 最大'+fmtNumber(limit)+'試合').join(' / ');
     const details=present?
       '<div class="source-rule-facts">'+conditions+cash+evalNote+squadsNote+cosmeticDetail+
