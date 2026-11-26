@@ -2,10 +2,10 @@
   "version": 1,
   "role": "generated canonical-source snapshot; results.json remains authoritative in phase 1",
   "canonicalFile": "results.json",
-  "canonicalSha256": "1f0fa9621b41b36c87491434cca96c1973500c9240703e88cafb91d3c2230057",
-  "count": 9878,
+  "canonicalSha256": "303c646088adae4954e40d9628fced5195ea0025afb79bb0e91b289bff060171",
+  "count": 9879,
   "teamPrizeCents": 12941000,
-  "unconfirmedPrizeRecords": 1781,
+  "unconfirmedPrizeRecords": 1782,
   "personalPrizeCents": 12921000,
   "recordOrder": [
     "s42-me-slenderman-reload-skin-20261021-acris-chacha",
@@ -9885,7 +9885,8 @@
     "owner-mobile-20261126-2080",
     "owner-mobile-20261126-2081",
     "owner-mobile-20261126-2082",
-    "auto-s43-77844731bb2c"
+    "auto-s43-77844731bb2c",
+    "auto-s43-a408856f13e9"
   ],
   "shards": [
     {
@@ -10071,11 +10072,11 @@
     {
       "seasonId": "S43",
       "file": "source-results/S43.json",
-      "count": 422,
+      "count": 423,
       "teamPrizeCents": 160000,
-      "unconfirmedPrizeRecords": 38,
+      "unconfirmedPrizeRecords": 39,
       "personalPrizeCents": 160000,
-      "sha256": "493aa33e0652bd67da3c4b9bc3ccec823a81b79ff27f033f67a4c167836d473a"
+      "sha256": "d159589fe425c184c9534f2a69214832216af7d7dd398706057750b582c67335"
     },
     {
       "seasonId": "unknown",

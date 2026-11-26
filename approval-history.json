@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-26T13:16:03.032Z",
+  "reviewedAt": "2026-11-26T22:36:00.813Z",
   "entries": [
     {
       "id": "auto-s43-21408f1d31bc",
@@ -39887,6 +39887,17 @@
       "originalHash": "a783a1478de2f5d71d5e7359518463239c1a1cf528694bcd4ee782bbfe853986",
       "recordHash": "3be456b6b5d5ea00ddbc0143c7c664912378c4ddf981b96d4a3534a6fb735394",
       "evidence": "Exact screenshot rank, points, kills, matches, wins and award; official session and prize rules"
+    },
+    {
+      "id": "auto-s43-a408856f13e9",
+      "decision": "published",
+      "recordId": "auto-s43-a408856f13e9",
+      "policy": "attendance-only",
+      "approvedAt": "2026-11-26T22:36:00.813Z",
+      "approvedBy": "ChatGPT / owner-authorized verified review",
+      "source": "https://www.fortnite.com/competitive/events/S43_ScottPilgrimCup_ZB/?region=NAC&round=S43_ScottPilgrimCup_ZB_NAC",
+      "rule": null,
+      "evidence": "Exact Epic account and team roster, canonical official event/calendar, ranked checkpoint with continuous mature rows or complete scan; duplicate check"
     }
   ]
 }
