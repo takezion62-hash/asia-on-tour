@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-11-26T11:39:58.480Z",
+  "checkedAt": "2026-11-26T23:24:28.805Z",
   "windows": {
     "epicgames_S42_InoxtagIconCup_NAW/S42_InoxtagIconCup_NAW": {
       "nextPage": 60,
@@ -572,12 +572,12 @@
       "emptyAttempts": 0
     },
     "epicgames_S43_ReloadZBDuosCashCup_EU/S43_ReloadZBDuosCashCup_Event1Round1_EU": {
-      "nextPage": 22,
-      "pages": 22,
+      "nextPage": 32,
+      "pages": 32,
       "complete": false,
       "coverageLimited": false,
       "totalPages": 100,
-      "lastScanned": "2026-11-14T09:31:08.303Z",
+      "lastScanned": "2026-11-26T23:24:14.000Z",
       "emptyAttempts": 0
     },
     "epicgames_S43_ReloadZBDuosCashCup_BR/S43_ReloadZBDuosCashCup_Event1Round1_BR": {
@@ -1240,12 +1240,12 @@
       "lastError": "Osirion API HTTP 429 /v1/tournaments/leaderboard"
     },
     "epicgames_S33_SoloCashCup_NAW/S33_SoloCashCup_Event8Round1_NAW": {
-      "nextPage": 32,
-      "pages": 32,
+      "nextPage": 38,
+      "pages": 38,
       "complete": false,
       "coverageLimited": false,
       "totalPages": 100,
-      "lastScanned": "2026-11-25T23:24:22.312Z",
+      "lastScanned": "2026-11-26T23:24:28.805Z",
       "emptyAttempts": 0
     },
     "epicgames_S30_PlaystationCupZBJune_OCE/S30_PlaystationCupZBJune_Qualifier1_OCE": {
@@ -1331,12 +1331,12 @@
       "emptyAttempts": 0
     },
     "epicgames_S30_PlaystationCupJune_ME/S30_PlaystationCupJune_Qualifier1_ME": {
-      "nextPage": 50,
-      "pages": 50,
-      "complete": false,
+      "nextPage": 51,
+      "pages": 51,
+      "complete": true,
       "coverageLimited": false,
       "totalPages": 51,
-      "lastScanned": "2026-11-26T11:39:58.480Z",
+      "lastScanned": "2026-11-26T23:24:16.018Z",
       "emptyAttempts": 0
     },
     "epicgames_S43_TriosCashCup_BR/S43_TriosCashCup_Event3_BR": {
@@ -1409,6 +1409,15 @@
       "coverageLimited": false,
       "totalPages": 100,
       "lastScanned": "2026-11-26T11:39:28.534Z",
+      "emptyAttempts": 0
+    },
+    "epicgames_S43_PerformanceEvaluationTrios_EU/S43_PerformanceEvaluation_Event4Round1_EU": {
+      "nextPage": 7,
+      "pages": 7,
+      "complete": true,
+      "coverageLimited": false,
+      "totalPages": 7,
+      "lastScanned": "2026-11-26T23:23:54.961Z",
       "emptyAttempts": 0
     }
   }
