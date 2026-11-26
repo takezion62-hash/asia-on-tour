@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "sourceCheckedAt": "2026-11-26T06:05:38.016Z",
-  "total": 32,
+  "sourceCheckedAt": "2026-11-26T06:07:08.799Z",
+  "total": 33,
   "alreadyResolved": 0,
   "byYear": [
     {
@@ -14,7 +14,7 @@
     },
     {
       "name": "2026",
-      "count": 4
+      "count": 5
     }
   ],
   "byRegion": [
@@ -24,7 +24,7 @@
     },
     {
       "name": "EU",
-      "count": 3
+      "count": 4
     },
     {
       "name": "ME",
@@ -53,6 +53,10 @@
       "count": 1
     },
     {
+      "name": "Scott Pilgrim Mobile Cup / EU / 2026",
+      "count": 1
+    },
+    {
       "name": "Squads Victory Cup Battle Royale / ME / 2026",
       "count": 1
     },
@@ -76,7 +80,7 @@
   "byStatus": [
     {
       "name": "partial-scan",
-      "count": 30
+      "count": 31
     },
     {
       "name": "rules-review",
@@ -1136,6 +1140,39 @@
         "seenPages": 4,
         "totalPages": 6,
         "sourceKey": "epicgames_S42_FNCSDivisionalCup_Division1_ME/S42_FNCSDivisionalCup_Division1_Event2_ME",
+        "possibleExistingId": null
+      },
+      "rewardState": "cash-unconfirmed"
+    },
+    {
+      "id": "auto-s43-0da1cb78cada",
+      "origin": "recent",
+      "date": "2026-11-26",
+      "year": "2026",
+      "region": "EU",
+      "tournamentId": "ch7s5-scott-pilgrim-mobile-cup",
+      "event": "Scott Pilgrim Mobile Cup",
+      "round": "単一開催枠 / 参加確認",
+      "player": "Hagane",
+      "kind": "参加確認",
+      "rank": 14,
+      "points": 349,
+      "kills": 33,
+      "vrs": 1,
+      "prize": null,
+      "source": "https://www.fortnite.com/competitive/events/S43_ScottPilgrimCup_Mobile/?region=EU&round=S43_ScottPilgrimCup_Mobile_EU",
+      "status": "partial-scan",
+      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
+      "reason": "Scott Pilgrimの本人ID・成熟済み順位表・報酬順位を再確認",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": false,
+        "observedPartial": true,
+        "seenPages": 1,
+        "totalPages": 92,
+        "sourceKey": "epicgames_S43_ScottPilgrimCup_Mobile_EU/S43_ScottPilgrimCup_Mobile_EU",
         "possibleExistingId": null
       },
       "rewardState": "cash-unconfirmed"
