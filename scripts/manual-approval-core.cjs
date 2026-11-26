@@ -39,12 +39,32 @@ const stage=r=>{
   if(b)return 'r'+b[1];
   return '';
 };
+// S39 Touch-Only Test Cup uses RoundN and FinalN for the same JST day.
+// The exact official event/window pair distinguishes these stages, not the
+// legacy "single session" label. Never waive a same-window collision.
+function touchOnlyWindow(r){
+ if(r.seasonId!=='S39'||r.tournamentId!=='ch7s1-touch-only-test-cup'||r.event!=='Touch-Only Test Cup'||r.region!=='EU')return null;
+ try{
+  const u=new URL(r.source);
+  if(u.protocol!=='https:'||u.username||u.password)return null;
+  let w;
+  if(u.hostname==='www.fortnite.com'&&u.pathname==='/competitive/events/S39_MobileTestCup/'&&u.searchParams.get('region')==='EU')w=u.searchParams.get('round');
+  else if(u.hostname==='fortnitetracker.com'&&u.pathname==='/events/epicgames_S39_MobileTestCup_EU')w=u.searchParams.get('window');
+  const m=w?.match(/^S39_MobileTestCup_(Round([1-4])|Final([2-4])?)_EU$/);
+  if(!m)return null;
+  const n=Number(m[2]||m[3]||1);
+  if(r.date!==['2026-02-06','2026-02-13','2026-02-20','2026-02-27'][n-1])return null;
+  return w;
+ }catch{return null}
+}
 function collision(existing,newRecord,aliases){
   if(existing.id===newRecord.id)return '同じ戦績IDが登録済み';
   if(existing.date!==newRecord.date||existing.region!==newRecord.region)return '';
   if(existing.tournamentId&&newRecord.tournamentId&&existing.tournamentId!==newRecord.tournamentId)return '';
   if(norm(existing.event)!==norm(newRecord.event))return '';
   if(matchSig(existing,aliases)!==matchSig(newRecord,aliases))return '';
+  const exactA=touchOnlyWindow(existing),exactB=touchOnlyWindow(newRecord);
+  if(exactA&&exactB)return exactA===exactB?'同一開催枠・同一選手に既存戦績あり':'';
   const a=stage(existing),b=stage(newRecord);
   if(!a||!b)return '同日・同大会・同選手の既存戦績にラウンド識別不足（要手動照合）';
   if(a===b)return '同一開催枠・同一選手に既存戦績あり';

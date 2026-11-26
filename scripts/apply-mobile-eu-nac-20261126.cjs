@@ -16,7 +16,7 @@ function run(dry){
  const sum=x=>x.reduce((a,r)=>a+Math.round((r.prize||0)*100),0);
  const personal=x=>x.reduce((a,r)=>a+personalCents(r)*roster(r).length,0);
  const before={count:rows.length,cash:sum(rows),personal:personal(rows)},added=[],already=[],existing=[];
- must(V.GOLD.length===9&&V.GOLD.reduce((a,x)=>a+x[13],0)===4350,'batch total mismatch');
+ must(V.GOLD.length===10&&V.GOLD.reduce((a,x)=>a+x[13],0)===4550,'batch total mismatch');
  const owners=new Map(),targetIds=new Set(Object.values(V.profiles).map(x=>x[1]));
  function capture(url,name){
   const id=V.uuid(url);if(!targetIds.has(id))return;
@@ -67,7 +67,7 @@ function run(dry){
  }
  const delta=sum(added);
  must(rows.length===before.count+added.length&&sum(rows)===before.cash+delta&&personal(rows)===before.personal+delta,'prior count or awards changed');
- if(added.length)upsertPublicationLog(updates,{id:'owner-mobile-eu-nac-20261126',date:'2026-11-26',title:'Mobile Series・Touch-Only Test Cup・Mini Venture 決勝戦績',description:'提供画像9件、開催枠・順位賞金と本人Epic IDを照合。画像2078は開催枠と試合日が矛盾するため未掲載。',recordIds:added.map(r=>r.id)});
+ if(added.length)upsertPublicationLog(updates,{id:'owner-mobile-eu-nac-20261126',date:'2026-11-26',title:'Mobile Series・Touch-Only Test Cup・Mini Venture 決勝戦績',description:'提供画像10件、開催枠・順位賞金と本人Epic IDを照合。画像2078は公式開催枠とユーザー再確認に基づき2/20に掲載。',existingDescription:()=> '提供画像10件、開催枠・順位賞金と本人Epic IDを照合。画像2078は公式開催枠とユーザー再確認に基づき2/20に掲載。',recordIds:added.map(r=>r.id)});
  const errors=[...validateData({results:rows,players,tournaments}).errors,...audit(rows,ledger,players),...validateUpdateLog(rows,updates)];
  must(!errors.length,'validation '+JSON.stringify(errors.slice(0,10)));
  if(!dry&&added.length){publishResults(root,rows);write('players.json',players);write('approval-history.json',ledger);write('updates.json',updates);}
