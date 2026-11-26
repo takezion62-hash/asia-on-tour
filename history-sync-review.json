@@ -320,30 +320,6 @@
       "reviewReason": "対象大会・ラウンドの自動承認方式が未登録"
     },
     {
-      "id": "auto-s31-469b9460062b",
-      "date": "2024-09-10",
-      "region": "NAC",
-      "player": "らいちん",
-      "playerRaw": "チン族らいちん",
-      "event": "Solo Victory Cup Battle Royale",
-      "round": "Event 2 · Round 1 / 予選",
-      "rank": 7641,
-      "points": 118,
-      "kills": 4,
-      "vrs": 0,
-      "prize": 0,
-      "kind": "予選",
-      "matches": 7,
-      "seasonId": "S31",
-      "chapter": 5,
-      "season": 4,
-      "tournamentId": "ch5s4-solo-victory-cup",
-      "source": "https://www.fortnite.com/competitive/events/S31_SoloVictoryCashCup/?region=NAC&round=S31_SoloVictoryCashCup_Event2Round1_NAC",
-      "verified": true,
-      "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。",
-      "reviewReason": "順位表の取得が完了していません"
-    },
-    {
       "id": "auto-s30-4fefa54fdb6a",
       "date": "2024-07-30",
       "region": "NAC",
@@ -519,6 +495,6 @@
       ]
     }
   ],
-  "manualReviewedAt": "2026-11-26T06:11:20.267Z",
+  "manualReviewedAt": "2026-11-26T11:33:50.003Z",
   "autoDuplicateReviewedAt": "2026-11-24T12:11:50.110Z"
 }
