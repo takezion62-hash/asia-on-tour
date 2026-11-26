@@ -1,7 +1,7 @@
 {
   "version": 1,
   "sourceCheckedAt": "2026-11-26T05:46:38.656Z",
-  "total": 53,
+  "total": 45,
   "alreadyResolved": 0,
   "byYear": [
     {
@@ -9,12 +9,8 @@
       "count": 43
     },
     {
-      "name": "2025",
-      "count": 2
-    },
-    {
       "name": "2026",
-      "count": 8
+      "count": 2
     }
   ],
   "byRegion": [
@@ -24,7 +20,7 @@
     },
     {
       "name": "ME",
-      "count": 4
+      "count": 1
     },
     {
       "name": "NAC",
@@ -32,30 +28,14 @@
     },
     {
       "name": "NAW",
-      "count": 2
+      "count": 1
     },
     {
       "name": "OCE",
-      "count": 18
+      "count": 14
     }
   ],
   "byTournament": [
-    {
-      "name": "FNCS Division 1 Practice / ME / 2026",
-      "count": 3
-    },
-    {
-      "name": "NVIDIA GeForce RTX Cup / NAW / 2025",
-      "count": 1
-    },
-    {
-      "name": "NVIDIA GeForce RTX Cup / OCE / 2025",
-      "count": 1
-    },
-    {
-      "name": "PlayStation Clix Cup (Battle Royale) / OCE / 2026",
-      "count": 3
-    },
     {
       "name": "Squads Victory Cup Battle Royale / ME / 2026",
       "count": 1
@@ -80,7 +60,7 @@
   "byStatus": [
     {
       "name": "partial-scan",
-      "count": 40
+      "count": 32
     },
     {
       "name": "rules-review",
@@ -1572,270 +1552,6 @@
         "possibleExistingId": null
       },
       "rewardState": "source-amount-present-not-verified-by-triage"
-    },
-    {
-      "id": "auto-s39-0e03042deea6",
-      "origin": "history",
-      "date": "2025-12-21",
-      "year": "2025",
-      "region": "OCE",
-      "tournamentId": "ch7s1-nvidia-geforce-rtx-cup",
-      "event": "NVIDIA GeForce RTX Cup",
-      "round": "単一開催枠 / 参加確認",
-      "player": "ふんふん",
-      "kind": "参加確認",
-      "rank": 5914,
-      "points": 27,
-      "kills": 3,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S39_NvidiaCup/?region=OCE&round=S39_NvidiaCup_OCE",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "全ページ連続の順位表・Epic ID付完全スナップショットが未確認",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 60,
-        "totalPages": 92,
-        "sourceKey": "epicgames_S39_NvidiaCup_OCE/S39_NvidiaCup_OCE",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s39-6cd01c87698b",
-      "origin": "history",
-      "date": "2025-12-22",
-      "year": "2025",
-      "region": "NAW",
-      "tournamentId": "ch7s1-nvidia-geforce-rtx-cup",
-      "event": "NVIDIA GeForce RTX Cup",
-      "round": "単一開催枠 / 参加確認",
-      "player": "rilamero",
-      "kind": "参加確認",
-      "rank": 6579,
-      "points": 55,
-      "kills": 10,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S39_NvidiaCup/?region=NAW&round=S39_NvidiaCup_NAW",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "全ページ連続の順位表・Epic ID付完全スナップショットが未確認",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 66,
-        "totalPages": 100,
-        "sourceKey": "epicgames_S39_NvidiaCup_NAW/S39_NvidiaCup_NAW",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s40-1aff63db1ec2",
-      "origin": "history",
-      "date": "2026-04-29",
-      "year": "2026",
-      "region": "OCE",
-      "tournamentId": "ch7s2-playstation-clix-cup-br",
-      "event": "PlayStation Clix Cup (Battle Royale)",
-      "round": "Qualifier / 参加確認",
-      "player": "はためいてる",
-      "kind": "参加確認",
-      "rank": 3569,
-      "points": 36,
-      "kills": 0,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S40_PlayStationCupClix/?region=OCE&round=S40_PlayStationCupClix_Qualifier_OCE",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "対象大会・ラウンドの自動承認方式が未登録",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 36,
-        "totalPages": 60,
-        "sourceKey": "epicgames_S40_PlayStationCupClix_OCE/S40_PlayStationCupClix_Qualifier_OCE",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s40-8bd86194b61b",
-      "origin": "history",
-      "date": "2026-04-29",
-      "year": "2026",
-      "region": "OCE",
-      "tournamentId": "ch7s2-playstation-clix-cup-br",
-      "event": "PlayStation Clix Cup (Battle Royale)",
-      "round": "Qualifier / 参加確認",
-      "player": "白組 shink",
-      "kind": "参加確認",
-      "rank": 3574,
-      "points": 35,
-      "kills": 4,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S40_PlayStationCupClix/?region=OCE&round=S40_PlayStationCupClix_Qualifier_OCE",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "対象大会・ラウンドの自動承認方式が未登録",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 36,
-        "totalPages": 60,
-        "sourceKey": "epicgames_S40_PlayStationCupClix_OCE/S40_PlayStationCupClix_Qualifier_OCE",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s40-9808cd1640a8",
-      "origin": "history",
-      "date": "2026-04-29",
-      "year": "2026",
-      "region": "OCE",
-      "tournamentId": "ch7s2-playstation-clix-cup-br",
-      "event": "PlayStation Clix Cup (Battle Royale)",
-      "round": "Qualifier / 参加確認",
-      "player": "RGN p1ng",
-      "kind": "参加確認",
-      "rank": 3571,
-      "points": 35,
-      "kills": 3,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S40_PlayStationCupClix/?region=OCE&round=S40_PlayStationCupClix_Qualifier_OCE",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "対象大会・ラウンドの自動承認方式が未登録",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 36,
-        "totalPages": 60,
-        "sourceKey": "epicgames_S40_PlayStationCupClix_OCE/S40_PlayStationCupClix_Qualifier_OCE",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s42-46bd46010dae",
-      "origin": "history",
-      "date": "2026-09-01",
-      "year": "2026",
-      "region": "ME",
-      "tournamentId": "ch7s4-fncs-division-1-practice",
-      "event": "FNCS Division 1 Practice",
-      "round": "Event 2 / 参加確認",
-      "player": "Xeno / かめてぃん",
-      "kind": "参加確認",
-      "rank": 66,
-      "points": 338,
-      "kills": 12,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S42_FNCSDivisionalCup_Division1/?region=ME&round=S42_FNCSDivisionalCup_Division1_Event2_ME",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "対象大会・ラウンドの自動承認方式が未登録",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 2,
-        "totalPages": 6,
-        "sourceKey": "epicgames_S42_FNCSDivisionalCup_Division1_ME/S42_FNCSDivisionalCup_Division1_Event2_ME",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s42-b32c65b2f83d",
-      "origin": "history",
-      "date": "2026-09-01",
-      "year": "2026",
-      "region": "ME",
-      "tournamentId": "ch7s4-fncs-division-1-practice",
-      "event": "FNCS Division 1 Practice",
-      "round": "Event 2 / 参加確認",
-      "player": "Asuka / huggyfv",
-      "kind": "参加確認",
-      "rank": 84,
-      "points": 314,
-      "kills": 20,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S42_FNCSDivisionalCup_Division1/?region=ME&round=S42_FNCSDivisionalCup_Division1_Event2_ME",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "対象大会・ラウンドの自動承認方式が未登録",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 2,
-        "totalPages": 6,
-        "sourceKey": "epicgames_S42_FNCSDivisionalCup_Division1_ME/S42_FNCSDivisionalCup_Division1_Event2_ME",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s42-e39bca473329",
-      "origin": "history",
-      "date": "2026-09-01",
-      "year": "2026",
-      "region": "ME",
-      "tournamentId": "ch7s4-fncs-division-1-practice",
-      "event": "FNCS Division 1 Practice",
-      "round": "Event 2 / 参加確認",
-      "player": "あくりあ / みずるん",
-      "kind": "参加確認",
-      "rank": 102,
-      "points": 292,
-      "kills": 13,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S42_FNCSDivisionalCup_Division1/?region=ME&round=S42_FNCSDivisionalCup_Division1_Event2_ME",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "対象大会・ラウンドの自動承認方式が未登録",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 2,
-        "totalPages": 6,
-        "sourceKey": "epicgames_S42_FNCSDivisionalCup_Division1_ME/S42_FNCSDivisionalCup_Division1_Event2_ME",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
     }
   ],
   "policy": "read-only queue; awards require existing official rule-backed validators and identity/collision proof"
