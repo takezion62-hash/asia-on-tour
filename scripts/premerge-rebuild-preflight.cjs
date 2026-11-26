@@ -170,6 +170,20 @@ function execute({root=ROOT,run=spawnSync,copy=copyToTemp}={}){
  let after;
  try{
   runSteps(temp,steps,run);
+  // Rehearse the same full rebuild on the post-rename dataset, once, to
+  // catch immutable proof publishers that are only exercised after migration.
+  if(steps.some(args=>args[0]==='scripts/apply-player-renames-20261126.cjs')&&
+   JSON.parse(fs.readFileSync(path.join(root,'players.json'),'utf8')).candidates.some(p=>
+    ['yotta guɿäʙöɴ-ɷ-','おらんげ','ぜろむの弟'].includes(p.name))){
+   const renamed=JSON.parse(fs.readFileSync(path.join(temp,'players.json'),'utf8'));
+   if(['gurabon','Lucci','えるやちぇ'].every(n=>renamed.candidates.some(p=>p.name===n))){
+    const first=inspect(temp);
+    runSteps(temp,steps,run);
+    const second=inspect(temp);
+    assert(first.published===second.published&&first.approvals===second.approvals&&first.sourceHash===second.sourceHash,
+     'post-rename rebuild is not idempotent');
+   }
+  }
   after=inspect(temp);
   const generated=JSON.parse(fs.readFileSync(path.join(temp,'season-data/manifest.json'),'utf8'));
   const triage=JSON.parse(fs.readFileSync(path.join(temp,'candidate-triage.json'),'utf8'));

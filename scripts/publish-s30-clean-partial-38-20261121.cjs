@@ -8,6 +8,7 @@ const {validateOriginal,collision}=require('./manual-approval-core.cjs');
 const {sameScannedCandidate,verifiedPartialPage}=require('./verified-partial-page.cjs');
 const {validateData,personalCents,roster}=require('./data-checks.cjs');
 const {audit}=require('./validate-approvals.cjs');
+const {verifyHistoricalRow}=require('./confirmed-player-renames-20261126.cjs');
 const {validateUpdateLog}=require('./validate-updates.cjs');
 const V=require('./verified-s30-clean-partial-38-20261121.cjs');
 const ROOT=path.resolve(__dirname,'..');
@@ -33,7 +34,7 @@ function apply({dryRun=false}={}){
   fail(old.length<=1,'result ID duplicate '+s.id);
   if(old.length){
    const approvals=db.ledger.entries.filter(x=>x.id===s.id);
-   fail(approvals.length===1&&V.verifyRow(old[0],approvals[0]),
+   fail(approvals.length===1&&verifyHistoricalRow(V.verifyRow,old[0],approvals[0],db.players),
     'previously published candidate no longer matches locked evidence '+s.id);
    already.push(s.id);
    if(pending.has(s.id)){

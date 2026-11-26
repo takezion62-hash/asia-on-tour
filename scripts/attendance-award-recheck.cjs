@@ -149,10 +149,21 @@ function verifyPromotion(row,entry,context,history){
   if(matches.length!==1)return false;
   const h=matches[0],before=h.beforeRow,now=Date.parse(h.approvedAt);
   if(!Number.isFinite(now)||!before||before.id!==row.id||!approvedEntry(before,entry)||
-   h.beforeSha256!==hash(before)||h.afterSha256!==hash(row)||h.proofSha256!==hash(h.proof))return false;
-  const results=context.results.map(r=>r.id===row.id?before:r);
-  const expected=inspect(before,entry,{...context,results},h.proof,now);
-  return !!expected&&json(expected)===json(row);
+   h.beforeSha256!==hash(before)||h.proofSha256!==hash(h.proof))return false;
+  // Reconstruct the exact historical canonical spelling only for the
+  // explicitly confirmed rename; every original proof hash remains mandatory.
+  let replayRow=row,replayContext=context;
+  if(h.afterSha256!==hash(row)){
+   const {historicalContext,renameRow}=require('./confirmed-player-renames-20261126.cjs');
+   const historical=historicalContext(context);
+   if(!historical)return false;
+   replayRow=renameRow(row,historical.reverse);
+   if(h.afterSha256!==hash(replayRow))return false;
+   replayContext=historical.context;
+  }
+  const results=replayContext.results.map(r=>r.id===row.id?before:r);
+  const expected=inspect(before,entry,{...replayContext,results},h.proof,now);
+  return !!expected&&json(expected)===json(replayRow);
  }catch{return false}
 }
 function run(root=ROOT,{dryRun=true,now=Date.now()}={}){

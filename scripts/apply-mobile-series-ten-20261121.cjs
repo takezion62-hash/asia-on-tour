@@ -5,6 +5,7 @@ const fs=require('node:fs'),path=require('node:path');
 const {readResults,publishResults}=require('./source-results-store.cjs');
 const {validateData,personalCents,roster}=require('./data-checks.cjs');
 const {audit}=require('./validate-approvals.cjs');
+const {verifyHistoricalRow}=require('./confirmed-player-renames-20261126.cjs');
 const {validateUpdateLog}=require('./validate-updates.cjs');
 const {upsertPublicationLog}=require('./reviewed-publication-core.cjs');
 const V=require('./verified-mobile-series-ten-20261121.cjs');
@@ -27,7 +28,7 @@ function apply({dryRun=false}={}){
   }
  }
  for(const player of V.DOC.expected.knownPlayers)
-  must(known.has(player),'existing canonical profile missing: '+player);
+  must(known.has(aliases.get(player)||player),'existing canonical profile missing: '+player);
  const uids=new Set(V.GOLD.map(z=>z[5])),owners=new Map();
  const capture=(url,name)=>{
   const uid=V.epicId(url);if(!uids.has(uid))return;
@@ -52,27 +53,29 @@ function apply({dryRun=false}={}){
   must(t&&t.seasonId===x.seasonId&&t.name===x.event&&t.team==='solo'&&
    t.mode===x.mode&&t.platform==='mobile'&&t.sourceEventIds.includes(x.eventId),
    'catalog mismatch '+x.id);
-  must(known.has(x.name)&&(aliases.get(x.name)||x.name)===x.name&&
-   (aliases.get(x.rawName)||x.rawName)===x.name,
+  const canonical=aliases.get(x.name)||x.name;
+  must(known.has(canonical)&&
+   (aliases.get(x.rawName)||x.rawName)===canonical,
    'unapproved new identity or alias '+x.name);
   const uid=V.epicId(x.profileUrl);
-  must(uid===x.epicUUID&&(!owners.has(uid)||owners.get(uid)===x.name),
+  must(uid===x.epicUUID&&(!owners.has(uid)||owners.get(uid)===canonical),
    'Epic UUID belongs to a different verified account: '+x.id);
-  owners.set(uid,x.name);
+  owners.set(uid,canonical);
   const collisions=rows.filter(r=>r.id===x.id||
    (r.date===x.date&&r.region===x.region&&
     (r.tournamentId===x.tournamentId||r.source===x.source)&&
     (r.rank===x.rank||
-      (r.players||[r.player]).some(y=>(aliases.get(y)||y)===x.name)||
+      (r.players||[r.player]).some(y=>(aliases.get(y)||y)===canonical)||
       (r.profiles||[]).some(p=>V.epicId(p.url)===uid)||
       V.epicId(r.profileUrl)===uid)));
   must(collisions.length<=1,'multiple original records overlap '+x.id);
   if(collisions.length){
    const prior=collisions[0],a=ledger.entries.filter(z=>z.recordId===prior.id);
-   must(prior.id===x.id&&a.length===1&&V.verifyRow(prior,a[0]),
+   must(prior.id===x.id&&a.length===1&&verifyHistoricalRow(V.verifyRow,prior,a[0],players),
     'previous unverified or altered published result '+x.id);
    existing.push(x.id);continue;
   }
+  must(canonical===x.name,'renamed historical record missing; refuse to recreate old identity '+x.id);
   const row=V.project(x),a=V.approval(x);
   must(V.verifyRow(row,a),'new proof audit mismatch '+x.id);
   rows.push(row);ledger.entries.push(a);added.push(row);

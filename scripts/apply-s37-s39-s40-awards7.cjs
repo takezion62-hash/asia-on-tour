@@ -5,6 +5,7 @@ const fs=require('node:fs'),path=require('node:path');
 const {readResults,publishResults}=require('./source-results-store.cjs');
 const {validateData,personalCents,roster}=require('./data-checks.cjs');
 const {audit}=require('./validate-approvals.cjs');
+const {verifyHistoricalRow,CHANGES,renameRow}=require('./confirmed-player-renames-20261126.cjs');
 const {validateUpdateLog}=require('./validate-updates.cjs');
 const {upsertPublicationLog}=require('./reviewed-publication-core.cjs');
 const V=require('./verified-s37-s39-s40-awards7.cjs');
@@ -67,9 +68,11 @@ for(const item of entries){
   cat.sourceEventIds.some(id=>t.source.includes('epicgames_'+id+'_')),
   'missing or mismatched official tournament definition: '+t.id);
  for(let i=0;i<t.players.length;i++){
-  const name=t.players[i],raw=item.raw[i],uuid=t.uuids[i];
-  must(!aliases.has(name)||aliases.get(name)===name,
-   'canonical roster player already belongs to a different identity '+name);
+  const originalName=t.players[i],raw=item.raw[i],uuid=t.uuids[i];
+  const name=aliases.get(originalName)||originalName;
+  must(name===originalName||(CHANGES.some(([old,fresh])=>old===originalName&&fresh===name)&&
+   t.id==='s39-nac-1million-unreal-20251221-r109'&&known.has(name)&&!known.has(originalName)),
+   'canonical roster player already belongs to a different identity '+originalName);
   must(!existingUUIDs.has(uuid)||existingUUIDs.get(uuid)===name,
    'source UUID is owned by different profile '+name+': '+uuid);
   if(!known.has(name)){
@@ -91,15 +94,17 @@ for(const item of entries){
  // The same duo can have a separately published Round 1 qualifier and
  // a Round 2 cash final on the same date. Only compare collisions within
  // the target award round; the exact target ID remains globally unique.
- const collisions=results.filter(r=>V.awardCollision(r,t));
+ const reverse=new Map(CHANGES.filter(([old,fresh])=>known.has(fresh)&&!known.has(old)&&aliases.get(old)===fresh).map(([old,fresh])=>[fresh,old]));
+ const collisions=results.filter(r=>V.awardCollision(r,t)||V.awardCollision(renameRow(r,reverse),t));
  must(collisions.length<=1,'duplicate matches for same tournament: '+t.id);
  if(collisions.length){
   const row=collisions[0],matches=ledger.entries.filter(e=>e.recordId===row.id);
-  must(row.id===t.id&&matches.length===1&&V.verifyCashRow(row,matches[0]),
+  must(row.id===t.id&&matches.length===1&&verifyHistoricalRow(V.verifyCashRow,row,matches[0],players),
    'conflicting existing cash award at '+t.id);
   alreadyPresent.push(t.id);continue;
  }
  must(!results.some(r=>r.id===t.id),'ID collision outside event: '+t.id);
+ must(t.players.every(n=>(aliases.get(n)||n)===n),'renamed historical record missing; refuse to recreate old identity '+t.id);
  const profiles=item.profiles.map(p=>({name:p.name,url:p.url}));
  const note='ユーザー提供Tracker画像'+item.screenshot+'で本人Epic IDと当該大会の決勝順位を確認。'+
   t.date+' '+t.region+' '+t.event+' '+t.round+' '+t.rank+'位、'+
