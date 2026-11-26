@@ -8,6 +8,8 @@ on:
       - achievements.js
       - rankings.js
       - scripts/build-season-data.cjs
+      - scripts/apply-player-renames-20261126.cjs
+      - scripts/confirmed-player-renames-20261126.cjs
       - scripts/build-source-results.cjs
       - scripts/source-results-store.cjs
       - 'source-results/**'
@@ -324,6 +326,8 @@ jobs:
             node scripts/publish-s32-nac-event3-4-zero-vr-review.cjs --dry-run
             node scripts/publish-s32-nac-event3-4-zero-vr-review.cjs --apply
             node --test tests/reviewonly-round1-20261116.test.cjs
+            node scripts/apply-player-renames-20261126.cjs --dry-run
+            node scripts/apply-player-renames-20261126.cjs --apply
             node scripts/validate-data.cjs
             node scripts/validate-approvals.cjs
             node scripts/validate-updates.cjs
