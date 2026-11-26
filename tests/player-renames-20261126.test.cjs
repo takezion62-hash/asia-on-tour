@@ -30,3 +30,20 @@ test('do not merge distinct players or reassign aliases',()=>{
  const q=fixture();q.confirmedAliases.someone=['gurabon'];
  assert.throws(()=>renamePlayers(q),/conflicting alias/);
 });
+
+test('only pinned historic records may replay exact original evidence; tampering fails',()=>{
+ const {verifyHistoricalRow}=require('../scripts/confirmed-player-renames-20261126.cjs');
+ const p=renamePlayers(fixture());
+ const source={id:'owner-s42-nac-mini-20260927-r34',player:old,playerRaw:old,rank:34,prize:50,profileUrl:'https://example.com/original'};
+ const changed=renameRow(source),entry={id:source.id};
+ const verify=(r,e)=>JSON.stringify(r)===JSON.stringify(source)&&e.id===source.id;
+ assert.equal(verifyHistoricalRow(verify,changed,entry,p),true);
+ assert.equal(verifyHistoricalRow(verify,{...changed,prize:500},entry,p),false);
+ assert.equal(verifyHistoricalRow(verify,{...changed,rank:1},entry,p),false);
+ assert.equal(verifyHistoricalRow(verify,{...changed,profileUrl:'https://example.com/other'},entry,p),false);
+ assert.equal(verifyHistoricalRow(verify,{...changed,playerRaw:'gurabon'},entry,p),false);
+ assert.equal(verifyHistoricalRow(verify,changed,entry,fixture()),false);
+ const noAlias=structuredClone(p);noAlias.confirmedAliases.gurabon=[];
+ assert.equal(verifyHistoricalRow(verify,changed,entry,noAlias),false);
+ assert.equal(verifyHistoricalRow(verify,{...changed,id:'unrelated-id'},entry,p),false);
+});
