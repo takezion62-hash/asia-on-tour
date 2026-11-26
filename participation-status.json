@@ -33,8 +33,10 @@
   },
   "newRecords": 3,
   "prunedPublished": 4,
-  "total": 581,
+  "total": 582,
   "months": 20,
   "skippedPublished": 0,
-  "message": "Epic IDで本人照合した出場戦績を月別に保存。公式通過枠外の判定以外は通過未確認。賞金・AOT PR・称号には加算しません。全順位表を無制限には調査しません。"
+  "message": "Epic ID確認済み出場戦績：人手確認で1件追加。現金賞金やスキン獲得は推定しない。",
+  "lastManualReviewAt": "2026-11-26T05:47:21.029Z",
+  "manualReviewPublished": 1
 }
