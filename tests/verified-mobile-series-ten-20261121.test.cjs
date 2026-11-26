@@ -22,8 +22,12 @@ test('owner screenshot ten-pack rank, points, kills, matches, VR, award stay exa
 });
 test('only four existing canonical players; Grape original decorated tag is pre-confirmed alias',()=>{
  const p=read('players.json');
- for(const name of V.DOC.expected.knownPlayers)
-  assert.ok(p.candidates.some(x=>x.name===name),'prior canonical identity '+name);
+ const nameSet=new Set(p.candidates.map(x=>x.name));
+ for(const name of V.DOC.expected.knownPlayers){
+  const resolved=nameSet.has(name)?[name]:Object.entries(p.confirmedAliases).filter(([owner,alts])=>nameSet.has(owner)&&alts.includes(name)).map(([owner])=>owner);
+  assert.equal(resolved.length,1,'unique confirmed canonical identity '+name);
+  if(name==='yotta guɿäʙöɴ-ɷ-'&&!nameSet.has(name))assert.equal(resolved[0],'gurabon');
+ }
  assert.deepEqual(V.DOC.expected.newPlayers,[]);
  const grape=V.DOC.batch.entries.find(x=>x.name==='Grape');
  assert.equal(grape.rawName,'שًٍَِّ今際の際שًٍَِّ');

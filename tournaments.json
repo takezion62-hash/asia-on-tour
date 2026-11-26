@@ -399,6 +399,10 @@
         {
           "id": "scott-pilgrim-mobile-cup",
           "label": "Scott Pilgrim Mobile Cup"
+        },
+        {
+          "id": "touch-only-test-cup",
+          "label": "Touch-Only Test Cup"
         }
       ]
     },
@@ -3791,6 +3795,58 @@
         {
           "text": "Fortnite Trackerの開催枠照合",
           "url": "https://fortnitetracker.com/events/epicgames_S43_ScottPilgrimCup_Mobile_NAC?window=S43_ScottPilgrimCup_Mobile_NAC"
+        }
+      ]
+    },
+    {
+      "id": "ch7s1-mobile-series-monthly-qualifier",
+      "name": "Mobile Series",
+      "chapter": 7,
+      "season": 1,
+      "seasonId": "S39",
+      "sourceEventIds": [
+        "S39_MobileSeriesCupMarQual"
+      ],
+      "series": "mobile-series",
+      "mode": "zero-build",
+      "subtype": "mobile-series-monthly-qualifier",
+      "team": "solo",
+      "platform": "mobile",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "2026/3/9 EU March Qualifier 7。賞金付きMobile Series Blitzソロ、既存分類はZero Build。順位賞金とGroup Stage進出は別。",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-mobile-series-chapter-7-official-rules"
+        },
+        {
+          "text": "提供Tracker順位表: Reo 2位 $900。",
+          "url": "https://fortnitetracker.com/events/epicgames_S39_MobileSeriesCupMarQual_EU?window=S39_MobileSeriesCup_MarQualifier7_EU"
+        }
+      ]
+    },
+    {
+      "id": "ch7s1-touch-only-test-cup",
+      "name": "Touch-Only Test Cup",
+      "chapter": 7,
+      "season": 1,
+      "seasonId": "S39",
+      "sourceEventIds": [
+        "S39_MobileTestCup"
+      ],
+      "series": "test-cup",
+      "mode": "battle-royale",
+      "subtype": "touch-only-test-cup",
+      "team": "solo",
+      "platform": "mobile",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "Epic公式イベントはタッチ操作限定ソロBattle Royale。2026年2月賞金決勝の2位$250、3位$200。",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/fortnite-mobile-cups-november-2025-official-rules"
+        },
+        {
+          "text": "公式イベントの開催枠。",
+          "url": "https://www.fortnite.com/competitive/events/S39_MobileTestCup/?region=EU"
         }
       ]
     }

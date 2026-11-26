@@ -8,6 +8,8 @@ on:
       - achievements.js
       - rankings.js
       - scripts/build-season-data.cjs
+      - scripts/apply-mobile-eu-nac-20261126.cjs
+      - scripts/verified-mobile-eu-nac-20261126.cjs
       - scripts/apply-player-renames-20261126.cjs
       - scripts/confirmed-player-renames-20261126.cjs
       - scripts/build-source-results.cjs
@@ -328,6 +330,8 @@ jobs:
             node --test tests/reviewonly-round1-20261116.test.cjs
             node scripts/apply-player-renames-20261126.cjs --dry-run
             node scripts/apply-player-renames-20261126.cjs --apply
+            node scripts/apply-mobile-eu-nac-20261126.cjs --dry-run
+            node scripts/apply-mobile-eu-nac-20261126.cjs --apply
             node scripts/validate-data.cjs
             node scripts/validate-approvals.cjs
             node scripts/validate-updates.cjs
