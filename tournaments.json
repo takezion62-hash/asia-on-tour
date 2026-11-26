@@ -387,6 +387,18 @@
         {
           "id": "playstation-cup-zero-build",
           "label": "PlayStation Cup Zero Build"
+        },
+        {
+          "id": "scott-pilgrim-cup-battle-royale",
+          "label": "Scott Pilgrim Cup Battle Royale"
+        },
+        {
+          "id": "scott-pilgrim-cup-zero-build",
+          "label": "Scott Pilgrim Cup Zero Build"
+        },
+        {
+          "id": "scott-pilgrim-mobile-cup",
+          "label": "Scott Pilgrim Mobile Cup"
         }
       ]
     },
@@ -3689,6 +3701,96 @@
         {
           "text": "Fortnite TrackerのS43固有イベントIDと予選/決勝の別開催枠を照合。",
           "url": "https://fortnitetracker.com/events/epicgames_S43_PlayStationCup_ZB_ASIA?window=S43_PlayStationCup_ZB_Qualifier_ASIA"
+        }
+      ]
+    },
+    {
+      "id": "ch7s5-scott-pilgrim-cup-battle-royale",
+      "name": "Scott Pilgrim Cup Battle Royale",
+      "chapter": 7,
+      "season": 5,
+      "seasonId": "S43",
+      "sourceEventIds": [
+        "S43_ScottPilgrimCup"
+      ],
+      "series": "skin-cup",
+      "mode": "battle-royale",
+      "subtype": "scott-pilgrim-cup-battle-royale",
+      "team": "duo",
+      "platform": "cross-platform",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "2026-11-24 Epic公式規則2.2.1、Attachment C：独立したデュオ開催枠、180分・最大11試合。順位報酬と8ptエモート、現金賞金なし。",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/scott-pilgrim-cup-chapter-7-mini-season-official-rules"
+        },
+        {
+          "text": "独立した大会イベントID",
+          "url": "https://www.fortnite.com/competitive/events/S43_ScottPilgrimCup/?region=NAC"
+        },
+        {
+          "text": "Fortnite Trackerの開催枠照合",
+          "url": "https://fortnitetracker.com/events/epicgames_S43_ScottPilgrimCup_NAC?window=S43_ScottPilgrimCup_NAC"
+        }
+      ]
+    },
+    {
+      "id": "ch7s5-scott-pilgrim-cup-zero-build",
+      "name": "Scott Pilgrim Cup Zero Build",
+      "chapter": 7,
+      "season": 5,
+      "seasonId": "S43",
+      "sourceEventIds": [
+        "S43_ScottPilgrimCup_ZB"
+      ],
+      "series": "skin-cup",
+      "mode": "zero-build",
+      "subtype": "scott-pilgrim-cup-zero-build",
+      "team": "duo",
+      "platform": "cross-platform",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "2026-11-24 Epic公式規則2.2.1、Attachment C：独立したデュオ開催枠、180分・最大11試合。順位報酬と8ptエモート、現金賞金なし。",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/scott-pilgrim-cup-chapter-7-mini-season-official-rules"
+        },
+        {
+          "text": "独立した大会イベントID",
+          "url": "https://www.fortnite.com/competitive/events/S43_ScottPilgrimCup_ZB/?region=NAC"
+        },
+        {
+          "text": "Fortnite Trackerの開催枠照合",
+          "url": "https://fortnitetracker.com/events/epicgames_S43_ScottPilgrimCup_ZB_NAC?window=S43_ScottPilgrimCup_ZB_NAC"
+        }
+      ]
+    },
+    {
+      "id": "ch7s5-scott-pilgrim-mobile-cup",
+      "name": "Scott Pilgrim Mobile Cup",
+      "chapter": 7,
+      "season": 5,
+      "seasonId": "S43",
+      "sourceEventIds": [
+        "S43_ScottPilgrimCup_Mobile"
+      ],
+      "series": "skin-cup",
+      "mode": "reload-zero-build",
+      "subtype": "scott-pilgrim-mobile-cup",
+      "team": "solo",
+      "platform": "mobile",
+      "unknownFields": [],
+      "evidence": [
+        {
+          "text": "2026-11-24 Epic公式規則2.2.2、Attachment C：タッチ限定Reloadソロ、75分・最大8試合。順位報酬と5ptエモート、現金賞金なし。",
+          "url": "https://www.fortnite.com/competitive/rules-guidelines/rules-library/scott-pilgrim-cup-chapter-7-mini-season-official-rules"
+        },
+        {
+          "text": "独立した大会イベントID",
+          "url": "https://www.fortnite.com/competitive/events/S43_ScottPilgrimCup_Mobile/?region=NAC"
+        },
+        {
+          "text": "Fortnite Trackerの開催枠照合",
+          "url": "https://fortnitetracker.com/events/epicgames_S43_ScottPilgrimCup_Mobile_NAC?window=S43_ScottPilgrimCup_Mobile_NAC"
         }
       ]
     }
