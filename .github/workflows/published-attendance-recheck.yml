@@ -101,7 +101,7 @@ jobs:
           npm run validate
           node scripts/build-season-data.cjs --check
           node scripts/build-candidate-triage.cjs --check
-          node --test tests/published-attendance-recheck.test.cjs tests/published-attendance-phase5.test.cjs tests/approval-history.test.cjs tests/update-history.test.cjs
+          node --test tests/published-attendance-request.test.cjs tests/published-attendance-recheck.test.cjs tests/published-attendance-phase5.test.cjs tests/approval-history.test.cjs tests/update-history.test.cjs
       - name: Propose data-only branch, never merge automatically
         if: steps.correction.outputs.has_changes == 'true'
         env:
