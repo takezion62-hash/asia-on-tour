@@ -2,11 +2,11 @@
   "version": 1,
   "role": "generated canonical-source snapshot; results.json remains authoritative in phase 1",
   "canonicalFile": "results.json",
-  "canonicalSha256": "d359d204c788d4d6d84e97255787e9c4fb26dd0fa3891b5b7000458f476d59c4",
-  "count": 9803,
-  "teamPrizeCents": 12431000,
+  "canonicalSha256": "da6780de9b411f2304c0906af0dc298f74788f6907ae824aa2c0e6df86f69ab1",
+  "count": 9816,
+  "teamPrizeCents": 12466000,
   "unconfirmedPrizeRecords": 1765,
-  "personalPrizeCents": 12411000,
+  "personalPrizeCents": 12446000,
   "recordOrder": [
     "s42-me-slenderman-reload-skin-20261021-acris-chacha",
     "s42-me-slenderman-reload-skin-20261021-karf-alpha",
@@ -9810,7 +9810,20 @@
     "auto-s30-303ac484ce3e",
     "auto-s30-3d2260b7d070",
     "auto-s30-701e98f2c1f6",
-    "auto-s30-1da3577927dd"
+    "auto-s30-1da3577927dd",
+    "auto-s43-a87dc128d5cd",
+    "auto-s43-1bb6f1212122",
+    "auto-s43-59632f63b18c",
+    "auto-s43-334d9a13ca0c",
+    "auto-s43-aca4c993d97a",
+    "auto-s43-a3a3165151fc",
+    "auto-s43-37e2526156d8",
+    "auto-s43-5e48d2d3c5c5",
+    "auto-s43-673da47c3758",
+    "auto-s43-b136e5917b54",
+    "auto-s43-ef5bcfa1d2a8",
+    "auto-s43-c9c6267c201a",
+    "auto-s43-ffd4cd5ae106"
   ],
   "shards": [
     {
@@ -9996,11 +10009,11 @@
     {
       "seasonId": "S43",
       "file": "source-results/S43.json",
-      "count": 406,
-      "teamPrizeCents": 125000,
+      "count": 419,
+      "teamPrizeCents": 160000,
       "unconfirmedPrizeRecords": 38,
-      "personalPrizeCents": 125000,
-      "sha256": "444403162329be9aad107f1449a102c27cea680c318a74d6b50175a76dd1eea8"
+      "personalPrizeCents": 160000,
+      "sha256": "f5dcd8d2a8744e22bbd4e35f791e1dcf3c7c19c65d94c52bf6232b5f0c472154"
     },
     {
       "seasonId": "unknown",
