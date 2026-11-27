@@ -1,4 +1,5 @@
 'use strict';
+// Read-only review snapshot requested 2026-11-26; no change to approval or publication policy.
 // Build an offline snapshot directly from the same checked-in sources used by
 // scheduled sync and the existing attendance-only approval correction path.
 const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
