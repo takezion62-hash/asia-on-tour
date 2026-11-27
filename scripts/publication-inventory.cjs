@@ -35,6 +35,11 @@ function inventory(workflows){
   const commands=file==='build-season-data.yml'?parseWorkflow(content).map(t=>t.join(' ')):
    [...content.matchAll(/\bnode\s+(scripts\/[a-zA-Z0-9._/-]+\.cjs)([^\r\n]*)/g)].map(m=>m[1]+m[2]);
   for(const line of commands){
+   const wrapped=line.match(/^scripts\/fixed-publication-replay\.cjs (scripts\/apply-[a-zA-Z0-9._-]+\.cjs)$/);
+   if(wrapped){
+    const script=wrapped[1],row=by.get(script)||{script,invocations:[]};
+    row.invocations.push({workflow:file,mode:'guarded-replay'});by.set(script,row);continue;
+   }
    const m=line.match(/^(scripts\/(?:apply-|publish-|reconcile-|resolve-|promote-|attendance-award-recheck|participation-promotion)[a-zA-Z0-9._-]*\.cjs)(?=\s|$)/);
    if(!m)continue;
    const script=m[1],row=by.get(script)||{script,invocations:[]};
