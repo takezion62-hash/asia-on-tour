@@ -126,6 +126,10 @@ function runSteps(root,steps,run=spawnSync){
    throw Error('REBUILD_PREFLIGHT production step '+(i+1)+' failed: '+
     args.join(' ')+' / '+String(outcome.error||'exit '+outcome.status));
   }
+  if(args[0]==='scripts/fixed-publication-replay.cjs'){
+   for(const line of String(outcome.stdout||'').split('\n'))
+    if(line.startsWith('AOT_FIXED_REPLAY ')||line.startsWith('FIXED_REPLAY_EQUIVALENCE '))console.log(line);
+  }
   console.log('REBUILD_PREFLIGHT PASS '+label+' '+elapsed+'ms');
  }
 }
