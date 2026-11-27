@@ -36,7 +36,9 @@ function parseWorkflow(workflow){
   if(tokens[0]==='--test'){
    assert(tokens.length===2,'unsafe test command');
   }else{
-   assert(tokens.slice(1).every(arg=>allowedArgs.has(arg)),'unsafe rebuild argument: '+line.trim());
+   if(tokens[0]==='scripts/fixed-publication-replay.cjs'){
+    assert(tokens.length===2&&require('./fixed-publication-replay.cjs').allowed(tokens[1]),'unsafe fixed replay target: '+line.trim());
+   }else assert(tokens.slice(1).every(arg=>allowedArgs.has(arg)),'unsafe rebuild argument: '+line.trim());
    assert(!tokens[0].split('/').includes('..'),'unsafe script path');
   }
   return tokens;
@@ -123,6 +125,10 @@ function runSteps(root,steps,run=spawnSync){
    console.error(output.slice(-7000));
    throw Error('REBUILD_PREFLIGHT production step '+(i+1)+' failed: '+
     args.join(' ')+' / '+String(outcome.error||'exit '+outcome.status));
+  }
+  if(args[0]==='scripts/fixed-publication-replay.cjs'){
+   for(const line of String(outcome.stdout||'').split('\n'))
+    if(line.startsWith('AOT_FIXED_REPLAY ')||line.startsWith('FIXED_REPLAY_EQUIVALENCE '))console.log(line);
   }
   console.log('REBUILD_PREFLIGHT PASS '+label+' '+elapsed+'ms');
  }
