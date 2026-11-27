@@ -36,7 +36,9 @@ function parseWorkflow(workflow){
   if(tokens[0]==='--test'){
    assert(tokens.length===2,'unsafe test command');
   }else{
-   assert(tokens.slice(1).every(arg=>allowedArgs.has(arg)),'unsafe rebuild argument: '+line.trim());
+   if(tokens[0]==='scripts/fixed-publication-replay.cjs'){
+    assert(tokens.length===2&&require('./fixed-publication-replay.cjs').allowed(tokens[1]),'unsafe fixed replay target: '+line.trim());
+   }else assert(tokens.slice(1).every(arg=>allowedArgs.has(arg)),'unsafe rebuild argument: '+line.trim());
    assert(!tokens[0].split('/').includes('..'),'unsafe script path');
   }
   return tokens;
