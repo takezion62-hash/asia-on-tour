@@ -13,7 +13,9 @@ on:
 permissions:
   contents: write
 concurrency:
-  group: aot-calendar-history-main
+  # All direct main writers share one FIFO queue; preserve waiting scans.
+  group: aot-provider-results-main
+  queue: max
   cancel-in-progress: false
 jobs:
   historical-calendar:
@@ -44,6 +46,31 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add calendar-history.json calendar-history-status.json calendar-history-index.json calendar-history/
+          CALENDAR_CATALOG_BLOB=$(git rev-parse HEAD:tournaments.json)
+          CALENDAR_SCRIPT_BLOB=$(git rev-parse HEAD:scripts/historical-calendar.cjs)
           git commit -m "data: archive verified historical tournament sessions"
-          git pull --rebase origin main
-          git push origin HEAD:main
+          # Human/PR merges and older in-flight runs can still advance main.
+          for attempt in 1 2 3 4 5; do
+            git pull --rebase origin main || {
+              git rebase --abort || true
+              echo "::error::Calendar rebase conflict; preserve both histories and require review"
+              exit 1
+            }
+            # Refuse a stale calendar if the rules used by discovery changed.
+            if ! git diff --quiet HEAD^ HEAD -- scripts/historical-calendar.cjs tournaments.json; then
+              echo "::error::Unexpected calendar commit scope"
+              exit 1
+            fi
+            if [ "$(git rev-parse HEAD^:tournaments.json)" != "$CALENDAR_CATALOG_BLOB" ] ||
+               [ "$(git rev-parse HEAD^:scripts/historical-calendar.cjs)" != "$CALENDAR_SCRIPT_BLOB" ]; then
+              echo "::error::Calendar discovery inputs changed; rerun against latest main"
+              exit 1
+            fi
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            echo "CALENDAR_RETRY main advanced ($attempt/5)"
+            sleep $((attempt * 3))
+          done
+          echo "::error::Calendar publication failed after five safe retries"
+          exit 1
