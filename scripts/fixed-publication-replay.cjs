@@ -7,10 +7,10 @@ const ROOT=path.resolve(__dirname,'..');
 // name, reviewed git blob hash, expected count, output label, existing-count key, apply arg
 const SPECS=Object.freeze(Object.fromEntries([
  ['s28-nac-zb-duos-three-20261119','a9eae4b6abea8df995fc5c5e2a3fe0cdbca5960c',3,'S28_NAC_ZB_DUOS_3','alreadyPublished'],
- ['mobile-series-ten-20261121','e73ff53ef7bf4b25b373ff0e6f0c8d94e305b4bd',10,'MOBILE_SERIES_NINE','existing'],
- ['mobile-oce-naw-ten-20261121','92d0a2c41e0f34daccbcd682c9e568fb5817163f',10,'MOBILE_OCE_NAW_TEN','existing'],
- ['mobile-extra-ten-20261121','6f0670ffaa15208e3bd4fdafe9b93f9006b5245b',10,'MOBILE_EXTRA_TEN','existing'],
- ['mobile-series-nine-20261121','1229f9ff4f0140bbd038814b05a21dfdfb4c1e4d',9,'MOBILE_SERIES_NINE','existing'],
+ ['mobile-series-ten-20261121','036f49967092708aab7813796992dba0ce0e28a1',10,'MOBILE_SERIES_NINE','existing'],
+ ['mobile-oce-naw-ten-20261121','d9dbc73ea3fc98d3e9672abba96107609aa6c7d1',10,'MOBILE_OCE_NAW_TEN','existing'],
+ ['mobile-extra-ten-20261121','51dfa50f8103fefa3e14abc0c1d8a0a09f5e2640',10,'MOBILE_EXTRA_TEN','existing'],
+ ['mobile-series-nine-20261121','90fc77b168a7e9af8d06010dd2c231a69a811f5b',9,'MOBILE_SERIES_NINE','existing'],
  ['s21-s25-s41-s42-ten-20261121','f88220db6b57c88ef2a7f75b5955dccd78f0f3fc',10,'OWNER_TEN_1970_1979','existing'],
  ['s21-s22-s35-s36-s37-ten-20261121','a78820ece7ada0f5b289b359ae2bf5284896ed3c',10,'HISTORICAL_TEN_PUBLISHED','existing'],
  ['s30-oce-s37-naw-ten-20261120','c5d4154da323834b1c4cd875814b345bd1f79a1b',10,'OCE_ZB_NAW_PS_TEN','existing'],
@@ -20,6 +20,18 @@ const SPECS=Object.freeze(Object.fromEntries([
 const allowed=s=>Object.hasOwn(SPECS,s);
 function blobHash(bytes){
  return crypto.createHash('sha1').update('blob '+bytes.length+'\0').update(bytes).digest('hex');
+}
+// These four wrappers delegate their write path to the reviewed shared engine.
+// Pin its implementation as well; a modified engine restores full replay.
+const COMMON_MOBILE_PIN='4b3b3ceccd187e6bb65d09635395d8faf7a6f141';
+const COMMON_MOBILE='scripts/mobile-screenshot-publication.cjs';
+const COMMON_WRAPPERS=new Set([
+ 'scripts/apply-mobile-series-nine-20261121.cjs','scripts/apply-mobile-series-ten-20261121.cjs',
+ 'scripts/apply-mobile-oce-naw-ten-20261121.cjs','scripts/apply-mobile-extra-ten-20261121.cjs'
+]);
+function sourcePinsMatch(script,read){
+ if(!allowed(script)||blobHash(read(script))!==SPECS[script].blob)return false;
+ return !COMMON_WRAPPERS.has(script)||blobHash(read(COMMON_MOBILE))===COMMON_MOBILE_PIN;
 }
 function noOp(stdout,spec){
  const lines=String(stdout).split(/\r?\n/).filter(l=>l.startsWith(spec.label+' '));
@@ -83,7 +95,7 @@ function replay(script,{run=spawnSync,read=p=>fs.readFileSync(path.join(ROOT,p))
  };
  const stdout=invoke(['--dry-run']);
  let skip=false;
- if(!force&&blobHash(read(script))===spec.blob&&noOp(stdout,spec)){
+ if(!force&&sourcePinsMatch(script,read)&&noOp(stdout,spec)){
   try{skip=prove(script)===true}catch(e){log('FIXED_REPLAY proof unavailable; use original apply: '+e.message)}
  }
  if(!skip)invoke(spec.args);
@@ -101,4 +113,4 @@ if(require.main===module){
  if(process.argv.length!==3)throw Error('Usage: node scripts/fixed-publication-replay.cjs scripts/apply-....cjs');
  replay(process.argv[2]);
 }
-module.exports={SPECS,allowed,blobHash,noOp,replay,snapshot};
+module.exports={SPECS,allowed,blobHash,noOp,replay,snapshot,sourcePinsMatch};
