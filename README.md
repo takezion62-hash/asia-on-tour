@@ -1,5 +1,15 @@
 # ASIA ON TOUR
 
+ASIA勢のFortnite海外大会戦績を検索・閲覧する、GitHub Pagesの閲覧専用サイトです。
+
+## 現行の構成・更新方法（2026-11-27）
+
+- 戦績の正本は `source-results/manifest.json` とシーズン別JSON。ルートの旧 `results.json` は廃止済みです。閲覧用の `season-data/` は正本から生成し、手で編集しません。
+- 通常画面は `season-data/manifest.json` から必要なシーズンやランキングを取得。検証センターは `source-results/manifest.json` と各シーズンの正本を照合します。
+- 戦績追加・訂正は出典と本人IDを確認し、`readResults` / `publishResults` を使う承認処理とPRで扱います。賞金・承認履歴・更新履歴・既存IDを保持し、`npm run validate` と必須CIの合格を確認してください。
+- [現行の自動更新設定](AUTO_SYNC.md)・[Actions運用ガイド](docs/WORKFLOW_OPERATIONS.md)・[正本分割の仕様](SOURCE_RESULTS_PHASE3.md)・[旧資料の隔離と復旧](docs/LEGACY_CLEANUP_STAGE6.md) を参照してください。
+- 以下の日付付き節には過去の実装記録を含みます。当時の件数、旧ファイル名、旧承認条件は現行仕様と区別し、現行のコード・設定・上記の案内を優先します。
+
 コード整理の記録と安全方針は [コード整理台帳](docs/CODE_CLEANUP.md) を参照してください。
 
 GitHub Actions の自動更新・候補承認・戦績訂正は [運用ガイド](docs/WORKFLOW_OPERATIONS.md) を参照してください（日時固定の修正用Actionは廃止済み）
@@ -56,7 +66,7 @@ GitHub Actions の自動更新・候補承認・戦績訂正は [運用ガイド
 公開ページの「データ検証センター」（verification.html）から、直近のAUTO SYNCと過去大会の確認候補、掲載済み戦績の重複・大会枠分裂疑い、不正な基本数値、未登録大会ID、月別・地域別の掲載状況、サイト更新と過去候補の処理履歴を参照できます。
 
 - サイドバーから移動可能。更新履歴のAUTO SYNC管理パネルと大会カレンダーにもリンクを追加しました。PC・スマホ対応、カテゴリ切り替え、検索、地域フィルター、50件ずつのページ移動、画面からの再読み込みに対応。
-- verification-core.js は読み取り専用の検査エンジン。results.json、auto-sync-review.json、history-sync-review.json、auto-sync-status.json、history-sync-status.json を都度読み込みます。補助データとして history-sync-reviewed.json、updates.json、calendar-history-status.json を利用。正式な結果や候補データを変更しません。
+- verification-core.js は読み取り専用の検査エンジン。現行の verification.js は source-results/manifest.json と各シーズンの正本、auto-sync-review.json、history-sync-review.json、auto-sync-status.json、history-sync-status.json を読み込みます。補助データとして history-sync-reviewed.json、updates.json、calendar-history-status.json を利用。正式な結果や候補データを変更しません。
 - 同一IDの重複・内容矛盾、同一選手・日付・地域・大会・段階・識別できたセッションの複数レコード、同日の「決勝」「賞金決勝」の混在を「要照合候補」として提示します。出典の公式ウィンドウが確認できない場合は自動統合しません。予選と決勝・異なるEvent/Session・同名別人の誤統合をしません。
 - 未確認の数値は null として扱い、0へ補完しません。スキン大会の現金賞金・負数・必須項目欠落などの基本的な不整合を表示します。ただしこの画面の検査は全チェックを再実装したものではありません。公開前の厳密な構造・出典整合性検証は従来の scripts/validate-data.cjs とGitHub ActionsのCIを利用してください。
 - 月別・地域別の掲載数は調査完了率ではありません。現在候補が0件でも未調査大会がないとは断言しません。未登録大会IDは収集側のスナップショットから参照し、未確認の大会を自動作成しません。
@@ -126,13 +136,15 @@ ASIA勢のFortnite海外大会戦績を検索・閲覧する、GitHub Pagesの�
 - `achievements.js` / `achievements.css`：プロフィールの進化バッジ・通常特別称号・秘密の称号
 - `growth.js` / `growth.css`：選手プロフィールの月別・シーズン別成長グラフ
 - `compare.js` / `compare.css`：2〜3選手の海外遠征成績比較（AOT PR・賞金・VR・決勝実績など）
-- `results.json`：確認済み・未確認の戦績データ（予定とは別）
+- `source-results/`：シーズン別の唯一の戦績正本と検証用manifest（予定とは別）
+- `season-data/`：自動生成する閲覧用シーズンデータ・事前集計ランキング
+- `approval-history.json`：掲載の承認履歴。`data/manual-approvals/`：個別承認の証拠
 - `schedule.json`：S43今シーズンの公式大会予定セッション（JST表示、戦績集計と完全分離）
 - `updates.json`：更新履歴と登録日を確認できた戦績IDの差分リスト
 - `players.json`：`candidates`（名鑑）と`confirmedAliases`（確認済み別名義）
 - `tournaments.json`：`axes`（5分類軸）と`catalog`（大会・シーズン・出典ID）
 
-掲載内容はJSONを編集して更新します。`results.json`・`players.json`・`tournaments.json`・`updates.json`・`schedule.json`、`rankings.js`、`aot-pr.js`、`aot-pr.css`、`achievements.js`、`achievements.css`、`growth.js`、`growth.css`、`compare.js`、`compare.css`、`app.js`は`index.html`と同じ場所へ配置してください。ローカルではHTTPサーバーを使用します。
+掲載内容は正本を扱う検証済みの承認処理で更新します。リポジトリ全体を取得して `npm run serve` で閲覧し、`source-results/` と `season-data/` の階層を維持してください。旧スナップショットを正本にコピーしたり、生成済み索引を手動編集したりしないでください。
 
 
 ## 特別称号の累計進化 v4（2026-11-03）
@@ -207,7 +219,7 @@ Override SeriesのMega Man・KINGDOM HEARTS・Persona 5の3大会をシリーズ
 
 - `type: "records"` はGitHubの差分で新規追加が確認できた**戦績IDのみ**を `recordIds` に記載します。修正済みレコードを新着扱いせず、日付を推測しません。
 - `type: "site"` はサイト機能・分類の改善記録です。`recordIds: []` にします。
-- **新しい戦績を登録する際は、results.json と updates.json をセットで更新**します。これは運用で明示的に追加する履歴で、GitHub APIから自動取得する仕組みではありません。書き忘れた戦績は新着欄に表示されません。
+- **新しい戦績を登録する際は、分割正本と updates.json をセットで更新**し、該当する承認証拠も保持します。これは運用で明示的に追加する履歴で、GitHub APIから自動取得する仕組みではありません。書き忘れた戦績は新着欄に表示されません。
 - 既存履歴は2026年11月1日の実コミット2件の新規追加差分（38＋20件）を元にしています。それ以前の登録日を推測していません。
 - ホームでは新着4件、更新履歴ページでは新着20件ずつと全更新履歴を表示します。新着は選択中のシーズンで絞り込みますが、更新履歴の記録自体は全期間を表示します。
 - `npm run validate` は `updates.json` の更新ID・日付・登録戦績IDの整合性も検証します。
