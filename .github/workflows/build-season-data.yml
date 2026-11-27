@@ -177,6 +177,7 @@ on:
       - 'data/manual-approvals/*-squads-confirmed.json'
       - scripts/build-candidate-triage.cjs
       - scripts/candidate-triage-core.cjs
+      - scripts/mobile-screenshot-publication.cjs
       - scripts/fixed-publication-replay.cjs
       - scripts/publication-inventory.cjs
       - .github/workflows/build-season-data.yml
