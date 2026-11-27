@@ -185,7 +185,9 @@ on:
 permissions:
   contents: write
 concurrency:
-  group: season-data-${{ github.ref }}
+  # All direct main writers share one FIFO queue; preserve waiting scans.
+  group: aot-provider-results-main
+  queue: max
   cancel-in-progress: false
 jobs:
   rebuild:
