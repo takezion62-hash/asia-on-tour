@@ -52,7 +52,26 @@ function proofComplete(script){
  return classifyFixed({...f,expected:(v.DOC?.batch?.entries||v.GOLD).map(v.project),
   verify:(r,e,p)=>verifyHistoricalRow(v.verifyRow,r,e,p)},ctx).status==='applied';
 }
-function replay(script,{run=spawnSync,read=p=>fs.readFileSync(path.join(ROOT,p)),prove=proofComplete,force=process.env.AOT_FORCE_PUBLICATION_REPLAY==='1',log=console.log}={}){
+// Preflight copies the repository before setting this flag. Compare every
+// file (not merely total cash) after the old apply to prove a no-op.
+function snapshot(root=ROOT){
+ const excluded=new Set(['.git','node_modules','playwright-report','test-results','.cache']);
+ const digest=crypto.createHash('sha256');
+ function visit(dir){
+  for(const e of fs.readdirSync(dir,{withFileTypes:true}).sort((a,b)=>a.name.localeCompare(b.name,'en'))){
+   if(excluded.has(e.name))continue;
+   const p=path.join(dir,e.name);
+   if(e.isSymbolicLink())throw Error('FIXED_REPLAY unexpected symlink '+p);
+   if(e.isDirectory()){visit(p);continue}
+   if(!e.isFile())throw Error('FIXED_REPLAY unexpected file '+p);
+   const bytes=fs.readFileSync(p);
+   digest.update(JSON.stringify([path.relative(root,p),bytes.length,crypto.createHash('sha256').update(bytes).digest('hex')]));
+  }
+ }
+ visit(root);
+ return digest.digest('hex');
+}
+function replay(script,{run=spawnSync,read=p=>fs.readFileSync(path.join(ROOT,p)),prove=proofComplete,force=process.env.AOT_FORCE_PUBLICATION_REPLAY==='1',verify=process.env.AOT_REBUILD_PREFLIGHT==='1',capture=snapshot,log=console.log}={}){
  if(!allowed(script))throw Error('FIXED_REPLAY unknown script '+script);
  const spec=SPECS[script];
  const invoke=args=>{
@@ -68,7 +87,13 @@ function replay(script,{run=spawnSync,read=p=>fs.readFileSync(path.join(ROOT,p))
   try{skip=prove(script)===true}catch(e){log('FIXED_REPLAY proof unavailable; use original apply: '+e.message)}
  }
  if(!skip)invoke(spec.args);
- const result={script,skippedApply:skip,validatedDryRun:true};
+ else if(verify){
+  const before=capture();
+  invoke(spec.args);
+  if(capture()!==before)throw Error('FIXED_REPLAY equivalence failed: original apply changed files '+script);
+  log('FIXED_REPLAY_EQUIVALENCE '+script);
+ }
+ const result={script,skippedApply:skip&&!verify,eligible:skip,verifiedEquivalent:skip&&verify,validatedDryRun:true};
  log('AOT_FIXED_REPLAY '+JSON.stringify(result));
  return result;
 }
@@ -76,4 +101,4 @@ if(require.main===module){
  if(process.argv.length!==3)throw Error('Usage: node scripts/fixed-publication-replay.cjs scripts/apply-....cjs');
  replay(process.argv[2]);
 }
-module.exports={SPECS,allowed,blobHash,noOp,replay};
+module.exports={SPECS,allowed,blobHash,noOp,replay,snapshot};
