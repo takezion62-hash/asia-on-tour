@@ -12,6 +12,8 @@ on:
       - scripts/verified-mobile-eu-nac-20261126.cjs
       - scripts/apply-mobile-nac-naw-20261127.cjs
       - scripts/verified-mobile-nac-naw-20261127.cjs
+      - scripts/apply-mobile-naw-20261127.cjs
+      - scripts/verified-mobile-naw-20261127.cjs
       - scripts/apply-player-renames-20261126.cjs
       - scripts/confirmed-player-renames-20261126.cjs
       - scripts/build-source-results.cjs
@@ -331,6 +333,8 @@ jobs:
             node scripts/fixed-publication-replay.cjs scripts/apply-mobile-eu-nac-20261126.cjs
             node scripts/apply-mobile-nac-naw-20261127.cjs --dry-run
             node scripts/apply-mobile-nac-naw-20261127.cjs --apply
+            node scripts/apply-mobile-naw-20261127.cjs --dry-run
+            node scripts/apply-mobile-naw-20261127.cjs --apply
             node scripts/validate-data.cjs
             node scripts/validate-approvals.cjs
             node scripts/validate-updates.cjs
