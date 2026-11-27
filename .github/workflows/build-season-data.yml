@@ -177,6 +177,8 @@ on:
       - 'data/manual-approvals/*-squads-confirmed.json'
       - scripts/build-candidate-triage.cjs
       - scripts/candidate-triage-core.cjs
+      - scripts/fixed-publication-replay.cjs
+      - scripts/publication-inventory.cjs
       - .github/workflows/build-season-data.yml
   workflow_dispatch:
 permissions:
@@ -207,26 +209,17 @@ jobs:
             git fetch origin main
             git reset --hard origin/main
             node scripts/source-results-store.cjs verify
-            node scripts/apply-s28-nac-zb-duos-three-20261119.cjs --dry-run
-            node scripts/apply-s28-nac-zb-duos-three-20261119.cjs
-            node scripts/apply-mobile-series-ten-20261121.cjs --dry-run
-            node scripts/apply-mobile-series-ten-20261121.cjs
-            node scripts/apply-mobile-oce-naw-ten-20261121.cjs --dry-run
-            node scripts/apply-mobile-oce-naw-ten-20261121.cjs
-            node scripts/apply-mobile-extra-ten-20261121.cjs --dry-run
-            node scripts/apply-mobile-extra-ten-20261121.cjs
-            node scripts/apply-mobile-series-nine-20261121.cjs --dry-run
-            node scripts/apply-mobile-series-nine-20261121.cjs
-            node scripts/apply-s21-s25-s41-s42-ten-20261121.cjs --dry-run
-            node scripts/apply-s21-s25-s41-s42-ten-20261121.cjs
-            node scripts/apply-s21-s22-s35-s36-s37-ten-20261121.cjs --dry-run
-            node scripts/apply-s21-s22-s35-s36-s37-ten-20261121.cjs
+            node scripts/fixed-publication-replay.cjs scripts/apply-s28-nac-zb-duos-three-20261119.cjs
+            node scripts/fixed-publication-replay.cjs scripts/apply-mobile-series-ten-20261121.cjs
+            node scripts/fixed-publication-replay.cjs scripts/apply-mobile-oce-naw-ten-20261121.cjs
+            node scripts/fixed-publication-replay.cjs scripts/apply-mobile-extra-ten-20261121.cjs
+            node scripts/fixed-publication-replay.cjs scripts/apply-mobile-series-nine-20261121.cjs
+            node scripts/fixed-publication-replay.cjs scripts/apply-s21-s25-s41-s42-ten-20261121.cjs
+            node scripts/fixed-publication-replay.cjs scripts/apply-s21-s22-s35-s36-s37-ten-20261121.cjs
             node scripts/apply-s37-naw-ps-zero-console-three-20261120.cjs --dry-run
             node scripts/apply-s37-naw-ps-zero-console-three-20261120.cjs
-            node scripts/apply-s30-oce-s37-naw-ten-20261120.cjs --dry-run
-            node scripts/apply-s30-oce-s37-naw-ten-20261120.cjs
-            node scripts/apply-s30-eu-zb-solo-eight-20261119.cjs --dry-run
-            node scripts/apply-s30-eu-zb-solo-eight-20261119.cjs
+            node scripts/fixed-publication-replay.cjs scripts/apply-s30-oce-s37-naw-ten-20261120.cjs
+            node scripts/fixed-publication-replay.cjs scripts/apply-s30-eu-zb-solo-eight-20261119.cjs
             node scripts/apply-verified-tracker-finals.cjs --dry-run
             node scripts/apply-verified-tracker-finals.cjs
             node scripts/apply-verified-s43-squads-finals.cjs --dry-run
@@ -330,8 +323,7 @@ jobs:
             node --test tests/reviewonly-round1-20261116.test.cjs
             node scripts/apply-player-renames-20261126.cjs --dry-run
             node scripts/apply-player-renames-20261126.cjs --apply
-            node scripts/apply-mobile-eu-nac-20261126.cjs --dry-run
-            node scripts/apply-mobile-eu-nac-20261126.cjs --apply
+            node scripts/fixed-publication-replay.cjs scripts/apply-mobile-eu-nac-20261126.cjs
             node scripts/validate-data.cjs
             node scripts/validate-approvals.cjs
             node scripts/validate-updates.cjs
