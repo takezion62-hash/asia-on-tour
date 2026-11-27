@@ -39,9 +39,9 @@ on:
 permissions:
   contents: write
 concurrency:
-  # Serialize recent and historical writers of source-results and updates.json.
-  # Never let simultaneous push-triggered scans race on a JSON rebase.
+  # All direct main writers share one FIFO queue; preserve waiting scans.
   group: aot-provider-results-main
+  queue: max
   cancel-in-progress: false
 jobs:
   check:
