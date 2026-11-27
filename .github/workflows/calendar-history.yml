@@ -13,7 +13,9 @@ on:
 permissions:
   contents: write
 concurrency:
-  group: aot-calendar-history-main
+  # All direct main writers share one FIFO queue; preserve waiting scans.
+  group: aot-provider-results-main
+  queue: max
   cancel-in-progress: false
 jobs:
   historical-calendar:
@@ -44,6 +46,29 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add calendar-history.json calendar-history-status.json calendar-history-index.json calendar-history/
+          CALENDAR_BASE=$(git rev-parse HEAD)
           git commit -m "data: archive verified historical tournament sessions"
-          git pull --rebase origin main
-          git push origin HEAD:main
+          # Human/PR merges and older in-flight runs can still advance main.
+          for attempt in 1 2 3 4 5; do
+            git fetch origin main || exit 1
+            # Never merge stale calendar discovery over changed source inputs
+            # or a newer calendar, even if a textual rebase would succeed.
+            if ! git diff --quiet "$CALENDAR_BASE" origin/main -- scripts/ tournaments.json calendar-history.json calendar-history-index.json calendar-history-status.json calendar-history/; then
+              echo "::error::Calendar discovery inputs or archive changed; rerun against latest main"
+              exit 1
+            fi
+            git rebase origin/main || {
+              git rebase --abort || true
+              echo "::error::Calendar rebase conflict; preserve both histories and require review"
+              exit 1
+            }
+            # Validate the merged snapshot, not just the original checkout.
+            npm run validate || exit 1
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            echo "CALENDAR_RETRY main advanced ($attempt/5)"
+            sleep $((attempt * 3))
+          done
+          echo "::error::Calendar publication failed after five safe retries"
+          exit 1
