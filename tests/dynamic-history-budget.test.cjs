@@ -1,6 +1,7 @@
 'use strict';
 const test=require('node:test'),assert=require('node:assert/strict');
-const {planBudget,allowance,summary}=require('../scripts/dynamic-history-budget.cjs');
+const {planBudget,planActiveBudget,allowance,summary}=require('../scripts/dynamic-history-budget.cjs');
+const {windowPageAllowance}=require('../scripts/scan-efficiency.cjs');
 const {recoveryShortlist,REVIEW_REASON}=require('../scripts/review-recovery-priority.cjs');
 const now=Date.parse('2026-11-24T13:00:00Z');
 const w=(key,series='victory-cup')=>({key,series});
@@ -62,4 +63,39 @@ test('additional recovery reasons require configured route, exact source and int
  assert.equal(plan(row,{...cp,retryAfter:'2026-11-25T00:00:00Z'}).length,0);
  assert.equal(plan(row,cp,config,[row.id]).length,0);
  assert.equal(plan({...row,rank:41}).length,0);
+});
+
+test('empty recovery queue keeps the due retry and six selected fresh windows funded after the delta scan',()=>{
+ const active=Array.from({length:24},(_,i)=>w('w'+i)),state={windows:{}};
+ state.windows.w0={nextPage:0,retryAfter:'2026-11-23T00:00:00Z'};
+ for(let i=7;i<24;i++)state.windows['w'+i]={complete:false,nextPage:10,totalPages:100};
+ state.windows.w22.totalPages=13;state.windows.w23.totalPages=15;
+ const before=JSON.stringify({active,state});
+ // Reproduces the old fallback: 48 steady-state pages, four already spent.
+ assert.equal(windowPageAllowance(active,state,0,44,12,true),0);
+ const p=planActiveBudget(active,state,[],{enabled:true,budget:44,minUnstarted:6,now});
+ assert.ok(p);
+ assert.equal(p.planned,44);
+ assert.ok(p.items[0].pages>=1,'due retry must get a page');
+ assert.ok(p.items.every(i=>i.pages>=1&&i.pages<=12));
+ for(let i=1;i<=6;i++)assert.ok(p.items[i].pages>=2);
+ assert.equal(p.items[22].pages,3);assert.equal(p.items[23].pages,5);
+ let left=44;
+ for(let i=0;i<active.length;i++){
+  const n=allowance(p,i,left);assert.equal(n,p.items[i].pages);left-=n;
+ }
+ assert.equal(left,0);assert.equal(JSON.stringify({active,state}),before);
+ assert.equal(summary(p).groups.retry.plannedPages,p.items[0].pages);
+ assert.equal(summary(p).windows.length,0);
+});
+test('ordinary historical allocation remains bounded during a reduced budget or provider pause',()=>{
+ const active=Array.from({length:20},(_,i)=>w('w'+i)),state={windows:{w0:{nextPage:0,retryAfter:'2026-11-23T00:00:00Z'}}};
+ const options={enabled:true,budget:20,minUnstarted:6,now};
+ const p=planActiveBudget(active,state,[],options);
+ assert.equal(p.planned,20);assert.ok(p.items.every(i=>i.pages===1));
+ assert.equal(planActiveBudget(active,state,[],{...options,rateLimited:true}),null);
+ assert.equal(planActiveBudget(active,state,[],{...options,enabled:false}),null);
+ const zero=planActiveBudget(active,state,[],{...options,budget:0});
+ assert.equal(zero.planned,0);
+ for(let i=0;i<active.length;i++)assert.equal(allowance(zero,i,0),0);
 });

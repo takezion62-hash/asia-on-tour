@@ -22,7 +22,7 @@ const {stageFor:playstationStageFor}=require('./automatic-playstation-approval.c
 const {scanCoverage}=require('./scan-coverage.cjs');
 const {finishableWindows,remainingPages,windowPageAllowance,leastCoveredBucket}=require('./scan-efficiency.cjs');
 const {recoveryShortlist}=require('./review-recovery-priority.cjs');
-const {planBudget,allowance:dynamicAllowance,summary:budgetSummary}=require('./dynamic-history-budget.cjs');
+const {planActiveBudget,allowance:dynamicAllowance,summary:budgetSummary}=require('./dynamic-history-budget.cjs');
 const {runDelta:runNewPlayerDelta}=require('./new-player-history-delta.cjs');
 const {trafficPlan,createPacer}=require('./osirion-traffic-policy.cjs');
 const root=path.resolve(__dirname,'..');
@@ -780,8 +780,8 @@ async function main(){
   }
   const recoveryCandidates=recoveryShortlist(active,state,recoveryRows,data.results,
    {perWindowCap:config.maxPagesPerWindowPerRun||12,...(dynamic?{config}: {})});
-  if(dynamic&&recoveryCandidates.length&&!rateLimited)allocation=planBudget(active,state,recoveryCandidates,{
-   budget:Math.max(0,budget),perWindowCap:Math.min(50,Math.max(1,config.maxPagesPerWindowPerRun||12)),
+  allocation=planActiveBudget(active,state,recoveryCandidates,{
+   enabled:dynamic,rateLimited,budget:Math.max(0,budget),perWindowCap:Math.min(50,Math.max(1,config.maxPagesPerWindowPerRun||12)),
    minUnstarted:Math.max(0,config.minUnstartedWindowsPerRun||0),maxRecoveryPercent:config.dynamicReviewBudget.maxRecoveryPercent??60});
   reviewRecoverySummary={selectedWindows:recoveryCandidates.length,
    candidateCount:recoveryCandidates.reduce((n,x)=>n+x.candidateCount,0),
