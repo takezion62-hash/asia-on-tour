@@ -1,16 +1,17 @@
 name: AOT verified participation archive
 on:
-  # Three provider workers share a concurrency group (one running, one pending).
-  # A single push may otherwise launch three runs and GitHub cancels an older
-  # pending one. Keep this participation job scheduled/manual only; CI still
-  # verifies participation code on PRs. Recent/history remain push-triggered.
+  # Keep participation scheduled/manual only to avoid additional provider calls.
+  # All direct main writers now share the queued concurrency group.
+  # CI still verifies participation code on PRs.
   schedule:
     - cron: '53 2,8,14,20 * * *'
   workflow_dispatch:
 permissions:
   contents: write
 concurrency:
+  # All direct main writers share one FIFO queue; preserve waiting scans.
   group: aot-provider-results-main
+  queue: max
   cancel-in-progress: false
 jobs:
   participation:
