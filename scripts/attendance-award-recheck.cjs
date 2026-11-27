@@ -9,8 +9,13 @@ const ps=require('./automatic-playstation-approval.cjs');
 const nv=require('./automatic-nvidia-approval.cjs');
 const cash=require('./automatic-cash-approval.cjs');
 const unreal=require('./automatic-unreal-approval.cjs');
-const {leaderboardCoverage,coversRankBoundary}=require('./verified-partial-page.cjs');
-const {individualRankPrize,teamRankPrize}=require('./tournament-rule-engine.cjs');
+const perf=require('./automatic-performance-approval.cjs');
+const duo=require('./automatic-duo-qualifier-approval.cjs');
+const {identityProof}=require('./saved-candidate-recheck.cjs');
+const {rules}=require('../tournament-rules.json');
+const ruleById=new Map(rules.map(r=>[r.id,r]));
+const {leaderboardCoverage,coversRankBoundary,verifiedQualification,verifiedVrFinal}=require('./verified-partial-page.cjs');
+const {individualRankPrize,teamRankPrize,advancementCutoff,individualVrPrize}=require('./tournament-rule-engine.cjs');
 const ROOT=path.resolve(__dirname,'..'),HISTORY='attendance-award-recheck-history.json';
 const SCANS=['auto-sync-scan.json','history-sync-scan.json'];
 const json=JSON.stringify,hash=x=>crypto.createHash('sha256').update(json(x)).digest('hex');
@@ -27,6 +32,15 @@ function route(row){
  if(c&&individualRankPrize(c,row.region,row.rank)>0&&(
    c.cashFinalAutoApproval==='verified-duo-round2-rank'?/^Event [1-9][0-9]* · Round 2 \/ 参加確認$/.test(row.round):
    /^Event [1-9][0-9]* \/ 参加確認$/.test(row.round)))return {adapter:cash,rule:c,kind:'cash'};
+ const pe=perf.RULES[row.tournamentId],d=duo.RULES[row.tournamentId];
+ const within=rule=>Number.isSafeInteger(row.rank)&&row.rank>=1&&row.rank<=advancementCutoff(rule,row.region);
+ if(pe&&within(pe)){
+  if(/^Event [1-9][0-9]* · Round 1 \/ 参加確認$/.test(row.round))return {adapter:perf,rule:pe,kind:'qualifier'};
+  if(/^Event [1-9][0-9]* · Round 2 \/ 参加確認$/.test(row.round)&&individualVrPrize(pe,row.vrs)>0)
+   return {adapter:perf,rule:pe,kind:'performance'};
+ }
+ if(d&&d.series==='cash-cup'&&within(d)&&/^Event [1-9][0-9]* · Round 1 \/ 参加確認$/.test(row.round))
+  return {adapter:duo,rule:d,kind:'qualifier'};
  return null;
 }
 function identity(row,rule){
@@ -68,9 +82,20 @@ function checkpointProof(cp,row,kind,rule,slot,now){
    eventId:slot.eventId,windowId:slot.sourceWindowId,tournamentId:row.tournamentId,
    seasonId:row.seasonId,region:row.region,dateJst:row.date,series:rule.series,
    round:row.round,kind:row.kind,end},cp,now);
+ // Keep the old PlayStation cutoff-complete replay intact. New ordinary
+ // partial snapshots must cross the actual cutoff and use the same proof
+ // as the live adapter. Full and old capped proofs retain their old shape.
+ const win={eventId:slot.eventId,windowId:slot.sourceWindowId,tournamentId:row.tournamentId,
+  seasonId:row.seasonId,region:row.region,dateJst:row.date,series:rule.series,
+  round:row.round,kind:row.kind,startUtc:slot.startUtc,end};
  const qualifierCapped=coverage.kind==='cutoff-complete'&&kind==='qualifier'&&
-  coversRankBoundary(coverage,rule.advance[row.region],{inclusive:true});
- if(!rankCashPrefix&&coverage.kind!=='full'&&!qualifierCapped)return null;
+  !!ps.RULES[rule.id]&&coversRankBoundary(coverage,rule.advance[row.region],{inclusive:true});
+ const qualifierPrefix=kind==='qualifier'&&verifiedQualification(hits[0],win,cp,rule,
+  advancementCutoff(rule,row.region),{now,requireEpicIds:!!ps.RULES[rule.id],matchStage:duo.RULES[rule.id]&&rule.series==='cash-cup'?'単一ラウンド':'予選'});
+ const performancePrefix=kind==='performance'&&!!perf.RULES[rule.id]&&
+  hits[0].vrs>0&&hits[0].rank<=advancementCutoff(rule,row.region)&&
+  verifiedVrFinal(hits[0],win,cp,rule,{now,stage:'Performance決勝',requirePoints:true});
+ if(!rankCashPrefix&&coverage.kind!=='full'&&!qualifierCapped&&!qualifierPrefix&&!performancePrefix)return null;
  return {...Object.fromEntries(['complete','rankingOrderValid','epicIdsRetained','nextPage','pages','totalPages','lastSeenRank','lastSuccessAt','emptyAttempts'].filter(k=>cp[k]!==undefined).map(k=>[k,cp[k]])),proposals:[hits[0]]};
 }
 function inspect(row,entry,context,proof,now){
@@ -93,15 +118,18 @@ function inspect(row,entry,context,proof,now){
  const win={key:place.key,eventId:place.eventId,windowId:place.windowId,series:target.rule.series,
   tournamentId:row.tournamentId,seasonId:row.seasonId,region:row.region,dateJst:row.date,
   kind:row.kind,round:row.round,startUtc:place.slot.startUtc,end:Date.parse(place.slot.endUtc)};
+ // Keep phase 1/2 historical proof replay unchanged. The newly supported
+ // routes additionally reuse strict deterministic identity checks.
+ if((target.adapter===perf||target.adapter===duo)&&!identityProof(candidate,win,context.verifiedAccounts,target.rule.team))return null;
  const verdict=target.adapter.decide(candidate,win,cp,{...context,results:others,
   schedule:{sessions:[place.slot]}},now);
  if(!verdict.approved)return null;
  const v=verdict.record;
- if(v.id!==row.id||(target.kind==='qualifier'?(v.kind!=='予選'||v.prize!==0):(v.kind!=='賞金決勝'||!(v.prize>0))))return null;
+ if(v.id!==row.id||(target.kind==='qualifier'?(v.kind!=='予選'||v.prize!==0||!v.round.endsWith('予選突破')):(v.kind!==(target.kind==='performance'?'Performance決勝':'賞金決勝')||!(v.prize>0))))return null;
  const corrected={...row,kind:v.kind,round:v.round,prize:v.prize,
   ...(v.prizePerPlayer!==undefined?{prizePerPlayer:v.prizePerPlayer}:{}),note:v.note};
  if(!Number.isSafeInteger(corrected.prize)||corrected.prize<0||
-  (names.length>1&&corrected.prize!==corrected.prizePerPlayer*names.length))return null;
+  (names.length>1&&target.kind!=='qualifier'&&corrected.prize!==corrected.prizePerPlayer*names.length))return null;
  return corrected;
 }
 function loadContext(root=ROOT,{results,players,withScans=true}={}){
@@ -116,17 +144,53 @@ function loadContext(root=ROOT,{results,players,withScans=true}={}){
    return cache.get(month);
   },scanDocs:withScans?SCANS.map(file=>({file,doc:read(root,file)})):[]};
 }
+// All published attendance rows are inventoried, including verified $0 and
+// unregistered rules. Only the existing attendance-only audit policy may be
+// rewritten here; other frozen approval policies need their own verifier.
+function inventory(context,ledger,changes,held){
+ const counts={},byTournament={},bySeason={},byId=new Map(ledger.entries.map(e=>[e.recordId,e]));
+ const updated=new Set(changes.map(c=>c.id)),blocked=new Set(held.map(c=>c.id));
+ const candidates=[];
+ for(const row of context.results){
+  if(row.kind!=='参加確認')continue;
+  const rule=ruleById.get(row.tournamentId),entry=byId.get(row.id),target=route(row);
+  let status;
+  if(updated.has(row.id))status='corrected';
+  else if(blocked.has(row.id))status='evidence-needed';
+  else if(!rule||rule.autoApproval==='review-only')status='rule-needed';
+  else if(target)status='evidence-needed';
+  else {
+   const isQualifier=/^(?:Qualifier|(?:Event|Day) [1-9][0-9]* · Round 1)\s*\/\s*(?:参加確認|出場確認)$/.test(row.round||'');
+   const cutoff=advancementCutoff(rule,row.region);
+   const positiveRank=individualRankPrize(rule,row.region,row.rank)>0||teamRankPrize(rule,row.region,row.rank)?.team>0;
+   const potential=(isQualifier&&Number.isSafeInteger(cutoff)&&row.rank>=1&&row.rank<=cutoff)||
+    (!isQualifier&&(positiveRank||(/Round 2|^Final/.test(row.round||'')&&individualVrPrize(rule,row.vrs)>0)));
+   status=potential?'policy-review-needed':row.prize===0?'confirmed-zero-retained':'not-eligible-or-unproven';
+  }
+  counts[status]=(counts[status]||0)+1;
+  for(const [obj,key] of [[byTournament,row.tournamentId||'unknown'],[bySeason,row.seasonId||'unknown']]){
+   const bucket=obj[key]||(obj[key]={});bucket[status]=(bucket[status]||0)+1;
+  }
+  if(['evidence-needed','rule-needed','policy-review-needed'].includes(status))candidates.push({id:row.id,seasonId:row.seasonId,tournamentId:row.tournamentId,region:row.region,rank:row.rank,round:row.round,status,policy:entry?.policy||null});
+ }
+ return {total:Object.values(counts).reduce((a,b)=>a+b,0),counts,byTournament,bySeason,candidates};
+}
 function plan(context,ledger,history={version:1,entries:[]},{now=Date.now()}={}){
  if(ledger?.version!==1||!Array.isArray(ledger.entries)||history?.version!==1||!Array.isArray(history.entries))
   throw Error('ATTENDANCE_RECHECK invalid ledger or history');
  const byId=new Map(ledger.entries.map(e=>[e.recordId,e])),seen=new Set(history.entries.map(e=>e.id));
+ const ledgerCounts=new Map();for(const e of ledger.entries)ledgerCounts.set(e.recordId,(ledgerCounts.get(e.recordId)||0)+1);
  const results=context.results.slice(),changes=[],held=[];
  for(let i=0;i<results.length;i++){
   const row=results[i],target=route(row);
   if(!target)continue;
   const entry=byId.get(row.id),place=officialSlot(row,target.rule,context);
-  if(!approvedEntry(row,entry)||!place||seen.has(row.id)){held.push({id:row.id,reason:'元承認・公式日程・履歴不一致'});continue}
+  if(ledgerCounts.get(row.id)!==1||!approvedEntry(row,entry)||!place||seen.has(row.id)){held.push({id:row.id,reason:'元承認・公式日程・履歴不一致'});continue}
   let found=null;
+  // Do not pick a favorable snapshot if another saved copy disagrees with
+  // the published score, roster or original ID. Missing copies are harmless.
+  const copies=context.scanDocs.flatMap(({doc})=>(doc.windows?.[place.key]?.proposals||[]).filter(c=>c.id===row.id));
+  if(copies.some(c=>!exact(row,c))){held.push({id:row.id,reason:'保存済み順位表間または公開済み成績との矛盾'});continue}
   for(const {file,doc} of context.scanDocs){
    const checkpoint=checkpointProof(doc.windows?.[place.key],row,target.kind,target.rule,place.slot,now);
    if(!checkpoint)continue;
@@ -140,7 +204,7 @@ function plan(context,ledger,history={version:1,entries:[]},{now=Date.now()}={})
    proof:found.proof,proofSha256:hash(found.proof),approvedAt:new Date(now).toISOString()});
  }
  if(results.length!==context.results.length||results.some((r,i)=>r.id!==context.results[i].id))throw Error('ATTENDANCE_RECHECK ID changed');
- return {results,changes,held,history:{version:1,entries:[...changes,...history.entries]}};
+ return {results,changes,held,inventory:inventory(context,ledger,changes,held),history:{version:1,entries:[...changes,...history.entries]}};
 }
 function verifyPromotion(row,entry,context,history){
  try{
@@ -166,10 +230,30 @@ function verifyPromotion(row,entry,context,history){
   return !!expected&&json(expected)===json(replayRow);
  }catch{return false}
 }
+// The separate participation archive uses different IDs and has no matching
+// attendance-only ledger entry. Inventory it independently; never move it
+// into source-results or infer awards from an archive row alone.
+function archiveInventory(root){
+ if(!fs.existsSync(path.join(root,'participation-index.json')))return null;
+ const index=read(root,'participation-index.json'),rows=[];
+ try{
+  if(!Array.isArray(index.months))throw Error('invalid month index');
+  for(const m of index.months){
+   if(!/^\d{4}-\d{2}$/.test(m.month)||!Number.isSafeInteger(m.count)||m.count<0)throw Error('invalid month');
+   if(!m.count)continue;
+   const doc=read(root,'participation/'+m.month+'.json');
+   if(doc.month!==m.month||!Array.isArray(doc.entries)||doc.entries.length!==m.count)throw Error('archive count mismatch '+m.month);
+   rows.push(...doc.entries.map(r=>({...r,kind:'参加確認'})));
+  }
+  if(rows.length!==index.total||new Set(rows.map(r=>r.id)).size!==rows.length)throw Error('archive total or IDs mismatch');
+  return {...inventory({results:rows},{entries:[]},[],[]),readOnly:true};
+ }catch(e){return {readOnly:true,expectedTotal:index.total,error:e.message};}
+}
 function run(root=ROOT,{dryRun=true,now=Date.now()}={}){
  const context=loadContext(root),ledger=read(root,'approval-history.json');
  const history=fs.existsSync(path.join(root,HISTORY))?read(root,HISTORY):{version:1,entries:[]};
  const output=plan(context,ledger,history,{now});
+ output.archiveInventory=archiveInventory(root);
  if(output.changes.length){
   const errors=validateData({results:output.results,players:context.players,tournaments:context.tournaments}).errors;
   if(errors.length)throw Error('ATTENDANCE_RECHECK invalid corrected data '+json(errors.slice(0,5)));
@@ -183,8 +267,10 @@ function run(root=ROOT,{dryRun=true,now=Date.now()}={}){
  }
  const byId=new Map(output.results.map(r=>[r.id,r]));
  console.log('ATTENDANCE_RECHECK '+json({dryRun,qualified:output.changes.filter(h=>byId.get(h.id).kind==='予選').length,
-  cash:output.changes.filter(h=>byId.get(h.id).kind==='賞金決勝').length,
+  cash:output.changes.filter(h=>['賞金決勝','Performance決勝'].includes(byId.get(h.id).kind)).length,
   totalPrize:output.changes.reduce((n,h)=>n+byId.get(h.id).prize,0),changes:output.changes.map(h=>{const r=byId.get(h.id);return {id:r.id,player:r.player,rank:r.rank,kind:r.kind,region:r.region,prize:r.prize}}),held:output.held}));
+ console.log('ATTENDANCE_INVENTORY '+json(output.inventory));
+ console.log('ATTENDANCE_ARCHIVE_INVENTORY '+json(output.archiveInventory));
  return output;
 }
 if(require.main===module){
@@ -192,4 +278,4 @@ if(require.main===module){
   run(ROOT,{dryRun:args[0]==='--dry-run'});
  }catch(e){console.error(e.stack);process.exitCode=1}
 }
-module.exports={HISTORY,route,identity,exact,checkpointProof,inspect,loadContext,plan,verifyPromotion,run};
+module.exports={HISTORY,route,identity,exact,checkpointProof,inspect,loadContext,inventory,archiveInventory,plan,verifyPromotion,run};
