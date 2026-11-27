@@ -46,26 +46,24 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add calendar-history.json calendar-history-status.json calendar-history-index.json calendar-history/
-          CALENDAR_CATALOG_BLOB=$(git rev-parse HEAD:tournaments.json)
-          CALENDAR_SCRIPT_BLOB=$(git rev-parse HEAD:scripts/historical-calendar.cjs)
+          CALENDAR_BASE=$(git rev-parse HEAD)
           git commit -m "data: archive verified historical tournament sessions"
           # Human/PR merges and older in-flight runs can still advance main.
           for attempt in 1 2 3 4 5; do
-            git pull --rebase origin main || {
+            git fetch origin main || exit 1
+            # Never merge stale calendar discovery over changed source inputs
+            # or a newer calendar, even if a textual rebase would succeed.
+            if ! git diff --quiet "$CALENDAR_BASE" origin/main -- scripts/ tournaments.json calendar-history.json calendar-history-index.json calendar-history-status.json calendar-history/; then
+              echo "::error::Calendar discovery inputs or archive changed; rerun against latest main"
+              exit 1
+            fi
+            git rebase origin/main || {
               git rebase --abort || true
               echo "::error::Calendar rebase conflict; preserve both histories and require review"
               exit 1
             }
-            # Refuse a stale calendar if the rules used by discovery changed.
-            if ! git diff --quiet HEAD^ HEAD -- scripts/historical-calendar.cjs tournaments.json; then
-              echo "::error::Unexpected calendar commit scope"
-              exit 1
-            fi
-            if [ "$(git rev-parse HEAD^:tournaments.json)" != "$CALENDAR_CATALOG_BLOB" ] ||
-               [ "$(git rev-parse HEAD^:scripts/historical-calendar.cjs)" != "$CALENDAR_SCRIPT_BLOB" ]; then
-              echo "::error::Calendar discovery inputs changed; rerun against latest main"
-              exit 1
-            fi
+            # Validate the merged snapshot, not just the original checkout.
+            npm run validate || exit 1
             if git push origin HEAD:main; then
               exit 0
             fi
