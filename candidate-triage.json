@@ -1,7 +1,7 @@
 {
   "version": 1,
   "sourceCheckedAt": "2026-11-28T06:49:08.046Z",
-  "total": 42,
+  "total": 37,
   "alreadyResolved": 0,
   "byYear": [
     {
@@ -9,12 +9,8 @@
       "count": 33
     },
     {
-      "name": "2025",
-      "count": 4
-    },
-    {
       "name": "2026",
-      "count": 5
+      "count": 4
     }
   ],
   "byRegion": [
@@ -24,7 +20,7 @@
     },
     {
       "name": "EU",
-      "count": 16
+      "count": 15
     },
     {
       "name": "ME",
@@ -36,22 +32,10 @@
     },
     {
       "name": "NAW",
-      "count": 3
-    },
-    {
-      "name": "OCE",
-      "count": 2
+      "count": 1
     }
   ],
   "byTournament": [
-    {
-      "name": "NVIDIA GeForce RTX Cup / NAW / 2025",
-      "count": 2
-    },
-    {
-      "name": "NVIDIA GeForce RTX Cup / OCE / 2025",
-      "count": 2
-    },
     {
       "name": "Solo Victory Cup Battle Royale / NAC / 2024",
       "count": 5
@@ -66,7 +50,7 @@
     },
     {
       "name": "Touch-Only Test Cup / EU / 2026",
-      "count": 3
+      "count": 2
     },
     {
       "name": "ZB Solo Victory Cup / BR / 2024",
@@ -88,7 +72,7 @@
     },
     {
       "name": "partial-scan",
-      "count": 33
+      "count": 28
     },
     {
       "name": "rules-review",
@@ -1316,171 +1300,6 @@
         "possibleExistingId": null
       },
       "rewardState": "source-amount-present-not-verified-by-triage"
-    },
-    {
-      "id": "auto-s39-598e0eb661b8",
-      "origin": "history",
-      "date": "2025-12-21",
-      "year": "2025",
-      "region": "OCE",
-      "tournamentId": "ch7s1-nvidia-geforce-rtx-cup",
-      "event": "NVIDIA GeForce RTX Cup",
-      "round": "単一開催枠 / 参加確認",
-      "player": "お前らグラファいってないんｗｗ",
-      "kind": "参加確認",
-      "rank": 7798,
-      "points": 4,
-      "kills": 2,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S39_NvidiaCup/?region=OCE&round=S39_NvidiaCup_OCE",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "全ページ連続の順位表・Epic ID付完全スナップショットが未確認",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 79,
-        "totalPages": 92,
-        "sourceKey": "epicgames_S39_NvidiaCup_OCE/S39_NvidiaCup_OCE",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s39-7e1820ed773d",
-      "origin": "history",
-      "date": "2025-12-21",
-      "year": "2025",
-      "region": "OCE",
-      "tournamentId": "ch7s1-nvidia-geforce-rtx-cup",
-      "event": "NVIDIA GeForce RTX Cup",
-      "round": "単一開催枠 / 参加確認",
-      "player": "alpha fvǃ",
-      "kind": "参加確認",
-      "rank": 7663,
-      "points": 7,
-      "kills": 2,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S39_NvidiaCup/?region=OCE&round=S39_NvidiaCup_OCE",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "全ページ連続の順位表・Epic ID付完全スナップショットが未確認",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 79,
-        "totalPages": 92,
-        "sourceKey": "epicgames_S39_NvidiaCup_OCE/S39_NvidiaCup_OCE",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s39-3a64da355c11",
-      "origin": "history",
-      "date": "2025-12-22",
-      "year": "2025",
-      "region": "NAW",
-      "tournamentId": "ch7s1-nvidia-geforce-rtx-cup",
-      "event": "NVIDIA GeForce RTX Cup",
-      "round": "単一開催枠 / 参加確認",
-      "player": "GR きのでーす",
-      "kind": "参加確認",
-      "rank": 7800,
-      "points": 41,
-      "kills": 3,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S39_NvidiaCup/?region=NAW&round=S39_NvidiaCup_NAW",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "全ページ連続の順位表・Epic ID付完全スナップショットが未確認",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 78,
-        "totalPages": 100,
-        "sourceKey": "epicgames_S39_NvidiaCup_NAW/S39_NvidiaCup_NAW",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s39-970b59a87625",
-      "origin": "history",
-      "date": "2025-12-22",
-      "year": "2025",
-      "region": "NAW",
-      "tournamentId": "ch7s1-nvidia-geforce-rtx-cup",
-      "event": "NVIDIA GeForce RTX Cup",
-      "round": "単一開催枠 / 参加確認",
-      "player": "なおやといくら",
-      "kind": "参加確認",
-      "rank": 7777,
-      "points": 42,
-      "kills": 0,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S39_NvidiaCup/?region=NAW&round=S39_NvidiaCup_NAW",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "全ページ連続の順位表・Epic ID付完全スナップショットが未確認",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 78,
-        "totalPages": 100,
-        "sourceKey": "epicgames_S39_NvidiaCup_NAW/S39_NvidiaCup_NAW",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s39-fbcb1a113622",
-      "origin": "history",
-      "date": "2026-02-06",
-      "year": "2026",
-      "region": "EU",
-      "tournamentId": "ch7s1-touch-only-test-cup",
-      "event": "Touch-Only Test Cup",
-      "round": "単一開催枠 / 参加確認",
-      "player": "tzd Misosqnda",
-      "kind": "参加確認",
-      "rank": 1227,
-      "points": 23,
-      "kills": 4,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S39_MobileTestCup/?region=EU&round=S39_MobileTestCup_Round1_EU",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "対象大会・ラウンドの自動承認方式が未登録",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 13,
-        "totalPages": 19,
-        "sourceKey": "epicgames_S39_MobileTestCup_EU/S39_MobileTestCup_Round1_EU",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
     }
   ],
   "policy": "read-only queue; awards require existing official rule-backed validators and identity/collision proof"
