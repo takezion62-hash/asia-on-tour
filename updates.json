@@ -2,6 +2,57 @@
   "version": 1,
   "entries": [
     {
+      "id": "review-publication-pending-20261114-8b17e82ee35c-verified-rule-1",
+      "date": "2026-11-28",
+      "type": "records",
+      "title": "管理者確認済み戦績 2件を追加",
+      "description": "公式規則に基づく予選突破または決勝0VRのみを確認。未確認賞金なし。",
+      "recordIds": [
+        "auto-s30-058829534c7a",
+        "auto-s30-30a701ddb428"
+      ]
+    },
+    {
+      "id": "review-publication-pending-20261114-8b17e82ee35c-attendance-only-1",
+      "date": "2026-11-28",
+      "type": "records",
+      "title": "管理者確認済み戦績 3件を追加",
+      "description": "Epic ID・開催枠・順位表を再照合した出場確認のみ。賞金・予選突破・スキン獲得を未認定。",
+      "recordIds": [
+        "auto-s39-5451ac4142fc",
+        "auto-s39-49f9e9b3a111",
+        "auto-s39-c3ebaf8197af"
+      ]
+    },
+    {
+      "id": "verified-pending-20261128",
+      "date": "2026-11-28",
+      "type": "records",
+      "title": "確認待ち候補の原本再照合・賞金なし戦績の掲載",
+      "description": "保存済みEpic IDと連続順位表、公式開催枠・地域別進出/賞金条件で照合。予選突破・参加・賞金圏外決勝を区別。未取得順位や賞金は推定せず、既存賞金は保持。",
+      "recordIds": [
+        "auto-s30-7611a39eafef",
+        "auto-s30-fd59652fb135",
+        "auto-s30-b926817c7689",
+        "auto-s30-40a792bacf5c",
+        "auto-s30-f70732d95457",
+        "auto-s30-22d60f8a1624",
+        "auto-s30-bb869a513ee0",
+        "auto-s30-7fa40a4821fe",
+        "auto-s30-4fefa54fdb6a",
+        "auto-s30-357d06afe574",
+        "auto-s30-bc15090adad5",
+        "auto-s30-9c10ff2e9421",
+        "auto-s30-42133bbee88e",
+        "auto-s32-3a8abeeacf2d",
+        "auto-s32-248ca08eeedf",
+        "auto-s32-8236d760d732",
+        "auto-s32-6633626f723b",
+        "auto-s32-84fe421f4985",
+        "auto-s32-fb3a04e97fdd"
+      ]
+    },
+    {
       "id": "auto-sync-20261128093107",
       "date": "2026-11-28",
       "type": "records",
