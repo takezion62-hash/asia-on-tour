@@ -80,4 +80,9 @@ function summary(plan,observed={}){
   windows:plan.items.filter(x=>x.category==='recovery').map(x=>({window:x.key,remainingPages:x.remaining,plannedPages:x.pages,
    attemptedPages:observed[x.key]?.attempted||0,scannedPages:observed[x.key]?.scanned||0,candidateCount:x.candidateCount,cashCandidates:x.cashCandidates}))};
 }
-module.exports={planBudget,allowance,summary};
+// A zero-length recovery shortlist is ordinary historical work, not a reason
+// to abandon protected allocations. Disabled mode and provider pause are unchanged.
+function planActiveBudget(active,state,recovery,{enabled=false,rateLimited=false,...options}={}){
+ return enabled&&!rateLimited?planBudget(active,state,recovery,options):null;
+}
+module.exports={planBudget,planActiveBudget,allowance,summary};
