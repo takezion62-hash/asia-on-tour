@@ -532,69 +532,8 @@
       "verified": true,
       "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。",
       "reviewReason": "順位表の取得が完了していません"
-    },
-    {
-      "id": "auto-s39-4efedb26291f",
-      "date": "2025-12-22",
-      "region": "NAW",
-      "player": "hst basil",
-      "playerRaw": "hst basil",
-      "event": "NVIDIA GeForce RTX Cup",
-      "round": "単一開催枠 / 参加確認",
-      "rank": 7895,
-      "points": 40,
-      "kills": 8,
-      "vrs": 0,
-      "prize": null,
-      "kind": "参加確認",
-      "matches": 5,
-      "seasonId": "S39",
-      "chapter": 7,
-      "season": 1,
-      "tournamentId": "ch7s1-nvidia-geforce-rtx-cup",
-      "source": "https://www.fortnite.com/competitive/events/S39_NvidiaCup/?region=NAW&round=S39_NvidiaCup_NAW",
-      "verified": true,
-      "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
-      "reviewOnly": true,
-      "reviewReason": "全ページ連続の順位表・Epic ID付完全スナップショットが未確認",
-      "teamAccountIds": [
-        "dd744c4f20fd4808a494626f72e6650a"
-      ]
-    },
-    {
-      "id": "auto-s39-0c5d097a86cc",
-      "date": "2026-02-10",
-      "region": "NAW",
-      "player": "Rise / Job",
-      "playerRaw": "Riddle RiIse / Jobsznǃ",
-      "event": "FNCS Division 1",
-      "round": "単一開催枠 / 参加確認",
-      "rank": 69,
-      "points": 233,
-      "kills": 27,
-      "vrs": 0,
-      "prize": null,
-      "kind": "参加確認",
-      "matches": 10,
-      "seasonId": "S39",
-      "chapter": 7,
-      "season": 1,
-      "tournamentId": "ch7s1-fncs-division-1",
-      "source": "https://www.fortnite.com/competitive/events/S39_FNCSDivisionalCup_Division1/?region=NAW&round=S39_FNCSDivisionalCup_Division1_Week2Day1_NAW",
-      "verified": true,
-      "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
-      "reviewOnly": true,
-      "reviewReason": "対象大会・ラウンドの自動承認方式が未登録",
-      "players": [
-        "Rise",
-        "Job"
-      ],
-      "teamAccountIds": [
-        "635ed9f369cf4720b1ec25e0575fd76b",
-        "dcd62fd578bb43819c33ac13c0138164"
-      ]
     }
   ],
-  "manualReviewedAt": "2026-11-28T06:59:14.889Z",
+  "manualReviewedAt": "2026-11-28T07:20:22.016Z",
   "autoDuplicateReviewedAt": "2026-11-24T12:11:50.110Z"
 }
