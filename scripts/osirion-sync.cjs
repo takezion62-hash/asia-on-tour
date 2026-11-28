@@ -818,7 +818,7 @@ async function main(){
   const perWindowLimit=allocation?dynamicAllowance(allocation,windowIndex,Math.max(0,budget),allocationObserved):windowPageAllowance(active,state,windowIndex,budget,limit,historical);
   if(perWindowLimit<=0)continue;
   processedWindows++;
-  const usage=allocationObserved[win.key]={attempted:0,scanned:0};
+  const usage=allocationObserved[win.key]={attempted:0,scanned:0,...(historical?{candidateIds:[]}: {})};
   while(budget>0&&pagesThisWindow<perWindowLimit&&!checkpoint.complete){
    if(Date.now()>=scanDeadline){timeLimitReached=true;break}
    const page=checkpoint.nextPage;
@@ -876,7 +876,7 @@ async function main(){
    invalidRows+=entries.filter(x=>!x).length;
    const found=prepare({entries:entries.filter(Boolean)},previewConfig,data).proposals;
    const already=new Set(checkpoint.proposals.map(x=>x.id));
-   for(const row of found)if(!already.has(row.id)){checkpoint.proposals.push(row);already.add(row.id)}
+   for(const row of found)if(!already.has(row.id)){checkpoint.proposals.push(row);already.add(row.id);if(historical)usage.candidateIds.push(row.id)}
    checkpoint.nextPage=page+1;checkpoint.pages++;scanned++;if(!dynamic)budget--;pagesThisWindow++;usage.scanned++;
    checkpoint.lastSuccessAt=new Date().toISOString();
    checkpoint.totalPages=l.totalPages;
@@ -939,6 +939,8 @@ async function main(){
  const cumulativeApprovals=data.updates.entries.filter(x=>x.title?.startsWith('公式規則で自動承認：')).reduce((sum,x)=>sum+(x.recordIds?.length||0),0);
  const status={version:1,state:'checked',checkedAt:stamp,mode:'review',scope:historical?'history':'recent',dateMode:historical?(storedConfig.toDate==='rolling'?'rolling':'fixed'):null,selectedWindows:active.length,fromDate:historical?config.fromDate:null,toDate:historical?config.toDate:null,provider:'osirion',linkedPlayers:accounts.length,trackedWindows:windows.length,found:unique.size,skipped:invalidRows,imported,scannedPages:scanned,completedWindows:finished,identityConflicts:conflicts.length,alreadyRegistered:recordedFromReview,autoApprovedTotal:cumulativeApprovals,invalidCachedCandidates:invalidCached,manualReviewCandidates:manuallyHeld,autoApprovedParticipationThisRun:verifiedParticipationIds.size,autoApprovedCosmeticThisRun:importedCosmetics,autoApprovedCashThisRun:cash.approved.length,autoApprovedPerformanceThisRun:performance.approved.length,autoApprovedUnrealThisRun:unreal.approved.length,autoApprovedDuoQualifierThisRun:duo.approved.length,autoApprovedPlayStationThisRun:playstation.approved.length,autoApprovedSquadsThisRun:squads.approved.length,autoApprovedConsoleDuosThisRun:consoleDuos.approved.length,timeLimitReached,processedWindows,providerRateLimitPaused:rateLimited,providerRateLimitRetryAfter:rateLimitRetryAfter,providerTraffic:{...traffic,...providerPacer.metrics()},
   ...(historical?{newlyCompletedWindows,newPlayerBackfill:playerBackfill,savedRecheck}:{}),retryWindows:coverage.retryCount,coverage,...(historical?{reviewRecovery:reviewRecoverySummary,dynamicReviewBudget:dynamic?{enabled:true,applied:Boolean(allocation),deltaAttempts,remainingPageBudget:Math.max(0,budget),...(allocation?budgetSummary(allocation,allocationObserved):{})}:null,priorityAudit:{...priorityAudit,selected:selectedPriority}}:{}),transientFailures,malformedFailures,skippedLeaderboards:skippedLeaderboards.slice(0,15),reviewOnlyWindows,reviewOnlyCandidates,unmappedEvents:unmapped.length,unmappedEventIds:unmapped.slice(0,12),unmappedDiscovery,message:'Osirionで'+accounts.length+'アカウントIDを追跡。今回の公式規則による自動承認'+imported+'件、追加確認待ち'+unique.size+'件、名義照合保留'+conflicts.length+'件。'};
+ if(historical)status.historyYieldObservation={measuredAt:stamp,windows:active.filter(w=>allocationObserved[w.key]?.attempted>0).map(w=>({
+  key:w.key,tournamentId:w.tournamentId,region:w.region,series:w.series,seasonId:w.seasonId,...allocationObserved[w.key]}))};
  state.checkedAt=stamp;
  write(prefix+'-scan.json',state);
  write(prefix+'-review.json',{version:1,status:'review',checkedAt:stamp,proposals:[...unique.values()]});
