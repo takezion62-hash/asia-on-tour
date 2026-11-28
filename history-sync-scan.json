@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-11-28T06:49:08.046Z",
+  "checkedAt": "2026-11-28T07:03:20.313Z",
   "windows": {
     "epicgames_S42_SoloVictoryCup_NAW/S42_SoloVictoryCup_Event3Round1_NAW": {
       "nextPage": 9,
@@ -66403,7 +66403,7 @@
       "totalPages": 1
     },
     "epicgames_S42_InoxtagIconCup_OCE/S42_InoxtagIconCup_OCE": {
-      "nextPage": 8,
+      "nextPage": 9,
       "complete": false,
       "proposals": [
         {
@@ -66465,12 +66465,12 @@
           ]
         }
       ],
-      "pages": 8,
-      "lastAttemptAt": "2026-11-28T06:48:57.422Z",
+      "pages": 9,
+      "lastAttemptAt": "2026-11-28T07:03:11.306Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 800,
-      "lastSuccessAt": "2026-11-28T06:48:58.818Z",
+      "lastSeenRank": 900,
+      "lastSuccessAt": "2026-11-28T07:03:12.852Z",
       "totalPages": 79
     },
     "epicgames_S30_SoloVictoryCashCup_NAC/S30_SoloVictoryCashCup_Event1Round1_NAC": {
@@ -120597,7 +120597,7 @@
       "totalPages": 100
     },
     "epicgames_S31_SoloVictoryCashCup_NAC/S31_SoloVictoryCashCup_Event2Round1_NAC": {
-      "nextPage": 92,
+      "nextPage": 93,
       "complete": false,
       "proposals": [
         {
@@ -121337,12 +121337,12 @@
           "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。"
         }
       ],
-      "pages": 92,
-      "lastAttemptAt": "2026-11-28T06:48:11.815Z",
+      "pages": 93,
+      "lastAttemptAt": "2026-11-28T07:01:57.048Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 9200,
-      "lastSuccessAt": "2026-11-28T06:48:13.405Z",
+      "lastSeenRank": 9300,
+      "lastSuccessAt": "2026-11-28T07:01:58.525Z",
       "totalPages": 100
     },
     "epicgames_S31_SoloVictoryCashCup_NAC/S31_SoloVictoryCashCup_Event2Round2_NAC": {
@@ -148660,7 +148660,7 @@
       "totalPages": 1
     },
     "epicgames_S32_SoloVictoryCashCup_NAC/S32_SoloVictoryCashCup_Event2Round1_NAC": {
-      "nextPage": 60,
+      "nextPage": 61,
       "complete": false,
       "proposals": [
         {
@@ -149651,14 +149651,37 @@
           "source": "https://www.fortnite.com/competitive/events/S32_SoloVictoryCashCup/?region=NAC&round=S32_SoloVictoryCashCup_Event2Round1_NAC",
           "verified": true,
           "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。"
+        },
+        {
+          "id": "auto-s32-fb3a04e97fdd",
+          "date": "2024-11-16",
+          "region": "NAC",
+          "player": "seek",
+          "playerRaw": "REL KID SEEK",
+          "event": "Solo Victory Cup Battle Royale",
+          "round": "Event 2 · Round 1 / 予選",
+          "rank": 6077,
+          "points": 123,
+          "kills": 24,
+          "vrs": 0,
+          "prize": 0,
+          "kind": "予選",
+          "matches": 7,
+          "seasonId": "S32",
+          "chapter": 5,
+          "season": 5,
+          "tournamentId": "ch5s5-solo-victory-cup",
+          "source": "https://www.fortnite.com/competitive/events/S32_SoloVictoryCashCup/?region=NAC&round=S32_SoloVictoryCashCup_Event2Round1_NAC",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。"
         }
       ],
-      "pages": 60,
-      "lastAttemptAt": "2026-11-28T06:49:02.055Z",
+      "pages": 61,
+      "lastAttemptAt": "2026-11-28T07:03:15.934Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 6000,
-      "lastSuccessAt": "2026-11-28T06:49:03.559Z",
+      "lastSeenRank": 6100,
+      "lastSuccessAt": "2026-11-28T07:03:17.285Z",
       "totalPages": 100
     },
     "epicgames_S32_SoloVictoryCashCup_NAC/S32_SoloVictoryCashCup_Event2Round2_NAC": {
@@ -161656,7 +161679,7 @@
       "totalPages": 1
     },
     "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event1Round1_NAC": {
-      "nextPage": 65,
+      "nextPage": 66,
       "complete": false,
       "proposals": [
         {
@@ -162097,12 +162120,12 @@
           "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。"
         }
       ],
-      "pages": 65,
-      "lastAttemptAt": "2026-11-28T06:49:01.051Z",
+      "pages": 66,
+      "lastAttemptAt": "2026-11-28T07:03:14.584Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 6500,
-      "lastSuccessAt": "2026-11-28T06:49:02.055Z",
+      "lastSeenRank": 6600,
+      "lastSuccessAt": "2026-11-28T07:03:15.934Z",
       "totalPages": 100
     },
     "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event1Round2_NAC": {
@@ -176613,7 +176636,7 @@
       "totalPages": 3
     },
     "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event9Round1_NAC": {
-      "nextPage": 78,
+      "nextPage": 79,
       "complete": false,
       "proposals": [
         {
@@ -177652,12 +177675,12 @@
           "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。"
         }
       ],
-      "pages": 78,
-      "lastAttemptAt": "2026-11-28T06:48:58.818Z",
+      "pages": 79,
+      "lastAttemptAt": "2026-11-28T07:03:12.852Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 7800,
-      "lastSuccessAt": "2026-11-28T06:49:01.051Z",
+      "lastSeenRank": 7900,
+      "lastSuccessAt": "2026-11-28T07:03:14.584Z",
       "totalPages": 100
     },
     "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event9Round2_NAC": {
@@ -179833,7 +179856,7 @@
       "totalPages": 1
     },
     "epicgames_S31_PlatformReloadDuosCashCupConsole_ME/S31_PlatformReloadDuosCashCupConsole_Event3Round1_ME": {
-      "nextPage": 67,
+      "nextPage": 68,
       "complete": false,
       "proposals": [
         {
@@ -180167,12 +180190,12 @@
           ]
         }
       ],
-      "pages": 67,
-      "lastAttemptAt": "2026-11-28T06:48:20.877Z",
+      "pages": 68,
+      "lastAttemptAt": "2026-11-28T07:02:05.125Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 6700,
-      "lastSuccessAt": "2026-11-28T06:48:22.330Z",
+      "lastSeenRank": 6800,
+      "lastSuccessAt": "2026-11-28T07:02:06.847Z",
       "totalPages": 100
     },
     "epicgames_S42_ReloadReloadSoloVictoryCup_NAC/S42_ReloadSoloVictoryCup_Event5_Round1_NAC": {
@@ -184091,7 +184114,7 @@
       "totalPages": 100
     },
     "epicgames_S37_ConsoleDuosCashCups_NAC/S37_ConsoleDuosCashCups_Event10Round1_NAC": {
-      "nextPage": 41,
+      "nextPage": 42,
       "complete": false,
       "proposals": [
         {
@@ -184157,12 +184180,12 @@
           ]
         }
       ],
-      "pages": 41,
-      "lastAttemptAt": "2026-11-28T06:48:14.886Z",
+      "pages": 42,
+      "lastAttemptAt": "2026-11-28T07:02:56.034Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 4100,
-      "lastSuccessAt": "2026-11-28T06:48:16.263Z",
+      "lastSeenRank": 4200,
+      "lastSuccessAt": "2026-11-28T07:02:58.392Z",
       "totalPages": 100
     },
     "epicgames_S39_FNCSDivisionalCup_Division1_ME/S39_FNCSDivisionalCup_Division1_Week3Day2_ME": {
@@ -192331,7 +192354,7 @@
       "totalPages": 1
     },
     "epicgames_S39_NvidiaCup_NAW/S39_NvidiaCup_NAW": {
-      "nextPage": 78,
+      "nextPage": 79,
       "complete": false,
       "proposals": [
         {
@@ -194489,19 +194512,47 @@
           "teamAccountIds": [
             "2bf20a97609642cab189828ff175a282"
           ]
+        },
+        {
+          "id": "auto-s39-4efedb26291f",
+          "date": "2025-12-22",
+          "region": "NAW",
+          "player": "hst basil",
+          "playerRaw": "hst basil",
+          "event": "NVIDIA GeForce RTX Cup",
+          "round": "単一開催枠 / 参加確認",
+          "rank": 7895,
+          "points": 40,
+          "kills": 8,
+          "vrs": 0,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 5,
+          "seasonId": "S39",
+          "chapter": 7,
+          "season": 1,
+          "tournamentId": "ch7s1-nvidia-geforce-rtx-cup",
+          "source": "https://www.fortnite.com/competitive/events/S39_NvidiaCup/?region=NAW&round=S39_NvidiaCup_NAW",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "teamAccountIds": [
+            "dd744c4f20fd4808a494626f72e6650a"
+          ]
         }
       ],
-      "pages": 78,
+      "pages": 79,
       "epicIdsRetained": true,
-      "lastAttemptAt": "2026-11-28T06:48:22.330Z",
+      "lastAttemptAt": "2026-11-28T07:02:06.847Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 7800,
-      "lastSuccessAt": "2026-11-28T06:48:23.743Z",
+      "lastSeenRank": 7900,
+      "lastSuccessAt": "2026-11-28T07:02:08.209Z",
       "totalPages": 100
     },
     "epicgames_S39_NvidiaCup_OCE/S39_NvidiaCup_OCE": {
-      "nextPage": 79,
+      "nextPage": 81,
       "complete": false,
       "proposals": [
         {
@@ -195681,13 +195732,13 @@
           ]
         }
       ],
-      "pages": 79,
+      "pages": 81,
       "epicIdsRetained": true,
-      "lastAttemptAt": "2026-11-28T06:48:08.737Z",
+      "lastAttemptAt": "2026-11-28T07:01:56.083Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 7900,
-      "lastSuccessAt": "2026-11-28T06:48:10.434Z",
+      "lastSeenRank": 8100,
+      "lastSuccessAt": "2026-11-28T07:01:57.048Z",
       "totalPages": 92
     },
     "epicgames_S43_PerformanceEvaluationTrios_EU/S43_PerformanceEvaluation_Event3Round1_EU": {
@@ -202398,7 +202449,7 @@
       "totalPages": 19
     },
     "epicgames_S30_SoloZBVictoryCashCup_EU/S30_SoloZBVictoryCashCup_Event4Round2_EU": {
-      "nextPage": 37,
+      "nextPage": 38,
       "complete": false,
       "proposals": [
         {
@@ -202632,17 +202683,17 @@
           "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。現金賞金の確定情報なし。"
         }
       ],
-      "pages": 37,
-      "lastAttemptAt": "2026-11-28T06:48:48.575Z",
+      "pages": 38,
+      "lastAttemptAt": "2026-11-28T07:02:58.392Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 3700,
-      "lastSuccessAt": "2026-11-28T06:48:49.798Z",
+      "lastSeenRank": 3800,
+      "lastSuccessAt": "2026-11-28T07:02:59.319Z",
       "totalPages": 67
     },
     "epicgames_S30_SoloZBVictoryCashCup_BR/S30_SoloZBVictoryCashCup_Event4Round1_BR": {
-      "nextPage": 12,
-      "complete": false,
+      "nextPage": 21,
+      "complete": true,
       "proposals": [
         {
           "id": "auto-s30-f71d31f49445",
@@ -202804,14 +202855,60 @@
           "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=BR&round=S30_SoloZBVictoryCashCup_Event4Round1_BR",
           "verified": true,
           "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。"
+        },
+        {
+          "id": "auto-s30-fa5e44f3a5dd",
+          "date": "2024-06-25",
+          "region": "BR",
+          "player": "ぴぐれ",
+          "playerRaw": "ガッツぴぐ",
+          "event": "ZB Solo Victory Cup",
+          "round": "Event 4 · Round 1 / 予選",
+          "rank": 1223,
+          "points": 115,
+          "kills": 16,
+          "vrs": 1,
+          "prize": 0,
+          "kind": "予選",
+          "matches": 7,
+          "seasonId": "S30",
+          "chapter": 5,
+          "season": 3,
+          "tournamentId": "ch5s3-zb-solo-victory",
+          "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=BR&round=S30_SoloZBVictoryCashCup_Event4Round1_BR",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。"
+        },
+        {
+          "id": "auto-s30-3f45c692e901",
+          "date": "2024-06-25",
+          "region": "BR",
+          "player": "はむたろう",
+          "playerRaw": "UC.はむたろう",
+          "event": "ZB Solo Victory Cup",
+          "round": "Event 4 · Round 1 / 予選",
+          "rank": 1382,
+          "points": 112,
+          "kills": 2,
+          "vrs": 1,
+          "prize": 0,
+          "kind": "予選",
+          "matches": 7,
+          "seasonId": "S30",
+          "chapter": 5,
+          "season": 3,
+          "tournamentId": "ch5s3-zb-solo-victory",
+          "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=BR&round=S30_SoloZBVictoryCashCup_Event4Round1_BR",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。"
         }
       ],
-      "pages": 12,
-      "lastAttemptAt": "2026-11-28T06:49:06.514Z",
+      "pages": 21,
+      "lastAttemptAt": "2026-11-28T07:02:32.368Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 1200,
-      "lastSuccessAt": "2026-11-28T06:49:08.027Z",
+      "lastSeenRank": 2100,
+      "lastSuccessAt": "2026-11-28T07:02:47.374Z",
       "totalPages": 100
     },
     "epicgames_S43_TriosCashCup_NAW/S43_TriosCashCup_Event3_NAW": {
@@ -204269,7 +204366,7 @@
       "totalPages": 100
     },
     "epicgames_S30_SoloZBVictoryCashCup_EU/S30_SoloZBVictoryCashCup_Event5Round2_EU": {
-      "nextPage": 30,
+      "nextPage": 31,
       "complete": false,
       "proposals": [
         {
@@ -204478,14 +204575,37 @@
           "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=EU&round=S30_SoloZBVictoryCashCup_Event5Round2_EU",
           "verified": true,
           "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。現金賞金の確定情報なし。"
+        },
+        {
+          "id": "auto-s30-e1fa0d470f4e",
+          "date": "2024-07-16",
+          "region": "EU",
+          "player": "モバイル勢のまかろん",
+          "playerRaw": "BRN 916GonLuck",
+          "event": "ZB Solo Victory Cup",
+          "round": "Event 5 · Round 2 / 賞金決勝",
+          "rank": 3072,
+          "points": 0,
+          "kills": 2,
+          "vrs": 0,
+          "prize": null,
+          "kind": "賞金決勝",
+          "matches": 3,
+          "seasonId": "S30",
+          "chapter": 5,
+          "season": 3,
+          "tournamentId": "ch5s3-zb-solo-victory",
+          "source": "https://www.fortnite.com/competitive/events/S30_SoloZBVictoryCashCup/?region=EU&round=S30_SoloZBVictoryCashCup_Event5Round2_EU",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。現金賞金の確定情報なし。"
         }
       ],
-      "pages": 30,
-      "lastAttemptAt": "2026-11-28T06:49:03.559Z",
+      "pages": 31,
+      "lastAttemptAt": "2026-11-28T07:03:17.285Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 3000,
-      "lastSuccessAt": "2026-11-28T06:49:05.010Z",
+      "lastSeenRank": 3100,
+      "lastSuccessAt": "2026-11-28T07:03:18.794Z",
       "totalPages": 66
     },
     "epicgames_S43_SquadsVictoryCup_ME/S43_SquadsVictoryCup_Event2_Round1_ME": {
@@ -208096,15 +208216,15 @@
       "totalPages": 19
     },
     "epicgames_S43_SquadsVictoryCup_EU/S43_SquadsVictoryCup_Event2_Round1_EU": {
-      "nextPage": 25,
+      "nextPage": 26,
       "complete": false,
       "proposals": [],
-      "pages": 25,
-      "lastAttemptAt": "2026-11-28T06:48:45.260Z",
+      "pages": 26,
+      "lastAttemptAt": "2026-11-28T07:02:54.225Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 2500,
-      "lastSuccessAt": "2026-11-28T06:48:47.186Z",
+      "lastSeenRank": 2600,
+      "lastSuccessAt": "2026-11-28T07:02:56.034Z",
       "totalPages": 100
     },
     "epicgames_S41_FNCSDivisionalCup_Division1_ME/S41_FNCSDivisionalCup_Division1_Week4Day2_ME": {
@@ -210704,8 +210824,8 @@
       "totalPages": 6
     },
     "epicgames_S30_SoloZBVictoryCashCup_EU/S30_SoloZBVictoryCashCup_Event9Round1_EU": {
-      "nextPage": 68,
-      "complete": false,
+      "nextPage": 71,
+      "complete": true,
       "proposals": [
         {
           "id": "auto-s30-ec2c64ca2e7c",
@@ -211145,24 +211265,24 @@
           "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。"
         }
       ],
-      "pages": 68,
-      "lastAttemptAt": "2026-11-28T06:48:42.774Z",
+      "pages": 71,
+      "lastAttemptAt": "2026-11-28T07:02:17.744Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 6800,
-      "lastSuccessAt": "2026-11-28T06:48:43.773Z",
+      "lastSeenRank": 7100,
+      "lastSuccessAt": "2026-11-28T07:02:18.920Z",
       "totalPages": 100
     },
     "epicgames_S30_SoloZBVictoryCashCup_EU/S30_SoloZBVictoryCashCup_Event9Round2_EU": {
-      "nextPage": 9,
+      "nextPage": 10,
       "complete": false,
       "proposals": [],
-      "pages": 9,
-      "lastAttemptAt": "2026-11-28T06:49:05.010Z",
+      "pages": 10,
+      "lastAttemptAt": "2026-11-28T07:03:18.794Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 900,
-      "lastSuccessAt": "2026-11-28T06:49:06.514Z",
+      "lastSeenRank": 1000,
+      "lastSuccessAt": "2026-11-28T07:03:20.288Z",
       "totalPages": 67
     },
     "epicgames_S30_PlaystationCupJune_BR/S30_PlaystationCupJune_Qualifier2_BR": {
@@ -213012,15 +213132,15 @@
       "totalPages": 5
     },
     "epicgames_S43_TriosCashCup_NAC/S43_TriosCashCup_Event3_NAC": {
-      "nextPage": 14,
+      "nextPage": 15,
       "complete": false,
       "proposals": [],
-      "pages": 14,
-      "lastAttemptAt": "2026-11-28T06:48:23.743Z",
+      "pages": 15,
+      "lastAttemptAt": "2026-11-28T07:02:08.209Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 1400,
-      "lastSuccessAt": "2026-11-28T06:48:25.439Z",
+      "lastSeenRank": 1500,
+      "lastSuccessAt": "2026-11-28T07:02:10.009Z",
       "totalPages": 44
     },
     "epicgames_S43_PlayStationCup_ME/S43_PlayStationCup_Qualifier_ME": {
@@ -213371,7 +213491,7 @@
       "totalPages": 3
     },
     "epicgames_S37_ConsoleDuosCashCups_OCE/S37_ConsoleDuosCashCups_Event4Round1_OCE": {
-      "nextPage": 9,
+      "nextPage": 10,
       "complete": false,
       "proposals": [
         {
@@ -213435,14 +213555,76 @@
             "1320be89d1354adf9078f82d6c54ca71",
             "57581f38ee2547ba90d1d18a9bec234d"
           ]
+        },
+        {
+          "id": "auto-s37-6186b904f88d",
+          "date": "2025-09-14",
+          "region": "OCE",
+          "player": "かぷせるてぃーてぃーTTていてい / ふぃる",
+          "playerRaw": "Pollo 17 ǃ ǃ / ポルターガイストǃ",
+          "event": "Duos Console Victory Cash Cup",
+          "round": "Event 4 · Round 1 / 予選",
+          "rank": 944,
+          "points": 86,
+          "kills": 24,
+          "vrs": 0,
+          "prize": 0,
+          "kind": "予選",
+          "matches": 5,
+          "seasonId": "S37",
+          "chapter": 6,
+          "season": 4,
+          "tournamentId": "ch6s4-console-duos-victory",
+          "source": "https://www.fortnite.com/competitive/events/S37_ConsoleDuosCashCups/?region=OCE&round=S37_ConsoleDuosCashCups_Event4Round1_OCE",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。",
+          "players": [
+            "かぷせるてぃーてぃーTTていてい",
+            "ふぃる"
+          ],
+          "teamAccountIds": [
+            "10a89ca8d9c140368cc3f4eac47bcc40",
+            "b8ee0fe8a5744c3ca37bb746388064ec"
+          ]
+        },
+        {
+          "id": "auto-s37-b5d8a8d17731",
+          "date": "2025-09-14",
+          "region": "OCE",
+          "player": "MAT4DOR. / ちゃる",
+          "playerRaw": "MAT4DOR. / charufn",
+          "event": "Duos Console Victory Cash Cup",
+          "round": "Event 4 · Round 1 / 予選",
+          "rank": 991,
+          "points": 80,
+          "kills": 21,
+          "vrs": 0,
+          "prize": 0,
+          "kind": "予選",
+          "matches": 4,
+          "seasonId": "S37",
+          "chapter": 6,
+          "season": 4,
+          "tournamentId": "ch6s4-console-duos-victory",
+          "source": "https://www.fortnite.com/competitive/events/S37_ConsoleDuosCashCups/?region=OCE&round=S37_ConsoleDuosCashCups_Event4Round1_OCE",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。",
+          "players": [
+            "MAT4DOR.",
+            "ちゃる"
+          ],
+          "teamAccountIds": [
+            "17b382b1e9be42a1b8d5b961c04fa963",
+            "e3d0bd7d4b8c4e60ac46564918e3e3a1"
+          ]
         }
       ],
-      "pages": 9,
-      "lastAttemptAt": "2026-11-28T06:48:47.186Z",
+      "pages": 10,
+      "lastAttemptAt": "2026-11-28T07:01:58.526Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 900,
-      "lastSuccessAt": "2026-11-28T06:48:48.575Z",
+      "lastSeenRank": 1000,
+      "lastSuccessAt": "2026-11-28T07:02:02.768Z",
       "totalPages": 21
     },
     "epicgames_S43_PlayStationCup_ZB_BR/S43_PlayStationCup_ZB_Qualifier_BR": {
@@ -213732,7 +213914,7 @@
       "totalPages": 6
     },
     "epicgames_S39_MobileTestCup_EU/S39_MobileTestCup_Round1_EU": {
-      "nextPage": 13,
+      "nextPage": 18,
       "complete": false,
       "proposals": [
         {
@@ -214011,12 +214193,12 @@
           "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。"
         }
       ],
-      "pages": 13,
-      "lastAttemptAt": "2026-11-28T06:48:43.773Z",
+      "pages": 18,
+      "lastAttemptAt": "2026-11-28T07:02:52.844Z",
       "emptyAttempts": 0,
       "rankingOrderValid": true,
-      "lastSeenRank": 1300,
-      "lastSuccessAt": "2026-11-28T06:48:45.260Z",
+      "lastSeenRank": 1800,
+      "lastSuccessAt": "2026-11-28T07:02:54.225Z",
       "totalPages": 19
     },
     "epicgames_S37_ConsoleDuosCashCups_OCE/S37_ConsoleDuosCashCups_Event4Round2_OCE": {
@@ -214842,6 +215024,455 @@
       "lastSeenRank": 49,
       "lastSuccessAt": "2026-11-28T06:48:54.483Z",
       "totalPages": 1
+    },
+    "epicgames_S43_ScottPilgrimCup_ME/S43_ScottPilgrimCup_ME": {
+      "nextPage": 1,
+      "complete": true,
+      "proposals": [],
+      "pages": 1,
+      "lastAttemptAt": "2026-11-28T07:01:34.704Z",
+      "emptyAttempts": 0,
+      "rankingOrderValid": true,
+      "lastSeenRank": 100,
+      "lastSuccessAt": "2026-11-28T07:01:35.474Z",
+      "totalPages": 100
+    },
+    "epicgames_S42_MobileVictoryCup_ReloadminiV_NAC/S42_MobileVictoryCup_Event3_Round2_NAC": {
+      "nextPage": 2,
+      "complete": true,
+      "proposals": [],
+      "pages": 2,
+      "lastAttemptAt": "2026-11-28T07:02:03.255Z",
+      "emptyAttempts": 0,
+      "rankingOrderValid": true,
+      "lastSeenRank": 141,
+      "lastSuccessAt": "2026-11-28T07:02:05.125Z",
+      "totalPages": 2
+    },
+    "epicgames_S39_FNCSDivisionalCup_Division1_NAW/S39_FNCSDivisionalCup_Division1_Week2Day1_NAW": {
+      "nextPage": 2,
+      "complete": false,
+      "proposals": [
+        {
+          "id": "auto-s39-0c5d097a86cc",
+          "date": "2026-02-10",
+          "region": "NAW",
+          "player": "Rise / Job",
+          "playerRaw": "Riddle RiIse / Jobsznǃ",
+          "event": "FNCS Division 1",
+          "round": "単一開催枠 / 参加確認",
+          "rank": 69,
+          "points": 233,
+          "kills": 27,
+          "vrs": 0,
+          "prize": null,
+          "kind": "参加確認",
+          "matches": 10,
+          "seasonId": "S39",
+          "chapter": 7,
+          "season": 1,
+          "tournamentId": "ch7s1-fncs-division-1",
+          "source": "https://www.fortnite.com/competitive/events/S39_FNCSDivisionalCup_Division1/?region=NAW&round=S39_FNCSDivisionalCup_Division1_Week2Day1_NAW",
+          "verified": true,
+          "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
+          "reviewOnly": true,
+          "reviewReason": "API順位表と本人IDのみ照合済み。予選通過・最終順位・賞金・スキン獲得は未確認。公開登録不可。",
+          "players": [
+            "Rise",
+            "Job"
+          ],
+          "teamAccountIds": [
+            "635ed9f369cf4720b1ec25e0575fd76b",
+            "dcd62fd578bb43819c33ac13c0138164"
+          ]
+        }
+      ],
+      "pages": 2,
+      "lastAttemptAt": "2026-11-28T07:03:00.866Z",
+      "emptyAttempts": 0,
+      "rankingOrderValid": true,
+      "lastSeenRank": 200,
+      "lastSuccessAt": "2026-11-28T07:03:02.509Z",
+      "totalPages": 3
+    },
+    "epicgames_S43_PlayStationCup_ZB_ME/S43_PlayStationCup_ZB_Qualifier_ME": {
+      "nextPage": 2,
+      "complete": true,
+      "proposals": [],
+      "pages": 2,
+      "epicIdsRetained": true,
+      "lastAttemptAt": "2026-11-28T07:03:03.569Z",
+      "emptyAttempts": 0,
+      "rankingOrderValid": true,
+      "lastSeenRank": 200,
+      "lastSuccessAt": "2026-11-28T07:03:05.023Z",
+      "totalPages": 100
+    },
+    "epicgames_S37_ConsoleDuosCashCups_NAC/S37_ConsoleDuosCashCups_Event4Round2_NAC": {
+      "nextPage": 2,
+      "complete": false,
+      "proposals": [],
+      "pages": 2,
+      "lastAttemptAt": "2026-11-28T07:03:06.809Z",
+      "emptyAttempts": 0,
+      "rankingOrderValid": true,
+      "lastSeenRank": 200,
+      "lastSuccessAt": "2026-11-28T07:03:08.263Z",
+      "totalPages": 5
+    },
+    "epicgames_S37_ConsoleDuosCashCups_NAW/S37_ConsoleDuosCashCups_Event4Round1_NAW": {
+      "nextPage": 2,
+      "complete": false,
+      "proposals": [
+        {
+          "id": "auto-s37-db18dff56f9b",
+          "date": "2025-09-15",
+          "region": "NAW",
+          "player": "seljuny / ちゃる",
+          "playerRaw": "alpha s3awesomer / charufn",
+          "event": "Duos Console Victory Cash Cup",
+          "round": "Event 4 · Round 1 / 予選",
+          "rank": 25,
+          "points": 269,
+          "kills": 34,
+          "vrs": 1,
+          "prize": 0,
+          "kind": "予選",
+          "matches": 7,
+          "seasonId": "S37",
+          "chapter": 6,
+          "season": 4,
+          "tournamentId": "ch6s4-console-duos-victory",
+          "source": "https://www.fortnite.com/competitive/events/S37_ConsoleDuosCashCups/?region=NAW&round=S37_ConsoleDuosCashCups_Event4Round1_NAW",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。",
+          "players": [
+            "seljuny",
+            "ちゃる"
+          ],
+          "teamAccountIds": [
+            "1e2bd6cc12614993928642aed3d4f1e4",
+            "e3d0bd7d4b8c4e60ac46564918e3e3a1"
+          ]
+        },
+        {
+          "id": "auto-s37-91b8432285ec",
+          "date": "2025-09-15",
+          "region": "NAW",
+          "player": "えありー / すかい",
+          "playerRaw": "zst Airyfnbr / AtlanticSkyx",
+          "event": "Duos Console Victory Cash Cup",
+          "round": "Event 4 · Round 1 / 予選",
+          "rank": 26,
+          "points": 268,
+          "kills": 41,
+          "vrs": 2,
+          "prize": 0,
+          "kind": "予選",
+          "matches": 6,
+          "seasonId": "S37",
+          "chapter": 6,
+          "season": 4,
+          "tournamentId": "ch6s4-console-duos-victory",
+          "source": "https://www.fortnite.com/competitive/events/S37_ConsoleDuosCashCups/?region=NAW&round=S37_ConsoleDuosCashCups_Event4Round1_NAW",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。",
+          "players": [
+            "えありー",
+            "すかい"
+          ],
+          "teamAccountIds": [
+            "bf6b915c60d94e09a7e155165440e01b",
+            "fba14a7d6fc342ba9599c6afa9f2c568"
+          ]
+        },
+        {
+          "id": "auto-s37-4bc5c2cd4f50",
+          "date": "2025-09-15",
+          "region": "NAW",
+          "player": "でーもんくらげǃ / 3peace",
+          "playerRaw": "でーもんくらげǃ / NEXUS 3peace",
+          "event": "Duos Console Victory Cash Cup",
+          "round": "Event 4 · Round 1 / 予選",
+          "rank": 28,
+          "points": 268,
+          "kills": 40,
+          "vrs": 0,
+          "prize": 0,
+          "kind": "予選",
+          "matches": 6,
+          "seasonId": "S37",
+          "chapter": 6,
+          "season": 4,
+          "tournamentId": "ch6s4-console-duos-victory",
+          "source": "https://www.fortnite.com/competitive/events/S37_ConsoleDuosCashCups/?region=NAW&round=S37_ConsoleDuosCashCups_Event4Round1_NAW",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。",
+          "players": [
+            "でーもんくらげǃ",
+            "3peace"
+          ],
+          "teamAccountIds": [
+            "1ec763a9ecbf4b1385d3702e7a64b22c",
+            "bc21e86cc3cf4761a52906a8e4fd910b"
+          ]
+        },
+        {
+          "id": "auto-s37-14172d7233e6",
+          "date": "2025-09-15",
+          "region": "NAW",
+          "player": "rakua / kmyt",
+          "playerRaw": "FPG わたくしヒカキン / やまもと そうし",
+          "event": "Duos Console Victory Cash Cup",
+          "round": "Event 4 · Round 1 / 予選",
+          "rank": 38,
+          "points": 263,
+          "kills": 36,
+          "vrs": 1,
+          "prize": 0,
+          "kind": "予選",
+          "matches": 7,
+          "seasonId": "S37",
+          "chapter": 6,
+          "season": 4,
+          "tournamentId": "ch6s4-console-duos-victory",
+          "source": "https://www.fortnite.com/competitive/events/S37_ConsoleDuosCashCups/?region=NAW&round=S37_ConsoleDuosCashCups_Event4Round1_NAW",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。",
+          "players": [
+            "rakua",
+            "kmyt"
+          ],
+          "teamAccountIds": [
+            "25bcf8f370b842cf8c1f214420cfc594",
+            "280bea94ac754668b69c31752624fb04"
+          ]
+        },
+        {
+          "id": "auto-s37-a5960fd2811a",
+          "date": "2025-09-15",
+          "region": "NAW",
+          "player": "かめてぃん / huggyfv",
+          "playerRaw": "かめてぃん.魔女 / stx huggyfvǃ",
+          "event": "Duos Console Victory Cash Cup",
+          "round": "Event 4 · Round 1 / 予選",
+          "rank": 39,
+          "points": 263,
+          "kills": 26,
+          "vrs": 1,
+          "prize": 0,
+          "kind": "予選",
+          "matches": 6,
+          "seasonId": "S37",
+          "chapter": 6,
+          "season": 4,
+          "tournamentId": "ch6s4-console-duos-victory",
+          "source": "https://www.fortnite.com/competitive/events/S37_ConsoleDuosCashCups/?region=NAW&round=S37_ConsoleDuosCashCups_Event4Round1_NAW",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。",
+          "players": [
+            "かめてぃん",
+            "huggyfv"
+          ],
+          "teamAccountIds": [
+            "a63f6c3b03304aecb65862c0a45f03a4",
+            "c640a465776d4417bd9ebedee4c68928"
+          ]
+        },
+        {
+          "id": "auto-s37-d0953d0cd198",
+          "date": "2025-09-15",
+          "region": "NAW",
+          "player": "あおねこ / Mofu",
+          "playerRaw": "Celis あおねこ416 / RC MOFU Ψ",
+          "event": "Duos Console Victory Cash Cup",
+          "round": "Event 4 · Round 1 / 予選",
+          "rank": 48,
+          "points": 257,
+          "kills": 43,
+          "vrs": 1,
+          "prize": 0,
+          "kind": "予選",
+          "matches": 5,
+          "seasonId": "S37",
+          "chapter": 6,
+          "season": 4,
+          "tournamentId": "ch6s4-console-duos-victory",
+          "source": "https://www.fortnite.com/competitive/events/S37_ConsoleDuosCashCups/?region=NAW&round=S37_ConsoleDuosCashCups_Event4Round1_NAW",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。",
+          "players": [
+            "あおねこ",
+            "Mofu"
+          ],
+          "teamAccountIds": [
+            "32fab8de7cd041a1aa87fabf285e40f0",
+            "b78631905b9847c38d347af8ea94d4b5"
+          ]
+        },
+        {
+          "id": "auto-s37-51b65fb49a32",
+          "date": "2025-09-15",
+          "region": "NAW",
+          "player": "AUR t3eny 19ǃ / あぶやちぇ",
+          "playerRaw": "AUR t3eny 19ǃ / あぶやちぇ",
+          "event": "Duos Console Victory Cash Cup",
+          "round": "Event 4 · Round 1 / 予選",
+          "rank": 58,
+          "points": 252,
+          "kills": 35,
+          "vrs": 0,
+          "prize": 0,
+          "kind": "予選",
+          "matches": 7,
+          "seasonId": "S37",
+          "chapter": 6,
+          "season": 4,
+          "tournamentId": "ch6s4-console-duos-victory",
+          "source": "https://www.fortnite.com/competitive/events/S37_ConsoleDuosCashCups/?region=NAW&round=S37_ConsoleDuosCashCups_Event4Round1_NAW",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。",
+          "players": [
+            "AUR t3eny 19ǃ",
+            "あぶやちぇ"
+          ],
+          "teamAccountIds": [
+            "047f53cb64354354abe8dc8e75fbfb75",
+            "3555d4b513ba4633914fbf7c995c43cf"
+          ]
+        },
+        {
+          "id": "auto-s37-53c97188441c",
+          "date": "2025-09-15",
+          "region": "NAW",
+          "player": "Hakkun / かなとˢˢʳ",
+          "playerRaw": "TGR はっくん / かなとˢˢʳ",
+          "event": "Duos Console Victory Cash Cup",
+          "round": "Event 4 · Round 1 / 予選",
+          "rank": 65,
+          "points": 250,
+          "kills": 38,
+          "vrs": 0,
+          "prize": 0,
+          "kind": "予選",
+          "matches": 6,
+          "seasonId": "S37",
+          "chapter": 6,
+          "season": 4,
+          "tournamentId": "ch6s4-console-duos-victory",
+          "source": "https://www.fortnite.com/competitive/events/S37_ConsoleDuosCashCups/?region=NAW&round=S37_ConsoleDuosCashCups_Event4Round1_NAW",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。",
+          "players": [
+            "Hakkun",
+            "かなとˢˢʳ"
+          ],
+          "teamAccountIds": [
+            "63826005a9c24444b113589813cde1d8",
+            "81a7e88cc001418aaedabcba98c54304"
+          ]
+        },
+        {
+          "id": "auto-s37-35a5abe4160e",
+          "date": "2025-09-15",
+          "region": "NAW",
+          "player": "ふぐ / お前らグラファいってないんｗｗ",
+          "playerRaw": "lowcortisol404 / お前らグラファいってないんｗｗ",
+          "event": "Duos Console Victory Cash Cup",
+          "round": "Event 4 · Round 1 / 予選",
+          "rank": 109,
+          "points": 237,
+          "kills": 40,
+          "vrs": 1,
+          "prize": 0,
+          "kind": "予選",
+          "matches": 5,
+          "seasonId": "S37",
+          "chapter": 6,
+          "season": 4,
+          "tournamentId": "ch6s4-console-duos-victory",
+          "source": "https://www.fortnite.com/competitive/events/S37_ConsoleDuosCashCups/?region=NAW&round=S37_ConsoleDuosCashCups_Event4Round1_NAW",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。",
+          "players": [
+            "ふぐ",
+            "お前らグラファいってないんｗｗ"
+          ],
+          "teamAccountIds": [
+            "d4f6897528db4438b9f4f67ae8f259b1",
+            "fecbcdd3237d4d29bdf5973bb2d5c596"
+          ]
+        },
+        {
+          "id": "auto-s37-fd23d8a5e5aa",
+          "date": "2025-09-15",
+          "region": "NAW",
+          "player": "れすぶゆりる / calm pepperǃ",
+          "playerRaw": "ネオン本人 / クローヴ本人",
+          "event": "Duos Console Victory Cash Cup",
+          "round": "Event 4 · Round 1 / 予選",
+          "rank": 129,
+          "points": 235,
+          "kills": 16,
+          "vrs": 1,
+          "prize": 0,
+          "kind": "予選",
+          "matches": 5,
+          "seasonId": "S37",
+          "chapter": 6,
+          "season": 4,
+          "tournamentId": "ch6s4-console-duos-victory",
+          "source": "https://www.fortnite.com/competitive/events/S37_ConsoleDuosCashCups/?region=NAW&round=S37_ConsoleDuosCashCups_Event4Round1_NAW",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。",
+          "players": [
+            "れすぶゆりる",
+            "calm pepperǃ"
+          ],
+          "teamAccountIds": [
+            "0784022a159240749a2660482aa4d2d6",
+            "742e89b95b2446f085137c540783ea23"
+          ]
+        },
+        {
+          "id": "auto-s37-51d8fae33191",
+          "date": "2025-09-15",
+          "region": "NAW",
+          "player": "DynamicCart1801 / Botえもん",
+          "playerRaw": "DynamicCart1801 / Botえもん",
+          "event": "Duos Console Victory Cash Cup",
+          "round": "Event 4 · Round 1 / 予選",
+          "rank": 133,
+          "points": 234,
+          "kills": 17,
+          "vrs": 0,
+          "prize": 0,
+          "kind": "予選",
+          "matches": 5,
+          "seasonId": "S37",
+          "chapter": 6,
+          "season": 4,
+          "tournamentId": "ch6s4-console-duos-victory",
+          "source": "https://www.fortnite.com/competitive/events/S37_ConsoleDuosCashCups/?region=NAW&round=S37_ConsoleDuosCashCups_Event4Round1_NAW",
+          "verified": true,
+          "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。",
+          "players": [
+            "DynamicCart1801",
+            "Botえもん"
+          ],
+          "teamAccountIds": [
+            "77e63d1aa5324bfe9ff4fa01c875aa73",
+            "d25771154c6443f1902090eccc1097e1"
+          ]
+        }
+      ],
+      "pages": 2,
+      "lastAttemptAt": "2026-11-28T07:03:10.081Z",
+      "emptyAttempts": 0,
+      "rankingOrderValid": true,
+      "lastSeenRank": 200,
+      "lastSuccessAt": "2026-11-28T07:03:11.306Z",
+      "totalPages": 68
     }
   },
   "newPlayerBackfill": {
@@ -255866,24 +256497,24 @@
         ]
       },
       "epicgames_S43_PlayStationCup_ME/S43_PlayStationCup_Qualifier_ME": {
-        "nextPage": 10,
-        "pages": 10,
+        "nextPage": 12,
+        "pages": 12,
         "accountIds": [
           "fc9b92b991d64cb0a4a3688fc4d2ac03"
         ],
-        "lastSeenRank": 1000,
+        "lastSeenRank": 1200,
         "totalPages": 100,
-        "lastSuccessAt": "2026-11-28T06:47:55.399Z"
+        "lastSuccessAt": "2026-11-28T07:01:28.999Z"
       },
       "epicgames_S43_PlayStationCup_NAW/S43_PlayStationCup_Qualifier_NAW": {
-        "nextPage": 10,
-        "pages": 10,
+        "nextPage": 12,
+        "pages": 12,
         "accountIds": [
           "fc9b92b991d64cb0a4a3688fc4d2ac03"
         ],
-        "lastSeenRank": 1000,
+        "lastSeenRank": 1200,
         "totalPages": 52,
-        "lastSuccessAt": "2026-11-28T06:47:55.399Z"
+        "lastSuccessAt": "2026-11-28T07:01:28.999Z"
       },
       "epicgames_S43_PlayStationCup_ZB_BR/S43_PlayStationCup_ZB_Qualifier_BR": {
         "nextPage": 0,
