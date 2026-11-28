@@ -1,7 +1,7 @@
 {
   "version": 1,
   "sourceCheckedAt": "2026-11-28T06:45:16.593Z",
-  "total": 30,
+  "total": 28,
   "alreadyResolved": 0,
   "byYear": [
     {
@@ -9,12 +9,8 @@
       "count": 24
     },
     {
-      "name": "2025",
-      "count": 1
-    },
-    {
       "name": "2026",
-      "count": 5
+      "count": 4
     }
   ],
   "byRegion": [
@@ -32,22 +28,10 @@
     },
     {
       "name": "NAW",
-      "count": 2
-    },
-    {
-      "name": "OCE",
       "count": 1
     }
   ],
   "byTournament": [
-    {
-      "name": "FNCS Division 1 / NAW / 2026",
-      "count": 1
-    },
-    {
-      "name": "NVIDIA GeForce RTX Cup / OCE / 2025",
-      "count": 1
-    },
     {
       "name": "Solo Victory Cup Battle Royale / NAC / 2024",
       "count": 2
@@ -80,11 +64,11 @@
     },
     {
       "name": "partial-scan",
-      "count": 20
+      "count": 19
     },
     {
       "name": "rules-review",
-      "count": 8
+      "count": 7
     }
   ],
   "queue": [
@@ -318,39 +302,6 @@
         "possibleExistingId": null
       },
       "rewardState": "source-amount-present-not-verified-by-triage"
-    },
-    {
-      "id": "auto-s39-8d3e44fa58fb",
-      "origin": "history",
-      "date": "2026-02-04",
-      "year": "2026",
-      "region": "NAW",
-      "tournamentId": "ch7s1-fncs-division-1",
-      "event": "FNCS Division 1",
-      "round": "単一開催枠 / 参加確認",
-      "player": "Rise / Job",
-      "kind": "参加確認",
-      "rank": 179,
-      "points": 27,
-      "kills": 1,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S39_FNCSDivisionalCup_Division1/?region=NAW&round=S39_FNCSDivisionalCup_Division1_Week1Day2_NAW",
-      "status": "rules-review",
-      "action": "公式規則・賞金・突破・スキン条件を個別確認",
-      "reason": "対象大会・ラウンドの自動承認方式が未登録",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": true,
-        "observedPartial": false,
-        "seenPages": 2,
-        "totalPages": 2,
-        "sourceKey": "epicgames_S39_FNCSDivisionalCup_Division1_NAW/S39_FNCSDivisionalCup_Division1_Week1Day2_NAW",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
     },
     {
       "id": "auto-s43-df6cd868029d",
@@ -1044,39 +995,6 @@
         "possibleExistingId": null
       },
       "rewardState": "source-amount-present-not-verified-by-triage"
-    },
-    {
-      "id": "auto-s39-7083e773aca0",
-      "origin": "history",
-      "date": "2025-12-21",
-      "year": "2025",
-      "region": "OCE",
-      "tournamentId": "ch7s1-nvidia-geforce-rtx-cup",
-      "event": "NVIDIA GeForce RTX Cup",
-      "round": "単一開催枠 / 参加確認",
-      "player": "hst basil",
-      "kind": "参加確認",
-      "rank": 7386,
-      "points": 10,
-      "kills": 2,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S39_NvidiaCup/?region=OCE&round=S39_NvidiaCup_OCE",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "全ページ連続の順位表・Epic ID付完全スナップショットが未確認",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 75,
-        "totalPages": 92,
-        "sourceKey": "epicgames_S39_NvidiaCup_OCE/S39_NvidiaCup_OCE",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
     }
   ],
   "policy": "read-only queue; awards require existing official rule-backed validators and identity/collision proof"
