@@ -99,3 +99,55 @@ test('ordinary historical allocation remains bounded during a reduced budget or 
  assert.equal(zero.planned,0);
  for(let i=0;i<active.length;i++)assert.equal(allowance(zero,i,0),0);
 });
+
+test('early finish releases only unused attempts to later windows while preserving future allocations',()=>{
+ const active=[w('a'),w('b'),w('c')],state={windows:{}};
+ const plan={budget:12,planned:12,unallocated:0,maxRecoveryPercent:60,items:[
+  {key:'a',category:'other',pages:5,cap:12},
+  {key:'b',category:'other',pages:3,cap:12},
+  {key:'c',category:'unstarted',pages:4,cap:12}]};
+ const before=JSON.stringify(plan);
+ const seen={a:{attempted:2,scanned:2}};
+ assert.equal(allowance(plan,1,10,seen),6);
+ seen.b={attempted:6,scanned:5}; // one failed request still consumes a page
+ assert.equal(allowance(plan,2,4,seen),4);
+ seen.c={attempted:4,scanned:4};
+ assert.equal(summary(plan,seen).reallocatedPages,3);
+ assert.equal(summary(plan,seen).unusedPlannedPages,3);
+ assert.equal(JSON.stringify(plan),before);
+ assert.equal(allowance(plan,1,10,{a:{attempted:5,scanned:2}}),3);
+});
+test('reallocation cannot exceed per-window cap, recovery percentage, or remaining budget',()=>{
+ const plan={budget:20,planned:20,unallocated:0,maxRecoveryPercent:60,items:[
+  {key:'a',category:'other',pages:6,cap:12},
+  {key:'b',category:'recovery',pages:5,cap:12},
+  {key:'c',category:'recovery',pages:5,cap:12},
+  {key:'d',category:'other',pages:4,cap:5},
+  {key:'blocked',category:'retry',pages:0,cap:0}]};
+ const obs={a:{attempted:1,scanned:1}};
+ assert.equal(allowance(plan,1,19,obs),7);
+ obs.b={attempted:7,scanned:7};
+ assert.equal(allowance(plan,2,12,obs),5);
+ obs.c={attempted:5,scanned:5};
+ assert.equal(allowance(plan,3,7,obs),5);
+ assert.equal(allowance(plan,3,2,obs),2);
+ assert.equal(allowance(plan,4,2,obs),0);
+ assert.equal(allowance(plan,4,0,obs),0);
+});
+test('real planner forward redistribution consumes at most budget for simulated early completions and errors',()=>{
+ const x=fixture();
+ for(const n of [0,1,6,12,20,24,44,48,96]){
+  const p=planBudget(x.active,x.state,x.recovery,{budget:n,minUnstarted:6,now});
+  let left=n;const observed={};
+  for(let i=0;i<p.items.length;i++){
+   const item=p.items[i],grant=allowance(p,i,left,observed);
+   assert.ok(grant>=0&&grant<=item.cap&&grant<=left);
+   const attempted=i%3===0?Math.min(1,grant):grant;
+   observed[item.key]={attempted,scanned:Math.max(0,attempted-(i%4===0?1:0))};
+   left-=attempted;
+  }
+  assert.ok(left>=0);
+  assert.equal(Object.values(observed).reduce((s,x)=>s+x.attempted,0)+left,n);
+  assert.ok(summary(p,observed).reallocatedPages>=0);
+ }
+});

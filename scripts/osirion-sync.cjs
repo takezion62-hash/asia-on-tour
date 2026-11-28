@@ -782,7 +782,7 @@ async function main(){
    {perWindowCap:config.maxPagesPerWindowPerRun||12,...(dynamic?{config}: {})});
   allocation=planActiveBudget(active,state,recoveryCandidates,{
    enabled:dynamic,rateLimited,budget:Math.max(0,budget),perWindowCap:Math.min(50,Math.max(1,config.maxPagesPerWindowPerRun||12)),
-   minUnstarted:Math.max(0,config.minUnstartedWindowsPerRun||0),maxRecoveryPercent:config.dynamicReviewBudget.maxRecoveryPercent??60});
+   minUnstarted:Math.max(0,config.minUnstartedWindowsPerRun||0),maxRecoveryPercent:config.dynamicReviewBudget?.maxRecoveryPercent??60});
   reviewRecoverySummary={selectedWindows:recoveryCandidates.length,
    candidateCount:recoveryCandidates.reduce((n,x)=>n+x.candidateCount,0),
    cashUnconfirmedCount:recoveryCandidates.reduce((n,x)=>n+x.cashCandidates,0),
@@ -815,7 +815,7 @@ async function main(){
   // Finish up to two near-complete historical leaderboards later in the
   // queue; preserve the minimum for every other window without expanding
   // the total page budget.
-  const perWindowLimit=allocation?dynamicAllowance(allocation,windowIndex,Math.max(0,budget)):windowPageAllowance(active,state,windowIndex,budget,limit,historical);
+  const perWindowLimit=allocation?dynamicAllowance(allocation,windowIndex,Math.max(0,budget),allocationObserved):windowPageAllowance(active,state,windowIndex,budget,limit,historical);
   if(perWindowLimit<=0)continue;
   processedWindows++;
   const usage=allocationObserved[win.key]={attempted:0,scanned:0};

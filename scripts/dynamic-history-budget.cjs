@@ -60,13 +60,33 @@ function planBudget(active,state,recovery,{budget,perWindowCap=12,minUnstarted=6
  const planned=items.reduce((n,x)=>n+x.pages,0);
  return {budget,planned,unallocated:budget-planned,maxRecoveryPercent,items};
 }
-function allowance(plan,index,budget){
+function allowance(plan,index,budget,observed=null){
  if(!plan?.items||!int(index)||index>=plan.items.length||!int(budget))throw Error('Invalid dynamic allowance');
- const item=plan.items[index];
- // Never spend protected future allocation. Reuse unused earlier allocation
- // in the same run, without exceeding a window's original cap.
- const reserved=plan.items.slice(index+1).reduce((n,x)=>n+x.pages,0);
- return Math.max(0,Math.min(item.pages,item.cap,budget-reserved));
+ const item=plan.items[index],future=plan.items.slice(index+1);
+ const reserved=future.reduce((n,x)=>n+x.pages,0);
+ const available=Math.max(0,budget-reserved);
+ const baseline=Math.min(item.pages,item.cap,available);
+ // Without runtime observations retain the original static allowance.
+ if(observed===null||!item.cap)return baseline;
+ // Only forward redistribution: never reopen a processed or blocked window.
+ // Remaining budget already charges failed requests, not just scanned pages.
+ const prior=plan.items.slice(0,index);
+ const reclaimed=prior.reduce((n,x)=>{
+  const used=observed[x.key]?.attempted??0;
+  if(!int(used)||used>x.cap)throw Error('Invalid historical attempted pages');
+  return n+x.pages-used;
+ },0);
+ const surplus=Math.max(0,Math.min(available-baseline,reclaimed));
+ let extra=Math.min(item.cap-baseline,surplus);
+ if(item.category==='recovery'){
+  const used=prior.filter(x=>x.category==='recovery').reduce((n,x)=>n+(observed[x.key]?.attempted??0),0);
+  const futureRecovery=future.filter(x=>x.category==='recovery').reduce((n,x)=>n+x.pages,0);
+  const target=Math.floor(plan.budget*plan.maxRecoveryPercent/100);
+  // Do not add recovery requests above the original percentage limit.
+  // Existing protected baseline allocation is not reduced.
+  extra=Math.min(extra,Math.max(0,target-used-futureRecovery-baseline));
+ }
+ return baseline+extra;
 }
 function summary(plan,observed={}){
  const groups={};
@@ -76,7 +96,9 @@ function summary(plan,observed={}){
   g.windows++;g.plannedPages+=item.pages;g.attemptedPages+=use.attempted||0;g.scannedPages+=use.scanned||0;
   g.candidateCount+=item.candidateCount;g.cashCandidates+=item.cashCandidates;
  }
- return {pageBudget:plan.budget,plannedPages:plan.planned,unallocatedPages:plan.unallocated,groups,
+ const reallocatedPages=plan.items.reduce((n,x)=>n+Math.max(0,(observed[x.key]?.attempted||0)-x.pages),0);
+ const unusedPlannedPages=plan.items.reduce((n,x)=>n+Math.max(0,x.pages-(observed[x.key]?.attempted||0)),0);
+ return {pageBudget:plan.budget,plannedPages:plan.planned,unallocatedPages:plan.unallocated,reallocatedPages,unusedPlannedPages,groups,
   windows:plan.items.filter(x=>x.category==='recovery').map(x=>({window:x.key,remainingPages:x.remaining,plannedPages:x.pages,
    attemptedPages:observed[x.key]?.attempted||0,scannedPages:observed[x.key]?.scanned||0,candidateCount:x.candidateCount,cashCandidates:x.cashCandidates}))};
 }
