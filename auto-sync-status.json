@@ -1,7 +1,7 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-28T07:25:34.624Z",
+  "checkedAt": "2026-11-28T07:50:35.181Z",
   "mode": "review",
   "scope": "recent",
   "dateMode": null,
@@ -42,7 +42,7 @@
     "alreadyPublished": 0,
     "reviewConflicts": 0,
     "keptPending": 2,
-    "reconciledAt": "2026-11-28T07:25:40.456Z"
+    "reconciledAt": "2026-11-28T07:50:41.445Z"
   },
   "coverage": {
     "total": 165,
@@ -124,7 +124,7 @@
     "minRequestIntervalMs": 1200,
     "reason": "steady-state",
     "requests": 6,
-    "waitedMs": 4316,
+    "waitedMs": 4436,
     "intervalMs": 1200
   },
   "autoApprovedPlayStationThisRun": 0,
@@ -134,7 +134,7 @@
     "version": 1,
     "provider": "osirion",
     "scope": "recent",
-    "observedAt": "2026-11-28T07:25:34.484Z",
+    "observedAt": "2026-11-28T07:50:35.144Z",
     "totalEvents": 1,
     "entries": [
       {
@@ -237,8 +237,8 @@
     "version": 1,
     "scope": "auto",
     "latest": {
-      "runId": "4f8998c0ed602e41f497dee8",
-      "measuredAt": "2026-11-28T07:25:34.624Z",
+      "runId": "3679d85d157dcb48e4e3b52c",
+      "measuredAt": "2026-11-28T07:50:35.181Z",
       "mode": "provider-scan",
       "pendingAtStart": 2,
       "newCandidates": 0,
@@ -704,6 +704,32 @@
         "scannedPages": 0,
         "providerRequests": 6,
         "savedRecheck": null
+      },
+      {
+        "runId": "3679d85d157dcb48e4e3b52c",
+        "measuredAt": "2026-11-28T07:50:35.181Z",
+        "mode": "provider-scan",
+        "pendingAtStart": 2,
+        "newCandidates": 0,
+        "observedCandidates": 2,
+        "oldPublished": 0,
+        "oldDuplicateResolved": 0,
+        "oldPendingAfter": 2,
+        "oldOtherRemoved": 0,
+        "published": 0,
+        "newPublished": 0,
+        "newPendingAfter": 0,
+        "newOtherNotPublished": 0,
+        "autoResolutionRate": 0,
+        "autoPublicationRate": 0,
+        "newCandidatePublicationRate": null,
+        "pendingAtEnd": 2,
+        "concurrentPublishedOrReviewed": 0,
+        "skippedApprovalDuplicates": 0,
+        "conflicts": 0,
+        "scannedPages": 0,
+        "providerRequests": 6,
+        "savedRecheck": null
       }
     ],
     "rolling": {
@@ -725,20 +751,20 @@
         "newCandidatePublicationRate": null
       },
       "last30Runs": {
-        "runs": 17,
-        "pendingAtStart": 34,
+        "runs": 18,
+        "pendingAtStart": 36,
         "newCandidates": 48,
-        "observedCandidates": 82,
+        "observedCandidates": 84,
         "oldPublished": 0,
         "oldDuplicateResolved": 0,
-        "oldPendingAfter": 34,
+        "oldPendingAfter": 36,
         "oldOtherRemoved": 0,
         "published": 46,
         "newPublished": 46,
         "newPendingAfter": 2,
         "newOtherNotPublished": 0,
         "autoResolutionRate": 0,
-        "autoPublicationRate": 56.1,
+        "autoPublicationRate": 54.76,
         "newCandidatePublicationRate": 95.83
       }
     }
