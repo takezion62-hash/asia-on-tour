@@ -61,5 +61,8 @@
   "dynamicReviewBudget": {
     "enabled": true,
     "maxRecoveryPercent": 60
+  },
+  "yieldPriority": {
+    "enabled": true
   }
 }

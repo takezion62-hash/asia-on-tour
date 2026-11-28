@@ -20,6 +20,8 @@ on:
       - "players.json"
       - "scripts/review-recovery-priority.cjs"
       - "scripts/dynamic-history-budget.cjs"
+      - "scripts/history-yield-priority.cjs"
+      - "scripts/history-yield-metrics.cjs"
       - "scripts/automatic-duo-qualifier-approval.cjs"
       - "scripts/verified-partial-page.cjs"
       - "scripts/audit-pending-history-20261108.cjs"
