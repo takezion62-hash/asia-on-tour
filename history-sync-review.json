@@ -486,39 +486,6 @@
       "reviewReason": "順位表の取得が完了していません"
     },
     {
-      "id": "auto-s31-b773a9995872",
-      "date": "2024-09-21",
-      "region": "ME",
-      "player": "こがね / らる",
-      "playerRaw": "Zst kogane / らるニキ LIZAǃǃӜ",
-      "event": "Reload Duos Cash Cup (Console)",
-      "round": "Event 3 · Round 1 / 参加確認",
-      "rank": 6136,
-      "points": 7,
-      "kills": 14,
-      "vrs": 0,
-      "prize": null,
-      "kind": "参加確認",
-      "matches": 3,
-      "seasonId": "S31",
-      "chapter": 5,
-      "season": 4,
-      "tournamentId": "ch5s4-reload-duos-cash-cup-console",
-      "source": "https://www.fortnite.com/competitive/events/S31_PlatformReloadDuosCashCupConsole/?region=ME&round=S31_PlatformReloadDuosCashCupConsole_Event3Round1_ME",
-      "verified": true,
-      "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
-      "reviewOnly": true,
-      "reviewReason": "対象大会・ラウンドの自動承認方式が未登録",
-      "players": [
-        "こがね",
-        "らる"
-      ],
-      "teamAccountIds": [
-        "0247b9620f5e49709904d2d659995926",
-        "3e0dee00fce0412db865d2844e1e5317"
-      ]
-    },
-    {
       "id": "auto-s30-138e044f165d",
       "date": "2024-08-13",
       "region": "EU",
@@ -589,41 +556,8 @@
       "verified": true,
       "note": "大会APIウィンドウと本人確認済みEpic IDによる登録。賞金額を推定せず登録。",
       "reviewReason": "順位表の取得が完了していません"
-    },
-    {
-      "id": "auto-s39-71ef9447c747",
-      "date": "2026-02-03",
-      "region": "NAW",
-      "player": "Rise / Job",
-      "playerRaw": "Riddle RiIse / Jobsznǃ",
-      "event": "FNCS Division 1",
-      "round": "単一開催枠 / 参加確認",
-      "rank": 100,
-      "points": 162,
-      "kills": 14,
-      "vrs": 0,
-      "prize": null,
-      "kind": "参加確認",
-      "matches": 10,
-      "seasonId": "S39",
-      "chapter": 7,
-      "season": 1,
-      "tournamentId": "ch7s1-fncs-division-1",
-      "source": "https://www.fortnite.com/competitive/events/S39_FNCSDivisionalCup_Division1/?region=NAW&round=S39_FNCSDivisionalCup_Division1_Week1Day1_NAW",
-      "verified": true,
-      "note": "参加データのみ自動照合。通過・賞金・スキン報酬の確定情報なし。",
-      "reviewOnly": true,
-      "reviewReason": "対象大会・ラウンドの自動承認方式が未登録",
-      "players": [
-        "Rise",
-        "Job"
-      ],
-      "teamAccountIds": [
-        "635ed9f369cf4720b1ec25e0575fd76b",
-        "dcd62fd578bb43819c33ac13c0138164"
-      ]
     }
   ],
-  "manualReviewedAt": "2026-11-28T00:08:49.745Z",
+  "manualReviewedAt": "2026-11-28T00:49:07.232Z",
   "autoDuplicateReviewedAt": "2026-11-24T12:11:50.110Z"
 }
