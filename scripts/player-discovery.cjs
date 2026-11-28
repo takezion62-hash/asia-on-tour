@@ -29,7 +29,7 @@ function init(previous,data,now){
  const used=occupied(data),old=previous?.version===1&&Array.isArray(previous.candidates)?previous.candidates:[];
  const candidates=old.filter(c=>id(c?.epicId)&&!used.ids.has(c.epicId)&&Number.isFinite(Date.parse(c.lastSeen))&&Date.parse(c.lastSeen)>=now-180*DAY)
   .map(c=>JSON.parse(JSON.stringify(c))).slice(0,MAX_CANDIDATES);
- return {version:1,candidates,boards:previous?.version===1&&previous.boards?JSON.parse(JSON.stringify(previous.boards)):{},checkedAt:new Date(now).toISOString(),attempts:0,scannedPages:0,lastError:null};
+ return {version:1,candidates,boards:previous?.version===1&&previous.boards?JSON.parse(JSON.stringify(previous.boards)):{},checkedAt:new Date(now).toISOString(),attempts:0,scannedPages:0,lastError:null,...(previous?.lastRegistration?{lastRegistration:previous.lastRegistration}: {})};
 }
 function evidence(win,row,name,teammate=false){
  return {window:win.key,eventId:win.eventId,region:win.region,date:win.dateJst,rank:row.rank,name,
@@ -56,7 +56,14 @@ function observe(state,win,entries,normalize,accounts,blocked,{homeOnly=false,no
     if(!c||!type)continue;
    }else if(!c){
     if(!teammate&&i>=8)continue;
-    if(state.candidates.length>=MAX_CANDIDATES)continue;
+    if(state.candidates.length>=MAX_CANDIDATES){
+     // Keep corroborated candidates, but rotate weak single sightings rather
+     // than let early arbitrary rows permanently block mixed-team discovery.
+     const victim=state.candidates.filter(x=>!x.home.length&&!x.conflicts.length&&x.foreign.length===1&&!x.foreign[0].knownTeammate&&
+      (teammate||Date.parse(x.lastSeen)<now-7*DAY)).sort((a,b)=>a.lastSeen.localeCompare(b.lastSeen)||a.epicId.localeCompare(b.epicId))[0];
+     if(!victim)continue;
+     state.candidates.splice(state.candidates.indexOf(victim),1);byId.delete(victim.epicId);
+    }
     c={epicId:a,lastSeen:new Date(now).toISOString(),foreign:[],home:[],conflicts:[]};byId.set(a,c);state.candidates.push(c);
    }
    const e=evidence(win,row,name,teammate);

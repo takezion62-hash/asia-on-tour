@@ -36,3 +36,14 @@ test('verification uses at most three shared budget units and stops on 429',asyn
  assert.equal(p.rateLimited,true);assert.equal(calls,1);assert.equal(p.attempts,1);
  assert.equal(evidenceWindows([e('ASIA')],now).length,1);
 });
+
+test('full candidate queue preserves verified mixed teammates by evicting weak singleton',()=>{
+ const d=data(),s=init(null,d,now),blocked=occupied(d);
+ for(let i=0;i<500;i++){
+  const accountId=(i+1000).toString(16).padStart(32,'0');
+  observe(s,win('S42_Cup','NAW','2026-09-01'),[{players:[{accountId,username:'sample'+i}]}],normalize,accounts,blocked,{now});
+ }
+ assert.equal(s.candidates.length,500);
+ observe(s,win('S42_Cup','NAW','2026-09-01'),[entry],normalize,accounts,blocked,{now});
+ assert.equal(s.candidates.length,500);assert.ok(s.candidates.some(x=>x.epicId===unknown&&x.foreign[0].knownTeammate));
+});
