@@ -22,6 +22,8 @@ on:
       - "scripts/dynamic-history-budget.cjs"
       - "scripts/history-yield-priority.cjs"
       - "scripts/history-yield-metrics.cjs"
+      - "scripts/player-discovery.cjs"
+      - "scripts/register-discovered-players.cjs"
       - "scripts/automatic-duo-qualifier-approval.cjs"
       - "scripts/verified-partial-page.cjs"
       - "scripts/audit-pending-history-20261108.cjs"
@@ -496,6 +498,28 @@ jobs:
             sleep $((attempt * 3))
           done
           echo "SAFE_HISTORY_MERGE failed after 5 conflict-safe attempts"
+          exit 1
+
+      - name: Register source-confirmed new ASIA players on newest main
+        run: |
+          set -euo pipefail
+          for attempt in 1 2 3 4 5; do
+            git fetch origin main
+            git reset --hard origin/main
+            node scripts/register-discovered-players.cjs
+            npm run validate
+            node --test tests/player-discovery.test.cjs
+            node scripts/build-season-data.cjs
+            node scripts/build-candidate-triage.cjs
+            git add players.json history-sync-status.json candidate-triage.json
+            git add -A season-data source-results
+            if git diff --cached --quiet; then exit 0; fi
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git commit -m "data: register source-confirmed ASIA discovery accounts"
+            if git push origin HEAD:main; then exit 0; fi
+            sleep $((attempt * 3))
+          done
           exit 1
 
       - name: Publish source-confirmed S35 zero-VR teams and close exact duplicates

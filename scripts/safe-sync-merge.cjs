@@ -20,7 +20,7 @@ const SOURCE_FILES=[
   'players.json','tournaments.json','tournament-rules.json',
   'scripts/osirion-sync.cjs','scripts/new-player-history-delta.cjs','scripts/auto-sync-core.cjs',
   'scripts/dynamic-history-budget.cjs','scripts/review-recovery-priority.cjs','scripts/scan-efficiency.cjs',
-  'scripts/history-yield-metrics.cjs','scripts/history-yield-priority.cjs',
+  'scripts/history-yield-metrics.cjs','scripts/history-yield-priority.cjs','scripts/player-discovery.cjs',
   'scripts/verified-history-approval.cjs',
   'scripts/source-results-store.cjs','scripts/build-source-results.cjs',
   'scripts/automatic-cash-approval.cjs',
@@ -327,6 +327,11 @@ function mergeSnapshots(scope,base,scanned,latest,reviewed={version:1,entries:[]
   if(yieldMetrics!==undefined)status.historyYield=yieldMetrics;
   else delete status.historyYield;
   delete status.historyYieldObservation;
+  // Discovery uses the same serialized provider queue. Do not overwrite a newer ledger on a replay.
+  const found=scanStatus.playerDiscovery,prior=latestStatus.playerDiscovery;
+  if(found?.checkedAt===c[cFile].checkedAt&&found.checkedAt!==b[cFile].checkedAt&&found.checkedAt>String(prior?.checkedAt||''))status.playerDiscovery=found;
+  else if(prior)status.playerDiscovery=prior;
+  else delete status.playerDiscovery;
  }
  status.message='最新版と安全統合：新規掲載'+appended.length+'件、重複スキップ'+duplicates.length+
   '件、要確認の競合'+conflicts.length+'件、確認待ち'+review.proposals.length+'件。既存の戦績・賞金は保持。';
