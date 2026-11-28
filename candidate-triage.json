@@ -1,7 +1,7 @@
 {
   "version": 1,
   "sourceCheckedAt": "2026-11-28T00:07:57.100Z",
-  "total": 27,
+  "total": 22,
   "alreadyResolved": 0,
   "byYear": [
     {
@@ -9,18 +9,14 @@
       "count": 18
     },
     {
-      "name": "2025",
-      "count": 1
-    },
-    {
       "name": "2026",
-      "count": 8
+      "count": 4
     }
   ],
   "byRegion": [
     {
       "name": "EU",
-      "count": 7
+      "count": 4
     },
     {
       "name": "ME",
@@ -33,21 +29,9 @@
     {
       "name": "NAW",
       "count": 1
-    },
-    {
-      "name": "OCE",
-      "count": 2
     }
   ],
   "byTournament": [
-    {
-      "name": "NVIDIA GeForce RTX Cup / OCE / 2025",
-      "count": 1
-    },
-    {
-      "name": "PlayStation Clix Cup (Battle Royale) / OCE / 2026",
-      "count": 1
-    },
     {
       "name": "Solo Victory Cup Battle Royale / NAC / 2024",
       "count": 2
@@ -62,7 +46,7 @@
     },
     {
       "name": "Touch-Only Test Cup / EU / 2026",
-      "count": 5
+      "count": 2
     },
     {
       "name": "ZB Solo Victory Cup / EU / 2024",
@@ -80,11 +64,11 @@
     },
     {
       "name": "partial-scan",
-      "count": 17
+      "count": 13
     },
     {
       "name": "rules-review",
-      "count": 8
+      "count": 7
     }
   ],
   "queue": [
@@ -318,39 +302,6 @@
         "possibleExistingId": null
       },
       "rewardState": "source-amount-present-not-verified-by-triage"
-    },
-    {
-      "id": "auto-s40-e89e75242091",
-      "origin": "history",
-      "date": "2026-04-29",
-      "year": "2026",
-      "region": "OCE",
-      "tournamentId": "ch7s2-playstation-clix-cup-br",
-      "event": "PlayStation Clix Cup (Battle Royale)",
-      "round": "Qualifier / 参加確認",
-      "player": "いずべすと",
-      "kind": "参加確認",
-      "rank": 5159,
-      "points": 2,
-      "kills": 1,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S40_PlayStationCupClix/?region=OCE&round=S40_PlayStationCupClix_Qualifier_OCE",
-      "status": "rules-review",
-      "action": "公式規則・賞金・突破・スキン条件を個別確認",
-      "reason": "対象大会・ラウンドの自動承認方式が未登録",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": true,
-        "observedPartial": false,
-        "seenPages": 60,
-        "totalPages": 60,
-        "sourceKey": "epicgames_S40_PlayStationCupClix_OCE/S40_PlayStationCupClix_Qualifier_OCE",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
     },
     {
       "id": "auto-s43-df6cd868029d",
@@ -846,138 +797,6 @@
         "possibleExistingId": null
       },
       "rewardState": "source-amount-present-not-verified-by-triage"
-    },
-    {
-      "id": "auto-s39-a9e38f868b35",
-      "origin": "history",
-      "date": "2025-12-21",
-      "year": "2025",
-      "region": "OCE",
-      "tournamentId": "ch7s1-nvidia-geforce-rtx-cup",
-      "event": "NVIDIA GeForce RTX Cup",
-      "round": "単一開催枠 / 参加確認",
-      "player": "こはこっこ",
-      "kind": "参加確認",
-      "rank": 6806,
-      "points": 17,
-      "kills": 0,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S39_NvidiaCup/?region=OCE&round=S39_NvidiaCup_OCE",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "全ページ連続の順位表・Epic ID付完全スナップショットが未確認",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 69,
-        "totalPages": 92,
-        "sourceKey": "epicgames_S39_NvidiaCup_OCE/S39_NvidiaCup_OCE",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s39-85dc5b1eedbd",
-      "origin": "history",
-      "date": "2026-02-06",
-      "year": "2026",
-      "region": "EU",
-      "tournamentId": "ch7s1-touch-only-test-cup",
-      "event": "Touch-Only Test Cup",
-      "round": "単一開催枠 / 参加確認",
-      "player": "軍神 心湊 壱輝",
-      "kind": "参加確認",
-      "rank": 742,
-      "points": 66,
-      "kills": 4,
-      "vrs": 1,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S39_MobileTestCup/?region=EU&round=S39_MobileTestCup_Round1_EU",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "対象大会・ラウンドの自動承認方式が未登録",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 10,
-        "totalPages": 19,
-        "sourceKey": "epicgames_S39_MobileTestCup_EU/S39_MobileTestCup_Round1_EU",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s39-ef9a64b8be2e",
-      "origin": "history",
-      "date": "2026-02-06",
-      "year": "2026",
-      "region": "EU",
-      "tournamentId": "ch7s1-touch-only-test-cup",
-      "event": "Touch-Only Test Cup",
-      "round": "単一開催枠 / 参加確認",
-      "player": "ごんた",
-      "kind": "参加確認",
-      "rank": 851,
-      "points": 55,
-      "kills": 7,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S39_MobileTestCup/?region=EU&round=S39_MobileTestCup_Round1_EU",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "対象大会・ラウンドの自動承認方式が未登録",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 10,
-        "totalPages": 19,
-        "sourceKey": "epicgames_S39_MobileTestCup_EU/S39_MobileTestCup_Round1_EU",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
-    },
-    {
-      "id": "auto-s39-fc7cd684ae9c",
-      "origin": "history",
-      "date": "2026-02-06",
-      "year": "2026",
-      "region": "EU",
-      "tournamentId": "ch7s1-touch-only-test-cup",
-      "event": "Touch-Only Test Cup",
-      "round": "単一開催枠 / 参加確認",
-      "player": "RVL ぐれーぷふぁんぼーい",
-      "kind": "参加確認",
-      "rank": 881,
-      "points": 52,
-      "kills": 2,
-      "vrs": 0,
-      "prize": null,
-      "source": "https://www.fortnite.com/competitive/events/S39_MobileTestCup/?region=EU&round=S39_MobileTestCup_Round1_EU",
-      "status": "partial-scan",
-      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
-      "reason": "対象大会・ラウンドの自動承認方式が未登録",
-      "evidence": {
-        "officialSource": true,
-        "exactCheckpoint": true,
-        "rankingOrderValid": true,
-        "scanComplete": false,
-        "observedPartial": true,
-        "seenPages": 10,
-        "totalPages": 19,
-        "sourceKey": "epicgames_S39_MobileTestCup_EU/S39_MobileTestCup_Round1_EU",
-        "possibleExistingId": null
-      },
-      "rewardState": "cash-unconfirmed"
     }
   ],
   "policy": "read-only queue; awards require existing official rule-backed validators and identity/collision proof"

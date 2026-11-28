@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewedAt": "2026-11-26T22:36:00.813Z",
+  "reviewedAt": "2026-11-28T00:08:49.745Z",
   "description": "Resolved historic review candidates: published, duplicate or participation",
   "entries": [
     {
@@ -36380,6 +36380,42 @@
       "recordId": "auto-s43-a408856f13e9",
       "reviewedAt": "2026-11-26T22:36:00.813Z",
       "source": "https://www.fortnite.com/competitive/events/S43_ScottPilgrimCup_ZB/?region=NAC&round=S43_ScottPilgrimCup_ZB_NAC",
+      "policy": "attendance-only",
+      "rule": null
+    },
+    {
+      "id": "auto-s39-a9e38f868b35",
+      "decision": "published",
+      "recordId": "auto-s39-a9e38f868b35",
+      "reviewedAt": "2026-11-28T00:08:49.745Z",
+      "source": "https://www.fortnite.com/competitive/events/S39_NvidiaCup/?region=OCE&round=S39_NvidiaCup_OCE",
+      "policy": "attendance-only",
+      "rule": null
+    },
+    {
+      "id": "auto-s39-85dc5b1eedbd",
+      "decision": "published",
+      "recordId": "auto-s39-85dc5b1eedbd",
+      "reviewedAt": "2026-11-28T00:08:49.745Z",
+      "source": "https://www.fortnite.com/competitive/events/S39_MobileTestCup/?region=EU&round=S39_MobileTestCup_Round1_EU",
+      "policy": "attendance-only",
+      "rule": null
+    },
+    {
+      "id": "auto-s39-ef9a64b8be2e",
+      "decision": "published",
+      "recordId": "auto-s39-ef9a64b8be2e",
+      "reviewedAt": "2026-11-28T00:08:49.745Z",
+      "source": "https://www.fortnite.com/competitive/events/S39_MobileTestCup/?region=EU&round=S39_MobileTestCup_Round1_EU",
+      "policy": "attendance-only",
+      "rule": null
+    },
+    {
+      "id": "auto-s39-fc7cd684ae9c",
+      "decision": "published",
+      "recordId": "auto-s39-fc7cd684ae9c",
+      "reviewedAt": "2026-11-28T00:08:49.745Z",
+      "source": "https://www.fortnite.com/competitive/events/S39_MobileTestCup/?region=EU&round=S39_MobileTestCup_Round1_EU",
       "policy": "attendance-only",
       "rule": null
     }
