@@ -22,6 +22,7 @@ const {stageFor:playstationStageFor}=require('./automatic-playstation-approval.c
 const {scanCoverage}=require('./scan-coverage.cjs');
 const {finishableWindows,remainingPages,windowPageAllowance,leastCoveredBucket}=require('./scan-efficiency.cjs');
 const {recoveryShortlist}=require('./review-recovery-priority.cjs');
+const {buildYieldPriority,fillResidual}=require('./history-yield-priority.cjs');
 const {planActiveBudget,allowance:dynamicAllowance,summary:budgetSummary}=require('./dynamic-history-budget.cjs');
 const {runDelta:runNewPlayerDelta}=require('./new-player-history-delta.cjs');
 const {trafficPlan,createPacer}=require('./osirion-traffic-policy.cjs');
@@ -436,7 +437,7 @@ function historicalPriorityAudit(windows,state,records,{limit=100,now=Date.now()
  ranked.sort((a,b)=>b.score-a.score||a.date.localeCompare(b.date)||a.key.localeCompare(b.key));
  return {eligible:ranked.length,top:ranked.slice(0,Math.max(0,Math.min(500,Number.isSafeInteger(limit)?limit:100)))};
 }
-function historicalPriority(state,records,evidence=historicalEvidenceIndex(records)){
+function historicalPriority(state,records,evidence=historicalEvidenceIndex(records),learning=null){
  const scores=new WeakMap();
  const score=w=>{
   if(scores.has(w))return scores.get(w);
@@ -444,13 +445,13 @@ function historicalPriority(state,records,evidence=historicalEvidenceIndex(recor
   const fraction=cp?.totalPages>0?Math.min(1,(cp.nextPage||0)/cp.totalPages):0;
   // Keep the same rank rules and ordering; only avoid repeated computation.
   const approvedRule=(Object.hasOwn(RULES,w.tournamentId)&&w.series==='victory-cup')||cutoffForWindow(w)!==null||cashLimitForWindow(w)!==null||evaluationStage(w)!==null||unrealWindow(w)!==null||nvidiaWindow(w)!==null||playstationStageFor(w)!==null;
-  const value=(approvedRule?150:0)+Math.round(fraction*90)+evidence(w)+(w.kind==='賞金決勝'?12:0)+(w.kind==='参加確認'?3:0);
+  const value=(approvedRule?150:0)+Math.round(fraction*90)+evidence(w)+(w.kind==='賞金決勝'?12:0)+(w.kind==='参加確認'?3:0)+(learning?.detail(w).bonus||0);
   scores.set(w,value);
   return value;
  };
  return (a,b)=>score(b)-score(a)||a.end-b.end;
 }
-function selectHistoricalWindows(windows,state,config,time=Date.now(),records=[],reviewRows=[]){
+function selectHistoricalWindows(windows,state,config,time=Date.now(),records=[],reviewRows=[],{learning=null,learnedSelections=[]}={}){
  const pending=windows.filter(w=>{
   const cp=state.windows[w.key];
   return (!cp?.complete||(requiresCheckpointEpicIds(w.series)&&cp?.epicIdsRetained!==true))&&(!cp?.retryAfter||Date.parse(cp.retryAfter)<=time);
@@ -459,6 +460,7 @@ function selectHistoricalWindows(windows,state,config,time=Date.now(),records=[]
  const limit=Math.max(1,config.maxWindowsPerRun||6),selected=[],seen=new Set();
  const evidence=historicalEvidenceIndex(records);
  const priority=historicalPriority(state,records,evidence);
+ const learnedPriority=learning?.eligibleGroups?historicalPriority(state,records,evidence,learning):priority;
  const add=pool=>{for(const w of pool.slice().sort(priority))if(!seen.has(w.key)){selected.push(w);seen.add(w.key);break}};
  // Resume at least one expired retry per run, preserving the original page.
  const dueRetries=pending.filter(w=>{const t=Date.parse(state.windows[w.key]?.retryAfter||'');return Number.isFinite(t)&&t<=time})
@@ -581,23 +583,20 @@ function selectHistoricalWindows(windows,state,config,time=Date.now(),records=[]
  const resumable=pending.filter(w=>{
   const cp=state.windows[w.key];
   return !seen.has(w.key)&&Number.isSafeInteger(cp?.nextPage)&&cp.nextPage>0;
- }).sort((a,b)=>{
+ });
+ const resumePriority=compare=>(a,b)=>{
   const pagesA=remainingPages(state.windows[a.key]);
   const pagesB=remainingPages(state.windows[b.key]);
   const boundedA=pagesA!==null&&pagesA<=Math.max(1,config.maxPagesPerWindowPerRun||12);
   const boundedB=pagesB!==null&&pagesB<=Math.max(1,config.maxPagesPerWindowPerRun||12);
   if(boundedA!==boundedB)return boundedA?-1:1;
   if(boundedA&&pagesA!==pagesB)return pagesA-pagesB;
-  return priority(a,b);
- });
- for(const w of resumable){
-  if(selected.length>=limit)break;
-  selected.push(w);seen.add(w.key);
- }
- for(const w of pending.slice().sort(priority)){
-  if(selected.length>=limit)break;
-  if(!seen.has(w.key)){selected.push(w);seen.add(w.key)}
- }
+  return compare(a,b);
+ };
+ // Apply learned yield only after every existing protected selection phase.
+ // Near-complete sorting remains dominant, and at most three slots may change.
+ fillResidual(resumable,selected,seen,limit,resumePriority(priority),resumePriority(learnedPriority),learning,learnedSelections);
+ fillResidual(pending,selected,seen,limit,priority,learnedPriority,learning,learnedSelections);
  return selected;
 }
 // Reconstruct only exact, unambiguous saved official calendar sessions. Reuse
@@ -726,9 +725,13 @@ async function main(){
  const recoveryRows=dynamic?pendingReviews.filter(x=>!suppressed.has(x.id)):pendingReviews;
  const deltaReserve=config.newPlayerBackfill?.enabled!==false?Math.min(4,Math.max(0,config.newPlayerBackfill?.maxPagesPerRun??4)):0;
  const selectionConfig=dynamic?{...config,maxWindowsPerRun:Math.min(config.maxWindowsPerRun||6,Math.max(1,traffic.pageBudget-deltaReserve))}:config;
- const active=historical?selectHistoricalWindows(windows,state,selectionConfig,Date.now(),data.results,recoveryRows):selectActiveWindows(windows,state,config);
- // Capture ranking before checkpoint mutations; reporting does not affect selection.
- const priorityAudit=historical?historicalPriorityAudit(windows,state,data.results,{limit:50}):null;
+ const selectionTime=Date.now(),learnedSelections=[];
+ const learning=historical?buildYieldPriority(previousHistoricalStatus?.historyYield,{enabled:config.yieldPriority?.enabled===true,now:selectionTime}):null;
+ const active=historical?selectHistoricalWindows(windows,state,selectionConfig,selectionTime,data.results,recoveryRows,{learning,learnedSelections}):selectActiveWindows(windows,state,config);
+ // The existing audit remains the baseline ranking, with actual changed choices separately recorded.
+ const priorityAudit=historical?{...historicalPriorityAudit(windows,state,data.results,{limit:50,now:selectionTime}),
+  yieldPriority:{enabled:learning.enabled,reason:learning.reason,observedRuns:learning.observedRuns,
+   eligibleGroups:learning.eligibleGroups,maxSlots:learning.maxSlots,changedSelections:learnedSelections}}:null;
  const selectedPriority=historical?active.map(w=>({key:w.key,date:w.dateJst,region:w.region,series:w.series,kind:w.kind})):null;
  const previewConfig={version:1,accounts,windows:active.map(w=>({eventId:w.eventId,windowId:w.windowId,dateJst:w.dateJst,region:w.region,seasonId:w.seasonId,tournamentId:w.tournamentId,kind:w.kind,round:w.round}))};
  // Historical backfill can inspect more pages, but always yields before the Actions job limit.
