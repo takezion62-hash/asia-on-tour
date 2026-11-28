@@ -11,6 +11,14 @@ const normalizedRound=round=>{
  const event=text.match(/Event\s*(\d+)/i),day=text.match(/Day\s*(\d+)/i),stage=text.match(/Round\s*([12])/i);
  return stage&&(event||day)?(event?'event'+Number(event[1]):'day'+Number(day[1]))+'/round'+stage[1]:text;
 };
+// Exact source IDs keep an already published Tracker final and a later API
+// final from becoming duplicate candidates solely due to review labels.
+const touchWindow=(source,region)=>{
+ try{const u=new URL(source),wid=u.searchParams.get('round')||u.searchParams.get('window');
+ const t=require('./touch-only-stage.cjs').touchStage(wid);
+ return t&&t.region===region?wid:null}catch{return null}
+};
+const recordRound=(r)=>r.tournamentId==='ch7s1-touch-only-test-cup'?(touchWindow(r.source,r.region)||normalizedRound(r.round)):normalizedRound(r.round);
 const normalizedRoster=members=>members.slice().sort((a,b)=>a.localeCompare(b,'ja')).join('|');
 // Epic's official S41/S42 Victory Cup rules specify session match limits.
 // Other seasons and unfamiliar event subtypes are never assigned an invented cap.
@@ -43,7 +51,7 @@ function prepare(feed,config,data){
   const {accounts,windows}=createIndex(config,data);
   if(!Array.isArray(feed?.entries))throw Error('取得した順位表が不正');
   const registeredIds=new Set(data.results.map(x=>x.id));
-  const existing=new Set(data.results.map(x=>[x.date,x.region,x.tournamentId,normalizedRound(x.round),normalizedRoster(roster(x))].join('|')));
+  const existing=new Set(data.results.map(x=>[x.date,x.region,x.tournamentId,recordRound(x),normalizedRoster(roster(x))].join('|')));
   const seen=new Set(),proposals=[],skipped=[];
   for(const x of feed.entries){
     const key=x.eventId+'/'+x.windowId,win=windows.get(key);
@@ -56,7 +64,7 @@ function prepare(feed,config,data){
     if(!Number.isSafeInteger(x.rank)||x.rank<1||!int(x.points)||!int(x.kills)||!int(x.vrs)||!int(x.matches)||x.matches<1||x.vrs>x.matches){skipped.push({key,reason:'成績が未確定'});continue}
     const matchCap=maximumMatches(win);
     if(matchCap!==null&&x.matches>matchCap){skipped.push({key,reason:'公式ルールの試合数上限を超過'});continue}
-    const deDup=[win.dateJst,win.region,win.tournamentId,normalizedRound(win.round),normalizedRoster(members)].join('|');
+    const deDup=[win.dateJst,win.region,win.tournamentId,win.tournamentId==='ch7s1-touch-only-test-cup'?win.windowId:normalizedRound(win.round),normalizedRoster(members)].join('|');
     if(existing.has(deDup)||seen.has(deDup)){skipped.push({key,reason:'登録済み'});continue}
     const id='auto-'+win.seasonId.toLowerCase()+'-'+crypto.createHash('sha256').update(JSON.stringify([key,ids])).digest('hex').slice(0,12);
     if(registeredIds.has(id)){skipped.push({key,reason:'ID重複'});continue}

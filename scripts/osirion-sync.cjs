@@ -117,6 +117,8 @@ function parseStage(windowId){
 // Never infer qualification, cash prizes or cosmetic rewards from a leaderboard.
 // Other series carry a neutral stage label and remain review-only.
 function parseReviewStage(windowId){
+ const touch=require('./touch-only-stage.cjs').touchStage(windowId);
+ if(touch)return {round:touch.round+' / 参加確認',kind:'参加確認'};
  if(typeof windowId!=='string'||!/_?(ME|EU|NAC|NAW|OCE|BR)$/.test(windowId))return null;
  const event=windowId.match(/(?:^|_)Event(\d+)_?Round(\d+)(?:_|$)/i);
  const day=windowId.match(/(?:^|_)Round(\d+)_Day(\d+)(?:_|$)/i);

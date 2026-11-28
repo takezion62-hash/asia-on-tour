@@ -46,3 +46,18 @@ test('Victory Cup Round1 and Round2 stay in distinct stages even when both were 
  assert.equal(kind('参加確認',t.id,'Event 5 · Round 2 / 参加確認',src2),'賞金決勝');
  assert.equal(round('Event 5 · Round 2 / 参加確認','参加確認',t.id,'2024-07-16','NAC',src2),'Event 5 · Round 2 / 賞金決勝');
 });
+
+test('February Touch-Only weekly qualifiers and finals remain separate; source evidence only',()=>{
+ const id='ch7s1-touch-only-test-cup',event='S39_MobileTestCup';
+ for(let n=1;n<=4;n++){
+  const q=source(event,event+'_Round'+n+'_EU','EU'),f=source(event,event+'_Final'+(n===1?'':n)+'_EU','EU');
+  assert.equal(kind('参加確認',id,'単一開催枠 / 参加確認',q),'予選');
+  assert.equal(round('単一開催枠 / 参加確認','参加確認',id,'2026-02-06','EU',q),'Round '+n+' / 予選');
+  assert.equal(kind('参加確認',id,'単一開催枠 / 参加確認',f),'賞金決勝');
+  assert.equal(round('Final / 参加確認','参加確認',id,'2026-02-06','EU',f),(n===1?'Final':'Final '+n)+' / 賞金決勝');
+ }
+ const f='https://fortnitetracker.com/events/epicgames_S39_MobileTestCup_EU?window=S39_MobileTestCup_Final3_EU';
+ assert.equal(round('Final 3 / 賞金決勝','賞金決勝',id,'2026-02-20','EU',f),'Final 3 / 賞金決勝');
+ assert.equal(kind('参加確認',id,'単一開催枠 / 参加確認',source(event,event+'_Mystery_EU','EU')),'参加確認');
+ assert.equal(kind('参加確認',id,'単一開催枠 / 参加確認',source(event,event+'_Round1_NAC','EU')),'参加確認');
+});
