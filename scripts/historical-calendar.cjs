@@ -7,7 +7,10 @@ const root=path.resolve(__dirname,'..');
 const regions=new Set(['ME','EU','NAC','NAW','OCE','BR']);
 const jst=stamp=>new Date(new Date(stamp).getTime()+9*3600000).toISOString();
 const officialUrl=(id,region,round)=>'https://www.fortnite.com/competitive/events/'+encodeURIComponent(id)+'/?region='+encodeURIComponent(region)+'&round='+encodeURIComponent(round);
+const {touchStage}=require('./touch-only-stage.cjs');
 function stageLabel(windowId){
+ const touch=touchStage(windowId);
+ if(touch)return {round:touch.round,stage:touch.stage};
  const s=String(windowId);
  const event=s.match(/(?:^|_)Event(\d+)_?Round(\d+)(?:_|$)/i);
  const day=s.match(/(?:^|_)Round(\d+)_Day(\d+)(?:_|$)/i);

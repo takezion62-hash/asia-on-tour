@@ -82,3 +82,23 @@ test('duplicate Epic event aliases collapse only identical windows, not separate
  assert.ok(out.sessions.filter(x=>x.tournamentId==='vc').every(x=>x.eventId==='S42_SoloVictoryCup'));
  assert.equal(out.sessions.filter(x=>x.mode==='zero-build').length,1);
 });
+
+test('S39 Touch-Only exact 4 weekly pairs use qualifier and final labels in calendar and discovery',()=>{
+ const {parseReviewStage}=require('../scripts/osirion-sync.cjs');
+ const {correct}=require('../scripts/repair-touch-only-calendar.cjs');
+ const sessions=[];
+ for(const region of ['EU','NAC'])for(let n=1;n<=4;n++){
+  for(const q of [true,false]){
+   const label=q?'Round '+n:n===1?'Final':'Final '+n,stage=q?'予選':'決勝';
+   const wid='S39_MobileTestCup_'+(q?'Round'+n:'Final'+(n===1?'':n))+'_'+region;
+   assert.deepEqual(stageLabel(wid),{round:label,stage});
+   assert.deepEqual(parseReviewStage(wid),{round:label+' / 参加確認',kind:'参加確認'});
+   sessions.push({tournamentId:'ch7s1-touch-only-test-cup',eventId:'S39_MobileTestCup',region,sourceWindowId:wid,round:'ラウンド詳細未確認',stage:'単一ラウンド'});
+  }
+ }
+ const doc={sessions};
+ assert.equal(correct(doc),16);assert.equal(correct(doc),0);
+ assert.equal(doc.sessions.filter(s=>s.stage==='予選').length,8);
+ assert.equal(doc.sessions.filter(s=>s.stage==='決勝').length,8);
+ assert.deepEqual(stageLabel('S39_OtherTestCup_Round2_EU'),{round:'ラウンド詳細未確認',stage:'単一ラウンド'});
+});
