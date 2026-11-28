@@ -1,7 +1,7 @@
 {
   "version": 1,
   "state": "checked",
-  "checkedAt": "2026-11-28T00:48:15.440Z",
+  "checkedAt": "2026-11-28T06:45:16.593Z",
   "mode": "review",
   "scope": "recent",
   "dateMode": null,
@@ -10,15 +10,15 @@
   "toDate": null,
   "provider": "osirion",
   "linkedPlayers": 718,
-  "trackedWindows": 171,
+  "trackedWindows": 165,
   "found": 2,
   "skipped": 0,
   "imported": 0,
   "scannedPages": 0,
-  "completedWindows": 171,
+  "completedWindows": 165,
   "identityConflicts": 3,
-  "alreadyRegistered": 324,
-  "autoApprovedTotal": 3829,
+  "alreadyRegistered": 316,
+  "autoApprovedTotal": 3830,
   "invalidCachedCandidates": 0,
   "manualReviewCandidates": 2,
   "autoApprovedCosmeticThisRun": 0,
@@ -30,7 +30,7 @@
   "transientFailures": 0,
   "malformedFailures": 0,
   "skippedLeaderboards": [],
-  "reviewOnlyWindows": 147,
+  "reviewOnlyWindows": 141,
   "reviewOnlyCandidates": 0,
   "unmappedEvents": 1,
   "unmappedEventIds": [
@@ -42,11 +42,11 @@
     "alreadyPublished": 0,
     "reviewConflicts": 0,
     "keptPending": 2,
-    "reconciledAt": "2026-11-28T00:48:22.891Z"
+    "reconciledAt": "2026-11-28T06:45:24.154Z"
   },
   "coverage": {
-    "total": 171,
-    "completed": 171,
+    "total": 165,
+    "completed": 165,
     "notStarted": 0,
     "partial": 0,
     "retryWaiting": 0,
@@ -55,21 +55,6 @@
     "retryCount": 0,
     "completionPercent": 100,
     "byRegion": {
-      "NAW": {
-        "total": 29,
-        "completed": 29,
-        "pending": 0
-      },
-      "NAC": {
-        "total": 32,
-        "completed": 32,
-        "pending": 0
-      },
-      "OCE": {
-        "total": 26,
-        "completed": 26,
-        "pending": 0
-      },
       "ME": {
         "total": 26,
         "completed": 26,
@@ -84,16 +69,31 @@
         "total": 26,
         "completed": 26,
         "pending": 0
+      },
+      "NAC": {
+        "total": 30,
+        "completed": 30,
+        "pending": 0
+      },
+      "NAW": {
+        "total": 26,
+        "completed": 26,
+        "pending": 0
+      },
+      "OCE": {
+        "total": 25,
+        "completed": 25,
+        "pending": 0
       }
     },
     "byYear": {
       "2026": {
-        "total": 171,
-        "completed": 171,
+        "total": 165,
+        "completed": 165,
         "pending": 0
       }
     },
-    "outsideScopeCheckpoints": 53,
+    "outsideScopeCheckpoints": 59,
     "samples": []
   },
   "manuallyPublished": 337,
@@ -124,7 +124,7 @@
     "minRequestIntervalMs": 1200,
     "reason": "steady-state",
     "requests": 6,
-    "waitedMs": 4417,
+    "waitedMs": 3993,
     "intervalMs": 1200
   },
   "autoApprovedPlayStationThisRun": 0,
@@ -134,7 +134,7 @@
     "version": 1,
     "provider": "osirion",
     "scope": "recent",
-    "observedAt": "2026-11-28T00:48:15.387Z",
+    "observedAt": "2026-11-28T06:45:16.536Z",
     "totalEvents": 1,
     "entries": [
       {
@@ -237,8 +237,8 @@
     "version": 1,
     "scope": "auto",
     "latest": {
-      "runId": "1807bab6391c96a64565b6e5",
-      "measuredAt": "2026-11-28T00:48:15.440Z",
+      "runId": "27c46e1fb3cce5f2699c138e",
+      "measuredAt": "2026-11-28T06:45:16.593Z",
       "mode": "provider-scan",
       "pendingAtStart": 2,
       "newCandidates": 0,
@@ -626,41 +626,67 @@
         "scannedPages": 0,
         "providerRequests": 6,
         "savedRecheck": null
+      },
+      {
+        "runId": "27c46e1fb3cce5f2699c138e",
+        "measuredAt": "2026-11-28T06:45:16.593Z",
+        "mode": "provider-scan",
+        "pendingAtStart": 2,
+        "newCandidates": 0,
+        "observedCandidates": 2,
+        "oldPublished": 0,
+        "oldDuplicateResolved": 0,
+        "oldPendingAfter": 2,
+        "oldOtherRemoved": 0,
+        "published": 0,
+        "newPublished": 0,
+        "newPendingAfter": 0,
+        "newOtherNotPublished": 0,
+        "autoResolutionRate": 0,
+        "autoPublicationRate": 0,
+        "newCandidatePublicationRate": null,
+        "pendingAtEnd": 2,
+        "concurrentPublishedOrReviewed": 0,
+        "skippedApprovalDuplicates": 0,
+        "conflicts": 0,
+        "scannedPages": 0,
+        "providerRequests": 6,
+        "savedRecheck": null
       }
     ],
     "rolling": {
       "last7Runs": {
         "runs": 7,
         "pendingAtStart": 14,
-        "newCandidates": 19,
-        "observedCandidates": 33,
+        "newCandidates": 17,
+        "observedCandidates": 31,
         "oldPublished": 0,
         "oldDuplicateResolved": 0,
         "oldPendingAfter": 14,
         "oldOtherRemoved": 0,
-        "published": 18,
-        "newPublished": 18,
-        "newPendingAfter": 1,
+        "published": 17,
+        "newPublished": 17,
+        "newPendingAfter": 0,
         "newOtherNotPublished": 0,
         "autoResolutionRate": 0,
-        "autoPublicationRate": 54.55,
-        "newCandidatePublicationRate": 94.74
+        "autoPublicationRate": 54.84,
+        "newCandidatePublicationRate": 100
       },
       "last30Runs": {
-        "runs": 14,
-        "pendingAtStart": 28,
+        "runs": 15,
+        "pendingAtStart": 30,
         "newCandidates": 48,
-        "observedCandidates": 76,
+        "observedCandidates": 78,
         "oldPublished": 0,
         "oldDuplicateResolved": 0,
-        "oldPendingAfter": 28,
+        "oldPendingAfter": 30,
         "oldOtherRemoved": 0,
         "published": 46,
         "newPublished": 46,
         "newPendingAfter": 2,
         "newOtherNotPublished": 0,
         "autoResolutionRate": 0,
-        "autoPublicationRate": 60.53,
+        "autoPublicationRate": 58.97,
         "newCandidatePublicationRate": 95.83
       }
     }
