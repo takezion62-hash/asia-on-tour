@@ -16,6 +16,8 @@ on:
       - scripts/verified-mobile-nac-naw-20261127.cjs
       - scripts/apply-mobile-naw-20261127.cjs
       - scripts/verified-mobile-naw-20261127.cjs
+      - scripts/verified-mobile-naw-oce-20261128.cjs
+      - scripts/apply-mobile-naw-oce-20261128.cjs
       - scripts/apply-player-renames-20261126.cjs
       - scripts/confirmed-player-renames-20261126.cjs
       - scripts/build-source-results.cjs
@@ -341,6 +343,8 @@ jobs:
             node scripts/apply-mobile-nac-naw-20261127.cjs --apply
             node scripts/apply-mobile-naw-20261127.cjs --dry-run
             node scripts/apply-mobile-naw-20261127.cjs --apply
+            node scripts/apply-mobile-naw-oce-20261128.cjs --dry-run
+            node scripts/apply-mobile-naw-oce-20261128.cjs --apply
             node scripts/repair-touch-only-calendar.cjs --dry-run
             node scripts/repair-touch-only-calendar.cjs
             node scripts/validate-data.cjs
