@@ -26,6 +26,7 @@ const {buildYieldPriority,fillResidual}=require('./history-yield-priority.cjs');
 const {planActiveBudget,allowance:dynamicAllowance,summary:budgetSummary}=require('./dynamic-history-budget.cjs');
 const {runDelta:runNewPlayerDelta}=require('./new-player-history-delta.cjs');
 const {trafficPlan,createPacer}=require('./osirion-traffic-policy.cjs');
+const playerDiscovery=require('./player-discovery.cjs');
 const root=path.resolve(__dirname,'..');
 const read=name=>name==='results.json'?readResults(root).rows:JSON.parse(fs.readFileSync(path.join(root,name),'utf8'));
 const write=(name,obj)=>name==='results.json'?publishResults(root,obj):fs.writeFileSync(path.join(root,name),JSON.stringify(obj,null,2)+'\n');
@@ -249,9 +250,9 @@ async function fetchJson(url,opts={}){
   }
  }
 }
-async function getTournaments(historical=false){
+async function getTournaments(historical=false,requestedRegions=regions){
  const all=new Map();
- for(const region of regions){
+ for(const region of requestedRegions){
   const response=await fetchJson('https://fnapi.osirion.gg/v1/tournaments?'+new URLSearchParams({region,includeHistoricData:historical?'true':'false'}),{stopOnRateLimit:true});
   if(!Array.isArray(response.tournaments))throw Error('大会一覧の形式が変わりました');
   for(const item of response.tournaments)if(typeof item.eventId==='string')all.set(item.eventId,item);
@@ -719,12 +720,16 @@ async function main(){
  const pendingReviews=historical?read('history-sync-review.json').proposals:[];
  const previousHistoricalStatus=historical?read('history-sync-status.json'):null;
  const dynamic=historical&&config.dynamicReviewBudget?.enabled===true&&config.reviewRecovery?.enabled===true;
+ const discoveryEnabled=historical&&dynamic&&config.playerDiscovery?.enabled===true;
+ const discoveryState=discoveryEnabled?playerDiscovery.init(previousHistoricalStatus?.playerDiscovery,data,Date.now()):null;
+ const discoveryBlocked=discoveryEnabled?playerDiscovery.occupied(data):null;
+ const discoveryReserve=discoveryState&&playerDiscovery.pending(discoveryState)?3:0;
  const reviewLedger=dynamic?read('history-sync-reviewed.json').entries:[];
  const approvalLedger=dynamic?read('approval-history.json').entries:[];
  const suppressed=new Set([...reviewLedger,...approvalLedger].map(x=>x.id));
  const recoveryRows=dynamic?pendingReviews.filter(x=>!suppressed.has(x.id)):pendingReviews;
  const deltaReserve=config.newPlayerBackfill?.enabled!==false?Math.min(4,Math.max(0,config.newPlayerBackfill?.maxPagesPerRun??4)):0;
- const selectionConfig=dynamic?{...config,maxWindowsPerRun:Math.min(config.maxWindowsPerRun||6,Math.max(1,traffic.pageBudget-deltaReserve))}:config;
+ const selectionConfig=dynamic?{...config,maxWindowsPerRun:Math.min(config.maxWindowsPerRun||6,Math.max(1,traffic.pageBudget-deltaReserve-discoveryReserve))}:config;
  const selectionTime=Date.now(),learnedSelections=[];
  const learning=historical?buildYieldPriority(previousHistoricalStatus?.historyYield,{enabled:config.yieldPriority?.enabled===true,now:selectionTime}):null;
  const active=historical?selectHistoricalWindows(windows,state,selectionConfig,selectionTime,data.results,recoveryRows,{learning,learnedSelections}):selectActiveWindows(windows,state,config);
@@ -768,6 +773,13 @@ async function main(){
    if(stats.rateLimited){rateLimited=true;rateLimitRetryAfter=stats.retryAfter;transientFailures++;}
    console.log('OSIRION_NEW_PLAYER_BACKFILL '+JSON.stringify(stats));
   }
+ }
+ if(discoveryState&&discoveryReserve&&!rateLimited&&budget>=2){
+  const verification=await playerDiscovery.verify(discoveryState,all,{getAsia:()=>getTournaments(true,['ASIA']),
+   getPage:getLeaderboard,normalize:normalizeRow,accounts,blocked:discoveryBlocked,budget:Math.min(discoveryReserve,budget),
+   deadline:scanDeadline,rateLimit:providerRateLimitFailure,recoverable:recoverableLeaderboardFailure});
+  budget-=verification.attempts;
+  if(verification.rateLimited){rateLimited=true;rateLimitRetryAfter=new Date(Date.now()+6*3600000).toISOString();transientFailures++}
  }
  if(historical){
   const byYear={},byRegion={};
@@ -875,6 +887,7 @@ async function main(){
    if(pageRanks.length)checkpoint.lastSeenRank=pageRanks[pageRanks.length-1];
    const crossed=checkpoint.rankingOrderValid&&cutoff!==null&&pageRanks.some(rank=>rank>cutoff);
    const eligibleRows=cutoff===null?l.entries:l.entries.filter(e=>!Number.isSafeInteger(e.rank)||e.rank<=cutoff);
+   if(discoveryState)playerDiscovery.observe(discoveryState,win,eligibleRows,normalizeRow,accounts,discoveryBlocked);
    const entries=eligibleRows.map(e=>normalizeRow(e,win));
    invalidRows+=entries.filter(x=>!x).length;
    const found=prepare({entries:entries.filter(Boolean)},previewConfig,data).proposals;
@@ -942,6 +955,7 @@ async function main(){
  const cumulativeApprovals=data.updates.entries.filter(x=>x.title?.startsWith('公式規則で自動承認：')).reduce((sum,x)=>sum+(x.recordIds?.length||0),0);
  const status={version:1,state:'checked',checkedAt:stamp,mode:'review',scope:historical?'history':'recent',dateMode:historical?(storedConfig.toDate==='rolling'?'rolling':'fixed'):null,selectedWindows:active.length,fromDate:historical?config.fromDate:null,toDate:historical?config.toDate:null,provider:'osirion',linkedPlayers:accounts.length,trackedWindows:windows.length,found:unique.size,skipped:invalidRows,imported,scannedPages:scanned,completedWindows:finished,identityConflicts:conflicts.length,alreadyRegistered:recordedFromReview,autoApprovedTotal:cumulativeApprovals,invalidCachedCandidates:invalidCached,manualReviewCandidates:manuallyHeld,autoApprovedParticipationThisRun:verifiedParticipationIds.size,autoApprovedCosmeticThisRun:importedCosmetics,autoApprovedCashThisRun:cash.approved.length,autoApprovedPerformanceThisRun:performance.approved.length,autoApprovedUnrealThisRun:unreal.approved.length,autoApprovedDuoQualifierThisRun:duo.approved.length,autoApprovedPlayStationThisRun:playstation.approved.length,autoApprovedSquadsThisRun:squads.approved.length,autoApprovedConsoleDuosThisRun:consoleDuos.approved.length,timeLimitReached,processedWindows,providerRateLimitPaused:rateLimited,providerRateLimitRetryAfter:rateLimitRetryAfter,providerTraffic:{...traffic,...providerPacer.metrics()},
   ...(historical?{newlyCompletedWindows,newPlayerBackfill:playerBackfill,savedRecheck}:{}),retryWindows:coverage.retryCount,coverage,...(historical?{reviewRecovery:reviewRecoverySummary,dynamicReviewBudget:dynamic?{enabled:true,applied:Boolean(allocation),deltaAttempts,remainingPageBudget:Math.max(0,budget),...(allocation?budgetSummary(allocation,allocationObserved):{})}:null,priorityAudit:{...priorityAudit,selected:selectedPriority}}:{}),transientFailures,malformedFailures,skippedLeaderboards:skippedLeaderboards.slice(0,15),reviewOnlyWindows,reviewOnlyCandidates,unmappedEvents:unmapped.length,unmappedEventIds:unmapped.slice(0,12),unmappedDiscovery,message:'Osirionで'+accounts.length+'アカウントIDを追跡。今回の公式規則による自動承認'+imported+'件、追加確認待ち'+unique.size+'件、名義照合保留'+conflicts.length+'件。'};
+ if(discoveryState){discoveryState.checkedAt=stamp;status.playerDiscovery=discoveryState}
  if(historical)status.historyYieldObservation={measuredAt:stamp,windows:active.filter(w=>allocationObserved[w.key]?.attempted>0).map(w=>({
   key:w.key,tournamentId:w.tournamentId,region:w.region,series:w.series,seasonId:w.seasonId,...allocationObserved[w.key]}))};
  state.checkedAt=stamp;
