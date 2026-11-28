@@ -136,6 +136,8 @@ on:
       - scripts/verified-s30-clean-partial-38-20261121.cjs
       - data/manual-approvals/20261121-s30-clean-partial-38.json
       - scripts/publish-s30-zb-review-eleven-20261121.cjs
+      - scripts/verified-pending-20261128.cjs
+      - scripts/publish-pending-20261128.cjs
       - scripts/verified-s30-zb-review-eleven-20261121.cjs
       - data/manual-approvals/20261121-s30-zb-reviewed-eleven.json
       - scripts/publish-s30-nac-zb-solo-round1-85.cjs
@@ -295,6 +297,8 @@ jobs:
             node scripts/publish-s30-nac-zb-solo-round1-85.cjs
             node scripts/publish-s30-zb-review-eleven-20261121.cjs --dry-run
             node scripts/publish-s30-zb-review-eleven-20261121.cjs
+            node scripts/publish-pending-20261128.cjs --dry-run
+            node scripts/publish-pending-20261128.cjs
             node scripts/publish-s30-clean-partial-38-20261121.cjs --dry-run
             node scripts/publish-s30-clean-partial-38-20261121.cjs
             node scripts/reconcile-existing-22-20261121.cjs --dry-run
