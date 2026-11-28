@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "sourceCheckedAt": "2026-11-28T09:31:07.895Z",
-  "total": 4,
+  "sourceCheckedAt": "2026-11-28T12:46:33.299Z",
+  "total": 8,
   "alreadyResolved": 0,
   "byYear": [
     {
@@ -9,11 +9,19 @@
       "count": 2
     },
     {
-      "name": "2026",
+      "name": "2025",
       "count": 2
+    },
+    {
+      "name": "2026",
+      "count": 4
     }
   ],
   "byRegion": [
+    {
+      "name": "EU",
+      "count": 2
+    },
     {
       "name": "ME",
       "count": 1
@@ -24,10 +32,14 @@
     },
     {
       "name": "NAW",
-      "count": 1
+      "count": 3
     }
   ],
   "byTournament": [
+    {
+      "name": "NVIDIA GeForce RTX Cup / NAW / 2025",
+      "count": 2
+    },
     {
       "name": "Squads Victory Cup Battle Royale / ME / 2026",
       "count": 1
@@ -37,6 +49,10 @@
       "count": 1
     },
     {
+      "name": "Touch-Only Test Cup / EU / 2026",
+      "count": 2
+    },
+    {
       "name": "ZB Solo Victory Cup / NAC / 2024",
       "count": 2
     }
@@ -44,7 +60,7 @@
   "byStatus": [
     {
       "name": "partial-scan",
-      "count": 2
+      "count": 6
     },
     {
       "name": "rules-review",
@@ -144,7 +160,7 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 82,
+        "seenPages": 84,
         "totalPages": 100,
         "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event9Round1_NAC",
         "possibleExistingId": null
@@ -177,12 +193,144 @@
         "rankingOrderValid": true,
         "scanComplete": false,
         "observedPartial": true,
-        "seenPages": 82,
+        "seenPages": 84,
         "totalPages": 100,
         "sourceKey": "epicgames_S30_SoloZBVictoryCashCup_NAC/S30_SoloZBVictoryCashCup_Event9Round1_NAC",
         "possibleExistingId": null
       },
       "rewardState": "source-amount-present-not-verified-by-triage"
+    },
+    {
+      "id": "auto-s39-6b8229ec5991",
+      "origin": "history",
+      "date": "2025-12-22",
+      "year": "2025",
+      "region": "NAW",
+      "tournamentId": "ch7s1-nvidia-geforce-rtx-cup",
+      "event": "NVIDIA GeForce RTX Cup",
+      "round": "単一開催枠 / 参加確認",
+      "player": "ひょっこりもりりん",
+      "kind": "参加確認",
+      "rank": 8453,
+      "points": 35,
+      "kills": 4,
+      "vrs": 0,
+      "prize": null,
+      "source": "https://www.fortnite.com/competitive/events/S39_NvidiaCup/?region=NAW&round=S39_NvidiaCup_NAW",
+      "status": "partial-scan",
+      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
+      "reason": "全ページ連続の順位表・Epic ID付完全スナップショットが未確認",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": false,
+        "observedPartial": true,
+        "seenPages": 85,
+        "totalPages": 100,
+        "sourceKey": "epicgames_S39_NvidiaCup_NAW/S39_NvidiaCup_NAW",
+        "possibleExistingId": null
+      },
+      "rewardState": "cash-unconfirmed"
+    },
+    {
+      "id": "auto-s39-e39fde0e4f57",
+      "origin": "history",
+      "date": "2025-12-22",
+      "year": "2025",
+      "region": "NAW",
+      "tournamentId": "ch7s1-nvidia-geforce-rtx-cup",
+      "event": "NVIDIA GeForce RTX Cup",
+      "round": "単一開催枠 / 参加確認",
+      "player": "rekshi れくしぃー",
+      "kind": "参加確認",
+      "rank": 8336,
+      "points": 36,
+      "kills": 2,
+      "vrs": 0,
+      "prize": null,
+      "source": "https://www.fortnite.com/competitive/events/S39_NvidiaCup/?region=NAW&round=S39_NvidiaCup_NAW",
+      "status": "partial-scan",
+      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
+      "reason": "全ページ連続の順位表・Epic ID付完全スナップショットが未確認",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": false,
+        "observedPartial": true,
+        "seenPages": 85,
+        "totalPages": 100,
+        "sourceKey": "epicgames_S39_NvidiaCup_NAW/S39_NvidiaCup_NAW",
+        "possibleExistingId": null
+      },
+      "rewardState": "cash-unconfirmed"
+    },
+    {
+      "id": "auto-s39-61c86b22b06c",
+      "origin": "history",
+      "date": "2026-02-13",
+      "year": "2026",
+      "region": "EU",
+      "tournamentId": "ch7s1-touch-only-test-cup",
+      "event": "Touch-Only Test Cup",
+      "round": "Round 2 / 参加確認",
+      "player": "始皇帝 yhyh",
+      "kind": "参加確認",
+      "rank": 336,
+      "points": 76,
+      "kills": 18,
+      "vrs": 1,
+      "prize": null,
+      "source": "https://www.fortnite.com/competitive/events/S39_MobileTestCup/?region=EU&round=S39_MobileTestCup_Round2_EU",
+      "status": "partial-scan",
+      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
+      "reason": "対象大会・ラウンドの自動承認方式が未登録",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": false,
+        "observedPartial": true,
+        "seenPages": 4,
+        "totalPages": 12,
+        "sourceKey": "epicgames_S39_MobileTestCup_EU/S39_MobileTestCup_Round2_EU",
+        "possibleExistingId": null
+      },
+      "rewardState": "cash-unconfirmed"
+    },
+    {
+      "id": "auto-s39-b282e7d0de41",
+      "origin": "history",
+      "date": "2026-02-13",
+      "year": "2026",
+      "region": "EU",
+      "tournamentId": "ch7s1-touch-only-test-cup",
+      "event": "Touch-Only Test Cup",
+      "round": "Round 2 / 参加確認",
+      "player": "Hagane",
+      "kind": "参加確認",
+      "rank": 362,
+      "points": 70,
+      "kills": 12,
+      "vrs": 0,
+      "prize": null,
+      "source": "https://www.fortnite.com/competitive/events/S39_MobileTestCup/?region=EU&round=S39_MobileTestCup_Round2_EU",
+      "status": "partial-scan",
+      "action": "残り順位表を調査。未完了のまま賞金を確定しない",
+      "reason": "対象大会・ラウンドの自動承認方式が未登録",
+      "evidence": {
+        "officialSource": true,
+        "exactCheckpoint": true,
+        "rankingOrderValid": true,
+        "scanComplete": false,
+        "observedPartial": true,
+        "seenPages": 4,
+        "totalPages": 12,
+        "sourceKey": "epicgames_S39_MobileTestCup_EU/S39_MobileTestCup_Round2_EU",
+        "possibleExistingId": null
+      },
+      "rewardState": "cash-unconfirmed"
     }
   ],
   "policy": "read-only queue; awards require existing official rule-backed validators and identity/collision proof"
