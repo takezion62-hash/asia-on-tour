@@ -11,6 +11,7 @@ const {decide:verifyHistoricalVictory}=require('./verified-history-approval.cjs'
 const {newestDiscoveryReport}=require('./unmapped-tournament-discovery.cjs');
 const {sameScannedCandidate}=require('./verified-partial-page.cjs');
 const {measure:measureAutomation}=require('./automation-metrics.cjs');
+const {measure:measureHistoryYield}=require('./history-yield-metrics.cjs');
 const {ID:SQUADS_ID,overlaps:squadOverlap}=require('./automatic-squads-approval.cjs');
 const {isConsole,overlaps:consoleOverlap}=require('./automatic-console-duos-approval.cjs');
 const teamOverlapProtected=id=>id===SQUADS_ID||isConsole(id);
@@ -19,6 +20,7 @@ const SOURCE_FILES=[
   'players.json','tournaments.json','tournament-rules.json',
   'scripts/osirion-sync.cjs','scripts/new-player-history-delta.cjs','scripts/auto-sync-core.cjs',
   'scripts/dynamic-history-budget.cjs','scripts/review-recovery-priority.cjs','scripts/scan-efficiency.cjs',
+  'scripts/history-yield-metrics.cjs',
   'scripts/verified-history-approval.cjs',
   'scripts/source-results-store.cjs','scripts/build-source-results.cjs',
   'scripts/automatic-cash-approval.cjs',
@@ -320,6 +322,12 @@ function mergeSnapshots(scope,base,scanned,latest,reviewed={version:1,entries:[]
  const metrics=measureAutomation({scope,base,scanned,latest,review,appended,reviewedIds,conflicts,duplicates});
  if(metrics!==undefined)status.automationMetrics=metrics;
  else delete status.automationMetrics;
+ if(scope==='history'){
+  const yieldMetrics=measureHistoryYield({scope,base,scanned,latest,review,appended,reviewedIds});
+  if(yieldMetrics!==undefined)status.historyYield=yieldMetrics;
+  else delete status.historyYield;
+  delete status.historyYieldObservation;
+ }
  status.message='最新版と安全統合：新規掲載'+appended.length+'件、重複スキップ'+duplicates.length+
   '件、要確認の競合'+conflicts.length+'件、確認待ち'+review.proposals.length+'件。既存の戦績・賞金は保持。';
  return {docs:{[rFile]:results,[uFile]:updates,[qFile]:review,[cFile]:checkpoint,[sFile]:status},
