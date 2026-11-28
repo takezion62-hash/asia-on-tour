@@ -8,6 +8,19 @@ const html = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
 const { loadData, summarize, seasonFor, tournamentFor, tournamentKey } = require('../scripts/data-checks.cjs');
 const data = loadData(path.join(__dirname, '..')).data;
 const records = data.results;
+// Independent expected labels for this specific weekly tournament. A source
+// stage is not an award or proof of qualification; all other rows stay exact.
+function expectedDisplayStage(record){
+  if(record.tournamentId==='ch7s1-touch-only-test-cup'){
+    const u=new URL(record.source),wid=u.searchParams.get('round')||u.searchParams.get('window')||'';
+    const m=wid.match(/^S39_MobileTestCup_(Round[1-4]|Final[2-4]?)_(EU|NAC)$/);
+    if(m&&m[2]===record.region){
+      const q=m[1].startsWith('Round'),n=Number(m[1].slice(5)||1);
+      return {kind:q?'予選':'賞金決勝',round:q?'Round '+n+' / 予選':(n===1?'Final':'Final '+n)+' / 賞金決勝'};
+    }
+  }
+  return {round:record.round,kind:record.kind};
+}
 const updates = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'updates.json'), 'utf8'));
 const schedule = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'schedule.json'), 'utf8'));
 // The real asynchronous loader is exercised by Playwright. The DOM harness
@@ -696,7 +709,8 @@ test('profile histories retain all result metrics, evidence and clickable duo pa
       const cash = personalCash(record);
       assert.equal(plain(markedContent(content, 'data-profile-event', 'prize')), cash > 0 ? currency(cash) : record.prize === 0 ? '$0' : '—', id);
       assert.equal(/\bis-prize-win\b/.test(attributes), cash > 0, id);
-      for (const text of [record.event, record.round, record.kind, record.region, record.date.replaceAll('-', '.')]) {
+      const stage=expectedDisplayStage(record);
+      for (const text of [record.event, stage.round, stage.kind, record.region, record.date.replaceAll('-', '.')]) {
         assert.ok(plain(content).includes(text), `${id}: ${text}`);
       }
       assert.ok([...content.matchAll(/<a\b[^>]*href="([^"]+)"/g)].some(([, href]) => decode(href) === new URL(record.source).href), id);
@@ -1000,7 +1014,7 @@ test('tournament catalog and detail routes retain all records once and separate 
       assert.equal(/\bis-prize-win\b/.test(attributes), record.verified === true && record.prize > 0, id);
       assert.deepEqual([...new Set(profileLinks(content).map(link => link.name))].sort(), [...new Set(roster(record))].sort(), id);
       assert.ok(detail(content, 'source').includes(new URL(record.source).href), id);
-      assert.equal(detail(content, 'round'), record.round, id);
+      assert.equal(detail(content, 'round'), expectedDisplayStage(record).round, id);
       assert.equal(detail(content, 'playerRaw'), record.playerRaw || record.player, id);
       if (record.players?.length > 1 && record.prize > 0) {
         assert.ok(detail(content, 'prize').includes(currency(record.prizePerPlayer)), id);
