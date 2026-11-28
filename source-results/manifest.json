@@ -2,11 +2,11 @@
   "version": 1,
   "role": "generated canonical-source snapshot; results.json remains authoritative in phase 1",
   "canonicalFile": "results.json",
-  "canonicalSha256": "5f16e7ecdfdd3c56dc79851ffcf635d7bedfd8fafbd92d66c1a6a6030e5004b4",
-  "count": 10084,
-  "teamPrizeCents": 13746000,
+  "canonicalSha256": "ac99a548487658c43883946225a23aeda553268404e73031fa44fb5393d8fb18",
+  "count": 10094,
+  "teamPrizeCents": 13816000,
   "unconfirmedPrizeRecords": 1826,
-  "personalPrizeCents": 13726000,
+  "personalPrizeCents": 13796000,
   "recordOrder": [
     "s42-me-slenderman-reload-skin-20261021-acris-chacha",
     "s42-me-slenderman-reload-skin-20261021-karf-alpha",
@@ -10091,7 +10091,17 @@
     "owner-mobile-naw-oce-20261128-07",
     "owner-mobile-naw-oce-20261128-08",
     "owner-mobile-naw-oce-20261128-09",
-    "owner-mobile-naw-oce-20261128-10"
+    "owner-mobile-naw-oce-20261128-10",
+    "owner-mobile-oce-20261129-01",
+    "owner-mobile-oce-20261129-02",
+    "owner-mobile-oce-20261129-03",
+    "owner-mobile-oce-20261129-04",
+    "owner-mobile-oce-20261129-05",
+    "owner-mobile-oce-20261129-06",
+    "owner-mobile-oce-20261129-07",
+    "owner-mobile-oce-20261129-08",
+    "owner-mobile-oce-20261129-09",
+    "owner-mobile-oce-20261129-10"
   ],
   "shards": [
     {
@@ -10268,11 +10278,11 @@
     {
       "seasonId": "S42",
       "file": "source-results/S42.json",
-      "count": 2504,
-      "teamPrizeCents": 1300000,
+      "count": 2514,
+      "teamPrizeCents": 1370000,
       "unconfirmedPrizeRecords": 601,
-      "personalPrizeCents": 1300000,
-      "sha256": "9350bdcaf3f38775a25ccb1015ed35906c9b0499a060fb58fa968f8ac4bfd1c6"
+      "personalPrizeCents": 1370000,
+      "sha256": "49496692d420ad9a8bff42dba403fc6ba345c118270847d28e103224b983c5fb"
     },
     {
       "seasonId": "S43",
